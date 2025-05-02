@@ -35,7 +35,7 @@ necessary and at its convenience with any unexpected events.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#expecteds](../../docs/library_index.html#expecteds)
+Open the [../../apis/library_index.html#expecteds](../../apis/library_index.html#expecteds)
 link in a web browser.
 
 

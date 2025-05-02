@@ -32,7 +32,7 @@ API documentation
 
 This tool API documentation is available at:
 
-[../../docs/library_index.html#tutor](../../docs/library_index.html#tutor)
+[../../../docs/apis/library_index.html#tutor](../../../docs/apis/library_index.html#tutor)
 
 
 Loading

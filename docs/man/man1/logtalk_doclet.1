@@ -1,0 +1,83 @@
+.TH logtalk_doclet 1 "May 2, 2025" "Logtalk 3.92.0" "Logtalk Documentation"
+
+.SH NAME
+logtalk_doclet \- Logtalk script for automating running doclets
+
+.SH SYNOPSIS
+.B logtalk_doclet -v
+.br
+.B logtalk_doclet -p \fIprolog\fR
+[\fB-d \fIresults\fR]
+[\fB-t \fItimeout\fR]
+[\fB-s \fIprefix\fR]
+[\fB-- \fIarguments\fR]
+.br
+.B logtalk_doclet -h
+
+.SH DESCRIPTION
+\fBlogtalk_doclet\fR is a script for automating running Logtalk doclets. This script runs doclets found in a directory and recursively in its sub-directories by scanning for \fIdoclet.lgt\fR and \fIdoclet.logtalk\fR source files. The script assumes that the doclets use an \fIinitialization/1\fR directive to automatically run the documentation generation goal at loading time. A non-zero exit status is returned in case of failed doclets, timed out doclets, or crashed doclets.
+
+.SH OPTIONS
+.TP
+.BI \-v
+Print script version.
+.TP
+.BI \-p
+Backend Prolog compiler. Required. The following identifiers are used: B-Prolog - \fIb\fR, CxProlog - \fIcx\fR, ECLiPSe - \fIeclipse\fR, GNU Prolog - \fIgnu\fR, GNU Prolog (native code) - \fIgnunc\fR, JIProlog - \fIji\fR, XVM - \fIxvm\fR, SICStus Prolog - \fIsicstus\fR, SWI-Prolog - \fIswi\fR, SWI-Prolog with Logtalk pack - \fIswipack\fR, Tau Prolog - \fItau\fR, XSB - \fIxsb\fR, YAP - \fIyap\fR.
+.TP
+.BI \-d
+Directory to store the doclet run logs. Default is the local \fI./logtalk_doclet_logs\fR directory.
+.TP
+.BI \-t
+Timeout in seconds for running each doclet. Default is \fI0\fR (i.e., disabled).
+.TP
+.BI \-s
+Path prefix to suppress when printing doclet paths. Default is the empty string.
+.TP
+.BI \--
+Arguments to be passed to the integration script used to run the doclets (no default).
+.TP
+.B \-h
+Provide help on script usage.
+
+.SH "EXIT STATUS"
+.TP
+.B 0
+All doclets succeeded. There are no timed out or crashed doclets.
+.TP
+.B 1
+Some doclets failed. But there are no timed out or crashed doclets.
+.TP
+.B 3
+One or more doclets timed out while executing. But there are no crashed doclets.
+.TP
+.B 7
+One or more doclets crashed the process running them.
+
+.SH IMPLEMENTATION NOTES
+The \fIgnunc\fR backend requires creating a GNU Prolog executable that includes Logtalk named \fIgplgtnc\fR and making it available in the system \fIPATH\fR. This executable can be created using the embedding script provided in the Logtalk distribution. For example:
+\fBgprolog_embed_logtalk.sh -c -d ~/collect -s none -- --new-top-level && mv ~/collect/logtalk ~/collect/gplgtnc\fR
+
+.SH ENVIRONMENT
+.TP
+.B LOGTALKHOME
+Specifies the location of the Logtalk installation.
+.TP
+.B LOGTALKUSER
+Specifies the location of the Logtalk user directory.
+
+.SH FILES
+.TP
+.BI $LOGTALKUSER/library/tester_versions.lgt
+Logtalk source file used for printing the Logtalk and backend Prolog compiler versions.
+
+.SH "SEE ALSO"
+The Logtalk website at https://logtalk.org/
+.PP
+The Logtalk Handbook at \fB$LOGTALKHOME/docs/handbook/index.html\fR
+
+.SH AUTHOR
+Paulo Moura <pmoura@logtalk.org>
+
+.SH COPYRIGHT
+Copyright (c) 1998-2025 Paulo Moura.

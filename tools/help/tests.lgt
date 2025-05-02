@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:9:0,
 		author is 'Paulo Moura',
-		date is 2018-10-02,
+		date is 2025-05-02,
 		comment is 'Unit tests for the "help" tool.'
 	]).
 
@@ -222,9 +222,9 @@
 
 	directory_page(SubDirectory, Path, File) :-
 		environment_variable('LOGTALKHOME', LOGTALKUSER),
-		atom_concat(LOGTALKUSER, '/manuals/refman/', AbsolutePath0),
+		atom_concat(LOGTALKUSER, '/docs/handbook/refman/', AbsolutePath0),
 		atom_concat(AbsolutePath0, SubDirectory, AbsolutePath),
-		atom_concat('/manuals/refman/', SubDirectory, Path0),
+		atom_concat('/docs/handbook/refman/', SubDirectory, Path0),
 		atom_concat(Path0, '/', Path),
 		directory_files(AbsolutePath, Files, [extensions(['.html'])]),
 		member(File, Files).

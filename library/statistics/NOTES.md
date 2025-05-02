@@ -31,7 +31,7 @@ Use the object `sample` of your data represents a sample. Use the object
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#statistics](../../docs/library_index.html#statistics)
+Open the [../../apis/library_index.html#statistics](../../apis/library_index.html#statistics)
 link in a web browser.
 
 

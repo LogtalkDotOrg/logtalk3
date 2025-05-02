@@ -83,7 +83,7 @@ For sample queries, please see the `SCRIPT.txt` file.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#metagol](../../docs/library_index.html#metagol)
+Open the [../../apis/library_index.html#metagol](../../apis/library_index.html#metagol)
 link in a web browser.
 
 

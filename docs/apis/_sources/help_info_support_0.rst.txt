@@ -1,0 +1,152 @@
+.. index:: single: help_info_support
+.. _help_info_support/0:
+
+.. rst-class:: right
+
+**category**
+
+``help_info_support``
+=====================
+
+Experimental help predicates for inline browsing of the Texinfo versions of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, GNU Prolog, XVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, or YAP as the backend running on a POSIX system.
+
+| **Availability:** 
+|    ``logtalk_load(help(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:9:0
+| **Date:** 2025-05-02
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Complements:**
+|    :ref:`help <help/0>`
+| **Uses:**
+|    :ref:`os <os/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: handbook/0
+.. _help_info_support/0::handbook/0:
+
+``handbook/0``
+^^^^^^^^^^^^^^
+
+Opens inline the Texinfo version of the Handbook.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``handbook`` - ``one``
+
+
+------------
+
+.. index:: handbook/1
+.. _help_info_support/0::handbook/1:
+
+``handbook/1``
+^^^^^^^^^^^^^^
+
+Opens inline the Texinfo version of the Handbook at the given topic.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``handbook(Topic)``
+| **Mode and number of proofs:**
+|    ``handbook(+atom)`` - ``one``
+|    ``handbook(+predicate_indicator)`` - ``one``
+|    ``handbook(+non_terminal_indicator)`` - ``one``
+
+
+------------
+
+.. index:: apis/0
+.. _help_info_support/0::apis/0:
+
+``apis/0``
+^^^^^^^^^^
+
+Opens inline the Texinfo version of the APIs documentation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``apis`` - ``one``
+
+
+------------
+
+.. index:: apis/1
+.. _help_info_support/0::apis/1:
+
+``apis/1``
+^^^^^^^^^^
+
+Opens inline the Texinfo version of the APIs documentation at the given topic.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``apis(Topic)``
+| **Mode and number of proofs:**
+|    ``apis(+atom)`` - ``one``
+|    ``apis(+predicate_indicator)`` - ``one``
+|    ``apis(+non_terminal_indicator)`` - ``one``
+
+
+------------
+
+.. index:: man/1
+.. _help_info_support/0::man/1:
+
+``man/1``
+^^^^^^^^^
+
+Opens inline the man page of the given script.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``man(Script)``
+| **Mode and number of proofs:**
+|    ``man(+atom)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

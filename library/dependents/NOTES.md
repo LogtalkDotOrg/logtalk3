@@ -30,7 +30,7 @@ programming.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#dependents](../../docs/library_index.html#dependents)
+Open the [../../apis/library_index.html#dependents](../../apis/library_index.html#dependents)
 link in a web browser.
 
 

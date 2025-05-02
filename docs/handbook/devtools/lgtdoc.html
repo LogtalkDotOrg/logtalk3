@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lgtdoc &mdash; The Logtalk Handbook v3.92.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=d8553e9b"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="lgtunit" href="lgtunit.html" />
+    <link rel="prev" title="issue_creator" href="issue_creator.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.92.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asdf.html"><code class="docutils literal notranslate"><span class="pre">asdf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_metrics.html"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dead_code_scanner.html"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug_messages.html"><code class="docutils literal notranslate"><span class="pre">debug_messages</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugger.html"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagrams.html"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="doclet.html"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="help.html"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="issue_creator.html"><code class="docutils literal notranslate"><span class="pre">issue_creator</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#documenting-source-code">Documenting source code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generating-documentation">Generating documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#documentation-linter-checks">Documentation linter checks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lgtunit.html"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linter.html"><code class="docutils literal notranslate"><span class="pre">linter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="make.html"><code class="docutils literal notranslate"><span class="pre">make</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="packs.html"><code class="docutils literal notranslate"><span class="pre">packs</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ports_profiler.html"><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiler.html"><code class="docutils literal notranslate"><span class="pre">profiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutor.html"><code class="docutils literal notranslate"><span class="pre">tutor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrapper.html"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../docs/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Developer Tools</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/devtools/lgtdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="lgtdoc">
+<span id="library-lgtdoc"></span><h1><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code><a class="headerlink" href="#lgtdoc" title="Link to this heading"></a></h1>
+<p>This is the default Logtalk documenting tool for generating API
+documentation for libraries and applications. It uses the structural
+reflection API to extract and output in XML format relevant
+documentation about a source file, a library or directory of source
+files, or all loaded source files. The tool predicates accept several
+options for generating the XML files, including the output directory.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">lgtdoc/xml</span></code> directory contains several ready-to-use Bash and
+PowerShell scripts for converting the XML documenting files into final
+formats, including (X)HTML, PDF, Markdown, and reStructuredText (for use
+with Sphinx), and plain text files. The scripts are described in their
+<code class="docutils literal notranslate"><span class="pre">man</span></code> pages and made available in the system path by default.</p>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<p>This tool requirements for converting the XML files it generates to a
+final format are as follows:</p>
+<ol class="arabic simple">
+<li><p>Converting XML files to (X)HTML, reStructuredText, Markdown, or plain
+text files requires a XSLT processor. The supported XSLT processors
+for Bash conversion scripts are:</p></li>
+</ol>
+<ul class="simple">
+<li><p>xsltproc: <a class="reference external" href="https://gitlab.gnome.org/GNOME/libxslt/-/wikis/home">https://gitlab.gnome.org/GNOME/libxslt/-/wikis/home</a></p></li>
+<li><p>Xalan: <a class="reference external" href="https://xml.apache.org/xalan-c/index.html">https://xml.apache.org/xalan-c/index.html</a></p></li>
+<li><p>Saxon: <a class="reference external" href="https://www.saxonica.com">https://www.saxonica.com</a></p></li>
+</ul>
+<p>On Windows, the PowerShell scripts use the .Net XSLT classes.</p>
+<p>The reStructuredText files output is usually used as an intermediate
+step to generate Sphinx HTML, PDF, ePub, and Texinfo files. The
+additional requirements are:</p>
+<ul class="simple">
+<li><p>Sphinx: <a class="reference external" href="https://www.sphinx-doc.org/">https://www.sphinx-doc.org/</a></p></li>
+<li><p>Pygments: <a class="reference external" href="https://pygments.org/">https://pygments.org/</a></p></li>
+<li><p>Read the Docs theme: <a class="reference external" href="https://github.com/readthedocs/sphinx_rtd_theme">https://github.com/readthedocs/sphinx_rtd_theme</a></p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Converting XML files to PDF files require a XSL-FO processor. The
+supported XSL-FO processors for Bash and PowerShell conversion
+scripts are:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Apache FOP processor: <a class="reference external" href="https://xmlgraphics.apache.org/fop/">https://xmlgraphics.apache.org/fop/</a></p></li>
+<li><p>RenderX XEP processor: <a class="reference external" href="https://www.renderx.com/">https://www.renderx.com/</a></p></li>
+</ul>
+<p>For additional details, including compatible dependency versions and
+available conversion scripts, see the <code class="docutils literal notranslate"><span class="pre">xml/NOTES.md</span></code> file. See the
+<code class="docutils literal notranslate"><span class="pre">tools/NOTES.md</span></code> file for per operating-system installation
+instructions for the above dependencies.</p>
+</section>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>This tool API documentation is available at:</p>
+<p><a class="reference external" href="../../../docs/apis/library_index.html#lgtdoc">../../../docs/apis/library_index.html#lgtdoc</a></p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>This tool can be loaded using the query:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(lgtdoc(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(lgtdoc(tester)).
+</pre></div>
+</div>
+</section>
+<section id="documenting-source-code">
+<h2>Documenting source code<a class="headerlink" href="#documenting-source-code" title="Link to this heading"></a></h2>
+<p>For information on documenting your source code, notably on documenting
+directives, consult the documenting section of the User Manual:</p>
+<p><a class="reference external" href="../../../docs/handbook/userman/documenting.html">../../../docs/handbook/userman/documenting.html</a></p>
+<p>Extracting documenting information from your source code using this tool
+requires compiling the source files using the <code class="docutils literal notranslate"><span class="pre">source_data(on)</span></code>
+compiler flag. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(source_file, [source_data(on)]).
+</pre></div>
+</div>
+<p>Usually, this flag is set for all application source files in the
+corresponding loader file. In alternative, you may also turn on the
+<code class="docutils literal notranslate"><span class="pre">source_data</span></code> flag globally by typing:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(source_data, on).
+</pre></div>
+</div>
+<p>The tool API allows generating documentation for libraries, directories,
+and files, complemented with library, directory, entity, and predicate
+indexes. Note that the source files to be documented <strong>must</strong> be loaded
+prior to using this tool predicates to generate the documentation.</p>
+</section>
+<section id="generating-documentation">
+<h2>Generating documentation<a class="headerlink" href="#generating-documentation" title="Link to this heading"></a></h2>
+<p>For a simple application, assuming a library alias is defined for it
+(e.g. <code class="docutils literal notranslate"><span class="pre">my_app</span></code>), and at the top-level interpreter, we can generate the
+application documentation by typing:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">{</span>my_app(loader)<span class="k">}</span>.
+...
+
+| <span class="o">?-</span> <span class="k">{</span>lgtdoc(loader)<span class="k">}</span>.
+...
+
+| <span class="o">?-</span> lgtdoc<span class="o">::</span>library(my_app).
+...
+</pre></div>
+</div>
+<p>By default, the documenting XML files are created in a <code class="docutils literal notranslate"><span class="pre">xml_docs</span></code>
+directory in the current working directory. But usually all documenting
+files are collected for both the application and the libraries it uses
+in a common directory so that all documentation links resolved properly.
+The <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> predicates can take a list of options to customize the
+generated XML documenting files. See the remarks section in the
+<a class="reference external" href="../../docs/apis/library_index.html#lgtdoc">lgtdocp</a> protocol
+documentation for details on the available options.</p>
+<p>After generating the XML documenting files, these can be easily
+converted into final formats using the provided scripts. For example,
+assuming that we want to generate HTML documentation:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> cd xml_docs
+<span class="err">$</span> lgt2html <span class="o">-</span>t <span class="s">&quot;My app&quot;</span>
+</pre></div>
+</div>
+<p>To generate the documentation in Sphinx format instead (as used by
+Logtalk itself for its APIs):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> cd xml_docs
+<span class="err">$</span> lgt2rst <span class="o">-</span>s <span class="o">--</span> <span class="o">-</span>q <span class="o">-</span>p <span class="s">&quot;Application name&quot;</span> <span class="o">-</span>a <span class="s">&quot;Author name&quot;</span> <span class="o">-</span>v <span class="s">&quot;Version X.YZ.P&quot;</span>
+<span class="err">$</span> make html
+</pre></div>
+</div>
+<p>In this case, the generated documentation will be in the
+<code class="docutils literal notranslate"><span class="pre">xml_docs/_build/html/</span></code> directory. See the scripts man pages or call
+them using the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option to learn more about their supported
+options.</p>
+<p>For more complex applications, you can use the <code class="docutils literal notranslate"><span class="pre">doclet</span></code> tool to define
+a <em>doclet</em> to automate all the steps required to generate documentation.
+The <em>doclet</em> message that triggers the process can also be sent
+automatically when the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool is used with the <code class="docutils literal notranslate"><span class="pre">documentation</span></code>
+target.</p>
+</section>
+<section id="documentation-linter-checks">
+<h2>Documentation linter checks<a class="headerlink" href="#documentation-linter-checks" title="Link to this heading"></a></h2>
+<p>When the <code class="docutils literal notranslate"><span class="pre">lgtdoc_missing_directives</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">warning</span></code> (its
+usual default value), the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool prints warnings on missing
+entity <code class="docutils literal notranslate"><span class="pre">info/1</span></code> directives and missing predicate <code class="docutils literal notranslate"><span class="pre">info/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">mode/2</span></code> directives.</p>
+<p>When the <code class="docutils literal notranslate"><span class="pre">lgtdoc_missing_info_key</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">warning</span></code> (its
+usual default value), the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool prints warnings on entity
+<code class="docutils literal notranslate"><span class="pre">info/1</span></code> directive and predicate <code class="docutils literal notranslate"><span class="pre">info/2</span></code> directive missing de facto
+required keys (e.g., <code class="docutils literal notranslate"><span class="pre">comment</span></code>, <code class="docutils literal notranslate"><span class="pre">parameters</span></code> or <code class="docutils literal notranslate"><span class="pre">parnames</span></code> for
+parametric entities, <code class="docutils literal notranslate"><span class="pre">arguments</span></code> or <code class="docutils literal notranslate"><span class="pre">argnames</span></code> for
+predicates/non-terminals with arguments).</p>
+<p>When the <code class="docutils literal notranslate"><span class="pre">lgtdoc_invalid_dates</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">warning</span></code> (its usual
+default value), the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool prints warnings on invalid dates
+(including dates in the future) in <code class="docutils literal notranslate"><span class="pre">info/1</span></code> directives.</p>
+<p>When the <code class="docutils literal notranslate"><span class="pre">lgtdoc_non_standard_exceptions</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">warning</span></code>
+(its usual default value), the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool prints warnings on
+non-standard exceptions. This linter check is particularly effective in
+detecting typos when specifying standard exceptions.</p>
+<p>When the <code class="docutils literal notranslate"><span class="pre">lgtdoc_missing_punctuation</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">warning</span></code> (its
+usual default value), the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool prints warnings on missing
+ending periods (full stops), exclamation marks, or question marks in
+<code class="docutils literal notranslate"><span class="pre">info/1-2</span></code> directives (in comments, remarks, parameter descriptions,
+and argument descriptions).</p>
+<p>Set a flag value to <code class="docutils literal notranslate"><span class="pre">silent</span></code> to turn off the corresponding linter
+warnings.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="issue_creator.html" class="btn btn-neutral float-left" title="issue_creator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="lgtunit.html" class="btn btn-neutral float-right" title="lgtunit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2025, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

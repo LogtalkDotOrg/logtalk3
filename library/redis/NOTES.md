@@ -34,7 +34,7 @@ commands, visit:
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#redis](../../docs/library_index.html#redis)
+Open the [../../apis/library_index.html#redis](../../apis/library_index.html#redis)
 link in a web browser.
 
 

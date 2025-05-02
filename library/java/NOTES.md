@@ -43,7 +43,7 @@ functor and number of arguments as found in the relevant JavaDocs.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#java](../../docs/library_index.html#java)
+Open the [../../apis/library_index.html#java](../../apis/library_index.html#java)
 link in a web browser.
 
 

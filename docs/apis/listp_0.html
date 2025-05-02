@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>listp &mdash; Logtalk APIs v3.92.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d8553e9b"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="natural" href="natural_0.html" />
+    <link rel="prev" title="list(Type)" href="list_1.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Logtalk APIs
+              <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.92.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#arbitrary"><span class="xref std std-ref">arbitrary</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><span class="xref std std-ref">assertions</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assignvars"><span class="xref std std-ref">assignvars</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#base64"><span class="xref std std-ref">base64</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#cbor"><span class="xref std std-ref">cbor</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><span class="xref std std-ref">code_metrics</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><span class="xref std std-ref">core</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#coroutining"><span class="xref std std-ref">coroutining</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#csv"><span class="xref std std-ref">csv</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dates"><span class="xref std std-ref">dates</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><span class="xref std std-ref">dead_code_scanner</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debug-messages"><span class="xref std std-ref">debug_messages</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><span class="xref std std-ref">debugger</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dependents"><span class="xref std std-ref">dependents</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><span class="xref std std-ref">diagrams</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dictionaries"><span class="xref std std-ref">dictionaries</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dif"><span class="xref std std-ref">dif</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><span class="xref std std-ref">doclet</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#edcg"><span class="xref std std-ref">edcg</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#events"><span class="xref std std-ref">events</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#expand-library-alias-paths"><span class="xref std std-ref">expand_library_alias_paths</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#expecteds"><span class="xref std std-ref">expecteds</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#fcube"><span class="xref std std-ref">fcube</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><span class="xref std std-ref">flags</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#format"><span class="xref std std-ref">format</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#genint"><span class="xref std std-ref">genint</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#gensym"><span class="xref std std-ref">gensym</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#git"><span class="xref std std-ref">git</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#grammars"><span class="xref std std-ref">grammars</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#heaps"><span class="xref std std-ref">heaps</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><span class="xref std std-ref">help</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#hierarchies"><span class="xref std std-ref">hierarchies</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#hook-flows"><span class="xref std std-ref">hook_flows</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#hook-objects"><span class="xref std std-ref">hook_objects</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#html"><span class="xref std std-ref">html</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ids"><span class="xref std std-ref">ids</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#intervals"><span class="xref std std-ref">intervals</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><span class="xref std std-ref">iso8601</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#issue-creator"><span class="xref std std-ref">issue_creator</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#java"><span class="xref std std-ref">java</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#json"><span class="xref std std-ref">json</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><span class="xref std std-ref">lgtdoc</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><span class="xref std std-ref">library</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#listing"><span class="xref std std-ref">listing</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#logging"><span class="xref std std-ref">logging</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#meta"><span class="xref std std-ref">meta</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#meta-compiler"><span class="xref std std-ref">meta_compiler</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#nested-dictionaries"><span class="xref std std-ref">nested_dictionaries</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#optionals"><span class="xref std std-ref">optionals</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#options"><span class="xref std std-ref">options</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#os"><span class="xref std std-ref">os</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#packs"><span class="xref std std-ref">packs</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><span class="xref std std-ref">pddl_parser</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports-profiler"><span class="xref std std-ref">ports_profiler</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#queues"><span class="xref std std-ref">queues</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#random"><span class="xref std std-ref">random</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#reader"><span class="xref std std-ref">reader</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#recorded-database"><span class="xref std std-ref">recorded_database</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#redis"><span class="xref std std-ref">redis</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#sets"><span class="xref std std-ref">sets</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#statistics"><span class="xref std std-ref">statistics</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#timeout"><span class="xref std std-ref">timeout</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><span class="xref std std-ref">tutor</span></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#types"><span class="xref std std-ref">types</span></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="atom_0.html">atom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomic_0.html">atomic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="callable_0.html">callable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="character_0.html">character</a></li>
+<li class="toctree-l3"><a class="reference internal" href="characterp_0.html">characterp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="comparingp_0.html">comparingp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compound_0.html">compound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="difflist_0.html">difflist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="float_0.html">float</a></li>
+<li class="toctree-l3"><a class="reference internal" href="integer_0.html">integer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list_0.html">list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list_1.html">list(Type)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">listp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="natural_0.html">natural</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number_0.html">number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numberlist_0.html">numberlist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numberlistp_0.html">numberlistp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pairs_0.html">pairs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="term_0.html">term</a></li>
+<li class="toctree-l3"><a class="reference internal" href="termp_0.html">termp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="type_0.html">type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varlist_0.html">varlist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varlistp_0.html">varlistp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ulid"><span class="xref std std-ref">ulid</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#union-find"><span class="xref std std-ref">union_find</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#uuid"><span class="xref std std-ref">uuid</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><span class="xref std std-ref">verdi_neruda</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><span class="xref std std-ref">wrapper</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#xml-parser"><span class="xref std std-ref">xml_parser</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#zippers"><span class="xref std std-ref">zippers</span></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicates</a></li>
+</ul>
+
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="core_inheritance_diagram.svg">Core diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="library_inheritance_diagram.svg">Libraries diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="tools_inheritance_diagram.svg">Tools diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="ports_inheritance_diagram.svg">Ports diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="contributions_inheritance_diagram.svg">Contributions diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+    </ul>
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../handbook/index.html">Handbook</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Logtalk APIs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">listp</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/listp_0.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p class="right" id="listp-0"><span id="index-0"></span><strong>protocol</strong></p>
+<section id="listp">
+<h1><code class="docutils literal notranslate"><span class="pre">listp</span></code><a class="headerlink" href="#listp" title="Link to this heading"></a></h1>
+<p>List protocol.</p>
+<div class="line-block">
+<div class="line"><strong>Availability:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(types(loader))</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1:18:0</div>
+<div class="line"><strong>Date:</strong> 2024-05-24</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Dependencies:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Inherited public predicates:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
+</div>
+</div>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#append-2" id="id2"><code class="docutils literal notranslate"><span class="pre">append/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#append-3" id="id3"><code class="docutils literal notranslate"><span class="pre">append/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#delete-3" id="id4"><code class="docutils literal notranslate"><span class="pre">delete/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#delete-matches-3" id="id5"><code class="docutils literal notranslate"><span class="pre">delete_matches/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#empty-1" id="id6"><code class="docutils literal notranslate"><span class="pre">empty/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#flatten-2" id="id7"><code class="docutils literal notranslate"><span class="pre">flatten/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#hamming-distance-3" id="id8"><code class="docutils literal notranslate"><span class="pre">hamming_distance/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#keysort-2" id="id9"><code class="docutils literal notranslate"><span class="pre">keysort/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#last-2" id="id10"><code class="docutils literal notranslate"><span class="pre">last/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#length-2" id="id11"><code class="docutils literal notranslate"><span class="pre">length/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#max-2" id="id12"><code class="docutils literal notranslate"><span class="pre">max/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#member-2" id="id13"><code class="docutils literal notranslate"><span class="pre">member/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#memberchk-2" id="id14"><code class="docutils literal notranslate"><span class="pre">memberchk/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#min-2" id="id15"><code class="docutils literal notranslate"><span class="pre">min/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#msort-2" id="id16"><code class="docutils literal notranslate"><span class="pre">msort/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#msort-3" id="id17"><code class="docutils literal notranslate"><span class="pre">msort/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nextto-3" id="id18"><code class="docutils literal notranslate"><span class="pre">nextto/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nth0-3" id="id19"><code class="docutils literal notranslate"><span class="pre">nth0/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nth0-4" id="id20"><code class="docutils literal notranslate"><span class="pre">nth0/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nth1-3" id="id21"><code class="docutils literal notranslate"><span class="pre">nth1/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nth1-4" id="id22"><code class="docutils literal notranslate"><span class="pre">nth1/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#sequential-occurrences-2" id="id23"><code class="docutils literal notranslate"><span class="pre">sequential_occurrences/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#sequential-occurrences-3" id="id24"><code class="docutils literal notranslate"><span class="pre">sequential_occurrences/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#occurrences-2" id="id25"><code class="docutils literal notranslate"><span class="pre">occurrences/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#occurrences-3" id="id26"><code class="docutils literal notranslate"><span class="pre">occurrences/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#partition-5" id="id27"><code class="docutils literal notranslate"><span class="pre">partition/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#permutation-2" id="id28"><code class="docutils literal notranslate"><span class="pre">permutation/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#prefix-2" id="id29"><code class="docutils literal notranslate"><span class="pre">prefix/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#prefix-3" id="id30"><code class="docutils literal notranslate"><span class="pre">prefix/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#proper-prefix-2" id="id31"><code class="docutils literal notranslate"><span class="pre">proper_prefix/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#proper-prefix-3" id="id32"><code class="docutils literal notranslate"><span class="pre">proper_prefix/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#remove-duplicates-2" id="id33"><code class="docutils literal notranslate"><span class="pre">remove_duplicates/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#reverse-2" id="id34"><code class="docutils literal notranslate"><span class="pre">reverse/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#same-length-2" id="id35"><code class="docutils literal notranslate"><span class="pre">same_length/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#same-length-3" id="id36"><code class="docutils literal notranslate"><span class="pre">same_length/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#select-3" id="id37"><code class="docutils literal notranslate"><span class="pre">select/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#selectchk-3" id="id38"><code class="docutils literal notranslate"><span class="pre">selectchk/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#select-4" id="id39"><code class="docutils literal notranslate"><span class="pre">select/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#selectchk-4" id="id40"><code class="docutils literal notranslate"><span class="pre">selectchk/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#sort-2" id="id41"><code class="docutils literal notranslate"><span class="pre">sort/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#sort-3" id="id42"><code class="docutils literal notranslate"><span class="pre">sort/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#sort-4" id="id43"><code class="docutils literal notranslate"><span class="pre">sort/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#split-4" id="id44"><code class="docutils literal notranslate"><span class="pre">split/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#sublist-2" id="id45"><code class="docutils literal notranslate"><span class="pre">sublist/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#subsequence-3" id="id46"><code class="docutils literal notranslate"><span class="pre">subsequence/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#subsequence-4" id="id47"><code class="docutils literal notranslate"><span class="pre">subsequence/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#substitute-4" id="id48"><code class="docutils literal notranslate"><span class="pre">substitute/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#subtract-3" id="id49"><code class="docutils literal notranslate"><span class="pre">subtract/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suffix-2" id="id50"><code class="docutils literal notranslate"><span class="pre">suffix/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#suffix-3" id="id51"><code class="docutils literal notranslate"><span class="pre">suffix/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#proper-suffix-2" id="id52"><code class="docutils literal notranslate"><span class="pre">proper_suffix/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#proper-suffix-3" id="id53"><code class="docutils literal notranslate"><span class="pre">proper_suffix/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#take-3" id="id54"><code class="docutils literal notranslate"><span class="pre">take/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#drop-3" id="id55"><code class="docutils literal notranslate"><span class="pre">drop/3</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id56">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id57">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id58">Operators</a></p></li>
+</ul>
+</nav>
+<section id="public-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
+<section id="append-2">
+<span id="listp-0-append-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">append/2</span></code></a><a class="headerlink" href="#append-2" title="Link to this heading"></a></h3>
+<p>Appends all lists in a list of lists.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">append(Lists,Concatenation)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">append(+list(list),?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="append-3">
+<span id="listp-0-append-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">append/3</span></code></a><a class="headerlink" href="#append-3" title="Link to this heading"></a></h3>
+<p>Appends two lists.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">append(List1,List2,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">append(?list,?list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="delete-3">
+<span id="listp-0-delete-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete/3</span></code></a><a class="headerlink" href="#delete-3" title="Link to this heading"></a></h3>
+<p>Deletes from a list all occurrences of an element returning the list of remaining elements. Uses <code class="docutils literal notranslate"><span class="pre">==/2</span></code> for element comparison.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete(List,Element,Remaining)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete(&#64;list,&#64;term,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="delete-matches-3">
+<span id="listp-0-delete-matches-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_matches/3</span></code></a><a class="headerlink" href="#delete-matches-3" title="Link to this heading"></a></h3>
+<p>Deletes all matching elements from a list, returning the list of remaining elements. Uses <code class="docutils literal notranslate"><span class="pre">=/2</span></code> for element comparison.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_matches(List,Element,Remaining)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_matches(&#64;list,&#64;term,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="empty-1">
+<span id="listp-0-empty-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">empty/1</span></code></a><a class="headerlink" href="#empty-1" title="Link to this heading"></a></h3>
+<p>True if the argument is an empty list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">empty(List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">empty(&#64;list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="flatten-2">
+<span id="listp-0-flatten-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">flatten/2</span></code></a><a class="headerlink" href="#flatten-2" title="Link to this heading"></a></h3>
+<p>Flattens a list of lists into a list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flatten(List,Flatted)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flatten(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="hamming-distance-3">
+<span id="listp-0-hamming-distance-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">hamming_distance/3</span></code></a><a class="headerlink" href="#hamming-distance-3" title="Link to this heading"></a></h3>
+<p>Calculates the Hamming distance between two lists (using equality to compare list elements). Fails if the two lists are not of the same length.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hamming_distance(List1,List2,Distance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hamming_distance(+list,+list,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="keysort-2">
+<span id="listp-0-keysort-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">keysort/2</span></code></a><a class="headerlink" href="#keysort-2" title="Link to this heading"></a></h3>
+<p>Sorts a list of key-value pairs in ascending order.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">keysort(List,Sorted)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">keysort(+list(pair),-list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="last-2">
+<span id="listp-0-last-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">last/2</span></code></a><a class="headerlink" href="#last-2" title="Link to this heading"></a></h3>
+<p>List last element (if it exists).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">last(List,Last)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">last(?list,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="length-2">
+<span id="listp-0-length-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">length/2</span></code></a><a class="headerlink" href="#length-2" title="Link to this heading"></a></h3>
+<p>List length.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">length(List,Length)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">length(?list,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="max-2">
+<span id="listp-0-max-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">max/2</span></code></a><a class="headerlink" href="#max-2" title="Link to this heading"></a></h3>
+<p>Determines the list maximum value using standard order. Fails if the list is empty.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">max(List,Maximum)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">max(+list,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="member-2">
+<span id="listp-0-member-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">member/2</span></code></a><a class="headerlink" href="#member-2" title="Link to this heading"></a></h3>
+<p>Element is a list member.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">member(Element,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">member(?term,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="memberchk-2">
+<span id="listp-0-memberchk-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">memberchk/2</span></code></a><a class="headerlink" href="#memberchk-2" title="Link to this heading"></a></h3>
+<p>Checks if a term is a member of a list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memberchk(Element,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memberchk(?term,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="min-2">
+<span id="listp-0-min-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">min/2</span></code></a><a class="headerlink" href="#min-2" title="Link to this heading"></a></h3>
+<p>Determines the minimum value in a list using standard order. Fails if the list is empty.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">min(List,Minimum)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">min(+list,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="msort-2">
+<span id="listp-0-msort-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">msort/2</span></code></a><a class="headerlink" href="#msort-2" title="Link to this heading"></a></h3>
+<p>Sorts a list in ascending order (duplicated elements are not removed).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">msort(List,Sorted)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">msort(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="msort-3">
+<span id="listp-0-msort-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">msort/3</span></code></a><a class="headerlink" href="#msort-3" title="Link to this heading"></a></h3>
+<p>Sorts a list using a user-specified comparison predicate modeled on the standard <code class="docutils literal notranslate"><span class="pre">compare/3</span></code> predicate (duplicated elements are not removed).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">msort(Closure,List,Sorted)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">msort(3,*,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">msort(+callable,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="nextto-3">
+<span id="listp-0-nextto-3"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nextto/3</span></code></a><a class="headerlink" href="#nextto-3" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> are consecutive elements in List.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nextto(X,Y,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nextto(?term,?term,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="nth0-3">
+<span id="listp-0-nth0-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nth0/3</span></code></a><a class="headerlink" href="#nth0-3" title="Link to this heading"></a></h3>
+<p>Nth element of a list (counting from zero).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nth0(Nth,List,Element)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nth0(?integer,?list,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="nth0-4">
+<span id="listp-0-nth0-4"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nth0/4</span></code></a><a class="headerlink" href="#nth0-4" title="Link to this heading"></a></h3>
+<p>Nth element of a list (counting from zero). <code class="docutils literal notranslate"><span class="pre">Rest</span></code> is a list of all the other elements. Can be used to either select the nth element of <code class="docutils literal notranslate"><span class="pre">List</span></code> or to insert an element before the nth element in <code class="docutils literal notranslate"><span class="pre">Rest</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nth0(Nth,List,Element,Rest)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nth0(?integer,?list,?term,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="nth1-3">
+<span id="listp-0-nth1-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nth1/3</span></code></a><a class="headerlink" href="#nth1-3" title="Link to this heading"></a></h3>
+<p>Nth element of a list (counting from one).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nth1(Nth,List,Element)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nth1(?integer,?list,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="nth1-4">
+<span id="listp-0-nth1-4"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nth1/4</span></code></a><a class="headerlink" href="#nth1-4" title="Link to this heading"></a></h3>
+<p>Nth element of a list (counting from one). <code class="docutils literal notranslate"><span class="pre">Rest</span></code> is a list of all the other elements. Can be used to either select the nth element of <code class="docutils literal notranslate"><span class="pre">List</span></code> or to insert an element before the nth element in <code class="docutils literal notranslate"><span class="pre">Rest</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nth1(Nth,List,Element,Rest)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nth1(?integer,?list,?term,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="sequential-occurrences-2">
+<span id="listp-0-sequential-occurrences-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sequential_occurrences/2</span></code></a><a class="headerlink" href="#sequential-occurrences-2" title="Link to this heading"></a></h3>
+<p>Counts the number of sequential occurrences of each <code class="docutils literal notranslate"><span class="pre">List</span></code> element, unifying <code class="docutils literal notranslate"><span class="pre">Occurrences</span></code> with a list of <code class="docutils literal notranslate"><span class="pre">Element-Count</span></code> pairs. Uses term equality for element comparison.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sequential_occurrences(List,Occurrences)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sequential_occurrences(&#64;list,-list(pair(term,positive_integer)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="sequential-occurrences-3">
+<span id="listp-0-sequential-occurrences-3"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sequential_occurrences/3</span></code></a><a class="headerlink" href="#sequential-occurrences-3" title="Link to this heading"></a></h3>
+<p>Counts the number of sequential occurrences of each <code class="docutils literal notranslate"><span class="pre">List</span></code> element, unifying <code class="docutils literal notranslate"><span class="pre">Occurrences</span></code> with a list of <code class="docutils literal notranslate"><span class="pre">Element-Count</span></code> pairs. Uses <code class="docutils literal notranslate"><span class="pre">Closure</span></code> for element comparison.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sequential_occurrences(List,Closure,Occurrences)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sequential_occurrences(&#64;list,&#64;callable,-list(pair(term,positive_integer)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="occurrences-2">
+<span id="listp-0-occurrences-2"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">occurrences/2</span></code></a><a class="headerlink" href="#occurrences-2" title="Link to this heading"></a></h3>
+<p>Counts the number of occurrences of each <code class="docutils literal notranslate"><span class="pre">List</span></code> element, unifying <code class="docutils literal notranslate"><span class="pre">Occurrences</span></code> with a sorted list of <code class="docutils literal notranslate"><span class="pre">Element-Count</span></code> pairs. Uses term equality for element comparison.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">occurrences(List,Occurrences)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">occurrences(&#64;list,-list(pair(term,positive_integer)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="occurrences-3">
+<span id="listp-0-occurrences-3"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">occurrences/3</span></code></a><a class="headerlink" href="#occurrences-3" title="Link to this heading"></a></h3>
+<p>Counts the number of occurrences of each <code class="docutils literal notranslate"><span class="pre">List</span></code> element, unifying <code class="docutils literal notranslate"><span class="pre">Occurrences</span></code> with a sorted list of <code class="docutils literal notranslate"><span class="pre">Element-Count</span></code> pairs. Uses <code class="docutils literal notranslate"><span class="pre">Closure</span></code> for element comparison.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">occurrences(List,Closure,Occurrences)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">occurrences(*,2,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">occurrences(&#64;list,&#64;callable,-list(pair(term,positive_integer)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="partition-5">
+<span id="listp-0-partition-5"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">partition/5</span></code></a><a class="headerlink" href="#partition-5" title="Link to this heading"></a></h3>
+<p>Partitions a list in lists with values less, equal, and greater than a given value (using standard order).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">partition(List,Value,Less,Equal,Greater)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">partition(+list,+number,-list,-list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="permutation-2">
+<span id="listp-0-permutation-2"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">permutation/2</span></code></a><a class="headerlink" href="#permutation-2" title="Link to this heading"></a></h3>
+<p>The two lists are a permutation of the same list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permutation(List,Permutation)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permutation(?list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="prefix-2">
+<span id="listp-0-prefix-2"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">prefix/2</span></code></a><a class="headerlink" href="#prefix-2" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Prefix</span></code> is a prefix of <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">prefix(Prefix,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">prefix(?list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="prefix-3">
+<span id="listp-0-prefix-3"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">prefix/3</span></code></a><a class="headerlink" href="#prefix-3" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Prefix</span></code> is a prefix of length <code class="docutils literal notranslate"><span class="pre">Length</span></code> of <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">prefix(Prefix,Length,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">prefix(?list,+integer,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">prefix(?list,-integer,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="proper-prefix-2">
+<span id="listp-0-proper-prefix-2"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">proper_prefix/2</span></code></a><a class="headerlink" href="#proper-prefix-2" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Prefix</span></code> is a proper prefix of <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">proper_prefix(Prefix,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">proper_prefix(?list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="proper-prefix-3">
+<span id="listp-0-proper-prefix-3"></span><span id="index-31"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">proper_prefix/3</span></code></a><a class="headerlink" href="#proper-prefix-3" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Prefix</span></code> is a proper prefix of length <code class="docutils literal notranslate"><span class="pre">Length</span></code> of <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">proper_prefix(Prefix,Length,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">proper_prefix(?list,+integer,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">proper_prefix(?list,-integer,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="remove-duplicates-2">
+<span id="listp-0-remove-duplicates-2"></span><span id="index-32"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">remove_duplicates/2</span></code></a><a class="headerlink" href="#remove-duplicates-2" title="Link to this heading"></a></h3>
+<p>Removes duplicated list elements using equality (<code class="docutils literal notranslate"><span class="pre">==/2</span></code>) for comparison and keeping the left-most element when repeated.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">remove_duplicates(List,Set)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">remove_duplicates(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="reverse-2">
+<span id="listp-0-reverse-2"></span><span id="index-33"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">reverse/2</span></code></a><a class="headerlink" href="#reverse-2" title="Link to this heading"></a></h3>
+<p>Reverses a list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">reverse(List,Reversed)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">reverse(+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">reverse(?list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">reverse(-list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="same-length-2">
+<span id="listp-0-same-length-2"></span><span id="index-34"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">same_length/2</span></code></a><a class="headerlink" href="#same-length-2" title="Link to this heading"></a></h3>
+<p>The two lists have the same length.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">same_length(List1,List2)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">same_length(+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">same_length(?list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">same_length(-list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="same-length-3">
+<span id="listp-0-same-length-3"></span><span id="index-35"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">same_length/3</span></code></a><a class="headerlink" href="#same-length-3" title="Link to this heading"></a></h3>
+<p>The two lists have the same length.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">same_length(List1,List2,Length)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">same_length(+list,?list,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">same_length(?list,+list,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">same_length(-list,-list,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="select-3">
+<span id="listp-0-select-3"></span><span id="index-36"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">select/3</span></code></a><a class="headerlink" href="#select-3" title="Link to this heading"></a></h3>
+<p>Selects an element from a list, returning the list of remaining elements.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">select(Element,List,Remaining)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">select(?term,?list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="selectchk-3">
+<span id="listp-0-selectchk-3"></span><span id="index-37"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">selectchk/3</span></code></a><a class="headerlink" href="#selectchk-3" title="Link to this heading"></a></h3>
+<p>Checks that an element can be selected from a list, returning the list of remaining elements.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">selectchk(Element,List,Remaining)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">selectchk(?term,?list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="select-4">
+<span id="listp-0-select-4"></span><span id="index-38"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">select/4</span></code></a><a class="headerlink" href="#select-4" title="Link to this heading"></a></h3>
+<p>Selects an element from a list, replacing it by a new element and returning the resulting list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">select(Old,OldList,New,NewList)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">select(?term,?list,?term,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="selectchk-4">
+<span id="listp-0-selectchk-4"></span><span id="index-39"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">selectchk/4</span></code></a><a class="headerlink" href="#selectchk-4" title="Link to this heading"></a></h3>
+<p>Checks that an element from a list can be replaced by a new element, returning the resulting list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">selectchk(Old,OldList,New,NewList)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">selectchk(?term,?list,?term,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="sort-2">
+<span id="listp-0-sort-2"></span><span id="index-40"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sort/2</span></code></a><a class="headerlink" href="#sort-2" title="Link to this heading"></a></h3>
+<p>Sorts a list in ascending order (duplicated elements are removed).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sort(List,Sorted)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sort(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="sort-3">
+<span id="listp-0-sort-3"></span><span id="index-41"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sort/3</span></code></a><a class="headerlink" href="#sort-3" title="Link to this heading"></a></h3>
+<p>Sorts a list using a user-specified comparison predicate modeled on the standard <code class="docutils literal notranslate"><span class="pre">compare/3</span></code> predicate (duplicated elements are removed).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sort(Closure,List,Sorted)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sort(3,*,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sort(+callable,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="sort-4">
+<span id="listp-0-sort-4"></span><span id="index-42"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sort/4</span></code></a><a class="headerlink" href="#sort-4" title="Link to this heading"></a></h3>
+<p>Sorts a list using the given key and order. Uses the standard term comparison operators for the order. The key selects the argument in each element in the list to use for comparisons. A key value of zero uses the whole element for comparisons.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sort(Key,Order,List,Sorted)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sort(+non_negative_integer,+atom,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Removing duplicates: Use one of the <code class="docutils literal notranslate"><span class="pre">&#64;&lt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;&gt;</span></code> orders.</p></li>
+<li><p>Keeping duplicates: Use one of the <code class="docutils literal notranslate"><span class="pre">&#64;=&lt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;&gt;=</span></code> orders.</p></li>
+<li><p>Sorting in ascending order: Use one of the <code class="docutils literal notranslate"><span class="pre">&#64;&lt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;=&lt;</span></code> orders.</p></li>
+<li><p>Sorting in descending order: Use one of the <code class="docutils literal notranslate"><span class="pre">&#64;&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;&gt;=</span></code> orders.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="split-4">
+<span id="listp-0-split-4"></span><span id="index-43"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">split/4</span></code></a><a class="headerlink" href="#split-4" title="Link to this heading"></a></h3>
+<p>Splits a list into sublists of a given length. Also returns a list with the remaining elements. Fails if the length is zero or negative.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">split(List,Length,Sublists,Remaining)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">split(+list,+integer,-list(list),-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="sublist-2">
+<span id="listp-0-sublist-2"></span><span id="index-44"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sublist/2</span></code></a><a class="headerlink" href="#sublist-2" title="Link to this heading"></a></h3>
+<p>The first list is a sublist of the second.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sublist(Sublist,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sublist(?list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="subsequence-3">
+<span id="listp-0-subsequence-3"></span><span id="index-45"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">subsequence/3</span></code></a><a class="headerlink" href="#subsequence-3" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">List</span></code> is an interleaving of <code class="docutils literal notranslate"><span class="pre">Subsequence</span></code> and <code class="docutils literal notranslate"><span class="pre">Remaining</span></code>. Element order is preserved.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequence(List,Subsequence,Remaining)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequence(?list,?list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="subsequence-4">
+<span id="listp-0-subsequence-4"></span><span id="index-46"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">subsequence/4</span></code></a><a class="headerlink" href="#subsequence-4" title="Link to this heading"></a></h3>
+<p>Generates subsequences of a given length from a list. Also returns the remaining elements. Element order is preserved.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequence(List,Length,Subsequence,Remaining)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequence(+list,+integer,?list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="substitute-4">
+<span id="listp-0-substitute-4"></span><span id="index-47"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">substitute/4</span></code></a><a class="headerlink" href="#substitute-4" title="Link to this heading"></a></h3>
+<p>Substitutes all occurrences of <code class="docutils literal notranslate"><span class="pre">Old</span></code> in <code class="docutils literal notranslate"><span class="pre">List</span></code> by <code class="docutils literal notranslate"><span class="pre">New</span></code>, returning <code class="docutils literal notranslate"><span class="pre">NewList</span></code>. Uses term equality for element comparison.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">substitute(Old,List,New,NewList)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">substitute(&#64;term,&#64;list,&#64;term,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="subtract-3">
+<span id="listp-0-subtract-3"></span><span id="index-48"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">subtract/3</span></code></a><a class="headerlink" href="#subtract-3" title="Link to this heading"></a></h3>
+<p>Removes all elements in the second list from the first list, returning the list of remaining elements.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subtract(List,Elements,Remaining)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subtract(+list,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="suffix-2">
+<span id="listp-0-suffix-2"></span><span id="index-49"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">suffix/2</span></code></a><a class="headerlink" href="#suffix-2" title="Link to this heading"></a></h3>
+<p>Suffix is a suffix of List.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">suffix(Suffix,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">suffix(?list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="suffix-3">
+<span id="listp-0-suffix-3"></span><span id="index-50"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">suffix/3</span></code></a><a class="headerlink" href="#suffix-3" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Suffix</span></code> is a suffix of length <code class="docutils literal notranslate"><span class="pre">Length</span></code> of <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">suffix(Suffix,Length,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">suffix(?list,+integer,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">suffix(?list,-integer,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="proper-suffix-2">
+<span id="listp-0-proper-suffix-2"></span><span id="index-51"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">proper_suffix/2</span></code></a><a class="headerlink" href="#proper-suffix-2" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Suffix</span></code> is a proper suffix of <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">proper_suffix(Suffix,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">proper_suffix(?list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="proper-suffix-3">
+<span id="listp-0-proper-suffix-3"></span><span id="index-52"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">proper_suffix/3</span></code></a><a class="headerlink" href="#proper-suffix-3" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Suffix</span></code> is a proper suffix of length <code class="docutils literal notranslate"><span class="pre">Length</span></code> of <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">proper_suffix(Suffix,Length,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">proper_suffix(?list,+integer,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">proper_suffix(?list,-integer,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="take-3">
+<span id="listp-0-take-3"></span><span id="index-53"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">take/3</span></code></a><a class="headerlink" href="#take-3" title="Link to this heading"></a></h3>
+<p>Takes the first <code class="docutils literal notranslate"><span class="pre">N</span></code> elements of a list. Fails if the list have fewer than <code class="docutils literal notranslate"><span class="pre">N</span></code> elements.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">take(N,List,Elements)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">take(+integer,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="drop-3">
+<span id="listp-0-drop-3"></span><span id="index-54"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">drop/3</span></code></a><a class="headerlink" href="#drop-3" title="Link to this heading"></a></h3>
+<p>Drops the first <code class="docutils literal notranslate"><span class="pre">N</span></code> elements of a list. Fails if the list have fewer than <code class="docutils literal notranslate"><span class="pre">N</span></code> elements.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">drop(N,List,Remaining)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">drop(+integer,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="protected-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
+<p>(none)</p>
+</section>
+<section id="private-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
+<p>(none)</p>
+</section>
+<section id="operators">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
+<p>(none)</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a>, <a class="reference internal" href="list_1.html#list-1"><span class="std std-ref">list(Type)</span></a>, <a class="reference internal" href="numberlistp_0.html#numberlistp-0"><span class="std std-ref">numberlistp</span></a>, <a class="reference internal" href="varlistp_0.html#varlistp-0"><span class="std std-ref">varlistp</span></a></p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="list_1.html" class="btn btn-neutral float-left" title="list(Type)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="natural_0.html" class="btn btn-neutral float-right" title="natural" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2025, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

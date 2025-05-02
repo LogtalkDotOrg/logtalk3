@@ -26,7 +26,7 @@ The `json` library provides predicates for parsing and generating data in
 the JSON format based on the specification and standard found at:
 
 - https://www.rfc-editor.org/rfc/rfc8259
-- https://www.ecma-international.org/publications-and-standards/standards/ecma-404/
+- https://ecma-international.org/publications-and-standards/standards/ecma-404/
 
 It includes parametric objects whose parameters allow selecting the
 representation for parsed JSON objects (`curly` or `list`), JSON text
@@ -37,7 +37,7 @@ or `colon`).
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#json](../../docs/library_index.html#json)
+Open the [../../apis/library_index.html#json](../../apis/library_index.html#json)
 link in a web browser.
 
 

@@ -33,7 +33,7 @@ Modified: 2014-09-26 (to use the library "os" object to get the current date)
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#iso8601](../../docs/library_index.html#iso8601)
+Open the [../../apis/library_index.html#iso8601](../../apis/library_index.html#iso8601)
 link in a web browser.
 
 

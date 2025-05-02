@@ -50,7 +50,7 @@ file.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#mutations](../../docs/library_index.html#mutations)
+Open the [../../apis/library_index.html#mutations](../../apis/library_index.html#mutations)
 link in a web browser.
 
 

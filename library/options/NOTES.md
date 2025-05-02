@@ -27,7 +27,7 @@ application options.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#options](../../docs/library_index.html#options)
+Open the [../../apis/library_index.html#options](../../apis/library_index.html#options)
 file in a web browser.
 
 Loading

@@ -1,0 +1,84 @@
+.TH lgt2pdf 1 "May 2, 2025" "Logtalk 3.92.0" "Logtalk Documentation"
+
+.SH NAME
+lgt2pdf \- Logtalk script for converting XML documenting files into PDF files
+
+.SH SYNOPSIS
+.B lgt2pdf
+[\fB-f \fIformat\fR]
+[\fB-d \fIdirectory\fR]
+[\fB-p \fIprocessor\fR]
+.br
+.B lgt2pdf
+.B \-h
+
+.SH DESCRIPTION
+\fBlgt2pdf\fR is a Logtalk script for converting all XML documenting files in the current directory into PDF files.
+
+.SH OPTIONS
+.TP
+.B \-f
+.I format
+Paper format (either \fIa4\fR or \fIus\fR).
+.TP
+.B \-d
+.I directory
+Output directory for the generated PDF files.
+.TP
+.B \-p
+.I processor
+XSL-FO processor.
+.TP
+.B \-h
+Prints a summary of the script options.
+
+.SH REQUIREMENTS
+Requires a compatible XSL-FO processor: \fIfop\fR (default), \fIfop2\fR, \fIxep\fR, or \fIxinc\fR.
+The \fIfop2\fR processor requires generating the XML documenting files using the option \fIxml_spec(xsd)\fR or \fIxml_spec_reference(standalone)\fR.
+
+.SH ENVIRONMENT
+.TP
+.B LOGTALKHOME
+Specifies the location of the Logtalk installation.
+.TP
+.B LOGTALKUSER
+Specifies the location of the Logtalk user directory.
+
+.SH FILES
+.TP
+.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk_entity.dtd
+The Logtalk entity DTD file.
+.TP
+.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk_index.dtd
+The Logtalk index DTD file.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/custom.ent
+The Logtalk custom entities file.
+.TP
+.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk_entity.xsd
+The Logtalk entity XML Schema file.
+.TP
+.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk_index.xsd
+The Logtalk index XML Schema file.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/lgtpdfa4.xsl
+The default XSLT file for generating PDF A4 files.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_pdf.xsl
+The Logtalk entity XSLT file.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_pdf.xsl
+The Logtalk index XSLT file.
+
+.SH "SEE ALSO"
+The Logtalk website at https://logtalk.org/
+.PP
+The Logtalk Handbook at \fB$LOGTALKHOME/docs/handbook/index.html\fR
+.PP
+logtalk_user_setup(1),\ lgt2html(1),\ lgt2xml(1),\ lgt2md(1),\ lgt2txt(1)
+
+.SH AUTHOR
+Paulo Moura <pmoura@logtalk.org>
+
+.SH COPYRIGHT
+Copyright (c) 1998-2025 Paulo Moura.

@@ -31,7 +31,7 @@ and only access them using the library predicates.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#sets](../../docs/library_index.html#sets)
+Open the [../../apis/library_index.html#sets](../../apis/library_index.html#sets)
 link in a web browser.
 
 

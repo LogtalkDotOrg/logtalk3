@@ -1,0 +1,114 @@
+.TH lgt2rst 1 "May 2, 2025" "Logtalk 3.92.0" "Logtalk Documentation"
+
+.SH NAME
+lgt2rst \- Logtalk script for converting XML documenting files into reStructuredText files, notably for use with Sphinx
+
+.SH SYNOPSIS
+.B lgt2rst
+[\fB-d \fIdirectory\fR]
+[\fB-i \fIindex\fR]
+[\fB-t \fItitle\fR]
+[\fB-p \fIprocessor\fR]
+[\fB-s\fI\fR]
+[\fB-m\fI\fR]
+[\fB-l \fImapping\fR]
+.br
+.B lgt2rst
+.B \-h
+
+.SH DESCRIPTION
+\fBlgt2rst\fR is a Logtalk script for converting all Logtalk XML documenting files in the current directory into reStructuredText files, notably for use with Sphinx. Assumes UTF-8 encoding.
+
+.SH OPTIONS
+.TP
+.B \-d
+.I directory
+Output directory for the reStructuredText files.
+.TP
+.B \-i
+.I index
+Name of the index file.
+.TP
+.B \-t
+.I title
+Title to be used in the index file.
+.TP
+.B \-p
+.I processor
+XSLT processor.
+.TP
+.B \-s
+Runs sphinx-quickstart script.
+.TP
+.B \-m
+Runs make html (requires also using the \fB-s\fI\fR option).
+.TP
+.B \-l
+.I mapping
+Name of the Intersphinx mapping for linking library APIs back to library descriptions.
+.TP
+.B \-h
+Prints a summary of the script options.
+
+.SH REQUIREMENTS
+Requires a compatible XSLT processor. See the script help screen for more information.
+.PP
+The use of the \fB-s\fR, \fB-m\fR, and \fB-l\fR options require Sphinx, Intersphinx extension, Read the Docs Sphinx theme, and Pygments to be installed.
+.PP
+The use of the \fB-l\fR option requires that the used \fBconf.py\fR file defines the mapping. The library description files must have a reStructuredText target in the first line with the name of the library prefixed by \fBlibrary_\fR. See the Intersphinx documentation for details.
+
+.SH ENVIRONMENT
+.TP
+.B LOGTALKHOME
+Specifies the location of the Logtalk installation.
+.TP
+.B LOGTALKUSER
+Specifies the location of the Logtalk user directory.
+
+.SH FILES
+.TP
+.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk_entity.dtd
+The Logtalk entity DTD file.
+.TP
+.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk_index.dtd
+The Logtalk index DTD file.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/custom.ent
+The Logtalk custom entities file.
+.TP
+.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk_entity.xsd
+The Logtalk entity XML Schema file.
+.TP
+.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk_index.xsd
+The Logtalk index XML Schema file.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_rst.xsl
+The Logtalk entity XSLT file.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_rst.xsl
+The Logtalk index XSLT file.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/conf.py.jinja
+The conf.py template file.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/css/sphinx/custom.css
+The CSS file used to customize the Sphinx Read the Docs theme.
+
+.SH "SEE ALSO"
+The Sphinx website at https://www.sphinx-doc.org/
+.PP
+The Pygments website at https://pygments.org/
+.PP
+The Read the Docs theme website at https://github.com/readthedocs/sphinx_rtd_theme
+.PP
+The Logtalk website at https://logtalk.org/
+.PP
+The Logtalk Handbook at \fB$LOGTALKHOME/docs/handbook/index.html\fR
+.PP
+logtalk_user_setup(1),\ lgt2html(1),\ lgt2xml(1),\ lgt2pdf(1),\ lgt2md(1),\ lgt2txt(1)
+
+.SH AUTHOR
+Paulo Moura <pmoura@logtalk.org>
+
+.SH COPYRIGHT
+Copyright (c) 1998-2025 Paulo Moura.

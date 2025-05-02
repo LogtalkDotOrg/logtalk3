@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on March 27, 2025
+; Last updated on May 2, 2025
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -65,7 +65,7 @@ Name: "prolog"; Description: "Prolog integration shortcuts"
 Name: "custom"; Description: "Custom installation"; Flags: iscustom
 
 [Components]
-Name: "base"; Description: "Base system (compiler/runtime, Prolog integration files, manuals)"; Types: full base custom; Flags: disablenouninstallwarning
+Name: "base"; Description: "Base system (compiler/runtime, Prolog integration files, documentation)"; Types: full base custom; Flags: disablenouninstallwarning
 Name: "user"; Description: "User files (libraries, examples, and other support files)"; Types: full user custom; Flags: checkablealone disablenouninstallwarning
 Name: "user\backup"; Description: "Backup current Logtalk user folder"; Types: full user custom; Flags: disablenouninstallwarning
 Name: "prolog"; Description: "Prolog integration (backend compiler support)"; Types: full prolog custom; Flags: disablenouninstallwarning
@@ -146,14 +146,14 @@ Type: files; Name: "{app}\paths\*.xwam"
 Name: "{group}\Acknowledgments"; Filename: "{app}\ACKNOWLEDGMENTS.md"; Components: base
 Name: "{group}\Bibliography"; Filename: "{app}\BIBLIOGRAPHY.bib"; Components: base
 Name: "{group}\Contributing"; Filename: "{app}\CONTRIBUTING.md"; Components: base
-Name: "{group}\User and Reference Manuals"; Filename: "{app}\manuals\index.html"; Components: base
+Name: "{group}\Handbook"; Filename: "{app}\docs\handbook\index.html"; Components: base
 Name: "{group}\License"; Filename: "{app}\LICENSE.txt"; Components: base
 Name: "{group}\Quick Start"; Filename: "{app}\QUICK_START.md"; Components: base
 Name: "{group}\Release Notes"; Filename: "{app}\RELEASE_NOTES.md"; Components: base
 Name: "{group}\Read Me"; Filename: "{app}\README.md"; Components: base
 Name: "{group}\Customization instructions"; Filename: "{app}\CUSTOMIZE.md"; Components: base
 Name: "{group}\Default settings"; Filename: "{app}\settings-sample.lgt"; Components: base
-Name: "{group}\APIs documentation"; Filename: "{app}\docs\index.html"; Components: base
+Name: "{group}\APIs documentation"; Filename: "{app}\docs\apis\index.html"; Components: base
 
 Name: "{group}\Web Site"; Filename: "{#MyAppUrl}"; Components: base
 
@@ -197,7 +197,7 @@ Name: "{code:GetLgtUserDir}\Read Me"; Filename: "{app}\README.md"; Components: u
 Name: "{code:GetLgtUserDir}\Customization Instructions"; Filename: "{app}\CUSTOMIZE.md"; Components: user
 Name: "{code:GetLgtUserDir}\adapters"; Filename: "{app}\adapters"; Components: user
 Name: "{code:GetLgtUserDir}\coding"; Filename: "{app}\coding"; Components: user
-Name: "{code:GetLgtUserDir}\manuals"; Filename: "{app}\manuals"; Components: user
+Name: "{code:GetLgtUserDir}\docs"; Filename: "{app}\docs"; Components: user
 Name: "{code:GetLgtUserDir}\paths"; Filename: "{app}\paths"; Components: user
 Name: "{code:GetLgtUserDir}\scripts"; Filename: "{app}\scripts"; Components: user
 

@@ -37,11 +37,20 @@ built-in predicate in version 2.68.11.
 Documentation
 -------------
 
+* CHANGED: Moved APIs documentation to the `docs/apis` directory. Moved the
+man pages to `docs/man`. Moved the Handbook to `docs/handbook`. Fixed the
+documentation and installation scripts for the new locations.
+
 * ADDED: Glossary entries for "flaky test", "test dialect", "test outcome",
 "mocking", "term-expansion", and "goal-expansion".
 
 * FIXED: Typo in the sample code for user-defined test dialects in the
 `lgtunit` tool documentation. Thanks to Paul Brown for the bug report.
+
+Tools
+-----
+
+* UPDATED: The `help` tool for the new location of the Handbook.
 
 Examples
 --------

@@ -1,0 +1,2099 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lgtunit &mdash; The Logtalk Handbook v3.92.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=d8553e9b"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="linter" href="linter.html" />
+    <link rel="prev" title="lgtdoc" href="lgtdoc.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.92.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asdf.html"><code class="docutils literal notranslate"><span class="pre">asdf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_metrics.html"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dead_code_scanner.html"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug_messages.html"><code class="docutils literal notranslate"><span class="pre">debug_messages</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugger.html"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagrams.html"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="doclet.html"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="help.html"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="issue_creator.html"><code class="docutils literal notranslate"><span class="pre">issue_creator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lgtdoc.html"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#main-files">Main files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-and-running-tests">Writing and running tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automating-running-tests">Automating running tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parametric-test-objects">Parametric test objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-dialects">Test dialects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-defined-test-dialects">User-defined test dialects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quickcheck">QuickCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#skipping-tests">Skipping tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#selecting-tests">Selecting tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#checking-test-goal-results">Checking test goal results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-local-predicates">Testing local predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-non-deterministic-predicates">Testing non-deterministic predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-generators">Testing generators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-input-output-predicates">Testing input/output predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#suppressing-tested-predicates-output">Suppressing tested predicates output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tests-with-timeout-limits">Tests with timeout limits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setup-and-cleanup-goals">Setup and cleanup goals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-annotations">Test annotations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-execution-times-and-memory-usage">Test execution times and memory usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#working-with-test-data-files">Working with test data files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flaky-tests">Flaky tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mocking">Mocking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-messages-in-tests">Debugging messages in tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-failed-tests">Debugging failed tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#code-coverage">Code coverage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#utility-predicates">Utility predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exporting-test-results-in-xunit-xml-format">Exporting test results in xUnit XML format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exporting-test-results-in-the-tap-output-format">Exporting test results in the TAP output format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generating-allure-reports">Generating Allure reports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exporting-code-coverage-results-in-xml-format">Exporting code coverage results in XML format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automatically-creating-bug-reports-at-issue-trackers">Automatically creating bug reports at issue trackers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#minimizing-test-results-output">Minimizing test results output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#help-with-warnings">Help with warnings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linter.html"><code class="docutils literal notranslate"><span class="pre">linter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="make.html"><code class="docutils literal notranslate"><span class="pre">make</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="packs.html"><code class="docutils literal notranslate"><span class="pre">packs</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ports_profiler.html"><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiler.html"><code class="docutils literal notranslate"><span class="pre">profiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutor.html"><code class="docutils literal notranslate"><span class="pre">tutor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrapper.html"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../docs/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Developer Tools</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/devtools/lgtunit.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="lgtunit">
+<span id="library-lgtunit"></span><h1><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code><a class="headerlink" href="#lgtunit" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool provides testing support for Logtalk. It can also
+be used for testing plain Prolog code and Prolog module code.</p>
+<p>This tool is inspired by the xUnit frameworks architecture and by the
+works of Joachim Schimpf (ECLiPSe library <code class="docutils literal notranslate"><span class="pre">test_util</span></code>) and Jan
+Wielemaker (SWI-Prolog <code class="docutils literal notranslate"><span class="pre">plunit</span></code> package).</p>
+<p>Tests are defined in objects, which represent a <em>test set</em> or <em>test
+suite</em>. In simple cases, we usually define a single object containing
+the tests. But it is also possible to use parametric test objects or
+multiple objects defining parametrizable tests or test subsets for
+testing more complex units and facilitating tests maintenance.
+Parametric test objects are specially useful to test multiple
+implementations of the same protocol using a single set of tests by
+passing the implementation object as a parameter value.</p>
+<section id="main-files">
+<h2>Main files<a class="headerlink" href="#main-files" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">lgtunit.lgt</span></code> source file implements a framework for defining and
+running unit tests in Logtalk. The <code class="docutils literal notranslate"><span class="pre">lgtunit_messages.lgt</span></code> source file
+defines the default translations for the messages printed when running
+unit tests. These messages can be intercepted to customize the output,
+e.g. to make it less verbose or for integration with e.g. GUI IDEs and
+continuous integration servers.</p>
+<p>Other files that are part of this tool provide support for alternative
+output formats of test results and are discussed below.</p>
+</section>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>This tool API documentation is available at:</p>
+<p><a class="reference external" href="../../../docs/apis/library_index.html#lgtunit">../../../docs/apis/library_index.html#lgtunit</a></p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>This tool can be loaded using the query:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(lgtunit(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(lgtunit(tester)).
+</pre></div>
+</div>
+</section>
+<section id="writing-and-running-tests">
+<h2>Writing and running tests<a class="headerlink" href="#writing-and-running-tests" title="Link to this heading"></a></h2>
+<p>In order to write your own unit tests, define objects extending the
+<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object. You may start by copying the <code class="docutils literal notranslate"><span class="pre">tests-sample.lgt</span></code>
+file (at the root of the Logtalk distribution) to a <code class="docutils literal notranslate"><span class="pre">tests.lgt</span></code> file
+in your project directory and editing it to add your tests:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(tests,
+    <span class="k">extends</span>(lgtunit)).
+
+    <span class="c">% test definitions</span>
+    ...
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>The section on <a class="reference external" href="#test-dialects">test dialects</a> below describes in
+detail how to write tests. See the <code class="docutils literal notranslate"><span class="pre">tests</span></code> top directory for examples
+of actual unit tests. Other sources of examples are the <code class="docutils literal notranslate"><span class="pre">library</span></code> and
+<code class="docutils literal notranslate"><span class="pre">examples</span></code> directories.</p>
+<p>The tests must be term-expanded by the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object by compiling
+the source files defining the test objects using the option
+<code class="docutils literal notranslate"><span class="pre">hook(lgtunit)</span></code>. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(lgtunit(loader)),
+     <span class="k">logtalk_load</span>(tests, [hook(lgtunit)]).
+</pre></div>
+</div>
+<p>As the term-expansion mechanism applies to all the contents of a source
+file, the source files defining the test objects should preferably not
+contain entities other than the test objects. Additional code necessary
+for the tests should go to separate files. In general, the tests
+themselves can be compiled in <em>optimized</em> mode. Assuming that’s the
+case, also use the <code class="docutils literal notranslate"><span class="pre">optimize(on)</span></code> compiler option for faster
+execution.</p>
+<p>The term-expansion performed by the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object sets the test
+object <code class="docutils literal notranslate"><span class="pre">source_data</span></code> flag to <code class="docutils literal notranslate"><span class="pre">on</span></code> and the
+<code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code> flag to <code class="docutils literal notranslate"><span class="pre">allow</span></code> for code coverage and
+debugging support. But these settings can always be overridden in the
+test objects.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">tester-sample.lgt</span></code> file (at the root of the Logtalk distribution)
+exemplifies how to compile and load <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool, the source code
+under testing, the unit tests, and how to automatically run all the
+tests after loading:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
+    <span class="c">% minimize compilation reports to the essential ones (errors and warnings)</span>
+    <span class="k">set_logtalk_flag</span>(report, warnings),
+    <span class="c">% load any necessary library files for your application; for example</span>
+    <span class="k">logtalk_load</span>(basic_types(loader)),
+    <span class="c">% load the unit test tool</span>
+    <span class="k">logtalk_load</span>(lgtunit(loader)),
+    <span class="c">% load your application files (e.g., &quot;source.lgt&quot;) enabling support for</span>
+    <span class="c">% code coverage, which requires compilation in debug mode and collecting</span>
+    <span class="c">% source data information; if code coverage is not required, remove the</span>
+    <span class="c">% &quot;debug(on)&quot; option for faster execution</span>
+    <span class="k">logtalk_load</span>(source, [source_data(on), debug(on)]),
+    <span class="c">% compile the unit tests file expanding it using &quot;lgtunit&quot; as the hook</span>
+    <span class="c">% object to preprocess the tests; if you have failing tests, add the</span>
+    <span class="c">% option debug(on) to debug them (see &quot;tools/lgtunit/NOTES.md&quot; for</span>
+    <span class="c">% debugging advice); tests should be loaded after the code being tested</span>
+    <span class="c">% is loaded to avoid warnings such as references to unknown entities</span>
+    <span class="k">logtalk_load</span>(tests, [hook(lgtunit)]),
+    <span class="c">% run all the unit tests; assuming your tests object is named &quot;tests&quot;</span>
+    tests<span class="o">::</span>run
+)).
+</pre></div>
+</div>
+<p>You may copy this sample file to a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file in your project
+directory and edit it to load your project and test files. The
+<code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> testing automation script defaults to looking for
+test driver files named <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> or <code class="docutils literal notranslate"><span class="pre">tester.logtalk</span></code> (if you
+have work-in-progress test sets that you don’t want to run by default,
+simply use a different file name such as <code class="docutils literal notranslate"><span class="pre">tester_wip.lgt</span></code>; you can
+still run them automated by using <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span> <span class="pre">-n</span> <span class="pre">tester_wip</span></code>).</p>
+<p>Debugged test sets should preferably be compiled in optimal mode,
+specially when containing deterministic tests and when using the utility
+benchmarking predicates.</p>
+<p>Assuming a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> driver file as exemplified above, the tests
+can be run by simply loading this file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(tester).
+</pre></div>
+</div>
+<p>Assuming your test object is named <code class="docutils literal notranslate"><span class="pre">tests</span></code>, you can re-run the tests
+by typing:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> tests<span class="o">::</span>run.
+</pre></div>
+</div>
+<p>You can also re-run a single test (or a list of tests) using the
+<code class="docutils literal notranslate"><span class="pre">run/1</span></code> predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> tests<span class="o">::</span>run(test_identifier).
+</pre></div>
+</div>
+<p>When testing complex <em>units</em>, it is often desirable to split the tests
+between several test objects or use parametric test objects to be able
+to run the same tests using different parameters (e.g., different data
+sets or alternative implementations of the same protocol). In this case,
+you can run all test subsets using the goal:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>run_test_sets([test_set_1, test_set_2, ...]).
+</pre></div>
+</div>
+<p>where the <code class="docutils literal notranslate"><span class="pre">run_test_sets/1</span></code> predicate argument is a list of two or
+more test object identifiers. This predicate makes it possible to get a
+single code coverage report that takes into account all the tests.</p>
+<p>It’s also possible to automatically run loaded tests when using the
+<code class="docutils literal notranslate"><span class="pre">make</span></code> tool by calling the goal that runs the tests from a definition
+of the hook predicate <code class="docutils literal notranslate"><span class="pre">logtalk_make_target_action/1</span></code>. For example, by
+adding to the tests <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> driver file the following code:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% integrate the tests with logtalk_make/1</span>
+<span class="p">:- </span><span class="k">multifile</span>(logtalk_make_target_action<span class="o">/</span><span class="m">1</span>).
+<span class="p">:- </span><span class="k">dynamic</span>(logtalk_make_target_action<span class="o">/</span><span class="m">1</span>).
+
+<span class="k">logtalk_make_target_action</span>(check) <span class="o">:-</span>
+    tests<span class="o">::</span>run.
+</pre></div>
+</div>
+<p>Alternatively, you can define the predicate <code class="docutils literal notranslate"><span class="pre">make/1</span></code> inside the test
+set object. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(tests, <span class="k">extends</span>(lgtunit)).
+
+    make(check).
+    ...
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>This clause will cause all tests to be run when calling the
+<code class="docutils literal notranslate"><span class="pre">logtalk_make/1</span></code> predicate with the target <code class="docutils literal notranslate"><span class="pre">check</span></code> (or its top-level
+shortcut, <code class="docutils literal notranslate"><span class="pre">{?}</span></code>). The other possible target is <code class="docutils literal notranslate"><span class="pre">all</span></code> (with top-level
+shortcut <code class="docutils literal notranslate"><span class="pre">{*}</span></code>).</p>
+<p>Note that you can have multiple test driver files. For example, one
+driver file that runs the tests collecting code coverage data and a
+quicker driver file that skips code coverage and compiles the code to be
+tested in optimized mode.</p>
+</section>
+<section id="automating-running-tests">
+<h2>Automating running tests<a class="headerlink" href="#automating-running-tests" title="Link to this heading"></a></h2>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">scripts/logtalk_tester.sh</span></code> Bash shell script or the
+<code class="docutils literal notranslate"><span class="pre">scripts/logtalk_tester.ps1</span></code> PowerShell script for automating running
+unit tests (e.g., from a CI/CD pipeline). When using one of the Logtalk
+installers, the <code class="docutils literal notranslate"><span class="pre">.sh</span></code> extension can usually be omitted. For example,
+assuming your current directory (or sub-directories) contains one or
+more <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> files:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">-</span>p gnu
+</pre></div>
+</div>
+<p>The only required argument is the identifier of the backend Prolog
+system. For other options, see the <code class="docutils literal notranslate"><span class="pre">scripts/NOTES.md</span></code> file or type:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">-</span>h
+</pre></div>
+</div>
+<p>On POSIX systems, you can also access extended documentation by
+consulting the script man page:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> man logtalk_tester
+</pre></div>
+</div>
+<p>The scripts support the same set of options. But the option for passing
+additional arguments to the tests uses different syntax. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">-</span>p gnu <span class="o">--</span> foo bar baz
+
+<span class="nv">PS</span><span class="o">&gt;</span> logtalk_tester <span class="o">-</span>p gnu <span class="o">-</span>a foo,bar,baz
+</pre></div>
+</div>
+<p>On POSIX systems, assuming Logtalk was installed using one of the
+provided installers or installation scripts, there is also a <code class="docutils literal notranslate"><span class="pre">man</span></code>
+page for the script:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> man logtalk_tester
+</pre></div>
+</div>
+<p>Alternatively, an HTML version of this man page can be found at:</p>
+<p><a class="reference external" href="https://logtalk.org/man/logtalk_tester.html">https://logtalk.org/man/logtalk_tester.html</a></p>
+<p>On POSIX systems, the <code class="docutils literal notranslate"><span class="pre">logtalk_tester.sh</span></code> Bash script timeout option
+requires either a <code class="docutils literal notranslate"><span class="pre">timeout</span></code> or a <code class="docutils literal notranslate"><span class="pre">gtimeout</span></code> command (provided by the
+GNU coreutils package). The <code class="docutils literal notranslate"><span class="pre">logtalk_tester.ps1</span></code> PowerShell script
+timeout option requires that Git for Windows is also installed, as it
+requires the GNU timeout command bundled with it.</p>
+<p>In addition to using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester.ps1</span></code> PowerShell script, the
+Bash shell version of the automation script can also be used in Windows
+operating-systems with selected backends by using the Bash shell
+included in the Git for Windows installer. That requires defining a
+<code class="docutils literal notranslate"><span class="pre">.profile</span></code> file setting the paths to the Logtalk scripts and the
+Prolog backend executables. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> cat <span class="err">~</span><span class="o">/</span>.profile
+<span class="err">#</span> <span class="nv">YAP</span>
+export <span class="nv">PATH</span><span class="o">=</span><span class="s">&quot;/C/Program Files/Yap64/bin&quot;</span><span class="o">:</span><span class="err">$</span><span class="nv">PATH</span>
+<span class="err">#</span> <span class="nv">GNU</span> <span class="nv">Prolog</span>
+export <span class="nv">PATH</span><span class="o">=</span><span class="s">&quot;/C/GNU-Prolog/bin&quot;</span><span class="o">:</span><span class="err">$</span><span class="nv">PATH</span>
+<span class="err">#</span> <span class="nv">SWI</span><span class="o">/</span><span class="nv">Prolog</span>
+export <span class="nv">PATH</span><span class="o">=</span><span class="s">&quot;/C/Program Files/swipl/bin&quot;</span><span class="o">:</span><span class="err">$</span><span class="nv">PATH</span>
+<span class="err">#</span> <span class="nv">ECLiPSe</span>
+export <span class="nv">PATH</span><span class="o">=</span><span class="s">&quot;/C/Program Files/ECLiPSe 7.0/lib/x86_64_nt&quot;</span><span class="o">:</span><span class="err">$</span><span class="nv">PATH</span>
+<span class="err">#</span> <span class="nv">SICStus</span> <span class="nv">Prolog</span>
+export <span class="nv">PATH</span><span class="o">=</span><span class="s">&quot;/C/Program Files/SICStus Prolog VC16 4.6.0/bin&quot;</span><span class="o">:</span><span class="err">$</span><span class="nv">PATH</span>
+<span class="err">#</span> <span class="nv">Logtalk</span>
+export <span class="nv">PATH</span><span class="o">=</span><span class="s">&quot;$LOGTALKHOME/scripts&quot;</span><span class="o">:</span><span class="s">&quot;$LOGTALKHOME/integration&quot;</span><span class="o">:</span><span class="err">$</span><span class="nv">PATH</span>
+</pre></div>
+</div>
+<p>The Git for Windows installer also includes GNU <code class="docutils literal notranslate"><span class="pre">coreutils</span></code> and its
+<code class="docutils literal notranslate"><span class="pre">timeout</span></code> command, which is used by the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> script
+<code class="docutils literal notranslate"><span class="pre">-t</span></code> option.</p>
+<p>Note that some tests may give different results when run from within the
+Bash shell compared with running the tests manually using a Windows GUI
+version of the Prolog backend. Some backends may also not be usable for
+automated testing due to the way they are made available as Windows
+applications.</p>
+<p>Additional advice on testing and on automating testing using continuous
+integration servers can be found at:</p>
+<p><a class="reference external" href="https://logtalk.org/testing.html">https://logtalk.org/testing.html</a></p>
+</section>
+<section id="parametric-test-objects">
+<h2>Parametric test objects<a class="headerlink" href="#parametric-test-objects" title="Link to this heading"></a></h2>
+<p>Parameterized unit tests can be easily defined by using parametric test
+objects. A typical example is testing multiple implementations of the
+same protocol. In this case, we can use a parameter to pass the specific
+implementation being tested. For example, assume that we want to run the
+same set of tests for the library <code class="docutils literal notranslate"><span class="pre">random_protocol</span></code> protocol. We can
+write:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(tests(<span class="nv">_RandomObject_</span>),
+    <span class="k">extends</span>(lgtunit)).
+
+<span class="p">    :- </span><span class="k">uses</span>(<span class="nv">_RandomObject_</span>, [
+        random<span class="o">/</span><span class="m">1</span>, between<span class="o">/</span><span class="m">3</span>, member<span class="o">/</span><span class="m">2</span>,
+        ...
+    ]).
+
+    test(between_3_in_interval) <span class="o">:-</span>
+        between(<span class="m">1</span>, <span class="m">10</span>, <span class="nv">Random</span>),
+        <span class="m">1</span> <span class="o">=&lt;</span> <span class="nv">Random</span>, <span class="nv">Random</span> <span class="o">=&lt;</span> <span class="m">10.</span>
+
+    ...
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>We can then test a specific implementation by instantiating the
+parameter. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> tests(fast_random)<span class="o">::</span>run.
+</pre></div>
+</div>
+<p>Or use the <code class="docutils literal notranslate"><span class="pre">lgtunit::run_test_sets/1</span></code> predicate to test all the
+implementations:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>run_test_sets([
+        tests(backend_random),
+        tests(fast_random),
+        tests(random)
+     ]).
+</pre></div>
+</div>
+</section>
+<section id="test-dialects">
+<h2>Test dialects<a class="headerlink" href="#test-dialects" title="Link to this heading"></a></h2>
+<p>Multiple test <em>dialects</em> are supported by default. See the next section
+on how to define your own test dialects. In all dialects, a <strong>ground
+callable term</strong>, usually an atom, is used to uniquely identify a test.
+This simplifies reporting failed tests and running tests selectively. An
+error message is printed if invalid or duplicated test identifiers are
+found. These errors must be corrected; otherwise the reported test
+results can be misleading. Ideally, tests should have descriptive names
+that clearly state the purpose of the test and what is being tested.</p>
+<p>Unit tests can be written using any of the following predefined
+dialects:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(<span class="nv">Test</span>) <span class="o">:-</span> <span class="nv">Goal</span>.
+</pre></div>
+</div>
+<p>This is the most simple dialect, allowing the specification of tests
+that are expected to succeed. The argument of the <code class="docutils literal notranslate"><span class="pre">test/1</span></code> predicate
+is the test identifier, which must be unique. A more versatile dialect
+is:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>succeeds(<span class="nv">Test</span>) <span class="o">:-</span> <span class="nv">Goal</span>.
+deterministic(<span class="nv">Test</span>) <span class="o">:-</span> <span class="nv">Goal</span>.
+fails(<span class="nv">Test</span>) <span class="o">:-</span> <span class="nv">Goal</span>.
+throws(<span class="nv">Test</span>, <span class="nv">Ball</span>) <span class="o">:-</span> <span class="nv">Goal</span>.
+throws(<span class="nv">Test</span>, <span class="nv">Balls</span>) <span class="o">:-</span> <span class="nv">Goal</span>.
+</pre></div>
+</div>
+<p>This is a straightforward dialect. For <code class="docutils literal notranslate"><span class="pre">succeeds/1</span></code> tests, <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is
+expected to succeed. For <code class="docutils literal notranslate"><span class="pre">deterministic/1</span></code> tests, <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is expected
+to succeed once without leaving a choice-point. For <code class="docutils literal notranslate"><span class="pre">fails/1</span></code> tests,
+<code class="docutils literal notranslate"><span class="pre">Goal</span></code> is expected to fail. For <code class="docutils literal notranslate"><span class="pre">throws/2</span></code> tests, <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is
+expected to throw the exception term <code class="docutils literal notranslate"><span class="pre">Ball</span></code> or one of the exception
+terms in the list <code class="docutils literal notranslate"><span class="pre">Balls</span></code>. The specified exception must subsume the
+actual exception for the test to succeed.</p>
+<p>An alternative test dialect that can be used with more expressive power
+is:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(<span class="nv">Test</span>, <span class="nv">Outcome</span>) <span class="o">:-</span> <span class="nv">Goal</span>.
+</pre></div>
+</div>
+<p>The possible values of the outcome argument are:</p>
+<ul>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">true</span></code></div>
+<div class="line">The test is expected to succeed.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">true(Assertion)</span></code></div>
+<div class="line">The test is expected to succeed and satisfy the <code class="docutils literal notranslate"><span class="pre">Assertion</span></code> goal.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">deterministic</span></code></div>
+<div class="line">The test is expected to succeed once without leaving a choice-point.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">deterministic(Assertion)</span></code></div>
+<div class="line">The test is expected to succeed once without leaving a choice-point
+and satisfy the <code class="docutils literal notranslate"><span class="pre">Assertion</span></code> goal.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsumes(Expected,</span> <span class="pre">Result)</span></code></div>
+<div class="line">The test is expected to succeed by binding <code class="docutils literal notranslate"><span class="pre">Result</span></code> to a term that
+is subsumed by the <code class="docutils literal notranslate"><span class="pre">Expected</span></code> term.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">variant(Term1,</span> <span class="pre">Term2)</span></code></div>
+<div class="line">The test is expected to succeed by binding <code class="docutils literal notranslate"><span class="pre">Term1</span></code> to a term that
+is a variant of the <code class="docutils literal notranslate"><span class="pre">Term2</span></code> term.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exists(Assertion)</span></code></div>
+<div class="line">A solution exists for the test goal that satisfies the <code class="docutils literal notranslate"><span class="pre">Assertion</span></code>
+goal.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">all(Assertion)</span></code></div>
+<div class="line">All test goal solutions satisfy the <code class="docutils literal notranslate"><span class="pre">Assertion</span></code> goal.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fail</span></code></div>
+<div class="line">The test is expected to fail.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">false</span></code></div>
+<div class="line">The test is expected to fail.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error(Error)</span></code></div>
+<div class="line">The test is expected to throw the exception term
+<code class="docutils literal notranslate"><span class="pre">error(ActualError,</span> <span class="pre">_)</span></code> where <code class="docutils literal notranslate"><span class="pre">ActualError</span></code> is subsumed
+<code class="docutils literal notranslate"><span class="pre">Error</span></code>.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">errors(Errors)</span></code></div>
+<div class="line">The test is expected to throw an exception term
+<code class="docutils literal notranslate"><span class="pre">error(ActualError,</span> <span class="pre">_)</span></code> where <code class="docutils literal notranslate"><span class="pre">ActualError</span></code> is subsumed by an
+element of the list <code class="docutils literal notranslate"><span class="pre">Errors</span></code>.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ball(Ball)</span></code></div>
+<div class="line">The test is expected to throw the exception term <code class="docutils literal notranslate"><span class="pre">ActualBall</span></code>
+where <code class="docutils literal notranslate"><span class="pre">ActualBall</span></code> is subsumed <code class="docutils literal notranslate"><span class="pre">Ball</span></code>.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">balls(Balls)</span></code></div>
+<div class="line">The test is expected to throw an exception term <code class="docutils literal notranslate"><span class="pre">ActualBall</span></code> where
+<code class="docutils literal notranslate"><span class="pre">ActualBall</span></code> is subsumed by an element of the list <code class="docutils literal notranslate"><span class="pre">Balls</span></code>.</div>
+</div>
+</li>
+</ul>
+<p>In the case of the <code class="docutils literal notranslate"><span class="pre">true(Assertion)</span></code>, <code class="docutils literal notranslate"><span class="pre">deterministic(Assertion)</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">all(Assertion)</span></code> outcomes, a message that includes the assertion
+goal is printed for assertion failures and errors to help to debug
+failed unit tests. Same for the <code class="docutils literal notranslate"><span class="pre">subsumes(Expected,</span> <span class="pre">Result)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">variant(Term1,</span> <span class="pre">Term2)</span></code> assertions. Note that this message is only
+printed when the test goal succeeds, as its failure will prevent the
+assertion goal from being called. This allows distinguishing between
+test goal failure and assertion failure.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">all(Assertion)</span></code> outcome simplifies pinpointing which
+test goal solution failed the assertion. See also the section below on
+testing non-deterministic predicates.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">fail</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code> outcomes are better reserved for cases where
+there is a single test goal. With multiple test goals, the test will
+succeed when <em>any</em> of those goals fail.</p>
+<p>Some tests may require individual condition, setup, or cleanup goals. In
+this case, the following alternative test dialect can be used:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(<span class="nv">Test</span>, <span class="nv">Outcome</span>, <span class="nv">Options</span>) <span class="o">:-</span> <span class="nv">Goal</span>.
+</pre></div>
+</div>
+<p>The currently supported options are (non-recognized options are
+ignored):</p>
+<ul>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">condition(Goal)</span></code></div>
+<div class="line">Condition for deciding if the test should be run or skipped (default
+goal is <code class="docutils literal notranslate"><span class="pre">true</span></code>).</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">setup(Goal)</span></code></div>
+<div class="line">Setup goal for the test (default goal is <code class="docutils literal notranslate"><span class="pre">true</span></code>).</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cleanup(Goal)</span></code></div>
+<div class="line">Cleanup goal for the test (default goal is <code class="docutils literal notranslate"><span class="pre">true</span></code>).</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flaky</span></code></div>
+<div class="line">Declare the test as a flaky test.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">note(Term)</span></code></div>
+<div class="line">Annotation to print (between parentheses by default) after the test
+result (default is <code class="docutils literal notranslate"><span class="pre">''</span></code>); the annotation term can share variables
+with the test goal, which can be used to pass additional information
+about the test result.</div>
+</div>
+</li>
+</ul>
+<p>Also supported is QuickCheck testing, where random tests are
+automatically generated and run given a predicate mode template with
+type information for each argument (see the section below for more
+details):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>quick_check(<span class="nv">Test</span>, <span class="nv">Template</span>, <span class="nv">Options</span>).
+quick_check(<span class="nv">Test</span>, <span class="nv">Template</span>).
+</pre></div>
+</div>
+<p>The valid options are the same as for the <code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect plus all
+the supported QuickCheck specific options (see the QuickCheck section
+below for details).</p>
+<p>For examples of how to write unit tests, check the <code class="docutils literal notranslate"><span class="pre">tests</span></code> folder or
+the <code class="docutils literal notranslate"><span class="pre">testing</span></code> example in the <code class="docutils literal notranslate"><span class="pre">examples</span></code> folder in the Logtalk
+distribution. Most of the provided examples also include unit tests,
+some of them with code coverage.</p>
+</section>
+<section id="user-defined-test-dialects">
+<h2>User-defined test dialects<a class="headerlink" href="#user-defined-test-dialects" title="Link to this heading"></a></h2>
+<p>Additional test dialects can be easily defined by extending the
+<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object and by term-expanding the new dialect into one of the
+default dialects. As an example, suppose that you want a dialect where
+you can simply write a file with tests defined by clauses using the
+format:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test_identifier <span class="o">:-</span>
+    test_goal.
+</pre></div>
+</div>
+<p>First, we define an expansion for this file into a test object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(simple_dialect,
+    <span class="k">implements</span>(expanding)).
+
+    <span class="k">term_expansion</span>(begin_of_file, [(<span class="o">:-</span> object(tests,extends(lgtunit)))]).
+    <span class="k">term_expansion</span>((<span class="nv">Head</span> <span class="o">:-</span> <span class="nv">Body</span>), [test(<span class="nv">Head</span>) <span class="o">:-</span> <span class="nv">Body</span>]).
+    <span class="k">term_expansion</span>(end_of_file, [(<span class="o">:-</span> end_object)]).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>Then we can use this hook object to expand and run tests written in this
+dialect by using a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> driver file with contents such as:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
+    <span class="k">set_logtalk_flag</span>(report, warnings),
+    <span class="k">logtalk_load</span>(lgtunit(loader)),
+    <span class="k">logtalk_load</span>(hook_flows(loader)),
+    <span class="k">logtalk_load</span>(simple_dialect),
+    <span class="k">logtalk_load</span>(tests, [hook(hook_pipeline([simple_dialect,lgtunit]))]),
+    tests<span class="o">::</span>run
+)).
+</pre></div>
+</div>
+<p>The hook pipeline first applies our <code class="docutils literal notranslate"><span class="pre">simple_dialect</span></code> expansion,
+followed by the default <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> expansion. This solution allows
+other hook objects (e.g., required by the code being tested) to also be
+used by updating the pipeline.</p>
+</section>
+<section id="quickcheck">
+<h2>QuickCheck<a class="headerlink" href="#quickcheck" title="Link to this heading"></a></h2>
+<p>QuickCheck was originally developed for Haskell. Implementations for
+several other programming languages soon followed. QuickCheck provides
+support for <em>property-based testing</em>. The idea is to express properties
+that predicates must comply with and automatically generate tests for
+those properties. The <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool supports both <code class="docutils literal notranslate"><span class="pre">quick_check/2-3</span></code>
+test dialects, as described above, and <code class="docutils literal notranslate"><span class="pre">quick_check/1-3</span></code> public
+predicates for interactive use:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>quick_check(<span class="nv">Template</span>, <span class="nv">Result</span>, <span class="nv">Options</span>).
+quick_check(<span class="nv">Template</span>, <span class="nv">Options</span>).
+quick_check(<span class="nv">Template</span>).
+</pre></div>
+</div>
+<p>The following options are supported:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">n/1</span></code>: number of random tests that will be generated and run
+(default is 100).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">s/1</span></code>: maximum number of shrink operations when a counter-example is
+found (default is 64).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ec/1</span></code>: boolean option deciding if type edge cases are tested before
+generating random tests (default is <code class="docutils literal notranslate"><span class="pre">true</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rs/1</span></code>: starting seed to be used when generating the random tests
+(no default).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pc/1</span></code>: pre-condition closure for generated tests (extended with the
+test arguments; no default).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">l/1</span></code>: label closure for classifying the generated tests (extended
+with the test arguments plus the label argument; no default).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">v/1</span></code>: boolean option for verbose reporting of generated random
+tests (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pb/2</span></code>: progress bar option for executed random tests when the
+verbose option is false (first argument is a boolean, default is
+<code class="docutils literal notranslate"><span class="pre">false</span></code>; second argument is the tick number, a positive integer).</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">quick_check/1</span></code> predicate uses the default option values. The
+<code class="docutils literal notranslate"><span class="pre">quick_check/1-2</span></code> predicates print the test results and are thus
+better reserved for testing at the top-level interpreter. The
+<code class="docutils literal notranslate"><span class="pre">quick_check/3</span></code> predicate returns results in reified form:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">passed(SequenceSeed,</span> <span class="pre">Discarded,</span> <span class="pre">Labels)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">failed(Goal,</span> <span class="pre">SequenceSeed,</span> <span class="pre">TestSeed)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">Goal,</span> <span class="pre">SequenceSeed,</span> <span class="pre">TestSeed)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">broken(Why,</span> <span class="pre">Culprit)</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">broken(Why,</span> <span class="pre">Culprit)</span></code> result only occurs when the user-defined
+testing setup is broken. For example, a non-callable template (e.g., a
+non-existing predicate), an invalid option, a problem with the
+pre-condition closure or with the label closure (e.g., a pre-condition
+that always fails or a label that fails to classify a generated test),
+or errors/failures when generating tests (e.g., due to an unknown type
+being used in the template or a broken custom type arbitrary value
+generator).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Goal</span></code> argument is the random test that failed.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">SequenceSeed</span></code> argument is the starting seed used to generate the
+sequence of random tests. The <code class="docutils literal notranslate"><span class="pre">TestSeed</span></code> is the seed used to generate
+the test that failed. Both seeds should be regarded as opaque terms.
+When the test seed is equal to the sequence seed, this means that the
+failure or error occurred while using only type edge cases. See below
+how to use the seeds when testing bug fixes.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Discarded</span></code> argument returns the number of generated tests that
+were discarded for failing to comply with a pre-condition specified
+using the <code class="docutils literal notranslate"><span class="pre">pc/1</span></code> option. This option is specially useful when
+constraining or enforcing a relation between the generated arguments and
+is often used as an alternative to define a custom type. For example, if
+we define the following predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>condition(<span class="nv">I</span>) <span class="o">:-</span>
+    between(<span class="m">0</span>, <span class="m">127</span>, <span class="nv">I</span>).
+</pre></div>
+</div>
+<p>We can then use it to filter the generated tests:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(<span class="k">integer</span>(<span class="o">+</span>byte), [pc(condition)]).
+<span class="c">% 100 random tests passed, 94 discarded</span>
+<span class="c">% starting seed: seed(416,18610,17023)</span>
+yes
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Labels</span></code> argument returns a list of pairs <code class="docutils literal notranslate"><span class="pre">Label-N</span></code> where <code class="docutils literal notranslate"><span class="pre">N</span></code>
+is the number of generated tests that are classified as <code class="docutils literal notranslate"><span class="pre">Label</span></code> by a
+closure specified using the <code class="docutils literal notranslate"><span class="pre">l/1</span></code> option. For example, assuming the
+following predicate definition:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>label(<span class="nv">I</span>, <span class="nv">Label</span>) <span class="o">:-</span>
+    (   <span class="nv">I</span> <span class="o">mod</span> <span class="m">2</span> <span class="o">=:=</span> <span class="m">0</span> <span class="o">-&gt;</span>
+        <span class="nv">Label</span> <span class="o">=</span> even
+    <span class="o">;</span>   <span class="nv">Label</span> <span class="o">=</span> odd
+    ).
+</pre></div>
+</div>
+<p>We can try:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(<span class="k">integer</span>(<span class="o">+</span>byte), [l(label), n(<span class="m">10000</span>)]).
+<span class="c">% 10000 random tests passed, 0 discarded</span>
+<span class="c">% starting seed: seed(25513,20881,16407)</span>
+<span class="c">% even: 5037/10000 (50.370000%)</span>
+<span class="c">% odd: 4963/10000 (49.630000%)</span>
+yes
+</pre></div>
+</div>
+<p>The label statistics are key to verifying that the generated tests
+provide the necessary coverage. The labeling predicates can return a
+single test label or a list of test labels. Labels should be ground and
+are typically atoms. To examine the generated tests themselves, you can
+use the verbose option, <code class="docutils literal notranslate"><span class="pre">v/1</span></code>. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(<span class="k">integer</span>(<span class="o">+</span>integer), [v(<span class="k">true</span>), n(<span class="m">7</span>), pc([<span class="nv">I</span>]<span class="o">&gt;&gt;</span>(<span class="nv">I</span><span class="o">&gt;</span><span class="m">5</span>))]).
+<span class="c">% Discarded: integer(0)</span>
+<span class="c">% Passed:    integer(786)</span>
+<span class="c">% Passed:    integer(590)</span>
+<span class="c">% Passed:    integer(165)</span>
+<span class="c">% Discarded: integer(-412)</span>
+<span class="c">% Passed:    integer(440)</span>
+<span class="c">% Discarded: integer(-199)</span>
+<span class="c">% Passed:    integer(588)</span>
+<span class="c">% Discarded: integer(-852)</span>
+<span class="c">% Discarded: integer(-214)</span>
+<span class="c">% Passed:    integer(196)</span>
+<span class="c">% Passed:    integer(353)</span>
+<span class="c">% 7 random tests passed, 5 discarded</span>
+<span class="c">% starting seed: seed(23671,3853,29824)</span>
+yes
+</pre></div>
+</div>
+<p>When a counter-example is found, the verbose option also prints the
+shrink steps. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(<span class="k">atom</span>(<span class="o">+</span>atomic), [v(<span class="k">true</span>), ec(<span class="k">false</span>)]).
+<span class="c">% Passed:    atom(&#39;dyO=Xv_MX-3b/U4KH U&#39;)</span>
+<span class="o">*</span>     <span class="nv">Failure</span><span class="o">:</span>   <span class="k">atom</span>(<span class="o">-</span><span class="m">198</span>)
+<span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="o">-</span><span class="m">99</span>)
+<span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="o">-</span><span class="m">49</span>)
+<span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="o">-</span><span class="m">24</span>)
+<span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="o">-</span><span class="m">12</span>)
+<span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="o">-</span><span class="m">6</span>)
+<span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="o">-</span><span class="m">3</span>)
+<span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="o">-</span><span class="m">1</span>)
+<span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="m">0</span>)
+<span class="o">*</span>     quick check test failure (at test <span class="m">2</span> after <span class="m">8</span> shrinks)<span class="o">:</span>
+<span class="o">*</span>       <span class="k">atom</span>(<span class="m">0</span>)
+<span class="o">*</span>     starting seed<span class="o">:</span> seed(<span class="m">3172</span>,<span class="m">9814</span>,<span class="m">20125</span>)
+<span class="o">*</span>     test seed<span class="o">:</span>     seed(<span class="m">7035</span>,<span class="m">19506</span>,<span class="m">18186</span>)
+no
+</pre></div>
+</div>
+<p>The template can be a <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code>, <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code>, or <code class="docutils literal notranslate"><span class="pre">(:)/2</span></code> qualified
+callable term. When the template is an unqualified callable term, it
+will be used to construct a goal to be called in the context of the
+<em>sender</em> using the <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> debugging control construct. Another
+simple example is passing a template that will trigger a failed test (as
+the <code class="docutils literal notranslate"><span class="pre">random::random/1</span></code> predicate always returns non-negative floats):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(random<span class="o">::</span>random(<span class="o">-</span>negative_float)).
+<span class="o">*</span>     quick check test failure (at test <span class="m">1</span> after <span class="m">0</span> shrinks)<span class="o">:</span>
+<span class="o">*</span>       random<span class="o">::</span>random(<span class="m">0.09230089279334841</span>)
+<span class="o">*</span>     starting seed<span class="o">:</span> seed(<span class="m">3172</span>,<span class="m">9814</span>,<span class="m">20125</span>)
+<span class="o">*</span>     test seed<span class="o">:</span>     seed(<span class="m">3172</span>,<span class="m">9814</span>,<span class="m">20125</span>)
+no
+</pre></div>
+</div>
+<p>When QuickCheck exposes a bug in the tested code, we can use the
+reported counter-example to help diagnose it and fix it. As tests are
+randomly generated, we can use the starting seed reported with the
+counter-example to confirm the bug fix by calling the
+<code class="docutils literal notranslate"><span class="pre">quick_check/2-3</span></code> predicates with the <code class="docutils literal notranslate"><span class="pre">rs(Seed)</span></code> option. For
+example, assume the following broken predicate definition:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>every_other([], []).
+every_other([<span class="nv">_</span>, <span class="nv">X</span>| <span class="nv">L</span>], [<span class="nv">X</span> | <span class="nv">R</span>]) <span class="o">:-</span>
+    every_other(<span class="nv">L</span>, <span class="nv">R</span>).
+</pre></div>
+</div>
+<p>The predicate is supposed to construct a list by taking every other
+element of an input list. Cursory testing may fail to notice the bug:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> every_other([<span class="m">1</span>,<span class="m">2</span>,<span class="m">3</span>,<span class="m">4</span>,<span class="m">5</span>,<span class="m">6</span>], <span class="nv">List</span>).
+<span class="nv">List</span> <span class="o">=</span> [<span class="m">2</span>, <span class="m">4</span>, <span class="m">6</span>]
+yes
+</pre></div>
+</div>
+<p>But QuickCheck will report a bug with lists with an odd number of
+elements with a simple property that verifies that the predicate always
+succeeds and returns a list of integers:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(every_other(<span class="o">+</span>list(integer), <span class="o">-</span>list(integer))).
+<span class="o">*</span>     quick check test failure (at test <span class="m">2</span> after <span class="m">0</span> shrinks)<span class="o">:</span>
+<span class="o">*</span>       every_other([<span class="m">0</span>],<span class="nv">A</span>)
+<span class="o">*</span>     starting seed<span class="o">:</span> seed(<span class="m">3172</span>,<span class="m">9814</span>,<span class="m">20125</span>)
+<span class="o">*</span>     test seed<span class="o">:</span>     seed(<span class="m">3172</span>,<span class="m">9814</span>,<span class="m">20125</span>)
+no
+</pre></div>
+</div>
+<p>We could fix this particular bug by rewriting the predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>every_other([], []).
+every_other([<span class="nv">H</span>| <span class="nv">T</span>], <span class="nv">L</span>) <span class="o">:-</span>
+    every_other(<span class="nv">T</span>, <span class="nv">H</span>, <span class="nv">L</span>).
+
+every_other([], <span class="nv">X</span>, [<span class="nv">X</span>]).
+every_other([<span class="nv">_</span>| <span class="nv">T</span>], <span class="nv">X</span>, [<span class="nv">X</span>| <span class="nv">L</span>]) <span class="o">:-</span>
+    every_other(<span class="nv">T</span>, <span class="nv">L</span>).
+</pre></div>
+</div>
+<p>By retesting with the same test seed that uncovered the bug, the same
+random test that found the bug will be generated and run again:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(
+        every_other(<span class="o">+</span>list(integer), <span class="o">-</span>list(integer)),
+        [rs(seed(<span class="m">3172</span>,<span class="m">9814</span>,<span class="m">20125</span>))]
+     ).
+<span class="c">% 100 random tests passed, 0 discarded</span>
+<span class="c">% starting seed: seed(3172,9814,20125)</span>
+yes
+</pre></div>
+</div>
+<p>Still, after verifying the bug fix, is also a good idea to re-run the
+tests using the sequence seed instead, as bug fixes sometimes cause
+regressions elsewhere.</p>
+<p>When retesting using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script, the
+starting seed can be set using the <code class="docutils literal notranslate"><span class="pre">-r</span></code> option. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">-</span>r <span class="s">&quot;seed(3172,9814,20125)&quot;</span>
+</pre></div>
+</div>
+<p>We could now move to other properties that the predicate should comply
+with (e.g., all elements in the output list being present in the input
+list). Often, both traditional unit tests and QuickCheck tests are used,
+complementing each other to ensure the required code coverage.</p>
+<p>Another example using a Prolog module predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(
+        pairs<span class="o">:</span>pairs_keys_values(
+            <span class="o">+</span>list(pair(atom,integer)),
+            <span class="o">-</span>list(atom),
+            <span class="o">-</span>list(integer)
+        )
+     ).
+<span class="c">% 100 random tests passed, 0 discarded</span>
+<span class="c">% starting seed: seed(3172,9814,20125)</span>
+yes
+</pre></div>
+</div>
+<p>As illustrated by the examples above, properties are expressed using
+predicates. In the most simple cases, that can be the predicate that we
+are testing itself. But, in general, it will be an auxiliary predicate
+calling the predicate or predicates being tested and checking properties
+that the results must comply with.</p>
+<p>The QuickCheck test dialects and predicates take as argument the mode
+template for a property, generate random values for each input argument
+based on the type information, and check each output argument. For
+common types, the implementation tries first (by default) common edge
+cases (e.g., empty atom, empty list, or zero) before generating
+arbitrary values. When the output arguments check fails, the QuickCheck
+implementation tries (by default) up to 64 shrink operations of the
+counter-example to report a simpler case to help debugging the failed
+test. Edge cases, generating arbitrary terms, and shrinking terms make
+use of the library <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> category via the <code class="docutils literal notranslate"><span class="pre">type</span></code> object (both
+entities can be extended by the user by defining clauses for multifile
+predicates).</p>
+<p>The mode template syntax is the same as that used in the <code class="docutils literal notranslate"><span class="pre">info/2</span></code>
+predicate directives with an additional notation, <code class="docutils literal notranslate"><span class="pre">{}/1</span></code>, for passing
+argument values as-is instead of generating random values for these
+arguments. For example, assume that we want to verify the
+<code class="docutils literal notranslate"><span class="pre">type::valid/2</span></code> predicate, which takes as its first argument a type.
+Randomly generating random types would be cumbersome at best but the
+main problem is that we need to generate random values for the second
+argument according to the first argument. Using the <code class="docutils literal notranslate"><span class="pre">{}/1</span></code> notation,
+we can solve this problem for any specific type, e.g. integer, by
+writing:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(type<span class="o">::</span>valid(<span class="k">{</span>integer<span class="k">}</span>, <span class="o">+</span>integer)).
+</pre></div>
+</div>
+<p>We can also test all (ground, i.e. non-parametric) types with arbitrary
+value generators by writing:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">forall</span>(
+        (type<span class="o">::</span>type(<span class="nv">Type</span>), <span class="k">ground</span>(<span class="nv">Type</span>), type<span class="o">::</span>arbitrary(<span class="nv">Type</span>)),
+        lgtunit<span class="o">::</span>quick_check(type<span class="o">::</span>valid(<span class="k">{</span><span class="nv">Type</span><span class="k">}</span>, <span class="o">+</span><span class="nv">Type</span>))
+     ).
+</pre></div>
+</div>
+<p>You can find the list of the basic supported types for use in the
+template in the API documentation for the library entities <code class="docutils literal notranslate"><span class="pre">type</span></code> and
+<code class="docutils literal notranslate"><span class="pre">arbitrary</span></code>. Note that other library entities, including third-party
+or your own, can contribute with additional type definitions, as both
+<code class="docutils literal notranslate"><span class="pre">type</span></code> and <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> entities are user-extensible by defining
+clauses for their multifile predicates.</p>
+<p>The user can define new types to use in the property mode templates to
+use with its QuickCheck tests by defining clauses for the <code class="docutils literal notranslate"><span class="pre">type</span></code>
+library object and the <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> library category multifile
+predicates. QuickCheck will use the later to generate arbitrary input
+arguments and the former to verify output arguments. As a toy example,
+assume that the property mode template has an argument of type <code class="docutils literal notranslate"><span class="pre">bit</span></code>
+with possible values <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code>. We would then need to define:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(type<span class="o">::</span>type<span class="o">/</span><span class="m">1</span>).
+type<span class="o">::</span>type(bit).
+
+<span class="p">:- </span><span class="k">multifile</span>(type<span class="o">::</span>check<span class="o">/</span><span class="m">2</span>).
+type<span class="o">::</span>check(bit, <span class="nv">Term</span>) <span class="o">:-</span>
+    <span class="k">once</span>((<span class="nv">Term</span> <span class="o">==</span> <span class="m">0</span><span class="o">;</span> <span class="nv">Term</span> <span class="o">==</span> <span class="m">1</span>)).
+
+<span class="p">:- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>arbitrary<span class="o">/</span><span class="m">1</span>).
+arbitrary<span class="o">::</span>arbitrary(bit).
+
+<span class="p">:- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>arbitrary<span class="o">/</span><span class="m">2</span>).
+arbitrary<span class="o">::</span>arbitrary(bit, <span class="nv">Arbitrary</span>) <span class="o">:-</span>
+    random<span class="o">::</span>member(<span class="nv">Arbitrary</span>, [<span class="m">0</span>, <span class="m">1</span>]).
+</pre></div>
+</div>
+</section>
+<section id="skipping-tests">
+<h2>Skipping tests<a class="headerlink" href="#skipping-tests" title="Link to this heading"></a></h2>
+<p>A test object can define the <code class="docutils literal notranslate"><span class="pre">condition/0</span></code> predicate (which defaults
+to <code class="docutils literal notranslate"><span class="pre">true</span></code>) to test if some necessary condition for running the tests
+holds. The tests are skipped if the call to this predicate fails or
+generates an error.</p>
+<p>Individual tests that for some reason should be unconditionally skipped
+can have the test clause head prefixed with the <code class="docutils literal notranslate"><span class="pre">(-)/1</span></code> operator. For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> test(not_yet_ready) <span class="o">:-</span>
+    ...
+</pre></div>
+</div>
+<p>In this case, it’s a good idea to use the <code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect with a
+<code class="docutils literal notranslate"><span class="pre">note/1</span></code> option that briefly explains why the test is being skipped.
+For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> test(xyz_reset, <span class="k">true</span>, [note(<span class="s">&#39;Feature xyz reset not yet implemented&#39;</span>)]) <span class="o">:-</span>
+    ...
+</pre></div>
+</div>
+<p>The number of skipped tests is reported together with the numbers of
+passed and failed tests. To skip a test depending on some condition, use
+the <code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect and the <code class="docutils literal notranslate"><span class="pre">condition/1</span></code> option. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(test_id, <span class="k">true</span>, [condition(<span class="k">current_prolog_flag</span>(bounded,<span class="k">true</span>))) <span class="o">:-</span>
+    ...
+</pre></div>
+</div>
+<p>The test is skipped if the condition goal fails or generates an error.
+The conditional compilation directives can also be used in alternative,
+but note that in this case there will be no report on the number of
+skipped tests.</p>
+</section>
+<section id="selecting-tests">
+<h2>Selecting tests<a class="headerlink" href="#selecting-tests" title="Link to this heading"></a></h2>
+<p>While debugging an application, we often want to temporarily run just a
+selection of relevant tests. This is specially useful when running all
+the tests slows down and distracts from testing fixes for a specific
+issue. This can be accomplished by prefixing the clause heads of the
+selected tests with the <code class="docutils literal notranslate"><span class="pre">(+)/1</span></code> operator. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(tests,
+    <span class="k">extends</span>(lgtunit)).
+
+    cover(ack).
+
+    test(ack_1, <span class="k">true</span>(<span class="nv">Result</span> <span class="o">==</span> <span class="m">11</span>)) <span class="o">:-</span>
+        ack<span class="o">::</span>ack(<span class="m">2</span>, <span class="m">4</span>, <span class="nv">Result</span>).
+
+    <span class="o">+</span> test(ack_2, <span class="k">true</span>(<span class="nv">Result</span> <span class="o">==</span> <span class="m">61</span>)) <span class="o">:-</span>
+        ack<span class="o">::</span>ack(<span class="m">3</span>, <span class="m">3</span>, <span class="nv">Result</span>).
+
+    test(ack_3, <span class="k">true</span>(<span class="nv">Result</span> <span class="o">==</span> <span class="m">125</span>)) <span class="o">:-</span>
+        ack<span class="o">::</span>ack(<span class="m">3</span>, <span class="m">4</span>, <span class="nv">Result</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>In this case, only the <code class="docutils literal notranslate"><span class="pre">ack_2</span></code> would run. Just be careful to remove
+all <code class="docutils literal notranslate"><span class="pre">(+)/1</span></code> test prefixes when done debugging the issue that prompted
+you to run just the selected tests. After, be sure to run all the tests
+to ensure there are no regressions introduced by your fixes.</p>
+</section>
+<section id="checking-test-goal-results">
+<h2>Checking test goal results<a class="headerlink" href="#checking-test-goal-results" title="Link to this heading"></a></h2>
+<p>Checking test goal results can be performed using the <code class="docutils literal notranslate"><span class="pre">test/2-3</span></code>
+supported outcomes such as <code class="docutils literal notranslate"><span class="pre">true(Assertion)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">deterministic(Assertion)</span></code>. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(compare_3_order_less, deterministic(<span class="nv">Order</span> <span class="o">==</span> (<span class="o">&lt;</span>))) <span class="o">:-</span>
+    <span class="k">compare</span>(<span class="nv">Order</span>, <span class="m">1</span>, <span class="m">2</span>).
+</pre></div>
+</div>
+<p>For the other test dialects, checking test goal results can be performed
+by calling the <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> utility predicates or by writing the
+checking goals directly in the test body. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(compare_3_order_less) <span class="o">:-</span>
+    <span class="k">compare</span>(<span class="nv">Order</span>, <span class="m">1</span>, <span class="m">2</span>),
+    <span class="o">^^</span>assertion(<span class="nv">Order</span> <span class="o">==</span> (<span class="o">&lt;</span>)).
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>succeeds(compare_3_order_less) <span class="o">:-</span>
+    <span class="k">compare</span>(<span class="nv">Order</span>, <span class="m">1</span>, <span class="m">2</span>),
+    <span class="nv">Order</span> <span class="o">==</span> (<span class="o">&lt;</span>).
+</pre></div>
+</div>
+<p>Using assertions is, however, preferable to directly checking test
+results in the test body as it facilitates debugging by printing the
+unexpected results when the assertions fail.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> utility predicates are also useful for the
+<code class="docutils literal notranslate"><span class="pre">test/2-3</span></code> dialects when we want to check multiple assertions in the
+same test. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(dictionary_clone_4_01, <span class="k">true</span>) <span class="o">:-</span>
+    as_dictionary([], <span class="nv">Dictionary</span>),
+    clone(<span class="nv">Dictionary</span>, <span class="nv">DictionaryPairs</span>, <span class="nv">Clone</span>, <span class="nv">ClonePairs</span>),
+    empty(<span class="nv">Clone</span>),
+    <span class="o">^^</span>assertion(original_pairs, <span class="nv">DictionaryPairs</span> <span class="o">==</span> []),
+    <span class="o">^^</span>assertion(clone_pairs, <span class="nv">ClonePairs</span> <span class="o">==</span> []).
+</pre></div>
+</div>
+<p>Ground results can be compared using the standard <code class="docutils literal notranslate"><span class="pre">==/2</span></code> term equality
+built-in predicate. Non-ground results can be compared using the
+<code class="docutils literal notranslate"><span class="pre">variant/2</span></code> predicate provided by <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>. The standard
+<code class="docutils literal notranslate"><span class="pre">subsumes_term/2</span></code> built-in predicate can be used when testing a
+compound term structure while abstracting some of its arguments.
+Floating-point numbers can be compared using the <code class="docutils literal notranslate"><span class="pre">=~=/2</span></code>,
+<code class="docutils literal notranslate"><span class="pre">approximately_equal/3</span></code>, <code class="docutils literal notranslate"><span class="pre">essentially_equal/3</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">tolerance_equal/4</span></code> predicates provided by <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>. Using the
+<code class="docutils literal notranslate"><span class="pre">=/2</span></code> term unification built-in predicate is almost always an error,
+as it would mask test goals failing to bind output arguments. The
+<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool implements a linter check for the use of unification
+goals in test outcome assertions. In the rare cases that a unification
+goal is intended, wrapping the <code class="docutils literal notranslate"><span class="pre">(=)/2</span></code> goal using the <code class="docutils literal notranslate"><span class="pre">{}/1</span></code> control
+construct avoids the linter warning.</p>
+<p>When the meta-argument of the <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> predicates is call to a
+local predicate (in the tests object), you need to call them using the
+<code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> message-sending control construct instead of the <code class="docutils literal notranslate"><span class="pre">(^^)/2</span></code>
+<em>super</em> call control construct. This is necessary as <em>super</em> calls
+preserve the <em>sender</em>, and the tests are implicitly run by the
+<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object sending a message to the tests object. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(lgtunit, [
+    assertion<span class="o">/</span><span class="m">1</span>
+]).
+
+test(my_test_id, <span class="k">true</span>) <span class="o">:-</span>
+    foo(<span class="nv">X</span>, <span class="nv">Y</span>),
+    assertion(consistent(<span class="nv">X</span>, <span class="nv">Y</span>)).
+
+consistent(<span class="nv">X</span>, <span class="nv">Y</span>) <span class="o">:-</span>
+    ...
+</pre></div>
+</div>
+<p>In this case, the <em>sender</em> is the tests object, and the <code class="docutils literal notranslate"><span class="pre">assertion/1</span></code>
+meta-predicate will call the local <code class="docutils literal notranslate"><span class="pre">consistent/2</span></code> predicate in the
+expected context.</p>
+</section>
+<section id="testing-local-predicates">
+<h2>Testing local predicates<a class="headerlink" href="#testing-local-predicates" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> debugging control construct can be used to access and
+test object local predicates (i.e., predicates without a scope
+directive). In this case, make sure that the <code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code>
+compiler flag is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code> for those objects. This is seldom
+required, however, as local predicates are usually auxiliary predicates
+called by public predicates and thus tested when testing those public
+predicates. The code coverage support can pinpoint any local predicate
+clause that is not being exercised by the tests.</p>
+</section>
+<section id="testing-non-deterministic-predicates">
+<h2>Testing non-deterministic predicates<a class="headerlink" href="#testing-non-deterministic-predicates" title="Link to this heading"></a></h2>
+<p>For testing non-deterministic predicates (with a finite and manageable
+number of solutions), you can wrap the test goal using the standard
+<code class="docutils literal notranslate"><span class="pre">findall/3</span></code> predicate to collect all solutions and check against the
+list of expected solutions. When the expected solutions are a set, use
+in alternative the standard <code class="docutils literal notranslate"><span class="pre">setof/3</span></code> predicate.</p>
+<p>If you want to check that all solutions of a non-deterministic predicate
+satisfy an assertion, use the <code class="docutils literal notranslate"><span class="pre">test/2</span></code> or <code class="docutils literal notranslate"><span class="pre">test/3</span></code> test dialect with
+the <code class="docutils literal notranslate"><span class="pre">all(Assertion)</span></code> outcome. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(atom_list, all(<span class="k">atom</span>(<span class="nv">Item</span>))) <span class="o">:-</span>
+    member(<span class="nv">Item</span>, [a, b, c]).
+</pre></div>
+</div>
+<p>See also the next section on testing <em>generators</em>.</p>
+<p>If you want to check that a solution exists for a non-deterministic
+predicate that satisfies an assertion, use the <code class="docutils literal notranslate"><span class="pre">test/2</span></code> or <code class="docutils literal notranslate"><span class="pre">test/3</span></code>
+test dialect with the <code class="docutils literal notranslate"><span class="pre">exists(Assertion)</span></code> outcome. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(at_least_one_atom, exists(<span class="k">atom</span>(<span class="nv">Item</span>))) <span class="o">:-</span>
+    member(<span class="nv">Item</span>, [<span class="m">1</span>, foo(<span class="m">2</span>), <span class="m">3.14</span>, abc, <span class="m">42</span>]).
+</pre></div>
+</div>
+</section>
+<section id="testing-generators">
+<h2>Testing generators<a class="headerlink" href="#testing-generators" title="Link to this heading"></a></h2>
+<p>To test all solutions of a predicate that acts as a <em>generator</em>, we can
+use either the <code class="docutils literal notranslate"><span class="pre">all/1</span></code> outcome or the <code class="docutils literal notranslate"><span class="pre">forall/2</span></code> predicate as the
+test goal with the <code class="docutils literal notranslate"><span class="pre">assertion/2</span></code> predicate called to report details on
+any solution that fails the test. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(test_solution_generator, all(test(<span class="nv">X</span>,<span class="nv">Y</span>,<span class="nv">Z</span>))) <span class="o">:-</span>
+    generator(<span class="nv">X</span>, <span class="nv">Y</span>, <span class="nv">Z</span>).
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(lgtunit, [assertion<span class="o">/</span><span class="m">2</span>]).
+...
+
+test(test_solution_generator_2) <span class="o">:-</span>
+    <span class="k">forall</span>(
+        generator(<span class="nv">X</span>, <span class="nv">Y</span>, <span class="nv">Z</span>),
+        assertion(generator(<span class="nv">X</span>), test(<span class="nv">X</span>,<span class="nv">Y</span>,<span class="nv">Z</span>))
+    ).
+</pre></div>
+</div>
+<p>While using the <code class="docutils literal notranslate"><span class="pre">all/1</span></code> outcome results in a more compact test
+definition, using the <code class="docutils literal notranslate"><span class="pre">forall/2</span></code> predicate allows customizing the
+assertion description. In the example above, we use the <code class="docutils literal notranslate"><span class="pre">generator(X)</span></code>
+description instead of the <code class="docutils literal notranslate"><span class="pre">test(X,Y,Z)</span></code> description implicit when we
+use the <code class="docutils literal notranslate"><span class="pre">all/1</span></code> outcome.</p>
+</section>
+<section id="testing-input-output-predicates">
+<h2>Testing input/output predicates<a class="headerlink" href="#testing-input-output-predicates" title="Link to this heading"></a></h2>
+<p>Extensive support for testing input/output predicates is provided, based
+on similar support found on the Prolog conformance testing framework
+written by Péter Szabó and Péter Szeredi.</p>
+<p>Two sets of predicates are provided, one for testing text input/output
+and one for testing binary input/output. In both cases, temporary files
+(possibly referenced by a user-defined alias) are used. The predicates
+allow setting, checking, and cleaning text/binary input/output. These
+predicates are declared as protected and thus called using the
+<code class="docutils literal notranslate"><span class="pre">(^^/1)</span></code> control construct.</p>
+<p>As an example of testing an input predicate, consider the standard
+<code class="docutils literal notranslate"><span class="pre">get_char/1</span></code> predicate. This predicate reads a single character (atom)
+from the current input stream. Some test for basic functionality could
+be:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(get_char_1_01, <span class="k">true</span>(<span class="nv">Char</span> <span class="o">==</span> <span class="s">&#39;q&#39;</span>)) <span class="o">:-</span>
+    <span class="o">^^</span>set_text_input(<span class="s">&#39;qwerty&#39;</span>),
+    <span class="k">get_char</span>(<span class="nv">Char</span>).
+
+test(get_char_1_02, <span class="k">true</span>(<span class="nv">Assertion</span>)) <span class="o">:-</span>
+    <span class="o">^^</span>set_text_input(<span class="s">&#39;qwerty&#39;</span>),
+    <span class="k">get_char</span>(<span class="nv">_Char</span>),
+    <span class="o">^^</span>text_input_assertion(<span class="s">&#39;werty&#39;</span>, <span class="nv">Assertion</span>).
+</pre></div>
+</div>
+<p>As you can see in the above example, the testing pattern consists on
+setting the input for the predicate being tested, calling it, and then
+checking the results. It is also possible to work with streams other
+than the current input/output streams by using the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> predicate
+variants that take a stream alias as argument. For example, when testing
+the standard <code class="docutils literal notranslate"><span class="pre">get_char/2</span></code> predicate, we could write:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(get_char_2_01, <span class="k">true</span>(<span class="nv">Char</span> <span class="o">==</span> <span class="s">&#39;q&#39;</span>)) <span class="o">:-</span>
+    <span class="o">^^</span>set_text_input(in, <span class="s">&#39;qwerty&#39;</span>),
+    <span class="k">get_char</span>(in, <span class="nv">Char</span>).
+
+test(get_char_2_02, <span class="k">true</span>(<span class="nv">Assertion</span>)) <span class="o">:-</span>
+    <span class="o">^^</span>set_text_input(in, <span class="s">&#39;qwerty&#39;</span>),
+    <span class="k">get_char</span>(in, <span class="nv">_Char</span>),
+    <span class="o">^^</span>text_input_assertion(in, <span class="s">&#39;werty&#39;</span>, <span class="nv">Assertion</span>).
+</pre></div>
+</div>
+<p>Testing output predicates follows a similar pattern by using instead the
+<code class="docutils literal notranslate"><span class="pre">set_text_output/1-2</span></code> and <code class="docutils literal notranslate"><span class="pre">text_output_assertion/2-3</span></code> predicates.
+For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(put_char_2_02, <span class="k">true</span>(<span class="nv">Assertion</span>)) <span class="o">:-</span>
+    <span class="o">^^</span>set_text_output(out, <span class="s">&#39;qwert&#39;</span>),
+    <span class="k">put_char</span>(out, y),
+    <span class="o">^^</span>text_output_assertion(out, <span class="s">&#39;qwerty&#39;</span>, <span class="nv">Assertion</span>).
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">set_text_output/1</span></code> predicate diverts only the standard output
+stream (to a temporary file) using the standard <code class="docutils literal notranslate"><span class="pre">set_output/1</span></code>
+predicate. Most backend Prolog systems also support writing to the de
+facto standard error stream. But there’s no standard solution to divert
+this stream. However, several systems provide a <code class="docutils literal notranslate"><span class="pre">set_stream/2</span></code> or
+similar predicate that can be used for stream redirection. For example,
+assume that you wanted to test a backend Prolog system warning when an
+<code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directive fails that is written to <code class="docutils literal notranslate"><span class="pre">user_error</span></code>.
+An hypothetical test could be:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(singletons_warning, <span class="k">true</span>(<span class="nv">Assertion</span>)) <span class="o">:-</span>
+    <span class="o">^^</span>set_text_output(<span class="s">&#39;&#39;</span>),
+    <span class="k">current_output</span>(<span class="nv">Stream</span>),
+    set_stream(<span class="nv">Stream</span>, alias(user_error)),
+    consult(broken_file),
+    <span class="o">^^</span>text_output_assertion(<span class="s">&#39;WARNING: initialization/1 directive failed&#39;</span>, <span class="nv">Assertion</span>).
+</pre></div>
+</div>
+<p>For testing binary input/output predicates, equivalent testing
+predicates are provided. There is also a small set of helper predicates
+for dealing with stream handles and stream positions. For testing with
+files instead of streams, testing predicates are provided that allow
+creating text and binary files with given contents and check text and
+binary files for expected contents.</p>
+<p>For more practical examples, check the included tests for Prolog
+standard conformance of built-in input/output predicates.</p>
+</section>
+<section id="suppressing-tested-predicates-output">
+<h2>Suppressing tested predicates output<a class="headerlink" href="#suppressing-tested-predicates-output" title="Link to this heading"></a></h2>
+<p>Sometimes predicates being tested output text or binary data that, at
+best, clutters testing logs and, at worst, can interfere with parsing of
+test logs. If that output itself is not under testing, you can suppress
+it by using the goals <code class="docutils literal notranslate"><span class="pre">^^suppress_text_output</span></code> or
+<code class="docutils literal notranslate"><span class="pre">^^suppress_binary_output</span></code> at the beginning of the tests. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(proxies_04, <span class="k">true</span>(<span class="nv">Color</span> <span class="o">==</span> yellow)) <span class="o">:-</span>
+    <span class="o">^^</span>suppress_text_output,
+    <span class="k">{</span>circle(<span class="s">&#39;#2&#39;</span>, <span class="nv">Color</span>)<span class="k">}</span><span class="o">::</span>print.
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">suppress_text_output/0</span></code> and <code class="docutils literal notranslate"><span class="pre">suppress_binary_output/0</span></code>
+predicates work by redirecting standard output to the operating-system
+null device. But the application may also output to e.g. <code class="docutils literal notranslate"><span class="pre">user_error</span></code>
+and other streams. If this output must also be suppressed, several
+alternatives are described next.</p>
+<p>Output of expected warnings can be suppressed by turning off the
+corresponding linter flags. In this case, it is advisable to restrict
+the scope of the flag value changes as much as possible.</p>
+<p>Output of expected compiler errors can be suppressed by defining
+suitable clauses for the <code class="docutils literal notranslate"><span class="pre">logtalk::message_hook/4</span></code> hook predicate. For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>message_hook<span class="o">/</span><span class="m">4</span>).
+<span class="p">:- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>message_hook<span class="o">/</span><span class="m">4</span>).
+
+<span class="c">% ignore expected domain error</span>
+logtalk<span class="o">::</span>message_hook(compiler_error(<span class="nv">_</span>,<span class="nv">_</span>,error(<span class="k">domain_error</span>(foo,bar),<span class="nv">_</span>)), error, core, <span class="nv">_</span>).
+</pre></div>
+</div>
+<p>In this case, it is advisable to restrict the scope of the clauses as
+much as possible to exact exception terms. For the exact message terms,
+see the <code class="docutils literal notranslate"><span class="pre">core_messages</span></code> category source file. Defining this hook
+predicate can also be used to suppress all messages from a given
+component. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>message_hook<span class="o">/</span><span class="m">4</span>).
+<span class="p">:- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>message_hook<span class="o">/</span><span class="m">4</span>).
+
+logtalk<span class="o">::</span>message_hook(<span class="nv">_Message</span>, <span class="nv">_Kind</span>, code_metrics, <span class="nv">_Tokens</span>).
+</pre></div>
+</div>
+<p>Note that there’s no portable solution to suppress <em>all</em> output.
+However, several systems provide a <code class="docutils literal notranslate"><span class="pre">set_stream/2</span></code> or similar predicate
+that can be used for stream redirection. Check the documentation of the
+backend Prolog systems you’re using for details.</p>
+</section>
+<section id="tests-with-timeout-limits">
+<h2>Tests with timeout limits<a class="headerlink" href="#tests-with-timeout-limits" title="Link to this heading"></a></h2>
+<p>There’s no portable way to call a goal with a timeout limit. However,
+some backend Prolog compilers provide this functionality:</p>
+<ul class="simple">
+<li><p>B-Prolog: <code class="docutils literal notranslate"><span class="pre">time_out/3</span></code> built-in predicate</p></li>
+<li><p>ECLiPSe: <code class="docutils literal notranslate"><span class="pre">timeout/3</span></code> and <code class="docutils literal notranslate"><span class="pre">timeout/7</span></code> library predicates</p></li>
+<li><p>XVM: <code class="docutils literal notranslate"><span class="pre">call_with_timeout/2-3</span></code> built-in predicates</p></li>
+<li><p>SICStus Prolog: <code class="docutils literal notranslate"><span class="pre">time_out/3</span></code> library predicate</p></li>
+<li><p>SWI-Prolog: <code class="docutils literal notranslate"><span class="pre">call_with_time_limit/2</span></code> library predicate</p></li>
+<li><p>Trealla Prolog: <code class="docutils literal notranslate"><span class="pre">call_with_time_limit/2</span></code> and <code class="docutils literal notranslate"><span class="pre">time_out/3</span></code> library
+predicates</p></li>
+<li><p>XSB: <code class="docutils literal notranslate"><span class="pre">timed_call/2</span></code> built-in predicate</p></li>
+<li><p>YAP: <code class="docutils literal notranslate"><span class="pre">time_out/3</span></code> library predicate</p></li>
+</ul>
+<p>Logtalk provides a <code class="docutils literal notranslate"><span class="pre">timeout</span></code> portability library implementing a simple
+abstraction for those backend Prolog compilers.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script accepts a timeout option that
+can be used to set a limit per-test set.</p>
+</section>
+<section id="setup-and-cleanup-goals">
+<h2>Setup and cleanup goals<a class="headerlink" href="#setup-and-cleanup-goals" title="Link to this heading"></a></h2>
+<p>A test object can define <code class="docutils literal notranslate"><span class="pre">setup/0</span></code> and <code class="docutils literal notranslate"><span class="pre">cleanup/0</span></code> goals. The
+<code class="docutils literal notranslate"><span class="pre">setup/0</span></code> predicate is called, when defined, before running the object
+unit tests. The <code class="docutils literal notranslate"><span class="pre">cleanup/0</span></code> predicate is called, when defined, after
+running all the object unit tests. The tests are skipped when the setup
+goal fails or throws an error. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>cleanup <span class="o">:-</span>
+    <span class="k">this</span>(<span class="nv">This</span>),
+    <span class="k">object_property</span>(<span class="nv">This</span>, file(<span class="nv">_</span>,<span class="nv">Directory</span>)),
+    <span class="k">atom_concat</span>(<span class="nv">Directory</span>, serialized_objects, <span class="nv">File</span>),
+    <span class="k">catch</span>(<span class="k">ignore</span>(os<span class="o">::</span>delete_file(<span class="nv">File</span>)), <span class="nv">_</span>, <span class="k">true</span>).
+</pre></div>
+</div>
+<p>Per test setup and cleanup goals can be defined using the <code class="docutils literal notranslate"><span class="pre">test/3</span></code>
+dialect and the <code class="docutils literal notranslate"><span class="pre">setup/1</span></code> and <code class="docutils literal notranslate"><span class="pre">cleanup/1</span></code> options. The test is
+skipped when the setup goal fails or throws an error. Note that a broken
+test cleanup goal doesn’t affect the test but may adversely affect any
+following tests. Variables in the setup and cleanup goals are shared
+with the test body.</p>
+</section>
+<section id="test-annotations">
+<h2>Test annotations<a class="headerlink" href="#test-annotations" title="Link to this heading"></a></h2>
+<p>It’s possible to define per-unit and per-test annotations to be printed
+after the test results or when tests are skipped. This is particularly
+useful when some units or some unit tests may be run while still being
+developed. Annotations can be used to pass additional information to a
+user reviewing test results. By intercepting the unit test framework
+message printing calls (using the <code class="docutils literal notranslate"><span class="pre">message_hook/4</span></code> hook predicate),
+test automation scripts and integrating tools can also access these
+annotations.</p>
+<p>Units can define a global annotation using the predicate <code class="docutils literal notranslate"><span class="pre">note/1</span></code>. To
+define per-test annotations, use the <code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect and the
+<code class="docutils literal notranslate"><span class="pre">note/1</span></code> option. For example, you can inform why a test is being
+skipped by writing:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> test(foo_1, <span class="k">true</span>, [note(<span class="s">&#39;Waiting for Deep Thought answer&#39;</span>)]) <span class="o">:-</span>
+    ...
+</pre></div>
+</div>
+<p>Another common use is to return the execution time of one of the test
+sub-goals. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(foobar, <span class="k">true</span>, [note(bar(seconds<span class="o">-</span><span class="nv">Time</span>))]) <span class="o">:-</span>
+    foo(...),
+    benchmark(bar(...), <span class="nv">Time</span>).
+</pre></div>
+</div>
+<p>Annotations are written, by default, between parentheses after and in
+the same line as the test results.</p>
+</section>
+<section id="test-execution-times-and-memory-usage">
+<h2>Test execution times and memory usage<a class="headerlink" href="#test-execution-times-and-memory-usage" title="Link to this heading"></a></h2>
+<p>Individual test CPU and wall execution times (in seconds) are reported
+by default when running the tests. Total CPU and wall execution times
+for passed and failed tests are reported after the tests complete.
+Starting and ending date and time when running a set of tests is also
+reported by default. The <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object also provides several public
+benchmarking predicates that can be useful for e.g. reporting test
+sub-goals execution times using either CPU or wall clocks. When running
+multi-threaded code, the CPU time may or may not include all threads CPU
+time depending on the backend.</p>
+<p>Test memory usage is not reported by default due to the lack of a
+portable solution to access memory data. However, several backend Prolog
+systems provide a <code class="docutils literal notranslate"><span class="pre">statistics/2</span></code> or similar predicate that can be used
+for a custom solution. Depending on the system, individual keys may be
+provided for each memory area (heap, trail, atom table, …).
+Aggregating keys may also be provided. As a hypothetical example, assume
+you’re running Logtalk with a backend providing a <code class="docutils literal notranslate"><span class="pre">statistics/2</span></code>
+predicate with a <code class="docutils literal notranslate"><span class="pre">memory_used</span></code> key:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(ack_3, <span class="k">true</span>(<span class="nv">Result</span> <span class="o">==</span> <span class="m">125</span>), [note(memory<span class="o">-</span><span class="nv">Memory</span>)]) <span class="o">:-</span>
+    statistics(memory_used, <span class="nv">Memory0</span>),
+    ack<span class="o">::</span>ack(<span class="m">3</span>, <span class="m">4</span>, <span class="nv">Result</span>),
+    statistics(memory_used, <span class="nv">Memory1</span>),
+    <span class="nv">Memory</span> <span class="k">is</span> <span class="nv">Memory1</span> <span class="o">-</span> <span class="nv">Memory0</span>.
+</pre></div>
+</div>
+<p>Consult the documentation of the backend Prolog systems for actual
+details.</p>
+</section>
+<section id="working-with-test-data-files">
+<h2>Working with test data files<a class="headerlink" href="#working-with-test-data-files" title="Link to this heading"></a></h2>
+<p>Frequently, tests make use of test data files that are usually stored in
+the test set directory or in sub-directories. These data files are
+referenced using their relative paths. But to allow the tests to run
+independently of the Logtalk process current directory, the relative
+paths often must be expanded into an absolute path before being passed
+to the predicates being tested. The <code class="docutils literal notranslate"><span class="pre">file_path/2</span></code> protected predicate
+can be used in the test definitions to expand the relative paths. For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% check that the encoding/1 option is accepted</span>
+test(lgt_unicode_open_4_01, <span class="k">true</span>) <span class="o">:-</span>
+    <span class="o">^^</span>file_path(sample_utf_8, <span class="nv">Path</span>),
+    <span class="k">open</span>(<span class="nv">Path</span>, write, <span class="nv">Stream</span>, [encoding(<span class="s">&#39;UTF-8&#39;</span>)]),
+    <span class="k">close</span>(<span class="nv">Stream</span>).
+</pre></div>
+</div>
+<p>The absolute path is computed relative to the path of <em>self</em>, i.e.
+relative to the path of the test object that received the message that
+runs the tests.</p>
+<p>It’s also common for tests to create temporary files and directories
+that should be deleted after the tests completion. The <code class="docutils literal notranslate"><span class="pre">clean_file/1</span></code>
+and <code class="docutils literal notranslate"><span class="pre">clean_directory/1</span></code> protected predicates can be used for this
+purpose. For example, assuming that the tests create a <code class="docutils literal notranslate"><span class="pre">foo.txt</span></code> text
+file and a <code class="docutils literal notranslate"><span class="pre">tmp</span></code> directory in the same directory as the tests object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>cleanup <span class="o">:-</span>
+    <span class="o">^^</span>clean_file(<span class="s">&#39;foo.txt&#39;</span>),
+    <span class="o">^^</span>clean_directory(<span class="s">&#39;tmp&#39;</span>).
+</pre></div>
+</div>
+<p>Similar to the <code class="docutils literal notranslate"><span class="pre">file_path/2</span></code> predicate, relative paths are interpreted
+as relative to the path of the test object. This predicate also closes
+any open stream connected to the file before deleting it.</p>
+</section>
+<section id="flaky-tests">
+<h2>Flaky tests<a class="headerlink" href="#flaky-tests" title="Link to this heading"></a></h2>
+<p>Flaky tests are tests that pass or fail non-deterministically, usually
+due to external conditions (e.g., computer or network load). Thus, flaky
+tests often don’t result from bugs in the code being tested itself but
+from test execution conditions that are not predictable. The <code class="docutils literal notranslate"><span class="pre">flaky/0</span></code>
+test option declares a test to be flaky. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(foo, <span class="k">true</span>, [flaky]) <span class="o">:-</span>
+    ...
+</pre></div>
+</div>
+<p>For backwards compatibility, the <code class="docutils literal notranslate"><span class="pre">note/1</span></code> annotation can also be used
+to alert that a test failure is for a flaky test when its argument is an
+atom containing the sub-atom <code class="docutils literal notranslate"><span class="pre">flaky</span></code>.</p>
+<p>The testing automation support outputs the text <code class="docutils literal notranslate"><span class="pre">[flaky]</span></code> when
+reporting failed flaky tests. Moreover, the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code>
+automation script will ignore failed flaky tests when setting its exit
+status.</p>
+</section>
+<section id="mocking">
+<h2>Mocking<a class="headerlink" href="#mocking" title="Link to this heading"></a></h2>
+<p>Sometimes the code being tested performs complex tasks that are not
+feasible or desirable when running tests. For example, the code may
+perform a login operation requiring the user to provide a username and a
+password using some GUI widget. In this case, the tests may require the
+login operation to still be performed but using canned data (also
+simplifying testing automation). I.e. we want to <em>mock</em> (as in
+<em>imitate</em>) the login procedure. Ideally, this should be accomplished
+without requiring any changes to the code being tested. Logtalk provides
+two solutions that can be used for mocking: <em>term-expansion</em> and <em>hot
+patching</em>. A third solution is possible if the code we want to mock uses
+the <em>message printing mechanism</em>.</p>
+<p>Using the term-expansion mechanism, we would define a <em>hook object</em> that
+expands the login predicate into a fact:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(mock_login,
+    <span class="k">implements</span>(expanding)).
+
+    <span class="k">term_expansion</span>((login(<span class="nv">_</span>, <span class="nv">_</span>) <span class="o">:-</span> <span class="nv">_</span>), login(jdoe, test123)).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>The tests driver file would then load the application object responsible
+for user management using this hook object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
+    ...,
+    <span class="k">logtalk_load</span>(mock_login),
+    <span class="k">logtalk_load</span>(user_management, [hook(mock_login)]),
+    ...
+)).
+</pre></div>
+</div>
+<p>Using hot patching, we would define a <em>complementing category</em> patching
+the object that defines the login predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(mock_login,
+    <span class="k">complements</span>(user_management)).
+
+    login(jdoe, test123).
+
+<span class="p">:- </span><span class="k">end_category</span>.
+</pre></div>
+</div>
+<p>The tests driver file would then set the <code class="docutils literal notranslate"><span class="pre">complements</span></code> flag to
+<code class="docutils literal notranslate"><span class="pre">allow</span></code> and load the patch after loading application code:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
+    ...,
+    <span class="k">set_logtalk_flag</span>(complements, allow),
+    <span class="k">logtalk_load</span>(application),
+    <span class="k">logtalk_load</span>(mock_login),
+    ...
+)).
+</pre></div>
+</div>
+<p>There are pros and cons for each solution. Term-expansion works by
+defining hook objects that are used at compile-time, while hot patching
+happens at runtime. Complementing categories can also be dynamically
+created, stacked, and abolished. Hot patching disables static binding
+optimizations, but that’s usually not a problem as the code being tested
+is often compiled in debug mode to collect code coverage data. Two
+advantages of the term-expansion solution are that it allows defining
+conditions for expanding terms and goals and can replace both predicate
+definitions and predicate calls. Limitations in the current Prolog
+standards prevent patching callers to local predicates being patched.
+But often both solutions can be used, with the choice depending on code
+clarity and user preference. See the Handbook sections on term-expansion
+and hot patching for more details on these mechanisms.</p>
+<p>In those cases where the code we want to mock uses the message printing
+mechanism, the solution is to intercept and rewrite the messages being
+printed and/or the questions being asked using the
+<code class="docutils literal notranslate"><span class="pre">logtalk::message_hook/4</span></code> and <code class="docutils literal notranslate"><span class="pre">logtalk::question_hook/6</span></code> hook
+predicates.</p>
+</section>
+<section id="debugging-messages-in-tests">
+<h2>Debugging messages in tests<a class="headerlink" href="#debugging-messages-in-tests" title="Link to this heading"></a></h2>
+<p>Sometimes it is useful to write debugging or logging messages from tests
+when running them manually. But those messages are better suppressed
+when running the tests automated. A common solution is to use debug
+<em>meta-messages</em>. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(logtalk, [
+    print_message(debug, my_app, <span class="nv">Message</span>) <span class="o">as</span> dbg(<span class="nv">Message</span>)
+]).
+
+test(some_test_id, ...) <span class="o">:-</span>
+    ...,
+    dbg(<span class="s">&#39;Some intermediate value&#39;</span><span class="o">-</span><span class="nv">Value</span>),
+    ...,
+    dbg([<span class="nv">Stream</span>]<span class="o">&gt;&gt;</span>custom_print_goal(<span class="nv">Stream</span>, ...)),
+    ...
+</pre></div>
+</div>
+<p>The messages are only printed (and the user-defined printing goals are
+only called) when the <code class="docutils literal notranslate"><span class="pre">debug</span></code> flag is turned on. Note that this
+doesn’t require compiling the tests in debug mode: you simply toggle the
+flag to toggle the debug messages. Also note that the
+<code class="docutils literal notranslate"><span class="pre">print_message/3</span></code> goals are suppressed by the compiler when compiling
+with the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag turned on.</p>
+</section>
+<section id="debugging-failed-tests">
+<h2>Debugging failed tests<a class="headerlink" href="#debugging-failed-tests" title="Link to this heading"></a></h2>
+<p>Debugging of failed unit tests is simplified by using test assertions as
+the reason for the assertion failures is printed out. Thus, use
+preferably the <code class="docutils literal notranslate"><span class="pre">test/2-3</span></code> dialects with <code class="docutils literal notranslate"><span class="pre">true(Assertion)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">deterministic(Assertion)</span></code>, <code class="docutils literal notranslate"><span class="pre">subsumes(Expected,</span> <span class="pre">Result)</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">variant(Term1,</span> <span class="pre">Term2)</span></code> outcomes. If a test checks multiple
+assertions, you can use the predicate <code class="docutils literal notranslate"><span class="pre">assertion/2</span></code> in the test body.
+In the case of QuickCheck tests, the <code class="docutils literal notranslate"><span class="pre">v(true)</span></code> verbose option can be
+used to print the generated test case that failed if necessary.</p>
+<p>If the assertion failures don’t provide enough information, you can use
+the <code class="docutils literal notranslate"><span class="pre">debugger</span></code> tool to debug failed unit tests. Start by compiling the
+unit test objects and the code being tested in debug mode. Load the
+debugger and trace the test that you want to debug. For example,
+assuming your tests are defined in a <code class="docutils literal notranslate"><span class="pre">tests</span></code> object and that the
+identifier of the test to be debugged is <code class="docutils literal notranslate"><span class="pre">test_foo</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(debugger(loader)).
+...
+
+| <span class="o">?-</span> debugger<span class="o">::</span>trace.
+...
+
+| <span class="o">?-</span> tests<span class="o">::</span>run(test_foo).
+...
+</pre></div>
+</div>
+<p>You can also compile the code and the tests in debug mode but without
+using the <code class="docutils literal notranslate"><span class="pre">hook/1</span></code> compiler option for the tests compilation. Assuming
+that the <code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code>, you can
+then use the <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> debugging control construct to debug the tests.
+For example, assuming that the identifier of the test to be debugged is
+<code class="docutils literal notranslate"><span class="pre">test_foo</span></code> and that you used the <code class="docutils literal notranslate"><span class="pre">test/1</span></code> dialect:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(debugger(loader)).
+...
+
+| <span class="o">?-</span> debugger<span class="o">::</span>trace.
+...
+
+| <span class="o">?-</span> tests<span class="o">&lt;&lt;</span>test(test_foo).
+...
+</pre></div>
+</div>
+<p>In the more complicated cases, it may be worth defining
+<code class="docutils literal notranslate"><span class="pre">loader_debug.lgt</span></code> and <code class="docutils literal notranslate"><span class="pre">tester_debug.lgt</span></code> driver files that load
+code and tests in debug mode and also load the debugger.</p>
+</section>
+<section id="code-coverage">
+<h2>Code coverage<a class="headerlink" href="#code-coverage" title="Link to this heading"></a></h2>
+<p>If you want entity predicate clause coverage information to be collected
+and printed, you will need to compile the entities that you’re testing
+using the flags <code class="docutils literal notranslate"><span class="pre">debug(on)</span></code> and <code class="docutils literal notranslate"><span class="pre">source_data(on)</span></code>. Be aware,
+however, that compiling in debug mode results in a performance penalty.</p>
+<p>A single test object may include tests for one or more entities
+(objects, protocols, and categories). The entities being tested by a
+unit test object for which code coverage information should be collected
+must be declared using the <code class="docutils literal notranslate"><span class="pre">cover/1</span></code> predicate. For example, to
+collect code coverage data for the objects <code class="docutils literal notranslate"><span class="pre">foo</span></code> and <code class="docutils literal notranslate"><span class="pre">bar</span></code> include
+in the tests object the two clauses:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>cover(foo).
+cover(bar).
+</pre></div>
+</div>
+<p>Code coverage is listed using the predicates clause indexes (counting
+from one). For example, using the <code class="docutils literal notranslate"><span class="pre">points</span></code> example in the Logtalk
+distribution:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% point: default_init_option/1 - 2/2 - (all)</span>
+<span class="c">% point: instance_base_name/1 - 1/1 - (all)</span>
+<span class="c">% point: move/2 - 1/1 - (all)</span>
+<span class="c">% point: position/2 - 1/1 - (all)</span>
+<span class="c">% point: print/0 - 1/1 - (all)</span>
+<span class="c">% point: process_init_option/1 - 1/2 - [1]</span>
+<span class="c">% point: position_/2 - 0/0 - (all)</span>
+<span class="c">% point: 7 out of 8 clauses covered, 87.500000% coverage</span>
+</pre></div>
+</div>
+<p>The numbers after the predicate indicators represent the clauses covered
+and the total number of clauses. E.g. for the <code class="docutils literal notranslate"><span class="pre">process_init_option/1</span></code>
+predicate, the tests cover 1 out of 2 clauses. After these numbers, we
+either get <code class="docutils literal notranslate"><span class="pre">(all)</span></code> telling us that all clauses are covered or a list
+of indexes for the covered clauses. E.g. only the first clause for the
+<code class="docutils literal notranslate"><span class="pre">process_init_option/1</span></code> predicate, <code class="docutils literal notranslate"><span class="pre">[1]</span></code>. Summary clause coverage
+numbers are also printed for entities and for clauses across all
+entities.</p>
+<p>In the printed predicate clause coverage information, you may get a
+total number of clauses smaller than the covered clauses. This results
+from the use of dynamic predicates with clauses asserted at runtime. You
+may easily identify dynamic predicates in the results as their clauses
+often have an initial count equal to zero.</p>
+<p>The list of indexes of the covered predicate clauses can be quite long.
+Some backend Prolog compilers provide a flag or a predicate to control
+the depth of printed terms that can be useful:</p>
+<ul class="simple">
+<li><p>CxProlog: <code class="docutils literal notranslate"><span class="pre">write_depth/2</span></code> predicate</p></li>
+<li><p>ECLiPSe: <code class="docutils literal notranslate"><span class="pre">print_depth</span></code> flag</p></li>
+<li><p>XVM 3.2.0 or later: <code class="docutils literal notranslate"><span class="pre">answer_write_options</span></code> flag</p></li>
+<li><p>SICStus Prolog: <code class="docutils literal notranslate"><span class="pre">toplevel_print_options</span></code> flag</p></li>
+<li><p>SWI-Prolog 7.1.10 or earlier: <code class="docutils literal notranslate"><span class="pre">toplevel_print_options</span></code> flag</p></li>
+<li><p>SWI-Prolog 7.1.11 or later: <code class="docutils literal notranslate"><span class="pre">answer_write_options</span></code> flag</p></li>
+<li><p>Trealla Prolog: <code class="docutils literal notranslate"><span class="pre">answer_write_options</span></code> flag</p></li>
+<li><p>XSB: <code class="docutils literal notranslate"><span class="pre">set_file_write_depth/1</span></code> predicate</p></li>
+<li><p>YAP: <code class="docutils literal notranslate"><span class="pre">write_depth/2-3</span></code> predicates</p></li>
+</ul>
+<p>Code coverage is only available when testing Logtalk code. But Prolog
+modules can often be compiled as Logtalk objects and plain Prolog code
+may be wrapped in a Logtalk object. For example, assuming a
+<code class="docutils literal notranslate"><span class="pre">module.pl</span></code> module file, we can compile and load the module as an
+object by simply calling:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(module).
+...
+</pre></div>
+</div>
+<p>The module exported predicates become object public predicates. For a
+plain Prolog file, say <code class="docutils literal notranslate"><span class="pre">plain.pl</span></code>, we can define a Logtalk object that
+wraps the code using an <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directive:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(plain).
+
+<span class="p">    :- </span><span class="k">include</span>(<span class="s">&#39;plain.pl&#39;</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>The object can also declare as public the top Prolog predicates to
+simplify writing the tests. In alternative, we can use the
+<code class="docutils literal notranslate"><span class="pre">object_wrapper_hook</span></code> provided by the <code class="docutils literal notranslate"><span class="pre">hook_objects</span></code> library:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(loader)).
+...
+
+| <span class="o">?-</span> <span class="k">logtalk_load</span>(plain, [hook(object_wrapper_hook)]).
+...
+</pre></div>
+</div>
+<p>These workarounds may thus allow generating code coverage data also for
+Prolog code by defining tests that use the <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> debugging control
+construct to call the Prolog predicates.</p>
+<p>See also the section below on exporting code coverage results to XML
+files, which can be easily converted and published as e.g. HTML reports.</p>
+</section>
+<section id="utility-predicates">
+<h2>Utility predicates<a class="headerlink" href="#utility-predicates" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool provides several public utility predicates to
+simplify writing unit tests and for general use:</p>
+<ul>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">variant(Term1,</span> <span class="pre">Term2)</span></code></div>
+<div class="line">To check when two terms are a variant of each other (e.g., to check
+expected test results against actual results when they contain
+variables).</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">assertion(Goal)</span></code></div>
+<div class="line">To generate an exception in case the goal argument fails or throws
+an error.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">assertion(Description,</span> <span class="pre">Goal)</span></code></div>
+<div class="line">To generate an exception in case the goal argument fails or throws
+an error (the first argument allows assertion failures to be
+distinguished when using multiple assertions).</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">approximately_equal(Number1,</span> <span class="pre">Number2)</span></code></div>
+<div class="line">For number approximate equality using the <code class="docutils literal notranslate"><span class="pre">epsilon</span></code> arithmetic
+constant value.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">approximately_equal(Number1,</span> <span class="pre">Number2,</span> <span class="pre">Epsilon)</span></code></div>
+<div class="line">For number approximate equality. Weaker equality than essential
+equality.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">essentially_equal(Number1,</span> <span class="pre">Number2,</span> <span class="pre">Epsilon)</span></code></div>
+<div class="line">For number essential equality. Stronger equality than approximate
+equality.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tolerance_equal(Number1,</span> <span class="pre">Number2,</span> <span class="pre">RelativeTolerance,</span> <span class="pre">AbsoluteTolerance)</span></code></div>
+<div class="line">For number equality within tolerances.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Number1</span> <span class="pre">=~=</span> <span class="pre">Number2</span></code></div>
+<div class="line">For number (or list of numbers) close equality (usually
+floating-point numbers).</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark(Goal,</span> <span class="pre">Time)</span></code></div>
+<div class="line">For timing a goal.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark_reified(Goal,</span> <span class="pre">Time,</span> <span class="pre">Result)</span></code></div>
+<div class="line">Reified version of <code class="docutils literal notranslate"><span class="pre">benchmark/2</span></code>.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark(Goal,</span> <span class="pre">Repetitions,</span> <span class="pre">Time)</span></code></div>
+<div class="line">For finding the average time to prove a goal.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">benchmark(Goal,</span> <span class="pre">Repetitions,</span> <span class="pre">Clock,</span> <span class="pre">Time)</span></code></div>
+<div class="line">For finding the average time to prove a goal using a <code class="docutils literal notranslate"><span class="pre">cpu</span></code> or a
+<code class="docutils literal notranslate"><span class="pre">wall</span></code> clock.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">deterministic(Goal)</span></code></div>
+<div class="line">For checking that a predicate succeeds without leaving a
+choice-point.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">deterministic(Goal,</span> <span class="pre">Deterministic)</span></code></div>
+<div class="line">Reified version of the <code class="docutils literal notranslate"><span class="pre">deterministic/1</span></code> predicate.</div>
+</div>
+</li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> predicates can be used in the body of tests where
+using two or more assertions is convenient or in the body of tests
+written using the <code class="docutils literal notranslate"><span class="pre">test/1</span></code>, <code class="docutils literal notranslate"><span class="pre">succeeds/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">deterministic/1</span></code>
+dialects to help differentiate between the test goal and checking the
+test goal results and to provide more informative test failure messages.</p>
+<p>When the assertion, benchmarking, and deterministic meta-predicates call
+a local predicate of the tests object, you must call them using an
+implicit or explicit message instead of using a <em>super</em> call. For
+example, to use an implicit message to call the <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code>
+meta-predicates, add the following directive to the tests object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(lgtunit, [assertion<span class="o">/</span><span class="m">1</span>, assertion<span class="o">/</span><span class="m">2</span>]).
+</pre></div>
+</div>
+<p>The reason this is required is that meta-predicates goals arguments are
+always called in the context of the <em>sender</em>, which would be the
+<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object in the case of a <code class="docutils literal notranslate"><span class="pre">(^^)/2</span></code> call (as it preserves
+both <em>self</em> and <em>sender</em> and the tests are internally run by a message
+sent from the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object to the tests object).</p>
+<p>As the <code class="docutils literal notranslate"><span class="pre">benchmark/2-4</span></code> predicates are meta-predicates, turning on the
+<code class="docutils literal notranslate"><span class="pre">optimize</span></code> compiler flag is advised to avoid runtime compilation of
+the meta-argument, which would add an overhead to the timing results.
+But this advice conflicts with collecting code coverage data, which
+requires compilation in debug mode. The solution is to use separate test
+objects for benchmarking and for code coverage. Note that the CPU and
+wall execution times (in seconds) for each individual test are reported
+by default when running the tests.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">(=~=)/2</span></code> predicate is typically used by adding the following
+directive to the object (or category) calling it:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(lgtunit, [
+    <span class="k">op</span>(<span class="m">700</span>, xfx, <span class="o">=</span><span class="err">~</span><span class="o">=</span>), (<span class="o">=</span><span class="err">~</span><span class="o">=</span>)<span class="o">/</span><span class="m">2</span>
+]).
+</pre></div>
+</div>
+<p>Consult the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object API documentation for more details on
+these predicates.</p>
+</section>
+<section id="exporting-test-results-in-xunit-xml-format">
+<h2>Exporting test results in xUnit XML format<a class="headerlink" href="#exporting-test-results-in-xunit-xml-format" title="Link to this heading"></a></h2>
+<p>To output test results in the xUnit XML format (from JUnit; see e.g.
+<a class="reference external" href="https://github.com/windyroad/JUnit-Schema">https://github.com/windyroad/JUnit-Schema</a> or
+<a class="reference external" href="https://llg.cubic.org/docs/junit/">https://llg.cubic.org/docs/junit/</a>), simply load the <code class="docutils literal notranslate"><span class="pre">xunit_output.lgt</span></code>
+file before running the tests. This file defines an object,
+<code class="docutils literal notranslate"><span class="pre">xunit_output</span></code>, that intercepts and rewrites unit test execution
+messages, converting them to the xUnit XML format.</p>
+<p>To export the test results to a file using the xUnit XML format, simply
+load the <code class="docutils literal notranslate"><span class="pre">xunit_report.lgt</span></code> file before running the tests. A file
+named <code class="docutils literal notranslate"><span class="pre">xunit_report.xml</span></code> will be created in the same directory as the
+object defining the tests. When running a set of test suites as a single
+unified suite (using the <code class="docutils literal notranslate"><span class="pre">run_test_sets/1</span></code> predicate), the single
+xUnit report is created in the directory of the first test suite object
+in the set.</p>
+<p>To use the xUnit.net v2 XML format
+(<a class="reference external" href="https://xunit.net/docs/format-xml-v2">https://xunit.net/docs/format-xml-v2</a>), load either the
+<code class="docutils literal notranslate"><span class="pre">xunit_net_v2_output.lgt</span></code> file or the <code class="docutils literal notranslate"><span class="pre">xunit_net_v2_report.lgt</span></code>
+file.</p>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script, use either the
+<code class="docutils literal notranslate"><span class="pre">-f</span> <span class="pre">xunit</span></code> option or the <code class="docutils literal notranslate"><span class="pre">-f</span> <span class="pre">xunit_net_v2</span></code> option to generate the
+<code class="docutils literal notranslate"><span class="pre">xunit_report.xml</span></code> files in the test set directories.</p>
+<p>There are several third-party xUnit report converters that can generate
+HTML files for easy browsing. For example:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://allurereport.org/docs/">https://allurereport.org/docs/</a> (supports multiple reports)</p></li>
+<li><p><a class="reference external" href="https://github.com/Zir0-93/xunit-to-html">https://github.com/Zir0-93/xunit-to-html</a> (supports multiple test sets
+in a single report)</p></li>
+<li><p><a class="reference external" href="https://www.npmjs.com/package/xunit-viewer">https://www.npmjs.com/package/xunit-viewer</a></p></li>
+<li><p><a class="reference external" href="https://github.com/JatechUK/NUnit-HTML-Report-Generator">https://github.com/JatechUK/NUnit-HTML-Report-Generator</a></p></li>
+<li><p><a class="reference external" href="https://plugins.jenkins.io/xunit">https://plugins.jenkins.io/xunit</a></p></li>
+</ul>
+</section>
+<section id="exporting-test-results-in-the-tap-output-format">
+<h2>Exporting test results in the TAP output format<a class="headerlink" href="#exporting-test-results-in-the-tap-output-format" title="Link to this heading"></a></h2>
+<p>To output test results in the TAP (Test Anything Protocol) format,
+simply load the <code class="docutils literal notranslate"><span class="pre">tap_output.lgt</span></code> file before running the tests. This
+file defines an object, <code class="docutils literal notranslate"><span class="pre">tap_output</span></code>, that intercepts and rewrites
+unit test execution messages, converting them to the TAP output format.</p>
+<p>To export the test results to a file using the TAP (Test Anything
+Protocol) output format, load instead the <code class="docutils literal notranslate"><span class="pre">tap_report.lgt</span></code> file before
+running the tests. A file named <code class="docutils literal notranslate"><span class="pre">tap_report.txt</span></code> will be created in
+the same directory as the object defining the tests.</p>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script, use the <code class="docutils literal notranslate"><span class="pre">-f</span> <span class="pre">tap</span></code>
+option to generate the <code class="docutils literal notranslate"><span class="pre">tap_report.xml</span></code> files in the test set
+directories.</p>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect with the TAP format, a <code class="docutils literal notranslate"><span class="pre">note/1</span></code>
+option whose argument is an atom starting with a <code class="docutils literal notranslate"><span class="pre">TODO</span></code> or <code class="docutils literal notranslate"><span class="pre">todo</span></code>
+word results in a test report with a TAP TODO directive.</p>
+<p>When running a set of test suites as a single unified suite, the single
+TAP report is created in the directory of the first test suite object in
+the set.</p>
+<p>There are several third-party TAP report converters that can generate
+HTML files for easy browsing. For example:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/Quobject/tap-to-html">https://github.com/Quobject/tap-to-html</a></p></li>
+<li><p><a class="reference external" href="https://plugins.jenkins.io/tap/">https://plugins.jenkins.io/tap/</a></p></li>
+</ul>
+</section>
+<section id="generating-allure-reports">
+<h2>Generating Allure reports<a class="headerlink" href="#generating-allure-reports" title="Link to this heading"></a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">logtalk_allure_report.pl</span></code> Bash shell script and a
+<code class="docutils literal notranslate"><span class="pre">logtalk_allure_report.ps1</span></code> PowerShell script are provided for
+generating <a class="reference external" href="https://allurereport.org/docs/">Allure reports</a> (version
+2.26.0 or later required). This requires exporting test results in xUnit
+XML format. A simple usage example (assuming a current directory
+containing tests):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">-</span>p gnu <span class="o">-</span>f xunit
+<span class="err">$</span> logtalk_allure_report
+<span class="err">$</span> allure open
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">allure</span> <span class="pre">open</span></code> command accepts <code class="docutils literal notranslate"><span class="pre">--host</span></code> and <code class="docutils literal notranslate"><span class="pre">--port</span></code> arguments
+in case their default values are not suitable (e.g., when running
+Logtalk in a remote host over a SSH connection).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">logtalk_allure_report</span></code> script supports command-line options to
+pass the tests directory (i.e., the directory where the
+<code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> script was run), the directory where to collect all
+the xUnit report files for generating the report, the directory where
+the report is to be saved, and the report title (see the script man page
+or type <code class="docutils literal notranslate"><span class="pre">logtalk_allure_report</span> <span class="pre">-h</span></code>). The script also supports saving
+the history of past test runs. In this case, a persistent location for
+both the results and report directories must be used.</p>
+<p>It’s also possible to use the script just to collect the xUnit report
+files generated by <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> and delegate the actual generation of the
+report to e.g. an Allure Docker container or to a Jenkins plug-in. Two
+examples are:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/fescobar/allure-docker-service">https://github.com/fescobar/allure-docker-service</a></p></li>
+<li><p><a class="reference external" href="https://plugins.jenkins.io/allure-jenkins-plugin/">https://plugins.jenkins.io/allure-jenkins-plugin/</a></p></li>
+</ul>
+<p>In this case, we would use the <code class="docutils literal notranslate"><span class="pre">logtalk_allure_report</span></code> script option
+to only perform the preprocessing step:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_allure_report <span class="o">-</span>p
+</pre></div>
+</div>
+<p>The script also supports passing <em>environment pairs</em>, which are
+displayed in the generated Allure reports in the environment pane. This
+feature can be used to pass e.g. the backend name and the backend
+version or git commit hash. The option syntax differs, however, between
+the two scripts. For example, using the Bash script:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_allure_report <span class="o">--</span> <span class="nv">Backend</span><span class="o">=</span><span class="s">&#39;GNU Prolog&#39;</span> <span class="nv">Version</span><span class="o">=</span><span class="m">1.5</span>.<span class="m">0</span>
+</pre></div>
+</div>
+<p>Or:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_allure_report <span class="o">--</span> <span class="nv">Project</span><span class="o">=</span><span class="s">&#39;Deep Thought&#39;</span> <span class="nv">Commit</span><span class="o">=</span><span class="err">`</span>git rev<span class="o">-</span>parse <span class="o">--</span>short <span class="nv">HEAD</span><span class="err">`</span>
+</pre></div>
+</div>
+<p>In the case of the PowerShell script, the pairs are passed comma
+separated inside a string:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">PS</span><span class="o">&gt;</span> logtalk_allure_report <span class="o">-e</span> <span class="s">&quot;Backend=&#39;GNU Prolog&#39;,Version=1.5.0&quot;</span>
+</pre></div>
+</div>
+<p>Or:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">PS</span><span class="o">&gt;</span> logtalk_allure_report <span class="o">-e</span> <span class="s">&quot;Project=&#39;Deep Thought&#39;,Commit=bf166b6&quot;</span>
+</pre></div>
+</div>
+<p>To show test run trends in the report (e.g., when running the tests for
+each application source code commit), save the processed test results
+and the report data to permanent directories. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_allure_report <span class="o">\</span>
+  <span class="o">-</span>i <span class="s">&quot;$HOME/my_project/allure-results&quot;</span> <span class="o">\</span>
+  <span class="o">-</span>o <span class="s">&quot;$HOME/my_project/allure-report&quot;</span>
+<span class="err">$</span> allure open <span class="s">&quot;$HOME/my_project/allure-report&quot;</span>
+</pre></div>
+</div>
+<p>Note that Allure cleans the report directory when generating a new
+report. Be careful to always specify a dedicated directory to prevent
+accidental data loss.</p>
+<p>The generated reports can include links to the tests source code. This
+requires using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> shell script option that allows
+passing the base URL for those links. This option needs to be used
+together with the option to suppress the tests directory prefix so that
+the links can be constructed by appending the tests file relative path
+to the base URL. For example, assuming that you want to generate a
+report for the tests included in the Logtalk distribution when using the
+GNU Prolog backend:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> cd <span class="err">$</span><span class="nv">LOGTALKUSER</span>
+<span class="err">$</span> logtalk_tester <span class="o">\</span>
+  <span class="o">-</span>p gnu <span class="o">\</span>
+  <span class="o">-</span>f xunit <span class="o">\</span>
+  <span class="o">-</span>s <span class="s">&quot;$LOGTALKUSER&quot;</span> <span class="o">\</span>
+  <span class="o">-</span>u <span class="s">&quot;https://github.com/LogtalkDotOrg/logtalk3/tree/3e4ea295986fb09d0d4aade1f3b4968e29ef594e&quot;</span>
+</pre></div>
+</div>
+<p>The use of a git hash in the base URL ensures that the generated links
+will always show the exact versions of the tests that were run. The
+links include the line number for the tests in the test files (assuming
+that the git repo is stored in a BitBucket, GitHub, or GitLab server).
+But note that not all supported backends provide accurate line numbers.</p>
+<p>It’s also possible to generate single-file reports. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_allure_report <span class="o">-</span>s <span class="o">-</span>t <span class="s">&quot;My Amazing Tests Report&quot;</span>
+</pre></div>
+</div>
+<p>There are some caveats when generating Allure reports that users must be
+aware of. First, Allure expects test names to be unique across different
+tests sets. If there are two tests with the same name in two different
+test sets, only one of them will be reported. Second, when using the
+<code class="docutils literal notranslate"><span class="pre">xunit</span></code> format, dates are reported as MM/DD/YYYY. Finally, when using
+the <code class="docutils literal notranslate"><span class="pre">xunit_net_v2</span></code> format, tests are reported in a random order
+instead of their run order, and dates are displayed as “unknown” in the
+overview page.</p>
+</section>
+<section id="exporting-code-coverage-results-in-xml-format">
+<h2>Exporting code coverage results in XML format<a class="headerlink" href="#exporting-code-coverage-results-in-xml-format" title="Link to this heading"></a></h2>
+<p>To export code coverage results in XML format, load the
+<code class="docutils literal notranslate"><span class="pre">coverage_report.lgt</span></code> file before running the tests. A file named
+<code class="docutils literal notranslate"><span class="pre">coverage_report.xml</span></code> will be created in the same directory as the
+object defining the tests.</p>
+<p>The XML file can be opened in most web browsers (with the notorious
+exception of Google Chrome) by copying to the same directory the
+<code class="docutils literal notranslate"><span class="pre">coverage_report.dtd</span></code> and <code class="docutils literal notranslate"><span class="pre">coverage_report.xsl</span></code> files found in the
+<code class="docutils literal notranslate"><span class="pre">tools/lgtunit</span></code> directory (when using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> script,
+these two files are copied automatically). In alternative, an XSLT
+processor can be used to generate an XHTML file instead of relying on a
+web browser for the transformation. For example, using the popular
+<code class="docutils literal notranslate"><span class="pre">xsltproc</span></code> processor:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> xsltproc <span class="o">-</span>o coverage_report.html coverage_report.xml
+</pre></div>
+</div>
+<p>On Windows operating-systems, this processor can be installed using e.g.
+Chocolatey. On a POSIX operating-systems (e.g., Linux, macOS, …) use
+the system package manager to install it if necessary.</p>
+<p>The coverage report can include links to the source code when hosted on
+Bitbucket, GitHub, or GitLab. This requires passing the base URL as the
+value for the <code class="docutils literal notranslate"><span class="pre">url</span></code> XSLT parameter. The exact syntax depends on the
+XSLT processor, however. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> xsltproc <span class="o">\</span>
+  <span class="o">--</span>stringparam url https<span class="o">://</span>github.com<span class="o">/</span><span class="nv">LogtalkDotOrg</span><span class="o">/</span>logtalk3<span class="o">/</span>blob<span class="o">/</span>master <span class="o">\</span>
+  <span class="o">-</span>o coverage_report.html coverage_report.xml
+</pre></div>
+</div>
+<p>Note that the base URL should preferably be a permanent link (i.e., it
+should include the commit SHA1) so that the links to source code files
+and lines remain valid if the source code is later updated. It’s also
+necessary to suppress the local path prefix in the generated
+<code class="docutils literal notranslate"><span class="pre">coverage_report.xml</span></code> file. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">-</span>c xml <span class="o">-</span>s <span class="err">$</span><span class="nv">HOME</span><span class="o">/</span>logtalk<span class="o">/</span>
+</pre></div>
+</div>
+<p>Alternatively, you can pass the local path prefix to be suppressed to
+the XSLT processor (note that the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> script suppresses
+the <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> prefix by default):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> xsltproc <span class="o">\</span>
+  <span class="o">--</span>stringparam prefix logtalk<span class="o">/</span> <span class="o">\</span>
+  <span class="o">--</span>stringparam url https<span class="o">://</span>github.com<span class="o">/</span><span class="nv">LogtalkDotOrg</span><span class="o">/</span>logtalk3<span class="o">/</span>blob<span class="o">/</span>master <span class="o">\</span>
+  <span class="o">-</span>o coverage_report.html coverage_report.xml
+</pre></div>
+</div>
+<p>If you are using Bitbucket, GitHub, or GitLab hosted on your own
+servers, the <code class="docutils literal notranslate"><span class="pre">url</span></code> parameter may not contain a <code class="docutils literal notranslate"><span class="pre">bitbucket</span></code>,
+<code class="docutils literal notranslate"><span class="pre">github</span></code>, or <code class="docutils literal notranslate"><span class="pre">gitlab</span></code> string. In this case, you can use the XSLT
+parameter <code class="docutils literal notranslate"><span class="pre">host</span></code> to indicate which service you are running.</p>
+</section>
+<section id="automatically-creating-bug-reports-at-issue-trackers">
+<h2>Automatically creating bug reports at issue trackers<a class="headerlink" href="#automatically-creating-bug-reports-at-issue-trackers" title="Link to this heading"></a></h2>
+<p>To automatically create bug report issues for failed tests in GitHub or
+GitLab servers, see the <code class="docutils literal notranslate"><span class="pre">issue_creator</span></code> tool.</p>
+</section>
+<section id="minimizing-test-results-output">
+<h2>Minimizing test results output<a class="headerlink" href="#minimizing-test-results-output" title="Link to this heading"></a></h2>
+<p>To minimize the test results output, simply load the
+<code class="docutils literal notranslate"><span class="pre">minimal_output.lgt</span></code> file before running the tests. This file defines
+an object, <code class="docutils literal notranslate"><span class="pre">minimal_output</span></code>, that intercepts and summarizes the unit
+test execution messages.</p>
+</section>
+<section id="help-with-warnings">
+<h2>Help with warnings<a class="headerlink" href="#help-with-warnings" title="Link to this heading"></a></h2>
+<p>Load the <code class="docutils literal notranslate"><span class="pre">tutor</span></code> tool to get help with selected warnings printed by
+the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool.</p>
+</section>
+<section id="known-issues">
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
+<p>Deterministic unit tests are currently not available when using Quintus
+Prolog as it lacks built-in support that cannot be sensibly defined in
+Prolog.</p>
+<p>Parameter variables (<code class="docutils literal notranslate"><span class="pre">_VariableName_</span></code>) cannot currently be used in the
+definition of the <code class="docutils literal notranslate"><span class="pre">condition/1</span></code>, <code class="docutils literal notranslate"><span class="pre">setup/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">cleanup/1</span></code> test
+options when using the <code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect. For example, the following
+condition will not work:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(some_id, <span class="k">true</span>, [condition(<span class="nv">_ParVar_</span> <span class="o">==</span> <span class="m">42</span>)]) <span class="o">:-</span>
+    ...
+</pre></div>
+</div>
+<p>The workaround is to define an auxiliary predicate called from those
+options. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(check_xyz, <span class="k">true</span>, [condition(xyz_condition)]) <span class="o">:-</span>
+    ...
+
+xyz_condition <span class="o">:-</span>
+    <span class="nv">_ParVar_</span> <span class="o">==</span> <span class="m">42.</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="lgtdoc.html" class="btn btn-neutral float-left" title="lgtdoc" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="linter.html" class="btn btn-neutral float-right" title="linter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2025, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

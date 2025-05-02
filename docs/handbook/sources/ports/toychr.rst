@@ -1,0 +1,52 @@
+.. _library_toychr:
+
+``toychr``
+==========
+
+This folder contains a Logtalk port of ToyCHR, a reference
+implementation of Constraint Handling Rules (CHR) available from:
+
+::
+
+   https://www.comp.nus.edu.sg/~gregory/toychr/
+
+The port is work in progress and includes significant modifications to
+the original code:
+
+- Instead of compiling ``.chr`` files, it uses the term-expansion
+  mechanism, by defining ``toychrdb`` as a hook object, to support
+  writing rules inside objects and categories. As a consequence, the
+  original ``chr_compile/1`` is not available.
+
+- The port is portable and should run on all supported backends.
+
+The port also includes examples ported from the SWI-Prolog CHR package
+examples and documentation. These examples are ported using the same
+license of the original code (BSD-2-Clause).
+
+For sample queries, please see the ``SCRIPT.txt`` file.
+
+API documentation
+-----------------
+
+Open the
+`../../apis/library_index.html#toychr <../../apis/library_index.html#toychr>`__
+link in a web browser.
+
+Loading
+-------
+
+To load all entities in this port, load the ``loader.lgt`` file:
+
+::
+
+   | ?- logtalk_load(toychr(loader)).
+
+Testing
+-------
+
+To test this port predicates, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(toychr(tester)).

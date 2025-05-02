@@ -115,7 +115,7 @@ API documentation
 
 This tool API documentation is available at:
 
-[../../docs/library_index.html#packs](../../docs/library_index.html#packs)
+[../../../docs/apis/library_index.html#packs](../../../docs/apis/library_index.html#packs)
 
 
 Loading

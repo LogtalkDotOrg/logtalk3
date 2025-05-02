@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Logtalk user folder setup script
-##   Last updated on March 24, 2025
+##   Last updated on May 2, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -158,7 +158,6 @@ ln -sf "$LOGTALKHOME"/adapters "$LOGTALKUSER"/adapters
 ln -sf "$LOGTALKHOME"/coding "$LOGTALKUSER"/coding
 ln -sf "$LOGTALKHOME"/docs "$LOGTALKUSER"/docs
 ln -sf "$LOGTALKHOME"/integration "$LOGTALKUSER"/integration
-ln -sf "$LOGTALKHOME"/manuals "$LOGTALKUSER"/manuals
 ln -sf "$LOGTALKHOME"/paths "$LOGTALKUSER"/paths
 ln -sf "$LOGTALKHOME"/scripts "$LOGTALKUSER"/scripts
 ln -sf "$LOGTALKHOME"/tools/diagrams/lgt2svg.sh "$LOGTALKUSER"/tools/diagrams/lgt2svg

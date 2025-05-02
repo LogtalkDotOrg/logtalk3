@@ -113,8 +113,8 @@ Brief description of each directory and file in this folder:
 - `logtalk_entity_to_pdf_us.xsl`  
 	XSLT files to generate PDF files from the XML files (formatted either
 	for A4 paper or US Letter paper) using XSL Formatting Objects. Tested
-	with the XSL-FO processors RenderX 4.4 (<http://www.renderx.com/>) and
-	Apache FOP 0.94 (<http://xmlgraphics.apache.org/fop/>).
+	with the XSL-FO processors RenderX 4.4 (<https://www.renderx.com/>) and
+	Apache FOP 0.94 (<https://xmlgraphics.apache.org/fop/>).
 
 	The `logtalk_entity_to_pdf.xsl` file defines a parameter for the paper
 	format (either A4 or US Letter). The files `logtalk_entity_to_pdf_a4.xsl`
@@ -148,8 +148,8 @@ Brief description of each directory and file in this folder:
 	Sample scripts to batch convert XML files to PDF files
 
 	Supported XSL-FO processors:  
-		* [Apache FOP processor](http://xmlgraphics.apache.org/fop/) (tested with version 0.94)  
-		* [RenderX XEP processor](http://www.renderx.com/) (tested with version 3.8.1)  
+		* [Apache FOP processor](https://xmlgraphics.apache.org/fop/) (tested with version 0.94)  
+		* [RenderX XEP processor](https://www.renderx.com/) (tested with version 3.8.1)  
 
 	FOP 2.x is also supported but requires generating the XML documentation
 	files using the option `xml_spec(xsd)` or `xml_spec_reference(standalone)`.

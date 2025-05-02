@@ -28,7 +28,7 @@ imperative languages.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#loops](../../docs/library_index.html#loops)
+Open the [../../apis/library_index.html#loops](../../apis/library_index.html#loops)
 link in a web browser.
 
 

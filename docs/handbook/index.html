@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Logtalk Handbook &mdash; The Logtalk Handbook v3.92.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d8553e9b"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="User Manual" href="userman/index.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.92.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../docs/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The Logtalk Handbook</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="the-logtalk-handbook">
+<h1>The Logtalk Handbook<a class="headerlink" href="#the-logtalk-handbook" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="userman/index.html">User Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="userman/declarative.html">Declarative object-oriented programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userman/features.html">Main features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/features.html#integration-of-logic-and-object-oriented-programming">Integration of logic and object-oriented programming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/features.html#integration-of-event-driven-and-object-oriented-programming">Integration of event-driven and object-oriented programming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/features.html#support-for-component-based-programming">Support for component-based programming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/features.html#support-for-both-prototype-and-class-based-systems">Support for both prototype and class-based systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/features.html#support-for-multiple-object-hierarchies">Support for multiple object hierarchies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/features.html#separation-between-interface-and-implementation">Separation between interface and implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/features.html#private-protected-and-public-inheritance">Private, protected and public inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/features.html#private-protected-and-public-object-predicates">Private, protected and public object predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/features.html#parametric-objects">Parametric objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/features.html#high-level-multi-threading-programming-support">High level multi-threading programming support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/features.html#smooth-learning-curve">Smooth learning curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/features.html#compatibility-with-most-prolog-systems-and-the-iso-standard">Compatibility with most Prolog systems and the ISO standard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/features.html#performance">Performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/features.html#logtalk-scope">Logtalk scope</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/nomenclature.html">Nomenclature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/nomenclature.html#prolog-nomenclature">Prolog nomenclature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/nomenclature.html#smalltalk-nomenclature">Smalltalk nomenclature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/nomenclature.html#c-nomenclature">C++ nomenclature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/nomenclature.html#java-nomenclature">Java nomenclature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/nomenclature.html#python-nomenclature">Python nomenclature</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/messages.html">Messages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/messages.html#operators-used-in-message-sending">Operators used in message-sending</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/messages.html#sending-a-message-to-an-object">Sending a message to an object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/messages.html#delegating-a-message-to-an-object">Delegating a message to an object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/messages.html#sending-a-message-to-self">Sending a message to <em>self</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/messages.html#broadcasting">Broadcasting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/messages.html#calling-imported-and-inherited-predicates">Calling imported and inherited predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/messages.html#message-sending-and-event-generation">Message sending and event generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/messages.html#sending-a-message-from-a-module">Sending a message from a module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/messages.html#message-sending-performance">Message sending performance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/objects.html">Objects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/objects.html#objects-prototypes-classes-and-instances">Objects, prototypes, classes, and instances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/objects.html#defining-a-new-object">Defining a new object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/objects.html#parametric-objects">Parametric objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/objects.html#finding-defined-objects">Finding defined objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/objects.html#creating-a-new-object-in-runtime">Creating a new object in runtime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/objects.html#abolishing-an-existing-object">Abolishing an existing object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/objects.html#object-directives">Object directives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/objects.html#object-relationships">Object relationships</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/objects.html#object-properties">Object properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/objects.html#built-in-objects">Built-in objects</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/protocols.html">Protocols</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/protocols.html#defining-a-new-protocol">Defining a new protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/protocols.html#finding-defined-protocols">Finding defined protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/protocols.html#creating-a-new-protocol-in-runtime">Creating a new protocol in runtime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/protocols.html#abolishing-an-existing-protocol">Abolishing an existing protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/protocols.html#protocol-directives">Protocol directives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/protocols.html#protocol-relationships">Protocol relationships</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/protocols.html#protocol-properties">Protocol properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/protocols.html#implementing-protocols">Implementing protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/protocols.html#built-in-protocols">Built-in protocols</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/categories.html">Categories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/categories.html#defining-a-new-category">Defining a new category</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/categories.html#hot-patching">Hot patching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/categories.html#finding-defined-categories">Finding defined categories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/categories.html#creating-a-new-category-in-runtime">Creating a new category in runtime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/categories.html#abolishing-an-existing-category">Abolishing an existing category</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/categories.html#category-directives">Category directives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/categories.html#category-relationships">Category relationships</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/categories.html#category-properties">Category properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/categories.html#importing-categories">Importing categories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/categories.html#calling-category-predicates">Calling category predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/categories.html#parametric-categories">Parametric categories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/categories.html#built-in-categories">Built-in categories</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/predicates.html">Predicates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/predicates.html#reserved-predicate-names">Reserved predicate names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/predicates.html#declaring-predicates">Declaring predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/predicates.html#defining-predicates">Defining predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/predicates.html#definite-clause-grammar-rules">Definite clause grammar rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/predicates.html#built-in-methods">Built-in methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/predicates.html#predicate-properties">Predicate properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/predicates.html#finding-declared-predicates">Finding declared predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/predicates.html#calling-prolog-predicates">Calling Prolog predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/predicates.html#defining-prolog-multifile-predicates">Defining Prolog multifile predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/predicates.html#asserting-and-retracting-prolog-predicates">Asserting and retracting Prolog predicates</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/inheritance.html">Inheritance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/inheritance.html#protocol-inheritance">Protocol inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/inheritance.html#implementation-inheritance">Implementation inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/inheritance.html#public-protected-and-private-inheritance">Public, protected, and private inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/inheritance.html#multiple-inheritance">Multiple inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/inheritance.html#composition-versus-multiple-inheritance">Composition versus multiple inheritance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/events.html">Event-driven programming</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/events.html#definitions">Definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/events.html#event-generation">Event generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/events.html#communicating-events-to-monitors">Communicating events to monitors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/events.html#performance-concerns">Performance concerns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/events.html#monitor-semantics">Monitor semantics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/events.html#activation-order-of-monitors">Activation order of monitors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/events.html#event-handling">Event handling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/threads.html">Multi-threading programming</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/threads.html#enabling-multi-threading-support">Enabling multi-threading support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/threads.html#enabling-objects-to-make-multi-threading-calls">Enabling objects to make multi-threading calls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/threads.html#multi-threading-built-in-predicates">Multi-threading built-in predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/threads.html#one-way-asynchronous-calls">One-way asynchronous calls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/threads.html#asynchronous-calls-and-synchronized-predicates">Asynchronous calls and synchronized predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/threads.html#synchronizing-threads-through-notifications">Synchronizing threads through notifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/threads.html#threaded-engines">Threaded engines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/threads.html#multi-threading-performance">Multi-threading performance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/errors.html">Error handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/errors.html#raising-exceptions">Raising Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/errors.html#type-checking">Type-checking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/errors.html#expected-terms">Expected terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/errors.html#compiler-warnings-and-errors">Compiler warnings and errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/errors.html#runtime-errors">Runtime errors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/reflection.html">Reflection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/reflection.html#structural-reflection">Structural reflection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/reflection.html#behavioral-reflection">Behavioral reflection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/programming.html">Writing and running applications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/programming.html#starting-logtalk">Starting Logtalk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/programming.html#running-parallel-logtalk-processes">Running parallel Logtalk processes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/programming.html#source-files">Source files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/programming.html#multi-pass-compiler">Multi-pass compiler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/programming.html#compiling-and-loading-your-applications">Compiling and loading your applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/programming.html#compiler-errors-warnings-and-comments">Compiler errors, warnings, and comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/programming.html#loader-files">Loader files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/programming.html#libraries-of-source-files">Libraries of source files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/programming.html#settings-files">Settings files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/programming.html#compiler-linter">Compiler linter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/programming.html#compiler-flags">Compiler flags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/programming.html#reloading-source-files">Reloading source files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/programming.html#batch-processing">Batch processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/programming.html#optimizing-performance">Optimizing performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/programming.html#portable-applications">Portable applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/programming.html#conditional-compilation">Conditional compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/programming.html#avoiding-common-errors">Avoiding common errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/programming.html#coding-style-guidelines">Coding style guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/printing.html">Printing messages and asking questions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/printing.html#printing-messages">Printing messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/printing.html#message-tokenization">Message tokenization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/printing.html#meta-messages">Meta-messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/printing.html#defining-message-prefixes-and-output-streams">Defining message prefixes and output streams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/printing.html#defining-message-prefixes-and-output-files">Defining message prefixes and output files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/printing.html#intercepting-messages">Intercepting messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/printing.html#asking-questions">Asking questions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/printing.html#intercepting-questions">Intercepting questions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/expansion.html">Term and goal expansion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/expansion.html#defining-expansions">Defining expansions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/expansion.html#expanding-grammar-rules">Expanding grammar rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/expansion.html#bypassing-expansions">Bypassing expansions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/expansion.html#hook-objects">Hook objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/expansion.html#virtual-source-file-terms-and-loading-context">Virtual source file terms and loading context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/expansion.html#default-compiler-expansion-workflow">Default compiler expansion workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/expansion.html#user-defined-expansion-workflows">User defined expansion workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/expansion.html#using-prolog-defined-expansions">Using Prolog defined expansions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/expansion.html#debugging-expansions">Debugging expansions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/documenting.html">Documenting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/documenting.html#entity-documenting-directives">Entity documenting directives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/documenting.html#predicate-documenting-directives">Predicate documenting directives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/documenting.html#describing-predicates">Describing predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/documenting.html#documenting-predicate-exceptions">Documenting predicate exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/documenting.html#processing-and-viewing-documenting-files">Processing and viewing documenting files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/documenting.html#inline-formatting-in-comments-text">Inline formatting in comments text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/documenting.html#diagrams">Diagrams</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/debugging.html">Debugging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#compiling-source-files-in-debug-mode">Compiling source files in debug mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#procedure-box-model">Procedure box model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#activating-the-debugger">Activating the debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#defining-breakpoints">Defining breakpoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#defining-log-points">Defining log points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#tracing-program-execution">Tracing program execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#debugging-using-breakpoints">Debugging using breakpoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#debugging-commands">Debugging commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#customizing-term-writing">Customizing term writing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#context-switching-calls">Context-switching calls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#debugging-messages">Debugging messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#using-the-term-expansion-mechanism-for-debugging">Using the term-expansion mechanism for debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#ports-profiling">Ports profiling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#debug-and-trace-events">Debug and trace events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#source-level-debugger">Source-level debugger</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/performance.html">Performance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/performance.html#source-code-compilation-modes">Source code compilation modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/performance.html#local-predicate-calls">Local predicate calls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/performance.html#calls-to-imported-or-inherited-predicates">Calls to imported or inherited predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/performance.html#calls-to-module-predicates">Calls to module predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/performance.html#messages">Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/performance.html#automatic-expansion-of-built-in-meta-predicates">Automatic expansion of built-in meta-predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/performance.html#inlining">Inlining</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/performance.html#generated-code-simplification-and-optimizations">Generated code simplification and optimizations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/performance.html#size-of-the-generated-code">Size of the generated code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/performance.html#circular-references">Circular references</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/performance.html#debug-mode-overhead">Debug mode overhead</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/performance.html#other-considerations">Other considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/installing.html">Installing Logtalk</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/installing.html#hardware-and-software-requirements">Hardware and software requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/installing.html#logtalk-installers">Logtalk installers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/installing.html#source-distribution">Source distribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/installing.html#distribution-overview">Distribution overview</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="userman/migration.html">Prolog integration and migration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userman/migration.html#source-files-with-both-prolog-code-and-logtalk-code">Source files with both Prolog code and Logtalk code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/migration.html#encapsulating-plain-prolog-code-in-objects">Encapsulating plain Prolog code in objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/migration.html#converting-prolog-modules-into-objects">Converting Prolog modules into objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/migration.html#compiling-prolog-modules-as-objects">Compiling Prolog modules as objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/migration.html#dealing-with-proprietary-prolog-directives-and-predicates">Dealing with proprietary Prolog directives and predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/migration.html#calling-prolog-module-predicates">Calling Prolog module predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/migration.html#loading-converted-prolog-applications">Loading converted Prolog applications</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="refman/index.html">Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="refman/grammar.html">Grammar</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#entities">Entities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#object-definition">Object definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#category-definition">Category definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#protocol-definition">Protocol definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#entity-relations">Entity relations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#entity-identifiers">Entity identifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#source-files">Source files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#source-file-names">Source file names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#terms">Terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#directives">Directives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#clauses-and-goals">Clauses and goals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#lambda-expressions">Lambda expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#entity-properties">Entity properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#predicate-properties">Predicate properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#compiler-flags">Compiler flags</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="refman/control/index.html">Control constructs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="refman/control/message_sending.html">Message sending</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/control/message_delegation.html">Message delegation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/control/super_calls.html">Calling imported and inherited predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/control/call_in_this.html">Calling predicates in <em>this</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/control/external_calls.html">Calling external predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/control/context_switching_calls.html">Context switching calls</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="refman/directives/index.html">Directives</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="refman/directives/source_file_directives.html">Source file directives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/directives/conditional_compilation_directives.html">Conditional compilation directives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/directives/entity_directives.html">Entity directives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/directives/predicate_directives.html">Predicate directives</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="refman/predicates/index.html">Built-in predicates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="refman/predicates/enumerating_entity_predicates.html">Enumerating objects, categories and protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/predicates/enumerating_entity_property_predicates.html">Enumerating objects, categories and protocols properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/predicates/creating_entity_predicates.html">Creating new objects, categories and protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/predicates/abolishing_entity_predicates.html">Abolishing objects, categories and protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/predicates/entity_relation_predicates.html">Objects, categories, and protocols relations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/predicates/event_handling_predicates.html">Event handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/predicates/multi_threading_predicates.html">Multi-threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/predicates/engine_predicates.html">Multi-threading engines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/predicates/compiling_predicates.html">Compiling and loading source files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/predicates/flag_predicates.html">Flags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/predicates/linter_predicates.html">Linter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="refman/methods/index.html">Built-in methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="refman/methods/logic_and_control_methods.html">Logic and control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/methods/context_methods.html">Execution context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/methods/reflection_methods.html">Reflection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/methods/database_methods.html">Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/methods/meta_call_methods.html">Meta-calls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/methods/error_handling_methods.html">Error handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/methods/solution_methods.html">All solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/methods/event_methods.html">Event handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/methods/forwarding_methods.html">Message forwarding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/methods/dcg_methods.html">Definite clause grammar rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/methods/expansion_methods.html">Term and goal expansion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/methods/coinduction_methods.html">Coinduction hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/methods/printing_methods.html">Message printing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/methods/asking_methods.html">Question asking</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/lists.html">List predicates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/lists.html#defining-a-list-object">Defining a list object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/lists.html#defining-a-list-protocol">Defining a list protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/lists.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/attributes.html">Dynamic object attributes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/attributes.html#defining-a-category">Defining a category</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/attributes.html#importing-the-category">Importing the category</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/attributes.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/reflection.html">A reflective class-based system</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/reflection.html#defining-the-base-classes">Defining the base classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/reflection.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/profiling.html">Profiling programs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/profiling.html#messages-as-events">Messages as events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/profiling.html#profilers-as-monitors">Profilers as monitors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/profiling.html#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq/index.html">FAQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq/general.html">General</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq/general.html#why-are-all-versions-of-logtalk-numbered-2-x-or-3-x">Why are all versions of Logtalk numbered 2.x or 3.x?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/general.html#why-do-i-need-a-prolog-compiler-to-use-logtalk">Why do I need a Prolog compiler to use Logtalk?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/general.html#is-the-logtalk-implementation-based-on-prolog-modules">Is the Logtalk implementation based on Prolog modules?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/general.html#does-the-logtalk-implementation-use-term-expansion">Does the Logtalk implementation use term-expansion?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq/compatibility.html">Compatibility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq/compatibility.html#what-are-the-backend-prolog-compiler-requirements-to-run-logtalk">What are the backend Prolog compiler requirements to run Logtalk?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/compatibility.html#can-i-use-constraint-based-packages-with-logtalk">Can I use constraint-based packages with Logtalk?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/compatibility.html#can-i-use-logtalk-objects-and-prolog-modules-at-the-same-time">Can I use Logtalk objects and Prolog modules at the same time?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq/installation.html">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq/installation.html#the-integration-scripts-shortcuts-are-not-working">The integration scripts/shortcuts are not working!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/installation.html#i-get-errors-when-starting-up-logtalk-after-upgrading-to-the-latest-version">I get errors when starting up Logtalk after upgrading to the latest version!</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq/portability.html">Portability</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq/portability.html#are-my-logtalk-applications-portable-across-prolog-compilers">Are my Logtalk applications portable across Prolog compilers?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/portability.html#are-my-logtalk-applications-portable-across-operating-systems">Are my Logtalk applications portable across operating systems?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq/programming.html">Programming</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq/programming.html#should-i-use-prototypes-or-classes-in-my-application">Should I use prototypes or classes in my application?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/programming.html#can-i-use-both-classes-and-prototypes-in-the-same-application">Can I use both classes and prototypes in the same application?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/programming.html#can-i-mix-classes-and-prototypes-in-the-same-hierarchy">Can I mix classes and prototypes in the same hierarchy?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/programming.html#can-i-use-a-protocol-or-a-category-with-both-prototypes-and-classes">Can I use a protocol or a category with both prototypes and classes?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/programming.html#what-support-is-provided-in-logtalk-for-defining-and-using-components">What support is provided in Logtalk for defining and using components?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/programming.html#what-support-is-provided-in-logtalk-for-reflective-programming">What support is provided in Logtalk for reflective programming?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq/troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq/troubleshooting.html#using-compiler-options-on-calls-to-the-logtalk-compiling-and-loading-predicates-does-not-work">Using compiler options on calls to the Logtalk compiling and loading predicates does not work!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/troubleshooting.html#gecko-based-browsers-e-g-firefox-show-non-rendered-html-entities-when-browsing-xml-documenting-files">Gecko-based browsers (e.g., Firefox) show non-rendered HTML entities when browsing XML documenting files!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/troubleshooting.html#compiling-a-source-file-results-in-errors-or-warnings-but-the-logtalk-compiler-reports-a-successful-compilation-with-zero-errors-and-zero-warnings">Compiling a source file results in errors or warnings but the Logtalk compiler reports a successful compilation with zero errors and zero warnings!</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq/usability.html">Usability</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq/usability.html#is-there-a-shortcut-for-compiling-and-loading-source-files">Is there a shortcut for compiling and loading source files?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/usability.html#is-there-an-equivalent-directive-to-the-ensure-loaded-1-prolog-directive">Is there an equivalent directive to the <code class="docutils literal notranslate"><span class="pre">ensure_loaded/1</span></code> Prolog directive?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/usability.html#are-there-shortcuts-for-the-make-functionality">Are there shortcuts for the make functionality?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq/deployment.html">Deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq/deployment.html#can-i-create-standalone-applications-with-logtalk">Can I create standalone applications with Logtalk?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq/performance.html">Performance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq/performance.html#is-logtalk-implemented-as-a-meta-interpreter">Is Logtalk implemented as a meta-interpreter?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/performance.html#what-kind-of-code-logtalk-generates-when-compiling-objects-dynamic-code-static-code">What kind of code Logtalk generates when compiling objects? Dynamic code? Static code?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/performance.html#how-about-message-sending-performance-does-logtalk-use-static-binding-or-dynamic-binding">How about message-sending performance? Does Logtalk use static binding or dynamic binding?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/performance.html#which-prolog-dependent-factors-are-most-crucial-for-good-logtalk-performance">Which Prolog-dependent factors are most crucial for good Logtalk performance?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/performance.html#how-does-logtalk-performance-compare-with-plain-prolog-and-with-prolog-modules">How does Logtalk performance compare with plain Prolog and with Prolog modules?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq/licensing.html">Licensing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq/licensing.html#what-s-the-logtalk-distribution-license">What’s the Logtalk distribution license?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/licensing.html#can-logtalk-be-used-in-commercial-applications">Can Logtalk be used in commercial applications?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq/licensing.html#what-s-the-final-license-for-a-combination-of-logtalk-with-a-prolog-compiler">What’s the final license for a combination of Logtalk with a Prolog compiler?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq/support.html">Support</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq/support.html#are-there-professional-consulting-training-and-supporting-services">Are there professional consulting, training and supporting services?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="devtools/index.html">Developer Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="devtools/overview.html">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/overview.html#loading-the-developer-tools">Loading the developer tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/overview.html#tools-documentation">Tools documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/overview.html#tools-common-flags">Tools common flags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/overview.html#tools-requirements">Tools requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/asdf.html"><code class="docutils literal notranslate"><span class="pre">asdf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/assertions.html"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/assertions.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/assertions.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/assertions.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/assertions.html#adding-assertions-to-your-source-code">Adding assertions to your source code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/assertions.html#automatically-adding-file-and-line-context-information-to-assertions">Automatically adding file and line context information to assertions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/assertions.html#suppressing-assertion-calls-from-source-code">Suppressing assertion calls from source code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/assertions.html#redirecting-assertion-failure-messages">Redirecting assertion failure messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/assertions.html#converting-assertion-failures-into-errors">Converting assertion failures into errors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/code_metrics.html"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#available-metrics">Available metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#coupling-metrics">Coupling metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#halstead-metric">Halstead metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#upn-metric">UPN metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#cyclomatic-complexity-metric">Cyclomatic complexity metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#excluding-code-from-analysis">Excluding code from analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#defining-new-metrics">Defining new metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#third-party-tools">Third-party tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#applying-metrics-to-prolog-modules">Applying metrics to Prolog modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#applying-metrics-to-plain-prolog-code">Applying metrics to plain Prolog code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/dead_code_scanner.html"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/dead_code_scanner.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/dead_code_scanner.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/dead_code_scanner.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/dead_code_scanner.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/dead_code_scanner.html#excluding-code-from-analysis">Excluding code from analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/dead_code_scanner.html#integration-with-the-make-tool">Integration with the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/dead_code_scanner.html#caveats">Caveats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/dead_code_scanner.html#scanning-prolog-modules">Scanning Prolog modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/dead_code_scanner.html#scanning-plain-prolog-files">Scanning plain Prolog files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/debug_messages.html"><code class="docutils literal notranslate"><span class="pre">debug_messages</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/debug_messages.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/debug_messages.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/debug_messages.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/debug_messages.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/debugger.html"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/debugger.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/debugger.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/debugger.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/debugger.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/debugger.html#alternative-debugger-tools">Alternative debugger tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/debugger.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/diagrams.html"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/diagrams.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/diagrams.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/diagrams.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/diagrams.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/diagrams.html#supported-diagrams">Supported diagrams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/diagrams.html#graph-elements">Graph elements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/diagrams.html#supported-graph-languages">Supported graph languages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/diagrams.html#customization">Customization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/diagrams.html#linking-diagrams">Linking diagrams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/diagrams.html#creating-diagrams-for-prolog-module-applications">Creating diagrams for Prolog module applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/diagrams.html#creating-diagrams-for-plain-prolog-files">Creating diagrams for plain Prolog files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/diagrams.html#other-notes">Other notes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/doclet.html"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/doclet.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/doclet.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/doclet.html#automating-running-doclets">Automating running doclets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/doclet.html#integration-with-the-make-tool">Integration with the make tool</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/help.html"><code class="docutils literal notranslate"><span class="pre">help</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/help.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/help.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/help.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/help.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/help.html#supported-operating-systems">Supported operating-systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/help.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/help.html#experimental-features">Experimental features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/help.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/issue_creator.html"><code class="docutils literal notranslate"><span class="pre">issue_creator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/issue_creator.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/issue_creator.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/issue_creator.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/issue_creator.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/lgtdoc.html"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtdoc.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtdoc.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtdoc.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtdoc.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtdoc.html#documenting-source-code">Documenting source code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtdoc.html#generating-documentation">Generating documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtdoc.html#documentation-linter-checks">Documentation linter checks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/lgtunit.html"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#main-files">Main files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#writing-and-running-tests">Writing and running tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#automating-running-tests">Automating running tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#parametric-test-objects">Parametric test objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#test-dialects">Test dialects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#user-defined-test-dialects">User-defined test dialects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#quickcheck">QuickCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#skipping-tests">Skipping tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#selecting-tests">Selecting tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#checking-test-goal-results">Checking test goal results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#testing-local-predicates">Testing local predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#testing-non-deterministic-predicates">Testing non-deterministic predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#testing-generators">Testing generators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#testing-input-output-predicates">Testing input/output predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#suppressing-tested-predicates-output">Suppressing tested predicates output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#tests-with-timeout-limits">Tests with timeout limits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#setup-and-cleanup-goals">Setup and cleanup goals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#test-annotations">Test annotations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#test-execution-times-and-memory-usage">Test execution times and memory usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#working-with-test-data-files">Working with test data files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#flaky-tests">Flaky tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#mocking">Mocking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#debugging-messages-in-tests">Debugging messages in tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#debugging-failed-tests">Debugging failed tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#code-coverage">Code coverage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#utility-predicates">Utility predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#exporting-test-results-in-xunit-xml-format">Exporting test results in xUnit XML format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#exporting-test-results-in-the-tap-output-format">Exporting test results in the TAP output format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#generating-allure-reports">Generating Allure reports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#exporting-code-coverage-results-in-xml-format">Exporting code coverage results in XML format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#automatically-creating-bug-reports-at-issue-trackers">Automatically creating bug reports at issue trackers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#minimizing-test-results-output">Minimizing test results output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#help-with-warnings">Help with warnings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/linter.html"><code class="docutils literal notranslate"><span class="pre">linter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/linter.html#main-linter-checks">Main linter checks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/linter.html#help-on-linter-warnings">Help on linter warnings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/linter.html#extending-the-linter">Extending the linter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/linter.html#linting-prolog-modules">Linting Prolog modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/linter.html#linting-plain-prolog-files">Linting plain Prolog files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/make.html"><code class="docutils literal notranslate"><span class="pre">make</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/make.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/make.html#help-with-warnings">Help with warnings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/packs.html"><code class="docutils literal notranslate"><span class="pre">packs</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#registries-and-packs-storage">Registries and packs storage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#virtual-environments">Virtual environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#registry-specification">Registry specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#registry-handling">Registry handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#registry-development">Registry development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#pack-specification">Pack specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#encrypted-packs">Encrypted packs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#signed-packs">Signed packs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#pack-urls-and-single-sign-on">Pack URLs and Single Sign-On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#multiple-pack-versions">Multiple pack versions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#pack-dependencies">Pack dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#pack-portability">Pack portability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#pack-development">Pack development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#pack-handling">Pack handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#pack-documentation">Pack documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#pinning-registries-and-packs">Pinning registries and packs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#testing-packs">Testing packs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#security-considerations">Security considerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#best-practices">Best practices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#installing-prolog-packs">Installing Prolog packs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#help-with-warnings">Help with warnings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/packs.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/ports_profiler.html"><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/ports_profiler.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/ports_profiler.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/ports_profiler.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/ports_profiler.html#compiling-source-files-for-port-profiling">Compiling source files for port profiling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/ports_profiler.html#generating-profiling-data">Generating profiling data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/ports_profiler.html#printing-profiling-data-reports">Printing profiling data reports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/ports_profiler.html#interpreting-profiling-data">Interpreting profiling data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/ports_profiler.html#profiling-prolog-modules">Profiling Prolog modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/ports_profiler.html#profiling-plain-prolog-code">Profiling plain Prolog code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/ports_profiler.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/profiler.html"><code class="docutils literal notranslate"><span class="pre">profiler</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/profiler.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/profiler.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/profiler.html#supported-backend-prolog-compilers">Supported backend Prolog compilers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/profiler.html#compiling-source-code-for-profiling">Compiling source code for profiling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/tutor.html"><code class="docutils literal notranslate"><span class="pre">tutor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/tutor.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/tutor.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/tutor.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devtools/wrapper.html"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devtools/wrapper.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/wrapper.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/wrapper.html#workflows">Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/wrapper.html#customization">Customization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/wrapper.html#current-limitations">Current limitations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libraries/index.html">Libraries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="libraries/overview.html">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/overview.html#library-documentation">Library documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/overview.html#loading-libraries">Loading libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/overview.html#testing-libraries">Testing libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/overview.html#credits">Credits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/overview.html#other-notes">Other notes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/arbitrary.html"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#pre-defined-types">Pre-defined types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#defining-new-generators-and-shrinkers">Defining new generators and shrinkers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#scoped-generators-and-shrinkers">Scoped generators and shrinkers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#reproducing-sequences-of-arbitrary-terms">Reproducing sequences of arbitrary terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#default-size-of-generated-terms">Default size of generated terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/assignvars.html"><code class="docutils literal notranslate"><span class="pre">assignvars</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/assignvars.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/assignvars.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/assignvars.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/base64.html"><code class="docutils literal notranslate"><span class="pre">base64</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/base64.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/base64.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/base64.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/base64.html#encoding">Encoding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/base64.html#decoding">Decoding</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/basic_types.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/basic_types.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/basic_types.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/cbor.html#representation">Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/cbor.html#encoding">Encoding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/cbor.html#decoding">Decoding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/cbor.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/cbor.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/cbor.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/core.html"><code class="docutils literal notranslate"><span class="pre">core</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/core.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/core.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/core.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/coroutining.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/coroutining.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/coroutining.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/coroutining.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/csv.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/csv.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/csv.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/csv.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/dates.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/dates.html#loading">Loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/dependents.html"><code class="docutils literal notranslate"><span class="pre">dependents</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/dependents.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/dependents.html#loading">Loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/dictionaries.html"><code class="docutils literal notranslate"><span class="pre">dictionaries</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/dictionaries.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/dictionaries.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/dictionaries.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/dictionaries.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/dictionaries.html#credits">Credits</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/dif.html"><code class="docutils literal notranslate"><span class="pre">dif</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/dif.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/dif.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/dif.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/dif.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/edcg.html"><code class="docutils literal notranslate"><span class="pre">edcg</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/edcg.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/edcg.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/edcg.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/edcg.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/edcg.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/edcg.html#syntax">Syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/edcg.html#declaration-of-predicates">Declaration of Predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/edcg.html#declaration-of-accumulators">Declaration of Accumulators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/edcg.html#declaration-of-passed-arguments">Declaration of Passed Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/edcg.html#additional-documentation">Additional documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/events.html"><code class="docutils literal notranslate"><span class="pre">events</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/events.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/events.html#loading">Loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/expand_library_alias_paths.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/expand_library_alias_paths.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/expand_library_alias_paths.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/expecteds.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/expecteds.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/expecteds.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/expecteds.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/expecteds.html#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/format.html"><code class="docutils literal notranslate"><span class="pre">format</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/format.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/format.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/format.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/format.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/format.html#portability">Portability</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/genint.html"><code class="docutils literal notranslate"><span class="pre">genint</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/genint.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/genint.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/genint.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/genint.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/gensym.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/gensym.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/gensym.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/gensym.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/git.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/git.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/git.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/git.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/grammars.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/grammars.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/grammars.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/grammars.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/heaps.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/heaps.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/heaps.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/heaps.html#credits">Credits</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/hierarchies.html"><code class="docutils literal notranslate"><span class="pre">hierarchies</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/hierarchies.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/hierarchies.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/hierarchies.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/hook_flows.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/hook_flows.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/hook_flows.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/hook_flows.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/hook_objects.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/hook_objects.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/hook_objects.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/hook_objects.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/html.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/html.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/html.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/html.html#generating-a-html-document">Generating a HTML document</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/html.html#generating-a-html-fragment">Generating a HTML fragment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/html.html#working-with-callbacks-to-generate-content">Working with callbacks to generate content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/html.html#working-with-custom-elements">Working with custom elements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/ids.html"><code class="docutils literal notranslate"><span class="pre">ids</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/ids.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/ids.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/ids.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/ids.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/intervals.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/intervals.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/intervals.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/java.html"><code class="docutils literal notranslate"><span class="pre">java</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/java.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/java.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/java.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/java.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/java.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/json.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/json.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/json.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/json.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/json.html#representation">Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/json.html#encoding">Encoding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/json.html#decoding">Decoding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/json.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/listing.html"><code class="docutils literal notranslate"><span class="pre">listing</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/listing.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/listing.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/listing.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/listing.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/logging.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/logging.html#loading">Loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/loops.html"><code class="docutils literal notranslate"><span class="pre">loops</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/loops.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/loops.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/loops.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/loops.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/meta.html"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/meta.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/meta.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/meta.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/meta.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/meta_compiler.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/meta_compiler.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/meta_compiler.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/meta_compiler.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/meta_compiler.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/mutations.html"><code class="docutils literal notranslate"><span class="pre">mutations</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/mutations.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/mutations.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/mutations.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/mutations.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/nested_dictionaries.html"><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/nested_dictionaries.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/nested_dictionaries.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/nested_dictionaries.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/nested_dictionaries.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/nested_dictionaries.html#curly-term-representation">Curly term representation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/optionals.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/optionals.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/optionals.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/optionals.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/optionals.html#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/options.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/options.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/options.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/options.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/os.html"><code class="docutils literal notranslate"><span class="pre">os</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/os.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/os.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/os.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/os.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/queues.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/queues.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/queues.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/queues.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/random.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/random.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/random.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/random.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/random.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/reader.html"><code class="docutils literal notranslate"><span class="pre">reader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/reader.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/reader.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/reader.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/recorded_database.html"><code class="docutils literal notranslate"><span class="pre">recorded_database</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/recorded_database.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/recorded_database.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/recorded_database.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/recorded_database.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/recorded_database.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/redis.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/redis.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/redis.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/redis.html#credits">Credits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/redis.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/sets.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/sets.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/sets.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/sets.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/sets.html#credits">Credits</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/statistics.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/statistics.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/statistics.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/statistics.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/term_io.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/term_io.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/term_io.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/timeout.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/timeout.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/timeout.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/timeout.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/tsv.html"><code class="docutils literal notranslate"><span class="pre">tsv</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/tsv.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/tsv.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/tsv.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/tsv.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/types.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/types.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/types.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/types.html#type-checking">Type-checking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/types.html#defining-new-types">Defining new types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/types.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/ulid.html"><code class="docutils literal notranslate"><span class="pre">ulid</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/ulid.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/ulid.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/ulid.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/ulid.html#generating-ulids">Generating ULIDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/ulid.html#type-checking-ulids">Type-checking ULIDs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/unicode_data.html"><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/unicode_data.html#authors">Authors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/unicode_data.html#license">License</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/unicode_data.html#website">Website</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/unicode_data.html#description">Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/unicode_data.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/unicode_data.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/unicode_data.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/unicode_data.html#acknowledgements">Acknowledgements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/unicode_data.html#files-and-api-summary">Files and API Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/union_find.html"><code class="docutils literal notranslate"><span class="pre">union_find</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/union_find.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/union_find.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/union_find.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/union_find.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/uuid.html"><code class="docutils literal notranslate"><span class="pre">uuid</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/uuid.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/uuid.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/uuid.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/uuid.html#generating-version-1-uuids">Generating version 1 UUIDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/uuid.html#generating-version-4-uuids">Generating version 4 UUIDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/uuid.html#generating-the-null-uuid">Generating the null UUID</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/zippers.html"><code class="docutils literal notranslate"><span class="pre">zippers</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/zippers.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/zippers.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/zippers.html#testing">Testing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ports/index.html">Ports</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ports/fcube.html"><code class="docutils literal notranslate"><span class="pre">fcube</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ports/fcube.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ports/fcube.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ports/fcube.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ports/metagol.html"><code class="docutils literal notranslate"><span class="pre">metagol</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ports/metagol.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ports/metagol.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ports/metagol.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ports/toychr.html"><code class="docutils literal notranslate"><span class="pre">toychr</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ports/toychr.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ports/toychr.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ports/toychr.html#testing">Testing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributions/index.html">Contributions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributions/flags.html"><code class="docutils literal notranslate"><span class="pre">flags</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributions/flags.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributions/flags.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributions/flags.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contributions/iso8601.html"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributions/iso8601.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributions/iso8601.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributions/iso8601.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contributions/pddl_parser.html"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributions/pddl_parser.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributions/pddl_parser.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributions/pddl_parser.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contributions/verdi_neruda.html"><code class="docutils literal notranslate"><span class="pre">verdi_neruda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributions/xml_parser.html"><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributions/xml_parser.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributions/xml_parser.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributions/xml_parser.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributions/xml_parser.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="userman/index.html" class="btn btn-neutral float-right" title="User Manual" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2025, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -36,7 +36,7 @@ See the API documentation for a full list of the types defined by default.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#types](../../docs/library_index.html#types)
+Open the [../../apis/library_index.html#types](../../apis/library_index.html#types)
 link in a web browser.
 
 

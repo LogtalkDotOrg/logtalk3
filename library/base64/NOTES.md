@@ -30,7 +30,7 @@ https://www.rfc-editor.org/rfc/rfc4648
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#base64](../../docs/library_index.html#base64)
+Open the [../../apis/library_index.html#base64](../../apis/library_index.html#base64)
 link in a web browser.
 
 

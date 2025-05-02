@@ -4,7 +4,7 @@
 ##
 ##   Logtalk script for updating the HTML versions of man pages
 ##
-##   Last updated on March 23, 2025
+##   Last updated on May 2, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -62,7 +62,7 @@ if ! [ -x "$(command -v roffit)" ] ; then
 	exit 1
 fi
 
-cd ../man/man1 || exit 1
+cd ../docs/man/man1 || exit 1
 for file in *.1; do
 	roffit < "$file" > "${file%.*}".html
 done

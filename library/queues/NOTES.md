@@ -28,7 +28,7 @@ as an opaque term and only accessed using the library predicates.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#queues](../../docs/library_index.html#queues)
+Open the [../../apis/library_index.html#queues](../../apis/library_index.html#queues)
 link in a web browser.
 
 

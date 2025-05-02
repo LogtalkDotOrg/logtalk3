@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Performance &mdash; The Logtalk Handbook v3.92.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=d8553e9b"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installing Logtalk" href="installing.html" />
+    <link rel="prev" title="Debugging" href="debugging.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.92.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="declarative.html">Declarative object-oriented programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html">Main features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nomenclature.html">Nomenclature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messages.html">Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html">Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocols.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categories.html">Categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predicates.html">Predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inheritance.html">Inheritance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">Event-driven programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html">Multi-threading programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">Error handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reflection.html">Reflection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html">Writing and running applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="printing.html">Printing messages and asking questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expansion.html">Term and goal expansion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documenting.html">Documenting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Performance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#source-code-compilation-modes">Source code compilation modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#local-predicate-calls">Local predicate calls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calls-to-imported-or-inherited-predicates">Calls to imported or inherited predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calls-to-module-predicates">Calls to module predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#messages">Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-expansion-of-built-in-meta-predicates">Automatic expansion of built-in meta-predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inlining">Inlining</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generated-code-simplification-and-optimizations">Generated code simplification and optimizations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#size-of-the-generated-code">Size of the generated code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular-references">Circular references</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debug-mode-overhead">Debug mode overhead</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-considerations">Other considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html">Installing Logtalk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Prolog integration and migration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../docs/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">User Manual</a></li>
+      <li class="breadcrumb-item active">Performance</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/userman/performance.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="performance">
+<span id="performance-performance"></span><h1>Performance<a class="headerlink" href="#performance" title="Link to this heading"></a></h1>
+<p>Logtalk is implemented as a <em>trans-compiler</em> to Prolog. When compiling
+predicates, it preserves in the generated Prolog code all cases of
+first-argument indexing and tail-recursion. In practice, this means that
+if you know how to write efficient Prolog predicates, you already know
+the basics of how to write efficient Logtalk predicates.</p>
+<p>The Logtalk compiler appends a single argument to the compiled form of
+all entity predicate clauses. This hidden argument is used to pass the
+<a class="reference internal" href="../glossary.html#term-predicate-execution-context"><span class="xref std std-term">execution-context</span></a> when proving a
+query. In the common case where a predicate makes no calls to the
+<a class="reference internal" href="../refman/methods/context_methods.html#context-methods"><span class="std std-ref">execution-context predicates</span></a> and
+<a class="reference internal" href="../refman/control/message_sending.html#message-sending"><span class="std std-ref">message-sending control constructs</span></a> and
+is neither a meta-predicate nor a coinductive predicate, the
+execution-context is simply passed between goals. In this case, with most
+backend Prolog virtual machines, the cost of this extra argument is null
+or negligible. When the execution-context needs to be accessed (e.g. to
+fetch the value of <a class="reference internal" href="../glossary.html#term-self"><span class="xref std std-term">self</span></a> for a <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a> call)
+there may be a small inherent overhead due to the access to the individual
+arguments of the compound term used to represent the execution-context.</p>
+<section id="source-code-compilation-modes">
+<h2>Source code compilation modes<a class="headerlink" href="#source-code-compilation-modes" title="Link to this heading"></a></h2>
+<p>Source code can be compiled in <em>optimal</em>, <em>normal</em>, or <em>debug</em> mode,
+depending on the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> and
+<a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> compiler flags. Optimal mode is used when
+deploying an application, while normal and debug modes are used when
+developing an application. Compiling code in optimal mode enables
+several optimizations, notably the use of <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> whenever
+enough information is available at compile-time. In debug mode, most
+optimizations are turned off, and the code is instrumented to generate
+<a class="reference internal" href="debugging.html#debugging-events"><span class="std std-ref">debug events</span></a> that enable developer tools such
+as the <a class="reference internal" href="../devtools/debugger.html"><span class="doc">command-line debugger</span></a> and the
+<a class="reference internal" href="../devtools/ports_profiler.html"><span class="doc">ports profiler</span></a>.</p>
+</section>
+<section id="local-predicate-calls">
+<h2>Local predicate calls<a class="headerlink" href="#local-predicate-calls" title="Link to this heading"></a></h2>
+<p>Local calls to object (or category) predicates have zero overhead in
+terms of the number of inferences, as expected, compared with local Prolog
+calls.</p>
+</section>
+<section id="calls-to-imported-or-inherited-predicates">
+<h2>Calls to imported or inherited predicates<a class="headerlink" href="#calls-to-imported-or-inherited-predicates" title="Link to this heading"></a></h2>
+<p>Assuming the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag is turned on and a
+static predicate, <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a> calls have zero overhead
+in terms of number of inferences.</p>
+</section>
+<section id="calls-to-module-predicates">
+<h2>Calls to module predicates<a class="headerlink" href="#calls-to-module-predicates" title="Link to this heading"></a></h2>
+<p>Local calls from an object (or category) to a module predicate have zero
+overhead (assuming both the module and the predicate are bound at
+compile-time).</p>
+</section>
+<section id="messages">
+<h2>Messages<a class="headerlink" href="#messages" title="Link to this heading"></a></h2>
+<p>Logtalk implements <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> and <a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>
+for message-sending calls. For dynamic binding, a caching mechanism is
+used by the runtime. It’s useful to measure the performance overhead in
+<em>number of logic inferences</em> compared with plain Prolog and Prolog modules.
+Note that the number of logic inferences is a metric independent of the
+chosen backend Prolog compiler. The results for Logtalk 3.17.0 and later
+versions are:</p>
+<ul class="simple">
+<li><p>Static binding: 0</p></li>
+<li><p>Dynamic binding (object bound at compile-time): +1</p></li>
+<li><p>Dynamic binding (object bound at runtime): +2</p></li>
+</ul>
+<p>Static binding is the common case with libraries and most application
+code; it requires compiling code with the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a>
+flag turned on. Dynamic binding numbers are after the first call (i.e.
+after the generalization of the query is cached). All numbers with the
+<a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> flag set to <code class="docutils literal notranslate"><span class="pre">deny</span></code> (setting this flag to
+<code class="docutils literal notranslate"><span class="pre">allow</span></code> adds an overhead of +5 inferences to the results above; note
+that this flag can be defined on a per-object basis as needed instead
+of globally and thus minimizing the performance impact).</p>
+<p>The dynamic binding caches assume the used <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a>
+does indexing of dynamic predicates. This is a common feature of modern
+Prolog systems, but the actual details vary from system to system and may
+have an impact on dynamic binding performance.</p>
+<p>Note that messages to <em>self</em> (<a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a> calls) and
+messages to an object (<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">(::)/2</span></a> calls) from the
+top-level interpreter always use dynamic binding, as the object that
+receives the message is only known at runtime.</p>
+<p>Messages sent from Prolog modules may use static binding depending on the
+used backend Prolog compiler native support for goal-expansion. Consult
+the Prolog compiler documentation and adapter file notes for details.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Some Prolog systems provide a <code class="docutils literal notranslate"><span class="pre">time/1</span></code> predicate that also reports
+the number of inferences. But the reported numbers are often misleading
+when the predicate is called from the top-level. Besides common top-level
+bookkeeping operations (e.g., keeping track of goal history or applying
+goal-expansion) that may influence the inference counting, the Logtalk
+runtime code for a <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> top-level goal is necessarily different
+from the code generated for a <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> goal from a compiled object, as
+it requires <em>runtime</em> compilation of the goal into the same low-level
+message-sending primitive (assuming dynamic-binding is also required
+for the compiled object goal).</p>
+</div>
+</section>
+<section id="automatic-expansion-of-built-in-meta-predicates">
+<h2>Automatic expansion of built-in meta-predicates<a class="headerlink" href="#automatic-expansion-of-built-in-meta-predicates" title="Link to this heading"></a></h2>
+<p>The compiler always expands calls to the <a class="reference internal" href="../refman/methods/forall_2.html#methods-forall-2"><span class="std std-ref">forall/2</span></a>,
+<a class="reference internal" href="../refman/methods/once_1.html#methods-once-1"><span class="std std-ref">once/1</span></a>, and <a class="reference internal" href="../refman/methods/ignore_1.html#methods-ignore-1"><span class="std std-ref">ignore/1</span></a> meta-predicates into
+equivalent definitions using the negation and conditional control constructs.
+It also expands calls to the <a class="reference internal" href="../refman/methods/call_N.html#methods-call-n"><span class="std std-ref">call/1-N</span></a>, <a class="reference internal" href="../refman/methods/phrase_2.html#methods-phrase-2"><span class="std std-ref">phrase/2</span></a>,
+and <a class="reference internal" href="../refman/methods/phrase_3.html#methods-phrase-3"><span class="std std-ref">phrase/3</span></a> meta-predicates when the first argument is bound.
+These expansions are performed independently of the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag value.</p>
+</section>
+<section id="inlining">
+<h2>Inlining<a class="headerlink" href="#inlining" title="Link to this heading"></a></h2>
+<p>When the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag is turned on, the Logtalk
+compiler performs <em>inlining</em> of predicate calls whenever possible. This
+includes calls to Prolog predicates that are either built-in, foreign, or
+defined in a module (including <code class="docutils literal notranslate"><span class="pre">user</span></code>). Inlining notably allows wrapping
+module or foreign predicates using an object without introducing any
+overhead. In the specific case of the
+<a class="reference internal" href="predicates.html#predicates-context"><span class="std std-ref">execution-context predicates</span></a>,
+calls are inlined independently of the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag value.</p>
+</section>
+<section id="generated-code-simplification-and-optimizations">
+<h2>Generated code simplification and optimizations<a class="headerlink" href="#generated-code-simplification-and-optimizations" title="Link to this heading"></a></h2>
+<p>When the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag is turned on, the Logtalk
+compiler simplifies and optimizes generated clauses (including those
+resulting from the compilation of grammar rules), by flattening conjunctions,
+folding left unifications (e.g. generated as a by-product of the compilation
+of grammar rules), and removing redundant calls to <code class="docutils literal notranslate"><span class="pre">true/0</span></code>.</p>
+<p>When using <a class="reference internal" href="predicates.html#predicates-lambdas"><span class="std std-ref">lambda expressions</span></a> and library
+meta-predicates, use the <a class="reference internal" href="../libraries/meta_compiler.html#library-meta-compiler"><span class="std std-ref">meta_compiler</span></a> library to avoid
+most meta-call overheads.</p>
+</section>
+<section id="size-of-the-generated-code">
+<h2>Size of the generated code<a class="headerlink" href="#size-of-the-generated-code" title="Link to this heading"></a></h2>
+<p>The size of the intermediate Prolog code generated by the compiler is
+proportional to the size of the source code. Assuming that the
+<a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term-expansion mechanism</span></a> is not used, each
+predicate clause in the source code is compiled into a single predicate
+clause. But the Logtalk compiler also generates internal tables for the
+defined entities, for the entity relations, and for the declared and
+defined predicates. These tables enable support for fundamental features
+such as <a class="reference internal" href="inheritance.html#inheritance-inheritance"><span class="std std-ref">inheritance</span></a> and
+<a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection</span></a>. The size of these tables is
+proportional to the number of entities, entity relations, and predicate
+declarations and definitions. When the <a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a>
+is turned on (the default when <em>developing</em> an application), the generated
+code also includes additional data about the source code, such as entity and
+predicate positions in a source file. This data enables advanced developer
+tool functionality. But it is usually not required when <em>deploying</em> an
+application. Thus, turning this flag off is a common setting for minimizing
+an application footprint.</p>
+</section>
+<section id="circular-references">
+<h2>Circular references<a class="headerlink" href="#circular-references" title="Link to this heading"></a></h2>
+<p>Circular references, i.e. two objects sending messages to each other, are
+relatively costly and should be avoided if possible as they prevent using
+static binding for the messages sent from the first loaded object to the
+second object. The <a class="reference internal" href="../refman/predicates/logtalk_make_1.html#predicates-logtalk-make-1"><span class="std std-ref">logtalk_make(circular)</span></a>
+goal (or its <code class="docutils literal notranslate"><span class="pre">{&#64;}</span></code> top-level abbreviation) can be used to scan for circular
+entity dependencies. The linter also warns by default about non-ideal file
+loading order (controlled by the <a class="reference internal" href="programming.html#flag-unknown-entities"><span class="std std-ref">unknown_entities</span></a>
+flag).</p>
+</section>
+<section id="debug-mode-overhead">
+<h2>Debug mode overhead<a class="headerlink" href="#debug-mode-overhead" title="Link to this heading"></a></h2>
+<p>Code compiled in debug mode runs slower, as expected, when compared with
+normal or optimized mode. The overhead depends on the number of <em>debug events</em>
+generated when running the application. A debug event is simply a pass on a
+call or unification port of the <a class="reference internal" href="debugging.html#debugging-box-model"><span class="std std-ref">procedure box model</span></a>.
+These debug events can be intercepted by defined clauses for the
+<a class="reference external" href="../../apis/logtalk_0.html#logtalk-0-trace-event-2" title="(in Logtalk APIs v3.92.0)"><span class="xref std std-ref">logtalk::trace_event/2</span></a>
+and <a class="reference external" href="../../apis/logtalk_0.html#logtalk-0-debug-handler-3" title="(in Logtalk APIs v3.92.0)"><span class="xref std std-ref">logtalk::debug_handler/3</span></a> multifile
+predicates. With no application (such as a debugger or a port profiler)
+loaded defining clauses for these predicates, each goal has an overhead of
+four extra inferences due to the runtime checking for a definition of the
+hook predicates and a meta-call of the user goal. The clause head unification
+events result in one or more inferences per goal (depending on the number of
+clauses whose head unifies with the goal and backtracking). In practice, this
+overhead translates to code compiled in debug mode running typically ~2x to
+~7x slower than code compiled in normal or optimized mode, depending on the
+application (the exact overhead is proportional to the number of passes on
+the call and unification ports; deterministic code often results in a
+relatively larger overhead when compared with code performing significant
+backtracking).</p>
+</section>
+<section id="other-considerations">
+<h2>Other considerations<a class="headerlink" href="#other-considerations" title="Link to this heading"></a></h2>
+<p>One aspect of performance that affects both Logtalk and Prolog code is
+the characteristics of the Prolog VM. The Logtalk distribution includes
+two examples,
+<a class="reference external" href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/examples/bench">bench</a>
+and
+<a class="reference external" href="https://github.com/LogtalkDotOrg/logtalk3/tree/master/examples/benchmarks">benchmarks</a>,
+to help evaluate performance with specific backend Prolog systems. A
+table with benchmark <a class="reference external" href="https://logtalk.org/performance.html">results</a> for
+a subset of the supported systems is also available at the Logtalk
+website. But note that multiple factors affect the performance of an
+application. The benchmark examples and their results only provide
+a partial assessment.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="debugging.html" class="btn btn-neutral float-left" title="Debugging" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="installing.html" class="btn btn-neutral float-right" title="Installing Logtalk" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2025, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

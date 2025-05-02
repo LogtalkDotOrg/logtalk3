@@ -29,7 +29,7 @@ using a backend Prolog compiler with multi-threading support.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#gensym](../../docs/library_index.html#gensym)
+Open the [../../apis/library_index.html#gensym](../../apis/library_index.html#gensym)
 link in a web browser.
 
 

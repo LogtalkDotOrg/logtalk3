@@ -38,7 +38,7 @@ usage and distributions conditions.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#xml_parser](../../docs/library_index.html#xml_parser)
+Open the [../../apis/library_index.html#xml_parser](../../apis/library_index.html#xml_parser)
 link in a web browser.
 
 

@@ -27,7 +27,7 @@ This library implements zippers over lists.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#zippers](../../docs/library_index.html#zippers)
+Open the [../../apis/library_index.html#zippers](../../apis/library_index.html#zippers)
 link in a web browser.
 
 

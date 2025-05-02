@@ -33,7 +33,7 @@ documentation of the `mutations` library for related functionality.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#arbitrary](../../docs/library_index.html#arbitrary)
+Open the [../../apis/library_index.html#arbitrary](../../apis/library_index.html#arbitrary)
 link in a web browser.
 
 
@@ -61,7 +61,7 @@ Pre-defined types
 -----------------
 
 This library defines random generators for the most common Logtalk and Prolog
-types. See the [API documentation](../../docs/library_index.html#arbitrary)
+types. See the [API documentation](../../apis/library_index.html#arbitrary)
 for a listing of all the pre-defined types.
 
 

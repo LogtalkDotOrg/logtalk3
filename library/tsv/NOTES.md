@@ -47,7 +47,7 @@ or the stream handle or alias.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#tsv](../../docs/library_index.html#tsv)
+Open the [../../apis/library_index.html#tsv](../../apis/library_index.html#tsv)
 link in a web browser.
 
 

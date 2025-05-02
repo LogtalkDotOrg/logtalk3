@@ -39,7 +39,7 @@ See also the `uuid` and `ulid` libraries.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#ids](../../docs/library_index.html#ids)
+Open the [../../apis/library_index.html#ids](../../apis/library_index.html#ids)
 link in a web browser.
 
 

@@ -41,7 +41,7 @@ API documentation
 
 This tool API documentation is available at:
 
-[../../docs/library_index.html#ports-profiler](../../docs/library_index.html#ports-profiler)
+[../../../docs/apis/library_index.html#ports-profiler](../../../docs/apis/library_index.html#ports-profiler)
 
 For sample queries, please see the `SCRIPT.txt` file in the tool directory.
 

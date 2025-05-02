@@ -43,7 +43,7 @@ only accessed using the library predicates.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#assignvars](../../docs/library_index.html#assignvars)
+Open the [../../apis/library_index.html#assignvars](../../apis/library_index.html#assignvars)
 link in a web browser.
 
 

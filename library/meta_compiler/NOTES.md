@@ -28,7 +28,7 @@ for the predicates defined in the `meta` library.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#meta-compiler](../../docs/library_index.html#meta-compiler)
+Open the [../../apis/library_index.html#meta-compiler](../../apis/library_index.html#meta-compiler)
 link in a web browser.
 
 

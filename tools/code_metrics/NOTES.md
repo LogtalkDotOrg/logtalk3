@@ -40,7 +40,7 @@ API documentation
 
 This tool API documentation is available at:
 
-[../../docs/library_index.html#code-metrics](../../docs/library_index.html#code-metrics)
+[../../../docs/apis/library_index.html#code-metrics](../../../docs/apis/library_index.html#code-metrics)
 
 
 Loading

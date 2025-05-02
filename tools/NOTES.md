@@ -178,7 +178,7 @@ documentation:
 
 - https://d2lang.com/tour/install
 - https://www.graphviz.org/download/
-- https://docs.qameta.io/allure-report/
+- https://allurereport.org/docs/
 - https://www.gnupg.org/
 - https://gitforwindows.org
 - https://cli.github.com

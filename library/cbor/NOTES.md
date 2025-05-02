@@ -106,7 +106,7 @@ Decoding is accomplished using the ``parse/2`` predicate. For example:
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#cbor](../../docs/library_index.html#cbor)
+Open the [../../apis/library_index.html#cbor](../../apis/library_index.html#cbor)
 link in a web browser.
 
 

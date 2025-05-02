@@ -62,8 +62,8 @@ requirements are:
 2. Converting XML files to PDF files require a XSL-FO processor. The supported
 XSL-FO processors for Bash and PowerShell conversion scripts are:
 
-* Apache FOP processor: http://xmlgraphics.apache.org/fop/
-* RenderX XEP processor: http://www.renderx.com/
+* Apache FOP processor: https://xmlgraphics.apache.org/fop/
+* RenderX XEP processor: https://www.renderx.com/
 
 For additional details, including compatible dependency versions and available
 conversion scripts, see the `xml/NOTES.md` file. See the `tools/NOTES.md` file
@@ -75,7 +75,7 @@ API documentation
 
 This tool API documentation is available at:
 
-[../../docs/library_index.html#lgtdoc](../../docs/library_index.html#lgtdoc)
+[../../../docs/apis/library_index.html#lgtdoc](../../../docs/apis/library_index.html#lgtdoc)
 
 
 Loading
@@ -100,7 +100,7 @@ Documenting source code
 For information on documenting your source code, notably on documenting
 directives, consult the documenting section of the User Manual:
 
-[../../manuals/userman/documenting.html](../../manuals/userman/documenting.html)
+[../../../docs/handbook/userman/documenting.html](../../../docs/handbook/userman/documenting.html)
 
 Extracting documenting information from your source code using this tool
 requires compiling the source files using the `source_data(on)` compiler
@@ -141,7 +141,7 @@ the current working directory. But usually all documenting files are collected
 for both the application and the libraries it uses in a common directory so
 that all documentation links resolved properly. The `lgtdoc` predicates can
 take a list of options to customize the generated XML documenting files. See
-the remarks section in the [lgtdocp](https://logtalk.org/docs/library_index.html#lgtdoc)
+the remarks section in the [lgtdocp](../../docs/apis/library_index.html#lgtdoc)
 protocol documentation for details on the available options.
 
 After generating the XML documenting files, these can be easily converted into

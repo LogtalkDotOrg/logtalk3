@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on April 16, 2025
+##   Last updated on May 2, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
@@ -49,7 +49,7 @@ ARG YAP_VERSION=master
 ENV LOGTALKHOME=/usr/local/share/logtalk
 ENV PATH=$PATH:$LOGTALKHOME/tools/diagrams:$LOGTALKHOME/tools/lgtdoc/xml:$LOGTALKHOME/scripts:$LOGTALKHOME/integration
 ENV MANPATH=$LOGTALKHOME/man:
-ENV INFOPATH=$LOGTALKHOME/docs:$LOGTALKHOME/manuals:
+ENV INFOPATH=$LOGTALKHOME/docs/apis:$LOGTALKHOME/docs/handbook:
 
 WORKDIR /downloads
 
@@ -147,10 +147,10 @@ RUN curl -sL https://github.com/LogtalkDotOrg/logtalk3/archive/${LOGTALK_VERSION
     && logtalk_user_setup
 
 # Download and install the Texinfo files for the latest stable version
-WORKDIR /root/logtalk/manuals
-RUN curl -O https://logtalk.org/manuals/TheLogtalkHandbook-${LOGTALK_TEXINFO_VERSION}.info \
-    && cd /root/logtalk/docs \
-    && curl -O https://logtalk.org/docs/LogtalkAPIs-${LOGTALK_TEXINFO_VERSION}.info
+WORKDIR /root/logtalk/docs/handbook
+RUN curl -O https://logtalk.org/docs/handbook/TheLogtalkHandbook-${LOGTALK_TEXINFO_VERSION}.info \
+    && cd /root/logtalk/docs/apis \
+    && curl -O https://logtalk.org/docs/apis/LogtalkAPIs-${LOGTALK_TEXINFO_VERSION}.info
 
 # Download required JAR files for the apache_poi example
 RUN cd /usr/local/share/logtalk/examples/apache_poi/jars \

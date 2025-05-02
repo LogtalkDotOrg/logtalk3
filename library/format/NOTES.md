@@ -42,7 +42,7 @@ when the `suspicious_calls` flag is set to `warning` (its usual default).
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#format](../../docs/library_index.html#format)
+Open the [../../apis/library_index.html#format](../../apis/library_index.html#format)
 link in a web browser.
 
 

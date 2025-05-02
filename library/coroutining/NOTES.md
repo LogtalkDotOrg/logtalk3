@@ -37,7 +37,7 @@ See also the `dif` library.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#coroutining](../../docs/library_index.html#coroutining)
+Open the [../../apis/library_index.html#coroutining](../../apis/library_index.html#coroutining)
 link in a web browser.
 
 

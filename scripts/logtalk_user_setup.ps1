@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Logtalk user folder setup script
-##   Last updated on March 26, 2025
+##   Last updated on May 2, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2025 Paulo Moura <pmoura@logtalk.org>
@@ -167,7 +167,6 @@ function New-Logtalkuser-Directory {
 	New-Item -ItemType SymbolicLink -Path "$env:LOGTALKUSER\coding" -Target "$env:LOGTALKHOME\coding" > $null
 	New-Item -ItemType SymbolicLink -Path "$env:LOGTALKUSER\docs" -Target "$env:LOGTALKHOME\docs" > $null
 	New-Item -ItemType SymbolicLink -Path "$env:LOGTALKUSER\integration" -Target "$env:LOGTALKHOME\integration" > $null
-	New-Item -ItemType SymbolicLink -Path "$env:LOGTALKUSER\manuals" -Target "$env:LOGTALKHOME\manuals" > $null
 	New-Item -ItemType SymbolicLink -Path "$env:LOGTALKUSER\paths" -Target "$env:LOGTALKHOME\paths" > $null
 	New-Item -ItemType SymbolicLink -Path "$env:LOGTALKUSER\scripts" -Target "$env:LOGTALKHOME\scripts" > $null
 	New-Item -ItemType SymbolicLink -Path "$env:LOGTALKUSER\tools\diagrams\lgt2svg.ps1" -Target "$env:LOGTALKHOME\tools\diagrams\lgt2svg.ps1" > $null

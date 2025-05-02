@@ -12,7 +12,7 @@ formats:
 
 python:
   install:
-    - requirements: manuals/sources/requirements.txt
+    - requirements: docs/handbook/sources/requirements.txt
 
 sphinx:
-  configuration: manuals/sources/conf.py
+  configuration: docs/handbook/sources/conf.py

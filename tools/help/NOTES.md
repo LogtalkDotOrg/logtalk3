@@ -42,7 +42,7 @@ API documentation
 
 This tool API documentation is available at:
 
-[../../docs/library_index.html#help](../../docs/library_index.html#help)
+[../../../docs/apis/library_index.html#help](../../../docs/apis/library_index.html#help)
 
 For sample queries, please see the `SCRIPT.txt` file in the tool directory.
 

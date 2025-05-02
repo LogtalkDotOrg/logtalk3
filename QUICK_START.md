@@ -75,11 +75,11 @@ integration scripts, see also the integration script `man` page.
 
 For a quick overview of some of the main Logtalk concepts, see the
 at [Learn X in Y minutes Where X=Logtalk](https://learnxinyminutes.com/docs/logtalk/)
-tutorial. See also the bundled [Handbook](https://logtalk.org/manuals/index.html)
-by opening the `~/logtalk/manuals/index.html` file with a web browser (the
-`~/logtalk` directory is created when you run Logtalk for the first time). The
-[Installing Logtalk](https://logtalk.org/manuals/userman/installing.html) and
-[Writing and running applications](https://logtalk.org/manuals/userman/programming.html)
+tutorial. See also the bundled [Handbook](docs/handbook/index.html) by
+opening the `~/logtalk/docs/handbook/index.html` file with a web browser
+(the `~/logtalk` directory is created when you run Logtalk for the first
+time). The [Installing Logtalk](docs/handbook/userman/installing.html) and
+[Writing and running applications](docs/handbook/userman/programming.html)
 sections in the User Manual will provide you with a basic understanding of how
 to start Logtalk as well as how to compile and load Logtalk code.
 

@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Distribution clean script for packaging
-##   Last updated on March 25, 2025
+##   Last updated on May 2, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -40,7 +40,7 @@ find . -type d -print0 | xargs -0 chmod 755
 
 chmod a+x integration/*.sh
 chmod a+x integration/unsupported/*.sh
-chmod a+x manuals/sources/*.sh
+chmod a+x docs/handbook/sources/*.sh
 chmod a+x scripts/*.sh
 chmod a+x scripts/embedding/ciao/*.sh
 chmod a+x scripts/embedding/cxprolog/*.sh

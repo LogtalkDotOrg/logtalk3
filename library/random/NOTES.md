@@ -33,7 +33,7 @@ probability; and predicates for sampling common probability distributions.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#random](../../docs/library_index.html#random)
+Open the [../../apis/library_index.html#random](../../apis/library_index.html#random)
 link in a web browser.
 
 

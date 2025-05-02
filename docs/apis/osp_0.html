@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>osp &mdash; Logtalk APIs v3.92.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d8553e9b"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pack_protocol" href="pack_protocol_0.html" />
+    <link rel="prev" title="os_types" href="os_types_0.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Logtalk APIs
+              <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.92.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#arbitrary"><span class="xref std std-ref">arbitrary</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><span class="xref std std-ref">assertions</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assignvars"><span class="xref std std-ref">assignvars</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#base64"><span class="xref std std-ref">base64</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#cbor"><span class="xref std std-ref">cbor</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><span class="xref std std-ref">code_metrics</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><span class="xref std std-ref">core</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#coroutining"><span class="xref std std-ref">coroutining</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#csv"><span class="xref std std-ref">csv</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dates"><span class="xref std std-ref">dates</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><span class="xref std std-ref">dead_code_scanner</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debug-messages"><span class="xref std std-ref">debug_messages</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><span class="xref std std-ref">debugger</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dependents"><span class="xref std std-ref">dependents</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><span class="xref std std-ref">diagrams</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dictionaries"><span class="xref std std-ref">dictionaries</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dif"><span class="xref std std-ref">dif</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><span class="xref std std-ref">doclet</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#edcg"><span class="xref std std-ref">edcg</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#events"><span class="xref std std-ref">events</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#expand-library-alias-paths"><span class="xref std std-ref">expand_library_alias_paths</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#expecteds"><span class="xref std std-ref">expecteds</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#fcube"><span class="xref std std-ref">fcube</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><span class="xref std std-ref">flags</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#format"><span class="xref std std-ref">format</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#genint"><span class="xref std std-ref">genint</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#gensym"><span class="xref std std-ref">gensym</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#git"><span class="xref std std-ref">git</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#grammars"><span class="xref std std-ref">grammars</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#heaps"><span class="xref std std-ref">heaps</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><span class="xref std std-ref">help</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#hierarchies"><span class="xref std std-ref">hierarchies</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#hook-flows"><span class="xref std std-ref">hook_flows</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#hook-objects"><span class="xref std std-ref">hook_objects</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#html"><span class="xref std std-ref">html</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ids"><span class="xref std std-ref">ids</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#intervals"><span class="xref std std-ref">intervals</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><span class="xref std std-ref">iso8601</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#issue-creator"><span class="xref std std-ref">issue_creator</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#java"><span class="xref std std-ref">java</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#json"><span class="xref std std-ref">json</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><span class="xref std std-ref">lgtdoc</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><span class="xref std std-ref">library</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#listing"><span class="xref std std-ref">listing</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#logging"><span class="xref std std-ref">logging</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#meta"><span class="xref std std-ref">meta</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#meta-compiler"><span class="xref std std-ref">meta_compiler</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#nested-dictionaries"><span class="xref std std-ref">nested_dictionaries</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#optionals"><span class="xref std std-ref">optionals</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#options"><span class="xref std std-ref">options</span></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#os"><span class="xref std std-ref">os</span></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="os_0.html">os</a></li>
+<li class="toctree-l3"><a class="reference internal" href="os_types_0.html">os_types</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">osp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#packs"><span class="xref std std-ref">packs</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><span class="xref std std-ref">pddl_parser</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports-profiler"><span class="xref std std-ref">ports_profiler</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#queues"><span class="xref std std-ref">queues</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#random"><span class="xref std std-ref">random</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#reader"><span class="xref std std-ref">reader</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#recorded-database"><span class="xref std std-ref">recorded_database</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#redis"><span class="xref std std-ref">redis</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#sets"><span class="xref std std-ref">sets</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#statistics"><span class="xref std std-ref">statistics</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#timeout"><span class="xref std std-ref">timeout</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><span class="xref std std-ref">tutor</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#types"><span class="xref std std-ref">types</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ulid"><span class="xref std std-ref">ulid</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#union-find"><span class="xref std std-ref">union_find</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#uuid"><span class="xref std std-ref">uuid</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><span class="xref std std-ref">verdi_neruda</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><span class="xref std std-ref">wrapper</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#xml-parser"><span class="xref std std-ref">xml_parser</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#zippers"><span class="xref std std-ref">zippers</span></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicates</a></li>
+</ul>
+
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="core_inheritance_diagram.svg">Core diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="library_inheritance_diagram.svg">Libraries diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="tools_inheritance_diagram.svg">Tools diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="ports_inheritance_diagram.svg">Ports diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="contributions_inheritance_diagram.svg">Contributions diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+    </ul>
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../handbook/index.html">Handbook</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Logtalk APIs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">osp</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/osp_0.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p class="right" id="osp-0"><span id="index-0"></span><strong>protocol</strong></p>
+<section id="osp">
+<h1><code class="docutils literal notranslate"><span class="pre">osp</span></code><a class="headerlink" href="#osp" title="Link to this heading"></a></h1>
+<p>Portable operating-system access protocol.</p>
+<div class="line-block">
+<div class="line"><strong>Availability:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(os(loader))</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1:40:0</div>
+<div class="line"><strong>Date:</strong> 2025-01-23</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Dependencies:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Error handling: Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.</p></li>
+</ul>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><strong>Inherited public predicates:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
+</div>
+</div>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#pid-1" id="id2"><code class="docutils literal notranslate"><span class="pre">pid/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#shell-2" id="id3"><code class="docutils literal notranslate"><span class="pre">shell/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#shell-1" id="id4"><code class="docutils literal notranslate"><span class="pre">shell/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-absolute-file-name-1" id="id5"><code class="docutils literal notranslate"><span class="pre">is_absolute_file_name/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#absolute-file-name-2" id="id6"><code class="docutils literal notranslate"><span class="pre">absolute_file_name/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#decompose-file-name-3" id="id7"><code class="docutils literal notranslate"><span class="pre">decompose_file_name/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#decompose-file-name-4" id="id8"><code class="docutils literal notranslate"><span class="pre">decompose_file_name/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#path-concat-3" id="id9"><code class="docutils literal notranslate"><span class="pre">path_concat/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#internal-os-path-2" id="id10"><code class="docutils literal notranslate"><span class="pre">internal_os_path/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#make-directory-1" id="id11"><code class="docutils literal notranslate"><span class="pre">make_directory/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#make-directory-path-1" id="id12"><code class="docutils literal notranslate"><span class="pre">make_directory_path/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#delete-directory-1" id="id13"><code class="docutils literal notranslate"><span class="pre">delete_directory/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#delete-directory-contents-1" id="id14"><code class="docutils literal notranslate"><span class="pre">delete_directory_contents/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#delete-directory-and-contents-1" id="id15"><code class="docutils literal notranslate"><span class="pre">delete_directory_and_contents/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#change-directory-1" id="id16"><code class="docutils literal notranslate"><span class="pre">change_directory/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#working-directory-1" id="id17"><code class="docutils literal notranslate"><span class="pre">working_directory/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#temporary-directory-1" id="id18"><code class="docutils literal notranslate"><span class="pre">temporary_directory/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#null-device-path-1" id="id19"><code class="docutils literal notranslate"><span class="pre">null_device_path/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#full-device-path-1" id="id20"><code class="docutils literal notranslate"><span class="pre">full_device_path/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#read-only-device-path-1" id="id21"><code class="docutils literal notranslate"><span class="pre">read_only_device_path/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#directory-files-2" id="id22"><code class="docutils literal notranslate"><span class="pre">directory_files/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#directory-files-3" id="id23"><code class="docutils literal notranslate"><span class="pre">directory_files/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#directory-exists-1" id="id24"><code class="docutils literal notranslate"><span class="pre">directory_exists/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ensure-directory-1" id="id25"><code class="docutils literal notranslate"><span class="pre">ensure_directory/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#file-exists-1" id="id26"><code class="docutils literal notranslate"><span class="pre">file_exists/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#file-modification-time-2" id="id27"><code class="docutils literal notranslate"><span class="pre">file_modification_time/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#file-size-2" id="id28"><code class="docutils literal notranslate"><span class="pre">file_size/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#file-permission-2" id="id29"><code class="docutils literal notranslate"><span class="pre">file_permission/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#copy-file-2" id="id30"><code class="docutils literal notranslate"><span class="pre">copy_file/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rename-file-2" id="id31"><code class="docutils literal notranslate"><span class="pre">rename_file/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#delete-file-1" id="id32"><code class="docutils literal notranslate"><span class="pre">delete_file/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ensure-file-1" id="id33"><code class="docutils literal notranslate"><span class="pre">ensure_file/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#environment-variable-2" id="id34"><code class="docutils literal notranslate"><span class="pre">environment_variable/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#time-stamp-1" id="id35"><code class="docutils literal notranslate"><span class="pre">time_stamp/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#date-time-7" id="id36"><code class="docutils literal notranslate"><span class="pre">date_time/7</span></code></a></p></li>
+<li><p><a class="reference internal" href="#cpu-time-1" id="id37"><code class="docutils literal notranslate"><span class="pre">cpu_time/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#wall-time-1" id="id38"><code class="docutils literal notranslate"><span class="pre">wall_time/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#operating-system-type-1" id="id39"><code class="docutils literal notranslate"><span class="pre">operating_system_type/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#operating-system-name-1" id="id40"><code class="docutils literal notranslate"><span class="pre">operating_system_name/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#operating-system-machine-1" id="id41"><code class="docutils literal notranslate"><span class="pre">operating_system_machine/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#operating-system-release-1" id="id42"><code class="docutils literal notranslate"><span class="pre">operating_system_release/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#command-line-arguments-1" id="id43"><code class="docutils literal notranslate"><span class="pre">command_line_arguments/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#sleep-1" id="id44"><code class="docutils literal notranslate"><span class="pre">sleep/1</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id45">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id46">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id47">Operators</a></p></li>
+</ul>
+</nav>
+<section id="public-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
+<section id="pid-1">
+<span id="osp-0-pid-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">pid/1</span></code></a><a class="headerlink" href="#pid-1" title="Link to this heading"></a></h3>
+<p>Returns the process identifier of the running process.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">pid(PID)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">pid(-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="shell-2">
+<span id="osp-0-shell-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">shell/2</span></code></a><a class="headerlink" href="#shell-2" title="Link to this heading"></a></h3>
+<p>Runs an operating-system shell command and returns its exit status.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">shell(Command,Status)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">shell(+atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="shell-1">
+<span id="osp-0-shell-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">shell/1</span></code></a><a class="headerlink" href="#shell-1" title="Link to this heading"></a></h3>
+<p>Runs an operating-system shell command.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">shell(Command)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">shell(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="is-absolute-file-name-1">
+<span id="osp-0-is-absolute-file-name-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">is_absolute_file_name/1</span></code></a><a class="headerlink" href="#is-absolute-file-name-1" title="Link to this heading"></a></h3>
+<p>True iff the argument is an absolute file path. On POSIX systems, this predicate is true if <code class="docutils literal notranslate"><span class="pre">File</span></code> starts with a <code class="docutils literal notranslate"><span class="pre">/</span></code>. On Windows systems, this predicate is true if <code class="docutils literal notranslate"><span class="pre">File</span></code> starts with a drive letter. No attempt is made to expand <code class="docutils literal notranslate"><span class="pre">File</span></code> as a path.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_absolute_file_name(File)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_absolute_file_name(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="absolute-file-name-2">
+<span id="osp-0-absolute-file-name-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">absolute_file_name/2</span></code></a><a class="headerlink" href="#absolute-file-name-2" title="Link to this heading"></a></h3>
+<p>Expands a file name to an absolute file path. An environment variable at the beginning of the file name is also expanded.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">absolute_file_name(File,Path)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">absolute_file_name(+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="decompose-file-name-3">
+<span id="osp-0-decompose-file-name-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">decompose_file_name/3</span></code></a><a class="headerlink" href="#decompose-file-name-3" title="Link to this heading"></a></h3>
+<p>Decomposes a file name into its directory (which always ends with a slash; <code class="docutils literal notranslate"><span class="pre">./</span></code> is returned if absent) and its basename (which can be the empty atom).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decompose_file_name(File,Directory,Basename)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decompose_file_name(+atom,?atom,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="decompose-file-name-4">
+<span id="osp-0-decompose-file-name-4"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">decompose_file_name/4</span></code></a><a class="headerlink" href="#decompose-file-name-4" title="Link to this heading"></a></h3>
+<p>Decomposes a file name into its directory (which always ends with a slash; <code class="docutils literal notranslate"><span class="pre">./</span></code> is returned if absent), name (that can be the empty atom), and extension (which starts with a <code class="docutils literal notranslate"><span class="pre">.</span></code> when defined; the empty atom otherwise).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decompose_file_name(File,Directory,Name,Extension)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decompose_file_name(+atom,?atom,?atom,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="path-concat-3">
+<span id="osp-0-path-concat-3"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">path_concat/3</span></code></a><a class="headerlink" href="#path-concat-3" title="Link to this heading"></a></h3>
+<p>Concatenates a path prefix and a path suffix, adding  a <code class="docutils literal notranslate"><span class="pre">/</span></code> separator if required. Returns <code class="docutils literal notranslate"><span class="pre">Suffix</span></code> when it is an absolute path. Returns <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> with a trailing <code class="docutils literal notranslate"><span class="pre">/</span></code> appended if missing when <code class="docutils literal notranslate"><span class="pre">Suffix</span></code> is the empty atom.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">path_concat(Prefix,Suffix,Path)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">path_concat(+atom,+atom,--atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="internal-os-path-2">
+<span id="osp-0-internal-os-path-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">internal_os_path/2</span></code></a><a class="headerlink" href="#internal-os-path-2" title="Link to this heading"></a></h3>
+<p>Converts between the internal path representation (which is backend dependent) and the operating-system native path representation.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">internal_os_path(InternalPath,OSPath)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">internal_os_path(+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">internal_os_path(-atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="make-directory-1">
+<span id="osp-0-make-directory-1"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">make_directory/1</span></code></a><a class="headerlink" href="#make-directory-1" title="Link to this heading"></a></h3>
+<p>Makes a new directory. Succeeds if the directory already exists.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">make_directory(Directory)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">make_directory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="make-directory-path-1">
+<span id="osp-0-make-directory-path-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">make_directory_path/1</span></code></a><a class="headerlink" href="#make-directory-path-1" title="Link to this heading"></a></h3>
+<p>Makes a new directory creating all the intermediate directories if necessary. Succeeds if the directory already exists.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">make_directory_path(Directory)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">make_directory_path(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="delete-directory-1">
+<span id="osp-0-delete-directory-1"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_directory/1</span></code></a><a class="headerlink" href="#delete-directory-1" title="Link to this heading"></a></h3>
+<p>Deletes an empty directory. Throws an error if the directory does not exist.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_directory(Directory)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_directory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="delete-directory-contents-1">
+<span id="osp-0-delete-directory-contents-1"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_directory_contents/1</span></code></a><a class="headerlink" href="#delete-directory-contents-1" title="Link to this heading"></a></h3>
+<p>Deletes directory contents. Throws an error if the directory does not exist.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_directory_contents(Directory)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_directory_contents(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="delete-directory-and-contents-1">
+<span id="osp-0-delete-directory-and-contents-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_directory_and_contents/1</span></code></a><a class="headerlink" href="#delete-directory-and-contents-1" title="Link to this heading"></a></h3>
+<p>Deletes directory and its contents. Throws an error if the directory does not exist.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_directory_and_contents(Directory)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_directory_and_contents(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="change-directory-1">
+<span id="osp-0-change-directory-1"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">change_directory/1</span></code></a><a class="headerlink" href="#change-directory-1" title="Link to this heading"></a></h3>
+<p>Changes current working directory. Throws an error if the directory does not exist.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">change_directory(Directory)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">change_directory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="working-directory-1">
+<span id="osp-0-working-directory-1"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">working_directory/1</span></code></a><a class="headerlink" href="#working-directory-1" title="Link to this heading"></a></h3>
+<p>Current working directory.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">working_directory(Directory)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">working_directory(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="temporary-directory-1">
+<span id="osp-0-temporary-directory-1"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">temporary_directory/1</span></code></a><a class="headerlink" href="#temporary-directory-1" title="Link to this heading"></a></h3>
+<p>Temporary directory. Tries first environment variables: <code class="docutils literal notranslate"><span class="pre">TEMP</span></code> and <code class="docutils literal notranslate"><span class="pre">TMP</span></code> on Windows systems; <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>, <code class="docutils literal notranslate"><span class="pre">TMP</span></code>, <code class="docutils literal notranslate"><span class="pre">TEMP</span></code>, and <code class="docutils literal notranslate"><span class="pre">TEMPDIR</span></code> on POSIX systems. When not defined, tries default locations. Returns the working directory as last resort.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">temporary_directory(Directory)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">temporary_directory(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="null-device-path-1">
+<span id="osp-0-null-device-path-1"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">null_device_path/1</span></code></a><a class="headerlink" href="#null-device-path-1" title="Link to this heading"></a></h3>
+<p>Null device path: <code class="docutils literal notranslate"><span class="pre">nul</span></code> on Windows systems and <code class="docutils literal notranslate"><span class="pre">/dev/null</span></code> on POSIX systems.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">null_device_path(Path)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">null_device_path(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="full-device-path-1">
+<span id="osp-0-full-device-path-1"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">full_device_path/1</span></code></a><a class="headerlink" href="#full-device-path-1" title="Link to this heading"></a></h3>
+<p>Full device path: <code class="docutils literal notranslate"><span class="pre">/dev/full</span></code> on Linux and BSD systems. Fails on other systems. Experimental.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">full_device_path(Path)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">full_device_path(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="read-only-device-path-1">
+<span id="osp-0-read-only-device-path-1"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">read_only_device_path/1</span></code></a><a class="headerlink" href="#read-only-device-path-1" title="Link to this heading"></a></h3>
+<p>Read-only device path: <code class="docutils literal notranslate"><span class="pre">/dev/urandom</span></code> on macOS. Fails on other systems. Experimental.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">read_only_device_path(Path)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">read_only_device_path(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="directory-files-2">
+<span id="osp-0-directory-files-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">directory_files/2</span></code></a><a class="headerlink" href="#directory-files-2" title="Link to this heading"></a></h3>
+<p>Returns a list of all files (including directories, regular files, and hidden directories and files) in a directory. File paths are relative to the directory. Throws an error if the directory does not exist.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory_files(Directory,Files)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory_files(+atom,-list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="directory-files-3">
+<span id="osp-0-directory-files-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">directory_files/3</span></code></a><a class="headerlink" href="#directory-files-3" title="Link to this heading"></a></h3>
+<p>Returns a list of files filtered using the given list of options. Invalid options are ignored. Default option values are equivalent to <code class="docutils literal notranslate"><span class="pre">directory_files/2</span></code>. Throws an error if the directory does not exist.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory_files(Directory,Files,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory_files(+atom,-list(atom),+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">paths/1</span></code>: Possible values are <code class="docutils literal notranslate"><span class="pre">relative</span></code> and <code class="docutils literal notranslate"><span class="pre">absolute</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">relative</span></code>.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">type/1</span></code>: Possible values are <code class="docutils literal notranslate"><span class="pre">all</span></code>, <code class="docutils literal notranslate"><span class="pre">regular</span></code>, <code class="docutils literal notranslate"><span class="pre">directory</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">all</span></code>.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">extensions/1</span></code>: Argument is a list of required extensions (using the format <code class="docutils literal notranslate"><span class="pre">'.ext'</span></code>). Default is the empty list.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">prefixes/1</span></code>: Argument is a list of required file prefixes (atoms). Default is the empty list.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">suffixes/1</span></code>: Argument is a list of required file suffixes (atoms). Default is the empty list.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">dot_files/1</span></code>: Possible values are <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="directory-exists-1">
+<span id="osp-0-directory-exists-1"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">directory_exists/1</span></code></a><a class="headerlink" href="#directory-exists-1" title="Link to this heading"></a></h3>
+<p>True if the specified directory exists (irrespective of directory permissions).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory_exists(Directory)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory_exists(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="ensure-directory-1">
+<span id="osp-0-ensure-directory-1"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ensure_directory/1</span></code></a><a class="headerlink" href="#ensure-directory-1" title="Link to this heading"></a></h3>
+<p>Ensures that a directory exists, creating it if necessary.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ensure_directory(Directory)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ensure_directory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="file-exists-1">
+<span id="osp-0-file-exists-1"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file_exists/1</span></code></a><a class="headerlink" href="#file-exists-1" title="Link to this heading"></a></h3>
+<p>True if the specified file exists and is a regular file (irrespective of file permissions).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file_exists(File)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file_exists(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="file-modification-time-2">
+<span id="osp-0-file-modification-time-2"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file_modification_time/2</span></code></a><a class="headerlink" href="#file-modification-time-2" title="Link to this heading"></a></h3>
+<p>File modification time (which can be used for comparison). Throws an error if the file does not exist.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file_modification_time(File,Time)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file_modification_time(+atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="file-size-2">
+<span id="osp-0-file-size-2"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file_size/2</span></code></a><a class="headerlink" href="#file-size-2" title="Link to this heading"></a></h3>
+<p>File size (in bytes). Throws an error if the file does not exist.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file_size(File,Size)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file_size(+atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="file-permission-2">
+<span id="osp-0-file-permission-2"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file_permission/2</span></code></a><a class="headerlink" href="#file-permission-2" title="Link to this heading"></a></h3>
+<p>True iff the specified file has the specified permission (<code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">write</span></code>, or <code class="docutils literal notranslate"><span class="pre">execute</span></code>). Throws an error if the file does not exist.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file_permission(File,Permission)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file_permission(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="copy-file-2">
+<span id="osp-0-copy-file-2"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">copy_file/2</span></code></a><a class="headerlink" href="#copy-file-2" title="Link to this heading"></a></h3>
+<p>Copies a file. Throws an error if the original file does not exist or if the copy cannot be created.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">copy_file(File,Copy)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">copy_file(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="rename-file-2">
+<span id="osp-0-rename-file-2"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rename_file/2</span></code></a><a class="headerlink" href="#rename-file-2" title="Link to this heading"></a></h3>
+<p>Renames a file or a directory. Throws an error if the file or directory does not exist.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rename_file(Old,New)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rename_file(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="delete-file-1">
+<span id="osp-0-delete-file-1"></span><span id="index-31"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_file/1</span></code></a><a class="headerlink" href="#delete-file-1" title="Link to this heading"></a></h3>
+<p>Deletes a file. Throws an error if the file does not exist.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_file(File)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_file(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="ensure-file-1">
+<span id="osp-0-ensure-file-1"></span><span id="index-32"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ensure_file/1</span></code></a><a class="headerlink" href="#ensure-file-1" title="Link to this heading"></a></h3>
+<p>Ensures that a file exists, creating it if necessary.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ensure_file(File)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ensure_file(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="environment-variable-2">
+<span id="osp-0-environment-variable-2"></span><span id="index-33"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">environment_variable/2</span></code></a><a class="headerlink" href="#environment-variable-2" title="Link to this heading"></a></h3>
+<p>Returns an environment variable value. Fails if the variable does not exists.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">environment_variable(Variable,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">environment_variable(+atom,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="time-stamp-1">
+<span id="osp-0-time-stamp-1"></span><span id="index-34"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">time_stamp/1</span></code></a><a class="headerlink" href="#time-stamp-1" title="Link to this heading"></a></h3>
+<p>Returns a system-dependent time stamp, which can be used for sorting, but should be regarded otherwise as an opaque term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">time_stamp(Time)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">time_stamp(-ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="date-time-7">
+<span id="osp-0-date-time-7"></span><span id="index-35"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">date_time/7</span></code></a><a class="headerlink" href="#date-time-7" title="Link to this heading"></a></h3>
+<p>Returns the current date and time. Note that most backends do not provide sub-second accuracy and in those cases the value of the <code class="docutils literal notranslate"><span class="pre">Milliseconds</span></code> argument is always zero.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">date_time(Year,Month,Day,Hours,Minutes,Seconds,Milliseconds)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">date_time(-integer,-integer,-integer,-integer,-integer,-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="cpu-time-1">
+<span id="osp-0-cpu-time-1"></span><span id="index-36"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">cpu_time/1</span></code></a><a class="headerlink" href="#cpu-time-1" title="Link to this heading"></a></h3>
+<p>System cpu time in seconds.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cpu_time(Seconds)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cpu_time(-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="wall-time-1">
+<span id="osp-0-wall-time-1"></span><span id="index-37"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">wall_time/1</span></code></a><a class="headerlink" href="#wall-time-1" title="Link to this heading"></a></h3>
+<p>Wall time in seconds.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">wall_time(Seconds)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">wall_time(-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="operating-system-type-1">
+<span id="osp-0-operating-system-type-1"></span><span id="index-38"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">operating_system_type/1</span></code></a><a class="headerlink" href="#operating-system-type-1" title="Link to this heading"></a></h3>
+<p>Operating system type. Possible values are <code class="docutils literal notranslate"><span class="pre">unix</span></code>, <code class="docutils literal notranslate"><span class="pre">windows</span></code>, and <code class="docutils literal notranslate"><span class="pre">unknown</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">operating_system_type(Type)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">operating_system_type(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="operating-system-name-1">
+<span id="osp-0-operating-system-name-1"></span><span id="index-39"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">operating_system_name/1</span></code></a><a class="headerlink" href="#operating-system-name-1" title="Link to this heading"></a></h3>
+<p>Operating system name. On POSIX systems, it returns the value of <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-s</span></code>. On macOS systems, it returns <code class="docutils literal notranslate"><span class="pre">'Darwin'</span></code>. On Windows systems, it returns <code class="docutils literal notranslate"><span class="pre">'Windows'</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">operating_system_name(Name)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">operating_system_name(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="operating-system-machine-1">
+<span id="osp-0-operating-system-machine-1"></span><span id="index-40"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">operating_system_machine/1</span></code></a><a class="headerlink" href="#operating-system-machine-1" title="Link to this heading"></a></h3>
+<p>Operating system hardware platform. On POSIX systems, it returns the value of <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-m</span></code>. On Windows systems, it returns the value of the <code class="docutils literal notranslate"><span class="pre">PROCESSOR_ARCHITECTURE</span></code> environment variable.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">operating_system_machine(Machine)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">operating_system_machine(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="operating-system-release-1">
+<span id="osp-0-operating-system-release-1"></span><span id="index-41"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">operating_system_release/1</span></code></a><a class="headerlink" href="#operating-system-release-1" title="Link to this heading"></a></h3>
+<p>Operating system release. On POSIX systems, it returns the value of <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-r</span></code>. On Windows systems, it uses <code class="docutils literal notranslate"><span class="pre">WMI</span></code> code.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">operating_system_release(Release)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">operating_system_release(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="command-line-arguments-1">
+<span id="osp-0-command-line-arguments-1"></span><span id="index-42"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">command_line_arguments/1</span></code></a><a class="headerlink" href="#command-line-arguments-1" title="Link to this heading"></a></h3>
+<p>Returns a list with the command line arguments that occur after <code class="docutils literal notranslate"><span class="pre">--</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">command_line_arguments(Arguments)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">command_line_arguments(-list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="sleep-1">
+<span id="osp-0-sleep-1"></span><span id="index-43"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sleep/1</span></code></a><a class="headerlink" href="#sleep-1" title="Link to this heading"></a></h3>
+<p>Suspends execution the given number of seconds.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sleep(Seconds)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sleep(+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="protected-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
+<p>(none)</p>
+</section>
+<section id="private-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
+<p>(none)</p>
+</section>
+<section id="operators">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
+<p>(none)</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="os_0.html#os-0"><span class="std std-ref">os</span></a>, <a class="reference internal" href="os_types_0.html#os-types-0"><span class="std std-ref">os_types</span></a></p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="os_types_0.html" class="btn btn-neutral float-left" title="os_types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pack_protocol_0.html" class="btn btn-neutral float-right" title="pack_protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2025, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

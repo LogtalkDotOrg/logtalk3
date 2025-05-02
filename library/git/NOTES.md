@@ -30,7 +30,7 @@ the used Prolog backend.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#git](../../docs/library_index.html#git)
+Open the [../../apis/library_index.html#git](../../apis/library_index.html#git)
 link in a web browser.
 
 

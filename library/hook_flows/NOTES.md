@@ -37,7 +37,7 @@ expansion workflows.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#hook-flows](../../docs/library_index.html#hook-flows)
+Open the [../../apis/library_index.html#hook-flows](../../apis/library_index.html#hook-flows)
 link in a web browser.
 
 

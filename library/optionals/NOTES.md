@@ -36,7 +36,7 @@ held by optional terms are not present.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#optionals](../../docs/library_index.html#optionals)
+Open the [../../apis/library_index.html#optionals](../../apis/library_index.html#optionals)
 link in a web browser.
 
 

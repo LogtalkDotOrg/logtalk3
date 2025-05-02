@@ -32,7 +32,7 @@ Prolog support for accessing the operating system time and date.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#dates](../../docs/library_index.html#dates)
+Open the [../../apis/library_index.html#dates](../../apis/library_index.html#dates)
 link in a web browser.
 
 

@@ -44,7 +44,7 @@ See also the `ids` and `uuid` libraries.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#ulid](../../docs/library_index.html#ulid)
+Open the [../../apis/library_index.html#ulid](../../apis/library_index.html#ulid)
 link in a web browser.
 
 

@@ -56,7 +56,7 @@ API documentation
 
 This tool API documentation is available at:
 
-[../../docs/library_index.html#lgtunit](../../docs/library_index.html#lgtunit)
+[../../../docs/apis/library_index.html#lgtunit](../../../docs/apis/library_index.html#lgtunit)
 
 
 Loading
@@ -1638,7 +1638,7 @@ files in the test set directories.
 There are several third-party xUnit report converters that can generate
 HTML files for easy browsing. For example:
 
-- https://docs.qameta.io/allure-report/ (supports multiple reports)
+- https://allurereport.org/docs/ (supports multiple reports)
 - https://github.com/Zir0-93/xunit-to-html (supports multiple test sets in a single report)
 - https://www.npmjs.com/package/xunit-viewer
 - https://github.com/JatechUK/NUnit-HTML-Report-Generator
@@ -1680,7 +1680,7 @@ Generating Allure reports
 -------------------------
 
 A `logtalk_allure_report.pl` Bash shell script and a `logtalk_allure_report.ps1`
-PowerShell script are provided for generating [Allure reports](https://docs.qameta.io/allure-report/)
+PowerShell script are provided for generating [Allure reports](https://allurereport.org/docs/)
 (version 2.26.0 or later required). This requires exporting test results in
 xUnit XML format. A simple usage example (assuming a current directory
 containing tests):

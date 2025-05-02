@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Release build script
-##   Last updated on April 11, 2025
+##   Last updated on May 2, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -103,13 +103,13 @@ scripts/cleandist.sh
 cd ..
 
 # Ensure that the Handbook and APIs documentation is up-to-date
-"logtalk-$version"/manuals/sources/build_manuals.sh
+"logtalk-$version"/docs/handbook/sources/build_manuals.sh
 "logtalk-$version"/scripts/update_html_docs.sh
 
 # Build manuals archive if enabled
 if [ "$BUILD_MANUALS" = true ]; then
     echo "Building manuals archive..."
-    cp -R "logtalk-$version/manuals" "logtalk-manuals-$version"
+    cp -R "logtalk-$version/docs/handbook" "logtalk-manuals-$version"
     tar -czf "logtalk-manuals-$version.tgz" "logtalk-manuals-$version"
 else
     echo "Skipping manuals archive build."

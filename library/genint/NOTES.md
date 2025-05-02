@@ -30,7 +30,7 @@ multi-threading support.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#genint](../../docs/library_index.html#genint)
+Open the [../../apis/library_index.html#genint](../../apis/library_index.html#genint)
 link in a web browser.
 
 

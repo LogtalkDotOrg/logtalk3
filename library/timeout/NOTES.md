@@ -34,7 +34,7 @@ that you are timing, are also compiled.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#timeout](../../docs/library_index.html#timeout)
+Open the [../../apis/library_index.html#timeout](../../apis/library_index.html#timeout)
 link in a web browser.
 
 

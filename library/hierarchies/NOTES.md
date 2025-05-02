@@ -29,7 +29,7 @@ object that requires reasoning about hierarchies.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#hierarchies](../../docs/library_index.html#hierarchies)
+Open the [../../apis/library_index.html#hierarchies](../../apis/library_index.html#hierarchies)
 link in a web browser.
 
 

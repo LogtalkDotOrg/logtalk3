@@ -44,7 +44,7 @@ https://en.wikipedia.org/wiki/Disjoint-set_data_structure
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#union-find](../../docs/library_index.html#union-find)
+Open the [../../apis/library_index.html#union-find](../../apis/library_index.html#union-find)
 link in a web browser.
 
 

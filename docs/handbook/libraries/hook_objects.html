@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hook_objects &mdash; The Logtalk Handbook v3.92.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=d8553e9b"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="html" href="html.html" />
+    <link rel="prev" title="hook_flows" href="hook_flows.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.92.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignvars.html"><code class="docutils literal notranslate"><span class="pre">assignvars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base64.html"><code class="docutils literal notranslate"><span class="pre">base64</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependents.html"><code class="docutils literal notranslate"><span class="pre">dependents</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dictionaries.html"><code class="docutils literal notranslate"><span class="pre">dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dif.html"><code class="docutils literal notranslate"><span class="pre">dif</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html"><code class="docutils literal notranslate"><span class="pre">edcg</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html"><code class="docutils literal notranslate"><span class="pre">events</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="format.html"><code class="docutils literal notranslate"><span class="pre">format</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="genint.html"><code class="docutils literal notranslate"><span class="pre">genint</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchies.html"><code class="docutils literal notranslate"><span class="pre">hierarchies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-prolog-backend-adapter-file-expansion-rules">Using the Prolog backend adapter file expansion rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#restoring-the-default-compiler-expansion-workflow">Restoring the default compiler expansion workflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#preventing-applying-any-other-user-defined-expansion-rules">Preventing applying any (other) user-defined expansion rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expanding-grammar-rules-into-clauses-independently-of-the-compiler">Expanding grammar rules into clauses independently of the compiler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-expansion-rules-defined-in-a-prolog-module">Using the expansion rules defined in a Prolog module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wrap-the-contents-of-a-plain-prolog-file-as-an-object">Wrap the contents of a plain Prolog file as an object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#outputting-term-expansion-results-to-a-stream-or-a-file">Outputting term-expansion results to a stream or a file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#printing-entity-predicate-goals-before-or-after-calling-them">Printing entity predicate goals before or after calling them</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#suppressing-goals">Suppressing goals</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ids.html"><code class="docutils literal notranslate"><span class="pre">ids</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="java.html"><code class="docutils literal notranslate"><span class="pre">java</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="listing.html"><code class="docutils literal notranslate"><span class="pre">listing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loops.html"><code class="docutils literal notranslate"><span class="pre">loops</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutations.html"><code class="docutils literal notranslate"><span class="pre">mutations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nested_dictionaries.html"><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html"><code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reader.html"><code class="docutils literal notranslate"><span class="pre">reader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorded_database.html"><code class="docutils literal notranslate"><span class="pre">recorded_database</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tsv.html"><code class="docutils literal notranslate"><span class="pre">tsv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ulid.html"><code class="docutils literal notranslate"><span class="pre">ulid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html"><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="union_find.html"><code class="docutils literal notranslate"><span class="pre">union_find</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="uuid.html"><code class="docutils literal notranslate"><span class="pre">uuid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="zippers.html"><code class="docutils literal notranslate"><span class="pre">zippers</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../docs/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Libraries</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/hook_objects.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="hook-objects">
+<span id="library-hook-objects"></span><h1><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code><a class="headerlink" href="#hook-objects" title="Link to this heading"></a></h1>
+<p>This library provides a set of convenient hook objects for defining
+custom expansion workflows (using, e.g., the <code class="docutils literal notranslate"><span class="pre">hook_flows</span></code> library) and
+for debugging. They are usable and useful as-is but should also be
+regarded as term- and goal-expansion examples that you can learn from,
+clone, and change to fit your application requirements.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#hook-objects">../../apis/library_index.html#hook-objects</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load all hook objects in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(loader)).
+</pre></div>
+</div>
+<p>To load a specific hook object, e.g., the <code class="docutils literal notranslate"><span class="pre">backend_adapter_hook</span></code>
+object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(backend_adapter_hook)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library hook objects, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(tester)).
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>The provided hook objects cover different expansion scenarios as
+follows.</p>
+<section id="using-the-prolog-backend-adapter-file-expansion-rules">
+<h3>Using the Prolog backend adapter file expansion rules<a class="headerlink" href="#using-the-prolog-backend-adapter-file-expansion-rules" title="Link to this heading"></a></h3>
+<p>Useful when defining a custom expansion workflow. This can be
+accomplished by loading the <code class="docutils literal notranslate"><span class="pre">backend_adapter_hook.lgt</span></code> file, which
+defines a <code class="docutils literal notranslate"><span class="pre">backend_adapter_hook</span></code> hook object that can be used as a
+workflow step.</p>
+</section>
+<section id="restoring-the-default-compiler-expansion-workflow">
+<h3>Restoring the default compiler expansion workflow<a class="headerlink" href="#restoring-the-default-compiler-expansion-workflow" title="Link to this heading"></a></h3>
+<p>In this case, load the <code class="docutils literal notranslate"><span class="pre">default_workflow_hook.lgt</span></code> file, which defines
+a <code class="docutils literal notranslate"><span class="pre">default_workflow_hook</span></code> hook object, and use the following <strong>goal</strong>
+to set the default hook object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(hook, default_workflow_hook).
+</pre></div>
+</div>
+</section>
+<section id="preventing-applying-any-other-user-defined-expansion-rules">
+<h3>Preventing applying any (other) user-defined expansion rules<a class="headerlink" href="#preventing-applying-any-other-user-defined-expansion-rules" title="Link to this heading"></a></h3>
+<p>When compiling a source file, we sometimes want to prevent applying
+expansion rules. This can be accomplished by simply loading the
+<code class="docutils literal notranslate"><span class="pre">identity_hook.lgt</span></code> file, which defines the <code class="docutils literal notranslate"><span class="pre">identity_hook</span></code> hook
+object, whose expansion rules simply succeed without changing the terms
+and goals, and setting it as the file-specific hook object writing as
+the first term in the file the <strong>directive</strong>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, identity_hook).
+</pre></div>
+</div>
+<p>Note that the compiler will always convert any grammar rules defined in
+the file into clauses. Although this conversion can also be performed as
+an expansion, grammar rules are part of the Logtalk language. If you
+want to preserve the grammar rules, use the hook objects described below
+to write them to a stream.</p>
+</section>
+<section id="expanding-grammar-rules-into-clauses-independently-of-the-compiler">
+<h3>Expanding grammar rules into clauses independently of the compiler<a class="headerlink" href="#expanding-grammar-rules-into-clauses-independently-of-the-compiler" title="Link to this heading"></a></h3>
+<p>Load the <code class="docutils literal notranslate"><span class="pre">grammar_rules_hook.lgt</span></code> and use the term-expansion rules in
+the <code class="docutils literal notranslate"><span class="pre">grammar_rules_hook</span></code> object. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> grammar_rules_hook<span class="o">::</span><span class="k">term_expansion</span>((a <span class="o">--&gt;</span> [b],c), <span class="nv">Clause</span>).
+
+<span class="nv">Clause</span> <span class="o">=</span> (a([b|<span class="nv">T</span>], <span class="nv">C</span>) <span class="o">:-</span> c(<span class="nv">T</span>, <span class="nv">C</span>))
+yes
+</pre></div>
+</div>
+</section>
+<section id="using-the-expansion-rules-defined-in-a-prolog-module">
+<h3>Using the expansion rules defined in a Prolog module<a class="headerlink" href="#using-the-expansion-rules-defined-in-a-prolog-module" title="Link to this heading"></a></h3>
+<p>Load the <code class="docutils literal notranslate"><span class="pre">prolog_module_hook.lgt</span></code>, which defines the parametric hook
+object <code class="docutils literal notranslate"><span class="pre">prolog_module_hook(Module)</span></code>. To use this hook object, you need
+to instantiate the parameter to the name of the module. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, prolog_module_hook(user)).
+</pre></div>
+</div>
+</section>
+<section id="wrap-the-contents-of-a-plain-prolog-file-as-an-object">
+<h3>Wrap the contents of a plain Prolog file as an object<a class="headerlink" href="#wrap-the-contents-of-a-plain-prolog-file-as-an-object" title="Link to this heading"></a></h3>
+<p>Load the <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook.lgt</span></code>, which defines the
+<code class="docutils literal notranslate"><span class="pre">object_wrapper_hook/0-2</span></code> hook objects. Use them to wrap the contents
+of a plain Prolog file as an object named after the file (optionally
+implementing a protocol) or an object with the given name and object
+relations. Can be used to apply Logtalk developer tools to plain Prolog
+code or when porting a Prolog application to Logtalk. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(<span class="s">&#39;plain.pl&#39;</span>, [hook(object_wrapper_hook)]).
+...
+
+| <span class="o">?-</span> <span class="k">current_object</span>(plain).
+yes
+</pre></div>
+</div>
+<p>Or:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(<span class="s">&#39;world_1.pl&#39;</span>, [hook(object_wrapper_hook(some_protocol))]).
+...
+
+| <span class="o">?-</span> <span class="k">current_object</span>(world_1).
+yes
+
+| <span class="o">?-</span> <span class="k">implements_protocol</span>(world_1, <span class="nv">Protocol</span>).
+<span class="nv">Protocol</span> <span class="o">=</span> some_protocol
+yes
+</pre></div>
+</div>
+<p>Or:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(<span class="s">&#39;foo.pl&#39;</span>, [hook(object_wrapper_hook(bar,[imports(some_category))]).
+...
+
+| <span class="o">?-</span> <span class="k">current_object</span>(bar).
+yes
+
+| <span class="o">?-</span> <span class="k">imports_category</span>(bar, <span class="nv">Category</span>).
+<span class="nv">Category</span> <span class="o">=</span> some_category
+yes
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook</span></code> object sets the <code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code>
+flag to <code class="docutils literal notranslate"><span class="pre">allow</span></code> for the generated object. This enables calling the
+predicates using the <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> context-switching control construct. But
+it’s usually better to define a protocol for the predicates being
+encapsulated and use instead the <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook/1-2</span></code> objects.</p>
+</section>
+<section id="outputting-term-expansion-results-to-a-stream-or-a-file">
+<h3>Outputting term-expansion results to a stream or a file<a class="headerlink" href="#outputting-term-expansion-results-to-a-stream-or-a-file" title="Link to this heading"></a></h3>
+<p>Load the <code class="docutils literal notranslate"><span class="pre">write_to_stream_hook.lgt</span></code> file and use the
+<code class="docutils literal notranslate"><span class="pre">write_to_stream_hook(Stream)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">write_to_stream_hook(Stream,</span> <span class="pre">Options)</span></code> hook objects. Alternatively,
+you can load the <code class="docutils literal notranslate"><span class="pre">write_to_file_hook.lgt</span></code> file and use the
+<code class="docutils literal notranslate"><span class="pre">write_to_file_hook(File)</span></code> or <code class="docutils literal notranslate"><span class="pre">write_to_file_hook(File,</span> <span class="pre">Options)</span></code>
+hook objects. The terms are not modified and thus these hook objects may
+be used at any point in an expansion workflow. The terms are written
+followed by a period and a new line.</p>
+<p>For example, assume that we want to expand all terms in a <code class="docutils literal notranslate"><span class="pre">input.pl</span></code>
+source file, writing the resulting terms to a <code class="docutils literal notranslate"><span class="pre">output.pl</span></code> file, using
+the expansion rules defined in a <code class="docutils literal notranslate"><span class="pre">expansions</span></code> hook object. Taking
+advantage of the <code class="docutils literal notranslate"><span class="pre">hook_flows</span></code> library <code class="docutils literal notranslate"><span class="pre">hook_pipeline/1</span></code> object, we
+can write:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_compile</span>(
+         <span class="s">&#39;input.pl&#39;</span>,
+         [hook(hook_pipeline([
+             expansions,
+             write_to_file_hook(<span class="s">&#39;output.pl&#39;</span>)
+         ]))]
+     ).
+</pre></div>
+</div>
+</section>
+<section id="printing-entity-predicate-goals-before-or-after-calling-them">
+<h3>Printing entity predicate goals before or after calling them<a class="headerlink" href="#printing-entity-predicate-goals-before-or-after-calling-them" title="Link to this heading"></a></h3>
+<p>This is helpful for quick debugging. Load the <code class="docutils literal notranslate"><span class="pre">print_goal_hook.lgt</span></code>
+file and use the <code class="docutils literal notranslate"><span class="pre">print_goal_hook</span></code> hook object. For example, we can
+set this hook object as the default hook:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(hook, print_goal_hook).
+</pre></div>
+</div>
+<p>Then, edit the entity source code to print selected goals:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo <span class="o">:-</span>
+    <span class="o">-</span> bar,   <span class="c">% print goal before calling it</span>
+    <span class="o">+</span> baz,   <span class="c">% print goal after calling it</span>
+    <span class="o">*</span> quux.  <span class="c">% print goal before and after calling it</span>
+</pre></div>
+</div>
+</section>
+<section id="suppressing-goals">
+<h3>Suppressing goals<a class="headerlink" href="#suppressing-goals" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">suppress_goal_hook.lgt</span></code> file provides the <code class="docutils literal notranslate"><span class="pre">suppress_goal_hook</span></code>
+hook object that supports suppressing a goal in a clause body by
+prefixing it using the <code class="docutils literal notranslate"><span class="pre">--</span></code> operator. We can set this hook object as
+the default hook using the goal:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(hook, suppress_goal_hook).
+</pre></div>
+</div>
+<p>If the expansion is only to be used in a single file, use instead the
+source file directive:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, suppress_goal_hook).
+</pre></div>
+</div>
+<p>Then, edit entity predicates to suppress goals. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo <span class="o">:-</span>
+    bar,
+    <span class="o">--</span> baz,
+    quux.
+</pre></div>
+</div>
+<p>The suppressed goals are replaced by calls to <code class="docutils literal notranslate"><span class="pre">true/0</span></code>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="hook_flows.html" class="btn btn-neutral float-left" title="hook_flows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="html.html" class="btn btn-neutral float-right" title="html" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2025, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

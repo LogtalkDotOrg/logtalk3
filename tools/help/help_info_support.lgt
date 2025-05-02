@@ -23,9 +23,9 @@
 	complements(help)).
 
 	:- info([
-		version is 0:8:1,
+		version is 0:9:0,
 		author is 'Paulo Moura',
-		date is 2024-04-08,
+		date is 2025-05-02,
 		comment is 'Experimental help predicates for inline browsing of the Texinfo versions of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, GNU Prolog, XVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, or YAP as the backend running on a POSIX system.'
 	]).
 
@@ -134,13 +134,13 @@
 		this(This),
 		object_property(This, file(_, Directory)),
 		current_logtalk_flag(version_data, logtalk(Major,Minor,Patch,_)),
-		atomic_list_concat([Directory, '../../manuals/TheLogtalkHandbook-',Major,'.',Minor,'.',Patch,'.info'], File).
+		atomic_list_concat([Directory, '../../docs/handbook/TheLogtalkHandbook-',Major,'.',Minor,'.',Patch,'.info'], File).
 
 	apis_file(File) :-
 		this(This),
 		object_property(This, file(_, Directory)),
 		current_logtalk_flag(version_data, logtalk(Major,Minor,Patch,_)),
-		atomic_list_concat([Directory, '../../docs/LogtalkAPIs-',Major,'.',Minor,'.',Patch,'.info'], File).
+		atomic_list_concat([Directory, '../../docs/apis/LogtalkAPIs-',Major,'.',Minor,'.',Patch,'.info'], File).
 
 	:- if(current_logtalk_flag(prolog_dialect, ciao)).
 

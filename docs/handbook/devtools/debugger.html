@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>debugger &mdash; The Logtalk Handbook v3.92.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=d8553e9b"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="diagrams" href="diagrams.html" />
+    <link rel="prev" title="debug_messages" href="debug_messages.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.92.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asdf.html"><code class="docutils literal notranslate"><span class="pre">asdf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_metrics.html"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dead_code_scanner.html"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug_messages.html"><code class="docutils literal notranslate"><span class="pre">debug_messages</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#alternative-debugger-tools">Alternative debugger tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="diagrams.html"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="doclet.html"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="help.html"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="issue_creator.html"><code class="docutils literal notranslate"><span class="pre">issue_creator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lgtdoc.html"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lgtunit.html"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linter.html"><code class="docutils literal notranslate"><span class="pre">linter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="make.html"><code class="docutils literal notranslate"><span class="pre">make</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="packs.html"><code class="docutils literal notranslate"><span class="pre">packs</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ports_profiler.html"><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiler.html"><code class="docutils literal notranslate"><span class="pre">profiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutor.html"><code class="docutils literal notranslate"><span class="pre">tutor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrapper.html"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../docs/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Developer Tools</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/devtools/debugger.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="debugger">
+<span id="library-debugger"></span><h1><code class="docutils literal notranslate"><span class="pre">debugger</span></code><a class="headerlink" href="#debugger" title="Link to this heading"></a></h1>
+<p>This tool provides the default Logtalk command-line debugger. Unlike
+Prolog systems, the Logtalk debugger is a regular application, using a
+public API. As a consequence, it must be explicitly loaded by the
+programmer, either manually at the top-level interpreter or
+automatically from a settings file.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>This tool API documentation is available at:</p>
+<p><a class="reference external" href="../../../docs/apis/library_index.html#debugger">../../../docs/apis/library_index.html#debugger</a></p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>This tool can be loaded using the query:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(debugger(loader)).
+</pre></div>
+</div>
+<p>When the code to be debugged runs computationally expensive
+initializations, loading this tool after the code may have a noticeable
+impact on loading times.</p>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(debugger(tester)).
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Debugging Logtalk source code (with this debugger) requires compiling
+source files using the <code class="docutils literal notranslate"><span class="pre">debug(on)</span></code> compiler flag. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(my_buggy_code, [debug(on)]).
+</pre></div>
+</div>
+<p>In alternative, you may also turn on the <code class="docutils literal notranslate"><span class="pre">debug</span></code> flag globally by
+typing:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(debug, on).
+</pre></div>
+</div>
+<p>But note that loader files may override this flag setting (e.g., by
+using <code class="docutils literal notranslate"><span class="pre">debug(off)</span></code> or <code class="docutils literal notranslate"><span class="pre">optimize(on)</span></code> options for loaded files). If
+that’s the case, you will need to either edit the loader files or write
+customized loader files enabling debugging. For detailed information on
+using the debugger, consult the debugging section of the User Manual:</p>
+<p><a class="reference external" href="../../../docs/handbook/userman/debugging.html">../../../docs/handbook/userman/debugging.html</a></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">debugger_messages.lgt</span></code> source file defines the default debugger
+message translations.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">dump_trace.lgt</span></code> provides a simple solution for dumping a goal
+trace to a file. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> dump_trace<span class="o">::</span>start_redirect_to_file(<span class="s">&#39;trace.txt&#39;</span>, some_goal),
+     dump_trace<span class="o">::</span>stop_redirect_to_file.
+</pre></div>
+</div>
+<p>A full trace can also be obtained at the top-level by using the <code class="docutils literal notranslate"><span class="pre">S</span></code>
+(Skip) command at the call port for the top-level goal when tracing it.</p>
+</section>
+<section id="alternative-debugger-tools">
+<h2>Alternative debugger tools<a class="headerlink" href="#alternative-debugger-tools" title="Link to this heading"></a></h2>
+<p>Logtalk provides basic support for the SWI-Prolog graphical tracer. The
+<strong>required</strong> settings are described in the <code class="docutils literal notranslate"><span class="pre">settings-sample.lgt</span></code> file.
+Logtalk queries can be traced using this tool by using the
+<code class="docutils literal notranslate"><span class="pre">gtrace/0-1</span></code> predicates. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> gtrace(foo<span class="o">::</span>bar).
+</pre></div>
+</div>
+<p>Or alternatively:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> gtrace, foo<span class="o">::</span>bar.
+</pre></div>
+</div>
+<p>You can also use the <code class="docutils literal notranslate"><span class="pre">gspy/1</span></code> predicate to spy on a Logtalk predicate
+specified as <code class="docutils literal notranslate"><span class="pre">Entity::Functor/Arity</span></code> when using the graphical tracer.
+When using this tool, internal Logtalk compiler/runtime predicates and
+compiled predicates that resulted from the term-expansion mechanism may
+be exposed in some cases. This issue is shared with Prolog code and
+results from the non-availability of source code for the predicates
+being traced.</p>
+</section>
+<section id="known-issues">
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
+<p>Clause breakpoints require a Prolog backend compiler that supports
+accessing read term starting line but only some backends (B-Prolog, GNU
+Prolog, JIProlog, XVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, and
+YAP) provide accurate line numbers. As a workaround, you can check the
+start line number for an entity predicate definition using a query such
+as:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">object_property</span>(<span class="nv">Entity</span>, defines(<span class="nv">Functor</span><span class="o">/</span><span class="nv">Arity</span>, <span class="nv">Properties</span>)).
+</pre></div>
+</div>
+<p>Check the returned <code class="docutils literal notranslate"><span class="pre">line_count/1</span></code> property to find if there’s any
+offset to the source file number of the predicate clause that you want
+to trace. This issue, if present, usually only affects the first
+predicate clause.</p>
+<p>Clause breakpoints are currently not available when using XSB as this
+backend doesn’t provide line information.</p>
+<p>Using the port command <code class="docutils literal notranslate"><span class="pre">p</span></code> (print) requires a backend supporting the
+user-defined <code class="docutils literal notranslate"><span class="pre">portray/1</span></code> hook predicate called via the <code class="docutils literal notranslate"><span class="pre">format/2-3</span></code>
+predicates <code class="docutils literal notranslate"><span class="pre">~p</span></code> control sequence.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="debug_messages.html" class="btn btn-neutral float-left" title="debug_messages" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="diagrams.html" class="btn btn-neutral float-right" title="diagrams" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2025, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

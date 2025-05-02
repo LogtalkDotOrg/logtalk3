@@ -35,7 +35,7 @@ The `monitor` object implements more sophisticated event handling predicates.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#events](../../docs/library_index.html#events)
+Open the [../../apis/library_index.html#events](../../apis/library_index.html#events)
 link in a web browser.
 
 

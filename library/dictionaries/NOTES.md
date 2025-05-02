@@ -30,7 +30,7 @@ regarded as opaque terms and only accessed using the library predicates.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#dictionaries](../../docs/library_index.html#dictionaries)
+Open the [../../apis/library_index.html#dictionaries](../../apis/library_index.html#dictionaries)
 link in a web browser.
 
 

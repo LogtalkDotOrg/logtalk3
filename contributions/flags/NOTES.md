@@ -16,7 +16,7 @@ Date: 27/11/2010
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#flags](../../docs/library_index.html#flags)
+Open the [../../apis/library_index.html#flags](../../apis/library_index.html#flags)
 link in a web browser.
 
 

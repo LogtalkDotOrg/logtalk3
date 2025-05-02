@@ -7,14 +7,14 @@
 
 # Logtalk distribution files and directories
 /TODO.txt
-/docs/*.pdf
-/docs/*.epub
-/docs/*.info
-/docs/LogtalkAPIs-*.md
-/manuals/*.pdf
-/manuals/*.epub
-/manuals/*.info
-/manuals/TheLogtalkHandbook-*.md
+/docs/apis/*.pdf
+/docs/apis/*.epub
+/docs/apis/*.info
+/docs/apis/LogtalkAPIs-*.md
+/docs/handbook/*.pdf
+/docs/handbook/*.epub
+/docs/handbook/*.info
+/docs/handbook/TheLogtalkHandbook-*.md
 
 # Logtalk automated documenting and testing logs
 logtalk_tester_logs/

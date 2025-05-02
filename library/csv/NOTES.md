@@ -50,7 +50,7 @@ or the stream handle or alias.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#csv](../../docs/library_index.html#csv)
+Open the [../../apis/library_index.html#csv](../../apis/library_index.html#csv)
 link in a web browser.
 
 

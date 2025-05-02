@@ -61,7 +61,7 @@ For sample queries, please see the `SCRIPT.txt` file.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#fcube](../../docs/library_index.html#fcube)
+Open the [../../apis/library_index.html#fcube](../../apis/library_index.html#fcube)
 link in a web browser.
 
 

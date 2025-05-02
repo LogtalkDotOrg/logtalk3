@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>arbitrary &mdash; Logtalk APIs v3.92.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d8553e9b"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="assertions" href="assertions_0.html" />
+    <link rel="prev" title="Libraries" href="library_index.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Logtalk APIs
+              <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.92.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Libraries</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#arbitrary"><span class="xref std std-ref">arbitrary</span></a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">arbitrary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><span class="xref std std-ref">assertions</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assignvars"><span class="xref std std-ref">assignvars</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#base64"><span class="xref std std-ref">base64</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#cbor"><span class="xref std std-ref">cbor</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><span class="xref std std-ref">code_metrics</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><span class="xref std std-ref">core</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#coroutining"><span class="xref std std-ref">coroutining</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#csv"><span class="xref std std-ref">csv</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dates"><span class="xref std std-ref">dates</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><span class="xref std std-ref">dead_code_scanner</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debug-messages"><span class="xref std std-ref">debug_messages</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><span class="xref std std-ref">debugger</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dependents"><span class="xref std std-ref">dependents</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><span class="xref std std-ref">diagrams</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dictionaries"><span class="xref std std-ref">dictionaries</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dif"><span class="xref std std-ref">dif</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><span class="xref std std-ref">doclet</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#edcg"><span class="xref std std-ref">edcg</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#events"><span class="xref std std-ref">events</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#expand-library-alias-paths"><span class="xref std std-ref">expand_library_alias_paths</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#expecteds"><span class="xref std std-ref">expecteds</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#fcube"><span class="xref std std-ref">fcube</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><span class="xref std std-ref">flags</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#format"><span class="xref std std-ref">format</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#genint"><span class="xref std std-ref">genint</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#gensym"><span class="xref std std-ref">gensym</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#git"><span class="xref std std-ref">git</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#grammars"><span class="xref std std-ref">grammars</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#heaps"><span class="xref std std-ref">heaps</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><span class="xref std std-ref">help</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#hierarchies"><span class="xref std std-ref">hierarchies</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#hook-flows"><span class="xref std std-ref">hook_flows</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#hook-objects"><span class="xref std std-ref">hook_objects</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#html"><span class="xref std std-ref">html</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ids"><span class="xref std std-ref">ids</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#intervals"><span class="xref std std-ref">intervals</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><span class="xref std std-ref">iso8601</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#issue-creator"><span class="xref std std-ref">issue_creator</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#java"><span class="xref std std-ref">java</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#json"><span class="xref std std-ref">json</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><span class="xref std std-ref">lgtdoc</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><span class="xref std std-ref">library</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#listing"><span class="xref std std-ref">listing</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#logging"><span class="xref std std-ref">logging</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#meta"><span class="xref std std-ref">meta</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#meta-compiler"><span class="xref std std-ref">meta_compiler</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#nested-dictionaries"><span class="xref std std-ref">nested_dictionaries</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#optionals"><span class="xref std std-ref">optionals</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#options"><span class="xref std std-ref">options</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#os"><span class="xref std std-ref">os</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#packs"><span class="xref std std-ref">packs</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><span class="xref std std-ref">pddl_parser</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports-profiler"><span class="xref std std-ref">ports_profiler</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#queues"><span class="xref std std-ref">queues</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#random"><span class="xref std std-ref">random</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#reader"><span class="xref std std-ref">reader</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#recorded-database"><span class="xref std std-ref">recorded_database</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#redis"><span class="xref std std-ref">redis</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#sets"><span class="xref std std-ref">sets</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#statistics"><span class="xref std std-ref">statistics</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#timeout"><span class="xref std std-ref">timeout</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><span class="xref std std-ref">tutor</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#types"><span class="xref std std-ref">types</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ulid"><span class="xref std std-ref">ulid</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#union-find"><span class="xref std std-ref">union_find</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#uuid"><span class="xref std std-ref">uuid</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><span class="xref std std-ref">verdi_neruda</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><span class="xref std std-ref">wrapper</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#xml-parser"><span class="xref std std-ref">xml_parser</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#zippers"><span class="xref std std-ref">zippers</span></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicates</a></li>
+</ul>
+
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="core_inheritance_diagram.svg">Core diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="library_inheritance_diagram.svg">Libraries diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="tools_inheritance_diagram.svg">Tools diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="ports_inheritance_diagram.svg">Ports diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="contributions_inheritance_diagram.svg">Contributions diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+    </ul>
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../handbook/index.html">Handbook</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Logtalk APIs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/arbitrary_0.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p class="right" id="arbitrary-0"><span id="index-0"></span><strong>category</strong></p>
+<section id="arbitrary">
+<h1><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code><a class="headerlink" href="#arbitrary" title="Link to this heading"></a></h1>
+<p>Adds predicates for generating and shrinking random values for selected types to the library <code class="docutils literal notranslate"><span class="pre">type</span></code> object. User extensible.</p>
+<div class="line-block">
+<div class="line"><strong>Availability:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(arbitrary(loader))</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 2:35:1</div>
+<div class="line"><strong>Date:</strong> 2024-08-13</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Complements:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></div>
+</div>
+<div class="line"><strong>Uses:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="fast_random_0.html#fast-random-0"><span class="std std-ref">fast_random</span></a></div>
+<div class="line"><a class="reference internal" href="integer_0.html#integer-0"><span class="std std-ref">integer</span></a></div>
+<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Logtalk specific types: <code class="docutils literal notranslate"><span class="pre">entity</span></code>, <code class="docutils literal notranslate"><span class="pre">object</span></code>, <code class="docutils literal notranslate"><span class="pre">protocol</span></code>, <code class="docutils literal notranslate"><span class="pre">category</span></code>, <code class="docutils literal notranslate"><span class="pre">entity_identifier</span></code>, <code class="docutils literal notranslate"><span class="pre">object_identifier</span></code>, <code class="docutils literal notranslate"><span class="pre">protocol_identifier</span></code>, <code class="docutils literal notranslate"><span class="pre">category_identifier</span></code>, <code class="docutils literal notranslate"><span class="pre">event</span></code>, <code class="docutils literal notranslate"><span class="pre">predicate</span></code>.</p></li>
+<li><p>Prolog module related types (when the backend compiler supports modules): <code class="docutils literal notranslate"><span class="pre">module</span></code>, <code class="docutils literal notranslate"><span class="pre">module_identifier</span></code>, <code class="docutils literal notranslate"><span class="pre">qualified_callable</span></code>.</p></li>
+<li><p>Prolog base types: <code class="docutils literal notranslate"><span class="pre">term</span></code>, <code class="docutils literal notranslate"><span class="pre">var</span></code>, <code class="docutils literal notranslate"><span class="pre">nonvar</span></code>, <code class="docutils literal notranslate"><span class="pre">atomic</span></code>, <code class="docutils literal notranslate"><span class="pre">atom</span></code>, <code class="docutils literal notranslate"><span class="pre">number</span></code>, <code class="docutils literal notranslate"><span class="pre">integer</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">compound</span></code>, <code class="docutils literal notranslate"><span class="pre">callable</span></code>, <code class="docutils literal notranslate"><span class="pre">ground</span></code>.</p></li>
+<li><p>Atom derived types: <code class="docutils literal notranslate"><span class="pre">non_quoted_atom</span></code>, <code class="docutils literal notranslate"><span class="pre">non_empty_atom</span></code>, <code class="docutils literal notranslate"><span class="pre">non_empty_atom(CharSet)</span></code>, <code class="docutils literal notranslate"><span class="pre">boolean</span></code>, <code class="docutils literal notranslate"><span class="pre">character</span></code>, <code class="docutils literal notranslate"><span class="pre">in_character</span></code>, <code class="docutils literal notranslate"><span class="pre">char</span></code>, <code class="docutils literal notranslate"><span class="pre">operator_specifier</span></code>, <code class="docutils literal notranslate"><span class="pre">hex_char</span></code>.</p></li>
+<li><p>Atom derived parametric types: <code class="docutils literal notranslate"><span class="pre">atom(CharSet)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(CharSet,Length)</span></code>, <code class="docutils literal notranslate"><span class="pre">non_empty_atom(CharSet)</span></code>, <code class="docutils literal notranslate"><span class="pre">character(CharSet)</span></code>, <code class="docutils literal notranslate"><span class="pre">in_character(CharSet)</span></code>, <code class="docutils literal notranslate"><span class="pre">char(CharSet)</span></code>.</p></li>
+<li><p>Number derived types: <code class="docutils literal notranslate"><span class="pre">positive_number</span></code>, <code class="docutils literal notranslate"><span class="pre">negative_number</span></code>, <code class="docutils literal notranslate"><span class="pre">non_positive_number</span></code>, <code class="docutils literal notranslate"><span class="pre">non_negative_number</span></code>.</p></li>
+<li><p>Float derived types: <code class="docutils literal notranslate"><span class="pre">positive_float</span></code>, <code class="docutils literal notranslate"><span class="pre">negative_float</span></code>, <code class="docutils literal notranslate"><span class="pre">non_positive_float</span></code>, <code class="docutils literal notranslate"><span class="pre">non_negative_float</span></code>, <code class="docutils literal notranslate"><span class="pre">probability</span></code>.</p></li>
+<li><p>Integer derived types: <code class="docutils literal notranslate"><span class="pre">positive_integer</span></code>, <code class="docutils literal notranslate"><span class="pre">negative_integer</span></code>, <code class="docutils literal notranslate"><span class="pre">non_positive_integer</span></code>, <code class="docutils literal notranslate"><span class="pre">non_negative_integer</span></code>, <code class="docutils literal notranslate"><span class="pre">byte</span></code>, <code class="docutils literal notranslate"><span class="pre">in_byte</span></code>, <code class="docutils literal notranslate"><span class="pre">character_code</span></code>, <code class="docutils literal notranslate"><span class="pre">in_character_code</span></code>, <code class="docutils literal notranslate"><span class="pre">code</span></code>, <code class="docutils literal notranslate"><span class="pre">operator_priority</span></code>, <code class="docutils literal notranslate"><span class="pre">hex_code</span></code>.</p></li>
+<li><p>Integer derived parametric types: <code class="docutils literal notranslate"><span class="pre">character_code(CharSet)</span></code>, <code class="docutils literal notranslate"><span class="pre">in_character_code(CharSet)</span></code>, <code class="docutils literal notranslate"><span class="pre">code(CharSet)</span></code>.</p></li>
+<li><p>List types (compound derived types): <code class="docutils literal notranslate"><span class="pre">list</span></code>, <code class="docutils literal notranslate"><span class="pre">non_empty_list</span></code>, <code class="docutils literal notranslate"><span class="pre">partial_list</span></code>, <code class="docutils literal notranslate"><span class="pre">list_or_partial_list</span></code>, <code class="docutils literal notranslate"><span class="pre">list(Type)</span></code>, <code class="docutils literal notranslate"><span class="pre">list(Type,Length)</span></code>, <code class="docutils literal notranslate"><span class="pre">list(Type,Min,Max)</span></code>, <code class="docutils literal notranslate"><span class="pre">list(Type,Length,Min,Max)</span></code>, <code class="docutils literal notranslate"><span class="pre">non_empty_list(Type)</span></code>, <code class="docutils literal notranslate"><span class="pre">codes</span></code>, <code class="docutils literal notranslate"><span class="pre">chars</span></code>.</p></li>
+<li><p>Difference list types (compound derived types): <code class="docutils literal notranslate"><span class="pre">difference_list</span></code>, <code class="docutils literal notranslate"><span class="pre">difference_list(Type)</span></code>.</p></li>
+<li><p>List and difference list types length: The types that do not take a fixed length generate lists with a length in the <code class="docutils literal notranslate"><span class="pre">[0,MaxSize]</span></code> interval (<code class="docutils literal notranslate"><span class="pre">[1,MaxSize]</span></code> for non-empty list types).</p></li>
+<li><p>Predicate and non-terminal indicator types arity: These types generate indicators with an arity in the <code class="docutils literal notranslate"><span class="pre">[0,MaxSize]</span></code> interval.</p></li>
+<li><p>Other compound derived types: <code class="docutils literal notranslate"><span class="pre">compound(Name,Types)</span></code>, <code class="docutils literal notranslate"><span class="pre">predicate_indicator</span></code>, <code class="docutils literal notranslate"><span class="pre">non_terminal_indicator</span></code>, <code class="docutils literal notranslate"><span class="pre">predicate_or_non_terminal_indicator</span></code>, <code class="docutils literal notranslate"><span class="pre">clause</span></code>, <code class="docutils literal notranslate"><span class="pre">grammar_rule</span></code>, <code class="docutils literal notranslate"><span class="pre">pair</span></code>, <code class="docutils literal notranslate"><span class="pre">pair(KeyType,ValueType)</span></code>.</p></li>
+<li><p>Other types: <code class="docutils literal notranslate"><span class="pre">Object::Closure</span></code>, <code class="docutils literal notranslate"><span class="pre">between(Type,Lower,Upper)</span></code>, <code class="docutils literal notranslate"><span class="pre">property(Type,LambdaExpression)</span></code>, <code class="docutils literal notranslate"><span class="pre">one_of(Type,Set)</span></code>, <code class="docutils literal notranslate"><span class="pre">var_or(Type)</span></code>, <code class="docutils literal notranslate"><span class="pre">ground(Type)</span></code>, <code class="docutils literal notranslate"><span class="pre">types(Types)</span></code>, <code class="docutils literal notranslate"><span class="pre">types_frequency(Pairs)</span></code>, <code class="docutils literal notranslate"><span class="pre">transform(Type,Closure)</span></code>, <code class="docutils literal notranslate"><span class="pre">constrain(Type,Closure)</span></code>.</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">Object::Closure</span></code> notes: Allows calling public object predicates as generators and shrinkers. The <code class="docutils literal notranslate"><span class="pre">Closure</span></code> closure is extended with either a single argument, the generated arbitrary value, or with two arguments, when shrinking a value.</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">compound(Name,Types)</span></code> notes: Generate a random compound term with the given name with a random argument for each type.</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">types_frequency(Pairs)</span></code> notes: Generate a random term for one of the types in a list of <code class="docutils literal notranslate"><span class="pre">Type-Frequency</span></code> pairs. The type is randomly selected taking into account the types frequency.</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">transform(Type,Closure)</span></code> notes: Generate a random term by transforming the term generated for the given type using the given closure.</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">constrain(Type,Closure)</span></code> notes: Generate a random term for the given type that satisfy the given closure.</p></li>
+<li><p>Registering new types: Add clauses for the <code class="docutils literal notranslate"><span class="pre">arbitrary/1-2</span></code> multifile predicates and optionally for the <code class="docutils literal notranslate"><span class="pre">shrinker/1</span></code> and <code class="docutils literal notranslate"><span class="pre">shrink/3</span></code> multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.</p></li>
+<li><p>Shrinking values: The <code class="docutils literal notranslate"><span class="pre">shrink/3</span></code> should either succeed or fail but never throw an exception.</p></li>
+<li><p>Character sets: <code class="docutils literal notranslate"><span class="pre">ascii_identifier</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_printable</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_full</span></code>, <code class="docutils literal notranslate"><span class="pre">byte</span></code>, <code class="docutils literal notranslate"><span class="pre">unicode_bmp</span></code>, <code class="docutils literal notranslate"><span class="pre">unicode_full</span></code>.</p></li>
+<li><p>Default character sets: The default character set when using a parameterizable type that takes a character set parameter depends on the type.</p></li>
+<li><p>Default character sets: Entity, predicate, and non-terminal identifier types plus compound and callable types default to an <code class="docutils literal notranslate"><span class="pre">ascii_identifier</span></code> functor. Character and character code types default to <code class="docutils literal notranslate"><span class="pre">ascii_full</span></code>. Other types default to <code class="docutils literal notranslate"><span class="pre">ascii_printable</span></code>.</p></li>
+<li><p>Caveats: The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.</p></li>
+<li><p>Unicode limitations: Currently, correct character/code generation is only ensured for XVM and SWI-Prolog as other backends do not provide support for querying a Unicode code point category.</p></li>
+</ul>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><strong>Inherited public predicates:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
+</div>
+</div>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#arbitrary-1" id="id2"><code class="docutils literal notranslate"><span class="pre">arbitrary/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#arbitrary-2" id="id3"><code class="docutils literal notranslate"><span class="pre">arbitrary/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#shrinker-1" id="id4"><code class="docutils literal notranslate"><span class="pre">shrinker/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#shrink-3" id="id5"><code class="docutils literal notranslate"><span class="pre">shrink/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#shrink-sequence-3" id="id6"><code class="docutils literal notranslate"><span class="pre">shrink_sequence/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#edge-case-2" id="id7"><code class="docutils literal notranslate"><span class="pre">edge_case/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#get-seed-1" id="id8"><code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#set-seed-1" id="id9"><code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#max-size-1" id="id10"><code class="docutils literal notranslate"><span class="pre">max_size/1</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id11">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id12">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id13">Operators</a></p></li>
+</ul>
+</nav>
+<section id="public-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
+<section id="arbitrary-1">
+<span id="arbitrary-0-arbitrary-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">arbitrary/1</span></code></a><a class="headerlink" href="#arbitrary-1" title="Link to this heading"></a></h3>
+<p>Table of defined types for which an arbitrary value can be generated. A new type can be registered by defining a clause for this predicate and adding a clause for the <code class="docutils literal notranslate"><span class="pre">arbitrary/2</span></code> multifile predicate.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">arbitrary(Type)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">arbitrary(?callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="arbitrary-2">
+<span id="arbitrary-0-arbitrary-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">arbitrary/2</span></code></a><a class="headerlink" href="#arbitrary-2" title="Link to this heading"></a></h3>
+<p>Generates an arbitrary term of the specified type. Fails if the type is not supported. A new generator can be defined by adding a clause for this predicate and registering it via the <code class="docutils literal notranslate"><span class="pre">arbitrary/1</span></code> predicate.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">arbitrary(Type,Term)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">arbitrary(::,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">arbitrary(&#64;callable,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="shrinker-1">
+<span id="arbitrary-0-shrinker-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">shrinker/1</span></code></a><a class="headerlink" href="#shrinker-1" title="Link to this heading"></a></h3>
+<p>Table of defined types for which a shrinker is provided. A new shrinker can be registered by defining a clause for this predicate and adding a definition for the <code class="docutils literal notranslate"><span class="pre">shrink/3</span></code> multifile predicate.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">shrinker(Type)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">shrinker(?callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="shrink-3">
+<span id="arbitrary-0-shrink-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">shrink/3</span></code></a><a class="headerlink" href="#shrink-3" title="Link to this heading"></a></h3>
+<p>Shrinks a value to a smaller value if possible. Must generate a finite number of solutions. Fails if the type is not supported. A new shrinker can be defined by adding a clause for this predicate and registering it via the <code class="docutils literal notranslate"><span class="pre">shrinker/1</span></code> predicate.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">shrink(Type,Large,Small)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">shrink(&#64;callable,&#64;term,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="shrink-sequence-3">
+<span id="arbitrary-0-shrink-sequence-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">shrink_sequence/3</span></code></a><a class="headerlink" href="#shrink-sequence-3" title="Link to this heading"></a></h3>
+<p>Shrinks a value repeatedly until shrinking is no longer possible returning the sequence of values (ordered from larger to smaller value). Fails if the type is not supported.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">shrink_sequence(Type,Value,Sequence)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">shrink_sequence(&#64;callable,&#64;term,-list(term))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="edge-case-2">
+<span id="arbitrary-0-edge-case-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">edge_case/2</span></code></a><a class="headerlink" href="#edge-case-2" title="Link to this heading"></a></h3>
+<p>Table of type edge cases. Fails if the given type have no defined edge cases. New edge cases for existing or new types can be added by defining a clause for this multifile predicate.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">edge_case(Type,Term)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">edge_case(?callable,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="get-seed-1">
+<span id="arbitrary-0-get-seed-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code></a><a class="headerlink" href="#get-seed-1" title="Link to this heading"></a></h3>
+<p>Gets the current random generator seed. Seed should be regarded as an opaque ground term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">get_seed(Seed)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">get_seed(-ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="set-seed-1">
+<span id="arbitrary-0-set-seed-1"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code></a><a class="headerlink" href="#set-seed-1" title="Link to this heading"></a></h3>
+<p>Sets the random generator seed to a given value returned by calling the <code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code> predicate.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_seed(Seed)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set_seed(+ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="max-size-1">
+<span id="arbitrary-0-max-size-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">max_size/1</span></code></a><a class="headerlink" href="#max-size-1" title="Link to this heading"></a></h3>
+<p>User defined maximum size for types where its meaningful and implicit. When not defined, defaults to 42. When multiple definitions exist, the first valid one found is used.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">max_size(Size)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">max_size(?positive_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="protected-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
+<p>(no local declarations; see entity ancestors if any)</p>
+</section>
+<section id="private-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
+<p>(no local declarations; see entity ancestors if any)</p>
+</section>
+<section id="operators">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
+<p>(none)</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="library_index.html" class="btn btn-neutral float-left" title="Libraries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="assertions_0.html" class="btn btn-neutral float-right" title="assertions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2025, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -105,9 +105,10 @@ and with general knowledge about object-oriented programming is available at
 the [Learn X in Y minutes](https://learnxinyminutes.com/docs/logtalk/) website.
 
 The HTML version of the Logtalk Handbook is included with the sources and can
-be found in the [manuals](manuals/) directory. It's also available online at:
+be found in the [`docs/handbook`](docs/handbook/) directory. It's also available
+online at:
 
-https://logtalk.org/manuals/index.html
+https://logtalk.org/docs/handbook/index.html
 
 PDF, ePub, and Texinfo versions of the Logtalk Handbook can be downloaded from:
 
@@ -118,14 +119,14 @@ user manual, the reference manual, glossary, FAQ, the library overviews, plus
 the developer tools documentation.
 
 The API documentation for the core, library, tools, and contributions is
-provided in HTML format and can be found in the [docs](docs/) directory and
-also available online at:
+provided in HTML format and can be found in the [`docs/apis`](docs//apis)
+directory and also available online at:
 
-https://logtalk.org/docs/index.html
+https://logtalk.org/docs/apis/index.html
 
 Most directories include `NOTES.md` documentation files.
 
-On POSIX systems, there's also a [man page](man/man1) for most shell scripts.
+On POSIX systems, there's also [man pages](docs/man/man1) for most shell scripts.
 A list of these scripts can be generated using the `apropos logtalk` command.
 [HTML versions](https://logtalk.org/documentation.html#man-pages) of the man
 pages are also available at the Logtalk website.

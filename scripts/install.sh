@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Logtalk installation script
-##   Last updated on March 23, 2025
+##   Last updated on May 2, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -42,7 +42,7 @@ default_directory=logtalk-$version
 
 print_version() {
 	echo "Current $(basename "$0") version:"
-	echo "  0.14"
+	echo "  0.15"
 	exit 0
 }
 
@@ -161,15 +161,15 @@ ln -sf ../share/logtalk/integration/yaplgt.sh yaplgt
 
 mkdir -p ../share/man/man1
 cd ../share/man/man1 || exit 1
-gzip --best ../../logtalk/man/man1/*.1
-for file in ../../logtalk/man/man1/*.1.gz ; do
+gzip --best ../../logtalk/docs/man/man1/*.1
+for file in ../../logtalk/docs/man/man1/*.1.gz ; do
 	ln -sf "$file" "$(basename "$file")"
 done
 
 if [ "$(command -v install-info)" != "" ]; then
 	mkdir -p ../../info
 	cd ../../info || exit 1
-	if [ -f ../logtalk/docs/LogtalkAPIs-$version_base.info ] ; then
+	if [ -f ../logtalk/docs/apis/LogtalkAPIs-$version_base.info ] ; then
 		if [ -f dir ] ; then
 			for file in ./LogtalkAPIs-*.info ; do
 				[ -e "$file" ] || continue
@@ -177,10 +177,10 @@ if [ "$(command -v install-info)" != "" ]; then
 				install-info --silent --delete "$file" dir > /dev/null 2>&1
 			done
 		fi
-		cp ../logtalk/docs/LogtalkAPIs-$version_base.info .
+		cp ../logtalk/docs/apis/LogtalkAPIs-$version_base.info .
 		install-info LogtalkAPIs-$version_base.info dir
 	fi
-	if [ -f ../logtalk/manuals/TheLogtalkHandbook-$version_base.info ] ; then
+	if [ -f ../logtalk/docs/handbook/TheLogtalkHandbook-$version_base.info ] ; then
 		if [ -f dir ] ; then
 			for file in ./TheLogtalkHandbook-*.info ; do
 				[ -e "$file" ] || continue
@@ -188,7 +188,7 @@ if [ "$(command -v install-info)" != "" ]; then
 				install-info --silent --delete "$file" dir > /dev/null 2>&1
 			done
 		fi
-		cp ../logtalk/manuals/TheLogtalkHandbook-$version_base.info .
+		cp ../logtalk/docs/handbook/TheLogtalkHandbook-$version_base.info .
 		install-info TheLogtalkHandbook-$version_base.info dir
 	fi
 	echo "Ensure that the \"$prefix/share/info\" directory is in your INFOPATH."

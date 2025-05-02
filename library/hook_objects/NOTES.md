@@ -31,7 +31,7 @@ your application requirements.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#hook-objects](../../docs/library_index.html#hook-objects)
+Open the [../../apis/library_index.html#hook-objects](../../apis/library_index.html#hook-objects)
 link in a web browser.
 
 

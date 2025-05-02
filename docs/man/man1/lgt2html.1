@@ -1,0 +1,96 @@
+.TH lgt2html 1 "May 2, 2025" "Logtalk 3.92.0" "Logtalk Documentation"
+
+.SH NAME
+lgt2html \- Logtalk script for converting XML documenting files into (X)HTML files
+
+.SH SYNOPSIS
+.B lgt2html
+[\fB-f \fIformat\fR]
+[\fB-d \fIdirectory\fR]
+[\fB-i \fIindex\fR]
+[\fB-t \fItitle\fR]
+[\fB-p \fIprocessor\fR]
+.br
+.B lgt2html
+.B \-h
+
+.SH DESCRIPTION
+\fBlgt2html\fR is a Logtalk script for converting all XML documenting files in the current directory into (X)HTML files.
+
+.SH OPTIONS
+.TP
+.B \-f 
+.I format
+Output file format (either \fIxhtml\fR or \fIhtml\fR).
+.TP
+.B \-d
+.I directory
+Output directory for the generated (X)HTML files.
+.TP
+.B \-i
+.I index
+Name of the index file.
+.TP
+.B \-t
+.I title
+Title to be used in the index file.
+.TP
+.B \-p
+.I processor
+XSLT processor.
+
+.SH REQUIREMENTS
+Requires a compatible XSLT processor. See the script help screen for more information.
+
+.SH ENVIRONMENT
+.TP
+.B LOGTALKHOME
+Specifies the location of the Logtalk installation.
+.TP
+.B LOGTALKUSER
+Specifies the location of the Logtalk user directory.
+
+.SH FILES
+.TP
+.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk_entity.dtd
+The Logtalk entity DTD file.
+.TP
+.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk_index.dtd
+The Logtalk index DTD file.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/custom.ent
+The Logtalk custom entities file.
+.TP
+.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk_entity.xsd
+The Logtalk entity XML Schema file.
+.TP
+.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk_index.xsd
+The Logtalk index XML Schema file.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk.css
+The default CSS file for the generated (X)HTML files.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_html.xsl
+The Logtalk entity XSLT file for generating HTML files.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_html.xsl
+The Logtalk index XSLT file for generating HTML files.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_xhtml.xsl
+The Logtalk entity XSLT file for generating XHTML files.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_xhtml.xsl
+The Logtalk index XSLT file for generating XHTML files.
+
+.SH "SEE ALSO"
+The Logtalk website at https://logtalk.org/
+.PP
+The Logtalk Handbook at \fB$LOGTALKHOME/docs/handbook/index.html\fR
+.PP
+logtalk_user_setup(1),\ lgt2txt(1),\ lgt2md(1),\ lgt2xml(1),\ lgt2pdf(1)
+
+.SH AUTHOR
+Paulo Moura <pmoura@logtalk.org>
+
+.SH COPYRIGHT
+Copyright (c) 1998-2025 Paulo Moura.

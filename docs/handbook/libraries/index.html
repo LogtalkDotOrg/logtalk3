@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Libraries &mdash; The Logtalk Handbook v3.92.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=d8553e9b"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Overview" href="overview.html" />
+    <link rel="prev" title="wrapper" href="../devtools/wrapper.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.92.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Libraries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignvars.html"><code class="docutils literal notranslate"><span class="pre">assignvars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base64.html"><code class="docutils literal notranslate"><span class="pre">base64</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependents.html"><code class="docutils literal notranslate"><span class="pre">dependents</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dictionaries.html"><code class="docutils literal notranslate"><span class="pre">dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dif.html"><code class="docutils literal notranslate"><span class="pre">dif</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html"><code class="docutils literal notranslate"><span class="pre">edcg</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html"><code class="docutils literal notranslate"><span class="pre">events</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="format.html"><code class="docutils literal notranslate"><span class="pre">format</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="genint.html"><code class="docutils literal notranslate"><span class="pre">genint</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchies.html"><code class="docutils literal notranslate"><span class="pre">hierarchies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ids.html"><code class="docutils literal notranslate"><span class="pre">ids</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="java.html"><code class="docutils literal notranslate"><span class="pre">java</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="listing.html"><code class="docutils literal notranslate"><span class="pre">listing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loops.html"><code class="docutils literal notranslate"><span class="pre">loops</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutations.html"><code class="docutils literal notranslate"><span class="pre">mutations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nested_dictionaries.html"><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html"><code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reader.html"><code class="docutils literal notranslate"><span class="pre">reader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorded_database.html"><code class="docutils literal notranslate"><span class="pre">recorded_database</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tsv.html"><code class="docutils literal notranslate"><span class="pre">tsv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ulid.html"><code class="docutils literal notranslate"><span class="pre">ulid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html"><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="union_find.html"><code class="docutils literal notranslate"><span class="pre">union_find</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="uuid.html"><code class="docutils literal notranslate"><span class="pre">uuid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="zippers.html"><code class="docutils literal notranslate"><span class="pre">zippers</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../docs/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Libraries</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <span class="target" id="library-library"></span><section id="libraries">
+<h1>Libraries<a class="headerlink" href="#libraries" title="Link to this heading"></a></h1>
+<p>The documentation of each library can also be found in the library
+directory in the <code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code> file.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#library-documentation">Library documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#loading-libraries">Loading libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#testing-libraries">Testing libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#credits">Credits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#other-notes">Other notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="arbitrary.html"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html#pre-defined-types">Pre-defined types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html#defining-new-generators-and-shrinkers">Defining new generators and shrinkers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html#scoped-generators-and-shrinkers">Scoped generators and shrinkers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html#reproducing-sequences-of-arbitrary-terms">Reproducing sequences of arbitrary terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html#default-size-of-generated-terms">Default size of generated terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="assignvars.html"><code class="docutils literal notranslate"><span class="pre">assignvars</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="assignvars.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignvars.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignvars.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="base64.html"><code class="docutils literal notranslate"><span class="pre">base64</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="base64.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base64.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base64.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base64.html#encoding">Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base64.html#decoding">Decoding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basic_types.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_types.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_types.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cbor.html#representation">Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbor.html#encoding">Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbor.html#decoding">Decoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbor.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbor.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbor.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="core.html"><code class="docutils literal notranslate"><span class="pre">core</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="coroutining.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coroutining.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coroutining.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coroutining.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="csv.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dates.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html#loading">Loading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dependents.html"><code class="docutils literal notranslate"><span class="pre">dependents</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dependents.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependents.html#loading">Loading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dictionaries.html"><code class="docutils literal notranslate"><span class="pre">dictionaries</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dictionaries.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dictionaries.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dictionaries.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dictionaries.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dictionaries.html#credits">Credits</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dif.html"><code class="docutils literal notranslate"><span class="pre">dif</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dif.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dif.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dif.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dif.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="edcg.html"><code class="docutils literal notranslate"><span class="pre">edcg</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html#syntax">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html#declaration-of-predicates">Declaration of Predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html#declaration-of-accumulators">Declaration of Accumulators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html#declaration-of-passed-arguments">Declaration of Passed Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html#additional-documentation">Additional documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="events.html"><code class="docutils literal notranslate"><span class="pre">events</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="events.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html#loading">Loading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="expecteds.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expecteds.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expecteds.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expecteds.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expecteds.html#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="format.html"><code class="docutils literal notranslate"><span class="pre">format</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="format.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="format.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="format.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="format.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="format.html#portability">Portability</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="genint.html"><code class="docutils literal notranslate"><span class="pre">genint</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="genint.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="genint.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="genint.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="genint.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="git.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="grammars.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grammars.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grammars.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grammars.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="heaps.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heaps.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heaps.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heaps.html#credits">Credits</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hierarchies.html"><code class="docutils literal notranslate"><span class="pre">hierarchies</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hierarchies.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchies.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchies.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hook_flows.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_flows.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_flows.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_flows.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hook_objects.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_objects.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_objects.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_objects.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="html.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="html.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="html.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="html.html#generating-a-html-document">Generating a HTML document</a></li>
+<li class="toctree-l2"><a class="reference internal" href="html.html#generating-a-html-fragment">Generating a HTML fragment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="html.html#working-with-callbacks-to-generate-content">Working with callbacks to generate content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="html.html#working-with-custom-elements">Working with custom elements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ids.html"><code class="docutils literal notranslate"><span class="pre">ids</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ids.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ids.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ids.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ids.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intervals.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intervals.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intervals.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="java.html"><code class="docutils literal notranslate"><span class="pre">java</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="java.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="java.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="java.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="java.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="java.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="json.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="json.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="json.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="json.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="json.html#representation">Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="json.html#encoding">Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="json.html#decoding">Decoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="json.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="listing.html"><code class="docutils literal notranslate"><span class="pre">listing</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="listing.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="listing.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="listing.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="listing.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#loading">Loading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="loops.html"><code class="docutils literal notranslate"><span class="pre">loops</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="loops.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loops.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loops.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loops.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="meta.html"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="meta.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="meta_compiler.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_compiler.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_compiler.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_compiler.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_compiler.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mutations.html"><code class="docutils literal notranslate"><span class="pre">mutations</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mutations.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutations.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutations.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutations.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nested_dictionaries.html"><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nested_dictionaries.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nested_dictionaries.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nested_dictionaries.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nested_dictionaries.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nested_dictionaries.html#curly-term-representation">Curly term representation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="optionals.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionals.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionals.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionals.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionals.html#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="options.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="os.html"><code class="docutils literal notranslate"><span class="pre">os</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="os.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="queues.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="random.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="random.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="random.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="random.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="random.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reader.html"><code class="docutils literal notranslate"><span class="pre">reader</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reader.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reader.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reader.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recorded_database.html"><code class="docutils literal notranslate"><span class="pre">recorded_database</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recorded_database.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorded_database.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorded_database.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorded_database.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorded_database.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="redis.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html#credits">Credits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sets.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sets.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sets.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sets.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sets.html#credits">Credits</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="statistics.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="term_io.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="term_io.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="term_io.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="timeout.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeout.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeout.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeout.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tsv.html"><code class="docutils literal notranslate"><span class="pre">tsv</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tsv.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tsv.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tsv.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tsv.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="types.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#type-checking">Type-checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#defining-new-types">Defining new types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ulid.html"><code class="docutils literal notranslate"><span class="pre">ulid</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ulid.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ulid.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ulid.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ulid.html#generating-ulids">Generating ULIDs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ulid.html#type-checking-ulids">Type-checking ULIDs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="unicode_data.html"><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html#license">License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html#website">Website</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html#known-issues">Known issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html#acknowledgements">Acknowledgements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html#files-and-api-summary">Files and API Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="union_find.html"><code class="docutils literal notranslate"><span class="pre">union_find</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="union_find.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="union_find.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="union_find.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="union_find.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="uuid.html"><code class="docutils literal notranslate"><span class="pre">uuid</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="uuid.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uuid.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uuid.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uuid.html#generating-version-1-uuids">Generating version 1 UUIDs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uuid.html#generating-version-4-uuids">Generating version 4 UUIDs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uuid.html#generating-the-null-uuid">Generating the null UUID</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="zippers.html"><code class="docutils literal notranslate"><span class="pre">zippers</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="zippers.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zippers.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zippers.html#testing">Testing</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../devtools/wrapper.html" class="btn btn-neutral float-left" title="wrapper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="overview.html" class="btn btn-neutral float-right" title="Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2025, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

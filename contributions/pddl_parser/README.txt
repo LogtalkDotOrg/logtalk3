@@ -27,7 +27,7 @@ output.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#pddl_parser](../../docs/library_index.html#pddl_parser)
+Open the [../../apis/library_index.html#pddl_parser](../../apis/library_index.html#pddl_parser)
 link in a web browser.
 
 

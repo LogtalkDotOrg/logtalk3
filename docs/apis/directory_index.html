@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Directories &mdash; Logtalk APIs v3.92.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d8553e9b"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Entities" href="entity_index.html" />
+    <link rel="prev" title="zlist" href="zlist_0.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Logtalk APIs
+              <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.92.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Libraries</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Directories</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#contributions-flags"><code class="docutils literal notranslate"><span class="pre">contributions/flags/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="flags_0.html">flags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flags_validator_0.html">flags_validator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#contributions-iso8601"><code class="docutils literal notranslate"><span class="pre">contributions/iso8601/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="iso8601_0.html">iso8601</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#contributions-pddl-parser"><code class="docutils literal notranslate"><span class="pre">contributions/pddl_parser/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pddl_0.html">pddl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="read_file_0.html">read_file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#contributions-verdi-neruda"><code class="docutils literal notranslate"><span class="pre">contributions/verdi_neruda/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="a_star_interpreter_1.html">a_star_interpreter(W)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="benchmark_generators_0.html">benchmark_generators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="best_first_0.html">best_first</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bfs_interpreter_0.html">bfs_interpreter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bup_interpreter_0.html">bup_interpreter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="counter_0.html">counter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="databasep_0.html">databasep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug_expansion_1.html">debug_expansion(Mode)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="demodb_0.html">demodb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dfs_interpreter_0.html">dfs_interpreter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flatting_0.html">flatting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heuristic_expansion_1.html">heuristic_expansion(Mode)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="iddfs_interpreter_1.html">iddfs_interpreter(Increment)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interpreterp_0.html">interpreterp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="magic_0.html">magic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="magic_expansion_1.html">magic_expansion(Mode)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rule_expansion_1.html">rule_expansion(Mode)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shell_0.html">shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shell_1.html">shell(Interpreters)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shell_expansion_1.html">shell_expansion(Mode)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#contributions-xml-parser"><code class="docutils literal notranslate"><span class="pre">contributions/xml_parser/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="xml_0.html">xml</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#core"><code class="docutils literal notranslate"><span class="pre">core/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core_messages_0.html">core_messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expanding_0.html">expanding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="forwarding_0.html">forwarding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logtalk_0.html">logtalk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitoring_0.html">monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_0.html">user</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library"><code class="docutils literal notranslate"><span class="pre">library/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloning_0.html">cloning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="counters_0.html">counters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="streamvars_0.html">streamvars</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-arbitrary"><code class="docutils literal notranslate"><span class="pre">library/arbitrary/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="arbitrary_0.html">arbitrary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-assignvars"><code class="docutils literal notranslate"><span class="pre">library/assignvars/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="assignvars_0.html">assignvars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assignvarsp_0.html">assignvarsp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-base64"><code class="docutils literal notranslate"><span class="pre">library/base64/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="base64_0.html">base64</a></li>
+<li class="toctree-l3"><a class="reference internal" href="base64url_0.html">base64url</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-cbor"><code class="docutils literal notranslate"><span class="pre">library/cbor/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cbor_0.html">cbor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cbor_1.html">cbor(StringRepresentation)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-coroutining"><code class="docutils literal notranslate"><span class="pre">library/coroutining/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="coroutining_0.html">coroutining</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-csv"><code class="docutils literal notranslate"><span class="pre">library/csv/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="csv_0.html">csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="csv_3.html">csv(Header,Separator,IgnoreQuotes)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="csv_guess_questions_0.html">csv_guess_questions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="csv_protocol_0.html">csv_protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-dates"><code class="docutils literal notranslate"><span class="pre">library/dates/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="date_0.html">date</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datep_0.html">datep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time_0.html">time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="timep_0.html">timep</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-dependents"><code class="docutils literal notranslate"><span class="pre">library/dependents/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="observer_0.html">observer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="subject_0.html">subject</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-dictionaries"><code class="docutils literal notranslate"><span class="pre">library/dictionaries/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="avltree_0.html">avltree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bintree_0.html">bintree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dictionaryp_0.html">dictionaryp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rbtree_0.html">rbtree</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-dif"><code class="docutils literal notranslate"><span class="pre">library/dif/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dif_0.html">dif</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-edcg"><code class="docutils literal notranslate"><span class="pre">library/edcg/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="edcg_0.html">edcg</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-events"><code class="docutils literal notranslate"><span class="pre">library/events/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="after_event_registry_0.html">after_event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="before_event_registry_0.html">before_event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_registry_0.html">event_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_registryp_0.html">event_registryp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitor_0.html">monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitorp_0.html">monitorp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-expand-library-alias-paths"><code class="docutils literal notranslate"><span class="pre">library/expand_library_alias_paths/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expand_library_alias_paths_0.html">expand_library_alias_paths</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-expecteds"><code class="docutils literal notranslate"><span class="pre">library/expecteds/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="either_0.html">either</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expected_0.html">expected</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expected_1.html">expected(Expected)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-format"><code class="docutils literal notranslate"><span class="pre">library/format/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="format_0.html">format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-genint"><code class="docutils literal notranslate"><span class="pre">library/genint/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="genint_0.html">genint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="genint_core_0.html">genint_core</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-gensym"><code class="docutils literal notranslate"><span class="pre">library/gensym/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gensym_0.html">gensym</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gensym_core_0.html">gensym_core</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-git"><code class="docutils literal notranslate"><span class="pre">library/git/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="git_0.html">git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git_protocol_0.html">git_protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-grammars"><code class="docutils literal notranslate"><span class="pre">library/grammars/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="blank_grammars_1.html">blank_grammars(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_grammars_1.html">ip_grammars(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number_grammars_1.html">number_grammars(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sequence_grammars_0.html">sequence_grammars</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-heaps"><code class="docutils literal notranslate"><span class="pre">library/heaps/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="heap_1.html">heap(Order)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heapp_0.html">heapp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maxheap_0.html">maxheap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="minheap_0.html">minheap</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-hierarchies"><code class="docutils literal notranslate"><span class="pre">library/hierarchies/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_hierarchy_0.html">class_hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class_hierarchyp_0.html">class_hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hierarchyp_0.html">hierarchyp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proto_hierarchy_0.html">proto_hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proto_hierarchyp_0.html">proto_hierarchyp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-hook-flows"><code class="docutils literal notranslate"><span class="pre">library/hook_flows/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hook_pipeline_1.html">hook_pipeline(Pipeline)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hook_set_1.html">hook_set(Set)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-hook-objects"><code class="docutils literal notranslate"><span class="pre">library/hook_objects/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="backend_adapter_hook_0.html">backend_adapter_hook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_workflow_hook_0.html">default_workflow_hook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="grammar_rules_hook_0.html">grammar_rules_hook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="identity_hook_0.html">identity_hook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_wrapper_hook_0.html">object_wrapper_hook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_wrapper_hook_1.html">object_wrapper_hook(Protocol)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_wrapper_hook_2.html">object_wrapper_hook(Name,Relations)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="print_goal_hook_0.html">print_goal_hook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prolog_module_hook_1.html">prolog_module_hook(Module)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="suppress_goal_hook_0.html">suppress_goal_hook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="write_to_file_hook_1.html">write_to_file_hook(File)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="write_to_file_hook_2.html">write_to_file_hook(File,Options)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="write_to_stream_hook_1.html">write_to_stream_hook(Stream)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="write_to_stream_hook_2.html">write_to_stream_hook(Stream,Options)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-html"><code class="docutils literal notranslate"><span class="pre">library/html/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="html_0.html">html</a></li>
+<li class="toctree-l3"><a class="reference internal" href="html5_0.html">html5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xhtml11_0.html">xhtml11</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-ids"><code class="docutils literal notranslate"><span class="pre">library/ids/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ids_0.html">ids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ids_2.html">ids(Representation,Bytes)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-intervals"><code class="docutils literal notranslate"><span class="pre">library/intervals/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="interval_0.html">interval</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intervalp_0.html">intervalp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-java"><code class="docutils literal notranslate"><span class="pre">library/java/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="java_0.html">java</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_1.html">java(Reference)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_2.html">java(Reference,ReturnValue)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_access_protocol_0.html">java_access_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_hook_0.html">java_hook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="java_utils_protocol_0.html">java_utils_protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-json"><code class="docutils literal notranslate"><span class="pre">library/json/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="json_0.html">json</a></li>
+<li class="toctree-l3"><a class="reference internal" href="json_1.html">json(StringRepresentation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="json_3.html">json(ObjectRepresentation,PairRepresentation,StringRepresentation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="json_protocol_0.html">json_protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-listing"><code class="docutils literal notranslate"><span class="pre">library/listing/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="listing_0.html">listing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-logging"><code class="docutils literal notranslate"><span class="pre">library/logging/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="logger_0.html">logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging_0.html">logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggingp_0.html">loggingp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-loops"><code class="docutils literal notranslate"><span class="pre">library/loops/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="loop_0.html">loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loopp_0.html">loopp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-meta"><code class="docutils literal notranslate"><span class="pre">library/meta/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="meta_0.html">meta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metap_0.html">metap</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-meta-compiler"><code class="docutils literal notranslate"><span class="pre">library/meta_compiler/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="meta_compiler_0.html">meta_compiler</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-mutations"><code class="docutils literal notranslate"><span class="pre">library/mutations/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="default_atom_mutations_0.html">default_atom_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_compound_mutations_0.html">default_compound_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_float_mutations_0.html">default_float_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_integer_mutations_0.html">default_integer_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_list_mutations_0.html">default_list_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mutations_0.html">mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mutations_store_0.html">mutations_store</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-nested-dictionaries"><code class="docutils literal notranslate"><span class="pre">library/nested_dictionaries/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="navltree_0.html">navltree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nbintree_0.html">nbintree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nested_dictionary_protocol_0.html">nested_dictionary_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrbtree_0.html">nrbtree</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-optionals"><code class="docutils literal notranslate"><span class="pre">library/optionals/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="maybe_0.html">maybe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_0.html">optional</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_1.html">optional(Optional)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-options"><code class="docutils literal notranslate"><span class="pre">library/options/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="options_0.html">options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="options_protocol_0.html">options_protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-os"><code class="docutils literal notranslate"><span class="pre">library/os/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="os_0.html">os</a></li>
+<li class="toctree-l3"><a class="reference internal" href="os_types_0.html">os_types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="osp_0.html">osp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-queues"><code class="docutils literal notranslate"><span class="pre">library/queues/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="queue_0.html">queue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="queuep_0.html">queuep</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-random"><code class="docutils literal notranslate"><span class="pre">library/random/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="backend_random_0.html">backend_random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_random_0.html">fast_random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pseudo_random_protocol_0.html">pseudo_random_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="random_0.html">random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="random_protocol_0.html">random_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sampling_protocol_0.html">sampling_protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-reader"><code class="docutils literal notranslate"><span class="pre">library/reader/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reader_0.html">reader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-recorded-database"><code class="docutils literal notranslate"><span class="pre">library/recorded_database/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="recorded_database_0.html">recorded_database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recorded_database_core_0.html">recorded_database_core</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-redis"><code class="docutils literal notranslate"><span class="pre">library/redis/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="redis_0.html">redis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-sets"><code class="docutils literal notranslate"><span class="pre">library/sets/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="set_0.html">set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set_1.html">set(Type)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setp_0.html">setp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-statistics"><code class="docutils literal notranslate"><span class="pre">library/statistics/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="population_0.html">population</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sample_0.html">sample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="statistics_0.html">statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="statisticsp_0.html">statisticsp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-term-io"><code class="docutils literal notranslate"><span class="pre">library/term_io/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="term_io_0.html">term_io</a></li>
+<li class="toctree-l3"><a class="reference internal" href="term_io_protocol_0.html">term_io_protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-timeout"><code class="docutils literal notranslate"><span class="pre">library/timeout/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="timeout_0.html">timeout</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-tsv"><code class="docutils literal notranslate"><span class="pre">library/tsv/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tsv_0.html">tsv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tsv_1.html">tsv(Header)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tsv_protocol_0.html">tsv_protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-types"><code class="docutils literal notranslate"><span class="pre">library/types/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="atom_0.html">atom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomic_0.html">atomic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="callable_0.html">callable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="character_0.html">character</a></li>
+<li class="toctree-l3"><a class="reference internal" href="characterp_0.html">characterp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="comparingp_0.html">comparingp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compound_0.html">compound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="difflist_0.html">difflist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="float_0.html">float</a></li>
+<li class="toctree-l3"><a class="reference internal" href="integer_0.html">integer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list_0.html">list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list_1.html">list(Type)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="listp_0.html">listp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="natural_0.html">natural</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number_0.html">number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numberlist_0.html">numberlist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numberlistp_0.html">numberlistp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pairs_0.html">pairs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="term_0.html">term</a></li>
+<li class="toctree-l3"><a class="reference internal" href="termp_0.html">termp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="type_0.html">type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varlist_0.html">varlist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varlistp_0.html">varlistp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-ulid"><code class="docutils literal notranslate"><span class="pre">library/ulid/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ulid_0.html">ulid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ulid_1.html">ulid(Representation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ulid_protocol_0.html">ulid_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ulid_types_0.html">ulid_types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-union-find"><code class="docutils literal notranslate"><span class="pre">library/union_find/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="union_find_0.html">union_find</a></li>
+<li class="toctree-l3"><a class="reference internal" href="union_find_protocol_0.html">union_find_protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-uuid"><code class="docutils literal notranslate"><span class="pre">library/uuid/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="uuid_0.html">uuid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uuid_1.html">uuid(Representation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uuid_protocol_0.html">uuid_protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-zippers"><code class="docutils literal notranslate"><span class="pre">library/zippers/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="zipperp_0.html">zipperp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zlist_0.html">zlist</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ports-fcube"><code class="docutils literal notranslate"><span class="pre">ports/fcube/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fcube_0.html">fcube</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ports-metagol"><code class="docutils literal notranslate"><span class="pre">ports/metagol/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metagol_0.html">metagol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metagol_example_protocol_0.html">metagol_example_protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ports-toychr"><code class="docutils literal notranslate"><span class="pre">ports/toychr/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="toychrdb_0.html">toychrdb</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tools-assertions"><code class="docutils literal notranslate"><span class="pre">tools/assertions/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="assertions_0.html">assertions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assertions_1.html">assertions(Mode)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assertions_messages_0.html">assertions_messages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tools-code-metrics"><code class="docutils literal notranslate"><span class="pre">tools/code_metrics/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cc_metric_0.html">cc_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code_metric_0.html">code_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code_metrics_0.html">code_metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code_metrics_messages_0.html">code_metrics_messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code_metrics_utilities_0.html">code_metrics_utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coupling_metric_0.html">coupling_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dit_metric_0.html">dit_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="doc_metric_0.html">doc_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="halstead_metric_0.html">halstead_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="halstead_metric_1.html">halstead_metric(Stroud)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="noc_metric_0.html">noc_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nor_metric_0.html">nor_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="size_metric_0.html">size_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upn_metric_0.html">upn_metric</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tools-dead-code-scanner"><code class="docutils literal notranslate"><span class="pre">tools/dead_code_scanner/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dead_code_scanner_0.html">dead_code_scanner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dead_code_scanner_messages_0.html">dead_code_scanner_messages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tools-debug-messages"><code class="docutils literal notranslate"><span class="pre">tools/debug_messages/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="debug_messages_0.html">debug_messages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tools-debugger"><code class="docutils literal notranslate"><span class="pre">tools/debugger/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="debugger_0.html">debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugger_messages_0.html">debugger_messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debuggerp_0.html">debuggerp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dump_trace_0.html">dump_trace</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tools-diagrams"><code class="docutils literal notranslate"><span class="pre">tools/diagrams/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="d2_graph_language_0.html">d2_graph_language</a></li>
+<li class="toctree-l3"><a class="reference internal" href="diagram_1.html">diagram(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="diagrams_0.html">diagrams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="diagrams_1.html">diagrams(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="directory_dependency_diagram_0.html">directory_dependency_diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="directory_dependency_diagram_1.html">directory_dependency_diagram(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="directory_diagram_1.html">directory_diagram(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="directory_load_diagram_0.html">directory_load_diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="directory_load_diagram_1.html">directory_load_diagram(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dot_graph_language_0.html">dot_graph_language</a></li>
+<li class="toctree-l3"><a class="reference internal" href="entity_diagram_0.html">entity_diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="entity_diagram_1.html">entity_diagram(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_dependency_diagram_0.html">file_dependency_diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_dependency_diagram_1.html">file_dependency_diagram(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_diagram_1.html">file_diagram(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_load_diagram_0.html">file_load_diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_load_diagram_1.html">file_load_diagram(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graph_language_protocol_0.html">graph_language_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graph_language_registry_0.html">graph_language_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="inheritance_diagram_0.html">inheritance_diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="inheritance_diagram_1.html">inheritance_diagram(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_dependency_diagram_0.html">library_dependency_diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_dependency_diagram_1.html">library_dependency_diagram(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_diagram_1.html">library_diagram(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_load_diagram_0.html">library_load_diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_load_diagram_1.html">library_load_diagram(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules_diagram_support_0.html">modules_diagram_support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uses_diagram_0.html">uses_diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uses_diagram_1.html">uses_diagram(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xref_diagram_0.html">xref_diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xref_diagram_1.html">xref_diagram(Format)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tools-doclet"><code class="docutils literal notranslate"><span class="pre">tools/doclet/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="doclet_0.html">doclet</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tools-help"><code class="docutils literal notranslate"><span class="pre">tools/help/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="help_0.html">help</a></li>
+<li class="toctree-l3"><a class="reference internal" href="help_info_support_0.html">help_info_support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tools-issue-creator"><code class="docutils literal notranslate"><span class="pre">tools/issue_creator/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="issue_creator_0.html">issue_creator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tools-lgtdoc"><code class="docutils literal notranslate"><span class="pre">tools/lgtdoc/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lgtdoc_0.html">lgtdoc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lgtdoc_messages_0.html">lgtdoc_messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lgtdocp_0.html">lgtdocp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tools-lgtunit"><code class="docutils literal notranslate"><span class="pre">tools/lgtunit/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="automation_report_0.html">automation_report</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coverage_report_0.html">coverage_report</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lgtunit_0.html">lgtunit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lgtunit_messages_0.html">lgtunit_messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="minimal_output_0.html">minimal_output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tap_output_0.html">tap_output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tap_report_0.html">tap_report</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xunit_net_v2_output_0.html">xunit_net_v2_output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xunit_net_v2_report_0.html">xunit_net_v2_report</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xunit_output_0.html">xunit_output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xunit_report_0.html">xunit_report</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tools-packs"><code class="docutils literal notranslate"><span class="pre">tools/packs/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pack_protocol_0.html">pack_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="packs_0.html">packs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="packs_common_0.html">packs_common</a></li>
+<li class="toctree-l3"><a class="reference internal" href="packs_messages_0.html">packs_messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="packs_specs_hook_0.html">packs_specs_hook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="registries_0.html">registries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="registry_loader_hook_0.html">registry_loader_hook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="registry_protocol_0.html">registry_protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tools-ports-profiler"><code class="docutils literal notranslate"><span class="pre">tools/ports_profiler/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ports_profiler_0.html">ports_profiler</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tools-tutor"><code class="docutils literal notranslate"><span class="pre">tools/tutor/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutor_0.html">tutor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tools-wrapper"><code class="docutils literal notranslate"><span class="pre">tools/wrapper/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="wrapper_0.html">wrapper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicates</a></li>
+</ul>
+
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="core_inheritance_diagram.svg">Core diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="library_inheritance_diagram.svg">Libraries diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="tools_inheritance_diagram.svg">Tools diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="ports_inheritance_diagram.svg">Ports diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="contributions_inheritance_diagram.svg">Contributions diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+    </ul>
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../handbook/index.html">Handbook</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Logtalk APIs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Directories</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/directory_index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="directories">
+<span id="directory-index"></span><h1>Directories<a class="headerlink" href="#directories" title="Link to this heading"></a></h1>
+<p>To load an entity, always load the library that includes it using the goal <code class="docutils literal notranslate"><span class="pre">logtalk_load(library_name(loader))</span></code> instead of using its path. The library loader file ensures that all the required dependencies are also loaded and that any required flags are used. The loading goal can be found in the entity documentation.</p>
+<section id="contributions-flags">
+<h2><code class="docutils literal notranslate"><span class="pre">contributions/flags/</span></code><a class="headerlink" href="#contributions-flags" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="flags_0.html">flags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flags_validator_0.html">flags_validator</a></li>
+</ul>
+</div>
+</section>
+<section id="contributions-iso8601">
+<h2><code class="docutils literal notranslate"><span class="pre">contributions/iso8601/</span></code><a class="headerlink" href="#contributions-iso8601" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="iso8601_0.html">iso8601</a></li>
+</ul>
+</div>
+</section>
+<section id="contributions-pddl-parser">
+<h2><code class="docutils literal notranslate"><span class="pre">contributions/pddl_parser/</span></code><a class="headerlink" href="#contributions-pddl-parser" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pddl_0.html">pddl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read_file_0.html">read_file</a></li>
+</ul>
+</div>
+</section>
+<section id="contributions-verdi-neruda">
+<h2><code class="docutils literal notranslate"><span class="pre">contributions/verdi_neruda/</span></code><a class="headerlink" href="#contributions-verdi-neruda" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="a_star_interpreter_1.html">a_star_interpreter(W)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmark_generators_0.html">benchmark_generators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="best_first_0.html">best_first</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bfs_interpreter_0.html">bfs_interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bup_interpreter_0.html">bup_interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="counter_0.html">counter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="databasep_0.html">databasep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug_expansion_1.html">debug_expansion(Mode)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demodb_0.html">demodb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dfs_interpreter_0.html">dfs_interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flatting_0.html">flatting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heuristic_expansion_1.html">heuristic_expansion(Mode)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iddfs_interpreter_1.html">iddfs_interpreter(Increment)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpreterp_0.html">interpreterp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="magic_0.html">magic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="magic_expansion_1.html">magic_expansion(Mode)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rule_expansion_1.html">rule_expansion(Mode)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shell_0.html">shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shell_1.html">shell(Interpreters)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shell_expansion_1.html">shell_expansion(Mode)</a></li>
+</ul>
+</div>
+</section>
+<section id="contributions-xml-parser">
+<h2><code class="docutils literal notranslate"><span class="pre">contributions/xml_parser/</span></code><a class="headerlink" href="#contributions-xml-parser" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="xml_0.html">xml</a></li>
+</ul>
+</div>
+</section>
+<section id="core">
+<h2><code class="docutils literal notranslate"><span class="pre">core/</span></code><a class="headerlink" href="#core" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="core_messages_0.html">core_messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expanding_0.html">expanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forwarding_0.html">forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logtalk_0.html">logtalk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring_0.html">monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_0.html">user</a></li>
+</ul>
+</div>
+</section>
+<section id="library">
+<h2><code class="docutils literal notranslate"><span class="pre">library/</span></code><a class="headerlink" href="#library" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cloning_0.html">cloning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="counters_0.html">counters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streamvars_0.html">streamvars</a></li>
+</ul>
+</div>
+</section>
+<section id="library-arbitrary">
+<h2><code class="docutils literal notranslate"><span class="pre">library/arbitrary/</span></code><a class="headerlink" href="#library-arbitrary" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="arbitrary_0.html">arbitrary</a></li>
+</ul>
+</div>
+</section>
+<section id="library-assignvars">
+<h2><code class="docutils literal notranslate"><span class="pre">library/assignvars/</span></code><a class="headerlink" href="#library-assignvars" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="assignvars_0.html">assignvars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignvarsp_0.html">assignvarsp</a></li>
+</ul>
+</div>
+</section>
+<section id="library-base64">
+<h2><code class="docutils literal notranslate"><span class="pre">library/base64/</span></code><a class="headerlink" href="#library-base64" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="base64_0.html">base64</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base64url_0.html">base64url</a></li>
+</ul>
+</div>
+</section>
+<section id="library-cbor">
+<h2><code class="docutils literal notranslate"><span class="pre">library/cbor/</span></code><a class="headerlink" href="#library-cbor" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cbor_0.html">cbor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cbor_1.html">cbor(StringRepresentation)</a></li>
+</ul>
+</div>
+</section>
+<section id="library-coroutining">
+<h2><code class="docutils literal notranslate"><span class="pre">library/coroutining/</span></code><a class="headerlink" href="#library-coroutining" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="coroutining_0.html">coroutining</a></li>
+</ul>
+</div>
+</section>
+<section id="library-csv">
+<h2><code class="docutils literal notranslate"><span class="pre">library/csv/</span></code><a class="headerlink" href="#library-csv" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="csv_0.html">csv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="csv_3.html">csv(Header,Separator,IgnoreQuotes)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="csv_guess_questions_0.html">csv_guess_questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="csv_protocol_0.html">csv_protocol</a></li>
+</ul>
+</div>
+</section>
+<section id="library-dates">
+<h2><code class="docutils literal notranslate"><span class="pre">library/dates/</span></code><a class="headerlink" href="#library-dates" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="date_0.html">date</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datep_0.html">datep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time_0.html">time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timep_0.html">timep</a></li>
+</ul>
+</div>
+</section>
+<section id="library-dependents">
+<h2><code class="docutils literal notranslate"><span class="pre">library/dependents/</span></code><a class="headerlink" href="#library-dependents" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="observer_0.html">observer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subject_0.html">subject</a></li>
+</ul>
+</div>
+</section>
+<section id="library-dictionaries">
+<h2><code class="docutils literal notranslate"><span class="pre">library/dictionaries/</span></code><a class="headerlink" href="#library-dictionaries" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="avltree_0.html">avltree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bintree_0.html">bintree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dictionaryp_0.html">dictionaryp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rbtree_0.html">rbtree</a></li>
+</ul>
+</div>
+</section>
+<section id="library-dif">
+<h2><code class="docutils literal notranslate"><span class="pre">library/dif/</span></code><a class="headerlink" href="#library-dif" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dif_0.html">dif</a></li>
+</ul>
+</div>
+</section>
+<section id="library-edcg">
+<h2><code class="docutils literal notranslate"><span class="pre">library/edcg/</span></code><a class="headerlink" href="#library-edcg" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="edcg_0.html">edcg</a></li>
+</ul>
+</div>
+</section>
+<section id="library-events">
+<h2><code class="docutils literal notranslate"><span class="pre">library/events/</span></code><a class="headerlink" href="#library-events" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="after_event_registry_0.html">after_event_registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="before_event_registry_0.html">before_event_registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_registry_0.html">event_registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_registryp_0.html">event_registryp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitor_0.html">monitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitorp_0.html">monitorp</a></li>
+</ul>
+</div>
+</section>
+<section id="library-expand-library-alias-paths">
+<h2><code class="docutils literal notranslate"><span class="pre">library/expand_library_alias_paths/</span></code><a class="headerlink" href="#library-expand-library-alias-paths" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="expand_library_alias_paths_0.html">expand_library_alias_paths</a></li>
+</ul>
+</div>
+</section>
+<section id="library-expecteds">
+<h2><code class="docutils literal notranslate"><span class="pre">library/expecteds/</span></code><a class="headerlink" href="#library-expecteds" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="either_0.html">either</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expected_0.html">expected</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expected_1.html">expected(Expected)</a></li>
+</ul>
+</div>
+</section>
+<section id="library-format">
+<h2><code class="docutils literal notranslate"><span class="pre">library/format/</span></code><a class="headerlink" href="#library-format" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="format_0.html">format</a></li>
+</ul>
+</div>
+</section>
+<section id="library-genint">
+<h2><code class="docutils literal notranslate"><span class="pre">library/genint/</span></code><a class="headerlink" href="#library-genint" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genint_0.html">genint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genint_core_0.html">genint_core</a></li>
+</ul>
+</div>
+</section>
+<section id="library-gensym">
+<h2><code class="docutils literal notranslate"><span class="pre">library/gensym/</span></code><a class="headerlink" href="#library-gensym" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gensym_0.html">gensym</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gensym_core_0.html">gensym_core</a></li>
+</ul>
+</div>
+</section>
+<section id="library-git">
+<h2><code class="docutils literal notranslate"><span class="pre">library/git/</span></code><a class="headerlink" href="#library-git" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="git_0.html">git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git_protocol_0.html">git_protocol</a></li>
+</ul>
+</div>
+</section>
+<section id="library-grammars">
+<h2><code class="docutils literal notranslate"><span class="pre">library/grammars/</span></code><a class="headerlink" href="#library-grammars" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="blank_grammars_1.html">blank_grammars(Format)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ip_grammars_1.html">ip_grammars(Format)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="number_grammars_1.html">number_grammars(Format)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sequence_grammars_0.html">sequence_grammars</a></li>
+</ul>
+</div>
+</section>
+<section id="library-heaps">
+<h2><code class="docutils literal notranslate"><span class="pre">library/heaps/</span></code><a class="headerlink" href="#library-heaps" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="heap_1.html">heap(Order)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heapp_0.html">heapp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maxheap_0.html">maxheap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minheap_0.html">minheap</a></li>
+</ul>
+</div>
+</section>
+<section id="library-hierarchies">
+<h2><code class="docutils literal notranslate"><span class="pre">library/hierarchies/</span></code><a class="headerlink" href="#library-hierarchies" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="class_hierarchy_0.html">class_hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="class_hierarchyp_0.html">class_hierarchyp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hierarchyp_0.html">hierarchyp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proto_hierarchy_0.html">proto_hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proto_hierarchyp_0.html">proto_hierarchyp</a></li>
+</ul>
+</div>
+</section>
+<section id="library-hook-flows">
+<h2><code class="docutils literal notranslate"><span class="pre">library/hook_flows/</span></code><a class="headerlink" href="#library-hook-flows" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hook_pipeline_1.html">hook_pipeline(Pipeline)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hook_set_1.html">hook_set(Set)</a></li>
+</ul>
+</div>
+</section>
+<section id="library-hook-objects">
+<h2><code class="docutils literal notranslate"><span class="pre">library/hook_objects/</span></code><a class="headerlink" href="#library-hook-objects" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="backend_adapter_hook_0.html">backend_adapter_hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="default_workflow_hook_0.html">default_workflow_hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grammar_rules_hook_0.html">grammar_rules_hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="identity_hook_0.html">identity_hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="object_wrapper_hook_0.html">object_wrapper_hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="object_wrapper_hook_1.html">object_wrapper_hook(Protocol)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="object_wrapper_hook_2.html">object_wrapper_hook(Name,Relations)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="print_goal_hook_0.html">print_goal_hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prolog_module_hook_1.html">prolog_module_hook(Module)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="suppress_goal_hook_0.html">suppress_goal_hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="write_to_file_hook_1.html">write_to_file_hook(File)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="write_to_file_hook_2.html">write_to_file_hook(File,Options)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="write_to_stream_hook_1.html">write_to_stream_hook(Stream)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="write_to_stream_hook_2.html">write_to_stream_hook(Stream,Options)</a></li>
+</ul>
+</div>
+</section>
+<section id="library-html">
+<h2><code class="docutils literal notranslate"><span class="pre">library/html/</span></code><a class="headerlink" href="#library-html" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="html_0.html">html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="html5_0.html">html5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xhtml11_0.html">xhtml11</a></li>
+</ul>
+</div>
+</section>
+<section id="library-ids">
+<h2><code class="docutils literal notranslate"><span class="pre">library/ids/</span></code><a class="headerlink" href="#library-ids" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ids_0.html">ids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ids_2.html">ids(Representation,Bytes)</a></li>
+</ul>
+</div>
+</section>
+<section id="library-intervals">
+<h2><code class="docutils literal notranslate"><span class="pre">library/intervals/</span></code><a class="headerlink" href="#library-intervals" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="interval_0.html">interval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intervalp_0.html">intervalp</a></li>
+</ul>
+</div>
+</section>
+<section id="library-java">
+<h2><code class="docutils literal notranslate"><span class="pre">library/java/</span></code><a class="headerlink" href="#library-java" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="java_0.html">java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="java_1.html">java(Reference)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="java_2.html">java(Reference,ReturnValue)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="java_access_protocol_0.html">java_access_protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="java_hook_0.html">java_hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="java_utils_protocol_0.html">java_utils_protocol</a></li>
+</ul>
+</div>
+</section>
+<section id="library-json">
+<h2><code class="docutils literal notranslate"><span class="pre">library/json/</span></code><a class="headerlink" href="#library-json" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="json_0.html">json</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json_1.html">json(StringRepresentation)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json_3.html">json(ObjectRepresentation,PairRepresentation,StringRepresentation)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json_protocol_0.html">json_protocol</a></li>
+</ul>
+</div>
+</section>
+<section id="library-listing">
+<h2><code class="docutils literal notranslate"><span class="pre">library/listing/</span></code><a class="headerlink" href="#library-listing" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="listing_0.html">listing</a></li>
+</ul>
+</div>
+</section>
+<section id="library-logging">
+<h2><code class="docutils literal notranslate"><span class="pre">library/logging/</span></code><a class="headerlink" href="#library-logging" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="logger_0.html">logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging_0.html">logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loggingp_0.html">loggingp</a></li>
+</ul>
+</div>
+</section>
+<section id="library-loops">
+<h2><code class="docutils literal notranslate"><span class="pre">library/loops/</span></code><a class="headerlink" href="#library-loops" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="loop_0.html">loop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loopp_0.html">loopp</a></li>
+</ul>
+</div>
+</section>
+<section id="library-meta">
+<h2><code class="docutils literal notranslate"><span class="pre">library/meta/</span></code><a class="headerlink" href="#library-meta" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="meta_0.html">meta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metap_0.html">metap</a></li>
+</ul>
+</div>
+</section>
+<section id="library-meta-compiler">
+<h2><code class="docutils literal notranslate"><span class="pre">library/meta_compiler/</span></code><a class="headerlink" href="#library-meta-compiler" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="meta_compiler_0.html">meta_compiler</a></li>
+</ul>
+</div>
+</section>
+<section id="library-mutations">
+<h2><code class="docutils literal notranslate"><span class="pre">library/mutations/</span></code><a class="headerlink" href="#library-mutations" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="default_atom_mutations_0.html">default_atom_mutations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="default_compound_mutations_0.html">default_compound_mutations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="default_float_mutations_0.html">default_float_mutations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="default_integer_mutations_0.html">default_integer_mutations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="default_list_mutations_0.html">default_list_mutations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mutations_0.html">mutations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mutations_store_0.html">mutations_store</a></li>
+</ul>
+</div>
+</section>
+<section id="library-nested-dictionaries">
+<h2><code class="docutils literal notranslate"><span class="pre">library/nested_dictionaries/</span></code><a class="headerlink" href="#library-nested-dictionaries" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="navltree_0.html">navltree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nbintree_0.html">nbintree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nested_dictionary_protocol_0.html">nested_dictionary_protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nrbtree_0.html">nrbtree</a></li>
+</ul>
+</div>
+</section>
+<section id="library-optionals">
+<h2><code class="docutils literal notranslate"><span class="pre">library/optionals/</span></code><a class="headerlink" href="#library-optionals" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="maybe_0.html">maybe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optional_0.html">optional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optional_1.html">optional(Optional)</a></li>
+</ul>
+</div>
+</section>
+<section id="library-options">
+<h2><code class="docutils literal notranslate"><span class="pre">library/options/</span></code><a class="headerlink" href="#library-options" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="options_0.html">options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options_protocol_0.html">options_protocol</a></li>
+</ul>
+</div>
+</section>
+<section id="library-os">
+<h2><code class="docutils literal notranslate"><span class="pre">library/os/</span></code><a class="headerlink" href="#library-os" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="os_0.html">os</a></li>
+<li class="toctree-l1"><a class="reference internal" href="os_types_0.html">os_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="osp_0.html">osp</a></li>
+</ul>
+</div>
+</section>
+<section id="library-queues">
+<h2><code class="docutils literal notranslate"><span class="pre">library/queues/</span></code><a class="headerlink" href="#library-queues" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="queue_0.html">queue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queuep_0.html">queuep</a></li>
+</ul>
+</div>
+</section>
+<section id="library-random">
+<h2><code class="docutils literal notranslate"><span class="pre">library/random/</span></code><a class="headerlink" href="#library-random" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="backend_random_0.html">backend_random</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fast_random_0.html">fast_random</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pseudo_random_protocol_0.html">pseudo_random_protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="random_0.html">random</a></li>
+<li class="toctree-l1"><a class="reference internal" href="random_protocol_0.html">random_protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling_protocol_0.html">sampling_protocol</a></li>
+</ul>
+</div>
+</section>
+<section id="library-reader">
+<h2><code class="docutils literal notranslate"><span class="pre">library/reader/</span></code><a class="headerlink" href="#library-reader" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reader_0.html">reader</a></li>
+</ul>
+</div>
+</section>
+<section id="library-recorded-database">
+<h2><code class="docutils literal notranslate"><span class="pre">library/recorded_database/</span></code><a class="headerlink" href="#library-recorded-database" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="recorded_database_0.html">recorded_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recorded_database_core_0.html">recorded_database_core</a></li>
+</ul>
+</div>
+</section>
+<section id="library-redis">
+<h2><code class="docutils literal notranslate"><span class="pre">library/redis/</span></code><a class="headerlink" href="#library-redis" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="redis_0.html">redis</a></li>
+</ul>
+</div>
+</section>
+<section id="library-sets">
+<h2><code class="docutils literal notranslate"><span class="pre">library/sets/</span></code><a class="headerlink" href="#library-sets" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="set_0.html">set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set_1.html">set(Type)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setp_0.html">setp</a></li>
+</ul>
+</div>
+</section>
+<section id="library-statistics">
+<h2><code class="docutils literal notranslate"><span class="pre">library/statistics/</span></code><a class="headerlink" href="#library-statistics" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="population_0.html">population</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sample_0.html">sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statistics_0.html">statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statisticsp_0.html">statisticsp</a></li>
+</ul>
+</div>
+</section>
+<section id="library-term-io">
+<h2><code class="docutils literal notranslate"><span class="pre">library/term_io/</span></code><a class="headerlink" href="#library-term-io" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="term_io_0.html">term_io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="term_io_protocol_0.html">term_io_protocol</a></li>
+</ul>
+</div>
+</section>
+<section id="library-timeout">
+<h2><code class="docutils literal notranslate"><span class="pre">library/timeout/</span></code><a class="headerlink" href="#library-timeout" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="timeout_0.html">timeout</a></li>
+</ul>
+</div>
+</section>
+<section id="library-tsv">
+<h2><code class="docutils literal notranslate"><span class="pre">library/tsv/</span></code><a class="headerlink" href="#library-tsv" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tsv_0.html">tsv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tsv_1.html">tsv(Header)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tsv_protocol_0.html">tsv_protocol</a></li>
+</ul>
+</div>
+</section>
+<section id="library-types">
+<h2><code class="docutils literal notranslate"><span class="pre">library/types/</span></code><a class="headerlink" href="#library-types" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="atom_0.html">atom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="atomic_0.html">atomic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="callable_0.html">callable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="character_0.html">character</a></li>
+<li class="toctree-l1"><a class="reference internal" href="characterp_0.html">characterp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comparingp_0.html">comparingp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compound_0.html">compound</a></li>
+<li class="toctree-l1"><a class="reference internal" href="difflist_0.html">difflist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="float_0.html">float</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integer_0.html">integer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="list_0.html">list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="list_1.html">list(Type)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="listp_0.html">listp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="natural_0.html">natural</a></li>
+<li class="toctree-l1"><a class="reference internal" href="number_0.html">number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numberlist_0.html">numberlist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numberlistp_0.html">numberlistp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pairs_0.html">pairs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="term_0.html">term</a></li>
+<li class="toctree-l1"><a class="reference internal" href="termp_0.html">termp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type_0.html">type</a></li>
+<li class="toctree-l1"><a class="reference internal" href="varlist_0.html">varlist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="varlistp_0.html">varlistp</a></li>
+</ul>
+</div>
+</section>
+<section id="library-ulid">
+<h2><code class="docutils literal notranslate"><span class="pre">library/ulid/</span></code><a class="headerlink" href="#library-ulid" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ulid_0.html">ulid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ulid_1.html">ulid(Representation)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ulid_protocol_0.html">ulid_protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ulid_types_0.html">ulid_types</a></li>
+</ul>
+</div>
+</section>
+<section id="library-union-find">
+<h2><code class="docutils literal notranslate"><span class="pre">library/union_find/</span></code><a class="headerlink" href="#library-union-find" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="union_find_0.html">union_find</a></li>
+<li class="toctree-l1"><a class="reference internal" href="union_find_protocol_0.html">union_find_protocol</a></li>
+</ul>
+</div>
+</section>
+<section id="library-uuid">
+<h2><code class="docutils literal notranslate"><span class="pre">library/uuid/</span></code><a class="headerlink" href="#library-uuid" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="uuid_0.html">uuid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uuid_1.html">uuid(Representation)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uuid_protocol_0.html">uuid_protocol</a></li>
+</ul>
+</div>
+</section>
+<section id="library-zippers">
+<h2><code class="docutils literal notranslate"><span class="pre">library/zippers/</span></code><a class="headerlink" href="#library-zippers" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="zipperp_0.html">zipperp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zlist_0.html">zlist</a></li>
+</ul>
+</div>
+</section>
+<section id="ports-fcube">
+<h2><code class="docutils literal notranslate"><span class="pre">ports/fcube/</span></code><a class="headerlink" href="#ports-fcube" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="fcube_0.html">fcube</a></li>
+</ul>
+</div>
+</section>
+<section id="ports-metagol">
+<h2><code class="docutils literal notranslate"><span class="pre">ports/metagol/</span></code><a class="headerlink" href="#ports-metagol" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="metagol_0.html">metagol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metagol_example_protocol_0.html">metagol_example_protocol</a></li>
+</ul>
+</div>
+</section>
+<section id="ports-toychr">
+<h2><code class="docutils literal notranslate"><span class="pre">ports/toychr/</span></code><a class="headerlink" href="#ports-toychr" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="toychrdb_0.html">toychrdb</a></li>
+</ul>
+</div>
+</section>
+<section id="tools-assertions">
+<h2><code class="docutils literal notranslate"><span class="pre">tools/assertions/</span></code><a class="headerlink" href="#tools-assertions" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="assertions_0.html">assertions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assertions_1.html">assertions(Mode)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assertions_messages_0.html">assertions_messages</a></li>
+</ul>
+</div>
+</section>
+<section id="tools-code-metrics">
+<h2><code class="docutils literal notranslate"><span class="pre">tools/code_metrics/</span></code><a class="headerlink" href="#tools-code-metrics" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cc_metric_0.html">cc_metric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_metric_0.html">code_metric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_metrics_0.html">code_metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_metrics_messages_0.html">code_metrics_messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_metrics_utilities_0.html">code_metrics_utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coupling_metric_0.html">coupling_metric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dit_metric_0.html">dit_metric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doc_metric_0.html">doc_metric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="halstead_metric_0.html">halstead_metric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="halstead_metric_1.html">halstead_metric(Stroud)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="noc_metric_0.html">noc_metric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nor_metric_0.html">nor_metric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="size_metric_0.html">size_metric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upn_metric_0.html">upn_metric</a></li>
+</ul>
+</div>
+</section>
+<section id="tools-dead-code-scanner">
+<h2><code class="docutils literal notranslate"><span class="pre">tools/dead_code_scanner/</span></code><a class="headerlink" href="#tools-dead-code-scanner" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dead_code_scanner_0.html">dead_code_scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dead_code_scanner_messages_0.html">dead_code_scanner_messages</a></li>
+</ul>
+</div>
+</section>
+<section id="tools-debug-messages">
+<h2><code class="docutils literal notranslate"><span class="pre">tools/debug_messages/</span></code><a class="headerlink" href="#tools-debug-messages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="debug_messages_0.html">debug_messages</a></li>
+</ul>
+</div>
+</section>
+<section id="tools-debugger">
+<h2><code class="docutils literal notranslate"><span class="pre">tools/debugger/</span></code><a class="headerlink" href="#tools-debugger" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="debugger_0.html">debugger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugger_messages_0.html">debugger_messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debuggerp_0.html">debuggerp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dump_trace_0.html">dump_trace</a></li>
+</ul>
+</div>
+</section>
+<section id="tools-diagrams">
+<h2><code class="docutils literal notranslate"><span class="pre">tools/diagrams/</span></code><a class="headerlink" href="#tools-diagrams" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="d2_graph_language_0.html">d2_graph_language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagram_1.html">diagram(Format)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagrams_0.html">diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagrams_1.html">diagrams(Format)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="directory_dependency_diagram_0.html">directory_dependency_diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="directory_dependency_diagram_1.html">directory_dependency_diagram(Format)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="directory_diagram_1.html">directory_diagram(Format)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="directory_load_diagram_0.html">directory_load_diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="directory_load_diagram_1.html">directory_load_diagram(Format)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dot_graph_language_0.html">dot_graph_language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_diagram_0.html">entity_diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_diagram_1.html">entity_diagram(Format)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file_dependency_diagram_0.html">file_dependency_diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file_dependency_diagram_1.html">file_dependency_diagram(Format)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file_diagram_1.html">file_diagram(Format)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file_load_diagram_0.html">file_load_diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file_load_diagram_1.html">file_load_diagram(Format)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_language_protocol_0.html">graph_language_protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_language_registry_0.html">graph_language_registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inheritance_diagram_0.html">inheritance_diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inheritance_diagram_1.html">inheritance_diagram(Format)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_dependency_diagram_0.html">library_dependency_diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_dependency_diagram_1.html">library_dependency_diagram(Format)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_diagram_1.html">library_diagram(Format)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_load_diagram_0.html">library_load_diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_load_diagram_1.html">library_load_diagram(Format)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_diagram_support_0.html">modules_diagram_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uses_diagram_0.html">uses_diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uses_diagram_1.html">uses_diagram(Format)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xref_diagram_0.html">xref_diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xref_diagram_1.html">xref_diagram(Format)</a></li>
+</ul>
+</div>
+</section>
+<section id="tools-doclet">
+<h2><code class="docutils literal notranslate"><span class="pre">tools/doclet/</span></code><a class="headerlink" href="#tools-doclet" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="doclet_0.html">doclet</a></li>
+</ul>
+</div>
+</section>
+<section id="tools-help">
+<h2><code class="docutils literal notranslate"><span class="pre">tools/help/</span></code><a class="headerlink" href="#tools-help" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="help_0.html">help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help_info_support_0.html">help_info_support</a></li>
+</ul>
+</div>
+</section>
+<section id="tools-issue-creator">
+<h2><code class="docutils literal notranslate"><span class="pre">tools/issue_creator/</span></code><a class="headerlink" href="#tools-issue-creator" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="issue_creator_0.html">issue_creator</a></li>
+</ul>
+</div>
+</section>
+<section id="tools-lgtdoc">
+<h2><code class="docutils literal notranslate"><span class="pre">tools/lgtdoc/</span></code><a class="headerlink" href="#tools-lgtdoc" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="lgtdoc_0.html">lgtdoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lgtdoc_messages_0.html">lgtdoc_messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lgtdocp_0.html">lgtdocp</a></li>
+</ul>
+</div>
+</section>
+<section id="tools-lgtunit">
+<h2><code class="docutils literal notranslate"><span class="pre">tools/lgtunit/</span></code><a class="headerlink" href="#tools-lgtunit" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="automation_report_0.html">automation_report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coverage_report_0.html">coverage_report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lgtunit_0.html">lgtunit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lgtunit_messages_0.html">lgtunit_messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimal_output_0.html">minimal_output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tap_output_0.html">tap_output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tap_report_0.html">tap_report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xunit_net_v2_output_0.html">xunit_net_v2_output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xunit_net_v2_report_0.html">xunit_net_v2_report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xunit_output_0.html">xunit_output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xunit_report_0.html">xunit_report</a></li>
+</ul>
+</div>
+</section>
+<section id="tools-packs">
+<h2><code class="docutils literal notranslate"><span class="pre">tools/packs/</span></code><a class="headerlink" href="#tools-packs" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pack_protocol_0.html">pack_protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packs_0.html">packs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packs_common_0.html">packs_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packs_messages_0.html">packs_messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packs_specs_hook_0.html">packs_specs_hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="registries_0.html">registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="registry_loader_hook_0.html">registry_loader_hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="registry_protocol_0.html">registry_protocol</a></li>
+</ul>
+</div>
+</section>
+<section id="tools-ports-profiler">
+<h2><code class="docutils literal notranslate"><span class="pre">tools/ports_profiler/</span></code><a class="headerlink" href="#tools-ports-profiler" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ports_profiler_0.html">ports_profiler</a></li>
+</ul>
+</div>
+</section>
+<section id="tools-tutor">
+<h2><code class="docutils literal notranslate"><span class="pre">tools/tutor/</span></code><a class="headerlink" href="#tools-tutor" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutor_0.html">tutor</a></li>
+</ul>
+</div>
+</section>
+<section id="tools-wrapper">
+<h2><code class="docutils literal notranslate"><span class="pre">tools/wrapper/</span></code><a class="headerlink" href="#tools-wrapper" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="wrapper_0.html">wrapper</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="zlist_0.html" class="btn btn-neutral float-left" title="zlist" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="entity_index.html" class="btn btn-neutral float-right" title="Entities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2025, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -37,7 +37,7 @@ file:
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#grammars](../../docs/library_index.html#grammars)
+Open the [../../apis/library_index.html#grammars](../../apis/library_index.html#grammars)
 link in a web browser.
 
 

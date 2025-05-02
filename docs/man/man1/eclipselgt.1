@@ -1,0 +1,73 @@
+.TH eclipselgt 1 "May 2, 2025" "Logtalk 3.92.0" "Logtalk Documentation"
+
+.SH NAME
+eclipselgt \- Logtalk integration script for ECLiPSe
+
+.SH SYNOPSIS
+.B eclipselgt
+[\fB-e \fIgoal\fR]
+
+.SH DESCRIPTION
+\fBeclipselgt\fR is a Logtalk integration script for ECLiPSe. It automatically loads the ECLiPSe adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories. It uses the \fBeclipse\fR executable \fB-f\fR option to load the Logtalk files. It passes any options to the \fBeclipse\fR executable; see the ECLiPSe documentation for the available options.
+
+.SH OPTIONS
+The most common option is:
+.TP
+.B \-e
+.I goal
+Initialization goal, written between double quotes, to be executed after Logtalk startup.
+
+.SH REQUIREMENTS
+ECLiPSe 6.1#143 are a later version is required. This integration script looks for a \fBeclipse\fR executable in the system path.
+
+.SH ENVIRONMENT
+.TP
+.B LOGTALKHOME
+Specifies the location of the Logtalk installation.
+.TP
+.B LOGTALKUSER
+Specifies the location of the Logtalk user directory.
+
+.SH FILES
+.TP
+.BI $LOGTALKHOME/integration/logtalk_eclipse.pl
+Prolog file used for loading the necessary files for starting Logtalk using ECLiPSe as the backend compiler.
+.TP
+.BI $LOGTALKHOME/adapters/eclipse.pl
+The ECLiPSe adapter file.
+.TP
+.BI $LOGTALKHOME/core/core.pl
+The Logtalk core compiler and runtime file.
+.TP
+.BI $LOGTALKHOME/paths/paths.pl
+The default table of library names and paths.
+.TP
+.BI ./settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). It may not exist.
+.TP
+.BI $LOGTALKUSER/settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). It may not exist.
+.TP
+.BI $HOME/settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). It may not exist.
+.TP
+.BI $XDG_CONFIG_HOME/logtalk/settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). It may not exist.
+.TP
+.BI $HOME/.config/logtalk/settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). It may not exist.
+
+.SH "SEE ALSO"
+The Logtalk website at https://logtalk.org/
+.PP
+The Logtalk Handbook at \fB$LOGTALKHOME/docs/handbook/index.html\fR
+.PP
+The ECLiPSe website at http://www.eclipse-clp.org/
+.PP
+logtalk_user_setup(1),\ logtalk_version_select(1),\ logtalk_backend_select(1)
+
+.SH AUTHOR
+Paulo Moura <pmoura@logtalk.org>
+
+.SH COPYRIGHT
+Copyright (c) 1998-2025 Paulo Moura.

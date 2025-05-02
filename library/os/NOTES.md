@@ -31,7 +31,7 @@ type-checking when using with the `type` library object.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#os](../../docs/library_index.html#os)
+Open the [../../apis/library_index.html#os](../../apis/library_index.html#os)
 link in a web browser.
 
 

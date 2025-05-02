@@ -24,7 +24,7 @@ ________________________________________________________________________
 This library provides a Logtalk port of Peter Van Roy's extended DCG
 implementation. For full documentation on EDCGs, see:
 
-https://www.info.ucl.ac.be/~pvr/edcg.html
+https://webperso.info.ucl.ac.be/~pvr/edcg.html
 
 This Logtalk version defines a hook object, `edcg`. Source files defining
 EDCGs must be compiled using the compiler option `hook(edcg)`:
@@ -56,7 +56,7 @@ EDCGs.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#edcg](../../docs/library_index.html#edcg)
+Open the [../../apis/library_index.html#edcg](../../apis/library_index.html#edcg)
 link in a web browser.
 
 
@@ -191,7 +191,7 @@ In most cases the short form is sufficient. It declares a passed argument `Pass`
 Additional documentation
 ------------------------
 
-Peter Van Roy's page: [Declarative Programming with State](https://www.info.ucl.ac.be/~pvr/edcg.html)
+Peter Van Roy's page: [Declarative Programming with State](https://webperso.info.ucl.ac.be/~pvr/edcg.html)
 
 Technical Report UCB/CSD-90-583 [Extended DCG Notation: A Tool for Applicative Programming in Prolog](https://www2.eecs.berkeley.edu/Pubs/TechRpts/1990/5471.html) by Peter Van Roy
 

@@ -36,7 +36,7 @@ See also the `coroutining` library.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#dif](../../docs/library_index.html#dif)
+Open the [../../apis/library_index.html#dif](../../apis/library_index.html#dif)
 link in a web browser.
 
 

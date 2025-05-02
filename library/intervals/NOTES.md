@@ -29,7 +29,7 @@ Allen Interval Algebra work).
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#intervals](../../docs/library_index.html#intervals)
+Open the [../../apis/library_index.html#intervals](../../apis/library_index.html#intervals)
 link in a web browser.
 
 

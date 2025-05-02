@@ -31,7 +31,7 @@ of meta-predicate calls.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#meta](../../docs/library_index.html#meta)
+Open the [../../apis/library_index.html#meta](../../apis/library_index.html#meta)
 link in a web browser.
 
 

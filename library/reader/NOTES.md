@@ -30,7 +30,7 @@ based on the SWI-Prolog `readutil` module.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#reader](../../docs/library_index.html#reader)
+Open the [../../apis/library_index.html#reader](../../apis/library_index.html#reader)
 link in a web browser.
 
 

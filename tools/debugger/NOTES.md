@@ -32,7 +32,7 @@ API documentation
 
 This tool API documentation is available at:
 
-[../../docs/library_index.html#debugger](../../docs/library_index.html#debugger)
+[../../../docs/apis/library_index.html#debugger](../../../docs/apis/library_index.html#debugger)
 
 
 Loading
@@ -73,7 +73,7 @@ case, you will need to either edit the loader files or write customized
 loader files enabling debugging. For detailed information on using the
 debugger, consult the debugging section of the User Manual:
 
-[../../manuals/userman/debugging.html](../../manuals/userman/debugging.html)
+[../../../docs/handbook/userman/debugging.html](../../../docs/handbook/userman/debugging.html)
 
 The `debugger_messages.lgt` source file defines the default debugger
 message translations.
