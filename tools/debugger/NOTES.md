@@ -73,7 +73,7 @@ case, you will need to either edit the loader files or write customized
 loader files enabling debugging. For detailed information on using the
 debugger, consult the debugging section of the User Manual:
 
-[../..//handbook/userman/debugging.html](../..//handbook/userman/debugging.html)
+[../../handbook/userman/debugging.html](../../handbook/userman/debugging.html)
 
 The `debugger_messages.lgt` source file defines the default debugger
 message translations.

@@ -100,7 +100,7 @@ Documenting source code
 For information on documenting your source code, notably on documenting
 directives, consult the documenting section of the User Manual:
 
-[../..//handbook/userman/documenting.html](../..//handbook/userman/documenting.html)
+[../../handbook/userman/documenting.html](../../handbook/userman/documenting.html)
 
 Extracting documenting information from your source code using this tool
 requires compiling the source files using the `source_data(on)` compiler

@@ -19,7 +19,7 @@ This tool API documentation is available at:
 For general information on debugging, open in a web browser the
 following link and consult the debugging section of the User Manual:
 
-`../..//handbook/userman/debugging.html <../..//handbook/userman/debugging.html>`__
+`../../handbook/userman/debugging.html <../../handbook/userman/debugging.html>`__
 
 Loading
 -------
