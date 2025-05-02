@@ -22,7 +22,7 @@ API documentation
 
 This tool API documentation is available at:
 
-`../../../docs/apis/library_index.html#ports-profiler <../../../docs/apis/library_index.html#ports-profiler>`__
+`../../apis/library_index.html#ports-profiler <../../apis/library_index.html#ports-profiler>`__
 
 For sample queries, please see the ``SCRIPT.txt`` file in the tool
 directory.

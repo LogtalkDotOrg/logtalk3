@@ -38,7 +38,7 @@ API documentation
 
 This tool API documentation is available at:
 
-`../../../docs/apis/library_index.html#dead-code-scanner <../../../docs/apis/library_index.html#dead-code-scanner>`__
+`../../apis/library_index.html#dead-code-scanner <../../apis/library_index.html#dead-code-scanner>`__
 
 For sample queries, please see the ``SCRIPT.txt`` file in the tool
 directory.

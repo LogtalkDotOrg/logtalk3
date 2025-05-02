@@ -33,7 +33,7 @@ API documentation
 
 This tool API documentation is available at:
 
-[../../../docs/apis/library_index.html#assertions](../../../docs/apis/library_index.html#assertions)
+[../../apis/library_index.html#assertions](../../apis/library_index.html#assertions)
 
 
 Loading

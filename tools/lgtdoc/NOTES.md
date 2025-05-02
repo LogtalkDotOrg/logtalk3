@@ -75,7 +75,7 @@ API documentation
 
 This tool API documentation is available at:
 
-[../../../docs/apis/library_index.html#lgtdoc](../../../docs/apis/library_index.html#lgtdoc)
+[../../apis/library_index.html#lgtdoc](../../apis/library_index.html#lgtdoc)
 
 
 Loading
@@ -100,7 +100,7 @@ Documenting source code
 For information on documenting your source code, notably on documenting
 directives, consult the documenting section of the User Manual:
 
-[../../../docs/handbook/userman/documenting.html](../../../docs/handbook/userman/documenting.html)
+[../..//handbook/userman/documenting.html](../..//handbook/userman/documenting.html)
 
 Extracting documenting information from your source code using this tool
 requires compiling the source files using the `source_data(on)` compiler

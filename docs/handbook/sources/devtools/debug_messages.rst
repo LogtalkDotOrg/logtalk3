@@ -14,12 +14,12 @@ API documentation
 
 This tool API documentation is available at:
 
-`../../../docs/apis/library_index.html#debug-messages <../../../docs/apis/library_index.html#debug-messages>`__
+`../../apis/library_index.html#debug-messages <../../apis/library_index.html#debug-messages>`__
 
 For general information on debugging, open in a web browser the
 following link and consult the debugging section of the User Manual:
 
-`../../../docs/handbook/userman/debugging.html <../../../docs/handbook/userman/debugging.html>`__
+`../..//handbook/userman/debugging.html <../..//handbook/userman/debugging.html>`__
 
 Loading
 -------

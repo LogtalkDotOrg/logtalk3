@@ -41,7 +41,7 @@ API documentation
 
 This tool API documentation is available at:
 
-[../../../docs/apis/library_index.html#wrapper](../../../docs/apis/library_index.html#wrapper)
+[../../apis/library_index.html#wrapper](../../apis/library_index.html#wrapper)
 
 
 Loading

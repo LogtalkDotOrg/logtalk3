@@ -37,7 +37,7 @@ API documentation
 
 This tool API documentation is available at:
 
-`../../../docs/apis/library_index.html#lgtunit <../../../docs/apis/library_index.html#lgtunit>`__
+`../../apis/library_index.html#lgtunit <../../apis/library_index.html#lgtunit>`__
 
 Loading
 -------

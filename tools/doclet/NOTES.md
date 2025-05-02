@@ -44,7 +44,7 @@ API documentation
 
 This tool API documentation is available at:
 
-[../../../docs/apis/library_index.html#doclet](../../../docs/apis/library_index.html#doclet)
+[../../apis/library_index.html#doclet](../../apis/library_index.html#doclet)
 
 For sample queries, please see the `SCRIPT.txt` file in the tool directory.
 
