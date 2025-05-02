@@ -187,15 +187,6 @@ pandoc _build/singlehtml/index.html --wrap=none -t gfm-raw_html -o _build/single
 sed_i -E 's/\[.\]\(#[-a-z0-9]+ "Link to this heading"\)//g' _build/singlehtml/TheLogtalkHandbook-$version_base.md
 # Remove other links leaving only the text
 sed_i -E 's/\[([^]]+)\]\([^)]+\)/\1/g' _build/singlehtml/TheLogtalkHandbook-$version_base.md
-# Fix relative links to the Logtalk API documentation
-sed_i -e 's|../apis/index.html|../../apis/index.html|g' _build/html/contributions/index.html
-sed_i -e 's|../apis/index.html|../../apis/index.html|g' _build/html/devtools/index.html
-sed_i -e 's|../apis/index.html|../../apis/index.html|g' _build/html/faq/index.html
-sed_i -e 's|../apis/index.html|../../apis/index.html|g' _build/html/libraries/index.html
-sed_i -e 's|../apis/index.html|../../apis/index.html|g' _build/html/ports/index.html
-sed_i -e 's|../apis/index.html|../../apis/index.html|g' _build/html/refman/index.html
-sed_i -e 's|../apis/index.html|../../apis/index.html|g' _build/html/tutorial/index.html
-sed_i -e 's|../apis/index.html|../../apis/index.html|g' _build/html/userman/index.html
 
 rm -f _build/html/index_latexpdf.html
 mv -f _build/html/* ../

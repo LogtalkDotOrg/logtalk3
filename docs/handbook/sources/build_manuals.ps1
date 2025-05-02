@@ -184,15 +184,6 @@ pandoc _build/singlehtml/index.html --wrap=none -t gfm-raw_html -o _build/single
 (Get-Content _build/singlehtml/TheLogtalkHandbook-$version_base.md) -replace '\[.\]\(#[-a-z0-9]+ "Link to this heading"\)', "" | Set-Content _build/singlehtml/TheLogtalkHandbook-$version_base.md
 # Remove other links leaving only the text
 (Get-Content _build/singlehtml/TheLogtalkHandbook-$version_base.md) -replace '\[([^]]+)\]\([^)]+\)', '$1' | Set-Content _build/singlehtml/TheLogtalkHandbook-$version_base.md
-# Fix relative links to the Logtalk API documentation
-(Get-Content _build/html/contributions/index.html).Replace('../docs/index.html', '../../docs/index.html') | Set-Content _build/html/contributions/index.html
-(Get-Content _build/html/devtools/index.html).Replace('../docs/index.html', '../../docs/index.html') | Set-Content _build/html/devtools/index.html
-(Get-Content _build/html/faq/index.html).Replace('../docs/index.html', '../../docs/index.html') | Set-Content _build/html/faq/index.html
-(Get-Content _build/html/libraries/index.html).Replace('../docs/index.html', '../../docs/index.html') | Set-Content _build/html/libraries/index.html
-(Get-Content _build/html/ports/index.html).Replace('../docs/index.html', '../../docs/index.html') | Set-Content _build/html/ports/index.html
-(Get-Content _build/html/refman/index.html).Replace('../docs/index.html', '../../docs/index.html') | Set-Content _build/html/refman/index.html
-(Get-Content _build/html/tutorial/index.html).Replace('../docs/index.html', '../../docs/index.html') | Set-Content _build/html/tutorial/index.html
-(Get-Content _build/html/userman/index.html).Replace('../docs/index.html', '../../docs/index.html') | Set-Content _build/html/userman/index.html
 
 Remove-Item _build/html/index_latexpdf.html
 Move-Item -Path _build/html/* -Destination ../ -Force
