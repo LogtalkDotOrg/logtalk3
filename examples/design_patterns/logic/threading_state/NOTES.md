@@ -42,7 +42,7 @@ Description:
 	an input state and an output state as arguments with the
 	output state of each call being passed to the next call as
 	its input state. DCGs notation allows abstracting the state
-	arguments and thus simplifying the code. 
+	arguments and thus simplifying the code.
 
 The sample implementation converts a floating-point number into an
 integer number using a sequence of operations represented using

@@ -20,7 +20,7 @@
 
 
 % in this simple implementation of the "many worlds" pattern, the different
-% worlds inherite the reasoning code
+% worlds inherit the reasoning code
 
 
 % we use a category instead on an object to prevent sending reasoning messages
