@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2021-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2021-2025 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2021 Jacinto Dávila <jdavila@optimusprime.ai>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -23,9 +23,9 @@
 :- protocol(csv_protocol).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Jacinto Dávila and Paulo Moura',
-		date is 2023-03-13,
+		date is 2025-05-07,
 		comment is 'CSV file and stream reading and writing protocol.',
 		remarks is [
 			'Type-checking' - 'Some of the predicate file and stream argument type-checking exceptions depend on the Prolog backend compliance with standards.'
@@ -167,7 +167,7 @@
 	:- public(write_file/3).
 	:- mode(write_file(+atom, +object_identifier, +predicate_indicator), one).
 	:- info(write_file/3, [
-		comment is 'Writes a CSV file with the data represented by the clauses of the specified object predicate.',
+		comment is 'Writes a CSV file with the data represented by the solutions to the specified object predicate.',
 		argnames is ['File', 'Object', 'Predicate'],
 		exceptions is [
 			'``File`` is a variable' - instantiation_error,
@@ -185,7 +185,7 @@
 	:- public(write_stream/3).
 	:- mode(write_stream(+stream_or_alias, +object_identifier, +predicate_indicator), one).
 	:- info(write_stream/3, [
-		comment is 'Writes a CSV stream with the data represented by the clauses of the specified object predicate.',
+		comment is 'Writes a CSV stream with the data represented by the solutions to the specified object predicate.',
 		argnames is ['Stream', 'Object', 'Predicate'],
 		exceptions is [
 			'``Stream`` is a variable' - instantiation_error,

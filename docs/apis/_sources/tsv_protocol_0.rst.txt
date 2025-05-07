@@ -14,8 +14,8 @@ TSV file and stream reading and writing protocol.
 |    ``logtalk_load(tsv(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2023-11-15
+| **Version:** 1:0:1
+| **Date:** 2025-05-07
 
 | **Compilation flags:**
 |    ``static``
@@ -333,7 +333,7 @@ Reads a TSV stream returning the data as a list of rows, each row a list of fiel
 ``write_file/3``
 ^^^^^^^^^^^^^^^^
 
-Writes a TSV file with the data represented by the clauses of the specified object predicate.
+Writes a TSV file with the data represented by the solutions to the specified object predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -372,7 +372,7 @@ Writes a TSV file with the data represented by the clauses of the specified obje
 ``write_stream/3``
 ^^^^^^^^^^^^^^^^^^
 
-Writes a TSV stream with the data represented by the clauses of the specified object predicate.
+Writes a TSV stream with the data represented by the solutions to the specified object predicate.
 
 | **Compilation flags:**
 |    ``static``

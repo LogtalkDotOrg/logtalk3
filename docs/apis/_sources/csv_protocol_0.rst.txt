@@ -14,8 +14,8 @@ CSV file and stream reading and writing protocol.
 |    ``logtalk_load(csv(loader))``
 
 | **Author:** Jacinto Dávila and Paulo Moura
-| **Version:** 2:0:0
-| **Date:** 2023-03-13
+| **Version:** 2:0:1
+| **Date:** 2025-05-07
 
 | **Compilation flags:**
 |    ``static``
@@ -333,7 +333,7 @@ Reads a CSV stream returning the data as a list of rows, each row a list of fiel
 ``write_file/3``
 ^^^^^^^^^^^^^^^^
 
-Writes a CSV file with the data represented by the clauses of the specified object predicate.
+Writes a CSV file with the data represented by the solutions to the specified object predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -372,7 +372,7 @@ Writes a CSV file with the data represented by the clauses of the specified obje
 ``write_stream/3``
 ^^^^^^^^^^^^^^^^^^
 
-Writes a CSV stream with the data represented by the clauses of the specified object predicate.
+Writes a CSV stream with the data represented by the solutions to the specified object predicate.
 
 | **Compilation flags:**
 |    ``static``
