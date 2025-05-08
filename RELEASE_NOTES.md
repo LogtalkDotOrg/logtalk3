@@ -67,6 +67,8 @@ of the individual benchmarks.
 * UPDATED: The SWI-Prolog backend specific `pengines` example to not require
 the `gui` flag set to `true`.
 
+* FIXED: The `buffer` multi-threading example to prevent potential deadlocks.
+
 * FIXED: The `engines/pmq` example `tester.lgt` file loading the library
 `pairs` object twice in different compilation modes.
 

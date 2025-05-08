@@ -22,9 +22,9 @@
 :- object(buffer(_MaxCapacity_)).
 
 	:- info([
-		version is 2:4:0,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2024-02-19,
+		date is 2025-05-08,
 		comment is 'Producer-consumer problem with a bounded buffer.'
 	]).
 
@@ -67,7 +67,11 @@
 		N2 is N + 1,
 		assertz(size_(N2)),
 		format('produced item ~w (~w/~w items in the buffer)~n', [Item, N2, _MaxCapacity_]),
-		assertz(produced(Item)).
+		assertz(produced(Item)),
+		(	N =:= 0 ->
+			threaded_notify(not_empty)
+		;	true
+		).
 
 	get_item(Item) :-
 		retract(item_(Item)),
@@ -75,35 +79,29 @@
 		N2 is N - 1,
 		assertz(size_(N2)),
 		format('consumed item ~w (~w/~w items in the buffer)~n', [Item, N2, _MaxCapacity_]),
-		assertz(consumed(Item)).
+		assertz(consumed(Item)),
+		(	N =:= _MaxCapacity_ ->
+			threaded_notify(vacancy)
+		;	true
+		).
 
 	put(Item) :-
-		size_(N),
-		(	N =:= _MaxCapacity_ ->
+		(	size_(_MaxCapacity_) ->
 			% maximum buffer capacity have been reached;
 			% wait until an item is consumed
 			threaded_wait(vacancy),
 			% be sure to consume all "vacancy" notifications before proceeding
 			put(Item)
-		;	put_item(Item),
-			(	N =:= 0 ->
-				threaded_notify(not_empty)
-			;	true
-			)
+		;	put_item(Item)
 		).
 
 	get(Item) :-
-		size_(N),
-		(	N =:= 0 ->
+		(	size_(0) ->
 			% buffer is empty, wait until an item is produced
 			threaded_wait(not_empty),
 			% be sure to consume all "not_empty" notifications before proceeding
 			get(Item)
-		;	get_item(Item),
-			(	N =:= _MaxCapacity_ ->
-				threaded_notify(vacancy)
-			;	true
-			)
+		;	get_item(Item)
 		).
 
 :- end_object.
