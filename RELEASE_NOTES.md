@@ -41,6 +41,8 @@ Documentation
 man pages to `docs/man`. Moved the Handbook to `docs/handbook`. Fixed the
 documentation and installation scripts for the new locations.
 
+* CHANGED: Moved the sample files to a `samples` directory.
+
 * ADDED: Glossary entries for "flaky test", "test dialect", "test outcome",
 "mocking", "term-expansion", and "goal-expansion".
 

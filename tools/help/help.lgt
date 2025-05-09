@@ -23,9 +23,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0:36:0,
+		version is 0:37:0,
 		author is 'Paulo Moura',
-		date is 2025-05-02,
+		date is 2025-05-09,
 		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -69,7 +69,7 @@
 		write('To lean more about available top-level shortcuts:'), nl, nl,
 		write('    help::logtalk_load/1.            help::logtalk_make/1.'), nl, nl,
 		write('Hint: you can preload the debugger (and other developer tools) from your'), nl,
-		write('settings file (see the settings-sample.lgt file for instructions).'), nl, nl.
+		write('settings file (see the samples/settings-sample.lgt file for instructions).'), nl, nl.
 
 	:- public(('/')/2).
 	:- mode('/'(+atom, +integer), zero_or_one).

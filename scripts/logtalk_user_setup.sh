@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Logtalk user folder setup script
-##   Last updated on May 2, 2025
+##   Last updated on May 9, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -105,7 +105,7 @@ then
 		echo "Copied your old \"settings.logtalk\" file to the new \"\$LOGTALKUSER\" directory."
 	fi
 	echo "If you are upgrading from a previous Logtalk version, check the file"
-	echo "\"\$LOGTALKUSER/settings-sample.lgt\" for updated settings suggestions."
+	echo "\"\$LOGTALKUSER/samples/settings-sample.lgt\" for updated settings suggestions."
 	echo
 	if [ -d "$LOGTALKUSER-backup-$date"/packs ]
 	then
@@ -132,13 +132,10 @@ cp -RL "$LOGTALKHOME"/contributions "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/examples "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/library "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/ports "$LOGTALKUSER"/
+cp -RL "$LOGTALKHOME"/samples "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/scratch "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/tests "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/tools "$LOGTALKUSER"/
-cp "$LOGTALKHOME"/loader-sample.lgt "$LOGTALKUSER"/loader-sample.lgt
-cp "$LOGTALKHOME"/settings-sample.lgt "$LOGTALKUSER"/settings-sample.lgt
-cp "$LOGTALKHOME"/tester-sample.lgt "$LOGTALKUSER"/tester-sample.lgt
-cp "$LOGTALKHOME"/tests-sample.lgt "$LOGTALKUSER"/tests-sample.lgt
 cp "$LOGTALKHOME"/VERSION.txt "$LOGTALKUSER"/
 chmod -R u+w "$LOGTALKUSER"
 rm -f "$LOGTALKUSER"/tools/diagrams/lgt2*
@@ -177,7 +174,7 @@ ln -sf "$LOGTALKHOME"/tools/packs/lgtenv.sh "$LOGTALKUSER"/tools/packs/lgtenv
 echo "Finished copying Logtalk files and directories."
 echo
 echo "You may want to customize the default compiler flags and preload developer"
-echo "tools by renaming and editing the \"settings-sample.lgt\" file found in the"
-echo "\"\$LOGTALKUSER\" directory. Consult the \"\$LOGTALKUSER/CUSTOMIZE.md\" file for"
-echo "more information."
+echo "tools by renaming and editing the \"samples/settings-sample.lgt\" file found"
+echo "in the \"\$LOGTALKUSER\" directory. Consult the \"\$LOGTALKUSER/CUSTOMIZE.md\""
+echo "file for more information."
 echo

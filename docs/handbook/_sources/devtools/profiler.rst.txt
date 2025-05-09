@@ -92,5 +92,5 @@ the default ``$`` before compiling your source code. For example:
 
    ?- set_logtalk_flag(code_prefix, '.').
 
-See also the ``settings-sample.lgt`` file for automating the necessary
-setup at Logtalk startup.
+See also the ``samples/settings-sample.lgt`` file for automating the
+necessary setup at Logtalk startup.

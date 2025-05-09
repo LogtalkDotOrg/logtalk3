@@ -144,16 +144,17 @@ tools to help you test, debug, analyze, and document your applications.
 which is updated when you update Logtalk) with a suitable name to hold
 all the files of your application.
 
-5. Copy or rename the [`settings-sample.lgt`](settings-sample.lgt) file to
-`settings.lgt`, and modify it to preload developer tools (e.g., the `help`
+5. Copy or rename the [`samples/settings-sample.lgt`](samples/settings-sample.lgt)
+file to `settings.lgt`, and modify it to preload developer tools (e.g., the `help`
 and `debugger` tools), to define library aliases for your applications, to
 define default compiler flags, and more (see the comments in the file itself
 and the [`CUSTOMIZE.md`](CUSTOMIZE.md) file for details).
 
-6. Copy to your application directory the [`loader-sample.lgt`](loader-sample.lgt)
+6. Copy to your application directory the [`samples/loader-sample.lgt`](samples/loader-sample.lgt)
 file, rename it to `loader.lgt`, and modify it to load your application source
-files. You may also copy the [`tester-sample.lgt`](tester-sample.lgt) and
-[`tests-sample.lgt`](tests-sample.lgt) files, renaming them to `tester.lgt`
-and `tests.lgt`, and editing them to define and run your application unit tests.
+files. You may also copy the [`samples/tester-sample.lgt`](samples/tester-sample.lgt)
+and [`samples/tests-sample.lgt`](samples/tests-sample.lgt) files, renaming
+them to `tester.lgt` and `tests.lgt`, and editing them to define and run your
+application unit tests.
 
 7. Have fun!

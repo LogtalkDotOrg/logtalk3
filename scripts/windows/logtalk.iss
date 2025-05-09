@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on May 2, 2025
+; Last updated on May 9, 2025
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -106,14 +106,11 @@ Source: "{#MyBaseDir}\docs\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\do
 Source: "{#MyBaseDir}\examples\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\examples"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
 Source: "{#MyBaseDir}\library\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\library"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
 Source: "{#MyBaseDir}\ports\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\ports"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
+Source: "{#MyBaseDir}\samples\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\samples"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
 Source: "{#MyBaseDir}\scratch\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\scratch"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
 Source: "{#MyBaseDir}\tests\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\tests"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
 Source: "{#MyBaseDir}\tools\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\tools"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
 
-Source: "{#MyBaseDir}\loader-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestName: "loader-sample.lgt"; Components: user; Flags: ignoreversion uninsneveruninstall
-Source: "{#MyBaseDir}\settings-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestName: "settings-sample.lgt"; Components: user; Flags: ignoreversion uninsneveruninstall
-Source: "{#MyBaseDir}\tester-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestName: "tester-sample.lgt"; Components: user; Flags: ignoreversion uninsneveruninstall
-Source: "{#MyBaseDir}\tests-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestName: "tests-sample.lgt"; Components: user; Flags: ignoreversion uninsneveruninstall
 Source: "{#MyBaseDir}\VERSION.txt"; DestDir: "{code:GetLgtUserDir}"; DestName: "VERSION.txt"; Components: user; Flags: ignoreversion uninsneveruninstall
 
 Source: "{#MyBaseDir}\scripts\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
@@ -152,7 +149,7 @@ Name: "{group}\Quick Start"; Filename: "{app}\QUICK_START.md"; Components: base
 Name: "{group}\Release Notes"; Filename: "{app}\RELEASE_NOTES.md"; Components: base
 Name: "{group}\Read Me"; Filename: "{app}\README.md"; Components: base
 Name: "{group}\Customization instructions"; Filename: "{app}\CUSTOMIZE.md"; Components: base
-Name: "{group}\Default settings"; Filename: "{app}\settings-sample.lgt"; Components: base
+Name: "{group}\Default settings"; Filename: "{app}\samples\settings-sample.lgt"; Components: base
 Name: "{group}\APIs documentation"; Filename: "{app}\docs\apis\index.html"; Components: base
 
 Name: "{group}\Web Site"; Filename: "{#MyAppUrl}"; Components: base

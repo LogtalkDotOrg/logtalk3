@@ -92,9 +92,9 @@ Alternative debugger tools
 --------------------------
 
 Logtalk provides basic support for the SWI-Prolog graphical tracer. The
-**required** settings are described in the `settings-sample.lgt` file. Logtalk
-queries can be traced using this tool by using the `gtrace/0-1` predicates.
-For example:
+**required** settings are described in the `samples/settings-sample.lgt` file.
+Logtalk queries can be traced using this tool by using the `gtrace/0-1`
+predicates. For example:
 
 	| ?- gtrace(foo::bar).
 

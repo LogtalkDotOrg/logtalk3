@@ -217,9 +217,10 @@ output formats of test results and are discussed below.</p>
 <section id="writing-and-running-tests">
 <h2>Writing and running tests<a class="headerlink" href="#writing-and-running-tests" title="Link to this heading"></a></h2>
 <p>In order to write your own unit tests, define objects extending the
-<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object. You may start by copying the <code class="docutils literal notranslate"><span class="pre">tests-sample.lgt</span></code>
-file (at the root of the Logtalk distribution) to a <code class="docutils literal notranslate"><span class="pre">tests.lgt</span></code> file
-in your project directory and editing it to add your tests:</p>
+<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object. You may start by copying the
+<code class="docutils literal notranslate"><span class="pre">samples/tests-sample.lgt</span></code> file (at the root of the Logtalk
+distribution) to a <code class="docutils literal notranslate"><span class="pre">tests.lgt</span></code> file in your project directory and
+editing it to add your tests:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(tests,
     <span class="k">extends</span>(lgtunit)).
 
@@ -252,10 +253,10 @@ object <code class="docutils literal notranslate"><span class="pre">source_data<
 <code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code> flag to <code class="docutils literal notranslate"><span class="pre">allow</span></code> for code coverage and
 debugging support. But these settings can always be overridden in the
 test objects.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">tester-sample.lgt</span></code> file (at the root of the Logtalk distribution)
-exemplifies how to compile and load <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool, the source code
-under testing, the unit tests, and how to automatically run all the
-tests after loading:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">samples/tester-sample.lgt</span></code> file (at the root of the Logtalk
+distribution) exemplifies how to compile and load <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool, the
+source code under testing, the unit tests, and how to automatically run
+all the tests after loading:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
     <span class="c">% minimize compilation reports to the essential ones (errors and warnings)</span>
     <span class="k">set_logtalk_flag</span>(report, warnings),

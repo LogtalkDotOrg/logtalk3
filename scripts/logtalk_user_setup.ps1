@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Logtalk user folder setup script
-##   Last updated on May 2, 2025
+##   Last updated on May 9, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2025 Paulo Moura <pmoura@logtalk.org>
@@ -136,13 +136,10 @@ function New-Logtalkuser-Directory {
 	Copy-Item -Path "$env:LOGTALKHOME\examples" -Destination "$env:LOGTALKUSER\examples" -Recurse
 	Copy-Item -Path "$env:LOGTALKHOME\library" -Destination "$env:LOGTALKUSER\library" -Recurse
 	Copy-Item -Path "$env:LOGTALKHOME\ports" -Destination "$env:LOGTALKUSER\ports" -Recurse
+	Copy-Item -Path "$env:LOGTALKHOME\samples" -Destination "$env:LOGTALKUSER\samples" -Recurse
 	Copy-Item -Path "$env:LOGTALKHOME\scratch" -Destination "$env:LOGTALKUSER\scratch" -Recurse
 	Copy-Item -Path "$env:LOGTALKHOME\tests" -Destination "$env:LOGTALKUSER\tests" -Recurse
 	Copy-Item -Path "$env:LOGTALKHOME\tools" -Destination "$env:LOGTALKUSER\tools" -Recurse
-	Copy-Item -Path "$env:LOGTALKHOME\loader-sample.lgt" -Destination "$env:LOGTALKUSER\loader-sample.lgt"
-	Copy-Item -Path "$env:LOGTALKHOME\settings-sample.lgt" -Destination "$env:LOGTALKUSER\settings-sample.lgt"
-	Copy-Item -Path "$env:LOGTALKHOME\tester-sample.lgt" -Destination "$env:LOGTALKUSER\tester-sample.lgt"
-	Copy-Item -Path "$env:LOGTALKHOME\tests-sample.lgt" -Destination "$env:LOGTALKUSER\tests-sample.lgt"
 	Copy-Item -Path "$env:LOGTALKHOME\VERSION.txt" -Destination "$env:LOGTALKUSER\VERSION.txt"
 	Remove-Item -Path "$env:LOGTALKUSER\tools\diagrams\lgt2*.*"
 	Remove-Item -Path "$env:LOGTALKUSER\tools\lgtdoc\xml\lgt2*.*"
@@ -187,9 +184,9 @@ function New-Logtalkuser-Directory {
 	Write-Output "Finished copying Logtalk files and directories."
 	Write-Output ""
 	Write-Output "You may want to customize the default compiler flags and preload developer"
-	Write-Output "tools by renaming and editing the `"settings-sample.lgt`" file found in the"
-	Write-Output "%LOGTALKUSER% directory. Consult the %LOGTALKUSER%\CUSTOMIZE.md file for"
-	Write-Output "more information."
+	Write-Output "tools by renaming and editing the `"samples\settings-sample.lgt`" file found"
+	Write-Output "in the `"%LOGTALKUSER%`" directory. Consult the `"%LOGTALKUSER%\CUSTOMIZE.md`""
+	Write-Output "file for more information."
 	Write-Output ""
 }
 

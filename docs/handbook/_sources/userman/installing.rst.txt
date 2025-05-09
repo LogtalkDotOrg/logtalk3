@@ -162,12 +162,11 @@ current Logtalk version
 ``VERSION.txt`` – file containing the current Logtalk version number
 (used for compatibility checking when upgrading Logtalk)
 
-``loader-sample.lgt`` – sample loader file for user applications
-
-``settings-sample.lgt`` – sample file for user-defined Logtalk settings
-
-``tester-sample.lgt`` – sample file for helping to automate running user
-application unit tests
+``samples``
+   ``loader-sample.lgt`` – sample loader file for user applications
+   ``settings-sample.lgt`` – sample file for user-defined Logtalk settings
+   ``tester-sample.lgt`` – sample file for helping to automate running user application unit tests
+   ``tests-sample.lgt`` – sample file for writing user application unit tests
 
 ``adapters``
    ``NOTES.md`` – notes on the provided adapter files

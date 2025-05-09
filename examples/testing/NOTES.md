@@ -40,8 +40,8 @@ the test dialects supported by default by the Logtalk `lgtunit` tool. See
 also the `quick_check` and `tests_dsl` examples.
 
 To define tests for your own project, see the `lgtunit` tool documentation
-and the `tests-sample.lgt` and `tester-sample.lgt` sample files in the root
-of the distribution.
+and the `samples/tests-sample.lgt` and `samples/tester-sample.lgt` files
+in the root of the distribution.
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 

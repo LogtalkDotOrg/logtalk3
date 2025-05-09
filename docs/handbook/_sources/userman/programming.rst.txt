@@ -538,8 +538,8 @@ flag we can write a single settings file that can be used with several
 
    :- endif.
 
-The Logtalk distribution includes a ``settings-sample.lgt`` sample file with
-commented out code snippets for common settings.
+The Logtalk distribution includes a ``samples/settings-sample.lgt`` sample
+file with commented out code snippets for common settings.
 
 .. _programming_linter:
 

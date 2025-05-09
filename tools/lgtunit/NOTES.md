@@ -79,9 +79,9 @@ Writing and running tests
 -------------------------
 
 In order to write your own unit tests, define objects extending the `lgtunit`
-object. You may start by copying the `tests-sample.lgt` file (at the root of
-the Logtalk distribution) to a `tests.lgt` file in your project directory and
-editing it to add your tests:
+object. You may start by copying the `samples/tests-sample.lgt` file (at the
+root of the Logtalk distribution) to a `tests.lgt` file in your project directory
+and editing it to add your tests:
 
 	:- object(tests,
 		extends(lgtunit)).
@@ -113,7 +113,7 @@ The term-expansion performed by the `lgtunit` object sets the test object
 for code coverage and debugging support. But these settings can always be
 overridden in the test objects.
 
-The `tester-sample.lgt` file (at the root of the Logtalk distribution)
+The `samples/tester-sample.lgt` file (at the root of the Logtalk distribution)
 exemplifies how to compile and load `lgtunit` tool, the source code under
 testing, the unit tests, and how to automatically run all the tests after
 loading:
