@@ -111,7 +111,7 @@ have scrolled from its last position, try to set your terminal terminfo
 to `xterm-256colour`).
 
 If you're running Logtalk from a git clone of its repo, you will need to
-run the `scripts/update_html_docs.sh` or `scripts/update_html_docs.ps1`
+run the `docs/apis/sources/build.sh` or `docs/apis/sources/build.ps1`
 scripts to generate the APIs documentation `.info` file and also run the
 `docs/handbook/sources/build.sh` or `docs/handbook/sources/build.ps1`
 scripts to generate the Handbook `.info` file. Alternatively, you can

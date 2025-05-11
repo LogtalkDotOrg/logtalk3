@@ -2,7 +2,7 @@
 ##
 ##   Logtalk script for updating the HTML library and tools SVG diagrams
 ##
-##   Last updated on May 2, 2025
+##   Last updated on May 11, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -38,7 +38,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 0.27"
+	Write-Output "$myName 0.30"
 }
 
 function Write-Usage-Help() {
@@ -139,9 +139,6 @@ if ($env:LOGTALKPACKS -ne "") {
 $ports_goal = "git_hash(Hash,[]), atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub), logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), logtalk_load(ports(loader)), inheritance_diagram::rlibrary(ports, [title('Logtalk ports of third-party software'),node_type_captions(true),zoom(true),output_directory('./'),path_url_prefixes('$env:LOGTALKUSER/',GitHub,'https://logtalk.org/library/'),output_directory('./'),path_url_prefixes('$env:LOGTALKHOME/',GitHub,'https://logtalk.org/library/'),omit_path_prefixes(['$env:LOGTALKUSER/','$env:LOGTALKHOME/','$env:USERPROFILE/'])]), halt."
 
 $contributions_goal = "git_hash(Hash,[]), atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub), logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), logtalk_load(contributions(loader)), inheritance_diagram::rlibrary(contributions, [title('Logtalk third-party contributions'),node_type_captions(true),zoom(true),output_directory('./'),path_url_prefixes('$env:LOGTALKUSER/',GitHub,'https://logtalk.org/library/'),output_directory('./'),path_url_prefixes('$env:LOGTALKHOME/',GitHub,'https://logtalk.org/library/'),omit_path_prefixes(['$env:LOGTALKUSER/','$env:LOGTALKHOME/','$env:USERPROFILE/'])]), halt."
-
-
-Push-Location ../docs/apis
 
 & $logtalk ($core_goal -replace '\\', '/')
 & $logtalk ($library_goal -replace '\\', '/')

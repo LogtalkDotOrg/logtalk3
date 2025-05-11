@@ -41,6 +41,11 @@ Documentation
 man pages to `docs/man`. Moved the Handbook to `docs/handbook`. Fixed the
 documentation and installation scripts for the new locations.
 
+* CHANGED: Moved the `update_html_docs.*` and `update_svg_diagrams.*` scripts
+from the `scripts` directory to the `docs/apis/sources` directory. Renamed
+the `update_html_docs.*` scripts to `build.*`. Renamed the `build_manuals.*`
+scripts to `build.*`.
+
 * CHANGED: Moved the sample files to a `samples` directory.
 
 * ADDED: Glossary entries for "flaky test", "test dialect", "test outcome",

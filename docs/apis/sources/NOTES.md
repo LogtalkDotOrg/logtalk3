@@ -20,8 +20,8 @@ ________________________________________________________________________
 
 This directory contains files used by the Logtalk API documentation. The
 sources are generated automatically in reStructuredText markup language
-using the `scripts/update_html_docs.sh` script and then converted to HTML,
-PDF, ePub, Texinfo, and Markdown formats using Sphinx:
+using the `build.*` scripts and then converted to HTML, PDF, ePub, Texinfo,
+and Markdown formats using Sphinx:
 
 http://sphinx-doc.org/
 
@@ -32,19 +32,25 @@ https://github.com/rtfd/sphinx_rtd_theme
 The Sphinx configuration file, `conf.py`, is renamed in this directory
 to `_conf.py` to avoid being picked up by the Read the Docs website
 builds. This file is temporarily renamed to the correct name by the
-`update_html_docs.sh` script.
+`build.*` scripts.
 
 The `_templates/layout.html` file adds the links to the SVG diagrams
 and the index to the sidebar of the generated HTML documentation.
 
 The required Python packages can be installed using the commands:
 
-	$ sudo pip install --upgrade pygments
-	$ sudo pip install --upgrade sphinx
-	$ sudo pip install --upgrade sphinx_rtd_theme
+	$ python3 -m pip install --upgrade pygments
+	$ python3 -m pip install --upgrade sphinx
+	$ python3 -m pip install --upgrade sphinx_rtd_theme
 
 Required versions are:
 
-- Sphinx 6.1.3 or later
-- RTD theme 1.2.0 or later
-- Pygments 2.10.0 or later
+- Sphinx 7.4.7 or later
+- RTD theme 2.0.0 or later
+- Pygments 2.19.1 or later
+
+The APIs are also documented using SVG diagrams. These can be generated
+using the `update_svg_diagrams.*` scripts, which must be called from a
+Logtalk git clone directory	as the generated diagrams link to the files
+at the latest commit at GitHub. [GraphViz](https://www.graphviz.org/) is
+required (version 2.43.20191029.1313 or later).

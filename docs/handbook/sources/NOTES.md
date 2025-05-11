@@ -51,9 +51,9 @@ The required Python packages can be installed using the commands:
 
 Required versions are:
 
-- Sphinx 7.2.6 or later
-- RTD theme 1.3.0 or later
-- Pygments 2.10.0 or later
+- Sphinx 7.4.7 or later
+- RTD theme 2.0.0 or later
+- Pygments 2.19.1 or later
 
 Also required is `pandoc` (used e.g. to convert the general, non-API,
 documentation of library, ports, and contributions from Markdown to

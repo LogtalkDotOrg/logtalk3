@@ -3,7 +3,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ##
-##   Last updated on May 2, 2025
+##   Last updated on May 11, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -40,7 +40,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 0.29"
+	Write-Output "$myName 0.30"
 }
 
 function Write-Usage-Help() {
@@ -124,16 +124,14 @@ if ($env:LOGTALKPACKS -ne "") {
 $cwd = $pwd
 
 if ($i -eq $true) {
-	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),library(packs_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd/../docs/apis/sources'),omit_path_prefixes(['$env:LOGTALKUSER/','$env:LOGTALKHOME/', '$logtalk_packs'])]),halt."
+	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),library(packs_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd'),omit_path_prefixes(['$env:LOGTALKUSER/','$env:LOGTALKHOME/', '$logtalk_packs'])]),halt."
 } elseif ($env:LOGTALKPACKS -ne "") {
-	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd/../docs/apis/sources'),omit_path_prefixes(['$env:LOGTALKUSER/','$env:LOGTALKHOME/']),exclude_prefixes(['$env:USERPROFILE/logtalk_packs/','$env:LOGTALKPACKS/'])]),halt."
+	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd'),omit_path_prefixes(['$env:LOGTALKUSER/','$env:LOGTALKHOME/']),exclude_prefixes(['$env:USERPROFILE/logtalk_packs/','$env:LOGTALKPACKS/'])]),halt."
 } else {
-	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd/../docs/apis/sources'),omit_path_prefixes(['$env:LOGTALKUSER/','$env:LOGTALKHOME/']),exclude_prefixes(['$env:USERPROFILE/logtalk_packs/'])]),halt."
+	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd'),omit_path_prefixes(['$env:LOGTALKUSER/','$env:LOGTALKHOME/']),exclude_prefixes(['$env:USERPROFILE/logtalk_packs/'])]),halt."
 }
 
 & $logtalk ($goal -replace '\\','/')
-
-Push-Location "$pwd/../docs/apis/sources"
 
 lgt2rst -t "Logtalk APIs"
 if ($i -eq $true) {
@@ -180,7 +178,5 @@ try {
 } catch {
 	Write-Error "Error occurred at cleanup"
 }
-
-Pop-Location
 
 Pop-Location

@@ -65,6 +65,4 @@ usage and distribution conditions.
 The `contributions/loader.lgt` file loads all contributions.
 
 HTML documentation for each contribution API can be found on the `docs`
-directory (open the `docs/index.html` file with your web browser). The
-documentation for these tools can be regenerated using the shell scripts
-`../scripts/update_html_docs.sh` and `../scripts/update_svg_diagrams.sh`.
+directory (open the `../docs/handbook/index.html` file with your web browser).

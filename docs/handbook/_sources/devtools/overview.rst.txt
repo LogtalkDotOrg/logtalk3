@@ -64,10 +64,8 @@ Tools documentation
 
 Specific notes about each tool can be found in the corresponding
 ``NOTES.md`` files. HTML documentation for each tool API can be found in
-the ``docs`` directory (open the ``../docs/index.html`` file with your
-web browser). The documentation for these tools can be regenerated using
-the shell scripts ``../scripts/update_html_docs.sh`` and
-``../scripts/update_svg_diagrams.sh``.
+the ``docs`` directory (open the ``../docs/handbook/index.html`` file
+with your web browser).
 
 Tools common flags
 ------------------

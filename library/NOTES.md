@@ -42,9 +42,7 @@ Library documentation
 
 Specific notes about each library can be found in the corresponding `NOTES.md`
 files. HTML documentation for each library API can be found on the `docs`
-directory (open the `../docs/index.html` file with your web browser). The
-documentation for these libraries can be regenerated using the shell scripts
-`../scripts/update_html_docs.sh` and `../scripts/update_svg_diagrams.sh`.
+directory (open the `../docs/handbook/index.html` file with your web browser).
 
 
 Loading libraries

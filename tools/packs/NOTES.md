@@ -907,8 +907,8 @@ For more details and alternatives, see the `lgtdoc` tool documentation.
 
 It is also possible to add API documentation and diagrams for all the installed
 packs to the Logtalk distribution API documentation and diagrams by calling
-the `update_html_docs` and `update_svg_diagrams` scripts with the `-i` option.
-See the scripts documentation for more details.
+the `build` and `update_svg_diagrams` scripts in the `docs/apis/sources`
+directory with the `-i` option. See the scripts documentation for more details.
 
 Pinning registries and packs
 ----------------------------

@@ -209,15 +209,15 @@ Generating documentation in human-readable formats
 
 		$ cd docs/handbook/sources
 		$ ./build.sh
-		$ cd ../../scripts
-		$ ./update_html_docs.sh
+		$ cd ../../apis/sources
+		$ ./build.sh
 
 * Windows  
 
-		C:\> cd docs/handbook\sources
+		C:\> cd docs\handbook\sources
 		C:\> build.ps1
-		C:\> cd ..\..\scripts
-		C:\> update_html_docs.ps1
+		C:\> cd ..\..\apis\sources
+		C:\> build.ps1
 
 If you used the `install.sh` script for the basic installation, run it again
 (using the same options) to install the generated Texinfo versions of the

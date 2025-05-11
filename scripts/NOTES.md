@@ -154,24 +154,6 @@ also available in the Logtalk website.
 	of symbolic links or turning on "Developer mode" in the
 	Settings -> Update & Security -> For Developers panel.
 
-- `update_html_docs.sh` and `update_html_docs.ps1`  
-	Bash shell and PowerShell scripts for updating the HTML	documentation
-	of core entities, library, developer tools, ports, contributions, and
-	optionally installed packs; requires [Sphinx](https://www.sphinx-doc.org)
-	to be installed (version 3.4.1 or later) plus [Pygments](https://pygments.org)
-	(version 2.7.3 or later) and the Sphinx
-	[Read The Docs theme](https://github.com/rtfd/sphinx_rtd_theme)
-	(version 0.5.0 or later); these scripts must be called from the `scripts`
-	sub-directory of a Logtalk git clone directory
-
-- `update_svg_diagrams.sh` and `update_svg_diagrams.ps1`  
-	Bash shell and PowerShell scripts for updating the SVG diagrams of core
-	entities, library, developer tools, ports, contributions, and optionally
-	installed packs; requires [GraphViz](https://www.graphviz.org/) to be
-	installed (version 2.43.20191029.1313 or later); these scripts must be
-	called from the `scripts` sub-directory of a Logtalk git clone directory
-	as the generated diagrams link to the files at the latest commit at GitHub
-
 - `update_man_html_versions.sh`  
 	shell script for updating the HTML versions of the man pages; requires
 	[`roffit`](https://github.com/bagder/roffit) to be installed and available
