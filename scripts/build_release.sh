@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Release build script
-##   Last updated on May 2, 2025
+##   Last updated on May 11, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -109,7 +109,7 @@ cd ..
 # Build manuals archive if enabled
 if [ "$BUILD_MANUALS" = true ]; then
     echo "Building manuals archive..."
-    cp -R "logtalk-$version/docs/handbook" "logtalk-manuals-$version"
+    cp -R "logtalk-$version/docs" "logtalk-manuals-$version"
     tar -czf "logtalk-manuals-$version.tgz" "logtalk-manuals-$version"
 else
     echo "Skipping manuals archive build."

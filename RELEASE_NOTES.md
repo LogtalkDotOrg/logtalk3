@@ -80,6 +80,9 @@ caused an error when open as a Jupyter notebook.
 Installers and installation scripts
 -----------------------------------
 
+* CHANGED: The `build_release.sh` script to also include the APIs documentation
+when building the manuals archive.
+
 * UPDATED: The portable Docker image to include the JAR files required by the
 `apache_poi`, `clustering`, and `document_converter` examples.
 
