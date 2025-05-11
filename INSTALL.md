@@ -201,21 +201,21 @@ and non-admin users) takes care of the definition of the environment variables.
 Generating documentation in human-readable formats
 --------------------------------------------------
 
-When downloading the source archive or cloning the git repo, the documentation
-human-readable formats are not included and must be manually generated afer
-the basic installation:
-
++When downloading the source archive or cloning the git repo, only the HTML
++version of the Handbook and APIs documentation is included. Other formats
++can be manually generated afer the basic installation:
+ 
 * POSIX systems  
 
-		$ cd manuals/sources
-		$ ./build_manuals.sh
+		$ cd docs/handbook/sources
+		$ ./build.sh
 		$ cd ../../scripts
 		$ ./update_html_docs.sh
 
 * Windows  
 
-		C:\> cd manuals\sources
-		C:\> build_manuals.ps1
+		C:\> cd docs/handbook\sources
+		C:\> build.ps1
 		C:\> cd ..\..\scripts
 		C:\> update_html_docs.ps1
 

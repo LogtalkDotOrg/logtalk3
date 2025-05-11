@@ -103,7 +103,7 @@ scripts/cleandist.sh
 cd ..
 
 # Ensure that the Handbook and APIs documentation is up-to-date
-"logtalk-$version"/docs/handbook/sources/build_manuals.sh
+"logtalk-$version"/docs/handbook/sources/build.sh
 "logtalk-$version"/scripts/update_html_docs.sh
 
 # Build manuals archive if enabled
