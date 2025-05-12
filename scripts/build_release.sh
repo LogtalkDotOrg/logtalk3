@@ -102,14 +102,14 @@ chmod a+x scripts/cleandist.sh
 scripts/cleandist.sh
 cd ..
 
-# Ensure that the Handbook and APIs documentation is up-to-date
-"logtalk-$version"/docs/handbook/sources/build.sh
-"logtalk-$version"/docs/apis/sources/build.sh
-"logtalk-$version"/docs/apis/sources/update_svg_diagrams.sh
-
 # Build manuals archive if enabled
 if [ "$BUILD_MANUALS" = true ]; then
     echo "Building manuals archive..."
+	# Ensure that the Handbook and APIs documentation is up-to-date
+	# and all output formats are generated
+	"logtalk-$version"/docs/handbook/sources/build.sh
+	"logtalk-$version"/docs/apis/sources/build.sh
+	"logtalk-$version"/docs/apis/sources/update_svg_diagrams.sh
     cp -R "logtalk-$version/docs" "logtalk-manuals-$version"
     tar -czf "logtalk-manuals-$version.tgz" "logtalk-manuals-$version"
 else
@@ -172,8 +172,8 @@ if [ "$BUILD_DEB" = true ]; then
     cp debian/control "$directory/debian/DEBIAN"
     # Use appropriate sed syntax based on the system
     case $(sed --help 2>&1) in
-        *GNU*) sudo sed -i "s/^Version:.*/Version: $version/" "$directory/debian/DEBIAN/control" ;;
-        *) sudo sed -i '' "s/^Version:.*/Version: $version/" "$directory/debian/DEBIAN/control" ;;
+        *GNU*) sed -i "s/^Version:.*/Version: $version/" "$directory/debian/DEBIAN/control" ;;
+        *) sed -i '' "s/^Version:.*/Version: $version/" "$directory/debian/DEBIAN/control" ;;
     esac
     cp debian/postinst "$directory/debian/DEBIAN"
     cp debian/prerm "$directory/debian/DEBIAN"
