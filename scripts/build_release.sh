@@ -105,6 +105,7 @@ cd ..
 # Ensure that the Handbook and APIs documentation is up-to-date
 "logtalk-$version"/docs/handbook/sources/build.sh
 "logtalk-$version"/docs/apis/sources/build.sh
+"logtalk-$version"/docs/apis/sources/update_svg_diagrams.sh
 
 # Build manuals archive if enabled
 if [ "$BUILD_MANUALS" = true ]; then
@@ -233,10 +234,24 @@ fi
 cd "$directory" || exit 1
 
 openssl sha256 logtalk-$version.tar.bz2 || true
-openssl sha256 logtalk-$version.pkg.zip || true
-openssl sha256 logtalk-$version-1.noarch.rpm || true
-openssl sha256 logtalk_$version-1_all.deb || true
-openssl sha256 logtalk-manuals-$version.tgz || true
-openssl sha256 logtalk-$version.exe || true
-openssl sha256 logtalk-$version.tgz || true
-openssl sha256 logtalk-experimental-$version.tgz || true
+if [ "$BUILD_PKG" = true ]; then
+	openssl sha256 logtalk-$version.pkg.zip || true
+fi
+if [ "$BUILD_RPM" = true ]; then
+	openssl sha256 logtalk-$version-1.noarch.rpm || true
+fi
+if [ "$BUILD_DEB" = true ]; then
+	openssl sha256 logtalk_$version-1_all.deb || true
+fi
+if [ "$BUILD_MANUALS" = true ]; then
+	openssl sha256 logtalk-manuals-$version.tgz || true
+fi
+if [ -f "logtalk-$version.exe" ]; then
+	openssl sha256 logtalk-$version.exe || true
+fi
+if [ "$BUILD_PACK" = true ]; then
+	openssl sha256 logtalk-$version.tgz || true
+fi
+if [ "$BUILD_PACK_EXPERIMENTAL" = true ]; then
+	openssl sha256 logtalk-experimental-$version.tgz || true
+fi
