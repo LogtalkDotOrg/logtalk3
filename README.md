@@ -110,7 +110,8 @@ online at:
 
 https://logtalk.org/docs/handbook/index.html
 
-PDF, ePub, and Texinfo versions of the Logtalk Handbook can be downloaded from:
+PDF, ePub, Texinfo, and Markdown versions of the Logtalk Handbook and APIs
+documentation can be downloaded from:
 
 https://logtalk.org/documentation.html
 
