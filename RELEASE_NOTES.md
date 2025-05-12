@@ -91,6 +91,8 @@ when building the manuals archive.
 * UPDATED: The portable Docker image to include the JAR files required by the
 `apache_poi`, `clustering`, and `document_converter` examples.
 
+* IMPROVED: Simplified the Docker files for the portable and SWI-Prolog images.
+
 
 3.91.1 - April 15, 2025
 =======================

@@ -1,10 +1,10 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on May 2, 2025
+##   Last updated on May 12, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 2017-2025 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,9 +47,7 @@ ARG YAP_VERSION=master
 
 # Logtalk environment
 ENV LOGTALKHOME=/usr/local/share/logtalk
-ENV PATH=$PATH:$LOGTALKHOME/tools/diagrams:$LOGTALKHOME/tools/lgtdoc/xml:$LOGTALKHOME/scripts:$LOGTALKHOME/integration
-ENV MANPATH=$LOGTALKHOME/man:
-ENV INFOPATH=$LOGTALKHOME/docs/apis:$LOGTALKHOME/docs/handbook:
+ENV LOGTALKUSER=/root/logtalk
 
 WORKDIR /downloads
 

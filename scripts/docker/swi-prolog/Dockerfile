@@ -1,10 +1,10 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on May 2, 2025
+##   Last updated on May 12, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 2017-2025 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-FileCopyrightText: 2017 Sergio Castro <sergioc78@gmail.com>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
@@ -30,12 +30,8 @@ LABEL org.opencontainers.image.authors="pmoura@logtalk.org"
 VOLUME ["/source", "/logtalkuser_prefix"]
 
 # Logtalk environment
-ENV LOGTALK_INSTALL_PREFIX=/usr/local
-ENV LOGTALKHOME=$LOGTALK_INSTALL_PREFIX/share/logtalk
-ENV LOGTALKUSER=/logtalkuser_prefix/logtalk
-ENV PATH=$PATH:$LOGTALKHOME/tools/diagrams:$LOGTALKHOME/tools/lgtdoc/xml:$LOGTALKHOME/scripts:$LOGTALKHOME/integration
-ENV MANPATH=$LOGTALKHOME/man:
-ENV INFOPATH=$LOGTALKHOME/docs/apis:$LOGTALKHOME/docs/handbook:
+ENV LOGTALKHOME=/usr/local/share/logtalk
+ENV LOGTALKUSER=/root/logtalk
 
 # Preparation for downloading
 ENV LOGTALK_DOWNLOAD=/download
@@ -52,8 +48,8 @@ ARG LOGTALK_VERSION=master
 RUN curl -sL https://github.com/LogtalkDotOrg/logtalk3/archive/${LOGTALK_VERSION}.tar.gz | tar xz
 
 # Install Logtalk
-RUN $LOGTALK_DOWNLOAD/logtalk3-${LOGTALK_VERSION}/scripts/install.sh -p $LOGTALK_INSTALL_PREFIX
-#RUN logtalk_user_setup.sh
+RUN $LOGTALK_DOWNLOAD/logtalk3-${LOGTALK_VERSION}/scripts/install.sh -p /usr/local
+RUN logtalk_user_setup
 
 WORKDIR /source
 ENTRYPOINT ["swilgt"]
