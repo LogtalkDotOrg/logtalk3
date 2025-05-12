@@ -160,8 +160,8 @@ the `install.sh` script, you will also need to add:
 	PATH=$PATH:$LOGTALKHOME/tools/packs
 	PATH=$PATH:$LOGTALKHOME/scripts
 	PATH=$PATH:$LOGTALKHOME/integration
-	MANPATH=$MANPATH:$LOGTALKHOME/man
-	INFOPATH=$INFOPATH:$LOGTALKHOME/docs:$LOGTALKHOME/manuals
+	MANPATH=$MANPATH:$LOGTALKHOME/docs/man
+	INFOPATH=$INFOPATH:$LOGTALKHOME/docs/handbook:$LOGTALKHOME/docs/apis
 	export PATH MANPATH INFOPATH
 
 If you use a zsh shell, edit and add the above lines for bash to your
@@ -181,8 +181,8 @@ the `install.sh` script, you will also need to add:
 	setenv PATH "${PATH}":"${LOGTALKHOME}"/tools/packs
 	setenv PATH "${PATH}":"${LOGTALKHOME}"/scripts
 	setenv PATH "${PATH}":"${LOGTALKHOME}"/integration
-	setenv MANPATH "${MANPATH}":"${LOGTALKHOME}"/man
-	setenv INFOPATH ${INFOPATH}:"${LOGTALKHOME}"/docs:"${LOGTALKHOME}"/manuals
+	setenv MANPATH "${MANPATH}":"${LOGTALKHOME}"/docs/man
+	setenv INFOPATH ${INFOPATH}:"${LOGTALKHOME}"/docs/handbook:"${LOGTALKHOME}"/docs/apis
 
 Don't use relative paths such as `../` or `./` in the definition of the environment
 variables. Some Prolog compilers don't expand environment variables, resulting
