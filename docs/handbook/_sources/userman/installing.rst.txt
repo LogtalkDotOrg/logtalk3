@@ -162,91 +162,111 @@ current Logtalk version
 ``VERSION.txt`` – file containing the current Logtalk version number
 (used for compatibility checking when upgrading Logtalk)
 
-``samples``
-   ``loader-sample.lgt`` – sample loader file for user applications
-   ``settings-sample.lgt`` – sample file for user-defined Logtalk settings
-   ``tester-sample.lgt`` – sample file for helping to automate running user application unit tests
-   ``tests-sample.lgt`` – sample file for writing user application unit tests
-
 ``adapters``
    ``NOTES.md`` – notes on the provided adapter files
+
    ``template.pl`` – template adapter file
+
    ``...`` – specific adapter files
 
 ``coding``
-   ``NOTES.md`` – notes on syntax highlighter and text editor support
-   files providing syntax coloring for publishing and editing Logtalk
-   source code
+   ``NOTES.md`` – notes on syntax highlighter and text editor support files
+   providing syntax coloring for publishing and editing Logtalk source code
+
    ``...`` – syntax coloring support files
 
 ``contributions``
    ``NOTES.md`` – notes on the user-contributed code
+
    ``...`` – user-contributed code files
 
 ``core``
-   ``NOTES.md`` – notes on the current status of the compiler and
-   runtime
+   ``NOTES.md`` – notes on the current status of the compiler and runtime
+
    ``...`` – core source files
 
 ``docs/apis``
    ``NOTES.md`` – notes on the provided documentation for core, library,
    tools, and contributions entities
+
    ``index.html`` – root document for all entities documentation
+
    ``...`` – other entity documentation files
+
+``docs/handbook``
+   ``NOTES.md`` – notes on the provided documentation
+
+   ``bibliography.html`` – bibliography
+
+   ``glossary.html`` – glossary
+
+   ``index.html`` – root document for all documentation
+
+   ``...`` – other documentation files
 
 ``docs/man``
    ``...`` – POSIX man pages for the shell scripts
 
-``docs/handbook``
-   ``NOTES.md`` – notes on the provided documentation
-   ``bibliography.html`` – bibliography
-   ``glossary.html`` – glossary
-   ``index.html`` – root document for all documentation
-   ``...`` – other documentation files
-
 ``examples``
    ``NOTES.md`` – short description of the provided examples
 
-   ``bricks``
-      ``NOTES.md`` – example description and other notes
-      ``SCRIPT.txt`` – step-by-step example tutorial
+   ``ack``
+      ``NOTES.md`` – example notes and sample queries
+
       ``loader.lgt`` – loader utility file for the example objects
-      ``...`` – bricks example source files
+
+      ``...`` – ack example source files
 
    ``...`` – other examples
 
 ``integration``
-   ``NOTES.md`` – notes on scripts for Logtalk integration with Prolog
-   compilers
+   ``NOTES.md`` – notes on scripts for Logtalk integration with Prolog compilers
+
    ``...`` – Prolog integration scripts
 
 ``library``
    ``NOTES.md`` – short description of the library contents
+
    ``all_loader.lgt`` – loader utility file for all library entities
+
    ``...`` – library source files
 
 ``paths``
    ``NOTES.md`` – description on how to setup library and example paths
+
    ``paths.pl`` – default library and example paths
 
 ``ports``
    ``NOTES.md`` – description of included ports of third-party software
+
    ``...`` – ports
+
+
+``samples``
+   ``loader-sample.lgt`` – sample loader file for user applications
+
+   ``settings-sample.lgt`` – sample file for user-defined Logtalk settings
+
+   ``tester-sample.lgt`` – sample file for helping to automate running user application unit tests
+
+   ``tests-sample.lgt`` – sample file for writing user application unit tests
 
 ``scratch``
    ``NOTES.md`` – notes on the scratch directory
 
 ``scripts``
-   ``NOTES.md`` – notes on scripts for Logtalk user setup, packaging,
-   and installation
+   ``NOTES.md`` – notes on scripts for Logtalk user setup, packaging, and installation
+
    ``...`` – packaging, installation, and setup scripts
 
 ``tests``
    ``NOTES.md`` – notes on the current status of the unit tests
+
    ``...`` – unit tests for built-in features
 
 ``tools``
    ``NOTES.md`` – notes on the provided programming tools
+
    ``...`` – programming tools
 
 .. _installing_adapters:
