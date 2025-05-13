@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Logtalk user folder setup script
-##   Last updated on May 9, 2025
+##   Last updated on May 13, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2025 Paulo Moura <pmoura@logtalk.org>
@@ -32,7 +32,7 @@ function Show-Script-Description {
 	Write-Output ""
 	Write-Output "This script copies all the Logtalk per-user files and directories to the"
 	Write-Output "user home directory. The location can be set by defining the LOGTALKUSER"
-	Write-Output "environment variable (defaults to %USERPROFILE%\Documents\Logtalk when"
+	Write-Output "environment variable (defaults to `"%USERPROFILE%\Documents\Logtalk`" when"
 	Write-Output "not defined)."
 	Write-Output ""
 }
@@ -81,7 +81,7 @@ if (Test-Path $env:LOGTALKHOME) {
 function Get-Logtalkuser {
 	if ($null -eq $env:LOGTALKUSER) {
 		Write-Output "After the script completion, you must set the environment variable"
-		Write-Output "LOGTALKUSER pointing to %USERPROFILE%\Documents\Logtalk."
+		Write-Output "LOGTALKUSER pointing to `"%USERPROFILE%\Documents\Logtalk`"."
 		$env:LOGTALKUSER = "%USERPROFILE%\Documents\Logtalk"
 	}
 	# At the end LOGTALKUSER was set already or now is set
