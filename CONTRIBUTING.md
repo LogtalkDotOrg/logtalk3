@@ -44,7 +44,7 @@ https://gitter.im/LogtalkDotOrg/logtalk3
 
 In alternative, you can also join our discussion forums at:
 
-https://forums.logtalk.org/
+https://github.com/LogtalkDotOrg/logtalk3/discussions
 
 For contributing improvements and fixes to the Handbook, open it in your
 web browser, click on the link on the top right that says "Edit on GitHub",

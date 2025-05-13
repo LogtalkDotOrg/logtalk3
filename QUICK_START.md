@@ -28,10 +28,10 @@ Install Logtalk by using either the [installer](https://logtalk.org/download.htm
 provided for your operating-system or by following the manual installation
 instructions in the [`INSTALL.md`](INSTALL.md) file. An alternative to installing
 Logtalk (and backend and tools dependencies) locally in your system is to use one
-of the Docker images available from the [Docker Hub](https://hub.docker.com/u/logtalk/).
+of the Docker images available from [Docker Hub](https://hub.docker.com/u/logtalk/).
 
-On POSIX operating-systems, the following shell scripts are installed
-by default for running Logtalk with the supported backend Prolog compilers
+On POSIX operating-systems, the following shell scripts are installed by
+default for running Logtalk with the supported backend Prolog compilers
 (which must be installed and up-to-date before running these scripts):
 
 * B-Prolog:       `bplgt`      (experimental)

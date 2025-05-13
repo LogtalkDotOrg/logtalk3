@@ -201,9 +201,9 @@ and non-admin users) takes care of the definition of the environment variables.
 Generating documentation in human-readable formats
 --------------------------------------------------
 
-+When downloading the source archive or cloning the git repo, only the HTML
-+version of the Handbook and APIs documentation is included. Other formats
-+can be manually generated afer the basic installation:
+When downloading the source archive or cloning the git repo, only the HTML
+version of the Handbook and APIs documentation is included. Other formats
+can be manually generated afer the basic installation:
  
 * POSIX systems  
 
