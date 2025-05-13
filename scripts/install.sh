@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Logtalk installation script
-##   Last updated on May 2, 2025
+##   Last updated on May 13, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -165,6 +165,7 @@ gzip --best ../../logtalk/docs/man/man1/*.1
 for file in ../../logtalk/docs/man/man1/*.1.gz ; do
 	ln -sf "$file" "$(basename "$file")"
 done
+echo "Ensure that the \"$prefix/share/man\" directory is in your MANPATH."
 
 if [ "$(command -v install-info)" != "" ]; then
 	mkdir -p ../../info

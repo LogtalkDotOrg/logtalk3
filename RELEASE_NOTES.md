@@ -93,6 +93,9 @@ when building the manuals archive.
 
 * IMPROVED: Simplified the Docker files for the portable and SWI-Prolog images.
 
+* IMPROVED: The manual installation script to also print the required `MANPATH`
+environment variable setting.
+
 
 3.91.1 - April 15, 2025
 =======================
