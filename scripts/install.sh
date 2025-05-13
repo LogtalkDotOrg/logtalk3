@@ -221,15 +221,15 @@ echo
 echo "To complete the Logtalk installation, define the environment variables:"
 echo
 echo "    LOGTALKHOME=$prefix/share/logtalk"
-echo "    LOGTALKUSER=\$HOME/logtalk"
+echo "    LOGTALKUSER=\$HOME/logtalk (default; can be overridden)"
 echo
 echo "After, run the \"logtalk_user_setup\" shell script once before running the"
 echo "integration scripts to ensure their LOGTALKUSER directory is up-to-date."
 echo "For more details on manual installation setups, see the \"INSTALL.md\" file."
 echo
 echo "If you get an unexpected failure when using one of the Prolog integration"
-echo "scripts, consult the \"$prefix/share/logtalk/adapters/NOTES.md\" file"
-echo "for compatibility notes or consult the integration script man page."
+echo "scripts, consult the \"\$LOGTALKHOME/adapters/NOTES.md\" file for compatibility"
+echo "notes or consult the integration script man page."
 echo
 
 if [ "$(command -v update-mime-database)" != "" ]; then
