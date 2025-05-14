@@ -81,9 +81,10 @@ settings on the `samples/settings-sample.lgt` for configuration suggestions.
 Check also the `scripts/embedding/settings-embedding-sample.lgt` file.
 
 You may customize the Logtalk compiler flags and add your own library paths
-by coping or renaming the `samples/settings-sample.lgt` file in your Logtalk
-user folder to `settings.lgt` and editing it. The `settings.lgt` file may also
-be stored in your home directory. For application specific settings, save the
+by coping or renaming the `samples/settings-sample.lgt` file to `settings.lgt`
+and editing it. The `settings.lgt` file can be saved to your `$LOGTALKUSER`
+directory, to your home directory, and other locations. See the comments in
+the sample file for details. For application specific settings, save the
 `settings.lgt` file in the application root directory and start Logtalk from
 that directory. Settings in this file override the default values in the
 adapter files. Some default flag values that you may want to change include:
