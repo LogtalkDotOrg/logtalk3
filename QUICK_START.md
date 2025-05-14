@@ -80,24 +80,25 @@ opening the `~/logtalk/docs/handbook/index.html` file with a web browser
 (the `~/logtalk` directory is created when you run Logtalk for the first
 time). The [Installing Logtalk](docs/handbook/userman/installing.html) and
 [Writing and running applications](docs/handbook/userman/programming.html)
-sections in the User Manual will provide you with a basic understanding of how
-to start Logtalk as well as how to compile and load Logtalk code.
+sections in the User Manual will provide you with a basic understanding of
+how to start Logtalk as well as how to compile and load Logtalk code.
 
 Basic help on Logtalk usage at the top-level interpreter
 --------------------------------------------------------
 
 Start Logtalk and call the goal `{help(loader)}` followed by `help::help`.
 This will provide you with an overview of how to get help and how to load
-and debug your code.
-
+and debug your code. This tool can be automatically loaded at startup by
+using a settings file (see the [CUSTOMIZE.md](CUSTOMIZE.md) file for details).
 
 Help on understanding compiler errors and warnings
 --------------------------------------------------
 
 Start Logtalk and call the goal `{tutor(loader)}`. The `tutor` tool will
 augment compiler errors and warnings with explanations and suggestions on
-how to solve the reported problems.
-
+how to solve the reported problems. This tool can be automatically loaded
+at startup by using a settings file (see the [CUSTOMIZE.md](CUSTOMIZE.md)
+file for details).
 
 Loading libraries, examples, and tools
 --------------------------------------
@@ -105,7 +106,6 @@ Loading libraries, examples, and tools
 From within a source file, use the goal `logtalk_load(<name>(loader))`. For
 example, `logtalk_load(optionals(loader))`. At the top-level interpreter, a
 `{<name>(loader)}` shortcut is available. For example, `{debugger(loader)}`.
-
 
 Running an example
 ------------------
@@ -120,7 +120,8 @@ walkthrough.
 2. Read the example `NOTES.md` file for a description of the example,
 instructions on how to load it, and for sample queries that you may try
 by copying and pasting them to your Prolog interpreter top-level or by
-opening the `NOTES.md` file as a Jupyter notebook.
+opening the `NOTES.md` file as a Jupyter notebook (after installing the
+Logtalk kernel).
 
 Writing your own programs
 -------------------------
