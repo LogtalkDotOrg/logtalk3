@@ -25,6 +25,12 @@ RELEASE NOTES
 3.92.0 - May ??, 2025
 =====================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Typo in the documentation of the `forwarding` protocol `forward/1`
+predicate.
+
 Prolog adapter and integration files
 ------------------------------------
 

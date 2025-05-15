@@ -14,8 +14,8 @@ Message forwarding protocol.
 |    ``built_in``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2013-05-04
+| **Version:** 1:0:1
+| **Date:** 2025-05-15
 
 | **Compilation flags:**
 |    ``static, built_in``
@@ -52,7 +52,7 @@ User-defined message forwarding handler, automatically called (if defined) by th
 | **Template:**
 |    ``forward(Message)``
 | **Mode and number of proofs:**
-|    ``forward(@callable)`` - ``zero_or_more``
+|    ``forward(+callable)`` - ``zero_or_more``
 
 
 ------------

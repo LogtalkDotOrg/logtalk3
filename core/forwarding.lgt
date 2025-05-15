@@ -22,16 +22,16 @@
 :- protocol(forwarding).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2013-05-04,
+		date is 2025-05-15,
 		comment is 'Message forwarding protocol.'
 	]).
 
 	:- built_in.
 
 	:- public(forward/1).
-	:- mode(forward(@callable), zero_or_more).
+	:- mode(forward(+callable), zero_or_more).
 	:- info(forward/1, [
 		comment is 'User-defined message forwarding handler, automatically called (if defined) by the runtime for any message that the receiving object does not understand.',
 		argnames is ['Message']
