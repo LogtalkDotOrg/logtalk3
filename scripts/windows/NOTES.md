@@ -21,10 +21,10 @@ ________________________________________________________________________
 This directory contains files used when building Windows GUI installers
 using Inno Setup 6.0.2 Unicode (or a later version):
 
-	http://www.jrsoftware.org/isinfo.php
+http://www.jrsoftware.org/isinfo.php
 
-The Inno Setup script, `logtalk.iss`, assumes that a checkout of the
-Logtalk repository exists in the `C:\lgt3git` directory.
+The Inno Setup script, `logtalk.iss`, assumes that a clone of the Logtalk
+git repository exists in the `C:\lgt3git` directory.
 
 The default location for the Logtalk system files installation when the
 `%LOGTALKHOME%` environment variable is not defined is:

@@ -10,6 +10,7 @@
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>lgt</string>
+				<string>logtalk</string>
 			</array>
 			<key>CFBundleTypeMIMETypes</key>
 			<array>
@@ -40,10 +41,11 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>lgt</string>
+					<string>logtalk</string>
 				</array>
 				<key>public.mime-type</key>
 				<array>
-					<string>image/x-xcf</string>
+					<string>text/x-logtalk</string>
 				</array>
 			</dict>
 		</dict>

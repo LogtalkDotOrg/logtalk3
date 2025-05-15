@@ -110,8 +110,7 @@ also available in the Logtalk website.
 	scripts are found
 
 - `debian`  
-	directory containing support files for building a Debian package
-	(work in progress; experimental)
+	directory containing support files for building the Debian package
 
 - `docker`  
 	directory containing support files for building Docker containers
@@ -125,10 +124,10 @@ also available in the Logtalk website.
 	to the freedesktop.org shared mime-info database
 
 - `linux`  
-	directory containing files used when building
+	directory containing files used for building the RPM package
 
 - `macos`  
-	directory containing files used when building macOS installer packages
+	directory containing files used when building the macOS installer package
 
 - `pack`  
 	support files for creating a `logtalk` SWI-Prolog pack
@@ -139,7 +138,7 @@ also available in the Logtalk website.
 	into `user`
 
 - `windows`  
-	directory containing files used when building Windows GUI installers
+	directory containing files used when building the Windows GUI installer
 
 - `logtalk_user_setup.sh` and `logtalk_user_setup.ps1`  
 	end-user scripts for copying the Logtalk user-modifiable files and
@@ -152,7 +151,7 @@ also available in the Logtalk website.
 	directory); the `logtalk_user_setup.ps1` script requires either
 	running by a user with administration privileges due to the creation
 	of symbolic links or turning on "Developer mode" in the
-	Settings -> Update & Security -> For Developers panel.
+	Settings -> Update & Security -> For Developers panel
 
 - `update_man_html_versions.sh`  
 	shell script for updating the HTML versions of the man pages; requires
