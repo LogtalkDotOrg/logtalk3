@@ -22,6 +22,11 @@ ________________________________________________________________________
 Logtalk Docker configuration for SWI-Prolog
 ===========================================
 
+For development, this Docker image is superseded by the portable Docker
+image, which can be built to include only the SWI-Prolog backend. The
+portable Docker image provides a more comprehensive Logtalk installation
+(including full support for developer tools) and a better user experience.
+
 
 Build arguments
 ---------------
