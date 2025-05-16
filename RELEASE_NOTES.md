@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: The exception terms used for object existence errors throw by the
+`asserta/1-2` built-in methods.
+
 * FIXED: Typo in the documentation of the `forwarding` protocol `forward/1`
 predicate.
 

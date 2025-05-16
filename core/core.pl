@@ -4350,7 +4350,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_asserta_rule_checked'(Obj, Clause, _, _, _, ExCtx) :-
-	throw(error(existence_error(object, Obj), Obj::asserta(Clause), ExCtx)).
+	throw(error(existence_error(object, Obj), logtalk(Obj::asserta(Clause), ExCtx))).
 
 
 '$lgt_asserta_fact_checked'(Obj, Head, Sender, _, _, _) :-
@@ -5060,7 +5060,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_asserta_rule_checked'(Obj, Clause, Ref, _, _, _, ExCtx) :-
-	throw(error(existence_error(object, Obj), Obj::asserta(Clause, Ref), ExCtx)).
+	throw(error(existence_error(object, Obj), logtalk(Obj::asserta(Clause, Ref), ExCtx))).
 
 
 '$lgt_asserta_fact_checked'(Obj, Head, Ref, Sender, _, _, _) :-
