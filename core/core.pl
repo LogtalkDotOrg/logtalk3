@@ -12918,7 +12918,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		DHead = '$lgt_debug'(rule(Entity, Head, N, File, BeginLine), ExCtx),
 		BodyCtx = Ctx
 	),
-	(	'$lgt_pp_dynamic_'(Head, _, _, _) ->
+	(	(	'$lgt_pp_dynamic_'(Head, _, _, _)
+		;	'$lgt_pp_dynamic_'
+		) ->
+		% clause for a dynamic predicate or a dynamic entity
 		TClause = drule(THead, '$lgt_nop'(Body), Body, BodyCtx),
 		DClause = ddrule(THead, '$lgt_nop'(Body), DHead, Body, BodyCtx)
 	;	TClause = srule(THead, Body, BodyCtx),

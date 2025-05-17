@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: The compilation of rules listed in the last argument of the
+`create_object/4` built-in predicate so that the `clause/2` built-in method
+correctly returns the original rule body instead of its compiled version.
+
 * FIXED: The exception terms used for object existence errors throw by the
 `asserta/1-2` built-in methods.
 
