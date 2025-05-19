@@ -1373,6 +1373,11 @@ sub-goals execution times using either CPU or wall clocks. When running
 multi-threaded code, the CPU time may or may not include all threads CPU
 time depending on the backend.
 
+Be aware that the accuracy of CPU and wall time depends of the backend.
+Accuracy can also be different between CPU and wall time (e.g. CPU time
+can have nanosecond accuracy with wall time only having millisecond
+accuracy).
+
 Test memory usage is not reported by default due to the lack of a
 portable solution to access memory data. However, several backend Prolog
 systems provide a ``statistics/2`` or similar predicate that can be used

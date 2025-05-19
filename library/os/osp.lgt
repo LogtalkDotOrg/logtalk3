@@ -22,12 +22,13 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:40:0,
+		version is 1:41:0,
 		author is 'Paulo Moura',
-		date is 2025-01-23,
+		date is 2025-05-19,
 		comment is 'Portable operating-system access protocol.',
 		remarks is [
-			'Error handling' - 'Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.'
+			'Error handling' - 'Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.',
+			'CPU and wall time accuracy' - 'Depends on the backend and can be different between CPU and wall time (e.g. CPU time can have nanosecond accuracy with wall time only having millisecond accuracy).'
 		],
 		see_also is [os, os_types]
 	]).
@@ -289,14 +290,14 @@
 	:- public(cpu_time/1).
 	:- mode(cpu_time(-number), one).
 	:- info(cpu_time/1, [
-		comment is 'System cpu time in seconds.',
+		comment is 'System cpu time in seconds. Accuracy depends on the backend.',
 		argnames is ['Seconds']
 	]).
 
 	:- public(wall_time/1).
 	:- mode(wall_time(-number), one).
 	:- info(wall_time/1, [
-		comment is 'Wall time in seconds.',
+		comment is 'Wall time in seconds. Accuracy depends on the backend.',
 		argnames is ['Seconds']
 	]).
 

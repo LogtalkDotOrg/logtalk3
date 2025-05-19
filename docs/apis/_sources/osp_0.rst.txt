@@ -14,8 +14,8 @@ Portable operating-system access protocol.
 |    ``logtalk_load(os(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:40:0
-| **Date:** 2025-01-23
+| **Version:** 1:41:0
+| **Date:** 2025-05-19
 
 | **Compilation flags:**
 |    ``static``
@@ -28,6 +28,7 @@ Portable operating-system access protocol.
 | **Remarks:**
 
    - Error handling: Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.
+   - CPU and wall time accuracy: Depends on the backend and can be different between CPU and wall time (e.g. CPU time can have nanosecond accuracy with wall time only having millisecond accuracy).
 
 | **Inherited public predicates:**
 |    (none)
@@ -720,7 +721,7 @@ Returns the current date and time. Note that most backends do not provide sub-se
 ``cpu_time/1``
 ^^^^^^^^^^^^^^
 
-System cpu time in seconds.
+System cpu time in seconds. Accuracy depends on the backend.
 
 | **Compilation flags:**
 |    ``static``
@@ -739,7 +740,7 @@ System cpu time in seconds.
 ``wall_time/1``
 ^^^^^^^^^^^^^^^
 
-Wall time in seconds.
+Wall time in seconds. Accuracy depends on the backend.
 
 | **Compilation flags:**
 |    ``static``
