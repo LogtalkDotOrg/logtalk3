@@ -38,9 +38,9 @@ foobaz.
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2024-07-20,
+		date is 2025-05-19,
 		comment is 'Unit tests for the clause/2 built-in method.'
 	]).
 
@@ -85,27 +85,35 @@ foobaz.
 		Object::clause(t(3), Body2),
 		abolish_object(Object).
 
+	test(clause_2_12, true(s(X,Body1,Body2) == s(1,t(1),(t(1), t(2))))) :-
+		create_object(Object, [], [public(t/1)], [t(1), (t(2) :- t(1)), (t(3) :- t(1),t(2))]),
+		Object::clause(t(X), true),
+		t2_head(T2),
+		Object::clause(T2, Body1),
+		Object::clause(t(3), Body2),
+		abolish_object(Object).
+
 	% tests for the "user" pseudo-object
 
-	test(clause_2_12, true(Body == true)) :-
+	test(clause_2_13, true(Body == true)) :-
 		user::clause(bar, Body).
 
-	test(clause_2_13, true(Body == true)) :-
+	test(clause_2_14, true(Body == true)) :-
 		baz_clause(Baz),
 		user::clause(Baz, Body).
 
-	test(clause_2_14, true(Body == true)) :-
+	test(clause_2_15, true(Body == true)) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
 		Object::clause(foobar, Body).
 
-	test(clause_2_15, true(Body == true)) :-
+	test(clause_2_16, true(Body == true)) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
 		foobaz_clause(FooBaz),
 		Object::clause(FooBaz, Body).
 
-	test(clause_2_16, true(L == [1-true,2-true,1-true]), [cleanup(abolish_object(Object))]) :-
+	test(clause_2_17, true(L == [1-true,2-true,1-true]), [cleanup(abolish_object(Object))]) :-
 		create_object(Object, [], [public(p/1), dynamic(p/1)], [p(1),p(2),p(1)]),
 		closure(Closure),
 		findall(X-Body, call(Object::Closure, p(X), Body), L).

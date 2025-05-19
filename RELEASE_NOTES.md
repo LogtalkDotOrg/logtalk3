@@ -32,7 +32,7 @@ Logtalk compiler and runtime
 `create_object/4` built-in predicate so that the `clause/2` built-in method
 correctly returns the original rule body instead of its compiled version.
 
-* FIXED: The exception terms used for object existence errors throw by the
+* FIXED: The exception terms used for object existence errors thrown by the
 `asserta/1-2` built-in methods.
 
 * FIXED: Typo in the documentation of the `forwarding` protocol `forward/1`
@@ -94,6 +94,11 @@ the `gui` flag set to `true`.
 
 * FIXED: Formatting typo in the `coinduction` example `NOTES.md` file that
 caused an error when open as a Jupyter notebook.
+
+Tests
+-----
+
+* ADDED: Additional test for the `clause/2` built-in method.
 
 Installers and installation scripts
 -----------------------------------
