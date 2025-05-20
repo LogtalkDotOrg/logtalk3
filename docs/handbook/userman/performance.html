@@ -84,6 +84,7 @@
 <li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Performance</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#source-code-compilation-modes">Source code compilation modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source-code-compilation-order">Source code compilation order</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#local-predicate-calls">Local predicate calls</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#calls-to-imported-or-inherited-predicates">Calls to imported or inherited predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#calls-to-module-predicates">Calls to module predicates</a></li>
@@ -178,6 +179,14 @@ optimizations are turned off, and the code is instrumented to generate
 <a class="reference internal" href="debugging.html#debugging-events"><span class="std std-ref">debug events</span></a> that enable developer tools such
 as the <a class="reference internal" href="../devtools/debugger.html"><span class="doc">command-line debugger</span></a> and the
 <a class="reference internal" href="../devtools/ports_profiler.html"><span class="doc">ports profiler</span></a>.</p>
+</section>
+<section id="source-code-compilation-order">
+<h2>Source code compilation order<a class="headerlink" href="#source-code-compilation-order" title="Link to this heading"></a></h2>
+<p>Static binding optimizations, notably message sending and super calls,
+require referenced code to be compiled before the calls so that the
+calls can be resolved at compile time. The compiler prints warnings
+when the file compilation/loading order is not ideal. See also the
+section below on circular references.</p>
 </section>
 <section id="local-predicate-calls">
 <h2>Local predicate calls<a class="headerlink" href="#local-predicate-calls" title="Link to this heading"></a></h2>

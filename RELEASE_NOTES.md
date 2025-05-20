@@ -67,6 +67,8 @@ scripts to `build.*`.
 * IMPROVED: Documentation on the CPU and wall time accuracy in the `lgtunit`
 tool and the `os` library.
 
+* UPDATED: The Handbook section on performance.
+
 * FIXED: Typo in the sample code for user-defined test dialects in the
 `lgtunit` tool documentation. Thanks to Paul Brown for the bug report.
 
