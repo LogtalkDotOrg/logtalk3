@@ -456,3 +456,10 @@ of endless loops. For example, the following query succeeds:
 Note that the ``logtalk::question_hook/6`` predicate takes as argument
 the closure specified in the ``logtalk::ask_question/5`` call, allowing
 a fixed answer to be checked before being returned.
+
+Multi-threading applications
+----------------------------
+
+When writing multi-threading applications, user-defined predicates calling
+methods such as ``print_message/3`` or ``ask_question/5`` may need to be
+declared synchronized in order to avoid race conditions.

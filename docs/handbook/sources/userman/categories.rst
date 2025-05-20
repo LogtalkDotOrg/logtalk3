@@ -769,3 +769,10 @@ The built-in category ``core_messages``
 The built-in :ref:`core_messages <apis:core_messages/0>` category provides
 default translations for all compiler and runtime printed messages, such as
 warnings and errors. It does not define any public predicates.
+
+Multi-threading applications
+----------------------------
+
+When writing multi-threading applications, user-defined predicates calling
+built-in predicates such as ``create_category/4`` and ``abolish_category/1``
+may need to be declared synchronized in order to avoid race conditions.

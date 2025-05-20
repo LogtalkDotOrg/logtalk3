@@ -28,9 +28,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 3:1:1,
+		version is 3:2:0,
 		author is 'Paulo Moura',
-		date is 2025-04-07,
+		date is 2025-05-20,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
@@ -48,7 +48,8 @@
 			'Meta message ``Title::List``' - 'By default, the title is printed followed by a newline and the indented list items, one per line. The items are printed as in the ``List`` meta message.',
 			'Meta message ``[Stream,Prefix]>>Goal``' - 'By default, call user-defined ``Goal`` in the context of ``user``. The use of a lambda expression allows passing the message stream and prefix. Printing the prefix is delegated to the goal.',
 			'Meta message ``[Stream]>>Goal``' - 'By default, call user-defined ``Goal`` in the context of ``user``. The use of a lambda expression allows passing the message stream.',
-			'Message tokens' - '``at_same_line``, ``tab(Expression)``, ``nl``, ``flush``, ``Format-Arguments``, ``term(Term,Options)``, ``ansi(Attributes,Format,Arguments)``, ``begin(Kind,Variable)``, and ``end(Variable)``.'
+			'Message tokens' - '``at_same_line``, ``tab(Expression)``, ``nl``, ``flush``, ``Format-Arguments``, ``term(Term,Options)``, ``ansi(Attributes,Format,Arguments)``, ``begin(Kind,Variable)``, and ``end(Variable)``.',
+			'Multi-threading applications' - 'Predicates calling methods such as ``print_message/3``, ``ask_question/5``, or ``compile_aux_clauses/1`` may need to be declared synchronized in order to avoid race conditions.'
 		]
 	]).
 

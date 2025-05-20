@@ -89,6 +89,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#the-built-in-protocol-forwarding">The built-in protocol <code class="docutils literal notranslate"><span class="pre">forwarding</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-threading-applications">Multi-threading applications</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="categories.html">Categories</a></li>
@@ -443,6 +444,12 @@ is automatically called (if defined) by the runtime for any message that
 the receiving object does not understand. See also the
 <a class="reference internal" href="../refman/control/delegate_message_1.html#control-delegate-message-1"><span class="std std-ref">[]/1</span></a> control construct.</p>
 </section>
+</section>
+<section id="multi-threading-applications">
+<h2>Multi-threading applications<a class="headerlink" href="#multi-threading-applications" title="Link to this heading"></a></h2>
+<p>When writing multi-threading applications, user-defined predicates calling
+built-in predicates such as <code class="docutils literal notranslate"><span class="pre">create_protocol/3</span></code> and <code class="docutils literal notranslate"><span class="pre">abolish_protocol/1</span></code>
+may need to be declared synchronized in order to avoid race conditions.</p>
 </section>
 </section>
 

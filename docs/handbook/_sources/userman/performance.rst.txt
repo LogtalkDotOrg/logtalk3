@@ -56,6 +56,15 @@ optimizations are turned off, and the code is instrumented to generate
 as the :doc:`command-line debugger <../devtools/debugger>` and the
 :doc:`ports profiler <../devtools/ports_profiler>`.
 
+Source code compilation order
+-----------------------------
+
+Static binding optimizations, notably message sending and super calls,
+require referenced code to be compiled before the calls so that the
+calls can be resolved at compile time. The compiler prints warnings
+when the file compilation/loading order is not ideal. See also the
+section below on circular references.
+
 Local predicate calls
 ---------------------
 

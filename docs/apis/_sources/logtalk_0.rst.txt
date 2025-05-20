@@ -14,8 +14,8 @@ Built-in object providing message printing, debugging, library, source file, and
 |    ``built_in``
 
 | **Author:** Paulo Moura
-| **Version:** 3:1:1
-| **Date:** 2025-04-07
+| **Version:** 3:2:0
+| **Date:** 2025-05-20
 
 | **Compilation flags:**
 |    ``static, built_in, context_switching_calls, threaded``
@@ -43,6 +43,7 @@ Built-in object providing message printing, debugging, library, source file, and
    - Meta message ``[Stream,Prefix]>>Goal``: By default, call user-defined ``Goal`` in the context of ``user``. The use of a lambda expression allows passing the message stream and prefix. Printing the prefix is delegated to the goal.
    - Meta message ``[Stream]>>Goal``: By default, call user-defined ``Goal`` in the context of ``user``. The use of a lambda expression allows passing the message stream.
    - Message tokens: ``at_same_line``, ``tab(Expression)``, ``nl``, ``flush``, ``Format-Arguments``, ``term(Term,Options)``, ``ansi(Attributes,Format,Arguments)``, ``begin(Kind,Variable)``, and ``end(Variable)``.
+   - Multi-threading applications: Predicates calling methods such as ``print_message/3``, ``ask_question/5``, or ``compile_aux_clauses/1`` may need to be declared synchronized in order to avoid race conditions.
 
 | **Inherited public predicates:**
 |    (none)

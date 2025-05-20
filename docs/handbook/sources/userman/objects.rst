@@ -905,3 +905,10 @@ The built-in :ref:`logtalk <apis:logtalk/0>` object provides
 accessing the internal database of loaded files and their properties, and
 also a set of low-level utility predicates normally used when defining hook
 objects. Consult its API documentation for details.
+
+Multi-threading applications
+----------------------------
+
+When writing multi-threading applications, user-defined predicates calling
+built-in predicates such as ``create_object/4`` and ``abolish_object/1`` may
+need to be declared synchronized in order to avoid race conditions.

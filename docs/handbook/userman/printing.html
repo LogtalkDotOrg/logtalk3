@@ -87,6 +87,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#intercepting-messages">Intercepting messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#asking-questions">Asking questions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#intercepting-questions">Intercepting questions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-threading-applications">Multi-threading applications</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="expansion.html">Term and goal expansion</a></li>
@@ -530,6 +531,12 @@ yes
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">logtalk::question_hook/6</span></code> predicate takes as argument
 the closure specified in the <code class="docutils literal notranslate"><span class="pre">logtalk::ask_question/5</span></code> call, allowing
 a fixed answer to be checked before being returned.</p>
+</section>
+<section id="multi-threading-applications">
+<h2>Multi-threading applications<a class="headerlink" href="#multi-threading-applications" title="Link to this heading"></a></h2>
+<p>When writing multi-threading applications, user-defined predicates calling
+methods such as <code class="docutils literal notranslate"><span class="pre">print_message/3</span></code> or <code class="docutils literal notranslate"><span class="pre">ask_question/5</span></code> may need to be
+declared synchronized in order to avoid race conditions.</p>
 </section>
 </section>
 

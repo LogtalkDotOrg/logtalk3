@@ -209,8 +209,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 3:1:1</div>
-<div class="line"><strong>Date:</strong> 2025-04-07</div>
+<div class="line"><strong>Version:</strong> 3:2:0</div>
+<div class="line"><strong>Date:</strong> 2025-05-20</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -245,6 +245,7 @@
 <li><p>Meta message <code class="docutils literal notranslate"><span class="pre">[Stream,Prefix]&gt;&gt;Goal</span></code>: By default, call user-defined <code class="docutils literal notranslate"><span class="pre">Goal</span></code> in the context of <code class="docutils literal notranslate"><span class="pre">user</span></code>. The use of a lambda expression allows passing the message stream and prefix. Printing the prefix is delegated to the goal.</p></li>
 <li><p>Meta message <code class="docutils literal notranslate"><span class="pre">[Stream]&gt;&gt;Goal</span></code>: By default, call user-defined <code class="docutils literal notranslate"><span class="pre">Goal</span></code> in the context of <code class="docutils literal notranslate"><span class="pre">user</span></code>. The use of a lambda expression allows passing the message stream.</p></li>
 <li><p>Message tokens: <code class="docutils literal notranslate"><span class="pre">at_same_line</span></code>, <code class="docutils literal notranslate"><span class="pre">tab(Expression)</span></code>, <code class="docutils literal notranslate"><span class="pre">nl</span></code>, <code class="docutils literal notranslate"><span class="pre">flush</span></code>, <code class="docutils literal notranslate"><span class="pre">Format-Arguments</span></code>, <code class="docutils literal notranslate"><span class="pre">term(Term,Options)</span></code>, <code class="docutils literal notranslate"><span class="pre">ansi(Attributes,Format,Arguments)</span></code>, <code class="docutils literal notranslate"><span class="pre">begin(Kind,Variable)</span></code>, and <code class="docutils literal notranslate"><span class="pre">end(Variable)</span></code>.</p></li>
+<li><p>Multi-threading applications: Predicates calling methods such as <code class="docutils literal notranslate"><span class="pre">print_message/3</span></code>, <code class="docutils literal notranslate"><span class="pre">ask_question/5</span></code>, or <code class="docutils literal notranslate"><span class="pre">compile_aux_clauses/1</span></code> may need to be declared synchronized in order to avoid race conditions.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">

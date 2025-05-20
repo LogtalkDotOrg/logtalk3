@@ -98,6 +98,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#the-built-in-object-logtalk">The built-in object <code class="docutils literal notranslate"><span class="pre">logtalk</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-threading-applications">Multi-threading applications</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="protocols.html">Protocols</a></li>
@@ -894,6 +895,12 @@ accessing the internal database of loaded files and their properties, and
 also a set of low-level utility predicates normally used when defining hook
 objects. Consult its API documentation for details.</p>
 </section>
+</section>
+<section id="multi-threading-applications">
+<h2>Multi-threading applications<a class="headerlink" href="#multi-threading-applications" title="Link to this heading"></a></h2>
+<p>When writing multi-threading applications, user-defined predicates calling
+built-in predicates such as <code class="docutils literal notranslate"><span class="pre">create_object/4</span></code> and <code class="docutils literal notranslate"><span class="pre">abolish_object/1</span></code> may
+need to be declared synchronized in order to avoid race conditions.</p>
 </section>
 </section>
 

@@ -64,6 +64,9 @@ scripts to `build.*`.
 * ADDED: Glossary entries for "flaky test", "test dialect", "test outcome",
 "mocking", "term-expansion", and "goal-expansion".
 
+* IMPROVED: Documentation on writing multi-threading applications that call
+built-in predicates and built-in methods with side-effects.
+
 * IMPROVED: Documentation on the CPU and wall time accuracy in the `lgtunit`
 tool and the `os` library.
 

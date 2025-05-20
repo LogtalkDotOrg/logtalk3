@@ -396,3 +396,10 @@ The built-in :ref:`forwarding <apis:forwarding/0>` protocol declares the
 is automatically called (if defined) by the runtime for any message that
 the receiving object does not understand. See also the
 :ref:`control_delegate_message_1` control construct.
+
+Multi-threading applications
+----------------------------
+
+When writing multi-threading applications, user-defined predicates calling
+built-in predicates such as ``create_protocol/3`` and ``abolish_protocol/1``
+may need to be declared synchronized in order to avoid race conditions.
