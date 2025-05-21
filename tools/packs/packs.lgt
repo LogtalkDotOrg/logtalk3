@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:84:0,
+		version is 0:85:0,
 		author is 'Paulo Moura',
-		date is 2025-02-06,
+		date is 2025-05-21,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1376,7 +1376,7 @@
 			read(Stream, Term),
 			restore(Term, Stream, Options)
 		;	close(Stream),
-			print_message(error, packs, @'Restoring registries/packs setup failed'),
+			print_message(error, packs, 'Restoring registries/packs setup failed while adding the ~q registry'+[Registry]),
 			fail
 		).
 	restore(pack(Registry, Pack, Version), Stream, Options) :-
@@ -1384,7 +1384,7 @@
 			read(Stream, Term),
 			restore(Term, Stream, Options)
 		;	close(Stream),
-			print_message(error, packs, @'Restoring registries/packs setup failed'),
+			print_message(error, packs, 'Restoring registries/packs setup failed while installing the ~q pack'+[Pack]),
 			fail
 		).
 	restore(pinned_registry(Registry), Stream, Options) :-
@@ -1392,7 +1392,7 @@
 			read(Stream, Term),
 			restore(Term, Stream, Options)
 		;	close(Stream),
-			print_message(error, packs, @'Restoring registries/packs setup failed'),
+			print_message(error, packs, 'Restoring registries/packs setup failed while pinning the ~q registry'+[Registry]),
 			fail
 		).
 	restore(pinned_pack(Pack), Stream, Options) :-
@@ -1400,7 +1400,7 @@
 			read(Stream, Term),
 			restore(Term, Stream, Options)
 		;	close(Stream),
-			print_message(error, packs, @'Restoring registries/packs setup failed'),
+			print_message(error, packs, 'Restoring registries/packs setup failed while pinning the ~q pack'+[Pack]),
 			fail
 		).
 
