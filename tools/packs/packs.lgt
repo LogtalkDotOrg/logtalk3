@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:85:0,
+		version is 0:86:0,
 		author is 'Paulo Moura',
 		date is 2025-05-21,
 		comment is 'Pack handling predicates.'
@@ -1673,6 +1673,7 @@
 	valid_status(rc).
 	valid_status(beta).
 	valid_status(alpha).
+	valid_status(experimental).
 	valid_status(deprecated).
 
 	valid_dependency((Dependency; Dependencies), Pack) :-

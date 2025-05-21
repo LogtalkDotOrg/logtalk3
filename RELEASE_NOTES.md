@@ -78,6 +78,8 @@ tool and the `os` library.
 Tools
 -----
 
+* ADDED: Support for an `experimental` status to pack definitions.
+
 * IMPROVED: The `packs` tool predicates `restore/1-2` error messages.
 
 * UPDATED: The `help` tool for the new location of the Handbook.
