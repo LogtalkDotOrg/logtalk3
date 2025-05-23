@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-10-13,
+		date is 2025-05-23,
 		comment is 'A local pack for testing.'
 	]).
 
@@ -35,6 +35,15 @@
 	license('Apache-2.0').
 
 	home('file://test_files/foo').
+
+	version(
+		3:0:0,
+		beta,
+		'file://test_files/foo',
+		none,
+		[logtalk @>= 3:42:0],
+		all
+	).
 
 	version(
 		2:0:0,

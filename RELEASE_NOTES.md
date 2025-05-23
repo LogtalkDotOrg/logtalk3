@@ -78,7 +78,16 @@ tool and the `os` library.
 Tools
 -----
 
+* CHANGED: The `packs` tool to never install or update to a pack version with
+a `experimental` or `deprecated` status unless the version is explicitly
+specified using the `install/3-4` or `update/2-3` predicates.
+
 * ADDED: Support for an `experimental` status to pack definitions.
+
+* ADDED: A `status/1` option to the `packs` tool `update/2-3` predicates to
+allow restricting the required status for pack updates.
+
+* ADDED: New predicates `outdated/5` and `outdated/2` to the `packs` tool.
 
 * IMPROVED: The `packs` tool predicates `restore/1-2` error messages.
 

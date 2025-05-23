@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:86:0,
+		version is 0:87:0,
 		author is 'Paulo Moura',
-		date is 2025-05-21,
+		date is 2025-05-23,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -99,33 +99,76 @@
 		comment is 'Lists all the packs that are installed.'
 	]).
 
+	:- public(outdated/5).
+	:- mode(outdated(?atom, ?atom, ?compound, ?compound, ++list(compound)), zero_or_more).
+	:- info(outdated/5, [
+		comment is 'Enumerates by backtracking all installed but outdated packs (together with the current version installed and the latest version available) using the given options.',
+		argnames is ['Registry', 'Pack', 'Version', 'LatestVersion', 'Options'],
+		remarks is [
+			'``compatible(Boolean)`` option' - 'Restrict listing to compatible packs. Default is ``true``.',
+			'``status(Status)`` option' - 'Restrict listing to updates with the given status. Default is ``[stable,rc,beta,alpha]``. Set to ``all`` to also list ``experimental`` and ``deprecated`` updates.'
+		],
+		exceptions is [
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
+			'``Version`` is neither a variable nor a compound term' - type_error(compound, 'Version'),
+			'``LatestVersion`` is neither a variable nor a compound term' - type_error(compound, 'LatestVersion'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
+	]).
+
 	:- public(outdated/4).
 	:- mode(outdated(?atom, ?atom, ?compound, ?compound), zero_or_more).
 	:- info(outdated/4, [
-		comment is 'Enumerates by backtracking all installed but outdated packs (together with the current version installed and the latest version available).',
+		comment is 'Enumerates by backtracking all installed but outdated packs (together with the current version installed and the latest version available) using default options.',
 		argnames is ['Registry', 'Pack', 'Version', 'LatestVersion'],
 		exceptions is [
 			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
 			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
 			'``Version`` is neither a variable nor a compound term' - type_error(compound, 'Version'),
 			'``LatestVersion`` is neither a variable nor a compound term' - type_error(compound, 'LatestVersion')
+		],
+		see_also is [outdated/5]
+	]).
+
+	:- public(outdated/2).
+	:- mode(outdated(+atom, ++list(compound)), one).
+	:- info(outdated/2, [
+		comment is 'Lists all the packs from the given registry that are installed but outdated using the given options.',
+		argnames is ['Registry', 'Options'],
+		remarks is [
+			'``compatible(Boolean)`` option' - 'Restrict installation to compatible packs. Default is ``true``.',
+			'``status(Status)`` option' - 'Restrict listing to updates with the given status. Default is ``[stable,rc,beta,alpha]``. Set to ``all`` to also list ``experimental`` and ``deprecated`` updates.'
+		],
+		exceptions is [
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
 		]
 	]).
 
 	:- public(outdated/1).
 	:- mode(outdated(+atom), one).
 	:- info(outdated/1, [
-		comment is 'Lists all the packs from the given registry that are installed but outdated.',
+		comment is 'Lists all the packs from the given registry that are installed but outdated using default options.',
 		argnames is ['Registry'],
 		exceptions is [
 			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry')
-		]
+		],
+		see_also is [outdated/2]
 	]).
 
 	:- public(outdated/0).
 	:- mode(outdated, one).
 	:- info(outdated/0, [
-		comment is 'Lists all the packs that are installed but outdated.'
+		comment is 'Lists all the packs that are installed but outdated using default options.'
 	]).
 
 	:- public(orphaned/2).
@@ -276,6 +319,7 @@
 			'``install(Boolean)`` option' - 'Install pack latest version if not already installed. Default is ``false``.',
 			'``force(Boolean)`` option' - 'Force update if the pack is pinned or breaks installed packs. Default is ``false``.',
 			'``compatible(Boolean)`` option' - 'Restrict updating to compatible packs. Default is ``true``.',
+			'``status(Status)`` option' - 'Specify allowed pack status. Default is ``[stable,rc,beta,alpha]``. Set to ``all`` to also allow ``experimental`` and ``deprecated``.',
 			'``clean(Boolean)`` option' - 'Clean pack archive after updating. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.',
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksum. Default is ``true``.',
@@ -309,6 +353,7 @@
 			'``install(Boolean)`` option' - 'Install pack latest version if not already installed. Default is ``false``.',
 			'``force(Boolean)`` option' - 'Force update if the pack is pinned or breaks installed packs. Default is ``false``.',
 			'``compatible(Boolean)`` option' - 'Restrict updating to compatible packs. Default is ``true``.',
+			'``status(Status)`` option' - 'Specify allowed pack update status. Default is ``[stable,rc,beta,alpha]``. Set to ``all`` to also allow ``experimental`` and ``deprecated``.',
 			'``clean(Boolean)`` option' - 'Clean pack archive after updating. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.',
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksum. Default is ``true``.',
@@ -339,7 +384,8 @@
 		exceptions is [
 			'``Pack`` is a variable' - instantiation_error,
 			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
-		]
+		],
+		see_also is [update/2, update/3]
 	]).
 
 	:- public(update/0).
@@ -737,19 +783,22 @@
 
 	% outdated pack predicates
 
-	outdated(Registry, Pack, Version, LatestVersion) :-
+	outdated(Registry, Pack, Version, LatestVersion, Options) :-
 		check(var_or(atom), Registry),
 		check(var_or(atom), Pack),
 		check(var_or(compound), Version),
 		check(var_or(compound), LatestVersion),
-		outdated_pack(Registry, Pack, Version, LatestVersion).
+		outdated_pack(Registry, Pack, Version, LatestVersion, Options).
 
-	outdated(Registry) :-
-		check(atom, Registry),
+	outdated(Registry, Pack, Version, LatestVersion) :-
+		outdated(Registry, Pack, Version, LatestVersion, []).
+
+	outdated(Registry, UserOptions) :-
+		^^merge_options(UserOptions, Options),
 		print_message(information, packs, 'Outdated packs from the ~q registry:'+[Registry]),
 		setof(
 			p(Registry, Pack, Version, LatestVersion),
-			outdated(Registry, Pack, Version, LatestVersion),
+			outdated(Registry, Pack, Version, LatestVersion, Options),
 			Packs
 		),
 		forall(
@@ -757,17 +806,23 @@
 			print_message(information, packs, outdated_pack(Registry, Pack, Version, LatestVersion))
 		),
 		fail.
-	outdated(Registry) :-
-		\+ outdated_pack(Registry, _, _, _),
+	outdated(Registry, UserOptions) :-
+		^^merge_options(UserOptions, Options),
+		\+ outdated_pack(Registry, _, _, _, Options),
 		print_message(information, packs, @'  (none)'),
 		fail.
-	outdated(_).
+	outdated(_, _).
+
+	outdated(Registry) :-
+		check(atom, Registry),
+		outdated(Registry, []).
 
 	outdated :-
+		^^merge_options([], Options),
 		print_message(information, packs, @'Outdated packs:'),
 		setof(
 			p(Registry, Pack, Version, LatestVersion),
-			outdated(Registry, Pack, Version, LatestVersion),
+			outdated(Registry, Pack, Version, LatestVersion, Options),
 			Packs
 		),
 		forall(
@@ -776,7 +831,8 @@
 		),
 		fail.
 	outdated :-
-		\+ outdated_pack(_, _, _, _),
+		^^merge_options([], Options),
+		\+ outdated_pack(_, _, _, _, Options),
 		print_message(information, packs, @'  (none)'),
 		fail.
 	outdated.
@@ -818,7 +874,7 @@
 		check(atom, Pack),
 		check(pack_version, Version),
 		^^check_options(UserOptions),
-		^^merge_options(UserOptions, Options),
+		^^merge_options([status(all)| UserOptions], Options),
 		(	installed_pack(OtherRegistry, Pack, OldVersion, _),
 			Registry \== OtherRegistry ->
 			print_message(error, packs, pack_already_installed_from_different_registry(OtherRegistry, Pack, OldVersion)),
@@ -831,7 +887,7 @@
 			print_message(error, packs, pack_already_installed(Pack)),
 			fail
 		;	registry_pack(Registry, Pack, PackObject) ->
-			(	PackObject::version(Version, _, URL, CheckSum, Dependencies, Portability) ->
+			(	PackObject::version(Version, _, URL, CheckSum, Dependencies, Portability),
 				print_message(comment, packs, installing_pack(Registry, Pack, Version)),
 				check_dependencies(Dependencies, Registry, Pack, Installs, Options),
 				check_portability(Portability, Options),
@@ -852,18 +908,21 @@
 	install(Registry, Pack) :-
 		check(atom, Registry),
 		check(atom, Pack),
+		^^merge_options([], Options),
 		(	installed_pack(_, Pack, _, _) ->
 			print_message(error, packs, pack_already_installed(Pack)),
 			fail
-		;	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies, Portability) ->
+		;	latest_version(Registry, Pack, LatestVersion, _, URL, CheckSum, Dependencies, Portability, Options) ->
 			print_message(comment, packs, installing_pack(Registry, Pack, LatestVersion)),
-			^^merge_options([], Options),
 			check_dependencies(Dependencies, Registry, Pack, Installs, Options),
 			check_portability(Portability, Options),
 			install_dependencies(Installs),
 			install_pack(Registry, Pack, LatestVersion, URL, CheckSum, Options),
 			print_message(comment, packs, pack_installed(Registry, Pack, LatestVersion)),
 			print_note(install, LatestVersion, Pack)
+		;	latest_version(Registry, Pack, LatestVersion, LatestStatus, URL, CheckSum, Dependencies, Portability, [status(all)| Options]) ->
+			print_message(error, packs, incompatible_pack_status(Registry, Pack, LatestVersion, LatestStatus)),
+			fail
 		;	print_message(error, packs, unknown_pack(Registry, Pack)),
 			fail
 		).
@@ -1130,7 +1189,7 @@
 		check(atom, Pack),
 		check(pack_version, Version),
 		^^check_options(UserOptions),
-		^^merge_options(UserOptions, Options),
+		^^merge_options([status(all)| UserOptions], Options),
 		(	installed_pack(Registry, Pack, OldVersion, Pinned) ->
 			(	Pinned == true ->
 				print_message(error, packs, cannot_update_pinned_pack(Pack)),
@@ -1139,7 +1198,7 @@
 			)
 		;	registry_pack(Registry, Pack, _) ->
 			(	member(install(true), Options) ->
-				latest_version(Registry, Pack, Version),
+				latest_version(Registry, Pack, Version, Options),
 				install(Registry, Pack, Version, Options)
 			;	print_message(error, packs, pack_not_installed(Pack)),
 				fail
@@ -1163,7 +1222,7 @@
 			)
 		;	registry_pack(Registry, Pack, _) ->
 			(	member(install(true), Options) ->
-				latest_version(Registry, Pack, Version),
+				latest_version(Registry, Pack, Version, Options),
 				install(Registry, Pack, Version, Options)
 			;	print_message(error, packs, pack_not_installed(Pack)),
 				fail
@@ -1196,7 +1255,7 @@
 			print_message(error, packs, orphaned_pack(Registry, Pack)),
 			fail
 		;	pack_object(Pack, PackObject),
-			PackObject::version(NewVersion, _, URL, CheckSum, Dependencies, Portability) ->
+			PackObject::version(NewVersion, _, URL, CheckSum, Dependencies, Portability),
 			(	print_message(comment, packs, updating_pack(Registry, Pack, Version, NewVersion)),
 				check_availability(Registry, Pack, URL, CheckSum, Options),
 				check_dependencies(Dependencies, Registry, Pack, Installs, Options),
@@ -1221,7 +1280,7 @@
 	update_pack(Registry, Pack, Version, Options) :-
 		(	orphaned(Registry, Pack) ->
 			print_message(comment, packs, orphaned_pack(Registry, Pack, Version))
-		;	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies, Portability),
+		;	latest_version(Registry, Pack, LatestVersion, _, URL, CheckSum, Dependencies, Portability, Options),
 			Version @< LatestVersion ->
 			(	print_message(comment, packs, updating_pack(Registry, Pack, Version, LatestVersion)),
 				check_dependencies(Dependencies, Registry, Pack, Installs, Options),
@@ -1675,6 +1734,15 @@
 	valid_status(alpha).
 	valid_status(experimental).
 	valid_status(deprecated).
+
+	compatible_status(Status, Options) :-
+		(	member(status(CompatibleStatus), Options) ->
+			(	CompatibleStatus == all ->
+				true
+			;	memberchk(Status, CompatibleStatus)
+			)
+		;	true
+		).
 
 	valid_dependency((Dependency; Dependencies), Pack) :-
 		!,
@@ -2132,28 +2200,32 @@
 		;	Pinned = false
 		).
 
-	outdated_pack(Registry, Pack, Version, LatestVersion) :-
+	outdated_pack(Registry, Pack, Version, LatestVersion, Options) :-
 		installed_pack(Registry, Pack, Version, _),
-		latest_version(Registry, Pack, LatestVersion),
+		latest_version(Registry, Pack, LatestVersion, Options),
 		Version @< LatestVersion.
 
-	latest_version(Registry, Pack, LatestVersion) :-
+	latest_version(Registry, Pack, LatestVersion, Options) :-
 		registry_pack(Registry, Pack, PackObject),
 		findall(
 			Version,
-			PackObject::version(Version, _, _, _, _, _),
+			(	PackObject::version(Version, Status, _, _, _, _),
+				compatible_status(Status, Options)
+			),
 			Versions
 		),
 		sort(0, (@>), Versions, [LatestVersion| _]).
 
-	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies, Portability) :-
+	latest_version(Registry, Pack, LatestVersion, LatestStatus, URL, CheckSum, Dependencies, Portability, Options) :-
 		registry_pack(Registry, Pack, PackObject),
 		findall(
-			version(Version, URL, CheckSum, Dependencies, Portability),
-			PackObject::version(Version, _, URL, CheckSum, Dependencies, Portability),
+			version(Version, Status, URL, CheckSum, Dependencies, Portability),
+			(	PackObject::version(Version, Status, URL, CheckSum, Dependencies, Portability),
+				compatible_status(Status, Options)
+			),
 			Versions
 		),
-		sort(1, (@>), Versions, [version(LatestVersion,URL,CheckSum,Dependencies,Portability)| _]).
+		sort(1, (@>), Versions, [version(LatestVersion,LatestStatus,URL,CheckSum,Dependencies,Portability)| _]).
 
 	uninstall_pack(Registry, Pack, Options) :-
 		directory(Pack, Directory0),
@@ -2443,6 +2515,7 @@
 	default_option(install(false)).
 	default_option(update(false)).
 	default_option(compatible(true)).
+	default_option(status([stable, rc, beta, alpha])).
 	% the restore/1-2 predicates use force(true) instead
 	default_option(force(false)).
 	default_option(checksum(true)).
@@ -2465,6 +2538,8 @@
 		valid(boolean, Boolean).
 	valid_option(compatible(Boolean)) :-
 		valid(boolean, Boolean).
+	valid_option(status(CompatibleStatus)) :-
+		once((CompatibleStatus == all; forall(member(Status, CompatibleStatus), memberchk(Status, [stable, rc, beta, alpha, experimental, deprecated])))).
 	valid_option(force(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(checksum(Boolean)) :-

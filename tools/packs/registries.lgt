@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:60:1,
+		version is 0:61:0,
 		author is 'Paulo Moura',
-		date is 2025-01-17,
+		date is 2025-05-23,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -700,6 +700,7 @@
 	default_option(install(false)).
 	default_option(update(false)).
 	default_option(compatible(false)).
+	default_option(status([stable, rc, beta, alpha])).
 	default_option(force(false)).
 	default_option(checksum(true)).
 	default_option(checksig(false)).
@@ -721,6 +722,8 @@
 		valid(boolean, Boolean).
 	valid_option(compatible(Boolean)) :-
 		valid(boolean, Boolean).
+	valid_option(status(CompatibleStatus)) :-
+		once((CompatibleStatus == all; forall(member(Status, CompatibleStatus), memberchk(Status, [stable, rc, beta, alpha, experimental, deprecated])))).
 	valid_option(force(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(checksum(Boolean)) :-

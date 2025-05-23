@@ -724,7 +724,17 @@ versions must be listed in order from newest to oldest. For details, see
 the <code class="docutils literal notranslate"><span class="pre">pack_protocol</span></code> API documentation.</p>
 <p>Listing multiple versions allows the pack specification to be updated
 (by updating its registry) without forcing existing users into
-installing (or updating to) the latest version of the pack.</p>
+installing (or updating to) the latest version of the pack. It allows
+different applications depending on different pack versions to continue
+to be built and deployed.</p>
+<p>The pack version is complemented by the pack status. Valid values are
+<code class="docutils literal notranslate"><span class="pre">stable</span></code>, <code class="docutils literal notranslate"><span class="pre">rc</span></code>, <code class="docutils literal notranslate"><span class="pre">beta</span></code>, <code class="docutils literal notranslate"><span class="pre">alpha</span></code>, <code class="docutils literal notranslate"><span class="pre">experimental</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">deprecated</span></code>. Packs with a <code class="docutils literal notranslate"><span class="pre">experimental</span></code> or <code class="docutils literal notranslate"><span class="pre">deprecated</span></code> status
+are <strong>never</strong> installed by default when using the install and update
+predicates unless their version is explicitly specified. When updating
+packs, we can restrict the valid status of the updates using the
+<code class="docutils literal notranslate"><span class="pre">status/1</span></code> option. For example, we can ensure that we only update to
+new stable pack versions by using the option <code class="docutils literal notranslate"><span class="pre">status([stable])</span></code>.</p>
 </section>
 <section id="pack-dependencies">
 <h2>Pack dependencies<a class="headerlink" href="#pack-dependencies" title="Link to this heading"></a></h2>

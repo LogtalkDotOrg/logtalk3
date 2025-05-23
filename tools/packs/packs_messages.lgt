@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:40:0,
+		version is 0:41:0,
 		author is 'Paulo Moura',
-		date is 2025-02-06,
+		date is 2025-05-23,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -189,6 +189,9 @@
 		['Lint checks completed for registry: ~q'-[Registry], nl].
 
 	% pack install messages
+
+	message_tokens(incompatible_pack_status(Registry, Pack, Version, Status)) -->
+		['Pack with status ~w cannot be installed with given options: ~q::~q@~q'-[Status, Registry, Pack, Version], nl].
 
 	message_tokens(unknown_pack_version(Registry, Pack, Version)) -->
 		['Unknown pack version: ~q::~q@~q'-[Registry, Pack, Version], nl].

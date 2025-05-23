@@ -14,8 +14,8 @@ Pack handling predicates.
 |    ``logtalk_load(packs(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:86:0
-| **Date:** 2025-05-21
+| **Version:** 0:87:0
+| **Date:** 2025-05-23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -210,13 +210,57 @@ Lists all the packs that are installed.
 
 ------------
 
+.. index:: outdated/5
+.. _packs/0::outdated/5:
+
+``outdated/5``
+^^^^^^^^^^^^^^
+
+Enumerates by backtracking all installed but outdated packs (together with the current version installed and the latest version available) using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``outdated(Registry,Pack,Version,LatestVersion,Options)``
+| **Mode and number of proofs:**
+|    ``outdated(?atom,?atom,?compound,?compound,++list(compound))`` - ``zero_or_more``
+
+| **Exceptions:**
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+|    ``Version`` is neither a variable nor a compound term:
+|        ``type_error(compound,Version)``
+|    ``LatestVersion`` is neither a variable nor a compound term:
+|        ``type_error(compound,LatestVersion)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
+| **Remarks:**
+
+    - ``compatible(Boolean)`` option: Restrict listing to compatible packs. Default is ``true``.
+    - ``status(Status)`` option: Restrict listing to updates with the given status. Default is ``[stable,rc,beta,alpha]``. Set to ``all`` to also list ``experimental`` and ``deprecated`` updates.
+
+
+------------
+
 .. index:: outdated/4
 .. _packs/0::outdated/4:
 
 ``outdated/4``
 ^^^^^^^^^^^^^^
 
-Enumerates by backtracking all installed but outdated packs (together with the current version installed and the latest version available).
+Enumerates by backtracking all installed but outdated packs (together with the current version installed and the latest version available) using default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -236,6 +280,47 @@ Enumerates by backtracking all installed but outdated packs (together with the c
 |    ``LatestVersion`` is neither a variable nor a compound term:
 |        ``type_error(compound,LatestVersion)``
 
+| **See also:**
+|    :ref:`packs/0::outdated/5`
+
+
+------------
+
+.. index:: outdated/2
+.. _packs/0::outdated/2:
+
+``outdated/2``
+^^^^^^^^^^^^^^
+
+Lists all the packs from the given registry that are installed but outdated using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``outdated(Registry,Options)``
+| **Mode and number of proofs:**
+|    ``outdated(+atom,++list(compound))`` - ``one``
+
+| **Exceptions:**
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
+| **Remarks:**
+
+    - ``compatible(Boolean)`` option: Restrict installation to compatible packs. Default is ``true``.
+    - ``status(Status)`` option: Restrict listing to updates with the given status. Default is ``[stable,rc,beta,alpha]``. Set to ``all`` to also list ``experimental`` and ``deprecated`` updates.
+
 
 ------------
 
@@ -245,7 +330,7 @@ Enumerates by backtracking all installed but outdated packs (together with the c
 ``outdated/1``
 ^^^^^^^^^^^^^^
 
-Lists all the packs from the given registry that are installed but outdated.
+Lists all the packs from the given registry that are installed but outdated using default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -259,6 +344,9 @@ Lists all the packs from the given registry that are installed but outdated.
 |    ``Registry`` is neither a variable nor an atom:
 |        ``type_error(atom,Registry)``
 
+| **See also:**
+|    :ref:`packs/0::outdated/2`
+
 
 ------------
 
@@ -268,7 +356,7 @@ Lists all the packs from the given registry that are installed but outdated.
 ``outdated/0``
 ^^^^^^^^^^^^^^
 
-Lists all the packs that are installed but outdated.
+Lists all the packs that are installed but outdated using default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -616,6 +704,7 @@ Updates an outdated pack to the specified version using the specified options. F
     - ``install(Boolean)`` option: Install pack latest version if not already installed. Default is ``false``.
     - ``force(Boolean)`` option: Force update if the pack is pinned or breaks installed packs. Default is ``false``.
     - ``compatible(Boolean)`` option: Restrict updating to compatible packs. Default is ``true``.
+    - ``status(Status)`` option: Specify allowed pack status. Default is ``[stable,rc,beta,alpha]``. Set to ``all`` to also allow ``experimental`` and ``deprecated``.
     - ``clean(Boolean)`` option: Clean pack archive after updating. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose updating steps. Default is ``false``.
     - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
@@ -667,6 +756,7 @@ Updates an outdated pack to its latest version using the specified options. Fail
     - ``install(Boolean)`` option: Install pack latest version if not already installed. Default is ``false``.
     - ``force(Boolean)`` option: Force update if the pack is pinned or breaks installed packs. Default is ``false``.
     - ``compatible(Boolean)`` option: Restrict updating to compatible packs. Default is ``true``.
+    - ``status(Status)`` option: Specify allowed pack update status. Default is ``[stable,rc,beta,alpha]``. Set to ``all`` to also allow ``experimental`` and ``deprecated``.
     - ``clean(Boolean)`` option: Clean pack archive after updating. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose updating steps. Default is ``false``.
     - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
@@ -702,6 +792,10 @@ Updates an outdated pack to its latest version using default options. Fails if t
 |        ``instantiation_error``
 |    ``Pack`` is neither a variable nor an atom:
 |        ``type_error(atom,Pack)``
+
+| **See also:**
+|    :ref:`packs/0::update/2`
+|    :ref:`packs/0::update/3`
 
 
 ------------

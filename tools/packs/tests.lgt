@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:34:1,
+		version is 0:35:0,
 		author is 'Paulo Moura',
-		date is 2024-11-02,
+		date is 2025-05-23,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -212,7 +212,7 @@
 	test(packs_registries_readme_1_01, true) :-
 		registries::readme(local_1_d).
 
-	test(packs_registries_provides_2_01, true(Pairs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-foo, local_1_d-gpg, local_1_d-sig])) :-
+	test(packs_registries_provides_2_01, true(Pairs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-deprecated, local_1_d-foo, local_1_d-gpg, local_1_d-sig])) :-
 		setof(Registry-Pack, registries::provides(Registry, Pack), Pairs).
 
 	test(packs_registries_update_1_01, true) :-
@@ -249,10 +249,10 @@
 	test(packs_packs_lint_1_01, true) :-
 		packs::lint(foo).
 
-	test(packs_packs_versions_3_01, true(Versions == [2:0:0,1:0:0])) :-
+	test(packs_packs_versions_3_01, true(Versions == [3:0:0,2:0:0,1:0:0])) :-
 		packs::versions(local_1_d, foo, Versions).
 
-	test(packs_packs_available_2_01, true(Packs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-foo, local_1_d-gpg, local_1_d-sig])) :-
+	test(packs_packs_available_2_01, true(Packs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-deprecated, local_1_d-foo, local_1_d-gpg, local_1_d-sig])) :-
 		findall(Registry-Pack, packs::available(Registry, Pack), Packs0),
 		msort(Packs0, Packs).
 
@@ -308,10 +308,10 @@
 		findall(Registry, registries::defined(Registry, _, _, true), Registries0),
 		list::msort(Registries0, Registries).
 
-	test(packs_registries_provides_2_02, true(Pairs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-foo, local_1_d-gpg, local_1_d-sig, local_2_d-baz])) :-
+	test(packs_registries_provides_2_02, true(Pairs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-deprecated, local_1_d-foo, local_1_d-gpg, local_1_d-sig, local_2_d-baz])) :-
 		setof(Registry-Pack, registries::provides(Registry, Pack), Pairs).
 
-	test(packs_packs_available_2_02, true(Packs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-foo, local_1_d-gpg, local_1_d-sig, local_2_d-baz])) :-
+	test(packs_packs_available_2_02, true(Packs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar,local_1_d-deprecated, local_1_d-foo, local_1_d-gpg, local_1_d-sig, local_2_d-baz])) :-
 		findall(Registry-Pack, packs::available(Registry, Pack), Packs0),
 		msort(Packs0, Packs).
 
@@ -363,6 +363,12 @@
 	test(packs_packs_dependents_3_02, true(Dependents == [foo])) :-
 		packs::dependents(local_2_d, baz, Dependents).
 
+	test(packs_packs_install_2_01, false) :-
+		packs::install(local_1_d, deprecated).
+
+	test(packs_packs_install_3_01, true) :-
+		packs::install(local_1_d, deprecated, 1:0:0).
+
 	% print installed packs
 
 	test(packs_packs_installed_1_01, true) :-
@@ -370,7 +376,17 @@
 
 	% update all installed packs
 
-	test(packs_packs_update_2_02, true(Version-Pinned == (2:0:0)-false)) :-
+	test(packs_packs_update_2_01, true(OldVersion == NewVersion)) :-
+		packs::installed(local_1_d, deprecated, OldVersion, _),
+		packs::update(deprecated, []),
+		packs::installed(local_1_d, deprecated, NewVersion, _).
+
+	test(packs_packs_update_2_02, true(OldVersion \== NewVersion)) :-
+		packs::installed(local_1_d, deprecated, OldVersion, _),
+		packs::update(deprecated, [status(all)]),
+		packs::installed(local_1_d, deprecated, NewVersion, _).
+
+	test(packs_packs_update_2_03, true(Version-Pinned == (3:0:0)-false)) :-
 		packs::uninstall(foo),
 		packs::install(local_1_d, foo, 1:0:0, [compatible(false)]),
 		packs::update(foo, [compatible(false)]),
@@ -381,13 +397,18 @@
 	test(packs_packs_update_1_01, true) :-
 		packs::update(baz).
 
-	test(packs_packs_update_2_03, true) :-
+	test(packs_packs_update_2_04, true) :-
 		packs::update(baz, [force(true)]).
 
 	test(packs_packs_update_3_01, true) :-
 		packs::uninstall(foo),
 		packs::install(local_1_d, foo, 1:0:0, [compatible(false)]),
 		packs::update(foo, 2:0:0, [clean(true), compatible(false)]).
+
+	test(packs_packs_update_2_05, true(OldVersion == NewVersion)) :-
+		packs::installed(local_1_d, foo, OldVersion, _),
+		packs::update(foo, [status(stable)]),
+		packs::installed(local_1_d, foo, NewVersion, _).
 
 	% clean pack archives
 

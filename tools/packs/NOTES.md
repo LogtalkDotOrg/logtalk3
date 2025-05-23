@@ -613,7 +613,17 @@ the `pack_protocol` API documentation.
 
 Listing multiple versions allows the pack specification to be updated (by
 updating its registry) without forcing existing users into installing (or
-updating to) the latest version of the pack.
+updating to) the latest version of the pack. It allows different applications
+depending on different pack versions to continue to be built and deployed.
+
+The pack version is complemented by the pack status. Valid values are
+`stable`, `rc`, `beta`, `alpha`, `experimental`, and `deprecated`. Packs
+with a `experimental` or `deprecated` status are **never** installed by
+default when using the install and update predicates unless their version
+is explicitly specified. When updating packs, we can restrict the valid
+status of the updates using the `status/1` option. For example, we can
+ensure that we only update to new stable pack versions by using the option
+`status([stable])`.
 
 
 Pack dependencies

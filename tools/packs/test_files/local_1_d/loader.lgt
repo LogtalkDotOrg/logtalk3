@@ -28,5 +28,6 @@
 	logtalk_load(badsig_pack),
 	logtalk_load(asc_pack),
 	logtalk_load(sig_pack),
+	logtalk_load(deprecated_pack),
 	logtalk_load(badcheck_pack)
 )).
