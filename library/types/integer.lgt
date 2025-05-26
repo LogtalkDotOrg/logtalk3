@@ -23,9 +23,9 @@
 	extends(number)).
 
 	:- info([
-		version is 1:55:0,
+		version is 1:56:0,
 		author is 'Paulo Moura',
-		date is 2022-06-21,
+		date is 2025-05-26,
 		comment is 'Integer data type predicates.',
 		remarks is [
 			'Portability notes' - 'This object will use the backend Prolog system ``between/3``, ``plus/3``, and ``succ/2`` built-in predicates when available.'
@@ -69,6 +69,13 @@
 	:- info(sequence/4, [
 		comment is 'Generates a list with the sequence of integers in the interval ``[Lower,Upper]`` by ``Step``. Assumes ``Lower =< Upper, Step >= 1`` and fails otherwise.',
 		argnames is ['Lower', 'Upper', 'Step', 'List']
+	]).
+
+	:- public(power_sequence/4).
+	:- mode(power_sequence(+integer, +integer, +integer, -list(integer)), zero_or_one).
+	:- info(power_sequence/4, [
+		comment is 'Generates a list of exponentiation results given ``[Lower,Upper]`` sequence of exponents and ``Base``. Assumes ``Lower =< Upper`` and ``Base > 1`` and fails otherwise.',
+		argnames is ['Lower', 'Upper', 'Base', 'List']
 	]).
 
 	:- if(predicate_property(between(_, _, _), built_in)).
@@ -166,6 +173,20 @@
 	gen_sequence(Lower, Upper, Step, [Lower| Tail]) :-
 		Next is Lower + Step,
 		gen_sequence(Next, Upper, Step, Tail).
+
+	power_sequence(Lower, Upper, Base, List) :-
+		Lower >= 0,
+		Lower =< Upper,
+		Base > 1,
+		gen_power_sequence(Lower, Upper, Base, List).
+
+	gen_power_sequence(Next, Upper, _, []) :-
+		Next > Upper,
+		!.
+	gen_power_sequence(Lower, Upper, Base, [Power| Tail]) :-
+		Next is Lower + 1,
+		Power is Base^Lower,
+		gen_power_sequence(Next, Upper, Base, Tail).
 
 	valid(Integer) :-
 		integer(Integer).

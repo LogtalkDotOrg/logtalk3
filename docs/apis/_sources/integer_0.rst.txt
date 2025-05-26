@@ -14,8 +14,8 @@ Integer data type predicates.
 |    ``logtalk_load(types(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:55:0
-| **Date:** 2022-06-21
+| **Version:** 1:56:0
+| **Date:** 2025-05-26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -133,6 +133,25 @@ Generates a list with the sequence of integers in the interval ``[Lower,Upper]``
 |    ``sequence(Lower,Upper,Step,List)``
 | **Mode and number of proofs:**
 |    ``sequence(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: power_sequence/4
+.. _integer/0::power_sequence/4:
+
+``power_sequence/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Generates a list of exponentiation results given ``[Lower,Upper]`` sequence of exponents and ``Base``. Assumes ``Lower =< Upper`` and ``Base > 1`` and fails otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``power_sequence(Lower,Upper,Base,List)``
+| **Mode and number of proofs:**
+|    ``power_sequence(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
 
 
 ------------

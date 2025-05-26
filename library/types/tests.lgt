@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:19:0,
+		version is 0:20:0,
 		author is 'Paulo Moura',
-		date is 2025-03-13,
+		date is 2025-05-26,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
@@ -121,6 +121,12 @@
 
 	test(integer_sequence_4_06, true(Sequence == [-100,-90,-80,-70,-60,-50,-40,-30,-20,-10])) :-
 		integer::sequence(-100, -10, 10, Sequence).
+
+	test(integer_power_sequence_4_01, true(Sequence == [1])) :-
+		integer::power_sequence(0, 0, 2, Sequence).
+
+	test(integer_power_sequence_4_02, true(Sequence == [1, 3, 9, 27, 81, 243])) :-
+		integer::power_sequence(0, 5, 3, Sequence).
 
 	test(float_between_4_01, true(Floats =~= [0.0, 0.0, 0.0, 0.0, 0.0])) :-
 		findall(Float, float::between(0.0, 0.0, 5, Float), Floats).

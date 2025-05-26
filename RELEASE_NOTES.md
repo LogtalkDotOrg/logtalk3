@@ -75,6 +75,11 @@ tool and the `os` library.
 * FIXED: Typo in the sample code for user-defined test dialects in the
 `lgtunit` tool documentation. Thanks to Paul Brown for the bug report.
 
+Library
+-------
+
+* ADDED: Library predicate `integer::power_sequence/4`.
+
 Tools
 -----
 
