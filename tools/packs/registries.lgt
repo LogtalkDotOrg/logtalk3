@@ -25,7 +25,7 @@
 	:- info([
 		version is 0:61:0,
 		author is 'Paulo Moura',
-		date is 2025-05-23,
+		date is 2025-05-27,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -252,7 +252,7 @@
 	]).
 
 	:- uses(list, [
-		member/2
+		member/2, memberchk/2
 	]).
 
 	:- uses(logtalk, [
