@@ -170,6 +170,9 @@ Objects
    json <json_0>
    json(StringRepresentation) <json_1>
    json(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_3>
+   json_lines <json_lines_0>
+   json_lines(StringRepresentation) <json_lines_1>
+   json_lines(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_lines_3>
    lgtdoc <lgtdoc_0>
    lgtunit <lgtunit_0>
    library_dependency_diagram <library_dependency_diagram_0>
@@ -300,6 +303,7 @@ Protocols
    intervalp <intervalp_0>
    java_access_protocol <java_access_protocol_0>
    java_utils_protocol <java_utils_protocol_0>
+   json_lines_protocol <json_lines_protocol_0>
    json_protocol <json_protocol_0>
    lgtdocp <lgtdocp_0>
    listp <listp_0>

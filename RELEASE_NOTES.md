@@ -78,6 +78,9 @@ tool and the `os` library.
 Library
 -------
 
+* ADDED: New `json_lines` library implementing the JSON Lines format proposal
+(available at https://jsonlines.org).
+
 * ADDED: Library predicate `integer::power_sequence/4`.
 
 Tools

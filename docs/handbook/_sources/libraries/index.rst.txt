@@ -58,6 +58,7 @@ directory in the ``NOTES.md`` file.
    intervals
    java
    json
+   json_lines
    listing
    logging
    loops

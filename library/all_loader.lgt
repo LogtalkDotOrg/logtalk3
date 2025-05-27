@@ -65,6 +65,7 @@
 		csv(loader),
 		tsv(loader),
 		json(loader),
+		json_lines(loader),
 		cbor(loader),
 		base64(loader),
 		ulid(loader),

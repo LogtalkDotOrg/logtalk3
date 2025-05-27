@@ -35,3 +35,6 @@ trim_trailing_whitespace = true
 indent_style = tab
 indent_size = 4
 trim_trailing_whitespace = true
+
+[*.{json,jsonl}]
+insert_final_newline = false

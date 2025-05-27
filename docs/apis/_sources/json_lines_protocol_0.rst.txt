@@ -1,0 +1,113 @@
+.. index:: single: json_lines_protocol
+.. _json_lines_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``json_lines_protocol``
+=======================
+
+JSON Lines parser and generator protocol.
+
+| **Availability:** 
+|    ``logtalk_load(json_lines(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2025-05-27
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/2
+.. _json_lines_protocol/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses the JSON Lines contents read from the given source (``file(Path)``, ``stream(Stream)``, ``line(Stream)``, ``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) into a list of ground terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,Terms)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,--list(ground))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source:
+|        ``domain_error(json_lines_source,Source)``
+
+
+------------
+
+.. index:: generate/2
+.. _json_lines_protocol/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates the content using the representation specified in the first argument (``file(Path)``, ``stream(Stream)``, ``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) for the list of ground terms in the second argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,Terms)``
+| **Mode and number of proofs:**
+|    ``generate(+compound,++list(ground))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Terms`` is a variable:
+|        ``instantiation_error``
+|    ``Terms`` is neither a variable nor a list:
+|        ``type_error(list,Terms)``
+|    ``Term`` is a non-ground element of the list ``Terms``:
+|        ``instantiation_error``
+|    ``Term`` is an element of the list ``Terms`` but not a valid JSON term:
+|        ``domain_error(json_term,Term)``
+|    ``Sink`` cannot be generated:
+|        ``domain_error(json_lines_sink,Sink)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
