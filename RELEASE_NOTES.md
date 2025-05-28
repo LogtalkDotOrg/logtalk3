@@ -83,6 +83,9 @@ Library
 
 * ADDED: Library predicate `integer::power_sequence/4`.
 
+* FIXED: Workaround spurious choice-point in the `avltree::delete/4` library
+predicate when using the SWI-Prolog backend on Windows.
+
 Tools
 -----
 

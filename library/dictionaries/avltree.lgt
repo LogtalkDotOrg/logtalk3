@@ -46,9 +46,9 @@
 	extends(term)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:4:1,
 		author is 'R.A.O''Keefe, L.Damas, V.S.Costa, Glenn Burgess, Jiri Spitz, and Jan Wielemaker; Logtalk port and additional predicates by Paulo Moura',
-		date is 2021-04-12,
+		date is 2025-05-28,
 		comment is 'AVL tree implementation of the dictionary protocol. Uses standard order to compare keys.',
 		see_also is [bintree, rbtree]
 	]).
@@ -303,6 +303,7 @@
 		deladjust(LeftHasChanged, t(MaxKey,MaxValue,Balance,NewLeft,Right), left, NewTree, WhatHasChanged),
 		!.
 	delete(<, t(Key1,Value1,Balance1,Left1,Right1), Key, Value, NewTree, WhatHasChanged) :-
+		!,
 		delete(Left1, Key, Value, NewLeft, LeftHasChanged),
 		deladjust(LeftHasChanged, t(Key1,Value1,Balance1,NewLeft,Right1), left, NewTree, WhatHasChanged).
 	delete(>, t(Key1,Value1,Balance1,Left1,Right1), Key, Value, NewTree, WhatHasChanged) :-
