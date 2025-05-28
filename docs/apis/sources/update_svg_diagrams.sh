@@ -4,7 +4,7 @@
 ##
 ##   Logtalk script for updating the HTML library and tools SVG diagrams
 ##
-##   Last updated on May 11, 2025
+##   Last updated on May 28, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -145,6 +145,8 @@ elif [ "$p_arg" != "" ] ; then
 	usage_help
 	exit 1
 fi
+
+cd .. || exit 1
 
 set_goals
 $logtalk "$core_goal"
