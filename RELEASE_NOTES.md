@@ -132,6 +132,9 @@ Tests
 
 * ADDED: Additional test for the `clause/2` built-in method.
 
+* FIXED: Tests for the `logtalk_library_path/2` built-in predicate when run on
+Windows systems that don't define the `HOME` environment variable.
+
 Installers and installation scripts
 -----------------------------------
 

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:1,
+		version is 1:4:2,
 		author is 'Paulo Moura',
-		date is 2021-10-15,
+		date is 2025-05-28,
 		comment is 'Unit tests for the logtalk_library_path/2 built-in predicate.'
 	]).
 
@@ -59,7 +59,10 @@
 		(	os::environment_variable('LOGTALKPACKS', Path),
 			os::directory_exists(Path) ->
 			true
-		;	os::make_directory_path('$HOME/logtalk_packs')
+		;	os::environment_variable('HOME', _) ->
+			os::make_directory_path('$HOME/logtalk_packs')
+		;	% assume Windows system
+			os::make_directory_path('$USERPROFILE/logtalk_packs')
 		),
 		forall(
 			logtalk_library_path(Library, _),
