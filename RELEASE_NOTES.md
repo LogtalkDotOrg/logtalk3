@@ -127,6 +127,9 @@ the `gui` flag set to `true`.
 * FIXED: Formatting typo in the `coinduction` example `NOTES.md` file that
 caused an error when open as a Jupyter notebook.
 
+* FIXED: The `neo4j` example `set_classpath.ps1` script to assume that Neo4j
+Desktop is installed in its default location.
+
 Tests
 -----
 

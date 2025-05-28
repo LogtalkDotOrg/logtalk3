@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Set CLASSPATH environment variable
-##   Last updated on March 18, 2025
+##   Last updated on May 28, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 $first = $true
 
-Get-ChildItem -Path jars\* -Filter *.jar |
+Get-ChildItem -Path C:\Program` Files\Neo4j` Desktop\lib\jars\* -Filter *.jar |
 Foreach-Object {
     if ($first) {
         $classpath = $_.FullName
