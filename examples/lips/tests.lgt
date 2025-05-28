@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2025-03-19,
+		date is 2025-05-28,
 		comment is 'Unit tests for the "lips" example.'
 	]).
 
@@ -33,6 +33,6 @@
 		lips::mlips(MLIPS).
 
 	test(lips_mlips_2, true(integer(MLIPS))) :-
-		lips::mlips(10000, MLIPS).
+		lips::mlips(50000, MLIPS).
 
 :- end_object.

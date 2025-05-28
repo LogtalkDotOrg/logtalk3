@@ -119,6 +119,9 @@ of the individual benchmarks.
 * UPDATED: The SWI-Prolog backend specific `pengines` example to not require
 the `gui` flag set to `true`.
 
+* UPDATED: The `lips` example test to try to avoid a divide by zero error with
+fast backends.
+
 * FIXED: The `buffer` multi-threading example to prevent potential deadlocks.
 
 * FIXED: The `engines/pmq` example `tester.lgt` file loading the library
