@@ -77,10 +77,10 @@
 	extends(ids(atom, 20))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2022-11-23,
-		comment is 'Generator of random identifiers with 160 bits (20 bytes) of randomness.',
+		date is 2025-06-03,
+		comment is 'Generator of random identifiers represented as atoms with 160 bits (20 bytes) of randomness.',
 		see_also is [ids(_, _), uuid, ulid]
 	]).
 
