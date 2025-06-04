@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2025-06-04,
 		comment is 'Unit tests for the ISO Prolog standard atom_concat/3 built-in predicate.'
 	]).
 
@@ -125,5 +125,16 @@
 
 	test(lgt_atom_concat_3_29, true(A == '{}{}')) :-
 		{atom_concat({}, {}, A)}.
+
+	% tests from the WG17 standardization work
+
+	test(wg17_atom_concat_3_30, deterministic(A == aa)) :-
+		{atom_concat(A, A, aaaa)}.
+
+	test(wg17_atom_concat_3_31, deterministic(A == '')) :-
+		{atom_concat(A, A, '')}.
+
+	test(wg17_atom_concat_3_32, false) :-
+		{atom_concat(A, A, aaaaa)}.
 
 :- end_object.

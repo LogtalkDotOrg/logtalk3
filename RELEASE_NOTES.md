@@ -25,7 +25,11 @@ RELEASE NOTES
 3.93.0 - June ??, 2025
 ======================
 
+Tests
+-----
 
+* ADDED: Additional tests for the Prolog standard `atom_concat/3` built-in
+predicate from WG17 work.
 
 
 3.92.0 - May 28, 2025
