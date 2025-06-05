@@ -25,6 +25,12 @@ RELEASE NOTES
 3.93.0 - June ??, 2025
 ======================
 
+Tools
+-----
+
+* UPDATED: The `logtalk_tester.*` scripts to also print the operating-system
+version after the Logtalk and Prolog backend versions.
+
 Tests
 -----
 

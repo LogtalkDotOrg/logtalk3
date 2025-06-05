@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on March 23, 2025
+##   Last updated on June 5, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -33,7 +33,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 20.1"
+	echo "$(basename "$0") 21.0"
 	exit 0
 }
 
@@ -596,6 +596,7 @@ if [ "$output" == 'verbose' ] ; then
 	$logtalk_call $versions_goal > "$results"/tester_versions.txt 2> /dev/null
 	grep -a "Logtalk version:" "$results"/tester_versions.txt
 	grep -a "Prolog version:" "$results"/tester_versions.txt | $sed "s/Prolog/$prolog/"
+	grep -a "OS version:" "$results"/tester_versions.txt
 fi
 
 declare drivers

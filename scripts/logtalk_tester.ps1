@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on March 26, 2025
+##   Last updated on June 5, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -53,7 +53,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 13.8"
+	Write-Output "$myName 14.0"
 }
 
 Function Invoke-TestSet() {
@@ -605,6 +605,7 @@ if ($o -eq "verbose") {
 	& $logtalk $backend_options $logtalk_option $versions_goal | Out-File $results/tester_versions.txt
 	Select-String -Path $results/tester_versions.txt -Pattern "Logtalk version:" -Raw -SimpleMatch
 	(Select-String -Path $results/tester_versions.txt -Pattern "Prolog version:" -Raw -SimpleMatch) -replace "Prolog", $prolog
+	Select-String -Path $results/tester_versions.txt -Pattern "OS version:" -Raw -SimpleMatch
 }
 
 if ($exclude -eq "") {

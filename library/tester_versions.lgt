@@ -37,5 +37,11 @@
 	;	PrologOther = [Data] ->
 		write('-'), write(Data), nl
 	;	write('-'), write(PrologOther), nl
-	)
+	),
+	logtalk_load(os(loader)),
+	os::operating_system_name(Name),
+	os::operating_system_machine(Machine),
+	os::operating_system_release(Release),
+	write('%         OS version: '),
+	write(Name), write(', '), write(Machine), write(', '), write(Release), nl
 )).
