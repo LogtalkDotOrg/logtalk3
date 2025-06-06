@@ -72,7 +72,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Protocols</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#defining-a-new-protocol">Defining a new protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#finding-defined-protocols">Finding defined protocols</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#creating-a-new-protocol-in-runtime">Creating a new protocol in runtime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-new-protocol-at-runtime">Creating a new protocol at runtime</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#abolishing-an-existing-protocol">Abolishing an existing protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#protocol-directives">Protocol directives</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dynamic-protocols">Dynamic protocols</a></li>
@@ -222,8 +222,8 @@ unbound argument:</p>
 <p>This predicate can also be used to test if a protocol is defined by
 calling it with a valid protocol identifier (an atom).</p>
 </section>
-<section id="creating-a-new-protocol-in-runtime">
-<span id="protocols-creating"></span><h2>Creating a new protocol in runtime<a class="headerlink" href="#creating-a-new-protocol-in-runtime" title="Link to this heading"></a></h2>
+<section id="creating-a-new-protocol-at-runtime">
+<span id="protocols-creating"></span><h2>Creating a new protocol at runtime<a class="headerlink" href="#creating-a-new-protocol-at-runtime" title="Link to this heading"></a></h2>
 <p>We can create a new (dynamic) protocol at runtime by calling the Logtalk
 built-in predicate <a class="reference internal" href="../refman/predicates/create_protocol_3.html#predicates-create-protocol-3"><span class="std std-ref">create_protocol/3</span></a>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- create_protocol(Protocol, Relations, Directives).

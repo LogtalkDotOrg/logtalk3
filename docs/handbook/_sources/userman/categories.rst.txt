@@ -299,7 +299,7 @@ term).
 
 .. _categories_creating:
 
-Creating a new category in runtime
+Creating a new category at runtime
 ----------------------------------
 
 A category can be dynamically created at runtime by using the

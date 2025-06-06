@@ -74,7 +74,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#defining-a-new-category">Defining a new category</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hot-patching">Hot patching</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#finding-defined-categories">Finding defined categories</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#creating-a-new-category-in-runtime">Creating a new category in runtime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-new-category-at-runtime">Creating a new category at runtime</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#abolishing-an-existing-category">Abolishing an existing category</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#category-directives">Category directives</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dynamic-categories">Dynamic categories</a></li>
@@ -396,8 +396,8 @@ unbound argument:</p>
 calling it with a valid category identifier (an atom or a compound
 term).</p>
 </section>
-<section id="creating-a-new-category-in-runtime">
-<span id="categories-creating"></span><h2>Creating a new category in runtime<a class="headerlink" href="#creating-a-new-category-in-runtime" title="Link to this heading"></a></h2>
+<section id="creating-a-new-category-at-runtime">
+<span id="categories-creating"></span><h2>Creating a new category at runtime<a class="headerlink" href="#creating-a-new-category-at-runtime" title="Link to this heading"></a></h2>
 <p>A category can be dynamically created at runtime by using the
 <a class="reference internal" href="../refman/predicates/create_category_4.html#predicates-create-category-4"><span class="std std-ref">create_category/4</span></a> built-in predicate:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- create_category(Category, Relations, Directives, Clauses).

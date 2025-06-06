@@ -106,7 +106,7 @@ calling it with a valid protocol identifier (an atom).
 
 .. _protocols_creating:
 
-Creating a new protocol in runtime
+Creating a new protocol at runtime
 ----------------------------------
 
 We can create a new (dynamic) protocol at runtime by calling the Logtalk
