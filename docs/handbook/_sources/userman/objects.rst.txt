@@ -432,7 +432,7 @@ calling it with a valid object identifier (an atom or a compound term).
 
 .. _objects_creating:
 
-Creating a new object in runtime
+Creating a new object at runtime
 --------------------------------
 
 An object can be dynamically created at runtime by using the

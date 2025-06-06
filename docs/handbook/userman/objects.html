@@ -81,7 +81,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#finding-defined-objects">Finding defined objects</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#creating-a-new-object-in-runtime">Creating a new object in runtime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-new-object-at-runtime">Creating a new object at runtime</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#abolishing-an-existing-object">Abolishing an existing object</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#object-directives">Object directives</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#object-initialization">Object initialization</a></li>
@@ -510,8 +510,8 @@ Object = user ;
 <p>This predicate can also be used to test if an object is defined by
 calling it with a valid object identifier (an atom or a compound term).</p>
 </section>
-<section id="creating-a-new-object-in-runtime">
-<span id="objects-creating"></span><h2>Creating a new object in runtime<a class="headerlink" href="#creating-a-new-object-in-runtime" title="Link to this heading"></a></h2>
+<section id="creating-a-new-object-at-runtime">
+<span id="objects-creating"></span><h2>Creating a new object at runtime<a class="headerlink" href="#creating-a-new-object-at-runtime" title="Link to this heading"></a></h2>
 <p>An object can be dynamically created at runtime by using the
 <a class="reference internal" href="../refman/predicates/create_object_4.html#predicates-create-object-4"><span class="std std-ref">create_object/4</span></a> built-in predicate:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- create_object(Object, Relations, Directives, Clauses).
