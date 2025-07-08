@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2019-05-27,
+		date is 2025-07-08,
 		comment is 'Unit tests for the "sets" library.',
 		parnames is ['SetObject']
 	]).
@@ -328,15 +328,15 @@
 		as_set([3,1,2], Set),
 		selectchk(4, Set, _).
 
-	test(set_selectchk_3_03, deterministic(Sorted == [1,3])) :-
-		as_set([3,1,2], Set1),
-		selectchk(2, Set1, Set2),
-		as_list(Set2, List),
-		msort(List, Sorted).
+	test(set_selectchk_3_03, deterministic) :-
+		as_set([3,1,2], Set),
+		selectchk(2, Set, _).
 
-	test(set_selectchk_3_04, deterministic) :-
-		as_set([3,1,2], Set1),
-		selectchk(_, Set1, _).
+	test(set_selectchk_3_04, deterministic(Sorted == [1,3])) :-
+		as_set([3,1,2], Set),
+		selectchk(2, Set, Rest),
+		as_list(Rest, List),
+		msort(List, Sorted).
 
 	% subset/2 tests
 

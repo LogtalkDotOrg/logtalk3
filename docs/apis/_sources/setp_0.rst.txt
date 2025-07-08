@@ -14,8 +14,8 @@ Set protocol.
 |    ``logtalk_load(sets(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:6:0
-| **Date:** 2019-05-23
+| **Version:** 2:0:0
+| **Date:** 2025-07-08
 
 | **Compilation flags:**
 |    ``static``
@@ -82,7 +82,7 @@ Returns a list with all elements of the given set.
 ``delete/3``
 ^^^^^^^^^^^^
 
-Deletes an element from a set returning the set of remaining elements.
+Deletes an element from a set returning the set of the remaining elements.
 
 | **Compilation flags:**
 |    ``static``
@@ -90,7 +90,7 @@ Deletes an element from a set returning the set of remaining elements.
 | **Template:**
 |    ``delete(Set,Element,Remaining)``
 | **Mode and number of proofs:**
-|    ``delete(+set,@term,?set)`` - ``one``
+|    ``delete(@set,@term,-set)`` - ``one``
 
 
 ------------
@@ -101,7 +101,7 @@ Deletes an element from a set returning the set of remaining elements.
 ``disjoint/2``
 ^^^^^^^^^^^^^^
 
-True if the two sets have no element in common.
+True when the two sets have no element in common.
 
 | **Compilation flags:**
 |    ``static``
@@ -109,7 +109,7 @@ True if the two sets have no element in common.
 | **Template:**
 |    ``disjoint(Set1,Set2)``
 | **Mode and number of proofs:**
-|    ``disjoint(+set,+set)`` - ``zero_or_one``
+|    ``disjoint(@set,@set)`` - ``zero_or_one``
 
 
 ------------
@@ -120,7 +120,7 @@ True if the two sets have no element in common.
 ``equal/2``
 ^^^^^^^^^^^
 
-True if the two sets are equal.
+True when the two sets are equal.
 
 | **Compilation flags:**
 |    ``static``
@@ -128,7 +128,7 @@ True if the two sets are equal.
 | **Template:**
 |    ``equal(Set1,Set2)``
 | **Mode and number of proofs:**
-|    ``equal(+set,+set)`` - ``zero_or_one``
+|    ``equal(@set,@set)`` - ``zero_or_one``
 
 
 ------------
@@ -139,7 +139,7 @@ True if the two sets are equal.
 ``empty/1``
 ^^^^^^^^^^^
 
-True if the set is empty.
+True when the set is empty.
 
 | **Compilation flags:**
 |    ``static``
@@ -147,7 +147,7 @@ True if the set is empty.
 | **Template:**
 |    ``empty(Set)``
 | **Mode and number of proofs:**
-|    ``empty(+set)`` - ``zero_or_one``
+|    ``empty(@set)`` - ``zero_or_one``
 
 
 ------------
@@ -166,7 +166,7 @@ Inserts an element in a set, returning the resulting set.
 | **Template:**
 |    ``insert(In,Element,Out)``
 | **Mode and number of proofs:**
-|    ``insert(+set,+term,?set)`` - ``one``
+|    ``insert(@set,@term,-set)`` - ``one``
 
 
 ------------
@@ -177,7 +177,7 @@ Inserts an element in a set, returning the resulting set.
 ``insert_all/3``
 ^^^^^^^^^^^^^^^^
 
-Inserts a list of elements in a set, returning the resulting set.
+Inserts all the elements of the list into a set, returning the resulting set.
 
 | **Compilation flags:**
 |    ``static``
@@ -185,7 +185,7 @@ Inserts a list of elements in a set, returning the resulting set.
 | **Template:**
 |    ``insert_all(List,In,Out)``
 | **Mode and number of proofs:**
-|    ``insert_all(+list,+set,?set)`` - ``one``
+|    ``insert_all(@list,@set,-set)`` - ``one``
 
 
 ------------
@@ -204,7 +204,7 @@ True if the two sets have at least one element in common.
 | **Template:**
 |    ``intersect(Set1,Set2)``
 | **Mode and number of proofs:**
-|    ``intersect(+set,+set)`` - ``zero_or_one``
+|    ``intersect(@set,@set)`` - ``zero_or_one``
 
 
 ------------
@@ -215,7 +215,7 @@ True if the two sets have at least one element in common.
 ``intersection/3``
 ^^^^^^^^^^^^^^^^^^
 
-Returns the intersection of ``Set1`` and ``Set2``.
+Computes the intersection of ``Set1`` and ``Set2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -223,7 +223,7 @@ Returns the intersection of ``Set1`` and ``Set2``.
 | **Template:**
 |    ``intersection(Set1,Set2,Intersection)``
 | **Mode and number of proofs:**
-|    ``intersection(+set,+set,?set)`` - ``zero_or_one``
+|    ``intersection(@set,@set,-set)`` - ``one``
 
 
 ------------
@@ -234,7 +234,7 @@ Returns the intersection of ``Set1`` and ``Set2``.
 ``intersection/4``
 ^^^^^^^^^^^^^^^^^^
 
-True if ``Intersection`` is the intersection of ``Set1`` and ``Set2`` and ``Difference`` is the difference between ``Set2`` and ``Set1``.
+Computes the intersection and the difference between ``Set2`` and ``Set1``.
 
 | **Compilation flags:**
 |    ``static``
@@ -242,7 +242,7 @@ True if ``Intersection`` is the intersection of ``Set1`` and ``Set2`` and ``Diff
 | **Template:**
 |    ``intersection(Set1,Set2,Intersection,Difference)``
 | **Mode and number of proofs:**
-|    ``intersection(+set,+set,?set,?set)`` - ``zero_or_one``
+|    ``intersection(@set,@set,-set,-set)`` - ``one``
 
 
 ------------
@@ -261,7 +261,7 @@ Number of set elements.
 | **Template:**
 |    ``size(Set,Size)``
 | **Mode and number of proofs:**
-|    ``size(+set,?integer)`` - ``zero_or_one``
+|    ``size(@set,?integer)`` - ``zero_or_one``
 
 
 ------------
@@ -280,8 +280,7 @@ Number of set elements.
 | **Template:**
 |    ``member(Element,Set)``
 | **Mode and number of proofs:**
-|    ``member(+term,+set)`` - ``zero_or_one``
-|    ``member(-term,+set)`` - ``zero_or_more``
+|    ``member(?term,+set)`` - ``zero_or_more``
 
 
 ------------
@@ -292,7 +291,7 @@ Number of set elements.
 ``memberchk/2``
 ^^^^^^^^^^^^^^^
 
-Checks if a term is a member of a set.
+True when a term is a member of a set.
 
 | **Compilation flags:**
 |    ``static``
@@ -300,7 +299,7 @@ Checks if a term is a member of a set.
 | **Template:**
 |    ``memberchk(Element,Set)``
 | **Mode and number of proofs:**
-|    ``memberchk(+term,+set)`` - ``zero_or_one``
+|    ``memberchk(@term,@set)`` - ``zero_or_one``
 
 
 ------------
@@ -319,7 +318,7 @@ Returns the power set of a set, represented as a list of sets.
 | **Template:**
 |    ``powerset(Set,Powerset)``
 | **Mode and number of proofs:**
-|    ``powerset(+set,-list)`` - ``one``
+|    ``powerset(@set,-list(set))`` - ``one``
 
 
 ------------
@@ -338,7 +337,7 @@ Returns the cartesian product of two sets.
 | **Template:**
 |    ``product(Set1,Set2,Product)``
 | **Mode and number of proofs:**
-|    ``product(+set,+set,-set)`` - ``one``
+|    ``product(@set,@set,-set)`` - ``one``
 
 
 ------------
@@ -357,7 +356,7 @@ Selects an element from a set, returning the set of remaining elements.
 | **Template:**
 |    ``select(Element,Set,Remaining)``
 | **Mode and number of proofs:**
-|    ``select(?term,+set,?set)`` - ``zero_or_more``
+|    ``select(?term,?set,?set)`` - ``zero_or_more``
 
 
 ------------
@@ -368,7 +367,7 @@ Selects an element from a set, returning the set of remaining elements.
 ``selectchk/3``
 ^^^^^^^^^^^^^^^
 
-Checks that an element can be selected from a set, returning the set of remaining elements.
+True if an element can be selected from a set, returning the set of remaining elements.
 
 | **Compilation flags:**
 |    ``static``
@@ -376,7 +375,7 @@ Checks that an element can be selected from a set, returning the set of remainin
 | **Template:**
 |    ``selectchk(Element,Set,Remaining)``
 | **Mode and number of proofs:**
-|    ``selectchk(?term,+set,?set)`` - ``zero_or_one``
+|    ``selectchk(@term,@set,-set)`` - ``zero_or_one``
 
 
 ------------
@@ -395,7 +394,7 @@ True if ``Subset`` is a subset of ``Set``.
 | **Template:**
 |    ``subset(Subset,Set)``
 | **Mode and number of proofs:**
-|    ``subset(+set,+set)`` - ``zero_or_one``
+|    ``subset(@set,@set)`` - ``zero_or_one``
 
 
 ------------
@@ -406,7 +405,7 @@ True if ``Subset`` is a subset of ``Set``.
 ``subtract/3``
 ^^^^^^^^^^^^^^
 
-True when ``Difference`` contains all and only the elements of ``Set1`` which are not also in ``Set2``.
+Computes the set of all the elements of ``Set1`` which are not also in ``Set2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -414,7 +413,7 @@ True when ``Difference`` contains all and only the elements of ``Set1`` which ar
 | **Template:**
 |    ``subtract(Set1,Set2,Difference)``
 | **Mode and number of proofs:**
-|    ``subtract(+set,+set,?set)`` - ``zero_or_one``
+|    ``subtract(@set,@set,-set)`` - ``one``
 
 
 ------------
@@ -425,7 +424,7 @@ True when ``Difference`` contains all and only the elements of ``Set1`` which ar
 ``symdiff/3``
 ^^^^^^^^^^^^^
 
-True if ``Difference`` is the symmetric difference of ``Set1`` and ``Set2``, containing all elements that are not in the sets intersection.
+Computes the symmetric difference of ``Set1`` and ``Set2``, containing all elements that are not in the sets intersection.
 
 | **Compilation flags:**
 |    ``static``
@@ -433,7 +432,7 @@ True if ``Difference`` is the symmetric difference of ``Set1`` and ``Set2``, con
 | **Template:**
 |    ``symdiff(Set1,Set2,Difference)``
 | **Mode and number of proofs:**
-|    ``symdiff(+set,+set,?set)`` - ``zero_or_one``
+|    ``symdiff(@set,@set,-set)`` - ``one``
 
 
 ------------
@@ -444,7 +443,7 @@ True if ``Difference`` is the symmetric difference of ``Set1`` and ``Set2``, con
 ``union/3``
 ^^^^^^^^^^^
 
-True if ``Union`` is the union of ``Set1`` and ``Set2``.
+Computes the union of ``Set1`` and ``Set2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -452,7 +451,7 @@ True if ``Union`` is the union of ``Set1`` and ``Set2``.
 | **Template:**
 |    ``union(Set1,Set2,Union)``
 | **Mode and number of proofs:**
-|    ``union(+set,+set,?set)`` - ``zero_or_one``
+|    ``union(@set,@set,-set)`` - ``one``
 
 
 ------------
@@ -463,7 +462,7 @@ True if ``Union`` is the union of ``Set1`` and ``Set2``.
 ``union/4``
 ^^^^^^^^^^^
 
-True if ``Union`` is the union of ``Set1`` and ``Set2`` and ``Difference`` is the difference between ``Set2`` and ``Set1``.
+Computes the union of ``Set1`` and ``Set2`` and the difference between ``Set2`` and ``Set1``.
 
 | **Compilation flags:**
 |    ``static``
@@ -471,7 +470,7 @@ True if ``Union`` is the union of ``Set1`` and ``Set2`` and ``Difference`` is th
 | **Template:**
 |    ``union(Set1,Set2,Union,Difference)``
 | **Mode and number of proofs:**
-|    ``union(+set,+set,?set,?set)`` - ``zero_or_one``
+|    ``union(@set,@set,-set,-set)`` - ``one``
 
 
 ------------

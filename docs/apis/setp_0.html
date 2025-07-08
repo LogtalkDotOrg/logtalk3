@@ -207,8 +207,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:6:0</div>
-<div class="line"><strong>Date:</strong> 2019-05-23</div>
+<div class="line"><strong>Version:</strong> 2:0:0</div>
+<div class="line"><strong>Date:</strong> 2025-07-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -314,7 +314,7 @@
 </section>
 <section id="delete-3">
 <span id="setp-0-delete-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete/3</span></code></a><a class="headerlink" href="#delete-3" title="Link to this heading"></a></h3>
-<p>Deletes an element from a set returning the set of remaining elements.</p>
+<p>Deletes an element from a set returning the set of the remaining elements.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -328,14 +328,14 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">delete(+set,&#64;term,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete(&#64;set,&#64;term,-set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="disjoint-2">
 <span id="setp-0-disjoint-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">disjoint/2</span></code></a><a class="headerlink" href="#disjoint-2" title="Link to this heading"></a></h3>
-<p>True if the two sets have no element in common.</p>
+<p>True when the two sets have no element in common.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -349,14 +349,14 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">disjoint(+set,+set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">disjoint(&#64;set,&#64;set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="equal-2">
 <span id="setp-0-equal-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">equal/2</span></code></a><a class="headerlink" href="#equal-2" title="Link to this heading"></a></h3>
-<p>True if the two sets are equal.</p>
+<p>True when the two sets are equal.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -370,14 +370,14 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">equal(+set,+set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">equal(&#64;set,&#64;set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="empty-1">
 <span id="setp-0-empty-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">empty/1</span></code></a><a class="headerlink" href="#empty-1" title="Link to this heading"></a></h3>
-<p>True if the set is empty.</p>
+<p>True when the set is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -391,7 +391,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">empty(+set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">empty(&#64;set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -412,14 +412,14 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">insert(+set,+term,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">insert(&#64;set,&#64;term,-set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="insert-all-3">
 <span id="setp-0-insert-all-3"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">insert_all/3</span></code></a><a class="headerlink" href="#insert-all-3" title="Link to this heading"></a></h3>
-<p>Inserts a list of elements in a set, returning the resulting set.</p>
+<p>Inserts all the elements of the list into a set, returning the resulting set.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -433,7 +433,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">insert_all(+list,+set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">insert_all(&#64;list,&#64;set,-set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -454,14 +454,14 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">intersect(+set,+set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">intersect(&#64;set,&#64;set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="intersection-3">
 <span id="setp-0-intersection-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">intersection/3</span></code></a><a class="headerlink" href="#intersection-3" title="Link to this heading"></a></h3>
-<p>Returns the intersection of <code class="docutils literal notranslate"><span class="pre">Set1</span></code> and <code class="docutils literal notranslate"><span class="pre">Set2</span></code>.</p>
+<p>Computes the intersection of <code class="docutils literal notranslate"><span class="pre">Set1</span></code> and <code class="docutils literal notranslate"><span class="pre">Set2</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -475,14 +475,14 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">intersection(+set,+set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">intersection(&#64;set,&#64;set,-set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="intersection-4">
 <span id="setp-0-intersection-4"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">intersection/4</span></code></a><a class="headerlink" href="#intersection-4" title="Link to this heading"></a></h3>
-<p>True if <code class="docutils literal notranslate"><span class="pre">Intersection</span></code> is the intersection of <code class="docutils literal notranslate"><span class="pre">Set1</span></code> and <code class="docutils literal notranslate"><span class="pre">Set2</span></code> and <code class="docutils literal notranslate"><span class="pre">Difference</span></code> is the difference between <code class="docutils literal notranslate"><span class="pre">Set2</span></code> and <code class="docutils literal notranslate"><span class="pre">Set1</span></code>.</p>
+<p>Computes the intersection and the difference between <code class="docutils literal notranslate"><span class="pre">Set2</span></code> and <code class="docutils literal notranslate"><span class="pre">Set1</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -496,7 +496,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">intersection(+set,+set,?set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">intersection(&#64;set,&#64;set,-set,-set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -517,7 +517,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">size(+set,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">size(&#64;set,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -538,15 +538,14 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">member(+term,+set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">member(-term,+set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">member(?term,+set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="memberchk-2">
 <span id="setp-0-memberchk-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">memberchk/2</span></code></a><a class="headerlink" href="#memberchk-2" title="Link to this heading"></a></h3>
-<p>Checks if a term is a member of a set.</p>
+<p>True when a term is a member of a set.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -560,7 +559,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">memberchk(+term,+set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memberchk(&#64;term,&#64;set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -581,7 +580,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">powerset(+set,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">powerset(&#64;set,-list(set))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -602,7 +601,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">product(+set,+set,-set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">product(&#64;set,&#64;set,-set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -623,14 +622,14 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">select(?term,+set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">select(?term,?set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="selectchk-3">
 <span id="setp-0-selectchk-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">selectchk/3</span></code></a><a class="headerlink" href="#selectchk-3" title="Link to this heading"></a></h3>
-<p>Checks that an element can be selected from a set, returning the set of remaining elements.</p>
+<p>True if an element can be selected from a set, returning the set of remaining elements.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -644,7 +643,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">selectchk(?term,+set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">selectchk(&#64;term,&#64;set,-set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -665,14 +664,14 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">subset(+set,+set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subset(&#64;set,&#64;set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="subtract-3">
 <span id="setp-0-subtract-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">subtract/3</span></code></a><a class="headerlink" href="#subtract-3" title="Link to this heading"></a></h3>
-<p>True when <code class="docutils literal notranslate"><span class="pre">Difference</span></code> contains all and only the elements of <code class="docutils literal notranslate"><span class="pre">Set1</span></code> which are not also in <code class="docutils literal notranslate"><span class="pre">Set2</span></code>.</p>
+<p>Computes the set of all the elements of <code class="docutils literal notranslate"><span class="pre">Set1</span></code> which are not also in <code class="docutils literal notranslate"><span class="pre">Set2</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -686,14 +685,14 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">subtract(+set,+set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subtract(&#64;set,&#64;set,-set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="symdiff-3">
 <span id="setp-0-symdiff-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">symdiff/3</span></code></a><a class="headerlink" href="#symdiff-3" title="Link to this heading"></a></h3>
-<p>True if <code class="docutils literal notranslate"><span class="pre">Difference</span></code> is the symmetric difference of <code class="docutils literal notranslate"><span class="pre">Set1</span></code> and <code class="docutils literal notranslate"><span class="pre">Set2</span></code>, containing all elements that are not in the sets intersection.</p>
+<p>Computes the symmetric difference of <code class="docutils literal notranslate"><span class="pre">Set1</span></code> and <code class="docutils literal notranslate"><span class="pre">Set2</span></code>, containing all elements that are not in the sets intersection.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -707,14 +706,14 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">symdiff(+set,+set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">symdiff(&#64;set,&#64;set,-set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="union-3">
 <span id="setp-0-union-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">union/3</span></code></a><a class="headerlink" href="#union-3" title="Link to this heading"></a></h3>
-<p>True if <code class="docutils literal notranslate"><span class="pre">Union</span></code> is the union of <code class="docutils literal notranslate"><span class="pre">Set1</span></code> and <code class="docutils literal notranslate"><span class="pre">Set2</span></code>.</p>
+<p>Computes the union of <code class="docutils literal notranslate"><span class="pre">Set1</span></code> and <code class="docutils literal notranslate"><span class="pre">Set2</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -728,14 +727,14 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">union(+set,+set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">union(&#64;set,&#64;set,-set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="union-4">
 <span id="setp-0-union-4"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">union/4</span></code></a><a class="headerlink" href="#union-4" title="Link to this heading"></a></h3>
-<p>True if <code class="docutils literal notranslate"><span class="pre">Union</span></code> is the union of <code class="docutils literal notranslate"><span class="pre">Set1</span></code> and <code class="docutils literal notranslate"><span class="pre">Set2</span></code> and <code class="docutils literal notranslate"><span class="pre">Difference</span></code> is the difference between <code class="docutils literal notranslate"><span class="pre">Set2</span></code> and <code class="docutils literal notranslate"><span class="pre">Set1</span></code>.</p>
+<p>Computes the union of <code class="docutils literal notranslate"><span class="pre">Set1</span></code> and <code class="docutils literal notranslate"><span class="pre">Set2</span></code> and the difference between <code class="docutils literal notranslate"><span class="pre">Set2</span></code> and <code class="docutils literal notranslate"><span class="pre">Set1</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -749,7 +748,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">union(+set,+set,?set,?set)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">union(&#64;set,&#64;set,-set,-set)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </section>

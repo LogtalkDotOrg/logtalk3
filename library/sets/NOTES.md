@@ -24,8 +24,17 @@ ________________________________________________________________________
 This library provides a set protocol and two implementations of this protocol
 using *ordered lists*, one of them a parametric object that takes the type of
 the set elements as a parameter. Although representing sets as ordered lists
-is a common representation, the best practice is to regard sets as opaque terms
-and only access them using the library predicates.
+is a common solution, the best practice is to regard sets as *opaque terms*
+and only construct, access, and update them using the library predicates. For
+better performance when handling large sets, alternative implementations of
+the protocol can always be written.
+
+The current implementations use `==/2` for element comparison and standard
+term ordering. This allows non-ground set elements. But requires caution with
+later unifications with output arguments and when using the `member/2` and
+`select/3` predicates, which can break the ordered representation. Note also
+that, per the ISO Prolog Core Standard, variable ordering is implementation
+dependent. This can result in unexpected results and portability issues.
 
 
 API documentation

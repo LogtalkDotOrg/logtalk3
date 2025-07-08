@@ -25,6 +25,13 @@ RELEASE NOTES
 3.93.0 - June ??, 2025
 ======================
 
+Library
+-------
+
+* CHANGED: The implementation of the `sets` library predicates `member/2` and
+`selectchk/3`. Also improved the documentation of the library and fixed the
+`mode/2` directives of several of its predicates.
+
 Tools
 -----
 

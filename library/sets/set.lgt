@@ -24,9 +24,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1:12:0,
+		version is 2:0:0,
 		author is 'Richard O''Keefe (main predicates); adapted to Logtalk by Paulo Moura.',
-		date is 2019-05-23,
+		date is 2025-07-08,
 		comment is 'Set predicates implemented using ordered lists. Uses ``==/2`` for element comparison and standard term ordering.',
 		see_also is [set(_)]
 	]).
@@ -125,28 +125,18 @@
 		Size1 is Size0 + 1,
 		size(Set, Size1, Size).
 
-	member(Element, Set) :-
-		(	var(Element) ->
-			member_var(Element, Set)
-		;	member_nonvar(Element, Set)
-		).
+	member(Element, [Element| _]).
+	member(Element, [_| Set]) :-
+		member(Element, Set).
 
-	member_var(Element, [Element| _]).
-	member_var(Element, [_| Set]) :-
-		member_var(Element, Set).
-
-	member_nonvar(Element, [Head| Tail]) :-
+	memberchk(Element, [Head| Set]) :-
 		compare(Order, Element, Head),
-		member_nonvar(Order, Element, Tail).
+		memberchk(Order, Element, Set).
 
-	member_nonvar(=, _, _).
-	member_nonvar(>, Element, [Head| Tail]) :-
+	memberchk(=, _, _).
+	memberchk(>, Element, [Head| Set]) :-
 		compare(Order, Element, Head),
-		member_nonvar(Order, Element, Tail).
-
-	memberchk(Element, Set) :-
-		member_nonvar(Element, Set),
-		!.
+		memberchk(Order, Element, Set).
 
 	new([]).
 
@@ -183,10 +173,14 @@
 	select(Head, [Head2| Tail], [Head2| Tail2]) :-
 		select(Head, Tail, Tail2).
 
-	selectchk(Elem, List, Remaining) :-
-		select(Elem, List, Rest),
-		!,
-		Remaining = Rest.
+	selectchk(Element, [Head| Set], Remaining) :-
+		compare(Order, Element, Head),
+		selectchk(Order, Element, Head, Set, Remaining).
+
+	selectchk(=, _, _, Remaining, Remaining).
+	selectchk(>, Element, Head, [Next| Set], [Head| Remaining]) :-
+		compare(Order, Element, Next),
+		selectchk(Order, Element, Next, Set, Remaining).
 
 	subset([], _) :- !.
 	subset([Head1| Tail1], [Head2| Tail2]) :-
