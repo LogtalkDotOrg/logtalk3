@@ -21357,6 +21357,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_unwrap_compiled_head'('$lgt_debug'(goal(_,THead), _), THead) :-
 	!.
 
+'$lgt_unwrap_compiled_head'(with_mutex(_, THead), THead) :-
+	!.
+
+'$lgt_unwrap_compiled_head'(once(THead), THead) :-
+	!.
+
 '$lgt_unwrap_compiled_head'(THead, THead).
 
 
