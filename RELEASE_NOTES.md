@@ -22,8 +22,14 @@ RELEASE NOTES
 =============
 
 
-3.93.0 - June ??, 2025
+3.93.0 - July ??, 2025
 ======================
+
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Support for declaring synchronized predicates in calls to the
+`create_object/4` and `create_category/4` built-in predicates.
 
 Library
 -------

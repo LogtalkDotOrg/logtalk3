@@ -21342,9 +21342,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % predicates for wrapping/unwrapping compiled predicate heads to deal with
-% compilation in debug mode
+% compilation in debug mode and compilation of synchronized predicates
 %
-% the wrapping when in compilation mode ensures that indirect predicate calls
+% the wrapping when in debug mode ensures that indirect predicate calls
 % (e.g., when sending a message) can also be intercepted by debug handlers
 
 '$lgt_wrap_compiled_head'(Head, THead, ExCtx, Call) :-
@@ -21356,6 +21356,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_unwrap_compiled_head'('$lgt_debug'(goal(_,THead), _), THead) :-
 	!.
+
+'$lgt_unwrap_compiled_head'(with_mutex(_, THead0), THead) :-
+	% synchronized predicate with backend supporting threads
+	!,
+	'$lgt_unwrap_compiled_head'(THead0, THead).
+
+'$lgt_unwrap_compiled_head'(once(THead0), THead) :-
+	% synchronized predicate with backend without threads support
+	!,
+	'$lgt_unwrap_compiled_head'(THead0, THead).
 
 '$lgt_unwrap_compiled_head'(THead, THead).
 
