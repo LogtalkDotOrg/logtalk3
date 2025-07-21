@@ -50,6 +50,11 @@ Tests
 * ADDED: Additional tests for the Prolog standard `atom_concat/3` built-in
 predicate from WG17 work.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* RENAMED: The `coding/codemirror` directory to `coding/codemirror5`.
+
 
 3.92.0 - May 28, 2025
 =====================
