@@ -55,6 +55,8 @@ IDEs, text editors, and syntax highlighters support
 
 * RENAMED: The `coding/codemirror` directory to `coding/codemirror5`.
 
+* ADDED: CodeMirror 6.x support (in the `coding/codemirror6` directory).
+
 
 3.92.0 - May 28, 2025
 =====================

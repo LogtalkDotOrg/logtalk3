@@ -22,7 +22,7 @@ CodeMirror is an embeddable code editor written in JavaScript available from:
 
 	https://codemirror.net/
 
-The files in this directory provide support for odeMirror 5.x.
+The files in this directory provide support for CodeMirror 5.x.
 
 In order to use CodeMirror for editing Logtalk source files, copy (or update
 if already present) the files `logtalk.js` and `index.html` to a `mode/logtalk`

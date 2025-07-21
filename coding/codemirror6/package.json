@@ -1,0 +1,30 @@
+{
+  "name": "codemirror6-logtalk",
+  "version": "1.0.0",
+  "description": "Logtalk language support for CodeMirror 6",
+  "type": "module",
+  "main": "logtalk.js",
+  "scripts": {
+    "test": "node -c logtalk.js"
+  },
+  "keywords": [
+    "codemirror",
+    "codemirror6",
+    "logtalk",
+    "syntax-highlighting",
+    "language-support"
+  ],
+  "author": "Paulo Moura",
+  "license": "MIT",
+  "peerDependencies": {
+    "@codemirror/language": "^6.0.0",
+    "@codemirror/view": "^6.0.0",
+    "@codemirror/state": "^6.0.0"
+  },
+  "devDependencies": {
+    "@codemirror/language": "^6.10.0",
+    "@codemirror/view": "^6.22.0",
+    "@codemirror/state": "^6.4.0",
+    "codemirror": "^6.0.1"
+  }
+}
