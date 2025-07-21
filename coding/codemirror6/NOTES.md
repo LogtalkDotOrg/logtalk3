@@ -124,7 +124,7 @@ import { logtalk } from "./logtalk.js";
 Examples
 --------
 
-See `example.html` for a complete working example that demonstrates the Logtalk language support in action.
+See `index.html` for a complete working example that demonstrates the Logtalk language support in action.
 
 Migration from CodeMirror 5
 ---------------------------

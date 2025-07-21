@@ -1,40 +1,31 @@
-<!doctype html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeMirror 6 Logtalk Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .editor {
+            border: 1px solid #ccc;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h1>CodeMirror 6 Logtalk Language Support</h1>
+    <p>This example demonstrates the updated Logtalk language support for CodeMirror 6.</p>
+    
+    <div id="editor" class="editor"></div>
 
-<title>CodeMirror: Logtalk mode</title>
-<meta charset="utf-8"/>
-<link rel=stylesheet href="../../doc/docs.css">
+    <script type="module">
+        import { EditorView, basicSetup } from "codemirror";
+        import { logtalk } from "./logtalk.js";
 
-<link rel="stylesheet" href="../../lib/codemirror.css">
-<link rel="stylesheet" href="../../addon/fold/foldgutter.css" />
-<link rel="stylesheet" href="../../addon/hint/show-hint.css" />
-<link rel="stylesheet" href="../../theme/ambiance.css">
-<script src="../../lib/codemirror.js"></script>
-<script src="../../addon/edit/matchbrackets.js"></script>
-<script src="../../addon/fold/foldcode.js"></script>
-<script src="../../addon/fold/foldgutter.js"></script>
-<script src="../../addon/fold/comment-fold.js"></script>
-<script src="../../addon/fold/indent-fold.js"></script>
-<script src="../../addon/hint/anyword-hint.js"></script>
-<script src="../../addon/hint/show-hint.js"></script>
-<script src="logtalk.js"></script>
-<style>.CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}</style>
-<div id=nav>
-  <a href="https://codemirror.net"><h1>CodeMirror</h1><img id=logo src="../../doc/logo.png"></a>
-
-  <ul>
-    <li><a href="../../index.html">Home</a>
-    <li><a href="../../doc/manual.html">Manual</a>
-    <li><a href="https://github.com/codemirror/codemirror">Code</a>
-  </ul>
-  <ul>
-    <li><a href="../index.html">Language modes</a>
-    <li><a class=active href="#">Logtalk</a>
-  </ul>
-</div>
-
-<article>
-<h2>Logtalk mode</h2>
-<form><textarea id="code" name="code">
+        const sampleCode = `
 :- encoding(Encoding).    % this is a single-line comment
 
 /*
@@ -508,24 +499,16 @@ comment
 :- reexport(library, [qux/4]).
 
 :- export(quux/5).
-</textarea></form>
+`;
 
-    <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-        lineNumbers: true,
-        matchBrackets: true,
-        extraKeys: {
-          "Tab":  "indentAuto",
-          "Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); },
-          "Ctrl-Y": cm => CodeMirror.commands.foldAll(cm),
-          "Ctrl-I": cm => CodeMirror.commands.unfoldAll(cm),
-          "Ctrl-Space": "autocomplete"
-        },
-        theme: "ambiance",
-        foldGutter: true,
-        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-      });
+        const view = new EditorView({
+            doc: sampleCode,
+            extensions: [
+                basicSetup,
+                logtalk
+            ],
+            parent: document.getElementById('editor')
+        });
     </script>
-
-    <p><strong>MIME types defined:</strong> <code>text/x-logtalk</code>.</p>
-  </article>
+</body>
+</html>
