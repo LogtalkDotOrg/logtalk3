@@ -70,12 +70,12 @@ const logtalkParser = {
     }
 
     // Entity opening directives
-    if (stream.match(/:-\s*(?:object|protocol|category|module)(?=\()/)) {
+    if (stream.match(/:-\s(?:object|protocol|category|module)(?=\()/)) {
       return "keyword";
     }
 
     // End entity directives
-    if (stream.match(/:-\s*end_(?:object|protocol|category)(?=\.)/)) {
+    if (stream.match(/:-\send_(?:object|protocol|category)(?=\.)/)) {
       return "keyword";
     }
 
@@ -85,13 +85,13 @@ const logtalkParser = {
     }
 
     // Other directives
-    if (stream.match(/:-\s*(?:else|endif|built_in|dynamic|synchronized|threaded)(?=\.)/)) {
+    if (stream.match(/:-\s(?:else|endif|built_in|dynamic|synchronized|threaded)(?=\.)/)) {
       return "keyword";
     }
-    if (stream.match(/:-\s*(?:calls|coinductive|elif|encoding|ensure_loaded|export|if|include|initialization|info|reexport|set_(?:logtalk|prolog)_flag|uses)(?=\()/)) {
+    if (stream.match(/:-\s(?:calls|coinductive|elif|encoding|ensure_loaded|export|if|include|initialization|info|reexport|set_(?:logtalk|prolog)_flag|uses)(?=\()/)) {
       return "keyword";
     }
-    if (stream.match(/:-\s*(?:alias|info|dynamic|discontiguous|meta_(?:non_terminal|predicate)|mode|multifile|public|protected|private|op|uses|use_module|synchronized)(?=\()/)) {
+    if (stream.match(/:-\s(?:alias|info|dynamic|discontiguous|meta_(?:non_terminal|predicate)|mode|multifile|public|protected|private|op|uses|use_module|synchronized)(?=\()/)) {
       return "keyword";
     }
 
