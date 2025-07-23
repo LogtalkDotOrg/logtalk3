@@ -325,7 +325,7 @@ const logtalkParser = {
     if (stream.match(/\b(?:0b[01]+|0o[0-7]+|0x[0-9a-fA-F]+)\b/)) {
       return "number";
     }
-    if (stream.match(/\b0'[\\]?.\b/)) {
+    if (stream.match(/(?<=^|\s)0'(?:\\.|.)/)) {
       return "number";
     }
     if (stream.match(/\b\d+\.?\d*(?:[eE][+-]?\d+)?\b/)) {
