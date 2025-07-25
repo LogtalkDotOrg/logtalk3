@@ -389,9 +389,76 @@ const logtalkParser = {
   languageData: {
     commentTokens: { line: "%", block: { open: "/*", close: "*/" } },
     closeBrackets: { brackets: ["(", "[", "{", "'", '"'] },
-    indentOnInput: /^\s*(?:\}|end_(?:object|protocol|category)\.)/
+    indentOnInput: /^\s*(?::-\s*(?:object|protocol|category|module)\(|:-\s*end_(?:object|protocol|category)\.|:-|\.)/,
+    indentService: (context, pos) => {
+      const line = context.state.doc.lineAt(pos);
+      const lineText = line.text;
+
+      // If this is the first line, no indentation
+      if (line.number === 1) {
+        return 0;
+      }
+
+      // Get the previous non-empty line
+      let prevLineNumber = line.number - 1;
+      let prevLine = null;
+      let prevLineText = '';
+
+      while (prevLineNumber >= 1) {
+        prevLine = context.state.doc.line(prevLineNumber);
+        prevLineText = prevLine.text.trim();
+        if (prevLineText) break;
+        prevLineNumber--;
+      }
+
+      // If no previous line found, return 0
+      if (!prevLineText || !prevLine) {
+        return 0;
+      }
+
+      // Calculate current indentation of previous line
+      const prevIndentMatch = prevLine.text.match(/^(\s*)/);
+      const prevIndent = prevIndentMatch ? prevIndentMatch[1].length : 0;
+      const indentSize = 4;
+
+      // Current line patterns (de-indent these)
+      if (/^\s*:-\s*end_(?:object|protocol|category)\./.test(lineText)) {
+        // De-indent entity closing directives
+        return Math.max(0, prevIndent - indentSize);
+      }
+
+      if (/^\s*\.(?:\s|$)/.test(lineText)) {
+        // De-indent lines that start with period (clause termination)
+        return Math.max(0, prevIndent - indentSize);
+      }
+
+      // Previous line patterns (indent after these)
+      // Indent after entity opening directives
+      if (/:-\s*(?:object|protocol|category|module)\s*\(/.test(prevLineText)) {
+        return prevIndent + indentSize;
+      }
+
+      // Indent after clause neck operator
+      if (/:-\s*$/.test(prevLineText) || /:-(?![^(]*\)).*[^.]$/.test(prevLineText)) {
+        return prevIndent + indentSize;
+      }
+
+      // Indent after opening parentheses, brackets, or braces at end of line
+      if (/[(\[{]\s*$/.test(prevLineText)) {
+        return prevIndent + indentSize;
+      }
+
+      // De-indent after closing parentheses, brackets, or braces at start of current line
+      if (/^\s*[)\]}]/.test(lineText)) {
+        return Math.max(0, prevIndent - indentSize);
+      }
+
+      // Default: maintain previous line's indentation
+      return prevIndent;
+    }
   }
 };
+
 // Create the language support
 export const logtalk = StreamLanguage.define(logtalkParser);
 
