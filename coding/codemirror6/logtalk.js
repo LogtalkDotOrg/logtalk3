@@ -373,7 +373,7 @@ const logtalkParser = {
 
     // Atoms (lowercase identifiers that aren't keywords or builtins)
     if (stream.match(/\b[a-z][A-Za-z0-9_]*\b/)) {
-      return "text";
+      return "";
     }
 
     // Skip whitespace
