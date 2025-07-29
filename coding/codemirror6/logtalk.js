@@ -389,7 +389,7 @@ const logtalkParser = {
   languageData: {
     commentTokens: { line: "%", block: { open: "/*", close: "*/" } },
     closeBrackets: { brackets: ["(", "[", "{", "'", '"'] },
-    indentOnInput: /^\s*(?::-\s*(?:object|protocol|category|module)\(|:-\s*end_(?:object|protocol|category)\.|:-|\.)/,
+    indentOnInput: /(?:^:-\s(?:object|protocol|category|module)\(.*$|^:-\send_(?:object|protocol|category)\.$|\s*.*\s:-$|.*\.$)/,
     indentService: (context, pos) => {
       const line = context.state.doc.lineAt(pos);
       const lineText = line.text;
@@ -422,7 +422,7 @@ const logtalkParser = {
       const indentSize = 4;
 
       // Current line patterns (de-indent these)
-      if (/^\s*:-\s*end_(?:object|protocol|category)\./.test(lineText)) {
+      if (/^:-\send_(?:object|protocol|category)\.$/.test(lineText)) {
         // De-indent entity closing directives
         return Math.max(0, prevIndent - indentSize);
       }
@@ -434,12 +434,12 @@ const logtalkParser = {
 
       // Previous line patterns (indent after these)
       // Indent after entity opening directives
-      if (/:-\s*(?:object|protocol|category|module)\s*\(/.test(prevLineText)) {
+      if (/^:-\s(?:object|protocol|category|module)\(.*$/.test(prevLineText)) {
         return prevIndent + indentSize;
       }
 
       // Indent after clause neck operator
-      if (/:-\s*$/.test(prevLineText) || /:-(?![^(]*\)).*[^.]$/.test(prevLineText)) {
+      if (/\s*.*\s:-$/.test(prevLineText) || /:-(?![^(]*\)).*[^.]$/.test(prevLineText)) {
         return prevIndent + indentSize;
       }
 

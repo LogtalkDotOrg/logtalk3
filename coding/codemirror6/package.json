@@ -5,7 +5,8 @@
   "type": "module",
   "main": "logtalk.js",
   "scripts": {
-    "test": "node -c logtalk.js"
+    "dev": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "codemirror",
@@ -16,15 +17,18 @@
   ],
   "author": "Paulo Moura",
   "license": "MIT",
-  "peerDependencies": {
+  "type": "commonjs",
+  "dependencies": {
+    "@codemirror/autocomplete": "^6.0.0",
+    "@codemirror/commands": "^6.0.0",
     "@codemirror/language": "^6.0.0",
+    "@codemirror/lint": "^6.0.0",
+    "@codemirror/search": "^6.0.0",
+    "@codemirror/state": "^6.0.0",
     "@codemirror/view": "^6.0.0",
-    "@codemirror/state": "^6.0.0"
+    "@fsegurai/codemirror-theme-bundle": "^6.2.0"
   },
   "devDependencies": {
-    "@codemirror/language": "^6.10.0",
-    "@codemirror/view": "^6.22.0",
-    "@codemirror/state": "^6.4.0",
-    "codemirror": "^6.0.1"
+    "vite": "^7.0.6"
   }
 }
