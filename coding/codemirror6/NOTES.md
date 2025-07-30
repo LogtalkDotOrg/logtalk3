@@ -29,13 +29,8 @@ if already present) the files `logtalk.js` and `index.html` to a `mode/logtalk`
 sub-directory of your CodeMirror installation directory. The `logtalk.js` file
 implements the mode while the `index.html` shows a usage example.
 
-The supporting files are work in progress, currently providing code folding,
-code completion (using words in the document), and syntax highlighting. The
-files were obtained by converting the Logtalk Ace mode using the `ace2cm`
-converter (and replacing `storage` by `meta` in the token types in the regular
-expressions):
-
-	https://github.com/espadrine/ace2cm
+The supporting files are work in progress, currently providing syntax
+highlighting.
 
 The `logtalk.js` and `index.html` files are licensed under the MIT license
 as other CodeMirror mode files.
@@ -47,14 +42,7 @@ Supported Language Features
 ---------------------------
 
 - Syntax highlighting for all Logtalk constructs
-- Comment toggling (line and block comments)
-- Automatic bracket closing
-- Proper indentation handling
-- Variable highlighting
-- Built-in predicate recognition
-- Operator highlighting
-- Number literal recognition (all formats)
-- String literal handling with escape sequences
+- Syntax highlighting for all standard Prolog constructs
 
 Basic Usage
 -----------
@@ -124,19 +112,12 @@ import { logtalk } from "./logtalk.js";
 Examples
 --------
 
-See `index.html` for a complete working example that demonstrates the Logtalk language support in action.
-
-Migration from CodeMirror 5
----------------------------
-
-If you were using the old CodeMirror 5 Logtalk mode:
-
-1. **Replace the import**: Change from `CodeMirror.defineMode()` to ES6 import
-2. **Update initialization**: Use `EditorView` instead of `CodeMirror()` constructor
-3. **Update configuration**: Use extensions array instead of options object
-4. **Update API calls**: Use CodeMirror 6 APIs for document manipulation
+See `index.html` for a complete working example that demonstrates the Logtalk
+language support in action.
 
 Browser Compatibility
 ---------------------
 
-This implementation works with all modern browsers that support ES6 modules. For older browser support, you'll need to use a bundler like Webpack, Rollup, or Vite.
+This implementation works with all modern browsers that support ES6 modules.
+For older browser support, you'll need to use a bundler like Webpack, Rollup,
+or Vite.
