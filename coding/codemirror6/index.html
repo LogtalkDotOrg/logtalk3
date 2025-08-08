@@ -43,7 +43,7 @@
             closeBracketsKeymap
         } from "@codemirror/autocomplete";
         import { lintKeymap } from "@codemirror/lint";
-        import { logtalkSupport, logtalkIndentService } from "./logtalk.js";
+        import { logtalkSupport } from "./logtalk.js";
         import { vsCodeLight } from "@fsegurai/codemirror-theme-vscode-light";
         const sampleCode = `
 :- encoding(Encoding).    % this is a single-line comment
@@ -551,12 +551,6 @@ comment
               // Highlight text that matches the selected text
               highlightSelectionMatches(),
               keymap.of([
-                {
-                  key: "Enter",
-                  run: logtalkIndentService
-                },
-                //
-                indentWithTab,
                 // Closed-brackets aware backspace
                 ...closeBracketsKeymap,
                 // A large set of basic bindings
@@ -572,9 +566,7 @@ comment
                 // Keys related to the linter system
                 ...lintKeymap
               ]),
-              indentUnit.of("\t"),
               logtalkSupport,
-//              customKeymap,
               vsCodeLight
             ]
           }),
