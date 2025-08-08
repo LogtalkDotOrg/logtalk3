@@ -43,6 +43,7 @@ Supported Language Features
 
 - Syntax highlighting for all Logtalk constructs
 - Syntax highlighting for all standard Prolog constructs
+- Automatic indentation
 
 Basic Usage
 -----------

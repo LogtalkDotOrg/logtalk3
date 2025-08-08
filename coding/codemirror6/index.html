@@ -22,28 +22,28 @@
     <div id="editor" class="editor"></div>
 
     <script type="module">
-		import { EditorState} from "@codemirror/state";
-		import {
-		  EditorView, keymap, highlightSpecialChars, drawSelection,
-		  highlightActiveLine, dropCursor, rectangularSelection,
-		  crosshairCursor, lineNumbers, highlightActiveLineGutter
-		} from "@codemirror/view";
-		import {
-		  defaultHighlightStyle, syntaxHighlighting, indentOnInput,
-		  bracketMatching, foldGutter, foldKeymap
-		} from "@codemirror/language";
-		import {
-		  defaultKeymap, history, historyKeymap
-		} from "@codemirror/commands";
-		import {
-		  searchKeymap, highlightSelectionMatches
-		} from "@codemirror/search";
-		import {
-		  autocompletion, completionKeymap, closeBrackets,
-		  closeBracketsKeymap
-		} from "@codemirror/autocomplete";
-		import { lintKeymap } from "@codemirror/lint";
-        import { logtalk } from "./logtalk.js";
+        import { EditorState} from "@codemirror/state";
+        import {
+            EditorView, keymap, highlightSpecialChars, drawSelection,
+            highlightActiveLine, dropCursor, rectangularSelection,
+            crosshairCursor, lineNumbers, highlightActiveLineGutter
+        } from "@codemirror/view";
+        import {
+            defaultHighlightStyle, syntaxHighlighting, indentUnit,
+            bracketMatching, foldGutter, foldKeymap
+        } from "@codemirror/language";
+        import {
+            defaultKeymap, history, historyKeymap, indentWithTab
+        } from "@codemirror/commands";
+        import {
+            searchKeymap, highlightSelectionMatches
+        } from "@codemirror/search";
+        import {
+            autocompletion, completionKeymap, closeBrackets,
+            closeBracketsKeymap
+        } from "@codemirror/autocomplete";
+        import { lintKeymap } from "@codemirror/lint";
+        import { logtalkSupport, logtalkIndentService } from "./logtalk.js";
         import { vsCodeLight } from "@fsegurai/codemirror-theme-vscode-light";
         const sampleCode = `
 :- encoding(Encoding).    % this is a single-line comment
@@ -454,21 +454,6 @@ comment
     number(C) --> "-", number(X), {C is -X}.
     number(X) --> [C], {0'0 =< C, C =< 0'9, X is C - 0'0}.
 
-    escape_sequences :-
-        write('Quoted atom with a quote ('') inside.'),
-        write('Quoted atom with a quote (\') inside using a control escape sequence.'),
-        write('Quoted atom with a backslash (\\) inside.'),
-        write('Quoted atom with control escape sequences: \a \b \r \f \t \n \v'),
-        write('Quoted atom with an octal escape sequence: \123\.'),
-        write('Quoted atom with an hexadecimal escape sequence: \x123f\.').
-
-    escape_sequences :-
-        write("Double-quoted term with a double-quote ("") inside."),
-        write("Double-quoted term with a double-quote (\") inside using a control escape sequence."),
-        write("Double-quoted term with a backslash (\\) inside."),
-        write("Double-quoted term with control escape sequences: \a \b \r \f \t \n \v"),
-        write("Double-quoted term with an octal escape sequence: \123\."),
-        write("Double-quoted term with an hexadecimal escape sequence: \x123f\.").
 
     % nothing in the following predicate definition should be highlighted
     sort :-
@@ -521,64 +506,80 @@ comment
 :- export(quux/5).
 `;
 
-		const view = new EditorView({
-		  doc: sampleCode,
-		  parent: document.body,
-		  extensions: [
-		    // A line number gutter
-		    lineNumbers(),
-		    // A gutter with code folding markers
-		    foldGutter(),
-		    // Replace non-printable characters with placeholders
-		    highlightSpecialChars(),
-		    // The undo history
-		    history(),
-		    // Replace native cursor/selection with our own
-		    drawSelection(),
-		    // Show a drop cursor when dragging over the editor
-		    dropCursor(),
-		    // Allow multiple cursors/selections
-		    EditorState.allowMultipleSelections.of(true),
-		    // Re-indent lines when typing specific input
-		    indentOnInput(),
-		    // Highlight syntax with a default style
-		    syntaxHighlighting(defaultHighlightStyle),
-		    // Highlight matching brackets near cursor
-		    bracketMatching(),
-		    // Automatically close brackets
-		    closeBrackets(),
-		    // Load the autocompletion system
-		    autocompletion(),
-		    // Allow alt-drag to select rectangular regions
-		    rectangularSelection(),
-		    // Change the cursor to a crosshair when holding alt
-		    crosshairCursor(),
-		    // Style the current line specially
-		    highlightActiveLine(),
-		    // Style the gutter for current line specially
-		    highlightActiveLineGutter(),
-		    // Highlight text that matches the selected text
-		    highlightSelectionMatches(),
-		    keymap.of([
-		      // Closed-brackets aware backspace
-		      ...closeBracketsKeymap,
-		      // A large set of basic bindings
-		      ...defaultKeymap,
-		      // Search-related keys
-		      ...searchKeymap,
-		      // Redo/undo keys
-		      ...historyKeymap,
-		      // Code folding bindings
-		      ...foldKeymap,
-		      // Autocompletion keys
-		      ...completionKeymap,
-		      // Keys related to the linter system
-		      ...lintKeymap
-		    ]),
-			logtalk,
-			vsCodeLight
-		  ]
-		});
+//        const customKeymap = keymap.of([
+//          {
+//            key: "Enter",
+//            run: logtalkIndentService
+//          },
+//          indentWithTab
+//        ]);
+
+        const editor = new EditorView({
+          state: EditorState.create({
+            doc: sampleCode,
+            extensions: [
+              // A line number gutter
+              lineNumbers(),
+              // A gutter with code folding markers
+              foldGutter(),
+              // Replace non-printable characters with placeholders
+              highlightSpecialChars(),
+              // The undo history
+              history(),
+              // Replace native cursor/selection with our own
+              drawSelection(),
+              // Show a drop cursor when dragging over the editor
+              dropCursor(),
+              // Allow multiple cursors/selections
+              EditorState.allowMultipleSelections.of(true),
+              // Highlight syntax with a default style
+              syntaxHighlighting(defaultHighlightStyle),
+              // Highlight matching brackets near cursor
+              bracketMatching(),
+              // Automatically close brackets
+              closeBrackets(),
+              // Load the autocompletion system
+              autocompletion(),
+              // Allow alt-drag to select rectangular regions
+              rectangularSelection(),
+              // Change the cursor to a crosshair when holding alt
+              crosshairCursor(),
+              // Style the current line specially
+              highlightActiveLine(),
+              // Style the gutter for current line specially
+              highlightActiveLineGutter(),
+              // Highlight text that matches the selected text
+              highlightSelectionMatches(),
+              keymap.of([
+                {
+                  key: "Enter",
+                  run: logtalkIndentService
+                },
+                //
+                indentWithTab,
+                // Closed-brackets aware backspace
+                ...closeBracketsKeymap,
+                // A large set of basic bindings
+                ...defaultKeymap,
+                // Search-related keys
+                ...searchKeymap,
+                // Redo/undo keys
+                ...historyKeymap,
+                // Code folding bindings
+                ...foldKeymap,
+                // Autocompletion keys
+                ...completionKeymap,
+                // Keys related to the linter system
+                ...lintKeymap
+              ]),
+              indentUnit.of("\t"),
+              logtalkSupport,
+//              customKeymap,
+              vsCodeLight
+            ]
+          }),
+          parent: document.getElementById('editor')
+        });
     </script>
 </body>
 </html>
