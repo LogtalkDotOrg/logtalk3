@@ -2,7 +2,7 @@
   "name": "codemirror6-logtalk",
   "version": "1.0.0",
   "description": "Logtalk language support for CodeMirror 6",
-  "type": "module",
+  "type": "commonjs",
   "main": "logtalk.js",
   "scripts": {
     "dev": "vite",
@@ -17,7 +17,6 @@
   ],
   "author": "Paulo Moura",
   "license": "MIT",
-  "type": "commonjs",
   "dependencies": {
     "@codemirror/autocomplete": "^6.0.0",
     "@codemirror/commands": "^6.0.0",
