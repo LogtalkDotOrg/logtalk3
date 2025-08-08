@@ -22,28 +22,34 @@ CodeMirror is an embeddable code editor written in JavaScript available from:
 
 	https://codemirror.net/
 
-The files in this directory provide support for CodeMirror 6.x.
+The files in this directory provide comprehensive support for CodeMirror 6.x using a
+Lezer-based parser for enhanced syntax highlighting and automatic indentation.
 
 In order to use CodeMirror for editing Logtalk source files, copy (or update
-if already present) the files `logtalk.js` and `index.html` to a `mode/logtalk`
-sub-directory of your CodeMirror installation directory. The `logtalk.js` file
-implements the mode while the `index.html` shows a usage example.
+if already present) the files `logtalk.js`, `src/logtalk-lezer.js`, `src/parser.js`,
+`src/logtalk.grammar`, and `index.html` to your project directory. The `logtalk.js`
+file exports the language support while the `index.html` shows a comprehensive usage example.
 
-The supporting files are work in progress, currently providing syntax
-highlighting.
+The implementation uses a Lezer parser generated from a complete Logtalk grammar,
+providing accurate syntax highlighting and context-aware automatic indentation.
 
-The `logtalk.js` and `index.html` files are licensed under the MIT license
+The `logtalk.js` and related files are licensed under the MIT license
 as other CodeMirror mode files.
-
-Supported themes must define CSS styles for `meta` and `variable`. Examples
-are `ambiance`, `blackboard`, `erlang-dark`, `lesser-dark`, and `mdn-like`.
 
 Supported Language Features
 ---------------------------
 
-- Syntax highlighting for all Logtalk constructs
-- Syntax highlighting for all standard Prolog constructs
-- Automatic indentation
+- **Complete syntax highlighting** for all Logtalk constructs using Lezer parser
+- **Context-aware automatic indentation** with proper handling of:
+  - Entity definitions (objects, protocols, categories, modules)
+  - Clause definitions and bodies
+  - Nested constructs (compound terms, lists, control structures)
+  - Directives and entity relations
+- **Syntax highlighting** for all standard Prolog constructs
+- **Code folding** support for entities and complex structures
+- **Bracket matching** and auto-closing
+- **Error-tolerant parsing** that continues highlighting even with syntax errors
+- **Performance optimized** incremental parsing for large files
 
 Basic Usage
 -----------
@@ -89,32 +95,63 @@ const view = new EditorView({
 Dependencies
 ------------
 
-- `@codemirror/language` - For the StreamLanguage interface
-- `@codemirror/view` - For the editor view (if using the basic example)
+- `@codemirror/language` - For LRLanguage and indentation support
+- `@codemirror/view` - For the editor view
 - `@codemirror/state` - For editor state management
+- `@lezer/highlight` - For syntax highlighting with style tags
+- `@lezer/lr` - For the Lezer parser runtime
+- `@lezer/generator` - For building the parser from grammar (dev dependency)
 
 Installation
 ------------
 
-1. Install CodeMirror 6 packages:
+1. Install CodeMirror 6 packages and Lezer dependencies:
 
 ```bash
-npm install @codemirror/language @codemirror/view @codemirror/state
+npm install @codemirror/language @codemirror/view @codemirror/state @lezer/highlight
+npm install --save-dev @lezer/generator
 ```
 
-2. Import the Logtalk language support:
+2. Build the Lezer parser (if modifying the grammar):
+
+```bash
+npm run build-parser
+```
+
+3. Import the Logtalk language support:
 
 ```javascript
 import { logtalk } from "./logtalk.js";
 ```
 
-3. Add it to your editor configuration as shown in the usage examples above.
+4. Add it to your editor configuration as shown in the usage examples above.
+
+Implementation Details
+---------------------
+
+This implementation uses a **Lezer parser** generated from a comprehensive Logtalk
+grammar (`src/logtalk.grammar`). The Lezer parser provides several advantages over
+the previous stream-based parser:
+
+- **Accurate parsing**: Full syntax tree construction enables precise syntax highlighting
+- **Context awareness**: Indentation and highlighting based on syntactic context
+- **Error recovery**: Continues parsing and highlighting even with syntax errors
+- **Performance**: Incremental parsing for efficient updates in large files
+- **Extensibility**: Easy to extend with new language features
+
+The parser recognizes all major Logtalk constructs including:
+- Entity definitions (objects, protocols, categories, modules)
+- Directives and entity relations
+- Clause definitions with heads and bodies
+- All operators and built-in predicates
+- Comments, strings, numbers, and variables
+- Control structures and message passing
 
 Examples
 --------
 
 See `index.html` for a complete working example that demonstrates the Logtalk
-language support in action.
+language support in action with comprehensive test cases.
 
 Browser Compatibility
 ---------------------

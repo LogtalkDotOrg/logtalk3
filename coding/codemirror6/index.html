@@ -17,7 +17,8 @@
 </head>
 <body>
     <h1>CodeMirror 6 Logtalk Language Support</h1>
-    <p>This example demonstrates the updated Logtalk language support for CodeMirror 6.</p>
+    <p>This example demonstrates the Lezer-based Logtalk language support for CodeMirror 6,
+       featuring enhanced syntax highlighting and context-aware automatic indentation.</p>
     
     <div id="editor" class="editor"></div>
 
@@ -551,10 +552,6 @@ comment
               // Highlight text that matches the selected text
               highlightSelectionMatches(),
               keymap.of([
-                {
-                  key: "Enter",
-                  run: logtalkIndentService
-                },
                 //
                 indentWithTab,
                 // Closed-brackets aware backspace
@@ -574,7 +571,6 @@ comment
               ]),
               indentUnit.of("\t"),
               logtalkSupport,
-//              customKeymap,
               githubDark
             ]
           }),

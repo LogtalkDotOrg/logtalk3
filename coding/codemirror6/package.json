@@ -2,10 +2,12 @@
   "name": "codemirror6-logtalk",
   "version": "1.0.0",
   "description": "Logtalk language support for CodeMirror 6",
-  "type": "commonjs",
+  "type": "module",
   "main": "logtalk.js",
   "scripts": {
-    "dev": "vite",
+    "build-parser": "lezer-generator src/logtalk.grammar -o src/parser.js",
+    "dev": "npm run build-parser && vite",
+    "build": "npm run build-parser",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -28,6 +30,7 @@
     "@fsegurai/codemirror-theme-bundle": "^6.2.0"
   },
   "devDependencies": {
+    "@lezer/generator": "^1.8.0",
     "vite": "^7.0.6"
   }
 }

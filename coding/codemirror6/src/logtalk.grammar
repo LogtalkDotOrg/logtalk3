@@ -1,0 +1,308 @@
+@precedence {
+  messageSending @left,
+  moduleQualification @left,
+  directive @cut
+}
+
+@top Program { item* }
+
+item {
+  Directive |
+  Clause |
+  EntityDefinition
+}
+
+// Entity definitions
+EntityDefinition {
+  EntityOpening | EntityClosing
+}
+
+EntityOpening {
+  ":-" EntityType "(" EntitySpec ")" "."
+}
+
+EntityType {
+  @specialize<identifier, "object"> |
+  @specialize<identifier, "protocol"> |
+  @specialize<identifier, "category"> |
+  @specialize<identifier, "module">
+}
+
+EntitySpec {
+  identifier ("(" ParameterList ")")? EntityRelations?
+}
+
+EntityRelations {
+  "," EntityRelation ("," EntityRelation)*
+}
+
+EntityRelation {
+  RelationType "(" RelationTarget ")"
+}
+
+RelationType {
+  @specialize<identifier, "implements"> |
+  @specialize<identifier, "imports"> |
+  @specialize<identifier, "extends"> |
+  @specialize<identifier, "instantiates"> |
+  @specialize<identifier, "specializes"> |
+  @specialize<identifier, "complements">
+}
+
+RelationTarget {
+  ScopeOperator? identifier ("(" ParameterList ")")?
+}
+
+ScopeOperator {
+  @specialize<identifier, "public"> "::" |
+  @specialize<identifier, "protected"> "::" |
+  @specialize<identifier, "private"> "::"
+}
+
+EntityClosing {
+  ":-" EndEntityType "."
+}
+
+EndEntityType {
+  @specialize<identifier, "end_object"> |
+  @specialize<identifier, "end_protocol"> |
+  @specialize<identifier, "end_category">
+}
+
+// Directives
+Directive {
+  ":-" DirectiveBody "."
+}
+
+DirectiveBody {
+  DirectiveName |
+  DirectiveName "(" ArgumentList ")"
+}
+
+DirectiveName {
+  // Entity directives
+  @specialize<identifier, "built_in"> |
+  @specialize<identifier, "dynamic"> |
+  @specialize<identifier, "synchronized"> |
+  @specialize<identifier, "threaded"> |
+  @specialize<identifier, "public"> |
+  @specialize<identifier, "protected"> |
+  @specialize<identifier, "private"> |
+  @specialize<identifier, "meta_predicate"> |
+  @specialize<identifier, "meta_non_terminal"> |
+  @specialize<identifier, "mode"> |
+  @specialize<identifier, "info"> |
+  @specialize<identifier, "multifile"> |
+  @specialize<identifier, "discontiguous"> |
+  @specialize<identifier, "op"> |
+  @specialize<identifier, "uses"> |
+  @specialize<identifier, "use_module"> |
+  @specialize<identifier, "alias"> |
+  @specialize<identifier, "coinductive"> |
+  @specialize<identifier, "export"> |
+  @specialize<identifier, "reexport"> |
+  // Compilation directives
+  @specialize<identifier, "if"> |
+  @specialize<identifier, "elif"> |
+  @specialize<identifier, "else"> |
+  @specialize<identifier, "endif"> |
+  @specialize<identifier, "encoding"> |
+  @specialize<identifier, "ensure_loaded"> |
+  @specialize<identifier, "include"> |
+  @specialize<identifier, "initialization"> |
+  @specialize<identifier, "set_logtalk_flag"> |
+  @specialize<identifier, "set_prolog_flag"> |
+  @specialize<identifier, "calls"> |
+  identifier
+}
+
+
+
+// Clauses
+Clause {
+  ClauseHead ClauseBody? "."
+}
+
+ClauseHead {
+  Term
+}
+
+ClauseBody {
+  ":-" Goals
+}
+
+Goals {
+  Goal ("," Goal)*
+}
+
+Goal {
+  Term |
+  Cut |
+  ControlConstruct
+}
+
+Cut {
+  cut
+}
+
+ControlConstruct {
+  IfThenElse |
+  Negation |
+  ExternalCall
+}
+
+IfThenElse {
+  "(" Goal "->" Goal (";" Goal)? ")"
+}
+
+Negation {
+  "\\+" Goal
+}
+
+ExternalCall {
+  "{" Goals "}"
+}
+
+// Terms
+Term {
+  Atom |
+  Number |
+  Variable |
+  String |
+  QuotedAtom |
+  CompoundTerm |
+  List |
+  MessageSending |
+  ModuleQualification
+}
+
+
+
+Atom {
+  identifier
+}
+
+MessageSending {
+  Term !messageSending "::" Term |
+  "::" Term |
+  "^^" Term
+}
+
+ModuleQualification {
+  identifier !moduleQualification ":" Term
+}
+
+CompoundTerm {
+  Functor "(" ArgumentList ")"
+}
+
+Functor {
+  identifier |
+  Operator
+}
+
+ArgumentList {
+  Term ("," Term)*
+}
+
+List {
+  "[" ListElements? "]"
+}
+
+ListElements {
+  Term ("," Term)* ("|" Term)?
+}
+
+ParameterList {
+  Parameter ("," Parameter)*
+}
+
+Parameter {
+  Term
+}
+
+// Operators
+Operator {
+  // Arithmetic operators
+  "+" | "-" | "*" | "/" | "//" | "**" |
+  @specialize<identifier, "mod"> | @specialize<identifier, "rem"> | @specialize<identifier, "div"> |
+  // Comparison operators
+  "=" | "\\=" | "==" | "\\==" | "@<" | "@=<" | "@>" | "@>=" |
+  "=:=" | "=\\=" | "<" | "=<" | ">" | ">=" |
+  // Bitwise operators
+  "<<" | ">>" | "/\\" | "\\/" | "\\" |
+  // Unification and control
+  @specialize<identifier, "is"> | @specialize<identifier, "as"> |
+  // Message sending
+  "::" | ":" |
+  // DCG
+  "-->" |
+  // Other
+  "^" | ".."
+}
+
+// Atoms, variables, numbers, strings
+@tokens {
+  // Comments
+  LineComment { "%" ![\n]* }
+  BlockComment { "/*" blockCommentRest }
+  blockCommentRest { ![*] blockCommentRest | "*" blockCommentAfterStar }
+  blockCommentAfterStar { "/" | "*" blockCommentAfterStar | ![/*] blockCommentRest }
+
+  // Strings and quoted atoms
+  String { '"' stringChar* '"' }
+  stringChar { !["\\] | "\\" _ }
+
+  QuotedAtom { "'" atomChar* "'" }
+  atomChar { !['] | "\\" _ }
+
+  // Numbers
+  Number {
+    // Binary numbers
+    "0b" binaryDigit binaryDigit* |
+    // Octal numbers
+    "0o" octalDigit octalDigit* |
+    // Hex numbers
+    "0x" hexDigit hexDigit* |
+    // Character codes
+    "0'" (_ | "\\" _) |
+    // Decimal numbers
+    @digit @digit* ("." @digit @digit*)? (("e" | "E") ("+" | "-")? @digit @digit*)?
+  }
+
+  binaryDigit { "0" | "1" }
+  octalDigit { "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" }
+  hexDigit { @digit | "a" | "b" | "c" | "d" | "e" | "f" | "A" | "B" | "C" | "D" | "E" | "F" }
+
+  // Variables (start with uppercase or underscore)
+  Variable { upperOrUnderscore identifierChar* }
+
+  // Identifiers (atoms)
+  identifier { lowerLetter identifierChar* }
+
+  upperOrUnderscore { @asciiUppercase | "_" }
+  lowerLetter { @asciiLowercase }
+  identifierChar { @asciiLetter | @digit | "_" }
+
+  // Whitespace
+  whitespace { @whitespace @whitespace* }
+
+  // Cut operator with a safe token name
+  cut { "!" }
+
+
+
+  @precedence { BlockComment, LineComment }
+  
+  // Operators and punctuation
+  ":-" "." "," ";" "(" ")" "[" "]" "{" "}" "|"
+  "+" "-" "*" "/" "//" "**"
+  "=" "\\=" "==" "\\==" "@<" "@=<" "@>" "@>="
+  "=:=" "=\\=" "<" "=<" ">" ">="
+  "<<" ">>" "/\\" "\\/" "\\"
+  "::" ":" "-->" "^" ".." "\\+"
+}
+
+@skip { whitespace | LineComment | BlockComment }
+
+@detectDelim
