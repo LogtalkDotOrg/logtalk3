@@ -30,7 +30,7 @@
         } from "@codemirror/view";
         import {
             defaultHighlightStyle, syntaxHighlighting, indentUnit,
-            bracketMatching, foldGutter, foldKeymap
+            bracketMatching, foldGutter, foldKeymap, codeFolding
         } from "@codemirror/language";
         import {
             defaultKeymap, history, historyKeymap, indentWithTab
@@ -522,6 +522,8 @@ comment
               lineNumbers(),
               // A gutter with code folding markers
               foldGutter(),
+              // Enable code folding
+              codeFolding(),
               // Replace non-printable characters with placeholders
               highlightSpecialChars(),
               // The undo history

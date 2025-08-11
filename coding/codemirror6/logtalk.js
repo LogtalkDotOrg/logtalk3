@@ -5,7 +5,7 @@
 // Parts from Ace; see <https://raw.githubusercontent.com/ajaxorg/ace/master/LICENSE>
 // Author: Paulo Moura
 
-import { StreamLanguage, indentOnInput, indentUnit } from "@codemirror/language"
+import { StreamLanguage, indentOnInput, indentUnit, foldService } from "@codemirror/language"
 import { indentWithTab } from '@codemirror/commands';
 import { keymap } from '@codemirror/view';
 import { Prec } from '@codemirror/state';
@@ -475,11 +475,215 @@ function logtalkEnterHandler(view) {
   return true;
 }
 
+// Logtalk code folding service
+function logtalkFoldService(state, lineStart, lineEnd) {
+  const doc = state.doc;
+  const line = doc.lineAt(lineStart);
+  const lineText = line.text.trim();
+
+  // 1. Objects, protocols, categories - fold from opening to closing directive
+  const entityOpenMatch = lineText.match(/^:-\s+(object|protocol|category|module)\s*\(/);
+  if (entityOpenMatch) {
+    const entityType = entityOpenMatch[1];
+
+    // For modules, fold from opening directive to end of file
+    if (entityType === 'module') {
+      // Only fold if there's content after the module directive
+      if (doc.lines > line.number) {
+        return { from: lineEnd, to: doc.length };
+      }
+      return null;
+    }
+
+    // For objects, protocols, categories - find the matching end directive
+    const endPattern = new RegExp(`^:-\\s+end_${entityType}\\s*\\.\\s*$`);
+    for (let i = line.number + 1; i <= doc.lines; i++) {
+      const nextLine = doc.line(i);
+      const nextText = nextLine.text.trim();
+
+      if (endPattern.test(nextText)) {
+        // Only fold if it spans multiple lines
+        if (i > line.number + 1) {
+          return { from: lineEnd, to: nextLine.from };
+        }
+        return null;
+      }
+    }
+  }
+
+  // 2. Directives - fold from directive start to ending period
+  const directiveMatch = lineText.match(/^:-\s+(?!end_object|end_protocol|end_category|endif|if|elif|else)([a-z_][a-z0-9_]*)\s*\(/);
+  if (directiveMatch) {
+    // Find the end of this directive (the period that closes it)
+    let parenCount = 0;
+    let inString = false;
+    let stringChar = null;
+    let pos = line.from;
+    let endLine = line.number;
+
+    // Start from the opening parenthesis
+    const openParenPos = line.text.indexOf('(', line.text.indexOf(':-'));
+    if (openParenPos !== -1) {
+      pos = line.from + openParenPos;
+      parenCount = 1;
+
+      // Scan forward to find the matching closing parenthesis and period
+      for (let i = pos + 1; i < doc.length; i++) {
+        const char = doc.sliceString(i, i + 1);
+
+        // Track which line we're on
+        if (char === '\n') {
+          endLine++;
+        }
+
+        if (inString) {
+          if (char === stringChar && doc.sliceString(i - 1, i) !== '\\') {
+            inString = false;
+            stringChar = null;
+          }
+        } else {
+          if (char === '"' || char === "'") {
+            inString = true;
+            stringChar = char;
+          } else if (char === '(') {
+            parenCount++;
+          } else if (char === ')') {
+            parenCount--;
+            if (parenCount === 0) {
+              // Found the closing parenthesis, now look for the period
+              for (let j = i + 1; j < doc.length; j++) {
+                const nextChar = doc.sliceString(j, j + 1);
+                if (nextChar === '.') {
+                  // Only fold if it spans multiple lines
+                  if (endLine > line.number) {
+                    return { from: lineEnd, to: j };
+                  }
+                  return null;
+                } else if (!/\s/.test(nextChar)) {
+                  break; // Non-whitespace character found, not a simple directive
+                }
+              }
+              break;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 3. Clauses - fold from neck operator to ending period
+  const clauseMatch = lineText.match(/^([^:]*?):-(?!\s+(object|protocol|category|module|end_|else|endif|built_in|dynamic|synchronized|threaded|calls|coinductive|elif|encoding|ensure_loaded|export|if|include|initialization|info|reexport|set_|uses|alias|discontiguous|meta_|mode|multifile|public|protected|private|op|use_module))/);
+  if (clauseMatch) {
+    // This is a clause (rule), find the ending period
+    let pos = line.from + line.text.indexOf(':-') + 2;
+    let inString = false;
+    let stringChar = null;
+    let parenCount = 0;
+    let endLine = line.number;
+
+    // Scan forward to find the period that ends this clause
+    for (let i = pos; i < doc.length; i++) {
+      const char = doc.sliceString(i, i + 1);
+
+      // Track which line we're on
+      if (char === '\n') {
+        endLine++;
+      }
+
+      if (inString) {
+        if (char === stringChar && doc.sliceString(i - 1, i) !== '\\') {
+          inString = false;
+          stringChar = null;
+        }
+      } else {
+        if (char === '"' || char === "'") {
+          inString = true;
+          stringChar = char;
+        } else if (char === '(' || char === '[' || char === '{') {
+          parenCount++;
+        } else if (char === ')' || char === ']' || char === '}') {
+          parenCount--;
+        } else if (char === '.' && parenCount === 0) {
+          // Check if this period is at the end of a line or followed by whitespace/comment
+          const nextChar = i + 1 < doc.length ? doc.sliceString(i + 1, i + 2) : '';
+          if (nextChar === '' || /\s/.test(nextChar) || nextChar === '%') {
+            // Only fold if it spans multiple lines
+            if (endLine > line.number) {
+              return { from: lineEnd, to: i };
+            }
+            return null;
+          }
+        }
+      }
+    }
+  }
+
+  // 4. Conditional compilation directives - if, elif, else
+  const conditionalMatch = lineText.match(/^:-\s+(if|elif|else)(?:\(|\.)/);
+  if (conditionalMatch) {
+    const directiveType = conditionalMatch[1];
+
+    if (directiveType === 'if') {
+      // For 'if', find the corresponding 'endif' with proper nesting
+      let nestingLevel = 1; // Start with 1 for the current 'if'
+
+      for (let i = line.number + 1; i <= doc.lines; i++) {
+        const nextLine = doc.line(i);
+        const nextText = nextLine.text.trim();
+
+        // Check for nested 'if' directives
+        if (/^:-\s+if(?:\(|\.)/.test(nextText)) {
+          nestingLevel++;
+        }
+        // Check for 'endif' directives
+        else if (/^:-\s+endif(?:\(|\.)/.test(nextText)) {
+          nestingLevel--;
+          if (nestingLevel === 0) {
+            // Found the matching 'endif'
+            if (i > line.number) {
+              return { from: lineEnd, to: nextLine.from };
+            }
+            return null;
+          }
+        }
+      }
+
+      // If no matching 'endif' found, fold to end of document
+      if (doc.lines > line.number) {
+        return { from: lineEnd, to: doc.length };
+      }
+    } else {
+      // For 'elif' and 'else', find the next conditional directive or endif
+      for (let i = line.number + 1; i <= doc.lines; i++) {
+        const nextLine = doc.line(i);
+        const nextText = nextLine.text.trim();
+
+        // Look for next conditional compilation directive or endif
+        if (/^:-\s+(elif|else|endif)(?:\(|\.)/.test(nextText)) {
+          // For conditional compilation, fold even single lines (logical blocks)
+          if (i > line.number) {
+            return { from: lineEnd, to: nextLine.from };
+          }
+          return null;
+        }
+      }
+
+      // If no closing directive found, fold to end of document
+      if (doc.lines > line.number) {
+        return { from: lineEnd, to: doc.length };
+      }
+    }
+  }
+
+  return null;
+}
+
 // Export complete language support bundle
 export const logtalkSupport = [
   logtalk,
   indentUnit.of('\t'),
   indentOnInput(),
+  foldService.of(logtalkFoldService),
   Prec.high(keymap.of([
     { key: "Enter", run: logtalkEnterHandler },
     indentWithTab
