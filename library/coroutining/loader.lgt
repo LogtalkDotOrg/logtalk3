@@ -45,6 +45,6 @@
 
 :- else.
 
-	:- initialization((write('(not available for the used backend Prolog compiler)'), nl)).
+	:- initialization((write('(Coroutining library not available for your backend Prolog compiler)'), nl)).
 
 :- endif.

@@ -38,6 +38,8 @@ Library
 `selectchk/3`. Also improved the documentation of the library and fixed the
 `mode/2` directives of several of its predicates.
 
+* IMPROVED: Warning messages when a library is not supported by a backend.
+
 Tools
 -----
 

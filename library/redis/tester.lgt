@@ -25,9 +25,7 @@
 	Dialect \== sicstus, Dialect \== swi, Dialect \== xsb
 )).
 
-	:- initialization((
-		write('(not applicable)'), nl
-	)).
+	:- initialization((write('(Redis client library not available for your backend Prolog compiler)'), nl)).
 
 :- else.
 

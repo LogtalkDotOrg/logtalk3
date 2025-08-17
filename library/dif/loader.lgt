@@ -43,6 +43,6 @@
 
 :- else.
 
-	:- initialization((write('(not available for the used backend Prolog compiler)'), nl)).
+	:- initialization((write('(Dif library not available for your backend Prolog compiler)'), nl)).
 
 :- endif.

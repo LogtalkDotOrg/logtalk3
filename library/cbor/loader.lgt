@@ -28,6 +28,6 @@
 
 :- else.
 
-	:- initialization((write('(this library requires support for unbounded integer arithmetic)'), nl)).
+	:- initialization((write('(CBOR library not available for your backend Prolog compiler)'), nl)).
 
 :- endif.

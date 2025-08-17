@@ -50,6 +50,6 @@
 
 :- else.
 
-	:- initialization((write('(not applicable)'), nl)).
+	:- initialization((write('(Coroutining library not available for your backend Prolog compiler)'), nl)).
 
 :- endif.
