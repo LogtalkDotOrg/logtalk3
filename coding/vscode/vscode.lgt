@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:65:0,
+		version is 0:66:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-04-07,
+		date is 2025-08-18,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -400,7 +400,8 @@
 
 	find_declaration_(Alias::Name/Arity, Entity, _, File, Line) :-
 		callable(Alias),
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		(	entity_property(Entity, _, alias(Alias, Properties)),
 			\+ member(predicate, Properties),
 			member(for(Object), Properties) ->
@@ -415,7 +416,8 @@
 	% non-terminal
 	find_declaration_(Object::Name/Arity, Entity, CallerLine, File, Line) :-
 		callable(Object),
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		ExtArity is Arity + 2,
 		entity_property(Entity, _, calls(Object::Name/ExtArity, Properties)),
 		memberchk(lines(Start, End), Properties),
@@ -425,7 +427,8 @@
 	% multifile predicate
 	find_declaration_(Other::Name/Arity, Entity, _, File, Line) :-
 		callable(Other),
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		entity_property(Entity, _, provides(Name/Arity, Other, _)),
 		entity_property(Other, Kind, declares(Name/Arity, Line, Properties)),
 		entity_property(Other, Kind, file(File)),
@@ -434,7 +437,8 @@
 	% multifile non-terminal
 	find_declaration_(Other::Name/Arity, Entity, _, File, Line) :-
 		callable(Other),
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		ExtArity is Arity + 2,
 		entity_property(Entity, _, provides(Name/ExtArity, Other, _)),
 		entity_property(Other, Kind, declares(Name/ExtArity, Properties)),
@@ -464,14 +468,16 @@
 
 	% locally declared
 	find_declaration_(Name/Arity, Entity, _, File, Line) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		entity_property(Entity, Kind, declares(Name/Arity, Properties)),
 		entity_property(Entity, Kind, file(File)),
 		memberchk(line_count(Line), Properties).
 
 	% non-local declaration
 	find_declaration_(Name/Arity, Entity, _, File, Line) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		functor(Template, Name, Arity),
 		(	current_object(Entity) ->
 			Entity \== user,
@@ -503,7 +509,8 @@
 
 	% predicate listed in a uses/2 directive
 	find_declaration_(Name/Arity, Entity, CallerLine, File, Line) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		entity_property(Entity, _, calls(Object::Name/Arity, Properties)),
 		callable(Object),
 		memberchk(lines(Start, End), Properties),
@@ -511,7 +518,8 @@
 		find_declaration_(Object::Name/Arity, Entity, CallerLine, File, Line).
 	% predicate alias listed in a uses/2 directive
 	find_declaration_(Name/Arity, Entity, CallerLine, File, Line) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
 		memberchk(alias(Name/Arity), Properties),
 		memberchk(lines(Start, End), Properties),
@@ -520,7 +528,8 @@
 
 	% predicate listed in an alias/2 directive
 	find_declaration_(Name/Arity, Entity, CallerLine, File, Line) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		entity_property(Entity, _, alias(_/Arity, Properties)),
 		memberchk(for(Name/Arity), Properties),
 		memberchk(lines(Start, End), Properties),
@@ -529,7 +538,8 @@
 		find_declaration_(Entity::Name/Arity, Entity, CallerLine, File, Line).
 	% predicate alias listed in an alias/2 directive
 	find_declaration_(Name/Arity, Entity, CallerLine, File, Line) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		entity_property(Entity, _, alias(Name/Arity, Properties)),
 		memberchk(lines(Start, End), Properties),
 		Start =< CallerLine, CallerLine =< End,
@@ -559,7 +569,8 @@
 
 	find_definition_(Alias::Name/Arity, Entity, _, File, Line) :-
 		callable(Alias),
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		(	entity_property(Entity, _, alias(Alias, AliasProperties)),
 			\+ member(predicate, AliasProperties),
 			member(for(Object), AliasProperties) ->
@@ -589,7 +600,8 @@
 	find_definition_(Object::Name/Arity, Entity, CallLine, File, Line) :-
 		% non-terminal
 		callable(Object),
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		ExtArity is Arity + 2,
 		entity_property(Entity, _, calls(Object::Name/ExtArity, Properties)),
 		memberchk(lines(Start, End), Properties),
@@ -597,7 +609,8 @@
 		find_definition_(Object::Name/ExtArity, Entity, CallLine, File, Line).
 
 	find_definition_(::Name/Arity, This, _, File, Line) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		functor(Template, Name, Arity),
 		(	% definition
 			(	current_object(This) ->
@@ -629,7 +642,8 @@
 
 	find_definition_(::Name/Arity, Entity, CallLine, File, Line) :-
 		% non-terminal
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		ExtArity is Arity + 2,
 		entity_property(Entity, _, calls(::Name/ExtArity, Properties)),
 		memberchk(lines(Start, End), Properties),
@@ -637,7 +651,8 @@
 		find_definition_(::Name/ExtArity, Entity, CallLine, File, Line).
 
 	find_definition_(^^Name/Arity, This, _, File, Line) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		functor(Template, Name, Arity),
 		(	current_object(This) ->
 			(	\+ instantiates_class(This, _),
@@ -668,7 +683,8 @@
 
 	find_definition_(^^Name/Arity, Entity, CallLine, File, Line) :-
 		% non-terminal
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		ExtArity is Arity + 2,
 		entity_property(Entity, _, calls(^^Name/ExtArity, Properties)),
 		memberchk(lines(Start, End), Properties),
@@ -676,7 +692,8 @@
 		find_definition_(^^Name/ExtArity, Entity, CallLine, File, Line).
 
 	find_definition_(Name/Arity, This, _, File, Line) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		functor(Template, Name, Arity),
 		(	current_object(This) ->
 			(	\+ instantiates_class(This, _),
@@ -695,7 +712,8 @@
 
 	% local predicate
 	find_definition_(Name/Arity, Entity, _CallerLine, File, Line) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		(	% definition
 			entity_property(Entity, _, defines(Name/Arity, Properties)) ->
 			entity_property(Entity, _, file(File)),
@@ -713,7 +731,8 @@
 
 	% predicate listed in a uses/2 directive
 	find_definition_(Name/Arity, Entity, CallerLine, File, Line) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		entity_property(Entity, _, calls(Object::Name/Arity, Properties)),
 		callable(Object),
 		memberchk(lines(Start, End), Properties),
@@ -721,7 +740,8 @@
 		find_definition_(Object::Name/Arity, Entity, CallerLine, File, Line).
 	% predicate alias listed in a uses/2 directive
 	find_definition_(Name/Arity, Entity, CallerLine, File, Line) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
 		memberchk(alias(Name/Arity), Properties),
 		memberchk(lines(Start, End), Properties),
@@ -730,7 +750,8 @@
 
 	% predicate listed in an alias/2 directive
 	find_definition_(Name/Arity, Entity, CallerLine, File, Line) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		entity_property(Entity, _, alias(_/Arity, Properties)),
 		memberchk(for(Name/Arity), Properties),
 		memberchk(lines(Start, End), Properties),
@@ -739,7 +760,8 @@
 		find_definition_(Entity::Name/Arity, Entity, CallerLine, File, Line).
 	% predicate alias listed in an alias/2 directive
 	find_definition_(Name/Arity, Entity, CallerLine, File, Line) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		entity_property(Entity, _, alias(Name/Arity, Properties)),
 		memberchk(lines(Start, End), Properties),
 		Start =< CallerLine, CallerLine =< End,
@@ -749,7 +771,8 @@
 
 	find_definition_(Name/Arity, Entity, CallLine, File, Line) :-
 		% non-terminal
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		ExtArity is Arity + 2,
 		(	entity_property(Entity, _, calls(Name/ExtArity, Properties)),
 			memberchk(non_terminal(Name//Arity), Properties),
@@ -762,7 +785,8 @@
 
 	find_definition_(Name/Arity, Entity, CallLine, File, Line) :-
 		% non-terminal
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		ExtArity is Arity + 2,
 		(	entity_property(Entity, _, calls(Object::Name/ExtArity, Properties)),
 			memberchk(non_terminal(Name//Arity), Properties),
@@ -790,7 +814,8 @@
 		close(MarkerStream).
 
 	find_type_definition_(Name/Arity, ReferenceEntity, DefinitionFile, DefinitionLine) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		functor(Entity, Name, Arity),
 		(	entity_property(ReferenceEntity, _, alias(Entity, Properties)),
 			\+ member(predicate, Properties),
@@ -832,13 +857,15 @@
 
 	% non-terminal
 	find_predicate_references(Name//Arity, _, File, Line, References) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		ExtArity is Arity + 2,
 		find_references_(Name/ExtArity, File, Line, References).
 
 	% predicate scope directive
 	find_predicate_references(Name/Arity, Entity, File, Line, References) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		entity_property(Entity, _, declares(Name/Arity, Properties)),
 		memberchk(line_count(Line), Properties),
 		findall(
@@ -934,7 +961,8 @@
 
 	% predicate listed in a uses/2 directive
 	find_predicate_references(Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		entity_property(Entity, _, calls(Object::Name/Arity, Properties)),
 		callable(Object),
 		memberchk(lines(Start, End), Properties),
@@ -944,7 +972,8 @@
 		find_predicate_references(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
 	% predicate alias listed in a uses/2 directive
 	find_predicate_references(Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
 		memberchk(alias(Name/Arity), Properties),
 		memberchk(lines(Start, End), Properties),
@@ -955,7 +984,8 @@
 
 	% predicate listed in an alias/2 directive
 	find_predicate_references(Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		entity_property(Entity, _, alias(_/Arity, Properties)),
 		memberchk(for(Name/Arity), Properties),
 		memberchk(lines(Start, End), Properties),
@@ -966,7 +996,8 @@
 		find_predicate_references(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
 	% predicate alias listed in an alias/2 directive
 	find_predicate_references(Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		entity_property(Entity, _, alias(Name/Arity, Properties)),
 		memberchk(lines(Start, End), Properties),
 		Start =< Line, Line =< End,
@@ -978,7 +1009,8 @@
 
 	% local predicate call; declared
 	find_predicate_references(Name/Arity, Entity, File, Line, References) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		find_declaration_(Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
 		once((
 			DeclarationFile \== File
@@ -989,7 +1021,8 @@
 
 	% local predicate call; no declaration
 	find_predicate_references(Name/Arity, Entity, File, Line, References) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		findall(
 			Reference,
 			(	find_predicate_local_reference(Name/Arity, Entity, ReferenceFile, StartLine, EndLine),
@@ -1004,7 +1037,8 @@
 
 	% non-terminal
 	find_predicate_references(Name/Arity, Entity, File, Line, References) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		ExtArity is Arity + 2,
 		once((
 			(	entity_property(Entity, Kind, defines(Name/ExtArity, Properties))
@@ -1016,7 +1050,8 @@
 
 	find_predicate_references(Alias::Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
 		callable(Alias),
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		(	entity_property(Entity, _, alias(Alias, Properties)),
 			\+ member(predicate, Properties),
 			member(for(Object), Properties) ->
@@ -1028,7 +1063,8 @@
 		find_predicate_references(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
 
 	find_predicate_references(::Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		(	find_declaration_(::Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
 			entity(DeclarationFile, DeclarationLine, DeclarationEntity),
 			find_predicate_references(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References) ->
@@ -1042,7 +1078,8 @@
 		).
 
 	find_predicate_references(^^Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		(	find_declaration_(^^Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
 			entity(DeclarationFile, DeclarationLine, DeclarationEntity),
 			find_predicate_references(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References) ->
@@ -1057,7 +1094,8 @@
 
 	find_predicate_local_reference(Name/Arity, Entity, File, StartLine, EndLine) :-
 		% local predicate
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		entity_property(Entity, Kind, file(File)),
 		(	entity_property(Entity, Kind, calls(Name/Arity, _)) ->
 			ExtArity = Arity
@@ -1069,7 +1107,8 @@
 		memberchk(lines(StartLine, EndLine), CallsProperties).
 
 	find_entity_references(Name/Arity, References) :-
-		ground(Name/Arity),
+		atom(Name),
+		integer(Arity),
 		functor(Entity, Name, Arity),
 		setof(
 			Reference,

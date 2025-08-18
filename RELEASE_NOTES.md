@@ -22,8 +22,8 @@ RELEASE NOTES
 =============
 
 
-3.93.0 - July ??, 2025
-======================
+3.93.0 - August ??, 2025
+========================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -60,6 +60,9 @@ IDEs, text editors, and syntax highlighters support
 * ADDED: CodeMirror 6.x support (in the `coding/codemirror6` directory).
 
 * IMPROVED: TextMate 2.x and Vim support for automatic indentation.
+
+* IMPROVED: VSCode support to avoid spurious errors when a find predicate
+declaration or definition is accidentally triggered for invalid text.
 
 
 3.92.0 - May 28, 2025
