@@ -59,7 +59,7 @@ IDEs, text editors, and syntax highlighters support
 
 * ADDED: CodeMirror 6.x support (in the `coding/codemirror6` directory).
 
-* IMPROVED: Vim support for automatic indentation.
+* IMPROVED: TextMate 2.x and Vim support for automatic indentation.
 
 
 3.92.0 - May 28, 2025

@@ -8,6 +8,10 @@
 	<string>source.logtalk</string>
 	<key>settings</key>
 	<dict>
+		<key>disableIndentCorrections</key>
+		<true/>
+		<key>decreaseIndentPattern</key>
+		<string>(\)|\]|\})$</string>
 		<key>highlightPairs</key>
 		<array>
 			<array>
@@ -24,7 +28,7 @@
 			</array>
 		</array>
 		<key>increaseIndentPattern</key>
-		<string>(:-|-->)$</string>
+		<string>(^:-\s(?:object|protocol|category)\(.*,|:-|--&gt;|\(|\[|\{|\s*;\s*.*|\s*-&gt;\s*.*|.*-&gt;|^\s*\*-&gt;)$</string>
 		<key>smartTypingPairs</key>
 		<array>
 			<array>
