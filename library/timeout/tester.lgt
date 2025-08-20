@@ -46,6 +46,6 @@
 
 :- else.
 
-	:- initialization((write('(Timeout library not available for your backend Prolog compiler)'), nl)).
+	:- initialization((write('(not applicable)'), nl)).
 
 :- endif.

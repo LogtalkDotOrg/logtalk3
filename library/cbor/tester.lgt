@@ -21,7 +21,7 @@
 
 :- if(current_prolog_flag(bounded, true)).
 
-	:- initialization((write('(CBOR library not available for your backend Prolog compiler)'), nl)).
+	:- initialization((write('(not applicable)'), nl)).
 
 :- else.
 

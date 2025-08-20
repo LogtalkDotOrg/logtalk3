@@ -69,6 +69,6 @@
 
 :- else.
 
-	:- initialization((write('(Java client library not available for your backend Prolog compiler)'), nl)).
+	:- initialization((write('(not applicable)'), nl)).
 
 :- endif.
