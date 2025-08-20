@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:87:0,
+		version is 0:87:1,
 		author is 'Paulo Moura',
-		date is 2025-05-23,
+		date is 2025-08-20,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -168,7 +168,8 @@
 	:- public(outdated/0).
 	:- mode(outdated, one).
 	:- info(outdated/0, [
-		comment is 'Lists all the packs that are installed but outdated using default options.'
+		comment is 'Lists all the packs that are installed but outdated using default options.',
+		see_also is [outdated/1]
 	]).
 
 	:- public(orphaned/2).
@@ -283,7 +284,8 @@
 			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
 			'``Version`` is a variable' - instantiation_error,
 			'``Version`` is neither a variable nor a valid version' - type_error(pack_version, 'Version')
-		]
+		],
+		see_also is [install/4]
 	]).
 
 	:- public(install/2).
@@ -296,7 +298,8 @@
 			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
 			'``Pack`` is a variable' - instantiation_error,
 			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
-		]
+		],
+		see_also is [install/3]
 	]).
 
 	:- public(install/1).
@@ -307,7 +310,8 @@
 		exceptions is [
 			'``Pack`` is a variable' - instantiation_error,
 			'``Pack`` is not an atom' - type_error(atom, 'Pack')
-		]
+		],
+		see_also is [install/2]
 	]).
 
 	:- public(update/3).
@@ -423,7 +427,8 @@
 		exceptions is [
 			'``Pack`` is a variable' - instantiation_error,
 			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
-		]
+		],
+		see_also is [uninstall/2]
 	]).
 
 	:- public(uninstall/0).
@@ -453,7 +458,8 @@
 		exceptions is [
 			'``Pack`` is a variable' - instantiation_error,
 			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
-		]
+		],
+		see_also is [clean/2]
 	]).
 
 	:- public(clean/0).
@@ -488,7 +494,8 @@
 			'``File`` is a variable' - instantiation_error,
 			'``File`` is neither a variable nor an atom' - type_error(atom, 'File'),
 			'``File`` is an existing file but cannot be written' - permission_error(open, source_sink, 'File')
-		]
+		],
+		see_also is [save/2]
 	]).
 
 	:- public(restore/2).
@@ -533,7 +540,8 @@
 			'``File`` is neither a variable nor an atom' - type_error(atom, 'File'),
 			'``File`` is an atom but not an existing file' - existence_error(file, 'File'),
 			'``File`` is an existing file but cannot be read' - permission_error(open, source_sink, 'File')
-		]
+		],
+		see_also is [restore/2]
 	]).
 
 	:- public(dependents/3).
@@ -876,7 +884,8 @@
 		^^check_options(UserOptions),
 		^^merge_options([status(all)| UserOptions], Options),
 		(	installed_pack(OtherRegistry, Pack, OldVersion, _),
-			Registry \== OtherRegistry ->
+			Registry \== OtherRegistry,
+			^^option(force(false), Options) ->
 			print_message(error, packs, pack_already_installed_from_different_registry(OtherRegistry, Pack, OldVersion)),
 			fail
 		;	installed_pack(Registry, Pack, OldVersion, _),

@@ -14,8 +14,8 @@ Pack handling predicates.
 |    ``logtalk_load(packs(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:87:0
-| **Date:** 2025-05-23
+| **Version:** 0:87:1
+| **Date:** 2025-08-20
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -364,6 +364,9 @@ Lists all the packs that are installed but outdated using default options.
 | **Mode and number of proofs:**
 |    ``outdated`` - ``one``
 
+| **See also:**
+|    :ref:`packs/0::outdated/1`
+
 
 ------------
 
@@ -606,6 +609,9 @@ Installs the specified version of a pack from the given registry using default o
 |    ``Version`` is neither a variable nor a valid version:
 |        ``type_error(pack_version,Version)``
 
+| **See also:**
+|    :ref:`packs/0::install/4`
+
 
 ------------
 
@@ -635,6 +641,9 @@ Installs the latest version of a pack from the given registry using default opti
 |    ``Pack`` is neither a variable nor an atom:
 |        ``type_error(atom,Pack)``
 
+| **See also:**
+|    :ref:`packs/0::install/3`
+
 
 ------------
 
@@ -659,6 +668,9 @@ Installs a pack (if its name is unique among all registries) using default optio
 |        ``instantiation_error``
 |    ``Pack`` is not an atom:
 |        ``type_error(atom,Pack)``
+
+| **See also:**
+|    :ref:`packs/0::install/2`
 
 
 ------------
@@ -880,6 +892,9 @@ Uninstalls a pack using default options. Fails if the pack is pinned, have depen
 |    ``Pack`` is neither a variable nor an atom:
 |        ``type_error(atom,Pack)``
 
+| **See also:**
+|    :ref:`packs/0::uninstall/2`
+
 
 ------------
 
@@ -950,6 +965,9 @@ Cleans all pack archives. Fails if the pack is unknown.
 |        ``instantiation_error``
 |    ``Pack`` is neither a variable nor an atom:
 |        ``type_error(atom,Pack)``
+
+| **See also:**
+|    :ref:`packs/0::clean/2`
 
 
 ------------
@@ -1031,6 +1049,9 @@ Saves a list of all installed packs and their registries plus pinning status to 
 |        ``type_error(atom,File)``
 |    ``File`` is an existing file but cannot be written:
 |        ``permission_error(open,source_sink,File)``
+
+| **See also:**
+|    :ref:`packs/0::save/2`
 
 
 ------------
@@ -1114,6 +1135,9 @@ Restores a list of registries and packs plus their pinning status from a file us
 |        ``existence_error(file,File)``
 |    ``File`` is an existing file but cannot be read:
 |        ``permission_error(open,source_sink,File)``
+
+| **See also:**
+|    :ref:`packs/0::restore/2`
 
 
 ------------

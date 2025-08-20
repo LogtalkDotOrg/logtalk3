@@ -14,8 +14,8 @@ Registry handling predicates.
 |    ``logtalk_load(packs(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:61:0
-| **Date:** 2025-05-27
+| **Version:** 0:62:0
+| **Date:** 2025-08-20
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -198,6 +198,9 @@ Adds a new registry using default options. Fails if the registry cannot be added
 
     - Registry name: Must be the URL basename when using a git URL or a local directory URL. Must also be the declared registry name in the registry specification object.
 
+| **See also:**
+|    :ref:`registries/0::add/3`
+
 
 ------------
 
@@ -226,6 +229,9 @@ Adds a new registry using default options. Fails if the registry cannot be added
 | **Remarks:**
 
     - Registry name: Taken from the URL basename.
+
+| **See also:**
+|    :ref:`registries/0::add/2`
 
 
 ------------
@@ -297,6 +303,9 @@ Updates a defined registry using default options. Fails if the registry is not d
 |        ``instantiation_error``
 |    ``Registry`` is neither a variable nor an atom:
 |        ``type_error(atom,Registry)``
+
+| **See also:**
+|    :ref:`registries/0::update/2`
 
 
 ------------
@@ -385,6 +394,9 @@ Deletes a registry using default options.
 |        ``instantiation_error``
 |    ``Registry`` is neither a variable nor an atom:
 |        ``type_error(atom,Registry)``
+
+| **See also:**
+|    :ref:`registries/0::delete/2`
 
 
 ------------

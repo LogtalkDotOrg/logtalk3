@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:61:0,
+		version is 0:62:0,
 		author is 'Paulo Moura',
-		date is 2025-05-27,
+		date is 2025-08-20,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -103,7 +103,8 @@
 			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
 			'``URL`` is a variable' - instantiation_error,
 			'``URL`` is neither a variable nor an atom' - type_error(atom, 'URL')
-		]
+		],
+		see_also is [add/3]
 	]).
 
 	:- public(add/1).
@@ -117,7 +118,8 @@
 		exceptions is [
 			'``URL`` is a variable' - instantiation_error,
 			'``URL`` is neither a variable nor an atom' - type_error(atom, 'URL')
-		]
+		],
+		see_also is [add/2]
 	]).
 
 	:- public(update/2).
@@ -154,7 +156,8 @@
 		exceptions is [
 			'``Registry`` is a variable' - instantiation_error,
 			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry')
-		]
+		],
+		see_also is [update/2]
 	]).
 
 	:- public(update/0).
@@ -197,7 +200,8 @@
 		exceptions is [
 			'``Registry`` is a variable' - instantiation_error,
 			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry')
-		]
+		],
+		see_also is [delete/2]
 	]).
 
 	:- public(delete/0).

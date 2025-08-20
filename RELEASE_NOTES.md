@@ -46,6 +46,10 @@ Tools
 * UPDATED: The `logtalk_tester.*` scripts to also print the operating-system
 version after the Logtalk and Prolog backend versions.
 
+* FIXED: The `packs` tool `restore/1-2` predicates when using the default
+option `force(true)` to allow restoring a pack when a pack with the same
+name is installed from a different registry.
+
 Tests
 -----
 
