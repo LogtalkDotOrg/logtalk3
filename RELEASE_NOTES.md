@@ -71,6 +71,9 @@ declaration or definition is accidentally triggered for invalid text.
 * FIXED: VSCode support finding of references to a predicate alias declared
 in a `uses/2` directive.
 
+* FIXED: VSCode support finding of a local predicate (or non-terminal)
+definition when provided by an included file.
+
 
 3.92.0 - May 28, 2025
 =====================

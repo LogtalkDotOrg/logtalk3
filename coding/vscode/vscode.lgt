@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:66:1,
+		version is 0:66:2,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2025-08-23,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -710,13 +710,16 @@
 		),
 		entity_property(Entity, _, file(File)).
 
-	% local predicate
+	% local predicate or non-terminal
 	find_definition_(Name/Arity, Entity, _CallerLine, File, Line) :-
 		atom(Name),
 		integer(Arity),
 		(	% definition
 			entity_property(Entity, _, defines(Name/Arity, Properties)) ->
-			entity_property(Entity, _, file(File)),
+			(	member(include(File), Properties) ->
+				true
+			;	entity_property(Entity, _, file(File))
+			),
 			memberchk(line_count(Line), Properties)
 		;	% multifile definitions
 			entity_property(Entity, _, includes(Name/Arity, DefinitionEntity, Properties)) ->
@@ -725,7 +728,10 @@
 		;	% non-terminal
 			ExtArity is Arity + 2,
 			entity_property(Entity, _, defines(Name/ExtArity, Properties)),
-			entity_property(Entity, _, file(File)),
+			(	member(include(File), Properties) ->
+				true
+			;	entity_property(Entity, _, file(File))
+			),
 			memberchk(line_count(Line), Properties)
 		).
 
