@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:66:0,
+		version is 0:66:1,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-08-18,
+		date is 2025-08-23,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -970,17 +970,15 @@
 		find_declaration_(Object::Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
 		entity(DeclarationFile, DeclarationLine, DeclarationEntity),
 		find_predicate_references(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
-	% predicate alias listed in a uses/2 directive
-	find_predicate_references(Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
+	% predicate alias listed in a uses/2 directive; look for local calls to the alias
+	find_predicate_references(Name/Arity, Entity, File, Line, References) :-
 		atom(Name),
 		integer(Arity),
-		entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
+		entity_property(Entity, _, calls(_::_/_, Properties)),
 		memberchk(alias(Name/Arity), Properties),
 		memberchk(lines(Start, End), Properties),
 		Start =< Line, Line =< End,
-		find_declaration_(Object::OriginalName/Arity, Entity, Line, DeclarationFile, DeclarationLine),
-		entity(DeclarationFile, DeclarationLine, DeclarationEntity),
-		find_predicate_references(OriginalName/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
+		find_predicate_local_references(Name/Arity, Entity, File, Line, References).
 
 	% predicate listed in an alias/2 directive
 	find_predicate_references(Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
@@ -1023,17 +1021,7 @@
 	find_predicate_references(Name/Arity, Entity, File, Line, References) :-
 		atom(Name),
 		integer(Arity),
-		findall(
-			Reference,
-			(	find_predicate_local_reference(Name/Arity, Entity, ReferenceFile, StartLine, EndLine),
-				(	ReferenceFile \== File ->
-					true
-				;	\+ (StartLine =< Line, Line =< EndLine)
-				),
-				Reference = ReferenceFile-StartLine
-			),
-			References
-		).
+		find_predicate_local_references(Name/Arity, Entity, File, Line, References).
 
 	% non-terminal
 	find_predicate_references(Name/Arity, Entity, File, Line, References) :-
@@ -1090,6 +1078,19 @@
 			find_declaration_(^^Name/ExtArity, Entity, Line, DeclarationFile, DeclarationLine),
 			entity(DeclarationFile, DeclarationLine, DeclarationEntity),
 			find_predicate_references(Name/ExtArity, DeclarationEntity, DeclarationFile, DeclarationLine, References)
+		).
+
+	find_predicate_local_references(Name/Arity, Entity, File, Line, References) :-
+		findall(
+			Reference,
+			(	find_predicate_local_reference(Name/Arity, Entity, ReferenceFile, StartLine, EndLine),
+				(	ReferenceFile \== File ->
+					true
+				;	\+ (StartLine =< Line, Line =< EndLine)
+				),
+				Reference = ReferenceFile-StartLine
+			),
+			References
 		).
 
 	find_predicate_local_reference(Name/Arity, Entity, File, StartLine, EndLine) :-

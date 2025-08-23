@@ -68,6 +68,9 @@ IDEs, text editors, and syntax highlighters support
 * IMPROVED: VSCode support to avoid spurious errors when a find predicate
 declaration or definition is accidentally triggered for invalid text.
 
+* FIXED: VSCode support finding of references to a predicate alias declared
+in a `uses/2` directive.
+
 
 3.92.0 - May 28, 2025
 =====================
