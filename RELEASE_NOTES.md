@@ -74,6 +74,10 @@ in a `uses/2` directive.
 * FIXED: VSCode support finding of a local predicate (or non-terminal)
 definition when provided by an included file.
 
+* FIXED: VSCode support finding of a local predicate (or non-terminal)
+reference to not report calls from auxiliary predicates (as the reflection
+API reports line zero in these cases).
+
 
 3.92.0 - May 28, 2025
 =====================

@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:66:2,
+		version is 0:66:3,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2025-08-23,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -1091,6 +1091,7 @@
 			Reference,
 			(	find_predicate_local_reference(Name/Arity, Entity, ReferenceFile, StartLine, EndLine),
 				(	ReferenceFile \== File ->
+					% included files case
 					true
 				;	\+ (StartLine =< Line, Line =< EndLine)
 				),
@@ -1111,7 +1112,8 @@
 			memberchk(non_terminal(Name//Arity), DefinesProperties)
 		),
 		entity_property(Entity, Kind, calls(Name/ExtArity, CallsProperties)),
-		memberchk(lines(StartLine, EndLine), CallsProperties).
+		memberchk(lines(StartLine, EndLine), CallsProperties),
+		StartLine > 0.
 
 	find_entity_references(Name/Arity, References) :-
 		atom(Name),
