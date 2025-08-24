@@ -22,9 +22,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 3:7:1,
+		version is 3:7:2,
 		author is 'Paulo Moura',
-		date is 2024-11-05,
+		date is 2025-08-23,
 		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
@@ -181,6 +181,9 @@
 
 	message_tokens(conditional_breakpoint_added) -->
 		['     Conditional breakpoint added.'-[], nl].
+
+	message_tokens(matching_conditional_spy_points_removed) -->
+		['     All matching conditional breakpoints removed.'-[], nl].
 
 	message_tokens(conditional_breakpoints(Breakpoints)) -->
 		['     Defined conditional breakpoints: Entity-Line (Condition):'-[], nl],
