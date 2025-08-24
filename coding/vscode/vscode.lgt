@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:66:3,
+		version is 0:67:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-08-23,
+		date is 2025-08-24,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -193,6 +193,18 @@
 	:- info(find_parent_file/2, [
 		comment is 'Find the loader file.',
 		argnames is ['Directory', 'File']
+	]).
+
+	:- public(debug/0).
+	:- mode(debug, one).
+	:- info(debug/0, [
+		comment is '.'
+	]).
+
+	:- public(nodebug/0).
+	:- mode(nodebug, one).
+	:- info(nodebug/0, [
+		comment is '.'
 	]).
 
 	:- public((spy)/1).
@@ -1523,6 +1535,14 @@
 		close(MarkerStream).
 
 	% debugger support
+
+	debug :-
+		ensure_debbugger,
+		{debugger::debug}.
+
+	nodebug :-
+		ensure_debbugger,
+		{debugger::nodebug}.
 
 	spy(Predicate) :-
 		ensure_debbugger,

@@ -66,6 +66,8 @@ IDEs, text editors, and syntax highlighters support
 
 * ADDED: CodeMirror 6.x support (in the `coding/codemirror6` directory).
 
+* ADDED: VSCode support predicates `debug/0` and `nodebug/0`.
+
 * IMPROVED: TextMate 2.x and Vim support for automatic indentation.
 
 * IMPROVED: VSCode support to avoid spurious errors when a find predicate
