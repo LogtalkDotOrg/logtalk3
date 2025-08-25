@@ -285,6 +285,8 @@ Definitions of the ``message_hook/4`` hook predicate are free to decide
 if the ``logtalk::message_prefix_file/6`` predicate should be called and
 acted upon.
 
+.. _intercepting_messages:
+
 Intercepting messages
 ---------------------
 
