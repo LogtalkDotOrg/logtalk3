@@ -192,8 +192,8 @@ to traditional predicate spy points.</p>
 <span id="debugging-debug-mode"></span><h2>Compiling source files in debug mode<a class="headerlink" href="#compiling-source-files-in-debug-mode" title="Link to this heading"></a></h2>
 <p>Compilation of source files in debug mode is controlled by the
 <a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> compiler flag. The default value for this flag,
-usually <code class="docutils literal notranslate"><span class="pre">off</span></code>, is defined in the adapter files. Its default value may
-be changed globally at runtime by calling:</p>
+usually <code class="docutils literal notranslate"><span class="pre">off</span></code>, is defined in the <a class="reference internal" href="../glossary.html#term-adapter-file"><span class="xref std std-term">backend adapter files</span></a>.
+Its default value may be changed globally at runtime by calling:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- set_logtalk_flag(debug, on).
 </pre></div>
 </div>
@@ -250,7 +250,7 @@ flow when calling a predicate:</p>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">redo</span></code></div>
 <div class="line-block">
-<div class="line">backtracking into a predicate</div>
+<div class="line">backtracking into a predicate call</div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">fail</span></code></div>
 <div class="line-block">
@@ -320,11 +320,12 @@ some Prolog compilers:</p>
 <h2>Activating the debugger<a class="headerlink" href="#activating-the-debugger" title="Link to this heading"></a></h2>
 <p>The <a class="reference external" href="../../apis/debuggerp_0.html#debuggerp-0-trace-0" title="(in Logtalk APIs v3.93.0)"><span class="xref std std-ref">debuggerp::trace/0</span></a> and
 <a class="reference external" href="../../apis/debuggerp_0.html#debuggerp-0-debug-0" title="(in Logtalk APIs v3.93.0)"><span class="xref std std-ref">debuggerp::debug/0</span></a> predicates implicitly
-select the <code class="docutils literal notranslate"><span class="pre">debugger</span></code> tool as the active debug handler. If you have additional
-debug handlers loaded (e.g., the <code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code> tool), those would no longer
-be active (there can be only one active debug handler at any given time). The
-<a class="reference external" href="../../apis/debuggerp_0.html#debuggerp-0-nodebug-0" title="(in Logtalk APIs v3.93.0)"><span class="xref std std-ref">debuggerp::nodebug/0</span></a> predicate implicitly
-deselects the <code class="docutils literal notranslate"><span class="pre">debugger</span></code> tool as the active debug handler.</p>
+select the <code class="docutils literal notranslate"><span class="pre">debugger</span></code> tool as the active <a class="reference internal" href="../glossary.html#term-debug-handler"><span class="xref std std-term">debug handler</span></a>. If you have
+additional debug handlers loaded (e.g., the <code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code> tool), those
+would no longer be active (there can be only one active debug handler at any
+given time). The <a class="reference external" href="../../apis/debuggerp_0.html#debuggerp-0-nodebug-0" title="(in Logtalk APIs v3.93.0)"><span class="xref std std-ref">debuggerp::nodebug/0</span></a>
+predicate implicitly deselects the <code class="docutils literal notranslate"><span class="pre">debugger</span></code> tool as the active debug
+handler.</p>
 </section>
 <section id="defining-breakpoints">
 <h2>Defining breakpoints<a class="headerlink" href="#defining-breakpoints" title="Link to this heading"></a></h2>

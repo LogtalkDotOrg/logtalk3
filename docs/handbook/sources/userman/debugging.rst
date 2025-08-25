@@ -54,8 +54,8 @@ Compiling source files in debug mode
 
 Compilation of source files in debug mode is controlled by the
 :ref:`debug <flag_debug>` compiler flag. The default value for this flag,
-usually ``off``, is defined in the adapter files. Its default value may
-be changed globally at runtime by calling:
+usually ``off``, is defined in the :term:`backend adapter files <adapter file>`.
+Its default value may be changed globally at runtime by calling:
 
 .. code-block:: text
 
@@ -119,7 +119,7 @@ flow when calling a predicate:
 | ``exit``
 |    success of a predicate call
 | ``redo``
-|    backtracking into a predicate
+|    backtracking into a predicate call
 | ``fail``
 |    failure of a predicate call
 
@@ -176,11 +176,12 @@ Activating the debugger
 
 The :ref:`debuggerp::trace/0 <apis:debuggerp/0::trace/0>` and
 :ref:`debuggerp::debug/0 <apis:debuggerp/0::debug/0>` predicates implicitly
-select the ``debugger`` tool as the active debug handler. If you have additional
-debug handlers loaded (e.g., the ``ports_profiler`` tool), those would no longer
-be active (there can be only one active debug handler at any given time). The
-:ref:`debuggerp::nodebug/0 <apis:debuggerp/0::nodebug/0>` predicate implicitly
-deselects the ``debugger`` tool as the active debug handler.
+select the ``debugger`` tool as the active :term:`debug handler`. If you have
+additional debug handlers loaded (e.g., the ``ports_profiler`` tool), those
+would no longer be active (there can be only one active debug handler at any
+given time). The :ref:`debuggerp::nodebug/0 <apis:debuggerp/0::nodebug/0>`
+predicate implicitly deselects the ``debugger`` tool as the active debug
+handler.
 
 
 Defining breakpoints

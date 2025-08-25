@@ -679,6 +679,11 @@ Glossary
       An opaque term that uniquely identifies a clause. Provided by
       some backends via alternative database built-in predicates.
 
+   debug handler
+      An object or category that defines clauses for the multifile
+      predicates that handle the trace and debug events generated
+      by the runtime.
+
    flaky test
       A test that can unpredictably succeed, fail, or throw an error and
       thus can yield different results when repeated without any code

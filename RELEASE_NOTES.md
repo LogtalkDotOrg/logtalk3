@@ -31,6 +31,11 @@ Logtalk compiler and runtime
 * ADDED: Support for declaring synchronized predicates in calls to the
 `create_object/4` and `create_category/4` built-in predicates.
 
+Documentation
+-------------
+
+* ADDED: Glossary definition for "debug handler".
+
 Library
 -------
 
