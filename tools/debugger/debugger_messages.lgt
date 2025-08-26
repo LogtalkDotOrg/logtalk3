@@ -22,9 +22,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 3:7:2,
+		version is 3:8:0,
 		author is 'Paulo Moura',
-		date is 2025-08-23,
+		date is 2025-08-26,
 		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
@@ -235,20 +235,20 @@
 	message_tokens(all_breakpoints_removed) -->
 		['     All breakpoints removed.'-[], nl].
 
-	% unconditional breakpoints
+	% clause breakpoints
 
-	message_tokens(unconditional_breakpoints(Breakpoints)) -->
-		['     Defined unconditional breakpoints: Entity-Line:'-[], nl],
+	message_tokens(clause_breakpoints(Breakpoints)) -->
+		['     Defined clause breakpoints: Entity-Line:'-[], nl],
 		breakpoints(Breakpoints).
 
-	message_tokens(no_unconditional_breakpoints_defined) -->
-		['     No unconditional breakpoints are defined.'-[], nl].
+	message_tokens(no_clause_breakpoints_defined) -->
+		['     No clause breakpoints are defined.'-[], nl].
 
-	message_tokens(unconditional_breakpoint_added) -->
-		['     Unconditional breakpoint added.'-[], nl].
+	message_tokens(clause_breakpoint_added) -->
+		['     Clause breakpoint added.'-[], nl].
 
-	message_tokens(unconditional_breakpoint_removed) -->
-		['     Unconditional breakpoint removed.'-[], nl].
+	message_tokens(clause_breakpoint_removed) -->
+		['     Clause breakpoint removed.'-[], nl].
 
 	% context breakpoints
 

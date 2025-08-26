@@ -382,12 +382,12 @@ non-terminal indicator (<code class="docutils literal notranslate"><span class="
 an <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> pair), or a list of breakpoints. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(person-42).
 
-All specified breakpoints added.
+Clause breakpoint added.
 yes
 
 | ?- debugger::spy(foo/2).
 
-All specified breakpoints added.
+Predicate breakpoint added.
 yes
 
 | ?- debugger::spy([foo/4, bar//1, agent-99]).
@@ -493,7 +493,7 @@ predicate defined on an object named <code class="docutils literal notranslate">
 the following context breakpoint:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(_, foo, _, _).
 
-Spy point set.
+Context breakpoint set.
 yes
 </pre></div>
 </div>
@@ -501,7 +501,7 @@ yes
 atom in the second argument by setting the condition:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(_, _, _, foo(_, bar)).
 
-Spy point set.
+Context breakpoint set.
 yes
 </pre></div>
 </div>

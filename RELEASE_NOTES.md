@@ -48,6 +48,9 @@ Library
 Tools
 -----
 
+* IMPROVED: The `debugger` tool code and documentation for a more consistent
+handling and description of breakpoints. Also added additional tests.
+
 * UPDATED: The `logtalk_tester.*` scripts to also print the operating-system
 version after the Logtalk and Prolog backend versions.
 

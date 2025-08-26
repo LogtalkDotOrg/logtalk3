@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 7:10:0,
+		version is 7:11:0,
 		author is 'Paulo Moura',
-		date is 2025-03-18,
+		date is 2025-03-26,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -76,32 +76,6 @@
 		argnames is ['Mode']
 	]).
 
-	:- private(breakpoint_/2).
-	:- dynamic(breakpoint_/2).
-	:- mode(breakpoint_(?object_identifier, ?integer), zero_or_more).
-	:- mode(breakpoint_(?category_identifier, ?integer), zero_or_more).
-	:- info(breakpoint_/2, [
-		comment is 'Table of unconditional breakpoints.',
-		argnames is ['Entity', 'Line']
-	]).
-
-	:- private(spying_predicate_/3).
-	:- dynamic(spying_predicate_/3).
-	:- mode(spying_predicate_(?atom, ?integer, ?predicate_indicator), zero_or_more).
-	:- mode(spying_predicate_(?atom, ?integer, ?non_terminal_indicator), zero_or_more).
-	:- info(spying_predicate_/3, [
-		comment is 'Table of predicate spy points.',
-		argnames is ['Functor', 'Arity', 'Original']
-	]).
-
-	:- private(spying_context_/4).
-	:- dynamic(spying_context_/4).
-	:- mode(spying_context_(?object_identifier, ?object_identifier, ?object_identifier, ?callable), zero_or_more).
-	:- info(spying_context_/4, [
-		comment is 'Table of context spy points.',
-		argnames is ['Sender', 'This', 'Self', 'Goal']
-	]).
-
 	:- private(leashing_/1).
 	:- dynamic(leashing_/1).
 	:- mode(leashing_(?atom), zero_or_more).
@@ -149,6 +123,32 @@
 	:- info(log_point_/3, [
 		comment is 'Table of log points.',
 		argnames is ['Entity', 'Line', 'Message']
+	]).
+
+	:- private(clause_breakpoint_/2).
+	:- dynamic(clause_breakpoint_/2).
+	:- mode(clause_breakpoint_(?object_identifier, ?integer), zero_or_more).
+	:- mode(clause_breakpoint_(?category_identifier, ?integer), zero_or_more).
+	:- info(clause_breakpoint_/2, [
+		comment is 'Table of clause breakpoints.',
+		argnames is ['Entity', 'Line']
+	]).
+
+	:- private(predicate_breakpoint_/3).
+	:- dynamic(predicate_breakpoint_/3).
+	:- mode(predicate_breakpoint_(?atom, ?integer, ?predicate_indicator), zero_or_more).
+	:- mode(predicate_breakpoint_(?atom, ?integer, ?non_terminal_indicator), zero_or_more).
+	:- info(predicate_breakpoint_/3, [
+		comment is 'Table of predicate breakpoints.',
+		argnames is ['Functor', 'Arity', 'Original']
+	]).
+
+	:- private(context_breakpoint_/4).
+	:- dynamic(context_breakpoint_/4).
+	:- mode(context_breakpoint_(?object_identifier, ?object_identifier, ?object_identifier, ?callable), zero_or_more).
+	:- info(context_breakpoint_/4, [
+		comment is 'Table of context breakpoints.',
+		argnames is ['Sender', 'This', 'Self', 'Goal']
 	]).
 
 	:- private(conditional_breakpoint_/3).
@@ -275,19 +275,19 @@
 			print_message(information, debugger, triggered_breakpoints(TriggeredPoints))
 		;	print_message(information, debugger, no_triggered_breakpoints_defined)
 		),
-		(	breakpoint_(_, _) ->
-			findall(Entity-Line, breakpoint_(Entity,Line), LineNumberSpyPoints),
-			print_message(information, debugger, unconditional_breakpoints(LineNumberSpyPoints))
-		;	print_message(information, debugger, no_unconditional_breakpoints_defined)
+		(	clause_breakpoint_(_, _) ->
+			findall(Entity-Line, clause_breakpoint_(Entity,Line), ClauseBreakpoints),
+			print_message(information, debugger, clause_breakpoints(ClauseBreakpoints))
+		;	print_message(information, debugger, no_clause_breakpoints_defined)
 		),
-		(	spying_predicate_(_, _, _) ->
-			findall(Predicate, spying_predicate_(_,_,Predicate), PredicateSpyPoints),
-			print_message(information, debugger, predicate_breakpoints(PredicateSpyPoints))
+		(	predicate_breakpoint_(_, _, _) ->
+			findall(Predicate, predicate_breakpoint_(_,_,Predicate), PredicateBreakpoints),
+			print_message(information, debugger, predicate_breakpoints(PredicateBreakpoints))
 		;	print_message(information, debugger, no_predicate_breakpoints_defined)
 		),
-		(	spying_context_(_, _, _, _) ->
-			findall((Sender,This,Self,Goal), spying_context_(Sender,This,Self,Goal), ContextSpyPoints),
-			print_message(information, debugger, context_breakpoints(ContextSpyPoints))
+		(	context_breakpoint_(_, _, _, _) ->
+			findall((Sender,This,Self,Goal), context_breakpoint_(Sender,This,Self,Goal), ContextBreakpoints),
+			print_message(information, debugger, context_breakpoints(ContextBreakpoints))
 		;	print_message(information, debugger, no_context_breakpoints_defined)
 		),
 		findall(Port, leashing_(Port), Ports),
@@ -318,40 +318,48 @@
 		current_category(Entity),
 		category_property(Entity, debugging).
 
-	% spy point predicates
+	% predicate and clause breakpoint predicates
 
-	spy(SpyPoints) :-
-		spy_aux(SpyPoints),
-		print_message(information, debugger, breakpoints_added),
+	spy(Spec) :-
+		(	Spec = Entity-Line ->
+			spy_clause(Entity-Line),
+			print_message(information, debugger, clause_breakpoint_added)
+		;	Spec = Name/Arity ->
+			spy_predicate(Name, Arity, Name/Arity),
+			print_message(information, debugger, predicate_breakpoint_added)
+		;	Spec = Name//Arity ->
+			ExtArity is Arity + 2,
+			spy_predicate(Name, ExtArity, Name//Arity),
+			print_message(information, debugger, predicate_breakpoint_added)
+		;	spy_list(Spec),
+			print_message(information, debugger, breakpoints_added)
+		),
 		(	debugging_ ->
 			true
 		;	debug
 		).
-
-	spy_aux([]).
-	spy_aux([SpyPoint| SpyPoints]) :-
-		spy_list([SpyPoint| SpyPoints]).
-	spy_aux(Entity-Line) :-
-		spy_line_number(Entity-Line).
-	spy_aux(Functor/Arity) :-
-		spy_predicate(Functor, Arity, Functor/Arity).
-	spy_aux(Functor//Arity) :-
-		ExtArity is Arity + 2,
-		spy_predicate(Functor, ExtArity, Functor//Arity).
 
 	spy_list([]).
 	spy_list([SpyPoint| SpyPoints]) :-
 		spy_aux(SpyPoint),
 		spy_list(SpyPoints).
 
-	spy_line_number(Entity-Line) :-
+	spy_aux(Entity-Line) :-
+		spy_clause(Entity-Line).
+	spy_aux(Functor/Arity) :-
+		spy_predicate(Functor, Arity, Functor/Arity).
+	spy_aux(Functor//Arity) :-
+		ExtArity is Arity + 2,
+		spy_predicate(Functor, ExtArity, Functor//Arity).
+
+	spy_clause(Entity-Line) :-
 		callable(Entity),
 		integer(Line),
 		functor(Entity, Functor, Arity),
 		functor(Template, Functor, Arity),
-		(	breakpoint_(Template, Line) ->
+		(	clause_breakpoint_(Template, Line) ->
 			true
-		;	assertz(breakpoint_(Template, Line))
+		;	assertz(clause_breakpoint_(Template, Line))
 		),
 		retractall(log_point_(Template, Line, _)),
 		retractall(conditional_breakpoint_(Template, Line, _)),
@@ -361,17 +369,17 @@
 	spy_predicate(Functor, Arity, Original) :-
 		atom(Functor),
 		integer(Arity),
-		(	spying_predicate_(Functor, Arity, _) ->
+		(	predicate_breakpoint_(Functor, Arity, _) ->
 			true
-		;	assertz(spying_predicate_(Functor, Arity, Original))
+		;	assertz(predicate_breakpoint_(Functor, Arity, Original))
 		).
 
 	spying(Entity-Line) :-
-		breakpoint_(Entity, Line).
+		clause_breakpoint_(Entity, Line).
 	spying(Functor/Arity) :-
-		spying_predicate_(Functor, Arity, Functor/Arity).
+		predicate_breakpoint_(Functor, Arity, Functor/Arity).
 	spying(Functor//Arity) :-
-		spying_predicate_(Functor, _, Functor//Arity).
+		predicate_breakpoint_(Functor, _, Functor//Arity).
 
 	nospy(SpyPoints) :-
 		nospy_aux(SpyPoints),
@@ -380,14 +388,14 @@
 	nospy_aux(SpyPoints) :-
 		var(SpyPoints),
 		!,
-		nospy_line_number(_),
+		nospy_clause(_),
 		nospy_predicate(_),
 		nospy_non_terminal(_).
 	nospy_aux([]).
 	nospy_aux([SpyPoint| SpyPoints]) :-
 		nospy_list([SpyPoint| SpyPoints]).
 	nospy_aux(Entity-Line) :-
-		nospy_line_number(Entity-Line).
+		nospy_clause(Entity-Line).
 	nospy_aux(Functor/Arity) :-
 		nospy_predicate(Functor/Arity).
 	nospy_aux(Functor//Arity) :-
@@ -398,17 +406,17 @@
 		nospy_aux(SpyPoint),
 		nospy_list(SpyPoints).
 
-	nospy_line_number(Entity-Line) :-
-		retractall(breakpoint_(Entity, Line)).
+	nospy_clause(Entity-Line) :-
+		retractall(clause_breakpoint_(Entity, Line)).
 
 	nospy_predicate(Functor/Arity) :-
-		retractall(spying_predicate_(Functor, Arity, _)).
+		retractall(predicate_breakpoint_(Functor, Arity, _)).
 
 	nospy_non_terminal(Functor//Arity) :-
-		retractall(spying_predicate_(Functor, _, Functor//Arity)),
+		retractall(predicate_breakpoint_(Functor, _, Functor//Arity)),
 		(	integer(Arity) ->
 			ExtArity is Arity + 2,
-			retractall(spying_predicate_(Functor, ExtArity, _))
+			retractall(predicate_breakpoint_(Functor, ExtArity, _))
 		;	true
 		).
 
@@ -422,7 +430,7 @@
 		retractall(conditional_breakpoint_(Template, Line, _)),
 		retractall(triggered_breakpoint_(Template, Line, _, _)),
 		retractall(triggered_breakpoint_enabled_(Template, Line)),
-		retractall(breakpoint_(Template, Line)),
+		retractall(clause_breakpoint_(Template, Line)),
 		retractall(log_point_(Template, Line, _)),
 		(	Condition = TriggerEntity-TriggerLine ->
 			functor(TriggerEntity, TriggerFunctor, TriggerArity),
@@ -456,7 +464,7 @@
 		integer(Line),
 		once((
 			conditional_breakpoint_(Entity, Line, _)
-		;	breakpoint_(Entity, Line)
+		;	clause_breakpoint_(Entity, Line)
 		)).
 	valid_conditional_spy_point_condition(>(Count)) :-
 		!,
@@ -494,7 +502,7 @@
 		print_message(comment, debugger, matching_conditional_spy_points_removed).
 
 	spy(Sender, This, Self, Goal) :-
-		asserta(spying_context_(Sender, This, Self, Goal)),
+		asserta(context_breakpoint_(Sender, This, Self, Goal)),
 		print_message(information, debugger, context_breakpoint_set),
 		(	debugging_ ->
 			true
@@ -502,19 +510,19 @@
 		).
 
 	spying(Sender, This, Self, Goal) :-
-		spying_context_(Sender, This, Self, Goal).
+		context_breakpoint_(Sender, This, Self, Goal).
 
 	nospy(Sender, This, Self, Goal) :-
-		retractall(spying_context_(Sender, This, Self, Goal)),
+		retractall(context_breakpoint_(Sender, This, Self, Goal)),
 		print_message(comment, debugger, matching_context_breakpoints_removed).
 
 	nospyall :-
-		retractall(breakpoint_(_, _)),
+		retractall(clause_breakpoint_(_, _)),
 		retractall(conditional_breakpoint_(_, _, _)),
 		retractall(triggered_breakpoint_(_, _, _, _)),
 		retractall(triggered_breakpoint_enabled_(_, _)),
-		retractall(spying_predicate_(_, _, _)),
-		retractall(spying_context_(_, _, _, _)),
+		retractall(predicate_breakpoint_(_, _, _)),
+		retractall(context_breakpoint_(_, _, _, _)),
 		print_message(comment, debugger, all_breakpoints_removed).
 
 	leash(Value) :-
@@ -628,14 +636,14 @@
 		).
 
 	spying_port_code(fact(Entity,_,_,Line), _, _, '#') :-
-		breakpoint_(Entity, Line),
+		clause_breakpoint_(Entity, Line),
 		(	triggered_breakpoint_(DependentEntity, DependentLine, Entity, Line) ->
 			assertz(triggered_breakpoint_enabled_(DependentEntity, DependentLine))
 		;	true
 		),
 		!.
 	spying_port_code(rule(Entity,_,_,Line), _, _, '#') :-
-		breakpoint_(Entity, Line),
+		clause_breakpoint_(Entity, Line),
 		(	triggered_breakpoint_(DependentEntity, DependentLine, Entity, Line) ->
 			assertz(triggered_breakpoint_enabled_(DependentEntity, DependentLine))
 		;	true
@@ -643,11 +651,11 @@
 		!.
 	spying_port_code(_, Goal, _, '+') :-
 		functor(Goal, Functor, Arity),
-		spying_predicate_(Functor, Arity, _),
+		predicate_breakpoint_(Functor, Arity, _),
 		!.
 	spying_port_code(_, Goal, ExCtx, '*') :-
 		logtalk::execution_context(ExCtx, _, Sender, This, Self, _, _),
-		spying_context_(Sender0, This0, Self0, Goal0),
+		context_breakpoint_(Sender0, This0, Self0, Goal0),
 		subsumes_term(sp(Sender0, This0, Self0, Goal0), sp(Sender, This, Self, Goal)),
 		!.
 
@@ -668,7 +676,7 @@
 		;	% new log point
 			assertz(log_point_(Template, Line, Message))
 		),
-		retractall(breakpoint_(Template, Line)),
+		retractall(clause_breakpoint_(Template, Line)),
 		retractall(conditional_breakpoint_(Template, Line, _)),
 		retractall(triggered_breakpoint_(Template, Line, _, _)),
 		retractall(triggered_breakpoint_enabled_(Template, Line)),
@@ -872,7 +880,7 @@
 			(	\+ skipping_,
 				\+ quasi_skipping_
 			;	quasi_skipping_,
-				breakpoint_(Entity, Line)
+				clause_breakpoint_(Entity, Line)
 			) ->
 			invocation_number_(N),
 			port(fact(Entity,Clause,File,Line), N, Fact, _, _, ExCtx, Action),
@@ -885,7 +893,7 @@
 			(	\+ skipping_,
 				\+ quasi_skipping_
 			;	quasi_skipping_,
-				breakpoint_(Entity, Line)
+				clause_breakpoint_(Entity, Line)
 			) ->
 			invocation_number_(N),
 			port(rule(Entity,Clause,File,Line), N, Head, _, _, ExCtx, Action),
@@ -908,9 +916,9 @@
 				\+ quasi_skipping_
 			;	quasi_skipping_,
 				(	functor(Goal, Functor, Arity),
-					spying_predicate_(Functor, Arity, _)
+					predicate_breakpoint_(Functor, Arity, _)
 				;	logtalk::execution_context(ExCtx, _, Sender, This, Self, _, _),
-					spying_context_(Sender0, This0, Self0, Goal0),
+					context_breakpoint_(Sender0, This0, Self0, Goal0),
 					subsumes_term(sp(Sender0, This0, Self0, Goal0), sp(Sender, This, Self, Goal))
 				)
 			) ->
@@ -1206,8 +1214,8 @@
 			true
 		;	Port = rule(Entity, _, _, Line)
 		),
-		spy_line_number(Entity-Line),
-		print_message(information, debugger, unconditional_breakpoint_added),
+		spy_clause(Entity-Line),
+		print_message(information, debugger, clause_breakpoint_added),
 		fail.
 
 	do_port_option(('|'), Port, _, _, _, _, _, _) :-
@@ -1215,8 +1223,8 @@
 			true
 		;	Port = rule(Entity, _, _, Line)
 		),
-		nospy_line_number(Entity-Line),
-		print_message(information, debugger, unconditional_breakpoint_removed),
+		nospy_clause(Entity-Line),
+		print_message(information, debugger, clause_breakpoint_removed),
 		fail.
 
 	do_port_option((*), _, _, Goal, _, _, _, _) :-

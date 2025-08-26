@@ -227,12 +227,12 @@ an ``Entity-Line`` pair), or a list of breakpoints. For example:
 
    | ?- debugger::spy(person-42).
 
-   All specified breakpoints added.
+   Clause breakpoint added.
    yes
 
    | ?- debugger::spy(foo/2).
 
-   All specified breakpoints added.
+   Predicate breakpoint added.
    yes
 
    | ?- debugger::spy([foo/4, bar//1, agent-99]).
@@ -357,7 +357,7 @@ the following context breakpoint:
 
    | ?- debugger::spy(_, foo, _, _).
 
-   Spy point set.
+   Context breakpoint set.
    yes
 
 For example, we can spy all calls to a ``foo/2`` predicate with a `bar`
@@ -367,7 +367,7 @@ atom in the second argument by setting the condition:
 
    | ?- debugger::spy(_, _, _, foo(_, bar)).
 
-   Spy point set.
+   Context breakpoint set.
    yes
 
 The debugger ``nospy/4`` predicate may be used to remove all matching

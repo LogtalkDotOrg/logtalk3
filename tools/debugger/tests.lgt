@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:9:0,
 		author is 'Paulo Moura',
-		date is 2024-06-18,
+		date is 2024-08-26,
 		comment is 'Unit tests for the "debugger" tool.'
 	]).
 
@@ -162,6 +162,8 @@
 		\+ spying(_, _, _),
 		\+ spying(_, _, _, _).
 
+	% leashing ports tests
+
 	test(debugger_leash_1_01, deterministic) :-
 		leash(none),
 		\+ leashing(_).
@@ -227,16 +229,28 @@
 		spy(logtalk, 13, 27),
 		spy(logtalk, 13, 42).
 
-	test(debugger_spy_3_06, deterministic(LogPoints == [cb(logtalk,13,27), cb(logtalk,33,42)])) :-
+	% conditional breakpoints are actually set
+	test(debugger_spy_3_06, deterministic(Breakpoints == [cb(logtalk,13,27), cb(logtalk,33,42)])) :-
 		reset,
 		spy(logtalk, 13, 27),
 		spy(logtalk, 33, 42),
-		setof(cb(Entity,Line,Condition), spying(Entity, Line, Condition), LogPoints).
+		setof(cb(Entity,Line,Condition), spying(Entity,Line,Condition), Breakpoints).
 
-	test(debugger_spy_3_07, deterministic(LogPoints == [cb(logtalk,13,27)])) :-
+	test(debugger_spy_3_07, deterministic(Breakpoints == [cb(logtalk,13,27)])) :-
 		reset,
 		spy(logtalk, 13, 27),
-		findall(cb(Entity,Line,Message), spying(Entity, Line, Message), LogPoints).
+		findall(cb(Entity,Line,Condition), spying(Entity,Line,Condition), Breakpoints).
+
+	% setting a triggered breakpoint fails if the referenced breakpoint doesn't exist
+	test(debugger_spy_3_08, false) :-
+		reset,
+		spy(logtalk, 42, logtalk-24).
+
+	% setting a triggered breakpoint succeeds if the referenced breakpoint exists
+	test(debugger_spy_3_09, deterministic) :-
+		reset,
+		spy(logtalk-24),
+		spy(logtalk, 42, logtalk-24).
 
 	test(debugger_nospy_3_01, deterministic) :-
 		reset,
@@ -247,6 +261,42 @@
 		spy(logtalk, 13, 27),
 		nospy(logtalk, _, _),
 		\+ spying(_, _, _).
+
+	% context breakpoint tests
+
+	test(debugger_spy_4_01, deterministic) :-
+		reset,
+		spy(user, logtalk, logtalk, _).
+
+	% setting a context breakpoint already set must still succeed deterministically
+	test(debugger_spy_4_02, deterministic) :-
+		reset,
+		spy(user, logtalk, logtalk, _),
+		spy(user, logtalk, logtalk, _).
+
+	% context breakpoints are actually set
+	test(debugger_spy_4_03, variant(Breakpoints, [c(user,logtalk,logtalk,loaded_file(_)),c(user,logtalk,logtalk,loaded_file_property(_,_))])) :-
+		reset,
+		spy(user, logtalk, logtalk, loaded_file(_)),
+		spy(user, logtalk, logtalk, loaded_file_property(_,_)),
+		setof(c(Sender,This,Self,Goal), spying(Sender,This,Self,Goal), Breakpoints).
+
+	% reset/0 deletes all context breakpoints
+	test(debugger_nospy_4_01, deterministic) :-
+		reset,
+		nospy(_, _, _, _).
+
+	test(debugger_nospy_4_02, deterministic) :-
+		reset,
+		spy(user, logtalk, _, _),
+		nospy(user, logtalk, _, _),
+		\+ spying(_, _, _, _).
+
+	test(debugger_nospy_4_03, deterministic) :-
+		reset,
+		spy(user, logtalk, _, _),
+		nospy(_, _, _, _),
+		\+ spying(_, _, _, _).
 
 	% log point tests
 
@@ -279,18 +329,21 @@
 		log(logtalk, 13, none),
 		log(logtalk, 13, new).
 
+	% log points are actually set
 	test(debugger_log_3_06, deterministic(LogPoints == [lp(logtalk,13,foo), lp(logtalk,33,bar)])) :-
 		reset,
 		log(logtalk, 13, foo),
 		log(logtalk, 33, bar),
 		setof(lp(Entity,Line,Message), logging(Entity, Line, Message), LogPoints).
 
+	% log point redefinition works
 	test(debugger_log_3_07, deterministic(LogPoints == [lp(logtalk,13,bar)])) :-
 		reset,
 		log(logtalk, 13, foo),
 		log(logtalk, 13, bar),
 		findall(lp(Entity,Line,Message), logging(Entity, Line, Message), LogPoints).
 
+	% reset/0 deletes all log points
 	test(debugger_nolog_3_01, deterministic) :-
 		reset,
 		nolog(_, _, _).
@@ -308,10 +361,12 @@
 		nologall,
 		\+ logging(_, _, _).
 
+	% predicate and clause breakpoint tests
+
 	test(debugger_spy_1_01, deterministic) :-
 		spy(logtalk-13).
 
-	% setting an unconditional breakpoint already set must still succeed deterministically
+	% setting a clause breakpoint already set must still succeed deterministically
 	test(debugger_spy_1_02, deterministic) :-
 		reset,
 		spy(logtalk-13),
@@ -320,7 +375,7 @@
 	test(debugger_spy_1_03, deterministic) :-
 		spy(foo/3).
 
-	% setting a predicate spy point already set must still succeed deterministically
+	% setting a predicate breakpoint already set must still succeed deterministically
 	test(debugger_spy_1_04, deterministic) :-
 		reset,
 		spy(foo/3),
@@ -329,12 +384,13 @@
 	test(debugger_spy_1_05, deterministic) :-
 		spy([]).
 
-	% all spy point in a list must be set
-	test(debugger_spy_1_06, deterministic(SpyPoints == [logtalk-27, bar/5])) :-
+	% all breakpoints in a list must be set
+	test(debugger_spy_1_06, deterministic(Breakpoints == [logtalk-27, bar/5])) :-
 		reset,
 		spy([logtalk-27, bar/5]),
-		setof(SpyPoint, spying(SpyPoint), SpyPoints).
+		setof(Breakpoint, spying(Breakpoint), Breakpoints).
 
+	% reset/0 deletes all predicate and clause breakpoints
 	test(debugger_nospy_1_01, deterministic) :-
 		reset,
 		nospy(_).
@@ -357,22 +413,6 @@
 		spy(foo/3),
 		nospy(_),
 		\+ spying(_).
-
-	test(debugger_nospy_4_01, deterministic) :-
-		reset,
-		nospy(_, _, _, _).
-
-	test(debugger_nospy_4_02, deterministic) :-
-		reset,
-		spy(user, logtalk, _, _),
-		nospy(user, logtalk, _, _),
-		\+ spying(_, _, _, _).
-
-	test(debugger_nospy_4_03, deterministic) :-
-		reset,
-		spy(user, logtalk, _, _),
-		nospy(_, _, _, _),
-		\+ spying(_, _, _, _).
 
 	% suppress all messages from the "debugger" component
 	% to not pollute the unit tests output

@@ -14,8 +14,8 @@ Command-line debugger based on an extended procedure box model supporting execut
 |    ``logtalk_load(debugger(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 7:10:0
-| **Date:** 2025-03-18
+| **Version:** 7:11:0
+| **Date:** 2025-03-26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -158,61 +158,61 @@ True iff leaping in tracing or debugging mode.
 
 ------------
 
-.. index:: breakpoint_/2
-.. _debugger/0::breakpoint_/2:
+.. index:: clause_breakpoint_/2
+.. _debugger/0::clause_breakpoint_/2:
 
-``breakpoint_/2``
-^^^^^^^^^^^^^^^^^
+``clause_breakpoint_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-Table of unconditional breakpoints.
+Table of clause breakpoints.
 
 | **Compilation flags:**
 |    ``dynamic``
 
 | **Template:**
-|    ``breakpoint_(Entity,Line)``
+|    ``clause_breakpoint_(Entity,Line)``
 | **Mode and number of proofs:**
-|    ``breakpoint_(?object_identifier,?integer)`` - ``zero_or_more``
-|    ``breakpoint_(?category_identifier,?integer)`` - ``zero_or_more``
+|    ``clause_breakpoint_(?object_identifier,?integer)`` - ``zero_or_more``
+|    ``clause_breakpoint_(?category_identifier,?integer)`` - ``zero_or_more``
 
 
 ------------
 
-.. index:: spying_predicate_/3
-.. _debugger/0::spying_predicate_/3:
+.. index:: predicate_breakpoint_/3
+.. _debugger/0::predicate_breakpoint_/3:
 
-``spying_predicate_/3``
-^^^^^^^^^^^^^^^^^^^^^^^
+``predicate_breakpoint_/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Table of predicate spy points.
+Table of predicate breakpoints.
 
 | **Compilation flags:**
 |    ``dynamic``
 
 | **Template:**
-|    ``spying_predicate_(Functor,Arity,Original)``
+|    ``predicate_breakpoint_(Functor,Arity,Original)``
 | **Mode and number of proofs:**
-|    ``spying_predicate_(?atom,?integer,?predicate_indicator)`` - ``zero_or_more``
-|    ``spying_predicate_(?atom,?integer,?non_terminal_indicator)`` - ``zero_or_more``
+|    ``predicate_breakpoint_(?atom,?integer,?predicate_indicator)`` - ``zero_or_more``
+|    ``predicate_breakpoint_(?atom,?integer,?non_terminal_indicator)`` - ``zero_or_more``
 
 
 ------------
 
-.. index:: spying_context_/4
-.. _debugger/0::spying_context_/4:
+.. index:: context_breakpoint_/4
+.. _debugger/0::context_breakpoint_/4:
 
-``spying_context_/4``
-^^^^^^^^^^^^^^^^^^^^^
+``context_breakpoint_/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Table of context spy points.
+Table of context breakpoints.
 
 | **Compilation flags:**
 |    ``dynamic``
 
 | **Template:**
-|    ``spying_context_(Sender,This,Self,Goal)``
+|    ``context_breakpoint_(Sender,This,Self,Goal)``
 | **Mode and number of proofs:**
-|    ``spying_context_(?object_identifier,?object_identifier,?object_identifier,?callable)`` - ``zero_or_more``
+|    ``context_breakpoint_(?object_identifier,?object_identifier,?object_identifier,?callable)`` - ``zero_or_more``
 
 
 ------------
