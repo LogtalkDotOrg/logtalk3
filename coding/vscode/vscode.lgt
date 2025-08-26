@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:67:0,
+		version is 0:67:1,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2025-08-24,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -628,6 +628,7 @@
 			(	current_object(This) ->
 				(	\+ instantiates_class(This, _),
 					\+ specializes_class(This, _) ->
+					This \== user,
 					This<<predicate_property(Template, declared_in(DeclarationEntity)),
 					This<<predicate_property(Template, defined_in(Primary))
 				;	create_object(Obj, [instantiates(This)], [], []),
@@ -669,6 +670,7 @@
 		(	current_object(This) ->
 			(	\+ instantiates_class(This, _),
 				\+ specializes_class(This, _) ->
+				This \== user,
 				This<<predicate_property(Template, declared_in(DeclarationEntity)),
 				(	This<<predicate_property(Template, redefined_from(Entity, Line)) ->
 					true
@@ -1272,6 +1274,7 @@
 		(	current_object(ImplementationEntity) ->
 			(	\+ instantiates_class(ImplementationEntity, _),
 				\+ specializes_class(ImplementationEntity, _) ->
+				ImplementationEntity \== user,
 				ImplementationEntity<<predicate_property(Template, declared_in(DeclarationEntity))
 			;	(	create_object(Obj, [instantiates(ImplementationEntity)], [], []),
 					Obj<<predicate_property(Template, declared_in(DeclarationEntity)),

@@ -88,6 +88,10 @@ definition when provided by an included file.
 reference to not report calls from auxiliary predicates (as the reflection
 API reports line zero in these cases).
 
+* FIXED: VSCode support when using the code navigating features resulted in
+predicate property queries to the `user` built-in object that would throw an
+error.
+
 
 3.92.0 - May 28, 2025
 =====================
