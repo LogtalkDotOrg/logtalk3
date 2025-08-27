@@ -86,12 +86,15 @@ the Logtalk kernel:
 
 	$ open /Applications/JupyterLab.app
 
-For VSCode and VSCodium, the Logtalk extension provides commands to open,
-pair, and sync notebooks.
+For VSCode and VSCodium, the Logtalk for VSCode extension provides
+commands to open, pair, and sync notebooks. Right-click on a `NOTES.md`
+file and use the commands available from the "Logtalk: Jupyter" sub-menu.
+You may need to activate the extension first by opening a Logtalk source
+file.
 
 If you edit the Jupytext setting for languages and add `markdown` to the
 list, you can then right-click on the `NOTES.md` files and select the
-option "Open as a Jupyter Notebook". Id you also add `logtalk` to the
+option "Open as a Jupyter Notebook". If you also add `logtalk` to the
 languages setting, the same option will be available for Logtalk source
 files and applicable when they are scripts written using e.g. the light
 or percent formats. See the Jupytext documentation for details:
