@@ -1018,6 +1018,7 @@
 				% the do_port_option/7 call can fail but still change the value of Code
 				% (e.g., when adding or removing a spy point)
 				leashing_port(Port, PortUserName, N, Goal, ExCtx, Code),
+				% allow tools such as the Logtalk for VSCode extension to intercept port messages
 				print_message(silent, debugger, Port),
 				(	write_max_depth_(MaxDepth),
 					MaxDepth > 0 ->
