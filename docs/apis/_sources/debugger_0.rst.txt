@@ -158,65 +158,6 @@ True iff leaping in tracing or debugging mode.
 
 ------------
 
-.. index:: clause_breakpoint_/2
-.. _debugger/0::clause_breakpoint_/2:
-
-``clause_breakpoint_/2``
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-Table of clause breakpoints.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Template:**
-|    ``clause_breakpoint_(Entity,Line)``
-| **Mode and number of proofs:**
-|    ``clause_breakpoint_(?object_identifier,?integer)`` - ``zero_or_more``
-|    ``clause_breakpoint_(?category_identifier,?integer)`` - ``zero_or_more``
-
-
-------------
-
-.. index:: predicate_breakpoint_/3
-.. _debugger/0::predicate_breakpoint_/3:
-
-``predicate_breakpoint_/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Table of predicate breakpoints.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Template:**
-|    ``predicate_breakpoint_(Functor,Arity,Original)``
-| **Mode and number of proofs:**
-|    ``predicate_breakpoint_(?atom,?integer,?predicate_indicator)`` - ``zero_or_more``
-|    ``predicate_breakpoint_(?atom,?integer,?non_terminal_indicator)`` - ``zero_or_more``
-
-
-------------
-
-.. index:: context_breakpoint_/4
-.. _debugger/0::context_breakpoint_/4:
-
-``context_breakpoint_/4``
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Table of context breakpoints.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Template:**
-|    ``context_breakpoint_(Sender,This,Self,Goal)``
-| **Mode and number of proofs:**
-|    ``context_breakpoint_(?object_identifier,?object_identifier,?object_identifier,?callable)`` - ``zero_or_more``
-
-
-------------
-
 .. index:: leashing_/1
 .. _debugger/0::leashing_/1:
 
@@ -328,6 +269,65 @@ Table of log points.
 | **Mode and number of proofs:**
 |    ``log_point_(?object_identifier,?integer,?atom)`` - ``zero_or_more``
 |    ``log_point_(?category_identifier,?integer,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: clause_breakpoint_/2
+.. _debugger/0::clause_breakpoint_/2:
+
+``clause_breakpoint_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of clause breakpoints.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``clause_breakpoint_(Entity,Line)``
+| **Mode and number of proofs:**
+|    ``clause_breakpoint_(?object_identifier,?integer)`` - ``zero_or_more``
+|    ``clause_breakpoint_(?category_identifier,?integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: predicate_breakpoint_/3
+.. _debugger/0::predicate_breakpoint_/3:
+
+``predicate_breakpoint_/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of predicate breakpoints.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``predicate_breakpoint_(Functor,Arity,Original)``
+| **Mode and number of proofs:**
+|    ``predicate_breakpoint_(?atom,?integer,?predicate_indicator)`` - ``zero_or_more``
+|    ``predicate_breakpoint_(?atom,?integer,?non_terminal_indicator)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: context_breakpoint_/4
+.. _debugger/0::context_breakpoint_/4:
+
+``context_breakpoint_/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of context breakpoints.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``context_breakpoint_(Sender,This,Self,Goal)``
+| **Mode and number of proofs:**
+|    ``context_breakpoint_(?object_identifier,?object_identifier,?object_identifier,?callable)`` - ``zero_or_more``
 
 
 ------------
