@@ -25,7 +25,11 @@ RELEASE NOTES
 3.94.0 - September ??, 2025
 ===========================
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
 
+* FIXED: VSCode support where finding predicate references from a local
+predicate call would not include a local predicate declaration.
 
 
 3.93.0 - August 28, 2025
