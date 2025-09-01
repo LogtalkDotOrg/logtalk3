@@ -25,6 +25,12 @@ RELEASE NOTES
 3.94.0 - September ??, 2025
 ===========================
 
+Examples
+--------
+
+* UPDATED: The `errors` example to illustrate missing `multifile/1` directive
+linter warnings.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

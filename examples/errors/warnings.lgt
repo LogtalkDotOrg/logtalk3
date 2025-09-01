@@ -148,6 +148,14 @@
 
 
 
+:- object(missing_multifile_directive).
+
+	user::foo(bar).
+
+:- end_object.
+
+
+
 :- object(missing_meta_predicate_directive).
 
 	foo(X) :- call(X).
