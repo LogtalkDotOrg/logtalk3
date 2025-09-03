@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:68:1,
+		version is 0:68:2,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2025-09-03,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -444,7 +444,7 @@
 		atom(Name),
 		integer(Arity),
 		entity_property(Entity, _, provides(Name/Arity, Other, _)),
-		entity_property(Other, Kind, declares(Name/Arity, Line, Properties)),
+		entity_property(Other, Kind, declares(Name/Arity, Properties)),
 		entity_property(Other, Kind, file(File)),
 		memberchk(line_count(Line), Properties).
 

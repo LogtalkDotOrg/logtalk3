@@ -40,6 +40,9 @@ predicate declarations.
 * FIXED: VSCode support error when trying to find predicate references from an
 `alias/2` directive with a protocol or category in its first argument.
 
+* FIXED: VSCode support failure to find a predicate declaration from a clause
+for a multifile predicate or from a `multifile/1` predicate directive.
+
 
 3.93.0 - August 28, 2025
 ========================
