@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:68:2,
+		version is 0:69:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2025-09-03,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -480,6 +480,17 @@
 			find_declaration_(^^Name/ExtArity, Entity, CallerLine, File, Line)
 		).
 
+	find_declaration_(@Name/Arity, Entity, CallerLine, File, Line) :-
+		(	complements_object(Entity, Object) ->
+			(	find_declaration_(Name/Arity, Object, _, File, Line) ->
+				true
+			;	ExtArity is Arity + 2,
+				find_declaration_(Name/ExtArity, Object, _, File, Line)
+			)
+		;	% object or non-complementing category
+			find_declaration_(Name/Arity, Entity, CallerLine, File, Line)
+		).
+
 	% locally declared
 	find_declaration_(Name/Arity, Entity, _, File, Line) :-
 		atom(Name),
@@ -706,6 +717,19 @@
 		memberchk(lines(Start, End), Properties),
 		Start =< CallLine, CallLine =< End,
 		find_definition_(^^Name/ExtArity, Entity, CallLine, File, Line).
+
+	find_definition_(@Name/Arity, Entity, CallLine, File, Line) :-
+		(	complements_object(Entity, Object) ->
+			(	find_definition_(Name/Arity, Object, _, File, Line),
+				entity_property(Object, _, file(File)) ->
+				true
+			;	ExtArity is Arity + 2,
+				find_definition_(Name/ExtArity, Object, _, File, Line),
+				entity_property(Object, _, file(File))
+			)
+		;	current_object(Entity),
+			find_definition_(Name/Arity, Entity, CallLine, File, Line)
+		).
 
 	find_definition_(Name/Arity, This, _, File, Line) :-
 		atom(Name),
