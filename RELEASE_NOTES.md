@@ -37,6 +37,9 @@ IDEs, text editors, and syntax highlighters support
 * CHANGED: VSCode support for finding predicate references no longer includes
 predicate declarations.
 
+* FIXED: VSCode support error when trying to find predicate references from an
+`alias/2` directive with a protocol or category in its first argument.
+
 
 3.93.0 - August 28, 2025
 ========================

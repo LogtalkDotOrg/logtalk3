@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:68:0,
+		version is 0:68:1,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2025-09-03,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -418,7 +418,9 @@
 			\+ member(predicate, Properties),
 			member(for(Object), Properties) ->
 			true
-		;	Object = Alias
+		;	current_object(Alias) ->
+			Object = Alias
+		;	false
 		),
 		Object \== user,
 		functor(Template, Name, Arity),
