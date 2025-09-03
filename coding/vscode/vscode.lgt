@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:67:2,
+		version is 0:68:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-08-29,
+		date is 2025-09-03,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -980,7 +980,7 @@
 		).
 
 	% predicate listed in a uses/2 directive
-	find_predicate_references(Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
+	find_predicate_references(Name/Arity, Entity, _, Line, References) :-
 		atom(Name),
 		integer(Arity),
 		entity_property(Entity, _, calls(Object::Name/Arity, Properties)),
@@ -1001,7 +1001,7 @@
 		find_predicate_local_references(Name/Arity, Entity, File, Line, References).
 
 	% predicate listed in an alias/2 directive
-	find_predicate_references(Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
+	find_predicate_references(Name/Arity, Entity, _, Line, References) :-
 		atom(Name),
 		integer(Arity),
 		entity_property(Entity, _, alias(_/Arity, Properties)),
@@ -1013,7 +1013,7 @@
 		entity(DeclarationFile, DeclarationLine, DeclarationEntity),
 		find_predicate_references(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
 	% predicate alias listed in an alias/2 directive
-	find_predicate_references(Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
+	find_predicate_references(Name/Arity, Entity, _, Line, References) :-
 		atom(Name),
 		integer(Arity),
 		entity_property(Entity, _, alias(Name/Arity, Properties)),
@@ -1026,7 +1026,7 @@
 		find_predicate_references(OriginalName/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
 
 	% local predicate call; declared
-	find_predicate_references(Name/Arity, Entity, File, Line, [DeclarationFile-DeclarationLine| References]) :-
+	find_predicate_references(Name/Arity, Entity, File, Line, References) :-
 		atom(Name),
 		integer(Arity),
 		find_declaration_(Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
@@ -1056,7 +1056,7 @@
 		)),
 		find_references_(Name/ExtArity, File, Line, References).
 
-	find_predicate_references(Alias::Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
+	find_predicate_references(Alias::Name/Arity, Entity, _, Line, References) :-
 		callable(Alias),
 		atom(Name),
 		integer(Arity),
@@ -1070,7 +1070,7 @@
 		entity(DeclarationFile, DeclarationLine, DeclarationEntity),
 		find_predicate_references(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
 
-	find_predicate_references(::Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
+	find_predicate_references(::Name/Arity, Entity, _, Line, References) :-
 		atom(Name),
 		integer(Arity),
 		(	find_declaration_(::Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
@@ -1085,7 +1085,7 @@
 			find_predicate_references(Name/ExtArity, DeclarationEntity, DeclarationFile, DeclarationLine, References)
 		).
 
-	find_predicate_references(^^Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
+	find_predicate_references(^^Name/Arity, Entity, _, Line, References) :-
 		atom(Name),
 		integer(Arity),
 		(	find_declaration_(^^Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),

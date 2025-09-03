@@ -34,8 +34,8 @@ linter warnings.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
-* FIXED: VSCode support where finding predicate references from a local
-predicate call would not include a local predicate declaration.
+* CHANGED: VSCode support for finding predicate references no longer includes
+predicate declarations.
 
 
 3.93.0 - August 28, 2025
