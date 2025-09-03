@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 7:11:0,
+		version is 7:12:0,
 		author is 'Paulo Moura',
-		date is 2025-03-26,
+		date is 2025-09-03,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -141,6 +141,15 @@
 	:- info(predicate_breakpoint_/3, [
 		comment is 'Table of predicate breakpoints.',
 		argnames is ['Functor', 'Arity', 'Original']
+	]).
+
+	:- private(entity_predicate_breakpoint_/4).
+	:- dynamic(entity_predicate_breakpoint_/4).
+	:- mode(entity_predicate_breakpoint_(?callable, ?atom, ?integer, ?qualified_predicate_indicator), zero_or_more).
+	:- mode(entity_predicate_breakpoint_(?callable, ?atom, ?integer, ?qualified_non_terminal_indicator), zero_or_more).
+	:- info(entity_predicate_breakpoint_/4, [
+		comment is 'Table of entity predicate breakpoints.',
+		argnames is ['Entity', 'Functor', 'Arity', 'Original']
 	]).
 
 	:- private(context_breakpoint_/4).
@@ -285,6 +294,11 @@
 			print_message(information, debugger, predicate_breakpoints(PredicateBreakpoints))
 		;	print_message(information, debugger, no_predicate_breakpoints_defined)
 		),
+		(	entity_predicate_breakpoint_(_, _, _, _) ->
+			findall(QualifiedPredicate, entity_predicate_breakpoint_(_,_,_,QualifiedPredicate), QualifiedPredicates),
+			print_message(information, debugger, entity_predicate_breakpoints(QualifiedPredicates))
+		;	print_message(information, debugger, no_entity_predicate_breakpoints_defined)
+		),
 		(	context_breakpoint_(_, _, _, _) ->
 			findall((Sender,This,Self,Goal), context_breakpoint_(Sender,This,Self,Goal), ContextBreakpoints),
 			print_message(information, debugger, context_breakpoints(ContextBreakpoints))
@@ -331,6 +345,13 @@
 			ExtArity is Arity + 2,
 			spy_predicate(Name, ExtArity, Name//Arity),
 			print_message(information, debugger, predicate_breakpoint_added)
+		;	Spec = Entity::Name/Arity ->
+			spy_entity_predicate(Entity, Name, Arity, Entity::Name/Arity),
+			print_message(information, debugger, entity_predicate_breakpoint_added)
+		;	Spec = Entity::Name//Arity ->
+			ExtArity is Arity + 2,
+			spy_entity_predicate(Entity, Name, ExtArity, Entity::Name//Arity),
+			print_message(information, debugger, entity_predicate_breakpoint_added)
 		;	spy_list(Spec),
 			print_message(information, debugger, breakpoints_added)
 		),
@@ -374,12 +395,24 @@
 		;	assertz(predicate_breakpoint_(Functor, Arity, Original))
 		).
 
+	spy_entity_predicate(Entity, Functor, Arity, QualifiedPredicate) :-
+		atom(Functor),
+		integer(Arity),
+		(	entity_predicate_breakpoint_(Entity, Functor, Arity, _) ->
+			true
+		;	assertz(entity_predicate_breakpoint_(Entity, Functor, Arity, QualifiedPredicate))
+		).
+
 	spying(Entity-Line) :-
 		clause_breakpoint_(Entity, Line).
 	spying(Functor/Arity) :-
 		predicate_breakpoint_(Functor, Arity, Functor/Arity).
 	spying(Functor//Arity) :-
 		predicate_breakpoint_(Functor, _, Functor//Arity).
+	spying(Entity::Functor/Arity) :-
+		entity_predicate_breakpoint_(Entity, Functor, Arity, Functor/Arity).
+	spying(Entity::Functor//Arity) :-
+		entity_predicate_breakpoint_(Entity, Functor, _, Functor//Arity).
 
 	nospy(SpyPoints) :-
 		nospy_aux(SpyPoints),
@@ -390,7 +423,9 @@
 		!,
 		nospy_clause(_),
 		nospy_predicate(_),
-		nospy_non_terminal(_).
+		nospy_non_terminal(_),
+		nospy_entity_predicate(_),
+		nospy_entity_non_terminal(_).
 	nospy_aux([]).
 	nospy_aux([SpyPoint| SpyPoints]) :-
 		nospy_list([SpyPoint| SpyPoints]).
@@ -400,6 +435,10 @@
 		nospy_predicate(Functor/Arity).
 	nospy_aux(Functor//Arity) :-
 		nospy_non_terminal(Functor//Arity).
+	nospy_aux(Entity::Functor/Arity) :-
+		nospy_entity_predicate(Entity::Functor/Arity).
+	nospy_aux(Entity::Functor//Arity) :-
+		nospy_entity_non_terminal(Entity::Functor//Arity).
 
 	nospy_list([]).
 	nospy_list([SpyPoint| SpyPoints]) :-
@@ -417,6 +456,17 @@
 		(	integer(Arity) ->
 			ExtArity is Arity + 2,
 			retractall(predicate_breakpoint_(Functor, ExtArity, _))
+		;	true
+		).
+
+	nospy_entity_predicate(Entity::Functor/Arity) :-
+		retractall(entity_predicate_breakpoint_(Entity, Functor, Arity, _)).
+
+	nospy_entity_non_terminal(Entity::Functor//Arity) :-
+		retractall(entity_predicate_breakpoint_(Entity, Functor, _, Entity::Functor//Arity)),
+		(	integer(Arity) ->
+			ExtArity is Arity + 2,
+			retractall(entity_predicate_breakpoint_(Entity, Functor, ExtArity, _))
 		;	true
 		).
 
@@ -522,6 +572,7 @@
 		retractall(triggered_breakpoint_(_, _, _, _)),
 		retractall(triggered_breakpoint_enabled_(_, _)),
 		retractall(predicate_breakpoint_(_, _, _)),
+		retractall(entity_predicate_breakpoint_(_, _, _, _)),
 		retractall(context_breakpoint_(_, _, _, _)),
 		print_message(comment, debugger, all_breakpoints_removed).
 
@@ -652,6 +703,11 @@
 	spying_port_code(_, Goal, _, '+') :-
 		functor(Goal, Functor, Arity),
 		predicate_breakpoint_(Functor, Arity, _),
+		!.
+	spying_port_code(_, Goal, ExCtx, '+') :-
+		functor(Goal, Functor, Arity),
+		logtalk::execution_context(ExCtx, Entity, _, _, _, _, _),
+		entity_predicate_breakpoint_(Entity, Functor, Arity, _),
 		!.
 	spying_port_code(_, Goal, ExCtx, '*') :-
 		logtalk::execution_context(ExCtx, _, Sender, This, Self, _, _),
@@ -917,6 +973,10 @@
 			;	quasi_skipping_,
 				(	functor(Goal, Functor, Arity),
 					predicate_breakpoint_(Functor, Arity, _)
+				;	functor(Goal, Functor, Arity),
+					logtalk::execution_context(ExCtx, Entity, _, _, _, _, _),
+					entity_predicate_breakpoint_(Entity0, Functor, Arity, _),
+					subsumes_term(Entity0, Entity)
 				;	logtalk::execution_context(ExCtx, _, Sender, This, Self, _, _),
 					context_breakpoint_(Sender0, This0, Self0, Goal0),
 					subsumes_term(sp(Sender0, This0, Self0, Goal0), sp(Sender, This, Self, Goal))

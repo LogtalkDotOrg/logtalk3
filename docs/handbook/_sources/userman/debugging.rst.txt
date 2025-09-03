@@ -221,7 +221,9 @@ Defining predicate and clause breakpoints
 Predicate and clause breakpoints can be defined using the debugger ``spy/1``
 predicate. The argument can be a predicate indicator (``Name/Arity``), a
 non-terminal indicator (``Name//Arity``), a clause location (expressed as
-an ``Entity-Line`` pair), or a list of breakpoints. For example:
+an ``Entity-Line`` pair), or a list of breakpoints. Predicate and non-terminal
+indicators can also be qualified with a specific object or category identifiers.
+For example:
 
 .. code-block:: text
 
@@ -233,6 +235,11 @@ an ``Entity-Line`` pair), or a list of breakpoints. For example:
    | ?- debugger::spy(foo/2).
 
    Predicate breakpoint added.
+   yes
+
+   | ?- debugger::spy(qux::baz/3).
+
+   Entity predicate breakpoint added.
    yes
 
    | ?- debugger::spy([foo/4, bar//1, agent-99]).

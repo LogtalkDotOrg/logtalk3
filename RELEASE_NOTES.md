@@ -25,6 +25,12 @@ RELEASE NOTES
 3.94.0 - September ??, 2025
 ===========================
 
+Tools
+-----
+
+* ADDED: Support for creating entity specific predicate breakpoints to the
+`debugger` tool.
+
 Examples
 --------
 

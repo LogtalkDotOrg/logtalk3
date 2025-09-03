@@ -22,14 +22,16 @@
 :- protocol(debuggerp).
 
 	:- info([
-		version is 3:4:0,
+		version is 3:5:0,
 		author is 'Paulo Moura',
-		date is 2025-03-18,
+		date is 2025-09-03,
 		comment is 'Debugger protocol.',
 		remarks is [
 			'Debugger help' - 'Type the character ``h`` (condensed help) or the character ``?`` (extended help) at a leashed port.',
 			'Predicate breakpoint' - 'Specified as a ground term ``Functor/Arity``.',
 			'Non-terminal breakpoint' - 'Specified as a ground term ``Functor//Arity``.',
+			'Entity predicate breakpoint' - 'Specified as a term ``Entity::Functor/Arity``. ``Entity`` must be an object or category and may not be ground if parametric.',
+			'Entity non-terminal breakpoint' - 'Specified as a term ``Entity::Functor//Arity``. ``Entity`` must be an object or category and may not be ground if parametric.',
 			'Clause breakpoint' - 'Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound. ``Line`` must be the first source file line of an entity clause.',
 			'Conditional breakpoint' - 'Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound and a condition. ``Line`` must be the first source file line of an entity clause.',
 			'Hit count breakpoint' - 'Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound and an unification count expression as a condition. ``Line`` must be the first source file line of an entity clause.',

@@ -379,7 +379,9 @@ tool documentation for details.</p>
 <p>Predicate and clause breakpoints can be defined using the debugger <code class="docutils literal notranslate"><span class="pre">spy/1</span></code>
 predicate. The argument can be a predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>), a
 non-terminal indicator (<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>), a clause location (expressed as
-an <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> pair), or a list of breakpoints. For example:</p>
+an <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> pair), or a list of breakpoints. Predicate and non-terminal
+indicators can also be qualified with a specific object or category identifiers.
+For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(person-42).
 
 Clause breakpoint added.
@@ -388,6 +390,11 @@ yes
 | ?- debugger::spy(foo/2).
 
 Predicate breakpoint added.
+yes
+
+| ?- debugger::spy(qux::baz/3).
+
+Entity predicate breakpoint added.
 yes
 
 | ?- debugger::spy([foo/4, bar//1, agent-99]).

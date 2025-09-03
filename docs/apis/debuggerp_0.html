@@ -208,8 +208,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 3:4:0</div>
-<div class="line"><strong>Date:</strong> 2025-03-18</div>
+<div class="line"><strong>Version:</strong> 3:5:0</div>
+<div class="line"><strong>Date:</strong> 2025-09-03</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -231,6 +231,8 @@
 <li><p>Debugger help: Type the character <code class="docutils literal notranslate"><span class="pre">h</span></code> (condensed help) or the character <code class="docutils literal notranslate"><span class="pre">?</span></code> (extended help) at a leashed port.</p></li>
 <li><p>Predicate breakpoint: Specified as a ground term <code class="docutils literal notranslate"><span class="pre">Functor/Arity</span></code>.</p></li>
 <li><p>Non-terminal breakpoint: Specified as a ground term <code class="docutils literal notranslate"><span class="pre">Functor//Arity</span></code>.</p></li>
+<li><p>Entity predicate breakpoint: Specified as a term <code class="docutils literal notranslate"><span class="pre">Entity::Functor/Arity</span></code>. <code class="docutils literal notranslate"><span class="pre">Entity</span></code> must be an object or category and may not be ground if parametric.</p></li>
+<li><p>Entity non-terminal breakpoint: Specified as a term <code class="docutils literal notranslate"><span class="pre">Entity::Functor//Arity</span></code>. <code class="docutils literal notranslate"><span class="pre">Entity</span></code> must be an object or category and may not be ground if parametric.</p></li>
 <li><p>Clause breakpoint: Specified as an <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> term with both <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and <code class="docutils literal notranslate"><span class="pre">Line</span></code> bound. <code class="docutils literal notranslate"><span class="pre">Line</span></code> must be the first source file line of an entity clause.</p></li>
 <li><p>Conditional breakpoint: Specified as an <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> term with both <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and <code class="docutils literal notranslate"><span class="pre">Line</span></code> bound and a condition. <code class="docutils literal notranslate"><span class="pre">Line</span></code> must be the first source file line of an entity clause.</p></li>
 <li><p>Hit count breakpoint: Specified as an <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> term with both <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and <code class="docutils literal notranslate"><span class="pre">Line</span></code> bound and an unification count expression as a condition. <code class="docutils literal notranslate"><span class="pre">Line</span></code> must be the first source file line of an entity clause.</p></li>

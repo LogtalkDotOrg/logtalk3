@@ -22,9 +22,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 3:8:0,
+		version is 3:9:0,
 		author is 'Paulo Moura',
-		date is 2025-08-26,
+		date is 2025-09-03,
 		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
@@ -229,6 +229,21 @@
 
 	message_tokens(predicate_breakpoint_removed) -->
 		['     Predicate breakpoint removed.'-[], nl].
+
+	% entity predicate breakpoints
+
+	message_tokens(entity_predicate_breakpoints(Breakpoints)) -->
+		['     Defined entity predicate breakpoints:'-[], nl],
+		breakpoints(Breakpoints).
+
+	message_tokens(no_entity_predicate_breakpoints_defined) -->
+		['     No entity predicate breakpoints are defined.'-[], nl].
+
+	message_tokens(entity_predicate_breakpoint_added) -->
+		['     Entity predicate breakpoint added.'-[], nl].
+
+	message_tokens(entity_predicate_breakpoint_removed) -->
+		['     Entity predicate breakpoint removed.'-[], nl].
 
 	% breakpoints
 
@@ -481,6 +496,9 @@
 		['        ~q'-[Functor/Arity], nl].
 	breakpoint(Functor//Arity) -->
 		['        ~q'-[Functor//Arity], nl].
+	breakpoint(Entity::Predicate) -->
+		{ground_term_copy(Entity, GroundEntity)},
+		['        ~q'-[GroundEntity::Predicate], nl].
 
 	context_breakpoints([Breakpoint| Breakpoints]) -->
 		context_breakpoint(Breakpoint),

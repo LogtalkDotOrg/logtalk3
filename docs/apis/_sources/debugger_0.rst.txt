@@ -14,8 +14,8 @@ Command-line debugger based on an extended procedure box model supporting execut
 |    ``logtalk_load(debugger(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 7:11:0
-| **Date:** 2025-03-26
+| **Version:** 7:12:0
+| **Date:** 2025-09-03
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -309,6 +309,26 @@ Table of predicate breakpoints.
 | **Mode and number of proofs:**
 |    ``predicate_breakpoint_(?atom,?integer,?predicate_indicator)`` - ``zero_or_more``
 |    ``predicate_breakpoint_(?atom,?integer,?non_terminal_indicator)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: entity_predicate_breakpoint_/4
+.. _debugger/0::entity_predicate_breakpoint_/4:
+
+``entity_predicate_breakpoint_/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of entity predicate breakpoints.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``entity_predicate_breakpoint_(Entity,Functor,Arity,Original)``
+| **Mode and number of proofs:**
+|    ``entity_predicate_breakpoint_(?callable,?atom,?integer,?qualified_predicate_indicator)`` - ``zero_or_more``
+|    ``entity_predicate_breakpoint_(?callable,?atom,?integer,?qualified_non_terminal_indicator)`` - ``zero_or_more``
 
 
 ------------

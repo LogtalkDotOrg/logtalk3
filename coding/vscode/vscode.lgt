@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:69:0,
+		version is 0:70:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2025-09-03,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -208,10 +208,12 @@
 	]).
 
 	:- public((spy)/1).
+	:- mode(spy(@qualified_predicate_indicator), one).
+	:- mode(spy(@qualified_non_terminal_indicator), one).
 	:- mode(spy(@predicate_indicator), one).
 	:- mode(spy(@non_terminal_indicator), one).
 	:- info((spy)/1, [
-		comment is 'Adds a spy point for the given predicate or non-terminal.',
+		comment is 'Adds a spy point for the given (possibly qualified) predicate or non-terminal.',
 		argnames is ['Predicate']
 	]).
 
@@ -230,9 +232,10 @@
 	]).
 
 	:- public((nospy)/1).
-	:- mode(nospy(+predicate_indicator), one).
+	:- mode(nospy(@qualified_directive_resource), one).
+	:- mode(nospy(@predicate_indicator), one).
 	:- info((nospy)/1, [
-		comment is 'Removes a spy point for the given predicate.',
+		comment is 'Removes a spy point for the given (possibly qualified) predicate.',
 		argnames is ['Predicate']
 	]).
 
@@ -1575,12 +1578,16 @@
 
 	spy(Predicate) :-
 		ensure_debbugger,
-		spy_(Predicate).
+		spy_(Predicate), !.
 
 	spy_(Name/Arity) :-
 		{debugger::spy(Name/Arity)}.
 	spy_(Name//Arity) :-
 		{debugger::spy(Name//Arity)}.
+	spy_(Entity::Name/Arity) :-
+		{debugger::spy(Entity::Name/Arity)}.
+	spy_(Entity::Name//Arity) :-
+		{debugger::spy(Entity::Name//Arity)}.
 	spy_((Sender, This, Self, Goal)) :-
 		{debugger::spy(Sender, This, Self, Goal)}.
 
@@ -1596,12 +1603,16 @@
 
 	nospy(Predicate) :-
 		ensure_debbugger,
-		nospy_(Predicate).
+		nospy_(Predicate), !.
 
 	nospy_(Name/Arity) :-
 		{debugger::nospy(Name/Arity)}.
 	nospy_(Name//Arity) :-
 		{debugger::nospy(Name//Arity)}.
+	nospy_(Entity::Name/Arity) :-
+		{debugger::nospy(Entity::Name/Arity)}.
+	nospy_(Entity::Name//Arity) :-
+		{debugger::nospy(Entity::Name//Arity)}.
 	nospy_((Sender, This, Self, Goal)) :-
 		{debugger::nospy(Sender, This, Self, Goal)}.
 
