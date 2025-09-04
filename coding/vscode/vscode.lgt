@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:70:0,
+		version is 0:71:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-09-03,
+		date is 2025-09-04,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -198,13 +198,13 @@
 	:- public(debug/0).
 	:- mode(debug, one).
 	:- info(debug/0, [
-		comment is '.'
+		comment is 'Ensures the debugger tool is loaded and starts debugging for all defined breakpoints.'
 	]).
 
 	:- public(nodebug/0).
 	:- mode(nodebug, one).
 	:- info(nodebug/0, [
-		comment is '.'
+		comment is 'Ensures the debugger tool is loaded and stops debugging for all defined breakpoints. Also turns off tracing. Does not remove defined breakpoints.'
 	]).
 
 	:- public((spy)/1).
