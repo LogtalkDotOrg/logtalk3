@@ -23,7 +23,7 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 7:12:1,
+		version is 7:12:2,
 		author is 'Paulo Moura',
 		date is 2025-09-05,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
@@ -356,11 +356,10 @@
 			spy_predicate(Name, ExtArity, Name//Arity),
 			print_message(information, debugger, predicate_breakpoint_added)
 		;	Spec = Entity::Name/Arity ->
-			spy_entity_predicate(Entity, Name, Arity, Entity::Name/Arity),
+			spy_entity_predicate(Entity, Name, Arity),
 			print_message(information, debugger, entity_predicate_breakpoint_added)
 		;	Spec = Entity::Name//Arity ->
-			ExtArity is Arity + 2,
-			spy_entity_predicate(Entity, Name, ExtArity, Entity::Name//Arity),
+			spy_entity_non_terminal(Entity, Name, Arity),
 			print_message(information, debugger, entity_predicate_breakpoint_added)
 		;	spy_list(Spec),
 			print_message(information, debugger, breakpoints_added)
@@ -405,12 +404,27 @@
 		;	assertz(predicate_breakpoint_(Functor, Arity, Original))
 		).
 
-	spy_entity_predicate(Entity, Functor, Arity, QualifiedPredicate) :-
+	spy_entity_predicate(Entity, Functor, Arity) :-
+		callable(Entity),
+		functor(Entity, EntityFunctor, EntityArity),
+		functor(Template, EntityFunctor, EntityArity),
 		atom(Functor),
 		integer(Arity),
-		(	entity_predicate_breakpoint_(Entity, Functor, Arity, _) ->
+		(	entity_predicate_breakpoint_(Template, Functor, Arity, _) ->
 			true
-		;	assertz(entity_predicate_breakpoint_(Entity, Functor, Arity, QualifiedPredicate))
+		;	assertz(entity_predicate_breakpoint_(Template, Functor, Arity, Template::Functor/Arity))
+		).
+
+	spy_entity_non_terminal(Entity, Functor, Arity) :-
+		callable(Entity),
+		functor(Entity, EntityFunctor, EntityArity),
+		functor(Template, EntityFunctor, EntityArity),
+		atom(Functor),
+		integer(Arity),
+		ExtArity is Arity + 2,
+		(	entity_predicate_breakpoint_(Template, Functor, ExtArity, _) ->
+			true
+		;	assertz(entity_predicate_breakpoint_(Template, Functor, ExtArity, Template::Functor//Arity))
 		).
 
 	spying(Entity-Line) :-
@@ -990,8 +1004,7 @@
 					predicate_breakpoint_(Functor, Arity, _)
 				;	functor(Goal, Functor, Arity),
 					logtalk::execution_context(ExCtx, Entity, _, _, _, _, _),
-					entity_predicate_breakpoint_(Entity0, Functor, Arity, _),
-					subsumes_term(Entity0, Entity)
+					entity_predicate_breakpoint_(Entity, Functor, Arity, _)
 				;	logtalk::execution_context(ExCtx, _, Sender, This, Self, _, _),
 					context_breakpoint_(Sender0, This0, Self0, Goal0),
 					subsumes_term(sp(Sender0, This0, Self0, Goal0), sp(Sender, This, Self, Goal))
