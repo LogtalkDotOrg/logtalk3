@@ -267,8 +267,10 @@ Defining conditional breakpoints
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Conditional clause breakpoints are specified using the debugger ``spy/3``
-predicate. The condition can be a lambda expression, an unification count
-expression (see next section), or another breakpoint (see next section).
+predicate. The first two arguments are the entity and the line of a clause
+head. The third argument is the condition, which can be a lambda expression,
+an unification count expression (see next section), or another breakpoint
+(see next below).
 
 The supported lambda expressions are ``[Count, N, Goal]>>Condition`` and
 ``[Goal]>>Condition`` where ``Count`` is the unification count, ``N`` is the

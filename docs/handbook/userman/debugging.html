@@ -420,8 +420,10 @@ yes
 <section id="defining-conditional-breakpoints">
 <h3>Defining conditional breakpoints<a class="headerlink" href="#defining-conditional-breakpoints" title="Link to this heading"></a></h3>
 <p>Conditional clause breakpoints are specified using the debugger <code class="docutils literal notranslate"><span class="pre">spy/3</span></code>
-predicate. The condition can be a lambda expression, an unification count
-expression (see next section), or another breakpoint (see next section).</p>
+predicate. The first two arguments are the entity and the line of a clause
+head. The third argument is the condition, which can be a lambda expression,
+an unification count expression (see next section), or another breakpoint
+(see next below).</p>
 <p>The supported lambda expressions are <code class="docutils literal notranslate"><span class="pre">[Count,</span> <span class="pre">N,</span> <span class="pre">Goal]&gt;&gt;Condition</span></code> and
 <code class="docutils literal notranslate"><span class="pre">[Goal]&gt;&gt;Condition</span></code> where <code class="docutils literal notranslate"><span class="pre">Count</span></code> is the unification count, <code class="docutils literal notranslate"><span class="pre">N</span></code> is the
 goal invocation number, and <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is the goal that unified with the clause

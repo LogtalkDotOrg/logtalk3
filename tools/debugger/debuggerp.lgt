@@ -22,9 +22,9 @@
 :- protocol(debuggerp).
 
 	:- info([
-		version is 3:5:0,
+		version is 3:6:0,
 		author is 'Paulo Moura',
-		date is 2025-09-03,
+		date is 2025-09-05,
 		comment is 'Debugger protocol.',
 		remarks is [
 			'Debugger help' - 'Type the character ``h`` (condensed help) or the character ``?`` (extended help) at a leashed port.',
@@ -33,11 +33,11 @@
 			'Entity predicate breakpoint' - 'Specified as a term ``Entity::Functor/Arity``. ``Entity`` must be an object or category and may not be ground if parametric.',
 			'Entity non-terminal breakpoint' - 'Specified as a term ``Entity::Functor//Arity``. ``Entity`` must be an object or category and may not be ground if parametric.',
 			'Clause breakpoint' - 'Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound. ``Line`` must be the first source file line of an entity clause.',
-			'Conditional breakpoint' - 'Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound and a condition. ``Line`` must be the first source file line of an entity clause.',
-			'Hit count breakpoint' - 'Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound and an unification count expression as a condition. ``Line`` must be the first source file line of an entity clause.',
-			'Triggered breakpoint' - 'Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound and another breakpoint as a condition. ``Line`` must be the first source file line of an entity clause.',
+			'Conditional breakpoint' - 'Specified using ``Entity`` and ``Line`` for the clause head and a condition. ``Line`` must be the first source file line of an entity clause.',
+			'Hit count breakpoint' - 'Specified using ``Entity`` and ``Line`` for the clause head and an unification count expression as a condition. ``Line`` must be the first source file line of an entity clause.',
+			'Triggered breakpoint' - 'Specified using ``Entity`` and ``Line`` for the clause head and another breakpoint as a condition. ``Line`` must be the first source file line of an entity clause.',
 			'Context breakpoint' - 'Specified as a ``(Sender, This, Self, Goal)`` tuple.',
-			'Log point' - 'Specified as an ``(Entity, Line, Message)`` tuple.',
+			'Log point' - 'Specified using ``Entity`` and ``Line`` for the clause head and a message.',
 			'Leash port shorthands' - '``none`` - ``[]``, ``loose`` - ``[fact,rule,call]``, ``half`` - ``[fact,rule,call,redo]``, ``tight`` - ``[fact,rule,call,redo,fail,exception]``, and ``full`` - ``[fact,rule,call,exit,redo,fail,exception]``.'
 		],
 		see_also is [debugger]
@@ -133,7 +133,7 @@
 	:- public((spy)/3).
 	:- mode(spy(+atom, +integer, @callable), zero_or_one).
 	:- info((spy)/3, [
-		comment is 'Sets a conditional or triggered breakpoint (removing any existing log point or breakpoint defined for the same location). The condition can be a unification count expression, a lambda expression, or another breakpoint. Fails if the breakpoint is invalid.',
+		comment is 'Sets a conditional or triggered breakpoint (removing any existing log point or breakpoint defined for the same location) at a clause head. The condition can be a unification count expression, a lambda expression, or another breakpoint. Fails if the breakpoint is invalid.',
 		argnames is ['Entity', 'Line', 'Condition'],
 		remarks is [
 			'Unification count expression conditions' - '``>(Count)``, ``>=(Count)``, ``=:=(Count)``, ``=<(Count)``, ``<(Count)``, ``mod(M)``, and ``Count``.',
@@ -188,7 +188,7 @@
 	:- mode(log(@object_identifier, +integer, +atom), zero_or_one).
 	:- mode(log(@category_identifier, +integer, +atom), zero_or_one).
 	:- info(log/3, [
-		comment is 'Sets a log point (removing any existing breakpoint defined for the same location). Fails if the log point is invalid.',
+		comment is 'Sets a log point (removing any existing breakpoint defined for the same location) at a clause head. Fails if the log point is invalid.',
 		argnames is ['Entity', 'Line', 'Message']
 	]).
 

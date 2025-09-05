@@ -208,8 +208,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 3:5:0</div>
-<div class="line"><strong>Date:</strong> 2025-09-03</div>
+<div class="line"><strong>Version:</strong> 3:6:0</div>
+<div class="line"><strong>Date:</strong> 2025-09-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -234,11 +234,11 @@
 <li><p>Entity predicate breakpoint: Specified as a term <code class="docutils literal notranslate"><span class="pre">Entity::Functor/Arity</span></code>. <code class="docutils literal notranslate"><span class="pre">Entity</span></code> must be an object or category and may not be ground if parametric.</p></li>
 <li><p>Entity non-terminal breakpoint: Specified as a term <code class="docutils literal notranslate"><span class="pre">Entity::Functor//Arity</span></code>. <code class="docutils literal notranslate"><span class="pre">Entity</span></code> must be an object or category and may not be ground if parametric.</p></li>
 <li><p>Clause breakpoint: Specified as an <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> term with both <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and <code class="docutils literal notranslate"><span class="pre">Line</span></code> bound. <code class="docutils literal notranslate"><span class="pre">Line</span></code> must be the first source file line of an entity clause.</p></li>
-<li><p>Conditional breakpoint: Specified as an <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> term with both <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and <code class="docutils literal notranslate"><span class="pre">Line</span></code> bound and a condition. <code class="docutils literal notranslate"><span class="pre">Line</span></code> must be the first source file line of an entity clause.</p></li>
-<li><p>Hit count breakpoint: Specified as an <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> term with both <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and <code class="docutils literal notranslate"><span class="pre">Line</span></code> bound and an unification count expression as a condition. <code class="docutils literal notranslate"><span class="pre">Line</span></code> must be the first source file line of an entity clause.</p></li>
-<li><p>Triggered breakpoint: Specified as an <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> term with both <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and <code class="docutils literal notranslate"><span class="pre">Line</span></code> bound and another breakpoint as a condition. <code class="docutils literal notranslate"><span class="pre">Line</span></code> must be the first source file line of an entity clause.</p></li>
+<li><p>Conditional breakpoint: Specified using <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and <code class="docutils literal notranslate"><span class="pre">Line</span></code> for the clause head and a condition. <code class="docutils literal notranslate"><span class="pre">Line</span></code> must be the first source file line of an entity clause.</p></li>
+<li><p>Hit count breakpoint: Specified using <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and <code class="docutils literal notranslate"><span class="pre">Line</span></code> for the clause head and an unification count expression as a condition. <code class="docutils literal notranslate"><span class="pre">Line</span></code> must be the first source file line of an entity clause.</p></li>
+<li><p>Triggered breakpoint: Specified using <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and <code class="docutils literal notranslate"><span class="pre">Line</span></code> for the clause head and another breakpoint as a condition. <code class="docutils literal notranslate"><span class="pre">Line</span></code> must be the first source file line of an entity clause.</p></li>
 <li><p>Context breakpoint: Specified as a <code class="docutils literal notranslate"><span class="pre">(Sender,</span> <span class="pre">This,</span> <span class="pre">Self,</span> <span class="pre">Goal)</span></code> tuple.</p></li>
-<li><p>Log point: Specified as an <code class="docutils literal notranslate"><span class="pre">(Entity,</span> <span class="pre">Line,</span> <span class="pre">Message)</span></code> tuple.</p></li>
+<li><p>Log point: Specified using <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and <code class="docutils literal notranslate"><span class="pre">Line</span></code> for the clause head and a message.</p></li>
 <li><p>Leash port shorthands: <code class="docutils literal notranslate"><span class="pre">none</span></code> - <code class="docutils literal notranslate"><span class="pre">[]</span></code>, <code class="docutils literal notranslate"><span class="pre">loose</span></code> - <code class="docutils literal notranslate"><span class="pre">[fact,rule,call]</span></code>, <code class="docutils literal notranslate"><span class="pre">half</span></code> - <code class="docutils literal notranslate"><span class="pre">[fact,rule,call,redo]</span></code>, <code class="docutils literal notranslate"><span class="pre">tight</span></code> - <code class="docutils literal notranslate"><span class="pre">[fact,rule,call,redo,fail,exception]</span></code>, and <code class="docutils literal notranslate"><span class="pre">full</span></code> - <code class="docutils literal notranslate"><span class="pre">[fact,rule,call,exit,redo,fail,exception]</span></code>.</p></li>
 </ul>
 </div></blockquote>
@@ -532,7 +532,7 @@
 </section>
 <section id="spy-3">
 <span id="debuggerp-0-spy-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">spy/3</span></code></a><a class="headerlink" href="#spy-3" title="Link to this heading"></a></h3>
-<p>Sets a conditional or triggered breakpoint (removing any existing log point or breakpoint defined for the same location). The condition can be a unification count expression, a lambda expression, or another breakpoint. Fails if the breakpoint is invalid.</p>
+<p>Sets a conditional or triggered breakpoint (removing any existing log point or breakpoint defined for the same location) at a clause head. The condition can be a unification count expression, a lambda expression, or another breakpoint. Fails if the breakpoint is invalid.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -691,7 +691,7 @@
 </section>
 <section id="log-3">
 <span id="debuggerp-0-log-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">log/3</span></code></a><a class="headerlink" href="#log-3" title="Link to this heading"></a></h3>
-<p>Sets a log point (removing any existing breakpoint defined for the same location). Fails if the log point is invalid.</p>
+<p>Sets a log point (removing any existing breakpoint defined for the same location) at a clause head. Fails if the log point is invalid.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
