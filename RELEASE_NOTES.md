@@ -31,6 +31,9 @@ Tools
 * ADDED: Support for creating entity specific predicate breakpoints to the
 `debugger` tool.
 
+* FIXED: The `debugger` tool to not change from debugging with breakpoints to
+tracing for the next top-level query if the `trace/0` predicate was not used.
+
 Examples
 --------
 

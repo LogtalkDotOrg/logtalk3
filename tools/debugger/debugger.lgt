@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 7:12:0,
+		version is 7:12:1,
 		author is 'Paulo Moura',
-		date is 2025-09-03,
+		date is 2025-09-05,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -44,6 +44,13 @@
 	:- mode(tracing_, zero_or_one).
 	:- info(tracing_/0, [
 		comment is 'True iff tracing is on.'
+	]).
+
+	:- private(explicit_tracing_/0).
+	:- dynamic(explicit_tracing_/0).
+	:- mode(explicit_tracing_, zero_or_one).
+	:- info(explicit_tracing_/0, [
+		comment is 'True iff tracing is on due to a call to the trace/0 predicate.'
 	]).
 
 	:- private(skipping_/0).
@@ -239,6 +246,8 @@
 
 	trace :-
 		logtalk::activate_debug_handler(debugger),
+		retractall(explicit_tracing_),
+		assertz(explicit_tracing_),
 		(	tracing_ ->
 			print_message(comment, debugger, debugger_tracing_on)
 		;	assertz(tracing_),
@@ -251,6 +260,7 @@
 		).
 
 	notrace :-
+		retractall(explicit_tracing_),
 		(	(tracing_; leaping_(tracing)) ->
 			retractall(tracing_),
 			retractall(leaping_(_)),
@@ -260,7 +270,7 @@
 
 	debugging :-
 		(	debugging_ ->
-			(	tracing_ ->
+			(	explicit_tracing_ ->
 				print_message(information, debugger, debugger_tracing_on)
 			;	print_message(information, debugger, debugger_spying_on)
 			)
@@ -959,11 +969,16 @@
 	debug_handler(top_goal(Goal, TGoal), ExCtx) :-
 		reset_invocation_number(_),
 		retractall(file_line_hit_count_(_, _, _)),
+		retractall(tracing_),
 		retractall(leaping_(_)),
 		retractall(skipping_),
 		retractall(quasi_skipping_),
 		retractall(skipping_unleashed_(_)),
 		retractall(zap_to_port_(_)),
+		(	explicit_tracing_ ->
+			assertz(tracing_)
+		;	true
+		),
 		debug_handler(goal(Goal, TGoal), ExCtx).
 	debug_handler(goal(Goal, TGoal), ExCtx) :-
 		inc_invocation_number(N),

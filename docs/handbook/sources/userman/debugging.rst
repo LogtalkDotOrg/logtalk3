@@ -589,8 +589,8 @@ and when hitting a breakpoint. The following commands are available:
    reached for that number
 ``z`` — zap
    reads either a port name and continues execution until that port is
-   reached or a negated port name and continues execution until a port
-   other than the negated port is reached
+   reached or a negated port name (e.g. ``-exit``) and continues execution
+   until a port other than the negated port is reached
 ``i`` — ignore
    ignores goal, assumes that it succeeded; valid at call and redo ports
 ``f`` — fail
