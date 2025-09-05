@@ -34,6 +34,9 @@ Tools
 * FIXED: The `debugger` tool to not change from debugging with breakpoints to
 tracing for the next top-level query if the `trace/0` predicate was not used.
 
+* FIXED: The `debugger` tool to allow creating a triggered breakpoint that
+depends on a clause breakpoint for a parametric entity.
+
 Examples
 --------
 

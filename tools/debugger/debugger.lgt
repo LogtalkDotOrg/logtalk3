@@ -520,7 +520,7 @@
 		callable(Condition).
 	valid_conditional_spy_point_condition(Entity-Line) :-
 		!,
-		atom(Entity),
+		callable(Entity),
 		integer(Line),
 		once((
 			conditional_breakpoint_(Entity, Line, _)
