@@ -23,13 +23,11 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:3,
+		version is 1:0:4,
 		author is 'Paulo Moura',
-		date is 2021-07-26,
+		date is 2025-09-09,
 		comment is 'Unit tests for the "hello_world" example.'
 	]).
-
-	cover(hello_world).
 
 	:- if((
 		os::operating_system_type(windows),
