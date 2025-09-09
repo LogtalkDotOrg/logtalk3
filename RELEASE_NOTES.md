@@ -40,8 +40,7 @@ depends on a clause breakpoint for a parametric entity.
 Examples
 --------
 
-* UPDATED: The `errors` example to illustrate missing `multifile/1` directive
-linter warnings.
+* UPDATED: The `errors` example to illustrate additional linter warnings.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

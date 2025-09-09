@@ -711,6 +711,11 @@
 
 :- object(deprecated).
 
+	:- info([
+		version is 12.3,
+		date is 2022/10/19
+	]).
+
 	foo :-
 		assert(bar).
 
