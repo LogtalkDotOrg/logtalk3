@@ -28,6 +28,9 @@ RELEASE NOTES
 Tools
 -----
 
+* CHANGED: The `lgtunit` tool code coverage linter warnings to be printed when
+compiling the tests instead of when printing the code coverage results.
+
 * ADDED: Support for creating entity specific predicate breakpoints to the
 `debugger` tool.
 

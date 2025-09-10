@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:80:0,
+		version is 0:81:0,
 		author is 'Paulo Moura',
-		date is 2024-12-13,
+		date is 2025-09-09,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -1224,29 +1224,30 @@
 
 	% lgtunit tool messages
 
-	explain(no_code_coverage_for_protocols(_)) -->
+	explain(no_code_coverage_for_protocols(_, _, _, _, _)) -->
 		[	'Protocols cannot contain predicate definitions, only predicate declarations.'-[], nl,
 			'Thus, declaring a protocol as covered is pointless. Fix this warning by'-[], nl,
 			'simply removing the corresponding cover/1 clause from the tests object.'-[], nl, nl
 		].
 
-	explain(unknown_entity_declared_covered(_)) -->
+	explain(unknown_entity_declared_covered(_, _, _, _, _, _)) -->
 		[	'Likely there is a typo in the corresponding cover/1 clause in the tests'-[], nl,
 			'object. You will need to find and fix this typo to fix the warning.'-[], nl, nl
+		].
+
+	explain(assertion_uses_unification(_, _, _, _, _, _, _)) -->
+		[	'Using unification in an assertion will fail to catch cases where a test'-[], nl,
+			'query fails to bind (or further instantiate) an output argument as the'-[], nl,
+			'unification will trivially succeed. Consider using instead (==)/2,'-[], nl,
+			'variant/2, or subsumes_term/2 (or the corresponding test outcomes) for'-[], nl,
+			'more strict and reliable test success checking. For float approximate'-[], nl,
+			'comparison, use the (=~=)/2 predicate provided by lgtunit.', nl, nl
 		].
 
 	explain(tests_run_differ_from_tests_total(_, _)) -->
 		[	'A number of tests run different from the total number of defined tests'-[], nl,
 			'usually implies bugs in the implementation of basic Prolog control'-[], nl,
 			'constructs by the used backend system.'-[], nl, nl
-		].
-
-	explain(assertion_uses_unification(_, _, _, _, _, _)) -->
-		[	'Using unification in an assertion will fail to catch cases where a test'-[], nl,
-			'query fails to bind (or further instantiate) an output argument as the'-[], nl,
-			'unification will trivially succeed. Consider using instead (==)/2,'-[], nl,
-			'variant/2, or subsumes_term/2 (or the corresponding test outcomes) for'-[], nl,
-			'more strict and reliable test success checking.'-[], nl, nl
 		].
 
 	% packs tool messages

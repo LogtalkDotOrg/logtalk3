@@ -29,9 +29,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 11:0:0,
+		version is 12:0:0,
 		author is 'Paulo Moura',
-		date is 2025-04-07,
+		date is 2025-09-09,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -56,7 +56,6 @@
 	:- dynamic(logtalk::message_tokens//2).
 
 	logtalk::message_tokens(Message, lgtunit) -->
-		{numbervars(Message, 0, _)},
 		message_tokens(Message).
 
 	% messages for tests handling
@@ -88,15 +87,18 @@
 		['tests ended at ~w-~w-~w, ~w:~w:~w'-Args, nl, nl].
 
 	message_tokens(running_tests_from_object_file(Object, File)) -->
+		{numbervars(Object, 0, _)},
 		['running tests from object ~q'-[Object], nl, 'file: ~w'-[File], nl, nl].
 
 	message_tokens(number_of_tests(Total)) -->
 		['number of tests: ~q'-[Total], nl].
 
 	message_tokens(completed_tests_from_object(Object)) -->
+		{numbervars(Object, 0, _)},
 		['completed tests from object ~q'-[Object], nl, nl].
 
 	message_tokens(tests_skipped(Object, _File, Note)) -->
+		{numbervars(Object, 0, _)},
 		(	{Note == ''} ->
 			['tests skipped @ ~q'-[Object], nl]
 		;	['tests skipped @ ~q (~w)'-[Object, Note], nl]
@@ -162,14 +164,19 @@
 		).
 
 	message_tokens(verbose_quick_check_test(passed, Goal)) -->
+		{numbervars(Goal, 0, _)},
 		['Passed:    ~q'-[Goal], nl].
 	message_tokens(verbose_quick_check_test(discarded, Goal)) -->
+		{numbervars(Goal, 0, _)},
 		['Discarded: ~q'-[Goal], nl].
 	message_tokens(verbose_quick_check_test(failure, Goal)) -->
+		{numbervars(Goal, 0, _)},
 		['Failure:   ~q'-[Goal], nl].
 	message_tokens(verbose_quick_check_test(error, Goal)) -->
+		{numbervars(Goal, 0, _)},
 		['Error:     ~q'-[Goal], nl].
 	message_tokens(verbose_quick_check_test(shrinked, Goal)) -->
+		{numbervars(Goal, 0, _)},
 		['Shrinked:  ~q'-[Goal], nl].
 
 	message_tokens(quick_check_progress_bar_start) -->
@@ -185,6 +192,7 @@
 		quick_check_labels(Labels, NumberOfTests).
 
 	message_tokens(quick_check_failed(Goal, Test, Shrinks, Seed, TestSeed)) -->
+		{numbervars(Goal, 0, _)},
 		(	{Shrinks == 1} ->
 			['quick check test failure (at test ~w after ~w shrink):'-[Test, Shrinks], nl, '  ~q'-[Goal], nl]
 		;	['quick check test failure (at test ~w after ~w shrinks):'-[Test, Shrinks], nl, '  ~q'-[Goal], nl]
@@ -195,29 +203,38 @@
 	message_tokens(quick_check_error(error(Error,_), Goal, Test, Seed, TestSeed)) -->
 		message_tokens(quick_check_error(Error, Goal, Test, Seed, TestSeed)).
 	message_tokens(quick_check_error(Error, _Goal, Test, Seed, TestSeed)) -->
+		{numbervars(Error, 0, _)},
 		['quick check test error (at test ~w):'-[Test], nl, '  ~q'-[Error], nl],
 		['starting seed: ~q'-[Seed], nl],
 		['test seed:     ~q'-[TestSeed], nl].
 
 	message_tokens(quick_check_broken(generate_test_error(Template), Error)) -->
+		{numbervars((Template, Error), 0, _)},
 		['quick check test generation error for template: ~q'-[Template], nl, '  ~q'-[Error], nl].
 	message_tokens(quick_check_broken(generate_test_failure(Template), Type)) -->
+		{numbervars((Template, Type), 0, _)},
 		['quick check test generation failure for template: ~q'-[Template], nl, '  ~q'-[Type], nl].
 
 	message_tokens(quick_check_broken(label_goal_error(Label), Error)) -->
+		{numbervars((Label, Error), 0, _)},
 		['quick check error using label closure: ~q'-[Label], nl, '  ~q'-[Error], nl].
 	message_tokens(quick_check_broken(label_goal_failure(Label))) -->
+		{numbervars(Label, 0, _)},
 		['quick check label closure fails: ~q'-[Label], nl].
 
 	message_tokens(quick_check_broken(pre_condition_error(Condition), Error)) -->
+		{numbervars((Condition, Error), 0, _)},
 		['quick check error using pre-condition closure: ~q'-[Condition], nl, '  ~q'-[Error], nl].
 	message_tokens(quick_check_broken(pre_condition_always_fails(Condition))) -->
+		{numbervars(Condition, 0, _)},
 		['quick check pre-condition closure fails: ~q'-[Condition], nl].
 
 	message_tokens(quick_check_broken(template_error(Template), Error)) -->
+		{numbervars((Template, Error), 0, _)},
 		['quick check error using template: ~q'-[Template], nl, '  ~q'-[Error], nl].
 
 	message_tokens(quick_check_broken(option_error(Option), Error)) -->
+		{numbervars((Option, Error), 0, _)},
 		['quick check option error: ~q'-[Option], nl, '  ~q'-[Error], nl].
 
 	message_tokens(failed_cleanup(_Object, Test, File, Position, Reason)) -->
@@ -225,9 +242,11 @@
 		message_context(File, Position).
 
 	message_tokens(broken_step(Step, Object, Error)) -->
+		{numbervars((Object, Error), 0, _)},
 		['broken ~w goal for test object ~q: ~q'-[Step, Object, Error], nl].
 
 	message_tokens(failed_step(Step, Object)) -->
+		{numbervars((Step, Object), 0, _)},
 		['failed ~w goal for test object ~q'-[Step, Object], nl].
 
 	% messages for test's clause coverage
@@ -271,6 +290,7 @@
 		[].
 
 	message_tokens(entity_predicate_coverage(Entity, Predicate, Covered, Total, _Percentage, Clauses)) -->
+		{numbervars(Entity, 0, _)},
 		(	{Covered =:= Total} ->
 			% all clause are covered
 			['~q: ~q - ~w - ~w'-[Entity, Predicate, Covered/Total, '(all)'], nl]
@@ -280,6 +300,7 @@
 	:- if(current_logtalk_flag(prolog_dialect, ji)).
 
 		message_tokens(entity_coverage(Entity, Covered, Total, Percentage)) -->
+			{numbervars(Entity, 0, _)},
 			['~q: ~d out of '-[Entity, Covered]],
 			clause_tokens(Total),
 			[' covered, ~f% coverage'-[Percentage], nl, nl].
@@ -287,6 +308,7 @@
 	:- else.
 
 		message_tokens(entity_coverage(Entity, Covered, Total, Percentage)) -->
+			{numbervars(Entity, 0, _)},
 			['~q: ~d out of '-[Entity, Covered]],
 			clause_tokens(Total),
 			[' covered, ~2f% coverage'-[Percentage], nl, nl].
@@ -299,12 +321,6 @@
 	message_tokens(no_code_coverage_information_collected) -->
 		['no code coverage information collected'-[], nl].
 
-	message_tokens(no_code_coverage_for_protocols(Entity)) -->
-		['code coverage requested for protocol: ~q'-[Entity], nl].
-
-	message_tokens(unknown_entity_declared_covered(Entity)) -->
-		['unknown entity declared covered: ~q'-[Entity], nl].
-
 	% messages for test identifier errors (compile-time)
 
 	message_tokens(non_instantiated_test_identifier(_Object, File, Position, Type, Entity)) -->
@@ -316,6 +332,7 @@
 		message_context(File, Position, Type, Entity).
 
 	message_tokens(non_ground_test_identifier(_Object, Test, File, Position, Type, Entity)) -->
+		{numbervars(Test, 0, _)},
 		['non-ground test identifier found: ~q'-[Test], nl],
 		message_context(File, Position, Type, Entity).
 
@@ -332,12 +349,14 @@
 		['non-callable test identifier: ~q'-[Test], nl].
 
 	message_tokens(non_ground_test_identifier(Test)) -->
+		{numbervars(Test, 0, _)},
 		['non-ground test identifier: ~q'-[Test], nl].
 
 	message_tokens(unknown_test(Test)) -->
 		['unknown test: ~q'-[Test], nl].
 
 	message_tokens(partial_list_of_tests(Tests)) -->
+		{numbervars(Tests, 0, _)},
 		['partial list of tests: ~q'-[Tests], nl].
 
 	% messages for test outcome errors
@@ -347,6 +366,7 @@
 		message_context(File, Position, Type, Entity).
 
 	message_tokens(invalid_test_outcome(Test, Outcome, File, Position, Type, Entity)) -->
+		{numbervars(Outcome, 0, _)},
 		['test ~q outcome is invalid: ~q'-[Test, Outcome], nl],
 		message_context(File, Position, Type, Entity).
 
@@ -357,13 +377,22 @@
 		message_context(File, Position, Type, Entity).
 
 	message_tokens(invalid_test_option(Test, Option, File, Position, Type, Entity)) -->
+		{numbervars(Option, 0, _)},
 		['test ~q option is invalid: ~q'-[Test, Option], nl],
 		message_context(File, Position, Type, Entity).
 
 	% linter warnings
 
-	message_tokens(assertion_uses_unification(Test, Assertion, File, Position, Type, Entity)) -->
-		['test ~q assertion uses a unification goal: ~q'-[Test, Assertion], nl],
+	message_tokens(no_code_coverage_for_protocols(This, File, Position, Type, Entity)) -->
+		['code coverage requested for protocol: ~q'-[This], nl],
+		message_context(File, Position, Type, Entity).
+
+	message_tokens(unknown_entity_declared_covered(This, File, Position, Type, Entity, VariableNames)) -->
+		['unknown entity declared covered: '-[], term(This, [quoted(true), variable_names(VariableNames)]), nl],
+		message_context(File, Position, Type, Entity).
+
+	message_tokens(assertion_uses_unification(Test, Assertion, File, Position, Type, Entity, VariableNames)) -->
+		['test ~q assertion uses a unification goal: '-[Test], term(Assertion, [quoted(true), variable_names(VariableNames)]), nl],
 		message_context(File, Position, Type, Entity).
 
 	% auxiliary grammar rules
@@ -371,31 +400,40 @@
 	failed_test_reason(success_instead_of_failure) -->
 		['  test goal succeeded but should have failed'-[], nl].
 	failed_test_reason(success_instead_of_error(ExpectedError)) -->
+		{numbervars(ExpectedError, 0, _)},
 		['  test goal succeeded but should have thrown an error:'-[], nl],
 		['    expected ~q'-[ExpectedError], nl].
 	failed_test_reason(failure_instead_of_success) -->
 		['  test goal failed but should have succeeded'-[], nl].
 	failed_test_reason(failure_instead_of_error(ExpectedError)) -->
+		{numbervars(ExpectedError, 0, _)},
 		['  test goal failed but should have thrown an error:'-[], nl],
 		['    expected ~q'-[ExpectedError], nl].
 	failed_test_reason(non_deterministic_success) -->
 		['  test goal succeeded non-deterministically'-[], nl].
 	failed_test_reason(error_instead_of_failure(Error)) -->
+		{numbervars(Error, 0, _)},
 		['  test goal throws an error but should have failed: ~q'-[Error], nl].
 	failed_test_reason(error_instead_of_success(assertion_error(Assertion, error(Error,_)))) -->
+		{numbervars((Assertion, Error), 0, _)},
 		['  test assertion throws an error: ~q - ~q'-[Assertion, Error], nl].
 	failed_test_reason(error_instead_of_success(assertion_error(Assertion, Error))) -->
+		{numbervars((Assertion, Error), 0, _)},
 		['  test assertion throws an error: ~q - ~q'-[Assertion, Error], nl].
 	failed_test_reason(error_instead_of_success(assertion_failure(Assertion))) -->
+		{numbervars(Assertion, 0, _)},
 		['  test assertion failed: ~q'-[Assertion], nl].
 	failed_test_reason(error_instead_of_success(Error)) -->
+		{numbervars(Error, 0, _)},
 		['  test goal throws an error but should have succeeded: ~q'-[Error], nl].
 	failed_test_reason(wrong_error(ExpectedError, Error)) -->
+		{numbervars((ExpectedError, Error), 0, _)},
 		['  test goal throws the wrong error:'-[], nl],
 		['    expected ~q'-[ExpectedError], nl],
 		['    but got  ~q'-[Error], nl].
 
 	failed_test_reason(quick_check_failed(Goal, Test, Shrinks, Seed, TestSeed)) -->
+		{numbervars(Goal, 0, _)},
 		(	{Shrinks == 1} ->
 			['  quick check test failure (at test ~w after ~w shrink with starting seed ~q and test seed ~q): ~q'-[Test, Shrinks, Seed, TestSeed, Goal], nl]
 		;	['  quick check test failure (at test ~w after ~w shrinks with starting seed ~q and test seed ~q): ~q'-[Test, Shrinks, Seed, TestSeed, Goal], nl]
@@ -404,24 +442,30 @@
 	failed_test_reason(quick_check_error(error(Error,_), Goal, Test, Seed, TestSeed)) -->
 		failed_test_reason(quick_check_error(Error, Goal, Test, Seed, TestSeed)).
 	failed_test_reason(quick_check_error(Error, _Goal, Test, Seed, TestSeed)) -->
+		{numbervars(Error, 0, _)},
 		['  quick check test error (at test ~w with starting seed ~q and test seed ~q): ~q'-[Test, Seed, TestSeed, Error], nl].
 	failed_test_reason(quick_check_error(Error, Culprit)) -->
+		{numbervars((Error, Culprit), 0, _)},
 		['  quick check test error (caused by ~q): ~q'-[Error, Culprit], nl].
 
 	failed_test_reason(quick_check_broken(Why, Error)) -->
+		{numbervars(Error, 0, _)},
 		['  quick check test broken (caused by ~q): ~q'-[Why, Error], nl].
 	failed_test_reason(quick_check_broken(Why)) -->
 		['  quick check test broken (caused by ~q)'-[Why], nl].
 
 	failed_test_reason(step_error(Step, Error)) -->
+		{numbervars(Error, 0, _)},
 		['  ~w goal throws an error but should have succeeded: ~q'-[Step, Error], nl].
 	failed_test_reason(step_failure(Step)) -->
 		['  ~w goal failed but should have succeeded'-[Step], nl].
 
 	failed_test_reason(Unexpected) -->
+		{numbervars(Unexpected, 0, _)},
 		['  Unexpected failure (likely backend bug): ~q'-[Unexpected], nl].
 
 	failed_cleanup_reason(error(Error), _Object, Test) -->
+		{numbervars(Error, 0, _)},
 		['  test ~q cleanup goal throws an error but should have succeeded: ~q'-[Test, Error], nl].
 	failed_cleanup_reason(failure, _Object, Test) -->
 		['  test ~q cleanup goal failed but should have succeeded'-[Test], nl].
@@ -432,7 +476,9 @@
 		[' '-[]].
 
 	message_context(Path, Lines, Type, Entity) -->
-		{suppress_path_prefix(Path, ShortPath)},
+		{	suppress_path_prefix(Path, ShortPath),
+			numbervars(Entity, 0, _)
+		},
 		['  while compiling ~w ~q'-[Type, Entity], nl],
 		(	{Lines == 0-0} ->
 			['  in auxiliary clause generated for file ~w'-[ShortPath], nl, nl]
