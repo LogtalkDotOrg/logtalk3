@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:71:0,
+		version is 0:72:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-09-04,
+		date is 2025-09-10,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -108,6 +108,13 @@
 	:- mode(metrics(+atom), one).
 	:- info(metrics/1, [
 		comment is 'Computes metrics given a marker directory.',
+		argnames is ['Directory']
+	]).
+
+	:- public(metrics_recursive/1).
+	:- mode(metrics_recursive(+atom), one).
+	:- info(metrics_recursive/1, [
+		comment is 'Recursively computes code metrics given a marker directory.',
 		argnames is ['Directory']
 	]).
 
@@ -377,6 +384,18 @@
 		ignore((
 			logtalk_load(code_metrics(loader)),
 			{code_metrics::directory(Directory)}
+		)),
+		close(vscode_metrics_results),
+		open(Marker, append, Stream),
+		close(Stream).
+
+	metrics_recursive(Directory) :-
+		atom_concat(Directory, '/.vscode_metrics_done', Marker),
+		atom_concat(Directory, '/.vscode_metrics_results', Data),
+		open(Data, write, _, [alias(vscode_metrics_results)]),
+		ignore((
+			logtalk_load(code_metrics(loader)),
+			{code_metrics::rdirectory(Directory)}
 		)),
 		close(vscode_metrics_results),
 		open(Marker, append, Stream),
