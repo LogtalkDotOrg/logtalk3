@@ -721,6 +721,8 @@
 
 	bar :-
 		not(baz(_)).
+	bar :-
+		not((qux(X,Y), quux(X,Y))).
 
 	baz(X) :-
 		get(X).
