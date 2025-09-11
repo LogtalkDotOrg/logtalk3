@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:72:0,
+		version is 0:72:1,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-09-10,
+		date is 2025-09-11,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -602,7 +602,9 @@
 		atom_concat(Directory, '/.vscode_definition', Data),
 		atom_concat(Directory, '/.vscode_definition_done', Marker),
 		open(Data, write, DataStream),
-		(	find_definition(Call, CallFile, CallLine, DeclarationFile, DeclarationLine) ->
+		(	find_definition(Call, CallFile, CallLine, DeclarationFile, DeclarationLine),
+			% for dynamic predicates, the reflection API may return line 0
+			DefinitionLine >= 1 ->
 			{format(DataStream, 'File:~w;Line:~d~n', [DeclarationFile, DeclarationLine])}
 		;	true
 		),
