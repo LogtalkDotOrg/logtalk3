@@ -602,10 +602,10 @@
 		atom_concat(Directory, '/.vscode_definition', Data),
 		atom_concat(Directory, '/.vscode_definition_done', Marker),
 		open(Data, write, DataStream),
-		(	find_definition(Call, CallFile, CallLine, DeclarationFile, DeclarationLine),
+		(	find_definition(Call, CallFile, CallLine, DefinitionFile, DefinitionLine),
 			% for dynamic predicates, the reflection API may return line 0
 			DefinitionLine >= 1 ->
-			{format(DataStream, 'File:~w;Line:~d~n', [DeclarationFile, DeclarationLine])}
+			{format(DataStream, 'File:~w;Line:~d~n', [DefinitionFile, DefinitionLine])}
 		;	true
 		),
 		close(DataStream),
