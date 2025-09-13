@@ -87,7 +87,8 @@ from an object ``initialization/1`` directive.
    Variables in the values of the ``term``, ``variables``, ``variable_names``,
    and ``singletons`` keys are not shared with, respectively, the term and
    goal arguments of the ``term_expansion/2`` and ``goal_expansion/2`` methods.
-   Use instead the ``variable_names(Term)`` and ``singletons(Term)`` keys.
+   Use instead the ``variable_names(Term)`` and ``singletons(Term)`` keys when
+   possible.
 
 Modes and number of proofs
 --------------------------

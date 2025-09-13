@@ -783,18 +783,18 @@ The following object properties are supported:
 ``includes(Predicate, Entity, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for an object multifile predicate that are defined
    in the specified entity (the properties include ``number_of_clauses(Number)``, ``number_of_rules(Number)``,
-   ``lines(Start,End)``, and ``line_count(Start)`` with ``Start`` being the begin line of the
-   first multifile predicate clause)
+   ``include(File)``, ``lines(Start,End)``, and ``line_count(Start)`` with ``Start`` being the begin line of
+   the first multifile predicate clause)
 ``provides(Predicate, Entity, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for other entity multifile predicates that are
-   defined in the object (the properties include ``number_of_clauses(Number)``, ``number_of_rules(Number)``, and
-   ``lines(Start,End)``, and ``line_count(Start)`` with ``Start`` being the begin line of the
-   first multifile predicate clause)
+   defined in the object (the properties include ``number_of_clauses(Number)``, ``number_of_rules(Number)``,
+   ``include(File)``, ``lines(Start,End)``, and ``line_count(Start)`` with ``Start`` being the begin line of
+   the first multifile predicate clause)
 ``alias(Entity, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for an :term:`entity alias` declared by the object
    (the properties include ``object`` in case of an object alias, ``module`` in case of a module alias,
-   ``for(Original)``, ``lines(Start,End)``, and ``line_count(Start)`` with ``Start`` being the begin line of the ``uses/1`` or
-   ``use_module/1`` directive)
+   ``for(Original)``, ``lines(Start,End)``, and ``line_count(Start)`` with ``Start`` being the begin line of
+   the ``uses/1`` or ``use_module/1`` directive)
 ``alias(Predicate, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for a :term:`predicate alias` declared by the object
    (the properties include ``predicate``, ``for(Original)``, ``from(Entity)``, ``non_terminal(NonTerminal)``,
