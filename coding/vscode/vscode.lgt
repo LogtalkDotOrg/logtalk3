@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:72:1,
+		version is 0:72:2,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-09-11,
+		date is 2025-09-18,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1183,11 +1183,13 @@
 		atom(Name),
 		integer(Arity),
 		functor(Entity, Name, Arity),
-		setof(
+		findall(
 			Reference,
 			find_entity_reference(Entity, Reference),
-			References
-		).
+			References0
+		),
+		% there may be e.g. multiple explicit message sending calls in the same clause
+		sort(References0, References).
 
 	% entity opening directives
 	find_entity_reference(Entity, File-Line) :-

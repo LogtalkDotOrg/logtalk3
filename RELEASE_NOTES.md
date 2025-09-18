@@ -60,6 +60,9 @@ a `(@)/1` goal.
 * FIXED: VSCode support failure to find a predicate declaration from a clause
 for a multifile predicate or from a `multifile/1` predicate directive.
 
+* FIXED: VSCode support `find_references/4` predicate bug where some references
+would be missed in the case of parametric entities.
+
 
 3.93.0 - August 28, 2025
 ========================
