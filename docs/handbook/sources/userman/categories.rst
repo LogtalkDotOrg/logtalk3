@@ -539,23 +539,23 @@ The following category properties are supported:
    List of :ref:`properties <grammar_entity_properties>` for an object multifile predicate that are defined
    in the specified entity (the properties include
    ``number_of_clauses(Number)``, ``number_of_rules(Number)``,
-   ``lines(Start,End)``, and ``line_count(Start)`` with ``Start`` being the begin line of the
+   ``lines(Start,End)``, and ``line_count(Start)`` with ``Start-End`` being the line range of the
    first multifile predicate clause)
 ``provides(Predicate, Entity, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for other entity multifile predicate that are
    defined in the category (the properties include
    ``number_of_clauses(Number)``, ``number_of_rules(Number)``,
-   ``lines(Start,End)``, and ``line_count(Start)`` with ``Start`` being the begin line of the
+   ``lines(Start,End)``, and ``line_count(Start)`` with ``Start-End`` being the line range of the
    first multifile predicate clause)
 ``alias(Entity, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for an :term:`entity alias` declared by the object
    (the properties include ``object`` in case of an object alias, ``module`` in case of a module alias,
-   ``for(Original)``, ``lines(Start,End)``, and ``line_count(Start)`` with ``Start`` being the begin line of the ``uses/1`` or
-   ``use_module/1`` directive)
+   ``for(Original)``, ``lines(Start,End)``, and ``line_count(Start)`` with ``Start-End`` being the line range
+   of the ``uses/1`` or ``use_module/1`` directive)
 ``alias(Predicate, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for a :term:`predicate alias` declared by the category
    (the properties include ``predicate``, ``for(Original)``, ``from(Entity)``, ``non_terminal(NonTerminal)``,
-   ``lines(Start,End)``, and ``line_count(Start)`` with ``Start`` being the begin line of the alias directive)
+   ``lines(Start,End)``, and ``line_count(Start)`` with ``Start-End`` being the line range of the alias directive)
 ``calls(Call, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for predicate calls made by the category (``Call``
    is either a predicate indicator or a control construct such as
@@ -564,7 +564,7 @@ The following category properties are supported:
    construct where its argument is only know at runtime; the properties
    include ``caller(Caller)``, ``alias(Alias)``, ``non_terminal(NonTerminal)``,
    ``lines(Start,End)``, and ``line_count(Start)`` with ``Caller``, ``Alias``, and ``NonTerminal``
-   being predicate indicators and ``Start`` being the begin line of the
+   being predicate indicators and ``Start-End`` being the line range of the
    predicate clause or directive making the call)
 ``updates(Predicate, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for dynamic predicate updates (and also access
@@ -576,7 +576,7 @@ The following category properties are supported:
    ``updater(Updater)``, ``alias(Alias)``, ``non_terminal(NonTerminal)``,
    ``lines(Start,End)``, and ``line_count(Start)`` with ``Updater`` being a (possibly multifile)
    predicate indicator, ``Alias`` and ``NonTerminal`` being predicate
-   indicators, and ``Start`` being the begin line of the predicate clause
+   indicators, and ``Start-End`` being the line range of the predicate clause
    or directive updating the predicate)
 ``number_of_clauses(Number)``
    Total number of predicate clauses defined in the category (includes
