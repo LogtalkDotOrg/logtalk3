@@ -63,6 +63,9 @@ for a multifile predicate or from a `multifile/1` predicate directive.
 * FIXED: VSCode support `find_references/4` predicate bug where some references
 would be missed in the case of parametric entities.
 
+* FIXED: VSCode support `find_references/4` predicate bug where predicate
+references in `alias/2` directives would be missed.
+
 
 3.93.0 - August 28, 2025
 ========================

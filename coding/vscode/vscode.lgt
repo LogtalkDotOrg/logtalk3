@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:72:2,
+		version is 0:72:3,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-09-18,
+		date is 2025-09-22,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1025,8 +1025,23 @@
 				;	UpdaterFile = File
 				)
 			),
-			References,
+			References6,
 			References5
+		),
+		findall(
+			AliasFile-AliasLine,
+			(	entity_property(Caller, _, alias(_, AliasProperties)),
+				memberchk(predicate, AliasProperties),
+				memberchk(for(Name/Arity), AliasProperties),
+				memberchk(from(Entity), AliasProperties),
+				memberchk(line_count(AliasLine), AliasProperties),
+				(	member(include(AliasFile), AliasProperties) ->
+					true
+				;	entity_property(Caller, _, file(AliasFile))
+				)
+			),
+			References,
+			References6
 		).
 
 	% predicate listed in a uses/2 directive
