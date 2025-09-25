@@ -211,7 +211,7 @@
 	node_shape_style_color(external_protocol, note, dashed, '#7fffd4').
 	node_shape_style_color(external_category, component, dashed, '#00ffff').
 	node_shape_style_color(external_module, tab, dashed, '#d8bfd8').
-	node_shape_style_color(external_file, box, dashed, '#0000ff').
+	node_shape_style_color(external_file, box, dashed, '#87ceeb').
 	node_shape_style_color(external_directory, tab, dashed, '#fa8072').
 	node_shape_style_color(external_library, tab, dashed, '#fa8072').
 	% predicates of the entities being documented
@@ -221,7 +221,7 @@
 	node_shape_style_color(protected_predicate, box, filled, '#ffff00').
 	node_shape_style_color(private_predicate, box, filled, '#ff0000').
 	node_shape_style_color(local_predicate, box, filled, '#fff8dc').
-	node_shape_style_color(multifile_predicate, box, filled, '#0000ff').
+	node_shape_style_color(multifile_predicate, box, filled, '#87ceeb').
 	node_shape_style_color(exported_predicate, box, filled, '#00ff00').
 	% external predicates to the entities being documented
 	node_shape_style_color(external_predicate, box, dashed, '#f5f5dc').
