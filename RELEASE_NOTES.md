@@ -40,6 +40,9 @@ tracing for the next top-level query if the `trace/0` predicate was not used.
 * FIXED: The `debugger` tool to allow creating a triggered breakpoint that
 depends on a clause breakpoint for a parametric entity.
 
+* FIXED: Preliminary `diagrams` tool support for Mermaid resulted in syntax
+errors with recent Mermaid versions.
+
 Examples
 --------
 

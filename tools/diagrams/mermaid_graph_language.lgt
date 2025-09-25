@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:1:1,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2024-12-02,
+		date is 2025-09-25,
 		comment is 'Predicates for generating graph files using Mermaid.'
 	]).
 
@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(term_io, [
-		write_to_chars/2
+		write_term_to_chars/3
 	]).
 
 	:- uses(user, [
@@ -155,9 +155,9 @@
 
 	node(Stream, Identifier, Label, Caption, Contents, Kind, Options) :-
 		node_shape_style_color(Kind, _Shape, Style, Color),
-		write(Stream, Identifier),
+		write_escaped_identifier(Stream, Identifier),
 		write(Stream, '["`\n**'),
-		writeq(Stream, Label),
+		write(Stream, Label),
 		write(Stream, '**\n'),
 		(	^^option(node_type_captions(true), Options),
 			Caption \== '' ->
@@ -174,20 +174,20 @@
 		(	^^option(url(URL), Options),
 			URL \== '' ->
 			write(Stream, 'click '),
-			write(Stream, Identifier),
+			write_escaped_identifier(Stream, Identifier),
 			write(Stream, ' "'),
 			write(Stream, URL),
 			write(Stream, '"')
 		;	member(tooltip(Tooltip), Options) ->
 			write(Stream, 'click '),
-			write(Stream, Identifier),
+			write_escaped_identifier(Stream, Identifier),
 			write(Stream, ' "'),
 			write(Stream, Tooltip),
 			write(Stream, '"')
 		;	true
 		),
 		write(Stream, '\nstyle '),
-		write(Stream, Identifier),
+		write_escaped_identifier(Stream, Identifier),
 		write(Stream, ' fill:'),
 		write(Stream, Color),
 		write(Stream, '\n').
@@ -227,15 +227,21 @@
 	node_shape_style_color(external_predicate, box, dashed, '#f5f5dc').
 
 	edge(Stream, Start, End, Labels, Kind, _Options) :-
-		write(Stream, Start),
+		write_vertex(Start, Stream),
 		write(Stream, ' '),
 		edge_arrow(Kind, ArrowHead),
 		write(Stream, ArrowHead),
 		write(Stream, ' |'),
 		write_edge_lines(Labels, Stream),
 		write(Stream, '| '),
-		write(Stream, End),
+		write_vertex(End, Stream),
 		nl(Stream).
+
+	write_vertex(_-Node, Stream) :-
+		!,
+		write_escaped_identifier(Stream, Node).
+	write_vertex(Node, Stream) :-
+		write_escaped_identifier(Stream, Node).
 
 	% entity relations
 	edge_arrow(extends_object, '-->').
@@ -266,6 +272,23 @@
 	% library relations
 	edge_arrow(depends_on_library, '-->').
 	edge_arrow(loads_library, '-->').
+
+	write_escaped_identifier(Stream, Identifier) :-
+		write_term_to_chars(Identifier, Chars, [quoted(false)]),
+		write_escaped_chars(['\''| Chars], Stream).
+
+	write_escaped_chars([], Stream) :-
+		put_char(Stream, '\'').
+	write_escaped_chars([Char| Chars], Stream) :-
+		(	Char == '(' ->
+			put_char(Stream, '_')
+		;	Char == ')' ->
+			put_char(Stream, '_')
+		;	Char == ',' ->
+			put_char(Stream, '_')
+		;	put_char(Stream, Char)
+		),
+		write_escaped_chars(Chars, Stream).
 
 	write_node_lines([], _).
 	write_node_lines([Line| Lines], Stream) :-
