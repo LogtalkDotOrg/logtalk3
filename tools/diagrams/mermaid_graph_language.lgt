@@ -24,7 +24,7 @@
 	imports(options)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
 		date is 2025-09-25,
 		comment is 'Predicates for generating graph files using Mermaid.'
@@ -53,7 +53,7 @@
 
 	file_header(Stream, _Identifier, Options) :-
 		write(Stream, '<html>\n<body>\n'),
-		write(Stream, '<script type="module">\nimport mermaid from \'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs\';\nmermaid.initialize({ startOnLoad: true });\n</script>\n'),
+		write(Stream, '<script type="module">\nimport mermaid from \'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs\';\nmermaid.initialize({ securityLevel: \'loose\', startOnLoad: true });\n</script>\n'),
 		write(Stream, '<pre class="mermaid">\n'),
 		write(Stream, 'graph '),
 		^^option(layout(Layout), Options),
@@ -226,7 +226,7 @@
 	% external predicates to the entities being documented
 	node_shape_style_color(external_predicate, box, dashed, '#f5f5dc').
 
-	edge(Stream, Start, End, Labels, Kind, _Options) :-
+	edge(Stream, Start, End, Labels, Kind, Options) :-
 		write_vertex(Start, Stream),
 		write(Stream, ' '),
 		edge_arrow(Kind, ArrowHead),
@@ -235,7 +235,25 @@
 		write_edge_lines(Labels, Stream),
 		write(Stream, '| '),
 		write_vertex(End, Stream),
-		nl(Stream).
+		nl(Stream),
+		(	^^option(url(URL), Options),
+			URL \== '' ->
+			write(Stream, 'click '),
+			write_vertex(Start, Stream),
+			write(Stream, '-->'),
+			write_vertex(End, Stream),
+			write(Stream, ' "'),
+			write(Stream, URL),
+			write(Stream, '"'),
+			(	member(tooltip(Tooltip), Options) ->
+				write(Stream, ' "'),
+				write(Stream, Tooltip),
+				write(Stream, '"')
+			;	true
+			),
+			nl(Stream)
+		;	true
+		).
 
 	write_vertex(_-Node, Stream) :-
 		!,
