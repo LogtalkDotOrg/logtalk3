@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:72:3,
+		version is 0:73:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-09-22,
+		date is 2025-09-26,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -467,7 +467,10 @@
 		integer(Arity),
 		entity_property(Entity, _, provides(Name/Arity, Other, _)),
 		entity_property(Other, Kind, declares(Name/Arity, Properties)),
-		entity_property(Other, Kind, file(File)),
+		(	member(include(File), Properties) ->
+			true
+		;	entity_property(Other, Kind, file(File))
+		),
 		memberchk(line_count(Line), Properties).
 
 	% multifile non-terminal
@@ -479,7 +482,10 @@
 		entity_property(Entity, _, provides(Name/ExtArity, Other, _)),
 		entity_property(Other, Kind, declares(Name/ExtArity, Properties)),
 		memberchk(non_terminal(Name//Arity), Properties),
-		entity_property(Other, Kind, file(File)),
+		(	member(include(File), Properties) ->
+			true
+		;	entity_property(Other, Kind, file(File))
+		),
 		memberchk(line_count(Line), Properties).
 
 	find_declaration_(::Name/Arity, Entity, CallerLine, File, Line) :-
@@ -1040,8 +1046,20 @@
 				;	entity_property(Caller, _, file(AliasFile))
 				)
 			),
-			References,
+			References7,
 			References6
+		),
+		findall(
+			ReferenceFile-ReferenceLine,
+			(	entity_property(Other, Kind, references(Entity::Name/Arity, ReferenceProperties)),
+				(	member(include(ReferenceFile), ReferenceProperties) ->
+					true
+				;	entity_property(Other, Kind, file(ReferenceFile))
+				),
+				memberchk(line_count(ReferenceLine), ReferenceProperties)
+			),
+			References,
+			References7
 		).
 
 	% predicate listed in a uses/2 directive
@@ -1234,7 +1252,10 @@
 		callable(Object),
 		Object = Entity,
 		memberchk(caller(Predicate), Properties),
-		entity_property(Other, Kind, file(File)),
+		(	member(include(File), Properties) ->
+			true
+		;	entity_property(Other, Kind, file(File))
+		),
 		memberchk(line_count(Line), Properties).
 	% explicit messages
 	find_entity_reference(Entity, File-Line) :-
@@ -1246,7 +1267,10 @@
 		memberchk(caller(Caller), Properties),
 		entity_property(Other, Kind, defines(Caller, DefinesProperties)),
 		\+ member(auxiliary, DefinesProperties),
-		entity_property(Other, Kind, file(File)),
+		(	member(include(File), Properties) ->
+			true
+		;	entity_property(Other, Kind, file(File))
+		),
 		memberchk(line_count(Line), Properties).
 	% uses/1 and alias/2 directives
 	find_entity_reference(Entity, File-Line) :-
@@ -1257,12 +1281,28 @@
 		;	% object alias
 			memberchk(for(Entity), Properties)
 		),
-		entity_property(Other, Kind, file(File)),
+		(	member(include(File), Properties) ->
+			true
+		;	entity_property(Other, Kind, file(File))
+		),
 		memberchk(line_count(Line), Properties).
 	% multifile/1 predicate clauses
 	find_entity_reference(Entity, File-Line) :-
 		entity_property(Other, Kind, provides(_, Entity, Properties)),
-		entity_property(Other, Kind, file(File)),
+		(	member(include(File), Properties) ->
+			true
+		;	entity_property(Other, Kind, file(File))
+		),
+		memberchk(line_count(Line), Properties).
+	% entity references including from multifile predicate directives
+	find_entity_reference(Entity, File-Line) :-
+		(	entity_property(Other, Kind, references(Entity, Properties))
+		;	entity_property(Other, Kind, references(Entity::_, Properties))
+		),
+		(	member(include(File), Properties) ->
+			true
+		;	entity_property(Other, Kind, file(File))
+		),
 		memberchk(line_count(Line), Properties).
 
 	% implementations

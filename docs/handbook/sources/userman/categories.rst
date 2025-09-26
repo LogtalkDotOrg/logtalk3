@@ -547,6 +547,14 @@ The following category properties are supported:
    ``number_of_clauses(Number)``, ``number_of_rules(Number)``,
    ``lines(Start,End)``, and ``line_count(Start)`` with ``Start-End`` being the line range of the
    first multifile predicate clause)
+``references(Reference, Properties)``
+   List of :ref:`properties <grammar_entity_properties>` for other references to entities in calls to the
+   execution-context built-in methods and in directives for multifile predicates and multifile non-terminals
+   that are found in the category (the properties include ``in(Context)``, ``non_terminal(NonTerminal)``,
+   ``include(File)``, ``lines(Start,End)``, and ``line_count(Start)`` with ``Start-End`` being the line range of
+   the first reference, a directive, a predicate clause, or a non-terminal grammar rule; the possible values for
+   ``Context`` are ``multifile``, ``dynamic``, ``discontiguous``, ``meta_predicate``, ``meta_non_terminal``,
+   and ``clause``); ``Reference`` can be either ``Entity`` or ``Entity::Functor/Arity``
 ``alias(Entity, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for an :term:`entity alias` declared by the object
    (the properties include ``object`` in case of an object alias, ``module`` in case of a module alias,

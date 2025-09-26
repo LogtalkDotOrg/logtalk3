@@ -1052,6 +1052,7 @@ terms <span class="o">::=</span>
    | &quot;defines(&quot; predicate_indicator &quot;,&quot; predicate_definition_property_list &quot;)&quot;
    | &quot;includes(&quot; predicate_indicator &quot;,&quot; ( object_identifier | category_identifier ) &quot;,&quot; predicate_definition_property_list &quot;)&quot;
    | &quot;provides(&quot; predicate_indicator &quot;,&quot; ( object_identifier | category_identifier ) &quot;,&quot; predicate_definition_property_list &quot;)&quot;
+   | &quot;references(&quot; reference &quot;,&quot; reference_property_list &quot;)&quot;
    | &quot;alias(&quot; ( object_identifier | module_identifier ) &quot;,&quot; entity_alias_property_list &quot;)&quot;
    | &quot;alias(&quot; predicate_indicator &quot;,&quot; predicate_alias_property_list &quot;)&quot;
    | &quot;calls(&quot; predicate &quot;,&quot; predicate_call_update_property_list &quot;)&quot;
@@ -1084,6 +1085,7 @@ object_property <span class="o">::=</span>
    | &quot;defines(&quot; predicate_indicator &quot;,&quot; predicate_definition_property_list &quot;)&quot;
    | &quot;includes(&quot; predicate_indicator &quot;,&quot; ( object_identifier | category_identifier ) &quot;,&quot; predicate_definition_property_list &quot;)&quot;
    | &quot;provides(&quot; predicate_indicator &quot;,&quot; ( object_identifier | category_identifier ) &quot;,&quot; predicate_definition_property_list &quot;)&quot;
+   | &quot;references(&quot; reference &quot;,&quot; reference_property_list &quot;)&quot;
    | &quot;alias(&quot; ( object_identifier | module_identifier ) &quot;,&quot; entity_alias_property_list &quot;)&quot;
    | &quot;alias(&quot; predicate_indicator &quot;,&quot; predicate_alias_property_list &quot;)&quot;
    | &quot;calls(&quot; predicate &quot;,&quot; predicate_call_update_property_list &quot;)&quot;
@@ -1205,6 +1207,17 @@ predicate_call_update_property <span class="o">::=</span>
    | &quot;lines(&quot; integer  &quot;,&quot; integer &quot;)&quot;
    | &quot;line_count(&quot; integer &quot;)&quot;
    | &quot;alias(&quot; predicate_indicator &quot;)&quot;
+   | &quot;non_terminal(&quot; non_terminal_indicator &quot;)&quot;
+
+reference <span class="o">::=</span>
+   object_identifier | category_identifier
+   | ( object_identifier | category_identifier ) &quot;::&quot; predicate_indicator
+
+reference_property_list <span class="o">::=</span>
+   &quot;in(&quot; ( &quot;multifile&quot; | &quot;dynamic&quot; | &quot;discontiguous&quot; | &quot;meta_predicate&quot; | &quot;meta_non_terminal&quot; | &quot;clause&quot; ) &quot;)&quot;
+   | &quot;include(&quot; atom &quot;)&quot;
+   | &quot;lines(&quot; integer  &quot;,&quot; integer &quot;)&quot;
+   | &quot;line_count(&quot; integer &quot;)&quot;
    | &quot;non_terminal(&quot; non_terminal_indicator &quot;)&quot;
 </pre></div>
 </div>

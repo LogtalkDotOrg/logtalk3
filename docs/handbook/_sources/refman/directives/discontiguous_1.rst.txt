@@ -35,9 +35,25 @@ Description
    discontiguous((Name/Arity, ...))
    discontiguous([Name/Arity, ...])
 
+   discontiguous(Entity::Name/Arity)
+   discontiguous((Entity::Name/Arity, ...))
+   discontiguous([Entity::Name/Arity, ...])
+
+   discontiguous(Module:Name/Arity)
+   discontiguous((Module:Name/Arity, ...))
+   discontiguous([Module:Name/Arity, ...])
+
    discontiguous(Name//Arity)
    discontiguous((Name//Arity, ...))
    discontiguous([Name//Arity, ...])
+
+   discontiguous(Entity::Name//Arity)
+   discontiguous((Entity::Name//Arity, ...))
+   discontiguous([Entity::Name//Arity, ...])
+
+   discontiguous(Module:Name//Arity)
+   discontiguous((Module:Name//Arity, ...))
+   discontiguous([Module:Name//Arity, ...])
 
 Declares :term:`discontiguous <discontiguous predicate>` predicates and
 discontiguous grammar rule non-terminals. The use of this directive should

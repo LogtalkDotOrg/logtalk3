@@ -419,6 +419,9 @@
 % '$lgt_pp_updates_predicate_'(Dynamic, HeadFunctor/HeadArity, File, Lines)
 :- dynamic('$lgt_pp_updates_predicate_'/4).
 
+% '$lgt_pp_references_'(Reference, In, File, Lines)
+:- dynamic('$lgt_pp_references_'/4).
+
 % '$lgt_pp_non_portable_predicate_'(Head, File, Lines)
 :- dynamic('$lgt_pp_non_portable_predicate_'/3).
 % '$lgt_pp_non_portable_function_'(Function, File, Lines)
@@ -867,6 +870,8 @@ object_property(Obj, Prop) :-
 	'$lgt_entity_property_includes'(Obj, Predicate, From, Properties).
 '$lgt_object_property'(provides(Predicate, To, Properties), Obj, _, _, _, _, _, _) :-
 	'$lgt_entity_property_provides'(Obj, Predicate, To, Properties).
+'$lgt_object_property'(references(Reference, Properties), Obj, _, _, _, _, _, _) :-
+	'$lgt_entity_property_references'(Obj, Reference, Properties).
 '$lgt_object_property'(alias(Alias, Properties), Obj, _, _, _, _, _, _) :-
 	'$lgt_entity_property_alias'(Obj, Alias, Properties).
 '$lgt_object_property'(calls(Predicate, Properties), Obj, _, _, _, _, _, _) :-
@@ -987,6 +992,8 @@ category_property(Ctg, Prop) :-
 	'$lgt_entity_property_includes'(Ctg, Predicate, From, Properties).
 '$lgt_category_property'(provides(Predicate, To, Properties), Ctg, _, _, _, _) :-
 	'$lgt_entity_property_provides'(Ctg, Predicate, To, Properties).
+'$lgt_category_property'(references(Reference, Properties), Ctg, _, _, _, _) :-
+	'$lgt_entity_property_references'(Ctg, Reference, Properties).
 '$lgt_category_property'(calls(Predicate, Properties), Ctg, _, _, _, _) :-
 	'$lgt_entity_property_calls'(Ctg, Predicate, Properties).
 '$lgt_category_property'(updates(Predicate, Properties), Ctg, _, _, _, _) :-
@@ -1285,6 +1292,20 @@ protocol_property(Ptc, Prop) :-
 	;	Properties = [predicate, for(OriginalFunctor/Arity), from(From)| LocationProperties]
 	).
 
+'$lgt_entity_property_references'(Entity, Reference, Properties) :-
+	'$lgt_entity_property_'(Entity, references(Reference0, In, Location)),
+	(	Location = include(File, BeginLine-EndLine) ->
+		LocationProperties = [include(File), lines(BeginLine,EndLine), line_count(BeginLine)]
+	;	Location = BeginLine-EndLine,
+		LocationProperties = [lines(BeginLine,EndLine), line_count(BeginLine)]
+	),
+	(	Reference0 = Other::Functor//Arity ->
+		ExtArity is Arity + 2,
+		Reference = Other::Functor/ExtArity,
+		Properties = [in(In), non_terminal(Functor//Arity)| LocationProperties]
+	;	Reference = Reference0,
+		Properties = [in(In)| LocationProperties]
+	).
 
 '$lgt_entity_property_calls'(Entity, Call, Properties) :-
 	'$lgt_entity_property_'(Entity, calls(Call, Caller, Alias, NonTerminal, Location)),
@@ -7964,6 +7985,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, updates(Dynamic, Updater, Alias, NonTerminal, Location)))),
 	fail.
 
+'$lgt_add_entity_properties'(_, Entity, MainFile) :-
+	'$lgt_pp_references_'(Reference, In, File, Lines),
+	'$lgt_property_location'(MainFile, File, Lines, Location),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, references(Reference, In, Location)))),
+	fail.
+
 '$lgt_add_entity_properties'(_, Entity, _) :-
 	'$lgt_pp_entity_info_'(Info, _, _),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, info(Info)))),
@@ -8640,6 +8667,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_calls_self_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_calls_super_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_updates_predicate_'(_, _, _, _)),
+	retractall('$lgt_pp_references_'(_, _, _, _)),
 	retractall('$lgt_pp_non_portable_predicate_'(_, _, _)),
 	retractall('$lgt_pp_non_portable_function_'(_, _, _)),
 	retractall('$lgt_pp_missing_function_'(_, _, _)),
@@ -10912,7 +10940,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	'$lgt_compile_dynamic_directive_resource'(Resource, Ctx).
 
-'$lgt_compile_dynamic_directive_resource'(Entity::Pred, _) :-
+'$lgt_compile_dynamic_directive_resource'(Entity::Pred, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	(	Entity == user ->
@@ -10924,11 +10952,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		'$lgt_check_for_duplicated_directive'(dynamic(TFunctor/TArity), dynamic(Entity::Pred)),
-		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity)))
+		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity))),
+		'$lgt_source_file_context'(Ctx, File, Lines),
+		assertz('$lgt_pp_references_'(Entity::Pred, (dynamic), File, Lines))
 	;	throw(permission_error(modify, predicate_declaration, Entity::Pred))
 	).
 
-'$lgt_compile_dynamic_directive_resource'(Entity::NonTerminal, _) :-
+'$lgt_compile_dynamic_directive_resource'(Entity::NonTerminal, Ctx) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
 	(	Entity == user ->
@@ -10940,7 +10970,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		'$lgt_check_for_duplicated_directive'(dynamic(TFunctor/TArity), dynamic(Entity::NonTerminal)),
-		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity)))
+		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity))),
+		'$lgt_source_file_context'(Ctx, File, Lines),
+		assertz('$lgt_pp_references_'(Entity::NonTerminal, (dynamic), File, Lines))
 	;	throw(permission_error(modify, non_terminal_declaration, Entity::NonTerminal))
 	).
 
@@ -11075,7 +11107,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	'$lgt_compile_discontiguous_directive_resource'(Resource, Ctx).
 
-'$lgt_compile_discontiguous_directive_resource'(Entity::Pred, _) :-
+'$lgt_compile_discontiguous_directive_resource'(Entity::Pred, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	(	Entity == user ->
@@ -11085,10 +11117,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		'$lgt_check_for_duplicated_directive'(discontiguous(TFunctor/TArity), discontiguous(Entity::Pred)),
-		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity)))
+		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity))),
+		'$lgt_source_file_context'(Ctx, File, Lines),
+		assertz('$lgt_pp_references_'(Entity::Pred, (discontiguous), File, Lines))
 	).
 
-'$lgt_compile_discontiguous_directive_resource'(Entity::NonTerminal, _) :-
+'$lgt_compile_discontiguous_directive_resource'(Entity::NonTerminal, Ctx) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
 	(	Entity == user ->
@@ -11098,7 +11132,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		'$lgt_check_for_duplicated_directive'(discontiguous(TFunctor/TArity), discontiguous(Entity::NonTerminal)),
-		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity)))
+		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity))),
+		'$lgt_source_file_context'(Ctx, File, Lines),
+		assertz('$lgt_pp_references_'(Entity::NonTerminal, (discontiguous), File, Lines))
 	).
 
 '$lgt_compile_discontiguous_directive_resource'(':'(Module, Pred), _) :-
@@ -11182,7 +11218,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_term_template'(Meta, Template),
 	'$lgt_check_for_duplicated_meta_predicate_directive'(Entity::Template, Entity::Meta),
 	'$lgt_source_file_context'(Ctx, File, Lines),
-	assertz('$lgt_pp_meta_predicate_'(Entity::Template, Entity::Meta, File, Lines)).
+	assertz('$lgt_pp_meta_predicate_'(Entity::Template, Entity::Meta, File, Lines)),
+	functor(Meta, Functor, Arity),
+	assertz('$lgt_pp_references_'(Entity::Functor/Arity, (meta_predicate), File, Lines)).
 
 '$lgt_compile_meta_predicate_directive_resource'(':'(Module, Meta), Ctx) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
@@ -11249,7 +11287,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_term_template'(ExtendedMeta, Template),
 	'$lgt_check_for_duplicated_meta_non_terminal_directive'(Entity::Template, Entity::ExtendedMeta, Entity::Meta),
 	'$lgt_source_file_context'(Ctx, File, Lines),
-	assertz('$lgt_pp_meta_predicate_'(Entity::Template, Entity::ExtendedMeta, File, Lines)).
+	assertz('$lgt_pp_meta_predicate_'(Entity::Template, Entity::ExtendedMeta, File, Lines)),
+	functor(Meta, Functor, Arity),
+	assertz('$lgt_pp_references_'(Entity::Functor//Arity, (meta_non_terminal), File, Lines)).
 
 '$lgt_compile_meta_non_terminal_directive_resource'(':'(Module, Meta), Ctx) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
@@ -11347,7 +11387,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	'$lgt_compile_multifile_directive_resource'(Resource, Ctx).
 
-'$lgt_compile_multifile_directive_resource'(Entity::Pred, _) :-
+'$lgt_compile_multifile_directive_resource'(Entity::Pred, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	(	Entity == user ->
@@ -11358,11 +11398,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		'$lgt_check_for_duplicated_directive'(multifile(TFunctor/TArity), multifile(Entity::Pred)),
-		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
+		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity))),
+		'$lgt_source_file_context'(Ctx, File, Lines),
+		assertz('$lgt_pp_references_'(Entity::Pred, (multifile), File, Lines))
 	;	throw(permission_error(modify, predicate_declaration, Entity::Pred))
 	).
 
-'$lgt_compile_multifile_directive_resource'(Entity::NonTerminal, _) :-
+'$lgt_compile_multifile_directive_resource'(Entity::NonTerminal, Ctx) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
 	(	Entity == user ->
@@ -11373,7 +11415,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		'$lgt_check_for_duplicated_directive'(multifile(TFunctor/TArity), multifile(Entity::NonTerminal)),
-		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
+		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity))),
+		'$lgt_source_file_context'(Ctx, File, Lines),
+		assertz('$lgt_pp_references_'(Entity::NonTerminal, (multifile), File, Lines))
 	;	throw(permission_error(modify, non_terminal_declaration, Entity::NonTerminal))
 	).
 
@@ -16307,7 +16351,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% we must delay unification to runtime
 		TPred = (Sender0 = Sender),
 		DPred = TPred,
-		DSender = Sender
+		DSender = Sender,
+		'$lgt_source_file_context'(Ctx, File, Lines),
+		assertz('$lgt_pp_references_'(Sender, clause, File, Lines))
 	).
 
 '$lgt_compile_body'(this(This), _, TPred, '$lgt_debug'(goal(this(DThis), DPred), ExCtx), Ctx) :-
@@ -16322,7 +16368,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% we must delay unification to runtime
 		TPred = (This0 = This),
 		DPred = TPred,
-		DThis = This
+		DThis = This,
+		'$lgt_source_file_context'(Ctx, File, Lines),
+		assertz('$lgt_pp_references_'(This, clause, File, Lines))
 	).
 
 '$lgt_compile_body'(self(Self), _, TPred, '$lgt_debug'(goal(self(DSelf), DPred), ExCtx), Ctx) :-
@@ -16337,7 +16385,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% we must delay unification to runtime
 		TPred = (Self0 = Self),
 		DPred = TPred,
-		DSelf = Self
+		DSelf = Self,
+		'$lgt_source_file_context'(Ctx, File, Lines),
+		assertz('$lgt_pp_references_'(Self, clause, File, Lines))
 	).
 
 '$lgt_compile_body'(parameter(Arg, _), _, _, _, Ctx) :-
@@ -25362,6 +25412,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_category_property'(calls(_, _)).
 % list of updating properties for a dynamic predicate updated in the entity
 '$lgt_valid_category_property'(updates(_, _)).
+% list of references to entities and multifile predicates in the entity
+'$lgt_valid_category_property'(references(_, _)).
 % number of predicate clauses (including both user-defined and auxiliary clauses)
 '$lgt_valid_category_property'(number_of_clauses(_)).
 % number of predicate rules (including both user-defined and auxiliary clauses)

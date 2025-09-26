@@ -1013,6 +1013,7 @@ Entity properties
       | "defines(" predicate_indicator "," predicate_definition_property_list ")"
       | "includes(" predicate_indicator "," ( object_identifier | category_identifier ) "," predicate_definition_property_list ")"
       | "provides(" predicate_indicator "," ( object_identifier | category_identifier ) "," predicate_definition_property_list ")"
+      | "references(" reference "," reference_property_list ")"
       | "alias(" ( object_identifier | module_identifier ) "," entity_alias_property_list ")"
       | "alias(" predicate_indicator "," predicate_alias_property_list ")"
       | "calls(" predicate "," predicate_call_update_property_list ")"
@@ -1045,6 +1046,7 @@ Entity properties
       | "defines(" predicate_indicator "," predicate_definition_property_list ")"
       | "includes(" predicate_indicator "," ( object_identifier | category_identifier ) "," predicate_definition_property_list ")"
       | "provides(" predicate_indicator "," ( object_identifier | category_identifier ) "," predicate_definition_property_list ")"
+      | "references(" reference "," reference_property_list ")"
       | "alias(" ( object_identifier | module_identifier ) "," entity_alias_property_list ")"
       | "alias(" predicate_indicator "," predicate_alias_property_list ")"
       | "calls(" predicate "," predicate_call_update_property_list ")"
@@ -1166,6 +1168,17 @@ Entity properties
       | "lines(" integer  "," integer ")"
       | "line_count(" integer ")"
       | "alias(" predicate_indicator ")"
+      | "non_terminal(" non_terminal_indicator ")"
+
+   reference ::=
+      object_identifier | category_identifier
+      | ( object_identifier | category_identifier ) "::" predicate_indicator
+
+   reference_property_list ::=
+      "in(" ( "multifile" | "dynamic" | "discontiguous" | "meta_predicate" | "meta_non_terminal" | "clause" ) ")"
+      | "include(" atom ")"
+      | "lines(" integer  "," integer ")"
+      | "line_count(" integer ")"
       | "non_terminal(" non_terminal_indicator ")"
 
 .. _grammar_predicate_properties:

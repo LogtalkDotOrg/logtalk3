@@ -25,6 +25,19 @@ RELEASE NOTES
 3.94.0 - September ??, 2025
 ===========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Object and category `references/2` property for querying entity
+references in calls to the execution-context built-in methods and in
+directives for multifile predicates/non-terminals not covered by other
+properties.
+
+Documentation
+-------------
+
+* FIXED: Incomplete documentation of the `discontiguous/1` directive.
+
 Tools
 -----
 
