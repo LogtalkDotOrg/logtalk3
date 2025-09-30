@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:81:0,
+		version is 0:82:0,
 		author is 'Paulo Moura',
-		date is 2025-09-09,
+		date is 2025-09-30,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -1015,6 +1015,12 @@
 
 	explain(variable_names_differ_only_on_case(_, _, _, _)) -->
 		['Variables differing only on case hurt code readability.'-[], nl, nl].
+
+	explain(entity_parameter_not_in_parameter_variable_syntax(_, _, _, _, _)) -->
+		[	'Parameter variable syntax is an underscore followed by a name in title'-[], nl,
+			'case followed by an underscore. This syntax allows the parameter to be'-[], nl,
+			'referenced by name in the parametric entity directives and clauses.'-[], nl, nl
+		].
 
 	% singleton variable messages
 

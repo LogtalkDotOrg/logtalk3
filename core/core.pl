@@ -10087,7 +10087,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_print_message'(silent(compiling), compiling_entity(object, Obj)),
 		'$lgt_compile_object_relations'(Relations, Obj, Ctx),
 		'$lgt_compile_object_identifier'(Obj, Ctx),
-		'$lgt_save_parameter_variables'(Obj)
+		'$lgt_save_parameter_variables'(Obj, Ctx)
 	).
 
 '$lgt_compile_logtalk_directive'(end_object, Ctx) :-
@@ -10192,7 +10192,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_print_message'(silent(compiling), compiling_entity(category, Ctg)),
 		'$lgt_compile_category_identifier'(Ctg, Ctx),
 		'$lgt_compile_category_relations'(Relations, Ctg, Ctx),
-		'$lgt_save_parameter_variables'(Ctg)
+		'$lgt_save_parameter_variables'(Ctg, Ctx)
 	).
 
 '$lgt_compile_logtalk_directive'(end_category, Ctx) :-
@@ -20208,47 +20208,55 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_save_parameter_variables'(@object_identifier)
-% '$lgt_save_parameter_variables'(@category_identifier)
+% '$lgt_save_parameter_variables'(@object_identifier, @compilation_context)
+% '$lgt_save_parameter_variables'(@category_identifier, @compilation_context)
 %
 % saves the parameter variable names and positions found
 % in parametric entity identifiers for later processing
 
-'$lgt_save_parameter_variables'(Entity) :-
+'$lgt_save_parameter_variables'(Entity, _) :-
 	atom(Entity),
 	% non-parametric entity
 	!.
 
-'$lgt_save_parameter_variables'(Entity) :-
+'$lgt_save_parameter_variables'(Entity, _) :-
 	% all parameters must be variables
 	Entity =.. [_| Parameters],
 	'$lgt_member'(Parameter, Parameters),
 	nonvar(Parameter),
 	throw(type_error(variable, Parameter)).
 
-'$lgt_save_parameter_variables'(_) :-
-	'$lgt_pp_term_source_data_'(_, VariableNames, _, _, _),
-	'$lgt_parameter_variable_pairs'(VariableNames, 1, ParameterVariablePairs),
+'$lgt_save_parameter_variables'(_, Ctx) :-
+	'$lgt_pp_term_source_data_'(_, VariableNames, Singletons, _, _),
+	'$lgt_parameter_variable_pairs'(VariableNames, Singletons, 1, ParameterVariablePairs, Ctx),
 	ParameterVariablePairs \== [],
 	!,
 	% only save a non-empty list of parameter
 	% variables to improve compiler performance
 	assertz('$lgt_pp_parameter_variables_'(ParameterVariablePairs)).
 
-'$lgt_save_parameter_variables'(_).
+'$lgt_save_parameter_variables'(_, _).
 
 
-'$lgt_parameter_variable_pairs'([], _, []).
+'$lgt_parameter_variable_pairs'([], _, _, [], _).
 
-'$lgt_parameter_variable_pairs'([VariableName=_| VariableNames], Position, [VariableName-Position| ParameterVariablePairs]) :-
+'$lgt_parameter_variable_pairs'([VariableName=_| VariableNames], Singletons, Position, [VariableName-Position| ParameterVariablePairs], Ctx) :-
 	'$lgt_parameter_variable_name'(VariableName),
 	!,
 	NextPosition is Position + 1,
-	'$lgt_parameter_variable_pairs'(VariableNames, NextPosition, ParameterVariablePairs).
+	'$lgt_parameter_variable_pairs'(VariableNames, Singletons, NextPosition, ParameterVariablePairs, Ctx).
 
-'$lgt_parameter_variable_pairs'([_| VariableNames], Position, ParameterVariablePairs) :-
+'$lgt_parameter_variable_pairs'([VariableName=_| VariableNames], Singletons, Position, ParameterVariablePairs, Ctx) :-
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+		'$lgt_compiler_flag'(naming, warning),
+		'$lgt_member'(VariableName=_, Singletons),
+		'$lgt_source_file_context'(File, Lines, Type, Entity) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(warning(naming), entity_parameter_not_in_parameter_variable_syntax(File, Lines, Type, Entity, VariableName))
+	;	true
+	),
 	NextPosition is Position + 1,
-	'$lgt_parameter_variable_pairs'(VariableNames, NextPosition, ParameterVariablePairs).
+	'$lgt_parameter_variable_pairs'(VariableNames, Singletons, NextPosition, ParameterVariablePairs, Ctx).
 
 
 

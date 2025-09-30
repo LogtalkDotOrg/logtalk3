@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:143:0,
+		version is 1:144:0,
 		author is 'Paulo Moura',
-		date is 2025-01-02,
+		date is 2025-09-30,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -815,6 +815,10 @@
 	message_tokens(variable_names_differ_only_on_case(File, Lines, Name, OtherName)) -->
 		['Variables differ only on case: ~w ~w'-[Name, OtherName], nl],
 		message_context(File, Lines).
+
+	message_tokens(entity_parameter_not_in_parameter_variable_syntax(File, Lines, Type, Entity, Name)) -->
+		['Entity parameter name not in parameter variable syntax: ~w'-[Name], nl],
+		message_context(File, Lines, Type, Entity).
 
 	message_tokens(file_and_entity_names_differ(File, Entity)) -->
 		['Source file basename differ from file entity name: ~q'-[Entity], nl],

@@ -33,6 +33,9 @@ references in calls to the execution-context built-in methods and in
 directives for multifile predicates/non-terminals not covered by other
 properties.
 
+* ADDED: Linter warning for entity parameter variables not in parameter
+variable syntax. Controlled by the `naming` linter flag.
+
 Documentation
 -------------
 
@@ -46,6 +49,9 @@ compiling the tests instead of when printing the code coverage results.
 
 * ADDED: Support for creating entity specific predicate breakpoints to the
 `debugger` tool.
+
+* UPDATED: The `tutor` tool to explain the new linter warning for entity
+parameters not in parameter variable syntax.
 
 * FIXED: The `debugger` tool to not change from debugging with breakpoints to
 tracing for the next top-level query if the `trace/0` predicate was not used.
