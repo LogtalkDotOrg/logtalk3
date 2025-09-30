@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:6:0,
+		version is 2:7:0,
 		author is 'Paulo Moura',
-		date is 2019-05-30,
+		date is 2025-09-30,
 		comment is 'Unit tests for the category_property/2 built-in predicate.'
 	]).
 
@@ -61,9 +61,9 @@
 		category_property(test_category, source_data),
 		category_property(test_category, file(Basename, Directory)), ground(Basename), ground(Directory),
 		category_property(test_category, lines(Start, End)), integer(Start), integer(End),
-		category_property(test_category, number_of_clauses(NC)), NC == 33,
+		category_property(test_category, number_of_clauses(NC)), NC == 34,
 		category_property(test_category, number_of_rules(NR)), NR == 25,
-		category_property(test_category, number_of_user_clauses(NUC)), NUC == 31,
+		category_property(test_category, number_of_user_clauses(NUC)), NUC == 32,
 		category_property(test_category, number_of_user_rules(NUR)), NUR == 23,
 		category_property(test_category, info(Info)),
 		member(version(_), Info),
@@ -74,7 +74,7 @@
 	% entity interface
 
 	succeeds(category_property_2_08) :-
-		category_property(test_category, public(Public)), Public == [a/1],
+		category_property(test_category, public(Public)), Public == [m/2, a/1],
 		category_property(test_category, protected(Protected)), Protected == [b/2],
 		category_property(test_category, private(Private)), Private == [c/3, e/5].
 
@@ -230,142 +230,166 @@
 			(member(line_count(Line), Properties), integer(Line))
 		).
 
+	% references property
+
+	succeeds(category_property_2_29) :-
+		findall(
+			Reference-Properties,
+			category_property(test_category, references(Reference, Properties)),
+			References
+		),
+		References == [].
+
+	succeeds(category_property_2_30) :-
+		findall(
+			Reference-Properties,
+			category_property(multifile_category, references(Reference, Properties)),
+			References
+		),
+		References == [
+			(test_category::m/2)-[in(multifile), lines(34, 34), line_count(34)]
+		].
+
 	% check that all queries with explicit properties are valid
 
-	fails(category_property_2_29) :-
+	fails(category_property_2_31) :-
 		category_property(empty_category, built_in),
 		fail.
 
-	fails(category_property_2_30) :-
+	fails(category_property_2_32) :-
 		category_property(empty_category, (dynamic)),
 		fail.
 
-	fails(category_property_2_31) :-
+	fails(category_property_2_33) :-
 		category_property(empty_category, static),
 		fail.
 
-	fails(category_property_2_32) :-
+	fails(category_property_2_34) :-
 		category_property(empty_category, debugging),
 		fail.
 
-	fails(category_property_2_33) :-
+	fails(category_property_2_35) :-
 		category_property(empty_category, public(_)),
 		fail.
 
-	fails(category_property_2_34) :-
+	fails(category_property_2_36) :-
 		category_property(empty_category, protected(_)),
 		fail.
 
-	fails(category_property_2_35) :-
+	fails(category_property_2_37) :-
 		category_property(empty_category, private(_)),
 		fail.
 
-	fails(category_property_2_36) :-
+	fails(category_property_2_38) :-
 		category_property(empty_category, declares(_, _)),
 		fail.
 
-	fails(category_property_2_37) :-
-		category_property(empty_category, alias(_, _)),
-		fail.
-
-	fails(category_property_2_38) :-
-		category_property(empty_category, source_data),
-		fail.
-
 	fails(category_property_2_39) :-
-		category_property(empty_category, info(_)),
+		category_property(empty_category, references(_, _)),
 		fail.
 
 	fails(category_property_2_40) :-
-		category_property(empty_category, file(_)),
+		category_property(empty_category, alias(_, _)),
 		fail.
 
 	fails(category_property_2_41) :-
-		category_property(empty_category, file(_, _)),
+		category_property(empty_category, source_data),
 		fail.
 
 	fails(category_property_2_42) :-
-		category_property(empty_category, lines(_, _)),
+		category_property(empty_category, info(_)),
 		fail.
 
 	fails(category_property_2_43) :-
-		category_property(empty_category, events),
+		category_property(empty_category, file(_)),
 		fail.
 
 	fails(category_property_2_44) :-
-		category_property(empty_category, defines(_, _)),
+		category_property(empty_category, file(_, _)),
 		fail.
 
 	fails(category_property_2_45) :-
-		category_property(empty_category, includes(_, _, _)),
+		category_property(empty_category, lines(_, _)),
 		fail.
 
 	fails(category_property_2_46) :-
-		category_property(empty_category, provides(_, _, _)),
+		category_property(empty_category, events),
 		fail.
 
 	fails(category_property_2_47) :-
-		category_property(empty_category, calls(_, _)),
+		category_property(empty_category, defines(_, _)),
 		fail.
 
 	fails(category_property_2_48) :-
-		category_property(empty_category, number_of_clauses(_)),
+		category_property(empty_category, includes(_, _, _)),
 		fail.
 
 	fails(category_property_2_49) :-
-		category_property(empty_category, number_of_rules(_)),
+		category_property(empty_category, provides(_, _, _)),
 		fail.
 
 	fails(category_property_2_50) :-
-		category_property(empty_category, number_of_user_clauses(_)),
+		category_property(empty_category, calls(_, _)),
 		fail.
 
 	fails(category_property_2_51) :-
+		category_property(empty_category, number_of_clauses(_)),
+		fail.
+
+	fails(category_property_2_52) :-
+		category_property(empty_category, number_of_rules(_)),
+		fail.
+
+	fails(category_property_2_53) :-
+		category_property(empty_category, number_of_user_clauses(_)),
+		fail.
+
+	fails(category_property_2_54) :-
 		category_property(empty_category, number_of_user_rules(_)),
 		fail.
 
 	% determinism tests
 
-	deterministic(category_property_2_52) :-
+	deterministic(category_property_2_55) :-
 		category_property(debug_category, debugging).
 
-	deterministic(category_property_2_53) :-
+	deterministic(category_property_2_56) :-
 		category_property(test_category, source_data).
 
-	deterministic(category_property_2_54) :-
+	deterministic(category_property_2_57) :-
 		category_property(dynamic_category, (dynamic)).
 
-	deterministic(category_property_2_55) :-
+	deterministic(category_property_2_58) :-
 		category_property(test_category, static).
 
-	deterministic(category_property_2_56) :-
+	deterministic(category_property_2_59) :-
 		category_property(built_in_category, built_in).
 
-	deterministic(category_property_2_57) :-
+	deterministic(category_property_2_60) :-
 		category_property(test_category, file(_)).
 
-	deterministic(category_property_2_58) :-
+	deterministic(category_property_2_61) :-
 		category_property(test_category, file(_, _)).
 
-	deterministic(category_property_2_59) :-
+	deterministic(category_property_2_62) :-
 		category_property(test_category, lines(_, _)).
 
-	deterministic(category_property_2_60) :-
+	deterministic(category_property_2_63) :-
 		category_property(test_category, info(_)).
 
-	deterministic(category_property_2_61) :-
+	deterministic(category_property_2_64) :-
 		category_property(events_category, events).
 
-	deterministic(category_property_2_62) :-
+	deterministic(category_property_2_65) :-
 		category_property(test_category, number_of_clauses(_)).
 
-	deterministic(category_property_2_63) :-
+	deterministic(category_property_2_66) :-
 		category_property(test_category, number_of_rules(_)).
 
-	deterministic(category_property_2_64) :-
+	deterministic(category_property_2_67) :-
 		category_property(test_category, number_of_user_clauses(_)).
 
-	deterministic(category_property_2_65) :-
+	deterministic(category_property_2_68) :-
 		category_property(test_category, number_of_user_rules(_)).
 
 	% auxiliary predicates (avoid library dependencies)

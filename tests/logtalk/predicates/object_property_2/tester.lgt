@@ -22,7 +22,7 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(test_objects),
+	logtalk_load([test_objects_1, test_objects_2]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).

@@ -36,13 +36,13 @@
 
 	test(prototype_1) :-
 		implements_protocol(prototype_1, protocol1),
-		imports_category(prototype_1, cateogry1),
+		imports_category(prototype_1, category1),
 		extends_object(prototype_1, parent1).
 
 	test(prototype_2) :-
 		implements_protocol(prototype_2, protocol1),
 		implements_protocol(prototype_2, protocol2),
-		imports_category(prototype_2, cateogry1),
+		imports_category(prototype_2, category1),
 		imports_category(prototype_2, category2),
 		extends_object(prototype_2, parent1),
 		extends_object(prototype_2, parent2).

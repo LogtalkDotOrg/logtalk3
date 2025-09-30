@@ -21,7 +21,7 @@
 
 :- object(prototype_1,
 	implements(protocol1),
-	imports(cateogry1),
+	imports(category1),
 	extends(parent1)).
 
 :- end_object.
@@ -29,7 +29,7 @@
 
 :- object(prototype_2,
 	implements((protocol1, protocol2)),
-	imports((cateogry1, category2)),
+	imports((category1, category2)),
 	extends((parent1, parent2))).
 
 :- end_object.

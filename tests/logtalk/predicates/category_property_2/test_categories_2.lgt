@@ -19,10 +19,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load([test_categories_1, test_categories_2]),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- set_logtalk_flag(source_data, on).
+
+
+:- category(multifile_category).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2025-09-30,
+		comment is 'Sample category for testing with the `source_data` flag turned on.'
+	]).
+
+	:- multifile(test_category::m/2).
+	test_category::m(_, _).
+
+:- end_category.

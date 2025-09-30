@@ -22,19 +22,18 @@
 :- set_logtalk_flag(source_data, on).
 
 
-:- object(test_object).
+:- category(test_category).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Paulo Moura',
-		date is 2016-11-01,
-		comment is 'Sample object for testing with the `source_data` flag turned on.'
+		date is 2025-09-30,
+		comment is 'Sample category for testing with the `source_data` flag turned on.'
 	]).
 
-	:- set_logtalk_flag(complements, allow).
-	:- set_logtalk_flag(dynamic_declarations, allow).
-	:- set_logtalk_flag(context_switching_calls, deny).
-	:- set_logtalk_flag(events, allow).
+	:- public(m/2).
+	:- multifile(m/2).
+	m(_, _).
 
 	:- public(a/1).
 	:- if(current_logtalk_flag(coinduction, supported)).
@@ -51,9 +50,6 @@
 
 	:- private(c/3).
 	:- dynamic(c/3).
-	c(1, 2, 3).
-	c(2, 3, 1).
-	c(3, 1, 2).
 
 	d(1, 2, 3, 4).
 	d(2, 3, 4, 1).
@@ -137,94 +133,72 @@
 	updater6o :-
 		logtalk::abolish(c/3).
 
-:- end_object.
+:- end_category.
 
 
-:- object(empty_object).
+:- category(empty_category).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-02-19,
-		comment is 'Empty object for testing validity of object properties.'
+		comment is 'Empty category for testing validity of category properties.'
 	]).
 
-:- end_object.
+:- end_category.
 
 
-:- object(built_in_object).
+:- category(built_in_category).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-03-20,
-		comment is 'Built-in object for testing determinism of object properties.'
+		comment is 'Built-in category for testing determinism of category properties.'
 	]).
 
 	:- built_in.
 
-:- end_object.
+:- end_category.
 
 
-:- object(dynamic_object).
+:- category(dynamic_category).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-03-20,
-		comment is 'Dynamic object for testing determinism of object properties.'
+		comment is 'Dynamic category for testing determinism of category properties.'
 	]).
 
 	:- (dynamic).
 
-:- end_object.
+:- end_category.
 
 
-:- object(debug_object).
+:- category(debug_category).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-03-20,
-		comment is 'Object compiled in debug mode for testing determinism of object properties.'
+		comment is 'Category compiled in debug mode for testing determinism of category properties.'
 	]).
 
 	:- set_logtalk_flag(debug, on).
 
-:- end_object.
+:- end_category.
 
 
-:- object(options_object).
+:- category(events_category).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-03-20,
-		comment is 'Object compiled with optional features turned on for testing determinism of object properties.'
+		comment is 'Category compiled with event support for testing determinism of category properties.'
 	]).
 
 	:- set_logtalk_flag(events, allow).
-	:- set_logtalk_flag(context_switching_calls, allow).
-	:- set_logtalk_flag(dynamic_declarations, allow).
-	:- set_logtalk_flag(complements, allow).
 
-:- end_object.
-
-
-:- object(threaded_object).
-
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2016-03-20,
-		comment is 'Object compiled with threaded calls support for testing determinism of object properties.'
-	]).
-
-	:- if(current_logtalk_flag(threads, supported)).
-		:- threaded.
-	:- endif.
-
-:- end_object.
-
-
-:- module(module, []).
+:- end_category.

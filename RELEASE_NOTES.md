@@ -67,6 +67,12 @@ Examples
 
 * UPDATED: The `errors` example to illustrate additional linter warnings.
 
+Tests
+-----
+
+* ADDED: Additional tests for the `object_property/2` and `category_property/2`
+built-in predicates.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
