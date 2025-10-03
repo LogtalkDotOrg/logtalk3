@@ -25,6 +25,11 @@ RELEASE NOTES
 3.95.0 - October ??, 2025
 =========================
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: Some typos in the syntax highlighting test files.
+
 
 3.94.0 - September 30, 2025
 ===========================

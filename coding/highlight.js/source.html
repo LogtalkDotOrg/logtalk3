@@ -43,9 +43,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1:51:0,
+		version is 1:51:1,
 		author is &#x27;Paulo Moura&#x27;,
-		date is 2024-09-14,
+		date is 2025-10-03,
 		comment is &#x27;Sample prototype for testing syntax coloring.&#x27;
 	]).
 
@@ -59,14 +59,24 @@ comment
 		foobar as fb
 	]).
 
-	:- alias(set, [member/2 as set_member/2]).
-	:- alias(words, [singular//0 as peculiar//0]).
+	:- alias(set, [
+		member/2 as set_member/2
+	]).
+	:- alias(words, [
+		singular//0 as peculiar//0
+	]).
 
-	:- uses(list, [append/3, member/2]).
-	:- uses(queues, [new/1 as new_queue/1]).
+	:- uses(list, [
+		append/3, member/2
+	]).
+	:- uses(queues, [
+		new/1 as new_queue/1
+	]).
 
 	:- use_module(module).
-	:- use_module(module, [append/3, member/2]).
+	:- use_module(module, [
+		append/3, member/2
+	]).
 
 	:- multifile(zzz/1).
 	:- multifile(module:zzz/1).
@@ -74,7 +84,9 @@ comment
 
 	:- coinductive(comember/1).
 
-	:- use_module(module, [xxx/1, yyy/2, zzz/3]).
+	:- use_module(module, [
+		xxx/1, yyy/2, zzz/3
+	]).
 	:- export(bbb/3).
 	:- reexport(cccc/4).
 
@@ -82,9 +94,12 @@ comment
 	:- meta_predicate(aaa(::, *)).
 	:- discontiguous(aaa/2).
 	:- mode(aaa(+callable, ?integer), zero_or_one).
-	:- info(position/2, [
+	:- info(aaa/2, [
 		comment is &#x27;Predicate brief description.&#x27;,
-		arguments is [&#x27;Arg1&#x27;-&#x27;Arg1 description&#x27;, &#x27;Arg2&#x27;-&#x27;Arg2 description&#x27;]
+		arguments is [
+			&#x27;Arg1&#x27;-&#x27;Arg1 description&#x27;,
+			&#x27;Arg2&#x27;-&#x27;Arg2 description&#x27;
+		]
 	]).
 
 	:- public(nt//2).
@@ -100,7 +115,7 @@ comment
 
 	:- private(ccc/2).
 	:- dynamic(ccc/2).
-	:- mode(ccc(@atom, ?atom, ++list, --ground), one_or_more).
+	:- mode(ccc(@atom, ?atom), one_or_more).
 	:- info(ccc/2, [
 		comment is &#x27;Predicate brief description.&#x27;,
 		argnames is [&#x27;Arg1&#x27;, &#x27;Arg2&#x27;]
@@ -329,7 +344,7 @@ comment
 		numbervars(Term, Start, End),
 		term_variables(Term, Variables).
 
-	arithemtic_evaluation :-
+	arithmetic_evaluation :-
 		X is Expression.
 
 	arithmetic_comparison :-
@@ -412,12 +427,15 @@ comment
 		keysort(List, Sorted),
 		sort(List, Sorted).
 
-	built_in_non_terminals(NonTerminal) -->
+	built_in_non_terminals(NonTerminal) --&gt;
 		phrase(NonTerminal), call(NonTerminal), eos.
 
-	number(C) --&gt; &quot;+&quot;, number(C).
-	number(C) --&gt; &quot;-&quot;, number(X), {C is -X}.
-	number(X) --&gt; [C], {0&#x27;0 =&lt; C, C =&lt; 0&#x27;9, X is C - 0&#x27;0}.
+	number(C) --&gt;
+		&quot;+&quot;, number(C).
+	number(C) --&gt;
+		&quot;-&quot;, number(X), {C is -X}.
+	number(X) --&gt;
+		[C], {0&#x27;0 =&lt; C, C =&lt; 0&#x27;9, X is C - 0&#x27;0}.
 
 	escape_sequences :-
 		write(&#x27;Quoted atom with a quote (&#x27;&#x27;) inside.&#x27;),
@@ -428,12 +446,12 @@ comment
 		write(&#x27;Quoted atom with an hexadecimal escape sequence: \x123f\.&#x27;).
 
 	escape_sequences :-
-		write(&quot;Quoted atom with a quote (&quot;&quot;) inside.&quot;),
-		write(&quot;Quoted atom with a quote (\&quot;) inside using a control escape sequence.&quot;),
-		write(&quot;Quoted atom with a backslash (\\) inside.&quot;),
-		write(&quot;Quoted atom with control escape sequences: \a \b \r \f \t \n \v&quot;),
-		write(&quot;Quoted atom with an octal escape sequence: \123\.&quot;),
-		write(&quot;Quoted atom with an hexadecimal escape sequence: \x123f\.&quot;).
+		write(&quot;Double-quoted term with a double-quote (&quot;&quot;) inside.&quot;),
+		write(&quot;Double-quoted term with a double-quote (\&quot;) inside using a control escape sequence.&quot;),
+		write(&quot;Double-quoted term with a backslash (\\) inside.&quot;),
+		write(&quot;Double-quoted term with control escape sequences: \a \b \r \f \t \n \v&quot;),
+		write(&quot;Double-quoted term with an octal escape sequence: \123\.&quot;),
+		write(&quot;Double-quoted term with an hexadecimal escape sequence: \x123f\.&quot;).
 
 	% nothing in the following predicate definition should be highlighted
 	sort :-

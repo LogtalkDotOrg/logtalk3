@@ -30,9 +30,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1:51:0,
+		version is 1:51:1,
 		author is 'Paulo Moura',
-		date is 2024-09-14,
+		date is 2025-10-03,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
@@ -46,14 +46,24 @@ comment
 		foobar as fb
 	]).
 
-	:- alias(set, [member/2 as set_member/2]).
-	:- alias(words, [singular//0 as peculiar//0]).
+	:- alias(set, [
+		member/2 as set_member/2
+	]).
+	:- alias(words, [
+		singular//0 as peculiar//0
+	]).
 
-	:- uses(list, [append/3, member/2]).
-	:- uses(queues, [new/1 as new_queue/1]).
+	:- uses(list, [
+		append/3, member/2
+	]).
+	:- uses(queues, [
+		new/1 as new_queue/1
+	]).
 
 	:- use_module(module).
-	:- use_module(module, [append/3, member/2]).
+	:- use_module(module, [
+		append/3, member/2
+	]).
 
 	:- multifile(zzz/1).
 	:- multifile(module:zzz/1).
@@ -61,7 +71,9 @@ comment
 
 	:- coinductive(comember/1).
 
-	:- use_module(module, [xxx/1, yyy/2, zzz/3]).
+	:- use_module(module, [
+		xxx/1, yyy/2, zzz/3
+	]).
 	:- export(bbb/3).
 	:- reexport(cccc/4).
 
@@ -69,9 +81,12 @@ comment
 	:- meta_predicate(aaa(::, *)).
 	:- discontiguous(aaa/2).
 	:- mode(aaa(+callable, ?integer), zero_or_one).
-	:- info(position/2, [
+	:- info(aaa/2, [
 		comment is 'Predicate brief description.',
-		arguments is ['Arg1'-'Arg1 description', 'Arg2'-'Arg2 description']
+		arguments is [
+			'Arg1'-'Arg1 description',
+			'Arg2'-'Arg2 description'
+		]
 	]).
 
 	:- public(nt//2).
@@ -87,7 +102,7 @@ comment
 
 	:- private(ccc/2).
 	:- dynamic(ccc/2).
-	:- mode(ccc(@atom, ?atom, ++list, --ground), one_or_more).
+	:- mode(ccc(@atom, ?atom), one_or_more).
 	:- info(ccc/2, [
 		comment is 'Predicate brief description.',
 		argnames is ['Arg1', 'Arg2']
@@ -402,9 +417,12 @@ comment
 	built_in_non_terminals(NonTerminal) -->
 		phrase(NonTerminal), call(NonTerminal), eos.
 
-	number(C) --> "+", number(C).
-	number(C) --> "-", number(X), {C is -X}.
-	number(X) --> [C], {0'0 =< C, C =< 0'9, X is C - 0'0}.
+	number(C) -->
+		"+", number(C).
+	number(C) -->
+		"-", number(X), {C is -X}.
+	number(X) -->
+		[C], {0'0 =< C, C =< 0'9, X is C - 0'0}.
 
 	escape_sequences :-
 		write('Quoted atom with a quote ('') inside.'),
