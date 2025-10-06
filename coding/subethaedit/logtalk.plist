@@ -83,6 +83,7 @@
 				<string>\:\-[[:space:]](initialization)\(</string>
 				<string>\:\-[[:space:]](info)\(</string>
 				<string>\:\-[[:space:]](mode)\(</string>
+				<string>\:\-[[:space:]](mode_non_terminal)\(</string>
 				<string>\:\-[[:space:]](module)\(</string>
 				<string>\:\-[[:space:]](built_in)\.</string>
 				<string>\:\-[[:space:]](dynamic)\(</string>
@@ -531,7 +532,7 @@
 			</array>
 			<key>Multiline</key>
 			<false/>
-            <key>Comment</key>
+			<key>Comment</key>
 			<true/>
 			<key>Regular Expressions</key>
 			<array>
@@ -550,7 +551,7 @@
 			</array>
 			<key>Multiline</key>
 			<true/>
-            <key>Comment</key>
+			<key>Comment</key>
 			<true/>
 			<key>Multiline Begin</key>
 			<string>/*</string>

@@ -22,92 +22,92 @@
 :- object(number_grammars(_Format_)).
 
 	:- info([
-		version is 0:2:2,
+		version is 0:3:0,
 		author is 'Paulo Moura',
-		date is 2024-03-14,
+		date is 2025-10-06,
 		comment is 'Number grammars.',
 		parnames is ['Format']
 	]).
 
 	:- public(bit//1).
-	:- mode(bit(?integer), zero_or_one).
+	:- mode_non_terminal(bit(?integer), zero_or_one).
 	:- info(bit//1, [
 		comment is 'Parses a single bit.',
 		argnames is ['Bit']
 	]).
 
 	:- public(bits//1).
-	:- mode(bits(?list(integer)), zero_or_one).
+	:- mode_non_terminal(bits(?list(integer)), zero_or_one).
 	:- info(bits//1, [
 		comment is 'Parses a sequence of one or more bits.',
 		argnames is ['Bits']
 	]).
 
 	:- public(digit//1).
-	:- mode(digit(?atomic), zero_or_one).
+	:- mode_non_terminal(digit(?atomic), zero_or_one).
 	:- info(digit//1, [
 		comment is 'Parses a single decimal digit.',
 		argnames is ['Digit']
 	]).
 
 	:- public(digits//1).
-	:- mode(digits(?list(atomic)), one).
+	:- mode_non_terminal(digits(?list(atomic)), one).
 	:- info(digits//1, [
 		comment is 'Parses a sequence of zero of more digits.',
 		argnames is ['Digits']
 	]).
 
 	:- public(hex_digit//1).
-	:- mode(hex_digit(?atomic), zero_or_one).
+	:- mode_non_terminal(hex_digit(?atomic), zero_or_one).
 	:- info(hex_digit//1, [
 		comment is 'Parses a single hexa-decimal digit.',
 		argnames is ['HexDigit']
 	]).
 
 	:- public(hex_digits//1).
-	:- mode(hex_digits(?list(atomic)), one).
+	:- mode_non_terminal(hex_digits(?list(atomic)), one).
 	:- info(hex_digits//1, [
 		comment is 'Parses a sequence of zero or more hexa-decimal digits.',
 		argnames is ['HexDigits']
 	]).
 
 	:- public(natural//1).
-	:- mode(natural(?non_negative_integer), zero_or_one).
+	:- mode_non_terminal(natural(?non_negative_integer), zero_or_one).
 	:- info(natural//1, [
 		comment is 'Parses a natural number (a non signed integer).',
 		argnames is ['Natural']
 	]).
 
 	:- public(integer//1).
-	:- mode(integer(?integer), zero_or_one).
+	:- mode_non_terminal(integer(?integer), zero_or_one).
 	:- info(integer//1, [
 		comment is 'Parses an integer.',
 		argnames is ['Integer']
 	]).
 
 	:- public(float//1).
-	:- mode(float(?float), zero_or_one).
+	:- mode_non_terminal(float(?float), zero_or_one).
 	:- info(float//1, [
 		comment is 'Parses a float.',
 		argnames is ['Float']
 	]).
 
 	:- public(number//1).
-	:- mode(number(?number), zero_or_one).
+	:- mode_non_terminal(number(?number), zero_or_one).
 	:- info(number//1, [
 		comment is 'Parses a number (an integer or a float).',
 		argnames is ['Number']
 	]).
 
 	:- public(sign//1).
-	:- mode(sign(?atomic), zero_or_one).
+	:- mode_non_terminal(sign(?atomic), zero_or_one).
 	:- info(sign//1, [
 		comment is 'Parses a number sign (plus or minus).',
 		argnames is ['Sign']
 	]).
 
 	:- public(dot//1).
-	:- mode(dot(?atomic), zero_or_one).
+	:- mode_non_terminal(dot(?atomic), zero_or_one).
 	:- info(dot//1, [
 		comment is 'Parses a decimal dot.',
 		argnames is ['Dot']

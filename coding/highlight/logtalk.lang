@@ -37,7 +37,7 @@ Keywords={
     Group=1,
   },
   { Id=1, -- entity and predicate directives
-    Regex=[[ ^\s*:-\s(calls|coinductive|public|protected|private|encoding|ensure_loaded|export|in(clude|fo|itialization)|alias|dynamic|discontiguous|meta_(non_terminal|predicate)|mode|module|multifile|reexport|set_(logtalk|prolog)_flag|synchronized|op|uses|use_module)(?=[(]) ]],
+    Regex=[[ ^\s*:-\s(calls|coinductive|public|protected|private|encoding|ensure_loaded|export|in(clude|fo|itialization)|alias|dynamic|discontiguous|meta_(non_terminal|predicate)|mode(_non_terminal)?|module|multifile|reexport|set_(logtalk|prolog)_flag|synchronized|op|uses|use_module)(?=[(]) ]],
      Group=1,
   },
   { Id=1,

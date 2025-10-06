@@ -43,9 +43,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1:51:0,
+		version is 1:52:0,
 		author is &#x27;Paulo Moura&#x27;,
-		date is 2024-09-14,
+		date is 2025-10-06,
 		comment is &#x27;Sample prototype for testing syntax coloring.&#x27;]).
 
 	:- built_in.
@@ -103,6 +103,14 @@ comment
 	:- info(ccc/2, [
 		comment is &#x27;Predicate brief description.&#x27;,
 		argnames is [&#x27;Arg1&#x27;, &#x27;Arg2&#x27;]
+	]).
+
+	:- private(ccc//2).
+	:- dynamic(ccc//2).
+	:- mode_non_terminal(ccc(@atom, ?atom), one_or_more).
+	:- info(ccc//2, [
+		comment is 'Non-terminal brief description.',
+		argnames is ['Arg1', 'Arg2']
 	]).
 
 	enumerating_entities(Object, Protocol, Category) :-

@@ -2,7 +2,7 @@
 "
 " Language:	Logtalk
 " Maintainer:   Paulo Moura <pmoura@logtalk.org>
-" Last Change:  September 14, 2024
+" Last Change:  October 6, 2025
 
 
 
@@ -85,6 +85,7 @@ syn region	logtalkDir		matchgroup=logtalkDirTag	start=":- encoding("		matchgroup
 syn region	logtalkDir		matchgroup=logtalkDirTag	start=":- initialization("	matchgroup=logtalkDirTag	end=")\."	contains=ALL
 syn region	logtalkDir		matchgroup=logtalkDirTag	start=":- info("		matchgroup=logtalkDirTag	end=")\."	contains=ALL
 syn region	logtalkDir		matchgroup=logtalkDirTag	start=":- mode("		matchgroup=logtalkDirTag	end=")\."	contains=logtalkOperator, logtalkAtom
+syn region	logtalkDir		matchgroup=logtalkDirTag	start=":- mode_non_terminal("		matchgroup=logtalkDirTag	end=")\."	contains=logtalkOperator, logtalkAtom
 syn region	logtalkDir		matchgroup=logtalkDirTag	start=":- dynamic("		matchgroup=logtalkDirTag	end=")\."	contains=ALL
 syn match	logtalkDirTag		":- built_in\."
 syn match	logtalkDirTag		":- dynamic\."

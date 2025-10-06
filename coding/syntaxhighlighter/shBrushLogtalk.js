@@ -5,7 +5,7 @@
 
 	function Brush()
 	{
-		// Contributed by Paulo Moura (https://logtalk.org/); last revised on September 14, 2024
+		// Contributed by Paulo Moura (https://logtalk.org/); last revised on October 6, 2025
 
 		this.regexList = [
 		  // variables
@@ -98,7 +98,7 @@
 			{ regex: new RegExp("\\b(ignore|once)(?=[(])", 'g'), css: 'keyword'},
 			{ regex: new RegExp("\\b(uninstantiation|type|domain|consistency|existence|permission|representation|evaluation|resource|syntax)_error(?=[(])", 'g'), css: 'keyword'},
 			// directives
-			{ regex: new RegExp("^\\s*:\-\\s(c(a(lls|tegory)|oinductive)|p(ublic|r(ot(ocol|ected)|ivate))|e(l(if|se)|n(coding|sure_loaded)|xport)|i(f|n(clude|itialization|fo))|alias|d(ynamic|iscontiguous)|m(eta_(non_terminal|predicate)|od(e|ule)|ultifile)|reexport|s(et_(logtalk|prolog)_flag|ynchronized)|o(bject|p)|use(s|_module))(?=[(])", 'gm'), css: 'preprocessor' },
+			{ regex: new RegExp("^\\s*:\-\\s(c(a(lls|tegory)|oinductive)|p(ublic|r(ot(ocol|ected)|ivate))|e(l(if|se)|n(coding|sure_loaded)|xport)|i(f|n(clude|itialization|fo))|alias|d(ynamic|iscontiguous)|m(eta_(non_terminal|predicate)|od(e|e_non_terminal|ule)|ultifile)|reexport|s(et_(logtalk|prolog)_flag|ynchronized)|o(bject|p)|use(s|_module))(?=[(])", 'gm'), css: 'preprocessor' },
 			{ regex: new RegExp("^\\s*:\-\\s(e(lse|nd(if|_(category|object|protocol)))|built_in|dynamic|synchronized|threaded)\.", 'gm'), css: 'preprocessor' },
 			{ regex: new RegExp("^\\s*(complements|extends|i(nstantiates|mp(lements|orts))|specializes)(?=[(])", 'gm'), css: 'preprocessor' },
 			// atoms

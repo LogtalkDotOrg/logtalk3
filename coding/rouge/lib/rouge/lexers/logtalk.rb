@@ -173,7 +173,7 @@ module Rouge
         rule %r/(encoding|ensure_loaded|export)(?=[(])/, Keyword, :pop!
         rule %r/(include|initialization|info)(?=[(])/, Keyword, :pop!
         rule %r/(built_in|dynamic|synchronized|threaded)(?=[.])/, Keyword, :pop!
-        rule %r/(alias|dynamic|discontiguous|meta_non_terminal|meta_predicate|mode|multifile|synchronized)(?=[(])/, Keyword, :pop!
+        rule %r/(alias|dynamic|discontiguous|meta_non_terminal|meta_predicate|mode|mode_non_terminal|multifile|synchronized)(?=[(])/, Keyword, :pop!
         rule %r/(set_logtalk_flag|set_prolog_flag)(?=[(])/, Keyword, :pop!
         rule %r/op(?=[(])/, Keyword, :pop!
         rule %r/(calls|coinductive|module|reexport|uses|use_module)(?=[(])/, Keyword, :pop!

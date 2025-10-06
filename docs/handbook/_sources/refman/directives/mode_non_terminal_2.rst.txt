@@ -20,20 +20,20 @@
 
 **directive**
 
-.. index:: pair: mode/2; Directive
-.. _directives_mode_2:
+.. index:: pair: mode_non_terminal/2; Directive
+.. _directives_mode_non_terminal_2:
 
-``mode/2``
-==========
+``mode_non_terminal/2``
+=======================
 
 Description
 -----------
 
 ::
 
-   mode(Mode, NumberOfProofs)
+   mode_non_terminal(Mode, NumberOfProofs)
 
-Most predicates can be used with several instantiations modes. This
+Most non-terminals can be used with several instantiations modes. This
 directive enables the specification of each
 :ref:`instantiation mode <predicates_mode_instantiation>` and the
 corresponding :ref:`number of proofs <predicates_mode_number_of_proofs>`
@@ -45,23 +45,18 @@ Template and modes
 
 ::
 
-   mode(+predicate_mode_term, +number_of_proofs)
-   mode(+non_terminal_mode_term, +number_of_proofs)
+   mode_non_terminal(+predicate_mode_term, +number_of_proofs)
+   mode_non_terminal(+non_terminal_mode_term, +number_of_proofs)
 
 Examples
 --------
 
 ::
 
-   :- mode(atom_concat(-atom, -atom, +atom), one_or_more).
-   :- mode(atom_concat(+atom, +atom, -atom), one).
-
-   :- mode(var(@term), zero_or_one).
-
-   :- mode(solve(+callable, -list(atom)), zero_or_one).
+   :- mode_non_terminal(zero_or_more(-list(atomic)), one).
 
 .. seealso::
 
-   :ref:`directives_mode_non_terminal_2`,
+   :ref:`directives_mode_2`,
    :ref:`directives_info_2`,
    :ref:`methods_predicate_property_2`

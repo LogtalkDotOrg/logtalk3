@@ -555,6 +555,7 @@ Predicate directives
       | use_module_directive
       | scope_directive
       | mode_directive
+      | mode_non_terminal_directive
       | meta_predicate_directive
       | meta_non_terminal_directive
       | info_directive
@@ -582,7 +583,10 @@ Predicate directives
       | ":- private(" scope_directive_resource_term ")."
 
    mode_directive ::=
-      ":- mode(" ( predicate_mode_term | non_terminal_mode_term ) "," number_of_proofs ")."
+      ":- mode(" predicate_mode_term "," number_of_proofs ")."
+
+   mode_non_terminal_directive ::=
+      ":- mode_non_terminal(" non_terminal_mode_term "," number_of_proofs ")."
 
    meta_predicate_directive ::=
       ":- meta_predicate(" meta_predicate_template_term ")."
@@ -1097,7 +1101,7 @@ Entity properties
       | "include(" atom ")"
       | "lines(" integer  "," integer ")"
       | "line_count(" integer ")"
-      | "mode(" ( predicate_mode_term | non_terminal_mode_term ) "," number_of_proofs ")"
+      | "mode(" predicate_mode_term "," number_of_proofs ")"
       | "info(" list ")"
 
    predicate_definition_property_list ::=
@@ -1211,7 +1215,7 @@ Predicate properties
       | "alias_of(" callable ")"
       | "alias_declared_in(" entity_identifier ")"
       | "non_terminal(" non_terminal_indicator ")"
-      | "mode(" ( predicate_mode_term | non_terminal_mode_term ) "," number_of_proofs ")"
+      | "mode(" predicate_mode_term "," number_of_proofs ")"
       | "info(" list ")"
       | "number_of_clauses(" integer ")"
       | "number_of_rules(" integer ")"

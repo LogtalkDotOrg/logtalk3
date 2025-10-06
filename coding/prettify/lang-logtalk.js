@@ -1,4 +1,4 @@
-// Copyright (C) 2014-2022 Paulo Moura
+// Copyright (C) 2014-2025 Paulo Moura
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ PR['registerLangHandler'](
           // block comments are delimited by /* and */
           [PR['PR_COMMENT'], /^\/\*[\s\S]*?\*\//],
           // directives
-          [PR['PR_KEYWORD'], /^\s*:-\s(?:category|coinductive|public|protocol|protected|private|elif|encoding|ensure_loaded|export|if|include|initialization|info|imports|alias|dynamic|discontiguous|meta_non_terminal|meta_predicate|mode|module|multifile|reexport|set_logtalk_flag|set_prolog_flag|synchronized|object|op|uses|use_module)\b/],
+          [PR['PR_KEYWORD'], /^\s*:-\s(?:category|coinductive|public|protocol|protected|private|elif|encoding|ensure_loaded|export|if|include|initialization|info|imports|alias|dynamic|discontiguous|meta_non_terminal|meta_predicate|mode|mode_non_terminal|module|multifile|reexport|set_logtalk_flag|set_prolog_flag|synchronized|object|op|uses|use_module)\b/],
           [PR['PR_KEYWORD'], /^\s*:-\s(?:else|endif|end_category|end_object|end_protocol|built_in|dynamic|threaded)\./],
           // variables
           [PR['PR_TYPE'], /^[A-Z_][a-zA-Z0-9_]*/],

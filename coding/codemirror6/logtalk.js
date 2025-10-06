@@ -437,7 +437,7 @@ function logtalkEnterHandler(view) {
       }
 
       // If we find :- that's not a directive, we're ending a rule
-      if (/:-/.test(prevText) && !/^:-\s(?:object|protocol|category|module|end_|else|endif|built_in|dynamic|synchronized|threaded|calls|coinductive|elif|encoding|ensure_loaded|export|if|include|initialization|info|reexport|set_|uses|alias|discontiguous|meta_|mode|multifile|public|protected|private|op|use_module)/.test(prevText)) {
+      if (/:-/.test(prevText) && !/^:-\s(?:object|protocol|category|module|end_|else|endif|built_in|dynamic|synchronized|threaded|calls|coinductive|elif|encoding|ensure_loaded|export|if|include|initialization|info|reexport|set_|uses|alias|discontiguous|meta_|mode(_non_terminal)?|multifile|public|protected|private|op|use_module)/.test(prevText)) {
         isEndOfRule = true;
         break;
       }

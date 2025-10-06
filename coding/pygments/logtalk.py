@@ -15,7 +15,7 @@ class LogtalkLexer(RegexLexer):
     """
     For Logtalk source code.
 
-    :copyright: 2008-2024 by Paulo Moura, Clara Dimene.
+    :copyright: 2008-2025 by Paulo Moura, Clara Dimene.
     :license: BSD, see LICENSE for more details.
     """
 
@@ -194,7 +194,7 @@ class LogtalkLexer(RegexLexer):
             (r'e(n(coding|sure_loaded)|xport)(?=[(])', Keyword, 'root'),
             (r'in(clude|itialization|fo)(?=[(])', Keyword, 'root'),
             (r'(built_in|dynamic|synchronized|threaded)(?=[.])', Keyword, 'root'),
-            (r'(alias|d(ynamic|iscontiguous)|m(eta_(non_terminal|predicate)|ode|ultifile)|s(et_(logtalk|prolog)_flag|ynchronized))(?=[(])', Keyword, 'root'),
+            (r'(alias|d(ynamic|iscontiguous)|m(eta_(non_terminal|predicate)|ode(_non_terminal)?|ultifile)|s(et_(logtalk|prolog)_flag|ynchronized))(?=[(])', Keyword, 'root'),
             (r'op(?=[(])', Keyword, 'root'),
             (r'(c(alls|oinductive)|module|reexport|use(s|_module))(?=[(])', Keyword, 'root'),
             (r'[a-z][a-zA-Z0-9_]*(?=[(])', Text, 'root'),

@@ -23,9 +23,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0:37:0,
+		version is 0:38:0,
 		author is 'Paulo Moura',
-		date is 2025-05-09,
+		date is 2025-10-06,
 		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -219,6 +219,7 @@
 	built_in_directive(meta_predicate, 1, '/docs/handbook/refman/directives/', 'meta_predicate_1.html').
 	built_in_directive(meta_non_terminal, 1, '/docs/handbook/refman/directives/', 'meta_non_terminal_1.html').
 	built_in_directive(mode, 2, '/docs/handbook/refman/directives/', 'mode_2.html').
+	built_in_directive(mode_non_terminal, 2, '/docs/handbook/refman/directives/', 'mode_non_terminal_2.html').
 	built_in_directive(multifile, 1, '/docs/handbook/refman/directives/', 'multifile_1.html').
 	built_in_directive(op, 3, '/docs/handbook/refman/directives/', 'op_3.html').
 	built_in_directive(private, 1, '/docs/handbook/refman/directives/', 'private_1.html').

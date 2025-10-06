@@ -286,7 +286,9 @@ message-sending.</p>
 <span id="predicates-mode"></span><h3>Mode directive<a class="headerlink" href="#mode-directive" title="Link to this heading"></a></h3>
 <p>Often predicates can only be called using specific argument patterns.
 The valid arguments and instantiation modes of those arguments can be
-documented using the <a class="reference internal" href="../refman/directives/mode_2.html#directives-mode-2"><span class="std std-ref">mode/2</span></a> directive. For example:</p>
+documented using the <a class="reference internal" href="../refman/directives/mode_2.html#directives-mode-2"><span class="std std-ref">mode/2</span></a> directive (in the case of
+<em>non-terminals</em>, there’s also a <a class="reference internal" href="../refman/directives/mode_non_terminal_2.html#directives-mode-non-terminal-2"><span class="std std-ref">mode_non_terminal/2</span></a>
+directive). For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">mode</span>(member(<span class="o">?</span>term, <span class="o">?</span>list), zero_or_more).
 </pre></div>
 </div>

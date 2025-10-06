@@ -1,7 +1,7 @@
 # highlighting for Logtalk source files (https://logtalk.org/)
 #
 #	written by Paulo Moura (pmoura@logtalk.org)
-#	last revised on September 14, 2024
+#	last revised on October 6, 2025
 
 comment start "%"
 comment delim "/*" "*/" multiline nested
@@ -71,7 +71,7 @@ variable =	'\<[A-Z_][A-Za-z0-9_]*'
 
 cbracket =	"{|}"
 
-preproc =	'^[[:blank:]]*:-[[:blank:]](c(a(lls|tegory)|oinductive)|p(ublic|r(ot(ocol|ected)|ivate))|e(l(if|se)|n(coding|sure_loaded)|xport)|i(f|n(clude|itialization|fo))|alias|d(ynamic|iscontiguous)|m(eta_(non_terminal|predicate)|od(e|ule)|ultifile)|reexport|s(et_(logtalk|prolog)_flag|ynchronized)|o(bject|p)|use(s|_module))(?=\()',
+preproc =	'^[[:blank:]]*:-[[:blank:]](c(a(lls|tegory)|oinductive)|p(ublic|r(ot(ocol|ected)|ivate))|e(l(if|se)|n(coding|sure_loaded)|xport)|i(f|n(clude|itialization|fo))|alias|d(ynamic|iscontiguous)|m(eta_(non_terminal|predicate)|od(e|e_non_terminal|ule)|ultifile)|reexport|s(et_(logtalk|prolog)_flag|ynchronized)|o(bject|p)|use(s|_module))(?=\()',
 			'^[[:blank:]]*:-[[:blank:]](e(lse|nd(if|_(category|object|protocol)))|built_in|dynamic|synchronized|threaded)\.'
 
 preproc =	'\<(complements|extends|i(nstantiates|mp(lements|orts))|specializes)(?=\()'

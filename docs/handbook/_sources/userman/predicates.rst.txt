@@ -147,7 +147,9 @@ Mode directive
 
 Often predicates can only be called using specific argument patterns.
 The valid arguments and instantiation modes of those arguments can be
-documented using the :ref:`directives_mode_2` directive. For example:
+documented using the :ref:`directives_mode_2` directive (in the case of
+*non-terminals*, there's also a :ref:`directives_mode_non_terminal_2`
+directive). For example:
 
 ::
 

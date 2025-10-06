@@ -40,6 +40,12 @@ mode(, zero_or_one).
 mode(, zero_or_more).
 mode(, one_or_more).
 mode(, error).
+mode_non_terminal(, one).
+mode_non_terminal(, zero).
+mode_non_terminal(, zero_or_one).
+mode_non_terminal(, zero_or_more).
+mode_non_terminal(, one_or_more).
+mode_non_terminal(, error).
 multifile(/).
 coinductive(/).
 built_in.

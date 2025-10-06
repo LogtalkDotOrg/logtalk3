@@ -12,6 +12,8 @@
  *
  * CHANGES
  * -------
+ * 2025/10/06 (1.1.28)
+ *  -  Added syntax coloring of the mode_non_terminal/2 directive
  * 2020/07/31 (1.1.27)
  *  -  Added syntax coloring of the consistency_error/3 error throwing built-in method
  * 2020/07/31 (1.1.26)
@@ -134,7 +136,7 @@ $language_data = array(
             // entity directives
             'calls', 'initialization', 'op', 'uses',
             // predicate directives
-            'alias', 'coinductive', 'discontiguous', 'dynamic', 'mode', 'info', 'meta_predicate', 'meta_non_terminal', 'multifile', 'synchronized',
+            'alias', 'coinductive', 'discontiguous', 'dynamic', 'mode', 'mode_non_terminal', 'info', 'meta_predicate', 'meta_non_terminal', 'multifile', 'synchronized',
             // module directives
             'export', 'module', 'reexport', 'use_module'
             ),

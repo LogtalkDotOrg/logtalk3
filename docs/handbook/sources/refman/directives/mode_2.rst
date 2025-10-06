@@ -38,8 +38,7 @@ directive enables the specification of each
 :ref:`instantiation mode <predicates_mode_instantiation>` and the
 corresponding :ref:`number of proofs <predicates_mode_number_of_proofs>`
 (but not necessarily distinct solutions). The instantiation mode of
-each argument can include type information. You may also use this
-directive for documenting grammar rule non-terminals.
+each argument can include type information.
 
 Template and modes
 ------------------
@@ -63,5 +62,6 @@ Examples
 
 .. seealso::
 
+   :ref:`directives_mode_non_terminal_2`,
    :ref:`directives_info_2`,
    :ref:`methods_predicate_property_2`

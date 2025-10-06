@@ -40,7 +40,7 @@ contexts:
       scope: storage.modifier.others.logtalk
       captures:
         1: punctuation.definition.storage.modifier.logtalk
-    - match: '(:-)\s(alias|info|d(ynamic|iscontiguous)|m(eta_(non_terminal|predicate)|ode|ultifile)|p(ublic|r(otected|ivate))|op|use(s|_module)|synchronized)(?=[(])'
+    - match: '(:-)\s(alias|info|d(ynamic|iscontiguous)|m(eta_(non_terminal|predicate)|ode|ode_non_terminal|ultifile)|p(ublic|r(otected|ivate))|op|use(s|_module)|synchronized)(?=[(])'
       scope: storage.modifier.others.logtalk
       captures:
         1: punctuation.definition.storage.modifier.logtalk

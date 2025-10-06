@@ -22,95 +22,95 @@
 :- object(blank_grammars(_Format_)).
 
 	:- info([
-		version is 0:3:1,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2022-10-08,
+		date is 2025-10-06,
 		comment is 'Blank grammars.',
 		parnames is ['Format']
 	]).
 
 	:- public(white_space//0).
-	:- mode(white_space, zero_or_one).
+	:- mode_non_terminal(white_space, zero_or_one).
 	:- info(white_space//0, [
 		comment is 'Consumes a single space or tab.'
 	]).
 
 	:- public(white_spaces//0).
-	:- mode(white_spaces, one).
+	:- mode_non_terminal(white_spaces, one).
 	:- info(white_spaces//0, [
 		comment is 'Consumes zero or more spaces and tabs.'
 	]).
 
 	:- public(space//0).
-	:- mode(space, zero_or_one).
+	:- mode_non_terminal(space, zero_or_one).
 	:- info(space//0, [
 		comment is 'Consumes a single space.'
 	]).
 
 	:- public(spaces//0).
-	:- mode(spaces, one).
+	:- mode_non_terminal(spaces, one).
 	:- info(spaces//0, [
 		comment is 'Consumes zero or more spaces.'
 	]).
 
 	:- public(tab//0).
-	:- mode(tab, zero_or_one).
+	:- mode_non_terminal(tab, zero_or_one).
 	:- info(tab//0, [
 		comment is 'Consumes a single tab.'
 	]).
 
 	:- public(tabs//0).
-	:- mode(tabs, one).
+	:- mode_non_terminal(tabs, one).
 	:- info(tabs//0, [
 		comment is 'Consumes zero or more tabs.'
 	]).
 
 	:- public(new_line//0).
-	:- mode(new_line, zero_or_one).
+	:- mode_non_terminal(new_line, zero_or_one).
 	:- info(new_line//0, [
 		comment is 'Consumes a single new line.'
 	]).
 
 	:- public(new_lines//0).
-	:- mode(new_lines, one).
+	:- mode_non_terminal(new_lines, one).
 	:- info(new_lines//0, [
 		comment is 'Consumes zero or more new lines.'
 	]).
 
 	:- public(blank//0).
-	:- mode(blank, zero_or_one).
+	:- mode_non_terminal(blank, zero_or_one).
 	:- info(blank//0, [
 		comment is 'Consumes a single space, tab, vertical tab, line feed, or new line.'
 	]).
 
 	:- public(blanks//0).
-	:- mode(blanks, one).
+	:- mode_non_terminal(blanks, one).
 	:- info(blanks//0, [
 		comment is 'Consumes zero or more spaces, tabs, vertical tabs, line feeds, or new lines.'
 	]).
 
 	:- public(non_blank//1).
-	:- mode(non_blank(-atomic), zero_or_one).
+	:- mode_non_terminal(non_blank(-atomic), zero_or_one).
 	:- info(non_blank//1, [
 		comment is 'Returns a single non-blank character or character code.',
 		argnames is ['NonBlank']
 	]).
 
 	:- public(non_blanks//1).
-	:- mode(non_blanks(-list(atomic)), one).
+	:- mode_non_terminal(non_blanks(-list(atomic)), one).
 	:- info(non_blanks//1, [
 		comment is 'Returns a (possibly empty) list of non-blank characters or character codes.',
 		argnames is ['NonBlanks']
 	]).
 
 	:- public(control//0).
-	:- mode(control, zero_or_one).
+	:- mode_non_terminal(control, zero_or_one).
 	:- info(control//0, [
 		comment is 'Consumes a single control character or character code. Support for the null control character depends on the Prolog backend.'
 	]).
 
 	:- public(controls//0).
-	:- mode(controls, one).
+	:- mode_non_terminal(controls, one).
 	:- info(controls//0, [
 		comment is 'Consumes zero or more control characters or character codes. Support for the null control character depends on the Prolog backend.'
 	]).

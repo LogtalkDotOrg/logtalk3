@@ -22,15 +22,15 @@
 :- object(sequence_grammars).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2023-12-09,
+		date is 2025-10-06,
 		comment is 'Sequence grammars.'
 	]).
 
 	:- public(zero_or_more//2).
 	:- meta_non_terminal(zero_or_more(1, *)).
-	:- mode(zero_or_more(+callable, -list(atomic)), one).
+	:- mode_non_terminal(zero_or_more(+callable, -list(atomic)), one).
 	:- info(zero_or_more//2, [
 		comment is 'Eagerly collect zero or more terminals that satisfy the given closure.',
 		argnames is ['Closure', 'Terminals']
@@ -38,39 +38,39 @@
 
 	:- public(one_or_more//2).
 	:- meta_non_terminal(one_or_more(1, *)).
-	:- mode(one_or_more(+callable, -list(atomic)), zero_or_one).
+	:- mode_non_terminal(one_or_more(+callable, -list(atomic)), zero_or_one).
 	:- info(one_or_more//2, [
 		comment is 'Eagerly collect one or more terminals that satisfy the given closure.',
 		argnames is ['Closure', 'Terminals']
 	]).
 
 	:- public(zero_or_more//1).
-	:- mode(zero_or_more(-list(atomic)), one).
+	:- mode_non_terminal(zero_or_more(-list(atomic)), one).
 	:- info(zero_or_more//1, [
 		comment is 'Eagerly collect zero or more terminals.',
 		argnames is ['Terminals']
 	]).
 
 	:- public(one_or_more//1).
-	:- mode(one_or_more(-list(atomic)), zero_or_one).
+	:- mode_non_terminal(one_or_more(-list(atomic)), zero_or_one).
 	:- info(one_or_more//1, [
 		comment is 'Eagerly collect one or more terminals.',
 		argnames is ['Terminals']
 	]).
 
 	:- public(zero_or_more//0).
-	:- mode(zero_or_more, one).
+	:- mode_non_terminal(zero_or_more, one).
 	:- info(zero_or_more//0, [
 		comment is 'Eagerly parse zero or more terminals.'
 	]).
 	:- public(one_or_more//0).
-	:- mode(one_or_more, zero_or_one).
+	:- mode_non_terminal(one_or_more, zero_or_one).
 	:- info(one_or_more//0, [
 		comment is 'Eagerly parse one or more terminals.'
 	]).
 
 	:- public(without//2).
-	:- mode(without(+list(atomic), -list(atomic)), one).
+	:- mode_non_terminal(without(+list(atomic), -list(atomic)), one).
 	:- info(without//2, [
 		comment is 'Collects input terminals until one of the stop terminals is found. The stop terminals are excluded from the collected terminals.',
 		argnames is ['StopTerminals', 'Terminals']

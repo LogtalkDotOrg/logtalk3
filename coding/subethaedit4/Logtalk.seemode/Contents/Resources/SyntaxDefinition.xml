@@ -250,7 +250,7 @@
 				<regex>:-\s(alias)\(</regex>
 				<regex>:-\s(e(?:n(?:coding|sure_loaded)|xport))\(</regex>
 				<regex>:-\s(in(?:clude|itialization|fo))\(</regex>
-				<regex>:-\s(mod(?:e|ule))\(</regex>
+				<regex>:-\s(mod(?:e|e_non_terminal|ule))\(</regex>
 				<regex>:-\s(built_in)\.</regex>
 				<regex>:-\s(dynamic)\(</regex>
 				<regex>:-\s(dynamic)\.</regex>
@@ -275,19 +275,19 @@
 			<state id="Strings" type="string" useforautocomplete="no" scope="string.double">
 				<begin><regex>(?&lt;!0'|0'\\)"</regex></begin>
 				<end><regex>(?&lt;!\\)(\\\\)*"</regex></end>
-                <keywords id="DoubleStringEscapedCharacters" useforautocomplete="no" scope="language.constant.numeric.character">
-                    <regex>(\\[\\abfnrtv"'])</regex>
-                    <regex>(\\(?:x[a-fA-F0-9]+|[0-7]+)\\)</regex>
-                </keywords>
+				<keywords id="DoubleStringEscapedCharacters" useforautocomplete="no" scope="language.constant.numeric.character">
+					<regex>(\\[\\abfnrtv"'])</regex>
+					<regex>(\\(?:x[a-fA-F0-9]+|[0-7]+)\\)</regex>
+				</keywords>
 			</state>
 	
 			<state id="Quoted Atoms" type="string" useforautocomplete="no" scope="string.single">
 				<begin><regex>(?&lt;!0|0'|0'\\)'</regex></begin>
 				<end><regex>(?&lt;!\\)(\\\\)*'</regex></end>
-                <keywords id="DoubleStringEscapedCharacters" useforautocomplete="no" scope="language.constant.numeric.character">
-                    <regex>(\\[\\abfnrtv"'])</regex>
-                    <regex>(\\(?:x[a-fA-F0-9]+|[0-7]+)\\)</regex>
-                </keywords>
+				<keywords id="DoubleStringEscapedCharacters" useforautocomplete="no" scope="language.constant.numeric.character">
+					<regex>(\\[\\abfnrtv"'])</regex>
+					<regex>(\\(?:x[a-fA-F0-9]+|[0-7]+)\\)</regex>
+				</keywords>
 			</state>
 	
 			<state id="Comment" type="comment" useforautocomplete="no" foldable="yes" scope="comment.block">
@@ -305,13 +305,13 @@
 			<state id="Conditional Compilation" foldable="yes" scope="meta.default">
 				<begin><regex>:-\sif\(</regex><autoend>:-\sendif\.</autoend></begin>
 				<end><regex>:-\sendif\.</regex></end>
-                <import/>
+				<import/>
 			</state>
 	
 			<state id="Entity" foldable="yes" scope="meta.default">
 				<begin><regex>:-\s(?:object|protocol|category)\(</regex><autoend>:-\send_(?:object|protocol|category)\.</autoend></begin>
 				<end><regex>:-\send_(?:object|protocol|category)\.</regex></end>
-                <import/>
+				<import/>
 			</state>
 
 		</default>

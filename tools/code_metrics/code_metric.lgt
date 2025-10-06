@@ -24,9 +24,9 @@
 	extends((code_metrics_utilities, options))).
 
 	:- info([
-		version is 0:12:1,
+		version is 0:13:0,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2024-05-08,
+		date is 2025-10-06,
 		comment is 'Core predicates for computing source code metrics.'
 	]).
 
@@ -174,7 +174,7 @@
 	]).
 
 	:- public(format_entity_score//2).
-	:- mode(format_entity_score(@entity_identifier, +ground), one).
+	:- mode_non_terminal(format_entity_score(@entity_identifier, +ground), one).
 	:- info(format_entity_score//2, [
 		comment is 'Formats the entity score for pretty printing.',
 		argnames is ['Entity', 'Score']

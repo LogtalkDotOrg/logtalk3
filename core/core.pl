@@ -8141,10 +8141,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_add_entity_predicate_properties'(Entity, _) :-
 	'$lgt_pp_mode_'(Mode, Solutions, _, _),
 		functor(Mode, Functor, Arity),
-		(	'$lgt_pp_non_terminal_'(Functor, Arity, ExtArity) ->
-			assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/ExtArity, mode(Mode, Solutions))))
-		;	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, mode(Mode, Solutions))))
-		),
+		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, mode(Mode, Solutions)))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity, _) :-
@@ -10577,6 +10574,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(mode(Mode, Solutions), Ctx) :-
 	'$lgt_source_file_context'(Ctx, File, Lines),
 	assertz('$lgt_pp_mode_'(Mode, Solutions, File, Lines)).
+
+% mode_non_terminal/2 predicate directive
+
+'$lgt_compile_logtalk_directive'(mode_non_terminal(Mode, Solutions), _) :-
+	(var(Mode); var(Solutions)),
+	throw(instantiation_error).
+
+'$lgt_compile_logtalk_directive'(mode_non_terminal(Mode, _), _) :-
+	\+ '$lgt_valid_mode_template'(Mode),
+	throw(type_error(mode_term, Mode)).
+
+'$lgt_compile_logtalk_directive'(mode_non_terminal(_, Solutions), _) :-
+	\+ '$lgt_valid_number_of_proofs'(Solutions),
+	throw(type_error(number_of_proofs, Solutions)).
+
+'$lgt_compile_logtalk_directive'(mode_non_terminal(Mode, Solutions), Ctx) :-
+	Mode =.. [Name| Args],
+	'$lgt_append'(Args, [?list, ?list], ExtArgs),
+	ModeExt =.. [Name| ExtArgs],
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	assertz('$lgt_pp_mode_'(ModeExt, Solutions, File, Lines)).
 
 % multifile/2 predicate directive
 
@@ -24713,6 +24731,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_logtalk_predicate_directive'(protected(_)).
 '$lgt_logtalk_predicate_directive'(private(_)).
 '$lgt_logtalk_predicate_directive'(mode(_, _)).
+'$lgt_logtalk_predicate_directive'(mode_non_terminal(_, _)).
 '$lgt_logtalk_predicate_directive'(info(_, _)).
 '$lgt_logtalk_predicate_directive'(alias(_, _)).
 '$lgt_logtalk_predicate_directive'(multifile(_)).

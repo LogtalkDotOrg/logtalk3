@@ -17,9 +17,9 @@
 :- object(xml).
 
 	:- info([
-		version is 3:8:4,
+		version is 3:9:0,
 		author is 'John Fletcher; adapted to Logtalk by Paulo Moura.',
-		date is 2024-03-14,
+		date is 2025-10-06,
 		copyright is 'Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005-2013 John Fletcher',
 		license is 'This program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.',
 		comment is 'Bi-directional XML parser.',
@@ -1704,7 +1704,7 @@
 	 * 'xml:space'="preserve" attribute.
 	 */
 	:- private(document_generation//2).
-	:- mode(document_generation(+nonvar, +nonvar), zero_or_one).
+	:- mode_non_terminal(document_generation(+nonvar, +nonvar), zero_or_one).
 	:- info(document_generation//2, [
 		comment is 'DCG generating Document as a list of character codes. ``Format`` is true|false defining whether layouts, to provide indentation, should be added between the element content of the resultant "string". Note that formatting is disabled for elements that are interspersed with ``pcdata/1`` terms, such as XHTML''s ''inline'' elements. Also, ``Format`` is over-ridden, for an individual element, by an explicit ``''xml:space''="preserve"`` attribute.',
 		argnames is ['Format', 'Document']
@@ -1909,7 +1909,7 @@
 	 * place of &apos;, because browsers don't recognize it in HTML.
 	 */
 	:- private(pcdata_7bit//1).
-	:- mode(pcdata_7bit(?nonvar), zero_or_one).
+	:- mode_non_terminal(pcdata_7bit(?nonvar), zero_or_one).
 	:- info(pcdata_7bit//1, [
 		comment is 'Represents the ASCII character set in its simplest format, using the character entities ``&amp;``, ``&quot;``, ``&lt;``, and ``&gt;`` which are common to both XML and HTML. The numeric entity ``&#39;`` is used in place of ``&apos;`` because browsers don''t recognize it in HTML.',
 		argnames is ['Code']
@@ -2066,7 +2066,7 @@
 	 * specification are not encoded.
 	 */
 	:- private(cdata_generation//1).
-	:- mode(cdata_generation(+list), zero_or_one).
+	:- mode_non_terminal(cdata_generation(+list), zero_or_one).
 	:- info(cdata_generation//1, [
 		comment is 'Holds when ``Format0`` and ``Format1`` are the statuses of XML formatting before and after ``Codes`` - which may be null.',
 		argnames is ['Codes']

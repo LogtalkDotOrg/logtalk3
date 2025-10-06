@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 11:1:4,
+		version is 11:2:0,
 		author is 'Paulo Moura',
-		date is 2025-04-07,
+		date is 2025-10-06,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -67,7 +67,7 @@
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2, sort/4
+		member/2, memberchk/2, prefix/3, sort/4
 	]).
 
 	:- uses(logtalk, [
@@ -1004,13 +1004,20 @@
 		;	true
 		),
 		(	Name = Functor//Args ->
-			functor(Template, Functor, Args)
+			ExtArgs is Args + 2,
+			functor(Template, Functor, ExtArgs)
 		;	functor(Template, Functor, Arity)
 		),
 		forall(
 			member(mode(Template, Proofs), Properties),
 			(	write_xml_open_tag(Stream, (mode), []),
-				write_xml_cdata_element(Stream, template, [], Template),
+				(	Name = Functor//Args ->
+					Template =.. [Functor| TemplateArgs],
+					prefix(NonTerminalTemplateArgs, Args, TemplateArgs),
+					NonTerminalTemplate =.. [Functor| NonTerminalTemplateArgs],
+					write_xml_cdata_element(Stream, template, [], NonTerminalTemplate)
+				;	write_xml_cdata_element(Stream, template, [], Template)
+				),
 				write_xml_element(Stream, proofs, [], Proofs),
 				write_xml_close_tag(Stream, (mode))
 			)

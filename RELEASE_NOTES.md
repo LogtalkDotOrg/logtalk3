@@ -25,8 +25,38 @@ RELEASE NOTES
 3.95.0 - October ??, 2025
 =========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Predicate directive `mode_non_terminal/2` to distinguish non-terminal
+mode declarations from predicate mode declarations.
+
+* UPDATED: The `logtalk` built-in object to use the new `mode_non_terminal/2`
+directive.
+
+Library
+-------
+
+* UPDATED: The `grammars` library to use the new `mode_non_terminal/2`
+directive.
+
+Tools
+-----
+
+* UPDATED: The `code_metrics`, `help`, `lgtdoc`, and `tutor` tools for the new
+`mode_non_terminal/2` directive.
+
+Contributions
+-------------
+
+* UPDATED: The `verdi_neruda` and `xml_parser` contributions to use the new
+`mode_non_terminal/2` directive.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
+
+* UPDATED: The syntax highlighting support for all supported text editors and
+syntax highlighters for the new `mode_non_terminal/2` directive.
 
 * FIXED: Some typos in the syntax highlighting test files.
 

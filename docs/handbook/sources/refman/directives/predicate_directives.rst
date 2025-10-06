@@ -32,6 +32,7 @@ Predicate directives
    meta_predicate_1
    meta_non_terminal_1
    mode_2
+   mode_non_terminal_2
    multifile_1
    op_3
    private_1

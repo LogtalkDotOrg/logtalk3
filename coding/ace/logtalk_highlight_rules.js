@@ -50,7 +50,7 @@ var LogtalkHighlightRules = function() {
            token: 
             [ 'storage.modifier.others.logtalk',
               'punctuation.definition.storage.modifier.logtalk' ],
-           regex: ':-\\s(?:alias|info|d(?:ynamic|iscontiguous)|m(?:eta_(?:non_terminal|predicate)|ode|ultifile)|p(?:ublic|r(?:otected|ivate))|op|use(?:s|_module)|synchronized)(?=[(])' },
+           regex: ':-\\s(?:alias|info|d(?:ynamic|iscontiguous)|m(?:eta_(?:non_terminal|predicate)|ode(_non_terminal)?|ultifile)|p(?:ublic|r(?:otected|ivate))|op|use(?:s|_module)|synchronized)(?=[(])' },
          { token: 'keyword.operator.message-sending.logtalk',
            regex: '(:|::|\\^\\^)' },
          { token: 'keyword.operator.external-call.logtalk',

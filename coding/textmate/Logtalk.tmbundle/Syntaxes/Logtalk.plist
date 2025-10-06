@@ -127,7 +127,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(:-)\s(alias|info|d(ynamic|iscontiguous)|m(eta_(non_terminal|predicate)|ode|ultifile)|p(ublic|r(otected|ivate))|op|use(s|_module)|synchronized)(?=[(])</string>
+			<string>(:-)\s(alias|info|d(ynamic|iscontiguous)|m(eta_(non_terminal|predicate)|ode|ode_non_terminal|ultifile)|p(ublic|r(otected|ivate))|op|use(s|_module)|synchronized)(?=[(])</string>
 			<key>name</key>
 			<string>storage.modifier.others.logtalk</string>
 		</dict>

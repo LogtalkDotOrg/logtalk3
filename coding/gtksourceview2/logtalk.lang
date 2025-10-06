@@ -2,7 +2,7 @@
 <!--
 
  Author: Paulo Moura <pmoura@logtalk.org>
- Copyright (c) 2007-2024 Paulo Moura <pmoura@logtalk.org>
+ Copyright (c) 2007-2025 Paulo Moura <pmoura@logtalk.org>
 
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Library General Public
@@ -127,7 +127,7 @@
       <keyword>(alias)(?=[(])</keyword>
       <keyword>((re)?export)(?=[(])</keyword>
       <keyword>(in(clude|itialization|fo))(?=[(])</keyword>
-      <keyword>(mod(e|ule))(?=[(])</keyword>
+      <keyword>(mod(e|e_non_terminal|ule))(?=[(])</keyword>
       <keyword>(built_in)(?=[.])</keyword>
       <keyword>(dynamic)(?=[(])</keyword>
       <keyword>(dynamic)(?=[.])</keyword>

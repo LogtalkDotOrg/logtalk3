@@ -28,9 +28,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 3:2:0,
+		version is 3:3:0,
 		author is 'Paulo Moura',
-		date is 2025-05-20,
+		date is 2025-10-06,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
@@ -91,7 +91,7 @@
 	:- public(message_tokens//2).
 	:- multifile(message_tokens//2).
 	:- dynamic(message_tokens//2).
-	:- mode(message_tokens(+nonvar, +nonvar), zero_or_one).
+	:- mode_non_terminal(message_tokens(+nonvar, +nonvar), zero_or_one).
 	:- info(message_tokens//2, [
 		comment is 'User-defined hook grammar rule for converting a message into a list of tokens (see this object remarks).',
 		argnames is ['Message', 'Component']

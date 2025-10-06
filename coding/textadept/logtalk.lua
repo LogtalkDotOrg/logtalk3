@@ -10,9 +10,9 @@ local lex = lexer.new('logtalk', {inherit = lexer.load('prolog')})
 -- add logtalk keywords to prolog ones
 local directives = [[
   set_logtalk_flag object info built_in threaded uses alias use_module
-  coinductive export reexport public metapredicate mode meta_non_terminal
+  coinductive export reexport public meta_predicate meta_non_terminal
   protected synchronized private module if elif else endif category protocol
-  end_object end_category end_protocol meta_predicate
+  end_object end_category end_protocol mode mode_non_terminal
 ]]
 lex:modify_rule('directive',
   (
@@ -41,12 +41,12 @@ local one_plus_arity_keywords = [[
   extends_category extends_object extends_protocol implements_protocol
   imports_category instantiates_class specializes_class complements_object
   conforms_to_protocol abolish_events current_event define_events threaded
-  threaded_call  threaded_call threaded_once threaded_ignore threaded_exit
-  threaded_peek  threaded_cancel threaded_wait threaded_notify threaded_engine
+  threaded_call threaded_call threaded_once threaded_ignore threaded_exit
+  threaded_peek threaded_cancel threaded_wait threaded_notify threaded_engine
   threaded_engine_create threaded_engine_destroy threaded_engine_self
   threaded_engine_next threaded_engine_next_reified threaded_engine_yield
   threaded_engine_post threaded_engine_fetch logtalk_compile logtalk_load
-  logtalk_library_path logtalk_load_context  logtalk_make_target_action
+  logtalk_library_path logtalk_load_context logtalk_make_target_action
   current_logtalk_flag set_logtalk_flag create_logtalk_flag context parameter
   self sender this uninstantiation_error type_error domain_error consistency_error
   existence_error permission_error representation_error evaluation_error resource_error

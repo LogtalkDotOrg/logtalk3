@@ -252,7 +252,7 @@
 				<regex>:-\s(alias)\(</regex>
 				<regex>:-\s(e(?:n(?:coding|sure_loaded)|xport))\(</regex>
 				<regex>:-\s(in(?:clude|itialization|fo))\(</regex>
-				<regex>:-\s(mod(?:e|ule))\(</regex>
+				<regex>:-\s(mod(?:e|e_non_terminal|ule))\(</regex>
 				<regex>:-\s(built_in)\.</regex>
 				<regex>:-\s(dynamic)\(</regex>
 				<regex>:-\s(dynamic)\.</regex>

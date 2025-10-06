@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>alias/2 &mdash; The Logtalk Handbook v3.95.0-b01 documentation</title>
+  <title>mode_non_terminal/2 &mdash; The Logtalk Handbook v3.95.0-b01 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=396eccfe" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="coinductive/1" href="coinductive_1.html" />
-    <link rel="prev" title="Predicate directives" href="predicate_directives.html" />
+    <link rel="next" title="multifile/1" href="multifile_1.html" />
+    <link rel="prev" title="mode/2" href="mode_2.html" />
    
 </head>
 
@@ -72,7 +72,7 @@
 <li class="toctree-l3"><a class="reference internal" href="conditional_compilation_directives.html">Conditional compilation directives</a></li>
 <li class="toctree-l3"><a class="reference internal" href="entity_directives.html">Entity directives</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="predicate_directives.html">Predicate directives</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">alias/2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="alias_2.html"><code class="docutils literal notranslate"><span class="pre">alias/2</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="coinductive_1.html"><code class="docutils literal notranslate"><span class="pre">coinductive/1</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="discontiguous_1.html"><code class="docutils literal notranslate"><span class="pre">discontiguous/1</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="dynamic_1.html"><code class="docutils literal notranslate"><span class="pre">dynamic/1</span></code></a></li>
@@ -80,7 +80,7 @@
 <li class="toctree-l4"><a class="reference internal" href="meta_predicate_1.html"><code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="meta_non_terminal_1.html"><code class="docutils literal notranslate"><span class="pre">meta_non_terminal/1</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mode_2.html"><code class="docutils literal notranslate"><span class="pre">mode/2</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mode_non_terminal_2.html"><code class="docutils literal notranslate"><span class="pre">mode_non_terminal/2</span></code></a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">mode_non_terminal/2</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="multifile_1.html"><code class="docutils literal notranslate"><span class="pre">multifile/1</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="op_3.html"><code class="docutils literal notranslate"><span class="pre">op/3</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="private_1.html"><code class="docutils literal notranslate"><span class="pre">private/1</span></code></a></li>
@@ -132,9 +132,9 @@
           <li class="breadcrumb-item"><a href="../index.html">Reference Manual</a></li>
           <li class="breadcrumb-item"><a href="index.html">Directives</a></li>
           <li class="breadcrumb-item"><a href="predicate_directives.html">Predicate directives</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">alias/2</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">mode_non_terminal/2</span></code></li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/refman/directives/alias_2.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/refman/directives/mode_non_terminal_2.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -143,52 +143,37 @@
            <div itemprop="articleBody">
              
   <p class="align-right"><strong>directive</strong></p>
-<section id="alias-2">
-<span id="directives-alias-2"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">alias/2</span></code><a class="headerlink" href="#alias-2" title="Link to this heading"></a></h1>
+<section id="mode-non-terminal-2">
+<span id="directives-mode-non-terminal-2"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">mode_non_terminal/2</span></code><a class="headerlink" href="#mode-non-terminal-2" title="Link to this heading"></a></h1>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>alias(<span class="nv">Entity</span>, [<span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span> <span class="o">as</span> <span class="nv">Alias</span><span class="o">/</span><span class="nv">Arity</span>, ...])
-alias(<span class="nv">Entity</span>, [<span class="nv">Name</span><span class="o">//</span><span class="nv">Arity</span> <span class="o">as</span> <span class="nv">Alias</span><span class="o">//</span><span class="nv">Arity</span>, ...])
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>mode_non_terminal(<span class="nv">Mode</span>, <span class="nv">NumberOfProofs</span>)
 </pre></div>
 </div>
-<p>Declares predicate and grammar rule non-terminal <a class="reference internal" href="../../glossary.html#term-predicate-alias"><span class="xref std std-term">aliases</span></a>.
-A predicate (non-terminal) alias is an alternative name for a predicate
-(non-terminal) declared or defined in an extended protocol, an
-implemented protocol, an extended category, an imported category, an
-extended prototype, an instantiated class, or a specialized class.
-Predicate aliases may be used to solve conflicts between imported or
-inherited predicates. It may also be used to give a predicate
-(non-terminal) a name more appropriate in its usage context. This
-directive may be used in objects, protocols, and categories.</p>
-<p>Predicate (and non-terminal) aliases are specified using (preferably)
-the notation <code class="docutils literal notranslate"><span class="pre">Name/Arity</span> <span class="pre">as</span> <span class="pre">Alias/Arity</span></code> or, in alternative, the
-notation <code class="docutils literal notranslate"><span class="pre">Name/Arity::Alias/Arity</span></code>.</p>
-<p>It is also possible to declare predicate and grammar rule non-terminal
-aliases in implicit qualification directives for sending messages
-to objects and calling module predicates.</p>
+<p>Most non-terminals can be used with several instantiations modes. This
+directive enables the specification of each
+<a class="reference internal" href="../../userman/predicates.html#predicates-mode-instantiation"><span class="std std-ref">instantiation mode</span></a> and the
+corresponding <a class="reference internal" href="../../userman/predicates.html#predicates-mode-number-of-proofs"><span class="std std-ref">number of proofs</span></a>
+(but not necessarily distinct solutions). The instantiation mode of
+each argument can include type information.</p>
 </section>
 <section id="template-and-modes">
 <h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>alias(<span class="o">@</span>entity_identifier, <span class="o">+</span>list(predicate_indicator_alias))
-alias(<span class="o">@</span>entity_identifier, <span class="o">+</span>list(non_terminal_indicator_alias))
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>mode_non_terminal(<span class="o">+</span>predicate_mode_term, <span class="o">+</span>number_of_proofs)
+mode_non_terminal(<span class="o">+</span>non_terminal_mode_term, <span class="o">+</span>number_of_proofs)
 </pre></div>
 </div>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% resolve a predicate name conflict:</span>
-<span class="p">:- </span><span class="k">alias</span>(list, [member<span class="o">/</span><span class="m">2</span> <span class="o">as</span> list_member<span class="o">/</span><span class="m">2</span>]).
-<span class="p">:- </span><span class="k">alias</span>(set,  [member<span class="o">/</span><span class="m">2</span> <span class="o">as</span> set_member<span class="o">/</span><span class="m">2</span>]).
-
-<span class="c">% define an alternative name for a non-terminal:</span>
-<span class="p">:- </span><span class="k">alias</span>(words, [singular<span class="o">//</span><span class="m">0</span> <span class="o">as</span> peculiar<span class="o">//</span><span class="m">0</span>]).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span>mode_non_terminal(zero_or_more(<span class="o">-</span>list(atomic)), one).
 </pre></div>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a>,
-<a class="reference internal" href="use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a>,
-<a class="reference internal" href="uses_1.html#directives-uses-1"><span class="std std-ref">uses/1</span></a></p>
+<p><a class="reference internal" href="mode_2.html#directives-mode-2"><span class="std std-ref">mode/2</span></a>,
+<a class="reference internal" href="info_2.html#directives-info-2"><span class="std std-ref">info/2</span></a>,
+<a class="reference internal" href="../methods/predicate_property_2.html#methods-predicate-property-2"><span class="std std-ref">predicate_property/2</span></a></p>
 </div>
 </section>
 </section>
@@ -197,8 +182,8 @@ alias(<span class="o">@</span>entity_identifier, <span class="o">+</span>list(no
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="predicate_directives.html" class="btn btn-neutral float-left" title="Predicate directives" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="coinductive_1.html" class="btn btn-neutral float-right" title="coinductive/1" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mode_2.html" class="btn btn-neutral float-left" title="mode/2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="multifile_1.html" class="btn btn-neutral float-right" title="multifile/1" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

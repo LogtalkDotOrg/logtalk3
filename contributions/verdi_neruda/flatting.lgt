@@ -38,15 +38,15 @@
 :- category(flatting).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Victor Lagerkvist',
-		date is 2010-06-13,
+		date is 2025-10-06,
 		comment is 'Flattens conjunction of goals with the form f and g into a list [f,g].',
 		source is 'Based on source code from The Craft of Prolog, by Richard O''Keefe.'
 	]).
 
 	:- protected(flatten_goals//1).
-	:- mode(flatten_goals(+callable), one).
+	:- mode_non_terminal(flatten_goals(+callable), one).
 	:- info(flatten_goals//1, [
 		comment is 'Flattens a conjunction of goals.',
 		argnames is ['Conjunction']

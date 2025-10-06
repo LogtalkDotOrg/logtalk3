@@ -602,6 +602,7 @@ library_name <span class="o">::=</span>
    | use_module_directive
    | scope_directive
    | mode_directive
+   | mode_non_terminal_directive
    | meta_predicate_directive
    | meta_non_terminal_directive
    | info_directive
@@ -629,7 +630,10 @@ scope_directive <span class="o">::=</span>
    | &quot;:- private(&quot; scope_directive_resource_term &quot;).&quot;
 
 mode_directive <span class="o">::=</span>
-   &quot;:- mode(&quot; ( predicate_mode_term | non_terminal_mode_term ) &quot;,&quot; number_of_proofs &quot;).&quot;
+   &quot;:- mode(&quot; predicate_mode_term &quot;,&quot; number_of_proofs &quot;).&quot;
+
+mode_non_terminal_directive <span class="o">::=</span>
+   &quot;:- mode_non_terminal(&quot; non_terminal_mode_term &quot;,&quot; number_of_proofs &quot;).&quot;
 
 meta_predicate_directive <span class="o">::=</span>
    &quot;:- meta_predicate(&quot; meta_predicate_template_term &quot;).&quot;
@@ -1136,7 +1140,7 @@ predicate_declaration_property <span class="o">::=</span>
    | &quot;include(&quot; atom &quot;)&quot;
    | &quot;lines(&quot; integer  &quot;,&quot; integer &quot;)&quot;
    | &quot;line_count(&quot; integer &quot;)&quot;
-   | &quot;mode(&quot; ( predicate_mode_term | non_terminal_mode_term ) &quot;,&quot; number_of_proofs &quot;)&quot;
+   | &quot;mode(&quot; predicate_mode_term &quot;,&quot; number_of_proofs &quot;)&quot;
    | &quot;info(&quot; list &quot;)&quot;
 
 predicate_definition_property_list <span class="o">::=</span>
@@ -1247,7 +1251,7 @@ reference_property_list <span class="o">::=</span>
    | &quot;alias_of(&quot; callable &quot;)&quot;
    | &quot;alias_declared_in(&quot; entity_identifier &quot;)&quot;
    | &quot;non_terminal(&quot; non_terminal_indicator &quot;)&quot;
-   | &quot;mode(&quot; ( predicate_mode_term | non_terminal_mode_term ) &quot;,&quot; number_of_proofs &quot;)&quot;
+   | &quot;mode(&quot; predicate_mode_term &quot;,&quot; number_of_proofs &quot;)&quot;
    | &quot;info(&quot; list &quot;)&quot;
    | &quot;number_of_clauses(&quot; integer &quot;)&quot;
    | &quot;number_of_rules(&quot; integer &quot;)&quot;
