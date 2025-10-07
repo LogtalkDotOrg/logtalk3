@@ -46,6 +46,12 @@ Tools
 * UPDATED: The `code_metrics`, `help`, `lgtdoc`, and `tutor` tools for the new
 `mode_non_terminal/2` directive.
 
+* FIXED: A `lgtdoc` tool bug when reporting missing predicate directives for
+declared non-terminals.
+
+* FIXED: A `lgtdoc` tool bug when reporting missing predicate directives when
+the scope directive is found in an included file.
+
 Contributions
 -------------
 

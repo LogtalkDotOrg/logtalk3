@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 11:2:0,
+		version is 11:2:1,
 		author is 'Paulo Moura',
-		date is 2025-10-06,
+		date is 2025-10-07,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -1024,6 +1024,8 @@
 		),
 		(	member(mode(_, _), Properties) ->
 			true
+		;	Name = _//_ ->
+			warn_on_missing_predicate_directive(mode_non_terminal/2, Name, Type, Entity)
 		;	warn_on_missing_predicate_directive((mode)/2, Name, Type, Entity)
 		),
 		(	member(info(Info), Properties) ->
@@ -1834,11 +1836,22 @@
 		).
 
 	entity_predicate_file_line(Entity, Indicator, File, Line) :-
-		entity_property(Entity, file(File)),
-		(	entity_property(Entity, declares(Indicator, Properties)),
-			member(line_count(Line), Properties) ->
-			true
-		;	Line = -1
+		(	Indicator = Name//Arity ->
+			ExtArity is Arity + 2,
+			ExtIndicator = Name/ExtArity
+		;	ExtIndicator = Indicator
+		),
+		(	entity_property(Entity, declares(ExtIndicator, Properties)) ->
+			(	member(include(File), Properties) ->
+				true
+			;	entity_property(Entity, file(File))
+			),
+			(	member(line_count(Line), Properties) ->
+				true
+			;	Line = -1
+			)
+		;	entity_property(Entity, file(File)),
+			Line = -1
 		).
 
 :- end_object.
