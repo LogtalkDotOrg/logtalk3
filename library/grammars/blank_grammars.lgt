@@ -30,10 +30,10 @@
 	]).
 
 	:- public(white_space//0).
-%	:- mode_non_terminal(white_space, zero_or_one).
-%	:- info(white_space//0, [
-%		comment is 'Consumes a single space or tab.'
-%	]).
+	:- mode_non_terminal(white_space, zero_or_one).
+	:- info(white_space//0, [
+		comment is 'Consumes a single space or tab.'
+	]).
 
 	:- public(white_spaces//0).
 	:- mode_non_terminal(white_spaces, one).
