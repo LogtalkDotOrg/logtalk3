@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:73:0,
+		version is 0:74:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-09-26,
+		date is 2025-10-10,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -102,6 +102,20 @@
 	:- info(test/3, [
 		comment is 'Re-run a single test.',
 		argnames is ['Directory', 'Object', 'Test']
+	]).
+
+	:- public(tests_file/2).
+	:- mode(tests_file(+atom, +atom), one).
+	:- info(tests_file/2, [
+		comment is 'Runs the tests defined in the given tests file and marker directory.',
+		argnames is ['Directory', 'File']
+	]).
+
+	:- public(tests_object/2).
+	:- mode(tests_object(+atom, +atom), one).
+	:- info(tests_object/2, [
+		comment is 'Runs the tests defined in the given tests object and marker directory.',
+		argnames is ['Directory', 'Object']
 	]).
 
 	:- public(metrics/1).
@@ -369,8 +383,31 @@
 	test(Directory, Object, Test) :-
 		atom_concat(Directory, '/.vscode_loading_done', Marker),
 		atom_concat(Directory, '/.vscode_test_results', Data),
-		open(Data, write, _, [alias(vscode_test_results)]),
+		open(Data, append, _, [alias(vscode_test_results)]),
 		ignore(Object::run(Test)),
+		close(vscode_test_results),
+		open(Marker, append, Stream),
+		close(Stream).
+
+	tests_file(Directory, File) :-
+		atom_concat(Directory, '/.vscode_loading_done', Marker),
+		atom_concat(Directory, '/.vscode_test_results', Data),
+		open(Data, append, _, [alias(vscode_test_results)]),
+		forall(
+			(	logtalk::loaded_file_property(File, object(Object)),
+				extends_object(Object, lgtunit)
+			),
+			ignore(Object::run)
+		),
+		close(vscode_test_results),
+		open(Marker, append, Stream),
+		close(Stream).
+
+	tests_object(Directory, Object) :-
+		atom_concat(Directory, '/.vscode_loading_done', Marker),
+		atom_concat(Directory, '/.vscode_test_results', Data),
+		open(Data, append, _, [alias(vscode_test_results)]),
+		ignore(Object::run),
 		close(vscode_test_results),
 		open(Marker, append, Stream),
 		close(Stream).
