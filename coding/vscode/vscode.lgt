@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:74:0,
+		version is 0:75:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-10-10,
+		date is 2025-10-11,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -374,41 +374,49 @@
 	tests(Directory, Tester) :-
 		atom_concat(Directory, '/.vscode_loading_done', Marker),
 		atom_concat(Directory, '/.vscode_test_results', Data),
-		open(Data, write, _, [alias(vscode_test_results)]),
-		ignore(logtalk_load(Tester, [reload(always)])),
-		close(vscode_test_results),
+		setup_once_cleanup(
+			open(Data, write, _, [alias(vscode_test_results)]),
+			ignore({logtalk_load(Tester, [reload(always)])}),
+			close(vscode_test_results)
+		),
 		open(Marker, append, Stream),
 		close(Stream).
 
 	test(Directory, Object, Test) :-
 		atom_concat(Directory, '/.vscode_loading_done', Marker),
 		atom_concat(Directory, '/.vscode_test_results', Data),
-		open(Data, append, _, [alias(vscode_test_results)]),
-		ignore(Object::run(Test)),
-		close(vscode_test_results),
+		setup_once_cleanup(
+			open(Data, append, _, [alias(vscode_test_results)]),
+			ignore({Object::run(Test)}),
+			close(vscode_test_results)
+		),
 		open(Marker, append, Stream),
 		close(Stream).
 
 	tests_file(Directory, File) :-
 		atom_concat(Directory, '/.vscode_loading_done', Marker),
 		atom_concat(Directory, '/.vscode_test_results', Data),
-		open(Data, append, _, [alias(vscode_test_results)]),
-		forall(
-			(	logtalk::loaded_file_property(File, object(Object)),
-				extends_object(Object, lgtunit)
+		setup_once_cleanup(
+			open(Data, append, _, [alias(vscode_test_results)]),
+			forall(
+				(	logtalk::loaded_file_property(File, object(Object)),
+					extends_object(Object, lgtunit)
+				),
+				ignore({Object::run})
 			),
-			ignore(Object::run)
+			close(vscode_test_results)
 		),
-		close(vscode_test_results),
 		open(Marker, append, Stream),
 		close(Stream).
 
 	tests_object(Directory, Object) :-
 		atom_concat(Directory, '/.vscode_loading_done', Marker),
 		atom_concat(Directory, '/.vscode_test_results', Data),
-		open(Data, append, _, [alias(vscode_test_results)]),
-		ignore(Object::run),
-		close(vscode_test_results),
+		setup_once_cleanup(
+			open(Data, append, _, [alias(vscode_test_results)]),
+			ignore({Object::run}),
+			close(vscode_test_results)
+		),
 		open(Marker, append, Stream),
 		close(Stream).
 
@@ -417,24 +425,24 @@
 	metrics(Directory) :-
 		atom_concat(Directory, '/.vscode_metrics_done', Marker),
 		atom_concat(Directory, '/.vscode_metrics_results', Data),
-		open(Data, write, _, [alias(vscode_metrics_results)]),
-		ignore((
-			logtalk_load(code_metrics(loader)),
-			{code_metrics::directory(Directory)}
-		)),
-		close(vscode_metrics_results),
+		logtalk_load(code_metrics(loader)),
+		setup_once_cleanup(
+			open(Data, write, _, [alias(vscode_metrics_results)]),
+			ignore({code_metrics::directory(Directory)}),
+			close(vscode_metrics_results)
+		),
 		open(Marker, append, Stream),
 		close(Stream).
 
 	metrics_recursive(Directory) :-
 		atom_concat(Directory, '/.vscode_metrics_done', Marker),
 		atom_concat(Directory, '/.vscode_metrics_results', Data),
-		open(Data, write, _, [alias(vscode_metrics_results)]),
-		ignore((
-			logtalk_load(code_metrics(loader)),
-			{code_metrics::rdirectory(Directory)}
-		)),
-		close(vscode_metrics_results),
+		logtalk_load(code_metrics(loader)),
+		setup_once_cleanup(
+			open(Data, write, _, [alias(vscode_metrics_results)]),
+			ignore({code_metrics::rdirectory(Directory)}),
+			close(vscode_metrics_results)
+		),
 		open(Marker, append, Stream),
 		close(Stream).
 
@@ -1854,6 +1862,15 @@
 		;	LowerChar = AnyChar
 		),
 		downcase_atom_portable_(AnyChars, LowerChars).
+
+	:- meta_predicate(setup_once_cleanup(*, *, *)).
+	setup_once_cleanup(Setup, Call, Cleanup) :-
+		call(Setup),
+		(   catch(Call, Error, (Cleanup, throw(Error))) ->
+			call(Cleanup)
+		;	call(Cleanup),
+			fail
+		).
 
 	% rewrite compiler error and warnings messages for parsing with Visual Studio Code
 
