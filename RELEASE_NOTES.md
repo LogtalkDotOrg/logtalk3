@@ -64,6 +64,8 @@ IDEs, text editors, and syntax highlighters support
 * ADDED: New test predicates to the VSCode support to allow running all tests
 defined in a file or in an object.
 
+* UPDATED: The format of the VSCode support generated file with test results.
+
 * UPDATED: The syntax highlighting support for all supported text editors and
 syntax highlighters for the new `mode_non_terminal/2` directive.
 

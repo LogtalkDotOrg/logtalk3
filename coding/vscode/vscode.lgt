@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:75:0,
+		version is 0:76:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-10-11,
+		date is 2025-10-12,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -386,7 +386,7 @@
 		atom_concat(Directory, '/.vscode_loading_done', Marker),
 		atom_concat(Directory, '/.vscode_test_results', Data),
 		setup_once_cleanup(
-			open(Data, append, _, [alias(vscode_test_results)]),
+			open(Data, write, _, [alias(vscode_test_results)]),
 			ignore({Object::run(Test)}),
 			close(vscode_test_results)
 		),
@@ -397,7 +397,7 @@
 		atom_concat(Directory, '/.vscode_loading_done', Marker),
 		atom_concat(Directory, '/.vscode_test_results', Data),
 		setup_once_cleanup(
-			open(Data, append, _, [alias(vscode_test_results)]),
+			open(Data, write, _, [alias(vscode_test_results)]),
 			forall(
 				(	logtalk::loaded_file_property(File, object(Object)),
 					extends_object(Object, lgtunit)
@@ -413,7 +413,7 @@
 		atom_concat(Directory, '/.vscode_loading_done', Marker),
 		atom_concat(Directory, '/.vscode_test_results', Data),
 		setup_once_cleanup(
-			open(Data, append, _, [alias(vscode_test_results)]),
+			open(Data, write, _, [alias(vscode_test_results)]),
 			ignore({Object::run}),
 			close(vscode_test_results)
 		),
@@ -1920,8 +1920,8 @@
 		entity_property(Object, Kind, file(File)),
 		entity_property(Object, Kind, lines(Line, _)),
 		(	Note == '' ->
-			{format(vscode_test_results, 'File:~w;Line:~d;Status:~d tests: ~d skipped, ~d passed, ~d failed (~d flaky)~n', [File, Line, Total, Skipped, Passed, Failed, Flaky])}
-		;	{format(vscode_test_results, 'File:~w;Line:~d;Status:~d tests: ~d skipped, ~d passed, ~d failed (~d flaky; ~w~n)', [File, Line, Total, Skipped, Passed, Failed, Flaky, Note])}
+			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Status:~d tests: ~d skipped, ~d passed, ~d failed (~d flaky)~n', [File, Line, Object, Total, Skipped, Passed, Failed, Flaky])}
+		;	{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Status:~d tests: ~d skipped, ~d passed, ~d failed (~d flaky; ~w~n)', [File, Line, Object, Total, Skipped, Passed, Failed, Flaky, Note])}
 		),
 		fail.
 	:- if(current_logtalk_flag(prolog_dialect, ji)).
