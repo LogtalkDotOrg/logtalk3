@@ -23,11 +23,31 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:15:0,
+		version is 1:16:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2025-01-29,
+		date is 2025-10-13,
 		comment is 'Unit tests for the "dcgs" example.'
 	]).
+
+	cover(calculator).
+	cover(macaddr).
+	cover(morse).
+	cover(enigma).
+	cover(sentence).
+	cover(parsetree).
+	cover(bom).
+	cover(shell).
+	cover(tokenizer).
+	cover(walker).
+	cover(xml).
+	cover(url).
+	cover(iban).
+	cover(bypass).
+	cover(lambdas).
+	cover(debug).
+	cover(meta_nt).
+	cover(library).
+	cover(client).
 
 	:- uses(lgtunit, [op(700, xfx, =~=), (=~=)/2]).
 

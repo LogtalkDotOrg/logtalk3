@@ -42,5 +42,7 @@
 		macaddr,
 		url,
 		xml
+	], [
+		optimize(on)
 	])
 ).

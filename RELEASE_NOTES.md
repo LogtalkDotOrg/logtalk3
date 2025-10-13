@@ -52,6 +52,11 @@ declared non-terminals.
 * FIXED: A `lgtdoc` tool bug when reporting missing predicate directives when
 the scope directive is found in an included file.
 
+Examples
+--------
+
+* UPDATED: The `dcgs` example tests to report code coverage.
+
 Contributions
 -------------
 

@@ -25,7 +25,30 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(sets(loader)),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(loader),
+	logtalk_load([
+		parsep,
+		enigma,
+		parsetree,
+		sentences,
+		tokenizer,
+		morse,
+		shell,
+		walker,
+		bom,
+		faa,
+		bypass,
+		dcgtest,
+		metas,
+		lambdas,
+		calculator,
+		iban,
+		macaddr,
+		url,
+		xml
+	], [
+		debug(on),
+		source_data(on)
+	]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).
