@@ -74,6 +74,8 @@ syntax highlighters for the new `mode_non_terminal/2` directive.
 * FIXED: The VSCode support to avoid leaking stream aliases in case of
 unexpected errors.
 
+* FIXED: The VSCode support handling of code coverage for non-terminals.
+
 
 3.94.0 - September 30, 2025
 ===========================
