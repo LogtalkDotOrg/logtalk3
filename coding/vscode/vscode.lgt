@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:77:0,
+		version is 0:78:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-10-14,
+		date is 2025-10-15,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1930,10 +1930,10 @@
 			flaky_text(Flaky, FlakyText),
 			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:passed~w(in ~f/~f cpu/wall seconds)~n', [File, Start, Object, Test, FlakyText, CPUTime, WallTime])},
 			fail.
-		logtalk::message_hook(failed_test(Object, Test, File, Start-_End, _Reason, Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+		logtalk::message_hook(failed_test(Object, Test, File, Start-_End, Reason, Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
 			stream_property(_, alias(vscode_test_results)),
 			flaky_text(Flaky, FlakyText),
-			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:failed~w(in ~f/~f cpu/wall seconds)~n', [File, Start, Object, Test, FlakyText, CPUTime, WallTime])},
+			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:failed~w(in ~f/~f cpu/wall seconds);Reason:~q~n', [File, Start, Object, Test, FlakyText, CPUTime, WallTime, Reason])},
 			fail.
 	:- else.
 		logtalk::message_hook(passed_test(Object, Test, File, Start-_End, Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
@@ -1941,10 +1941,10 @@
 			flaky_text(Flaky, FlakyText),
 			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:passed~w(in ~9f/~9f cpu/wall seconds)~n', [File, Start, Object, Test, FlakyText, CPUTime, WallTime])},
 			fail.
-		logtalk::message_hook(failed_test(Object, Test, File, Start-_End, _Reason, Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+		logtalk::message_hook(failed_test(Object, Test, File, Start-_End, Reason, Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
 			stream_property(_, alias(vscode_test_results)),
 			flaky_text(Flaky, FlakyText),
-			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:failed~w(in ~9f/~9f cpu/wall seconds)~n', [File, Start, Object, Test, FlakyText, CPUTime, WallTime])},
+			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:failed~w(in ~9f/~9f cpu/wall seconds);Reason:~q~n', [File, Start, Object, Test, FlakyText, CPUTime, WallTime, Reason])},
 			fail.
 	:- endif.
 	logtalk::message_hook(skipped_test(Object, Test, File, Start-_, Flaky, _Note), _, lgtunit, _) :-
