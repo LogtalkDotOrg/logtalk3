@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:78:0,
+		version is 0:79:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-10-15,
+		date is 2025-10-16,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1933,7 +1933,9 @@
 		logtalk::message_hook(failed_test(Object, Test, File, Start-_End, Reason, Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
 			stream_property(_, alias(vscode_test_results)),
 			flaky_text(Flaky, FlakyText),
-			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:failed~w(in ~f/~f cpu/wall seconds);Reason:~q~n', [File, Start, Object, Test, FlakyText, CPUTime, WallTime, Reason])},
+			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:failed~w(in ~f/~f cpu/wall seconds);Reason:', [File, Start, Object, Test, FlakyText, CPUTime, WallTime])},
+			reason_format(Reason),
+			nl(vscode_test_results),
 			fail.
 	:- else.
 		logtalk::message_hook(passed_test(Object, Test, File, Start-_End, Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
@@ -1944,7 +1946,9 @@
 		logtalk::message_hook(failed_test(Object, Test, File, Start-_End, Reason, Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
 			stream_property(_, alias(vscode_test_results)),
 			flaky_text(Flaky, FlakyText),
-			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:failed~w(in ~9f/~9f cpu/wall seconds);Reason:~q~n', [File, Start, Object, Test, FlakyText, CPUTime, WallTime, Reason])},
+			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:failed~w(in ~9f/~9f cpu/wall seconds);Reason:', [File, Start, Object, Test, FlakyText, CPUTime, WallTime])},
+			reason_format(Reason),
+			nl(vscode_test_results),
 			fail.
 	:- endif.
 	logtalk::message_hook(skipped_test(Object, Test, File, Start-_, Flaky, _Note), _, lgtunit, _) :-
@@ -2012,5 +2016,21 @@
 
 	flaky_text(true,  ' [flaky] ').
 	flaky_text(false, ' ').
+
+	reason_format(Reason) :-
+		current_object(lgtunit),
+		!,
+		phrase(lgtunit::failed_test_reason(Reason), Tokens0),
+		replace_nl_tokens(Tokens0, Tokens),
+		logtalk::print_message_tokens(vscode_test_results, '', Tokens).
+	reason_format(Reason) :-
+		writeq(vscode_test_results, Reason).
+
+	replace_nl_tokens([], []).
+	replace_nl_tokens([nl| Tokens0], Tokens) :-
+		!,
+		replace_nl_tokens(Tokens0, Tokens).
+	replace_nl_tokens([Token| Tokens0], [Token| Tokens]) :-
+		replace_nl_tokens(Tokens0, Tokens).
 
 :- end_object.
