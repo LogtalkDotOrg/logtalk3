@@ -20,16 +20,17 @@
 
 
 :- object(lgtunit,
-	implements(expanding)).
+	implements(expanding),
+	imports(lgtunit_messages)).
 
 	% avoid a catch-22 due to the local definition
 	% of the logtalk::trace_event/2 predicate
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 22:0:0,
+		version is 22:1:0,
 		author is 'Paulo Moura',
-		date is 2025-09-09,
+		date is 2025-10-15,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',

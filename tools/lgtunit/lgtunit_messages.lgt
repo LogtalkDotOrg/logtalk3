@@ -29,13 +29,20 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 12:0:0,
+		version is 12:1:0,
 		author is 'Paulo Moura',
-		date is 2025-09-09,
+		date is 2025-10-16,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
 	:- set_logtalk_flag(debug, off).
+
+	:- public(failed_test_reason//1).
+	:- mode_non_terminal(failed_test_reason(@nonvar), one_or_more).
+	:- info(failed_test_reason//1, [
+		comment is 'Used to rewrite a term representing the reason why a term failed into a list of tokens.',
+		argnames is ['Reason']
+	]).
 
 	% structured message printing predicates;
 	% the main reason to not write directly to an output stream is to allows

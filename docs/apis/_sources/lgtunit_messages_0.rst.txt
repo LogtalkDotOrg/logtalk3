@@ -14,8 +14,8 @@ Logtalk unit test framework default message translations.
 |    ``logtalk_load(lgtunit(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 12:0:0
-| **Date:** 2025-09-09
+| **Version:** 12:1:0
+| **Date:** 2025-10-16
 
 | **Compilation flags:**
 |    ``static``
@@ -38,7 +38,24 @@ Logtalk unit test framework default message translations.
 Public predicates
 -----------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: failed_test_reason//1
+.. _lgtunit_messages/0::failed_test_reason//1:
+
+``failed_test_reason//1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Used to rewrite a term representing the reason why a term failed into a list of tokens.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``failed_test_reason(Reason)``
+| **Mode and number of proofs:**
+|    ``failed_test_reason(@nonvar)`` - ``one_or_more``
+
+
+------------
 
 Protected predicates
 --------------------

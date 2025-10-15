@@ -14,8 +14,8 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 |    ``logtalk_load(lgtunit(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 22:0:0
-| **Date:** 2025-09-09
+| **Version:** 22:1:0
+| **Date:** 2025-10-15
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -23,6 +23,8 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 
 | **Implements:**
 |    ``public`` :ref:`expanding <expanding/0>`
+| **Imports:**
+|    ``public`` :ref:`lgtunit_messages <lgtunit_messages/0>`
 | **Provides:**
 |    :ref:`logtalk::trace_event/2 <logtalk/0::trace_event/2>`
 | **Uses:**
@@ -40,7 +42,7 @@ A unit test framework supporting predicate clause coverage, determinism testing,
    - Known issues: Parameter variables cannot currently be used in the definition of test options.
 
 | **Inherited public predicates:**
-|     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
+|     :ref:`lgtunit_messages/0::failed_test_reason//1`  :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
 
 .. contents::
    :local:

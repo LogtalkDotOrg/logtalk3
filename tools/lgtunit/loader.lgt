@@ -26,5 +26,5 @@
 	% define a flag to allow the logtalk_tester script to pass the
 	% option to suppress the test file and directory path prefix
 	create_logtalk_flag(suppress_path_prefix, '', [type(atom), keep(true)]),
-	logtalk_load([lgtunit, lgtunit_messages], [optimize(on)])
+	logtalk_load([lgtunit_messages, lgtunit], [optimize(on)])
 )).

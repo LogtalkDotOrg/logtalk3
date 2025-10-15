@@ -43,6 +43,9 @@ directive.
 Tools
 -----
 
+* UPDATED: The `lgtunit` tool to allow using `failed_test_reason//1` as a
+public non-terminal to better support IDEs such as VSCode.
+
 * UPDATED: The `code_metrics`, `help`, `lgtdoc`, and `tutor` tools for the new
 `mode_non_terminal/2` directive.
 
