@@ -550,6 +550,14 @@
 		print_message(debug, dcs, Message) as dbg(Message)
 	]).
 
+	:- if(current_logtalk_flag(modules, supported)).
+
+		:- use_module(some_module, [
+			foo/2 as bar/2, baz/2
+		]).
+
+	:- endif.
+
 	foo(L, X) :-
 		last(L, X).
 

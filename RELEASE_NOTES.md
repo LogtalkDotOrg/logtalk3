@@ -49,6 +49,9 @@ public non-terminal to better support IDEs such as VSCode.
 * UPDATED: The `code_metrics`, `help`, `lgtdoc`, and `tutor` tools for the new
 `mode_non_terminal/2` directive.
 
+* UPDATED: The `dead_code_scanner` tool for additional tests using
+`use_module/2` directives.
+
 * FIXED: A `lgtdoc` tool bug when reporting missing predicate directives for
 declared non-terminals.
 

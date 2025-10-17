@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2024-10-21,
+		date is 2025-10-17,
 		comment is 'Unit tests for the "dead_code_scanner" tool.'
 	]).
 
@@ -224,11 +224,21 @@
 		logtalk::expand_library_path(lgtunit, Directory),
 		rdirectory(Directory).
 
-	% tests for non-called predicates listed in uses/2 directives
+	% tests for non-called predicates listed in uses/2 and use_module/2 directives
 
-	test(dcs_uses_directive_01, deterministic) :-
-		setof(Predicate, predicate(predicate_directives, Predicate), Predicates),
-		^^assertion(Predicates == [list::app/3, list::member/2, logtalk::dbg/1]).
+	:- if(current_logtalk_flag(modules, supported)).
+
+		test(dcs_uses_directive_01, deterministic) :-
+			setof(Predicate, predicate(predicate_directives, Predicate), Predicates),
+			^^assertion(Predicates == [some_module:bar/2, some_module:baz/2, list::app/3, list::member/2, logtalk::dbg/1]).
+
+	:- else.
+
+		test(dcs_uses_directive_01, deterministic) :-
+			setof(Predicate, predicate(predicate_directives, Predicate), Predicates),
+			^^assertion(Predicates == [list::app/3, list::member/2, logtalk::dbg/1]).
+
+	:- endif.
 
 	% tests for option validation
 
