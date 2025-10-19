@@ -614,6 +614,8 @@
 
 	foo(Goal) :-
 		\+ call(Goal).
+	foo(Goal) :-
+		\+ once(Goal).
 
 :- end_object.
 
