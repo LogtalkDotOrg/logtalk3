@@ -35,7 +35,7 @@
 	logtalk_load(types(loader)),
 	logtalk_load([arbitrary(arbitrary)], [optimize(on)]),
 	logtalk_load(os(loader)),
-	logtalk_load([lgtunit(lgtunit), lgtunit(lgtunit_messages)], [optimize(on)]),
+	logtalk_load([lgtunit(lgtunit_messages), lgtunit(lgtunit)], [optimize(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	lgtunit::run_test_sets([
 		tests(random),

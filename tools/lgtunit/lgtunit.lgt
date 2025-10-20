@@ -28,9 +28,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 22:1:0,
+		version is 22:2:0,
 		author is 'Paulo Moura',
-		date is 2025-10-15,
+		date is 2025-10-20,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1743,14 +1743,91 @@
 	convert_test_outcome(ball(Ball), _, Goal, [Ball], Goal, _, _, _, _, _).
 	convert_test_outcome(balls(Balls), _, Goal, Balls, Goal, _, _, _, _, _).
 
+	:- meta_predicate(lint_check_assertion(*, *, *, *, *, *, *)).
 	lint_check_assertion(_, Assertion, _, _, _, _, _) :-
 		var(Assertion),
 		!.
-	lint_check_assertion(Test, Term1 = Term2, File, Position, Type, Entity, VariableNames) :-
-		once((var(Term1); var(Term2))),
+	lint_check_assertion(Test, Goal, File, Position, Type, Entity, VariableNames) :-
+		candidate_tautology_or_falsehood_goal(Goal),
+		ground(Goal),
 		!,
-		print_message(warning, lgtunit, assertion_uses_unification(Test, Term1 = Term2, File, Position, Type, Entity, VariableNames)).
+		(	catch({Goal}, Error, true) ->
+			(	var(Error) ->
+				print_message(warning, lgtunit, assertion_is_always_true(Test, Goal, File, Position, Type, Entity, VariableNames))
+			;	print_message(warning, lgtunit, assertion_is_always_error(Test, Goal, File, Position, Type, Entity, VariableNames))
+			)
+		;	print_message(warning, lgtunit, assertion_is_always_false(Test, Goal, File, Position, Type, Entity, VariableNames))
+		).
+	lint_check_assertion(Test, unify_with_occurs_check(Term1, Term2), File, Position, Type, Entity, VariableNames) :-
+		\+ unify_with_occurs_check(Term1, Term2),
+		% unification fails; further instantiation of Term1 or Term2 will not make it succeed
+		!,
+		print_message(warning, lgtunit, assertion_is_always_false(Test, unify_with_occurs_check(Term1, Term2), File, Position, Type, Entity, VariableNames)).
+	lint_check_assertion(Test, Term1 = Term2, File, Position, Type, Entity, VariableNames) :-
+		(	Term1 \= Term2 ->
+			% unification fails; further instantiation of Term1 or Term2 will not make it succeed
+			print_message(warning, lgtunit, assertion_is_always_false(Test, Term1 = Term2, File, Position, Type, Entity, VariableNames))
+		;	once((var(Term1); var(Term2))),
+			print_message(warning, lgtunit, assertion_uses_unification(Test, Term1 = Term2, File, Position, Type, Entity, VariableNames))
+		),
+		!.
+	lint_check_assertion(Test, Term1 \= Term2, File, Position, Type, Entity, VariableNames) :-
+		Term1 \= Term2,
+		!,
+		print_message(warning, lgtunit, assertion_is_always_true(Test, Term1 \= Term2, File, Position, Type, Entity, VariableNames)).
 	lint_check_assertion(_, _, _, _, _, _, _).
+
+	% candidate_tautology_or_falsehood_goal(@callable)
+	%
+	% valid candidates are standard built-in predicates with
+	% no side-effects when called with ground arguments
+
+	% unification
+	candidate_tautology_or_falsehood_goal(_ = _).
+	candidate_tautology_or_falsehood_goal(unify_with_occurs_check(_, _)).
+	candidate_tautology_or_falsehood_goal(_ \= _).
+	% term comparison
+	candidate_tautology_or_falsehood_goal(_ == _).
+	candidate_tautology_or_falsehood_goal(_ \== _).
+	candidate_tautology_or_falsehood_goal(_ @< _).
+	candidate_tautology_or_falsehood_goal(_ @=< _).
+	candidate_tautology_or_falsehood_goal(_ @> _).
+	candidate_tautology_or_falsehood_goal(_ @>= _).
+	% arithmetic comparison
+	candidate_tautology_or_falsehood_goal(_ < _).
+	candidate_tautology_or_falsehood_goal(_ =< _).
+	candidate_tautology_or_falsehood_goal(_ > _).
+	candidate_tautology_or_falsehood_goal(_ >= _).
+	candidate_tautology_or_falsehood_goal(_ =:= _).
+	candidate_tautology_or_falsehood_goal(_ =\= _).
+	candidate_tautology_or_falsehood_goal(compare(_, _, _)).
+	% type testing
+	candidate_tautology_or_falsehood_goal(acyclic_term(_)).
+	candidate_tautology_or_falsehood_goal(atom(_)).
+	candidate_tautology_or_falsehood_goal(atomic(_)).
+	candidate_tautology_or_falsehood_goal(callable(_)).
+	candidate_tautology_or_falsehood_goal(compound(_)).
+	candidate_tautology_or_falsehood_goal(float(_)).
+	candidate_tautology_or_falsehood_goal(ground(_)).
+	candidate_tautology_or_falsehood_goal(integer(_)).
+	candidate_tautology_or_falsehood_goal(nonvar(_)).
+	candidate_tautology_or_falsehood_goal(number(_)).
+	candidate_tautology_or_falsehood_goal(var(_)).
+	% term creation and decomposition
+	candidate_tautology_or_falsehood_goal(_ =.. _).
+	candidate_tautology_or_falsehood_goal(arg(_, _, _)).
+	candidate_tautology_or_falsehood_goal(copy_term(_, _)).
+	candidate_tautology_or_falsehood_goal(functor(_, _, _)).
+	candidate_tautology_or_falsehood_goal(subsumes_term(_, _)).
+	% atomic term processing
+	candidate_tautology_or_falsehood_goal(atom_length(_, _)).
+	candidate_tautology_or_falsehood_goal(atom_concat(_, _, _)).
+	candidate_tautology_or_falsehood_goal(sub_atom(_, _, _, _, _)).
+	candidate_tautology_or_falsehood_goal(atom_chars(_, _)).
+	candidate_tautology_or_falsehood_goal(atom_codes(_, _)).
+	candidate_tautology_or_falsehood_goal(char_code(_, _)).
+	candidate_tautology_or_falsehood_goal(number_chars(_, _)).
+	candidate_tautology_or_falsehood_goal(number_codes(_, _)).
 
 	map_errors([], []).
 	map_errors([Ball| Balls], [error(Ball,_)| Errors]) :-

@@ -29,9 +29,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 12:1:0,
+		version is 12:2:0,
 		author is 'Paulo Moura',
-		date is 2025-10-16,
+		date is 2025-10-20,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -400,6 +400,18 @@
 
 	message_tokens(assertion_uses_unification(Test, Assertion, File, Position, Type, Entity, VariableNames)) -->
 		['test ~q assertion uses a unification goal: '-[Test], term(Assertion, [quoted(true), variable_names(VariableNames)]), nl],
+		message_context(File, Position, Type, Entity).
+
+	message_tokens(assertion_is_always_true(Test, Assertion, File, Position, Type, Entity, VariableNames)) -->
+		['test ~q assertion is always true: '-[Test], term(Assertion, [quoted(true), variable_names(VariableNames)]), nl],
+		message_context(File, Position, Type, Entity).
+
+	message_tokens(assertion_is_always_false(Test, Assertion, File, Position, Type, Entity, VariableNames)) -->
+		['test ~q assertion is always false: '-[Test], term(Assertion, [quoted(true), variable_names(VariableNames)]), nl],
+		message_context(File, Position, Type, Entity).
+
+	message_tokens(assertion_is_always_error(Test, Assertion, File, Position, Type, Entity, VariableNames)) -->
+		['test ~q assertion always throws an error: '-[Test], term(Assertion, [quoted(true), variable_names(VariableNames)]), nl],
 		message_context(File, Position, Type, Entity).
 
 	% auxiliary grammar rules

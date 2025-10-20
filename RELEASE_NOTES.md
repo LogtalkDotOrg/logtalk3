@@ -49,6 +49,8 @@ directive.
 Tools
 -----
 
+* IMPROVED: The `lgtunit` tool lint checking of test assertions.
+
 * UPDATED: The `lgtunit` tool to allow using `failed_test_reason//1` as a
 public non-terminal to better support IDEs such as VSCode.
 

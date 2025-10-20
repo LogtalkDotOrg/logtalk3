@@ -32,7 +32,7 @@
 	logtalk_load(os(loader)),
 	% load the "arbitrary" category in debug mode to support collecting code coverage data
 	logtalk_load(arbitrary, [debug(on), source_data(on), clean(on)]),
-	logtalk_load([lgtunit(lgtunit), lgtunit(lgtunit_messages)], [optimize(on)]),
+	logtalk_load([lgtunit(lgtunit_messages), lgtunit(lgtunit)], [optimize(on)]),
 	logtalk_load(['test_files/binary_tree', 'test_files/odd', 'test_files/scoped']),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
