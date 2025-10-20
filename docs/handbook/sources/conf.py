@@ -85,6 +85,7 @@ highlight_language = 'logtalk'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
+html_title = 'Logtalk ' + version
 html_theme = 'sphinx_rtd_theme'
 # html_theme = 'groundwork'
 # html_theme = 'rtcat_sphinx_theme'

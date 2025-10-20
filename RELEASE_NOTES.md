@@ -34,6 +34,12 @@ mode declarations from predicate mode declarations.
 * UPDATED: The `logtalk` built-in object to use the new `mode_non_terminal/2`
 directive.
 
+Documentation
+-------------
+
+* UPDATED: Simplified page titles in the HTML versions of the Handbook and
+APIs documentation.
+
 Library
 -------
 
