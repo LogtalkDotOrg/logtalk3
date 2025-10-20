@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:83:0,
+		version is 0:84:0,
 		author is 'Paulo Moura',
-		date is 2025-10-06,
+		date is 2025-10-20,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -1249,6 +1249,15 @@
 			'more strict and reliable test success checking. For float approximate'-[], nl,
 			'comparison, use the (=~=)/2 predicate provided by lgtunit.', nl, nl
 		].
+
+	explain(assertion_is_always_true(_, _, _, _, _, _, _)) -->
+		['As-is, the assertion likely makes the test always succeed. Typo in the assertion?'-[], nl, nl].
+
+	explain(assertion_is_always_false(_, _, _, _, _, _, _)) -->
+		['As-is, the assertion makes the test always fail. Typo in the assertion?'-[], nl, nl].
+
+	explain(assertion_is_always_error(_, _, _, _, _, _, _)) -->
+		['As-is, the assertion makes the test always throw an error. Typo in the assertion?'-[], nl, nl].
 
 	explain(tests_run_differ_from_tests_total(_, _)) -->
 		[	'A number of tests run different from the total number of defined tests'-[], nl,

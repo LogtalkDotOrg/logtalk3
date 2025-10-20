@@ -51,6 +51,8 @@ Tools
 
 * IMPROVED: The `lgtunit` tool lint checking of test assertions.
 
+* UPDATED: The `tutor` tool to explain the new `lgtunit` tool linter warnings.
+
 * UPDATED: The `lgtunit` tool to allow using `failed_test_reason//1` as a
 public non-terminal to better support IDEs such as VSCode.
 
