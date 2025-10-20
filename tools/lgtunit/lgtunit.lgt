@@ -28,7 +28,7 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 22:2:0,
+		version is 22:3:0,
 		author is 'Paulo Moura',
 		date is 2025-10-20,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
@@ -1439,10 +1439,7 @@
 	term_expansion((- Head), Expansion, VariableNames) :-
 		term_expansion((- Head :- true), Expansion, VariableNames).
 	term_expansion((- Head :- _), [], _) :-
-		logtalk_load_context(file, File),
-		logtalk_load_context(term_position, Position),
-		logtalk_load_context(entity_type, Type),
-		logtalk_load_context(entity_identifier, Entity),
+		load_context(File, Position, Type, Entity),
 		test_idiom_head(Head, Test),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
 		(	Head = test(Test, _, Options) ->
@@ -1467,10 +1464,7 @@
 	term_expansion(test(Test, Outcome, Options), Expansion, VariableNames) :-
 		term_expansion((test(Test, Outcome, Options) :- true), Expansion, VariableNames).
 	term_expansion((test(Test, Outcome0, Options) :- Goal0), [(test(Test, Variables, Outcome) :- Goal)], VariableNames) :-
-		logtalk_load_context(file, File),
-		logtalk_load_context(term_position, Position),
-		logtalk_load_context(entity_type, Type),
-		logtalk_load_context(entity_identifier, Entity),
+		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
 		check_for_valid_test_outcome(Test, Outcome0, File, Position, Type, Entity, VariableNames),
 		convert_test_outcome(Outcome0, Test, Goal0, Outcome, Goal, File, Position, Type, Entity, VariableNames),
@@ -1490,10 +1484,7 @@
 	term_expansion(test(Test, Outcome), Expansion, VariableNames) :-
 		term_expansion((test(Test, Outcome) :- true), Expansion, VariableNames).
 	term_expansion((test(Test, Outcome0) :- Goal0), [(test(Test, Variables, Outcome) :- Goal)], VariableNames) :-
-		logtalk_load_context(file, File),
-		logtalk_load_context(term_position, Position),
-		logtalk_load_context(entity_type, Type),
-		logtalk_load_context(entity_identifier, Entity),
+		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
 		check_for_valid_test_outcome(Test, Outcome0, File, Position, Type, Entity, VariableNames),
 		convert_test_outcome(Outcome0, Test, Goal0, Outcome, Goal, File, Position, Type, Entity, VariableNames),
@@ -1510,55 +1501,34 @@
 
 	% unit test idiom test/1
 	term_expansion(test(Test), [test(Test, [], true)], _) :-
-		logtalk_load_context(file, File),
-		logtalk_load_context(term_position, Position),
-		logtalk_load_context(entity_type, Type),
-		logtalk_load_context(entity_identifier, Entity),
+		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
 		assertz(test_(Test, succeeds(Test, [], Position))).
 	term_expansion((test(Test) :- Goal), [(test(Test, [], true) :- Goal)], _) :-
-		logtalk_load_context(file, File),
-		logtalk_load_context(term_position, Position),
-		logtalk_load_context(entity_type, Type),
-		logtalk_load_context(entity_identifier, Entity),
+		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
 		assertz(test_(Test, succeeds(Test, [], Position))).
 
 	% unit test idiom succeeds/1 + deterministic/1 + fails/1 + throws/2
 	term_expansion(succeeds(Test), [test(Test, [], true)], _) :-
-		logtalk_load_context(file, File),
-		logtalk_load_context(term_position, Position),
-		logtalk_load_context(entity_type, Type),
-		logtalk_load_context(entity_identifier, Entity),
+		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
 		assertz(test_(Test, succeeds(Test, [], Position))).
 	term_expansion((succeeds(Test) :- Goal), [(test(Test, [], true) :- Goal)], _) :-
-		logtalk_load_context(file, File),
-		logtalk_load_context(term_position, Position),
-		logtalk_load_context(entity_type, Type),
-		logtalk_load_context(entity_identifier, Entity),
+		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
 		assertz(test_(Test, succeeds(Test, [], Position))).
 	term_expansion((deterministic(Test) :- Goal), [(test(Test, [], deterministic(Deterministic)) :- lgtunit::deterministic(Head,Deterministic))], _) :-
-		logtalk_load_context(file, File),
-		logtalk_load_context(term_position, Position),
-		logtalk_load_context(entity_type, Type),
-		logtalk_load_context(entity_identifier, Entity),
+		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
 		compile_deterministic_test_aux_predicate(Test, Goal, Head),
 		assertz(test_(Test, deterministic(Test, [], Position))).
 	term_expansion((fails(Test) :- Goal), [(test(Test, [], fail) :- Goal)], _) :-
-		logtalk_load_context(file, File),
-		logtalk_load_context(term_position, Position),
-		logtalk_load_context(entity_type, Type),
-		logtalk_load_context(entity_identifier, Entity),
+		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
 		assertz(test_(Test, fails(Test, [], Position))).
 	term_expansion((throws(Test, Balls) :- Goal), [(test(Test, Variables, Errors) :- Goal)], _) :-
-		logtalk_load_context(file, File),
-		logtalk_load_context(term_position, Position),
-		logtalk_load_context(entity_type, Type),
-		logtalk_load_context(entity_identifier, Entity),
+		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
 		(	Balls = [_| _] ->
 			Errors = Balls
@@ -1569,10 +1539,7 @@
 
 	% unit test idiom quick_check/3
 	term_expansion(quick_check(Test, Template, Options),  [(test(Test, Variables, quick_check) :- ::run_quick_check_tests(Template, QuickCheckOptions, _, _, _))], _) :-
-		logtalk_load_context(file, File),
-		logtalk_load_context(term_position, Position),
-		logtalk_load_context(entity_type, Type),
-		logtalk_load_context(entity_identifier, Entity),
+		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
 		term_variables(Options, Variables),
 		parse_quick_check_idiom_options(Options, Test, Condition, Setup, Cleanup, Flaky, Note, QuickCheckOptions, File, Position, Type, Entity),
@@ -1580,10 +1547,7 @@
 
 	% unit test idiom quick_check/2
 	term_expansion(quick_check(Test, Template),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, QuickCheckOptions, _, _, _))], _) :-
-		logtalk_load_context(file, File),
-		logtalk_load_context(term_position, Position),
-		logtalk_load_context(entity_type, Type),
-		logtalk_load_context(entity_identifier, Entity),
+		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
 		findall(Option, default_quick_check_option(Option), QuickCheckOptions),
 		assertz(test_(Test, quick_check(Test, [], Position))).
@@ -1600,10 +1564,7 @@
 	term_expansion(unit(Entity), [cover(Entity)], _).
 	% verify entity coverage declarations
 	term_expansion(cover(This), cover(This), VariableNames) :-
-		logtalk_load_context(file, File),
-		logtalk_load_context(term_position, Position),
-		logtalk_load_context(entity_type, Type),
-		logtalk_load_context(entity_identifier, Entity),
+		load_context(File, Position, Type, Entity),
 		(	atom(This),
 			current_protocol(This) ->
 			print_message(warning, lgtunit, no_code_coverage_for_protocols(This, File, Position, Type, Entity))
@@ -1842,6 +1803,12 @@
 	test_idiom_head(throws(Test, _), Test).
 	test_idiom_head(quick_check(Test, _, _), Test).
 	test_idiom_head(quick_check(Test, _), Test).
+
+	load_context(File, Position, Type, Entity) :-
+		logtalk_load_context(file, File),
+		logtalk_load_context(term_position, Position),
+		logtalk_load_context(entity_type, Type),
+		logtalk_load_context(entity_identifier, Entity).
 
 	check_for_valid_test_identifier(Test, File, Position, Type, Entity) :-
 		self(Object),
