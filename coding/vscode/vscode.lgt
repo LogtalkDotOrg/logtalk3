@@ -494,6 +494,10 @@
 
 	% definition from entity indentifier and predicate indicator
 
+	find_predicate_definition(Directory, Entity0, Name//Arity) :-
+		!,
+		ExtArity is Arity + 2,
+		find_predicate_definition(Directory, Entity0, Name/ExtArity).
 	find_predicate_definition(Directory, Entity0, Predicate) :-
 		(	Entity0 = Name/Arity ->
 			functor(Entity, Name, Arity)
