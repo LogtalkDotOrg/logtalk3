@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:79:0,
+		version is 0:80:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-10-16,
+		date is 2025-10-21,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -137,6 +137,22 @@
 	:- info(doclet/2, [
 		comment is 'Loads the doclet file given the marker directory.',
 		argnames is ['Directory', 'Doclet']
+	]).
+
+	:- public(find_entity_definition/2).
+	:- mode(find_entity_definition(+atom, @atom), one).
+	:- mode(find_entity_definition(+atom, @entity_indicator), one).
+	:- info(find_entity_definition/2, [
+		comment is 'Find the entity definition file and line.',
+		argnames is ['Directory', 'Entity']
+	]).
+
+	:- public(find_predicate_definition/3).
+	:- mode(find_predicate_definition(+atom, @atom, @predicate_indicator), one).
+	:- mode(find_predicate_definition(+atom, @entity_indicator, @predicate_indicator), one).
+	:- info(find_predicate_definition/3, [
+		comment is 'Find the entity predicate definition file and line.',
+		argnames is ['Directory', 'Entity', 'Predicate']
 	]).
 
 	:- public(find_declaration/4).
@@ -456,6 +472,48 @@
 		)),
 		open(Marker, append, Stream),
 		close(Stream).
+
+	% definition from entity indentifier
+
+	find_entity_definition(Directory, Entity0) :-
+		(	Entity0 = Name/Arity ->
+			functor(Entity, Name, Arity)
+		;	Entity = Entity0
+		),
+		atom_concat(Directory, '/.vscode_entity_definition', Data),
+		atom_concat(Directory, '/.vscode_entity_definition_done', Marker),
+		open(Data, write, DataStream),
+		(	entity_property(Entity, _, file(File)),
+			entity_property(Entity, _, lines(Line, _)) ->
+			{format(DataStream, 'File:~w;Line:~d~n', [File, Line])}
+		;	true
+		),
+		close(DataStream),
+		open(Marker, write, MarkerStream),
+		close(MarkerStream).
+
+	% definition from entity indentifier and predicate indicator
+
+	find_predicate_definition(Directory, Entity0, Predicate) :-
+		(	Entity0 = Name/Arity ->
+			functor(Entity, Name, Arity)
+		;	Entity = Entity0
+		),
+		atom_concat(Directory, '/.vscode_predicate_definition', Data),
+		atom_concat(Directory, '/.vscode_predicate_definition_done', Marker),
+		open(Data, write, DataStream),
+		(	entity_property(Entity, _, defines(Predicate, Properties)),
+			(	member(include(File), Properties) ->
+				true
+			;	entity_property(Entity, _, file(File))
+			),
+			memberchk(line_count(Line), Properties) ->
+			{format(DataStream, 'File:~w;Line:~d~n', [File, Line])}
+		;	true
+		),
+		close(DataStream),
+		open(Marker, write, MarkerStream),
+		close(MarkerStream).
 
 	% declarations
 

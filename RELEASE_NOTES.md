@@ -82,6 +82,9 @@ Contributions
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* ADDED: New entity and predicate definition predicates to the VSCode support
+to allow navigating to entities, predicates, and clauses from profiling views.
+
 * ADDED: New test predicates to the VSCode support to allow running all tests
 defined in a file or in an object.
 
