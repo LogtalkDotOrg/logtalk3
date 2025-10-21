@@ -37,6 +37,12 @@ ________________________________________________________________________
 ...
 
 
+% start profiling
+
+| ?- ports_profiler::start.
+...
+
+
 % run a query:
 
 | ?- miss_cann::initial_state(Initial), hill_climbing(16)::solve(miss_cann, Initial, Path, Cost), miss_cann::print_path(Path).
@@ -91,3 +97,9 @@ Clause  Count
      1      1
      2     12
 -------------
+
+
+% stop profiling
+
+| ?- ports_profiler::stop.
+...
