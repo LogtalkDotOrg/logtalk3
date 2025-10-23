@@ -68,6 +68,9 @@ declared non-terminals.
 * FIXED: A `lgtdoc` tool bug when reporting missing predicate directives when
 the scope directive is found in an included file.
 
+* FIXED: The `lgtdoc` tool `logtalk.css` file to avoid rendering issues when
+viewing documentation in VSCode.
+
 Examples
 --------
 
