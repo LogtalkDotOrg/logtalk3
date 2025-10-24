@@ -338,7 +338,7 @@
 		atom_concat(Directory, '/dot_dias', DotDias),
 		ignore({
 			logtalk_load(diagrams(loader)),
-			diagrams::directory(Project, Directory, [output_directory(DotDias)])
+			diagrams::directory(Project, Directory, [output_directory(DotDias), url_prefixes('vscode://file/', 'vscode://file/xml_docs/'), zoom(true)])
 		}),
 		open(Marker, append, Stream),
 		close(Stream).
@@ -348,7 +348,7 @@
 		atom_concat(Directory, '/dot_dias', DotDias),
 		ignore({
 			logtalk_load(diagrams(loader)),
-			diagrams::rdirectory(Project, Directory, [output_directory(DotDias)])
+			diagrams::rdirectory(Project, Directory, [output_directory(DotDias), url_prefixes('vscode://file/', 'vscode://file/xml_docs/'), zoom(true)])
 		}),
 		open(Marker, append, Stream),
 		close(Stream).

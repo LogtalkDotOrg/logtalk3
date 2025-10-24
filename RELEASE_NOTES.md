@@ -93,6 +93,10 @@ defined in a file or in an object.
 
 * UPDATED: The format of the VSCode support generated file with test results.
 
+* UPDATED: The VSCode support diagram predicates to use the `url_prefixes/2`
+and `zoom/1` options to allow opening code and documentation links in VSCode
+itself.
+
 * UPDATED: The syntax highlighting support for all supported text editors and
 syntax highlighters for the new `mode_non_terminal/2` directive.
 
