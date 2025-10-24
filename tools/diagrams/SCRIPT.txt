@@ -113,13 +113,13 @@ yes
 % opens the corresponding file, and clicking on an entity or predicate
 % node opens its documentation:
 
-| ?- entity_diagram::library(core, [title('Logtalk core entities'), node_type_captions(true), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/library/'), omit_path_prefixes(['$LOGTALKUSER', '$LOGTALKHOME'])]).
+| ?- entity_diagram::library(core, [title('Logtalk core entities'), node_type_captions(true), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/apis/'), omit_path_prefixes(['$LOGTALKUSER', '$LOGTALKHOME'])]).
 true.
 
-| ?- xref_diagram::entity(logtalk, [title('logtalk built-in object'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/library/'), omit_path_prefixes(['$LOGTALKUSER', '$LOGTALKHOME'])]).
+| ?- xref_diagram::entity(logtalk, [title('logtalk built-in object'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/apis/'), omit_path_prefixes(['$LOGTALKUSER', '$LOGTALKHOME'])]).
 true.
 
-| ?- inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/library/'), omit_path_prefixes(['$LOGTALKUSER', '$LOGTALKHOME'])]).
+| ?- inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/apis/'), omit_path_prefixes(['$LOGTALKUSER', '$LOGTALKHOME'])]).
 yes
 
 
@@ -132,12 +132,12 @@ yes
 
 | ?- git::commit_hash('$HOME/logtalk3', Hash),
      atom_concat('https://github.com/LogtalkDotOrg/logtalk3/tree/', Hash, GitHub),
-     library_load_diagram::rlibrary(tools, [title('Logtalk development tools'), zoom(true), path_url_prefixes('$LOGTALKUSER/',GitHub,'https://logtalk.org/library/'), path_url_prefixes('$LOGTALKHOME/',GitHub,'https://logtalk.org/library/'), omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/','$HOME/']), exclude_directories(['$HOME/logtalk_packs/', '$HOME/lib'])]).
+     library_load_diagram::rlibrary(tools, [title('Logtalk development tools'), zoom(true), path_url_prefixes('$LOGTALKUSER/',GitHub,'https://logtalk.org/apis/'), path_url_prefixes('$LOGTALKHOME/',GitHub,'https://logtalk.org/apis/'), omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/','$HOME/']), exclude_directories(['$HOME/logtalk_packs/', '$HOME/lib'])]).
 yes
 
 | ?- git::commit_hash('$HOME/logtalk3', Hash),
      atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub),
-     directory_load_diagram::rdirectory(tools, '$LOGTALKUSER/tools', [title('Logtalk development tools'), zoom(true), path_url_prefixes('$LOGTALKUSER/',GitHub,'https://logtalk.org/library/'), path_url_prefixes('$LOGTALKHOME/',GitHub,'https://logtalk.org/library/'), omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/','$HOME/']), exclude_directories(['$HOME/logtalk_packs/', '$HOME/lib'])]).
+     directory_load_diagram::rdirectory(tools, '$LOGTALKUSER/tools', [title('Logtalk development tools'), zoom(true), path_url_prefixes('$LOGTALKUSER/',GitHub,'https://logtalk.org/apis/'), path_url_prefixes('$LOGTALKHOME/',GitHub,'https://logtalk.org/apis/'), omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/','$HOME/']), exclude_directories(['$HOME/logtalk_packs/', '$HOME/lib'])]).
 yes
 
 
@@ -151,7 +151,7 @@ yes
 % the utility objects diagrams/0-1 allows generating all supported diagrams
 % at once:
 
-| ?- diagrams::rlibrary(tools, [title('Logtalk development tools'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/library/'), omit_path_prefixes(['$LOGTALKUSER', '$LOGTALKHOME'])]).
+| ?- diagrams::rlibrary(tools, [title('Logtalk development tools'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/apis/'), omit_path_prefixes(['$LOGTALKUSER', '$LOGTALKHOME'])]).
 yes
 
 
