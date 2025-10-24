@@ -16,7 +16,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into HTML files
-%  Last updated on September 30, 2024
+%  Last updated on October 24, 2025
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -51,12 +51,20 @@
 			<h1 class="code"><xsl:value-of select="logtalk_entity/entity/name" /></h1>
 			<blockquote>
 			<xsl:if test="logtalk_entity/entity/comment">
-				<p class="comment"><xsl:value-of select="logtalk_entity/entity/comment" /></p>
+				<p class="comment">
+					<xsl:call-template name="process-inline">
+						<xsl:with-param name="text" select="logtalk_entity/entity/comment" />
+					</xsl:call-template>
+				</p>
 			</xsl:if>
 			<xsl:if test="logtalk_entity/entity/parameters">
 				<ul class="parameters">
 				<xsl:for-each select="logtalk_entity/entity/parameters/parameter">
-					<li><code><xsl:value-of select="name" /></code><xsl:text disable-output-escaping="yes"> &amp;ndash; </xsl:text><span class="comment"><xsl:value-of select="description" /></span></li>
+					<li><code><xsl:value-of select="name" /></code><xsl:text disable-output-escaping="yes"> &amp;ndash; </xsl:text><span class="comment">
+						<xsl:call-template name="process-inline">
+							<xsl:with-param name="text" select="description" />
+						</xsl:call-template>
+					</span></li>
 				</xsl:for-each>
 				</ul>
 			</xsl:if>
@@ -288,12 +296,20 @@
 	<h3 id="{name}" class="code"><xsl:value-of select="name" /></h3>
 	<xsl:if test="comment">
 	<blockquote>
-		<p class="comment"><xsl:value-of select="comment" /></p>
+		<p class="comment">
+			<xsl:call-template name="process-inline">
+				<xsl:with-param name="text" select="comment" />
+			</xsl:call-template>
+		</p>
 	</blockquote>
 	</xsl:if>
 	<xsl:if test="fails_if">
 	<blockquote>
-		<p class="comment"><xsl:value-of select="fails_if" /></p>
+		<p class="comment">
+			<xsl:call-template name="process-inline">
+				<xsl:with-param name="text" select="fails_if" />
+			</xsl:call-template>
+		</p>
 	</blockquote>
 	</xsl:if>
 	<dl class="properties">
@@ -304,9 +320,13 @@
 			<dd class ="value"><code><xsl:value-of select="template" /></code></dd>
 		</xsl:if>
 		<xsl:if test="arguments">
-			<dd class ="value"><ul class="arguments">
+			<dd class="value"><ul class="arguments">
 			<xsl:for-each select="arguments/argument">
-				<li><code><xsl:value-of select="name" /></code><xsl:text disable-output-escaping="yes"> &amp;ndash; </xsl:text><span class="comment"><xsl:value-of select="description" /></span></li>
+				<li><code><xsl:value-of select="name" /></code><xsl:text disable-output-escaping="yes"> &amp;ndash; </xsl:text><span class="comment">
+					<xsl:call-template name="process-inline">
+						<xsl:with-param name="text" select="description" />
+					</xsl:call-template>
+				</span></li>
 			</xsl:for-each></ul></dd>
 		</xsl:if>
 		<xsl:if test="meta">
@@ -324,9 +344,9 @@
 		</xsl:for-each>
 		</xsl:if>
 		<xsl:if test="exceptions">
-		<dt class ="key">exceptions:</dt>
+		<dt class="key">exceptions:</dt>
 		<xsl:for-each select="exceptions/exception">
-			<dd class ="value"><xsl:value-of select="condition" />: <code><xsl:value-of select="term" /></code></dd>
+			<dd class="value"><xsl:call-template name="process-inline"><xsl:with-param name="text" select="condition" /></xsl:call-template>: <code><xsl:value-of select="term" /></code></dd>
 		</xsl:for-each>
 		</xsl:if>
 		<xsl:if test="remarks">
@@ -349,7 +369,11 @@
 		<dt class ="key">examples:</dt>
 			<xsl:for-each select="examples/example">
 			<dd class ="value"><dl class="examples">
-				<dt class="comment"><xsl:value-of select="description" /></dt>
+				<dt class="comment">
+					<xsl:call-template name="process-inline">
+						<xsl:with-param name="text" select="description" />
+					</xsl:call-template>
+				</dt>
 					<dd class="code"><xsl:value-of select="call" /></dd>
 					<dd class="code"><xsl:value-of select="bindings" /></dd>
 			</dl></dd>
@@ -401,9 +425,88 @@
 
 <xsl:template match="logtalk_entity/remarks/remark">
 	<dl class="remarks">
-		<dt class="comment"><xsl:value-of select="topic" /></dt>
-			<dd class="text"><xsl:value-of select="text" /></dd>
+		<dt class="comment">
+			<xsl:call-template name="process-inline"><xsl:with-param name="text" select="topic" /></xsl:call-template>
+		</dt>
+			<dd class="text">
+				<xsl:call-template name="process-inline"><xsl:with-param name="text" select="text" /></xsl:call-template>
+			</dd>
 	</dl>
+</xsl:template>
+
+
+<!-- Inline markup processor: support a small subset of Markdown and reStructuredText
+     inline syntax: code spans (``...`` and `...`), bold (**...** and __...__),
+     and emphasis (*...* and _..._). Processing is left-to-right and recursive to
+     allow nested constructs. This is implemented with simple string operations
+     available in XSLT 1.0. -->
+<xsl:template name="process-inline">
+	<xsl:param name="text" />
+	<xsl:choose>
+		<!-- rst double backticks for inline literals: ``code`` -->
+		<xsl:when test="contains($text, '``')">
+			<xsl:variable name="before" select="substring-before($text, '``')"/>
+			<xsl:variable name="rest" select="substring-after($text, '``')"/>
+			<xsl:variable name="inside" select="substring-before($rest, '``')"/>
+			<xsl:variable name="after" select="substring-after($rest, '``')"/>
+			<xsl:call-template name="process-inline"><xsl:with-param name="text" select="$before"/></xsl:call-template>
+			<code><xsl:value-of select="$inside"/></code>
+			<xsl:call-template name="process-inline"><xsl:with-param name="text" select="$after"/></xsl:call-template>
+		</xsl:when>
+		<!-- markdown single backtick: `code` -->
+		<xsl:when test="contains($text, '`')">
+			<xsl:variable name="before" select="substring-before($text, '`')"/>
+			<xsl:variable name="rest" select="substring-after($text, '`')"/>
+			<xsl:variable name="inside" select="substring-before($rest, '`')"/>
+			<xsl:variable name="after" select="substring-after($rest, '`')"/>
+			<xsl:call-template name="process-inline"><xsl:with-param name="text" select="$before"/></xsl:call-template>
+			<code><xsl:value-of select="$inside"/></code>
+			<xsl:call-template name="process-inline"><xsl:with-param name="text" select="$after"/></xsl:call-template>
+		</xsl:when>
+		<!-- bold with **...** -->
+		<xsl:when test="contains($text, '**')">
+			<xsl:variable name="before" select="substring-before($text, '**')"/>
+			<xsl:variable name="rest" select="substring-after($text, '**')"/>
+			<xsl:variable name="inside" select="substring-before($rest, '**')"/>
+			<xsl:variable name="after" select="substring-after($rest, '**')"/>
+			<xsl:call-template name="process-inline"><xsl:with-param name="text" select="$before"/></xsl:call-template>
+			<strong><xsl:call-template name="process-inline"><xsl:with-param name="text" select="$inside"/></xsl:call-template></strong>
+			<xsl:call-template name="process-inline"><xsl:with-param name="text" select="$after"/></xsl:call-template>
+		</xsl:when>
+		<!-- bold with __...__ -->
+		<xsl:when test="contains($text, '__')">
+			<xsl:variable name="before" select="substring-before($text, '__')"/>
+			<xsl:variable name="rest" select="substring-after($text, '__')"/>
+			<xsl:variable name="inside" select="substring-before($rest, '__')"/>
+			<xsl:variable name="after" select="substring-after($rest, '__')"/>
+			<xsl:call-template name="process-inline"><xsl:with-param name="text" select="$before"/></xsl:call-template>
+			<strong><xsl:call-template name="process-inline"><xsl:with-param name="text" select="$inside"/></xsl:call-template></strong>
+			<xsl:call-template name="process-inline"><xsl:with-param name="text" select="$after"/></xsl:call-template>
+		</xsl:when>
+		<!-- emphasis *...* (note: '**' already handled) -->
+		<xsl:when test="contains($text, '*')">
+			<xsl:variable name="before" select="substring-before($text, '*')"/>
+			<xsl:variable name="rest" select="substring-after($text, '*')"/>
+			<xsl:variable name="inside" select="substring-before($rest, '*')"/>
+			<xsl:variable name="after" select="substring-after($rest, '*')"/>
+			<xsl:call-template name="process-inline"><xsl:with-param name="text" select="$before"/></xsl:call-template>
+			<em><xsl:call-template name="process-inline"><xsl:with-param name="text" select="$inside"/></xsl:call-template></em>
+			<xsl:call-template name="process-inline"><xsl:with-param name="text" select="$after"/></xsl:call-template>
+		</xsl:when>
+		<!-- emphasis with underscores _..._ -->
+		<xsl:when test="contains($text, '_')">
+			<xsl:variable name="before" select="substring-before($text, '_')"/>
+			<xsl:variable name="rest" select="substring-after($text, '_')"/>
+			<xsl:variable name="inside" select="substring-before($rest, '_')"/>
+			<xsl:variable name="after" select="substring-after($rest, '_')"/>
+			<xsl:call-template name="process-inline"><xsl:with-param name="text" select="$before"/></xsl:call-template>
+			<em><xsl:call-template name="process-inline"><xsl:with-param name="text" select="$inside"/></xsl:call-template></em>
+			<xsl:call-template name="process-inline"><xsl:with-param name="text" select="$after"/></xsl:call-template>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="$text" />
+		</xsl:otherwise>
+	</xsl:choose>
 </xsl:template>
 
 

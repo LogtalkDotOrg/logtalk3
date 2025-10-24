@@ -71,6 +71,10 @@ the scope directive is found in an included file.
 * FIXED: The `lgtdoc` tool `logtalk.css` file to avoid rendering issues when
 viewing documentation in VSCode.
 
+* FIXED: The `lgtdoc` tool XSLT files for converting XML documentation files
+to (X)HTML files to correctly handle italic, bold, and monospaced text
+fragments.
+
 Examples
 --------
 
