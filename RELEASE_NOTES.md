@@ -75,6 +75,10 @@ viewing documentation in VSCode.
 to (X)HTML files to correctly handle italic, bold, and monospaced text
 fragments.
 
+* FIXED: The `diagrams` tool to exclude the default scratch directory on
+Windows (`lgt_tmp`) when generating diagrams for all sub-directories or
+sub-libraries.
+
 Examples
 --------
 

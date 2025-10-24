@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 3:15:0,
+		version is 3:15:1,
 		author is 'Paulo Moura',
-		date is 2024-12-04,
+		date is 2025-10-24,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -801,6 +801,9 @@
 	sub_directory(TopPath, ExcludedDirectories, SubDirectory, SubDirectoryPath) :-
 		os::directory_files(TopPath, SubDirectories, [type(directory), dot_files(false), paths(relative)]),
 		member(Directory, SubDirectories),
+		% also exclude the default scratch directory on Windows
+		% (on POSIX systems, the default is .lgt_tmp and thus already excluded)
+		Directory \== lgt_tmp,
 		\+ (
 			member(ExcludedDirectory, ExcludedDirectories),
 			sub_atom(Directory, 0, _, _, ExcludedDirectory)
