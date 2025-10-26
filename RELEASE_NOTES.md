@@ -107,6 +107,8 @@ defined in a file or in an object.
 and `zoom/1` options to allow opening code and documentation links in VSCode
 itself.
 
+* UPDATED: The VSCode support diagram predicates to accept a format argument.
+
 * UPDATED: The syntax highlighting support for all supported text editors and
 syntax highlighters for the new `mode_non_terminal/2` directive.
 

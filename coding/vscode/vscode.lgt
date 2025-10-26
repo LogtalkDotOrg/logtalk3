@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:80:0,
+		version is 0:82:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-10-21,
+		date is 2025-10-26,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -55,18 +55,18 @@
 		argnames is ['Directory']
 	]).
 
-	:- public(diagrams/2).
-	:- mode(diagrams(+atom, +atom), one).
-	:- info(diagrams/2, [
+	:- public(diagrams/3).
+	:- mode(diagrams(+atom, +atom, +atom), one).
+	:- info(diagrams/3, [
 		comment is 'Generates diagrams given a loader file and a marker directory.',
-		argnames is ['Project', 'Directory']
+		argnames is ['Project', 'Directory', 'Format']
 	]).
 
-	:- public(diagrams_recursive/2).
-	:- mode(diagrams_recursive(+atom, +atom), one).
-	:- info(diagrams_recursive/2, [
+	:- public(diagrams_recursive/3).
+	:- mode(diagrams_recursive(+atom, +atom, +atom), one).
+	:- info(diagrams_recursive/3, [
 		comment is 'Generates diagrams given a loader file and a marker directory.',
-		argnames is ['Project', 'Directory']
+		argnames is ['Project', 'Directory', 'Format']
 	]).
 
 	:- public(dead_code/1).
@@ -333,22 +333,40 @@
 
 	% diagrams
 
-	diagrams(Project, Directory) :-
+	diagrams(Project, Directory, Format) :-
 		atom_concat(Directory, '/.vscode_dot_files_done', Marker),
 		atom_concat(Directory, '/dot_dias', DotDias),
 		ignore({
 			logtalk_load(diagrams(loader)),
-			diagrams::directory(Project, Directory, [output_directory(DotDias), url_prefixes('vscode://file/', 'vscode://file/xml_docs/'), zoom(true)])
+			diagrams(Format)::directory(
+				Project,
+				Directory,
+				[
+					output_directory(DotDias),
+					url_prefixes('vscode://file/', 'vscode://file/xml_docs/'),
+					omit_path_prefixes(['$LOGTALKUSER', '$LOGTALKHOME']),
+					zoom(true)
+				]
+			)
 		}),
 		open(Marker, append, Stream),
 		close(Stream).
 
-	diagrams_recursive(Project, Directory) :-
+	diagrams_recursive(Project, Directory, Format) :-
 		atom_concat(Directory, '/.vscode_dot_files_done', Marker),
 		atom_concat(Directory, '/dot_dias', DotDias),
 		ignore({
 			logtalk_load(diagrams(loader)),
-			diagrams::rdirectory(Project, Directory, [output_directory(DotDias), url_prefixes('vscode://file/', 'vscode://file/xml_docs/'), zoom(true)])
+			diagrams(Format)::rdirectory(
+				Project,
+				Directory,
+				[
+					output_directory(DotDias),
+					url_prefixes('vscode://file/', 'vscode://file/xml_docs/'),
+					omit_path_prefixes(['$LOGTALKUSER', '$LOGTALKHOME']),
+					zoom(true)
+				]
+			)
 		}),
 		open(Marker, append, Stream),
 		close(Stream).
