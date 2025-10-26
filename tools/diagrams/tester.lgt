@@ -32,7 +32,8 @@
 		graph_language_registry,
 		graph_language_protocol,
 		d2_graph_language,
-		dot_graph_language
+		dot_graph_language,
+		mermaid_graph_language
 	], [
 		source_data(on),
 		debug(on)
@@ -60,6 +61,7 @@
 	logtalk_load(tests, [hook(lgtunit)]),
 	lgtunit::run_test_sets([
 		tests(d2),
-		tests(dot)
+		tests(dot),
+		tests(mermaid)
 	])
 )).

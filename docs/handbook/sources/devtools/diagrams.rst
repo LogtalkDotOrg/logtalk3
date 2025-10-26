@@ -260,10 +260,9 @@ Supported graph languages
 -------------------------
 
 Currently, both DOT and d2 graph languages support all the features of
-the ``diagrams`` tool. There's also preliminary support for Mermaid (not
-loaded by default, as its current version lacks several required
-features for parity with d2 and Graphviz, notably support for links on
-edges).
+the ``diagrams`` tool. There's also preliminary support for Mermaid (its
+current version lacks several required features for parity with d2 and
+Graphviz, notably support for links on edges).
 
 The diagrams ``.d2`` and ``.dot`` files are created in the current
 directory by default. These files can be easily converted into a

@@ -30,7 +30,8 @@
 		graph_language_registry,
 		graph_language_protocol,
 		d2_graph_language,
-		dot_graph_language
+		dot_graph_language,
+		mermaid_graph_language
 	], [
 		optimize(on)
 	]),

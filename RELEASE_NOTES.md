@@ -62,6 +62,8 @@ public non-terminal to better support IDEs such as VSCode.
 * UPDATED: The `dead_code_scanner` tool for additional tests using
 `use_module/2` directives.
 
+* UPDATED: The `diagrams` tool to also load the Mermaid experimental support.
+
 * FIXED: A `lgtdoc` tool bug when reporting missing predicate directives for
 declared non-terminals.
 
