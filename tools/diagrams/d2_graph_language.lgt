@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2025-02-04,
+		date is 2025-10-27,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -166,13 +166,6 @@
 		write_key_value(Stream, shape, Shape),
 		write_key_value(Stream, 'style.fill', Color),
 		write_key_value(Stream, 'style.stroke-dash', Dash),
-		(	^^option(url(URL), Options),
-			URL \== '' ->
-			write_key_value_quoted(Stream, link, URL)
-		;	member(tooltip(Tooltip), Options) ->
-			write_key_value(Stream, tooltip, Tooltip)
-		;	true
-		),
 		write(Stream, 'label: ""\n'),
 		write(Stream, 'text: |md\n'),
 		(	member(zoom_url(Diagram), Options) ->
@@ -182,7 +175,15 @@
 		;	true
 		),
 		write(Stream, '## '),
-		write_term(Stream, Label, [quoted(Quoted)]),
+		(	^^option(url(URL), Options),
+			URL \== '' ->
+			write(Stream, '['),
+			write_node_line(Label, Stream, [quoted(Quoted)]),
+			write(Stream, ']('),
+			write(Stream, URL),
+			write(Stream, ')')
+		;	write_node_line(Label, Stream, [quoted(Quoted)])
+		),
 		write(Stream, '\n'),
 		(	^^option(node_type_captions(true), Options),
 			Caption \== '' ->
@@ -312,10 +313,13 @@
 
 	write_node_lines([], _, _).
 	write_node_lines([Line| Lines], Stream, Options) :-
-		write_term_to_chars(Line, Chars, Options),
-		write_escaped_chars(Chars, Stream),
+		write_node_line(Line, Stream, Options),
 		write(Stream, '  \n'),
 		write_node_lines(Lines, Stream, Options).
+
+	write_node_line(Line, Stream, Options) :-
+		write_term_to_chars(Line, Chars, Options),
+		write_escaped_chars(Chars, Stream).
 
 	write_escaped_chars([], _).
 	write_escaped_chars([Char| Chars], Stream) :-

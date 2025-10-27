@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 3:11:0,
+		version is 3:12:0,
 		author is 'Paulo Moura',
-		date is 2024-12-07,
+		date is 2025-10-27,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -192,14 +192,6 @@
 		write(Stream, Identifier),
 		write(Stream, '" ['),
 		write_key_value_comma(Stream, shape, Shape),
-		(	^^option(url(URL), Options),
-			URL \== '' ->
-			write_key_value_comma(Stream, 'URL', URL),
-			write_key_value_comma(Stream, tooltip, URL)
-		;	member(tooltip(Tooltip), Options) ->
-			write_key_value_comma(Stream, tooltip, Tooltip)
-		;	true
-		),
 		write_key_value_comma(Stream, style, Style),
 		write_key_value_comma(Stream, fillcolor, Color),
 		write(Stream, 'label=<<TABLE border="0" cellborder="0" cellspacing="0" cellpadding="0">'),
@@ -209,7 +201,21 @@
 			write(Stream, '">&#128269;</TD></TR>')
 		;	true
 		),
-		write(Stream, '<TR><TD> </TD><TD><FONT POINT-SIZE="11">'),
+		write(Stream, '<TR><TD> </TD><TD'),
+		(	^^option(url(URL), Options),
+			URL \== '' ->
+			write(Stream, ' tooltip="'),
+			write(Stream, URL),
+			write(Stream, '" href="'),
+			write(Stream, URL),
+			write(Stream, '">')
+		;	member(tooltip(Tooltip), Options) ->
+			write(Stream, ' tooltip="'),
+			write(Stream, Tooltip),
+			write(Stream, '">')
+		;	write(Stream, '>')
+		),
+		write(Stream, '<FONT POINT-SIZE="11">'),
 		write_escaped_term(Stream, Label, [quoted(Quoted)]),
 		write(Stream, '</FONT></TD><TD> </TD></TR>'),
 		(	^^option(node_type_captions(true), Options),

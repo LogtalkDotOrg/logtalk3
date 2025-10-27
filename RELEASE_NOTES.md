@@ -49,6 +49,9 @@ directive.
 Tools
 -----
 
+* IMPROVED: The `diagrams` tool generated diagram node links by encompassing
+just the relevant text.
+
 * IMPROVED: The `lgtunit` tool lint checking of test assertions.
 
 * UPDATED: The `tutor` tool to explain the new `lgtunit` tool linter warnings.
