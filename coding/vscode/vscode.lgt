@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:82:1,
+		version is 0:82:2,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2025-10-27,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -345,6 +345,7 @@
 					output_directory(DotDias),
 					url_prefixes('vscode://file/', 'vscode://file/xml_docs/'),
 					omit_path_prefixes(['$LOGTALKUSER', '$LOGTALKHOME']),
+					predicate_url_target_format(other),
 					zoom(true)
 				]
 			)
@@ -364,6 +365,7 @@
 					output_directory(DotDias),
 					url_prefixes('vscode://file/', 'vscode://file/xml_docs/'),
 					omit_path_prefixes(['$LOGTALKUSER', '$LOGTALKHOME']),
+					predicate_url_target_format(other),
 					zoom(true)
 				]
 			)
