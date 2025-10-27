@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:82:0,
+		version is 0:82:1,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-10-26,
+		date is 2025-10-27,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -2100,7 +2100,9 @@
 	reason_format(Reason) :-
 		current_object(lgtunit),
 		!,
-		phrase(lgtunit::failed_test_reason(Reason), Tokens0),
+		% avoid make check warning in the next line when lgtunit is not loaded
+		Object = lgtunit,
+		phrase(Object::failed_test_reason(Reason), Tokens0),
 		replace_nl_tokens(Tokens0, Tokens),
 		logtalk::print_message_tokens(vscode_test_results, '', Tokens).
 	reason_format(Reason) :-
