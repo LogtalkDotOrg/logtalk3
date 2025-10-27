@@ -49,6 +49,9 @@ directive.
 Tools
 -----
 
+* CHANGED: The `diagrams` tool `predicate_url_target_format/1` option to only
+accept `sphinx` and `other` values.
+
 * IMPROVED: The `diagrams` tool generated diagram node links by encompassing
 just the relevant text.
 

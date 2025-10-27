@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 3:15:1,
+		version is 3:16:0,
 		author is 'Paulo Moura',
-		date is 2025-10-24,
+		date is 2025-10-27,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -704,8 +704,8 @@
 	valid_option(entity_url_suffix_target(Suffix, Target)) :-
 		atom(Suffix),
 		atom(Target).
-	valid_option(predicate_url_target_format(Generator)) :-
-		atom(Generator).
+	valid_option(predicate_url_target_format(Format)) :-
+		valid(one_of(atom, [sphinx,other]), Format).
 	valid_option(zoom(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(zoom_url_suffix(Suffix)) :-
