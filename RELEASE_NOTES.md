@@ -81,6 +81,10 @@ fragments.
 Windows (`lgt_tmp`) when generating diagrams for all sub-directories or
 sub-libraries.
 
+* FIXED: The `diagrams` tool generated entity cross-referencing diagrams to
+link to the entity definition line instead of just to the entity definition
+file.
+
 Examples
 --------
 

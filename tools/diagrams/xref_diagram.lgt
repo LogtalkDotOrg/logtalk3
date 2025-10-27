@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:85:0,
+		version is 2:85:1,
 		author is 'Paulo Moura',
-		date is 2024-12-04,
+		date is 2025-10-27,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -99,9 +99,11 @@
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
 		(	Format::file_header(diagram_output_file, Identifier, [description(Description)| Options]),
 			entity_property(Kind, Entity, file(Basename, Directory)),
+			entity_property(Kind, Entity, lines(Line, _)),
+			add_xref_code_url(Options, Kind, Entity, Line, XRefOptions),
+			Format::graph_header(diagram_output_file, Identifier, GroundEntity, entity, XRefOptions),
 			atom_concat(Directory, Basename, Path),
 			^^add_link_options(Path, Options, GraphOptions),
-			Format::graph_header(diagram_output_file, Identifier, GroundEntity, entity, GraphOptions),
 			process_entity(Kind, Entity, GraphOptions),
 			output_externals(Options),
 			^^output_edges(Options),
