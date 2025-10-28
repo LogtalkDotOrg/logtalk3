@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2025-02-02,
+		date is 2025-10-28,
 		comment is 'Unit tests for the "planets" example.'
 	]).
 
@@ -36,6 +36,7 @@
 	cover(planet).
 	cover(earth).
 	cover(mars).
+	cover(jupiter).
 
 	test(planets_01, true(W1 =~= 29.4)) :-
 		earth::weight(m1, W1).
