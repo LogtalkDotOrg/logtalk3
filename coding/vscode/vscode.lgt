@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:82:2,
+		version is 0:82:3,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-10-27,
+		date is 2025-10-28,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -2040,12 +2040,16 @@
 		fail.
 	logtalk::message_hook(entity_predicate_coverage(Entity, Predicate, Covered, Total, _Percentage, Clauses), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
-		entity_property(Entity, Kind, file(File)),
+		entity_property(Entity, Kind, file(File0)),
 		(	Predicate = Name/Arity ->
 			entity_property(Entity, Kind, defines(Name/Arity, Properties))
 		;	Predicate = Name//Arity,
 			ExtArity is Arity + 2,
 			entity_property(Entity, Kind, defines(Name/ExtArity, Properties))
+		),
+		(	member(include(File), Properties) ->
+			true
+		;	File = File0
 		),
 		memberchk(lines(Line, _), Properties),
 		(	Covered =:= Total ->
