@@ -91,6 +91,8 @@ sub-libraries.
 link to the entity definition line instead of just to the entity definition
 file.
 
+* FIXED: Some documentation formatting issues in the `wrapper` tool.
+
 Examples
 --------
 
