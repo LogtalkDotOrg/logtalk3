@@ -31,18 +31,15 @@
 		parnames is ['Threshold']
 	]).
 
-	:- private(expand/8).
-	:- private(succlist/5).
-	:- private(bestf/3).
-	:- private(continue/9).
-	:- private(f/2).
-	:- private(insert/4).
+	:- uses(list, [
+		reverse/2
+	]).
 
 	search(Space, State, Threshold, Solution, Cost) :-
 		% to avoid issues with some Prolog backends parsing 0/0 as
 		% a rational number, we write the term instead as (0)/(0)
 		expand([], l(State, (0)/(0)), Threshold, _, yes, Path, Space, Cost),
-		list::reverse(Path, Solution).
+		reverse(Path, Solution).
 
 	expand(Path, l(State,Cost/_), _, _, yes, [State|Path], Space, Cost) :-
 		Space::goal_state(State).

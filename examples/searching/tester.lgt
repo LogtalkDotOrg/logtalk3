@@ -21,8 +21,41 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
+	logtalk_load(types(loader)),
+	logtalk_load(sets(loader)),
+	logtalk_load(meta(loader)),
+	logtalk_load(loops(loader)),
+	logtalk_load(dates(loader)),
+	logtalk_load(roots(loader)),
+	set_logtalk_flag(events, allow),
+	% puzzles
+	logtalk_load([
+		state_space,
+		water_jug,
+		farmer,
+		heuristic_state_space,
+		bridge,
+		eight_puzzle,
+		miss_cann,
+		salt3
+	], [
+		debug(on),
+		source_data(on)
+	]),
+	% search methods
+	logtalk_load([
+		search_strategy,
+		blind_search1,
+		heuristic_search1,
+		breadth_first1,
+		depth_first1,
+		best_first1,
+		hill_climbing1
+	], [
+		debug(on),
+		source_data(on)
+	]),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(loader),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).

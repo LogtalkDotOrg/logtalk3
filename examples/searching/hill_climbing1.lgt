@@ -30,7 +30,9 @@
 		parnames is ['Threshold']
 	]).
 
-	:- uses(list, [member/2, reverse/2, sort/2]).
+	:- uses(list, [
+		member/2, reverse/2, sort/2
+	]).
 
 	search(Space, State, Threshold, Solution, Cost) :-
 		hill(Space, State, Threshold, [], Path, 0, Cost),

@@ -36,13 +36,13 @@
 		bridge,
 		eight_puzzle,
 		miss_cann,
-		salt3,
-		search_strategy,
-		blind_search1,
-		heuristic_search1
+		salt3
 	]),
 	% search methods
 	logtalk_load([
+		search_strategy,
+		blind_search1,
+		heuristic_search1,
 		breadth_first1,
 		depth_first1,
 		best_first1,
