@@ -23,11 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2021-06-06,
+		date is 202-10-28,
 		comment is 'Unit tests for the "includes" example.'
 	]).
+
+	cover(counters).
+	cover(countries).
 
 	test(includes_01, true(Vowels == [a,e,i,o,u])) :-
 		{findall(Vowel, vowel(Vowel), Vowels)}.
@@ -42,5 +45,11 @@
 		create_object(capitals, [], [public(capital/1), include(includes('countries.pl'))], [(capital(Capital) :- country(_,Capital,_))]),
 		{setof(Capital, capitals::capital(Capital), Capitals)},
 		abolish_object(capitals).
+
+	test(includes_05, true(Counters == [a-0, b-0, c-0])) :-
+		findall(Counter-Value, counters::counter(Counter, Value), Counters).
+
+	test(includes_06, true(Vowels == [a,e,i,o,u])) :-
+		findall(Vowel, {vowel(Vowel)}, Vowels).
 
 :- end_object.

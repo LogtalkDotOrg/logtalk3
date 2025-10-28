@@ -94,7 +94,8 @@ file.
 Examples
 --------
 
-* UPDATED: The `dcgs` and `searching` examples tests to report code coverage.
+* UPDATED: The `dcgs`, `includes`, and `searching` examples tests to report
+code coverage.
 
 Contributions
 -------------
