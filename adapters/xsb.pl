@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.8.0 or later versions
-%  Last updated on November 12, 2024
+%  Last updated on October 29, 2025
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -359,7 +359,35 @@
 %
 % converts between Prolog internal file paths and operating-system paths
 
-'$lgt_prolog_os_file_name'(Path, Path).
+'$lgt_prolog_os_file_name'(PrologPath, OSPath) :-
+	(	expand_atom('$COMSPEC', _) ->
+		% Windows systems define this environment variable...
+		(	var(PrologPath) ->
+			% replace all backslashes with slashes
+			atom_codes(OSPath, Codes0),
+			'$lgt_xsb_replace_backslashes'(Codes0, Codes),
+			atom_codes(PrologPath, Codes)
+		;	% replace all slashes with backslashes
+			atom_codes(PrologPath, Codes0),
+			'$lgt_xsb_replace_slashes'(Codes0, Codes),
+			atom_codes(OSPath, Codes)
+		)
+	;	PrologPath = OSPath
+	).
+
+'$lgt_xsb_replace_backslashes'([], []).
+'$lgt_xsb_replace_backslashes'([0'\\, 0'\\| Codes0], [0'/| Codes]) :-
+	!,
+	'$lgt_xsb_replace_backslashes'(Codes0, Codes).
+'$lgt_xsb_replace_backslashes'([Other| Codes0], [Other| Codes]) :-
+	'$lgt_xsb_replace_backslashes'(Codes0, Codes).
+
+'$lgt_xsb_replace_slashes'([], []).
+'$lgt_xsb_replace_slashes'([0'/| Codes0], [0'\\, 0'\\| Codes]) :-
+	!,
+	'$lgt_xsb_replace_slashes'(Codes0, Codes).
+'$lgt_xsb_replace_slashes'([Other| Codes0], [Other| Codes]) :-
+	'$lgt_xsb_replace_slashes'(Codes0, Codes).
 
 
 % '$lgt_expand_path'(+atom, -atom)

@@ -34,6 +34,12 @@ mode declarations from predicate mode declarations.
 * UPDATED: The `logtalk` built-in object to use the new `mode_non_terminal/2`
 directive.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The XSB adapter file with an implementation of the predicate that
+converts between internal and native file system paths.
+
 Documentation
 -------------
 
