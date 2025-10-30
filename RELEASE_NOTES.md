@@ -138,6 +138,11 @@ unexpected errors.
 
 * FIXED: The VSCode support handling of code coverage for non-terminals.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: The `build_release.sh` script building of the SVG diagrams.
+
 
 3.94.0 - September 30, 2025
 ===========================

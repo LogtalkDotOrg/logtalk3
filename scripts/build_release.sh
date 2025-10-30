@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Release build script
-##   Last updated on May 11, 2025
+##   Last updated on October 30, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -97,11 +97,6 @@ mv lgtclone "logtalk-$version"
 
 directory=$(PWD)
 
-cd "logtalk-$version" || exit 1
-chmod a+x scripts/cleandist.sh
-scripts/cleandist.sh
-cd ..
-
 # Build manuals archive if enabled
 if [ "$BUILD_MANUALS" = true ]; then
     echo "Building manuals archive..."
@@ -115,6 +110,13 @@ if [ "$BUILD_MANUALS" = true ]; then
 else
     echo "Skipping manuals archive build."
 fi
+
+# Clean the distribution directory now that we no longer need .git
+# for generating the diagrams (which use the last commit git hash)
+cd "logtalk-$version" || exit 1
+chmod a+x scripts/cleandist.sh
+scripts/cleandist.sh
+cd ..
 
 tar -cjf "logtalk-$version.tar.bz2" "logtalk-$version"
 
