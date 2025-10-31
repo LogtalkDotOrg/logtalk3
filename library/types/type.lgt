@@ -68,7 +68,7 @@
 			'Meta-types' - 'Meta-types are types that have one or more sub-type arguments. E.g. ``var_or(Type)``. The sub-types of a meta-type can be enumerated by defining a clause for the ``meta_type/3`` multifile predicate.',
 			'Character sets' - 'When testing character or character code based terms (e.g., atom), it is possible to choose a character set (``ascii_identifier``, ``ascii_printable``, ``ascii_full``, ``byte``, ``unicode_bmp``, or ``unicode_full``) using the parameterizable types.',
 			'Caveats' - 'The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.',
-			'Unicode limitations' - 'Currently, correct character/code type-checking is only ensured for XVM and SWI-Prolog as other backends do not provide support for querying a Unicode code point category.'
+			'Unicode limitations' - 'Currently, correct character/code type-checking is only ensured for SWI-Prolog and XVM as other backends do not provide support for querying a Unicode code point category.'
 		],
 		see_also is [arbitrary, os_types, either, maybe]
 	]).

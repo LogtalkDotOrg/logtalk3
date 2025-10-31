@@ -27,7 +27,7 @@
 		date is 2021-12-17,
 		comment is 'Coroutining predicates.',
 		remarks is [
-			'Supported backend Prolog systems' - 'ECLiPSe, XVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, and YAP.'
+			'Supported backend Prolog systems' - 'ECLiPSe, SICStus Prolog, SWI-Prolog, Trealla Prolog, XVM, and YAP.'
 		]
 	]).
 

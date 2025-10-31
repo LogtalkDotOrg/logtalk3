@@ -55,7 +55,7 @@ run this example; see the `NOTES.txt` file for details
 
 When running this example from the terminal (i.e., not as a notebook),
 start by setting the Java `CLASSPATH` environment variable. Three backend
-Prolog systems are supported: XVM, SWI-Prolog, and YAP. There's a Bash
+Prolog systems are supported: SWI-Prolog, XVM, and YAP. There's a Bash
 script file that sets the `CLASSPATH` environment variable when sourced:
 
 ```text

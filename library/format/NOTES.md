@@ -90,8 +90,8 @@ systems. See the section below on testing.
 Only some of the supported Prolog backends provide implementations of the
 `format/2-3` predicates that allow using not only an atom or a list of
 character codes for the format string (as de facto standard) but also using
-a list of characters. These currently include ECLiPSe, GNU Prolog, XVM,
-SICStus Prolog, SWI-Prolog, Trealla Prolog, and YAP. Therefore, when wide
+a list of characters. These currently include ECLiPSe, GNU Prolog, SICStus
+Prolog, SWI-Prolog, Trealla Prolog, XVM, and YAP. Therefore, when wide
 portability is sought, atoms must be used for the format specifier argument
 as they bypass any dependency on the `double_quotes` standard Prolog flag.
 Some systems, like Tau Prolog, only accept a list of characters for the

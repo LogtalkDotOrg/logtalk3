@@ -1523,7 +1523,7 @@
 			asserta(file_line_hit_count_(File, Line, 1))
 		).
 
-	:- if(predicate_property(get_unbuffered_char(_), built_in)). % e.g. XVM or Trealla Prolog
+	:- if(predicate_property(get_unbuffered_char(_), built_in)). % e.g. Trealla Prolog or XVM
 
 		read_single_char(Char) :-
 			{get_unbuffered_char(Char)}, put_char(Char),

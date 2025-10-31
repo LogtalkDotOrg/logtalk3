@@ -57,7 +57,7 @@ Adds predicates for generating and shrinking random values for selected types to
    - Default character sets: The default character set when using a parameterizable type that takes a character set parameter depends on the type.
    - Default character sets: Entity, predicate, and non-terminal identifier types plus compound and callable types default to an ``ascii_identifier`` functor. Character and character code types default to ``ascii_full``. Other types default to ``ascii_printable``.
    - Caveats: The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.
-   - Unicode limitations: Currently, correct character/code generation is only ensured for XVM and SWI-Prolog as other backends do not provide support for querying a Unicode code point category.
+   - Unicode limitations: Currently, correct character/code generation is only ensured for SWI-Prolog and XVM as other backends do not provide support for querying a Unicode code point category.
 
 | **Inherited public predicates:**
 |    (none)

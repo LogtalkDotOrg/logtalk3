@@ -71,7 +71,7 @@ The two main objects in this library are `java(Reference, ReturnValue)` and
 when calling a void Java method.
 
 The `java` object implements utility predicates. For some backend Java
-interfaces such as JPL (available in XVM, SWI-Prolog, and YAP) there is
+interfaces such as JPL (available in SWI-Prolog, XVM, and YAP) there is
 also a `java_hook` hook object for removing any overhead when using this
 library abstraction.
 

@@ -283,7 +283,7 @@
 <li><p>Meta-types: Meta-types are types that have one or more sub-type arguments. E.g. <code class="docutils literal notranslate"><span class="pre">var_or(Type)</span></code>. The sub-types of a meta-type can be enumerated by defining a clause for the <code class="docutils literal notranslate"><span class="pre">meta_type/3</span></code> multifile predicate.</p></li>
 <li><p>Character sets: When testing character or character code based terms (e.g., atom), it is possible to choose a character set (<code class="docutils literal notranslate"><span class="pre">ascii_identifier</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_printable</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_full</span></code>, <code class="docutils literal notranslate"><span class="pre">byte</span></code>, <code class="docutils literal notranslate"><span class="pre">unicode_bmp</span></code>, or <code class="docutils literal notranslate"><span class="pre">unicode_full</span></code>) using the parameterizable types.</p></li>
 <li><p>Caveats: The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.</p></li>
-<li><p>Unicode limitations: Currently, correct character/code type-checking is only ensured for XVM and SWI-Prolog as other backends do not provide support for querying a Unicode code point category.</p></li>
+<li><p>Unicode limitations: Currently, correct character/code type-checking is only ensured for SWI-Prolog and XVM as other backends do not provide support for querying a Unicode code point category.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">

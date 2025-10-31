@@ -767,13 +767,13 @@ identifiers (atoms):
 - ECLiPSe: ``eclipse``
 - GNU Prolog: ``gnu``
 - JIProlog: ``ji``
-- XVM: ``xvm``
 - Quintus Prolog: ``quintus``
 - SICStus Prolog: ``sicstus``
 - SWI-Prolog: ``swi``
 - Tau Prolog: ``tau``
 - Trealla Prolog: ``trealla``
 - XSB: ``xsb``
+- XVM: ``xvm``
 - YAP: ``yap``
 
 Pack development

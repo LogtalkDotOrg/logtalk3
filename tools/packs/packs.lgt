@@ -2503,13 +2503,13 @@
 	backend(eclipse, 'ECLiPSe').
 	backend(gnu,     'GNU Prolog').
 	backend(ji,      'JIProlog').
-	backend(xvm,     'XVM').
 	backend(quintus, 'Quintus Prolog').
 	backend(sicstus, 'SICStus Prolog').
 	backend(swi,     'SWI-Prolog').
 	backend(tau,     'Tau Prolog').
 	backend(trealla, 'Trealla Prolog').
 	backend(xsb,     'XSB').
+	backend(xvm,     'XVM').
 	backend(yap,     'YAP').
 
 	backends([], []).

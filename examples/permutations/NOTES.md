@@ -53,7 +53,7 @@ logtalk_load(permutations(loader)).
 ```
 
 Some example benchmark queries for backend Prolog compilers implementing
-the `time/1` timing predicate (e.g., SWI-Prolog, Trealla Prolog, YAP, XVM, 
+the `time/1` timing predicate (e.g., SWI-Prolog, Trealla Prolog, XVM, YAP, 
 and others):
 
 ```logtalk
