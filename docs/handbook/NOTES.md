@@ -42,7 +42,7 @@ pr AI coding tool, you may need to split in several files for indexing due
 to file size limitations. For example, using the POSIX `split` utility
 command:
 
-	$ split -p '## (Reference Manual|Developer Tools)' TheLogtalkHandbook-3.95.0.md TheLogtalkHandbook_
+	$ split -p '## (Reference Manual|Developer Tools)' TheLogtalkHandbook-3.96.0.md TheLogtalkHandbook_
 	$ for file in "TheLogtalkHandbook_"*; do mv "$file" "${file}.md"; done
 
 Experiment with the section headers until all generated files are below
