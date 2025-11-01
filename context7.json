@@ -3,24 +3,29 @@
   "projectTitle": "Logtalk",
   "description": "Object-oriented logic programming language that extends and leverages Prolog",
   "folders": [
-    "core",
-    "library",
-    "tools",
     "docs",
-    "examples",
-    "contributions",
-	"ports",
-	"tests/logtalk"
+    "examples"
   ],
   "excludeFolders": [
     "adapters",
     "coding",
+    "contributions",
+    "core",
+	"docs/apis/_sources",
+	"docs/apis/_static",
+	"docs/apis/sources",
+	"docs/handbook/_sources",
+	"docs/handbook/_static",
+	"docs/handbook/sources",
     "integration",
+    "library",
     "paths",
+ 	"ports",
     "samples",
     "scratch",
     "scripts",
-    "tests/prolog"
+    "tests",
+    "tools"
   ],
   "excludeFiles": [
     "ACKNOWLEDGMENTS.md",
@@ -45,6 +50,7 @@
     "Use loader.lgt files for proper dependency management",
     "Place tests in tests.lgt files in the same directory as the code",
 	"Use tester.lgt files to run tests",
+	"Use a settings.lgt file for project/library configuration (e.g., library aliases, scratch directories, verbosity)",
 	"Indent using tabs",
 	"Use snake_case for object, protocol, category, and predicate names",
 	"Use CamelCase for variable names",
