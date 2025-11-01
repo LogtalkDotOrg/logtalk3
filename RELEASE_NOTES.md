@@ -25,7 +25,11 @@ RELEASE NOTES
 3.96.0 - November ??, 2025
 ==========================
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
 
+* FIXED: The VSCode support to workaround the non-compliant implementation of
+multifile predicates in Ciao Prolog.
 
 
 3.95.0 - October 30, 2025

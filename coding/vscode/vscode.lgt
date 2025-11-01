@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:82:3,
+		version is 0:82:4,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-10-28,
+		date is 2025-11-01,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1992,8 +1992,7 @@
 		;	logtalk::expand_library_path(logtalk_user('scratch/.messages'), Messages),
 			open(Messages, append, Stream, [alias(vscode_scratch_messages)])
 		),
-		logtalk::message_prefix_stream(comment, core, Prefix, _),
-		logtalk::print_message_tokens(Stream, Prefix, ['[ compiling ~w ... ]'-[File], nl, nl]),
+		logtalk::print_message_tokens(Stream, '% ', ['[ compiling ~w ... ]'-[File], nl, nl]),
 		close(Stream),
 		fail.
 	% lgtunit test results
