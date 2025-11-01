@@ -1,0 +1,54 @@
+{
+  "$schema": "https://context7.com/schema/context7.json",
+  "projectTitle": "Logtalk",
+  "description": "Object-oriented logic programming language that extends and leverages Prolog",
+  "folders": [
+    "core",
+    "library",
+    "tools",
+    "docs",
+    "examples",
+    "contributions",
+	"ports",
+	"tests/logtalk"
+  ],
+  "excludeFolders": [
+    "adapters",
+    "coding",
+    "integration",
+    "paths",
+    "samples",
+    "scratch",
+    "scripts",
+    "tests/prolog"
+  ],
+  "excludeFiles": [
+    "ACKNOWLEDGMENTS.md",
+    "BIBLIOGRAPHY.bib",
+    "CITATION.cff",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "CUSTOMIZE.md",
+    "INSTALL.md",
+    "LICENSE.txt",
+    "NOTICE.txt",
+    "QUICK_START.md",
+    "README.md",
+    "RELEASE_NOTES.md",
+    "UPGRADING.md",
+    "VERSION.txt",
+    "TODO.txt"
+  ],
+  "rules": [
+    "Always use proper Logtalk syntax for object-oriented predicates and messages",
+    "Follow Logtalk's file naming conventions: .lgt extension for source files",
+    "Use loader.lgt files for proper dependency management",
+    "Place tests in tests.lgt files in the same directory as the code",
+	"Use tester.lgt files to run tests",
+	"Indent using tabs",
+	"Use snake_case for object, protocol, category, and predicate names",
+	"Use CamelCase for variable names",
+	"Prefer explicit public/1, protected/1, and private/1 declarations for predicates",
+	"Use info/2 and mode/2 directives for predicate documentation and mode declarations"
+  ]
+}
