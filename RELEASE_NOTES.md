@@ -31,6 +31,12 @@ Prolog adapter and integration files
 * ADDED: Internal predicate, `'$lgt_time_stamp'/1`, for retrieving an opaque
 but comparable time stamp for the current time.
 
+Library
+-------
+
+* IMPROVED: The `os::time_stamp/1` predicate implementation for SICStus Prolog,
+Trealla Prolog, and YAP.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
