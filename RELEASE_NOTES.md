@@ -51,7 +51,7 @@ Library
 -------
 
 * IMPROVED: The `os::time_stamp/1` predicate implementation for SICStus Prolog,
-Trealla Prolog, and YAP.
+Trealla Prolog, XSB, and YAP.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

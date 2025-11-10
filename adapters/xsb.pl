@@ -22,7 +22,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- import datime/1 from standard.
+:- import epoch_milliseconds/2 from machine.
 :- import expand_atom/2 from standard.
 :- import term_hash/3 from machine.
 :- import sys_pid/1 from shell.
@@ -550,7 +550,8 @@
 % returns an opaque but comparable time stamp for the current time
 
 '$lgt_time_stamp'(TimeStamp) :-
-	datime(TimeStamp).
+	epoch_milliseconds(Seconds, Milliseconds),
+	TimeStamp is Seconds + Milliseconds / 1000.
 
 
 

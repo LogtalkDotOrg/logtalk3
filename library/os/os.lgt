@@ -38,7 +38,7 @@
 	:- use_module(library(lists)).
 	:- use_module(library(statistics)).
 :- elif(current_logtalk_flag(prolog_dialect, xsb)).
-	:- import(from(/(datime,1), standard)).
+	:- import(from(/(epoch_milliseconds,2), machine)).
 	:- import(from(/(get_localdate,6), standard)).
 	:- import(from(/(expand_atom,2), standard)).
 	:- import(from(/(xsb_configuration,2), xsb_configuration)).
@@ -51,7 +51,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:101:3,
+		version is 1:101:4,
 		author is 'Paulo Moura',
 		date is 2025-11-10,
 		comment is 'Portable operating-system access predicates.',
@@ -476,7 +476,8 @@
 			{expand_atom(DollarVariable, Value)}.
 
 		time_stamp(Time) :-
-			{datime(Time)}.
+			{epoch_milliseconds(Seconds, Milliseconds)},
+			Time is Seconds + Milliseconds / 1000.
 
 		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
 			{get_localdate(Year, Month, Day, Hours, Minutes, Seconds)}.
