@@ -25,6 +25,14 @@ RELEASE NOTES
 3.96.0 - November ??, 2025
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: The implementation of the `logtalk_make/0-1` predicates for the
+target `all` to avoid or minimize compilation warnings due to out-of-order
+loading of modified source files. This works best with backends that provide
+sub-second time stamps.
+
 Prolog adapter and integration files
 ------------------------------------
 

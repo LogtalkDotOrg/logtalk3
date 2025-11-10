@@ -145,6 +145,8 @@
 % '$lgt_included_file_'(File, Line, MainBasename, MainDirectory, TimeStamp)
 :- multifile('$lgt_included_file_'/5).
 :- dynamic('$lgt_included_file_'/5).
+% '$lgt_loaded_file_time_'(SourceFile, TimeStamp)
+:- dynamic('$lgt_loaded_file_time_'/2).
 % '$lgt_failed_file_'(SourceFile)
 :- dynamic('$lgt_failed_file_'/1).
 % '$lgt_parent_file_'(SourceFile, ParentSourceFile)
@@ -2942,13 +2944,25 @@ logtalk_make(Target) :-
 	fail.
 % recompilation of changed source files since last loaded
 '$lgt_logtalk_make'(all) :-
-	'$lgt_loaded_file_'(Basename, Directory, _, Flags, _, _, LoadingTimeStamp),
-	atom_concat(Directory, Basename, Path),
-	'$lgt_file_exists'(Path),
-	'$lgt_file_modification_time'(Path, CurrentTimeStamp),
-	LoadingTimeStamp @< CurrentTimeStamp,
-	\+ '$lgt_member'(reload(skip), Flags),
-	logtalk_load(Path, Flags),
+	findall(
+		data(LoadingTimeStamp, Path, Flags),
+		(	'$lgt_loaded_file_'(Basename, Directory, _, Flags, _, _, TimeStamp),
+			atom_concat(Directory, Basename, Path),
+			'$lgt_file_exists'(Path),
+			'$lgt_file_modification_time'(Path, CurrentTimeStamp),
+			TimeStamp @< CurrentTimeStamp,
+			\+ '$lgt_member'(reload(skip), Flags),
+			'$lgt_loaded_file_time_'(Path, LoadingTimeStamp)
+		),
+		TimesPaths
+	),
+	sort(TimesPaths, SortedTimesPaths),
+	% load files in the same order they were loaded before to avoid
+	% or minimize compilation warnings due to out-of-order loading
+	forall(
+		'$lgt_member'(data(_, Path, Flags), SortedTimesPaths),
+		logtalk_load(Path, Flags)
+	),
 	fail.
 % recompilation of included source files since last loaded
 '$lgt_logtalk_make'(all) :-
@@ -7111,7 +7125,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% load the generated intermediate Prolog file but cope with unexpected error or failure
 	(	(	catch('$lgt_load_prolog_code'(ObjectFile, SourceFile, Options), Error, true) ->
 			(	var(Error) ->
-				true
+				'$lgt_time_stamp'(TimeStamp),
+				retractall('$lgt_loaded_file_time_'(SourceFile, _)),
+				assertz('$lgt_loaded_file_time_'(SourceFile, TimeStamp))
 			;	% an error while loading the generated intermediate Prolog files is usually
 				% caused by backend write_canonical/2 and/or read_term/3 predicate bugs
 				'$lgt_print_message'(error, loading_error(SourceFile, Error)),
