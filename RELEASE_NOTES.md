@@ -35,7 +35,7 @@ time stamps.
 * IMPROVED: The implementation of the `logtalk_make/0-1` predicates for the
 target `all` to avoid or minimize compilation warnings due to out-of-order
 loading of modified source files. This works best with backends that provide
-sub-second time stamps.
+sub-second time stamps. See the `make` tool documentation for details.
 
 Prolog adapter and integration files
 ------------------------------------
@@ -46,6 +46,11 @@ but comparable time stamp for the current time.
 * UPDATED: The ECLiPSe adapter file to use the new `read_term/3` predicate
 `line/1` option introduced in version 7.2#5 for accurate read term starting
 lines.
+
+Documentation
+-------------
+
+ADDED: A "Known issues" section to the documentation of the `make` tool.
 
 Library
 -------

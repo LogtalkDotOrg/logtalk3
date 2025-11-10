@@ -85,6 +85,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">make</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#help-with-warnings">Help with warnings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="packs.html"><code class="docutils literal notranslate"><span class="pre">packs</span></code></a></li>
@@ -159,6 +160,14 @@ documentation):</p>
 <h2>Help with warnings<a class="headerlink" href="#help-with-warnings" title="Link to this heading"></a></h2>
 <p>Load the <code class="docutils literal notranslate"><span class="pre">tutor</span></code> tool to get help with selected warnings printed by
 the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool.</p>
+</section>
+<section id="known-issues">
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
+<p>The implementation of the <code class="docutils literal notranslate"><span class="pre">logtalk_make/0-1</span></code> predicates for the target
+<code class="docutils literal notranslate"><span class="pre">all</span></code> tries to avoid or minimize compilation warnings due to
+out-of-order loading of modified source files. This works best with
+backends that provide sub-second time stamps such as JIProlog,
+SWI-Prolog, XSB, XVM, and YAP.</p>
 </section>
 </section>
 

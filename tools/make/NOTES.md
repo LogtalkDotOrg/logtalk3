@@ -48,3 +48,12 @@ Help with warnings
 
 Load the `tutor` tool to get help with selected warnings printed
 by the `make` tool.
+
+
+Known issues
+------------
+
+The implementation of the `logtalk_make/0-1` predicates for the target `all`
+tries to avoid or minimize compilation warnings due to out-of-order loading of
+modified source files. This works best with backends that provide sub-second
+time stamps such as JIProlog, SWI-Prolog, XSB, XVM, and YAP.
