@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Property `loaded/1` to the `logtalk::loaded_file_property/2`
+predicate for retrieving file loading times as opaque but comparable
+time stamps.
+
 * IMPROVED: The implementation of the `logtalk_make/0-1` predicates for the
 target `all` to avoid or minimize compilation warnings due to out-of-order
 loading of modified source files. This works best with backends that provide

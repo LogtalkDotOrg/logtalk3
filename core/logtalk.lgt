@@ -28,9 +28,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 3:3:0,
+		version is 3:4:0,
 		author is 'Paulo Moura',
-		date is 2025-10-06,
+		date is 2025-11-10,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
@@ -242,6 +242,7 @@
 			'Property ``text_properties/1``' - 'List of the file text properties (``encoding/1`` and ``bom/1``). Empty if no ``encoding/1`` directive is present and the stream used for reading the file does not have a ``bom/1`` (or equivalent) property.',
 			'Property ``target/1``' - 'Full path of the generated intermediate Prolog file.',
 			'Property ``modified/1``' - 'File modification time stamp (should be regarded as an opaque but otherwise comparable term).',
+			'Property ``loaded/1``' - 'File loading time stamp (should be regarded as an opaque but otherwise comparable term).',
 			'Property ``parent/1``' - 'Full path of the parent file that loaded the file.',
 			'Property ``includes/2``' - 'Full path of a file included by the file and the line of the ``include/1`` directive.',
 			'Property ``includes/1``' - 'Full path of a file included by the file.',
@@ -651,6 +652,9 @@
 	loaded_file_property(text_properties(TextProperties), _, _, _, _, TextProperties, _, _).
 	loaded_file_property(target(PrologFile), _, _, _, _, _, PrologFile, _).
 	loaded_file_property(modified(TimeStamp), _, _, _, _, _, _, TimeStamp).
+	loaded_file_property(loaded(TimeStamp), Basename, Directory, _, _, _, _, _) :-
+		atom_concat(Directory, Basename, Path),
+		{'$lgt_loaded_file_time_'(Path, TimeStamp)}.
 	loaded_file_property(parent(Parent), Basename, Directory, _, _, _, _, _) :-
 		atom_concat(Directory, Basename, Path),
 		{'$lgt_parent_file_'(Path, Parent)}.
