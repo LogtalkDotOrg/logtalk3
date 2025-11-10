@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on November 12, 2024
+%  Last updated on November 10, 2025
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -612,6 +612,14 @@
 
 '$lgt_directory_files'(Directory, Files) :-
 	directory_files(Directory, Files).
+
+
+% '$lgt_time_stamp'(++ground)
+%
+% returns an opaque but comparable time stamp for the current time
+
+'$lgt_time_stamp'(TimeStamp) :-
+	get_time(TimeStamp).
 
 
 

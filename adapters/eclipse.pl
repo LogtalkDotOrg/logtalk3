@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on November 12, 2024
+%  Last updated on November 10, 2025
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -654,6 +654,14 @@ forall(Generate, Test) :-
 	findall(File1, (member(File0, Files0), atom_string(File1, File0)), Files1),
 	findall(Directory1, (member(Directory0, Directories0), atom_string(Directory1, Directory0)), Directories1),
 	append(['.', '..'| Directories1], Files1, Files).
+
+
+% '$lgt_time_stamp'(++ground)
+%
+% returns an opaque but comparable time stamp for the current time
+
+'$lgt_time_stamp'(TimeStamp) :-
+	get_flag(unix_time, TimeStamp).
 
 
 

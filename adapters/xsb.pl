@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.8.0 or later versions
-%  Last updated on October 29, 2025
+%  Last updated on November 10, 2025
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -22,6 +22,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- import datime/1 from standard.
 :- import expand_atom/2 from standard.
 :- import term_hash/3 from machine.
 :- import sys_pid/1 from shell.
@@ -542,6 +543,14 @@
 
 '$lgt_directory_files'(Directory, Files) :-
 	findall(File, list_directory(Directory, File), Files).
+
+
+% '$lgt_time_stamp'(++ground)
+%
+% returns an opaque but comparable time stamp for the current time
+
+'$lgt_time_stamp'(TimeStamp) :-
+	datime(TimeStamp).
 
 
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for CxProlog 0.98.2 or a later version
-%  Last updated on November 12, 2024
+%  Last updated on November 10, 2025
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -525,6 +525,14 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 	fs_cwd(CurrentDirectory, Directory),
 	fs_files(Files),
 	fs_cwd(_, CurrentDirectory).
+
+
+% '$lgt_time_stamp'(++ground)
+%
+% returns an opaque but comparable time stamp for the current time
+
+'$lgt_time_stamp'(TimeStamp) :-
+	TimeStamp is currtime.
 
 
 

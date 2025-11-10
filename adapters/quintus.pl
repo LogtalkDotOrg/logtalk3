@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on November 12, 2024
+%  Last updated on November 10, 2025
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -22,6 +22,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- [library(date)].
 :- [library(between)].
 :- [library(foreach)].
 :- [library(files)].
@@ -795,6 +796,14 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 	findall(File1, file_member_of_directory(Directory, File1, _), Files1),
 	findall(Directory1, directory_member_of_directory(Directory, Directory1, _), Directories1),
 	append(['.', '..'| Directories1], Files1, Files).
+
+
+% '$lgt_time_stamp'(++ground)
+%
+% returns an opaque but comparable time stamp for the current time
+
+'$lgt_time_stamp'(TimeStamp) :-
+	now(TimeStamp).
 
 
 
