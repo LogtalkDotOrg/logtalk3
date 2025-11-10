@@ -43,6 +43,10 @@ Prolog adapter and integration files
 * ADDED: Internal predicate, `'$lgt_time_stamp'/1`, for retrieving an opaque
 but comparable time stamp for the current time.
 
+* UPDATED: The ECLiPSe adapter file to use the new `read_term/3` predicate
+`line/1` option introduced in version 7.2#5 for accurate read term starting
+lines.
+
 Library
 -------
 

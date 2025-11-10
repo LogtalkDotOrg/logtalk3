@@ -713,7 +713,11 @@ forall(Generate, Test) :-
 
 % '$lgt_read_term'(@stream, -term, +list, -pair(integer,integer))
 
-:- if((get_flag(version_as_list, Version), Version @>= [7,0,35])).
+:- if((get_flag(version_as_list, Version), Version @>= [7,2,5])).
+	'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
+		read_term(Stream, Term, [line(LineBegin), syntax_errors(error)| Options]),
+		get_stream_info(Stream, line, LineEnd).
+:- elif((get_flag(version_as_list, Version), Version @>= [7,0,35])).
 	'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
 		get_stream_info(Stream, line, LineLast),
 		read_term(Stream, Term, [syntax_errors(error)| Options]),
