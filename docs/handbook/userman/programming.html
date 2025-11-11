@@ -282,6 +282,32 @@ application loader file to ensure the availability of the entities
 they define when compiling the application source files (thus enabling
 static binding optimizations).</p></li>
 </ul>
+<p>Note that you can use the <a class="reference external" href="../../apis/logtalk_0.html#logtalk-0-loaded-files-topological-sort-1" title="(in Logtalk APIs v3.96.0)"><span class="xref std std-ref">logtalk::loaded_files_topological_sort/1</span></a>
+and <a class="reference external" href="../../apis/logtalk_0.html#logtalk-0-loaded-files-topological-sort-2" title="(in Logtalk APIs v3.96.0)"><span class="xref std std-ref">logtalk::loaded_files_topological_sort/2</span></a>
+predicates to find an optimal file loading order to eliminate compilation
+warnings due to files being loaded before their dependencies. In the case
+of simple applications with no library dependencies:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>?- {loader}.  % load you application code
+...
+
+?- logtalk::loaded_files_topological_sort(Sorted).
+Sorted = [...]
+</pre></div>
+</div>
+<p>Use the file basenames from the returned list to update the application
+driver files (typically, <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> and <a href="#id2"><span class="problematic" id="id3">``</span></a>tester.lgt`).</p>
+<p>In more complex applications with external library dependencies, define
+a library alies for your application (e.g., <code class="docutils literal notranslate"><span class="pre">my_app</span></code>) and use ot get an
+initial list of your application files:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>?- {my_app(loader)}.  % load you application code
+...
+
+?- findall(Path, logtalk::loaded_file_property(Path, library(my_app)), Paths),
+   logtalk::loaded_files_topological_sort(Paths, Sorted).
+   Sorted = [...]
+</pre></div>
+</div>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">Sorted</span></code> list will include the loader file itself.</p>
 <section id="naming-conventions">
 <h3>Naming conventions<a class="headerlink" href="#naming-conventions" title="Link to this heading"></a></h3>
 <p>When defining each entity in its own source file, it is recommended that

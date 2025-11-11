@@ -160,6 +160,38 @@ When writing a Logtalk source file, the following advice applies:
   they define when compiling the application source files (thus enabling
   static binding optimizations).
 
+Note that you can use the :ref:`logtalk::loaded_files_topological_sort/1 <apis:logtalk/0::loaded_files_topological_sort/1>`
+and :ref:`logtalk::loaded_files_topological_sort/2 <apis:logtalk/0::loaded_files_topological_sort/2>`
+predicates to find an optimal file loading order to eliminate compilation
+warnings due to files being loaded before their dependencies. In the case
+of simple applications with no library dependencies:
+
+.. code-block:: text
+
+   ?- {loader}.  % load you application code
+   ...
+
+   ?- logtalk::loaded_files_topological_sort(Sorted).
+   Sorted = [...]
+
+Use the file basenames from the returned list to update the application
+driver files (typically, ``loader.lgt`` and ``tester.lgt`).
+
+In more complex applications with external library dependencies, define
+a library alies for your application (e.g., ``my_app``) and use ot get an
+initial list of your application files:
+
+.. code-block:: text
+
+   ?- {my_app(loader)}.  % load you application code
+   ...
+
+   ?- findall(Path, logtalk::loaded_file_property(Path, library(my_app)), Paths),
+      logtalk::loaded_files_topological_sort(Paths, Sorted).
+      Sorted = [...]
+
+Note that the ``Sorted`` list will include the loader file itself.
+
 Naming conventions
 ^^^^^^^^^^^^^^^^^^
 

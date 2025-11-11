@@ -183,10 +183,14 @@ as the <a class="reference internal" href="../devtools/debugger.html"><span clas
 <section id="source-code-compilation-order">
 <h2>Source code compilation order<a class="headerlink" href="#source-code-compilation-order" title="Link to this heading"></a></h2>
 <p>Static binding optimizations, notably message sending and super calls,
-require referenced code to be compiled before the calls so that the
-calls can be resolved at compile time. The compiler prints warnings
-when the file compilation/loading order is not ideal. See also the
-section below on circular references.</p>
+require referenced code to be compiled before the calls so that the calls
+can be resolved at compile time. The compiler prints warnings when the file
+compilation/loading order is not ideal (controlled by the <a class="reference internal" href="programming.html#flag-unknown-entities"><span class="std std-ref">unknown_entities</span></a>
+flag). See the <a class="reference internal" href="programming.html#programming-source-files"><span class="std std-ref">Source files</span></a> section on using the
+<a class="reference external" href="../../apis/logtalk_0.html#logtalk-0-loaded-files-topological-sort-1" title="(in Logtalk APIs v3.96.0)"><span class="xref std std-ref">logtalk::loaded_files_topological_sort/1</span></a>
+and <a class="reference external" href="../../apis/logtalk_0.html#logtalk-0-loaded-files-topological-sort-2" title="(in Logtalk APIs v3.96.0)"><span class="xref std std-ref">logtalk::loaded_files_topological_sort/2</span></a>
+predicates to find an optimal file loading order. See the <a class="reference internal" href="programming.html#programming-source-files"><span class="std std-ref">Source files</span></a>
+section for details. See also the section below on circular references.</p>
 </section>
 <section id="local-predicate-calls">
 <h2>Local predicate calls<a class="headerlink" href="#local-predicate-calls" title="Link to this heading"></a></h2>
@@ -311,9 +315,7 @@ relatively costly and should be avoided if possible as they prevent using
 static binding for the messages sent from the first loaded object to the
 second object. The <a class="reference internal" href="../refman/predicates/logtalk_make_1.html#predicates-logtalk-make-1"><span class="std std-ref">logtalk_make(circular)</span></a>
 goal (or its <code class="docutils literal notranslate"><span class="pre">{&#64;}</span></code> top-level abbreviation) can be used to scan for circular
-entity dependencies. The linter also warns by default about non-ideal file
-loading order (controlled by the <a class="reference internal" href="programming.html#flag-unknown-entities"><span class="std std-ref">unknown_entities</span></a>
-flag).</p>
+entity dependencies.</p>
 </section>
 <section id="debug-mode-overhead">
 <h2>Debug mode overhead<a class="headerlink" href="#debug-mode-overhead" title="Link to this heading"></a></h2>

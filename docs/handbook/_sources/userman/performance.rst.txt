@@ -60,10 +60,14 @@ Source code compilation order
 -----------------------------
 
 Static binding optimizations, notably message sending and super calls,
-require referenced code to be compiled before the calls so that the
-calls can be resolved at compile time. The compiler prints warnings
-when the file compilation/loading order is not ideal. See also the
-section below on circular references.
+require referenced code to be compiled before the calls so that the calls
+can be resolved at compile time. The compiler prints warnings when the file
+compilation/loading order is not ideal (controlled by the :ref:`unknown_entities <flag_unknown_entities>`
+flag). See the :ref:`programming_source_files` section on using the
+:ref:`logtalk::loaded_files_topological_sort/1 <apis:logtalk/0::loaded_files_topological_sort/1>`
+and :ref:`logtalk::loaded_files_topological_sort/2 <apis:logtalk/0::loaded_files_topological_sort/2>`
+predicates to find an optimal file loading order. See the :ref:`programming_source_files`
+section for details. See also the section below on circular references.
 
 Local predicate calls
 ---------------------
@@ -201,9 +205,7 @@ relatively costly and should be avoided if possible as they prevent using
 static binding for the messages sent from the first loaded object to the
 second object. The :ref:`logtalk_make(circular) <predicates_logtalk_make_1>`
 goal (or its ``{@}`` top-level abbreviation) can be used to scan for circular
-entity dependencies. The linter also warns by default about non-ideal file
-loading order (controlled by the :ref:`unknown_entities <flag_unknown_entities>`
-flag).
+entity dependencies.
 
 Debug mode overhead
 -------------------

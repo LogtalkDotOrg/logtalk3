@@ -266,7 +266,7 @@
 	:- mode(loaded_files_topological_sort(+list(atom), --list(atom)), one).
 	:- info(loaded_files_topological_sort/2, [
 		comment is 'Sorts a list of full paths for loaded files by dependencies.',
-		argnames is ['Path', 'Sorted']
+		argnames is ['Paths', 'Sorted']
 	]).
 
 	:- public(file_type_extension/2).

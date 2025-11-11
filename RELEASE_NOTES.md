@@ -48,6 +48,9 @@ Documentation
 
 * ADDED: A "Known issues" section to the documentation of the `make` tool.
 
+* UPDATED: The Handbook on finding an optimal file loading order using the new
+`logtalk::loaded_files_topological_sort/1-2` predicates.
+
 Library
 -------
 

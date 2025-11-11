@@ -484,7 +484,7 @@ Sorts a list of full paths for loaded files by dependencies.
 |    ``static``
 
 | **Template:**
-|    ``loaded_files_topological_sort(Path,Sorted)``
+|    ``loaded_files_topological_sort(Paths,Sorted)``
 | **Mode and number of proofs:**
 |    ``loaded_files_topological_sort(+list(atom),--list(atom))`` - ``one``
 
