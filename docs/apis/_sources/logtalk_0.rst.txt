@@ -14,8 +14,8 @@ Built-in object providing message printing, debugging, library, source file, and
 |    ``built_in``
 
 | **Author:** Paulo Moura
-| **Version:** 3:3:0
-| **Date:** 2025-10-06
+| **Version:** 3:4:0
+| **Date:** 2025-11-11
 
 | **Compilation flags:**
 |    ``static, built_in, context_switching_calls, threaded``
@@ -449,6 +449,44 @@ Enumerates, by backtracking, loaded file properties.
     - Property ``protocol/1``: Identifier for a protocol defined in the file.
     - Property ``category/3``: Identifier for a category defined in the file and the start and end lines of its definition.
     - Property ``category/1``: Identifier for a category defined in the file.
+
+
+------------
+
+.. index:: loaded_files_topological_sort/1
+.. _logtalk/0::loaded_files_topological_sort/1:
+
+``loaded_files_topological_sort/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a list of full paths for all loaded user-defined files sorted by dependencies.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``loaded_files_topological_sort(Sorted)``
+| **Mode and number of proofs:**
+|    ``loaded_files_topological_sort(--list(atom))`` - ``one``
+
+
+------------
+
+.. index:: loaded_files_topological_sort/2
+.. _logtalk/0::loaded_files_topological_sort/2:
+
+``loaded_files_topological_sort/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Sorts a list of full paths for loaded files by dependencies.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``loaded_files_topological_sort(Path,Sorted)``
+| **Mode and number of proofs:**
+|    ``loaded_files_topological_sort(+list(atom),--list(atom))`` - ``one``
 
 
 ------------

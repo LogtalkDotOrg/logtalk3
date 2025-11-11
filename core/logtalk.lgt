@@ -28,9 +28,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 3:3:0,
+		version is 3:4:0,
 		author is 'Paulo Moura',
-		date is 2025-10-06,
+		date is 2025-11-11,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
@@ -253,6 +253,20 @@
 			'Property ``category/3``' - 'Identifier for a category defined in the file and the start and end lines of its definition.',
 			'Property ``category/1``' - 'Identifier for a category defined in the file.'
 		]
+	]).
+
+	:- public(loaded_files_topological_sort/1).
+	:- mode(loaded_files_topological_sort(--list(atom)), one).
+	:- info(loaded_files_topological_sort/1, [
+		comment is 'Returns a list of full paths for all loaded user-defined files sorted by dependencies.',
+		argnames is ['Sorted']
+	]).
+
+	:- public(loaded_files_topological_sort/2).
+	:- mode(loaded_files_topological_sort(+list(atom), --list(atom)), one).
+	:- info(loaded_files_topological_sort/2, [
+		comment is 'Sorts a list of full paths for loaded files by dependencies.',
+		argnames is ['Path', 'Sorted']
 	]).
 
 	:- public(file_type_extension/2).
@@ -689,6 +703,21 @@
 	loaded_file_property(library(Library), _, Directory, _, _, _, _, _) :-
 		logtalk_library_path(Library, _),
 		{'$lgt_expand_library_alias'(Library, Directory)}, !.
+
+	loaded_files_topological_sort(Sorted) :-
+		{'$lgt_expand_library_alias'(core, CoreDirectory)}, !,
+		findall(
+			Path,
+			(	{'$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)},
+				Directory \== CoreDirectory,
+				atom_concat(Directory, Basename, Path)
+			),
+			Paths
+		),
+		{'$lgt_file_topological_sort'(Paths, Sorted)}.
+
+	loaded_files_topological_sort(Paths, Sorted) :-
+		{'$lgt_file_topological_sort'(Paths, Sorted)}.
 
 	file_type_extension(Type, Extension) :-
 		{'$lgt_file_extension'(Type, Extension)}.

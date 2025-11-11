@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:10:0,
 		author is 'Paulo Moura',
-		date is 2024-12-19,
+		date is 2025-11-11,
 		comment is 'Unit tests for the "logtalk" built-in object.'
 	]).
 
@@ -134,31 +134,43 @@
 		protocol_property(expanding, file(SourceFile)),
 		logtalk::loaded_file_property(SourceFile, protocol(Protocol, Start, End)), Protocol == expanding, Start =< End.
 
+	% loaded_files_topological_sort/1 tests
+
+	succeeds(logtalk_20) :-
+		logtalk::loaded_files_topological_sort(_TopSorted).
+
+	% loaded_files_topological_sort/2 tests
+
+	succeeds(logtalk_21) :-
+		findall(File, logtalk::loaded_file_property(File, library(core)), Files),
+		sort(Files, Sorted),
+		logtalk::loaded_files_topological_sort(Sorted, _TopSorted).
+
 	% expand_library_path/2 tests
 
-	deterministic(logtalk_20) :-
+	deterministic(logtalk_22) :-
 		logtalk::expand_library_path(core, Path),
 		atom(Path).
 
-	deterministic(logtalk_21) :-
+	deterministic(logtalk_23) :-
 		logtalk::expand_library_path(core(logtalk), Path),
 		atom(Path).
 
-	fails(logtalk_22) :-
+	fails(logtalk_24) :-
 		logtalk::expand_library_path(non_existing_library_alias, _).
 
-	fails(logtalk_23) :-
+	fails(logtalk_25) :-
 		logtalk::expand_library_path(non_existing_library_alias(some_file), _).
 
 	% file_type_extension/2 tests
 
-	succeeds(logtalk_24) :-
+	succeeds(logtalk_26) :-
 		forall(
 			logtalk::file_type_extension(Type, Extension),
 			(atom(Type), atom(Extension))
 		).
 
-	succeeds(logtalk_25) :-
+	succeeds(logtalk_27) :-
 		setof(
 			Type,
 			Extension^(logtalk::file_type_extension(Type, Extension)),
@@ -171,7 +183,7 @@
 			Extensions == [logtalk, object, prolog, source]
 		).
 
-	succeeds(logtalk_26) :-
+	succeeds(logtalk_28) :-
 		findall(
 			LogtalkExtension,
 			logtalk::file_type_extension(logtalk, LogtalkExtension),

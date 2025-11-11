@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Predicates `logtalk::loaded_files_topological_sort/1-2` for sorting
+loaded files by their dependencies.
+
 * IMPROVED: The implementation of the `logtalk_make/0-1` predicates for the
 target `all` to avoid or minimize compilation warnings due to out-of-order
 loading of modified source files. See the `make` tool documentation for
