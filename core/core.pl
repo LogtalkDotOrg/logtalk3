@@ -145,8 +145,6 @@
 % '$lgt_included_file_'(File, Line, MainBasename, MainDirectory, TimeStamp)
 :- multifile('$lgt_included_file_'/5).
 :- dynamic('$lgt_included_file_'/5).
-% '$lgt_loaded_file_time_'(SourceFile, TimeStamp)
-:- dynamic('$lgt_loaded_file_time_'/2).
 % '$lgt_failed_file_'(SourceFile)
 :- dynamic('$lgt_failed_file_'/1).
 % '$lgt_parent_file_'(SourceFile, ParentSourceFile)
@@ -2945,22 +2943,24 @@ logtalk_make(Target) :-
 % recompilation of changed source files since last loaded
 '$lgt_logtalk_make'(all) :-
 	findall(
-		data(LoadingTimeStamp, Path, Flags),
+		Path-Flags,
 		(	'$lgt_loaded_file_'(Basename, Directory, _, Flags, _, _, TimeStamp),
 			atom_concat(Directory, Basename, Path),
 			'$lgt_file_exists'(Path),
 			'$lgt_file_modification_time'(Path, CurrentTimeStamp),
 			TimeStamp @< CurrentTimeStamp,
-			\+ '$lgt_member'(reload(skip), Flags),
-			'$lgt_loaded_file_time_'(Path, LoadingTimeStamp)
+			\+ '$lgt_member'(reload(skip), Flags)
 		),
-		TimesPaths
+		Data
 	),
-	sort(TimesPaths, SortedTimesPaths),
-	% load files in the same order they were loaded before to avoid
+	% load files in the same topological order they were loaded before to avoid
 	% or minimize compilation warnings due to out-of-order loading
+	findall(Path, '$lgt_member'(Path-_, Data), Paths),
+	'$lgt_file_topological_sort'(Paths, PathsSorted),
 	forall(
-		'$lgt_member'(data(_, Path, Flags), SortedTimesPaths),
+		(	'$lgt_member'(Path, PathsSorted),
+			'$lgt_memberchk'(Path-Flags, Data)
+		),
 		logtalk_load(Path, Flags)
 	),
 	fail.
@@ -3277,6 +3277,7 @@ logtalk_make(Target) :-
 % find circular dependencies for logtalk_make(circular); we only check
 % for mutual and triangular dependencies due to the computational cost
 
+% mutual dependency
 '$lgt_circular_reference'((Object1-Object2)-references([Path1-Line1,Path2-Line2])) :-
 	'$lgt_current_object_'(Object1, _, _, _, _, _, _, _, _, _, _),
 	'$lgt_current_object_'(Object2, _, _, _, _, _, _, _, _, _, _),
@@ -3293,7 +3294,7 @@ logtalk_make(Target) :-
 	),
 	'$lgt_circular_reference_object_path'(Object1, Path1),
 	'$lgt_circular_reference_object_path'(Object2, Path2).
-
+% triangular dependency
 '$lgt_circular_reference'((Object1-Object2-Object3)-references([Path1-Line1,Path2-Line2,Path3-Line3])) :-
 	'$lgt_current_object_'(Object1, _, _, _, _, _, _, _, _, _, _),
 	'$lgt_current_object_'(Object2, _, _, _, _, _, _, _, _, _, _),
@@ -3325,6 +3326,168 @@ logtalk_make(Target) :-
 		atom_concat(Directory, File, Path)
 	;	Path = ''
 	).
+
+
+% '$lgt_file_topological_sort'(+list(atom), --list(atom))
+%
+% topological sort for file dependencies using Kahn's algorithm
+
+'$lgt_file_topological_sort'(Files, TopSorted) :-
+	sort(Files, FilesSorted),
+	ground(FilesSorted),
+	findall(
+		File-Dependency,
+		(	'$lgt_select'(File, FilesSorted, Rest),
+			'$lgt_member'(Dependency, Rest),
+			'$lgt_file_dependency'(File, Dependency)
+		),
+		Dependencies
+	),
+	'$lgt_topological_sort'(FilesSorted, Dependencies, TopSorted).
+
+
+'$lgt_topological_sort'(Files, Dependencies, Sorted) :-
+	% initialize in-degree counts for all files
+	'$lgt_init_counts'(Files, Counts0),
+	% count incoming edges (dependencies) for each file
+	'$lgt_count_dependencies'(Dependencies, Files, Counts0, Counts),
+	% select files with zero in-degree (no dependencies)
+	'$lgt_select_zeros'(Counts, Files, Zeros),
+	% perform topological sort
+	'$lgt_topological_sort'(Zeros, Sorted, Dependencies, Files, Counts).
+
+
+'$lgt_init_counts'([], []).
+'$lgt_init_counts'([_| Files], [0| Counts]) :-
+	'$lgt_init_counts'(Files, Counts).
+
+
+'$lgt_count_dependencies'([], _, Counts, Counts).
+'$lgt_count_dependencies'([Dependent-_| Dependencies], Files, Counts0, Counts) :-
+	'$lgt_increment_count'(Files, Dependent, Counts0, Counts1),
+	'$lgt_count_dependencies'(Dependencies, Files, Counts1, Counts).
+
+
+'$lgt_increment_count'([], _, [], []).
+'$lgt_increment_count'([File| Files], Dependent, [Count0 |Counts0], [Count| Counts]) :-
+	(	File == Dependent ->
+		Count is Count0 + 1
+	;	Count = Count0
+	),
+	'$lgt_increment_count'(Files, Dependent, Counts0, Counts).
+
+
+'$lgt_select_zeros'([], [], []).
+'$lgt_select_zeros'([0| Counts], [File| Files], [File| Zeros]) :-
+	!,
+	'$lgt_select_zeros'(Counts, Files, Zeros).
+'$lgt_select_zeros'([_| Counts], [_| Files], Zeros) :-
+	'$lgt_select_zeros'(Counts, Files, Zeros).
+
+
+'$lgt_topological_sort'([], Remaining, _, Files, Counts) :-
+	% if no more zeros, add remaining files with non-zero counts (circular dependencies)
+	'$lgt_collect_remaining'(Files, Counts, Remaining).
+'$lgt_topological_sort'([File| Zeros], [File| Sorted], Dependencies, Files, Counts0) :-
+	% find all files that depend on the current file
+	findall(Dependent, '$lgt_member'(Dependent-File, Dependencies), Dependents),
+	% decrement counts for dependent files and collect new zeros
+	'$lgt_decrement_counts'(Dependents, Files, Counts0, Counts, Zeros, NewZeros),
+	% continue with updated zeros
+	'$lgt_topological_sort'(NewZeros, Sorted, Dependencies, Files, Counts).
+
+
+'$lgt_collect_remaining'([], [], []).
+'$lgt_collect_remaining'([File| Files], [Count| Counts], [File| Remaining]) :-
+	Count > 0,
+	!,
+	'$lgt_collect_remaining'(Files, Counts, Remaining).
+'$lgt_collect_remaining'([_| Files], [_| Counts], Remaining) :-
+	'$lgt_collect_remaining'(Files, Counts, Remaining).
+
+
+'$lgt_decrement_counts'([], _, Counts, Counts, Zeros, Zeros).
+'$lgt_decrement_counts'([Dependent| Dependents], Files, Counts0, Counts, Zeros0, Zeros) :-
+	'$lgt_decrement_count'(Files, Dependent, Counts0, Counts1, Zeros0, Zeros1),
+	'$lgt_decrement_counts'(Dependents, Files, Counts1, Counts, Zeros1, Zeros).
+
+
+'$lgt_decrement_count'([], _, [], [], Zeros, Zeros).
+'$lgt_decrement_count'([File| Files], Dependent, [Count0| Counts0], [Count| Counts], Zeros0, Zeros) :-
+	(	File == Dependent ->
+		Count is Count0 - 1,
+		(	Count =:= 0 ->
+			Zeros1 = [File| Zeros0]
+		;	Zeros1 = Zeros0
+		)
+	;	Count = Count0,
+		Zeros1 = Zeros0
+	),
+	'$lgt_decrement_count'(Files, Dependent, Counts0, Counts, Zeros1, Zeros).
+
+
+'$lgt_file_dependency'(File, Dependency) :-
+	'$lgt_decompose_file_name'(File, Directory, Name, Extension),
+	atom_concat(Name, Extension, Basename),
+	'$lgt_file_dependency'(Basename, Directory, Dependency).
+
+
+'$lgt_file_dependency'(Basename, Directory, Dependency) :-
+	'$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
+	'$lgt_entity_property_'(Object, file_lines(Basename, Directory, _, _)),
+	(	'$lgt_implements_protocol_'(Object, Other, _)
+	;	'$lgt_imports_category_'(Object, Other, _)
+	;	'$lgt_extends_object_'(Object, Other, _)
+	;	'$lgt_instantiates_class_'(Object, Other, _)
+	;	'$lgt_specializes_class_'(Object, Other, _)
+	;	'$lgt_entity_property_calls'(Object, Other::_, _),
+		nonvar(Other)
+	;	'$lgt_entity_property_provides'(Object, _, Other, _),
+		(	'$lgt_current_object_'(Other, _, _, _, _, _, _, _, _, _, _) ->
+			true
+		;	'$lgt_current_category_'(Other, _, _, _, _, _)
+		)
+	),
+	'$lgt_entity_property_'(Other, file_lines(OtherBasename, OtherDirectory, _, _)),
+	(	OtherDirectory \== Directory ->
+		true
+	;	OtherBasename \== Basename
+	),
+	atom_concat(OtherDirectory, OtherBasename, Dependency),
+	!.
+
+'$lgt_file_dependency'(Basename, Directory, Dependency) :-
+	'$lgt_current_category_'(Category, _, _, _, _, _),
+	'$lgt_entity_property_'(Category, file_lines(Basename, Directory, _, _)),
+	(	'$lgt_implements_protocol_'(Category, Other, _)
+	;	'$lgt_extends_category_'(Category, Other, _)
+	;	'$lgt_entity_property_calls'(Category, Other::_, _),
+		nonvar(Other)
+	;	'$lgt_entity_property_provides'(Category, _, Other, _),
+		(	'$lgt_current_object_'(Other, _, _, _, _, _, _, _, _, _, _) ->
+			true
+		;	'$lgt_current_category_'(Other, _, _, _, _, _)
+		)
+	),
+	'$lgt_entity_property_'(Other, file_lines(OtherBasename, OtherDirectory, _, _)),
+	(	OtherDirectory \== Directory ->
+		true
+	;	OtherBasename \== Basename
+	),
+	atom_concat(OtherDirectory, OtherBasename, Dependency),
+	!.
+
+'$lgt_file_dependency'(Basename, Directory, Dependency) :-
+	'$lgt_current_protocol_'(Protocol, _, _, _, _),
+	'$lgt_entity_property_'(Protocol, file_lines(Basename, Directory, _, _)),
+	'$lgt_extends_protocol_'(Protocol, Other, _),
+	'$lgt_entity_property_'(Other, file_lines(OtherBasename, OtherDirectory, _, _)),
+	(	OtherDirectory \== Directory ->
+		true
+	;	OtherBasename \== Basename
+	),
+	atom_concat(OtherDirectory, OtherBasename, Dependency),
+	!.
 
 
 
@@ -7125,9 +7288,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% load the generated intermediate Prolog file but cope with unexpected error or failure
 	(	(	catch('$lgt_load_prolog_code'(ObjectFile, SourceFile, Options), Error, true) ->
 			(	var(Error) ->
-				'$lgt_time_stamp'(TimeStamp),
-				retractall('$lgt_loaded_file_time_'(SourceFile, _)),
-				assertz('$lgt_loaded_file_time_'(SourceFile, TimeStamp))
+				true
 			;	% an error while loading the generated intermediate Prolog files is usually
 				% caused by backend write_canonical/2 and/or read_term/3 predicate bugs
 				'$lgt_print_message'(error, loading_error(SourceFile, Error)),
@@ -28693,6 +28854,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_member'(Head, [Head| _]).
 '$lgt_member'(Head, [_| Tail]) :-
 	'$lgt_member'(Head, Tail).
+
+
+'$lgt_memberchk'(Head, [Head| _]) :-
+	!.
+'$lgt_memberchk'(Head, [_| Tail]) :-
+	'$lgt_memberchk'(Head, Tail).
 
 
 '$lgt_member_var'(V, [H| _]) :-

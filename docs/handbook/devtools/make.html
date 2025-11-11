@@ -165,9 +165,11 @@ the <code class="docutils literal notranslate"><span class="pre">make</span></co
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
 <p>The implementation of the <code class="docutils literal notranslate"><span class="pre">logtalk_make/0-1</span></code> predicates for the target
 <code class="docutils literal notranslate"><span class="pre">all</span></code> tries to avoid or minimize compilation warnings due to
-out-of-order loading of modified source files. This works best with
-backends that provide sub-second time stamps such as JIProlog,
-SWI-Prolog, XSB, XVM, and YAP.</p>
+out-of-order loading of modified source files by performing a file
+topological sort based on the dependencies in the previous versions of
+the files. But it’s always possible that the new versions of the files
+bring changes to those dependencies and thus result in compilation
+warnings that could possibly be avoided with a different loading order.</p>
 </section>
 </section>
 

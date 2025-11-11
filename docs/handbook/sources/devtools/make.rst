@@ -34,6 +34,8 @@ Known issues
 
 The implementation of the ``logtalk_make/0-1`` predicates for the target
 ``all`` tries to avoid or minimize compilation warnings due to
-out-of-order loading of modified source files. This works best with
-backends that provide sub-second time stamps such as JIProlog,
-SWI-Prolog, XSB, XVM, and YAP.
+out-of-order loading of modified source files by performing a file
+topological sort based on the dependencies in the previous versions of
+the files. But it's always possible that the new versions of the files
+bring changes to those dependencies and thus result in compilation
+warnings that could possibly be avoided with a different loading order.

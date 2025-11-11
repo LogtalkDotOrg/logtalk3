@@ -550,6 +550,8 @@
 	default_message_tokens_list_item(Item) -->
 		['~q'- [Item], nl].
 
+	% question asking predicates
+
 	ask_question(Kind, Component, Question, Check, Answer) :-
 		message_term_to_tokens(Question, Kind, Component, Tokens),
 		(	question_hook(Question, Kind, Component, Tokens, Check, Answer) ->
@@ -619,6 +621,8 @@
 	:- endif.
 
 	default_question_prompt_stream(question, _, '> ', user_input).
+
+	% file and library predicates
 
 	expand_library_path(LibraryAlias, AbsolutePath) :-
 		(	atom(LibraryAlias) ->
@@ -692,6 +696,8 @@
 		{'$lgt_file_extension'(logtalk, Extension)}.
 	file_type_extension(source, Extension) :-
 		{'$lgt_file_extension'(prolog, Extension)}.
+
+	% hacking predicates
 
 	compile_aux_clauses(Clauses) :-
 		{'$lgt_compile_aux_clauses'(Clauses)}.
