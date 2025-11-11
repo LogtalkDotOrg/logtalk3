@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on November 10, 2025
+%  Last updated on November 12, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -601,14 +601,6 @@ forall(Generate, Test) :-
 	findall(File1, file_member_of_directory(Directory, File1, _), Files1),
 	findall(Directory1, directory_member_of_directory(Directory, Directory1, _), Directories1),
 	append(['.', '..'| Directories1], Files1, Files).
-
-
-% '$lgt_time_stamp'(++ground)
-%
-% returns an opaque but comparable time stamp for the current time
-
-'$lgt_time_stamp'(TimeStamp) :-
-	now(TimeStamp).
 
 
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.5 (and later versions)
-%  Last updated on November 10, 2025
+%  Last updated on November 12, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -502,14 +502,6 @@ setup_call_cleanup(_, _, _) :-
 
 '$lgt_directory_files'(Directory, Files) :-
 	directory_files(Directory, Files).
-
-
-% '$lgt_time_stamp'(++ground)
-%
-% returns an opaque but comparable time stamp for the current time
-
-'$lgt_time_stamp'(TimeStamp) :-
-	date_time(TimeStamp).
 
 
 

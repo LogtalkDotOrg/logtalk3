@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XVM 10.0.0 and later versions
-%  Last updated on Novwmber 10, 2025
+%  Last updated on April 23, 2025
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -517,14 +517,6 @@
 
 '$lgt_directory_files'(Directory, ['.', '..'| Files]) :-
 	directory_files(Directory, Files).
-
-
-% '$lgt_time_stamp'(++ground)
-%
-% returns an opaque but comparable time stamp for the current time
-
-'$lgt_time_stamp'(TimeStamp) :-
-	time_stamp(TimeStamp).
 
 
 
