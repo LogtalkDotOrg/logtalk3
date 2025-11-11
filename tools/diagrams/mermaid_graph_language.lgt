@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:3:1,
 		author is 'Paulo Moura',
-		date is 2025-09-25,
+		date is 2025-11-11,
 		comment is 'Predicates for generating graph files using Mermaid.'
 	]).
 
@@ -302,7 +302,7 @@
 			put_char(Stream, '_')
 		;	Char == ')' ->
 			put_char(Stream, '_')
-		;	Char == ',' ->
+		;	Char == (',') ->
 			put_char(Stream, '_')
 		;	put_char(Stream, Char)
 		),

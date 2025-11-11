@@ -50,13 +50,19 @@ lines.
 Documentation
 -------------
 
-ADDED: A "Known issues" section to the documentation of the `make` tool.
+* ADDED: A "Known issues" section to the documentation of the `make` tool.
 
 Library
 -------
 
 * IMPROVED: The `os::time_stamp/1` predicate implementation for SICStus Prolog,
 Trealla Prolog, XSB, and YAP.
+
+Tools
+-----
+
+* FIXED: Syntax error when loading the `diagrams` tool using the GNU Prolog
+backend.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
