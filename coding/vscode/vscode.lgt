@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:82:4,
+		version is 0:83:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-11-01,
+		date is 2025-11-12,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -230,6 +230,13 @@
 	:- info(find_parent_file/2, [
 		comment is 'Find the loader file.',
 		argnames is ['Directory', 'File']
+	]).
+
+	:- public(infer_public_predicates/2).
+	:- mode(infer_public_predicates(+atom, +atom), one).
+	:- info(infer_public_predicates/2, [
+		comment is 'Infer the public predicates for the given entity.',
+		argnames is ['Directory', 'Entity']
 	]).
 
 	:- public(debug/0).
@@ -1767,6 +1774,23 @@
 			{format(DataStream, '~w', [Loader])}
 		;	true
 		),
+		close(DataStream),
+		open(Marker, write, MarkerStream),
+		close(MarkerStream).
+
+	% infer public predicates
+
+	infer_public_predicates(Directory, Entity) :-
+		atom_concat(Directory, '/.vscode_infer_public_predicates', Data),
+		atom_concat(Directory, '/.vscode_infer_public_predicates_done', Marker),
+		open(Data, write, DataStream),
+		(	current_object(Entity) ->
+			findall(Predicate, (object_property(Entity, defines(Predicate, _)), \+ object_property(Entity, calls(Predicate, _))), Predicates)
+		;	current_category(Entity) ->
+			findall(Predicate, (category_property(Entity, defines(Predicate, _)), \+ category_property(Entity, calls(Predicate, _))), Predicates)
+		;	Predicates = []
+		),
+		{format(DataStream, '~q', [Predicates])},
 		close(DataStream),
 		open(Marker, write, MarkerStream),
 		close(MarkerStream).

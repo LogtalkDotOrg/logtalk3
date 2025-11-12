@@ -68,6 +68,8 @@ IDEs, text editors, and syntax highlighters support
 
 * ADDED: Support for the Context7 MCP server via a `context7.json` file.
 
+* ADDED: VSCode support predicate `infer_public_predicates/2`.
+
 * FIXED: The VSCode support to workaround the non-compliant implementation of
 multifile predicates in Ciao Prolog.
 
