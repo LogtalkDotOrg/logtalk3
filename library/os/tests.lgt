@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:40:0,
+		version is 0:40:1,
 		author is 'Paulo Moura',
-		date is 2024-12-01,
+		date is 2025-11-13,
 		comment is 'Unit tests for the "os" library.'
 	]).
 
@@ -94,6 +94,9 @@
 		^^assertion(Directory == './'),
 		^^assertion(Name == 'foo'),
 		^^assertion(Extension == '.bar').
+
+	test(os_decompose_file_name_4_05, error(instantiation_error)) :-
+		os::decompose_file_name(_, _, _, _).
 
 	test(os_path_concat_3_01, true(Path == File)) :-
 		this(This),
@@ -179,6 +182,9 @@
 	test(os_file_exists_1_02, false) :-
 		os::file_exists(non_existing_file).
 
+	test(os_file_exists_1_03, error(instantiation_error)) :-
+		os::file_exists(_).
+
 	test(os_file_modification_time_1_01, true(ground(Time))) :-
 		this(This),
 		object_property(This, file(File)),
@@ -187,6 +193,9 @@
 	test(os_file_modification_time_1_02, error(_)) :-
 		os::file_modification_time(non_existing_file, _).
 
+	test(os_file_modification_time_1_03, error(instantiation_error)) :-
+		os::file_modification_time(_, _).
+
 	test(os_file_size_1_01, true(integer(Size))) :-
 		this(This),
 		object_property(This, file(File)),
@@ -194,6 +203,9 @@
 
 	test(os_file_size_1_02, error(_)) :-
 		os::file_size(non_existing_file, _).
+
+	test(os_file_size_1_03, error(instantiation_error)) :-
+		os::file_size(_, _).
 
 	test(os_file_permission_2_01, true) :-
 		this(This),
@@ -208,7 +220,10 @@
 	test(os_file_permission_2_03, error(_)) :-
 		os::file_permission(non_existing_file, _).
 
-	test(os_delete_file_1_01, true) :-
+	test(os_file_permission_2_04, error(instantiation_error)) :-
+		os::file_permission(_, _).
+
+	test(os_delete_file_1_01, true(\+ os::file_exists(TestFile))) :-
 		this(This),
 		object_property(This, file(_,Directory)),
 		os::path_concat(Directory, test_file, TestFile),
@@ -220,6 +235,9 @@
 	test(os_delete_file_1_02, error(_)) :-
 		os::delete_file(non_existing_file).
 
+	test(os_delete_file_1_03, error(instantiation_error)) :-
+		os::delete_file(_).
+
 	test(os_copy_file_2_01, true) :-
 		this(This),
 		object_property(This, file(Path)),
@@ -230,6 +248,9 @@
 
 	test(os_copy_file_2_02, error(_)) :-
 		os::copy_file(non_existing_file, some_file).
+
+	test(os_copy_file_2_03, error(instantiation_error)) :-
+		os::copy_file(_, some_file).
 
 	test(os_rename_file_2_01, true) :-
 		this(This),
@@ -244,7 +265,10 @@
 		os::delete_file(TestFile2).
 
 	test(os_rename_file_2_02, error(_)) :-
-		os::rename_file(non_existing_file, non_existing_file_2).
+		os::rename_file(non_existing_file, some_file).
+
+	test(os_rename_file_2_03, error(instantiation_error)) :-
+		os::rename_file(_, some_file).
 
 	test(os_ensure_file_1_01, true) :-
 		this(This),
@@ -273,6 +297,9 @@
 	test(os_directory_exists_1_02, false) :-
 		os::directory_exists(non_existing_directory).
 
+	test(os_directory_exists_1_03, error(instantiation_error)) :-
+		os::directory_exists(_).
+
 	test(os_make_directory_1_01, true) :-
 		this(This),
 		object_property(This, file(_,Directory)),
@@ -288,6 +315,9 @@
 		os::make_directory(SubDirectory),
 		os::directory_exists(SubDirectory).
 
+	test(os_make_directory_1_03, error(instantiation_error)) :-
+		os::make_directory(_).
+
 	test(os_make_directory_path_1_01, true) :-
 		this(This),
 		object_property(This, file(_,Directory)),
@@ -302,6 +332,9 @@
 		os::make_directory_path(SubDirectory),
 		os::directory_exists(SubDirectory).
 
+	test(os_make_directory_path_1_03, error(instantiation_error)) :-
+		os::make_directory_path(_).
+
 	test(os_delete_directory_1_01, true) :-
 		this(This),
 		object_property(This, file(_,Directory)),
@@ -312,6 +345,9 @@
 
 	test(os_delete_directory_1_02, error(_)) :-
 		os::delete_directory(non_existing_directory).
+
+	test(os_delete_directory_1_03, error(instantiation_error)) :-
+		os::delete_directory(_).
 
 	test(os_delete_directory_contents_1_01, true) :-
 		this(This),
@@ -330,6 +366,9 @@
 	test(os_delete_directory_contents_1_02, error(_)) :-
 		os::delete_directory_contents(non_existing_directory).
 
+	test(os_delete_directory_contents_1_03, error(instantiation_error)) :-
+		os::delete_directory_contents(_).
+
 	test(os_delete_directory_and_contents_1_01, true) :-
 		this(This),
 		object_property(This, file(_,Directory)),
@@ -347,6 +386,9 @@
 	test(os_delete_directory_and_contents_1_02, error(_)) :-
 		os::delete_directory_and_contents(non_existing_directory).
 
+	test(os_delete_directory_and_contents_1_03, error(instantiation_error)) :-
+		os::delete_directory_and_contents(_).
+
 	test(os_working_directory_01, true(atom(WorkingDirectory))) :-
 		os::working_directory(WorkingDirectory).
 
@@ -359,6 +401,9 @@
 
 	test(os_change_directory_02, error(_)) :-
 		os::change_directory(non_existing_directory).
+
+	test(os_change_directory_03, error(instantiation_error)) :-
+		os::change_directory(_).
 
 	test(os_ensure_directory_1_01, true) :-
 		this(This),
@@ -397,6 +442,9 @@
 	test(os_is_absolute_file_name_1_04, false) :-
 		os::is_absolute_file_name('$LOGTALKHOME').
 
+	test(os_is_absolute_file_name_1_05, error(instantiation_error)) :-
+		os::is_absolute_file_name(_).
+
 	test(os_absolute_file_name_2_01, true(ExpandedFile == Path)) :-
 		this(This),
 		object_property(This, file(File,Directory)),
@@ -429,6 +477,9 @@
 
 	test(os_absolute_file_name_2_07, true(ExpandedPath == '/a/b/c/d'), [condition(only_posix_systems)]) :-
 		os::absolute_file_name('/a/b/c/././d', ExpandedPath).
+
+	test(os_absolute_file_name_2_08, error(instantiation_error)) :-
+		os::absolute_file_name(_, _).
 
 	test(os_temporary_directory_1_01, true) :-
 		os::temporary_directory(Directory),
@@ -486,6 +537,9 @@
 
 	test(os_directory_files_2_02, error(_)) :-
 		os::directory_files(non_existing_directory, _).
+
+	test(os_directory_files_2_03, error(instantiation_error)) :-
+		os::directory_files(_, _).
 
 	test(os_directory_files_3_01, true) :-
 		this(This),
@@ -573,11 +627,17 @@
 	test(os_directory_files_3_11, error(_)) :-
 		os::directory_files(non_existing_directory, _, []).
 
+	test(os_directory_files_3_12, error(instantiation_error)) :-
+		os::directory_files(_, _, []).
+
 	test(os_sleep_1_01, true) :-
 		os::sleep(1).
 
 	test(os_sleep_1_02, true) :-
 		os::sleep(1.1).
+
+	test(os_sleep_1_03, error(instantiation_error)) :-
+		os::sleep(_).
 
 	test(os_shell_1_01, true) :-
 		os::shell(cd).
@@ -588,6 +648,9 @@
 		;	os::shell('cd non_existing_directory > /dev/null 2>&1')
 		).
 
+	test(os_shell_1_03, error(instantiation_error)) :-
+		os::shell(_).
+
 	test(os_shell_2_01, true(Exit == 0)) :-
 		os::shell(cd, Exit).
 
@@ -596,6 +659,9 @@
 			os::shell('cd non_existing_directory 2>&1> nul', Exit)
 		;	os::shell('cd non_existing_directory > /dev/null 2>&1', Exit)
 		).
+
+	test(os_shell_2_03, error(instantiation_error)) :-
+		os::shell(_, _).
 
 	% os_types category tests
 

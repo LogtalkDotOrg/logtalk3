@@ -57,6 +57,8 @@ Library
 * IMPROVED: The `os::time_stamp/1` predicate implementation for SICStus Prolog,
 Trealla Prolog, XSB, and YAP.
 
+* IMPROVED: Tests for the `os` library predicates.
+
 Tools
 -----
 
