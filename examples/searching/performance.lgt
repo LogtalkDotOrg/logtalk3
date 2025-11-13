@@ -78,7 +78,8 @@
 		write('maximum branching degree: '), write(Maximum), nl,
 		write('time: '), write(Time), nl.
 
-	report :-		% clean up for next solution
+	report :-
+		% clean up for next solution
 		retractall(time_(_)),
 		retractall(solution_length_(_)),
 		cpu_time(Start),
@@ -118,7 +119,8 @@
 		retractall(transitions_(_, _, _)),
 		retractall(time_(_)),
 		retractall(solution_length_(_)),
-		set_logtalk_flag(events, allow).	% solve/3-4 messages are sent from "user"
+		% solve/3-4 messages are sent from "user"
+		set_logtalk_flag(events, allow).
 
 	stop :-
 		set_logtalk_flag(events, deny),
