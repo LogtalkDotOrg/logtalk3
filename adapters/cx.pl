@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for CxProlog 0.98.2 or a later version
-%  Last updated on November 12, 2024
+%  Last updated on November 13, 2025
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -99,6 +99,10 @@ findall(Term, Goal, List, Tail) :-
 
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
+'$lgt_predicate_property'(Pred, _) :-
+	predicate_property(Pred, undefined),
+	!,
+	fail.
 '$lgt_predicate_property'(Pred, Prop) :-
 	predicate_property(Pred, Prop).
 '$lgt_predicate_property'(setup_call_cleanup(_, _, _), built_in).

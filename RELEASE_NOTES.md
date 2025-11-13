@@ -43,6 +43,10 @@ Prolog adapter and integration files
 `line/1` option introduced in version 7.2#5 for accurate read term starting
 lines.
 
+* FIXED: The CxProlog adapter file to workaround its implementation of the
+`predicate_property/2` built-in predicate returning properties for unknown
+predicates.
+
 Documentation
 -------------
 
