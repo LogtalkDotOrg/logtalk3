@@ -39,11 +39,13 @@ details.
 Prolog adapter and integration files
 ------------------------------------
 
-* UPDATED: The ECLiPSe adapter file to use the new `read_term/3` predicate
+* CHANGED: Trealla Prolog adapter file to require version 2.84.29 or later.
+
+* UPDATED: ECLiPSe adapter file to use the new `read_term/3` predicate
 `line/1` option introduced in version 7.2#5 for accurate read term starting
 lines.
 
-* FIXED: The CxProlog adapter file to workaround its implementation of the
+* FIXED: CxProlog adapter file to workaround its implementation of the
 `predicate_property/2` built-in predicate returning properties for unknown
 predicates.
 

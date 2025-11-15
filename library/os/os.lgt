@@ -51,9 +51,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:101:4,
+		version is 1:102:0,
 		author is 'Paulo Moura',
-		date is 2025-11-10,
+		date is 2025-11-15,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1837,13 +1837,13 @@
 			{getenv(Variable, Value)}.
 
 		time_stamp(Time) :-
-			{now(Time)}.
+			{get_time(Time)}.
 
 		date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds) :-
 			{date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds)}.
 
 		cpu_time(Seconds) :-
-			{get_time(Seconds)}.
+			{cpu_time(Seconds)}.
 
 		wall_time(Seconds) :-
 			{wall_time(Seconds)}.
