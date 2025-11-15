@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on June 5, 2025
+##   Last updated on November 15, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -57,6 +57,11 @@ elif [ -x "$(command -v timeout)" ] && [[ "$(timeout --version)" == *"GNU coreut
 	timeout_command="timeout --foreground -s 9 -k 1.0s"
 elif [ -x "$(command -v gtimeout)" ] && [[ "$(gtimeout --version)" == *"GNU coreutils"* ]] ; then
 	timeout_command="gtimeout --foreground -s 9 -k 1.0s"
+elif [ -x "$(command -v gnutimeout)" ] && [[ "$(gnutimeout --version)" == *"GNU coreutils"* ]] ; then
+	timeout_command="gnutimeout --foreground -s 9 -k 1.0s"
+# third, look for uutils coreutils
+elif [ -x "$(command -v timeout)" ] && [[ "$(timeout --version)" == *"uutils coreutils"* ]] ; then
+	timeout_command="timeout --foreground -s 9 -k 1.0s"
 else
 	timeout_command=""
 fi

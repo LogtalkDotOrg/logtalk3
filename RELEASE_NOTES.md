@@ -71,6 +71,10 @@ Tools
 * FIXED: Syntax error when loading the `diagrams` tool using the GNU Prolog
 backend.
 
+* FIXED: The `logtalk_tester.sh` script to also check for the `gnutimeout`
+alternative name for the GNU `coreutils` command `timeout`. Thanks to Andrew
+Davison for the bug report.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
