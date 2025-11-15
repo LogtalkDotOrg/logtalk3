@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:144:0,
+		version is 1:145:0,
 		author is 'Paulo Moura',
-		date is 2025-09-30,
+		date is 2025-11-15,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -1162,14 +1162,12 @@
 
 	default_backend_flags -->
 		{
-			current_logtalk_flag(prolog_dialect, PrologDialect),
 			current_logtalk_flag(underscore_variables, Underscore),
 			current_logtalk_flag(prolog_compiler, PrologCompiler),
 			current_logtalk_flag(prolog_loader, PrologLoader)
 		},
 		[
 			'Backend Prolog compiler file compilation and loading flags:'-[], nl,
-			'  prolog_dialect:  ~w'-[PrologDialect], nl,
 			'  underscore_variables: ~w'-[Underscore], nl,
 			'  prolog_compiler: ~w'-[PrologCompiler], nl,
 			'  prolog_loader:   ~w'-[PrologLoader], nl
@@ -1183,14 +1181,15 @@
 			current_logtalk_flag(threads, Threads),
 			current_logtalk_flag(modules, Modules0), align(Modules0, Modules),
 			current_logtalk_flag(coinduction, Coinduction),
-			current_logtalk_flag(tabling, Tabling)
+			current_logtalk_flag(tabling, Tabling0), align(Tabling0, Tabling),
+			current_logtalk_flag(prolog_dialect, PrologDialect)
 		},
 		[
 			'Read-only compilation flags (backend Prolog compiler features):'-[], nl,
 			'  unicode: ~w  encoding_directive: ~w'-[Unicode, Encodings], nl,
 			'  engines: ~w  threads:            ~w'-[Engines, Threads], nl,
-			'  modules: ~w  coinduction:        ~w '-[Modules, Coinduction], nl,
-			'  tabling: ~w'-[Tabling], nl, nl
+			'  modules: ~w  coinduction:        ~w'-[Modules, Coinduction], nl,
+			'  tabling: ~w  prolog_dialect:     ~w'-[Tabling, PrologDialect], nl, nl
 		].
 
 	ground_term_copy(Term, GroundTerm) :-

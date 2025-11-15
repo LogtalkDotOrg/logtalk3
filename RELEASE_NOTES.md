@@ -36,6 +36,9 @@ target `all` to avoid or minimize compilation warnings due to out-of-order
 loading of modified source files. See the `make` tool documentation for
 details.
 
+* FIXED: Printing of the default flag values at startup to list the
+`prolog_dialect` flag as a read-only flag.
+
 Prolog adapter and integration files
 ------------------------------------
 
