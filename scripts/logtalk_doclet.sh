@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation automation script
-##   Last updated on March 23, 2025
+##   Last updated on November 15, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -47,9 +47,14 @@ if [[ "$(command -v timeout)" == *"System32"* ]] || [[ "$(command -v timeout)" =
 	timeout_command=""
 # second, look for GNU coreutils package timeout command
 elif [ -x "$(command -v timeout)" ] && [[ "$(timeout --version)" == *"GNU coreutils"* ]] ; then
-	timeout_command="timeout -k 1"
+	timeout_command="timeout --foreground -s 9 -k 1.0s"
 elif [ -x "$(command -v gtimeout)" ] && [[ "$(gtimeout --version)" == *"GNU coreutils"* ]] ; then
-	timeout_command="gtimeout -k 1"
+	timeout_command="gtimeout --foreground -s 9 -k 1.0s"
+elif [ -x "$(command -v gnutimeout)" ] && [[ "$(gnutimeout --version)" == *"GNU coreutils"* ]] ; then
+	timeout_command="gnutimeout --foreground -s 9 -k 1.0s"
+# third, look for uutils coreutils
+elif [ -x "$(command -v timeout)" ] && [[ "$(timeout --version)" == *"uutils coreutils"* ]] ; then
+	timeout_command="timeout --foreground -s 9 -k 1.0s"
 else
 	timeout_command=""
 fi
