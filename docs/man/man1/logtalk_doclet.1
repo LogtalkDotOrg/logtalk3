@@ -1,4 +1,4 @@
-.TH logtalk_doclet 1 "May 2, 2025" "Logtalk 3.92.0" "Logtalk Documentation"
+.TH logtalk_doclet 1 "November 16, 2025" "Logtalk 3.96.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_doclet \- Logtalk script for automating running doclets
@@ -32,7 +32,7 @@ Directory to store the doclet run logs. Default is the local \fI./logtalk_doclet
 Timeout in seconds for running each doclet. Default is \fI0\fR (i.e., disabled).
 .TP
 .BI \-s
-Path prefix to suppress when printing doclet paths. Default is the empty string.
+Path prefix to suppress when printing doclet paths. Default is the user home directory.
 .TP
 .BI \--
 Arguments to be passed to the integration script used to run the doclets (no default).
@@ -55,6 +55,10 @@ One or more doclets timed out while executing. But there are no crashed doclets.
 One or more doclets crashed the process running them.
 
 .SH IMPLEMENTATION NOTES
+When the script detects either a \fItimeout\fR, \fIgtimeout\fR, or \fIgnutimeout\fR command (provided by the GNU \fIcoreutils\fR package), it will use it to run each test set if the timeout option is set to a value greater than zero. This package can be easily installed in POSIX operating-systems (including Linux and macOS) if not provided by default. On Windows operating-systems, the native timeout command is not usable for this purpose. But the Git for Windows installer includes the GNU \fIcoreutils\fR package, which can be used from the bundled Bash shell.
+.TP
+The script kills all created child processes on exit using the \fIpkill\fR command.
+.TP
 The \fIgnunc\fR backend requires creating a GNU Prolog executable that includes Logtalk named \fIgplgtnc\fR and making it available in the system \fIPATH\fR. This executable can be created using the embedding script provided in the Logtalk distribution. For example:
 \fBgprolog_embed_logtalk.sh -c -d ~/collect -s none -- --new-top-level && mv ~/collect/logtalk ~/collect/gplgtnc\fR
 

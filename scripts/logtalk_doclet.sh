@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation automation script
-##   Last updated on November 15, 2025
+##   Last updated on November 16, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -25,8 +25,13 @@
 
 export LC_ALL=C
 
+function cleanup {
+	pkill -9 -P $$
+}
+trap cleanup EXIT
+
 print_version() {
-	echo "$(basename "$0") 2.7"
+	echo "$(basename "$0") 2.8"
 	exit 0
 }
 

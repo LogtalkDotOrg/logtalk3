@@ -71,6 +71,9 @@ Trealla Prolog, XSB, and YAP.
 Tools
 -----
 
+* IMPROVED: The `logtalk_doclet.sh` script now kills all created child
+processes on exit.
+
 * FIXED: Syntax error when loading the `diagrams` tool using the GNU Prolog
 backend.
 

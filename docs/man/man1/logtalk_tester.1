@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "May 2, 2025" "Logtalk 3.92.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "November 16, 2025" "Logtalk 3.96.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -161,7 +161,7 @@ Run all Prolog standards compliance tests with the exception of the \fIcatch_3\f
 \fBlogtalk_tester -p swi -e ".*/(catch_3|cut_0)/.*"\fR
 
 .SH IMPLEMENTATION NOTES
-When the script detects either a \fItimeout\fR or a \fIgtimeout\fR command (provided by the GNU \fIcoreutils\fR package), it will use it to run each test set if the timeout option is set to a value greater than zero. This package can be easily installed in POSIX operating-systems (including Linux and macOS) if not provided by default. On Windows operating-systems, the native timeout command is not usable for this purpose. But the Git for Windows installer includes the GNU \fIcoreutils\fR package, which can be used from the bundled Bash shell.
+When the script detects either a \fItimeout\fR, \fIgtimeout\fR, or \fIgnutimeout\fR command (provided by the GNU \fIcoreutils\fR package), it will use it to run each test set if the timeout option is set to a value greater than zero. This package can be easily installed in POSIX operating-systems (including Linux and macOS) if not provided by default. On Windows operating-systems, the native timeout command is not usable for this purpose. But the Git for Windows installer includes the GNU \fIcoreutils\fR package, which can be used from the bundled Bash shell.
 .TP
 Installation of the GNU \fIsed\fR command, when not available by default, is strongly recommended. The Git for Windows installer includes this command, which can be used from the bundled Bash shell.
 .TP
