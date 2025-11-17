@@ -1820,9 +1820,19 @@
 	expand_files([], _, []).
 	expand_files([File| Files], LoaderDirectory, [File-Path| FilePaths]) :-
 		(	is_absolute_file_name(File) ->
-			Path = File
-		;	atomic_list_concat([LoaderDirectory, '/', File], Path0),
-			{'$lgt_expand_path'(Path0, Path)}
+			Path0 = File
+		;	atomic_list_concat([LoaderDirectory, '/', File], Path0)
+		),
+		(	(	{'$lgt_file_extension'(logtalk, Extension)},
+				atom_concat(Path0, Extension, Path1)
+			;	{'$lgt_file_extension'(prolog, Extension)},
+				atom_concat(Path0, Extension, Path1)
+			;	Path1 = Path0
+			),
+			{'$lgt_expand_path'(Path1, Path)},
+			{'$lgt_file_exists'(Path)} ->
+			true
+		;	{'$lgt_expand_path'(Path0, Path)}
 		),
 		expand_files(Files, LoaderDirectory, FilePaths).
 
