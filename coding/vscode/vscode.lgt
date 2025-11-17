@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:83:0,
+		version is 0:84:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-11-12,
+		date is 2025-11-17,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -237,6 +237,13 @@
 	:- info(infer_public_predicates/2, [
 		comment is 'Infer the public predicates for the given entity.',
 		argnames is ['Directory', 'Entity']
+	]).
+
+	:- public(files_topological_sort/3).
+	:- mode(files_topological_sort(+atom, +atom, +list(atom)), one).
+	:- info(files_topological_sort/3, [
+		comment is 'Sort files by dependencies.',
+		argnames is ['Directory', 'LoaderDirectory', 'Files']
 	]).
 
 	:- public(debug/0).
@@ -1794,6 +1801,42 @@
 		close(DataStream),
 		open(Marker, write, MarkerStream),
 		close(MarkerStream).
+
+	% sort files by dependencies
+
+	files_topological_sort(Directory, LoaderDirectory, Files) :-
+		atom_concat(Directory, '/.vscode_files_topological_sort', Data),
+		atom_concat(Directory, '/.vscode_files_topological_sort_done', Marker),
+		open(Data, write, DataStream),
+		expand_files(Files, LoaderDirectory, FilePaths),
+		findall(Path, member(_-Path, FilePaths), Paths),
+		logtalk::loaded_files_topological_sort(Paths, SortedPaths),
+		findall(File, (member(Path, SortedPaths), memberchk(File-Path, FilePaths)), SortedFiles),
+		{format(DataStream, '~q', [SortedFiles])},
+		close(DataStream),
+		open(Marker, write, MarkerStream),
+		close(MarkerStream).
+
+	expand_files([], _, []).
+	expand_files([File| Files], LoaderDirectory, [File-Path| FilePaths]) :-
+		(	is_absolute_file_name(File) ->
+			Path = File
+		;	atomic_list_concat([LoaderDirectory, '/', File], Path0),
+			{'$lgt_expand_path'(Path0, Path)}
+		),
+		expand_files(Files, LoaderDirectory, FilePaths).
+
+	is_absolute_file_name(Path) :-
+		(	{'$lgt_environment_variable'('COMSPEC', _)} ->
+			sub_atom(Path, 1, 1, _, ':'),
+			sub_atom(Path, 0, 1, _, Drive),
+			(	a @=< Drive, Drive @=< z ->
+				true
+			;	'A' @=< Drive, Drive @=< 'Z'
+			)
+		;	% assume POSIX or POSIX compatible operating-system
+			sub_atom(Path, 0, 1, _, '/')
+		).
 
 	% debugger support
 
