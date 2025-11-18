@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on November 12, 2024
+%  Last updated on November 18, 2025
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -881,9 +881,9 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
 
 % some built-in predicate use a argument order different from the one that become the standard
-'$lgt_prolog_goal_expansion'(read_term(Term, Options), {read_term(Options, Term)}).
-'$lgt_prolog_goal_expansion'(read_term(Stream, Term, Options), {read_term(Stream, Options, Term)}).
-'$lgt_prolog_goal_expansion'(open(File, Mode, Stream, Options), {open(File, Mode, Options, Stream)}).
+'$lgt_prolog_goal_expansion'(read_term(Term, Options), read_term(Options, Term)).
+'$lgt_prolog_goal_expansion'(read_term(Stream, Term, Options), read_term(Stream, Options, Term)).
+'$lgt_prolog_goal_expansion'(open(File, Mode, Stream, Options), open(File, Mode, Options, Stream)).
 % most arithmetic functions are implemented as predicates
 '$lgt_prolog_goal_expansion'(Result is Expression, {Head}) :-
 	'$lgt_quintus_arithmetic_expression_to_head'(Result is Expression, Head),

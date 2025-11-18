@@ -52,6 +52,9 @@ lines.
 `predicate_property/2` built-in predicate returning properties for unknown
 predicates.
 
+* FIXED: Quintus Prolog adapter file to avoid some spurious suspicious call
+warnings when loading tools such as `lgtunit`.
+
 Documentation
 -------------
 
