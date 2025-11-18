@@ -39,6 +39,9 @@ details.
 * FIXED: Printing of the default flag values at startup to list the
 `prolog_dialect` flag as a read-only flag.
 
+* FIXED: The linter warning for the use of Logtalk or Prolog top-level
+shortcuts as directives ignored the `portability` flag.
+
 Prolog adapter and integration files
 ------------------------------------
 

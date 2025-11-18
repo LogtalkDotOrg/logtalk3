@@ -10096,6 +10096,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_term_source_data_'(_, _, _, File, Lines),
 	assertz('$lgt_pp_prolog_term_'((:- Directive), Lines)),
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)) ->
+		'$lgt_compiler_flag'(portability, warning),
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_print_message'(warning(portability), top_level_shortcut_as_directive(File, Lines, Directive))
 	;	true
