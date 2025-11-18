@@ -55,6 +55,9 @@ predicates.
 * FIXED: Quintus Prolog adapter file to avoid some spurious suspicious call
 warnings when loading tools such as `lgtunit`.
 
+* FIXED: Quintus Prolog adapter file missing expansions for some arithmetic
+functions.
+
 Documentation
 -------------
 

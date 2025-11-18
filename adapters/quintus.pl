@@ -930,6 +930,8 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 		ExpressionGoal = (Result is Expression)
 	;	number(Expression) ->
 		ExpressionGoal = (Result is Expression)
+	;	atom(Expression) ->
+		'$lgt_quintus_arithmetic_function_0'(Expression, Result, ExpressionGoal)
 	;	'$lgt_quintus_arithmetic_function_1'(Expression, Result, X, ResultX, Goal) ->
 		'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
 		ExpressionGoal = (GoalX, Goal)
@@ -939,8 +941,13 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 		ExpressionGoal = (GoalX, GoalY, Goal)
 	).
 
+'$lgt_quintus_arithmetic_function_0'(pi, Result, (Result is 3.1415926535897931)).
+
+'$lgt_quintus_arithmetic_function_1'(- X, Result, X, ResultX, Result is - ResultX).
 '$lgt_quintus_arithmetic_function_1'(abs(X), Result, X, ResultX, abs(ResultX, Result)).
 '$lgt_quintus_arithmetic_function_1'(atan(X), Result, X, ResultX, atan(ResultX, Result)).
+'$lgt_quintus_arithmetic_function_1'(acos(X), Result, X, ResultX, (Result0 is 1 - ResultX * ResultX, sqrt(Result0, Result1), Result2 is Result1 / ResultX, atan(Result2, Result))).
+'$lgt_quintus_arithmetic_function_1'(asin(X), Result, X, ResultX, (Result0 is 1 - ResultX * ResultX, sqrt(Result0, Result1), Result2 is ResultX / Result1, atan(Result2, Result))).
 '$lgt_quintus_arithmetic_function_1'(ceiling(X), Result, X, ResultX, ceiling(ResultX, Result)).
 '$lgt_quintus_arithmetic_function_1'(cos(X), Result, X, ResultX, cos(ResultX, Result)).
 '$lgt_quintus_arithmetic_function_1'(exp(X), Result, X, ResultX, exp(ResultX, Result)).
@@ -950,6 +957,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_quintus_arithmetic_function_1'(round(X), Result, X, ResultX, round(ResultX, Result)).
 '$lgt_quintus_arithmetic_function_1'(sign(X), Result, X, ResultX, sign(ResultX, Result)).
 '$lgt_quintus_arithmetic_function_1'(sin(X), Result, X, ResultX, sin(ResultX, Result)).
+'$lgt_quintus_arithmetic_function_1'(tan(X), Result, X, ResultX, (sin(ResultX, ResultSin), cos(ResultX, ResultCos), Result is ResultSin / ResultCos)).
 '$lgt_quintus_arithmetic_function_1'(sqrt(X), Result, X, ResultX, sqrt(ResultX, Result)).
 '$lgt_quintus_arithmetic_function_1'(truncate(X), Result, X, ResultX, truncate(ResultX, Result)).
 
@@ -959,6 +967,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_quintus_arithmetic_function_2'(X / Y, Result, X, ResultX, Y, ResultY, Result is ResultX / ResultY).
 '$lgt_quintus_arithmetic_function_2'(X // Y, Result, X, ResultX, Y, ResultY, Result is ResultX // ResultY).
 '$lgt_quintus_arithmetic_function_2'(X ** Y, Result, X, ResultX, Y, ResultY, pow(ResultX, ResultY, Result)).
+'$lgt_quintus_arithmetic_function_2'(X ^ Y, Result, X, ResultX, Y, ResultY, (pow(ResultX, ResultY, Result0), truncate(Result0, Result))).
 '$lgt_quintus_arithmetic_function_2'(X mod Y, Result, X, ResultX, Y, ResultY, Result is ResultX mod ResultY).
 '$lgt_quintus_arithmetic_function_2'(min(X, Y), Result, X, ResultX, Y, ResultY, min(ResultX, ResultY, Result)).
 '$lgt_quintus_arithmetic_function_2'(max(X, Y), Result, X, ResultX, Y, ResultY, max(ResultX, ResultY, Result)).
