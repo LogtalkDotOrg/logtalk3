@@ -175,7 +175,7 @@ of simple applications with no library dependencies:
    Sorted = [...]
 
 Use the file basenames from the returned list to update the application
-driver files (typically, ``loader.lgt`` and ``tester.lgt`).
+driver files (typically, ``loader.lgt`` and ``tester.lgt``).
 
 In more complex applications with external library dependencies, define
 a library alies for your application (e.g., ``my_app``) and use ot get an
