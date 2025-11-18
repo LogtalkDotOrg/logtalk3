@@ -77,6 +77,9 @@ Trealla Prolog, XSB, and YAP.
 
 * IMPROVED: Tests for the `os` library predicates.
 
+* UPDATED: The `format` library linter checker to be aware of the `~W` control
+sequence that uses two arguments.
+
 Tools
 -----
 

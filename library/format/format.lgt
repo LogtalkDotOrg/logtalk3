@@ -22,9 +22,9 @@
 :- object(format).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2023-10-02,
+		date is 2025-11-18,
 		comment is 'Formatted output predicates.'
 	]).
 
@@ -143,9 +143,16 @@
 		phrase(non_arg_control_sequence, Chars, Rest),
 		!,
 		verify_arguments_chars(Rest, Arguments, Reason).
+	verify_arguments_chars(['~'| Chars], [_], due_to('too few arguments')) :-
+		phrase(double_arg_control_sequence, Chars, _),
+		!.
 	verify_arguments_chars(['~'| Chars], [], due_to('too few arguments')) :-
 		phrase(control_sequence, Chars, _),
 		!.
+	verify_arguments_chars(['~'| Chars], [_, _| Arguments], Reason) :-
+		phrase(double_arg_control_sequence, Chars, Rest),
+		!,
+		verify_arguments_chars(Rest, Arguments, Reason).
 	verify_arguments_chars(['~'| Chars], [_| Arguments], Reason) :-
 		!,
 		phrase(control_sequence, Chars, Rest),
@@ -179,6 +186,9 @@
 
 	char -->
 		[Char], {once(('a' @=< Char, Char @=< 'z'; 'A' @=< Char, Char @=< 'Z'))}.
+
+	double_arg_control_sequence -->
+		['W'].
 
 	codes_to_chars([], []).
 	codes_to_chars([Code| Codes], [Char| Chars]) :-
