@@ -53,7 +53,7 @@ pr AI coding tool, you may need to split in several files for indexing due
 to file size limitations. For example, using the POSIX `split` utility
 command:
 
-	$ split -p '### (debugger|lgtunit|packs)' LogtalkAPIs-3.96.0.md LogtalkAPIs_
+	$ split -p '### (debugger|lgtunit|packs)' LogtalkAPIs-3.97.0.md LogtalkAPIs_
 	$ for file in "LogtalkAPIs_"*; do mv "$file" "${file}.md"; done
 
 Experiment with the section headers until all generated files are below
