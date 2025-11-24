@@ -25,7 +25,11 @@ RELEASE NOTES
 3.97.0 - December ??, 2025
 ==========================
 
+Tests
+-----
 
+* ADDED: Additional tests for the de facto standard `format/2-3` predicates
+from the PIP-0110 standardization work.
 
 
 3.96.0 - November 18, 2025

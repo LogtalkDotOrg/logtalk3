@@ -34,6 +34,8 @@
 		{format("~~", [])},
 		^^text_output_assertion('~', Assertion).
 
+	% ~w control sequence
+
 	test(lgt_format_2_write, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~w", ['ABC'])},
@@ -52,6 +54,8 @@
 		{format("~w", [A])},
 		^^text_output_contents(Chars).
 
+	% ~q control sequence
+
 	test(lgt_format_2_quoted, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~q", ['ABC'])},
@@ -63,10 +67,19 @@
 		{format("~q", [A])},
 		^^text_output_contents(Chars).
 
-	test(lgt_format_2_canonical, true(Assertion)) :-
+	% ~k control sequence
+
+	test(lgt_format_2_canonical_operators, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~k", [(:-a)])},
 		^^text_output_assertion(':-(a)', Assertion).
+
+	test(lgt_format_2_canonical_quotes, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~k", ['A'+'B'])},
+		^^text_output_assertion('+(\'A\',\'B\')', Assertion).
+
+	% ~p control sequence
 
 	test(lgt_format_2_print_default, true(Assertion)) :-
 		^^set_text_output(''),
@@ -197,6 +210,8 @@
 		{format("~a~i~a", [a,b,c])},
 		^^text_output_assertion(ac, Assertion).
 
+	% ~d and ~D control sequences
+
 	test(lgt_format_2_decimal, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~d", [123])},
@@ -227,6 +242,40 @@
 		{format("~*D", [2,1234567890])},
 		^^text_output_assertion('12,345,678.90', Assertion).
 
+	test(lgt_format_2_decimal_invalid_01, error(instantiation_error)) :-
+		^^set_text_output(''),
+		{format("~d", [_])}.
+
+	test(lgt_format_2_decimal_invalid_02, error(instantiation_error)) :-
+		^^set_text_output(''),
+		{format("~D", [_])}.
+
+	test(lgt_format_2_decimal_invalid_07, error(type_error(integer, 123.0))) :-
+		^^set_text_output(''),
+		{format("~d", [123.0])}.
+
+	test(lgt_format_2_decimal_invalid_08, error(type_error(integer, 123.0))) :-
+		^^set_text_output(''),
+		{format("~D", [123.0])}.
+
+	test(lgt_format_2_decimal_invalid_09, error(type_error(evaluable, foo/1))) :-
+		^^set_text_output(''),
+		{format("~d", [foo(bar)])}.
+
+	test(lgt_format_2_decimal_invalid_10, error(type_error(evaluable, foo/1))) :-
+		^^set_text_output(''),
+		{format("~D", [foo(bar)])}.
+
+	test(lgt_format_2_decimal_invalid_11, error(domain_error(_,_))) :-
+		^^set_text_output(''),
+		{format("~*d", [-1,123])}.
+
+	test(lgt_format_2_decimal_invalid_12, error(domain_error(_,_))) :-
+		^^set_text_output(''),
+		{format("~*D", [-1,123])}.
+
+	% ~r and ~R control sequences
+
 	test(lgt_format_2_radix_2, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~2r", [127])},
@@ -237,10 +286,25 @@
 		{format("~8r", [127])},
 		^^text_output_assertion('177', Assertion).
 
+	test(lgt_format_2_radix_10, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~10r", [127])},
+		^^text_output_assertion('127', Assertion).
+
 	test(lgt_format_2_radix_16, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~16r", [127])},
 		^^text_output_assertion('7f', Assertion).
+
+	test(lgt_format_2_radix_36, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~36r", [127])},
+		^^text_output_assertion('3j', Assertion).
+
+	test(lgt_format_2_radix_36_expression, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~36r", [36*36*36-1])},
+		^^text_output_assertion('zzz', Assertion).
 
 	test(lgt_format_2_radix_star, true(Assertion)) :-
 		^^set_text_output(''),
@@ -262,6 +326,16 @@
 		{format("~16R", [127])},
 		^^text_output_assertion('7F', Assertion).
 
+	test(lgt_format_2_radix_upper_case_36, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~36R", [127])},
+		^^text_output_assertion('3J', Assertion).
+
+	test(lgt_format_2_radix_upper_case_36_expression, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~36R", [36*36*36-1])},
+		^^text_output_assertion('ZZZ', Assertion).
+
 	test(lgt_format_2_radix_upper_case_star, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~*R", [16,127])},
@@ -277,21 +351,53 @@
 		{format("~R", [16])},
 		^^text_output_assertion('20', Assertion).
 
-	test(lgt_format_2_radix_invalid_1, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+	test(lgt_format_2_radix_invalid_01, error(instantiation_error)) :-
+		^^set_text_output(''),
+		{format("~r", [_])}.
+
+	test(lgt_format_2_radix_invalid_02, error(instantiation_error)) :-
+		^^set_text_output(''),
+		{format("~R", [_])}.
+
+	test(lgt_format_2_radix_invalid_03, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
 		^^set_text_output(''),
 		{format("~0r", [16])}.
 
-	test(lgt_format_2_radix_invalid_2, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+	test(lgt_format_2_radix_invalid_04, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
 		^^set_text_output(''),
 		{format("~1R", [16])}.
 
-	test(lgt_format_2_radix_invalid_3, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+	test(lgt_format_2_radix_invalid_05, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
 		^^set_text_output(''),
 		{format("~37r", [16])}.
 
-	test(lgt_format_2_radix_invalid_4, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+	test(lgt_format_2_radix_invalid_06, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
 		^^set_text_output(''),
 		{format("~42R", [16])}.
+
+	test(lgt_format_2_radix_invalid_07, error(type_error(integer, 123.0))) :-
+		^^set_text_output(''),
+		{format("~r", [123.0])}.
+
+	test(lgt_format_2_radix_invalid_08, error(type_error(integer, 123.0))) :-
+		^^set_text_output(''),
+		{format("~R", [123.0])}.
+
+	test(lgt_format_2_radix_invalid_09, error(type_error(evaluable, foo/1))) :-
+		^^set_text_output(''),
+		{format("~r", [foo(bar)])}.
+
+	test(lgt_format_2_radix_invalid_10, error(type_error(evaluable, foo/1))) :-
+		^^set_text_output(''),
+		{format("~R", [foo(bar)])}.
+
+	test(lgt_format_2_radix_invalid_11, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		{format("~*r", [-1,123])}.
+
+	test(lgt_format_2_radix_invalid_12, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		{format("~*R", [-1,123])}.
 
 	test(lgt_format_2_float, true(Assertion)) :-
 		^^set_text_output(''),

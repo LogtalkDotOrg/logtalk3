@@ -34,6 +34,8 @@
 		{format(out, "~~", [])},
 		^^text_output_assertion(out, '~', Assertion).
 
+	% ~w control sequence
+
 	test(lgt_format_3_write_numbervars, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		Term = a(_),
@@ -52,6 +54,8 @@
 		{format(out, "~w", [A])},
 		^^text_output_contents(out, Chars).
 
+	% ~q control sequence
+
 	test(lgt_format_3_quoted, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~q", ['ABC'])},
@@ -63,10 +67,19 @@
 		{format(out, "~q", [A])},
 		^^text_output_contents(out, Chars).
 
-	test(lgt_format_3_canonical, true(Assertion)) :-
+	% ~k control sequence
+
+	test(lgt_format_3_canonical_operators, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~k", [(:-a)])},
 		^^text_output_assertion(out, ':-(a)', Assertion).
+
+	test(lgt_format_3_canonical_quotes, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~k", ['A'+'B'])},
+		^^text_output_assertion(out, '+(\'A\',\'B\')', Assertion).
+
+	% ~p control sequence
 
 	test(lgt_format_3_print_default, true(Assertion)) :-
 		^^set_text_output(out, ''),
@@ -197,6 +210,8 @@
 		{format(out, "~a~i~a", [a,b,c])},
 		^^text_output_assertion(out, ac, Assertion).
 
+	% ~d and ~D control sequences
+
 	test(lgt_format_3_decimal, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~d", [123])},
@@ -227,6 +242,40 @@
 		{format(out, "~*D", [2,1234567890])},
 		^^text_output_assertion(out, '12,345,678.90', Assertion).
 
+	test(lgt_format_3_decimal_invalid_01, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~d", [_])}.
+
+	test(lgt_format_3_decimal_invalid_02, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~D", [_])}.
+
+	test(lgt_format_3_decimal_invalid_07, error(type_error(integer, 123.0))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~d", [123.0])}.
+
+	test(lgt_format_3_decimal_invalid_08, error(type_error(integer, 123.0))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~D", [123.0])}.
+
+	test(lgt_format_3_decimal_invalid_09, error(type_error(evaluable, foo/1))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~d", [foo(bar)])}.
+
+	test(lgt_format_3_decimal_invalid_10, error(type_error(evaluable, foo/1))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~D", [foo(bar)])}.
+
+	test(lgt_format_3_decimal_invalid_11, error(domain_error(_,_))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*d", [-1,123])}.
+
+	test(lgt_format_3_decimal_invalid_12, error(domain_error(_,_))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*D", [-1,123])}.
+
+	% ~r and ~R control sequences
+
 	test(lgt_format_3_radix_2, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~2r", [127])},
@@ -237,10 +286,25 @@
 		{format(out, "~8r", [127])},
 		^^text_output_assertion(out, '177', Assertion).
 
+	test(lgt_format_3_radix_10, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~10r", [127])},
+		^^text_output_assertion(out, '127', Assertion).
+
 	test(lgt_format_3_radix_16, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~16r", [127])},
 		^^text_output_assertion(out, '7f', Assertion).
+
+	test(lgt_format_3_radix_36, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~36r", [127])},
+		^^text_output_assertion(out, '3j', Assertion).
+
+	test(lgt_format_3_radix_36_expression, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~36r", [36*36*36-1])},
+		^^text_output_assertion(out, 'zzz', Assertion).
 
 	test(lgt_format_3_radix_star, true(Assertion)) :-
 		^^set_text_output(out, ''),
@@ -262,6 +326,16 @@
 		{format(out, "~16R", [127])},
 		^^text_output_assertion(out, '7F', Assertion).
 
+	test(lgt_format_3_radix_upper_case_36, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~36R", [127])},
+		^^text_output_assertion(out, '3J', Assertion).
+
+	test(lgt_format_3_radix_upper_case_36_expression, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~36R", [36*36*36-1])},
+		^^text_output_assertion(out, 'ZZZ', Assertion).
+
 	test(lgt_format_3_radix_upper_case_star, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~*R", [16,127])},
@@ -277,21 +351,53 @@
 		{format(out, "~R", [16])},
 		^^text_output_assertion(out, '20', Assertion).
 
-	test(lgt_format_3_radix_invalid_1, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+	test(lgt_format_3_radix_invalid_01, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~r", [_])}.
+
+	test(lgt_format_3_radix_invalid_02, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~R", [_])}.
+
+	test(lgt_format_3_radix_invalid_03, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
 		^^set_text_output(out, ''),
 		{format(out, "~0r", [16])}.
 
-	test(lgt_format_3_radix_invalid_2, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+	test(lgt_format_3_radix_invalid_04, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
 		^^set_text_output(out, ''),
 		{format(out, "~1R", [16])}.
 
-	test(lgt_format_3_radix_invalid_3, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+	test(lgt_format_3_radix_invalid_05, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
 		^^set_text_output(out, ''),
 		{format(out, "~37r", [16])}.
 
-	test(lgt_format_3_radix_invalid_4, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+	test(lgt_format_3_radix_invalid_06, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
 		^^set_text_output(out, ''),
 		{format(out, "~42R", [16])}.
+
+	test(lgt_format_3_radix_invalid_07, error(type_error(integer, 123.0))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~r", [123.0])}.
+
+	test(lgt_format_3_radix_invalid_08, error(type_error(integer, 123.0))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~R", [123.0])}.
+
+	test(lgt_format_3_radix_invalid_09, error(type_error(evaluable, foo/1))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~r", [foo(bar)])}.
+
+	test(lgt_format_3_radix_invalid_10, error(type_error(evaluable, foo/1))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~R", [foo(bar)])}.
+
+	test(lgt_format_3_radix_invalid_11, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*r", [-1,123])}.
+
+	test(lgt_format_3_radix_invalid_12, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*R", [-1,123])}.
 
 	test(lgt_format_3_float, true(Assertion)) :-
 		^^set_text_output(out, ''),
