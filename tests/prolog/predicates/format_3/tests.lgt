@@ -106,6 +106,8 @@
 		{format(out, "~p", [a(foo,b(c(foo,3.14)))])},
 		^^text_output_assertion(out, 'a(foofoo,b(c(foofoo,3)))', Assertion).
 
+	% ~a control sequence
+
 	test(lgt_format_3_atom, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~a", [abc])},
@@ -115,6 +117,53 @@
 		^^set_text_output(out, ''),
 		{format(out, "~a", ['ABC'])},
 		^^text_output_assertion(out, 'ABC', Assertion).
+
+	test(lgt_format_3_atom_empty_list, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~a", [[]])},
+		^^text_output_assertion(out, '[]', Assertion).
+
+	test(lgt_format_3_atom_empty_curly, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~a", [{}])},
+		^^text_output_assertion(out, '{}', Assertion).
+
+	test(lgt_format_3_atom_ignore_fixed_count, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~3a", [abc])},
+		^^text_output_assertion(out, abc, Assertion).
+
+	test(lgt_format_3_atom_ignore_star_count, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*a", [3,abc])},
+		^^text_output_assertion(out, abc, Assertion).
+
+	test(lgt_format_3_atom_ignore_expression_count, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*a", [1+2,abc])},
+		^^text_output_assertion(out, abc, Assertion).
+
+	test(lgt_format_3_atom_invalid_01, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~a", [_])}.
+
+	test(lgt_format_3_atom_invalid_02, error(type_error(atom,[0'a,0'b,0'c]))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~a", [[0'a,0'b,0'c]])}.
+
+	test(lgt_format_3_atom_invalid_03, error(type_error(atom,[a,b,c]))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~a", [[a,b,c]])}.
+
+	test(lgt_format_3_atom_invalid_04, error(type_error(atom,42))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~a", [42])}.
+
+	test(lgt_format_3_atom_invalid_05, error(type_error(atom,foo(bar)))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~a", [foo(bar)])}.
+
+	% ~c control sequence
 
 	test(lgt_format_3_code, true(Assertion)) :-
 		^^set_text_output(out, ''),
@@ -205,9 +254,26 @@
 
 	:- endif.
 
+	% ~i control sequence
+
 	test(lgt_format_3_ignore, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~a~i~a", [a,b,c])},
+		^^text_output_assertion(out, ac, Assertion).
+
+	test(lgt_format_3_ignore_fixed_count, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~a~3i~a", [a,b,c])},
+		^^text_output_assertion(out, ac, Assertion).
+
+	test(lgt_format_3_ignore_star_count, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~a~*i~a", [a,3,b,c])},
+		^^text_output_assertion(out, ac, Assertion).
+
+	test(lgt_format_3_ignore_expresion_count, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~a~*i~a", [a,1+2,b,c])},
 		^^text_output_assertion(out, ac, Assertion).
 
 	% ~d and ~D control sequences
@@ -422,11 +488,11 @@
 		{format(out, "~0f", [123.456])},
 		^^text_output_assertion(out, '123', Assertion).
 
-	test(lgt_format_2_float_invalid_01, error(instantiation_error)) :-
+	test(lgt_format_3_float_invalid_01, error(instantiation_error)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~f", [_])}.
 
-	test(lgt_format_2_float_invalid_02, error(type_error(evaluable, foo/1))) :-
+	test(lgt_format_3_float_invalid_02, error(type_error(evaluable, foo/1))) :-
 		^^set_text_output(out, ''),
 		{format(out, "~f", [foo(bar)])}.
 
