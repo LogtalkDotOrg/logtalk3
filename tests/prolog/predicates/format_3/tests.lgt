@@ -29,9 +29,16 @@
 		{format(out, "abc", [])},
 		^^text_output_assertion(out, 'abc', Assertion).
 
+	% ~~ control sequence
+
 	test(lgt_format_3_tilde, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~~", [])},
+		^^text_output_assertion(out, '~', Assertion).
+
+	test(lgt_format_3_tilde_ignore_count, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~3~", [])},
 		^^text_output_assertion(out, '~', Assertion).
 
 	% ~w control sequence
@@ -228,7 +235,7 @@
 		^^set_text_output(out, ''),
 		{format(out, "~s", [65,66|_])}.
 
-	test(lgt_format_3_string_invalid_02, error(type_error(_,42))) :-
+	test(lgt_format_3_string_invalid_03, error(type_error(_,42))) :-
 		^^set_text_output(out, ''),
 		{format(out, "~s", [42])}.
 
@@ -502,10 +509,26 @@
 		% default is six decimal places
 		^^text_output_assertion(out, '1.000000', Assertion).
 
-	test(lgt_format_3_float_n_places, true(Assertion)) :-
+	test(lgt_format_3_float_expression, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~f", [1+1.0])},
+		% default is six decimal places
+		^^text_output_assertion(out, '2.000000', Assertion).
+
+	test(lgt_format_3_float_n_places_01, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~4f", [-1.0e-1])},
 		^^text_output_assertion(out, '-0.1000', Assertion).
+
+	test(lgt_format_3_float_n_places_02, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~3f", [12.3456789])},
+		^^text_output_assertion(out, '12.346', Assertion).
+
+	test(lgt_format_3_float_n_places_03, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~12f", [12.3456789])},
+		^^text_output_assertion(out, '12.345678900000', Assertion).
 
 	test(lgt_format_3_float_star_places, true(Assertion)) :-
 		^^set_text_output(out, ''),
@@ -655,6 +678,8 @@
 		^^set_text_output(out, ''),
 		{format(out, "~G", [foo(bar)])}.
 
+	% ~| and ~t control sequences
+
 	test(lgt_format_3_tab_stop_default, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~|~a", [abcd])},
@@ -775,6 +800,123 @@
 		^^set_text_output(out, ''),
 		{format(out, "~`0t~2r~16+", [0xFF])},
 		^^text_output_assertion(out, '0000000011111111', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_01, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "left~tright", [])},
+		^^text_output_assertion(out, 'leftright', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_02, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "left~tright~|", [])},
+		^^text_output_assertion(out, 'leftright', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_03, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "left~tright~8|", [])},
+		^^text_output_assertion(out, 'leftright', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_04, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "left~tright~20|", [])},
+		^^text_output_assertion(out, 'left           right', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_05, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~|left~tright~20|", [])},
+		^^text_output_assertion(out, 'left           right', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_06, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "left~tright~20+", [])},
+		^^text_output_assertion(out, 'left           right', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_07, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "left~10+next", [])},
+		^^text_output_assertion(out, 'left      next', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_08, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "left~t~10+next", [])},
+		^^text_output_assertion(out, 'left      next', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_09, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~tright~10+next", [])},
+		^^text_output_assertion(out, '     rightnext', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_10, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "^~|abc~10+$",[])},
+		^^text_output_assertion(out, '^abc       $', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_11, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "^~|abc~11|$",[])},
+		^^text_output_assertion(out, '^abc       $', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_12, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "^~|abc~*+$",[10])},
+		^^text_output_assertion(out, '^abc       $', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_13, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "^~|abc~*|$",[11])},
+		^^text_output_assertion(out, '^abc       $', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_14, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "^~|abc~t~10+$",[])},
+		^^text_output_assertion(out, '^abc       $', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_15, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "^~|~tabc~t~10+$",[])},
+		^^text_output_assertion(out, '^   abc    $', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_16, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "^~|~t~tabc~t~10+$",[])},
+		^^text_output_assertion(out, '^    abc   $', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_17, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "^~|~t~t~tabc~t~10+$",[])},
+		^^text_output_assertion(out, '^     abc  $', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_18, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "^~|~tabc~10+$",[])},
+		^^text_output_assertion(out, '^       abc$', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_19, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "^~|~ta~tb~tc~t~10+$",[])},
+		^^text_output_assertion(out, '^ a  b  c  $', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_20, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "^~|a~tb~tc~t~10+$",[])},
+		^^text_output_assertion(out, '^a  b  c   $', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_21, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "^~|~*tabc~*t~10+$",[0'.,95])},
+		^^text_output_assertion(out, '^...abc____$', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_22, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "^~|~`.tabc~95t~10+$",[])},
+		^^text_output_assertion(out, '^...abc____$', Assertion).
+
+	test(lgt_format_3_tab_table_pip_0110_23, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*+.~n~3+.~n~*+.~n", [3,3])},
+		^^text_output_assertion(out, '   .\n   .\n   .\n', Assertion).
+
+	% errors
 
 	test(lgt_format_3_unbound_first_argument, error(instantiation_error)) :-
 		{format(_, _, [42])}.
