@@ -167,18 +167,33 @@
 
 	test(lgt_format_3_code, true(Assertion)) :-
 		^^set_text_output(out, ''),
-		{format(out, "~c", [65])},
+		{format(out, "~c", [0'A])},
 		^^text_output_assertion(out, 'A', Assertion).
 
 	test(lgt_format_3_code_n, true(Assertion)) :-
 		^^set_text_output(out, ''),
-		{format(out, "~8c", [65])},
+		{format(out, "~8c", [0'A])},
 		^^text_output_assertion(out, 'AAAAAAAA', Assertion).
 
 	test(lgt_format_3_code_star, true(Assertion)) :-
 		^^set_text_output(out, ''),
-		{format(out, "~*c", [8,65])},
+		{format(out, "~*c", [8,0'A])},
 		^^text_output_assertion(out, 'AAAAAAAA', Assertion).
+
+	test(lgt_format_3_code_expression, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*c", [3+5,0'A])},
+		^^text_output_assertion(out, 'AAAAAAAA', Assertion).
+
+	test(lgt_format_3_code_invalid_01, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~c", [_])}.
+
+	test(lgt_format_3_code_invalid_02, error(type_error(evaluable,a/0))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~c", [a])}.
+
+	% ~s control sequence
 
 	test(lgt_format_3_string, true(Assertion)) :-
 		^^set_text_output(out, ''),
@@ -204,6 +219,20 @@
 		^^set_text_output(out, ''),
 		{format(out, "~6s", [[65,66,67]])},
 		^^text_output_assertion(out, 'ABC   ', Assertion).
+
+	test(lgt_format_3_string_invalid_01, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~s", [_])}.
+
+	test(lgt_format_3_string_invalid_02, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~s", [65,66|_])}.
+
+	test(lgt_format_3_string_invalid_02, error(type_error(_,42))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~s", [42])}.
+
+	% ~n and ~N control sequences
 
 	:- if((
 		os::operating_system_type(windows),
