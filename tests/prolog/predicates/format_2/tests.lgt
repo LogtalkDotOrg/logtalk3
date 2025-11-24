@@ -399,6 +399,8 @@
 		^^set_text_output(''),
 		{format("~*R", [-1,123])}.
 
+	% ~f control sequence
+
 	test(lgt_format_2_float, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~f", [1.0])},
@@ -420,11 +422,27 @@
 		{format("~0f", [123.456])},
 		^^text_output_assertion('123', Assertion).
 
+	test(lgt_format_2_float_invalid_01, error(instantiation_error)) :-
+		^^set_text_output(''),
+		{format("~f", [_])}.
+
+	test(lgt_format_2_float_invalid_02, error(type_error(evaluable, foo/1))) :-
+		^^set_text_output(''),
+		{format("~f", [foo(bar)])}.
+
+	% ~e and ~E control sequences
+
 	test(lgt_format_2_float_exponential_notation, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~e", [1.333333])},
 		% default is six decimal places
 		^^text_output_assertion('1.333333e+00', Assertion).
+
+	test(lgt_format_2_float_exponential_notation_expression, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~e", [1.333333+1])},
+		% default is six decimal places
+		^^text_output_assertion('2.333333e+00', Assertion).
 
 	test(lgt_format_2_float_exponential_notation_n_places, true(Assertion)) :-
 		^^set_text_output(''),
@@ -436,16 +454,55 @@
 		{format("~*e", [3,1.333333])},
 		^^text_output_assertion('1.333e+00', Assertion).
 
+	test(lgt_format_2_float_exponential_notation_zero_places, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~0e", [1.333333])},
+		^^text_output_assertion('1e+00', Assertion).
+
+	test(lgt_format_2_float_exponential_notation_invalid_01, error(instantiation_error)) :-
+		^^set_text_output(''),
+		{format("~e", [_])}.
+
+	test(lgt_format_2_float_exponential_notation_invalid_02, error(type_error(evaluable, foo/1))) :-
+		^^set_text_output(''),
+		{format("~e", [foo(bar)])}.
+
 	test(lgt_format_2_float_exponential_notation_upper_case, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~E", [1.333333])},
 		% default is six decimal places
 		^^text_output_assertion('1.333333E+00', Assertion).
 
+	test(lgt_format_2_float_exponential_notation_upper_case_expression, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~E", [1.333333+1])},
+		% default is six decimal places
+		^^text_output_assertion('2.333333E+00', Assertion).
+
 	test(lgt_format_2_float_exponential_notation_n_places_upper_case, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~3E", [1.333333])},
 		^^text_output_assertion('1.333E+00', Assertion).
+
+	test(lgt_format_2_float_exponential_notation_upper_case_star_places, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~*E", [3,1.333333])},
+		^^text_output_assertion('1.333E+00', Assertion).
+
+	test(lgt_format_2_float_exponential_notation_upper_case_zero_places, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~0E", [1.333333])},
+		^^text_output_assertion('1E+00', Assertion).
+
+	test(lgt_format_2_float_exponential_notation_upper_case_invalid_01, error(instantiation_error)) :-
+		^^set_text_output(''),
+		{format("~E", [_])}.
+
+	test(lgt_format_2_float_exponential_notation_upper_case_invalid_02, error(type_error(evaluable, foo/1))) :-
+		^^set_text_output(''),
+		{format("~E", [foo(bar)])}.
+
+	% ~g and ~G control sequences
 
 	test(lgt_format_2_float_best_e, true(Assertion)) :-
 		^^set_text_output(''),
@@ -467,6 +524,14 @@
 		{format("~2g", [0.39265e+3])},
 		^^text_output_assertion('3.9e+02', Assertion).
 
+	test(lgt_format_2_float_best_invalid_01, error(instantiation_error)) :-
+		^^set_text_output(''),
+		{format("~g", [_])}.
+
+	test(lgt_format_2_float_best_invalid_02, error(type_error(evaluable, foo/1))) :-
+		^^set_text_output(''),
+		{format("~g", [foo(bar)])}.
+
 	test(lgt_format_2_float_best_e_upper_case, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~G", [0.00000123])},
@@ -486,6 +551,14 @@
 		^^set_text_output(''),
 		{format("~2G", [0.39265e+3])},
 		^^text_output_assertion('3.9E+02', Assertion).
+
+	test(lgt_format_2_float_best_upper_case_invalid_01, error(instantiation_error)) :-
+		^^set_text_output(''),
+		{format("~G", [_])}.
+
+	test(lgt_format_2_float_best_upper_case_invalid_02, error(type_error(evaluable, foo/1))) :-
+		^^set_text_output(''),
+		{format("~G", [foo(bar)])}.
 
 	test(lgt_format_2_tab_stop_default, true(Assertion)) :-
 		^^set_text_output(''),
