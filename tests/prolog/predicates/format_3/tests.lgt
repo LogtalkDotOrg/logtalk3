@@ -322,6 +322,14 @@
 
 	:- endif.
 
+	test(lgt_format_3_new_line_invalid_01, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*n", [_])}.
+
+	test(lgt_format_3_new_line_invalid_02, error(type_error(evaluable,foo/0))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*n", [foo])}.
+
 	% ~i control sequence
 
 	test(lgt_format_3_ignore, true(Assertion)) :-
@@ -576,7 +584,15 @@
 		^^set_text_output(out, ''),
 		{format(out, "~f", [_])}.
 
-	test(lgt_format_3_float_invalid_02, error(type_error(evaluable, foo/1))) :-
+	test(lgt_format_3_float_invalid_02, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*f", [5,_])}.
+
+	test(lgt_format_3_float_invalid_03, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*f", [_,123.456])}.
+
+	test(lgt_format_3_float_invalid_04, error(type_error(evaluable, foo/1))) :-
 		^^set_text_output(out, ''),
 		{format(out, "~f", [foo(bar)])}.
 
@@ -613,7 +629,15 @@
 		^^set_text_output(out, ''),
 		{format(out, "~e", [_])}.
 
-	test(lgt_format_3_float_exponential_notation_invalid_02, error(type_error(evaluable, foo/1))) :-
+	test(lgt_format_3_float_exponential_notation_invalid_02, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*e", [_,1.333333])}.
+
+	test(lgt_format_3_float_exponential_notation_invalid_03, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*e", [5,_])}.
+
+	test(lgt_format_3_float_exponential_notation_invalid_04, error(type_error(evaluable, foo/1))) :-
 		^^set_text_output(out, ''),
 		{format(out, "~e", [foo(bar)])}.
 
@@ -648,7 +672,15 @@
 		^^set_text_output(out, ''),
 		{format(out, "~E", [_])}.
 
-	test(lgt_format_3_float_exponential_notation_upper_case_invalid_02, error(type_error(evaluable, foo/1))) :-
+	test(lgt_format_3_float_exponential_notation_upper_case_invalid_02, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*E", [_,1.333333])}.
+
+	test(lgt_format_3_float_exponential_notation_upper_case_invalid_03, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*E", [5,_])}.
+
+	test(lgt_format_3_float_exponential_notation_upper_case_invalid_04, error(type_error(evaluable, foo/1))) :-
 		^^set_text_output(out, ''),
 		{format(out, "~E", [foo(bar)])}.
 
@@ -678,7 +710,15 @@
 		^^set_text_output(out, ''),
 		{format(out, "~g", [_])}.
 
-	test(lgt_format_3_float_best_invalid_02, error(type_error(evaluable, foo/1))) :-
+	test(lgt_format_3_float_best_invalid_02, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*g", [_,0.00000123])}.
+
+	test(lgt_format_3_float_best_invalid_03, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*g", [5,_])}.
+
+	test(lgt_format_3_float_best_invalid_04, error(type_error(evaluable, foo/1))) :-
 		^^set_text_output(out, ''),
 		{format(out, "~g", [foo(bar)])}.
 
@@ -706,7 +746,15 @@
 		^^set_text_output(out, ''),
 		{format(out, "~G", [_])}.
 
-	test(lgt_format_3_float_best_upper_case_invalid_02, error(type_error(evaluable, foo/1))) :-
+	test(lgt_format_3_float_best_upper_case_invalid_02, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*G", [_,0.00000123])}.
+
+	test(lgt_format_3_float_best_upper_case_invalid_03, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*G", [5,_])}.
+
+	test(lgt_format_3_float_best_upper_case_invalid_04, error(type_error(evaluable, foo/1))) :-
 		^^set_text_output(out, ''),
 		{format(out, "~G", [foo(bar)])}.
 
@@ -999,14 +1047,6 @@
 	test(lgt_format_3_third_argument_wrong_type, error(type_error(list,42))) :-
 		^^set_text_output(out, ''),
 		{format(out, "~d", 42)}.
-
-	test(lgt_format_3_invalid_argument_1, errors([type_error(_,_), consistency_error(_,_,_)])) :-
-		^^set_text_output(out, ''),
-		{format(out, "~a", [42])}.
-
-	test(lgt_format_3_invalid_argument_2, errors([type_error(_,_), consistency_error(_,_,_)])) :-
-		^^set_text_output(out, ''),
-		{format(out, "~d", [abc])}.
 
 	test(lgt_format_3_not_enough_arguments_1, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
 		^^set_text_output(out, ''),
