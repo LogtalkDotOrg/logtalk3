@@ -916,6 +916,23 @@
 		{format(out, "~*+.~n~3+.~n~*+.~n", [3,3])},
 		^^text_output_assertion(out, '   .\n   .\n   .\n', Assertion).
 
+	% ~W control sequence
+
+	test(lgt_format_3_write_term_default, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~W", [a+'B',[]])},
+		^^text_output_assertion(out, 'a+B', Assertion).
+
+	test(lgt_format_3_write_term_quoted, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~W", [a+'B',[quoted(true)]])},
+		^^text_output_assertion(out, 'a+\'B\'', Assertion).
+
+	test(lgt_format_3_write_term_canonical, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~W", [a+'B',[quoted(true),ignore_ops(true)]])},
+		^^text_output_assertion(out, '+(a,\'B\')', Assertion).
+
 	% errors
 
 	test(lgt_format_3_unbound_first_argument, error(instantiation_error)) :-

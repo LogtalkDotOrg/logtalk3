@@ -28,7 +28,7 @@
 	:- info([
 		version is 1:21:0,
 		author is 'Paulo Moura',
-		date is 2025-11-24,
+		date is 2025-11-25,
 		comment is 'Unit tests for the de facto Prolog standard format/2 built-in predicate with format strings specified using lists of codes.'
 	]).
 
