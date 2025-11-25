@@ -196,7 +196,15 @@
 		^^set_text_output(''),
 		{format("~c", [_])}.
 
-	test(lgt_format_2_code_invalid_02, error(type_error(evaluable,a/0))) :-
+	test(lgt_format_2_code_invalid_02, error(instantiation_error)) :-
+		^^set_text_output(''),
+		{format("~*c", [4,_])}.
+
+	test(lgt_format_2_code_invalid_03, error(instantiation_error)) :-
+		^^set_text_output(''),
+		{format("~*c", [_,0'A])}.
+
+	test(lgt_format_2_code_invalid_04, error(type_error(evaluable,a/0))) :-
 		^^set_text_output(''),
 		{format("~c", [a])}.
 
@@ -243,9 +251,13 @@
 
 	test(lgt_format_2_string_invalid_02, error(instantiation_error)) :-
 		^^set_text_output(''),
-		{format("~s", [65,66|_])}.
+		{format("~s", [[65,66|_]])}.
 
-	test(lgt_format_2_string_invalid_03, error(type_error(_,42))) :-
+	test(lgt_format_2_string_invalid_03, error(instantiation_error)) :-
+		^^set_text_output(''),
+		{format("~*s", [_,[65,66,67]])}.
+
+	test(lgt_format_2_string_invalid_04, error(type_error(_,42))) :-
 		^^set_text_output(''),
 		{format("~s", [42])}.
 
@@ -276,6 +288,11 @@
 			{format("~Nbegin~N~Nend", [])},
 			^^text_output_assertion('begin\r\nend', Assertion).
 
+		test(lgt_format_2_new_line_if_not_beginning_of_line_ignore_count, true(Assertion)) :-
+			^^set_text_output(''),
+			{format("~Nbegin~3N~Nend", [])},
+			^^text_output_assertion('begin\r\nend', Assertion).
+
 	:- else.
 
 		test(lgt_format_2_new_line, true(Assertion)) :-
@@ -296,6 +313,11 @@
 		test(lgt_format_2_new_line_if_not_beginning_of_line, true(Assertion)) :-
 			^^set_text_output(''),
 			{format("~Nbegin~N~Nend", [])},
+			^^text_output_assertion('begin\nend', Assertion).
+
+		test(lgt_format_2_new_line_if_not_beginning_of_line_ignore_count, true(Assertion)) :-
+			^^set_text_output(''),
+			{format("~Nbegin~3N~Nend", [])},
 			^^text_output_assertion('begin\nend', Assertion).
 
 	:- endif.
