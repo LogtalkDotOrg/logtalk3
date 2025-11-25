@@ -202,9 +202,19 @@
 
 	% ~s control sequence
 
-	test(lgt_format_2_string, true(Assertion)) :-
+	test(lgt_format_2_string_codes, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~s", [[65,66,67]])},
+		^^text_output_assertion('ABC', Assertion).
+
+	test(lgt_format_2_string_chars, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~s", [['A','B','C']])},
+		^^text_output_assertion('ABC', Assertion).
+
+	test(lgt_format_2_string_atom, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~s", ['ABC'])},
 		^^text_output_assertion('ABC', Assertion).
 
 	test(lgt_format_2_string_first_n, true(Assertion)) :-
