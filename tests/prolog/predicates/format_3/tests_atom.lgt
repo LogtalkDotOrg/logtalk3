@@ -29,7 +29,7 @@
 		version is 1:21:0,
 		author is 'Paulo Moura',
 		date is 2025-11-25,
-		comment is 'Unit tests for the de facto Prolog standard format/3 built-in predicate with format strings specified using atoms.'
+		comment is 'Unit tests for the de facto Prolog standard format/3 built-in predicate with format strings specified using atoms. Follows PIP-0110.'
 	]).
 
 	:- include(tests).

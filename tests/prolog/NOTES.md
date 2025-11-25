@@ -27,6 +27,10 @@ Prolog standard (updated up to the ISO/IEC 13211-1:1995 Prolog Core standard
 and the follow-up corrigenda). Several tests originate from SICS, ECLiPSe, and
 SWI-Prolog and are used here with permission.
 
+Some tests originate from PIP proposals:
+
+https://prolog-lang.org/ImplementersForum/0110-format.html
+
 This conformance suite also includes unit tests for Prolog features that
 are slowly becoming de facto standards (e.g., the `(*->)/2` soft-cut control
 construct or the `atomic_list_concat/2-3` and `setup_call_cleanup/3` built-in
