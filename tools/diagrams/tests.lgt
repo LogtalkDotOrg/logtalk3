@@ -49,18 +49,6 @@
 	cover(uses_diagram(_)).
 	cover(xref_diagram(_)).
 
-	:- uses(lgtunit, [
-		deterministic/1
-	]).
-
-	:- uses(os, [
-		directory_files/2, delete_file/1, delete_directory/1
-	]).
-
-	:- uses(list, [
-		member/2
-	]).
-
 	setup :-
 		logtalk::expand_library_path(logtalk_user(scratch), Directory),
 		os::change_directory(Directory).
