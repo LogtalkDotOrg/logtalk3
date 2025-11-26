@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 3:16:0,
+		version is 3:16:1,
 		author is 'Paulo Moura',
-		date is 2025-10-27,
+		date is 2025-11-26,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -580,7 +580,6 @@
 		self(Self),
 		^^option(exclude_directories(ExcludedDirectories), Options),
 		^^option(exclude_files(ExcludedFiles), Options),
-		logtalk::loaded_file(Path),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles),

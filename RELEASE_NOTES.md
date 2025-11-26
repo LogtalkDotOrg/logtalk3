@@ -28,6 +28,9 @@ RELEASE NOTES
 Tools
 -----
 
+* FIXED: Removed redundant goal in the `diagrams::all_files/0-1` predicates
+implementation.
+
 * FIXED: Removed redundant tests for the `diagrams` and `lgtdoc` tools while
 keeping the same code coverage.
 
