@@ -151,7 +151,7 @@
 	default_option(date(true)).
 	% by default, don't print Logtalk and backend version data:
 	default_option(versions(false)).
-	% by default, don't omit any prefix when printing paths:
+	% by default, omit only the HOME path prefix when printing paths:
 	default_option(omit_path_prefixes(Prefixes)) :-
 		(	logtalk::expand_library_path(home, Home) ->
 			Prefixes = [Home]

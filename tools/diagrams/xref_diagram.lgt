@@ -826,7 +826,7 @@
 	default_option(exclude_libraries([startup, scratch_directory])).
 	% by default, don't exclude any entities:
 	default_option(exclude_entities([])).
-	% by default, don't omit any prefix when printing paths:
+	% by default, omit only the HOME path prefix when printing paths:
 	default_option(omit_path_prefixes(Prefixes)) :-
 		(	logtalk::expand_library_path(home, Home) ->
 			Prefixes = [Home]
