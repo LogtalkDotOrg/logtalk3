@@ -28,8 +28,8 @@ RELEASE NOTES
 Tools
 -----
 
-* FIXED: Removed redundant tests for the `diagrams` tool while keeping the
-same code coverage.
+* FIXED: Removed redundant tests for the `diagrams` and `lgtdoc` tools while
+keeping the same code coverage.
 
 Tests
 -----
