@@ -25,6 +25,12 @@ RELEASE NOTES
 3.97.0 - December ??, 2025
 ==========================
 
+Tools
+-----
+
+* FIXED: Removed redundant tests for the `diagrams` tool while keeping the
+same code coverage.
+
 Tests
 -----
 
