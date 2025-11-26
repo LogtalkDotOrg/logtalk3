@@ -23,9 +23,9 @@
 	extends(doclet)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2017-12-12,
+		date is 2025-11-26,
 		comment is 'Example of a doclet object generating linking diagrams using the zoom/1 option.'
 	]).
 
@@ -74,7 +74,6 @@
 	tool_entity(Tool, Entity) :-
 		tool(Tool),
 		logtalk::expand_library_path(Tool, ToolDirectory),
-		logtalk::loaded_file(File),
 		logtalk::loaded_file_property(File, directory(ToolDirectory)),
 		(	logtalk::loaded_file_property(File, object(Entity))
 		;	logtalk::loaded_file_property(File, category(Entity))
