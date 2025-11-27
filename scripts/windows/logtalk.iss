@@ -55,7 +55,7 @@ PrivilegesRequired=none
 VersionInfoTextVersion={#MyAppVer}
 
 AllowRootDirectory=yes
-UninstallFilesDir="{userdocs}\Logtalk uninstaller"
+UninstallFilesDir="{app}\uninstaller"
 
 [Types]
 Name: "full"; Description: "Full installation"
@@ -96,7 +96,6 @@ BeveledLabel={#MyAppName} {#MyAppVer} {#MyAppCopyright}
 
 [Dirs]
 Name: {code:GetLgtUserDir}; Components: user; Flags: uninsneveruninstall
-Name: "{userdocs}\Logtalk uninstaller"
 
 [Files]
 Source: "{#MyBaseDir}\*"; Excludes: ".*"; DestDir: "{app}"; Components: base; Flags: ignoreversion recursesubdirs createallsubdirs
@@ -829,6 +828,24 @@ begin
       (YAPWinExePath = 'prolog_compiler_not_installed')
 end;
 
+function GetUserDocsDir: String;
+var
+  UserDocs: String;
+begin
+  // Try to get the user documents folder; fallback to a safe default
+  // when running in system context where {userdocs} is not available
+  try
+    UserDocs := ExpandConstant('{userdocs}');
+    Result := UserDocs;
+  except
+    // Fallback to localappdata or commonappdata when userdocs is not available
+    if IsAdminInstallMode then
+      Result := ExpandConstant('{commonappdata}')
+    else
+      Result := ExpandConstant('{localappdata}');
+  end;
+end;
+
 procedure InitializeWizard;
 var
   Version, InstalledVersion: String;
@@ -861,8 +878,8 @@ begin
   LgtUserDirPage.Add('');
   if RegQueryStringValue(HKCU, 'Environment', 'LOGTALKUSER', LOGTALKUSER) then
     LgtUserDirPage.Values[0] := LOGTALKUSER
-  else 
-    LgtUserDirPage.Values[0] := ExpandConstant('{userdocs}') + '\Logtalk';
+  else
+    LgtUserDirPage.Values[0] := GetUserDocsDir + '\Logtalk';
   if not IsAdminInstallMode and RegQueryStringValue(HKLM, 'Software\Logtalk', 'Version', Version) then
   begin
     Warning := 'You are running this installer from a non-administrative account.'

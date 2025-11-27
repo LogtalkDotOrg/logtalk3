@@ -42,6 +42,15 @@ Tests
 * ADDED: Additional tests for the de facto standard `format/2-3` predicates
 from the PIP-0110 standardization work.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: The Windows installer to support running in system context for
+deployment via enterprise management tools.
+
+* FIXED: The Windows installer to support the base installation (with
+`/COMPONENTS="base"` without requiring a user documents folder.
+
 
 3.96.0 - November 18, 2025
 ==========================
