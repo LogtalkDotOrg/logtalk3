@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on November 15, 2025
+; Last updated on November 27, 2025
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -853,7 +853,7 @@ begin
                  + Chr(13) + Chr(13)
                  + 'A copy of these files must exist in the user home folder in order to use the Logtalk-Prolog integration scripts available from the Start Menu program group "Logtalk".'
                  + Chr(13) + Chr(13)
-                 + 'Addtional end-users may use this installer to make a copy of these files on their home folders after a full installation of Logtalk.';
+                 + 'Additional end-users may use this installer to make a copy of these files on their home folders after a full installation of Logtalk.';
   LgtUserDirPage := CreateInputDirPage(wpSelectDir,
     'Select folder for Logtalk user files', 'Where should Logtalk user files be installed?',
     Explanation,
@@ -888,9 +888,9 @@ begin
   begin
     Warning := 'Your Logtalk user directory is outdated: ' + InstalledVersion + ' < ' + ExpandConstant('{#MyAppVer}')
                + Chr(13) + Chr(13)
-               + 'You must updade your Logtalk user folder by performing a full installation.'
+               + 'You must update your Logtalk user folder by performing a full installation.'
                + Chr(13) + Chr(13)
-               + 'All aditional Logtalk users on your computer must also use this installer to update their Logtalk user folders.';
+               + 'All additional Logtalk users on your computer must also use this installer to update their Logtalk user folders.';
     WarningPage := CreateOutputMsgPage(wpWelcome, 'Warning', 'Logtalk user folder update required.', Warning)
   end;
   if NoBackEndPrologCompilerInstalled and not WizardSilent then
