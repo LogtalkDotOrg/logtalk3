@@ -63,7 +63,7 @@
 		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		['[ loading ~w ...  ]'-[File], nl].
 
-	message_tokens(loaded_file(File, _Flags)) -->
+	message_tokens(loaded_file(File0, _Flags)) -->
 		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		['[ ~w loaded ]'-[File], nl].
 
@@ -98,7 +98,7 @@
 		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		['[ ~w compiled ]'-[File], nl].
 
-	message_tokens(up_to_date_file(File, _Flags)) -->
+	message_tokens(up_to_date_file(File0, _Flags)) -->
 		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		['[ compiling ~w ... up-to-date ]'-[File], nl].
 
@@ -960,7 +960,7 @@
 			['  first found at or above line ~d'-[Line], nl]
 		;	['  first found between lines ~w'-[OriginalLines], nl]
 		).
-	first_found_at(OriginalFile, OriginalLines, _) -->
+	first_found_at(OriginalFile0, OriginalLines, _) -->
 		{{'$lgt_prolog_os_file_name'(OriginalFile0, OriginalFile)}},
 		(	{OriginalLines == 1-1} ->
 			['  first found in file ~w at line 1'-[OriginalFile], nl]
