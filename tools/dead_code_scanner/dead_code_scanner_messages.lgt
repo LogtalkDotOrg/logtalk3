@@ -23,9 +23,9 @@
 :- category(dead_code_scanner_messages).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:9:0,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2024-05-07,
+		date is 2025-11-01,
 		comment is 'Logtalk ``dead_code_scanner`` tool default message translations.'
 	]).
 
@@ -81,7 +81,8 @@
 	message_tokens(scanning_directory(Directory)) -->
 		['Scanning directory ~w ...'-[Directory], nl].
 
-	message_tokens(scanning_file(File)) -->
+	message_tokens(scanning_file(File0)) -->
+		{os::internal_os_path(File0, File)},
 		['Scanning file ~w ...'-[File], nl].
 
 	message_tokens(scanning_entity(Kind, Entity)) -->
@@ -111,7 +112,8 @@
 	likely_dead_predicate(Functor//Arity) -->
 		['Likely dead non-terminal: ~q'-[Functor//Arity], nl].
 
-	message_context(File, Lines, Type, Entity) -->
+	message_context(File0, Lines, Type, Entity) -->
+		{os::internal_os_path(File0, File)},
 		['  while compiling ~w ~q'-[Type, Entity], nl],
 		(	{Lines == 0-0} ->
 			['  in auxiliary clause generated for file ~w'-[File], nl, nl]

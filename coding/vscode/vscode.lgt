@@ -325,11 +325,12 @@
 
 	% documentation
 
-	documentation(Directory) :-
-		atom_concat(Directory, '/.vscode_xml_files_done', Marker),
-		atom_concat(Directory, '/xml_docs', XMLDocs),
+	documentation(Directory0) :-
+		atom_concat(Directory0, '/.vscode_xml_files_done', Marker),
+		atom_concat(Directory0, '/xml_docs', XMLDocs),
 		ignore({
 			logtalk_load(lgtdoc(loader)),
+			'$lgt_prolog_os_file_name'(Directory, Directory0),
 			lgtdoc::directory(Directory, [xml_docs_directory(XMLDocs)])
 		}),
 		open(Marker, append, Stream),
@@ -2063,55 +2064,62 @@
 	% fail after processing to allow default processing of the messages
 
 	% compiling file messages
-	logtalk::message_hook(compiling_file(File, _), _, core, _) :-
+	logtalk::message_hook(compiling_file(File0, _), _, core, _) :-
 		(	stream_property(Stream, alias(vscode_scratch_messages)) ->
 			true
 		;	logtalk::expand_library_path(logtalk_user('scratch/.messages'), Messages),
 			open(Messages, append, Stream, [alias(vscode_scratch_messages)])
 		),
+		{'$lgt_prolog_os_file_name'(File0, File)},
 		logtalk::print_message_tokens(Stream, '% ', ['[ compiling ~w ... ]'-[File], nl, nl]),
 		close(Stream),
 		fail.
 	% lgtunit test results
 	logtalk::message_hook(tests_results_summary(Object, Total, Skipped, Passed, Failed, Flaky, Note), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
-		entity_property(Object, Kind, file(File)),
+		entity_property(Object, Kind, file(File0)),
 		entity_property(Object, Kind, lines(Line, _)),
+		{'$lgt_prolog_os_file_name'(File0, File)},
 		(	Note == '' ->
 			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Status:~d tests: ~d skipped, ~d passed, ~d failed (~d flaky)~n', [File, Line, Object, Total, Skipped, Passed, Failed, Flaky])}
 		;	{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Status:~d tests: ~d skipped, ~d passed, ~d failed (~d flaky; ~w~n)', [File, Line, Object, Total, Skipped, Passed, Failed, Flaky, Note])}
 		),
 		fail.
 	:- if(current_logtalk_flag(prolog_dialect, ji)).
-		logtalk::message_hook(passed_test(Object, Test, File, Start-_End, Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+		logtalk::message_hook(passed_test(Object, Test, File0, Start-_End, Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
 			stream_property(_, alias(vscode_test_results)),
 			flaky_text(Flaky, FlakyText),
+			{'$lgt_prolog_os_file_name'(File0, File)},
 			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:passed~w(in ~f/~f cpu/wall seconds)~n', [File, Start, Object, Test, FlakyText, CPUTime, WallTime])},
 			fail.
-		logtalk::message_hook(failed_test(Object, Test, File, Start-_End, Reason, Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+		logtalk::message_hook(failed_test(Object, Test, File0, Start-_End, Reason, Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
 			stream_property(_, alias(vscode_test_results)),
 			flaky_text(Flaky, FlakyText),
+			{'$lgt_prolog_os_file_name'(File0, File)},
 			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:failed~w(in ~f/~f cpu/wall seconds);Reason:', [File, Start, Object, Test, FlakyText, CPUTime, WallTime])},
 			reason_format(Reason),
 			nl(vscode_test_results),
 			fail.
 	:- else.
-		logtalk::message_hook(passed_test(Object, Test, File, Start-_End, Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+		logtalk::message_hook(passed_test(Object, Test, File0, Start-_End, Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
 			stream_property(_, alias(vscode_test_results)),
 			flaky_text(Flaky, FlakyText),
+			{'$lgt_prolog_os_file_name'(File0, File)},
 			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:passed~w(in ~9f/~9f cpu/wall seconds)~n', [File, Start, Object, Test, FlakyText, CPUTime, WallTime])},
 			fail.
-		logtalk::message_hook(failed_test(Object, Test, File, Start-_End, Reason, Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+		logtalk::message_hook(failed_test(Object, Test, File0, Start-_End, Reason, Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
 			stream_property(_, alias(vscode_test_results)),
 			flaky_text(Flaky, FlakyText),
+			{'$lgt_prolog_os_file_name'(File0, File)},
 			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:failed~w(in ~9f/~9f cpu/wall seconds);Reason:', [File, Start, Object, Test, FlakyText, CPUTime, WallTime])},
 			reason_format(Reason),
 			nl(vscode_test_results),
 			fail.
 	:- endif.
-	logtalk::message_hook(skipped_test(Object, Test, File, Start-_, Flaky, _Note), _, lgtunit, _) :-
+	logtalk::message_hook(skipped_test(Object, Test, File0, Start-_, Flaky, _Note), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
 		flaky_text(Flaky, FlakyText),
+		{'$lgt_prolog_os_file_name'(File0, File)},
 		{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:skipped~w~n', [File, Start, Object, Test, FlakyText])},
 		fail.
 	logtalk::message_hook(entity_predicate_coverage(Entity, Predicate, Covered, Total, _Percentage, Clauses), _, lgtunit, _) :-
@@ -2123,10 +2131,11 @@
 			ExtArity is Arity + 2,
 			entity_property(Entity, Kind, defines(Name/ExtArity, Properties))
 		),
-		(	member(include(File), Properties) ->
+		(	member(include(File1), Properties) ->
 			true
-		;	File = File0
+		;	File1 = File0
 		),
+		{'$lgt_prolog_os_file_name'(File1, File)},
 		memberchk(lines(Line, _), Properties),
 		(	Covered =:= Total ->
 			% all clause are covered
@@ -2137,8 +2146,9 @@
 	:- if(current_logtalk_flag(prolog_dialect, ji)).
 		logtalk::message_hook(entity_coverage(Entity, Covered, Total, Percentage), _, lgtunit, _) :-
 			stream_property(_, alias(vscode_test_results)),
-			entity_property(Entity, Kind, file(File)),
+			entity_property(Entity, Kind, file(File0)),
 			entity_property(Entity, Kind, lines(Line, _)),
+			{'$lgt_prolog_os_file_name'(File0, File)},
 			(	Total =:= 1 ->
 				{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clause covered, ~f% coverage~n', [File, Line, Covered, Total, Percentage])}
 			;	{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clauses covered, ~f% coverage~n', [File, Line, Covered, Total, Percentage])}
@@ -2147,8 +2157,9 @@
 	:- else.
 		logtalk::message_hook(entity_coverage(Entity, Covered, Total, Percentage), _, lgtunit, _) :-
 			stream_property(_, alias(vscode_test_results)),
-			entity_property(Entity, Kind, file(File)),
+			entity_property(Entity, Kind, file(File0)),
 			entity_property(Entity, Kind, lines(Line, _)),
+			{'$lgt_prolog_os_file_name'(File0, File)},
 			(	Total =:= 1 ->
 				{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clause covered, ~2f% coverage~n', [File, Line, Covered, Total, Percentage])}
 			;	{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clauses covered, ~2f% coverage~n', [File, Line, Covered, Total, Percentage])}
@@ -2158,20 +2169,23 @@
 	% code_metrics tool results
 	logtalk::message_hook(entity_score(cc_metric, Entity, Score), _, code_metrics, _) :-
 		stream_property(_, alias(vscode_metrics_results)),
-		entity_property(Entity, Kind, file(File)),
+		entity_property(Entity, Kind, file(File0)),
 		entity_property(Entity, Kind, lines(Line, _)),
+		{'$lgt_prolog_os_file_name'(File0, File)},
 		{format(vscode_metrics_results, 'File:~w;Line:~d;Score:~d~n', [File, Line, Score])},
 		fail.
 	% debugger messages
-	logtalk::message_hook(fact(_, _, File, Line), _, debugger, _) :-
+	logtalk::message_hook(fact(_, _, File0, Line), _, debugger, _) :-
 		logtalk::expand_library_path(logtalk_user('scratch/.debug_info'), DebugInfo),
 		open(DebugInfo, write, Stream),
+		{'$lgt_prolog_os_file_name'(File0, File)},
 		{format(Stream, 'File:~w;Line:~d~n', [File, Line])},
 		close(Stream),
 		fail.
-	logtalk::message_hook(rule(_, _, File, Line), _, debugger, _) :-
+	logtalk::message_hook(rule(_, _, File0, Line), _, debugger, _) :-
 		logtalk::expand_library_path(logtalk_user('scratch/.debug_info'), DebugInfo),
 		open(DebugInfo, write, Stream),
+		{'$lgt_prolog_os_file_name'(File0, File)},
 		{format(Stream, 'File:~w;Line:~d~n', [File, Line])},
 		close(Stream),
 		fail.

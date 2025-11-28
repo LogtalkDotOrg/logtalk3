@@ -23,9 +23,9 @@
 :- category(code_metrics_messages).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:9:0,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2022-05-05,
+		date is 2025-11-01,
 		comment is 'Message translations for the ``code_metrics`` tool.'
 	]).
 
@@ -75,7 +75,8 @@
 	message_tokens(scanning_directory(Directory)) -->
 		['Scanning directory ~w ...'-[Directory], nl].
 
-	message_tokens(scanning_file(File)) -->
+	message_tokens(scanning_file(File0)) -->
+		{os::internal_os_path(File0, File)},
 		['Scanning file ~w ...'-[File], nl].
 
 	message_tokens(scanning_entity(Kind, Entity)) -->
@@ -85,7 +86,8 @@
 		['Library not defined: ~q'-[Library], nl].
 	message_tokens(unknown(directory, Directory)) -->
 		['Directory does not exist: ~q'-[Directory], nl].
-	message_tokens(unknown(file, File)) -->
+	message_tokens(unknown(file, File0)) -->
+		{os::internal_os_path(File0, File)},
 		['File does not exist: ~q'-[File], nl].
 	message_tokens(unknown(entity, Entity)) -->
 		['Entity not loaded: ~q'-[Entity], nl].

@@ -59,22 +59,28 @@
 
 	% file compilation and loading messages
 
-	message_tokens(loading_file(File, _Flags)) -->
+	message_tokens(loading_file(File0, _Flags)) -->
+		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		['[ loading ~w ...  ]'-[File], nl].
 
 	message_tokens(loaded_file(File, _Flags)) -->
+		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		['[ ~w loaded ]'-[File], nl].
 
-	message_tokens(skipping_reloading_file(File, _Flags)) -->
+	message_tokens(skipping_reloading_file(File0, _Flags)) -->
+		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		['[ ~w already loaded; skipping ]'-[File], nl].
 
-	message_tokens(reloading_file(File, _Flags)) -->
+	message_tokens(reloading_file(File0, _Flags)) -->
+		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		['[ reloading ~w ... ]'-[File], nl].
 
-	message_tokens(reloaded_file(File, _Flags)) -->
+	message_tokens(reloaded_file(File0, _Flags)) -->
+		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		['[ ~w reloaded ]'-[File], nl].
 
-	message_tokens(compiling_file(File, _Flags)) -->
+	message_tokens(compiling_file(File0, _Flags)) -->
+		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		['[ compiling ~w '-[File]],
 		(	{current_logtalk_flag(debug, on)} ->
 			['in debug mode '-[]]
@@ -88,10 +94,12 @@
 		;	['... ]'-[], nl]
 		).
 
-	message_tokens(compiled_file(File, _Flags)) -->
+	message_tokens(compiled_file(File0, _Flags)) -->
+		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		['[ ~w compiled ]'-[File], nl].
 
 	message_tokens(up_to_date_file(File, _Flags)) -->
+		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		['[ compiling ~w ... up-to-date ]'-[File], nl].
 
 	message_tokens(compilation_and_loading_warnings(CCounter, LCounter)) -->
@@ -123,7 +131,8 @@
 	message_tokens(redefining_entity(Type, Entity)) -->
 		['Redefining ~w ~q'-[Type, Entity], nl].
 
-	message_tokens(redefining_entity_from_file(File, Lines, Type, Entity, OldFile)) -->
+	message_tokens(redefining_entity_from_file(File, Lines, Type, Entity, OldFile0)) -->
+		{{'$lgt_prolog_os_file_name'(OldFile0, OldFile)}},
 		['Redefining ~w ~q (loaded from file ~w)'-[Type, Entity, OldFile], nl],
 		message_context(File, Lines).
 
@@ -287,13 +296,15 @@
 
 	% compiler error and warning messages
 
-	message_tokens(loading_failure(File)) -->
+	message_tokens(loading_failure(File0)) -->
+		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		[	'Unexpected failure while loading the code generated for the file:'-[], nl,
 			'  ~w'-[File], nl,
 			'Likely bug in the backend Prolog compiler. Please file a bug report.'-[], nl
 		].
 
-	message_tokens(loading_error(File, Error)) -->
+	message_tokens(loading_error(File0, Error)) -->
+		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		[	'Unexpected error while loading the code generated for the file:'-[], nl,
 			'  ~w'-[File], nl,
 			'  '-[]
@@ -950,6 +961,7 @@
 		;	['  first found between lines ~w'-[OriginalLines], nl]
 		).
 	first_found_at(OriginalFile, OriginalLines, _) -->
+		{{'$lgt_prolog_os_file_name'(OriginalFile0, OriginalFile)}},
 		(	{OriginalLines == 1-1} ->
 			['  first found in file ~w at line 1'-[OriginalFile], nl]
 		;	{OriginalLines = Line-Line} ->
@@ -957,7 +969,8 @@
 		;	['  first found in file ~w between lines ~w'-[OriginalFile, OriginalLines], nl]
 		).
 
-	message_context(File, Lines, Type, Entity) -->
+	message_context(File0, Lines, Type, Entity) -->
+		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		['  while compiling ~w ~q'-[Type, Entity], nl],
 		(	{Lines == 0-0} ->
 			['  in auxiliary clause generated for file ~w'-[File], nl, nl]
@@ -968,7 +981,8 @@
 		;	['  in file ~w between lines ~w'-[File, Lines], nl, nl]
 		).
 
-	message_context(File, Lines) -->
+	message_context(File0, Lines) -->
+		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		['  while compiling file'-[], nl],
 		(	{Lines == 0-0} ->
 			['  in auxiliary clause generated for file ~w'-[File], nl, nl]
@@ -979,10 +993,12 @@
 		;	['  in file ~w between lines ~w'-[File, Lines], nl, nl]
 		).
 
-	message_context(File) -->
+	message_context(File0) -->
+		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		['  while compiling file ~w'-[File], nl, nl].
 
-	error_message_context(File, Lines) -->
+	error_message_context(File0, Lines) -->
+		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		(	{Lines == 0-0} ->
 			['  in auxiliary clause generated for file ~w'-[File], nl, nl]
 		;	{Lines == 1-1} ->
@@ -1074,7 +1090,8 @@
 		make_warning_context(File, Line),
 		circular_reference_file_lines(FileLines).
 
-	make_warning_context(File, Line) -->
+	make_warning_context(File0, Line) -->
+		{{'$lgt_prolog_os_file_name'(File0, File)}},
 		(	{File == ''} ->
 			[]
 		;	['    in file ~w at line ~w'-[File,Line], nl]

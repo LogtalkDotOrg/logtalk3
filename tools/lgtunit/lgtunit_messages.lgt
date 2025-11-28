@@ -93,8 +93,10 @@
 		},
 		['tests ended at ~w-~w-~w, ~w:~w:~w'-Args, nl, nl].
 
-	message_tokens(running_tests_from_object_file(Object, File)) -->
-		{numbervars(Object, 0, _)},
+	message_tokens(running_tests_from_object_file(Object, File0)) -->
+		{	numbervars(Object, 0, _),
+			os::internal_os_path(File0, File)
+		},
 		['running tests from object ~q'-[Object], nl, 'file: ~w'-[File], nl, nl].
 
 	message_tokens(number_of_tests(Total)) -->
@@ -495,7 +497,8 @@
 		[' '-[]].
 
 	message_context(Path, Lines, Type, Entity) -->
-		{	suppress_path_prefix(Path, ShortPath),
+		{	suppress_path_prefix(Path, ShortPath0),
+			os::internal_os_path(ShortPath0, ShortPath),
 			numbervars(Entity, 0, _)
 		},
 		['  while compiling ~w ~q'-[Type, Entity], nl],
@@ -509,7 +512,9 @@
 		).
 
 	message_context(Path, Lines) -->
-		{suppress_path_prefix(Path, ShortPath)},
+		{	suppress_path_prefix(Path, ShortPath0),
+			os::internal_os_path(ShortPath0, ShortPath),
+		},
 		['  while compiling file'-[], nl],
 		(	{Lines == 0-0} ->
 			['  in auxiliary clause generated for file ~w'-[ShortPath], nl, nl]

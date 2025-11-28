@@ -100,7 +100,8 @@
 	% auxiliary non-terminals and predicates
 
 	message_context(Path, Line, Type, Entity) -->
-		{suppress_path_prefix(Path, ShortPath)},
+		{suppress_path_prefix(Path, ShortPath0)},
+		{os::internal_os_path(ShortPath0, ShortPath)},
 		['  while compiling ~w ~q'-[Type, Entity], nl],
 		(	{Line == 0} ->
 			['  in auxiliary clause generated for file ~w'-[ShortPath], nl, nl]
