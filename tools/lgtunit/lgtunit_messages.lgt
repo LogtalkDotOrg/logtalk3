@@ -513,7 +513,7 @@
 
 	message_context(Path, Lines) -->
 		{	suppress_path_prefix(Path, ShortPath0),
-			os::internal_os_path(ShortPath0, ShortPath),
+			os::internal_os_path(ShortPath0, ShortPath)
 		},
 		['  while compiling file'-[], nl],
 		(	{Lines == 0-0} ->

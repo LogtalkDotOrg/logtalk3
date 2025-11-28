@@ -305,7 +305,7 @@
 	message_tokens(file_context(File0, Line0, Entity, Predicate, Clause0)) -->
 		{	ground_term_copy(Entity, GroundEntity),
 			location_and_clause_number(File0, Line0, Clause0, File1, Line, Clause),
-			os::internal_os_path(File1, File),
+			os::internal_os_path(File1, File)
 		},
 		[
 			'     File:          ~w'-[File], nl,
