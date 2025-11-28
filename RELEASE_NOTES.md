@@ -54,6 +54,12 @@ deployment via enterprise management tools.
 * FIXED: The Windows installer to support the base installation (with
 `/COMPONENTS="base"` without requiring a user documents folder.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: The VSCode support use of the `atomic_list_concat/2` predicate
+to work will all backends.
+
 
 3.96.0 - November 18, 2025
 ==========================

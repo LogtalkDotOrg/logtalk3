@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:84:0,
+		version is 0:84:1,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-11-17,
+		date is 2025-11-28,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -312,7 +312,7 @@
 	]).
 
 	:- uses(user, [
-		numbervars/3
+		atomic_list_concat/2, numbervars/3
 	]).
 
 	% loading
