@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   XML documenting files to (X)HTML conversion script
-##   Last updated on March 23, 2025
+##   Last updated on November 28, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2025 Paulo Moura <pmoura@logtalk.org>
@@ -39,7 +39,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 2.5"
+	Write-Output "$myName 2.6"
 }
 
 function Write-Usage-Help() {
@@ -55,7 +55,7 @@ function Write-Usage-Help() {
 	Write-Output "  $myName -h"
 	Write-Output ""
 	Write-Output "Optional arguments:"
-	Write-Output "  -f output file format (either xhtml or html; default is $f)"
+	Write-Output "  -f output file format (either xhtml, html, or html5; default is $f)"
 	Write-Output "  -d output directory for the generated files (default is $d)"
 	Write-Output "  -i name of the index file (default is $i)"
 	Write-Output "  -t title to be used in the index file (default is `"$t`")"
@@ -66,7 +66,7 @@ function Write-Usage-Help() {
 
 function Confirm-Parameters() {
 
-	if ($f -ne "xhtml" -and $f -ne "html") {
+	if ($f -ne "xhtml" -and $f -ne "html" -and $f -ne "html5") {
 		Write-Error "Error! Unknown output file format: $f"
 		Start-Sleep -Seconds 2
 		Exit 1
@@ -104,13 +104,28 @@ function New-Index-File() {
 			Add-Content -Path "$i" -Value "<!DOCTYPE html PUBLIC `"-//W3C//DTD HTML 4.01//EN`" `"http://www.w3.org/TR/html4/strict.dtd`">"
 			Add-Content -Path "$i" -Value "<html>"
 		}
+		"html5" {
+			Add-Content -Path "$i" -Value "<!DOCTYPE html>"
+			Add-Content -Path "$i" -Value "<html lang=`"en`">"
+		}
 	}
 
-	Add-Content -Path "$i" -Value "<head>"
-	Add-Content -Path "$i" -Value "    <meta http-equiv=`"content-type`" content=`"text/html; charset=utf-8`"/>"
-	Add-Content -Path "$i" -Value "    <title>$i</title>"
-	Add-Content -Path "$i" -Value "    <link rel=`"stylesheet`" href=`"logtalk.css`" type=`"text/css`"/>"
-	Add-Content -Path "$i" -Value "</head>"
+	switch ( $f ) {
+		{ $_ -eq "xhtml" -or $_ -eq "html" } {
+			Add-Content -Path "$i" -Value "<head>"
+			Add-Content -Path "$i" -Value "    <meta http-equiv=`"content-type`" content=`"text/html; charset=utf-8`"/>"
+			Add-Content -Path "$i" -Value "    <title>$i</title>"
+			Add-Content -Path "$i" -Value "    <link rel=`"stylesheet`" href=`"logtalk.css`" type=`"text/css`"/>"
+			Add-Content -Path "$i" -Value "</head>"
+		}
+		"html5" {
+			Add-Content -Path "$i" -Value "<head>"
+			Add-Content -Path "$i" -Value "    <meta charset=`"utf-8`"/>"
+			Add-Content -Path "$i" -Value "    <title>$i</title>"
+			Add-Content -Path "$i" -Value "    <link rel=`"stylesheet`" href=`"logtalk.css`"/>"
+			Add-Content -Path "$i" -Value "</head>"
+		}
+	}
 	Add-Content -Path "$i" -Value "<body>"
 	Add-Content -Path "$i" -Value "<h1>$i</h1>"
 	Add-Content -Path "$i" -Value "<ul>"
@@ -155,6 +170,9 @@ Confirm-Parameters
 if ($f -eq "xhtml") {
 	$entity_xslt = "$env:LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_xhtml.xsl"
 	$index_xslt  = "$env:LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_xhtml.xsl"
+} elseif ($f -eq "html5") {
+	$entity_xslt = "$env:LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_html_5.xsl"
+	$index_xslt  = "$env:LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_html_5.xsl"
 } else {
 	$entity_xslt = "$env:LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_html.xsl"
 	$index_xslt  = "$env:LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_html.xsl"

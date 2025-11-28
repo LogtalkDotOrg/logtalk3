@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   XML documenting files to (X)HTML conversion script
-##   Last updated on March 23, 2025
+##   Last updated on November 28, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 2.6"
+	echo "$(basename "$0") 2.7"
 	exit 0
 }
 
@@ -33,9 +33,11 @@ source "$(dirname "$0")/logtalk_setup_env.sh"
 setup_logtalk_env || exit 1
 
 html_entity_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_html.xsl"
+html5_entity_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_html_5.xsl"
 xhtml_entity_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_xhtml.xsl"
 
 html_index_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_html.xsl"
+html5_index_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_html_5.xsl"
 xhtml_index_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_xhtml.xsl"
 
 format=xhtml
@@ -60,7 +62,7 @@ usage_help() {
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
-	echo "  -f output file format (either xhtml or html; default is $format)"
+	echo "  -f output file format (either xhtml, html, or html5; default is $format)"
 	echo "  -d output directory for the generated files (default is $directory)"
 	echo "  -i name of the index file (default is $index_file)"
 	echo "  -t title to be used in the index file (default is $index_title)"
@@ -84,13 +86,28 @@ create_index_file() {
 			echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">" >> "$index_file"
 			echo "<html>" >> "$index_file"
 			;;
+		html5)
+			echo "<!DOCTYPE html>" >> "$index_file"
+			echo "<html lang=\"en\">" >> "$index_file"
+			;;
 	esac
 
-	echo "<head>" >> "$index_file"
-	echo "    <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>" >> "$index_file"
-	echo "    <title>$index_title</title>" >> "$index_file"
-	echo "    <link rel=\"stylesheet\" href=\"logtalk.css\" type=\"text/css\"/>" >> "$index_file"
-	echo "</head>" >> "$index_file"
+	case "$format" in
+		xhtml|html)
+			echo "<head>" >> "$index_file"
+			echo "    <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>" >> "$index_file"
+			echo "    <title>$index_title</title>" >> "$index_file"
+			echo "    <link rel=\"stylesheet\" href=\"logtalk.css\" type=\"text/css\"/>" >> "$index_file"
+			echo "</head>" >> "$index_file"
+			;;
+		html5)
+			echo "<head>" >> "$index_file"
+			echo "    <meta charset=\"utf-8\"/>" >> "$index_file"
+			echo "    <title>$index_title</title>" >> "$index_file"
+			echo "    <link rel=\"stylesheet\" href=\"logtalk.css\"/>" >> "$index_file"
+			echo "</head>" >> "$index_file"
+			;;
+	esac
 	echo "<body>" >> "$index_file"
 	echo "<h1>$index_title</h1>" >> "$index_file"
 	echo "<ul>" >> "$index_file"
@@ -138,7 +155,7 @@ while getopts "vf:d:i:t:p:h" option; do
 	esac
 done
 
-if [ "$f_arg" != "" ] && [ "$f_arg" != "xhtml" ] && [ "$f_arg" != "html" ] ; then
+if [ "$f_arg" != "" ] && [ "$f_arg" != "xhtml" ] && [ "$f_arg" != "html" ] && [ "$f_arg" != "html5" ] ; then
 	echo "Error! Unsupported output format: $f_arg" >&2
 	usage_help
 	exit 1
@@ -173,6 +190,9 @@ fi
 if [ "$format" = "xhtml" ] ; then
 	entity_xslt=$xhtml_entity_xslt
 	index_xslt=$xhtml_index_xslt
+elif [ "$format" = "html5" ] ; then
+	entity_xslt=$html5_entity_xslt
+	index_xslt=$html5_index_xslt
 else
 	entity_xslt=$html_entity_xslt
 	index_xslt=$html_index_xslt

@@ -1,4 +1,4 @@
-.TH lgt2html 1 "May 2, 2025" "Logtalk 3.92.0" "Logtalk Documentation"
+.TH lgt2html 1 "November 28, 2025" "Logtalk 3.97.0" "Logtalk Documentation"
 
 .SH NAME
 lgt2html \- Logtalk script for converting XML documenting files into (X)HTML files
@@ -21,7 +21,7 @@ lgt2html \- Logtalk script for converting XML documenting files into (X)HTML fil
 .TP
 .B \-f 
 .I format
-Output file format (either \fIxhtml\fR or \fIhtml\fR).
+Output file format (\fIxhtml\fR, \fIhtml\fR, or \fIhtml5\fR).
 .TP
 .B \-d
 .I directory
@@ -71,16 +71,22 @@ The Logtalk index XML Schema file.
 The default CSS file for the generated (X)HTML files.
 .TP
 .BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_html.xsl
-The Logtalk entity XSLT file for generating HTML files.
+The Logtalk entity XSLT file for generating HTML 4.01 files.
 .TP
 .BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_html.xsl
-The Logtalk index XSLT file for generating HTML files.
+The Logtalk index XSLT file for generating HTML 4.01 files.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_html_5.xsl
+The Logtalk entity XSLT file for generating HTML 5 files.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_html_5.xsl
+The Logtalk index XSLT file for generating HTML 5 files.
 .TP
 .BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_xhtml.xsl
-The Logtalk entity XSLT file for generating XHTML files.
+The Logtalk entity XSLT file for generating XHTML 1.1 files.
 .TP
 .BI $LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_xhtml.xsl
-The Logtalk index XSLT file for generating XHTML files.
+The Logtalk index XSLT file for generating XHTML 1.1 files.
 
 .SH "SEE ALSO"
 The Logtalk website at https://logtalk.org/

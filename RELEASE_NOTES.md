@@ -28,6 +28,9 @@ RELEASE NOTES
 Tools
 -----
 
+* ADDED: Support to the `lgtdoc` tool for converting XML documenting files
+to HTML 5 files.
+
 * FIXED: Removed redundant goal in the `diagrams::all_files/0-1` predicates
 implementation.
 

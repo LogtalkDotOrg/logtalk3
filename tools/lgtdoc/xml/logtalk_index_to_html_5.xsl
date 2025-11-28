@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsl:stylesheet
+	version="1.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+
+<xsl:output
+	method="html"
+    indent="yes"
+    encoding="utf-8"/>
+
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+%  XSLT stylesheet for converting XML documenting files into HTML 5 files
+%  Last updated on November 28, 2025
+%
+%  This file is part of Logtalk <https://logtalk.org/>  
+%  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%  
+%      http://www.apache.org/licenses/LICENSE-2.0
+%  
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+
+<xsl:template match="/">
+	<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;
+</xsl:text>
+	<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title><xsl:apply-templates select="logtalk_index/type" /></title>
+		<link rel="stylesheet" href="logtalk.css" />
+	</head>
+	<body>
+		<div class="header">
+			<h1 class="code"><xsl:apply-templates select="logtalk_index/type" /></h1>
+		</div>
+		<div class="predicates">
+			<xsl:apply-templates select="logtalk_index/entries" />
+		</div>
+	</body>
+	</html>
+</xsl:template>
+
+
+<xsl:template match="logtalk_index/type">
+	<xsl:if test=".='library'">
+		Library index
+	</xsl:if>
+	<xsl:if test=".='directory'">
+		Directory index
+	</xsl:if>
+	<xsl:if test=".='entity'">
+		Entity index
+	</xsl:if>
+	<xsl:if test=".='predicate'">
+		Predicate index
+	</xsl:if>
+</xsl:template>
+
+
+<xsl:template match="logtalk_index/entries">
+	<xsl:apply-templates select="entry" />
+</xsl:template>
+
+
+<xsl:template match="*/entry">
+	<dl>
+	<dt id="{key}"><code><xsl:apply-templates select="key" /></code></dt>
+		<xsl:choose>
+		    <xsl:when test="/logtalk_index/type='predicate'">
+				<xsl:for-each select="entities/entity">
+					<dd class ="code"><code><a href="{file}.html#{../../key}"><xsl:value-of select="name" /></a></code></dd>
+				</xsl:for-each>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:for-each select="entities/entity">
+					<dd class ="code"><code><a href="{file}.html"><xsl:value-of select="name" /></a></code></dd>
+				</xsl:for-each>
+			</xsl:otherwise>
+		</xsl:choose>
+	</dl>
+</xsl:template>
+
+
+<xsl:template match="*/key">
+	<xsl:choose>
+	    <xsl:when test=".='object'">
+			Objects
+		</xsl:when>
+	    <xsl:when test=".='protocol'">
+			Protocols
+		</xsl:when>
+	    <xsl:when test=".='category'">
+			Categories
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="." />
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+
+
+</xsl:stylesheet>
+
