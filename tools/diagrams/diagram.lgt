@@ -347,10 +347,11 @@
 	output_directories([], _Project, _Format, _Options).
 	output_directories([Directory| Directories], Project, Format, Options) :-
 		self(Self),
-		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, Directory)),
+		os::internal_os_path(Directory, DirectoryOS),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, DirectoryOS)),
 		add_link_options(Directory, Options, GraphOptions),
 		::output_library(Project, Directory, GraphOptions),
-		logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, Directory)),
+		logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, DirectoryOS)),
 		output_directories(Directories, Project, Format, Options).
 
 	:- public(directories/2).
@@ -373,8 +374,10 @@
 	rdirectory(Project, Directory, UserOptions) :-
 		self(Self),
 		^^check_options(UserOptions),
-		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, Directory)),
+		os::internal_os_path(Directory, DirectoryOS),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, DirectoryOS)),
 		locate_directory(Directory, NormalizedDirectory),
+		os::internal_os_path(NormalizedDirectory, NormalizedDirectoryOS),
 		format_object(Format),
 		^^merge_options(UserOptions, Options),
 		::reset,
@@ -395,9 +398,9 @@
 			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, rdirectory, GraphOptions),
 			Format::file_footer(diagram_output_file, Project, [description(Description)| Options]) ->
-			logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, NormalizedDirectory))
+			logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, NormalizedDirectoryOS))
 		;	% failure is usually caused by errors in the source itself
-			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::rdirectory(Project, NormalizedDirectory, UserOptions)))
+			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::rdirectory(Project, NormalizedDirectoryOS, UserOptions)))
 		),
 		close(Stream),
 		::output_sub_diagrams(UserOptions).
@@ -434,8 +437,10 @@
 	directory(Project, Directory, UserOptions) :-
 		self(Self),
 		^^check_options(UserOptions),
-		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, Directory)),
+		os::internal_os_path(Directory, DirectoryOS),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, DirectoryOS)),
 		locate_directory(Directory, NormalizedDirectory),
+		os::internal_os_path(NormalizedDirectory, NormalizedDirectoryOS),
 		format_object(Format),
 		^^merge_options(UserOptions, Options),
 		::reset,
@@ -456,9 +461,9 @@
 			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, directory, GraphOptions),
 			Format::file_footer(diagram_output_file, Project, [description(Description)| Options]) ->
-			logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, NormalizedDirectory))
+			logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, NormalizedDirectoryOS))
 		;	% failure is usually caused by errors in the source itself
-			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::directory(Project, NormalizedDirectory, UserOptions)))
+			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::directory(Project, NormalizedDirectoryOS, UserOptions)))
 		),
 		close(Stream),
 		::output_sub_diagrams(UserOptions).
@@ -520,11 +525,12 @@
 	output_files([], _Options).
 	output_files([File| Files], Options) :-
 		self(Self),
-		logtalk::print_message(comment, diagrams, generating_diagram(Self, file, File)),
+		os::internal_os_path(File, FileOS),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, file, FileOS)),
 		locate_file(File, Basename, _, Directory, Path),
 		add_link_options(Path, Options, FileOptions),
 		::output_file(Path, Basename, Directory, FileOptions),
-		logtalk::print_message(comment, diagrams, generated_diagram(Self, file, File)),
+		logtalk::print_message(comment, diagrams, generated_diagram(Self, file, FileOS)),
 		output_files(Files, Options).
 
 	:- public(files/2).
@@ -583,9 +589,10 @@
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles),
-		logtalk::print_message(comment, diagrams, generating_diagram(Self, file, Path)),
+		os::internal_os_path(Path, PathOS),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, file, PathOS)),
 		::output_file(Path, Basename, Directory, Options),
-		logtalk::print_message(comment, diagrams, generated_diagram(Self, file, Path)),
+		logtalk::print_message(comment, diagrams, generated_diagram(Self, file, PathOS)),
 		fail.
 	output_all_files(Options) :-
 		self(Self),
@@ -602,9 +609,10 @@
 			logtalk::loaded_file(Other)
 		)),
 		modules_diagram_support::loaded_file_property(Path, directory(Directory)),
-		logtalk::print_message(comment, diagrams, generating_diagram(Self, file, Path)),
+		os::internal_os_path(Path, PathOS),
+		logtalk::print_message(comment, diagrams, generating_diagram(Self, file, PathOS)),
 		::output_file(Path, Basename, Directory, Options),
-		logtalk::print_message(comment, diagrams, generated_diagram(Self, file, Path)),
+		logtalk::print_message(comment, diagrams, generated_diagram(Self, file, PathOS)),
 		fail.
 	output_all_files(_).
 
