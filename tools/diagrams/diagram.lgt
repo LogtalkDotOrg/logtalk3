@@ -434,7 +434,7 @@
 		argnames is ['Project', 'Directory', 'Options']
 	]).
 
-	directory(Project, Directory, UserOptions) :-
+	directory(Project, DirectoryOS, UserOptions) :-
 		self(Self),
 		^^check_options(UserOptions),
 		os::internal_os_path(Directory, DirectoryOS),
