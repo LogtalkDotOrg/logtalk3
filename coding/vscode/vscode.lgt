@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:84:2,
+		version is 0:85:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2025-11-30,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -555,9 +555,7 @@
 
 	% declarations
 
-	find_declaration(Directory, Call, CallFile0, CallLine) :-
-		% workaround path downcasing on Windows
-		{'$lgt_expand_path'(CallFile0, CallFile)},
+	find_declaration(Directory, Call, CallFile, CallLine) :-
 		atom_concat(Directory, '/.vscode_declaration', Data),
 		atom_concat(Directory, '/.vscode_declaration_done', Marker),
 		open(Data, write, DataStream),
@@ -743,9 +741,7 @@
 
 	% definitions
 
-	find_definition(Directory, Call, CallFile0, CallLine) :-
-		% workaround path downcasing on Windows
-		{'$lgt_expand_path'(CallFile0, CallFile)},
+	find_definition(Directory, Call, CallFile, CallLine) :-
 		atom_concat(Directory, '/.vscode_definition', Data),
 		atom_concat(Directory, '/.vscode_definition_done', Marker),
 		open(Data, write, DataStream),
@@ -1047,9 +1043,7 @@
 
 	% references
 
-	find_references(Directory, Resource, ResourceFile0, ResourceLine) :-
-		% workaround path downcasing on Windows
-		{'$lgt_expand_path'(ResourceFile0, ResourceFile)},
+	find_references(Directory, Resource, ResourceFile, ResourceLine) :-
 		atom_concat(Directory, '/.vscode_references', Data),
 		atom_concat(Directory, '/.vscode_references_done', Marker),
 		open(Data, write, DataStream),
@@ -1448,9 +1442,7 @@
 
 	% implementations
 
-	find_implementations(Directory, Resource, ReferenceFile0, ReferenceLine) :-
-		% workaround path downcasing on Windows
-		{'$lgt_expand_path'(ReferenceFile0, ReferenceFile)},
+	find_implementations(Directory, Resource, ReferenceFile, ReferenceLine) :-
 		atom_concat(Directory, '/.vscode_implementations', Data),
 		atom_concat(Directory, '/.vscode_implementations_done', Marker),
 		open(Data, write, DataStream),
@@ -1544,9 +1536,7 @@
 
 	% callers
 
-	find_callers(Directory, Predicate, ReferenceFile0, ReferenceLine) :-
-		% workaround path downcasing on Windows
-		{'$lgt_expand_path'(ReferenceFile0, ReferenceFile)},
+	find_callers(Directory, Predicate, ReferenceFile, ReferenceLine) :-
 		atom_concat(Directory, '/.vscode_callers', Data),
 		atom_concat(Directory, '/.vscode_callers_done', Marker),
 		open(Data, write, DataStream),
@@ -1587,9 +1577,7 @@
 
 	% callees
 
-	find_callees(Directory, Predicate, ReferenceFile0, ReferenceLine) :-
-		% workaround path downcasing on Windows
-		{'$lgt_expand_path'(ReferenceFile0, ReferenceFile)},
+	find_callees(Directory, Predicate, ReferenceFile, ReferenceLine) :-
 		atom_concat(Directory, '/.vscode_callees', Data),
 		atom_concat(Directory, '/.vscode_callees_done', Marker),
 		open(Data, write, DataStream),
@@ -1769,21 +1757,39 @@
 
 	% loader file
 
-	find_parent_file(Directory, File0) :-
-		% workaround path downcasing on Windows
-		{'$lgt_expand_path'(File0, File)},
+	find_parent_file(Directory, File) :-
 		atom_concat(Directory, '/.vscode_find_parent', Data),
 		atom_concat(Directory, '/.vscode_find_parent_done', Marker),
 		open(Data, write, DataStream),
-		(	logtalk::loaded_file_property(File, parent(Loader)) ->
-			{format(DataStream, '~w', [Loader])}
-		;	logtalk::loaded_file_property(Loader, includes(File)) ->
+		(	find_parent_file_(File, Loader) ->
 			{format(DataStream, '~w', [Loader])}
 		;	true
 		),
 		close(DataStream),
 		open(Marker, write, MarkerStream),
 		close(MarkerStream).
+
+	find_parent_file_(File, Loader) :-
+		(	{'$lgt_environment_variable'('COMSPEC', _)} ->
+			% assume running on Windows
+			current_logtalk_flag(prolog_dialect, Dialect),
+			% workaround backends downcasing file paths on Windows
+			(	Dialect == swi ->
+				{downcase_atom(File, FileAlt)}
+			;	Dialect == sicstus ->
+				downcase_atom_portable(File, FileAlt)
+			;	Dialect == eclipse ->
+				{'$lgt_prolog_os_file_name'(FileAlt, File)}
+			;	FileAlt = File
+			)
+		;	FileAlt = File
+		),
+		(	logtalk::loaded_file_property(FileAlt, parent(Loader)) ->
+			true
+		;	logtalk::loaded_file_property(Loader, includes(FileAlt)) ->
+			true
+		;	fail
+		).
 
 	% infer public predicates
 
