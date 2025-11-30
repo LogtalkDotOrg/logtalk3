@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:84:1,
+		version is 0:84:2,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-11-28,
+		date is 2025-11-30,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1938,15 +1938,17 @@
 		current_logtalk_flag(prolog_dialect, Dialect),
 		% workaround backends downcasing file paths on Windows
 		(	Dialect == swi ->
-			{downcase_atom(File, FileLowerCase)}
-		;	Dialect == sicstus,
-			downcase_atom_portable(File, FileLowerCase)
+			{downcase_atom(File, FileAlt)}
+		;	Dialect == sicstus ->
+			downcase_atom_portable(File, FileAlt)
+		;	Dialect == eclipse,
+			{'$lgt_prolog_os_file_name'(FileAlt, File)}
 		),
-        (	object_property(Entity, file(FileLowerCase)),
+        (	object_property(Entity, file(FileAlt)),
         	object_property(Entity, lines(BeginLine, EndLine))
-		;	category_property(Entity, file(FileLowerCase)),
+		;	category_property(Entity, file(FileAlt)),
         	category_property(Entity, lines(BeginLine, EndLine))
-		;	protocol_property(Entity, file(FileLowerCase)),
+		;	protocol_property(Entity, file(FileAlt)),
         	protocol_property(Entity, lines(BeginLine, EndLine))
 		),
         BeginLine =< Line, Line =< EndLine,

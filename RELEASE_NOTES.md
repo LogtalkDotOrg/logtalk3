@@ -60,6 +60,9 @@ IDEs, text editors, and syntax highlighters support
 * FIXED: The VSCode support use of the `atomic_list_concat/2` predicate
 to work will all backends.
 
+* FIXED: The VSCode support for ECLiPSe file paths on Windows when finding
+the enclosing entity from a file position.
+
 
 3.96.0 - November 18, 2025
 ==========================
