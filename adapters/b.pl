@@ -68,7 +68,7 @@ findall(Term, Goal, List, Tail) :-
 % forall(+callable, +callable) -- built-in
 
 
-% format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in
+% format(+stream_or_alias, +character_code_list_or_atom, +list)
 
 '$lgt_format'(Stream, Format, Arguments) :-
 	format(Stream, Format, Arguments).
