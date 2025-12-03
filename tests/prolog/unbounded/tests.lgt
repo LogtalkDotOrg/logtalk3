@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:13:0,
 		author is 'Paulo Moura',
-		date is 2022-03-25,
+		date is 2025-12-03,
 		comment is 'Unit tests for unbounded integer arithmetic.'
 	]).
 
@@ -487,6 +487,18 @@
 	test(lgt_unbounded_arg_04, error(domain_error(not_less_than_zero, -1844674407370909797907654848955145546336677610))) :-
 		arg(-1844674407370909797907654848955145546336677610, t(1,2,3), _).
 
+	% format/2-3
+
+	test(lgt_unbounded_format_01, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~d', [1844674407370909797907654848955145546336677616])},
+		^^text_output_assertion('1844674407370909797907654848955145546336677616', Assertion).
+
+	test(lgt_unbounded_format_02, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, '~d', [1844674407370909797907654848955145546336677616])},
+		^^text_output_assertion(out, '1844674407370909797907654848955145546336677616', Assertion).
+
 	% auxiliary predicates for delaying tests to runtime
 
 	small(42).
@@ -496,3 +508,9 @@
 	real(1.0e+32).
 
 :- end_object.
+
+
+:- if(current_logtalk_flag(prolog_dialect, xsb)).
+	% workaround XSB atom-based module system
+	:- import(from(/(format,2), format)).
+:- endif.

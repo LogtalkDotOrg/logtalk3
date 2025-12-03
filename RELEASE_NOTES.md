@@ -51,6 +51,9 @@ Tests
 * ADDED: Additional tests for the de facto standard `format/2-3` predicates
 from the PIP-0110 standardization work.
 
+* ADDED: Additional tests for unbounded integers when used as arguments to the
+`format/2-3` predicates.
+
 Installers and installation scripts
 -----------------------------------
 
