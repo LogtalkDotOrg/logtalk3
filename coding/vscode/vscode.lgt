@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:85:0,
+		version is 0:86:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-11-30,
+		date is 2025-12-03,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -2138,8 +2138,14 @@
 		memberchk(lines(Line, _), Properties),
 		(	Covered =:= Total ->
 			% all clause are covered
-			{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests clause coverage: ~w - ~w~n', [File, Line, Covered/Total, '(all)'])}
-		;	{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests clause coverage: ~w - ~w~n', [File, Line, Covered/Total, Clauses])}
+			(	Total =:= 1 ->
+				{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests coverage: ~w clause - ~w~n', [File, Line, Covered/Total, '(all)'])}
+			;	{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests coverage: ~w clauses - ~w~n', [File, Line, Covered/Total, '(all)'])}
+			)
+		;	(	Total =:= 1 ->
+				{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests coverage: ~w clause - ~w~n', [File, Line, Covered/Total, Clauses])}
+			;	{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests coverage: ~w clauses - ~w~n', [File, Line, Covered/Total, Clauses])}
+			)
 		),
 		fail.
 	:- if(current_logtalk_flag(prolog_dialect, ji)).
@@ -2148,8 +2154,8 @@
 			entity_property(Entity, Kind, file(File)),
 			entity_property(Entity, Kind, lines(Line, _)),
 			(	Total =:= 1 ->
-				{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clause covered, ~f% coverage~n', [File, Line, Covered, Total, Percentage])}
-			;	{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clauses covered, ~f% coverage~n', [File, Line, Covered, Total, Percentage])}
+				{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests coverage: ~d/~d clause (~f%)~n', [File, Line, Covered, Total, Percentage])}
+			;	{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests coverage: ~d/~d clauses (~f%)~n', [File, Line, Covered, Total, Percentage])}
 			),
 			fail.
 	:- else.
@@ -2158,8 +2164,8 @@
 			entity_property(Entity, Kind, file(File)),
 			entity_property(Entity, Kind, lines(Line, _)),
 			(	Total =:= 1 ->
-				{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clause covered, ~2f% coverage~n', [File, Line, Covered, Total, Percentage])}
-			;	{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clauses covered, ~2f% coverage~n', [File, Line, Covered, Total, Percentage])}
+				{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests coverage: ~d/~d clause (~2f%)~n', [File, Line, Covered, Total, Percentage])}
+			;	{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests coverage: ~d/~d clauses (~2f%)~n', [File, Line, Covered, Total, Percentage])}
 			),
 			fail.
 	:- endif.

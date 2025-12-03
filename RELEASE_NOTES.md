@@ -57,6 +57,8 @@ deployment via enterprise management tools.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* UPDATED: The VSCode support for more compact display of tests coverage.
+
 * FIXED: The VSCode support use of the `atomic_list_concat/2` predicate
 to work will all backends.
 
