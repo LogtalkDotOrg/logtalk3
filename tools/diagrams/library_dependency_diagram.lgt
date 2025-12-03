@@ -23,9 +23,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2:33:1,
+		version is 2:34:0,
 		author is 'Paulo Moura',
-		date is 2024-04-01,
+		date is 2025-12-03,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [library_load_diagram(_), directory_load_diagram(_), file_load_diagram(_), entity_diagram(_)]
@@ -43,13 +43,12 @@
 		argnames is ['Library']
 	]).
 
-	% first, output the library node if it depends on one or more libraries
+	% first, output the library node independently of any dependencies on other libraries
 	output_library(Library, Directory, Options) :-
 		parameter(1, Format),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
 		^^add_library_documentation_url(logtalk, LinkingOptions, Library, NodeOptions0),
-		once(depends_library(Library, Directory, _, _, _)),
 		entity_diagram(Format)::diagram_name_suffix(Suffix),
 		^^add_node_zoom_option(Library, Suffix, NodeOptions0, NodeOptions),
 		assertz(sub_diagram_(Library)),

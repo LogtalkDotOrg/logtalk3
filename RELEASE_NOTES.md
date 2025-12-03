@@ -28,6 +28,9 @@ RELEASE NOTES
 Tools
 -----
 
+* CHANGED: The `diagrams` tool directory and library dependency diagrams to
+always output the root directory and library nodes.
+
 * ADDED: Support to the `lgtdoc` tool for converting XML documenting files
 to HTML 5 files.
 
