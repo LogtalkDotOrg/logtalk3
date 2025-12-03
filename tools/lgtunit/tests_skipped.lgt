@@ -23,16 +23,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2024-10-16,
+		date is 2025-12-03,
 		comment is 'Unit tests for the "lgtunit" tool support for skipping tests.'
 	]).
 
 	- test(t1, true).
 
 	test(t2, true(Tests == [t1, t3])) :-
-		findall(Test, ::test(Test, skipped(Test, _)), Tests).
+		findall(Test, ::test(Test, skipped(Test, _, _)), Tests).
 
 	- test(t3, true).
 

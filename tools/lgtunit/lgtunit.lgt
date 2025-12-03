@@ -28,9 +28,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 22:3:0,
+		version is 22:3:1,
 		author is 'Paulo Moura',
-		date is 2025-10-20,
+		date is 2025-12-03,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1062,7 +1062,7 @@
 		).
 
 	% test/3 dialect
-	run_test(succeeds(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note), File, Output) :-
+	run_test(succeeds(Test, Variables, File, Position, Condition, Setup, Cleanup, Flaky, Note), _MainFile, Output) :-
 		(	run_test_condition(Condition) ->
 			(	run_test_setup(Test, Setup, File, Position, Flaky, Note, Output) ->
 				wall_time(WallStart),
@@ -1079,7 +1079,7 @@
 			)
 		;	skipped_test(Test, File, Position, Flaky, Note, Output)
 		).
-	run_test(deterministic(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note), File, Output) :-
+	run_test(deterministic(Test, Variables, File, Position, Condition, Setup, Cleanup, Flaky, Note), _MainFile, Output) :-
 		(	run_test_condition(Condition) ->
 			(	run_test_setup(Test, Setup, File, Position, Flaky, Note, Output) ->
 				wall_time(WallStart),
@@ -1099,7 +1099,7 @@
 			)
 		;	skipped_test(Test, File, Position, Flaky, Note, Output)
 		).
-	run_test(fails(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note), File, Output) :-
+	run_test(fails(Test, Variables, File, Position, Condition, Setup, Cleanup, Flaky, Note), _MainFile, Output) :-
 		(	run_test_condition(Condition) ->
 			(	run_test_setup(Test, Setup, File, Position, Flaky, Note, Output) ->
 				wall_time(WallStart),
@@ -1116,7 +1116,7 @@
 			)
 		;	skipped_test(Test, File, Position, Flaky, Note, Output)
 		).
-	run_test(throws(Test, Variables, PossibleErrors, Position, Condition, Setup, Cleanup, Flaky, Note), File, Output) :-
+	run_test(throws(Test, Variables, PossibleErrors, File, Position, Condition, Setup, Cleanup, Flaky, Note), _MainFile, Output) :-
 		(	run_test_condition(Condition) ->
 			(	run_test_setup(Test, Setup, File, Position, Flaky, Note, Output) ->
 				wall_time(WallStart),
@@ -1136,7 +1136,7 @@
 		;	skipped_test(Test, File, Position, Flaky, Note, Output)
 		).
 	% quick_check/3 dialect
-	run_test(quick_check(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note), File, Output) :-
+	run_test(quick_check(Test, Variables, File, Position, Condition, Setup, Cleanup, Flaky, Note), _MainFile, Output) :-
 		(	run_test_condition(Condition) ->
 			(	run_test_setup(Test, Setup, File, Position, Flaky, Note, Output) ->
 				wall_time(WallStart),
@@ -1154,7 +1154,7 @@
 		;	skipped_test(Test, File, Position, Flaky, Note, Output)
 		).
 	% quick_check/2 dialect
-	run_test(quick_check(Test, Variables, Position), File, Output) :-
+	run_test(quick_check(Test, Variables, File, Position), _MainFile, Output) :-
 		wall_time(WallStart),
 		cpu_time(CPUStart),
 		(	catch(::test(Test, Variables, quick_check), Error, failed_test(Test, File, Position, Error, CPUStart, WallStart, Output)) ->
@@ -1165,7 +1165,7 @@
 		;	failed_test(Test, File, Position, failure_instead_of_success, CPUStart, WallStart, Output)
 		).
 	% other dialects
-	run_test(succeeds(Test, Variables, Position), File, Output) :-
+	run_test(succeeds(Test, Variables, File, Position), _MainFile, Output) :-
 		wall_time(WallStart),
 		cpu_time(CPUStart),
 		(	catch(::test(Test, Variables, true), Error, failed_test(Test, File, Position, error_instead_of_success(Error), CPUStart, WallStart, Output)) ->
@@ -1175,7 +1175,7 @@
 			)
 		;	failed_test(Test, File, Position, failure_instead_of_success, CPUStart, WallStart, Output)
 		).
-	run_test(deterministic(Test, Variables, Position), File, Output) :-
+	run_test(deterministic(Test, Variables, File, Position), _MainFile, Output) :-
 		wall_time(WallStart),
 		cpu_time(CPUStart),
 		(	catch(::test(Test, Variables, deterministic(Deterministic)), Error, failed_test(Test, File, Position, error_instead_of_success(Error), CPUStart, WallStart, Output)) ->
@@ -1188,7 +1188,7 @@
 			)
 		;	failed_test(Test, File, Position, failure_instead_of_success, CPUStart, WallStart, Output)
 		).
-	run_test(fails(Test, Variables, Position), File, Output) :-
+	run_test(fails(Test, Variables, File, Position), _MainFile, Output) :-
 		wall_time(WallStart),
 		cpu_time(CPUStart),
 		(	catch(::test(Test, Variables, fail), Error, failed_test(Test, File, Position, error_instead_of_failure(Error), CPUStart, WallStart, Output)) ->
@@ -1198,7 +1198,7 @@
 			)
 		;	passed_test(Test, File, Position, CPUStart, WallStart, Output)
 		).
-	run_test(throws(Test, Variables, PossibleErrors, Position), File, Output) :-
+	run_test(throws(Test, Variables, PossibleErrors, File, Position), _MainFile, Output) :-
 		wall_time(WallStart),
 		cpu_time(CPUStart),
 		(	catch(::test(Test, Variables, PossibleErrors), Error, check_error(Test, PossibleErrors, Error, File, Position, CPUStart, WallStart, Output)) ->
@@ -1211,10 +1211,10 @@
 			failed_test(Test, File, Position, failure_instead_of_error(PossibleError), CPUStart, WallStart, Output)
 		).
 
-	run_test(skipped(Test, Position, Flaky, Note), File, Output) :-
+	run_test(skipped(Test, File, Position, Flaky, Note), _MainFile, Output) :-
 		skipped_test(Test, File, Position, Flaky, Note, Output).
 
-	run_test(skipped(Test, Position), File, Output) :-
+	run_test(skipped(Test, File, Position), _MainFile, Output) :-
 		skipped_test(Test, File, Position, Output).
 
 	check_error(Test, PossibleErrors, Error, File, Position, CPUStart, WallStart, Output) :-
@@ -1444,8 +1444,8 @@
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
 		(	Head = test(Test, _, Options) ->
 			parse_test_options(Options, Test, _, _, _, Flaky, Note, File, Position, Type, Entity),
-			assertz(test_(Test, skipped(Test, Position, Flaky, Note)))
-		;	assertz(test_(Test, skipped(Test, Position)))
+			assertz(test_(Test, skipped(Test, File, Position, Flaky, Note)))
+		;	assertz(test_(Test, skipped(Test, File, Position)))
 		).
 
 	% selected tests
@@ -1471,13 +1471,13 @@
 		term_variables(Outcome0+Options, Variables),
 		parse_test_options(Options, Test, Condition, Setup, Cleanup, Flaky, Note, File, Position, Type, Entity),
 		(	Outcome == true ->
-			assertz(test_(Test, succeeds(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note)))
+			assertz(test_(Test, succeeds(Test, Variables, File, Position, Condition, Setup, Cleanup, Flaky, Note)))
 		;	Outcome = deterministic(_) ->
-			assertz(test_(Test, deterministic(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note)))
+			assertz(test_(Test, deterministic(Test, Variables, File, Position, Condition, Setup, Cleanup, Flaky, Note)))
 		;	Outcome == fail ->
-			assertz(test_(Test, fails(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note)))
+			assertz(test_(Test, fails(Test, Variables, File, Position, Condition, Setup, Cleanup, Flaky, Note)))
 		;	% errors
-			assertz(test_(Test, throws(Test, Variables, Outcome, Position, Condition, Setup, Cleanup, Flaky, Note)))
+			assertz(test_(Test, throws(Test, Variables, Outcome, File, Position, Condition, Setup, Cleanup, Flaky, Note)))
 		).
 
 	% unit test idiom test/2
@@ -1490,43 +1490,43 @@
 		convert_test_outcome(Outcome0, Test, Goal0, Outcome, Goal, File, Position, Type, Entity, VariableNames),
 		term_variables(Outcome0, Variables),
 		(	Outcome == true ->
-			assertz(test_(Test, succeeds(Test, Variables, Position)))
+			assertz(test_(Test, succeeds(Test, Variables, File, Position)))
 		;	Outcome = deterministic(_) ->
-			assertz(test_(Test, deterministic(Test, Variables, Position)))
+			assertz(test_(Test, deterministic(Test, Variables, File, Position)))
 		;	Outcome == fail ->
-			assertz(test_(Test, fails(Test, Variables, Position)))
+			assertz(test_(Test, fails(Test, Variables, File, Position)))
 		;	% errors
-			assertz(test_(Test, throws(Test, Variables, Outcome, Position)))
+			assertz(test_(Test, throws(Test, Variables, Outcome, File, Position)))
 		).
 
 	% unit test idiom test/1
 	term_expansion(test(Test), [test(Test, [], true)], _) :-
 		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
-		assertz(test_(Test, succeeds(Test, [], Position))).
+		assertz(test_(Test, succeeds(Test, [], File, Position))).
 	term_expansion((test(Test) :- Goal), [(test(Test, [], true) :- Goal)], _) :-
 		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
-		assertz(test_(Test, succeeds(Test, [], Position))).
+		assertz(test_(Test, succeeds(Test, [], File, Position))).
 
 	% unit test idiom succeeds/1 + deterministic/1 + fails/1 + throws/2
 	term_expansion(succeeds(Test), [test(Test, [], true)], _) :-
 		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
-		assertz(test_(Test, succeeds(Test, [], Position))).
+		assertz(test_(Test, succeeds(Test, [], File, Position))).
 	term_expansion((succeeds(Test) :- Goal), [(test(Test, [], true) :- Goal)], _) :-
 		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
-		assertz(test_(Test, succeeds(Test, [], Position))).
+		assertz(test_(Test, succeeds(Test, [], File, Position))).
 	term_expansion((deterministic(Test) :- Goal), [(test(Test, [], deterministic(Deterministic)) :- lgtunit::deterministic(Head,Deterministic))], _) :-
 		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
 		compile_deterministic_test_aux_predicate(Test, Goal, Head),
-		assertz(test_(Test, deterministic(Test, [], Position))).
+		assertz(test_(Test, deterministic(Test, [], File, Position))).
 	term_expansion((fails(Test) :- Goal), [(test(Test, [], fail) :- Goal)], _) :-
 		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
-		assertz(test_(Test, fails(Test, [], Position))).
+		assertz(test_(Test, fails(Test, [], File, Position))).
 	term_expansion((throws(Test, Balls) :- Goal), [(test(Test, Variables, Errors) :- Goal)], _) :-
 		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
@@ -1535,7 +1535,7 @@
 		;	Errors = [Balls]
 		),
 		term_variables(Balls, Variables),
-		assertz(test_(Test, throws(Test, Variables, Errors, Position))).
+		assertz(test_(Test, throws(Test, Variables, Errors, File, Position))).
 
 	% unit test idiom quick_check/3
 	term_expansion(quick_check(Test, Template, Options),  [(test(Test, Variables, quick_check) :- ::run_quick_check_tests(Template, QuickCheckOptions, _, _, _))], _) :-
@@ -1543,14 +1543,14 @@
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
 		term_variables(Options, Variables),
 		parse_quick_check_idiom_options(Options, Test, Condition, Setup, Cleanup, Flaky, Note, QuickCheckOptions, File, Position, Type, Entity),
-		assertz(test_(Test, quick_check(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note))).
+		assertz(test_(Test, quick_check(Test, Variables, File, Position, Condition, Setup, Cleanup, Flaky, Note))).
 
 	% unit test idiom quick_check/2
 	term_expansion(quick_check(Test, Template),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, QuickCheckOptions, _, _, _))], _) :-
 		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
 		findall(Option, default_quick_check_option(Option), QuickCheckOptions),
-		assertz(test_(Test, quick_check(Test, [], Position))).
+		assertz(test_(Test, quick_check(Test, [], File, Position))).
 
 	% make target for automatically running the tests
 	term_expansion(make(Target), [make(Target), (:- initialization({assertz((logtalk_make_target_action(Target) :- Tests::run))}))], _) :-
