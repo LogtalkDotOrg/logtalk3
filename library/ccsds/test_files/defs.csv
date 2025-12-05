@@ -1,0 +1,14 @@
+name,data_type,bit_offset,bit_length,calibration
+pkt1_time_secs,uint,0,32,
+pkt1_time_subsecs,uint,32,16,
+pkt1_uint8_cnt,uint,48,8,"{""0"":""INVALID"",""[1,3]"":""POSITIVE"",""[6,100]"":""NEGATIVE"",""[101,101]"":""OVERFLOW"",""103"":""NO_OVERFLOW"",""[110,255]"":""DEFAULT""}"
+pkt1_uint16_osc,uint,56,16,
+pkt1_uint32_cnt,uint,72,32,"{""[0,1714811133]"":""BELOW"",""1714834890"":""INVALID"",""1714866566"":""EQUAL"",""[1714866567,4294967295]"":""ABOVE""}"
+pkt1_uint32_sprsmp[0],uint,104,4,
+pkt1_uint32_sprsmp[1],uint,104,4,
+pkt1_uint32_sprsmp[2],uint,104,4,
+pkt1_uint32_sprsmp[3],uint,104,4,
+pkt1_uint32_sprsmp[4],uint,104,4,
+pkt1_uint32_sprsmp[5],uint,104,4,
+pkt1_uint32_sprsmp[6],uint,104,4,
+pkt1_uint32_sprsmp[7],uint,104,4,

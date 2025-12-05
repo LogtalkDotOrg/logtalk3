@@ -25,6 +25,13 @@ RELEASE NOTES
 3.97.0 - December ??, 2025
 ==========================
 
+Library
+-------
+
+* ADDED: New `ccsds` library for parsing and generating CCSDS (Consultative
+Committee for Space Data Systems) Space Packets following the CCSDS 133.0-B-2
+standard (Space Packet Protocol).
+
 Tools
 -----
 
