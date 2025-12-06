@@ -23,11 +23,41 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
 		date is 2025-12-06,
 		comment is 'Performance tests for the "ccsds" library.'
 	]).
+
+	:- private(bytes_/1).
+	:- dynamic(bytes_/1).
+
+	setup :-
+		type::arbitrary(ccsds_packet, Bytes),
+		assertz(bytes_(Bytes)).
+
+	cleanup :-
+		retractall(bytes_(_)).
+
+	% Performance test: parse 1 packet 1000 times
+	test(parse_1_packet_1000_times, true, [note(seconds-Time)]) :-
+		bytes_(Bytes),
+		lgtunit::benchmark(ccsds::parse(Bytes, _), 1000, Time).
+
+	% Performance test: parse 1 packet 10000 times
+	test(parse_1_packet_10000_times, true, [note(seconds-Time)]) :-
+		bytes_(Bytes),
+		lgtunit::benchmark(ccsds::parse(Bytes, _), 10000, Time).
+
+	% Performance test: parse 1 packet 100000 times
+	test(parse_1_packet_100000_times, true, [note(seconds-Time)]) :-
+		bytes_(Bytes),
+		lgtunit::benchmark(ccsds::parse(Bytes, _), 100000, Time).
+
+	% Performance test: parse 1 packet 1000000 times
+	test(parse_1_packet_1000000_times, true, [note(seconds-Time)]) :-
+		bytes_(Bytes),
+		lgtunit::benchmark(ccsds::parse(Bytes, _), 1000000, Time).
 
 	% Performance test: parse 1000 packets
 	test(parse_1000_packets, true, [note(seconds-Time)]) :-
