@@ -116,6 +116,12 @@ packets. For example:
     | ?- type::check(ccsds_packet, Bytes).
     | ?- type::arbitrary(ccsds_packet(42), Bytes).
 
+It also provides a `ccsds_packets(N)` and `ccsds_packets(SecondaryHeaderLength, N)`
+types for generating a list with `N` packets. For example:
+
+    | ?- type::arbitrary(ccsds_packets(10), Bytes).
+    | ?- type::arbitrary(ccsds_packets(42, 10), Bytes).
+
 
 API documentation
 -----------------

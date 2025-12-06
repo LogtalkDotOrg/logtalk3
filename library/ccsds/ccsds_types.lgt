@@ -58,6 +58,8 @@
 	:- multifile(arbitrary::arbitrary/1).
 	arbitrary::arbitrary(ccsds_packet(_)).
 	arbitrary::arbitrary(ccsds_packet).
+	arbitrary::arbitrary(ccsds_packets(_, _)).
+	arbitrary::arbitrary(ccsds_packets(_)).
 
 	:- multifile(arbitrary::arbitrary/2).
 	arbitrary::arbitrary(ccsds_packet(SecondaryHeaderLength), Bytes) :-
@@ -65,8 +67,26 @@
 	% ccsds_packet is an alias for ccsds_packet(0)
 	arbitrary::arbitrary(ccsds_packet, Bytes) :-
 		generate_ccsds_packet(0, Bytes).
+	arbitrary::arbitrary(ccsds_packets(SecondaryHeaderLength, N), Bytes) :-
+		generate_ccsds_packets(SecondaryHeaderLength, N, Bytes).
+	% ccsds_packet is an alias for ccsds_packet(0)
+	arbitrary::arbitrary(ccsds_packets(N), Bytes) :-
+		generate_ccsds_packets(0, N, Bytes).
 
 	generate_ccsds_packet(SecondaryHeaderLength, Bytes) :-
+		generate_ccsds_packet_term(SecondaryHeaderLength, Packet),
+		ccsds(SecondaryHeaderLength)::generate(Packet, Bytes).
+
+	generate_ccsds_packets(_, 0, []) :-
+		!.
+	generate_ccsds_packets(SecondaryHeaderLength, N, Bytes) :-
+		N > 0,
+		M is N - 1,
+		generate_ccsds_packet_term(SecondaryHeaderLength, Packet),
+		ccsds(SecondaryHeaderLength)::generate(Packet, Bytes, Tail),
+		generate_ccsds_packets(SecondaryHeaderLength, M, Tail).
+
+	generate_ccsds_packet_term(SecondaryHeaderLength, Packet) :-
 		% Generate random valid packet fields
 		Version = 0,                                                % Version is always 0
 		type::arbitrary(between(integer, 0, 1), Type),              % 0=telemetry, 1=telecommand
@@ -86,8 +106,7 @@
 		% Calculate data length field (total data field length - 1)
 		DataLength is UserDataLength + SecondaryHeaderLength - 1,
 		% Build the packet and generate bytes
-		Packet = ccsds_packet(Version, Type, SecHeaderFlag, APID, SeqFlags, SeqCount, DataLength, SecHeader, UserData),
-		ccsds(SecondaryHeaderLength)::generate(Packet, Bytes).
+		Packet = ccsds_packet(Version, Type, SecHeaderFlag, APID, SeqFlags, SeqCount, DataLength, SecHeader, UserData).
 
 :- end_category.
 

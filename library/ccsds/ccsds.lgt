@@ -22,9 +22,9 @@
 :- object(ccsds(_SecondaryHeaderLength_)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
-		date is 2025-12-05,
+		date is 2025-12-06,
 		comment is 'CCSDS Space Packet parser following the CCSDS 133.0-B-2 standard. Parses binary packet data including optional secondary headers.',
 		parameters is [
 			'SecondaryHeaderLength' - 'Length in bytes of the secondary header when present (0 for no secondary header parsing, or a positive integer).'
@@ -64,6 +64,13 @@
 	:- info(generate/2, [
 		comment is 'Generates a list of bytes from a CCSDS packet term.',
 		argnames is ['Packet', 'Bytes']
+	]).
+
+	:- public(generate/3).
+	:- mode(generate(+compound, -list(byte), --variable), one_or_error).
+	:- info(generate/3, [
+		comment is 'Generates a list of bytes from a CCSDS packet term with an open tail.',
+		argnames is ['Packet', 'Bytes', 'Tail']
 	]).
 
 	:- public(version/2).
@@ -177,6 +184,12 @@
 		phrase(encode_packet(Packet), Bytes),
 		!.
 	generate(Packet, _) :-
+		domain_error(ccsds_packet, Packet).
+
+	generate(Packet, Bytes, Tail) :-
+		phrase(encode_packet(Packet), Bytes, Tail),
+		!.
+	generate(Packet, _, _) :-
 		domain_error(ccsds_packet, Packet).
 
 	% Accessor predicates
