@@ -64,6 +64,8 @@ from the PIP-0110 standardization work.
 Installers and installation scripts
 -----------------------------------
 
+* UPDATED: The Windows installation script to also detect ECLiPSe 7.2 versions.
+
 * FIXED: The Windows installer to support running in system context for
 deployment via enterprise management tools.
 

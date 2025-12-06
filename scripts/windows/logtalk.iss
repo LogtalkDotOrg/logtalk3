@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on November 27, 2025
+; Last updated on December 6, 2025
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -341,34 +341,41 @@ var
   ECLIPSEDIR: String;
 begin
   if IsWin64 then
-    if RegQueryStringValue(HKLM64, 'Software\IC-Parc\Eclipse\7.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
-        Result := ECLIPSEDIR + '\lib\x86_64_nt\eclipse.exe'
+    if RegQueryStringValue(HKLM64, 'Software\IC-Parc\Eclipse\7.2\', 'ECLIPSEDIR', ECLIPSEDIR) then
+      Result := ECLIPSEDIR + '\lib\x86_64_nt\eclipse.exe'
+    else if RegQueryStringValue(HKLM32, 'Software\IC-Parc\Eclipse\7.2\', 'ECLIPSEDIR', ECLIPSEDIR) then
+      Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
+    else if RegQueryStringValue(HKLM64, 'Software\IC-Parc\Eclipse\7.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
+      Result := ECLIPSEDIR + '\lib\x86_64_nt\eclipse.exe'
     else if RegQueryStringValue(HKLM32, 'Software\IC-Parc\Eclipse\7.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
-        Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
+      Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
     else if RegQueryStringValue(HKLM64, 'Software\IC-Parc\Eclipse\7.0\', 'ECLIPSEDIR', ECLIPSEDIR) then
-        Result := ECLIPSEDIR + '\lib\x86_64_nt\eclipse.exe'
+      Result := ECLIPSEDIR + '\lib\x86_64_nt\eclipse.exe'
     else if RegQueryStringValue(HKLM32, 'Software\IC-Parc\Eclipse\7.0\', 'ECLIPSEDIR', ECLIPSEDIR) then
-        Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
+      Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
     else if RegQueryStringValue(HKLM64, 'Software\IC-Parc\Eclipse\6.2\', 'ECLIPSEDIR', ECLIPSEDIR) then
-        Result := ECLIPSEDIR + '\lib\x86_64_nt\eclipse.exe'
+      Result := ECLIPSEDIR + '\lib\x86_64_nt\eclipse.exe'
     else if RegQueryStringValue(HKLM32, 'Software\IC-Parc\Eclipse\6.2\', 'ECLIPSEDIR', ECLIPSEDIR) then
-        Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
+      Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
     else if RegQueryStringValue(HKLM64, 'Software\IC-Parc\Eclipse\6.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
-        Result := ECLIPSEDIR + '\lib\x86_64_nt\eclipse.exe'
+      Result := ECLIPSEDIR + '\lib\x86_64_nt\eclipse.exe'
     else if RegQueryStringValue(HKLM32, 'Software\IC-Parc\Eclipse\6.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
-        Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
+      Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
     else
       Result := 'prolog_compiler_not_installed'
-  else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\7.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
-         Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
-       else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\7.0\', 'ECLIPSEDIR', ECLIPSEDIR) then
-         Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
-       else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\6.2\', 'ECLIPSEDIR', ECLIPSEDIR) then
-         Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
-       else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\6.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
-         Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
-       else
-         Result := 'prolog_compiler_not_installed'
+  else
+    if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\7.2\', 'ECLIPSEDIR', ECLIPSEDIR) then
+      Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
+    else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\7.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
+      Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
+    else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\7.0\', 'ECLIPSEDIR', ECLIPSEDIR) then
+      Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
+    else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\6.2\', 'ECLIPSEDIR', ECLIPSEDIR) then
+      Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
+    else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\6.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
+      Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
+    else
+      Result := 'prolog_compiler_not_installed'
 end;
 
 function GetEclipseExePath(Param: String): String;
