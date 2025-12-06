@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2025-12-05,
+		date is 2025-12-06,
 		comment is 'Unit tests for the "ccsds" library.'
 	]).
 
@@ -42,6 +42,7 @@
 
 	cover(ccsds).
 	cover(ccsds(_)).
+	cover(ccsds_types).
 
 	% Test packet structure (without secondary header parsing):
 	% - Version: 0 (3 bits)
@@ -260,132 +261,192 @@
 		                   secondary_header([0x01, 0x02, 0x03, 0x04, 0x05, 0x06]),
 		                   [0xAA, 0xBB]), Bytes).
 
-		% ============================================================
-		% Tests using sample data files from CCSDSPy project
-		% ============================================================
+	% ============================================================
+	% Tests using sample data files from CCSDSPy project
+	% ============================================================
 
-		% --- var_length_packets.bin tests ---
-		% Contains 10 variable-length packets with APIDs 0x20E2 (8418)
+	% --- var_length_packets.bin tests ---
+	% Contains 10 variable-length packets with APIDs 0x20E2 (8418)
 
-		test(ccsds_file_var_length_01, true(N == 10)) :-
-			^^file_path('test_files/var_length_packets.bin', Path),
-			ccsds::parse_file(Path, Packets),
-			length(Packets, N).
+	test(ccsds_file_var_length_01, true(N == 10)) :-
+		^^file_path('test_files/var_length_packets.bin', Path),
+		ccsds::parse_file(Path, Packets),
+		length(Packets, N).
 
-		test(ccsds_file_var_length_02, true(APID == 226)) :-
-			% First packet APID (0x00E2 from first two bytes 0x20E2 with version/type bits)
-			^^file_path('test_files/var_length_packets.bin', Path),
-			ccsds::parse_file(Path, [Packet| _]),
-			apid(Packet, APID).
+	test(ccsds_file_var_length_02, true(APID == 226)) :-
+		% First packet APID (0x00E2 from first two bytes 0x20E2 with version/type bits)
+		^^file_path('test_files/var_length_packets.bin', Path),
+		ccsds::parse_file(Path, [Packet| _]),
+		apid(Packet, APID).
 
-		test(ccsds_file_var_length_03, true) :-
-			% All packets have the same APID
-			^^file_path('test_files/var_length_packets.bin', Path),
-			ccsds::parse_file(Path, Packets),
-			forall(member(Packet, Packets), apid(Packet, 226)).
+	test(ccsds_file_var_length_03, true) :-
+		% All packets have the same APID
+		^^file_path('test_files/var_length_packets.bin', Path),
+		ccsds::parse_file(Path, Packets),
+		forall(member(Packet, Packets), apid(Packet, 226)).
 
-		test(ccsds_file_var_length_04, true(Counts == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])) :-
-			% Sequence counts increment from 0 to 9
-			^^file_path('test_files/var_length_packets.bin', Path),
-			ccsds::parse_file(Path, Packets),
-			findall(Count, (member(Packet, Packets), sequence_count(Packet, Count)), Counts).
+	test(ccsds_file_var_length_04, true(Counts == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])) :-
+		% Sequence counts increment from 0 to 9
+		^^file_path('test_files/var_length_packets.bin', Path),
+		ccsds::parse_file(Path, Packets),
+		findall(Count, (member(Packet, Packets), sequence_count(Packet, Count)), Counts).
 
-		% --- apid01217.tlm tests (Europa Clipper) ---
-		% Small file with 4 packets, APID 1217 (0x04C1)
+	% --- apid01217.tlm tests (Europa Clipper) ---
+	% Small file with 4 packets, APID 1217 (0x04C1)
 
-		test(ccsds_file_europa_clipper_01, true(N > 0)) :-
-			^^file_path('test_files/apid01217.tlm', Path),
-			ccsds::parse_file(Path, Packets),
-			length(Packets, N).
+	test(ccsds_file_europa_clipper_01, true(N > 0)) :-
+		^^file_path('test_files/apid01217.tlm', Path),
+		ccsds::parse_file(Path, Packets),
+		length(Packets, N).
 
-		test(ccsds_file_europa_clipper_02, true(APID == 1217)) :-
-			% First packet should have APID 1217
-			^^file_path('test_files/apid01217.tlm', Path),
-			ccsds::parse_file(Path, [Packet| _]),
-			apid(Packet, APID).
+	test(ccsds_file_europa_clipper_02, true(APID == 1217)) :-
+		% First packet should have APID 1217
+		^^file_path('test_files/apid01217.tlm', Path),
+		ccsds::parse_file(Path, [Packet| _]),
+		apid(Packet, APID).
 
-		test(ccsds_file_europa_clipper_03, true(Type == telemetry)) :-
-			% Packets should be telemetry
-			^^file_path('test_files/apid01217.tlm', Path),
-			ccsds::parse_file(Path, [Packet| _]),
-			type(Packet, Type).
+	test(ccsds_file_europa_clipper_03, true(Type == telemetry)) :-
+		% Packets should be telemetry
+		^^file_path('test_files/apid01217.tlm', Path),
+		ccsds::parse_file(Path, [Packet| _]),
+		type(Packet, Type).
 
-		% --- SSAT1 telemetry tests ---
-		% Larger file with many packets, APID 1
+	% --- SSAT1 telemetry tests ---
+	% Larger file with many packets, APID 1
 
-		test(ccsds_file_ssat1_01, true(N > 100)) :-
-			% File should contain many packets
-			^^file_path('test_files/SSAT1_2015-180-00-00-00_2015-180-01-59-58_1_1_sim.tlm', Path),
-			ccsds::parse_file(Path, Packets),
-			length(Packets, N).
+	test(ccsds_file_ssat1_01, true(N > 100)) :-
+		% File should contain many packets
+		^^file_path('test_files/SSAT1_2015-180-00-00-00_2015-180-01-59-58_1_1_sim.tlm', Path),
+		ccsds::parse_file(Path, Packets),
+		length(Packets, N).
 
-		test(ccsds_file_ssat1_02, true(APID == 1)) :-
-			% First packet should have APID 1
-			^^file_path('test_files/SSAT1_2015-180-00-00-00_2015-180-01-59-58_1_1_sim.tlm', Path),
-			ccsds::parse_file(Path, [Packet| _]),
-			apid(Packet, APID).
+	test(ccsds_file_ssat1_02, true(APID == 1)) :-
+		% First packet should have APID 1
+		^^file_path('test_files/SSAT1_2015-180-00-00-00_2015-180-01-59-58_1_1_sim.tlm', Path),
+		ccsds::parse_file(Path, [Packet| _]),
+		apid(Packet, APID).
 
-		test(ccsds_file_ssat1_03, true(Flag == present)) :-
-			% Packets should have secondary header
-			^^file_path('test_files/SSAT1_2015-180-00-00-00_2015-180-01-59-58_1_1_sim.tlm', Path),
-			ccsds::parse_file(Path, [Packet| _]),
-			secondary_header_flag(Packet, Flag).
+	test(ccsds_file_ssat1_03, true(Flag == present)) :-
+		% Packets should have secondary header
+		^^file_path('test_files/SSAT1_2015-180-00-00-00_2015-180-01-59-58_1_1_sim.tlm', Path),
+		ccsds::parse_file(Path, [Packet| _]),
+		secondary_header_flag(Packet, Flag).
 
-		% --- apid00400.tlm tests (CSA) ---
-		% Large file with APID 400 packets
+	% --- apid00400.tlm tests (CSA) ---
+	% Large file with APID 400 packets
 
-		test(ccsds_file_csa_01, true(N > 100)) :-
-			% File should contain many packets
-			^^file_path('test_files/apid00400.tlm', Path),
-			ccsds::parse_file(Path, Packets),
-			length(Packets, N).
+	test(ccsds_file_csa_01, true(N > 100)) :-
+		% File should contain many packets
+		^^file_path('test_files/apid00400.tlm', Path),
+		ccsds::parse_file(Path, Packets),
+		length(Packets, N).
 
-		test(ccsds_file_csa_02, true(APID == 400)) :-
-			% First packet should have APID 400
-			^^file_path('test_files/apid00400.tlm', Path),
-			ccsds::parse_file(Path, [Packet| _]),
-			apid(Packet, APID).
+	test(ccsds_file_csa_02, true(APID == 400)) :-
+		% First packet should have APID 400
+		^^file_path('test_files/apid00400.tlm', Path),
+		ccsds::parse_file(Path, [Packet| _]),
+		apid(Packet, APID).
 
-		% --- ecm_raw2.bin tests (Europa Clipper ECM) ---
-		% Large file with Europa Clipper ECM data
+	% --- ecm_raw2.bin tests (Europa Clipper ECM) ---
+	% Large file with Europa Clipper ECM data
 
-		test(ccsds_file_ecm_01, true(N > 0)) :-
-			% File should contain packets
-			^^file_path('test_files/ecm_raw2.bin', Path),
-			ccsds::parse_file(Path, Packets),
-			length(Packets, N).
+	test(ccsds_file_ecm_01, true(N > 0)) :-
+		% File should contain packets
+		^^file_path('test_files/ecm_raw2.bin', Path),
+		ccsds::parse_file(Path, Packets),
+		length(Packets, N).
 
-		test(ccsds_file_ecm_02, true(Type == telemetry)) :-
-			% Packets should be telemetry
-			^^file_path('test_files/ecm_raw2.bin', Path),
-			ccsds::parse_file(Path, [Packet| _]),
-			type(Packet, Type).
+	test(ccsds_file_ecm_02, true(Type == telemetry)) :-
+		% Packets should be telemetry
+		^^file_path('test_files/ecm_raw2.bin', Path),
+		ccsds::parse_file(Path, [Packet| _]),
+		type(Packet, Type).
 
-		test(ccsds_file_ecm_03, true(Flags == standalone)) :-
-			% Check sequence flags
-			^^file_path('test_files/ecm_raw2.bin', Path),
-			ccsds::parse_file(Path, [Packet| _]),
-			sequence_flags(Packet, Flags).
+	test(ccsds_file_ecm_03, true(Flags == standalone)) :-
+		% Check sequence flags
+		^^file_path('test_files/ecm_raw2.bin', Path),
+		ccsds::parse_file(Path, [Packet| _]),
+		sequence_flags(Packet, Flags).
 
-		% --- Roundtrip tests with real data ---
-		% Parse and regenerate should produce identical bytes
+	% --- Roundtrip tests with real data ---
+	% Parse and regenerate should produce identical bytes
 
-		test(ccsds_file_roundtrip_01, true(Bytes == OriginalBytes)) :-
-			% Roundtrip first packet from var_length_packets.bin
-			^^file_path('test_files/var_length_packets.bin', Path),
-			reader::file_to_bytes(Path, AllBytes),
-			% First packet: 6 header + 4 data bytes = 10 bytes
-			AllBytes = [B0, B1, B2, B3, B4, B5, B6, B7, B8, B9| _],
-			OriginalBytes = [B0, B1, B2, B3, B4, B5, B6, B7, B8, B9],
-			ccsds::parse(OriginalBytes, Packet),
-			ccsds::generate(Packet, Bytes).
+	test(ccsds_file_roundtrip_01, true(Bytes == OriginalBytes)) :-
+		% Roundtrip first packet from var_length_packets.bin
+		^^file_path('test_files/var_length_packets.bin', Path),
+		reader::file_to_bytes(Path, AllBytes),
+		% First packet: 6 header + 4 data bytes = 10 bytes
+		AllBytes = [B0, B1, B2, B3, B4, B5, B6, B7, B8, B9| _],
+		OriginalBytes = [B0, B1, B2, B3, B4, B5, B6, B7, B8, B9],
+		ccsds::parse(OriginalBytes, Packet),
+		ccsds::generate(Packet, Bytes).
 
-		test(ccsds_file_roundtrip_02, true(Packets == ParsedAgain)) :-
-			% Parse all packets, regenerate all bytes, parse again
-			^^file_path('test_files/var_length_packets.bin', Path),
-			ccsds::parse_file(Path, Packets),
-			findall(Bytes, (member(Packet, Packets), ccsds::generate(Packet, Bytes)), BytesList),
-			flatten(BytesList, AllBytes),
-			ccsds::parse_all(AllBytes, ParsedAgain).
+	test(ccsds_file_roundtrip_02, true(Packets == ParsedAgain)) :-
+		% Parse all packets, regenerate all bytes, parse again
+		^^file_path('test_files/var_length_packets.bin', Path),
+		ccsds::parse_file(Path, Packets),
+		findall(Bytes, (member(Packet, Packets), ccsds::generate(Packet, Bytes)), BytesList),
+		flatten(BytesList, AllBytes),
+		ccsds::parse_all(AllBytes, ParsedAgain).
+
+	% QuickCheck tests for arbitrary generators and type checking
+
+	% Test that generated ccsds_packet bytes pass type checking
+	quick_check(
+		ccsds_quickcheck_type_01,
+		type::check({ccsds_packet}, +ccsds_packet),
+		[n(100)]
+	).
+
+	% Test that generated ccsds_packet(0) bytes pass type checking
+	quick_check(
+		ccsds_quickcheck_type_02,
+		type::check({ccsds_packet(0)}, +ccsds_packet(0)),
+		[n(100)]
+	).
+
+	% Test that generated ccsds_packet(6) bytes pass type checking
+	quick_check(
+		ccsds_quickcheck_type_03,
+		type::check({ccsds_packet(6)}, +ccsds_packet(6)),
+		[n(100)]
+	).
+
+	% Test roundtrip: generate bytes, parse them, regenerate bytes
+	quick_check(
+		ccsds_quickcheck_roundtrip_01,
+		roundtrip_property(+ccsds_packet),
+		[n(100)]
+	).
+
+	% Test roundtrip with secondary header
+	quick_check(
+		ccsds_quickcheck_roundtrip_02,
+		roundtrip_property_with_secondary_header(+ccsds_packet(6)),
+		[n(100)]
+	).
+
+	% Test that parsed packets can be regenerated
+	quick_check(
+		ccsds_quickcheck_parse_generate_01,
+		parse_generate_property(+ccsds_packet),
+		[n(100)]
+	).
+
+	% Helper predicates for QuickCheck tests
+
+	roundtrip_property(Bytes) :-
+		ccsds::parse(Bytes, Packet),
+		ccsds::generate(Packet, GeneratedBytes),
+		Bytes == GeneratedBytes.
+
+	roundtrip_property_with_secondary_header(Bytes) :-
+		ccsds(6)::parse(Bytes, Packet),
+		ccsds(6)::generate(Packet, GeneratedBytes),
+		Bytes == GeneratedBytes.
+
+	parse_generate_property(Bytes) :-
+		ccsds::parse(Bytes, Packet),
+		ccsds::generate(Packet, _GeneratedBytes).
 
 :- end_object.

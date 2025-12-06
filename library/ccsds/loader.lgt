@@ -22,5 +22,6 @@
 :- initialization((
 	logtalk_load(basic_types(loader)),
 	logtalk_load(reader(loader)),
-	logtalk_load(ccsds, [optimize(on), portability(warning)])
+	logtalk_load(arbitrary(loader)),
+	logtalk_load([ccsds, ccsds_types], [optimize(on), portability(warning)])
 )).

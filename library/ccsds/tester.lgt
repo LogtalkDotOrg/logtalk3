@@ -23,7 +23,8 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(basic_types(loader)),
 	logtalk_load(reader(loader)),
-	logtalk_load(ccsds, [source_data(on), debug(on)]),
+	logtalk_load(arbitrary(loader)),
+	logtalk_load([ccsds, ccsds_types], [source_data(on), debug(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
