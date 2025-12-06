@@ -106,6 +106,17 @@ The library provides accessor predicates for extracting packet fields:
     | ?- ccsds::user_data(Packet, Data).
 
 
+Types and arbitrary generators
+------------------------------
+
+The library includes a `ccsds_types` category that provides `ccsds_packet` and
+`ccsds_packet(SecondaryHeaderLength)` types and arbitrary generators for CCSDS
+packets. For example:
+
+    | ?- type::check(ccsds_packet, Bytes).
+    | ?- type::arbitrary(ccsds_packet(42), Bytes).
+
+
 API documentation
 -----------------
 
@@ -127,3 +138,8 @@ Testing
 To test this library predicates, load the `tester.lgt` file:
 
     | ?- logtalk_load(ccsds(tester)).
+
+To test the performance of the library parsing predicates, load the
+`tester_performance.lgt` file:
+
+    | ?- logtalk_load(ccsds(tester_performance)).
