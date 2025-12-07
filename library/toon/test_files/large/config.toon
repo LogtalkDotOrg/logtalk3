@@ -1,0 +1,176 @@
+application:
+  name: MyApp
+  version: 2.5.1
+  environment: production
+  debug: false
+server:
+  host: 0.0.0.0
+  port: 8080
+  ssl:
+    enabled: true
+    certificate: /etc/ssl/certs/app.crt
+    key: /etc/ssl/private/app.key
+    protocols: [3]: TLSv1.2, TLSv1.3, TLSv1.1
+  cors:
+    enabled: true
+    origins: [4]: https://example.com, https://api.example.com, https://admin.example.com, https://cdn.example.com
+    methods: [5]: GET, POST, PUT, DELETE, PATCH
+    headers: [3]: Content-Type, Authorization, X-Request-ID
+    credentials: true
+    maxAge: 86400
+  rateLimit:
+    enabled: true
+    windowMs: 60000
+    maxRequests: 100
+    skipFailedRequests: false
+    keyGenerator: ip
+database:
+  primary:
+    type: postgresql
+    host: db-primary.internal
+    port: 5432
+    name: myapp_production
+    username: app_user
+    pool:
+      min: 5
+      max: 20
+      idleTimeout: 30000
+      acquireTimeout: 60000
+    ssl:
+      enabled: true
+      rejectUnauthorized: true
+  replica:
+    type: postgresql
+    host: db-replica.internal
+    port: 5432
+    name: myapp_production
+    username: app_readonly
+    pool:
+      min: 2
+      max: 10
+      idleTimeout: 30000
+      acquireTimeout: 60000
+    ssl:
+      enabled: true
+      rejectUnauthorized: true
+  redis:
+    host: redis.internal
+    port: 6379
+    db: 0
+    keyPrefix: myapp:
+    cluster:
+      enabled: false
+      nodes: [3]: redis-1.internal:6379, redis-2.internal:6379, redis-3.internal:6379
+cache:
+  enabled: true
+  driver: redis
+  ttl: 3600
+  prefix: cache:
+  tags:
+    enabled: true
+    separator: ":"
+  stores:
+    default:
+      driver: redis
+      connection: cache
+      ttl: 3600
+    sessions:
+      driver: redis
+      connection: sessions
+      ttl: 86400
+    api:
+      driver: redis
+      connection: api
+      ttl: 300
+logging:
+  level: info
+  format: json
+  outputs: [2]: stdout, file
+  file:
+    path: /var/log/myapp/app.log
+    maxSize: 100MB
+    maxFiles: 10
+    compress: true
+  sentry:
+    enabled: true
+    dsn: https://key@sentry.io/project
+    environment: production
+    sampleRate: 0.1
+    tracesSampleRate: 0.05
+auth:
+  jwt:
+    secret: ${JWT_SECRET}
+    algorithm: RS256
+    expiresIn: 3600
+    refreshExpiresIn: 604800
+    issuer: myapp
+    audience: myapp-api
+  oauth:
+    google:
+      enabled: true
+      clientId: ${GOOGLE_CLIENT_ID}
+      clientSecret: ${GOOGLE_CLIENT_SECRET}
+      callbackUrl: https://api.example.com/auth/google/callback
+      scopes: [3]: email, profile, openid
+    github:
+      enabled: true
+      clientId: ${GITHUB_CLIENT_ID}
+      clientSecret: ${GITHUB_CLIENT_SECRET}
+      callbackUrl: https://api.example.com/auth/github/callback
+      scopes: [2]: user:email, read:user
+    microsoft:
+      enabled: false
+      clientId: ${MICROSOFT_CLIENT_ID}
+      clientSecret: ${MICROSOFT_CLIENT_SECRET}
+      callbackUrl: https://api.example.com/auth/microsoft/callback
+      scopes: [3]: openid, email, profile
+queue:
+  driver: redis
+  connection: queue
+  defaultQueue: default
+  retryAfter: 90
+  blockFor: 5
+  queues:
+    high:
+      connection: queue
+      tries: 3
+      timeout: 60
+    default:
+      connection: queue
+      tries: 3
+      timeout: 120
+    low:
+      connection: queue
+      tries: 5
+      timeout: 300
+mail:
+  driver: smtp
+  host: smtp.sendgrid.net
+  port: 587
+  encryption: tls
+  username: apikey
+  from:
+    address: noreply@example.com
+    name: MyApp
+  templates:
+    welcome: emails/welcome
+    passwordReset: emails/password-reset
+    orderConfirmation: emails/order-confirmation
+storage:
+  driver: s3
+  bucket: myapp-production
+  region: us-east-1
+  endpoint: null
+  usePathStyleEndpoint: false
+  visibility: private
+  disks:
+    public:
+      driver: s3
+      bucket: myapp-public
+      visibility: public
+      url: https://cdn.example.com
+    private:
+      driver: s3
+      bucket: myapp-private
+      visibility: private
+

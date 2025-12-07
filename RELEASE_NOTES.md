@@ -32,6 +32,9 @@ Library
 Committee for Space Data Systems) Space Packets following the CCSDS 133.0-B-2
 standard (Space Packet Protocol).
 
+* ADDED: New `toon` library implementing the TOON (Token-Oriented Object
+Notation) format proposal.
+
 Tools
 -----
 

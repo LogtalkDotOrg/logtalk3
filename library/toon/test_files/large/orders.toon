@@ -1,0 +1,480 @@
+[20]:
+  orderId: ORD-2024-001
+  customerId: CUST-1001
+  orderDate: 2024-01-15T10:30:00Z
+  status: delivered
+  customer:
+    name: Alice Johnson
+    email: alice.johnson@email.com
+    phone: +1-555-0101
+  shippingAddress:
+    street: 123 Main Street
+    city: San Francisco
+    state: CA
+    zipCode: 94102
+    country: USA
+  items: [3]{productId,name,quantity,unitPrice}:
+    PROD-001, "Wireless Bluetooth Headphones", 1, 79.99
+    PROD-002, "USB-C Charging Cable 6ft", 2, 12.99
+    PROD-003, "Phone Case - Clear", 1, 24.99
+  subtotal: 130.96
+  tax: 11.79
+  shipping: 5.99
+  total: 148.74
+  paymentMethod: credit_card
+  ---
+  orderId: ORD-2024-002
+  customerId: CUST-1002
+  orderDate: 2024-01-16T14:22:00Z
+  status: shipped
+  customer:
+    name: Bob Smith
+    email: bob.smith@email.com
+    phone: +1-555-0102
+  shippingAddress:
+    street: 456 Oak Avenue
+    city: New York
+    state: NY
+    zipCode: 10001
+    country: USA
+  items: [2]{productId,name,quantity,unitPrice}:
+    PROD-004, "Mechanical Keyboard RGB", 1, 149.99
+    PROD-005, "Gaming Mouse Pad XL", 1, 29.99
+  subtotal: 179.98
+  tax: 15.30
+  shipping: 0.00
+  total: 195.28
+  paymentMethod: paypal
+  ---
+  orderId: ORD-2024-003
+  customerId: CUST-1003
+  orderDate: 2024-01-17T09:15:00Z
+  status: processing
+  customer:
+    name: Carol Davis
+    email: carol.davis@email.com
+    phone: +1-555-0103
+  shippingAddress:
+    street: 789 Pine Road
+    city: Chicago
+    state: IL
+    zipCode: 60601
+    country: USA
+  items: [4]{productId,name,quantity,unitPrice}:
+    PROD-006, "Laptop Stand Adjustable", 1, 45.99
+    PROD-007, "Webcam HD 1080p", 1, 69.99
+    PROD-008, "USB Hub 7-Port", 1, 34.99
+    PROD-009, "Monitor Light Bar", 1, 54.99
+  subtotal: 205.96
+  tax: 17.51
+  shipping: 8.99
+  total: 232.46
+  paymentMethod: credit_card
+  ---
+  orderId: ORD-2024-004
+  customerId: CUST-1004
+  orderDate: 2024-01-18T16:45:00Z
+  status: delivered
+  customer:
+    name: David Wilson
+    email: david.wilson@email.com
+    phone: +1-555-0104
+  shippingAddress:
+    street: 321 Elm Street
+    city: Austin
+    state: TX
+    zipCode: 78701
+    country: USA
+  items: [1]{productId,name,quantity,unitPrice}:
+    PROD-010, "4K Monitor 27 inch", 1, 399.99
+  subtotal: 399.99
+  tax: 33.00
+  shipping: 0.00
+  total: 432.99
+  paymentMethod: credit_card
+  ---
+  orderId: ORD-2024-005
+  customerId: CUST-1005
+  orderDate: 2024-01-19T11:30:00Z
+  status: pending
+  customer:
+    name: Eva Martinez
+    email: eva.martinez@email.com
+    phone: +1-555-0105
+  shippingAddress:
+    street: 654 Maple Drive
+    city: Seattle
+    state: WA
+    zipCode: 98101
+    country: USA
+  items: [5]{productId,name,quantity,unitPrice}:
+    PROD-011, "Wireless Mouse", 2, 29.99
+    PROD-012, "Keyboard Wrist Rest", 2, 19.99
+    PROD-013, "Cable Management Kit", 1, 15.99
+    PROD-014, "Desk Organizer", 1, 24.99
+    PROD-015, "Screen Cleaner Kit", 1, 12.99
+  subtotal: 153.93
+  tax: 15.39
+  shipping: 5.99
+  total: 175.31
+  paymentMethod: debit_card
+  ---
+  orderId: ORD-2024-006
+  customerId: CUST-1006
+  orderDate: 2024-01-20T08:00:00Z
+  status: delivered
+  customer:
+    name: Frank Brown
+    email: frank.brown@email.com
+    phone: +1-555-0106
+  shippingAddress:
+    street: 987 Cedar Lane
+    city: Denver
+    state: CO
+    zipCode: 80201
+    country: USA
+  items: [2]{productId,name,quantity,unitPrice}:
+    PROD-016, "Noise Cancelling Earbuds", 1, 199.99
+    PROD-017, "Earbuds Charging Case", 1, 29.99
+  subtotal: 229.98
+  tax: 16.10
+  shipping: 0.00
+  total: 246.08
+  paymentMethod: apple_pay
+  ---
+  orderId: ORD-2024-007
+  customerId: CUST-1007
+  orderDate: 2024-01-21T13:20:00Z
+  status: shipped
+  customer:
+    name: Grace Lee
+    email: grace.lee@email.com
+    phone: +1-555-0107
+  shippingAddress:
+    street: 147 Birch Court
+    city: Boston
+    state: MA
+    zipCode: 02101
+    country: USA
+  items: [3]{productId,name,quantity,unitPrice}:
+    PROD-018, "Portable SSD 1TB", 1, 109.99
+    PROD-019, "USB Flash Drive 128GB", 2, 19.99
+    PROD-020, "Memory Card 256GB", 1, 39.99
+  subtotal: 189.96
+  tax: 11.40
+  shipping: 5.99
+  total: 207.35
+  paymentMethod: credit_card
+  ---
+  orderId: ORD-2024-008
+  customerId: CUST-1008
+  orderDate: 2024-01-22T15:45:00Z
+  status: delivered
+  customer:
+    name: Henry Taylor
+    email: henry.taylor@email.com
+    phone: +1-555-0108
+  shippingAddress:
+    street: 258 Walnut Street
+    city: Portland
+    state: OR
+    zipCode: 97201
+    country: USA
+  items: [2]{productId,name,quantity,unitPrice}:
+    PROD-021, "Smart Watch Series 5", 1, 299.99
+    PROD-022, "Watch Band Silicone", 2, 14.99
+  subtotal: 329.97
+  tax: 26.40
+  shipping: 0.00
+  total: 356.37
+  paymentMethod: google_pay
+  ---
+  orderId: ORD-2024-009
+  customerId: CUST-1009
+  orderDate: 2024-01-23T10:10:00Z
+  status: processing
+  customer:
+    name: Ivy Chen
+    email: ivy.chen@email.com
+    phone: +1-555-0109
+  shippingAddress:
+    street: 369 Spruce Avenue
+    city: Miami
+    state: FL
+    zipCode: 33101
+    country: USA
+  items: [4]{productId,name,quantity,unitPrice}:
+    PROD-023, "Tablet Stand", 1, 35.99
+    PROD-024, "Stylus Pen", 1, 49.99
+    PROD-025, "Screen Protector", 2, 9.99
+    PROD-026, "Tablet Sleeve", 1, 29.99
+  subtotal: 135.95
+  tax: 9.52
+  shipping: 5.99
+  total: 151.46
+  paymentMethod: credit_card
+  ---
+  orderId: ORD-2024-010
+  customerId: CUST-1010
+  orderDate: 2024-01-24T12:30:00Z
+  status: shipped
+  customer:
+    name: Jack Anderson
+    email: jack.anderson@email.com
+    phone: +1-555-0110
+  shippingAddress:
+    street: 480 Ash Boulevard
+    city: Phoenix
+    state: AZ
+    zipCode: 85001
+    country: USA
+  items: [3]{productId,name,quantity,unitPrice}:
+    PROD-027, "Wireless Charger Pad", 2, 24.99
+    PROD-028, "Car Phone Mount", 1, 19.99
+    PROD-029, "Power Bank 20000mAh", 1, 49.99
+  subtotal: 119.96
+  tax: 9.60
+  shipping: 5.99
+  total: 135.55
+  paymentMethod: paypal
+  ---
+  orderId: ORD-2024-011
+  customerId: CUST-1011
+  orderDate: 2024-01-25T09:00:00Z
+  status: delivered
+  customer:
+    name: Karen White
+    email: karen.white@email.com
+    phone: +1-555-0111
+  shippingAddress:
+    street: 591 Hickory Lane
+    city: Atlanta
+    state: GA
+    zipCode: 30301
+    country: USA
+  items: [2]{productId,name,quantity,unitPrice}:
+    PROD-030, "Bluetooth Speaker", 1, 79.99
+    PROD-031, "Speaker Stand", 1, 24.99
+  subtotal: 104.98
+  tax: 7.35
+  shipping: 5.99
+  total: 118.32
+  paymentMethod: credit_card
+  ---
+  orderId: ORD-2024-012
+  customerId: CUST-1012
+  orderDate: 2024-01-26T14:15:00Z
+  status: pending
+  customer:
+    name: Leo Garcia
+    email: leo.garcia@email.com
+    phone: +1-555-0112
+  shippingAddress:
+    street: 702 Poplar Road
+    city: Las Vegas
+    state: NV
+    zipCode: 89101
+    country: USA
+  items: [6]{productId,name,quantity,unitPrice}:
+    PROD-032, "HDMI Cable 10ft", 2, 14.99
+    PROD-033, "DisplayPort Cable", 1, 19.99
+    PROD-034, "Ethernet Cable Cat6", 3, 9.99
+    PROD-035, "Cable Clips", 2, 7.99
+    PROD-036, "Velcro Cable Ties", 1, 8.99
+    PROD-037, "Cable Sleeve", 1, 12.99
+  subtotal: 117.88
+  tax: 8.25
+  shipping: 5.99
+  total: 132.12
+  paymentMethod: debit_card
+  ---
+  orderId: ORD-2024-013
+  customerId: CUST-1013
+  orderDate: 2024-01-27T11:45:00Z
+  status: delivered
+  customer:
+    name: Mia Robinson
+    email: mia.robinson@email.com
+    phone: +1-555-0113
+  shippingAddress:
+    street: 813 Willow Way
+    city: San Diego
+    state: CA
+    zipCode: 92101
+    country: USA
+  items: [1]{productId,name,quantity,unitPrice}:
+    PROD-038, "Gaming Headset Pro", 1, 149.99
+  subtotal: 149.99
+  tax: 13.50
+  shipping: 0.00
+  total: 163.49
+  paymentMethod: credit_card
+  ---
+  orderId: ORD-2024-014
+  customerId: CUST-1014
+  orderDate: 2024-01-28T16:00:00Z
+  status: shipped
+  customer:
+    name: Noah Clark
+    email: noah.clark@email.com
+    phone: +1-555-0114
+  shippingAddress:
+    street: 924 Chestnut Circle
+    city: Philadelphia
+    state: PA
+    zipCode: 19101
+    country: USA
+  items: [3]{productId,name,quantity,unitPrice}:
+    PROD-039, "Desk Lamp LED", 1, 44.99
+    PROD-040, "Monitor Arm", 1, 89.99
+    PROD-041, "Footrest Ergonomic", 1, 39.99
+  subtotal: 174.97
+  tax: 10.50
+  shipping: 8.99
+  total: 194.46
+  paymentMethod: apple_pay
+  ---
+  orderId: ORD-2024-015
+  customerId: CUST-1015
+  orderDate: 2024-01-29T08:30:00Z
+  status: processing
+  customer:
+    name: Olivia Lewis
+    email: olivia.lewis@email.com
+    phone: +1-555-0115
+  shippingAddress:
+    street: 135 Sycamore Street
+    city: Dallas
+    state: TX
+    zipCode: 75201
+    country: USA
+  items: [2]{productId,name,quantity,unitPrice}:
+    PROD-042, "Webcam 4K", 1, 129.99
+    PROD-043, "Ring Light 12 inch", 1, 49.99
+  subtotal: 179.98
+  tax: 14.85
+  shipping: 0.00
+  total: 194.83
+  paymentMethod: credit_card
+  ---
+  orderId: ORD-2024-016
+  customerId: CUST-1016
+  orderDate: 2024-01-30T13:00:00Z
+  status: delivered
+  customer:
+    name: Peter Hall
+    email: peter.hall@email.com
+    phone: +1-555-0116
+  shippingAddress:
+    street: 246 Magnolia Drive
+    city: Houston
+    state: TX
+    zipCode: 77001
+    country: USA
+  items: [4]{productId,name,quantity,unitPrice}:
+    PROD-044, "Keyboard Mechanical", 1, 89.99
+    PROD-045, "Keycap Set", 1, 34.99
+    PROD-046, "Switch Puller", 1, 8.99
+    PROD-047, "Keyboard Lubricant", 1, 12.99
+  subtotal: 146.96
+  tax: 12.14
+  shipping: 5.99
+  total: 165.09
+  paymentMethod: paypal
+  ---
+  orderId: ORD-2024-017
+  customerId: CUST-1017
+  orderDate: 2024-01-31T10:20:00Z
+  status: shipped
+  customer:
+    name: Quinn Young
+    email: quinn.young@email.com
+    phone: +1-555-0117
+  shippingAddress:
+    street: 357 Redwood Avenue
+    city: Minneapolis
+    state: MN
+    zipCode: 55401
+    country: USA
+  items: [2]{productId,name,quantity,unitPrice}:
+    PROD-048, "External HDD 2TB", 1, 79.99
+    PROD-049, "HDD Enclosure", 1, 24.99
+  subtotal: 104.98
+  tax: 7.35
+  shipping: 5.99
+  total: 118.32
+  paymentMethod: credit_card
+  ---
+  orderId: ORD-2024-018
+  customerId: CUST-1018
+  orderDate: 2024-02-01T15:30:00Z
+  status: pending
+  customer:
+    name: Rachel King
+    email: rachel.king@email.com
+    phone: +1-555-0118
+  shippingAddress:
+    street: 468 Cypress Court
+    city: Detroit
+    state: MI
+    zipCode: 48201
+    country: USA
+  items: [3]{productId,name,quantity,unitPrice}:
+    PROD-050, "Microphone USB", 1, 69.99
+    PROD-051, "Pop Filter", 1, 14.99
+    PROD-052, "Boom Arm", 1, 39.99
+  subtotal: 124.97
+  tax: 7.50
+  shipping: 5.99
+  total: 138.46
+  paymentMethod: google_pay
+  ---
+  orderId: ORD-2024-019
+  customerId: CUST-1019
+  orderDate: 2024-02-02T09:45:00Z
+  status: delivered
+  customer:
+    name: Sam Wright
+    email: sam.wright@email.com
+    phone: +1-555-0119
+  shippingAddress:
+    street: 579 Juniper Lane
+    city: Charlotte
+    state: NC
+    zipCode: 28201
+    country: USA
+  items: [2]{productId,name,quantity,unitPrice}:
+    PROD-053, "Router WiFi 6", 1, 149.99
+    PROD-054, "Ethernet Switch 8-Port", 1, 39.99
+  subtotal: 189.98
+  tax: 13.30
+  shipping: 0.00
+  total: 203.28
+  paymentMethod: credit_card
+  ---
+  orderId: ORD-2024-020
+  customerId: CUST-1020
+  orderDate: 2024-02-03T12:00:00Z
+  status: processing
+  customer:
+    name: Tina Lopez
+    email: tina.lopez@email.com
+    phone: +1-555-0120
+  shippingAddress:
+    street: 690 Dogwood Road
+    city: Nashville
+    state: TN
+    zipCode: 37201
+    country: USA
+  items: [5]{productId,name,quantity,unitPrice}:
+    PROD-055, "Laptop Backpack", 1, 59.99
+    PROD-056, "Laptop Sleeve 15 inch", 1, 24.99
+    PROD-057, "Mouse Pad Large", 1, 19.99
+    PROD-058, "USB-C Adapter", 1, 29.99
+    PROD-059, "Laptop Lock", 1, 34.99
+  subtotal: 169.95
+  tax: 14.45
+  shipping: 5.99
+  total: 190.39
+  paymentMethod: debit_card
+
