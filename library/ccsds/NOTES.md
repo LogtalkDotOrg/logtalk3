@@ -70,39 +70,60 @@ Where:
 Parsing
 -------
 
-To parse a single packet from a list of bytes:
+The `parse/2` predicate accepts a source term as its first argument. The source
+can be `file(File)`, `stream(Stream)`, or `bytes(Bytes)`. All source types
+return a list of packets for uniformity.
 
-    | ?- ccsds::parse([0x08, 0x01, 0xC0, 0x00, 0x00, 0x03, 0xDE, 0xAD, 0xBE, 0xEF], Packet).
-    Packet = ccsds_packet(0, 0, 1, 1, 3, 0, 3, [222, 173, 190, 239])
+To parse packets from a list of bytes:
+
+    | ?- ccsds::parse(bytes([0x08, 0x01, 0xC0, 0x00, 0x00, 0x03, 0xDE, 0xAD, 0xBE, 0xEF]), Packets).
+    Packets = [ccsds_packet(0, 0, 1, 1, 3, 0, 3, none, [222, 173, 190, 239])]
     yes
-
-To parse multiple packets from a byte stream:
-
-    | ?- ccsds::parse_all(Bytes, Packets).
 
 To parse packets from a binary file:
 
-    | ?- ccsds::parse_file('telemetry.bin', Packets).
+    | ?- ccsds::parse(file('telemetry.bin'), Packets).
+
+To parse packets from a binary stream:
+
+    | ?- ccsds::parse(stream(Stream), Packets).
 
 
 Generating
 ----------
 
-To generate bytes from a packet term:
+The `generate/2` predicate accepts a sink term as its first argument and a list
+of packet terms as the second argument. The sink can be `file(File)`,
+`stream(Stream)`, or `bytes(Bytes)`.
 
-    | ?- ccsds::generate(ccsds_packet(0, 0, 1, 1, 3, 0, 3, [0xDE, 0xAD, 0xBE, 0xEF]), Bytes).
+To generate bytes from a list of packet terms:
+
+    | ?- ccsds::generate(bytes(Bytes), [ccsds_packet(0, 0, 1, 1, 3, 0, 3, none, [0xDE, 0xAD, 0xBE, 0xEF])]).
     Bytes = [8, 1, 192, 0, 0, 3, 222, 173, 190, 239]
     yes
+
+To write the bytes generated from a list of packet terms to a binary file:
+
+    | ?- ccsds::generate(file('output.bin'), Packets).
+
+To write the bytes generated from a list of packet terms to a binary stream:
+
+    | ?- ccsds::generate(stream(Stream), Packets).
 
 
 Accessor Predicates
 -------------------
 
-The library provides accessor predicates for extracting packet fields:
+The library provides convenient accessor predicates for extracting packet fields:
 
-    | ?- ccsds::parse(Bytes, Packet), ccsds::apid(Packet, APID).
-    | ?- ccsds::type(Packet, Type).           % Returns telemetry or telecommand
-    | ?- ccsds::sequence_flags(Packet, Flags). % Returns continuation, first, last, or standalone
+    | ?- ccsds::apid(Packet, APID).
+
+    % Returns telemetry or telecommand
+    | ?- ccsds::type(Packet, Type).
+
+	 % Returns continuation, first, last, or standalone
+    | ?- ccsds::sequence_flags(Packet, Flags).
+
     | ?- ccsds::user_data(Packet, Data).
 
 
@@ -114,12 +135,14 @@ The library includes a `ccsds_types` category that provides `ccsds_packet` and
 packets. For example:
 
     | ?- type::check(ccsds_packet, Bytes).
+
     | ?- type::arbitrary(ccsds_packet(42), Bytes).
 
 It also provides a `ccsds_packets(N)` and `ccsds_packets(SecondaryHeaderLength, N)`
 types for generating a list with `N` packets. For example:
 
     | ?- type::arbitrary(ccsds_packets(10), Bytes).
+
     | ?- type::arbitrary(ccsds_packets(42, 10), Bytes).
 
 

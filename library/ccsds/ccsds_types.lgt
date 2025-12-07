@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2025-12-06,
+		date is 2025-12-07,
 		comment is 'Type definitions and arbitrary generators for CCSDS packets.'
 	]).
 
@@ -50,7 +50,7 @@
 	% Check if a term is a valid list of bytes that parses as a CCSDS packet
 	check_ccsds_bytes(Bytes, SecondaryHeaderLength) :-
 		type::valid(list(byte), Bytes),
-		ccsds(SecondaryHeaderLength)::parse(Bytes, _).
+		ccsds(SecondaryHeaderLength)::parse(bytes(Bytes), _).
 
 	% Arbitrary generators for ccsds_packet(SecondaryHeaderLength)
 	% Generates random valid CCSDS packets as byte lists
@@ -75,7 +75,7 @@
 
 	generate_ccsds_packet(SecondaryHeaderLength, Bytes) :-
 		generate_ccsds_packet_term(SecondaryHeaderLength, Packet),
-		ccsds(SecondaryHeaderLength)::generate(Packet, Bytes).
+		ccsds(SecondaryHeaderLength)::generate(bytes(Bytes), [Packet]).
 
 	generate_ccsds_packets(_, 0, []) :-
 		!.
