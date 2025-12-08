@@ -124,7 +124,13 @@ run_testset() {
 	fi
 	if [ "$output" == 'verbose' ] ; then
 		echo "%"
-		echo "% $unit_short"
+		if [ -f "$unit/VERSION.packs" ] ; then
+			echo -n "% $unit_short (pack version "
+			echo -n "$(cat "$unit/VERSION.packs")"
+			echo ")"
+		else
+			echo "% $unit_short"
+		fi
 	fi
 	if [ -f "$driver.sh" ] ; then
 		source "./$driver.sh" $allargs

@@ -1,0 +1,105 @@
+.. index:: single: toon_protocol
+.. _toon_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``toon_protocol``
+=================
+
+TOON (Token-Oriented Object Notation) parser and generator protocol.
+
+| **Availability:** 
+|    ``logtalk_load(toon(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2025-12-07
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/2
+.. _toon_protocol/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses the TOON contents read from the given source (``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, or ``atom(Atom)``) into a term. Throws an error if the TOON contents cannot be parsed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,Term)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,--term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source:
+|        ``type_error(toon_source,Source)``
+
+
+------------
+
+.. index:: generate/2
+.. _toon_protocol/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates the content using the representation specified in the first argument (``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, or ``atom(Atom)``) for the term in the second argument. Throws an error if this term cannot be processed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,Term)``
+| **Mode and number of proofs:**
+|    ``generate(+compound,++term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid sink:
+|        ``type_error(toon_sink,Sink)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

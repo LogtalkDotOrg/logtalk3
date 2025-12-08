@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on May 2, 2025
+##   Last updated on December 7, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -80,6 +80,7 @@ Foreach-Object {
 (Get-Content ../../../library/basic_types/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/basic_types.rst
 (Get-Content ../../../library/coroutining/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/coroutining.rst
 (Get-Content ../../../library/cbor/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/cbor.rst
+(Get-Content ../../../library/ccsds/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ccsds.rst
 (Get-Content ../../../library/csv/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/csv.rst
 (Get-Content ../../../library/dates/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dates.rst
 (Get-Content ../../../library/dependents/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dependents.rst
@@ -121,6 +122,7 @@ Foreach-Object {
 (Get-Content ../../../library/statistics/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/statistics.rst
 (Get-Content ../../../library/term_io/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/term_io.rst
 (Get-Content ../../../library/timeout/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/timeout.rst
+(Get-Content ../../../library/toon/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/toon.rst
 (Get-Content ../../../library/tsv/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/tsv.rst
 (Get-Content ../../../library/types/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/types.rst
 (Get-Content ../../../library/unicode_data/README.md) | pandoc -f gfm -t rst -o libraries/unicode_data.rst

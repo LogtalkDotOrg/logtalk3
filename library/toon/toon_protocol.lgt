@@ -22,7 +22,7 @@
 :- protocol(toon_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 0:1:0,
 		author is 'Paulo Moura',
 		date is 2025-12-07,
 		comment is 'TOON (Token-Oriented Object Notation) parser and generator protocol.'
@@ -31,15 +31,23 @@
 	:- public(parse/2).
 	:- mode(parse(++compound, --term), one_or_error).
 	:- info(parse/2, [
-		comment is 'Parses the TOON contents read from the given source (``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, or ``atom(Atom)``) into a term. Fails if the TOON contents cannot be parsed.',
-		argnames is ['Source', 'Term']
+		comment is 'Parses the TOON contents read from the given source (``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, or ``atom(Atom)``) into a term. Throws an error if the TOON contents cannot be parsed.',
+		argnames is ['Source', 'Term'],
+		exceptions is [
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is neither a variable nor a valid source' - type_error(toon_source, 'Source')
+		]
 	]).
 
 	:- public(generate/2).
 	:- mode(generate(+compound, ++term), one_or_error).
 	:- info(generate/2, [
-		comment is 'Generates the content using the representation specified in the first argument (``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, or ``atom(Atom)``) for the term in the second argument. Fails if this term cannot be processed.',
-		argnames is ['Sink', 'Term']
+		comment is 'Generates the content using the representation specified in the first argument (``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, or ``atom(Atom)``) for the term in the second argument. Throws an error if this term cannot be processed.',
+		argnames is ['Sink', 'Term'],
+		exceptions is [
+			'``Sink`` is a variable' - instantiation_error,
+			'``Sink`` is neither a variable nor a valid sink' - type_error(toon_sink, 'Sink')
+		]
 	]).
 
 :- end_protocol.

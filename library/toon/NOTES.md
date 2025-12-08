@@ -32,7 +32,7 @@ https://github.com/toon-format/toon
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#toon](../../docs/library_index.html#toon)
+Open the [../../apis/library_index.html#toon](../../apis/library_index.html#toon)
 link in a web browser.
 
 

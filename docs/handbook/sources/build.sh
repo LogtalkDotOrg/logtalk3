@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on May 7, 2025
+##   Last updated on December 7, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -80,6 +80,7 @@ sed '1,19d' ../../../library/base64/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,19d' ../../../library/basic_types/NOTES.md | pandoc -f gfm -t rst -o libraries/basic_types.rst
 sed '1,19d' ../../../library/coroutining/NOTES.md | pandoc -f gfm -t rst -o libraries/coroutining.rst
 sed '1,19d' ../../../library/cbor/NOTES.md | pandoc -f gfm -t rst -o libraries/cbor.rst
+sed '1,19d' ../../../library/ccsds/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds.rst
 sed '1,19d' ../../../library/csv/NOTES.md | pandoc -f gfm -t rst -o libraries/csv.rst
 sed '1,19d' ../../../library/dates/NOTES.md | pandoc -f gfm -t rst -o libraries/dates.rst
 sed '1,19d' ../../../library/dependents/NOTES.md | pandoc -f gfm -t rst -o libraries/dependents.rst
@@ -123,6 +124,7 @@ sed '1,19d' ../../../library/sets/NOTES.md | pandoc -f gfm -t rst -o libraries/s
 sed '1,19d' ../../../library/statistics/NOTES.md | pandoc -f gfm -t rst -o libraries/statistics.rst
 sed '1,19d' ../../../library/term_io/NOTES.md | pandoc -f gfm -t rst -o libraries/term_io.rst
 sed '1,19d' ../../../library/timeout/NOTES.md | pandoc -f gfm -t rst -o libraries/timeout.rst
+sed '1,19d' ../../../library/toon/NOTES.md | pandoc -f gfm -t rst -o libraries/toon.rst
 sed '1,19d' ../../../library/tsv/NOTES.md | pandoc -f gfm -t rst -o libraries/tsv.rst
 sed '1,19d' ../../../library/types/NOTES.md | pandoc -f gfm -t rst -o libraries/types.rst
 cat ../../../library/unicode_data/README.md | pandoc -f gfm -t rst -o libraries/unicode_data.rst

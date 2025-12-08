@@ -1,0 +1,182 @@
+.. _library_ccsds:
+
+``ccsds``
+=========
+
+The ``ccsds`` library implements predicates for parsing and generating
+CCSDS (Consultative Committee for Space Data Systems) Space Packets
+following the CCSDS 133.0-B-2 standard (Space Packet Protocol).
+
+Reference documentation:
+
+- https://public.ccsds.org/Pubs/133x0b2e1.pdf
+- https://jastoolbox.sandia.gov/topic/communication-specification/jas-packets/ccsds-telecommand-and-telemetry-format-packet-standard/
+
+Packet Structure
+----------------
+
+A CCSDS Space Packet consists of:
+
+1. **Primary Header (6 bytes)**:
+
+   - Version Number (3 bits) - Always 000 for Space Packets
+   - Packet Type (1 bit) - 0=Telemetry, 1=Telecommand
+   - Secondary Header Flag (1 bit) - 0=absent, 1=present
+   - Application Process ID (APID) (11 bits) - 0-2047
+   - Sequence Flags (2 bits) - 00=continuation, 01=first, 10=last,
+     11=standalone
+   - Packet Sequence Count (14 bits) - 0-16383
+   - Packet Data Length (16 bits) - Number of octets in data field minus
+     1
+
+2. **User Data Field** - Variable length payload
+
+Representation
+--------------
+
+Packets are represented using the compound term:
+
+::
+
+   ccsds_packet(Version, Type, SecHeaderFlag, APID, SeqFlags, SeqCount, DataLength, UserData)
+
+Where:
+
+- ``Version`` is an integer (0-7, typically 0)
+- ``Type`` is an integer (0=telemetry, 1=telecommand)
+- ``SecHeaderFlag`` is an integer (0 or 1)
+- ``APID`` is an integer (0-2047)
+- ``SeqFlags`` is an integer (0-3)
+- ``SeqCount`` is an integer (0-16383)
+- ``DataLength`` is an integer (0-65535)
+- ``UserData`` is a list of bytes
+
+Parsing
+-------
+
+The ``parse/2`` predicate accepts a source term as its first argument.
+The source can be ``file(File)``, ``stream(Stream)``, or
+``bytes(Bytes)``. All source types return a list of packets for
+uniformity.
+
+To parse packets from a list of bytes:
+
+::
+
+   | ?- ccsds::parse(bytes([0x08, 0x01, 0xC0, 0x00, 0x00, 0x03, 0xDE, 0xAD, 0xBE, 0xEF]), Packets).
+   Packets = [ccsds_packet(0, 0, 1, 1, 3, 0, 3, none, [222, 173, 190, 239])]
+   yes
+
+To parse packets from a binary file:
+
+::
+
+   | ?- ccsds::parse(file('telemetry.bin'), Packets).
+
+To parse packets from a binary stream:
+
+::
+
+   | ?- ccsds::parse(stream(Stream), Packets).
+
+Generating
+----------
+
+The ``generate/2`` predicate accepts a sink term as its first argument
+and a list of packet terms as the second argument. The sink can be
+``file(File)``, ``stream(Stream)``, or ``bytes(Bytes)``.
+
+To generate bytes from a list of packet terms:
+
+::
+
+   | ?- ccsds::generate(bytes(Bytes), [ccsds_packet(0, 0, 1, 1, 3, 0, 3, none, [0xDE, 0xAD, 0xBE, 0xEF])]).
+   Bytes = [8, 1, 192, 0, 0, 3, 222, 173, 190, 239]
+   yes
+
+To write the bytes generated from a list of packet terms to a binary
+file:
+
+::
+
+   | ?- ccsds::generate(file('output.bin'), Packets).
+
+To write the bytes generated from a list of packet terms to a binary
+stream:
+
+::
+
+   | ?- ccsds::generate(stream(Stream), Packets).
+
+Accessor Predicates
+-------------------
+
+The library provides convenient accessor predicates for extracting
+packet fields:
+
+::
+
+   | ?- ccsds::apid(Packet, APID).
+
+   % Returns telemetry or telecommand
+   | ?- ccsds::type(Packet, Type).
+
+    % Returns continuation, first, last, or standalone
+   | ?- ccsds::sequence_flags(Packet, Flags).
+
+   | ?- ccsds::user_data(Packet, Data).
+
+Types and arbitrary generators
+------------------------------
+
+The library includes a ``ccsds_types`` category that provides
+``ccsds_packet`` and ``ccsds_packet(SecondaryHeaderLength)`` types and
+arbitrary generators for CCSDS packets. For example:
+
+::
+
+   | ?- type::check(ccsds_packet, Bytes).
+
+   | ?- type::arbitrary(ccsds_packet(42), Bytes).
+
+It also provides a ``ccsds_packets(N)`` and
+``ccsds_packets(SecondaryHeaderLength, N)`` types for generating a list
+with ``N`` packets. For example:
+
+::
+
+   | ?- type::arbitrary(ccsds_packets(10), Bytes).
+
+   | ?- type::arbitrary(ccsds_packets(42, 10), Bytes).
+
+API documentation
+-----------------
+
+Open the
+`../../apis/library_index.html#ccsds <../../apis/library_index.html#ccsds>`__
+link in a web browser.
+
+Loading
+-------
+
+To load all entities in this library, load the ``loader.lgt`` file:
+
+::
+
+   | ?- logtalk_load(ccsds(loader)).
+
+Testing
+-------
+
+To test this library predicates, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(ccsds(tester)).
+
+To test the performance of the library parsing predicates, load the
+``tester_performance.lgt`` file:
+
+::
+
+   | ?- logtalk_load(ccsds(tester_performance)).

@@ -1,0 +1,65 @@
+.. index:: single: toon(ObjectRepresentation,PairRepresentation,StringRepresentation)
+.. _toon/3:
+
+.. rst-class:: right
+
+**object**
+
+``toon(ObjectRepresentation,PairRepresentation,StringRepresentation)``
+======================================================================
+
+* ``ObjectRepresentation`` - Object representation to be used when decoding TOON objects. Possible values are ``curly`` (default) and ``list``.
+* ``PairRepresentation`` - Pair representation to be used when decoding TOON objects. Possible values are ``dash`` (default), ``equal``, and ``colon``.
+* ``StringRepresentation`` - Text representation to be used when decoding TOON strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.
+
+
+TOON (Token-Oriented Object Notation) parser and generator. TOON is a compact, human-readable, line-oriented format that encodes the JSON data model.
+
+| **Availability:** 
+|    ``logtalk_load(toon(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2025-12-07
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`toon_protocol <toon_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`meta <meta/0>`
+|    :ref:`reader <reader/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`toon_protocol/0::generate/2`  :ref:`toon_protocol/0::parse/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

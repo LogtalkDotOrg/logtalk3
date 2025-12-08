@@ -1,0 +1,59 @@
+.. index:: single: toon(StringRepresentation)
+.. _toon/1:
+
+.. rst-class:: right
+
+**object**
+
+``toon(StringRepresentation)``
+==============================
+
+* ``StringRepresentation`` - Text representation to be used when decoding TOON strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.
+
+
+TOON parser and generator. Uses curly terms for parsed TOON objects and dashes for parsed TOON pairs.
+
+| **Availability:** 
+|    ``logtalk_load(toon(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2025-12-07
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`toon(curly,dash,StringRepresentation) <toon/3>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`toon_protocol/0::generate/2`  :ref:`toon_protocol/0::parse/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

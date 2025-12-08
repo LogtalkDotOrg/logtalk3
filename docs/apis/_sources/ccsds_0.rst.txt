@@ -1,0 +1,56 @@
+.. index:: single: ccsds
+.. _ccsds/0:
+
+.. rst-class:: right
+
+**object**
+
+``ccsds``
+=========
+
+CCSDS Space Packet parser with no secondary header parsing. For secondary header support, use ccsds(Length) where Length is the secondary header size in bytes.
+
+| **Availability:** 
+|    ``logtalk_load(ccsds(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2025-12-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`ccsds(0) <ccsds/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`ccsds/1::apid/2`  :ref:`ccsds/1::data_length/2`  :ref:`ccsds/1::generate/2`  :ref:`ccsds/1::generate/3`  :ref:`ccsds/1::parse/2`  :ref:`ccsds/1::secondary_header/2`  :ref:`ccsds/1::secondary_header_flag/2`  :ref:`ccsds/1::secondary_header_time/2`  :ref:`ccsds/1::sequence_count/2`  :ref:`ccsds/1::sequence_flags/2`  :ref:`ccsds/1::type/2`  :ref:`ccsds/1::user_data/2`  :ref:`ccsds/1::version/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

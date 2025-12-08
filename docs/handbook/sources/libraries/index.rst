@@ -33,6 +33,7 @@ directory in the ``NOTES.md`` file.
    base64
    basic_types
    cbor
+   ccsds
    core
    coroutining
    csv
@@ -78,6 +79,7 @@ directory in the ``NOTES.md`` file.
    statistics
    term_io
    timeout
+   toon
    tsv
    types
    ulid

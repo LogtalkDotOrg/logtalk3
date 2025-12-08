@@ -63,6 +63,18 @@ To load any library (including developer tools, ports, and contributions), use t
    cbor <cbor_0>
    cbor(StringRepresentation) <cbor_1>
 
+:ref:`ccsds <library_ccsds>`
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   ccsds <ccsds_0>
+   ccsds(SecondaryHeaderLength) <ccsds_1>
+   ccsds_types <ccsds_types_0>
+
 :ref:`code_metrics <library_code_metrics>`
 ------------------------------------------
 
@@ -860,6 +872,19 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    timeout <timeout_0>
+
+:ref:`toon <library_toon>`
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   toon <toon_0>
+   toon(StringRepresentation) <toon_1>
+   toon(ObjectRepresentation,PairRepresentation,StringRepresentation) <toon_3>
+   toon_protocol <toon_protocol_0>
 
 :ref:`toychr <library_toychr>`
 ------------------------------
