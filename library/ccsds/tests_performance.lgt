@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2025-12-07,
+		date is 2025-12-11,
 		comment is 'Performance tests for the "ccsds" library.'
 	]).
 
@@ -68,6 +68,42 @@
 	test(parse_100000_packets, true, [note(seconds-Time)]) :-
 		type::arbitrary(ccsds_packets(100000), Bytes),
 		lgtunit::benchmark(ccsds::parse(bytes(Bytes), _), Time).
+
+	% --- ecm_raw2.bin tests (Europa Clipper ECM) ---
+	% Large file with Europa Clipper ECM data
+
+	test(ccsds_file_ecm_01, true(N > 0)) :-
+		% File should contain packets
+		^^file_path('test_files/ecm_raw2.bin', Path),
+		ccsds::parse(file(Path), Packets),
+		length(Packets, N).
+
+	test(ccsds_file_ecm_02, true(Type == telemetry)) :-
+		% Packets should be telemetry
+		^^file_path('test_files/ecm_raw2.bin', Path),
+		ccsds::parse(file(Path), [Packet| _]),
+		type(Packet, Type).
+
+	test(ccsds_file_ecm_03, true(Flags == standalone)) :-
+		% Check sequence flags
+		^^file_path('test_files/ecm_raw2.bin', Path),
+		ccsds::parse(file(Path), [Packet| _]),
+		sequence_flags(Packet, Flags).
+
+	% --- apid00400.tlm tests (CSA) ---
+	% Large file with APID 400 packets
+
+	test(ccsds_file_csa_01, true(N > 100)) :-
+		% File should contain many packets
+		^^file_path('test_files/apid00400.tlm', Path),
+		ccsds::parse(file(Path), Packets),
+		length(Packets, N).
+
+	test(ccsds_file_csa_02, true(APID == 400)) :-
+		% First packet should have APID 400
+		^^file_path('test_files/apid00400.tlm', Path),
+		ccsds::parse(file(Path), [Packet| _]),
+		apid(Packet, APID).
 
 :- end_object.
 
