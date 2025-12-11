@@ -32,6 +32,10 @@
 	:- private(bytes_/1).
 	:- dynamic(bytes_/1).
 
+	:- uses(ccsds, [
+		type/2, apid/2, sequence_flags/2
+	]).
+
 	setup :-
 		type::arbitrary(ccsds_packet, Bytes),
 		assertz(bytes_(Bytes)).
