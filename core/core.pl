@@ -7596,7 +7596,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_expand_path'(FilePath, SourceFile0)
 		)
 	),
-	'$lgt_decompose_file_name'(SourceFile0, Directory, Name0, Extension0),
+	'$lgt_decompose_file_name'(SourceFile0, Directory0, Name0, Extension0),
+	% ensure that there are no . or .. path segments in the directory
+	'$lgt_expand_path'(Directory0, Directory),
 	(	% file extensions are defined in the Prolog adapter files (there
 		% might be multiple extensions defined for the same type of file)
 		'$lgt_file_extension'(logtalk, Extension0) ->

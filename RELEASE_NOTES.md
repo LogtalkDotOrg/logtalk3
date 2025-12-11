@@ -25,6 +25,13 @@ RELEASE NOTES
 3.97.0 - December ??, 2025
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Expansion of source file arguments to the `logtalk_compile/1-2` and
+`logtalk_load/1-2` built-in predicates to avoid spurious file redefinition
+warnings when the file paths contain '.' or '..' segments.
+
 Library
 -------
 
