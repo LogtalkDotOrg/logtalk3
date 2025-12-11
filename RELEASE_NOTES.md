@@ -93,6 +93,9 @@ to work will all backends.
 * FIXED: The VSCode support for ECLiPSe file paths on Windows when finding
 the enclosing entity from a file position.
 
+* FIXED: Bug in the VSCode support where calls to a local predicate would
+not be found.
+
 
 3.96.0 - November 18, 2025
 ==========================

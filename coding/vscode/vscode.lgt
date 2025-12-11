@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:86:0,
+		version is 0:86:1,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-12-03,
+		date is 2025-12-11,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1195,7 +1195,8 @@
 			),
 			References,
 			References7
-		).
+		),
+		References \== [].
 
 	% predicate listed in a uses/2 directive
 	find_predicate_references(Name/Arity, Entity, _, Line, References) :-
@@ -1330,7 +1331,8 @@
 				Reference = ReferenceFile-StartLine
 			),
 			References
-		).
+		),
+		References \== [].
 
 	find_predicate_local_reference(Name/Arity, Entity, File, StartLine, EndLine) :-
 		% local predicate
