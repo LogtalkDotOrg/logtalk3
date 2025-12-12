@@ -59,6 +59,13 @@ may specify the same encoding of the main file or a different encoding.
 
 .. warning::
 
+   The use of nested included files (i.e., included files including other
+   files) is only partially supported. Notably, the reflection API currently
+   only keeps track of the included files dependency on the main file.
+   Although this allows predicates such as ``logtalk_make/0-1`` to work
+   correctly, it prevents full code navigation features in supported IDEs
+   for predicates defined in the nested included files.
+
    When using this directive as an argument in calls to the
    :ref:`predicates_create_object_4`, :ref:`predicates_create_category_4`,
    and :ref:`predicates_create_protocol_3` built-in predicates, the objects,

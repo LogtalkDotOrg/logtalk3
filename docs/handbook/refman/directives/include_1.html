@@ -160,6 +160,12 @@ to avoid a fragile dependency on the current working directory.</p>
 may specify the same encoding of the main file or a different encoding.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
+<p>The use of nested included files (i.e., included files including other
+files) is only partially supported. Notably, the reflection API currently
+only keeps track of the included files dependency on the main file.
+Although this allows predicates such as <code class="docutils literal notranslate"><span class="pre">logtalk_make/0-1</span></code> to work
+correctly, it prevents full code navigation features in supported IDEs
+for predicates defined in the nested included files.</p>
 <p>When using this directive as an argument in calls to the
 <a class="reference internal" href="../predicates/create_object_4.html#predicates-create-object-4"><span class="std std-ref">create_object/4</span></a>, <a class="reference internal" href="../predicates/create_category_4.html#predicates-create-category-4"><span class="std std-ref">create_category/4</span></a>,
 and <a class="reference internal" href="../predicates/create_protocol_3.html#predicates-create-protocol-3"><span class="std std-ref">create_protocol/3</span></a> built-in predicates, the objects,

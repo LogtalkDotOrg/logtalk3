@@ -32,6 +32,12 @@ Logtalk compiler and runtime
 `logtalk_load/1-2` built-in predicates to avoid spurious file redefinition
 warnings when the file paths contain '.' or '..' segments.
 
+Documentation
+-------------
+
+* UPDATED: The Handbook documentation of the `include/1` directive with
+a mention of the limited support for nested included files.
+
 Library
 -------
 
