@@ -102,6 +102,9 @@ the enclosing entity from a file position.
 * FIXED: Bug in the VSCode support where calls to a local predicate would
 not be found.
 
+* FIXED: The VSCode support handling of included files when looking for local
+predicate declarations, definitions, and references.
+
 
 3.96.0 - November 18, 2025
 ==========================

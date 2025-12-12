@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:86:2,
+		version is 0:86:3,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2025-12-12,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -663,7 +663,10 @@
 		atom(Name),
 		integer(Arity),
 		entity_property(Entity, Kind, declares(Name/Arity, Properties)),
-		entity_property(Entity, Kind, file(File)),
+		(	member(include(File), Properties) ->
+			true
+		;	entity_property(Entity, Kind, file(File))
+		),
 		memberchk(line_count(Line), Properties).
 
 	% non-local declaration
@@ -898,6 +901,7 @@
 			find_definition_(Name/Arity, Entity, CallLine, File, Line)
 		).
 
+	% non-local definition
 	find_definition_(Name/Arity, This, _, File, Line) :-
 		atom(Name),
 		integer(Arity),
@@ -915,6 +919,8 @@
 			Obj<<predicate_property(Template, defined_in(Entity, Line)),
 			abolish_object(Obj)
 		),
+		% ensure non-local definition as this clause cannot handle included files
+		Entity \= This,
 		entity_property(Entity, _, file(File)).
 
 	% local predicate or non-terminal
@@ -1338,7 +1344,6 @@
 		% local predicate
 		atom(Name),
 		integer(Arity),
-		entity_property(Entity, Kind, file(File)),
 		(	entity_property(Entity, Kind, calls(Name/Arity, _)) ->
 			ExtArity = Arity
 		;	ExtArity is Arity + 2,
@@ -1346,6 +1351,10 @@
 			memberchk(non_terminal(Name//Arity), DefinesProperties)
 		),
 		entity_property(Entity, Kind, calls(Name/ExtArity, CallsProperties)),
+		(	member(include(File), CallsProperties) ->
+			true
+		;	entity_property(Entity, Kind, file(File))
+		),
 		memberchk(lines(StartLine, EndLine), CallsProperties),
 		StartLine > 0.
 
