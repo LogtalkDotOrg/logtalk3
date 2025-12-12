@@ -1970,7 +1970,7 @@
 		% handle the case of nested included files
         (	entity_property(Entity, _, declares(_, Properties))
 		;	entity_property(Entity, _, defines(_, Properties))
-		;	entity_property(Entity, _, provides(_, _, Properties)
+		;	entity_property(Entity, _, provides(_, _, Properties))
 		;	entity_property(Entity, _, calls(_, Properties))
 		;	entity_property(Entity, _, updates(_, Properties))
 		),
