@@ -38,6 +38,8 @@ Documentation
 * UPDATED: The Handbook documentation of the `include/1` directive with
 a mention of the limited support for nested included files.
 
+* UPDATED: The `man` page for the `logtalk_allure_report.sh` script.
+
 Library
 -------
 
@@ -53,6 +55,10 @@ Tools
 
 * CHANGED: The `diagrams` tool directory and library dependency diagrams to
 always output the root directory and library nodes.
+
+* CHANGED: The `logtalk_allure_report` scripts to update the previous report
+while preserving the tests run history when the `allure-report` directory
+already exists.
 
 * ADDED: Support to the `lgtdoc` tool for converting XML documenting files
 to HTML 5 files.

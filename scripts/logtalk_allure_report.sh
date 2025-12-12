@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Allure report generator script
-##   Last updated on March 23, 2025
+##   Last updated on December 12, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -24,7 +24,7 @@
 #############################################################################
 
 print_version() {
-	echo "$(basename "$0") 0.14"
+	echo "$(basename "$0") 0.15"
 	exit 0
 }
 
@@ -112,10 +112,21 @@ if [ "$s_arg" != "" ] ; then
 fi
 
 if [ -d "$report" ] && [ -n "$(ls -A "$report")" ] ; then
-	if  [ -d "$report/data" ] && [ -d "$report/export" ] && [ -d "$report/history" ] &&
-		[ -d "$report/plugins" ] && [ -d "$report/widgets" ] && [ -e "$report/app.js" ] &&
-		[ -e "$report/favicon.ico" ] && [ -e "$report/index.html" ] && [ -e "$report/styles.css" ] ; then
-		echo "Warning: Overriding previous report..."
+	# consider the directory a previous Allure report when it contains the
+	# usual Allure artifacts. Accept either "plugins" or "plugin" directory
+	# names and do not require a favicon to be present (not all reports include
+	# it). This makes the check more robust against small variations in
+	# generated report layouts.
+	if [ -d "$report/data" ] && [ -d "$report/export" ] && [ -d "$report/history" ] && \
+	   [ -d "$report/widgets" ] && [ -e "$report/app.js" ] && [ -e "$report/index.html" ] && \
+	   [ -e "$report/styles.css" ] ; then
+		if [ -d "$report/plugins" ] || [ -d "$report/plugin" ] ; then
+			echo "Updating report; preserving previous run history..."
+		else
+			echo "Error! Specified report directory is not empty and does not contain a previous" >&2
+			echo "       report. Terminating the script execution to prevent any data loss." >&2
+			exit 1
+		fi
 	else
 		echo "Error! Specified report directory is not empty and does not contain a previous" >&2
 		echo "       report. Terminating the script execution to prevent any data loss." >&2

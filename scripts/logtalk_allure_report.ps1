@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Allure report generator script
-##   Last updated on March 23, 2025
+##   Last updated on December 2, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -41,7 +41,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 0.14"
+	Write-Output "$myName 0.15"
 }
 
 Function Write-Usage-Help() {
@@ -99,10 +99,21 @@ if ($null -eq (Get-Command "allure" -ErrorAction SilentlyContinue))  {
 Confirm-Parameters
 
 if (Test-Path $o -PathType container) {
+	# consider the directory a previous Allure report when it contains the
+	# usual Allure artifacts. Accept either "plugins" or "plugin" directory
+	# names and do not require a favicon to be present (not all reports include
+	# it). This makes the check more robust against small variations in
+	# generated report layouts.
 	if ((Test-Path "$o/data") -and (Test-Path "$o/export") -and (Test-Path "$o/history") -and `
-		(Test-Path "$o/plugins") -and (Test-Path "$o/widgets") -and (Test-Path "$o/app.js") -and `
-		(Test-Path "$o/favicon.ico") -and (Test-Path "$o/index.html") -and (Test-Path "$o/styles.css")) {
-		Write-Output "Warning: Overriding previous report..."
+		(Test-Path "$o/widgets") -and (Test-Path "$o/app.js") -and (Test-Path "$o/index.html") -and `
+		(Test-Path "$o/styles.css")) {
+		if ((Test-Path "$o/plugins") -or (Test-Path "$o/plugin")) {
+			Write-Output "Updating report; preserving previous run history..."
+		} else {
+			Write-Error "Error! Specified report directory is not empty and does not contain a previous"
+			Write-Error "       report. Terminating the script execution to prevent any data loss."
+			Exit 1
+		}
 	} else {
 		Write-Error "Error! Specified report directory is not empty and does not contain a previous"
 		Write-Error "       report. Terminating the script execution to prevent any data loss."

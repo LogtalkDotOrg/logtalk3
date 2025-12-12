@@ -1985,9 +1985,8 @@ and the report data to permanent directories. For example:
      -o "$HOME/my_project/allure-report"
    $ allure open "$HOME/my_project/allure-report"
 
-Note that Allure cleans the report directory when generating a new
-report. Be careful to always specify a dedicated directory to prevent
-accidental data loss.
+Note that (in Allure 2.x) the single file option is not compatible with
+run trends.
 
 The generated reports can include links to the tests source code. This
 requires using the ``logtalk_tester`` shell script option that allows
