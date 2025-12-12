@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:86:1,
+		version is 0:86:2,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-12-11,
+		date is 2025-12-12,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1963,7 +1963,18 @@
 		!.
 	entity(File, _, Entity) :-
 		logtalk::loaded_file_property(Includer, includes(File, Line)),
+		% this only works for directly included files
 		entity(Includer, Line, Entity),
+		!.
+	entity(File, _, Entity) :-
+		% handle the case of nested included files
+        (	entity_property(Entity, _, declares(_, Properties))
+		;	entity_property(Entity, _, defines(_, Properties))
+		;	entity_property(Entity, _, provides(_, _, Properties)
+		;	entity_property(Entity, _, calls(_, Properties))
+		;	entity_property(Entity, _, updates(_, Properties))
+		),
+		memberchk(include(File), Properties),
 		!.
 
 	entity_property(Object, object, Property) :-
