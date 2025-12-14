@@ -74,6 +74,11 @@ implementation.
 * FIXED: Removed redundant tests for the `diagrams` and `lgtdoc` tools while
 keeping the same code coverage.
 
+Examples
+--------
+
+* ADDED: Locked doors puzzle to the `searching` example.
+
 Tests
 -----
 

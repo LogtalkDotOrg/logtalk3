@@ -20,6 +20,7 @@
 
 
 :- initialization((
+	logtalk_load(format(loader)),
 	logtalk_load(types(loader)),
 	logtalk_load(sets(loader)),
 	logtalk_load(meta(loader)),
@@ -30,8 +31,9 @@
 	% puzzles
 	logtalk_load([
 		state_space,
-		water_jug,
+		doors,
 		farmer,
+		water_jug,		
 		heuristic_state_space,
 		bridge,
 		eight_puzzle,

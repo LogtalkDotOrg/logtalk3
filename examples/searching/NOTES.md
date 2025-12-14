@@ -103,6 +103,27 @@ Initial = (north,north,north,north) ?
 true.
 -->
 
+Finding the treasure behind looked doors:
+
+```logtalk
+doors::initial_state(Initial), breadth_first(8)::solve(doors, Initial, Path), doors::print_path(Path).
+```
+
+<!--
+At room 0 holding with no keys
+At room 1 holding with no keys
+At room 3 holding the red key
+At room 1 holding the red key
+At room 2 holding the red key
+At room 4 holding the red and blue keys
+At room 2 holding the red and blue keys
+At room 5 holding the red and blue keys
+At room 6 holding the red and blue keys
+Initial = s(0,false,false), Path = [s(0,false,false),s(1,false,false),s(3,true,false),s(1,true,false),s(2,true,false),s(4,true,true),s(2,true,true),s(5,true,true),s(6,true,true)] ?
+
+true.
+-->
+
 Missionaries and cannibals problem, solved using a hill-climbing strategy:
 
 ```logtalk
