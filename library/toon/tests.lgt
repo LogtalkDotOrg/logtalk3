@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(lgtunit, [
-		assertion/1, assertion/2,
+		assertion/1,
 		op(700, xfx, =~=), (=~=)/2
 	]).
 
@@ -104,7 +104,13 @@
 	test(toon_parse_file_primitives, true) :-
 		^^file_path('test_files/simple/primitives.toon', Path),
 		parse(file(Path), Term),
-		assertion(Term == {string-hello, number-42, float-3.14, bool_true- @true, bool_false- @false, null_value- @null}).
+		Term = {string-String, number-Number, float-Float, bool_true-BoolTrue, bool_false-BoolFalse, null_value-Null},
+		assertion(String == hello),
+		assertion(Number == 42),
+		assertion(Float =~= 3.14),
+		assertion(BoolTrue == @true),
+		assertion(BoolFalse == @false),
+		assertion(Null == @null).
 
 	test(toon_parse_file_inline_array, true(Term == {numbers-[1,2,3]})) :-
 		^^file_path('test_files/simple/inline_array.toon', Path),
@@ -131,9 +137,8 @@
 	test(toon_generate_empty_object, true(Atom == '')) :-
 		generate(atom(Atom), {}).
 
-	test(toon_generate_object_one_element, true) :-
-		generate(atom(Atom), {name-'John'}),
-		assertion(sub_atom(Atom, _, _, _, 'name: John')).
+	test(toon_generate_object_one_element, true(Atom == 'name: John')) :-
+		generate(atom(Atom), {name-'John'}).
 
 	test(toon_generate_primitives_true, true(Atom == 'true')) :-
 		generate(atom(Atom), @true).
@@ -150,16 +155,13 @@
 	test(toon_generate_primitives_float, true(sub_atom(Atom, 0, _, _, '3.14'))) :-
 		generate(atom(Atom), 3.14).
 
-	test(toon_generate_inline_array, true) :-
-		generate(atom(Atom), [1,2,3]),
-		assertion(sub_atom(Atom, _, _, _, '[3]: 1,2,3')).
+	test(toon_generate_inline_array, true(sub_atom(Atom, _, _, _, '[3]: 1,2,3'))) :-
+		generate(atom(Atom), [1,2,3]).
 
-	test(toon_generate_codes, true) :-
-		generate(codes(Codes), {name-'John'}),
-		assertion(is_list(Codes)).
+	test(toon_generate_codes, true(Codes == [110,97,109,101,58,32,74,111,104,110])) :-
+		generate(codes(Codes), {name-'John'}).
 
-	test(toon_generate_chars, true) :-
-		generate(chars(Chars), {name-'John'}),
-		assertion(is_list(Chars)).
+	test(toon_generate_chars, true(Chars == [n,a,m,e,':',' ','J',o,h,n])) :-
+		generate(chars(Chars), {name-'John'}).
 
 :- end_object.
