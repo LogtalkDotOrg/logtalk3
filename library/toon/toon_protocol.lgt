@@ -24,7 +24,7 @@
 	:- info([
 		version is 0:1:0,
 		author is 'Paulo Moura',
-		date is 2025-12-07,
+		date is 2025-12-15,
 		comment is 'TOON (Token-Oriented Object Notation) parser and generator protocol.'
 	]).
 
@@ -35,7 +35,7 @@
 		argnames is ['Source', 'Term'],
 		exceptions is [
 			'``Source`` is a variable' - instantiation_error,
-			'``Source`` is neither a variable nor a valid source' - type_error(toon_source, 'Source')
+			'``Source`` is neither a variable nor a valid source' - domain_error(toon_source, 'Source')
 		]
 	]).
 
@@ -46,7 +46,7 @@
 		argnames is ['Sink', 'Term'],
 		exceptions is [
 			'``Sink`` is a variable' - instantiation_error,
-			'``Sink`` is neither a variable nor a valid sink' - type_error(toon_sink, 'Sink')
+			'``Sink`` is neither a variable nor a valid sink' - domain_error(toon_sink, 'Sink')
 		]
 	]).
 

@@ -15,7 +15,7 @@ TOON (Token-Oriented Object Notation) parser and generator protocol.
 
 | **Author:** Paulo Moura
 | **Version:** 0:1:0
-| **Date:** 2025-12-07
+| **Date:** 2025-12-15
 
 | **Compilation flags:**
 |    ``static``
@@ -58,7 +58,7 @@ Parses the TOON contents read from the given source (``codes(List)``, ``stream(S
 |    ``Source`` is a variable:
 |        ``instantiation_error``
 |    ``Source`` is neither a variable nor a valid source:
-|        ``type_error(toon_source,Source)``
+|        ``domain_error(toon_source,Source)``
 
 
 ------------
@@ -83,7 +83,7 @@ Generates the content using the representation specified in the first argument (
 |    ``Sink`` is a variable:
 |        ``instantiation_error``
 |    ``Sink`` is neither a variable nor a valid sink:
-|        ``type_error(toon_sink,Sink)``
+|        ``domain_error(toon_sink,Sink)``
 
 
 ------------
