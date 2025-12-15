@@ -22,9 +22,9 @@
 :- object(ccsds(_SecondaryHeaderLength_)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2025-12-07,
+		date is 2025-12-15,
 		comment is 'CCSDS Space Packet parser following the CCSDS 133.0-B-2 standard. Parses binary packet data including optional secondary headers.',
 		parameters is [
 			'SecondaryHeaderLength' - 'Length in bytes of the secondary header when present (0 for no secondary header parsing, or a positive integer).'
@@ -38,7 +38,8 @@
 		argnames is ['Source', 'Packets'],
 		exceptions is [
 			'``Source`` is a variable' - instantiation_error,
-			'``Source`` is neither a variable nor a valid source' - type_error(ccsds_source, 'Source')
+			'``Source`` is neither a variable nor a valid source' - domain_error(ccsds_source, 'Source'),
+			'``Source`` is a valid source but the data cannot be parsed as a CCSDS packet' - domain_error(ccsds_byte_sequence, 'Bytes')
 		]
 	]).
 
@@ -49,7 +50,9 @@
 		argnames is ['Sink', 'Packets'],
 		exceptions is [
 			'``Sink`` is a variable' - instantiation_error,
-			'``Sink`` is neither a variable nor a valid sink' - type_error(ccsds_sink, 'Sink')
+			'``Sink`` is neither a variable nor a valid sink' - domain_error(ccsds_sink, 'Sink'),
+			'``Packets`` is a partial list or a list with an element ``Packet`` which is a variable' - instantiation_error,
+			'An element ``Packet`` of the list ``Packets`` is neither a variable nor a valid CCSDS packet term' - domain_error(ccsds_packet_term, 'Packet')
 		]
 	]).
 
@@ -57,7 +60,11 @@
 	:- mode(generate(+compound, -list(byte), --variable), one_or_error).
 	:- info(generate/3, [
 		comment is 'Generates a list of bytes from a CCSDS packet term with an open tail. Mainly used when generating arbitrary CCSDS packets.',
-		argnames is ['Packet', 'Bytes', 'Tail']
+		argnames is ['Packet', 'Bytes', 'Tail'],
+		exceptions is [
+			'``Packet`` is a variable' - instantiation_error,
+			'``Packet`` is neither a variable nor a valid CCSDS packet term' - domain_error(ccsds_packet_term, 'Packet')
+		]
 	]).
 
 	:- public(version/2).
@@ -190,27 +197,33 @@
 		domain_error(ccsds_sink, Sink).
 
 	% Helper to generate all packets to a stream
-	generate_all_stream([], _).
 	generate_all_stream([Packet| Packets], Stream) :-
-		(	phrase(encode_packet(Packet), Bytes) ->
+		(	var(Packet) ->
+			instantiation_error
+		;	phrase(encode_packet(Packet), Bytes) ->
 			write_bytes(Bytes, Stream),
 			generate_all_stream(Packets, Stream)
-		;	domain_error(ccsds_packet, Packet)
+		;	domain_error(ccsds_packet_term, Packet)
 		).
+	generate_all_stream([], _).
 
 	% Helper to generate all packets to a byte list
-	generate_all_bytes([], []).
 	generate_all_bytes([Packet| Packets], Bytes) :-
-		(	phrase(encode_packet(Packet), Bytes, Tail) ->
+		(	var(Packet) ->
+			instantiation_error
+		;	phrase(encode_packet(Packet), Bytes, Tail) ->
 			generate_all_bytes(Packets, Tail)
-		;	domain_error(ccsds_packet, Packet)
+		;	domain_error(ccsds_packet_term, Packet)
 		).
+	generate_all_bytes([], []).
 
 	generate(Packet, Bytes, Tail) :-
-		phrase(encode_packet(Packet), Bytes, Tail),
-		!.
-	generate(Packet, _, _) :-
-		domain_error(ccsds_packet, Packet).
+		(	var(Packet) ->
+			instantiation_error
+		;	phrase(encode_packet(Packet), Bytes, Tail) ->
+			true
+		;	domain_error(ccsds_packet_term, Packet)
+		).
 
 	% Helper predicate to write bytes to a stream
 	write_bytes([], _).
@@ -219,29 +232,39 @@
 		write_bytes(Bytes, Stream).
 
 	% Accessor predicates
-	version(ccsds_packet(Version, _, _, _, _, _, _, _, _), Version).
+	version(ccsds_packet(Version, _, _, _, _, _, _, _), Version).
 
-	type(ccsds_packet(_, TypeCode, _, _, _, _, _, _, _), Type) :-
+	type(ccsds_packet(_, TypeCode, _, _, _, _, _, _), Type) :-
 		(	TypeCode =:= 0 ->
 			Type = telemetry
 		;	Type = telecommand
 		).
 
-	secondary_header_flag(ccsds_packet(_, _, SecHeaderFlag, _, _, _, _, _, _), SecHeader) :-
+	secondary_header_flag(ccsds_packet(_, _, SecHeaderFlag, _, _, _, _, _), SecHeader) :-
 		secondary_header_flag_atom(SecHeaderFlag, SecHeader).
 
-	apid(ccsds_packet(_, _, _, APID, _, _, _, _, _), APID).
+	apid(ccsds_packet(_, _, _, APID, _, _, _, _), APID).
 
-	sequence_flags(ccsds_packet(_, _, _, _, SeqFlagsCode, _, _, _, _), Flags) :-
+	sequence_flags(ccsds_packet(_, _, _, _, SeqFlagsCode, _, _, _), Flags) :-
 		sequence_flags_atom(SeqFlagsCode, Flags).
 
-	sequence_count(ccsds_packet(_, _, _, _, _, SeqCount, _, _, _), SeqCount).
+	sequence_count(ccsds_packet(_, _, _, _, _, SeqCount, _, _), SeqCount).
 
-	data_length(ccsds_packet(_, _, _, _, _, _, DataLength, _, _), DataLength).
+	data_length(Packet, DataLength) :-
+		secondary_header(Packet, SecHeader),
+		user_data(Packet, UserData),
+		secondary_header_length(SecHeader, SecHeaderLen),
+		length(UserData, UserDataLen),
+		DataLength is SecHeaderLen + UserDataLen - 1.
 
-	user_data(ccsds_packet(_, _, _, _, _, _, _, _, UserData), UserData).
+	user_data(ccsds_packet(_, _, _, _, _, _, _, UserData), UserData).
 
-	secondary_header(ccsds_packet(_, _, _, _, _, _, _, SecHeader, _), SecHeader).
+	secondary_header(ccsds_packet(_, _, _, _, _, _, SecHeader, _), SecHeader).
+
+	% Helper to get secondary header length
+	secondary_header_length(none, 0).
+	secondary_header_length(secondary_header(Bytes), Length) :-
+		length(Bytes, Length).
 
 	secondary_header_time(Packet, cuc_time(Coarse, Fine)) :-
 		secondary_header(Packet, secondary_header(Bytes)),
@@ -273,11 +296,11 @@
 	decode_packets([]) -->
 		[].
 
-	decode_packet(ccsds_packet(Version, Type, SecHeaderFlag, APID, SeqFlags, SeqCount, DataLength, SecHeader, UserData)) -->
+	decode_packet(ccsds_packet(Version, Type, SecHeaderFlag, APID, SeqFlags, SeqCount, SecHeader, UserData)) -->
 		decode_primary_header(Version, Type, SecHeaderFlag, APID, SeqFlags, SeqCount, DataLength),
 		decode_secondary_header(SecHeaderFlag, SecHeader, SecHeaderLen),
-		{	ActualLength is DataLength + 1 - SecHeaderLen,
-			length(UserData, ActualLength)
+		{	UserDataLength is DataLength + 1 - SecHeaderLen,
+			length(UserData, UserDataLength)
 		},
 		bytes(UserData).
 
@@ -316,7 +339,12 @@
 
 	% DCG rules for encoding
 
-	encode_packet(ccsds_packet(Version, Type, SecHeaderFlag, APID, SeqFlags, SeqCount, DataLength, SecHeader, UserData)) -->
+	encode_packet(ccsds_packet(Version, Type, SecHeaderFlag, APID, SeqFlags, SeqCount, SecHeader, UserData)) -->
+		{	% Compute DataLength from SecHeader and UserData
+			secondary_header_length(SecHeader, SecHeaderLen),
+			length(UserData, UserDataLen),
+			DataLength is SecHeaderLen + UserDataLen - 1
+		},
 		encode_primary_header(Version, Type, SecHeaderFlag, APID, SeqFlags, SeqCount, DataLength),
 		encode_secondary_header(SecHeader),
 		bytes(UserData).

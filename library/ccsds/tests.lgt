@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2025-12-11,
+		date is 2025-12-15,
 		comment is 'Unit tests for the "ccsds" library.'
 	]).
 
@@ -61,11 +61,11 @@
 		% Empty byte stream
 		parse(bytes([]), Packets).
 
-	test(ccsds_parse_2_02, true(Packets == [ccsds_packet(0, 0, 0, 0, 3, 0, 0, none, [0x42])])) :-
+	test(ccsds_parse_2_02, true(Packets == [ccsds_packet(0, 0, 0, 0, 3, 0, none, [0x42])])) :-
 		% Single minimal packet
 		parse(bytes([0x00, 0x00, 0xC0, 0x00, 0x00, 0x00, 0x42]), Packets).
 
-	test(ccsds_parse_2_03, true(Packets == [ccsds_packet(0, 0, 1, 1, 3, 0, 3, none, [0xDE, 0xAD, 0xBE, 0xEF])])) :-
+	test(ccsds_parse_2_03, true(Packets == [ccsds_packet(0, 0, 1, 1, 3, 0, none, [0xDE, 0xAD, 0xBE, 0xEF])])) :-
 		parse(bytes([0x08, 0x01, 0xC0, 0x00, 0x00, 0x03, 0xDE, 0xAD, 0xBE, 0xEF]), Packets).
 
 	test(ccsds_parse_2_04, true(length(Packets, 2))) :-
@@ -75,7 +75,7 @@
 			0x00, 0x00, 0xC0, 0x01, 0x00, 0x00, 0x43   % Second packet (1 byte data)
 		]), Packets).
 
-	test(ccsds_parse_2_05, true(Packets == [ccsds_packet(0, 1, 0, 2047, 0, 16383, 0, none, [0xFF])])) :-
+	test(ccsds_parse_2_05, true(Packets == [ccsds_packet(0, 1, 0, 2047, 0, 16383, none, [0xFF])])) :-
 		% Telecommand packet with max APID (2047) and max sequence count (16383)
 		% Byte0: 0001 0111 = 0x17 (version=0, type=1, secheader=0, apid_high=7)
 		% Byte1: 1111 1111 = 0xFF (apid_low=255) -> APID = 7*256 + 255 = 2047
@@ -84,7 +84,7 @@
 		% Byte4-5: 0x0000 (data length = 0, means 1 byte)
 		parse(bytes([0x17, 0xFF, 0x3F, 0xFF, 0x00, 0x00, 0xFF]), Packets).
 
-	test(ccsds_parse_2_06, true(Packets == [ccsds_packet(0, 0, 0, 0, 1, 1, 1, none, [0xAA, 0xBB])])) :-
+	test(ccsds_parse_2_06, true(Packets == [ccsds_packet(0, 0, 0, 0, 1, 1, none, [0xAA, 0xBB])])) :-
 		% Telemetry, no secondary header, APID=0, first segment, seqcount=1, 2 bytes data
 		% Byte0: 0000 0000 = 0x00
 		% Byte1: 0000 0000 = 0x00
@@ -104,13 +104,13 @@
 	% generate/2 tests
 
 	test(ccsds_generate_2_01, true(Bytes == [0x08, 0x01, 0xC0, 0x00, 0x00, 0x03, 0xDE, 0xAD, 0xBE, 0xEF])) :-
-		generate(bytes(Bytes), [ccsds_packet(0, 0, 1, 1, 3, 0, 3, none, [0xDE, 0xAD, 0xBE, 0xEF])]).
+		generate(bytes(Bytes), [ccsds_packet(0, 0, 1, 1, 3, 0, none, [0xDE, 0xAD, 0xBE, 0xEF])]).
 
 	test(ccsds_generate_2_02, true(Bytes == [0x17, 0xFF, 0x3F, 0xFF, 0x00, 0x00, 0xFF])) :-
-		generate(bytes(Bytes), [ccsds_packet(0, 1, 0, 2047, 0, 16383, 0, none, [0xFF])]).
+		generate(bytes(Bytes), [ccsds_packet(0, 1, 0, 2047, 0, 16383, none, [0xFF])]).
 
 	test(ccsds_generate_2_03, true(Bytes == [0x00, 0x00, 0xC0, 0x00, 0x00, 0x00, 0x42])) :-
-		generate(bytes(Bytes), [ccsds_packet(0, 0, 0, 0, 3, 0, 0, none, [0x42])]).
+		generate(bytes(Bytes), [ccsds_packet(0, 0, 0, 0, 3, 0, none, [0x42])]).
 
 	% Roundtrip tests (parse then generate should give original bytes)
 
@@ -255,7 +255,7 @@
 		Expected = [0x08, 0x01, 0xC0, 0x00, 0x00, 0x07,
 		            0x01, 0x02, 0x03, 0x04, 0x05, 0x06,
 		            0xAA, 0xBB],
-		ccsds(6)::generate(bytes(Bytes), [ccsds_packet(0, 0, 1, 1, 3, 0, 7,
+		ccsds(6)::generate(bytes(Bytes), [ccsds_packet(0, 0, 1, 1, 3, 0,
 		                   secondary_header([0x01, 0x02, 0x03, 0x04, 0x05, 0x06]),
 		                   [0xAA, 0xBB])]).
 

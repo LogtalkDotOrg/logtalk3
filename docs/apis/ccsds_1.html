@@ -212,8 +212,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:4:0</div>
-<div class="line"><strong>Date:</strong> 2025-12-07</div>
+<div class="line"><strong>Version:</strong> 0:5:0</div>
+<div class="line"><strong>Date:</strong> 2025-12-15</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -294,7 +294,11 @@
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is neither a variable nor a valid source:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(ccsds_source,Source)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_source,Source)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is a valid source but the data cannot be parsed as a CCSDS packet:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_byte_sequence,Bytes)</span></code></div>
 </div>
 </div>
 </div>
@@ -328,7 +332,15 @@
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is neither a variable nor a valid sink:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(ccsds_sink,Sink)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_sink,Sink)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Packets</span></code> is a partial list or a list with an element <code class="docutils literal notranslate"><span class="pre">Packet</span></code> which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Packet</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Packets</span></code> is neither a variable nor a valid CCSDS packet term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_term,Packet)</span></code></div>
 </div>
 </div>
 </div>
@@ -351,6 +363,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">generate(+compound,-list(byte),--variable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Packet</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Packet</span></code> is neither a variable nor a valid CCSDS packet term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_term,Packet)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />

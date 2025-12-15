@@ -17,8 +17,8 @@ CCSDS Space Packet parser following the CCSDS 133.0-B-2 standard. Parses binary 
 |    ``logtalk_load(ccsds(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:4:0
-| **Date:** 2025-12-07
+| **Version:** 0:5:0
+| **Date:** 2025-12-15
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -61,7 +61,9 @@ Parses CCSDS packet(s) from a source into a list of packet terms. The source can
 |    ``Source`` is a variable:
 |        ``instantiation_error``
 |    ``Source`` is neither a variable nor a valid source:
-|        ``type_error(ccsds_source,Source)``
+|        ``domain_error(ccsds_source,Source)``
+|    ``Source`` is a valid source but the data cannot be parsed as a CCSDS packet:
+|        ``domain_error(ccsds_byte_sequence,Bytes)``
 
 
 ------------
@@ -86,7 +88,11 @@ Generates CCSDS packet bytes to a sink from a list of packet terms. The sink can
 |    ``Sink`` is a variable:
 |        ``instantiation_error``
 |    ``Sink`` is neither a variable nor a valid sink:
-|        ``type_error(ccsds_sink,Sink)``
+|        ``domain_error(ccsds_sink,Sink)``
+|    ``Packets`` is a partial list or a list with an element ``Packet`` which is a variable:
+|        ``instantiation_error``
+|    An element ``Packet`` of the list ``Packets`` is neither a variable nor a valid CCSDS packet term:
+|        ``domain_error(ccsds_packet_term,Packet)``
 
 
 ------------
@@ -106,6 +112,12 @@ Generates a list of bytes from a CCSDS packet term with an open tail. Mainly use
 |    ``generate(Packet,Bytes,Tail)``
 | **Mode and number of proofs:**
 |    ``generate(+compound,-list(byte),--variable)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Packet`` is a variable:
+|        ``instantiation_error``
+|    ``Packet`` is neither a variable nor a valid CCSDS packet term:
+|        ``domain_error(ccsds_packet_term,Packet)``
 
 
 ------------

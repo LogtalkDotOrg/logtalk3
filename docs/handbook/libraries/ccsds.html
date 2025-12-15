@@ -214,7 +214,7 @@ following the CCSDS 133.0-B-2 standard (Space Packet Protocol).</p>
 <section id="representation">
 <h2>Representation<a class="headerlink" href="#representation" title="Link to this heading"></a></h2>
 <p>Packets are represented using the compound term:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>ccsds_packet(<span class="nv">Version</span>, <span class="nv">Type</span>, <span class="nv">SecHeaderFlag</span>, <span class="nv">APID</span>, <span class="nv">SeqFlags</span>, <span class="nv">SeqCount</span>, <span class="nv">DataLength</span>, <span class="nv">UserData</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>ccsds_packet(<span class="nv">Version</span>, <span class="nv">Type</span>, <span class="nv">SecHeaderFlag</span>, <span class="nv">APID</span>, <span class="nv">SeqFlags</span>, <span class="nv">SeqCount</span>, <span class="nv">SecHeader</span>, <span class="nv">UserData</span>)
 </pre></div>
 </div>
 <p>Where:</p>
@@ -225,9 +225,14 @@ following the CCSDS 133.0-B-2 standard (Space Packet Protocol).</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">APID</span></code> is an integer (0-2047)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">SeqFlags</span></code> is an integer (0-3)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">SeqCount</span></code> is an integer (0-16383)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DataLength</span></code> is an integer (0-65535)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SecHeader</span></code> is either <code class="docutils literal notranslate"><span class="pre">none</span></code> or <code class="docutils literal notranslate"><span class="pre">secondary_header(Bytes)</span></code> where
+<code class="docutils literal notranslate"><span class="pre">Bytes</span></code> is a list of bytes</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">UserData</span></code> is a list of bytes</p></li>
 </ul>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">DataLength</span></code> field from the wire format is not stored in
+the term representation as it can be computed from <code class="docutils literal notranslate"><span class="pre">SecHeader</span></code> and
+<code class="docutils literal notranslate"><span class="pre">UserData</span></code>. The <code class="docutils literal notranslate"><span class="pre">data_length/2</span></code> accessor predicate computes and
+returns this value when needed.</p>
 </section>
 <section id="parsing">
 <h2>Parsing<a class="headerlink" href="#parsing" title="Link to this heading"></a></h2>
@@ -237,7 +242,7 @@ The source can be <code class="docutils literal notranslate"><span class="pre">f
 uniformity.</p>
 <p>To parse packets from a list of bytes:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> ccsds<span class="o">::</span>parse(bytes([<span class="mh">0x08</span>, <span class="mh">0x01</span>, <span class="mh">0xC0</span>, <span class="mh">0x00</span>, <span class="mh">0x00</span>, <span class="mh">0x03</span>, <span class="mh">0xDE</span>, <span class="mh">0xAD</span>, <span class="mh">0xBE</span>, <span class="mh">0xEF</span>]), <span class="nv">Packets</span>).
-<span class="nv">Packets</span> <span class="o">=</span> [ccsds_packet(<span class="m">0</span>, <span class="m">0</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">3</span>, <span class="m">0</span>, <span class="m">3</span>, none, [<span class="m">222</span>, <span class="m">173</span>, <span class="m">190</span>, <span class="m">239</span>])]
+<span class="nv">Packets</span> <span class="o">=</span> [ccsds_packet(<span class="m">0</span>, <span class="m">0</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">3</span>, <span class="m">0</span>, none, [<span class="m">222</span>, <span class="m">173</span>, <span class="m">190</span>, <span class="m">239</span>])]
 yes
 </pre></div>
 </div>
@@ -256,7 +261,7 @@ yes
 and a list of packet terms as the second argument. The sink can be
 <code class="docutils literal notranslate"><span class="pre">file(File)</span></code>, <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>, or <code class="docutils literal notranslate"><span class="pre">bytes(Bytes)</span></code>.</p>
 <p>To generate bytes from a list of packet terms:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> ccsds<span class="o">::</span>generate(bytes(<span class="nv">Bytes</span>), [ccsds_packet(<span class="m">0</span>, <span class="m">0</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">3</span>, <span class="m">0</span>, <span class="m">3</span>, none, [<span class="mh">0xDE</span>, <span class="mh">0xAD</span>, <span class="mh">0xBE</span>, <span class="mh">0xEF</span>])]).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> ccsds<span class="o">::</span>generate(bytes(<span class="nv">Bytes</span>), [ccsds_packet(<span class="m">0</span>, <span class="m">0</span>, <span class="m">1</span>, <span class="m">1</span>, <span class="m">3</span>, <span class="m">0</span>, none, [<span class="mh">0xDE</span>, <span class="mh">0xAD</span>, <span class="mh">0xBE</span>, <span class="mh">0xEF</span>])]).
 <span class="nv">Bytes</span> <span class="o">=</span> [<span class="m">8</span>, <span class="m">1</span>, <span class="m">192</span>, <span class="m">0</span>, <span class="m">0</span>, <span class="m">3</span>, <span class="m">222</span>, <span class="m">173</span>, <span class="m">190</span>, <span class="m">239</span>]
 yes
 </pre></div>
@@ -281,10 +286,19 @@ packet fields:</p>
 <span class="c">% Returns telemetry or telecommand</span>
 | <span class="o">?-</span> ccsds<span class="o">::</span>type(<span class="nv">Packet</span>, <span class="nv">Type</span>).
 
- <span class="c">% Returns continuation, first, last, or standalone</span>
+<span class="c">% Returns continuation, first, last, or standalone</span>
 | <span class="o">?-</span> ccsds<span class="o">::</span>sequence_flags(<span class="nv">Packet</span>, <span class="nv">Flags</span>).
 
+<span class="c">% Returns the secondary header as a list of bytes or none</span>
+| <span class="o">?-</span> ccsds<span class="o">::</span>secondary_header(<span class="nv">Packet</span>, <span class="nv">SecHeader</span>).
+
+<span class="c">% Returns the secondary header time as a cuc_time(Coarse, Fine) term or fails if no time is available</span>
+| <span class="o">?-</span> ccsds<span class="o">::</span>secondary_header_time(<span class="nv">Packet</span>, <span class="nv">Time</span>).
+
 | <span class="o">?-</span> ccsds<span class="o">::</span>user_data(<span class="nv">Packet</span>, <span class="nv">Data</span>).
+
+<span class="c">% Returns the packet data length (computed from secondary header and user data)</span>
+| <span class="o">?-</span> ccsds<span class="o">::</span>data_length(<span class="nv">Packet</span>, <span class="nv">Length</span>).
 </pre></div>
 </div>
 </section>
@@ -303,7 +317,15 @@ arbitrary generators for CCSDS packets. For example:</p>
 with <code class="docutils literal notranslate"><span class="pre">N</span></code> packets. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> type<span class="o">::</span>arbitrary(ccsds_packets(<span class="m">10</span>), <span class="nv">Bytes</span>).
 
-| <span class="o">?-</span> type<span class="o">::</span>arbitrary(ccsds_packets(<span class="m">42</span>, <span class="m">10</span>), <span class="nv">Bytes</span>).
+| <span class="o">?-</span> type<span class="o">::</span>check(ccsds_packets(<span class="m">42</span>, <span class="m">10</span>), <span class="nv">Bytes</span>).
+</pre></div>
+</div>
+<p>For a term representation of a packet, use the <code class="docutils literal notranslate"><span class="pre">ccsds_packet_term</span></code> and
+<code class="docutils literal notranslate"><span class="pre">ccsds_packet_term(SecondaryHeaderLength)</span></code> types and arbitrary
+generators. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> type<span class="o">::</span>check(ccsds_packet_term, <span class="nv">Packet</span>).
+
+| <span class="o">?-</span> type<span class="o">::</span>arbitrary(ccsds_packet_term(<span class="m">42</span>), <span class="nv">Packet</span>).
 </pre></div>
 </div>
 </section>

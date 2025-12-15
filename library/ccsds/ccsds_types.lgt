@@ -22,9 +22,9 @@
 :- category(ccsds_types).
 
 	:- info([
-		version is 1:0:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2025-12-07,
+		date is 2025-12-15,
 		comment is 'Type definitions and arbitrary generators for CCSDS packets.'
 	]).
 
@@ -34,10 +34,12 @@
 	:- multifile(type::type/1).
 	type::type(ccsds_packet(_)).
 	type::type(ccsds_packet).
+	type::type(ccsds_packet_term(_)).
+	type::type(ccsds_packet_term).
 
 	:- multifile(type::check/2).
 	type::check(ccsds_packet(SecondaryHeaderLength), Term) :-
-		(	check_ccsds_bytes(Term, SecondaryHeaderLength) ->
+		(	valid_ccsds_bytes(Term, SecondaryHeaderLength) ->
 			true
 		;	var(Term) ->
 			throw(instantiation_error)
@@ -46,11 +48,39 @@
 	% ccsds_packet is an alias for ccsds_packet(0)
 	type::check(ccsds_packet, Term) :-
 		type::check(ccsds_packet(0), Term).
+	% Type check for ccsds_packet_term(SecondaryHeaderLength)
+	type::check(ccsds_packet_term(SecondaryHeaderLength), Term) :-
+		(	valid_ccsds_packet_term(Term, SecondaryHeaderLength) ->
+			true
+		;	var(Term) ->
+			throw(instantiation_error)
+		;	throw(type_error(ccsds_packet_term(SecondaryHeaderLength), Term))
+		).
+	% ccsds_packet_term is an alias for ccsds_packet_term(0)
+	type::check(ccsds_packet_term, Term) :-
+		type::check(ccsds_packet_term(0), Term).
 
 	% Check if a term is a valid list of bytes that parses as a CCSDS packet
-	check_ccsds_bytes(Bytes, SecondaryHeaderLength) :-
+	valid_ccsds_bytes(Bytes, SecondaryHeaderLength) :-
 		type::valid(list(byte), Bytes),
 		ccsds(SecondaryHeaderLength)::parse(bytes(Bytes), _).
+
+	% Check if a term is a valid ccsds_packet_term
+	valid_ccsds_packet_term(ccsds_packet(Version, Type, SecHeaderFlag, APID, SeqFlags, SeqCount, SecHeader, UserData), SecondaryHeaderLength) :-
+		integer(Version), Version >= 0, Version =< 7,
+		integer(Type), Type >= 0, Type =< 1,
+		integer(SecHeaderFlag), SecHeaderFlag >= 0, SecHeaderFlag =< 1,
+		integer(APID), APID >= 0, APID =< 2047,
+		integer(SeqFlags), SeqFlags >= 0, SeqFlags =< 3,
+		integer(SeqCount), SeqCount >= 0, SeqCount =< 16383,
+		valid_secondary_header(SecHeader, SecondaryHeaderLength),
+		type::valid(list(byte), UserData).
+
+	% Check secondary header
+	valid_secondary_header(none, 0).
+	valid_secondary_header(secondary_header(Bytes), Length) :-
+		Length > 0,
+		type::valid(list(byte, Length), Bytes).
 
 	% Arbitrary generators for ccsds_packet(SecondaryHeaderLength)
 	% Generates random valid CCSDS packets as byte lists
@@ -60,6 +90,8 @@
 	arbitrary::arbitrary(ccsds_packet).
 	arbitrary::arbitrary(ccsds_packets(_, _)).
 	arbitrary::arbitrary(ccsds_packets(_)).
+	arbitrary::arbitrary(ccsds_packet_term(_)).
+	arbitrary::arbitrary(ccsds_packet_term).
 
 	:- multifile(arbitrary::arbitrary/2).
 	arbitrary::arbitrary(ccsds_packet(SecondaryHeaderLength), Bytes) :-
@@ -69,9 +101,15 @@
 		generate_ccsds_packet(0, Bytes).
 	arbitrary::arbitrary(ccsds_packets(SecondaryHeaderLength, N), Bytes) :-
 		generate_ccsds_packets(SecondaryHeaderLength, N, Bytes).
-	% ccsds_packet is an alias for ccsds_packet(0)
+	% ccsds_packets(N) is an alias for ccsds_packets(0, N)
 	arbitrary::arbitrary(ccsds_packets(N), Bytes) :-
 		generate_ccsds_packets(0, N, Bytes).
+	% Arbitrary generator for ccsds_packet_term(SecondaryHeaderLength)
+	arbitrary::arbitrary(ccsds_packet_term(SecondaryHeaderLength), PacketTerm) :-
+		generate_ccsds_packet_term(SecondaryHeaderLength, PacketTerm).
+	% ccsds_packet_term is an alias for ccsds_packet_term(0)
+	arbitrary::arbitrary(ccsds_packet_term, PacketTerm) :-
+		generate_ccsds_packet_term(0, PacketTerm).
 
 	generate_ccsds_packet(SecondaryHeaderLength, Bytes) :-
 		generate_ccsds_packet_term(SecondaryHeaderLength, Packet),
@@ -86,7 +124,7 @@
 		ccsds(SecondaryHeaderLength)::generate(Packet, Bytes, Tail),
 		generate_ccsds_packets(SecondaryHeaderLength, M, Tail).
 
-	generate_ccsds_packet_term(SecondaryHeaderLength, Packet) :-
+	generate_ccsds_packet_term(SecondaryHeaderLength, PacketTerm) :-
 		% Generate random valid packet fields
 		Version = 0,                                                % Version is always 0
 		type::arbitrary(between(integer, 0, 1), Type),              % 0=telemetry, 1=telecommand
@@ -103,10 +141,7 @@
 		;	SecHeaderFlag = 0,
 			SecHeader = none
 		),
-		% Calculate data length field (total data field length - 1)
-		DataLength is UserDataLength + SecondaryHeaderLength - 1,
-		% Build the packet and generate bytes
-		Packet = ccsds_packet(Version, Type, SecHeaderFlag, APID, SeqFlags, SeqCount, DataLength, SecHeader, UserData).
+		% Build the packet term (DataLength is computed during generation)
+		PacketTerm = ccsds_packet(Version, Type, SecHeaderFlag, APID, SeqFlags, SeqCount, SecHeader, UserData).
 
 :- end_category.
-

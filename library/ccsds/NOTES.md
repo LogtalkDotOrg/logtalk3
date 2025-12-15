@@ -53,7 +53,7 @@ Representation
 
 Packets are represented using the compound term:
 
-    ccsds_packet(Version, Type, SecHeaderFlag, APID, SeqFlags, SeqCount, DataLength, UserData)
+    ccsds_packet(Version, Type, SecHeaderFlag, APID, SeqFlags, SeqCount, SecHeader, UserData)
 
 Where:
 
@@ -63,8 +63,12 @@ Where:
 - `APID` is an integer (0-2047)
 - `SeqFlags` is an integer (0-3)
 - `SeqCount` is an integer (0-16383)
-- `DataLength` is an integer (0-65535)
+- `SecHeader` is either `none` or `secondary_header(Bytes)` where `Bytes` is a list of bytes
 - `UserData` is a list of bytes
+
+Note that the `DataLength` field from the wire format is not stored in the term
+representation as it can be computed from `SecHeader` and `UserData`. The `data_length/2`
+accessor predicate computes and returns this value when needed.
 
 
 Parsing
@@ -77,7 +81,7 @@ return a list of packets for uniformity.
 To parse packets from a list of bytes:
 
     | ?- ccsds::parse(bytes([0x08, 0x01, 0xC0, 0x00, 0x00, 0x03, 0xDE, 0xAD, 0xBE, 0xEF]), Packets).
-    Packets = [ccsds_packet(0, 0, 1, 1, 3, 0, 3, none, [222, 173, 190, 239])]
+    Packets = [ccsds_packet(0, 0, 1, 1, 3, 0, none, [222, 173, 190, 239])]
     yes
 
 To parse packets from a binary file:
@@ -87,6 +91,12 @@ To parse packets from a binary file:
 To parse packets from a binary stream:
 
     | ?- ccsds::parse(stream(Stream), Packets).
+
+When the packets include a secondary header, the secondary header length must be
+known. In this case, use the `ccsds(SecondaryHeaderLength)` object instead of the
+`ccsds` object. For example, to parse packets with a secondary header of 6 bytes:
+
+    | ?- ccsds(6)::parse(bytes([0x08, 0x01, 0xC0, 0x00, 0x00, 0x07, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0xAA, 0xBB]), Packets).
 
 
 Generating
@@ -98,7 +108,7 @@ of packet terms as the second argument. The sink can be `file(File)`,
 
 To generate bytes from a list of packet terms:
 
-    | ?- ccsds::generate(bytes(Bytes), [ccsds_packet(0, 0, 1, 1, 3, 0, 3, none, [0xDE, 0xAD, 0xBE, 0xEF])]).
+    | ?- ccsds::generate(bytes(Bytes), [ccsds_packet(0, 0, 1, 1, 3, 0, none, [0xDE, 0xAD, 0xBE, 0xEF])]).
     Bytes = [8, 1, 192, 0, 0, 3, 222, 173, 190, 239]
     yes
 
@@ -121,10 +131,19 @@ The library provides convenient accessor predicates for extracting packet fields
     % Returns telemetry or telecommand
     | ?- ccsds::type(Packet, Type).
 
-	 % Returns continuation, first, last, or standalone
+    % Returns continuation, first, last, or standalone
     | ?- ccsds::sequence_flags(Packet, Flags).
 
+    % Returns the secondary header as a list of bytes or none
+    | ?- ccsds::secondary_header(Packet, SecHeader).
+
+    % Returns the secondary header time as a cuc_time(Coarse, Fine) term or fails if no time is available
+    | ?- ccsds::secondary_header_time(Packet, Time).
+
     | ?- ccsds::user_data(Packet, Data).
+
+    % Returns the packet data length (computed from secondary header and user data)
+    | ?- ccsds::data_length(Packet, Length).
 
 
 Types and arbitrary generators
@@ -143,7 +162,15 @@ types for generating a list with `N` packets. For example:
 
     | ?- type::arbitrary(ccsds_packets(10), Bytes).
 
-    | ?- type::arbitrary(ccsds_packets(42, 10), Bytes).
+    | ?- type::check(ccsds_packets(42, 10), Bytes).
+
+For a term representation of a packet, use the `ccsds_packet_term` and
+`ccsds_packet_term(SecondaryHeaderLength)` types and arbitrary generators.
+For example:
+
+    | ?- type::check(ccsds_packet_term, Packet).
+
+    | ?- type::arbitrary(ccsds_packet_term(42), Packet).
 
 
 API documentation
