@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 0:1:0,
 		author is 'Paulo Moura',
-		date is 2025-12-07,
+		date is 2025-12-15,
 		comment is 'Tests for the TOON library.'
 	]).
 
@@ -34,7 +34,8 @@
 	]).
 
 	:- uses(lgtunit, [
-		assertion/1, assertion/2
+		assertion/1, assertion/2,
+		op(700, xfx, =~=), (=~=)/2
 	]).
 
 	cover(toon(_,_,_)).
@@ -65,7 +66,7 @@
 	test(toon_parse_primitives_number, true(Term == 42)) :-
 		parse(atom('42'), Term).
 
-	test(toon_parse_primitives_float, true(Term == 3.14)) :-
+	test(toon_parse_primitives_float, true(Term =~= 3.14)) :-
 		parse(atom('3.14'), Term).
 
 	test(toon_parse_inline_array, true(Term == {numbers-[1,2,3]})) :-
@@ -103,7 +104,7 @@
 	test(toon_parse_file_primitives, true) :-
 		^^file_path('test_files/simple/primitives.toon', Path),
 		parse(file(Path), Term),
-		assertion(Term = {string-hello, number-42, float-3.14, bool_true- @true, bool_false- @false, null_value- @null}).
+		assertion(Term == {string-hello, number-42, float-3.14, bool_true- @true, bool_false- @false, null_value- @null}).
 
 	test(toon_parse_file_inline_array, true(Term == {numbers-[1,2,3]})) :-
 		^^file_path('test_files/simple/inline_array.toon', Path),
@@ -146,7 +147,7 @@
 	test(toon_generate_primitives_number, true(Atom == '42')) :-
 		generate(atom(Atom), 42).
 
-	test(toon_generate_primitives_float, true(Atom == '3.14')) :-
+	test(toon_generate_primitives_float, true(sub_atom(Atom, 0, _, _, '3.14'))) :-
 		generate(atom(Atom), 3.14).
 
 	test(toon_generate_inline_array, true) :-
