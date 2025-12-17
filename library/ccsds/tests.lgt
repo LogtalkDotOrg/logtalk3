@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:5:1,
 		author is 'Paulo Moura',
-		date is 2025-12-15,
+		date is 2025-12-17,
 		comment is 'Unit tests for the "ccsds" library.'
 	]).
 
@@ -37,7 +37,7 @@
 	]).
 
 	:- uses(list, [
-		member/2, flatten/2
+		member/2, flatten/2, length/2
 	]).
 
 	cover(ccsds).

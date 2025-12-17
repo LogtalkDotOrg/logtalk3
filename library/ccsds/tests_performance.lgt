@@ -23,18 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:5:1,
 		author is 'Paulo Moura',
-		date is 2025-12-11,
+		date is 2025-12-17,
 		comment is 'Performance tests for the "ccsds" library.'
 	]).
 
 	:- private(bytes_/1).
 	:- dynamic(bytes_/1).
-
-	:- uses(ccsds, [
-		type/2, apid/2, sequence_flags/2
-	]).
 
 	setup :-
 		type::arbitrary(ccsds_packet, Bytes),
@@ -80,19 +76,19 @@
 		% File should contain packets
 		^^file_path('test_files/ecm_raw2.bin', Path),
 		ccsds::parse(file(Path), Packets),
-		length(Packets, N).
+		list::length(Packets, N).
 
 	test(ccsds_file_ecm_02, true(Type == telemetry)) :-
 		% Packets should be telemetry
 		^^file_path('test_files/ecm_raw2.bin', Path),
 		ccsds::parse(file(Path), [Packet| _]),
-		type(Packet, Type).
+		ccsds::type(Packet, Type).
 
 	test(ccsds_file_ecm_03, true(Flags == standalone)) :-
 		% Check sequence flags
 		^^file_path('test_files/ecm_raw2.bin', Path),
 		ccsds::parse(file(Path), [Packet| _]),
-		sequence_flags(Packet, Flags).
+		ccsds::sequence_flags(Packet, Flags).
 
 	% --- apid00400.tlm tests (CSA) ---
 	% Large file with APID 400 packets
@@ -101,13 +97,13 @@
 		% File should contain many packets
 		^^file_path('test_files/apid00400.tlm', Path),
 		ccsds::parse(file(Path), Packets),
-		length(Packets, N).
+		list::length(Packets, N).
 
 	test(ccsds_file_csa_02, true(APID == 400)) :-
 		% First packet should have APID 400
 		^^file_path('test_files/apid00400.tlm', Path),
 		ccsds::parse(file(Path), [Packet| _]),
-		apid(Packet, APID).
+		ccsds::apid(Packet, APID).
 
 :- end_object.
 
