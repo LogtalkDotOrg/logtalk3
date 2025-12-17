@@ -283,19 +283,55 @@ Provides access to the HTML documenting files describing built-in DCG non-termin
 
 ------------
 
-.. index:: library/0
-.. _help/0::library/0:
+.. index:: tools/0
+.. _help/0::tools/0:
 
-``library/0``
-^^^^^^^^^^^^^
+``tools/0``
+^^^^^^^^^^^
 
-Provides help on the standard Logtalk library.
+Provides help on the Logtalk developer tools.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Mode and number of proofs:**
-|    ``library`` - ``one``
+|    ``tools`` - ``one``
+
+
+------------
+
+.. index:: tool/1
+.. _help/0::tool/1:
+
+``tool/1``
+^^^^^^^^^^
+
+Provides help on the standard Logtalk libraries, library predicates, and library non-terminals.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tool(Tool)``
+| **Mode and number of proofs:**
+|    ``tool(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: libraries/0
+.. _help/0::libraries/0:
+
+``libraries/0``
+^^^^^^^^^^^^^^^
+
+Provides help on the standard Logtalk libraries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``libraries`` - ``one``
 
 
 ------------
@@ -312,11 +348,9 @@ Provides help on the standard Logtalk libraries, library predicates, and library
 |    ``static``
 
 | **Template:**
-|    ``library(Topic)``
+|    ``library(Library)``
 | **Mode and number of proofs:**
 |    ``library(+atom)`` - ``zero_or_one``
-|    ``library(+predicate_indicator)`` - ``zero_or_one``
-|    ``library(+non_terminal_indicator)`` - ``zero_or_one``
 
 
 ------------

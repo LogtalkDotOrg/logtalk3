@@ -4979,6 +4979,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`queuep <queuep/0::length/2>`
 * :ref:`varlistp <varlistp/0::length/2>`
 
+``libraries/0``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`help <help/0::libraries/0>`
+
 ``libraries/1``
 ---------------
 
@@ -5013,16 +5023,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`diagram(Format) <diagram/1::libraries/3>`
 * :ref:`diagrams(Format) <diagrams/1::libraries/3>`
-
-``library/0``
--------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`help <help/0::library/0>`
 
 ``library/1``
 -------------
@@ -9346,6 +9346,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`lgtunit <lgtunit/0::tolerance_equal/4>`
 * :ref:`number <number/0::tolerance_equal/4>`
+
+``tool/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`help <help/0::tool/1>`
+
+``tools/0``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`help <help/0::tools/0>`
 
 ``top/3``
 ---------

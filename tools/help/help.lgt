@@ -127,19 +127,30 @@
 		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
 	]).
 
-	:- public(library/0).
-	:- mode(library, one).
-	:- info(library/0, [
-		comment is 'Provides help on the standard Logtalk library.'
+	:- public(tools/0).
+	:- mode(tools, one).
+	:- info(tools/0, [
+		comment is 'Provides help on the Logtalk developer tools.'
+	]).
+
+	:- public(tool/1).
+	:- mode(tool(+atom), zero_or_one).
+	:- info(tool/1, [
+		comment is 'Provides help on the standard Logtalk libraries, library predicates, and library non-terminals.',
+		argnames is ['Tool']
+	]).
+
+	:- public(libraries/0).
+	:- mode(libraries, one).
+	:- info(libraries/0, [
+		comment is 'Provides help on the standard Logtalk libraries.'
 	]).
 
 	:- public(library/1).
 	:- mode(library(+atom), zero_or_one).
-	:- mode(library(+predicate_indicator), zero_or_one).
-	:- mode(library(+non_terminal_indicator), zero_or_one).
 	:- info(library/1, [
 		comment is 'Provides help on the standard Logtalk libraries, library predicates, and library non-terminals.',
-		argnames is ['Topic']
+		argnames is ['Library']
 	]).
 
 	:- public(entity/1).
@@ -155,25 +166,28 @@
 
 	help :-
 		nl,
-		write('On-line help is available for Logtalk built-in control constructs,'), nl,
-		write('directives, predicates, non-terminals, and methods:'), nl, nl,
-		write('    help::Functor/Arity.        help::Functor//Arity.'), nl, nl,
-		write('Also available for Logtalk libraries, APIs and entities:'), nl, nl,
-		write('    help::library.              help::library(Library).'), nl,
-		write('    help::apis.'), nl,
-		write('    help::apis(Functor/Arity).  help::apis(Functor//Arity).'), nl,
+		write('Help tool predicates open documentation either inline using a terminal-based'), nl,
+		write('browser (when available) or in the default browser.'), nl, nl,
+		write('To consult the Logtalk Handbook and APIs documentation:'), nl, nl,
+		write('    help::handbook.          help::apis.'), nl, nl,
+		write('To consult the documentation of Logtalk built-in control constructs, methods,'), nl,
+		write('directives, predicates, and non-terminals:'), nl, nl,
+		write('    help::Name/Arity.        help::Name//Arity.'), nl, nl,
+		write('To consult the documentation of Logtalk developer tools and libraries plus'), nl,
+		write('their APIs and entities:'), nl, nl,
+		write('    help::tools.             help::tool(Tool).'), nl,
+		write('    help::libraries.         help::library(Library).'), nl,
+		write('    help::apis(Name/Arity).  help::apis(Name//Arity).'), nl,
 		write('    help::entity(Entity).'), nl, nl,
-		write('The help page opens in your default web browser. To consult the Handbook:'), nl, nl,
-		write('    help::handbook.'), nl, nl,
-		write('To compile and load source files the following shortcut can be used:'), nl, nl,
-		write('    {File1, File2, ...}'), nl, nl,
+		write('To compile and load source files, the following shortcut can be used:'), nl, nl,
+		write('    {File1, File2, ...}.'), nl, nl,
 		write('To recompile and reload modified files, the following shortcut can be used:'), nl, nl,
-		write('    {*}'), nl, nl,
-		write('To recompile your source files for debugging you can use the shortcut:'), nl, nl,
-		write('    {+d}'), nl, nl,
+		write('    {*}.'), nl, nl,
+		write('To recompile source files for debugging, the following shortcut can be used:'), nl, nl,
+		write('    {+d}.'), nl, nl,
 		write('Next, load the debugger and start tracing:'), nl, nl,
 		write('    {debugger(loader)}, debugger::trace.'), nl, nl,
-		write('To lean more about available top-level shortcuts:'), nl, nl,
+		write('To learn more about the available top-level shortcuts:'), nl, nl,
 		write('    help::logtalk_load/1.            help::logtalk_make/1.'), nl, nl,
 		write('Hint: you can preload the debugger (and other developer tools) from your'), nl,
 		write('settings file (see the samples/settings-sample.lgt file for instructions).'), nl, nl.
@@ -472,7 +486,24 @@
 
 	built_in_non_terminal(message_tokens, 2, '/docs/handbook/refman/methods/', 'message_tokens_2.html').
 
-	library :-
+	tools :-
+		open('/docs/handbook/devtools/', 'index.html').
+
+	tool(Tool) :-
+		var(Tool),
+		!,
+		open('/docs/handbook/devtools/', 'index.html').
+	tool(Tool) :-
+		logtalk_library_path(Tool, _),
+		atom_concat(Tool,  '.html', Path),
+		open('/docs/handbook/devtools/', Path),
+		!.
+	tool(Tool) :-
+		write('Unknown library or no help available for '), writeq(Tool), write('.'), nl,
+		write('Showing index of all developer tools.'), nl,
+		open('/docs/handbook/devtools/', 'index.html').
+
+	libraries :-
 		open('/docs/handbook/libraries/', 'index.html').
 
 	library(Topic) :-
