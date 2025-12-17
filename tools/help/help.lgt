@@ -23,9 +23,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0:38:0,
+		version is 0:39:0,
 		author is 'Paulo Moura',
-		date is 2025-10-06,
+		date is 2025-12-17,
 		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -44,20 +44,127 @@
 		comment is 'Prints instructions on how to use the help tool.'
 	]).
 
+	:- public(handbook/0).
+	:- mode(handbook, one).
+	:- info(handbook/0, [
+		comment is 'Opens inline the HTML version of the Handbook.'
+	]).
+
+	:- public(apis/0).
+	:- mode(apis, one).
+	:- info(apis/0, [
+		comment is 'Opens inline the HTML version of the APIs documentation.'
+	]).
+
+	:- public(apis/1).
+	:- mode(apis(+predicate_indicator), one).
+	:- mode(apis(+non_terminal_indicator), one).
+	:- info(apis/1, [
+		comment is 'Opens inline the HTML version of the APIs documentation.',
+		argnames is ['Indicator']
+	]).
+
+	:- public(('/')/2).
+	:- mode('/'(+atom, +integer), zero_or_one).
+	:- info(('/')/2, [
+		comment is 'Provides help on the ``Functor/Arity`` built-in control construct, directive, predicate, or method.',
+		argnames is ['Functor', 'Arity']
+	]).
+
+	:- public(('//')/2).
+	:- mode('//'(+atom, +integer), zero_or_one).
+	:- info(('//')/2, [
+		comment is 'Provides help on the ``Functor//Arity`` built-in non-terminal.',
+		argnames is ['Functor', 'Arity']
+	]).
+
+	:- public(completion/2).
+	:- mode(completion(+atom, -pair), zero_or_more).
+	:- info(completion/2, [
+		comment is 'Provides a completion pair, ``Completion-Page``, for a given prefix.',
+		argnames is ['Prefix', 'Completion']
+	]).
+
+	:- public(completions/2).
+	:- mode(completions(+atom, -lists(pair)), zero_or_more).
+	:- info(completions/2, [
+		comment is 'Provides a list of completions pairs, ``Completion-Page``, for a given prefix.',
+		argnames is ['Prefix', 'Completions']
+	]).
+
+	:- public(built_in_directive/4).
+	:- mode(built_in_directive(?atom, ?integer, -atom, -atom), zero_or_more).
+	:- info(built_in_directive/4, [
+		comment is 'Provides access to the HTML documenting files describing built-in directives.',
+		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
+	]).
+
+	:- public(built_in_predicate/4).
+	:- mode(built_in_predicate(?atom, ?integer, -atom, -atom), zero_or_more).
+	:- info(built_in_predicate/4, [
+		comment is 'Provides access to the HTML documenting files describing built-in predicates.',
+		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
+	]).
+
+	:- public(built_in_method/4).
+	:- mode(built_in_method(?atom, ?integer, -atom, -atom), zero_or_more).
+	:- info(built_in_method/4, [
+		comment is 'Provides access to the HTML documenting files describing built-in methods.',
+		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
+	]).
+
+	:- public(control_construct/4).
+	:- mode(control_construct(?atom, ?integer, -atom, -atom), zero_or_more).
+	:- info(control_construct/4, [
+		comment is 'Provides access to the HTML documenting files describing built-in control constructs.',
+		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
+	]).
+
+	:- public(built_in_non_terminal/4).
+	:- mode(built_in_non_terminal(?atom, ?integer, -atom, -atom), zero_or_more).
+	:- info(built_in_non_terminal/4, [
+		comment is 'Provides access to the HTML documenting files describing built-in DCG non-terminals.',
+		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
+	]).
+
+	:- public(library/0).
+	:- mode(library, one).
+	:- info(library/0, [
+		comment is 'Provides help on the standard Logtalk library.'
+	]).
+
+	:- public(library/1).
+	:- mode(library(+atom), zero_or_one).
+	:- mode(library(+predicate_indicator), zero_or_one).
+	:- mode(library(+non_terminal_indicator), zero_or_one).
+	:- info(library/1, [
+		comment is 'Provides help on the standard Logtalk libraries, library predicates, and library non-terminals.',
+		argnames is ['Topic']
+	]).
+
+	:- public(entity/1).
+	:- mode(entity(+entity_identifier), zero_or_one).
+	:- info(entity/1, [
+		comment is 'Provides help on Logtalk entities (objects, protocols, or categories).',
+		argnames is ['Entity']
+	]).
+
 	:- uses(user, [
 		atomic_list_concat/2
 	]).
 
 	help :-
 		nl,
-		write('On-line help is available for Logtalk libraries, entities, plus built-in'), nl,
-		write('control constructs, directives, predicates, non-terminals, and methods:'), nl, nl,
-		write('    help::Functor/Arity.           help::Functor//Arity.'), nl,
-		write('    help::library.                 help::library(Library).'), nl,
-		write('    help::library(Functor/Arity).  help::library(Functor//Arity).'), nl,
+		write('On-line help is available for Logtalk built-in control constructs,'), nl,
+		write('directives, predicates, non-terminals, and methods:'), nl, nl,
+		write('    help::Functor/Arity.        help::Functor//Arity.'), nl, nl,
+		write('Also available for Logtalk libraries, APIs and entities:'), nl, nl,
+		write('    help::library.              help::library(Library).'), nl,
+		write('    help::apis.'), nl,
+		write('    help::apis(Functor/Arity).  help::apis(Functor//Arity).'), nl,
 		write('    help::entity(Entity).'), nl, nl,
-		write('The help page opens in your default web browser. To consult the manuals:'), nl, nl,
-		write('    help::manuals.'), nl, nl,
+		write('The help page opens in your default web browser. To consult the Handbook:'), nl, nl,
+		write('    help::handbook.'), nl, nl,
 		write('To compile and load source files the following shortcut can be used:'), nl, nl,
 		write('    {File1, File2, ...}'), nl, nl,
 		write('To recompile and reload modified files, the following shortcut can be used:'), nl, nl,
@@ -71,13 +178,6 @@
 		write('Hint: you can preload the debugger (and other developer tools) from your'), nl,
 		write('settings file (see the samples/settings-sample.lgt file for instructions).'), nl, nl.
 
-	:- public(('/')/2).
-	:- mode('/'(+atom, +integer), zero_or_one).
-	:- info(('/')/2, [
-		comment is 'Provides help on the ``Functor/Arity`` built-in control construct, directive, predicate, or method.',
-		argnames is ['Functor', 'Arity']
-	]).
-
 	Functor/Arity :-
 		atom(Functor),
 		findall(
@@ -90,13 +190,6 @@
 			Hits
 		),
 		show(Hits, Functor/Arity).
-
-	:- public(('//')/2).
-	:- mode('//'(+atom, +integer), zero_or_one).
-	:- info(('//')/2, [
-		comment is 'Provides help on the ``Functor//Arity`` built-in non-terminal.',
-		argnames is ['Functor', 'Arity']
-	]).
 
 	NonTerminalFunctor//Arity :-
 		atom(NonTerminalFunctor),
@@ -145,13 +238,6 @@
 		write('  '), writeq(Alternative), nl,
 		write_alternatives(Alternatives).
 
-	:- public(completion/2).
-	:- mode(completion(+atom, -pair), zero_or_more).
-	:- info(completion/2, [
-		comment is 'Provides a completion pair, ``Completion-Page``, for a given prefix.',
-		argnames is ['Prefix', 'Completion']
-	]).
-
 	completion(Prefix, Completion-Page) :-
 		(	built_in_directive(Functor, Arity, Path, File),
 			Completion = Functor/Arity
@@ -169,22 +255,8 @@
 		atom_concat(Page0, File, Page1),
 		os::absolute_file_name(Page1, Page).
 
-	:- public(completions/2).
-	:- mode(completions(+atom, -lists(pair)), zero_or_more).
-	:- info(completions/2, [
-		comment is 'Provides a list of completions pairs, ``Completion-Page``, for a given prefix.',
-		argnames is ['Prefix', 'Completions']
-	]).
-
 	completions(Prefix, Completions) :-
 		findall(Completion, completion(Prefix, Completion), Completions).
-
-	:- public(built_in_directive/4).
-	:- mode(built_in_directive(?atom, ?integer, -atom, -atom), zero_or_more).
-	:- info(built_in_directive/4, [
-		comment is 'Provides access to the HTML documenting files describing built-in directives.',
-		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
-	]).
 
 	built_in_directive(encoding, 1, '/docs/handbook/refman/directives/', 'encoding_1.html').
 	built_in_directive(set_logtalk_flag, 2, '/docs/handbook/refman/directives/', 'set_logtalk_flag_2.html').
@@ -229,13 +301,6 @@
 	built_in_directive(uses, 2, '/docs/handbook/refman/directives/', 'uses_2.html').
 	built_in_directive(use_module, 1, '/docs/handbook/refman/directives/', 'use_module_1.html').
 	built_in_directive(use_module, 2, '/docs/handbook/refman/directives/', 'use_module_2.html').
-
-	:- public(built_in_predicate/4).
-	:- mode(built_in_predicate(?atom, ?integer, -atom, -atom), zero_or_more).
-	:- info(built_in_predicate/4, [
-		comment is 'Provides access to the HTML documenting files describing built-in predicates.',
-		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
-	]).
 
 	built_in_predicate(current_category, 1, '/docs/handbook/refman/predicates/', 'current_category_1.html').
 	built_in_predicate(current_object, 1, '/docs/handbook/refman/predicates/', 'current_object_1.html').
@@ -315,13 +380,6 @@
 
 	built_in_predicate(logtalk_linter_hook, 7, '/docs/handbook/refman/predicates/', 'logtalk_linter_hook_7.html').
 
-	:- public(built_in_method/4).
-	:- mode(built_in_method(?atom, ?integer, -atom, -atom), zero_or_more).
-	:- info(built_in_method/4, [
-		comment is 'Provides access to the HTML documenting files describing built-in methods.',
-		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
-	]).
-
 	built_in_method(!, 0, '/docs/handbook/refman/methods/', 'cut_0.html').
 	built_in_method(true, 0, '/docs/handbook/refman/methods/', 'true_0.html').
 	built_in_method(fail, 0, '/docs/handbook/refman/methods/', 'fail_0.html').
@@ -399,13 +457,6 @@
 	built_in_method(question_hook, 6, '/docs/handbook/refman/methods/', 'question_hook_6.html').
 	built_in_method(question_prompt_stream, 4, '/docs/handbook/refman/methods/', 'question_prompt_stream_4.html').
 
-	:- public(control_construct/4).
-	:- mode(control_construct(?atom, ?integer, -atom, -atom), zero_or_more).
-	:- info(control_construct/4, [
-		comment is 'Provides access to the HTML documenting files describing built-in control constructs.',
-		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
-	]).
-
 	control_construct((::), 2, '/docs/handbook/refman/control/', 'send_to_object_2.html').
 	control_construct('[]', 1, '/docs/handbook/refman/control/', 'delegate_message_1.html').
 	control_construct((::), 1, '/docs/handbook/refman/control/', 'send_to_self_1.html').
@@ -414,13 +465,6 @@
 	control_construct(({}), 1, '/docs/handbook/refman/control/', 'external_call_1.html').
 	control_construct((<<), 2, '/docs/handbook/refman/control/', 'context_switch_2.html').
 
-	:- public(built_in_non_terminal/4).
-	:- mode(built_in_non_terminal(?atom, ?integer, -atom, -atom), zero_or_more).
-	:- info(built_in_non_terminal/4, [
-		comment is 'Provides access to the HTML documenting files describing built-in DCG non-terminals.',
-		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
-	]).
-
 	built_in_non_terminal(call, N, '/docs/handbook/refman/methods/', 'call_1.html') :-
 		between(1, 6, N).
 	built_in_non_terminal(eos, 0, '/docs/handbook/refman/methods/', 'eos_0.html').
@@ -428,52 +472,13 @@
 
 	built_in_non_terminal(message_tokens, 2, '/docs/handbook/refman/methods/', 'message_tokens_2.html').
 
-	:- public(library/0).
-	:- mode(library, one).
-	:- info(library/0, [
-		comment is 'Provides help on the standard Logtalk library.'
-	]).
-
 	library :-
-		open('/docs/apis/', 'index.html').
-
-	:- public(library/1).
-	:- mode(library(+atom), zero_or_one).
-	:- mode(library(+predicate_indicator), zero_or_one).
-	:- mode(library(+non_terminal_indicator), zero_or_one).
-	:- info(library/1, [
-		comment is 'Provides help on the standard Logtalk libraries, library predicates, and library non-terminals.',
-		argnames is ['Topic']
-	]).
+		open('/docs/handbook/libraries/', 'index.html').
 
 	library(Topic) :-
 		var(Topic),
 		!,
 		open('/docs/handbook/libraries/', 'index.html').
-	library(Name/Arity) :-
-		atom(Name),
-		integer(Arity),
-		atom::replace_sub_atom('_', '-', Name, NameDashes),
-		atomic_list_concat(['predicate_index.html#', NameDashes, '-', Arity], File),
-		open('/docs/', File),
-		!.
-	library(Name/Arity) :-
-		!,
-		write('Unknown predicate or no help available for '), writeq(Name/Arity), write('.'), nl,
-		write('Showing index of all documented predicates.'), nl,
-		open('/docs/', 'predicate_index.html').
-	library(Name//Arity) :-
-		atom(Name),
-		integer(Arity),
-		atom::replace_sub_atom('_', '-', Name, NameDashes),
-		atomic_list_concat(['predicate_index.html#', NameDashes, '-', Arity], File),
-		open('/docs/', File),
-		!.
-	library(Name//Arity) :-
-		!,
-		write('Unknown non-terminal or no help available for '), writeq(Name//Arity), write('.'), nl,
-		write('Showing index of all documented predicates.'), nl,
-		open('/docs/', 'predicate_index.html').
 	library(Library) :-
 		logtalk_library_path(Library, _),
 		atom_concat(Library,  '.html', Path),
@@ -484,12 +489,33 @@
 		write('Showing index of all libraries.'), nl,
 		open('/docs/handbook/libraries/', 'index.html').
 
-	:- public(entity/1).
-	:- mode(entity(+entity_identifier), zero_or_one).
-	:- info(entity/1, [
-		comment is 'Provides help on Logtalk entities (objects, protocols, or categories).',
-		argnames is ['Entity']
-	]).
+	apis :-
+		open('/docs/apis/', 'index.html').
+
+	apis(Name/Arity) :-
+		atom(Name),
+		integer(Arity),
+		atom::replace_sub_atom('_', '-', Name, NameDashes),
+		atomic_list_concat(['predicate_index.html#', NameDashes, '-', Arity], File),
+		open('/docs/apis/', File),
+		!.
+	apis(Name/Arity) :-
+		!,
+		write('Unknown predicate or no help available for '), writeq(Name/Arity), write('.'), nl,
+		write('Showing index of all documented predicates.'), nl,
+		open('/docs/apis/', 'predicate_index.html').
+	apis(Name//Arity) :-
+		atom(Name),
+		integer(Arity),
+		atom::replace_sub_atom('_', '-', Name, NameDashes),
+		atomic_list_concat(['predicate_index.html#', NameDashes, '-', Arity], File),
+		open('/docs/apis/', File),
+		!.
+	apis(Name//Arity) :-
+		!,
+		write('Unknown non-terminal or no help available for '), writeq(Name//Arity), write('.'), nl,
+		write('Showing index of all documented predicates.'), nl,
+		open('/docs/apis/', 'predicate_index.html').
 
 	entity(Entity) :-
 		callable(Entity),
@@ -499,28 +525,58 @@
 		atom_chars(ArityAtom, ArityChars),
 		atom_concat(File0, ArityAtom, File1),
 		atom_concat(File1, '.html', File),
-		open('/docs/', File),
+		open('/docs/apis/', File),
 		!.
 	entity(Entity) :-
 		write('Unknown entity or no help available for '), writeq(Entity), write('.'), nl,
 		write('Showing index of all documented entities.'), nl,
-		open('/docs/', 'entity_index.html').
+		open('/docs/apis/', 'entity_index.html').
 
-	:- public(manuals/0).
-	:- mode(manuals, one).
-	:- info(manuals/0, [
-		comment is 'Provides access to the Logtalk User and Reference manuals.'
-	]).
-
-	manuals :-
+	handbook :-
 		open('/docs/handbook/', 'index.html').
 
+	open(_, _) :-
+		\+ os::environment_variable('LOGTALKHOME', _),
+		!,
+		write('The environment variable LOGTALKHOME must be defined and pointing to your'), nl,
+		write('Logtalk installation folder in order for on-line help to be available.'), nl, nl,
+		fail.
 	open(Path, File) :-
-		(	\+ os::environment_variable('LOGTALKHOME', _) ->
-			write('The environment variable LOGTALKHOME must be defined and pointing to your'), nl,
-			write('Logtalk installation folder in order for on-line help to be available.'), nl, nl,
-			fail
-		;	os::environment_variable('COMSPEC', _) ->
+		% the JIProlog uses a Java-based console that isn't compatible with inline browsers
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		inline_browser(Browser),
+		inline_browser_executable(Browser, Executable),
+		!,
+		open_in_inline_browser(Executable, Path, File).
+	open(Path, File) :-
+		open_in_default_browser(Path, File).
+
+	inline_browser(lynx).
+	inline_browser(w3m).
+	inline_browser(links).
+
+	inline_browser_executable(Browser, Executable) :-
+		inline_browser_command_path(Browser,  Executable),
+		os::file_exists(Executable),
+		!.
+
+	inline_browser_command_path(lynx,  '/usr/bin/lynx').
+	inline_browser_command_path(lynx,  '/usr/local/bin/lynx').
+	inline_browser_command_path(lynx,  '/opt/local/bin/lynx').
+	inline_browser_command_path(w3m,   '/usr/bin/w3m').
+	inline_browser_command_path(w3m,   '/usr/local/bin/w3m').
+	inline_browser_command_path(w3m,   '/opt/local/bin/w3m').
+	inline_browser_command_path(links, '/usr/bin/links').
+	inline_browser_command_path(links, '/usr/local/bin/links').
+	inline_browser_command_path(links, '/opt/local/bin/links').
+
+	open_in_inline_browser(Executable, Path, File) :-
+		os::environment_variable('LOGTALKHOME', LOGTALKHOME),
+		atomic_list_concat([Executable, ' ', LOGTALKHOME, Path, File], Command),
+		os::shell(Command).
+
+	open_in_default_browser(Path, File) :-
+		(	os::environment_variable('COMSPEC', _) ->
 			% assume we're running on Windows
 			atomic_list_concat(['cmd /c start "" "file:///%LOGTALKHOME%', Path, File, '"'], Command),
 			os::shell(Command)

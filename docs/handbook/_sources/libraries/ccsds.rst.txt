@@ -85,6 +85,15 @@ To parse packets from a binary stream:
 
    | ?- ccsds::parse(stream(Stream), Packets).
 
+When the packets include a secondary header, the secondary header length
+must be known. In this case, use the ``ccsds(SecondaryHeaderLength)``
+object instead of the ``ccsds`` object. For example, to parse packets
+with a secondary header of 6 bytes:
+
+::
+
+   | ?- ccsds(6)::parse(bytes([0x08, 0x01, 0xC0, 0x00, 0x00, 0x07, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0xAA, 0xBB]), Packets).
+
 Generating
 ----------
 

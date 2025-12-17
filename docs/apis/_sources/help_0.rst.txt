@@ -14,8 +14,8 @@ Command-line help for Logtalk libraries, entities, plus built-in control constru
 |    ``logtalk_load(help(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:38:0
-| **Date:** 2025-10-06
+| **Version:** 0:39:0
+| **Date:** 2025-12-17
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, complements(allow)``
@@ -32,7 +32,7 @@ Command-line help for Logtalk libraries, entities, plus built-in control constru
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`help_info_support/0::apis/0`  :ref:`help_info_support/0::apis/1`  :ref:`forwarding/0::forward/1`  :ref:`help_info_support/0::handbook/0`  :ref:`help_info_support/0::handbook/1`  :ref:`help_info_support/0::man/1`  
+|     :ref:`forwarding/0::forward/1`  
 
 .. contents::
    :local:
@@ -54,6 +54,60 @@ Prints instructions on how to use the help tool.
 
 | **Mode and number of proofs:**
 |    ``help`` - ``one``
+
+
+------------
+
+.. index:: handbook/0
+.. _help/0::handbook/0:
+
+``handbook/0``
+^^^^^^^^^^^^^^
+
+Opens inline the HTML version of the Handbook.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``handbook`` - ``one``
+
+
+------------
+
+.. index:: apis/0
+.. _help/0::apis/0:
+
+``apis/0``
+^^^^^^^^^^
+
+Opens inline the HTML version of the APIs documentation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``apis`` - ``one``
+
+
+------------
+
+.. index:: apis/1
+.. _help/0::apis/1:
+
+``apis/1``
+^^^^^^^^^^
+
+Opens inline the HTML version of the APIs documentation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``apis(Indicator)``
+| **Mode and number of proofs:**
+|    ``apis(+predicate_indicator)`` - ``one``
+|    ``apis(+non_terminal_indicator)`` - ``one``
 
 
 ------------
@@ -282,23 +336,6 @@ Provides help on Logtalk entities (objects, protocols, or categories).
 |    ``entity(Entity)``
 | **Mode and number of proofs:**
 |    ``entity(+entity_identifier)`` - ``zero_or_one``
-
-
-------------
-
-.. index:: manuals/0
-.. _help/0::manuals/0:
-
-``manuals/0``
-^^^^^^^^^^^^^
-
-Provides access to the Logtalk User and Reference manuals.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``manuals`` - ``one``
 
 
 ------------

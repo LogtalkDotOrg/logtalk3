@@ -111,7 +111,7 @@ not listed, see the dependency websites for installation instructions.
 ### Tool dependencies for full functionality
 
 - `diagrams`: d2, Graphviz
-- `help`: `info`
+- `help`: `lynx` `info`
 - `issue_creator`: `gh`, `glab`
 - `lgtdoc`: Sphinx, `libxslt`, `fop`, `texlive`, `texinfo`, `pandoc`, `xsltproc`
 - `lgtunit`: Allure, `coreutils`, `gsed`
@@ -132,7 +132,7 @@ documentation:
 ### macOS - MacPorts
 
 	$ sudo port install d2 graphviz
-	$ sudo port install texinfo pandoc
+	$ sudo port install lynx texinfo pandoc
 	$ sudo port install libxslt fop texlive
 	$ sudo port install gsed
 	$ sudo port install coreutils gsed libarchive gnupg2 git curl wget direnv
@@ -141,7 +141,7 @@ documentation:
 ### macOS - Homebrew
 
 	$ brew install d2 graphviz
-	$ brew install texinfo pandoc
+	$ brew install lynx texinfo pandoc
 	$ brew install libxslt fop texlive
 	$ brew install allure gsed
 	$ brew install coreutils libarchive gnupg2 git curl wget direnv
@@ -150,7 +150,7 @@ documentation:
 ### Ubuntu
 
 	$ sudo apt install graphviz
-	$ sudo apt install texinfo pandoc
+	$ sudo apt install lynx texinfo pandoc
 	$ sudo apt install xsltproc fop texlive-latex-extra tex-gyre latexmk
 	$ sudo apt install coreutils libarchive-tools gnupg2 git curl wget direnv
 	$ sudo apt install gh
@@ -158,7 +158,7 @@ documentation:
 ### RedHat
 
 	$ sudo dnf install graphviz
-	$ sudo dnf install texinfo pandoc
+	$ sudo dnf install lynx texinfo pandoc
 	$ sudo dnf install libxslt fop
 	$ sudo dnf install bsdtar gnupg2 git curl wget direnv
 

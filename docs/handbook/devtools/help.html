@@ -84,7 +84,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#supported-operating-systems">Supported operating-systems</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#experimental-features">Experimental features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
 </ul>
 </li>
@@ -142,18 +141,22 @@
              
   <section id="help">
 <span id="library-help"></span><h1><code class="docutils literal notranslate"><span class="pre">help</span></code><a class="headerlink" href="#help" title="Link to this heading"></a></h1>
-<p>This tool provides basic online help for Logtalk features and libraries
-when running in most operating-systems. For help on the Logtalk compiler
-error and warning messages, see the <code class="docutils literal notranslate"><span class="pre">tutor</span></code> tool.</p>
+<p>This tool provides help for Logtalk features and libraries when running
+in most operating-systems. For help on the Logtalk compiler error and
+warning messages, see the <code class="docutils literal notranslate"><span class="pre">tutor</span></code> tool.</p>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
 <p>On Windows, the <code class="docutils literal notranslate"><span class="pre">start</span></code> command must be available. On Linux, the
 <code class="docutils literal notranslate"><span class="pre">xdg-open</span></code> command must be available. On macOS, the command <code class="docutils literal notranslate"><span class="pre">open</span></code>
 is used.</p>
-<p>Experimental features for browsing the Handbook and APIs documentation
-at the top-level require Texinfo to be installed. See the
-<code class="docutils literal notranslate"><span class="pre">tools/NOTES.md</span></code> file for per operating-system installation
-instructions.</p>
+<p>Browsing the Handbook and APIs documentation at the top-level requires a
+POSIX system and one of the following terminal-based browsers installed:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">`lynx</span></code> &lt;<a class="reference external" href="https://invisible-island.net/lynx/">https://invisible-island.net/lynx/</a>&gt;`__</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">`w3m</span></code> &lt;<a class="reference external" href="https://w3m.sourceforge.net/">https://w3m.sourceforge.net/</a>&gt;`__</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">`links</span></code> &lt;<a class="reference external" href="http://links.twibright.com/">http://links.twibright.com/</a>&gt;`__</p></li>
+</ul>
+<p>On Windows systems, the documentation is open in the default browser.</p>
 </section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
@@ -183,19 +186,8 @@ abstraction.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
-<p>After loading the tool, use the query <code class="docutils literal notranslate"><span class="pre">help::help</span></code> to get started.</p>
-</section>
-<section id="experimental-features">
-<h2>Experimental features<a class="headerlink" href="#experimental-features" title="Link to this heading"></a></h2>
-<p>On POSIX systems, when using Ciao Prolog, ECLiPSe, GNU Prolog (1.5.1 or
-later version), SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, or XVM
-as the backend, <code class="docutils literal notranslate"><span class="pre">apis/1</span></code> and <code class="docutils literal notranslate"><span class="pre">handbook/0-1</span></code> predicates are made
-available. These predicates open inline at the top-level interpreter the
-Texinfo versions of the Handbook and the APIs documentation. The
-optional argument is a starting node, which can be an atom, a predicate
-indicator, or a non-terminal indicator. When there are several nodes for
-the same argument (e.g., multiple implementations of the <code class="docutils literal notranslate"><span class="pre">member/2</span></code>
-predicate), one of them will be displayed. Some examples:</p>
+<p>After loading the tool, use the query <code class="docutils literal notranslate"><span class="pre">help::help</span></code> to get started.
+Some query examples:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> help<span class="o">::</span>handbook.
 
 | <span class="o">?-</span> help<span class="o">::</span>handbook(base64).
@@ -214,44 +206,48 @@ scripts. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> help<span class="o">::</span>man(logtalk_tester).
 </pre></div>
 </div>
-<p>When you finish consulting the documentation and quit the <code class="docutils literal notranslate"><span class="pre">info</span></code>
-process, you will be back to the top-level prompt (if you find that the
-top-level have scrolled from its last position, try to set your terminal
-terminfo to <code class="docutils literal notranslate"><span class="pre">xterm-256colour</span></code>).</p>
+<p>When using the terminal-based browsers, after finishing consulting the
+documentation and quitting the process, you will be back to the
+top-level prompt (if you find that the top-level have scrolled from its
+last position, try to set your terminal terminfo to
+<code class="docutils literal notranslate"><span class="pre">xterm-256colour</span></code>).</p>
 <p>If you’re running Logtalk from a git clone of its repo, you will need to
 run the <code class="docutils literal notranslate"><span class="pre">docs/apis/sources/build.sh</span></code> or
-<code class="docutils literal notranslate"><span class="pre">docs/apis/sources/build.ps1</span></code> scripts to generate the APIs
-documentation <code class="docutils literal notranslate"><span class="pre">.info</span></code> file and also run the
-<code class="docutils literal notranslate"><span class="pre">docs/handbook/sources/build.sh</span></code> or
+<code class="docutils literal notranslate"><span class="pre">docs/apis/sources/build.ps1</span></code> scripts to generate APIs documentation
+HTML files and also run the <code class="docutils literal notranslate"><span class="pre">docs/handbook/sources/build.sh</span></code> or
 <code class="docutils literal notranslate"><span class="pre">docs/handbook/sources/build.ps1</span></code> scripts to generate the Handbook
-<code class="docutils literal notranslate"><span class="pre">.info</span></code> file. Alternatively, you can download the <code class="docutils literal notranslate"><span class="pre">.info</span></code> files for
-the latest stable release from the Logtalk website and save them to the
-<code class="docutils literal notranslate"><span class="pre">docs</span></code> and <code class="docutils literal notranslate"><span class="pre">manuals</span></code> directories.</p>
-<p>The required <code class="docutils literal notranslate"><span class="pre">info</span></code> command is provided by the third-party <code class="docutils literal notranslate"><span class="pre">texinfo</span></code>
-package (tested with version 6.8). On macOS, this package can be
-installed with either MacPorts:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install texinfo
+HTML files. Alternatively, you can download the documentation for the
+latest stable release from the Logtalk website and save them to the
+<code class="docutils literal notranslate"><span class="pre">docs</span></code> directories.</p>
+<p>On POSIX systems, one of the supported terminal-based browsers must be
+installed unless you prefer using the default browser.</p>
+<p>On macOS, these browsers can be installed with either MacPorts:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install lynx
+<span class="err">$</span> sudo port install w3m
+<span class="err">$</span> sudo port install links
 </pre></div>
 </div>
 <p>Or using Homebrew:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install texinfo
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install lynx
+<span class="err">$</span> brew install w3m
+<span class="err">$</span> brew install links
 </pre></div>
 </div>
 <p>On Linux systems, use the distribution’s own package manager to install
-the <code class="docutils literal notranslate"><span class="pre">texinfo</span></code> package. For example, in Ubuntu systems:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo apt install info
+the browsers. For example, in Ubuntu systems:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo apt install lynx
+<span class="err">$</span> sudo apt install w3m
 </pre></div>
 </div>
 </section>
 <section id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
-<p>The open commands used to open documentation URLs drops the fragment
-part, thus preventing navigation to the specified position on the
-documentation page.</p>
-<p>When browsing the Texinfo versions of the Handbook and the APIs
-documentation generated with a recent version of Sphinx and using a
-recent version of Texinfo, the Texinfo search feature often displays the
-previous nodes of the searched nodes.</p>
+<p>When using the terminal-based browsers, the Handbook and APIs search
+boxes are not usable as they require JavaScript support. Use instead the
+indexes.</p>
+<p>The open commands used to open documentation URLs in the default browser
+drop the fragment part, thus preventing navigation to the specified
+position on the documentation page.</p>
 <p>ECLiPSe defines a <code class="docutils literal notranslate"><span class="pre">help</span></code> prefix operator that forces wrapping this
 atom between parentheses when sending messages to the tool. E.g. use
 <code class="docutils literal notranslate"><span class="pre">(help)::help</span></code> instead of <code class="docutils literal notranslate"><span class="pre">help::help</span></code>.</p>

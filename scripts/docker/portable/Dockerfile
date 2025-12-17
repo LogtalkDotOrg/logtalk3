@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on May 12, 2025
+##   Last updated on December 17, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2025 Paulo Moura <pmoura@logtalk.org>
@@ -37,7 +37,7 @@ ARG LOGTALK_TEXINFO_VERSION=3.97.0
 ARG B_VERSION=81
 ARG CIAO_VERSION=v1.23.0-m1
 ARG CX_VERSION=0.98.3
-ARG ECLIPSE_VERSION=7.1_13
+ARG ECLIPSE_VERSION=7.2_10
 ARG GNU_VERSION=master
 ARG SWI_VERSION=master
 ARG TAU_VERSION=0.3.4
@@ -61,6 +61,7 @@ RUN apt-get update \
         git \
         gnupg2 \
         graphviz \
+        lynx \
         info \
         libarchive-tools \
         python3-pip \
@@ -215,9 +216,9 @@ RUN if [ "$CX_VERSION" != "none" ] ; then \
 # Install ECLiPSe
 WORKDIR /downloads/eclipse
 RUN if [ "$ECLIPSE_VERSION" != "none" ] ; then \
-        curl -O http://eclipseclp.org/Distribution/Builds/${ECLIPSE_VERSION}/x86_64_linux/eclipse_basic.tgz \
-        && curl -O http://eclipseclp.org/Distribution/Builds/${ECLIPSE_VERSION}/x86_64_linux/eclipse_doc.tgz \
-        && curl -O http://eclipseclp.org/Distribution/Builds/${ECLIPSE_VERSION}/x86_64_linux/UNPACK \
+        curl -O http://eclipseclp.org/Distribution/Dev/${ECLIPSE_VERSION}/x86_64_linux/eclipse_basic.tgz \
+        && curl -O http://eclipseclp.org/Distribution/Dev/${ECLIPSE_VERSION}/x86_64_linux/eclipse_doc.tgz \
+        && curl -O http://eclipseclp.org/Distribution/Dev/${ECLIPSE_VERSION}/x86_64_linux/UNPACK \
         && chmod a+x UNPACK \
         && ./UNPACK \
         && echo -n "\n\n\n\n\n\n" | ./RUNME \

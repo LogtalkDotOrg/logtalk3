@@ -254,6 +254,13 @@ yes
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> ccsds<span class="o">::</span>parse(stream(<span class="nv">Stream</span>), <span class="nv">Packets</span>).
 </pre></div>
 </div>
+<p>When the packets include a secondary header, the secondary header length
+must be known. In this case, use the <code class="docutils literal notranslate"><span class="pre">ccsds(SecondaryHeaderLength)</span></code>
+object instead of the <code class="docutils literal notranslate"><span class="pre">ccsds</span></code> object. For example, to parse packets
+with a secondary header of 6 bytes:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> ccsds(<span class="m">6</span>)<span class="o">::</span>parse(bytes([<span class="mh">0x08</span>, <span class="mh">0x01</span>, <span class="mh">0xC0</span>, <span class="mh">0x00</span>, <span class="mh">0x00</span>, <span class="mh">0x07</span>, <span class="mh">0x01</span>, <span class="mh">0x02</span>, <span class="mh">0x03</span>, <span class="mh">0x04</span>, <span class="mh">0x05</span>, <span class="mh">0x06</span>, <span class="mh">0xAA</span>, <span class="mh">0xBB</span>]), <span class="nv">Packets</span>).
+</pre></div>
+</div>
 </section>
 <section id="generating">
 <h2>Generating<a class="headerlink" href="#generating" title="Link to this heading"></a></h2>

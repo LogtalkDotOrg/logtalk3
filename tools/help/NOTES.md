@@ -21,9 +21,9 @@ ________________________________________________________________________
 `help`
 ======
 
-This tool provides basic online help for Logtalk features and libraries
-when running in most operating-systems. For help on the Logtalk compiler
-error and warning messages, see the `tutor` tool.
+This tool provides help for Logtalk features and libraries when running
+in most operating-systems. For help on the Logtalk compiler error and
+warning messages, see the `tutor` tool.
 
 
 Requirements
@@ -32,9 +32,14 @@ Requirements
 On Windows, the `start` command must be available. On Linux, the `xdg-open`
 command must be available. On macOS, the command `open` is used.
 
-Experimental features for browsing the Handbook and APIs documentation at
-the top-level require Texinfo to be installed. See the `tools/NOTES.md` file
-for per operating-system installation instructions.
+Browsing the Handbook and APIs documentation at the top-level requires a
+POSIX system and one of the following terminal-based browsers installed:
+
+- [`lynx`](https://invisible-island.net/lynx/)
+- [`w3m`](https://w3m.sourceforge.net/)
+- [`links`](http://links.twibright.com/)
+
+On Windows systems, the documentation is open in the default browser.
 
 
 API documentation
@@ -72,21 +77,8 @@ This tool relies on the library portable operating-system access abstraction.
 Usage
 -----
 
-After loading the tool, use the query `help::help` to get started.
-
-
-Experimental features
----------------------
-
-On POSIX systems, when using Ciao Prolog, ECLiPSe, GNU Prolog (1.5.1 or later
-version), SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, or XVM as the
-backend, `apis/1` and `handbook/0-1` predicates are made available. These
-predicates open inline at the top-level interpreter the Texinfo versions of
-the Handbook and the APIs documentation. The optional argument is a starting
-node, which can be an atom, a predicate indicator, or a non-terminal
-indicator. When there are several nodes for the same argument (e.g., multiple
-implementations of the `member/2` predicate), one of them will be displayed.
-Some examples:
+After loading the tool, use the query `help::help` to get started. Some query
+examples:
 
 	| ?- help::handbook.
 
@@ -105,45 +97,50 @@ scripts. For example:
 
 	| ?- help::man(logtalk_tester).
 
-When you finish consulting the documentation and quit the `info` process,
-you will be back to the top-level prompt (if you find that the top-level
-have scrolled from its last position, try to set your terminal terminfo
-to `xterm-256colour`).
+When using the terminal-based browsers, after finishing consulting the
+documentation and quitting the process, you will be back to the top-level
+prompt (if you find that the top-level have scrolled from its last position,
+try to set your terminal terminfo to `xterm-256colour`).
 
 If you're running Logtalk from a git clone of its repo, you will need to
 run the `docs/apis/sources/build.sh` or `docs/apis/sources/build.ps1`
-scripts to generate the APIs documentation `.info` file and also run the
+scripts to generate APIs documentation HTML files and also run the
 `docs/handbook/sources/build.sh` or `docs/handbook/sources/build.ps1`
-scripts to generate the Handbook `.info` file. Alternatively, you can
-download the `.info` files for the latest stable release from the Logtalk
-website and save them to the `docs` and `manuals` directories.
+scripts to generate the Handbook HTML files. Alternatively, you can
+download the documentation for the latest stable release from the Logtalk
+website and save them to the `docs` directories.
 
-The required `info` command is provided by the third-party `texinfo` package
-(tested with version 6.8). On macOS, this package can be installed with
-either MacPorts:
+On POSIX systems, one of the supported terminal-based browsers must be
+installed unless you prefer using the default browser.
 
-	$ sudo port install texinfo
+On macOS, these browsers can be installed with either MacPorts:
+
+	$ sudo port install lynx
+	$ sudo port install w3m
+	$ sudo port install links
 
 Or using Homebrew:
 
-	$ brew install texinfo
+	$ brew install lynx
+	$ brew install w3m
+	$ brew install links
 
 On Linux systems, use the distribution's own package manager to install the
-`texinfo` package. For example, in Ubuntu systems:
+browsers. For example, in Ubuntu systems:
 
-	$ sudo apt install info
+	$ sudo apt install lynx
+	$ sudo apt install w3m
 
 
 Known issues
 ------------
 
-The open commands used to open documentation URLs drops the fragment part, thus
-preventing navigation to the specified position on the documentation page.
+When using the terminal-based browsers, the Handbook and APIs search boxes are
+not usable as they require JavaScript support. Use instead the indexes.
 
-When browsing the Texinfo versions of the Handbook and the APIs documentation
-generated with a recent version of Sphinx and using a recent version of
-Texinfo, the Texinfo search feature often displays the previous nodes of the
-searched nodes.
+The open commands used to open documentation URLs in the default browser drop
+the fragment part, thus preventing navigation to the specified position on the
+documentation page.
 
 ECLiPSe defines a `help` prefix operator that forces wrapping this atom between
 parentheses when sending messages to the tool. E.g. use `(help)::help` instead

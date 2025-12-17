@@ -53,6 +53,11 @@ Notation) format proposal.
 Tools
 -----
 
+* CHANGED: The `help` tool to use a terminal-based browser or the default
+browser to open documentation for all features. Removed support for browsing
+the Texinfo versions of the documentation due to issues with recent Texinfo
+and Sphinx versions.
+
 * CHANGED: The `diagrams` tool directory and library dependency diagrams to
 always output the root directory and library nodes.
 
