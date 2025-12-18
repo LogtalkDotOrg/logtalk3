@@ -17,10 +17,10 @@ is used.
 Browsing the Handbook and APIs documentation at the top-level requires a
 POSIX system and one of the following terminal-based browsers installed:
 
-- ```lynx`` <https://invisible-island.net/lynx/>`__
-- ```w3m`` <https://w3m.sourceforge.net/>`__
-- ```links`` <http://links.twibright.com/>`__
-- ```chawan`` <https://sr.ht/~bptato/chawan/>`__
+- https://invisible-island.net/lynx/
+- https://w3m.sourceforge.net/
+- http://links.twibright.com/
+- https://sr.ht/~bptato/chawan/
 
 The preferred browser can be set in a ``settings.lgt`` file. See the
 ``samples/settings-sample.lgt`` file for details.

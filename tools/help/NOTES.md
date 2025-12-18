@@ -35,10 +35,10 @@ command must be available. On macOS, the command `open` is used.
 Browsing the Handbook and APIs documentation at the top-level requires a
 POSIX system and one of the following terminal-based browsers installed:
 
-- [`lynx`](https://invisible-island.net/lynx/)
-- [`w3m`](https://w3m.sourceforge.net/)
-- [`links`](http://links.twibright.com/)
-- [`chawan`](https://sr.ht/~bptato/chawan/)
+- https://invisible-island.net/lynx/
+- https://w3m.sourceforge.net/
+- http://links.twibright.com/
+- https://sr.ht/~bptato/chawan/
 
 The preferred browser can be set in a `settings.lgt` file. See the
 `samples/settings-sample.lgt` file for details.
