@@ -98,9 +98,9 @@ latest stable release from the Logtalk website and save them to the
 ``docs`` directories.
 
 On POSIX systems, one of the supported terminal-based browsers must be
-installed unless you prefer using the default browser. The tool checks
-first for ``lynx``, second for ``w3m``, third for ``links``, and finally
-for ``chawan``.
+installed unless you prefer using the default browser. By default, the
+tool checks first for ``lynx``, second for ``w3m``, third for ``links``,
+and finally for ``chawan``.
 
 On macOS, these browsers can be installed with either MacPorts:
 

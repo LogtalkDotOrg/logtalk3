@@ -23,7 +23,7 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0:40:0,
+		version is 0:41:0,
 		author is 'Paulo Moura',
 		date is 2025-12-18,
 		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'
@@ -160,8 +160,16 @@
 		argnames is ['Entity']
 	]).
 
+	:- uses(integer, [
+		between/3
+	]).
+
 	:- uses(list, [
 		memberchk/2
+	]).
+
+	:- uses(os, [
+		absolute_file_name/2, environment_variable/2, file_exists/1, shell/1
 	]).
 
 	:- uses(user, [
@@ -271,7 +279,7 @@
 		sub_atom(Functor, 0, _, _, Prefix),
 		atom_concat('$LOGTALKHOME', Path, Page0),
 		atom_concat(Page0, File, Page1),
-		os::absolute_file_name(Page1, Page).
+		absolute_file_name(Page1, Page).
 
 	completions(Prefix, Completions) :-
 		findall(Completion, completion(Prefix, Completion), Completions).
@@ -571,7 +579,7 @@
 		open('/docs/handbook/', 'index.html').
 
 	open(_, _) :-
-		\+ os::environment_variable('LOGTALKHOME', _),
+		\+ environment_variable('LOGTALKHOME', _),
 		!,
 		write('The environment variable LOGTALKHOME must be defined and pointing to your'), nl,
 		write('Logtalk installation folder in order for on-line help to be available.'), nl, nl,
@@ -603,7 +611,7 @@
 
 	inline_browser_executable(Browser, Executable) :-
 		inline_browser_command_path(Browser,  Executable),
-		os::file_exists(Executable),
+		file_exists(Executable),
 		!.
 
 	inline_browser_command_path(lynx,  '/usr/bin/lynx').
@@ -615,39 +623,31 @@
 	inline_browser_command_path(links, '/usr/bin/links').
 	inline_browser_command_path(links, '/usr/local/bin/links').
 	inline_browser_command_path(links, '/opt/local/bin/links').
-	inline_browser_command_path(cha,  '/usr/bin/cha').
-	inline_browser_command_path(cha,  '/usr/local/bin/cha').
-	inline_browser_command_path(cha,  '/opt/local/bin/cha').
+	inline_browser_command_path(cha,   '/usr/bin/cha').
+	inline_browser_command_path(cha,   '/usr/local/bin/cha').
+	inline_browser_command_path(cha,   '/opt/local/bin/cha').
 
 	open_in_inline_browser(Executable, Path, File) :-
-		os::environment_variable('LOGTALKHOME', LOGTALKHOME),
+		environment_variable('LOGTALKHOME', LOGTALKHOME),
 		atomic_list_concat([Executable, ' ', LOGTALKHOME, Path, File], Command),
-		os::shell(Command).
+		shell(Command).
 
 	open_in_default_browser(Path, File) :-
-		(	os::environment_variable('COMSPEC', _) ->
+		(	environment_variable('COMSPEC', _) ->
 			% assume we're running on Windows
 			atomic_list_concat(['cmd /c start "" "file:///%LOGTALKHOME%', Path, File, '"'], Command),
-			os::shell(Command)
-		;	os::shell('uname -s | grep Darwin 1> /dev/null') ->
+			shell(Command)
+		;	shell('uname -s | grep Darwin 1> /dev/null') ->
 			% assume we're running on macOS
 			atomic_list_concat(['open "file://$LOGTALKHOME', Path, File, '" > /dev/null 2>&1'], Command),
-			os::shell(Command)
-		;	os::shell('command -v xdg-open > /dev/null 2>&1') ->
+			shell(Command)
+		;	shell('command -v xdg-open > /dev/null 2>&1') ->
 			% assume we're running on Linux or BSD
 			atomic_list_concat(['xdg-open "file://$LOGTALKHOME', Path, File, '" > /dev/null 2>&1'], Command),
-			os::shell(Command)
+			shell(Command)
 		;	% we couldn't find which operating-system are we running on
 			write('Unsupported operating-system.'), nl
 		).
-
-	% we use a simplified version of the integer::between/3
-	% predicate in order to minimize this tool dependencies
-	between(Lower, _, Lower).
-	between(Lower, Upper, Integer) :-
-		Lower < Upper,
-		Next is Lower + 1,
-		between(Next, Upper, Integer).
 
 :- end_object.
 
