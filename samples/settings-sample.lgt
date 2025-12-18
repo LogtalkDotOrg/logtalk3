@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on December 31, 2024
+%  Last updated on December 18, 2025
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -115,6 +115,14 @@ when running on non-POSIX operating systems such as Windows. Check the
 %  for Logtalk, uncomment the following lines:
 
 /*
+:- initialization(
+	% define the flag that allows selecting the help tool preferred browser
+	% valid values are: 'lynx', 'w3m', 'links', 'cha', and 'default'
+	% 'default' means use the operating-system default browser instead of
+	% one of the terminal-based browsers
+	create_logtalk_flag(help_default_browser, 'default', [type(atom), keep(true)])
+).
+
 :- initialization(
 	logtalk_load(help(loader))
 ).

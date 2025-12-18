@@ -40,6 +40,9 @@ a mention of the limited support for nested included files.
 
 * UPDATED: The `man` page for the `logtalk_allure_report.sh` script.
 
+* UPDATED: The `settings-sample.lgt` file with initialization code for
+defining the `help` tool preferred browser.
+
 Library
 -------
 

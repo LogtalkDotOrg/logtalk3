@@ -23,9 +23,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0:39:0,
+		version is 0:40:0,
 		author is 'Paulo Moura',
-		date is 2025-12-17,
+		date is 2025-12-18,
 		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -158,6 +158,10 @@
 	:- info(entity/1, [
 		comment is 'Provides help on Logtalk entities (objects, protocols, or categories).',
 		argnames is ['Entity']
+	]).
+
+	:- uses(list, [
+		memberchk/2
 	]).
 
 	:- uses(user, [
@@ -582,9 +586,20 @@
 	open(Path, File) :-
 		open_in_default_browser(Path, File).
 
+	inline_browser(Browser) :-
+		current_logtalk_flag(help_default_browser, Browser),
+		(	Browser == default ->
+			!,
+			fail
+		;	Browser == '' ->
+			fail
+		;	atom(Browser),
+			memberchk(Browser, [lynx, w3m, links, cha])
+		).
 	inline_browser(lynx).
 	inline_browser(w3m).
 	inline_browser(links).
+	inline_browser(cha).
 
 	inline_browser_executable(Browser, Executable) :-
 		inline_browser_command_path(Browser,  Executable),
@@ -600,6 +615,9 @@
 	inline_browser_command_path(links, '/usr/bin/links').
 	inline_browser_command_path(links, '/usr/local/bin/links').
 	inline_browser_command_path(links, '/opt/local/bin/links').
+	inline_browser_command_path(cha,  '/usr/bin/cha').
+	inline_browser_command_path(cha,  '/usr/local/bin/cha').
+	inline_browser_command_path(cha,  '/opt/local/bin/cha').
 
 	open_in_inline_browser(Executable, Path, File) :-
 		os::environment_variable('LOGTALKHOME', LOGTALKHOME),

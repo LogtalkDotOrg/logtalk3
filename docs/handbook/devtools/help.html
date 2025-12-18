@@ -155,8 +155,12 @@ POSIX system and one of the following terminal-based browsers installed:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">`lynx</span></code> &lt;<a class="reference external" href="https://invisible-island.net/lynx/">https://invisible-island.net/lynx/</a>&gt;`__</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">`w3m</span></code> &lt;<a class="reference external" href="https://w3m.sourceforge.net/">https://w3m.sourceforge.net/</a>&gt;`__</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">`links</span></code> &lt;<a class="reference external" href="http://links.twibright.com/">http://links.twibright.com/</a>&gt;`__</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">`chawan</span></code> &lt;<a class="reference external" href="https://sr.ht/~bptato/chawan/">https://sr.ht/~bptato/chawan/</a>&gt;`__</p></li>
 </ul>
-<p>On Windows systems, the documentation is open in the default browser.</p>
+<p>The preferred browser can be set in a <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file. See the
+<code class="docutils literal notranslate"><span class="pre">samples/settings-sample.lgt</span></code> file for details.</p>
+<p>On Windows systems, the documentation is open in the operating-system
+default browser.</p>
 </section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
@@ -201,11 +205,6 @@ Some query examples:</p>
 | <span class="o">?-</span> help<span class="o">::</span>apis(message_tokens<span class="o">//</span><span class="m">2</span>).
 </pre></div>
 </div>
-<p>Although less useful, you can also browse the <code class="docutils literal notranslate"><span class="pre">man</span></code> pages of Logtalk
-scripts. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> help<span class="o">::</span>man(logtalk_tester).
-</pre></div>
-</div>
 <p>When using the terminal-based browsers, after finishing consulting the
 documentation and quitting the process, you will be back to the
 top-level prompt (if you find that the top-level have scrolled from its
@@ -221,7 +220,8 @@ latest stable release from the Logtalk website and save them to the
 <code class="docutils literal notranslate"><span class="pre">docs</span></code> directories.</p>
 <p>On POSIX systems, one of the supported terminal-based browsers must be
 installed unless you prefer using the default browser. The tool checks
-first for <code class="docutils literal notranslate"><span class="pre">lynx</span></code>, second for <code class="docutils literal notranslate"><span class="pre">w3m</span></code>, and finally for <code class="docutils literal notranslate"><span class="pre">links</span></code>.</p>
+first for <code class="docutils literal notranslate"><span class="pre">lynx</span></code>, second for <code class="docutils literal notranslate"><span class="pre">w3m</span></code>, third for <code class="docutils literal notranslate"><span class="pre">links</span></code>, and finally
+for <code class="docutils literal notranslate"><span class="pre">chawan</span></code>.</p>
 <p>On macOS, these browsers can be installed with either MacPorts:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install lynx
 <span class="err">$</span> sudo port install w3m
@@ -232,6 +232,7 @@ first for <code class="docutils literal notranslate"><span class="pre">lynx</spa
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install lynx
 <span class="err">$</span> brew install w3m
 <span class="err">$</span> brew install links
+<span class="err">$</span> brew install chawan
 </pre></div>
 </div>
 <p>On Linux systems, use the distribution’s own package manager to install

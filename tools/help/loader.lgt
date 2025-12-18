@@ -20,6 +20,11 @@
 
 
 :- initialization((
+	% define the flag that allows selecting the help tool preferred browser
+	% valid values are: 'lynx', 'w3m', 'links', 'cha', and 'default'
+	% 'default' means use the operating-system default browser instead of
+	% one of the terminal-based browsers
+	create_logtalk_flag(help_default_browser, 'lynx', [type(atom), keep(true)]),
 	logtalk_load(basic_types(loader)),
 	logtalk_load(os(loader)),
 	logtalk_load(help, [optimize(on)])

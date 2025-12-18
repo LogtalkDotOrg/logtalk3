@@ -20,8 +20,13 @@ POSIX system and one of the following terminal-based browsers installed:
 - ```lynx`` <https://invisible-island.net/lynx/>`__
 - ```w3m`` <https://w3m.sourceforge.net/>`__
 - ```links`` <http://links.twibright.com/>`__
+- ```chawan`` <https://sr.ht/~bptato/chawan/>`__
 
-On Windows systems, the documentation is open in the default browser.
+The preferred browser can be set in a ``settings.lgt`` file. See the
+``samples/settings-sample.lgt`` file for details.
+
+On Windows systems, the documentation is open in the operating-system
+default browser.
 
 API documentation
 -----------------
@@ -77,13 +82,6 @@ Some query examples:
 
    | ?- help::apis(message_tokens//2).
 
-Although less useful, you can also browse the ``man`` pages of Logtalk
-scripts. For example:
-
-::
-
-   | ?- help::man(logtalk_tester).
-
 When using the terminal-based browsers, after finishing consulting the
 documentation and quitting the process, you will be back to the
 top-level prompt (if you find that the top-level have scrolled from its
@@ -101,7 +99,8 @@ latest stable release from the Logtalk website and save them to the
 
 On POSIX systems, one of the supported terminal-based browsers must be
 installed unless you prefer using the default browser. The tool checks
-first for ``lynx``, second for ``w3m``, and finally for ``links``.
+first for ``lynx``, second for ``w3m``, third for ``links``, and finally
+for ``chawan``.
 
 On macOS, these browsers can be installed with either MacPorts:
 
@@ -118,6 +117,7 @@ Or using Homebrew:
    $ brew install lynx
    $ brew install w3m
    $ brew install links
+   $ brew install chawan
 
 On Linux systems, use the distribution's own package manager to install
 the browsers. For example, in Ubuntu systems:
