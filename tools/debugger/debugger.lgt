@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 7:12:2,
+		version is 8:0:0,
 		author is 'Paulo Moura',
-		date is 2025-09-05,
+		date is 2025-12-18,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -620,14 +620,14 @@
 	leashing_(fail).
 	leashing_(exception).
 
-	port_user_name(fact(_,_,_,_), fact).
-	port_user_name(rule(_,_,_,_), rule).
-	port_user_name(call, call).
-	port_user_name(exit, exit).
-	port_user_name(nd_exit, exit).
-	port_user_name(redo, redo).
-	port_user_name(fail, fail).
-	port_user_name(exception, exception).
+	port_user_name(fact(_,_,_,_,_), fact).
+	port_user_name(rule(_,_,_,_,_), rule).
+	port_user_name(call,            call).
+	port_user_name(exit,            exit).
+	port_user_name(nd_exit,         exit).
+	port_user_name(redo,            redo).
+	port_user_name(fail,            fail).
+	port_user_name(exception,       exception).
 
 	valid_leash_value(Shorthand, Ports) :-
 		atom(Shorthand),
@@ -710,14 +710,14 @@
 		;	fail
 		).
 
-	spying_port_code(fact(Entity,_,_,Line), _, _, '#') :-
+	spying_port_code(fact(Entity,_,_,_,Line), _, _, '#') :-
 		clause_breakpoint_(Entity, Line),
 		(	triggered_breakpoint_(DependentEntity, DependentLine, Entity, Line) ->
 			assertz(triggered_breakpoint_enabled_(DependentEntity, DependentLine))
 		;	true
 		),
 		!.
-	spying_port_code(rule(Entity,_,_,Line), _, _, '#') :-
+	spying_port_code(rule(Entity,_,_,_,Line), _, _, '#') :-
 		clause_breakpoint_(Entity, Line),
 		(	triggered_breakpoint_(DependentEntity, DependentLine, Entity, Line) ->
 			assertz(triggered_breakpoint_enabled_(DependentEntity, DependentLine))
@@ -777,14 +777,14 @@
 		retractall(log_point_(_, _, _)),
 		print_message(comment, debugger, all_log_points_removed).
 
-	logging_port(fact(Entity, Clause, File, Line), N, Goal, ExCtx) :-
+	logging_port(fact(Entity, _, Clause, File, Line), N, Goal, ExCtx) :-
 		log_point_(Entity, Line, Message),
 		logging_message(Message, 'Fact', Entity, Clause, File, Line, N, Goal, ExCtx),
 		(	triggered_breakpoint_(DependentEntity, DependentLine, Entity, Line) ->
 			assertz(triggered_breakpoint_enabled_(DependentEntity, DependentLine))
 		;	true
 		).
-	logging_port(rule(Entity, Clause, File, Line), N, Goal, ExCtx) :-
+	logging_port(rule(Entity, _, Clause, File, Line), N, Goal, ExCtx) :-
 		log_point_(Entity, Line, Message),
 		logging_message(Message, 'Rule', Entity, Clause, File, Line, N, Goal, ExCtx),
 		(	triggered_breakpoint_(DependentEntity, DependentLine, Entity, Line) ->
@@ -870,21 +870,21 @@
 
 	% conditional breakpoint predicates
 
-	conditional_port(fact(Entity, _, File, Line), N, Goal) :-
+	conditional_port(fact(Entity, _, _, File, Line), N, Goal) :-
 		conditional_breakpoint_(Entity, Line, Condition),
 		conditional_port_check(Condition, File, Line, N, Goal).
-	conditional_port(rule(Entity, _, File, Line), N, Goal) :-
+	conditional_port(rule(Entity, _, _, File, Line), N, Goal) :-
 		conditional_breakpoint_(Entity, Line, Condition),
 		conditional_port_check(Condition, File, Line, N, Goal).
 
-	conditional_port(fact(Entity, _, File, Line), N, Goal, '?') :-
+	conditional_port(fact(Entity, _, _, File, Line), N, Goal, '?') :-
 		conditional_breakpoint_(Entity, Line, Condition),
 		conditional_port_check(Condition, File, Line, N, Goal),
 		(	triggered_breakpoint_(DependentEntity, DependentLine, Entity, Line) ->
 			assertz(triggered_breakpoint_enabled_(DependentEntity, DependentLine))
 		;	true
 		).
-	conditional_port(rule(Entity, _, File, Line), N, Goal, '?') :-
+	conditional_port(rule(Entity, _, _, File, Line), N, Goal, '?') :-
 		conditional_breakpoint_(Entity, Line, Condition),
 		conditional_port_check(Condition, File, Line, N, Goal),
 		(	triggered_breakpoint_(DependentEntity, DependentLine, Entity, Line) ->
@@ -933,14 +933,14 @@
 
 	% triggered breakpoint predicates
 
-	triggered_port(fact(Entity, _, _, Line)) :-
+	triggered_port(fact(Entity, _, _, _, Line)) :-
 		triggered_breakpoint_enabled_(Entity, Line), !.
-	triggered_port(rule(Entity, _, _, Line)) :-
+	triggered_port(rule(Entity, _, _, _, Line)) :-
 		triggered_breakpoint_enabled_(Entity, Line), !.
 
-	triggered_port(fact(Entity, _, _, Line), '^') :-
+	triggered_port(fact(Entity, _, _, _, Line), '^') :-
 		retract(triggered_breakpoint_enabled_(Entity, Line)), !.
-	triggered_port(rule(Entity, _, _, Line), '^') :-
+	triggered_port(rule(Entity, _, _, _, Line), '^') :-
 		retract(triggered_breakpoint_enabled_(Entity, Line)), !.
 
 	% debug handler
@@ -963,7 +963,7 @@
 				clause_breakpoint_(Entity, Line)
 			) ->
 			invocation_number_(N),
-			port(fact(Entity,Clause,File,Line), N, Fact, _, _, ExCtx, Action),
+			port(fact(Entity,Fact,Clause,File,Line), N, Fact, _, _, ExCtx, Action),
 			{Action}
 		;	true
 		).
@@ -976,7 +976,7 @@
 				clause_breakpoint_(Entity, Line)
 			) ->
 			invocation_number_(N),
-			port(rule(Entity,Clause,File,Line), N, Head, _, _, ExCtx, Action),
+			port(rule(Entity,Head,Clause,File,Line), N, Head, _, _, ExCtx, Action),
 			{Action}
 		;	true
 		).
@@ -1194,7 +1194,7 @@
 			assertz(leaping_(debugging))
 		).
 
-	do_port_option(s, rule(_,_,_,_), _, _, _, _, _, true) :-
+	do_port_option(s, rule(_,_,_,_,_), _, _, _, _, _, true) :-
 		!,
 		retractall(skipping_),
 		assertz(skipping_).
@@ -1208,7 +1208,7 @@
 		assertz(skipping_).
 	do_port_option(s, _, _, _, _, _, _, true).
 
-	do_port_option('S', rule(_,_,_,_), N, _, _, _, _, true) :-
+	do_port_option('S', rule(_,_,_,_,_), N, _, _, _, _, true) :-
 		!,
 		retractall(skipping_unleashed_(_)),
 		assertz(skipping_unleashed_(N)).
@@ -1299,18 +1299,18 @@
 		fail.
 
 	do_port_option((#), Port, _, _, _, _, _, _) :-
-		(	Port = fact(Entity, _, _, Line) ->
+		(	Port = fact(Entity, _, _, _, Line) ->
 			true
-		;	Port = rule(Entity, _, _, Line)
+		;	Port = rule(Entity, _, _, _, Line)
 		),
 		spy_clause(Entity-Line),
 		print_message(information, debugger, clause_breakpoint_added),
 		fail.
 
 	do_port_option(('|'), Port, _, _, _, _, _, _) :-
-		(	Port = fact(Entity, _, _, Line) ->
+		(	Port = fact(Entity, _, _, _, Line) ->
 			true
-		;	Port = rule(Entity, _, _, Line)
+		;	Port = rule(Entity, _, _, _, Line)
 		),
 		nospy_clause(Entity-Line),
 		print_message(information, debugger, clause_breakpoint_removed),
@@ -1408,9 +1408,9 @@
 		fail.
 
 	do_port_option('.', Port, _, Goal, _, _, _, _) :-
-		(	Port = fact(Entity, Clause, File, Line) ->
+		(	Port = fact(Entity, _, Clause, File, Line) ->
 			true
-		;	Port = rule(Entity, Clause, File, Line)
+		;	Port = rule(Entity, _, Clause, File, Line)
 		),
 		(	current_object(Entity) ->
 			true

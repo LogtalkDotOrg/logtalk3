@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:86:3,
+		version is 0:87:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-12-12,
+		date is 2025-12-18,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -2199,16 +2199,16 @@
 		{format(vscode_metrics_results, 'File:~w;Line:~d;Score:~d~n', [File, Line, Score])},
 		fail.
 	% debugger messages
-	logtalk::message_hook(fact(_, _, File, Line), _, debugger, _) :-
+	logtalk::message_hook(fact(Entity, Head, _, File, Line), _, debugger, _) :-
 		logtalk::expand_library_path(logtalk_user('scratch/.debug_info'), DebugInfo),
 		open(DebugInfo, write, Stream),
-		{format(Stream, 'File:~w;Line:~d~n', [File, Line])},
+		{format(Stream, 'File:~w;Line:~d;Head:~q @ ~q~n', [File, Line, Head, Entity])},
 		close(Stream),
 		fail.
-	logtalk::message_hook(rule(_, _, File, Line), _, debugger, _) :-
+	logtalk::message_hook(rule(Entity, Head, _, File, Line), _, debugger, _) :-
 		logtalk::expand_library_path(logtalk_user('scratch/.debug_info'), DebugInfo),
 		open(DebugInfo, write, Stream),
-		{format(Stream, 'File:~w;Line:~d~n', [File, Line])},
+		{format(Stream, 'File:~w;Line:~d;Head:~q @ ~q~n', [File, Line, Head, Entity])},
 		close(Stream),
 		fail.
 

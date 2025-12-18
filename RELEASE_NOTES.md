@@ -56,6 +56,9 @@ Notation) format proposal.
 Tools
 -----
 
+* CHANGED: The `debugger` tool silent messages for the current unification
+ports to include the head of the clause.
+
 * CHANGED: The `help` tool to use a terminal-based browser or the default
 browser to open documentation for all features. Removed support for browsing
 the Texinfo versions of the documentation due to issues with recent Texinfo
@@ -109,6 +112,9 @@ deployment via enterprise management tools.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
+
+* UPDATED: The VSCode support to create debug data files that include the
+clause heads besides the source file name and line number.
 
 * UPDATED: The VSCode support for more compact display of tests coverage.
 

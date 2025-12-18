@@ -22,9 +22,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 3:9:0,
+		version is 4:0:0,
 		author is 'Paulo Moura',
-		date is 2025-09-03,
+		date is 2025-12-18,
 		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
@@ -118,9 +118,9 @@
 
 	% at port
 
-	message_tokens(fact(_, _, _, _)) -->
+	message_tokens(fact(_, _, _, _, _)) -->
 		[].
-	message_tokens(rule(_, _, _, _)) -->
+	message_tokens(rule(_, _, _, _, _)) -->
 		[].
 	message_tokens(call) -->
 		[].
@@ -439,9 +439,9 @@
 		leashed_ports(Ports).
 	leashed_ports([]) --> [].
 
-	port_name(fact(_,_,_,_)) -->
+	port_name(fact(_, _, _, _, _)) -->
 		['  Fact: '-[]].
-	port_name(rule(_,_,_,_)) -->
+	port_name(rule(_, _, _, _, _)) -->
 		['  Rule: '-[]].
 	port_name(call) -->
 		['  Call: '-[]].
