@@ -28,9 +28,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2023-01-13,
+		date is 2025-12-19,
 		comment is 'Examples of the default test dialects.'
 	]).
 
@@ -104,9 +104,17 @@
 
 	% a test dialect supporting individual test options
 
+	test(double_quotes_as_atom, true, [condition(current_prolog_flag(double_quotes,atom))]) :-
+		String = "abc",  % avoid lint warnings
+		String == abc.
+
 	test(double_quotes_as_list_of_chars, true, [condition(current_prolog_flag(double_quotes,chars))]) :-
 		String = "abc",  % avoid lint warnings
 		String == [a,b,c].
+
+	test(double_quotes_as_list_of_codes, true, [condition(current_prolog_flag(double_quotes,codes))]) :-
+		String = "abc",  % avoid lint warnings
+		String == [0'a,0'b,0'c].
 
 	test(dynamicly_created_object_is_dynanic, true, [
 			setup(create_object(foo, [], [], [])),

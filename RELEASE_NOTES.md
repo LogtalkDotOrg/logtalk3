@@ -90,6 +90,9 @@ Examples
 
 * ADDED: Locked doors puzzle to the `searching` example.
 
+* UPDATED: The `testing` example tests so that the number of run/skipped tests
+is independent of the `double_quotes` flag standard values.
+
 Tests
 -----
 
