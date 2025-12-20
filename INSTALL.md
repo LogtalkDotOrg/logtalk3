@@ -203,7 +203,7 @@ Generating documentation in human-readable formats
 
 When downloading the source archive or cloning the git repo, only the HTML
 version of the Handbook and APIs documentation is included. Other formats
-can be manually generated afer the basic installation:
+can be manually generated after the basic installation:
  
 * POSIX systems  
 

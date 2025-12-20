@@ -33,7 +33,7 @@ programming in the large. Logtalk supports modern code encapsulation and
 code reuse mechanisms while preserving the declarative programming features
 of Prolog.
 
-Logtalk is implemented as a transcompiler in highly portable code and can
+Logtalk is implemented as a trans-compiler in highly portable code and can
 use most modern and standards-compliant Prolog implementations as a backend
 compiler.
 
