@@ -591,7 +591,7 @@
 		;	Flags = Mode
 		).
 
-	% write_xml_entity_info(+stream, +atom, +entity_indentifier, +list)
+	% write_xml_entity_info(+stream, +atom, +entity_identifier, +list)
 	%
 	% outputs the contents of entity info/1 directive
 	% in the order specified in the Logtalk DTD file

@@ -23,10 +23,10 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0:41:0,
+		version is 0:42:0,
 		author is 'Paulo Moura',
-		date is 2025-12-18,
-		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'
+		date is 2025-12-21,
+		comment is 'Command-line help for Logtalk tools, libraries, entities, predicates, and non-terminals.'
 	]).
 
 	% only allow complementing categories to add new functionality:
@@ -41,41 +41,74 @@
 	:- public(help/0).
 	:- mode(help, one).
 	:- info(help/0, [
-		comment is 'Prints instructions on how to use the help tool.'
+		comment is 'Provides instructions on how to use the help tool.'
 	]).
 
 	:- public(handbook/0).
 	:- mode(handbook, one).
 	:- info(handbook/0, [
-		comment is 'Opens inline the HTML version of the Handbook.'
+		comment is 'Provides access to the Handbook.'
 	]).
 
 	:- public(apis/0).
 	:- mode(apis, one).
 	:- info(apis/0, [
-		comment is 'Opens inline the HTML version of the APIs documentation.'
+		comment is 'Provides access to the APIs documentation.'
 	]).
 
 	:- public(apis/1).
 	:- mode(apis(+predicate_indicator), one).
 	:- mode(apis(+non_terminal_indicator), one).
 	:- info(apis/1, [
-		comment is 'Opens inline the HTML version of the APIs documentation.',
+		comment is 'Provides help on the given predicate or non-terminal.',
 		argnames is ['Indicator']
+	]).
+
+	:- public(tools/0).
+	:- mode(tools, one).
+	:- info(tools/0, [
+		comment is 'Provides access to the developer tools documentation.'
+	]).
+
+	:- public(tool/1).
+	:- mode(tool(+atom), zero_or_one).
+	:- info(tool/1, [
+		comment is 'Provides help on the given developer tool.',
+		argnames is ['Tool']
+	]).
+
+	:- public(libraries/0).
+	:- mode(libraries, one).
+	:- info(libraries/0, [
+		comment is 'Provides access to the standard libraries documentation.'
+	]).
+
+	:- public(library/1).
+	:- mode(library(+atom), zero_or_one).
+	:- info(library/1, [
+		comment is 'Provides help on the given standard library.',
+		argnames is ['Library']
+	]).
+
+	:- public(entity/1).
+	:- mode(entity(+entity_identifier), zero_or_one).
+	:- info(entity/1, [
+		comment is 'Provides help on the given built-in, tool, and library entity (object, protocol, or category).',
+		argnames is ['Entity']
 	]).
 
 	:- public(('/')/2).
 	:- mode('/'(+atom, +integer), zero_or_one).
 	:- info(('/')/2, [
-		comment is 'Provides help on the ``Functor/Arity`` built-in control construct, directive, predicate, or method.',
-		argnames is ['Functor', 'Arity']
+		comment is 'Provides help on the ``Name/Arity`` built-in control construct, directive, predicate, or method.',
+		argnames is ['Name', 'Arity']
 	]).
 
 	:- public(('//')/2).
 	:- mode('//'(+atom, +integer), zero_or_one).
 	:- info(('//')/2, [
-		comment is 'Provides help on the ``Functor//Arity`` built-in non-terminal.',
-		argnames is ['Functor', 'Arity']
+		comment is 'Provides help on the ``Name//Arity`` built-in non-terminal.',
+		argnames is ['Name', 'Arity']
 	]).
 
 	:- public(completion/2).
@@ -96,68 +129,35 @@
 	:- mode(built_in_directive(?atom, ?integer, -atom, -atom), zero_or_more).
 	:- info(built_in_directive/4, [
 		comment is 'Provides access to the HTML documenting files describing built-in directives.',
-		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
+		argnames is ['Name', 'Arity', 'Directory', 'Basename']
 	]).
 
 	:- public(built_in_predicate/4).
 	:- mode(built_in_predicate(?atom, ?integer, -atom, -atom), zero_or_more).
 	:- info(built_in_predicate/4, [
 		comment is 'Provides access to the HTML documenting files describing built-in predicates.',
-		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
+		argnames is ['Name', 'Arity', 'Directory', 'Basename']
 	]).
 
 	:- public(built_in_method/4).
 	:- mode(built_in_method(?atom, ?integer, -atom, -atom), zero_or_more).
 	:- info(built_in_method/4, [
 		comment is 'Provides access to the HTML documenting files describing built-in methods.',
-		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
+		argnames is ['Name', 'Arity', 'Directory', 'Basename']
 	]).
 
 	:- public(control_construct/4).
 	:- mode(control_construct(?atom, ?integer, -atom, -atom), zero_or_more).
 	:- info(control_construct/4, [
 		comment is 'Provides access to the HTML documenting files describing built-in control constructs.',
-		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
+		argnames is ['Name', 'Arity', 'Directory', 'Basename']
 	]).
 
 	:- public(built_in_non_terminal/4).
 	:- mode(built_in_non_terminal(?atom, ?integer, -atom, -atom), zero_or_more).
 	:- info(built_in_non_terminal/4, [
 		comment is 'Provides access to the HTML documenting files describing built-in DCG non-terminals.',
-		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
-	]).
-
-	:- public(tools/0).
-	:- mode(tools, one).
-	:- info(tools/0, [
-		comment is 'Provides help on the Logtalk developer tools.'
-	]).
-
-	:- public(tool/1).
-	:- mode(tool(+atom), zero_or_one).
-	:- info(tool/1, [
-		comment is 'Provides help on the standard Logtalk libraries, library predicates, and library non-terminals.',
-		argnames is ['Tool']
-	]).
-
-	:- public(libraries/0).
-	:- mode(libraries, one).
-	:- info(libraries/0, [
-		comment is 'Provides help on the standard Logtalk libraries.'
-	]).
-
-	:- public(library/1).
-	:- mode(library(+atom), zero_or_one).
-	:- info(library/1, [
-		comment is 'Provides help on the standard Logtalk libraries, library predicates, and library non-terminals.',
-		argnames is ['Library']
-	]).
-
-	:- public(entity/1).
-	:- mode(entity(+entity_identifier), zero_or_one).
-	:- info(entity/1, [
-		comment is 'Provides help on Logtalk entities (objects, protocols, or categories).',
-		argnames is ['Entity']
+		argnames is ['Name', 'Arity', 'Directory', 'Basename']
 	]).
 
 	:- uses(integer, [
@@ -179,7 +179,7 @@
 	help :-
 		nl,
 		write('Help tool predicates open documentation either inline using a terminal-based'), nl,
-		write('browser (when available) or in the default browser.'), nl, nl,
+		write('browser (when available) or in the operating-system default browser.'), nl, nl,
 		write('To consult the Logtalk Handbook and APIs documentation:'), nl, nl,
 		write('    help::handbook.          help::apis.'), nl, nl,
 		write('To consult the documentation of Logtalk built-in control constructs, methods,'), nl,
@@ -204,27 +204,27 @@
 		write('Hint: you can preload the debugger (and other developer tools) from your'), nl,
 		write('settings file (see the samples/settings-sample.lgt file for instructions).'), nl, nl.
 
-	Functor/Arity :-
-		atom(Functor),
+	Name/Arity :-
+		atom(Name),
 		findall(
 			Path-File,
-			(	built_in_directive(Functor, Arity, Path, File)
-			;	built_in_method(Functor, Arity, Path, File)
-			;	built_in_predicate(Functor, Arity, Path, File)
-			;	control_construct(Functor, Arity, Path, File)
+			(	built_in_directive(Name, Arity, Path, File)
+			;	built_in_method(Name, Arity, Path, File)
+			;	built_in_predicate(Name, Arity, Path, File)
+			;	control_construct(Name, Arity, Path, File)
 			),
 			Hits
 		),
-		show(Hits, Functor/Arity).
+		show(Hits, Name/Arity).
 
-	NonTerminalFunctor//Arity :-
-		atom(NonTerminalFunctor),
+	Name//Arity :-
+		atom(Name),
 		findall(
 			Path-File,
-			built_in_non_terminal(NonTerminalFunctor, Arity, Path, File),
+			built_in_non_terminal(Name, Arity, Path, File),
 			Hits
 		),
-		show(Hits, NonTerminalFunctor//Arity).
+		show(Hits, Name//Arity).
 
 	show([], Search) :-
 		fuzzy_matching(Search).
@@ -234,23 +234,25 @@
 		;	fuzzy_matching(Search)
 		).
 
-	fuzzy_matching(Functor/Arity) :-
+	fuzzy_matching(Name/Arity) :-
 		findall(
-			ExpandedFunctor/Arity,
-			completion(Functor, ExpandedFunctor/Arity-_),
+			ExpandedName/Arity,
+			completion(Name, ExpandedName/Arity-_),
 			ExpandedPIs
 		),
-		alternatives(ExpandedPIs, Functor/Arity).
-	fuzzy_matching(NonTerminalFunctor//Arity) :-
+		alternatives(ExpandedPIs, Name/Arity).
+	fuzzy_matching(Name//Arity) :-
 		findall(
-			ExpandedFunctor//Arity,
-			completion(NonTerminalFunctor, ExpandedFunctor//Arity-_),
+			ExpandedName//Arity,
+			completion(Name, ExpandedName//Arity-_),
 			ExpandedNTIs
 		),
-		alternatives(ExpandedNTIs, NonTerminalFunctor//Arity).
+		alternatives(ExpandedNTIs, Name//Arity).
 
 	alternatives([], Search) :-
-		write('No help available for '), writeq(Search), nl,
+		write('No help available for '), writeq(Search), write('.'), nl,
+		write('Not a Logtalk built-in directive, predicate, non-terminal, or control construct.'), nl,
+		write('Looking for a tool or library predicate instead? Try help::apis/1.'), nl,
 		fail.
 	alternatives([Alternative| Alternatives], _) :-
 		(	Alternatives == [] ->
@@ -265,18 +267,18 @@
 		write_alternatives(Alternatives).
 
 	completion(Prefix, Completion-Page) :-
-		(	built_in_directive(Functor, Arity, Path, File),
-			Completion = Functor/Arity
-		;	built_in_method(Functor, Arity, Path, File),
-			Completion = Functor/Arity
-		;	built_in_predicate(Functor, Arity, Path, File),
-			Completion = Functor/Arity
-		;	built_in_non_terminal(Functor, Arity, Path, File),
-			Completion = Functor//Arity
-		;	control_construct(Functor, Arity, Path, File),
-			Completion = Functor/Arity
+		(	built_in_directive(Name, Arity, Path, File),
+			Completion = Name/Arity
+		;	built_in_method(Name, Arity, Path, File),
+			Completion = Name/Arity
+		;	built_in_predicate(Name, Arity, Path, File),
+			Completion = Name/Arity
+		;	built_in_non_terminal(Name, Arity, Path, File),
+			Completion = Name//Arity
+		;	control_construct(Name, Arity, Path, File),
+			Completion = Name/Arity
 		),
-		sub_atom(Functor, 0, _, _, Prefix),
+		sub_atom(Name, 0, _, _, Prefix),
 		atom_concat('$LOGTALKHOME', Path, Page0),
 		atom_concat(Page0, File, Page1),
 		absolute_file_name(Page1, Page).

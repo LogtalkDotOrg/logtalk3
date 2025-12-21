@@ -8,14 +8,14 @@
 ``help``
 ========
 
-Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.
+Command-line help for Logtalk tools, libraries, entities, predicates, and non-terminals.
 
 | **Availability:** 
 |    ``logtalk_load(help(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:41:0
-| **Date:** 2025-12-18
+| **Version:** 0:42:0
+| **Date:** 2025-12-21
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, complements(allow)``
@@ -49,7 +49,7 @@ Public predicates
 ``help/0``
 ^^^^^^^^^^
 
-Prints instructions on how to use the help tool.
+Provides instructions on how to use the help tool.
 
 | **Compilation flags:**
 |    ``static``
@@ -66,7 +66,7 @@ Prints instructions on how to use the help tool.
 ``handbook/0``
 ^^^^^^^^^^^^^^
 
-Opens inline the HTML version of the Handbook.
+Provides access to the Handbook.
 
 | **Compilation flags:**
 |    ``static``
@@ -83,7 +83,7 @@ Opens inline the HTML version of the Handbook.
 ``apis/0``
 ^^^^^^^^^^
 
-Opens inline the HTML version of the APIs documentation.
+Provides access to the APIs documentation.
 
 | **Compilation flags:**
 |    ``static``
@@ -100,7 +100,7 @@ Opens inline the HTML version of the APIs documentation.
 ``apis/1``
 ^^^^^^^^^^
 
-Opens inline the HTML version of the APIs documentation.
+Provides help on the given predicate or non-terminal.
 
 | **Compilation flags:**
 |    ``static``
@@ -114,19 +114,110 @@ Opens inline the HTML version of the APIs documentation.
 
 ------------
 
+.. index:: tools/0
+.. _help/0::tools/0:
+
+``tools/0``
+^^^^^^^^^^^
+
+Provides access to the developer tools documentation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``tools`` - ``one``
+
+
+------------
+
+.. index:: tool/1
+.. _help/0::tool/1:
+
+``tool/1``
+^^^^^^^^^^
+
+Provides help on the given developer tool.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tool(Tool)``
+| **Mode and number of proofs:**
+|    ``tool(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: libraries/0
+.. _help/0::libraries/0:
+
+``libraries/0``
+^^^^^^^^^^^^^^^
+
+Provides access to the standard libraries documentation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``libraries`` - ``one``
+
+
+------------
+
+.. index:: library/1
+.. _help/0::library/1:
+
+``library/1``
+^^^^^^^^^^^^^
+
+Provides help on the given standard library.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``library(Library)``
+| **Mode and number of proofs:**
+|    ``library(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: entity/1
+.. _help/0::entity/1:
+
+``entity/1``
+^^^^^^^^^^^^
+
+Provides help on the given built-in, tool, and library entity (object, protocol, or category).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``entity(Entity)``
+| **Mode and number of proofs:**
+|    ``entity(+entity_identifier)`` - ``zero_or_one``
+
+
+------------
+
 .. index:: (/)/2
 .. _help/0::(/)/2:
 
 ``(/)/2``
 ^^^^^^^^^
 
-Provides help on the ``Functor/Arity`` built-in control construct, directive, predicate, or method.
+Provides help on the ``Name/Arity`` built-in control construct, directive, predicate, or method.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``Functor/Arity``
+|    ``Name/Arity``
 | **Mode and number of proofs:**
 |    ``+atom/ +integer`` - ``zero_or_one``
 
@@ -139,13 +230,13 @@ Provides help on the ``Functor/Arity`` built-in control construct, directive, pr
 ``(//)/2``
 ^^^^^^^^^^
 
-Provides help on the ``Functor//Arity`` built-in non-terminal.
+Provides help on the ``Name//Arity`` built-in non-terminal.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``Functor//Arity``
+|    ``Name//Arity``
 | **Mode and number of proofs:**
 |    ``+atom// +integer`` - ``zero_or_one``
 
@@ -202,7 +293,7 @@ Provides access to the HTML documenting files describing built-in directives.
 |    ``static``
 
 | **Template:**
-|    ``built_in_directive(Functor,Arity,Directory,Basename)``
+|    ``built_in_directive(Name,Arity,Directory,Basename)``
 | **Mode and number of proofs:**
 |    ``built_in_directive(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
 
@@ -221,7 +312,7 @@ Provides access to the HTML documenting files describing built-in predicates.
 |    ``static``
 
 | **Template:**
-|    ``built_in_predicate(Functor,Arity,Directory,Basename)``
+|    ``built_in_predicate(Name,Arity,Directory,Basename)``
 | **Mode and number of proofs:**
 |    ``built_in_predicate(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
 
@@ -240,7 +331,7 @@ Provides access to the HTML documenting files describing built-in methods.
 |    ``static``
 
 | **Template:**
-|    ``built_in_method(Functor,Arity,Directory,Basename)``
+|    ``built_in_method(Name,Arity,Directory,Basename)``
 | **Mode and number of proofs:**
 |    ``built_in_method(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
 
@@ -259,7 +350,7 @@ Provides access to the HTML documenting files describing built-in control constr
 |    ``static``
 
 | **Template:**
-|    ``control_construct(Functor,Arity,Directory,Basename)``
+|    ``control_construct(Name,Arity,Directory,Basename)``
 | **Mode and number of proofs:**
 |    ``control_construct(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
 
@@ -278,100 +369,9 @@ Provides access to the HTML documenting files describing built-in DCG non-termin
 |    ``static``
 
 | **Template:**
-|    ``built_in_non_terminal(Functor,Arity,Directory,Basename)``
+|    ``built_in_non_terminal(Name,Arity,Directory,Basename)``
 | **Mode and number of proofs:**
 |    ``built_in_non_terminal(?atom,?integer,-atom,-atom)`` - ``zero_or_more``
-
-
-------------
-
-.. index:: tools/0
-.. _help/0::tools/0:
-
-``tools/0``
-^^^^^^^^^^^
-
-Provides help on the Logtalk developer tools.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``tools`` - ``one``
-
-
-------------
-
-.. index:: tool/1
-.. _help/0::tool/1:
-
-``tool/1``
-^^^^^^^^^^
-
-Provides help on the standard Logtalk libraries, library predicates, and library non-terminals.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``tool(Tool)``
-| **Mode and number of proofs:**
-|    ``tool(+atom)`` - ``zero_or_one``
-
-
-------------
-
-.. index:: libraries/0
-.. _help/0::libraries/0:
-
-``libraries/0``
-^^^^^^^^^^^^^^^
-
-Provides help on the standard Logtalk libraries.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``libraries`` - ``one``
-
-
-------------
-
-.. index:: library/1
-.. _help/0::library/1:
-
-``library/1``
-^^^^^^^^^^^^^
-
-Provides help on the standard Logtalk libraries, library predicates, and library non-terminals.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``library(Library)``
-| **Mode and number of proofs:**
-|    ``library(+atom)`` - ``zero_or_one``
-
-
-------------
-
-.. index:: entity/1
-.. _help/0::entity/1:
-
-``entity/1``
-^^^^^^^^^^^^
-
-Provides help on Logtalk entities (objects, protocols, or categories).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``entity(Entity)``
-| **Mode and number of proofs:**
-|    ``entity(+entity_identifier)`` - ``zero_or_one``
 
 
 ------------
