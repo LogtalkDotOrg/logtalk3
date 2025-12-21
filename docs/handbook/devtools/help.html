@@ -157,8 +157,18 @@ POSIX system and one of the following terminal-based browsers installed:</p>
 <li><p><a class="reference external" href="http://links.twibright.com/">http://links.twibright.com/</a></p></li>
 <li><p><a class="reference external" href="https://sr.ht/~bptato/chawan/">https://sr.ht/~bptato/chawan/</a></p></li>
 </ul>
-<p>The preferred browser can be set in a <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file. See the
-<code class="docutils literal notranslate"><span class="pre">samples/settings-sample.lgt</span></code> file for details.</p>
+<p>The preferred browser can be set in a <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file by defining
+the <code class="docutils literal notranslate"><span class="pre">help_default_browser</span></code> user-defined flag as follows:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>(
+    <span class="k">create_logtalk_flag</span>(help_default_browser, <span class="nv">Browser</span>, [type(atom), keep(<span class="k">true</span>)])
+).
+</pre></div>
+</div>
+<p>The valid values for <code class="docutils literal notranslate"><span class="pre">Browser</span></code> are: <code class="docutils literal notranslate"><span class="pre">lynx</span></code>, <code class="docutils literal notranslate"><span class="pre">w3m</span></code>, <code class="docutils literal notranslate"><span class="pre">links</span></code>,
+<code class="docutils literal notranslate"><span class="pre">cha</span></code>, and <code class="docutils literal notranslate"><span class="pre">default</span></code> (<code class="docutils literal notranslate"><span class="pre">default</span></code> means use the operating-system
+default browser instead of one of the terminal-based browsers).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">samples/settings-sample.lgt</span></code> file contains commented out code for
+this flag.</p>
 <p>On Windows systems, the documentation is open in the operating-system
 default browser.</p>
 </section>
@@ -166,8 +176,6 @@ default browser.</p>
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>This tool API documentation is available at:</p>
 <p><a class="reference external" href="../../apis/library_index.html#help">../../apis/library_index.html#help</a></p>
-<p>For sample queries, please see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool
-directory.</p>
 </section>
 <section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
@@ -190,19 +198,70 @@ abstraction.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
-<p>After loading the tool, use the query <code class="docutils literal notranslate"><span class="pre">help::help</span></code> to get started.
-Some query examples:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> help<span class="o">::</span>handbook.
+<p>After loading the tool, use the query <code class="docutils literal notranslate"><span class="pre">help::help</span></code> to get started:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(help(loader)).
+...
 
-| <span class="o">?-</span> help<span class="o">::</span>handbook(base64).
+| <span class="o">?-</span> help<span class="o">::</span>help.
+...
+</pre></div>
+</div>
+<p>When using ECLiPSe, you will need to write the object name, <code class="docutils literal notranslate"><span class="pre">help</span></code>,
+between parentheses to avoid a clash with the “help” built-in operator:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> (help)<span class="o">::</span>help.
+...
+</pre></div>
+</div>
+<p>Same sample help queries:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% get et on-line help for the `logtalk_load/2` built-in predicate:</span>
 
-| <span class="o">?-</span> help<span class="o">::</span>handbook(logtalk_load<span class="o">/</span><span class="m">2</span>).
+| <span class="o">?-</span> help<span class="o">::</span>logtalk_load<span class="o">/</span><span class="m">2.</span>
+...
+
+<span class="c">% get on-line help for the `eos//0` built-in non-terminal:</span>
+
+| <span class="o">?-</span> help<span class="o">::</span>eos<span class="o">//</span><span class="m">0.</span>
+...
+
+<span class="c">% consult the Handbook:</span>
+
+| <span class="o">?-</span> help<span class="o">::</span>handbook.
+...
+
+<span class="c">% consult the APIs documentation:</span>
 
 | <span class="o">?-</span> help<span class="o">::</span>apis.
+...
 
-| <span class="o">?-</span> help<span class="o">::</span>apis(check<span class="o">/</span><span class="m">2</span>).
+<span class="c">% consult the APIs documentation about a library predicate:</span>
 
-| <span class="o">?-</span> help<span class="o">::</span>apis(message_tokens<span class="o">//</span><span class="m">2</span>).
+| <span class="o">?-</span> help<span class="o">::</span>apis(member<span class="o">/</span><span class="m">2</span>).
+...
+
+<span class="c">% consult the APIs documentation about a library non-terminal:</span>
+
+| <span class="o">?-</span> help<span class="o">::</span>apis(one_or_more<span class="o">//</span><span class="m">0</span>).
+...
+
+<span class="c">% consult the documentation of a library:</span>
+
+| <span class="o">?-</span> help<span class="o">::</span>library(random).
+...
+
+<span class="c">% consult the documentation of an entity:</span>
+
+| <span class="o">?-</span> help<span class="o">::</span>entity(logtalk).
+...
+
+<span class="c">% consult the developer tools documentation:</span>
+
+| <span class="o">?-</span> help<span class="o">::</span>tools.
+...
+
+<span class="c">% consult the documentation of the lgtunit tool:</span>
+
+| <span class="o">?-</span> help<span class="o">::</span>tool(lgtunit).
+...
 </pre></div>
 </div>
 <p>When using the terminal-based browsers, after finishing consulting the
