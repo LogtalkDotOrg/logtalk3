@@ -334,35 +334,38 @@ pauses at a leashed port for user interaction:</p>
 <ul class="simple">
 <li><dl class="simple">
 <dt>Predicate breakpoints</dt><dd><p>Traditional Prolog spy points are defined using a predicate (or a non-terminal)
-indicator.</p>
+indicator. The debugger pauses for user input at all ports for the predicate
+(or non-terminal).</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>Clause breakpoints</dt><dd><p>Defined using the location of a clause.</p>
+<dt>Clause breakpoints</dt><dd><p>Defined using the location of a clause. The debugger pauses for user input at
+unification ports.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>Conditional breakpoints</dt><dd><p>Defined using the location of a clause and a condition for pausing.</p>
+<dt>Conditional breakpoints</dt><dd><p>Defined using the location of a clause and a condition for pausing for user
+input at an unification port.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
 <dt>Hit count breakpoints</dt><dd><p>Defined using the location of a clause and an unification count expression
-as a condition for pausing.</p>
+as a condition for pausing for user input at an unification port.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
 <dt>Triggered breakpoints</dt><dd><p>Defined using the location of a clause and another breakpoint that must be
-hit first as a condition for pausing.</p>
+hit first as a condition for pausing for user input at an unification port.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
 <dt>Context breakpoints</dt><dd><p>Defined using execution context and goal templates as a condition for
-pausing.</p>
+pausing for user input at all ports.</p>
 </dd>
 </dl>
 </li>
@@ -540,18 +543,19 @@ to its default settings and delete all defined breakpoints and log points.</p>
 </section>
 <section id="defining-log-points">
 <h2>Defining log points<a class="headerlink" href="#defining-log-points" title="Link to this heading"></a></h2>
-<p>Logtalk log points are similar to breakpoints. Therefore, the line number must
-correspond to the first line of an entity clause. When the debugger reaches
-a log point, it prints a log message and continues without pausing execution
-for reading a port command. When the log message is an empty atom, the default
-port output message is printed. When the log message starts with a <code class="docutils literal notranslate"><span class="pre">%</span></code>
-character, the default port output message is printed, followed by the log
-message. In these two cases, the debugger prints a <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> character at the
-beginning of the line for easy recognition of log points output. When the log
-message is neither empty nor starts with a <code class="docutils literal notranslate"><span class="pre">%</span></code> character, the log message is
-printed instead of the default port output message. In this case, the message
-can contain <code class="docutils literal notranslate"><span class="pre">$KEYWORD</span></code> placeholders that are expanded at runtime. The valid
-keywords are:</p>
+<p>Logtalk log points are similar to clause breakpoints. Therefore, the line
+number must correspond to the first line of an entity clause. When the
+debugger reaches a log point at an unification port, it prints a log message
+and continues without pausing execution for reading a port command. When the
+log message is an empty atom, the default port output message is printed.
+When the log message starts with a <code class="docutils literal notranslate"><span class="pre">%</span></code> character, the default port output
+message is printed, followed by the log message. In these two cases, the
+debugger prints a <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> character at the beginning of the line for easy
+recognition of log points output. When the log message is neither empty
+nor starts with a <code class="docutils literal notranslate"><span class="pre">%</span></code> character, the log message is printed instead of
+the default port output message. In this case, the message can contain
+<code class="docutils literal notranslate"><span class="pre">$KEYWORD</span></code> placeholders that are expanded at runtime. The valid keywords
+are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">PORT</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ENTITY</span></code></p></li>

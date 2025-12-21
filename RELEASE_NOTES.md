@@ -74,6 +74,8 @@ already exists.
 * ADDED: Support to the `lgtdoc` tool for converting XML documenting files
 to HTML 5 files.
 
+* IMPROVED: The `debugger` tool documentation on breakpoints.
+
 * FIXED: The `lgtunit` tool to correctly report the location of tests defined
 in included files.
 

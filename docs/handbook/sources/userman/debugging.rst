@@ -192,20 +192,23 @@ pauses at a leashed port for user interaction:
 
 - Predicate breakpoints
    Traditional Prolog spy points are defined using a predicate (or a non-terminal)
-   indicator.
+   indicator. The debugger pauses for user input at all ports for the predicate
+   (or non-terminal).
 - Clause breakpoints
-   Defined using the location of a clause.
+   Defined using the location of a clause. The debugger pauses for user input at
+   unification ports.
 - Conditional breakpoints
-   Defined using the location of a clause and a condition for pausing.
+   Defined using the location of a clause and a condition for pausing for user
+   input at an unification port.
 - Hit count breakpoints
    Defined using the location of a clause and an unification count expression
-   as a condition for pausing.
+   as a condition for pausing for user input at an unification port.
 - Triggered breakpoints
    Defined using the location of a clause and another breakpoint that must be
-   hit first as a condition for pausing.
+   hit first as a condition for pausing for user input at an unification port.
 - Context breakpoints
    Defined using execution context and goal templates as a condition for
-   pausing.
+   pausing for user input at all ports.
 
 Clause breakpoints are checked when the current goal successfully unifies
 with a clause head. To simplify their definition, these are specified using
@@ -411,18 +414,19 @@ to its default settings and delete all defined breakpoints and log points.
 Defining log points
 -------------------
 
-Logtalk log points are similar to breakpoints. Therefore, the line number must
-correspond to the first line of an entity clause. When the debugger reaches
-a log point, it prints a log message and continues without pausing execution
-for reading a port command. When the log message is an empty atom, the default
-port output message is printed. When the log message starts with a ``%``
-character, the default port output message is printed, followed by the log
-message. In these two cases, the debugger prints a ``@`` character at the
-beginning of the line for easy recognition of log points output. When the log
-message is neither empty nor starts with a ``%`` character, the log message is
-printed instead of the default port output message. In this case, the message
-can contain ``$KEYWORD`` placeholders that are expanded at runtime. The valid
-keywords are:
+Logtalk log points are similar to clause breakpoints. Therefore, the line
+number must correspond to the first line of an entity clause. When the
+debugger reaches a log point at an unification port, it prints a log message
+and continues without pausing execution for reading a port command. When the
+log message is an empty atom, the default port output message is printed.
+When the log message starts with a ``%`` character, the default port output
+message is printed, followed by the log message. In these two cases, the
+debugger prints a ``@`` character at the beginning of the line for easy
+recognition of log points output. When the log message is neither empty
+nor starts with a ``%`` character, the log message is printed instead of
+the default port output message. In this case, the message can contain
+``$KEYWORD`` placeholders that are expanded at runtime. The valid keywords
+are:
 
 - ``PORT``
 - ``ENTITY``
