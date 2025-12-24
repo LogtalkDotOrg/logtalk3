@@ -2,6 +2,8 @@
   "$schema": "https://context7.com/schema/context7.json",
   "projectTitle": "Logtalk",
   "description": "Object-oriented logic programming language that extends and leverages Prolog",
+  "url": "https://context7.com/logtalkdotorg/logtalk3",
+  "public_key": "pk_xW70HQ2IIlbaYarz7gVZQ",
   "folders": [
     "docs",
     "examples"
@@ -11,12 +13,12 @@
     "coding",
     "contributions",
     "core",
-	"docs/apis/_sources",
-	"docs/apis/_static",
-	"docs/apis/sources",
-	"docs/handbook/_sources",
-	"docs/handbook/_static",
-	"docs/handbook/sources",
+    "docs/apis/_sources",
+    "docs/apis/_static",
+    "docs/apis/sources",
+    "docs/handbook/_sources",
+    "docs/handbook/_static",
+    "docs/handbook/sources",
     "integration",
     "library",
     "paths",
@@ -49,12 +51,12 @@
     "Follow Logtalk's file naming conventions: .lgt extension for source files",
     "Use loader.lgt files for proper dependency management",
     "Place tests in tests.lgt files in the same directory as the code",
-	"Use tester.lgt files to run tests",
-	"Use a settings.lgt file for project/library configuration (e.g., library aliases, scratch directories, verbosity)",
-	"Indent using tabs",
-	"Use snake_case for object, protocol, category, and predicate names",
-	"Use CamelCase for variable names",
-	"Prefer explicit public/1, protected/1, and private/1 declarations for predicates",
-	"Use info/2 and mode/2 directives for predicate documentation and mode declarations"
+    "Use tester.lgt files to run tests",
+    "Use a settings.lgt file for project/library configuration (e.g., library aliases, scratch directories, verbosity)",
+    "Indent using tabs",
+    "Use snake_case for object, protocol, category, and predicate names",
+    "Use CamelCase for variable names",
+    "Prefer explicit public/1, protected/1, and private/1 declarations for predicates",
+    "Use info/2 and mode/2 directives for predicate documentation and mode declarations"
   ]
 }
