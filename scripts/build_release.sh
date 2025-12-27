@@ -208,7 +208,7 @@ if [ "$BUILD_PKG" = true ]; then
 	sed -i '' "s/VERSION/$version/" "$PKG_BUILD_DIR/distribution.xml"
 	# Prepare installer scripts: include original postflight
 	mkdir -p "$SCRIPTS_DIR"
-	cp "$directory/logtalk-$version/scripts/macos/postflight" "$SCRIPTS_DIR/postinstall"
+	cp "$directory/logtalk-$version/scripts/macos/postinstall" "$SCRIPTS_DIR/"
 	chmod +x "$SCRIPTS_DIR/postinstall"
 	# Build component package
 	pkgbuild --root "$PAYLOAD_DIR" --scripts "$SCRIPTS_DIR" --identifier "org.logtalk.logtalk" --version "$version" "$COMPONENT_PKG"

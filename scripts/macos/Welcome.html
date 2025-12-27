@@ -4,18 +4,15 @@
 	<title>Install Logtalk</title>
 </head>
 <body>
-<p>
-<b>Welcome to the Logtalk for macOS Installer</b>
-</p>
-<p>
-Logtalk is an open source object-oriented logic programming language that can use most Prolog implementations as a backend compiler. As a multi-paradigm language, it includes support for both prototypes and classes, protocols (interfaces), component-based programming through category-based composition, event-driven programming, and high-level multi-threading programming.
-</p>
+<h2>Requirements</h2>
 <p>
 Logtalk <b>requires</b> a compatible Prolog compiler to be installed in order to run.
 </p>
+<h2>Installation directory</h2>
 <p>
 This installer guides you through the steps necessary to install Logtalk for macOS. Logtalk is installed in the <b>/opt/local/share/logtalk</b> directory. A link to this directory is automatically created in the <b>/Applications</b> directory. Links to the Prolog integration scripts are created in the <b>/opt/local/bin</b> directory. Links to the script man pages are created in the <b>/opt/local/man</b> directory. The Texinfo versions of the Handbook and APIs documentation are copied to the <b>/opt/local/share/info</b> directory. The installer adds these directories to, respectively, the <b>PATH</b>, <b>MANPATH</b>, and <b>INFOPATH</b> systems environment variables for the <b>bash</b>, <b>zsh</b>, and <b>csh</b> shells.
 </p>
+<h2>Post-install steps</h2>
 <p>
 After installation, each Logtalk user should run the shell command <b>logtalk_user_setup</b> once to create a <b>logtalk</b> directory in the user's home directory containing library files, examples, and documentation.
 </p>
