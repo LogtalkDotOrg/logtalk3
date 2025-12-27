@@ -8,7 +8,7 @@
     <choices-outline>
         <line choice="org.logtalk.logtalk"/>
     </choices-outline>
-    <choice id="org.logtalk.logtalk">
+    <choice id="org.logtalk.logtalk" title="Logtalk">
         <pkg-ref id="org.logtalk.logtalk"/>
     </choice>
 </installer-gui-script>
