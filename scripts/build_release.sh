@@ -203,7 +203,7 @@ if [ "$BUILD_PKG" = true ]; then
 	cd "$directory" || exit 1
 	# Prepare the installer resources
 	mkdir -p "$PKG_BUILD_DIR/resources"
-	cp "$directory/logtalk-$version/scripts/macos/*.html" "$PKG_BUILD_DIR/resources/"
+	cp "$directory/logtalk-$version/scripts/macos"/*.html "$PKG_BUILD_DIR/resources/"
 	cp "$directory/logtalk-$version/scripts/macos/distribution.xml" "$PKG_BUILD_DIR/"
 	sed -i '' "s/VERSION/$version/" "$PKG_BUILD_DIR/distribution.xml"
 	# Prepare installer scripts: include original postflight
@@ -213,7 +213,7 @@ if [ "$BUILD_PKG" = true ]; then
 	# Build component package
 	pkgbuild --root "$PAYLOAD_DIR" --scripts "$SCRIPTS_DIR" --identifier "org.logtalk.logtalk" --version "$version" "$COMPONENT_PKG"
 	# Build product package (single component)
-	productbuild --distribution "$PKG_BUILD_DIR/distribution.xml" --resources "$PKG_BUILD_DIR/resources" --package "$COMPONENT_PKG" "$PRODUCT_PKG"
+	productbuild --distribution "$PKG_BUILD_DIR/distribution.xml" --resources "$PKG_BUILD_DIR/resources" --package-path "$PKG_BUILD_DIR" "$PRODUCT_PKG"
 	# Zip the package to match previous output naming used by the release script
 	if [ -f "$PRODUCT_PKG" ]; then
 		(cd "$directory" && zip -r "$(basename "$ZIP_PKG")" "$(basename "$PRODUCT_PKG")" >/dev/null)
