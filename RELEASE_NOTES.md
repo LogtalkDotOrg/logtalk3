@@ -22,10 +22,21 @@ RELEASE NOTES
 =============
 
 
-3.97.1 - January ??, 2026
-=========================
+3.97.1 - December ??, 2025
+==========================
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
 
+* UPDATED: The Context7 MCP server `context7.json` support file to claim
+the `logtalk3` project ownership.
+
+Installers and installation scripts
+-----------------------------------
+
+* CHANGED: Build the macOS installer using Apple's official `productbuild` and
+`pkgbuild` command-line utilities instead of using MacPorts for compatibility
+with macOS 15.x and later versions.
 
 
 3.97.0 - December 22, 2025

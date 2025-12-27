@@ -43,8 +43,9 @@ also available in the Logtalk website.
 
 - `build_release.sh`  
 	helper script for building most of the distribution files of a new
-	Logtalk release; must be run on a macOS computer due to its dependency
-	on MacPorts to build the macOS installer
+	Logtalk release; must be run on a macOS system due to its dependency
+	on Apple's command-line utilities used to build the macOS installer;
+	call `build_release.sh --help` for supported options
 
 - `cleandist.sh`  
 	script for cleaning a Logtalk distribution in preparation for packaging;

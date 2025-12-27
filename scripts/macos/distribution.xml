@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="1">
+    <title>Logtalk</title>
+    <welcome file="Welcome.html" mime-type="text/html"/>
+    <readme file="ReadMe.html" mime-type="text/html"/>
+    <license file="License.html" mime-type="text/html"/>
+    <pkg-ref id="org.logtalk.logtalk">logtalk-VERSION-component.pkg</pkg-ref>
+    <choices-outline>
+        <line choice="org.logtalk.logtalk"/>
+    </choices-outline>
+    <choice id="org.logtalk.logtalk">
+        <pkg-ref id="org.logtalk.logtalk"/>
+    </choice>
+</installer-gui-script>

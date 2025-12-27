@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk macOS installer package auxiliary script
-##   Last updated on November 1, 2023
+##   Last updated on December 27, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -148,7 +148,7 @@ echo "Creating a link to the Logtalk installation folder in the /Applications fo
 /bin/ln -sf /opt/local/share/logtalk /Applications/Logtalk
 /usr/bin/open /Applications/Logtalk/
 /usr/bin/open /Applications/Logtalk/scripts/macos/command_files
-/usr/bin/open /Applications/Logtalk/README.md
+/usr/bin/open -t /Applications/Logtalk/README.md
 
 echo ""
 echo "You have successfully installed Logtalk!"
