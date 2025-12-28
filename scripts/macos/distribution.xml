@@ -4,11 +4,11 @@
     <welcome file="Welcome.html" mime-type="text/html"/>
     <readme file="ReadMe.html" mime-type="text/html"/>
     <license file="License.html" mime-type="text/html"/>
-    <pkg-ref id="org.logtalk.logtalk">logtalk-VERSION-component.pkg</pkg-ref>
+	<options customize="never"/>
+    <choice id="org.logtalk.logtalk" title="Logtalk" description="Full installation">
+        <pkg-ref id="org.logtalk.logtalk">logtalk-VERSION-component.pkg</pkg-ref>
+    </choice>
     <choices-outline>
         <line choice="org.logtalk.logtalk"/>
     </choices-outline>
-    <choice id="org.logtalk.logtalk" title="Logtalk">
-        <pkg-ref id="org.logtalk.logtalk"/>
-    </choice>
 </installer-gui-script>
