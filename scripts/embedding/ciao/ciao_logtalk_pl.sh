@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.pl file with
 ##   a Logtalk application
 ##
-##   Last updated on March 23, 2025
+##   Last updated on December 28, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -230,7 +230,7 @@ echo ":- discontiguous('\$lgt_extends_category_'/3)." >> header.pl
 echo ":- discontiguous('\$lgt_extends_object_'/3)." >> header.pl
 echo ":- discontiguous('\$lgt_extends_protocol_'/3)." >> header.pl
 echo ":- discontiguous('\$lgt_loaded_file_'/7)." >> header.pl
-echo ":- discontiguous('\$lgt_included_file_'/4)." >> header.pl
+echo ":- discontiguous('\$lgt_included_file_'/5)." >> header.pl
 
 ciaolgt$extension -e "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$temporary')]),halt"
 
@@ -293,7 +293,7 @@ if [ "$loader" != "" ] ; then
 	echo ":- discontiguous('\$lgt_extends_object_'/3)." >> "$directory"/header.pl
 	echo ":- discontiguous('\$lgt_extends_protocol_'/3)." >> "$directory"/header.pl
 	echo ":- discontiguous('\$lgt_loaded_file_'/7)." >> "$directory"/header.pl
-	echo ":- discontiguous('\$lgt_included_file_'/4)." >> "$directory"/header.pl
+	echo ":- discontiguous('\$lgt_included_file_'/5)." >> "$directory"/header.pl
 	if test -n "$(find . -maxdepth 1 -name '*.pl' -print -quit)" ; then
 		files="$(ls -rt ./*.pl)"
 		for a in $files ; do cat "$a" >> "$directory"/application0.pl ; done

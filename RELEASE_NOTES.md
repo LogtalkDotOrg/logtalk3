@@ -25,6 +25,13 @@ RELEASE NOTES
 3.97.1 - December ??, 2025
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Typo in the declaration of an internal runtime predicate in the
+workaround for a `gplc` limitation when dealing with multifile predicates.
+Thanks to Daniel Diaz for the bug report.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
@@ -37,6 +44,9 @@ Installers and installation scripts
 * CHANGED: Build the macOS installer using Apple's official `productbuild` and
 `pkgbuild` command-line utilities instead of using MacPorts for compatibility
 with macOS 15.x and later versions.
+
+* FIXED: Typo in the declaration of an internal runtime predicate in the embedding
+scripts for Ciao Prolog.
 
 
 3.97.0 - December 22, 2025

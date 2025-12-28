@@ -5,7 +5,7 @@
 ##   compiler and runtime and optionally an application.pl file with
 ##   a Logtalk application
 ##
-##   Last updated on March 18, 2025
+##   Last updated on December 28, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2025 Paulo Moura <pmoura@logtalk.org>
@@ -228,7 +228,7 @@ Add-Content -Path header.pl -Value ":- discontiguous('\$lgt_extends_category_'/3
 Add-Content -Path header.pl -Value ":- discontiguous('\$lgt_extends_object_'/3)."
 Add-Content -Path header.pl -Value ":- discontiguous('\$lgt_extends_protocol_'/3)."
 Add-Content -Path header.pl -Value ":- discontiguous('\$lgt_loaded_file_'/7)."
-Add-Content -Path header.pl -Value ":- discontiguous('\$lgt_included_file_'/4)."
+Add-Content -Path header.pl -Value ":- discontiguous('\$lgt_included_file_'/5)."
 
 $GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwarding), core(user), core(logtalk), core(core_messages)], [optimize(on)$ScratchDirOption]), halt"
 ciaolgt -e $GoalParam
@@ -296,7 +296,7 @@ if ($l -ne "") {
 	Add-Content -Path $d/header.pl -Value ":- discontiguous('\$lgt_extends_object_'/3)."
 	Add-Content -Path $d/header.pl -Value ":- discontiguous('\$lgt_extends_protocol_'/3)."
 	Add-Content -Path $d/header.pl -Value ":- discontiguous('\$lgt_loaded_file_'/7)."
-	Add-Content -Path $d/header.pl -Value ":- discontiguous('\$lgt_included_file_'/4)."
+	Add-Content -Path $d/header.pl -Value ":- discontiguous('\$lgt_included_file_'/5)."
 
 	$GoalParam = "set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'$($t.Replace('\', '/'))/application'), logtalk_load('$($l.Replace('\', '/'))'), halt"
 

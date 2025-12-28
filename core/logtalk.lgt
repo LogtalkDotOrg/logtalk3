@@ -851,6 +851,6 @@
 	:- dynamic('$lgt_current_protocol_'/5).
 	:- multifile('$lgt_current_category_'/6).
 	:- dynamic('$lgt_current_category_'/6).
-	:- multifile('$lgt_included_file_'/4).
-	:- dynamic('$lgt_included_file_'/4).
+	:- multifile('$lgt_included_file_'/5).
+	:- dynamic('$lgt_included_file_'/5).
 :- endif.
