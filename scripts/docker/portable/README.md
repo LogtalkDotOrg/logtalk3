@@ -222,6 +222,7 @@ The backend identifier must be for one of the installed Prolog systems:
 - CxProlog: `cx`
 - ECLiPSe: `eclipse`
 - GNU Prolog: `gnu`
+- GNU Prolog (native code): `gnunc`
 - SWI-Prolog: `swi`
 - Tau Prolog: `tau`
 - Trealla Prolog: `trealla`

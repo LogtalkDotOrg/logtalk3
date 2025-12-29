@@ -45,6 +45,9 @@ Installers and installation scripts
 `pkgbuild` command-line utilities instead of using MacPorts for compatibility
 with macOS 15.x and later versions.
 
+* UPDATED: The portable Docker image to create the alternative GNU Prolog native
+code backend (`gplgtnc`).
+
 * FIXED: Typo in the declaration of an internal runtime predicate in the embedding
 scripts for Ciao Prolog.
 
