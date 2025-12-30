@@ -22,7 +22,7 @@ RELEASE NOTES
 =============
 
 
-3.97.1 - December ??, 2025
+3.97.1 - December 30, 2025
 ==========================
 
 Logtalk compiler and runtime
@@ -45,11 +45,11 @@ Installers and installation scripts
 `pkgbuild` command-line utilities instead of using MacPorts for compatibility
 with macOS 15.x and later versions.
 
-* UPDATED: The portable Docker image to create the alternative GNU Prolog native
-code backend (`gplgtnc`).
+* UPDATED: The portable Docker image to create the alternative GNU Prolog
+native code backend (`gplgtnc`).
 
-* FIXED: Typo in the declaration of an internal runtime predicate in the embedding
-scripts for Ciao Prolog.
+* FIXED: Typo in the declaration of an internal runtime predicate in the
+embedding scripts for Ciao Prolog.
 
 
 3.97.0 - December 22, 2025

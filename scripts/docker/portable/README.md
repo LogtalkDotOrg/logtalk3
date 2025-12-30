@@ -36,7 +36,7 @@ Prolog backends:
 
 Includes Jupyter, JupyterLab, and the Logtalk kernel.
 
-Includes all Logtalk developer tool dependencies. 
+Includes all Logtalk developer tool dependencies.
 
 Includes the `nano` text editor for small editing tasks. For actual
 development, use the VSCode or VSCodium recommended setups as described
@@ -49,22 +49,22 @@ command.
 
 ## Build arguments and their defaults
 
-* `LOGTALK_VERSION` (`master`)
-* `LOGTALK_TEXINFO_VERSION` (3.97.1)
+- `LOGTALK_VERSION` (`master`)
+- `LOGTALK_TEXINFO_VERSION` (3.97.1)
 
 Valid identifiers are as shown in the Logtalk GitHub repository at
 [release names](https://github.com/LogtalkDotOrg/logtalk3/releases).
 
-* `B_VERSION` (`81`)
-* `CIAO_VERSION` (`v1.23.0-m1`)
-* `CX_VERSION` (`0.98.3`)
-* `ECLIPSE_VERSION` (`7.2_10`)
-* `GNU_VERSION` (`master`)
-* `SWI_VERSION` (`swipl-devel` repo; `master`)
-* `TAU_VERSION` (`0.3.4`)
-* `TREALLA_VERSION` (`main`)
-* `XSB_VERSION` (`git-origin`)
-* `YAP_VERSION` (`master`)
+- `B_VERSION` (`81`)
+- `CIAO_VERSION` (`v1.23.0-m1`)
+- `CX_VERSION` (`0.98.3`)
+- `ECLIPSE_VERSION` (`7.2_10`)
+- `GNU_VERSION` (`master`)
+- `SWI_VERSION` (`swipl-devel` repo; `master`)
+- `TAU_VERSION` (`0.3.4`)
+- `TREALLA_VERSION` (`main`)
+- `XSB_VERSION` (`git-origin`)
+- `YAP_VERSION` (`master`)
 
 Valid identifiers are as shown in the backend repositories or download
 websites. Setting the backend version build argument to `none` skips
@@ -85,7 +85,7 @@ system:
 
 ## Volumes
 
-* `/source`  
+- `/source`  
 The working directory where Logtalk is started. The source of your project can
 be mounted here.
 
