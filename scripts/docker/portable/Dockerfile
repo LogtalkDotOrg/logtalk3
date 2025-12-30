@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on December 29, 2025
+##   Last updated on December 30, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2025 Paulo Moura <pmoura@logtalk.org>
@@ -232,9 +232,9 @@ RUN if [ "$GNU_VERSION" != "none" ] ; then \
         git clone --depth 1 --branch ${GNU_VERSION} https://github.com/didoudiaz/gprolog \
         && cd gprolog/src \
         && ./configure --prefix=/usr/local --without-doc-dir --without-html-dir && make && make install && make distclean \
-        && rm -rf /downloads/gprolog ; \
+        && rm -rf /downloads/gprolog \
         && cd /usr/local/share/logtalk/scripts/embedding/gprolog \
-        && ./gprolog_embed_logtalk.sh -c -n gplgtnc -s none -d /usr/local/bin -- --new-top-level --no-susp-warn \
+        && ./gprolog_embed_logtalk.sh -c -n gplgtnc -s none -d /usr/local/bin -- --new-top-level --no-susp-warn ; \
     fi
 
 # Install SWI-Prolog
