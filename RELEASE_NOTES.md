@@ -32,6 +32,12 @@ Prolog adapter and integration files
 from the `aggregate` library instead of defining it locally, thus avoiding
 a predicate redefinition warning when this library is imported.
 
+Tests
+-----
+
+* FIXED: Workaround a crash using the SICStus Prolog backend when running the
+tests for the ISO Prolog standard `is/2` built-in predicate.
+
 
 3.97.1 - December 30, 2025
 ==========================
