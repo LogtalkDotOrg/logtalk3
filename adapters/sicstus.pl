@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on November 12, 2024
+%  Last updated on January 8, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -101,10 +101,7 @@ user:message_hook(informational, loaded(_, compiled, File, _, _, _), _) :-
 
 % forall(+callable, +callable)
 
-:- meta_predicate(forall(0, 0)).
-
-forall(Generate, Test) :-
-	\+ (Generate, \+ Test).
+:- use_module(library(aggregate), [forall/2]).
 
 
 % format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in

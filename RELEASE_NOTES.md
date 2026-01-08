@@ -25,7 +25,12 @@ RELEASE NOTES
 3.98.0 - January ??, 2026
 =========================
 
+Prolog adapter and integration files
+------------------------------------
 
+* FIXED: The SICStus Prolog adapter file to import the `forall/2` predicate
+from the `aggregate` library instead of defining it locally, thus avoiding
+a predicate redefinition warning when this library is imported.
 
 
 3.97.1 - December 30, 2025
