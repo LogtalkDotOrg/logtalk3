@@ -79,6 +79,7 @@
 <li class="toctree-l2"><a class="reference internal" href="doclet.html"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">help</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customization">Customization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
@@ -157,6 +158,36 @@ POSIX system and one of the following terminal-based browsers installed:</p>
 <li><p><a class="reference external" href="http://links.twibright.com/">http://links.twibright.com/</a></p></li>
 <li><p><a class="reference external" href="https://sr.ht/~bptato/chawan/">https://sr.ht/~bptato/chawan/</a></p></li>
 </ul>
+<p>On macOS, these browsers can be installed with either MacPorts:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install lynx
+<span class="err">$</span> sudo port install w3m
+<span class="err">$</span> sudo port install links
+</pre></div>
+</div>
+<p>Or using Homebrew:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install lynx
+<span class="err">$</span> brew install w3m
+<span class="err">$</span> brew install links
+<span class="err">$</span> brew install chawan
+</pre></div>
+</div>
+<p>On Linux systems, use the distribution’s own package manager to install
+the browsers. For example, in Ubuntu systems:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo apt install lynx
+<span class="err">$</span> sudo apt install w3m
+</pre></div>
+</div>
+<p>If you’re running Logtalk from a git clone of its repo, you will need to
+run the <code class="docutils literal notranslate"><span class="pre">docs/apis/sources/build.sh</span></code> or
+<code class="docutils literal notranslate"><span class="pre">docs/apis/sources/build.ps1</span></code> scripts to generate APIs documentation
+HTML files and also run the <code class="docutils literal notranslate"><span class="pre">docs/handbook/sources/build.sh</span></code> or
+<code class="docutils literal notranslate"><span class="pre">docs/handbook/sources/build.ps1</span></code> scripts to generate the Handbook
+HTML files. Alternatively, you can download the documentation for the
+latest stable release from the Logtalk website and save them to the
+<code class="docutils literal notranslate"><span class="pre">docs</span></code> directories.</p>
+</section>
+<section id="customization">
+<h2>Customization<a class="headerlink" href="#customization" title="Link to this heading"></a></h2>
 <p>The preferred browser can be set in a <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file by defining
 the <code class="docutils literal notranslate"><span class="pre">help_default_browser</span></code> user-defined flag as follows:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>(
@@ -164,13 +195,36 @@ the <code class="docutils literal notranslate"><span class="pre">help_default_br
 ).
 </pre></div>
 </div>
-<p>The valid values for <code class="docutils literal notranslate"><span class="pre">Browser</span></code> are: <code class="docutils literal notranslate"><span class="pre">lynx</span></code>, <code class="docutils literal notranslate"><span class="pre">w3m</span></code>, <code class="docutils literal notranslate"><span class="pre">links</span></code>,
-<code class="docutils literal notranslate"><span class="pre">cha</span></code>, and <code class="docutils literal notranslate"><span class="pre">default</span></code> (<code class="docutils literal notranslate"><span class="pre">default</span></code> means use the operating-system
-default browser instead of one of the terminal-based browsers).</p>
+<p>The valid values for <code class="docutils literal notranslate"><span class="pre">Browser</span></code> are: <code class="docutils literal notranslate"><span class="pre">lynx</span></code> (default value), <code class="docutils literal notranslate"><span class="pre">w3m</span></code>,
+<code class="docutils literal notranslate"><span class="pre">links</span></code>, <code class="docutils literal notranslate"><span class="pre">cha</span></code>, and <code class="docutils literal notranslate"><span class="pre">default</span></code> (<code class="docutils literal notranslate"><span class="pre">default</span></code> means use the
+operating-system default browser instead of one of the terminal-based
+browsers).</p>
+<p>We can also select between browsing the HTML files generated by Sphinx
+for web browsing or the XHTML files generated by Sphinx for the ePub
+version of the documentation by defining the <code class="docutils literal notranslate"><span class="pre">help_default_files</span></code>
+user-defined flag as follows:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>(
+    <span class="k">create_logtalk_flag</span>(help_default_files, <span class="nv">Format</span>, [type(atom), keep(<span class="k">true</span>)])
+).
+</pre></div>
+</div>
+<p>The valid values for <code class="docutils literal notranslate"><span class="pre">Format</span></code> are <code class="docutils literal notranslate"><span class="pre">html</span></code> (default value) or
+<code class="docutils literal notranslate"><span class="pre">xhtml</span></code>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">samples/settings-sample.lgt</span></code> file contains commented out code for
-this flag.</p>
+defining these flags.</p>
+<p>On POSIX systems, one of the supported terminal-based browsers must be
+installed unless you prefer using the default browser. By default, the
+tool checks first for <code class="docutils literal notranslate"><span class="pre">lynx</span></code>, second for <code class="docutils literal notranslate"><span class="pre">w3m</span></code>, third for <code class="docutils literal notranslate"><span class="pre">links</span></code>,
+and finally for <code class="docutils literal notranslate"><span class="pre">chawan</span></code>. When none of these terminal-based browsers
+is available in their default installation paths, the documentation is
+open in the operating-system default browser.</p>
 <p>On Windows systems, the documentation is open in the operating-system
 default browser.</p>
+<p>When using the terminal-based browsers, after finishing consulting the
+documentation and quitting the process, you will be back to the
+top-level prompt (if you find that the top-level have scrolled from its
+last position, try to set your terminal terminfo to
+<code class="docutils literal notranslate"><span class="pre">xterm-256colour</span></code>).</p>
 </section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
@@ -262,42 +316,6 @@ between parentheses to avoid a clash with the “help” built-in operator:</p>
 
 | <span class="o">?-</span> help<span class="o">::</span>tool(lgtunit).
 ...
-</pre></div>
-</div>
-<p>When using the terminal-based browsers, after finishing consulting the
-documentation and quitting the process, you will be back to the
-top-level prompt (if you find that the top-level have scrolled from its
-last position, try to set your terminal terminfo to
-<code class="docutils literal notranslate"><span class="pre">xterm-256colour</span></code>).</p>
-<p>If you’re running Logtalk from a git clone of its repo, you will need to
-run the <code class="docutils literal notranslate"><span class="pre">docs/apis/sources/build.sh</span></code> or
-<code class="docutils literal notranslate"><span class="pre">docs/apis/sources/build.ps1</span></code> scripts to generate APIs documentation
-HTML files and also run the <code class="docutils literal notranslate"><span class="pre">docs/handbook/sources/build.sh</span></code> or
-<code class="docutils literal notranslate"><span class="pre">docs/handbook/sources/build.ps1</span></code> scripts to generate the Handbook
-HTML files. Alternatively, you can download the documentation for the
-latest stable release from the Logtalk website and save them to the
-<code class="docutils literal notranslate"><span class="pre">docs</span></code> directories.</p>
-<p>On POSIX systems, one of the supported terminal-based browsers must be
-installed unless you prefer using the default browser. By default, the
-tool checks first for <code class="docutils literal notranslate"><span class="pre">lynx</span></code>, second for <code class="docutils literal notranslate"><span class="pre">w3m</span></code>, third for <code class="docutils literal notranslate"><span class="pre">links</span></code>,
-and finally for <code class="docutils literal notranslate"><span class="pre">chawan</span></code>.</p>
-<p>On macOS, these browsers can be installed with either MacPorts:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install lynx
-<span class="err">$</span> sudo port install w3m
-<span class="err">$</span> sudo port install links
-</pre></div>
-</div>
-<p>Or using Homebrew:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install lynx
-<span class="err">$</span> brew install w3m
-<span class="err">$</span> brew install links
-<span class="err">$</span> brew install chawan
-</pre></div>
-</div>
-<p>On Linux systems, use the distribution’s own package manager to install
-the browsers. For example, in Ubuntu systems:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo apt install lynx
-<span class="err">$</span> sudo apt install w3m
 </pre></div>
 </div>
 </section>
