@@ -38,6 +38,10 @@ Tests
 * FIXED: Workaround a crash using the SICStus Prolog backend when running the
 tests for the ISO Prolog standard `is/2` built-in predicate.
 
+* FIXED: The compatibility of the de facto standard `format/2-3` predicate
+tests with 32 bits systems with bounded integers. Thanks to Daniel Diaz for
+the bug report.
+
 
 3.97.1 - December 30, 2025
 ==========================

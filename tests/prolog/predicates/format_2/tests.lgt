@@ -371,18 +371,18 @@
 
 	test(lgt_format_2_decimal_group, true(Assertion)) :-
 		^^set_text_output(''),
-		{format("~D", [1234567890])},
-		^^text_output_assertion('1,234,567,890', Assertion).
+		{format("~D", [123456789])},
+		^^text_output_assertion('123,456,789', Assertion).
 
 	test(lgt_format_2_decimal_group_n, true(Assertion)) :-
 		^^set_text_output(''),
-		{format("~2D", [1234567890])},
-		^^text_output_assertion('12,345,678.90', Assertion).
+		{format("~2D", [123456789])},
+		^^text_output_assertion('1,234,567.89', Assertion).
 
 	test(lgt_format_2_decimal_group_star, true(Assertion)) :-
 		^^set_text_output(''),
-		{format("~*D", [2,1234567890])},
-		^^text_output_assertion('12,345,678.90', Assertion).
+		{format("~*D", [2,123456789])},
+		^^text_output_assertion('1,234,567.89', Assertion).
 
 	test(lgt_format_2_decimal_invalid_01, error(instantiation_error)) :-
 		^^set_text_output(''),
