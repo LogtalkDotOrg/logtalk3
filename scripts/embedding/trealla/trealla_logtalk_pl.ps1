@@ -8,7 +8,7 @@
 ##   Last updated on March 18, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
-##   Copyright 2022-2025 Paulo Moura <pmoura@logtalk.org>
+##   Copyright 2022-2026 Paulo Moura <pmoura@logtalk.org>
 ##   Copyright 2022 Hans N. Beck
 ##   SPDX-License-Identifier: Apache-2.0
 ##

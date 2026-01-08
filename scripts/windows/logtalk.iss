@@ -2,7 +2,7 @@
 ; Last updated on December 6, 2025
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
-; SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
+; SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
 ; SPDX-License-Identifier: Apache-2.0
 ; 
 ; Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +18,7 @@
 ; limitations under the License.
 
 #define MyAppName "Logtalk"
-#define MyAppCopyright "Copyright © 1998-2025 Paulo Moura"
+#define MyAppCopyright "Copyright © 1998-2026 Paulo Moura"
 #define MyAppPublisher "Logtalk.org"
 #define MyAppURL "https://logtalk.org"
 #define MyAppUrlName "Logtalk Web Site.url"

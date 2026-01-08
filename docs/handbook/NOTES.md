@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,7 +42,7 @@ pr AI coding tool, you may need to split in several files for indexing due
 to file size limitations. For example, using the POSIX `split` utility
 command:
 
-	$ split -p '## (Reference Manual|Developer Tools)' TheLogtalkHandbook-3.97.1.md TheLogtalkHandbook_
+	$ split -p '## (Reference Manual|Developer Tools)' TheLogtalkHandbook-3.98.0.md TheLogtalkHandbook_
 	$ for file in "TheLogtalkHandbook_"*; do mv "$file" "${file}.md"; done
 
 Experiment with the section headers until all generated files are below

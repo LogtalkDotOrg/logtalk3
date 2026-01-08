@@ -4,7 +4,7 @@
 %  Last updated on February 14, 2016
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
-%  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@
 :- module(logtalk, []).
 
 :-	prolog_load_context(directory, Directory),
-	atom_concat(Directory, '/../logtalk-3.97.1/', Location),
+	atom_concat(Directory, '/../logtalk-3.98.0/', Location),
 	setenv('LOGTALKHOME', Location),
 	setenv('LOGTALKUSER', Location),
-	user:load_files('../logtalk-3.97.1/integration/logtalk_swi.pl').
+	user:load_files('../logtalk-3.98.0/integration/logtalk_swi.pl').

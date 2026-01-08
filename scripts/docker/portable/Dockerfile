@@ -4,7 +4,7 @@
 ##   Last updated on December 30, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 2017-2025 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 2017-2026 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,7 +32,7 @@ VOLUME ["/source"]
 
 # Logtalk
 ARG LOGTALK_VERSION=master
-ARG LOGTALK_TEXINFO_VERSION=3.97.1
+ARG LOGTALK_TEXINFO_VERSION=3.98.0
 # Backends
 ARG B_VERSION=81
 ARG CIAO_VERSION=v1.23.0-m1

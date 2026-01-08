@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2021-2025 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2021-2026 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 1998-2021 Jacob Friedman <jfriedman@graphstax.com>
 %  SPDX-License-Identifier: Apache-2.0
 %

@@ -6,7 +6,7 @@
 ##   Last updated on March 11, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.

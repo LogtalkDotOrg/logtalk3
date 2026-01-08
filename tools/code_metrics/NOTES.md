@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 2017-2025 Paulo Moura <pmoura@logtalk.org>
+SPDX-FileCopyrightText: 2017-2026 Paulo Moura <pmoura@logtalk.org>
 SPDX-FileCopyrightText: 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>
 SPDX-License-Identifier: Apache-2.0
 

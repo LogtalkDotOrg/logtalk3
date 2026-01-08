@@ -1,4 +1,4 @@
-// Copyright (C) 2014-2025 Paulo Moura
+// Copyright (C) 2014-2026 Paulo Moura
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
