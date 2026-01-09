@@ -25,7 +25,7 @@
 	:- info([
 		version is 0:42:0,
 		author is 'Paulo Moura',
-		date is 2026-01-08,
+		date is 2026-01-09,
 		comment is 'Command-line help for Logtalk tools, libraries, entities, predicates, and non-terminals.'
 	]).
 
@@ -630,6 +630,9 @@
 	inline_browser_command_path(links, '/usr/bin/links').
 	inline_browser_command_path(links, '/usr/local/bin/links').
 	inline_browser_command_path(links, '/opt/local/bin/links').
+	inline_browser_command_path(links, '/usr/bin/links2').
+	inline_browser_command_path(links, '/usr/local/bin/links2').
+	inline_browser_command_path(links, '/opt/local/bin/links2').
 	inline_browser_command_path(cha,   '/usr/bin/cha').
 	inline_browser_command_path(cha,   '/usr/local/bin/cha').
 	inline_browser_command_path(cha,   '/opt/local/bin/cha').
@@ -707,10 +710,10 @@
 		atomic_list_concat([LOGTALKHOME, '/docs/apis/LogtalkAPIs-', Major, '.', Minor, '.', Patch, '.epub'], APIsFile),
 		copy_file(APIsFile, APIsDirectory),
 		atomic_list_concat([LOGTALKUSER, '/tools/help/.docs_cache/docs/handbook/TheLogtalkHandbook-', Major, '.', Minor, '.', Patch, '.epub'], HandbookFileCopy),
-		atomic_list_concat(['tar -xf "', HandbookFileCopy, '" --directory "', HandbookDirectory, '"'], Command1),
+		atomic_list_concat(['bsdtar -xf "', HandbookFileCopy, '" --directory "', HandbookDirectory, '"'], Command1),
 		shell(Command1),
 		atomic_list_concat([LOGTALKUSER, '/tools/help/.docs_cache/docs/apis/LogtalkAPIs-', Major, '.', Minor, '.', Patch, '.epub'], HandbookAPIsCopy),
-		atomic_list_concat(['tar -xf "', HandbookAPIsCopy, '" --directory "', APIsDirectory, '"'], Command2),
+		atomic_list_concat(['bsdtar -xf "', HandbookAPIsCopy, '" --directory "', APIsDirectory, '"'], Command2),
 		shell(Command2),
 		atomic_list_concat(['find "', LOGTALKUSER, '/tools/help/.docs_cache/docs', '" -type f -name "*.xhtml" -exec sed -i.bak \'s/\\.html#/.xhtml#/g\' {} +'], Command3),
 		shell(Command3),

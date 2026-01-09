@@ -12,7 +12,7 @@ Requirements
 
 On Windows, the ``start`` command must be available. On Linux, the
 ``xdg-open`` command must be available. On macOS, the command ``open``
-is used.
+is used. On POSIX systems ``bsdtar`` is also required.
 
 Browsing the Handbook and APIs documentation at the top-level requires a
 POSIX system and one of the following terminal-based browsers installed:
@@ -22,13 +22,15 @@ POSIX system and one of the following terminal-based browsers installed:
 - http://links.twibright.com/
 - https://sr.ht/~bptato/chawan/
 
-On macOS, these browsers can be installed with either MacPorts:
+On macOS, these browsers and ``bsdtar`` can be installed with either
+MacPorts:
 
 ::
 
    $ sudo port install lynx
    $ sudo port install w3m
    $ sudo port install links
+   $ sudo port install libarchive
 
 Or using Homebrew:
 
@@ -38,14 +40,26 @@ Or using Homebrew:
    $ brew install w3m
    $ brew install links
    $ brew install chawan
+   $ brew install libarchive
 
 On Linux systems, use the distribution's own package manager to install
-the browsers. For example, in Ubuntu systems:
+the browsers and ``bsdtar``. For example, in Ubuntu systems:
 
 ::
 
    $ sudo apt install lynx
    $ sudo apt install w3m
+   $ sudo apt install links2
+   $ sudo apt install libarchive-tools
+
+For RedHat systems:
+
+::
+
+   $ sudo dnf install lynx
+   $ sudo dnf install w3m
+   $ sudo dnf install links2
+   $ sudo dnf install bsdtar
 
 If you're running Logtalk from a git clone of its repo, you will need to
 run the ``docs/apis/sources/build.sh`` or

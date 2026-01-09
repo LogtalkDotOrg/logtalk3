@@ -149,7 +149,7 @@ warning messages, see the <code class="docutils literal notranslate"><span class
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
 <p>On Windows, the <code class="docutils literal notranslate"><span class="pre">start</span></code> command must be available. On Linux, the
 <code class="docutils literal notranslate"><span class="pre">xdg-open</span></code> command must be available. On macOS, the command <code class="docutils literal notranslate"><span class="pre">open</span></code>
-is used.</p>
+is used. On POSIX systems <code class="docutils literal notranslate"><span class="pre">bsdtar</span></code> is also required.</p>
 <p>Browsing the Handbook and APIs documentation at the top-level requires a
 POSIX system and one of the following terminal-based browsers installed:</p>
 <ul class="simple">
@@ -158,10 +158,12 @@ POSIX system and one of the following terminal-based browsers installed:</p>
 <li><p><a class="reference external" href="http://links.twibright.com/">http://links.twibright.com/</a></p></li>
 <li><p><a class="reference external" href="https://sr.ht/~bptato/chawan/">https://sr.ht/~bptato/chawan/</a></p></li>
 </ul>
-<p>On macOS, these browsers can be installed with either MacPorts:</p>
+<p>On macOS, these browsers and <code class="docutils literal notranslate"><span class="pre">bsdtar</span></code> can be installed with either
+MacPorts:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install lynx
 <span class="err">$</span> sudo port install w3m
 <span class="err">$</span> sudo port install links
+<span class="err">$</span> sudo port install libarchive
 </pre></div>
 </div>
 <p>Or using Homebrew:</p>
@@ -169,12 +171,22 @@ POSIX system and one of the following terminal-based browsers installed:</p>
 <span class="err">$</span> brew install w3m
 <span class="err">$</span> brew install links
 <span class="err">$</span> brew install chawan
+<span class="err">$</span> brew install libarchive
 </pre></div>
 </div>
 <p>On Linux systems, use the distribution’s own package manager to install
-the browsers. For example, in Ubuntu systems:</p>
+the browsers and <code class="docutils literal notranslate"><span class="pre">bsdtar</span></code>. For example, in Ubuntu systems:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo apt install lynx
 <span class="err">$</span> sudo apt install w3m
+<span class="err">$</span> sudo apt install links2
+<span class="err">$</span> sudo apt install libarchive<span class="o">-</span>tools
+</pre></div>
+</div>
+<p>For RedHat systems:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo dnf install lynx
+<span class="err">$</span> sudo dnf install w3m
+<span class="err">$</span> sudo dnf install links2
+<span class="err">$</span> sudo dnf install bsdtar
 </pre></div>
 </div>
 <p>If you’re running Logtalk from a git clone of its repo, you will need to
