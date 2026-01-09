@@ -321,9 +321,16 @@ between parentheses to avoid a clash with the “help” built-in operator:</p>
 </section>
 <section id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">lynx</span></code> terminal-based browser, the
+<code class="docutils literal notranslate"><span class="pre">help_default_files</span></code> flag setting is ignored as this browser doesn’t
+support XHTML.</p>
 <p>When using the terminal-based browsers, the Handbook and APIs search
 boxes are not usable as they require JavaScript support. Use instead the
 indexes.</p>
+<p>Some CSS support is only provided by the Chawan terminal-based browser.
+This results in formatting issues when browsing the Logtalk
+documentation. Some of these issues can be avoided by setting the
+<code class="docutils literal notranslate"><span class="pre">help_default_files</span></code> flag to <code class="docutils literal notranslate"><span class="pre">xhtml</span></code>.</p>
 <p>The open commands used to open documentation URLs in the default browser
 drop the fragment part, thus preventing navigation to the specified
 position on the documentation page.</p>

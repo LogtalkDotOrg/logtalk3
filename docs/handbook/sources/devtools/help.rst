@@ -215,9 +215,18 @@ Same sample help queries:
 Known issues
 ------------
 
+When using the ``lynx`` terminal-based browser, the
+``help_default_files`` flag setting is ignored as this browser doesn't
+support XHTML.
+
 When using the terminal-based browsers, the Handbook and APIs search
 boxes are not usable as they require JavaScript support. Use instead the
 indexes.
+
+Some CSS support is only provided by the Chawan terminal-based browser.
+This results in formatting issues when browsing the Logtalk
+documentation. Some of these issues can be avoided by setting the
+``help_default_files`` flag to ``xhtml``.
 
 The open commands used to open documentation URLs in the default browser
 drop the fragment part, thus preventing navigation to the specified
