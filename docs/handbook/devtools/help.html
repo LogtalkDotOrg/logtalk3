@@ -273,7 +273,8 @@ abstraction.</p>
 </pre></div>
 </div>
 <p>When using ECLiPSe, you will need to write the object name, <code class="docutils literal notranslate"><span class="pre">help</span></code>,
-between parentheses to avoid a clash with the “help” built-in operator:</p>
+between parentheses to avoid a clash with the <code class="docutils literal notranslate"><span class="pre">help</span></code> built-in
+operator:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> (help)<span class="o">::</span>help.
 ...
 </pre></div>
@@ -327,6 +328,11 @@ between parentheses to avoid a clash with the “help” built-in operator:</p>
 <span class="c">% consult the documentation of the lgtunit tool:</span>
 
 | <span class="o">?-</span> help<span class="o">::</span>tool(lgtunit).
+...
+
+<span class="c">% consult the documentation of the logtalk_tester script:</span>
+
+| <span class="o">?-</span> help<span class="o">::</span>man(logtalk_tester).
 ...
 </pre></div>
 </div>

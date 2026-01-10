@@ -166,7 +166,7 @@ After loading the tool, use the query `help::help` to get started:
 	...
 
 When using ECLiPSe, you will need to write the object name, `help`, between
-parentheses to avoid a clash with the "help" built-in operator:
+parentheses to avoid a clash with the `help` built-in operator:
 
 	| ?- (help)::help.
 	...
@@ -221,6 +221,11 @@ Same sample help queries:
 	% consult the documentation of the lgtunit tool:
 
 	| ?- help::tool(lgtunit).
+	...
+
+	% consult the documentation of the logtalk_tester script:
+
+	| ?- help::man(logtalk_tester).
 	...
 
 

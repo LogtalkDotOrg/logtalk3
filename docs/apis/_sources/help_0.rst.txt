@@ -15,7 +15,7 @@ Command-line help for Logtalk tools, libraries, entities, predicates, and non-te
 
 | **Author:** Paulo Moura
 | **Version:** 0:42:0
-| **Date:** 2026-01-09
+| **Date:** 2026-01-10
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, complements(allow)``
@@ -239,6 +239,25 @@ Provides help on the ``Name//Arity`` built-in non-terminal.
 |    ``Name//Arity``
 | **Mode and number of proofs:**
 |    ``+atom// +integer`` - ``zero_or_one``
+
+
+------------
+
+.. index:: man/1
+.. _help/0::man/1:
+
+``man/1``
+^^^^^^^^^
+
+Opens the man page of the given script. On POSIX systems, the page is open inline. On Windows system, the HTML version of the man page is open on the operating-system default browser.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``man(Page)``
+| **Mode and number of proofs:**
+|    ``man(+atom)`` - ``one``
 
 
 ------------

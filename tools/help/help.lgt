@@ -25,7 +25,7 @@
 	:- info([
 		version is 0:42:0,
 		author is 'Paulo Moura',
-		date is 2026-01-09,
+		date is 2026-01-10,
 		comment is 'Command-line help for Logtalk tools, libraries, entities, predicates, and non-terminals.'
 	]).
 
@@ -112,6 +112,13 @@
 	:- info(('//')/2, [
 		comment is 'Provides help on the ``Name//Arity`` built-in non-terminal.',
 		argnames is ['Name', 'Arity']
+	]).
+
+	:- public(man/1).
+	:- mode(man(+atom), one).
+	:- info(man/1, [
+		comment is 'Opens the man page of the given script. On POSIX systems, the page is open inline. On Windows system, the HTML version of the man page is open on the operating-system default browser.',
+		argnames is ['Page']
 	]).
 
 	:- public(completion/2).
@@ -722,6 +729,50 @@
 		atomic_list_concat([LOGTALKUSER, '/VERSION.txt'], OriginalFile),
 		atomic_list_concat([LOGTALKUSER, '/tools/help/.docs_cache/VERSION.txt'], CopyFile),
 		copy_file(OriginalFile, CopyFile).
+
+	man(Page) :-
+		\+ man_page_url(Page, _),
+		!,
+		write('Unknown script or no help available for '), writeq(Page), write('.'), nl.
+	man(Page) :-
+		environment_variable('COMSPEC', _),
+		% assume we're running on Windows
+		!,
+		man_page_url(Page, URL),
+		atomic_list_concat(['cmd /c start "" "', URL, '"'], Command),
+		shell(Command).
+	man(Page) :-
+		atomic_list_concat([man, ' ', Page], Command),
+		shell(Command).
+
+	man_page_url(bplgt,                  'https://logtalk.org/man/bplgt.html').
+	man_page_url(ciaolgt,                'https://logtalk.org/man/ciaolgt.html').
+	man_page_url(cxlgt,                  'https://logtalk.org/man/cxlgt.html').
+	man_page_url(eclipselgt,             'https://logtalk.org/man/eclipselgt.html').
+	man_page_url(gplgt,                  'https://logtalk.org/man/gplgt.html').
+	man_page_url(jiplgt,                 'https://logtalk.org/man/jiplgt.html').
+	man_page_url(quintuslgt,             'https://logtalk.org/man/quintuslgt.html').
+	man_page_url(sicstuslgt,             'https://logtalk.org/man/sicstuslgt.html').
+	man_page_url(swilgt,                 'https://logtalk.org/man/swilgt.html').
+	man_page_url(taulgt,                 'https://logtalk.org/man/taulgt.html').
+	man_page_url(tplgt,                  'https://logtalk.org/man/tplgt.html').
+	man_page_url(xsblgt,                 'https://logtalk.org/man/xsblgt.html').
+	man_page_url(xvmlgt,                 'https://logtalk.org/man/xvmlgt.html').
+	man_page_url(yaplgt,                 'https://logtalk.org/man/yaplgt.html').
+	man_page_url(logtalk_user_setup,     'https://logtalk.org/man/logtalk_user_setup.html').
+	man_page_url(logtalk_backend_select, 'https://logtalk.org/man/logtalk_backend_select.html').
+	man_page_url(logtalk_version_select, 'https://logtalk.org/man/logtalk_version_select.html').
+	man_page_url(logtalk_tester,         'https://logtalk.org/man/logtalk_tester.html').
+	man_page_url(logtalk_allure_report,  'https://logtalk.org/man/logtalk_allure_report.html').
+	man_page_url(logtalk_doclet,         'https://logtalk.org/man/logtalk_doclet.html').
+	man_page_url(lgt2html,               'https://logtalk.org/man/lgt2html.html').
+	man_page_url(lgt2md,                 'https://logtalk.org/man/lgt2md.html').
+	man_page_url(lgt2pdf,                'https://logtalk.org/man/lgt2pdf.html').
+	man_page_url(lgt2rst,                'https://logtalk.org/man/lgt2rst.html').
+	man_page_url(lgt2txt,                'https://logtalk.org/man/lgt2txt.html').
+	man_page_url(lgt2xml,                'https://logtalk.org/man/lgt2xml.html').
+	man_page_url(lgt2svg,                'https://logtalk.org/man/lgt2svg.html').
+	man_page_url(lgtenv,                 'https://logtalk.org/man/lgtenv.html').
 
 :- end_object.
 
