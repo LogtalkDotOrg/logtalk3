@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on June 5, 2025
+##   Last updated on January 12, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -53,7 +53,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 14.0"
+	Write-Output "$myName 14.1"
 }
 
 Function Invoke-TestSet() {
@@ -351,11 +351,13 @@ Function Confirm-Parameters() {
 		$script:prolog = 'GNU Prolog'
 		$script:logtalk = "gplgt"
 		$script:logtalk_option = "--query-goal"
+		$env:LINEDIT = "gui=no"
 	} elseif ($p -eq "gnunc") {
 		$script:backend = 'gnu'
 		$script:prolog = 'GNU Prolog (native code)'
 		$script:logtalk = "gplgtnc"
 		$script:logtalk_option = "--query-goal"
+		$env:LINEDIT = "gui=no"
 	} elseif ($p -eq "ji") {
 		$script:backend = 'ji'
 		$script:prolog = 'JIProlog'
