@@ -28,6 +28,9 @@ RELEASE NOTES
 Prolog adapter and integration files
 ------------------------------------
 
+* UPDATED: The `gplgt.sh` script to export the `LINEDIT` environment variable
+(set to `gui=no`) to allow running it on Windows using a Bash shell.
+
 * FIXED: The SICStus Prolog adapter file to import the `forall/2` predicate
 from the `aggregate` library instead of defining it locally, thus avoiding
 a predicate redefinition warning when this library is imported.
