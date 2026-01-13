@@ -18,3 +18,15 @@ xunit_report.xml
 *.ql
 *.itf
 *.po
+
+# Logtalk for VSCode extension temporary files
+.vscode_*
+.vscode/
+
+# Jupyter temporary files
+.ipynb_checkpoints/
+.jupyter
+.jupyter_ystore.db
+
+# operating-system bookkeeping files
+.DS_Store

@@ -59,6 +59,13 @@ tests for the ISO Prolog standard `is/2` built-in predicate.
 tests with 32 bits systems with bounded integers. Thanks to Daniel Diaz for
 the bug report.
 
+VCS support
+-----------
+
+* UPDATED: The `Logtalk.gitignore`, `Logtalk.hgignore`, and `Logtalk.p4ignore`
+template files to also ignore the temporary files created by the Logtalk for
+VSCode extension.
+
 
 3.97.1 - December 30, 2025
 ==========================
