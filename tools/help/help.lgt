@@ -25,7 +25,7 @@
 	:- info([
 		version is 0:42:0,
 		author is 'Paulo Moura',
-		date is 2026-01-10,
+		date is 2026-01-14,
 		comment is 'Command-line help for Logtalk tools, libraries, entities, predicates, and non-terminals.'
 	]).
 
@@ -631,18 +631,22 @@
 	inline_browser_command_path(lynx,  '/usr/bin/lynx').
 	inline_browser_command_path(lynx,  '/usr/local/bin/lynx').
 	inline_browser_command_path(lynx,  '/opt/local/bin/lynx').
+	inline_browser_command_path(lynx,  '/opt/homebrew/bin/lynx').
 	inline_browser_command_path(w3m,   '/usr/bin/w3m').
 	inline_browser_command_path(w3m,   '/usr/local/bin/w3m').
 	inline_browser_command_path(w3m,   '/opt/local/bin/w3m').
+	inline_browser_command_path(w3m,   '/opt/homebrew/bin/w3m').
 	inline_browser_command_path(links, '/usr/bin/links').
 	inline_browser_command_path(links, '/usr/local/bin/links').
 	inline_browser_command_path(links, '/opt/local/bin/links').
+	inline_browser_command_path(links, '/opt/homebrew/bin/links').
 	inline_browser_command_path(links, '/usr/bin/links2').
 	inline_browser_command_path(links, '/usr/local/bin/links2').
 	inline_browser_command_path(links, '/opt/local/bin/links2').
 	inline_browser_command_path(cha,   '/usr/bin/cha').
 	inline_browser_command_path(cha,   '/usr/local/bin/cha').
 	inline_browser_command_path(cha,   '/opt/local/bin/cha').
+	inline_browser_command_path(cha,   '/opt/homebrew/bin/cha').
 
 	open_in_inline_browser(Browser, Executable, Directory, File) :-
 		(	Browser == lynx
