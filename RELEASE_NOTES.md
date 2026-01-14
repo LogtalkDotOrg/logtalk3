@@ -49,6 +49,9 @@ environment variable (set to `gui=no`) when run using the GNU Prolog backend.
 
 * FIXED: The `help` tool use of the `links` terminal-based browser on Linux.
 
+* FIXED: The `help` tool search for the terminal-based browser executables
+for the prefix used by Homebrew on Apple Silicon.
+
 Tests
 -----
 
