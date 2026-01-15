@@ -25,6 +25,15 @@ RELEASE NOTES
 3.98.0 - January ??, 2026
 =========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: The `create_object/4` and `create_category/4` no longer silently
+accept (and generalize) a compound entity identifier with parameters that
+are not variables. Attempts to create a parametric entity with a non-variable
+parameter now throw a type error, consistent with the compiler behavior for
+source files defined parametric entities.
+
 Prolog adapter and integration files
 ------------------------------------
 
@@ -34,6 +43,14 @@ Prolog adapter and integration files
 * FIXED: The SICStus Prolog adapter file to import the `forall/2` predicate
 from the `aggregate` library instead of defining it locally, thus avoiding
 a predicate redefinition warning when this library is imported.
+
+Documentation
+-------------
+
+* IMPROVED: The Handbook documentation on parametric categories and objects.
+
+* UPDATED: The Handbook documentation of the `create_category/4` and
+`create_object/4` built-in predicate exceptions.
 
 Tools
 -----

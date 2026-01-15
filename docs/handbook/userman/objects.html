@@ -385,13 +385,13 @@ the <a class="reference internal" href="inheritance.html#inheritance-scope"><spa
 <p>Parametric objects have a compound term as identifier where all the
 arguments of the compound term are variables. These variables can be
 bound when sending a message or become bound when a message to the object
-succeeds, thus acting as <em>object parameters</em>. The object predicates
-can be coded to depend on those parameters, which are logical variables
-shared by all object predicates. When an object state is set at object
-creation and never changed, parameters provide a better solution than
-using the object’s database via asserts. Parametric objects can also be
-used to associate a set of predicates to terms that share a common
-functor and arity.</p>
+succeeds, thus acting as <em>object parameters</em>. The object predicates can be
+coded to depend on those parameters, which are <em>logical variables</em> shared
+by all object predicates. Parametric objects can also be used to associate
+a set of predicates to terms that share a common functor and arity.</p>
+<p>As a consequence of parameters being logical variables, when defining, for
+example, a parametric object <code class="docutils literal notranslate"><span class="pre">foo/1</span></code>, <code class="docutils literal notranslate"><span class="pre">foo(bar)</span></code> and <code class="docutils literal notranslate"><span class="pre">foo(baz)</span></code> are
+different parameterizations of the same object, not distinct objects.</p>
 <section id="accessing-object-parameters">
 <h3>Accessing object parameters<a class="headerlink" href="#accessing-object-parameters" title="Link to this heading"></a></h3>
 <p>Object parameters can be accessed using <a class="reference internal" href="../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variables</span></a>

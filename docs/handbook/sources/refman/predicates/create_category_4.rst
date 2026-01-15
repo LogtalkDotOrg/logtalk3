@@ -64,6 +64,8 @@ Errors
 |     ``instantiation_error``
 | ``Identifier`` is neither a variable nor a valid category identifier:
 |     ``type_error(category_identifier, Identifier)``
+| ``Identifier`` is a valid object identifier but one of its arguments, ``Parameter``, is not a variable:
+|     ``type_error(variable, Parameter)``
 | ``Identifier`` is already in use:
 |     ``permission_error(modify, category, Identifier)``
 |     ``permission_error(modify, object, Identifier)``

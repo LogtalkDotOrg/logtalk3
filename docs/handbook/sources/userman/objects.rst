@@ -284,13 +284,14 @@ Parametric objects
 Parametric objects have a compound term as identifier where all the
 arguments of the compound term are variables. These variables can be
 bound when sending a message or become bound when a message to the object
-succeeds, thus acting as *object parameters*. The object predicates
-can be coded to depend on those parameters, which are logical variables
-shared by all object predicates. When an object state is set at object
-creation and never changed, parameters provide a better solution than
-using the object's database via asserts. Parametric objects can also be
-used to associate a set of predicates to terms that share a common
-functor and arity.
+succeeds, thus acting as *object parameters*. The object predicates can be
+coded to depend on those parameters, which are *logical variables* shared
+by all object predicates. Parametric objects can also be used to associate
+a set of predicates to terms that share a common functor and arity.
+
+As a consequence of parameters being logical variables, when defining, for
+example, a parametric object ``foo/1``, ``foo(bar)`` and ``foo(baz)`` are
+different parameterizations of the same object, not distinct objects.
 
 Accessing object parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

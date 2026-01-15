@@ -1355,6 +1355,11 @@ create_object(Obj, Relations, Directives, Clauses) :-
 	nonvar(Obj),
 	(	\+ callable(Obj),
 		throw(error(type_error(object_identifier, Obj), logtalk(create_object(Obj, Relations, Directives, Clauses), ExCtx)))
+	;	compound(Obj),
+		Obj =.. [_| Parameters],
+		'$lgt_member'(Parameter, Parameters),
+		nonvar(Parameter),
+		throw(error(type_error(variable, Parameter), logtalk(create_object(Obj, Relations, Directives, Clauses), ExCtx)))
 	;	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _),
 		throw(error(permission_error(modify, object, Obj), logtalk(create_object(Obj, Relations, Directives, Clauses), ExCtx)))
 	;	'$lgt_current_category_'(Obj, _, _, _, _, _),
@@ -1415,6 +1420,11 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 	nonvar(Ctg),
 	(	\+ callable(Ctg),
 		throw(error(type_error(category_identifier, Ctg), logtalk(create_category(Ctg, Relations, Directives, Clauses), ExCtx)))
+	;	compound(Ctg),
+		Ctg =.. [_| Parameters],
+		'$lgt_member'(Parameter, Parameters),
+		nonvar(Parameter),
+		throw(error(type_error(variable, Parameter), logtalk(create_category(Ctg, Relations, Directives, Clauses), ExCtx)))
 	;	'$lgt_current_category_'(Ctg, _, _, _, _, _),
 		throw(error(permission_error(modify, category, Ctg), logtalk(create_category(Ctg, Relations, Directives, Clauses), ExCtx)))
 	;	'$lgt_current_object_'(Ctg, _, _, _, _, _, _, _, _, _, _),
@@ -10244,6 +10254,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(instantiation_error)
 	;	\+ callable(Obj) ->
 		throw(type_error(object_identifier, Obj))
+	;	compound(Obj),
+		Obj =.. [_| Parameters],
+		'$lgt_member'(Parameter, Parameters),
+		nonvar(Parameter) ->
+		% all parameters must be variables
+		throw(type_error(variable, Parameter))
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
 		% an object with the same identifier was defined earlier in the same source file
 		throw(permission_error(modify, object, Obj))
@@ -10352,6 +10368,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(instantiation_error)
 	;	\+ callable(Ctg) ->
 		throw(type_error(category_identifier, Ctg))
+	;	compound(Ctg),
+		Ctg =.. [_| Parameters],
+		'$lgt_member'(Parameter, Parameters),
+		nonvar(Parameter) ->
+		% all parameters must be variables
+		throw(type_error(variable, Parameter))
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Ctg, _, _, _, _, _, _, _, _, _, _)) ->
 		% an object with the same identifier was defined earlier in the same source file
 		throw(permission_error(modify, object, Ctg))
@@ -20421,13 +20443,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% non-parametric entity
 	!.
 
-'$lgt_save_parameter_variables'(Entity, _) :-
-	% all parameters must be variables
-	Entity =.. [_| Parameters],
-	'$lgt_member'(Parameter, Parameters),
-	nonvar(Parameter),
-	throw(type_error(variable, Parameter)).
-
 '$lgt_save_parameter_variables'(_, Ctx) :-
 	'$lgt_pp_term_source_data_'(_, VariableNames, Singletons, _, _),
 	'$lgt_parameter_variable_pairs'(VariableNames, Singletons, 1, ParameterVariablePairs, Ctx),
@@ -20519,20 +20534,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 % functor prefixes used in the compiled code clauses
 
 '$lgt_compile_object_identifier'(Obj, Ctx) :-
-	(	atom(Obj) ->
-		GObj = Obj
-	;	% parametric object
-		'$lgt_term_template'(Obj, GObj)
-	),
-	'$lgt_add_referenced_object'(GObj, Ctx),
+	'$lgt_add_referenced_object'(Obj, Ctx),
 	(	'$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
-		'$lgt_construct_ic_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
+		'$lgt_construct_ic_functors'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
 	;	'$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
-		'$lgt_construct_ic_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
-	;	'$lgt_construct_prototype_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
+		'$lgt_construct_ic_functors'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
+	;	'$lgt_construct_prototype_functors'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
 	),
 	% the object flags are only computed at the end of the entity compilation
-	assertz('$lgt_pp_object_'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, _)),
+	assertz('$lgt_pp_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, _)),
 	% provide quick access to some common used data on the entity being compiled
 	assertz('$lgt_pp_entity_'(object, Obj, Prefix)),
 	% initialize the predicate mutex counter
@@ -20546,15 +20556,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % functor prefixes used in the compiled code clauses
 
 '$lgt_compile_category_identifier'(Ctg, Ctx) :-
-	(	atom(Ctg) ->
-		GCtg = Ctg
-	;	% parametric category
-		'$lgt_term_template'(Ctg, GCtg)
-	),
-	'$lgt_add_referenced_category'(GCtg, Ctx),
-	'$lgt_construct_category_functors'(GCtg, Prefix, Dcl, Def, Rnm),
+	'$lgt_add_referenced_category'(Ctg, Ctx),
+	'$lgt_construct_category_functors'(Ctg, Prefix, Dcl, Def, Rnm),
 	% the category flags are only computed at the end of the entity compilation
-	assertz('$lgt_pp_category_'(GCtg, Prefix, Dcl, Def, Rnm, _)),
+	assertz('$lgt_pp_category_'(Ctg, Prefix, Dcl, Def, Rnm, _)),
 	% provide quick access to some common used data on the entity being compiled
 	assertz('$lgt_pp_entity_'(category, Ctg, Prefix)),
 	% initialize the predicate mutex counter

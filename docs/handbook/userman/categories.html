@@ -757,11 +757,14 @@ similar to calling the category predicate using a message to <a class="reference
 <section id="parametric-categories">
 <span id="categories-parametric"></span><h2>Parametric categories<a class="headerlink" href="#parametric-categories" title="Link to this heading"></a></h2>
 <p>Category predicates can be parameterized in the same way as object predicates
-by using a compound term as the category identifier where all the arguments
-of the compound term are variables. These variables, the <em>category parameters</em>,
-can be accessed by calling the <a class="reference internal" href="../refman/methods/parameter_2.html#methods-parameter-2"><span class="std std-ref">parameter/2</span></a> or
-<a class="reference internal" href="../refman/methods/this_1.html#methods-this-1"><span class="std std-ref">this/1</span></a> built-in local methods in the category predicate
+by using a compound term as the category identifier where all the arguments of
+the compound term are variables. These variables, the <em>category parameters</em>,
+are <em>logical variables</em> and can be accessed by calling the <a class="reference internal" href="../refman/methods/parameter_2.html#methods-parameter-2"><span class="std std-ref">parameter/2</span></a>
+or <a class="reference internal" href="../refman/methods/this_1.html#methods-this-1"><span class="std std-ref">this/1</span></a> built-in local methods in the category predicate
 clauses or by using <a class="reference internal" href="../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variables</span></a>.</p>
+<p>As a consequence of parameters being logical variables, when defining, for
+example, a parametric category named <code class="docutils literal notranslate"><span class="pre">foo/1</span></code>, <code class="docutils literal notranslate"><span class="pre">foo(bar)</span></code> and <code class="docutils literal notranslate"><span class="pre">foo(baz)</span></code>
+are different parameterizations of the same category, not distinct categories.</p>
 <p>Category parameter values can be defined by the importing objects.
 For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(speech(<span class="nv">Season</span>, <span class="nv">Event</span>),
