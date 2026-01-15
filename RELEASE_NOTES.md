@@ -47,6 +47,8 @@ a predicate redefinition warning when this library is imported.
 Documentation
 -------------
 
+* IMPROVED: Man page for the `logtalk_tester` script.
+
 * IMPROVED: The Handbook documentation on parametric categories and objects.
 
 * UPDATED: The Handbook documentation of the `create_category/4` and

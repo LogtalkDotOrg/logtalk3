@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "November 16, 2025" "Logtalk 3.96.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "January 15, 2026" "Logtalk 3.98.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -81,7 +81,7 @@ Integration script command-line options (no default).
 Initialization goal. Default is \fItrue\fR (no period). Called after loading the Logtalk compiler/runtime and before running the tests.
 .TP
 .BI \-r
-Random generator starting seed (no default).
+Random generator starting seed (no default). Only meaningful when running property-based tests (aka QuickCheck). The seed must be a valid value for the portable random generator provided by the \fIrandom\fR library.
 .TP
 .BI \-w
 Wipe test set default scratch directories (\fI./.lgt_tmp\fR and \fI./lgt_tmp\fR) before running it. This option should not be used when running parallel processes that use the same test sets.
