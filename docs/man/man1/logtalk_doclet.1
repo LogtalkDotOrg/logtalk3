@@ -1,4 +1,4 @@
-.TH logtalk_doclet 1 "November 16, 2025" "Logtalk 3.96.0" "Logtalk Documentation"
+.TH logtalk_doclet 1 "January 15, 2026" "Logtalk 3.98.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_doclet \- Logtalk script for automating running doclets
@@ -74,6 +74,9 @@ Specifies the location of the Logtalk user directory.
 .TP
 .BI $LOGTALKUSER/library/tester_versions.lgt
 Logtalk source file used for printing the Logtalk and backend Prolog compiler versions.
+.TP
+.BI ./logtalk_doclet_logs
+Default directory created with logs resulting from running the doclets. In the case of a broken doclet or a crash while running a doclet, the files in this directory may provided useful information for debugging the problem.
 
 .SH "SEE ALSO"
 The Logtalk website at https://logtalk.org/
