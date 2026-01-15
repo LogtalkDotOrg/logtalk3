@@ -47,6 +47,8 @@ a predicate redefinition warning when this library is imported.
 Documentation
 -------------
 
+* IMPROVED: Documentation of the `type::set_seed/1` library predicate.
+
 * IMPROVED: Man page for the `logtalk_tester` script.
 
 * IMPROVED: The Handbook documentation on parametric categories and objects.

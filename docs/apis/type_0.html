@@ -229,8 +229,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2:5:1</div>
-<div class="line"><strong>Date:</strong> 2024-09-26</div>
+<div class="line"><strong>Version:</strong> 2:6:0</div>
+<div class="line"><strong>Date:</strong> 2026-01-15</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -286,6 +286,7 @@
 <li><p>Character sets: When testing character or character code based terms (e.g., atom), it is possible to choose a character set (<code class="docutils literal notranslate"><span class="pre">ascii_identifier</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_printable</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_full</span></code>, <code class="docutils literal notranslate"><span class="pre">byte</span></code>, <code class="docutils literal notranslate"><span class="pre">unicode_bmp</span></code>, or <code class="docutils literal notranslate"><span class="pre">unicode_full</span></code>) using the parameterizable types.</p></li>
 <li><p>Caveats: The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.</p></li>
 <li><p>Unicode limitations: Currently, correct character/code type-checking is only ensured for SWI-Prolog and XVM as other backends do not provide support for querying a Unicode code point category.</p></li>
+<li><p>Random seed: When setting the random generator seed using the <code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code> predicate inherited from the <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> category, the seed must be a valid value for the portable random generator provided by the <code class="docutils literal notranslate"><span class="pre">random</span></code> library.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
