@@ -65,6 +65,9 @@ Library
 * FIXED: The `arbitrary` and `types` libraries for XSB which also defines the
 `epsilon/0` de facto standard arithmetic constant.
 
+* FIXED: The `types` library to avoid a portability warning when using the XVM
+backend.
+
 Tools
 -----
 

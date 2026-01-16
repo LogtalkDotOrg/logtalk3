@@ -27,9 +27,9 @@
 :- object(type).
 
 	:- info([
-		version is 2:6:0,
+		version is 2:6:1,
 		author is 'Paulo Moura',
-		date is 2026-01-15,
+		date is 2026-01-16,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -1314,6 +1314,8 @@
 	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == xvm; Dialect == swi))).
 		:- if(current_logtalk_flag(prolog_dialect, swi)).
 			:- use_module(unicode, [unicode_property/2]).
+		:- elif(current_logtalk_flag(prolog_dialect, xvm)).
+			:- uses(user, [unicode_property/2]).
 		:- endif.
 		valid_character_code(unicode_bmp, Code) :-
 			0 =< Code, Code =< 65535,
