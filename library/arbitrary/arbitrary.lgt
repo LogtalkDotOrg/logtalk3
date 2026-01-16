@@ -19,6 +19,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- if(current_logtalk_flag(prolog_dialect, swi)).
+	:- use_module(library(unicode), []).
+:- endif.
+
+
 :- category(arbitrary,
 	complements(type)).
 
@@ -1402,7 +1407,9 @@
 
 	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == xvm; Dialect == swi))).
 		:- if(current_logtalk_flag(prolog_dialect, swi)).
-			:- use_module(library(unicode), [unicode_property/2]).
+			:- use_module(unicode, [unicode_property/2]).
+		:- elif(current_logtalk_flag(prolog_dialect, xvm)).
+			:- uses(user, [unicode_property/2]).
 		:- endif.
 		arbitrary_unicode_bmp_code_point(First, Arbitrary) :-
 			repeat,
