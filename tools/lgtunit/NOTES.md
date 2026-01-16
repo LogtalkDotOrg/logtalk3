@@ -1430,6 +1430,11 @@ In the more complicated cases, it may be worth defining `loader_debug.lgt`
 and `tester_debug.lgt` driver files that load code and tests in debug mode
 and also load the debugger.
 
+When using the `logtalk_tester` automation script, some test sets can be
+reported as broken or crashed. The script creates a logs directory, by
+default named `logtalk_tester_logs`, in the same directory where the script
+was called. The log files, notably the `*.errors` files, often contain
+valuable information for debugging broken and crashed test sets.
 
 Code coverage
 -------------

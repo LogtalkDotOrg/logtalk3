@@ -53,6 +53,9 @@ Documentation
 
 * IMPROVED: The Handbook documentation on parametric categories and objects.
 
+* IMPROVED: The `lgtunit` documentation on debugging broken and crashed test
+sets.
+
 * UPDATED: The Handbook documentation of the `create_category/4` and
 `create_object/4` built-in predicate exceptions.
 

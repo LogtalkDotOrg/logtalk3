@@ -1599,6 +1599,12 @@ For example, assuming that the identifier of the test to be debugged is
 <p>In the more complicated cases, it may be worth defining
 <code class="docutils literal notranslate"><span class="pre">loader_debug.lgt</span></code> and <code class="docutils literal notranslate"><span class="pre">tester_debug.lgt</span></code> driver files that load
 code and tests in debug mode and also load the debugger.</p>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script, some test sets can
+be reported as broken or crashed. The script creates a logs directory,
+by default named <code class="docutils literal notranslate"><span class="pre">logtalk_tester_logs</span></code>, in the same directory where
+the script was called. The log files, notably the <code class="docutils literal notranslate"><span class="pre">*.errors</span></code> files,
+often contain valuable information for debugging broken and crashed test
+sets.</p>
 </section>
 <section id="code-coverage">
 <h2>Code coverage<a class="headerlink" href="#code-coverage" title="Link to this heading"></a></h2>
