@@ -23,9 +23,9 @@
 	extends(atomic)).
 
 	:- info([
-		version is 1:14:0,
+		version is 1:14:1,
 		author is 'Paulo Moura',
-		date is 2023-12-07,
+		date is 2026-01-16,
 		comment is 'Number data type predicates.'
 	]).
 
@@ -103,7 +103,8 @@
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
 		(	Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b;
-			Dialect == cx; Dialect == tau; Dialect == xvm; Dialect == trealla
+			Dialect == cx; Dialect == tau; Dialect == xsb; Dialect == xvm;
+			Dialect == trealla
 		)
 	)).
 		epsilon(Epsilon) :-

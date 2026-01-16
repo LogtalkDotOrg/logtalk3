@@ -59,6 +59,12 @@ sets.
 * UPDATED: The Handbook documentation of the `create_category/4` and
 `create_object/4` built-in predicate exceptions.
 
+Library
+-------
+
+* FIXED: The `arbitrary` and `types` libraries for XSB which also defines the
+`epsilon/0` de facto standard arithmetic constant.
+
 Tools
 -----
 

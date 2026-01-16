@@ -23,9 +23,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:35:1,
+		version is 2:35:2,
 		author is 'Paulo Moura',
-		date is 2024-08-13,
+		date is 2026-01-16,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -1160,7 +1160,8 @@
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
 		(	Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b;
-			Dialect == cx; Dialect == tau; Dialect == xvm; Dialect == trealla
+			Dialect == cx; Dialect == tau; Dialect == xsb; Dialect == xvm;
+			Dialect == trealla
 		)
 	)).
 		edge_case(float, Epsilon) :-
