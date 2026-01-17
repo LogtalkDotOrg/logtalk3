@@ -369,6 +369,9 @@
 % '$lgt_pp_final_object_initialization_'(Goal, Lines)
 :- dynamic('$lgt_pp_final_object_initialization_'/2).
 
+% '$lgt_pp_final_category_initialization_'(Goal, Lines)
+:- dynamic('$lgt_pp_final_category_initialization_'/2).
+
 % '$lgt_pp_entity_meta_directive_'(Directive, SourceData, Lines)
 :- dynamic('$lgt_pp_entity_meta_directive_'/3).
 
@@ -8827,6 +8830,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_clean_pp_category_clauses' :-
 	retractall('$lgt_pp_category_'(_, _, _, _, _, _)),
+	retractall('$lgt_pp_final_category_initialization_'(_, _)),
 	retractall('$lgt_pp_complemented_object_'(_, _, _, _, _)),
 	retractall('$lgt_pp_extended_category_'(_, _, _, _, _, _)),
 	'$lgt_clean_pp_common_object_category_clauses',
@@ -20827,7 +20831,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% ensure that a new complementing category will take preference over
 	% any previously loaded complementing category for the same object
 	'$lgt_comp_ctx_lines'(Ctx, Lines),
-	asserta('$lgt_pp_file_initialization_'(asserta('$lgt_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)), Lines)),
+	asserta('$lgt_pp_final_category_initialization_'(asserta('$lgt_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)), Lines)),
 	assertz('$lgt_pp_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)),
 	'$lgt_compile_complements_object_relation'(Objs, Ctg, Dcl, Def, Rnm, Ctx).
 
@@ -21862,14 +21866,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_predicate_calls'(compile_time),
 	'$lgt_generate_object_clauses',
 	'$lgt_generate_object_directives',
-	'$lgt_generate_file_object_initialization_goal'.
+	'$lgt_generate_object_initialization_goal'.
 
 '$lgt_generate_entity_code'(category, Ctx) :-
 	'$lgt_generate_def_table_clauses'(Ctx),
 	'$lgt_compile_predicate_calls'(compile_time),
 	'$lgt_generate_category_clauses',
 	'$lgt_generate_category_directives',
-	'$lgt_generate_file_category_initialization_goal'.
+	'$lgt_generate_category_initialization_goal'.
 
 
 
@@ -23930,7 +23934,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % generates and asserts the initialization goal for the object being compiled
 
-'$lgt_generate_file_object_initialization_goal' :-
+'$lgt_generate_object_initialization_goal' :-
 	'$lgt_pp_entity_'(_, Object, Prefix),
 	(	'$lgt_prolog_feature'(threads, supported),
 		setof(Mutex, Head^File^Lines^'$lgt_pp_synchronized_'(Head, Mutex, File, Lines), Mutexes) ->
@@ -23957,12 +23961,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % generates and asserts the initialization goal for the category being compiled
 
-'$lgt_generate_file_category_initialization_goal' :-
+'$lgt_generate_category_initialization_goal' :-
+	'$lgt_pp_entity_'(_, Category, _),
 	(	'$lgt_prolog_feature'(threads, supported),
 		setof(Mutex, Head^File^Lines^'$lgt_pp_synchronized_'(Head, Mutex, File, Lines), Mutexes) ->
-		'$lgt_pp_referenced_category_'(Category, _File, Lines),
-		assertz('$lgt_pp_file_entity_initialization_'(Category, '$lgt_create_mutexes'(Mutexes), Lines))
-	;	true
+		Goal1 = '$lgt_create_mutexes'(Mutexes)
+	;	Goal1 = true
+	),
+	% a complementing category requires initialization goals (one per complemented object)
+	(	bagof(CategoryInitGoal, Lines^'$lgt_pp_final_category_initialization_'(CategoryInitGoal, Lines), CategoryInitGoals) ->
+		'$lgt_list_to_conjunction'(CategoryInitGoals, Goal2),
+		'$lgt_remove_redundant_calls'((Goal1, Goal2), Goal)
+	;	Goal = Goal1
+	),
+	(	Goal == true ->
+		true
+	;	'$lgt_pp_referenced_category_'(Category, _File, Lines),
+		assertz('$lgt_pp_file_entity_initialization_'(Category, Goal, Lines))
 	).
 
 
@@ -23974,17 +23989,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_assert_dynamic_entity'(object) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, Rnm, _),
 	'$lgt_assert_dynamic_entity'(object, Rnm),
-	'$lgt_call_initialization_goal'.
+	'$lgt_call_initialization_goal'(object).
 
 '$lgt_assert_dynamic_entity'(protocol) :-
 	'$lgt_pp_protocol_'(_, _, _, Rnm, _),
-	'$lgt_assert_dynamic_entity'(protocol, Rnm),
-	'$lgt_call_initialization_goal'.
+	'$lgt_assert_dynamic_entity'(protocol, Rnm).
 
 '$lgt_assert_dynamic_entity'(category) :-
 	'$lgt_pp_category_'(_, _, _, _, Rnm, _),
 	'$lgt_assert_dynamic_entity'(category, Rnm),
-	'$lgt_call_initialization_goal'.
+	'$lgt_call_initialization_goal'(category).
 
 
 '$lgt_assert_dynamic_entity'(_, _) :-
@@ -24048,11 +24062,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_call_initialization_goal'
+% '$lgt_call_initialization_goal'(+entity_type)
 %
 % calls any defined initialization goals for a dynamically created entity
 
-'$lgt_call_initialization_goal' :-
+'$lgt_call_initialization_goal'(object) :-
 	(	'$lgt_prolog_feature'(threads, supported),
 		setof(Mutex, Head^File^Lines^'$lgt_pp_synchronized_'(Head, Mutex, File, Lines), Mutexes) ->
 		'$lgt_create_mutexes'(Mutexes)
@@ -24068,10 +24082,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_list_to_conjunction'(GoalList, Goals),
 		once(Goals)
 	;	true
+	).
+
+'$lgt_call_initialization_goal'(category) :-
+	(	'$lgt_prolog_feature'(threads, supported),
+		setof(Mutex, Head^File^Lines^'$lgt_pp_synchronized_'(Head, Mutex, File, Lines), Mutexes) ->
+		'$lgt_create_mutexes'(Mutexes)
+	;	true
 	),
-	% complementing categories add a file initialization goal
-	(	'$lgt_pp_file_initialization_'(InitializationGoal, _) ->
-		once(InitializationGoal)
+	% a complementing category requires initialization goals (one per complemented object)
+	(	bagof(Goal, Lines^'$lgt_pp_final_category_initialization_'(Goal, Lines), GoalList) ->
+		'$lgt_list_to_conjunction'(GoalList, Goals),
+		once(Goals)
 	;	true
 	).
 

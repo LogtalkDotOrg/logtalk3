@@ -28,11 +28,15 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* CHANGED: The `create_object/4` and `create_category/4` no longer silently
-accept (and generalize) a compound entity identifier with parameters that
-are not variables. Attempts to create a parametric entity with a non-variable
-parameter now throw a type error, consistent with the compiler behavior for
-source files defined parametric entities.
+* CHANGED: The `create_object/4` and `create_category/4` built-in predicates
+no longer silently accept (and generalize) a compound entity identifier with
+parameters that are not variables. Attempts to create a parametric entity with
+a non-variable parameter now throw a type error, consistent with the compiler
+behavior for source files defined parametric entities.
+
+* FIXED: Compiler bug where a file `initialization/1` directive calling the
+`create_object/4` built-in predicate with valid object relation arguments
+would result in a compiler error. Thanks to Paul Brown for the bug report.
 
 Prolog adapter and integration files
 ------------------------------------
