@@ -34,7 +34,7 @@
 :- else.
 
 	:- initialization((
-		write('(this example requires SWI-Prolog as the backend compiler)'), nl
+		write('(this example requires the SWI-Prolog backend running on a GUI environment)'), nl
 	)).
 
 :- endif.
