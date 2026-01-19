@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:5:1,
 		author is 'Paulo Moura',
-		date is 2022-03-30,
+		date is 2026-01-19,
 		comment is 'Unit tests for the ISO Prolog standard (^)/2 built-in function.'
 	]).
 
@@ -44,11 +44,11 @@
 	test(iso_integer_power_2_03, true(X == 27)) :-
 		{X is 3^3}.
 
-	test(iso_integer_power_2_04, true(X == 7625597484987)) :-
-		{X is 3^27}.
+	test(iso_integer_power_2_04, true(X == 134217728)) :-
+		{X is 2^27}.
 
-	test(iso_integer_power_2_05, true(X == 7625597484987)) :-
-		{X is 3^3^3}.
+	test(iso_integer_power_2_05, true(X == 134217728)) :-
+		{X is 2^3^3}.
 
 	test(iso_integer_power_2_06, error(type_error(float,2))) :-
 		{_X is 2^(-1)}.

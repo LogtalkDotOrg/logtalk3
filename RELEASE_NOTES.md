@@ -99,6 +99,9 @@ tests for the ISO Prolog standard `is/2` built-in predicate.
 tests with 32 bits systems with bounded integers. Thanks to Daniel Diaz for
 the bug report.
 
+* FIXED: The compatibility of the standard `(^)/2` function tests with 32 bits
+systems with bounded integers. Thanks to Daniel Diaz for the bug report.
+
 VCS support
 -----------
 
