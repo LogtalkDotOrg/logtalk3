@@ -75,7 +75,7 @@ The API predicates also accept a set of options for customization:
 - | ``exclude_files(Files)``
   | list of Prolog source files to exclude (default is ``[]``)
 
-- | ``exclude_directories(Files)``
+- | ``exclude_directories(Directories)``
   | list of sub-directories to exclude (default is ``[]``)
 
 - | ``include_wrapped_files(Boolean)``
