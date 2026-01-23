@@ -135,6 +135,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generating-version-1-uuids">Generating version 1 UUIDs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generating-version-4-uuids">Generating version 4 UUIDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generating-version-7-uuids">Generating version 7 UUIDs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generating-the-null-uuid">Generating the null UUID</a></li>
 </ul>
 </li>
@@ -183,16 +184,21 @@
   <section id="uuid">
 <span id="library-uuid"></span><h1><code class="docutils literal notranslate"><span class="pre">uuid</span></code><a class="headerlink" href="#uuid" title="Link to this heading"></a></h1>
 <p>This library implements a Universally Unique Identifier (UUID)
-generator. Currently only version 1 and version 4 UUIDs are supported.
-For reference material, see e.g.</p>
+generator. Currently version 1, version 4, and version 7 UUIDs are
+supported. For reference material, see e.g.</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Universally_unique_identifier">https://en.wikipedia.org/wiki/Universally_unique_identifier</a></p>
 <p>Some backends provide time stamps with low granularity (e.g., seconds
 but not milliseconds or nanoseconds). To compensate, the generation of
 version 1 UUIDs uses 14 random bits for the clock sequence.</p>
-<p>The generation of version 4 UUIDs uses the <code class="docutils literal notranslate"><span class="pre">/dev/urandom</span></code> random
-number generator when available. This includes macOS, Linux, *BSD, and
-other POSIX operating-systems. On Windows, a pseudo-random generator is
-used, but randomized using the current wall time.</p>
+<p>The generation of version 4 and version 7 UUIDs uses the
+<code class="docutils literal notranslate"><span class="pre">/dev/urandom</span></code> random number generator when available. This includes
+macOS, Linux, *BSD, and other POSIX operating-systems. On Windows, a
+pseudo-random generator is used, but randomized using the current wall
+time.</p>
+<p>Version 7 UUIDs are time-ordered using a Unix Epoch timestamp in
+milliseconds, as specified in RFC 9562. They are recommended over
+version 1 UUIDs for new applications due to improved entropy and
+sortability characteristics.</p>
 <p>UUIDs can be generated as atoms, lists of characters, or lists of
 character codes.</p>
 <p>See also the <code class="docutils literal notranslate"><span class="pre">ids</span></code> and <code class="docutils literal notranslate"><span class="pre">ulid</span></code> libraries.</p>
@@ -260,6 +266,32 @@ yes
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> uuid(codes)<span class="o">::</span>uuid_v4(<span class="nv">UUID</span>).
 <span class="nv">UUID</span> <span class="o">=</span> [<span class="m">102</span>,<span class="m">97</span>,<span class="m">52</span>,<span class="m">54</span>,<span class="m">57</span>,<span class="m">98</span>,<span class="m">100</span>,<span class="m">50</span>,<span class="m">45</span>,<span class="m">51</span>,<span class="m">57</span>,<span class="m">54</span>,<span class="m">51</span>,<span class="m">45</span>,<span class="m">52</span>,<span class="m">97</span>,<span class="m">100</span>,<span class="m">55</span>,<span class="m">45</span>,
         <span class="m">98</span>,<span class="m">50</span>,<span class="m">50</span>,<span class="m">55</span>,<span class="m">45</span>,<span class="m">101</span>,<span class="m">100</span>,<span class="m">52</span>,<span class="m">99</span>,<span class="m">56</span>,<span class="m">55</span>,<span class="m">99</span>,<span class="m">54</span>,<span class="m">53</span>,<span class="m">55</span>,<span class="m">102</span>,<span class="m">98</span>]
+yes
+</pre></div>
+</div>
+</section>
+<section id="generating-version-7-uuids">
+<h2>Generating version 7 UUIDs<a class="headerlink" href="#generating-version-7-uuids" title="Link to this heading"></a></h2>
+<p>Version 7 UUIDs are time-ordered using the Unix Epoch timestamp in
+milliseconds (as specified in RFC 9562). By default, version 7 UUIDs are
+generated as atoms. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> uuid<span class="o">::</span>uuid_v7(<span class="nv">UUID</span>).
+<span class="nv">UUID</span> <span class="o">=</span> <span class="s">&#39;018d5f3c-9b5a-7c4e-8f2a-1b3c4d5e6f70&#39;</span>
+yes
+</pre></div>
+</div>
+<p>To generate a UUID using a list of characters representation, use
+instead the <code class="docutils literal notranslate"><span class="pre">uuid/1</span></code> parametric object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> uuid(chars)<span class="o">::</span>uuid_v7(<span class="nv">UUID</span>).
+<span class="nv">UUID</span> <span class="o">=</span> [<span class="s">&#39;0&#39;</span>,<span class="s">&#39;1&#39;</span>,<span class="s">&#39;8&#39;</span>,d,<span class="s">&#39;5&#39;</span>,f,<span class="s">&#39;3&#39;</span>,c,<span class="o">-</span>,<span class="s">&#39;9&#39;</span>,b,<span class="s">&#39;5&#39;</span>,a,<span class="o">-</span>,<span class="s">&#39;7&#39;</span>,c,<span class="s">&#39;4&#39;</span>,<span class="o">e</span>,<span class="o">-</span>,
+        <span class="s">&#39;8&#39;</span>,f,<span class="s">&#39;2&#39;</span>,a,<span class="o">-</span>,<span class="s">&#39;1&#39;</span>,b,<span class="s">&#39;3&#39;</span>,c,<span class="s">&#39;4&#39;</span>,d,<span class="s">&#39;5&#39;</span>,<span class="o">e</span>,<span class="s">&#39;6&#39;</span>,f,<span class="s">&#39;7&#39;</span>,<span class="s">&#39;0&#39;</span>]
+yes
+</pre></div>
+</div>
+<p>Similar to get a UUID using a list of character codes representation:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> uuid(codes)<span class="o">::</span>uuid_v7(<span class="nv">UUID</span>).
+<span class="nv">UUID</span> <span class="o">=</span> [<span class="m">48</span>,<span class="m">49</span>,<span class="m">56</span>,<span class="m">100</span>,<span class="m">53</span>,<span class="m">102</span>,<span class="m">51</span>,<span class="m">99</span>,<span class="m">45</span>,<span class="m">57</span>,<span class="m">98</span>,<span class="m">53</span>,<span class="m">97</span>,<span class="m">45</span>,<span class="m">55</span>,<span class="m">99</span>,<span class="m">52</span>,<span class="m">101</span>,<span class="m">45</span>,
+        <span class="m">56</span>,<span class="m">102</span>,<span class="m">50</span>,<span class="m">97</span>,<span class="m">45</span>,<span class="m">49</span>,<span class="m">98</span>,<span class="m">51</span>,<span class="m">99</span>,<span class="m">52</span>,<span class="m">100</span>,<span class="m">53</span>,<span class="m">101</span>,<span class="m">54</span>,<span class="m">102</span>,<span class="m">55</span>,<span class="m">48</span>]
 yes
 </pre></div>
 </div>

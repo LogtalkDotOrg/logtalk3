@@ -4,8 +4,8 @@
 ========
 
 This library implements a Universally Unique Identifier (UUID)
-generator. Currently only version 1 and version 4 UUIDs are supported.
-For reference material, see e.g.
+generator. Currently version 1, version 4, and version 7 UUIDs are
+supported. For reference material, see e.g.
 
 https://en.wikipedia.org/wiki/Universally_unique_identifier
 
@@ -13,10 +13,16 @@ Some backends provide time stamps with low granularity (e.g., seconds
 but not milliseconds or nanoseconds). To compensate, the generation of
 version 1 UUIDs uses 14 random bits for the clock sequence.
 
-The generation of version 4 UUIDs uses the ``/dev/urandom`` random
-number generator when available. This includes macOS, Linux, \*BSD, and
-other POSIX operating-systems. On Windows, a pseudo-random generator is
-used, but randomized using the current wall time.
+The generation of version 4 and version 7 UUIDs uses the
+``/dev/urandom`` random number generator when available. This includes
+macOS, Linux, \*BSD, and other POSIX operating-systems. On Windows, a
+pseudo-random generator is used, but randomized using the current wall
+time.
+
+Version 7 UUIDs are time-ordered using a Unix Epoch timestamp in
+milliseconds, as specified in RFC 9562. They are recommended over
+version 1 UUIDs for new applications due to improved entropy and
+sortability characteristics.
 
 UUIDs can be generated as atoms, lists of characters, or lists of
 character codes.
@@ -106,6 +112,38 @@ Similar to get a UUID using a list of character codes representation:
    | ?- uuid(codes)::uuid_v4(UUID).
    UUID = [102,97,52,54,57,98,100,50,45,51,57,54,51,45,52,97,100,55,45,
            98,50,50,55,45,101,100,52,99,56,55,99,54,53,55,102,98]
+   yes
+
+Generating version 7 UUIDs
+--------------------------
+
+Version 7 UUIDs are time-ordered using the Unix Epoch timestamp in
+milliseconds (as specified in RFC 9562). By default, version 7 UUIDs are
+generated as atoms. For example:
+
+::
+
+   | ?- uuid::uuid_v7(UUID).
+   UUID = '018d5f3c-9b5a-7c4e-8f2a-1b3c4d5e6f70'
+   yes
+
+To generate a UUID using a list of characters representation, use
+instead the ``uuid/1`` parametric object:
+
+::
+
+   | ?- uuid(chars)::uuid_v7(UUID).
+   UUID = ['0','1','8',d,'5',f,'3',c,-,'9',b,'5',a,-,'7',c,'4',e,-,
+           '8',f,'2',a,-,'1',b,'3',c,'4',d,'5',e,'6',f,'7','0']
+   yes
+
+Similar to get a UUID using a list of character codes representation:
+
+::
+
+   | ?- uuid(codes)::uuid_v7(UUID).
+   UUID = [48,49,56,100,53,102,51,99,45,57,98,53,97,45,55,99,52,101,45,
+           56,102,50,97,45,49,98,51,99,52,100,53,101,54,102,55,48]
    yes
 
 Generating the null UUID

@@ -22,9 +22,9 @@
 :- protocol(uuid_protocol).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2021-03-13,
+		date is 2026-01-23,
 		comment is 'Universally unique identifier (UUID) generator protocol.'
 	]).
 
@@ -39,6 +39,13 @@
 	:- mode(uuid_v4(--ground), one).
 	:- info(uuid_v4/1, [
 		comment is 'Returns a version 4 UUID.',
+		argnames is ['UUID']
+	]).
+
+	:- public(uuid_v7/1).
+	:- mode(uuid_v7(--ground), one).
+	:- info(uuid_v7/1, [
+		comment is 'Returns a version 7 UUID.',
 		argnames is ['UUID']
 	]).
 

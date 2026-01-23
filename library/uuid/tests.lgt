@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
-		date is 2021-03-13,
+		date is 2026-01-23,
 		comment is 'Unit tests for the "uuid" library.'
 	]).
 
@@ -34,6 +34,7 @@
 
 	quick_check(uuid_v1_valid, uuid_v1_valid(+list(byte,6), -chars)).
 	quick_check(uuid_v4_valid, uuid_v4_valid(-chars)).
+	quick_check(uuid_v7_valid, uuid_v7_valid(-chars)).
 
 	test(uuid_null_atom, true(atom(UUID))) :-
 		uuid(atom)::uuid_null(UUID).
@@ -73,6 +74,19 @@
 		],
 		Dash == ('-'),
 		Version == '4',
+		once((Hex == '8'; Hex == '9'; Hex == 'a'; Hex == 'b')).
+
+	uuid_v7_valid(UUID) :-
+		uuid(chars)::uuid_v7(UUID),
+		UUID = [
+			_, _, _, _, _, _, _, _, Dash,
+			_, _, _, _, Dash,
+			Version, _, _, _, Dash,
+			Hex, _, _, _, Dash,
+			_, _, _, _, _, _, _, _, _, _, _, _
+		],
+		Dash == ('-'),
+		Version == '7',
 		once((Hex == '8'; Hex == '9'; Hex == 'a'; Hex == 'b')).
 
 :- end_object.

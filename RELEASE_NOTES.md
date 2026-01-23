@@ -76,6 +76,8 @@ work and libraries.
 libraries. These types support representing text using atoms, character 
 lists, or character code lists.
 
+* UPDATED: The `uuid` library to also support version 7 UUIDs.
+
 * FIXED: The `arbitrary` and `types` libraries for XSB which also defines the
 `epsilon/0` de facto standard arithmetic constant.
 

@@ -23,9 +23,9 @@
 	implements(uuid_protocol)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2022-11-23,
+		date is 2026-01-23,
 		comment is 'Universally unique identifier (UUID) generator.',
 		parameters is [
 			'Representation' - 'Text representation for the UUID. Possible values are ``atom``, ``chars``, and ``codes``.'
@@ -81,6 +81,42 @@
 				[TimeHiAndVersion, Byte8],
 				[ClockSeqHi, Byte10],
 				[Byte11, Byte12, Byte13, Byte14, Byte15, Byte16]
+			),
+			Codes
+		),
+		codes_to_uuid(_Representation_, Codes, UUID).
+
+	uuid_v7(UUID) :-
+		% get Unix timestamp in milliseconds
+		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds),
+		% calculate days since Unix epoch (1970-01-01)
+		iso8601::date(UnixEpoch, 1970, 1, 1),
+		iso8601::date(Current, Year, Month, Day),
+		DaysSinceEpoch is Current - UnixEpoch,
+		% calculate total milliseconds since Unix epoch
+		UnixTimestampMs is DaysSinceEpoch * 86400000 + Hours * 3600000 + Minutes * 60000 + Seconds * 1000 + Milliseconds,
+		% extract 6 bytes from the 48-bit timestamp (big-endian)
+		Byte1 is (UnixTimestampMs >> 40) /\ 0xff,
+		Byte2 is (UnixTimestampMs >> 32) /\ 0xff,
+		Byte3 is (UnixTimestampMs >> 24) /\ 0xff,
+		Byte4 is (UnixTimestampMs >> 16) /\ 0xff,
+		Byte5 is (UnixTimestampMs >> 8) /\ 0xff,
+		Byte6 is UnixTimestampMs /\ 0xff,
+		% get random bytes for rand_a (12 bits in Byte7-Byte8) and rand_b (62 bits in Byte9-Byte16)
+		random_bytes(10, [RandByte7, RandByte8, RandByte9, RandByte10, RandByte11, RandByte12, RandByte13, RandByte14, RandByte15, RandByte16]),
+		% set version 7 in the high nibble of Byte7: version = 0b0111 (7)
+		Byte7 is 0b01110000 \/ (RandByte7 /\ 0b00001111),
+		% Byte8 is all rand_a
+		Byte8 is RandByte8,
+		% set variant in the high 2 bits of Byte9: variant = 0b10
+		Byte9 is 0b10000000 \/ (RandByte9 /\ 0b00111111),
+		phrase(
+			bytes_to_uuid(
+				[Byte1, Byte2, Byte3, Byte4],
+				[Byte5, Byte6],
+				[Byte7, Byte8],
+				[Byte9, RandByte10],
+				[RandByte11, RandByte12, RandByte13, RandByte14, RandByte15, RandByte16]
 			),
 			Codes
 		),

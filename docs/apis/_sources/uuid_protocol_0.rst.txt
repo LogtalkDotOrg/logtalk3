@@ -14,8 +14,8 @@ Universally unique identifier (UUID) generator protocol.
 |    ``logtalk_load(uuid(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:3:0
-| **Date:** 2021-03-13
+| **Version:** 0:4:0
+| **Date:** 2026-01-23
 
 | **Compilation flags:**
 |    ``static``
@@ -72,6 +72,25 @@ Returns a version 4 UUID.
 |    ``uuid_v4(UUID)``
 | **Mode and number of proofs:**
 |    ``uuid_v4(--ground)`` - ``one``
+
+
+------------
+
+.. index:: uuid_v7/1
+.. _uuid_protocol/0::uuid_v7/1:
+
+``uuid_v7/1``
+^^^^^^^^^^^^^
+
+Returns a version 7 UUID.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``uuid_v7(UUID)``
+| **Mode and number of proofs:**
+|    ``uuid_v7(--ground)`` - ``one``
 
 
 ------------
