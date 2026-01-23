@@ -70,6 +70,7 @@
 		cbor(loader),
 		ccsds(loader),
 		base64(loader),
+		url(loader),
 		ulid(loader),
 		uuid(loader),
 		html(loader),

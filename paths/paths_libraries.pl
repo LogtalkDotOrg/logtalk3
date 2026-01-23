@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on December 7, 2025
+%  Last updated on January 22, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -88,5 +88,6 @@ logtalk_library_path(tsv, library('tsv/')).
 logtalk_library_path(types, library('types/')).
 logtalk_library_path(ulid, library('ulid/')).
 logtalk_library_path(union_find, library('union_find/')).
+logtalk_library_path(url, library('url/')).
 logtalk_library_path(uuid, library('uuid/')).
 logtalk_library_path(zippers, library('zippers/')).

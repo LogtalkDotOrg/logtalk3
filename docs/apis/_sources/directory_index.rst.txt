@@ -772,6 +772,16 @@ To load an entity, always load the library that includes it using the goal ``log
    union_find <union_find_0>
    union_find_protocol <union_find_protocol_0>
 
+``library/url/``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   url(Representation) <url_1>
+
 ``library/uuid/``
 -----------------
 

@@ -66,6 +66,9 @@ sets.
 Library
 -------
 
+* ADDED: New `url` library with predicates for validating, parsing, generating,
+and normalizing URLs.
+
 * FIXED: The `arbitrary` and `types` libraries for XSB which also defines the
 `epsilon/0` de facto standard arithmetic constant.
 

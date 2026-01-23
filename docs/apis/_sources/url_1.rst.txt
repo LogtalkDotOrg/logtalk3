@@ -1,0 +1,150 @@
+.. index:: single: url(Representation)
+.. _url/1:
+
+.. rst-class:: right
+
+**object**
+
+``url(Representation)``
+=======================
+
+* ``Representation`` - URL and is components representation. Valid values are ``atom``, ``codes``, and ``chars``.
+
+
+URL validating, parsing, and normalizing predicates following RFC3986 nomenclature.
+
+| **Availability:** 
+|    ``logtalk_load(url(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-01-22
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: valid/1
+.. _url/1::valid/1:
+
+``valid/1``
+^^^^^^^^^^^
+
+True iff the argument is a valid URL, including optional query and fragment components.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid(URL)``
+| **Mode and number of proofs:**
+|    ``valid(++text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: parse/2
+.. _url/1::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses a URL into a list of its components: ``[scheme(Scheme), authority(Authority), path(Path), query(Query), fragment(Fragment)]``. Fails if the URL is invalid and cannot be parsed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(URL,Components)``
+| **Mode and number of proofs:**
+|    ``parse(++text,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: generate/2
+.. _url/1::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates a URL from a list of its components: ``[scheme(Scheme), authority(Authority), path(Path), query(Query), fragment(Fragment)]`` for standard URLs, or scheme-specific components for mailto, news, tel, and urn URLs. Fails if the components are invalid.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Components,URL)``
+| **Mode and number of proofs:**
+|    ``generate(++list(compound),-text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: normalize/2
+.. _url/1::normalize/2:
+
+``normalize/2``
+^^^^^^^^^^^^^^^
+
+Normalizes a URL by standardizing its components. Normalization includes converting scheme and authority to lowercase, ensuring proper path separators, and handling relative paths.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize(URL,NormalizedURL)``
+| **Mode and number of proofs:**
+|    ``normalize(++text,-text)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: downcase_text/2
+.. _url/1::downcase_text/2:
+
+``downcase_text/2``
+^^^^^^^^^^^^^^^^^^^
+
+Converts text to lowercase (ASCII only). Only uppercase letters A-Z are converted to lowercase.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``downcase_text(Text,LowerText)``
+| **Mode and number of proofs:**
+|    ``downcase_text(+text,-text)`` - ``one``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

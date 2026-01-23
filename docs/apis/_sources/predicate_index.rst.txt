@@ -3657,6 +3657,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`json_protocol <json_protocol/0::generate/2>`
 * :ref:`toon_protocol <toon_protocol/0::generate/2>`
 * :ref:`ulid_protocol <ulid_protocol/0::generate/2>`
+* :ref:`url(Representation) <url/1::generate/2>`
 
 ``generate/3``
 --------------
@@ -6162,6 +6163,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`html <html/0::normal_element/2>`
 
+``normalize/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`url(Representation) <url/1::normalize/2>`
+
 ``normalize_range/2``
 ---------------------
 
@@ -6755,6 +6766,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`json_lines_protocol <json_lines_protocol/0::parse/2>`
 * :ref:`json_protocol <json_protocol/0::parse/2>`
 * :ref:`toon_protocol <toon_protocol/0::parse/2>`
+* :ref:`url(Representation) <url/1::parse/2>`
 * :ref:`xml <xml/0::parse/2>`
 
 ``parse/3``
@@ -9735,6 +9747,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`intervalp <intervalp/0::valid/1>`
 * :ref:`statisticsp <statisticsp/0::valid/1>`
 * :ref:`termp <termp/0::valid/1>`
+* :ref:`url(Representation) <url/1::valid/1>`
 * :ref:`varlistp <varlistp/0::valid/1>`
 
 ``valid/2``

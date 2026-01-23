@@ -85,5 +85,6 @@ directory in the ``NOTES.md`` file.
    ulid
    unicode_data
    union_find
+   url
    uuid
    zippers
