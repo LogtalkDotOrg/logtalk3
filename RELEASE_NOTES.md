@@ -72,6 +72,10 @@ and normalizing URLs.
 * ADDED: New `strings` compatibility library. Based on ECLiPSe and SWI-Prolog
 work and libraries.
 
+* ADDED: Types `text` and `text(CharSet)` to the `arbitrary` and `types`
+libraries. These types support representing text using atoms, character 
+lists, or character code lists.
+
 * FIXED: The `arbitrary` and `types` libraries for XSB which also defines the
 `epsilon/0` de facto standard arithmetic constant.
 

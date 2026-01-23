@@ -28,9 +28,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:35:2,
+		version is 2:36:0,
 		author is 'Paulo Moura',
-		date is 2026-01-16,
+		date is 2026-01-23,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -47,7 +47,8 @@
 			'List and difference list types length' - 'The types that do not take a fixed length generate lists with a length in the ``[0,MaxSize]`` interval (``[1,MaxSize]`` for non-empty list types).',
 			'Predicate and non-terminal indicator types arity' - 'These types generate indicators with an arity in the ``[0,MaxSize]`` interval.',
 			'Other compound derived types' - '``compound(Name,Types)``, ``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``.',
-			'Other types' - '``Object::Closure``, ``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``types_frequency(Pairs)``, ``transform(Type,Closure)``, ``constrain(Type,Closure)``.',
+			'Other types' - '``text``, ``text(CharSet)``, ``Object::Closure``, ``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``types_frequency(Pairs)``, ``transform(Type,Closure)``, ``constrain(Type,Closure)``.',
+			'Types ``text`` and ``text(CharSet)`` notes' - 'Generate random text represented using either atoms, character lists, or character code lists.',
 			'Type ``Object::Closure`` notes' - 'Allows calling public object predicates as generators and shrinkers. The ``Closure`` closure is extended with either a single argument, the generated arbitrary value, or with two arguments, when shrinking a value.',
 			'Type ``compound(Name,Types)`` notes' - 'Generate a random compound term with the given name with a random argument for each type.',
 			'Type ``types_frequency(Pairs)`` notes' - 'Generate a random term for one of the types in a list of ``Type-Frequency`` pairs. The type is randomly selected taking into account the types frequency.',
@@ -240,6 +241,8 @@
 	arbitrary(between(_Type, _Lower, _Upper)).
 	arbitrary(property(_Type, _LambdaExpression)).
 	% other types
+	arbitrary(text).
+	arbitrary(text(_CharSet)).
 	arbitrary(_Object::_Closure).
 	arbitrary(one_of(_Type, _Set)).
 	arbitrary(var_or(_Type)).
@@ -710,6 +713,12 @@
 		arbitrary(Type, Arbitrary),
 		{once(Goal)}.
 
+	arbitrary(text, Arbitrary) :-
+		arbitrary(types([atom, list(character), list(character_code)]), Arbitrary).
+
+	arbitrary(text(CharSet), Arbitrary) :-
+		arbitrary(types([atom(CharSet), list(character(CharSet)), list(character_code(CharSet))]), Arbitrary).
+
 	arbitrary(Object::Closure, Arbitrary) :-
 		(	call(Object::Closure, Arbitrary) ->
 			true
@@ -810,6 +819,8 @@
 	shrinker(pair).
 	shrinker(pair(_KeyType, _ValueType)).
 	% other types
+	shrinker(text).
+	shrinker(text(_CharSet)).
 	shrinker(_Object::_Closure).
 	shrinker(var_or(_Type)).
 	shrinker(ground(_Type)).
@@ -1057,6 +1068,12 @@
 
 	shrink(ground(Type), Large, Small) :-
 		shrink(Type, Large, Small).
+
+	shrink(text, Large, Small) :-
+		shrink(types([atom, list(character), list(character_code)]), Large, Small).
+
+	shrink(text(CharSet), Large, Small) :-
+		shrink(types([atom(CharSet), list(character(CharSet)), list(character_code(CharSet))]), Large, Small).
 
 	shrink(Object::Closure, Large, Small) :-
 		(	call(Object::Closure, Large, Small) ->

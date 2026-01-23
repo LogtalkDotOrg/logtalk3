@@ -27,9 +27,9 @@
 :- object(type).
 
 	:- info([
-		version is 2:6:1,
+		version is 2:7:0,
 		author is 'Paulo Moura',
-		date is 2026-01-16,
+		date is 2026-01-23,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -45,12 +45,13 @@
 			'Difference list types (compound derived types)' - '``difference_list``, ``difference_list(Type)``.',
 			'Other compound derived types' - '``compound(Name,Types)``, ``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``, ``cyclic``, ``acyclic``.',
 			'Stream types' - '``stream``, ``stream_or_alias``, ``stream(Property)``, ``stream_or_alias(Property)``.',
-			'Other types' - '``Object::Closure``, ``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``constrain(Type,Closure)``, ``type``.',
+			'Other types' - '``text``, ``text(CharSet)``, ``Object::Closure``, ``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``constrain(Type,Closure)``, ``type``.',
 			'Type ``predicate`` notes' - 'This type is used to check for an object public predicate specified as ``Object::Functor/Arity``.',
 			'Type ``boolean`` notes' - 'The two value of this type are the atoms ``true`` and ``false``.',
 			'Stream types notes' - 'In the case of the ``stream(Property)`` and ``stream_or_alias(Property)`` types, Property must be a valid stream property.',
 			'Type ``order`` notes' - 'The three possible values of this type are the single character atoms ``<``, ``=``, and ``>``.',
 			'Type ``character_code`` notes' - 'This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.',
+			'Types ``text`` and ``text(CharSet)`` notes' - 'These types allow text to be represented using atoms, character lists, or character code lists.',
 			'Type ``Object::Closure`` notes' - 'Allows calling a public object predicate for type-checking. The predicate should provide ``valid/2`` predicate semantics and assume called with a bound argument. The ``Closure`` closure is extended with a single argument, the value to be checked.',
 			'Type ``compound(Name,Types)`` notes' - 'This type verifies that a compound term have the given ``Name`` and its arguments conform to ``Types``.',
 			'Type ``between(Type, Lower, Upper)`` notes' - 'The type argument allows distinguishing between numbers and other types. It also allows choosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.',
@@ -231,6 +232,8 @@
 	type(stream).
 	type(stream(_Type)).
 	% other types
+	type(text).
+	type(text(_Charset)).
 	type(_Object::_Closure).
 	type(one_of(_Type, _Set)).
 	type(var_or(_Type)).
@@ -1193,6 +1196,34 @@
 		).
 
 	% other types
+
+	check(text, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	atom(Term) ->
+			true
+		;	valid(list(character), Term) ->
+			true
+		;	valid(list(character_code), Term) ->
+			true
+		;	\+ ground(Term) ->
+			throw(instantiation_error)
+		;	throw(type_error(text, Term))
+		).
+
+	check(text(CharSet), Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	valid(atom(CharSet), Term) ->
+			true
+		;	valid(list(character(CharSet)), Term) ->
+			true
+		;	valid(list(character_code(CharSet)), Term) ->
+			true
+		;	\+ ground(Term) ->
+			throw(instantiation_error)
+		;	throw(type_error(text(CharSet), Term))
+		).
 
 	check(Object::Closure, Term) :-
 		(	var(Term) ->
