@@ -81,6 +81,7 @@ logtalk_library_path(recorded_database, library('recorded_database/')).
 logtalk_library_path(redis, library('redis/')).
 logtalk_library_path(sets, library('sets/')).
 logtalk_library_path(statistics, library('statistics/')).
+logtalk_library_path(strings, library('strings/')).
 logtalk_library_path(term_io, library('term_io/')).
 logtalk_library_path(timeout, library('timeout/')).
 logtalk_library_path(toon, library('toon/')).

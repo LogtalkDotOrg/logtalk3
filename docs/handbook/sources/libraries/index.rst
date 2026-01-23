@@ -82,6 +82,7 @@ directory in the ``NOTES.md`` file.
    toon
    tsv
    types
+   strings
    ulid
    unicode_data
    union_find

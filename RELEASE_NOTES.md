@@ -69,6 +69,9 @@ Library
 * ADDED: New `url` library with predicates for validating, parsing, generating,
 and normalizing URLs.
 
+* ADDED: New `strings` compatibility library. Based on ECLiPSe and SWI-Prolog
+work and libraries.
+
 * FIXED: The `arbitrary` and `types` libraries for XSB which also defines the
 `epsilon/0` de facto standard arithmetic constant.
 

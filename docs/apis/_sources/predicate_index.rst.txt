@@ -621,6 +621,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`assignvarsp <assignvarsp/0::assignable/2>`
 
+``atom_string/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`string(Representation) <string/1::atom_string/2>`
+
+``atomics_to_string/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`string(Representation) <string/1::atomics_to_string/2>`
+
+``atomics_to_string/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`string(Representation) <string/1::atomics_to_string/3>`
+
 ``available/0``
 ---------------
 
@@ -6377,6 +6407,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`lgtunit <lgtunit/0::number_of_tests/1>`
 
+``number_string/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`string(Representation) <string/1::number_string/2>`
+
 ``numbervars/1``
 ----------------
 
@@ -8761,6 +8801,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`listp <listp/0::split/4>`
 
+``split_string/4``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`string(Representation) <string/1::split_string/4>`
+
 ``spy/1``
 ---------
 
@@ -9031,6 +9081,76 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`reader <reader/0::stream_to_terms/3>`
+
+``string_chars/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`string(Representation) <string/1::string_chars/2>`
+
+``string_codes/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`string(Representation) <string/1::string_codes/2>`
+
+``string_concat/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`string(Representation) <string/1::string_concat/3>`
+
+``string_length/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`string(Representation) <string/1::string_length/2>`
+
+``string_lower/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`string(Representation) <string/1::string_lower/2>`
+
+``string_upper/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`string(Representation) <string/1::string_upper/2>`
+
+``sub_string/5``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`string(Representation) <string/1::sub_string/5>`
 
 ``subclass/1``
 --------------

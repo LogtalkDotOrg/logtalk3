@@ -1,0 +1,290 @@
+.. index:: single: string(Representation)
+.. _string/1:
+
+.. rst-class:: right
+
+**object**
+
+``string(Representation)``
+==========================
+
+* ``Representation`` - String representation. Valid values are ``atom``, ``codes``, and ``chars``.
+
+
+String manipulation predicates supporting different string representations.
+
+| **Availability:** 
+|    ``logtalk_load(strings(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-01-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: atom_string/2
+.. _string/1::atom_string/2:
+
+``atom_string/2``
+^^^^^^^^^^^^^^^^^
+
+Converts between an atom and a string.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``atom_string(Atom,String)``
+| **Mode and number of proofs:**
+|    ``atom_string(+atom,?text)`` - ``zero_or_one``
+|    ``atom_string(-atom,+text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: number_string/2
+.. _string/1::number_string/2:
+
+``number_string/2``
+^^^^^^^^^^^^^^^^^^^
+
+Converts between a number and a string. Fails if the string does not represent a valid number.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``number_string(Number,String)``
+| **Mode and number of proofs:**
+|    ``number_string(+number,?text)`` - ``zero_or_one``
+|    ``number_string(-number,+text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: string_chars/2
+.. _string/1::string_chars/2:
+
+``string_chars/2``
+^^^^^^^^^^^^^^^^^^
+
+Converts between a string and a list of characters.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``string_chars(String,Chars)``
+| **Mode and number of proofs:**
+|    ``string_chars(+text,?list(character))`` - ``zero_or_one``
+|    ``string_chars(-text,+list(character))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: string_codes/2
+.. _string/1::string_codes/2:
+
+``string_codes/2``
+^^^^^^^^^^^^^^^^^^
+
+Converts between a string and a list of character codes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``string_codes(String,Codes)``
+| **Mode and number of proofs:**
+|    ``string_codes(+text,?list(character_code))`` - ``zero_or_one``
+|    ``string_codes(-text,+list(character_code))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: string_concat/3
+.. _string/1::string_concat/3:
+
+``string_concat/3``
+^^^^^^^^^^^^^^^^^^^
+
+Concatenates two strings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``string_concat(String1,String2,String3)``
+| **Mode and number of proofs:**
+|    ``string_concat(+text,+text,?text)`` - ``zero_or_one``
+|    ``string_concat(?text,?text,+text)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: string_length/2
+.. _string/1::string_length/2:
+
+``string_length/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the length of a string.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``string_length(String,Length)``
+| **Mode and number of proofs:**
+|    ``string_length(+text,?integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: sub_string/5
+.. _string/1::sub_string/5:
+
+``sub_string/5``
+^^^^^^^^^^^^^^^^
+
+Extracts a substring from a string.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sub_string(String,Before,Length,After,SubString)``
+| **Mode and number of proofs:**
+|    ``sub_string(+text,?integer,?integer,?integer,?text)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: string_upper/2
+.. _string/1::string_upper/2:
+
+``string_upper/2``
+^^^^^^^^^^^^^^^^^^
+
+Converts a string to uppercase (ASCII only).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``string_upper(String,UpperString)``
+| **Mode and number of proofs:**
+|    ``string_upper(+text,?text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: string_lower/2
+.. _string/1::string_lower/2:
+
+``string_lower/2``
+^^^^^^^^^^^^^^^^^^
+
+Converts a string to lowercase (ASCII only).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``string_lower(String,LowerString)``
+| **Mode and number of proofs:**
+|    ``string_lower(+text,?text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: split_string/4
+.. _string/1::split_string/4:
+
+``split_string/4``
+^^^^^^^^^^^^^^^^^^
+
+Decomposes ``String`` into ``SubStrings`` according to separators ``SepChars`` and padding characters ``PadChars``. The string is split at the separators, and any padding characters around the resulting sub-strings are removed. Characters in both ``SepChars`` and ``PadChars`` are treated as separators where sequences count as one separator, and are ignored at string boundaries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``split_string(String,SepChars,PadChars,SubStrings)``
+| **Mode and number of proofs:**
+|    ``split_string(+text,+text,+text,-list(text))`` - ``one``
+
+
+------------
+
+.. index:: atomics_to_string/2
+.. _string/1::atomics_to_string/2:
+
+``atomics_to_string/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Concatenates the atomic terms in ``List`` into ``String``. The list may contain numbers, atoms, and strings (in the current representation).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``atomics_to_string(List,String)``
+| **Mode and number of proofs:**
+|    ``atomics_to_string(++list(atomic),-text)`` - ``one``
+
+
+------------
+
+.. index:: atomics_to_string/3
+.. _string/1::atomics_to_string/3:
+
+``atomics_to_string/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Concatenates the atomic terms in ``List`` into ``String``, with ``Separator`` inserted between each element. The list may contain numbers, atoms, and strings (in the current representation).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``atomics_to_string(List,Separator,String)``
+| **Mode and number of proofs:**
+|    ``atomics_to_string(++list(atomic),+text,-text)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -23,6 +23,7 @@
 	logtalk_load([
 		types(loader),
 		arbitrary(loader),
+		strings(loader),
 		os(loader),
 		dates(loader),
 		events(loader),
