@@ -41,6 +41,26 @@ To load any library (including developer tools, ports, and contributions), use t
    assignvars <assignvars_0>
    assignvarsp <assignvarsp_0>
 
+:ref:`base32 <library_base32>`
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   base32 <base32_0>
+
+:ref:`base58 <library_base58>`
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   base58 <base58_0>
+
 :ref:`base64 <library_base64>`
 ------------------------------
 
@@ -51,6 +71,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
    base64 <base64_0>
    base64url <base64url_0>
+
+:ref:`base85 <library_base85>`
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   base85 <base85_0>
 
 :ref:`cbor <library_cbor>`
 --------------------------

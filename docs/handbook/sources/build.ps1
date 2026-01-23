@@ -76,7 +76,10 @@ Foreach-Object {
 (Get-Content ../../../library/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/overview.rst
 (Get-Content ../../../library/arbitrary/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/arbitrary.rst
 (Get-Content ../../../library/assignvars/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/assignvars.rst
+(Get-Content ../../../library/base32/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/base32.rst
+(Get-Content ../../../library/base58/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/base58.rst
 (Get-Content ../../../library/base64/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/base64.rst
+(Get-Content ../../../library/base85/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/base85.rst
 (Get-Content ../../../library/basic_types/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/basic_types.rst
 (Get-Content ../../../library/coroutining/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/coroutining.rst
 (Get-Content ../../../library/cbor/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/cbor.rst

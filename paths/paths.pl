@@ -105,7 +105,10 @@ logtalk_library_path(wrapper, tools('wrapper/')).
 % libraries
 logtalk_library_path(arbitrary, library('arbitrary/')).
 logtalk_library_path(assignvars, library('assignvars/')).
+logtalk_library_path(base32, library('base32/')).
+logtalk_library_path(base58, library('base58/')).
 logtalk_library_path(base64, library('base64/')).
+logtalk_library_path(base85, library('base85/')).
 logtalk_library_path(basic_types, library('basic_types/')).
 logtalk_library_path(coroutining, library('coroutining/')).
 logtalk_library_path(cbor, library('cbor/')).

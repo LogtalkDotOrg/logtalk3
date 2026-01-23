@@ -127,6 +127,26 @@ To load an entity, always load the library that includes it using the goal ``log
    assignvars <assignvars_0>
    assignvarsp <assignvarsp_0>
 
+``library/base32/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   base32 <base32_0>
+
+``library/base58/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   base58 <base58_0>
+
 ``library/base64/``
 -------------------
 
@@ -137,6 +157,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    base64 <base64_0>
    base64url <base64url_0>
+
+``library/base85/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   base85 <base85_0>
 
 ``library/cbor/``
 -----------------

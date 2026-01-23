@@ -30,7 +30,10 @@ directory in the ``NOTES.md`` file.
    overview
    arbitrary
    assignvars
+   base32
+   base58
    base64
+   base85
    basic_types
    cbor
    ccsds

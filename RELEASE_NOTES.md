@@ -66,6 +66,8 @@ sets.
 Library
 -------
 
+* ADDED: New `base32`, `base58`, and `base85` libraries.
+
 * ADDED: New `url` library with predicates for validating, parsing, generating,
 and normalizing URLs.
 

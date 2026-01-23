@@ -1,0 +1,93 @@
+.. index:: single: base85
+.. _base85/0:
+
+.. rst-class:: right
+
+**object**
+
+``base85``
+==========
+
+Base85 encoder and decoder (Ascii85/btoa variant).
+
+| **Availability:** 
+|    ``logtalk_load(base85(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2025-01-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/2
+.. _base85/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses Base85 (Ascii85) data from the given source (``atom(Atom)``, ``chars(List)``, or ``codes(List)``) into a list of bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,Bytes)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,--list(byte))`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate/2
+.. _base85/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates Base85 (Ascii85) in the representation specified in the first argument (``atom(Atom)``, ``chars(List)``, or ``codes(List)``) for the list of bytes in the second argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,Bytes)``
+| **Mode and number of proofs:**
+|    ``generate(+compound,+list(byte))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
