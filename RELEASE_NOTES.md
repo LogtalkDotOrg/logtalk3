@@ -66,6 +66,9 @@ sets.
 Library
 -------
 
+* ADDED: New `avro` library implementing for parsing and generating files in
+the Apache Avro binary format.
+
 * ADDED: New `base32`, `base58`, and `base85` libraries.
 
 * ADDED: New `url` library with predicates for validating, parsing, generating,

@@ -1,0 +1,132 @@
+.. index:: single: avro
+.. _avro/0:
+
+.. rst-class:: right
+
+**object**
+
+``avro``
+========
+
+Apache Avro binary format parser and generator.
+
+| **Availability:** 
+|    ``logtalk_load(avro(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-01-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`json(ObjectRepresentation,PairRepresentation,StringRepresentation) <json/3>`
+|    :ref:`list <list/0>`
+|    :ref:`reader <reader/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/2
+.. _avro/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses Avro binary data from the given source (``bytes(List)``, ``stream(Stream)``, or ``file(Path)``) returning a ``Schema-Data`` pair. When the schema is not present in the file, ``Schema`` is unified with ``false``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,Schema-Data)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,--pair)`` - ``one_or_error``
+
+
+------------
+
+.. index:: parse/3
+.. _avro/0::parse/3:
+
+``parse/3``
+^^^^^^^^^^^
+
+Parses Avro binary data from the given source using the provided schema, returning the decoded data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,Schema,Data)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,++term,--term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate/3
+.. _avro/0::generate/3:
+
+``generate/3``
+^^^^^^^^^^^^^^
+
+Generates Avro binary data to the given sink (``bytes(List)``, ``stream(Stream)``, or ``file(Path)``) from the given schema and data. The schema is not included in the output.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,Schema,Data)``
+| **Mode and number of proofs:**
+|    ``generate(++compound,++term,++term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate/4
+.. _avro/0::generate/4:
+
+``generate/4``
+^^^^^^^^^^^^^^
+
+Generates Avro binary data to the given sink from the given schema and data. When ``IncludeSchema`` is ``true``, generates an Avro Object Container File with the schema embedded.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,IncludeSchema,Schema,Data)``
+| **Mode and number of proofs:**
+|    ``generate(++compound,++boolean,++term,++term)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

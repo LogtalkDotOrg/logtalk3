@@ -3700,7 +3700,18 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`avro <avro/0::generate/3>`
 * :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::generate/3>`
+
+``generate/4``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`avro <avro/0::generate/4>`
 
 ``generate/8``
 --------------
@@ -6802,6 +6813,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`avro <avro/0::parse/2>`
 * :ref:`base32 <base32/0::parse/2>`
 * :ref:`base58 <base58/0::parse/2>`
 * :ref:`base64 <base64/0::parse/2>`
@@ -6823,6 +6835,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`avro <avro/0::parse/3>`
 * :ref:`xml <xml/0::parse/3>`
 
 ``parse_domain/2``

@@ -30,6 +30,7 @@ directory in the ``NOTES.md`` file.
    overview
    arbitrary
    assignvars
+   avro
    base32
    base58
    base64

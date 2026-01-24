@@ -70,6 +70,7 @@
 		toon(loader),
 		cbor(loader),
 		ccsds(loader),
+		avro(loader),
 		base32(loader),
 		base58(loader),
 		base64(loader),

@@ -76,6 +76,7 @@ rm -f temp0
 sed '1,19d' ../../../library/NOTES.md | pandoc -f gfm -t rst -o libraries/overview.rst
 sed '1,19d' ../../../library/arbitrary/NOTES.md | pandoc -f gfm -t rst -o libraries/arbitrary.rst
 sed '1,19d' ../../../library/assignvars/NOTES.md | pandoc -f gfm -t rst -o libraries/assignvars.rst
+sed '1,19d' ../../../library/avro/NOTES.md | pandoc -f gfm -t rst -o libraries/avro.rst
 sed '1,19d' ../../../library/base32/NOTES.md | pandoc -f gfm -t rst -o libraries/base32.rst
 sed '1,19d' ../../../library/base58/NOTES.md | pandoc -f gfm -t rst -o libraries/base58.rst
 sed '1,19d' ../../../library/base64/NOTES.md | pandoc -f gfm -t rst -o libraries/base64.rst
