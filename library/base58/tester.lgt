@@ -19,11 +19,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load([base58], [debug(on), source_data(on)]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- if(current_prolog_flag(bounded, true)).
 
+	:- initialization((write('(not applicable)'), nl)).
+
+:- else.
+
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load([base58], [debug(on), source_data(on)]),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(tests, [hook(lgtunit)]),
+		tests::run
+	)).
+
+:- endif.

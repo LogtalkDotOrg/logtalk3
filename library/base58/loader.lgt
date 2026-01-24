@@ -19,7 +19,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load([base58], [optimize(on)])
-)).
+:- if(current_prolog_flag(bounded, false)).
 
+	:- initialization((
+		logtalk_load([base58], [optimize(on)])
+	)).
+
+:- else.
+
+	:- initialization((write('(base58 library requires unbounded integer arithmetic support from the backend Prolog compiler)'), nl)).
+
+:- endif.

@@ -15,6 +15,8 @@ The Bitcoin alphabet excludes visually ambiguous characters:
 
 Alphabet: ``123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz``
 
+This library requires a backend supporting unbounded integer arithmetic.
+
 API documentation
 -----------------
 
