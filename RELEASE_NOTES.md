@@ -81,6 +81,9 @@ work and libraries.
 libraries. These types support representing text using atoms, character 
 lists, or character code lists.
 
+* ADDED: Support for the SplitMix64, Xoshiro128++, Xoshiro128**, Xoshiro256++,
+and Xoshiro256** algorithms to the `random` library.
+
 * UPDATED: The `uuid` library to also support version 7 UUIDs.
 
 * FIXED: The `arbitrary` and `types` libraries for XSB which also defines the

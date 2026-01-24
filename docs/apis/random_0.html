@@ -32,7 +32,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="random_protocol" href="random_protocol_0.html" />
+    <link rel="next" title="random(Algorithm)" href="random_1.html" />
     <link rel="prev" title="pseudo_random_protocol" href="pseudo_random_protocol_0.html" />
    
 </head>
@@ -134,6 +134,7 @@
 <li class="toctree-l3"><a class="reference internal" href="fast_random_0.html">fast_random</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pseudo_random_protocol_0.html">pseudo_random_protocol</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="random_1.html">random(Algorithm)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="random_protocol_0.html">random_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sampling_protocol_0.html">sampling_protocol</a></li>
 </ul>
@@ -218,8 +219,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2:12:1</div>
-<div class="line"><strong>Date:</strong> 2025-04-07</div>
+<div class="line"><strong>Version:</strong> 3:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-01-24</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -228,14 +229,9 @@
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Implements:</strong></div>
+<div class="line"><strong>Extends:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="pseudo_random_protocol_0.html#pseudo-random-protocol-0"><span class="std std-ref">pseudo_random_protocol</span></a></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0"><span class="std std-ref">sampling_protocol</span></a></div>
-</div>
-<div class="line"><strong>Uses:</strong></div>
-<div class="line-block">
-<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="random_1.html#random-1"><span class="std std-ref">random(as183)</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -250,95 +246,29 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-bernoulli-2"><span class="std std-ref">bernoulli/2</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-beta-3"><span class="std std-ref">beta/3</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-between-3"><span class="std std-ref">between/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-binomial-3"><span class="std std-ref">binomial/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-chi-squared-2"><span class="std std-ref">chi_squared/2</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-circular-uniform-cartesian-3"><span class="std std-ref">circular_uniform_cartesian/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-circular-uniform-polar-3"><span class="std std-ref">circular_uniform_polar/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-dirichlet-2"><span class="std std-ref">dirichlet/2</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-enumerate-2"><span class="std std-ref">enumerate/2</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-exponential-2"><span class="std std-ref">exponential/2</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-fisher-3"><span class="std std-ref">fisher/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-gamma-3"><span class="std std-ref">gamma/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-geometric-2"><span class="std std-ref">geometric/2</span></a>  <a class="reference internal" href="pseudo_random_protocol_0.html#pseudo-random-protocol-0-get-seed-1"><span class="std std-ref">get_seed/1</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-gumbel-3"><span class="std std-ref">gumbel/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-hypergeometric-4"><span class="std std-ref">hypergeometric/4</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-logistic-3"><span class="std std-ref">logistic/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-lognormal-3"><span class="std std-ref">lognormal/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-logseries-2"><span class="std std-ref">logseries/2</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-maybe-0"><span class="std std-ref">maybe/0</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-maybe-1"><span class="std std-ref">maybe/1</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-maybe-2"><span class="std std-ref">maybe/2</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-maybe-call-1"><span class="std std-ref">maybe_call/1</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-maybe-call-2"><span class="std std-ref">maybe_call/2</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-member-2"><span class="std std-ref">member/2</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-normal-3"><span class="std std-ref">normal/3</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-permutation-2"><span class="std std-ref">permutation/2</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-poisson-2"><span class="std std-ref">poisson/2</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-power-2"><span class="std std-ref">power/2</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-random-1"><span class="std std-ref">random/1</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-random-3"><span class="std std-ref">random/3</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-randseq-4"><span class="std std-ref">randseq/4</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-randset-4"><span class="std std-ref">randset/4</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-select-3"><span class="std std-ref">select/3</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-select-4"><span class="std std-ref">select/4</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-sequence-4"><span class="std std-ref">sequence/4</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-set-4"><span class="std std-ref">set/4</span></a>  <a class="reference internal" href="pseudo_random_protocol_0.html#pseudo-random-protocol-0-set-seed-1"><span class="std std-ref">set_seed/1</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-standard-cauchy-3"><span class="std std-ref">standard_cauchy/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-standard-exponential-1"><span class="std std-ref">standard_exponential/1</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-standard-gamma-2"><span class="std std-ref">standard_gamma/2</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-standard-normal-1"><span class="std std-ref">standard_normal/1</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-standard-t-2"><span class="std std-ref">standard_t/2</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-swap-2"><span class="std std-ref">swap/2</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-swap-consecutive-2"><span class="std std-ref">swap_consecutive/2</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-triangular-4"><span class="std std-ref">triangular/4</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-uniform-1"><span class="std std-ref">uniform/1</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-uniform-3"><span class="std std-ref">uniform/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-von-mises-3"><span class="std std-ref">von_mises/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-wald-3"><span class="std std-ref">wald/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-weibull-3"><span class="std std-ref">weibull/3</span></a></div>
+<div class="line"> <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-bernoulli-2"><span class="std std-ref">bernoulli/2</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-beta-3"><span class="std std-ref">beta/3</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-between-3"><span class="std std-ref">between/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-binomial-3"><span class="std std-ref">binomial/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-chi-squared-2"><span class="std std-ref">chi_squared/2</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-circular-uniform-cartesian-3"><span class="std std-ref">circular_uniform_cartesian/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-circular-uniform-polar-3"><span class="std std-ref">circular_uniform_polar/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-dirichlet-2"><span class="std std-ref">dirichlet/2</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-enumerate-2"><span class="std std-ref">enumerate/2</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-exponential-2"><span class="std std-ref">exponential/2</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-fisher-3"><span class="std std-ref">fisher/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-gamma-3"><span class="std std-ref">gamma/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-geometric-2"><span class="std std-ref">geometric/2</span></a>  <a class="reference internal" href="pseudo_random_protocol_0.html#pseudo-random-protocol-0-get-seed-1"><span class="std std-ref">get_seed/1</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-gumbel-3"><span class="std std-ref">gumbel/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-hypergeometric-4"><span class="std std-ref">hypergeometric/4</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-logistic-3"><span class="std std-ref">logistic/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-lognormal-3"><span class="std std-ref">lognormal/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-logseries-2"><span class="std std-ref">logseries/2</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-maybe-0"><span class="std std-ref">maybe/0</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-maybe-1"><span class="std std-ref">maybe/1</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-maybe-2"><span class="std std-ref">maybe/2</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-maybe-call-1"><span class="std std-ref">maybe_call/1</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-maybe-call-2"><span class="std std-ref">maybe_call/2</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-member-2"><span class="std std-ref">member/2</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-normal-3"><span class="std std-ref">normal/3</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-permutation-2"><span class="std std-ref">permutation/2</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-poisson-2"><span class="std std-ref">poisson/2</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-power-2"><span class="std std-ref">power/2</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-random-1"><span class="std std-ref">random/1</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-random-3"><span class="std std-ref">random/3</span></a>  <a class="reference internal" href="random_1.html#random-1-randomize-1"><span class="std std-ref">randomize/1</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-randseq-4"><span class="std std-ref">randseq/4</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-randset-4"><span class="std std-ref">randset/4</span></a>  <a class="reference internal" href="random_1.html#random-1-reset-seed-0"><span class="std std-ref">reset_seed/0</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-select-3"><span class="std std-ref">select/3</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-select-4"><span class="std std-ref">select/4</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-sequence-4"><span class="std std-ref">sequence/4</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-set-4"><span class="std std-ref">set/4</span></a>  <a class="reference internal" href="pseudo_random_protocol_0.html#pseudo-random-protocol-0-set-seed-1"><span class="std std-ref">set_seed/1</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-standard-cauchy-3"><span class="std std-ref">standard_cauchy/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-standard-exponential-1"><span class="std std-ref">standard_exponential/1</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-standard-gamma-2"><span class="std std-ref">standard_gamma/2</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-standard-normal-1"><span class="std std-ref">standard_normal/1</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-standard-t-2"><span class="std std-ref">standard_t/2</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-swap-2"><span class="std std-ref">swap/2</span></a>  <a class="reference internal" href="random_protocol_0.html#random-protocol-0-swap-consecutive-2"><span class="std std-ref">swap_consecutive/2</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-triangular-4"><span class="std std-ref">triangular/4</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-uniform-1"><span class="std std-ref">uniform/1</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-uniform-3"><span class="std std-ref">uniform/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-von-mises-3"><span class="std std-ref">von_mises/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-wald-3"><span class="std std-ref">wald/3</span></a>  <a class="reference internal" href="sampling_protocol_0.html#sampling-protocol-0-weibull-3"><span class="std std-ref">weibull/3</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
-<ul>
-<li><p><a class="reference internal" href="#reset-seed-0" id="id2"><code class="docutils literal notranslate"><span class="pre">reset_seed/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#randomize-1" id="id3"><code class="docutils literal notranslate"><span class="pre">randomize/1</span></code></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id4">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id5">Private predicates</a></p>
-<ul>
-<li><p><a class="reference internal" href="#seed-3" id="id6"><code class="docutils literal notranslate"><span class="pre">seed_/3</span></code></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#operators" id="id7">Operators</a></p></li>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id4">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="reset-seed-0">
-<span id="random-0-reset-seed-0"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">reset_seed/0</span></code></a><a class="headerlink" href="#reset-seed-0" title="Link to this heading"></a></h3>
-<p>Resets the random generator seed to its default value. Use <code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code> and <code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code> instead if you need reproducibility.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">synchronized</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">reset_seed</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
-<section id="randomize-1">
-<span id="random-0-randomize-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">randomize/1</span></code></a><a class="headerlink" href="#randomize-1" title="Link to this heading"></a></h3>
-<p>Randomizes the random generator using a positive integer to compute a new seed. Use of a large integer is recommended. In alternative, when using a small integer argument, discard the first dozen random values.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">synchronized</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">randomize(Seed)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">randomize(+positive_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<section id="seed-3">
-<span id="random-0-seed-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seed_/3</span></code></a><a class="headerlink" href="#seed-3" title="Link to this heading"></a></h3>
-<p>Stores the current random generator seed values.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">seed_(S0,S1,S2)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">seed_(-integer,-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
-</section>
-<hr class="docutils" />
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
@@ -354,7 +284,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="pseudo_random_protocol_0.html" class="btn btn-neutral float-left" title="pseudo_random_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="random_protocol_0.html" class="btn btn-neutral float-right" title="random_protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="random_1.html" class="btn btn-neutral float-right" title="random(Algorithm)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
