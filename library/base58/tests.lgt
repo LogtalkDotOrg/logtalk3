@@ -77,4 +77,3 @@
 		base58::generate(atom(Base58), [0, 0, 0, 1, 2, 3]).
 
 :- end_object.
-

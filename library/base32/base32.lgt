@@ -287,4 +287,3 @@
 		write_codes(Codes, Stream).
 
 :- end_object.
-

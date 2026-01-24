@@ -89,13 +89,13 @@
 		strip_end_delimiter(Codes, Stripped).
 
 	strip_end_delimiter(Codes, Stripped) :-
-		append_(Stripped, [0'~, 0'>], Codes),
+		append(Stripped, [0'~, 0'>], Codes),
 		!.
 	strip_end_delimiter(Codes, Codes).
 
-	append_([], L, L).
-	append_([H| T], L, [H| R]) :-
-		append_(T, L, R).
+	append([], L, L).
+	append([H| T], L, [H| R]) :-
+		append(T, L, R).
 
 	% decoder - 5 Ascii85 chars decode to 4 bytes
 
@@ -220,4 +220,3 @@
 		codes_to_chars(Codes, Chars).
 
 :- end_object.
-

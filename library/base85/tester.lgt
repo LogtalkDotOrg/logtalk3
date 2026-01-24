@@ -26,4 +26,3 @@
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).
-

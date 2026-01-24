@@ -83,4 +83,3 @@
 		base85::generate(atom(Base85), [0, 0, 0, 0, 0, 0, 0, 0]).
 
 :- end_object.
-

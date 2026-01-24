@@ -110,4 +110,3 @@
 		atom_codes(Atom, Bytes).
 
 :- end_object.
-

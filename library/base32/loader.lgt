@@ -23,4 +23,3 @@
 	logtalk_load(reader(loader)),
 	logtalk_load([base32], [optimize(on)])
 )).
-

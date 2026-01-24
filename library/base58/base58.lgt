@@ -93,19 +93,21 @@
 		N is N1 + 1.
 	count_leading(Codes, _, 0, Codes).
 
-	codes_to_number([], Acc, Acc).
-	codes_to_number([Code| Codes], Acc, Number) :-
+	codes_to_number([], Number, Number).
+	codes_to_number([Code| Codes], Number0, Number) :-
 		code_to_index(Code, Index),
-		Acc1 is Acc * 58 + Index,
-		codes_to_number(Codes, Acc1, Number).
+		Number1 is Number0 * 58 + Index,
+		codes_to_number(Codes, Number1, Number).
 
-	number_to_bytes(0, Bytes, Bytes) :- !.
-	number_to_bytes(Number, Acc, Bytes) :-
+	number_to_bytes(0, Bytes, Bytes) :-
+		!.
+	number_to_bytes(Number, Bytes0, Bytes) :-
 		Byte is Number /\ 255,
 		Number1 is Number >> 8,
-		number_to_bytes(Number1, [Byte| Acc], Bytes).
+		number_to_bytes(Number1, [Byte| Bytes0], Bytes).
 
-	leading_zeros(0, Bytes, Bytes) :- !.
+	leading_zeros(0, Bytes, Bytes) :-
+		!.
 	leading_zeros(N, Bytes, [0| Result]) :-
 		N1 is N - 1,
 		leading_zeros(N1, Bytes, Result).
@@ -118,19 +120,21 @@
 		number_to_codes(Number, [], RestCodes),
 		leading_ones(LeadingZeros, RestCodes, Codes).
 
-	bytes_to_number([], Acc, Acc).
-	bytes_to_number([Byte| Bytes], Acc, Number) :-
-		Acc1 is (Acc << 8) \/ Byte,
-		bytes_to_number(Bytes, Acc1, Number).
+	bytes_to_number([], Number, Number).
+	bytes_to_number([Byte| Bytes], Number0, Number) :-
+		Number1 is (Number0 << 8) \/ Byte,
+		bytes_to_number(Bytes, Number1, Number).
 
-	number_to_codes(0, Codes, Codes) :- !.
-	number_to_codes(Number, Acc, Codes) :-
+	number_to_codes(0, Codes, Codes) :-
+		!.
+	number_to_codes(Number, Codes0, Codes) :-
 		Index is Number mod 58,
 		index_to_code(Index, Code),
 		Number1 is Number // 58,
-		number_to_codes(Number1, [Code| Acc], Codes).
+		number_to_codes(Number1, [Code| Codes0], Codes).
 
-	leading_ones(0, Codes, Codes) :- !.
+	leading_ones(0, Codes, Codes) :-
+		!.
 	leading_ones(N, Codes, [0'1| Result]) :-
 		N1 is N - 1,
 		leading_ones(N1, Codes, Result).
@@ -172,4 +176,3 @@
 		codes_to_chars(Codes, Chars).
 
 :- end_object.
-

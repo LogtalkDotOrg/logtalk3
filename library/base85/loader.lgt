@@ -22,4 +22,3 @@
 :- initialization((
 	logtalk_load([base85], [optimize(on)])
 )).
-
