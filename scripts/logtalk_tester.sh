@@ -33,7 +33,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 22.1"
+	echo "$(basename "$0") 23.0"
 	exit 0
 }
 
@@ -112,6 +112,12 @@ format_goal=$format_default_goal
 coverage_default_goal="true"
 coverage_xml_goal="logtalk_load(lgtunit(coverage_report))"
 coverage_goal=$coverage_default_goal
+
+format_decimal() {
+    local num=$1
+    local places=$2
+    printf "%.${places}f" "$num"
+}
 
 run_testset() {
 	start_time="$(date +%s)"
@@ -193,10 +199,10 @@ run_testset() {
 			duration="$(cut -f 8 <<< "$line")"
 			echo -n '%         completed tests from object '
 			echo -n "$(cut -f 2 <<< "$line")"
-			echo " in $duration seconds"
+			echo " in $(format_decimal "$duration" 3) seconds"
 		done < <(grep '^object' "$results/$name.totals")
-		echo -n '%         clause coverage '
-		echo "$(grep "^coverage" "$results/$name.totals" | cut -f 2)"
+		clause_coverage="$(grep "^coverage" "$results/$name.totals" | cut -f 2)"
+		echo "%         clause coverage $(format_decimal "${clause_coverage%?}" 3)%"
 	elif [ "$tests_exit" -eq 5 ] ; then
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         broken"

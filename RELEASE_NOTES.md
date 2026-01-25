@@ -104,6 +104,9 @@ for the ePub version of the documentation.
 * UPDATED: The `logtalk_tester.ps1` PowerShell script to export the `LINEDIT`
 environment variable (set to `gui=no`) when run using the GNU Prolog backend.
 
+* IMPROVED: The `logtalk_doclet.sh` and `logtalk_tester.sh` scripts to print
+only three decimal places for test set runtime and clause coverage percentage.
+
 * FIXED: The `logtalk_doclet.sh` and `logtalk_tester.sh` scripts to print the
 correct number of seconds runtime for each test object.
 

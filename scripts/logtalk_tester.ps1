@@ -53,7 +53,15 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 14.2"
+	Write-Output "$myName 15.0"
+}
+
+Function Format-Decimal {
+    param(
+        [double]$Number,
+        [int]$DecimalPlaces
+    )
+    return [Math]::Round($Number, $DecimalPlaces)
 }
 
 Function Invoke-TestSet() {
@@ -136,12 +144,15 @@ param(
 			$end_time = Get-Date -UFormat %s
 			Write-Host -NoNewline '%         completed tests from object '
 			Write-Host -NoNewline $line[1]
+			$duration = Format-Decimal -Number $line[7] -DecimalPlaces 3
 			Write-Host -NoNewline ' in '
-			Write-Host -NoNewline $line[7]
+			Write-Host -NoNewline $duration
 			Write-Output ' seconds'
 		}
+		$coverage_raw = (Get-Content -Path $results/$name.totals | Select-String -Pattern '^coverage' -CaseSensitive -Raw).split("`t")[1]
+		$coverage_num = [double]($coverage_raw.TrimEnd('%'))
 		Write-Host -NoNewline '%         clause coverage '
-		(Get-Content -Path $results/$name.totals | Select-String -Pattern '^coverage' -CaseSensitive -Raw).split("`t")[1]
+		Write-Output "$(Format-Decimal -Number $coverage_num -DecimalPlaces 3)%"
 	} elseif ($tests_exit -eq 5) {
 		if ($o -eq "verbose") {
 			Write-Output "%         broken"
