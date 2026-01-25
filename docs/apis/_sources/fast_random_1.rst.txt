@@ -1,24 +1,24 @@
-.. index:: single: random(Algorithm)
-.. _random/1:
+.. index:: single: fast_random(Algorithm)
+.. _fast_random/1:
 
 .. rst-class:: right
 
 **object**
 
-``random(Algorithm)``
-=====================
+``fast_random(Algorithm)``
+==========================
 
 * ``Algorithm`` - Random number generator algorithm. One of ``as183``, ``splitmix64``, ``xoshiro128pp``, ``xoshiro128ss``, ``xoshiro256pp``, ``xoshiro256ss``.
 
 
-Portable random number generator predicates.
+Fast portable random number generator predicates.
 
 | **Availability:** 
 |    ``logtalk_load(random(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 3:0:0
-| **Date:** 2026-01-24
+| **Date:** 2026-01-25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -32,15 +32,8 @@ Portable random number generator predicates.
 
 | **Remarks:**
 
-   - Multiple random number generators: To define multiple random number generators, simply extend this object. The derived objects must send to *self* the ``reset_seed/0`` message.
+   - Single random number generator: This object provides a faster version of the ``random`` library object but does not support being extended to define multiple random number generators.
    - Randomness: Loading this object always initializes the random generator seed to the same value, thus providing a pseudo random number generator. The ``randomize/1`` predicate can be used to initialize the seed with a random value.
-   - ``as183``: Algorithm AS 183 from Applied Statistics. 32-bit PRNG with period 2^60. Not cryptographically secure.
-   - ``xoshiro128pp``: Xoshiro128++ random number generator. 32-bit state-of-the-art PRNG with period 2^128-1. Algorithm by David Blackman and Sebastiano Vigna.
-   - ``xoshiro128ss``: Xoshiro128** random number generator. 32-bit PRNG with period 2^128-1. Algorithm by David Blackman and Sebastiano Vigna.
-   - ``xoshiro256pp``: Xoshiro256++ random number generator. 64-bit state-of-the-art PRNG with period 2^256-1. Algorithm by David Blackman and Sebastiano Vigna.
-   - ``xoshiro256ss``: Xoshiro256** random number generator. 64-bit PRNG with period 2^256-1. Algorithm by David Blackman and Sebastiano Vigna.
-   - ``splitmix64``: SplitMix64 random number generator. 64-bit PRNG primarily used for seeding other generators. Algorithm by Guy L. Steele Jr. et al.
-   - Algorithms backend compatibility: The SplitMix64, Xoshiro256++, and Xoshiro256** algorithms require support for unbound integer arithmetic.
 
 | **Inherited public predicates:**
 |     :ref:`sampling_protocol/0::bernoulli/2`  :ref:`sampling_protocol/0::beta/3`  :ref:`random_protocol/0::between/3`  :ref:`sampling_protocol/0::binomial/3`  :ref:`sampling_protocol/0::chi_squared/2`  :ref:`sampling_protocol/0::circular_uniform_cartesian/3`  :ref:`sampling_protocol/0::circular_uniform_polar/3`  :ref:`sampling_protocol/0::dirichlet/2`  :ref:`random_protocol/0::enumerate/2`  :ref:`sampling_protocol/0::exponential/2`  :ref:`sampling_protocol/0::fisher/3`  :ref:`sampling_protocol/0::gamma/3`  :ref:`sampling_protocol/0::geometric/2`  :ref:`pseudo_random_protocol/0::get_seed/1`  :ref:`sampling_protocol/0::gumbel/3`  :ref:`sampling_protocol/0::hypergeometric/4`  :ref:`sampling_protocol/0::logistic/3`  :ref:`sampling_protocol/0::lognormal/3`  :ref:`sampling_protocol/0::logseries/2`  :ref:`random_protocol/0::maybe/0`  :ref:`random_protocol/0::maybe/1`  :ref:`random_protocol/0::maybe/2`  :ref:`random_protocol/0::maybe_call/1`  :ref:`random_protocol/0::maybe_call/2`  :ref:`random_protocol/0::member/2`  :ref:`sampling_protocol/0::normal/3`  :ref:`random_protocol/0::permutation/2`  :ref:`sampling_protocol/0::poisson/2`  :ref:`sampling_protocol/0::power/2`  :ref:`random_protocol/0::random/1`  :ref:`random_protocol/0::random/3`  :ref:`random_protocol/0::randseq/4`  :ref:`random_protocol/0::randset/4`  :ref:`random_protocol/0::select/3`  :ref:`random_protocol/0::select/4`  :ref:`random_protocol/0::sequence/4`  :ref:`random_protocol/0::set/4`  :ref:`pseudo_random_protocol/0::set_seed/1`  :ref:`sampling_protocol/0::standard_cauchy/3`  :ref:`sampling_protocol/0::standard_exponential/1`  :ref:`sampling_protocol/0::standard_gamma/2`  :ref:`sampling_protocol/0::standard_normal/1`  :ref:`sampling_protocol/0::standard_t/2`  :ref:`random_protocol/0::swap/2`  :ref:`random_protocol/0::swap_consecutive/2`  :ref:`sampling_protocol/0::triangular/4`  :ref:`sampling_protocol/0::uniform/1`  :ref:`sampling_protocol/0::uniform/3`  :ref:`sampling_protocol/0::von_mises/3`  :ref:`sampling_protocol/0::wald/3`  :ref:`sampling_protocol/0::weibull/3`  
@@ -53,7 +46,7 @@ Public predicates
 -----------------
 
 .. index:: reset_seed/0
-.. _random/1::reset_seed/0:
+.. _fast_random/1::reset_seed/0:
 
 ``reset_seed/0``
 ^^^^^^^^^^^^^^^^
@@ -70,7 +63,7 @@ Resets the random generator seed to its default value. Use ``get_seed/1`` and ``
 ------------
 
 .. index:: randomize/1
-.. _random/1::randomize/1:
+.. _fast_random/1::randomize/1:
 
 ``randomize/1``
 ^^^^^^^^^^^^^^^
@@ -97,7 +90,7 @@ Private predicates
 ------------------
 
 .. index:: seed_/2
-.. _random/1::seed_/2:
+.. _fast_random/1::seed_/2:
 
 ``seed_/2``
 ^^^^^^^^^^^
@@ -122,5 +115,5 @@ Operators
 
 .. seealso::
 
-   :ref:`random <random/0>`, :ref:`fast_random(Algorithm) <fast_random/1>`, :ref:`backend_random <backend_random/0>`
+   :ref:`fast_random <fast_random/0>`, :ref:`random(Algorithm) <random/1>`, :ref:`random <random/0>`, :ref:`backend_random <backend_random/0>`
 

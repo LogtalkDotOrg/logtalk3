@@ -28,7 +28,6 @@
 		Float is A0/30269 + A1/30307 + A2/30323,
 		Random is float(Float) - truncate(Float).
 	% Core Xoshiro128++ algorithm
-	% Returns a random 32-bit integer and updates state
 	random_seeds(xoshiro128pp, [S0, S1, S2, S3], [NewS0, NewS1, NewS2, NewS3], Random) :-
 		mask32(Mask),
 		% IntRandom = rotl(s0 + s3, 7) + s0
@@ -49,7 +48,6 @@
 		% Convert to float in [0.0, 1.0)
 		Random is IntRandom / 4294967296.0.
 	% Core Xoshiro128** algorithm
-	% Returns a random 32-bit integer and updates state
 	random_seeds(xoshiro128ss, [S0, S1, S2, S3], [NewS0, NewS1, NewS2, NewS3], Random) :-
 		mask32(Mask),
 		% IntRandom = rotl(s1 * 5, 7) * 9

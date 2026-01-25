@@ -20,7 +20,6 @@
 
 
 	% Core Xoshiro256++ algorithm
-	% Returns a random 64-bit integer and updates state
 	random_seeds(xoshiro256pp, [S0, S1, S2, S3], [NewS0, NewS1, NewS2, NewS3], Random) :-
 		mask64(Mask),
 		% IntRandom = rotl(s0 + s3, 23) + s0
@@ -41,7 +40,6 @@
 		% Convert to float in [0.0, 1.0)
 		Random is IntRandom / 18446744073709551616.0.
 	% Xoshiro256** algorithm
-	% Returns a random 64-bit integer and updates state
 	random_seeds(xoshiro256ss, [S0, S1, S2, S3], [NewS0, NewS1, NewS2, NewS3], Random) :-
 		mask64(Mask),
 		% IntRandom = rotl(s1 * 5, 7) * 9
@@ -62,7 +60,6 @@
 		% Convert to float in [0.0, 1.0)
 		Random is IntRandom / 18446744073709551616.0.
 	% SplitMix64 algorithm
-	% A simple generator used primarily for seeding other generators
 	random_seeds(splitmix64, [State0], [State], Random) :-
 		mask64(Mask),
 		State1 is State0 + 0x9e3779b97f4a7c15,

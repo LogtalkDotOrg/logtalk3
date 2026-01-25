@@ -19,20 +19,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(fast_random,
+:- object(fast_random(_Algorithm_),
 	implements((pseudo_random_protocol, sampling_protocol))).
 
 	:- info([
-		version is 2:12:1,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2025-04-07,
-		comment is 'Fast portable random number generator predicates. Core predicates originally written by Richard O''Keefe. Based on algorithm AS 183 from Applied Statistics.',
+		date is 2026-01-25,
+		comment is 'Fast portable random number generator predicates.',
+		parameters is [
+			'Algorithm' - 'Random number generator algorithm. One of ``as183``, ``splitmix64``, ``xoshiro128pp``, ``xoshiro128ss``, ``xoshiro256pp``, ``xoshiro256ss``.'
+		],
 		remarks is [
 			'Single random number generator' - 'This object provides a faster version of the ``random`` library object but does not support being extended to define multiple random number generators.',
 			'Randomness' - 'Loading this object always initializes the random generator seed to the same value, thus providing a pseudo random number generator. The ``randomize/1`` predicate can be used to initialize the seed with a random value.'
 		],
-		see_also is [random, backend_random]
+		see_also is [fast_random, random(_), random, backend_random]
 	]).
+
+	:- initialization(reset_seeds).
 
 	:- public(reset_seed/0).
 	:- mode(reset_seed, one).
@@ -62,44 +67,33 @@
 
 	:- initialization(reset_seed).
 
-	:- private(seed_/3).
-	:- dynamic(seed_/3).
-	:- mode(seed_(-integer, -integer, -integer), one).
-	:- info(seed_/3, [
+	:- private(seed_/2).
+	:- dynamic(seed_/2).
+	:- mode(seed_(+atom, -list(integer)), one).
+	:- info(seed_/2, [
 		comment is 'Stores the current random generator seed values.',
-		argnames is ['S0', 'S1', 'S2']
+		argnames is ['Algorithm', 'Values']
 	]).
 
 	random(Random) :-
-		retract(seed_(A0, A1, A2)),
-		random(A0, A1, A2, B0, B1, B2, Random),
-		asserta(seed_(B0, B1, B2)).
-
-	random(A0, A1, A2, B0, B1, B2, Random) :-
-		B0 is (A0*171) mod 30269,
-		B1 is (A1*172) mod 30307,
-		B2 is (A2*170) mod 30323,
-		Float is A0/30269 + A1/30307 + A2/30323,
-		% as some Prolog backends may return Float as an integer or a rational
-		% number, we explicitly convert the value into a float in the next goal
-		Random is float(Float) - truncate(Float).
+		random(_Algorithm_, Random).
 
 	between(Lower, Upper, Random) :-
 		integer(Lower),
 		integer(Upper),
 		Upper >= Lower,
-		random(Float),
+		random(_Algorithm_, Float),
 		Random is truncate(Float * (Upper - Lower + 1)) + Lower.
 
 	member(Random, List) :-
 		length(List, Length),
-		random(Float),
+		random(_Algorithm_, Float),
 		Index is truncate(Float*Length+1),
 		nth1(Index, List, Random).
 
 	select(Random, List, Rest) :-
 		length(List, Length),
-		random(Float),
+		random(_Algorithm_, Float),
 		Index is truncate(Float*Length+1),
 		select(1, Index, Random, List, Rest).
 
@@ -111,7 +105,7 @@
 
 	select(Random, List, New, Rest) :-
 		length(List, Length),
-		random(Float),
+		random(_Algorithm_, Float),
 		Index is truncate(Float*Length+1),
 		select(1, Index, Random, List, New, Rest).
 
@@ -170,17 +164,17 @@
 		integer(Lower),
 		integer(Upper),
 		Upper >= Lower,
-		retract(seed_(A0, A1, A2)),
-		sequence(Length, Lower, Upper, A0, A1, A2, B0, B1, B2, Sequence),
-		asserta(seed_(B0, B1, B2)).
+		retract(seed_(_Algorithm_, Values0)),
+		sequence(Length, Lower, Upper, Values0, Values, Sequence),
+		asserta(seed_(_Algorithm_, Values)).
 
-	sequence(0, _, _, S0, S1, S2, S0, S1, S2, []) :-
+	sequence(0, _, _, Values, Values, []) :-
 		!.
-	sequence(N, Lower, Upper, A0, A1, A2, S0, S1, S2, [Random| Sequence]) :-
+	sequence(N, Lower, Upper, Values0, Values, [Random| Sequence]) :-
 		N2 is N - 1,
-		random(A0, A1, A2, B0, B1, B2, Float),
+		random_seeds(_Algorithm_, Values0, Values1, Float),
 		Random is truncate(Float * (Upper - Lower + 1)) + Lower,
-		sequence(N2, Lower, Upper, B0, B1, B2, S0, S1, S2, Sequence).
+		sequence(N2, Lower, Upper, Values1, Values, Sequence).
 
 	set(Length, Lower, Upper, Set) :-
 		integer(Length),
@@ -189,33 +183,33 @@
 		integer(Upper),
 		Upper >= Lower,
 		Length =< Upper - Lower + 1,
-		retract(seed_(A0, A1, A2)),
-		set(Length, Lower, Upper, A0, A1, A2, B0, B1, B2, [], Set),
-		asserta(seed_(B0, B1, B2)).
+		retract(seed_(_Algorithm_, Values0)),
+		set(Length, Lower, Upper, Values0, Values, [], Set),
+		asserta(seed_(_Algorithm_, Values)).
 
-	set(0, _, _, S0, S1, S2, S0, S1, S2, List, Set) :-
+	set(0, _, _, Values, Values, List, Set) :-
 		!,
 		sort(List, Set).
-	set(N, Lower, Upper, A0, A1, A2, S0, S1, S2, Acc, Set) :-
-		random(A0, A1, A2, B0, B1, B2, Float),
+	set(N, Lower, Upper, Values0, Values, Acc, Set) :-
+		random_seeds(_Algorithm_, Values0, Values1, Float),
 		Random is truncate(Float * (Upper - Lower + 1)) + Lower,
 		(	not_member(Acc, Random) ->
 			N2 is N - 1,
-			set(N2, Lower, Upper, B0, B1, B2, S0, S1, S2, [Random| Acc], Set)
-		;	set(N, Lower, Upper, B0, B1, B2, S0, S1, S2, Acc, Set)
+			set(N2, Lower, Upper, Values1, Values, [Random| Acc], Set)
+		;	set(N, Lower, Upper, Values1, Values, Acc, Set)
 		).
 
 	permutation(List, Permutation) :-
-		retract(seed_(A0, A1, A2)),
-		add_random_key(List, A0, A1, A2, B0, B1, B2, KeyList),
-		asserta(seed_(B0, B1, B2)),
+		retract(seed_(_Algorithm_, Values0)),
+		add_random_key(List, Values0, Values, KeyList),
+		asserta(seed_(_Algorithm_, Values)),
 		keysort(KeyList, SortedKeyList),
 		remove_random_key(SortedKeyList, Permutation).
 
-	add_random_key([], S0, S1, S2, S0, S1, S2, []).
-	add_random_key([Head| Tail], A0, A1, A2, S0, S1, S2, [Random-Head| KeyTail]) :-
-		random(A0, A1, A2, B0, B1, B2, Random),
-		add_random_key(Tail, B0, B1, B2, S0, S1, S2, KeyTail).
+	add_random_key([], Values, Values, []).
+	add_random_key([Head| Tail], Values0, Values, [Random-Head| KeyTail]) :-
+		random_seeds(_Algorithm_, Values0, Values1, Random),
+		add_random_key(Tail, Values1, Values, KeyTail).
 
 	remove_random_key([], []).
 	remove_random_key([_-Head| KeyTail], [Head| Tail]) :-
@@ -226,13 +220,13 @@
 		integer(Upper),
 		Upper >= Lower,
 		!,
-		random(Float),
+		random(_Algorithm_, Float),
 		Random is truncate((Float * (Upper - Lower) + Lower)).
 	random(Lower, Upper, Random) :-
 		float(Lower),
 		float(Upper),
 		Upper >= Lower,
-		random(Float),
+		random(_Algorithm_, Float),
 		Random is Float * (Upper-Lower) + Lower.
 
 	randseq(Length, Lower, Upper, Sequence) :-
@@ -242,9 +236,9 @@
 		integer(Upper),
 		Upper >= Lower,
 		!,
-		retract(seed_(A0, A1, A2)),
-		randseq(Length, Lower, Upper, (A0, A1, A2), (B0, B1, B2), List),
-		asserta(seed_(B0, B1, B2)),
+		retract(seed_(_Algorithm_, Values0)),
+		randseq(Length, Lower, Upper, Values0, Values, List),
+		asserta(seed_(_Algorithm_, Values)),
 		map_truncate(List, Sequence).
 	randseq(Length, Lower, Upper, Sequence) :-
 		integer(Length),
@@ -252,17 +246,17 @@
 		float(Lower),
 		float(Upper),
 		Upper >= Lower,
-		retract(seed_(A0, A1, A2)),
-		randseq(Length, Lower, Upper, (A0, A1, A2), (B0, B1, B2), Sequence),
-		asserta(seed_(B0, B1, B2)).
+		retract(seed_(_Algorithm_, Values0)),
+		randseq(Length, Lower, Upper, Values0, Values, Sequence),
+		asserta(seed_(_Algorithm_, Values)).
 
-	randseq(0, _, _, Seed, Seed, []) :-
+	randseq(0, _, _, Values, Values, []) :-
 		!.
-	randseq(N, Lower, Upper, (A0, A1, A2), (C0, C1, C2),  [Random| List]) :-
+	randseq(N, Lower, Upper, Values0, Values, [Random| List]) :-
 		N2 is N - 1,
-		random(A0, A1, A2, B0, B1, B2, R),
+		random_seeds(_Algorithm_, Values0, Values1, R),
 		Random is R * (Upper-Lower)+Lower,
-		randseq(N2, Lower, Upper, (B0, B1, B2), (C0, C1, C2), List).
+		randseq(N2, Lower, Upper, Values1, Values, List).
 
 	map_truncate([], []).
 	map_truncate([Float| Floats], [Integer| Integers]) :-
@@ -277,24 +271,24 @@
 		Upper >= Lower,
 		Length =< Upper - Lower,
 		!,
-		retract(seed_(A0, A1, A2)),
-		randset(Length, Lower, Upper, (A0, A1, A2), (B0, B1, B2), [], Set),
-		asserta(seed_(B0, B1, B2)).
+		retract(seed_(_Algorithm_, Values0)),
+		randset(Length, Lower, Upper, Values0, Values, [], Set),
+		asserta(seed_(_Algorithm_, Values)).
 	randset(Length, Lower, Upper, Set) :-
 		integer(Length),
 		Length >= 0,
 		float(Lower),
 		float(Upper),
 		Upper >= Lower,
-		retract(seed_(A0, A1, A2)),
-		randset(Length, Lower, Upper, (A0, A1, A2), (B0, B1, B2), [], Set),
-		asserta(seed_(B0, B1, B2)).
+		retract(seed_(_Algorithm_, Values0)),
+		randset(Length, Lower, Upper, Values0, Values, [], Set),
+		asserta(seed_(_Algorithm_, Values)).
 
-	randset(0, _, _, Seed, Seed, List, Set) :-
+	randset(0, _, _, Values, Values, List, Set) :-
 		!,
 		sort(List, Set).
-	randset(N, Lower, Upper, (A0, A1, A2), (C0, C1, C2), Acc, Set) :-
-		random(A0, A1, A2, B0, B1, B2, Float),
+	randset(N, Lower, Upper, Values0, Values, Acc, Set) :-
+		random_seeds(_Algorithm_, Values0, Values1, Float),
 		Float2 is Float * (Upper-Lower) + Lower,
 		(	integer(Lower) ->
 			Random is truncate(Float2)
@@ -302,8 +296,8 @@
 		),
 		(	not_member(Acc, Random) ->
 			N2 is N - 1,
-			randset(N2, Lower, Upper, (B0, B1, B2), (C0, C1, C2), [Random| Acc], Set)
-		;	randset(N, Lower, Upper, (B0, B1, B2), (C0, C1, C2), Acc, Set)
+			randset(N2, Lower, Upper, Values1, Values, [Random| Acc], Set)
+		;	randset(N, Lower, Upper, Values1, Values, Acc, Set)
 		).
 
 	not_member([], _).
@@ -312,24 +306,17 @@
 		not_member(T, R).
 
 	reset_seed :-
-		retractall(seed_(_, _, _)),
-		asserta(seed_(3172, 9814, 20125)).
+		reset_seed(_Algorithm_).
 
-	get_seed(seed(S0, S1, S2)) :-
-		seed_(S0, S1, S2).
+	get_seed(seed(_Algorithm_, Values)) :-
+		::seed_(_Algorithm_, Values).
 
-	set_seed(seed(S0, S1, S2)) :-
-		retractall(seed_(_, _, _)),
-		asserta(seed_(S0, S1, S2)).
+	set_seed(seed(_Algorithm_, Values)) :-
+		::retractall(seed_(_Algorithm_, _)),
+		::asserta(seed_(_Algorithm_, Values)).
 
 	randomize(Seed) :-
-		integer(Seed),
-		Seed > 0,
-		retractall(seed_(_, _, _)),
-		S0 is Seed mod 30269,
-		S1 is Seed mod 30307,
-		S2 is Seed mod 30323,
-		asserta(seed_(S0, S1, S2)).
+		randomize(_Algorithm_, Seed).
 
 	maybe :-
 		random(Random),
@@ -338,19 +325,19 @@
 	maybe(Probability) :-
 		float(Probability),
 		0.0 =< Probability, Probability =< 1.0,
-		random(Random),
+		random(_Algorithm_, Random),
 		Random < Probability.
 
 	maybe(K, N) :-
 		integer(K), integer(N),
 		0 =< K, K =< N,
-		random(Float),
+		random(_Algorithm_, Float),
 		Random is truncate(Float * N),
 		Random < K.
 
 	:- meta_predicate(maybe_call(0)).
 	maybe_call(Goal) :-
-		random(Random),
+		random(_Algorithm_, Random),
 		Random < 0.5,
 		once(Goal).
 
@@ -358,10 +345,51 @@
 	maybe_call(Probability, Goal) :-
 		float(Probability),
 		0.0 =< Probability, Probability =< 1.0,
-		random(Random),
+		random(_Algorithm_, Random),
 		Random < Probability,
 		once(Goal).
 
+	random(_Algorithm_, Random) :-
+		::retract(seed_(_Algorithm_, Values0)),
+		random_seeds(_Algorithm_, Values0, Values, Random),
+		::asserta(seed_(_Algorithm_, Values)).
+
+	reset_seeds :-
+		reset_seed(_),
+		fail.
+	reset_seeds.
+
+	:- if(current_prolog_flag(bounded, false)).
+		:- discontiguous(random/2).
+		:- discontiguous(random_seeds/4).
+		:- discontiguous(randomize/2).
+		:- discontiguous(reset_seed/1).
+		:- include(fast_random_algorithms_32_bits).
+		:- include(fast_random_algorithms_64_bits).
+	:- else.
+		:- include(fast_random_algorithms_32_bits).
+	:- endif.
+
 	:- include(sampling).
+
+:- end_object.
+
+
+:- object(fast_random,
+	extends(fast_random(as183))).
+
+	:- info([
+		version is 3:0:0,
+		author is 'Paulo Moura',
+		date is 2026-01-25,
+		comment is 'Portable random number generator predicates. Core predicates originally written by Richard O''Keefe. Based on algorithm AS 183 from Applied Statistics.',
+		remarks is [
+			'Single random number generator' - 'This object provides a faster version of the ``random`` library object but does not support being extended to define multiple random number generators.',
+			'Randomness' - 'Loading this object always initializes the random generator seed to the same value, thus providing a pseudo random number generator. The ``randomize/1`` predicate can be used to initialize the seed with a random value.'
+		],
+		see_also is [fast_random, random, random(_), backend_random]
+	]).
+
+	:- initialization(::reset_seed).
 
 :- end_object.

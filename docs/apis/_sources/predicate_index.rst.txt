@@ -7481,7 +7481,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`fast_random <fast_random/0::randomize/1>`
+* :ref:`fast_random(Algorithm) <fast_random/1::randomize/1>`
 * :ref:`random(Algorithm) <random/1::randomize/1>`
 
 ``randseq/4``
@@ -8036,7 +8036,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`fast_random <fast_random/0::reset_seed/0>`
+* :ref:`fast_random(Algorithm) <fast_random/1::reset_seed/0>`
 * :ref:`random(Algorithm) <random/1::reset_seed/0>`
 
 ``restore/1``

@@ -40,8 +40,8 @@ To test this library predicates, load the ``tester.lgt`` file:
 Algorithms
 ----------
 
-The ``random(Algorithm)`` parametric object supports the following
-random number generator algorithms:
+The ``random(Algorithm)`` and ``fast_random(Algorithm)`` parametric
+objects support the following random number generator algorithms:
 
 - ``as183`` - Algorithm AS 183 from Applied Statistics. 32-bit PRNG with
   period 2^60. Not cryptographically secure.
@@ -59,8 +59,8 @@ random number generator algorithms:
 The SplitMix64, Xoshiro256++, and Xoshiro256*\* algorithms require a
 backend supporting unbound integer arithmetic.
 
-The ``random`` object uses the ``as183`` algorithm and is provided for
-backward compatibility.
+The ``random`` and ``fast_random`` objects use the ``as183`` algorithm
+and are provided for backward compatibility.
 
 Usage
 -----
@@ -78,25 +78,26 @@ different seeds, by defining derived objects. For example:
 
    :- end_object.
 
-The ``fast_random`` object also implements a portable random number
-generator but does not support deriving multiple random number
+The ``fast_random(Algorithm)`` object also implements a portable random
+number generator but does not support deriving multiple random number
 generators, which makes it a bit faster than the ``random(Algorithm)``
 object.
 
-The ``random(Algorithm)``, ``random``, and ``fast_random`` objects
-manage the random number generator seed using internal dynamic state.
-The predicates that update the seed are declared as synchronized (when
-running on Prolog backends that support threads). Still, care must be
-taken when using these objects from multi-threaded applications, as
-there is no portable solution to protect seed updates from signals and
-prevent inconsistent state when threads are canceled.
+The ``random(Algorithm)``, ``random``, ``fast_random(Algorithm)``, and
+``fast_random`` objects manage the random number generator seed using
+internal dynamic state. The predicates that update the seed are declared
+as synchronized (when running on Prolog backends that support threads).
+Still, care must be taken when using these objects from multi-threaded
+applications, as there is no portable solution to protect seed updates
+from signals and prevent inconsistent state when threads are canceled.
 
-The ``random(Algorithm)``, ``random``, and ``fast_random`` objects
-always initialize the random generator seed to the same value, thus
-providing a pseudo random number generator. The ``randomize/1``
-predicate can be used to initialize the seed with a random value. The
-argument should be a large positive integer. In alternative, when using
-a small integer argument, discard the first dozen random values.
+The ``random(Algorithm)``, ``random``, ``fast_random(Algorithm)``, and
+``fast_random`` objects always initialize the random generator seed to
+the same value, thus providing a pseudo random number generator. The
+``randomize/1`` predicate can be used to initialize the seed with a
+random value. The argument should be a large positive integer. In
+alternative, when using a small integer argument, discard the first
+dozen random values.
 
 The ``backend_random`` object abstracts the native backend Prolog
 compiler random number generator for the basic ``random/1``,
@@ -110,8 +111,7 @@ Prolog, do not provide implementations for both the ``get_seed/1`` and
 ``set_seed/1`` predicates and calling these predicates simply succeed
 without performing any action.
 
-All random objects (``random(Algorithm)``, ``random``, ``fast_random``,
-and ``backend_random``) implement the ``sampling_protocol`` protocol. To
+All random objects implement the ``sampling_protocol`` protocol. To
 maximize performance, the shared implementations of the sampling
 predicates is defined in the ``sampling.lgt`` file that's included in
 the random objects. This allows these predicates to call the basic

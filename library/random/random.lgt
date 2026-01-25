@@ -41,7 +41,7 @@
 			'``splitmix64``' - 'SplitMix64 random number generator. 64-bit PRNG primarily used for seeding other generators. Algorithm by Guy L. Steele Jr. et al.',
 			'Algorithms backend compatibility' - 'The SplitMix64, Xoshiro256++, and Xoshiro256** algorithms require support for unbound integer arithmetic.'
 		],
-		see_also is [fast_random, backend_random]
+		see_also is [random, fast_random(_), backend_random]
 	]).
 
 	:- initialization(reset_seeds).
@@ -369,10 +369,10 @@
 		:- discontiguous(random_seeds/4).
 		:- discontiguous(randomize/2).
 		:- discontiguous(reset_seed/1).
-		:- include(algorithms_32_bits).
-		:- include(algorithms_64_bits).
+		:- include(random_algorithms_32_bits).
+		:- include(random_algorithms_64_bits).
 	:- else.
-		:- include(algorithms_32_bits).
+		:- include(random_algorithms_32_bits).
 	:- endif.
 
 	:- include(sampling).
