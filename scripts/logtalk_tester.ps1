@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on January 12, 2026
+##   Last updated on January 25, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -53,7 +53,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 14.1"
+	Write-Output "$myName 14.2"
 }
 
 Function Invoke-TestSet() {
@@ -134,14 +134,11 @@ param(
 			Write-Host -NoNewline $line[6]
 			Write-Output ' flaky)'
 			$end_time = Get-Date -UFormat %s
-			$duration = $end_time - $start_time
 			Write-Host -NoNewline '%         completed tests from object '
 			Write-Host -NoNewline $line[1]
-			if ($duration -eq 1) {
-				Write-Output " in $duration second"
-			} else {
-				Write-Output " in $duration seconds"
-			}
+			Write-Host -NoNewline ' in '
+			Write-Host -NoNewline $line[7]
+			Write-Output ' seconds'
 		}
 		Write-Host -NoNewline '%         clause coverage '
 		(Get-Content -Path $results/$name.totals | Select-String -Pattern '^coverage' -CaseSensitive -Raw).split("`t")[1]
