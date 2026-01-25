@@ -23,15 +23,19 @@
 	implements(json_lines_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2025-05-27,
+		date is 2026-01-25,
 		comment is 'JSON Lines parser and generator.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding JSON objects. Possible values are ``curly`` (default) and ``list``.',
 			'PairRepresentation' - 'Pair representation to be used when decoding JSON objects. Possible values are ``dash`` (default), ``equal``, and ``colon``.',
 			'StringRepresentation' - 'Text representation to be used when decoding JSON strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
 		]
+	]).
+
+	:- uses(reader, [
+		line_to_codes/2
 	]).
 
 	parse(Source, _) :-
@@ -382,30 +386,6 @@
 		[Code], codes(Codes).
 
 	% auxiliary predicates
-
-	line_to_codes(Stream, Codes) :-
-		(	at_end_of_stream(Stream) ->
-			Codes = end_of_file
-		;	get_code(Stream, Code),
-			(	Code == -1 ->
-				Codes = end_of_file
-			;	line_to_codes(Code, Stream, Codes)
-			)
-		).
-
-	line_to_codes(-1, _, []) :-
-		!.
-	line_to_codes(10, _, []) :-
-		!.
-	line_to_codes(13, Stream, []) :-
-		!,
-		(	peek_code(Stream, 10) ->
-			get_code(Stream, 10)
-		;	true
-		).
-	line_to_codes(Code, Stream, [Code| Codes]) :-
-		get_code(Stream, NextCode),
-		line_to_codes(NextCode, Stream, Codes).
 
 	chars_to_codes([], []).
 	chars_to_codes([Char| Chars], [Code| Codes]) :-

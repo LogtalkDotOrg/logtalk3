@@ -22,7 +22,5 @@
 
 :- initialization((
 	logtalk_load(reader(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(term_io(loader)),
 	logtalk_load([json_protocol, json], [optimize(on)])
 )).

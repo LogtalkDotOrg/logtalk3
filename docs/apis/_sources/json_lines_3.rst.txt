@@ -19,8 +19,8 @@ JSON Lines parser and generator.
 |    ``logtalk_load(json_lines(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2025-05-27
+| **Version:** 1:1:0
+| **Date:** 2026-01-25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,6 +28,8 @@ JSON Lines parser and generator.
 
 | **Implements:**
 |    ``public`` :ref:`json_lines_protocol <json_lines_protocol/0>`
+| **Uses:**
+|    :ref:`reader <reader/0>`
 
 | **Remarks:**
 |    (none)

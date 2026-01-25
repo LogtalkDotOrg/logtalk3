@@ -92,6 +92,8 @@ and Xoshiro256** algorithms to the `random` library.
 * FIXED: The `arbitrary` and `types` libraries to avoid a portability warning
 when using the XVM backend.
 
+* FIXED: Unused dependencies in the `json` and `json_lines` libraries.
+
 Tools
 -----
 

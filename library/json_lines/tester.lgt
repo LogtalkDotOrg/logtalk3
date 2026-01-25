@@ -21,8 +21,6 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(reader(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(term_io(loader)),
 	logtalk_load([json_lines_protocol, json_lines], [source_data(on), debug(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),

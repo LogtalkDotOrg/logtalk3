@@ -24,9 +24,9 @@
 	implements(json_protocol)).
 
 	:- info([
-		version is 0:13:0,
+		version is 0:14:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2024-07-16,
+		date is 2026-01-25,
 		comment is 'JSON parser and generator.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -35,15 +35,19 @@
 		]
 	]).
 
+	:- uses(reader, [
+		file_to_codes/2, line_to_codes/2, stream_to_codes/2
+	]).
+
 	parse(Source, _) :-
 		var(Source),
 		instantiation_error.
 	parse(file(File), JSON) :-
-		reader::file_to_codes(File, Codes),
+		file_to_codes(File, Codes),
 		phrase(json(JSON), Codes),
 		!.
 	parse(stream(Stream), JSON) :-
-		reader::stream_to_codes(Stream, Codes),
+		stream_to_codes(Stream, Codes),
 		phrase(json(JSON), Codes),
 		!.
 	parse(line(Stream), JSON) :-
@@ -352,30 +356,6 @@
 		[Code], codes(Codes).
 
 	% auxiliary predicates
-
-	line_to_codes(Stream, Codes) :-
-		(	at_end_of_stream(Stream) ->
-			Codes = end_of_file
-		;	get_code(Stream, Code),
-			(	Code == -1 ->
-				Codes = end_of_file
-			;	line_to_codes(Code, Stream, Codes)
-			)
-		).
-
-	line_to_codes(-1, _, []) :-
-		!.
-	line_to_codes(10, _, []) :-
-		!.
-	line_to_codes(13, Stream, []) :-
-		!,
-		(	peek_code(Stream, 10) ->
-			get_code(Stream, 10)
-		;	true
-		).
-	line_to_codes(Code, Stream, [Code| Codes]) :-
-		get_code(Stream, NextCode),
-		line_to_codes(NextCode, Stream, Codes).
 
 	chars_to_codes([], []).
 	chars_to_codes([Char| Chars], [Code| Codes]) :-
