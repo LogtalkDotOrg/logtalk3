@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on January 25, 2026
+##   Last updated on January 26, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -53,7 +53,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 15.0"
+	Write-Output "$myName 15.1"
 }
 
 Function Format-Decimal {
@@ -150,9 +150,13 @@ param(
 			Write-Output ' seconds'
 		}
 		$coverage_raw = (Get-Content -Path $results/$name.totals | Select-String -Pattern '^coverage' -CaseSensitive -Raw).split("`t")[1]
-		$coverage_num = [double]($coverage_raw.TrimEnd('%'))
-		Write-Host -NoNewline '%         clause coverage '
-		Write-Output "$(Format-Decimal -Number $coverage_num -DecimalPlaces 3)%"
+		if ($coverage_raw -eq "n/a") {
+			Write-Output '%         clause coverage n/a'
+		} else {
+			$coverage_num = [double]($coverage_raw.TrimEnd('%'))
+			Write-Host -NoNewline '%         clause coverage '
+			Write-Output "$(Format-Decimal -Number $coverage_num -DecimalPlaces 3)%"
+		}
 	} elseif ($tests_exit -eq 5) {
 		if ($o -eq "verbose") {
 			Write-Output "%         broken"

@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on January 25, 2026
+##   Last updated on January 26, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -33,7 +33,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 23.0"
+	echo "$(basename "$0") 23.1"
 	exit 0
 }
 
@@ -202,7 +202,11 @@ run_testset() {
 			echo " in $(format_decimal "$duration" 3) seconds"
 		done < <(grep '^object' "$results/$name.totals")
 		clause_coverage="$(grep "^coverage" "$results/$name.totals" | cut -f 2)"
-		echo "%         clause coverage $(format_decimal "${clause_coverage%?}" 3)%"
+		if [ $clause_coverage == 'n/a' ] ; then
+			echo "%         clause coverage n/a"
+		else
+			echo "%         clause coverage $(format_decimal "${clause_coverage%?}" 3)%"
+		fi
 	elif [ "$tests_exit" -eq 5 ] ; then
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         broken"
