@@ -23,9 +23,9 @@
 	implements(random_protocol)).
 
 	:- info([
-		version is 2:8:0,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2021-02-21,
+		date is 2026-01-26,
 		comment is 'Random number generator predicate based on ``/dev/urandom``.',
 		remarks is [
 			'Single random number generator' - 'This object provides a faster version of the ``random`` library object but does not support being extended to define multiple random number generators.'
@@ -47,7 +47,28 @@
 
 	random(Random) :-
 		open('/dev/urandom', read, Stream, [type(binary)]),
-		bytes(Stream, 16, Bytes).
+		length(Bytes, 7),
+		read_random_bytes(Bytes, Stream),
+		close(Stream),
+		bytes_to_integer(Bytes, Integer),
+    	% Use only 53 bits (mask off extra bits from 7 bytes)
+    	Integer53 is Integer >> 3,  % Shift right 3 bits to get 53 bits
+    	% Divide by 2^53 to get [0,1)
+    	Random is Integer53 / 9007199254740992.0.  % 2^53
+
+	read_random_bytes([], _).
+	read_random_bytes([Byte| Bytes], Stream) :-
+		get_byte(Stream, Byte),
+		read_random_bytes(Bytes, Stream).
+
+	bytes_to_integer(Bytes, Int) :-
+		bytes_to_integer(Bytes, 0, 0, Int).
+
+	bytes_to_integer([], _, Int, Int).
+	bytes_to_integer([Byte| Bytes], Shift0, Int0, Int) :-
+		Int1 is Int0 + Byte << Shift0,
+		Shift1 is Shift0 + 8,
+		bytes_to_integer(Bytes, Shift1, Int1, Int).
 
 	between(Lower, Upper, Random) :-
 		integer(Lower),
@@ -74,6 +95,57 @@
 		Next is Current + 1,
 		select(Next, Index, Random, Tail, Rest).
 
+	select(Random, List, New, Rest) :-
+		length(List, Length),
+		random(Float),
+		Index is truncate(Float*Length+1),
+		select(1, Index, Random, List, New, Rest).
+
+	select(Index, Index, Random, [Random| Tail], New, [New| Tail]) :-
+		!.
+	select(Current, Index, Random, [Head| OldTail], New, [Head| NewTail]) :-
+		Next is Current + 1,
+		select(Next, Index, Random, OldTail, New, NewTail).
+
+	swap(List, Mutation) :-
+		length(List, Length),
+		Length > 1,
+		repeat,
+			between(1, Length, N1),
+			between(1, Length, N2),
+		N1 =\= N2,
+		!,
+		(	N1 < N2 ->
+			swap_1(N1, N2, List, Mutation)
+		;	swap_1(N2, N1, List, Mutation)
+		).
+
+	swap_1(1, N2, [Element1| Rest0], [Element2| Rest]) :-
+		!,
+		swap_2(N2, Element1, Element2, Rest0, Rest).
+	swap_1(N1, N2, [Head| Tail], [Head| Mutation]) :-
+		M1 is N1 - 1,
+		M2 is N2 - 1,
+		swap_1(M1, M2, Tail, Mutation).
+
+	swap_2(2, Element1, Element2, [Element2| Rest], [Element1| Rest]) :-
+		!.
+	swap_2(N2, Element1, Element2, [Head| Rest0], [Head| Rest]) :-
+		M is N2 - 1,
+		swap_2(M, Element1, Element2, Rest0, Rest).
+
+	swap_consecutive(List, Mutation) :-
+		length(List, Length),
+		Limit is Length - 1,
+		between(1, Limit, N),
+		swap_consecutive(N, List, Mutation).
+
+	swap_consecutive(1, [Element1, Element2| Rest], [Element2, Element1| Rest]) :-
+		!.
+	swap_consecutive(N, [Head| Tail], [Head| Mutation]) :-
+		M is N - 1,
+		swap_consecutive(M, Tail, Mutation).
+
 	enumerate(List, Random) :-
 		permutation(List, Permutation),
 		list::member(Random, Permutation).
@@ -84,15 +156,15 @@
 		integer(Lower),
 		integer(Upper),
 		Upper >= Lower,
-		sequence(Length, Lower, Upper, Sequence).
+		sequence_aux(Length, Lower, Upper, Sequence).
 
-	sequence(0, _, _, []) :-
+	sequence_aux(0, _, _, []) :-
 		!.
-	sequence(N, Lower, Upper, [Random| Sequence]) :-
+	sequence_aux(N, Lower, Upper, [Random| Sequence]) :-
 		N2 is N - 1,
 		random(Float),
 		Random is truncate(Float * (Upper - Lower + 1)) + Lower,
-		sequence(N2, Lower, Upper, Sequence).
+		sequence_aux(N2, Lower, Upper, Sequence).
 
 	set(Length, Lower, Upper, Set) :-
 		integer(Length),

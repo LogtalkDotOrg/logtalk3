@@ -41,10 +41,10 @@ Algorithms
 ----------
 
 The ``random(Algorithm)`` and ``fast_random(Algorithm)`` parametric
-objects support the following random number generator algorithms:
+objects support the following pseudo-random number generator algorithms:
 
 - ``as183`` - Algorithm AS 183 from Applied Statistics. 32-bit PRNG with
-  period 2^60. Not cryptographically secure.
+  period 2^60.
 - ``splitmix64`` - SplitMix64 64-bit PRNG primarily used for seeding
   other generators. Algorithm by Guy L. Steele Jr. et al.
 - ``xoshiro128pp`` - Xoshiro128++ 32-bit state-of-the-art PRNG with
@@ -55,6 +55,8 @@ objects support the following random number generator algorithms:
   period 2^256-1. Algorithm by David Blackman and Sebastiano Vigna.
 - ``xoshiro256ss`` - Xoshiro256*\* 64-bit state-of-the-art PRNG with
   period 2^256-1. Algorithm by David Blackman and Sebastiano Vigna.
+
+Note that none of the above algorithms are cryptographically secure.
 
 The SplitMix64, Xoshiro256++, and Xoshiro256*\* algorithms require a
 backend supporting unbound integer arithmetic.
