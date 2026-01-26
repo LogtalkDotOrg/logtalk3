@@ -86,7 +86,7 @@
 	randomize(xoshiro256ss, Seed) :-
 		integer(Seed),
 		Seed > 0,
-		::retractall(seed_(xoshiro256ss, _)),
+		retractall(seed_(xoshiro256ss, _)),
 		mask64(Mask),
 		S0 is Seed /\ Mask,
 		S1 is ((Seed >> 16) \/ (Seed * 7)) /\ Mask,

@@ -309,11 +309,11 @@
 		reset_seed(_Algorithm_).
 
 	get_seed(seed(_Algorithm_, Values)) :-
-		::seed_(_Algorithm_, Values).
+		seed_(_Algorithm_, Values).
 
 	set_seed(seed(_Algorithm_, Values)) :-
-		::retractall(seed_(_Algorithm_, _)),
-		::asserta(seed_(_Algorithm_, Values)).
+		retractall(seed_(_Algorithm_, _)),
+		asserta(seed_(_Algorithm_, Values)).
 
 	randomize(Seed) :-
 		randomize(_Algorithm_, Seed).
@@ -350,9 +350,9 @@
 		once(Goal).
 
 	random(_Algorithm_, Random) :-
-		::retract(seed_(_Algorithm_, Values0)),
+		retract(seed_(_Algorithm_, Values0)),
 		random_seeds(_Algorithm_, Values0, Values, Random),
-		::asserta(seed_(_Algorithm_, Values)).
+		asserta(seed_(_Algorithm_, Values)).
 
 	reset_seeds :-
 		reset_seed(_),

@@ -39,12 +39,14 @@
 	logtalk_load(tests, [hook(lgtunit)]),
 	(	current_prolog_flag(bounded, false) ->
 		lgtunit::run_test_sets([
+			tests(random),
 			tests(random(as183)),
 			tests(random(xoshiro128pp)),
 			tests(random(xoshiro128ss)),
 			tests(random(xoshiro256pp)),
 			tests(random(xoshiro256ss)),
 			tests(random(splitmix64)),
+			tests(fast_random),
 			tests(fast_random(as183)),
 			tests(fast_random(xoshiro128pp)),
 			tests(fast_random(xoshiro128ss)),
@@ -54,9 +56,11 @@
 			tests(backend_random)
 		])
 	;	lgtunit::run_test_sets([
+			tests(random),
 			tests(random(as183)),
 			tests(random(xoshiro128pp)),
 			tests(random(xoshiro128ss)),
+			tests(fast_random),
 			tests(fast_random(as183)),
 			tests(fast_random(xoshiro128pp)),
 			tests(fast_random(xoshiro128ss)),
