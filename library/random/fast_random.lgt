@@ -362,7 +362,6 @@
 	reset_seeds.
 
 	:- if(current_prolog_flag(bounded, false)).
-		:- discontiguous(random/2).
 		:- discontiguous(random_seeds/4).
 		:- discontiguous(randomize/2).
 		:- discontiguous(reset_seed/1).
