@@ -19,16 +19,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-	random_seeds(as183, [A0, A1, A2], [B0, B1, B2], Random) :-
-		B0 is (A0*171) mod 30269,
-		B1 is (A1*172) mod 30307,
-		B2 is (A2*170) mod 30323,
+	random_seeds(as183, s(S0, S1, S2), s(NewS0, NewS1, NewS2), Random) :-
+		NewS0 is (S0*171) mod 30269,
+		NewS1 is (S1*172) mod 30307,
+		NewS2 is (S2*170) mod 30323,
 		% as some Prolog backends may return Float as an integer or a rational
 		% number, we explicitly convert the value into a float in the next goal
-		Float is A0/30269 + A1/30307 + A2/30323,
+		Float is S0/30269 + S1/30307 + S2/30323,
 		Random is float(Float) - truncate(Float).
 	% Core Xoshiro128++ algorithm
-	random_seeds(xoshiro128pp, [S0, S1, S2, S3], [NewS0, NewS1, NewS2, NewS3], Random) :-
+	random_seeds(xoshiro128pp, s(S0, S1, S2, S3), s(NewS0, NewS1, NewS2, NewS3), Random) :-
 		mask32(Mask),
 		% IntRandom = rotl(s0 + s3, 7) + s0
 		Sum1 is (S0 + S3) /\ Mask,
@@ -48,7 +48,7 @@
 		% Convert to float in [0.0, 1.0)
 		Random is IntRandom / 4294967296.0.
 	% Core Xoshiro128** algorithm
-	random_seeds(xoshiro128ss, [S0, S1, S2, S3], [NewS0, NewS1, NewS2, NewS3], Random) :-
+	random_seeds(xoshiro128ss, s(S0, S1, S2, S3), s(NewS0, NewS1, NewS2, NewS3), Random) :-
 		mask32(Mask),
 		% IntRandom = rotl(s1 * 5, 7) * 9
 		Mul1 is (S1 * 5) /\ Mask,
@@ -75,7 +75,7 @@
 		S0 is Seed mod 30269,
 		S1 is Seed mod 30307,
 		S2 is Seed mod 30323,
-		asserta(seed_(as183, [S0, S1, S2])).
+		assertz(seed_(as183, s(S0, S1, S2))).
 	randomize(xoshiro128pp, Seed) :-
 		integer(Seed),
 		Seed > 0,
@@ -87,8 +87,8 @@
 		S3 is ((Seed >> 96) \/ (Seed * 17)) /\ Mask,
 		% Ensure non-zero state
 		(	S0 =:= 0, S1 =:= 0, S2 =:= 0, S3 =:= 0 ->
-			asserta(seed_(xoshiro128pp, [1, 1, 1, 1]))
-		;	asserta(seed_(xoshiro128pp, [S0, S1, S2, S3]))
+			assertz(seed_(xoshiro128pp, s(1, 1, 1, 1)))
+		;	assertz(seed_(xoshiro128pp, s(S0, S1, S2, S3)))
 		).
 	randomize(xoshiro128ss, Seed) :-
 		integer(Seed),
@@ -101,21 +101,21 @@
 		S3 is ((Seed >> 96) \/ (Seed * 17)) /\ Mask,
 		% Ensure non-zero state
 		(	S0 =:= 0, S1 =:= 0, S2 =:= 0, S3 =:= 0 ->
-			asserta(seed_(xoshiro128ss, [1, 1, 1, 1]))
-		;	asserta(seed_(xoshiro128ss, [S0, S1, S2, S3]))
+			assertz(seed_(xoshiro128ss, s(1, 1, 1, 1)))
+		;	assertz(seed_(xoshiro128ss, s(S0, S1, S2, S3)))
 		).
 
 	reset_seed(as183) :-
 		retractall(seed_(as183, _)),
-		asserta(seed_(as183, [3172, 9814, 20125])).
+		assertz(seed_(as183, s(3172, 9814, 20125))).
 	reset_seed(xoshiro128pp) :-
 		retractall(seed_(xoshiro128pp, _)),
 		% Default seed values (must be non-zero; [0x12345678, 0x9ABCDEF0, 0xFEDCBA98, 0x76543210])
-		asserta(seed_(xoshiro128pp, [305419896, 2596069104, 4275878552, 1985229328])).
+		assertz(seed_(xoshiro128pp, s(305419896, 2596069104, 4275878552, 1985229328))).
 	reset_seed(xoshiro128ss) :-
 		retractall(seed_(xoshiro128ss, _)),
 		% Default seed values (must be non-zero)
-		asserta(seed_(xoshiro128ss, [305419896, 2596069104, 4275878552, 1985229328])).
+		assertz(seed_(xoshiro128ss, s(305419896, 2596069104, 4275878552, 1985229328))).
 
 	% Mask for 32-bit integers (0xFFFFFFFF)
 	mask32(4294967295).

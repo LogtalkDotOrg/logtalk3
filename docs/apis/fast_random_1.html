@@ -324,7 +324,7 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <section id="seed-2">
 <span id="fast-random-1-seed-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seed_/2</span></code></a><a class="headerlink" href="#seed-2" title="Link to this heading"></a></h3>
-<p>Stores the current random generator seed values.</p>
+<p>Stores the current random generator seed values (a ground but otherwise opaque term).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -334,11 +334,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">seed_(Algorithm,Values)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seed_(Algorithm,Seed)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">seed_(+atom,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seed_(+atom,-ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </section>

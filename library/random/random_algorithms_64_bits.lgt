@@ -20,7 +20,7 @@
 
 
 	% Core Xoshiro256++ algorithm
-	random_seeds(xoshiro256pp, [S0, S1, S2, S3], [NewS0, NewS1, NewS2, NewS3], Random) :-
+	random_seeds(xoshiro256pp, s(S0, S1, S2, S3), s(NewS0, NewS1, NewS2, NewS3), Random) :-
 		mask64(Mask),
 		% IntRandom = rotl(s0 + s3, 23) + s0
 		Sum1 is (S0 + S3) /\ Mask,
@@ -40,7 +40,7 @@
 		% Convert to float in [0.0, 1.0)
 		Random is IntRandom / 18446744073709551616.0.
 	% Xoshiro256** algorithm
-	random_seeds(xoshiro256ss, [S0, S1, S2, S3], [NewS0, NewS1, NewS2, NewS3], Random) :-
+	random_seeds(xoshiro256ss, s(S0, S1, S2, S3), s(NewS0, NewS1, NewS2, NewS3), Random) :-
 		mask64(Mask),
 		% IntRandom = rotl(s1 * 5, 7) * 9
 		Mul1 is (S1 * 5) /\ Mask,
@@ -60,11 +60,11 @@
 		% Convert to float in [0.0, 1.0)
 		Random is IntRandom / 18446744073709551616.0.
 	% SplitMix64 algorithm
-	random_seeds(splitmix64, [State0], [State], Random) :-
+	random_seeds(splitmix64, s(S0), s(NewS0), Random) :-
 		mask64(Mask),
-		State1 is State0 + 0x9e3779b97f4a7c15,
-		State is State1 /\ Mask,
-		Z is (xor(State1, (State1 >> 30)) * 0xbf58476d1ce4e5b9) /\ Mask,
+		TmpS0 is S0 + 0x9e3779b97f4a7c15,
+		NewS0 is TmpS0 /\ Mask,
+		Z is (xor(TmpS0, (TmpS0 >> 30)) * 0xbf58476d1ce4e5b9) /\ Mask,
 		IntRandom is xor(Z, (Z >> 27)) /\ Mask,
 		% Convert to float in [0.0, 1.0)
 		Random is IntRandom / 18446744073709551616.0.
@@ -80,8 +80,8 @@
 		S3 is ((Seed >> 48) \/ (Seed * 17)) /\ Mask,
 		% Ensure non-zero state
 		(	S0 =:= 0, S1 =:= 0, S2 =:= 0, S3 =:= 0 ->
-			::asserta(seed_(xoshiro256pp, [1, 1, 1, 1]))
-		;	::asserta(seed_(xoshiro256pp, [S0, S1, S2, S3]))
+			::assertz(seed_(xoshiro256pp, s(1, 1, 1, 1)))
+		;	::assertz(seed_(xoshiro256pp, s(S0, S1, S2, S3)))
 		).
 	randomize(xoshiro256ss, Seed) :-
 		integer(Seed),
@@ -94,8 +94,8 @@
 		S3 is ((Seed >> 48) \/ (Seed * 17)) /\ Mask,
 		% Ensure non-zero state
 		(	S0 =:= 0, S1 =:= 0, S2 =:= 0, S3 =:= 0 ->
-			::asserta(seed_(xoshiro256ss, [1, 1, 1, 1]))
-		;	::asserta(seed_(xoshiro256ss, [S0, S1, S2, S3]))
+			::assertz(seed_(xoshiro256ss, s(1, 1, 1, 1)))
+		;	::assertz(seed_(xoshiro256ss, s(S0, S1, S2, S3)))
 		).
 	randomize(splitmix64, Seed) :-
 		integer(Seed),
@@ -103,20 +103,20 @@
 		::retractall(seed_(splitmix64, _)),
 		mask64(Mask),
 		S is Seed /\ Mask,
-		::asserta(seed_(splitmix64, [S])).
+		::assertz(seed_(splitmix64, [S])).
 
 	reset_seed(xoshiro256pp) :-
 		::retractall(seed_(xoshiro256pp, _)),
 		% Default seed values (must be non-zero)
-		::asserta(seed_(xoshiro256pp, [0x123456789ABCDEF0, 0x0FEDCBA987654321, 0x13579BDF2468ACE0, 0x2468ACE013579BDF])).
+		::assertz(seed_(xoshiro256pp, s(0x123456789ABCDEF0, 0x0FEDCBA987654321, 0x13579BDF2468ACE0, 0x2468ACE013579BDF))).
 	reset_seed(xoshiro256ss) :-
 		::retractall(seed_(xoshiro256ss, _)),
 		% Default seed values (must be non-zero)
-		::asserta(seed_(xoshiro256ss, [0x123456789ABCDEF0, 0x0FEDCBA987654321, 0x13579BDF2468ACE0, 0x2468ACE013579BDF])).
+		::assertz(seed_(xoshiro256ss, s(0x123456789ABCDEF0, 0x0FEDCBA987654321, 0x13579BDF2468ACE0, 0x2468ACE013579BDF))).
 	reset_seed(splitmix64) :-
 		::retractall(seed_(splitmix64, _)),
 		% Default seed value
-		::asserta(seed_(splitmix64, [0x0DFC83DF70B8AB7E])).
+		::assertz(seed_(splitmix64, s(0x0DFC83DF70B8AB7E))).
 
 	% Mask for 64-bit integers
 	mask64(0xFFFFFFFFFFFFFFFF).

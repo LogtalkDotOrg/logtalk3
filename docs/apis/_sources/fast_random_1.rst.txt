@@ -95,15 +95,15 @@ Private predicates
 ``seed_/2``
 ^^^^^^^^^^^
 
-Stores the current random generator seed values.
+Stores the current random generator seed values (a ground but otherwise opaque term).
 
 | **Compilation flags:**
 |    ``dynamic``
 
 | **Template:**
-|    ``seed_(Algorithm,Values)``
+|    ``seed_(Algorithm,Seed)``
 | **Mode and number of proofs:**
-|    ``seed_(+atom,-list(integer))`` - ``one``
+|    ``seed_(+atom,-ground)`` - ``one``
 
 
 ------------

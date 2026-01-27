@@ -65,14 +65,12 @@
 		]).
 	:- endif.
 
-	:- initialization(reset_seed).
-
 	:- private(seed_/2).
 	:- dynamic(seed_/2).
-	:- mode(seed_(+atom, -list(integer)), one).
+	:- mode(seed_(+atom, -ground), one).
 	:- info(seed_/2, [
-		comment is 'Stores the current random generator seed values.',
-		argnames is ['Algorithm', 'Values']
+		comment is 'Stores the current random generator seed values (a ground but otherwise opaque term).',
+		argnames is ['Algorithm', 'Seed']
 	]).
 
 	random(Random) :-
@@ -164,17 +162,17 @@
 		integer(Lower),
 		integer(Upper),
 		Upper >= Lower,
-		retract(seed_(_Algorithm_, Values0)),
-		sequence(Length, Lower, Upper, Values0, Values, Sequence),
-		asserta(seed_(_Algorithm_, Values)).
+		retract(seed_(_Algorithm_, Seed0)),
+		sequence(Length, Lower, Upper, Seed0, Seed, Sequence),
+		assertz(seed_(_Algorithm_, Seed)).
 
-	sequence(0, _, _, Values, Values, []) :-
+	sequence(0, _, _, Seed, Seed, []) :-
 		!.
-	sequence(N, Lower, Upper, Values0, Values, [Random| Sequence]) :-
+	sequence(N, Lower, Upper, Seed0, Seed, [Random| Sequence]) :-
 		N2 is N - 1,
-		random_seeds(_Algorithm_, Values0, Values1, Float),
+		random_seeds(_Algorithm_, Seed0, Seed1, Float),
 		Random is truncate(Float * (Upper - Lower + 1)) + Lower,
-		sequence(N2, Lower, Upper, Values1, Values, Sequence).
+		sequence(N2, Lower, Upper, Seed1, Seed, Sequence).
 
 	set(Length, Lower, Upper, Set) :-
 		integer(Length),
@@ -183,33 +181,33 @@
 		integer(Upper),
 		Upper >= Lower,
 		Length =< Upper - Lower + 1,
-		retract(seed_(_Algorithm_, Values0)),
-		set(Length, Lower, Upper, Values0, Values, [], Set),
-		asserta(seed_(_Algorithm_, Values)).
+		retract(seed_(_Algorithm_, Seed0)),
+		set(Length, Lower, Upper, Seed0, Seed, [], Set),
+		assertz(seed_(_Algorithm_, Seed)).
 
-	set(0, _, _, Values, Values, List, Set) :-
+	set(0, _, _, Seed, Seed, List, Set) :-
 		!,
 		sort(List, Set).
-	set(N, Lower, Upper, Values0, Values, Acc, Set) :-
-		random_seeds(_Algorithm_, Values0, Values1, Float),
+	set(N, Lower, Upper, Seed0, Seed, Acc, Set) :-
+		random_seeds(_Algorithm_, Seed0, Seed1, Float),
 		Random is truncate(Float * (Upper - Lower + 1)) + Lower,
 		(	not_member(Acc, Random) ->
 			N2 is N - 1,
-			set(N2, Lower, Upper, Values1, Values, [Random| Acc], Set)
-		;	set(N, Lower, Upper, Values1, Values, Acc, Set)
+			set(N2, Lower, Upper, Seed1, Seed, [Random| Acc], Set)
+		;	set(N, Lower, Upper, Seed1, Seed, Acc, Set)
 		).
 
 	permutation(List, Permutation) :-
-		retract(seed_(_Algorithm_, Values0)),
-		add_random_key(List, Values0, Values, KeyList),
-		asserta(seed_(_Algorithm_, Values)),
+		retract(seed_(_Algorithm_, Seed0)),
+		add_random_key(List, Seed0, Seed, KeyList),
+		assertz(seed_(_Algorithm_, Seed)),
 		keysort(KeyList, SortedKeyList),
 		remove_random_key(SortedKeyList, Permutation).
 
-	add_random_key([], Values, Values, []).
-	add_random_key([Head| Tail], Values0, Values, [Random-Head| KeyTail]) :-
-		random_seeds(_Algorithm_, Values0, Values1, Random),
-		add_random_key(Tail, Values1, Values, KeyTail).
+	add_random_key([], Seed, Seed, []).
+	add_random_key([Head| Tail], Seed0, Seed, [Random-Head| KeyTail]) :-
+		random_seeds(_Algorithm_, Seed0, Seed1, Random),
+		add_random_key(Tail, Seed1, Seed, KeyTail).
 
 	remove_random_key([], []).
 	remove_random_key([_-Head| KeyTail], [Head| Tail]) :-
@@ -236,9 +234,9 @@
 		integer(Upper),
 		Upper >= Lower,
 		!,
-		retract(seed_(_Algorithm_, Values0)),
-		randseq(Length, Lower, Upper, Values0, Values, List),
-		asserta(seed_(_Algorithm_, Values)),
+		retract(seed_(_Algorithm_, Seed0)),
+		randseq(Length, Lower, Upper, Seed0, Seed, List),
+		assertz(seed_(_Algorithm_, Seed)),
 		map_truncate(List, Sequence).
 	randseq(Length, Lower, Upper, Sequence) :-
 		integer(Length),
@@ -246,17 +244,17 @@
 		float(Lower),
 		float(Upper),
 		Upper >= Lower,
-		retract(seed_(_Algorithm_, Values0)),
-		randseq(Length, Lower, Upper, Values0, Values, Sequence),
-		asserta(seed_(_Algorithm_, Values)).
+		retract(seed_(_Algorithm_, Seed0)),
+		randseq(Length, Lower, Upper, Seed0, Seed, Sequence),
+		assertz(seed_(_Algorithm_, Seed)).
 
-	randseq(0, _, _, Values, Values, []) :-
+	randseq(0, _, _, Seed, Seed, []) :-
 		!.
-	randseq(N, Lower, Upper, Values0, Values, [Random| List]) :-
+	randseq(N, Lower, Upper, Seed0, Seed, [Random| List]) :-
 		N2 is N - 1,
-		random_seeds(_Algorithm_, Values0, Values1, R),
+		random_seeds(_Algorithm_, Seed0, Seed1, R),
 		Random is R * (Upper-Lower)+Lower,
-		randseq(N2, Lower, Upper, Values1, Values, List).
+		randseq(N2, Lower, Upper, Seed1, Seed, List).
 
 	map_truncate([], []).
 	map_truncate([Float| Floats], [Integer| Integers]) :-
@@ -271,24 +269,24 @@
 		Upper >= Lower,
 		Length =< Upper - Lower,
 		!,
-		retract(seed_(_Algorithm_, Values0)),
-		randset(Length, Lower, Upper, Values0, Values, [], Set),
-		asserta(seed_(_Algorithm_, Values)).
+		retract(seed_(_Algorithm_, Seed0)),
+		randset(Length, Lower, Upper, Seed0, Seed, [], Set),
+		assertz(seed_(_Algorithm_, Seed)).
 	randset(Length, Lower, Upper, Set) :-
 		integer(Length),
 		Length >= 0,
 		float(Lower),
 		float(Upper),
 		Upper >= Lower,
-		retract(seed_(_Algorithm_, Values0)),
-		randset(Length, Lower, Upper, Values0, Values, [], Set),
-		asserta(seed_(_Algorithm_, Values)).
+		retract(seed_(_Algorithm_, Seed0)),
+		randset(Length, Lower, Upper, Seed0, Seed, [], Set),
+		assertz(seed_(_Algorithm_, Seed)).
 
-	randset(0, _, _, Values, Values, List, Set) :-
+	randset(0, _, _, Seed, Seed, List, Set) :-
 		!,
 		sort(List, Set).
-	randset(N, Lower, Upper, Values0, Values, Acc, Set) :-
-		random_seeds(_Algorithm_, Values0, Values1, Float),
+	randset(N, Lower, Upper, Seed0, Seed, Acc, Set) :-
+		random_seeds(_Algorithm_, Seed0, Seed1, Float),
 		Float2 is Float * (Upper-Lower) + Lower,
 		(	integer(Lower) ->
 			Random is truncate(Float2)
@@ -296,8 +294,8 @@
 		),
 		(	not_member(Acc, Random) ->
 			N2 is N - 1,
-			randset(N2, Lower, Upper, Values1, Values, [Random| Acc], Set)
-		;	randset(N, Lower, Upper, Values1, Values, Acc, Set)
+			randset(N2, Lower, Upper, Seed1, Seed, [Random| Acc], Set)
+		;	randset(N, Lower, Upper, Seed1, Seed, Acc, Set)
 		).
 
 	not_member([], _).
@@ -308,12 +306,12 @@
 	reset_seed :-
 		reset_seed(_Algorithm_).
 
-	get_seed(seed(_Algorithm_, Values)) :-
-		seed_(_Algorithm_, Values).
+	get_seed(seed(_Algorithm_, Seed)) :-
+		seed_(_Algorithm_, Seed).
 
-	set_seed(seed(_Algorithm_, Values)) :-
+	set_seed(seed(_Algorithm_, Seed)) :-
 		retractall(seed_(_Algorithm_, _)),
-		asserta(seed_(_Algorithm_, Values)).
+		assertz(seed_(_Algorithm_, Seed)).
 
 	randomize(Seed) :-
 		randomize(_Algorithm_, Seed).
@@ -352,9 +350,9 @@
 	% SWI-Prolog and XVM require the cut at the
 	% end to avoid a spurious choice-point
 	random(_Algorithm_, Random) :-
-		retract(seed_(_Algorithm_, Values0)),
-		random_seeds(_Algorithm_, Values0, Values, Random),
-		asserta(seed_(_Algorithm_, Values)), !.
+		retract(seed_(_Algorithm_, Seed0)),
+		random_seeds(_Algorithm_, Seed0, Seed, Random),
+		assertz(seed_(_Algorithm_, Seed)).
 
 	reset_seeds :-
 		reset_seed(_),
