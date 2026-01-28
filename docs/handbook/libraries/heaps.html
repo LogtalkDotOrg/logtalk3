@@ -100,6 +100,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#credits">Credits</a></li>
 </ul>
 </li>
@@ -187,10 +188,13 @@
 <p>This library defines a heap protocol and provides minimum and maximum
 heaps using two different implementations: pairing heaps and binary
 heaps.</p>
+<p>The heap representations should be regarded as opaque terms, subjected
+to be changed without notice, and only accessed using the library
+predicates.</p>
 <p>For backward-compatibility, the <code class="docutils literal notranslate"><span class="pre">legacy.lgt</span></code> file defines the
-<code class="docutils literal notranslate"><span class="pre">heapp</span></code> protocol using the <code class="docutils literal notranslate"><span class="pre">heap_protocol</span></code> protocol plus the
-<code class="docutils literal notranslate"><span class="pre">heap/1</span></code>, <code class="docutils literal notranslate"><span class="pre">minheap</span></code>, and <code class="docutils literal notranslate"><span class="pre">maxheap</span></code> objects using the
-<code class="docutils literal notranslate"><span class="pre">binary_heap/1</span></code> objects. These legacy protocol and objects are
+<code class="docutils literal notranslate"><span class="pre">heapp</span></code> protocol extending the <code class="docutils literal notranslate"><span class="pre">heap_protocol</span></code> protocol plus the
+<code class="docutils literal notranslate"><span class="pre">heap/1</span></code>, <code class="docutils literal notranslate"><span class="pre">minheap</span></code>, and <code class="docutils literal notranslate"><span class="pre">maxheap</span></code> objects extending the
+<code class="docutils literal notranslate"><span class="pre">binary_heap/1</span></code> object. These legacy protocol and objects are
 deprecated and should not be used in new code.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
@@ -211,6 +215,23 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(heaps(tester)).
 </pre></div>
 </div>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Choose the heap implementation that best suits your needs. The pairing
+heap implementation is usually the best choice, specially if insertion
+and merging operations dominate in your use case. You can easily
+benchmark and compare the two implementations using either a <code class="docutils literal notranslate"><span class="pre">uses/2</span></code>
+directive with a parameter variable for the heap object and calling the
+heap predicates using implicit message-sending goals or a <code class="docutils literal notranslate"><span class="pre">uses/1</span></code>
+directive defining an object alias for the heap object and using the
+alias with explicit message-sending goals.</p>
+<p>The two main library objects are <code class="docutils literal notranslate"><span class="pre">binary_heap(Order)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">pairing_heap(Order)</span></code>, where <code class="docutils literal notranslate"><span class="pre">Order</span></code> is either <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> for a minimum
+heap or <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> for a maximum heap. For convenience, there are also
+<code class="docutils literal notranslate"><span class="pre">binary_heap_min</span></code> and <code class="docutils literal notranslate"><span class="pre">pairing_heap_min</span></code> objects for minimum heaps
+and <code class="docutils literal notranslate"><span class="pre">binary_heap_max</span></code> and <code class="docutils literal notranslate"><span class="pre">pairing_heap_max</span></code> objects for maximum
+heaps.</p>
 </section>
 <section id="credits">
 <h2>Credits<a class="headerlink" href="#credits" title="Link to this heading"></a></h2>
