@@ -25,7 +25,7 @@
 	:- info([
 		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2026-01-27,
+		date is 2026-01-28,
 		comment is 'Portable random number generator predicates.',
 		parameters is [
 			'Algorithm' - 'Random number generator algorithm. One of ``as183``, ``splitmix64``, ``xoshiro128pp``, ``xoshiro128ss``, ``xoshiro256pp``, ``xoshiro256ss``.'
@@ -354,12 +354,11 @@
 		Random < Probability,
 		once(Goal).
 
-	% SWI-Prolog and XVM require the cut at the
-	% end to avoid a spurious choice-point
+	% SWI-Prolog requires the cut at the end to avoid a spurious choice-point
 	random(_Algorithm_, Random) :-
 		::retract(seed_(_Algorithm_, Seed0)),
 		random_seeds(_Algorithm_, Seed0, Seed, Random),
-		::assertz(seed_(_Algorithm_, Seed)).
+		::assertz(seed_(_Algorithm_, Seed)), !.
 
 	reset_seeds :-
 		reset_seed(_),
