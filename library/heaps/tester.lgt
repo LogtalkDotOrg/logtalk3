@@ -23,10 +23,19 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(basic_types(loader)),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load([heapp, heaps], [debug(on), source_data(on)]),
+	logtalk_load([
+		heap_protocol,
+		binary_heaps,
+		pairing_heaps
+	], [
+		debug(on),
+		source_data(on)
+	]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	lgtunit::run_test_sets([
-		tests(heap(<)),
-		tests(heap(>))
+		tests(binary_heap(<)),
+		tests(binary_heap(>)),
+		tests(pairing_heap(<)),
+		tests(pairing_heap(>))
 	])
 )).

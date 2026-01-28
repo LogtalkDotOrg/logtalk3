@@ -318,12 +318,12 @@ some Prolog compilers:</p>
 </section>
 <section id="activating-the-debugger">
 <h2>Activating the debugger<a class="headerlink" href="#activating-the-debugger" title="Link to this heading"></a></h2>
-<p>The <a class="reference external" href="../../apis/debuggerp_0.html#debuggerp-0-trace-0" title="(in Logtalk APIs v3.98.0)"><span class="xref std std-ref">debuggerp::trace/0</span></a> and
-<a class="reference external" href="../../apis/debuggerp_0.html#debuggerp-0-debug-0" title="(in Logtalk APIs v3.98.0)"><span class="xref std std-ref">debuggerp::debug/0</span></a> predicates implicitly
+<p>The <span class="xref std std-ref">debuggerp::trace/0</span> and
+<span class="xref std std-ref">debuggerp::debug/0</span> predicates implicitly
 select the <code class="docutils literal notranslate"><span class="pre">debugger</span></code> tool as the active <a class="reference internal" href="../glossary.html#term-debug-handler"><span class="xref std std-term">debug handler</span></a>. If you have
 additional debug handlers loaded (e.g., the <code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code> tool), those
 would no longer be active (there can be only one active debug handler at any
-given time). The <a class="reference external" href="../../apis/debuggerp_0.html#debuggerp-0-nodebug-0" title="(in Logtalk APIs v3.98.0)"><span class="xref std std-ref">debuggerp::nodebug/0</span></a>
+given time). The <span class="xref std std-ref">debuggerp::nodebug/0</span>
 predicate implicitly deselects the <code class="docutils literal notranslate"><span class="pre">debugger</span></code> tool as the active debug
 handler.</p>
 </section>
@@ -783,8 +783,8 @@ yes
 </div>
 <p>The default maximum depth depends on the backend. To print compound
 terms without a depth limit, set it explicitly to zero if necessary.
-The <a class="reference external" href="../../apis/debuggerp_0.html#debuggerp-0-write-max-depth-1" title="(in Logtalk APIs v3.98.0)"><span class="xref std std-ref">debuggerp::write_max_depth/1</span></a>
-and <a class="reference external" href="../../apis/debuggerp_0.html#debuggerp-0-set-write-max-depth-1" title="(in Logtalk APIs v3.98.0)"><span class="xref std std-ref">debuggerp::set_write_max_depth/1</span></a>
+The <span class="xref std std-ref">debuggerp::write_max_depth/1</span>
+and <span class="xref std std-ref">debuggerp::set_write_max_depth/1</span>
 predicates can be used to query and set the default maximum depth.</p>
 </section>
 <section id="custom-term-writing">
@@ -999,7 +999,7 @@ yes
 <p>The <a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term-expansion mechanism</span></a> can also be used for
 conditional compilation of debugging goals. For example, the
 <a class="reference internal" href="../libraries/hook_objects.html"><span class="doc">hook_objects</span></a> library provides a
-<a class="reference external" href="../../apis/print_goal_hook_0.html#print-goal-hook-0" title="(in Logtalk APIs v3.98.0)"><span class="xref std std-ref">print_goal_hook</span></a> object that simplifies
+<span class="xref std std-ref">print_goal_hook</span> object that simplifies
 printing entity goals before or after calling them by simply prefixing them
 with an operator. See the library and hook object documentation for details.
 You can also define your own specialized hook objects for custom debugging

@@ -60,17 +60,19 @@
 */
 
 
-:- object(heap(_Order),
-	implements(heapp),
+:- object(binary_heap(_Order_),
+	implements(heap_protocol),
 	extends(compound)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Richard O''Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.',
-		date is 2019-05-18,
+		date is 2026-01-28,
 		comment is 'Heap implementation, parameterized by the order to be used to compare keys (``<`` or ``>``).',
-		parnames is ['Order'],
-		see_also is [minheap, maxheap]
+		parameters is [
+			'Order' - 'Either ``<`` for a min heap or ``>`` for a max heap.'
+		],
+		see_also is [binary_heap_min, binary_heap_max]
 	]).
 
 	insert(Key, Value, t(M,[],OldTree), t(N,[],NewTree)) :- !,
@@ -98,8 +100,7 @@
 	% sort/8 *assumes* the last four arguments are not instantiated;
 	% this holds when sort/8 is called from insert/5
 	sort(Key1, Value1, Key2, Value2, Key1, Value1, Key2, Value2) :-
-		parameter(1, Order),
-		compare(Order, Key1, Key2),
+		compare(_Order_, Key1, Key2),
 		!.
 	sort(Key1, Value1, Key2, Value2, Key2, Value2, Key1, Value1).
 
@@ -113,8 +114,7 @@
 		repair(Left, Right, Tree, Hole).
 
 	repair(t(K1,V1,L1,R1), t(K2,V2,L2,R2), t(K2,V2,t(K1,V1,L1,R1),R3), N) :-
-		parameter(1, Order),
-		compare(Order, K2, K1),
+		compare(_Order_, K2, K1),
 		!,
 		repair(L2, R2, R3, M),
 		N is 2*M+1.
@@ -146,8 +146,7 @@
 		merge_pairs(LeftPairs, RightPairs, Pairs).
 
 	merge_pairs([Pair1| Pairs1], [Pair2| Pairs2], [Pair| Pairs]) :-
-		parameter(1, Order),
-		compare(Order, Pair2, Pair1),
+		compare(_Order_, Pair2, Pair1),
 		!,
 		Pair = Pair2,
 		merge_pairs([Pair1| Pairs1], Pairs2, Pairs).
@@ -187,8 +186,7 @@
 		top_next(Left, Right, Key2, Value2).
 
 	top_next(t(Ka,_,_,_), t(Kb,Vb,_,_), Key, Value) :-
-		parameter(1, Order),
-		compare(Order, Kb, Ka),
+		compare(_Order_, Kb, Ka),
 		!,
 		Key = Kb,
 		Value = Vb.
@@ -201,7 +199,15 @@
 		valid_(Tree, 0, N).
 
 	valid_(t, N, N).
-	valid_(t(_, _, Left, Right), N0, N) :-
+	valid_(t(Key, _, Left, Right), N0, N) :-
+		(	Left = t(KeyLeft, _, _, _) ->
+			compare(_Order_, Key, KeyLeft)
+		;	true
+		),
+		(	Right = t(KeyRight, _, _, _) ->
+			compare(_Order_, Key, KeyRight)
+		;	true
+		),
 		N1 is N0 + 1,
 		valid_(Left, N1, N2),
 		valid_(Right, N2, N).
@@ -209,27 +215,29 @@
 :- end_object.
 
 
-:- object(minheap,
-	extends(heap(<))).
+:- object(binary_heap_min,
+	extends(binary_heap(<))).
 
 	:- info([
 		version is 1:0:0,
-		author is 'Paulo Moura.',
+		author is 'Paulo Moura',
 		date is 2010-02-19,
-		comment is 'Min-heap implementation. Uses standard order to compare keys.'
+		comment is 'Min-heap implementation. Uses standard order to compare keys.',
+		see_also is [binary_heap_max, binary_heap(_)]
 	]).
 
 :- end_object.
 
 
-:- object(maxheap,
-	extends(heap(>))).
+:- object(binary_heap_max,
+	extends(binary_heap(>))).
 
 	:- info([
 		version is 1:0:0,
-		author is 'Paulo Moura.',
+		author is 'Paulo Moura',
 		date is 2010-02-19,
-		comment is 'Max-heap implementation. Uses standard order to compare keys.'
+		comment is 'Max-heap implementation. Uses standard order to compare keys.',
+		see_also is [binary_heap_min, binary_heap(_)]
 	]).
 
 :- end_object.

@@ -184,7 +184,14 @@
              
   <section id="heaps">
 <span id="library-heaps"></span><h1><code class="docutils literal notranslate"><span class="pre">heaps</span></code><a class="headerlink" href="#heaps" title="Link to this heading"></a></h1>
-<p>This library implements minimum and maximum heaps.</p>
+<p>This library defines a heap protocol and provides minimum and maximum
+heaps using two different implementations: pairing heaps and binary
+heaps.</p>
+<p>For backward-compatibility, the <code class="docutils literal notranslate"><span class="pre">legacy.lgt</span></code> file defines the
+<code class="docutils literal notranslate"><span class="pre">heapp</span></code> protocol using the <code class="docutils literal notranslate"><span class="pre">heap_protocol</span></code> protocol plus the
+<code class="docutils literal notranslate"><span class="pre">heap/1</span></code>, <code class="docutils literal notranslate"><span class="pre">minheap</span></code>, and <code class="docutils literal notranslate"><span class="pre">maxheap</span></code> objects using the
+<code class="docutils literal notranslate"><span class="pre">binary_heap/1</span></code> objects. These legacy protocol and objects are
+deprecated and should not be used in new code.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -207,8 +214,8 @@ link in a web browser.</p>
 </section>
 <section id="credits">
 <h2>Credits<a class="headerlink" href="#credits" title="Link to this heading"></a></h2>
-<p>Original code by Richard O’’Keefe. Adapted to Logtalk by Paulo Moura and
-Victor Lagerkvist.</p>
+<p>Original binary heap code by Richard O’Keefe and adapted to Logtalk by
+Paulo Moura and Victor Lagerkvist.</p>
 </section>
 </section>
 

@@ -32,7 +32,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="help" href="help_0.html" />
+    <link rel="next" title="pairing_heap(Order)" href="pairing_heap_1.html" />
     <link rel="prev" title="maxheap" href="maxheap_0.html" />
    
 </head>
@@ -99,10 +99,17 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#git"><span class="xref std std-ref">git</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#grammars"><span class="xref std std-ref">grammars</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#heaps"><span class="xref std std-ref">heaps</span></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="binary_heap_1.html">binary_heap(Order)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary_heap_max_0.html">binary_heap_max</a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary_heap_min_0.html">binary_heap_min</a></li>
 <li class="toctree-l3"><a class="reference internal" href="heap_1.html">heap(Order)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heap_protocol_0.html">heap_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="heapp_0.html">heapp</a></li>
 <li class="toctree-l3"><a class="reference internal" href="maxheap_0.html">maxheap</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">minheap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pairing_heap_1.html">pairing_heap(Order)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pairing_heap_max_0.html">pairing_heap_max</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pairing_heap_min_0.html">pairing_heap_min</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><span class="xref std std-ref">help</span></a></li>
@@ -207,7 +214,7 @@
   <p class="right" id="minheap-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="minheap">
 <h1><code class="docutils literal notranslate"><span class="pre">minheap</span></code><a class="headerlink" href="#minheap" title="Link to this heading"></a></h1>
-<p>Min-heap implementation. Uses standard order to compare keys.</p>
+<p>Min-heap implementation. Uses standard order to compare keys. Deprecated. Use the <code class="docutils literal notranslate"><span class="pre">binary_heap_min</span></code> object instead.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -215,7 +222,7 @@
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Author:</strong> Paulo Moura.</div>
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
 <div class="line"><strong>Date:</strong> 2010-02-19</div>
 </div>
@@ -228,7 +235,7 @@
 <div class="line-block">
 <div class="line"><strong>Extends:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="heap_1.html#heap-1"><span class="std std-ref">heap(&lt;)</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="binary_heap_1.html#binary-heap-1"><span class="std std-ref">binary_heap(&lt;)</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -240,7 +247,7 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="comparingp_0.html#comparingp-0-2"><span class="std std-ref">(&lt;)/2</span></a>  <a class="reference internal" href="comparingp_0.html#id8"><span class="std std-ref">(=:=)/2</span></a>  <a class="reference internal" href="comparingp_0.html#id2"><span class="std std-ref">(=&lt;)/2</span></a>  <a class="reference internal" href="comparingp_0.html#id10"><span class="std std-ref">(=\=)/2</span></a>  <a class="reference internal" href="comparingp_0.html#id4"><span class="std std-ref">(&gt;)/2</span></a>  <a class="reference internal" href="comparingp_0.html#id6"><span class="std std-ref">(&gt;=)/2</span></a>  <a class="reference internal" href="heapp_0.html#heapp-0-as-heap-2"><span class="std std-ref">as_heap/2</span></a>  <a class="reference internal" href="heapp_0.html#heapp-0-as-list-2"><span class="std std-ref">as_list/2</span></a>  <a class="reference internal" href="termp_0.html#termp-0-check-1"><span class="std std-ref">check/1</span></a>  <a class="reference internal" href="heapp_0.html#heapp-0-delete-4"><span class="std std-ref">delete/4</span></a>  <a class="reference internal" href="termp_0.html#termp-0-depth-2"><span class="std std-ref">depth/2</span></a>  <a class="reference internal" href="heapp_0.html#heapp-0-empty-1"><span class="std std-ref">empty/1</span></a>  <a class="reference internal" href="termp_0.html#termp-0-ground-1"><span class="std std-ref">ground/1</span></a>  <a class="reference internal" href="heapp_0.html#heapp-0-insert-4"><span class="std std-ref">insert/4</span></a>  <a class="reference internal" href="heapp_0.html#heapp-0-insert-all-3"><span class="std std-ref">insert_all/3</span></a>  <a class="reference internal" href="heapp_0.html#heapp-0-merge-3"><span class="std std-ref">merge/3</span></a>  <a class="reference internal" href="termp_0.html#termp-0-new-1"><span class="std std-ref">new/1</span></a>  <a class="reference internal" href="termp_0.html#termp-0-numbervars-1"><span class="std std-ref">numbervars/1</span></a>  <a class="reference internal" href="termp_0.html#termp-0-numbervars-3"><span class="std std-ref">numbervars/3</span></a>  <a class="reference internal" href="termp_0.html#termp-0-occurs-2"><span class="std std-ref">occurs/2</span></a>  <a class="reference internal" href="termp_0.html#termp-0-singletons-2"><span class="std std-ref">singletons/2</span></a>  <a class="reference internal" href="heapp_0.html#heapp-0-size-2"><span class="std std-ref">size/2</span></a>  <a class="reference internal" href="termp_0.html#termp-0-subsumes-2"><span class="std std-ref">subsumes/2</span></a>  <a class="reference internal" href="termp_0.html#termp-0-subterm-2"><span class="std std-ref">subterm/2</span></a>  <a class="reference internal" href="heapp_0.html#heapp-0-top-3"><span class="std std-ref">top/3</span></a>  <a class="reference internal" href="heapp_0.html#heapp-0-top-next-5"><span class="std std-ref">top_next/5</span></a>  <a class="reference internal" href="termp_0.html#termp-0-valid-1"><span class="std std-ref">valid/1</span></a>  <a class="reference internal" href="termp_0.html#termp-0-variables-2"><span class="std std-ref">variables/2</span></a>  <a class="reference internal" href="termp_0.html#termp-0-variant-2"><span class="std std-ref">variant/2</span></a>  <a class="reference internal" href="termp_0.html#termp-0-varnumbers-2"><span class="std std-ref">varnumbers/2</span></a>  <a class="reference internal" href="termp_0.html#termp-0-varnumbers-3"><span class="std std-ref">varnumbers/3</span></a></div>
+<div class="line"> <a class="reference internal" href="comparingp_0.html#comparingp-0-2"><span class="std std-ref">(&lt;)/2</span></a>  <a class="reference internal" href="comparingp_0.html#id8"><span class="std std-ref">(=:=)/2</span></a>  <a class="reference internal" href="comparingp_0.html#id2"><span class="std std-ref">(=&lt;)/2</span></a>  <a class="reference internal" href="comparingp_0.html#id10"><span class="std std-ref">(=\=)/2</span></a>  <a class="reference internal" href="comparingp_0.html#id4"><span class="std std-ref">(&gt;)/2</span></a>  <a class="reference internal" href="comparingp_0.html#id6"><span class="std std-ref">(&gt;=)/2</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-as-heap-2"><span class="std std-ref">as_heap/2</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-as-list-2"><span class="std std-ref">as_list/2</span></a>  <a class="reference internal" href="termp_0.html#termp-0-check-1"><span class="std std-ref">check/1</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-delete-4"><span class="std std-ref">delete/4</span></a>  <a class="reference internal" href="termp_0.html#termp-0-depth-2"><span class="std std-ref">depth/2</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-empty-1"><span class="std std-ref">empty/1</span></a>  <a class="reference internal" href="termp_0.html#termp-0-ground-1"><span class="std std-ref">ground/1</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-insert-4"><span class="std std-ref">insert/4</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-insert-all-3"><span class="std std-ref">insert_all/3</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-merge-3"><span class="std std-ref">merge/3</span></a>  <a class="reference internal" href="termp_0.html#termp-0-new-1"><span class="std std-ref">new/1</span></a>  <a class="reference internal" href="termp_0.html#termp-0-numbervars-1"><span class="std std-ref">numbervars/1</span></a>  <a class="reference internal" href="termp_0.html#termp-0-numbervars-3"><span class="std std-ref">numbervars/3</span></a>  <a class="reference internal" href="termp_0.html#termp-0-occurs-2"><span class="std std-ref">occurs/2</span></a>  <a class="reference internal" href="termp_0.html#termp-0-singletons-2"><span class="std std-ref">singletons/2</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-size-2"><span class="std std-ref">size/2</span></a>  <a class="reference internal" href="termp_0.html#termp-0-subsumes-2"><span class="std std-ref">subsumes/2</span></a>  <a class="reference internal" href="termp_0.html#termp-0-subterm-2"><span class="std std-ref">subterm/2</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-top-3"><span class="std std-ref">top/3</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-top-next-5"><span class="std std-ref">top_next/5</span></a>  <a class="reference internal" href="termp_0.html#termp-0-valid-1"><span class="std std-ref">valid/1</span></a>  <a class="reference internal" href="termp_0.html#termp-0-variables-2"><span class="std std-ref">variables/2</span></a>  <a class="reference internal" href="termp_0.html#termp-0-variant-2"><span class="std std-ref">variant/2</span></a>  <a class="reference internal" href="termp_0.html#termp-0-varnumbers-2"><span class="std std-ref">varnumbers/2</span></a>  <a class="reference internal" href="termp_0.html#termp-0-varnumbers-3"><span class="std std-ref">varnumbers/3</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
@@ -266,6 +273,10 @@
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="binary_heap_min_0.html#binary-heap-min-0"><span class="std std-ref">binary_heap_min</span></a></p>
+</div>
 </section>
 </section>
 
@@ -274,7 +285,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="maxheap_0.html" class="btn btn-neutral float-left" title="maxheap" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="help_0.html" class="btn btn-neutral float-right" title="help" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="pairing_heap_1.html" class="btn btn-neutral float-right" title="pairing_heap(Order)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

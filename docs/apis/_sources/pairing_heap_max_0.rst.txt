@@ -1,17 +1,14 @@
-.. index:: single: heap(Order)
-.. _heap/1:
+.. index:: single: pairing_heap_max
+.. _pairing_heap_max/0:
 
 .. rst-class:: right
 
 **object**
 
-``heap(Order)``
-===============
+``pairing_heap_max``
+====================
 
-* ``Order`` - Either ``<`` for a min heap or ``>`` for a max heap.
-
-
-Heap implementation, parameterized by the order to be used to compare keys (``<`` or ``>``). Deprecated. Use the ``binary_heap/1`` object instead.
+Max-pairing heap implementation. Uses standard order to compare keys.
 
 | **Availability:** 
 |    ``logtalk_load(heaps(loader))``
@@ -25,7 +22,7 @@ Heap implementation, parameterized by the order to be used to compare keys (``<`
 
 
 | **Extends:**
-|    ``public`` :ref:`binary_heap(Order) <binary_heap/1>`
+|    ``public`` :ref:`pairing_heap(>) <pairing_heap/1>`
 
 | **Remarks:**
 |    (none)
@@ -59,5 +56,5 @@ Operators
 
 .. seealso::
 
-   :ref:`binary_heap(Order) <binary_heap/1>`
+   :ref:`pairing_heap_min <pairing_heap_min/0>`, :ref:`pairing_heap(Order) <pairing_heap/1>`
 

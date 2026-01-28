@@ -33,7 +33,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="maxheap" href="maxheap_0.html" />
-    <link rel="prev" title="heap(Order)" href="heap_1.html" />
+    <link rel="prev" title="heap_protocol" href="heap_protocol_0.html" />
    
 </head>
 
@@ -99,10 +99,17 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#git"><span class="xref std std-ref">git</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#grammars"><span class="xref std std-ref">grammars</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#heaps"><span class="xref std std-ref">heaps</span></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="binary_heap_1.html">binary_heap(Order)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary_heap_max_0.html">binary_heap_max</a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary_heap_min_0.html">binary_heap_min</a></li>
 <li class="toctree-l3"><a class="reference internal" href="heap_1.html">heap(Order)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heap_protocol_0.html">heap_protocol</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">heapp</a></li>
 <li class="toctree-l3"><a class="reference internal" href="maxheap_0.html">maxheap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="minheap_0.html">minheap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pairing_heap_1.html">pairing_heap(Order)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pairing_heap_max_0.html">pairing_heap_max</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pairing_heap_min_0.html">pairing_heap_min</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><span class="xref std std-ref">help</span></a></li>
@@ -207,7 +214,7 @@
   <p class="right" id="heapp-0"><span id="index-0"></span><strong>protocol</strong></p>
 <section id="heapp">
 <h1><code class="docutils literal notranslate"><span class="pre">heapp</span></code><a class="headerlink" href="#heapp" title="Link to this heading"></a></h1>
-<p>Heap protocol. Key-value pairs are represented as <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code>.</p>
+<p>Heap protocol. Deprecated. Use the <code class="docutils literal notranslate"><span class="pre">heap_protocol</span></code> protocol instead.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -215,9 +222,9 @@
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Author:</strong> Richard O’Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.</div>
-<div class="line"><strong>Version:</strong> 1:0:1</div>
-<div class="line"><strong>Date:</strong> 2010-11-13</div>
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-01-28</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -226,9 +233,9 @@
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Dependencies:</strong></div>
+<div class="line"><strong>Extends:</strong></div>
 <div class="line-block">
-<div class="line">(none)</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0"><span class="std std-ref">heap_protocol</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -240,257 +247,35 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line">(none)</div>
+<div class="line"> <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-as-heap-2"><span class="std std-ref">as_heap/2</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-as-list-2"><span class="std std-ref">as_list/2</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-delete-4"><span class="std std-ref">delete/4</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-empty-1"><span class="std std-ref">empty/1</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-insert-4"><span class="std std-ref">insert/4</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-insert-all-3"><span class="std std-ref">insert_all/3</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-merge-3"><span class="std std-ref">merge/3</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-size-2"><span class="std std-ref">size/2</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-top-3"><span class="std std-ref">top/3</span></a>  <a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-top-next-5"><span class="std std-ref">top_next/5</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
-<ul>
-<li><p><a class="reference internal" href="#insert-4" id="id2"><code class="docutils literal notranslate"><span class="pre">insert/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#insert-all-3" id="id3"><code class="docutils literal notranslate"><span class="pre">insert_all/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#delete-4" id="id4"><code class="docutils literal notranslate"><span class="pre">delete/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#merge-3" id="id5"><code class="docutils literal notranslate"><span class="pre">merge/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#empty-1" id="id6"><code class="docutils literal notranslate"><span class="pre">empty/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#size-2" id="id7"><code class="docutils literal notranslate"><span class="pre">size/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#as-list-2" id="id8"><code class="docutils literal notranslate"><span class="pre">as_list/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#as-heap-2" id="id9"><code class="docutils literal notranslate"><span class="pre">as_heap/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#top-3" id="id10"><code class="docutils literal notranslate"><span class="pre">top/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#top-next-5" id="id11"><code class="docutils literal notranslate"><span class="pre">top_next/5</span></code></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id12">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id13">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id14">Operators</a></p></li>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id4">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="insert-4">
-<span id="heapp-0-insert-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">insert/4</span></code></a><a class="headerlink" href="#insert-4" title="Link to this heading"></a></h3>
-<p>Inserts the new pair into a heap, returning the updated heap.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">insert(Key,Value,Heap,NewHeap)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">insert(+key,+value,+heap,-heap)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
-<section id="insert-all-3">
-<span id="heapp-0-insert-all-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">insert_all/3</span></code></a><a class="headerlink" href="#insert-all-3" title="Link to this heading"></a></h3>
-<p>Inserts a list of pairs into a heap, returning the updated heap.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">insert_all(List,Heap,NewHeap)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">insert_all(&#64;list(pairs),+heap,-heap)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="delete-4">
-<span id="heapp-0-delete-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete/4</span></code></a><a class="headerlink" href="#delete-4" title="Link to this heading"></a></h3>
-<p>Deletes and returns the top pair in a heap returning the updated heap.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">delete(Heap,TopKey,TopValue,NewHeap)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">delete(+heap,?key,?value,-heap)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="merge-3">
-<span id="heapp-0-merge-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">merge/3</span></code></a><a class="headerlink" href="#merge-3" title="Link to this heading"></a></h3>
-<p>Merges two heaps.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">merge(Heap1,Heap2,NewHeap)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">merge(+heap,+heap,-heap)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="empty-1">
-<span id="heapp-0-empty-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">empty/1</span></code></a><a class="headerlink" href="#empty-1" title="Link to this heading"></a></h3>
-<p>True if the heap is empty.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">empty(Heap)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">empty(&#64;heap)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="size-2">
-<span id="heapp-0-size-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">size/2</span></code></a><a class="headerlink" href="#size-2" title="Link to this heading"></a></h3>
-<p>Returns the number of heap elements.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">size(Heap,Size)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">size(+heap,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="as-list-2">
-<span id="heapp-0-as-list-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">as_list/2</span></code></a><a class="headerlink" href="#as-list-2" title="Link to this heading"></a></h3>
-<p>Returns the current set of pairs in the heap as a list, sorted into ascending order of the keys.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">as_list(Heap,List)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">as_list(+heap,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="as-heap-2">
-<span id="heapp-0-as-heap-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">as_heap/2</span></code></a><a class="headerlink" href="#as-heap-2" title="Link to this heading"></a></h3>
-<p>Constructs a heap from a list of pairs.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">as_heap(List,Heap)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">as_heap(+list,-heap)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="top-3">
-<span id="heapp-0-top-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">top/3</span></code></a><a class="headerlink" href="#top-3" title="Link to this heading"></a></h3>
-<p>Returns the top pair in the heap. Fails if the heap is empty.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">top(Heap,TopKey,TopValue)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">top(+heap,?key,?value)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="top-next-5">
-<span id="heapp-0-top-next-5"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">top_next/5</span></code></a><a class="headerlink" href="#top-next-5" title="Link to this heading"></a></h3>
-<p>Returns the top pair and the next pair in the heap. Fails if the heap does not have at least two elements.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">top_next(Heap,TopKey,TopValue,NextKey,NextValue)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">top_next(+heap,?key,?value,?key,?value)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
-<p>(none)</p>
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<p>(none)</p>
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="heap_1.html#heap-1"><span class="std std-ref">heap(Order)</span></a></p>
+<p><a class="reference internal" href="heap_protocol_0.html#heap-protocol-0"><span class="std std-ref">heap_protocol</span></a></p>
 </div>
 </section>
 </section>
@@ -499,7 +284,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="heap_1.html" class="btn btn-neutral float-left" title="heap(Order)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="heap_protocol_0.html" class="btn btn-neutral float-left" title="heap_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="maxheap_0.html" class="btn btn-neutral float-right" title="maxheap" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

@@ -86,6 +86,11 @@ and Xoshiro256** algorithms to the `random` library.
 
 * UPDATED: The `uuid` library to also support version 7 UUIDs.
 
+* UPDATED: The `heaps` library with pairing heap implementation.
+
+* FIXED: The `heaps` library definition of the `valid/1` predicate for binary
+heaps.
+
 * FIXED: The `arbitrary` and `types` libraries for XSB which also defines the
 `epsilon/0` de facto standard arithmetic constant.
 

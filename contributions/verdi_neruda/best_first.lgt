@@ -36,9 +36,9 @@
 	implements(interpreterp)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Victor Lagerkvist',
-		date is 2019-03-08,
+		date is 2026-01-28,
 		comment is 'Best-first framework for general logic programs.'
 	]).
 
@@ -47,6 +47,10 @@
 	:- info(f/4, [
 		comment is '.',
 		argnames is ['Length1', 'Length2', 'Depth', 'Cost']
+	]).
+
+	:- uses([
+		pairing_heap(<) as minheap
 	]).
 
 	prove(Goal, DB) :-

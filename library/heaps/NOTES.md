@@ -21,7 +21,13 @@ ________________________________________________________________________
 `heaps`
 =======
 
-This library implements minimum and maximum heaps.
+This library defines a heap protocol and provides minimum and maximum heaps
+using two different implementations: pairing heaps and binary heaps.
+
+For backward-compatibility, the `legacy.lgt` file defines the `heapp` protocol
+using the `heap_protocol` protocol plus the `heap/1`, `minheap`, and `maxheap`
+objects using the `binary_heap/1` objects. These legacy protocol and objects
+are deprecated and should not be used in new code.
 
 
 API documentation
@@ -50,5 +56,5 @@ To test this library predicates, load the `tester.lgt` file:
 Credits
 -------
 
-Original code by Richard O''Keefe. Adapted to Logtalk by Paulo Moura and
-Victor Lagerkvist.
+Original binary heap code by Richard O'Keefe and adapted to Logtalk by Paulo
+Moura and Victor Lagerkvist.

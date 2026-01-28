@@ -14,8 +14,8 @@ Best-first framework for general logic programs.
 |    ``logtalk_load(verdi_neruda(loader))``
 
 | **Author:** Victor Lagerkvist
-| **Version:** 1:1:0
-| **Date:** 2019-03-08
+| **Version:** 1:1:1
+| **Date:** 2026-01-28
 
 | **Compilation flags:**
 |    ``static``
@@ -25,7 +25,7 @@ Best-first framework for general logic programs.
 |    ``public`` :ref:`interpreterp <interpreterp/0>`
 | **Uses:**
 |    :ref:`counter <counter/0>`
-|    :ref:`minheap <minheap/0>`
+|    :ref:`pairing_heap(Order) <pairing_heap/1>`
 
 | **Remarks:**
 |    (none)

@@ -84,6 +84,9 @@ Objects
    before_event_registry <before_event_registry_0>
    benchmark_generators <benchmark_generators_0>
    bfs_interpreter <bfs_interpreter_0>
+   binary_heap(Order) <binary_heap_1>
+   binary_heap_max <binary_heap_max_0>
+   binary_heap_min <binary_heap_min_0>
    bintree <bintree_0>
    blank_grammars(Format) <blank_grammars_1>
    bup_interpreter <bup_interpreter_0>
@@ -220,6 +223,9 @@ Objects
    os <os_0>
    packs <packs_0>
    packs_specs_hook <packs_specs_hook_0>
+   pairing_heap(Order) <pairing_heap_1>
+   pairing_heap_max <pairing_heap_max_0>
+   pairing_heap_min <pairing_heap_min_0>
    pairs <pairs_0>
    pddl <pddl_0>
    population <population_0>
@@ -311,6 +317,7 @@ Protocols
    forwarding <forwarding_0>
    git_protocol <git_protocol_0>
    graph_language_protocol <graph_language_protocol_0>
+   heap_protocol <heap_protocol_0>
    heapp <heapp_0>
    hierarchyp <hierarchyp_0>
    interpreterp <interpreterp_0>

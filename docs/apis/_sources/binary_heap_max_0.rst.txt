@@ -1,31 +1,28 @@
-.. index:: single: heap(Order)
-.. _heap/1:
+.. index:: single: binary_heap_max
+.. _binary_heap_max/0:
 
 .. rst-class:: right
 
 **object**
 
-``heap(Order)``
-===============
+``binary_heap_max``
+===================
 
-* ``Order`` - Either ``<`` for a min heap or ``>`` for a max heap.
-
-
-Heap implementation, parameterized by the order to be used to compare keys (``<`` or ``>``). Deprecated. Use the ``binary_heap/1`` object instead.
+Max-heap implementation. Uses standard order to compare keys.
 
 | **Availability:** 
 |    ``logtalk_load(heaps(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-01-28
+| **Date:** 2010-02-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Extends:**
-|    ``public`` :ref:`binary_heap(Order) <binary_heap/1>`
+|    ``public`` :ref:`binary_heap(>) <binary_heap/1>`
 
 | **Remarks:**
 |    (none)
@@ -59,5 +56,5 @@ Operators
 
 .. seealso::
 
-   :ref:`binary_heap(Order) <binary_heap/1>`
+   :ref:`binary_heap_min <binary_heap_min/0>`, :ref:`binary_heap(Order) <binary_heap/1>`
 

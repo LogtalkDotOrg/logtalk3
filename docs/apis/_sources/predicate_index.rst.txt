@@ -533,7 +533,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`heapp <heapp/0::as_heap/2>`
+* :ref:`heap_protocol <heap_protocol/0::as_heap/2>`
 
 ``as_list/2``
 -------------
@@ -545,7 +545,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`dictionaryp <dictionaryp/0::as_list/2>`
 * :ref:`difflist <difflist/0::as_list/2>`
-* :ref:`heapp <heapp/0::as_list/2>`
+* :ref:`heap_protocol <heap_protocol/0::as_list/2>`
 * :ref:`queuep <queuep/0::as_list/2>`
 * :ref:`setp <setp/0::as_list/2>`
 
@@ -1921,7 +1921,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dictionaryp <dictionaryp/0::delete/4>`
-* :ref:`heapp <heapp/0::delete/4>`
+* :ref:`heap_protocol <heap_protocol/0::delete/4>`
 
 ``delete_all_after/2``
 ----------------------
@@ -2575,7 +2575,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dictionaryp <dictionaryp/0::empty/1>`
-* :ref:`heapp <heapp/0::empty/1>`
+* :ref:`heap_protocol <heap_protocol/0::empty/1>`
 * :ref:`listp <listp/0::empty/1>`
 * :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::empty/1>`
 * :ref:`optional <optional/0::empty/1>`
@@ -4175,7 +4175,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dictionaryp <dictionaryp/0::insert/4>`
-* :ref:`heapp <heapp/0::insert/4>`
+* :ref:`heap_protocol <heap_protocol/0::insert/4>`
 
 ``insert_after/3``
 ------------------
@@ -4195,7 +4195,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`heapp <heapp/0::insert_all/3>`
+* :ref:`heap_protocol <heap_protocol/0::insert_all/3>`
 * :ref:`setp <setp/0::insert_all/3>`
 
 ``insert_before/3``
@@ -5763,7 +5763,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`heapp <heapp/0::merge/3>`
+* :ref:`heap_protocol <heap_protocol/0::merge/3>`
 
 ``message_hook/4``
 ------------------
@@ -8697,7 +8697,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dictionaryp <dictionaryp/0::size/2>`
-* :ref:`heapp <heapp/0::size/2>`
+* :ref:`heap_protocol <heap_protocol/0::size/2>`
 * :ref:`setp <setp/0::size/2>`
 
 ``skewness/2``
@@ -9536,7 +9536,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`heapp <heapp/0::top/3>`
+* :ref:`heap_protocol <heap_protocol/0::top/3>`
 
 ``top_next/5``
 --------------
@@ -9546,7 +9546,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`heapp <heapp/0::top_next/5>`
+* :ref:`heap_protocol <heap_protocol/0::top_next/5>`
 
 ``trace/0``
 -----------

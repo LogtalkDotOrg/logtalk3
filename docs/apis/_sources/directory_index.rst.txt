@@ -382,10 +382,17 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
 
+   binary_heap(Order) <binary_heap_1>
+   binary_heap_max <binary_heap_max_0>
+   binary_heap_min <binary_heap_min_0>
    heap(Order) <heap_1>
+   heap_protocol <heap_protocol_0>
    heapp <heapp_0>
    maxheap <maxheap_0>
    minheap <minheap_0>
+   pairing_heap(Order) <pairing_heap_1>
+   pairing_heap_max <pairing_heap_max_0>
+   pairing_heap_min <pairing_heap_min_0>
 
 ``library/hierarchies/``
 ------------------------

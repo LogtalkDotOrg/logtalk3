@@ -8,28 +8,27 @@
 ``heapp``
 =========
 
-Heap protocol. Key-value pairs are represented as ``Key-Value``.
+Heap protocol. Deprecated. Use the ``heap_protocol`` protocol instead.
 
 | **Availability:** 
 |    ``logtalk_load(heaps(loader))``
 
-| **Author:** Richard O'Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.
-| **Version:** 1:0:1
-| **Date:** 2010-11-13
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-01-28
 
 | **Compilation flags:**
 |    ``static``
 
 
-| **Dependencies:**
-|   (none)
-
+| **Extends:**
+|    ``public`` :ref:`heap_protocol <heap_protocol/0>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`heap_protocol/0::as_heap/2`  :ref:`heap_protocol/0::as_list/2`  :ref:`heap_protocol/0::delete/4`  :ref:`heap_protocol/0::empty/1`  :ref:`heap_protocol/0::insert/4`  :ref:`heap_protocol/0::insert_all/3`  :ref:`heap_protocol/0::merge/3`  :ref:`heap_protocol/0::size/2`  :ref:`heap_protocol/0::top/3`  :ref:`heap_protocol/0::top_next/5`  
 
 .. contents::
    :local:
@@ -38,205 +37,17 @@ Heap protocol. Key-value pairs are represented as ``Key-Value``.
 Public predicates
 -----------------
 
-.. index:: insert/4
-.. _heapp/0::insert/4:
-
-``insert/4``
-^^^^^^^^^^^^
-
-Inserts the new pair into a heap, returning the updated heap.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``insert(Key,Value,Heap,NewHeap)``
-| **Mode and number of proofs:**
-|    ``insert(+key,+value,+heap,-heap)`` - ``one``
-
-
-------------
-
-.. index:: insert_all/3
-.. _heapp/0::insert_all/3:
-
-``insert_all/3``
-^^^^^^^^^^^^^^^^
-
-Inserts a list of pairs into a heap, returning the updated heap.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``insert_all(List,Heap,NewHeap)``
-| **Mode and number of proofs:**
-|    ``insert_all(@list(pairs),+heap,-heap)`` - ``one``
-
-
-------------
-
-.. index:: delete/4
-.. _heapp/0::delete/4:
-
-``delete/4``
-^^^^^^^^^^^^
-
-Deletes and returns the top pair in a heap returning the updated heap.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``delete(Heap,TopKey,TopValue,NewHeap)``
-| **Mode and number of proofs:**
-|    ``delete(+heap,?key,?value,-heap)`` - ``zero_or_one``
-
-
-------------
-
-.. index:: merge/3
-.. _heapp/0::merge/3:
-
-``merge/3``
-^^^^^^^^^^^
-
-Merges two heaps.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``merge(Heap1,Heap2,NewHeap)``
-| **Mode and number of proofs:**
-|    ``merge(+heap,+heap,-heap)`` - ``one``
-
-
-------------
-
-.. index:: empty/1
-.. _heapp/0::empty/1:
-
-``empty/1``
-^^^^^^^^^^^
-
-True if the heap is empty.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``empty(Heap)``
-| **Mode and number of proofs:**
-|    ``empty(@heap)`` - ``zero_or_one``
-
-
-------------
-
-.. index:: size/2
-.. _heapp/0::size/2:
-
-``size/2``
-^^^^^^^^^^
-
-Returns the number of heap elements.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``size(Heap,Size)``
-| **Mode and number of proofs:**
-|    ``size(+heap,?integer)`` - ``zero_or_one``
-
-
-------------
-
-.. index:: as_list/2
-.. _heapp/0::as_list/2:
-
-``as_list/2``
-^^^^^^^^^^^^^
-
-Returns the current set of pairs in the heap as a list, sorted into ascending order of the keys.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``as_list(Heap,List)``
-| **Mode and number of proofs:**
-|    ``as_list(+heap,-list)`` - ``one``
-
-
-------------
-
-.. index:: as_heap/2
-.. _heapp/0::as_heap/2:
-
-``as_heap/2``
-^^^^^^^^^^^^^
-
-Constructs a heap from a list of pairs.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``as_heap(List,Heap)``
-| **Mode and number of proofs:**
-|    ``as_heap(+list,-heap)`` - ``one``
-
-
-------------
-
-.. index:: top/3
-.. _heapp/0::top/3:
-
-``top/3``
-^^^^^^^^^
-
-Returns the top pair in the heap. Fails if the heap is empty.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``top(Heap,TopKey,TopValue)``
-| **Mode and number of proofs:**
-|    ``top(+heap,?key,?value)`` - ``zero_or_one``
-
-
-------------
-
-.. index:: top_next/5
-.. _heapp/0::top_next/5:
-
-``top_next/5``
-^^^^^^^^^^^^^^
-
-Returns the top pair and the next pair in the heap. Fails if the heap does not have at least two elements.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``top_next(Heap,TopKey,TopValue,NextKey,NextValue)``
-| **Mode and number of proofs:**
-|    ``top_next(+heap,?key,?value,?key,?value)`` - ``zero_or_one``
-
-
-------------
+(no local declarations; see entity ancestors if any)
 
 Protected predicates
 --------------------
 
-(none)
+(no local declarations; see entity ancestors if any)
 
 Private predicates
 ------------------
 
-(none)
+(no local declarations; see entity ancestors if any)
 
 Operators
 ---------
@@ -245,5 +56,5 @@ Operators
 
 .. seealso::
 
-   :ref:`heap(Order) <heap/1>`
+   :ref:`heap_protocol <heap_protocol/0>`
 

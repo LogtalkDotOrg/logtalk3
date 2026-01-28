@@ -8,12 +8,12 @@
 ``minheap``
 ===========
 
-Min-heap implementation. Uses standard order to compare keys.
+Min-heap implementation. Uses standard order to compare keys. Deprecated. Use the ``binary_heap_min`` object instead.
 
 | **Availability:** 
 |    ``logtalk_load(heaps(loader))``
 
-| **Author:** Paulo Moura.
+| **Author:** Paulo Moura
 | **Version:** 1:0:0
 | **Date:** 2010-02-19
 
@@ -22,13 +22,13 @@ Min-heap implementation. Uses standard order to compare keys.
 
 
 | **Extends:**
-|    ``public`` :ref:`heap(\<) <heap/1>`
+|    ``public`` :ref:`binary_heap(\<) <binary_heap/1>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`comparingp/0::(<)/2`  :ref:`comparingp/0::(=:=)/2`  :ref:`comparingp/0::(=<)/2`  :ref:`comparingp/0::(=\=)/2`  :ref:`comparingp/0::(>)/2`  :ref:`comparingp/0::(>=)/2`  :ref:`heapp/0::as_heap/2`  :ref:`heapp/0::as_list/2`  :ref:`termp/0::check/1`  :ref:`heapp/0::delete/4`  :ref:`termp/0::depth/2`  :ref:`heapp/0::empty/1`  :ref:`termp/0::ground/1`  :ref:`heapp/0::insert/4`  :ref:`heapp/0::insert_all/3`  :ref:`heapp/0::merge/3`  :ref:`termp/0::new/1`  :ref:`termp/0::numbervars/1`  :ref:`termp/0::numbervars/3`  :ref:`termp/0::occurs/2`  :ref:`termp/0::singletons/2`  :ref:`heapp/0::size/2`  :ref:`termp/0::subsumes/2`  :ref:`termp/0::subterm/2`  :ref:`heapp/0::top/3`  :ref:`heapp/0::top_next/5`  :ref:`termp/0::valid/1`  :ref:`termp/0::variables/2`  :ref:`termp/0::variant/2`  :ref:`termp/0::varnumbers/2`  :ref:`termp/0::varnumbers/3`  
+|     :ref:`comparingp/0::(<)/2`  :ref:`comparingp/0::(=:=)/2`  :ref:`comparingp/0::(=<)/2`  :ref:`comparingp/0::(=\=)/2`  :ref:`comparingp/0::(>)/2`  :ref:`comparingp/0::(>=)/2`  :ref:`heap_protocol/0::as_heap/2`  :ref:`heap_protocol/0::as_list/2`  :ref:`termp/0::check/1`  :ref:`heap_protocol/0::delete/4`  :ref:`termp/0::depth/2`  :ref:`heap_protocol/0::empty/1`  :ref:`termp/0::ground/1`  :ref:`heap_protocol/0::insert/4`  :ref:`heap_protocol/0::insert_all/3`  :ref:`heap_protocol/0::merge/3`  :ref:`termp/0::new/1`  :ref:`termp/0::numbervars/1`  :ref:`termp/0::numbervars/3`  :ref:`termp/0::occurs/2`  :ref:`termp/0::singletons/2`  :ref:`heap_protocol/0::size/2`  :ref:`termp/0::subsumes/2`  :ref:`termp/0::subterm/2`  :ref:`heap_protocol/0::top/3`  :ref:`heap_protocol/0::top_next/5`  :ref:`termp/0::valid/1`  :ref:`termp/0::variables/2`  :ref:`termp/0::variant/2`  :ref:`termp/0::varnumbers/2`  :ref:`termp/0::varnumbers/3`  
 
 .. contents::
    :local:
@@ -53,4 +53,8 @@ Operators
 ---------
 
 (none)
+
+.. seealso::
+
+   :ref:`binary_heap_min <binary_heap_min/0>`
 
