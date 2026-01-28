@@ -48,7 +48,7 @@ Encoding
 --------
 
 Encoding is accomplished using the ``generate/3`` or ``generate/4``
-predicates. For example, assuming the schema is just "int":
+predicates. For example, assuming the schema is just ``int``:
 
 ::
 
@@ -56,7 +56,7 @@ predicates. For example, assuming the schema is just "int":
    Bytes = [84]
    yes
 
-Or an array of "int":
+Or an array of ``int``:
 
 ::
 

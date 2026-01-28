@@ -227,13 +227,13 @@ the <code class="docutils literal notranslate"><span class="pre">json_lines(curl
 <section id="encoding">
 <h2>Encoding<a class="headerlink" href="#encoding" title="Link to this heading"></a></h2>
 <p>Encoding is accomplished using the <code class="docutils literal notranslate"><span class="pre">generate/3</span></code> or <code class="docutils literal notranslate"><span class="pre">generate/4</span></code>
-predicates. For example, assuming the schema is just “int”:</p>
+predicates. For example, assuming the schema is just <code class="docutils literal notranslate"><span class="pre">int</span></code>:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> avro<span class="o">::</span>generate(bytes(<span class="nv">Bytes</span>), int, <span class="m">42</span>).
 <span class="nv">Bytes</span> <span class="o">=</span> [<span class="m">84</span>]
 yes
 </pre></div>
 </div>
-<p>Or an array of “int”:</p>
+<p>Or an array of <code class="docutils literal notranslate"><span class="pre">int</span></code>:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> avro<span class="o">::</span>generate(bytes(<span class="nv">Bytes</span>), <span class="k">{</span>type<span class="o">-</span>array,items<span class="o">-</span>int<span class="k">}</span>, [<span class="m">42</span>,<span class="m">37</span>,<span class="m">13</span>,<span class="m">17</span>]).
 <span class="nv">Bytes</span> <span class="o">=</span> [<span class="m">8</span>,<span class="m">84</span>,<span class="m">74</span>,<span class="m">26</span>,<span class="m">34</span>,<span class="m">0</span>]
 yes

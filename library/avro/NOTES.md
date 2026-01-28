@@ -68,13 +68,13 @@ Encoding
 --------
 
 Encoding is accomplished using the `generate/3` or `generate/4` predicates.
-For example, assuming the schema is just "int":
+For example, assuming the schema is just `int`:
 
 	| ?- avro::generate(bytes(Bytes), int, 42).
 	Bytes = [84]
 	yes
 
-Or an array of "int":
+Or an array of `int`:
 
 	| ?- avro::generate(bytes(Bytes), {type-array,items-int}, [42,37,13,17]).
 	Bytes = [8,84,74,26,34,0]
