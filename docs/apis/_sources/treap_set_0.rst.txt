@@ -1,21 +1,21 @@
-.. index:: single: set
-.. _set/0:
+.. index:: single: treap_set
+.. _treap_set/0:
 
 .. rst-class:: right
 
 **object**
 
-``set``
-=======
+``treap_set``
+=============
 
-Set predicates implemented using ordered lists. Uses ``==/2`` for element comparison and standard term ordering.
+Set predicates implemented using treaps (tree heaps). A treap is a binary search tree with randomly assigned priorities. Uses ``==/2`` for element comparison and standard term ordering.
 
 | **Availability:** 
 |    ``logtalk_load(sets(loader))``
 
-| **Author:** Richard O'Keefe (main predicates); adapted to Logtalk by Paulo Moura.
-| **Version:** 2:0:0
-| **Date:** 2025-07-08
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-01-28
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,8 +25,10 @@ Set predicates implemented using ordered lists. Uses ``==/2`` for element compar
 |    ``public`` :ref:`setp <setp/0>`
 | **Extends:**
 |    ``public`` :ref:`compound <compound/0>`
-| **Aliases:**
-|    ``setp`` ``size/2`` as ``length/2``
+| **Uses:**
+|    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`list <list/0>`
+|    :ref:`set <set/0>`
 
 | **Remarks:**
 |    (none)
@@ -60,5 +62,5 @@ Operators
 
 .. seealso::
 
-   :ref:`set(Type) <set/1>`, :ref:`treap_set <treap_set/0>`
+   :ref:`set <set/0>`, :ref:`set(Type) <set/1>`
 

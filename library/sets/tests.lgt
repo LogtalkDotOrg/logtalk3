@@ -362,10 +362,12 @@
 		as_set([3,1,2], Set),
 		subtract(EmptySet, Set, Difference).
 
-	test(set_subtract_3_02, deterministic(Difference == Set)) :-
+	test(set_subtract_3_02, deterministic(Difference == [1,2,3])) :-
 		as_set([], EmptySet),
 		as_set([3,1,2], Set),
-		subtract(Set, EmptySet, Difference).
+		subtract(Set, EmptySet, DifferenceSet),
+		as_list(DifferenceSet, Difference0),
+		msort(Difference0, Difference).
 
 	test(set_subtract_3_03, deterministic(List == [4])) :-
 		as_set([1,4,1], Set1),
@@ -375,15 +377,19 @@
 
 	% symdiff/3 tests
 
-	test(set_symdiff_3_01, deterministic(Difference == Set)) :-
+	test(set_symdiff_3_01, deterministic(Difference == [1,2,3])) :-
 		as_set([], EmptySet),
 		as_set([3,1,2], Set),
-		symdiff(EmptySet, Set, Difference).
+		symdiff(EmptySet, Set, DifferenceSet),
+		as_list(DifferenceSet, Difference0),
+		msort(Difference0, Difference).
 
-	test(set_symdiff_3_02, deterministic(Difference == Set)) :-
+	test(set_symdiff_3_02, deterministic(Difference == [1,2,3])) :-
 		as_set([], EmptySet),
 		as_set([3,1,2], Set),
-		symdiff(Set, EmptySet, Difference).
+		symdiff(Set, EmptySet, DifferenceSet),
+		as_list(DifferenceSet, Difference0),
+		msort(Difference0, Difference).
 
 	test(set_symdiff_3_03, deterministic(Sorted == [1,2,3,4,5,6])) :-
 		as_set([3,6,2], Set1),
@@ -424,19 +430,19 @@
 
 	% union/4 tests
 
-	test(set_union_4_01, deterministic) :-
+	test(set_union_4_01, deterministic(Union-Difference == [1]-[1])) :-
 		as_set([], Set1),
 		as_set([1], Set2),
-		union(Set1, Set2, Union, Difference),
-		assertion(union, Union == Set2),
-		assertion(difference, Difference == Set2).
+		union(Set1, Set2, UnionSet, DifferenceSet),
+		as_list(UnionSet, Union),
+		as_list(DifferenceSet, Difference).
 
-	test(set_union_4_02, deterministic) :-
+	test(set_union_4_02, deterministic(Union-Difference == [1]-[])) :-
 		as_set([1], Set1),
 		as_set([], Set2),
-		union(Set1, Set2, Union, Difference),
-		assertion(union, Union == Set1),
-		assertion(difference, empty(Difference)).
+		union(Set1, Set2, UnionSet, DifferenceSet),
+		as_list(UnionSet, Union),
+		as_list(DifferenceSet, Difference).
 
 	test(set_union_4_03, deterministic) :-
 		as_set([3,1,2], Set1),

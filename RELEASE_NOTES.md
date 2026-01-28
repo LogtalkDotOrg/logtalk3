@@ -84,6 +84,8 @@ lists, or character code lists.
 * ADDED: Support for the SplitMix64, Xoshiro128++, Xoshiro128**, Xoshiro256++,
 and Xoshiro256** algorithms to the `random` library.
 
+* UPDATED: The `sets` library with a treap (tree heap) implementation.
+
 * UPDATED: The `uuid` library to also support version 7 UUIDs.
 
 * UPDATED: The `heaps` library with pairing heap implementation.

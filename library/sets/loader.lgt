@@ -21,5 +21,6 @@
 
 :- initialization((
 	logtalk_load(basic_types(loader)),
-	logtalk_load([setp, set, set1], [optimize(on)])
+	logtalk_load(random(loader)),
+	logtalk_load([setp, set, set1, treap_set], [optimize(on)])
 )).

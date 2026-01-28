@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>set(Type) &mdash; Logtalk 3.98.0</title>
+  <title>treap_set &mdash; Logtalk 3.98.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="setp" href="setp_0.html" />
-    <link rel="prev" title="set" href="set_0.html" />
+    <link rel="next" title="population" href="population_0.html" />
+    <link rel="prev" title="setp" href="setp_0.html" />
    
 </head>
 
@@ -135,9 +135,9 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#redis"><span class="xref std std-ref">redis</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#sets"><span class="xref std std-ref">sets</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="set_0.html">set</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">set(Type)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set_1.html">set(Type)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="setp_0.html">setp</a></li>
-<li class="toctree-l3"><a class="reference internal" href="treap_set_0.html">treap_set</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">treap_set</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#statistics"><span class="xref std std-ref">statistics</span></a></li>
@@ -194,9 +194,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">set(Type)</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">treap_set</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/set_1.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/treap_set_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -204,10 +204,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="set-1"><span id="index-0"></span><strong>object</strong></p>
-<section id="set-type">
-<h1><code class="docutils literal notranslate"><span class="pre">set(Type)</span></code><a class="headerlink" href="#set-type" title="Link to this heading"></a></h1>
-<p>Set predicates with elements constrained to a single type and custom comparing rules.</p>
+  <p class="right" id="treap-set-0"><span id="index-0"></span><strong>object</strong></p>
+<section id="treap-set">
+<h1><code class="docutils literal notranslate"><span class="pre">treap_set</span></code><a class="headerlink" href="#treap-set" title="Link to this heading"></a></h1>
+<p>Set predicates implemented using treaps (tree heaps). A treap is a binary search tree with randomly assigned priorities. Uses <code class="docutils literal notranslate"><span class="pre">==/2</span></code> for element comparison and standard term ordering.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -215,9 +215,9 @@
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Author:</strong> Paulo Moura and Adrian Arroyo</div>
-<div class="line"><strong>Version:</strong> 1:24:0</div>
-<div class="line"><strong>Date:</strong> 2022-02-03</div>
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-01-28</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -226,13 +226,19 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Implements:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="setp_0.html#setp-0"><span class="std std-ref">setp</span></a></div>
+</div>
 <div class="line"><strong>Extends:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="set_0.html#set-0"><span class="std std-ref">set</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="compound_0.html#compound-0"><span class="std std-ref">compound</span></a></div>
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
+<div class="line"><a class="reference internal" href="fast_random_1.html#fast-random-1"><span class="std std-ref">fast_random(Algorithm)</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="set_0.html#set-0"><span class="std std-ref">set</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -251,13 +257,8 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
 <li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p>
-<ul>
-<li><p><a class="reference internal" href="#sort-2" id="id4"><code class="docutils literal notranslate"><span class="pre">sort/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#partition-4" id="id5"><code class="docutils literal notranslate"><span class="pre">partition/4</span></code></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#operators" id="id6">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id4">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -270,55 +271,14 @@
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<section id="sort-2">
-<span id="set-1-sort-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sort/2</span></code></a><a class="headerlink" href="#sort-2" title="Link to this heading"></a></h3>
-<p>Sorts a list in ascending order.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">sort(List,Sorted)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">sort(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
-<section id="partition-4">
-<span id="set-1-partition-4"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">partition/4</span></code></a><a class="headerlink" href="#partition-4" title="Link to this heading"></a></h3>
-<p>List partition in two sub-lists using a pivot.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">partition(List,Pivot,Lowers,Biggers)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">partition(+list,+nonvar,-list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="set_0.html#set-0"><span class="std std-ref">set</span></a>, <a class="reference internal" href="treap_set_0.html#treap-set-0"><span class="std std-ref">treap_set</span></a></p>
+<p><a class="reference internal" href="set_0.html#set-0"><span class="std std-ref">set</span></a>, <a class="reference internal" href="set_1.html#set-1"><span class="std std-ref">set(Type)</span></a></p>
 </div>
 </section>
 </section>
@@ -327,8 +287,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="set_0.html" class="btn btn-neutral float-left" title="set" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="setp_0.html" class="btn btn-neutral float-right" title="setp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="setp_0.html" class="btn btn-neutral float-left" title="setp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="population_0.html" class="btn btn-neutral float-right" title="population" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

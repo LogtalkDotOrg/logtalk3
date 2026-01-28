@@ -21,13 +21,19 @@ ________________________________________________________________________
 `sets`
 ======
 
-This library provides a set protocol and two implementations of this protocol
-using *ordered lists*, one of them a parametric object that takes the type of
-the set elements as a parameter. Although representing sets as ordered lists
-is a common solution, the best practice is to regard sets as *opaque terms*
-and only construct, access, and update them using the library predicates. For
-better performance when handling large sets, alternative implementations of
-the protocol can always be written.
+This library provides a set protocol, two implementations of this protocol
+using *ordered lists* (one of them a parametric object that takes the type
+of the set elements as a parameter), and an implementation using *treaps*
+(tree heaps).
+
+The set representations should be regarded as *opaque terms* and only
+constructed, accessed, and updated them using the library predicates.
+
+For small sets, the ordered list implementations are likely to provide the
+best performance. For larger sets, the treap implementation likely provides
+better performance, notably for the `memberchk/2`, `insert/3`, and `delete/3`
+operations. Benchmark both implementations to select the best one for your
+application.
 
 The current implementations use `==/2` for element comparison and standard
 term ordering. This allows non-ground set elements. But requires caution with
@@ -93,8 +99,9 @@ Predicates are provided for the most common set operations. For example:
 	Difference = [3, 4, 5, 7]
 	yes
 
-When working with a custom type of set elements, the corresponding object
-must implement the `comparingp` protocol. For example:
+When working with a custom type of set elements and the ordered list
+representation, the corresponding object must implement the `comparingp`
+protocol. For example:
 
 	:- object(rainbow_colors,
 		implements(comparingp)).

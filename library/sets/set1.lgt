@@ -27,7 +27,8 @@
 		author is 'Paulo Moura and Adrian Arroyo',
 		date is 2022-02-03,
 		comment is 'Set predicates with elements constrained to a single type and custom comparing rules.',
-		parnames is ['Type']
+		parnames is ['Type'],
+		see_also is [set, treap_set]
 	]).
 
 	:- private(sort/2).
