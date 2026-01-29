@@ -1,0 +1,19 @@
+# Configuration file for application
+server:
+  host: localhost
+  port: 8080
+  ssl: true
+
+database:
+  driver: postgresql
+  host: db.example.com
+  port: 5432
+  credentials:
+    username: admin
+    password: secret123
+
+features:
+  - authentication
+  - logging
+  - caching
+  - monitoring
