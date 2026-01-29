@@ -76,6 +76,9 @@ the Apache Avro binary format.
 * ADDED: New `url` library with predicates for validating, parsing, generating,
 and normalizing URLs.
 
+* ADDED: New `process` compatibility library. Supports ECLiPSe, GNU Prolog,
+SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
+
 * ADDED: New `strings` compatibility library. Based on ECLiPSe and SWI-Prolog
 work and libraries.
 

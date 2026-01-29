@@ -25,6 +25,7 @@
 		arbitrary(loader),
 		strings(loader),
 		os(loader),
+		process(loader),
 		dates(loader),
 		events(loader),
 		dependents(loader),

@@ -1,0 +1,136 @@
+.. index:: single: process
+.. _process/0:
+
+.. rst-class:: right
+
+**object**
+
+``process``
+===========
+
+Portable process handling predicates.
+
+| **Availability:** 
+|    ``logtalk_load(process(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2025-01-29
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Supported backend Prolog systems: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: create/3
+.. _process/0::create/3:
+
+``create/3``
+^^^^^^^^^^^^
+
+Creates a new process from the given executable and list of arguments. Supported options are ``process(Pid)``, ``stdin(Stream)``, ``stdout(Stream)``, and ``stderr(Stream)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``create(Executable,Arguments,Options)``
+| **Mode and number of proofs:**
+|    ``create(+atom,+list(atom),+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: wait/2
+.. _process/0::wait/2:
+
+``wait/2``
+^^^^^^^^^^
+
+Waits for a process to terminate and retrieves its exit status.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``wait(Process,Status)``
+| **Mode and number of proofs:**
+|    ``wait(+process_or_pid,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: kill/2
+.. _process/0::kill/2:
+
+``kill/2``
+^^^^^^^^^^
+
+Kills the given process with the specified signal (an integer or one of the following atoms: ``sighup``, ``sigint``, ``sigkill``, or ``sigterm``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``kill(Process,Signal)``
+| **Mode and number of proofs:**
+|    ``kill(+process_or_pid,+atom_or_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: kill/1
+.. _process/0::kill/1:
+
+``kill/1``
+^^^^^^^^^^
+
+Kills the given process using the default signal (``sigkill``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``kill(Process)``
+| **Mode and number of proofs:**
+|    ``kill(+process_or_pid)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`os <os/0>`
+

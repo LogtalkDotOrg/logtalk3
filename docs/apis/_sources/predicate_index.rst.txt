@@ -1518,6 +1518,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`osp <osp/0::cpu_time/1>`
 * :ref:`timep <timep/0::cpu_time/1>`
 
+``create/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`process <process/0::create/3>`
+
 ``current/2``
 -------------
 
@@ -4819,6 +4829,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`listp <listp/0::keysort/2>`
+
+``kill/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`process <process/0::kill/1>`
+
+``kill/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`process <process/0::kill/2>`
 
 ``kurtosis/2``
 --------------
@@ -10142,6 +10172,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`sampling_protocol <sampling_protocol/0::von_mises/3>`
+
+``wait/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`process <process/0::wait/2>`
 
 ``wald/3``
 ----------

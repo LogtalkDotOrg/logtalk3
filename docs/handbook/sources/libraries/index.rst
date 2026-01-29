@@ -75,6 +75,7 @@ directory in the ``NOTES.md`` file.
    optionals
    options
    os
+   process
    queues
    random
    reader
