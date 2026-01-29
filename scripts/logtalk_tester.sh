@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on January 26, 2026
+##   Last updated on January 29, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -33,7 +33,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 23.1"
+	echo "$(basename "$0") 23.2"
 	exit 0
 }
 
@@ -116,7 +116,7 @@ coverage_goal=$coverage_default_goal
 format_decimal() {
     local num=$1
     local places=$2
-    printf "%.${places}f" "$num"
+    LC_NUMERIC=C printf "%.${places}f" "$num"
 }
 
 run_testset() {
