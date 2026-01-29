@@ -408,6 +408,14 @@ for common configuration and data serialization tasks:</p>
 <ul class="simple">
 <li><p>Strings: unquoted, single-quoted (<code class="docutils literal notranslate"><span class="pre">'...'</span></code>), and double-quoted
 (<code class="docutils literal notranslate"><span class="pre">&quot;...&quot;</span></code>)</p></li>
+<li><p>Multi-line flow scalars: quoted strings spanning multiple lines with
+proper line folding</p>
+<ul>
+<li><p>Single newline becomes a space</p></li>
+<li><p>Blank lines (consecutive newlines) become literal newlines</p></li>
+<li><p>Leading/trailing whitespace around newlines is trimmed</p></li>
+</ul>
+</li>
 <li><p>Multi-word keys: keys containing spaces (e.g., <code class="docutils literal notranslate"><span class="pre">Mark</span> <span class="pre">McGwire:</span> <span class="pre">65</span></code>)</p></li>
 <li><p>Numbers:</p>
 <ul>
@@ -481,7 +489,6 @@ skipped</p></li>
 interpreted</p></li>
 <li><p>Complex keys: <code class="docutils literal notranslate"><span class="pre">?</span></code> indicator for multi-line or complex keys</p></li>
 <li><p>Multi-line plain scalars: plain scalars spanning multiple lines</p></li>
-<li><p>Multi-line flow scalars: line folding in flow context</p></li>
 <li><p>Aliases in flow sequences: <code class="docutils literal notranslate"><span class="pre">[*alias1,</span> <span class="pre">*alias2]</span></code> (aliases work in
 block context)</p></li>
 <li><p>Merge with list of aliases: <code class="docutils literal notranslate"><span class="pre">&lt;&lt;:</span> <span class="pre">[*a,</span> <span class="pre">*b]</span></code> (single alias merge

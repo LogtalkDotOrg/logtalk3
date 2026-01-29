@@ -1280,6 +1280,15 @@
 		[Escaped],
 		{ unescape_char(Escaped, Code) },
 		quoted_string_content(Codes).
+	% Handle line folding: newline followed by optional whitespace
+	% In flow scalars, newlines are folded into spaces
+	quoted_string_content(Codes) -->
+		flow_newline,
+		!,
+		% Skip leading whitespace on next line
+		skip_flow_line_whitespace,
+		% Check for additional blank lines
+		quoted_string_fold_lines(Codes).
 	quoted_string_content([Code| Codes]) -->
 		[Code],
 		{ Code =\= 0'" },
@@ -1288,11 +1297,54 @@
 	quoted_string_content([]) -->
 		[].
 
+	% Match a single line ending (LF, CR, or CRLF as a unit)
+	flow_newline --> [13, 10], !.  % CRLF (Windows)
+	flow_newline --> [10], !.      % LF (Unix)
+	flow_newline --> [13].         % CR (old Mac)
+
+	% Handle blank lines in multi-line flow scalar
+	% First newline becomes space, additional blank lines become newlines
+	quoted_string_fold_lines(Codes) -->
+		% Another newline - this becomes a literal newline
+		flow_newline,
+		!,
+		skip_flow_line_whitespace,
+		quoted_string_fold_lines_after_blank(Codes).
+	quoted_string_fold_lines([32| Codes]) -->
+		% Non-blank line - the original newline becomes a space
+		quoted_string_content(Codes).
+
+	% After at least one blank line, add newlines for each blank
+	quoted_string_fold_lines_after_blank([10| Codes]) -->
+		% Another newline - add another literal newline
+		flow_newline,
+		!,
+		skip_flow_line_whitespace,
+		quoted_string_fold_lines_after_blank(Codes).
+	quoted_string_fold_lines_after_blank([10| Codes]) -->
+		% Non-blank line after blank lines - add one newline and continue
+		quoted_string_content(Codes).
+
+	% Skip whitespace at start of continuation line
+	skip_flow_line_whitespace -->
+		[Code],
+		{ Code =:= 32 ; Code =:= 9 },
+		!,
+		skip_flow_line_whitespace.
+	skip_flow_line_whitespace -->
+		[].
+
 	% Single quoted string content
 	single_quoted_content([0'\'| Codes]) -->
 		[0'\'], [0'\'],
 		!,
 		single_quoted_content(Codes).
+	% Handle line folding in single-quoted strings (same as double-quoted)
+	single_quoted_content(Codes) -->
+		flow_newline,
+		!,
+		skip_flow_line_whitespace,
+		single_quoted_fold_lines(Codes).
 	single_quoted_content([Code| Codes]) -->
 		[Code],
 		{ Code =\= 0'\' },
@@ -1300,6 +1352,26 @@
 		single_quoted_content(Codes).
 	single_quoted_content([]) -->
 		[].
+
+	% Handle blank lines in multi-line single-quoted scalar
+	single_quoted_fold_lines(Codes) -->
+		flow_newline,
+		!,
+		skip_flow_line_whitespace,
+		single_quoted_fold_lines_after_blank(Codes).
+	single_quoted_fold_lines([32| Codes]) -->
+		% Non-blank line - the original newline becomes a space
+		single_quoted_content(Codes).
+
+	% After at least one blank line, add newlines for each blank
+	single_quoted_fold_lines_after_blank([10| Codes]) -->
+		flow_newline,
+		!,
+		skip_flow_line_whitespace,
+		single_quoted_fold_lines_after_blank(Codes).
+	single_quoted_fold_lines_after_blank([10| Codes]) -->
+		% Non-blank line after blank lines - add one newline and continue
+		single_quoted_content(Codes).
 
 	% Unescape characters in double-quoted strings
 	unescape_char(0'n, 10) :- !.    % newline

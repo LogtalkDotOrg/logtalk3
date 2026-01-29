@@ -201,6 +201,10 @@ common configuration and data serialization tasks:
 **Scalars**
 
 - Strings: unquoted, single-quoted (`'...'`), and double-quoted (`"..."`)
+- Multi-line flow scalars: quoted strings spanning multiple lines with proper line folding
+  - Single newline becomes a space
+  - Blank lines (consecutive newlines) become literal newlines
+  - Leading/trailing whitespace around newlines is trimmed
 - Multi-word keys: keys containing spaces (e.g., `Mark McGwire: 65`)
 - Numbers:
   - Integers: decimal (`42`), signed positive (`+12345`), octal (`0o14`), hexadecimal (`0xC`)
@@ -264,7 +268,6 @@ The following YAML features are **not** currently supported:
 - Tag interpretation: Tags are recognized and skipped, but not interpreted
 - Complex keys: `?` indicator for multi-line or complex keys
 - Multi-line plain scalars: plain scalars spanning multiple lines
-- Multi-line flow scalars: line folding in flow context
 - Aliases in flow sequences: `[*alias1, *alias2]` (aliases work in block context)
 - Merge with list of aliases: `<<: [*a, *b]` (single alias merge works)
 - Directives: `%YAML` and `%TAG` directives

@@ -208,6 +208,13 @@ for common configuration and data serialization tasks:
 
 - Strings: unquoted, single-quoted (``'...'``), and double-quoted
   (``"..."``)
+- Multi-line flow scalars: quoted strings spanning multiple lines with
+  proper line folding
+
+  - Single newline becomes a space
+  - Blank lines (consecutive newlines) become literal newlines
+  - Leading/trailing whitespace around newlines is trimmed
+
 - Multi-word keys: keys containing spaces (e.g., ``Mark McGwire: 65``)
 - Numbers:
 
@@ -280,7 +287,6 @@ The following YAML features are **not** currently supported:
   interpreted
 - Complex keys: ``?`` indicator for multi-line or complex keys
 - Multi-line plain scalars: plain scalars spanning multiple lines
-- Multi-line flow scalars: line folding in flow context
 - Aliases in flow sequences: ``[*alias1, *alias2]`` (aliases work in
   block context)
 - Merge with list of aliases: ``<<: [*a, *b]`` (single alias merge

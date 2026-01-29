@@ -264,4 +264,35 @@
 		% Last occurrence wins in YAML merge semantics
 		member(timeout-60, ServerPairs).
 
+	% Multi-line flow scalar tests
+
+	test(parse_double_quoted_single_newline, true(YAML == yaml([key-'line1 line2']))) :-
+		% Single newline is folded into a space
+		parse(atom('key: "line1\nline2"'), YAML).
+
+	test(parse_double_quoted_blank_line, true(YAML == yaml([key-'a\nb']))) :-
+		% Blank line (two consecutive newlines) becomes a literal newline
+		atom_codes(Input, [107,101,121,58,32,34,97,10,10,98,34]),  % key: "a\n\nb"
+		parse(atom(Input), YAML).
+
+	test(parse_double_quoted_multiple_blank_lines, true(YAML == yaml([key-'a\n\nb']))) :-
+		% Three consecutive newlines becomes two literal newlines
+		atom_codes(Input, [107,101,121,58,32,34,97,10,10,10,98,34]),  % key: "a\n\n\nb"
+		parse(atom(Input), YAML).
+
+	test(parse_double_quoted_leading_whitespace_trimmed, true(YAML == yaml([key-'a b']))) :-
+		% Leading whitespace on continuation line is trimmed
+		atom_codes(Input, [107,101,121,58,32,34,97,10,32,32,98,34]),  % key: "a\n  b"
+		parse(atom(Input), YAML).
+
+	test(parse_single_quoted_single_newline, true(YAML == yaml([key-'line1 line2']))) :-
+		% Single newline in single-quoted string is folded into a space
+		atom_codes(Input, [107,101,121,58,32,39,108,105,110,101,49,10,108,105,110,101,50,39]),  % key: 'line1\nline2'
+		parse(atom(Input), YAML).
+
+	test(parse_single_quoted_blank_line, true(YAML == yaml([key-'a\nb']))) :-
+		% Blank line in single-quoted string becomes a literal newline
+		atom_codes(Input, [107,101,121,58,32,39,97,10,10,98,39]),  % key: 'a\n\nb'
+		parse(atom(Input), YAML).
+
 :- end_object.
