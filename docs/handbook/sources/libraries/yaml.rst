@@ -230,6 +230,23 @@ for common configuration and data serialization tasks:
 - Nested structures: arbitrary nesting of sequences and mappings
 - Trailing commas: supported in flow collections
 
+**Block Scalars**
+
+- Literal block scalars: ``|`` style preserves newlines exactly
+- Folded block scalars: ``>`` style folds newlines into spaces
+- Chomping indicators: ``-`` (strip), ``+`` (keep), default (clip) for
+  trailing newlines
+- More-indented lines: preserved with original indentation in folded
+  scalars
+- Blank lines: preserved in both literal and folded block scalars
+
+**Anchors and Aliases**
+
+- Anchor definitions: ``&name`` to define a reusable node
+- Alias references: ``*name`` to reference a previously defined anchor
+- Merge key: ``<<`` to merge mappings from aliases
+- Works with scalars, sequences, and mappings
+
 **Document Structure**
 
 - Document start marker: ``---`` is recognized and skipped
@@ -237,6 +254,8 @@ for common configuration and data serialization tasks:
 - Multi-document streams: multiple ``---`` or ``...`` separated
   documents (via ``parse_all/2``)
 - Comments: lines starting with ``#`` and inline comments after values
+- Tags: ``!tag``, ``!!type``, and ``!<uri>`` tags are recognized and
+  skipped
 
 **Escape Sequences** (in double-quoted strings)
 
@@ -257,13 +276,15 @@ Limitations
 
 The following YAML features are **not** currently supported:
 
-- Literal block scalars: ``|`` style multi-line strings
-- Folded block scalars: ``>`` style multi-line strings
-- Anchors and aliases: ``&anchor`` and ``*alias`` references
-- Tags: ``!!str``, ``!!int``, ``!!binary``, ``!custom`` type annotations
+- Tag interpretation: Tags are recognized and skipped, but not
+  interpreted
 - Complex keys: ``?`` indicator for multi-line or complex keys
+- Multi-line plain scalars: plain scalars spanning multiple lines
 - Multi-line flow scalars: line folding in flow context
-- Merge key: ``<<`` for merging mappings
+- Aliases in flow sequences: ``[*alias1, *alias2]`` (aliases work in
+  block context)
+- Merge with list of aliases: ``<<: [*a, *b]`` (single alias merge
+  works)
 - Directives: ``%YAML`` and ``%TAG`` directives
 
 Error Handling
@@ -322,11 +343,12 @@ Future Enhancements
 
 Potential future enhancements may include:
 
-- Support for YAML anchors and aliases
-- Support for custom tags
-- Support for multi-line strings and folded scalars
-- Improved compliance with full YAML specification
-- Support for YAML 1.2 specification
+- Support for tag interpretation (e.g., ``!!binary`` for base64
+  decoding)
+- Support for complex keys using ``?`` indicator
+- Support for multi-line plain scalars
+- Aliases in flow sequences
+- Merge key with list of aliases
 - Parametric objects for custom representation choices
 
 See Also

@@ -431,6 +431,23 @@ for common configuration and data serialization tasks:</p>
 <li><p>Nested structures: arbitrary nesting of sequences and mappings</p></li>
 <li><p>Trailing commas: supported in flow collections</p></li>
 </ul>
+<p><strong>Block Scalars</strong></p>
+<ul class="simple">
+<li><p>Literal block scalars: <code class="docutils literal notranslate"><span class="pre">|</span></code> style preserves newlines exactly</p></li>
+<li><p>Folded block scalars: <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> style folds newlines into spaces</p></li>
+<li><p>Chomping indicators: <code class="docutils literal notranslate"><span class="pre">-</span></code> (strip), <code class="docutils literal notranslate"><span class="pre">+</span></code> (keep), default (clip) for
+trailing newlines</p></li>
+<li><p>More-indented lines: preserved with original indentation in folded
+scalars</p></li>
+<li><p>Blank lines: preserved in both literal and folded block scalars</p></li>
+</ul>
+<p><strong>Anchors and Aliases</strong></p>
+<ul class="simple">
+<li><p>Anchor definitions: <code class="docutils literal notranslate"><span class="pre">&amp;name</span></code> to define a reusable node</p></li>
+<li><p>Alias references: <code class="docutils literal notranslate"><span class="pre">*name</span></code> to reference a previously defined anchor</p></li>
+<li><p>Merge key: <code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code> to merge mappings from aliases</p></li>
+<li><p>Works with scalars, sequences, and mappings</p></li>
+</ul>
 <p><strong>Document Structure</strong></p>
 <ul class="simple">
 <li><p>Document start marker: <code class="docutils literal notranslate"><span class="pre">---</span></code> is recognized and skipped</p></li>
@@ -438,6 +455,8 @@ for common configuration and data serialization tasks:</p>
 <li><p>Multi-document streams: multiple <code class="docutils literal notranslate"><span class="pre">---</span></code> or <code class="docutils literal notranslate"><span class="pre">...</span></code> separated
 documents (via <code class="docutils literal notranslate"><span class="pre">parse_all/2</span></code>)</p></li>
 <li><p>Comments: lines starting with <code class="docutils literal notranslate"><span class="pre">#</span></code> and inline comments after values</p></li>
+<li><p>Tags: <code class="docutils literal notranslate"><span class="pre">!tag</span></code>, <code class="docutils literal notranslate"><span class="pre">!!type</span></code>, and <code class="docutils literal notranslate"><span class="pre">!&lt;uri&gt;</span></code> tags are recognized and
+skipped</p></li>
 </ul>
 <p><strong>Escape Sequences</strong> (in double-quoted strings)</p>
 <ul class="simple">
@@ -458,13 +477,15 @@ documents (via <code class="docutils literal notranslate"><span class="pre">pars
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <p>The following YAML features are <strong>not</strong> currently supported:</p>
 <ul class="simple">
-<li><p>Literal block scalars: <code class="docutils literal notranslate"><span class="pre">|</span></code> style multi-line strings</p></li>
-<li><p>Folded block scalars: <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> style multi-line strings</p></li>
-<li><p>Anchors and aliases: <code class="docutils literal notranslate"><span class="pre">&amp;anchor</span></code> and <code class="docutils literal notranslate"><span class="pre">*alias</span></code> references</p></li>
-<li><p>Tags: <code class="docutils literal notranslate"><span class="pre">!!str</span></code>, <code class="docutils literal notranslate"><span class="pre">!!int</span></code>, <code class="docutils literal notranslate"><span class="pre">!!binary</span></code>, <code class="docutils literal notranslate"><span class="pre">!custom</span></code> type annotations</p></li>
+<li><p>Tag interpretation: Tags are recognized and skipped, but not
+interpreted</p></li>
 <li><p>Complex keys: <code class="docutils literal notranslate"><span class="pre">?</span></code> indicator for multi-line or complex keys</p></li>
+<li><p>Multi-line plain scalars: plain scalars spanning multiple lines</p></li>
 <li><p>Multi-line flow scalars: line folding in flow context</p></li>
-<li><p>Merge key: <code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code> for merging mappings</p></li>
+<li><p>Aliases in flow sequences: <code class="docutils literal notranslate"><span class="pre">[*alias1,</span> <span class="pre">*alias2]</span></code> (aliases work in
+block context)</p></li>
+<li><p>Merge with list of aliases: <code class="docutils literal notranslate"><span class="pre">&lt;&lt;:</span> <span class="pre">[*a,</span> <span class="pre">*b]</span></code> (single alias merge
+works)</p></li>
 <li><p>Directives: <code class="docutils literal notranslate"><span class="pre">%YAML</span></code> and <code class="docutils literal notranslate"><span class="pre">%TAG</span></code> directives</p></li>
 </ul>
 </section>
@@ -525,11 +546,12 @@ nested structures</p></li>
 <h2>Future Enhancements<a class="headerlink" href="#future-enhancements" title="Link to this heading"></a></h2>
 <p>Potential future enhancements may include:</p>
 <ul class="simple">
-<li><p>Support for YAML anchors and aliases</p></li>
-<li><p>Support for custom tags</p></li>
-<li><p>Support for multi-line strings and folded scalars</p></li>
-<li><p>Improved compliance with full YAML specification</p></li>
-<li><p>Support for YAML 1.2 specification</p></li>
+<li><p>Support for tag interpretation (e.g., <code class="docutils literal notranslate"><span class="pre">!!binary</span></code> for base64
+decoding)</p></li>
+<li><p>Support for complex keys using <code class="docutils literal notranslate"><span class="pre">?</span></code> indicator</p></li>
+<li><p>Support for multi-line plain scalars</p></li>
+<li><p>Aliases in flow sequences</p></li>
+<li><p>Merge key with list of aliases</p></li>
 <li><p>Parametric objects for custom representation choices</p></li>
 </ul>
 </section>

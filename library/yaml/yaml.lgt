@@ -213,8 +213,8 @@
 
 	% Skip whitespace and comments only
 	skip_ws_and_comments -->
-		[C],
-		{ member(C, [32, 9, 10, 13]) },
+		[Code],
+		{ member(Code, [32, 9, 10, 13]) },
 		!,
 		skip_ws_and_comments.
 	skip_ws_and_comments -->
@@ -276,7 +276,7 @@
 		{ atom_codes(Data, Codes) }.
 	yaml_content(Indent, Data) -->
 		% Try block sequence (starts with -)
-		peek_char(0'-),
+		peek_code(0'-),
 		!,
 		block_sequence(Indent, Items),
 		{ Data = Items }.
@@ -347,7 +347,7 @@
 		{ atom_codes(Data, Codes) }.
 	yaml_content_s(Indent, Data, S0, S) -->
 		% Try block sequence (starts with -)
-		peek_char(0'-),
+		peek_code(0'-),
 		!,
 		block_sequence_s(Indent, Items, S0, S),
 		{ Data = Items }.
@@ -806,8 +806,8 @@
 
 	literal_block_lines_rest(BaseIndent, AccLine, Codes) -->
 		% Check if there's a newline followed by content at sufficient indent
-		peek_char(C),
-		{ C =:= 10 ; C =:= 13 },
+		peek_code(Code),
+		{ Code =:= 10 ; Code =:= 13 },
 		!,
 		% Peek at what's after the newline
 		(   peek_next_line_indent_literal(BaseIndent)
@@ -824,7 +824,7 @@
 	% After consuming newline, continue collecting lines
 	literal_block_lines_continue(BaseIndent, AccLine, Codes) -->
 		% Check for blank line
-		peek_char(C),
+		peek_code(C),
 		{ C =:= 10 ; C =:= 13 },
 		!,
 		{ append(AccLine, [10], NewAcc) },
@@ -860,9 +860,9 @@
 	literal_block_line(_BaseIndent, Codes) -->
 		line_content(Codes).
 
-	line_content([C| Codes]) -->
-		[C],
-		{ C =\= 10, C =\= 13 },
+	line_content([Code| Codes]) -->
+		[Code],
+		{ Code =\= 10, Code =\= 13 },
 		!,
 		line_content(Codes).
 	line_content([]) -->
@@ -886,8 +886,8 @@
 
 	folded_block_lines_rest(BaseIndent, Lines) -->
 		% Check if there's a newline followed by content at sufficient indent
-		peek_char(C),
-		{ C =:= 10 ; C =:= 13 },
+		peek_code(Code),
+		{ Code =:= 10 ; Code =:= 13 },
 		!,
 		% Peek at what's after the newline
 		(   peek_next_line_indent(BaseIndent)
@@ -904,7 +904,7 @@
 	% After consuming newline, continue collecting lines
 	folded_block_lines_continue(BaseIndent, Lines) -->
 		% Check for blank line
-		peek_char(C),
+		peek_code(C),
 		{ C =:= 10 ; C =:= 13 },
 		!,
 		{ Lines = [blank| RestLines] },
@@ -1021,9 +1021,9 @@
 
 	% Check if input starts with newline followed by line with sufficient indent
 	% Used by block scalar parsing to look ahead without DCG pushback
-	has_next_line_with_indent(MinIndent, [C| Rest]) :-
-		(C =:= 10 ; C =:= 13),
-		count_leading_spaces_and_check(Rest, 0, MinIndent).
+	has_next_line_with_indent(MinIndent, [Code| Codes]) :-
+		(Code =:= 10 -> true ; Code =:= 13),
+		count_leading_spaces_and_check(Codes, 0, MinIndent).
 
 	% Count leading spaces and check if line has sufficient indent or is blank
 	count_leading_spaces_and_check([32| Rest], Acc, MinIndent) :-
@@ -1034,10 +1034,10 @@
 		!,
 		Acc1 is Acc + 2,  % Tab counts as 2 spaces
 		count_leading_spaces_and_check(Rest, Acc1, MinIndent).
-	count_leading_spaces_and_check([C| _], Acc, MinIndent) :-
+	count_leading_spaces_and_check([Code| _], Acc, MinIndent) :-
 		% Non-whitespace character - check indent
-		C =\= 32, C =\= 9,
-		(   (C =:= 10 ; C =:= 13)
+		Code =\= 32, Code =\= 9,
+		(   (Code =:= 10 ; Code =:= 13)
 		->  true  % Blank line is OK (continue to next line)
 		;   Acc >= MinIndent  % Content line must have sufficient indent
 		).
@@ -1065,11 +1065,11 @@
 		{ Codes \= [] },
 		{ atom_codes(Name, Codes) }.
 
-	anchor_name_codes([C| Codes]) -->
-		[C],
-		{ C =\= 32, C =\= 9, C =\= 10, C =\= 13,
-		  C =\= 0':, C =\= 0',, C =\= 0'[, C =\= 0'],
-		  C =\= 0'{, C =\= 0'} },
+	anchor_name_codes([Code| Codes]) -->
+		[Code],
+		{ Code =\= 32, Code =\= 9, Code =\= 10, Code =\= 13,
+		  Code =\= 0':, Code =\= 0',, Code =\= 0'[, Code =\= 0'],
+		  Code =\= 0'{, Code =\= 0'} },
 		!,
 		anchor_name_codes(Codes).
 	anchor_name_codes([]) -->
@@ -1116,7 +1116,7 @@
 	flow_mapping_pairs([Key-Value| Pairs]) -->
 		skip_whitespace,
 		% Check if we have a closing brace (handles trailing comma)
-		peek_char(C),
+		peek_code(C),
 		{ C =\= 0'} },
 		!,
 		flow_key(Key),
@@ -1207,9 +1207,9 @@
 
 	% Key can contain spaces but ends at ": " or ":\n" or ":end"
 	% First character cannot be a quote
-	scalar_key_codes([C| Codes]) -->
-		[C],
-		{ \+ member(C, [0':, 10, 13, 0'", 0'\']) },
+	scalar_key_codes([Code| Codes]) -->
+		[Code],
+		{ \+ member(Code, [0':, 10, 13, 0'", 0'\']) },
 		!,
 		scalar_key_codes_rest(Codes).
 	scalar_key_codes([]) -->
@@ -1219,22 +1219,22 @@
 	scalar_key_codes_rest([0':| Codes]) -->
 		[0':],
 		% Colon followed by non-space is part of the key (e.g., "time:20:03:20")
-		peek_char(C),
-		{ C =\= 32, C =\= 9, C =\= 10, C =\= 13 },
+		peek_code(Code),
+		{ Code =\= 32, Code =\= 9, Code =\= 10, Code =\= 13 },
 		!,
 		scalar_key_codes_rest(Codes).
-	scalar_key_codes_rest([C| Codes]) -->
-		[C],
-		{ \+ member(C, [0':, 10, 13]) },
+	scalar_key_codes_rest([Code| Codes]) -->
+		[Code],
+		{ \+ member(Code, [0':, 10, 13]) },
 		!,
 		scalar_key_codes_rest(Codes).
 	scalar_key_codes_rest([]) -->
 		[].
 
 	% Flow scalar (stops at flow indicators)
-	flow_scalar([C| Codes]) -->
-		[C],
-		{ \+ member(C, [0':, 0',, 0'{, 0'}, 0'[, 0'], 10, 13]) },
+	flow_scalar([Code| Codes]) -->
+		[Code],
+		{ \+ member(Code, [0':, 0',, 0'{, 0'}, 0'[, 0'], 10, 13]) },
 		!,
 		flow_scalar(Codes).
 	flow_scalar([]) -->
@@ -1247,9 +1247,9 @@
 			atom_codes(Scalar, Trimmed)
 		}.
 
-	inline_scalar_codes([C| Codes]) -->
-		[C],
-		{ \+ member(C, [10, 13, 0'#]) },
+	inline_scalar_codes([Code| Codes]) -->
+		[Code],
+		{ \+ member(Code, [10, 13, 0'#]) },
 		!,
 		inline_scalar_codes(Codes).
 	inline_scalar_codes([]) -->
@@ -1318,27 +1318,27 @@
 	% =========================================================================
 
 	% Peek at next character without consuming
-	peek_char(C), [C] --> [C].
+	peek_code(Code), [Code] --> [Code].
 
 	% Peek for non-newline character
-	peek_non_newline_char, [C] -->
-		[C],
-		{ C =\= 10, C =\= 13 }.
+	peek_non_newline_char, [Code] -->
+		[Code],
+		{ Code =\= 10, Code =\= 13 }.
 
 	% Peek for newline character
-	peek_newline_char, [C] -->
-		[C],
-		{ C =:= 10 ; C =:= 13 }.
+	peek_newline_char, [Code] -->
+		[Code],
+		{ Code =:= 10 ; Code =:= 13 }.
 
 	% Peek for scalar start (not newline, not whitespace, not end of input)
-	peek_scalar_start, [C] -->
-		[C],
-		{ \+ member(C, [10, 13, 32, 9]) }.
+	peek_scalar_start, [Code] -->
+		[Code],
+		{ \+ member(Code, [10, 13, 32, 9]) }.
 
 	% Skip spaces (not newlines)
 	skip_spaces -->
-		[C],
-		{ member(C, [32, 9]) },
+		[Code],
+		{ member(Code, [32, 9]) },
 		!,
 		skip_spaces.
 	skip_spaces -->
@@ -1346,8 +1346,8 @@
 
 	% Skip whitespace (spaces and tabs only)
 	skip_whitespace -->
-		[C],
-		{ member(C, [32, 9, 10, 13]) },
+		[Code],
+		{ member(Code, [32, 9, 10, 13]) },
 		!,
 		skip_whitespace.
 	skip_whitespace -->
@@ -1359,8 +1359,8 @@
 		!,
 		skip_spaces,
 		% Check if there's content after --- on same line
-		(   peek_char(C),
-		    { C =\= 10, C =\= 13, C =\= 0'! }
+		(   peek_code(Code),
+		    { Code =\= 10, Code =\= 13, Code =\= 0'! }
 		->  % Real content on same line as --- (e.g., --- |), leave for parser
 		    []
 		;   % Tag, newline, or spaces after ---, skip it
@@ -1374,8 +1374,8 @@
 		skip_to_newline,
 		skip_whitespace_and_comments.
 	skip_whitespace_and_comments -->
-		[C],
-		{ member(C, [32, 9, 10, 13]) },
+		[Code],
+		{ member(Code, [32, 9, 10, 13]) },
 		!,
 		skip_whitespace_and_comments.
 	skip_whitespace_and_comments -->
@@ -1404,8 +1404,8 @@
 
 	% Skip until specific character
 	skip_until_char(Target) -->
-		[C],
-		{ C =\= Target },
+		[Code],
+		{ Code =\= Target },
 		!,
 		skip_until_char(Target).
 	skip_until_char(_) -->
@@ -1413,8 +1413,8 @@
 
 	% Skip tag name characters
 	skip_tag_name -->
-		[C],
-		{ C =\= 32, C =\= 9, C =\= 10, C =\= 13 },
+		[Code],
+		{ Code =\= 32, Code =\= 9, Code =\= 10, Code =\= 13 },
 		!,
 		skip_tag_name.
 	skip_tag_name -->
@@ -1422,8 +1422,8 @@
 
 	% Skip to end of line
 	skip_to_newline -->
-		[C],
-		{ \+ member(C, [10, 13]) },
+		[Code],
+		{ \+ member(Code, [10, 13]) },
 		!,
 		skip_to_newline.
 	skip_to_newline -->
@@ -1446,8 +1446,8 @@
 
 	% Peek if current line is empty (only whitespace until newline)
 	peek_empty_line -->
-		peek_char(C),
-		{ member(C, [10, 13]) }.
+		peek_code(Code),
+		{ member(Code, [10, 13]) }.
 
 	% Measure indentation (count spaces at start of line) - consumes the spaces
 	measure_indent(Indent) -->
@@ -1470,15 +1470,15 @@
 	peek_indent(Indent) -->
 		peek_count_spaces(0, Indent).
 
-	peek_count_spaces(Acc, Indent), [C] -->
-		[C],
-		{ C =:= 32 },
+	peek_count_spaces(Acc, Indent), [Code] -->
+		[Code],
+		{ Code =:= 32 },
 		!,
 		{ Acc1 is Acc + 1 },
 		peek_count_spaces(Acc1, Indent).
-	peek_count_spaces(Acc, Indent), [C] -->
-		[C],
-		{ C =:= 9 },
+	peek_count_spaces(Acc, Indent), [Code] -->
+		[Code],
+		{ Code =:= 9 },
 		!,
 		{ Acc1 is Acc + 2 },  % Tab counts as 2 spaces
 		peek_count_spaces(Acc1, Indent).
@@ -1506,8 +1506,8 @@
 		skip_to_newline,
 		skip_trailing.
 	skip_trailing -->
-		[C],
-		{ member(C, [32, 9, 10, 13]) },
+		[Code],
+		{ member(Code, [32, 9, 10, 13]) },
 		!,
 		skip_trailing.
 	skip_trailing -->
@@ -1539,16 +1539,18 @@
 	% Parse octal numbers (0o14)
 	parse_scalar_or_number(Atom, Number) :-
 		atom(Atom),
-		atom_codes(Atom, [0'0, 0'o| OctalDigits]),
-		OctalDigits \= [],
-		octal_to_number(OctalDigits, Number),
+		sub_atom(Atom, 0, 2, After, '0o'),
+		After > 0,
+		atom_codes(Atom, Codes),
+		number_codes(Number, Codes),
 		!.
 	% Parse hexadecimal numbers (0x1A)
 	parse_scalar_or_number(Atom, Number) :-
 		atom(Atom),
-		atom_codes(Atom, [0'0, 0'x| HexDigits]),
-		HexDigits \= [],
-		hex_to_number(HexDigits, Number),
+		sub_atom(Atom, 0, 2, After, '0x'),
+		After > 0,
+		atom_codes(Atom, Codes),
+		number_codes(Number, Codes),
 		!.
 	% Standard number parsing
 	parse_scalar_or_number(Atom, Number) :-
@@ -1568,24 +1570,6 @@
 	parse_special_float(Atom, '@'(nan)) :-
 		member(Atom, ['.nan', '.NaN', '.NAN']).
 
-	% Octal to number conversion
-	octal_to_number(Digits, Number) :-
-		octal_to_number(Digits, 0, Number).
-	octal_to_number([], Acc, Acc).
-	octal_to_number([D| Ds], Acc, Number) :-
-		D >= 0'0, D =< 0'7,
-		Acc1 is Acc * 8 + (D - 0'0),
-		octal_to_number(Ds, Acc1, Number).
-
-	% Hex to number conversion
-	hex_to_number(Digits, Number) :-
-		hex_to_number(Digits, 0, Number).
-	hex_to_number([], Acc, Acc).
-	hex_to_number([D| Ds], Acc, Number) :-
-		hex_digit(D, V),
-		Acc1 is Acc * 16 + V,
-		hex_to_number(Ds, Acc1, Number).
-
 	% Trim trailing spaces from a list of codes
 	trim_trailing_spaces(Codes, Trimmed) :-
 		reverse(Codes, Reversed),
@@ -1599,9 +1583,9 @@
 	drop_spaces(Codes, Codes).
 
 	% Hex digit conversion (for \xXX and \uXXXX escapes)
-	hex_digit(C, V) :- C >= 0'0, C =< 0'9, !, V is C - 0'0.
-	hex_digit(C, V) :- C >= 0'a, C =< 0'f, !, V is C - 0'a + 10.
-	hex_digit(C, V) :- C >= 0'A, C =< 0'F, V is C - 0'A + 10.
+	hex_digit(Code, Value) :- Code >= 0'0, Code =< 0'9, !, Value is Code - 0'0.
+	hex_digit(Code, Value) :- Code >= 0'a, Code =< 0'f, !, Value is Code - 0'a + 10.
+	hex_digit(Code, Value) :- Code >= 0'A, Code =< 0'F, Value is Code - 0'A + 10.
 
 	% =========================================================================
 	% DCG Rules for YAML Generation
@@ -1704,13 +1688,13 @@
 		[0',],
 		yaml_generate_items(Items).
 
-	% Helper to output a list of codes
-	codes([]) --> [].
-	codes([C| Cs]) --> [C], codes(Cs).
-
 	% =========================================================================
 	% Auxiliary predicates
 	% =========================================================================
+
+	% Helper to output a list of codes
+	codes([]) --> [].
+	codes([Code| Codes]) --> [Code], codes(Codes).
 
 	chars_to_codes([], []).
 	chars_to_codes([Char| Chars], [Code| Codes]) :-
