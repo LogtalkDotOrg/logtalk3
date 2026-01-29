@@ -94,4 +94,5 @@ directory in the ``NOTES.md`` file.
    union_find
    url
    uuid
+   yaml
    zippers

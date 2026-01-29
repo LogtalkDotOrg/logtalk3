@@ -139,6 +139,7 @@ sed '1,19d' ../../../library/ulid/NOTES.md | pandoc -f gfm -t rst -o libraries/u
 sed '1,19d' ../../../library/union_find/NOTES.md | pandoc -f gfm -t rst -o libraries/union_find.rst
 sed '1,19d' ../../../library/url/NOTES.md | pandoc -f gfm -t rst -o libraries/url.rst
 sed '1,19d' ../../../library/uuid/NOTES.md | pandoc -f gfm -t rst -o libraries/uuid.rst
+sed '1,19d' ../../../library/yaml/NOTES.md | pandoc -f gfm -t rst -o libraries/yaml.rst
 sed '1,19d' ../../../library/zippers/NOTES.md | pandoc -f gfm -t rst -o libraries/zippers.rst
 
 for file in libraries/*.rst; do

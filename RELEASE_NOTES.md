@@ -73,6 +73,8 @@ the Apache Avro binary format.
 
 * ADDED: New `json_schema` library.
 
+* ADDED: New `yaml` library.
+
 * ADDED: New `url` library with predicates for validating, parsing, generating,
 and normalizing URLs.
 

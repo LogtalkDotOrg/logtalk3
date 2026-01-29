@@ -97,4 +97,5 @@ logtalk_library_path(ulid, library('ulid/')).
 logtalk_library_path(union_find, library('union_find/')).
 logtalk_library_path(url, library('url/')).
 logtalk_library_path(uuid, library('uuid/')).
+logtalk_library_path(yaml, library('yaml/')).
 logtalk_library_path(zippers, library('zippers/')).

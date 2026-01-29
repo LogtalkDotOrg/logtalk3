@@ -3701,6 +3701,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`toon_protocol <toon_protocol/0::generate/2>`
 * :ref:`ulid_protocol <ulid_protocol/0::generate/2>`
 * :ref:`url(Representation) <url/1::generate/2>`
+* :ref:`yaml_protocol <yaml_protocol/0::generate/2>`
 
 ``generate/3``
 --------------
@@ -3732,6 +3733,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ulid_protocol <ulid_protocol/0::generate/8>`
+
+``generate_all/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`yaml_protocol <yaml_protocol/0::generate_all/2>`
 
 ``genint/2``
 ------------
@@ -6857,6 +6868,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`toon_protocol <toon_protocol/0::parse/2>`
 * :ref:`url(Representation) <url/1::parse/2>`
 * :ref:`xml <xml/0::parse/2>`
+* :ref:`yaml_protocol <yaml_protocol/0::parse/2>`
 
 ``parse/3``
 -----------
@@ -6868,6 +6880,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`avro <avro/0::parse/3>`
 * :ref:`xml <xml/0::parse/3>`
+
+``parse_all/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`yaml_protocol <yaml_protocol/0::parse_all/2>`
 
 ``parse_domain/2``
 ------------------

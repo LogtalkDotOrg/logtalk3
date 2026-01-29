@@ -1,0 +1,165 @@
+.. index:: single: yaml_protocol
+.. _yaml_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``yaml_protocol``
+=================
+
+YAML parser and generator protocol.
+
+| **Availability:** 
+|    ``logtalk_load(yaml(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-01-25
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/2
+.. _yaml_protocol/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses YAML content read from the given source (``file(Path)``, ``stream(Stream)``, ``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) into a ground term with the ``yaml`` functor representing the parsed YAML data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,YAML)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,--ground)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source:
+|        ``domain_error(yaml_source,Source)``
+
+
+------------
+
+.. index:: parse_all/2
+.. _yaml_protocol/0::parse_all/2:
+
+``parse_all/2``
+^^^^^^^^^^^^^^^
+
+Parses all YAML documents from the given source (``file(Path)``, ``stream(Stream)``, ``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) into a list of ground terms. Documents are separated by ``---`` markers and optionally terminated by ``...`` markers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_all(Source,YAMLs)``
+| **Mode and number of proofs:**
+|    ``parse_all(++compound,--list(ground))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source:
+|        ``domain_error(yaml_source,Source)``
+
+
+------------
+
+.. index:: generate/2
+.. _yaml_protocol/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates YAML output using the representation specified in the first argument (``file(Path)``, ``stream(Stream)``, ``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) from the ground YAML term in the second argument (with the ``yaml`` functor).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,YAML)``
+| **Mode and number of proofs:**
+|    ``generate(++compound,+ground)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``YAML`` is a variable:
+|        ``instantiation_error``
+|    ``YAML`` is not a valid YAML term:
+|        ``domain_error(yaml_term,YAML)``
+|    ``Sink`` cannot be generated:
+|        ``domain_error(yaml_sink,Sink)``
+
+
+------------
+
+.. index:: generate_all/2
+.. _yaml_protocol/0::generate_all/2:
+
+``generate_all/2``
+^^^^^^^^^^^^^^^^^^
+
+Generates YAML output with multiple documents separated by ``---`` markers using the representation specified in the first argument (``file(Path)``, ``stream(Stream)``, ``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) from the list of ground YAML terms in the second argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_all(Sink,YAMLs)``
+| **Mode and number of proofs:**
+|    ``generate_all(++compound,+list(ground))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``YAMLs`` is a variable:
+|        ``instantiation_error``
+|    ``YAMLs`` is not a list:
+|        ``type_error(list,YAMLs)``
+|    An element of ``YAMLs`` is not a valid YAML term:
+|        ``domain_error(yaml_term,Term)``
+|    ``Sink`` cannot be generated:
+|        ``domain_error(yaml_sink,Sink)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

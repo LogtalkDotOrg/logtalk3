@@ -69,6 +69,7 @@
 		json(loader),
 		json_lines(loader),
 		json_schema(loader),
+		yaml(loader),
 		toon(loader),
 		cbor(loader),
 		ccsds(loader),

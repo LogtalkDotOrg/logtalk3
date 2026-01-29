@@ -1,0 +1,59 @@
+.. index:: single: yaml
+.. _yaml/0:
+
+.. rst-class:: right
+
+**object**
+
+``yaml``
+========
+
+YAML parser and generator.
+
+| **Availability:** 
+|    ``logtalk_load(yaml(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:1:0
+| **Date:** 2026-01-29
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`yaml_protocol <yaml_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`reader <reader/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`yaml_protocol/0::generate/2`  :ref:`yaml_protocol/0::generate_all/2`  :ref:`yaml_protocol/0::parse/2`  :ref:`yaml_protocol/0::parse_all/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
