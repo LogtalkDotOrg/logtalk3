@@ -64,6 +64,7 @@ directory in the ``NOTES.md`` file.
    java
    json
    json_lines
+   json_schema
    listing
    logging
    loops

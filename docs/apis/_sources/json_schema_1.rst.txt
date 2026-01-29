@@ -1,0 +1,59 @@
+.. index:: single: json_schema(StringRepresentation)
+.. _json_schema/1:
+
+.. rst-class:: right
+
+**object**
+
+``json_schema(StringRepresentation)``
+=====================================
+
+* ``StringRepresentation`` - String representation used for JSON strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.
+
+
+JSON Schema parser and validator. Uses curly terms for JSON objects and dashes for JSON pairs.
+
+| **Availability:** 
+|    ``logtalk_load(json_schema(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-01-29
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`json_schema(curly,dash,StringRepresentation) <json_schema/3>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`json_schema_protocol/0::parse/2`  :ref:`json_schema_protocol/0::validate/2`  :ref:`json_schema_protocol/0::validate/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

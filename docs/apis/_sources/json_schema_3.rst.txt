@@ -1,0 +1,65 @@
+.. index:: single: json_schema(ObjectRepresentation,PairRepresentation,StringRepresentation)
+.. _json_schema/3:
+
+.. rst-class:: right
+
+**object**
+
+``json_schema(ObjectRepresentation,PairRepresentation,StringRepresentation)``
+=============================================================================
+
+* ``ObjectRepresentation`` - Object representation used for JSON objects. Possible values are ``curly`` (default) and ``list``.
+* ``PairRepresentation`` - Pair representation used for JSON object pairs. Possible values are ``dash`` (default), ``equal``, and ``colon``.
+* ``StringRepresentation`` - String representation used for JSON strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.
+
+
+JSON Schema parser and validator supporting JSON Schema draft-07/draft-2019-09/draft-2020-12.
+
+| **Availability:** 
+|    ``logtalk_load(json_schema(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-01-29
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`json_schema_protocol <json_schema_protocol/0>`
+| **Uses:**
+|    :ref:`json(ObjectRepresentation,PairRepresentation,StringRepresentation) <json/3>`
+|    :ref:`list <list/0>`
+|    :ref:`url(Representation) <url/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`json_schema_protocol/0::parse/2`  :ref:`json_schema_protocol/0::validate/2`  :ref:`json_schema_protocol/0::validate/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

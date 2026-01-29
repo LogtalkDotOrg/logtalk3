@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on January 23, 2026
+%  Last updated on January 29, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -138,6 +138,7 @@ logtalk_library_path(intervals, library('intervals/')).
 logtalk_library_path(java, library('java/')).
 logtalk_library_path(json, library('json/')).
 logtalk_library_path(json_lines, library('json_lines/')).
+logtalk_library_path(json_schema, library('json_schema/')).
 logtalk_library_path(listing, library('listing/')).
 logtalk_library_path(logging, library('logging/')).
 logtalk_library_path(loops, library('loops/')).

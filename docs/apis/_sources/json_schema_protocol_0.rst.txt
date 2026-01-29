@@ -1,0 +1,112 @@
+.. index:: single: json_schema_protocol
+.. _json_schema_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``json_schema_protocol``
+========================
+
+JSON Schema parser and validator protocol.
+
+| **Availability:** 
+|    ``logtalk_load(json_schema(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-01-29
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/2
+.. _json_schema_protocol/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses a JSON schema from the given source (``file(Path)``, ``stream(Stream)``, ``codes(List)``, ``chars(List)``, or ``atom(Atom)``) into a schema term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,Schema)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,--term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: validate/2
+.. _json_schema_protocol/0::validate/2:
+
+``validate/2``
+^^^^^^^^^^^^^^
+
+Validates a JSON term against a parsed schema. Succeeds if the JSON term is valid according to the schema.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate(Schema,JSON)``
+| **Mode and number of proofs:**
+|    ``validate(+term,+term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: validate/3
+.. _json_schema_protocol/0::validate/3:
+
+``validate/3``
+^^^^^^^^^^^^^^
+
+Validates a JSON term against a parsed schema. Returns a list of validation errors (empty list if valid).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate(Schema,JSON,Errors)``
+| **Mode and number of proofs:**
+|    ``validate(+term,+term,--list)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

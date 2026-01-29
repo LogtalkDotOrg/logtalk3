@@ -6823,6 +6823,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::parse/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::parse/2>`
 * :ref:`json_protocol <json_protocol/0::parse/2>`
+* :ref:`json_schema_protocol <json_schema_protocol/0::parse/2>`
 * :ref:`toon_protocol <toon_protocol/0::parse/2>`
 * :ref:`url(Representation) <url/1::parse/2>`
 * :ref:`xml <xml/0::parse/2>`
@@ -9959,6 +9960,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`flags_validator <flags_validator/0::validate/1>`
+
+``validate/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_schema_protocol <json_schema_protocol/0::validate/2>`
+
+``validate/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_schema_protocol <json_schema_protocol/0::validate/3>`
 
 ``value/1``
 -----------
