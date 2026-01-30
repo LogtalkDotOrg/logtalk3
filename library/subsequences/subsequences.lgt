@@ -612,9 +612,6 @@
 	subsequences_with_min_span(MinSpan, List, Subsequences) :-
 		findall(Sub, subsequence_with_min_span(MinSpan, List, 0, Sub), Subsequences).
 
-	subsequences_with_min_span(MinSpan, List, Subsequence) :-
-		subsequence_with_min_span(MinSpan, List, 0, Subsequence).
-
 	subsequence_with_min_span(_, [], _, []).
 	subsequence_with_min_span(MinSpan, [H|T], Pos, [H|Sub]) :-
 		NextPos is Pos + MinSpan,
@@ -636,20 +633,21 @@
 
 	alternating_subsequence(List, Subsequence) :-
 		subsequence(List, Subsequence),
-		Subsequence = [_,_|_],  % At least 2 elements
+		% At least 2 elements
+		Subsequence = [_, _| _],
 		is_alternating(Subsequence).
 
-	is_alternating([_]).
-	is_alternating([_,_]).
-	is_alternating([A,B,C|T]) :-
-		(	(A @< B, B @> C) ; (A @> B, B @< C) ),
-		is_alternating([B,C|T]).
+	is_alternating([A, B, C| T]) :-
+		!,
+		(	A @< B, B @> C ->
+			true
+		; 	A @> B, B @< C
+		),
+		is_alternating([B, C| T]).
+	is_alternating(_).
 
 	k_distinct_subsequences(K, List, Subsequences) :-
 		findall(Sub, k_distinct_subsequence(K, List, Sub), Subsequences).
-
-	k_distinct_subsequences(K, List, Subsequence) :-
-		k_distinct_subsequence(K, List, Subsequence).
 
 	k_distinct_subsequence(K, List, Sub) :-
 		combination(K, List, Sub),

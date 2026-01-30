@@ -637,12 +637,21 @@
 
 	:- public(k_distinct_subsequences/3).
 	:- mode(k_distinct_subsequences(+integer, +list, -list), one).
-	:- mode(k_distinct_subsequences(+integer, +list, ?list), zero_or_more).
 	:- info(k_distinct_subsequences/3, [
-		comment is 'Generates K-element subsequences where all elements are distinct (no duplicates in the subsequence itself).',
+		comment is 'Generates all K-element subsequences where all elements are distinct (no duplicates in the subsequence itself).',
+		argnames is ['K', 'List', 'DistinctSubsequences'],
+		examples is [
+			'All distinct only' - k_distinct_subsequences(2, [a,a,b], Subsequences) - {Subsequences = [[a,b],[a,c],[b,c]]}
+		]
+	]).
+
+	:- public(k_distinct_subsequence/3).
+	:- mode(k_distinct_subsequence(+integer, +list, -list), one).
+	:- info(k_distinct_subsequence/3, [
+		comment is 'True iff the third argument is a subsequence of the first argument that is a K-element subsequence where all elements are distinct (no duplicates in the subsequence itself).',
 		argnames is ['K', 'List', 'DistinctSubsequence'],
 		examples is [
-			'Distinct only' - k_distinct_subsequences(2, [a,a,b], Sequences) - {Sequences = [a,b]}
+			'A distinct only' - k_distinct_subsequence(2, [a,a,b], Subsequences) - {Subsequences = [a,b]}
 		]
 	]).
 
