@@ -649,4 +649,20 @@
 	test(subsequences_sliding_window_3_one_of_three, true(Windows == [[a],[b],[c]])) :-
 		subsequences::sliding_window(1, [a,b,c], Windows).
 
+	% random_combination/3 tests
+
+	test(subsequences_random_combination_3_two_of_three, true(length(Combination, 2))) :-
+		subsequences::random_combination(2, [a,b,c], Combination).
+
+	% random_permutation/2 tests
+
+	test(subsequences_random_permutation_2_three, true(length(Permutation, 3))) :-
+		subsequences::random_permutation([a,b,c], Permutation).
+
+	% random_subsequence/2 tests
+
+	test(subsequences_random_subsequence_2_three, true(Length =< 3)) :-
+		subsequences::random_subsequence([a,b,c], Subsequence),
+		length(Subsequence, Length).
+
 :- end_object.

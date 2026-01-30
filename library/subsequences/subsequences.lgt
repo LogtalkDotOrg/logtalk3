@@ -30,11 +30,11 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, msort/2, nth0/3, reverse/2, select/3
+		append/3, length/2, member/2, msort/2, nth0/3, nth0/4, nth1/3, reverse/2, select/3
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [
-		between/3 as random_between/3, maybe/0
+		between/3 as random_between/3, maybe/0, set/4 as random_set/4
 	]).
 
 	% =========================================================================
@@ -297,8 +297,7 @@
 		N1 is N - 1,
 		factorial(N1, F),
 		Pos is Index // F,
-		nth0(Pos, List, H),
-		select(H, List, Rest),
+		nth0(Pos, List, H, Rest),
 		Index1 is Index mod F,
 		nth_permutation_helper(Rest, Index1, Perm).
 
@@ -565,9 +564,8 @@
 	random_combination(K, List, Combination) :-
 		length(List, N),
 		K =< N,
-		random_indices(K, N, Indices),
-		sort(Indices, SortedIndices),
-		select_by_indices(SortedIndices, List, Combination).
+		random_set(K, 1, N, Indices),
+		select_by_indices(Indices, List, Combination).
 
 	random_indices(0, _, []).
 	random_indices(K, N, [Indice| Indices]) :-
@@ -577,21 +575,20 @@
 		random_indices(K1, N, Indices).
 
 	select_by_indices([], _, []).
-	select_by_indices([Indice| Indices], List, [Elem|Elems]) :-
-		nth0(Indice, List, Elem),
-		select_by_indices(Indices, List, Elems).
+	select_by_indices([Indice| Indices], List, [Element| Elements]) :-
+		nth1(Indice, List, Element),
+		select_by_indices(Indices, List, Elements).
 
 	random_permutation(List, Permutation) :-
 		random_permutation_helper(List, [], Permutation).
 
-	random_permutation_helper([], Permutation, Permutation).
+	random_permutation_helper([], Permutation, Permutation) :-
+		!.
 	random_permutation_helper(List, Permutation0, Permutation) :-
-		List \= [],
 		length(List, N),
 		N1 is N - 1,
 		random_between(0, N1, Indice),
-		nth0(Indice, List, Element),
-		select(Element, List, Rest),
+		nth0(Indice, List, Element, Rest),
 		random_permutation_helper(Rest, [Element| Permutation0], Permutation).
 
 	random_subsequence(List, Subsequence) :-

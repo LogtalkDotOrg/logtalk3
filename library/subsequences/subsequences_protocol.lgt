@@ -40,9 +40,7 @@
 		]
 	]).
 
-	% =========================================================================
-	% Generation operations - Creating all subsequences
-	% =========================================================================
+	% generation operations - Creating all subsequences
 
 	:- public(subsequences/2).
 	:- mode(subsequences(+list, -list), one).
@@ -216,9 +214,7 @@
 		]
 	]).
 
-	% =========================================================================
-	% Filtered subsequence generation
-	% =========================================================================
+	% filtered subsequence generation
 
 	:- public(combinations/3).
 	:- mode(combinations(+integer, +list, -list), one).
@@ -375,9 +371,7 @@
 		]
 	]).
 
-	% =========================================================================
-	% Indexed access to subsequences
-	% =========================================================================
+	% indexed access to subsequences
 
 	:- public(nth_combination/4).
 	:- mode(nth_combination(+integer, +list, +integer, -list), zero_or_one).
@@ -419,9 +413,7 @@
 		]
 	]).
 
-	% =========================================================================
-	% Searching and matching subsequences
-	% =========================================================================
+	% searching and matching subsequences
 
 	:- public(longest_common_subsequence/3).
 	:- mode(longest_common_subsequence(+list, +list, -list), one).
@@ -514,9 +506,7 @@
 		]
 	]).
 
-	% =========================================================================
-	% Prefix and suffix operations
-	% =========================================================================
+	% prefix and suffix operations
 
 	:- public(is_prefix_of/2).
 	:- mode(is_prefix_of(+list, +list), zero_or_one).
@@ -540,9 +530,7 @@
 		]
 	]).
 
-	% =========================================================================
-	% Contiguous subsequences
-	% =========================================================================
+	% contiguous subsequences
 
 	:- public(subslices/2).
 	:- mode(subslices(+list, -list), one).
@@ -566,9 +554,7 @@
 		]
 	]).
 
-	% =========================================================================
-	% Random selection
-	% =========================================================================
+	% random selection
 
 	:- public(random_combination/3).
 	:- mode(random_combination(+integer, +list, -list), one).
@@ -600,9 +586,7 @@
 		]
 	]).
 
-	% =========================================================================
-	% Constrained subsequence operations
-	% =========================================================================
+	% constrained subsequence operations
 
 	:- public(subsequences_with_min_span/3).
 	:- mode(subsequences_with_min_span(+integer, +list, -list), one).
@@ -655,9 +639,7 @@
 		]
 	]).
 
-	% =========================================================================
-	% Utility predicates
-	% =========================================================================
+	% utility predicates
 
 	:- public(count_subsequences/2).
 	:- mode(count_subsequences(+list, -integer), one).
