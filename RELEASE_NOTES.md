@@ -66,6 +66,9 @@ sets.
 Library
 -------
 
+* ADDED: New `subsequences` library implementing predicates over sequences
+represented as lists.
+
 * ADDED: New `avro` library implementing for parsing and generating files in
 the Apache Avro binary format.
 

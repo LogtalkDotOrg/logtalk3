@@ -24,6 +24,7 @@
 		types(loader),
 		arbitrary(loader),
 		strings(loader),
+		subsequences(loader),
 		os(loader),
 		process(loader),
 		dates(loader),

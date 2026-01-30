@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>subsequences_protocol &mdash; Logtalk 3.98.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=fd83a980"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="term_io" href="term_io_0.html" />
+    <link rel="prev" title="subsequences" href="subsequences_0.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Logtalk APIs
+              <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.98.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#arbitrary"><span class="xref std std-ref">arbitrary</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><span class="xref std std-ref">assertions</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assignvars"><span class="xref std std-ref">assignvars</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#avro"><span class="xref std std-ref">avro</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#base32"><span class="xref std std-ref">base32</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#base58"><span class="xref std std-ref">base58</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#base64"><span class="xref std std-ref">base64</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#base85"><span class="xref std std-ref">base85</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#cbor"><span class="xref std std-ref">cbor</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ccsds"><span class="xref std std-ref">ccsds</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><span class="xref std std-ref">code_metrics</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><span class="xref std std-ref">core</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#coroutining"><span class="xref std std-ref">coroutining</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#csv"><span class="xref std std-ref">csv</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dates"><span class="xref std std-ref">dates</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><span class="xref std std-ref">dead_code_scanner</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debug-messages"><span class="xref std std-ref">debug_messages</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><span class="xref std std-ref">debugger</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dependents"><span class="xref std std-ref">dependents</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><span class="xref std std-ref">diagrams</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dictionaries"><span class="xref std std-ref">dictionaries</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dif"><span class="xref std std-ref">dif</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><span class="xref std std-ref">doclet</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#edcg"><span class="xref std std-ref">edcg</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#events"><span class="xref std std-ref">events</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#expand-library-alias-paths"><span class="xref std std-ref">expand_library_alias_paths</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#expecteds"><span class="xref std std-ref">expecteds</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#fcube"><span class="xref std std-ref">fcube</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><span class="xref std std-ref">flags</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#format"><span class="xref std std-ref">format</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#genint"><span class="xref std std-ref">genint</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#gensym"><span class="xref std std-ref">gensym</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#git"><span class="xref std std-ref">git</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#grammars"><span class="xref std std-ref">grammars</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#heaps"><span class="xref std std-ref">heaps</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><span class="xref std std-ref">help</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#hierarchies"><span class="xref std std-ref">hierarchies</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#hook-flows"><span class="xref std std-ref">hook_flows</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#hook-objects"><span class="xref std std-ref">hook_objects</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#html"><span class="xref std std-ref">html</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ids"><span class="xref std std-ref">ids</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#intervals"><span class="xref std std-ref">intervals</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><span class="xref std std-ref">iso8601</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#issue-creator"><span class="xref std std-ref">issue_creator</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#java"><span class="xref std std-ref">java</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#json"><span class="xref std std-ref">json</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#json-lines"><span class="xref std std-ref">json_lines</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#json-schema"><span class="xref std std-ref">json_schema</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><span class="xref std std-ref">lgtdoc</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><span class="xref std std-ref">library</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#listing"><span class="xref std std-ref">listing</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#logging"><span class="xref std std-ref">logging</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#meta"><span class="xref std std-ref">meta</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#meta-compiler"><span class="xref std std-ref">meta_compiler</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#nested-dictionaries"><span class="xref std std-ref">nested_dictionaries</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#optionals"><span class="xref std std-ref">optionals</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#options"><span class="xref std std-ref">options</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#os"><span class="xref std std-ref">os</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#packs"><span class="xref std std-ref">packs</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><span class="xref std std-ref">pddl_parser</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports-profiler"><span class="xref std std-ref">ports_profiler</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#process"><span class="xref std std-ref">process</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#queues"><span class="xref std std-ref">queues</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#random"><span class="xref std std-ref">random</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#reader"><span class="xref std std-ref">reader</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#recorded-database"><span class="xref std std-ref">recorded_database</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#redis"><span class="xref std std-ref">redis</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#sets"><span class="xref std std-ref">sets</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#statistics"><span class="xref std std-ref">statistics</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#strings"><span class="xref std std-ref">strings</span></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#subsequences"><span class="xref std std-ref">subsequences</span></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="subsequences_0.html">subsequences</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">subsequences_protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#timeout"><span class="xref std std-ref">timeout</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#toon"><span class="xref std std-ref">toon</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><span class="xref std std-ref">tutor</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#types"><span class="xref std std-ref">types</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ulid"><span class="xref std std-ref">ulid</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#union-find"><span class="xref std std-ref">union_find</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#url"><span class="xref std std-ref">url</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#uuid"><span class="xref std std-ref">uuid</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><span class="xref std std-ref">verdi_neruda</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><span class="xref std std-ref">wrapper</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#xml-parser"><span class="xref std std-ref">xml_parser</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#yaml"><span class="xref std std-ref">yaml</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#zippers"><span class="xref std std-ref">zippers</span></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicates</a></li>
+</ul>
+
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="core_inheritance_diagram.svg">Core diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="library_inheritance_diagram.svg">Libraries diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="tools_inheritance_diagram.svg">Tools diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="ports_inheritance_diagram.svg">Ports diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="contributions_inheritance_diagram.svg">Contributions diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+    </ul>
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../handbook/index.html">Handbook</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Logtalk APIs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">subsequences_protocol</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/subsequences_protocol_0.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p class="right" id="subsequences-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
+<section id="subsequences-protocol">
+<h1><code class="docutils literal notranslate"><span class="pre">subsequences_protocol</span></code><a class="headerlink" href="#subsequences-protocol" title="Link to this heading"></a></h1>
+<p>Protocol for subsequence operations over lists.</p>
+<div class="line-block">
+<div class="line"><strong>Availability:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(subsequences(loader))</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-01-30</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Dependencies:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Generation operations: Predicates for generating all subsequences or variants thereof.</p></li>
+<li><p>Ordering variants: Predicates that support an additional Order argument (default, lexicographic, or shortlex) for controlling output order.</p></li>
+<li><p>Filtered generation: Predicates for generating specific types of subsequences (combinations, permutations).</p></li>
+<li><p>Indexed access: Predicates for direct access to subsequences at specific positions.</p></li>
+<li><p>Searching and matching: Predicates for finding specific subsequences with desired properties.</p></li>
+<li><p>Prefix and suffix operations: Predicates for checking and finding prefixes and suffixes.</p></li>
+<li><p>Contiguous subsequences: Predicates for working with contiguous subsequences (subslices, sliding windows).</p></li>
+<li><p>Random selection: Predicates for randomly selecting subsequences.</p></li>
+<li><p>Constrained operations: Predicates for generating subsequences with specific constraints.</p></li>
+<li><p>Utility predicates: Helper predicates for subsequence operations.</p></li>
+</ul>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><strong>Inherited public predicates:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
+</div>
+</div>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#subsequences-2" id="id2"><code class="docutils literal notranslate"><span class="pre">subsequences/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#subsequences-3" id="id3"><code class="docutils literal notranslate"><span class="pre">subsequences/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nonempty-subsequences-2" id="id4"><code class="docutils literal notranslate"><span class="pre">nonempty_subsequences/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#power-set-2" id="id5"><code class="docutils literal notranslate"><span class="pre">power_set/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#inits-2" id="id6"><code class="docutils literal notranslate"><span class="pre">inits/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#tails-2" id="id7"><code class="docutils literal notranslate"><span class="pre">tails/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#inits1-2" id="id8"><code class="docutils literal notranslate"><span class="pre">inits1/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#tails1-2" id="id9"><code class="docutils literal notranslate"><span class="pre">tails1/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#init-tails-2" id="id10"><code class="docutils literal notranslate"><span class="pre">init_tails/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#combinations-3" id="id11"><code class="docutils literal notranslate"><span class="pre">combinations/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#combinations-4" id="id12"><code class="docutils literal notranslate"><span class="pre">combinations/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#combinations-with-replacement-3" id="id13"><code class="docutils literal notranslate"><span class="pre">combinations_with_replacement/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#permutations-2" id="id14"><code class="docutils literal notranslate"><span class="pre">permutations/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#permutations-3" id="id15"><code class="docutils literal notranslate"><span class="pre">permutations/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#k-permutations-3" id="id16"><code class="docutils literal notranslate"><span class="pre">k_permutations/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#k-permutations-4" id="id17"><code class="docutils literal notranslate"><span class="pre">k_permutations/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#cartesian-product-3" id="id18"><code class="docutils literal notranslate"><span class="pre">cartesian_product/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#derangements-2" id="id19"><code class="docutils literal notranslate"><span class="pre">derangements/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#next-permutation-2" id="id20"><code class="docutils literal notranslate"><span class="pre">next_permutation/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#prev-permutation-2" id="id21"><code class="docutils literal notranslate"><span class="pre">prev_permutation/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nth-combination-4" id="id22"><code class="docutils literal notranslate"><span class="pre">nth_combination/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nth-permutation-3" id="id23"><code class="docutils literal notranslate"><span class="pre">nth_permutation/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#combination-index-3" id="id24"><code class="docutils literal notranslate"><span class="pre">combination_index/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#permutation-index-2" id="id25"><code class="docutils literal notranslate"><span class="pre">permutation_index/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#longest-common-subsequence-3" id="id26"><code class="docutils literal notranslate"><span class="pre">longest_common_subsequence/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#longest-increasing-subsequence-2" id="id27"><code class="docutils literal notranslate"><span class="pre">longest_increasing_subsequence/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#longest-decreasing-subsequence-2" id="id28"><code class="docutils literal notranslate"><span class="pre">longest_decreasing_subsequence/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#longest-common-increasing-subsequence-3" id="id29"><code class="docutils literal notranslate"><span class="pre">longest_common_increasing_subsequence/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#longest-repeating-subsequence-2" id="id30"><code class="docutils literal notranslate"><span class="pre">longest_repeating_subsequence/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-subsequence-of-2" id="id31"><code class="docutils literal notranslate"><span class="pre">is_subsequence_of/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#all-common-subsequences-3" id="id32"><code class="docutils literal notranslate"><span class="pre">all_common_subsequences/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#count-distinct-subsequences-3" id="id33"><code class="docutils literal notranslate"><span class="pre">count_distinct_subsequences/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-prefix-of-2" id="id34"><code class="docutils literal notranslate"><span class="pre">is_prefix_of/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-suffix-of-2" id="id35"><code class="docutils literal notranslate"><span class="pre">is_suffix_of/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#subslices-2" id="id36"><code class="docutils literal notranslate"><span class="pre">subslices/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#sliding-window-3" id="id37"><code class="docutils literal notranslate"><span class="pre">sliding_window/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#random-combination-3" id="id38"><code class="docutils literal notranslate"><span class="pre">random_combination/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#random-permutation-2" id="id39"><code class="docutils literal notranslate"><span class="pre">random_permutation/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#random-subsequence-2" id="id40"><code class="docutils literal notranslate"><span class="pre">random_subsequence/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#subsequences-with-min-span-3" id="id41"><code class="docutils literal notranslate"><span class="pre">subsequences_with_min_span/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#alternating-subsequences-2" id="id42"><code class="docutils literal notranslate"><span class="pre">alternating_subsequences/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#k-distinct-subsequences-3" id="id43"><code class="docutils literal notranslate"><span class="pre">k_distinct_subsequences/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#count-subsequences-2" id="id44"><code class="docutils literal notranslate"><span class="pre">count_subsequences/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#count-combinations-3" id="id45"><code class="docutils literal notranslate"><span class="pre">count_combinations/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#count-permutations-2" id="id46"><code class="docutils literal notranslate"><span class="pre">count_permutations/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#subsequence-length-2" id="id47"><code class="docutils literal notranslate"><span class="pre">subsequence_length/2</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id48">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id49">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id50">Operators</a></p></li>
+</ul>
+</nav>
+<section id="public-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
+<section id="subsequences-2">
+<span id="subsequences-protocol-0-subsequences-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">subsequences/2</span></code></a><a class="headerlink" href="#subsequences-2" title="Link to this heading"></a></h3>
+<p>Generates all subsequences of a list using default order. A subsequence maintains the relative order of elements but need not be contiguous. The empty list is included.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequences(List,Subsequence)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequences(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequences(+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Simple subsequences</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequences([a,b,c],Subsequence)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Subsequence=[[],[a],[b],[a,b],[c],[a,c],[b,c],[a,b,c]]</span></code></div>
+</div>
+<div class="line">Backtracking through subsequences</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequences([1,2],Subsequence)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Subsequence=[],Subsequence=[1],Subsequence=[2],Subsequence=[1,2]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="subsequences-3">
+<span id="subsequences-protocol-0-subsequences-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">subsequences/3</span></code></a><a class="headerlink" href="#subsequences-3" title="Link to this heading"></a></h3>
+<p>Generates all subsequences of a list with specified ordering: <code class="docutils literal notranslate"><span class="pre">default</span></code> (as naturally produced), <code class="docutils literal notranslate"><span class="pre">lexicographic</span></code>, or <code class="docutils literal notranslate"><span class="pre">shortlex</span></code> (by length first, then lexicographically).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequences(List,Order,Subsequence)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequences(+list,+atom,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequences(+list,+atom,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Shortlex order</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequences([a,b],shortlex,Subsequence)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Subsequence=[[],[a],[b],[a,b]]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="nonempty-subsequences-2">
+<span id="subsequences-protocol-0-nonempty-subsequences-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nonempty_subsequences/2</span></code></a><a class="headerlink" href="#nonempty-subsequences-2" title="Link to this heading"></a></h3>
+<p>Generates all non-empty subsequences of a list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nonempty_subsequences(List,Subsequence)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nonempty_subsequences(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nonempty_subsequences(+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Non-empty subsequences</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nonempty_subsequences([a,b],Subsequence)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Subsequence=[[a],[b],[a,b]]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="power-set-2">
+<span id="subsequences-protocol-0-power-set-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">power_set/2</span></code></a><a class="headerlink" href="#power-set-2" title="Link to this heading"></a></h3>
+<p>Generates the power set of a list (all possible subsequences). Alias for subsequences/2 when first argument is ground.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">power_set(List,PowerSet)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">power_set(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Power set</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">power_set([a,b],PowerSet)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PowerSet=[[],[a],[b],[a,b]]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="inits-2">
+<span id="subsequences-protocol-0-inits-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">inits/2</span></code></a><a class="headerlink" href="#inits-2" title="Link to this heading"></a></h3>
+<p>Generates all initial segments (prefixes) of a list, shortest first. Includes the empty list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">inits(List,Init)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">inits(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">inits(+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">All prefixes</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">inits([a,b,c],Init)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Init=[[],[a],[a,b],[a,b,c]]</span></code></div>
+</div>
+<div class="line">Backtracking</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">inits([1,2],Init)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Init=[],Init=[1],Init=[1,2]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="tails-2">
+<span id="subsequences-protocol-0-tails-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">tails/2</span></code></a><a class="headerlink" href="#tails-2" title="Link to this heading"></a></h3>
+<p>Generates all final segments (suffixes) of a list, longest first. Includes the empty list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tails(List,Tail)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tails(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tails(+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">All suffixes</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tails([a,b,c],Tail)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tail=[[a,b,c],[b,c],[c],[]]</span></code></div>
+</div>
+<div class="line">Backtracking</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tails([1,2],Tail)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tail=[1,2],Tail=[2],Tail=[]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="inits1-2">
+<span id="subsequences-protocol-0-inits1-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">inits1/2</span></code></a><a class="headerlink" href="#inits1-2" title="Link to this heading"></a></h3>
+<p>Generates all non-empty initial segments (prefixes) of a list, shortest first. Excludes the empty list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">inits1(List,Init)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">inits1(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">inits1(+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Non-empty prefixes</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">inits1([a,b,c],Init)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Init=[[a],[a,b],[a,b,c]]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="tails1-2">
+<span id="subsequences-protocol-0-tails1-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">tails1/2</span></code></a><a class="headerlink" href="#tails1-2" title="Link to this heading"></a></h3>
+<p>Generates all non-empty final segments (suffixes) of a list, longest first. Excludes the empty list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tails1(List,Tail)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tails1(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tails1(+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Non-empty suffixes</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tails1([a,b,c],Tail)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tail=[[a,b,c],[b,c],[c]]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="init-tails-2">
+<span id="subsequences-protocol-0-init-tails-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">init_tails/2</span></code></a><a class="headerlink" href="#init-tails-2" title="Link to this heading"></a></h3>
+<p>Generates all pairs of initial and final segments. Each pair (Init,Tail) represents a split of the list where Init+Tail equals the original list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">init_tails(List,InitTailPairs)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">init_tails(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">init_tails(+list,?pair)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">All splits</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">init_tails([a,b],InitTailPairs)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">InitTailPairs=[([],[a,b]),([a],[b]),([a,b],[])]</span></code></div>
+</div>
+<div class="line">Backtracking through splits</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">init_tails([1,2],(A,B))</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">A=[],B=[1,2]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="combinations-3">
+<span id="subsequences-protocol-0-combinations-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">combinations/3</span></code></a><a class="headerlink" href="#combinations-3" title="Link to this heading"></a></h3>
+<p>Generates all K-element subsequences (combinations) of a list. Order of elements is preserved from the original list, but position selection varies. No repetitions allowed.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">combinations(K,List,Combination)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">combinations(+integer,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">combinations(+integer,+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">2-combinations</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">combinations(2,[a,b,c],Combination)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Combination=[[a,b],[a,c],[b,c]]</span></code></div>
+</div>
+<div class="line">Empty combination</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">combinations(0,[a,b],Combination)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Combination=[[]]</span></code></div>
+</div>
+<div class="line">Impossible combination</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">combinations(3,[a,b],_)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">false</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="combinations-4">
+<span id="subsequences-protocol-0-combinations-4"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">combinations/4</span></code></a><a class="headerlink" href="#combinations-4" title="Link to this heading"></a></h3>
+<p>Generates all K-element combinations with specified ordering: <code class="docutils literal notranslate"><span class="pre">default</span></code>, <code class="docutils literal notranslate"><span class="pre">lexicographic</span></code>, or <code class="docutils literal notranslate"><span class="pre">shortlex</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">combinations(K,List,Order,Combination)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">combinations(+integer,+list,+atom,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">combinations(+integer,+list,+atom,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Lexicographic 2-combinations</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">combinations(2,[a,b,c],lexicographic,Combination)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Combination=[[a,b],[a,c],[b,c]]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="combinations-with-replacement-3">
+<span id="subsequences-protocol-0-combinations-with-replacement-3"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">combinations_with_replacement/3</span></code></a><a class="headerlink" href="#combinations-with-replacement-3" title="Link to this heading"></a></h3>
+<p>Generates all K-element subsequences with replacement allowed. Elements can be repeated.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">combinations_with_replacement(K,List,Combination)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">combinations_with_replacement(+integer,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">combinations_with_replacement(+integer,+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">2-combinations with replacement</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">combinations_with_replacement(2,[a,b],Combination)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Combination=[[a,a],[a,b],[b,b]]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="permutations-2">
+<span id="subsequences-protocol-0-permutations-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">permutations/2</span></code></a><a class="headerlink" href="#permutations-2" title="Link to this heading"></a></h3>
+<p>Generates all permutations of a list. Unlike subsequences, permutations rearrange all elements without preserving relative order.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permutations(List,Permutation)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permutations(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permutations(+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">All permutations</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permutations([a,b,c],Permutation)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Permutation=[[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="permutations-3">
+<span id="subsequences-protocol-0-permutations-3"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">permutations/3</span></code></a><a class="headerlink" href="#permutations-3" title="Link to this heading"></a></h3>
+<p>Generates all permutations of a list with specified ordering: <code class="docutils literal notranslate"><span class="pre">default</span></code>, <code class="docutils literal notranslate"><span class="pre">lexicographic</span></code>, or <code class="docutils literal notranslate"><span class="pre">shortlex</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permutations(List,Order,Permutation)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permutations(+list,+atom,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permutations(+list,+atom,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Lexicographic permutations</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permutations([a,b,c],lexicographic,Permutation)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Permutation=[[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="k-permutations-3">
+<span id="subsequences-protocol-0-k-permutations-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">k_permutations/3</span></code></a><a class="headerlink" href="#k-permutations-3" title="Link to this heading"></a></h3>
+<p>Generates all K-element permutations of a list. These are ordered selections where order matters.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">k_permutations(K,List,Permutation)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">k_permutations(+integer,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">k_permutations(+integer,+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">2-permutations</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">k_permutations(2,[a,b,c],Permutation)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Permutation=[[a,b],[a,c],[b,a],[b,c],[c,a],[c,b]]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="k-permutations-4">
+<span id="subsequences-protocol-0-k-permutations-4"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">k_permutations/4</span></code></a><a class="headerlink" href="#k-permutations-4" title="Link to this heading"></a></h3>
+<p>Generates all K-element permutations with specified ordering: <code class="docutils literal notranslate"><span class="pre">default</span></code>, <code class="docutils literal notranslate"><span class="pre">lexicographic</span></code>, or <code class="docutils literal notranslate"><span class="pre">shortlex</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">k_permutations(K,List,Order,Permutation)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">k_permutations(+integer,+list,+atom,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">k_permutations(+integer,+list,+atom,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Lexicographic 2-permutations</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">k_permutations(2,[a,b,c],lexicographic,Permutation)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Permutation=[[a,b],[a,c],[b,a],[b,c],[c,a],[c,b]]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="cartesian-product-3">
+<span id="subsequences-protocol-0-cartesian-product-3"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">cartesian_product/3</span></code></a><a class="headerlink" href="#cartesian-product-3" title="Link to this heading"></a></h3>
+<p>Generates all K-element tuples from the list with replacement and where order matters (Cartesian product of the list with itself K times).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cartesian_product(K,List,Tuple)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cartesian_product(+integer,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cartesian_product(+integer,+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">2-tuples</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cartesian_product(2,[a,b],Tuple)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tuple=[[a,a],[a,b],[b,a],[b,b]]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="derangements-2">
+<span id="subsequences-protocol-0-derangements-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">derangements/2</span></code></a><a class="headerlink" href="#derangements-2" title="Link to this heading"></a></h3>
+<p>Generates all derangements of a list. A derangement is a permutation where no element appears in its original position.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">derangements(List,Derangement)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">derangements(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">derangements(+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Simple derangement</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">derangements([a,b,c],Derangement)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Derangement=[[b,c,a],[c,a,b]]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="next-permutation-2">
+<span id="subsequences-protocol-0-next-permutation-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">next_permutation/2</span></code></a><a class="headerlink" href="#next-permutation-2" title="Link to this heading"></a></h3>
+<p>Computes the next permutation in lexicographic order. Fails if the input is the last permutation.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">next_permutation(Permutation,NextPermutation)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">next_permutation(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Next permutation</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">next_permutation([a,b,c],NextPermutation)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">NextPermutation=[a,c,b]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="prev-permutation-2">
+<span id="subsequences-protocol-0-prev-permutation-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">prev_permutation/2</span></code></a><a class="headerlink" href="#prev-permutation-2" title="Link to this heading"></a></h3>
+<p>Computes the previous permutation in lexicographic order. Fails if the input is the first permutation.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">prev_permutation(Permutation,PrevPermutation)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">prev_permutation(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Previous permutation</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">prev_permutation([a,c,b],PrevPermutation)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PrevPermutation=[a,b,c]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="nth-combination-4">
+<span id="subsequences-protocol-0-nth-combination-4"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nth_combination/4</span></code></a><a class="headerlink" href="#nth-combination-4" title="Link to this heading"></a></h3>
+<p>Directly computes the Nth K-element combination in lexicographic order without generating all previous ones. Index starts at 0.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nth_combination(K,List,Index,Combination)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nth_combination(+integer,+list,+integer,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Second 2-combination</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nth_combination(2,[a,b,c,d],1,Combination)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Combination=[a,c]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="nth-permutation-3">
+<span id="subsequences-protocol-0-nth-permutation-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nth_permutation/3</span></code></a><a class="headerlink" href="#nth-permutation-3" title="Link to this heading"></a></h3>
+<p>Directly computes the Nth permutation in lexicographic order. Index starts at 0.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nth_permutation(List,Index,Permutation)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nth_permutation(+list,+integer,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Third permutation</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nth_permutation([a,b,c],2,Permutation)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Permutation=[b,a,c]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="combination-index-3">
+<span id="subsequences-protocol-0-combination-index-3"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">combination_index/3</span></code></a><a class="headerlink" href="#combination-index-3" title="Link to this heading"></a></h3>
+<p>Finds the lexicographic index of a given K-element combination. Inverse of nth_combination/4.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">combination_index(K,Combination,Index)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">combination_index(+integer,+list,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Index of combination</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">combination_index(2,[a,c],Index)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Index=1</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="permutation-index-2">
+<span id="subsequences-protocol-0-permutation-index-2"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">permutation_index/2</span></code></a><a class="headerlink" href="#permutation-index-2" title="Link to this heading"></a></h3>
+<p>Finds the lexicographic index of a given permutation. Inverse of nth_permutation/3.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permutation_index(Permutation,Index)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permutation_index(+list,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Index of permutation</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permutation_index([b,a,c],Index)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Index=2</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="longest-common-subsequence-3">
+<span id="subsequences-protocol-0-longest-common-subsequence-3"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">longest_common_subsequence/3</span></code></a><a class="headerlink" href="#longest-common-subsequence-3" title="Link to this heading"></a></h3>
+<p>Finds the longest common subsequence (LCS) between two lists. Uses dynamic programming.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">longest_common_subsequence(List1,List2,LCS)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">longest_common_subsequence(+list,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">LCS example</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">longest_common_subsequence([a,b,c,d,e],[a,c,e,f],LCS)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">LCS=[a,c,e]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="longest-increasing-subsequence-2">
+<span id="subsequences-protocol-0-longest-increasing-subsequence-2"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">longest_increasing_subsequence/2</span></code></a><a class="headerlink" href="#longest-increasing-subsequence-2" title="Link to this heading"></a></h3>
+<p>Finds the longest strictly increasing subsequence in a list. Elements must be comparable.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">longest_increasing_subsequence(List,LIS)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">longest_increasing_subsequence(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">LIS example</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">longest_increasing_subsequence([3,1,4,1,5,9,2,6],LIS)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">LIS=[1,4,5,9]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="longest-decreasing-subsequence-2">
+<span id="subsequences-protocol-0-longest-decreasing-subsequence-2"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">longest_decreasing_subsequence/2</span></code></a><a class="headerlink" href="#longest-decreasing-subsequence-2" title="Link to this heading"></a></h3>
+<p>Finds the longest strictly decreasing subsequence in a list. Elements must be comparable.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">longest_decreasing_subsequence(List,LDS)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">longest_decreasing_subsequence(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">LDS example</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">longest_decreasing_subsequence([9,5,2,8,3,1],LDS)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">LDS=[9,5,2,1]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="longest-common-increasing-subsequence-3">
+<span id="subsequences-protocol-0-longest-common-increasing-subsequence-3"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">longest_common_increasing_subsequence/3</span></code></a><a class="headerlink" href="#longest-common-increasing-subsequence-3" title="Link to this heading"></a></h3>
+<p>Finds the longest subsequence that is both common to two lists and strictly increasing.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">longest_common_increasing_subsequence(List1,List2,LCIS)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">longest_common_increasing_subsequence(+list,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">LCIS example</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">longest_common_increasing_subsequence([1,4,2,5],[4,1,3,5],LCIS)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">LCIS=[1,5]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="longest-repeating-subsequence-2">
+<span id="subsequences-protocol-0-longest-repeating-subsequence-2"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">longest_repeating_subsequence/2</span></code></a><a class="headerlink" href="#longest-repeating-subsequence-2" title="Link to this heading"></a></h3>
+<p>Finds the longest subsequence that appears at least twice in the list (at different positions).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">longest_repeating_subsequence(List,LRS)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">longest_repeating_subsequence(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">LRS example</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">longest_repeating_subsequence([a,a,b,a,b],LRS)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">LRS=[a,b]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="is-subsequence-of-2">
+<span id="subsequences-protocol-0-is-subsequence-of-2"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">is_subsequence_of/2</span></code></a><a class="headerlink" href="#is-subsequence-of-2" title="Link to this heading"></a></h3>
+<p>Checks if the first list is a subsequence of the second list. All elements must occur in order.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_subsequence_of(Subsequence,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_subsequence_of(+list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Valid subsequence</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_subsequence_of([a,c],[a,b,c])</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">true</span></code></div>
+</div>
+<div class="line">Invalid subsequence</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_subsequence_of([c,a],[a,b,c])</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">false</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="all-common-subsequences-3">
+<span id="subsequences-protocol-0-all-common-subsequences-3"></span><span id="index-31"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">all_common_subsequences/3</span></code></a><a class="headerlink" href="#all-common-subsequences-3" title="Link to this heading"></a></h3>
+<p>Generates all subsequences that are common to both lists.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">all_common_subsequences(List1,List2,CommonSubsequence)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">all_common_subsequences(+list,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">all_common_subsequences(+list,+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Common subsequences</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">all_common_subsequences([a,b,c],[a,c,d],CommonSubsequence)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">CommonSubsequence=[],CommonSubsequence=[a],CommonSubsequence=[c],CommonSubsequence=[a,c]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="count-distinct-subsequences-3">
+<span id="subsequences-protocol-0-count-distinct-subsequences-3"></span><span id="index-32"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">count_distinct_subsequences/3</span></code></a><a class="headerlink" href="#count-distinct-subsequences-3" title="Link to this heading"></a></h3>
+<p>Counts the number of distinct occurrences of a pattern as a subsequence in a list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">count_distinct_subsequences(Pattern,List,Count)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">count_distinct_subsequences(+list,+list,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Count occurrences</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">count_distinct_subsequences([a,b],[a,a,b,b],Count)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count=4</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="is-prefix-of-2">
+<span id="subsequences-protocol-0-is-prefix-of-2"></span><span id="index-33"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">is_prefix_of/2</span></code></a><a class="headerlink" href="#is-prefix-of-2" title="Link to this heading"></a></h3>
+<p>Checks if the first list is a prefix of the second list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_prefix_of(Prefix,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_prefix_of(+list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Valid prefix</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_prefix_of([a,b],[a,b,c])</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">true</span></code></div>
+</div>
+<div class="line">Invalid prefix</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_prefix_of([b,c],[a,b,c])</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">false</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="is-suffix-of-2">
+<span id="subsequences-protocol-0-is-suffix-of-2"></span><span id="index-34"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">is_suffix_of/2</span></code></a><a class="headerlink" href="#is-suffix-of-2" title="Link to this heading"></a></h3>
+<p>Checks if the first list is a suffix of the second list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_suffix_of(Suffix,List)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_suffix_of(+list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Valid suffix</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_suffix_of([b,c],[a,b,c])</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">true</span></code></div>
+</div>
+<div class="line">Invalid suffix</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_suffix_of([a,b],[a,b,c])</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">false</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="subslices-2">
+<span id="subsequences-protocol-0-subslices-2"></span><span id="index-35"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">subslices/2</span></code></a><a class="headerlink" href="#subslices-2" title="Link to this heading"></a></h3>
+<p>Generates all contiguous non-empty subslices (sublists) of a list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subslices(List,Subslice)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subslices(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subslices(+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">All subslices</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subslices([a,b,c],Subslice)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Subslice=[[a],[a,b],[a,b,c],[b],[b,c],[c]]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="sliding-window-3">
+<span id="subsequences-protocol-0-sliding-window-3"></span><span id="index-36"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sliding_window/3</span></code></a><a class="headerlink" href="#sliding-window-3" title="Link to this heading"></a></h3>
+<p>Generates all contiguous windows of size N from a list. Fails if N is larger than the list length.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sliding_window(N,List,Window)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sliding_window(+integer,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sliding_window(+integer,+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Windows of size 2</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sliding_window(2,[a,b,c,d],Window)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Window=[[a,b],[b,c],[c,d]]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="random-combination-3">
+<span id="subsequences-protocol-0-random-combination-3"></span><span id="index-37"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">random_combination/3</span></code></a><a class="headerlink" href="#random-combination-3" title="Link to this heading"></a></h3>
+<p>Randomly selects one K-element combination uniformly from all possible combinations.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">random_combination(K,List,Combination)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">random_combination(+integer,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Random 2-combination</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">random_combination(2,[a,b,c,d],Combination)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Combination=[b,d]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="random-permutation-2">
+<span id="subsequences-protocol-0-random-permutation-2"></span><span id="index-38"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">random_permutation/2</span></code></a><a class="headerlink" href="#random-permutation-2" title="Link to this heading"></a></h3>
+<p>Randomly selects one permutation uniformly from all possible permutations. Also known as shuffling.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">random_permutation(List,Permutation)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">random_permutation(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Random permutation</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">random_permutation([a,b,c],Permutation)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Permutation=[c,a,b]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="random-subsequence-2">
+<span id="subsequences-protocol-0-random-subsequence-2"></span><span id="index-39"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">random_subsequence/2</span></code></a><a class="headerlink" href="#random-subsequence-2" title="Link to this heading"></a></h3>
+<p>Randomly selects one subsequence uniformly from all 2^N possible subsequences.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">random_subsequence(List,Subsequence)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">random_subsequence(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Random subsequence</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">random_subsequence([a,b,c],Subsequence)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Subsequence=[a,c]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="subsequences-with-min-span-3">
+<span id="subsequences-protocol-0-subsequences-with-min-span-3"></span><span id="index-40"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">subsequences_with_min_span/3</span></code></a><a class="headerlink" href="#subsequences-with-min-span-3" title="Link to this heading"></a></h3>
+<p>Generates subsequences where consecutive elements are at least MinSpan positions apart in the original list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequences_with_min_span(MinSpan,List,Subsequence)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequences_with_min_span(+integer,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequences_with_min_span(+integer,+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Min span of 2</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequences_with_min_span(2,[a,b,c,d],Subsequence)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Subsequence=[a,c]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="alternating-subsequences-2">
+<span id="subsequences-protocol-0-alternating-subsequences-2"></span><span id="index-41"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">alternating_subsequences/2</span></code></a><a class="headerlink" href="#alternating-subsequences-2" title="Link to this heading"></a></h3>
+<p>Generates subsequences that alternate between increasing and decreasing (or vice versa). Elements must be comparable.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">alternating_subsequences(List,AlternatingSubsequence)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">alternating_subsequences(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">alternating_subsequences(+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Alternating</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">alternating_subsequences([1,3,2,4,3,5],AlternatingSubsequence)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">AlternatingSubsequence=[1,3,2,4,3,5]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="k-distinct-subsequences-3">
+<span id="subsequences-protocol-0-k-distinct-subsequences-3"></span><span id="index-42"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">k_distinct_subsequences/3</span></code></a><a class="headerlink" href="#k-distinct-subsequences-3" title="Link to this heading"></a></h3>
+<p>Generates K-element subsequences where all elements are distinct (no duplicates in the subsequence itself).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">k_distinct_subsequences(K,List,DistinctSubsequence)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">k_distinct_subsequences(+integer,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">k_distinct_subsequences(+integer,+list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Distinct only</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">k_distinct_subsequences(2,[a,a,b],DistinctSubsequence)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DistinctSubsequence=[a,b]</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="count-subsequences-2">
+<span id="subsequences-protocol-0-count-subsequences-2"></span><span id="index-43"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">count_subsequences/2</span></code></a><a class="headerlink" href="#count-subsequences-2" title="Link to this heading"></a></h3>
+<p>Counts the total number of subsequences (always 2^N for a list of length N).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">count_subsequences(List,Count)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">count_subsequences(+list,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Count</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">count_subsequences([a,b,c],Count)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count=8</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="count-combinations-3">
+<span id="subsequences-protocol-0-count-combinations-3"></span><span id="index-44"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">count_combinations/3</span></code></a><a class="headerlink" href="#count-combinations-3" title="Link to this heading"></a></h3>
+<p>Counts the number of K-element combinations: C(N,K) = N!/(K!(N-K)!).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">count_combinations(K,List,Count)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">count_combinations(+integer,+list,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">C(4,2)</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">count_combinations(2,[a,b,c,d],Count)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count=6</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="count-permutations-2">
+<span id="subsequences-protocol-0-count-permutations-2"></span><span id="index-45"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">count_permutations/2</span></code></a><a class="headerlink" href="#count-permutations-2" title="Link to this heading"></a></h3>
+<p>Counts the number of permutations (always N! for a list of length N).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">count_permutations(List,Count)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">count_permutations(+list,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Count</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">count_permutations([a,b,c],Count)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count=6</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="subsequence-length-2">
+<span id="subsequences-protocol-0-subsequence-length-2"></span><span id="index-46"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">subsequence_length/2</span></code></a><a class="headerlink" href="#subsequence-length-2" title="Link to this heading"></a></h3>
+<p>Returns the length of a subsequence (same as list length, provided for consistency).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequence_length(Subsequence,Length)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequence_length(+list,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Length</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsequence_length([a,b,c],Length)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Length=3</span></code></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="protected-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
+<p>(none)</p>
+</section>
+<section id="private-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
+<p>(none)</p>
+</section>
+<section id="operators">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
+<p>(none)</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="subsequences_0.html" class="btn btn-neutral float-left" title="subsequences" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="term_io_0.html" class="btn btn-neutral float-right" title="term_io" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2026, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

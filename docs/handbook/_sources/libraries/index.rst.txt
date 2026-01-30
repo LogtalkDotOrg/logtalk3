@@ -83,12 +83,13 @@ directory in the ``NOTES.md`` file.
    redis
    sets
    statistics
+   strings
+   subsequences
    term_io
    timeout
    toon
    tsv
    types
-   strings
    ulid
    unicode_data
    union_find
