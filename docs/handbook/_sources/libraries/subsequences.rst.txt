@@ -3,7 +3,29 @@
 ``subsequences``
 ================
 
-This library provides subsequence predicates.
+This library provides predicates for working with subsequences
+represented using lists. The following categories of predicates are
+provided:
+
+- Generation operations - Predicates for generating all subsequences or
+  variants thereof.
+- Ordering variants - Predicates that support an additional order
+  argument (default, lexicographic, or shortlex) for controlling output
+  order.
+- Filtered generation - Predicates for generating specific types of
+  subsequences (combinations, permutations).
+- Indexed access - Predicates for direct access to subsequences at
+  specific positions.
+- Searching and matching - Predicates for finding specific subsequences
+  with desired properties.
+- Prefix and suffix operations - Predicates for checking and finding
+  prefixes and suffixes.
+- Contiguous subsequences - Predicates for working with contiguous
+  subsequences (subslices, sliding windows).
+- Random selection - Predicates for randomly selecting subsequences.
+- Constrained operations - Predicates for generating subsequences with
+  specific constraints.
+- Utility predicates - Helper predicates for subsequence operations.
 
 API documentation
 -----------------

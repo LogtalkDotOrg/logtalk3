@@ -60,18 +60,38 @@ Generates all subsequences of a list using default order. A subsequence maintain
 |    ``static``
 
 | **Template:**
-|    ``subsequences(List,Subsequence)``
+|    ``subsequences(List,Subsequences)``
 | **Mode and number of proofs:**
 |    ``subsequences(+list,-list)`` - ``one``
-|    ``subsequences(+list,?list)`` - ``zero_or_more``
 
 | **Examples:**
-|    Simple subsequences
-|      ``subsequences([a,b,c],Subsequence)``
-|      ``Subsequence=[[],[a],[b],[a,b],[c],[a,c],[b,c],[a,b,c]]``
-|    Backtracking through subsequences
-|      ``subsequences([1,2],Subsequence)``
-|      ``Subsequence=[],Subsequence=[1],Subsequence=[2],Subsequence=[1,2]``
+|    All subsequences
+|      ``subsequences([a,b,c],Subsequences)``
+|      ``Subsequences=[[],[a],[b],[a,b],[c],[a,c],[b,c],[a,b,c]]``
+
+
+------------
+
+.. index:: subsequence/2
+.. _subsequences_protocol/0::subsequence/2:
+
+``subsequence/2``
+^^^^^^^^^^^^^^^^^
+
+True iff the second argument is a subsequence of the first argument. Subsequences of a list using default order. A subsequence maintains the relative order of elements but need not be contiguous. The empty list is included.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``subsequence(List,Subsequence)``
+| **Mode and number of proofs:**
+|    ``subsequence(+list,-list)`` - ``one_or_more``
+
+| **Examples:**
+|    A subsequence
+|      ``subsequence([1,2],Subsequence)``
+|      ``Subsequence=[]``
 
 
 ------------
@@ -88,15 +108,38 @@ Generates all subsequences of a list with specified ordering: ``default`` (as na
 |    ``static``
 
 | **Template:**
-|    ``subsequences(List,Order,Subsequence)``
+|    ``subsequences(List,Order,Subsequences)``
 | **Mode and number of proofs:**
 |    ``subsequences(+list,+atom,-list)`` - ``one``
-|    ``subsequences(+list,+atom,?list)`` - ``zero_or_more``
 
 | **Examples:**
 |    Shortlex order
-|      ``subsequences([a,b],shortlex,Subsequence)``
-|      ``Subsequence=[[],[a],[b],[a,b]]``
+|      ``subsequences([a,b],shortlex,Subsequences)``
+|      ``Subsequences=[[],[a],[b],[a,b]]``
+
+
+------------
+
+.. index:: subsequence/3
+.. _subsequences_protocol/0::subsequence/3:
+
+``subsequence/3``
+^^^^^^^^^^^^^^^^^
+
+True iff the third argument is a subsequence of the first argument with specified ordering: ``default`` (as naturally produced), ``lexicographic``, or ``shortlex`` (by length first, then lexicographically).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``subsequence(List,Order,Subsequence)``
+| **Mode and number of proofs:**
+|    ``subsequence(+list,+atom,-list)`` - ``one_or_more``
+
+| **Examples:**
+|    Shortlex order
+|      ``subsequence([a,b],shortlex,Subsequence)``
+|      ``Subsequence=[]``
 
 
 ------------
@@ -113,15 +156,38 @@ Generates all non-empty subsequences of a list.
 |    ``static``
 
 | **Template:**
-|    ``nonempty_subsequences(List,Subsequence)``
+|    ``nonempty_subsequences(List,Subsequences)``
 | **Mode and number of proofs:**
 |    ``nonempty_subsequences(+list,-list)`` - ``one``
-|    ``nonempty_subsequences(+list,?list)`` - ``zero_or_more``
 
 | **Examples:**
 |    Non-empty subsequences
-|      ``nonempty_subsequences([a,b],Subsequence)``
-|      ``Subsequence=[[a],[b],[a,b]]``
+|      ``nonempty_subsequences([a,b],Subsequences)``
+|      ``Subsequences=[[a],[b],[a,b]]``
+
+
+------------
+
+.. index:: nonempty_subsequence/2
+.. _subsequences_protocol/0::nonempty_subsequence/2:
+
+``nonempty_subsequence/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the second argument is a non-empty subsequence of the first argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nonempty_subsequence(List,Subsequence)``
+| **Mode and number of proofs:**
+|    ``nonempty_subsequence(+list,-list)`` - ``one_or_more``
+
+| **Examples:**
+|    Non-empty subsequence
+|      ``nonempty_subsequence([a,b],Subsequence)``
+|      ``Subsequence=[a]``
 
 
 ------------
@@ -162,18 +228,39 @@ Generates all initial segments (prefixes) of a list, shortest first. Includes th
 |    ``static``
 
 | **Template:**
-|    ``inits(List,Init)``
+|    ``inits(List,Inits)``
 | **Mode and number of proofs:**
 |    ``inits(+list,-list)`` - ``one``
-|    ``inits(+list,?list)`` - ``zero_or_more``
 
 | **Examples:**
 |    All prefixes
-|      ``inits([a,b,c],Init)``
-|      ``Init=[[],[a],[a,b],[a,b,c]]``
-|    Backtracking
-|      ``inits([1,2],Init)``
-|      ``Init=[],Init=[1],Init=[1,2]``
+|      ``inits([a,b,c],Inits)``
+|      ``Inits=[[],[a],[a,b],[a,b,c]]``
+
+
+------------
+
+.. index:: init/2
+.. _subsequences_protocol/0::init/2:
+
+``init/2``
+^^^^^^^^^^
+
+True iff the second argument is one of the initial segments (prefixes) of a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``init(List,Inits)``
+| **Mode and number of proofs:**
+|    ``init(+list,-term)`` - ``zero_or_more``
+|    ``init(+list,+term)`` - ``zero_or_one``
+
+| **Examples:**
+|    Check prefix
+|      ``init([a,b,c],[a,b])``
+|      ``true``
 
 
 ------------
@@ -190,18 +277,39 @@ Generates all final segments (suffixes) of a list, longest first. Includes the e
 |    ``static``
 
 | **Template:**
-|    ``tails(List,Tail)``
+|    ``tails(List,Tails)``
 | **Mode and number of proofs:**
 |    ``tails(+list,-list)`` - ``one``
-|    ``tails(+list,?list)`` - ``zero_or_more``
 
 | **Examples:**
 |    All suffixes
-|      ``tails([a,b,c],Tail)``
-|      ``Tail=[[a,b,c],[b,c],[c],[]]``
-|    Backtracking
-|      ``tails([1,2],Tail)``
-|      ``Tail=[1,2],Tail=[2],Tail=[]``
+|      ``tails([a,b,c],Tails)``
+|      ``Tails=[[a,b,c],[b,c],[c],[]]``
+
+
+------------
+
+.. index:: tail/2
+.. _subsequences_protocol/0::tail/2:
+
+``tail/2``
+^^^^^^^^^^
+
+True iff the second argument is one of the final segments (suffixes) of a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tail(List,Tails)``
+| **Mode and number of proofs:**
+|    ``tail(+list,-term)`` - ``zero_or_more``
+|    ``tail(+list,+term)`` - ``zero_or_one``
+
+| **Examples:**
+|    Check suffix
+|      ``tail([a,b,c],[b,c])``
+|      ``true``
 
 
 ------------
@@ -212,21 +320,44 @@ Generates all final segments (suffixes) of a list, longest first. Includes the e
 ``inits1/2``
 ^^^^^^^^^^^^
 
-Generates all non-empty initial segments (prefixes) of a list, shortest first. Excludes the empty list.
+Generates all non-empty initial segments (prefixes) of a list, shortest first.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``inits1(List,Init)``
+|    ``inits1(List,Inits)``
 | **Mode and number of proofs:**
 |    ``inits1(+list,-list)`` - ``one``
-|    ``inits1(+list,?list)`` - ``zero_or_more``
 
 | **Examples:**
 |    Non-empty prefixes
-|      ``inits1([a,b,c],Init)``
-|      ``Init=[[a],[a,b],[a,b,c]]``
+|      ``inits1([a,b,c],Inits)``
+|      ``Inits=[[a],[a,b],[a,b,c]]``
+
+
+------------
+
+.. index:: init1/2
+.. _subsequences_protocol/0::init1/2:
+
+``init1/2``
+^^^^^^^^^^^
+
+True iff the second argument is a non-empty initial segment (prefix) of a list, shortest first.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``init1(List,Init)``
+| **Mode and number of proofs:**
+|    ``init1(+list,-term)`` - ``one_or_more``
+
+| **Examples:**
+|    Non-empty prefix
+|      ``init1([a,b,c],Init)``
+|      ``Init=[a]``
 
 
 ------------
@@ -237,21 +368,44 @@ Generates all non-empty initial segments (prefixes) of a list, shortest first. E
 ``tails1/2``
 ^^^^^^^^^^^^
 
-Generates all non-empty final segments (suffixes) of a list, longest first. Excludes the empty list.
+Generates all non-empty final segments (suffixes) of a list, longest first.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``tails1(List,Tail)``
+|    ``tails1(List,Tails)``
 | **Mode and number of proofs:**
 |    ``tails1(+list,-list)`` - ``one``
-|    ``tails1(+list,?list)`` - ``zero_or_more``
 
 | **Examples:**
-|    Non-empty suffixes
-|      ``tails1([a,b,c],Tail)``
-|      ``Tail=[[a,b,c],[b,c],[c]]``
+|    Non-empty suffix
+|      ``tails1([a,b,c],Tails)``
+|      ``Tails=[[a,b,c],[b,c],[c]]``
+
+
+------------
+
+.. index:: tail1/2
+.. _subsequences_protocol/0::tail1/2:
+
+``tail1/2``
+^^^^^^^^^^^
+
+True iff the second argument is a non-empty final segment (suffix) of a list, longest first.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tail1(List,Tail)``
+| **Mode and number of proofs:**
+|    ``tail1(+list,-list)`` - ``one``
+
+| **Examples:**
+|    Non-empty suffix
+|      ``tail1([a,b,c],Tail)``
+|      ``Tail=[a,b,c]``
 
 
 ------------
@@ -262,7 +416,7 @@ Generates all non-empty final segments (suffixes) of a list, longest first. Excl
 ``init_tails/2``
 ^^^^^^^^^^^^^^^^
 
-Generates all pairs of initial and final segments. Each pair (Init,Tail) represents a split of the list where Init+Tail equals the original list.
+Generates all pairs of initial and final segments. Each pair Init-Tail represents a split of the list where Init+Tail equals the original list. When the second argument is bound, checks if it is a valid split.
 
 | **Compilation flags:**
 |    ``static``
@@ -271,15 +425,35 @@ Generates all pairs of initial and final segments. Each pair (Init,Tail) represe
 |    ``init_tails(List,InitTailPairs)``
 | **Mode and number of proofs:**
 |    ``init_tails(+list,-list)`` - ``one``
-|    ``init_tails(+list,?pair)`` - ``zero_or_more``
 
 | **Examples:**
 |    All splits
 |      ``init_tails([a,b],InitTailPairs)``
-|      ``InitTailPairs=[([],[a,b]),([a],[b]),([a,b],[])]``
-|    Backtracking through splits
-|      ``init_tails([1,2],(A,B))``
-|      ``A=[],B=[1,2]``
+|      ``InitTailPairs=['-'([],[a,b]),'-'([a],[b]),'-'([a,b],[])]``
+
+
+------------
+
+.. index:: init_tail/2
+.. _subsequences_protocol/0::init_tail/2:
+
+``init_tail/2``
+^^^^^^^^^^^^^^^
+
+True iff (Init,Tail) represents a split of the list where Init+Tail equals the original list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``init_tail(List,InitTailPairs)``
+| **Mode and number of proofs:**
+|    ``init_tail(+list,-term)`` - ``one_or_more``
+
+| **Examples:**
+|    Check split
+|      ``init_tail([a,b,c],'-'([a],[b,c]))``
+|      ``true``
 
 
 ------------
@@ -299,7 +473,6 @@ Generates all K-element subsequences (combinations) of a list. Order of elements
 |    ``combinations(K,List,Combination)``
 | **Mode and number of proofs:**
 |    ``combinations(+integer,+list,-list)`` - ``one``
-|    ``combinations(+integer,+list,?list)`` - ``zero_or_more``
 
 | **Examples:**
 |    2-combinations
@@ -308,9 +481,33 @@ Generates all K-element subsequences (combinations) of a list. Order of elements
 |    Empty combination
 |      ``combinations(0,[a,b],Combination)``
 |      ``Combination=[[]]``
-|    Impossible combination
+|    Impossible combinations
 |      ``combinations(3,[a,b],_)``
 |      ``false``
+
+
+------------
+
+.. index:: combination/3
+.. _subsequences_protocol/0::combination/3:
+
+``combination/3``
+^^^^^^^^^^^^^^^^^
+
+True iff the third argument is a K-element subsequence (combinations) of a list. Order of elements is preserved from the original list, but position selection varies. No repetitions allowed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``combination(K,List,Combination)``
+| **Mode and number of proofs:**
+|    ``combination(+integer,+list,-list)`` - ``one_or_more``
+
+| **Examples:**
+|    2-combination
+|      ``combination(2,[a,b,c],Combination)``
+|      ``Combination=[a,b]``
 
 
 ------------
@@ -327,15 +524,38 @@ Generates all K-element combinations with specified ordering: ``default``, ``lex
 |    ``static``
 
 | **Template:**
-|    ``combinations(K,List,Order,Combination)``
+|    ``combinations(K,List,Order,Combinations)``
 | **Mode and number of proofs:**
 |    ``combinations(+integer,+list,+atom,-list)`` - ``one``
-|    ``combinations(+integer,+list,+atom,?list)`` - ``zero_or_more``
 
 | **Examples:**
 |    Lexicographic 2-combinations
-|      ``combinations(2,[a,b,c],lexicographic,Combination)``
-|      ``Combination=[[a,b],[a,c],[b,c]]``
+|      ``combinations(2,[a,b,c],lexicographic,Combinations)``
+|      ``Combinations=[[a,b],[a,c],[b,c]]``
+
+
+------------
+
+.. index:: combination/4
+.. _subsequences_protocol/0::combination/4:
+
+``combination/4``
+^^^^^^^^^^^^^^^^^
+
+True iff the fourth argument is a K-element combination with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``combination(K,List,Order,Combination)``
+| **Mode and number of proofs:**
+|    ``combination(+integer,+list,+atom,-list)`` - ``one_or_more``
+
+| **Examples:**
+|    Lexicographic 2-combination
+|      ``combination(2,[a,b,c],lexicographic,Combination)``
+|      ``Combination=[a,b]``
 
 
 ------------
@@ -377,15 +597,38 @@ Generates all permutations of a list. Unlike subsequences, permutations rearrang
 |    ``static``
 
 | **Template:**
-|    ``permutations(List,Permutation)``
+|    ``permutations(List,Permutations)``
 | **Mode and number of proofs:**
 |    ``permutations(+list,-list)`` - ``one``
-|    ``permutations(+list,?list)`` - ``zero_or_more``
 
 | **Examples:**
 |    All permutations
-|      ``permutations([a,b,c],Permutation)``
-|      ``Permutation=[[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]``
+|      ``permutations([a,b,c],Permutations)``
+|      ``Permutations=[[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]``
+
+
+------------
+
+.. index:: permutation/2
+.. _subsequences_protocol/0::permutation/2:
+
+``permutation/2``
+^^^^^^^^^^^^^^^^^
+
+Generates all permutations of a list. Unlike subsequences, permutations rearrange all elements without preserving relative order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``permutation(List,Permutation)``
+| **Mode and number of proofs:**
+|    ``permutation(+list,-list)`` - ``one_or_more``
+
+| **Examples:**
+|    A permutation
+|      ``permutation([1,2],Permutation)``
+|      ``Permutation=[2,1]``
 
 
 ------------
@@ -402,15 +645,14 @@ Generates all permutations of a list with specified ordering: ``default``, ``lex
 |    ``static``
 
 | **Template:**
-|    ``permutations(List,Order,Permutation)``
+|    ``permutations(List,Order,Permutations)``
 | **Mode and number of proofs:**
 |    ``permutations(+list,+atom,-list)`` - ``one``
-|    ``permutations(+list,+atom,?list)`` - ``zero_or_more``
 
 | **Examples:**
 |    Lexicographic permutations
-|      ``permutations([a,b,c],lexicographic,Permutation)``
-|      ``Permutation=[[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]``
+|      ``permutations([a,b,c],lexicographic,Permutations)``
+|      ``Permutations=[[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]``
 
 
 ------------
@@ -480,7 +722,6 @@ Generates all K-element tuples from the list with replacement and where order ma
 |    ``cartesian_product(K,List,Tuple)``
 | **Mode and number of proofs:**
 |    ``cartesian_product(+integer,+list,-list)`` - ``one``
-|    ``cartesian_product(+integer,+list,?list)`` - ``zero_or_more``
 
 | **Examples:**
 |    2-tuples
@@ -502,15 +743,38 @@ Generates all derangements of a list. A derangement is a permutation where no el
 |    ``static``
 
 | **Template:**
-|    ``derangements(List,Derangement)``
+|    ``derangements(List,Derangements)``
 | **Mode and number of proofs:**
 |    ``derangements(+list,-list)`` - ``one``
-|    ``derangements(+list,?list)`` - ``zero_or_more``
 
 | **Examples:**
-|    Simple derangement
-|      ``derangements([a,b,c],Derangement)``
-|      ``Derangement=[[b,c,a],[c,a,b]]``
+|    All derangements
+|      ``derangements([a,b,c],Derangements)``
+|      ``Derangements=[[b,c,a],[c,a,b]]``
+
+
+------------
+
+.. index:: derangement/2
+.. _subsequences_protocol/0::derangement/2:
+
+``derangement/2``
+^^^^^^^^^^^^^^^^^
+
+True iff the second argument is a derangement of the first argument. A derangement is a permutation where no element appears in its original position.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``derangement(List,Derangement)``
+| **Mode and number of proofs:**
+|    ``derangement(+list,-list)`` - ``one``
+
+| **Examples:**
+|    A derangement
+|      ``derangement([a,b,c],Derangement)``
+|      ``Derangement=[b,c,a]``
 
 
 ------------
@@ -539,11 +803,11 @@ Computes the next permutation in lexicographic order. Fails if the input is the 
 
 ------------
 
-.. index:: prev_permutation/2
-.. _subsequences_protocol/0::prev_permutation/2:
+.. index:: previous_permutation/2
+.. _subsequences_protocol/0::previous_permutation/2:
 
-``prev_permutation/2``
-^^^^^^^^^^^^^^^^^^^^^^
+``previous_permutation/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Computes the previous permutation in lexicographic order. Fails if the input is the first permutation.
 
@@ -551,13 +815,13 @@ Computes the previous permutation in lexicographic order. Fails if the input is 
 |    ``static``
 
 | **Template:**
-|    ``prev_permutation(Permutation,PrevPermutation)``
+|    ``previous_permutation(Permutation,PrevPermutation)``
 | **Mode and number of proofs:**
-|    ``prev_permutation(+list,-list)`` - ``zero_or_one``
+|    ``previous_permutation(+list,-list)`` - ``zero_or_one``
 
 | **Examples:**
 |    Previous permutation
-|      ``prev_permutation([a,c,b],PrevPermutation)``
+|      ``previous_permutation([a,c,b],PrevPermutation)``
 |      ``PrevPermutation=[a,b,c]``
 
 
@@ -611,34 +875,34 @@ Directly computes the Nth permutation in lexicographic order. Index starts at 0.
 
 ------------
 
-.. index:: combination_index/3
-.. _subsequences_protocol/0::combination_index/3:
+.. index:: combination_index/4
+.. _subsequences_protocol/0::combination_index/4:
 
-``combination_index/3``
+``combination_index/4``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Finds the lexicographic index of a given K-element combination. Inverse of nth_combination/4.
+Finds the lexicographic index of a given K-element combination from the original list. Inverse of nth_combination/4.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``combination_index(K,Combination,Index)``
+|    ``combination_index(K,List,Combination,Index)``
 | **Mode and number of proofs:**
-|    ``combination_index(+integer,+list,-integer)`` - ``zero_or_one``
+|    ``combination_index(+integer,+list,+list,-integer)`` - ``zero_or_one``
 
 | **Examples:**
 |    Index of combination
-|      ``combination_index(2,[a,c],Index)``
+|      ``combination_index(2,[a,b,c,d],[a,c],Index)``
 |      ``Index=1``
 
 
 ------------
 
-.. index:: permutation_index/2
-.. _subsequences_protocol/0::permutation_index/2:
+.. index:: permutation_index/3
+.. _subsequences_protocol/0::permutation_index/3:
 
-``permutation_index/2``
+``permutation_index/3``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 Finds the lexicographic index of a given permutation. Inverse of nth_permutation/3.
@@ -647,13 +911,13 @@ Finds the lexicographic index of a given permutation. Inverse of nth_permutation
 |    ``static``
 
 | **Template:**
-|    ``permutation_index(Permutation,Index)``
+|    ``permutation_index(List,Permutation,Index)``
 | **Mode and number of proofs:**
-|    ``permutation_index(+list,-integer)`` - ``zero_or_one``
+|    ``permutation_index(+list,+list,-integer)`` - ``zero_or_one``
 
 | **Examples:**
 |    Index of permutation
-|      ``permutation_index([b,a,c],Index)``
+|      ``permutation_index([a,b,c],[b,a,c],Index)``
 |      ``Index=2``
 
 
@@ -806,11 +1070,11 @@ Checks if the first list is a subsequence of the second list. All elements must 
 
 ------------
 
-.. index:: all_common_subsequences/3
-.. _subsequences_protocol/0::all_common_subsequences/3:
+.. index:: common_subsequences/3
+.. _subsequences_protocol/0::common_subsequences/3:
 
-``all_common_subsequences/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``common_subsequences/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Generates all subsequences that are common to both lists.
 
@@ -818,15 +1082,38 @@ Generates all subsequences that are common to both lists.
 |    ``static``
 
 | **Template:**
-|    ``all_common_subsequences(List1,List2,CommonSubsequence)``
+|    ``common_subsequences(List1,List2,CommonSubsequences)``
 | **Mode and number of proofs:**
-|    ``all_common_subsequences(+list,+list,-list)`` - ``one``
-|    ``all_common_subsequences(+list,+list,?list)`` - ``zero_or_more``
+|    ``common_subsequences(+list,+list,-list)`` - ``one``
 
 | **Examples:**
-|    Common subsequences
-|      ``all_common_subsequences([a,b,c],[a,c,d],CommonSubsequence)``
-|      ``CommonSubsequence=[],CommonSubsequence=[a],CommonSubsequence=[c],CommonSubsequence=[a,c]``
+|    All common subsequences
+|      ``common_subsequences([a,b,c],[a,c,d],CommonSubsequences)``
+|      ``CommonSubsequences=[[a,c],[a],[c],[]]``
+
+
+------------
+
+.. index:: common_subsequence/3
+.. _subsequences_protocol/0::common_subsequence/3:
+
+``common_subsequence/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the third argument is a common subsequence of both lists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``common_subsequence(List1,List2,CommonSubsequence)``
+| **Mode and number of proofs:**
+|    ``common_subsequence(+list,+list,-list)`` - ``one_or_more``
+
+| **Examples:**
+|    Check common subsequence
+|      ``common_subsequence([a,b,c],[a,c,d],[a,c])``
+|      ``true``
 
 
 ------------
@@ -1062,21 +1349,44 @@ Generates subsequences where consecutive elements are at least MinSpan positions
 ``alternating_subsequences/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Generates subsequences that alternate between increasing and decreasing (or vice versa). Elements must be comparable.
+Generates all subsequences that alternate between increasing and decreasing (or vice versa). Elements must be comparable.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``alternating_subsequences(List,AlternatingSubsequence)``
+|    ``alternating_subsequences(List,AlternatingSubsequences)``
 | **Mode and number of proofs:**
 |    ``alternating_subsequences(+list,-list)`` - ``one``
-|    ``alternating_subsequences(+list,?list)`` - ``zero_or_more``
+
+| **Examples:**
+|    All alternating subsequences
+|      ``alternating_subsequences([1,3,2,4],AlternatingSubsequences)``
+|      ``AlternatingSubsequences=[[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]``
+
+
+------------
+
+.. index:: alternating_subsequence/2
+.. _subsequences_protocol/0::alternating_subsequence/2:
+
+``alternating_subsequence/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the second argument is a subsequence that alternates between increasing and decreasing (or vice versa). Elements must be comparable.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``alternating_subsequence(List,AlternatingSubsequence)``
+| **Mode and number of proofs:**
+|    ``alternating_subsequence(+list,-list)`` - ``one_or_more``
 
 | **Examples:**
 |    Alternating
-|      ``alternating_subsequences([1,3,2,4,3,5],AlternatingSubsequence)``
-|      ``AlternatingSubsequence=[1,3,2,4,3,5]``
+|      ``alternating_subsequence([1,3,2,4],AlternatingSubsequence)``
+|      ``AlternatingSubsequence=[[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]``
 
 
 ------------

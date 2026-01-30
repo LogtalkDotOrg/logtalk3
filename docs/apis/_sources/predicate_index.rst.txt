@@ -246,16 +246,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`dead_code_scanner <dead_code_scanner/0::all/1>`
 * :ref:`lgtdocp <lgtdocp/0::all/1>`
 
-``all_common_subsequences/3``
------------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`subsequences_protocol <subsequences_protocol/0::all_common_subsequences/3>`
-
 ``all_files/0``
 ---------------
 
@@ -309,6 +299,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`code_metric <code_metric/0::all_score/1>`
+
+``alternating_subsequence/2``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subsequences_protocol <subsequences_protocol/0::alternating_subsequence/2>`
 
 ``alternating_subsequences/2``
 ------------------------------
@@ -1316,7 +1316,27 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`statisticsp <statisticsp/0::coefficient_of_variation/2>`
 
-``combination_index/3``
+``combination/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subsequences_protocol <subsequences_protocol/0::combination/3>`
+
+``combination/4``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subsequences_protocol <subsequences_protocol/0::combination/4>`
+
+``combination_index/4``
 -----------------------
 
 .. toctree::
@@ -1324,7 +1344,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`subsequences_protocol <subsequences_protocol/0::combination_index/3>`
+* :ref:`subsequences_protocol <subsequences_protocol/0::combination_index/4>`
 
 ``combinations/3``
 ------------------
@@ -1425,6 +1445,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`git_protocol <git_protocol/0::commit_message/2>`
+
+``common_subsequence/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subsequences_protocol <subsequences_protocol/0::common_subsequence/3>`
+
+``common_subsequences/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subsequences_protocol <subsequences_protocol/0::common_subsequences/3>`
 
 ``compile_aux_clauses/1``
 -------------------------
@@ -2233,6 +2273,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`termp <termp/0::depth/2>`
+
+``derangement/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subsequences_protocol <subsequences_protocol/0::derangement/2>`
 
 ``derangements/2``
 ------------------
@@ -4277,6 +4327,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`shell(Interpreters) <shell/1::init/0>`
 
+``init/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subsequences_protocol <subsequences_protocol/0::init/2>`
+
+``init1/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subsequences_protocol <subsequences_protocol/0::init1/2>`
+
 ``init_log_file/2``
 -------------------
 
@@ -4286,6 +4356,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`loggingp <loggingp/0::init_log_file/2>`
+
+``init_tail/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subsequences_protocol <subsequences_protocol/0::init_tail/2>`
 
 ``init_tails/2``
 ----------------
@@ -6498,6 +6578,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`blank_grammars(Format) <blank_grammars/1::non_blanks//1>`
 
+``nonempty_subsequence/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subsequences_protocol <subsequences_protocol/0::nonempty_subsequence/2>`
+
 ``nonempty_subsequences/2``
 ---------------------------
 
@@ -7301,9 +7391,10 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`listp <listp/0::permutation/2>`
 * :ref:`random_protocol <random_protocol/0::permutation/2>`
+* :ref:`subsequences_protocol <subsequences_protocol/0::permutation/2>`
 * :ref:`varlistp <varlistp/0::permutation/2>`
 
-``permutation_index/2``
+``permutation_index/3``
 -----------------------
 
 .. toctree::
@@ -7311,7 +7402,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`subsequences_protocol <subsequences_protocol/0::permutation_index/2>`
+* :ref:`subsequences_protocol <subsequences_protocol/0::permutation_index/3>`
 
 ``permutations/2``
 ------------------
@@ -7594,16 +7685,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`bintree <bintree/0::preorder/2>`
 
-``prev_permutation/2``
-----------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`subsequences_protocol <subsequences_protocol/0::prev_permutation/2>`
-
 ``previous/2``
 --------------
 
@@ -7633,6 +7714,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dictionaryp <dictionaryp/0::previous/4>`
+
+``previous_permutation/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subsequences_protocol <subsequences_protocol/0::previous_permutation/2>`
 
 ``print_flags/0``
 -----------------
@@ -9645,6 +9736,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`listp <listp/0::sublist/2>`
 * :ref:`varlistp <varlistp/0::sublist/2>`
 
+``subsequence/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subsequences_protocol <subsequences_protocol/0::subsequence/2>`
+
 ``subsequence/3``
 -----------------
 
@@ -9654,6 +9755,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`listp <listp/0::subsequence/3>`
+* :ref:`subsequences_protocol <subsequences_protocol/0::subsequence/3>`
 
 ``subsequence/4``
 -----------------
@@ -9889,6 +9991,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`blank_grammars(Format) <blank_grammars/1::tabs//0>`
+
+``tail/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subsequences_protocol <subsequences_protocol/0::tail/2>`
+
+``tail1/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subsequences_protocol <subsequences_protocol/0::tail1/2>`
 
 ``tails/2``
 -----------

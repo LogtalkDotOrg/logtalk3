@@ -46,35 +46,61 @@
 
 	:- public(subsequences/2).
 	:- mode(subsequences(+list, -list), one).
-	:- mode(subsequences(+list, ?list), zero_or_more).
 	:- info(subsequences/2, [
 		comment is 'Generates all subsequences of a list using default order. A subsequence maintains the relative order of elements but need not be contiguous. The empty list is included.',
+		argnames is ['List', 'Subsequences'],
+		examples is [
+			'All subsequences' - subsequences([a,b,c], Subsequences) - {Subsequences = [[],[a],[b],[a,b],[c],[a,c],[b,c],[a,b,c]]}
+		]
+	]).
+
+	:- public(subsequence/2).
+	:- mode(subsequence(+list, -list), one_or_more).
+	:- info(subsequence/2, [
+		comment is 'True iff the second argument is a subsequence of the first argument. Subsequences of a list using default order. A subsequence maintains the relative order of elements but need not be contiguous. The empty list is included.',
 		argnames is ['List', 'Subsequence'],
 		examples is [
-			'Simple subsequences' - subsequences([a,b,c], Subs) - {Subs = [[],[a],[b],[a,b],[c],[a,c],[b,c],[a,b,c]]},
-			'Backtracking through subsequences' - subsequences([1,2], Sub) - {Sub = [], Sub = [1], Sub = [2], Sub = [1,2]}
+			'A subsequence' - subsequence([1,2], Subsequence) - {Subsequence = []}
 		]
 	]).
 
 	:- public(subsequences/3).
 	:- mode(subsequences(+list, +atom, -list), one).
-	:- mode(subsequences(+list, +atom, ?list), zero_or_more).
 	:- info(subsequences/3, [
 		comment is 'Generates all subsequences of a list with specified ordering: ``default`` (as naturally produced), ``lexicographic``, or ``shortlex`` (by length first, then lexicographically).',
+		argnames is ['List', 'Order', 'Subsequences'],
+		examples is [
+			'Shortlex order' - subsequences([a,b], shortlex, Subsequences) - {Subsequences = [[],[a],[b],[a,b]]}
+		]
+	]).
+
+	:- public(subsequence/3).
+	:- mode(subsequence(+list, +atom, -list), one_or_more).
+	:- info(subsequence/3, [
+		comment is 'True iff the third argument is a subsequence of the first argument with specified ordering: ``default`` (as naturally produced), ``lexicographic``, or ``shortlex`` (by length first, then lexicographically).',
 		argnames is ['List', 'Order', 'Subsequence'],
 		examples is [
-			'Shortlex order' - subsequences([a,b], shortlex, Subs) - {Subs = [[],[a],[b],[a,b]]}
+			'Shortlex order' - subsequence([a,b], shortlex, Subsequence) - {Subsequence = []}
 		]
 	]).
 
 	:- public(nonempty_subsequences/2).
 	:- mode(nonempty_subsequences(+list, -list), one).
-	:- mode(nonempty_subsequences(+list, ?list), zero_or_more).
 	:- info(nonempty_subsequences/2, [
 		comment is 'Generates all non-empty subsequences of a list.',
+		argnames is ['List', 'Subsequences'],
+		examples is [
+			'Non-empty subsequences' - nonempty_subsequences([a,b], Subsequences) - {Subsequences = [[a],[b],[a,b]]}
+		]
+	]).
+
+	:- public(nonempty_subsequence/2).
+	:- mode(nonempty_subsequence(+list, -list), one_or_more).
+	:- info(nonempty_subsequence/2, [
+		comment is 'True iff the second argument is a non-empty subsequence of the first argument.',
 		argnames is ['List', 'Subsequence'],
 		examples is [
-			'Non-empty subsequences' - nonempty_subsequences([a,b], Subs) - {Subs = [[a],[b],[a,b]]}
+			'Non-empty subsequence' - nonempty_subsequence([a,b], Subsequence) - {Subsequence = [a]}
 		]
 	]).
 
@@ -84,65 +110,109 @@
 		comment is 'Generates the power set of a list (all possible subsequences). Alias for subsequences/2 when first argument is ground.',
 		argnames is ['List', 'PowerSet'],
 		examples is [
-			'Power set' - power_set([a,b], PS) - {PS = [[],[a],[b],[a,b]]}
+			'Power set' - power_set([a,b], PowerSet) - {PowerSet = [[],[a],[b],[a,b]]}
 		]
 	]).
 
 	:- public(inits/2).
 	:- mode(inits(+list, -list), one).
-	:- mode(inits(+list, ?list), zero_or_more).
 	:- info(inits/2, [
 		comment is 'Generates all initial segments (prefixes) of a list, shortest first. Includes the empty list.',
-		argnames is ['List', 'Init'],
+		argnames is ['List', 'Inits'],
 		examples is [
-			'All prefixes' - inits([a,b,c], Inits) - {Inits = [[],[a],[a,b],[a,b,c]]},
-			'Backtracking' - inits([1,2], I) - {I = [], I = [1], I = [1,2]}
+			'All prefixes' - inits([a,b,c], Inits) - {Inits = [[],[a],[a,b],[a,b,c]]}
+		]
+	]).
+
+	:- public(init/2).
+	:- mode(init(+list, -term), zero_or_more).
+	:- mode(init(+list, +term), zero_or_one).
+	:- info(init/2, [
+		comment is 'True iff the second argument is one of the initial segments (prefixes) of a list.',
+		argnames is ['List', 'Inits'],
+		examples is [
+			'Check prefix' - init([a,b,c], [a,b]) - {true}
 		]
 	]).
 
 	:- public(tails/2).
 	:- mode(tails(+list, -list), one).
-	:- mode(tails(+list, ?list), zero_or_more).
 	:- info(tails/2, [
 		comment is 'Generates all final segments (suffixes) of a list, longest first. Includes the empty list.',
-		argnames is ['List', 'Tail'],
+		argnames is ['List', 'Tails'],
 		examples is [
-			'All suffixes' - tails([a,b,c], Tails) - {Tails = [[a,b,c],[b,c],[c],[]]},
-			'Backtracking' - tails([1,2], T) - {T = [1,2], T = [2], T = []}
+			'All suffixes' - tails([a,b,c], Tails) - {Tails = [[a,b,c],[b,c],[c],[]]}
+		]
+	]).
+
+	:- public(tail/2).
+	:- mode(tail(+list, -term), zero_or_more).
+	:- mode(tail(+list, +term), zero_or_one).
+	:- info(tail/2, [
+		comment is 'True iff the second argument is one of the final segments (suffixes) of a list.',
+		argnames is ['List', 'Tails'],
+		examples is [
+			'Check suffix' - tail([a,b,c], [b,c]) - {true}
 		]
 	]).
 
 	:- public(inits1/2).
 	:- mode(inits1(+list, -list), one).
-	:- mode(inits1(+list, ?list), zero_or_more).
 	:- info(inits1/2, [
-		comment is 'Generates all non-empty initial segments (prefixes) of a list, shortest first. Excludes the empty list.',
-		argnames is ['List', 'Init'],
+		comment is 'Generates all non-empty initial segments (prefixes) of a list, shortest first.',
+		argnames is ['List', 'Inits'],
 		examples is [
 			'Non-empty prefixes' - inits1([a,b,c], Inits) - {Inits = [[a],[a,b],[a,b,c]]}
 		]
 	]).
 
+	:- public(init1/2).
+	:- mode(init1(+list, -term), one_or_more).
+	:- info(init1/2, [
+		comment is 'True iff the second argument is a non-empty initial segment (prefix) of a list, shortest first.',
+		argnames is ['List', 'Init'],
+		examples is [
+			'Non-empty prefix' - init1([a,b,c], Init) - {Init = [a]}
+		]
+	]).
+
 	:- public(tails1/2).
 	:- mode(tails1(+list, -list), one).
-	:- mode(tails1(+list, ?list), zero_or_more).
 	:- info(tails1/2, [
-		comment is 'Generates all non-empty final segments (suffixes) of a list, longest first. Excludes the empty list.',
+		comment is 'Generates all non-empty final segments (suffixes) of a list, longest first.',
+		argnames is ['List', 'Tails'],
+		examples is [
+			'Non-empty suffix' - tails1([a,b,c], Tails) - {Tails = [[a,b,c],[b,c],[c]]}
+		]
+	]).
+
+	:- public(tail1/2).
+	:- mode(tail1(+list, -list), one).
+	:- info(tail1/2, [
+		comment is 'True iff the second argument is a non-empty final segment (suffix) of a list, longest first.',
 		argnames is ['List', 'Tail'],
 		examples is [
-			'Non-empty suffixes' - tails1([a,b,c], Tails) - {Tails = [[a,b,c],[b,c],[c]]}
+			'Non-empty suffix' - tail1([a,b,c], Tail) - {Tail = [a,b,c]}
 		]
 	]).
 
 	:- public(init_tails/2).
 	:- mode(init_tails(+list, -list), one).
-	:- mode(init_tails(+list, ?pair), zero_or_more).
 	:- info(init_tails/2, [
-		comment is 'Generates all pairs of initial and final segments. Each pair (Init,Tail) represents a split of the list where Init+Tail equals the original list.',
+		comment is 'Generates all pairs of initial and final segments. Each pair Init-Tail represents a split of the list where Init+Tail equals the original list. When the second argument is bound, checks if it is a valid split.',
 		argnames is ['List', 'InitTailPairs'],
 		examples is [
-			'All splits' - init_tails([a,b], Pairs) - {Pairs = [([],[a,b]),([a],[b]),([a,b],[])]},
-			'Backtracking through splits' - init_tails([1,2], (I,T)) - {I = [], T = [1,2]} %, ([1],[2]), ([1,2],[])}
+			'All splits' - init_tails([a,b], Pairs) - {Pairs = [[]-[a,b],[a]-[b],[a,b]-[]]}
+		]
+	]).
+
+	:- public(init_tail/2).
+	:- mode(init_tail(+list, -term), one_or_more).
+	:- info(init_tail/2, [
+		comment is 'True iff (Init,Tail) represents a split of the list where Init+Tail equals the original list.',
+		argnames is ['List', 'InitTailPairs'],
+		examples is [
+			'Check split' - init_tail([a,b,c], [a]-[b,c]) - {true}
 		]
 	]).
 
@@ -152,25 +222,43 @@
 
 	:- public(combinations/3).
 	:- mode(combinations(+integer, +list, -list), one).
-	:- mode(combinations(+integer, +list, ?list), zero_or_more).
 	:- info(combinations/3, [
 		comment is 'Generates all K-element subsequences (combinations) of a list. Order of elements is preserved from the original list, but position selection varies. No repetitions allowed.',
 		argnames is ['K', 'List', 'Combination'],
 		examples is [
-			'2-combinations' - combinations(2, [a,b,c], Combs) - {Combs = [[a,b],[a,c],[b,c]]},
+			'2-combinations' - combinations(2, [a,b,c], Combinations) - {Combinations = [[a,b],[a,c],[b,c]]},
 			'Empty combination' - combinations(0, [a,b], C) - {C = [[]]},
-			'Impossible combination' - combinations(3, [a,b], C) - {false}
+			'Impossible combinations' - combinations(3, [a,b], C) - {false}
+		]
+	]).
+
+	:- public(combination/3).
+	:- mode(combination(+integer, +list, -list), one_or_more).
+	:- info(combination/3, [
+		comment is 'True iff the third argument is a K-element subsequence (combinations) of a list. Order of elements is preserved from the original list, but position selection varies. No repetitions allowed.',
+		argnames is ['K', 'List', 'Combination'],
+		examples is [
+			'2-combination' - combination(2, [a,b,c], Combination) - {Combination = [a,b]}
 		]
 	]).
 
 	:- public(combinations/4).
 	:- mode(combinations(+integer, +list, +atom, -list), one).
-	:- mode(combinations(+integer, +list, +atom, ?list), zero_or_more).
 	:- info(combinations/4, [
 		comment is 'Generates all K-element combinations with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.',
+		argnames is ['K', 'List', 'Order', 'Combinations'],
+		examples is [
+			'Lexicographic 2-combinations' - combinations(2, [a,b,c], lexicographic, Combinations) - {Combinations = [[a,b],[a,c],[b,c]]}
+		]
+	]).
+
+	:- public(combination/4).
+	:- mode(combination(+integer, +list, +atom, -list), one_or_more).
+	:- info(combination/4, [
+		comment is 'True iff the fourth argument is a K-element combination with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.',
 		argnames is ['K', 'List', 'Order', 'Combination'],
 		examples is [
-			'Lexicographic 2-combinations' - combinations(2, [a,b,c], lexicographic, Combs) - {Combs = [[a,b],[a,c],[b,c]]}
+			'Lexicographic 2-combination' - combination(2, [a,b,c], lexicographic, Combination) - {Combination = [a,b]}
 		]
 	]).
 
@@ -181,30 +269,37 @@
 		comment is 'Generates all K-element subsequences with replacement allowed. Elements can be repeated.',
 		argnames is ['K', 'List', 'Combination'],
 		examples is [
-			'2-combinations with replacement' - combinations_with_replacement(2, [a,b], Combs) - {Combs = [[a,a],[a,b],[b,b]]}
+			'2-combinations with replacement' - combinations_with_replacement(2, [a,b], Combinations) - {Combinations = [[a,a],[a,b],[b,b]]}
 		]
 	]).
 
 	:- public(permutations/2).
 	:- mode(permutations(+list, -list), one).
-	:- mode(permutations(+list, ?list), zero_or_more).
 	:- info(permutations/2, [
+		comment is 'Generates all permutations of a list. Unlike subsequences, permutations rearrange all elements without preserving relative order.',
+		argnames is ['List', 'Permutations'],
+		examples is [
+			'All permutations' - permutations([a,b,c], Permutations) - {Permutations = [[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]}
+		]
+	]).
+
+	:- public(permutation/2).
+	:- mode(permutation(+list, -list), one_or_more).
+	:- info(permutation/2, [
 		comment is 'Generates all permutations of a list. Unlike subsequences, permutations rearrange all elements without preserving relative order.',
 		argnames is ['List', 'Permutation'],
 		examples is [
-			'All permutations' - permutations([a,b,c], Perms) - {Perms = [[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]}
-%			'Backtracking' - permutations([1,2], P) generates all 2! = 2 permutations on backtracking
+			'A permutation' - permutation([1,2], Permutation) - {Permutation = [2,1]}
 		]
 	]).
 
 	:- public(permutations/3).
 	:- mode(permutations(+list, +atom, -list), one).
-	:- mode(permutations(+list, +atom, ?list), zero_or_more).
 	:- info(permutations/3, [
 		comment is 'Generates all permutations of a list with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.',
-		argnames is ['List', 'Order', 'Permutation'],
+		argnames is ['List', 'Order', 'Permutations'],
 		examples is [
-			'Lexicographic permutations' - permutations([a,b,c], lexicographic, Perms) - {Perms = [[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]}
+			'Lexicographic permutations' - permutations([a,b,c], lexicographic, Permutations) - {Permutations = [[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]}
 		]
 	]).
 
@@ -215,7 +310,7 @@
 		comment is 'Generates all K-element permutations of a list. These are ordered selections where order matters.',
 		argnames is ['K', 'List', 'Permutation'],
 		examples is [
-			'2-permutations' - k_permutations(2, [a,b,c], Perms) - {Perms = [[a,b],[a,c],[b,a],[b,c],[c,a],[c,b]]}
+			'2-permutations' - k_permutations(2, [a,b,c], Permutations) - {Permutations = [[a,b],[a,c],[b,a],[b,c],[c,a],[c,b]]}
 		]
 	]).
 
@@ -226,13 +321,12 @@
 		comment is 'Generates all K-element permutations with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.',
 		argnames is ['K', 'List', 'Order', 'Permutation'],
 		examples is [
-			'Lexicographic 2-permutations' - k_permutations(2, [a,b,c], lexicographic, Perms) - {Perms = [[a,b],[a,c],[b,a],[b,c],[c,a],[c,b]]}
+			'Lexicographic 2-permutations' - k_permutations(2, [a,b,c], lexicographic, Permutations) - {Permutations = [[a,b],[a,c],[b,a],[b,c],[c,a],[c,b]]}
 		]
 	]).
 
 	:- public(cartesian_product/3).
 	:- mode(cartesian_product(+integer, +list, -list), one).
-	:- mode(cartesian_product(+integer, +list, ?list), zero_or_more).
 	:- info(cartesian_product/3, [
 		comment is 'Generates all K-element tuples from the list with replacement and where order matters (Cartesian product of the list with itself K times).',
 		argnames is ['K', 'List', 'Tuple'],
@@ -243,12 +337,21 @@
 
 	:- public(derangements/2).
 	:- mode(derangements(+list, -list), one).
-	:- mode(derangements(+list, ?list), zero_or_more).
 	:- info(derangements/2, [
 		comment is 'Generates all derangements of a list. A derangement is a permutation where no element appears in its original position.',
+		argnames is ['List', 'Derangements'],
+		examples is [
+			'All derangements' - derangements([a,b,c], Derangements) - {Derangements = [[b,c,a],[c,a,b]]}
+		]
+	]).
+
+	:- public(derangement/2).
+	:- mode(derangement(+list, -list), one).
+	:- info(derangement/2, [
+		comment is 'True iff the second argument is a derangement of the first argument. A derangement is a permutation where no element appears in its original position.',
 		argnames is ['List', 'Derangement'],
 		examples is [
-			'Simple derangement' - derangements([a,b,c], Derangs) - {Derangs = [[b,c,a],[c,a,b]]} % but not [a,b,c],[a,c,b],[b,a,c],[c,b,a]
+			'A derangement' - derangement([a,b,c], Derangement) - {Derangement = [b,c,a]}
 		]
 	]).
 
@@ -262,13 +365,13 @@
 		]
 	]).
 
-	:- public(prev_permutation/2).
-	:- mode(prev_permutation(+list, -list), zero_or_one).
-	:- info(prev_permutation/2, [
+	:- public(previous_permutation/2).
+	:- mode(previous_permutation(+list, -list), zero_or_one).
+	:- info(previous_permutation/2, [
 		comment is 'Computes the previous permutation in lexicographic order. Fails if the input is the first permutation.',
 		argnames is ['Permutation', 'PrevPermutation'],
 		examples is [
-			'Previous permutation' - prev_permutation([a,c,b], Prev) - {Prev = [a,b,c]}
+			'Previous permutation' - previous_permutation([a,c,b], Previous) - {Previous = [a,b,c]}
 		]
 	]).
 
@@ -282,7 +385,7 @@
 		comment is 'Directly computes the Nth K-element combination in lexicographic order without generating all previous ones. Index starts at 0.',
 		argnames is ['K', 'List', 'Index', 'Combination'],
 		examples is [
-			'Second 2-combination' - nth_combination(2, [a,b,c,d], 1, C) - {C = [a,c]} % (0:[a,b], 1:[a,c], 2:[a,d], ...)
+			'Second 2-combination' - nth_combination(2, [a,b,c,d], 1, Combination) - {Combination = [a,c]} % (0:[a,b], 1:[a,c], 2:[a,d], ...)
 		]
 	]).
 
@@ -292,27 +395,27 @@
 		comment is 'Directly computes the Nth permutation in lexicographic order. Index starts at 0.',
 		argnames is ['List', 'Index', 'Permutation'],
 		examples is [
-			'Third permutation' - nth_permutation([a,b,c], 2, P) - {P = [b,a,c]}
+			'Third permutation' - nth_permutation([a,b,c], 2, Permutation) - {Permutation = [b,a,c]}
 		]
 	]).
 
-	:- public(combination_index/3).
-	:- mode(combination_index(+integer, +list, -integer), zero_or_one).
-	:- info(combination_index/3, [
-		comment is 'Finds the lexicographic index of a given K-element combination. Inverse of nth_combination/4.',
-		argnames is ['K', 'Combination', 'Index'],
+	:- public(combination_index/4).
+	:- mode(combination_index(+integer, +list, +list, -integer), zero_or_one).
+	:- info(combination_index/4, [
+		comment is 'Finds the lexicographic index of a given K-element combination from the original list. Inverse of nth_combination/4.',
+		argnames is ['K', 'List', 'Combination', 'Index'],
 		examples is [
-			'Index of combination' - combination_index(2, [a,c], Idx) - {Idx = 1} % (given original list [a,b,c,d])
+			'Index of combination' - combination_index(2, [a,b,c,d], [a,c], Index) - {Index = 1}
 		]
 	]).
 
-	:- public(permutation_index/2).
-	:- mode(permutation_index(+list, -integer), zero_or_one).
-	:- info(permutation_index/2, [
+	:- public(permutation_index/3).
+	:- mode(permutation_index(+list, +list, -integer), zero_or_one).
+	:- info(permutation_index/3, [
 		comment is 'Finds the lexicographic index of a given permutation. Inverse of nth_permutation/3.',
-		argnames is ['Permutation', 'Index'],
+		argnames is ['List', 'Permutation', 'Index'],
 		examples is [
-			'Index of permutation' - permutation_index([b,a,c], Idx) - {Idx = 2}
+			'Index of permutation' - permutation_index([a,b,c], [b,a,c], Index) - {Index = 2}
 		]
 	]).
 
@@ -381,14 +484,23 @@
 		]
 	]).
 
-	:- public(all_common_subsequences/3).
-	:- mode(all_common_subsequences(+list, +list, -list), one).
-	:- mode(all_common_subsequences(+list, +list, ?list), zero_or_more).
-	:- info(all_common_subsequences/3, [
+	:- public(common_subsequences/3).
+	:- mode(common_subsequences(+list, +list, -list), one).
+	:- info(common_subsequences/3, [
 		comment is 'Generates all subsequences that are common to both lists.',
+		argnames is ['List1', 'List2', 'CommonSubsequences'],
+		examples is [
+			'All common subsequences' - common_subsequences([a,b,c], [a,c,d], CommonSubsequences) - {CommonSubsequences = [[a,c],[a],[c],[]]}
+		]
+	]).
+
+	:- public(common_subsequence/3).
+	:- mode(common_subsequence(+list, +list, -list), one_or_more).
+	:- info(common_subsequence/3, [
+		comment is 'True iff the third argument is a common subsequence of both lists.',
 		argnames is ['List1', 'List2', 'CommonSubsequence'],
 		examples is [
-			'Common subsequences' - all_common_subsequences([a,b,c], [a,c,d], CS) - {CS = [], CS = [a], CS = [c], CS = [a,c]}
+			'Check common subsequence' - common_subsequence([a,b,c], [a,c,d], [a,c]) - {true}
 		]
 	]).
 
@@ -464,7 +576,7 @@
 		comment is 'Randomly selects one K-element combination uniformly from all possible combinations.',
 		argnames is ['K', 'List', 'Combination'],
 		examples is [
-			'Random 2-combination' - random_combination(2, [a,b,c,d], C) - {C = [b,d]}
+			'Random 2-combination' - random_combination(2, [a,b,c,d], Combination) - {Combination = [b,d]}
 		]
 	]).
 
@@ -474,7 +586,7 @@
 		comment is 'Randomly selects one permutation uniformly from all possible permutations. Also known as shuffling.',
 		argnames is ['List', 'Permutation'],
 		examples is [
-			'Random permutation' - random_permutation([a,b,c], P) - {P = [c,a,b]}
+			'Random permutation' - random_permutation([a,b,c], Permutation) - {Permutation = [c,a,b]}
 		]
 	]).
 
@@ -484,7 +596,7 @@
 		comment is 'Randomly selects one subsequence uniformly from all 2^N possible subsequences.',
 		argnames is ['List', 'Subsequence'],
 		examples is [
-			'Random subsequence' - random_subsequence([a,b,c], S) - {S = [a,c]}
+			'Random subsequence' - random_subsequence([a,b,c], Subsequence) - {Subsequence = [a,c]}
 		]
 	]).
 
@@ -499,18 +611,27 @@
 		comment is 'Generates subsequences where consecutive elements are at least MinSpan positions apart in the original list.',
 		argnames is ['MinSpan', 'List', 'Subsequence'],
 		examples is [
-			'Min span of 2' - subsequences_with_min_span(2, [a,b,c,d], S) - {S = [a,c]}
+			'Min span of 2' - subsequences_with_min_span(2, [a,b,c,d], Sequences) - {Sequences = [a,c]}
 		]
 	]).
 
 	:- public(alternating_subsequences/2).
 	:- mode(alternating_subsequences(+list, -list), one).
-	:- mode(alternating_subsequences(+list, ?list), zero_or_more).
 	:- info(alternating_subsequences/2, [
-		comment is 'Generates subsequences that alternate between increasing and decreasing (or vice versa). Elements must be comparable.',
+		comment is 'Generates all subsequences that alternate between increasing and decreasing (or vice versa). Elements must be comparable.',
+		argnames is ['List', 'AlternatingSubsequences'],
+		examples is [
+			'All alternating subsequences' - alternating_subsequences([1,3,2,4], Sequences) - {Sequences = [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]}
+		]
+	]).
+
+	:- public(alternating_subsequence/2).
+	:- mode(alternating_subsequence(+list, -list), one_or_more).
+	:- info(alternating_subsequence/2, [
+		comment is 'True iff the second argument is a subsequence that alternates between increasing and decreasing (or vice versa). Elements must be comparable.',
 		argnames is ['List', 'AlternatingSubsequence'],
 		examples is [
-			'Alternating' - alternating_subsequences([1,3,2,4,3,5], S) - {S = [1,3,2,4,3,5]}
+			'Alternating' - alternating_subsequence([1,3,2,4], Sequences) - {Sequences = [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]}
 		]
 	]).
 
@@ -521,7 +642,7 @@
 		comment is 'Generates K-element subsequences where all elements are distinct (no duplicates in the subsequence itself).',
 		argnames is ['K', 'List', 'DistinctSubsequence'],
 		examples is [
-			'Distinct only' - k_distinct_subsequences(2, [a,a,b], S) - {S = [a,b]}
+			'Distinct only' - k_distinct_subsequences(2, [a,a,b], Sequences) - {Sequences = [a,b]}
 		]
 	]).
 
