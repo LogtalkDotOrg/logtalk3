@@ -272,7 +272,7 @@
 	:- public(permutations/2).
 	:- mode(permutations(+list, -list), one).
 	:- info(permutations/2, [
-		comment is 'Generates all permutations of a list. Unlike subsequences, permutations rearrange all elements without preserving relative order.',
+		comment is 'Generates all permutations of a list with default ordering. Unlike subsequences, permutations rearrange all elements without preserving relative order.',
 		argnames is ['List', 'Permutations'],
 		examples is [
 			'All permutations' - permutations([a,b,c], Permutations) - {Permutations = [[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]}
@@ -282,7 +282,7 @@
 	:- public(permutation/2).
 	:- mode(permutation(+list, -list), one_or_more).
 	:- info(permutation/2, [
-		comment is 'Generates all permutations of a list. Unlike subsequences, permutations rearrange all elements without preserving relative order.',
+		comment is 'True iff the second argument is a permutation of a list with default ordering. Unlike subsequences, permutations rearrange all elements without preserving relative order.',
 		argnames is ['List', 'Permutation'],
 		examples is [
 			'A permutation' - permutation([1,2], Permutation) - {Permutation = [2,1]}
@@ -295,29 +295,57 @@
 		comment is 'Generates all permutations of a list with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.',
 		argnames is ['List', 'Order', 'Permutations'],
 		examples is [
-			'Lexicographic permutations' - permutations([a,b,c], lexicographic, Permutations) - {Permutations = [[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]}
+			'All lexicographic permutations' - permutations([a,b,c], lexicographic, Permutations) - {Permutations = [[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]}
+		]
+	]).
+
+	:- public(permutation/3).
+	:- mode(permutation(+list, +atom, -list), one_or_more).
+	:- info(permutation/3, [
+		comment is 'True iff the third argument is a permutation of a list with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.',
+		argnames is ['List', 'Order', 'Permutation'],
+		examples is [
+			'A lexicographic permutations' - permutation([a,b,c], lexicographic, Permutation) - {Permutation = [a,b,c]}
 		]
 	]).
 
 	:- public(k_permutations/3).
 	:- mode(k_permutations(+integer, +list, -list), one).
-	:- mode(k_permutations(+integer, +list, ?list), zero_or_more).
 	:- info(k_permutations/3, [
 		comment is 'Generates all K-element permutations of a list. These are ordered selections where order matters.',
-		argnames is ['K', 'List', 'Permutation'],
+		argnames is ['K', 'List', 'Permutations'],
 		examples is [
 			'2-permutations' - k_permutations(2, [a,b,c], Permutations) - {Permutations = [[a,b],[a,c],[b,a],[b,c],[c,a],[c,b]]}
 		]
 	]).
 
+	:- public(k_permutation/3).
+	:- mode(k_permutation(+integer, +list, -list), one_or_more).
+	:- info(k_permutation/3, [
+		comment is 'True iff the third argument is a K-element permutations of a list. These are ordered selections where order matters.',
+		argnames is ['K', 'List', 'Permutation'],
+		examples is [
+			'2-permutations' - k_permutation(2, [a,b,c], Permutation) - {Permutation = [a,b]}
+		]
+	]).
+
 	:- public(k_permutations/4).
 	:- mode(k_permutations(+integer, +list, +atom, -list), one).
-	:- mode(k_permutations(+integer, +list, +atom, ?list), zero_or_more).
 	:- info(k_permutations/4, [
-		comment is 'Generates all K-element permutations with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.',
-		argnames is ['K', 'List', 'Order', 'Permutation'],
+		comment is 'Generates all K-element permutations of a list with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.',
+		argnames is ['K', 'List', 'Order', 'Permutations'],
 		examples is [
 			'Lexicographic 2-permutations' - k_permutations(2, [a,b,c], lexicographic, Permutations) - {Permutations = [[a,b],[a,c],[b,a],[b,c],[c,a],[c,b]]}
+		]
+	]).
+
+	:- public(k_permutation/4).
+	:- mode(k_permutation(+integer, +list, +atom, -list), one_or_more).
+	:- info(k_permutation/4, [
+		comment is 'True iff the fourth argument is a K-element permutation of a list with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.',
+		argnames is ['K', 'List', 'Order', 'Permutation'],
+		examples is [
+			'Lexicographic 2-permutations' - k_permutation(2, [a,b,c], lexicographic, Permutation) - {Permutation = [a,b]}
 		]
 	]).
 
@@ -325,7 +353,7 @@
 	:- mode(cartesian_product(+integer, +list, -list), one).
 	:- info(cartesian_product/3, [
 		comment is 'Generates all K-element tuples from the list with replacement and where order matters (Cartesian product of the list with itself K times).',
-		argnames is ['K', 'List', 'Tuple'],
+		argnames is ['K', 'List', 'Tuples'],
 		examples is [
 			'2-tuples' - cartesian_product(2, [a,b], Tuples) - {Tuples = [[a,a],[a,b],[b,a],[b,b]]}
 		]

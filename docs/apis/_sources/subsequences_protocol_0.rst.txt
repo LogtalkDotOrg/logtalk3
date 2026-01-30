@@ -591,7 +591,7 @@ Generates all K-element subsequences with replacement allowed. Elements can be r
 ``permutations/2``
 ^^^^^^^^^^^^^^^^^^
 
-Generates all permutations of a list. Unlike subsequences, permutations rearrange all elements without preserving relative order.
+Generates all permutations of a list with default ordering. Unlike subsequences, permutations rearrange all elements without preserving relative order.
 
 | **Compilation flags:**
 |    ``static``
@@ -615,7 +615,7 @@ Generates all permutations of a list. Unlike subsequences, permutations rearrang
 ``permutation/2``
 ^^^^^^^^^^^^^^^^^
 
-Generates all permutations of a list. Unlike subsequences, permutations rearrange all elements without preserving relative order.
+True iff the second argument is a permutation of a list with default ordering. Unlike subsequences, permutations rearrange all elements without preserving relative order.
 
 | **Compilation flags:**
 |    ``static``
@@ -650,9 +650,33 @@ Generates all permutations of a list with specified ordering: ``default``, ``lex
 |    ``permutations(+list,+atom,-list)`` - ``one``
 
 | **Examples:**
-|    Lexicographic permutations
+|    All lexicographic permutations
 |      ``permutations([a,b,c],lexicographic,Permutations)``
 |      ``Permutations=[[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]``
+
+
+------------
+
+.. index:: permutation/3
+.. _subsequences_protocol/0::permutation/3:
+
+``permutation/3``
+^^^^^^^^^^^^^^^^^
+
+True iff the third argument is a permutation of a list with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``permutation(List,Order,Permutation)``
+| **Mode and number of proofs:**
+|    ``permutation(+list,+atom,-list)`` - ``one_or_more``
+
+| **Examples:**
+|    A lexicographic permutations
+|      ``permutation([a,b,c],lexicographic,Permutation)``
+|      ``Permutation=[a,b,c]``
 
 
 ------------
@@ -669,15 +693,38 @@ Generates all K-element permutations of a list. These are ordered selections whe
 |    ``static``
 
 | **Template:**
-|    ``k_permutations(K,List,Permutation)``
+|    ``k_permutations(K,List,Permutations)``
 | **Mode and number of proofs:**
 |    ``k_permutations(+integer,+list,-list)`` - ``one``
-|    ``k_permutations(+integer,+list,?list)`` - ``zero_or_more``
 
 | **Examples:**
 |    2-permutations
-|      ``k_permutations(2,[a,b,c],Permutation)``
-|      ``Permutation=[[a,b],[a,c],[b,a],[b,c],[c,a],[c,b]]``
+|      ``k_permutations(2,[a,b,c],Permutations)``
+|      ``Permutations=[[a,b],[a,c],[b,a],[b,c],[c,a],[c,b]]``
+
+
+------------
+
+.. index:: k_permutation/3
+.. _subsequences_protocol/0::k_permutation/3:
+
+``k_permutation/3``
+^^^^^^^^^^^^^^^^^^^
+
+True iff the third argument is a K-element permutations of a list. These are ordered selections where order matters.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``k_permutation(K,List,Permutation)``
+| **Mode and number of proofs:**
+|    ``k_permutation(+integer,+list,-list)`` - ``one_or_more``
+
+| **Examples:**
+|    2-permutations
+|      ``k_permutation(2,[a,b,c],Permutation)``
+|      ``Permutation=[a,b]``
 
 
 ------------
@@ -688,21 +735,44 @@ Generates all K-element permutations of a list. These are ordered selections whe
 ``k_permutations/4``
 ^^^^^^^^^^^^^^^^^^^^
 
-Generates all K-element permutations with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.
+Generates all K-element permutations of a list with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``k_permutations(K,List,Order,Permutation)``
+|    ``k_permutations(K,List,Order,Permutations)``
 | **Mode and number of proofs:**
 |    ``k_permutations(+integer,+list,+atom,-list)`` - ``one``
-|    ``k_permutations(+integer,+list,+atom,?list)`` - ``zero_or_more``
 
 | **Examples:**
 |    Lexicographic 2-permutations
-|      ``k_permutations(2,[a,b,c],lexicographic,Permutation)``
-|      ``Permutation=[[a,b],[a,c],[b,a],[b,c],[c,a],[c,b]]``
+|      ``k_permutations(2,[a,b,c],lexicographic,Permutations)``
+|      ``Permutations=[[a,b],[a,c],[b,a],[b,c],[c,a],[c,b]]``
+
+
+------------
+
+.. index:: k_permutation/4
+.. _subsequences_protocol/0::k_permutation/4:
+
+``k_permutation/4``
+^^^^^^^^^^^^^^^^^^^
+
+True iff the fourth argument is a K-element permutation of a list with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``k_permutation(K,List,Order,Permutation)``
+| **Mode and number of proofs:**
+|    ``k_permutation(+integer,+list,+atom,-list)`` - ``one_or_more``
+
+| **Examples:**
+|    Lexicographic 2-permutations
+|      ``k_permutation(2,[a,b,c],lexicographic,Permutation)``
+|      ``Permutation=[a,b]``
 
 
 ------------
@@ -719,14 +789,14 @@ Generates all K-element tuples from the list with replacement and where order ma
 |    ``static``
 
 | **Template:**
-|    ``cartesian_product(K,List,Tuple)``
+|    ``cartesian_product(K,List,Tuples)``
 | **Mode and number of proofs:**
 |    ``cartesian_product(+integer,+list,-list)`` - ``one``
 
 | **Examples:**
 |    2-tuples
-|      ``cartesian_product(2,[a,b],Tuple)``
-|      ``Tuple=[[a,a],[a,b],[b,a],[b,b]]``
+|      ``cartesian_product(2,[a,b],Tuples)``
+|      ``Tuples=[[a,a],[a,b],[b,a],[b,b]]``
 
 
 ------------

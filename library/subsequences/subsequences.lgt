@@ -30,25 +30,23 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, msort/2, nth0/3, nth0/4, nth1/3, reverse/2, select/3
+		append/3, drop/3, length/2, member/2, msort/2, nth0/3, nth0/4, nth1/3, reverse/2, select/3
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [
 		between/3 as random_between/3, maybe/0, set/4 as random_set/4
 	]).
 
-	% =========================================================================
-	% Generation operations - Creating all subsequences
-	% =========================================================================
+	% generation operations - Creating all subsequences
 
 	subsequences(List, Subsequences) :-
 		findall(Subsequence, subsequence(List, Subsequence), Subsequences).
 
 	subsequence([], []).
-	subsequence([H|T], [H|Sub]) :-
-		subsequence(T, Sub).
-	subsequence([_|T], Sub) :-
-		subsequence(T, Sub).
+	subsequence([Head| Tail], [Head| Subsequence]) :-
+		subsequence(Tail, Subsequence).
+	subsequence([_| Tail], Subsequence) :-
+		subsequence(Tail, Subsequence).
 
 	subsequences(List, Order, Subsequences) :-
 		findall(Subsequence, subsequence(List, Subsequence), Subsequences0),
@@ -102,65 +100,71 @@
 	init_tail(List, Init-Tail) :-
 		append(Init, Tail, List).
 
-	% =========================================================================
-	% Filtered subsequence generation
-	% =========================================================================
+	% filtered subsequence generation
 
 	combinations(K, List, Combinations) :-
 		combinations(K, List, default, Combinations).
 
 	combination(0, _, []).
-	combination(K, [H|T], [H|Comb]) :-
+	combination(K, [Head| Tail], [Head| Combination]) :-
 		K > 0,
 		K1 is K - 1,
-		combination(K1, T, Comb).
-	combination(K, [_|T], Comb) :-
+		combination(K1, Tail, Combination).
+	combination(K, [_| Tail], Combination) :-
 		K > 0,
-		combination(K, T, Comb).
+		combination(K, Tail, Combination).
 
 	combinations(K, List, Order, Combinations) :-
-		findall(Comb, combination(K, List, Comb), Combs),
-		apply_order(Order, Combs, Combinations).
+		findall(Combination, combination(K, List, Combination), Combinations0),
+		apply_order(Order, Combinations0, Combinations).
 
 	combination(K, List, Order, Combination) :-
 		combination(K, List, Combination0),
 		apply_order(Order, [Combination0], [Combination]).
 
 	combinations_with_replacement(K, List, Combinations) :-
-		findall(Comb, combination_with_replacement(K, List, Comb), Combinations).
+		findall(Combination, combination_with_replacement(K, List, Combination), Combinations).
 
 	combination_with_replacement(0, _, []).
-	combination_with_replacement(K, List, [H|Comb]) :-
+	combination_with_replacement(K, List, [Head| Combination]) :-
 		K > 0,
 		K1 is K - 1,
-		append(_, [H|Rest], List),  % Select element H and everything after
-		combination_with_replacement(K1, [H|Rest], Comb).  % Can reuse H
+		append(_, [Head| Tail], List),  % Select element H and everything after
+		combination_with_replacement(K1, [Head| Tail], Combination).  % Can reuse H
 
 	permutations(List, Permutations) :-
-		permutations(List, default, Permutations).
-
-	permutations(List, Order, Permutations) :-
-		findall(Perm, permutation(List, Perm), Perms),
-		apply_order(Order, Perms, Permutations).
+		findall(Permutation, permutation(List, Permutation), Permutations).
 
 	permutation([], []).
-	permutation(List, [H|Perm]) :-
-		select(H, List, Rest),
-		permutation(Rest, Perm).
+	permutation(List, [Head| Permutation]) :-
+		select(Head, List, Rest),
+		permutation(Rest, Permutation).
+
+	permutations(List, Order, Permutations) :-
+		findall(Permutation, permutation(List, Permutation), Permutations0),
+		apply_order(Order, Permutations0, Permutations).
+
+	permutation(List, Order, Permutation) :-
+		permutation(List, Permutation0),
+		apply_order(Order, [Permutation0], [Permutation]).
 
 	k_permutations(K, List, Permutations) :-
-		k_permutations(K, List, default, Permutations).
+		findall(Permutation, k_permutation(K, List, Permutation), Permutations).
 
-	k_permutations(K, List, Order, Permutations) :-
-		findall(Perm, k_permutation(K, List, Perm), Perms),
-		apply_order(Order, Perms, Permutations).
-
-	k_permutation(0, _, []).
-	k_permutation(K, List, [H|Perm]) :-
+	k_permutation(0, _, []) :- !.
+	k_permutation(K, List, [Head| Permutation]) :-
 		K > 0,
 		K1 is K - 1,
-		select(H, List, Rest),
-		k_permutation(K1, Rest, Perm).
+		select(Head, List, Rest),
+		k_permutation(K1, Rest, Permutation).
+
+	k_permutations(K, List, Order, Permutations) :-
+		findall(Permutation, k_permutation(K, List, Permutation), Permutations0),
+		apply_order(Order, Permutations0, Permutations).
+
+	k_permutation(K, List, Order, Permutation) :-
+		k_permutation(K, List, Permutation0),
+		apply_order(Order, [Permutation0], [Permutation]).
 
 	% Cartesian product - K-tuples with replacement where order matters
 	cartesian_product(K, List, Tuples) :-
@@ -204,8 +208,8 @@
 		append(Prefix, [Swap|RevSuffix], Next).
 
 	% Check if there's an element greater than Pivot in the suffix
-	has_greater(Pivot, [H|_]) :- H @> Pivot, !.
-	has_greater(Pivot, [_|T]) :- has_greater(Pivot, T).
+	has_greater(Pivot, [Head| _]) :- Head @> Pivot, !.
+	has_greater(Pivot, [_| Tail]) :- has_greater(Pivot, Tail).
 
 	% Check if there's a valid pivot point later in the list
 	has_greater_in_prefix(Prefix, Suffix) :-
@@ -278,9 +282,7 @@
 		H @>= Pivot,
 		replace_first_smaller(Pivot, T, Swap, Rest).
 
-	% =========================================================================
-	% Indexed access to subsequences
-	% =========================================================================
+	% indexed access to subsequences
 
 	nth_permutation(List, Index, Permutation) :-
 		length(List, N),
@@ -375,20 +377,17 @@
 		permutation_index_helper(List, Permutation, 0, Index).
 
 	% Helper using factorial number system (Lehmer code) - inverse of nth_permutation_helper
-	permutation_index_helper([], [], Index, Index).
-	permutation_index_helper(List, [H|Perm], Index0, Index) :-
+	permutation_index_helper([], [], Index, Index) :- !.
+	permutation_index_helper(List, [Head| Permutation], Index0, Index) :-
 		List \= [],
 		length(List, N),
-		select(H, List, Rest),
-		nth0(Pos, List, H),
+		nth0(Pos, List, Head, Rest),
 		N1 is N - 1,
 		factorial(N1, F),
 		Index1 is Index0 + Pos * F,
-		permutation_index_helper(Rest, Perm, Index1, Index).
+		permutation_index_helper(Rest, Permutation, Index1, Index).
 
-	% =========================================================================
-	% Searching and matching subsequences
-	% =========================================================================
+	% searching and matching subsequences
 
 	longest_common_subsequence(List1, List2, LCS) :-
 		lcs_dp(List1, List2, LCS).
@@ -396,12 +395,12 @@
 	% Dynamic programming LCS
 	lcs_dp([], _, []).
 	lcs_dp(_, [], []).
-	lcs_dp([H|T1], [H|T2], [H|LCS]) :-
+	lcs_dp([Head| Tail1], [Head| Tail2], [Head| LCS]) :-
 		!,
-		lcs_dp(T1, T2, LCS).
-	lcs_dp([H1|T1], [H2|T2], LCS) :-
-		lcs_dp([H1|T1], T2, LCS1),
-		lcs_dp(T1, [H2|T2], LCS2),
+		lcs_dp(Tail1, Tail2, LCS).
+	lcs_dp([Head1| Tail1], [Head2| Tail2], LCS) :-
+		lcs_dp([Head1| Tail1], Tail2, LCS1),
+		lcs_dp(Tail1, [Head2| Tail2], LCS2),
 		(	length(LCS1, L1),
 			length(LCS2, L2),
 			L1 >= L2 ->
@@ -428,13 +427,13 @@
 	insert_or_extend(X, [Seq|Rest], [[X|Seq]|Rest]).
 
 	longest_list([], []).
-	longest_list([H|T], Longest) :-
-		longest_list(T, TLongest),
-		(	length(H, LH),
-			length(TLongest, LT),
-			LH > LT ->
-			Longest = H
-		;	Longest = TLongest
+	longest_list([Head| Tail], Longest) :-
+		longest_list(Tail, TailLongest),
+		(	length(Head, HeadLength),
+			length(TailLongest, TailLongestLength),
+			HeadLength > TailLongestLength ->
+			Longest = Head
+		;	Longest = TailLongest
 		).
 
 	% Longest decreasing subsequence - symmetric to LIS
@@ -517,30 +516,26 @@
 		(	P == L ->
 			% Both match: count subsequences with and without using L
 			count_distinct_subseq_dp(Ps, Ls, M1, N1, Count1),
-			count_distinct_subseq_dp([P|Ps], Ls, M, N1, Count2),
+			count_distinct_subseq_dp([P| Ps], Ls, M, N1, Count2),
 			Count is Count1 + Count2
 		;	% No match: skip L
-			count_distinct_subseq_dp([P|Ps], Ls, M, N1, Count)
+			count_distinct_subseq_dp([P| Ps], Ls, M, N1, Count)
 		).
 
-	% =========================================================================
-	% Prefix and suffix operations
-	% =========================================================================
+	% prefix and suffix operations
 
 	is_prefix_of([], _).
-	is_prefix_of([H|T1], [H|T2]) :-
-		is_prefix_of(T1, T2).
+	is_prefix_of([Head| Tail1], [Head| Tail2]) :-
+		is_prefix_of(Tail1, Tail2).
 
 	is_suffix_of(Suffix, List) :-
 		append(_, Suffix, List).
 
-	% =========================================================================
-	% Contiguous subsequences
-	% =========================================================================
+	% contiguous subsequences
 
 	% Generate all contiguous non-empty subslices
 	subslices(List, Subslices) :-
-		findall(Sub, subslice(List, Sub), Subslices).
+		findall(Subslice, subslice(List, Subslice), Subslices).
 
 	subslice(List, Subslice) :-
 		append(_, Suffix, List),
@@ -557,22 +552,13 @@
 		append(Window, _, Suffix),
 		append(_, Suffix, List).
 
-	% =========================================================================
-	% Random selection
-	% =========================================================================
+	% random selection
 
 	random_combination(K, List, Combination) :-
 		length(List, N),
 		K =< N,
 		random_set(K, 1, N, Indices),
 		select_by_indices(Indices, List, Combination).
-
-	random_indices(0, _, []).
-	random_indices(K, N, [Indice| Indices]) :-
-		K > 0,
-		random_between(0, N, Indice),
-		K1 is K - 1,
-		random_indices(K1, N, Indices).
 
 	select_by_indices([], _, []).
 	select_by_indices([Indice| Indices], List, [Element| Elements]) :-
@@ -595,35 +581,33 @@
 		random_subsequence_helper(List, Subsequence).
 
 	random_subsequence_helper([], []).
-	random_subsequence_helper([H|T], Sub) :-
+	random_subsequence_helper([Head| Tail], Subsequence) :-
 		(	maybe ->
-			random_subsequence_helper(T, Sub)
-		;	random_subsequence_helper(T, SubRest),
-			Sub = [H|SubRest]
+			random_subsequence_helper(Tail, Subsequence)
+		;	random_subsequence_helper(Tail, Rest),
+			Subsequence = [Head| Rest]
 		).
 
-	% =========================================================================
-	% Constrained subsequence operations
-	% =========================================================================
+	% constrained subsequence operations
 
 	subsequences_with_min_span(MinSpan, List, Subsequences) :-
-		findall(Sub, subsequence_with_min_span(MinSpan, List, 0, Sub), Subsequences).
+		findall(Subsequence, subsequence_with_min_span(MinSpan, List, 0, Subsequence), Subsequences).
 
 	subsequence_with_min_span(_, [], _, []).
-	subsequence_with_min_span(MinSpan, [H|T], Pos, [H|Sub]) :-
+	subsequence_with_min_span(MinSpan, [Head| Tail], Pos, [Head| Subsequence]) :-
 		NextPos is Pos + MinSpan,
-		drop_until(NextPos, T, 1, Rest),
-		subsequence_with_min_span(MinSpan, Rest, NextPos, Sub).
-	subsequence_with_min_span(MinSpan, [_|T], Pos, Sub) :-
+		drop_until(NextPos, Tail, 1, Rest),
+		subsequence_with_min_span(MinSpan, Rest, NextPos, Subsequence).
+	subsequence_with_min_span(MinSpan, [_| Tail], Pos, Subsequence) :-
 		Pos1 is Pos + 1,
-		subsequence_with_min_span(MinSpan, T, Pos1, Sub).
+		subsequence_with_min_span(MinSpan, Tail, Pos1, Subsequence).
 
 	drop_until(_, List, Pos, List) :-
 		Pos >= 0,
 		!.
-	drop_until(Target, [_|T], Pos, Rest) :-
+	drop_until(Target, [_| Tail], Pos, Rest) :-
 		Pos1 is Pos + 1,
-		drop_until(Target, T, Pos1, Rest).
+		drop_until(Target, Tail, Pos1, Rest).
 
 	alternating_subsequences(List, Subsequences) :-
 		findall(Sub, alternating_subsequence(List, Sub), Subsequences).
@@ -646,18 +630,16 @@
 	k_distinct_subsequences(K, List, Subsequences) :-
 		findall(Sub, k_distinct_subsequence(K, List, Sub), Subsequences).
 
-	k_distinct_subsequence(K, List, Sub) :-
-		combination(K, List, Sub),
-		all_distinct(Sub).
+	k_distinct_subsequence(K, List, Subsequence) :-
+		combination(K, List, Subsequence),
+		all_distinct(Subsequence).
 
 	all_distinct([]).
 	all_distinct([H|T]) :-
 		\+ member(H, T),
 		all_distinct(T).
 
-	% =========================================================================
-	% Utility predicates
-	% =========================================================================
+	% utility predicates
 
 	count_subsequences(List, Count) :-
 		length(List, N),
@@ -674,9 +656,7 @@
 	subsequence_length(Subsequence, Length) :-
 		length(Subsequence, Length).
 
-	% =========================================================================
-	% Helper predicates
-	% =========================================================================
+	% auxiliary predicates
 
 	% Apply ordering to a list of results
 	% default: keep as-is
@@ -686,18 +666,18 @@
 	apply_order(lexicographic, List, Sorted) :-
 		msort(List, Sorted).
 	apply_order(shortlex, List, Sorted) :-
-		map_with_length(List, LenList),
-		msort(LenList, SortedLenList),
-		unmap_length(SortedLenList, Sorted).
+		map_with_length(List, Mapped),
+		msort(Mapped, MappedSorted),
+		unmap_length(MappedSorted, Sorted).
 
 	map_with_length([], []).
-	map_with_length([H|T], [Len-H|T2]) :-
-		length(H, Len),
-		map_with_length(T, T2).
+	map_with_length([Head| Tail], [Lenght-Head| Mapped]) :-
+		length(Head, Lenght),
+		map_with_length(Tail, Mapped).
 
 	unmap_length([], []).
-	unmap_length([_-H|T], [H|T2]) :-
-		unmap_length(T, T2).
+	unmap_length([_-Head| Mapped], [Head| Tail]) :-
+		unmap_length(Mapped, Tail).
 
 	% Binomial coefficient: C(N, K) = N! / (K! * (N-K)!)
 	binomial(_, K, 0) :- K < 0, !.
@@ -715,19 +695,16 @@
 		Result is R1 + R2.
 
 	% Factorial
-	factorial(0, 1).
 	factorial(N, F) :-
-		N > 0,
-		N1 is N - 1,
-		factorial(N1, F1),
-		F is N * F1.
+		integer(N),
+		N >= 0,
+		factorial(N, 1, F).
 
-	% Drop first N elements
-	drop(0, List, List) :- !.
-	drop(N, [_|T], Rest) :-
-		N > 0,
+	factorial(0, F, F) :-
+		!.
+	factorial(N, F0, F) :-
 		N1 is N - 1,
-		drop(N1, T, Rest).
-	drop(_, [], []).
+		F1 is F0 * N,
+		factorial(N1, F1, F).
 
 :- end_object.

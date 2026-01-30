@@ -209,6 +209,11 @@
 	test(subsequences_k_permutations_3_one_of_any, true(Permutations == [[a],[b],[c]])) :-
 		subsequences::k_permutations(1, [a,b,c], Permutations).
 
+	% k_permutation/3 tests
+
+	test(subsequences_k_permutation_3_one_of_any, true(Permutations == [[a],[b],[c]])) :-
+		findall(Permutation, subsequences::k_permutation(1, [a,b,c], Permutation), Permutations).
+
 	% derangements/2 tests
 
 	test(subsequences_derangements_of_3, true(Derangements == [[b,c,a],[c,a,b]])) :-
@@ -527,6 +532,14 @@
 	test(subsequences_permutations_3_lexicographic, true(length(Permutations, 6))) :-
 		subsequences::permutations([a,b,c], lexicographic, Permutations).
 
+	% permutation/3 (ordering variants) tests
+
+	test(subsequences_permutation_3_default, exists(Permutation == [c,b,a])) :-
+		subsequences::permutation([a,b,c], default, Permutation).
+
+	test(subsequences_permutation_3_lexicographic, exists(Permutation == [c,a,b])) :-
+		subsequences::permutation([a,b,c], lexicographic, Permutation).
+
 	% k_permutations/4 (ordering variants) tests
 
 	test(subsequences_k_permutations_4_default, true(length(Permutations, 6))) :-
@@ -534,6 +547,14 @@
 
 	test(subsequences_k_permutations_4_lexicographic, true(length(Permutations, 6))) :-
 		subsequences::k_permutations(2, [a,b,c], lexicographic, Permutations).
+
+	% k_permutation/4 (ordering variants) tests
+
+	test(subsequences_k_permutation_4_default, exists(Permutation == [c,b])) :-
+		subsequences::k_permutation(2, [a,b,c], default, Permutation).
+
+	test(subsequences_k_permutation_4_lexicographic, exists(Permutation == [c,b])) :-
+		subsequences::k_permutation(2, [a,b,c], lexicographic, Permutation).
 
 	% cartesian_product/3 tests
 
