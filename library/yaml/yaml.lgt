@@ -23,9 +23,9 @@
 	implements(yaml_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-01-29,
+		date is 2026-01-31,
 		comment is 'YAML parser and generator.'
 	]).
 
@@ -37,9 +37,7 @@
 		file_to_codes/2, stream_to_codes/2
 	]).
 
-	% =========================================================================
-	% Public predicates
-	% =========================================================================
+	% public predicates
 
 	parse(Source, _) :-
 		var(Source),
@@ -154,49 +152,33 @@
 	generate_all(Sink, _) :-
 		domain_error(yaml_sink, Sink).
 
-	% =========================================================================
 	% DCG Rules for YAML Parsing
-	% =========================================================================
 
-	% Document parsing - entry point (single document)
-	% Stateful version with anchor tracking
+	% Document parsing - entry point (single document) with anchor tracking
 	yaml_document(Data, StateIn, StateOut) -->
 		skip_whitespace_and_comments,
-		yaml_content_s(0, Data, StateIn, StateOut),
+		yaml_content(0, Data, StateIn, StateOut),
 		skip_trailing.
 
-	% Non-stateful version (backward compatible, ignores anchors/aliases)
-	yaml_document(Data) -->
-		skip_whitespace_and_comments,
-		yaml_content(0, Data),
-		skip_trailing.
-
-	% Multi-document parsing - entry point
-	% Strategy: split input by document markers, then parse each part
+	% Multi-document parsing - entry point (split input by document markers)
 	yaml_documents(Documents) -->
-		yaml_documents_acc([], Documents).
-
-	yaml_documents_acc(Acc, Documents) -->
 		skip_ws_and_comments,
 		(   % End of input
 		    eos
-		->  { reverse(Acc, Documents) }
-		;   % Document start marker
-		    [0'-, 0'-, 0'-]
+		->  { Documents = [] }
+		;   % Document start or end marker
+		    document_marker
 		->  skip_rest_of_line,
-		    yaml_documents_acc(Acc, Documents)
-		;   % Document end marker
-		    [0'., 0'., 0'.]
-		->  skip_rest_of_line,
-		    yaml_documents_acc(Acc, Documents)
+		    yaml_documents(Documents)
 		;   % Parse document content
-		    yaml_single_document(Doc),
-		    yaml_documents_acc([Doc| Acc], Documents)
+		    yaml_single_document(Document),
+			{ Documents = [Document| Acc] },
+		    yaml_documents(Acc)
 		).
 
 	% Parse a single document (stops at --- or ... or end)
-	yaml_single_document(Doc) -->
-		yaml_content(0, Doc),
+	yaml_single_document(Document) -->
+		yaml_content(0, Document, [], _),
 		skip_to_marker_or_end.
 
 	% Skip to next document marker or end of input
@@ -204,9 +186,7 @@
 		skip_ws_and_comments,
 		(   eos
 		->  []
-		;   [0'-, 0'-, 0'-]
-		->  skip_rest_of_line
-		;   [0'., 0'., 0'.]
+		;   document_marker
 		->  skip_rest_of_line
 		;   []
 		).
@@ -243,20 +223,22 @@
 	skip_rest_of_line -->
 		[].
 
-	% Main content parser with indentation tracking
-	yaml_content(_Indent, Data) -->
+	% stateful Content Parser (with anchor/alias tracking)
+	% state is threaded through as StateIn -> StateOut
+
+	yaml_content(_Indent, Data, S, S) -->
 		% Try flow mapping first
 		[0'{],
 		!,
 		flow_mapping(Pairs),
 		{ Data = yaml(Pairs) }.
-	yaml_content(_Indent, Data) -->
+	yaml_content(_Indent, Data, S, S) -->
 		% Try flow sequence
 		[0'[],
 		!,
 		flow_sequence(Items),
 		{ Data = Items }.
-	yaml_content(_Indent, Data) -->
+	yaml_content(_Indent, Data, S, S) -->
 		% Literal block scalar at document level
 		[0'|],
 		!,
@@ -265,7 +247,7 @@
 		newline,
 		literal_block_scalar(Chomping, Codes),
 		{ atom_codes(Data, Codes) }.
-	yaml_content(_Indent, Data) -->
+	yaml_content(_Indent, Data, S, S) -->
 		% Folded block scalar at document level
 		[0'>],
 		!,
@@ -274,84 +256,13 @@
 		newline,
 		folded_block_scalar(Chomping, Codes),
 		{ atom_codes(Data, Codes) }.
-	yaml_content(Indent, Data) -->
+	yaml_content(Indent, Data, S0, S) -->
 		% Try block sequence (starts with -)
 		peek_code(0'-),
 		!,
-		block_sequence(Indent, Items),
+		block_sequence(Indent, Items, S0, S),
 		{ Data = Items }.
-	yaml_content(Indent, Data) -->
-		% Try block mapping or scalar
-		scalar_key(Key),
-		skip_spaces,
-		(   [0':]
-		->  % This is a block mapping
-		    skip_spaces,
-		    block_mapping_value(Indent, Key, FirstPair),
-		    block_mapping_rest(Indent, RestPairs),
-		    { Data = yaml([FirstPair| RestPairs]) }
-		;   % Just a scalar value
-		    { parse_scalar_or_number(Key, Data) }
-		).
-	yaml_content(_Indent, Data) -->
-		% Quoted strings
-		[0'"],
-		!,
-		quoted_string_content(Codes),
-		[0'"],
-		{ atom_codes(Data, Codes) }.
-	yaml_content(_Indent, Data) -->
-		[0'\'],
-		!,
-		single_quoted_content(Codes),
-		[0'\'],
-		{ atom_codes(Data, Codes) }.
-	yaml_content(_Indent, '@'(null)) -->
-		% Empty document
-		[].
-
-	% =========================================================================
-	% Stateful Content Parser (with anchor/alias tracking)
-	% =========================================================================
-	% State is threaded through as StateIn -> StateOut
-
-	yaml_content_s(_Indent, Data, S, S) -->
-		% Try flow mapping first
-		[0'{],
-		!,
-		flow_mapping(Pairs),
-		{ Data = yaml(Pairs) }.
-	yaml_content_s(_Indent, Data, S, S) -->
-		% Try flow sequence
-		[0'[],
-		!,
-		flow_sequence(Items),
-		{ Data = Items }.
-	yaml_content_s(_Indent, Data, S, S) -->
-		% Literal block scalar at document level
-		[0'|],
-		!,
-		block_scalar_header(Chomping),
-		skip_to_newline,
-		newline,
-		literal_block_scalar(Chomping, Codes),
-		{ atom_codes(Data, Codes) }.
-	yaml_content_s(_Indent, Data, S, S) -->
-		% Folded block scalar at document level
-		[0'>],
-		!,
-		block_scalar_header(Chomping),
-		skip_to_newline,
-		newline,
-		folded_block_scalar(Chomping, Codes),
-		{ atom_codes(Data, Codes) }.
-	yaml_content_s(Indent, Data, S0, S) -->
-		% Try block sequence (starts with -)
-		peek_code(0'-),
-		!,
-		block_sequence_s(Indent, Items, S0, S),
-		{ Data = Items }.
-	yaml_content_s(Indent, Data, S0, S) -->
+	yaml_content(Indent, Data, S0, S) -->
 		% Try block mapping or scalar
 		scalar_key(Key),
 		skip_spaces,
@@ -361,220 +272,67 @@
 		    % Check for merge key as first key
 		    (   { Key == '<<' }
 		    ->  % Merge key - value should be an alias
-		        inline_value_s(Indent, MergeValue, S0, S1),
+		        inline_value(Indent, MergeValue, S0, S1),
 		        { merge_key_pairs(MergeValue, MergedPairs) },
-		        block_mapping_rest_s(Indent, RestPairs, S1, S),
+		        block_mapping_rest(Indent, RestPairs, S1, S),
 		        { append(MergedPairs, RestPairs, AllPairs) },
 		        { Data = yaml(AllPairs) }
 		    ;   % Normal first key
-		        block_mapping_value_s(Indent, Key, FirstPair, S0, S1),
-		        block_mapping_rest_s(Indent, RestPairs, S1, S),
+		        block_mapping_value(Indent, Key, FirstPair, S0, S1),
+		        block_mapping_rest(Indent, RestPairs, S1, S),
 		        { Data = yaml([FirstPair| RestPairs]) }
 		    )
 		;   % Just a scalar value
 		    { parse_scalar_or_number(Key, Data) },
 		    { S = S0 }
 		).
-	yaml_content_s(_Indent, Data, S, S) -->
+	yaml_content(_Indent, Data, S, S) -->
 		% Quoted strings
 		[0'"],
 		!,
 		quoted_string_content(Codes),
 		[0'"],
 		{ atom_codes(Data, Codes) }.
-	yaml_content_s(_Indent, Data, S, S) -->
+	yaml_content(_Indent, Data, S, S) -->
 		[0'\'],
 		!,
 		single_quoted_content(Codes),
 		[0'\'],
 		{ atom_codes(Data, Codes) }.
-	yaml_content_s(_Indent, '@'(null), S, S) -->
+	yaml_content(_Indent, '@'(null), S, S) -->
 		% Empty document
 		[].
 
-	% Block mapping value (after the colon)
-	block_mapping_value(Indent, Key, Key-Value) -->
-		% Check if value is on the same line
-		peek_non_newline_char,
-		!,
-		inline_value(Indent, Value).
-	block_mapping_value(Indent, Key, Key-Value) -->
-		% Value is a sequence starting on next line at same indent level
-		skip_to_newline,
-		newline,
-		measure_indent(ChildIndent),
-		{ ChildIndent =:= Indent },
-		[0'-],
-		!,
-		skip_spaces,
-		block_sequence_item(Indent, FirstItem),
-		block_sequence_rest(Indent, RestItems),
-		{ Value = [FirstItem| RestItems] }.
-	block_mapping_value(Indent, Key, Key-Value) -->
-		% Value is on the next line (nested structure with greater indent)
-		skip_to_newline,
-		newline,
-		measure_indent(ChildIndent),
-		{ ChildIndent > Indent },
-		!,
-		yaml_content(ChildIndent, Value).
-	block_mapping_value(_Indent, Key, Key-'') -->
-		% Empty value
-		[].
-
-	% Rest of block mapping (additional key-value pairs at same indent)
-	block_mapping_rest(Indent, [Pair| Pairs]) -->
-		skip_to_newline,
-		newline,
-		skip_empty_lines,
-		% Stop at document markers
-		\+ peek_document_marker,
-		measure_indent(CurrentIndent),
-		{ CurrentIndent =:= Indent },
-		% Verify there's a valid key (not just whitespace/newline)
-		peek_scalar_start,
-		!,
-		scalar_key(Key),
-		skip_spaces,
-		[0':],
-		skip_spaces,
-		block_mapping_value(Indent, Key, Pair),
-		block_mapping_rest(Indent, Pairs).
-	block_mapping_rest(_Indent, []) -->
-		[].
+	% Document marker (--- or ...)
+	document_marker -->
+		[0'-, 0'-, 0'-],
+		!.
+	document_marker -->
+		[0'., 0'., 0'.].
 
 	% Peek for document markers (--- or ...)
-	peek_document_marker, [C1, C2, C3] -->
-		[C1, C2, C3],
-		{ C1 == 0'-, C2 == 0'-, C3 == 0'- },
+	peek_document_marker, [0'-, 0'-, 0'-] -->
+		[0'-, 0'-, 0'-],
 		!.
-	peek_document_marker, [C1, C2, C3] -->
-		[C1, C2, C3],
-		{ C1 == 0'., C2 == 0'., C3 == 0'. }.
+	peek_document_marker, [0'., 0'., 0'.] -->
+		[0'., 0'., 0'.].
 
-	% Block sequence parsing
-	block_sequence(Indent, [Item| Items]) -->
-		[0'-],
-		skip_spaces,
-		block_sequence_item(Indent, Item),
-		block_sequence_rest(Indent, Items).
-
-	block_sequence_item(Indent, Item) -->
-		% Content on next line (- on its own line)
-		peek_newline_char,
-		!,
-		skip_to_newline,
-		newline,
-		measure_indent(ChildIndent),
-		{ ChildIndent > Indent },
-		yaml_content(ChildIndent, Item).
-	block_sequence_item(Indent, Item) -->
-		% Check for inline mapping after -
-		scalar_key(Key),
-		skip_spaces,
-		[0':],
-		!,
-		skip_spaces,
-		{ ItemIndent is Indent + 2 },
-		block_mapping_value(ItemIndent, Key, FirstPair),
-		block_mapping_rest(ItemIndent, RestPairs),
-		{ Item = yaml([FirstPair| RestPairs]) }.
-	block_sequence_item(Indent, Item) -->
-		% Regular value after -
-		inline_value(Indent, Item).
-
-	block_sequence_rest(Indent, [Item| Items]) -->
-		skip_to_newline,
-		newline,
-		skip_empty_lines,
-		% Stop at document markers
-		\+ peek_document_marker,
-		measure_indent(CurrentIndent),
-		{ CurrentIndent =:= Indent },
-		[0'-],
-		!,
-		skip_spaces,
-		block_sequence_item(Indent, Item),
-		block_sequence_rest(Indent, Items).
-	block_sequence_rest(_Indent, []) -->
-		[].
-
-	% Inline value (on the same line after : or -)
-	inline_value(_Indent, Value) -->
-		[0'{],
-		!,
-		flow_mapping(Pairs),
-		{ Value = yaml(Pairs) }.
-	inline_value(_Indent, Value) -->
-		[0'[],
-		!,
-		flow_sequence(Value).
-	inline_value(_Indent, Value) -->
-		[0'"],
-		!,
-		quoted_string_content(Codes),
-		[0'"],
-		{ atom_codes(Value, Codes) }.
-	inline_value(_Indent, Value) -->
-		[0'\'],
-		!,
-		single_quoted_content(Codes),
-		[0'\'],
-		{ atom_codes(Value, Codes) }.
-	inline_value(_Indent, Value) -->
-		% Literal block scalar (|)
-		[0'|],
-		!,
-		block_scalar_header(Chomping),
-		skip_to_newline,
-		newline,
-		literal_block_scalar(Chomping, Codes),
-		{ atom_codes(Value, Codes) }.
-	inline_value(_Indent, Value) -->
-		% Folded block scalar (>)
-		[0'>],
-		!,
-		block_scalar_header(Chomping),
-		skip_to_newline,
-		newline,
-		folded_block_scalar(Chomping, Codes),
-		{ atom_codes(Value, Codes) }.
-	inline_value(_Indent, Value) -->
-		% Anchor definition (&name)
-		[0'&],
-		!,
-		anchor_name(_AnchorName),
-		skip_spaces,
-		inline_value(_Indent, Value).
-	inline_value(_Indent, Value) -->
-		% Alias reference (*name)
-		[0'*],
-		!,
-		anchor_name(_AliasName),
-		% For now, aliases without state return null - will be handled with state
-		{ Value = '@'(null) }.
-	inline_value(_Indent, Value) -->
-		inline_scalar(Scalar),
-		{ parse_scalar_or_number(Scalar, Value) }.
-
-	% =========================================================================
-	% Stateful Block Mapping/Sequence/Value (with anchor/alias tracking)
-	% =========================================================================
+	% stateful Block Mapping/Sequence/Value (with anchor/alias tracking)
 
 	% Block mapping value with state threading
-	block_mapping_value_s(Indent, Key, Key-Value, S0, S) -->
+	block_mapping_value(Indent, Key, Key-Value, S0, S) -->
 		% Check for anchor with block content on next line
 		[0'&],
 		!,
 		anchor_name(AnchorName),
 		skip_spaces,
-		block_mapping_value_anchor_s(Indent, Value, AnchorName, S0, S).
-	block_mapping_value_s(Indent, Key, Key-Value, S0, S) -->
+		block_mapping_value_anchor(Indent, Value, AnchorName, S0, S).
+	block_mapping_value(Indent, Key, Key-Value, S0, S) -->
 		% Check if value is on the same line
 		peek_non_newline_char,
 		!,
-		inline_value_s(Indent, Value, S0, S).
-	block_mapping_value_s(Indent, Key, Key-Value, S0, S) -->
+		inline_value(Indent, Value, S0, S).
+	block_mapping_value(Indent, Key, Key-Value, S0, S) -->
 		% Value is a sequence starting on next line at same indent level
 		skip_to_newline,
 		newline,
@@ -583,29 +341,29 @@
 		[0'-],
 		!,
 		skip_spaces,
-		block_sequence_item_s(Indent, FirstItem, S0, S1),
-		block_sequence_rest_s(Indent, RestItems, S1, S),
-		{ Value = [FirstItem| RestItems] }.
-	block_mapping_value_s(Indent, Key, Key-Value, S0, S) -->
+		block_sequence_item(Indent, Item, S0, S1),
+		block_sequence_rest(Indent, Items, S1, S),
+		{ Value = [Item| Items] }.
+	block_mapping_value(Indent, Key, Key-Value, S0, S) -->
 		% Value is on the next line (nested structure with greater indent)
 		skip_to_newline,
 		newline,
 		measure_indent(ChildIndent),
 		{ ChildIndent > Indent },
 		!,
-		yaml_content_s(ChildIndent, Value, S0, S).
-	block_mapping_value_s(_Indent, Key, Key-'', S, S) -->
+		yaml_content(ChildIndent, Value, S0, S).
+	block_mapping_value(_Indent, Key, Key-'', S, S) -->
 		% Empty value
 		[].
 
 	% Helper: parse value after anchor and store anchor
-	block_mapping_value_anchor_s(Indent, Value, AnchorName, S0, S) -->
+	block_mapping_value_anchor(Indent, Value, AnchorName, S0, S) -->
 		% Value is on the same line (after anchor)
 		peek_non_newline_char,
 		!,
-		inline_value_s(Indent, Value, S0, S1),
+		inline_value(Indent, Value, S0, S1),
 		{ store_anchor(AnchorName, Value, S1, S) }.
-	block_mapping_value_anchor_s(Indent, Value, AnchorName, S0, S) -->
+	block_mapping_value_anchor(Indent, Value, AnchorName, S0, S) -->
 		% Value is a sequence starting on next line
 		skip_to_newline,
 		newline,
@@ -614,25 +372,25 @@
 		[0'-],
 		!,
 		skip_spaces,
-		block_sequence_item_s(Indent, FirstItem, S0, S1),
-		block_sequence_rest_s(Indent, RestItems, S1, S2),
-		{ Value = [FirstItem| RestItems] },
+		block_sequence_item(Indent, Item, S0, S1),
+		block_sequence_rest(Indent, Items, S1, S2),
+		{ Value = [Item| Items] },
 		{ store_anchor(AnchorName, Value, S2, S) }.
-	block_mapping_value_anchor_s(Indent, Value, AnchorName, S0, S) -->
+	block_mapping_value_anchor(Indent, Value, AnchorName, S0, S) -->
 		% Value is block content on next line
 		skip_to_newline,
 		newline,
 		measure_indent(ChildIndent),
 		{ ChildIndent > Indent },
 		!,
-		yaml_content_s(ChildIndent, Value, S0, S1),
+		yaml_content(ChildIndent, Value, S0, S1),
 		{ store_anchor(AnchorName, Value, S1, S) }.
-	block_mapping_value_anchor_s(_Indent, '', AnchorName, S0, S) -->
+	block_mapping_value_anchor(_Indent, '', AnchorName, S0, S) -->
 		% Empty value - anchor on empty value doesn't make sense but handle it
 		{ store_anchor(AnchorName, '', S0, S) }.
 
 	% Rest of block mapping with state threading
-	block_mapping_rest_s(Indent, ResultPairs, S0, S) -->
+	block_mapping_rest(Indent, ResultPairs, S0, S) -->
 		skip_to_newline,
 		newline,
 		skip_empty_lines,
@@ -650,27 +408,27 @@
 		% Check for merge key
 		(   { Key == '<<' }
 		->  % Merge key - value should be an alias or list of aliases
-		    inline_value_s(Indent, MergeValue, S0, S1),
+		    inline_value(Indent, MergeValue, S0, S1),
 		    { merge_key_pairs(MergeValue, MergedPairs) },
-		    block_mapping_rest_s(Indent, RestPairs, S1, S),
+		    block_mapping_rest(Indent, RestPairs, S1, S),
 		    { append(MergedPairs, RestPairs, ResultPairs) }
 		;   % Normal key-value pair
-		    block_mapping_value_s(Indent, Key, Pair, S0, S1),
-		    block_mapping_rest_s(Indent, RestPairs, S1, S),
+		    block_mapping_value(Indent, Key, Pair, S0, S1),
+		    block_mapping_rest(Indent, RestPairs, S1, S),
 		    { ResultPairs = [Pair| RestPairs] }
 		).
-	block_mapping_rest_s(_Indent, [], S, S) -->
+	block_mapping_rest(_Indent, [], S, S) -->
 		[].
 
 	% Block sequence with state threading
-	block_sequence_s(Indent, [Item| Items], S0, S) -->
+	block_sequence(Indent, [Item| Items], S0, S) -->
 		[0'-],
 		skip_spaces,
-		block_sequence_item_s(Indent, Item, S0, S1),
-		block_sequence_rest_s(Indent, Items, S1, S).
+		block_sequence_item(Indent, Item, S0, S1),
+		block_sequence_rest(Indent, Items, S1, S).
 
 	% Block sequence item with state threading
-	block_sequence_item_s(Indent, Item, S0, S) -->
+	block_sequence_item(Indent, Item, S0, S) -->
 		% Content on next line (- on its own line)
 		peek_newline_char,
 		!,
@@ -678,8 +436,8 @@
 		newline,
 		measure_indent(ChildIndent),
 		{ ChildIndent > Indent },
-		yaml_content_s(ChildIndent, Item, S0, S).
-	block_sequence_item_s(Indent, Item, S0, S) -->
+		yaml_content(ChildIndent, Item, S0, S).
+	block_sequence_item(Indent, Item, S0, S) -->
 		% Check for inline mapping after -
 		scalar_key(Key),
 		skip_spaces,
@@ -687,15 +445,15 @@
 		!,
 		skip_spaces,
 		{ ItemIndent is Indent + 2 },
-		block_mapping_value_s(ItemIndent, Key, FirstPair, S0, S1),
-		block_mapping_rest_s(ItemIndent, RestPairs, S1, S),
-		{ Item = yaml([FirstPair| RestPairs]) }.
-	block_sequence_item_s(Indent, Item, S0, S) -->
+		block_mapping_value(ItemIndent, Key, Pair, S0, S1),
+		block_mapping_rest(ItemIndent, Pairs, S1, S),
+		{ Item = yaml([Pair| Pairs]) }.
+	block_sequence_item(Indent, Item, S0, S) -->
 		% Regular value after -
-		inline_value_s(Indent, Item, S0, S).
+		inline_value(Indent, Item, S0, S).
 
 	% Block sequence rest with state threading
-	block_sequence_rest_s(Indent, [Item| Items], S0, S) -->
+	block_sequence_rest(Indent, [Item| Items], S0, S) -->
 		skip_to_newline,
 		newline,
 		skip_empty_lines,
@@ -706,34 +464,34 @@
 		[0'-],
 		!,
 		skip_spaces,
-		block_sequence_item_s(Indent, Item, S0, S1),
-		block_sequence_rest_s(Indent, Items, S1, S).
-	block_sequence_rest_s(_Indent, [], S, S) -->
+		block_sequence_item(Indent, Item, S0, S1),
+		block_sequence_rest(Indent, Items, S1, S).
+	block_sequence_rest(_Indent, [], S, S) -->
 		[].
 
 	% Inline value with state threading
-	inline_value_s(_Indent, Value, S, S) -->
+	inline_value(_Indent, Value, S, S) -->
 		[0'{],
 		!,
 		flow_mapping(Pairs),
 		{ Value = yaml(Pairs) }.
-	inline_value_s(_Indent, Value, S, S) -->
+	inline_value(_Indent, Value, S, S) -->
 		[0'[],
 		!,
 		flow_sequence(Value).
-	inline_value_s(_Indent, Value, S, S) -->
+	inline_value(_Indent, Value, S, S) -->
 		[0'"],
 		!,
 		quoted_string_content(Codes),
 		[0'"],
 		{ atom_codes(Value, Codes) }.
-	inline_value_s(_Indent, Value, S, S) -->
+	inline_value(_Indent, Value, S, S) -->
 		[0'\'],
 		!,
 		single_quoted_content(Codes),
 		[0'\'],
 		{ atom_codes(Value, Codes) }.
-	inline_value_s(_Indent, Value, S, S) -->
+	inline_value(_Indent, Value, S, S) -->
 		% Literal block scalar (|)
 		[0'|],
 		!,
@@ -742,7 +500,7 @@
 		newline,
 		literal_block_scalar(Chomping, Codes),
 		{ atom_codes(Value, Codes) }.
-	inline_value_s(_Indent, Value, S, S) -->
+	inline_value(_Indent, Value, S, S) -->
 		% Folded block scalar (>)
 		[0'>],
 		!,
@@ -751,30 +509,28 @@
 		newline,
 		folded_block_scalar(Chomping, Codes),
 		{ atom_codes(Value, Codes) }.
-	inline_value_s(Indent, Value, S0, S) -->
+	inline_value(Indent, Value, S0, S) -->
 		% Anchor definition (&name value)
 		[0'&],
 		!,
 		anchor_name(AnchorName),
 		skip_spaces,
 		% Parse the value that this anchor refers to
-		inline_value_s(Indent, Value, S0, S1),
+		inline_value(Indent, Value, S0, S1),
 		% Store the anchor in state
 		{ store_anchor(AnchorName, Value, S1, S) }.
-	inline_value_s(_Indent, Value, S0, S0) -->
+	inline_value(_Indent, Value, S0, S0) -->
 		% Alias reference (*name)
 		[0'*],
 		!,
 		anchor_name(AliasName),
 		% Look up the alias in state
 		{ (lookup_anchor(AliasName, S0, Value) -> true ; Value = '@'(null)) }.
-	inline_value_s(_Indent, Value, S, S) -->
+	inline_value(_Indent, Value, S, S) -->
 		inline_scalar(Scalar),
 		{ parse_scalar_or_number(Scalar, Value) }.
 
-	% =========================================================================
-	% Block Scalar Parsing (| and >)
-	% =========================================================================
+	% block Scalar Parsing (| and >)
 
 	% Block scalar header - parse optional chomping indicator
 	% - (strip): remove final line breaks
@@ -1011,12 +767,12 @@
 		strip_leading_newlines(Rev, RevResult),
 		reverse(RevResult, Result).
 
-	strip_leading_newlines([10| Rest], Result) :-
+	strip_leading_newlines([10| Codes], Result) :-
 		!,
-		strip_leading_newlines(Rest, Result).
-	strip_leading_newlines([13| Rest], Result) :-
+		strip_leading_newlines(Codes, Result).
+	strip_leading_newlines([13| Codes], Result) :-
 		!,
-		strip_leading_newlines(Rest, Result).
+		strip_leading_newlines(Codes, Result).
 	strip_leading_newlines(Result, Result).
 
 	% Check if input starts with newline followed by line with sufficient indent
@@ -1026,14 +782,14 @@
 		count_leading_spaces_and_check(Codes, 0, MinIndent).
 
 	% Count leading spaces and check if line has sufficient indent or is blank
-	count_leading_spaces_and_check([32| Rest], Acc, MinIndent) :-
+	count_leading_spaces_and_check([32| Codes], Acc, MinIndent) :-
 		!,
 		Acc1 is Acc + 1,
-		count_leading_spaces_and_check(Rest, Acc1, MinIndent).
-	count_leading_spaces_and_check([9| Rest], Acc, MinIndent) :-
+		count_leading_spaces_and_check(Codes, Acc1, MinIndent).
+	count_leading_spaces_and_check([9| Codes], Acc, MinIndent) :-
 		!,
 		Acc1 is Acc + 2,  % Tab counts as 2 spaces
-		count_leading_spaces_and_check(Rest, Acc1, MinIndent).
+		count_leading_spaces_and_check(Codes, Acc1, MinIndent).
 	count_leading_spaces_and_check([Code| _], Acc, MinIndent) :-
 		% Non-whitespace character - check indent
 		Code =\= 32, Code =\= 9,
@@ -1047,17 +803,17 @@
 
 	% Generate N space characters (code 32)
 	n_spaces(0, []) :- !.
-	n_spaces(N, [32| Rest]) :-
+	n_spaces(N, [32| Codes]) :-
 		N > 0,
 		N1 is N - 1,
-		n_spaces(N1, Rest).
+		n_spaces(N1, Codes).
 
 	% Generate N newline characters (code 10)
 	n_newlines(0, []) :- !.
-	n_newlines(N, [10| Rest]) :-
+	n_newlines(N, [10| Codes]) :-
 		N > 0,
 		N1 is N - 1,
-		n_newlines(N1, Rest).
+		n_newlines(N1, Codes).
 
 	% Anchor name parsing
 	anchor_name(Name) -->
@@ -1075,10 +831,8 @@
 	anchor_name_codes([]) -->
 		[].
 
-	% =========================================================================
-	% Anchor/Alias State Management
-	% =========================================================================
-	% State is a list of AnchorName-Value pairs
+	% anchor/Alias State Management
+	% state is a list of AnchorName-Value pairs
 
 	% Look up an anchor in the state
 	lookup_anchor(Name, [Name-Value| _], Value) :-
@@ -1385,9 +1139,7 @@
 	unescape_char(0'/, 0'/) :- !.   % forward slash
 	unescape_char(C, C).
 
-	% =========================================================================
-	% Helper DCG rules for parsing
-	% =========================================================================
+	% helper DCG rules for parsing
 
 	% Peek at next character without consuming
 	peek_code(Code), [Code] --> [Code].
@@ -1585,9 +1337,7 @@
 	skip_trailing -->
 		[].
 
-	% =========================================================================
-	% Scalar value parsing helpers
-	% =========================================================================
+	% scalar value parsing helpers
 
 	parse_scalar_value(true, '@'(true)) :- !.
 	parse_scalar_value(false, '@'(false)) :- !.
@@ -1604,9 +1354,9 @@
 	% Parse signed positive numbers (+12345)
 	parse_scalar_or_number(Atom, Number) :-
 		atom(Atom),
-		atom_codes(Atom, [0'+| Rest]),
-		Rest \= [],
-		catch(number_codes(Number, Rest), _, fail),
+		atom_codes(Atom, [0'+| Codes]),
+		Codes \= [],
+		catch(number_codes(Number, Codes), _, fail),
 		!.
 	% Parse octal numbers (0o14)
 	parse_scalar_or_number(Atom, Number) :-
@@ -1659,9 +1409,7 @@
 	hex_digit(Code, Value) :- Code >= 0'a, Code =< 0'f, !, Value is Code - 0'a + 10.
 	hex_digit(Code, Value) :- Code >= 0'A, Code =< 0'F, Value is Code - 0'A + 10.
 
-	% =========================================================================
 	% DCG Rules for YAML Generation
-	% =========================================================================
 
 	% Main generation entry point
 	yaml_generate(Data) -->
@@ -1760,9 +1508,7 @@
 		[0',],
 		yaml_generate_items(Items).
 
-	% =========================================================================
-	% Auxiliary predicates
-	% =========================================================================
+	% auxiliary predicates
 
 	% Helper to output a list of codes
 	codes([]) --> [].
