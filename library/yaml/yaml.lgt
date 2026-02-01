@@ -44,22 +44,22 @@
 		instantiation_error.
 	parse(file(File), Data) :-
 		file_to_codes(File, Codes),
-		phrase(yaml_document(Data, [], _), Codes),
+		phrase(yaml_document(Data), Codes),
 		!.
 	parse(stream(Stream), Data) :-
 		stream_to_codes(Stream, Codes),
-		phrase(yaml_document(Data, [], _), Codes),
+		phrase(yaml_document(Data), Codes),
 		!.
 	parse(codes(Codes), Data) :-
-		phrase(yaml_document(Data, [], _), Codes),
+		phrase(yaml_document(Data), Codes),
 		!.
 	parse(chars(Chars), Data) :-
 		chars_to_codes(Chars, Codes),
-		phrase(yaml_document(Data, [], _), Codes),
+		phrase(yaml_document(Data), Codes),
 		!.
 	parse(atom(Atom), Data) :-
 		atom_codes(Atom, Codes),
-		phrase(yaml_document(Data, [], _), Codes),
+		phrase(yaml_document(Data), Codes),
 		!.
 	parse(Source, _) :-
 		domain_error(yaml_source, Source).
@@ -155,6 +155,9 @@
 	% DCG Rules for YAML Parsing
 
 	% Document parsing - entry point (single document) with anchor tracking
+	yaml_document(Data) -->
+		yaml_document(Data, [], _).
+
 	yaml_document(Data, StateIn, StateOut) -->
 		skip_whitespace_and_comments,
 		yaml_content(0, Data, StateIn, StateOut),
@@ -270,7 +273,7 @@
 		->  % This is a block mapping
 		    skip_spaces,
 		    % Check for merge key as first key
-		    (   { Key == '<<' }
+		    (   { Key == (<<) }
 		    ->  % Merge key - value should be an alias
 		        inline_value(Indent, MergeValue, S0, S1),
 		        { merge_key_pairs(MergeValue, MergedPairs) },
@@ -406,7 +409,7 @@
 		[0':],
 		skip_spaces,
 		% Check for merge key
-		(   { Key == '<<' }
+		(   { Key == (<<) }
 		->  % Merge key - value should be an alias or list of aliases
 		    inline_value(Indent, MergeValue, S0, S1),
 		    { merge_key_pairs(MergeValue, MergedPairs) },
@@ -1254,9 +1257,9 @@
 		[].
 
 	% Consume newline
-	newline --> [10].
-	newline --> [13], [10].
-	newline --> [13].
+	newline --> [10], !.
+	newline --> [13], [10], !.
+	newline --> [13], !.
 
 	% Skip empty lines (lines with only whitespace)
 	skip_empty_lines -->
