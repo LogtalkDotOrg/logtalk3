@@ -15,7 +15,7 @@ YAML parser and generator protocol.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-01-25
+| **Date:** 2026-01-31
 
 | **Compilation flags:**
 |    ``static``
@@ -44,7 +44,7 @@ Public predicates
 ``parse/2``
 ^^^^^^^^^^^
 
-Parses YAML content read from the given source (``file(Path)``, ``stream(Stream)``, ``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) into a ground term with the ``yaml`` functor representing the parsed YAML data.
+Parses YAML content read from the given source (``file(Path)``, ``stream(Stream)``, ``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) into a ground term representing the parsed YAML data.
 
 | **Compilation flags:**
 |    ``static``
@@ -94,7 +94,7 @@ Parses all YAML documents from the given source (``file(Path)``, ``stream(Stream
 ``generate/2``
 ^^^^^^^^^^^^^^
 
-Generates YAML output using the representation specified in the first argument (``file(Path)``, ``stream(Stream)``, ``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) from the ground YAML term in the second argument (with the ``yaml`` functor).
+Generates YAML output using the representation specified in the first argument (``file(Path)``, ``stream(Stream)``, ``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) from the ground YAML term in the second argument.
 
 | **Compilation flags:**
 |    ``static``

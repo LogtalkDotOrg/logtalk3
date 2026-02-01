@@ -24,14 +24,14 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-01-25,
+		date is 2026-01-31,
 		comment is 'YAML parser and generator protocol.'
 	]).
 
 	:- public(parse/2).
 	:- mode(parse(++compound, --ground), one_or_error).
 	:- info(parse/2, [
-		comment is 'Parses YAML content read from the given source (``file(Path)``, ``stream(Stream)``, ``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) into a ground term with the ``yaml`` functor representing the parsed YAML data.',
+		comment is 'Parses YAML content read from the given source (``file(Path)``, ``stream(Stream)``, ``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) into a ground term representing the parsed YAML data.',
 		argnames is ['Source', 'YAML'],
 		exceptions is [
 			'``Source`` is a variable' - instantiation_error,
@@ -53,7 +53,7 @@
 	:- public(generate/2).
 	:- mode(generate(++compound, +ground), one_or_error).
 	:- info(generate/2, [
-		comment is 'Generates YAML output using the representation specified in the first argument (``file(Path)``, ``stream(Stream)``, ``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) from the ground YAML term in the second argument (with the ``yaml`` functor).',
+		comment is 'Generates YAML output using the representation specified in the first argument (``file(Path)``, ``stream(Stream)``, ``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) from the ground YAML term in the second argument.',
 		argnames is ['Sink', 'YAML'],
 		exceptions is [
 			'``Sink`` is a variable' - instantiation_error,
