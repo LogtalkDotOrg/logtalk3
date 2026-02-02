@@ -250,28 +250,28 @@
 	% above-left (RowPrev[j-1], i.e. the previous Above before it was
 	% consumed).
 	% -----------------------------------------------------------------
-	levenshtein(S1, S2, Distance) :-
-		levenshtein(_Representation_, S1, S2, Distance).
+	levenshtein(String1, String2, Distance) :-
+		levenshtein(_Representation_, String1, String2, Distance).
 
-	levenshtein(atom, S1, S2, Distance) :-
-		atom_codes(S1, Cs1),
-		atom_codes(S2, Cs2),
-		levenshtein(codes, Cs1, Cs2, Distance).
-	levenshtein(chars, S1, S2, Distance) :-
-		levenshtein(codes, S1, S2, Distance).
-	levenshtein(codes, S1, S2, Distance) :-
-		length(S2, Cols),
+	levenshtein(atom, String1, String2, Distance) :-
+		atom_codes(String1, Codes1),
+		atom_codes(String2, Codes2),
+		levenshtein(codes, Codes1, Codes2, Distance).
+	levenshtein(chars, String1, String2, Distance) :-
+		levenshtein(codes, String1, String2, Distance).
+	levenshtein(codes, String1, String2, Distance) :-
+		length(String2, Cols),
 		numlist(0, Cols, Row0),
-		lev_rows(S1, S2, Row0, RowFinal),
+		lev_rows(String1, String2, Row0, RowFinal),
 		last(RowFinal, Distance).
 
 	lev_rows([], _, Row, Row).
-	lev_rows([H1|T1], Cs2, RowPrev, RowFinal) :-
+	lev_rows([H1|T1], Codes2, RowPrev, RowFinal) :-
 		RowPrev = [RowIdx0|RowVals],
 		RowIdx is RowIdx0 + 1,
-		lev_row(Cs2, H1, RowVals, RowIdx, RowIdx0, [], RowCur0),
+		lev_row(Codes2, H1, RowVals, RowIdx, RowIdx0, [], RowCur0),
 		RowCur = [RowIdx|RowCur0],
-		lev_rows(T1, Cs2, RowCur, RowFinal).
+		lev_rows(T1, Codes2, RowCur, RowFinal).
 
 	lev_row([], _, _, _, _, Acc, Row) :-
 		reverse(Acc, Row).
@@ -291,7 +291,7 @@
 	%
 	% Same row DP as Levenshtein, but we also carry:
 	%   RowPrevPrev  – the row two steps back
-	%   PrevChar     – the previous character of S1
+	%   PrevCode     – the previous character of String1
 	%   ColIdx       – current 0-based column index
 	%
 	% Transposition condition at (i,j):
@@ -299,36 +299,36 @@
 	% which lets us look up RowPrevPrev[j-1] for the transposition cost.
 	% -----------------------------------------------------------------
 
-	damerau_levenshtein(S1, S2, Distance) :-
-		damerau_levenshtein(_Representation_, S1, S2, Distance).
+	damerau_levenshtein(String1, String2, Distance) :-
+		damerau_levenshtein(_Representation_, String1, String2, Distance).
 
-	damerau_levenshtein(atom, S1, S2, Distance) :-
-		atom_codes(S1, Cs1),
-		atom_codes(S2, Cs2),
-		damerau_levenshtein(codes, Cs1, Cs2, Distance).
-	damerau_levenshtein(chars, S1, S2, Distance) :-
-		damerau_levenshtein(codes, S1, S2, Distance).
-	damerau_levenshtein(codes, S1, S2, Distance) :-
-		length(S2, Cols),
+	damerau_levenshtein(atom, String1, String2, Distance) :-
+		atom_codes(String1, Codes1),
+		atom_codes(String2, Codes2),
+		damerau_levenshtein(codes, Codes1, Codes2, Distance).
+	damerau_levenshtein(chars, String1, String2, Distance) :-
+		damerau_levenshtein(codes, String1, String2, Distance).
+	damerau_levenshtein(codes, String1, String2, Distance) :-
+		length(String2, Cols),
 		sequence(0, Cols, Row0),
-		dl_rows(S1, S2, Row0, [], none, RowFinal),
+		dl_rows(String1, String2, Row0, [], none, RowFinal),
 		last(RowFinal, Distance).
 
 	dl_rows([], _, Row, _, _, Row).
-	dl_rows([H1|T1], Cs2, RowPrev, RowPrevPrev, PrevChar, RowFinal) :-
+	dl_rows([H1|T1], Codes2, RowPrev, RowPrevPrev, PrevCode, RowFinal) :-
 		RowPrev = [RowIdx0|RowVals],
 		RowIdx is RowIdx0 + 1,
 		(	RowPrevPrev == []
 		->	RowPrevPrevVals = []
 		;	RowPrevPrev = [_|RowPrevPrevVals]
 		),
-		dl_row(Cs2, H1, PrevChar, RowVals, RowPrevPrevVals, RowIdx, RowIdx0, 0, [], RowCur0),
+		dl_row(Codes2, H1, PrevCode, RowVals, RowPrevPrevVals, RowIdx, RowIdx0, 0, [], RowCur0),
 		RowCur = [RowIdx|RowCur0],
-		dl_rows(T1, Cs2, RowCur, RowPrev, H1, RowFinal).
+		dl_rows(T1, Codes2, RowCur, RowPrev, H1, RowFinal).
 
 	dl_row([], _, _, _, _, _, _, _, Acc, Row) :-
 		reverse(Acc, Row).
-	dl_row([H2|T2], H1, PrevChar, [Above|AboveRest], PrevPrevRow, Left, Diag, ColIdx, Acc, Row) :-
+	dl_row([H2|T2], H1, PrevCode, [Above|AboveRest], PrevPrevRow, Left, Diag, ColIdx, Acc, Row) :-
 		(	H1 == H2
 		->	Cost = 0
 		;	Cost = 1
@@ -338,11 +338,11 @@
 		Del is Left  + 1,
 		Val0 is min(Sub, min(Ins, Del)),
 		% Transposition: s1[i]==s2[j-1] and s1[i-1]==s2[j].
-		% H1 = s1[i], PrevChar = s1[i-1], H2 = s2[j].
+		% H1 = s1[i], PrevCode = s1[i-1], H2 = s2[j].
 		% s2[j-1] is the element just before H2 — we detect this by
 		% checking H1 == the previous s2 char.  We approximate this
 		% with the standard OSA condition using PrevPrevRow.
-		(	PrevChar \== none,
+		(	PrevCode \== none,
 			ColIdx > 0,
 			PrevPrevRow \= [],
 			ColIdx1 is ColIdx - 1,
@@ -352,32 +352,32 @@
 		;	Val = Val0
 		),
 		ColIdxNext is ColIdx + 1,
-		dl_row(T2, H1, PrevChar, AboveRest, PrevPrevRow, Val, Above, ColIdxNext, [Val|Acc], Row).
+		dl_row(T2, H1, PrevCode, AboveRest, PrevPrevRow, Val, Above, ColIdxNext, [Val|Acc], Row).
 
 	% -----------------------------------------------------------------
 	% Hamming
 	% -----------------------------------------------------------------
-	hamming(S1, S2, Distance) :-
-		hamming(_Representation_, S1, S2, Distance).
+	hamming(String1, String2, Distance) :-
+		hamming(_Representation_, String1, String2, Distance).
 
-	hamming(atom, S1, S2, Distance) :-
-		atom_codes(S1, Cs1),
-		atom_codes(S2, Cs2),
-		hamming(codes, Cs1, Cs2, Distance).
-	hamming(chars, S1, S2, Distance) :-
-		hamming(codes, S1, S2, Distance).
-	hamming(codes, S1, S2, Distance) :-
-		length(S1, L),
-		length(S2, L),
-		hamming_count(S1, S2, 0, Distance).
+	hamming(atom, String1, String2, Distance) :-
+		atom_codes(String1, Codes1),
+		atom_codes(String2, Codes2),
+		hamming(codes, Codes1, Codes2, Distance).
+	hamming(chars, String1, String2, Distance) :-
+		hamming(codes, String1, String2, Distance).
+	hamming(codes, String1, String2, Distance) :-
+		length(String1, L),
+		length(String2, L),
+		hamming_count(String1, String2, 0, Distance).
 
-	hamming_count([], [], Acc, Acc).
-	hamming_count([H1|T1], [H2|T2], Acc, Dist) :-
-		(	H1 == H2
-		->	Acc1 = Acc
-		;	Acc1 is Acc + 1
+	hamming_count([], [], Distance, Distance).
+	hamming_count([Code1| Codes1], [Code2| Codes2], Distance0, Distance) :-
+		(	Code1 == Code2
+		->	Distance1 = Distance0
+		;	Distance1 is Distance0 + 1
 		),
-		hamming_count(T1, T2, Acc1, Dist).
+		hamming_count(Codes1, Codes2, Distance1, Distance).
 
 	% =================================================================
 	% Similarity scores
@@ -395,18 +395,18 @@
 	%    differ).
 	% 5. jaro = (m/|s1| + m/|s2| + (m - t/2)/m) / 3.
 	% -----------------------------------------------------------------
-	jaro(S1, S2, Similarity) :-
-		jaro(_Representation_, S1, S2, Similarity).
+	jaro(String1, String2, Similarity) :-
+		jaro(_Representation_, String1, String2, Similarity).
 
-	jaro(atom, S1, S2, Similarity) :-
-		atom_codes(S1, Cs1),
-		atom_codes(S2, Cs2),
-		jaro(codes, Cs1, Cs2, Similarity).
-	jaro(chars, S1, S2, Similarity) :-
-		jaro(codes, S1, S2, Similarity).
-	jaro(codes, Cs1, Cs2, Similarity) :-
-		length(Cs1, Len1),
-		length(Cs2, Len2),
+	jaro(atom, String1, String2, Similarity) :-
+		atom_codes(String1, Codes1),
+		atom_codes(String2, Codes2),
+		jaro(codes, Codes1, Codes2, Similarity).
+	jaro(chars, String1, String2, Similarity) :-
+		jaro(codes, String1, String2, Similarity).
+	jaro(codes, Codes1, Codes2, Similarity) :-
+		length(Codes1, Len1),
+		length(Codes2, Len2),
 		(	Len1 =:= 0, Len2 =:= 0
 		->	Similarity = 1.0
 		;	(Len1 =:= 0 ; Len2 =:= 0)
@@ -414,8 +414,8 @@
 		;	MW is max(max(Len1, Len2) // 2 - 1, 0),
 			length(Used0, Len2),
 			maplist_eq(Used0, false),
-			jaro_match_s1(Cs1, 0, Cs2, Len2, MW, Used0, Matches1, UsedFinal),
-			jaro_match_s2(Cs2, 0, UsedFinal, Matches2),
+			jaro_match_s1(Codes1, 0, Codes2, Len2, MW, Used0, Matches1, UsedFinal),
+			jaro_match_s2(Codes2, 0, UsedFinal, Matches2),
 			length(Matches1, M),
 			(	M =:= 0
 			->	Similarity = 0.0
@@ -425,27 +425,27 @@
 		).
 
 	jaro_match_s1([], _, _, _, _, Used, [], Used).
-	jaro_match_s1([H1|T1], I, Cs2, Len2, MW, Used0, Matches, UsedOut) :-
+	jaro_match_s1([H1|T1], I, Codes2, Len2, MW, Used0, Matches, UsedOut) :-
 		Low  is max(0,        I - MW),
 		High is min(Len2 - 1, I + MW),
-		(	jaro_find_unused(H1, Cs2, Low, High, Used0, Pos)
+		(	jaro_find_unused(H1, Codes2, Low, High, Used0, Pos)
 		->	Matches = [H1|RestM],
 			set_nth0(Pos, Used0, true, Used1),
 			I1 is I + 1,
-			jaro_match_s1(T1, I1, Cs2, Len2, MW, Used1, RestM, UsedOut)
+			jaro_match_s1(T1, I1, Codes2, Len2, MW, Used1, RestM, UsedOut)
 		;	Matches = RestM,
 			I1 is I + 1,
-			jaro_match_s1(T1, I1, Cs2, Len2, MW, Used0, RestM, UsedOut)
+			jaro_match_s1(T1, I1, Codes2, Len2, MW, Used0, RestM, UsedOut)
 		).
 
-	jaro_find_unused(Char, Cs2, Low, High, Used, Pos) :-
+	jaro_find_unused(Code, Codes2, Low, High, Used, Pos) :-
 		Low =< High,
-		nth0(Low, Cs2,  C2),
+		nth0(Low, Codes2,  C2),
 		nth0(Low, Used, Flag),
-		(	C2 == Char, Flag == false
+		(	C2 == Code, Flag == false
 		->	Pos = Low
 		;	Low1 is Low + 1,
-			jaro_find_unused(Char, Cs2, Low1, High, Used, Pos)
+			jaro_find_unused(Code, Codes2, Low1, High, Used, Pos)
 		).
 
 	jaro_match_s2([], _, _, []).
@@ -471,45 +471,46 @@
 	%
 	% jw = jaro + min(commonPrefix, 4) * 0.1 * (1 - jaro)
 	% -----------------------------------------------------------------
-	jaro_winkler(S1, S2, Similarity) :-
-		jaro_winkler(_Representation_, S1, S2, Similarity).
+	jaro_winkler(String1, String2, Similarity) :-
+		jaro_winkler(_Representation_, String1, String2, Similarity).
 
-	jaro_winkler(atom, S1, S2, Similarity) :-
-		atom_codes(S1, Cs1),
-		atom_codes(S2, Cs2),
-		jaro_winkler(codes, Cs1, Cs2, Similarity).
-	jaro_winkler(chars, S1, S2, Similarity) :-
-		jaro_winkler(codes, S1, S2, Similarity).
-	jaro_winkler(codes, Cs1, Cs2, Similarity) :-
-		jaro(codes, Cs1, Cs2, JaroSim),
-		common_prefix_length(Cs1, Cs2, 0, PrefRaw),
+	jaro_winkler(atom, String1, String2, Similarity) :-
+		atom_codes(String1, Codes1),
+		atom_codes(String2, Codes2),
+		jaro_winkler(codes, Codes1, Codes2, Similarity).
+	jaro_winkler(chars, String1, String2, Similarity) :-
+		jaro_winkler(codes, String1, String2, Similarity).
+	jaro_winkler(codes, Codes1, Codes2, Similarity) :-
+		jaro(codes, Codes1, Codes2, JaroSim),
+		common_prefix_length(Codes1, Codes2, 0, PrefRaw),
 		Pref is min(PrefRaw, 4),
 		Similarity is JaroSim + Pref * 0.1 * (1.0 - JaroSim).
 
-	common_prefix_length([H|T1], [H|T2], Acc, Len) :-
-		Acc < 4, !,
-		Acc1 is Acc + 1,
-		common_prefix_length(T1, T2, Acc1, Len).
-	common_prefix_length(_, _, Acc, Acc).
+	common_prefix_length([Code| Codes1], [Code| Codes2], Length0, Length) :-
+		Length0 < 4,
+		!,
+		Length1 is Length0 + 1,
+		common_prefix_length(Codes1, Codes2, Length1, Length).
+	common_prefix_length(_, _, Length, Length).
 
 	% -----------------------------------------------------------------
 	% Edit similarity
 	%
 	% sim = 1 - (edit_distance / max(|s1|, |s2|))
 	% -----------------------------------------------------------------
-	edit_similarity(S1, S2, Similarity) :-
-		edit_similarity(_Representation_, S1, S2, Similarity).
+	edit_similarity(String1, String2, Similarity) :-
+		edit_similarity(_Representation_, String1, String2, Similarity).
 
-	edit_similarity(atom, S1, S2, Similarity) :-
-		atom_codes(S1, Cs1),
-		atom_codes(S2, Cs2),
-		edit_similarity(codes, Cs1, Cs2, Similarity).
-	edit_similarity(chars, S1, S2, Similarity) :-
-		edit_similarity(codes, S1, S2, Similarity).
-	edit_similarity(codes, S1, S2, Similarity) :-
-		levenshtein(codes, S1, S2, Distance),
-		length(S1, Length1),
-		length(S2, Length2),
+	edit_similarity(atom, String1, String2, Similarity) :-
+		atom_codes(String1, Codes1),
+		atom_codes(String2, Codes2),
+		edit_similarity(codes, Codes1, Codes2, Similarity).
+	edit_similarity(chars, String1, String2, Similarity) :-
+		edit_similarity(codes, String1, String2, Similarity).
+	edit_similarity(codes, String1, String2, Similarity) :-
+		levenshtein(codes, String1, String2, Distance),
+		length(String1, Length1),
+		length(String2, Length2),
 		MaxLength is max(Length1, Length2),
 		(	MaxLength =:= 0
 			% both empty
@@ -517,28 +518,28 @@
 		;	Similarity is 1.0 - (Distance / MaxLength)
 		).
 
-	edit_similarity(Algorithm, S1, S2, Similarity) :-
-		edit_similarity(_Representation_, Algorithm, S1, S2, Similarity).
+	edit_similarity(Algorithm, String1, String2, Similarity) :-
+		edit_similarity(_Representation_, Algorithm, String1, String2, Similarity).
 
-	edit_similarity(atom, Algorithm, S1, S2, Similarity) :-
-		atom_codes(S1, Cs1),
-		atom_codes(S2, Cs2),
-		edit_similarity(codes, Algorithm, Cs1, Cs2, Similarity).
-	edit_similarity(chars, Algorithm, S1, S2, Similarity) :-
-		edit_similarity(codes, Algorithm, S1, S2, Similarity).
-	edit_similarity(codes, Algorithm, S1, S2, Similarity) :-
+	edit_similarity(atom, Algorithm, String1, String2, Similarity) :-
+		atom_codes(String1, Codes1),
+		atom_codes(String2, Codes2),
+		edit_similarity(codes, Algorithm, Codes1, Codes2, Similarity).
+	edit_similarity(chars, Algorithm, String1, String2, Similarity) :-
+		edit_similarity(codes, Algorithm, String1, String2, Similarity).
+	edit_similarity(codes, Algorithm, String1, String2, Similarity) :-
 		(	Algorithm == levenshtein
-		->	levenshtein(codes, S1, S2, Distance)
+		->	levenshtein(codes, String1, String2, Distance)
 		;	Algorithm == damerau_levenshtein
-		->	damerau_levenshtein(codes, S1, S2, Distance)
+		->	damerau_levenshtein(codes, String1, String2, Distance)
 		;	Algorithm == hamming
-		->	hamming(codes, S1, S2, Distance)
+		->	hamming(codes, String1, String2, Distance)
 		;	Algorithm == longest_common_subsequence
-		->	longest_common_subsequence_length(codes, S1, S2, Distance)
+		->	longest_common_subsequence_length(codes, String1, String2, Distance)
 		;	fail
 		),
-		length(S1, Length1),
-		length(S2, Length2),
+		length(String1, Length1),
+		length(String2, Length2),
 		MaxLength is max(Length1, Length2),
 		(	MaxLength =:= 0
 		->	Similarity = 1.0
@@ -561,39 +562,39 @@
 	% Diag tracks prevRow[j] (the diagonal cell).
 	% The current-row left neighbor is the head of the accumulator.
 	% -----------------------------------------------------------------
-	longest_common_subsequence_length(S1, S2, Length) :-
-		longest_common_subsequence_length(_Representation_, S1, S2, Length).
+	longest_common_subsequence_length(String1, String2, Length) :-
+		longest_common_subsequence_length(_Representation_, String1, String2, Length).
 
-	longest_common_subsequence_length(atom, S1, S2, Length) :-
-		atom_codes(S1, Cs1),
-		atom_codes(S2, Cs2),
-		longest_common_subsequence_length(codes, Cs1, Cs2, Length).
-	longest_common_subsequence_length(chars, S1, S2, Length) :-
-		longest_common_subsequence_length(codes, S1, S2, Length).
-	longest_common_subsequence_length(codes, Cs1, Cs2, Length) :-
-		length(Cs2, Cols),
+	longest_common_subsequence_length(atom, String1, String2, Length) :-
+		atom_codes(String1, Codes1),
+		atom_codes(String2, Codes2),
+		longest_common_subsequence_length(codes, Codes1, Codes2, Length).
+	longest_common_subsequence_length(chars, String1, String2, Length) :-
+		longest_common_subsequence_length(codes, String1, String2, Length).
+	longest_common_subsequence_length(codes, Codes1, Codes2, Length) :-
+		length(Codes2, Cols),
 		Cols1 is Cols + 1,
 		length(Row0, Cols1),
 		maplist_eq(Row0, 0),
-		longest_common_subsequence_length_rows(Cs1, Cs2, Row0, RowFinal),
+		longest_common_subsequence_length_rows(Codes1, Codes2, Row0, RowFinal),
 		last(RowFinal, Length).
 
 	longest_common_subsequence_length_rows([], _, Row, Row).
-	longest_common_subsequence_length_rows([H1|T1], Cs2, RowPrev, RowFinal) :-
+	longest_common_subsequence_length_rows([H1| T1], Codes2, RowPrev, RowFinal) :-
 		% skip the leading 0 / row-index
-		RowPrev = [_|RowPrevTail],
-		longest_common_subsequence_length_row(Cs2, H1, RowPrevTail, 0, [0], RowCur),
-		longest_common_subsequence_length_rows(T1, Cs2, RowCur, RowFinal).
+		RowPrev = [_| RowPrevTail],
+		longest_common_subsequence_length_row(Codes2, H1, RowPrevTail, 0, [0], RowCur),
+		longest_common_subsequence_length_rows(T1, Codes2, RowCur, RowFinal).
 
 	longest_common_subsequence_length_row([], _, _, _, Acc, Row) :-
 		reverse(Acc, Row).
-	longest_common_subsequence_length_row([H2|T2], H1, [Above|AboveRest], Diag, Acc, Row) :-
+	longest_common_subsequence_length_row([H2| T2], H1, [Above| AboveRest], Diag, Acc, Row) :-
 		(	H1 == H2
 		->	Val is Diag + 1
-		;	Acc = [Left|_],
+		;	Acc = [Left| _],
 			Val is max(Above, Left)
 		),
-		longest_common_subsequence_length_row(T2, H1, AboveRest, Above, [Val|Acc], Row).
+		longest_common_subsequence_length_row(T2, H1, AboveRest, Above, [Val| Acc], Row).
 
 	% -----------------------------------------------------------------
 	% LCS (recover the full subsequence)
@@ -601,55 +602,55 @@
 	% Build the complete DP table as a list of rows (index 0 = all
 	% zeros), then backtrack from (|s1|, |s2|).
 	% -----------------------------------------------------------------
-	longest_common_subsequence(S1, S2, Subsequence) :-
-		longest_common_subsequence(_Representation_, S1, S2, Subsequence).
+	longest_common_subsequence(String1, String2, Subsequence) :-
+		longest_common_subsequence(_Representation_, String1, String2, Subsequence).
 
-	longest_common_subsequence(atom, S1, S2, Subsequence) :-
-		atom_codes(S1, Cs1),
-		atom_codes(S2, Cs2),
-		longest_common_subsequence(codes, Cs1, Cs2, Subsequence0),
+	longest_common_subsequence(atom, String1, String2, Subsequence) :-
+		atom_codes(String1, Codes1),
+		atom_codes(String2, Codes2),
+		longest_common_subsequence(codes, Codes1, Codes2, Subsequence0),
 		atom_codes(Subsequence, Subsequence0).
-	longest_common_subsequence(chars, S1, S2, Subsequence) :-
-		chars_to_codes(S1, Cs1),
-		chars_to_codes(S2, Cs2),
-		longest_common_subsequence(codes, Cs1, Cs2, Subsequence0),
+	longest_common_subsequence(chars, String1, String2, Subsequence) :-
+		chars_to_codes(String1, Codes1),
+		chars_to_codes(String2, Codes2),
+		longest_common_subsequence(codes, Codes1, Codes2, Subsequence0),
 		codes_to_chars(Subsequence0, Subsequence).
-	longest_common_subsequence(codes, Cs1, Cs2, Subsequence) :-
-		length(Cs1, Rows),
-		length(Cs2, Cols),
+	longest_common_subsequence(codes, Codes1, Codes2, Subsequence) :-
+		length(Codes1, Rows),
+		length(Codes2, Cols),
 		Cols1 is Cols + 1,
 		length(Row0, Cols1),
 		maplist_eq(Row0, 0),
-		lcs_build_table(Cs1, Cs2, Row0, TableRev),
+		lcs_build_table(Codes1, Codes2, Row0, TableRev),
 		reverse(TableRev, Table),
-		lcs_backtrack(Table, Cs1, Cs2, Rows, Cols, RevSeq),
+		lcs_backtrack(Table, Codes1, Codes2, Rows, Cols, RevSeq),
 		reverse(RevSeq, Subsequence).
 
 	lcs_build_table([], _, Row0, [Row0]).
-	lcs_build_table([H1|T1], Cs2, RowPrev, [RowCur|Rest]) :-
+	lcs_build_table([H1|T1], Codes2, RowPrev, [RowCur|Rest]) :-
 		RowPrev = [_|RowPrevTail],
-		longest_common_subsequence_length_row(Cs2, H1, RowPrevTail, 0, [0], RowCur),
-		lcs_build_table(T1, Cs2, RowCur, Rest).
+		longest_common_subsequence_length_row(Codes2, H1, RowPrevTail, 0, [0], RowCur),
+		lcs_build_table(T1, Codes2, RowCur, Rest).
 
 	lcs_backtrack(_, _, _, 0, _, []) :-
 		!.
 	lcs_backtrack(_, _, _, _, 0, []) :-
 		!.
-	lcs_backtrack(Table, Cs1, Cs2, I, J, Seq) :-
+	lcs_backtrack(Table, Codes1, Codes2, I, J, Seq) :-
 		I1 is I - 1,
 		J1 is J - 1,
-		nth0(I1, Cs1, CharI),
-		nth0(J1, Cs2, CharJ),
-		(	CharI == CharJ
-		->	Seq = [CharI|RestSeq],
-			lcs_backtrack(Table, Cs1, Cs2, I1, J1, RestSeq)
+		nth0(I1, Codes1, CodeI),
+		nth0(J1, Codes2, CodeJ),
+		(	CodeI == CodeJ
+		->	Seq = [CodeI|RestSeq],
+			lcs_backtrack(Table, Codes1, Codes2, I1, J1, RestSeq)
 		;	nth0(I1, Table, RowUp),
 			nth0(J,  RowUp,  ValUp),
 			nth0(I,  Table, RowCur),
 			nth0(J1, RowCur, ValLeft),
 			(	ValUp >= ValLeft
-			->	lcs_backtrack(Table, Cs1, Cs2, I1, J, Seq)
-			;	lcs_backtrack(Table, Cs1, Cs2, I, J1, Seq)
+			->	lcs_backtrack(Table, Codes1, Codes2, I1, J, Seq)
+			;	lcs_backtrack(Table, Codes1, Codes2, I, J1, Seq)
 			)
 		).
 
@@ -662,40 +663,40 @@
 	%   else                     cell = 0
 	%
 	% We track the running maximum and the row index where it occurred
-	% (EndI).  After scanning, the substring is Cs1[EndI-MaxLen .. EndI-1].
+	% (EndI).  After scanning, the substring is Codes1[EndI-MaxLen .. EndI-1].
 	% -----------------------------------------------------------------
-	longest_common_substring(S1, S2, Substring) :-
-		longest_common_substring(_Representation_, S1, S2, Substring).
+	longest_common_substring(String1, String2, Substring) :-
+		longest_common_substring(_Representation_, String1, String2, Substring).
 
-	longest_common_substring(atom, S1, S2, Substring) :-
-		atom_chars(S1, Cs1),
-		atom_chars(S2, Cs2),
-		longest_common_substring(chars, Cs1, Cs2, Substring0),
+	longest_common_substring(atom, String1, String2, Substring) :-
+		atom_chars(String1, Codes1),
+		atom_chars(String2, Codes2),
+		longest_common_substring(chars, Codes1, Codes2, Substring0),
 		atom_chars(Substring, Substring0).
-	longest_common_substring(chars, S1, S2, Substring) :-
-		chars_to_codes(S1, Cs1),
-		chars_to_codes(S2, Cs2),
-		longest_common_substring(codes, Cs1, Cs2, Substring0),
+	longest_common_substring(chars, String1, String2, Substring) :-
+		chars_to_codes(String1, Codes1),
+		chars_to_codes(String2, Codes2),
+		longest_common_substring(codes, Codes1, Codes2, Substring0),
 		codes_to_chars(Substring0, Substring).
-	longest_common_substring(codes, Cs1, Cs2, Substring) :-
-		length(Cs2, Cols),
+	longest_common_substring(codes, Codes1, Codes2, Substring) :-
+		length(Codes2, Cols),
 		Cols1 is Cols + 1,
 		length(Row0, Cols1),
 		maplist_eq(Row0, 0),
-		lcsub_rows(Cs1, Cs2, Row0, 0, 0, 0, MaxLen, EndI),
+		lcsub_rows(Codes1, Codes2, Row0, 0, 0, 0, MaxLen, EndI),
 		(	MaxLen =:= 0
 		->	Substring = ''
 		;	StartI is EndI - MaxLen,
-			lcsub_slice(Cs1, StartI, MaxLen, Substring)
+			lcsub_slice(Codes1, StartI, MaxLen, Substring)
 		).
 
 	lcsub_rows([], _, _, ML, EI, _, ML, EI).
-	lcsub_rows([H1|T1], Cs2, RowPrev, ML0, EI0, RowIdx, ML, EI) :-
+	lcsub_rows([H1|T1], Codes2, RowPrev, ML0, EI0, RowIdx, ML, EI) :-
 		RowPrev = [_|RowPrevTail],
-		lcsub_row(Cs2, H1, RowPrevTail, 0, ML0, EI0, RowIdx, ML1, EI1, RowCur0),
+		lcsub_row(Codes2, H1, RowPrevTail, 0, ML0, EI0, RowIdx, ML1, EI1, RowCur0),
 		RowCur = [0|RowCur0],
 		RowIdx1 is RowIdx + 1,
-		lcsub_rows(T1, Cs2, RowCur, ML1, EI1, RowIdx1, ML, EI).
+		lcsub_rows(T1, Codes2, RowCur, ML1, EI1, RowIdx1, ML, EI).
 
 	lcsub_row([], _, _, _, ML, EI, _, ML, EI, []).
 	lcsub_row([H2|T2], H1, [Above|AboveRest], Diag, ML0, EI0, RowIdx, ML, EI, [Val|RestRow]) :-
@@ -703,7 +704,7 @@
 		->	Val is Diag + 1
 		;	Val = 0
 		),
-		% 1-based end position in Cs1
+		% 1-based end position in Codes1
 		RowIdxEnd is RowIdx + 1,
 		(	Val > ML0
 		->	ML1 = Val, EI1 = RowIdxEnd
@@ -784,7 +785,7 @@
 	% -----------------------------------------------------------------
 	% Jaccard index
 	%
-	% |intersection(S1,S2)| / |union(S1,S2)|
+	% |intersection(String1,String2)| / |union(String1,String2)|
 	% Both sets are de-duplicated first (sort).
 	% Convention: two empty sets have index 1.0.
 	% -----------------------------------------------------------------
@@ -848,11 +849,10 @@
 		).
 
 	soundex_encode([], []).
-	soundex_encode([H|T], [C|Cs]) :-
-		upcase_char(H, HUp),
-		atom_chars(HUp, [HChar]),
-		soundex_char_code(HChar, C),
-		soundex_encode(T, Cs).
+	soundex_encode([Char| Chars], [Code| Codes]) :-
+		upcase_char(Char, UpcaseChar),
+		soundex_char_code(UpcaseChar, Code),
+		soundex_encode(Chars, Codes).
 
 	soundex_char_code(Char, Code) :-
 		(	soundex_char_code_(Char, Code)
@@ -881,18 +881,18 @@
 
 	soundex_dedup([], []).
 	soundex_dedup([X], [X]).
-	soundex_dedup([X,X|T], Result) :-
+	soundex_dedup([X,X| Tail], Result) :-
 		!,
-		soundex_dedup([X|T], Result).
-	soundex_dedup([X,Y|T], [X|Result]) :-
-		soundex_dedup([Y|T], Result).
+		soundex_dedup([X| Tail], Result).
+	soundex_dedup([X,Y| Tail], [X| Result]) :-
+		soundex_dedup([Y| Tail], Result).
 
 	exclude_zero([], []).
-	exclude_zero(['0'|T], R) :-
+	exclude_zero(['0'| Tail], Result) :-
 		!,
-		exclude_zero(T, R).
-	exclude_zero([H|T], [H|R]) :-
-		exclude_zero(T, R).
+		exclude_zero(Tail, Result).
+	exclude_zero([Head| Tail], [Head| Result]) :-
+		exclude_zero(Tail, Result).
 
 	soundex_pad(List, N, Padded) :-
 		length(List, Length),
@@ -935,24 +935,24 @@
 			metaphone_encode(Cs0, Code)
 		).
 
-	metaphone_drop_initial(['A','E'|T], T) :-
+	metaphone_drop_initial(['A','E'| Chars], Chars) :-
 		!.
-	metaphone_drop_initial(['G','N'|T], T) :-
+	metaphone_drop_initial(['G','N'| Chars], Chars) :-
 		!.
-	metaphone_drop_initial(['K','N'|T], T) :-
+	metaphone_drop_initial(['K','N'| Chars], Chars) :-
 		!.
-	metaphone_drop_initial(['P','N'|T], T) :-
+	metaphone_drop_initial(['P','N'| Chars], Chars) :-
 		!.
-	metaphone_drop_initial(['W','R'|T], T) :-
+	metaphone_drop_initial(['W','R'| Chars], Chars) :-
 		!.
-	metaphone_drop_initial(Cs, Cs).
+	metaphone_drop_initial(Chars, Chars).
 
 	metaphone_encode([], []).
-	metaphone_encode([H|T], Encoded) :-
+	metaphone_encode([H| T], Encoded) :-
 		metaphone_char(H, T, Code, Rest),
 		(	Code == []
 		->	metaphone_encode(Rest, Encoded)
-		;	Encoded = [Code|RestEnc],
+		;	Encoded = [Code| RestEnc],
 			metaphone_encode(Rest, RestEnc)
 		).
 
@@ -1050,13 +1050,13 @@
 	% -----------------------------------------------------------------
 	% Phonetic match convenience predicates
 	% -----------------------------------------------------------------
-	soundex_match(S1, S2) :-
-		soundex(S1, Code),
-		soundex(S2, Code).
+	soundex_match(String1, String2) :-
+		soundex(String1, Code),
+		soundex(String2, Code).
 
-	metaphone_match(S1, S2) :-
-		metaphone(S1, Key),
-		metaphone(S2, Key).
+	metaphone_match(String1, String2) :-
+		metaphone(String1, Key),
+		metaphone(String2, Key).
 
 	% =================================================================
 	% Private helpers
