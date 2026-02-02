@@ -74,15 +74,19 @@ the Apache Avro binary format.
 
 * ADDED: New `base32`, `base58`, and `base85` libraries.
 
-* ADDED: New `json_schema` library.
+* ADDED: New `json_schema` library for parsing JSON Schema files and validating
+JSON files after a schema.
 
-* ADDED: New `yaml` library.
+* ADDED: New `yaml` library for parsing and generating files in the YAML format.
 
 * ADDED: New `url` library with predicates for validating, parsing, generating,
 and normalizing URLs.
 
 * ADDED: New `process` compatibility library. Supports ECLiPSe, GNU Prolog,
 SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
+
+* ADDED: New `string_distance` library implementing common algorithms for
+computing the distance between two strings.
 
 * ADDED: New `strings` compatibility library. Based on ECLiPSe and SWI-Prolog
 work and libraries.
