@@ -276,7 +276,10 @@
 	lev_row([], _, _, _, _, Acc, Row) :-
 		reverse(Acc, Row).
 	lev_row([H2|T2], H1, [Above|AboveRest], Left, Diag, Acc, Row) :-
-		( H1 == H2 -> Cost = 0 ; Cost = 1 ),
+		(	H1 == H2
+		->	Cost = 0
+		;	Cost = 1
+		),
 		Sub is Diag  + Cost,
 		Ins is Above + 1,
 		Del is Left  + 1,
@@ -315,9 +318,9 @@
 	dl_rows([H1|T1], Cs2, RowPrev, RowPrevPrev, PrevChar, RowFinal) :-
 		RowPrev = [RowIdx0|RowVals],
 		RowIdx is RowIdx0 + 1,
-		(   RowPrevPrev == []
-		->  RowPrevPrevVals = []
-		;   RowPrevPrev = [_|RowPrevPrevVals]
+		(	RowPrevPrev == []
+		->	RowPrevPrevVals = []
+		;	RowPrevPrev = [_|RowPrevPrevVals]
 		),
 		dl_row(Cs2, H1, PrevChar, RowVals, RowPrevPrevVals, RowIdx, RowIdx0, 0, [], RowCur0),
 		RowCur = [RowIdx|RowCur0],
@@ -325,9 +328,11 @@
 
 	dl_row([], _, _, _, _, _, _, _, Acc, Row) :-
 		reverse(Acc, Row).
-	dl_row([H2|T2], H1, PrevChar, [Above|AboveRest], PrevPrevRow,
-		   Left, Diag, ColIdx, Acc, Row) :-
-		(   H1 == H2 -> Cost = 0 ; Cost = 1 ),
+	dl_row([H2|T2], H1, PrevChar, [Above|AboveRest], PrevPrevRow, Left, Diag, ColIdx, Acc, Row) :-
+		(	H1 == H2
+		->	Cost = 0
+		;	Cost = 1
+		),
 		Sub is Diag  + Cost,
 		Ins is Above + 1,
 		Del is Left  + 1,
@@ -337,18 +342,17 @@
 		% s2[j-1] is the element just before H2 — we detect this by
 		% checking H1 == the previous s2 char.  We approximate this
 		% with the standard OSA condition using PrevPrevRow.
-		(   PrevChar \== none,
+		(	PrevChar \== none,
 			ColIdx > 0,
 			PrevPrevRow \= [],
 			ColIdx1 is ColIdx - 1,
 			nth0(ColIdx1, PrevPrevRow, PPVal)
-		->  Trans is PPVal + 1,
+		->	Trans is PPVal + 1,
 			Val is min(Val0, Trans)
-		;   Val = Val0
+		;	Val = Val0
 		),
 		ColIdxNext is ColIdx + 1,
-		dl_row(T2, H1, PrevChar, AboveRest, PrevPrevRow,
-			   Val, Above, ColIdxNext, [Val|Acc], Row).
+		dl_row(T2, H1, PrevChar, AboveRest, PrevPrevRow, Val, Above, ColIdxNext, [Val|Acc], Row).
 
 	% -----------------------------------------------------------------
 	% Hamming
@@ -369,7 +373,10 @@
 
 	hamming_count([], [], Acc, Acc).
 	hamming_count([H1|T1], [H2|T2], Acc, Dist) :-
-		(   H1 == H2 -> Acc1 = Acc ; Acc1 is Acc + 1 ),
+		(	H1 == H2
+		->	Acc1 = Acc
+		;	Acc1 is Acc + 1
+		),
 		hamming_count(T1, T2, Acc1, Dist).
 
 	% =================================================================
@@ -400,19 +407,19 @@
 	jaro(codes, Cs1, Cs2, Similarity) :-
 		length(Cs1, Len1),
 		length(Cs2, Len2),
-		(   Len1 =:= 0, Len2 =:= 0
-		->  Similarity = 1.0
-		;   (Len1 =:= 0 ; Len2 =:= 0)
-		->  Similarity = 0.0
-		;   MW is max(max(Len1, Len2) // 2 - 1, 0),
+		(	Len1 =:= 0, Len2 =:= 0
+		->	Similarity = 1.0
+		;	(Len1 =:= 0 ; Len2 =:= 0)
+		->	Similarity = 0.0
+		;	MW is max(max(Len1, Len2) // 2 - 1, 0),
 			length(Used0, Len2),
 			maplist_eq(Used0, false),
 			jaro_match_s1(Cs1, 0, Cs2, Len2, MW, Used0, Matches1, UsedFinal),
 			jaro_match_s2(Cs2, 0, UsedFinal, Matches2),
 			length(Matches1, M),
-			(   M =:= 0
-			->  Similarity = 0.0
-			;   jaro_count_trans(Matches1, Matches2, T),
+			(	M =:= 0
+			->	Similarity = 0.0
+			;	jaro_count_trans(Matches1, Matches2, 0, T),
 				Similarity is (M / Len1 + M / Len2 + (M - T / 2) / M) / 3.0
 			)
 		).
@@ -421,12 +428,12 @@
 	jaro_match_s1([H1|T1], I, Cs2, Len2, MW, Used0, Matches, UsedOut) :-
 		Low  is max(0,        I - MW),
 		High is min(Len2 - 1, I + MW),
-		(   jaro_find_unused(H1, Cs2, Low, High, Used0, Pos)
-		->  Matches = [H1|RestM],
+		(	jaro_find_unused(H1, Cs2, Low, High, Used0, Pos)
+		->	Matches = [H1|RestM],
 			set_nth0(Pos, Used0, true, Used1),
 			I1 is I + 1,
 			jaro_match_s1(T1, I1, Cs2, Len2, MW, Used1, RestM, UsedOut)
-		;   Matches = RestM,
+		;	Matches = RestM,
 			I1 is I + 1,
 			jaro_match_s1(T1, I1, Cs2, Len2, MW, Used0, RestM, UsedOut)
 		).
@@ -435,26 +442,29 @@
 		Low =< High,
 		nth0(Low, Cs2,  C2),
 		nth0(Low, Used, Flag),
-		(   C2 == Char, Flag == false
-		->  Pos = Low
-		;   Low1 is Low + 1,
+		(	C2 == Char, Flag == false
+		->	Pos = Low
+		;	Low1 is Low + 1,
 			jaro_find_unused(Char, Cs2, Low1, High, Used, Pos)
 		).
 
 	jaro_match_s2([], _, _, []).
 	jaro_match_s2([H|T], I, Used, Matches) :-
 		nth0(I, Used, Flag),
-		(   Flag == true
-		->  Matches = [H|Rest]
-		;   Matches = Rest
+		(	Flag == true
+		->	Matches = [H|Rest]
+		;	Matches = Rest
 		),
 		I1 is I + 1,
 		jaro_match_s2(T, I1, Used, Rest).
 
-	jaro_count_trans([], [], 0).
-	jaro_count_trans([H1|T1], [H2|T2], T) :-
-		jaro_count_trans(T1, T2, T1Val),
-		(   H1 \== H2 -> T is T1Val + 1 ; T = T1Val ).
+	jaro_count_trans([], [], T, T).
+	jaro_count_trans([Head1| Tail1], [Head2| Tail2], T0, T) :-
+		(	Head1 \== Head2
+		->	T1 is T0 + 1
+		;	T1 = T0
+		),
+		jaro_count_trans(Tail1, Tail2, T1, T).
 
 	% -----------------------------------------------------------------
 	% Jaro-Winkler
@@ -501,10 +511,10 @@
 		length(S1, Length1),
 		length(S2, Length2),
 		MaxLength is max(Length1, Length2),
-		(   MaxLength =:= 0
+		(	MaxLength =:= 0
 			% both empty
-		->  Similarity = 1.0
-		;   Similarity is 1.0 - (Distance / MaxLength)
+		->	Similarity = 1.0
+		;	Similarity is 1.0 - (Distance / MaxLength)
 		).
 
 	edit_similarity(Algorithm, S1, S2, Similarity) :-
@@ -518,22 +528,22 @@
 		edit_similarity(codes, Algorithm, S1, S2, Similarity).
 	edit_similarity(codes, Algorithm, S1, S2, Similarity) :-
 		(	Algorithm == levenshtein
-		->  levenshtein(codes, S1, S2, Distance)
+		->	levenshtein(codes, S1, S2, Distance)
 		;	Algorithm == damerau_levenshtein
-		->  damerau_levenshtein(codes, S1, S2, Distance)
+		->	damerau_levenshtein(codes, S1, S2, Distance)
 		;	Algorithm == hamming
-		->  hamming(codes, S1, S2, Distance)
+		->	hamming(codes, S1, S2, Distance)
 		;	Algorithm == longest_common_subsequence
-		->  longest_common_subsequence_length(codes, S1, S2, Distance)
+		->	longest_common_subsequence_length(codes, S1, S2, Distance)
 		;	fail
 		),
 		length(S1, Length1),
 		length(S2, Length2),
 		MaxLength is max(Length1, Length2),
-		(   MaxLength =:= 0
-		->  Similarity = 1.0
+		(	MaxLength =:= 0
+		->	Similarity = 1.0
 			% both empty
-		;   Similarity is 1.0 - (Distance / MaxLength)
+		;	Similarity is 1.0 - (Distance / MaxLength)
 		).
 
 	% =================================================================
@@ -578,9 +588,9 @@
 	longest_common_subsequence_length_row([], _, _, _, Acc, Row) :-
 		reverse(Acc, Row).
 	longest_common_subsequence_length_row([H2|T2], H1, [Above|AboveRest], Diag, Acc, Row) :-
-		(   H1 == H2
-		->  Val is Diag + 1
-		;   Acc = [Left|_],
+		(	H1 == H2
+		->	Val is Diag + 1
+		;	Acc = [Left|_],
 			Val is max(Above, Left)
 		),
 		longest_common_subsequence_length_row(T2, H1, AboveRest, Above, [Val|Acc], Row).
@@ -630,16 +640,16 @@
 		J1 is J - 1,
 		nth0(I1, Cs1, CharI),
 		nth0(J1, Cs2, CharJ),
-		(   CharI == CharJ
-		->  Seq = [CharI|RestSeq],
+		(	CharI == CharJ
+		->	Seq = [CharI|RestSeq],
 			lcs_backtrack(Table, Cs1, Cs2, I1, J1, RestSeq)
-		;   nth0(I1, Table, RowUp),
+		;	nth0(I1, Table, RowUp),
 			nth0(J,  RowUp,  ValUp),
 			nth0(I,  Table, RowCur),
 			nth0(J1, RowCur, ValLeft),
-			(   ValUp >= ValLeft
-			->  lcs_backtrack(Table, Cs1, Cs2, I1, J, Seq)
-			;   lcs_backtrack(Table, Cs1, Cs2, I, J1, Seq)
+			(	ValUp >= ValLeft
+			->	lcs_backtrack(Table, Cs1, Cs2, I1, J, Seq)
+			;	lcs_backtrack(Table, Cs1, Cs2, I, J1, Seq)
 			)
 		).
 
@@ -673,9 +683,9 @@
 		length(Row0, Cols1),
 		maplist_eq(Row0, 0),
 		lcsub_rows(Cs1, Cs2, Row0, 0, 0, 0, MaxLen, EndI),
-		(   MaxLen =:= 0
-		->  Substring = ''
-		;   StartI is EndI - MaxLen,
+		(	MaxLen =:= 0
+		->	Substring = ''
+		;	StartI is EndI - MaxLen,
 			lcsub_slice(Cs1, StartI, MaxLen, Substring)
 		).
 
@@ -689,15 +699,15 @@
 
 	lcsub_row([], _, _, _, ML, EI, _, ML, EI, []).
 	lcsub_row([H2|T2], H1, [Above|AboveRest], Diag, ML0, EI0, RowIdx, ML, EI, [Val|RestRow]) :-
-		(   H1 == H2
-		->  Val is Diag + 1
-		;   Val = 0
+		(	H1 == H2
+		->	Val is Diag + 1
+		;	Val = 0
 		),
 		% 1-based end position in Cs1
 		RowIdxEnd is RowIdx + 1,
-		(   Val > ML0
-		->  ML1 = Val, EI1 = RowIdxEnd
-		;   ML1 = ML0, EI1 = EI0
+		(	Val > ML0
+		->	ML1 = Val, EI1 = RowIdxEnd
+		;	ML1 = ML0, EI1 = EI0
 		),
 		lcsub_row(T2, H1, AboveRest, Above, ML1, EI1, RowIdx, ML, EI, RestRow).
 
@@ -734,41 +744,42 @@
 		cosine_similarity(_Representation_, Tokens1, Tokens2, Similarity).
 
 	cosine_similarity(_, Tokens1, Tokens2, Similarity) :-
-		sort(Tokens1, S1),
-		sort(Tokens2, S2),
-		union(S1, S2, AllTokens),
-		dot_product(AllTokens, Tokens1, Tokens2, Dot),
-		magnitude(AllTokens, Tokens1, Mag1),
-		magnitude(AllTokens, Tokens2, Mag2),
-		Denom is Mag1 * Mag2,
-		(   Denom =:= 0
+		sort(Tokens1, SortedTokens1),
+		sort(Tokens2, SortedTokens2),
+		union(SortedTokens1, SortedTokens2, AllTokens),
+		dot_product(AllTokens, Tokens1, Tokens2, 0.0, DotProduct),
+		magnitude(AllTokens, Tokens1, Magnitude1),
+		magnitude(AllTokens, Tokens2, Magnitude2),
+		Denominator is Magnitude1 * Magnitude2,
+		(   Denominator =:= 0
 		->  Similarity = 0.0
-		;   Similarity is Dot / Denom
+		;   Similarity is DotProduct / Denominator
 		).
 
-	count_token(_, [], 0).
-	count_token(Token, [Token|T], N) :-
+	dot_product([], _, _, DotProduct, DotProduct).
+	dot_product([Token| Tokens], Tokens1, Tokens2, DotProduct0, DotProduct) :-
+		count_token(Tokens1, Token, 0, Count1),
+		count_token(Tokens2, Token, 0, Count2),
+		DotProduct1 is DotProduct0 + (Count1 * Count2),
+		dot_product(Tokens, Tokens1, Tokens2, DotProduct1, DotProduct).
+
+	count_token([], _, N, N).
+	count_token([Token| Tokens], Token, N0, N) :-
 		!,
-		count_token(Token, T, N1), N is N1 + 1.
-	count_token(Token, [_|T], N) :-
-		count_token(Token, T, N).
+		N1 is N0 + 1,
+		count_token(Tokens, Token, N1, N).
+	count_token([_| Tokens], Token, N0, N) :-
+		count_token(Tokens, Token, N0, N).
 
-	dot_product([], _, _, 0.0).
-	dot_product([H|T], T1, T2, Dot) :-
-		count_token(H, T1, C1),
-		count_token(H, T2, C2),
-		dot_product(T, T1, T2, RestDot),
-		Dot is RestDot + (C1 * C2).
+	magnitude(AllTokens, Tokens, Magnitude) :-
+		mag_sq(AllTokens, Tokens, 0.0, SquareSum),
+		Magnitude is sqrt(SquareSum).
 
-	magnitude(AllTokens, Tokens, Mag) :-
-		mag_sq(AllTokens, Tokens, SqSum),
-		Mag is sqrt(SqSum).
-
-	mag_sq([], _, 0.0).
-	mag_sq([H|T], Tokens, Sq) :-
-		count_token(H, Tokens, C),
-		mag_sq(T, Tokens, RestSq),
-		Sq is RestSq + (C * C).
+	mag_sq([], _, SquareSum, SquareSum).
+	mag_sq([AllToken| AllTokens], Tokens, SquareSum0, SquareSum) :-
+		count_token(Tokens, AllToken, 0, Count),
+		SquareSum1 is SquareSum0 + (Count * Count),
+		mag_sq(AllTokens, Tokens, SquareSum1, SquareSum).
 
 	% -----------------------------------------------------------------
 	% Jaccard index
@@ -781,15 +792,15 @@
 		jaccard_index(_Representation_, Tokens1, Tokens2, Index).
 
 	jaccard_index(_, Tokens1, Tokens2, Index) :-
-		sort(Tokens1, S1),
-		sort(Tokens2, S2),
-		intersection(S1, S2, Inter),
-		union(S1, S2, Union),
-		length(Inter, ILen),
-		length(Union, ULen),
-		(   ULen =:= 0
-		->  Index = 1.0
-		;   Index is ILen / ULen
+		sort(Tokens1, SortedTokens1),
+		sort(Tokens2, SortedTokens2),
+		intersection(SortedTokens1, SortedTokens2, Intersection),
+		union(SortedTokens1, SortedTokens2, Union),
+		length(Intersection, IntersectionLength),
+		length(Union, UnionLength),
+		(	UnionLength =:= 0
+		->	Index = 1.0
+		;	Index is IntersectionLength / UnionLength
 		).
 
 	% =================================================================
@@ -821,9 +832,9 @@
 		soundex(chars, Chars, Code0),
 		chars_to_codes(Code0, Code).
 	soundex(chars, String, Code) :-
-		(   String == []
-		->  Code = ''
-		;   String = [First|Rest],
+		(	String == []
+		->	Code = ''
+		;	String = [First|Rest],
 			upcase_char(First, FirstUp),
 			atom_chars(FirstUp, [FirstChar]),
 			soundex_char_code(FirstChar, FirstCode),
@@ -845,8 +856,8 @@
 
 	soundex_char_code(Char, Code) :-
 		(	soundex_char_code_(Char, Code)
-		->  true
-		;   Code = '0'
+		->	true
+		;	Code = '0'
 		).
 
 	soundex_char_code_('B', '1').
@@ -884,11 +895,11 @@
 		exclude_zero(T, R).
 
 	soundex_pad(List, N, Padded) :-
-		length(List, Len),
-		(   Len >= N
+		length(List, Length),
+		(   Length >= N
 		->  length(Padded, N),
 			append(Padded, _, List)
-		;   Rem is N - Len,
+		;   Rem is N - Length,
 			length(Zeros, Rem),
 			maplist_eq(Zeros, '0'),
 			append(List, Zeros, Padded)
@@ -917,9 +928,9 @@
 		metaphone(chars, Chars, Code0),
 		chars_to_codes(Code0, Code).
 	metaphone(chars, String, Code) :-
-		(   String == []
-		->  Code = ''
-		;   upcase_chars(String, Upper),
+		(	String == []
+		->	Code = ''
+		;	upcase_chars(String, Upper),
 			metaphone_drop_initial(Upper, Cs0),
 			metaphone_encode(Cs0, Code)
 		).
@@ -939,9 +950,9 @@
 	metaphone_encode([], []).
 	metaphone_encode([H|T], Encoded) :-
 		metaphone_char(H, T, Code, Rest),
-		(   Code == []
-		->  metaphone_encode(Rest, Encoded)
-		;   Encoded = [Code|RestEnc],
+		(	Code == []
+		->	metaphone_encode(Rest, Encoded)
+		;	Encoded = [Code|RestEnc],
 			metaphone_encode(Rest, RestEnc)
 		).
 
@@ -1059,8 +1070,8 @@
 		numlist(Next, High, T).
 
 	maplist_eq([], _).
-	maplist_eq([V|T], V) :-
-		maplist_eq(T, V).
+	maplist_eq([Value| Tail], Value) :-
+		maplist_eq(Tail, Value).
 
 	upcase_char(Lower, Upper) :-
 		upcase_atom(Lower, Upper).
@@ -1083,13 +1094,13 @@
 		),
 		upcase_codes(Codes,UpCaseCodes).
 
-	% set_nth0(+Pos, +ListIn, +Value, -ListOut)
-	set_nth0(0, [_|T], Val, [Val|T]) :-
+	% set_nth0(+Position, +ListIn, +Value, -ListOut)
+	set_nth0(0, [_| Tail], Value, [Value| Tail]) :-
 		!.
-	set_nth0(N, [H|T], Val, [H|T1]) :-
+	set_nth0(N, [H| Tail], Value, [H| Tail1]) :-
 		N > 0,
 		N1 is N - 1,
-		set_nth0(N1, T, Val, T1).
+		set_nth0(N1, Tail, Value, Tail1).
 
 	chars_to_codes([], []).
 	chars_to_codes([Char| Chars], [Code| Codes]) :-
