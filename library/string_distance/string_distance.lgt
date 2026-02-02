@@ -229,7 +229,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, last/2, length/2, member/2, nth0/3, reverse/2
+		append/3, drop/3, last/2, length/2, member/2, nth0/3, reverse/2, take/3
 	]).
 
 	:- uses(set, [
@@ -405,37 +405,37 @@
 	jaro(chars, String1, String2, Similarity) :-
 		jaro(codes, String1, String2, Similarity).
 	jaro(codes, Codes1, Codes2, Similarity) :-
-		length(Codes1, Len1),
-		length(Codes2, Len2),
-		(	Len1 =:= 0, Len2 =:= 0
+		length(Codes1, Length1),
+		length(Codes2, Length2),
+		(	Length1 =:= 0, Length2 =:= 0
 		->	Similarity = 1.0
-		;	(Len1 =:= 0 ; Len2 =:= 0)
+		;	(Length1 =:= 0 ; Length2 =:= 0)
 		->	Similarity = 0.0
-		;	MW is max(max(Len1, Len2) // 2 - 1, 0),
-			length(Used0, Len2),
+		;	MW is max(max(Length1, Length2) // 2 - 1, 0),
+			length(Used0, Length2),
 			maplist_eq(Used0, false),
-			jaro_match_s1(Codes1, 0, Codes2, Len2, MW, Used0, Matches1, UsedFinal),
+			jaro_match_s1(Codes1, 0, Codes2, Length2, MW, Used0, Matches1, UsedFinal),
 			jaro_match_s2(Codes2, 0, UsedFinal, Matches2),
 			length(Matches1, M),
 			(	M =:= 0
 			->	Similarity = 0.0
 			;	jaro_count_trans(Matches1, Matches2, 0, T),
-				Similarity is (M / Len1 + M / Len2 + (M - T / 2) / M) / 3.0
+				Similarity is (M / Length1 + M / Length2 + (M - T / 2) / M) / 3.0
 			)
 		).
 
 	jaro_match_s1([], _, _, _, _, Used, [], Used).
-	jaro_match_s1([H1|T1], I, Codes2, Len2, MW, Used0, Matches, UsedOut) :-
+	jaro_match_s1([H1|T1], I, Codes2, Length2, MW, Used0, Matches, UsedOut) :-
 		Low  is max(0,        I - MW),
-		High is min(Len2 - 1, I + MW),
+		High is min(Length2 - 1, I + MW),
 		(	jaro_find_unused(H1, Codes2, Low, High, Used0, Pos)
-		->	Matches = [H1|RestM],
+		->	Matches = [H1| RestM],
 			set_nth0(Pos, Used0, true, Used1),
 			I1 is I + 1,
-			jaro_match_s1(T1, I1, Codes2, Len2, MW, Used1, RestM, UsedOut)
+			jaro_match_s1(T1, I1, Codes2, Length2, MW, Used1, RestM, UsedOut)
 		;	Matches = RestM,
 			I1 is I + 1,
-			jaro_match_s1(T1, I1, Codes2, Len2, MW, Used0, RestM, UsedOut)
+			jaro_match_s1(T1, I1, Codes2, Length2, MW, Used0, RestM, UsedOut)
 		).
 
 	jaro_find_unused(Code, Codes2, Low, High, Used, Pos) :-
@@ -712,21 +712,9 @@
 		),
 		lcsub_row(T2, H1, AboveRest, Above, ML1, EI1, RowIdx, ML, EI, RestRow).
 
-	lcsub_slice(List, Start, Len, Slice) :-
-		lcsub_drop(List, Start, Rest),
-		lcsub_take(Rest, Len, Slice).
-
-	lcsub_drop(List, 0, List) :-
-		!.
-	lcsub_drop([_|T], N, Rest) :-
-		N > 0, N1 is N - 1,
-		lcsub_drop(T, N1, Rest).
-
-	lcsub_take(_, 0, []) :-
-		!.
-	lcsub_take([H|T], N, [H|Rest]) :-
-		N > 0, N1 is N - 1,
-		lcsub_take(T, N1, Rest).
+	lcsub_slice(List, Start, Length, Slice) :-
+		drop(Start, List, Rest),
+		take(Length, Rest, Slice).
 
 	% =================================================================
 	% Token-based similarities
@@ -948,8 +936,8 @@
 	metaphone_drop_initial(Chars, Chars).
 
 	metaphone_encode([], []).
-	metaphone_encode([H| T], Encoded) :-
-		metaphone_char(H, T, Code, Rest),
+	metaphone_encode([Char| Chars], Encoded) :-
+		metaphone_char(Char, Chars, Code, Rest),
 		(	Code == []
 		->	metaphone_encode(Rest, Encoded)
 		;	Encoded = [Code| RestEnc],
@@ -957,95 +945,98 @@
 		).
 
 	% Vowels — dropped.
-	metaphone_char('A', T, [], T).
-	metaphone_char('E', T, [], T).
-	metaphone_char('I', T, [], T).
-	metaphone_char('O', T, [], T).
-	metaphone_char('U', T, [], T).
+	metaphone_char('A', Chars, [], Chars).
+	metaphone_char('E', Chars, [], Chars).
+	metaphone_char('I', Chars, [], Chars).
+	metaphone_char('O', Chars, [], Chars).
+	metaphone_char('U', Chars, [], Chars).
 	% B
-	metaphone_char('B', T, 'B', T).
+	metaphone_char('B', Chars, 'B', Chars).
 	% C — S before E/I/Y; K otherwise.
-	metaphone_char('C', ['E'|T], 'S', T) :-
+	metaphone_char('C', ['E'| Chars], 'S', Chars) :-
 		!.
-	metaphone_char('C', ['I'|T], 'S', T) :-
+	metaphone_char('C', ['I'| Chars], 'S', Chars) :-
 		!.
-	metaphone_char('C', ['Y'|T], 'S', T) :-
+	metaphone_char('C', ['Y'| Chars], 'S', Chars) :-
 		!.
-	metaphone_char('C', T,       'K', T).
+	metaphone_char('C', Chars,        'K', Chars).
 	% D — J before G+vowel-ish; T otherwise.
-	metaphone_char('D', ['G','E'|T], 'J', T) :-
+	metaphone_char('D', ['G','E'| Chars], 'J', Chars) :-
 		!.
-	metaphone_char('D', ['G','I'|T], 'J', T) :-
+	metaphone_char('D', ['G','I'| Chars], 'J', Chars) :-
 		!.
-	metaphone_char('D', ['G','Y'|T], 'J', T) :-
+	metaphone_char('D', ['G','Y'| Chars], 'J', Chars) :-
 		!.
-	metaphone_char('D', T,           'T', T).
+	metaphone_char('D', Chars,            'T', Chars).
 	% F
-	metaphone_char('F', T, 'F', T).
+	metaphone_char('F', Chars, 'F', Chars).
 	% G — silent before H; J before E/I/Y; K otherwise.
-	metaphone_char('G', ['H'|T], [], T) :-
+	metaphone_char('G', ['H'| Chars], [], Chars) :-
 		!.
-	metaphone_char('G', ['E'|T], 'J', T) :-
+	metaphone_char('G', ['E'| Chars], 'J', Chars) :-
 		!.
-	metaphone_char('G', ['I'|T], 'J', T) :-
+	metaphone_char('G', ['I'| Chars], 'J', Chars) :-
 		!.
-	metaphone_char('G', ['Y'|T], 'J', T) :-
+	metaphone_char('G', ['Y'| Chars], 'J', Chars) :-
 		!.
-	metaphone_char('G', T,       'K', T).
+	metaphone_char('G', Chars,        'K', Chars).
 	% H — kept only before a vowel.
-	metaphone_char('H', [V|T], 'H', T) :-
-		member(V, ['A','E','I','O','U']), !.
-	metaphone_char('H', T, [], T).
+	metaphone_char('H', [Char| Chars], 'H', Chars) :-
+		member(Char, ['A','E','I','O','U']),
+		!.
+	metaphone_char('H', Chars, [], Chars).
 	% J
-	metaphone_char('J', T, 'J', T).
+	metaphone_char('J', Chars, 'J', Chars).
 	% K
-	metaphone_char('K', T, 'K', T).
+	metaphone_char('K', Chars, 'K', Chars).
 	% L
-	metaphone_char('L', T, 'L', T).
+	metaphone_char('L', Chars, 'L', Chars).
 	% M
-	metaphone_char('M', T, 'M', T).
+	metaphone_char('M', Chars, 'M', Chars).
 	% N
-	metaphone_char('N', T, 'N', T).
+	metaphone_char('N', Chars, 'N', Chars).
 	% P — F before H; P otherwise.
-	metaphone_char('P', ['H'|T], 'F', T) :-
+	metaphone_char('P', ['H'| Chars], 'F', Chars) :-
 		!.
-	metaphone_char('P', T,       'P', T).
+	metaphone_char('P', Chars,       'P', Chars).
 	% Q → K
-	metaphone_char('Q', T, 'K', T).
+	metaphone_char('Q', Chars, 'K', Chars).
 	% R
-	metaphone_char('R', T, 'R', T).
+	metaphone_char('R', Chars, 'R', Chars).
 	% S — X (sh) before H / IA / IO; S otherwise.
-	metaphone_char('S', ['H'|T],     'X', T) :-
+	metaphone_char('S', ['H'| Chars],     'X', Chars) :-
 		!.
-	metaphone_char('S', ['I','A'|T], 'X', T) :-
+	metaphone_char('S', ['I','A'| Chars], 'X', Chars) :-
 		!.
-	metaphone_char('S', ['I','O'|T], 'X', T) :-
+	metaphone_char('S', ['I','O'| Chars], 'X', Chars) :-
 		!.
-	metaphone_char('S', T,           'S', T).
-	% T — 0 (theta) before H; X before IA/IO; T otherwise.
-	metaphone_char('T', ['H'|T],     '0', T) :-
+	metaphone_char('S', Chars,            'S', Chars).
+	% Chars — 0 (theta) before H; X before IA/IO; T otherwise.
+	metaphone_char('Chars', ['H'| Chars],     '0', Chars) :-
 		!.
-	metaphone_char('T', ['I','A'|T], 'X', T) :-
+	metaphone_char('T', ['I','A'| Chars], 'X', Chars) :-
 		!.
-	metaphone_char('T', ['I','O'|T], 'X', T) :-
+	metaphone_char('T', ['I','O'| Chars], 'X', Chars) :-
 		!.
-	metaphone_char('T', T,           'T', T).
+	metaphone_char('T', Chars,            'T', Chars).
 	% V → F
-	metaphone_char('V', T, 'F', T).
+	metaphone_char('V', Chars, 'F', Chars).
 	% W — kept only before a vowel.
-	metaphone_char('W', [V|T], 'W', T) :-
-		member(V, ['A','E','I','O','U']), !.
-	metaphone_char('W', T, [], T).
+	metaphone_char('W', [Char| Chars], 'W', Chars) :-
+		member(Char, ['A','E','I','O','U']),
+		!.
+	metaphone_char('W', Chars, [], Chars).
 	% X → K, push S back onto input.
-	metaphone_char('X', T, 'K', ['S'|T]).
+	metaphone_char('X', Chars, 'K', ['S'| Chars]).
 	% Y — kept only before a vowel.
-	metaphone_char('Y', [V|T], 'Y', T) :-
-		member(V, ['A','E','I','O','U']), !.
-	metaphone_char('Y', T, [], T).
+	metaphone_char('Y', [Char| Chars], 'Y', Chars) :-
+		member(Char, ['A','E','I','O','U']),
+		!.
+	metaphone_char('Y', Chars, [], Chars).
 	% Z → S
-	metaphone_char('Z', T, 'S', T).
+	metaphone_char('Z', Chars, 'S', Chars).
 	% Fallback
-	metaphone_char(_, T, [], T).
+	metaphone_char(_, Chars, [], Chars).
 
 	% -----------------------------------------------------------------
 	% Phonetic match convenience predicates
