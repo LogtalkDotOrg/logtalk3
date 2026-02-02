@@ -840,6 +840,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`natural <natural/0::binomial/3>`
 * :ref:`sampling_protocol <sampling_protocol/0::binomial/3>`
 
 ``bit//1``
@@ -3117,6 +3118,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`proto_hierarchyp <proto_hierarchyp/0::extensions/1>`
+
+``factorial/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`natural <natural/0::factorial/2>`
 
 ``failed_test_reason//1``
 -------------------------

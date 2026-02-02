@@ -15,7 +15,7 @@ Natural numbers data type predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
-| **Date:** 2025-01-16
+| **Date:** 2026-02-02
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -37,7 +37,43 @@ Natural numbers data type predicates.
 Public predicates
 -----------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: factorial/2
+.. _natural/0::factorial/2:
+
+``factorial/2``
+^^^^^^^^^^^^^^^
+
+Computes the factorial of a non-negative integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``factorial(N,Factorial)``
+| **Mode and number of proofs:**
+|    ``factorial(+non_negative_integer,-non_negative_integer)`` - ``one``
+
+
+------------
+
+.. index:: binomial/3
+.. _natural/0::binomial/3:
+
+``binomial/3``
+^^^^^^^^^^^^^^
+
+Computes the binomial coefficient. ``N`` must be greater than or equal to ``K`` (fails otherwise).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``binomial(N,K,Binomial)``
+| **Mode and number of proofs:**
+|    ``binomial(+non_negative_integer,+non_negative_integer,-non_negative_integer)`` - ``zero_or_one``
+
+
+------------
 
 Protected predicates
 --------------------

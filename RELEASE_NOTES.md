@@ -95,6 +95,9 @@ work and libraries.
 libraries. These types support representing text using atoms, character 
 lists, or character code lists.
 
+* ADDED: New `natural` library object `factorial/2` and `binomial/3`
+predicates.
+
 * ADDED: Support for the SplitMix64, Xoshiro128++, Xoshiro128**, Xoshiro256++,
 and Xoshiro256** algorithms to the `random` library.
 

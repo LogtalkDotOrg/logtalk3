@@ -25,9 +25,56 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2025-01-16,
+		date is 2026-02-02,
 		comment is 'Natural numbers data type predicates.'
 	]).
+
+	:- public(factorial/2).
+	:- mode(factorial(+non_negative_integer, -non_negative_integer), one).
+	:- info(factorial/2, [
+		comment is 'Computes the factorial of a non-negative integer.',
+		argnames is ['N', 'Factorial']
+	]).
+
+	:- public(binomial/3).
+	:- mode(binomial(+non_negative_integer, +non_negative_integer, -non_negative_integer), zero_or_one).
+	:- info(binomial/3, [
+		comment is 'Computes the binomial coefficient. ``N`` must be greater than or equal to ``K`` (fails otherwise).',
+		argnames is ['N', 'K', 'Binomial']
+	]).
+
+	factorial(N, Factorial) :-
+		integer(N),
+		N >= 0,
+		factorial(N, 1, Factorial).
+
+	factorial(0, Factorial, Factorial) :-
+		!.
+	factorial(N, Factorial0, Factorial) :-
+		N1 is N - 1,
+		Factorial1 is Factorial0 * N,
+		factorial(N1, Factorial1, Factorial).
+
+	binomial(N, K, Binomial) :-
+		K =< N,
+		K >= 0,
+		min_k(N, K, K_opt),
+		binomial(K_opt, 0, N, 1, Binomial).
+
+	% take advantage of the fact that C(n,k) = C(n,n-k)
+	min_k(N, K, K_opt) :-
+    	(	K > N - K
+		->	K_opt is N - K
+		;	K_opt = K
+		).
+
+	binomial(K, K, _, Binomial, Binomial) :-
+		!.
+	binomial(K, K0, N, Binomial0, Binomial) :-
+		K0 < K,
+		K1 is K0 + 1,
+		Binomial1 is Binomial0 * (N - K0) // K1,
+		binomial(K, K1, N, Binomial1, Binomial).
 
 	between(Lower, Upper, Integer) :-
 		integer(Lower),

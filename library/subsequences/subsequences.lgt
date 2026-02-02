@@ -25,8 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-01-30,
+		date is 2026-02-02,
 		comment is 'Implementation of subsequence operations over lists.'
+	]).
+
+	:- uses(natural, [
+		binomial/3, factorial/2
 	]).
 
 	:- uses(list, [
@@ -647,7 +651,10 @@
 
 	count_combinations(K, List, Count) :-
 		length(List, N),
-		binomial(N, K, Count).
+		(	N >= K, K >= 0 ->
+			binomial(N, K, Count)
+		;	Count = 0
+		).
 
 	count_permutations(List, Count) :-
 		length(List, N),
@@ -678,33 +685,5 @@
 	unmap_length([], []).
 	unmap_length([_-Head| Mapped], [Head| Tail]) :-
 		unmap_length(Mapped, Tail).
-
-	% Binomial coefficient: C(N, K) = N! / (K! * (N-K)!)
-	binomial(_, K, 0) :- K < 0, !.
-	binomial(N, K, 0) :- K > N, !.
-	binomial(N, 0, 1) :- N >= 0, !.
-	binomial(N, N, 1) :- N >= 0, !.
-	binomial(N, K, Result) :-
-		N > 0,
-		K > 0,
-		K < N,
-		K1 is K - 1,
-		N1 is N - 1,
-		binomial(N1, K1, R1),
-		binomial(N1, K, R2),
-		Result is R1 + R2.
-
-	% Factorial
-	factorial(N, F) :-
-		integer(N),
-		N >= 0,
-		factorial(N, 1, F).
-
-	factorial(0, F, F) :-
-		!.
-	factorial(N, F0, F) :-
-		N1 is N - 1,
-		F1 is F0 * N,
-		factorial(N1, F1, F).
 
 :- end_object.
