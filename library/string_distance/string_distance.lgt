@@ -261,21 +261,21 @@
 		levenshtein(codes, String1, String2, Distance).
 	levenshtein(codes, String1, String2, Distance) :-
 		length(String2, Cols),
-		numlist(0, Cols, Row0),
-		lev_rows(String1, String2, Row0, RowFinal),
-		last(RowFinal, Distance).
+		sequence(0, Cols, Row0),
+		lev_rows(String1, String2, Row0, Row),
+		last(Row, Distance).
 
 	lev_rows([], _, Row, Row).
-	lev_rows([H1|T1], Codes2, RowPrev, RowFinal) :-
-		RowPrev = [RowIdx0|RowVals],
+	lev_rows([Code1| Codes1], Codes2, Row0, Row) :-
+		Row0 = [RowIdx0| RowVals],
 		RowIdx is RowIdx0 + 1,
-		lev_row(Codes2, H1, RowVals, RowIdx, RowIdx0, [], RowCur0),
-		RowCur = [RowIdx|RowCur0],
-		lev_rows(T1, Codes2, RowCur, RowFinal).
+		lev_row(Codes2, Code1, RowVals, RowIdx, RowIdx0, [], RowCur0),
+		RowCur = [RowIdx| RowCur0],
+		lev_rows(Codes1, Codes2, RowCur, Row).
 
 	lev_row([], _, _, _, _, Acc, Row) :-
 		reverse(Acc, Row).
-	lev_row([H2|T2], H1, [Above|AboveRest], Left, Diag, Acc, Row) :-
+	lev_row([H2| T2], H1, [Above| AboveRest], Left, Diag, Acc, Row) :-
 		(	H1 == H2
 		->	Cost = 0
 		;	Cost = 1
@@ -284,7 +284,7 @@
 		Ins is Above + 1,
 		Del is Left  + 1,
 		Val is min(Sub, min(Ins, Del)),
-		lev_row(T2, H1, AboveRest, Val, Above, [Val|Acc], Row).
+		lev_row(T2, H1, AboveRest, Val, Above, [Val| Acc], Row).
 
 	% -----------------------------------------------------------------
 	% Damerau-Levenshtein — optimal string alignment (OSA) variant.
@@ -315,12 +315,12 @@
 		last(RowFinal, Distance).
 
 	dl_rows([], _, Row, _, _, Row).
-	dl_rows([H1|T1], Codes2, RowPrev, RowPrevPrev, PrevCode, RowFinal) :-
-		RowPrev = [RowIdx0|RowVals],
+	dl_rows([H1| T1], Codes2, RowPrev, RowPrevPrev, PrevCode, RowFinal) :-
+		RowPrev = [RowIdx0| RowVals],
 		RowIdx is RowIdx0 + 1,
 		(	RowPrevPrev == []
 		->	RowPrevPrevVals = []
-		;	RowPrevPrev = [_|RowPrevPrevVals]
+		;	RowPrevPrev = [_| RowPrevPrevVals]
 		),
 		dl_row(Codes2, H1, PrevCode, RowVals, RowPrevPrevVals, RowIdx, RowIdx0, 0, [], RowCur0),
 		RowCur = [RowIdx|RowCur0],
@@ -328,7 +328,7 @@
 
 	dl_row([], _, _, _, _, _, _, _, Acc, Row) :-
 		reverse(Acc, Row).
-	dl_row([H2|T2], H1, PrevCode, [Above|AboveRest], PrevPrevRow, Left, Diag, ColIdx, Acc, Row) :-
+	dl_row([H2| T2], H1, PrevCode, [Above| AboveRest], PrevPrevRow, Left, Diag, ColIdx, Acc, Row) :-
 		(	H1 == H2
 		->	Cost = 0
 		;	Cost = 1
@@ -352,7 +352,7 @@
 		;	Val = Val0
 		),
 		ColIdxNext is ColIdx + 1,
-		dl_row(T2, H1, PrevCode, AboveRest, PrevPrevRow, Val, Above, ColIdxNext, [Val|Acc], Row).
+		dl_row(T2, H1, PrevCode, AboveRest, PrevPrevRow, Val, Above, ColIdxNext, [Val| Acc], Row).
 
 	% -----------------------------------------------------------------
 	% Hamming
@@ -425,7 +425,7 @@
 		).
 
 	jaro_match_s1([], _, _, _, _, Used, [], Used).
-	jaro_match_s1([H1|T1], I, Codes2, Length2, MW, Used0, Matches, UsedOut) :-
+	jaro_match_s1([H1| T1], I, Codes2, Length2, MW, Used0, Matches, UsedOut) :-
 		Low  is max(0,        I - MW),
 		High is min(Length2 - 1, I + MW),
 		(	jaro_find_unused(H1, Codes2, Low, High, Used0, Pos)
@@ -449,7 +449,7 @@
 		).
 
 	jaro_match_s2([], _, _, []).
-	jaro_match_s2([H|T], I, Used, Matches) :-
+	jaro_match_s2([H| T], I, Used, Matches) :-
 		nth0(I, Used, Flag),
 		(	Flag == true
 		->	Matches = [H|Rest]
@@ -627,7 +627,7 @@
 		reverse(RevSeq, Subsequence).
 
 	lcs_build_table([], _, Row0, [Row0]).
-	lcs_build_table([H1|T1], Codes2, RowPrev, [RowCur|Rest]) :-
+	lcs_build_table([H1| T1], Codes2, RowPrev, [RowCur| Rest]) :-
 		RowPrev = [_|RowPrevTail],
 		longest_common_subsequence_length_row(Codes2, H1, RowPrevTail, 0, [0], RowCur),
 		lcs_build_table(T1, Codes2, RowCur, Rest).
@@ -692,14 +692,14 @@
 
 	lcsub_rows([], _, _, ML, EI, _, ML, EI).
 	lcsub_rows([H1|T1], Codes2, RowPrev, ML0, EI0, RowIdx, ML, EI) :-
-		RowPrev = [_|RowPrevTail],
+		RowPrev = [_| RowPrevTail],
 		lcsub_row(Codes2, H1, RowPrevTail, 0, ML0, EI0, RowIdx, ML1, EI1, RowCur0),
-		RowCur = [0|RowCur0],
+		RowCur = [0| RowCur0],
 		RowIdx1 is RowIdx + 1,
 		lcsub_rows(T1, Codes2, RowCur, ML1, EI1, RowIdx1, ML, EI).
 
 	lcsub_row([], _, _, _, ML, EI, _, ML, EI, []).
-	lcsub_row([H2|T2], H1, [Above|AboveRest], Diag, ML0, EI0, RowIdx, ML, EI, [Val|RestRow]) :-
+	lcsub_row([H2| T2], H1, [Above| AboveRest], Diag, ML0, EI0, RowIdx, ML, EI, [Val| RestRow]) :-
 		(	H1 == H2
 		->	Val is Diag + 1
 		;	Val = 0
@@ -830,7 +830,7 @@
 			soundex_encode(Rest, Codes0),
 			soundex_dedup([FirstCode|Codes0], Deduped0),
 			% drop the first code
-			Deduped0 = [_|Deduped],
+			Deduped0 = [_| Deduped],
 			exclude_zero(Deduped, Filtered),
 			soundex_pad(Filtered, 3, Digits),
 			Code = [FirstChar| Digits]
@@ -1052,13 +1052,6 @@
 	% =================================================================
 	% Private helpers
 	% =================================================================
-
-	numlist(Low, High, []) :-
-		Low > High, !.
-	numlist(Low, High, [Low|T]) :-
-		Low =< High,
-		Next is Low + 1,
-		numlist(Next, High, T).
 
 	maplist_eq([], _).
 	maplist_eq([Value| Tail], Value) :-
