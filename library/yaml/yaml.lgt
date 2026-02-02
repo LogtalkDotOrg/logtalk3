@@ -166,14 +166,14 @@
 	% Multi-document parsing - entry point (split input by document markers)
 	yaml_documents(Documents) -->
 		skip_ws_and_comments,
-		(   % End of input
+		(	% End of input
 		    eos
-		->  { Documents = [] }
-		;   % Document start or end marker
+		->	{ Documents = [] }
+		;	% Document start or end marker
 		    document_marker
-		->  skip_rest_of_line,
+		->	skip_rest_of_line,
 		    yaml_documents(Documents)
-		;   % Parse document content
+		;	% Parse document content
 		    yaml_single_document(Document),
 			{ Documents = [Document| Acc] },
 		    yaml_documents(Acc)
@@ -187,11 +187,11 @@
 	% Skip to next document marker or end of input
 	skip_to_marker_or_end -->
 		skip_ws_and_comments,
-		(   eos
-		->  []
-		;   document_marker
-		->  skip_rest_of_line
-		;   []
+		(	eos
+		->	[]
+		;	document_marker
+		->	skip_rest_of_line
+		;	[]
 		).
 
 	% Skip whitespace and comments only
@@ -269,8 +269,8 @@
 		% Try block mapping or scalar
 		scalar_key(Key),
 		skip_spaces,
-		(   [0':]
-		->  % This is a block mapping
+		(	[0':]
+		->	% This is a block mapping
 		    skip_spaces,
 		    % Check for merge key as first key
 		    (   { Key == (<<) }
@@ -285,7 +285,7 @@
 		        block_mapping_rest(Indent, RestPairs, S1, S),
 		        { Data = yaml([FirstPair| RestPairs]) }
 		    )
-		;   % Just a scalar value
+		;	% Just a scalar value
 		    { parse_scalar_or_number(Key, Data) },
 		    { S = S0 }
 		).
@@ -409,13 +409,13 @@
 		[0':],
 		skip_spaces,
 		% Check for merge key
-		(   { Key == (<<) }
-		->  % Merge key - value should be an alias or list of aliases
+		(	{ Key == (<<) }
+		->	% Merge key - value should be an alias or list of aliases
 		    inline_value(Indent, MergeValue, S0, S1),
 		    { merge_key_pairs(MergeValue, MergedPairs) },
 		    block_mapping_rest(Indent, RestPairs, S1, S),
 		    { append(MergedPairs, RestPairs, ResultPairs) }
-		;   % Normal key-value pair
+		;	% Normal key-value pair
 		    block_mapping_value(Indent, Key, Pair, S0, S1),
 		    block_mapping_rest(Indent, RestPairs, S1, S),
 		    { ResultPairs = [Pair| RestPairs] }
@@ -569,11 +569,11 @@
 		{ Code =:= 10 ; Code =:= 13 },
 		!,
 		% Peek at what's after the newline
-		(   peek_next_line_indent_literal(BaseIndent)
-		->  % More content for this block scalar
+		(	peek_next_line_indent_literal(BaseIndent)
+		->	% More content for this block scalar
 		    newline,
 		    literal_block_lines_continue(BaseIndent, AccLine, Codes)
-		;   % End of block scalar - don't consume newline
+		;	% End of block scalar - don't consume newline
 		    { Codes = AccLine }
 		).
 	literal_block_lines_rest(_BaseIndent, AccLine, AccLine) -->
@@ -649,11 +649,11 @@
 		{ Code =:= 10 ; Code =:= 13 },
 		!,
 		% Peek at what's after the newline
-		(   peek_next_line_indent(BaseIndent)
-		->  % More content for this block scalar
+		(	peek_next_line_indent(BaseIndent)
+		->	% More content for this block scalar
 		    newline,
 		    folded_block_lines_continue(BaseIndent, Lines)
-		;   % End of block scalar - don't consume newline
+		;	% End of block scalar - don't consume newline
 		    { Lines = [] }
 		).
 	folded_block_lines_rest(_BaseIndent, []) -->
@@ -676,12 +676,12 @@
 		consume_indent(CurrentIndent),
 		% Check if more indented (preserve newlines for more indented)
 		{ ExtraIndent is CurrentIndent - BaseIndent },
-		(   { ExtraIndent > 0 }
-		->  { n_spaces(ExtraIndent, ExtraSpaces) },
+		(	{ ExtraIndent > 0 }
+		->	{ n_spaces(ExtraIndent, ExtraSpaces) },
 		    folded_block_line(CurrentIndent, LineCodes),
 		    { append(ExtraSpaces, LineCodes, Line) },
 		    { Lines = [more(Line)| RestLines] }
-		;   folded_block_line(CurrentIndent, Line),
+		;	folded_block_line(CurrentIndent, Line),
 		    { Lines = [line(Line)| RestLines] }
 		),
 		folded_block_lines_rest(BaseIndent, RestLines).
@@ -753,16 +753,16 @@
 	apply_chomping(keep, Codes, Result) :-
 		!,
 		% Keep all trailing newlines, add one if none
-		(   Codes == []
-		->  Result = []
-		;   Result = Codes
+		(	Codes == []
+		->	Result = []
+		;	Result = Codes
 		).
 	apply_chomping(clip, Codes, Result) :-
 		% Default: single trailing newline
 		strip_trailing_newlines(Codes, Stripped),
-		(   Stripped == []
-		->  Result = []
-		;   append(Stripped, [10], Result)
+		(	Stripped == []
+		->	Result = []
+		;	append(Stripped, [10], Result)
 		).
 
 	strip_trailing_newlines(Codes, Result) :-
@@ -796,9 +796,9 @@
 	count_leading_spaces_and_check([Code| _], Acc, MinIndent) :-
 		% Non-whitespace character - check indent
 		Code =\= 32, Code =\= 9,
-		(   (Code =:= 10 ; Code =:= 13)
-		->  true  % Blank line is OK (continue to next line)
-		;   Acc >= MinIndent  % Content line must have sufficient indent
+		(	(Code =:= 10 ; Code =:= 13)
+		->	true  % Blank line is OK (continue to next line)
+		;	Acc >= MinIndent  % Content line must have sufficient indent
 		).
 	count_leading_spaces_and_check([], _, _) :-
 		% End of input - OK to continue
@@ -848,8 +848,10 @@
 
 	% Extract pairs from merge key value
 	% The value can be a yaml(Pairs) or a list of yaml(Pairs)
-	merge_key_pairs(yaml(Pairs), Pairs) :- !.
-	merge_key_pairs([], []) :- !.
+	merge_key_pairs(yaml(Pairs), Pairs) :-
+		!.
+	merge_key_pairs([], []) :-
+		!.
 	merge_key_pairs([yaml(Pairs)| Rest], AllPairs) :-
 		!,
 		merge_key_pairs(Rest, RestPairs),
@@ -863,9 +865,9 @@
 	% Flow mapping: {key: value, ...}
 	flow_mapping(Pairs) -->
 		skip_whitespace,
-		(   [0'}]
-		->  { Pairs = [] }
-		;   flow_mapping_pairs(Pairs),
+		(	[0'}]
+		->	{ Pairs = [] }
+		;	flow_mapping_pairs(Pairs),
 		    skip_whitespace,
 		    [0'}]
 		).
@@ -882,9 +884,9 @@
 		skip_whitespace,
 		flow_value(Value),
 		skip_whitespace,
-		(   [0',]
-		->  flow_mapping_pairs(Pairs)
-		;   { Pairs = [] }
+		(	[0',]
+		->	flow_mapping_pairs(Pairs)
+		;	{ Pairs = [] }
 		).
 	flow_mapping_pairs([]) -->
 		skip_whitespace.
@@ -892,9 +894,9 @@
 	% Flow sequence: [item, ...]
 	flow_sequence(Items) -->
 		skip_whitespace,
-		(   [0']]
-		->  { Items = [] }
-		;   flow_sequence_items(Items),
+		(	[0']]
+		->	{ Items = [] }
+		;	flow_sequence_items(Items),
 		    skip_whitespace,
 		    [0']]
 		).
@@ -903,9 +905,9 @@
 		skip_whitespace,
 		flow_value(Item),
 		skip_whitespace,
-		(   [0',]
-		->  flow_sequence_items(Items)
-		;   { Items = [] }
+		(	[0',]
+		->	flow_sequence_items(Items)
+		;	{ Items = [] }
 		).
 
 	% Flow key (in flow mapping)
@@ -1186,11 +1188,11 @@
 		!,
 		skip_spaces,
 		% Check if there's content after --- on same line
-		(   peek_code(Code),
+		(	peek_code(Code),
 		    { Code =\= 10, Code =\= 13, Code =\= 0'! }
-		->  % Real content on same line as --- (e.g., --- |), leave for parser
+		->	% Real content on same line as --- (e.g., --- |), leave for parser
 		    []
-		;   % Tag, newline, or spaces after ---, skip it
+		;	% Tag, newline, or spaces after ---, skip it
 		    skip_tag_if_present,
 		    skip_to_newline,
 		    skip_whitespace_and_comments
