@@ -57,7 +57,7 @@
 	]).
 
 	:- uses(list, [
-		append/2, append/3, drop/3, length/2, memberchk/2, nth0/3, reverse/2, take/4
+		append/2, append/3, drop/3, length/2, memberchk/2, nth0/3, take/4
 	]).
 
 	:- uses(reader, [
@@ -229,8 +229,9 @@
 	decode_boolean([1| Rest], true, Rest).
 
 	% Encode/decode null
-	encode_null([]).
-	decode_null(Bytes, @null, Bytes).
+	%encode_null([]).
+
+	%decode_null(Bytes, @null, Bytes).
 
 	% Encode/decode float (4 bytes, little-endian IEEE 754)
 	encode_float(Float, [B0, B1, B2, B3]) :-
@@ -342,7 +343,7 @@
 		atom_codes(Atom, Codes).
 
 	% Encode/decode fixed
-	encode_fixed(Bytes, _, Bytes).
+	%encode_fixed(Bytes, _, Bytes).
 
 	decode_fixed(Input, Size, Bytes, Rest) :-
 		take(Size, Input, Bytes, Rest).
