@@ -57,7 +57,7 @@
 	]).
 
 	:- uses(list, [
-		append/2, append/3, drop/3, length/2, memberchk/2, nth0/3, reverse/2
+		append/2, append/3, drop/3, length/2, memberchk/2, nth0/3, reverse/2, take/4
 	]).
 
 	:- uses(reader, [
@@ -121,19 +121,12 @@
 			Data = [],
 			Rest1 = []
 		;	decode_long(Rest1, BlockSize, Rest2),
-			take_bytes(BlockSize, Rest2, BlockData, Rest3),
+			take(BlockSize, Rest2, BlockData, Rest3),
 			% Skip sync marker
 			drop(16, Rest3, AfterSync),
 			parse_data_blocks(AfterSync, MoreData),
 			append(BlockData, MoreData, Data)
 		).
-
-	take_bytes(0, Bytes, [], Bytes) :-
-		!.
-	take_bytes(N, [B|Rest], [B|Taken], Remaining) :-
-		N > 0,
-		N1 is N - 1,
-		take_bytes(N1, Rest, Taken, Remaining).
 
 	% generate/3 - generate without schema in output
 	generate(Sink, Schema, Data) :-
@@ -333,7 +326,7 @@
 
 	decode_bytes(Input, Bytes, Rest) :-
 		decode_long(Input, Len, Input1),
-		take_bytes(Len, Input1, Bytes, Rest).
+		take(Len, Input1, Bytes, Rest).
 
 	% Encode/decode string (UTF-8 bytes)
 	encode_string(Atom, Encoded) :-
@@ -352,7 +345,7 @@
 	encode_fixed(Bytes, _, Bytes).
 
 	decode_fixed(Input, Size, Bytes, Rest) :-
-		take_bytes(Size, Input, Bytes, Rest).
+		take(Size, Input, Bytes, Rest).
 
 	% Encode/decode array
 	encode_array([], _Schema, [0]).
