@@ -434,7 +434,8 @@
 		insert_or_extend(Head, LIS0, LIS1),
 		lis_helper(Tail, LIS1, LIS).
 
-	insert_or_extend(X, [], [[X]]).
+	insert_or_extend(X, [], [[X]]) :-
+		!.
 	insert_or_extend(X, [Seq| Rest], [Seq| NewRest]) :-
 		Seq = [Last| _],
 		X =< Last,
