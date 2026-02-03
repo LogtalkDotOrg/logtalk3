@@ -24,9 +24,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2020-05-11,
+		date is 2026-02-03,
 		comment is 'Difference list predicates.',
 		see_also is [list, list(_), numberlist, varlist]
 	]).
@@ -524,6 +524,16 @@
 		N > 0,
 		M is N - 1,
 		take(M, Tail-Back1, Elements-Back2).
+
+	take(0, List, Elements, Remaining) :-
+		!,
+		unify_with_occurs_check(Elements, Back-Back),
+		unify_with_occurs_check(List, Remaining).
+	take(N, [Element| Tail]-Back1, [Element| Elements]-Back2, Remaining) :-
+		Tail \== Back1,
+		N > 0,
+		M is N - 1,
+		take(M, Tail-Back1, Elements-Back2, Remaining).
 
 	drop(0, List1-Back1, List2-Back2) :-
 		!,

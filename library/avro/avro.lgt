@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-01-23,
+		date is 2026-02-03,
 		comment is 'Apache Avro binary format parser and generator.'
 	]).
 
@@ -57,7 +57,7 @@
 	]).
 
 	:- uses(list, [
-		append/2, append/3, length/2, nth0/3, reverse/2
+		append/2, append/3, drop/3, length/2, memberchk/2, nth0/3, reverse/2
 	]).
 
 	:- uses(reader, [
@@ -105,20 +105,13 @@
 		% Parse file header metadata (map)
 		decode_map(Rest, Metadata, AfterMeta),
 		% Extract schema from metadata
-		member('avro.schema'-SchemaBytes, Metadata),
+		memberchk('avro.schema'-SchemaBytes, Metadata),
 		atom_codes(SchemaAtom, SchemaBytes),
 		json_parse(atom(SchemaAtom), Schema),
 		% Skip sync marker (16 bytes)
-		skip_bytes(16, AfterMeta, AfterSync),
+		drop(16, AfterMeta, AfterSync),
 		% Parse data blocks
 		parse_data_blocks(AfterSync, DataBytes).
-
-	skip_bytes(0, Bytes, Bytes) :-
-		!.
-	skip_bytes(N, [_|Rest], Result) :-
-		N > 0,
-		N1 is N - 1,
-		skip_bytes(N1, Rest, Result).
 
 	parse_data_blocks([], []) :-
 		!.
@@ -130,7 +123,7 @@
 		;	decode_long(Rest1, BlockSize, Rest2),
 			take_bytes(BlockSize, Rest2, BlockData, Rest3),
 			% Skip sync marker
-			skip_bytes(16, Rest3, AfterSync),
+			drop(16, Rest3, AfterSync),
 			parse_data_blocks(AfterSync, MoreData),
 			append(BlockData, MoreData, Data)
 		).
@@ -141,9 +134,6 @@
 		N > 0,
 		N1 is N - 1,
 		take_bytes(N1, Rest, Taken, Remaining).
-
-	member(X, [X|_]).
-	member(X, [_|T]) :- member(X, T).
 
 	% generate/3 - generate without schema in output
 	generate(Sink, Schema, Data) :-
@@ -222,13 +212,13 @@
 		decode_varint(Bytes, ZigZag, Rest),
 		Value is xor((ZigZag >> 1), (-(ZigZag /\ 1))).
 
-	decode_varint([Byte| Rest], Value, Rest) :-
+	decode_varint([Byte| Bytes], Value, Bytes) :-
 		Byte < 128,
 		!,
 		Value is Byte.
-	decode_varint([Byte| Bytes], Value, Rest) :-
+	decode_varint([Byte| Bytes0], Value, Bytes) :-
 		Byte1 is Byte /\ 0x7f,
-		decode_varint(Bytes, Value1, Rest),
+		decode_varint(Bytes0, Value1, Bytes),
 		Value is Byte1 \/ (Value1 << 7).
 
 	% Encode int (same as long but 32-bit)
@@ -347,7 +337,8 @@
 
 	% Encode/decode string (UTF-8 bytes)
 	encode_string(Atom, Encoded) :-
-		atom(Atom), !,
+		atom(Atom),
+		!,
 		atom_codes(Atom, Codes),
 		encode_bytes(Codes, Encoded).
 	encode_string(codes(Codes), Encoded) :-
@@ -549,9 +540,9 @@
 		encode_map_pairs_with_schema(Pairs, ValueSchema, RestBytes),
 		append([KeyBytes, ValueBytes, RestBytes], Encoded).
 
-	find_union_match([Schema|_], Data, Index, Index, Schema) :-
+	find_union_match([Schema| _], Data, Index, Index, Schema) :-
 		data_matches_schema(Schema, Data), !.
-	find_union_match([_|Schemas], Data, N, Index, Schema) :-
+	find_union_match([_| Schemas], Data, N, Index, Schema) :-
 		N1 is N + 1,
 		find_union_match(Schemas, Data, N1, Index, Schema).
 
@@ -652,7 +643,7 @@
 		N1 is N - 1,
 		decode_map_pairs_with_schema(N1, ValueSchema, Input2, Pairs, Rest).
 
-	% Helper to find a pair in a curly term's comma-separated pairs
+	% find a pair in a curly term's comma-separated pairs
 	curly_member(Pair, (Pair, _)) :-
 		!.
 	curly_member(Pair, (_, Rest)) :-
@@ -660,7 +651,7 @@
 		curly_member(Pair, Rest).
 	curly_member(Pair, Pair).
 
-	% Helper to convert list of pairs to comma-separated pairs for curly terms
+	% convert list of pairs to comma-separated pairs for curly terms
 	list_to_curly([Pair], Pair) :-
 		!.
 	list_to_curly([Pair| Pairs], (Pair, Rest)) :-

@@ -98,6 +98,9 @@ lists, or character code lists.
 * ADDED: New `natural` library object `factorial/2` and `binomial/3`
 predicates.
 
+* ADDED: New `take/4` predicate to the `listp` library protocol and to the
+`list` and `difflist` library objects.
+
 * ADDED: Support for the SplitMix64, Xoshiro128++, Xoshiro128**, Xoshiro256++,
 and Xoshiro256** algorithms to the `random` library.
 
