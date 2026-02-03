@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-01-29,
+		date is 2026-02-03,
 		comment is 'JSON Schema parser and validator supporting JSON Schema draft-07/draft-2019-09/draft-2020-12.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation used for JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -985,11 +985,9 @@
 	% =============== Helper predicates ===============
 
 	all_digits([]).
-	all_digits([C| Cs]) :-
-		is_digit(C),
-		all_digits(Cs).
-
-	is_digit(C) :- C >= 0'0, C =< 0'9.
+	all_digits([Code| Codes]) :-
+		0'0 =< Code, Code =< 0'9,
+		all_digits(Codes).
 
 :- end_object.
 
