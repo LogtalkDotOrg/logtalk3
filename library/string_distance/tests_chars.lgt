@@ -28,16 +28,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-02,
+		date is 2026-02-03,
 		comment is 'Unit tests for the "string_distance" library using a character list representation.'
 	]).
 
 	:- uses([
 		string_distance(chars) as string_distance
-	]).
-
-	:- uses(lgtunit, [
-		op(700, xfx, =~=), (=~=)/2
 	]).
 
 	:- include(tests).
