@@ -193,14 +193,17 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">base58</span></code> library provides predicates for encoding and decoding
 data in the Base58 format using the Bitcoin alphabet variant. Base58 is
 commonly used in Bitcoin addresses and other cryptocurrency
-applications.</p>
-<p>The Bitcoin alphabet excludes visually ambiguous characters:</p>
+applications. The Bitcoin alphabet excludes visually ambiguous
+characters:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> (zero), <code class="docutils literal notranslate"><span class="pre">O</span></code> (uppercase o)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">I</span></code> (uppercase i), <code class="docutils literal notranslate"><span class="pre">l</span></code> (lowercase L)</p></li>
 </ul>
 <p>Alphabet: <code class="docutils literal notranslate"><span class="pre">123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz</span></code></p>
-<p>This library requires a backend supporting unbounded integer arithmetic.</p>
+<p>For more details, see for example:</p>
+<p><a class="reference external" href="https://bitcoinwiki.org/wiki/base58">https://bitcoinwiki.org/wiki/base58</a></p>
+<p><strong>This library requires a backend supporting unbounded integer
+arithmetic.</strong></p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

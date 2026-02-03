@@ -23,15 +23,19 @@ ________________________________________________________________________
 
 The `base58` library provides predicates for encoding and decoding data in
 the Base58 format using the Bitcoin alphabet variant. Base58 is commonly
-used in Bitcoin addresses and other cryptocurrency applications.
+used in Bitcoin addresses and other cryptocurrency applications. The Bitcoin
+alphabet excludes visually ambiguous characters:
 
-The Bitcoin alphabet excludes visually ambiguous characters:
 - `0` (zero), `O` (uppercase o)
 - `I` (uppercase i), `l` (lowercase L)
 
 Alphabet: `123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz`
 
-This library requires a backend supporting unbounded integer arithmetic.
+For more details, see for example:
+
+https://bitcoinwiki.org/wiki/base58
+
+**This library requires a backend supporting unbounded integer arithmetic.**
 
 
 API documentation

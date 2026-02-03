@@ -5,10 +5,11 @@
 
 The ``base85`` library provides predicates for encoding and decoding
 data in the Base85 (Ascii85) format. Ascii85 is used in PostScript and
-PDF files.
+PDF files. The encoding uses printable ASCII characters from ``!`` (33)
+to ``u`` (117). A special shortcut ``z`` represents four zero bytes. For
+more details, see for example:
 
-The encoding uses printable ASCII characters from ``!`` (33) to ``u``
-(117). A special shortcut ``z`` represents four zero bytes.
+https://en.wikipedia.org/wiki/Ascii85
 
 API documentation
 -----------------
