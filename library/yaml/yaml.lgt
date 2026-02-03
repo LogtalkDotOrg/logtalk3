@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-01-31,
+		date is 2026-02-03,
 		comment is 'YAML parser and generator.'
 	]).
 
@@ -171,8 +171,7 @@
 		->	{ Documents = [] }
 		;	% Document start or end marker
 		    document_marker
-		->	skip_rest_of_line,
-		    yaml_documents(Documents)
+		->	yaml_documents(Documents)
 		;	% Parse document content
 		    yaml_single_document(Document),
 			{ Documents = [Document| Acc] },
@@ -190,7 +189,7 @@
 		(	eos
 		->	[]
 		;	document_marker
-		->	skip_rest_of_line
+		->	[]
 		;	[]
 		).
 
@@ -309,16 +308,23 @@
 	% Document marker (--- or ...)
 	document_marker -->
 		[0'-, 0'-, 0'-],
-		!.
+		!,
+		skip_rest_of_line.
 	document_marker -->
-		[0'., 0'., 0'.].
+		[0'., 0'., 0'.],
+		skip_rest_of_line.
 
-	% Peek for document markers (--- or ...)
-	peek_document_marker, [0'-, 0'-, 0'-] -->
+	% check that we're not at a document markers (--- or ...)
+	not_at_document_marker -->
 		[0'-, 0'-, 0'-],
-		!.
-	peek_document_marker, [0'., 0'., 0'.] -->
-		[0'., 0'., 0'.].
+		!,
+		{fail}.
+	not_at_document_marker -->
+		[0'., 0'., 0'.],
+		!,
+		{fail}.
+	not_at_document_marker -->
+		[].
 
 	% stateful Block Mapping/Sequence/Value (with anchor/alias tracking)
 
@@ -398,7 +404,7 @@
 		newline,
 		skip_empty_lines,
 		% Stop at document markers
-		\+ peek_document_marker,
+		not_at_document_marker,
 		measure_indent(CurrentIndent),
 		{ CurrentIndent =:= Indent },
 		% Verify there's a valid key (not just whitespace/newline)
@@ -461,7 +467,7 @@
 		newline,
 		skip_empty_lines,
 		% Stop at document markers
-		\+ peek_document_marker,
+		not_at_document_marker,
 		measure_indent(CurrentIndent),
 		{ CurrentIndent =:= Indent },
 		[0'-],
