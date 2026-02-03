@@ -191,8 +191,8 @@
 <span id="library-strings"></span><h1><code class="docutils literal notranslate"><span class="pre">strings</span></code><a class="headerlink" href="#strings" title="Link to this heading"></a></h1>
 <p>This library provides string manipulation predicates with support for
 different string representations: atoms, character lists, or character
-code lists. Its API is based on work and libraries found in ECLiPSe and
-SWI-Prolog.</p>
+code lists. Its API is partially based on work and libraries found in
+ECLiPSe and SWI-Prolog.</p>
 <p>The predicates are defined in the <code class="docutils literal notranslate"><span class="pre">string(_Representation_)</span></code>
 parametric object where <code class="docutils literal notranslate"><span class="pre">_Representation_</span></code> can be one of:</p>
 <ul class="simple">
@@ -223,7 +223,7 @@ link in a web browser.</p>
 </section>
 <section id="predicates">
 <h2>Predicates<a class="headerlink" href="#predicates" title="Link to this heading"></a></h2>
-<p>The library provides the following predicates:</p>
+<p>The library provides the following compatibility predicates:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">atom_string/2</span></code> - converts between atoms and strings</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">number_string/2</span></code> - converts between numbers and strings</p></li>
@@ -240,6 +240,12 @@ and padding</p></li>
 string</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">atomics_to_string/3</span></code> - concatenates a list of atomic terms into a
 string with separator</p></li>
+</ul>
+<p>It also provides the following string trimming predicates:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">trim/2-3</span></code> - trims leading and trailing characters from a string</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trim_left/2-3</span></code> - trims leading characters from a string</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trim_right/2-3</span></code> - trims trailing characters from a string</p></li>
 </ul>
 <p>For converting between terms and strings, see the <code class="docutils literal notranslate"><span class="pre">term_io</span></code> library.</p>
 </section>

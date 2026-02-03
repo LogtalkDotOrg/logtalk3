@@ -18,7 +18,7 @@ String manipulation predicates supporting different string representations.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-01-23
+| **Date:** 2026-02-03
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -269,6 +269,120 @@ Concatenates the atomic terms in ``List`` into ``String``, with ``Separator`` in
 |    ``atomics_to_string(List,Separator,String)``
 | **Mode and number of proofs:**
 |    ``atomics_to_string(++list(atomic),+text,-text)`` - ``one``
+
+
+------------
+
+.. index:: trim/2
+.. _string/1::trim/2:
+
+``trim/2``
+^^^^^^^^^^
+
+Trims string by deleting all leading and trailing whitespace.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``trim(String,Trimmed)``
+| **Mode and number of proofs:**
+|    ``trim(+text,-text)`` - ``one``
+
+
+------------
+
+.. index:: trim/3
+.. _string/1::trim/3:
+
+``trim/3``
+^^^^^^^^^^
+
+Trims string by deleting all occurrences of the characters in ``Elements`` from the beginning and end of the string.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``trim(String,Elements,Trimmed)``
+| **Mode and number of proofs:**
+|    ``trim(+text,+text,-text)`` - ``one``
+
+
+------------
+
+.. index:: trim_left/2
+.. _string/1::trim_left/2:
+
+``trim_left/2``
+^^^^^^^^^^^^^^^
+
+Trims string by deleting all leading whitespace.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``trim_left(String,Trimmed)``
+| **Mode and number of proofs:**
+|    ``trim_left(+text,-text)`` - ``one``
+
+
+------------
+
+.. index:: trim_left/3
+.. _string/1::trim_left/3:
+
+``trim_left/3``
+^^^^^^^^^^^^^^^
+
+Trims string by deleting all occurrences of the characters in ``Elements`` from the beginning of the string.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``trim_left(String,Elements,Trimmed)``
+| **Mode and number of proofs:**
+|    ``trim_left(+text,+text,-text)`` - ``one``
+
+
+------------
+
+.. index:: trim_right/2
+.. _string/1::trim_right/2:
+
+``trim_right/2``
+^^^^^^^^^^^^^^^^
+
+Trims string by deleting all trailing whitespace.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``trim_right(String,Trimmed)``
+| **Mode and number of proofs:**
+|    ``trim_right(+text,-text)`` - ``one``
+
+
+------------
+
+.. index:: trim_right/3
+.. _string/1::trim_right/3:
+
+``trim_right/3``
+^^^^^^^^^^^^^^^^
+
+Trims string by deleting all occurrences of the characters in ``Elements`` from the end of the string.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``trim_right(String,Elements,Trimmed)``
+| **Mode and number of proofs:**
+|    ``trim_right(+text,+text,-text)`` - ``one``
 
 
 ------------

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-01-23,
+		date is 2026-02-03,
 		comment is 'String manipulation predicates supporting different string representations.',
 		parameters is [
 			'Representation' - 'String representation. Valid values are ``atom``, ``codes``, and ``chars``.'
@@ -120,8 +120,50 @@
 		argnames is ['List', 'Separator', 'String']
 	]).
 
+	:- public(trim/2).
+	:- mode(trim(+text, -text), one).
+	:- info(trim/2, [
+		comment is 'Trims string by deleting all leading and trailing whitespace.',
+		argnames is ['String', 'Trimmed']
+	]).
+
+	:- public(trim/3).
+	:- mode(trim(+text, +text, -text), one).
+	:- info(trim/3, [
+		comment is 'Trims string by deleting all occurrences of the characters in ``Elements`` from the beginning and end of the string.',
+		argnames is ['String', 'Elements', 'Trimmed']
+	]).
+
+	:- public(trim_left/2).
+	:- mode(trim_left(+text, -text), one).
+	:- info(trim_left/2, [
+		comment is 'Trims string by deleting all leading whitespace.',
+		argnames is ['String', 'Trimmed']
+	]).
+
+	:- public(trim_left/3).
+	:- mode(trim_left(+text, +text, -text), one).
+	:- info(trim_left/3, [
+		comment is 'Trims string by deleting all occurrences of the characters in ``Elements`` from the beginning of the string.',
+		argnames is ['String', 'Elements', 'Trimmed']
+	]).
+
+	:- public(trim_right/2).
+	:- mode(trim_right(+text, -text), one).
+	:- info(trim_right/2, [
+		comment is 'Trims string by deleting all trailing whitespace.',
+		argnames is ['String', 'Trimmed']
+	]).
+
+	:- public(trim_right/3).
+	:- mode(trim_right(+text, +text, -text), one).
+	:- info(trim_right/3, [
+		comment is 'Trims string by deleting all occurrences of the characters in ``Elements`` from the end of the string.',
+		argnames is ['String', 'Elements', 'Trimmed']
+	]).
+
 	:- uses(list, [
-		append/3, length/2
+		append/3, length/2, reverse/2
 	]).
 
 	% atom_string/2
@@ -437,7 +479,7 @@
 				SubStrings = [[]]
 			;	SubStrings = []
 			)
-		;	reverse_list(Acc, SubString),
+		;	reverse(Acc, SubString),
 			SubStrings = [SubString]
 		).
 	split_at_separators_aux([Code| Codes], SepCodes, PadCodes, BothCodes, Acc, _AfterSep, SubStrings) :-
@@ -449,7 +491,7 @@
 				% At beginning or after another separator - skip
 				split_at_separators_aux(RestCodes, SepCodes, PadCodes, BothCodes, [], no, SubStrings)
 			;	% In middle - treat as separator
-				reverse_list(Acc, SubString),
+				reverse(Acc, SubString),
 				(	RestCodes == [] ->
 					% At end - just add accumulated
 					SubStrings = [SubString]
@@ -460,7 +502,7 @@
 		;	% Check if it's a separator (but not a "both" character)
 			member_code(Code, SepCodes) ->
 			% Split here - this always produces a substring (possibly empty)
-			reverse_list(Acc, SubString),
+			reverse(Acc, SubString),
 			SubStrings = [SubString| RestSubStrings],
 			split_at_separators_aux(Codes, SepCodes, PadCodes, BothCodes, [], yes, RestSubStrings)
 		;	% Regular character - accumulate
@@ -478,9 +520,9 @@
 	% Strip padding from both ends
 	strip_padding(Codes, PadCodes, Stripped) :-
 		strip_leading_padding(Codes, PadCodes, Temp),
-		reverse_list(Temp, TempRev),
+		reverse(Temp, TempRev),
 		strip_leading_padding(TempRev, PadCodes, StrippedRev),
-		reverse_list(StrippedRev, Stripped).
+		reverse(StrippedRev, Stripped).
 
 	% Strip leading padding characters
 	strip_leading_padding([], _, []).
@@ -490,12 +532,102 @@
 		;	Rest = [Code| Codes]
 		).
 
-	% Simple list reversal
-	reverse_list(List, Reversed) :-
-		reverse_list(List, [], Reversed).
+	% Strip trailing padding characters
+	strip_trailing_padding(Codes, PadCodes, Stripped) :-
+		reverse(Codes, Temp),
+		strip_leading_padding(Temp, PadCodes, TempRev),
+		reverse(TempRev, Stripped).
 
-	reverse_list([], Acc, Acc).
-	reverse_list([H| T], Acc, Reversed) :-
-		reverse_list(T, [H| Acc], Reversed).
+	% Trimming
+
+	trim(String, Trimmed) :-
+		trim_(_Representation_, String, Trimmed).
+
+	trim_(atom, String, Trimmed) :-
+		atom_codes(String, Codes),
+		strip_padding(Codes, [9, 32], TrimmedCodes),
+		atom_codes(Trimmed, TrimmedCodes).
+	trim_(chars, String, Trimmed) :-
+		chars_to_codes(String, Codes),
+		strip_padding(Codes, [9, 32], TrimmedCodes),
+		codes_to_chars(TrimmedCodes, Trimmed).
+	trim_(codes, String, Trimmed) :-
+		strip_padding(String, [9, 32], Trimmed).
+
+	trim(String, Elements, Trimmed) :-
+		trim_(_Representation_, String, Elements, Trimmed).
+
+	trim_(atom, String, Elements, Trimmed) :-
+		atom_codes(String, Codes),
+		atom_codes(Elements, ElementsCodes),
+		strip_padding(Codes, ElementsCodes, TrimmedCodes),
+		atom_codes(Trimmed, TrimmedCodes).
+	trim_(chars, String, Elements, Trimmed) :-
+		chars_to_codes(String, Codes),
+		chars_to_codes(Elements, ElementsCodes),
+		strip_padding(Codes, ElementsCodes, TrimmedCodes),
+		codes_to_chars(TrimmedCodes, Trimmed).
+	trim_(codes, String, Elements, Trimmed) :-
+		strip_padding(String, Elements, Trimmed).
+
+	trim_left(String, Trimmed) :-
+		trim_left_(_Representation_, String, Trimmed).
+
+	trim_left_(atom, String, Trimmed) :-
+		atom_codes(String, Codes),
+		strip_leading_padding(Codes, [9, 32], TrimmedCodes),
+		atom_codes(Trimmed, TrimmedCodes).
+	trim_left_(chars, String, Trimmed) :-
+		chars_to_codes(String, Codes),
+		strip_leading_padding(Codes, [9, 32], TrimmedCodes),
+		codes_to_chars(TrimmedCodes, Trimmed).
+	trim_left_(codes, String, Trimmed) :-
+		strip_leading_padding(String, [9, 32], Trimmed).
+
+	trim_left(String, Elements, Trimmed) :-
+		trim_left_(_Representation_, String, Elements, Trimmed).
+
+	trim_left_(atom, String, Elements, Trimmed) :-
+		atom_codes(String, Codes),
+		atom_codes(Elements, ElementsCodes),
+		strip_leading_padding(Codes, ElementsCodes, TrimmedCodes),
+		atom_codes(Trimmed, TrimmedCodes).
+	trim_left_(chars, String, Elements, Trimmed) :-
+		chars_to_codes(String, Codes),
+		chars_to_codes(Elements, ElementsCodes),
+		strip_leading_padding(Codes, ElementsCodes, TrimmedCodes),
+		codes_to_chars(TrimmedCodes, Trimmed).
+	trim_left_(codes, String, Elements, Trimmed) :-
+		strip_leading_padding(String, Elements, Trimmed).
+
+	trim_right(String, Trimmed) :-
+		trim_right_(_Representation_, String, Trimmed).
+
+	trim_right_(atom, String, Trimmed) :-
+		atom_codes(String, Codes),
+		strip_trailing_padding(Codes, [9, 32], TrimmedCodes),
+		atom_codes(Trimmed, TrimmedCodes).
+	trim_right_(chars, String, Trimmed) :-
+		chars_to_codes(String, Codes),
+		strip_trailing_padding(Codes, [9, 32], TrimmedCodes),
+		codes_to_chars(TrimmedCodes, Trimmed).
+	trim_right_(codes, String, Trimmed) :-
+		strip_trailing_padding(String, [9, 32], Trimmed).
+
+	trim_right(String, Elements, Trimmed) :-
+		trim_right_(_Representation_, String, Elements, Trimmed).
+
+	trim_right_(atom, String, Elements, Trimmed) :-
+		atom_codes(String, Codes),
+		atom_codes(Elements, ElementsCodes),
+		strip_trailing_padding(Codes, ElementsCodes, TrimmedCodes),
+		atom_codes(Trimmed, TrimmedCodes).
+	trim_right_(chars, String, Elements, Trimmed) :-
+		chars_to_codes(String, Codes),
+		chars_to_codes(Elements, ElementsCodes),
+		strip_trailing_padding(Codes, ElementsCodes, TrimmedCodes),
+		codes_to_chars(TrimmedCodes, Trimmed).
+	trim_right_(codes, String, Elements, Trimmed) :-
+		strip_trailing_padding(String, Elements, Trimmed).
 
 :- end_object.

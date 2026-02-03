@@ -232,3 +232,26 @@
 	test(atomics_to_string_3_05, true(S == "a,b,c")) :-
 		string::atomics_to_string([a, b, c], ",", S).
 
+	% trim/2-3 tests
+
+	test(trim_3_01, true(Trimmed == "hello")) :-
+		string::trim("  hello  ", Trimmed).
+
+	test(trim_3_02, true(Trimmed == "hello")) :-
+		string::trim("--hello--", "-", Trimmed).
+
+	% trim_left/2-3 tests
+
+	test(trim_left_3_01, true(Trimmed == "hello  ")) :-
+		string::trim_left("  hello  ", Trimmed).
+
+	test(trim_left_3_02, true(Trimmed == "hello--")) :-
+		string::trim_left("--hello--", "-", Trimmed).
+
+	% trim_right/2-3 tests
+
+	test(trim_right_3_01, true(Trimmed == "  hello")) :-
+		string::trim_right("  hello  ", Trimmed).
+
+	test(trim_right_3_02, true(Trimmed == "--hello")) :-
+		string::trim_right("--hello--", "-", Trimmed).

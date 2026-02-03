@@ -5,8 +5,8 @@
 
 This library provides string manipulation predicates with support for
 different string representations: atoms, character lists, or character
-code lists. Its API is based on work and libraries found in ECLiPSe and
-SWI-Prolog.
+code lists. Its API is partially based on work and libraries found in
+ECLiPSe and SWI-Prolog.
 
 The predicates are defined in the ``string(_Representation_)``
 parametric object where ``_Representation_`` can be one of:
@@ -45,7 +45,7 @@ To test this library predicates, load the ``tester.lgt`` file:
 Predicates
 ----------
 
-The library provides the following predicates:
+The library provides the following compatibility predicates:
 
 - ``atom_string/2`` - converts between atoms and strings
 - ``number_string/2`` - converts between numbers and strings
@@ -62,5 +62,11 @@ The library provides the following predicates:
   string
 - ``atomics_to_string/3`` - concatenates a list of atomic terms into a
   string with separator
+
+It also provides the following string trimming predicates:
+
+- ``trim/2-3`` - trims leading and trailing characters from a string
+- ``trim_left/2-3`` - trims leading characters from a string
+- ``trim_right/2-3`` - trims trailing characters from a string
 
 For converting between terms and strings, see the ``term_io`` library.
