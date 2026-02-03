@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-02,
+		date is 2026-02-03,
 		comment is 'Implementation of subsequence operations over lists.'
 	]).
 
@@ -155,7 +155,8 @@
 	k_permutations(K, List, Permutations) :-
 		findall(Permutation, k_permutation(K, List, Permutation), Permutations).
 
-	k_permutation(0, _, []) :- !.
+	k_permutation(0, _, []) :-
+		!.
 	k_permutation(K, List, [Head| Permutation]) :-
 		K > 0,
 		K1 is K - 1,
@@ -175,7 +176,7 @@
 		findall(Tuple, cartesian_tuple(K, List, Tuple), Tuples).
 
 	cartesian_tuple(0, _, []).
-	cartesian_tuple(K, List, [H|Tuple]) :-
+	cartesian_tuple(K, List, [H| Tuple]) :-
 		K > 0,
 		K1 is K - 1,
 		member(H, List),
@@ -212,8 +213,11 @@
 		append(Prefix, [Swap|RevSuffix], Next).
 
 	% Check if there's an element greater than Pivot in the suffix
-	has_greater(Pivot, [Head| _]) :- Head @> Pivot, !.
-	has_greater(Pivot, [_| Tail]) :- has_greater(Pivot, Tail).
+	has_greater(Pivot, [Head| _]) :-
+		Head @> Pivot,
+		!.
+	has_greater(Pivot, [_| Tail]) :-
+		has_greater(Pivot, Tail).
 
 	% Check if there's a valid pivot point later in the list
 	has_greater_in_prefix(Prefix, Suffix) :-
@@ -236,11 +240,11 @@
 			reverse(RevNewSuffix, SuffixWithoutSwap)
 		).
 
-	find_rightmost_greater_helper(Pivot, [H|T], Swap, [H|Rest]) :-
+	find_rightmost_greater_helper(Pivot, [H| T], Swap, [H| Rest]) :-
 		H @=< Pivot,
 		!,
 		find_rightmost_greater_helper(Pivot, T, Swap, Rest).
-	find_rightmost_greater_helper(Pivot, [H|T], H, T) :-
+	find_rightmost_greater_helper(Pivot, [H| T], H, T) :-
 		H @> Pivot.
 
 	% Previous permutation in lexicographic order
@@ -250,25 +254,28 @@
 	% 3. Swap Perm[i] and Perm[j]
 	% 4. Reverse the suffix starting at Perm[i+1]
 	previous_permutation(Perm, Prev) :-
-		append(Prefix, [Pivot|Suffix], Perm),
+		append(Prefix, [Pivot| Suffix], Perm),
 		Suffix \= [],
 		has_smaller(Pivot, Suffix),
-		\+ has_smaller_in_prefix(Prefix, [Pivot|Suffix]),
+		\+ has_smaller_in_prefix(Prefix, [Pivot| Suffix]),
 		!,
 		% Find rightmost element smaller than pivot and swap with pivot in suffix
 		replace_rightmost_smaller(Pivot, Suffix, Swap, SwappedSuffix),
 		reverse(SwappedSuffix, RevSuffix),
-		append(Prefix, [Swap|RevSuffix], Prev).
+		append(Prefix, [Swap| RevSuffix], Prev).
 
-	has_smaller(Pivot, [H|_]) :- H @< Pivot, !.
-	has_smaller(Pivot, [_|T]) :- has_smaller(Pivot, T).
+	has_smaller(Pivot, [Head| _]) :-
+		Head @< Pivot,
+		!.
+	has_smaller(Pivot, [_| Tail]) :-
+		has_smaller(Pivot, Tail).
 
 	has_smaller_in_prefix(Prefix, Suffix) :-
 		append(Prefix, Suffix, Full),
-		append(NewPrefix, [P|S], Full),
-		length(NewPrefix, L1),
-		length(Prefix, L2),
-		L1 > L2,
+		append(NewPrefix, [P| S], Full),
+		length(NewPrefix, Length1),
+		length(Prefix, Length2),
+		Length1 > Length2,
 		S \= [],
 		has_smaller(P, S).
 
@@ -279,12 +286,12 @@
 		replace_first_smaller(Pivot, RevSuffix, Swap, RevSwapped),
 		reverse(RevSwapped, SwappedSuffix).
 
-	replace_first_smaller(Pivot, [H|T], H, [Pivot|T]) :-
-		H @< Pivot,
+	replace_first_smaller(Pivot, [Head| Tail], Head, [Pivot| Tail]) :-
+		Head @< Pivot,
 		!.
-	replace_first_smaller(Pivot, [H|T], Swap, [H|Rest]) :-
-		H @>= Pivot,
-		replace_first_smaller(Pivot, T, Swap, Rest).
+	replace_first_smaller(Pivot, [Head| Tail], Swap, [Head| Rest]) :-
+		Head @>= Pivot,
+		replace_first_smaller(Pivot, Tail, Swap, Rest).
 
 	% indexed access to subsequences
 
@@ -296,16 +303,16 @@
 		nth_permutation_helper(List, Index, Permutation).
 
 	% Helper using factorial number system (Lehmer code)
-	nth_permutation_helper([], _, []).
-	nth_permutation_helper(List, Index, [H|Perm]) :-
-		List \= [],
+	nth_permutation_helper([], _, []) :-
+		!.
+	nth_permutation_helper(List, Index, [Head| Permutation]) :-
 		length(List, N),
 		N1 is N - 1,
 		factorial(N1, F),
 		Pos is Index // F,
-		nth0(Pos, List, H, Rest),
+		nth0(Pos, List, Head, Rest),
 		Index1 is Index mod F,
-		nth_permutation_helper(Rest, Index1, Perm).
+		nth_permutation_helper(Rest, Index1, Permutation).
 
 	nth_combination(K, List, Index, Combination) :-
 		length(List, N),
@@ -317,14 +324,15 @@
 	% Helper using combinatorial number system
 	% Algorithm: For each element in the combination, find which element from the list to pick
 	% such that the remaining elements can form valid combinations
-	nth_combination_helper(0, _, _, []).
-	nth_combination_helper(K, List, Index, [H|Comb]) :-
+	nth_combination_helper(0, _, _, []) :-
+		!.
+	nth_combination_helper(K, List, Index, [Head| Comb]) :-
 		K > 0,
 		length(List, N),
 		% We need to find position C in the current list
 		% Count how many combinations start with each position
 		find_comb_position(N, K, Index, C, IndexRemainder),
-		nth0(C, List, H),
+		nth0(C, List, Head),
 		C1 is C + 1,
 		drop(C1, List, Rest),
 		K1 is K - 1,
@@ -358,22 +366,23 @@
 		combination_index_helper(K, List, Combination, 0, Index).
 
 	% Base case: empty combination
-	combination_index_helper(0, _, [], Index, Index).
+	combination_index_helper(0, _, [], Index, Index) :-
+		!.
 	% Recursive case: find position of first element and count skipped combinations
-	combination_index_helper(K, [H|T], [H|Comb], Index0, Index) :-
+	combination_index_helper(K, [Head| Tail], [Head| Comb], Index0, Index) :-
 		% First element matches - continue with rest
 		K > 0,
 		!,
 		K1 is K - 1,
-		combination_index_helper(K1, T, Comb, Index0, Index).
-	combination_index_helper(K, [_|T], Combination, Index0, Index) :-
+		combination_index_helper(K1, Tail, Comb, Index0, Index).
+	combination_index_helper(K, [_| Tail], Combination, Index0, Index) :-
 		% First element doesn't match - count combinations we're skipping
 		K > 0,
-		length(T, N),
+		length(Tail, N),
 		K1 is K - 1,
 		binomial(N, K1, Skip),
 		Index1 is Index0 + Skip,
-		combination_index_helper(K, T, Combination, Index1, Index).
+		combination_index_helper(K, Tail, Combination, Index1, Index).
 
 	permutation_index(List, Permutation, Index) :-
 		length(List, N),
@@ -381,11 +390,12 @@
 		permutation_index_helper(List, Permutation, 0, Index).
 
 	% Helper using factorial number system (Lehmer code) - inverse of nth_permutation_helper
-	permutation_index_helper([], [], Index, Index) :- !.
+	permutation_index_helper([], [], Index, Index) :-
+		!.
 	permutation_index_helper(List, [Head| Permutation], Index0, Index) :-
 		List \= [],
 		length(List, N),
-		nth0(Pos, List, Head, Rest),
+		once(nth0(Pos, List, Head, Rest)),
 		N1 is N - 1,
 		factorial(N1, F),
 		Index1 is Index0 + Pos * F,
@@ -397,8 +407,10 @@
 		lcs_dp(List1, List2, LCS).
 
 	% Dynamic programming LCS
-	lcs_dp([], _, []).
-	lcs_dp(_, [], []).
+	lcs_dp([], _, []) :-
+		!.
+	lcs_dp(_, [], []) :-
+		!.
 	lcs_dp([Head| Tail1], [Head| Tail2], [Head| LCS]) :-
 		!,
 		lcs_dp(Tail1, Tail2, LCS).
@@ -416,19 +428,19 @@
 		lis_helper(List, [], LIS).
 
 	% Helper for LIS using patience sorting approach
-	lis_helper([], Acc, LIS) :-
-		longest_list(Acc, LIS).
-	lis_helper([H|T], Acc, LIS) :-
-		insert_or_extend(H, Acc, NewAcc),
-		lis_helper(T, NewAcc, LIS).
+	lis_helper([], LIS0, LIS) :-
+		longest_list(LIS0, LIS).
+	lis_helper([Head| Tail], LIS0, LIS) :-
+		insert_or_extend(Head, LIS0, LIS1),
+		lis_helper(Tail, LIS1, LIS).
 
 	insert_or_extend(X, [], [[X]]).
-	insert_or_extend(X, [Seq|Rest], [Seq|NewRest]) :-
-		Seq = [Last|_],
+	insert_or_extend(X, [Seq| Rest], [Seq| NewRest]) :-
+		Seq = [Last| _],
 		X =< Last,
 		!,
 		insert_or_extend(X, Rest, NewRest).
-	insert_or_extend(X, [Seq|Rest], [[X|Seq]|Rest]).
+	insert_or_extend(X, [Seq| Rest], [[X| Seq]| Rest]).
 
 	longest_list([], []).
 	longest_list([Head| Tail], Longest) :-
@@ -444,19 +456,19 @@
 	longest_decreasing_subsequence(List, LDS) :-
 		lds_helper(List, [], LDS).
 
-	lds_helper([], Acc, LDS) :-
-		longest_list(Acc, LDS).
-	lds_helper([H|T], Acc, LDS) :-
-		insert_or_extend_decreasing(H, Acc, NewAcc),
-		lds_helper(T, NewAcc, LDS).
+	lds_helper([], LDS0, LDS) :-
+		longest_list(LDS0, LDS).
+	lds_helper([Head| Tail], LDS0, LDS) :-
+		insert_or_extend_decreasing(Head, LDS0, LDS1),
+		lds_helper(Tail, LDS1, LDS).
 
 	insert_or_extend_decreasing(X, [], [[X]]).
-	insert_or_extend_decreasing(X, [Seq|Rest], [Seq|NewRest]) :-
+	insert_or_extend_decreasing(X, [Seq| Rest], [Seq| NewRest]) :-
 		Seq = [Last|_],
 		X >= Last,
 		!,
 		insert_or_extend_decreasing(X, Rest, NewRest).
-	insert_or_extend_decreasing(X, [Seq|Rest], [[X|Seq]|Rest]).
+	insert_or_extend_decreasing(X, [Seq| Rest], [[X| Seq]| Rest]).
 
 	longest_common_increasing_subsequence(List1, List2, LCIS) :-
 		findall(Seq, (subsequence(List1, Seq), subsequence(List2, Seq), is_increasing(Seq)), Seqs),
@@ -464,9 +476,9 @@
 
 	is_increasing([]).
 	is_increasing([_]).
-	is_increasing([A,B|T]) :-
+	is_increasing([A,B| Tail]) :-
 		A @< B,
-		is_increasing([B|T]).
+		is_increasing([B| Tail]).
 
 	longest_repeating_subsequence(List, LRS) :-
 		% LRS is like LCS but with constraint that indices must differ
@@ -474,30 +486,31 @@
 
 	lrs_helper([], _, _, _, []).
 	lrs_helper(_, [], _, _, []).
-	lrs_helper([H|T1], [H|T2], I, J, [H|LRS]) :-
+	lrs_helper([Head| Tail1], [Head| Tail2], I, J, [Head| LRS]) :-
 		I \= J,
 		!,
 		I1 is I + 1,
 		J1 is J + 1,
-		lrs_helper(T1, T2, I1, J1, LRS).
-	lrs_helper([_|T1], [_|T2], I, J, LRS) :-
+		lrs_helper(Tail1, Tail2, I1, J1, LRS).
+	lrs_helper([_| Tail1], [_| Tail2], I, J, LRS) :-
 		I1 is I + 1,
 		J1 is J + 1,
-		lrs_helper([_|T1], T2, I, J1, LRS1),
-		lrs_helper(T1, [_|T2], I1, J, LRS2),
-		(	length(LRS1, L1),
-			length(LRS2, L2),
-			L1 >= L2 ->
+		lrs_helper([_| Tail1], Tail2, I, J1, LRS1),
+		lrs_helper(Tail1, [_| Tail2], I1, J, LRS2),
+		(	length(LRS1, Length1),
+			length(LRS2, Length2),
+			Length1 >= Length2 ->
 			LRS = LRS1
 		;	LRS = LRS2
 		).
 
-	is_subsequence_of([], _).
-	is_subsequence_of([H|T1], [H|T2]) :-
+	is_subsequence_of([], _) :-
+		!.
+	is_subsequence_of([Head| Tail1], [Head| Tail2]) :-
 		!,
-		is_subsequence_of(T1, T2).
-	is_subsequence_of(Sub, [_|T]) :-
-		is_subsequence_of(Sub, T).
+		is_subsequence_of(Tail1, Tail2).
+	is_subsequence_of(Subsequence, [_| Tail]) :-
+		is_subsequence_of(Subsequence, Tail).
 
 	common_subsequences(List1, List2, CommonSubsequences) :-
 		findall(Subsequence, (subsequence(List1, Subsequence), subsequence(List2, Subsequence)), CommonSubsequences).
@@ -514,7 +527,7 @@
 
 	count_distinct_subseq_dp([], _, _, _, 1) :- !.
 	count_distinct_subseq_dp(_, [], _, _, 0) :- !.
-	count_distinct_subseq_dp([P|Ps], [L|Ls], M, N, Count) :-
+	count_distinct_subseq_dp([P| Ps], [L| Ls], M, N, Count) :-
 		M1 is M - 1,
 		N1 is N - 1,
 		(	P == L ->
@@ -533,7 +546,8 @@
 		is_prefix_of(Tail1, Tail2).
 
 	is_suffix_of(Suffix, List) :-
-		append(_, Suffix, List).
+		append(_, Suffix, List),
+		!.
 
 	% contiguous subsequences
 
@@ -622,13 +636,13 @@
 		Subsequence = [_, _| _],
 		is_alternating(Subsequence).
 
-	is_alternating([A, B, C| T]) :-
+	is_alternating([A, B, C| Tail]) :-
 		!,
 		(	A @< B, B @> C ->
 			true
 		; 	A @> B, B @< C
 		),
-		is_alternating([B, C| T]).
+		is_alternating([B, C| Tail]).
 	is_alternating(_).
 
 	k_distinct_subsequences(K, List, Subsequences) :-
@@ -639,9 +653,9 @@
 		all_distinct(Subsequence).
 
 	all_distinct([]).
-	all_distinct([H|T]) :-
-		\+ member(H, T),
-		all_distinct(T).
+	all_distinct([Head| Tail]) :-
+		\+ member(Head, Tail),
+		all_distinct(Tail).
 
 	% utility predicates
 
