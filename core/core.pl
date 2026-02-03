@@ -29142,6 +29142,32 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	'$lgt_read_term'(Stream, NextTerm, [variable_names(NextVariableNames), singletons(NextSingletons)], NextLines),
 	'$lgt_read_stream_to_terms'(NextTerm, NextVariableNames, NextSingletons, NextLines, File, Stream, Terms, Mode).
+'$lgt_read_stream_to_terms'((:- uses(Object, Resources)), VariableNames, Singletons, Lines, File, Stream, [(:- uses(Object, Resources))-sd(VariableNames,Singletons,Lines)| Terms], Mode) :-
+	!,
+	forall(
+		'$lgt_member'(op(Priority, Specifier, Operators), Resources),
+		(	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
+			(	'$lgt_pp_entity_'(_, _, _) ->
+				'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l, File, Lines, Mode)
+			;	'$lgt_activate_file_operators'(Priority, Specifier, Operators, Mode)
+			)
+		)
+	),
+	'$lgt_read_term'(Stream, NextTerm, [variable_names(NextVariableNames), singletons(NextSingletons)], NextLines),
+	'$lgt_read_stream_to_terms'(NextTerm, NextVariableNames, NextSingletons, NextLines, File, Stream, Terms, Mode).
+'$lgt_read_stream_to_terms'((:- use_module(Module, Resources)), VariableNames, Singletons, Lines, File, Stream, [(:- use_module(Module, Resources))-sd(VariableNames,Singletons,Lines)| Terms], Mode) :-
+	!,
+	forall(
+		'$lgt_member'(op(Priority, Specifier, Operators), Resources),
+		(	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
+			(	'$lgt_pp_entity_'(_, _, _) ->
+				'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l, File, Lines, Mode)
+			;	'$lgt_activate_file_operators'(Priority, Specifier, Operators, Mode)
+			)
+		)
+	),
+	'$lgt_read_term'(Stream, NextTerm, [variable_names(NextVariableNames), singletons(NextSingletons)], NextLines),
+	'$lgt_read_stream_to_terms'(NextTerm, NextVariableNames, NextSingletons, NextLines, File, Stream, Terms, Mode).
 '$lgt_read_stream_to_terms'(Term, VariableNames, Singletons, Lines, File, Stream, [Term-sd(VariableNames,Singletons,Lines)| Terms], Mode) :-
 	'$lgt_report_singleton_variables'(Mode, Singletons, Term, File, Lines),
 	'$lgt_read_term'(Stream, NextTerm, [variable_names(NextVariableNames), singletons(NextSingletons)], NextLines),

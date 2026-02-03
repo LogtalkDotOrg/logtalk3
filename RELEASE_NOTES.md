@@ -38,6 +38,10 @@ behavior for source files defined parametric entities.
 `create_object/4` built-in predicate with valid object relation arguments
 would result in a compiler error. Thanks to Paul Brown for the bug report.
 
+* FIXED: Compiler bug where compiling an `include/1` directive where the
+included file contains `uses/2` or `use_module/2` directives that define
+operators would result in syntax errors.
+
 Prolog adapter and integration files
 ------------------------------------
 
