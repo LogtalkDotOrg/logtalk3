@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:87:0,
+		version is 0:88:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-12-18,
+		date is 2026-02-04,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -2161,12 +2161,12 @@
 		(	Covered =:= Total ->
 			% all clause are covered
 			(	Total =:= 1 ->
-				{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests coverage: ~w clause - ~w~n', [File, Line, Covered/Total, '(all)'])}
-			;	{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests coverage: ~w clauses - ~w~n', [File, Line, Covered/Total, '(all)'])}
+				{format(vscode_test_results, 'File:~w;Line:~d;Entity:~q;Predicate:~q;Status:Tests coverage: ~w clause - ~w~n', [File, Line, Entity, Predicate, Covered/Total, '(all)'])}
+			;	{format(vscode_test_results, 'File:~w;Line:~d;Entity:~q;Predicate:~q;Status:Tests coverage: ~w clauses - ~w~n', [File, Line, Entity, Predicate, Covered/Total, '(all)'])}
 			)
 		;	(	Total =:= 1 ->
-				{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests coverage: ~w clause - ~w~n', [File, Line, Covered/Total, Clauses])}
-			;	{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests coverage: ~w clauses - ~w~n', [File, Line, Covered/Total, Clauses])}
+				{format(vscode_test_results, 'File:~w;Line:~d;Entity:~q;Predicate:~q;Status:Tests coverage: ~w clause - ~w~n', [File, Line, Entity, Predicate, Covered/Total, Clauses])}
+			;	{format(vscode_test_results, 'File:~w;Line:~d;Entity:~q;Predicate:~q;Status:Tests coverage: ~w clauses - ~w~n', [File, Line, Entity, Predicate, Covered/Total, Clauses])}
 			)
 		),
 		fail.

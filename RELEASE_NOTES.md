@@ -165,6 +165,9 @@ systems with bounded integers. Thanks to Daniel Diaz for the bug report.
 VCS support
 -----------
 
+* UPDATED: The VSCode support to include per entity and per entity predicate
+code coverage data when creating test results files.
+
 * UPDATED: The `Logtalk.gitignore`, `Logtalk.hgignore`, and `Logtalk.p4ignore`
 template files to also ignore the temporary files created by the Logtalk for
 VSCode extension.
