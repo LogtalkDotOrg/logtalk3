@@ -22,9 +22,9 @@
 :- object(ccsds(_SecondaryHeaderLength_)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:5:1,
 		author is 'Paulo Moura',
-		date is 2025-12-15,
+		date is 2026-02-04,
 		comment is 'CCSDS Space Packet parser following the CCSDS 133.0-B-2 standard. Parses binary packet data including optional secondary headers.',
 		parameters is [
 			'SecondaryHeaderLength' - 'Length in bytes of the secondary header when present (0 for no secondary header parsing, or a positive integer).'
@@ -138,7 +138,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2
+		length/2
 	]).
 
 	:- uses(reader, [
