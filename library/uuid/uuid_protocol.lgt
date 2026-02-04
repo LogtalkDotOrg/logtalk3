@@ -22,9 +22,9 @@
 :- protocol(uuid_protocol).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2026-01-23,
+		date is 2026-02-04,
 		comment is 'Universally unique identifier (UUID) generator protocol.'
 	]).
 
@@ -52,7 +52,21 @@
 	:- public(uuid_null/1).
 	:- mode(uuid_null(--ground), one).
 	:- info(uuid_null/1, [
-		comment is 'Returns the null UUID.',
+		comment is 'Returns the null UUID. Deprecated. Use ``uuid_nil/1`` instead.',
+		argnames is ['UUID']
+	]).
+
+	:- public(uuid_nil/1).
+	:- mode(uuid_nil(--ground), one).
+	:- info(uuid_nil/1, [
+		comment is 'Returns the Nil UUID.',
+		argnames is ['UUID']
+	]).
+
+	:- public(uuid_max/1).
+	:- mode(uuid_max(--ground), one).
+	:- info(uuid_max/1, [
+		comment is 'Returns the Max UUID.',
 		argnames is ['UUID']
 	]).
 

@@ -146,13 +146,17 @@ Similar to get a UUID using a list of character codes representation:
            56,102,50,97,45,49,98,51,99,52,100,53,101,54,102,55,48]
    yes
 
-Generating the null UUID
-------------------------
+Generating the Nil and Max UUIDs
+--------------------------------
 
-A predicate is also provided that returns the null UUID:
+Predicates are also provided that return the Nil and Max UUIDs:
 
 ::
 
-   | ?- uuid::uuid_null(UUID).
+   | ?- uuid::uuid_nil(UUID).
    UUID = '00000000-0000-0000-0000-000000000000'
+   yes
+
+   | ?- uuid::uuid_max(UUID).
+   UUID = 'FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF'
    yes

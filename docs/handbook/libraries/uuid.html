@@ -144,7 +144,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#generating-version-1-uuids">Generating version 1 UUIDs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generating-version-4-uuids">Generating version 4 UUIDs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generating-version-7-uuids">Generating version 7 UUIDs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#generating-the-null-uuid">Generating the null UUID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generating-the-nil-and-max-uuids">Generating the Nil and Max UUIDs</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="yaml.html"><code class="docutils literal notranslate"><span class="pre">yaml</span></code></a></li>
@@ -305,11 +305,15 @@ yes
 </pre></div>
 </div>
 </section>
-<section id="generating-the-null-uuid">
-<h2>Generating the null UUID<a class="headerlink" href="#generating-the-null-uuid" title="Link to this heading"></a></h2>
-<p>A predicate is also provided that returns the null UUID:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> uuid<span class="o">::</span>uuid_null(<span class="nv">UUID</span>).
+<section id="generating-the-nil-and-max-uuids">
+<h2>Generating the Nil and Max UUIDs<a class="headerlink" href="#generating-the-nil-and-max-uuids" title="Link to this heading"></a></h2>
+<p>Predicates are also provided that return the Nil and Max UUIDs:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> uuid<span class="o">::</span>uuid_nil(<span class="nv">UUID</span>).
 <span class="nv">UUID</span> <span class="o">=</span> <span class="s">&#39;00000000-0000-0000-0000-000000000000&#39;</span>
+yes
+
+| <span class="o">?-</span> uuid<span class="o">::</span>uuid_max(<span class="nv">UUID</span>).
+<span class="nv">UUID</span> <span class="o">=</span> <span class="s">&#39;FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF&#39;</span>
 yes
 </pre></div>
 </div>

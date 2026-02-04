@@ -22,8 +22,8 @@ RELEASE NOTES
 =============
 
 
-3.98.0 - January ??, 2026
-=========================
+3.98.0 - February ??, 2026
+==========================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -108,9 +108,10 @@ predicates.
 * ADDED: Support for the SplitMix64, Xoshiro128++, Xoshiro128**, Xoshiro256++,
 and Xoshiro256** algorithms to the `random` library.
 
-* UPDATED: The `sets` library with a treap (tree heap) implementation.
+* ADDED: Support for version 7 UUIDs to the `uuid` library. Also added
+`uuid_nil/1` and `uuid_max/1` predicates per RFC 9562.
 
-* UPDATED: The `uuid` library to also support version 7 UUIDs.
+* UPDATED: The `sets` library with a treap (tree heap) implementation.
 
 * UPDATED: The `heaps` library with pairing heap implementation.
 

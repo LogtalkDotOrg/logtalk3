@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2026-01-23,
+		date is 2026-02-04,
 		comment is 'Unit tests for the "uuid" library.'
 	]).
 
@@ -36,14 +36,23 @@
 	quick_check(uuid_v4_valid, uuid_v4_valid(-chars)).
 	quick_check(uuid_v7_valid, uuid_v7_valid(-chars)).
 
-	test(uuid_null_atom, true(atom(UUID))) :-
-		uuid(atom)::uuid_null(UUID).
+	test(uuid_nil_atom, true(atom(UUID))) :-
+		uuid(atom)::uuid_nil(UUID).
 
-	test(uuid_null_chars, true(type::valid(chars,UUID))) :-
-		uuid(chars)::uuid_null(UUID).
+	test(uuid_nil_chars, true(type::valid(chars,UUID))) :-
+		uuid(chars)::uuid_nil(UUID).
 
-	test(uuid_null_codes, true(type::valid(codes,UUID))) :-
-		uuid(codes)::uuid_null(UUID).
+	test(uuid_nil_codes, true(type::valid(codes,UUID))) :-
+		uuid(codes)::uuid_nil(UUID).
+
+	test(uuid_max_atom, true(atom(UUID))) :-
+		uuid(atom)::uuid_max(UUID).
+
+	test(uuid_max_chars, true(type::valid(chars,UUID))) :-
+		uuid(chars)::uuid_max(UUID).
+
+	test(uuid_max_codes, true(type::valid(codes,UUID))) :-
+		uuid(codes)::uuid_max(UUID).
 
 	test(uuid_random_node, true(type::valid(list(byte,6),Node))) :-
 		uuid::random_node(Node).

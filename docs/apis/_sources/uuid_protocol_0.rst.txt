@@ -14,8 +14,8 @@ Universally unique identifier (UUID) generator protocol.
 |    ``logtalk_load(uuid(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:4:0
-| **Date:** 2026-01-23
+| **Version:** 0:5:0
+| **Date:** 2026-02-04
 
 | **Compilation flags:**
 |    ``static``
@@ -101,7 +101,7 @@ Returns a version 7 UUID.
 ``uuid_null/1``
 ^^^^^^^^^^^^^^^
 
-Returns the null UUID.
+Returns the null UUID. Deprecated. Use ``uuid_nil/1`` instead.
 
 | **Compilation flags:**
 |    ``static``
@@ -110,6 +110,44 @@ Returns the null UUID.
 |    ``uuid_null(UUID)``
 | **Mode and number of proofs:**
 |    ``uuid_null(--ground)`` - ``one``
+
+
+------------
+
+.. index:: uuid_nil/1
+.. _uuid_protocol/0::uuid_nil/1:
+
+``uuid_nil/1``
+^^^^^^^^^^^^^^
+
+Returns the Nil UUID.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``uuid_nil(UUID)``
+| **Mode and number of proofs:**
+|    ``uuid_nil(--ground)`` - ``one``
+
+
+------------
+
+.. index:: uuid_max/1
+.. _uuid_protocol/0::uuid_max/1:
+
+``uuid_max/1``
+^^^^^^^^^^^^^^
+
+Returns the Max UUID.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``uuid_max(UUID)``
+| **Mode and number of proofs:**
+|    ``uuid_max(--ground)`` - ``one``
 
 
 ------------

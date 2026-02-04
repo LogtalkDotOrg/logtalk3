@@ -23,9 +23,9 @@
 	implements(uuid_protocol)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Paulo Moura',
-		date is 2026-01-23,
+		date is 2026-02-04,
 		comment is 'Universally unique identifier (UUID) generator.',
 		parameters is [
 			'Representation' - 'Text representation for the UUID. Possible values are ``atom``, ``chars``, and ``codes``.'
@@ -140,11 +140,21 @@
 	codes_to_uuid(codes, UUID, UUID).
 
 	uuid_null(UUID) :-
-		uuid_null(_Representation_, UUID).
+		uuid_nil(_Representation_, UUID).
 
-	uuid_null(atom,  '00000000-0000-0000-0000-000000000000').
-	uuid_null(chars, ['0','0','0','0','0','0','0','0',-,'0','0','0','0',-,'0','0','0','0',-,'0','0','0','0',-,'0','0','0','0','0','0','0','0','0','0','0','0']).
-	uuid_null(codes, [48,48,48,48,48,48,48,48,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,48,48,48,48,48,48,48,48]).
+	uuid_nil(UUID) :-
+		uuid_nil(_Representation_, UUID).
+
+	uuid_nil(atom,  '00000000-0000-0000-0000-000000000000').
+	uuid_nil(chars, ['0','0','0','0','0','0','0','0',-,'0','0','0','0',-,'0','0','0','0',-,'0','0','0','0',-,'0','0','0','0','0','0','0','0','0','0','0','0']).
+	uuid_nil(codes, [48,48,48,48,48,48,48,48,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,48,48,48,48,48,48,48,48]).
+
+	uuid_max(UUID) :-
+		uuid_max(_Representation_, UUID).
+
+	uuid_max(atom,  'FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF').
+	uuid_max(chars, ['F','F','F','F','F','F','F','F',-,'F','F','F','F',-,'F','F','F','F',-,'F','F','F','F',-,'F','F','F','F','F','F','F','F','F','F','F','F']).
+	uuid_max(codes, [70,70,70,70,70,70,70,70,45,70,70,70,70,45,70,70,70,70,45,70,70,70,70,45,70,70,70,70,70,70,70,70,70,70,70,70]).
 
 	random_node(Node) :-
 		random_bytes(6, Node).
