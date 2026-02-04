@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-151 1013,-151 1013,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol heap_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;02&#45;04, 01:08</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;02&#45;04, 11:47</text>
 <g id="clust1" class="cluster">
 <title>cluster_heap_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="heap_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 989,-54.25 989,-54.25 995,-54.25 1001,-60.25 1001,-66.25 1001,-66.25 1001,-127 1001,-127 1001,-133 995,-139 989,-139 989,-139 20,-139 20,-139 14,-139 8,-133 8,-127 8,-127 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-121.5" font-family="Monospace" font-size="10.00" fill="dimgray">heap_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>insert/4</title>
 <polygon fill="springgreen" stroke="black" points="98.25,-100.25 17.75,-100.25 17.75,-64.25 98.25,-64.25 98.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="25.75" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="31" y="-84.17" font-family="Monospace" font-size="11.00">insert/4</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>insert_all/3</title>
 <polygon fill="springgreen" stroke="black" points="223.75,-100.25 116.25,-100.25 116.25,-64.25 223.75,-64.25 223.75,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="124.25" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L39">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="129.5" y="-84.17" font-family="Monospace" font-size="11.00">insert_all/3</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>delete/4</title>
 <polygon fill="springgreen" stroke="black" points="322.25,-100.25 241.75,-100.25 241.75,-64.25 322.25,-64.25 322.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="249.75" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L46">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="255" y="-84.17" font-family="Monospace" font-size="11.00">delete/4</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>merge/3</title>
 <polygon fill="springgreen" stroke="black" points="413.88,-100.25 340.12,-100.25 340.12,-64.25 413.88,-64.25 413.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="348.12" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L53">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="353.38" y="-84.17" font-family="Monospace" font-size="11.00">merge/3</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>empty/1</title>
 <polygon fill="springgreen" stroke="black" points="505.88,-100.25 432.12,-100.25 432.12,-64.25 505.88,-64.25 505.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="440.12" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L60">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="445.38" y="-84.17" font-family="Monospace" font-size="11.00">empty/1</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>size/2</title>
 <polygon fill="springgreen" stroke="black" points="590.5,-100.25 523.5,-100.25 523.5,-64.25 590.5,-64.25 590.5,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="531.5" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L67">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="536.75" y="-84.17" font-family="Monospace" font-size="11.00">size/2</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>as_list/2</title>
 <polygon fill="springgreen" stroke="black" points="695.62,-100.25 608.38,-100.25 608.38,-64.25 695.62,-64.25 695.62,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="616.38" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L74">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="621.62" y="-84.17" font-family="Monospace" font-size="11.00">as_list/2</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>as_heap/2</title>
 <polygon fill="springgreen" stroke="black" points="800.62,-100.25 713.38,-100.25 713.38,-64.25 800.62,-64.25 800.62,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="721.38" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L81">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="726.62" y="-84.17" font-family="Monospace" font-size="11.00">as_heap/2</text>
 </a>
 </g>
@@ -141,7 +141,7 @@
 <title>top/3</title>
 <polygon fill="springgreen" stroke="black" points="879.12,-100.25 818.88,-100.25 818.88,-64.25 879.12,-64.25 879.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="826.88" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L88">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="832.12" y="-84.17" font-family="Monospace" font-size="11.00">top/3</text>
 </a>
 </g>
@@ -155,7 +155,7 @@
 <title>top_next/5</title>
 <polygon fill="springgreen" stroke="black" points="991,-100.25 897,-100.25 897,-64.25 991,-64.25 991,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="905" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/777ab4be0787fd854de43b937da4c3455301ded0/library/heaps/heap_protocol.lgt#L95">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fce052ef1214f551223d64864c3f82db7c35c8d7/library/heaps/heap_protocol.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="910.25" y="-84.17" font-family="Monospace" font-size="11.00">top_next/5</text>
 </a>
 </g>
