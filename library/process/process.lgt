@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2025-01-29,
+		date is 2026-02-04,
 		comment is 'Portable process handling predicates.',
 		remarks is [
 			'Supported backend Prolog systems' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.'
@@ -61,6 +61,10 @@
 	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
+
+		:- uses(user, [
+			member/2
+		]).
 
 		create(Executable, Arguments, Options) :-
 			build_streams_list(Options, Streams),
@@ -101,6 +105,10 @@
 			{kill(Pid, 9)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
+
+		:- uses(user, [
+			atomic_list_concat/3, member/2
+		]).
 
 		create(Executable, Arguments, Options) :-
 			atomic_list_concat([Executable| Arguments], ' ', Command),
@@ -287,13 +295,9 @@
 
 	:- endif.
 
-		signal_number(sighup,   1).
-		signal_number(sigint,   2).
-		signal_number(sigkill,  9).
-		signal_number(sigterm, 15).
-
-	member(Head, [Head| _]).
-	member(Head, [_| Tail]) :-
-		member(Head, Tail).
+	signal_number(sighup,   1).
+	signal_number(sigint,   2).
+	signal_number(sigkill,  9).
+	signal_number(sigterm, 15).
 
 :- end_object.
