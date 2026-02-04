@@ -23,9 +23,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0:42:0,
+		version is 0:43:0,
 		author is 'Paulo Moura',
-		date is 2026-01-14,
+		date is 2026-02-04,
 		comment is 'Command-line help for Logtalk tools, libraries, entities, predicates, and non-terminals.'
 	]).
 
@@ -708,7 +708,7 @@
 		% assume .xhtml files already cached
 		!.
 	cache_epub_xhtml_files :-
-		% cache the .xhtml files by extracting thme from the .epub archives
+		% cache the .xhtml files by extracting thme from the .epub archives if they exist
 		current_logtalk_flag(version_data, logtalk(Major,Minor,Patch, _)),
 		environment_variable('LOGTALKUSER', LOGTALKUSER),
 		atomic_list_concat([LOGTALKUSER, '/tools/help/.docs_cache/docs/handbook'], HandbookDirectory),
@@ -717,22 +717,26 @@
 		make_directory_path(APIsDirectory),
 		environment_variable('LOGTALKHOME', LOGTALKHOME),
 		atomic_list_concat([LOGTALKHOME, '/docs/handbook/TheLogtalkHandbook-', Major, '.', Minor, '.', Patch, '.epub'], HandbookFile),
-		copy_file(HandbookFile, HandbookDirectory),
 		atomic_list_concat([LOGTALKHOME, '/docs/apis/LogtalkAPIs-', Major, '.', Minor, '.', Patch, '.epub'], APIsFile),
-		copy_file(APIsFile, APIsDirectory),
-		atomic_list_concat([LOGTALKUSER, '/tools/help/.docs_cache/docs/handbook/TheLogtalkHandbook-', Major, '.', Minor, '.', Patch, '.epub'], HandbookFileCopy),
-		atomic_list_concat(['bsdtar -xf "', HandbookFileCopy, '" --directory "', HandbookDirectory, '"'], Command1),
-		shell(Command1),
-		atomic_list_concat([LOGTALKUSER, '/tools/help/.docs_cache/docs/apis/LogtalkAPIs-', Major, '.', Minor, '.', Patch, '.epub'], HandbookAPIsCopy),
-		atomic_list_concat(['bsdtar -xf "', HandbookAPIsCopy, '" --directory "', APIsDirectory, '"'], Command2),
-		shell(Command2),
-		atomic_list_concat(['find "', LOGTALKUSER, '/tools/help/.docs_cache/docs', '" -type f -name "*.xhtml" -exec sed -i.bak \'s/\\.html#/.xhtml#/g\' {} +'], Command3),
-		shell(Command3),
-		atomic_list_concat(['find "', LOGTALKUSER, '/tools/help/.docs_cache/docs', '" -name "*.bak" -delete'], Command4),
-		shell(Command4),
-		atomic_list_concat([LOGTALKUSER, '/VERSION.txt'], OriginalFile),
-		atomic_list_concat([LOGTALKUSER, '/tools/help/.docs_cache/VERSION.txt'], CopyFile),
-		copy_file(OriginalFile, CopyFile).
+		(	file_exists(HandbookFile),
+			file_exists(APIsFile) ->
+			copy_file(HandbookFile, HandbookDirectory),
+			copy_file(APIsFile, APIsDirectory),
+			atomic_list_concat([LOGTALKUSER, '/tools/help/.docs_cache/docs/handbook/TheLogtalkHandbook-', Major, '.', Minor, '.', Patch, '.epub'], HandbookFileCopy),
+			atomic_list_concat(['bsdtar -xf "', HandbookFileCopy, '" --directory "', HandbookDirectory, '"'], Command1),
+			shell(Command1),
+			atomic_list_concat([LOGTALKUSER, '/tools/help/.docs_cache/docs/apis/LogtalkAPIs-', Major, '.', Minor, '.', Patch, '.epub'], HandbookAPIsCopy),
+			atomic_list_concat(['bsdtar -xf "', HandbookAPIsCopy, '" --directory "', APIsDirectory, '"'], Command2),
+			shell(Command2),
+			atomic_list_concat(['find "', LOGTALKUSER, '/tools/help/.docs_cache/docs', '" -type f -name "*.xhtml" -exec sed -i.bak \'s/\\.html#/.xhtml#/g\' {} +'], Command3),
+			shell(Command3),
+			atomic_list_concat(['find "', LOGTALKUSER, '/tools/help/.docs_cache/docs', '" -name "*.bak" -delete'], Command4),
+			shell(Command4),
+			atomic_list_concat([LOGTALKUSER, '/VERSION.txt'], OriginalFile),
+			atomic_list_concat([LOGTALKUSER, '/tools/help/.docs_cache/VERSION.txt'], CopyFile),
+			copy_file(OriginalFile, CopyFile)
+		;	true
+		).
 
 	man(Page) :-
 		\+ man_page_url(Page, _),
