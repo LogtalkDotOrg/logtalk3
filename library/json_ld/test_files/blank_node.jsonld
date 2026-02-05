@@ -1,0 +1,12 @@
+{
+  "@context": {
+    "name": "http://schema.org/name",
+    "knows": "http://schema.org/knows"
+  },
+  "@id": "_:b0",
+  "name": "Anonymous",
+  "knows": {
+    "@id": "_:b1",
+    "name": "Another Anonymous"
+  }
+}

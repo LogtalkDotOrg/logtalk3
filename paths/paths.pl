@@ -139,6 +139,7 @@ logtalk_library_path(java, library('java/')).
 logtalk_library_path(json, library('json/')).
 logtalk_library_path(json_lines, library('json_lines/')).
 logtalk_library_path(json_schema, library('json_schema/')).
+logtalk_library_path(json_ld, library('json_ld/')).
 logtalk_library_path(listing, library('listing/')).
 logtalk_library_path(logging, library('logging/')).
 logtalk_library_path(loops, library('loops/')).

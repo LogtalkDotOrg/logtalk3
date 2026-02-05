@@ -1,0 +1,19 @@
+{
+  "@context": {
+    "@vocab": "http://schema.org/"
+  },
+  "@id": "http://example.org/collection",
+  "@type": "ItemList",
+  "@included": [
+    {
+      "@id": "http://example.org/items/1",
+      "@type": "Thing",
+      "name": "Item 1"
+    },
+    {
+      "@id": "http://example.org/items/2",
+      "@type": "Thing",
+      "name": "Item 2"
+    }
+  ]
+}

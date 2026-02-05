@@ -81,6 +81,8 @@ the Google Protocol Buffers binary format.
 
 * ADDED: New `base32`, `base58`, and `base85` libraries.
 
+* ADDED: New `json_ld` library for parsing and generating JSON-LD data.
+
 * ADDED: New `json_schema` library for parsing JSON Schema files and validating
 JSON files after a schema.
 

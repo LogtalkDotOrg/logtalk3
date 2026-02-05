@@ -1,0 +1,9 @@
+{
+  "@context": {
+    "foaf": "http://xmlns.com/foaf/0.1/"
+  },
+  "@id": "http://example.org/people/1",
+  "foaf:nick": {
+    "@list": ["joe", "bob", "jaybee"]
+  }
+}

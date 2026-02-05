@@ -1,0 +1,14 @@
+{
+  "@context": {
+    "name": "http://schema.org/name",
+    "description": "http://schema.org/description"
+  },
+  "name": [
+    { "@value": "The Mona Lisa", "@language": "en" },
+    { "@value": "La Joconde", "@language": "fr" }
+  ],
+  "description": {
+    "@value": "A portrait painting by Leonardo da Vinci",
+    "@language": "en"
+  }
+}

@@ -1467,6 +1467,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`subsequences_protocol <subsequences_protocol/0::common_subsequences/3>`
 
+``compact/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_ld_protocol <json_ld_protocol/0::compact/3>`
+
 ``compile_aux_clauses/1``
 -------------------------
 
@@ -3069,6 +3079,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`logtalk <logtalk/0::execution_context/7>`
 
+``expand/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_ld_protocol <json_ld_protocol/0::expand/2>`
+
 ``expand_library_path/2``
 -------------------------
 
@@ -3937,6 +3957,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`cbor(StringRepresentation) <cbor/1::generate/2>`
 * :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::generate/2>`
 * :ref:`html <html/0::generate/2>`
+* :ref:`json_ld_protocol <json_ld_protocol/0::generate/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::generate/2>`
 * :ref:`json_protocol <json_protocol/0::generate/2>`
 * :ref:`toon_protocol <toon_protocol/0::generate/2>`
@@ -7446,6 +7467,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`base85 <base85/0::parse/2>`
 * :ref:`cbor(StringRepresentation) <cbor/1::parse/2>`
 * :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::parse/2>`
+* :ref:`json_ld_protocol <json_ld_protocol/0::parse/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::parse/2>`
 * :ref:`json_protocol <json_protocol/0::parse/2>`
 * :ref:`json_schema_protocol <json_schema_protocol/0::parse/2>`

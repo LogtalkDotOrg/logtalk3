@@ -1,0 +1,9 @@
+{
+  "@context": {
+    "@vocab": "http://schema.org/"
+  },
+  "@id": "http://example.org/people/1",
+  "@type": "Person",
+  "name": "Alice",
+  "@index": "person-index"
+}

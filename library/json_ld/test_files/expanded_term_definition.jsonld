@@ -1,0 +1,18 @@
+{
+  "@context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "name": "http://schema.org/name",
+    "age": {
+      "@id": "http://schema.org/age",
+      "@type": "xsd:integer"
+    },
+    "homepage": {
+      "@id": "http://schema.org/url",
+      "@type": "@id"
+    }
+  },
+  "@id": "http://example.org/people/1",
+  "name": "Jane Doe",
+  "age": "30",
+  "homepage": "http://jane.example.org/"
+}

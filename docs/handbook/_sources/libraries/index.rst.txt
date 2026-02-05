@@ -63,6 +63,7 @@ directory in the ``NOTES.md`` file.
    intervals
    java
    json
+   json_ld
    json_lines
    json_schema
    listing

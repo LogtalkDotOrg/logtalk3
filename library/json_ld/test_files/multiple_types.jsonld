@@ -1,0 +1,8 @@
+{
+  "@context": {
+    "@vocab": "http://schema.org/"
+  },
+  "@id": "http://example.org/people/1",
+  "@type": ["Person", "Author"],
+  "name": "Jane Doe"
+}

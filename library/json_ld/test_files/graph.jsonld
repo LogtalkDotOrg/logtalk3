@@ -1,0 +1,17 @@
+{
+  "@context": {
+    "@vocab": "http://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "http://example.org/people/1",
+      "@type": "Person",
+      "name": "Alice"
+    },
+    {
+      "@id": "http://example.org/people/2",
+      "@type": "Person",
+      "name": "Bob"
+    }
+  ]
+}

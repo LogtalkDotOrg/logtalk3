@@ -1,0 +1,24 @@
+{
+  "@context": {
+    "@vocab": "http://schema.org/"
+  },
+  "@type": "Event",
+  "name": "Logtalk Conference 2025",
+  "startDate": "2025-07-01T09:00",
+  "endDate": "2025-07-03T17:00",
+  "location": {
+    "@type": "Place",
+    "name": "University of Lisbon",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Alameda da Universidade",
+      "addressLocality": "Lisbon",
+      "addressCountry": "PT"
+    }
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "Logtalk.org",
+    "url": "https://logtalk.org/"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "@context": {
+    "@vocab": "http://schema.org/"
+  },
+  "@id": "http://example.org/people/1",
+  "name": "Alice",
+  "@reverse": {
+    "knows": {
+      "@id": "http://example.org/people/2",
+      "name": "Bob"
+    }
+  }
+}

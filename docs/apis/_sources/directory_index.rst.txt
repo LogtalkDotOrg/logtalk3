@@ -504,6 +504,19 @@ To load an entity, always load the library that includes it using the goal ``log
    json(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_3>
    json_protocol <json_protocol_0>
 
+``library/json_ld/``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   json_ld <json_ld_0>
+   json_ld(StringRepresentation) <json_ld_1>
+   json_ld(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_ld_3>
+   json_ld_protocol <json_ld_protocol_0>
+
 ``library/json_lines/``
 -----------------------
 
