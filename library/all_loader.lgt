@@ -25,6 +25,7 @@
 		arbitrary(loader),
 		strings(loader),
 		string_distance(loader),
+		stemming(loader),
 		subsequences(loader),
 		os(loader),
 		process(loader),

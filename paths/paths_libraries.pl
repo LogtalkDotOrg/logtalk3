@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on February 4, 2026
+%  Last updated on February 5, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -88,6 +88,7 @@ logtalk_library_path(recorded_database, library('recorded_database/')).
 logtalk_library_path(redis, library('redis/')).
 logtalk_library_path(sets, library('sets/')).
 logtalk_library_path(statistics, library('statistics/')).
+logtalk_library_path(stemming, library('stemming/')).
 logtalk_library_path(string_distance, library('string_distance/')).
 logtalk_library_path(strings, library('strings/')).
 logtalk_library_path(subsequences, library('subsequences/')).

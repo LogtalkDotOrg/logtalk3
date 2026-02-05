@@ -753,6 +753,18 @@ To load an entity, always load the library that includes it using the goal ``log
    statistics <statistics_0>
    statisticsp <statisticsp_0>
 
+``library/stemming/``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   lovins_stemmer(Representation) <lovins_stemmer_1>
+   porter_stemmer(Representation) <porter_stemmer_1>
+   stemmer_protocol <stemmer_protocol_0>
+
 ``library/string_distance/``
 ----------------------------
 

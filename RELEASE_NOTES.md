@@ -92,6 +92,9 @@ and normalizing URLs.
 * ADDED: New `process` compatibility library. Supports ECLiPSe, GNU Prolog,
 SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
+* ADDED: New `stemming` library implementing Porter and Lovins algorithms for
+computing stems for English words.
+
 * ADDED: New `string_distance` library implementing common algorithms for
 computing the distance between two strings.
 

@@ -1,0 +1,97 @@
+.. index:: single: stemmer_protocol
+.. _stemmer_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``stemmer_protocol``
+====================
+
+Stemmer protocol for reducing words to their stems.
+
+| **Availability:** 
+|    ``logtalk_load(stemming(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-05
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: stem/2
+.. _stemmer_protocol/0::stem/2:
+
+``stem/2``
+^^^^^^^^^^
+
+Stems a single word, returning its root form.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stem(Word,Stem)``
+| **Mode and number of proofs:**
+|    ``stem(+text,-text)`` - ``one``
+
+
+------------
+
+.. index:: stems/2
+.. _stemmer_protocol/0::stems/2:
+
+``stems/2``
+^^^^^^^^^^^
+
+Stems a list of words, returning a list of their root forms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stems(Words,Stems)``
+| **Mode and number of proofs:**
+|    ``stems(+list(text),-list(text))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`porter_stemmer(Representation) <porter_stemmer/1>`, :ref:`lovins_stemmer(Representation) <lovins_stemmer/1>`
+

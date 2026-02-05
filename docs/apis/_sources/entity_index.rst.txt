@@ -197,6 +197,7 @@ Objects
    logger <logger_0>
    logtalk <logtalk_0>
    loop <loop_0>
+   lovins_stemmer(Representation) <lovins_stemmer_1>
    magic <magic_0>
    magic_expansion(Mode) <magic_expansion_1>
    maxheap <maxheap_0>
@@ -232,6 +233,7 @@ Objects
    pairs <pairs_0>
    pddl <pddl_0>
    population <population_0>
+   porter_stemmer(Representation) <porter_stemmer_1>
    ports_profiler <ports_profiler_0>
    print_goal_hook <print_goal_hook_0>
    process <process_0>
@@ -357,6 +359,7 @@ Protocols
    sampling_protocol <sampling_protocol_0>
    setp <setp_0>
    statisticsp <statisticsp_0>
+   stemmer_protocol <stemmer_protocol_0>
    subsequences_protocol <subsequences_protocol_0>
    term_io_protocol <term_io_protocol_0>
    termp <termp_0>

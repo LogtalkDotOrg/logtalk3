@@ -84,6 +84,7 @@ directory in the ``NOTES.md`` file.
    redis
    sets
    statistics
+   stemming
    string_distance
    strings
    subsequences

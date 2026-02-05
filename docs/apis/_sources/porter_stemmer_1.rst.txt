@@ -1,0 +1,67 @@
+.. index:: single: porter_stemmer(Representation)
+.. _porter_stemmer/1:
+
+.. rst-class:: right
+
+**object**
+
+``porter_stemmer(Representation)``
+==================================
+
+* ``Representation`` - Word representation. Valid values are ``atom``, ``codes``, and ``chars``.
+
+
+Porter stemmer algorithm implementation for English words.
+
+| **Availability:** 
+|    ``logtalk_load(stemming(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`stemmer_protocol <stemmer_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+
+   - Algorithm: The Porter stemming algorithm (Porter, 1980) is a widely used algorithm for reducing English words to their root form by applying a series of rules that remove common suffixes.
+   - Reference: Porter, M.F. (1980). An algorithm for suffix stripping. Program, 14(3), 130-137.
+
+| **Inherited public predicates:**
+|     :ref:`stemmer_protocol/0::stem/2`  :ref:`stemmer_protocol/0::stems/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`stemmer_protocol <stemmer_protocol/0>`, :ref:`lovins_stemmer(Representation) <lovins_stemmer/1>`
+
