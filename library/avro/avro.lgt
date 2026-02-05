@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-03,
+		date is 2026-02-05,
 		comment is 'Apache Avro binary format parser and generator.'
 	]).
 
@@ -57,7 +57,7 @@
 	]).
 
 	:- uses(list, [
-		append/2, append/3, drop/3, length/2, memberchk/2, nth0/3, take/4
+		append/2, append/3, length/2, memberchk/2, nth0/3
 	]).
 
 	:- uses(reader, [
@@ -71,20 +71,20 @@
 	% parse/2 - returns Schema-Data pair
 	parse(Source, Schema-Data) :-
 		parse_source(Source, Bytes),
-		(	avro_container_file(Bytes, Schema0, DataBytes) ->
+		(	phrase(avro_container_file(Schema0, DataBytes), Bytes) ->
 			Schema = Schema0
 		;	Schema = false,
 			DataBytes = Bytes
 		),
 		(	Schema \== false ->
-			decode_data(Schema, DataBytes, Data)
+			phrase(decode_data(Schema, Data), DataBytes)
 		;	Data = DataBytes
 		).
 
 	% parse/3 - parse with provided schema
 	parse(Source, Schema, Data) :-
 		parse_source(Source, Bytes),
-		decode_data(Schema, Bytes, Data).
+		phrase(decode_data(Schema, Data), Bytes).
 
 	parse_source(Source, _) :-
 		var(Source),
@@ -100,32 +100,47 @@
 	parse_source(Source, _) :-
 		domain_error(avro_source, Source).
 
-	% Check for Avro Object Container File magic bytes: Obj1
-	avro_container_file([0x4f, 0x62, 0x6a, 0x01| Rest], Schema, DataBytes) :-
+	% DCG rule for Avro Object Container File magic bytes: Obj1
+	avro_container_file(Schema, DataBytes) -->
+		[0x4f, 0x62, 0x6a, 0x01],
 		% Parse file header metadata (map)
-		decode_map(Rest, Metadata, AfterMeta),
-		% Extract schema from metadata
-		memberchk('avro.schema'-SchemaBytes, Metadata),
-		atom_codes(SchemaAtom, SchemaBytes),
-		json_parse(atom(SchemaAtom), Schema),
+		decode_map(Metadata),
+		{	% Extract schema from metadata
+			memberchk('avro.schema'-SchemaBytes, Metadata),
+			atom_codes(SchemaAtom, SchemaBytes),
+			json_parse(atom(SchemaAtom), Schema)
+		},
 		% Skip sync marker (16 bytes)
-		drop(16, AfterMeta, AfterSync),
+		skip_bytes(16),
 		% Parse data blocks
-		parse_data_blocks(AfterSync, DataBytes).
+		parse_data_blocks(DataBytes).
 
-	parse_data_blocks([], []) :-
+	skip_bytes(0) -->
 		!.
-	parse_data_blocks(Bytes, Data) :-
-		decode_long(Bytes, Count, Rest1),
-		(	Count =:= 0 ->
-			Data = [],
-			Rest1 = []
-		;	decode_long(Rest1, BlockSize, Rest2),
-			take(BlockSize, Rest2, BlockData, Rest3),
-			% Skip sync marker
-			drop(16, Rest3, AfterSync),
-			parse_data_blocks(AfterSync, MoreData),
-			append(BlockData, MoreData, Data)
+	skip_bytes(N) -->
+		[_],
+		{ N1 is N - 1 },
+		skip_bytes(N1).
+
+	take_bytes(0, []) -->
+		!.
+	take_bytes(N, [Byte| Bytes]) -->
+		[Byte],
+		{ N1 is N - 1 },
+		take_bytes(N1, Bytes).
+
+	parse_data_blocks([]) -->
+		[].
+	parse_data_blocks(Data) -->
+		decode_long(Count),
+		(	{ Count =:= 0 } ->
+			{ Data = [] }
+		;	decode_long(BlockSize),
+			take_bytes(BlockSize, BlockData),
+			% Skip sync marker (16 bytes)
+			skip_bytes(16),
+			parse_data_blocks(MoreData),
+			{ append(BlockData, MoreData, Data) }
 		).
 
 	% generate/3 - generate without schema in output
@@ -134,7 +149,7 @@
 
 	% generate/4 - generate with optional schema inclusion
 	generate(Sink, IncludeSchema, Schema, Data) :-
-		encode_data(Schema, Data, DataBytes),
+		phrase(encode_data(Schema, Data), DataBytes),
 		(	IncludeSchema == true ->
 			generate_container_file(Schema, DataBytes, Bytes)
 		;	Bytes = DataBytes
@@ -176,103 +191,110 @@
 		% Create metadata map with avro.schema and avro.codec
 		% encode_map expects Key-RawValueBytes format where Key is an atom
 		Metadata = ['avro.schema'-SchemaCodes, 'avro.codec'-[0x6e, 0x75, 0x6c, 0x6c]], % "null"
-		encode_map(Metadata, MetaBytes),
+		phrase(encode_map(Metadata), MetaBytes),
 		% Generate sync marker (16 bytes of simple deterministic data)
 		SyncMarker = [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
 		              0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10],
 		% Create data block
-		length(DataBytes, DataLen),
-		encode_long(1, CountBytes), % 1 object in block
-		encode_long(DataLen, SizeBytes),
+		length(DataBytes, DataLength),
+		phrase(encode_long(1), CountBytes), % 1 object in block
+		phrase(encode_long(DataLength), SizeBytes),
 		append([Magic, MetaBytes, SyncMarker, CountBytes, SizeBytes, DataBytes, SyncMarker], Bytes).
 
-	% Varint encoding for long (zig-zag encoding)
-	encode_long(N, Bytes) :-
-		ZigZag is xor((N << 1), (N >> 63)),
-		encode_varint(ZigZag, Bytes).
+	% DCG rule for varint encoding for long (zig-zag encoding)
+	encode_long(N) -->
+		{ ZigZag is xor((N << 1), (N >> 63)) },
+		encode_varint(ZigZag).
 
-	encode_varint(N, [Byte]) :-
-		N < 128,
-		!,
-		Byte is N /\ 0x7f.
-	encode_varint(N, [Byte| Bytes]) :-
-		Byte is (N /\ 0x7f) \/ 0x80,
-		N1 is N >> 7,
-		encode_varint(N1, Bytes).
+	encode_varint(N) -->
+		{ N < 128, ! },
+		{ Byte is N /\ 0x7f },
+		[Byte].
+	encode_varint(N) -->
+		{ Byte is (N /\ 0x7f) \/ 0x80 },
+		[Byte],
+		{ N1 is N >> 7 },
+		encode_varint(N1).
 
-	% Varint decoding for long
-	decode_long(Bytes, Value, Rest) :-
-		decode_varint(Bytes, ZigZag, Rest),
-		Value is xor((ZigZag >> 1), (-(ZigZag /\ 1))).
+	% DCG rule for varint decoding for long
+	decode_long(Value) -->
+		decode_varint(ZigZag),
+		{ Value is xor((ZigZag >> 1), (-(ZigZag /\ 1))) }.
 
-	decode_varint([Byte| Bytes], Value, Bytes) :-
-		Byte < 128,
-		!,
-		Value is Byte.
-	decode_varint([Byte| Bytes0], Value, Bytes) :-
-		Byte1 is Byte /\ 0x7f,
-		decode_varint(Bytes0, Value1, Bytes),
-		Value is Byte1 \/ (Value1 << 7).
+	decode_varint(Value) -->
+		[Byte],
+		{ Byte < 128, ! },
+		{ Value is Byte }.
+	decode_varint(Value) -->
+		[Byte],
+		{ Byte1 is Byte /\ 0x7f },
+		decode_varint(Value1),
+		{ Value is Byte1 \/ (Value1 << 7) }.
 
 	% Encode int (same as long but 32-bit)
-	encode_int(N, Bytes) :-
-		encode_long(N, Bytes).
+	encode_int(N) -->
+		encode_long(N).
 
-	decode_int(Bytes, Value, Rest) :-
-		decode_long(Bytes, Value, Rest).
+	decode_int(Value) -->
+		decode_long(Value).
 
-	% Encode/decode boolean
-	encode_boolean(false, [0]).
-	encode_boolean(true, [1]).
+	% DCG rules for encode/decode boolean
+	encode_boolean(false) -->
+		[0].
+	encode_boolean(true) -->
+		[1].
 
-	decode_boolean([0| Rest], false, Rest).
-	decode_boolean([1| Rest], true, Rest).
+	decode_boolean(false) -->
+		[0].
+	decode_boolean(true) -->
+		[1].
 
-	% Encode/decode null
-	%encode_null([]).
+	% DCG rules for encode/decode float (4 bytes, little-endian IEEE 754)
+	encode_float(Float) -->
+		{	float_to_ieee754_32(Float, Bits),
+			B0 is Bits /\ 0xff,
+			B1 is (Bits >> 8) /\ 0xff,
+			B2 is (Bits >> 16) /\ 0xff,
+			B3 is (Bits >> 24) /\ 0xff
+		},
+		[B0, B1, B2, B3].
 
-	%decode_null(Bytes, @null, Bytes).
+	decode_float(Float) -->
+		[B0, B1, B2, B3],
+		{	Bits is B0 \/ (B1 << 8) \/ (B2 << 16) \/ (B3 << 24),
+			ieee754_32_to_float(Bits, Float)
+		}.
 
-	% Encode/decode float (4 bytes, little-endian IEEE 754)
-	encode_float(Float, [B0, B1, B2, B3]) :-
-		float_to_ieee754_32(Float, Bits),
-		B0 is Bits /\ 0xff,
-		B1 is (Bits >> 8) /\ 0xff,
-		B2 is (Bits >> 16) /\ 0xff,
-		B3 is (Bits >> 24) /\ 0xff.
+	% DCG rules for encode/decode double (8 bytes, little-endian IEEE 754)
+	encode_double(Double) -->
+		{	float_to_ieee754_64(Double, Bits),
+			B0 is Bits /\ 0xff,
+			B1 is (Bits >> 8) /\ 0xff,
+			B2 is (Bits >> 16) /\ 0xff,
+			B3 is (Bits >> 24) /\ 0xff,
+			B4 is (Bits >> 32) /\ 0xff,
+			B5 is (Bits >> 40) /\ 0xff,
+			B6 is (Bits >> 48) /\ 0xff,
+			B7 is (Bits >> 56) /\ 0xff
+		},
+		[B0, B1, B2, B3, B4, B5, B6, B7].
 
-	decode_float([B0, B1, B2, B3| Rest], Float, Rest) :-
-		Bits is B0 \/ (B1 << 8) \/ (B2 << 16) \/ (B3 << 24),
-		ieee754_32_to_float(Bits, Float).
-
-	% Encode/decode double (8 bytes, little-endian IEEE 754)
-	encode_double(Double, [B0, B1, B2, B3, B4, B5, B6, B7]) :-
-		float_to_ieee754_64(Double, Bits),
-		B0 is Bits /\ 0xff,
-		B1 is (Bits >> 8) /\ 0xff,
-		B2 is (Bits >> 16) /\ 0xff,
-		B3 is (Bits >> 24) /\ 0xff,
-		B4 is (Bits >> 32) /\ 0xff,
-		B5 is (Bits >> 40) /\ 0xff,
-		B6 is (Bits >> 48) /\ 0xff,
-		B7 is (Bits >> 56) /\ 0xff.
-
-	decode_double([B0, B1, B2, B3, B4, B5, B6, B7| Rest], Double, Rest) :-
-		Bits is B0 \/ (B1 << 8) \/ (B2 << 16) \/ (B3 << 24) \/
-		        (B4 << 32) \/ (B5 << 40) \/ (B6 << 48) \/ (B7 << 56),
-		ieee754_64_to_float(Bits, Double).
+	decode_double(Double) -->
+		[B0, B1, B2, B3, B4, B5, B6, B7],
+		{	Bits is B0 \/ (B1 << 8) \/ (B2 << 16) \/ (B3 << 24) \/
+			       (B4 << 32) \/ (B5 << 40) \/ (B6 << 48) \/ (B7 << 56),
+			ieee754_64_to_float(Bits, Double)
+		}.
 
 	% IEEE 754 conversions (simplified - using Prolog float representation)
 	float_to_ieee754_32(Float, Bits) :-
 		(	Float =:= 0 ->
 			Bits = 0
 		;	Float < 0 ->
-			Sign = 1,
 			AbsFloat is -Float,
 			float_to_ieee754_32_unsigned(AbsFloat, UBits),
 			Bits is UBits \/ 0x80000000
-		;	Sign = 0,
-			float_to_ieee754_32_unsigned(Float, Bits)
+		;	float_to_ieee754_32_unsigned(Float, Bits)
 		).
 
 	float_to_ieee754_32_unsigned(Float, Bits) :-
@@ -319,220 +341,214 @@
 		UFloat is Mantissa * (2 ** Exponent),
 		(Sign =:= 1 -> Float is -UFloat ; Float = UFloat).
 
-	% Encode/decode bytes
-	encode_bytes(Bytes, Encoded) :-
-		length(Bytes, Len),
-		encode_long(Len, LenBytes),
-		append(LenBytes, Bytes, Encoded).
+	% DCG rules for encode/decode bytes
+	encode_bytes(Bytes) -->
+		{ length(Bytes, Length) },
+		encode_long(Length),
+		Bytes.
 
-	decode_bytes(Input, Bytes, Rest) :-
-		decode_long(Input, Len, Input1),
-		take(Len, Input1, Bytes, Rest).
+	decode_bytes(Bytes) -->
+		decode_long(Length),
+		take_bytes(Length, Bytes).
 
-	% Encode/decode string (UTF-8 bytes)
-	encode_string(Atom, Encoded) :-
-		atom(Atom),
-		!,
-		atom_codes(Atom, Codes),
-		encode_bytes(Codes, Encoded).
-	encode_string(codes(Codes), Encoded) :-
-		encode_bytes(Codes, Encoded).
+	% DCG rules for encode/decode string (UTF-8 bytes)
+	encode_string(Atom) -->
+		{ atom(Atom), ! },
+		{ atom_codes(Atom, Codes) },
+		encode_bytes(Codes).
+	encode_string(codes(Codes)) -->
+		encode_bytes(Codes).
 
-	decode_string(Input, Atom, Rest) :-
-		decode_bytes(Input, Codes, Rest),
-		atom_codes(Atom, Codes).
+	decode_string(Atom) -->
+		decode_bytes(Codes),
+		{ atom_codes(Atom, Codes) }.
 
-	% Encode/decode fixed
-	%encode_fixed(Bytes, _, Bytes).
+	% DCG rule for decode fixed
+	decode_fixed(Size, Bytes) -->
+		take_bytes(Size, Bytes).
 
-	decode_fixed(Input, Size, Bytes, Rest) :-
-		take(Size, Input, Bytes, Rest).
+	% DCG rules for encode/decode array
+	encode_array([], _Schema) -->
+		[0].
+	encode_array([Item| Items], Schema) -->
+		{ length([Item| Items], Length) },
+		encode_long(Length),
+		encode_array_items([Item| Items], Schema),
+		[0].
 
-	% Encode/decode array
-	encode_array([], _Schema, [0]).
-	encode_array(Items, Schema, Encoded) :-
-		Items \== [],
-		length(Items, Len),
-		encode_long(Len, LenBytes),
-		encode_array_items(Items, Schema, ItemBytes),
-		append(LenBytes, ItemBytes, Encoded1),
-		append(Encoded1, [0], Encoded).
+	encode_array_items([], _) -->
+		[].
+	encode_array_items([Item| Items], Schema) -->
+		encode_data(Schema, Item),
+		encode_array_items(Items, Schema).
 
-	encode_array_items([], _, []).
-	encode_array_items([Item| Items], Schema, Encoded) :-
-		encode_data(Schema, Item, ItemBytes),
-		encode_array_items(Items, Schema, RestBytes),
-		append(ItemBytes, RestBytes, Encoded).
+	decode_array(Schema, Items) -->
+		decode_array_blocks(Schema, Items).
 
-	decode_array(Input, Schema, Items, Rest) :-
-		decode_array_blocks(Input, Schema, Items, Rest).
-
-	decode_array_blocks(Input, Schema, Items, Rest) :-
-		decode_long(Input, Count, Input1),
-		(	Count =:= 0 ->
-			Items = [],
-			Rest = Input1
-		;	Count < 0 ->
-			AbsCount is -Count,
-			decode_long(Input1, _BlockSize, Input2),
-			decode_array_items(AbsCount, Schema, Input2, Items1, Input3),
-			decode_array_blocks(Input3, Schema, Items2, Rest),
-			append(Items1, Items2, Items)
-		;	decode_array_items(Count, Schema, Input1, Items1, Input2),
-			decode_array_blocks(Input2, Schema, Items2, Rest),
-			append(Items1, Items2, Items)
+	decode_array_blocks(Schema, Items) -->
+		decode_long(Count),
+		(	{ Count =:= 0 } ->
+			{ Items = [] }
+		;	{ Count < 0 } ->
+			{ AbsCount is -Count },
+			decode_long(_BlockSize),
+			decode_array_items(AbsCount, Schema, Items1),
+			decode_array_blocks(Schema, Items2),
+			{ append(Items1, Items2, Items) }
+		;	decode_array_items(Count, Schema, Items1),
+			decode_array_blocks(Schema, Items2),
+			{ append(Items1, Items2, Items) }
 		).
 
-	decode_array_items(0, _, Input, [], Input) :-
+	decode_array_items(0, _, []) -->
 		!.
-	decode_array_items(N, Schema, Input, [Item| Items], Rest) :-
-		N > 0,
-		decode_data(Schema, Input, Item, Input1),
-		N1 is N - 1,
-		decode_array_items(N1, Schema, Input1, Items, Rest).
+	decode_array_items(N, Schema, [Item| Items]) -->
+		{ N > 0 },
+		decode_data(Schema, Item),
+		{ N1 is N - 1 },
+		decode_array_items(N1, Schema, Items).
 
-	% Encode/decode map
-	encode_map([], [0]).
-	encode_map(Pairs, Encoded) :-
-		Pairs \== [],
-		length(Pairs, Len),
-		encode_long(Len, LenBytes),
-		encode_map_pairs(Pairs, PairBytes),
-		append(LenBytes, PairBytes, Encoded1),
-		append(Encoded1, [0], Encoded).
+	% DCG rules for encode/decode map
+	encode_map([]) -->
+		[0].
+	encode_map([Pair| Pairs]) -->
+		{ length([Pair| Pairs], Length) },
+		encode_long(Length),
+		encode_map_pairs([Pair| Pairs]),
+		[0].
 
-	encode_map_pairs([], []).
-	encode_map_pairs([Key-Value| Pairs], Encoded) :-
-		encode_string(Key, KeyBytes),
-		encode_bytes(Value, ValueBytes),
-		encode_map_pairs(Pairs, RestBytes),
-		append([KeyBytes, ValueBytes, RestBytes], Encoded).
+	encode_map_pairs([]) -->
+		[].
+	encode_map_pairs([Key-Value| Pairs]) -->
+		encode_string(Key),
+		encode_bytes(Value),
+		encode_map_pairs(Pairs).
 
-	decode_map(Input, Pairs, Rest) :-
-		decode_map_blocks(Input, Pairs, Rest).
+	decode_map(Pairs) -->
+		decode_map_blocks(Pairs).
 
-	decode_map_blocks(Input, Pairs, Rest) :-
-		decode_long(Input, Count, Input1),
-		(	Count =:= 0 ->
-			Pairs = [],
-			Rest = Input1
-		;	Count < 0 ->
-			AbsCount is -Count,
-			decode_long(Input1, _BlockSize, Input2),
-			decode_map_pairs(AbsCount, Input2, Pairs1, Input3),
-			decode_map_blocks(Input3, Pairs2, Rest),
-			append(Pairs1, Pairs2, Pairs)
-		;	decode_map_pairs(Count, Input1, Pairs1, Input2),
-			decode_map_blocks(Input2, Pairs2, Rest),
-			append(Pairs1, Pairs2, Pairs)
+	decode_map_blocks(Pairs) -->
+		decode_long(Count),
+		(	{ Count =:= 0 } ->
+			{ Pairs = [] }
+		;	{ Count < 0 } ->
+			{ AbsCount is -Count },
+			decode_long(_BlockSize),
+			decode_map_pairs(AbsCount, Pairs1),
+			decode_map_blocks(Pairs2),
+			{ append(Pairs1, Pairs2, Pairs) }
+		;	decode_map_pairs(Count, Pairs1),
+			decode_map_blocks(Pairs2),
+			{ append(Pairs1, Pairs2, Pairs) }
 		).
 
-	decode_map_pairs(0, Input, [], Input) :-
+	decode_map_pairs(0, []) -->
 		!.
-	decode_map_pairs(N, Input, [Key-Value| Pairs], Rest) :-
-		N > 0,
-		decode_string(Input, Key, Input1),
-		decode_bytes(Input1, Value, Input2),
-		N1 is N - 1,
-		decode_map_pairs(N1, Input2, Pairs, Rest).
+	decode_map_pairs(N, [Key-Value| Pairs]) -->
+		{ N > 0 },
+		decode_string(Key),
+		decode_bytes(Value),
+		{ N1 is N - 1 },
+		decode_map_pairs(N1, Pairs).
 
-	% Encode/decode union (index + value)
-	encode_union(Index, Schema, Value, Encoded) :-
-		encode_long(Index, IndexBytes),
-		encode_data(Schema, Value, ValueBytes),
-		append(IndexBytes, ValueBytes, Encoded).
+	% DCG rules for encode/decode union (index + value)
+	encode_union(Index, Schema, Value) -->
+		encode_long(Index),
+		encode_data(Schema, Value).
 
-	decode_union(Input, Schemas, Value, Rest) :-
-		decode_long(Input, Index, Input1),
-		nth0(Index, Schemas, Schema),
-		decode_data(Schema, Input1, Value, Rest).
+	decode_union(Schemas, Value) -->
+		decode_long(Index),
+		{ nth0(Index, Schemas, Schema) },
+		decode_data(Schema, Value).
 
-	% Encode/decode enum
-	encode_enum(Symbol, Symbols, Encoded) :-
-		enum_index(Symbol, Symbols, 0, Index),
-		encode_int(Index, Encoded).
+	% DCG rules for encode/decode enum
+	encode_enum(Symbol, Symbols) -->
+		{ enum_index(Symbol, Symbols, 0, Index) },
+		encode_int(Index).
 
-	enum_index(Symbol, [Symbol|_], Index, Index) :-
+	enum_index(Symbol, [Symbol| _], Index, Index) :-
 		!.
-	enum_index(Symbol, [_|Symbols], N, Index) :-
+	enum_index(Symbol, [_| Symbols], N, Index) :-
 		N1 is N + 1,
 		enum_index(Symbol, Symbols, N1, Index).
 
-	decode_enum(Input, Symbols, Symbol, Rest) :-
-		decode_int(Input, Index, Rest),
-		nth0(Index, Symbols, Symbol).
+	decode_enum(Symbols, Symbol) -->
+		decode_int(Index),
+		{ nth0(Index, Symbols, Symbol) }.
 
-	% Main encode_data predicate - dispatches based on schema type
-	encode_data(null, @null, []).
-	encode_data(boolean, Bool, Bytes) :-
-		encode_boolean(Bool, Bytes).
-	encode_data(int, Int, Bytes) :-
-		encode_int(Int, Bytes).
-	encode_data(long, Long, Bytes) :-
-		encode_long(Long, Bytes).
-	encode_data(float, Float, Bytes) :-
-		encode_float(Float, Bytes).
-	encode_data(double, Double, Bytes) :-
-		encode_double(Double, Bytes).
-	encode_data(bytes, Bytes, Encoded) :-
-		encode_bytes(Bytes, Encoded).
-	encode_data(string, String, Bytes) :-
-		encode_string(String, Bytes).
+	% Main DCG rule for encode_data - dispatches based on schema type
+	encode_data(null, @null) -->
+		[].
+	encode_data(boolean, Bool) -->
+		encode_boolean(Bool).
+	encode_data(int, Int) -->
+		encode_int(Int).
+	encode_data(long, Long) -->
+		encode_long(Long).
+	encode_data(float, Float) -->
+		encode_float(Float).
+	encode_data(double, Double) -->
+		encode_double(Double).
+	encode_data(bytes, Bytes) -->
+		encode_bytes(Bytes).
+	encode_data(string, String) -->
+		encode_string(String).
 	% Complex types are represented as curly terms {Pairs}
-	encode_data({Props}, Data, Bytes) :-
-		encode_complex_type(Props, Data, Bytes).
+	encode_data({Props}, Data) -->
+		encode_complex_type(Props, Data).
 	% Arrays in schema (union types)
-	encode_data([Type| Types], Data, Bytes) :-
-		find_union_match([Type| Types], Data, 0, Index, Schema),
-		encode_union(Index, Schema, Data, Bytes).
+	encode_data([Type| Types], Data) -->
+		{ find_union_match([Type| Types], Data, 0, Index, Schema) },
+		encode_union(Index, Schema, Data).
 
-	encode_complex_type(Props, Data, Bytes) :-
-		curly_member(type-Type, Props),
-		encode_by_type(Type, Props, Data, Bytes).
+	encode_complex_type(Props, Data) -->
+		{ curly_member(type-Type, Props) },
+		encode_by_type(Type, Props, Data).
 
-	encode_by_type(record, Props, Data, Bytes) :-
-		curly_member(fields-Fields, Props),
-		encode_record_fields(Fields, Data, Bytes).
-	encode_by_type(enum, Props, Symbol, Bytes) :-
-		curly_member(symbols-Symbols, Props),
-		encode_enum(Symbol, Symbols, Bytes).
-	encode_by_type(array, Props, Items, Bytes) :-
-		curly_member(items-ItemSchema, Props),
-		encode_array(Items, ItemSchema, Bytes).
-	encode_by_type(map, Props, Pairs, Bytes) :-
-		curly_member(values-ValueSchema, Props),
-		encode_map_with_schema(Pairs, ValueSchema, Bytes).
-	encode_by_type(fixed, Props, Data, Data) :-
-		curly_member(size-Size, Props),
-		length(Data, Size).
+	encode_by_type(record, Props, Data) -->
+		{ curly_member(fields-Fields, Props) },
+		encode_record_fields(Fields, Data).
+	encode_by_type(enum, Props, Symbol) -->
+		{ curly_member(symbols-Symbols, Props) },
+		encode_enum(Symbol, Symbols).
+	encode_by_type(array, Props, Items) -->
+		{ curly_member(items-ItemSchema, Props) },
+		encode_array(Items, ItemSchema).
+	encode_by_type(map, Props, Pairs) -->
+		{ curly_member(values-ValueSchema, Props) },
+		encode_map_with_schema(Pairs, ValueSchema).
+	encode_by_type(fixed, Props, Data) -->
+		{ curly_member(size-Size, Props) },
+		{ length(Data, Size) },
+		Data.
 
-	encode_record_fields([], _, []).
-	encode_record_fields([{FieldProps}| Fields], Data, Bytes) :-
-		curly_member(name-FieldName, FieldProps),
-		curly_member(type-FieldType, FieldProps),
-		get_field_value(Data, FieldName, Value),
-		encode_data(FieldType, Value, FieldBytes),
-		encode_record_fields(Fields, Data, RestBytes),
-		append(FieldBytes, RestBytes, Bytes).
+	encode_record_fields([], _) -->
+		[].
+	encode_record_fields([{FieldProps}| Fields], Data) -->
+		{	curly_member(name-FieldName, FieldProps),
+			curly_member(type-FieldType, FieldProps),
+			get_field_value(Data, FieldName, Value)
+		},
+		encode_data(FieldType, Value),
+		encode_record_fields(Fields, Data).
 
 	get_field_value({Pairs}, FieldName, Value) :-
 		curly_member(FieldName-Value, Pairs).
 
-	encode_map_with_schema([], _, [0]).
-	encode_map_with_schema(Pairs, ValueSchema, Encoded) :-
-		Pairs \== [],
-		length(Pairs, Len),
-		encode_long(Len, LenBytes),
-		encode_map_pairs_with_schema(Pairs, ValueSchema, PairBytes),
-		append(LenBytes, PairBytes, Encoded1),
-		append(Encoded1, [0], Encoded).
+	encode_map_with_schema([], _) -->
+		[0].
+	encode_map_with_schema([Pair| Pairs], ValueSchema) -->
+		{ length([Pair| Pairs], Length) },
+		encode_long(Length),
+		encode_map_pairs_with_schema([Pair| Pairs], ValueSchema),
+		[0].
 
-	encode_map_pairs_with_schema([], _, []).
-	encode_map_pairs_with_schema([Key-Value| Pairs], ValueSchema, Encoded) :-
-		encode_string(Key, KeyBytes),
-		encode_data(ValueSchema, Value, ValueBytes),
-		encode_map_pairs_with_schema(Pairs, ValueSchema, RestBytes),
-		append([KeyBytes, ValueBytes, RestBytes], Encoded).
+	encode_map_pairs_with_schema([], _) -->
+		[].
+	encode_map_pairs_with_schema([Key-Value| Pairs], ValueSchema) -->
+		encode_string(Key),
+		encode_data(ValueSchema, Value),
+		encode_map_pairs_with_schema(Pairs, ValueSchema).
 
 	find_union_match([Schema| _], Data, Index, Index, Schema) :-
 		data_matches_schema(Schema, Data), !.
@@ -554,88 +570,86 @@
 	data_matches_schema(string, String) :-
 		atom(String).
 
-	% decode_data/3 - decode with schema, consuming all bytes
-	decode_data(Schema, Bytes, Data) :-
-		decode_data(Schema, Bytes, Data, []).
-
-	% decode_data/4 - decode with schema, returning remaining bytes
-	decode_data(null, Input, @null, Input).
-	decode_data(boolean, Input, Bool, Rest) :-
-		decode_boolean(Input, Bool, Rest).
-	decode_data(int, Input, Int, Rest) :-
-		decode_int(Input, Int, Rest).
-	decode_data(long, Input, Long, Rest) :-
-		decode_long(Input, Long, Rest).
-	decode_data(float, Input, Float, Rest) :-
-		decode_float(Input, Float, Rest).
-	decode_data(double, Input, Double, Rest) :-
-		decode_double(Input, Double, Rest).
-	decode_data(bytes, Input, Bytes, Rest) :-
-		decode_bytes(Input, Bytes, Rest).
-	decode_data(string, Input, String, Rest) :-
-		decode_string(Input, String, Rest).
+	% Main DCG rule for decode_data - dispatches based on schema type
+	decode_data(null, @null) -->
+		[].
+	decode_data(boolean, Bool) -->
+		decode_boolean(Bool).
+	decode_data(int, Int) -->
+		decode_int(Int).
+	decode_data(long, Long) -->
+		decode_long(Long).
+	decode_data(float, Float) -->
+		decode_float(Float).
+	decode_data(double, Double) -->
+		decode_double(Double).
+	decode_data(bytes, Bytes) -->
+		decode_bytes(Bytes).
+	decode_data(string, String) -->
+		decode_string(String).
 	% Complex types
-	decode_data({Props}, Input, Data, Rest) :-
-		decode_complex_type(Props, Input, Data, Rest).
+	decode_data({Props}, Data) -->
+		decode_complex_type(Props, Data).
 	% Union types
-	decode_data([Type| Types], Input, Data, Rest) :-
-		decode_union(Input, [Type| Types], Data, Rest).
+	decode_data([Type| Types], Data) -->
+		decode_union([Type| Types], Data).
 
-	decode_complex_type(Props, Input, Data, Rest) :-
-		curly_member(type-Type, Props),
-		decode_by_type(Type, Props, Input, Data, Rest).
+	decode_complex_type(Props, Data) -->
+		{ curly_member(type-Type, Props) },
+		decode_by_type(Type, Props, Data).
 
-	decode_by_type(record, Props, Input, {FieldPairs}, Rest) :-
-		curly_member(fields-Fields, Props),
-		decode_record_fields(Fields, Input, FieldPairsList, Rest),
-		list_to_curly(FieldPairsList, FieldPairs).
-	decode_by_type(enum, Props, Input, Symbol, Rest) :-
-		curly_member(symbols-Symbols, Props),
-		decode_enum(Input, Symbols, Symbol, Rest).
-	decode_by_type(array, Props, Input, Items, Rest) :-
-		curly_member(items-ItemSchema, Props),
-		decode_array(Input, ItemSchema, Items, Rest).
-	decode_by_type(map, Props, Input, Pairs, Rest) :-
-		curly_member(values-ValueSchema, Props),
-		decode_map_with_schema(Input, ValueSchema, Pairs, Rest).
-	decode_by_type(fixed, Props, Input, Data, Rest) :-
-		curly_member(size-Size, Props),
-		decode_fixed(Input, Size, Data, Rest).
+	decode_by_type(record, Props, {FieldPairs}) -->
+		{ curly_member(fields-Fields, Props) },
+		decode_record_fields(Fields, FieldPairsList),
+		{ list_to_curly(FieldPairsList, FieldPairs) }.
+	decode_by_type(enum, Props, Symbol) -->
+		{ curly_member(symbols-Symbols, Props) },
+		decode_enum(Symbols, Symbol).
+	decode_by_type(array, Props, Items) -->
+		{ curly_member(items-ItemSchema, Props) },
+		decode_array(ItemSchema, Items).
+	decode_by_type(map, Props, Pairs) -->
+		{ curly_member(values-ValueSchema, Props) },
+		decode_map_with_schema(ValueSchema, Pairs).
+	decode_by_type(fixed, Props, Data) -->
+		{ curly_member(size-Size, Props) },
+		decode_fixed(Size, Data).
 
-	decode_record_fields([], Input, [], Input).
-	decode_record_fields([{FieldProps}| Fields], Input, [FieldName-Value| Pairs], Rest) :-
-		curly_member(name-FieldName, FieldProps),
-		curly_member(type-FieldType, FieldProps),
-		decode_data(FieldType, Input, Value, Input1),
-		decode_record_fields(Fields, Input1, Pairs, Rest).
+	decode_record_fields([], []) -->
+		[].
+	decode_record_fields([{FieldProps}| Fields], [FieldName-Value| Pairs]) -->
+		{	curly_member(name-FieldName, FieldProps),
+			curly_member(type-FieldType, FieldProps)
+		},
+		decode_data(FieldType, Value),
+		decode_record_fields(Fields, Pairs).
 
-	decode_map_with_schema(Input, ValueSchema, Pairs, Rest) :-
-		decode_map_blocks_with_schema(Input, ValueSchema, Pairs, Rest).
+	decode_map_with_schema(ValueSchema, Pairs) -->
+		decode_map_blocks_with_schema(ValueSchema, Pairs).
 
-	decode_map_blocks_with_schema(Input, ValueSchema, Pairs, Rest) :-
-		decode_long(Input, Count, Input1),
-		(	Count =:= 0 ->
-			Pairs = [],
-			Rest = Input1
-		;	Count < 0 ->
-			AbsCount is -Count,
-			decode_long(Input1, _BlockSize, Input2),
-			decode_map_pairs_with_schema(AbsCount, ValueSchema, Input2, Pairs1, Input3),
-			decode_map_blocks_with_schema(Input3, ValueSchema, Pairs2, Rest),
-			append(Pairs1, Pairs2, Pairs)
-		;	decode_map_pairs_with_schema(Count, ValueSchema, Input1, Pairs1, Input2),
-			decode_map_blocks_with_schema(Input2, ValueSchema, Pairs2, Rest),
-			append(Pairs1, Pairs2, Pairs)
+	decode_map_blocks_with_schema(ValueSchema, Pairs) -->
+		decode_long(Count),
+		(	{ Count =:= 0 } ->
+			{ Pairs = [] }
+		;	{ Count < 0 } ->
+			{ AbsCount is -Count },
+			decode_long(_BlockSize),
+			decode_map_pairs_with_schema(AbsCount, ValueSchema, Pairs1),
+			decode_map_blocks_with_schema(ValueSchema, Pairs2),
+			{ append(Pairs1, Pairs2, Pairs) }
+		;	decode_map_pairs_with_schema(Count, ValueSchema, Pairs1),
+			decode_map_blocks_with_schema(ValueSchema, Pairs2),
+			{ append(Pairs1, Pairs2, Pairs) }
 		).
 
-	decode_map_pairs_with_schema(0, _, Input, [], Input) :-
+	decode_map_pairs_with_schema(0, _, []) -->
 		!.
-	decode_map_pairs_with_schema(N, ValueSchema, Input, [Key-Value| Pairs], Rest) :-
-		N > 0,
-		decode_string(Input, Key, Input1),
-		decode_data(ValueSchema, Input1, Value, Input2),
-		N1 is N - 1,
-		decode_map_pairs_with_schema(N1, ValueSchema, Input2, Pairs, Rest).
+	decode_map_pairs_with_schema(N, ValueSchema, [Key-Value| Pairs]) -->
+		{ N > 0 },
+		decode_string(Key),
+		decode_data(ValueSchema, Value),
+		{ N1 is N - 1 },
+		decode_map_pairs_with_schema(N1, ValueSchema, Pairs).
 
 	% find a pair in a curly term's comma-separated pairs
 	curly_member(Pair, (Pair, _)) :-

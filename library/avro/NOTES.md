@@ -26,7 +26,30 @@ The `avro` library implements predicates for reading (parsing) and writing
 
 - https://avro.apache.org/docs/current/specification/
 
-This library requires a backend supporting unbounded integer arithmetic.
+**This library requires a backend supporting unbounded integer arithmetic.**
+
+
+API documentation
+-----------------
+
+Open the [../../apis/library_index.html#avro](../../apis/library_index.html#avro)
+link in a web browser.
+
+
+Loading
+-------
+
+To load all entities in this library, load the `loader.lgt` file:
+
+	| ?- logtalk_load(avro(loader)).
+
+
+Testing
+-------
+
+To test this library predicates, load the `tester.lgt` file:
+
+	| ?- logtalk_load(avro(tester)).
 
 
 Schema representation
@@ -105,26 +128,3 @@ For example:
 	| ?- avro::parse(bytes([84]), int, Data).
 	Data = 42
 	yes
-
-
-API documentation
------------------
-
-Open the [../../apis/library_index.html#avro](../../apis/library_index.html#avro)
-link in a web browser.
-
-
-Loading
--------
-
-To load all entities in this library, load the `loader.lgt` file:
-
-	| ?- logtalk_load(avro(loader)).
-
-
-Testing
--------
-
-To test this library predicates, load the `tester.lgt` file:
-
-	| ?- logtalk_load(avro(tester)).

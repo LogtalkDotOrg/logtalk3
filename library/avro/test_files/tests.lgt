@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-01-23,
+		date is 2026-02-05,
 		comment is 'Unit tests for the "avro" library.'
 	]).
 
@@ -164,6 +164,129 @@
 		generate(bytes(Bytes), Schema, Data1),
 		parse(bytes(Bytes), Schema, Data2).
 
+	% Enum encoding/decoding tests
+
+	test(avro_enum_first, true(Data == red)) :-
+		Schema = {type-enum, name-color, symbols-[red, green, blue]},
+		generate(bytes(Bytes), Schema, red),
+		parse(bytes(Bytes), Schema, Data).
+
+	test(avro_enum_middle, true(Data == green)) :-
+		Schema = {type-enum, name-color, symbols-[red, green, blue]},
+		generate(bytes(Bytes), Schema, green),
+		parse(bytes(Bytes), Schema, Data).
+
+	test(avro_enum_last, true(Data == blue)) :-
+		Schema = {type-enum, name-color, symbols-[red, green, blue]},
+		generate(bytes(Bytes), Schema, blue),
+		parse(bytes(Bytes), Schema, Data).
+
+	% Fixed encoding/decoding tests
+
+	test(avro_fixed, true(Data == [0x01, 0x02, 0x03, 0x04])) :-
+		Schema = {type-fixed, name-four_bytes, size-4},
+		generate(bytes(Bytes), Schema, [0x01, 0x02, 0x03, 0x04]),
+		parse(bytes(Bytes), Schema, Data).
+
+	% Map with schema encoding/decoding tests
+
+	test(avro_map_empty, true(Data == [])) :-
+		Schema = {type-map, values-int},
+		generate(bytes(Bytes), Schema, []),
+		parse(bytes(Bytes), Schema, Data).
+
+	test(avro_map_string_values, true(Data == [key1-hello, key2-world])) :-
+		Schema = {type-map, values-string},
+		generate(bytes(Bytes), Schema, [key1-hello, key2-world]),
+		parse(bytes(Bytes), Schema, Data).
+
+	test(avro_map_int_values, true(Data == [count-42, total-100])) :-
+		Schema = {type-map, values-int},
+		generate(bytes(Bytes), Schema, [count-42, total-100]),
+		parse(bytes(Bytes), Schema, Data).
+
+	% Union type tests
+
+	test(avro_union_null, true(Data == @null)) :-
+		Schema = [null, string],
+		generate(bytes(Bytes), Schema, @null),
+		parse(bytes(Bytes), Schema, Data).
+
+	test(avro_union_string, true(Data == hello)) :-
+		Schema = [null, string],
+		generate(bytes(Bytes), Schema, hello),
+		parse(bytes(Bytes), Schema, Data).
+
+	test(avro_union_int, true(Data == 42)) :-
+		Schema = [null, int, string],
+		generate(bytes(Bytes), Schema, 42),
+		parse(bytes(Bytes), Schema, Data).
+
+	test(avro_union_boolean_true, true(Data == true)) :-
+		Schema = [null, boolean],
+		generate(bytes(Bytes), Schema, true),
+		parse(bytes(Bytes), Schema, Data).
+
+	test(avro_union_boolean_false, true(Data == false)) :-
+		Schema = [null, boolean],
+		generate(bytes(Bytes), Schema, false),
+		parse(bytes(Bytes), Schema, Data).
+
+	test(avro_union_long, true(Data == 9999999)) :-
+		Schema = [null, long],
+		generate(bytes(Bytes), Schema, 9999999),
+		parse(bytes(Bytes), Schema, Data).
+
+	test(avro_union_float, true(Data =~= 1.5)) :-
+		Schema = [null, float],
+		generate(bytes(Bytes), Schema, 1.5),
+		parse(bytes(Bytes), Schema, Data).
+
+	test(avro_union_double, true(Data =~= 2.5)) :-
+		Schema = [null, double],
+		generate(bytes(Bytes), Schema, 2.5),
+		parse(bytes(Bytes), Schema, Data).
+
+	% Float edge cases
+
+	test(avro_float_negative, true(Data =~= -3.14)) :-
+		generate(bytes(Bytes), float, -3.14),
+		parse(bytes(Bytes), float, Data).
+
+	% File I/O tests
+
+	test(avro_file_roundtrip, true(Data2 == Data1)) :-
+		Data1 = 12345,
+		Schema = int,
+		^^file_path('test_output.avro', Path),
+		generate(file(Path), Schema, Data1),
+		parse(file(Path), Schema, Data2).
+
+	test(avro_stream_roundtrip, true(Data2 == Data1)) :-
+		Data1 = hello,
+		Schema = string,
+		^^file_path('test_stream.avro', Path),
+		open(Path, write, WriteStream, [type(binary)]),
+		generate(stream(WriteStream), Schema, Data1),
+		close(WriteStream),
+		open(Path, read, ReadStream, [type(binary)]),
+		parse(stream(ReadStream), Schema, Data2),
+		close(ReadStream).
+
+	% Error handling tests
+
+	test(avro_parse_instantiation_error, error(instantiation_error)) :-
+		parse(_, _).
+
+	test(avro_parse_domain_error, error(domain_error(avro_source, invalid))) :-
+		parse(invalid, _).
+
+	test(avro_generate_instantiation_error, error(instantiation_error)) :-
+		generate(_, int, 42).
+
+	test(avro_generate_domain_error, error(domain_error(avro_sink, invalid))) :-
+		generate(invalid, int, 42).
+
 	% Round-trip tests using user.avsc schema and user.jsonl data
 
 	% Round-trip test with schema included in generated file
@@ -179,6 +302,11 @@
 		user_data(Data1),
 		generate(bytes(Bytes), false, Schema, Data1),
 		parse(bytes(Bytes), Schema, Data2).
+
+	% Cleanup helper
+	cleanup :-
+		^^clean_file('test_output.avro'),
+		^^clean_file('test_stream.avro').
 
 	% Helper predicates
 
