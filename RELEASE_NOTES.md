@@ -76,6 +76,9 @@ represented as lists.
 * ADDED: New `avro` library implementing for parsing and generating files in
 the Apache Avro binary format.
 
+* ADDED: New `protobuf` library implementing for parsing and generating files in
+the Google Protocol Buffers binary format.
+
 * ADDED: New `base32`, `base58`, and `base85` libraries.
 
 * ADDED: New `json_schema` library for parsing JSON Schema files and validating

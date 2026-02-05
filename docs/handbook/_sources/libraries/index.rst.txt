@@ -76,6 +76,7 @@ directory in the ``NOTES.md`` file.
    options
    os
    process
+   protobuf
    queues
    random
    reader

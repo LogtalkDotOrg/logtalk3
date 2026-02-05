@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on February 2, 2026
+##   Last updated on February 4, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -120,6 +120,7 @@ Foreach-Object {
 (Get-Content ../../../library/options/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/options.rst
 (Get-Content ../../../library/os/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/os.rst
 (Get-Content ../../../library/process/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/process.rst
+(Get-Content ../../../library/protobuf/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/protobuf.rst
 (Get-Content ../../../library/queues/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/queues.rst
 (Get-Content ../../../library/random/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/random.rst
 (Get-Content ../../../library/reader/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/reader.rst

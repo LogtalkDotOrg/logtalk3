@@ -1,0 +1,20 @@
+// This is a reference .proto file for documentation purposes.
+// The actual schema used by the Logtalk library is in addressbook.json
+
+// Source: Adapted from the official Protocol Buffers tutorial
+// URL: https://protobuf.dev/getting-started/
+// License: Apache License 2.0
+
+syntax = "proto3";
+
+package tutorial;
+
+message Person {
+  string name = 1;
+  int32 id = 2;
+  string email = 3;
+}
+
+message AddressBook {
+  string owner = 1;
+}

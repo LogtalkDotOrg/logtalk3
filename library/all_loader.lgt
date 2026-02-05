@@ -76,6 +76,7 @@
 		cbor(loader),
 		ccsds(loader),
 		avro(loader),
+		protobuf(loader),
 		base32(loader),
 		base58(loader),
 		base64(loader),

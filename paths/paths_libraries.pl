@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on February 2, 2026
+%  Last updated on February 4, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -80,6 +80,7 @@ logtalk_library_path(optionals, library('optionals/')).
 logtalk_library_path(options, library('options/')).
 logtalk_library_path(os, library('os/')).
 logtalk_library_path(process, library('process/')).
+logtalk_library_path(protobuf, library('protobuf/')).
 logtalk_library_path(queues, library('queues/')).
 logtalk_library_path(random, library('random/')).
 logtalk_library_path(reader, library('reader/')).

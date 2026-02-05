@@ -73,14 +73,14 @@
 <li class="toctree-l2"><a class="reference internal" href="arbitrary.html"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="assignvars.html"><code class="docutils literal notranslate"><span class="pre">assignvars</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">avro</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#schema-representation">Schema representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#data-representation">Data representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#schema-examples">Schema Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#encoding">Encoding</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#decoding">Decoding</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="base32.html"><code class="docutils literal notranslate"><span class="pre">base32</span></code></a></li>
@@ -128,6 +128,7 @@
 <li class="toctree-l2"><a class="reference internal" href="options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="os.html"><code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="process.html"><code class="docutils literal notranslate"><span class="pre">process</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="protobuf.html"><code class="docutils literal notranslate"><span class="pre">protobuf</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="random.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="reader.html"><code class="docutils literal notranslate"><span class="pre">reader</span></code></a></li>
@@ -198,7 +199,28 @@ writing (generating) data in the Apache Avro binary format:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://avro.apache.org/docs/current/specification/">https://avro.apache.org/docs/current/specification/</a></p></li>
 </ul>
-<p>This library requires a backend supporting unbounded integer arithmetic.</p>
+<p><strong>This library requires a backend supporting unbounded integer
+arithmetic.</strong></p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#avro">../../apis/library_index.html#avro</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(avro(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(avro(tester)).
+</pre></div>
+</div>
+</section>
 <section id="schema-representation">
 <h2>Schema representation<a class="headerlink" href="#schema-representation" title="Link to this heading"></a></h2>
 <p>Schema files use the <code class="docutils literal notranslate"><span class="pre">.avsc</span></code> extension and their contents are always
@@ -268,26 +290,6 @@ For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> avro<span class="o">::</span>parse(bytes([<span class="m">84</span>]), int, <span class="nv">Data</span>).
 <span class="nv">Data</span> <span class="o">=</span> <span class="m">42</span>
 yes
-</pre></div>
-</div>
-</section>
-<section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
-<p>Open the
-<a class="reference external" href="../../apis/library_index.html#avro">../../apis/library_index.html#avro</a>
-link in a web browser.</p>
-</section>
-<section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
-<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(avro(loader)).
-</pre></div>
-</div>
-</section>
-<section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
-<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(avro(tester)).
 </pre></div>
 </div>
 </section>
