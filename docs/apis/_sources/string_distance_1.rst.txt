@@ -18,7 +18,7 @@ String distance predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-02
+| **Date:** 2026-02-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -313,38 +313,17 @@ Computes the Jaccard index (similarity) between two token lists.
 ``soundex/2``
 ^^^^^^^^^^^^^
 
-Computes the Soundex phonetic code for a string.
+Computes the Soundex phonetic encoding for a string.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``soundex(String,Code)``
+|    ``soundex(String,Encoding)``
 |        ``String`` - Input string (typically a name).
-|        ``Code`` - A four-character Soundex code representing the phonetic encoding.
+|        ``Encoding`` - A four-character Soundex code representing the phonetic encoding.
 | **Mode and number of proofs:**
 |    ``soundex(+text,-atom)`` - ``one``
-
-
-------------
-
-.. index:: metaphone/2
-.. _string_distance/1::metaphone/2:
-
-``metaphone/2``
-^^^^^^^^^^^^^^^
-
-Computes the Metaphone phonetic key for a string.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``metaphone(String,Key)``
-|        ``String`` - Input string (typically a name).
-|        ``Key`` - The Metaphone phonetic key, a more accurate phonetic encoding than Soundex.
-| **Mode and number of proofs:**
-|    ``metaphone(+text,-atom)`` - ``one``
 
 
 ------------
@@ -370,6 +349,27 @@ Succeeds if two strings share the same Soundex code.
 
 ------------
 
+.. index:: metaphone/2
+.. _string_distance/1::metaphone/2:
+
+``metaphone/2``
+^^^^^^^^^^^^^^^
+
+Computes the Metaphone phonetic key for a string.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``metaphone(String,Encoding)``
+|        ``String`` - Input string (typically a name).
+|        ``Encoding`` - The Metaphone phonetic encoding, a more accurate phonetic encoding than Soundex.
+| **Mode and number of proofs:**
+|    ``metaphone(+text,-atom)`` - ``one``
+
+
+------------
+
 .. index:: metaphone_match/2
 .. _string_distance/1::metaphone_match/2:
 
@@ -387,6 +387,49 @@ Succeeds if two strings share the same Metaphone key.
 |        ``String2`` - Second input string.
 | **Mode and number of proofs:**
 |    ``metaphone_match(+text,+text)`` - ``one``
+
+
+------------
+
+.. index:: double_metaphone/3
+.. _string_distance/1::double_metaphone/3:
+
+``double_metaphone/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the Double Metaphone encoding of a text, returning both primary and alternative encodings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``double_metaphone(Text,Primary,Alternative)``
+|        ``Text`` - Input string (typically a name).
+|        ``Primary`` - Primary Double Metaphone encoding.
+|        ``Alternative`` - Alternative Double Metaphone encoding.
+| **Mode and number of proofs:**
+|    ``double_metaphone(+text,-atom,-atom)`` - ``one``
+
+
+------------
+
+.. index:: double_metaphone_match/2
+.. _string_distance/1::double_metaphone_match/2:
+
+``double_metaphone_match/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds if the Double Metaphone encodings of two texts match (either primary or alternative encodings).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``double_metaphone_match(String1,String2)``
+|        ``String1`` - First input string.
+|        ``String2`` - Second input string.
+| **Mode and number of proofs:**
+|    ``double_metaphone_match(+text,+text)`` - ``zero_or_one``
 
 
 ------------

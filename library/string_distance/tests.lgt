@@ -135,8 +135,43 @@
 
 	% metaphone/2 tests
 
-	test(metaphone_2_01, true(Key == "KTTN")) :-
+	test(metaphone_2_01, true(Key == "JS")) :-
+		string_distance::metaphone("jose", Key).
+
+	test(metaphone_2_02, true(Key == "HS")) :-
+		string_distance::metaphone("hose", Key).
+
+	test(metaphone_2_03, true(Key == "KTN")) :-
 		string_distance::metaphone("kitten", Key).
+
+	% double_metaphone/3 tests
+
+	test(double_metaphone_3_01, true((Primary == "JS", Alternative == "HS"))) :-
+		string_distance::double_metaphone("jose", Primary, Alternative).
+
+	test(double_metaphone_3_02, true((Primary == "HS", Alternative == "HS"))) :-
+		string_distance::double_metaphone("hose", Primary, Alternative).
+
+	test(double_metaphone_3_03, true((Primary == "KTN", Alternative == "KTN"))) :-
+		string_distance::double_metaphone("kitten", Primary, Alternative).
+
+	test(double_metaphone_3_04, true((Primary == "JN", Alternative == "AN"))) :-
+		string_distance::double_metaphone("john", Primary, Alternative).
+
+	test(double_metaphone_3_05, true((Primary == "XMT", Alternative == "SMT"))) :-
+		string_distance::double_metaphone("schmidt", Primary, Alternative).
+
+	test(double_metaphone_3_06, true((Primary == "K0RN", Alternative == "KTRN"))) :-
+		string_distance::double_metaphone("catherine", Primary, Alternative).
+
+	test(double_metaphone_3_07, true((Primary == "K0RN", Alternative == "KTRN"))) :-
+		string_distance::double_metaphone("katherine", Primary, Alternative).
+
+	test(double_metaphone_3_08, true((Primary == "STFN", Alternative == "STFN"))) :-
+		string_distance::double_metaphone("steven", Primary, Alternative).
+
+	test(double_metaphone_3_09, true((Primary == "STFN", Alternative == "STFN"))) :-
+		string_distance::double_metaphone("stephen", Primary, Alternative).
 
 	% soundex_match/2 tests
 
@@ -147,3 +182,17 @@
 
 	test(metaphone_match_2_01, true) :-
 		string_distance::metaphone_match("kitten", "sitting").
+
+	test(metaphone_match_2_02, false) :-
+		string_distance::metaphone_match("jose", "hose").
+
+	% double_metaphone_match/2 tests
+
+	test(double_metaphone_match_2_01, true) :-
+		string_distance::double_metaphone_match("jose", "hose").
+
+	test(double_metaphone_match_2_02, true) :-
+		string_distance::double_metaphone_match("catherine", "katherine").
+
+	test(double_metaphone_match_2_03, true) :-
+		string_distance::double_metaphone_match("steven", "stephen").

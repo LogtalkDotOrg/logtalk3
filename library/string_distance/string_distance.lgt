@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-02,
+		date is 2026-02-05,
 		comment is 'String distance predicates.',
 		parameters is [
 			'Representation' - 'String representation. Valid values are ``atom``, ``codes``, and ``chars``.'
@@ -187,20 +187,10 @@
 	:- public(soundex/2).
 	:- mode(soundex(+text, -atom), one).
 	:- info(soundex/2, [
-		comment is 'Computes the Soundex phonetic code for a string.',
+		comment is 'Computes the Soundex phonetic encoding for a string.',
 		arguments is [
 			'String' - 'Input string (typically a name).',
-			'Code' - 'A four-character Soundex code representing the phonetic encoding.'
-		]
-	]).
-
-	:- public(metaphone/2).
-	:- mode(metaphone(+text, -atom), one).
-	:- info(metaphone/2, [
-		comment is 'Computes the Metaphone phonetic key for a string.',
-		arguments is [
-			'String' - 'Input string (typically a name).',
-			'Key' - 'The Metaphone phonetic key, a more accurate phonetic encoding than Soundex.'
+			'Encoding' - 'A four-character Soundex code representing the phonetic encoding.'
 		]
 	]).
 
@@ -214,10 +204,41 @@
 		]
 	]).
 
+	:- public(metaphone/2).
+	:- mode(metaphone(+text, -atom), one).
+	:- info(metaphone/2, [
+		comment is 'Computes the Metaphone phonetic key for a string.',
+		arguments is [
+			'String' - 'Input string (typically a name).',
+			'Encoding' - 'The Metaphone phonetic encoding, a more accurate phonetic encoding than Soundex.'
+		]
+	]).
+
 	:- public(metaphone_match/2).
 	:- mode(metaphone_match(+text, +text), one).
 	:- info(metaphone_match/2, [
 		comment is 'Succeeds if two strings share the same Metaphone key.',
+		arguments is [
+			'String1' - 'First input string.',
+			'String2' - 'Second input string.'
+		]
+	]).
+
+	:- public(double_metaphone/3).
+	:- mode(double_metaphone(+text, -atom, -atom), one).
+	:- info(double_metaphone/3, [
+		comment is 'Computes the Double Metaphone encoding of a text, returning both primary and alternative encodings.',
+		arguments is [
+			'Text' - 'Input string (typically a name).',
+			'Primary' - 'Primary Double Metaphone encoding.',
+			'Alternative' - 'Alternative Double Metaphone encoding.'
+		]
+	]).
+
+	:- public(double_metaphone_match/2).
+	:- mode(double_metaphone_match(+text, +text), zero_or_one).
+	:- info(double_metaphone_match/2, [
+		comment is 'Succeeds if the Double Metaphone encodings of two texts match (either primary or alternative encodings).',
 		arguments is [
 			'String1' - 'First input string.',
 			'String2' - 'Second input string.'
@@ -367,8 +388,8 @@
 	hamming(chars, String1, String2, Distance) :-
 		hamming(codes, String1, String2, Distance).
 	hamming(codes, String1, String2, Distance) :-
-		length(String1, L),
-		length(String2, L),
+		length(String1, Length),
+		length(String2, Length),
 		hamming_count(String1, String2, 0, Distance).
 
 	hamming_count([], [], Distance, Distance).
@@ -416,11 +437,11 @@
 			maplist_eq(Used0, false),
 			jaro_match_s1(Codes1, 0, Codes2, Length2, MW, Used0, Matches1, UsedFinal),
 			jaro_match_s2(Codes2, 0, UsedFinal, Matches2),
-			length(Matches1, M),
-			(	M =:= 0
+			length(Matches1, M1Length),
+			(	M1Length =:= 0
 			->	Similarity = 0.0
-			;	jaro_count_trans(Matches1, Matches2, 0, T),
-				Similarity is (M / Length1 + M / Length2 + (M - T / 2) / M) / 3.0
+			;	jaro_count_trans(Matches1, Matches2, 0, Count),
+				Similarity is (M1Length / Length1 + M1Length / Length2 + (M1Length - Count / 2) / M1Length) / 3.0
 			)
 		).
 
@@ -440,31 +461,31 @@
 
 	jaro_find_unused(Code, Codes2, Low, High, Used, Pos) :-
 		Low =< High,
-		nth0(Low, Codes2,  C2),
+		nth0(Low, Codes2,  Code2),
 		nth0(Low, Used, Flag),
-		(	C2 == Code, Flag == false
+		(	Code2 == Code, Flag == false
 		->	Pos = Low
 		;	Low1 is Low + 1,
 			jaro_find_unused(Code, Codes2, Low1, High, Used, Pos)
 		).
 
 	jaro_match_s2([], _, _, []).
-	jaro_match_s2([H| T], I, Used, Matches) :-
+	jaro_match_s2([Head| Tail], I, Used, Matches) :-
 		nth0(I, Used, Flag),
 		(	Flag == true
-		->	Matches = [H|Rest]
+		->	Matches = [Head| Rest]
 		;	Matches = Rest
 		),
 		I1 is I + 1,
-		jaro_match_s2(T, I1, Used, Rest).
+		jaro_match_s2(Tail, I1, Used, Rest).
 
-	jaro_count_trans([], [], T, T).
-	jaro_count_trans([Head1| Tail1], [Head2| Tail2], T0, T) :-
+	jaro_count_trans([], [], Count, Count).
+	jaro_count_trans([Head1| Tail1], [Head2| Tail2], Count0, Count) :-
 		(	Head1 \== Head2
-		->	T1 is T0 + 1
-		;	T1 = T0
+		->	Count1 is Count0 + 1
+		;	Count1 = Count0
 		),
-		jaro_count_trans(Tail1, Tail2, T1, T).
+		jaro_count_trans(Tail1, Tail2, Count1, Count).
 
 	% -----------------------------------------------------------------
 	% Jaro-Winkler
@@ -809,21 +830,21 @@
 	%   6. Remove all '0' digits (vowels / H / W / Y).
 	%   7. Pad with '0's or truncate to exactly 3 digits.
 	% -----------------------------------------------------------------
-	soundex(String, Code) :-
-		soundex(_Representation_, String, Code).
+	soundex(String, Encoding) :-
+		soundex(_Representation_, String, Encoding).
 
-	soundex(atom, String, Code) :-
+	soundex(atom, String, Encoding) :-
 		atom_chars(String, Codes),
-		soundex(chars, Codes, Code0),
-		atom_chars(Code, Code0).
-	soundex(codes, String, Code) :-
+		soundex(chars, Codes, Encoding0),
+		atom_chars(Encoding, Encoding0).
+	soundex(codes, String, Encoding) :-
 		codes_to_chars(String, Chars),
-		soundex(chars, Chars, Code0),
-		chars_to_codes(Code0, Code).
-	soundex(chars, String, Code) :-
+		soundex(chars, Chars, Encoding0),
+		chars_to_codes(Encoding0, Encoding).
+	soundex(chars, String, Encoding) :-
 		(	String == []
-		->	Code = ''
-		;	String = [First|Rest],
+		->	Encoding = ''
+		;	String = [First| Rest],
 			upcase_char(First, FirstUp),
 			atom_chars(FirstUp, [FirstChar]),
 			soundex_char_code(FirstChar, FirstCode),
@@ -833,7 +854,7 @@
 			Deduped0 = [_| Deduped],
 			exclude_zero(Deduped, Filtered),
 			soundex_pad(Filtered, 3, Digits),
-			Code = [FirstChar| Digits]
+			Encoding = [FirstChar| Digits]
 		).
 
 	soundex_encode([], []).
@@ -904,23 +925,24 @@
 	% 3. Vowels are always dropped (significance at the start is
 	%    handled by step 1).
 	% -----------------------------------------------------------------
-	metaphone(String, Key) :-
-		metaphone(_Representation_, String, Key).
+	metaphone(String, Encoding) :-
+		metaphone(_Representation_, String, Encoding).
 
-	metaphone(atom, String, Code) :-
+	metaphone(atom, String, Encoding) :-
 		atom_chars(String, Codes),
-		metaphone(chars, Codes, Code0),
-		atom_chars(Code, Code0).
-	metaphone(codes, String, Code) :-
+		metaphone(chars, Codes, Encoding0),
+		atom_chars(Encoding, Encoding0).
+	metaphone(codes, String, Encoding) :-
 		codes_to_chars(String, Chars),
-		metaphone(chars, Chars, Code0),
-		chars_to_codes(Code0, Code).
-	metaphone(chars, String, Code) :-
+		metaphone(chars, Chars, Encoding0),
+		chars_to_codes(Encoding0, Encoding).
+	metaphone(chars, String, Encoding) :-
 		(	String == []
-		->	Code = ''
+		->	Encoding = ''
 		;	upcase_chars(String, Upper),
-			metaphone_drop_initial(Upper, Cs0),
-			metaphone_encode(Cs0, Code)
+			metaphone_drop_initial(Upper, Encoding0),
+			metaphone_encode(Encoding0, Encoding1),
+			metaphone_deduplicate(Encoding1, Encoding)
 		).
 
 	metaphone_drop_initial(['A','E'| Chars], Chars) :-
@@ -1011,8 +1033,8 @@
 	metaphone_char('S', ['I','O'| Chars], 'X', Chars) :-
 		!.
 	metaphone_char('S', Chars,            'S', Chars).
-	% Chars — 0 (theta) before H; X before IA/IO; T otherwise.
-	metaphone_char('Chars', ['H'| Chars],     '0', Chars) :-
+	% T — 0 (theta) before H; X before IA/IO; T otherwise.
+	metaphone_char('T', ['H'| Chars],     '0', Chars) :-
 		!.
 	metaphone_char('T', ['I','A'| Chars], 'X', Chars) :-
 		!.
@@ -1038,6 +1060,176 @@
 	% Fallback
 	metaphone_char(_, Chars, [], Chars).
 
+	% Deduplicate consecutive identical phonetic codes
+	metaphone_deduplicate([], []).
+	metaphone_deduplicate([X], [X]) :-
+		!.
+	metaphone_deduplicate([X,X| Tail], Result) :-
+		!,
+		metaphone_deduplicate([X| Tail], Result).
+	metaphone_deduplicate([X,Y| Tail], [X| Result]) :-
+		metaphone_deduplicate([Y| Tail], Result).
+
+	% -----------------------------------------------------------------
+	% Double Metaphone (simplified variant)
+	%
+	% Returns primary and alternative encodings. Many words have
+	% identical primary and alternative codes.
+	% -----------------------------------------------------------------
+	double_metaphone(String, Primary, Alternative) :-
+		double_metaphone(_Representation_, String, Primary, Alternative).
+
+	double_metaphone(atom, String, Primary, Alternative) :-
+		atom_chars(String, Chars),
+		double_metaphone(chars, Chars, Primary0, Alternative0),
+		atom_chars(Primary, Primary0),
+		atom_chars(Alternative, Alternative0).
+	double_metaphone(codes, String, Primary, Alternative) :-
+		codes_to_chars(String, Chars),
+		double_metaphone(chars, Chars, Primary0, Alternative0),
+		chars_to_codes(Primary0, Primary),
+		chars_to_codes(Alternative0, Alternative).
+	double_metaphone(chars, String, Primary, Alternative) :-
+		(	String == []
+		->	Primary = '', Alternative = ''
+		;	upcase_chars(String, Upper),
+			is_slavo_germanic(Upper, IsSlavoGermanic),
+			double_metaphone_encode(Upper, IsSlavoGermanic, Primary0, Alternative0),
+			metaphone_deduplicate(Primary0, Primary),
+			metaphone_deduplicate(Alternative0, Alternative)
+		).
+
+	% Detect Slavo-Germanic language patterns
+	is_slavo_germanic(Chars, true) :-
+		(	member('W', Chars)
+		;	member('K', Chars)
+		;	append(_, ['C','Z'| _], Chars)
+		;	append(_, ['W','I','T','Z'| _], Chars)
+		),
+		!.
+	is_slavo_germanic(_, false).
+
+	% Simplified Double Metaphone encoding
+	% Handles some common alternative pronunciations
+	double_metaphone_encode([], _, [], []).
+	double_metaphone_encode([Char| Chars], IsSlavoGermanic, Primary, Alternative) :-
+		double_metaphone_char(Char, Chars, IsSlavoGermanic, PCode, ACode, Rest),
+		(	PCode == []
+		->	double_metaphone_encode(Rest, IsSlavoGermanic, Primary, Alternative)
+		;	Primary = [PCode| RestP],
+			(	ACode == []
+			->	Alternative = [PCode| RestA]
+			;	Alternative = [ACode| RestA]
+			),
+			double_metaphone_encode(Rest, IsSlavoGermanic, RestP, RestA)
+		).
+
+	% Double Metaphone character rules
+	% Returns primary code, alternative code (or [] if same as primary), and remaining chars
+	% Signature: double_metaphone_char(Char, Rest, IsSlavoGermanic, PrimaryCode, AltCode, NewRest)
+
+	% Vowels — dropped (except initial)
+	double_metaphone_char('A', Chars, _, [], [], Chars).
+	double_metaphone_char('E', Chars, _, [], [], Chars).
+	double_metaphone_char('I', Chars, _, [], [], Chars).
+	double_metaphone_char('O', Chars, _, [], [], Chars).
+	double_metaphone_char('U', Chars, _, [], [], Chars).
+	% B
+	double_metaphone_char('B', Chars, _, 'P', [], Chars).
+	% C — S before E/I/Y; X before H; K otherwise
+	double_metaphone_char('C', ['H'| Chars], _, 'X', [], Chars) :-
+		!.
+	double_metaphone_char('C', ['E'| Chars], _, 'S', [], Chars) :-
+		!.
+	double_metaphone_char('C', ['I'| Chars], _, 'S', 'X', Chars) :-
+		!.
+	double_metaphone_char('C', ['Y'| Chars], _, 'S', [], Chars) :-
+		!.
+	double_metaphone_char('C', Chars, _, 'K', [], Chars).
+	% D — J before G+vowel; T otherwise
+	double_metaphone_char('D', ['G','E'| Chars], _, 'J', [], Chars) :-
+		!.
+	double_metaphone_char('D', ['G','I'| Chars], _, 'J', [], Chars) :-
+		!.
+	double_metaphone_char('D', ['G','Y'| Chars], _, 'J', [], Chars) :-
+		!.
+	double_metaphone_char('D', Chars, _, 'T', [], Chars).
+	% F
+	double_metaphone_char('F', Chars, _, 'F', [], Chars).
+	% G — F before H; J before E/I/Y; K otherwise
+	double_metaphone_char('G', ['H'| Chars], _, 'F', [], Chars) :-
+		!.
+	double_metaphone_char('G', ['E'| Chars], _, 'J', 'K', Chars) :-
+		!.
+	double_metaphone_char('G', ['I'| Chars], _, 'J', 'K', Chars) :-
+		!.
+	double_metaphone_char('G', ['Y'| Chars], _, 'J', 'K', Chars) :-
+		!.
+	double_metaphone_char('G', ['N'| Chars], _, 'K', 'N', Chars) :-
+		!.
+	double_metaphone_char('G', Chars, _, 'K', [], Chars).
+	% H — kept only before a vowel
+	double_metaphone_char('H', [Char| Chars], _, 'H', [], Chars) :-
+		member(Char, ['A','E','I','O','U']),
+		!.
+	double_metaphone_char('H', Chars, _, [], [], Chars).
+	% J — Context-dependent alternative (H for Spanish Jose-like, A otherwise)
+	double_metaphone_char('J', ['O','S','E'| Rest], _, 'J', 'H', ['O','S','E'| Rest]) :-
+		!.
+	double_metaphone_char('J', Chars, _, 'J', 'A', Chars).
+	% K
+	double_metaphone_char('K', Chars, _, 'K', [], Chars).
+	% L
+	double_metaphone_char('L', Chars, _, 'L', [], Chars).
+	% M
+	double_metaphone_char('M', Chars, _, 'M', [], Chars).
+	% N
+	double_metaphone_char('N', Chars, _, 'N', [], Chars).
+	% P — F before H; P otherwise
+	double_metaphone_char('P', ['H'| Chars], _, 'F', [], Chars) :-
+		!.
+	double_metaphone_char('P', Chars, _, 'P', [], Chars).
+	% Q → K
+	double_metaphone_char('Q', Chars, _, 'K', [], Chars).
+	% R
+	double_metaphone_char('R', Chars, _, 'R', [], Chars).
+	% S — X before H/IA/IO; S otherwise
+	double_metaphone_char('S', ['H'| Chars], _, 'X', [], Chars) :-
+		!.
+	double_metaphone_char('S', ['I','A'| Chars], _, 'X', 'S', Chars) :-
+		!.
+	double_metaphone_char('S', ['I','O'| Chars], _, 'X', 'S', Chars) :-
+		!.
+	double_metaphone_char('S', ['C','H'| Chars], _, 'X', 'S', Chars) :-
+		!.
+	double_metaphone_char('S', Chars, _, 'S', [], Chars).
+	% T — 0 before H; X before IA/IO; T otherwise
+	double_metaphone_char('T', ['H'| Chars], _, '0', 'T', Chars) :-
+		!.
+	double_metaphone_char('T', ['I','A'| Chars], _, 'X', 'T', Chars) :-
+		!.
+	double_metaphone_char('T', ['I','O'| Chars], _, 'X', 'T', Chars) :-
+		!.
+	double_metaphone_char('T', Chars, _, 'T', [], Chars).
+	% V → F
+	double_metaphone_char('V', Chars, _, 'F', [], Chars).
+	% W — kept only before a vowel
+	double_metaphone_char('W', [Char| Chars], _, 'W', 'F', Chars) :-
+		member(Char, ['A','E','I','O','U']),
+		!.
+	double_metaphone_char('W', Chars, _, [], [], Chars).
+	% X → K, push S back onto input
+	double_metaphone_char('X', Chars, _, 'K', [], ['S'| Chars]).
+	% Y — kept only before a vowel
+	double_metaphone_char('Y', [Char| Chars], _, 'Y', [], Chars) :-
+		member(Char, ['A','E','I','O','U']),
+		!.
+	double_metaphone_char('Y', Chars, _, [], [], Chars).
+	% Z → S
+	double_metaphone_char('Z', Chars, _, 'S', 'X', Chars).
+	% Fallback
+	double_metaphone_char(_, Chars, _, [], [], Chars).
+
 	% -----------------------------------------------------------------
 	% Phonetic match convenience predicates
 	% -----------------------------------------------------------------
@@ -1049,8 +1241,18 @@
 		metaphone(String1, Key),
 		metaphone(String2, Key).
 
+	double_metaphone_match(String1, String2) :-
+		double_metaphone(String1, P1, A1),
+		double_metaphone(String2, P2, A2),
+		(	P1 == P2
+		;	P1 == A2
+		;	A1 == P2
+		;	A1 == A2
+		),
+		!.
+
 	% =================================================================
-	% Private helpers
+	% Auxiliary predicates
 	% =================================================================
 
 	maplist_eq([], _).
