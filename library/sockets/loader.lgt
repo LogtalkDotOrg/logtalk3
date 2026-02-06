@@ -21,7 +21,6 @@
 
 :- if(current_logtalk_flag(prolog_dialect, eclipse)).
 
-	:- ensure_loaded(library(sockets)).
 	:- initialization((
 		logtalk_load(socket, [optimize(on)])
 	)).

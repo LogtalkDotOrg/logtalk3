@@ -31,9 +31,15 @@
 
 :- else.
 
+	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
+		:- use_module(library(sockets), []).
+	:- elif(current_logtalk_flag(prolog_dialect, swi)).
+		:- use_module(library(socket), []).
+	:- endif.
+
 	:- initialization((
 		set_logtalk_flag(report, warnings),
-		logtalk_load(loader),
+		logtalk_load(socket, [debug(on), source_data(on)]),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests, [hook(lgtunit)]),
 		tests::run

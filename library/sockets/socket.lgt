@@ -22,7 +22,7 @@
 :- object(socket).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
 		date is 2026-02-06,
 		comment is 'Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.',
@@ -153,7 +153,9 @@
 	current_host(Host) :-
 		context(Context),
 		catch(
-			sockets:current_host(Host),
+			(	get_flag(hostname, HostString),
+				atom_string(Host, HostString)
+			),
 			Error,
 			throw(error(socket_error(Error), Context))
 		).
