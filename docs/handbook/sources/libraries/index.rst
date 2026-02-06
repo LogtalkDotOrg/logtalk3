@@ -84,6 +84,7 @@ directory in the ``NOTES.md`` file.
    recorded_database
    redis
    sets
+   sockets
    statistics
    stemming
    string_distance

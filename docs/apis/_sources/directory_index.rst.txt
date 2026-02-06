@@ -753,6 +753,16 @@ To load an entity, always load the library that includes it using the goal ``log
    setp <setp_0>
    treap_set <treap_set_0>
 
+``library/sockets/``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   socket <socket_0>
+
 ``library/statistics/``
 -----------------------
 

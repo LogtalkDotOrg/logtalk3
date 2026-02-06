@@ -1,0 +1,185 @@
+.. index:: single: socket
+.. _socket/0:
+
+.. rst-class:: right
+
+**object**
+
+``socket``
+==========
+
+Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.
+
+| **Availability:** 
+|    ``logtalk_load(sockets(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:2:0
+| **Date:** 2026-02-06
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Supported backends: ECLiPSe, GNU Prolog, SICStus Prolog, and SWI-Prolog.
+   - Design rationale: Some backends (notably SICStus Prolog) do not provide low-level socket creation predicates that can be separated from binding or connecting. This library therefore provides a higher-level API with ``client_open/4`` and ``server_open/3`` that abstracts over these differences.
+   - Stream handling: Streams returned by ``client_open/4`` and ``server_accept/4`` are opened in binary mode. Use standard stream predicates (``put_byte/2``, ``get_byte/2``, ``read/2``, ``write/2``, etc.) to communicate.
+   - Options: The ``Options`` argument is currently reserved for future use and should be passed as an empty list ``[]``.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: client_open/4
+.. _socket/0::client_open/4:
+
+``client_open/4``
+^^^^^^^^^^^^^^^^^
+
+Opens a client connection to the specified host and port. Returns a stream for bidirectional communication. The stream is opened in binary mode.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``client_open(Host,Port,Stream,Options)``
+| **Mode and number of proofs:**
+|    ``client_open(+atom,+integer,--stream,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Connection refused or host not found:
+|        ``socket_error(Error)``
+
+
+------------
+
+.. index:: server_open/3
+.. _socket/0::server_open/3:
+
+``server_open/3``
+^^^^^^^^^^^^^^^^^
+
+Opens a server socket bound to the specified port. If ``Port`` is a variable, binds to an available port and unifies ``Port`` with the port number. Returns a ``ServerSocket`` handle to use with ``server_accept/4``. The default backlog (queue length) for pending connections is 5.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``server_open(Port,ServerSocket,Options)``
+| **Mode and number of proofs:**
+|    ``server_open(?integer,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Port already in use:
+|        ``socket_error(Error)``
+
+
+------------
+
+.. index:: server_accept/4
+.. _socket/0::server_accept/4:
+
+``server_accept/4``
+^^^^^^^^^^^^^^^^^^^
+
+Accepts an incoming connection on the server socket, blocking until a client connects. Returns a stream for bidirectional communication and client information as ``client(Host, Port)`` or ``client(Address)`` depending on backend. The stream is opened in binary mode.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``server_accept(ServerSocket,Stream,ClientInfo,Options)``
+| **Mode and number of proofs:**
+|    ``server_accept(+compound,--stream,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Invalid server socket:
+|        ``socket_error(Error)``
+
+
+------------
+
+.. index:: server_close/1
+.. _socket/0::server_close/1:
+
+``server_close/1``
+^^^^^^^^^^^^^^^^^^
+
+Closes a server socket.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``server_close(ServerSocket)``
+| **Mode and number of proofs:**
+|    ``server_close(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: close/1
+.. _socket/0::close/1:
+
+``close/1``
+^^^^^^^^^^^
+
+Closes a client or accepted connection stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close(Stream)``
+| **Mode and number of proofs:**
+|    ``close(+stream)`` - ``one_or_error``
+
+
+------------
+
+.. index:: current_host/1
+.. _socket/0::current_host/1:
+
+``current_host/1``
+^^^^^^^^^^^^^^^^^^
+
+Returns the hostname of the current machine.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``current_host(Host)``
+| **Mode and number of proofs:**
+|    ``current_host(-atom)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

@@ -29,6 +29,7 @@
 		subsequences(loader),
 		os(loader),
 		process(loader),
+		sockets(loader),
 		dates(loader),
 		events(loader),
 		dependents(loader),
