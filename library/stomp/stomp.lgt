@@ -242,7 +242,7 @@
 	connect_(Host, Port, Connection, Options, Context) :-
 		% Open TCP connection
 		catch(
-			socket::client_open(Host, Port, Stream, []),
+			socket::client_open(Host, Port, Input, Output, []),
 			_,
 			throw(error(stomp_error(connection_failed), Context))
 		),
@@ -251,9 +251,9 @@
 		option(heartbeat(ClientCx, ClientCy), Options, heartbeat(0, 0)),
 		build_connect_frame(VirtualHost, Options, ClientCx, ClientCy, Frame),
 		% Send CONNECT frame
-		send_frame(Stream, Frame),
+		send_frame(Output, Frame),
 		% Receive CONNECTED frame
-		receive_frame(Stream, ResponseFrame, -1, Context),
+		receive_frame(Input, ResponseFrame, -1, Context),
 		% Validate response
 		(	frame_command(ResponseFrame, 'CONNECTED') ->
 			% Extract negotiated heartbeat
@@ -271,15 +271,15 @@
 				true
 			;	Version = '1.2'
 			),
-			Connection = connection(Stream, Host, Port, Session, Version, HeartbeatSend, HeartbeatRecv)
+			Connection = connection(Input, Output, Host, Port, Session, Version, HeartbeatSend, HeartbeatRecv)
 		;	frame_command(ResponseFrame, 'ERROR') ->
-			socket::close(Stream),
+			socket::close(Input, Output),
 			(	frame_header(ResponseFrame, 'message', ErrorMsg) ->
 				true
 			;	ErrorMsg = 'Connection rejected'
 			),
 			throw(error(stomp_error(protocol_error(ErrorMsg)), Context))
-		;	socket::close(Stream),
+		;	socket::close(Input, Output),
 			throw(error(stomp_error(protocol_error('Unexpected response')), Context))
 		).
 
@@ -305,7 +305,8 @@
 
 	disconnect(Connection, Options) :-
 		context(Context),
-		arg(1, Connection, Stream),
+		arg(1, Connection, Input),
+		arg(2, Connection, Output),
 		% Generate receipt ID if not provided
 		(	option(receipt(ReceiptId), Options) ->
 			true
@@ -314,9 +315,9 @@
 		% Build and send DISCONNECT frame
 		Frame = frame('DISCONNECT', ['receipt'-ReceiptId], ''),
 		catch(
-			(	send_frame(Stream, Frame),
+			(	send_frame(Output, Frame),
 				% Wait for receipt
-				receive_frame(Stream, ResponseFrame, 5000, Context),
+				receive_frame(Input, ResponseFrame, 5000, Context),
 				(	frame_command(ResponseFrame, 'RECEIPT'),
 					frame_header(ResponseFrame, 'receipt-id', ReceiptId) ->
 					true
@@ -326,16 +327,12 @@
 			_,
 			true  % Ignore errors during disconnect
 		),
-		catch(socket::close(Stream), _, true).
+		catch(socket::close(Input, Output), _, true).
 
 	connection_alive(Connection) :-
-		arg(1, Connection, Stream),
-		(	Stream = stream_pair(Input, _) ->
-			ActualStream = Input
-		;	ActualStream = Stream
-		),
+		arg(1, Connection, Input),
 		catch(
-			stream_property(ActualStream, _),
+			stream_property(Input, _),
 			_,
 			fail
 		).
@@ -346,7 +343,7 @@
 
 	send(Connection, Destination, Body, Options) :-
 		context(Context),
-		arg(1, Connection, Stream),
+		arg(2, Connection, Output),
 		% Encode body to bytes
 		body_to_bytes(Body, BodyBytes, BodyLength),
 		% Build headers
@@ -378,14 +375,14 @@
 		add_custom_headers(Options, Headers4, Headers5),
 		Frame = frame('SEND', Headers5, BodyBytes),
 		catch(
-			send_frame(Stream, Frame),
+			send_frame(Output, Frame),
 			Error,
 			throw(error(stomp_error(Error), Context))
 		).
 
 	subscribe(Connection, Destination, SubscriptionId, Options) :-
 		context(Context),
-		arg(1, Connection, Stream),
+		arg(2, Connection, Output),
 		% Build headers
 		Headers0 = ['id'-SubscriptionId, 'destination'-Destination],
 		% Add ack mode
@@ -396,7 +393,7 @@
 		),
 		Frame = frame('SUBSCRIBE', Headers, ''),
 		catch(
-			send_frame(Stream, Frame),
+			send_frame(Output, Frame),
 			Error,
 			throw(error(stomp_error(Error), Context))
 		).
@@ -407,19 +404,19 @@
 
 	unsubscribe(Connection, SubscriptionId, _Options) :-
 		context(Context),
-		arg(1, Connection, Stream),
+		arg(2, Connection, Output),
 		Frame = frame('UNSUBSCRIBE', ['id'-SubscriptionId], ''),
 		catch(
-			send_frame(Stream, Frame),
+			send_frame(Output, Frame),
 			Error,
 			throw(error(stomp_error(Error), Context))
 		).
 
 	receive(Connection, Frame, Options) :-
 		context(Context),
-		arg(1, Connection, Stream),
+		arg(1, Connection, Input),
 		option(timeout(Timeout), Options, -1),
-		receive_frame(Stream, Frame, Timeout, Context).
+		receive_frame(Input, Frame, Timeout, Context).
 
 	% ==========================================================================
 	% Implementation - Acknowledgment
@@ -427,7 +424,7 @@
 
 	ack(Connection, AckId, Options) :-
 		context(Context),
-		arg(1, Connection, Stream),
+		arg(2, Connection, Output),
 		Headers0 = ['id'-AckId],
 		(	option(transaction(TransactionId), Options) ->
 			Headers = ['transaction'-TransactionId | Headers0]
@@ -435,14 +432,14 @@
 		),
 		Frame = frame('ACK', Headers, ''),
 		catch(
-			send_frame(Stream, Frame),
+			send_frame(Output, Frame),
 			Error,
 			throw(error(stomp_error(Error), Context))
 		).
 
 	nack(Connection, AckId, Options) :-
 		context(Context),
-		arg(1, Connection, Stream),
+		arg(2, Connection, Output),
 		Headers0 = ['id'-AckId],
 		(	option(transaction(TransactionId), Options) ->
 			Headers = ['transaction'-TransactionId| Headers0]
@@ -450,7 +447,7 @@
 		),
 		Frame = frame('NACK', Headers, ''),
 		catch(
-			send_frame(Stream, Frame),
+			send_frame(Output, Frame),
 			Error,
 			throw(error(stomp_error(Error), Context))
 		).
@@ -461,30 +458,30 @@
 
 	begin_transaction(Connection, TransactionId, _Options) :-
 		context(Context),
-		arg(1, Connection, Stream),
+		arg(2, Connection, Output),
 		Frame = frame('BEGIN', ['transaction'-TransactionId], ''),
 		catch(
-			send_frame(Stream, Frame),
+			send_frame(Output, Frame),
 			Error,
 			throw(error(stomp_error(Error), Context))
 		).
 
 	commit_transaction(Connection, TransactionId, _Options) :-
 		context(Context),
-		arg(1, Connection, Stream),
+		arg(2, Connection, Output),
 		Frame = frame('COMMIT', ['transaction'-TransactionId], ''),
 		catch(
-			send_frame(Stream, Frame),
+			send_frame(Output, Frame),
 			Error,
 			throw(error(stomp_error(Error), Context))
 		).
 
 	abort_transaction(Connection, TransactionId, _Options) :-
 		context(Context),
-		arg(1, Connection, Stream),
+		arg(2, Connection, Output),
 		Frame = frame('ABORT', ['transaction'-TransactionId], ''),
 		catch(
-			send_frame(Stream, Frame),
+			send_frame(Output, Frame),
 			Error,
 			throw(error(stomp_error(Error), Context))
 		).
@@ -495,9 +492,9 @@
 
 	send_heartbeat(Connection) :-
 		context(Context),
-		arg(1, Connection, Stream),
+		arg(2, Connection, Output),
 		catch(
-			write_to_stream(Stream, '\n'),
+			write_to_stream(Output, '\n'),
 			Error,
 			throw(error(stomp_error(Error), Context))
 		).
@@ -798,12 +795,8 @@
 			length(Codes, Length)
 		).
 
-	% Stream I/O - handles both single streams and stream pairs
-	% GNU Prolog and SWI-Prolog return stream_pair(Input, Output)
+	% Stream I/O - works with individual input and output streams
 
-	write_codes(stream_pair(_, Output), Codes) :-
-		!,
-		write_codes_(Codes, Output).
 	write_codes(Stream, Codes) :-
 		write_codes_(Codes, Stream).
 
@@ -812,29 +805,16 @@
 		put_byte(Stream, Code),
 		write_codes_(Codes, Stream).
 
-	write_byte_to_stream(stream_pair(_, Output), Byte) :-
-		!,
-		put_byte(Output, Byte).
 	write_byte_to_stream(Stream, Byte) :-
 		put_byte(Stream, Byte).
 
-	write_to_stream(stream_pair(_, Output), Atom) :-
-		!,
-		atom_codes(Atom, Codes),
-		write_codes_(Codes, Output).
 	write_to_stream(Stream, Atom) :-
 		atom_codes(Atom, Codes),
 		write_codes_(Codes, Stream).
 
-	read_byte_from_stream(stream_pair(Input, _), Byte) :-
-		!,
-		get_byte(Input, Byte).
 	read_byte_from_stream(Stream, Byte) :-
 		get_byte(Stream, Byte).
 
-	flush_stream(stream_pair(_, Output)) :-
-		!,
-		flush_output(Output).
 	flush_stream(Stream) :-
 		flush_output(Stream).
 

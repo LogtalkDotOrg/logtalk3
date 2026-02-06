@@ -1316,7 +1316,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`packs <packs/0::clean/2>`
 
-``client_open/4``
+``client_open/5``
 -----------------
 
 .. toctree::
@@ -1324,7 +1324,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`socket <socket/0::client_open/4>`
+* :ref:`socket <socket/0::client_open/5>`
 
 ``clone/1``
 -----------
@@ -1357,7 +1357,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`dictionaryp <dictionaryp/0::clone/4>`
 
-``close/1``
+``close/2``
 -----------
 
 .. toctree::
@@ -1365,7 +1365,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`socket <socket/0::close/1>`
+* :ref:`socket <socket/0::close/2>`
 
 ``coefficient_of_variation/2``
 ------------------------------
@@ -9760,7 +9760,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`queuep <queuep/0::serve/3>`
 
-``server_accept/4``
+``server_accept/5``
 -------------------
 
 .. toctree::
@@ -9768,7 +9768,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`socket <socket/0::server_accept/4>`
+* :ref:`socket <socket/0::server_accept/5>`
 
 ``server_close/1``
 ------------------

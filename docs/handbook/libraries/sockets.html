@@ -217,7 +217,7 @@ SWI-Prolog.</p>
 abstraction levels. Some backends (notably SICStus Prolog) do not
 provide low-level socket creation predicates that can be separated from
 binding or connecting. This library therefore provides a higher-level
-API with predicates <code class="docutils literal notranslate"><span class="pre">client_open/4</span></code> and <code class="docutils literal notranslate"><span class="pre">server_open/3</span></code> that
+API with predicates <code class="docutils literal notranslate"><span class="pre">client_open/5</span></code> and <code class="docutils literal notranslate"><span class="pre">server_open/3</span></code> that
 abstracts over these differences.</p>
 </section>
 <section id="api-documentation">
@@ -245,20 +245,22 @@ link in a web browser.</p>
 <section id="creating-a-client-connection">
 <h3>Creating a client connection<a class="headerlink" href="#creating-a-client-connection" title="Link to this heading"></a></h3>
 <p>To connect to a server:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> socket<span class="o">::</span>client_open(localhost, <span class="m">8080</span>, <span class="nv">Stream</span>, []).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> socket<span class="o">::</span>client_open(localhost, <span class="m">8080</span>, <span class="nv">Input</span>, <span class="nv">Output</span>, []).
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">Stream</span></code> returned will be either a single stream handle or a
-compound term <code class="docutils literal notranslate"><span class="pre">stream_pair(Input,</span> <span class="pre">Output)</span></code> depending on the backend
-Prolog system. Use <code class="docutils literal notranslate"><span class="pre">socket::close/1</span></code> to close the stream when done.</p>
+<p>The predicates <code class="docutils literal notranslate"><span class="pre">client_open/5</span></code> and <code class="docutils literal notranslate"><span class="pre">server_accept/5</span></code> return separate
+input and output streams. For backends where the same stream is used for
+bidirectional communication (SICStus Prolog and ECLiPSe), the same
+stream handle is returned in both arguments. Use <code class="docutils literal notranslate"><span class="pre">socket::close/2</span></code> to
+close both streams when done.</p>
 </section>
 <section id="creating-a-server">
 <h3>Creating a server<a class="headerlink" href="#creating-a-server" title="Link to this heading"></a></h3>
 <p>To create a server that accepts connections:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> socket<span class="o">::</span>server_open(<span class="m">8080</span>, <span class="nv">ServerSocket</span>, []),
-   socket<span class="o">::</span>server_accept(<span class="nv">ServerSocket</span>, <span class="nv">ClientStream</span>, <span class="nv">ClientInfo</span>, []),
-   <span class="c">% ... communicate with client using ClientStream ...</span>
-   socket<span class="o">::</span><span class="k">close</span>(<span class="nv">ClientStream</span>),
+   socket<span class="o">::</span>server_accept(<span class="nv">ServerSocket</span>, <span class="nv">Input</span>, <span class="nv">Output</span>, <span class="nv">ClientInfo</span>, []),
+   <span class="c">% ... communicate with client using Input and Output ...</span>
+   socket<span class="o">::</span><span class="k">close</span>(<span class="nv">Input</span>, <span class="nv">Output</span>),
    socket<span class="o">::</span>server_close(<span class="nv">ServerSocket</span>).
 </pre></div>
 </div>
@@ -275,13 +277,15 @@ port will be selected and unified with the variable.</p>
 <section id="api-summary">
 <h2>API Summary<a class="headerlink" href="#api-summary" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">client_open(+Host,</span> <span class="pre">+Port,</span> <span class="pre">-Stream,</span> <span class="pre">+Options)</span></code> - Connect to a server</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">client_open(+Host,</span> <span class="pre">+Port,</span> <span class="pre">-InputStream,</span> <span class="pre">-OutputStream,</span> <span class="pre">+Options)</span></code> -
+Connect to a server</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">server_open(?Port,</span> <span class="pre">-ServerSocket,</span> <span class="pre">+Options)</span></code> - Create a server
 socket</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">server_accept(+ServerSocket,</span> <span class="pre">-Stream,</span> <span class="pre">-ClientInfo,</span> <span class="pre">+Options)</span></code> -
-Accept connection</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">server_accept(+ServerSocket,</span> <span class="pre">-InputStream,</span> <span class="pre">-OutputStream,</span> <span class="pre">-ClientInfo,</span> <span class="pre">+Options)</span></code>
+- Accept connection</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">server_close(+ServerSocket)</span></code> - Close a server socket</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">close(+Stream)</span></code> - Close a client or accepted connection stream</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">close(+InputStream,</span> <span class="pre">+OutputStream)</span></code> - Close a client or accepted
+connection</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">current_host(-Host)</span></code> - Get the current machine’s hostname</p></li>
 </ul>
 </section>
@@ -289,12 +293,12 @@ Accept connection</p></li>
 <h2>Backend-specific notes<a class="headerlink" href="#backend-specific-notes" title="Link to this heading"></a></h2>
 <section id="stream-representation">
 <h3>Stream representation<a class="headerlink" href="#stream-representation" title="Link to this heading"></a></h3>
-<p>Different backends represent socket streams differently:</p>
-<ul class="simple">
-<li><p><strong>SICStus Prolog and ECLiPSe</strong>: Return a single bidirectional stream.</p></li>
-<li><p><strong>GNU Prolog, SWI-Prolog</strong>: Return <code class="docutils literal notranslate"><span class="pre">stream_pair(Input,</span> <span class="pre">Output)</span></code> with
-separate streams for reading and writing.</p></li>
-</ul>
+<p>The library provides separate input and output stream arguments in
+<code class="docutils literal notranslate"><span class="pre">client_open/5</span></code> and <code class="docutils literal notranslate"><span class="pre">server_accept/5</span></code>. For backends where the same
+stream is used for bidirectional communication (SICStus Prolog and
+ECLiPSe), the same stream handle is returned in both the input and
+output arguments. For backends that use separate streams (GNU Prolog and
+SWI-Prolog), separate stream handles are returned.</p>
 </section>
 <section id="binary-mode">
 <h3>Binary mode<a class="headerlink" href="#binary-mode" title="Link to this heading"></a></h3>

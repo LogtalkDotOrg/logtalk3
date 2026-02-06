@@ -22,25 +22,25 @@
 :- object(socket).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
 		date is 2026-02-06,
 		comment is 'Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, and SWI-Prolog.',
-			'Design rationale' - 'Some backends (notably SICStus Prolog) do not provide low-level socket creation predicates that can be separated from binding or connecting. This library therefore provides a higher-level API with ``client_open/4`` and ``server_open/3`` that abstracts over these differences.',
-			'Stream handling' - 'Streams returned by ``client_open/4`` and ``server_accept/4`` are opened in binary mode. Use standard stream predicates (``put_byte/2``, ``get_byte/2``, ``read/2``, ``write/2``, etc.) to communicate.',
+			'Design rationale' - 'Some backends (notably SICStus Prolog) do not provide low-level socket creation predicates that can be separated from binding or connecting. This library therefore provides a higher-level API with ``client_open/5`` and ``server_open/3`` that abstracts over these differences.',
+			'Stream handling' - 'Predicates ``client_open/5`` and ``server_accept/5`` return separate input and output streams opened in binary mode. For backends where the same stream is used for bidirectional communication, the same stream handle is returned in both arguments. Use standard stream predicates (``put_byte/2``, ``get_byte/2``, ``read/2``, ``write/2``, etc.) to communicate.',
 			'Options' - 'The ``Options`` argument is currently reserved for future use and should be passed as an empty list ``[]``.'
 		]
 	]).
 
 	% Client predicates
 
-	:- public(client_open/4).
-	:- mode(client_open(+atom, +integer, --stream, +list), one_or_error).
-	:- info(client_open/4, [
-		comment is 'Opens a client connection to the specified host and port. Returns a stream for bidirectional communication. The stream is opened in binary mode.',
-		argnames is ['Host', 'Port', 'Stream', 'Options'],
+	:- public(client_open/5).
+	:- mode(client_open(+atom, +integer, --stream, --stream, +list), one_or_error).
+	:- info(client_open/5, [
+		comment is 'Opens a client connection to the specified host and port. Returns separate input and output streams for bidirectional communication. For backends where the same stream is used for bidirectional communication, the same stream handle is returned in both arguments. The streams are opened in binary mode.',
+		argnames is ['Host', 'Port', 'InputStream', 'OutputStream', 'Options'],
 		exceptions is [
 			'Connection refused or host not found' - 'socket_error(Error)'
 		]
@@ -58,11 +58,11 @@
 		]
 	]).
 
-	:- public(server_accept/4).
-	:- mode(server_accept(+compound, --stream, --compound, +list), one_or_error).
-	:- info(server_accept/4, [
-		comment is 'Accepts an incoming connection on the server socket, blocking until a client connects. Returns a stream for bidirectional communication and client information as ``client(Host, Port)`` or ``client(Address)`` depending on backend. The stream is opened in binary mode.',
-		argnames is ['ServerSocket', 'Stream', 'ClientInfo', 'Options'],
+	:- public(server_accept/5).
+	:- mode(server_accept(+compound, --stream, --stream, --compound, +list), one_or_error).
+	:- info(server_accept/5, [
+		comment is 'Accepts an incoming connection on the server socket, blocking until a client connects. Returns separate input and output streams for bidirectional communication and client information as ``client(Host, Port)`` or ``client(Address)`` depending on backend. For backends where the same stream is used for bidirectional communication, the same stream handle is returned in both arguments. The streams are opened in binary mode.',
+		argnames is ['ServerSocket', 'InputStream', 'OutputStream', 'ClientInfo', 'Options'],
 		exceptions is [
 			'Invalid server socket' - 'socket_error(Error)'
 		]
@@ -77,11 +77,11 @@
 
 	% Common predicates
 
-	:- public(close/1).
-	:- mode(close(+stream), one_or_error).
-	:- info(close/1, [
-		comment is 'Closes a client or accepted connection stream.',
-		argnames is ['Stream']
+	:- public(close/2).
+	:- mode(close(+stream, +stream), one_or_error).
+	:- info(close/2, [
+		comment is 'Closes a client or accepted connection by closing both the input and output streams. If the same stream is used for both, it is closed only once.',
+		argnames is ['InputStream', 'OutputStream']
 	]).
 
 	:- public(current_host/1).
@@ -97,7 +97,7 @@
 
 	% ECLiPSe: socket/2 for creation, then bind, listen, etc.
 
-	client_open(Host, Port, Stream, _Options) :-
+	client_open(Host, Port, Stream, Stream, _Options) :-
 		context(Context),
 		catch(
 			(	{socket(internet, stream, Socket)},
@@ -120,7 +120,7 @@
 			throw(error(socket_error(Error), Context))
 		).
 
-	server_accept(server_socket(Socket, _), ClientSocket, client(Host, Port), _Options) :-
+	server_accept(server_socket(Socket, _), ClientSocket, ClientSocket, client(Host, Port), _Options) :-
 		context(Context),
 		catch(
 			(	{accept(Socket, Host/Port, ClientSocket)},
@@ -133,15 +133,19 @@
 	server_close(server_socket(Socket, _)) :-
 		context(Context),
 		catch(
-			close(Socket),
+			close(Socket, Socket),
 			Error,
 			throw(error(socket_error(Error), Context))
 		).
 
-	close(Stream) :-
+	close(Input, Output) :-
 		context(Context),
 		catch(
-			{close(Stream)},
+			(	Input == Output ->
+				close(Input)
+			;	close(Input),
+				close(Output)
+			),
 			Error,
 			throw(error(socket_error(Error), Context))
 		).
@@ -158,7 +162,7 @@
 
 	% GNU Prolog: socket/2, socket_connect/4, socket_bind/2, socket_listen/2, socket_accept/4
 
-	client_open(Host, Port, stream_pair(Input, Output), _Options) :-
+	client_open(Host, Port, Input, Output, _Options) :-
 		context(Context),
 		catch(
 			(	socket('AF_INET', Socket),
@@ -181,7 +185,7 @@
 			throw(error(socket_error(Error), Context))
 		).
 
-	server_accept(server_socket(Socket, _), stream_pair(Input, Output), client(Host, Port), _Options) :-
+	server_accept(server_socket(Socket, _), Input, Output, client(Host, Port), _Options) :-
 		context(Context),
 		catch(
 			(	socket_accept(Socket, 'AF_INET'(Host, Port), Input, Output),
@@ -200,20 +204,14 @@
 			throw(error(socket_error(Error), Context))
 		).
 
-	close(stream_pair(Input, Output)) :-
-		!,
+	close(Input, Output) :-
 		context(Context),
 		catch(
-			(	{close(Input)},
-				{close(Output)}
+			(	Input == Output ->
+				close(Input)
+			;	close(Input),
+				close(Output)
 			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
-	close(Stream) :-
-		context(Context),
-		catch(
-			{close(Stream)},
 			Error,
 			throw(error(socket_error(Error), Context))
 		).
@@ -230,7 +228,7 @@
 
 	% SICStus Prolog: higher-level API with socket_client_open/3 and socket_server_open/[2,3]
 
-	client_open(Host, Port, Stream, _Options) :-
+	client_open(Host, Port, Stream, Stream, _Options) :-
 		context(Context),
 		catch(
 			sockets:socket_client_open(inet(Host, Port), Stream, [type(binary)]),
@@ -262,7 +260,7 @@
 			throw(error(socket_error(Error), Context))
 		).
 
-	server_accept(server_socket(ServerSocket, _), Stream, client(Client), _Options) :-
+	server_accept(server_socket(ServerSocket, _), Stream, Stream, client(Client), _Options) :-
 		context(Context),
 		catch(
 			sockets:socket_server_accept(ServerSocket, Client, Stream, [type(binary)]),
@@ -278,10 +276,14 @@
 			throw(error(socket_error(Error), Context))
 		).
 
-	close(Stream) :-
+	close(Input, Output) :-
 		context(Context),
 		catch(
-			{close(Stream)},
+			(	Input == Output ->
+				close(Input)
+			;	close(Input),
+				close(Output)
+			),
 			Error,
 			throw(error(socket_error(Error), Context))
 		).
@@ -298,7 +300,7 @@
 
 	% SWI-Prolog: tcp_socket/1, tcp_connect/2, tcp_bind/2, tcp_listen/2, tcp_accept/3
 
-	client_open(Host, Port, stream_pair(Input, Output), _Options) :-
+	client_open(Host, Port, Input, Output, _Options) :-
 		context(Context),
 		catch(
 			(	socket:tcp_socket(Socket),
@@ -323,7 +325,7 @@
 			throw(error(socket_error(Error), Context))
 		).
 
-	server_accept(server_socket(Socket, _), stream_pair(Input, Output), client(Host, Port), _Options) :-
+	server_accept(server_socket(Socket, _), Input, Output, client(Host, Port), _Options) :-
 		context(Context),
 		catch(
 			(	socket:tcp_accept(Socket, ClientSocket, Peer),
@@ -352,20 +354,14 @@
 			throw(error(socket_error(Error), Context))
 		).
 
-	close(stream_pair(Input, Output)) :-
-		!,
+	close(Input, Output) :-
 		context(Context),
 		catch(
-			(	{close(Input)},
-				{close(Output)}
+			(	Input == Output ->
+				close(Input)
+			;	close(Input),
+				close(Output)
 			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
-	close(Stream) :-
-		context(Context),
-		catch(
-			{close(Stream)},
 			Error,
 			throw(error(socket_error(Error), Context))
 		).

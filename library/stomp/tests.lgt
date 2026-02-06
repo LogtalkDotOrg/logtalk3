@@ -81,7 +81,7 @@
 
 	test(stomp_connection_alive_01, fail) :-
 		% A fake connection should fail the alive test
-		FakeConnection = connection(invalid_stream, localhost, 61613, '', '1.2', 0, 0),
+		FakeConnection = connection(invalid_stream, invalid_stream, localhost, 61613, '', '1.2', 0, 0),
 		stomp::connection_alive(FakeConnection).
 
 	% ==========================================================================
@@ -190,8 +190,8 @@
 
 	stomp_server_available :-
 		catch(
-			(	socket::client_open(localhost, 61613, Stream, []),
-				socket::close(Stream)
+			(	socket::client_open(localhost, 61613, Input, Output, []),
+				socket::close(Input, Output)
 			),
 			_,
 			fail

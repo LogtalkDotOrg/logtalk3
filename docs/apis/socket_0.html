@@ -223,7 +223,7 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:2:0</div>
+<div class="line"><strong>Version:</strong> 0:3:0</div>
 <div class="line"><strong>Date:</strong> 2026-02-06</div>
 </div>
 <div class="line-block">
@@ -244,8 +244,8 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Supported backends: ECLiPSe, GNU Prolog, SICStus Prolog, and SWI-Prolog.</p></li>
-<li><p>Design rationale: Some backends (notably SICStus Prolog) do not provide low-level socket creation predicates that can be separated from binding or connecting. This library therefore provides a higher-level API with <code class="docutils literal notranslate"><span class="pre">client_open/4</span></code> and <code class="docutils literal notranslate"><span class="pre">server_open/3</span></code> that abstracts over these differences.</p></li>
-<li><p>Stream handling: Streams returned by <code class="docutils literal notranslate"><span class="pre">client_open/4</span></code> and <code class="docutils literal notranslate"><span class="pre">server_accept/4</span></code> are opened in binary mode. Use standard stream predicates (<code class="docutils literal notranslate"><span class="pre">put_byte/2</span></code>, <code class="docutils literal notranslate"><span class="pre">get_byte/2</span></code>, <code class="docutils literal notranslate"><span class="pre">read/2</span></code>, <code class="docutils literal notranslate"><span class="pre">write/2</span></code>, etc.) to communicate.</p></li>
+<li><p>Design rationale: Some backends (notably SICStus Prolog) do not provide low-level socket creation predicates that can be separated from binding or connecting. This library therefore provides a higher-level API with <code class="docutils literal notranslate"><span class="pre">client_open/5</span></code> and <code class="docutils literal notranslate"><span class="pre">server_open/3</span></code> that abstracts over these differences.</p></li>
+<li><p>Stream handling: Predicates <code class="docutils literal notranslate"><span class="pre">client_open/5</span></code> and <code class="docutils literal notranslate"><span class="pre">server_accept/5</span></code> return separate input and output streams opened in binary mode. For backends where the same stream is used for bidirectional communication, the same stream handle is returned in both arguments. Use standard stream predicates (<code class="docutils literal notranslate"><span class="pre">put_byte/2</span></code>, <code class="docutils literal notranslate"><span class="pre">get_byte/2</span></code>, <code class="docutils literal notranslate"><span class="pre">read/2</span></code>, <code class="docutils literal notranslate"><span class="pre">write/2</span></code>, etc.) to communicate.</p></li>
 <li><p>Options: The <code class="docutils literal notranslate"><span class="pre">Options</span></code> argument is currently reserved for future use and should be passed as an empty list <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p></li>
 </ul>
 </div></blockquote>
@@ -259,11 +259,11 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#client-open-4" id="id2"><code class="docutils literal notranslate"><span class="pre">client_open/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#client-open-5" id="id2"><code class="docutils literal notranslate"><span class="pre">client_open/5</span></code></a></p></li>
 <li><p><a class="reference internal" href="#server-open-3" id="id3"><code class="docutils literal notranslate"><span class="pre">server_open/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#server-accept-4" id="id4"><code class="docutils literal notranslate"><span class="pre">server_accept/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#server-accept-5" id="id4"><code class="docutils literal notranslate"><span class="pre">server_accept/5</span></code></a></p></li>
 <li><p><a class="reference internal" href="#server-close-1" id="id5"><code class="docutils literal notranslate"><span class="pre">server_close/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#close-1" id="id6"><code class="docutils literal notranslate"><span class="pre">close/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#close-2" id="id6"><code class="docutils literal notranslate"><span class="pre">close/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#current-host-1" id="id7"><code class="docutils literal notranslate"><span class="pre">current_host/1</span></code></a></p></li>
 </ul>
 </li>
@@ -274,9 +274,9 @@
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="client-open-4">
-<span id="socket-0-client-open-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">client_open/4</span></code></a><a class="headerlink" href="#client-open-4" title="Link to this heading"></a></h3>
-<p>Opens a client connection to the specified host and port. Returns a stream for bidirectional communication. The stream is opened in binary mode.</p>
+<section id="client-open-5">
+<span id="socket-0-client-open-5"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">client_open/5</span></code></a><a class="headerlink" href="#client-open-5" title="Link to this heading"></a></h3>
+<p>Opens a client connection to the specified host and port. Returns separate input and output streams for bidirectional communication. For backends where the same stream is used for bidirectional communication, the same stream handle is returned in both arguments. The streams are opened in binary mode.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -286,11 +286,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">client_open(Host,Port,Stream,Options)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">client_open(Host,Port,InputStream,OutputStream,Options)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">client_open(+atom,+integer,--stream,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">client_open(+atom,+integer,--stream,--stream,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -334,9 +334,9 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="server-accept-4">
-<span id="socket-0-server-accept-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">server_accept/4</span></code></a><a class="headerlink" href="#server-accept-4" title="Link to this heading"></a></h3>
-<p>Accepts an incoming connection on the server socket, blocking until a client connects. Returns a stream for bidirectional communication and client information as <code class="docutils literal notranslate"><span class="pre">client(Host,</span> <span class="pre">Port)</span></code> or <code class="docutils literal notranslate"><span class="pre">client(Address)</span></code> depending on backend. The stream is opened in binary mode.</p>
+<section id="server-accept-5">
+<span id="socket-0-server-accept-5"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">server_accept/5</span></code></a><a class="headerlink" href="#server-accept-5" title="Link to this heading"></a></h3>
+<p>Accepts an incoming connection on the server socket, blocking until a client connects. Returns separate input and output streams for bidirectional communication and client information as <code class="docutils literal notranslate"><span class="pre">client(Host,</span> <span class="pre">Port)</span></code> or <code class="docutils literal notranslate"><span class="pre">client(Address)</span></code> depending on backend. For backends where the same stream is used for bidirectional communication, the same stream handle is returned in both arguments. The streams are opened in binary mode.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -346,11 +346,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">server_accept(ServerSocket,Stream,ClientInfo,Options)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">server_accept(ServerSocket,InputStream,OutputStream,ClientInfo,Options)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">server_accept(+compound,--stream,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">server_accept(+compound,--stream,--stream,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -385,9 +385,9 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="close-1">
-<span id="socket-0-close-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">close/1</span></code></a><a class="headerlink" href="#close-1" title="Link to this heading"></a></h3>
-<p>Closes a client or accepted connection stream.</p>
+<section id="close-2">
+<span id="socket-0-close-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">close/2</span></code></a><a class="headerlink" href="#close-2" title="Link to this heading"></a></h3>
+<p>Closes a client or accepted connection by closing both the input and output streams. If the same stream is used for both, it is closed only once.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -397,11 +397,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">close(Stream)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">close(InputStream,OutputStream)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">close(+stream)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">close(+stream,+stream)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />

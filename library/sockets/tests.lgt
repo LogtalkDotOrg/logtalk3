@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
 		date is 2026-02-06,
 		comment is 'Unit tests for the "sockets" library.'
@@ -69,8 +69,8 @@
 		threaded_ignore(
 			client_connect_and_close(Port)
 		),
-		socket::server_accept(ServerSocket, ClientStream, _ClientInfo, []),
-		socket::close(ClientStream),
+		socket::server_accept(ServerSocket, ClientInput, ClientOutput, _ClientInfo, []),
+		socket::close(ClientInput, ClientOutput),
 		socket::server_close(ServerSocket).
 
 	test(sockets_client_server_02, true(compound(ClientInfo))) :-
@@ -79,8 +79,8 @@
 		threaded_ignore(
 			client_connect_and_close(Port)
 		),
-		socket::server_accept(ServerSocket, ClientStream, ClientInfo, []),
-		socket::close(ClientStream),
+		socket::server_accept(ServerSocket, ClientInput, ClientOutput, ClientInfo, []),
+		socket::close(ClientInput, ClientOutput),
 		socket::server_close(ServerSocket).
 
 	test(sockets_client_server_03, true) :-
@@ -89,9 +89,9 @@
 		threaded_ignore(
 			client_send_byte(Port, 42)
 		),
-		socket::server_accept(ServerSocket, ClientStream, _ClientInfo, []),
-		read_byte_from_stream(ClientStream, Byte),
-		socket::close(ClientStream),
+		socket::server_accept(ServerSocket, ClientInput, ClientOutput, _ClientInfo, []),
+		get_byte(ClientInput, Byte),
+		socket::close(ClientInput, ClientOutput),
 		socket::server_close(ServerSocket),
 		Byte == 42.
 
@@ -101,12 +101,13 @@
 		threaded_ignore(
 			client_echo(Port, 123)
 		),
-		socket::server_accept(ServerSocket, ClientStream, _ClientInfo, []),
+		socket::server_accept(ServerSocket, ClientInput, ClientOutput, _ClientInfo, []),
 		% read the byte from client
-		read_byte_from_stream(ClientStream, Byte),
+		get_byte(ClientInput, Byte),
 		% echo it back
-		write_byte_to_stream(ClientStream, Byte),
-		socket::close(ClientStream),
+		put_byte(ClientOutput, Byte),
+		flush_output(ClientOutput),
+		socket::close(ClientInput, ClientOutput),
 		socket::server_close(ServerSocket),
 		Byte == 123.
 
@@ -115,20 +116,20 @@
 		socket::server_open(Port, ServerSocket, []),
 		% First connection
 		threaded_ignore(client_connect_and_close(Port)),
-		socket::server_accept(ServerSocket, ClientStream1, _, []),
-		socket::close(ClientStream1),
+		socket::server_accept(ServerSocket, ClientInput1, ClientOutput1, _, []),
+		socket::close(ClientInput1, ClientOutput1),
 		% Second connection
 		threaded_ignore(client_connect_and_close(Port)),
-		socket::server_accept(ServerSocket, ClientStream2, _, []),
-		socket::close(ClientStream2),
+		socket::server_accept(ServerSocket, ClientInput2, ClientOutput2, _, []),
+		socket::close(ClientInput2, ClientOutput2),
 		socket::server_close(ServerSocket).
 
 	% Helper predicates for threaded tests
 
 	client_connect_and_close(Port) :-
 		catch(
-			(	socket::client_open('127.0.0.1', Port, Stream, []),
-				socket::close(Stream)
+			(	socket::client_open('127.0.0.1', Port, Input, Output, []),
+				socket::close(Input, Output)
 			),
 			_,
 			true
@@ -136,9 +137,10 @@
 
 	client_send_byte(Port, Byte) :-
 		catch(
-			(	socket::client_open('127.0.0.1', Port, Stream, []),
-				write_byte_to_stream(Stream, Byte),
-				socket::close(Stream)
+			(	socket::client_open('127.0.0.1', Port, Input, Output, []),
+				put_byte(Output, Byte),
+				flush_output(Output),
+				socket::close(Input, Output)
 			),
 			_,
 			true
@@ -146,32 +148,17 @@
 
 	client_echo(Port, Byte) :-
 		catch(
-			(	socket::client_open('127.0.0.1', Port, Stream, []),
-				write_byte_to_stream(Stream, Byte),
+			(	socket::client_open('127.0.0.1', Port, Input, Output, []),
+				put_byte(Output, Byte),
+				flush_output(Output),
 				% read the echoed byte (but don't check it here)
-				read_byte_from_stream(Stream, _),
-				socket::close(Stream)
+				get_byte(Input, _),
+				socket::close(Input, Output)
 			),
 			_,
 			true
 		).
 
 	:- endif.
-
-	% Helper predicates for stream I/O that handle both single streams and stream pairs
-
-	read_byte_from_stream(stream_pair(Input, _), Byte) :-
-		!,
-		get_byte(Input, Byte).
-	read_byte_from_stream(Stream, Byte) :-
-		get_byte(Stream, Byte).
-
-	write_byte_to_stream(stream_pair(_, Output), Byte) :-
-		!,
-		put_byte(Output, Byte),
-		flush_output(Output).
-	write_byte_to_stream(Stream, Byte) :-
-		put_byte(Stream, Byte),
-		flush_output(Stream).
 
 :- end_object.
