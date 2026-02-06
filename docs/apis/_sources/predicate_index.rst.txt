@@ -392,6 +392,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`queuep <queuep/0::append/3>`
 * :ref:`varlistp <varlistp/0::append/3>`
 
+``append/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::append/4>`
+
 ``apply/2``
 -----------
 
@@ -1969,6 +1979,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::decompose_file_name/4>`
 
+``decr/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::decr/3>`
+
+``decrby/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::decrby/4>`
+
 ``decrement_counter/1``
 -----------------------
 
@@ -2030,6 +2060,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`flags <flags/0::defined_flag/6>`
+
+``del/3``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::del/3>`
 
 ``del_monitors/0``
 ------------------
@@ -3079,6 +3119,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`logtalk <logtalk/0::execution_context/7>`
 
+``exists/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::exists/3>`
+
 ``expand/2``
 ------------
 
@@ -3118,6 +3168,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`either <either/0::expecteds/2>`
+
+``expire/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::expire/4>`
 
 ``explain//1``
 --------------
@@ -3543,6 +3603,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`json_ld_protocol <json_ld_protocol/0::flatten/2>`
 * :ref:`listp <listp/0::flatten/2>`
 * :ref:`varlistp <varlistp/0::flatten/2>`
 
@@ -4058,6 +4119,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`optional(Optional) <optional/1::get/1>`
 
+``get/3``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::get/3>`
+
 ``get_field/2``
 ---------------
 
@@ -4088,6 +4159,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`arbitrary <arbitrary/0::get_seed/1>`
 * :ref:`pseudo_random_protocol <pseudo_random_protocol/0::get_seed/1>`
+
+``getrange/5``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::getrange/5>`
 
 ``gnu/0``
 ---------
@@ -4239,6 +4320,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`statisticsp <statisticsp/0::harmonic_mean/2>`
 
+``hdel/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::hdel/4>`
+
 ``head/2``
 ----------
 
@@ -4290,6 +4381,56 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`number_grammars(Format) <number_grammars/1::hex_digits//1>`
 
+``hexists/4``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::hexists/4>`
+
+``hget/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::hget/4>`
+
+``hgetall/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::hgetall/3>`
+
+``hkeys/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::hkeys/3>`
+
+``hlen/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::hlen/3>`
+
 ``home/1``
 ----------
 
@@ -4300,6 +4441,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`pack_protocol <pack_protocol/0::home/1>`
 * :ref:`registry_protocol <registry_protocol/0::home/1>`
+
+``hset/5``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::hset/5>`
+
+``hvals/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::hvals/3>`
 
 ``hypergeometric/4``
 --------------------
@@ -4390,6 +4551,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`metap <metap/0::include/3>`
+
+``incr/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::incr/3>`
+
+``incrby/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::incrby/4>`
 
 ``increase/1``
 --------------
@@ -5275,6 +5456,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`dictionaryp <dictionaryp/0::keys/2>`
 * :ref:`pairs <pairs/0::keys/2>`
 
+``keys/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::keys/3>`
+
 ``keys_values/3``
 -----------------
 
@@ -5735,6 +5926,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`listing <listing/0::listing/1>`
 
+``llen/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::llen/3>`
+
 ``loaded_file/1``
 -----------------
 
@@ -5986,6 +6187,56 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`characterp <characterp/0::lower_upper/2>`
+
+``lpop/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::lpop/3>`
+
+``lpush/4``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::lpush/4>`
+
+``lrange/5``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::lrange/5>`
+
+``lrem/5``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::lrem/5>`
+
+``ltrim/5``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::ltrim/5>`
 
 ``magic/2``
 -----------
@@ -6441,6 +6692,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`metagol <metagol/0::metarule_next_id/1>`
 
+``mget/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::mget/3>`
+
 ``min/2``
 ---------
 
@@ -6554,6 +6815,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`event_registryp <event_registryp/0::monitors/1>`
+
+``mset/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::mset/3>`
 
 ``msort/2``
 -----------
@@ -7652,6 +7923,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`subsequences_protocol <subsequences_protocol/0::permutations/3>`
 
+``persist/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::persist/3>`
+
 ``pid/1``
 ---------
 
@@ -8627,6 +8908,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`listp <listp/0::remove_duplicates/2>`
 * :ref:`varlistp <varlistp/0::remove_duplicates/2>`
 
+``rename/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::rename/4>`
+
 ``rename_file/2``
 -----------------
 
@@ -8900,6 +9191,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`code_metric <code_metric/0::rlibrary_score/2>`
 
+``rpop/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::rpop/3>`
+
+``rpush/4``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::rpush/4>`
+
 ``rule/2``
 ----------
 
@@ -8969,6 +9280,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`lgtunit <lgtunit/0::run_test_sets/1>`
+
+``sadd/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::sadd/4>`
 
 ``same_length/2``
 -----------------
@@ -9071,6 +9392,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`metap <metap/0::scan_right_1/3>`
+
+``scard/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::scard/3>`
 
 ``search/1``
 ------------
@@ -9268,6 +9599,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`random_protocol <random_protocol/0::set/4>`
+* :ref:`redis <redis/0::set/4>`
 
 ``set_element/2``
 -----------------
@@ -9349,6 +9681,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`debuggerp <debuggerp/0::set_write_max_depth/1>`
+
+``setrange/5``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::setrange/5>`
 
 ``setup/0``
 -----------
@@ -9440,6 +9782,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`termp <termp/0::singletons/2>`
 
+``sismember/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::sismember/4>`
+
 ``size/2``
 ----------
 
@@ -9481,6 +9833,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`subsequences_protocol <subsequences_protocol/0::sliding_window/3>`
+
+``smembers/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::smembers/3>`
 
 ``softmax/2``
 -------------
@@ -9681,6 +10043,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`debuggerp <debuggerp/0::spying/4>`
+
+``srem/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::srem/4>`
 
 ``standard_cauchy/3``
 ---------------------
@@ -9962,6 +10334,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`string(Representation) <string/1::string_upper/2>`
+
+``strlen/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::strlen/3>`
 
 ``sub_string/5``
 ----------------
@@ -10571,6 +10953,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`java_utils_protocol <java_utils_protocol/0::true/1>`
 
+``ttl/3``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::ttl/3>`
+
 ``type/1``
 ----------
 
@@ -10590,6 +10982,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::type/2>`
+
+``type/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::type/3>`
 
 ``unexpected/1``
 ----------------
@@ -11387,6 +11789,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`statisticsp <statisticsp/0::z_normalization/2>`
 
+``zadd/5``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::zadd/5>`
+
+``zcard/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::zcard/3>`
+
 ``zero_or_more//0``
 -------------------
 
@@ -11446,4 +11868,44 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`zlist <zlist/0::zip_at_index/4>`
+
+``zrange/5``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::zrange/5>`
+
+``zrank/4``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::zrank/4>`
+
+``zrem/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::zrem/4>`
+
+``zscore/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`redis <redis/0::zscore/4>`
 

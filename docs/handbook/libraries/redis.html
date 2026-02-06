@@ -128,6 +128,17 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#supported-redis-features">Supported Redis Features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#connection-management">Connection Management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#string-operations">String Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#key-operations">Key Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hash-operations">Hash Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#list-operations">List Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-operations">Set Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sorted-set-operations">Sorted Set Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usage-examples">Usage Examples</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#credits">Credits</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
 </ul>
@@ -231,6 +242,155 @@ Prolog Redis client library:</p>
 <p>The Logtalk version is a straight-forward port of the original tests
 using the <code class="docutils literal notranslate"><span class="pre">test/1</span></code> dialect of <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>.</p>
 </section>
+<section id="supported-redis-features">
+<h2>Supported Redis Features<a class="headerlink" href="#supported-redis-features" title="Link to this heading"></a></h2>
+<p>This library provides wrapper predicates for commonly used Redis
+operations across multiple data types. For Redis commands not covered by
+a wrapper, use the generic <code class="docutils literal notranslate"><span class="pre">redis::send/3</span></code> predicate with the command
+as a compound term.</p>
+<section id="connection-management">
+<h3>Connection Management<a class="headerlink" href="#connection-management" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">connect/1</span></code> - Connect to localhost on default port (6379)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connect/3</span></code> - Connect to specified host and port</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">disconnect/1</span></code> - Disconnect from Redis server</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">send/3</span></code> - Send any Redis command and receive reply</p></li>
+</ul>
+</section>
+<section id="string-operations">
+<h3>String Operations<a class="headerlink" href="#string-operations" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get/3</span></code> - Get the value of a key</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set/4</span></code> - Set the value of a key</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">append/4</span></code> - Append a value to a key</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">getrange/5</span></code> - Get substring of string stored at key</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">setrange/5</span></code> - Overwrite part of a string at key starting at offset</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">strlen/3</span></code> - Get the length of the value stored at key</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mget/3</span></code> - Get values of multiple keys</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mset/3</span></code> - Set multiple key-value pairs atomically</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">incr/3</span></code> - Increment integer value of key by one</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">decr/3</span></code> - Decrement integer value of key by one</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">incrby/4</span></code> - Increment integer value of key by amount</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">decrby/4</span></code> - Decrement integer value of key by amount</p></li>
+</ul>
+</section>
+<section id="key-operations">
+<h3>Key Operations<a class="headerlink" href="#key-operations" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">del/3</span></code> - Delete a key</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exists/3</span></code> - Check if a key exists</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">keys/3</span></code> - Find all keys matching a pattern</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ttl/3</span></code> - Get time to live for a key in seconds</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expire/4</span></code> - Set a timeout on a key in seconds</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">persist/3</span></code> - Remove the expiration from a key</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rename/4</span></code> - Rename a key</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type/3</span></code> - Get the type of value stored at key</p></li>
+</ul>
+</section>
+<section id="hash-operations">
+<h3>Hash Operations<a class="headerlink" href="#hash-operations" title="Link to this heading"></a></h3>
+<p>Hashes are maps between string fields and string values, ideal for
+representing objects.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">hset/5</span></code> - Set field in a hash</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hget/4</span></code> - Get value of field in a hash</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hgetall/3</span></code> - Get all fields and values in a hash</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hdel/4</span></code> - Delete field from a hash</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hexists/4</span></code> - Check if field exists in a hash</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hkeys/3</span></code> - Get all field names in a hash</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hvals/3</span></code> - Get all values in a hash</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hlen/3</span></code> - Get number of fields in a hash</p></li>
+</ul>
+</section>
+<section id="list-operations">
+<h3>List Operations<a class="headerlink" href="#list-operations" title="Link to this heading"></a></h3>
+<p>Redis lists are ordered collections of strings, sorted by insertion
+order.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lpush/4</span></code> - Prepend value to a list</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rpush/4</span></code> - Append value to a list</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lpop/3</span></code> - Remove and return first element of list</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rpop/3</span></code> - Remove and return last element of list</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lrange/5</span></code> - Get range of elements from list</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">llen/3</span></code> - Get length of list</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lrem/5</span></code> - Remove elements from list</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ltrim/5</span></code> - Trim list to specified range</p></li>
+</ul>
+</section>
+<section id="set-operations">
+<h3>Set Operations<a class="headerlink" href="#set-operations" title="Link to this heading"></a></h3>
+<p>Redis sets are unordered collections of unique strings.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sadd/4</span></code> - Add member to a set</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srem/4</span></code> - Remove member from a set</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">smembers/3</span></code> - Get all members in a set</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sismember/4</span></code> - Check if value is member of set</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scard/3</span></code> - Get number of members in a set</p></li>
+</ul>
+</section>
+<section id="sorted-set-operations">
+<h3>Sorted Set Operations<a class="headerlink" href="#sorted-set-operations" title="Link to this heading"></a></h3>
+<p>Sorted sets are collections of unique strings (members) ordered by an
+associated score. Members are unique, but scores may repeat.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">zadd/5</span></code> - Add member with score to sorted set</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zrem/4</span></code> - Remove member from sorted set</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zrange/5</span></code> - Get range of members from sorted set by index</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zrank/4</span></code> - Get rank (index) of member in sorted set</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zcard/3</span></code> - Get number of members in sorted set</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zscore/4</span></code> - Get score of member in sorted set</p></li>
+</ul>
+</section>
+<section id="usage-examples">
+<h3>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Connect and perform basic string operations</span>
+<span class="o">?-</span> redis<span class="o">::</span>connect(<span class="nv">Connection</span>),
+   redis<span class="o">::</span>set(<span class="nv">Connection</span>, mykey, <span class="s">&#39;Hello World&#39;</span>, <span class="nv">Status</span>),
+   redis<span class="o">::</span>get(<span class="nv">Connection</span>, mykey, <span class="nv">Value</span>),
+   redis<span class="o">::</span>disconnect(<span class="nv">Connection</span>).
+<span class="nv">Status</span> <span class="o">=</span> <span class="s">&#39;OK&#39;</span>,
+<span class="nv">Value</span> <span class="o">=</span> <span class="s">&#39;Hello World&#39;</span>.
+
+<span class="c">% Working with hashes</span>
+<span class="o">?-</span> redis<span class="o">::</span>connect(<span class="nv">Connection</span>),
+   redis<span class="o">::</span>hset(<span class="nv">Connection</span>, user<span class="o">:</span><span class="m">1000</span>, name, <span class="s">&#39;John Doe&#39;</span>, <span class="nv">_</span>),
+   redis<span class="o">::</span>hset(<span class="nv">Connection</span>, user<span class="o">:</span><span class="m">1000</span>, email, <span class="s">&#39;john@example.com&#39;</span>, <span class="nv">_</span>),
+   redis<span class="o">::</span>hgetall(<span class="nv">Connection</span>, user<span class="o">:</span><span class="m">1000</span>, <span class="nv">Fields</span>),
+   redis<span class="o">::</span>disconnect(<span class="nv">Connection</span>).
+<span class="nv">Fields</span> <span class="o">=</span> [bulk(name), bulk(<span class="s">&#39;John Doe&#39;</span>), bulk(email), bulk(<span class="s">&#39;john@example.com&#39;</span>)].
+
+<span class="c">% Using lists as queues</span>
+<span class="o">?-</span> redis<span class="o">::</span>connect(<span class="nv">Connection</span>),
+   redis<span class="o">::</span>rpush(<span class="nv">Connection</span>, queue, task1, <span class="nv">_</span>),
+   redis<span class="o">::</span>rpush(<span class="nv">Connection</span>, queue, task2, <span class="nv">_</span>),
+   redis<span class="o">::</span>lpop(<span class="nv">Connection</span>, queue, <span class="nv">Task</span>),
+   redis<span class="o">::</span>disconnect(<span class="nv">Connection</span>).
+<span class="nv">Task</span> <span class="o">=</span> task1.
+
+<span class="c">% Batch operations with mget/mset</span>
+<span class="o">?-</span> redis<span class="o">::</span>connect(<span class="nv">Connection</span>),
+   redis<span class="o">::</span>mset(<span class="nv">Connection</span>, [key1, val1, key2, val2], <span class="nv">Status</span>),
+   redis<span class="o">::</span>mget(<span class="nv">Connection</span>, [key1, key2], <span class="nv">Values</span>),
+   redis<span class="o">::</span>disconnect(<span class="nv">Connection</span>).
+<span class="nv">Status</span> <span class="o">=</span> <span class="s">&#39;OK&#39;</span>,
+<span class="nv">Values</span> <span class="o">=</span> [bulk(val1), bulk(val2)].
+
+<span class="c">% Key expiration</span>
+<span class="o">?-</span> redis<span class="o">::</span>connect(<span class="nv">Connection</span>),
+   redis<span class="o">::</span>set(<span class="nv">Connection</span>, session<span class="o">:</span>xyz, <span class="s">&#39;user_data&#39;</span>, <span class="nv">_</span>),
+   redis<span class="o">::</span>expire(<span class="nv">Connection</span>, session<span class="o">:</span>xyz, <span class="m">3600</span>, <span class="nv">_</span>), <span class="c">% Expire in 1 hour</span>
+   redis<span class="o">::</span>ttl(<span class="nv">Connection</span>, session<span class="o">:</span>xyz, <span class="nv">TTL</span>),
+   redis<span class="o">::</span>disconnect(<span class="nv">Connection</span>).
+<span class="nv">TTL</span> <span class="o">=</span> <span class="m">3600.</span>
+
+<span class="c">% Using send/3 for commands without wrappers</span>
+<span class="o">?-</span> redis<span class="o">::</span>connect(<span class="nv">Connection</span>),
+   redis<span class="o">::</span>send(<span class="nv">Connection</span>, info(server), <span class="nv">Reply</span>),
+   redis<span class="o">::</span>disconnect(<span class="nv">Connection</span>).
+</pre></div>
+</div>
+</section>
+</section>
 <section id="credits">
 <h2>Credits<a class="headerlink" href="#credits" title="Link to this heading"></a></h2>
 <p>This library is inspired by the Sean Charles GNU Prolog Redis client
@@ -241,9 +401,9 @@ library.</p>
 <p>Recent versions of macOS seem to disable the mapping of <code class="docutils literal notranslate"><span class="pre">localhost</span></code> to
 <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>. This issue may prevent running this library unit tests
 and the <code class="docutils literal notranslate"><span class="pre">redis::connect/1</span></code> predicate from working. This can be fixed
-either by editing the
-<code class="docutils literal notranslate"><span class="pre">/etc/hosts</span> <span class="pre">file</span> <span class="pre">or</span> <span class="pre">by</span> <span class="pre">using</span> <span class="pre">in</span> <span class="pre">alternative</span> <span class="pre">the</span> <span class="pre">predicate</span></code>redis::connect/3<code class="docutils literal notranslate"><span class="pre">with</span></code>’127.0.0.1’`
-as the first argument.</p>
+either by editing the <code class="docutils literal notranslate"><span class="pre">/etc/hosts</span></code> file or by using in alternative the
+predicate <code class="docutils literal notranslate"><span class="pre">redis::connect/3</span></code> with <code class="docutils literal notranslate"><span class="pre">'127.0.0.1'</span></code> as the first
+argument.</p>
 </section>
 </section>
 

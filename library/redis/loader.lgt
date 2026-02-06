@@ -41,13 +41,6 @@
 		logtalk_load(redis, [optimize(on)])
 	)).
 
-:- elif(current_logtalk_flag(prolog_dialect, xvm)).
-
-	:- initialization((
-		logtalk_load(basic_types(loader)),
-		logtalk_load(redis, [optimize(on)])
-	)).
-
 :- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
 	:- use_module(library(sockets), []).
@@ -71,6 +64,13 @@
 	:- import(from(/(socket_close,2), socket)).
 	:- import(from(/(socket_put,3), socket)).
 	:- import(from(/(socket_get0,3), socket)).
+	:- initialization((
+		logtalk_load(basic_types(loader)),
+		logtalk_load(redis, [optimize(on)])
+	)).
+
+:- elif(current_logtalk_flag(prolog_dialect, xvm)).
+
 	:- initialization((
 		logtalk_load(basic_types(loader)),
 		logtalk_load(redis, [optimize(on)])

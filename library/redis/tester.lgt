@@ -21,8 +21,9 @@
 
 :- if((
 	current_logtalk_flag(prolog_dialect, Dialect),
-	Dialect \== ciao, Dialect \== eclipse, Dialect \== gnu, Dialect \== xvm,
-	Dialect \== sicstus, Dialect \== swi, Dialect \== xsb
+	Dialect \== ciao, Dialect \== eclipse, Dialect \== gnu,
+	Dialect \== sicstus, Dialect \== swi, Dialect \== xsb,
+	Dialect \== xvm
 )).
 
 	:- initialization((
@@ -35,13 +36,22 @@
 		:- use_module(library(system), []).
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 		:- use_module(library(system), []).
+	:- elif(current_logtalk_flag(prolog_dialect, swi)).
+		:- use_module(library(socket), []).
 	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
 		:- import(from(/(sleep,1), shell)).
+	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
+		:- import(from(/(socket,2), socket)).
+		:- import(from(/(socket_connect,4), socket)).
+		:- import(from(/(socket_close,2), socket)).
+		:- import(from(/(socket_put,3), socket)).
+		:- import(from(/(socket_get0,3), socket)).
 	:- endif.
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),
-		logtalk_load(loader),
+		logtalk_load(basic_types(loader)),
+		logtalk_load(redis, [debug(on), source_data(on)]),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(os(loader)),
 		logtalk_load(term_io(loader)),

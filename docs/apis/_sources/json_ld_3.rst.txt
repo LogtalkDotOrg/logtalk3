@@ -36,7 +36,7 @@ JSON-LD 1.1 parser, generator, and processor. Builds on top of the ``json`` libr
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`json_ld_protocol/0::compact/3`  :ref:`json_ld_protocol/0::expand/2`  :ref:`json_ld_protocol/0::generate/2`  :ref:`json_ld_protocol/0::parse/2`  
+|     :ref:`json_ld_protocol/0::compact/3`  :ref:`json_ld_protocol/0::expand/2`  :ref:`json_ld_protocol/0::flatten/2`  :ref:`json_ld_protocol/0::generate/2`  :ref:`json_ld_protocol/0::parse/2`  
 
 .. contents::
    :local:

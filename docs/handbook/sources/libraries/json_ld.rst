@@ -90,6 +90,19 @@ or compact IRIs. This is the inverse of expansion:
    | ?- json_ld::expand({'@context'-{name-'http://schema.org/name'}, name-'Manu Sporny'}, Expanded),
         json_ld::compact(Expanded, {'@context'-{name-'http://schema.org/name'}}, Compacted).
 
+Flattening
+----------
+
+Flattening collects all node objects from a document into a flat
+``@graph`` array, with nested objects replaced by references. Blank node
+identifiers are generated for nodes that don't have an ``@id``:
+
+::
+
+   | ?- json_ld::parse(atom('{"@context":{"knows":"http://xmlns.com/foaf/0.1/knows"},"@id":"http://example.org/john","knows":{"@id":"http://example.org/jane"}}'), Doc),
+        json_ld::expand(Doc, Expanded),
+        json_ld::flatten(Expanded, Flattened).
+
 Supported Features
 ------------------
 
@@ -134,11 +147,12 @@ The library supports the following JSON-LD 1.1 features:
 - Reverse properties (``@reverse``)
 - Included blocks (``@included``)
 - Index preservation (``@index``)
+- Flattening algorithm (``flatten/2``)
 
 **Not currently supported:**
 
 - Remote context fetching (contexts referenced by URL)
-- Full JSON-LD API algorithms (flattening, framing)
+- Framing algorithm
 - ``@import`` context processing
 
 Representation

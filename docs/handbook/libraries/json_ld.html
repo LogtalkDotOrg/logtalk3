@@ -113,6 +113,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#generating">Generating</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#expansion">Expansion</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#compaction">Compaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flattening">Flattening</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#supported-features">Supported Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#representation">Representation</a></li>
 </ul>
@@ -268,6 +269,17 @@ or compact IRIs. This is the inverse of expansion:</p>
 </pre></div>
 </div>
 </section>
+<section id="flattening">
+<h2>Flattening<a class="headerlink" href="#flattening" title="Link to this heading"></a></h2>
+<p>Flattening collects all node objects from a document into a flat
+<code class="docutils literal notranslate"><span class="pre">&#64;graph</span></code> array, with nested objects replaced by references. Blank node
+identifiers are generated for nodes that don’t have an <code class="docutils literal notranslate"><span class="pre">&#64;id</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> json_ld<span class="o">::</span>parse(<span class="k">atom</span>(<span class="s">&#39;{&quot;@context&quot;:{&quot;knows&quot;:&quot;http://xmlns.com/foaf/0.1/knows&quot;},&quot;@id&quot;:&quot;http://example.org/john&quot;,&quot;knows&quot;:{&quot;@id&quot;:&quot;http://example.org/jane&quot;}}&#39;</span>), <span class="nv">Doc</span>),
+     json_ld<span class="o">::</span>expand(<span class="nv">Doc</span>, <span class="nv">Expanded</span>),
+     json_ld<span class="o">::</span>flatten(<span class="nv">Expanded</span>, <span class="nv">Flattened</span>).
+</pre></div>
+</div>
+</section>
 <section id="supported-features">
 <h2>Supported Features<a class="headerlink" href="#supported-features" title="Link to this heading"></a></h2>
 <p>The library supports the following JSON-LD 1.1 features:</p>
@@ -310,11 +322,12 @@ or compact IRIs. This is the inverse of expansion:</p>
 <li><p>Reverse properties (<code class="docutils literal notranslate"><span class="pre">&#64;reverse</span></code>)</p></li>
 <li><p>Included blocks (<code class="docutils literal notranslate"><span class="pre">&#64;included</span></code>)</p></li>
 <li><p>Index preservation (<code class="docutils literal notranslate"><span class="pre">&#64;index</span></code>)</p></li>
+<li><p>Flattening algorithm (<code class="docutils literal notranslate"><span class="pre">flatten/2</span></code>)</p></li>
 </ul>
 <p><strong>Not currently supported:</strong></p>
 <ul class="simple">
 <li><p>Remote context fetching (contexts referenced by URL)</p></li>
-<li><p>Full JSON-LD API algorithms (flattening, framing)</p></li>
+<li><p>Framing algorithm</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&#64;import</span></code> context processing</p></li>
 </ul>
 </section>

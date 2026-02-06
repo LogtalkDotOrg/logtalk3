@@ -136,6 +136,29 @@ Compacts an expanded JSON-LD document using the given context. Compaction applie
 
 ------------
 
+.. index:: flatten/2
+.. _json_ld_protocol/0::flatten/2:
+
+``flatten/2``
+^^^^^^^^^^^^^
+
+Flattens an expanded JSON-LD document. Flattening collects all node objects into a flat ``@graph`` array, with nested nodes replaced by references. Blank node identifiers are generated for nodes without ``@id``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``flatten(Document,Flattened)``
+| **Mode and number of proofs:**
+|    ``flatten(+term,--term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Document`` is a variable:
+|        ``instantiation_error``
+
+
+------------
+
 Protected predicates
 --------------------
 

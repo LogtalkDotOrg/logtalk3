@@ -212,7 +212,7 @@
   <p class="right" id="redis-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="redis">
 <h1><code class="docutils literal notranslate"><span class="pre">redis</span></code><a class="headerlink" href="#redis" title="Link to this heading"></a></h1>
-<p>Redis client. Inspired by Sean Charles GNU Prolog Redis client.</p>
+<p>Redis client library with support for strings, keys, hashes, lists, sets, and sorted sets. Inspired by Sean Charles GNU Prolog Redis client.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -221,8 +221,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:5:1</div>
-<div class="line"><strong>Date:</strong> 2021-12-06</div>
+<div class="line"><strong>Version:</strong> 0:6:0</div>
+<div class="line"><strong>Date:</strong> 2026-02-06</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -248,6 +248,7 @@
 <div><ul class="simple">
 <li><p>Command representation: Use the Redis command name as the functor of a compound term where the arguments are the command arguments.</p></li>
 <li><p>Valid arguments: Atoms, integers, and floats. Always use atoms instead of double-quoted “strings”. This helps portability by not depending on the value of the <code class="docutils literal notranslate"><span class="pre">double_quotes</span></code> flag.</p></li>
+<li><p>Wrapper predicates: The library provides convenient wrapper predicates for common Redis operations. For operations without a wrapper, use the generic <code class="docutils literal notranslate"><span class="pre">send/3</span></code> predicate.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -265,11 +266,58 @@
 <li><p><a class="reference internal" href="#disconnect-1" id="id4"><code class="docutils literal notranslate"><span class="pre">disconnect/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#send-3" id="id5"><code class="docutils literal notranslate"><span class="pre">send/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#console-1" id="id6"><code class="docutils literal notranslate"><span class="pre">console/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#get-3" id="id7"><code class="docutils literal notranslate"><span class="pre">get/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#set-4" id="id8"><code class="docutils literal notranslate"><span class="pre">set/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#append-4" id="id9"><code class="docutils literal notranslate"><span class="pre">append/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#getrange-5" id="id10"><code class="docutils literal notranslate"><span class="pre">getrange/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#setrange-5" id="id11"><code class="docutils literal notranslate"><span class="pre">setrange/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#strlen-3" id="id12"><code class="docutils literal notranslate"><span class="pre">strlen/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mget-3" id="id13"><code class="docutils literal notranslate"><span class="pre">mget/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mset-3" id="id14"><code class="docutils literal notranslate"><span class="pre">mset/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#incr-3" id="id15"><code class="docutils literal notranslate"><span class="pre">incr/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#decr-3" id="id16"><code class="docutils literal notranslate"><span class="pre">decr/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#incrby-4" id="id17"><code class="docutils literal notranslate"><span class="pre">incrby/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#decrby-4" id="id18"><code class="docutils literal notranslate"><span class="pre">decrby/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#del-3" id="id19"><code class="docutils literal notranslate"><span class="pre">del/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#exists-3" id="id20"><code class="docutils literal notranslate"><span class="pre">exists/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#keys-3" id="id21"><code class="docutils literal notranslate"><span class="pre">keys/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ttl-3" id="id22"><code class="docutils literal notranslate"><span class="pre">ttl/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#expire-4" id="id23"><code class="docutils literal notranslate"><span class="pre">expire/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#persist-3" id="id24"><code class="docutils literal notranslate"><span class="pre">persist/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rename-4" id="id25"><code class="docutils literal notranslate"><span class="pre">rename/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#type-3" id="id26"><code class="docutils literal notranslate"><span class="pre">type/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#hset-5" id="id27"><code class="docutils literal notranslate"><span class="pre">hset/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#hget-4" id="id28"><code class="docutils literal notranslate"><span class="pre">hget/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#hgetall-3" id="id29"><code class="docutils literal notranslate"><span class="pre">hgetall/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#hdel-4" id="id30"><code class="docutils literal notranslate"><span class="pre">hdel/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#hexists-4" id="id31"><code class="docutils literal notranslate"><span class="pre">hexists/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#hkeys-3" id="id32"><code class="docutils literal notranslate"><span class="pre">hkeys/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#hvals-3" id="id33"><code class="docutils literal notranslate"><span class="pre">hvals/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#hlen-3" id="id34"><code class="docutils literal notranslate"><span class="pre">hlen/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#lpush-4" id="id35"><code class="docutils literal notranslate"><span class="pre">lpush/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rpush-4" id="id36"><code class="docutils literal notranslate"><span class="pre">rpush/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#lpop-3" id="id37"><code class="docutils literal notranslate"><span class="pre">lpop/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rpop-3" id="id38"><code class="docutils literal notranslate"><span class="pre">rpop/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#lrange-5" id="id39"><code class="docutils literal notranslate"><span class="pre">lrange/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#llen-3" id="id40"><code class="docutils literal notranslate"><span class="pre">llen/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#lrem-5" id="id41"><code class="docutils literal notranslate"><span class="pre">lrem/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ltrim-5" id="id42"><code class="docutils literal notranslate"><span class="pre">ltrim/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#sadd-4" id="id43"><code class="docutils literal notranslate"><span class="pre">sadd/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#srem-4" id="id44"><code class="docutils literal notranslate"><span class="pre">srem/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#smembers-3" id="id45"><code class="docutils literal notranslate"><span class="pre">smembers/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#sismember-4" id="id46"><code class="docutils literal notranslate"><span class="pre">sismember/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#scard-3" id="id47"><code class="docutils literal notranslate"><span class="pre">scard/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#zadd-5" id="id48"><code class="docutils literal notranslate"><span class="pre">zadd/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#zrem-4" id="id49"><code class="docutils literal notranslate"><span class="pre">zrem/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#zrange-5" id="id50"><code class="docutils literal notranslate"><span class="pre">zrange/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#zrank-4" id="id51"><code class="docutils literal notranslate"><span class="pre">zrank/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#zcard-3" id="id52"><code class="docutils literal notranslate"><span class="pre">zcard/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#zscore-4" id="id53"><code class="docutils literal notranslate"><span class="pre">zscore/4</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id7">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id8">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id9">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id54">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id55">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id56">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -375,6 +423,993 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">console(++callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="get-3">
+<span id="redis-0-get-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">get/3</span></code></a><a class="headerlink" href="#get-3" title="Link to this heading"></a></h3>
+<p>Gets the value of a key.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">get(Connection,Key,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">get(+ground,+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="set-4">
+<span id="redis-0-set-4"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">set/4</span></code></a><a class="headerlink" href="#set-4" title="Link to this heading"></a></h3>
+<p>Sets the value of a key.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set(Connection,Key,Value,Status)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">set(+ground,+atom,+ground,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="append-4">
+<span id="redis-0-append-4"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">append/4</span></code></a><a class="headerlink" href="#append-4" title="Link to this heading"></a></h3>
+<p>Appends a value to a key. Returns the length of the string after the append.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">append(Connection,Key,Value,Length)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">append(+ground,+atom,+ground,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="getrange-5">
+<span id="redis-0-getrange-5"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">getrange/5</span></code></a><a class="headerlink" href="#getrange-5" title="Link to this heading"></a></h3>
+<p>Gets a substring of the string stored at a key.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">getrange(Connection,Key,Start,End,Substring)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">getrange(+ground,+atom,+integer,+integer,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="setrange-5">
+<span id="redis-0-setrange-5"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">setrange/5</span></code></a><a class="headerlink" href="#setrange-5" title="Link to this heading"></a></h3>
+<p>Overwrites part of a string at a key starting at the specified offset. Returns the length of the string after modification.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">setrange(Connection,Key,Offset,Value,Length)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">setrange(+ground,+atom,+integer,+ground,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="strlen-3">
+<span id="redis-0-strlen-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">strlen/3</span></code></a><a class="headerlink" href="#strlen-3" title="Link to this heading"></a></h3>
+<p>Gets the length of the value stored at a key.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">strlen(Connection,Key,Length)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">strlen(+ground,+atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="mget-3">
+<span id="redis-0-mget-3"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mget/3</span></code></a><a class="headerlink" href="#mget-3" title="Link to this heading"></a></h3>
+<p>Gets the values of multiple keys. Returns a list of values.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">mget(Connection,Keys,Values)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">mget(+ground,+list(atom),-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="mset-3">
+<span id="redis-0-mset-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mset/3</span></code></a><a class="headerlink" href="#mset-3" title="Link to this heading"></a></h3>
+<p>Sets multiple key-value pairs. Pairs should be provided as a flat list [Key1, Value1, Key2, Value2, …].</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">mset(Connection,Pairs,Status)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">mset(+ground,+list,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="incr-3">
+<span id="redis-0-incr-3"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">incr/3</span></code></a><a class="headerlink" href="#incr-3" title="Link to this heading"></a></h3>
+<p>Increments the integer value of a key by one. Returns the value after increment.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">incr(Connection,Key,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">incr(+ground,+atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="decr-3">
+<span id="redis-0-decr-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">decr/3</span></code></a><a class="headerlink" href="#decr-3" title="Link to this heading"></a></h3>
+<p>Decrements the integer value of a key by one. Returns the value after decrement.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decr(Connection,Key,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decr(+ground,+atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="incrby-4">
+<span id="redis-0-incrby-4"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">incrby/4</span></code></a><a class="headerlink" href="#incrby-4" title="Link to this heading"></a></h3>
+<p>Increments the integer value of a key by the specified amount. Returns the value after increment.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">incrby(Connection,Key,Increment,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">incrby(+ground,+atom,+integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="decrby-4">
+<span id="redis-0-decrby-4"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">decrby/4</span></code></a><a class="headerlink" href="#decrby-4" title="Link to this heading"></a></h3>
+<p>Decrements the integer value of a key by the specified amount. Returns the value after decrement.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decrby(Connection,Key,Decrement,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decrby(+ground,+atom,+integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="del-3">
+<span id="redis-0-del-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">del/3</span></code></a><a class="headerlink" href="#del-3" title="Link to this heading"></a></h3>
+<p>Deletes a key. Returns the number of keys removed.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">del(Connection,Key,Count)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">del(+ground,+atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="exists-3">
+<span id="redis-0-exists-3"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exists/3</span></code></a><a class="headerlink" href="#exists-3" title="Link to this heading"></a></h3>
+<p>Checks if a key exists. Returns 1 if the key exists, 0 otherwise.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exists(Connection,Key,Exists)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exists(+ground,+atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="keys-3">
+<span id="redis-0-keys-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">keys/3</span></code></a><a class="headerlink" href="#keys-3" title="Link to this heading"></a></h3>
+<p>Finds all keys matching a pattern. Returns a list of keys.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">keys(Connection,Pattern,Keys)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">keys(+ground,+atom,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="ttl-3">
+<span id="redis-0-ttl-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ttl/3</span></code></a><a class="headerlink" href="#ttl-3" title="Link to this heading"></a></h3>
+<p>Gets the time to live for a key in seconds. Returns -1 if the key has no expiry, -2 if the key does not exist.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ttl(Connection,Key,Seconds)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ttl(+ground,+atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="expire-4">
+<span id="redis-0-expire-4"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">expire/4</span></code></a><a class="headerlink" href="#expire-4" title="Link to this heading"></a></h3>
+<p>Sets a timeout on a key in seconds. Returns 1 if the timeout was set, 0 if the key does not exist.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">expire(Connection,Key,Seconds,Result)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">expire(+ground,+atom,+integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="persist-3">
+<span id="redis-0-persist-3"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">persist/3</span></code></a><a class="headerlink" href="#persist-3" title="Link to this heading"></a></h3>
+<p>Removes the expiration from a key. Returns 1 if the timeout was removed, 0 if the key does not exist or has no timeout.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">persist(Connection,Key,Result)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">persist(+ground,+atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="rename-4">
+<span id="redis-0-rename-4"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rename/4</span></code></a><a class="headerlink" href="#rename-4" title="Link to this heading"></a></h3>
+<p>Renames a key. Returns status OK or error if the key does not exist.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rename(Connection,OldKey,NewKey,Status)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rename(+ground,+atom,+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="type-3">
+<span id="redis-0-type-3"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">type/3</span></code></a><a class="headerlink" href="#type-3" title="Link to this heading"></a></h3>
+<p>Gets the type of the value stored at a key. Returns one of: string, list, set, zset, hash, stream, none.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type(Connection,Key,Type)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type(+ground,+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="hset-5">
+<span id="redis-0-hset-5"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">hset/5</span></code></a><a class="headerlink" href="#hset-5" title="Link to this heading"></a></h3>
+<p>Sets a field in a hash. Returns 1 if a new field was created, 0 if the field was updated.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hset(Connection,Key,Field,Value,Result)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hset(+ground,+atom,+atom,+ground,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="hget-4">
+<span id="redis-0-hget-4"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">hget/4</span></code></a><a class="headerlink" href="#hget-4" title="Link to this heading"></a></h3>
+<p>Gets the value of a field in a hash.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hget(Connection,Key,Field,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hget(+ground,+atom,+atom,-ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="hgetall-3">
+<span id="redis-0-hgetall-3"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">hgetall/3</span></code></a><a class="headerlink" href="#hgetall-3" title="Link to this heading"></a></h3>
+<p>Gets all fields and values in a hash. Returns a flat list of alternating fields and values.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hgetall(Connection,Key,FieldsValues)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hgetall(+ground,+atom,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="hdel-4">
+<span id="redis-0-hdel-4"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">hdel/4</span></code></a><a class="headerlink" href="#hdel-4" title="Link to this heading"></a></h3>
+<p>Deletes a field from a hash. Returns the number of fields removed.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hdel(Connection,Key,Field,Count)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hdel(+ground,+atom,+atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="hexists-4">
+<span id="redis-0-hexists-4"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">hexists/4</span></code></a><a class="headerlink" href="#hexists-4" title="Link to this heading"></a></h3>
+<p>Checks if a field exists in a hash. Returns 1 if the field exists, 0 otherwise.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hexists(Connection,Key,Field,Exists)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hexists(+ground,+atom,+atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="hkeys-3">
+<span id="redis-0-hkeys-3"></span><span id="index-31"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">hkeys/3</span></code></a><a class="headerlink" href="#hkeys-3" title="Link to this heading"></a></h3>
+<p>Gets all field names in a hash.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hkeys(Connection,Key,Fields)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hkeys(+ground,+atom,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="hvals-3">
+<span id="redis-0-hvals-3"></span><span id="index-32"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">hvals/3</span></code></a><a class="headerlink" href="#hvals-3" title="Link to this heading"></a></h3>
+<p>Gets all values in a hash.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hvals(Connection,Key,Values)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hvals(+ground,+atom,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="hlen-3">
+<span id="redis-0-hlen-3"></span><span id="index-33"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">hlen/3</span></code></a><a class="headerlink" href="#hlen-3" title="Link to this heading"></a></h3>
+<p>Gets the number of fields in a hash.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hlen(Connection,Key,Count)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hlen(+ground,+atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="lpush-4">
+<span id="redis-0-lpush-4"></span><span id="index-34"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">lpush/4</span></code></a><a class="headerlink" href="#lpush-4" title="Link to this heading"></a></h3>
+<p>Prepends a value to a list. Returns the length of the list after the push.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lpush(Connection,Key,Value,Length)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lpush(+ground,+atom,+ground,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="rpush-4">
+<span id="redis-0-rpush-4"></span><span id="index-35"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rpush/4</span></code></a><a class="headerlink" href="#rpush-4" title="Link to this heading"></a></h3>
+<p>Appends a value to a list. Returns the length of the list after the push.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rpush(Connection,Key,Value,Length)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rpush(+ground,+atom,+ground,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="lpop-3">
+<span id="redis-0-lpop-3"></span><span id="index-36"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">lpop/3</span></code></a><a class="headerlink" href="#lpop-3" title="Link to this heading"></a></h3>
+<p>Removes and returns the first element of a list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lpop(Connection,Key,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lpop(+ground,+atom,-ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="rpop-3">
+<span id="redis-0-rpop-3"></span><span id="index-37"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rpop/3</span></code></a><a class="headerlink" href="#rpop-3" title="Link to this heading"></a></h3>
+<p>Removes and returns the last element of a list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rpop(Connection,Key,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rpop(+ground,+atom,-ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="lrange-5">
+<span id="redis-0-lrange-5"></span><span id="index-38"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">lrange/5</span></code></a><a class="headerlink" href="#lrange-5" title="Link to this heading"></a></h3>
+<p>Gets a range of elements from a list. Indices are zero-based.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lrange(Connection,Key,Start,Stop,Elements)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lrange(+ground,+atom,+integer,+integer,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="llen-3">
+<span id="redis-0-llen-3"></span><span id="index-39"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">llen/3</span></code></a><a class="headerlink" href="#llen-3" title="Link to this heading"></a></h3>
+<p>Gets the length of a list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">llen(Connection,Key,Length)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">llen(+ground,+atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="lrem-5">
+<span id="redis-0-lrem-5"></span><span id="index-40"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">lrem/5</span></code></a><a class="headerlink" href="#lrem-5" title="Link to this heading"></a></h3>
+<p>Removes elements from a list. Count &gt; 0: remove from head, Count &lt; 0: remove from tail, Count = 0: remove all. Returns the number of removed elements.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lrem(Connection,Key,Count,Value,Removed)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lrem(+ground,+atom,+integer,+ground,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="ltrim-5">
+<span id="redis-0-ltrim-5"></span><span id="index-41"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ltrim/5</span></code></a><a class="headerlink" href="#ltrim-5" title="Link to this heading"></a></h3>
+<p>Trims a list to the specified range.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ltrim(Connection,Key,Start,Stop,Status)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ltrim(+ground,+atom,+integer,+integer,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="sadd-4">
+<span id="redis-0-sadd-4"></span><span id="index-42"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sadd/4</span></code></a><a class="headerlink" href="#sadd-4" title="Link to this heading"></a></h3>
+<p>Adds a member to a set. Returns the number of elements added.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sadd(Connection,Key,Member,Count)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sadd(+ground,+atom,+ground,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="srem-4">
+<span id="redis-0-srem-4"></span><span id="index-43"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">srem/4</span></code></a><a class="headerlink" href="#srem-4" title="Link to this heading"></a></h3>
+<p>Removes a member from a set. Returns the number of elements removed.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">srem(Connection,Key,Member,Count)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">srem(+ground,+atom,+ground,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="smembers-3">
+<span id="redis-0-smembers-3"></span><span id="index-44"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">smembers/3</span></code></a><a class="headerlink" href="#smembers-3" title="Link to this heading"></a></h3>
+<p>Gets all members in a set.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">smembers(Connection,Key,Members)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">smembers(+ground,+atom,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="sismember-4">
+<span id="redis-0-sismember-4"></span><span id="index-45"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sismember/4</span></code></a><a class="headerlink" href="#sismember-4" title="Link to this heading"></a></h3>
+<p>Checks if a value is a member of a set. Returns 1 if the member exists, 0 otherwise.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sismember(Connection,Key,Member,IsMember)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sismember(+ground,+atom,+ground,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="scard-3">
+<span id="redis-0-scard-3"></span><span id="index-46"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">scard/3</span></code></a><a class="headerlink" href="#scard-3" title="Link to this heading"></a></h3>
+<p>Gets the number of members in a set.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">scard(Connection,Key,Count)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">scard(+ground,+atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="zadd-5">
+<span id="redis-0-zadd-5"></span><span id="index-47"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zadd/5</span></code></a><a class="headerlink" href="#zadd-5" title="Link to this heading"></a></h3>
+<p>Adds a member with a score to a sorted set. Returns the number of elements added.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zadd(Connection,Key,Score,Member,Count)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zadd(+ground,+atom,+number,+ground,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="zrem-4">
+<span id="redis-0-zrem-4"></span><span id="index-48"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zrem/4</span></code></a><a class="headerlink" href="#zrem-4" title="Link to this heading"></a></h3>
+<p>Removes a member from a sorted set. Returns the number of elements removed.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zrem(Connection,Key,Member,Count)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zrem(+ground,+atom,+ground,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="zrange-5">
+<span id="redis-0-zrange-5"></span><span id="index-49"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zrange/5</span></code></a><a class="headerlink" href="#zrange-5" title="Link to this heading"></a></h3>
+<p>Gets a range of members from a sorted set, ordered from lowest to highest score.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zrange(Connection,Key,Start,Stop,Members)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zrange(+ground,+atom,+integer,+integer,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="zrank-4">
+<span id="redis-0-zrank-4"></span><span id="index-50"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zrank/4</span></code></a><a class="headerlink" href="#zrank-4" title="Link to this heading"></a></h3>
+<p>Gets the rank (index) of a member in a sorted set, ordered from lowest to highest score. Returns nil if the member does not exist.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zrank(Connection,Key,Member,Rank)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zrank(+ground,+atom,+ground,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="zcard-3">
+<span id="redis-0-zcard-3"></span><span id="index-51"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zcard/3</span></code></a><a class="headerlink" href="#zcard-3" title="Link to this heading"></a></h3>
+<p>Gets the number of members in a sorted set.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zcard(Connection,Key,Count)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zcard(+ground,+atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="zscore-4">
+<span id="redis-0-zscore-4"></span><span id="index-52"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zscore/4</span></code></a><a class="headerlink" href="#zscore-4" title="Link to this heading"></a></h3>
+<p>Gets the score of a member in a sorted set.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zscore(Connection,Key,Member,Score)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zscore(+ground,+atom,+ground,-ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </section>

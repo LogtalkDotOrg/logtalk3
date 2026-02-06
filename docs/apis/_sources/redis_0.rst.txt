@@ -8,14 +8,14 @@
 ``redis``
 =========
 
-Redis client. Inspired by Sean Charles GNU Prolog Redis client.
+Redis client library with support for strings, keys, hashes, lists, sets, and sorted sets. Inspired by Sean Charles GNU Prolog Redis client.
 
 | **Availability:** 
 |    ``logtalk_load(redis(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:5:1
-| **Date:** 2021-12-06
+| **Version:** 0:6:0
+| **Date:** 2026-02-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -31,6 +31,7 @@ Redis client. Inspired by Sean Charles GNU Prolog Redis client.
 
    - Command representation: Use the Redis command name as the functor of a compound term where the arguments are the command arguments.
    - Valid arguments: Atoms, integers, and floats. Always use atoms instead of double-quoted "strings". This helps portability by not depending on the value of the ``double_quotes`` flag.
+   - Wrapper predicates: The library provides convenient wrapper predicates for common Redis operations. For operations without a wrapper, use the generic ``send/3`` predicate.
 
 | **Inherited public predicates:**
 |    (none)
@@ -133,6 +134,899 @@ Sends a request to a Redis server running on localhost at the default 6379 port 
 |    ``console(Request)``
 | **Mode and number of proofs:**
 |    ``console(++callable)`` - ``one``
+
+
+------------
+
+.. index:: get/3
+.. _redis/0::get/3:
+
+``get/3``
+^^^^^^^^^
+
+Gets the value of a key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``get(Connection,Key,Value)``
+| **Mode and number of proofs:**
+|    ``get(+ground,+atom,-atom)`` - ``one``
+
+
+------------
+
+.. index:: set/4
+.. _redis/0::set/4:
+
+``set/4``
+^^^^^^^^^
+
+Sets the value of a key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``set(Connection,Key,Value,Status)``
+| **Mode and number of proofs:**
+|    ``set(+ground,+atom,+ground,-atom)`` - ``one``
+
+
+------------
+
+.. index:: append/4
+.. _redis/0::append/4:
+
+``append/4``
+^^^^^^^^^^^^
+
+Appends a value to a key. Returns the length of the string after the append.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``append(Connection,Key,Value,Length)``
+| **Mode and number of proofs:**
+|    ``append(+ground,+atom,+ground,-integer)`` - ``one``
+
+
+------------
+
+.. index:: getrange/5
+.. _redis/0::getrange/5:
+
+``getrange/5``
+^^^^^^^^^^^^^^
+
+Gets a substring of the string stored at a key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``getrange(Connection,Key,Start,End,Substring)``
+| **Mode and number of proofs:**
+|    ``getrange(+ground,+atom,+integer,+integer,-atom)`` - ``one``
+
+
+------------
+
+.. index:: setrange/5
+.. _redis/0::setrange/5:
+
+``setrange/5``
+^^^^^^^^^^^^^^
+
+Overwrites part of a string at a key starting at the specified offset. Returns the length of the string after modification.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``setrange(Connection,Key,Offset,Value,Length)``
+| **Mode and number of proofs:**
+|    ``setrange(+ground,+atom,+integer,+ground,-integer)`` - ``one``
+
+
+------------
+
+.. index:: strlen/3
+.. _redis/0::strlen/3:
+
+``strlen/3``
+^^^^^^^^^^^^
+
+Gets the length of the value stored at a key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``strlen(Connection,Key,Length)``
+| **Mode and number of proofs:**
+|    ``strlen(+ground,+atom,-integer)`` - ``one``
+
+
+------------
+
+.. index:: mget/3
+.. _redis/0::mget/3:
+
+``mget/3``
+^^^^^^^^^^
+
+Gets the values of multiple keys. Returns a list of values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mget(Connection,Keys,Values)``
+| **Mode and number of proofs:**
+|    ``mget(+ground,+list(atom),-list)`` - ``one``
+
+
+------------
+
+.. index:: mset/3
+.. _redis/0::mset/3:
+
+``mset/3``
+^^^^^^^^^^
+
+Sets multiple key-value pairs. Pairs should be provided as a flat list [Key1, Value1, Key2, Value2, ...].
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mset(Connection,Pairs,Status)``
+| **Mode and number of proofs:**
+|    ``mset(+ground,+list,-atom)`` - ``one``
+
+
+------------
+
+.. index:: incr/3
+.. _redis/0::incr/3:
+
+``incr/3``
+^^^^^^^^^^
+
+Increments the integer value of a key by one. Returns the value after increment.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``incr(Connection,Key,Value)``
+| **Mode and number of proofs:**
+|    ``incr(+ground,+atom,-integer)`` - ``one``
+
+
+------------
+
+.. index:: decr/3
+.. _redis/0::decr/3:
+
+``decr/3``
+^^^^^^^^^^
+
+Decrements the integer value of a key by one. Returns the value after decrement.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decr(Connection,Key,Value)``
+| **Mode and number of proofs:**
+|    ``decr(+ground,+atom,-integer)`` - ``one``
+
+
+------------
+
+.. index:: incrby/4
+.. _redis/0::incrby/4:
+
+``incrby/4``
+^^^^^^^^^^^^
+
+Increments the integer value of a key by the specified amount. Returns the value after increment.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``incrby(Connection,Key,Increment,Value)``
+| **Mode and number of proofs:**
+|    ``incrby(+ground,+atom,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: decrby/4
+.. _redis/0::decrby/4:
+
+``decrby/4``
+^^^^^^^^^^^^
+
+Decrements the integer value of a key by the specified amount. Returns the value after decrement.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decrby(Connection,Key,Decrement,Value)``
+| **Mode and number of proofs:**
+|    ``decrby(+ground,+atom,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: del/3
+.. _redis/0::del/3:
+
+``del/3``
+^^^^^^^^^
+
+Deletes a key. Returns the number of keys removed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``del(Connection,Key,Count)``
+| **Mode and number of proofs:**
+|    ``del(+ground,+atom,-integer)`` - ``one``
+
+
+------------
+
+.. index:: exists/3
+.. _redis/0::exists/3:
+
+``exists/3``
+^^^^^^^^^^^^
+
+Checks if a key exists. Returns 1 if the key exists, 0 otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exists(Connection,Key,Exists)``
+| **Mode and number of proofs:**
+|    ``exists(+ground,+atom,-integer)`` - ``one``
+
+
+------------
+
+.. index:: keys/3
+.. _redis/0::keys/3:
+
+``keys/3``
+^^^^^^^^^^
+
+Finds all keys matching a pattern. Returns a list of keys.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``keys(Connection,Pattern,Keys)``
+| **Mode and number of proofs:**
+|    ``keys(+ground,+atom,-list)`` - ``one``
+
+
+------------
+
+.. index:: ttl/3
+.. _redis/0::ttl/3:
+
+``ttl/3``
+^^^^^^^^^
+
+Gets the time to live for a key in seconds. Returns -1 if the key has no expiry, -2 if the key does not exist.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ttl(Connection,Key,Seconds)``
+| **Mode and number of proofs:**
+|    ``ttl(+ground,+atom,-integer)`` - ``one``
+
+
+------------
+
+.. index:: expire/4
+.. _redis/0::expire/4:
+
+``expire/4``
+^^^^^^^^^^^^
+
+Sets a timeout on a key in seconds. Returns 1 if the timeout was set, 0 if the key does not exist.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``expire(Connection,Key,Seconds,Result)``
+| **Mode and number of proofs:**
+|    ``expire(+ground,+atom,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: persist/3
+.. _redis/0::persist/3:
+
+``persist/3``
+^^^^^^^^^^^^^
+
+Removes the expiration from a key. Returns 1 if the timeout was removed, 0 if the key does not exist or has no timeout.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``persist(Connection,Key,Result)``
+| **Mode and number of proofs:**
+|    ``persist(+ground,+atom,-integer)`` - ``one``
+
+
+------------
+
+.. index:: rename/4
+.. _redis/0::rename/4:
+
+``rename/4``
+^^^^^^^^^^^^
+
+Renames a key. Returns status OK or error if the key does not exist.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rename(Connection,OldKey,NewKey,Status)``
+| **Mode and number of proofs:**
+|    ``rename(+ground,+atom,+atom,-atom)`` - ``one``
+
+
+------------
+
+.. index:: type/3
+.. _redis/0::type/3:
+
+``type/3``
+^^^^^^^^^^
+
+Gets the type of the value stored at a key. Returns one of: string, list, set, zset, hash, stream, none.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``type(Connection,Key,Type)``
+| **Mode and number of proofs:**
+|    ``type(+ground,+atom,-atom)`` - ``one``
+
+
+------------
+
+.. index:: hset/5
+.. _redis/0::hset/5:
+
+``hset/5``
+^^^^^^^^^^
+
+Sets a field in a hash. Returns 1 if a new field was created, 0 if the field was updated.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hset(Connection,Key,Field,Value,Result)``
+| **Mode and number of proofs:**
+|    ``hset(+ground,+atom,+atom,+ground,-integer)`` - ``one``
+
+
+------------
+
+.. index:: hget/4
+.. _redis/0::hget/4:
+
+``hget/4``
+^^^^^^^^^^
+
+Gets the value of a field in a hash.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hget(Connection,Key,Field,Value)``
+| **Mode and number of proofs:**
+|    ``hget(+ground,+atom,+atom,-ground)`` - ``one``
+
+
+------------
+
+.. index:: hgetall/3
+.. _redis/0::hgetall/3:
+
+``hgetall/3``
+^^^^^^^^^^^^^
+
+Gets all fields and values in a hash. Returns a flat list of alternating fields and values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hgetall(Connection,Key,FieldsValues)``
+| **Mode and number of proofs:**
+|    ``hgetall(+ground,+atom,-list)`` - ``one``
+
+
+------------
+
+.. index:: hdel/4
+.. _redis/0::hdel/4:
+
+``hdel/4``
+^^^^^^^^^^
+
+Deletes a field from a hash. Returns the number of fields removed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hdel(Connection,Key,Field,Count)``
+| **Mode and number of proofs:**
+|    ``hdel(+ground,+atom,+atom,-integer)`` - ``one``
+
+
+------------
+
+.. index:: hexists/4
+.. _redis/0::hexists/4:
+
+``hexists/4``
+^^^^^^^^^^^^^
+
+Checks if a field exists in a hash. Returns 1 if the field exists, 0 otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hexists(Connection,Key,Field,Exists)``
+| **Mode and number of proofs:**
+|    ``hexists(+ground,+atom,+atom,-integer)`` - ``one``
+
+
+------------
+
+.. index:: hkeys/3
+.. _redis/0::hkeys/3:
+
+``hkeys/3``
+^^^^^^^^^^^
+
+Gets all field names in a hash.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hkeys(Connection,Key,Fields)``
+| **Mode and number of proofs:**
+|    ``hkeys(+ground,+atom,-list)`` - ``one``
+
+
+------------
+
+.. index:: hvals/3
+.. _redis/0::hvals/3:
+
+``hvals/3``
+^^^^^^^^^^^
+
+Gets all values in a hash.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hvals(Connection,Key,Values)``
+| **Mode and number of proofs:**
+|    ``hvals(+ground,+atom,-list)`` - ``one``
+
+
+------------
+
+.. index:: hlen/3
+.. _redis/0::hlen/3:
+
+``hlen/3``
+^^^^^^^^^^
+
+Gets the number of fields in a hash.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hlen(Connection,Key,Count)``
+| **Mode and number of proofs:**
+|    ``hlen(+ground,+atom,-integer)`` - ``one``
+
+
+------------
+
+.. index:: lpush/4
+.. _redis/0::lpush/4:
+
+``lpush/4``
+^^^^^^^^^^^
+
+Prepends a value to a list. Returns the length of the list after the push.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lpush(Connection,Key,Value,Length)``
+| **Mode and number of proofs:**
+|    ``lpush(+ground,+atom,+ground,-integer)`` - ``one``
+
+
+------------
+
+.. index:: rpush/4
+.. _redis/0::rpush/4:
+
+``rpush/4``
+^^^^^^^^^^^
+
+Appends a value to a list. Returns the length of the list after the push.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rpush(Connection,Key,Value,Length)``
+| **Mode and number of proofs:**
+|    ``rpush(+ground,+atom,+ground,-integer)`` - ``one``
+
+
+------------
+
+.. index:: lpop/3
+.. _redis/0::lpop/3:
+
+``lpop/3``
+^^^^^^^^^^
+
+Removes and returns the first element of a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lpop(Connection,Key,Value)``
+| **Mode and number of proofs:**
+|    ``lpop(+ground,+atom,-ground)`` - ``one``
+
+
+------------
+
+.. index:: rpop/3
+.. _redis/0::rpop/3:
+
+``rpop/3``
+^^^^^^^^^^
+
+Removes and returns the last element of a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rpop(Connection,Key,Value)``
+| **Mode and number of proofs:**
+|    ``rpop(+ground,+atom,-ground)`` - ``one``
+
+
+------------
+
+.. index:: lrange/5
+.. _redis/0::lrange/5:
+
+``lrange/5``
+^^^^^^^^^^^^
+
+Gets a range of elements from a list. Indices are zero-based.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lrange(Connection,Key,Start,Stop,Elements)``
+| **Mode and number of proofs:**
+|    ``lrange(+ground,+atom,+integer,+integer,-list)`` - ``one``
+
+
+------------
+
+.. index:: llen/3
+.. _redis/0::llen/3:
+
+``llen/3``
+^^^^^^^^^^
+
+Gets the length of a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``llen(Connection,Key,Length)``
+| **Mode and number of proofs:**
+|    ``llen(+ground,+atom,-integer)`` - ``one``
+
+
+------------
+
+.. index:: lrem/5
+.. _redis/0::lrem/5:
+
+``lrem/5``
+^^^^^^^^^^
+
+Removes elements from a list. Count > 0: remove from head, Count < 0: remove from tail, Count = 0: remove all. Returns the number of removed elements.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lrem(Connection,Key,Count,Value,Removed)``
+| **Mode and number of proofs:**
+|    ``lrem(+ground,+atom,+integer,+ground,-integer)`` - ``one``
+
+
+------------
+
+.. index:: ltrim/5
+.. _redis/0::ltrim/5:
+
+``ltrim/5``
+^^^^^^^^^^^
+
+Trims a list to the specified range.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ltrim(Connection,Key,Start,Stop,Status)``
+| **Mode and number of proofs:**
+|    ``ltrim(+ground,+atom,+integer,+integer,-atom)`` - ``one``
+
+
+------------
+
+.. index:: sadd/4
+.. _redis/0::sadd/4:
+
+``sadd/4``
+^^^^^^^^^^
+
+Adds a member to a set. Returns the number of elements added.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sadd(Connection,Key,Member,Count)``
+| **Mode and number of proofs:**
+|    ``sadd(+ground,+atom,+ground,-integer)`` - ``one``
+
+
+------------
+
+.. index:: srem/4
+.. _redis/0::srem/4:
+
+``srem/4``
+^^^^^^^^^^
+
+Removes a member from a set. Returns the number of elements removed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``srem(Connection,Key,Member,Count)``
+| **Mode and number of proofs:**
+|    ``srem(+ground,+atom,+ground,-integer)`` - ``one``
+
+
+------------
+
+.. index:: smembers/3
+.. _redis/0::smembers/3:
+
+``smembers/3``
+^^^^^^^^^^^^^^
+
+Gets all members in a set.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``smembers(Connection,Key,Members)``
+| **Mode and number of proofs:**
+|    ``smembers(+ground,+atom,-list)`` - ``one``
+
+
+------------
+
+.. index:: sismember/4
+.. _redis/0::sismember/4:
+
+``sismember/4``
+^^^^^^^^^^^^^^^
+
+Checks if a value is a member of a set. Returns 1 if the member exists, 0 otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sismember(Connection,Key,Member,IsMember)``
+| **Mode and number of proofs:**
+|    ``sismember(+ground,+atom,+ground,-integer)`` - ``one``
+
+
+------------
+
+.. index:: scard/3
+.. _redis/0::scard/3:
+
+``scard/3``
+^^^^^^^^^^^
+
+Gets the number of members in a set.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``scard(Connection,Key,Count)``
+| **Mode and number of proofs:**
+|    ``scard(+ground,+atom,-integer)`` - ``one``
+
+
+------------
+
+.. index:: zadd/5
+.. _redis/0::zadd/5:
+
+``zadd/5``
+^^^^^^^^^^
+
+Adds a member with a score to a sorted set. Returns the number of elements added.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zadd(Connection,Key,Score,Member,Count)``
+| **Mode and number of proofs:**
+|    ``zadd(+ground,+atom,+number,+ground,-integer)`` - ``one``
+
+
+------------
+
+.. index:: zrem/4
+.. _redis/0::zrem/4:
+
+``zrem/4``
+^^^^^^^^^^
+
+Removes a member from a sorted set. Returns the number of elements removed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zrem(Connection,Key,Member,Count)``
+| **Mode and number of proofs:**
+|    ``zrem(+ground,+atom,+ground,-integer)`` - ``one``
+
+
+------------
+
+.. index:: zrange/5
+.. _redis/0::zrange/5:
+
+``zrange/5``
+^^^^^^^^^^^^
+
+Gets a range of members from a sorted set, ordered from lowest to highest score.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zrange(Connection,Key,Start,Stop,Members)``
+| **Mode and number of proofs:**
+|    ``zrange(+ground,+atom,+integer,+integer,-list)`` - ``one``
+
+
+------------
+
+.. index:: zrank/4
+.. _redis/0::zrank/4:
+
+``zrank/4``
+^^^^^^^^^^^
+
+Gets the rank (index) of a member in a sorted set, ordered from lowest to highest score. Returns nil if the member does not exist.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zrank(Connection,Key,Member,Rank)``
+| **Mode and number of proofs:**
+|    ``zrank(+ground,+atom,+ground,-integer)`` - ``one``
+
+
+------------
+
+.. index:: zcard/3
+.. _redis/0::zcard/3:
+
+``zcard/3``
+^^^^^^^^^^^
+
+Gets the number of members in a sorted set.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zcard(Connection,Key,Count)``
+| **Mode and number of proofs:**
+|    ``zcard(+ground,+atom,-integer)`` - ``one``
+
+
+------------
+
+.. index:: zscore/4
+.. _redis/0::zscore/4:
+
+``zscore/4``
+^^^^^^^^^^^^
+
+Gets the score of a member in a sorted set.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zscore(Connection,Key,Member,Score)``
+| **Mode and number of proofs:**
+|    ``zscore(+ground,+atom,+ground,-ground)`` - ``one``
 
 
 ------------

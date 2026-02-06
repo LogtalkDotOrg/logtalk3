@@ -23,16 +23,23 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Sean Charles. Adapted to Logtalk by Paulo Moura',
-		date is 2021-07-15,
+		date is 2026-02-06,
 		comment is 'Unit tests for the "redis" library.'
 	]).
 
 	:- uses(redis, [
 		connect/1, connect/3,
 		send/3,
-		disconnect/1
+		disconnect/1,
+		get/3, set/4, append/4, getrange/5, setrange/5, strlen/3,
+		mget/3, mset/3, incr/3, decr/3, incrby/4, decrby/4,
+		del/3, exists/3, keys/3, ttl/3, expire/4, persist/3, rename/4, type/3,
+		hset/5, hget/4, hgetall/3, hdel/4, hexists/4, hkeys/3, hvals/3, hlen/3,
+		lpush/4, rpush/4, lpop/3, rpop/3, lrange/5, llen/3, lrem/5, ltrim/5,
+		sadd/4, srem/4, smembers/3, sismember/4, scard/3,
+		zadd/5, zrem/4, zrange/5, zrank/4, zcard/3, zscore/4
 	]).
 
 	:- uses(list, [
@@ -58,6 +65,8 @@
 		% as a built-in predicate but we list it here for clarity
 		:- uses(user, [sleep/1]).
 	:- endif.
+
+	cover(redis).
 
 	% only run the tests if there's a Redis server running
 	condition :-
@@ -318,6 +327,253 @@
 		send(Connection, flushall, status('OK')),
 		send(Connection, set('bitbucket(!)', 'U'), status('OK')),
 		send(Connection, bitcount('bitbucket(!)'), number(4)),
+		disconnect(Connection).
+
+	%% STRING WRAPPER PREDICATES...
+
+	test(wrapper_get_set) :-
+		server_connection(Connection),
+		send(Connection, flushall, status('OK')),
+		set(Connection, wrapper_test_key, 'Test Value', 'OK'),
+		get(Connection, wrapper_test_key, 'Test Value'),
+		disconnect(Connection).
+
+	test(wrapper_getrange) :-
+		server_connection(Connection),
+		set(Connection, range_key, 'Hello World', 'OK'),
+		getrange(Connection, range_key, 0, 4, 'Hello'),
+		getrange(Connection, range_key, 6, 10, 'World'),
+		disconnect(Connection).
+
+	test(wrapper_setrange) :-
+		server_connection(Connection),
+		set(Connection, setrange_key, 'Hello World', 'OK'),
+		setrange(Connection, setrange_key, 6, 'Redis', 11),
+		get(Connection, setrange_key, 'Hello Redis'),
+		disconnect(Connection).
+
+	test(wrapper_mget_mset) :-
+		server_connection(Connection),
+		mset(Connection, [key1, value1, key2, value2, key3, value3], 'OK'),
+		mget(Connection, [key1, key2, key3], [bulk(value1), bulk(value2), bulk(value3)]),
+		disconnect(Connection).
+
+	test(wrapper_incr_decr) :-
+		server_connection(Connection),
+		set(Connection, counter, '10', 'OK'),
+		incr(Connection, counter, 11),
+		incr(Connection, counter, 12),
+		decr(Connection, counter, 11),
+		decr(Connection, counter, 10),
+		disconnect(Connection).
+
+	test(wrapper_incrby_decrby) :-
+		server_connection(Connection),
+		set(Connection, counter2, '100', 'OK'),
+		incrby(Connection, counter2, 50, 150),
+		decrby(Connection, counter2, 30, 120),
+		disconnect(Connection).
+
+	%% KEY WRAPPER PREDICATES...
+
+	test(wrapper_del_exists) :-
+		server_connection(Connection),
+		set(Connection, del_test_key, 'value', 'OK'),
+		exists(Connection, del_test_key, 1),
+		del(Connection, del_test_key, 1),
+		exists(Connection, del_test_key, 0),
+		disconnect(Connection).
+
+	test(wrapper_keys_pattern) :-
+		server_connection(Connection),
+		set(Connection, test_key_a, 'a', 'OK'),
+		set(Connection, test_key_b, 'b', 'OK'),
+		set(Connection, other_key, 'c', 'OK'),
+		keys(Connection, 'test_key_*', Keys),
+		length(Keys, Len),
+		Len >= 2,
+		disconnect(Connection).
+
+	test(wrapper_expire_ttl_persist) :-
+		server_connection(Connection),
+		set(Connection, ttl_test_key, 'value', 'OK'),
+		expire(Connection, ttl_test_key, 100, 1),
+		ttl(Connection, ttl_test_key, TTL),
+		TTL > 0,
+		TTL =< 100,
+		persist(Connection, ttl_test_key, 1),
+		ttl(Connection, ttl_test_key, -1),
+		disconnect(Connection).
+
+	test(wrapper_rename) :-
+		server_connection(Connection),
+		set(Connection, old_name, 'value', 'OK'),
+		rename(Connection, old_name, new_name, 'OK'),
+		exists(Connection, old_name, 0),
+		exists(Connection, new_name, 1),
+		del(Connection, new_name, _),
+		disconnect(Connection).
+
+	test(wrapper_type) :-
+		server_connection(Connection),
+		set(Connection, string_key, 'value', 'OK'),
+		type(Connection, string_key, string),
+		lpush(Connection, list_key, item1, _),
+		type(Connection, list_key, list),
+		sadd(Connection, set_key, member1, _),
+		type(Connection, set_key, set),
+		hset(Connection, hash_key, field, value, _),
+		type(Connection, hash_key, hash),
+		zadd(Connection, zset_key, 1.0, member, _),
+		type(Connection, zset_key, zset),
+		disconnect(Connection).
+
+	%% HASH WRAPPER PREDICATES...
+
+	test(wrapper_hset_hget_hdel) :-
+		server_connection(Connection),
+		send(Connection, flushall, status('OK')),
+		hset(Connection, wrapper_hash, field1, value1, 1),
+		hget(Connection, wrapper_hash, field1, value1),
+		hdel(Connection, wrapper_hash, field1, 1),
+		disconnect(Connection).
+
+	test(wrapper_hexists) :-
+		server_connection(Connection),
+		hset(Connection, exists_hash, field, value, 1),
+		hexists(Connection, exists_hash, field, 1),
+		hexists(Connection, exists_hash, nonexistent, 0),
+		disconnect(Connection).
+
+	test(wrapper_hkeys_hvals_hlen) :-
+		server_connection(Connection),
+		send(Connection, flushall, status('OK')),
+		hset(Connection, multi_hash, f1, v1, 1),
+		hset(Connection, multi_hash, f2, v2, 1),
+		hset(Connection, multi_hash, f3, v3, 1),
+		hlen(Connection, multi_hash, 3),
+		hkeys(Connection, multi_hash, Keys),
+		length(Keys, 3),
+		hvals(Connection, multi_hash, Vals),
+		length(Vals, 3),
+		disconnect(Connection).
+
+	test(wrapper_hgetall) :-
+		server_connection(Connection),
+		send(Connection, flushall, status('OK')),
+		hset(Connection, getall_hash, name, 'John', 1),
+		hset(Connection, getall_hash, age, '30', 1),
+		hgetall(Connection, getall_hash, All),
+		length(All, 4),
+		disconnect(Connection).
+
+	%% LIST WRAPPER PREDICATES...
+
+	test(wrapper_lpush_rpush_lpop_rpop) :-
+		server_connection(Connection),
+		send(Connection, flushall, status('OK')),
+		lpush(Connection, wrapper_list, item1, 1),
+		rpush(Connection, wrapper_list, item2, 2),
+		lpush(Connection, wrapper_list, item0, 3),
+		lpop(Connection, wrapper_list, item0),
+		rpop(Connection, wrapper_list, item2),
+		lpop(Connection, wrapper_list, item1),
+		disconnect(Connection).
+
+	test(wrapper_llen_lrange) :-
+		server_connection(Connection),
+		send(Connection, flushall, status('OK')),
+		rpush(Connection, range_list, a, 1),
+		rpush(Connection, range_list, b, 2),
+		rpush(Connection, range_list, c, 3),
+		rpush(Connection, range_list, d, 4),
+		llen(Connection, range_list, 4),
+		lrange(Connection, range_list, 0, 1, [bulk(a), bulk(b)]),
+		disconnect(Connection).
+
+	test(wrapper_lrem) :-
+		server_connection(Connection),
+		send(Connection, flushall, status('OK')),
+		rpush(Connection, rem_list, a, _),
+		rpush(Connection, rem_list, b, _),
+		rpush(Connection, rem_list, a, _),
+		rpush(Connection, rem_list, a, _),
+		lrem(Connection, rem_list, 2, a, 2),
+		llen(Connection, rem_list, 2),
+		disconnect(Connection).
+
+	test(wrapper_ltrim) :-
+		server_connection(Connection),
+		send(Connection, flushall, status('OK')),
+		rpush(Connection, trim_list, a, _),
+		rpush(Connection, trim_list, b, _),
+		rpush(Connection, trim_list, c, _),
+		rpush(Connection, trim_list, d, _),
+		ltrim(Connection, trim_list, 1, 2, 'OK'),
+		llen(Connection, trim_list, 2),
+		lrange(Connection, trim_list, 0, -1, [bulk(b), bulk(c)]),
+		disconnect(Connection).
+
+	%% SET WRAPPER PREDICATES...
+
+	test(wrapper_sadd_srem_smembers) :-
+		server_connection(Connection),
+		send(Connection, flushall, status('OK')),
+		sadd(Connection, wrapper_set, member1, 1),
+		sadd(Connection, wrapper_set, member2, 1),
+		sadd(Connection, wrapper_set, member3, 1),
+		sadd(Connection, wrapper_set, member1, 0),
+		smembers(Connection, wrapper_set, Members),
+		length(Members, 3),
+		srem(Connection, wrapper_set, member2, 1),
+		smembers(Connection, wrapper_set, Members2),
+		length(Members2, 2),
+		disconnect(Connection).
+
+	test(wrapper_sismember_scard) :-
+		server_connection(Connection),
+		send(Connection, flushall, status('OK')),
+		sadd(Connection, test_set, a, 1),
+		sadd(Connection, test_set, b, 1),
+		sismember(Connection, test_set, a, 1),
+		sismember(Connection, test_set, c, 0),
+		scard(Connection, test_set, 2),
+		disconnect(Connection).
+
+	%% SORTED SET WRAPPER PREDICATES...
+
+	test(wrapper_zadd_zrem_zcard) :-
+		server_connection(Connection),
+		send(Connection, flushall, status('OK')),
+		zadd(Connection, wrapper_zset, 1.0, member1, 1),
+		zadd(Connection, wrapper_zset, 2.0, member2, 1),
+		zadd(Connection, wrapper_zset, 3.0, member3, 1),
+		zcard(Connection, wrapper_zset, 3),
+		zrem(Connection, wrapper_zset, member2, 1),
+		zcard(Connection, wrapper_zset, 2),
+		disconnect(Connection).
+
+	test(wrapper_zrange) :-
+		server_connection(Connection),
+		send(Connection, flushall, status('OK')),
+		zadd(Connection, range_zset, 1.0, a, _),
+		zadd(Connection, range_zset, 2.0, b, _),
+		zadd(Connection, range_zset, 3.0, c, _),
+		zrange(Connection, range_zset, 0, 1, [bulk(a), bulk(b)]),
+		zrange(Connection, range_zset, 0, -1, [bulk(a), bulk(b), bulk(c)]),
+		disconnect(Connection).
+
+	test(wrapper_zrank_zscore) :-
+		server_connection(Connection),
+		send(Connection, flushall, status('OK')),
+		zadd(Connection, score_zset, 10.5, member1, _),
+		zadd(Connection, score_zset, 20.3, member2, _),
+		zadd(Connection, score_zset, 15.7, member3, _),
+		zrank(Connection, score_zset, member1, 0),
+		zrank(Connection, score_zset, member3, 1),
+		zrank(Connection, score_zset, member2, 2),
+		zscore(Connection, score_zset, member1, '10.5'),
+		zscore(Connection, score_zset, member2, '20.3'),
 		disconnect(Connection).
 
 	% auxiliary predicates

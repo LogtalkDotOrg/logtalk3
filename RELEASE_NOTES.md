@@ -119,6 +119,9 @@ and Xoshiro256** algorithms to the `random` library.
 * ADDED: Support for version 7 UUIDs to the `uuid` library. Also added
 `uuid_nil/1` and `uuid_max/1` predicates per RFC 9562.
 
+* ADDED: Wrapper predicates for commonly used Redis operations across multiple
+data types to the `redis` library.
+
 * UPDATED: The `sets` library with a treap (tree heap) implementation.
 
 * UPDATED: The `heaps` library with pairing heap implementation.
