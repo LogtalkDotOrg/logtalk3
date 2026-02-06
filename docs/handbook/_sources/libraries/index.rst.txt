@@ -87,6 +87,7 @@ directory in the ``NOTES.md`` file.
    sockets
    statistics
    stemming
+   stomp
    string_distance
    strings
    subsequences

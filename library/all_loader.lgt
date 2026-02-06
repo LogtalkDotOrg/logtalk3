@@ -92,6 +92,7 @@
 		union_find(loader),
 		mutations(loader),
 		listing(loader),
+		stomp(loader),
 		cloning,
 		counters,
 		streamvars

@@ -97,6 +97,10 @@ SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 * ADDED: New `sockets` high-level compatibility library. Supports ECLiPSe,
 GNU Prolog, SICStus Prolog, and SWI-Prolog.
 
+* ADDED: New `stomp` library implementing a STOMP (Simple Text Orientated
+Messaging Protocol) client. Supports ECLiPSe, GNU Prolog, SICStus Prolog,
+and SWI-Prolog.
+
 * ADDED: New `stemming` library implementing Porter and Lovins algorithms for
 computing stems for English words.
 

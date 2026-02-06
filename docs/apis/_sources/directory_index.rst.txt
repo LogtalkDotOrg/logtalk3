@@ -788,6 +788,16 @@ To load an entity, always load the library that includes it using the goal ``log
    porter_stemmer(Representation) <porter_stemmer_1>
    stemmer_protocol <stemmer_protocol_0>
 
+``library/stomp/``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   stomp <stomp_0>
+
 ``library/string_distance/``
 ----------------------------
 

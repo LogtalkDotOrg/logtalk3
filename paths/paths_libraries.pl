@@ -91,6 +91,7 @@ logtalk_library_path(sets, library('sets/')).
 logtalk_library_path(sockets, library('sockets/')).
 logtalk_library_path(statistics, library('statistics/')).
 logtalk_library_path(stemming, library('stemming/')).
+logtalk_library_path(stomp, library('stomp/')).
 logtalk_library_path(string_distance, library('string_distance/')).
 logtalk_library_path(strings, library('strings/')).
 logtalk_library_path(subsequences, library('subsequences/')).

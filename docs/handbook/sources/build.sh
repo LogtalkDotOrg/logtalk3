@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on February 5, 2026
+##   Last updated on February 6, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -132,6 +132,7 @@ sed '1,19d' ../../../library/sets/NOTES.md | pandoc -f gfm -t rst -o libraries/s
 sed '1,19d' ../../../library/sockets/NOTES.md | pandoc -f gfm -t rst -o libraries/sockets.rst
 sed '1,19d' ../../../library/statistics/NOTES.md | pandoc -f gfm -t rst -o libraries/statistics.rst
 sed '1,19d' ../../../library/stemming/NOTES.md | pandoc -f gfm -t rst -o libraries/stemming.rst
+sed '1,19d' ../../../library/stomp/NOTES.md | pandoc -f gfm -t rst -o libraries/stomp.rst
 sed '1,19d' ../../../library/string_distance/NOTES.md | pandoc -f gfm -t rst -o libraries/string_distance.rst
 sed '1,19d' ../../../library/strings/NOTES.md | pandoc -f gfm -t rst -o libraries/strings.rst
 sed '1,19d' ../../../library/subsequences/NOTES.md | pandoc -f gfm -t rst -o libraries/subsequences.rst

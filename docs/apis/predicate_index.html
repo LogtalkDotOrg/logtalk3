@@ -99,7 +99,13 @@
 <li class="toctree-l2"><a class="reference internal" href="#id11"><code class="docutils literal notranslate"><span class="pre">(&gt;=)/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#abort-transaction-3"><code class="docutils literal notranslate"><span class="pre">abort_transaction/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#absolute-file-name-2"><code class="docutils literal notranslate"><span class="pre">absolute_file_name/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ack-3"><code class="docutils literal notranslate"><span class="pre">ack/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#activate-debug-handler-1"><code class="docutils literal notranslate"><span class="pre">activate_debug_handler/1</span></code></a><ul class="simple">
@@ -280,6 +286,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#before-3"><code class="docutils literal notranslate"><span class="pre">before/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#begin-transaction-3"><code class="docutils literal notranslate"><span class="pre">begin_transaction/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#bench-goal-1"><code class="docutils literal notranslate"><span class="pre">bench_goal/1</span></code></a><ul class="simple">
@@ -498,6 +507,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#commit-message-2"><code class="docutils literal notranslate"><span class="pre">commit_message/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#commit-transaction-3"><code class="docutils literal notranslate"><span class="pre">commit_transaction/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#common-subsequence-3"><code class="docutils literal notranslate"><span class="pre">common_subsequence/3</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -526,6 +538,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#connect-3"><code class="docutils literal notranslate"><span class="pre">connect/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#connect-4"><code class="docutils literal notranslate"><span class="pre">connect/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#connection-alive-1"><code class="docutils literal notranslate"><span class="pre">connection_alive/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#console-1"><code class="docutils literal notranslate"><span class="pre">console/1</span></code></a><ul class="simple">
@@ -867,6 +885,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#disconnect-1"><code class="docutils literal notranslate"><span class="pre">disconnect/1</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#disconnect-2"><code class="docutils literal notranslate"><span class="pre">disconnect/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#disjoint-2"><code class="docutils literal notranslate"><span class="pre">disjoint/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -1204,6 +1225,18 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#fractile-3"><code class="docutils literal notranslate"><span class="pre">fractile/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#frame-body-2"><code class="docutils literal notranslate"><span class="pre">frame_body/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#frame-command-2"><code class="docutils literal notranslate"><span class="pre">frame_command/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#frame-header-3"><code class="docutils literal notranslate"><span class="pre">frame_header/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#frame-headers-2"><code class="docutils literal notranslate"><span class="pre">frame_headers/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#freeze-2"><code class="docutils literal notranslate"><span class="pre">freeze/2</span></code></a><ul class="simple">
@@ -2082,6 +2115,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#mutation-3"><code class="docutils literal notranslate"><span class="pre">mutation/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#nack-3"><code class="docutils literal notranslate"><span class="pre">nack/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#name-1"><code class="docutils literal notranslate"><span class="pre">name/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -2652,6 +2688,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#readme-2"><code class="docutils literal notranslate"><span class="pre">readme/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#receive-3"><code class="docutils literal notranslate"><span class="pre">receive/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#recorda-2"><code class="docutils literal notranslate"><span class="pre">recorda/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -2848,6 +2887,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#send-3"><code class="docutils literal notranslate"><span class="pre">send/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#send-4"><code class="docutils literal notranslate"><span class="pre">send/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#send-heartbeat-1"><code class="docutils literal notranslate"><span class="pre">send_heartbeat/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#sequence-3"><code class="docutils literal notranslate"><span class="pre">sequence/3</span></code></a><ul class="simple">
@@ -3123,6 +3168,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#sublist-2"><code class="docutils literal notranslate"><span class="pre">sublist/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#subscribe-4"><code class="docutils literal notranslate"><span class="pre">subscribe/4</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#subsequence-2"><code class="docutils literal notranslate"><span class="pre">subsequence/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -3337,6 +3385,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#unpin-1"><code class="docutils literal notranslate"><span class="pre">unpin/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#unsubscribe-3"><code class="docutils literal notranslate"><span class="pre">unsubscribe/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#unzip-2"><code class="docutils literal notranslate"><span class="pre">unzip/2</span></code></a><ul class="simple">
@@ -3710,12 +3761,28 @@
 <li><p><a class="reference internal" href="comparingp_0.html#id6"><span class="std std-ref">comparingp</span></a></p></li>
 </ul>
 </section>
+<section id="abort-transaction-3">
+<h2><code class="docutils literal notranslate"><span class="pre">abort_transaction/3</span></code><a class="headerlink" href="#abort-transaction-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="stomp_0.html#stomp-0-abort-transaction-3"><span class="std std-ref">stomp</span></a></p></li>
+</ul>
+</section>
 <section id="absolute-file-name-2">
 <h2><code class="docutils literal notranslate"><span class="pre">absolute_file_name/2</span></code><a class="headerlink" href="#absolute-file-name-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="osp_0.html#osp-0-absolute-file-name-2"><span class="std std-ref">osp</span></a></p></li>
+</ul>
+</section>
+<section id="ack-3">
+<h2><code class="docutils literal notranslate"><span class="pre">ack/3</span></code><a class="headerlink" href="#ack-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="stomp_0.html#stomp-0-ack-3"><span class="std std-ref">stomp</span></a></p></li>
 </ul>
 </section>
 <section id="activate-debug-handler-1">
@@ -4216,6 +4283,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="monitoring_0.html#monitoring-0-before-3"><span class="std std-ref">monitoring</span></a></p></li>
+</ul>
+</section>
+<section id="begin-transaction-3">
+<h2><code class="docutils literal notranslate"><span class="pre">begin_transaction/3</span></code><a class="headerlink" href="#begin-transaction-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="stomp_0.html#stomp-0-begin-transaction-3"><span class="std std-ref">stomp</span></a></p></li>
 </ul>
 </section>
 <section id="bench-goal-1">
@@ -4800,6 +4875,14 @@
 <li><p><a class="reference internal" href="git_protocol_0.html#git-protocol-0-commit-message-2"><span class="std std-ref">git_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="commit-transaction-3">
+<h2><code class="docutils literal notranslate"><span class="pre">commit_transaction/3</span></code><a class="headerlink" href="#commit-transaction-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="stomp_0.html#stomp-0-commit-transaction-3"><span class="std std-ref">stomp</span></a></p></li>
+</ul>
+</section>
 <section id="common-subsequence-3">
 <h2><code class="docutils literal notranslate"><span class="pre">common_subsequence/3</span></code><a class="headerlink" href="#common-subsequence-3" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -4878,6 +4961,22 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="redis_0.html#redis-0-connect-3"><span class="std std-ref">redis</span></a></p></li>
+</ul>
+</section>
+<section id="connect-4">
+<h2><code class="docutils literal notranslate"><span class="pre">connect/4</span></code><a class="headerlink" href="#connect-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="stomp_0.html#stomp-0-connect-4"><span class="std std-ref">stomp</span></a></p></li>
+</ul>
+</section>
+<section id="connection-alive-1">
+<h2><code class="docutils literal notranslate"><span class="pre">connection_alive/1</span></code><a class="headerlink" href="#connection-alive-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="stomp_0.html#stomp-0-connection-alive-1"><span class="std std-ref">stomp</span></a></p></li>
 </ul>
 </section>
 <section id="console-1">
@@ -5814,6 +5913,14 @@
 <li><p><a class="reference internal" href="redis_0.html#redis-0-disconnect-1"><span class="std std-ref">redis</span></a></p></li>
 </ul>
 </section>
+<section id="disconnect-2">
+<h2><code class="docutils literal notranslate"><span class="pre">disconnect/2</span></code><a class="headerlink" href="#disconnect-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="stomp_0.html#stomp-0-disconnect-2"><span class="std std-ref">stomp</span></a></p></li>
+</ul>
+</section>
 <section id="disjoint-2">
 <h2><code class="docutils literal notranslate"><span class="pre">disjoint/2</span></code><a class="headerlink" href="#disjoint-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -6746,6 +6853,38 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="statisticsp_0.html#statisticsp-0-fractile-3"><span class="std std-ref">statisticsp</span></a></p></li>
+</ul>
+</section>
+<section id="frame-body-2">
+<h2><code class="docutils literal notranslate"><span class="pre">frame_body/2</span></code><a class="headerlink" href="#frame-body-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="stomp_0.html#stomp-0-frame-body-2"><span class="std std-ref">stomp</span></a></p></li>
+</ul>
+</section>
+<section id="frame-command-2">
+<h2><code class="docutils literal notranslate"><span class="pre">frame_command/2</span></code><a class="headerlink" href="#frame-command-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="stomp_0.html#stomp-0-frame-command-2"><span class="std std-ref">stomp</span></a></p></li>
+</ul>
+</section>
+<section id="frame-header-3">
+<h2><code class="docutils literal notranslate"><span class="pre">frame_header/3</span></code><a class="headerlink" href="#frame-header-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="stomp_0.html#stomp-0-frame-header-3"><span class="std std-ref">stomp</span></a></p></li>
+</ul>
+</section>
+<section id="frame-headers-2">
+<h2><code class="docutils literal notranslate"><span class="pre">frame_headers/2</span></code><a class="headerlink" href="#frame-headers-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="stomp_0.html#stomp-0-frame-headers-2"><span class="std std-ref">stomp</span></a></p></li>
 </ul>
 </section>
 <section id="freeze-2">
@@ -9154,6 +9293,14 @@
 <li><p><a class="reference internal" href="mutations_store_0.html#mutations-store-0-mutation-3"><span class="std std-ref">mutations_store</span></a></p></li>
 </ul>
 </section>
+<section id="nack-3">
+<h2><code class="docutils literal notranslate"><span class="pre">nack/3</span></code><a class="headerlink" href="#nack-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="stomp_0.html#stomp-0-nack-3"><span class="std std-ref">stomp</span></a></p></li>
+</ul>
+</section>
 <section id="name-1">
 <h2><code class="docutils literal notranslate"><span class="pre">name/1</span></code><a class="headerlink" href="#name-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -10734,6 +10881,14 @@
 <li><p><a class="reference internal" href="packs_common_0.html#packs-common-0-readme-2"><span class="std std-ref">packs_common</span></a></p></li>
 </ul>
 </section>
+<section id="receive-3">
+<h2><code class="docutils literal notranslate"><span class="pre">receive/3</span></code><a class="headerlink" href="#receive-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="stomp_0.html#stomp-0-receive-3"><span class="std std-ref">stomp</span></a></p></li>
+</ul>
+</section>
 <section id="recorda-2">
 <h2><code class="docutils literal notranslate"><span class="pre">recorda/2</span></code><a class="headerlink" href="#recorda-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -11281,6 +11436,22 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="redis_0.html#redis-0-send-3"><span class="std std-ref">redis</span></a></p></li>
+</ul>
+</section>
+<section id="send-4">
+<h2><code class="docutils literal notranslate"><span class="pre">send/4</span></code><a class="headerlink" href="#send-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="stomp_0.html#stomp-0-send-4"><span class="std std-ref">stomp</span></a></p></li>
+</ul>
+</section>
+<section id="send-heartbeat-1">
+<h2><code class="docutils literal notranslate"><span class="pre">send_heartbeat/1</span></code><a class="headerlink" href="#send-heartbeat-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="stomp_0.html#stomp-0-send-heartbeat-1"><span class="std std-ref">stomp</span></a></p></li>
 </ul>
 </section>
 <section id="sequence-3">
@@ -12019,6 +12190,14 @@
 <li><p><a class="reference internal" href="varlistp_0.html#varlistp-0-sublist-2"><span class="std std-ref">varlistp</span></a></p></li>
 </ul>
 </section>
+<section id="subscribe-4">
+<h2><code class="docutils literal notranslate"><span class="pre">subscribe/4</span></code><a class="headerlink" href="#subscribe-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="stomp_0.html#stomp-0-subscribe-4"><span class="std std-ref">stomp</span></a></p></li>
+</ul>
+</section>
 <section id="subsequence-2">
 <h2><code class="docutils literal notranslate"><span class="pre">subsequence/2</span></code><a class="headerlink" href="#subsequence-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -12601,6 +12780,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="packs_common_0.html#packs-common-0-unpin-1"><span class="std std-ref">packs_common</span></a></p></li>
+</ul>
+</section>
+<section id="unsubscribe-3">
+<h2><code class="docutils literal notranslate"><span class="pre">unsubscribe/3</span></code><a class="headerlink" href="#unsubscribe-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="stomp_0.html#stomp-0-unsubscribe-3"><span class="std std-ref">stomp</span></a></p></li>
 </ul>
 </section>
 <section id="unzip-2">

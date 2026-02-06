@@ -1,0 +1,426 @@
+.. index:: single: stomp
+.. _stomp/0:
+
+.. rst-class:: right
+
+**object**
+
+``stomp``
+=========
+
+Portable STOMP 1.2 (Simple Text Orientated Messaging Protocol) client. Uses the sockets library for TCP communication.
+
+| **Availability:** 
+|    ``logtalk_load(stomp(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-06
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`socket <socket/0>`
+|    :ref:`term_io <term_io/0>`
+
+| **Remarks:**
+
+   - Supported backends: ECLiPSe, GNU Prolog, SICStus Prolog, and SWI-Prolog (same as the sockets library).
+   - Protocol version: Implements STOMP 1.2 specification.
+   - Heartbeat: Supports heartbeat negotiation. Automatic heartbeat sending is not implemented; use send_heartbeat/1 manually if needed.
+   - Subscriptions: Supports multiple concurrent subscriptions with unique IDs.
+   - Transactions: Supports STOMP transactions with BEGIN, COMMIT, and ABORT.
+   - Frame encoding: Properly encodes/decodes header values according to STOMP 1.2 escaping rules.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: connect/4
+.. _stomp/0::connect/4:
+
+``connect/4``
+^^^^^^^^^^^^^
+
+Connects to a STOMP server and performs the STOMP handshake. Returns a connection handle for subsequent operations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``connect(Host,Port,Connection,Options)``
+| **Mode and number of proofs:**
+|    ``connect(+atom,+integer,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Connection refused or network error:
+|        ``error(stomp_error(connection_failed), Context)``
+|    Server rejected connection:
+|        ``error(stomp_error(protocol_error(Message)), Context)``
+
+| **Remarks:**
+
+    - Option login(Login): Username for authentication.
+    - Option passcode(Passcode): Password for authentication.
+    - Option host(VirtualHost): Virtual host name. Defaults to the Host parameter.
+    - Option heartbeat(ClientMs, ServerMs): Heartbeat timing in milliseconds. Default is 0,0 (no heartbeat).
+
+
+------------
+
+.. index:: disconnect/2
+.. _stomp/0::disconnect/2:
+
+``disconnect/2``
+^^^^^^^^^^^^^^^^
+
+Gracefully disconnects from the STOMP server. Sends DISCONNECT frame and waits for RECEIPT if requested.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``disconnect(Connection,Options)``
+| **Mode and number of proofs:**
+|    ``disconnect(+compound,+list)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Option receipt(ReceiptId): Request receipt confirmation. Automatically generated if not specified.
+
+
+------------
+
+.. index:: connection_alive/1
+.. _stomp/0::connection_alive/1:
+
+``connection_alive/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Checks if the connection is still open and valid.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``connection_alive(Connection)``
+| **Mode and number of proofs:**
+|    ``connection_alive(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: send/4
+.. _stomp/0::send/4:
+
+``send/4``
+^^^^^^^^^^
+
+Sends a message to the specified destination.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send(Connection,Destination,Body,Options)``
+| **Mode and number of proofs:**
+|    ``send(+compound,+atom,+term,+list)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Option content_type(MimeType): MIME type of the body.
+    - Option content_length(Length): Body length in bytes. Auto-calculated if omitted for atom/string bodies.
+    - Option transaction(TransactionId): Include message in the named transaction.
+    - Option receipt(ReceiptId): Request receipt confirmation.
+    - Option header(Name, Value): Add custom header (can be repeated).
+
+
+------------
+
+.. index:: subscribe/4
+.. _stomp/0::subscribe/4:
+
+``subscribe/4``
+^^^^^^^^^^^^^^^
+
+Subscribes to a destination to receive messages.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``subscribe(Connection,Destination,SubscriptionId,Options)``
+| **Mode and number of proofs:**
+|    ``subscribe(+compound,+atom,+atom,+list)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Option ack(Mode): Acknowledgment mode: auto (default), client, or client_individual.
+
+
+------------
+
+.. index:: unsubscribe/3
+.. _stomp/0::unsubscribe/3:
+
+``unsubscribe/3``
+^^^^^^^^^^^^^^^^^
+
+Unsubscribes from a destination.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``unsubscribe(Connection,SubscriptionId,Options)``
+| **Mode and number of proofs:**
+|    ``unsubscribe(+compound,+atom,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: receive/3
+.. _stomp/0::receive/3:
+
+``receive/3``
+^^^^^^^^^^^^^
+
+Receives a frame from the server. Returns MESSAGE, RECEIPT, or ERROR frames.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``receive(Connection,Frame,Options)``
+| **Mode and number of proofs:**
+|    ``receive(+compound,-compound,+list)`` - ``zero_or_one_or_error``
+
+| **Remarks:**
+
+    - Option timeout(Milliseconds): Timeout in milliseconds. 0 for non-blocking, -1 for infinite wait. Default is -1.
+
+
+------------
+
+.. index:: ack/3
+.. _stomp/0::ack/3:
+
+``ack/3``
+^^^^^^^^^
+
+Acknowledges receipt of a message.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ack(Connection,AckId,Options)``
+| **Mode and number of proofs:**
+|    ``ack(+compound,+atom,+list)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Option transaction(TransactionId): Include acknowledgment in the named transaction.
+
+
+------------
+
+.. index:: nack/3
+.. _stomp/0::nack/3:
+
+``nack/3``
+^^^^^^^^^^
+
+Negatively acknowledges a message (tells server the message was not consumed).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nack(Connection,AckId,Options)``
+| **Mode and number of proofs:**
+|    ``nack(+compound,+atom,+list)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Option transaction(TransactionId): Include negative acknowledgment in the named transaction.
+
+
+------------
+
+.. index:: begin_transaction/3
+.. _stomp/0::begin_transaction/3:
+
+``begin_transaction/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Begins a new transaction.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``begin_transaction(Connection,TransactionId,Options)``
+| **Mode and number of proofs:**
+|    ``begin_transaction(+compound,+atom,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: commit_transaction/3
+.. _stomp/0::commit_transaction/3:
+
+``commit_transaction/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Commits a transaction, making all its operations permanent.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``commit_transaction(Connection,TransactionId,Options)``
+| **Mode and number of proofs:**
+|    ``commit_transaction(+compound,+atom,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: abort_transaction/3
+.. _stomp/0::abort_transaction/3:
+
+``abort_transaction/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Aborts a transaction, rolling back all its operations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``abort_transaction(Connection,TransactionId,Options)``
+| **Mode and number of proofs:**
+|    ``abort_transaction(+compound,+atom,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: send_heartbeat/1
+.. _stomp/0::send_heartbeat/1:
+
+``send_heartbeat/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Sends a heartbeat (EOL) to the server to keep the connection alive.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send_heartbeat(Connection)``
+| **Mode and number of proofs:**
+|    ``send_heartbeat(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: frame_command/2
+.. _stomp/0::frame_command/2:
+
+``frame_command/2``
+^^^^^^^^^^^^^^^^^^^
+
+Extracts the command from a frame.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``frame_command(Frame,Command)``
+| **Mode and number of proofs:**
+|    ``frame_command(+compound,-atom)`` - ``one``
+
+
+------------
+
+.. index:: frame_header/3
+.. _stomp/0::frame_header/3:
+
+``frame_header/3``
+^^^^^^^^^^^^^^^^^^
+
+Extracts a header value from a frame. Fails if header is not present.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``frame_header(Frame,HeaderName,Value)``
+| **Mode and number of proofs:**
+|    ``frame_header(+compound,+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: frame_headers/2
+.. _stomp/0::frame_headers/2:
+
+``frame_headers/2``
+^^^^^^^^^^^^^^^^^^^
+
+Extracts all headers from a frame as a list of Name-Value pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``frame_headers(Frame,Headers)``
+| **Mode and number of proofs:**
+|    ``frame_headers(+compound,-list)`` - ``one``
+
+
+------------
+
+.. index:: frame_body/2
+.. _stomp/0::frame_body/2:
+
+``frame_body/2``
+^^^^^^^^^^^^^^^^
+
+Extracts the body from a frame. Returns empty atom if no body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``frame_body(Frame,Body)``
+| **Mode and number of proofs:**
+|    ``frame_body(+compound,-term)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

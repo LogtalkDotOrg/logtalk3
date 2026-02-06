@@ -121,6 +121,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`comparingp <comparingp/0::(>=)/2>`
 
+``abort_transaction/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stomp <stomp/0::abort_transaction/3>`
+
 ``absolute_file_name/2``
 ------------------------
 
@@ -130,6 +140,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::absolute_file_name/2>`
+
+``ack/3``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stomp <stomp/0::ack/3>`
 
 ``activate_debug_handler/1``
 ----------------------------
@@ -750,6 +770,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`monitoring <monitoring/0::before/3>`
+
+``begin_transaction/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stomp <stomp/0::begin_transaction/3>`
 
 ``bench_goal/1``
 ----------------
@@ -1477,6 +1507,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`git_protocol <git_protocol/0::commit_message/2>`
 
+``commit_transaction/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stomp <stomp/0::commit_transaction/3>`
+
 ``common_subsequence/3``
 ------------------------
 
@@ -1576,6 +1616,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`redis <redis/0::connect/3>`
+
+``connect/4``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stomp <stomp/0::connect/4>`
+
+``connection_alive/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stomp <stomp/0::connection_alive/1>`
 
 ``console/1``
 -------------
@@ -2737,6 +2797,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`redis <redis/0::disconnect/1>`
 
+``disconnect/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stomp <stomp/0::disconnect/2>`
+
 ``disjoint/2``
 --------------
 
@@ -3896,6 +3966,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`statisticsp <statisticsp/0::fractile/3>`
+
+``frame_body/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stomp <stomp/0::frame_body/2>`
+
+``frame_command/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stomp <stomp/0::frame_command/2>`
+
+``frame_header/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stomp <stomp/0::frame_header/3>`
+
+``frame_headers/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stomp <stomp/0::frame_headers/2>`
 
 ``freeze/2``
 ------------
@@ -6887,6 +6997,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`mutations <mutations/0::mutation/3>`
 * :ref:`mutations_store <mutations_store/0::mutation/3>`
 
+``nack/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stomp <stomp/0::nack/3>`
+
 ``name/1``
 ----------
 
@@ -8847,6 +8967,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`packs_common <packs_common/0::readme/2>`
 
+``receive/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stomp <stomp/0::receive/3>`
+
 ``recorda/2``
 -------------
 
@@ -9527,6 +9657,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`redis <redis/0::send/3>`
+
+``send/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stomp <stomp/0::send/4>`
+
+``send_heartbeat/1``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stomp <stomp/0::send_heartbeat/1>`
 
 ``sequence/3``
 --------------
@@ -10446,6 +10596,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`listp <listp/0::sublist/2>`
 * :ref:`varlistp <varlistp/0::sublist/2>`
 
+``subscribe/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stomp <stomp/0::subscribe/4>`
+
 ``subsequence/2``
 -----------------
 
@@ -11173,6 +11333,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`packs_common <packs_common/0::unpin/1>`
+
+``unsubscribe/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stomp <stomp/0::unsubscribe/3>`
 
 ``unzip/2``
 -----------
