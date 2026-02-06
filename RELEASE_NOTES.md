@@ -167,6 +167,9 @@ correct number of seconds runtime for each test object.
 * FIXED: The `help` tool search for the terminal-based browser executables
 for the prefix used by Homebrew on Apple Silicon.
 
+* FIXED: A linter portability warning when loading the `lgtunit` tool file
+`coverage_report.lgt`.
+
 Tests
 -----
 
