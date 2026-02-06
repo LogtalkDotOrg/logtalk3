@@ -1,0 +1,153 @@
+.. index:: single: json_ld_protocol
+.. _json_ld_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``json_ld_protocol``
+====================
+
+JSON-LD 1.1 parser, generator, and processor protocol.
+
+| **Availability:** 
+|    ``logtalk_load(json_ld(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-05
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/2
+.. _json_ld_protocol/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses a JSON-LD document from the given source (``file(Path)``, ``stream(Stream)``, ``codes(List)``, ``chars(List)``, or ``atom(Atom)``) into a term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,Term)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,--term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source:
+|        ``domain_error(json_ld_source,Source)``
+
+
+------------
+
+.. index:: generate/2
+.. _json_ld_protocol/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates the content using the representation specified in the first argument (``file(Path)``, ``stream(Stream)``, ``codes(List)``, ``chars(List)``, or ``atom(Atom)``) for the term in the second argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,Term)``
+| **Mode and number of proofs:**
+|    ``generate(+compound,++term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` cannot be generated:
+|        ``domain_error(json_ld_sink,Sink)``
+
+
+------------
+
+.. index:: expand/2
+.. _json_ld_protocol/0::expand/2:
+
+``expand/2``
+^^^^^^^^^^^^
+
+Expands a parsed JSON-LD document. Expansion removes the context and represents all properties and types as full IRIs. The result is a list of node objects in expanded document form.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``expand(Document,Expanded)``
+| **Mode and number of proofs:**
+|    ``expand(+term,--list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Document`` is a variable:
+|        ``instantiation_error``
+
+
+------------
+
+.. index:: compact/3
+.. _json_ld_protocol/0::compact/3:
+
+``compact/3``
+^^^^^^^^^^^^^
+
+Compacts an expanded JSON-LD document using the given context. Compaction applies the context to shorten IRIs to terms or compact IRIs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``compact(Document,Context,Compacted)``
+| **Mode and number of proofs:**
+|    ``compact(+term,+term,--term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Document`` is a variable:
+|        ``instantiation_error``
+|    ``Context`` is a variable:
+|        ``instantiation_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

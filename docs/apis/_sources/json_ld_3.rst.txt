@@ -1,0 +1,64 @@
+.. index:: single: json_ld(ObjectRepresentation,PairRepresentation,StringRepresentation)
+.. _json_ld/3:
+
+.. rst-class:: right
+
+**object**
+
+``json_ld(ObjectRepresentation,PairRepresentation,StringRepresentation)``
+=========================================================================
+
+* ``ObjectRepresentation`` - Object representation to be used when decoding JSON objects. Possible values are ``curly`` (default) and ``list``.
+* ``PairRepresentation`` - Pair representation to be used when decoding JSON objects. Possible values are ``dash`` (default), ``equal``, and ``colon``.
+* ``StringRepresentation`` - Text representation to be used when decoding JSON strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.
+
+
+JSON-LD 1.1 parser, generator, and processor. Builds on top of the ``json`` library for JSON parsing and generation.
+
+| **Availability:** 
+|    ``logtalk_load(json_ld(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`json_ld_protocol <json_ld_protocol/0>`
+| **Uses:**
+|    :ref:`json(ObjectRepresentation,PairRepresentation,StringRepresentation) <json/3>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`json_ld_protocol/0::compact/3`  :ref:`json_ld_protocol/0::expand/2`  :ref:`json_ld_protocol/0::generate/2`  :ref:`json_ld_protocol/0::parse/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

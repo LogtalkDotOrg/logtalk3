@@ -1,0 +1,59 @@
+.. index:: single: json_ld(StringRepresentation)
+.. _json_ld/1:
+
+.. rst-class:: right
+
+**object**
+
+``json_ld(StringRepresentation)``
+=================================
+
+* ``StringRepresentation`` - Text representation to be used when decoding JSON strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.
+
+
+JSON-LD 1.1 parser, generator, and processor. Uses curly terms for parsed JSON objects and dashes for parsed JSON pairs.
+
+| **Availability:** 
+|    ``logtalk_load(json_ld(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`json_ld(curly,dash,StringRepresentation) <json_ld/3>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`json_ld_protocol/0::compact/3`  :ref:`json_ld_protocol/0::expand/2`  :ref:`json_ld_protocol/0::generate/2`  :ref:`json_ld_protocol/0::parse/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
