@@ -21,26 +21,13 @@
 
 :- if((
 	current_logtalk_flag(prolog_dialect, Dialect),
-	Dialect \== eclipse, Dialect \== gnu,
-	Dialect \== sicstus, Dialect \== swi,
-	Dialect \== trealla
+	(	Dialect == eclipse; Dialect \== gnu;
+		Dialect == sicstus; Dialect \== swi;
+		Dialect == trealla,
+		current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
+		v(Major, Minor, Patch) @>= v(2, 90, 0)
+	)
 )).
-
-	:- initialization((
-		write('(not applicable)'), nl
-	)).
-
-:- elif((
-	current_logtalk_flag(prolog_dialect, trealla),
-	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
-	v(Major, Minor, Patch) @< v(2, 90, 0)
-)).
-
-	:- initialization((
-		write('(not applicable)'), nl
-	)).
-
-:- else.
 
 	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
 		:- use_module(library(sockets), []).
@@ -56,6 +43,12 @@
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests, [hook(lgtunit)]),
 		tests::run
+	)).
+
+:- else.
+
+	:- initialization((
+		write('(not applicable)'), nl
 	)).
 
 :- endif.

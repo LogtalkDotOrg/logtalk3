@@ -19,39 +19,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, eclipse)).
-
-	:- initialization((
-		logtalk_load(socket, [optimize(on)])
-	)).
-
-:- elif(current_logtalk_flag(prolog_dialect, gnu)).
-
-	:- initialization((
-		logtalk_load(socket, [optimize(on)])
-	)).
-
-:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
-
-	:- use_module(library(sockets), []).
-	:- initialization((
-		logtalk_load(socket, [optimize(on)])
-	)).
-
-:- elif(current_logtalk_flag(prolog_dialect, swi)).
-
-	:- use_module(library(socket), []).
-	:- initialization((
-		logtalk_load(socket, [optimize(on)])
-	)).
-
-:- elif((
-	current_logtalk_flag(prolog_dialect, trealla),
-	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
-	v(Major, Minor, Patch) @>= v(2, 90, 0)
+:- if((
+	current_logtalk_flag(prolog_dialect, Dialect),
+	(	Dialect == eclipse; Dialect \== gnu;
+		Dialect == sicstus; Dialect \== swi;
+		Dialect == trealla,
+		current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
+		v(Major, Minor, Patch) @>= v(2, 90, 0)
+	)
 )).
 
-	:- use_module(library(sockets), []).
+	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
+		:- use_module(library(sockets), []).
+	:- elif(current_logtalk_flag(prolog_dialect, swi)).
+		:- use_module(library(socket), []).
+	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
+		:- use_module(library(sockets), []).
+	:- endif.
+
 	:- initialization((
 		logtalk_load(socket, [optimize(on)])
 	)).
