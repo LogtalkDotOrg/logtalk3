@@ -46,7 +46,8 @@
 	cover(json_ld(_, _, _)).
 
 	cleanup :-
-		^^clean_file('test_files/output.jsonld').
+		^^clean_file('test_files/output.jsonld'),
+		^^clean_file('test_files/output2.jsonld').
 
 	% =============== Error Handling Tests ===============
 
@@ -535,7 +536,6 @@
 		generate(stream(Stream), {'@id'-'http://example.org/1'}),
 		close(Stream),
 		parse(file(Path), Term),
-		catch(ignore(os::delete_file(Path)), _, true),
 		assertion(Term == {'@id'-'http://example.org/1'}).
 
 	% pair_key_value/3 with equal representation
