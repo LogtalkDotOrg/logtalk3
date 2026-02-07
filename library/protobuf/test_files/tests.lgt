@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-04,
+		date is 2026-02-07,
 		comment is 'Unit tests for the "protobuf" library.'
 	]).
 
@@ -49,6 +49,10 @@
 
 	condition :-
 		current_prolog_flag(bounded, false).
+
+	cleanup :-
+		^^clean_file('test_output.bin'),
+		^^clean_file('test_stream.bin').
 
 	% Varint encoding tests
 
