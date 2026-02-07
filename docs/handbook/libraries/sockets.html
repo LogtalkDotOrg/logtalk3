@@ -209,16 +209,16 @@
 <span id="library-sockets"></span><h1><code class="docutils literal notranslate"><span class="pre">sockets</span></code><a class="headerlink" href="#sockets" title="Link to this heading"></a></h1>
 <p>Portable abstraction over TCP sockets. Provides a high-level API for
 client and server socket operations that works across all supported
-backend Prolog systems: ECLiPSe, GNU Prolog, SICStus Prolog, and
-SWI-Prolog.</p>
+backend Prolog systems: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
+and Trealla Prolog.</p>
 <section id="design-rationale">
 <h2>Design rationale<a class="headerlink" href="#design-rationale" title="Link to this heading"></a></h2>
 <p>Different Prolog systems provide socket functionality at different
-abstraction levels. Some backends (notably SICStus Prolog) do not
-provide low-level socket creation predicates that can be separated from
-binding or connecting. This library therefore provides a higher-level
-API with predicates <code class="docutils literal notranslate"><span class="pre">client_open/5</span></code> and <code class="docutils literal notranslate"><span class="pre">server_open/3</span></code> that
-abstracts over these differences.</p>
+abstraction levels. Some backends (notably SICStus Prolog and Trealla
+Prolog) do not provide low-level socket creation predicates that can be
+separated from binding or connecting. This library therefore provides a
+higher-level API with predicates <code class="docutils literal notranslate"><span class="pre">client_open/5</span></code> and <code class="docutils literal notranslate"><span class="pre">server_open/3</span></code>
+that abstracts over these differences.</p>
 </section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>

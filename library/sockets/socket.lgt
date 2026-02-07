@@ -22,9 +22,9 @@
 :- object(socket).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2026-02-06,
+		date is 2026-02-07,
 		comment is 'Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, and SWI-Prolog.',
@@ -372,6 +372,78 @@
 		context(Context),
 		catch(
 			socket:gethostname(Host),
+			Error,
+			throw(error(socket_error(Error), Context))
+		).
+
+	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
+
+	% Trealla Prolog: higher-level API with socket_client_open/3 and socket_server_open/[2,3]
+
+	client_open(Host, Port, Stream, Stream, _Options) :-
+		context(Context),
+		catch(
+			sockets:socket_client_open(inet(Host, Port), Stream, [type(binary)]),
+			Error,
+			throw(error(socket_error(Error), Context))
+		).
+
+	server_open(Port, server_socket(ServerSocket, PortInt), _Options) :-
+		context(Context),
+		catch(
+			(	% Use internal variable for socket_server_open
+				(	var(Port) ->
+					sockets:socket_server_open(Port0, ServerSocket, [reuseaddr(true)])
+				;	Port0 = Port,
+					sockets:socket_server_open(Port0, ServerSocket, [reuseaddr(true)])
+				),
+				% SICStus may return the port as an atom, convert to integer
+				(	atom(Port0) ->
+					{atom_codes(Port0, Codes), number_codes(PortInt, Codes)}
+				;	PortInt = Port0
+				),
+				% Unify Port with the integer value if it was a variable
+				(	var(Port) ->
+					Port = PortInt
+				;	true
+				)
+			),
+			Error,
+			throw(error(socket_error(Error), Context))
+		).
+
+	server_accept(server_socket(ServerSocket, _), Stream, Stream, client(Client), _Options) :-
+		context(Context),
+		catch(
+			sockets:socket_server_accept(ServerSocket, Client, Stream, [type(binary)]),
+			Error,
+			throw(error(socket_error(Error), Context))
+		).
+
+	server_close(server_socket(ServerSocket, _)) :-
+		context(Context),
+		catch(
+			sockets:socket_server_close(ServerSocket),
+			Error,
+			throw(error(socket_error(Error), Context))
+		).
+
+	close(Input, Output) :-
+		context(Context),
+		catch(
+			(	Input == Output ->
+				close(Input)
+			;	close(Input),
+				close(Output)
+			),
+			Error,
+			throw(error(socket_error(Error), Context))
+		).
+
+	current_host(Host) :-
+		context(Context),
+		catch(
+			sockets:current_host(Host),
 			Error,
 			throw(error(socket_error(Error), Context))
 		).

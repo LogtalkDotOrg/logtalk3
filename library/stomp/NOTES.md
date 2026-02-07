@@ -24,7 +24,7 @@ ________________________________________________________________________
 Portable STOMP 1.2 (Simple Text Orientated Messaging Protocol) client
 implementation. This library uses the `sockets` library and supports all
 backend Prolog systems supported by that library: ECLiPSe, GNU Prolog,
-SICStus Prolog, and SWI-Prolog.
+SICStus Prolog, SWI-Prolog, and Trealla Prolog.
 
 
 Protocol Version

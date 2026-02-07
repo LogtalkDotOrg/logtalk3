@@ -23,17 +23,18 @@ ________________________________________________________________________
 
 Portable abstraction over TCP sockets. Provides a high-level API for client
 and server socket operations that works across all supported backend Prolog
-systems: ECLiPSe, GNU Prolog, SICStus Prolog, and SWI-Prolog.
+systems: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.
 
 
 Design rationale
 ----------------
 
 Different Prolog systems provide socket functionality at different abstraction
-levels. Some backends (notably SICStus Prolog) do not provide low-level socket
-creation predicates that can be separated from binding or connecting. This
-library therefore provides a higher-level API with predicates `client_open/5`
-and `server_open/3` that abstracts over these differences.
+levels. Some backends (notably SICStus Prolog and Trealla Prolog) do not
+provide low-level socket creation predicates that can be separated from
+binding or connecting. This library therefore provides a higher-level API
+with predicates `client_open/5` and `server_open/3` that abstracts over these
+differences.
 
 
 API documentation
