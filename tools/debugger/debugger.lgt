@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 8:0:0,
+		version is 8:0:1,
 		author is 'Paulo Moura',
-		date is 2025-12-18,
+		date is 2026-02-07,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -852,7 +852,7 @@
 		logging_message_argument_token(CoinductionStack, Token).
 	:- if(current_logtalk_flag(threads, supported)).
 		logging_message_argument(['T','H','R','E','A','D'| MessageChars], MessageChars, _, _, _, _, _, _, _, _, '~q'-[Thread]) :-
-			thread_self(Thread).
+			{thread_self(Thread)}.
 	:- endif.
 
 	logging_message_argument_token(Term, Token) :-

@@ -170,6 +170,8 @@ for the prefix used by Homebrew on Apple Silicon.
 * FIXED: A linter portability warning when loading the `lgtunit` tool file
 `coverage_report.lgt`.
 
+* FIXED: A linter portability warning when loading the `debugger` tool.
+
 Tests
 -----
 
