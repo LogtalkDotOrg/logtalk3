@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-05,
+		date is 2026-02-07,
 		comment is 'Tests for the "json_ld" library.'
 	]).
 
@@ -46,8 +46,7 @@
 	cover(json_ld(_, _, _)).
 
 	cleanup :-
-		^^file_path('test_files/output.jsonld', Path),
-		catch(ignore(os::delete_file(Path)), _, true).
+		^^clean_file('test_files/output.jsonld').
 
 	% =============== Error Handling Tests ===============
 
