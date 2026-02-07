@@ -22,7 +22,6 @@
 :- if(current_prolog_flag(bounded, false)).
 
 	:- initialization((
-		set_logtalk_flag(portability, warning),
 		logtalk_load(basic_types(loader)),
 		logtalk_load(reader(loader)),
 		logtalk_load(json(loader)),
