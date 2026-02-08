@@ -62,7 +62,7 @@
 	:- public(server_open/3).
 	:- mode(server_open(?integer, --compound, +list), one_or_error).
 	:- info(server_open/3, [
-		comment is 'Opens a server socket bound to the specified port using the given options. If ``Port`` is a variable, binds to an available port and unifies ``Port`` with the port number. Returns a ``ServerSocket`` handle to use with ``server_accept/4``. The default backlog (queue length) for pending connections is 5. Use the option ``backlog(N)`` to override.',
+		comment is 'Opens a server socket bound to the specified port using the given options. If ``Port`` is a variable, binds to an available port and unifies ``Port`` with the port number. Returns a ``ServerSocket`` handle to use with ``server_accept/4``. The default backlog (queue length) for pending connections is 5. Use the option ``backlog(N)`` to override. This option is not supported and thus ignored by the SICStus Prolog and Trealla Prolog backends.',
 		argnames is ['Port', 'ServerSocket', 'Options'],
 		exceptions is [
 			'Port already in use' - 'socket_error(Error)'
