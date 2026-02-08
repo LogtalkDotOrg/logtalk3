@@ -119,11 +119,11 @@ Prolog), the same stream handle is returned in both the input and output
 arguments. For backends that use separate streams (GNU Prolog and SWI-Prolog),
 separate stream handles are returned.
 
-### Binary mode
+### Binary and text modes
 
-The library automatically sets streams to binary mode where applicable to
-ensure consistent behavior across backends. This is important for sending
-and receiving raw bytes.
+The library automatically sets streams by default to binary mode (e.g., for
+sending and receiving raw bytes). An option is supported for opening streams
+in text mode.
 
 
 Known issues

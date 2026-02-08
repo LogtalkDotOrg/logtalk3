@@ -67,24 +67,44 @@
 		% test basic client-server connection
 		socket::server_open(Port, ServerSocket),
 		threaded_ignore(
-			client_connect_and_close(Port)
+			client_connect_and_close_binary(Port)
 		),
 		socket::server_accept(ServerSocket, ClientInput, ClientOutput, _ClientInfo),
 		socket::close(ClientInput, ClientOutput),
 		socket::server_close(ServerSocket).
 
-	test(sockets_client_server_02, true(compound(ClientInfo))) :-
+	test(sockets_client_server_02, true) :-
+		% test basic client-server connection
+		socket::server_open(Port, ServerSocket),
+		threaded_ignore(
+			client_connect_and_close_text(Port)
+		),
+		socket::server_accept(ServerSocket, ClientInput, ClientOutput, _ClientInfo, [type(text)]),
+		socket::close(ClientInput, ClientOutput),
+		socket::server_close(ServerSocket).
+
+	test(sockets_client_server_03, true(compound(ClientInfo))) :-
 		% test that client info is returned
 		socket::server_open(Port, ServerSocket),
 		threaded_ignore(
-			client_connect_and_close(Port)
+			client_connect_and_close_binary(Port)
 		),
 		socket::server_accept(ServerSocket, ClientInput, ClientOutput, ClientInfo),
 		socket::close(ClientInput, ClientOutput),
 		socket::server_close(ServerSocket).
 
-	test(sockets_client_server_03, true(Byte == 42)) :-
-		% test sending and receiving data
+	test(sockets_client_server_04, true(compound(ClientInfo))) :-
+		% test that client info is returned
+		socket::server_open(Port, ServerSocket),
+		threaded_ignore(
+			client_connect_and_close_text(Port)
+		),
+		socket::server_accept(ServerSocket, ClientInput, ClientOutput, ClientInfo, [type(text)]),
+		socket::close(ClientInput, ClientOutput),
+		socket::server_close(ServerSocket).
+
+	test(sockets_client_server_05, true(Byte == 42)) :-
+		% test sending and receiving binary data
 		socket::server_open(Port, ServerSocket),
 		threaded_ignore(
 			client_send_byte(Port, 42)
@@ -94,11 +114,22 @@
 		socket::close(ClientInput, ClientOutput),
 		socket::server_close(ServerSocket).
 
-	test(sockets_client_server_04, true(Byte == 123)) :-
-		% test bidirectional communication
+	test(sockets_client_server_06, true(Text == a)) :-
+		% test sending and receiving text data
 		socket::server_open(Port, ServerSocket),
 		threaded_ignore(
-			client_echo(Port, 123)
+			client_send_char(Port, a)
+		),
+		socket::server_accept(ServerSocket, ClientInput, ClientOutput, _ClientInfo, [type(text)]),
+		get_char(ClientInput, Text),
+		socket::close(ClientInput, ClientOutput),
+		socket::server_close(ServerSocket).
+
+	test(sockets_client_server_07, true(Byte == 123)) :-
+		% test bidirectional binary communication
+		socket::server_open(Port, ServerSocket),
+		threaded_ignore(
+			client_echo_byte(Port, 123)
 		),
 		socket::server_accept(ServerSocket, ClientInput, ClientOutput, _ClientInfo),
 		% read the byte from client
@@ -109,24 +140,61 @@
 		socket::close(ClientInput, ClientOutput),
 		socket::server_close(ServerSocket).
 
-	test(sockets_client_server_05, true) :-
-		% test multiple sequential connections
+	test(sockets_client_server_08, true(Char == b)) :-
+		% test bidirectional text communication
+		socket::server_open(Port, ServerSocket),
+		threaded_ignore(
+			client_echo_char(Port, b)
+		),
+		socket::server_accept(ServerSocket, ClientInput, ClientOutput, _ClientInfo, [type(text)]),
+		% read the term from client
+		get_char(ClientInput, Char),
+		% echo it back
+		put_char(ClientOutput, Char),
+		flush_output(ClientOutput),
+		socket::close(ClientInput, ClientOutput),
+		socket::server_close(ServerSocket).
+
+	test(sockets_client_server_09, true) :-
+		% test multiple sequential binary connections
 		socket::server_open(Port, ServerSocket),
 		% First connection
-		threaded_ignore(client_connect_and_close(Port)),
+		threaded_ignore(client_connect_and_close_binary(Port)),
 		socket::server_accept(ServerSocket, ClientInput1, ClientOutput1, _),
 		socket::close(ClientInput1, ClientOutput1),
 		% Second connection
-		threaded_ignore(client_connect_and_close(Port)),
+		threaded_ignore(client_connect_and_close_binary(Port)),
 		socket::server_accept(ServerSocket, ClientInput2, ClientOutput2, _),
+		socket::close(ClientInput2, ClientOutput2),
+		socket::server_close(ServerSocket).
+
+	test(sockets_client_server_10, true) :-
+		% test multiple sequential text connections
+		socket::server_open(Port, ServerSocket),
+		% First connection
+		threaded_ignore(client_connect_and_close_binary(Port)),
+		socket::server_accept(ServerSocket, ClientInput1, ClientOutput1, _, [type(text)]),
+		socket::close(ClientInput1, ClientOutput1),
+		% Second connection
+		threaded_ignore(client_connect_and_close_binary(Port)),
+		socket::server_accept(ServerSocket, ClientInput2, ClientOutput2, _, [type(text)]),
 		socket::close(ClientInput2, ClientOutput2),
 		socket::server_close(ServerSocket).
 
 	% Helper predicates for threaded tests
 
-	client_connect_and_close(Port) :-
+	client_connect_and_close_binary(Port) :-
 		catch(
 			(	socket::client_open('127.0.0.1', Port, Input, Output),
+				socket::close(Input, Output)
+			),
+			_,
+			true
+		).
+
+	client_connect_and_close_text(Port) :-
+		catch(
+			(	socket::client_open('127.0.0.1', Port, Input, Output, [type(text)]),
 				socket::close(Input, Output)
 			),
 			_,
@@ -135,7 +203,7 @@
 
 	client_send_byte(Port, Byte) :-
 		catch(
-			(	socket::client_open('127.0.0.1', Port, Input, Output),  write('client_open\n'),
+			(	socket::client_open('127.0.0.1', Port, Input, Output),
 				put_byte(Output, Byte),
 				flush_output(Output),
 				socket::close(Input, Output)
@@ -144,13 +212,37 @@
 			true
 		).
 
-	client_echo(Port, Byte) :-
+	client_send_char(Port, Char) :-
+		catch(
+			(	socket::client_open('127.0.0.1', Port, Input, Output, [type(text)]),
+				put_char(Output, Char),
+				flush_output(Output),
+				socket::close(Input, Output)
+			),
+			_,
+			true
+		).
+
+	client_echo_byte(Port, Byte) :-
 		catch(
 			(	socket::client_open('127.0.0.1', Port, Input, Output),
 				put_byte(Output, Byte),
 				flush_output(Output),
 				% read the echoed byte (but don't check it here)
 				get_byte(Input, _),
+				socket::close(Input, Output)
+			),
+			_,
+			true
+		).
+
+	client_echo_char(Port, Char) :-
+		catch(
+			(	socket::client_open('127.0.0.1', Port, Input, Output, [type(text)]),
+				put_char(Output, Char),
+				flush_output(Output),
+				% read the echoed char (but don't check it here)
+				get_char(Input, _),
 				socket::close(Input, Output)
 			),
 			_,

@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Paulo Moura',
-		date is 2026-02-07,
+		date is 2026-02-08,
 		comment is 'Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.',
@@ -40,10 +40,14 @@
 	:- public(client_open/5).
 	:- mode(client_open(+atom, +integer, --stream, --stream, +list), one_or_error).
 	:- info(client_open/5, [
-		comment is 'Opens a client connection to the specified host and port using the given options. Returns separate input and output streams for bidirectional communication. The streams are opened in binary mode.',
+		comment is 'Opens a client connection to the specified host and port using the given options. Returns separate input and output streams for bidirectional communication. The streams are opened by default in binary mode.',
 		argnames is ['Host', 'Port', 'InputStream', 'OutputStream', 'Options'],
 		exceptions is [
 			'Connection refused or host not found' - 'socket_error(Error)'
+		],
+		remarks is [
+			'Option ``type(binary)``' - 'Open the streams in binary mode. This is the default.',
+			'Option ``type(text)``' - 'Open the streams in text mode.'
 		]
 	]).
 
@@ -82,10 +86,14 @@
 	:- public(server_accept/5).
 	:- mode(server_accept(+compound, --stream, --stream, --compound, +list), one_or_error).
 	:- info(server_accept/5, [
-		comment is 'Accepts an incoming connection on the server socket, blocking until a client connects, using the given options. Returns separate input and output streams for bidirectional communication and client information as ``client(Host, Port)`` or ``client(Address)`` depending on backend. The streams are opened in binary mode.',
+		comment is 'Accepts an incoming connection on the server socket, blocking until a client connects, using the given options. Returns separate input and output streams for bidirectional communication and client information as ``client(Host, Port)`` or ``client(Address)`` depending on backend. The streams are opened by default in binary mode.',
 		argnames is ['ServerSocket', 'InputStream', 'OutputStream', 'ClientInfo', 'Options'],
 		exceptions is [
 			'Invalid server socket' - 'socket_error(Error)'
+		],
+		remarks is [
+			'Option ``type(binary)``' - 'Open the streams in binary mode. This is the default.',
+			'Option ``type(text)``' - 'Open the streams in text mode.'
 		]
 	]).
 
@@ -123,7 +131,7 @@
 	]).
 
 	:- uses(list, [
-		memberchk/2
+		member/2, memberchk/2
 	]).
 
 	client_open(Host, Port, InputStream, OutputStream, UserOptions) :-
@@ -194,10 +202,13 @@
 		).
 
 	default_option(backlog(5)).
+	default_option(type(binary)).
 
 	valid_option(backlog(N)) :-
 		integer(N),
 		N > 0.
+	valid_option(type(Type)) :-
+		once((Type == binary; Type == text)).
 
 	% Backend Prolog compiler dependent implementations
 
@@ -205,11 +216,13 @@
 
 	% ECLiPSe: socket/2 for creation, then bind, listen, etc.
 
-	client_open_(Host, Port, Stream, Stream, _Options) :-
+	client_open_(Host, Port, Socket, Socket, Options) :-
 		{socket(internet, stream, Socket)},
 		{connect(Socket, Host/Port)},
-		set_stream_property(Socket, encoding, octet),
-		Stream = Socket.
+		(	member(type(binary), Options) ->
+			set_stream_property(Socket, encoding, octet)
+		;	true
+		).
 
 	server_open_(Port, server_socket(Socket, Port), Options) :-
 		memberchk(backlog(N), Options),
@@ -217,9 +230,12 @@
 		{bind(Socket, _Host/Port)},
 		{listen(Socket, N)}.
 
-	server_accept_(server_socket(Socket, _), ClientSocket, ClientSocket, client(Host, Port), _Options) :-
+	server_accept_(server_socket(Socket, _), ClientSocket, ClientSocket, client(Host, Port), Options) :-
 		{accept(Socket, Host/Port, ClientSocket)},
-		set_stream_property(ClientSocket, encoding, octet).
+		(	member(type(binary), Options) ->
+			set_stream_property(ClientSocket, encoding, octet)
+		;	true
+		).
 
 	server_close_(server_socket(Socket, _)) :-
 		close(Socket, Socket).
@@ -232,11 +248,12 @@
 
 	% GNU Prolog: socket/2, socket_connect/4, socket_bind/2, socket_listen/2, socket_accept/4
 
-	client_open_(Host, Port, Input, Output, _Options) :-
+	client_open_(Host, Port, Input, Output, Options) :-
 		socket('AF_INET', Socket),
 		socket_connect(Socket, 'AF_INET'(Host, Port), Input, Output),
-		set_stream_type(Input, binary),
-		set_stream_type(Output, binary).
+		memberchk(type(Type), Options),
+		set_stream_type(Input, Type),
+		set_stream_type(Output, Type).
 
 	server_open_(Port, server_socket(Socket, Port), Options) :-
 		memberchk(backlog(N), Options),
@@ -244,10 +261,11 @@
 		socket_bind(Socket, 'AF_INET'('', Port)),
 		socket_listen(Socket, N).
 
-	server_accept_(server_socket(Socket, _), Input, Output, client(Host, Port), _Options) :-
+	server_accept_(server_socket(Socket, _), Input, Output, client(Host, Port), Options) :-
 		socket_accept(Socket, 'AF_INET'(Host, Port), Input, Output),
-		set_stream_type(Input, binary),
-		set_stream_type(Output, binary).
+		memberchk(type(Type), Options),
+		set_stream_type(Input, Type),
+		set_stream_type(Output, Type).
 
 	server_close_(server_socket(Socket, _)) :-
 		socket_close(Socket).
@@ -259,8 +277,9 @@
 
 	% SICStus Prolog: higher-level API with socket_client_open/3 and socket_server_open/[2,3]
 
-	client_open_(Host, Port, Stream, Stream, _Options) :-
-		sockets:socket_client_open(inet(Host, Port), Stream, [type(binary)]).
+	client_open_(Host, Port, Stream, Stream, Options) :-
+		memberchk(type(Type), Options),
+		sockets:socket_client_open(inet(Host, Port), Stream, [type(Type)]).
 
 	server_open_(Port, server_socket(ServerSocket, PortInt), Options) :-
 		memberchk(backlog(_N), Options),
@@ -282,8 +301,9 @@
 			)
 		).
 
-	server_accept_(server_socket(ServerSocket, _), Stream, Stream, client(Client), _Options) :-
-		sockets:socket_server_accept(ServerSocket, Client, Stream, [type(binary)]).
+	server_accept_(server_socket(ServerSocket, _), Stream, Stream, client(Client), Options) :-
+		memberchk(type(Type), Options),
+		sockets:socket_server_accept(ServerSocket, Client, Stream, [type(Type)]).
 
 	server_close_(server_socket(ServerSocket, _)) :-
 		sockets:socket_server_close(ServerSocket).
@@ -295,12 +315,13 @@
 
 	% SWI-Prolog: tcp_socket/1, tcp_connect/2, tcp_bind/2, tcp_listen/2, tcp_accept/3
 
-	client_open_(Host, Port, Input, Output, _Options) :-
+	client_open_(Host, Port, Input, Output, Options) :-
 		socket:tcp_socket(Socket),
 		socket:tcp_connect(Socket, Host:Port, StreamPair),
 		stream_pair(StreamPair, Input, Output),
-		set_stream(Input, type(binary)),
-		set_stream(Output, type(binary)).
+		memberchk(type(Type), Options),
+		set_stream(Input, type(Type)),
+		set_stream(Output, type(Type)).
 
 	server_open_(Port, server_socket(Socket, Port), Options) :-
 		memberchk(backlog(N), Options),
@@ -309,11 +330,12 @@
 		socket:tcp_bind(Socket, Port),
 		socket:tcp_listen(Socket, N).
 
-	server_accept_(server_socket(Socket, _), Input, Output, client(Host, Port), _Options) :-
+	server_accept_(server_socket(Socket, _), Input, Output, client(Host, Port), Options) :-
 		socket:tcp_accept(Socket, ClientSocket, Peer),
 		socket:tcp_open_socket(ClientSocket, Input, Output),
-		set_stream(Input, type(binary)),
-		set_stream(Output, type(binary)),
+		memberchk(type(Type), Options),
+		set_stream(Input, type(Type)),
+		set_stream(Output, type(Type)),
 		peer_to_host_port(Peer, Host, Port).
 
 	peer_to_host_port(ip(A, B, C, D):Port, Host, Port) :-
@@ -334,8 +356,9 @@
 
 	% Trealla Prolog: higher-level API with socket_client_open/3 and socket_server_open/[2,3]
 
-	client_open_(Host, Port, Stream, Stream, _Options) :-
-		sockets:socket_client_open(inet(Host, Port), Stream, [type(binary)]).
+	client_open_(Host, Port, Stream, Stream, Options) :-
+		memberchk(type(Type), Options),
+		sockets:socket_client_open(inet(Host, Port), Stream, [type(Type)]).
 
 	server_open_(Port, server_socket(ServerSocket, PortInt), Options) :-
 		memberchk(backlog(_N), Options),
@@ -357,8 +380,9 @@
 			)
 		).
 
-	server_accept_(server_socket(ServerSocket, _), Stream, Stream, client(Client), _Options) :-
-		sockets:socket_server_accept(ServerSocket, Client, Stream, [type(binary)]).
+	server_accept_(server_socket(ServerSocket, _), Stream, Stream, client(Client), Options) :-
+		memberchk(type(Type), Options),
+		sockets:socket_server_accept(ServerSocket, Client, Stream, [type(Type)]).
 
 	server_close_(server_socket(ServerSocket, _)) :-
 		sockets:socket_server_close(ServerSocket).

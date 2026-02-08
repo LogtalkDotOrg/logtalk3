@@ -140,7 +140,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-summary">API Summary</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#backend-specific-notes">Backend-specific notes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#stream-representation">Stream representation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#binary-mode">Binary mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#binary-and-text-modes">Binary and text modes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
@@ -306,11 +306,11 @@ Prolog, and Trealla Prolog), the same stream handle is returned in both
 the input and output arguments. For backends that use separate streams
 (GNU Prolog and SWI-Prolog), separate stream handles are returned.</p>
 </section>
-<section id="binary-mode">
-<h3>Binary mode<a class="headerlink" href="#binary-mode" title="Link to this heading"></a></h3>
-<p>The library automatically sets streams to binary mode where applicable
-to ensure consistent behavior across backends. This is important for
-sending and receiving raw bytes.</p>
+<section id="binary-and-text-modes">
+<h3>Binary and text modes<a class="headerlink" href="#binary-and-text-modes" title="Link to this heading"></a></h3>
+<p>The library automatically sets streams by default to binary mode (e.g.,
+for sending and receiving raw bytes). An option is supported for opening
+streams in text mode.</p>
 </section>
 </section>
 <section id="known-issues">

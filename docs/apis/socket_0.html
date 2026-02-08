@@ -223,8 +223,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:6:0</div>
-<div class="line"><strong>Date:</strong> 2026-02-07</div>
+<div class="line"><strong>Version:</strong> 0:7:0</div>
+<div class="line"><strong>Date:</strong> 2026-02-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -283,7 +283,7 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="client-open-5">
 <span id="socket-0-client-open-5"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">client_open/5</span></code></a><a class="headerlink" href="#client-open-5" title="Link to this heading"></a></h3>
-<p>Opens a client connection to the specified host and port using the given options. Returns separate input and output streams for bidirectional communication. The streams are opened in binary mode.</p>
+<p>Opens a client connection to the specified host and port using the given options. Returns separate input and output streams for bidirectional communication. The streams are opened by default in binary mode.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -309,6 +309,15 @@
 </div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">type(binary)</span></code>: Open the streams in binary mode. This is the default.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">type(text)</span></code>: Open the streams in text mode.</p></li>
+</ul>
+</div></blockquote>
 <hr class="docutils" />
 </section>
 <section id="client-open-4">
@@ -403,7 +412,7 @@
 </section>
 <section id="server-accept-5">
 <span id="socket-0-server-accept-5"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">server_accept/5</span></code></a><a class="headerlink" href="#server-accept-5" title="Link to this heading"></a></h3>
-<p>Accepts an incoming connection on the server socket, blocking until a client connects, using the given options. Returns separate input and output streams for bidirectional communication and client information as <code class="docutils literal notranslate"><span class="pre">client(Host,</span> <span class="pre">Port)</span></code> or <code class="docutils literal notranslate"><span class="pre">client(Address)</span></code> depending on backend. The streams are opened in binary mode.</p>
+<p>Accepts an incoming connection on the server socket, blocking until a client connects, using the given options. Returns separate input and output streams for bidirectional communication and client information as <code class="docutils literal notranslate"><span class="pre">client(Host,</span> <span class="pre">Port)</span></code> or <code class="docutils literal notranslate"><span class="pre">client(Address)</span></code> depending on backend. The streams are opened by default in binary mode.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -429,6 +438,15 @@
 </div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">type(binary)</span></code>: Open the streams in binary mode. This is the default.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">type(text)</span></code>: Open the streams in text mode.</p></li>
+</ul>
+</div></blockquote>
 <hr class="docutils" />
 </section>
 <section id="server-accept-4">
