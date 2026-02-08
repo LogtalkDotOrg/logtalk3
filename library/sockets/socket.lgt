@@ -19,18 +19,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(socket).
+:- object(socket,
+	imports(options)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
 		date is 2026-02-07,
 		comment is 'Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.',
 		remarks is [
-			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, and SWI-Prolog.',
+			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.',
 			'Design rationale' - 'Some backends (notably SICStus Prolog) do not provide low-level socket creation predicates that can be separated from binding or connecting. This library therefore provides a higher-level API with ``client_open/5`` and ``server_open/3`` that abstracts over these differences.',
 			'Stream handling' - 'Predicates ``client_open/5`` and ``server_accept/5`` return separate input and output streams opened in binary mode. For backends where the same stream is used for bidirectional communication, the same stream handle is returned in both arguments. Use standard stream predicates (``put_byte/2``, ``get_byte/2``, ``read/2``, ``write/2``, etc.) to communicate.',
-			'Options' - 'The ``Options`` argument is currently reserved for future use and should be passed as an empty list ``[]``.'
+			'Options' - 'Currently options are only defined for the ``server_open/3`` predicate. This is expected to change in future versions for the other predicates that have an options argument.'
 		]
 	]).
 
@@ -39,8 +40,18 @@
 	:- public(client_open/5).
 	:- mode(client_open(+atom, +integer, --stream, --stream, +list), one_or_error).
 	:- info(client_open/5, [
-		comment is 'Opens a client connection to the specified host and port. Returns separate input and output streams for bidirectional communication. For backends where the same stream is used for bidirectional communication, the same stream handle is returned in both arguments. The streams are opened in binary mode.',
+		comment is 'Opens a client connection to the specified host and port using the given options. Returns separate input and output streams for bidirectional communication. The streams are opened in binary mode.',
 		argnames is ['Host', 'Port', 'InputStream', 'OutputStream', 'Options'],
+		exceptions is [
+			'Connection refused or host not found' - 'socket_error(Error)'
+		]
+	]).
+
+	:- public(client_open/4).
+	:- mode(client_open(+atom, +integer, --stream, --stream), one_or_error).
+	:- info(client_open/4, [
+		comment is 'Opens a client connection to the specified host and port using default options. Returns separate input and output streams for bidirectional communication. The streams are opened in binary mode.',
+		argnames is ['Host', 'Port', 'InputStream', 'OutputStream'],
 		exceptions is [
 			'Connection refused or host not found' - 'socket_error(Error)'
 		]
@@ -51,8 +62,18 @@
 	:- public(server_open/3).
 	:- mode(server_open(?integer, --compound, +list), one_or_error).
 	:- info(server_open/3, [
-		comment is 'Opens a server socket bound to the specified port. If ``Port`` is a variable, binds to an available port and unifies ``Port`` with the port number. Returns a ``ServerSocket`` handle to use with ``server_accept/4``. The default backlog (queue length) for pending connections is 5.',
+		comment is 'Opens a server socket bound to the specified port using the given options. If ``Port`` is a variable, binds to an available port and unifies ``Port`` with the port number. Returns a ``ServerSocket`` handle to use with ``server_accept/4``. The default backlog (queue length) for pending connections is 5. Use the option ``backlog(N)`` to override.',
 		argnames is ['Port', 'ServerSocket', 'Options'],
+		exceptions is [
+			'Port already in use' - 'socket_error(Error)'
+		]
+	]).
+
+	:- public(server_open/2).
+	:- mode(server_open(?integer, --compound), one_or_error).
+	:- info(server_open/2, [
+		comment is 'Opens a server socket bound to the specified port using default options. If ``Port`` is a variable, binds to an available port and unifies ``Port`` with the port number. Returns a ``ServerSocket`` handle to use with ``server_accept/4``. The default backlog (queue length) for pending connections is 5.',
+		argnames is ['Port', 'ServerSocket'],
 		exceptions is [
 			'Port already in use' - 'socket_error(Error)'
 		]
@@ -61,8 +82,18 @@
 	:- public(server_accept/5).
 	:- mode(server_accept(+compound, --stream, --stream, --compound, +list), one_or_error).
 	:- info(server_accept/5, [
-		comment is 'Accepts an incoming connection on the server socket, blocking until a client connects. Returns separate input and output streams for bidirectional communication and client information as ``client(Host, Port)`` or ``client(Address)`` depending on backend. For backends where the same stream is used for bidirectional communication, the same stream handle is returned in both arguments. The streams are opened in binary mode.',
+		comment is 'Accepts an incoming connection on the server socket, blocking until a client connects, using the given options. Returns separate input and output streams for bidirectional communication and client information as ``client(Host, Port)`` or ``client(Address)`` depending on backend. The streams are opened in binary mode.',
 		argnames is ['ServerSocket', 'InputStream', 'OutputStream', 'ClientInfo', 'Options'],
+		exceptions is [
+			'Invalid server socket' - 'socket_error(Error)'
+		]
+	]).
+
+	:- public(server_accept/4).
+	:- mode(server_accept(+compound, --stream, --stream, --compound), one_or_error).
+	:- info(server_accept/4, [
+		comment is 'Accepts an incoming connection on the server socket, blocking until a client connects, using default options. Returns separate input and output streams for bidirectional communication and client information as ``client(Host, Port)`` or ``client(Address)`` depending on backend. The streams are opened in binary mode.',
+		argnames is ['ServerSocket', 'InputStream', 'OutputStream', 'ClientInfo'],
 		exceptions is [
 			'Invalid server socket' - 'socket_error(Error)'
 		]
@@ -91,254 +122,199 @@
 		argnames is ['Host']
 	]).
 
+	:- uses(list, [
+		memberchk/2
+	]).
+
+	client_open(Host, Port, InputStream, OutputStream, UserOptions) :-
+		context(Context),
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		catch(
+			client_open_(Host, Port, InputStream, OutputStream, Options),
+			Error,
+			throw(error(socket_error(Error), Context))
+		).
+
+	client_open(Host, Port, InputStream, OutputStream) :-
+		client_open(Host, Port, InputStream, OutputStream, []).
+
+	server_open(Port, ServerSocket, UserOptions) :-
+		context(Context),
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		catch(
+			server_open_(Port, ServerSocket, Options),
+			Error,
+			throw(error(socket_error(Error), Context))
+		).
+
+	server_open(Port, ServerSocket) :-
+		server_open(Port, ServerSocket, []).
+
+	server_accept(ServerSocket, InputStream, OutputStream, ClientInfo, UserOptions) :-
+		context(Context),
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		catch(
+			server_accept_(ServerSocket, InputStream, OutputStream, ClientInfo, Options),
+			Error,
+			throw(error(socket_error(Error), Context))
+		).
+
+	server_accept(ServerSocket, InputStream, OutputStream, ClientInfo) :-
+		server_accept(ServerSocket, InputStream, OutputStream, ClientInfo, []).
+
+	server_close(ServerSocket) :-
+		context(Context),
+		catch(
+			server_close_(ServerSocket),
+			Error,
+			throw(error(socket_error(Error), Context))
+		).
+
+	close(Input, Output) :-
+		context(Context),
+		catch(
+			(	Input == Output ->
+				close(Input)
+			;	close(Input),
+				close(Output)
+			),
+			Error,
+			throw(error(socket_error(Error), Context))
+		).
+
+	current_host(Host) :-
+		context(Context),
+		catch(
+			current_host_(Host),
+			Error,
+			throw(error(socket_error(Error), Context))
+		).
+
+	default_option(backlog(5)).
+
+	valid_option(backlog(N)) :-
+		integer(N),
+		N > 0.
+
 	% Backend Prolog compiler dependent implementations
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
 
 	% ECLiPSe: socket/2 for creation, then bind, listen, etc.
 
-	client_open(Host, Port, Stream, Stream, _Options) :-
-		context(Context),
-		catch(
-			(	{socket(internet, stream, Socket)},
-				{connect(Socket, Host/Port)},
-				set_stream_property(Socket, encoding, octet),
-				Stream = Socket
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	client_open_(Host, Port, Stream, Stream, _Options) :-
+		{socket(internet, stream, Socket)},
+		{connect(Socket, Host/Port)},
+		set_stream_property(Socket, encoding, octet),
+		Stream = Socket.
 
-	server_open(Port, server_socket(Socket, Port), _Options) :-
-		context(Context),
-		catch(
-			(	{socket(internet, stream, Socket)},
-				{bind(Socket, _Host/Port)},
-				{listen(Socket, 5)}
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	server_open_(Port, server_socket(Socket, Port), Options) :-
+		memberchk(backlog(N), Options),
+		{socket(internet, stream, Socket)},
+		{bind(Socket, _Host/Port)},
+		{listen(Socket, N)}.
 
-	server_accept(server_socket(Socket, _), ClientSocket, ClientSocket, client(Host, Port), _Options) :-
-		context(Context),
-		catch(
-			(	{accept(Socket, Host/Port, ClientSocket)},
-				set_stream_property(ClientSocket, encoding, octet)
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	server_accept_(server_socket(Socket, _), ClientSocket, ClientSocket, client(Host, Port), _Options) :-
+		{accept(Socket, Host/Port, ClientSocket)},
+		set_stream_property(ClientSocket, encoding, octet).
 
-	server_close(server_socket(Socket, _)) :-
-		context(Context),
-		catch(
-			close(Socket, Socket),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	server_close_(server_socket(Socket, _)) :-
+		close(Socket, Socket).
 
-	close(Input, Output) :-
-		context(Context),
-		catch(
-			(	Input == Output ->
-				close(Input)
-			;	close(Input),
-				close(Output)
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
-
-	current_host(Host) :-
-		context(Context),
-		catch(
-			(	get_flag(hostname, HostString),
-				atom_string(Host, HostString)
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	current_host_(Host) :-
+		get_flag(hostname, HostString),
+		atom_string(Host, HostString).
 
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
 
 	% GNU Prolog: socket/2, socket_connect/4, socket_bind/2, socket_listen/2, socket_accept/4
 
-	client_open(Host, Port, Input, Output, _Options) :-
-		context(Context),
-		catch(
-			(	socket('AF_INET', Socket),
-				socket_connect(Socket, 'AF_INET'(Host, Port), Input, Output),
-				set_stream_type(Input, binary),
-				set_stream_type(Output, binary)
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	client_open_(Host, Port, Input, Output, _Options) :-
+		socket('AF_INET', Socket),
+		socket_connect(Socket, 'AF_INET'(Host, Port), Input, Output),
+		set_stream_type(Input, binary),
+		set_stream_type(Output, binary).
 
-	server_open(Port, server_socket(Socket, Port), _Options) :-
-		context(Context),
-		catch(
-			(	socket('AF_INET', Socket),
-				socket_bind(Socket, 'AF_INET'('', Port)),
-				socket_listen(Socket, 5)
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	server_open_(Port, server_socket(Socket, Port), Options) :-
+		memberchk(backlog(N), Options),
+		socket('AF_INET', Socket),
+		socket_bind(Socket, 'AF_INET'('', Port)),
+		socket_listen(Socket, N).
 
-	server_accept(server_socket(Socket, _), Input, Output, client(Host, Port), _Options) :-
-		context(Context),
-		catch(
-			(	socket_accept(Socket, 'AF_INET'(Host, Port), Input, Output),
-				set_stream_type(Input, binary),
-				set_stream_type(Output, binary)
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	server_accept_(server_socket(Socket, _), Input, Output, client(Host, Port), _Options) :-
+		socket_accept(Socket, 'AF_INET'(Host, Port), Input, Output),
+		set_stream_type(Input, binary),
+		set_stream_type(Output, binary).
 
-	server_close(server_socket(Socket, _)) :-
-		context(Context),
-		catch(
-			socket_close(Socket),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	server_close_(server_socket(Socket, _)) :-
+		socket_close(Socket).
 
-	close(Input, Output) :-
-		context(Context),
-		catch(
-			(	Input == Output ->
-				close(Input)
-			;	close(Input),
-				close(Output)
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
-
-	current_host(Host) :-
-		context(Context),
-		catch(
-			host_name(Host),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	current_host_(Host) :-
+		host_name(Host).
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
 	% SICStus Prolog: higher-level API with socket_client_open/3 and socket_server_open/[2,3]
 
-	client_open(Host, Port, Stream, Stream, _Options) :-
-		context(Context),
-		catch(
-			sockets:socket_client_open(inet(Host, Port), Stream, [type(binary)]),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	client_open_(Host, Port, Stream, Stream, _Options) :-
+		sockets:socket_client_open(inet(Host, Port), Stream, [type(binary)]).
 
-	server_open(Port, server_socket(ServerSocket, PortInt), _Options) :-
-		context(Context),
-		catch(
-			(	% Use internal variable for socket_server_open
-				(	var(Port) ->
-					sockets:socket_server_open(Port0, ServerSocket, [reuseaddr(true)])
-				;	Port0 = Port,
-					sockets:socket_server_open(Port0, ServerSocket, [reuseaddr(true)])
-				),
-				% SICStus may return the port as an atom, convert to integer
-				(	atom(Port0) ->
-					{atom_codes(Port0, Codes), number_codes(PortInt, Codes)}
-				;	PortInt = Port0
-				),
-				% Unify Port with the integer value if it was a variable
-				(	var(Port) ->
-					Port = PortInt
-				;	true
-				)
+	server_open_(Port, server_socket(ServerSocket, PortInt), Options) :-
+		memberchk(backlog(_N), Options),
+		(	% Use internal variable for socket_server_open
+			(	var(Port) ->
+				sockets:socket_server_open(Port0, ServerSocket, [reuseaddr(true)])
+			;	Port0 = Port,
+				sockets:socket_server_open(Port0, ServerSocket, [reuseaddr(true)])
 			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
-
-	server_accept(server_socket(ServerSocket, _), Stream, Stream, client(Client), _Options) :-
-		context(Context),
-		catch(
-			sockets:socket_server_accept(ServerSocket, Client, Stream, [type(binary)]),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
-
-	server_close(server_socket(ServerSocket, _)) :-
-		context(Context),
-		catch(
-			sockets:socket_server_close(ServerSocket),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
-
-	close(Input, Output) :-
-		context(Context),
-		catch(
-			(	Input == Output ->
-				close(Input)
-			;	close(Input),
-				close(Output)
+			% SICStus may return the port as an atom, convert to integer
+			(	atom(Port0) ->
+				{atom_codes(Port0, Codes), number_codes(PortInt, Codes)}
+			;	PortInt = Port0
 			),
-			Error,
-			throw(error(socket_error(Error), Context))
+			% Unify Port with the integer value if it was a variable
+			(	var(Port) ->
+				Port = PortInt
+			;	true
+			)
 		).
 
-	current_host(Host) :-
-		context(Context),
-		catch(
-			sockets:current_host(Host),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	server_accept_(server_socket(ServerSocket, _), Stream, Stream, client(Client), _Options) :-
+		sockets:socket_server_accept(ServerSocket, Client, Stream, [type(binary)]).
+
+	server_close_(server_socket(ServerSocket, _)) :-
+		sockets:socket_server_close(ServerSocket).
+
+	current_host_(Host) :-
+		sockets:current_host(Host).
 
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 
 	% SWI-Prolog: tcp_socket/1, tcp_connect/2, tcp_bind/2, tcp_listen/2, tcp_accept/3
 
-	client_open(Host, Port, Input, Output, _Options) :-
-		context(Context),
-		catch(
-			(	socket:tcp_socket(Socket),
-				socket:tcp_connect(Socket, Host:Port, StreamPair),
-				stream_pair(StreamPair, Input, Output),
-				set_stream(Input, type(binary)),
-				set_stream(Output, type(binary))
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	client_open_(Host, Port, Input, Output, _Options) :-
+		socket:tcp_socket(Socket),
+		socket:tcp_connect(Socket, Host:Port, StreamPair),
+		stream_pair(StreamPair, Input, Output),
+		set_stream(Input, type(binary)),
+		set_stream(Output, type(binary)).
 
-	server_open(Port, server_socket(Socket, Port), _Options) :-
-		context(Context),
-		catch(
-			(	socket:tcp_socket(Socket),
-				socket:tcp_setopt(Socket, reuseaddr),
-				socket:tcp_bind(Socket, Port),
-				socket:tcp_listen(Socket, 5)
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	server_open_(Port, server_socket(Socket, Port), Options) :-
+		memberchk(backlog(N), Options),
+		socket:tcp_socket(Socket),
+		socket:tcp_setopt(Socket, reuseaddr),
+		socket:tcp_bind(Socket, Port),
+		socket:tcp_listen(Socket, N).
 
-	server_accept(server_socket(Socket, _), Input, Output, client(Host, Port), _Options) :-
-		context(Context),
-		catch(
-			(	socket:tcp_accept(Socket, ClientSocket, Peer),
-				socket:tcp_open_socket(ClientSocket, Input, Output),
-				set_stream(Input, type(binary)),
-				set_stream(Output, type(binary)),
-				peer_to_host_port(Peer, Host, Port)
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	server_accept_(server_socket(Socket, _), Input, Output, client(Host, Port), _Options) :-
+		socket:tcp_accept(Socket, ClientSocket, Peer),
+		socket:tcp_open_socket(ClientSocket, Input, Output),
+		set_stream(Input, type(binary)),
+		set_stream(Output, type(binary)),
+		peer_to_host_port(Peer, Host, Port).
 
 	peer_to_host_port(ip(A, B, C, D):Port, Host, Port) :-
 		!,
@@ -348,105 +324,47 @@
 		!.
 	peer_to_host_port(_, unknown, 0).
 
-	server_close(server_socket(Socket, _)) :-
-		context(Context),
-		catch(
-			socket:tcp_close_socket(Socket),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	server_close_(server_socket(Socket, _)) :-
+		socket:tcp_close_socket(Socket).
 
-	close(Input, Output) :-
-		context(Context),
-		catch(
-			(	Input == Output ->
-				close(Input)
-			;	close(Input),
-				close(Output)
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
-
-	current_host(Host) :-
-		context(Context),
-		catch(
-			socket:gethostname(Host),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	current_host_(Host) :-
+		socket:gethostname(Host).
 
 	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
 
 	% Trealla Prolog: higher-level API with socket_client_open/3 and socket_server_open/[2,3]
 
-	client_open(Host, Port, Stream, Stream, _Options) :-
-		context(Context),
-		catch(
-			sockets:socket_client_open(inet(Host, Port), Stream, [type(binary)]),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	client_open_(Host, Port, Stream, Stream, _Options) :-
+		sockets:socket_client_open(inet(Host, Port), Stream, [type(binary)]).
 
-	server_open(Port, server_socket(ServerSocket, PortInt), _Options) :-
-		context(Context),
-		catch(
-			(	% Use internal variable for socket_server_open
-				(	var(Port) ->
-					sockets:socket_server_open(Port0, ServerSocket, [reuseaddr(true)])
-				;	Port0 = Port,
-					sockets:socket_server_open(Port0, ServerSocket, [reuseaddr(true)])
-				),
-				% SICStus may return the port as an atom, convert to integer
-				(	atom(Port0) ->
-					{atom_codes(Port0, Codes), number_codes(PortInt, Codes)}
-				;	PortInt = Port0
-				),
-				% Unify Port with the integer value if it was a variable
-				(	var(Port) ->
-					Port = PortInt
-				;	true
-				)
+	server_open_(Port, server_socket(ServerSocket, PortInt), Options) :-
+		memberchk(backlog(_N), Options),
+		(	% Use internal variable for socket_server_open
+			(	var(Port) ->
+				sockets:socket_server_open(Port0, ServerSocket, [reuseaddr(true)])
+			;	Port0 = Port,
+				sockets:socket_server_open(Port0, ServerSocket, [reuseaddr(true)])
 			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
-
-	server_accept(server_socket(ServerSocket, _), Stream, Stream, client(Client), _Options) :-
-		context(Context),
-		catch(
-			sockets:socket_server_accept(ServerSocket, Client, Stream, [type(binary)]),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
-
-	server_close(server_socket(ServerSocket, _)) :-
-		context(Context),
-		catch(
-			sockets:socket_server_close(ServerSocket),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
-
-	close(Input, Output) :-
-		context(Context),
-		catch(
-			(	Input == Output ->
-				close(Input)
-			;	close(Input),
-				close(Output)
+			% SICStus may return the port as an atom, convert to integer
+			(	atom(Port0) ->
+				{atom_codes(Port0, Codes), number_codes(PortInt, Codes)}
+			;	PortInt = Port0
 			),
-			Error,
-			throw(error(socket_error(Error), Context))
+			% Unify Port with the integer value if it was a variable
+			(	var(Port) ->
+				Port = PortInt
+			;	true
+			)
 		).
 
-	current_host(Host) :-
-		context(Context),
-		catch(
-			sockets:current_host(Host),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
+	server_accept_(server_socket(ServerSocket, _), Stream, Stream, client(Client), _Options) :-
+		sockets:socket_server_accept(ServerSocket, Client, Stream, [type(binary)]).
+
+	server_close_(server_socket(ServerSocket, _)) :-
+		sockets:socket_server_close(ServerSocket).
+
+	current_host_(Host) :-
+		sockets:current_host(Host).
 
 	:- endif.
 

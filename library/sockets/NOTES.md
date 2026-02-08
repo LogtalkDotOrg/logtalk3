@@ -33,7 +33,7 @@ Different Prolog systems provide socket functionality at different abstraction
 levels. Some backends (notably SICStus Prolog and Trealla Prolog) do not
 provide low-level socket creation predicates that can be separated from
 binding or connecting. This library therefore provides a higher-level API
-with predicates `client_open/5` and `server_open/3` that abstracts over these
+with predicates `client_open/4-5` and `server_open/2-3` that abstracts over these
 differences.
 
 
@@ -65,27 +65,27 @@ Usage
 
 ### Creating a client connection
 
-To connect to a server:
+To connect to a server using default options:
 
-	?- socket::client_open(localhost, 8080, Input, Output, []).
+	?- socket::client_open(localhost, 8080, Input, Output).
 
-The predicates `client_open/5` and `server_accept/5` return separate input
-and output streams. For backends where the same stream is used for
+The predicates `client_open/4-5` and `server_accept/4-5` return separate
+input and output streams. For backends where the same stream is used for
 bidirectional communication (SICStus Prolog and ECLiPSe), the same stream
 handle is returned in both arguments. Use `socket::close/2` to close both
 streams when done.
 
 ### Creating a server
 
-To create a server that accepts connections:
+To create a server that accepts connections using default options:
 
-	?- socket::server_open(8080, ServerSocket, []),
-	   socket::server_accept(ServerSocket, Input, Output, ClientInfo, []),
+	?- socket::server_open(8080, ServerSocket),
+	   socket::server_accept(ServerSocket, Input, Output, ClientInfo),
 	   % ... communicate with client using Input and Output ...
 	   socket::close(Input, Output),
 	   socket::server_close(ServerSocket).
 
-If the port is passed as a variable to `server_open/3`, an available port
+If the port is passed as a variable to `server_open/2-3`, an available port
 will be selected and unified with the variable.
 
 ### Getting the current host name
@@ -97,8 +97,11 @@ API Summary
 -----------
 
 - `client_open(+Host, +Port, -InputStream, -OutputStream, +Options)` - Connect to a server
+- `client_open(+Host, +Port, -InputStream, -OutputStream)` - Connect to a server using default options
 - `server_open(?Port, -ServerSocket, +Options)` - Create a server socket
+- `server_open(?Port, -ServerSocket)` - Create a server socket using default options
 - `server_accept(+ServerSocket, -InputStream, -OutputStream, -ClientInfo, +Options)` - Accept connection
+- `server_accept(+ServerSocket, -InputStream, -OutputStream, -ClientInfo)` - Accept connection using default options
 - `server_close(+ServerSocket)` - Close a server socket
 - `close(+InputStream, +OutputStream)` - Close a client or accepted connection
 - `current_host(-Host)` - Get the current machine's hostname
@@ -110,11 +113,11 @@ Backend-specific notes
 ### Stream representation
 
 The library provides separate input and output stream arguments in
-`client_open/5` and `server_accept/5`. For backends where the same stream
-is used for bidirectional communication (SICStus Prolog and ECLiPSe), the
-same stream handle is returned in both the input and output arguments.
-For backends that use separate streams (GNU Prolog and SWI-Prolog), separate
-stream handles are returned.
+`client_open/4-5` and `server_accept/4-5`. For backends where the same stream
+is used for bidirectional communication (ECLiPSe, SICStus Prolog, and Trealla
+Prolog), the same stream handle is returned in both the input and output
+arguments. For backends that use separate streams (GNU Prolog and SWI-Prolog),
+separate stream handles are returned.
 
 ### Binary mode
 

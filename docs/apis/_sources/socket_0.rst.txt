@@ -14,26 +14,27 @@ Portable abstraction over TCP sockets. Provides a high-level API for client and 
 |    ``logtalk_load(sockets(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:5:0
+| **Version:** 0:6:0
 | **Date:** 2026-02-07
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
-| **Dependencies:**
-|   (none)
-
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
 
 | **Remarks:**
 
-   - Supported backends: ECLiPSe, GNU Prolog, SICStus Prolog, and SWI-Prolog.
+   - Supported backends: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.
    - Design rationale: Some backends (notably SICStus Prolog) do not provide low-level socket creation predicates that can be separated from binding or connecting. This library therefore provides a higher-level API with ``client_open/5`` and ``server_open/3`` that abstracts over these differences.
    - Stream handling: Predicates ``client_open/5`` and ``server_accept/5`` return separate input and output streams opened in binary mode. For backends where the same stream is used for bidirectional communication, the same stream handle is returned in both arguments. Use standard stream predicates (``put_byte/2``, ``get_byte/2``, ``read/2``, ``write/2``, etc.) to communicate.
-   - Options: The ``Options`` argument is currently reserved for future use and should be passed as an empty list ``[]``.
+   - Options: Currently options are only defined for the ``server_open/3`` predicate. This is expected to change in future versions for the other predicates that have an options argument.
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -48,7 +49,7 @@ Public predicates
 ``client_open/5``
 ^^^^^^^^^^^^^^^^^
 
-Opens a client connection to the specified host and port. Returns separate input and output streams for bidirectional communication. For backends where the same stream is used for bidirectional communication, the same stream handle is returned in both arguments. The streams are opened in binary mode.
+Opens a client connection to the specified host and port using the given options. Returns separate input and output streams for bidirectional communication. The streams are opened in binary mode.
 
 | **Compilation flags:**
 |    ``static``
@@ -65,13 +66,36 @@ Opens a client connection to the specified host and port. Returns separate input
 
 ------------
 
+.. index:: client_open/4
+.. _socket/0::client_open/4:
+
+``client_open/4``
+^^^^^^^^^^^^^^^^^
+
+Opens a client connection to the specified host and port using default options. Returns separate input and output streams for bidirectional communication. The streams are opened in binary mode.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``client_open(Host,Port,InputStream,OutputStream)``
+| **Mode and number of proofs:**
+|    ``client_open(+atom,+integer,--stream,--stream)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Connection refused or host not found:
+|        ``socket_error(Error)``
+
+
+------------
+
 .. index:: server_open/3
 .. _socket/0::server_open/3:
 
 ``server_open/3``
 ^^^^^^^^^^^^^^^^^
 
-Opens a server socket bound to the specified port. If ``Port`` is a variable, binds to an available port and unifies ``Port`` with the port number. Returns a ``ServerSocket`` handle to use with ``server_accept/4``. The default backlog (queue length) for pending connections is 5.
+Opens a server socket bound to the specified port using the given options. If ``Port`` is a variable, binds to an available port and unifies ``Port`` with the port number. Returns a ``ServerSocket`` handle to use with ``server_accept/4``. The default backlog (queue length) for pending connections is 5. Use the option ``backlog(N)`` to override.
 
 | **Compilation flags:**
 |    ``static``
@@ -88,13 +112,36 @@ Opens a server socket bound to the specified port. If ``Port`` is a variable, bi
 
 ------------
 
+.. index:: server_open/2
+.. _socket/0::server_open/2:
+
+``server_open/2``
+^^^^^^^^^^^^^^^^^
+
+Opens a server socket bound to the specified port using default options. If ``Port`` is a variable, binds to an available port and unifies ``Port`` with the port number. Returns a ``ServerSocket`` handle to use with ``server_accept/4``. The default backlog (queue length) for pending connections is 5.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``server_open(Port,ServerSocket)``
+| **Mode and number of proofs:**
+|    ``server_open(?integer,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Port already in use:
+|        ``socket_error(Error)``
+
+
+------------
+
 .. index:: server_accept/5
 .. _socket/0::server_accept/5:
 
 ``server_accept/5``
 ^^^^^^^^^^^^^^^^^^^
 
-Accepts an incoming connection on the server socket, blocking until a client connects. Returns separate input and output streams for bidirectional communication and client information as ``client(Host, Port)`` or ``client(Address)`` depending on backend. For backends where the same stream is used for bidirectional communication, the same stream handle is returned in both arguments. The streams are opened in binary mode.
+Accepts an incoming connection on the server socket, blocking until a client connects, using the given options. Returns separate input and output streams for bidirectional communication and client information as ``client(Host, Port)`` or ``client(Address)`` depending on backend. The streams are opened in binary mode.
 
 | **Compilation flags:**
 |    ``static``
@@ -103,6 +150,29 @@ Accepts an incoming connection on the server socket, blocking until a client con
 |    ``server_accept(ServerSocket,InputStream,OutputStream,ClientInfo,Options)``
 | **Mode and number of proofs:**
 |    ``server_accept(+compound,--stream,--stream,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Invalid server socket:
+|        ``socket_error(Error)``
+
+
+------------
+
+.. index:: server_accept/4
+.. _socket/0::server_accept/4:
+
+``server_accept/4``
+^^^^^^^^^^^^^^^^^^^
+
+Accepts an incoming connection on the server socket, blocking until a client connects, using default options. Returns separate input and output streams for bidirectional communication and client information as ``client(Host, Port)`` or ``client(Address)`` depending on backend. The streams are opened in binary mode.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``server_accept(ServerSocket,InputStream,OutputStream,ClientInfo)``
+| **Mode and number of proofs:**
+|    ``server_accept(+compound,--stream,--stream,--compound)`` - ``one_or_error``
 
 | **Exceptions:**
 |    Invalid server socket:
@@ -171,12 +241,12 @@ Returns the hostname of the current machine.
 Protected predicates
 --------------------
 
-(none)
+(no local declarations; see entity ancestors if any)
 
 Private predicates
 ------------------
 
-(none)
+(no local declarations; see entity ancestors if any)
 
 Operators
 ---------

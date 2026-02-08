@@ -38,6 +38,8 @@
 	:- endif.
 
 	:- initialization((
+		logtalk_load(basic_types(loader)),
+		logtalk_load(options(loader)),
 		logtalk_load(socket, [optimize(on)])
 	)).
 
