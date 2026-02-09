@@ -15,7 +15,7 @@ Portable STOMP 1.2 (Simple Text Orientated Messaging Protocol) client. Uses the 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-06
+| **Date:** 2026-02-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -65,9 +65,9 @@ Connects to a STOMP server and performs the STOMP handshake. Returns a connectio
 
 | **Exceptions:**
 |    Connection refused or network error:
-|        ``error(stomp_error(connection_failed), Context)``
+|        ``stomp_error(connection_failed)``
 |    Server rejected connection:
-|        ``error(stomp_error(protocol_error(Message)), Context)``
+|        ``stomp_error(protocol_error(Message))``
 
 | **Remarks:**
 

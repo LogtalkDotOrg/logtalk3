@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:8:0,
 		author is 'Paulo Moura',
-		date is 2026-02-08,
+		date is 2026-02-09,
 		comment is 'Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.',
@@ -43,7 +43,7 @@
 		comment is 'Opens a client connection to the specified host and port using the given options. Returns separate input and output streams for bidirectional communication. The streams are opened by default in binary mode.',
 		argnames is ['Host', 'Port', 'InputStream', 'OutputStream', 'Options'],
 		exceptions is [
-			'Connection refused or host not found' - 'socket_error(Error)'
+			'Connection refused or host not found' - socket_error('Error')
 		],
 		remarks is [
 			'Option ``type(binary)``' - 'Open the streams in binary mode. This is the default.',
@@ -57,7 +57,7 @@
 		comment is 'Opens a client connection to the specified host and port using default options. Returns separate input and output streams for bidirectional communication. The streams are opened in binary mode.',
 		argnames is ['Host', 'Port', 'InputStream', 'OutputStream'],
 		exceptions is [
-			'Connection refused or host not found' - 'socket_error(Error)'
+			'Connection refused or host not found' - socket_error('Error')
 		]
 	]).
 
@@ -69,7 +69,7 @@
 		comment is 'Opens a server socket bound to the specified port using the given options. If ``Port`` is a variable, binds to an available port and unifies ``Port`` with the port number. Returns a ``ServerSocket`` handle to use with ``server_accept/4``. The default backlog (queue length) for pending connections is 5. Use the option ``backlog(N)`` to override. This option is not supported and thus ignored by the SICStus Prolog and Trealla Prolog backends.',
 		argnames is ['Port', 'ServerSocket', 'Options'],
 		exceptions is [
-			'Port already in use' - 'socket_error(Error)'
+			'Port already in use' - socket_error('Error')
 		]
 	]).
 
@@ -79,7 +79,7 @@
 		comment is 'Opens a server socket bound to the specified port using default options. If ``Port`` is a variable, binds to an available port and unifies ``Port`` with the port number. Returns a ``ServerSocket`` handle to use with ``server_accept/4``. The default backlog (queue length) for pending connections is 5.',
 		argnames is ['Port', 'ServerSocket'],
 		exceptions is [
-			'Port already in use' - 'socket_error(Error)'
+			'Port already in use' - socket_error('Error')
 		]
 	]).
 
@@ -89,7 +89,7 @@
 		comment is 'Accepts an incoming connection on the server socket, blocking until a client connects, using the given options. Returns separate input and output streams for bidirectional communication and client information as ``client(Host, Port)`` or ``client(Address)`` depending on backend. The streams are opened by default in binary mode.',
 		argnames is ['ServerSocket', 'InputStream', 'OutputStream', 'ClientInfo', 'Options'],
 		exceptions is [
-			'Invalid server socket' - 'socket_error(Error)'
+			'Invalid server socket' - socket_error('Error')
 		],
 		remarks is [
 			'Option ``type(binary)``' - 'Open the streams in binary mode. This is the default.',
@@ -103,7 +103,7 @@
 		comment is 'Accepts an incoming connection on the server socket, blocking until a client connects, using default options. Returns separate input and output streams for bidirectional communication and client information as ``client(Host, Port)`` or ``client(Address)`` depending on backend. The streams are opened in binary mode.',
 		argnames is ['ServerSocket', 'InputStream', 'OutputStream', 'ClientInfo'],
 		exceptions is [
-			'Invalid server socket' - 'socket_error(Error)'
+			'Invalid server socket' - socket_error('Error')
 		]
 	]).
 

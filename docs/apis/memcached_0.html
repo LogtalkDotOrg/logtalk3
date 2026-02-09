@@ -327,7 +327,7 @@
 <div class="line-block">
 <div class="line">Connection refused or network error:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error(memcached_error(connection_failed),</span> <span class="pre">Context)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(connection_failed)</span></code></div>
 </div>
 </div>
 </div>
@@ -357,7 +357,7 @@
 <div class="line-block">
 <div class="line">Connection refused or network error:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error(memcached_error(connection_failed),</span> <span class="pre">Context)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(connection_failed)</span></code></div>
 </div>
 </div>
 </div>
@@ -408,11 +408,11 @@
 <div class="line-block">
 <div class="line">Storage failed:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error(memcached_error(not_stored),</span> <span class="pre">Context)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(not_stored)</span></code></div>
 </div>
 <div class="line">Network error:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error(memcached_error(Error),</span> <span class="pre">Context)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
 </div>
 </div>
 </div>
@@ -442,11 +442,11 @@
 <div class="line-block">
 <div class="line">Storage failed:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error(memcached_error(not_stored),</span> <span class="pre">Context)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(not_stored)</span></code></div>
 </div>
 <div class="line">Network error:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error(memcached_error(Error),</span> <span class="pre">Context)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
 </div>
 </div>
 </div>
@@ -476,11 +476,11 @@
 <div class="line-block">
 <div class="line">Key already exists:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error(memcached_error(not_stored),</span> <span class="pre">Context)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(not_stored)</span></code></div>
 </div>
 <div class="line">Network error:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error(memcached_error(Error),</span> <span class="pre">Context)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
 </div>
 </div>
 </div>
@@ -510,11 +510,11 @@
 <div class="line-block">
 <div class="line">Key does not exist:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error(memcached_error(not_stored),</span> <span class="pre">Context)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(not_stored)</span></code></div>
 </div>
 <div class="line">Network error:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error(memcached_error(Error),</span> <span class="pre">Context)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
 </div>
 </div>
 </div>
@@ -544,11 +544,11 @@
 <div class="line-block">
 <div class="line">Key does not exist:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error(memcached_error(not_stored),</span> <span class="pre">Context)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(not_stored)</span></code></div>
 </div>
 <div class="line">Network error:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error(memcached_error(Error),</span> <span class="pre">Context)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
 </div>
 </div>
 </div>
@@ -578,11 +578,11 @@
 <div class="line-block">
 <div class="line">Key does not exist:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error(memcached_error(not_stored),</span> <span class="pre">Context)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(not_stored)</span></code></div>
 </div>
 <div class="line">Network error:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error(memcached_error(Error),</span> <span class="pre">Context)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
 </div>
 </div>
 </div>
@@ -612,15 +612,15 @@
 <div class="line-block">
 <div class="line">CAS value mismatch (item modified by another client):</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error(memcached_error(exists),</span> <span class="pre">Context)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(exists)</span></code></div>
 </div>
 <div class="line">Key does not exist:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error(memcached_error(not_found),</span> <span class="pre">Context)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(not_found)</span></code></div>
 </div>
 <div class="line">Network error:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error(memcached_error(Error),</span> <span class="pre">Context)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
 </div>
 </div>
 </div>

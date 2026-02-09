@@ -49,7 +49,7 @@
 		comment is 'Connects to a Memcached server at the given host and port. Returns a connection handle for subsequent operations.',
 		argnames is ['Host', 'Port', 'Connection'],
 		exceptions is [
-			'Connection refused or network error' - 'error(memcached_error(connection_failed), Context)'
+			'Connection refused or network error' - memcached_error(connection_failed)
 		]
 	]).
 
@@ -59,7 +59,7 @@
 		comment is 'Connects to a Memcached server at the given host on the default port (11211). Returns a connection handle for subsequent operations.',
 		argnames is ['Host', 'Connection'],
 		exceptions is [
-			'Connection refused or network error' - 'error(memcached_error(connection_failed), Context)'
+			'Connection refused or network error' - memcached_error(connection_failed)
 		]
 	]).
 
@@ -80,8 +80,8 @@
 		comment is 'Stores the data unconditionally. Overwrites any existing data for the key.',
 		argnames is ['Connection', 'Key', 'Value', 'Flags', 'ExpTime'],
 		exceptions is [
-			'Storage failed' - 'error(memcached_error(not_stored), Context)',
-			'Network error' - 'error(memcached_error(Error), Context)'
+			'Storage failed' - memcached_error(not_stored),
+			'Network error' - memcached_error('Error')
 		]
 	]).
 
@@ -91,8 +91,8 @@
 		comment is 'Stores the data unconditionally with default flags (0) and no expiration (0).',
 		argnames is ['Connection', 'Key', 'Value'],
 		exceptions is [
-			'Storage failed' - 'error(memcached_error(not_stored), Context)',
-			'Network error' - 'error(memcached_error(Error), Context)'
+			'Storage failed' - memcached_error(not_stored),
+			'Network error' - memcached_error('Error')
 		]
 	]).
 
@@ -102,8 +102,8 @@
 		comment is 'Stores the data only if the key does not already exist.',
 		argnames is ['Connection', 'Key', 'Value', 'Flags', 'ExpTime'],
 		exceptions is [
-			'Key already exists' - 'error(memcached_error(not_stored), Context)',
-			'Network error' - 'error(memcached_error(Error), Context)'
+			'Key already exists' - memcached_error(not_stored),
+			'Network error' - memcached_error('Error')
 		]
 	]).
 
@@ -113,8 +113,8 @@
 		comment is 'Stores the data only if the key already exists.',
 		argnames is ['Connection', 'Key', 'Value', 'Flags', 'ExpTime'],
 		exceptions is [
-			'Key does not exist' - 'error(memcached_error(not_stored), Context)',
-			'Network error' - 'error(memcached_error(Error), Context)'
+			'Key does not exist' - memcached_error(not_stored),
+			'Network error' - memcached_error('Error')
 		]
 	]).
 
@@ -124,8 +124,8 @@
 		comment is 'Appends the data to the end of an existing item''s data.',
 		argnames is ['Connection', 'Key', 'Value'],
 		exceptions is [
-			'Key does not exist' - 'error(memcached_error(not_stored), Context)',
-			'Network error' - 'error(memcached_error(Error), Context)'
+			'Key does not exist' - memcached_error(not_stored),
+			'Network error' - memcached_error('Error')
 		]
 	]).
 
@@ -135,8 +135,8 @@
 		comment is 'Prepends the data to the beginning of an existing item''s data.',
 		argnames is ['Connection', 'Key', 'Value'],
 		exceptions is [
-			'Key does not exist' - 'error(memcached_error(not_stored), Context)',
-			'Network error' - 'error(memcached_error(Error), Context)'
+			'Key does not exist' - memcached_error(not_stored),
+			'Network error' - memcached_error('Error')
 		]
 	]).
 
@@ -146,9 +146,9 @@
 		comment is 'Stores the data only if no one else has updated it since the given CAS unique value was obtained (via gets/3).',
 		argnames is ['Connection', 'Key', 'Value', 'Flags', 'ExpTime', 'CasUnique'],
 		exceptions is [
-			'CAS value mismatch (item modified by another client)' - 'error(memcached_error(exists), Context)',
-			'Key does not exist' - 'error(memcached_error(not_found), Context)',
-			'Network error' - 'error(memcached_error(Error), Context)'
+			'CAS value mismatch (item modified by another client)' - memcached_error(exists),
+			'Key does not exist' - memcached_error(not_found),
+			'Network error' - memcached_error('Error')
 		]
 	]).
 

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-06,
+		date is 2026-02-09,
 		comment is 'Portable STOMP 1.2 (Simple Text Orientated Messaging Protocol) client. Uses the sockets library for TCP communication.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, and SWI-Prolog (same as the sockets library).',
@@ -52,8 +52,8 @@
 			'Option heartbeat(ClientMs, ServerMs)' - 'Heartbeat timing in milliseconds. Default is 0,0 (no heartbeat).'
 		],
 		exceptions is [
-			'Connection refused or network error' - 'error(stomp_error(connection_failed), Context)',
-			'Server rejected connection' - 'error(stomp_error(protocol_error(Message)), Context)'
+			'Connection refused or network error' - stomp_error(connection_failed),
+			'Server rejected connection' - stomp_error(protocol_error('Message'))
 		]
 	]).
 

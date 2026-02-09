@@ -66,7 +66,7 @@ Connects to a Memcached server at the given host and port. Returns a connection 
 
 | **Exceptions:**
 |    Connection refused or network error:
-|        ``error(memcached_error(connection_failed), Context)``
+|        ``memcached_error(connection_failed)``
 
 
 ------------
@@ -89,7 +89,7 @@ Connects to a Memcached server at the given host on the default port (11211). Re
 
 | **Exceptions:**
 |    Connection refused or network error:
-|        ``error(memcached_error(connection_failed), Context)``
+|        ``memcached_error(connection_failed)``
 
 
 ------------
@@ -131,9 +131,9 @@ Stores the data unconditionally. Overwrites any existing data for the key.
 
 | **Exceptions:**
 |    Storage failed:
-|        ``error(memcached_error(not_stored), Context)``
+|        ``memcached_error(not_stored)``
 |    Network error:
-|        ``error(memcached_error(Error), Context)``
+|        ``memcached_error(Error)``
 
 
 ------------
@@ -156,9 +156,9 @@ Stores the data unconditionally with default flags (0) and no expiration (0).
 
 | **Exceptions:**
 |    Storage failed:
-|        ``error(memcached_error(not_stored), Context)``
+|        ``memcached_error(not_stored)``
 |    Network error:
-|        ``error(memcached_error(Error), Context)``
+|        ``memcached_error(Error)``
 
 
 ------------
@@ -181,9 +181,9 @@ Stores the data only if the key does not already exist.
 
 | **Exceptions:**
 |    Key already exists:
-|        ``error(memcached_error(not_stored), Context)``
+|        ``memcached_error(not_stored)``
 |    Network error:
-|        ``error(memcached_error(Error), Context)``
+|        ``memcached_error(Error)``
 
 
 ------------
@@ -206,9 +206,9 @@ Stores the data only if the key already exists.
 
 | **Exceptions:**
 |    Key does not exist:
-|        ``error(memcached_error(not_stored), Context)``
+|        ``memcached_error(not_stored)``
 |    Network error:
-|        ``error(memcached_error(Error), Context)``
+|        ``memcached_error(Error)``
 
 
 ------------
@@ -231,9 +231,9 @@ Appends the data to the end of an existing item's data.
 
 | **Exceptions:**
 |    Key does not exist:
-|        ``error(memcached_error(not_stored), Context)``
+|        ``memcached_error(not_stored)``
 |    Network error:
-|        ``error(memcached_error(Error), Context)``
+|        ``memcached_error(Error)``
 
 
 ------------
@@ -256,9 +256,9 @@ Prepends the data to the beginning of an existing item's data.
 
 | **Exceptions:**
 |    Key does not exist:
-|        ``error(memcached_error(not_stored), Context)``
+|        ``memcached_error(not_stored)``
 |    Network error:
-|        ``error(memcached_error(Error), Context)``
+|        ``memcached_error(Error)``
 
 
 ------------
@@ -281,11 +281,11 @@ Stores the data only if no one else has updated it since the given CAS unique va
 
 | **Exceptions:**
 |    CAS value mismatch (item modified by another client):
-|        ``error(memcached_error(exists), Context)``
+|        ``memcached_error(exists)``
 |    Key does not exist:
-|        ``error(memcached_error(not_found), Context)``
+|        ``memcached_error(not_found)``
 |    Network error:
-|        ``error(memcached_error(Error), Context)``
+|        ``memcached_error(Error)``
 
 
 ------------
