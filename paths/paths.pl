@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on February 6, 2026
+%  Last updated on February 9, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -117,6 +117,7 @@ logtalk_library_path(ccsds, library('ccsds/')).
 logtalk_library_path(csv, library('csv/')).
 logtalk_library_path(dates, library('dates/')).
 logtalk_library_path(dependents, library('dependents/')).
+logtalk_library_path(deques, library('deques/')).
 logtalk_library_path(dictionaries, library('dictionaries/')).
 logtalk_library_path(dif, library('dif/')).
 logtalk_library_path(edcg, library('edcg/')).

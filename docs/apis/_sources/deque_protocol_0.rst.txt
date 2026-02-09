@@ -1,0 +1,287 @@
+.. index:: single: deque_protocol
+.. _deque_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``deque_protocol``
+==================
+
+Extracted protocol entity
+
+| **Availability:** 
+|    ``logtalk_load(deques(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-08
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: empty/1
+.. _deque_protocol/0::empty/1:
+
+``empty/1``
+^^^^^^^^^^^
+
+True iff the deque is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``empty(Deque)``
+| **Mode and number of proofs:**
+|    ``empty(+deque)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: push_front/3
+.. _deque_protocol/0::push_front/3:
+
+``push_front/3``
+^^^^^^^^^^^^^^^^
+
+Adds an element to the front of the deque.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``push_front(Element,DequeIn,DequeOut)``
+| **Mode and number of proofs:**
+|    ``push_front(+term,+deque,-deque)`` - ``one``
+
+
+------------
+
+.. index:: push_back/3
+.. _deque_protocol/0::push_back/3:
+
+``push_back/3``
+^^^^^^^^^^^^^^^
+
+Adds an element to the back of the deque.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``push_back(Element,DequeIn,DequeOut)``
+| **Mode and number of proofs:**
+|    ``push_back(+term,+deque,-deque)`` - ``one``
+
+
+------------
+
+.. index:: pop_front/3
+.. _deque_protocol/0::pop_front/3:
+
+``pop_front/3``
+^^^^^^^^^^^^^^^
+
+Removes and returns the front element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pop_front(DequeIn,Element,DequeOut)``
+| **Mode and number of proofs:**
+|    ``pop_front(+deque,-term,-deque)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: pop_back/3
+.. _deque_protocol/0::pop_back/3:
+
+``pop_back/3``
+^^^^^^^^^^^^^^
+
+Removes and returns the back element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pop_back(DequeIn,Element,DequeOut)``
+| **Mode and number of proofs:**
+|    ``pop_back(+deque,-term,-deque)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: peek_front/2
+.. _deque_protocol/0::peek_front/2:
+
+``peek_front/2``
+^^^^^^^^^^^^^^^^
+
+Returns the front element without removing it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``peek_front(Deque,Element)``
+| **Mode and number of proofs:**
+|    ``peek_front(+deque,-term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: peek_back/2
+.. _deque_protocol/0::peek_back/2:
+
+``peek_back/2``
+^^^^^^^^^^^^^^^
+
+Returns the back element without removing it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``peek_back(Deque,Element)``
+| **Mode and number of proofs:**
+|    ``peek_back(+deque,-term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: length/2
+.. _deque_protocol/0::length/2:
+
+``length/2``
+^^^^^^^^^^^^
+
+Returns the number of elements in the deque.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``length(Deque,Length)``
+| **Mode and number of proofs:**
+|    ``length(+deque,-integer)`` - ``one``
+
+
+------------
+
+.. index:: map/2
+.. _deque_protocol/0::map/2:
+
+``map/2``
+^^^^^^^^^
+
+Applies a closure to all elements of a deque.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``map(Closure,Deque)``
+| **Meta-predicate template:**
+|    ``map(1,*)``
+| **Mode and number of proofs:**
+|    ``map(+callable,+deque)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: map/3
+.. _deque_protocol/0::map/3:
+
+``map/3``
+^^^^^^^^^
+
+Applies a closure to all elements of a deque constructing a new deque.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``map(Closure,Deque,NewQueue)``
+| **Meta-predicate template:**
+|    ``map(2,*,*)``
+| **Mode and number of proofs:**
+|    ``map(+callable,+deque,?deque)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: as_list/2
+.. _deque_protocol/0::as_list/2:
+
+``as_list/2``
+^^^^^^^^^^^^^
+
+Converts a deque to a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``as_list(Deque,List)``
+| **Mode and number of proofs:**
+|    ``as_list(+deque,-list)`` - ``one``
+
+
+------------
+
+.. index:: as_deque/2
+.. _deque_protocol/0::as_deque/2:
+
+``as_deque/2``
+^^^^^^^^^^^^^^
+
+Converts a list to a deque.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``as_deque(List,Deque)``
+| **Mode and number of proofs:**
+|    ``as_deque(+list,-deque)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

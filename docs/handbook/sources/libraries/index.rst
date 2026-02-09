@@ -43,6 +43,7 @@ directory in the ``NOTES.md`` file.
    csv
    dates
    dependents
+   deques
    dictionaries
    dif
    edcg

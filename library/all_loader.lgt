@@ -34,6 +34,7 @@
 		events(loader),
 		dependents(loader),
 		dictionaries(loader),
+		deques(loader),
 		nested_dictionaries(loader),
 		heaps(loader),
 		queues(loader),

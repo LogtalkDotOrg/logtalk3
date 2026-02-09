@@ -248,6 +248,17 @@ To load an entity, always load the library that includes it using the goal ``log
    observer <observer_0>
    subject <subject_0>
 
+``library/deques/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   deque <deque_0>
+   deque_protocol <deque_protocol_0>
+
 ``library/dictionaries/``
 -------------------------
 

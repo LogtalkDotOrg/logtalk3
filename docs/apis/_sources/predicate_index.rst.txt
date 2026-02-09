@@ -555,6 +555,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`dictionaryp <dictionaryp/0::as_curly_bracketed/2>`
 * :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::as_curly_bracketed/2>`
 
+``as_deque/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`deque_protocol <deque_protocol/0::as_deque/2>`
+
 ``as_dictionary/2``
 -------------------
 
@@ -593,6 +603,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`deque_protocol <deque_protocol/0::as_list/2>`
 * :ref:`dictionaryp <dictionaryp/0::as_list/2>`
 * :ref:`difflist <difflist/0::as_list/2>`
 * :ref:`heap_protocol <heap_protocol/0::as_list/2>`
@@ -2975,6 +2986,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`deque_protocol <deque_protocol/0::empty/1>`
 * :ref:`dictionaryp <dictionaryp/0::empty/1>`
 * :ref:`heap_protocol <heap_protocol/0::empty/1>`
 * :ref:`listp <listp/0::empty/1>`
@@ -5856,6 +5868,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`deque_protocol <deque_protocol/0::length/2>`
 * :ref:`listp <listp/0::length/2>`
 * :ref:`queuep <queuep/0::length/2>`
 * :ref:`varlistp <varlistp/0::length/2>`
@@ -6476,6 +6489,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`deque_protocol <deque_protocol/0::map/2>`
 * :ref:`dictionaryp <dictionaryp/0::map/2>`
 * :ref:`expected(Expected) <expected/1::map/2>`
 * :ref:`metap <metap/0::map/2>`
@@ -6490,6 +6504,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`deque_protocol <deque_protocol/0::map/3>`
 * :ref:`dictionaryp <dictionaryp/0::map/3>`
 * :ref:`metap <metap/0::map/3>`
 * :ref:`pairs <pairs/0::map/3>`
@@ -8030,6 +8045,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::path_concat/3>`
 
+``peek_back/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`deque_protocol <deque_protocol/0::peek_back/2>`
+
+``peek_front/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`deque_protocol <deque_protocol/0::peek_front/2>`
+
 ``permutation/2``
 -----------------
 
@@ -8152,6 +8187,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`sampling_protocol <sampling_protocol/0::poisson/2>`
+
+``pop_back/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`deque_protocol <deque_protocol/0::pop_back/3>`
+
+``pop_front/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`deque_protocol <deque_protocol/0::pop_front/3>`
 
 ``port/5``
 ----------
@@ -8545,6 +8600,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`registries <registries/0::provides/2>`
+
+``push_back/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`deque_protocol <deque_protocol/0::push_back/3>`
+
+``push_front/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`deque_protocol <deque_protocol/0::push_front/3>`
 
 ``question_hook/6``
 -------------------

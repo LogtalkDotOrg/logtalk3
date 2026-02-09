@@ -70,6 +70,9 @@ sets.
 Library
 -------
 
+* ADDED: New `deques` library implementing double-ended queues represented
+using difference lists.
+
 * ADDED: New `subsequences` library implementing predicates over sequences
 represented as lists.
 
