@@ -14,8 +14,8 @@ Dictionary protocol.
 |    ``logtalk_load(dictionaries(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:4:0
-| **Date:** 2024-10-02
+| **Version:** 2:5:0
+| **Date:** 2026-02-09
 
 | **Compilation flags:**
 |    ``static``
@@ -575,5 +575,5 @@ Operators
 
 .. seealso::
 
-   :ref:`avltree <avltree/0>`, :ref:`bintree <bintree/0>`, :ref:`rbtree <rbtree/0>`
+   :ref:`avltree <avltree/0>`, :ref:`bintree <bintree/0>`, :ref:`rbtree <rbtree/0>`, :ref:`splaytree <splaytree/0>`
 

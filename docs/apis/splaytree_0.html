@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>avltree &mdash; Logtalk 3.98.0</title>
+  <title>splaytree &mdash; Logtalk 3.98.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="bintree" href="bintree_0.html" />
-    <link rel="prev" title="xref_diagram(Format)" href="xref_diagram_1.html" />
+    <link rel="next" title="dif" href="dif_0.html" />
+    <link rel="prev" title="rbtree" href="rbtree_0.html" />
    
 </head>
 
@@ -86,11 +86,11 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#deques"><span class="xref std std-ref">deques</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><span class="xref std std-ref">diagrams</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#dictionaries"><span class="xref std std-ref">dictionaries</span></a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">avltree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="avltree_0.html">avltree</a></li>
 <li class="toctree-l3"><a class="reference internal" href="bintree_0.html">bintree</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dictionaryp_0.html">dictionaryp</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rbtree_0.html">rbtree</a></li>
-<li class="toctree-l3"><a class="reference internal" href="splaytree_0.html">splaytree</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">splaytree</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#dif"><span class="xref std std-ref">dif</span></a></li>
@@ -206,9 +206,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">avltree</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">splaytree</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/avltree_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/splaytree_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -216,10 +216,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="avltree-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="avltree">
-<h1><code class="docutils literal notranslate"><span class="pre">avltree</span></code><a class="headerlink" href="#avltree" title="Link to this heading"></a></h1>
-<p>AVL tree implementation of the dictionary protocol. Uses standard order to compare keys.</p>
+  <p class="right" id="splaytree-0"><span id="index-0"></span><strong>object</strong></p>
+<section id="splaytree">
+<h1><code class="docutils literal notranslate"><span class="pre">splaytree</span></code><a class="headerlink" href="#splaytree" title="Link to this heading"></a></h1>
+<p>Splay tree implementation of the dictionary protocol. A splay tree is a self-adjusting binary search tree with the property that recently accessed elements are quick to access again. Uses standard order to compare keys.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -227,8 +227,8 @@
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Author:</strong> R.A.O’Keefe, L.Damas, V.S.Costa, Glenn Burgess, Jiri Spitz, and Jan Wielemaker; Logtalk port and additional predicates by Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:5:0</div>
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1:0:0</div>
 <div class="line"><strong>Date:</strong> 2026-02-09</div>
 </div>
 <div class="line-block">
@@ -288,7 +288,7 @@
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="bintree_0.html#bintree-0"><span class="std std-ref">bintree</span></a>, <a class="reference internal" href="rbtree_0.html#rbtree-0"><span class="std std-ref">rbtree</span></a></p>
+<p><a class="reference internal" href="avltree_0.html#avltree-0"><span class="std std-ref">avltree</span></a>, <a class="reference internal" href="bintree_0.html#bintree-0"><span class="std std-ref">bintree</span></a>, <a class="reference internal" href="rbtree_0.html#rbtree-0"><span class="std std-ref">rbtree</span></a></p>
 </div>
 </section>
 </section>
@@ -297,8 +297,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="xref_diagram_1.html" class="btn btn-neutral float-left" title="xref_diagram(Format)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="bintree_0.html" class="btn btn-neutral float-right" title="bintree" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="rbtree_0.html" class="btn btn-neutral float-left" title="rbtree" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dif_0.html" class="btn btn-neutral float-right" title="dif" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

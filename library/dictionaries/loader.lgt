@@ -21,5 +21,5 @@
 
 :- initialization((
 	logtalk_load(basic_types(loader)),
-	logtalk_load([dictionaryp, avltree, bintree, rbtree], [optimize(on)])
+	logtalk_load([dictionaryp, avltree, bintree, rbtree, splaytree], [optimize(on)])
 )).

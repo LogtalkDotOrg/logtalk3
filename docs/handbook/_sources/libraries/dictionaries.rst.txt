@@ -4,10 +4,10 @@
 ================
 
 This library provides a dictionary (also known as associative array,
-map, or symbol table) protocol and binary tree, AVL tree, and Red–Black
-tree implementations. The different representations of a dictionary
-should be regarded as opaque terms and only accessed using the library
-predicates.
+map, or symbol table) protocol and binary tree, AVL tree, Red–Black
+tree, and splay tree implementations. The different representations of a
+dictionary should be regarded as opaque terms and only accessed using
+the library predicates.
 
 API documentation
 -----------------
@@ -40,13 +40,15 @@ Usage
 First, select the dictionary implementation that you want to use. For
 cases where the number of elements is relatively small and performance
 is not critical, ``bintree`` can be a good choice. For other cases,
-``avltree`` or ``rbtree`` are likely better choices. If you want to
-compare the performance of the implementations, either define an object
-alias or use a ``uses/2`` directive so that you can switch between
-implementations by simply changing the alias definition or the first
-argument of the directive. Note that you can switch between
-implementations at runtime without code changes by using a parameter
-variable in the first argument of a ``uses/2`` directive.
+``avltree`` or ``rbtree`` are likely better choices. The ``splaytree``
+implementation can be a good choice when recently accessed elements are
+likely to be accessed again, as it moves accessed elements closer to the
+root. If you want to compare the performance of the implementations,
+either define an object alias or use a ``uses/2`` directive so that you
+can switch between implementations by simply changing the alias
+definition or the first argument of the directive. Note that you can
+switch between implementations at runtime without code changes by using
+a parameter variable in the first argument of a ``uses/2`` directive.
 
 Dictionary keys should preferably be ground terms. If the keys contain
 variables, the user must ensure that any instantiation of those

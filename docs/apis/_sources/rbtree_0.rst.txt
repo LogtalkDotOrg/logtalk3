@@ -14,8 +14,8 @@ Red-Black tree implementation of the dictionary protocol. Uses standard order to
 |    ``logtalk_load(dictionaries(loader))``
 
 | **Author:** Vitor Santos Costa; Logtalk port and additional predicates by Paulo Moura.
-| **Version:** 1:9:0
-| **Date:** 2021-04-12
+| **Version:** 1:10:0
+| **Date:** 2026-02-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -77,5 +77,5 @@ Operators
 
 .. seealso::
 
-   :ref:`avltree <avltree/0>`, :ref:`bintree <bintree/0>`
+   :ref:`avltree <avltree/0>`, :ref:`splaytree <splaytree/0>`, :ref:`bintree <bintree/0>`
 

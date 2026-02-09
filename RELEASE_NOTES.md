@@ -132,6 +132,8 @@ and Xoshiro256** algorithms to the `random` library.
 * ADDED: Wrapper predicates for commonly used Redis operations across multiple
 data types to the `redis` library.
 
+* UPDATED: The `dictionaries` library with a splay tree implementation.
+
 * UPDATED: The `sets` library with a treap (tree heap) implementation.
 
 * UPDATED: The `heaps` library with pairing heap implementation.

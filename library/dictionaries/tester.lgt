@@ -24,13 +24,14 @@
 	logtalk_load(basic_types(loader)),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(
-		[dictionaryp, avltree, bintree, rbtree],
+		[dictionaryp, avltree, bintree, rbtree, splaytree],
 		[debug(on), source_data(on)]
 	),
 	logtalk_load(tests, [hook(lgtunit)]),
 	lgtunit::run_test_sets([
 		tests(avltree),
 		tests(bintree),
-		tests(rbtree)
+		tests(rbtree),
+		tests(splaytree)
 	])
 )).

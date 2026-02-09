@@ -31,11 +31,11 @@
 	extends(term)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:10:0,
 		author is 'Vitor Santos Costa; Logtalk port and additional predicates by Paulo Moura.',
-		date is 2021-04-12,
+		date is 2026-02-09,
 		comment is 'Red-Black tree implementation of the dictionary protocol. Uses standard order to compare keys.',
-		see_also is [avltree, bintree]
+		see_also is [avltree, splaytree, bintree]
 	]).
 
 	:- public(partial_map/4).

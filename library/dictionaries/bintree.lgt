@@ -24,11 +24,11 @@
 	extends(term)).
 
 	:- info([
-		version is 2:11:1,
+		version is 2:12:0,
 		author is 'Paulo Moura and Paul Fodor',
-		date is 2022-05-05,
+		date is 2026-02-09,
 		comment is 'Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.',
-		see_also is [avltree, rbtree]
+		see_also is [avltree, rbtree, splaytree]
 	]).
 
 	:- public(preorder/2).

@@ -1,20 +1,20 @@
-.. index:: single: bintree
-.. _bintree/0:
+.. index:: single: splaytree
+.. _splaytree/0:
 
 .. rst-class:: right
 
 **object**
 
-``bintree``
-===========
+``splaytree``
+=============
 
-Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.
+Splay tree implementation of the dictionary protocol. A splay tree is a self-adjusting binary search tree with the property that recently accessed elements are quick to access again. Uses standard order to compare keys.
 
 | **Availability:** 
 |    ``logtalk_load(dictionaries(loader))``
 
-| **Author:** Paulo Moura and Paul Fodor
-| **Version:** 2:12:0
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
 | **Date:** 2026-02-09
 
 | **Compilation flags:**
@@ -41,62 +41,7 @@ Simple binary tree implementation of the dictionary protocol. Uses standard orde
 Public predicates
 -----------------
 
-.. index:: preorder/2
-.. _bintree/0::preorder/2:
-
-``preorder/2``
-^^^^^^^^^^^^^^
-
-Preorder tree traversal.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``preorder(Tree,List)``
-| **Mode and number of proofs:**
-|    ``preorder(@tree,-list)`` - ``one``
-
-
-------------
-
-.. index:: inorder/2
-.. _bintree/0::inorder/2:
-
-``inorder/2``
-^^^^^^^^^^^^^
-
-Inorder tree traversal.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``inorder(Tree,List)``
-| **Mode and number of proofs:**
-|    ``inorder(@tree,-list)`` - ``one``
-
-
-------------
-
-.. index:: postorder/2
-.. _bintree/0::postorder/2:
-
-``postorder/2``
-^^^^^^^^^^^^^^^
-
-Postorder tree traversal.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``postorder(Tree,List)``
-| **Mode and number of proofs:**
-|    ``postorder(@tree,-list)`` - ``one``
-
-
-------------
+(no local declarations; see entity ancestors if any)
 
 Protected predicates
 --------------------
@@ -115,5 +60,5 @@ Operators
 
 .. seealso::
 
-   :ref:`avltree <avltree/0>`, :ref:`rbtree <rbtree/0>`, :ref:`splaytree <splaytree/0>`
+   :ref:`avltree <avltree/0>`, :ref:`bintree <bintree/0>`, :ref:`rbtree <rbtree/0>`
 

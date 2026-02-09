@@ -22,11 +22,11 @@
 :- protocol(dictionaryp).
 
 	:- info([
-		version is 2:4:0,
+		version is 2:5:0,
 		author is 'Paulo Moura',
-		date is 2024-10-02,
+		date is 2026-02-09,
 		comment is 'Dictionary protocol.',
-		see_also is [avltree, bintree, rbtree]
+		see_also is [avltree, bintree, rbtree, splaytree]
 	]).
 
 	:- public(as_dictionary/2).
