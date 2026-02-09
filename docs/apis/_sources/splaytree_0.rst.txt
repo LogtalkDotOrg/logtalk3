@@ -14,7 +14,7 @@ Splay tree implementation of the dictionary protocol. A splay tree is a self-adj
 |    ``logtalk_load(dictionaries(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
+| **Version:** 1:1:0
 | **Date:** 2026-02-09
 
 | **Compilation flags:**
@@ -41,7 +41,24 @@ Splay tree implementation of the dictionary protocol. A splay tree is a self-adj
 Public predicates
 -----------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: lookup/4
+.. _splaytree/0::lookup/4:
+
+``lookup/4``
+^^^^^^^^^^^^
+
+Lookups a key-value pair from a tree and returns the splayed tree with the key at the root. Fails if the key is not found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lookup(Key,Value,Tree,SplayedTree)``
+| **Mode and number of proofs:**
+|    ``lookup(+ground,?term,+tree,-tree)`` - ``zero_or_one``
+
+
+------------
 
 Protected predicates
 --------------------

@@ -1,0 +1,611 @@
+.. index:: single: memcached
+.. _memcached/0:
+
+.. rst-class:: right
+
+**object**
+
+``memcached``
+=============
+
+Portable Memcached client implementing the text (ASCII) protocol. Uses the sockets library for TCP communication.
+
+| **Availability:** 
+|    ``logtalk_load(memcached(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`socket <socket/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+
+   - Supported backends: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog (same as the sockets library).
+   - Protocol version: Implements the Memcached text (ASCII) protocol as documented in the official protocol.txt specification.
+   - Connection: The default Memcached port is 11211. Connections are represented as opaque handles that should be passed to all other predicates.
+   - Keys: Keys are atoms up to 250 characters. They must not include control characters or whitespace.
+   - Flags: Flags are 32-bit unsigned integers stored alongside the data, opaque to the server.
+   - Expiration: Expiration time in seconds. 0 means never expire. Values over 30 days (2592000) are treated as Unix timestamps.
+   - Storage commands: Supports set, add, replace, append, prepend, and cas (check-and-set).
+   - Retrieval commands: Supports get, gets (with CAS token), gat, and gats (get-and-touch).
+   - Other commands: Supports delete, incr/decr, touch, flush_all, version, stats, and quit.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: connect/3
+.. _memcached/0::connect/3:
+
+``connect/3``
+^^^^^^^^^^^^^
+
+Connects to a Memcached server at the given host and port. Returns a connection handle for subsequent operations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``connect(Host,Port,Connection)``
+| **Mode and number of proofs:**
+|    ``connect(+atom,+integer,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Connection refused or network error:
+|        ``error(memcached_error(connection_failed), Context)``
+
+
+------------
+
+.. index:: connect/2
+.. _memcached/0::connect/2:
+
+``connect/2``
+^^^^^^^^^^^^^
+
+Connects to a Memcached server at the given host on the default port (11211). Returns a connection handle for subsequent operations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``connect(Host,Connection)``
+| **Mode and number of proofs:**
+|    ``connect(+atom,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Connection refused or network error:
+|        ``error(memcached_error(connection_failed), Context)``
+
+
+------------
+
+.. index:: disconnect/1
+.. _memcached/0::disconnect/1:
+
+``disconnect/1``
+^^^^^^^^^^^^^^^^
+
+Disconnects from the Memcached server. Sends a quit command before closing.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``disconnect(Connection)``
+| **Mode and number of proofs:**
+|    ``disconnect(+compound)`` - ``one``
+
+
+------------
+
+.. index:: set/5
+.. _memcached/0::set/5:
+
+``set/5``
+^^^^^^^^^
+
+Stores the data unconditionally. Overwrites any existing data for the key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``set(Connection,Key,Value,Flags,ExpTime)``
+| **Mode and number of proofs:**
+|    ``set(+compound,+atom,+atom,+integer,+integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Storage failed:
+|        ``error(memcached_error(not_stored), Context)``
+|    Network error:
+|        ``error(memcached_error(Error), Context)``
+
+
+------------
+
+.. index:: set/3
+.. _memcached/0::set/3:
+
+``set/3``
+^^^^^^^^^
+
+Stores the data unconditionally with default flags (0) and no expiration (0).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``set(Connection,Key,Value)``
+| **Mode and number of proofs:**
+|    ``set(+compound,+atom,+atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Storage failed:
+|        ``error(memcached_error(not_stored), Context)``
+|    Network error:
+|        ``error(memcached_error(Error), Context)``
+
+
+------------
+
+.. index:: add/5
+.. _memcached/0::add/5:
+
+``add/5``
+^^^^^^^^^
+
+Stores the data only if the key does not already exist.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add(Connection,Key,Value,Flags,ExpTime)``
+| **Mode and number of proofs:**
+|    ``add(+compound,+atom,+atom,+integer,+integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Key already exists:
+|        ``error(memcached_error(not_stored), Context)``
+|    Network error:
+|        ``error(memcached_error(Error), Context)``
+
+
+------------
+
+.. index:: replace/5
+.. _memcached/0::replace/5:
+
+``replace/5``
+^^^^^^^^^^^^^
+
+Stores the data only if the key already exists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``replace(Connection,Key,Value,Flags,ExpTime)``
+| **Mode and number of proofs:**
+|    ``replace(+compound,+atom,+atom,+integer,+integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Key does not exist:
+|        ``error(memcached_error(not_stored), Context)``
+|    Network error:
+|        ``error(memcached_error(Error), Context)``
+
+
+------------
+
+.. index:: append/3
+.. _memcached/0::append/3:
+
+``append/3``
+^^^^^^^^^^^^
+
+Appends the data to the end of an existing item's data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``append(Connection,Key,Value)``
+| **Mode and number of proofs:**
+|    ``append(+compound,+atom,+atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Key does not exist:
+|        ``error(memcached_error(not_stored), Context)``
+|    Network error:
+|        ``error(memcached_error(Error), Context)``
+
+
+------------
+
+.. index:: prepend/3
+.. _memcached/0::prepend/3:
+
+``prepend/3``
+^^^^^^^^^^^^^
+
+Prepends the data to the beginning of an existing item's data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prepend(Connection,Key,Value)``
+| **Mode and number of proofs:**
+|    ``prepend(+compound,+atom,+atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Key does not exist:
+|        ``error(memcached_error(not_stored), Context)``
+|    Network error:
+|        ``error(memcached_error(Error), Context)``
+
+
+------------
+
+.. index:: cas/6
+.. _memcached/0::cas/6:
+
+``cas/6``
+^^^^^^^^^
+
+Stores the data only if no one else has updated it since the given CAS unique value was obtained (via gets/3).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cas(Connection,Key,Value,Flags,ExpTime,CasUnique)``
+| **Mode and number of proofs:**
+|    ``cas(+compound,+atom,+atom,+integer,+integer,+integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    CAS value mismatch (item modified by another client):
+|        ``error(memcached_error(exists), Context)``
+|    Key does not exist:
+|        ``error(memcached_error(not_found), Context)``
+|    Network error:
+|        ``error(memcached_error(Error), Context)``
+
+
+------------
+
+.. index:: get/3
+.. _memcached/0::get/3:
+
+``get/3``
+^^^^^^^^^
+
+Retrieves the value associated with the key. Fails if the key is not found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``get(Connection,Key,Value)``
+| **Mode and number of proofs:**
+|    ``get(+compound,+atom,-atom)`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: get/4
+.. _memcached/0::get/4:
+
+``get/4``
+^^^^^^^^^
+
+Retrieves the value and flags associated with the key. Fails if the key is not found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``get(Connection,Key,Value,Flags)``
+| **Mode and number of proofs:**
+|    ``get(+compound,+atom,-atom,-integer)`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: gets/4
+.. _memcached/0::gets/4:
+
+``gets/4``
+^^^^^^^^^^
+
+Retrieves the value and CAS unique token for the key. Fails if the key is not found. The CAS value is used with the cas/6 predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``gets(Connection,Key,Value,CasUnique)``
+| **Mode and number of proofs:**
+|    ``gets(+compound,+atom,-atom,-integer)`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: gets/5
+.. _memcached/0::gets/5:
+
+``gets/5``
+^^^^^^^^^^
+
+Retrieves the value, flags, and CAS unique token for the key. Fails if the key is not found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``gets(Connection,Key,Value,Flags,CasUnique)``
+| **Mode and number of proofs:**
+|    ``gets(+compound,+atom,-atom,-integer,-integer)`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: mget/3
+.. _memcached/0::mget/3:
+
+``mget/3``
+^^^^^^^^^^
+
+Retrieves multiple keys at once. Returns a list of ``item(Key, Value, Flags)`` terms for found keys.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mget(Connection,Keys,Items)``
+| **Mode and number of proofs:**
+|    ``mget(+compound,+list(atom),-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: delete/2
+.. _memcached/0::delete/2:
+
+``delete/2``
+^^^^^^^^^^^^
+
+Deletes the item with the given key. Fails if the key is not found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete(Connection,Key)``
+| **Mode and number of proofs:**
+|    ``delete(+compound,+atom)`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: incr/4
+.. _memcached/0::incr/4:
+
+``incr/4``
+^^^^^^^^^^
+
+Increments the numeric value of the given key by the specified amount. Returns the new value. The item must already exist and contain a decimal representation of a 64-bit unsigned integer. Fails if the key is not found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``incr(Connection,Key,Amount,NewValue)``
+| **Mode and number of proofs:**
+|    ``incr(+compound,+atom,+integer,-integer)`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: decr/4
+.. _memcached/0::decr/4:
+
+``decr/4``
+^^^^^^^^^^
+
+Decrements the numeric value of the given key by the specified amount. Returns the new value. Underflow is caught: decrementing below 0 yields 0. Fails if the key is not found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decr(Connection,Key,Amount,NewValue)``
+| **Mode and number of proofs:**
+|    ``decr(+compound,+atom,+integer,-integer)`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: touch/3
+.. _memcached/0::touch/3:
+
+``touch/3``
+^^^^^^^^^^^
+
+Updates the expiration time of the given key without fetching the data. Fails if the key is not found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``touch(Connection,Key,ExpTime)``
+| **Mode and number of proofs:**
+|    ``touch(+compound,+atom,+integer)`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: gat/4
+.. _memcached/0::gat/4:
+
+``gat/4``
+^^^^^^^^^
+
+Gets the value of the key and updates its expiration time. Fails if the key is not found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``gat(Connection,Key,ExpTime,Value)``
+| **Mode and number of proofs:**
+|    ``gat(+compound,+atom,+integer,-atom)`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: gats/5
+.. _memcached/0::gats/5:
+
+``gats/5``
+^^^^^^^^^^
+
+Gets the value and CAS unique token of the key and updates its expiration time. Fails if the key is not found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``gats(Connection,Key,ExpTime,Value,CasUnique)``
+| **Mode and number of proofs:**
+|    ``gats(+compound,+atom,+integer,-atom,-integer)`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: flush_all/1
+.. _memcached/0::flush_all/1:
+
+``flush_all/1``
+^^^^^^^^^^^^^^^
+
+Invalidates all existing items immediately.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``flush_all(Connection)``
+| **Mode and number of proofs:**
+|    ``flush_all(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: flush_all/2
+.. _memcached/0::flush_all/2:
+
+``flush_all/2``
+^^^^^^^^^^^^^^^
+
+Invalidates all existing items after the specified number of seconds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``flush_all(Connection,Delay)``
+| **Mode and number of proofs:**
+|    ``flush_all(+compound,+integer)`` - ``one_or_error``
+
+
+------------
+
+.. index:: version/2
+.. _memcached/0::version/2:
+
+``version/2``
+^^^^^^^^^^^^^
+
+Returns the version string of the Memcached server.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``version(Connection,Version)``
+| **Mode and number of proofs:**
+|    ``version(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: stats/2
+.. _memcached/0::stats/2:
+
+``stats/2``
+^^^^^^^^^^^
+
+Returns general-purpose statistics as a list of ``stat(Name, Value)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stats(Connection,Stats)``
+| **Mode and number of proofs:**
+|    ``stats(+compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: stats/3
+.. _memcached/0::stats/3:
+
+``stats/3``
+^^^^^^^^^^^
+
+Returns statistics for the given argument (e.g. ``items``, ``slabs``, ``sizes``) as a list of ``stat(Name, Value)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stats(Connection,Argument,Stats)``
+| **Mode and number of proofs:**
+|    ``stats(+compound,+atom,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

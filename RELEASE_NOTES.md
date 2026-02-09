@@ -100,6 +100,8 @@ SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 * ADDED: New `sockets` high-level compatibility library. Supports ECLiPSe,
 GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.
 
+* ADDED: New `memcached` library implementing a Memcached client.
+
 * ADDED: New `stomp` library implementing a STOMP (Simple Text Orientated
 Messaging Protocol) client. Supports ECLiPSe, GNU Prolog, SICStus Prolog,
 SWI-Prolog, and Trealla Prolog.

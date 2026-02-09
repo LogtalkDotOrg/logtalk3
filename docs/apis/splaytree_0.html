@@ -127,6 +127,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#listing"><span class="xref std std-ref">listing</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#logging"><span class="xref std std-ref">logging</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#memcached"><span class="xref std std-ref">memcached</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta"><span class="xref std std-ref">meta</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta-compiler"><span class="xref std std-ref">meta_compiler</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a></li>
@@ -228,7 +229,7 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
+<div class="line"><strong>Version:</strong> 1:1:0</div>
 <div class="line"><strong>Date:</strong> 2026-02-09</div>
 </div>
 <div class="line-block">
@@ -265,16 +266,40 @@
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id4">Operators</a></p></li>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#lookup-4" id="id2"><code class="docutils literal notranslate"><span class="pre">lookup/4</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id3">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id4">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id5">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<section id="lookup-4">
+<span id="splaytree-0-lookup-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">lookup/4</span></code></a><a class="headerlink" href="#lookup-4" title="Link to this heading"></a></h3>
+<p>Lookups a key-value pair from a tree and returns the splayed tree with the key at the root. Fails if the key is not found.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lookup(Key,Value,Tree,SplayedTree)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lookup(+ground,?term,+tree,-tree)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </section>
+</section>
+<hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>

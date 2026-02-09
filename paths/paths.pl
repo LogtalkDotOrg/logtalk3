@@ -144,6 +144,7 @@ logtalk_library_path(json_ld, library('json_ld/')).
 logtalk_library_path(listing, library('listing/')).
 logtalk_library_path(logging, library('logging/')).
 logtalk_library_path(loops, library('loops/')).
+logtalk_library_path(memcached, library('memcached/')).
 logtalk_library_path(meta, library('meta/')).
 logtalk_library_path(meta_compiler, library('meta_compiler/')).
 logtalk_library_path(mutations, library('mutations/')).

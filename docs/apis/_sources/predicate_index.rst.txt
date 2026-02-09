@@ -212,6 +212,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`difflist <difflist/0::add/3>`
 * :ref:`registries <registries/0::add/3>`
 
+``add/5``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::add/5>`
+
 ``addDependent/1``
 ------------------
 
@@ -409,6 +419,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`listp <listp/0::append/3>`
+* :ref:`memcached <memcached/0::append/3>`
 * :ref:`queuep <queuep/0::append/3>`
 * :ref:`varlistp <varlistp/0::append/3>`
 
@@ -1044,6 +1055,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`subsequences_protocol <subsequences_protocol/0::cartesian_product/3>`
 
+``cas/6``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::cas/6>`
+
 ``cat/2``
 ---------
 
@@ -1628,6 +1649,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`redis <redis/0::connect/1>`
 
+``connect/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::connect/2>`
+
 ``connect/3``
 -------------
 
@@ -1636,6 +1667,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`memcached <memcached/0::connect/3>`
 * :ref:`redis <redis/0::connect/3>`
 
 ``connect/4``
@@ -2100,6 +2132,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`redis <redis/0::decr/3>`
 
+``decr/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::decr/4>`
+
 ``decrby/4``
 ------------
 
@@ -2240,6 +2282,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`memcached <memcached/0::delete/2>`
 * :ref:`registries <registries/0::delete/2>`
 
 ``delete/3``
@@ -2816,6 +2859,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`memcached <memcached/0::disconnect/1>`
 * :ref:`redis <redis/0::disconnect/1>`
 
 ``disconnect/2``
@@ -3739,6 +3783,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`number_grammars(Format) <number_grammars/1::float//1>`
 
+``flush_all/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::flush_all/1>`
+
+``flush_all/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::flush_all/2>`
+
 ``fold_left/4``
 ---------------
 
@@ -4153,6 +4217,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`sampling_protocol <sampling_protocol/0::gamma/3>`
 
+``gat/4``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::gat/4>`
+
+``gats/5``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::gats/5>`
+
 ``generate/1``
 --------------
 
@@ -4289,7 +4373,18 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`memcached <memcached/0::get/3>`
 * :ref:`redis <redis/0::get/3>`
+
+``get/4``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::get/4>`
 
 ``get_field/2``
 ---------------
@@ -4331,6 +4426,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`redis <redis/0::getrange/5>`
+
+``gets/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::gets/4>`
+
+``gets/5``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::gets/5>`
 
 ``gnu/0``
 ---------
@@ -4723,6 +4838,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`redis <redis/0::incr/3>`
+
+``incr/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::incr/4>`
 
 ``incrby/4``
 ------------
@@ -6331,6 +6456,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`dictionaryp <dictionaryp/0::lookup/3>`
 
+``lookup/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`splaytree <splaytree/0::lookup/4>`
+
 ``lookup_in/3``
 ---------------
 
@@ -6865,6 +7000,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`memcached <memcached/0::mget/3>`
 * :ref:`redis <redis/0::mget/3>`
 
 ``min/2``
@@ -8409,6 +8545,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`bintree <bintree/0::preorder/2>`
 
+``prepend/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::prepend/3>`
+
 ``previous/2``
 --------------
 
@@ -9183,6 +9329,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`zipperp <zipperp/0::replace/3>`
 
+``replace/5``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::replace/5>`
+
 ``replace_sub_atom/4``
 ----------------------
 
@@ -9905,6 +10061,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`counter <counter/0::set/1>`
 
+``set/3``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::set/3>`
+
 ``set/4``
 ---------
 
@@ -9915,6 +10081,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`random_protocol <random_protocol/0::set/4>`
 * :ref:`redis <redis/0::set/4>`
+
+``set/5``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::set/5>`
 
 ``set_element/2``
 -----------------
@@ -10469,6 +10645,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`intervalp <intervalp/0::starts/2>`
+
+``stats/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::stats/2>`
+
+``stats/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::stats/3>`
 
 ``stem/2``
 ----------
@@ -11168,6 +11364,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`heap_protocol <heap_protocol/0::top_next/5>`
 
+``touch/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`memcached <memcached/0::touch/3>`
+
 ``trace/0``
 -----------
 
@@ -11821,6 +12027,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::version/2>`
+* :ref:`memcached <memcached/0::version/2>`
 
 ``version/6``
 -------------

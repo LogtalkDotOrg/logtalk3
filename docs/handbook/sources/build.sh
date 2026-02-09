@@ -115,6 +115,7 @@ sed '1,19d' ../../../library/json_schema/NOTES.md | pandoc -f gfm -t rst -o libr
 sed '1,19d' ../../../library/listing/NOTES.md | pandoc -f gfm -t rst -o libraries/listing.rst
 sed '1,19d' ../../../library/logging/NOTES.md | pandoc -f gfm -t rst -o libraries/logging.rst
 sed '1,19d' ../../../library/loops/NOTES.md | pandoc -f gfm -t rst -o libraries/loops.rst
+sed '1,19d' ../../../library/memcached/NOTES.md | pandoc -f gfm -t rst -o libraries/memcached.rst
 sed '1,19d' ../../../library/meta/NOTES.md | pandoc -f gfm -t rst -o libraries/meta.rst
 sed '1,19d' ../../../library/meta_compiler/NOTES.md | pandoc -f gfm -t rst -o libraries/meta_compiler.rst
 sed '1,19d' ../../../library/mutations/NOTES.md | pandoc -f gfm -t rst -o libraries/mutations.rst

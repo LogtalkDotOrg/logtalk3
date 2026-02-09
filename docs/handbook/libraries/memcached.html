@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>memcached &mdash; Logtalk 3.98.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fd83a980"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="meta" href="meta.html" />
+    <link rel="prev" title="loops" href="loops.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.98.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignvars.html"><code class="docutils literal notranslate"><span class="pre">assignvars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="avro.html"><code class="docutils literal notranslate"><span class="pre">avro</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base32.html"><code class="docutils literal notranslate"><span class="pre">base32</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base58.html"><code class="docutils literal notranslate"><span class="pre">base58</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base64.html"><code class="docutils literal notranslate"><span class="pre">base64</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base85.html"><code class="docutils literal notranslate"><span class="pre">base85</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds.html"><code class="docutils literal notranslate"><span class="pre">ccsds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependents.html"><code class="docutils literal notranslate"><span class="pre">dependents</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="deques.html"><code class="docutils literal notranslate"><span class="pre">deques</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dictionaries.html"><code class="docutils literal notranslate"><span class="pre">dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dif.html"><code class="docutils literal notranslate"><span class="pre">dif</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html"><code class="docutils literal notranslate"><span class="pre">edcg</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html"><code class="docutils literal notranslate"><span class="pre">events</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="format.html"><code class="docutils literal notranslate"><span class="pre">format</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="genint.html"><code class="docutils literal notranslate"><span class="pre">genint</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchies.html"><code class="docutils literal notranslate"><span class="pre">hierarchies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ids.html"><code class="docutils literal notranslate"><span class="pre">ids</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="java.html"><code class="docutils literal notranslate"><span class="pre">java</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_ld.html"><code class="docutils literal notranslate"><span class="pre">json_ld</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_lines.html"><code class="docutils literal notranslate"><span class="pre">json_lines</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_schema.html"><code class="docutils literal notranslate"><span class="pre">json_schema</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="listing.html"><code class="docutils literal notranslate"><span class="pre">listing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loops.html"><code class="docutils literal notranslate"><span class="pre">loops</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">memcached</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#protocol-version">Protocol Version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#connecting-to-a-memcached-server">Connecting to a Memcached server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#storing-data">Storing data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#retrieving-data">Retrieving data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#check-and-set-cas">Check-and-Set (CAS)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deleting-data">Deleting data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#increment-decrement">Increment/Decrement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#touch-and-get-and-touch">Touch and Get-and-Touch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#server-management">Server management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#disconnecting">Disconnecting</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#api-summary">API Summary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#connection-management">Connection management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#storage-commands">Storage commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#retrieval-commands">Retrieval commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deletion">Deletion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#incrementdecrement-1">Increment/Decrement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#touch">Touch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#server-commands">Server commands</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#error-handling">Error Handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#key-format">Key Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#expiration-times">Expiration Times</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutations.html"><code class="docutils literal notranslate"><span class="pre">mutations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nested_dictionaries.html"><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html"><code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="docutils literal notranslate"><span class="pre">process</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="protobuf.html"><code class="docutils literal notranslate"><span class="pre">protobuf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reader.html"><code class="docutils literal notranslate"><span class="pre">reader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorded_database.html"><code class="docutils literal notranslate"><span class="pre">recorded_database</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sockets.html"><code class="docutils literal notranslate"><span class="pre">sockets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stemming.html"><code class="docutils literal notranslate"><span class="pre">stemming</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stomp.html"><code class="docutils literal notranslate"><span class="pre">stomp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="string_distance.html"><code class="docutils literal notranslate"><span class="pre">string_distance</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings.html"><code class="docutils literal notranslate"><span class="pre">strings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="subsequences.html"><code class="docutils literal notranslate"><span class="pre">subsequences</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="toon.html"><code class="docutils literal notranslate"><span class="pre">toon</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tsv.html"><code class="docutils literal notranslate"><span class="pre">tsv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ulid.html"><code class="docutils literal notranslate"><span class="pre">ulid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html"><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="union_find.html"><code class="docutils literal notranslate"><span class="pre">union_find</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="url.html"><code class="docutils literal notranslate"><span class="pre">url</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="uuid.html"><code class="docutils literal notranslate"><span class="pre">uuid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html"><code class="docutils literal notranslate"><span class="pre">yaml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="zippers.html"><code class="docutils literal notranslate"><span class="pre">zippers</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../apis/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Libraries</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">memcached</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/memcached.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="memcached">
+<span id="library-memcached"></span><h1><code class="docutils literal notranslate"><span class="pre">memcached</span></code><a class="headerlink" href="#memcached" title="Link to this heading"></a></h1>
+<p>Portable Memcached client implementing the text (ASCII) protocol. This
+library uses the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library and supports all backend Prolog
+systems supported by that library: ECLiPSe, GNU Prolog, SICStus Prolog,
+SWI-Prolog, and Trealla Prolog.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#memcached">../../apis/library_index.html#memcached</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(memcached(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(memcached(tester)).
+</pre></div>
+</div>
+<p>Note: Tests require a running Memcached server on <code class="docutils literal notranslate"><span class="pre">localhost</span></code> port
+<code class="docutils literal notranslate"><span class="pre">11211</span></code> (the default). To install and start Memcached:</p>
+<p>On macOS:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install memcached
+<span class="err">$</span> memcached <span class="o">-</span>d
+</pre></div>
+</div>
+<p>On Linux (Debian/Ubuntu):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo apt<span class="o">-</span>get install memcached
+<span class="err">$</span> sudo systemctl start memcached
+</pre></div>
+</div>
+<p>On Linux (RHEL/Fedora):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo dnf install memcached
+<span class="err">$</span> sudo systemctl start memcached
+</pre></div>
+</div>
+</section>
+<section id="protocol-version">
+<h2>Protocol Version<a class="headerlink" href="#protocol-version" title="Link to this heading"></a></h2>
+<p>This library implements the Memcached text (ASCII) protocol as
+documented in the official specification:</p>
+<p><a class="reference external" href="https://github.com/memcached/memcached/blob/master/doc/protocol.txt">https://github.com/memcached/memcached/blob/master/doc/protocol.txt</a></p>
+<p>The text protocol is the standard protocol supported by all Memcached
+clients and servers. All commands use simple text lines terminated by
+<code class="docutils literal notranslate"><span class="pre">\r\n</span></code>.</p>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Full storage command support: <code class="docutils literal notranslate"><span class="pre">set</span></code>, <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">replace</span></code>,
+<code class="docutils literal notranslate"><span class="pre">append</span></code>, <code class="docutils literal notranslate"><span class="pre">prepend</span></code>, <code class="docutils literal notranslate"><span class="pre">cas</span></code></p></li>
+<li><p>Retrieval commands: <code class="docutils literal notranslate"><span class="pre">get</span></code>, <code class="docutils literal notranslate"><span class="pre">gets</span></code> (with CAS token), multi-get,
+<code class="docutils literal notranslate"><span class="pre">gat</span></code>, <code class="docutils literal notranslate"><span class="pre">gats</span></code></p></li>
+<li><p>Key deletion with <code class="docutils literal notranslate"><span class="pre">delete</span></code></p></li>
+<li><p>Atomic increment/decrement with <code class="docutils literal notranslate"><span class="pre">incr</span></code>/<code class="docutils literal notranslate"><span class="pre">decr</span></code></p></li>
+<li><p>Item expiration management with <code class="docutils literal notranslate"><span class="pre">touch</span></code>, <code class="docutils literal notranslate"><span class="pre">gat</span></code>, <code class="docutils literal notranslate"><span class="pre">gats</span></code></p></li>
+<li><p>Server management: <code class="docutils literal notranslate"><span class="pre">flush_all</span></code>, <code class="docutils literal notranslate"><span class="pre">version</span></code>, <code class="docutils literal notranslate"><span class="pre">stats</span></code></p></li>
+<li><p>Graceful disconnect with <code class="docutils literal notranslate"><span class="pre">quit</span></code></p></li>
+<li><p>Proper handling of all protocol response codes</p></li>
+</ul>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="connecting-to-a-memcached-server">
+<h3>Connecting to a Memcached server<a class="headerlink" href="#connecting-to-a-memcached-server" title="Link to this heading"></a></h3>
+<p>Basic connection to localhost on the default port (11211):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>connect(localhost, <span class="nv">Connection</span>).
+</pre></div>
+</div>
+<p>Connection to a specific host and port:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>connect(<span class="s">&#39;cache.example.com&#39;</span>, <span class="m">11211</span>, <span class="nv">Connection</span>).
+</pre></div>
+</div>
+</section>
+<section id="storing-data">
+<h3>Storing data<a class="headerlink" href="#storing-data" title="Link to this heading"></a></h3>
+<p>Store a value unconditionally:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>set(<span class="nv">Connection</span>, my_key, <span class="s">&#39;Hello, World!&#39;</span>).
+</pre></div>
+</div>
+<p>Store with flags and expiration time (in seconds):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>set(<span class="nv">Connection</span>, my_key, <span class="s">&#39;Hello!&#39;</span>, <span class="m">0</span>, <span class="m">3600</span>).
+</pre></div>
+</div>
+<p>Store only if the key does not exist:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>add(<span class="nv">Connection</span>, new_key, <span class="s">&#39;New value&#39;</span>, <span class="m">0</span>, <span class="m">60</span>).
+</pre></div>
+</div>
+<p>Store only if the key already exists:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>replace(<span class="nv">Connection</span>, existing_key, <span class="s">&#39;Updated&#39;</span>, <span class="m">0</span>, <span class="m">60</span>).
+</pre></div>
+</div>
+<p>Append data to an existing value:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>append(<span class="nv">Connection</span>, my_key, <span class="s">&#39; World!&#39;</span>).
+</pre></div>
+</div>
+<p>Prepend data to an existing value:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>prepend(<span class="nv">Connection</span>, my_key, <span class="s">&#39;Hello &#39;</span>).
+</pre></div>
+</div>
+</section>
+<section id="retrieving-data">
+<h3>Retrieving data<a class="headerlink" href="#retrieving-data" title="Link to this heading"></a></h3>
+<p>Get a value by key:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>get(<span class="nv">Connection</span>, my_key, <span class="nv">Value</span>).
+</pre></div>
+</div>
+<p>Get a value with flags:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>get(<span class="nv">Connection</span>, my_key, <span class="nv">Value</span>, <span class="nv">Flags</span>).
+</pre></div>
+</div>
+<p>Get a value with CAS token (for optimistic locking):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>gets(<span class="nv">Connection</span>, my_key, <span class="nv">Value</span>, <span class="nv">CasUnique</span>).
+</pre></div>
+</div>
+<p>Get multiple keys at once:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>mget(<span class="nv">Connection</span>, [key1, key2, key3], <span class="nv">Items</span>).
+</pre></div>
+</div>
+</section>
+<section id="check-and-set-cas">
+<h3>Check-and-Set (CAS)<a class="headerlink" href="#check-and-set-cas" title="Link to this heading"></a></h3>
+<p>CAS provides optimistic locking for cache updates:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>gets(<span class="nv">Connection</span>, my_key, <span class="nv">Value</span>, <span class="nv">CasUnique</span>),
+   <span class="c">% ... process value ...</span>
+   memcached<span class="o">::</span>cas(<span class="nv">Connection</span>, my_key, <span class="s">&#39;New value&#39;</span>, <span class="m">0</span>, <span class="m">60</span>, <span class="nv">CasUnique</span>).
+</pre></div>
+</div>
+<p>If another client modifies the value between <code class="docutils literal notranslate"><span class="pre">gets</span></code> and <code class="docutils literal notranslate"><span class="pre">cas</span></code>, the
+<code class="docutils literal notranslate"><span class="pre">cas</span></code> command will throw <code class="docutils literal notranslate"><span class="pre">error(memcached_error(exists),</span> <span class="pre">_)</span></code>.</p>
+</section>
+<section id="deleting-data">
+<h3>Deleting data<a class="headerlink" href="#deleting-data" title="Link to this heading"></a></h3>
+<p>Delete an item by key:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>delete(<span class="nv">Connection</span>, my_key).
+</pre></div>
+</div>
+<p>Fails if the key does not exist.</p>
+</section>
+<section id="increment-decrement">
+<h3>Increment/Decrement<a class="headerlink" href="#increment-decrement" title="Link to this heading"></a></h3>
+<p>Atomically increment a numeric value:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>set(<span class="nv">Connection</span>, counter, <span class="s">&#39;100&#39;</span>),
+   memcached<span class="o">::</span>incr(<span class="nv">Connection</span>, counter, <span class="m">5</span>, <span class="nv">NewValue</span>).
+<span class="c">% NewValue = 105</span>
+</pre></div>
+</div>
+<p>Atomically decrement a numeric value:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>decr(<span class="nv">Connection</span>, counter, <span class="m">3</span>, <span class="nv">NewValue</span>).
+<span class="c">% NewValue = 102</span>
+</pre></div>
+</div>
+<p>Note: The item must already exist and contain a decimal representation
+of a 64-bit unsigned integer. Decrementing below 0 yields 0.</p>
+</section>
+<section id="touch-and-get-and-touch">
+<h3>Touch and Get-and-Touch<a class="headerlink" href="#touch-and-get-and-touch" title="Link to this heading"></a></h3>
+<p>Update expiration time without fetching:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>touch(<span class="nv">Connection</span>, my_key, <span class="m">3600</span>).
+</pre></div>
+</div>
+<p>Fetch and update expiration time in one operation:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>gat(<span class="nv">Connection</span>, my_key, <span class="m">3600</span>, <span class="nv">Value</span>).
+</pre></div>
+</div>
+<p>Fetch with CAS and update expiration:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>gats(<span class="nv">Connection</span>, my_key, <span class="m">3600</span>, <span class="nv">Value</span>, <span class="nv">CasUnique</span>).
+</pre></div>
+</div>
+</section>
+<section id="server-management">
+<h3>Server management<a class="headerlink" href="#server-management" title="Link to this heading"></a></h3>
+<p>Invalidate all items:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>flush_all(<span class="nv">Connection</span>).
+</pre></div>
+</div>
+<p>Invalidate all items after a delay (in seconds):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>flush_all(<span class="nv">Connection</span>, <span class="m">30</span>).
+</pre></div>
+</div>
+<p>Get server version:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>version(<span class="nv">Connection</span>, <span class="nv">Version</span>).
+</pre></div>
+</div>
+<p>Get server statistics:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>stats(<span class="nv">Connection</span>, <span class="nv">Stats</span>).
+</pre></div>
+</div>
+<p>Get specific statistics:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>stats(<span class="nv">Connection</span>, items, <span class="nv">Stats</span>).
+</pre></div>
+</div>
+</section>
+<section id="disconnecting">
+<h3>Disconnecting<a class="headerlink" href="#disconnecting" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> memcached<span class="o">::</span>disconnect(<span class="nv">Connection</span>).
+</pre></div>
+</div>
+</section>
+</section>
+<section id="api-summary">
+<h2>API Summary<a class="headerlink" href="#api-summary" title="Link to this heading"></a></h2>
+<section id="connection-management">
+<h3>Connection management<a class="headerlink" href="#connection-management" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">connect(+Host,</span> <span class="pre">+Port,</span> <span class="pre">-Connection)</span></code> - Connect to server</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connect(+Host,</span> <span class="pre">-Connection)</span></code> - Connect to server on default port</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">disconnect(+Connection)</span></code> - Disconnect from server</p></li>
+</ul>
+</section>
+<section id="storage-commands">
+<h3>Storage commands<a class="headerlink" href="#storage-commands" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">set(+Connection,</span> <span class="pre">+Key,</span> <span class="pre">+Value,</span> <span class="pre">+Flags,</span> <span class="pre">+ExpTime)</span></code> - Store
+unconditionally</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set(+Connection,</span> <span class="pre">+Key,</span> <span class="pre">+Value)</span></code> - Store with default flags and no
+expiration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add(+Connection,</span> <span class="pre">+Key,</span> <span class="pre">+Value,</span> <span class="pre">+Flags,</span> <span class="pre">+ExpTime)</span></code> - Store only if
+new</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">replace(+Connection,</span> <span class="pre">+Key,</span> <span class="pre">+Value,</span> <span class="pre">+Flags,</span> <span class="pre">+ExpTime)</span></code> - Store only
+if exists</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">append(+Connection,</span> <span class="pre">+Key,</span> <span class="pre">+Value)</span></code> - Append to existing value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prepend(+Connection,</span> <span class="pre">+Key,</span> <span class="pre">+Value)</span></code> - Prepend to existing value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cas(+Connection,</span> <span class="pre">+Key,</span> <span class="pre">+Value,</span> <span class="pre">+Flags,</span> <span class="pre">+ExpTime,</span> <span class="pre">+CasUnique)</span></code> -
+Check-and-set</p></li>
+</ul>
+</section>
+<section id="retrieval-commands">
+<h3>Retrieval commands<a class="headerlink" href="#retrieval-commands" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get(+Connection,</span> <span class="pre">+Key,</span> <span class="pre">-Value)</span></code> - Get value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get(+Connection,</span> <span class="pre">+Key,</span> <span class="pre">-Value,</span> <span class="pre">-Flags)</span></code> - Get value and flags</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gets(+Connection,</span> <span class="pre">+Key,</span> <span class="pre">-Value,</span> <span class="pre">-CasUnique)</span></code> - Get with CAS token</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gets(+Connection,</span> <span class="pre">+Key,</span> <span class="pre">-Value,</span> <span class="pre">-Flags,</span> <span class="pre">-CasUnique)</span></code> - Get with
+flags and CAS</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mget(+Connection,</span> <span class="pre">+Keys,</span> <span class="pre">-Items)</span></code> - Multi-get</p></li>
+</ul>
+</section>
+<section id="deletion">
+<h3>Deletion<a class="headerlink" href="#deletion" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">delete(+Connection,</span> <span class="pre">+Key)</span></code> - Delete item</p></li>
+</ul>
+</section>
+<section id="incrementdecrement-1">
+<span id="id1"></span><h3>Increment/Decrement<a class="headerlink" href="#incrementdecrement-1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">incr(+Connection,</span> <span class="pre">+Key,</span> <span class="pre">+Amount,</span> <span class="pre">-NewValue)</span></code> - Increment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">decr(+Connection,</span> <span class="pre">+Key,</span> <span class="pre">+Amount,</span> <span class="pre">-NewValue)</span></code> - Decrement</p></li>
+</ul>
+</section>
+<section id="touch">
+<h3>Touch<a class="headerlink" href="#touch" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">touch(+Connection,</span> <span class="pre">+Key,</span> <span class="pre">+ExpTime)</span></code> - Update expiration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gat(+Connection,</span> <span class="pre">+Key,</span> <span class="pre">+ExpTime,</span> <span class="pre">-Value)</span></code> - Get and touch</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gats(+Connection,</span> <span class="pre">+Key,</span> <span class="pre">+ExpTime,</span> <span class="pre">-Value,</span> <span class="pre">-CasUnique)</span></code> -
+Get-and-touch with CAS</p></li>
+</ul>
+</section>
+<section id="server-commands">
+<h3>Server commands<a class="headerlink" href="#server-commands" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">flush_all(+Connection)</span></code> - Invalidate all items</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flush_all(+Connection,</span> <span class="pre">+Delay)</span></code> - Invalidate all items after delay</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">version(+Connection,</span> <span class="pre">-Version)</span></code> - Get server version</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stats(+Connection,</span> <span class="pre">-Stats)</span></code> - Get general statistics</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stats(+Connection,</span> <span class="pre">+Argument,</span> <span class="pre">-Stats)</span></code> - Get specific statistics</p></li>
+</ul>
+</section>
+</section>
+<section id="error-handling">
+<h2>Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading"></a></h2>
+<p>Most predicates throw <code class="docutils literal notranslate"><span class="pre">error(memcached_error(Reason),</span> <span class="pre">Context)</span></code> on
+failure. Common error reasons:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_failed</span></code> - Could not establish TCP connection</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">not_stored</span></code> - Storage condition not met (e.g. <code class="docutils literal notranslate"><span class="pre">add</span></code> on existing
+key)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exists</span></code> - CAS conflict (item was modified by another client)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">not_found</span></code> - CAS on non-existent key</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">server_error(Message)</span></code> - Server returned an error</p></li>
+</ul>
+<p>Retrieval predicates (<code class="docutils literal notranslate"><span class="pre">get</span></code>, <code class="docutils literal notranslate"><span class="pre">gets</span></code>, <code class="docutils literal notranslate"><span class="pre">gat</span></code>, <code class="docutils literal notranslate"><span class="pre">gats</span></code>) fail (rather
+than throw) when the requested key is not found. The <code class="docutils literal notranslate"><span class="pre">delete</span></code>,
+<code class="docutils literal notranslate"><span class="pre">incr</span></code>, <code class="docutils literal notranslate"><span class="pre">decr</span></code>, and <code class="docutils literal notranslate"><span class="pre">touch</span></code> predicates also fail when the key is
+not found.</p>
+</section>
+<section id="key-format">
+<h2>Key Format<a class="headerlink" href="#key-format" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Keys are atoms up to 250 characters</p></li>
+<li><p>Keys must not contain control characters or whitespace</p></li>
+<li><p>Keys are case-sensitive</p></li>
+</ul>
+</section>
+<section id="expiration-times">
+<h2>Expiration Times<a class="headerlink" href="#expiration-times" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> means the item never expires (may still be evicted by LRU)</p></li>
+<li><p>Values up to 2592000 (30 days) are treated as relative seconds</p></li>
+<li><p>Values over 2592000 are treated as absolute Unix timestamps</p></li>
+<li><p>Negative values cause immediate expiration</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="loops.html" class="btn btn-neutral float-left" title="loops" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="meta.html" class="btn btn-neutral float-right" title="meta" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2026, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

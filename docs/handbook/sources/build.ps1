@@ -114,6 +114,7 @@ Foreach-Object {
 (Get-Content ../../../library/json_schema/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_schema.rst
 (Get-Content ../../../library/logging/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/logging.rst
 (Get-Content ../../../library/loops/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/loops.rst
+(Get-Content ../../../library/memcached/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/memcached.rst
 (Get-Content ../../../library/meta/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/meta.rst
 (Get-Content ../../../library/meta_compiler/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/meta_compiler.rst
 (Get-Content ../../../library/mutations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mutations.rst

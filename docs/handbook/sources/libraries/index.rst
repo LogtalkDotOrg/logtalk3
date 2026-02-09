@@ -70,6 +70,7 @@ directory in the ``NOTES.md`` file.
    listing
    logging
    loops
+   memcached
    meta
    meta_compiler
    mutations
