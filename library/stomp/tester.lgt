@@ -33,7 +33,7 @@
 :- elif((
 	current_logtalk_flag(prolog_dialect, trealla),
 	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
-	v(Major, Minor, Patch) @< v(2, 90, 2)
+	v(Major, Minor, Patch) @< v(2, 90, 3)
 )).
 
 	:- initialization((

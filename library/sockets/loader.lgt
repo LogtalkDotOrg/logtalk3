@@ -25,7 +25,7 @@
 		Dialect == sicstus; Dialect \== swi;
 		Dialect == trealla,
 		current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
-		v(Major, Minor, Patch) @>= v(2, 90, 2)
+		v(Major, Minor, Patch) @>= v(2, 90, 3)
 	)
 )).
 
