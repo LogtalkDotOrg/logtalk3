@@ -190,8 +190,8 @@ the bug report.
 * FIXED: The compatibility of the standard `(^)/2` function tests with 32 bits
 systems with bounded integers. Thanks to Daniel Diaz for the bug report.
 
-VCS support
------------
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
 
 * UPDATED: The VSCode support to include per entity and per entity predicate
 code coverage data when creating test results files.
@@ -199,6 +199,9 @@ code coverage data when creating test results files.
 * UPDATED: The `Logtalk.gitignore`, `Logtalk.hgignore`, and `Logtalk.p4ignore`
 template files to also ignore the temporary files created by the Logtalk for
 VSCode extension.
+
+* FIXED: The EditorConfig files to use space-based indentation for Markdown
+files.
 
 
 3.97.1 - December 30, 2025
