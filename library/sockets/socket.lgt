@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:8:1,
 		author is 'Paulo Moura',
-		date is 2026-02-09,
+		date is 2026-02-10,
 		comment is 'Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.',
@@ -330,21 +330,21 @@
 		socket:tcp_bind(Socket, Port),
 		socket:tcp_listen(Socket, N).
 
-	server_accept_(server_socket(Socket, _), Input, Output, client(Host, Port), Options) :-
+	server_accept_(server_socket(Socket, _), Input, Output, client(Client), Options) :-
 		socket:tcp_accept(Socket, ClientSocket, Peer),
 		socket:tcp_open_socket(ClientSocket, Input, Output),
 		memberchk(type(Type), Options),
 		set_stream(Input, type(Type)),
 		set_stream(Output, type(Type)),
-		peer_to_host_port(Peer, Host, Port).
+		peer_to_host_port(Peer, Client).
 
-	peer_to_host_port(ip(A, B, C, D):Port, Host, Port) :-
+	peer_to_host_port(ip(A, B, C, D), Host) :-
 		!,
 		format(atom(Host), '~w.~w.~w.~w', [A, B, C, D]).
-	peer_to_host_port(Host:Port, Host, Port) :-
+	peer_to_host_port(Host, Host) :-
 		atom(Host),
 		!.
-	peer_to_host_port(_, unknown, 0).
+	peer_to_host_port(_, unknown).
 
 	server_close_(server_socket(Socket, _)) :-
 		socket:tcp_close_socket(Socket).
