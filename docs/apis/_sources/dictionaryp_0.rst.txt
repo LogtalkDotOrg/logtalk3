@@ -14,8 +14,8 @@ Dictionary protocol.
 |    ``logtalk_load(dictionaries(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:5:0
-| **Date:** 2026-02-09
+| **Version:** 2:6:0
+| **Date:** 2026-02-10
 
 | **Compilation flags:**
 |    ``static``
@@ -243,6 +243,25 @@ True iff the dictionary is empty.
 |    ``empty(Dictionary)``
 | **Mode and number of proofs:**
 |    ``empty(@dictionary)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: lookup/4
+.. _dictionaryp/0::lookup/4:
+
+``lookup/4``
+^^^^^^^^^^^^
+
+Lookups a matching key-value pair from a dictionary and returns the splayed dictionary with the key at the root. Fails if the key is not found. In implementations that do not update the dictionary on lookup, the same dictionary is returned.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lookup(Key,Value,Dictionary,SplayedDictionary)``
+| **Mode and number of proofs:**
+|    ``lookup(+ground,?term,+tree,-tree)`` - ``zero_or_one``
 
 
 ------------

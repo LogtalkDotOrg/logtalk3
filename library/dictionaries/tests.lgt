@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:10:0,
+		version is 1:11:0,
 		author is 'Paulo Moura',
-		date is 2024-10-02,
+		date is 2026-02-10,
 		comment is 'Unit tests for the "dictionaries" library.',
 		parnames is ['DictionaryObject']
 	]).
@@ -279,13 +279,13 @@
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		\+ empty(Dictionary).
 
-	% lookup/4 tests (currently only provided by the splaytree implementation)
+	% lookup/4 tests (currently only meaningful for the splaytree implementation)
 
-	test(dictionary_lookup_4_01, false, [condition(current_predicate(lookup/4))]) :-
+	test(dictionary_lookup_4_01, false) :-
 		as_dictionary([], Dictionary),
 		lookup(b, _, Dictionary, _).
 
-	test(dictionary_lookup_4_02, deterministic, [condition(current_predicate(lookup/4))]) :-
+	test(dictionary_lookup_4_02, deterministic) :-
 		Pairs = [j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4],
 		as_dictionary(Pairs, Dictionary),
 		lookup(h, Value, Dictionary, SplayedDictionary),

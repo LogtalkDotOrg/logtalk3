@@ -24,9 +24,9 @@
 	extends(term)).
 
 	:- info([
-		version is 2:12:0,
+		version is 2:13:0,
 		author is 'Paulo Moura and Paul Fodor',
-		date is 2026-02-09,
+		date is 2026-02-10,
 		comment is 'Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.',
 		see_also is [avltree, rbtree, splaytree]
 	]).
@@ -205,6 +205,9 @@
 	lookup([Key-Value| Pairs], Tree) :-
 		lookup(Key, Value, Tree),
 		lookup(Pairs, Tree).
+
+	lookup(Key, Value, Tree, Tree) :-
+		lookup(Key, Value, Tree).
 
 	intersection(Tree1, Tree2) :-
 		inorder(Tree1, Pairs),

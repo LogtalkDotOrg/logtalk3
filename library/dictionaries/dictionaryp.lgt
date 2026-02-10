@@ -22,9 +22,9 @@
 :- protocol(dictionaryp).
 
 	:- info([
-		version is 2:5:0,
+		version is 2:6:0,
 		author is 'Paulo Moura',
-		date is 2026-02-09,
+		date is 2026-02-10,
 		comment is 'Dictionary protocol.',
 		see_also is [avltree, bintree, rbtree, splaytree]
 	]).
@@ -104,6 +104,13 @@
 	:- info(empty/1, [
 		comment is 'True iff the dictionary is empty.',
 		argnames is ['Dictionary']
+	]).
+
+	:- public(lookup/4).
+	:- mode(lookup(+ground, ?term, +tree, -tree), zero_or_one).
+	:- info(lookup/4, [
+		comment is 'Lookups a matching key-value pair from a dictionary and returns the splayed dictionary with the key at the root. Fails if the key is not found. In implementations that do not update the dictionary on lookup, the same dictionary is returned.',
+		argnames is ['Key', 'Value', 'Dictionary', 'SplayedDictionary']
 	]).
 
 	:- public(lookup/3).

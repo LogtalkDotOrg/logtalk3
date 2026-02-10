@@ -31,9 +31,9 @@
 	extends(term)).
 
 	:- info([
-		version is 1:10:0,
+		version is 1:11:0,
 		author is 'Vitor Santos Costa; Logtalk port and additional predicates by Paulo Moura.',
-		date is 2026-02-09,
+		date is 2026-02-10,
 		comment is 'Red-Black tree implementation of the dictionary protocol. Uses standard order to compare keys.',
 		see_also is [avltree, splaytree, bintree]
 	]).
@@ -95,6 +95,9 @@
 	lookup([Key-Value| Pairs], Tree) :-
 		lookup(Key, Value, Tree),
 		lookup(Pairs, Tree).
+
+	lookup(Key, Value, Tree, Tree) :-
+		lookup(Key, Value, Tree).
 
 	intersection(Tree1, Tree2) :-
 		as_list(Tree1, Pairs),

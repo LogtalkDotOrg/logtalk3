@@ -24,18 +24,11 @@
 	extends(term)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-09,
+		date is 2026-02-10,
 		comment is 'Splay tree implementation of the dictionary protocol. A splay tree is a self-adjusting binary search tree with the property that recently accessed elements are quick to access again. Uses standard order to compare keys.',
 		see_also is [avltree, bintree, rbtree]
-	]).
-
-	:- public(lookup/4).
-	:- mode(lookup(+ground, ?term, +tree, -tree), zero_or_one).
-	:- info(lookup/4, [
-		comment is 'Lookups a key-value pair from a tree and returns the splayed tree with the key at the root. Fails if the key is not found.',
-		argnames is ['Key', 'Value', 'Tree', 'SplayedTree']
 	]).
 
 	% Tree representation:
@@ -197,7 +190,6 @@
 	insert_(>, Key1, Value1, Left1, Right1, Key, Value, t(Key1, Value1, Left1, Right2)) :-
 		insert(Right1, Key, Value, Right2).
 
-	% Lookup with potential splaying (but we don't return splayed tree per protocol)
 	lookup(Key, Value, Tree) :-
 		(	var(Key) ->
 			lookup_var(Key, Value, Tree)
@@ -225,7 +217,6 @@
 		lookup(Key, Value, Tree),
 		lookup(Pairs, Tree).
 
-	% Lookup with splaying, returning the splayed tree
 	lookup(Key, Value, Tree, SplayedTree) :-
 		splay(Tree, Key, SplayedTree),
 		SplayedTree = t(Key, Value, _, _).
