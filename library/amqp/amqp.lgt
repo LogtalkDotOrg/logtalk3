@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-10,
+		date is 2026-02-11,
 		comment is 'Portable AMQP 0-9-1 (Advanced Message Queuing Protocol) client. Uses the sockets library for TCP communication.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM (same as the sockets library).',
@@ -35,7 +35,8 @@
 			'Content' - 'Supports message publishing and consuming with content headers.',
 			'Transactions' - 'Supports AMQP transactions with tx.select, tx.commit, and tx.rollback.',
 			'Publisher confirms' - 'Support for publisher confirms can be added.',
-			'Heartbeat' - 'Supports heartbeat negotiation to keep connections alive.'
+			'Heartbeat' - 'Supports heartbeat negotiation to keep connections alive.',
+			'Reconnection' - 'Automatic reconnection with configurable retry attempts and delays.'
 		]
 	]).
 
@@ -46,7 +47,7 @@
 	:- public(connect/4).
 	:- mode(connect(+atom, +integer, --compound, +list), one_or_error).
 	:- info(connect/4, [
-		comment is 'Connects to an AMQP 0-9-1 server and performs the protocol handshake. Returns a connection handle for subsequent operations.',
+		comment is 'Connects to an AMQP 0-9-1 server and performs the protocol handshake. Returns a connection handle for subsequent operations. Supports automatic reconnection on connection failures.',
 		argnames is ['Host', 'Port', 'Connection', 'Options'],
 		remarks is [
 			'Option username(Username)' - 'Username for authentication. Default is guest.',
@@ -54,12 +55,16 @@
 			'Option virtual_host(VHost)' - 'Virtual host name. Default is /.',
 			'Option heartbeat(Seconds)' - 'Heartbeat interval in seconds. Default is 60.',
 			'Option channel_max(Max)' - 'Maximum number of channels. Default is 0 (no limit).',
-			'Option frame_max(Max)' - 'Maximum frame size. Default is 131072.'
+			'Option frame_max(Max)' - 'Maximum frame size. Default is 131072.',
+			'Option reconnect(Boolean)' - 'Enable automatic reconnection on connection failure. Default is false.',
+			'Option reconnect_attempts(N)' - 'Maximum number of reconnection attempts. Default is 3. Only used when reconnect(true).',
+			'Option reconnect_delay(Seconds)' - 'Delay between reconnection attempts in seconds. Default is 1. Only used when reconnect(true).'
 		],
 		exceptions is [
 			'Connection refused or network error' - amqp_error(connection_failed),
 			'Server rejected connection' - amqp_error(protocol_error('Message')),
-			'Authentication failed' - amqp_error(auth_failed)
+			'Authentication failed' - amqp_error(auth_failed),
+			'All reconnection attempts failed' - amqp_error(reconnect_failed)
 		]
 	]).
 
@@ -566,10 +571,37 @@
 
 	connect(Host, Port, Connection, Options) :-
 		context(Context),
+		option(reconnect(Reconnect), Options, false),
+		(	Reconnect == true ->
+			option(reconnect_attempts(MaxAttempts), Options, 3),
+			option(reconnect_delay(Delay), Options, 1),
+			connect_with_retry(Host, Port, Connection, Options, Context, MaxAttempts, Delay)
+		;	catch(
+				connect_(Host, Port, Connection, Options, Context),
+				Error,
+				throw(Error)
+			)
+		).
+
+	% Connect with automatic retry on failure
+	connect_with_retry(Host, Port, Connection, Options, Context, MaxAttempts, Delay) :-
+		connect_with_retry_(Host, Port, Connection, Options, Context, MaxAttempts, Delay, 1).
+
+	connect_with_retry_(Host, Port, Connection, Options, Context, MaxAttempts, Delay, Attempt) :-
 		catch(
 			connect_(Host, Port, Connection, Options, Context),
 			Error,
-			throw(Error)
+			(	Attempt < MaxAttempts ->
+				% Wait before retrying
+				os::sleep(Delay),
+				NextAttempt is Attempt + 1,
+				connect_with_retry_(Host, Port, Connection, Options, Context, MaxAttempts, Delay, NextAttempt)
+			;	% All attempts exhausted
+				(	Error = error(amqp_error(_), _) ->
+					throw(error(amqp_error(reconnect_failed), Context))
+				;	throw(Error)
+				)
+			)
 		).
 
 	connect_(Host, Port, Connection, Options, Context) :-
@@ -650,7 +682,7 @@
 		% Receive Connection.Open-Ok
 		read_frame(Input, OpenOkFrame, Context),
 		(	OpenOkFrame = frame(method, 0, connection, open_ok, _) ->
-			Connection = connection(Input, Output, Host, Port, NegotiatedChannelMax, NegotiatedFrameMax, NegotiatedHeartbeat)
+			Connection = connection(Input, Output, Host, Port, NegotiatedChannelMax, NegotiatedFrameMax, NegotiatedHeartbeat, Options)
 		;	socket::close(Input, Output),
 			throw(error(amqp_error(protocol_error('Expected Connection.Open-Ok')), Context))
 		).

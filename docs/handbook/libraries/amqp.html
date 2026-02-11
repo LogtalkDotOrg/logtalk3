@@ -239,6 +239,7 @@ ActiveMQ, and other brokers.</p>
 <ul class="simple">
 <li><p>Full AMQP 0-9-1 protocol support with binary frame encoding/decoding</p></li>
 <li><p>Connection management with heartbeat negotiation</p></li>
+<li><p>Automatic reconnection with configurable retry attempts and delays</p></li>
 <li><p>Multiple concurrent channels over a single connection</p></li>
 <li><p>Exchange operations: declare, delete, bind, unbind</p></li>
 <li><p>Queue operations: declare, delete, bind, unbind, purge</p></li>
@@ -291,6 +292,25 @@ guest/guest credentials.</p>
 ]).
 </pre></div>
 </div>
+<p>Connection with automatic reconnection enabled:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> amqp<span class="o">::</span>connect(localhost, <span class="m">5672</span>, <span class="nv">Connection</span>, [
+    reconnect(<span class="k">true</span>),
+    reconnect_attempts(<span class="m">5</span>),
+    reconnect_delay(<span class="m">2</span>)
+]).
+</pre></div>
+</div>
+<p>This will attempt to connect up to 5 times with a 2 second delay between
+attempts. If all attempts fail, an <code class="docutils literal notranslate"><span class="pre">amqp_error(reconnect_failed)</span></code>
+error is thrown. The reconnection options are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">reconnect(Boolean)</span></code> - Enable automatic reconnection (default:
+<code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reconnect_attempts(N)</span></code> - Maximum number of connection attempts
+(default: <code class="docutils literal notranslate"><span class="pre">3</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reconnect_delay(Seconds)</span></code> - Delay between attempts in seconds
+(default: <code class="docutils literal notranslate"><span class="pre">1</span></code>)</p></li>
+</ul>
 </section>
 <section id="opening-a-channel">
 <h3>Opening a channel<a class="headerlink" href="#opening-a-channel" title="Link to this heading"></a></h3>
@@ -570,7 +590,6 @@ significantly:</p>
 etc.)</p></li>
 <li><p>Categories for common message transformations</p></li>
 <li><p>Connection pooling</p></li>
-<li><p>Automatic reconnection</p></li>
 <li><p>Async message handlers</p></li>
 </ul>
 </section>

@@ -15,7 +15,7 @@ Portable AMQP 0-9-1 (Advanced Message Queuing Protocol) client. Uses the sockets
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-10
+| **Date:** 2026-02-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -23,6 +23,7 @@ Portable AMQP 0-9-1 (Advanced Message Queuing Protocol) client. Uses the sockets
 
 | **Uses:**
 |    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
 |    :ref:`socket <socket/0>`
 |    :ref:`term_io <term_io/0>`
 
@@ -37,6 +38,7 @@ Portable AMQP 0-9-1 (Advanced Message Queuing Protocol) client. Uses the sockets
    - Transactions: Supports AMQP transactions with tx.select, tx.commit, and tx.rollback.
    - Publisher confirms: Support for publisher confirms can be added.
    - Heartbeat: Supports heartbeat negotiation to keep connections alive.
+   - Reconnection: Automatic reconnection with configurable retry attempts and delays.
 
 | **Inherited public predicates:**
 |    (none)
@@ -54,7 +56,7 @@ Public predicates
 ``connect/4``
 ^^^^^^^^^^^^^
 
-Connects to an AMQP 0-9-1 server and performs the protocol handshake. Returns a connection handle for subsequent operations.
+Connects to an AMQP 0-9-1 server and performs the protocol handshake. Returns a connection handle for subsequent operations. Supports automatic reconnection on connection failures.
 
 | **Compilation flags:**
 |    ``static``
@@ -71,6 +73,8 @@ Connects to an AMQP 0-9-1 server and performs the protocol handshake. Returns a 
 |        ``amqp_error(protocol_error(Message))``
 |    Authentication failed:
 |        ``amqp_error(auth_failed)``
+|    All reconnection attempts failed:
+|        ``amqp_error(reconnect_failed)``
 
 | **Remarks:**
 
@@ -80,6 +84,9 @@ Connects to an AMQP 0-9-1 server and performs the protocol handshake. Returns a 
     - Option heartbeat(Seconds): Heartbeat interval in seconds. Default is 60.
     - Option channel_max(Max): Maximum number of channels. Default is 0 (no limit).
     - Option frame_max(Max): Maximum frame size. Default is 131072.
+    - Option reconnect(Boolean): Enable automatic reconnection on connection failure. Default is false.
+    - Option reconnect_attempts(N): Maximum number of reconnection attempts. Default is 3. Only used when reconnect(true).
+    - Option reconnect_delay(Seconds): Delay between reconnection attempts in seconds. Default is 1. Only used when reconnect(true).
 
 
 ------------

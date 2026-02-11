@@ -44,6 +44,7 @@ Features
 
 - Full AMQP 0-9-1 protocol support with binary frame encoding/decoding
 - Connection management with heartbeat negotiation
+- Automatic reconnection with configurable retry attempts and delays
 - Multiple concurrent channels over a single connection
 - Exchange operations: declare, delete, bind, unbind
 - Queue operations: declare, delete, bind, unbind, purge
@@ -99,6 +100,22 @@ Connection with custom credentials and virtual host:
 		virtual_host('/myvhost'),
 		heartbeat(30)
 	]).
+
+Connection with automatic reconnection enabled:
+
+	?- amqp::connect(localhost, 5672, Connection, [
+		reconnect(true),
+		reconnect_attempts(5),
+		reconnect_delay(2)
+	]).
+
+This will attempt to connect up to 5 times with a 2 second delay between
+attempts. If all attempts fail, an `amqp_error(reconnect_failed)` error
+is thrown. The reconnection options are:
+
+- `reconnect(Boolean)` - Enable automatic reconnection (default: `false`)
+- `reconnect_attempts(N)` - Maximum number of connection attempts (default: `3`)
+- `reconnect_delay(Seconds)` - Delay between attempts in seconds (default: `1`)
 
 
 ### Opening a channel
@@ -352,7 +369,6 @@ Planned enhancements for phase 2:
 - Logtalk protocols for messaging patterns (request/reply, pub/sub, etc.)
 - Categories for common message transformations
 - Connection pooling
-- Automatic reconnection
 - Async message handlers
 
 

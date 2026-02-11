@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-10,
+		date is 2026-02-11,
 		comment is 'Unit tests for the "amqp" library.'
 	]).
 
@@ -563,6 +563,28 @@
 	test(amqp_connect_with_heartbeat_01, true, [condition(amqp_server_available)]) :-
 		amqp::connect(localhost, 5672, Connection, [heartbeat(30)]),
 		amqp::close(Connection).
+
+	% Reconnection tests
+	test(amqp_connect_with_reconnect_disabled_01, true, [condition(amqp_server_available)]) :-
+		amqp::connect(localhost, 5672, Connection, [reconnect(false)]),
+		amqp::close(Connection).
+
+	test(amqp_connect_with_reconnect_enabled_01, true, [condition(amqp_server_available)]) :-
+		amqp::connect(localhost, 5672, Connection, [reconnect(true)]),
+		amqp::close(Connection).
+
+	test(amqp_connect_with_reconnect_options_01, true, [condition(amqp_server_available)]) :-
+		amqp::connect(localhost, 5672, Connection, [reconnect(true), reconnect_attempts(5), reconnect_delay(0.5)]),
+		amqp::close(Connection).
+
+	test(amqp_connect_reconnect_failure_01, error(amqp_error(reconnect_failed))) :-
+		% Try to connect to a port where nothing is listening
+		% Should fail after reconnect_attempts
+		amqp::connect(localhost, 59999, _, [reconnect(true), reconnect_attempts(2), reconnect_delay(0.1)]).
+
+	test(amqp_connect_no_reconnect_failure_01, error(amqp_error(connection_failed))) :-
+		% Without reconnect, should fail immediately with connection_failed
+		amqp::connect(localhost, 59999, _, [reconnect(false)]).
 
 	test(amqp_channel_open_close_01, true, [condition(amqp_server_available)]) :-
 		amqp::connect(localhost, 5672, Connection, []),
