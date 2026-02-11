@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
-This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>  
+This file is part of Logtalk <https://logtalk.org/>
+SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -404,6 +404,42 @@ Field values in tables use type tags:
 - `void` - No value
 
 
+Float/Double Encoding
+---------------------
+
+The library implements proper IEEE 754 encoding and decoding for floating-point
+values:
+
+**Float (32-bit IEEE 754 single precision):**
+- Format: 1 sign bit + 8 exponent bits (bias 127) + 23 mantissa bits
+- Encoded as 4 bytes in big-endian order
+- Used for `float(Value)` field values
+
+**Double (64-bit IEEE 754 double precision):**
+- Format: 1 sign bit + 11 exponent bits (bias 1023) + 52 mantissa bits  
+- Encoded as 8 bytes in big-endian order
+- Used for `double(Value)` field values
+
+**Special values representation:**
+
+The library represents IEEE 754 special values using Prolog compound terms:
+
+- `@infinity` - Positive infinity
+- `@negative_infinity` - Negative infinity  
+- `@not_a_number` - NaN (Not a Number)
+
+These special values are automatically encoded to and decoded from their
+standard IEEE 754 binary representations.
+
+**Known limitation:**
+
+Most Prolog backends cannot distinguish between `-0.0` and `0.0` when comparing
+floating-point values. While the library correctly encodes and decodes both
+positive and negative zero according to IEEE 754, these values will typically
+compare as equal in Prolog arithmetic operations. This limitation is unlikely
+to affect typical AMQP messaging applications.
+
+
 Error Handling
 --------------
 
@@ -451,8 +487,6 @@ Use STOMP when you need:
 Future Work
 -----------
 
-Planned enhancements for phase 2:
-
 - Logtalk protocols for messaging patterns (request/reply, pub/sub, etc.)
 - Categories for common message transformations
 - Async message handlers
@@ -463,5 +497,33 @@ Known Limitations
 
 - SSL/TLS connections not yet supported (use stunnel or similar)
 - Heartbeat sending must be done manually via `send_heartbeat/1`
-- Float/double encoding uses simplified representation
-- No support for AMQP 1.0 (different protocol)
+
+
+AMQP 1.0 vs AMQP 0-9-1
+-----------------------
+
+This library implements AMQP 0-9-1 only. Despite the similar name, **AMQP 1.0
+is a fundamentally different protocol** and is not supported by this library.
+The two versions are not wire-compatible and have different conceptual models:
+
+| Aspect | AMQP 0-9-1 | AMQP 1.0 |
+|--------|------------|----------|
+| Design | Broker-centric | Peer-to-peer |
+| Routing | Exchanges + queues | Link-based addressing |
+| Frame structure | Custom binary framing | Layered performatives |
+| Data encoding | Custom type system | CBOR-like encoding |
+
+**Key differences:**
+
+- AMQP 0-9-1 uses exchanges, bindings, and queues as core protocol concepts
+- AMQP 1.0 abstracts these as broker-specific "nodes" and uses links
+- Frame encoding, handshake, and message format are completely different
+- Minimal code could be shared between the two implementations
+
+AMQP 1.0 support would require a separate library with its own distinct API
+reflecting the link-based model, rather than the exchange/queue model of
+AMQP 0-9-1.
+
+**Practical note:** RabbitMQ and most message brokers continue to primarily
+use AMQP 0-9-1, making this library suitable for the vast majority of use
+cases.

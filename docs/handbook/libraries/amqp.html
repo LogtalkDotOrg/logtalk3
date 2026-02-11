@@ -106,10 +106,12 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#data-types">Data Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#float-double-encoding">Float/Double Encoding</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#error-handling">Error Handling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#comparison-with-stomp">Comparison with STOMP</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#future-work">Future Work</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#known-limitations">Known Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#amqp-1-0-vs-amqp-0-9-1">AMQP 1.0 vs AMQP 0-9-1</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="arbitrary.html"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
@@ -618,6 +620,40 @@ and decoding predicates for working with raw frames:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">void</span></code> - No value</p></li>
 </ul>
 </section>
+<section id="float-double-encoding">
+<h2>Float/Double Encoding<a class="headerlink" href="#float-double-encoding" title="Link to this heading"></a></h2>
+<p>The library implements proper IEEE 754 encoding and decoding for
+floating-point values:</p>
+<p><strong>Float (32-bit IEEE 754 single precision):</strong></p>
+<ul class="simple">
+<li><p>Format: 1 sign bit + 8 exponent bits (bias 127) + 23 mantissa bits</p></li>
+<li><p>Encoded as 4 bytes in big-endian order</p></li>
+<li><p>Used for <code class="docutils literal notranslate"><span class="pre">float(Value)</span></code> field values</p></li>
+</ul>
+<p><strong>Double (64-bit IEEE 754 double precision):</strong></p>
+<ul class="simple">
+<li><p>Format: 1 sign bit + 11 exponent bits (bias 1023) + 52 mantissa bits</p></li>
+<li><p>Encoded as 8 bytes in big-endian order</p></li>
+<li><p>Used for <code class="docutils literal notranslate"><span class="pre">double(Value)</span></code> field values</p></li>
+</ul>
+<p><strong>Special values representation:</strong></p>
+<p>The library represents IEEE 754 special values using Prolog compound
+terms:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;infinity</span></code> - Positive infinity</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;negative_infinity</span></code> - Negative infinity</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;not_a_number</span></code> - NaN (Not a Number)</p></li>
+</ul>
+<p>These special values are automatically encoded to and decoded from their
+standard IEEE 754 binary representations.</p>
+<p><strong>Known limitation:</strong></p>
+<p>Most Prolog backends cannot distinguish between <code class="docutils literal notranslate"><span class="pre">-0.0</span></code> and <code class="docutils literal notranslate"><span class="pre">0.0</span></code>
+when comparing floating-point values. While the library correctly
+encodes and decodes both positive and negative zero according to IEEE
+754, these values will typically compare as equal in Prolog arithmetic
+operations. This limitation is unlikely to affect typical AMQP messaging
+applications.</p>
+</section>
 <section id="error-handling">
 <h2>Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading"></a></h2>
 <p>The library throws structured errors:</p>
@@ -690,7 +726,6 @@ significantly:</p>
 </section>
 <section id="future-work">
 <h2>Future Work<a class="headerlink" href="#future-work" title="Link to this heading"></a></h2>
-<p>Planned enhancements for phase 2:</p>
 <ul class="simple">
 <li><p>Logtalk protocols for messaging patterns (request/reply, pub/sub,
 etc.)</p></li>
@@ -703,9 +738,54 @@ etc.)</p></li>
 <ul class="simple">
 <li><p>SSL/TLS connections not yet supported (use stunnel or similar)</p></li>
 <li><p>Heartbeat sending must be done manually via <code class="docutils literal notranslate"><span class="pre">send_heartbeat/1</span></code></p></li>
-<li><p>Float/double encoding uses simplified representation</p></li>
-<li><p>No support for AMQP 1.0 (different protocol)</p></li>
 </ul>
+</section>
+<section id="amqp-1-0-vs-amqp-0-9-1">
+<span id="amqp-10-vs-amqp-0-9-1"></span><h2>AMQP 1.0 vs AMQP 0-9-1<a class="headerlink" href="#amqp-1-0-vs-amqp-0-9-1" title="Link to this heading"></a></h2>
+<p>This library implements AMQP 0-9-1 only. Despite the similar name,
+<strong>AMQP 1.0 is a fundamentally different protocol</strong> and is not supported
+by this library. The two versions are not wire-compatible and have
+different conceptual models:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspect</p></th>
+<th class="head"><p>AMQP 0-9-1</p></th>
+<th class="head"><p>AMQP 1.0</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Design</p></td>
+<td><p>Broker-centric</p></td>
+<td><p>Peer-to-peer</p></td>
+</tr>
+<tr class="row-odd"><td><p>Routing</p></td>
+<td><p>Exchanges + queues</p></td>
+<td><p>Link-based addressing</p></td>
+</tr>
+<tr class="row-even"><td><p>Frame structure</p></td>
+<td><p>Custom binary framing</p></td>
+<td><p>Layered performatives</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data encoding</p></td>
+<td><p>Custom type system</p></td>
+<td><p>CBOR-like encoding</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key differences:</strong></p>
+<ul class="simple">
+<li><p>AMQP 0-9-1 uses exchanges, bindings, and queues as core protocol
+concepts</p></li>
+<li><p>AMQP 1.0 abstracts these as broker-specific “nodes” and uses links</p></li>
+<li><p>Frame encoding, handshake, and message format are completely different</p></li>
+<li><p>Minimal code could be shared between the two implementations</p></li>
+</ul>
+<p>AMQP 1.0 support would require a separate library with its own distinct
+API reflecting the link-based model, rather than the exchange/queue
+model of AMQP 0-9-1.</p>
+<p><strong>Practical note:</strong> RabbitMQ and most message brokers continue to
+primarily use AMQP 0-9-1, making this library suitable for the vast
+majority of use cases.</p>
 </section>
 </section>
 

@@ -357,6 +357,58 @@
 		amqp<<encode_double(2.718281828, Bytes),
 		amqp<<decode_double(Bytes, Value2, _).
 
+	% IEEE 754 float zero encoding
+	test(amqp_encode_float_zero_01, true(Bytes == [0x00, 0x00, 0x00, 0x00])) :-
+		amqp<<encode_float(0.0, Bytes).
+
+	test(amqp_decode_float_zero_01, true(Value =:= 0.0)) :-
+		amqp<<decode_float([0x00, 0x00, 0x00, 0x00], Value, _).
+
+	% IEEE 754 float negative value
+	test(amqp_roundtrip_float_negative_01, true(abs(Value2 - (-1.5)) < 0.001)) :-
+		amqp<<encode_float(-1.5, Bytes),
+		amqp<<decode_float(Bytes, Value2, _).
+
+	% IEEE 754 float small value
+	test(amqp_roundtrip_float_small_01, true(abs(Value2 - 0.0001) < 0.00001)) :-
+		amqp<<encode_float(0.0001, Bytes),
+		amqp<<decode_float(Bytes, Value2, _).
+
+	% IEEE 754 float large value
+	test(amqp_roundtrip_float_large_01, true(abs(Value2 - 1000000.0) < 100.0)) :-
+		amqp<<encode_float(1000000.0, Bytes),
+		amqp<<decode_float(Bytes, Value2, _).
+
+	% IEEE 754 double zero encoding
+	test(amqp_encode_double_zero_01, true(Bytes == [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])) :-
+		amqp<<encode_double(0.0, Bytes).
+
+	test(amqp_decode_double_zero_01, true(Value =:= 0.0)) :-
+		amqp<<decode_double([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00], Value, _).
+
+	% IEEE 754 double negative value
+	test(amqp_roundtrip_double_negative_01, true(abs(Value2 - (-1.5)) < 0.0001)) :-
+		amqp<<encode_double(-1.5, Bytes),
+		amqp<<decode_double(Bytes, Value2, _).
+
+	% IEEE 754 double small value
+	test(amqp_roundtrip_double_small_01, true(abs(Value2 - 0.00000001) < 0.000000001)) :-
+		amqp<<encode_double(0.00000001, Bytes),
+		amqp<<decode_double(Bytes, Value2, _).
+
+	% IEEE 754 double large value
+	test(amqp_roundtrip_double_large_01, true(abs(Value2 - 999999999999.0) / 999999999999.0 < 0.0001)) :-
+		amqp<<encode_double(999999999999.0, Bytes),
+		amqp<<decode_double(Bytes, Value2, _).
+
+	% IEEE 754 float 4 bytes
+	test(amqp_encode_float_bytes_01, true(length(Bytes, 4))) :-
+		amqp<<encode_float(3.14, Bytes).
+
+	% IEEE 754 double 8 bytes
+	test(amqp_encode_double_bytes_01, true(length(Bytes, 8))) :-
+		amqp<<encode_double(3.14, Bytes).
+
 	% ==========================================================================
 	% Array Encoding Tests
 	% ==========================================================================

@@ -1521,25 +1521,117 @@
 		decode_field_value(Byte, Bytes, Value, After),
 		decode_array_values(After, Values).
 
-	% Float encoding (IEEE 754 single precision) - simplified
+	% ==========================================================================
+	% IEEE 754 Float/Double Encoding and Decoding
+	% ==========================================================================
+
+	% Float encoding (IEEE 754 single precision - 32 bits)
+	% Format: 1 sign bit + 8 exponent bits (bias 127) + 23 mantissa bits
+	encode_float(0.0, [0x00, 0x00, 0x00, 0x00]) :- !.
 	encode_float(Value, Bytes) :-
-		% Simplified: convert to 4 bytes representation
-		% Real implementation would use proper IEEE 754 encoding
-		IntValue is round(Value * 1000000),
-		encode_long(IntValue, Bytes).
+		Value = -0.0,
+		!,
+		Bytes = [0x80, 0x00, 0x00, 0x00].
+	encode_float(Value, Bytes) :-
+		(	Value < 0 ->
+			Sign = 1,
+			AbsValue is abs(Value)
+		;	Sign = 0,
+			AbsValue = Value
+		),
+		% Calculate exponent and mantissa
+		float_to_exponent_mantissa_32(AbsValue, Exponent, Mantissa),
+		% Encode to bytes (big-endian)
+		BiasedExp is Exponent + 127,
+		Byte3 is (Sign << 7) \/ (BiasedExp >> 1),
+		Byte2 is ((BiasedExp /\ 0x01) << 7) \/ ((Mantissa >> 16) /\ 0x7f),
+		Byte1 is (Mantissa >> 8) /\ 0xff,
+		Byte0 is Mantissa /\ 0xff,
+		Bytes = [Byte3, Byte2, Byte1, Byte0].
 
-	decode_float(Bytes, Value, Rest) :-
-		decode_long(Bytes, IntValue, Rest),
-		Value is IntValue / 1000000.
+	float_to_exponent_mantissa_32(Value, Exponent, Mantissa) :-
+		% Find exponent: floor(log2(value))
+		LogValue is log(Value) / log(2),
+		Exponent is floor(LogValue),
+		% Normalized mantissa: (value / 2^exponent - 1) * 2^23
+		NormalizedMantissa is (Value / (2 ** Exponent) - 1) * 8388608,  % 2^23 = 8388608
+		Mantissa is round(NormalizedMantissa) /\ 0x7fffff.
 
-	% Double encoding (IEEE 754 double precision) - simplified
+	% Float decoding (IEEE 754 single precision)
+	decode_float([0x00, 0x00, 0x00, 0x00| Rest], 0.0, Rest) :- !.
+	decode_float([0x80, 0x00, 0x00, 0x00| Rest], NegZero, Rest) :-
+		!,
+		NegZero is -0.0.
+	decode_float([0x7f, 0x80, 0x00, 0x00| Rest], @infinity, Rest) :- !.
+	decode_float([0xff, 0x80, 0x00, 0x00| Rest], @negative_infinity, Rest) :- !.
+	decode_float([0x7f, 0xc0, 0x00, 0x00| Rest], @not_a_number, Rest) :- !.
+	decode_float([Byte3, Byte2, Byte1, Byte0| Rest], Value, Rest) :-
+		Sign is Byte3 >> 7,
+		Exponent is ((Byte3 /\ 0x7f) << 1) + (Byte2 >> 7),
+		Significand is ((Byte2 /\ 0x7f) << 16) + (Byte1 << 8) + Byte0,
+		BiasedExp is Exponent - 127,
+		(	Exponent =:= 0 ->
+			% Denormalized number
+			Value is ((-1) ** Sign) * (Significand * (2 ** (-23))) * (2 ** (-126))
+		;	% Normalized number
+			Value is ((-1) ** Sign) * (1 + Significand * (2 ** (-23))) * (2 ** BiasedExp)
+		).
+
+	% Double encoding (IEEE 754 double precision - 64 bits)
+	% Format: 1 sign bit + 11 exponent bits (bias 1023) + 52 mantissa bits
+	encode_double(0.0, [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]) :- !.
 	encode_double(Value, Bytes) :-
-		IntValue is round(Value * 1000000000000),
-		encode_longlong(IntValue, Bytes).
+		Value = -0.0,
+		!,
+		Bytes = [0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00].
+	encode_double(Value, Bytes) :-
+		(	Value < 0 ->
+			Sign = 1,
+			AbsValue is abs(Value)
+		;	Sign = 0,
+			AbsValue = Value
+		),
+		% Calculate exponent and mantissa
+		float_to_exponent_mantissa_64(AbsValue, Exponent, Mantissa),
+		% Encode to bytes (big-endian)
+		BiasedExp is Exponent + 1023,
+		Byte7 is (Sign << 7) \/ (BiasedExp >> 4),
+		Byte6 is ((BiasedExp /\ 0x0f) << 4) \/ ((Mantissa >> 48) /\ 0x0f),
+		Byte5 is (Mantissa >> 40) /\ 0xff,
+		Byte4 is (Mantissa >> 32) /\ 0xff,
+		Byte3 is (Mantissa >> 24) /\ 0xff,
+		Byte2 is (Mantissa >> 16) /\ 0xff,
+		Byte1 is (Mantissa >> 8) /\ 0xff,
+		Byte0 is Mantissa /\ 0xff,
+		Bytes = [Byte7, Byte6, Byte5, Byte4, Byte3, Byte2, Byte1, Byte0].
 
-	decode_double(Bytes, Value, Rest) :-
-		decode_longlong(Bytes, IntValue, Rest),
-		Value is IntValue / 1000000000000.
+	float_to_exponent_mantissa_64(Value, Exponent, Mantissa) :-
+		% Find exponent: floor(log2(value))
+		LogValue is log(Value) / log(2),
+		Exponent is floor(LogValue),
+		% Normalized mantissa: (value / 2^exponent - 1) * 2^52
+		NormalizedMantissa is (Value / (2 ** Exponent) - 1) * 4503599627370496,  % 2^52
+		Mantissa is round(NormalizedMantissa) /\ 0xfffffffffffff.
+
+	% Double decoding (IEEE 754 double precision)
+	decode_double([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00| Rest], 0.0, Rest) :- !.
+	decode_double([0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00| Rest], NegZero, Rest) :-
+		!,
+		NegZero is -0.0.
+	decode_double([0x7f, 0xf0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00| Rest], @infinity, Rest) :- !.
+	decode_double([0xff, 0xf0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00| Rest], @negative_infinity, Rest) :- !.
+	decode_double([0x7f, 0xf8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00| Rest], @not_a_number, Rest) :- !.
+	decode_double([Byte7, Byte6, Byte5, Byte4, Byte3, Byte2, Byte1, Byte0| Rest], Value, Rest) :-
+		Sign is Byte7 >> 7,
+		Exponent is ((Byte7 /\ 0x7f) << 4) + (Byte6 >> 4),
+		Significand is ((Byte6 /\ 0x0f) << 48) + (Byte5 << 40) + (Byte4 << 32) + (Byte3 << 24) + (Byte2 << 16) + (Byte1 << 8) + Byte0,
+		BiasedExp is Exponent - 1023,
+		(	Exponent =:= 0 ->
+			% Denormalized number
+			Value is ((-1) ** Sign) * (Significand * (2 ** (-52))) * (2 ** (-1022))
+		;	% Normalized number
+			Value is ((-1) ** Sign) * (1 + Significand * (2 ** (-52))) * (2 ** BiasedExp)
+		).
 
 	% ==========================================================================
 	% Method Frame Encoding

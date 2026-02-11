@@ -104,8 +104,8 @@ GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 * ADDED: New `amqp` library implementing the Advanced Message Queuing Protocol
-(AMQP). Supports ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla
-Prolog, and XVM.
+(AMQP) 0-9-1 spec. Supports ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
+Trealla Prolog, and XVM.
 
 * ADDED: New `stomp` library implementing a STOMP (Simple Text Orientated
 Messaging Protocol) client. Supports ECLiPSe, GNU Prolog, SICStus Prolog,
