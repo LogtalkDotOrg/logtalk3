@@ -1,0 +1,318 @@
+.. index:: single: amqp_pool
+.. _amqp_pool/0:
+
+.. rst-class:: right
+
+**category**
+
+``amqp_pool``
+=============
+
+AMQP connection pool category. Import this category into an object to create a named connection pool with automatic connection management.
+
+| **Availability:** 
+|    ``logtalk_load(amqp(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-11
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`amqp <amqp/0>`
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: initialize/1
+.. _amqp_pool/0::initialize/1:
+
+``initialize/1``
+^^^^^^^^^^^^^^^^
+
+Initializes the connection pool with the given configuration options. Must be called before using other pool predicates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initialize(Options)``
+| **Mode and number of proofs:**
+|    ``initialize(+list)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Option host(Host): AMQP server hostname. Default is localhost.
+    - Option port(Port): AMQP server port. Default is 5672.
+    - Option min_size(N): Minimum number of connections to maintain. Default is 1.
+    - Option max_size(N): Maximum number of connections allowed. Default is 10.
+    - Option connection_options(Options): Options passed to amqp::connect/4. Default is [].
+
+
+------------
+
+.. index:: destroy/0
+.. _amqp_pool/0::destroy/0:
+
+``destroy/0``
+^^^^^^^^^^^^^
+
+Destroys the pool, closing all connections and clearing state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``destroy`` - ``one``
+
+
+------------
+
+.. index:: acquire/1
+.. _amqp_pool/0::acquire/1:
+
+``acquire/1``
+^^^^^^^^^^^^^
+
+Acquires a connection from the pool. Returns an available connection or creates a new one if the pool is not at maximum capacity.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``acquire(Connection)``
+| **Mode and number of proofs:**
+|    ``acquire(--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Pool not initialized:
+|        ``pool_error(not_initialized)``
+|    Pool exhausted (at max capacity):
+|        ``pool_error(exhausted)``
+
+
+------------
+
+.. index:: release/1
+.. _amqp_pool/0::release/1:
+
+``release/1``
+^^^^^^^^^^^^^
+
+Releases a connection back to the pool, making it available for reuse.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``release(Connection)``
+| **Mode and number of proofs:**
+|    ``release(+compound)`` - ``one``
+
+
+------------
+
+.. index:: with_connection/1
+.. _amqp_pool/0::with_connection/1:
+
+``with_connection/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Acquires a connection, calls Goal with the connection as argument, and releases the connection. The connection is released even if Goal fails or throws an exception.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``with_connection(Goal)``
+| **Meta-predicate template:**
+|    ``with_connection(1)``
+| **Mode and number of proofs:**
+|    ``with_connection(+callable)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: stats/1
+.. _amqp_pool/0::stats/1:
+
+``stats/1``
+^^^^^^^^^^^
+
+Returns pool statistics as a compound term stats(Available, InUse, Total, MinSize, MaxSize).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stats(Stats)``
+| **Mode and number of proofs:**
+|    ``stats(-compound)`` - ``one``
+
+
+------------
+
+.. index:: resize/2
+.. _amqp_pool/0::resize/2:
+
+``resize/2``
+^^^^^^^^^^^^
+
+Resizes the pool by setting new minimum and maximum sizes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``resize(MinSize,MaxSize)``
+| **Mode and number of proofs:**
+|    ``resize(+integer,+integer)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: pool_config/5
+.. _amqp_pool/0::pool_config/5:
+
+``pool_config/5``
+^^^^^^^^^^^^^^^^^
+
+Stores the pool configuration parameters.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``pool_config(Host,Port,MinSize,MaxSize,ConnectionOptions)``
+| **Mode and number of proofs:**
+|    ``pool_config(?atom,?integer,?integer,?integer,?list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: available/1
+.. _amqp_pool/0::available/1:
+
+``available/1``
+^^^^^^^^^^^^^^^
+
+Tracks connections that are available for use.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``available(Connection)``
+| **Mode and number of proofs:**
+|    ``available(?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: in_use/2
+.. _amqp_pool/0::in_use/2:
+
+``in_use/2``
+^^^^^^^^^^^^
+
+Tracks connections currently in use along with their acquisition timestamp.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``in_use(Connection,AcquireTimestamp)``
+| **Mode and number of proofs:**
+|    ``in_use(?compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: create_initial_connections/4
+.. _amqp_pool/0::create_initial_connections/4:
+
+``create_initial_connections/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: create_connections/4
+.. _amqp_pool/0::create_connections/4:
+
+``create_connections/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: total_connections/1
+.. _amqp_pool/0::total_connections/1:
+
+``total_connections/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: current_timestamp/1
+.. _amqp_pool/0::current_timestamp/1:
+
+``current_timestamp/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: option/3
+.. _amqp_pool/0::option/3:
+
+``option/3``
+^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+Operators
+---------
+
+(none)
+
