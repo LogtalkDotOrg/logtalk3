@@ -30,7 +30,7 @@
 	]).
 
 	:- uses(list, [
-		valid/1 as is_list/1
+		length/2, valid/1 as is_list/1
 	]).
 
 	cover(amqp).

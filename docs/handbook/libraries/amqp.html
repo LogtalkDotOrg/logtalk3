@@ -71,11 +71,10 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Libraries</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">amqp</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#protocol-version">Protocol Version</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#connecting-to-an-amqp-server">Connecting to an AMQP server</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#opening-a-channel">Opening a channel</a></li>
@@ -106,11 +105,11 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#data-types">Data Types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#float-double-encoding">Float/Double Encoding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#float-double-encoding-decoding">Float/Double Encoding/Decoding</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#error-handling">Error Handling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#comparison-with-stomp">Comparison with STOMP</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#future-work">Future Work</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#known-limitations">Known Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-limitations-and-issues">Known Limitations and Issues</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#amqp-1-0-vs-amqp-0-9-1">AMQP 1.0 vs AMQP 0-9-1</a></li>
 </ul>
 </li>
@@ -238,34 +237,11 @@
 implementation. This library uses the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library and supports
 all backend Prolog systems supported by that library: ECLiPSe, GNU
 Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p>
-<section id="protocol-version">
-<h2>Protocol Version<a class="headerlink" href="#protocol-version" title="Link to this heading"></a></h2>
-<p>This library implements the AMQP 0-9-1 protocol specification:</p>
 <p><a class="reference external" href="https://www.rabbitmq.com/amqp-0-9-1-reference.html">https://www.rabbitmq.com/amqp-0-9-1-reference.html</a></p>
 <p>AMQP 0-9-1 is a binary wire-level protocol for message-oriented
 middleware. It is the de facto standard for message broker
 interoperability and is supported by RabbitMQ, Apache Qpid, Apache
 ActiveMQ, and other brokers.</p>
-</section>
-<section id="features">
-<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>Full AMQP 0-9-1 protocol support with binary frame encoding/decoding</p></li>
-<li><p>Connection management with heartbeat negotiation</p></li>
-<li><p>Automatic reconnection with configurable retry attempts and delays</p></li>
-<li><p>Connection pooling with automatic connection management</p></li>
-<li><p>Multiple concurrent channels over a single connection</p></li>
-<li><p>Exchange operations: declare, delete, bind, unbind</p></li>
-<li><p>Queue operations: declare, delete, bind, unbind, purge</p></li>
-<li><p>Basic messaging: publish, consume, get, ack, nack, reject</p></li>
-<li><p>Quality of service (QoS) with prefetch settings</p></li>
-<li><p>Transaction support: tx.select, tx.commit, tx.rollback</p></li>
-<li><p>Publisher confirms (RabbitMQ extension)</p></li>
-<li><p>SASL PLAIN authentication</p></li>
-<li><p>Custom message properties and headers</p></li>
-<li><p>Content properties: content-type, delivery-mode, priority, etc.</p></li>
-</ul>
-</section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -288,6 +264,25 @@ link in a web browser.</p>
 <p>Note: Integration tests require a running AMQP 0-9-1 server (e.g.,
 RabbitMQ). RabbitMQ AMQP listens on port 5672 by default with
 guest/guest credentials.</p>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Full AMQP 0-9-1 protocol support with binary frame encoding/decoding</p></li>
+<li><p>Connection management with heartbeat negotiation</p></li>
+<li><p>Automatic reconnection with configurable retry attempts and delays</p></li>
+<li><p>Connection pooling with automatic connection management</p></li>
+<li><p>Multiple concurrent channels over a single connection</p></li>
+<li><p>Exchange operations: declare, delete, bind, unbind</p></li>
+<li><p>Queue operations: declare, delete, bind, unbind, purge</p></li>
+<li><p>Basic messaging: publish, consume, get, ack, nack, reject</p></li>
+<li><p>Quality of service (QoS) with prefetch settings</p></li>
+<li><p>Transaction support: tx.select, tx.commit, tx.rollback</p></li>
+<li><p>Publisher confirms (RabbitMQ extension)</p></li>
+<li><p>SASL PLAIN authentication</p></li>
+<li><p>Custom message properties and headers</p></li>
+<li><p>Content properties: content-type, delivery-mode, priority, etc.</p></li>
+</ul>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
@@ -620,8 +615,8 @@ and decoding predicates for working with raw frames:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">void</span></code> - No value</p></li>
 </ul>
 </section>
-<section id="float-double-encoding">
-<h2>Float/Double Encoding<a class="headerlink" href="#float-double-encoding" title="Link to this heading"></a></h2>
+<section id="float-double-encoding-decoding">
+<h2>Float/Double Encoding/Decoding<a class="headerlink" href="#float-double-encoding-decoding" title="Link to this heading"></a></h2>
 <p>The library implements proper IEEE 754 encoding and decoding for
 floating-point values:</p>
 <p><strong>Float (32-bit IEEE 754 single precision):</strong></p>
@@ -733,11 +728,15 @@ etc.)</p></li>
 <li><p>Async message handlers</p></li>
 </ul>
 </section>
-<section id="known-limitations">
-<h2>Known Limitations<a class="headerlink" href="#known-limitations" title="Link to this heading"></a></h2>
+<section id="known-limitations-and-issues">
+<h2>Known Limitations and Issues<a class="headerlink" href="#known-limitations-and-issues" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>SSL/TLS connections not yet supported (use stunnel or similar)</p></li>
 <li><p>Heartbeat sending must be done manually via <code class="docutils literal notranslate"><span class="pre">send_heartbeat/1</span></code></p></li>
+<li><p>Most Prolog backends cannot distinguish between <code class="docutils literal notranslate"><span class="pre">-0.0</span></code> and <code class="docutils literal notranslate"><span class="pre">0.0</span></code>
+(see the “Float/Double Encoding/Decoding” section above for details)</p></li>
+<li><p>GNU Prolog support is partial as it doesn’t currently support null
+characters in atoms</p></li>
 </ul>
 </section>
 <section id="amqp-1-0-vs-amqp-0-9-1">

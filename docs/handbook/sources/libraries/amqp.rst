@@ -8,35 +8,12 @@ implementation. This library uses the ``sockets`` library and supports
 all backend Prolog systems supported by that library: ECLiPSe, GNU
 Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
-Protocol Version
-----------------
-
-This library implements the AMQP 0-9-1 protocol specification:
-
 https://www.rabbitmq.com/amqp-0-9-1-reference.html
 
 AMQP 0-9-1 is a binary wire-level protocol for message-oriented
 middleware. It is the de facto standard for message broker
 interoperability and is supported by RabbitMQ, Apache Qpid, Apache
 ActiveMQ, and other brokers.
-
-Features
---------
-
-- Full AMQP 0-9-1 protocol support with binary frame encoding/decoding
-- Connection management with heartbeat negotiation
-- Automatic reconnection with configurable retry attempts and delays
-- Connection pooling with automatic connection management
-- Multiple concurrent channels over a single connection
-- Exchange operations: declare, delete, bind, unbind
-- Queue operations: declare, delete, bind, unbind, purge
-- Basic messaging: publish, consume, get, ack, nack, reject
-- Quality of service (QoS) with prefetch settings
-- Transaction support: tx.select, tx.commit, tx.rollback
-- Publisher confirms (RabbitMQ extension)
-- SASL PLAIN authentication
-- Custom message properties and headers
-- Content properties: content-type, delivery-mode, priority, etc.
 
 API documentation
 -----------------
@@ -66,6 +43,24 @@ To test this library predicates, load the ``tester.lgt`` file:
 Note: Integration tests require a running AMQP 0-9-1 server (e.g.,
 RabbitMQ). RabbitMQ AMQP listens on port 5672 by default with
 guest/guest credentials.
+
+Features
+--------
+
+- Full AMQP 0-9-1 protocol support with binary frame encoding/decoding
+- Connection management with heartbeat negotiation
+- Automatic reconnection with configurable retry attempts and delays
+- Connection pooling with automatic connection management
+- Multiple concurrent channels over a single connection
+- Exchange operations: declare, delete, bind, unbind
+- Queue operations: declare, delete, bind, unbind, purge
+- Basic messaging: publish, consume, get, ack, nack, reject
+- Quality of service (QoS) with prefetch settings
+- Transaction support: tx.select, tx.commit, tx.rollback
+- Publisher confirms (RabbitMQ extension)
+- SASL PLAIN authentication
+- Custom message properties and headers
+- Content properties: content-type, delivery-mode, priority, etc.
 
 Usage
 -----
@@ -469,8 +464,8 @@ Field values in tables use type tags:
 - ``timestamp(V)`` - Timestamp
 - ``void`` - No value
 
-Float/Double Encoding
----------------------
+Float/Double Encoding/Decoding
+------------------------------
 
 The library implements proper IEEE 754 encoding and decoding for
 floating-point values:
@@ -561,11 +556,15 @@ Future Work
 - Categories for common message transformations
 - Async message handlers
 
-Known Limitations
------------------
+Known Limitations and Issues
+----------------------------
 
 - SSL/TLS connections not yet supported (use stunnel or similar)
 - Heartbeat sending must be done manually via ``send_heartbeat/1``
+- Most Prolog backends cannot distinguish between ``-0.0`` and ``0.0``
+  (see the "Float/Double Encoding/Decoding" section above for details)
+- GNU Prolog support is partial as it doesn't currently support null
+  characters in atoms
 
 .. _amqp-10-vs-amqp-0-9-1:
 
