@@ -98,13 +98,14 @@ and normalizing URLs.
 SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 * ADDED: New `sockets` high-level compatibility library. Supports ECLiPSe,
-GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.
+GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
-* ADDED: New `memcached` library implementing a Memcached client.
+* ADDED: New `memcached` library implementing a Memcached client. Supports
+ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 * ADDED: New `stomp` library implementing a STOMP (Simple Text Orientated
 Messaging Protocol) client. Supports ECLiPSe, GNU Prolog, SICStus Prolog,
-SWI-Prolog, and Trealla Prolog.
+SWI-Prolog, Trealla Prolog, and XVM.
 
 * ADDED: New `stemming` library implementing Porter and Lovins algorithms for
 computing stems for English words.

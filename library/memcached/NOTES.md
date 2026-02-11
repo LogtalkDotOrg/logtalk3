@@ -24,7 +24,7 @@ ________________________________________________________________________
 Portable Memcached client implementing the text (ASCII) protocol. This
 library uses the `sockets` library and supports all backend Prolog systems
 supported by that library: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
-and Trealla Prolog.
+Trealla Prolog, and XVM.
 
 
 API documentation

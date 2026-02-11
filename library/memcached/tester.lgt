@@ -23,7 +23,7 @@
 	current_logtalk_flag(prolog_dialect, Dialect),
 	Dialect \== eclipse, Dialect \== gnu,
 	Dialect \== sicstus, Dialect \== swi,
-	Dialect \== trealla
+	Dialect \== trealla, Dialect \== xvm
 )).
 
 	:- initialization((

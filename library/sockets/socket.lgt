@@ -23,7 +23,7 @@
 	imports(options)).
 
 	:- info([
-		version is 0:8:1,
+		version is 0:9:0,
 		author is 'Paulo Moura',
 		date is 2026-02-10,
 		comment is 'Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.',
@@ -258,7 +258,7 @@
 	server_open_(Port, server_socket(Socket, Port), Options) :-
 		memberchk(backlog(N), Options),
 		socket('AF_INET', Socket),
-		socket_bind(Socket, 'AF_INET'('', Port)),
+		socket_bind(Socket, 'AF_INET'(_Host, Port)),
 		socket_listen(Socket, N).
 
 	server_accept_(server_socket(Socket, _), Input, Output, client(Host, Port), Options) :-
@@ -389,6 +389,35 @@
 
 	current_host_(Host) :-
 		sockets:current_host(Host).
+
+	:- elif(current_logtalk_flag(prolog_dialect, xvm)).
+
+	% XVM: socket/2, socket_connect/4, socket_bind/2, socket_listen/2, socket_accept/4
+
+	client_open_(Host, Port, Input, Output, Options) :-
+		socket('AF_INET', Socket),
+		socket_connect(Socket, 'AF_INET'(Host, Port), Input, Output),
+		memberchk(type(Type), Options),
+		set_stream_type(Input, Type),
+		set_stream_type(Output, Type).
+
+	server_open_(Port, server_socket(Socket, Port), Options) :-
+		memberchk(backlog(N), Options),
+		socket('AF_INET', Socket),
+		socket_bind(Socket, 'AF_INET'('127.0.0.1', Port)),
+		socket_listen(Socket, N).
+
+	server_accept_(server_socket(Socket, _), Input, Output, client(Client), Options) :-
+		socket_accept(Socket, Client, Input, Output),
+		memberchk(type(Type), Options),
+		set_stream_type(Input, Type),
+		set_stream_type(Output, Type).
+
+	server_close_(server_socket(Socket, _)) :-
+		socket_close(Socket).
+
+	current_host_(Host) :-
+		host_name(Host).
 
 	:- endif.
 
