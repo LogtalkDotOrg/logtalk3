@@ -279,8 +279,8 @@
 	:- private(total_connections/1).
 
 	total_connections(Total) :-
-		findall(C, ::available(C), AvailableList),
-		findall(C, ::in_use(C, _), InUseList),
+		findall(Connection, ::available(Connection), AvailableList),
+		findall(Connection, ::in_use(Connection, _), InUseList),
 		length(AvailableList, Available),
 		length(InUseList, InUse),
 		Total is Available + InUse.

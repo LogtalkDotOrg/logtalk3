@@ -160,6 +160,10 @@ when using the XVM backend.
 
 * FIXED: Unused dependencies in the `json` and `json_lines` libraries.
 
+* FIXED: Avoid portability warnings when loading the `arbitrary`, `os`,
+`random`, and `types` libraries due to the necessary use of backend specific
+features.
+
 Tools
 -----
 
@@ -183,10 +187,8 @@ correct number of seconds runtime for each test object.
 * FIXED: The `help` tool search for the terminal-based browser executables
 for the prefix used by Homebrew on Apple Silicon.
 
-* FIXED: A linter portability warning when loading the `lgtunit` tool file
-`coverage_report.lgt`.
-
-* FIXED: A linter portability warning when loading the `debugger` tool.
+* FIXED: Avoid portability warnings when loading the `debugger` and `lgtunit`
+tools due to the necessary use of backend specific features.
 
 Tests
 -----

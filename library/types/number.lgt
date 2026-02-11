@@ -23,9 +23,9 @@
 	extends(atomic)).
 
 	:- info([
-		version is 1:14:1,
+		version is 1:15:0,
 		author is 'Paulo Moura',
-		date is 2026-01-16,
+		date is 2026-02-11,
 		comment is 'Number data type predicates.'
 	]).
 
@@ -100,22 +100,6 @@
 			{abs(Float1 - Float2) < 0.00001 * max(abs(Float1), abs(Float2))}
 		).
 
-	:- if((
-		current_logtalk_flag(prolog_dialect, Dialect),
-		(	Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b;
-			Dialect == cx; Dialect == tau; Dialect == xsb; Dialect == xvm;
-			Dialect == trealla
-		)
-	)).
-		epsilon(Epsilon) :-
-			Epsilon is epsilon.
-	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
-		epsilon(Epsilon) :-
-			Epsilon is nexttoward(1.0, 2.0) - 1.0.
-	:- else.
-		epsilon(0.000000000001).
-	:- endif.
-
 	valid(Number) :-
 		number(Number).
 
@@ -147,5 +131,23 @@
 
 	Term1 =\= Term2 :-
 		{Term1 =\= Term2}.
+
+	:- set_logtalk_flag(portability, silent).
+
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(	Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b;
+			Dialect == cx; Dialect == tau; Dialect == xsb; Dialect == xvm;
+			Dialect == trealla
+		)
+	)).
+		epsilon(Epsilon) :-
+			Epsilon is epsilon.
+	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+		epsilon(Epsilon) :-
+			Epsilon is nexttoward(1.0, 2.0) - 1.0.
+	:- else.
+		epsilon(0.000000000001).
+	:- endif.
 
 :- end_object.

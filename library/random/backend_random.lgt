@@ -23,9 +23,9 @@
 	implements((pseudo_random_protocol, sampling_protocol))).
 
 	:- info([
-		version is 1:21:1,
+		version is 1:22:0,
 		author is 'Paulo Moura',
-		date is 2025-04-07,
+		date is 2026-02-11,
 		comment is 'Random number generator predicates using the backend Prolog compiler built-in random generator.',
 		remarks is [
 			'Implementation' - 'The backend Prolog compiler built-in random generator is only used for the basic ``random/1``, ``get_seed/1``, and ``set_seed/1`` predicates.',
@@ -251,6 +251,41 @@
 		H =\= R,
 		not_member(T, R).
 
+	maybe :-
+		random(Random),
+		Random < 0.5.
+
+	maybe(Probability) :-
+		float(Probability),
+		0.0 =< Probability, Probability =< 1.0,
+		random(Random),
+		Random < Probability.
+
+	maybe(K, N) :-
+		integer(K), integer(N),
+		0 =< K, K =< N,
+		random(Float),
+		Random is truncate(Float * N),
+		Random < K.
+
+	:- meta_predicate(maybe_call(0)).
+	maybe_call(Goal) :-
+		random(Random),
+		Random < 0.5,
+		once(Goal).
+
+	:- meta_predicate(maybe_call(*, 0)).
+	maybe_call(Probability, Goal) :-
+		float(Probability),
+		0.0 =< Probability, Probability =< 1.0,
+		random(Random),
+		Random < Probability,
+		once(Goal).
+
+	:- include(sampling).
+
+	:- set_logtalk_flag(portability, silent).
+
 	:- if(current_logtalk_flag(prolog_dialect, b)).
 		get_seed(_).
 		set_seed(_).
@@ -320,38 +355,5 @@
 		set_seed(Seed) :- {random:setrand(Seed)}.
 		random(Random) :- {random:random(Random)}.
 	:- endif.
-
-	maybe :-
-		random(Random),
-		Random < 0.5.
-
-	maybe(Probability) :-
-		float(Probability),
-		0.0 =< Probability, Probability =< 1.0,
-		random(Random),
-		Random < Probability.
-
-	maybe(K, N) :-
-		integer(K), integer(N),
-		0 =< K, K =< N,
-		random(Float),
-		Random is truncate(Float * N),
-		Random < K.
-
-	:- meta_predicate(maybe_call(0)).
-	maybe_call(Goal) :-
-		random(Random),
-		Random < 0.5,
-		once(Goal).
-
-	:- meta_predicate(maybe_call(*, 0)).
-	maybe_call(Probability, Goal) :-
-		float(Probability),
-		0.0 =< Probability, Probability =< 1.0,
-		random(Random),
-		Random < Probability,
-		once(Goal).
-
-	:- include(sampling).
 
 :- end_object.

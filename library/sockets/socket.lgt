@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2026-02-10,
+		date is 2026-02-11,
 		comment is 'Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.',
@@ -209,6 +209,8 @@
 		N > 0.
 	valid_option(type(Type)) :-
 		once((Type == binary; Type == text)).
+
+	:- set_logtalk_flag(portability, silent).
 
 	% Backend Prolog compiler dependent implementations
 

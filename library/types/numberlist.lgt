@@ -24,9 +24,9 @@
 	extends(list)).
 
 	:- info([
-		version is 1:16:0,
+		version is 1:17:0,
 		author is 'Paulo Moura',
-		date is 2025-03-13,
+		date is 2026-02-11,
 		comment is 'List of numbers predicates.',
 		see_also is [list, list(_), varlist, difflist]
 	]).
@@ -300,6 +300,25 @@
 		Y is E / Sum,
 		softmax_exps_softmax(Es, Sum, Ys).
 
+	valid((-)) :-
+		% catch variables and lists with unbound tails
+		!,
+		fail.
+	valid([]).
+	valid([Element| List]) :-
+		number(Element),
+		valid(List).
+
+	check(Term) :-
+		(	valid(Term) ->
+			true
+		;	var(Term) ->
+			instantiation_error
+		;	type_error(numberlist, Term)
+		).
+
+	:- set_logtalk_flag(portability, silent).
+
 	:- if(current_logtalk_flag(prolog_dialect, xsb)).
 
 		:- set_logtalk_flag(left_recursion, silent).
@@ -338,22 +357,5 @@
 			least_common_multiple(Is, Multiple1, Multiple).
 
 	:- endif.
-
-	valid((-)) :-
-		% catch variables and lists with unbound tails
-		!,
-		fail.
-	valid([]).
-	valid([Element| List]) :-
-		number(Element),
-		valid(List).
-
-	check(Term) :-
-		(	valid(Term) ->
-			true
-		;	var(Term) ->
-			instantiation_error
-		;	type_error(numberlist, Term)
-		).
 
 :- end_object.

@@ -28,9 +28,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:36:0,
+		version is 2:37:0,
 		author is 'Paulo Moura',
-		date is 2026-01-23,
+		date is 2026-02-11,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -1404,75 +1404,12 @@
 		arbitrary(list(character_code(CharSet),Length), Codes),
 		atom_codes(Arbitrary, Codes).
 
-	% some Prolog backends either don't support the null character or
-	% provide buggy results when calling char_code/2 with a code of zero
-	:- if((
-		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == eclipse; Dialect == ji; Dialect == sicstus; Dialect == swi; Dialect == tau; Dialect == trealla)
-	)).
-		first_valid_character_code(0).
-	:- else.
-		first_valid_character_code(1).
-	:- endif.
-
 	identifier_characters([
 		a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,
 		'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
 		'0','1','2','3','4','5','6','7','8','9','0',
 		'_'
 	]).
-
-	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == xvm; Dialect == swi))).
-		:- if(current_logtalk_flag(prolog_dialect, swi)).
-			:- use_module(unicode, [unicode_property/2]).
-		:- elif(current_logtalk_flag(prolog_dialect, xvm)).
-			:- uses(user, [unicode_property/2]).
-		:- endif.
-		arbitrary_unicode_bmp_code_point(First, Arbitrary) :-
-			repeat,
-				between(First, 65535, Arbitrary),
-				unicode_property(Arbitrary, category(Category)),
-			Category \== 'Cn',
-			Category \== 'Cs',
-			Category \== 'Co',
-			!.
-		arbitrary_unicode_full_code_point(First, Arbitrary) :-
-			repeat,
-				between(First, 1114111, Arbitrary),
-				unicode_property(Arbitrary, category(Category)),
-			Category \== 'Cn',
-			Category \== 'Cs',
-			Category \== 'Co',
-			!.
-	:- else.
-		arbitrary_unicode_bmp_code_point(First, Arbitrary) :-
-			repeat,
-				% 65534 and 65535 are Cn, Unassigned
-				between(First, 65533, Arbitrary),
-				% not a high or low surrogate code point
-				\+ integer::between(55296, 57343, Arbitrary),
-				% not a non-character code point
-				\+ integer::between(64976, 65007, Arbitrary),
-				% not a private use code point
-				\+ integer::between(57344, 63743, Arbitrary),
-			!.
-		arbitrary_unicode_full_code_point(First, Arbitrary) :-
-			repeat,
-				between(First, 1048575, Arbitrary),
-				% not a high or low surrogate code point
-				\+ integer::between(55296, 57343, Arbitrary),
-				% not a non-character code point
-				\+ integer::between(64976, 65007, Arbitrary),
-				% not Cn, Unassigned
-				Code is Arbitrary /\ 65535,
-				Code =\= 65534,
-				Code =\= 65535,
-				% not a private use code point
-				\+ integer::between(57344, 63743, Arbitrary),
-				\+ integer::between(983040, 1048573, Arbitrary),
-				% \+ integer::between(Arbitrary, 1048576, 1114109),
-			!.
-	:- endif.
 
 	map_arbitrary([], _).
 	map_arbitrary([Head| Tail], Type) :-
@@ -1561,5 +1498,70 @@
 			types_frequency_to_types_list([Type-M| TypesFrequency], Types)
 		;	types_frequency_to_types_list(TypesFrequency, WeightedList)
 		).
+
+	:- set_logtalk_flag(portability, silent).
+
+	% some Prolog backends either don't support the null character or
+	% provide buggy results when calling char_code/2 with a code of zero
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == eclipse; Dialect == ji; Dialect == sicstus; Dialect == swi; Dialect == tau; Dialect == trealla)
+	)).
+		first_valid_character_code(0).
+	:- else.
+		first_valid_character_code(1).
+	:- endif.
+
+	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == xvm; Dialect == swi))).
+		:- if(current_logtalk_flag(prolog_dialect, swi)).
+			:- use_module(unicode, [unicode_property/2]).
+		:- elif(current_logtalk_flag(prolog_dialect, xvm)).
+			:- uses(user, [unicode_property/2]).
+		:- endif.
+		arbitrary_unicode_bmp_code_point(First, Arbitrary) :-
+			repeat,
+				between(First, 65535, Arbitrary),
+				unicode_property(Arbitrary, category(Category)),
+			Category \== 'Cn',
+			Category \== 'Cs',
+			Category \== 'Co',
+			!.
+		arbitrary_unicode_full_code_point(First, Arbitrary) :-
+			repeat,
+				between(First, 1114111, Arbitrary),
+				unicode_property(Arbitrary, category(Category)),
+			Category \== 'Cn',
+			Category \== 'Cs',
+			Category \== 'Co',
+			!.
+	:- else.
+		arbitrary_unicode_bmp_code_point(First, Arbitrary) :-
+			repeat,
+				% 65534 and 65535 are Cn, Unassigned
+				between(First, 65533, Arbitrary),
+				% not a high or low surrogate code point
+				\+ integer::between(55296, 57343, Arbitrary),
+				% not a non-character code point
+				\+ integer::between(64976, 65007, Arbitrary),
+				% not a private use code point
+				\+ integer::between(57344, 63743, Arbitrary),
+			!.
+		arbitrary_unicode_full_code_point(First, Arbitrary) :-
+			repeat,
+				between(First, 1048575, Arbitrary),
+				% not a high or low surrogate code point
+				\+ integer::between(55296, 57343, Arbitrary),
+				% not a non-character code point
+				\+ integer::between(64976, 65007, Arbitrary),
+				% not Cn, Unassigned
+				Code is Arbitrary /\ 65535,
+				Code =\= 65534,
+				Code =\= 65535,
+				% not a private use code point
+				\+ integer::between(57344, 63743, Arbitrary),
+				\+ integer::between(983040, 1048573, Arbitrary),
+				% \+ integer::between(Arbitrary, 1048576, 1114109),
+			!.
+	:- endif.
 
 :- end_category.

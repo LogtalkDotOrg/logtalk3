@@ -28,9 +28,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 22:3:1,
+		version is 22:4:0,
 		author is 'Paulo Moura',
-		date is 2025-12-03,
+		date is 2026-02-11,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -2166,21 +2166,6 @@
 			abs(Float1 - Float2) < 0.00001 * max(abs(Float1), abs(Float2))
 		).
 
-	:- if((
-		current_logtalk_flag(prolog_dialect, Dialect),
-		(	Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b;
-			Dialect == cx; Dialect == tau; Dialect == xvm; Dialect == trealla
-		)
-	)).
-		epsilon(Epsilon) :-
-			Epsilon is epsilon.
-	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
-		epsilon(Epsilon) :-
-			Epsilon is nexttoward(1.0, 2.0) - 1.0.
-	:- else.
-		epsilon(0.000000000001).
-	:- endif.
-
 	quick_check(Template, Result, Options) :-
 		catch(parse_quick_check_options(Options, QuickCheckOptions), OptionError, true),
 		(	var(OptionError) ->
@@ -3337,6 +3322,8 @@
 		close(WriteStream),
 		os::delete_file(Path).
 
+	:- set_logtalk_flag(portability, silent).
+
 	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
 
 		stream_position(Position) :-
@@ -3355,6 +3342,21 @@
 			close(Stream),
 			os::delete_file(Path).
 
+	:- endif.
+
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(	Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b;
+			Dialect == cx; Dialect == tau; Dialect == xvm; Dialect == trealla
+		)
+	)).
+		epsilon(Epsilon) :-
+			Epsilon is epsilon.
+	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+		epsilon(Epsilon) :-
+			Epsilon is nexttoward(1.0, 2.0) - 1.0.
+	:- else.
+		epsilon(0.000000000001).
 	:- endif.
 
 :- end_object.
