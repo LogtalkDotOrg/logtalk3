@@ -115,6 +115,7 @@
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Libraries</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#amqp"><span class="xref std std-ref">amqp</span></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="amqp_0.html">amqp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="amqp_pool_0.html">amqp_pool</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#arbitrary"><span class="xref std std-ref">arbitrary</span></a><ul>
@@ -823,6 +824,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-amqp"><code class="docutils literal notranslate"><span class="pre">library/amqp/</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="amqp_0.html">amqp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="amqp_pool_0.html">amqp_pool</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-arbitrary"><code class="docutils literal notranslate"><span class="pre">library/arbitrary/</span></code></a><ul>
@@ -1418,6 +1420,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entities</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="entity_index.html#categories">Categories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="amqp_pool_0.html">amqp_pool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="arbitrary_0.html">arbitrary</a></li>
 <li class="toctree-l3"><a class="reference internal" href="assertions_messages_0.html">assertions_messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="best_first_0.html">best_first</a></li>
@@ -1818,6 +1821,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#ack-3"><code class="docutils literal notranslate"><span class="pre">ack/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#acquire-1"><code class="docutils literal notranslate"><span class="pre">acquire/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#activate-debug-handler-1"><code class="docutils literal notranslate"><span class="pre">activate_debug_handler/1</span></code></a><ul class="simple">
@@ -2594,6 +2600,9 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#description-1"><code class="docutils literal notranslate"><span class="pre">description/1</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#destroy-0"><code class="docutils literal notranslate"><span class="pre">destroy/0</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#deterministic-1"><code class="docutils literal notranslate"><span class="pre">deterministic/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -3285,6 +3294,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#init-tails-2"><code class="docutils literal notranslate"><span class="pre">init_tails/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#initialize-1"><code class="docutils literal notranslate"><span class="pre">initialize/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#inits-2"><code class="docutils literal notranslate"><span class="pre">inits/2</span></code></a><ul class="simple">
@@ -4586,6 +4598,9 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#relative-standard-deviation-2"><code class="docutils literal notranslate"><span class="pre">relative_standard_deviation/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#release-1"><code class="docutils literal notranslate"><span class="pre">release/1</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#removedependent-1"><code class="docutils literal notranslate"><span class="pre">removeDependent/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -4644,6 +4659,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#reset-seed-0"><code class="docutils literal notranslate"><span class="pre">reset_seed/0</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#resize-2"><code class="docutils literal notranslate"><span class="pre">resize/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#restore-1"><code class="docutils literal notranslate"><span class="pre">restore/1</span></code></a><ul class="simple">
@@ -4986,6 +5004,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#starts-2"><code class="docutils literal notranslate"><span class="pre">starts/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#stats-1"><code class="docutils literal notranslate"><span class="pre">stats/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#stats-2"><code class="docutils literal notranslate"><span class="pre">stats/2</span></code></a><ul class="simple">
@@ -5450,6 +5471,9 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#white-spaces-0"><code class="docutils literal notranslate"><span class="pre">white_spaces//0</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#with-connection-1"><code class="docutils literal notranslate"><span class="pre">with_connection/1</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#with-output-to-2"><code class="docutils literal notranslate"><span class="pre">with_output_to/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -5542,7 +5566,7 @@
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
-<p>Generated on Wed Feb 11 00:53:00 WET 2026</p>
+<p>Generated on Wed Feb 11 01:33:25 WET 2026</p>
 </section>
 
 

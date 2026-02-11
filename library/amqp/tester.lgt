@@ -48,10 +48,10 @@
 		logtalk_load(os(loader)),
 		logtalk_load(sockets(loader)),
 		logtalk_load(term_io(loader)),
-		logtalk_load(amqp, [source_data(on), debug(on)]),
+		logtalk_load([amqp, amqp_pool], [source_data(on), debug(on)]),
 		logtalk_load(lgtunit(loader)),
-		logtalk_load(tests, [hook(lgtunit)]),
-		tests::run
+		logtalk_load([tests, tests_pool], [hook(lgtunit)]),
+		lgtunit::run_test_sets([tests, tests_pool])
 	)).
 
 :- endif.

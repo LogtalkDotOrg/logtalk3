@@ -89,6 +89,17 @@
 <li class="toctree-l4"><a class="reference internal" href="#closing-connections">Closing connections</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#connection-pooling">Connection Pooling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#defining-a-pool">Defining a pool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#initializing-the-pool">Initializing the pool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#acquiring-and-releasing-connections">Acquiring and releasing connections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-with-connection-1">Using with_connection/1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pool-statistics">Pool statistics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resizing-the-pool">Resizing the pool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#destroying-the-pool">Destroying the pool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-pools-dynamically">Creating pools dynamically</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#binary-frame-encoding">Binary Frame Encoding</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#frame-structure">Frame structure</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#encoding-decoding-frames">Encoding/decoding frames</a></li>
@@ -240,6 +251,7 @@ ActiveMQ, and other brokers.</p>
 <li><p>Full AMQP 0-9-1 protocol support with binary frame encoding/decoding</p></li>
 <li><p>Connection management with heartbeat negotiation</p></li>
 <li><p>Automatic reconnection with configurable retry attempts and delays</p></li>
+<li><p>Connection pooling with automatic connection management</p></li>
 <li><p>Multiple concurrent channels over a single connection</p></li>
 <li><p>Exchange operations: declare, delete, bind, unbind</p></li>
 <li><p>Queue operations: declare, delete, bind, unbind, purge</p></li>
@@ -456,6 +468,100 @@ connection.</p>
 </div>
 </section>
 </section>
+<section id="connection-pooling">
+<h2>Connection Pooling<a class="headerlink" href="#connection-pooling" title="Link to this heading"></a></h2>
+<p>The library provides connection pooling through the <code class="docutils literal notranslate"><span class="pre">amqp_pool</span></code>
+category. To create a connection pool, define an object that imports
+this category:</p>
+<section id="defining-a-pool">
+<h3>Defining a pool<a class="headerlink" href="#defining-a-pool" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(my_pool,
+    <span class="k">imports</span>(amqp_pool)).
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+</section>
+<section id="initializing-the-pool">
+<h3>Initializing the pool<a class="headerlink" href="#initializing-the-pool" title="Link to this heading"></a></h3>
+<p>Initialize the pool with configuration options:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> my_pool<span class="o">::</span>initialize([
+    host(localhost),
+    port(<span class="m">5672</span>),
+    min_size(<span class="m">2</span>),
+    max_size(<span class="m">10</span>),
+    connection_options([
+        username(<span class="s">&#39;guest&#39;</span>),
+        password(<span class="s">&#39;guest&#39;</span>),
+        virtual_host(<span class="s">&#39;/&#39;</span>)
+    ])
+]).
+</pre></div>
+</div>
+<p>Pool configuration options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">host(Host)</span></code> - AMQP server hostname (default: <code class="docutils literal notranslate"><span class="pre">localhost</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">port(Port)</span></code> - AMQP server port (default: <code class="docutils literal notranslate"><span class="pre">5672</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min_size(N)</span></code> - Minimum connections to maintain (default: <code class="docutils literal notranslate"><span class="pre">1</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_size(N)</span></code> - Maximum connections allowed (default: <code class="docutils literal notranslate"><span class="pre">10</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_options(Options)</span></code> - Options passed to
+<code class="docutils literal notranslate"><span class="pre">amqp::connect/4</span></code> (default: <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</p></li>
+</ul>
+</section>
+<section id="acquiring-and-releasing-connections">
+<h3>Acquiring and releasing connections<a class="headerlink" href="#acquiring-and-releasing-connections" title="Link to this heading"></a></h3>
+<p>Manually acquire and release connections:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> my_pool<span class="o">::</span>acquire(<span class="nv">Connection</span>),
+   amqp<span class="o">::</span>channel_open(<span class="nv">Connection</span>, <span class="m">1</span>, <span class="nv">Channel</span>),
+   <span class="c">% ... use the channel ...</span>
+   amqp<span class="o">::</span>channel_close(<span class="nv">Channel</span>),
+   my_pool<span class="o">::</span>release(<span class="nv">Connection</span>).
+</pre></div>
+</div>
+</section>
+<section id="using-with-connection-1">
+<h3>Using with_connection/1<a class="headerlink" href="#using-with-connection-1" title="Link to this heading"></a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">with_connection/1</span></code> for automatic connection management:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> my_pool<span class="o">::</span>with_connection(do_work).
+
+do_work(<span class="nv">Connection</span>) <span class="o">:-</span>
+    amqp<span class="o">::</span>channel_open(<span class="nv">Connection</span>, <span class="m">1</span>, <span class="nv">Channel</span>),
+    amqp<span class="o">::</span>basic_publish(<span class="nv">Channel</span>, <span class="s">&#39;&#39;</span>, <span class="s">&#39;Hello!&#39;</span>, [routing_key(<span class="s">&#39;my.queue&#39;</span>)]),
+    amqp<span class="o">::</span>channel_close(<span class="nv">Channel</span>).
+</pre></div>
+</div>
+<p>The connection is automatically released even if the goal fails or
+throws an exception.</p>
+</section>
+<section id="pool-statistics">
+<h3>Pool statistics<a class="headerlink" href="#pool-statistics" title="Link to this heading"></a></h3>
+<p>Get pool statistics:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> my_pool<span class="o">::</span>stats(stats(<span class="nv">Available</span>, <span class="nv">InUse</span>, <span class="nv">Total</span>, <span class="nv">MinSize</span>, <span class="nv">MaxSize</span>)).
+</pre></div>
+</div>
+</section>
+<section id="resizing-the-pool">
+<h3>Resizing the pool<a class="headerlink" href="#resizing-the-pool" title="Link to this heading"></a></h3>
+<p>Resize the pool at runtime:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> my_pool<span class="o">::</span>resize(<span class="m">5</span>, <span class="m">20</span>).
+</pre></div>
+</div>
+</section>
+<section id="destroying-the-pool">
+<h3>Destroying the pool<a class="headerlink" href="#destroying-the-pool" title="Link to this heading"></a></h3>
+<p>Close all connections and clear pool state:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> my_pool<span class="o">::</span>destroy.
+</pre></div>
+</div>
+</section>
+<section id="creating-pools-dynamically">
+<h3>Creating pools dynamically<a class="headerlink" href="#creating-pools-dynamically" title="Link to this heading"></a></h3>
+<p>Pools can also be created at runtime using <code class="docutils literal notranslate"><span class="pre">create_object/4</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">create_object</span>(dynamic_pool, [imports(amqp_pool)], [], []),
+   dynamic_pool<span class="o">::</span>initialize([host(localhost), port(<span class="m">5672</span>)]).
+</pre></div>
+</div>
+</section>
+</section>
 <section id="binary-frame-encoding">
 <h2>Binary Frame Encoding<a class="headerlink" href="#binary-frame-encoding" title="Link to this heading"></a></h2>
 <p>AMQP 0-9-1 is a binary protocol. The library provides low-level encoding
@@ -589,7 +695,6 @@ significantly:</p>
 <li><p>Logtalk protocols for messaging patterns (request/reply, pub/sub,
 etc.)</p></li>
 <li><p>Categories for common message transformations</p></li>
-<li><p>Connection pooling</p></li>
 <li><p>Async message handlers</p></li>
 </ul>
 </section>

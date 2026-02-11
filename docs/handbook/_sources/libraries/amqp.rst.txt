@@ -26,6 +26,7 @@ Features
 - Full AMQP 0-9-1 protocol support with binary frame encoding/decoding
 - Connection management with heartbeat negotiation
 - Automatic reconnection with configurable retry attempts and delays
+- Connection pooling with automatic connection management
 - Multiple concurrent channels over a single connection
 - Exchange operations: declare, delete, bind, unbind
 - Queue operations: declare, delete, bind, unbind, purge
@@ -296,6 +297,117 @@ Close the connection:
 
    ?- amqp::close(Connection).
 
+Connection Pooling
+------------------
+
+The library provides connection pooling through the ``amqp_pool``
+category. To create a connection pool, define an object that imports
+this category:
+
+Defining a pool
+~~~~~~~~~~~~~~~
+
+::
+
+   :- object(my_pool,
+       imports(amqp_pool)).
+   :- end_object.
+
+Initializing the pool
+~~~~~~~~~~~~~~~~~~~~~
+
+Initialize the pool with configuration options:
+
+::
+
+   ?- my_pool::initialize([
+       host(localhost),
+       port(5672),
+       min_size(2),
+       max_size(10),
+       connection_options([
+           username('guest'),
+           password('guest'),
+           virtual_host('/')
+       ])
+   ]).
+
+Pool configuration options:
+
+- ``host(Host)`` - AMQP server hostname (default: ``localhost``)
+- ``port(Port)`` - AMQP server port (default: ``5672``)
+- ``min_size(N)`` - Minimum connections to maintain (default: ``1``)
+- ``max_size(N)`` - Maximum connections allowed (default: ``10``)
+- ``connection_options(Options)`` - Options passed to
+  ``amqp::connect/4`` (default: ``[]``)
+
+Acquiring and releasing connections
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Manually acquire and release connections:
+
+::
+
+   ?- my_pool::acquire(Connection),
+      amqp::channel_open(Connection, 1, Channel),
+      % ... use the channel ...
+      amqp::channel_close(Channel),
+      my_pool::release(Connection).
+
+Using with_connection/1
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Use ``with_connection/1`` for automatic connection management:
+
+::
+
+   ?- my_pool::with_connection(do_work).
+
+   do_work(Connection) :-
+       amqp::channel_open(Connection, 1, Channel),
+       amqp::basic_publish(Channel, '', 'Hello!', [routing_key('my.queue')]),
+       amqp::channel_close(Channel).
+
+The connection is automatically released even if the goal fails or
+throws an exception.
+
+Pool statistics
+~~~~~~~~~~~~~~~
+
+Get pool statistics:
+
+::
+
+   ?- my_pool::stats(stats(Available, InUse, Total, MinSize, MaxSize)).
+
+Resizing the pool
+~~~~~~~~~~~~~~~~~
+
+Resize the pool at runtime:
+
+::
+
+   ?- my_pool::resize(5, 20).
+
+Destroying the pool
+~~~~~~~~~~~~~~~~~~~
+
+Close all connections and clear pool state:
+
+::
+
+   ?- my_pool::destroy.
+
+Creating pools dynamically
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Pools can also be created at runtime using ``create_object/4``:
+
+::
+
+   ?- create_object(dynamic_pool, [imports(amqp_pool)], [], []),
+      dynamic_pool::initialize([host(localhost), port(5672)]).
+
 Binary Frame Encoding
 ---------------------
 
@@ -410,7 +522,6 @@ Planned enhancements for phase 2:
 - Logtalk protocols for messaging patterns (request/reply, pub/sub,
   etc.)
 - Categories for common message transformations
-- Connection pooling
 - Async message handlers
 
 Known Limitations

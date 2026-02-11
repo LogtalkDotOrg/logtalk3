@@ -151,6 +151,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`stomp <stomp/0::ack/3>`
 
+``acquire/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp_pool <amqp_pool/0::acquire/1>`
+
 ``activate_debug_handler/1``
 ----------------------------
 
@@ -2773,6 +2783,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`pack_protocol <pack_protocol/0::description/1>`
 * :ref:`registry_protocol <registry_protocol/0::description/1>`
 
+``destroy/0``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp_pool <amqp_pool/0::destroy/0>`
+
 ``deterministic/1``
 -------------------
 
@@ -5160,6 +5180,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`subsequences_protocol <subsequences_protocol/0::init_tails/2>`
+
+``initialize/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp_pool <amqp_pool/0::initialize/1>`
 
 ``inits/2``
 -----------
@@ -9601,6 +9631,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`statisticsp <statisticsp/0::relative_standard_deviation/2>`
 
+``release/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp_pool <amqp_pool/0::release/1>`
+
 ``removeDependent/1``
 ---------------------
 
@@ -9805,6 +9845,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`fast_random(Algorithm) <fast_random/1::reset_seed/0>`
 * :ref:`random(Algorithm) <random/1::reset_seed/0>`
+
+``resize/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp_pool <amqp_pool/0::resize/2>`
 
 ``restore/1``
 -------------
@@ -10969,6 +11019,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`intervalp <intervalp/0::starts/2>`
+
+``stats/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp_pool <amqp_pool/0::stats/1>`
 
 ``stats/2``
 -----------
@@ -12532,6 +12592,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`blank_grammars(Format) <blank_grammars/1::white_spaces//0>`
+
+``with_connection/1``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp_pool <amqp_pool/0::with_connection/1>`
 
 ``with_output_to/2``
 --------------------
