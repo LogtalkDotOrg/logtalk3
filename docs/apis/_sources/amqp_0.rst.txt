@@ -228,10 +228,10 @@ Declares an exchange on the server.
 | **Remarks:**
 
     - Option type(Type): Exchange type: direct, fanout, topic, headers. Default is direct.
-    - Option durable(Bool): Survive server restart. Default is false.
-    - Option auto_delete(Bool): Delete when unused. Default is false.
-    - Option internal(Bool): Internal exchange. Default is false.
-    - Option arguments(Args): Additional arguments as key-value pairs.
+    - Option durable(Boolean): Survive server restart. Default is false.
+    - Option auto_delete(Boolean): Delete when unused. Default is false.
+    - Option internal(Boolean): Internal exchange. Default is false.
+    - Option arguments(Arguments): Additional arguments as key-value pairs.
 
 
 ------------
@@ -254,7 +254,7 @@ Deletes an exchange.
 
 | **Remarks:**
 
-    - Option if_unused(Bool): Only delete if unused. Default is false.
+    - Option if_unused(Boolean): Only delete if unused. Default is false.
 
 
 ------------
@@ -278,7 +278,7 @@ Binds an exchange to another exchange.
 | **Remarks:**
 
     - Option routing_key(Key): Routing key for binding. Default is empty.
-    - Option arguments(Args): Additional arguments.
+    - Option arguments(Arguments): Additional arguments.
 
 
 ------------
@@ -320,10 +320,10 @@ Declares a queue on the server. If Queue is a variable, the server generates a u
 
 | **Remarks:**
 
-    - Option durable(Bool): Survive server restart. Default is false.
-    - Option exclusive(Bool): Exclusive to this connection. Default is false.
-    - Option auto_delete(Bool): Delete when unused. Default is false.
-    - Option arguments(Args): Additional arguments (e.g., message TTL, dead letter exchange).
+    - Option durable(Boolean): Survive server restart. Default is false.
+    - Option exclusive(Boolean): Exclusive to this connection. Default is false.
+    - Option auto_delete(Boolean): Delete when unused. Default is false.
+    - Option arguments(Arguments): Additional arguments (e.g., message TTL, dead letter exchange).
 
 
 ------------
@@ -346,8 +346,8 @@ Deletes a queue.
 
 | **Remarks:**
 
-    - Option if_unused(Bool): Only delete if unused. Default is false.
-    - Option if_empty(Bool): Only delete if empty. Default is false.
+    - Option if_unused(Boolean): Only delete if unused. Default is false.
+    - Option if_empty(Boolean): Only delete if empty. Default is false.
 
 
 ------------
@@ -371,7 +371,7 @@ Binds a queue to an exchange.
 | **Remarks:**
 
     - Option routing_key(Key): Routing key for binding. Default is empty.
-    - Option arguments(Args): Additional arguments.
+    - Option arguments(Arguments): Additional arguments.
 
 
 ------------
@@ -433,8 +433,8 @@ Publishes a message to an exchange.
 | **Remarks:**
 
     - Option routing_key(Key): Routing key for message. Default is empty.
-    - Option mandatory(Bool): Return if not routable. Default is false.
-    - Option immediate(Bool): Return if not deliverable. Default is false (deprecated in RabbitMQ).
+    - Option mandatory(Boolean): Return if not routable. Default is false.
+    - Option immediate(Boolean): Return if not deliverable. Default is false (deprecated in RabbitMQ).
     - Option content_type(Type): MIME content type.
     - Option content_encoding(Enc): Content encoding.
     - Option correlation_id(Id): Correlation identifier.
@@ -471,10 +471,10 @@ Starts consuming messages from a queue.
 | **Remarks:**
 
     - Option consumer_tag(Tag): Consumer identifier. Server generates if not provided.
-    - Option no_local(Bool): Do not receive own messages. Default is false.
-    - Option no_ack(Bool): No acknowledgment required. Default is false.
-    - Option exclusive(Bool): Exclusive consumer. Default is false.
-    - Option arguments(Args): Additional arguments.
+    - Option no_local(Boolean): Do not receive own messages. Default is false.
+    - Option no_ack(Boolean): No acknowledgment required. Default is false.
+    - Option exclusive(Boolean): Exclusive consumer. Default is false.
+    - Option arguments(Arguments): Additional arguments.
 
 
 ------------
@@ -516,7 +516,7 @@ Synchronously gets a message from a queue.
 
 | **Remarks:**
 
-    - Option no_ack(Bool): No acknowledgment required. Default is false.
+    - Option no_ack(Boolean): No acknowledgment required. Default is false.
 
 
 ------------
@@ -539,7 +539,7 @@ Acknowledges a message.
 
 | **Remarks:**
 
-    - Option multiple(Bool): Acknowledge all up to this tag. Default is false.
+    - Option multiple(Boolean): Acknowledge all up to this tag. Default is false.
 
 
 ------------
@@ -562,8 +562,8 @@ Negatively acknowledges a message (RabbitMQ extension).
 
 | **Remarks:**
 
-    - Option multiple(Bool): Reject all up to this tag. Default is false.
-    - Option requeue(Bool): Requeue the message. Default is true.
+    - Option multiple(Boolean): Reject all up to this tag. Default is false.
+    - Option requeue(Boolean): Requeue the message. Default is true.
 
 
 ------------
@@ -586,7 +586,7 @@ Rejects a message.
 
 | **Remarks:**
 
-    - Option requeue(Bool): Requeue the message. Default is true.
+    - Option requeue(Boolean): Requeue the message. Default is true.
 
 
 ------------
@@ -611,7 +611,7 @@ Sets quality of service (prefetch) settings.
 
     - Option prefetch_size(Size): Prefetch window size in bytes. Default is 0 (no limit).
     - Option prefetch_count(Count): Prefetch window in messages. Default is 0 (no limit).
-    - Option global(Bool): Apply to entire connection. Default is false.
+    - Option global(Boolean): Apply to entire connection. Default is false.
 
 
 ------------
@@ -634,7 +634,7 @@ Asks the server to redeliver unacknowledged messages.
 
 | **Remarks:**
 
-    - Option requeue(Bool): Requeue messages. Default is false.
+    - Option requeue(Boolean): Requeue messages. Default is false.
 
 
 ------------

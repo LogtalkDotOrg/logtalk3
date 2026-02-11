@@ -463,10 +463,10 @@
 	% ==========================================================================
 
 	test(amqp_bool_to_int_1, true(Int == 1)) :-
-		amqp<<bool_to_int(1, Int).
+		amqp<<boolean_to_integer(1, Int).
 
 	test(amqp_bool_to_int_0, true(Int == 0)) :-
-		amqp<<bool_to_int(0, Int).
+		amqp<<boolean_to_integer(0, Int).
 
 	% ==========================================================================
 	% Negotiate Value Helper Tests
@@ -673,6 +673,72 @@
 		amqp::basic_consume(Channel, 'test-queue', [consumer_tag('test-consumer')]),
 		amqp::basic_cancel(Channel, 'test-consumer', []),
 		amqp::queue_delete(Channel, 'test-queue', []),
+		amqp::channel_close(Channel),
+		amqp::close(Connection).
+
+	test(amqp_receive_deliver_01, subsumes(message(deliver,_,_,'test-receive-queue',_,_), Message), [condition(amqp_server_available)]) :-
+		amqp::connect(localhost, 5672, Connection, []),
+		amqp::channel_open(Connection, 1, Channel),
+		amqp::queue_declare(Channel, 'test-receive-queue', [auto_delete(true)]),
+		% Start consuming
+		amqp::basic_consume(Channel, 'test-receive-queue', [consumer_tag('test-receiver'), no_ack(true)]),
+		% Publish a message
+		amqp::basic_publish(Channel, '', 'Hello from receive test', [routing_key('test-receive-queue')]),
+		% Receive the message
+		amqp::receive(Channel, Message, []),
+		% Cleanup
+		amqp::basic_cancel(Channel, 'test-receiver', []),
+		amqp::channel_close(Channel),
+		amqp::close(Connection).
+
+	test(amqp_receive_message_body_01, subsumes(message(deliver,_,_,'test-receive-body-queue',_,_), Message), [condition(amqp_server_available)]) :-
+		amqp::connect(localhost, 5672, Connection, []),
+		amqp::channel_open(Connection, 1, Channel),
+		amqp::queue_declare(Channel, 'test-receive-body-queue', [auto_delete(true)]),
+		amqp::basic_consume(Channel, 'test-receive-body-queue', [consumer_tag('test-body-receiver'), no_ack(true)]),
+		amqp::basic_publish(Channel, '', 'Test message body', [routing_key('test-receive-body-queue')]),
+		amqp::receive(Channel, Message, []),
+		% Extract and verify body is non-empty atom
+		amqp::message_body(Message, Body),
+		^^assertion(body_nonvar, nonvar(Body)),
+		^^assertion(body_atom, atom(Body)),
+		amqp::basic_cancel(Channel, 'test-body-receiver', []),
+		amqp::channel_close(Channel),
+		amqp::close(Connection).
+
+	test(amqp_receive_message_properties_01, subsumes(message(deliver,_,_,'test-receive-props-queue',_,_), Message), [condition(amqp_server_available)]) :-
+		amqp::connect(localhost, 5672, Connection, []),
+		amqp::channel_open(Connection, 1, Channel),
+		amqp::queue_declare(Channel, 'test-receive-props-queue', [auto_delete(true)]),
+		amqp::basic_consume(Channel, 'test-receive-props-queue', [consumer_tag('test-props-receiver'), no_ack(true)]),
+		amqp::basic_publish(Channel, '', 'Props test', [routing_key('test-receive-props-queue')]),
+		amqp::receive(Channel, Message, []),
+		% Extract properties - should be a list
+		amqp::message_properties(Message, Properties),
+		^^assertion(properties_list, is_list(Properties)),
+		amqp::basic_cancel(Channel, 'test-props-receiver', []),
+		amqp::channel_close(Channel),
+		amqp::close(Connection).
+
+	test(amqp_receive_multiple_01, true, [condition(amqp_server_available)]) :-
+		amqp::connect(localhost, 5672, Connection, []),
+		amqp::channel_open(Connection, 1, Channel),
+		amqp::queue_declare(Channel, 'test-receive-multi-queue', [auto_delete(true)]),
+		amqp::basic_consume(Channel, 'test-receive-multi-queue', [consumer_tag('test-multi-receiver'), no_ack(true)]),
+		% Publish two messages
+		amqp::basic_publish(Channel, '', 'Message 1', [routing_key('test-receive-multi-queue')]),
+		amqp::basic_publish(Channel, '', 'Message 2', [routing_key('test-receive-multi-queue')]),
+		% Receive both and verify structure
+		amqp::receive(Channel, Message1, []),
+		amqp::receive(Channel, Message2, []),
+		^^assertion(message1_structure, subsumes_term(message(deliver,_,_,'test-receive-multi-queue',_,_), Message1)),
+		^^assertion(message2_structure, subsumes_term(message(deliver,_,_,'test-receive-multi-queue',_,_), Message2)),
+		amqp::message_body(Message1, Body1),
+		amqp::message_body(Message2, Body2),
+		^^assertion(body1_atom, atom(Body1)),
+		^^assertion(body2_atom, atom(Body2)),
+		^^assertion(bodies_different, Body1 \== Body2),
+		amqp::basic_cancel(Channel, 'test-multi-receiver', []),
 		amqp::channel_close(Channel),
 		amqp::close(Connection).
 

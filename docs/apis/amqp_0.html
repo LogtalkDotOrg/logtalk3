@@ -538,10 +538,10 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Option type(Type): Exchange type: direct, fanout, topic, headers. Default is direct.</p></li>
-<li><p>Option durable(Bool): Survive server restart. Default is false.</p></li>
-<li><p>Option auto_delete(Bool): Delete when unused. Default is false.</p></li>
-<li><p>Option internal(Bool): Internal exchange. Default is false.</p></li>
-<li><p>Option arguments(Args): Additional arguments as key-value pairs.</p></li>
+<li><p>Option durable(Boolean): Survive server restart. Default is false.</p></li>
+<li><p>Option auto_delete(Boolean): Delete when unused. Default is false.</p></li>
+<li><p>Option internal(Boolean): Internal exchange. Default is false.</p></li>
+<li><p>Option arguments(Arguments): Additional arguments as key-value pairs.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -570,7 +570,7 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Option if_unused(Bool): Only delete if unused. Default is false.</p></li>
+<li><p>Option if_unused(Boolean): Only delete if unused. Default is false.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -600,7 +600,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Option routing_key(Key): Routing key for binding. Default is empty.</p></li>
-<li><p>Option arguments(Args): Additional arguments.</p></li>
+<li><p>Option arguments(Arguments): Additional arguments.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -650,10 +650,10 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Option durable(Bool): Survive server restart. Default is false.</p></li>
-<li><p>Option exclusive(Bool): Exclusive to this connection. Default is false.</p></li>
-<li><p>Option auto_delete(Bool): Delete when unused. Default is false.</p></li>
-<li><p>Option arguments(Args): Additional arguments (e.g., message TTL, dead letter exchange).</p></li>
+<li><p>Option durable(Boolean): Survive server restart. Default is false.</p></li>
+<li><p>Option exclusive(Boolean): Exclusive to this connection. Default is false.</p></li>
+<li><p>Option auto_delete(Boolean): Delete when unused. Default is false.</p></li>
+<li><p>Option arguments(Arguments): Additional arguments (e.g., message TTL, dead letter exchange).</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -682,8 +682,8 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Option if_unused(Bool): Only delete if unused. Default is false.</p></li>
-<li><p>Option if_empty(Bool): Only delete if empty. Default is false.</p></li>
+<li><p>Option if_unused(Boolean): Only delete if unused. Default is false.</p></li>
+<li><p>Option if_empty(Boolean): Only delete if empty. Default is false.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -713,7 +713,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Option routing_key(Key): Routing key for binding. Default is empty.</p></li>
-<li><p>Option arguments(Args): Additional arguments.</p></li>
+<li><p>Option arguments(Arguments): Additional arguments.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -785,8 +785,8 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Option routing_key(Key): Routing key for message. Default is empty.</p></li>
-<li><p>Option mandatory(Bool): Return if not routable. Default is false.</p></li>
-<li><p>Option immediate(Bool): Return if not deliverable. Default is false (deprecated in RabbitMQ).</p></li>
+<li><p>Option mandatory(Boolean): Return if not routable. Default is false.</p></li>
+<li><p>Option immediate(Boolean): Return if not deliverable. Default is false (deprecated in RabbitMQ).</p></li>
 <li><p>Option content_type(Type): MIME content type.</p></li>
 <li><p>Option content_encoding(Enc): Content encoding.</p></li>
 <li><p>Option correlation_id(Id): Correlation identifier.</p></li>
@@ -829,10 +829,10 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Option consumer_tag(Tag): Consumer identifier. Server generates if not provided.</p></li>
-<li><p>Option no_local(Bool): Do not receive own messages. Default is false.</p></li>
-<li><p>Option no_ack(Bool): No acknowledgment required. Default is false.</p></li>
-<li><p>Option exclusive(Bool): Exclusive consumer. Default is false.</p></li>
-<li><p>Option arguments(Args): Additional arguments.</p></li>
+<li><p>Option no_local(Boolean): Do not receive own messages. Default is false.</p></li>
+<li><p>Option no_ack(Boolean): No acknowledgment required. Default is false.</p></li>
+<li><p>Option exclusive(Boolean): Exclusive consumer. Default is false.</p></li>
+<li><p>Option arguments(Arguments): Additional arguments.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -882,7 +882,7 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Option no_ack(Bool): No acknowledgment required. Default is false.</p></li>
+<li><p>Option no_ack(Boolean): No acknowledgment required. Default is false.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -911,7 +911,7 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Option multiple(Bool): Acknowledge all up to this tag. Default is false.</p></li>
+<li><p>Option multiple(Boolean): Acknowledge all up to this tag. Default is false.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -940,8 +940,8 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Option multiple(Bool): Reject all up to this tag. Default is false.</p></li>
-<li><p>Option requeue(Bool): Requeue the message. Default is true.</p></li>
+<li><p>Option multiple(Boolean): Reject all up to this tag. Default is false.</p></li>
+<li><p>Option requeue(Boolean): Requeue the message. Default is true.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -970,7 +970,7 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Option requeue(Bool): Requeue the message. Default is true.</p></li>
+<li><p>Option requeue(Boolean): Requeue the message. Default is true.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -1001,7 +1001,7 @@
 <div><ul class="simple">
 <li><p>Option prefetch_size(Size): Prefetch window size in bytes. Default is 0 (no limit).</p></li>
 <li><p>Option prefetch_count(Count): Prefetch window in messages. Default is 0 (no limit).</p></li>
-<li><p>Option global(Bool): Apply to entire connection. Default is false.</p></li>
+<li><p>Option global(Boolean): Apply to entire connection. Default is false.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -1030,7 +1030,7 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Option requeue(Bool): Requeue messages. Default is false.</p></li>
+<li><p>Option requeue(Boolean): Requeue messages. Default is false.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />

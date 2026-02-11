@@ -128,10 +128,10 @@
 		argnames is ['Channel', 'Exchange', 'Options'],
 		remarks is [
 			'Option type(Type)' - 'Exchange type: direct, fanout, topic, headers. Default is direct.',
-			'Option durable(Bool)' - 'Survive server restart. Default is false.',
-			'Option auto_delete(Bool)' - 'Delete when unused. Default is false.',
-			'Option internal(Bool)' - 'Internal exchange. Default is false.',
-			'Option arguments(Args)' - 'Additional arguments as key-value pairs.'
+			'Option durable(Boolean)' - 'Survive server restart. Default is false.',
+			'Option auto_delete(Boolean)' - 'Delete when unused. Default is false.',
+			'Option internal(Boolean)' - 'Internal exchange. Default is false.',
+			'Option arguments(Arguments)' - 'Additional arguments as key-value pairs.'
 		]
 	]).
 
@@ -141,7 +141,7 @@
 		comment is 'Deletes an exchange.',
 		argnames is ['Channel', 'Exchange', 'Options'],
 		remarks is [
-			'Option if_unused(Bool)' - 'Only delete if unused. Default is false.'
+			'Option if_unused(Boolean)' - 'Only delete if unused. Default is false.'
 		]
 	]).
 
@@ -152,7 +152,7 @@
 		argnames is ['Channel', 'Destination', 'Source', 'Options'],
 		remarks is [
 			'Option routing_key(Key)' - 'Routing key for binding. Default is empty.',
-			'Option arguments(Args)' - 'Additional arguments.'
+			'Option arguments(Arguments)' - 'Additional arguments.'
 		]
 	]).
 
@@ -173,10 +173,10 @@
 		comment is 'Declares a queue on the server. If Queue is a variable, the server generates a unique name.',
 		argnames is ['Channel', 'Queue', 'Options'],
 		remarks is [
-			'Option durable(Bool)' - 'Survive server restart. Default is false.',
-			'Option exclusive(Bool)' - 'Exclusive to this connection. Default is false.',
-			'Option auto_delete(Bool)' - 'Delete when unused. Default is false.',
-			'Option arguments(Args)' - 'Additional arguments (e.g., message TTL, dead letter exchange).'
+			'Option durable(Boolean)' - 'Survive server restart. Default is false.',
+			'Option exclusive(Boolean)' - 'Exclusive to this connection. Default is false.',
+			'Option auto_delete(Boolean)' - 'Delete when unused. Default is false.',
+			'Option arguments(Arguments)' - 'Additional arguments (e.g., message TTL, dead letter exchange).'
 		]
 	]).
 
@@ -186,8 +186,8 @@
 		comment is 'Deletes a queue.',
 		argnames is ['Channel', 'Queue', 'Options'],
 		remarks is [
-			'Option if_unused(Bool)' - 'Only delete if unused. Default is false.',
-			'Option if_empty(Bool)' - 'Only delete if empty. Default is false.'
+			'Option if_unused(Boolean)' - 'Only delete if unused. Default is false.',
+			'Option if_empty(Boolean)' - 'Only delete if empty. Default is false.'
 		]
 	]).
 
@@ -198,7 +198,7 @@
 		argnames is ['Channel', 'Queue', 'Exchange', 'Options'],
 		remarks is [
 			'Option routing_key(Key)' - 'Routing key for binding. Default is empty.',
-			'Option arguments(Args)' - 'Additional arguments.'
+			'Option arguments(Arguments)' - 'Additional arguments.'
 		]
 	]).
 
@@ -227,8 +227,8 @@
 		argnames is ['Channel', 'Exchange', 'Body', 'Options'],
 		remarks is [
 			'Option routing_key(Key)' - 'Routing key for message. Default is empty.',
-			'Option mandatory(Bool)' - 'Return if not routable. Default is false.',
-			'Option immediate(Bool)' - 'Return if not deliverable. Default is false (deprecated in RabbitMQ).',
+			'Option mandatory(Boolean)' - 'Return if not routable. Default is false.',
+			'Option immediate(Boolean)' - 'Return if not deliverable. Default is false (deprecated in RabbitMQ).',
 			'Option content_type(Type)' - 'MIME content type.',
 			'Option content_encoding(Enc)' - 'Content encoding.',
 			'Option correlation_id(Id)' - 'Correlation identifier.',
@@ -252,10 +252,10 @@
 		argnames is ['Channel', 'Queue', 'Options'],
 		remarks is [
 			'Option consumer_tag(Tag)' - 'Consumer identifier. Server generates if not provided.',
-			'Option no_local(Bool)' - 'Do not receive own messages. Default is false.',
-			'Option no_ack(Bool)' - 'No acknowledgment required. Default is false.',
-			'Option exclusive(Bool)' - 'Exclusive consumer. Default is false.',
-			'Option arguments(Args)' - 'Additional arguments.'
+			'Option no_local(Boolean)' - 'Do not receive own messages. Default is false.',
+			'Option no_ack(Boolean)' - 'No acknowledgment required. Default is false.',
+			'Option exclusive(Boolean)' - 'Exclusive consumer. Default is false.',
+			'Option arguments(Arguments)' - 'Additional arguments.'
 		]
 	]).
 
@@ -272,7 +272,7 @@
 		comment is 'Synchronously gets a message from a queue.',
 		argnames is ['Channel', 'Queue', 'Options'],
 		remarks is [
-			'Option no_ack(Bool)' - 'No acknowledgment required. Default is false.'
+			'Option no_ack(Boolean)' - 'No acknowledgment required. Default is false.'
 		]
 	]).
 
@@ -282,7 +282,7 @@
 		comment is 'Acknowledges a message.',
 		argnames is ['Channel', 'DeliveryTag', 'Options'],
 		remarks is [
-			'Option multiple(Bool)' - 'Acknowledge all up to this tag. Default is false.'
+			'Option multiple(Boolean)' - 'Acknowledge all up to this tag. Default is false.'
 		]
 	]).
 
@@ -292,8 +292,8 @@
 		comment is 'Negatively acknowledges a message (RabbitMQ extension).',
 		argnames is ['Channel', 'DeliveryTag', 'Options'],
 		remarks is [
-			'Option multiple(Bool)' - 'Reject all up to this tag. Default is false.',
-			'Option requeue(Bool)' - 'Requeue the message. Default is true.'
+			'Option multiple(Boolean)' - 'Reject all up to this tag. Default is false.',
+			'Option requeue(Boolean)' - 'Requeue the message. Default is true.'
 		]
 	]).
 
@@ -303,7 +303,7 @@
 		comment is 'Rejects a message.',
 		argnames is ['Channel', 'DeliveryTag', 'Options'],
 		remarks is [
-			'Option requeue(Bool)' - 'Requeue the message. Default is true.'
+			'Option requeue(Boolean)' - 'Requeue the message. Default is true.'
 		]
 	]).
 
@@ -315,7 +315,7 @@
 		remarks is [
 			'Option prefetch_size(Size)' - 'Prefetch window size in bytes. Default is 0 (no limit).',
 			'Option prefetch_count(Count)' - 'Prefetch window in messages. Default is 0 (no limit).',
-			'Option global(Bool)' - 'Apply to entire connection. Default is false.'
+			'Option global(Boolean)' - 'Apply to entire connection. Default is false.'
 		]
 	]).
 
@@ -325,7 +325,7 @@
 		comment is 'Asks the server to redeliver unacknowledged messages.',
 		argnames is ['Channel', 'Options'],
 		remarks is [
-			'Option requeue(Bool)' - 'Requeue messages. Default is false.'
+			'Option requeue(Boolean)' - 'Requeue messages. Default is false.'
 		]
 	]).
 
@@ -617,19 +617,19 @@
 		flush_output(Output),
 		% Receive Connection.Start
 		read_frame(Input, StartFrame, Context),
-		(	StartFrame = frame(method, 0, connection, start, StartArgs) ->
+		(	StartFrame = frame(method, 0, connection, start, StartArguments) ->
 			true
 		;	socket::close(Input, Output),
 			throw(error(amqp_error(protocol_error('Expected Connection.Start')), Context))
 		),
 		% Extract server capabilities
-		member(mechanisms-Mechanisms, StartArgs),
-		(	member(locales-_Locales, StartArgs) -> true ; true),
+		member(mechanisms-Mechanisms, StartArguments),
+		(	member(locales-_Locales, StartArguments) -> true ; true),
 		% Send Connection.Start-Ok
 		option(username(Username), Options, 'guest'),
 		option(password(Password), Options, 'guest'),
 		build_sasl_response(Username, Password, Mechanisms, SaslResponse),
-		StartOkArgs = [
+		StartOkArguments = [
 			client_properties-[
 				product-longstr('Logtalk AMQP'),
 				version-longstr('1.0.0'),
@@ -646,18 +646,18 @@
 			response-SaslResponse,
 			locale-'en_US'
 		],
-		send_method(Output, 0, connection, start_ok, StartOkArgs),
+		send_method(Output, 0, connection, start_ok, StartOkArguments),
 		% Receive Connection.Tune
 		read_frame(Input, TuneFrame, Context),
-		(	TuneFrame = frame(method, 0, connection, tune, TuneArgs) ->
+		(	TuneFrame = frame(method, 0, connection, tune, TuneArguments) ->
 			true
 		;	socket::close(Input, Output),
 			throw(error(amqp_error(protocol_error('Expected Connection.Tune')), Context))
 		),
 		% Negotiate parameters
-		member(channel_max-ServerChannelMax, TuneArgs),
-		member(frame_max-ServerFrameMax, TuneArgs),
-		member(heartbeat-ServerHeartbeat, TuneArgs),
+		member(channel_max-ServerChannelMax, TuneArguments),
+		member(frame_max-ServerFrameMax, TuneArguments),
+		member(heartbeat-ServerHeartbeat, TuneArguments),
 		option(channel_max(ClientChannelMax), Options, 0),
 		option(frame_max(ClientFrameMax), Options, 131072),
 		option(heartbeat(ClientHeartbeat), Options, 60),
@@ -665,20 +665,20 @@
 		negotiate_value(ClientFrameMax, ServerFrameMax, NegotiatedFrameMax),
 		negotiate_heartbeat(ClientHeartbeat, ServerHeartbeat, NegotiatedHeartbeat),
 		% Send Connection.Tune-Ok
-		TuneOkArgs = [
+		TuneOkArguments = [
 			channel_max-NegotiatedChannelMax,
 			frame_max-NegotiatedFrameMax,
 			heartbeat-NegotiatedHeartbeat
 		],
-		send_method(Output, 0, connection, tune_ok, TuneOkArgs),
+		send_method(Output, 0, connection, tune_ok, TuneOkArguments),
 		% Send Connection.Open
 		option(virtual_host(VHost), Options, '/'),
-		OpenArgs = [
+		OpenArguments = [
 			virtual_host-VHost,
 			reserved_1-'',
 			reserved_2-0
 		],
-		send_method(Output, 0, connection, open, OpenArgs),
+		send_method(Output, 0, connection, open, OpenArguments),
 		% Receive Connection.Open-Ok
 		read_frame(Input, OpenOkFrame, Context),
 		(	OpenOkFrame = frame(method, 0, connection, open_ok, _) ->
@@ -694,14 +694,14 @@
 		context(Context),
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
-		CloseArgs = [
+		CloseArguments = [
 			reply_code-ReplyCode,
 			reply_text-ReplyText,
 			class_id-0,
 			method_id-0
 		],
 		catch(
-			(	send_method(Output, 0, connection, close, CloseArgs),
+			(	send_method(Output, 0, connection, close, CloseArguments),
 				read_frame(Input, CloseOkFrame, Context),
 				(	CloseOkFrame = frame(method, 0, connection, close_ok, _) ->
 					true
@@ -729,8 +729,8 @@
 		context(Context),
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
-		OpenArgs = [reserved_1-''],
-		send_method(Output, ChannelNumber, channel, open, OpenArgs),
+		OpenArguments = [reserved_1-''],
+		send_method(Output, ChannelNumber, channel, open, OpenArguments),
 		read_frame(Input, OpenOkFrame, Context),
 		(	OpenOkFrame = frame(method, ChannelNumber, channel, open_ok, _) ->
 			Channel = channel(Connection, ChannelNumber)
@@ -746,14 +746,14 @@
 		arg(2, Channel, ChannelNumber),
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
-		CloseArgs = [
+		CloseArguments = [
 			reply_code-ReplyCode,
 			reply_text-ReplyText,
 			class_id-0,
 			method_id-0
 		],
 		catch(
-			(	send_method(Output, ChannelNumber, channel, close, CloseArgs),
+			(	send_method(Output, ChannelNumber, channel, close, CloseArguments),
 				read_frame(Input, CloseOkFrame, Context),
 				(	CloseOkFrame = frame(method, ChannelNumber, channel, close_ok, _) ->
 					true
@@ -779,19 +779,19 @@
 		option(auto_delete(AutoDelete), Options, false),
 		option(internal(Internal), Options, false),
 		option(arguments(Arguments), Options, []),
-		bool_to_int(Durable, DurableInt),
-		bool_to_int(AutoDelete, AutoDeleteInt),
-		bool_to_int(Internal, InternalInt),
+		boolean_to_integer(Durable, DurableInt),
+		boolean_to_integer(AutoDelete, AutoDeleteInt),
+		boolean_to_integer(Internal, InternalInt),
 		% Flags: reserved1=0, durable, auto_delete, internal, nowait=0
 		Flags is (DurableInt << 1) \/ (AutoDeleteInt << 2) \/ (InternalInt << 3),
-		DeclareArgs = [
+		DeclareArguments = [
 			reserved_1-0,
 			exchange-Exchange,
 			type-Type,
 			flags-Flags,
 			arguments-Arguments
 		],
-		send_method(Output, ChannelNumber, exchange, declare, DeclareArgs),
+		send_method(Output, ChannelNumber, exchange, declare, DeclareArguments),
 		read_frame(Input, DeclareOkFrame, Context),
 		(	DeclareOkFrame = frame(method, ChannelNumber, exchange, declare_ok, _) ->
 			true
@@ -805,14 +805,14 @@
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
 		option(if_unused(IfUnused), Options, false),
-		bool_to_int(IfUnused, IfUnusedInt),
+		boolean_to_integer(IfUnused, IfUnusedInt),
 		Flags is (IfUnusedInt << 0),
-		DeleteArgs = [
+		DeleteArguments = [
 			reserved_1-0,
 			exchange-Exchange,
 			flags-Flags
 		],
-		send_method(Output, ChannelNumber, exchange, delete, DeleteArgs),
+		send_method(Output, ChannelNumber, exchange, delete, DeleteArguments),
 		read_frame(Input, DeleteOkFrame, Context),
 		(	DeleteOkFrame = frame(method, ChannelNumber, exchange, delete_ok, _) ->
 			true
@@ -827,7 +827,7 @@
 		arg(2, Connection, Output),
 		option(routing_key(RoutingKey), Options, ''),
 		option(arguments(Arguments), Options, []),
-		BindArgs = [
+		BindArguments = [
 			reserved_1-0,
 			destination-Destination,
 			source-Source,
@@ -835,7 +835,7 @@
 			nowait-0,
 			arguments-Arguments
 		],
-		send_method(Output, ChannelNumber, exchange, bind, BindArgs),
+		send_method(Output, ChannelNumber, exchange, bind, BindArguments),
 		read_frame(Input, BindOkFrame, Context),
 		(	BindOkFrame = frame(method, ChannelNumber, exchange, bind_ok, _) ->
 			true
@@ -850,7 +850,7 @@
 		arg(2, Connection, Output),
 		option(routing_key(RoutingKey), Options, ''),
 		option(arguments(Arguments), Options, []),
-		UnbindArgs = [
+		UnbindArguments = [
 			reserved_1-0,
 			destination-Destination,
 			source-Source,
@@ -858,7 +858,7 @@
 			nowait-0,
 			arguments-Arguments
 		],
-		send_method(Output, ChannelNumber, exchange, unbind, UnbindArgs),
+		send_method(Output, ChannelNumber, exchange, unbind, UnbindArguments),
 		read_frame(Input, UnbindOkFrame, Context),
 		(	UnbindOkFrame = frame(method, ChannelNumber, exchange, unbind_ok, _) ->
 			true
@@ -879,26 +879,26 @@
 		option(exclusive(Exclusive), Options, false),
 		option(auto_delete(AutoDelete), Options, false),
 		option(arguments(Arguments), Options, []),
-		bool_to_int(Durable, DurableInt),
-		bool_to_int(Exclusive, ExclusiveInt),
-		bool_to_int(AutoDelete, AutoDeleteInt),
+		boolean_to_integer(Durable, DurableInt),
+		boolean_to_integer(Exclusive, ExclusiveInt),
+		boolean_to_integer(AutoDelete, AutoDeleteInt),
 		% Flags: reserved1=0, durable, exclusive, auto_delete, nowait=0
 		Flags is (DurableInt << 1) \/ (ExclusiveInt << 2) \/ (AutoDeleteInt << 3),
 		(	var(Queue) ->
 			QueueName = ''
 		;	QueueName = Queue
 		),
-		DeclareArgs = [
+		DeclareArguments = [
 			reserved_1-0,
 			queue-QueueName,
 			flags-Flags,
 			arguments-Arguments
 		],
-		send_method(Output, ChannelNumber, queue, declare, DeclareArgs),
+		send_method(Output, ChannelNumber, queue, declare, DeclareArguments),
 		read_frame(Input, DeclareOkFrame, Context),
-		(	DeclareOkFrame = frame(method, ChannelNumber, queue, declare_ok, DeclareOkArgs) ->
+		(	DeclareOkFrame = frame(method, ChannelNumber, queue, declare_ok, DeclareOkArguments) ->
 			(	var(Queue) ->
-				member(queue-Queue, DeclareOkArgs)
+				member(queue-Queue, DeclareOkArguments)
 			;	true
 			)
 		;	throw(error(amqp_error(queue_error('Queue declare failed')), Context))
@@ -912,15 +912,15 @@
 		arg(2, Connection, Output),
 		option(if_unused(IfUnused), Options, false),
 		option(if_empty(IfEmpty), Options, false),
-		bool_to_int(IfUnused, IfUnusedInt),
-		bool_to_int(IfEmpty, IfEmptyInt),
+		boolean_to_integer(IfUnused, IfUnusedInt),
+		boolean_to_integer(IfEmpty, IfEmptyInt),
 		Flags is (IfUnusedInt << 0) \/ (IfEmptyInt << 1),
-		DeleteArgs = [
+		DeleteArguments = [
 			reserved_1-0,
 			queue-Queue,
 			flags-Flags
 		],
-		send_method(Output, ChannelNumber, queue, delete, DeleteArgs),
+		send_method(Output, ChannelNumber, queue, delete, DeleteArguments),
 		read_frame(Input, DeleteOkFrame, Context),
 		(	DeleteOkFrame = frame(method, ChannelNumber, queue, delete_ok, _) ->
 			true
@@ -935,7 +935,7 @@
 		arg(2, Connection, Output),
 		option(routing_key(RoutingKey), Options, ''),
 		option(arguments(Arguments), Options, []),
-		BindArgs = [
+		BindArguments = [
 			reserved_1-0,
 			queue-Queue,
 			exchange-Exchange,
@@ -943,7 +943,7 @@
 			nowait-0,
 			arguments-Arguments
 		],
-		send_method(Output, ChannelNumber, queue, bind, BindArgs),
+		send_method(Output, ChannelNumber, queue, bind, BindArguments),
 		read_frame(Input, BindOkFrame, Context),
 		(	BindOkFrame = frame(method, ChannelNumber, queue, bind_ok, _) ->
 			true
@@ -958,14 +958,14 @@
 		arg(2, Connection, Output),
 		option(routing_key(RoutingKey), Options, ''),
 		option(arguments(Arguments), Options, []),
-		UnbindArgs = [
+		UnbindArguments = [
 			reserved_1-0,
 			queue-Queue,
 			exchange-Exchange,
 			routing_key-RoutingKey,
 			arguments-Arguments
 		],
-		send_method(Output, ChannelNumber, queue, unbind, UnbindArgs),
+		send_method(Output, ChannelNumber, queue, unbind, UnbindArguments),
 		read_frame(Input, UnbindOkFrame, Context),
 		(	UnbindOkFrame = frame(method, ChannelNumber, queue, unbind_ok, _) ->
 			true
@@ -978,12 +978,12 @@
 		arg(2, Channel, ChannelNumber),
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
-		PurgeArgs = [
+		PurgeArguments = [
 			reserved_1-0,
 			queue-Queue,
 			nowait-0
 		],
-		send_method(Output, ChannelNumber, queue, purge, PurgeArgs),
+		send_method(Output, ChannelNumber, queue, purge, PurgeArguments),
 		read_frame(Input, PurgeOkFrame, Context),
 		(	PurgeOkFrame = frame(method, ChannelNumber, queue, purge_ok, _) ->
 			true
@@ -1002,17 +1002,17 @@
 		option(routing_key(RoutingKey), Options, ''),
 		option(mandatory(Mandatory), Options, false),
 		option(immediate(Immediate), Options, false),
-		bool_to_int(Mandatory, MandatoryInt),
-		bool_to_int(Immediate, ImmediateInt),
+		boolean_to_integer(Mandatory, MandatoryInt),
+		boolean_to_integer(Immediate, ImmediateInt),
 		Flags is (MandatoryInt << 0) \/ (ImmediateInt << 1),
-		PublishArgs = [
+		PublishArguments = [
 			reserved_1-0,
 			exchange-Exchange,
 			routing_key-RoutingKey,
 			flags-Flags
 		],
 		% Send method frame
-		send_method(Output, ChannelNumber, basic, publish, PublishArgs),
+		send_method(Output, ChannelNumber, basic, publish, PublishArguments),
 		% Build content properties
 		build_content_properties(Options, Properties, PropertyFlags),
 		% Convert body to bytes
@@ -1036,18 +1036,18 @@
 		option(no_ack(NoAck), Options, false),
 		option(exclusive(Exclusive), Options, false),
 		option(arguments(Arguments), Options, []),
-		bool_to_int(NoLocal, NoLocalInt),
-		bool_to_int(NoAck, NoAckInt),
-		bool_to_int(Exclusive, ExclusiveInt),
+		boolean_to_integer(NoLocal, NoLocalInt),
+		boolean_to_integer(NoAck, NoAckInt),
+		boolean_to_integer(Exclusive, ExclusiveInt),
 		Flags is (NoLocalInt << 0) \/ (NoAckInt << 1) \/ (ExclusiveInt << 2),
-		ConsumeArgs = [
+		ConsumeArguments = [
 			reserved_1-0,
 			queue-Queue,
 			consumer_tag-ConsumerTag,
 			flags-Flags,
 			arguments-Arguments
 		],
-		send_method(Output, ChannelNumber, basic, consume, ConsumeArgs),
+		send_method(Output, ChannelNumber, basic, consume, ConsumeArguments),
 		read_frame(Input, ConsumeOkFrame, Context),
 		(	ConsumeOkFrame = frame(method, ChannelNumber, basic, consume_ok, _) ->
 			true
@@ -1060,11 +1060,11 @@
 		arg(2, Channel, ChannelNumber),
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
-		CancelArgs = [
+		CancelArguments = [
 			consumer_tag-ConsumerTag,
 			nowait-0
 		],
-		send_method(Output, ChannelNumber, basic, cancel, CancelArgs),
+		send_method(Output, ChannelNumber, basic, cancel, CancelArguments),
 		read_frame(Input, CancelOkFrame, Context),
 		(	CancelOkFrame = frame(method, ChannelNumber, basic, cancel_ok, _) ->
 			true
@@ -1078,13 +1078,13 @@
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
 		option(no_ack(NoAck), Options, false),
-		bool_to_int(NoAck, NoAckInt),
-		GetArgs = [
+		boolean_to_integer(NoAck, NoAckInt),
+		GetArguments = [
 			reserved_1-0,
 			queue-Queue,
 			no_ack-NoAckInt
 		],
-		send_method(Output, ChannelNumber, basic, get, GetArgs),
+		send_method(Output, ChannelNumber, basic, get, GetArguments),
 		read_frame(Input, GetFrame, Context),
 		(	GetFrame = frame(method, ChannelNumber, basic, get_ok, _) ->
 			true
@@ -1098,12 +1098,12 @@
 		arg(2, Channel, ChannelNumber),
 		arg(2, Connection, Output),
 		option(multiple(Multiple), Options, false),
-		bool_to_int(Multiple, MultipleInt),
-		AckArgs = [
+		boolean_to_integer(Multiple, MultipleInt),
+		AckArguments = [
 			delivery_tag-DeliveryTag,
 			multiple-MultipleInt
 		],
-		send_method(Output, ChannelNumber, basic, ack, AckArgs).
+		send_method(Output, ChannelNumber, basic, ack, AckArguments).
 
 	basic_nack(Channel, DeliveryTag, Options) :-
 		arg(1, Channel, Connection),
@@ -1111,26 +1111,26 @@
 		arg(2, Connection, Output),
 		option(multiple(Multiple), Options, false),
 		option(requeue(Requeue), Options, true),
-		bool_to_int(Multiple, MultipleInt),
-		bool_to_int(Requeue, RequeueInt),
+		boolean_to_integer(Multiple, MultipleInt),
+		boolean_to_integer(Requeue, RequeueInt),
 		Flags is (MultipleInt << 0) \/ (RequeueInt << 1),
-		NackArgs = [
+		NackArguments = [
 			delivery_tag-DeliveryTag,
 			flags-Flags
 		],
-		send_method(Output, ChannelNumber, basic, nack, NackArgs).
+		send_method(Output, ChannelNumber, basic, nack, NackArguments).
 
 	basic_reject(Channel, DeliveryTag, Options) :-
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
 		arg(2, Connection, Output),
 		option(requeue(Requeue), Options, true),
-		bool_to_int(Requeue, RequeueInt),
-		RejectArgs = [
+		boolean_to_integer(Requeue, RequeueInt),
+		RejectArguments = [
 			delivery_tag-DeliveryTag,
 			requeue-RequeueInt
 		],
-		send_method(Output, ChannelNumber, basic, reject, RejectArgs).
+		send_method(Output, ChannelNumber, basic, reject, RejectArguments).
 
 	basic_qos(Channel, Options) :-
 		context(Context),
@@ -1141,13 +1141,13 @@
 		option(prefetch_size(PrefetchSize), Options, 0),
 		option(prefetch_count(PrefetchCount), Options, 0),
 		option(global(Global), Options, false),
-		bool_to_int(Global, GlobalInt),
-		QosArgs = [
+		boolean_to_integer(Global, GlobalInt),
+		QosArguments = [
 			prefetch_size-PrefetchSize,
 			prefetch_count-PrefetchCount,
 			global-GlobalInt
 		],
-		send_method(Output, ChannelNumber, basic, qos, QosArgs),
+		send_method(Output, ChannelNumber, basic, qos, QosArguments),
 		read_frame(Input, QosOkFrame, Context),
 		(	QosOkFrame = frame(method, ChannelNumber, basic, qos_ok, _) ->
 			true
@@ -1161,11 +1161,11 @@
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
 		option(requeue(Requeue), Options, false),
-		bool_to_int(Requeue, RequeueInt),
-		RecoverArgs = [
+		boolean_to_integer(Requeue, RequeueInt),
+		RecoverArguments = [
 			requeue-RequeueInt
 		],
-		send_method(Output, ChannelNumber, basic, recover, RecoverArgs),
+		send_method(Output, ChannelNumber, basic, recover, RecoverArguments),
 		read_frame(Input, RecoverOkFrame, Context),
 		(	RecoverOkFrame = frame(method, ChannelNumber, basic, recover_ok, _) ->
 			true
@@ -1184,29 +1184,29 @@
 		option(timeout(_Timeout), Options, -1),
 		% Read the deliver/return method frame
 		read_frame(Input, MethodFrame, Context),
-		(	MethodFrame = frame(method, ChannelNumber, basic, deliver, DeliverArgs) ->
+		(	MethodFrame = frame(method, ChannelNumber, basic, deliver, DeliverArguments) ->
 			% Read content header
 			read_frame(Input, HeaderFrame, Context),
 			(	HeaderFrame = frame(header, ChannelNumber, basic, BodySize, Properties) ->
 				% Read content body
 				read_content_body(Input, BodySize, BodyBytes, Context),
 				atom_codes(Body, BodyBytes),
-				member(delivery_tag-DeliveryTag, DeliverArgs),
-				member(exchange-Exchange, DeliverArgs),
-				member(routing_key-RoutingKey, DeliverArgs),
+				member(delivery_tag-DeliveryTag, DeliverArguments),
+				member(exchange-Exchange, DeliverArguments),
+				member(routing_key-RoutingKey, DeliverArguments),
 				Message = message(deliver, DeliveryTag, Exchange, RoutingKey, Properties, Body)
 			;	throw(error(amqp_error(protocol_error('Expected content header')), Context))
 			)
-		;	MethodFrame = frame(method, ChannelNumber, basic, return, ReturnArgs) ->
+		;	MethodFrame = frame(method, ChannelNumber, basic, return, ReturnArguments) ->
 			% Returned message
 			read_frame(Input, HeaderFrame, Context),
 			(	HeaderFrame = frame(header, ChannelNumber, basic, BodySize, Properties) ->
 				read_content_body(Input, BodySize, BodyBytes, Context),
 				atom_codes(Body, BodyBytes),
-				member(exchange-Exchange, ReturnArgs),
-				member(routing_key-RoutingKey, ReturnArgs),
-				member(reply_code-ReplyCode, ReturnArgs),
-				member(reply_text-ReplyText, ReturnArgs),
+				member(exchange-Exchange, ReturnArguments),
+				member(routing_key-RoutingKey, ReturnArguments),
+				member(reply_code-ReplyCode, ReturnArguments),
+				member(reply_text-ReplyText, ReturnArguments),
 				Message = message(return, ReplyCode, ReplyText, Exchange, RoutingKey, Properties, Body)
 			;	throw(error(amqp_error(protocol_error('Expected content header')), Context))
 			)
@@ -1457,27 +1457,40 @@
 			decode_table_pairs(TableBytes, Pairs)
 		).
 
-	decode_table_pairs([], []) :-
-		!.
-	decode_table_pairs(Bytes, [Key-Value| Pairs]) :-
-		decode_shortstr(Bytes, Key, After1),
-		decode_field_value(After1, Value, After2),
+	decode_table_pairs([], []).
+	decode_table_pairs([Byte| Bytes], [Key-Value| Pairs]) :-
+		decode_shortstr([Byte| Bytes], Key, [First| After1]),
+		decode_field_value(First, After1, Value, After2),
 		decode_table_pairs(After2, Pairs).
 
 	% Decode field value
-	decode_field_value([116, V| Rest], bool(Bool), Rest) :- !,  % 't'
-		(V == 1 -> Bool = true ; Bool = false).
-	decode_field_value([98| Bytes], byte(V), Rest) :- !, decode_octet(Bytes, V, Rest).
-	decode_field_value([115| Bytes], short(V), Rest) :- !, decode_short(Bytes, V, Rest).
-	decode_field_value([73| Bytes], int(V), Rest) :- !, decode_long(Bytes, V, Rest).
-	decode_field_value([108| Bytes], long(V), Rest) :- !, decode_longlong(Bytes, V, Rest).
-	decode_field_value([102| Bytes], float(V), Rest) :- !, decode_float(Bytes, V, Rest).
-	decode_field_value([100| Bytes], double(V), Rest) :- !, decode_double(Bytes, V, Rest).
-	decode_field_value([83| Bytes], longstr(V), Rest) :- !, decode_longstr(Bytes, V, Rest).
-	decode_field_value([70| Bytes], table(V), Rest) :- !, decode_table(Bytes, V, Rest).
-	decode_field_value([65| Bytes], array(V), Rest) :- !, decode_array(Bytes, V, Rest).
-	decode_field_value([86| Rest], void, Rest) :- !.
-	decode_field_value([84| Bytes], timestamp(V), Rest) :- !, decode_longlong(Bytes, V, Rest).
+	decode_field_value(116, [Byte| Rest], bool(Value), Rest) :-
+		(Byte == 1 -> Value = true ; Value = false).
+	decode_field_value(98, Bytes, byte(Value), Rest) :-
+		decode_octet(Bytes, Value, Rest).
+	decode_field_value(115, Bytes, short(Value), Rest) :-
+		decode_short(Bytes, Value, Rest).
+	decode_field_value(73, Bytes, int(Value), Rest) :-
+		decode_long(Bytes, Value, Rest).
+	decode_field_value(108, Bytes, long(Value), Rest) :-
+		decode_longlong(Bytes, Value, Rest).
+	decode_field_value(102, Bytes, float(Value), Rest) :-
+		decode_float(Bytes, Value, Rest).
+	decode_field_value(100, Bytes, double(Value), Rest) :-
+		decode_double(Bytes, Value, Rest).
+	decode_field_value(83, Bytes, longstr(Value), Rest) :-
+		decode_longstr(Bytes, Value, Rest).
+	decode_field_value(70, Bytes, table(Value), Rest) :-
+		decode_table(Bytes, Value, Rest).
+	decode_field_value(65, Bytes, array(Value), Rest) :-
+		decode_array(Bytes, Value, Rest).
+	decode_field_value(86, Rest, void, Rest).
+	decode_field_value(84, Bytes, timestamp(Value), Rest) :-
+		decode_longlong(Bytes, Value, Rest).
+
+	% For testing
+	decode_field_value([Byte| Bytes], Value, Rest) :-
+		decode_field_value(Byte, Bytes, Value, Rest).
 
 	% Encode array
 	encode_array(Values, Bytes) :-
@@ -1503,9 +1516,9 @@
 			decode_array_values(ArrayBytes, Values)
 		).
 
-	decode_array_values([], []) :- !.
-	decode_array_values(Bytes, [Value| Values]) :-
-		decode_field_value(Bytes, Value, After),
+	decode_array_values([], []).
+	decode_array_values([Byte| Bytes], [Value| Values]) :-
+		decode_field_value(Byte, Bytes, Value, After),
 		decode_array_values(After, Values).
 
 	% Float encoding (IEEE 754 single precision) - simplified
@@ -1532,13 +1545,13 @@
 	% Method Frame Encoding
 	% ==========================================================================
 
-	encode_payload(method, method_payload(Class, Method, Args), Bytes) :-
+	encode_payload(method, method_payload(Class, Method, Arguments), Bytes) :-
 		class_id(Class, ClassId),
 		method_id(Class, Method, MethodId),
 		encode_short(ClassId, ClassBytes),
 		encode_short(MethodId, MethodBytes),
-		encode_method_args(Class, Method, Args, ArgsBytes),
-		append([ClassBytes, MethodBytes, ArgsBytes], Bytes).
+		encode_method_arguments(Class, Method, Arguments, ArgumentsBytes),
+		append([ClassBytes, MethodBytes, ArgumentsBytes], Bytes).
 
 	encode_payload(header, header_payload(Class, BodySize, Properties), Bytes) :-
 		class_id(Class, ClassId),
@@ -1553,12 +1566,12 @@
 	encode_payload(heartbeat, _, []).
 
 	% Decode payload based on type
-	decode_payload(method, Channel, Bytes, frame(method, Channel, Class, Method, Args)) :-
+	decode_payload(method, Channel, Bytes, frame(method, Channel, Class, Method, Arguments)) :-
 		decode_short(Bytes, ClassId, Rest1),
 		decode_short(Rest1, MethodId, Rest2),
 		class_id(Class, ClassId),
 		method_id(Class, Method, MethodId),
-		decode_method_args(Class, Method, Rest2, Args).
+		decode_method_arguments(Class, Method, Rest2, Arguments).
 
 	decode_payload(header, Channel, Bytes, frame(header, Channel, Class, BodySize, Properties)) :-
 		decode_short(Bytes, ClassId, Rest1),
@@ -1576,11 +1589,11 @@
 	% ==========================================================================
 
 	% Connection.Start-Ok
-	encode_method_args(connection, start_ok, Args, Bytes) :-
-		member(client_properties-Props, Args),
-		member(mechanism-Mechanism, Args),
-		member(response-Response, Args),
-		member(locale-Locale, Args),
+	encode_method_arguments(connection, start_ok, MethodArguments, Bytes) :-
+		member(client_properties-Props, MethodArguments),
+		member(mechanism-Mechanism, MethodArguments),
+		member(response-Response, MethodArguments),
+		member(locale-Locale, MethodArguments),
 		encode_table(Props, PropsBytes),
 		encode_shortstr(Mechanism, MechBytes),
 		encode_longstr(Response, RespBytes),
@@ -1588,27 +1601,27 @@
 		append([PropsBytes, MechBytes, RespBytes, LocaleBytes], Bytes).
 
 	% Connection.Tune-Ok
-	encode_method_args(connection, tune_ok, Args, Bytes) :-
-		member(channel_max-ChannelMax, Args),
-		member(frame_max-FrameMax, Args),
-		member(heartbeat-Heartbeat, Args),
+	encode_method_arguments(connection, tune_ok, MethodArguments, Bytes) :-
+		member(channel_max-ChannelMax, MethodArguments),
+		member(frame_max-FrameMax, MethodArguments),
+		member(heartbeat-Heartbeat, MethodArguments),
 		encode_short(ChannelMax, ChanBytes),
 		encode_long(FrameMax, FrameBytes),
 		encode_short(Heartbeat, HbBytes),
 		append([ChanBytes, FrameBytes, HbBytes], Bytes).
 
 	% Connection.Open
-	encode_method_args(connection, open, Args, Bytes) :-
-		member(virtual_host-VHost, Args),
+	encode_method_arguments(connection, open, MethodArguments, Bytes) :-
+		member(virtual_host-VHost, MethodArguments),
 		encode_shortstr(VHost, VHostBytes),
 		append([VHostBytes, [0, 0]], Bytes).  % reserved fields
 
 	% Connection.Close
-	encode_method_args(connection, close, Args, Bytes) :-
-		member(reply_code-ReplyCode, Args),
-		member(reply_text-ReplyText, Args),
-		member(class_id-ClassId, Args),
-		member(method_id-MethodId, Args),
+	encode_method_arguments(connection, close, MethodArguments, Bytes) :-
+		member(reply_code-ReplyCode, MethodArguments),
+		member(reply_text-ReplyText, MethodArguments),
+		member(class_id-ClassId, MethodArguments),
+		member(method_id-MethodId, MethodArguments),
 		encode_short(ReplyCode, CodeBytes),
 		encode_shortstr(ReplyText, TextBytes),
 		encode_short(ClassId, ClassBytes),
@@ -1616,17 +1629,17 @@
 		append([CodeBytes, TextBytes, ClassBytes, MethBytes], Bytes).
 
 	% Connection.Close-Ok
-	encode_method_args(connection, close_ok, _, []).
+	encode_method_arguments(connection, close_ok, _, []).
 
 	% Channel.Open
-	encode_method_args(channel, open, _, [0]).  % reserved
+	encode_method_arguments(channel, open, _, [0]).  % reserved
 
 	% Channel.Close
-	encode_method_args(channel, close, Args, Bytes) :-
-		member(reply_code-ReplyCode, Args),
-		member(reply_text-ReplyText, Args),
-		member(class_id-ClassId, Args),
-		member(method_id-MethodId, Args),
+	encode_method_arguments(channel, close, MethodArguments, Bytes) :-
+		member(reply_code-ReplyCode, MethodArguments),
+		member(reply_text-ReplyText, MethodArguments),
+		member(class_id-ClassId, MethodArguments),
+		member(method_id-MethodId, MethodArguments),
 		encode_short(ReplyCode, CodeBytes),
 		encode_shortstr(ReplyText, TextBytes),
 		encode_short(ClassId, ClassBytes),
@@ -1634,153 +1647,153 @@
 		append([CodeBytes, TextBytes, ClassBytes, MethBytes], Bytes).
 
 	% Channel.Close-Ok
-	encode_method_args(channel, close_ok, _, []).
+	encode_method_arguments(channel, close_ok, _, []).
 
 	% Exchange.Declare
-	encode_method_args(exchange, declare, Args, Bytes) :-
-		member(exchange-Exchange, Args),
-		member(type-Type, Args),
-		member(flags-Flags, Args),
-		member(arguments-Arguments, Args),
+	encode_method_arguments(exchange, declare, MethodArguments, Bytes) :-
+		member(exchange-Exchange, MethodArguments),
+		member(type-Type, MethodArguments),
+		member(flags-Flags, MethodArguments),
+		member(arguments-Arguments, MethodArguments),
 		encode_short(0, TicketBytes),  % reserved
 		encode_shortstr(Exchange, ExchBytes),
 		encode_shortstr(Type, TypeBytes),
 		encode_octet(Flags, FlagBytes),
-		encode_table(Arguments, ArgsBytes),
-		append([TicketBytes, ExchBytes, TypeBytes, FlagBytes, ArgsBytes], Bytes).
+		encode_table(Arguments, ArgumentsBytes),
+		append([TicketBytes, ExchBytes, TypeBytes, FlagBytes, ArgumentsBytes], Bytes).
 
 	% Exchange.Delete
-	encode_method_args(exchange, delete, Args, Bytes) :-
-		member(exchange-Exchange, Args),
-		member(flags-Flags, Args),
+	encode_method_arguments(exchange, delete, MethodArguments, Bytes) :-
+		member(exchange-Exchange, MethodArguments),
+		member(flags-Flags, MethodArguments),
 		encode_short(0, TicketBytes),
 		encode_shortstr(Exchange, ExchBytes),
 		encode_octet(Flags, FlagBytes),
 		append([TicketBytes, ExchBytes, FlagBytes], Bytes).
 
 	% Exchange.Bind
-	encode_method_args(exchange, bind, Args, Bytes) :-
-		member(destination-Dest, Args),
-		member(source-Source, Args),
-		member(routing_key-RoutingKey, Args),
-		member(nowait-NoWait, Args),
-		member(arguments-Arguments, Args),
+	encode_method_arguments(exchange, bind, MethodArguments, Bytes) :-
+		member(destination-Dest, MethodArguments),
+		member(source-Source, MethodArguments),
+		member(routing_key-RoutingKey, MethodArguments),
+		member(nowait-NoWait, MethodArguments),
+		member(arguments-Arguments, MethodArguments),
 		encode_short(0, TicketBytes),
 		encode_shortstr(Dest, DestBytes),
 		encode_shortstr(Source, SourceBytes),
 		encode_shortstr(RoutingKey, RkBytes),
 		encode_octet(NoWait, NwBytes),
-		encode_table(Arguments, ArgsBytes),
-		append([TicketBytes, DestBytes, SourceBytes, RkBytes, NwBytes, ArgsBytes], Bytes).
+		encode_table(Arguments, ArgumentsBytes),
+		append([TicketBytes, DestBytes, SourceBytes, RkBytes, NwBytes, ArgumentsBytes], Bytes).
 
 	% Exchange.Unbind
-	encode_method_args(exchange, unbind, Args, Bytes) :-
-		member(destination-Dest, Args),
-		member(source-Source, Args),
-		member(routing_key-RoutingKey, Args),
-		member(nowait-NoWait, Args),
-		member(arguments-Arguments, Args),
+	encode_method_arguments(exchange, unbind, MethodArguments, Bytes) :-
+		member(destination-Dest, MethodArguments),
+		member(source-Source, MethodArguments),
+		member(routing_key-RoutingKey, MethodArguments),
+		member(nowait-NoWait, MethodArguments),
+		member(arguments-Arguments, MethodArguments),
 		encode_short(0, TicketBytes),
 		encode_shortstr(Dest, DestBytes),
 		encode_shortstr(Source, SourceBytes),
 		encode_shortstr(RoutingKey, RkBytes),
 		encode_octet(NoWait, NwBytes),
-		encode_table(Arguments, ArgsBytes),
-		append([TicketBytes, DestBytes, SourceBytes, RkBytes, NwBytes, ArgsBytes], Bytes).
+		encode_table(Arguments, ArgumentsBytes),
+		append([TicketBytes, DestBytes, SourceBytes, RkBytes, NwBytes, ArgumentsBytes], Bytes).
 
 	% Queue.Declare
-	encode_method_args(queue, declare, Args, Bytes) :-
-		member(queue-Queue, Args),
-		member(flags-Flags, Args),
-		member(arguments-Arguments, Args),
+	encode_method_arguments(queue, declare, MethodArguments, Bytes) :-
+		member(queue-Queue, MethodArguments),
+		member(flags-Flags, MethodArguments),
+		member(arguments-Arguments, MethodArguments),
 		encode_short(0, TicketBytes),
 		encode_shortstr(Queue, QueueBytes),
 		encode_octet(Flags, FlagBytes),
-		encode_table(Arguments, ArgsBytes),
-		append([TicketBytes, QueueBytes, FlagBytes, ArgsBytes], Bytes).
+		encode_table(Arguments, ArgumentsBytes),
+		append([TicketBytes, QueueBytes, FlagBytes, ArgumentsBytes], Bytes).
 
 	% Queue.Bind
-	encode_method_args(queue, bind, Args, Bytes) :-
-		member(queue-Queue, Args),
-		member(exchange-Exchange, Args),
-		member(routing_key-RoutingKey, Args),
-		member(nowait-NoWait, Args),
-		member(arguments-Arguments, Args),
+	encode_method_arguments(queue, bind, MethodArguments, Bytes) :-
+		member(queue-Queue, MethodArguments),
+		member(exchange-Exchange, MethodArguments),
+		member(routing_key-RoutingKey, MethodArguments),
+		member(nowait-NoWait, MethodArguments),
+		member(arguments-Arguments, MethodArguments),
 		encode_short(0, TicketBytes),
 		encode_shortstr(Queue, QueueBytes),
 		encode_shortstr(Exchange, ExchBytes),
 		encode_shortstr(RoutingKey, RkBytes),
 		encode_octet(NoWait, NwBytes),
-		encode_table(Arguments, ArgsBytes),
-		append([TicketBytes, QueueBytes, ExchBytes, RkBytes, NwBytes, ArgsBytes], Bytes).
+		encode_table(Arguments, ArgumentsBytes),
+		append([TicketBytes, QueueBytes, ExchBytes, RkBytes, NwBytes, ArgumentsBytes], Bytes).
 
 	% Queue.Unbind
-	encode_method_args(queue, unbind, Args, Bytes) :-
-		member(queue-Queue, Args),
-		member(exchange-Exchange, Args),
-		member(routing_key-RoutingKey, Args),
-		member(arguments-Arguments, Args),
+	encode_method_arguments(queue, unbind, MethodArguments, Bytes) :-
+		member(queue-Queue, MethodArguments),
+		member(exchange-Exchange, MethodArguments),
+		member(routing_key-RoutingKey, MethodArguments),
+		member(arguments-Arguments, MethodArguments),
 		encode_short(0, TicketBytes),
 		encode_shortstr(Queue, QueueBytes),
 		encode_shortstr(Exchange, ExchBytes),
 		encode_shortstr(RoutingKey, RkBytes),
-		encode_table(Arguments, ArgsBytes),
-		append([TicketBytes, QueueBytes, ExchBytes, RkBytes, ArgsBytes], Bytes).
+		encode_table(Arguments, ArgumentsBytes),
+		append([TicketBytes, QueueBytes, ExchBytes, RkBytes, ArgumentsBytes], Bytes).
 
 	% Queue.Purge
-	encode_method_args(queue, purge, Args, Bytes) :-
-		member(queue-Queue, Args),
-		member(nowait-NoWait, Args),
+	encode_method_arguments(queue, purge, MethodArguments, Bytes) :-
+		member(queue-Queue, MethodArguments),
+		member(nowait-NoWait, MethodArguments),
 		encode_short(0, TicketBytes),
 		encode_shortstr(Queue, QueueBytes),
 		encode_octet(NoWait, NwBytes),
 		append([TicketBytes, QueueBytes, NwBytes], Bytes).
 
 	% Queue.Delete
-	encode_method_args(queue, delete, Args, Bytes) :-
-		member(queue-Queue, Args),
-		member(flags-Flags, Args),
+	encode_method_arguments(queue, delete, MethodArguments, Bytes) :-
+		member(queue-Queue, MethodArguments),
+		member(flags-Flags, MethodArguments),
 		encode_short(0, TicketBytes),
 		encode_shortstr(Queue, QueueBytes),
 		encode_octet(Flags, FlagBytes),
 		append([TicketBytes, QueueBytes, FlagBytes], Bytes).
 
 	% Basic.Qos
-	encode_method_args(basic, qos, Args, Bytes) :-
-		member(prefetch_size-PrefetchSize, Args),
-		member(prefetch_count-PrefetchCount, Args),
-		member(global-Global, Args),
+	encode_method_arguments(basic, qos, MethodArguments, Bytes) :-
+		member(prefetch_size-PrefetchSize, MethodArguments),
+		member(prefetch_count-PrefetchCount, MethodArguments),
+		member(global-Global, MethodArguments),
 		encode_long(PrefetchSize, SizeBytes),
 		encode_short(PrefetchCount, CountBytes),
 		encode_octet(Global, GlobalBytes),
 		append([SizeBytes, CountBytes, GlobalBytes], Bytes).
 
 	% Basic.Consume
-	encode_method_args(basic, consume, Args, Bytes) :-
-		member(queue-Queue, Args),
-		member(consumer_tag-ConsumerTag, Args),
-		member(flags-Flags, Args),
-		member(arguments-Arguments, Args),
+	encode_method_arguments(basic, consume, MethodArguments, Bytes) :-
+		member(queue-Queue, MethodArguments),
+		member(consumer_tag-ConsumerTag, MethodArguments),
+		member(flags-Flags, MethodArguments),
+		member(arguments-Arguments, MethodArguments),
 		encode_short(0, TicketBytes),
 		encode_shortstr(Queue, QueueBytes),
 		encode_shortstr(ConsumerTag, TagBytes),
 		encode_octet(Flags, FlagBytes),
-		encode_table(Arguments, ArgsBytes),
-		append([TicketBytes, QueueBytes, TagBytes, FlagBytes, ArgsBytes], Bytes).
+		encode_table(Arguments, ArgumentsBytes),
+		append([TicketBytes, QueueBytes, TagBytes, FlagBytes, ArgumentsBytes], Bytes).
 
 	% Basic.Cancel
-	encode_method_args(basic, cancel, Args, Bytes) :-
-		member(consumer_tag-ConsumerTag, Args),
-		member(nowait-NoWait, Args),
+	encode_method_arguments(basic, cancel, MethodArguments, Bytes) :-
+		member(consumer_tag-ConsumerTag, MethodArguments),
+		member(nowait-NoWait, MethodArguments),
 		encode_shortstr(ConsumerTag, TagBytes),
 		encode_octet(NoWait, NwBytes),
 		append([TagBytes, NwBytes], Bytes).
 
 	% Basic.Publish
-	encode_method_args(basic, publish, Args, Bytes) :-
-		member(exchange-Exchange, Args),
-		member(routing_key-RoutingKey, Args),
-		member(flags-Flags, Args),
+	encode_method_arguments(basic, publish, MethodArguments, Bytes) :-
+		member(exchange-Exchange, MethodArguments),
+		member(routing_key-RoutingKey, MethodArguments),
+		member(flags-Flags, MethodArguments),
 		encode_short(0, TicketBytes),
 		encode_shortstr(Exchange, ExchBytes),
 		encode_shortstr(RoutingKey, RkBytes),
@@ -1788,56 +1801,56 @@
 		append([TicketBytes, ExchBytes, RkBytes, FlagBytes], Bytes).
 
 	% Basic.Get
-	encode_method_args(basic, get, Args, Bytes) :-
-		member(queue-Queue, Args),
-		member(no_ack-NoAck, Args),
+	encode_method_arguments(basic, get, MethodArguments, Bytes) :-
+		member(queue-Queue, MethodArguments),
+		member(no_ack-NoAck, MethodArguments),
 		encode_short(0, TicketBytes),
 		encode_shortstr(Queue, QueueBytes),
 		encode_octet(NoAck, NoAckBytes),
 		append([TicketBytes, QueueBytes, NoAckBytes], Bytes).
 
 	% Basic.Ack
-	encode_method_args(basic, ack, Args, Bytes) :-
-		member(delivery_tag-DeliveryTag, Args),
-		member(multiple-Multiple, Args),
+	encode_method_arguments(basic, ack, MethodArguments, Bytes) :-
+		member(delivery_tag-DeliveryTag, MethodArguments),
+		member(multiple-Multiple, MethodArguments),
 		encode_longlong(DeliveryTag, TagBytes),
 		encode_octet(Multiple, MultBytes),
 		append([TagBytes, MultBytes], Bytes).
 
 	% Basic.Reject
-	encode_method_args(basic, reject, Args, Bytes) :-
-		member(delivery_tag-DeliveryTag, Args),
-		member(requeue-Requeue, Args),
+	encode_method_arguments(basic, reject, MethodArguments, Bytes) :-
+		member(delivery_tag-DeliveryTag, MethodArguments),
+		member(requeue-Requeue, MethodArguments),
 		encode_longlong(DeliveryTag, TagBytes),
 		encode_octet(Requeue, ReqBytes),
 		append([TagBytes, ReqBytes], Bytes).
 
 	% Basic.Nack (RabbitMQ extension)
-	encode_method_args(basic, nack, Args, Bytes) :-
-		member(delivery_tag-DeliveryTag, Args),
-		member(flags-Flags, Args),
+	encode_method_arguments(basic, nack, MethodArguments, Bytes) :-
+		member(delivery_tag-DeliveryTag, MethodArguments),
+		member(flags-Flags, MethodArguments),
 		encode_longlong(DeliveryTag, TagBytes),
 		encode_octet(Flags, FlagBytes),
 		append([TagBytes, FlagBytes], Bytes).
 
 	% Basic.Recover
-	encode_method_args(basic, recover, Args, Bytes) :-
-		member(requeue-Requeue, Args),
+	encode_method_arguments(basic, recover, MethodArguments, Bytes) :-
+		member(requeue-Requeue, MethodArguments),
 		encode_octet(Requeue, ReqBytes),
 		Bytes = ReqBytes.
 
 	% Tx.Select
-	encode_method_args(tx, select, _, []).
+	encode_method_arguments(tx, select, _, []).
 
 	% Tx.Commit
-	encode_method_args(tx, commit, _, []).
+	encode_method_arguments(tx, commit, _, []).
 
 	% Tx.Rollback
-	encode_method_args(tx, rollback, _, []).
+	encode_method_arguments(tx, rollback, _, []).
 
 	% Confirm.Select
-	encode_method_args(confirm, select, Args, Bytes) :-
-		member(nowait-NoWait, Args),
+	encode_method_arguments(confirm, select, MethodArguments, Bytes) :-
+		member(nowait-NoWait, MethodArguments),
 		encode_octet(NoWait, NwBytes),
 		Bytes = NwBytes.
 
@@ -1846,13 +1859,13 @@
 	% ==========================================================================
 
 	% Connection.Start
-	decode_method_args(connection, start, Bytes, Args) :-
+	decode_method_arguments(connection, start, Bytes, Arguments) :-
 		decode_octet(Bytes, VersionMajor, Rest1),
 		decode_octet(Rest1, VersionMinor, Rest2),
 		decode_table(Rest2, ServerProperties, Rest3),
 		decode_longstr(Rest3, Mechanisms, Rest4),
 		decode_longstr(Rest4, Locales, _),
-		Args = [
+		Arguments = [
 			version_major-VersionMajor,
 			version_minor-VersionMinor,
 			server_properties-ServerProperties,
@@ -1861,28 +1874,28 @@
 		].
 
 	% Connection.Tune
-	decode_method_args(connection, tune, Bytes, Args) :-
+	decode_method_arguments(connection, tune, Bytes, Arguments) :-
 		decode_short(Bytes, ChannelMax, Rest1),
 		decode_long(Rest1, FrameMax, Rest2),
 		decode_short(Rest2, Heartbeat, _),
-		Args = [
+		Arguments = [
 			channel_max-ChannelMax,
 			frame_max-FrameMax,
 			heartbeat-Heartbeat
 		].
 
 	% Connection.Open-Ok
-	decode_method_args(connection, open_ok, Bytes, Args) :-
+	decode_method_arguments(connection, open_ok, Bytes, Arguments) :-
 		decode_shortstr(Bytes, Reserved, _),
-		Args = [reserved-Reserved].
+		Arguments = [reserved-Reserved].
 
 	% Connection.Close
-	decode_method_args(connection, close, Bytes, Args) :-
+	decode_method_arguments(connection, close, Bytes, Arguments) :-
 		decode_short(Bytes, ReplyCode, Rest1),
 		decode_shortstr(Rest1, ReplyText, Rest2),
 		decode_short(Rest2, ClassId, Rest3),
 		decode_short(Rest3, MethodId, _),
-		Args = [
+		Arguments = [
 			reply_code-ReplyCode,
 			reply_text-ReplyText,
 			class_id-ClassId,
@@ -1890,20 +1903,20 @@
 		].
 
 	% Connection.Close-Ok
-	decode_method_args(connection, close_ok, _, []).
+	decode_method_arguments(connection, close_ok, _, []).
 
 	% Channel.Open-Ok
-	decode_method_args(channel, open_ok, Bytes, Args) :-
+	decode_method_arguments(channel, open_ok, Bytes, Arguments) :-
 		decode_longstr(Bytes, Reserved, _),
-		Args = [reserved-Reserved].
+		Arguments = [reserved-Reserved].
 
 	% Channel.Close
-	decode_method_args(channel, close, Bytes, Args) :-
+	decode_method_arguments(channel, close, Bytes, Arguments) :-
 		decode_short(Bytes, ReplyCode, Rest1),
 		decode_shortstr(Rest1, ReplyText, Rest2),
 		decode_short(Rest2, ClassId, Rest3),
 		decode_short(Rest3, MethodId, _),
-		Args = [
+		Arguments = [
 			reply_code-ReplyCode,
 			reply_text-ReplyText,
 			class_id-ClassId,
@@ -1911,68 +1924,68 @@
 		].
 
 	% Channel.Close-Ok
-	decode_method_args(channel, close_ok, _, []).
+	decode_method_arguments(channel, close_ok, _, []).
 
 	% Exchange.Declare-Ok
-	decode_method_args(exchange, declare_ok, _, []).
+	decode_method_arguments(exchange, declare_ok, _, []).
 
 	% Exchange.Delete-Ok
-	decode_method_args(exchange, delete_ok, _, []).
+	decode_method_arguments(exchange, delete_ok, _, []).
 
 	% Exchange.Bind-Ok
-	decode_method_args(exchange, bind_ok, _, []).
+	decode_method_arguments(exchange, bind_ok, _, []).
 
 	% Exchange.Unbind-Ok
-	decode_method_args(exchange, unbind_ok, _, []).
+	decode_method_arguments(exchange, unbind_ok, _, []).
 
 	% Queue.Declare-Ok
-	decode_method_args(queue, declare_ok, Bytes, Args) :-
+	decode_method_arguments(queue, declare_ok, Bytes, Arguments) :-
 		decode_shortstr(Bytes, Queue, Rest1),
 		decode_long(Rest1, MessageCount, Rest2),
 		decode_long(Rest2, ConsumerCount, _),
-		Args = [
+		Arguments = [
 			queue-Queue,
 			message_count-MessageCount,
 			consumer_count-ConsumerCount
 		].
 
 	% Queue.Bind-Ok
-	decode_method_args(queue, bind_ok, _, []).
+	decode_method_arguments(queue, bind_ok, _, []).
 
 	% Queue.Unbind-Ok
-	decode_method_args(queue, unbind_ok, _, []).
+	decode_method_arguments(queue, unbind_ok, _, []).
 
 	% Queue.Purge-Ok
-	decode_method_args(queue, purge_ok, Bytes, Args) :-
+	decode_method_arguments(queue, purge_ok, Bytes, Arguments) :-
 		decode_long(Bytes, MessageCount, _),
-		Args = [message_count-MessageCount].
+		Arguments = [message_count-MessageCount].
 
 	% Queue.Delete-Ok
-	decode_method_args(queue, delete_ok, Bytes, Args) :-
+	decode_method_arguments(queue, delete_ok, Bytes, Arguments) :-
 		decode_long(Bytes, MessageCount, _),
-		Args = [message_count-MessageCount].
+		Arguments = [message_count-MessageCount].
 
 	% Basic.Qos-Ok
-	decode_method_args(basic, qos_ok, _, []).
+	decode_method_arguments(basic, qos_ok, _, []).
 
 	% Basic.Consume-Ok
-	decode_method_args(basic, consume_ok, Bytes, Args) :-
+	decode_method_arguments(basic, consume_ok, Bytes, Arguments) :-
 		decode_shortstr(Bytes, ConsumerTag, _),
-		Args = [consumer_tag-ConsumerTag].
+		Arguments = [consumer_tag-ConsumerTag].
 
 	% Basic.Cancel-Ok
-	decode_method_args(basic, cancel_ok, Bytes, Args) :-
+	decode_method_arguments(basic, cancel_ok, Bytes, Arguments) :-
 		decode_shortstr(Bytes, ConsumerTag, _),
-		Args = [consumer_tag-ConsumerTag].
+		Arguments = [consumer_tag-ConsumerTag].
 
 	% Basic.Deliver
-	decode_method_args(basic, deliver, Bytes, Args) :-
+	decode_method_arguments(basic, deliver, Bytes, Arguments) :-
 		decode_shortstr(Bytes, ConsumerTag, Rest1),
 		decode_longlong(Rest1, DeliveryTag, Rest2),
 		decode_octet(Rest2, Redelivered, Rest3),
 		decode_shortstr(Rest3, Exchange, Rest4),
 		decode_shortstr(Rest4, RoutingKey, _),
-		Args = [
+		Arguments = [
 			consumer_tag-ConsumerTag,
 			delivery_tag-DeliveryTag,
 			redelivered-Redelivered,
@@ -1981,13 +1994,13 @@
 		].
 
 	% Basic.Get-Ok
-	decode_method_args(basic, get_ok, Bytes, Args) :-
+	decode_method_arguments(basic, get_ok, Bytes, Arguments) :-
 		decode_longlong(Bytes, DeliveryTag, Rest1),
 		decode_octet(Rest1, Redelivered, Rest2),
 		decode_shortstr(Rest2, Exchange, Rest3),
 		decode_shortstr(Rest3, RoutingKey, Rest4),
 		decode_long(Rest4, MessageCount, _),
-		Args = [
+		Arguments = [
 			delivery_tag-DeliveryTag,
 			redelivered-Redelivered,
 			exchange-Exchange,
@@ -1996,17 +2009,17 @@
 		].
 
 	% Basic.Get-Empty
-	decode_method_args(basic, get_empty, Bytes, Args) :-
+	decode_method_arguments(basic, get_empty, Bytes, Arguments) :-
 		decode_shortstr(Bytes, ClusterId, _),
-		Args = [cluster_id-ClusterId].
+		Arguments = [cluster_id-ClusterId].
 
 	% Basic.Return
-	decode_method_args(basic, return, Bytes, Args) :-
+	decode_method_arguments(basic, return, Bytes, Arguments) :-
 		decode_short(Bytes, ReplyCode, Rest1),
 		decode_shortstr(Rest1, ReplyText, Rest2),
 		decode_shortstr(Rest2, Exchange, Rest3),
 		decode_shortstr(Rest3, RoutingKey, _),
-		Args = [
+		Arguments = [
 			reply_code-ReplyCode,
 			reply_text-ReplyText,
 			exchange-Exchange,
@@ -2014,19 +2027,19 @@
 		].
 
 	% Basic.Recover-Ok
-	decode_method_args(basic, recover_ok, _, []).
+	decode_method_arguments(basic, recover_ok, _, []).
 
 	% Tx.Select-Ok
-	decode_method_args(tx, select_ok, _, []).
+	decode_method_arguments(tx, select_ok, _, []).
 
 	% Tx.Commit-Ok
-	decode_method_args(tx, commit_ok, _, []).
+	decode_method_arguments(tx, commit_ok, _, []).
 
 	% Tx.Rollback-Ok
-	decode_method_args(tx, rollback_ok, _, []).
+	decode_method_arguments(tx, rollback_ok, _, []).
 
 	% Confirm.Select-Ok
-	decode_method_args(confirm, select_ok, _, []).
+	decode_method_arguments(confirm, select_ok, _, []).
 
 	% ==========================================================================
 	% Content Properties Encoding/Decoding
@@ -2044,26 +2057,26 @@
 
 	build_content_properties(Options, Properties, Flags) :-
 		% Build properties list and calculate flags
-		build_prop(content_type, Options, Props0, [], 15, Flag0, 0),
-		build_prop(content_encoding, Options, Props1, Props0, 14, Flag1, Flag0),
-		build_prop(headers, Options, Props2, Props1, 13, Flag2, Flag1),
-		build_prop(delivery_mode, Options, Props3, Props2, 12, Flag3, Flag2),
-		build_prop(priority, Options, Props4, Props3, 11, Flag4, Flag3),
-		build_prop(correlation_id, Options, Props5, Props4, 10, Flag5, Flag4),
-		build_prop(reply_to, Options, Props6, Props5, 9, Flag6, Flag5),
-		build_prop(expiration, Options, Props7, Props6, 8, Flag7, Flag6),
-		build_prop(message_id, Options, Props8, Props7, 7, Flag8, Flag7),
-		build_prop(timestamp, Options, Props9, Props8, 6, Flag9, Flag8),
-		build_prop(type, Options, Props10, Props9, 5, Flag10, Flag9),
-		build_prop(user_id, Options, Props11, Props10, 4, Flag11, Flag10),
-		build_prop(app_id, Options, Properties, Props11, 3, Flags, Flag11).
+		build_property(content_type, Options, Props0, [], 15, Flag0, 0),
+		build_property(content_encoding, Options, Props1, Props0, 14, Flag1, Flag0),
+		build_property(headers, Options, Props2, Props1, 13, Flag2, Flag1),
+		build_property(delivery_mode, Options, Props3, Props2, 12, Flag3, Flag2),
+		build_property(priority, Options, Props4, Props3, 11, Flag4, Flag3),
+		build_property(correlation_id, Options, Props5, Props4, 10, Flag5, Flag4),
+		build_property(reply_to, Options, Props6, Props5, 9, Flag6, Flag5),
+		build_property(expiration, Options, Props7, Props6, 8, Flag7, Flag6),
+		build_property(message_id, Options, Props8, Props7, 7, Flag8, Flag7),
+		build_property(timestamp, Options, Props9, Props8, 6, Flag9, Flag8),
+		build_property(type, Options, Props10, Props9, 5, Flag10, Flag9),
+		build_property(user_id, Options, Props11, Props10, 4, Flag11, Flag10),
+		build_property(app_id, Options, Properties, Props11, 3, Flags, Flag11).
 
-	build_prop(Name, Options, [Name-Value| PropsIn], PropsIn, BitPos, FlagOut, FlagIn) :-
+	build_property(Name, Options, [Name-Value| PropsIn], PropsIn, BitPos, FlagOut, FlagIn) :-
 		Opt =.. [Name, Value],
 		member(Opt, Options),
 		!,
 		FlagOut is FlagIn \/ (1 << BitPos).
-	build_prop(_, _, Props, Props, _, Flag, Flag).
+	build_property(_, _, Props, Props, _, Flag, Flag).
 
 	encode_properties(Properties, Bytes) :-
 		properties_to_flags(Properties, Flags),
@@ -2134,25 +2147,25 @@
 		decode_property_values(Flags, Rest, Properties).
 
 	decode_property_values(Flags, Bytes, Properties) :-
-		decode_prop_if_set(Flags, 15, content_type, shortstr, Bytes, Props0, [], Rest0),
-		decode_prop_if_set(Flags, 14, content_encoding, shortstr, Rest0, Props1, Props0, Rest1),
-		decode_prop_if_set(Flags, 13, headers, table, Rest1, Props2, Props1, Rest2),
-		decode_prop_if_set(Flags, 12, delivery_mode, octet, Rest2, Props3, Props2, Rest3),
-		decode_prop_if_set(Flags, 11, priority, octet, Rest3, Props4, Props3, Rest4),
-		decode_prop_if_set(Flags, 10, correlation_id, shortstr, Rest4, Props5, Props4, Rest5),
-		decode_prop_if_set(Flags, 9, reply_to, shortstr, Rest5, Props6, Props5, Rest6),
-		decode_prop_if_set(Flags, 8, expiration, shortstr, Rest6, Props7, Props6, Rest7),
-		decode_prop_if_set(Flags, 7, message_id, shortstr, Rest7, Props8, Props7, Rest8),
-		decode_prop_if_set(Flags, 6, timestamp, longlong, Rest8, Props9, Props8, Rest9),
-		decode_prop_if_set(Flags, 5, type, shortstr, Rest9, Props10, Props9, Rest10),
-		decode_prop_if_set(Flags, 4, user_id, shortstr, Rest10, Props11, Props10, Rest11),
-		decode_prop_if_set(Flags, 3, app_id, shortstr, Rest11, Properties, Props11, _).
+		decode_property_if_set(Flags, 15, content_type, shortstr, Bytes, Props0, [], Rest0),
+		decode_property_if_set(Flags, 14, content_encoding, shortstr, Rest0, Props1, Props0, Rest1),
+		decode_property_if_set(Flags, 13, headers, table, Rest1, Props2, Props1, Rest2),
+		decode_property_if_set(Flags, 12, delivery_mode, octet, Rest2, Props3, Props2, Rest3),
+		decode_property_if_set(Flags, 11, priority, octet, Rest3, Props4, Props3, Rest4),
+		decode_property_if_set(Flags, 10, correlation_id, shortstr, Rest4, Props5, Props4, Rest5),
+		decode_property_if_set(Flags, 9, reply_to, shortstr, Rest5, Props6, Props5, Rest6),
+		decode_property_if_set(Flags, 8, expiration, shortstr, Rest6, Props7, Props6, Rest7),
+		decode_property_if_set(Flags, 7, message_id, shortstr, Rest7, Props8, Props7, Rest8),
+		decode_property_if_set(Flags, 6, timestamp, longlong, Rest8, Props9, Props8, Rest9),
+		decode_property_if_set(Flags, 5, type, shortstr, Rest9, Props10, Props9, Rest10),
+		decode_property_if_set(Flags, 4, user_id, shortstr, Rest10, Props11, Props10, Rest11),
+		decode_property_if_set(Flags, 3, app_id, shortstr, Rest11, Properties, Props11, _).
 
-	decode_prop_if_set(Flags, Bit, Name, Type, Bytes, [Name-Value| PropsIn], PropsIn, Rest) :-
+	decode_property_if_set(Flags, Bit, Name, Type, Bytes, [Name-Value| PropsIn], PropsIn, Rest) :-
 		Flags /\ (1 << Bit) =\= 0,
 		!,
 		decode_typed_value(Type, Bytes, Value, Rest).
-	decode_prop_if_set(_, _, _, _, Bytes, Props, Props, Bytes).
+	decode_property_if_set(_, _, _, _, Bytes, Props, Props, Bytes).
 
 	decode_typed_value(shortstr, Bytes, Value, Rest) :- decode_shortstr(Bytes, Value, Rest).
 	decode_typed_value(longstr, Bytes, Value, Rest) :- decode_longstr(Bytes, Value, Rest).
@@ -2166,13 +2179,13 @@
 	% Frame I/O
 	% ==========================================================================
 
-	send_method(Stream, Channel, Class, Method, Args) :-
+	send_method(Stream, Channel, Class, Method, Arguments) :-
 		class_id(Class, ClassId),
 		method_id(Class, Method, MethodId),
 		encode_short(ClassId, ClassBytes),
 		encode_short(MethodId, MethodBytes),
-		encode_method_args(Class, Method, Args, ArgsBytes),
-		append([ClassBytes, MethodBytes, ArgsBytes], PayloadBytes),
+		encode_method_arguments(Class, Method, Arguments, ArgumentsBytes),
+		append([ClassBytes, MethodBytes, ArgumentsBytes], PayloadBytes),
 		send_frame_bytes(Stream, 1, Channel, PayloadBytes).
 
 	send_content_header(Stream, Channel, BodySize, _PropertyFlags, Properties, _Context) :-
@@ -2230,19 +2243,15 @@
 		frame_type(Type, TypeByte),
 		decode_payload(Type, Channel, PayloadBytes, Frame).
 
-	read_content_body(Stream, BodySize, BodyBytes, Context) :-
-		read_content_body_acc(Stream, BodySize, [], BodyBytes, Context).
-
-	read_content_body_acc(_, 0, Acc, BodyBytes, _) :-
-		!,
-		reverse(Acc, BodyBytes).
-	read_content_body_acc(Stream, Remaining, Acc, BodyBytes, Context) :-
+	read_content_body(_, 0, [], _) :-
+		!.
+	read_content_body(Stream, Remaining, BodyBytes, Context) :-
 		read_frame(Stream, Frame, Context),
 		(	Frame = frame(body, _, ChunkBytes) ->
 			length(ChunkBytes, ChunkLength),
 			NewRemaining is Remaining - ChunkLength,
-			append(ChunkBytes, Acc, NewAcc),
-			read_content_body_acc(Stream, NewRemaining, NewAcc, BodyBytes, Context)
+			append(ChunkBytes, RestBytes, BodyBytes),
+			read_content_body(Stream, NewRemaining, RestBytes, Context)
 		;	throw(error(amqp_error(protocol_error('Expected body frame')), Context))
 		).
 
@@ -2255,7 +2264,8 @@
 		put_byte(Stream, Byte),
 		write_bytes(Bytes, Stream).
 
-	read_bytes(_, 0, []) :- !.
+	read_bytes(_, 0, []) :-
+		!.
 	read_bytes(Stream, N, [Byte| Bytes]) :-
 		N > 0,
 		get_byte(Stream, Byte),
@@ -2275,10 +2285,10 @@
 	option(Option, _, Default) :-
 		Option =.. [_, Default].
 
-	bool_to_int(true,  1).
-	bool_to_int(false, 0).
-	bool_to_int(1,     1).
-	bool_to_int(0,     0).
+	boolean_to_integer(true,  1).
+	boolean_to_integer(false, 0).
+	boolean_to_integer(1,     1).
+	boolean_to_integer(0,     0).
 
 	negotiate_value(0, Server, Server) :- !.
 	negotiate_value(Client, 0, Client) :- !.
