@@ -94,6 +94,7 @@
 		union_find(loader),
 		mutations(loader),
 		listing(loader),
+		amqp(loader),
 		stomp(loader),
 		cloning,
 		counters,

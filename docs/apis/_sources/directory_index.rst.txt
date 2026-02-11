@@ -106,6 +106,16 @@ To load an entity, always load the library that includes it using the goal ``log
    counters <counters_0>
    streamvars <streamvars_0>
 
+``library/amqp/``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   amqp <amqp_0>
+
 ``library/arbitrary/``
 ----------------------
 

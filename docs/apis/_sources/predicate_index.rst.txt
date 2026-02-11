@@ -773,6 +773,96 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`statisticsp <statisticsp/0::average_deviation/3>`
 
+``basic_ack/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::basic_ack/3>`
+
+``basic_cancel/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::basic_cancel/3>`
+
+``basic_consume/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::basic_consume/3>`
+
+``basic_get/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::basic_get/3>`
+
+``basic_nack/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::basic_nack/3>`
+
+``basic_publish/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::basic_publish/4>`
+
+``basic_qos/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::basic_qos/2>`
+
+``basic_recover/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::basic_recover/2>`
+
+``basic_reject/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::basic_reject/3>`
+
 ``before/2``
 ------------
 
@@ -1105,6 +1195,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`subject <subject/0::changed/1>`
 
+``channel_close/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::channel_close/1>`
+
+``channel_close/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::channel_close/3>`
+
+``channel_open/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::channel_open/3>`
+
 ``chebyshev_distance/3``
 ------------------------
 
@@ -1399,6 +1519,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`dictionaryp <dictionaryp/0::clone/4>`
 
+``close/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::close/1>`
+
 ``close/2``
 -----------
 
@@ -1408,6 +1538,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`socket <socket/0::close/2>`
+
+``close/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::close/3>`
 
 ``coefficient_of_variation/2``
 ------------------------------
@@ -1639,6 +1779,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`help <help/0::completions/2>`
 
+``confirm_select/1``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::confirm_select/1>`
+
 ``connect/1``
 -------------
 
@@ -1678,6 +1828,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`amqp <amqp/0::connect/4>`
 * :ref:`stomp <stomp/0::connect/4>`
 
 ``connection_alive/1``
@@ -1688,6 +1839,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`amqp <amqp/0::connection_alive/1>`
 * :ref:`stomp <stomp/0::connection_alive/1>`
 
 ``console/1``
@@ -2081,6 +2233,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`java_utils_protocol <java_utils_protocol/0::decode_exception/3>`
+
+``decode_frame/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::decode_frame/2>`
 
 ``decompile_predicate_heads/4``
 -------------------------------
@@ -3090,6 +3252,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`debug_messages <debug_messages/0::enabled/2>`
 
+``encode_frame/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::encode_frame/2>`
+
 ``ensure_directory/1``
 ----------------------
 
@@ -3264,6 +3436,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`numberlistp <numberlistp/0::euclidean_norm/2>`
+
+``exchange_bind/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::exchange_bind/4>`
+
+``exchange_declare/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::exchange_declare/3>`
+
+``exchange_delete/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::exchange_delete/3>`
+
+``exchange_unbind/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::exchange_unbind/4>`
 
 ``exclude/3``
 -------------
@@ -6892,6 +7104,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`heap_protocol <heap_protocol/0::merge/3>`
 
+``message_body/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::message_body/2>`
+
+``message_delivery_tag/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::message_delivery_tag/2>`
+
+``message_exchange/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::message_exchange/2>`
+
 ``message_hook/4``
 ------------------
 
@@ -6921,6 +7163,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`logtalk <logtalk/0::message_prefix_stream/4>`
+
+``message_properties/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::message_properties/2>`
+
+``message_property/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::message_property/3>`
+
+``message_routing_key/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::message_routing_key/2>`
 
 ``message_tokens//2``
 ---------------------
@@ -8787,6 +9059,56 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`logtalk <logtalk/0::question_prompt_stream/4>`
 
+``queue_bind/4``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::queue_bind/4>`
+
+``queue_declare/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::queue_declare/3>`
+
+``queue_delete/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::queue_delete/3>`
+
+``queue_purge/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::queue_purge/2>`
+
+``queue_unbind/4``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::queue_unbind/4>`
+
 ``quick_check/1``
 -----------------
 
@@ -9206,6 +9528,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`amqp <amqp/0::receive/3>`
 * :ref:`stomp <stomp/0::receive/3>`
 
 ``recorda/2``
@@ -9917,6 +10240,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`amqp <amqp/0::send_heartbeat/1>`
 * :ref:`stomp <stomp/0::send_heartbeat/1>`
 
 ``sequence/3``
@@ -11493,6 +11817,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`redis <redis/0::ttl/3>`
+
+``tx_commit/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::tx_commit/1>`
+
+``tx_rollback/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::tx_rollback/1>`
+
+``tx_select/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`amqp <amqp/0::tx_select/1>`
 
 ``type/1``
 ----------

@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>amqp &mdash; Logtalk 3.98.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=fd83a980"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="arbitrary" href="arbitrary_0.html" />
+    <link rel="prev" title="Libraries" href="library_index.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Logtalk APIs
+              <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.98.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Libraries</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#amqp"><span class="xref std std-ref">amqp</span></a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">amqp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#arbitrary"><span class="xref std std-ref">arbitrary</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><span class="xref std std-ref">assertions</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assignvars"><span class="xref std std-ref">assignvars</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#avro"><span class="xref std std-ref">avro</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#base32"><span class="xref std std-ref">base32</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#base58"><span class="xref std std-ref">base58</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#base64"><span class="xref std std-ref">base64</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#base85"><span class="xref std std-ref">base85</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#cbor"><span class="xref std std-ref">cbor</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ccsds"><span class="xref std std-ref">ccsds</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><span class="xref std std-ref">code_metrics</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><span class="xref std std-ref">core</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#coroutining"><span class="xref std std-ref">coroutining</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#csv"><span class="xref std std-ref">csv</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dates"><span class="xref std std-ref">dates</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><span class="xref std std-ref">dead_code_scanner</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debug-messages"><span class="xref std std-ref">debug_messages</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><span class="xref std std-ref">debugger</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dependents"><span class="xref std std-ref">dependents</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#deques"><span class="xref std std-ref">deques</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><span class="xref std std-ref">diagrams</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dictionaries"><span class="xref std std-ref">dictionaries</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dif"><span class="xref std std-ref">dif</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><span class="xref std std-ref">doclet</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#edcg"><span class="xref std std-ref">edcg</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#events"><span class="xref std std-ref">events</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#expand-library-alias-paths"><span class="xref std std-ref">expand_library_alias_paths</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#expecteds"><span class="xref std std-ref">expecteds</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#fcube"><span class="xref std std-ref">fcube</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><span class="xref std std-ref">flags</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#format"><span class="xref std std-ref">format</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#genint"><span class="xref std std-ref">genint</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#gensym"><span class="xref std std-ref">gensym</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#git"><span class="xref std std-ref">git</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#grammars"><span class="xref std std-ref">grammars</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#heaps"><span class="xref std std-ref">heaps</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><span class="xref std std-ref">help</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#hierarchies"><span class="xref std std-ref">hierarchies</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#hook-flows"><span class="xref std std-ref">hook_flows</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#hook-objects"><span class="xref std std-ref">hook_objects</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#html"><span class="xref std std-ref">html</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ids"><span class="xref std std-ref">ids</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#intervals"><span class="xref std std-ref">intervals</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><span class="xref std std-ref">iso8601</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#issue-creator"><span class="xref std std-ref">issue_creator</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#java"><span class="xref std std-ref">java</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#json"><span class="xref std std-ref">json</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#json-ld"><span class="xref std std-ref">json_ld</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#json-lines"><span class="xref std std-ref">json_lines</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#json-schema"><span class="xref std std-ref">json_schema</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><span class="xref std std-ref">lgtdoc</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><span class="xref std std-ref">library</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#listing"><span class="xref std std-ref">listing</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#logging"><span class="xref std std-ref">logging</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#memcached"><span class="xref std std-ref">memcached</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#meta"><span class="xref std std-ref">meta</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#meta-compiler"><span class="xref std std-ref">meta_compiler</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#nested-dictionaries"><span class="xref std std-ref">nested_dictionaries</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#optionals"><span class="xref std std-ref">optionals</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#options"><span class="xref std std-ref">options</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#os"><span class="xref std std-ref">os</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#packs"><span class="xref std std-ref">packs</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><span class="xref std std-ref">pddl_parser</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports-profiler"><span class="xref std std-ref">ports_profiler</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#process"><span class="xref std std-ref">process</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#protobuf"><span class="xref std std-ref">protobuf</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#queues"><span class="xref std std-ref">queues</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#random"><span class="xref std std-ref">random</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#reader"><span class="xref std std-ref">reader</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#recorded-database"><span class="xref std std-ref">recorded_database</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#redis"><span class="xref std std-ref">redis</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#sets"><span class="xref std std-ref">sets</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#sockets"><span class="xref std std-ref">sockets</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#statistics"><span class="xref std std-ref">statistics</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#stemming"><span class="xref std std-ref">stemming</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#stomp"><span class="xref std std-ref">stomp</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#string-distance"><span class="xref std std-ref">string_distance</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#strings"><span class="xref std std-ref">strings</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#subsequences"><span class="xref std std-ref">subsequences</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#timeout"><span class="xref std std-ref">timeout</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#toon"><span class="xref std std-ref">toon</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><span class="xref std std-ref">tutor</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#types"><span class="xref std std-ref">types</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ulid"><span class="xref std std-ref">ulid</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#union-find"><span class="xref std std-ref">union_find</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#url"><span class="xref std std-ref">url</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#uuid"><span class="xref std std-ref">uuid</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><span class="xref std std-ref">verdi_neruda</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><span class="xref std std-ref">wrapper</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#xml-parser"><span class="xref std std-ref">xml_parser</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#yaml"><span class="xref std std-ref">yaml</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#zippers"><span class="xref std std-ref">zippers</span></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicates</a></li>
+</ul>
+
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="core_inheritance_diagram.svg">Core diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="library_inheritance_diagram.svg">Libraries diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="tools_inheritance_diagram.svg">Tools diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="ports_inheritance_diagram.svg">Ports diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="contributions_inheritance_diagram.svg">Contributions diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+    </ul>
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../handbook/index.html">Handbook</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Logtalk APIs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">amqp</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/amqp_0.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p class="right" id="amqp-0"><span id="index-0"></span><strong>object</strong></p>
+<section id="amqp">
+<h1><code class="docutils literal notranslate"><span class="pre">amqp</span></code><a class="headerlink" href="#amqp" title="Link to this heading"></a></h1>
+<p>Portable AMQP 0-9-1 (Advanced Message Queuing Protocol) client. Uses the sockets library for TCP communication.</p>
+<div class="line-block">
+<div class="line"><strong>Availability:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(amqp(loader))</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 1:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-02-10</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Uses:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="socket_0.html#socket-0"><span class="std std-ref">socket</span></a></div>
+<div class="line"><a class="reference internal" href="term_io_0.html#term-io-0"><span class="std std-ref">term_io</span></a></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Supported backends: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM (same as the sockets library).</p></li>
+<li><p>Protocol version: Implements AMQP 0-9-1 specification.</p></li>
+<li><p>Binary protocol: AMQP is a binary protocol with typed frame encoding.</p></li>
+<li><p>Channels: Supports multiple concurrent channels over a single connection.</p></li>
+<li><p>Exchanges and queues: Full support for declaring exchanges, queues, and bindings.</p></li>
+<li><p>Content: Supports message publishing and consuming with content headers.</p></li>
+<li><p>Transactions: Supports AMQP transactions with tx.select, tx.commit, and tx.rollback.</p></li>
+<li><p>Publisher confirms: Support for publisher confirms can be added.</p></li>
+<li><p>Heartbeat: Supports heartbeat negotiation to keep connections alive.</p></li>
+</ul>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><strong>Inherited public predicates:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
+</div>
+</div>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#connect-4" id="id2"><code class="docutils literal notranslate"><span class="pre">connect/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#close-1" id="id3"><code class="docutils literal notranslate"><span class="pre">close/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#close-3" id="id4"><code class="docutils literal notranslate"><span class="pre">close/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#connection-alive-1" id="id5"><code class="docutils literal notranslate"><span class="pre">connection_alive/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#channel-open-3" id="id6"><code class="docutils literal notranslate"><span class="pre">channel_open/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#channel-close-1" id="id7"><code class="docutils literal notranslate"><span class="pre">channel_close/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#channel-close-3" id="id8"><code class="docutils literal notranslate"><span class="pre">channel_close/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#exchange-declare-3" id="id9"><code class="docutils literal notranslate"><span class="pre">exchange_declare/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#exchange-delete-3" id="id10"><code class="docutils literal notranslate"><span class="pre">exchange_delete/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#exchange-bind-4" id="id11"><code class="docutils literal notranslate"><span class="pre">exchange_bind/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#exchange-unbind-4" id="id12"><code class="docutils literal notranslate"><span class="pre">exchange_unbind/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#queue-declare-3" id="id13"><code class="docutils literal notranslate"><span class="pre">queue_declare/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#queue-delete-3" id="id14"><code class="docutils literal notranslate"><span class="pre">queue_delete/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#queue-bind-4" id="id15"><code class="docutils literal notranslate"><span class="pre">queue_bind/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#queue-unbind-4" id="id16"><code class="docutils literal notranslate"><span class="pre">queue_unbind/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#queue-purge-2" id="id17"><code class="docutils literal notranslate"><span class="pre">queue_purge/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#basic-publish-4" id="id18"><code class="docutils literal notranslate"><span class="pre">basic_publish/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#basic-consume-3" id="id19"><code class="docutils literal notranslate"><span class="pre">basic_consume/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#basic-cancel-3" id="id20"><code class="docutils literal notranslate"><span class="pre">basic_cancel/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#basic-get-3" id="id21"><code class="docutils literal notranslate"><span class="pre">basic_get/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#basic-ack-3" id="id22"><code class="docutils literal notranslate"><span class="pre">basic_ack/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#basic-nack-3" id="id23"><code class="docutils literal notranslate"><span class="pre">basic_nack/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#basic-reject-3" id="id24"><code class="docutils literal notranslate"><span class="pre">basic_reject/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#basic-qos-2" id="id25"><code class="docutils literal notranslate"><span class="pre">basic_qos/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#basic-recover-2" id="id26"><code class="docutils literal notranslate"><span class="pre">basic_recover/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#receive-3" id="id27"><code class="docutils literal notranslate"><span class="pre">receive/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#tx-select-1" id="id28"><code class="docutils literal notranslate"><span class="pre">tx_select/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#tx-commit-1" id="id29"><code class="docutils literal notranslate"><span class="pre">tx_commit/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#tx-rollback-1" id="id30"><code class="docutils literal notranslate"><span class="pre">tx_rollback/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#confirm-select-1" id="id31"><code class="docutils literal notranslate"><span class="pre">confirm_select/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#send-heartbeat-1" id="id32"><code class="docutils literal notranslate"><span class="pre">send_heartbeat/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#message-body-2" id="id33"><code class="docutils literal notranslate"><span class="pre">message_body/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#message-properties-2" id="id34"><code class="docutils literal notranslate"><span class="pre">message_properties/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#message-property-3" id="id35"><code class="docutils literal notranslate"><span class="pre">message_property/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#message-delivery-tag-2" id="id36"><code class="docutils literal notranslate"><span class="pre">message_delivery_tag/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#message-exchange-2" id="id37"><code class="docutils literal notranslate"><span class="pre">message_exchange/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#message-routing-key-2" id="id38"><code class="docutils literal notranslate"><span class="pre">message_routing_key/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#encode-frame-2" id="id39"><code class="docutils literal notranslate"><span class="pre">encode_frame/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#decode-frame-2" id="id40"><code class="docutils literal notranslate"><span class="pre">decode_frame/2</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id41">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id42">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id43">Operators</a></p></li>
+</ul>
+</nav>
+<section id="public-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
+<section id="connect-4">
+<span id="amqp-0-connect-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">connect/4</span></code></a><a class="headerlink" href="#connect-4" title="Link to this heading"></a></h3>
+<p>Connects to an AMQP 0-9-1 server and performs the protocol handshake. Returns a connection handle for subsequent operations.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">connect(Host,Port,Connection,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">connect(+atom,+integer,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Connection refused or network error:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(connection_failed)</span></code></div>
+</div>
+<div class="line">Server rejected connection:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(protocol_error(Message))</span></code></div>
+</div>
+<div class="line">Authentication failed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(auth_failed)</span></code></div>
+</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option username(Username): Username for authentication. Default is guest.</p></li>
+<li><p>Option password(Password): Password for authentication. Default is guest.</p></li>
+<li><p>Option virtual_host(VHost): Virtual host name. Default is /.</p></li>
+<li><p>Option heartbeat(Seconds): Heartbeat interval in seconds. Default is 60.</p></li>
+<li><p>Option channel_max(Max): Maximum number of channels. Default is 0 (no limit).</p></li>
+<li><p>Option frame_max(Max): Maximum frame size. Default is 131072.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="close-1">
+<span id="amqp-0-close-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">close/1</span></code></a><a class="headerlink" href="#close-1" title="Link to this heading"></a></h3>
+<p>Gracefully closes the AMQP connection. Closes all channels and the connection itself.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">close(Connection)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">close(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="close-3">
+<span id="amqp-0-close-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">close/3</span></code></a><a class="headerlink" href="#close-3" title="Link to this heading"></a></h3>
+<p>Closes the AMQP connection with a specific reply code and reason.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">close(Connection,ReplyCode,ReplyText)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">close(+compound,+integer,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="connection-alive-1">
+<span id="amqp-0-connection-alive-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">connection_alive/1</span></code></a><a class="headerlink" href="#connection-alive-1" title="Link to this heading"></a></h3>
+<p>Checks if the connection is still open and valid.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">connection_alive(Connection)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">connection_alive(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="channel-open-3">
+<span id="amqp-0-channel-open-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">channel_open/3</span></code></a><a class="headerlink" href="#channel-open-3" title="Link to this heading"></a></h3>
+<p>Opens a new channel on the connection. Returns a channel handle.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">channel_open(Connection,ChannelNumber,Channel)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">channel_open(+compound,+integer,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Channel already open:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(channel_error(Message))</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="channel-close-1">
+<span id="amqp-0-channel-close-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">channel_close/1</span></code></a><a class="headerlink" href="#channel-close-1" title="Link to this heading"></a></h3>
+<p>Closes a channel.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">channel_close(Channel)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">channel_close(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="channel-close-3">
+<span id="amqp-0-channel-close-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">channel_close/3</span></code></a><a class="headerlink" href="#channel-close-3" title="Link to this heading"></a></h3>
+<p>Closes a channel with a specific reply code and reason.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">channel_close(Channel,ReplyCode,ReplyText)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">channel_close(+compound,+integer,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="exchange-declare-3">
+<span id="amqp-0-exchange-declare-3"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange_declare/3</span></code></a><a class="headerlink" href="#exchange-declare-3" title="Link to this heading"></a></h3>
+<p>Declares an exchange on the server.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_declare(Channel,Exchange,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_declare(+compound,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option type(Type): Exchange type: direct, fanout, topic, headers. Default is direct.</p></li>
+<li><p>Option durable(Bool): Survive server restart. Default is false.</p></li>
+<li><p>Option auto_delete(Bool): Delete when unused. Default is false.</p></li>
+<li><p>Option internal(Bool): Internal exchange. Default is false.</p></li>
+<li><p>Option arguments(Args): Additional arguments as key-value pairs.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="exchange-delete-3">
+<span id="amqp-0-exchange-delete-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange_delete/3</span></code></a><a class="headerlink" href="#exchange-delete-3" title="Link to this heading"></a></h3>
+<p>Deletes an exchange.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_delete(Channel,Exchange,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_delete(+compound,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option if_unused(Bool): Only delete if unused. Default is false.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="exchange-bind-4">
+<span id="amqp-0-exchange-bind-4"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange_bind/4</span></code></a><a class="headerlink" href="#exchange-bind-4" title="Link to this heading"></a></h3>
+<p>Binds an exchange to another exchange.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_bind(Channel,Destination,Source,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_bind(+compound,+atom,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option routing_key(Key): Routing key for binding. Default is empty.</p></li>
+<li><p>Option arguments(Args): Additional arguments.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="exchange-unbind-4">
+<span id="amqp-0-exchange-unbind-4"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange_unbind/4</span></code></a><a class="headerlink" href="#exchange-unbind-4" title="Link to this heading"></a></h3>
+<p>Unbinds an exchange from another exchange.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_unbind(Channel,Destination,Source,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_unbind(+compound,+atom,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="queue-declare-3">
+<span id="amqp-0-queue-declare-3"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">queue_declare/3</span></code></a><a class="headerlink" href="#queue-declare-3" title="Link to this heading"></a></h3>
+<p>Declares a queue on the server. If Queue is a variable, the server generates a unique name.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">queue_declare(Channel,Queue,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">queue_declare(+compound,?atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option durable(Bool): Survive server restart. Default is false.</p></li>
+<li><p>Option exclusive(Bool): Exclusive to this connection. Default is false.</p></li>
+<li><p>Option auto_delete(Bool): Delete when unused. Default is false.</p></li>
+<li><p>Option arguments(Args): Additional arguments (e.g., message TTL, dead letter exchange).</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="queue-delete-3">
+<span id="amqp-0-queue-delete-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">queue_delete/3</span></code></a><a class="headerlink" href="#queue-delete-3" title="Link to this heading"></a></h3>
+<p>Deletes a queue.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">queue_delete(Channel,Queue,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">queue_delete(+compound,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option if_unused(Bool): Only delete if unused. Default is false.</p></li>
+<li><p>Option if_empty(Bool): Only delete if empty. Default is false.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="queue-bind-4">
+<span id="amqp-0-queue-bind-4"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">queue_bind/4</span></code></a><a class="headerlink" href="#queue-bind-4" title="Link to this heading"></a></h3>
+<p>Binds a queue to an exchange.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">queue_bind(Channel,Queue,Exchange,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">queue_bind(+compound,+atom,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option routing_key(Key): Routing key for binding. Default is empty.</p></li>
+<li><p>Option arguments(Args): Additional arguments.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="queue-unbind-4">
+<span id="amqp-0-queue-unbind-4"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">queue_unbind/4</span></code></a><a class="headerlink" href="#queue-unbind-4" title="Link to this heading"></a></h3>
+<p>Unbinds a queue from an exchange.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">queue_unbind(Channel,Queue,Exchange,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">queue_unbind(+compound,+atom,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="queue-purge-2">
+<span id="amqp-0-queue-purge-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">queue_purge/2</span></code></a><a class="headerlink" href="#queue-purge-2" title="Link to this heading"></a></h3>
+<p>Purges all messages from a queue.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">queue_purge(Channel,Queue)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">queue_purge(+compound,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="basic-publish-4">
+<span id="amqp-0-basic-publish-4"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">basic_publish/4</span></code></a><a class="headerlink" href="#basic-publish-4" title="Link to this heading"></a></h3>
+<p>Publishes a message to an exchange.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">basic_publish(Channel,Exchange,Body,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">basic_publish(+compound,+atom,+term,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option routing_key(Key): Routing key for message. Default is empty.</p></li>
+<li><p>Option mandatory(Bool): Return if not routable. Default is false.</p></li>
+<li><p>Option immediate(Bool): Return if not deliverable. Default is false (deprecated in RabbitMQ).</p></li>
+<li><p>Option content_type(Type): MIME content type.</p></li>
+<li><p>Option content_encoding(Enc): Content encoding.</p></li>
+<li><p>Option correlation_id(Id): Correlation identifier.</p></li>
+<li><p>Option reply_to(Queue): Reply queue name.</p></li>
+<li><p>Option expiration(Ms): Message TTL in milliseconds.</p></li>
+<li><p>Option message_id(Id): Application message identifier.</p></li>
+<li><p>Option timestamp(Ts): Message timestamp.</p></li>
+<li><p>Option type(Type): Message type name.</p></li>
+<li><p>Option user_id(Id): Creating user ID.</p></li>
+<li><p>Option app_id(Id): Creating application ID.</p></li>
+<li><p>Option delivery_mode(Mode): 1 for non-persistent, 2 for persistent.</p></li>
+<li><p>Option priority(P): Message priority (0-9).</p></li>
+<li><p>Option headers(H): Application headers as key-value pairs.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="basic-consume-3">
+<span id="amqp-0-basic-consume-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">basic_consume/3</span></code></a><a class="headerlink" href="#basic-consume-3" title="Link to this heading"></a></h3>
+<p>Starts consuming messages from a queue.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">basic_consume(Channel,Queue,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">basic_consume(+compound,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option consumer_tag(Tag): Consumer identifier. Server generates if not provided.</p></li>
+<li><p>Option no_local(Bool): Do not receive own messages. Default is false.</p></li>
+<li><p>Option no_ack(Bool): No acknowledgment required. Default is false.</p></li>
+<li><p>Option exclusive(Bool): Exclusive consumer. Default is false.</p></li>
+<li><p>Option arguments(Args): Additional arguments.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="basic-cancel-3">
+<span id="amqp-0-basic-cancel-3"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">basic_cancel/3</span></code></a><a class="headerlink" href="#basic-cancel-3" title="Link to this heading"></a></h3>
+<p>Cancels a consumer.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">basic_cancel(Channel,ConsumerTag,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">basic_cancel(+compound,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="basic-get-3">
+<span id="amqp-0-basic-get-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">basic_get/3</span></code></a><a class="headerlink" href="#basic-get-3" title="Link to this heading"></a></h3>
+<p>Synchronously gets a message from a queue.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">basic_get(Channel,Queue,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">basic_get(+compound,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option no_ack(Bool): No acknowledgment required. Default is false.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="basic-ack-3">
+<span id="amqp-0-basic-ack-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">basic_ack/3</span></code></a><a class="headerlink" href="#basic-ack-3" title="Link to this heading"></a></h3>
+<p>Acknowledges a message.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">basic_ack(Channel,DeliveryTag,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">basic_ack(+compound,+integer,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option multiple(Bool): Acknowledge all up to this tag. Default is false.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="basic-nack-3">
+<span id="amqp-0-basic-nack-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">basic_nack/3</span></code></a><a class="headerlink" href="#basic-nack-3" title="Link to this heading"></a></h3>
+<p>Negatively acknowledges a message (RabbitMQ extension).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">basic_nack(Channel,DeliveryTag,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">basic_nack(+compound,+integer,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option multiple(Bool): Reject all up to this tag. Default is false.</p></li>
+<li><p>Option requeue(Bool): Requeue the message. Default is true.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="basic-reject-3">
+<span id="amqp-0-basic-reject-3"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">basic_reject/3</span></code></a><a class="headerlink" href="#basic-reject-3" title="Link to this heading"></a></h3>
+<p>Rejects a message.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">basic_reject(Channel,DeliveryTag,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">basic_reject(+compound,+integer,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option requeue(Bool): Requeue the message. Default is true.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="basic-qos-2">
+<span id="amqp-0-basic-qos-2"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">basic_qos/2</span></code></a><a class="headerlink" href="#basic-qos-2" title="Link to this heading"></a></h3>
+<p>Sets quality of service (prefetch) settings.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">basic_qos(Channel,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">basic_qos(+compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option prefetch_size(Size): Prefetch window size in bytes. Default is 0 (no limit).</p></li>
+<li><p>Option prefetch_count(Count): Prefetch window in messages. Default is 0 (no limit).</p></li>
+<li><p>Option global(Bool): Apply to entire connection. Default is false.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="basic-recover-2">
+<span id="amqp-0-basic-recover-2"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">basic_recover/2</span></code></a><a class="headerlink" href="#basic-recover-2" title="Link to this heading"></a></h3>
+<p>Asks the server to redeliver unacknowledged messages.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">basic_recover(Channel,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">basic_recover(+compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option requeue(Bool): Requeue messages. Default is false.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="receive-3">
+<span id="amqp-0-receive-3"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">receive/3</span></code></a><a class="headerlink" href="#receive-3" title="Link to this heading"></a></h3>
+<p>Receives a message or method from the server. Blocks until data is available or timeout.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">receive(Channel,Message,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">receive(+compound,-compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option timeout(Milliseconds): Timeout in milliseconds. 0 for non-blocking, -1 for infinite. Default is -1.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="tx-select-1">
+<span id="amqp-0-tx-select-1"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">tx_select/1</span></code></a><a class="headerlink" href="#tx-select-1" title="Link to this heading"></a></h3>
+<p>Enables transaction mode on a channel.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tx_select(Channel)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tx_select(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="tx-commit-1">
+<span id="amqp-0-tx-commit-1"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">tx_commit/1</span></code></a><a class="headerlink" href="#tx-commit-1" title="Link to this heading"></a></h3>
+<p>Commits the current transaction.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tx_commit(Channel)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tx_commit(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="tx-rollback-1">
+<span id="amqp-0-tx-rollback-1"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">tx_rollback/1</span></code></a><a class="headerlink" href="#tx-rollback-1" title="Link to this heading"></a></h3>
+<p>Rolls back the current transaction.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tx_rollback(Channel)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tx_rollback(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="confirm-select-1">
+<span id="amqp-0-confirm-select-1"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">confirm_select/1</span></code></a><a class="headerlink" href="#confirm-select-1" title="Link to this heading"></a></h3>
+<p>Enables publisher confirms on a channel (RabbitMQ extension).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">confirm_select(Channel)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">confirm_select(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="send-heartbeat-1">
+<span id="amqp-0-send-heartbeat-1"></span><span id="index-31"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">send_heartbeat/1</span></code></a><a class="headerlink" href="#send-heartbeat-1" title="Link to this heading"></a></h3>
+<p>Sends a heartbeat frame to the server.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">send_heartbeat(Connection)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">send_heartbeat(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="message-body-2">
+<span id="amqp-0-message-body-2"></span><span id="index-32"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">message_body/2</span></code></a><a class="headerlink" href="#message-body-2" title="Link to this heading"></a></h3>
+<p>Extracts the body from a message.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">message_body(Message,Body)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">message_body(+compound,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="message-properties-2">
+<span id="amqp-0-message-properties-2"></span><span id="index-33"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">message_properties/2</span></code></a><a class="headerlink" href="#message-properties-2" title="Link to this heading"></a></h3>
+<p>Extracts the properties from a message as a list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">message_properties(Message,Properties)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">message_properties(+compound,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="message-property-3">
+<span id="amqp-0-message-property-3"></span><span id="index-34"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">message_property/3</span></code></a><a class="headerlink" href="#message-property-3" title="Link to this heading"></a></h3>
+<p>Extracts a specific property from a message. Fails if not present.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">message_property(Message,PropertyName,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">message_property(+compound,+atom,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="message-delivery-tag-2">
+<span id="amqp-0-message-delivery-tag-2"></span><span id="index-35"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">message_delivery_tag/2</span></code></a><a class="headerlink" href="#message-delivery-tag-2" title="Link to this heading"></a></h3>
+<p>Extracts the delivery tag from a message.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">message_delivery_tag(Message,DeliveryTag)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">message_delivery_tag(+compound,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="message-exchange-2">
+<span id="amqp-0-message-exchange-2"></span><span id="index-36"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">message_exchange/2</span></code></a><a class="headerlink" href="#message-exchange-2" title="Link to this heading"></a></h3>
+<p>Extracts the exchange name from a message.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">message_exchange(Message,Exchange)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">message_exchange(+compound,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="message-routing-key-2">
+<span id="amqp-0-message-routing-key-2"></span><span id="index-37"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">message_routing_key/2</span></code></a><a class="headerlink" href="#message-routing-key-2" title="Link to this heading"></a></h3>
+<p>Extracts the routing key from a message.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">message_routing_key(Message,RoutingKey)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">message_routing_key(+compound,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="encode-frame-2">
+<span id="amqp-0-encode-frame-2"></span><span id="index-38"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">encode_frame/2</span></code></a><a class="headerlink" href="#encode-frame-2" title="Link to this heading"></a></h3>
+<p>Encodes an AMQP frame to a list of bytes.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">encode_frame(Frame,Bytes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">encode_frame(+compound,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="decode-frame-2">
+<span id="amqp-0-decode-frame-2"></span><span id="index-39"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">decode_frame/2</span></code></a><a class="headerlink" href="#decode-frame-2" title="Link to this heading"></a></h3>
+<p>Decodes a list of bytes to an AMQP frame.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decode_frame(Bytes,Frame)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decode_frame(+list,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="protected-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
+<p>(no local declarations; see entity ancestors if any)</p>
+</section>
+<section id="private-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
+<p>(no local declarations; see entity ancestors if any)</p>
+</section>
+<section id="operators">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
+<p>(none)</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="library_index.html" class="btn btn-neutral float-left" title="Libraries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="arbitrary_0.html" class="btn btn-neutral float-right" title="arbitrary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2026, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

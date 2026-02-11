@@ -28,6 +28,7 @@ directory in the ``NOTES.md`` file.
    :maxdepth: 2
 
    overview
+   amqp
    arbitrary
    assignvars
    avro
