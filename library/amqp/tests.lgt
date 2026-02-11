@@ -33,6 +33,10 @@
 		length/2, valid/1 as is_list/1
 	]).
 
+	:- uses(lgtunit, [
+		assertion/2
+	]).
+
 	cover(amqp).
 
 	% ==========================================================================
@@ -752,8 +756,8 @@
 		amqp::receive(Channel, Message, []),
 		% Extract and verify body is non-empty atom
 		amqp::message_body(Message, Body),
-		^^assertion(body_nonvar, nonvar(Body)),
-		^^assertion(body_atom, atom(Body)),
+		assertion(body_nonvar, nonvar(Body)),
+		assertion(body_atom, atom(Body)),
 		amqp::basic_cancel(Channel, 'test-body-receiver', []),
 		amqp::channel_close(Channel),
 		amqp::close(Connection).
@@ -767,7 +771,7 @@
 		amqp::receive(Channel, Message, []),
 		% Extract properties - should be a list
 		amqp::message_properties(Message, Properties),
-		^^assertion(properties_list, is_list(Properties)),
+		assertion(properties_list, is_list(Properties)),
 		amqp::basic_cancel(Channel, 'test-props-receiver', []),
 		amqp::channel_close(Channel),
 		amqp::close(Connection).
@@ -783,13 +787,13 @@
 		% Receive both and verify structure
 		amqp::receive(Channel, Message1, []),
 		amqp::receive(Channel, Message2, []),
-		^^assertion(message1_structure, subsumes_term(message(deliver,_,_,'test-receive-multi-queue',_,_), Message1)),
-		^^assertion(message2_structure, subsumes_term(message(deliver,_,_,'test-receive-multi-queue',_,_), Message2)),
+		assertion(message1_structure, subsumes_term(message(deliver,_,_,'test-receive-multi-queue',_,_), Message1)),
+		assertion(message2_structure, subsumes_term(message(deliver,_,_,'test-receive-multi-queue',_,_), Message2)),
 		amqp::message_body(Message1, Body1),
 		amqp::message_body(Message2, Body2),
-		^^assertion(body1_atom, atom(Body1)),
-		^^assertion(body2_atom, atom(Body2)),
-		^^assertion(bodies_different, Body1 \== Body2),
+		assertion(body1_atom, atom(Body1)),
+		assertion(body2_atom, atom(Body2)),
+		assertion(bodies_different, Body1 \== Body2),
 		amqp::basic_cancel(Channel, 'test-multi-receiver', []),
 		amqp::channel_close(Channel),
 		amqp::close(Connection).
