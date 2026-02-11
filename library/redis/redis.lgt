@@ -22,9 +22,9 @@
 :- object(redis).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Paulo Moura',
-		date is 2026-02-06,
+		date is 2026-02-10,
 		comment is 'Redis client library with support for strings, keys, hashes, lists, sets, and sorted sets. Inspired by Sean Charles GNU Prolog Redis client.',
 		remarks is [
 			'Command representation' - 'Use the Redis command name as the functor of a compound term where the arguments are the command arguments.',
@@ -411,29 +411,30 @@
 
 	:- uses(logtalk, [print_message/3]).
 	:- uses(list, [length/2]).
+	:- uses(socket, [client_open/4, close/2]).
 
 	% public predicates
 
-	connect(Connection) :-
+	connect(redis(Input, Output, _Socket)) :-
 		context(Context),
 		catch(
-			connect_to_server(localhost, 6379, Connection),
+			client_open(localhost, 6379, Input, Output),
 			Error,
 			throw(error(Error, Context))
 		).
 
-	connect(Host, Port, Connection) :-
+	connect(Host, Port, redis(Input, Output, _Socket)) :-
 		context(Context),
 		catch(
-			connect_to_server(Host, Port, Connection),
+			client_open(Host, Port, Input, Output),
 			Error,
 			throw(error(Error, Context))
 		).
 
-	disconnect(Connection) :-
+	disconnect(redis(Input, Output, _Socket)) :-
 		context(Context),
 		catch(
-			disconnect_from_server(Connection),
+			close(Input, Output),
 			Error,
 			throw(error(Error, Context))
 		).
@@ -613,102 +614,6 @@
 
 	zscore(Connection, Key, Member, Score) :-
 		send(Connection, zscore(Key, Member), bulk(Score)).
-
-	% backend Prolog compiler dependent auxiliary predicates
-	% (there is not standard sockets Prolog library)
-
-	:- if(current_logtalk_flag(prolog_dialect, ciao)).
-
-	connect_to_server(Host, Port, redis(Stream, Stream, _)) :-
-		sockets:connect_to_socket(Host, Port, Stream).
-
-	disconnect_from_server(redis(Stream, _, _)) :-
-		sockets:socket_shutdown(Stream, read_write).
-
-	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
-
-	connect_to_server(Host, Port, redis(Stream, Stream, _)) :-
-		socket(internet, stream, Stream),
-		connect(Stream, Host/Port),
-		set_stream_property(Stream, encoding, octet).
-
-	disconnect_from_server(redis(Stream, _, _)) :-
-		close(Stream).
-
-	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
-
-	connect_to_server(Host, Port, redis(Input, Output, Socket)) :-
-		socket('AF_INET', Socket),
-		socket_connect(Socket, 'AF_INET'(Host, Port), Input, Output),
-		set_stream_type(Input, binary),
-		set_stream_type(Output, binary).
-
-	disconnect_from_server(redis(_, _, Socket)) :-
-		socket_close(Socket).
-
-	:- elif(current_logtalk_flag(prolog_dialect, qp)).
-
-	connect_to_server(Host0, Port, redis(Input, Output, Socket)) :-
-		(	Host0 == localhost ->
-			Host = '127.0.0.1'
-		;	Host = Host0
-		),
-		tcp_client(Port, Host, Socket),
-		open_socket_stream(Socket, read, Input),
-		open_socket_stream(Socket, write, Output).
-
-	disconnect_from_server(redis(_, _, Socket)) :-
-		tcp_close(Socket).
-
-	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
-
-	connect_to_server(Host, Port, redis(Stream, Stream, _)) :-
-		sockets:socket_client_open(inet(Host,Port), Stream, [type(binary), eof_action(eof)]).
-
-	disconnect_from_server(redis(Stream, _, _)) :-
-		close(Stream).
-
-	:- elif(current_logtalk_flag(prolog_dialect, swi)).
-
-	connect_to_server(Host, Port, redis(Input, Output, Socket)) :-
-		socket:tcp_socket(Socket),
-		socket:tcp_connect(Socket, Host:Port, Stream),
-		stream_pair(Stream, Input, Output),
-		set_stream(Stream, type(binary)).
-
-	disconnect_from_server(redis(_, _, Socket)) :-
-		socket:tcp_close_socket(Socket).
-
-	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
-
-	connect_to_server(Host, Port, redis(Socket, Socket, Socket)) :-
-		{	socket(Socket, _),
-			socket_connect(Socket, Port, Host, _)
-		}.
-
-	disconnect_from_server(redis(_, _, Socket)) :-
-		{socket_close(Socket, _)}.
-
-	put_byte(Socket, Byte) :-
-		{socket_put(Socket, Byte, _)}.
-
-	get_byte(Socket, Byte) :-
-		{socket_get0(Socket, Byte0, _), Byte0 = Byte}.
-
-	flush_output(_).
-
-	:- elif(current_logtalk_flag(prolog_dialect, xvm)).
-
-	connect_to_server(Host, Port, redis(Input, Output, Socket)) :-
-		socket('AF_INET', Socket),
-		socket_connect(Socket, 'AF_INET'(Host, Port), Input, Output),
-		set_stream_type(Input, binary),
-		set_stream_type(Output, binary).
-
-	disconnect_from_server(redis(_, _, Socket)) :-
-		socket_close(Socket).
-
-	:- endif.
 
 	% other auxiliary predicates
 

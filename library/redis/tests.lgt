@@ -61,8 +61,8 @@
 	:- elif(current_logtalk_flag(prolog_dialect, qp)).
 		:- uses(user, [thread_sleep/1 as sleep/1]).
 	:- else.
-		% ECLiPSe, GNU Prolog, SWI-Prolog, XSB, and XVM provide sleep/1
-		% as a built-in predicate but we list it here for clarity
+		% ECLiPSe, GNU Prolog, SWI-Prolog, Trealla Prolog, XSB, and XVM provide
+		% sleep/1 as a built-in predicate but we list it here for clarity
 		:- uses(user, [sleep/1]).
 	:- endif.
 
@@ -75,15 +75,15 @@
 
 	%% CONNECTION...
 
-	test(default_connection_and_echo, true(Output == 'GNU Prolog rocks!')) :-
+	test(default_connection_and_echo, true(Output == 'Logtalk rocks!')) :-
 		server_connection(Connection),
-		send(Connection, echo('GNU Prolog rocks!'), bulk(Output)),
+		send(Connection, echo('Logtalk rocks!'), bulk(Output)),
 		disconnect(Connection).
 
-	test(explicit_connection_and_echo, true(Output == 'GNU Prolog rocks!')) :-
+	test(explicit_connection_and_echo, true(Output == 'Logtalk rocks!')) :-
 		server_host_port(Host, Port),
 		connect(Host, Port, Connection),
-		send(Connection, echo('GNU Prolog rocks!'), bulk(Output)),
+		send(Connection, echo('Logtalk rocks!'), bulk(Output)),
 		disconnect(Connection).
 
 	test(ping_the_server, true(Output == 'PONG')) :-
@@ -292,9 +292,9 @@
 
 	test(append_to_an_existing_string, true) :-
 		server_connection(Connection),
-		send(Connection, set(test_string, 'GNU Prolog'), status('OK')),
-		send(Connection, append(test_string, ' is Cool'), number(18)),
-		send(Connection, strlen(test_string), number(18)),
+		send(Connection, set(test_string, 'Logtalk'), status('OK')),
+		send(Connection, append(test_string, ' is Cool'), number(15)),
+		send(Connection, strlen(test_string), number(15)),
 		disconnect(Connection).
 
 	test(counting_bits_in_a_string, true) :-

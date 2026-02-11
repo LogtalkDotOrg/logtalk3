@@ -19,60 +19,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, ciao)).
+:- if((
+	current_logtalk_flag(prolog_dialect, Dialect),
+	(	Dialect == eclipse; Dialect == gnu;
+		Dialect == sicstus; Dialect == swi;
+		Dialect == trealla,
+		current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
+		v(Major, Minor, Patch) @>= v(2, 90, 3);
+		Dialect == xvm
+	)
+)).
 
-	:- use_module(library(sockets), []).
-	:- initialization((
-		logtalk_load(basic_types(loader)),
-		logtalk_load(redis, [optimize(on)])
-	)).
-
-:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
-
-	:- initialization((
-		logtalk_load(basic_types(loader)),
-		logtalk_load(redis, [optimize(on)])
-	)).
-
-:- elif(current_logtalk_flag(prolog_dialect, gnu)).
-
-	:- initialization((
-		logtalk_load(basic_types(loader)),
-		logtalk_load(redis, [optimize(on)])
-	)).
-
-:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
-
-	:- use_module(library(sockets), []).
-	:- initialization((
-		logtalk_load(basic_types(loader)),
-		logtalk_load(redis, [optimize(on)])
-	)).
-
-:- elif(current_logtalk_flag(prolog_dialect, swi)).
-
-	:- use_module(library(socket), []).
-	:- initialization((
-		logtalk_load(basic_types(loader)),
-		logtalk_load(redis, [optimize(on)])
-	)).
-
-:- elif(current_logtalk_flag(prolog_dialect, xsb)).
-
-	:- import(from(/(socket,2), socket)).
-	:- import(from(/(socket_connect,4), socket)).
-	:- import(from(/(socket_close,2), socket)).
-	:- import(from(/(socket_put,3), socket)).
-	:- import(from(/(socket_get0,3), socket)).
-	:- initialization((
-		logtalk_load(basic_types(loader)),
-		logtalk_load(redis, [optimize(on)])
-	)).
-
-:- elif(current_logtalk_flag(prolog_dialect, xvm)).
+	:- if(current_logtalk_flag(prolog_dialect, ciao)).
+		:- use_module(library(sockets), []).
+	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
+		:- use_module(library(sockets), []).
+	:- elif(current_logtalk_flag(prolog_dialect, swi)).
+		:- use_module(library(socket), []).
+	:- endif.
 
 	:- initialization((
 		logtalk_load(basic_types(loader)),
+		logtalk_load(sockets(loader)),
 		logtalk_load(redis, [optimize(on)])
 	)).
 

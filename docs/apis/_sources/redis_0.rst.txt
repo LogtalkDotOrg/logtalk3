@@ -14,8 +14,8 @@ Redis client library with support for strings, keys, hashes, lists, sets, and so
 |    ``logtalk_load(redis(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:6:0
-| **Date:** 2026-02-06
+| **Version:** 0:7:0
+| **Date:** 2026-02-10
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -26,6 +26,7 @@ Redis client library with support for strings, keys, hashes, lists, sets, and so
 | **Uses:**
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
+|    :ref:`socket <socket/0>`
 
 | **Remarks:**
 

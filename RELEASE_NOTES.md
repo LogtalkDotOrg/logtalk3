@@ -135,6 +135,9 @@ and Xoshiro256** algorithms to the `random` library.
 * ADDED: Wrapper predicates for commonly used Redis operations across multiple
 data types to the `redis` library.
 
+* UPDATED: The `redis` library to use the new `sockets` library. Supports
+ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
+
 * UPDATED: The `dictionaries` library with a splay tree implementation. A new
 `lookup/4` predicate allows returning the splayed tree.
 
