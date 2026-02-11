@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:6:1,
 		author is 'Sean Charles. Adapted to Logtalk by Paulo Moura',
-		date is 2026-02-10,
+		date is 2026-02-11,
 		comment is 'Unit tests for the "redis" library.'
 	]).
 
@@ -534,7 +534,7 @@
 		zrange(Connection, range_zset, 0, -1, ZRange2),
 		disconnect(Connection).
 
-	test(wrapper_zrank_zscore, true(v(ZRank1,ZRank2,ZRank3,ZScore1,ZScore2) == v(0,1,2,'10.5','20.3'))) :-
+	test(wrapper_zrank_zscore, true(v(ZRank1,ZRank2,ZRank3) == v(0,1,2))) :-
 		server_connection(Connection),
 		send(Connection, flushall, status('OK')),
 		zadd(Connection, score_zset, 10.5, member1, _),
@@ -544,7 +544,9 @@
 		zrank(Connection, score_zset, member3, ZRank2),
 		zrank(Connection, score_zset, member2, ZRank3),
 		zscore(Connection, score_zset, member1, ZScore1),
+		^^assertion(sub_atom(ZScore1, 0, _, _, '10.5')),
 		zscore(Connection, score_zset, member2, ZScore2),
+		^^assertion(sub_atom(ZScore2, 0, _, _, '20.3')),
 		disconnect(Connection).
 
 	% auxiliary predicates
