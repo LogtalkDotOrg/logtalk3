@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-09,
+		date is 2026-02-12,
 		comment is 'Unit tests for the "memcached" library.'
 	]).
 
@@ -337,8 +337,8 @@
 
 	memcached_server_available :-
 		catch(
-			(	socket::client_open(localhost, 11211, Input, Output, []),
-				socket::close(Input, Output)
+			(	memcached::connect(localhost, 11211, Connection),
+				memcached::disconnect(Connection)
 			),
 			_,
 			fail
