@@ -96,6 +96,7 @@
 		listing(loader),
 		amqp(loader),
 		stomp(loader),
+		linda(loader),
 		cloning,
 		counters,
 		streamvars

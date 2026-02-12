@@ -1,0 +1,793 @@
+.. index:: single: linda
+.. _linda/0:
+
+.. rst-class:: right
+
+**object**
+
+``linda``
+=========
+
+Linda tuple-space implementation for process communication. Provides a server that acts as a shared blackboard where clients can write (``out/1``), read (``rd/1``), and remove (``in/1``) tuples. Uses threaded engines for the server implementation and the sockets library for network communication.
+
+| **Availability:** 
+|    ``logtalk_load(linda(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-12
+
+| **Compilation flags:**
+|    ``static, context_switching_calls, threaded``
+
+
+| **Provides:**
+|    :ref:`logtalk::message_prefix_stream/4 <logtalk/0::message_prefix_stream/4>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`os <os/0>`
+|    :ref:`socket <socket/0>`
+
+| **Remarks:**
+
+   - Supported backends: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog (requires both multi-threading and sockets support).
+   - Linda operations: The basic operations are ``out/1`` (write tuple), ``in/1`` (remove tuple, blocking), ``rd/1`` (read tuple, blocking), ``in_noblock/1`` (remove tuple, non-blocking), and ``rd_noblock/1`` (read tuple, non-blocking).
+   - Tuple matching: Tuples are matched using unification.
+   - Blocking behavior: The ``in/1`` and ``rd/1`` predicates block until a matching tuple is available. The ``in_noblock/1`` and ``rd_noblock/1`` predicates fail immediately if no matching tuple is found.
+   - Multiple clients: Multiple clients can connect to the same server. A tuple removed by ``in/1`` or ``in_noblock/1`` is only removed for one client.
+   - API compatibility: The API is inspired by the SICStus Prolog Linda library.
+   - Network communication: Uses TCP sockets for client-server communication, allowing processes to run on different machines.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: linda/0
+.. _linda/0::linda/0:
+
+``linda/0``
+^^^^^^^^^^^
+
+Starts a Linda server on an automatically assigned port. The server address (``Host:Port``) is written to the current output stream. The predicate succeeds when all clients have disconnected after a shutdown request.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``linda`` - ``one``
+
+
+------------
+
+.. index:: linda/1
+.. _linda/0::linda/1:
+
+``linda/1``
+^^^^^^^^^^^
+
+Starts a Linda server with the given options. The predicate succeeds when all clients have disconnected after a shutdown request.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``linda(Options)``
+| **Meta-predicate template:**
+|    ``linda(::)``
+| **Mode and number of proofs:**
+|    ``linda(+list)`` - ``one``
+
+| **Remarks:**
+
+    - Option ``Address-Goal``: ``Address`` is unified with ``Host:Port`` and ``Goal`` is called when the server starts. Useful for saving the address or starting clients.
+    - Option ``accept_hook(Client,Stream,Goal)``: When a client connects, ``Client`` is unified with the client address, ``Stream`` with the connection stream, and ``Goal`` is called. If ``Goal`` fails, the connection is rejected.
+
+
+------------
+
+.. index:: linda_client/1
+.. _linda/0::linda_client/1:
+
+``linda_client/1``
+^^^^^^^^^^^^^^^^^^
+
+Connects to a Linda server at the given address (``Host:Port``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``linda_client(Address)``
+| **Mode and number of proofs:**
+|    ``linda_client(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Already connected:
+|        ``linda_error(already_connected)``
+|    Connection failed:
+|        ``linda_error(connection_failed(Error))``
+
+
+------------
+
+.. index:: close_client/0
+.. _linda/0::close_client/0:
+
+``close_client/0``
+^^^^^^^^^^^^^^^^^^
+
+Closes the connection to the Linda server.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``close_client`` - ``one``
+
+
+------------
+
+.. index:: shutdown_server/0
+.. _linda/0::shutdown_server/0:
+
+``shutdown_server/0``
+^^^^^^^^^^^^^^^^^^^^^
+
+Sends a shutdown signal to the server. The server stops accepting new connections but continues serving existing clients until they all disconnect. Call ``close_client/0`` after this predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``shutdown_server`` - ``one_or_error``
+
+| **Exceptions:**
+|    Not connected:
+|        ``linda_error(not_connected)``
+
+
+------------
+
+.. index:: linda_timeout/2
+.. _linda/0::linda_timeout/2:
+
+``linda_timeout/2``
+^^^^^^^^^^^^^^^^^^^
+
+Gets or sets the client timeout. ``OldTime`` is unified with the current timeout and the timeout is set to ``NewTime``. The timeout value is either ``off`` (no timeout, wait forever) or ``Seconds:Milliseconds``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``linda_timeout(OldTime,NewTime)``
+| **Mode and number of proofs:**
+|    ``linda_timeout(?compound,+compound)`` - ``one``
+
+
+------------
+
+.. index:: out/1
+.. _linda/0::out/1:
+
+``out/1``
+^^^^^^^^^
+
+Places the tuple ``Tuple`` in the tuple-space.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``out(Tuple)``
+| **Mode and number of proofs:**
+|    ``out(+term)`` - ``one``
+
+
+------------
+
+.. index:: in/1
+.. _linda/0::in/1:
+
+``in/1``
+^^^^^^^^
+
+Removes a tuple matching ``Tuple`` from the tuple-space. Blocks if no matching tuple is available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``in(Tuple)``
+| **Mode and number of proofs:**
+|    ``in(?term)`` - ``one``
+
+
+------------
+
+.. index:: in_noblock/1
+.. _linda/0::in_noblock/1:
+
+``in_noblock/1``
+^^^^^^^^^^^^^^^^
+
+Removes a tuple matching ``Tuple`` from the tuple-space. Fails if no matching tuple is available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``in_noblock(Tuple)``
+| **Mode and number of proofs:**
+|    ``in_noblock(?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: in/2
+.. _linda/0::in/2:
+
+``in/2``
+^^^^^^^^
+
+Removes a tuple matching one of the patterns in ``TupleList`` from the tuple-space. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``in(TupleList,Tuple)``
+| **Mode and number of proofs:**
+|    ``in(+list,?term)`` - ``one``
+
+
+------------
+
+.. index:: in_list/2
+.. _linda/0::in_list/2:
+
+``in_list/2``
+^^^^^^^^^^^^^
+
+Removes a tuple matching one of the patterns in ``TupleList`` from the tuple-space. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``in_list(TupleList,Tuple)``
+| **Mode and number of proofs:**
+|    ``in_list(+list,?term)`` - ``one``
+
+
+------------
+
+.. index:: rd/1
+.. _linda/0::rd/1:
+
+``rd/1``
+^^^^^^^^
+
+Reads a tuple matching ``Tuple`` from the tuple-space without removing it. Blocks if no matching tuple is available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rd(Tuple)``
+| **Mode and number of proofs:**
+|    ``rd(?term)`` - ``one``
+
+
+------------
+
+.. index:: rd_noblock/1
+.. _linda/0::rd_noblock/1:
+
+``rd_noblock/1``
+^^^^^^^^^^^^^^^^
+
+Reads a tuple matching ``Tuple`` from the tuple-space without removing it. Fails if no matching tuple is available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rd_noblock(Tuple)``
+| **Mode and number of proofs:**
+|    ``rd_noblock(?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: rd/2
+.. _linda/0::rd/2:
+
+``rd/2``
+^^^^^^^^
+
+Reads a tuple matching one of the patterns in ``TupleList`` from the tuple-space without removing it. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rd(TupleList,Tuple)``
+| **Mode and number of proofs:**
+|    ``rd(+list,?term)`` - ``one``
+
+
+------------
+
+.. index:: rd_list/2
+.. _linda/0::rd_list/2:
+
+``rd_list/2``
+^^^^^^^^^^^^^
+
+Reads a tuple matching one of the patterns in ``TupleList`` from the tuple-space without removing it. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rd_list(TupleList,Tuple)``
+| **Mode and number of proofs:**
+|    ``rd_list(+list,?term)`` - ``one``
+
+
+------------
+
+.. index:: findall_rd_noblock/3
+.. _linda/0::findall_rd_noblock/3:
+
+``findall_rd_noblock/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a list of all instances of ``Template`` for tuples matching ``Tuple`` in the tuple-space. The operation is atomic.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``findall_rd_noblock(Template,Tuple,List)``
+| **Mode and number of proofs:**
+|    ``findall_rd_noblock(?term,+term,?list)`` - ``one``
+
+
+------------
+
+.. index:: findall_in_noblock/3
+.. _linda/0::findall_in_noblock/3:
+
+``findall_in_noblock/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Removes and returns a list of all instances of ``Template`` for tuples matching ``Tuple`` in the tuple-space. The operation is atomic - all matching tuples are removed in one synchronized operation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``findall_in_noblock(Template,Tuple,List)``
+| **Mode and number of proofs:**
+|    ``findall_in_noblock(?term,+term,?list)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: server_socket_/1
+.. _linda/0::server_socket_/1:
+
+``server_socket_/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Stores the server socket descriptor.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``server_socket_(ServerSocket)``
+| **Mode and number of proofs:**
+|    ``server_socket_(?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: client_connection_/3
+.. _linda/0::client_connection_/3:
+
+``client_connection_/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Stores active client connections. Each client has an ID, input stream, and output stream.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``client_connection_(ClientId,InputStream,OutputStream)``
+| **Mode and number of proofs:**
+|    ``client_connection_(?term,?term,?term)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: accept_hook_/1
+.. _linda/0::accept_hook_/1:
+
+``accept_hook_/1``
+^^^^^^^^^^^^^^^^^^
+
+Stores the optional accept hook goal to call when a client connects.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``accept_hook_(Hook)``
+| **Mode and number of proofs:**
+|    ``accept_hook_(?callable)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: server_running_/0
+.. _linda/0::server_running_/0:
+
+``server_running_/0``
+^^^^^^^^^^^^^^^^^^^^^
+
+Flag indicating the server is running.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``server_running_`` - ``zero_or_one``
+
+
+------------
+
+.. index:: server_shutdown_/0
+.. _linda/0::server_shutdown_/0:
+
+``server_shutdown_/0``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Flag indicating the server has received a shutdown request.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``server_shutdown_`` - ``zero_or_one``
+
+
+------------
+
+.. index:: tuple_/1
+.. _linda/0::tuple_/1:
+
+``tuple_/1``
+^^^^^^^^^^^^
+
+Stores tuples in the Linda tuple space.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``tuple_(Tuple)``
+| **Mode and number of proofs:**
+|    ``tuple_(?term)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: waiting_/3
+.. _linda/0::waiting_/3:
+
+``waiting_/3``
+^^^^^^^^^^^^^^
+
+Stores blocked clients waiting for tuples. Records the client ID, request pattern, and output stream.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``waiting_(ClientId,Request,OutputStream)``
+| **Mode and number of proofs:**
+|    ``waiting_(?term,?term,?term)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: engine_counter_/1
+.. _linda/0::engine_counter_/1:
+
+``engine_counter_/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Counter for generating unique client engine names.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``engine_counter_(Counter)``
+| **Mode and number of proofs:**
+|    ``engine_counter_(?integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: client_engine_/2
+.. _linda/0::client_engine_/2:
+
+``client_engine_/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Maps client IDs to their corresponding threaded engine names.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``client_engine_(ClientId,EngineName)``
+| **Mode and number of proofs:**
+|    ``client_engine_(?term,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: client_connection_input_/1
+.. _linda/0::client_connection_input_/1:
+
+``client_connection_input_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Stores the input stream for the client connection to the server.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``client_connection_input_(InputStream)``
+| **Mode and number of proofs:**
+|    ``client_connection_input_(?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: client_connection_output_/1
+.. _linda/0::client_connection_output_/1:
+
+``client_connection_output_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Stores the output stream for the client connection to the server.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``client_connection_output_(OutputStream)``
+| **Mode and number of proofs:**
+|    ``client_connection_output_(?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: client_timeout_/1
+.. _linda/0::client_timeout_/1:
+
+``client_timeout_/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Stores the timeout value for blocking client operations. Value is either ``off`` or ``Seconds:Milliseconds``.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``client_timeout_(Timeout)``
+| **Mode and number of proofs:**
+|    ``client_timeout_(?compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: ts_out/1
+.. _linda/0::ts_out/1:
+
+``ts_out/1``
+^^^^^^^^^^^^
+
+Synchronized predicate to add a tuple to the tuple space and wake waiting clients.
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Template:**
+|    ``ts_out(Tuple)``
+| **Mode and number of proofs:**
+|    ``ts_out(+term)`` - ``one``
+
+
+------------
+
+.. index:: ts_in/4
+.. _linda/0::ts_in/4:
+
+``ts_in/4``
+^^^^^^^^^^^
+
+Synchronized predicate to remove a matching tuple or register a waiting client.
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Template:**
+|    ``ts_in(Tuple,ClientId,OutputStream,Found)``
+| **Mode and number of proofs:**
+|    ``ts_in(+term,+term,+term,-compound)`` - ``one``
+
+
+------------
+
+.. index:: ts_in_noblock/2
+.. _linda/0::ts_in_noblock/2:
+
+``ts_in_noblock/2``
+^^^^^^^^^^^^^^^^^^^
+
+Synchronized predicate to try removing a matching tuple without blocking.
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Template:**
+|    ``ts_in_noblock(Tuple,Found)``
+| **Mode and number of proofs:**
+|    ``ts_in_noblock(+term,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: ts_in_list/4
+.. _linda/0::ts_in_list/4:
+
+``ts_in_list/4``
+^^^^^^^^^^^^^^^^
+
+Synchronized predicate to remove a tuple matching one of multiple patterns or register a waiting client.
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Template:**
+|    ``ts_in_list(TupleList,ClientId,OutputStream,Found)``
+| **Mode and number of proofs:**
+|    ``ts_in_list(+list,+term,+term,-compound)`` - ``one``
+
+
+------------
+
+.. index:: ts_rd/4
+.. _linda/0::ts_rd/4:
+
+``ts_rd/4``
+^^^^^^^^^^^
+
+Synchronized predicate to read a matching tuple or register a waiting client.
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Template:**
+|    ``ts_rd(Tuple,ClientId,OutputStream,Found)``
+| **Mode and number of proofs:**
+|    ``ts_rd(+term,+term,+term,-compound)`` - ``one``
+
+
+------------
+
+.. index:: ts_rd_noblock/2
+.. _linda/0::ts_rd_noblock/2:
+
+``ts_rd_noblock/2``
+^^^^^^^^^^^^^^^^^^^
+
+Synchronized predicate to try reading a matching tuple without blocking.
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Template:**
+|    ``ts_rd_noblock(Tuple,Found)``
+| **Mode and number of proofs:**
+|    ``ts_rd_noblock(+term,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: ts_rd_list/4
+.. _linda/0::ts_rd_list/4:
+
+``ts_rd_list/4``
+^^^^^^^^^^^^^^^^
+
+Synchronized predicate to read a tuple matching one of multiple patterns or register a waiting client.
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Template:**
+|    ``ts_rd_list(TupleList,ClientId,OutputStream,Found)``
+| **Mode and number of proofs:**
+|    ``ts_rd_list(+list,+term,+term,-compound)`` - ``one``
+
+
+------------
+
+.. index:: ts_findall_rd_noblock/3
+.. _linda/0::ts_findall_rd_noblock/3:
+
+``ts_findall_rd_noblock/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Synchronized predicate to collect all tuples matching a pattern.
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Template:**
+|    ``ts_findall_rd_noblock(Template,Tuple,List)``
+| **Mode and number of proofs:**
+|    ``ts_findall_rd_noblock(+term,+term,-list)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: ts_findall_in_noblock/3
+.. _linda/0::ts_findall_in_noblock/3:
+
+``ts_findall_in_noblock/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Synchronized predicate to collect and remove all tuples matching a pattern.
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Template:**
+|    ``ts_findall_in_noblock(Template,Tuple,List)``
+| **Mode and number of proofs:**
+|    ``ts_findall_in_noblock(+term,+term,-list)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

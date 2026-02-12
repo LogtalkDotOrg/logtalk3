@@ -1559,6 +1559,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`amqp <amqp/0::close/3>`
 
+``close_client/0``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linda <linda/0::close_client/0>`
+
 ``coefficient_of_variation/2``
 ------------------------------
 
@@ -3912,6 +3922,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`union_find_protocol <union_find_protocol/0::find/5>`
 
+``findall_in_noblock/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linda <linda/0::findall_in_noblock/3>`
+
 ``findall_member/4``
 --------------------
 
@@ -3931,6 +3951,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`metap <metap/0::findall_member/5>`
+
+``findall_rd_noblock/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linda <linda/0::findall_rd_noblock/3>`
 
 ``finished_by/2``
 -----------------
@@ -5050,6 +5080,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`expected(Expected) <expected/1::if_unexpected/1>`
+
+``in/1``
+--------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linda <linda/0::in/1>`
+
+``in/2``
+--------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linda <linda/0::in/2>`
+
+``in_list/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linda <linda/0::in_list/2>`
+
+``in_noblock/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linda <linda/0::in_noblock/1>`
 
 ``include/3``
 -------------
@@ -6343,6 +6413,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`pack_protocol <pack_protocol/0::license/1>`
+
+``linda/0``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linda <linda/0::linda/0>`
+
+``linda/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linda <linda/0::linda/1>`
+
+``linda_client/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linda <linda/0::linda_client/1>`
+
+``linda_timeout/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linda <linda/0::linda_timeout/2>`
 
 ``line_to_chars/2``
 -------------------
@@ -8225,6 +8335,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`packs <packs/0::orphaned/2>`
 
+``out/1``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linda <linda/0::out/1>`
+
 ``outdated/0``
 --------------
 
@@ -9279,6 +9399,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`statisticsp <statisticsp/0::range/2>`
+
+``rd/1``
+--------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linda <linda/0::rd/1>`
+
+``rd/2``
+--------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linda <linda/0::rd/2>`
+
+``rd_list/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linda <linda/0::rd_list/2>`
+
+``rd_noblock/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linda <linda/0::rd_noblock/1>`
 
 ``rdirectories/1``
 ------------------
@@ -10626,6 +10786,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`arbitrary <arbitrary/0::shrinker/1>`
+
+``shutdown_server/0``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linda <linda/0::shutdown_server/0>`
 
 ``sign//1``
 -----------

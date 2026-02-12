@@ -111,6 +111,9 @@ Trealla Prolog, and XVM.
 Messaging Protocol) client. Supports ECLiPSe, GNU Prolog, SICStus Prolog,
 SWI-Prolog, Trealla Prolog, and XVM.
 
+* ADDED: New `linda` library implementing the classic Linda coordination model
+for process communication. Supports SWI-Prolog, Trealla Prolog, and XVM.
+
 * ADDED: New `stemming` library implementing Porter and Lovins algorithms for
 computing stems for English words.
 
