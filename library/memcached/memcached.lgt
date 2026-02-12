@@ -317,8 +317,7 @@
 				socket::close(Input, Output)
 			),
 			_,
-			(	catch(socket::close(Input, Output), _, true)
-			)
+			catch(socket::close(Input, Output), _, true)
 		).
 
 	% ==========================================================================
