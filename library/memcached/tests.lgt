@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-12,
+		date is 2026-02-13,
 		comment is 'Unit tests for the "memcached" library.'
 	]).
 
@@ -35,7 +35,14 @@
 
 	cover(memcached).
 
-	condition(memcached_server_available).
+	condition :-
+		catch(
+			(	memcached::connect(localhost, 11211, Connection),
+				memcached::disconnect(Connection)
+			),
+			_,
+			fail
+		).
 
 	% ==========================================================================
 	% Connection Tests (require running Memcached server on localhost:11211)
@@ -332,16 +339,5 @@
 	test(memcached_connect_refused_01, error(memcached_error(connection_failed))) :-
 		% Try connecting to a port that should not have Memcached running
 		memcached::connect(localhost, 19999, _).
-
-	% auxiliary predicates
-
-	memcached_server_available :-
-		catch(
-			(	memcached::connect(localhost, 11211, Connection),
-				memcached::disconnect(Connection)
-			),
-			_,
-			fail
-		).
 
 :- end_object.
