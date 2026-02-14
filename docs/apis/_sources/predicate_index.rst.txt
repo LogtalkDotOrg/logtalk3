@@ -242,6 +242,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`subject <subject/0::addDependent/1>`
 
+``add_rule/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datalog_protocol <datalog_protocol/0::add_rule/3>`
+
 ``after/2``
 -----------
 
@@ -661,6 +671,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`logtalk <logtalk/0::ask_question/5>`
 
+``assert_fact/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datalog_protocol <datalog_protocol/0::assert_fact/1>`
+
 ``assertion/1``
 ---------------
 
@@ -892,6 +912,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`monitoring <monitoring/0::before/3>`
+
+``begin/0``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datalog_protocol <datalog_protocol/0::begin/0>`
 
 ``begin_transaction/3``
 -----------------------
@@ -1478,6 +1508,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`packs <packs/0::clean/2>`
 
+``clear/0``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datalog_protocol <datalog_protocol/0::clear/0>`
+
 ``client_open/4``
 -----------------
 
@@ -1648,6 +1688,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::command_line_arguments/1>`
+
+``commit/0``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datalog_protocol <datalog_protocol/0::commit/0>`
 
 ``commit_author/2``
 -------------------
@@ -3587,6 +3637,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`redis <redis/0::expire/4>`
 
+``explain/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datalog_protocol <datalog_protocol/0::explain/2>`
+
 ``explain//1``
 --------------
 
@@ -3636,6 +3696,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`natural <natural/0::factorial/2>`
+
+``facts/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datalog_protocol <datalog_protocol/0::facts/1>`
 
 ``failed_test_reason//1``
 -------------------------
@@ -6576,6 +6646,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`redis <redis/0::llen/3>`
 
+``load_program/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datalog_protocol <datalog_protocol/0::load_program/1>`
+
 ``loaded_file/1``
 -----------------
 
@@ -7066,6 +7146,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`metap <metap/0::map_reduce/5>`
+
+``materialize/0``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datalog_protocol <datalog_protocol/0::materialize/0>`
 
 ``max/2``
 ---------
@@ -8906,6 +8996,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`doc_metric <doc_metric/0::predicate_mode_score_hook/5>`
 
+``predicate_stratum/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datalog_protocol <datalog_protocol/0::predicate_stratum/3>`
+
 ``predicates/2``
 ----------------
 
@@ -9188,6 +9288,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`deque_protocol <deque_protocol/0::push_front/3>`
+
+``query/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datalog_protocol <datalog_protocol/0::query/1>`
+
+``query/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datalog_protocol <datalog_protocol/0::query/2>`
 
 ``question_hook/6``
 -------------------
@@ -9822,6 +9942,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`listp <listp/0::remove_duplicates/2>`
 * :ref:`varlistp <varlistp/0::remove_duplicates/2>`
 
+``remove_rule/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datalog_protocol <datalog_protocol/0::remove_rule/1>`
+
 ``rename/4``
 ------------
 
@@ -10036,6 +10166,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`packs <packs/0::restore/2>`
 
+``retract_fact/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datalog_protocol <datalog_protocol/0::retract_fact/1>`
+
 ``reverse/2``
 -------------
 
@@ -10125,6 +10265,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`code_metric <code_metric/0::rlibrary_score/2>`
 
+``rollback/0``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datalog_protocol <datalog_protocol/0::rollback/0>`
+
 ``rpop/3``
 ----------
 
@@ -10174,6 +10324,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`databasep <databasep/0::rule/4>`
+
+``(rules)/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datalog_protocol <datalog_protocol/0::(rules)/1>`
 
 ``run/0``
 ---------
@@ -11260,6 +11420,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`dump_trace <dump_trace/0::stop_redirect_to_file/0>`
 
+``strata/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datalog_protocol <datalog_protocol/0::strata/1>`
+
 ``stream_to_bytes/2``
 ---------------------
 
@@ -12292,6 +12462,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`datalog_protocol <datalog_protocol/0::update/3>`
 * :ref:`dictionaryp <dictionaryp/0::update/3>`
 * :ref:`packs <packs/0::update/3>`
 

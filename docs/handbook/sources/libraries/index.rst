@@ -42,6 +42,7 @@ directory in the ``NOTES.md`` file.
    core
    coroutining
    csv
+   datalog
    dates
    dependents
    deques

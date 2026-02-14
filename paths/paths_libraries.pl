@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on February 12, 2026
+%  Last updated on February 13, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -46,6 +46,7 @@ logtalk_library_path(coroutining, library('coroutining/')).
 logtalk_library_path(cbor, library('cbor/')).
 logtalk_library_path(ccsds, library('ccsds/')).
 logtalk_library_path(csv, library('csv/')).
+logtalk_library_path(datalog, library('datalog/')).
 logtalk_library_path(dates, library('dates/')).
 logtalk_library_path(dependents, library('dependents/')).
 logtalk_library_path(deques, library('deques/')).

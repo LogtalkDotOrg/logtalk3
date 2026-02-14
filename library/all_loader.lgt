@@ -31,6 +31,7 @@
 		process(loader),
 		sockets(loader),
 		dates(loader),
+		datalog(loader),
 		events(loader),
 		dependents(loader),
 		dictionaries(loader),

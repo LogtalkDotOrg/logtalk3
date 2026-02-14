@@ -1,0 +1,475 @@
+.. index:: single: datalog
+.. _datalog/0:
+
+.. rst-class:: right
+
+**object**
+
+``datalog``
+===========
+
+Portable Datalog engine with stratified negation and incremental updates.
+
+| **Availability:** 
+|    ``logtalk_load(datalog(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2026-02-13
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`datalog_protocol <datalog_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`type <type/0>`
+|    :ref:`varlist <varlist/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`datalog_protocol/0::add_rule/3`  :ref:`datalog_protocol/0::assert_fact/1`  :ref:`datalog_protocol/0::begin/0`  :ref:`datalog_protocol/0::clear/0`  :ref:`datalog_protocol/0::commit/0`  :ref:`datalog_protocol/0::explain/2`  :ref:`datalog_protocol/0::facts/1`  :ref:`datalog_protocol/0::load_program/1`  :ref:`datalog_protocol/0::materialize/0`  :ref:`datalog_protocol/0::predicate_stratum/3`  :ref:`datalog_protocol/0::query/1`  :ref:`datalog_protocol/0::query/2`  :ref:`datalog_protocol/0::remove_rule/1`  :ref:`datalog_protocol/0::retract_fact/1`  :ref:`datalog_protocol/0::rollback/0`  :ref:`datalog_protocol/0::(rules)/1`  :ref:`datalog_protocol/0::strata/1`  :ref:`datalog_protocol/0::update/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: rule_/3
+.. _datalog/0::rule_/3:
+
+``rule_/3``
+^^^^^^^^^^^
+
+Table of loaded rules represented as rule id, head, and body literals.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``rule_(Id,Head,Body)``
+| **Mode and number of proofs:**
+|    ``rule_(?nonvar,?callable,?list)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: edb_fact_/1
+.. _datalog/0::edb_fact_/1:
+
+``edb_fact_/1``
+^^^^^^^^^^^^^^^
+
+Table of extensional database (EDB) facts.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``edb_fact_(Fact)``
+| **Mode and number of proofs:**
+|    ``edb_fact_(?callable)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: idb_fact_/1
+.. _datalog/0::idb_fact_/1:
+
+``idb_fact_/1``
+^^^^^^^^^^^^^^^
+
+Table of intensional database (IDB) currently derived facts.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``idb_fact_(Fact)``
+| **Mode and number of proofs:**
+|    ``idb_fact_(?callable)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: support_count_/2
+.. _datalog/0::support_count_/2:
+
+``support_count_/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Table of derivation support counts for currently derived facts.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``support_count_(Fact,Count)``
+| **Mode and number of proofs:**
+|    ``support_count_(?callable,?integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: support_edge_/3
+.. _datalog/0::support_edge_/3:
+
+``support_edge_/3``
+^^^^^^^^^^^^^^^^^^^
+
+Table of concrete derivation edges as fact, rule id, and supporting literals.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``support_edge_(Fact,RuleId,Supports)``
+| **Mode and number of proofs:**
+|    ``support_edge_(?callable,?nonvar,?list)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: predicate_stratum_/3
+.. _datalog/0::predicate_stratum_/3:
+
+``predicate_stratum_/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of computed predicate strata represented as name, arity, and stratum number.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``predicate_stratum_(Name,Arity,Stratum)``
+| **Mode and number of proofs:**
+|    ``predicate_stratum_(?atom,?integer,?integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: snapshot_/6
+.. _datalog/0::snapshot_/6:
+
+``snapshot_/6``
+^^^^^^^^^^^^^^^
+
+Transaction snapshot of rules, EDB facts, IDB facts, support counts, support edges, and predicate strata.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``snapshot_(Rules,EdbFacts,IdbFacts,SupportCounts,SupportEdges,PredicateStrata)``
+| **Mode and number of proofs:**
+|    ``snapshot_(?list,?list,?list,?list,?list,?list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: restore_snapshot/6
+.. _datalog/0::restore_snapshot/6:
+
+``restore_snapshot/6``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Restores a saved transaction snapshot into the current engine state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``restore_snapshot(Rules,EdbFacts,IdbFacts,SupportCounts,SupportEdges,PredicateStrata)``
+| **Mode and number of proofs:**
+|    ``restore_snapshot(+list,+list,+list,+list,+list,+list)`` - ``one``
+
+
+------------
+
+.. index:: restore_edb_facts/1
+.. _datalog/0::restore_edb_facts/1:
+
+``restore_edb_facts/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Restores EDB facts from a saved list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``restore_edb_facts(Facts)``
+| **Mode and number of proofs:**
+|    ``restore_edb_facts(+list(callable))`` - ``one``
+
+
+------------
+
+.. index:: restore_idb_facts/1
+.. _datalog/0::restore_idb_facts/1:
+
+``restore_idb_facts/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Restores IDB facts from a saved list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``restore_idb_facts(Facts)``
+| **Mode and number of proofs:**
+|    ``restore_idb_facts(+list(callable))`` - ``one``
+
+
+------------
+
+.. index:: restore_support_counts/1
+.. _datalog/0::restore_support_counts/1:
+
+``restore_support_counts/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Restores support counts from a saved list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``restore_support_counts(Supports)``
+| **Mode and number of proofs:**
+|    ``restore_support_counts(+list)`` - ``one``
+
+
+------------
+
+.. index:: restore_support_edges/1
+.. _datalog/0::restore_support_edges/1:
+
+``restore_support_edges/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Restores support edges from a saved list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``restore_support_edges(Edges)``
+| **Mode and number of proofs:**
+|    ``restore_support_edges(+list)`` - ``one``
+
+
+------------
+
+.. index:: restore_predicate_strata/1
+.. _datalog/0::restore_predicate_strata/1:
+
+``restore_predicate_strata/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Restores predicate strata from a saved list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``restore_predicate_strata(Strata)``
+| **Mode and number of proofs:**
+|    ``restore_predicate_strata(+list)`` - ``one``
+
+
+------------
+
+.. index:: strata_from_numbers/2
+.. _datalog/0::strata_from_numbers/2:
+
+``strata_from_numbers/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds grouped strata terms from a sorted list of stratum numbers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``strata_from_numbers(StratumNumbers,Strata)``
+| **Mode and number of proofs:**
+|    ``strata_from_numbers(+list(integer),-list)`` - ``one``
+
+
+------------
+
+.. index:: predicates_in_stratum/2
+.. _datalog/0::predicates_in_stratum/2:
+
+``predicates_in_stratum/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns predicates in a given stratum as sorted ``predicate(Name, Arity)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predicates_in_stratum(Stratum,Predicates)``
+| **Mode and number of proofs:**
+|    ``predicates_in_stratum(+integer,-list)`` - ``one``
+
+
+------------
+
+.. index:: has_aggregate_rules/0
+.. _datalog/0::has_aggregate_rules/0:
+
+``has_aggregate_rules/0``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when at least one loaded rule body contains an aggregate literal.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``has_aggregate_rules`` - ``zero_or_one``
+
+
+------------
+
+.. index:: aggregate_body_predicate/2
+.. _datalog/0::aggregate_body_predicate/2:
+
+``aggregate_body_predicate/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates predicate indicators referenced in aggregate goals from a body literal list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``aggregate_body_predicate(Body,Predicate)``
+| **Mode and number of proofs:**
+|    ``aggregate_body_predicate(+list,-compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: derive_aggregate_literal/2
+.. _datalog/0::derive_aggregate_literal/2:
+
+``derive_aggregate_literal/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Evaluates an aggregate literal and returns a normalized support term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``derive_aggregate_literal(AggregateLiteral,Support)``
+| **Mode and number of proofs:**
+|    ``derive_aggregate_literal(+compound,-nonvar)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: derive_aggregate_goals/1
+.. _datalog/0::derive_aggregate_goals/1:
+
+``derive_aggregate_goals/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when all aggregate goals are true for the current bindings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``derive_aggregate_goals(Goals)``
+| **Mode and number of proofs:**
+|    ``derive_aggregate_goals(+list(callable))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: optimize_rule_body/2
+.. _datalog/0::optimize_rule_body/2:
+
+``optimize_rule_body/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes a rule body by placing positive ground literals first, then positive non-ground literals, then aggregates, and finally negative literals.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``optimize_rule_body(Body,OptimizedBody)``
+| **Mode and number of proofs:**
+|    ``optimize_rule_body(+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: partition_body_literals/5
+.. _datalog/0::partition_body_literals/5:
+
+``partition_body_literals/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Partitions body literals into positive-ground, positive-non-ground, aggregate, and negative lists preserving relative order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``partition_body_literals(Body,PositiveGround,PositiveNonGround,Aggregates,Negatives)``
+| **Mode and number of proofs:**
+|    ``partition_body_literals(+list,-list,-list,-list,-list)`` - ``one``
+
+
+------------
+
+.. index:: literal_bucket/2
+.. _datalog/0::literal_bucket/2:
+
+``literal_bucket/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Classifies a body literal into one of the normalization buckets.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``literal_bucket(Literal,Bucket)``
+| **Mode and number of proofs:**
+|    ``literal_bucket(+nonvar,-atom)`` - ``one``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

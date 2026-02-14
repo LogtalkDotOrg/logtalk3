@@ -108,6 +108,7 @@ Objects
    csv <csv_0>
    csv(Header,Separator,IgnoreQuotes) <csv_3>
    d2_graph_language <d2_graph_language_0>
+   datalog <datalog_0>
    date <date_0>
    dead_code_scanner <dead_code_scanner_0>
    debug_expansion(Mode) <debug_expansion_1>
@@ -330,6 +331,7 @@ Protocols
    comparingp <comparingp_0>
    csv_protocol <csv_protocol_0>
    databasep <databasep_0>
+   datalog_protocol <datalog_protocol_0>
    datep <datep_0>
    debuggerp <debuggerp_0>
    deque_protocol <deque_protocol_0>

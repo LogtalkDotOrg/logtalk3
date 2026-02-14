@@ -70,6 +70,9 @@ sets.
 Library
 -------
 
+* ADDED: New `datalog` library intended for educational purposes and
+non-demanding applications.
+
 * ADDED: New `deques` library implementing double-ended queues represented
 using difference lists.
 

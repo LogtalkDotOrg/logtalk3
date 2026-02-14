@@ -235,6 +235,17 @@ To load an entity, always load the library that includes it using the goal ``log
    csv_guess_questions <csv_guess_questions_0>
    csv_protocol <csv_protocol_0>
 
+``library/datalog/``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   datalog <datalog_0>
+   datalog_protocol <datalog_protocol_0>
+
 ``library/dates/``
 ------------------
 

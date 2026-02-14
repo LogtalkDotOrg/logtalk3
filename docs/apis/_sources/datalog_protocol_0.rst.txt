@@ -1,0 +1,390 @@
+.. index:: single: datalog_protocol
+.. _datalog_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``datalog_protocol``
+====================
+
+Datalog and incremental rule engine protocol (stratified negation subset).
+
+| **Availability:** 
+|    ``logtalk_load(datalog(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2026-02-13
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Rules: Rules are represented as ``rule(Id, Head, Body)`` where ``Body`` is a list of literals using ``Term`` for positive, ``neg(Term)`` for negative, and ``agg(Op, Template, Goals, Result)`` for aggregates where ``Op`` is one of ``count``, ``sum``, ``min``, or ``max``.
+   - Facts: EDB facts are represented by callable and ground terms.
+   - Limitations: Current version requires aggregate dependencies to be in lower strata.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: clear/0
+.. _datalog_protocol/0::clear/0:
+
+``clear/0``
+^^^^^^^^^^^
+
+Clears all loaded rules, base facts, derived facts, and explanation supports.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``clear`` - ``one``
+
+
+------------
+
+.. index:: load_program/1
+.. _datalog_protocol/0::load_program/1:
+
+``load_program/1``
+^^^^^^^^^^^^^^^^^^
+
+Loads a full program represented as a list of ``rule(Id,Head,Body)`` and ``fact(Fact)`` terms, replacing current engine state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``load_program(Program)``
+| **Mode and number of proofs:**
+|    ``load_program(+list)`` - ``one``
+
+
+------------
+
+.. index:: add_rule/3
+.. _datalog_protocol/0::add_rule/3:
+
+``add_rule/3``
+^^^^^^^^^^^^^^
+
+Adds or replaces a rule. Rule safety is checked.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_rule(Id,Head,Body)``
+| **Mode and number of proofs:**
+|    ``add_rule(+nonvar,+callable,+list(callable))`` - ``one``
+
+
+------------
+
+.. index:: remove_rule/1
+.. _datalog_protocol/0::remove_rule/1:
+
+``remove_rule/1``
+^^^^^^^^^^^^^^^^^
+
+Removes all rules matching a rule identifier.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``remove_rule(Id)``
+| **Mode and number of proofs:**
+|    ``remove_rule(+nonvar)`` - ``one``
+
+
+------------
+
+.. index:: begin/0
+.. _datalog_protocol/0::begin/0:
+
+``begin/0``
+^^^^^^^^^^^
+
+Starts a transaction by saving the current engine state snapshot.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``begin`` - ``one``
+
+
+------------
+
+.. index:: commit/0
+.. _datalog_protocol/0::commit/0:
+
+``commit/0``
+^^^^^^^^^^^^
+
+Commits a transaction by discarding the saved state snapshot.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``commit`` - ``one``
+
+
+------------
+
+.. index:: rollback/0
+.. _datalog_protocol/0::rollback/0:
+
+``rollback/0``
+^^^^^^^^^^^^^^
+
+Rolls back a transaction by restoring the saved state snapshot.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``rollback`` - ``one``
+
+
+------------
+
+.. index:: assert_fact/1
+.. _datalog_protocol/0::assert_fact/1:
+
+``assert_fact/1``
+^^^^^^^^^^^^^^^^^
+
+Asserts a ground EDB fact if not already present.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``assert_fact(Fact)``
+| **Mode and number of proofs:**
+|    ``assert_fact(+callable)`` - ``one``
+
+
+------------
+
+.. index:: retract_fact/1
+.. _datalog_protocol/0::retract_fact/1:
+
+``retract_fact/1``
+^^^^^^^^^^^^^^^^^^
+
+Retracts an EDB fact if present.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``retract_fact(Fact)``
+| **Mode and number of proofs:**
+|    ``retract_fact(+callable)`` - ``one``
+
+
+------------
+
+.. index:: materialize/0
+.. _datalog_protocol/0::materialize/0:
+
+``materialize/0``
+^^^^^^^^^^^^^^^^^
+
+Computes rule closure from current EDB facts and loaded rules using a fixpoint algorithm.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``materialize`` - ``one``
+
+
+------------
+
+.. index:: update/3
+.. _datalog_protocol/0::update/3:
+
+``update/3``
+^^^^^^^^^^^^
+
+Applies incremental EDB updates and propagates derivation additions/removals; returns the resulting truth delta.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update(Inserts,Deletes,Delta)``
+| **Mode and number of proofs:**
+|    ``update(+list(callable),+list(callable),-compound)`` - ``one``
+
+
+------------
+
+.. index:: query/1
+.. _datalog_protocol/0::query/1:
+
+``query/1``
+^^^^^^^^^^^
+
+Enumerates currently true facts (EDB + IDB).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``query(Goal)``
+| **Mode and number of proofs:**
+|    ``query(?callable)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: query/2
+.. _datalog_protocol/0::query/2:
+
+``query/2``
+^^^^^^^^^^^
+
+Same as ``query/1`` while returning the unified goal as the second argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``query(Goal,Bindings)``
+| **Mode and number of proofs:**
+|    ``query(?callable,?callable)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: explain/2
+.. _datalog_protocol/0::explain/2:
+
+``explain/2``
+^^^^^^^^^^^^^
+
+Returns one explanation for a currently true fact.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``explain(Fact,Explanation)``
+| **Mode and number of proofs:**
+|    ``explain(+callable,-nonvar)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: (rules)/1
+.. _datalog_protocol/0::(rules)/1:
+
+``(rules)/1``
+^^^^^^^^^^^^^
+
+Returns the loaded rules.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rules Rules``
+| **Mode and number of proofs:**
+|    ``rules-list`` - ``one``
+
+
+------------
+
+.. index:: facts/1
+.. _datalog_protocol/0::facts/1:
+
+``facts/1``
+^^^^^^^^^^^
+
+Returns all currently true facts as a sorted list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``facts(Facts)``
+| **Mode and number of proofs:**
+|    ``facts(-list(callable))`` - ``one``
+
+
+------------
+
+.. index:: predicate_stratum/3
+.. _datalog_protocol/0::predicate_stratum/3:
+
+``predicate_stratum/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates predicate strata as functor, arity, and stratum number.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predicate_stratum(Functor,Arity,Stratum)``
+| **Mode and number of proofs:**
+|    ``predicate_stratum(?atom,?integer,?integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: strata/1
+.. _datalog_protocol/0::strata/1:
+
+``strata/1``
+^^^^^^^^^^^^
+
+Returns all strata grouped by stratum number and contained predicates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``strata(Strata)``
+| **Mode and number of proofs:**
+|    ``strata(-list)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
