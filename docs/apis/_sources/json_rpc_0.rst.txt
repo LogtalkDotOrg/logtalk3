@@ -1,0 +1,615 @@
+.. index:: single: json_rpc
+.. _json_rpc/0:
+
+.. rst-class:: right
+
+**object**
+
+``json_rpc``
+============
+
+JSON-RPC 2.0 protocol encoding and decoding. Provides predicates for constructing and parsing JSON-RPC 2.0 request, notification, response, and error objects. Uses the ``json`` library for JSON parsing and generation.
+
+| **Availability:** 
+|    ``logtalk_load(json_rpc(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-14
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`json <json/0>`
+|    :ref:`list <list/0>`
+|    :ref:`reader <reader/0>`
+
+| **Remarks:**
+
+   - Specification: Implements the JSON-RPC 2.0 specification: https://www.jsonrpc.org/specification
+   - JSON representation: Uses the ``json`` library default representation: curly terms for objects, dashes for pairs, and atoms for strings.
+   - Request: A JSON-RPC 2.0 request is represented as ``{jsonrpc-'2.0', method-Method, params-Params, id-Id}``.
+   - Notification: A JSON-RPC 2.0 notification is represented as ``{jsonrpc-'2.0', method-Method, params-Params}``.
+   - Successful response: A JSON-RPC 2.0 successful response is represented as ``{jsonrpc-'2.0', result-Result, id-Id}``.
+   - Error response: A JSON-RPC 2.0 error response is represented as ``{jsonrpc-'2.0', error-{code-Code, message-Message}, id-Id}`` or ``{jsonrpc-'2.0', error-{code-Code, message-Message, data-Data}, id-Id}``.
+   - Batch request: A JSON-RPC 2.0 batch request is represented as a list of request and/or notification terms.
+   - Error codes: Standard error codes: -32700 (parse error), -32600 (invalid request), -32601 (method not found), -32602 (invalid params), -32603 (internal error). Server errors: -32000 to -32099.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: request/4
+.. _json_rpc/0::request/4:
+
+``request/4``
+^^^^^^^^^^^^^
+
+Constructs a JSON-RPC 2.0 request term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request(Method,Params,Id,Request)``
+| **Mode and number of proofs:**
+|    ``request(+atom,+list,+nonvar,--compound)`` - ``one``
+
+
+------------
+
+.. index:: request/3
+.. _json_rpc/0::request/3:
+
+``request/3``
+^^^^^^^^^^^^^
+
+Constructs a JSON-RPC 2.0 request term with no parameters.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request(Method,Id,Request)``
+| **Mode and number of proofs:**
+|    ``request(+atom,+nonvar,--compound)`` - ``one``
+
+
+------------
+
+.. index:: notification/3
+.. _json_rpc/0::notification/3:
+
+``notification/3``
+^^^^^^^^^^^^^^^^^^
+
+Constructs a JSON-RPC 2.0 notification term (a request without an id).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``notification(Method,Params,Notification)``
+| **Mode and number of proofs:**
+|    ``notification(+atom,+list,--compound)`` - ``one``
+
+
+------------
+
+.. index:: notification/2
+.. _json_rpc/0::notification/2:
+
+``notification/2``
+^^^^^^^^^^^^^^^^^^
+
+Constructs a JSON-RPC 2.0 notification term with no parameters.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``notification(Method,Notification)``
+| **Mode and number of proofs:**
+|    ``notification(+atom,--compound)`` - ``one``
+
+
+------------
+
+.. index:: response/3
+.. _json_rpc/0::response/3:
+
+``response/3``
+^^^^^^^^^^^^^^
+
+Constructs a JSON-RPC 2.0 successful response term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``response(Result,Id,Response)``
+| **Mode and number of proofs:**
+|    ``response(+nonvar,+nonvar,--compound)`` - ``one``
+
+
+------------
+
+.. index:: error_response/4
+.. _json_rpc/0::error_response/4:
+
+``error_response/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Constructs a JSON-RPC 2.0 error response term with a null id (used when the request id cannot be determined).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``error_response(Code,Message,Id,ErrorResponse)``
+| **Mode and number of proofs:**
+|    ``error_response(+integer,+atom,+nonvar,--compound)`` - ``one``
+
+
+------------
+
+.. index:: error_response/5
+.. _json_rpc/0::error_response/5:
+
+``error_response/5``
+^^^^^^^^^^^^^^^^^^^^
+
+Constructs a JSON-RPC 2.0 error response term with additional error data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``error_response(Code,Message,Data,Id,ErrorResponse)``
+| **Mode and number of proofs:**
+|    ``error_response(+integer,+atom,+nonvar,+nonvar,--compound)`` - ``one``
+
+
+------------
+
+.. index:: parse_error/1
+.. _json_rpc/0::parse_error/1:
+
+``parse_error/1``
+^^^^^^^^^^^^^^^^^
+
+Constructs a JSON-RPC 2.0 parse error response (-32700) with a null id.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_error(ErrorResponse)``
+| **Mode and number of proofs:**
+|    ``parse_error(--compound)`` - ``one``
+
+
+------------
+
+.. index:: invalid_request/1
+.. _json_rpc/0::invalid_request/1:
+
+``invalid_request/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Constructs a JSON-RPC 2.0 invalid request error response (-32600) with a null id.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``invalid_request(ErrorResponse)``
+| **Mode and number of proofs:**
+|    ``invalid_request(--compound)`` - ``one``
+
+
+------------
+
+.. index:: method_not_found/2
+.. _json_rpc/0::method_not_found/2:
+
+``method_not_found/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs a JSON-RPC 2.0 method not found error response (-32601).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``method_not_found(Id,ErrorResponse)``
+| **Mode and number of proofs:**
+|    ``method_not_found(+nonvar,--compound)`` - ``one``
+
+
+------------
+
+.. index:: invalid_params/2
+.. _json_rpc/0::invalid_params/2:
+
+``invalid_params/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Constructs a JSON-RPC 2.0 invalid params error response (-32602).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``invalid_params(Id,ErrorResponse)``
+| **Mode and number of proofs:**
+|    ``invalid_params(+nonvar,--compound)`` - ``one``
+
+
+------------
+
+.. index:: internal_error/2
+.. _json_rpc/0::internal_error/2:
+
+``internal_error/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Constructs a JSON-RPC 2.0 internal error response (-32603).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``internal_error(Id,ErrorResponse)``
+| **Mode and number of proofs:**
+|    ``internal_error(+nonvar,--compound)`` - ``one``
+
+
+------------
+
+.. index:: encode/2
+.. _json_rpc/0::encode/2:
+
+``encode/2``
+^^^^^^^^^^^^
+
+Encodes a JSON-RPC 2.0 term (request, notification, response, error, or batch) into a JSON atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode(Term,JSON)``
+| **Mode and number of proofs:**
+|    ``encode(+compound,--atom)`` - ``one``
+
+
+------------
+
+.. index:: decode/2
+.. _json_rpc/0::decode/2:
+
+``decode/2``
+^^^^^^^^^^^^
+
+Decodes a JSON atom into a JSON-RPC 2.0 term (request, notification, response, error, or batch).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode(JSON,Term)``
+| **Mode and number of proofs:**
+|    ``decode(+atom,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: is_request/1
+.. _json_rpc/0::is_request/1:
+
+``is_request/1``
+^^^^^^^^^^^^^^^^
+
+True if the term is a valid JSON-RPC 2.0 request (has jsonrpc, method, and id fields).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_request(Term)``
+| **Mode and number of proofs:**
+|    ``is_request(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: is_notification/1
+.. _json_rpc/0::is_notification/1:
+
+``is_notification/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+True if the term is a valid JSON-RPC 2.0 notification (has jsonrpc and method fields but no id field).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_notification(Term)``
+| **Mode and number of proofs:**
+|    ``is_notification(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: is_response/1
+.. _json_rpc/0::is_response/1:
+
+``is_response/1``
+^^^^^^^^^^^^^^^^^
+
+True if the term is a valid JSON-RPC 2.0 successful response (has jsonrpc, result, and id fields).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_response(Term)``
+| **Mode and number of proofs:**
+|    ``is_response(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: is_error_response/1
+.. _json_rpc/0::is_error_response/1:
+
+``is_error_response/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+True if the term is a valid JSON-RPC 2.0 error response (has jsonrpc, error, and id fields).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_error_response(Term)``
+| **Mode and number of proofs:**
+|    ``is_error_response(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: is_batch/1
+.. _json_rpc/0::is_batch/1:
+
+``is_batch/1``
+^^^^^^^^^^^^^^
+
+True if the term is a valid JSON-RPC 2.0 batch (a non-empty list).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_batch(Term)``
+| **Mode and number of proofs:**
+|    ``is_batch(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: id/2
+.. _json_rpc/0::id/2:
+
+``id/2``
+^^^^^^^^
+
+Extracts the id field from a JSON-RPC 2.0 message.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``id(Message,Id)``
+| **Mode and number of proofs:**
+|    ``id(+compound,--nonvar)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: method/2
+.. _json_rpc/0::method/2:
+
+``method/2``
+^^^^^^^^^^^^
+
+Extracts the method field from a JSON-RPC 2.0 request or notification.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``method(Message,Method)``
+| **Mode and number of proofs:**
+|    ``method(+compound,--atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: params/2
+.. _json_rpc/0::params/2:
+
+``params/2``
+^^^^^^^^^^^^
+
+Extracts the params field from a JSON-RPC 2.0 request or notification.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``params(Message,Params)``
+| **Mode and number of proofs:**
+|    ``params(+compound,--nonvar)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: result/2
+.. _json_rpc/0::result/2:
+
+``result/2``
+^^^^^^^^^^^^
+
+Extracts the result field from a JSON-RPC 2.0 response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``result(Message,Result)``
+| **Mode and number of proofs:**
+|    ``result(+compound,--nonvar)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: error/2
+.. _json_rpc/0::error/2:
+
+``error/2``
+^^^^^^^^^^^
+
+Extracts the error field from a JSON-RPC 2.0 error response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``error(Message,Error)``
+| **Mode and number of proofs:**
+|    ``error(+compound,--compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: error_code/2
+.. _json_rpc/0::error_code/2:
+
+``error_code/2``
+^^^^^^^^^^^^^^^^
+
+Extracts the error code from a JSON-RPC 2.0 error response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``error_code(Message,Code)``
+| **Mode and number of proofs:**
+|    ``error_code(+compound,--integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: error_message/2
+.. _json_rpc/0::error_message/2:
+
+``error_message/2``
+^^^^^^^^^^^^^^^^^^^
+
+Extracts the error message from a JSON-RPC 2.0 error response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``error_message(Message,ErrorMessage)``
+| **Mode and number of proofs:**
+|    ``error_message(+compound,--atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: error_data/2
+.. _json_rpc/0::error_data/2:
+
+``error_data/2``
+^^^^^^^^^^^^^^^^
+
+Extracts the error data from a JSON-RPC 2.0 error response. Fails if no data field is present.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``error_data(Message,Data)``
+| **Mode and number of proofs:**
+|    ``error_data(+compound,--nonvar)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: write_message/2
+.. _json_rpc/0::write_message/2:
+
+``write_message/2``
+^^^^^^^^^^^^^^^^^^^
+
+Writes a JSON-RPC 2.0 message to an output stream as a single line of JSON followed by a newline. Flushes the output stream after writing.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``write_message(Output,Message)``
+| **Mode and number of proofs:**
+|    ``write_message(+stream,+compound)`` - ``one``
+
+
+------------
+
+.. index:: read_message/2
+.. _json_rpc/0::read_message/2:
+
+``read_message/2``
+^^^^^^^^^^^^^^^^^^
+
+Reads a JSON-RPC 2.0 message from an input stream. Reads a line of JSON text and parses it. Fails at end of stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``read_message(Input,Message)``
+| **Mode and number of proofs:**
+|    ``read_message(+stream,--compound)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
