@@ -89,6 +89,8 @@ the Google Protocol Buffers binary format.
 
 * ADDED: New `json_ld` library for parsing and generating JSON-LD data.
 
+* ADDED: New `json_rpc` library implementing the JSON-RPC 2.0 spec.
+
 * ADDED: New `json_schema` library for parsing JSON Schema files and validating
 JSON files after a schema.
 

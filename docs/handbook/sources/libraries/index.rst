@@ -68,6 +68,7 @@ directory in the ``NOTES.md`` file.
    json
    json_ld
    json_lines
+   json_rpc
    json_schema
    linda
    listing

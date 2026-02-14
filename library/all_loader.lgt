@@ -74,6 +74,7 @@
 		csv(loader),
 		tsv(loader),
 		json(loader),
+		json_rpc(loader),
 		json_lines(loader),
 		json_schema(loader),
 		json_ld(loader),

@@ -2284,6 +2284,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`fcube <fcube/0::decide/2>`
 
+``decode/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::decode/2>`
+
 ``decode_exception/2``
 ----------------------
 
@@ -3332,6 +3342,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`debug_messages <debug_messages/0::enabled/2>`
 
+``encode/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::encode/2>`
+
 ``encode_frame/2``
 ------------------
 
@@ -3485,6 +3505,66 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`recorded_database_core <recorded_database_core/0::erase/1>`
+
+``error/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::error/2>`
+
+``error_code/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::error_code/2>`
+
+``error_data/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::error_data/2>`
+
+``error_message/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::error_message/2>`
+
+``error_response/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::error_response/4>`
+
+``error_response/5``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::error_response/5>`
 
 ``essentially_equal/3``
 -----------------------
@@ -5091,6 +5171,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`metagol <metagol/0::ibk/3>`
 
+``id/2``
+--------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::id/2>`
+
 ``if_empty/1``
 --------------
 
@@ -5543,6 +5633,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`number_grammars(Format) <number_grammars/1::integer//1>`
 
+``internal_error/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::internal_error/2>`
+
 ``internal_os_path/2``
 ----------------------
 
@@ -5593,6 +5693,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`setp <setp/0::intersection/4>`
+
+``invalid_params/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::invalid_params/2>`
+
+``invalid_request/1``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::invalid_request/1>`
 
 ``invoke/1``
 ------------
@@ -5674,6 +5794,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`characterp <characterp/0::is_ascii/1>`
 
+``is_batch/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::is_batch/1>`
+
 ``is_bin_digit/1``
 ------------------
 
@@ -5723,6 +5853,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`characterp <characterp/0::is_end_of_line/1>`
+
+``is_error_response/1``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::is_error_response/1>`
 
 ``is_expected/0``
 -----------------
@@ -5793,6 +5933,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`characterp <characterp/0::is_newline/1>`
+
+``is_notification/1``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::is_notification/1>`
 
 ``is_null/1``
 -------------
@@ -5873,6 +6023,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`characterp <characterp/0::is_quote/1>`
+
+``is_request/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::is_request/1>`
+
+``is_response/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::is_response/1>`
 
 ``is_subsequence_of/2``
 -----------------------
@@ -7494,6 +7664,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`metagol <metagol/0::metarule_next_id/1>`
 
+``method/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::method/2>`
+
+``method_not_found/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::method_not_found/2>`
+
 ``mget/3``
 ----------
 
@@ -8027,6 +8217,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`pack_protocol <pack_protocol/0::note/3>`
 
+``notification/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::notification/2>`
+
+``notification/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::notification/3>`
+
 ``notrace/0``
 -------------
 
@@ -8515,6 +8725,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`intervalp <intervalp/0::overlaps/2>`
 
+``params/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::params/2>`
+
 ``parent/1``
 ------------
 
@@ -8612,6 +8832,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`pddl <pddl/0::parse_domain/3>`
+
+``parse_error/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::parse_error/1>`
 
 ``parse_problem/2``
 -------------------
@@ -9706,6 +9936,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`term_io_protocol <term_io_protocol/0::read_from_codes/2>`
 
+``read_message/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::read_message/2>`
+
 ``read_only_device_path/1``
 ---------------------------
 
@@ -10002,6 +10242,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`atom <atom/0::replace_sub_atom/4>`
 
+``request/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::request/3>`
+
+``request/4``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::request/4>`
+
 ``rescale/3``
 -------------
 
@@ -10146,6 +10406,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`amqp_pool <amqp_pool/0::resize/2>`
 
+``response/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::response/3>`
+
 ``restore/1``
 -------------
 
@@ -10165,6 +10435,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`packs <packs/0::restore/2>`
+
+``result/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::result/2>`
 
 ``retract_fact/1``
 ------------------
@@ -12994,6 +13274,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`debuggerp <debuggerp/0::write_max_depth/1>`
+
+``write_message/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::write_message/2>`
 
 ``write_stream/3``
 ------------------
