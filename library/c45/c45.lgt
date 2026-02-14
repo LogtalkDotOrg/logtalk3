@@ -25,10 +25,11 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-02-14,
-		comment is 'C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file.',
+		comment is 'C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes.',
 		remarks is [
 			'Algorithm' - 'C4.5 is an extension of the ID3 algorithm that uses information gain ratio instead of information gain for attribute selection, which avoids bias towards attributes with many values.',
-			'Tree representation' - 'The learned decision tree is represented as ``leaf(Class)`` for leaf nodes and ``tree(Attribute, Subtrees)`` for internal nodes, where ``Subtrees`` is a list of ``Value-Subtree`` pairs.',
+			'Discrete attributes' - 'The learned decision tree is represented as ``leaf(Class)`` for leaf nodes and ``tree(Attribute, Subtrees)`` for internal nodes with discrete attributes, where ``Subtrees`` is a list of ``Value-Subtree`` pairs.',
+			'Continuous attributes' - 'For continuous (numeric) attributes, the tree uses binary threshold splits represented as ``tree(Attribute, threshold(Threshold), LeftSubtree, RightSubtree)`` where ``LeftSubtree`` corresponds to values ``=< Threshold`` and ``RightSubtree`` to values ``> Threshold``.',
 			'Export format' - 'The tree can be exported as a list of Prolog/Logtalk clauses of the form ``Class(AttributeValue1, AttributeValue2, ...)``.'
 		],
 		see_also is [dataset_protocol]
@@ -63,8 +64,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, memberchk/2, msort/2, nth1/3,
-		sort/2
+		append/3, length/2, member/2, memberchk/2, msort/2, nth1/3
 	]).
 
 	:- uses(pairs, [
@@ -104,6 +104,20 @@
 		(	BestAttribute == none ->
 			majority_class(Examples, Class),
 			Tree = leaf(Class)
+		;	BestAttribute = threshold(Attr, Threshold) ->
+			% Continuous attribute with binary threshold split
+			filter_examples_threshold(Examples, Attr, Threshold, Left, Right),
+			(	Left == [] ->
+				majority_class(Examples, ClassL),
+				LeftTree = leaf(ClassL)
+			;	build_tree(Left, AttributeNames, Attributes, LeftTree)
+			),
+			(	Right == [] ->
+				majority_class(Examples, ClassR),
+				RightTree = leaf(ClassR)
+			;	build_tree(Right, AttributeNames, Attributes, RightTree)
+			),
+			Tree = tree(Attr, threshold(Threshold), LeftTree, RightTree)
 		;	memberchk(BestAttribute-Values, Attributes),
 			build_subtrees(Values, BestAttribute, Examples, AttributeNames, Attributes, Subtrees),
 			Tree = tree(BestAttribute, Subtrees)
@@ -130,6 +144,18 @@
 		;	Filtered = Rest
 		),
 		filter_examples(Examples, Attribute, Value, Rest).
+
+	% filter_examples_threshold/5 - split examples by threshold on a continuous attribute
+	filter_examples_threshold([], _, _, [], []).
+	filter_examples_threshold([Id-Class-AVs| Examples], Attr, Threshold, Left, Right) :-
+		memberchk(Attr-Value, AVs),
+		(	Value =< Threshold ->
+			Left = [Id-Class-AVs| LeftRest],
+			Right = RightRest
+		;	Left = LeftRest,
+			Right = [Id-Class-AVs| RightRest]
+		),
+		filter_examples_threshold(Examples, Attr, Threshold, LeftRest, RightRest).
 
 	% select_attribute/3 - remove an attribute from the list
 	select_attribute([], _, []).
@@ -201,18 +227,71 @@
 
 	% compute_gain_ratios/6 - compute gain ratio for each attribute
 	compute_gain_ratios([], _, _, _, _, []).
-	compute_gain_ratios([Attr| Attrs], Attributes, Examples, Total, BaseEntropy, [Attr-GainRatio| GainRatios]) :-
+	compute_gain_ratios([Attr| Attrs], Attributes, Examples, Total, BaseEntropy, [BestKey-GainRatio| GainRatios]) :-
 		member(Attr-Values, Attributes),
 		!,
-		information_gain(Values, Attr, Examples, Total, BaseEntropy, Gain),
-		split_info(Values, Attr, Examples, Total, SplitInfo),
-		(	SplitInfo > 0.0 ->
-			GainRatio is Gain / SplitInfo
-		;	GainRatio is 0.0
+		(	Values == continuous ->
+			% Continuous attribute: find best threshold
+			best_threshold(Attr, Examples, Total, BaseEntropy, GainRatio, Threshold),
+			BestKey = threshold(Attr, Threshold)
+		;	% Discrete attribute
+			information_gain(Values, Attr, Examples, Total, BaseEntropy, Gain),
+			split_info(Values, Attr, Examples, Total, SplitInfo),
+			(	SplitInfo > 0.0 ->
+				GainRatio is Gain / SplitInfo
+			;	GainRatio is 0.0
+			),
+			BestKey = Attr
 		),
 		compute_gain_ratios(Attrs, Attributes, Examples, Total, BaseEntropy, GainRatios).
 	compute_gain_ratios([_| Attrs], Attributes, Examples, Total, BaseEntropy, GainRatios) :-
 		compute_gain_ratios(Attrs, Attributes, Examples, Total, BaseEntropy, GainRatios).
+
+	% best_threshold/6 - find the best threshold for a continuous attribute
+	best_threshold(Attr, Examples, Total, BaseEntropy, BestGainRatio, BestThreshold) :-
+		findall(V, (member(_-_-AVs, Examples), member(Attr-V, AVs)), AllValues),
+		sort(AllValues, Sorted),
+		candidate_thresholds(Sorted, Candidates),
+		evaluate_thresholds(Candidates, Attr, Examples, Total, BaseEntropy, 0.0, none, BestGainRatio, BestThreshold).
+
+	% candidate_thresholds/2 - generate midpoints between consecutive sorted values
+	candidate_thresholds([], []).
+	candidate_thresholds([_], []) :-
+		!.
+	candidate_thresholds([V1, V2| Vs], [Mid| Mids]) :-
+		Mid is (V1 + V2) / 2,
+		candidate_thresholds([V2| Vs], Mids).
+
+	% evaluate_thresholds/9 - find threshold with highest gain ratio
+	evaluate_thresholds([], _, _, _, _, BestGR, BestT, BestGR, BestT).
+	evaluate_thresholds([T| Ts], Attr, Examples, Total, BaseEntropy, CurrentGR, CurrentT, BestGR, BestT) :-
+		threshold_gain_ratio(T, Attr, Examples, Total, BaseEntropy, GR),
+		(	GR > CurrentGR ->
+			evaluate_thresholds(Ts, Attr, Examples, Total, BaseEntropy, GR, T, BestGR, BestT)
+		;	evaluate_thresholds(Ts, Attr, Examples, Total, BaseEntropy, CurrentGR, CurrentT, BestGR, BestT)
+		).
+
+	% threshold_gain_ratio/6 - compute gain ratio for a binary split at threshold
+	threshold_gain_ratio(Threshold, Attr, Examples, Total, BaseEntropy, GainRatio) :-
+		filter_examples_threshold(Examples, Attr, Threshold, Left, Right),
+		length(Left, NLeft),
+		length(Right, NRight),
+		(	NLeft =:= 0 ->
+			GainRatio is 0.0
+		;	NRight =:= 0 ->
+			GainRatio is 0.0
+		;	entropy(Left, NLeft, LeftEntropy),
+			entropy(Right, NRight, RightEntropy),
+			WeightedEntropy is (NLeft / Total) * LeftEntropy + (NRight / Total) * RightEntropy,
+			Gain is BaseEntropy - WeightedEntropy,
+			PLeft is NLeft / Total,
+			PRight is NRight / Total,
+			SplitInfo is -(PLeft * log(PLeft) / log(2)) - (PRight * log(PRight) / log(2)),
+			(	SplitInfo > 0.0 ->
+				GainRatio is Gain / SplitInfo
+			;	GainRatio is 0.0
+			)
+		).
 
 	% information_gain/6 - compute information gain for an attribute
 	information_gain(Values, Attr, Examples, Total, BaseEntropy, Gain) :-
@@ -268,6 +347,10 @@
 
 	tree_to_clauses_(leaf(Class), Functor, AttributeNames, Bindings, [Clause]) :-
 		build_clause(Functor, AttributeNames, Bindings, Class, Clause).
+	tree_to_clauses_(tree(Attribute, threshold(Threshold), LeftTree, RightTree), Functor, AttributeNames, Bindings, Clauses) :-
+		tree_to_clauses_(LeftTree, Functor, AttributeNames, [Attribute- =<(Threshold)| Bindings], LeftClauses),
+		tree_to_clauses_(RightTree, Functor, AttributeNames, [Attribute- >(Threshold)| Bindings], RightClauses),
+		append(LeftClauses, RightClauses, Clauses).
 	tree_to_clauses_(tree(Attribute, Subtrees), Functor, AttributeNames, Bindings, Clauses) :-
 		subtrees_to_clauses(Subtrees, Attribute, Functor, AttributeNames, Bindings, Clauses).
 
@@ -309,6 +392,13 @@
 	print_tree(leaf(Class), Indent) :-
 		Spaces is Indent * 2,
 		format('~*c=> ~w~n', [Spaces, 32, Class]).
+	print_tree(tree(Attribute, threshold(Threshold), LeftTree, RightTree), Indent) :-
+		Spaces is Indent * 2,
+		Indent1 is Indent + 1,
+		format('~*c~w =< ~w:~n', [Spaces, 32, Attribute, Threshold]),
+		print_tree(LeftTree, Indent1),
+		format('~*c~w > ~w:~n', [Spaces, 32, Attribute, Threshold]),
+		print_tree(RightTree, Indent1).
 	print_tree(tree(Attribute, Subtrees), Indent) :-
 		print_subtrees(Subtrees, Attribute, Indent).
 

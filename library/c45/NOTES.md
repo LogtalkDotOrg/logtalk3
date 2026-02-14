@@ -25,7 +25,8 @@ ________________________________________________________________________
 This library implements the C4.5 decision tree learning algorithm. C4.5
 is an extension of the ID3 algorithm that uses information gain ratio
 instead of information gain for attribute selection, which avoids bias
-towards attributes with many values.
+towards attributes with many values. The implementation supports both
+discrete (categorical) and continuous (numeric) attributes.
 
 The library provides predicates for learning a decision tree from a
 dataset and exporting the learned tree as a list of predicate clauses
@@ -34,10 +35,37 @@ or to a file.
 Datasets are represented as objects implementing the `dataset_protocol`
 protocol. This protocol defines the following predicates:
 
-- `attribute_values/2` - enumerates attributes and their possible values
+- `attribute_values/2` - enumerates attributes and their possible values;
+  for discrete attributes, the values is a list of possible values; for
+  continuous attributes, the value is the atom `continuous`
 - `class/1` - returns the name of the target class attribute
 - `class_values/1` - returns the list of possible class values
 - `example/3` - enumerates the examples in the dataset
+
+
+Implemented features
+--------------------
+
+- Information gain ratio for attribute selection (avoids bias towards
+  attributes with many values)
+- Handling of discrete (categorical) attributes with multi-way splits
+- Handling of continuous (numeric) attributes with binary threshold
+  splits (selects the threshold with the highest gain ratio from
+  midpoints between consecutive sorted values)
+- Export of learned decision trees as lists of predicate clauses or
+  to files
+- Pretty-printing of learned decision trees
+
+
+Limitations
+-----------
+
+- No tree pruning (builds full unpruned trees, which may lead to
+  overfitting on training data)
+- No missing value handling (all examples must have values for all
+  attributes)
+- No incremental learning (the tree must be rebuilt from scratch when
+  new examples are added)
 
 
 References
@@ -58,22 +86,30 @@ References
 Test datasets
 -------------
 
-Two sample datasets are included in the `test_files` directory:
+Three sample datasets are included in the `test_files` directory:
 
 - **Play Tennis** — The classic weather/tennis dataset with 14 examples
-  and 4 attributes (outlook, temperature, humidity, wind). Originally
-  from Quinlan (1986) and widely used in machine learning textbooks
-  including Mitchell (1997). Also available from the UCI Machine Learning
-  Repository:
+  and 4 discrete attributes (outlook, temperature, humidity, wind).
+  Originally from Quinlan (1986) and widely used in machine learning
+  textbooks including Mitchell (1997). Also available from the UCI
+  Machine Learning Repository:
   https://archive.ics.uci.edu/dataset/349/tennis+major+tournament+match+statistics
 
-- **Contact Lenses** — A dataset with 24 examples and 4 attributes (age,
-  spectacle prescription, astigmatism, tear production rate) for deciding
-  the type of contact lenses to prescribe. Originally from Cendrowska, J.
-  (1987). PRISM: An algorithm for inducing modular rules. *International
-  Journal of Man-Machine Studies*, 27(4), 349-370. Available from the UCI
-  Machine Learning Repository:
+- **Contact Lenses** — A dataset with 24 examples and 4 discrete
+  attributes (age, spectacle prescription, astigmatism, tear production
+  rate) for deciding the type of contact lenses to prescribe. Originally
+  from Cendrowska, J. (1987). PRISM: An algorithm for inducing modular
+  rules. *International Journal of Man-Machine Studies*, 27(4), 349-370.
+  Available from the UCI Machine Learning Repository:
   https://archive.ics.uci.edu/dataset/58/lenses
+
+- **Iris** — The classic Iris flower dataset with 150 examples and 4
+  continuous attributes (sepal length, sepal width, petal length, petal
+  width) for classifying iris species (setosa, versicolor, virginica).
+  Originally from Fisher, R.A. (1936). The use of multiple measurements
+  in taxonomic problems. *Annals of Eugenics*, 7(2), 179-188. Available
+  from the UCI Machine Learning Repository:
+  https://archive.ics.uci.edu/dataset/53/iris
 
 
 API documentation

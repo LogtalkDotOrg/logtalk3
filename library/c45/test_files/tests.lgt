@@ -102,5 +102,27 @@
 		c45::learn(contact_lenses, Tree),
 		c45::print_tree(Tree).
 
+	% learn/2 tests - iris dataset (continuous attributes)
+
+	test(c45_learn_2_iris, deterministic) :-
+		c45::learn(iris, Tree),
+		ground(Tree).
+
+	test(c45_learn_2_iris_root_is_continuous, true) :-
+		c45::learn(iris, tree(_, threshold(_), _, _)).
+
+	% tree_to_clauses/4 tests - iris dataset
+
+	test(c45_tree_to_clauses_4_iris, true(N > 0)) :-
+		c45::learn(iris, Tree),
+		c45::tree_to_clauses(iris, Tree, classify, Clauses),
+		list::length(Clauses, N).
+
+	% print_tree/1 tests - iris dataset
+
+	test(c45_print_tree_1_iris, deterministic) :-
+		c45::learn(iris, Tree),
+		c45::print_tree(Tree).
+
 :- end_object.
 

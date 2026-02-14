@@ -26,7 +26,7 @@
 	logtalk_load(format(loader)),
 	logtalk_load(os(loader)),
 	logtalk_load([dataset_protocol, c45], [source_data(on), debug(on)]),
-	logtalk_load(['test_files/play_tennis', 'test_files/contact_lenses'], [source_data(on), debug(on)]),
+	logtalk_load(['test_files/play_tennis', 'test_files/contact_lenses', 'test_files/iris'], [source_data(on), debug(on)]),
 	logtalk_load('test_files/tests', [hook(lgtunit)]),
 	tests::run
 )).

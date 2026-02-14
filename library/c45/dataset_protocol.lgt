@@ -31,8 +31,9 @@
 
 	:- public(attribute_values/2).
 	:- mode(attribute_values(?atom, -list(atom)), zero_or_more).
+	:- mode(attribute_values(?atom, -atom), zero_or_more).
 	:- info(attribute_values/2, [
-		comment is 'Enumerates by backtracking the attributes and their possible values.',
+		comment is 'Enumerates by backtracking the attributes and their possible values. For discrete attributes, ``Values`` is a list of possible values. For continuous (numeric) attributes, ``Values`` is the atom ``continuous``.',
 		argnames is ['Attribute', 'Values']
 	]).
 
