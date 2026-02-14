@@ -43,6 +43,29 @@ protocol. This protocol defines the following predicates:
 - `example/3` - enumerates the examples in the dataset
 
 
+API documentation
+-----------------
+
+Open the [../../apis/library_index.html#c45](../../apis/library_index.html#c45)
+link in a web browser.
+
+
+Loading
+-------
+
+To load all entities in this library, load the `loader.lgt` file:
+
+	| ?- logtalk_load(c45(loader)).
+
+
+Testing
+-------
+
+To test this library predicates, load the `tester.lgt` file:
+
+	| ?- logtalk_load(c45(tester)).
+
+
 Implemented features
 --------------------
 
@@ -124,29 +147,6 @@ Four sample datasets are included in the `test_files` directory:
   Ming Tan and Jeff Schlimmer. Available from the UCI Machine Learning
   Repository:
   https://archive.ics.uci.edu/dataset/14/breast+cancer
-
-
-API documentation
------------------
-
-Open the [../../apis/library_index.html#c45](../../apis/library_index.html#c45)
-link in a web browser.
-
-
-Loading
--------
-
-To load all entities in this library, load the `loader.lgt` file:
-
-	| ?- logtalk_load(c45(loader)).
-
-
-Testing
--------
-
-To test this library predicates, load the `tester.lgt` file:
-
-	| ?- logtalk_load(c45(tester)).
 
 
 Usage
