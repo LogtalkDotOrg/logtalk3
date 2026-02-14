@@ -84,6 +84,7 @@ sed '1,19d' ../../../library/base64/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,19d' ../../../library/base85/NOTES.md | pandoc -f gfm -t rst -o libraries/base85.rst
 sed '1,19d' ../../../library/basic_types/NOTES.md | pandoc -f gfm -t rst -o libraries/basic_types.rst
 sed '1,19d' ../../../library/coroutining/NOTES.md | pandoc -f gfm -t rst -o libraries/coroutining.rst
+sed '1,19d' ../../../library/c45/NOTES.md | pandoc -f gfm -t rst -o libraries/c45.rst
 sed '1,19d' ../../../library/cbor/NOTES.md | pandoc -f gfm -t rst -o libraries/cbor.rst
 sed '1,19d' ../../../library/ccsds/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds.rst
 sed '1,19d' ../../../library/csv/NOTES.md | pandoc -f gfm -t rst -o libraries/csv.rst

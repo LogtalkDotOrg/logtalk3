@@ -80,6 +80,7 @@
 		json_ld(loader),
 		yaml(loader),
 		toon(loader),
+		c45(loader),
 		cbor(loader),
 		ccsds(loader),
 		avro(loader),

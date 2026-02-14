@@ -70,6 +70,9 @@ sets.
 Library
 -------
 
+* ADDED: New `c45` library implementing the C4.5 algorithm for learning
+decision trees.
+
 * ADDED: New `datalog` library intended for educational purposes and
 non-demanding applications.
 

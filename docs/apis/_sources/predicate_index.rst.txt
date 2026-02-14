@@ -753,6 +753,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`string(Representation) <string/1::atomics_to_string/3>`
 
+``attribute_values/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dataset_protocol <dataset_protocol/0::attribute_values/2>`
+
 ``available/0``
 ---------------
 
@@ -1445,6 +1455,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`class_hierarchyp <class_hierarchyp/0::class/1>`
+* :ref:`dataset_protocol <dataset_protocol/0::class/1>`
+
+``class_values/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dataset_protocol <dataset_protocol/0::class_values/1>`
 
 ``classes/1``
 -------------
@@ -3596,6 +3617,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`numberlistp <numberlistp/0::euclidean_norm/2>`
+
+``example/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dataset_protocol <dataset_protocol/0::example/3>`
 
 ``exchange_bind/4``
 -------------------
@@ -6465,6 +6496,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`c45 <c45/0::learn/2>`
 * :ref:`metagol <metagol/0::learn/2>`
 
 ``learn/3``
@@ -9397,6 +9429,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`logtalk <logtalk/0::print_message_tokens/3>`
+
+``print_tree/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`c45 <c45/0::print_tree/1>`
 
 ``product/2``
 -------------
@@ -12407,6 +12449,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`pairs <pairs/0::transpose/2>`
+
+``tree_to_clauses/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`c45 <c45/0::tree_to_clauses/4>`
+
+``tree_to_file/4``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`c45 <c45/0::tree_to_file/4>`
 
 ``triangular/4``
 ----------------

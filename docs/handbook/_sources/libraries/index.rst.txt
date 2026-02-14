@@ -37,6 +37,7 @@ directory in the ``NOTES.md`` file.
    base64
    base85
    basic_types
+   c45
    cbor
    ccsds
    core
