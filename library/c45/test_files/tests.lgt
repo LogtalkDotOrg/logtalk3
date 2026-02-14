@@ -92,13 +92,16 @@
 	% print_tree/1 tests
 
 	test(c45_print_tree_1_play_tennis, deterministic) :-
+		^^suppress_text_output,
 		c45::learn(play_tennis, Tree),
 		c45::print_tree(Tree).
 
 	test(c45_print_tree_1_leaf, deterministic) :-
+		^^suppress_text_output,
 		c45::print_tree(leaf(yes)).
 
 	test(c45_print_tree_1_contact_lenses, deterministic) :-
+		^^suppress_text_output,
 		c45::learn(contact_lenses, Tree),
 		c45::print_tree(Tree).
 
@@ -121,7 +124,31 @@
 	% print_tree/1 tests - iris dataset
 
 	test(c45_print_tree_1_iris, deterministic) :-
+		^^suppress_text_output,
 		c45::learn(iris, Tree),
+		c45::print_tree(Tree).
+
+	% learn/2 tests - breast_cancer dataset (missing values)
+
+	test(c45_learn_2_breast_cancer, deterministic) :-
+		c45::learn(breast_cancer, Tree),
+		ground(Tree).
+
+	test(c45_learn_2_breast_cancer_root_is_tree, true) :-
+		c45::learn(breast_cancer, tree(_, _)).
+
+	% tree_to_clauses/4 tests - breast_cancer dataset
+
+	test(c45_tree_to_clauses_4_breast_cancer, true(N > 0)) :-
+		c45::learn(breast_cancer, Tree),
+		c45::tree_to_clauses(breast_cancer, Tree, classify, Clauses),
+		list::length(Clauses, N).
+
+	% print_tree/1 tests - breast_cancer dataset
+
+	test(c45_print_tree_1_breast_cancer, deterministic) :-
+		^^suppress_text_output,
+		c45::learn(breast_cancer, Tree),
 		c45::print_tree(Tree).
 
 :- end_object.

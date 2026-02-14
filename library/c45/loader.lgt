@@ -24,4 +24,3 @@
 	logtalk_load(format(loader)),
 	logtalk_load([dataset_protocol, c45], [optimize(on)])
 )).
-

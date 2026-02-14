@@ -234,6 +234,11 @@ attributes with many values)</p></li>
 <li><p>Handling of continuous (numeric) attributes with binary threshold
 splits (selects the threshold with the highest gain ratio from
 midpoints between consecutive sorted values)</p></li>
+<li><p>Handling of missing attribute values (represented using anonymous
+variables): examples with missing values for an attribute are
+distributed to all branches during tree construction; gain ratio
+computation uses only examples with known values for the attribute
+being evaluated</p></li>
 <li><p>Export of learned decision trees as lists of predicate clauses or to
 files</p></li>
 <li><p>Pretty-printing of learned decision trees</p></li>
@@ -244,8 +249,6 @@ files</p></li>
 <ul class="simple">
 <li><p>No tree pruning (builds full unpruned trees, which may lead to
 overfitting on training data)</p></li>
-<li><p>No missing value handling (all examples must have values for all
-attributes)</p></li>
 <li><p>No incremental learning (the tree must be rebuilt from scratch when
 new examples are added)</p></li>
 </ul>
@@ -263,7 +266,7 @@ Decision Tree Learning.</p></li>
 </section>
 <section id="test-datasets">
 <h2>Test datasets<a class="headerlink" href="#test-datasets" title="Link to this heading"></a></h2>
-<p>Three sample datasets are included in the <code class="docutils literal notranslate"><span class="pre">test_files</span></code> directory:</p>
+<p>Four sample datasets are included in the <code class="docutils literal notranslate"><span class="pre">test_files</span></code> directory:</p>
 <ul class="simple">
 <li><p><strong>Play Tennis</strong> — The classic weather/tennis dataset with 14 examples
 and 4 discrete attributes (outlook, temperature, humidity, wind).
@@ -285,6 +288,15 @@ Originally from Fisher, R.A. (1936). The use of multiple measurements
 in taxonomic problems. <em>Annals of Eugenics</em>, 7(2), 179-188. Available
 from the UCI Machine Learning Repository:
 <a class="reference external" href="https://archive.ics.uci.edu/dataset/53/iris">https://archive.ics.uci.edu/dataset/53/iris</a></p></li>
+<li><p><strong>Breast Cancer</strong> — A dataset with 286 examples and 9 discrete
+attributes (age, menopause, tumor size, inv-nodes, node-caps, degree
+of malignancy, breast, breast quadrant, irradiation) for predicting
+breast cancer recurrence events. Contains missing values (9 examples
+with missing values in the node-caps and breast-quad attributes,
+represented using anonymous variables). Originally from the Institute
+of Oncology, University Medical Centre, Ljubljana, Yugoslavia. Donors:
+Ming Tan and Jeff Schlimmer. Available from the UCI Machine Learning
+Repository: <a class="reference external" href="https://archive.ics.uci.edu/dataset/14/breast+cancer">https://archive.ics.uci.edu/dataset/14/breast+cancer</a></p></li>
 </ul>
 </section>
 <section id="api-documentation">

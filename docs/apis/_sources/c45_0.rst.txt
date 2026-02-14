@@ -8,7 +8,7 @@
 ``c45``
 =======
 
-C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file.
+C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes and handles missing values.
 
 | **Availability:** 
 |    ``logtalk_load(c45(loader))``
@@ -24,13 +24,14 @@ C4.5 decision tree learning algorithm. Builds a decision tree from a dataset obj
 | **Uses:**
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
-|    :ref:`numberlist <numberlist/0>`
 |    :ref:`pairs <pairs/0>`
 
 | **Remarks:**
 
    - Algorithm: C4.5 is an extension of the ID3 algorithm that uses information gain ratio instead of information gain for attribute selection, which avoids bias towards attributes with many values.
-   - Tree representation: The learned decision tree is represented as ``leaf(Class)`` for leaf nodes and ``tree(Attribute, Subtrees)`` for internal nodes, where ``Subtrees`` is a list of ``Value-Subtree`` pairs.
+   - Discrete attributes: The learned decision tree is represented as ``leaf(Class)`` for leaf nodes and ``tree(Attribute, Subtrees)`` for internal nodes with discrete attributes, where ``Subtrees`` is a list of ``Value-Subtree`` pairs.
+   - Continuous attributes: For continuous (numeric) attributes, the tree uses binary threshold splits represented as ``tree(Attribute, threshold(Threshold), LeftSubtree, RightSubtree)`` where ``LeftSubtree`` corresponds to values ``=< Threshold`` and ``RightSubtree`` to values ``> Threshold``.
+   - Missing values: Missing attribute values are represented using anonymous variables. During tree construction, examples with missing values for the split attribute are distributed to all branches. Entropy and gain calculations use only examples with known values for the attribute being evaluated.
    - Export format: The tree can be exported as a list of Prolog/Logtalk clauses of the form ``Class(AttributeValue1, AttributeValue2, ...)``.
 
 | **Inherited public predicates:**

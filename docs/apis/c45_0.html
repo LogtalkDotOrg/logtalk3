@@ -222,7 +222,7 @@
   <p class="right" id="c45-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="c45">
 <h1><code class="docutils literal notranslate"><span class="pre">c45</span></code><a class="headerlink" href="#c45" title="Link to this heading"></a></h1>
-<p>C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the <code class="docutils literal notranslate"><span class="pre">dataset_protocol</span></code> protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file.</p>
+<p>C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the <code class="docutils literal notranslate"><span class="pre">dataset_protocol</span></code> protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes and handles missing values.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -245,7 +245,6 @@
 <div class="line-block">
 <div class="line"><a class="reference internal" href="format_0.html#format-0"><span class="std std-ref">format</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
-<div class="line"><a class="reference internal" href="numberlist_0.html#numberlist-0"><span class="std std-ref">numberlist</span></a></div>
 <div class="line"><a class="reference internal" href="pairs_0.html#pairs-0"><span class="std std-ref">pairs</span></a></div>
 </div>
 </div>
@@ -255,7 +254,9 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Algorithm: C4.5 is an extension of the ID3 algorithm that uses information gain ratio instead of information gain for attribute selection, which avoids bias towards attributes with many values.</p></li>
-<li><p>Tree representation: The learned decision tree is represented as <code class="docutils literal notranslate"><span class="pre">leaf(Class)</span></code> for leaf nodes and <code class="docutils literal notranslate"><span class="pre">tree(Attribute,</span> <span class="pre">Subtrees)</span></code> for internal nodes, where <code class="docutils literal notranslate"><span class="pre">Subtrees</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">Value-Subtree</span></code> pairs.</p></li>
+<li><p>Discrete attributes: The learned decision tree is represented as <code class="docutils literal notranslate"><span class="pre">leaf(Class)</span></code> for leaf nodes and <code class="docutils literal notranslate"><span class="pre">tree(Attribute,</span> <span class="pre">Subtrees)</span></code> for internal nodes with discrete attributes, where <code class="docutils literal notranslate"><span class="pre">Subtrees</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">Value-Subtree</span></code> pairs.</p></li>
+<li><p>Continuous attributes: For continuous (numeric) attributes, the tree uses binary threshold splits represented as <code class="docutils literal notranslate"><span class="pre">tree(Attribute,</span> <span class="pre">threshold(Threshold),</span> <span class="pre">LeftSubtree,</span> <span class="pre">RightSubtree)</span></code> where <code class="docutils literal notranslate"><span class="pre">LeftSubtree</span></code> corresponds to values <code class="docutils literal notranslate"><span class="pre">=&lt;</span> <span class="pre">Threshold</span></code> and <code class="docutils literal notranslate"><span class="pre">RightSubtree</span></code> to values <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">Threshold</span></code>.</p></li>
+<li><p>Missing values: Missing attribute values are represented using anonymous variables. During tree construction, examples with missing values for the split attribute are distributed to all branches. Entropy and gain calculations use only examples with known values for the attribute being evaluated.</p></li>
 <li><p>Export format: The tree can be exported as a list of Prolog/Logtalk clauses of the form <code class="docutils literal notranslate"><span class="pre">Class(AttributeValue1,</span> <span class="pre">AttributeValue2,</span> <span class="pre">...)</span></code>.</p></li>
 </ul>
 </div></blockquote>

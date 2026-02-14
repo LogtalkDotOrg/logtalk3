@@ -52,6 +52,11 @@ Implemented features
 - Handling of continuous (numeric) attributes with binary threshold
   splits (selects the threshold with the highest gain ratio from
   midpoints between consecutive sorted values)
+- Handling of missing attribute values (represented using anonymous
+  variables): examples with missing values for an attribute are
+  distributed to all branches during tree construction; gain ratio
+  computation uses only examples with known values for the attribute
+  being evaluated
 - Export of learned decision trees as lists of predicate clauses or
   to files
 - Pretty-printing of learned decision trees
@@ -62,8 +67,6 @@ Limitations
 
 - No tree pruning (builds full unpruned trees, which may lead to
   overfitting on training data)
-- No missing value handling (all examples must have values for all
-  attributes)
 - No incremental learning (the tree must be rebuilt from scratch when
   new examples are added)
 
@@ -86,7 +89,7 @@ References
 Test datasets
 -------------
 
-Three sample datasets are included in the `test_files` directory:
+Four sample datasets are included in the `test_files` directory:
 
 - **Play Tennis** — The classic weather/tennis dataset with 14 examples
   and 4 discrete attributes (outlook, temperature, humidity, wind).
@@ -110,6 +113,17 @@ Three sample datasets are included in the `test_files` directory:
   in taxonomic problems. *Annals of Eugenics*, 7(2), 179-188. Available
   from the UCI Machine Learning Repository:
   https://archive.ics.uci.edu/dataset/53/iris
+
+- **Breast Cancer** — A dataset with 286 examples and 9 discrete
+  attributes (age, menopause, tumor size, inv-nodes, node-caps, degree
+  of malignancy, breast, breast quadrant, irradiation) for predicting
+  breast cancer recurrence events. Contains missing values (9 examples
+  with missing values in the node-caps and breast-quad attributes,
+  represented using anonymous variables). Originally from the Institute
+  of Oncology, University Medical Centre, Ljubljana, Yugoslavia. Donors:
+  Ming Tan and Jeff Schlimmer. Available from the UCI Machine Learning
+  Repository:
+  https://archive.ics.uci.edu/dataset/14/breast+cancer
 
 
 API documentation

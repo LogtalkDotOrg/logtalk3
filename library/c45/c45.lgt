@@ -25,11 +25,12 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-02-14,
-		comment is 'C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes.',
+		comment is 'C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes and handles missing values.',
 		remarks is [
 			'Algorithm' - 'C4.5 is an extension of the ID3 algorithm that uses information gain ratio instead of information gain for attribute selection, which avoids bias towards attributes with many values.',
 			'Discrete attributes' - 'The learned decision tree is represented as ``leaf(Class)`` for leaf nodes and ``tree(Attribute, Subtrees)`` for internal nodes with discrete attributes, where ``Subtrees`` is a list of ``Value-Subtree`` pairs.',
 			'Continuous attributes' - 'For continuous (numeric) attributes, the tree uses binary threshold splits represented as ``tree(Attribute, threshold(Threshold), LeftSubtree, RightSubtree)`` where ``LeftSubtree`` corresponds to values ``=< Threshold`` and ``RightSubtree`` to values ``> Threshold``.',
+			'Missing values' - 'Missing attribute values are represented using anonymous variables. During tree construction, examples with missing values for the split attribute are distributed to all branches. Entropy and gain calculations use only examples with known values for the attribute being evaluated.',
 			'Export format' - 'The tree can be exported as a list of Prolog/Logtalk clauses of the form ``Class(AttributeValue1, AttributeValue2, ...)``.'
 		],
 		see_also is [dataset_protocol]
@@ -64,15 +65,11 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, memberchk/2, msort/2, nth1/3
+		append/3, length/2, member/2, memberchk/2, msort/2
 	]).
 
 	:- uses(pairs, [
 		keys/2
-	]).
-
-	:- uses(numberlist, [
-		sum/2, max/2
 	]).
 
 	:- uses(format, [
@@ -137,19 +134,30 @@
 		build_subtrees(Values, Attribute, Examples, AttributeNames, Attributes, Subtrees).
 
 	% filter_examples/4 - filter examples by attribute value
+	% Examples with missing values (uninstantiated) for the attribute
+	% are included in all branches
 	filter_examples([], _, _, []).
 	filter_examples([Id-Class-AVs| Examples], Attribute, Value, Filtered) :-
-		(	member(Attribute-Value, AVs) ->
+		(	member(Attribute-AV, AVs),
+			var(AV) ->
+			% Missing value: include in all branches
+			Filtered = [Id-Class-AVs| Rest]
+		;	member(Attribute-Value, AVs) ->
 			Filtered = [Id-Class-AVs| Rest]
 		;	Filtered = Rest
 		),
 		filter_examples(Examples, Attribute, Value, Rest).
 
 	% filter_examples_threshold/5 - split examples by threshold on a continuous attribute
+	% Examples with missing values for the attribute are included in both branches
 	filter_examples_threshold([], _, _, [], []).
 	filter_examples_threshold([Id-Class-AVs| Examples], Attr, Threshold, Left, Right) :-
 		memberchk(Attr-Value, AVs),
-		(	Value =< Threshold ->
+		(	var(Value) ->
+			% Missing value: include in both branches
+			Left = [Id-Class-AVs| LeftRest],
+			Right = [Id-Class-AVs| RightRest]
+		;	Value =< Threshold ->
 			Left = [Id-Class-AVs| LeftRest],
 			Right = RightRest
 		;	Left = LeftRest,
@@ -166,7 +174,8 @@
 		select_attribute(Attrs, Target, Rest).
 
 	% all_same_class/2 - check if all examples have the same class
-	all_same_class([_-Class-_], Class).
+	all_same_class([_-Class-_], Class) :-
+		!.
 	all_same_class([_-Class-_| Rest], Class) :-
 		all_same_class(Rest, Class).
 
@@ -190,13 +199,13 @@
 	count_same([Y| Xs], _, Count, Count, [Y| Xs]).
 
 	max_count([Class-Count], Class) :-
+		!,
 		Count > 0.
 	max_count([C1-N1, C2-N2| Rest], Class) :-
 		(	N1 >= N2 ->
 			max_count([C1-N1| Rest], Class)
 		;	max_count([C2-N2| Rest], Class)
 		).
-
 
 	% best_attribute/4 - select the attribute with the highest gain ratio
 	best_attribute(Examples, AttributeNames, Attributes, BestAttribute) :-
@@ -226,6 +235,7 @@
 		).
 
 	% compute_gain_ratios/6 - compute gain ratio for each attribute
+	% Uses only examples with known values for the attribute being evaluated
 	compute_gain_ratios([], _, _, _, _, []).
 	compute_gain_ratios([Attr| Attrs], Attributes, Examples, Total, BaseEntropy, [BestKey-GainRatio| GainRatios]) :-
 		member(Attr-Values, Attributes),
@@ -235,11 +245,17 @@
 			best_threshold(Attr, Examples, Total, BaseEntropy, GainRatio, Threshold),
 			BestKey = threshold(Attr, Threshold)
 		;	% Discrete attribute
-			information_gain(Values, Attr, Examples, Total, BaseEntropy, Gain),
-			split_info(Values, Attr, Examples, Total, SplitInfo),
-			(	SplitInfo > 0.0 ->
-				GainRatio is Gain / SplitInfo
-			;	GainRatio is 0.0
+			known_examples(Examples, Attr, KnownExamples),
+			length(KnownExamples, KnownTotal),
+			(	KnownTotal =:= 0 ->
+				GainRatio is 0.0
+			;	entropy(KnownExamples, KnownTotal, KnownEntropy),
+				information_gain(Values, Attr, KnownExamples, KnownTotal, KnownEntropy, Gain),
+				split_info(Values, Attr, KnownExamples, KnownTotal, SplitInfo),
+				(	SplitInfo > 0.0 ->
+					GainRatio is Gain / SplitInfo
+				;	GainRatio is 0.0
+				)
 			),
 			BestKey = Attr
 		),
@@ -247,9 +263,20 @@
 	compute_gain_ratios([_| Attrs], Attributes, Examples, Total, BaseEntropy, GainRatios) :-
 		compute_gain_ratios(Attrs, Attributes, Examples, Total, BaseEntropy, GainRatios).
 
+	% known_examples/3 - filter examples to only those with known (non-missing) values for an attribute
+	known_examples([], _, []).
+	known_examples([Id-Class-AVs| Examples], Attr, Known) :-
+		(	member(Attr-Value, AVs),
+			nonvar(Value) ->
+			Known = [Id-Class-AVs| Rest]
+		;	Known = Rest
+		),
+		known_examples(Examples, Attr, Rest).
+
 	% best_threshold/6 - find the best threshold for a continuous attribute
+	% Only considers examples with known (non-missing) values for the attribute
 	best_threshold(Attr, Examples, Total, BaseEntropy, BestGainRatio, BestThreshold) :-
-		findall(V, (member(_-_-AVs, Examples), member(Attr-V, AVs)), AllValues),
+		findall(V, (member(_-_-AVs, Examples), member(Attr-V, AVs), nonvar(V)), AllValues),
 		sort(AllValues, Sorted),
 		candidate_thresholds(Sorted, Candidates),
 		evaluate_thresholds(Candidates, Attr, Examples, Total, BaseEntropy, 0.0, none, BestGainRatio, BestThreshold).

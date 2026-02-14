@@ -59,4 +59,3 @@
 	]).
 
 :- end_protocol.
-
