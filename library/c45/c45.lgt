@@ -91,6 +91,10 @@
 		append/3, length/2, member/2, memberchk/2, msort/2
 	]).
 
+	:- uses(numberlist, [
+		min/2, max/2
+	]).
+
 	:- uses(pairs, [
 		keys/2
 	]).
@@ -411,17 +415,48 @@
 		append(Clauses1, Clauses2, Clauses).
 
 	build_clause(Functor, AttributeNames, Bindings, Class, Clause) :-
-		build_args(AttributeNames, Bindings, Args),
+		build_args(AttributeNames, Bindings, Args, Goals),
 		append(Args, [Class], AllArgs),
-		Clause =.. [Functor| AllArgs].
+		Head =.. [Functor| AllArgs],
+		(	Goals == [] ->
+			Clause = Head
+		;	list_to_conjunction(Goals, Body),
+			Clause = (Head :- Body)
+		).
 
-	build_args([], _, []).
-	build_args([Attr| Attrs], Bindings, [Value| Values]) :-
-		(	member(Attr-Value, Bindings) ->
-			true
-		;	Value = _
+	build_args([], _, [], []).
+	build_args([Attr| Attrs], Bindings, [Arg| Args], Goals) :-
+		findall(T, member(Attr-(=<(T)), Bindings), LEThresholds),
+		findall(T, member(Attr-(>(T)), Bindings), GTThresholds),
+		(	(LEThresholds \== [] ; GTThresholds \== []) ->
+			make_simplified_goals(LEThresholds, GTThresholds, Arg, AttrGoals),
+			append(AttrGoals, RestGoals, Goals)
+		;	memberchk(Attr-Arg, Bindings) ->
+			Goals = RestGoals
+		;	Goals = RestGoals
 		),
-		build_args(Attrs, Bindings, Values).
+		build_args(Attrs, Bindings, Args, RestGoals).
+
+	% make_simplified_goals/4 - keep only the most restrictive threshold for each direction
+	% For =< constraints: keep the minimum (most restrictive upper bound)
+	% For > constraints: keep the maximum (most restrictive lower bound)
+	make_simplified_goals(LEThresholds, GTThresholds, Var, Goals) :-
+		(	LEThresholds == [] ->
+			LEGoals = []
+		;	min(LEThresholds, MinLE),
+			LEGoals = [Var =< MinLE]
+		),
+		(	GTThresholds == [] ->
+			GTGoals = []
+		;	max(GTThresholds, MaxGT),
+			GTGoals = [Var > MaxGT]
+		),
+		append(LEGoals, GTGoals, Goals).
+
+	list_to_conjunction([Goal], Goal) :-
+		!.
+	list_to_conjunction([Goal| Goals], (Goal, Rest)) :-
+		list_to_conjunction(Goals, Rest).
 
 	% tree_to_file/4 - export tree as clauses to a file
 	tree_to_file(Dataset, Tree, Functor, File) :-

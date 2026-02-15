@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-14,
+		date is 2026-02-15,
 		comment is 'Unit tests for the "c45" library.'
 	]).
 
@@ -221,6 +221,79 @@
 		c45::tree_to_clauses(breast_cancer, PrunedTree2, classify, Clauses2),
 		list::length(Clauses1, N1),
 		list::length(Clauses2, N2).
+
+	% Classification verification tests - play_tennis dataset
+	% These tests verify that generated clauses correctly classify training examples
+
+	test(c45_classify_play_tennis_example_1, true(Class == no)) :-
+		% Example 1: sunny, hot, high, weak -> no
+		c45::learn(play_tennis, Tree),
+		c45::tree_to_clauses(play_tennis, Tree, classify, Clauses),
+		create_object(Classifier, [], [public(classify/5)], Clauses),
+		Classifier::classify(sunny, hot, high, weak, Class),
+		abolish_object(Classifier).
+
+	test(c45_classify_play_tennis_example_3, true(Class == yes)) :-
+		% Example 3: overcast, hot, high, weak -> yes (overcast always means play)
+		c45::learn(play_tennis, Tree),
+		c45::tree_to_clauses(play_tennis, Tree, classify, Clauses),
+		create_object(Classifier, [], [public(classify/5)], Clauses),
+		Classifier::classify(overcast, hot, high, weak, Class),
+		abolish_object(Classifier).
+
+	% Classification verification tests - contact_lenses dataset
+
+	test(c45_classify_contact_lenses_example_2, true(Class == none)) :-
+		% Example 2: young, myope, no astigmatism, reduced tears -> none
+		c45::learn(contact_lenses, Tree),
+		c45::tree_to_clauses(contact_lenses, Tree, classify, Clauses),
+		create_object(Classifier, [], [public(classify/5)], Clauses),
+		Classifier::classify(young, myope, no, reduced, Class),
+		abolish_object(Classifier).
+
+	test(c45_classify_contact_lenses_example_5, true(Class == soft)) :-
+		% Example 5: young, hypermetrope, no astigmatism, normal tears -> soft
+		c45::learn(contact_lenses, Tree),
+		c45::tree_to_clauses(contact_lenses, Tree, classify, Clauses),
+		create_object(Classifier, [], [public(classify/5)], Clauses),
+		Classifier::classify(young, hypermetrope, no, normal, Class),
+		abolish_object(Classifier).
+
+	% Classification verification tests - iris dataset (continuous attributes)
+
+	test(c45_classify_iris_setosa, true(Class == setosa)) :-
+		% Example 1: sepal_length=5.1, sepal_width=3.5, petal_length=1.4, petal_width=0.2 -> setosa
+		c45::learn(iris, Tree),
+		c45::tree_to_clauses(iris, Tree, classify, Clauses),
+		create_object(Classifier, [], [public(classify/5)], Clauses),
+		Classifier::classify(5.1, 3.5, 1.4, 0.2, Class),
+		abolish_object(Classifier).
+
+	test(c45_classify_iris_virginica, true(Class == virginica)) :-
+		% Example 150: sepal_length=5.9, sepal_width=3.0, petal_length=5.1, petal_width=1.8 -> virginica
+		c45::learn(iris, Tree),
+		c45::tree_to_clauses(iris, Tree, classify, Clauses),
+		create_object(Classifier, [], [public(classify/5)], Clauses),
+		Classifier::classify(5.9, 3.0, 5.1, 1.8, Class),
+		abolish_object(Classifier).
+
+	% Classification verification tests - breast_cancer dataset
+
+	test(c45_classify_breast_cancer_example_1, true(Class == no_recurrence_events)) :-
+		% Example 1: 30_39, premeno, 30_34, 0_2, no, 3, left, left_low, no -> no_recurrence_events
+		c45::learn(breast_cancer, Tree),
+		c45::tree_to_clauses(breast_cancer, Tree, classify, Clauses),
+		create_object(Classifier, [], [public(classify/10)], Clauses),
+		Classifier::classify('30_39', premeno, '30_34', '0_2', no, '3', left, left_low, no, Class),
+		abolish_object(Classifier).
+
+	test(c45_classify_breast_cancer_example_225, true(Class == recurrence_events)) :-
+		% Example 225: 30_39, premeno, 25_29, 3_5, yes, 3, left, left_low, yes -> recurrence_events
+		c45::learn(breast_cancer, Tree),
+		c45::tree_to_clauses(breast_cancer, Tree, classify, Clauses),
+		create_object(Classifier, [], [public(classify/10)], Clauses),
+		Classifier::classify('30_39', premeno, '25_29', '3_5', yes, '3', left, left_low, yes, Class),
+		abolish_object(Classifier).
 
 :- end_object.
 
