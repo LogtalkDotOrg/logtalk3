@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-14,
+		date is 2026-02-15,
 		comment is 'C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes, handles missing values, and supports tree pruning.',
 		remarks is [
 			'Algorithm' - 'C4.5 is an extension of the ID3 algorithm that uses information gain ratio instead of information gain for attribute selection, which avoids bias towards attributes with many values.',
@@ -427,8 +427,32 @@
 	tree_to_file(Dataset, Tree, Functor, File) :-
 		tree_to_clauses(Dataset, Tree, Functor, Clauses),
 		open(File, write, Stream),
+		write_comment_header(Dataset, Functor, Stream),
 		write_clauses(Clauses, Stream),
 		close(Stream).
+
+	write_comment_header(Dataset, Functor, Stream) :-
+		Dataset::class(Class),
+		findall(
+			Attribute,
+			Dataset::attribute_values(Attribute, _),
+			Arguments,
+			[Class]
+		),
+		title_case(Arguments, TitleCaseArguments),
+		Template =.. [Functor| TitleCaseArguments],
+		format(Stream, '% ~w~n', [Template]).
+
+	% assumes ASCII attribute names
+	title_case([], []).
+	title_case([Attribute| Attributes], [TitleCaseAttribute| TitleCaseAttributes]) :-
+		atom_codes(Attribute, [Letter| Letters]),
+		(	0'a @=< Letter, Letter @=< 0'z ->
+			UpperCaseLetter is Letter - 32,
+			atom_codes(TitleCaseAttribute, [UpperCaseLetter| Letters])
+		;	TitleCaseAttribute = Attribute
+		),
+		title_case(Attributes, TitleCaseAttributes).
 
 	write_clauses([], _).
 	write_clauses([Clause| Clauses], Stream) :-

@@ -43,7 +43,6 @@
 
 	class_values([no_recurrence_events, recurrence_events]).
 
-
 	example(  1, no_recurrence_events, [age-'30_39', menopause-premeno, tumor_size-'30_34', inv_nodes-'0_2', node_caps-no, deg_malig-'3', breast-left, breast_quad-left_low, irradiat-no]).
 	example(  2, no_recurrence_events, [age-'40_49', menopause-premeno, tumor_size-'20_24', inv_nodes-'0_2', node_caps-no, deg_malig-'2', breast-right, breast_quad-right_up, irradiat-no]).
 	example(  3, no_recurrence_events, [age-'40_49', menopause-premeno, tumor_size-'20_24', inv_nodes-'0_2', node_caps-no, deg_malig-'2', breast-left, breast_quad-left_low, irradiat-no]).
