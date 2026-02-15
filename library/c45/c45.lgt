@@ -25,12 +25,13 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-02-14,
-		comment is 'C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes and handles missing values.',
+		comment is 'C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes, handles missing values, and supports tree pruning.',
 		remarks is [
 			'Algorithm' - 'C4.5 is an extension of the ID3 algorithm that uses information gain ratio instead of information gain for attribute selection, which avoids bias towards attributes with many values.',
 			'Discrete attributes' - 'The learned decision tree is represented as ``leaf(Class)`` for leaf nodes and ``tree(Attribute, Subtrees)`` for internal nodes with discrete attributes, where ``Subtrees`` is a list of ``Value-Subtree`` pairs.',
 			'Continuous attributes' - 'For continuous (numeric) attributes, the tree uses binary threshold splits represented as ``tree(Attribute, threshold(Threshold), LeftSubtree, RightSubtree)`` where ``LeftSubtree`` corresponds to values ``=< Threshold`` and ``RightSubtree`` to values ``> Threshold``.',
 			'Missing values' - 'Missing attribute values are represented using anonymous variables. During tree construction, examples with missing values for the split attribute are distributed to all branches. Entropy and gain calculations use only examples with known values for the attribute being evaluated.',
+			'Tree pruning' - 'The ``prune/3`` and ``prune/5`` predicates implement pessimistic error pruning (PEP), which estimates error rates using the upper confidence bound of the binomial distribution (Wilson score interval) with a configurable confidence factor (default 0.25, range ``(0.0, 1.0)``) and minimum instances per leaf (default 2). Subtrees are replaced with leaf nodes when doing so would not increase the estimated error.',
 			'Export format' - 'The tree can be exported as a list of Prolog/Logtalk clauses of the form ``Class(AttributeValue1, AttributeValue2, ...)``.'
 		],
 		see_also is [dataset_protocol]
@@ -62,6 +63,28 @@
 	:- info(print_tree/1, [
 		comment is 'Prints a decision tree to the current output stream in a human-readable format.',
 		argnames is ['Tree']
+	]).
+
+	:- public(prune/5).
+	:- mode(prune(+object_identifier, +tree, +float, +positive_integer, -tree), one).
+	:- info(prune/5, [
+		comment is 'Prunes a decision tree using pessimistic error pruning (PEP). This post-pruning method estimates error rates using the upper confidence bound of the binomial distribution with the given confidence factor and replaces subtrees with leaf nodes when doing so would not increase the estimated error. Pruning helps reduce overfitting and can improve generalization to unseen data.',
+		argnames is ['Dataset', 'Tree', 'ConfidenceFactor', 'MinInstances', 'PrunedTree'],
+		remarks is [
+			'Confidence factor' - 'The confidence factor controls the aggressiveness of pruning. It must be in the range ``(0.0, 1.0)``. Lower values result in more aggressive pruning (smaller, simpler trees), while higher values result in less pruning (larger, more complex trees). The default value is ``0.25``.',
+			'Minimum instances per leaf' - 'The minimum number of instances required at a leaf node. When a node has fewer instances than this value, the node may be pruned. It must be a positive integer. The default value is ``2``.',
+			'Statistical basis' - 'The pruning uses the upper confidence bound of the binomial distribution to estimate the true error rate. Given observed errors E and total instances N, the upper bound is calculated using: ``UCF = (f + z²/(2N) + z*sqrt(f*(1-f)/N + z²/(4N²))) / (1 + z²/N)`` where ``f = E/N`` is the observed error rate and ``z`` is the z-score corresponding to the confidence factor.'
+		]
+	]).
+
+	:- public(prune/3).
+	:- mode(prune(+object_identifier, +tree, -tree), one).
+	:- info(prune/3, [
+		comment is 'Prunes a decision tree using pessimistic error pruning (PEP) with default parameter values. Calls ``prune/5`` with ``ConfidenceFactor = 0.25`` and ``MinInstances = 2``.',
+		argnames is ['Dataset', 'Tree', 'PrunedTree'],
+		remarks is [
+			'Default parameters' - 'Uses the standard C4.5 default values: confidence factor of ``0.25`` (the confidence level for computing the upper bound of the error estimate) and minimum instances per leaf of ``2``.'
+		]
 	]).
 
 	:- uses(list, [
@@ -443,5 +466,170 @@
 			Dataset::attribute_values(Attribute, Values),
 			Attributes
 		).
+
+	% prune/5 - pessimistic error pruning with configurable parameters
+	% Prunes the tree by comparing error estimates of subtrees vs. leaf replacement
+	prune(Dataset, Tree, ConfidenceFactor, MinInstances, PrunedTree) :-
+		% Convert confidence factor to z-score using inverse normal approximation
+		confidence_to_zscore(ConfidenceFactor, ZScore),
+		findall(
+			Id-Class-AVs,
+			Dataset::example(Id, Class, AVs),
+			Examples
+		),
+		prune_tree(Tree, ZScore, MinInstances, Examples, PrunedTree).
+
+	% prune/3 - pessimistic error pruning with default parameters
+	prune(Dataset, Tree, PrunedTree) :-
+		prune(Dataset, Tree, 0.25, 2, PrunedTree).
+
+	% confidence_to_zscore/2 - converts confidence factor to z-score
+	% Uses the Abramowitz and Stegun approximation for the inverse normal distribution
+	% For confidence factor CF, we want the z-score such that P(Z <= z) = 1 - CF
+	confidence_to_zscore(ConfidenceFactor, ZScore) :-
+		P is 1.0 - ConfidenceFactor,
+		% Handle edge cases
+		(	P =< 0.0 ->
+			ZScore = -10.0
+		;	P >= 1.0 ->
+			ZScore = 10.0
+		;	P < 0.5 ->
+			% For P < 0.5, we compute for 1-P and negate
+			P1 is 1.0 - P,
+			inverse_normal_approx(P1, Z1),
+			ZScore is -Z1
+		;	inverse_normal_approx(P, ZScore)
+		).
+
+	% inverse_normal_approx/2 - Abramowitz and Stegun rational approximation
+	% Valid for P in (0.5, 1.0), returns positive z-score
+	inverse_normal_approx(P, Z) :-
+		% Constants for the approximation
+		C0 = 2.515517,
+		C1 = 0.802853,
+		C2 = 0.010328,
+		D1 = 1.432788,
+		D2 = 0.189269,
+		D3 = 0.001308,
+		% Calculate t from P
+		T is sqrt(-2.0 * log(1.0 - P)),
+		% Rational approximation
+		Z is T - (C0 + C1 * T + C2 * T * T) / (1.0 + D1 * T + D2 * T * T + D3 * T * T * T).
+
+	% prune_tree/5 - recursive tree pruning (bottom-up)
+	prune_tree(leaf(Class), _, _, _, leaf(Class)).
+	prune_tree(tree(Attr, threshold(Threshold), Left, Right), ZScore, MinInstances, Examples, PrunedTree) :-
+		% First, recursively prune subtrees
+		filter_examples_threshold(Examples, Attr, Threshold, LeftExamples, RightExamples),
+		prune_tree(Left, ZScore, MinInstances, LeftExamples, PrunedLeft),
+		prune_tree(Right, ZScore, MinInstances, RightExamples, PrunedRight),
+		% Calculate error estimate for the pruned subtree
+		subtree_error(tree(Attr, threshold(Threshold), PrunedLeft, PrunedRight), ZScore, Examples, SubtreeError),
+		% Calculate error estimate if we replace with a leaf
+		leaf_error(Examples, ZScore, MinInstances, LeafError, MajorityClass),
+		% Prune if leaf error is not worse than subtree error
+		(	LeafError =< SubtreeError ->
+			PrunedTree = leaf(MajorityClass)
+		;	PrunedTree = tree(Attr, threshold(Threshold), PrunedLeft, PrunedRight)
+		).
+	prune_tree(tree(Attr, Subtrees), ZScore, MinInstances, Examples, PrunedTree) :-
+		% First, recursively prune all subtrees
+		prune_subtrees(Subtrees, ZScore, MinInstances, Attr, Examples, PrunedSubtrees),
+		% Calculate error estimate for the pruned subtree
+		subtree_error(tree(Attr, PrunedSubtrees), ZScore, Examples, SubtreeError),
+		% Calculate error estimate if we replace with a leaf
+		leaf_error(Examples, ZScore, MinInstances, LeafError, MajorityClass),
+		% Prune if leaf error is not worse than subtree error
+		(	LeafError =< SubtreeError ->
+			PrunedTree = leaf(MajorityClass)
+		;	PrunedTree = tree(Attr, PrunedSubtrees)
+		).
+
+	% prune_subtrees/6 - recursively prune each subtree
+	prune_subtrees([], _, _, _, _, []).
+	prune_subtrees([Value-Subtree| Subtrees], ZScore, MinInstances, Attr, Examples, [Value-PrunedSubtree| PrunedSubtrees]) :-
+		filter_examples(Examples, Attr, Value, FilteredExamples),
+		prune_tree(Subtree, ZScore, MinInstances, FilteredExamples, PrunedSubtree),
+		prune_subtrees(Subtrees, ZScore, MinInstances, Attr, Examples, PrunedSubtrees).
+
+	% leaf_error/5 - pessimistic error estimate for replacing with a leaf
+	% Uses upper confidence bound of binomial distribution (C4.5 formula)
+	leaf_error([], _, _, 1.0, unknown) :-
+		!.
+	leaf_error(Examples, ZScore, MinInstances, Error, MajorityClass) :-
+		majority_class(Examples, MajorityClass),
+		length(Examples, Total),
+		count_errors(Examples, MajorityClass, Errors),
+		% Apply minimum instances consideration
+		(	Total < MinInstances ->
+			% Small sample: use pessimistic estimate
+			Error is 1.0
+		;	upper_confidence_bound(Errors, Total, ZScore, Error)
+		).
+
+	% count_errors/3 - count examples not belonging to the given class
+	count_errors([], _, 0).
+	count_errors([_-Class-_| Examples], MajorityClass, Errors) :-
+		count_errors(Examples, MajorityClass, RestErrors),
+		(	Class == MajorityClass ->
+			Errors = RestErrors
+		;	Errors is RestErrors + 1
+		).
+
+	% upper_confidence_bound/4 - C4.5 upper confidence bound formula
+	% Computes the upper bound of the binomial distribution confidence interval
+	% Formula: UCF = (f + z²/(2N) + z*sqrt(f*(1-f)/N + z²/(4N²))) / (1 + z²/N)
+	% where f = E/N is the observed error rate and z is the z-score
+	upper_confidence_bound(Errors, Total, ZScore, UCB) :-
+		(	Total =:= 0 ->
+			UCB = 1.0
+		;	Errors =:= 0 ->
+			% No errors: use a minimal upper bound based on sample size
+			Z2 is ZScore * ZScore,
+			UCB is Z2 / (Total + Z2)
+		;	F is Errors / Total,
+			Z2 is ZScore * ZScore,
+			% Upper confidence bound formula (Wilson score interval upper bound)
+			Numerator is F + Z2 / (2 * Total) + ZScore * sqrt(F * (1 - F) / Total + Z2 / (4 * Total * Total)),
+			Denominator is 1 + Z2 / Total,
+			UCB is Numerator / Denominator
+		).
+
+	% subtree_error/4 - pessimistic error estimate for a subtree
+	% Sums the error estimates of all leaves, weighted by proportion of examples
+	subtree_error(leaf(Class), ZScore, Examples, Error) :-
+		length(Examples, Total),
+		(	Total =:= 0 ->
+			Error is 1.0
+		;	count_errors(Examples, Class, Errors),
+			upper_confidence_bound(Errors, Total, ZScore, Error)
+		).
+	subtree_error(tree(Attr, threshold(Threshold), Left, Right), ZScore, Examples, Error) :-
+		filter_examples_threshold(Examples, Attr, Threshold, LeftExamples, RightExamples),
+		length(Examples, Total),
+		length(LeftExamples, LeftTotal),
+		length(RightExamples, RightTotal),
+		(	Total =:= 0 ->
+			Error is 1.0
+		;	subtree_error(Left, ZScore, LeftExamples, LeftError),
+			subtree_error(Right, ZScore, RightExamples, RightError),
+			% Weighted sum of subtree errors
+			Error is (LeftTotal * LeftError + RightTotal * RightError) / Total
+		).
+	subtree_error(tree(Attr, Subtrees), ZScore, Examples, Error) :-
+		length(Examples, Total),
+		(	Total =:= 0 ->
+			Error is 1.0
+		;	subtrees_error(Subtrees, Attr, ZScore, Examples, Total, 0.0, Error)
+		).
+
+	% subtrees_error/7 - accumulate weighted error from all subtrees
+	subtrees_error([], _, _, _, _, Error, Error).
+	subtrees_error([Value-Subtree| Subtrees], Attr, ZScore, Examples, Total, Acc, Error) :-
+		filter_examples(Examples, Attr, Value, FilteredExamples),
+		length(FilteredExamples, SubTotal),
+		subtree_error(Subtree, ZScore, FilteredExamples, SubError),
+		Acc1 is Acc + (SubTotal * SubError) / Total,
+		subtrees_error(Subtrees, Attr, ZScore, Examples, Total, Acc1, Error).
 
 :- end_object.

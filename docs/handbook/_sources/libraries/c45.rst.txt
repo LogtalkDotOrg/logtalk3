@@ -64,6 +64,12 @@ Implemented features
   distributed to all branches during tree construction; gain ratio
   computation uses only examples with known values for the attribute
   being evaluated
+- Tree pruning using pessimistic error pruning (PEP): estimates error
+  rates using the upper confidence bound of the binomial distribution
+  (Wilson score interval) with a configurable confidence factor (default
+  0.25) and minimum instances per leaf (default 2); replaces subtrees
+  with leaf nodes when doing so would not increase the estimated error;
+  helps reduce overfitting and improve generalization
 - Export of learned decision trees as lists of predicate clauses or to
   files
 - Pretty-printing of learned decision trees
@@ -71,8 +77,6 @@ Implemented features
 Limitations
 -----------
 
-- No tree pruning (builds full unpruned trees, which may lead to
-  overfitting on training data)
 - No incremental learning (the tree must be rebuilt from scratch when
   new examples are added)
 
@@ -134,6 +138,22 @@ To learn a decision tree from a dataset:
 ::
 
    | ?- c45::learn(play_tennis, Tree).
+
+To prune a learned tree with the default parameters (confidence factor
+0.25, minimum instances per leaf 2):
+
+::
+
+   | ?- c45::learn(breast_cancer, Tree),
+        c45::prune(breast_cancer, Tree, PrunedTree).
+
+To prune a learned tree with both custom confidence factor and minimum
+instances per leaf:
+
+::
+
+   | ?- c45::learn(breast_cancer, Tree),
+        c45::prune(breast_cancer, Tree, 0.1, 3, PrunedTree).
 
 To export the tree as a list of predicate clauses:
 
