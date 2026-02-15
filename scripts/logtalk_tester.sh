@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on January 29, 2026
+##   Last updated on February 15, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -116,11 +116,11 @@ coverage_goal=$coverage_default_goal
 format_decimal() {
     local num=$1
     local places=$2
-    LC_NUMERIC=C printf "%.${places}f" "$num"
+    LC_NUMERIC=C
+	printf "%.${places}f" "$num"
 }
 
 run_testset() {
-	start_time="$(date +%s)"
 	unit=$(dirname "$1")
 	unit_short=${unit#$prefix}
 	cd "$unit" || exit 1
