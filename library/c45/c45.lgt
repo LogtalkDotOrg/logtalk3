@@ -398,8 +398,8 @@
 	tree_to_clauses_(leaf(Class), Functor, AttributeNames, Bindings, [Clause]) :-
 		build_clause(Functor, AttributeNames, Bindings, Class, Clause).
 	tree_to_clauses_(tree(Attribute, threshold(Threshold), LeftTree, RightTree), Functor, AttributeNames, Bindings, Clauses) :-
-		tree_to_clauses_(LeftTree, Functor, AttributeNames, [Attribute- =<(Threshold)| Bindings], LeftClauses),
-		tree_to_clauses_(RightTree, Functor, AttributeNames, [Attribute- >(Threshold)| Bindings], RightClauses),
+		tree_to_clauses_(LeftTree, Functor, AttributeNames, [Attribute-(=<(Threshold))| Bindings], LeftClauses),
+		tree_to_clauses_(RightTree, Functor, AttributeNames, [Attribute-(>(Threshold))| Bindings], RightClauses),
 		append(LeftClauses, RightClauses, Clauses).
 	tree_to_clauses_(tree(Attribute, Subtrees), Functor, AttributeNames, Bindings, Clauses) :-
 		subtrees_to_clauses(Subtrees, Attribute, Functor, AttributeNames, Bindings, Clauses).
