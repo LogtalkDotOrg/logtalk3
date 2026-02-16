@@ -89,7 +89,6 @@
 	example( 49, setosa,     [sepal_length-5.3, sepal_width-3.7, petal_length-1.5, petal_width-0.2]).
 	example( 50, setosa,     [sepal_length-5.0, sepal_width-3.3, petal_length-1.4, petal_width-0.2]).
 
-
 	example( 51, versicolor, [sepal_length-7.0, sepal_width-3.2, petal_length-4.7, petal_width-1.4]).
 	example( 52, versicolor, [sepal_length-6.4, sepal_width-3.2, petal_length-4.5, petal_width-1.5]).
 	example( 53, versicolor, [sepal_length-6.9, sepal_width-3.1, petal_length-4.9, petal_width-1.5]).

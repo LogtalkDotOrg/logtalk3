@@ -331,4 +331,3 @@
 	example(286, recurrence_events, [age-'50_59', menopause-ge40, tumor_size-'30_34', inv_nodes-'3_5', node_caps-no, deg_malig-'3', breast-left, breast_quad-left_low, irradiat-no]).
 
 :- end_object.
-

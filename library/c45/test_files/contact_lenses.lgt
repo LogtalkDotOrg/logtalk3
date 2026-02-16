@@ -64,4 +64,3 @@
 	example(24, none, [age-presbyopic,      spectacle_prescription-hypermetrope, astigmatism-yes, tear_production_rate-reduced]).
 
 :- end_object.
-

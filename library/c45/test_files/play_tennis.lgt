@@ -54,4 +54,3 @@
 	example(14, no,  [outlook-rain,     temperature-mild, humidity-high,   wind-strong]).
 
 :- end_object.
-

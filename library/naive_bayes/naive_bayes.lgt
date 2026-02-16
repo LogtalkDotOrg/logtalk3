@@ -108,7 +108,8 @@
 		compute_priors_list(UniqueClasses, Labels, Total, ClassPriors).
 
 	remove_duplicates_sorted([], []).
-	remove_duplicates_sorted([X], [X]) :- !.
+	remove_duplicates_sorted([X], [X]) :-
+		!.
 	remove_duplicates_sorted([X, X| Xs], Ys) :-
 		!,
 		remove_duplicates_sorted([X| Xs], Ys).

@@ -338,4 +338,3 @@
 		c45::predict(Tree, [age-'30_39', menopause-premeno, tumor_size-'25_29', inv_nodes-'3_5', node_caps-yes, deg_malig-'3', breast-left, breast_quad-left_low, irradiat-yes], Class).
 
 :- end_object.
-

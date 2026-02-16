@@ -156,7 +156,6 @@
 			Tree = tree(BestAttribute, Subtrees)
 		).
 
-
 	% build_subtrees/6 - build subtree for each value of the best attribute
 	build_subtrees([], _, _, _, _, []).
 	build_subtrees([Value| Values], Attribute, Examples, AttributeNames, Attributes, [Value-Subtree| Subtrees]) :-
@@ -400,7 +399,6 @@
 		select_best(Rest, Attr, GR, Best).
 	select_best([_| Rest], CurrentBest, CurrentGR, Best) :-
 		select_best(Rest, CurrentBest, CurrentGR, Best).
-
 
 	% classifier_to_clauses/4 - convert tree to list of clauses
 	classifier_to_clauses(Dataset, Tree, Functor, Clauses) :-
