@@ -59,16 +59,35 @@
 		]
 	]).
 
+	:- uses(format, [
+		format/2, format/3
+	]).
+
 	:- uses(list, [
 		append/3, length/2, member/2, memberchk/2, msort/2
 	]).
 
-	% predict/3 - predict class for an instance using a learned tree
-	% Instance is a list of Attribute-Value pairs
+	:- uses(numberlist, [
+		min/2, max/2
+	]).
+
+	:- uses(pairs, [
+		keys/2
+	]).
+
+	learn(Dataset, Tree) :-
+		dataset_attributes(Dataset, Attributes),
+		keys(Attributes, AttributeNames),
+		findall(
+			Id-Class-AVs,
+			Dataset::example(Id, Class, AVs),
+			Examples
+		),
+		build_tree(Examples, AttributeNames, Attributes, Tree).
+
 	predict(Tree, Instance, Class) :-
 		predict_tree(Tree, Instance, Class).
 
-	% predict_tree/3 - traverse tree to find class
 	predict_tree(leaf(Class), _, Class).
 	predict_tree(tree(Attribute, threshold(Threshold), LeftTree, RightTree), Instance, Class) :-
 		!,
@@ -91,37 +110,6 @@
 		;	memberchk(Value-Subtree, Subtrees),
 			predict_tree(Subtree, Instance, Class)
 		).
-
-	% majority_vote/2 - find the most common class in a list
-	majority_vote([Class], Class) :-
-		!.
-	majority_vote(Classes, MajorityClass) :-
-		msort(Classes, Sorted),
-		count_occurrences(Sorted, Counts),
-		max_count(Counts, MajorityClass).
-
-	:- uses(numberlist, [
-		min/2, max/2
-	]).
-
-	:- uses(pairs, [
-		keys/2
-	]).
-
-	:- uses(format, [
-		format/2, format/3
-	]).
-
-	% learn/2 - main entry point
-	learn(Dataset, Tree) :-
-		dataset_attributes(Dataset, Attributes),
-		keys(Attributes, AttributeNames),
-		findall(
-			Id-Class-AVs,
-			Dataset::example(Id, Class, AVs),
-			Examples
-		),
-		build_tree(Examples, AttributeNames, Attributes, Tree).
 
 	% build_tree/4 - recursive tree construction
 	build_tree([], _, _, leaf(unknown)) :-
@@ -214,7 +202,15 @@
 	all_same_class([_-Class-_| Rest], Class) :-
 		all_same_class(Rest, Class).
 
-	% majority_class/2 - find the most common class
+	% majority_vote/2 - find the most common class in a list
+	majority_vote([Class], Class) :-
+		!.
+	majority_vote(Classes, MajorityClass) :-
+		msort(Classes, Sorted),
+		count_occurrences(Sorted, Counts),
+		max_count(Counts, MajorityClass).
+
+	% majority_class/2 - find the most common class in the examples
 	majority_class(Examples, Class) :-
 		findall(C, member(_-C-_, Examples), Classes),
 		msort(Classes, Sorted),
