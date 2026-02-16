@@ -35,7 +35,6 @@ Naive Bayes classifier with Laplace smoothing and Gaussian distribution support.
    - Categorical features: Uses Laplace smoothing to handle unseen feature values.
    - Continuous features: Uses Gaussian (normal) distribution to model numeric features.
    - Classifier representation: The learned classifier is represented as ``Functor(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams)`` where ``FeatureParams`` contains the learned probabilities or statistics for each feature.
-   - Export format: The classifier can be exported as a list of clauses.
 
 | **Inherited public predicates:**
 |     :ref:`classifier_protocol/0::classifier_to_clauses/4`  :ref:`classifier_protocol/0::classifier_to_file/4`  :ref:`classifier_protocol/0::learn/2`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  
@@ -83,5 +82,5 @@ Operators
 
 .. seealso::
 
-   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`c45 <c45/0>`
+   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`c45 <c45/0>`, :ref:`knn <knn/0>`
 

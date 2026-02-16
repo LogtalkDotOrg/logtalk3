@@ -6527,6 +6527,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`knn <knn/0::learn/3>`
 * :ref:`metagol <metagol/0::learn/3>`
 
 ``learn_seq/2``
@@ -9308,6 +9309,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`classifier_protocol <classifier_protocol/0::predict/3>`
 
+``predict/4``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`knn <knn/0::predict/4>`
+
 ``predict_probabilities/3``
 ---------------------------
 
@@ -9316,7 +9327,18 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`knn <knn/0::predict_probabilities/3>`
 * :ref:`naive_bayes <naive_bayes/0::predict_probabilities/3>`
+
+``predict_probabilities/4``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`knn <knn/0::predict_probabilities/4>`
 
 ``prefix/0``
 ------------

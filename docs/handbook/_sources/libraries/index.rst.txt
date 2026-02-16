@@ -72,6 +72,7 @@ directory in the ``NOTES.md`` file.
    json_lines
    json_rpc
    json_schema
+   knn
    linda
    listing
    logging

@@ -76,6 +76,7 @@ logtalk_library_path(json_rpc, library('json_rpc/')).
 logtalk_library_path(json_lines, library('json_lines/')).
 logtalk_library_path(json_schema, library('json_schema/')).
 logtalk_library_path(json_ld, library('json_ld/')).
+logtalk_library_path(knn, library('knn/')).
 logtalk_library_path(linda, library('linda/')).
 logtalk_library_path(listing, library('listing/')).
 logtalk_library_path(logging, library('logging/')).

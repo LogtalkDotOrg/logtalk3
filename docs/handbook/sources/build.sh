@@ -118,6 +118,7 @@ sed '1,19d' ../../../library/json_lines/NOTES.md | pandoc -f gfm -t rst -o libra
 sed '1,19d' ../../../library/json_rpc/NOTES.md | pandoc -f gfm -t rst -o libraries/json_rpc.rst
 sed '1,19d' ../../../library/json_schema/NOTES.md | pandoc -f gfm -t rst -o libraries/json_schema.rst
 sed '1,19d' ../../../library/linda/NOTES.md | pandoc -f gfm -t rst -o libraries/linda.rst
+sed '1,19d' ../../../library/knn/NOTES.md | pandoc -f gfm -t rst -o libraries/knn.rst
 sed '1,19d' ../../../library/listing/NOTES.md | pandoc -f gfm -t rst -o libraries/listing.rst
 sed '1,19d' ../../../library/logging/NOTES.md | pandoc -f gfm -t rst -o libraries/logging.rst
 sed '1,19d' ../../../library/loops/NOTES.md | pandoc -f gfm -t rst -o libraries/loops.rst

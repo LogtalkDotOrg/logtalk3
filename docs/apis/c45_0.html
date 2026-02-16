@@ -122,6 +122,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#json-lines"><span class="xref std std-ref">json_lines</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#json-rpc"><span class="xref std std-ref">json_rpc</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#json-schema"><span class="xref std std-ref">json_schema</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#knn"><span class="xref std std-ref">knn</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><span class="xref std std-ref">lgtdoc</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><span class="xref std std-ref">library</span></a></li>
@@ -264,7 +265,6 @@
 <li><p>Continuous attributes: For continuous (numeric) attributes, the tree uses binary threshold splits represented as <code class="docutils literal notranslate"><span class="pre">tree(Attribute,</span> <span class="pre">threshold(Threshold),</span> <span class="pre">LeftSubtree,</span> <span class="pre">RightSubtree)</span></code> where <code class="docutils literal notranslate"><span class="pre">LeftSubtree</span></code> corresponds to values <code class="docutils literal notranslate"><span class="pre">=&lt;</span> <span class="pre">Threshold</span></code> and <code class="docutils literal notranslate"><span class="pre">RightSubtree</span></code> to values <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">Threshold</span></code>.</p></li>
 <li><p>Missing values: Missing attribute values are represented using anonymous variables. During tree construction, examples with missing values for the split attribute are distributed to all branches. Entropy and gain calculations use only examples with known values for the attribute being evaluated.</p></li>
 <li><p>Tree pruning: The <code class="docutils literal notranslate"><span class="pre">prune/3</span></code> and <code class="docutils literal notranslate"><span class="pre">prune/5</span></code> predicates implement pessimistic error pruning (PEP), which estimates error rates using the upper confidence bound of the binomial distribution (Wilson score interval) with a configurable confidence factor (default 0.25, range <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">1.0)</span></code>) and minimum instances per leaf (default 2). Subtrees are replaced with leaf nodes when doing so would not increase the estimated error.</p></li>
-<li><p>Export format: The tree can be exported as a list of Prolog/Logtalk clauses of the form <code class="docutils literal notranslate"><span class="pre">Class(AttributeValue1,</span> <span class="pre">AttributeValue2,</span> <span class="pre">...)</span></code>.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -362,7 +362,7 @@
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="dataset_protocol_0.html#dataset-protocol-0"><span class="std std-ref">dataset_protocol</span></a>, <a class="reference internal" href="naive_bayes_0.html#naive-bayes-0"><span class="std std-ref">naive_bayes</span></a></p>
+<p><a class="reference internal" href="dataset_protocol_0.html#dataset-protocol-0"><span class="std std-ref">dataset_protocol</span></a>, <a class="reference internal" href="knn_0.html#knn-0"><span class="std std-ref">knn</span></a>, <a class="reference internal" href="naive_bayes_0.html#naive-bayes-0"><span class="std std-ref">naive_bayes</span></a></p>
 </div>
 </section>
 </section>

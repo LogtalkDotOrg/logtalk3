@@ -608,6 +608,16 @@ To load an entity, always load the library that includes it using the goal ``log
    json_schema(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_schema_3>
    json_schema_protocol <json_schema_protocol_0>
 
+``library/knn/``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   knn <knn_0>
+
 ``library/linda/``
 ------------------
 

@@ -85,21 +85,21 @@
 		c45::learn(play_tennis, Tree),
 		c45::classifier_to_file(play_tennis, Tree, classify, File).
 
-	% print_tree/1 tests
+	% print_classifier/1 tests
 
-	test(c45_print_tree_1_play_tennis, deterministic) :-
+	test(c45_print_classifier_1_play_tennis, deterministic) :-
 		^^suppress_text_output,
 		c45::learn(play_tennis, Tree),
-		c45::print_tree(Tree).
+		c45::print_classifier(Tree).
 
-	test(c45_print_tree_1_leaf, deterministic) :-
+	test(c45_print_classifier_1_leaf, deterministic) :-
 		^^suppress_text_output,
-		c45::print_tree(leaf(yes)).
+		c45::print_classifier(leaf(yes)).
 
-	test(c45_print_tree_1_contact_lenses, deterministic) :-
+	test(c45_print_classifier_1_contact_lenses, deterministic) :-
 		^^suppress_text_output,
 		c45::learn(contact_lenses, Tree),
-		c45::print_tree(Tree).
+		c45::print_classifier(Tree).
 
 	% learn/2 tests - iris dataset (continuous attributes)
 
@@ -116,12 +116,12 @@
 		c45::classifier_to_clauses(iris, Tree, classify, Clauses),
 		list::length(Clauses, N).
 
-	% print_tree/1 tests - iris dataset
+	% print_classifier/1 tests - iris dataset
 
-	test(c45_print_tree_1_iris, deterministic) :-
+	test(c45_print_classifier_1_iris, deterministic) :-
 		^^suppress_text_output,
 		c45::learn(iris, Tree),
-		c45::print_tree(Tree).
+		c45::print_classifier(Tree).
 
 	% learn/2 tests - breast_cancer dataset (missing values)
 
@@ -138,12 +138,12 @@
 		c45::classifier_to_clauses(breast_cancer, Tree, classify, Clauses),
 		list::length(Clauses, N).
 
-	% print_tree/1 tests - breast_cancer dataset
+	% print_classifier/1 tests - breast_cancer dataset
 
-	test(c45_print_tree_1_breast_cancer, deterministic) :-
+	test(c45_print_classifier_1_breast_cancer, deterministic) :-
 		^^suppress_text_output,
 		c45::learn(breast_cancer, Tree),
-		c45::print_tree(Tree).
+		c45::print_classifier(Tree).
 
 	% prune/3 tests - play_tennis dataset
 

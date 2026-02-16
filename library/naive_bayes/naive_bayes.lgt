@@ -31,10 +31,9 @@
 			'Algorithm' - 'Naive Bayes is a probabilistic classifier based on Bayes theorem with strong (naive) independence assumptions between features.',
 			'Categorical features' - 'Uses Laplace smoothing to handle unseen feature values.',
 			'Continuous features' - 'Uses Gaussian (normal) distribution to model numeric features.',
-			'Classifier representation' - 'The learned classifier is represented as ``Functor(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams)`` where ``FeatureParams`` contains the learned probabilities or statistics for each feature.',
-			'Export format' - 'The classifier can be exported as a list of clauses.'
+			'Classifier representation' - 'The learned classifier is represented as ``Functor(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams)`` where ``FeatureParams`` contains the learned probabilities or statistics for each feature.'
 		],
-		see_also is [dataset_protocol, c45]
+		see_also is [dataset_protocol, c45, knn]
 	]).
 
 	:- public(predict_probabilities/3).
@@ -60,7 +59,6 @@
 		format/2, format/3
 	]).
 
-	% learn/2 - main entry point
 	learn(Dataset, Classifier) :-
 		% Get attribute information from dataset
 		dataset_attributes(Dataset, Attributes),
@@ -173,7 +171,6 @@
 		variance(Values, Variance),
 		learn_continuous_stats_by_class(Index, Classes, Instances, Labels, Pairs).
 
-	% Prediction using classifier term
 	predict(Classifier, Instance, Class) :-
 		predict_probabilities(Classifier, Instance, Probabilities),
 		max_probability(Probabilities, Class, _).
@@ -264,13 +261,9 @@
 			Attributes
 		).
 
-	% classifier_to_clauses/4 - convert classifier to a clause that can be loaded
-	% The exported clause is: Functor(Classifier)
-	% This can be loaded and then used with predict/3 and predict_probability/3
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Clause =.. [Functor, Classifier].
 
-	% classifier_to_file/4 - export classifier to a file
 	classifier_to_file(Dataset, Classifier, Functor, File) :-
 		classifier_to_clauses(Dataset, Classifier, Functor, Clauses),
 		open(File, write, Stream),
@@ -290,7 +283,6 @@
 		format(Stream, '~q.~n', [Clause]),
 		write_clauses(Clauses, Stream).
 
-	% print_classifier/1 - pretty print the classifier
 	print_classifier(Classifier) :-
 		Classifier = nb_classifier(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams),
 		format('Naive Bayes Classifier~n', []),

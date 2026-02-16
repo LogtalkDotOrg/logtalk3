@@ -9,8 +9,8 @@ objects implementing the ``dataset_protocol`` protocol. Classifiers are
 represented as objects implementing the ``classifier_protocol``
 protocol.
 
-Logtalk currently provides ``c45`` and ``naive_bayes`` classifiers. See
-these libraries documentation for details.
+Logtalk currently provides ``c45``, ``knn``, and ``naive_bayes``
+classifiers. See these libraries documentation for details.
 
 API documentation
 -----------------
@@ -27,16 +27,3 @@ To load all entities in this library, load the ``loader.lgt`` file:
 ::
 
    | ?- logtalk_load(classifier_protocols(loader)).
-
-Comparison between classifiers
-------------------------------
-
-======================== ================= ==========================
-Aspect                   Naive Bayes       C4.5
-======================== ================= ==========================
-**Speed**                Very fast         Slower (tree construction)
-**Interpretability**     Probability-based Decision rules
-**Continuous Features**  Native (Gaussian) Threshold splits
-**Feature Dependencies** Ignored           Captured through splits
-**Export Format**        Clauses           Clauses
-======================== ================= ==========================
