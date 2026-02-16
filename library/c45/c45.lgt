@@ -140,6 +140,7 @@
 		;	BestAttribute = threshold(Attr, Threshold) ->
 			% Continuous attribute with binary threshold split
 			filter_examples_threshold(Examples, Attr, Threshold, Left, Right),
+			Tree = tree(Attr, threshold(Threshold), LeftTree, RightTree),
 			(	Left == [] ->
 				majority_class(Examples, ClassL),
 				LeftTree = leaf(ClassL)
@@ -149,8 +150,7 @@
 				majority_class(Examples, ClassR),
 				RightTree = leaf(ClassR)
 			;	build_tree(Right, AttributeNames, Attributes, RightTree)
-			),
-			Tree = tree(Attr, threshold(Threshold), LeftTree, RightTree)
+			)
 		;	memberchk(BestAttribute-Values, Attributes),
 			build_subtrees(Values, BestAttribute, Examples, AttributeNames, Attributes, Subtrees),
 			Tree = tree(BestAttribute, Subtrees)
