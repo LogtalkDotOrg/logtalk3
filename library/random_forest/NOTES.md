@@ -191,6 +191,7 @@ Usage
 	% Print a summary of the random forest
 	| ?- random_forest::learn(play_tennis, Classifier),
 	     random_forest::print_classifier(Classifier).
+
 	Random Forest Classifier
 	========================
 

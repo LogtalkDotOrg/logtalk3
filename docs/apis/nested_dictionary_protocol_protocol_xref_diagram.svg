@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-151 1158,-151 1158,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol nested_dictionary_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;02&#45;16, 17:48</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;02&#45;16, 20:51</text>
 <g id="clust1" class="cluster">
 <title>cluster_nested_dictionary_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="nested_dictionary_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 1134,-54.25 1134,-54.25 1140,-54.25 1146,-60.25 1146,-66.25 1146,-66.25 1146,-127 1146,-127 1146,-133 1140,-139 1134,-139 1134,-139 20,-139 20,-139 14,-139 8,-133 8,-127 8,-127 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L23" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L23">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L23" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L23">
 <text xml:space="preserve" text-anchor="start" x="20" y="-121.5" font-family="Monospace" font-size="10.00" fill="dimgray">nested_dictionary_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>new/1</title>
 <polygon fill="springgreen" stroke="black" points="78.12,-100.25 17.88,-100.25 17.88,-64.25 78.12,-64.25 78.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="25.88" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L33">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L33">
 <text xml:space="preserve" text-anchor="start" x="31.12" y="-84.17" font-family="Monospace" font-size="11.00">new/1</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>empty/1</title>
 <polygon fill="springgreen" stroke="black" points="169.88,-100.25 96.12,-100.25 96.12,-64.25 169.88,-64.25 169.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="104.12" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L40">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="109.38" y="-84.17" font-family="Monospace" font-size="11.00">empty/1</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>as_nested_dictionary/2</title>
 <polygon fill="springgreen" stroke="black" points="362.5,-100.25 187.5,-100.25 187.5,-64.25 362.5,-64.25 362.5,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="195.5" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L47">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L47">
 <text xml:space="preserve" text-anchor="start" x="200.75" y="-84.17" font-family="Monospace" font-size="11.00">as_nested_dictionary/2</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>as_curly_bracketed/2</title>
 <polygon fill="springgreen" stroke="black" points="541.75,-100.25 380.25,-100.25 380.25,-64.25 541.75,-64.25 541.75,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="388.25" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L54">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="393.5" y="-84.17" font-family="Monospace" font-size="11.00">as_curly_bracketed/2</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>lookup_in/3</title>
 <polygon fill="springgreen" stroke="black" points="660.38,-100.25 559.62,-100.25 559.62,-64.25 660.38,-64.25 660.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="567.62" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L61">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L61">
 <text xml:space="preserve" text-anchor="start" x="572.88" y="-84.17" font-family="Monospace" font-size="11.00">lookup_in/3</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>update_in/4</title>
 <polygon fill="springgreen" stroke="black" points="779.38,-100.25 678.62,-100.25 678.62,-64.25 779.38,-64.25 779.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="686.62" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L68">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L68">
 <text xml:space="preserve" text-anchor="start" x="691.88" y="-84.17" font-family="Monospace" font-size="11.00">update_in/4</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>update_in/5</title>
 <polygon fill="springgreen" stroke="black" points="898.38,-100.25 797.62,-100.25 797.62,-64.25 898.38,-64.25 898.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="805.62" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L75">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L75">
 <text xml:space="preserve" text-anchor="start" x="810.88" y="-84.17" font-family="Monospace" font-size="11.00">update_in/5</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>insert_in/4</title>
 <polygon fill="springgreen" stroke="black" points="1017.38,-100.25 916.62,-100.25 916.62,-64.25 1017.38,-64.25 1017.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="924.62" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L82">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L82">
 <text xml:space="preserve" text-anchor="start" x="929.88" y="-84.17" font-family="Monospace" font-size="11.00">insert_in/4</text>
 </a>
 </g>
@@ -141,7 +141,7 @@
 <title>delete_in/4</title>
 <polygon fill="springgreen" stroke="black" points="1136.38,-100.25 1035.62,-100.25 1035.62,-64.25 1136.38,-64.25 1136.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1043.62" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/86ef0cbf977539e8ebe0906d62e4cd5b0533399a/library/nested_dictionaries/nested_dictionary_protocol.lgt#L89">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/72f690cb1223e5963e91c65815f1e1781c7315b8/library/nested_dictionaries/nested_dictionary_protocol.lgt#L89">
 <text xml:space="preserve" text-anchor="start" x="1048.88" y="-84.17" font-family="Monospace" font-size="11.00">delete_in/4</text>
 </a>
 </g>
