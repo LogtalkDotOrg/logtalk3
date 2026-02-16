@@ -301,7 +301,7 @@
 
 	normalize_weights([], _, []).
 	normalize_weights([Class-Weight| ClassWeights], Total, [Class-Probability| ClassProbabilities]) :-
-		Probability is Weight / Total,
+		Probability is float(Weight / Total),
 		normalize_weights(ClassWeights, Total, ClassProbabilities).
 
 	max_probability([Class-Probability], Class, Probability) :-
