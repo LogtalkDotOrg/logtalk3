@@ -125,6 +125,11 @@
 		(	BestAttribute == none ->
 			majority_class(Examples, Class),
 			Tree = leaf(Class)
+		;	BestAttribute = threshold(Attr, Threshold),
+			Threshold == none ->
+			% Continuous attribute with no valid threshold (all values identical)
+			majority_class(Examples, Class),
+			Tree = leaf(Class)
 		;	BestAttribute = threshold(Attr, Threshold) ->
 			% Continuous attribute with binary threshold split
 			filter_examples_threshold(Examples, Attr, Threshold, Left, Right),
