@@ -19,12 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(naive_bayes).
+:- object(naive_bayes,
+	implements(classifier_protocol)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-15,
+		date is 2026-02-16,
 		comment is 'Naive Bayes classifier with Laplace smoothing and Gaussian distribution support. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Naive Bayes is a probabilistic classifier based on Bayes theorem with strong (naive) independence assumptions between features.',
@@ -36,46 +37,11 @@
 		see_also is [dataset_protocol, c45]
 	]).
 
-	:- public(learn/2).
-	:- mode(learn(+object_identifier, -compound), one).
-	:- info(learn/2, [
-		comment is 'Learns a Naive Bayes classifier from the given dataset object.',
-		argnames is ['Dataset', 'Classifier']
-	]).
-
-	:- public(predict/3).
-	:- mode(predict(+compound, +list, -atom), one).
-	:- info(predict/3, [
-		comment is 'Predicts the class label for a new instance using the learned classifier. The instance is a list of ``Attribute-Value`` pairs.',
-		argnames is ['Classifier', 'Instance', 'Class']
-	]).
-
 	:- public(predict_probabilities/3).
 	:- mode(predict_probabilities(+compound, +list, -list), one).
 	:- info(predict_probabilities/3, [
 		comment is 'Predicts class probabilities for a new instance using the learned classifier. Returns a list of ``Class-Probability`` pairs. The instance is a list of ``Attribute-Value`` pairs.',
 		argnames is ['Classifier', 'Instance', 'Probabilities']
-	]).
-
-	:- public(classifier_to_clauses/3).
-	:- mode(classifier_to_clauses(+compound, +callable, -list(clause)), one).
-	:- info(classifier_to_clauses/3, [
-		comment is 'Converts a Naive Bayes classifier into a list of predicate clauses. ``Functor`` is the functor for the generated clause. Returns a list with a single clause ``Functor(Classifier)`` that can be loaded and used with the ``predict/3`` and ``predict_probability/3`` predicates.',
-		argnames is ['Classifier', 'Functor', 'Clauses']
-	]).
-
-	:- public(classifier_to_file/3).
-	:- mode(classifier_to_file(+compound, +callable, +atom), one).
-	:- info(classifier_to_file/3, [
-		comment is 'Exports a Naive Bayes classifier to a file. ``Functor`` is the functor for the generated clause. The exported clauses can be loaded and used with the ``predict/3`` and ``predict_probability/3`` predicates.',
-		argnames is ['Classifier', 'Functor', 'File']
-	]).
-
-	:- public(print_classifier/1).
-	:- mode(print_classifier(+compound), one).
-	:- info(print_classifier/1, [
-		comment is 'Prints a Naive Bayes classifier to the current output stream in a human-readable format.',
-		argnames is ['Classifier']
 	]).
 
 	:- uses(list, [
@@ -298,15 +264,15 @@
 			Attributes
 		).
 
-	% classifier_to_clauses/3 - convert classifier to a clause that can be loaded
+	% classifier_to_clauses/4 - convert classifier to a clause that can be loaded
 	% The exported clause is: Functor(Classifier)
 	% This can be loaded and then used with predict/3 and predict_probability/3
-	classifier_to_clauses(Classifier, Functor, [Clause]) :-
+	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Clause =.. [Functor, Classifier].
 
-	% classifier_to_file/3 - export classifier to a file
-	classifier_to_file(Classifier, Functor, File) :-
-		classifier_to_clauses(Classifier, Functor, Clauses),
+	% classifier_to_file/4 - export classifier to a file
+	classifier_to_file(Dataset, Classifier, Functor, File) :-
+		classifier_to_clauses(Dataset, Classifier, Functor, Clauses),
 		open(File, write, Stream),
 		write_file_header(Functor, Stream),
 		write_clauses(Clauses, Stream),

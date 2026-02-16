@@ -23,6 +23,6 @@
 	logtalk_load(types(loader)),
 	logtalk_load(statistics(loader)),
 	logtalk_load(format(loader)),
-	logtalk_load(c45(dataset_protocol)),
+	logtalk_load(classifier_protocols(loader)),
 	logtalk_load(naive_bayes, [optimize(on)])
 )).

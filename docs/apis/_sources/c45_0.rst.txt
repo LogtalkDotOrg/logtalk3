@@ -15,12 +15,14 @@ C4.5 decision tree learning algorithm. Builds a decision tree from a dataset obj
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-15
+| **Date:** 2026-02-16
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
+| **Implements:**
+|    ``public`` :ref:`classifier_protocol <classifier_protocol/0>`
 | **Uses:**
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
@@ -37,7 +39,7 @@ C4.5 decision tree learning algorithm. Builds a decision tree from a dataset obj
    - Export format: The tree can be exported as a list of Prolog/Logtalk clauses of the form ``Class(AttributeValue1, AttributeValue2, ...)``.
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`classifier_protocol/0::classifier_to_clauses/4`  :ref:`classifier_protocol/0::classifier_to_file/4`  :ref:`classifier_protocol/0::learn/2`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  
 
 .. contents::
    :local:
@@ -45,82 +47,6 @@ C4.5 decision tree learning algorithm. Builds a decision tree from a dataset obj
 
 Public predicates
 -----------------
-
-.. index:: learn/2
-.. _c45/0::learn/2:
-
-``learn/2``
-^^^^^^^^^^^
-
-Learns a decision tree from the given dataset object.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``learn(Dataset,Tree)``
-| **Mode and number of proofs:**
-|    ``learn(+object_identifier,-tree)`` - ``one``
-
-
-------------
-
-.. index:: tree_to_clauses/4
-.. _c45/0::tree_to_clauses/4:
-
-``tree_to_clauses/4``
-^^^^^^^^^^^^^^^^^^^^^
-
-Converts a decision tree into a list of predicate clauses. ``Functor`` is the functor for the generated clauses. Each clause has the form ``Functor(AttributeValue1, ..., AttributeValueN, Class)``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``tree_to_clauses(Dataset,Tree,Functor,Clauses)``
-| **Mode and number of proofs:**
-|    ``tree_to_clauses(+object_identifier,+tree,+callable,-list(clause))`` - ``one``
-
-
-------------
-
-.. index:: tree_to_file/4
-.. _c45/0::tree_to_file/4:
-
-``tree_to_file/4``
-^^^^^^^^^^^^^^^^^^
-
-Exports a decision tree as predicate clauses to a file. ``Functor`` is the functor for the generated clauses.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``tree_to_file(Dataset,Tree,Functor,File)``
-| **Mode and number of proofs:**
-|    ``tree_to_file(+object_identifier,+tree,+callable,+atom)`` - ``one``
-
-
-------------
-
-.. index:: print_tree/1
-.. _c45/0::print_tree/1:
-
-``print_tree/1``
-^^^^^^^^^^^^^^^^
-
-Prints a decision tree to the current output stream in a human-readable format.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``print_tree(Tree)``
-| **Mode and number of proofs:**
-|    ``print_tree(+tree)`` - ``one``
-
-
-------------
 
 .. index:: prune/5
 .. _c45/0::prune/5:
@@ -187,5 +113,5 @@ Operators
 
 .. seealso::
 
-   :ref:`dataset_protocol <dataset_protocol/0>`
+   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`naive_bayes <naive_bayes/0>`
 

@@ -28,19 +28,14 @@ instead of information gain for attribute selection, which avoids bias
 towards attributes with many values. The implementation supports both
 discrete (categorical) and continuous (numeric) attributes.
 
-The library provides predicates for learning a decision tree from a
-dataset and exporting the learned tree as a list of predicate clauses
-or to a file.
+The library implements the `classifier_protocol` defined in the
+`classifier_protocols` library. It provides predicates for learning a 
+decision tree from a dataset, optionally prune it, using it to make
+predictions, and exporting it as a list of predicate clauses or to a file.
 
 Datasets are represented as objects implementing the `dataset_protocol`
-protocol. This protocol defines the following predicates:
-
-- `attribute_values/2` - enumerates attributes and their possible values;
-  for discrete attributes, the values is a list of possible values; for
-  continuous attributes, the value is the atom `continuous`
-- `class/1` - returns the name of the target class attribute
-- `class_values/1` - returns the list of possible class values
-- `example/3` - enumerates the examples in the dataset
+protocol from the `classifier_protocols` library. See `test_files` directory
+for examples.
 
 
 API documentation
@@ -79,7 +74,8 @@ Implemented features
   variables): examples with missing values for an attribute are
   distributed to all branches during tree construction; gain ratio
   computation uses only examples with known values for the attribute
-  being evaluated
+  being evaluated; prediction with missing values uses majority voting
+  by exploring all possible branches and selecting the most common class
 - Tree pruning using pessimistic error pruning (PEP): estimates error
   rates using the upper confidence bound of the binomial distribution
   (Wilson score interval) with a configurable confidence factor (default
@@ -186,4 +182,9 @@ To print the tree to the current output:
 
 	| ?- c45::learn(play_tennis, Tree),
 	     c45::print_tree(Tree).
+
+To predict the class for a new instance (as a list of attribute-value pairs):
+
+	| ?- c45::learn(play_tennis, Tree),
+	     c45::predict(Tree, [outlook-sunny, temperature-hot, humidity-high, wind-weak], Class).
 

@@ -19,12 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(c45).
+:- object(c45,
+	implements(classifier_protocol)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-15,
+		date is 2026-02-16,
 		comment is 'C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes, handles missing values, and supports tree pruning.',
 		remarks is [
 			'Algorithm' - 'C4.5 is an extension of the ID3 algorithm that uses information gain ratio instead of information gain for attribute selection, which avoids bias towards attributes with many values.',
@@ -34,35 +35,7 @@
 			'Tree pruning' - 'The ``prune/3`` and ``prune/5`` predicates implement pessimistic error pruning (PEP), which estimates error rates using the upper confidence bound of the binomial distribution (Wilson score interval) with a configurable confidence factor (default 0.25, range ``(0.0, 1.0)``) and minimum instances per leaf (default 2). Subtrees are replaced with leaf nodes when doing so would not increase the estimated error.',
 			'Export format' - 'The tree can be exported as a list of Prolog/Logtalk clauses of the form ``Class(AttributeValue1, AttributeValue2, ...)``.'
 		],
-		see_also is [dataset_protocol]
-	]).
-
-	:- public(learn/2).
-	:- mode(learn(+object_identifier, -tree), one).
-	:- info(learn/2, [
-		comment is 'Learns a decision tree from the given dataset object.',
-		argnames is ['Dataset', 'Tree']
-	]).
-
-	:- public(tree_to_clauses/4).
-	:- mode(tree_to_clauses(+object_identifier, +tree, +callable, -list(clause)), one).
-	:- info(tree_to_clauses/4, [
-		comment is 'Converts a decision tree into a list of predicate clauses. ``Functor`` is the functor for the generated clauses. Each clause has the form ``Functor(AttributeValue1, ..., AttributeValueN, Class)``.',
-		argnames is ['Dataset', 'Tree', 'Functor', 'Clauses']
-	]).
-
-	:- public(tree_to_file/4).
-	:- mode(tree_to_file(+object_identifier, +tree, +callable, +atom), one).
-	:- info(tree_to_file/4, [
-		comment is 'Exports a decision tree as predicate clauses to a file. ``Functor`` is the functor for the generated clauses.',
-		argnames is ['Dataset', 'Tree', 'Functor', 'File']
-	]).
-
-	:- public(print_tree/1).
-	:- mode(print_tree(+tree), one).
-	:- info(print_tree/1, [
-		comment is 'Prints a decision tree to the current output stream in a human-readable format.',
-		argnames is ['Tree']
+		see_also is [dataset_protocol, naive_bayes]
 	]).
 
 	:- public(prune/5).
@@ -90,6 +63,43 @@
 	:- uses(list, [
 		append/3, length/2, member/2, memberchk/2, msort/2
 	]).
+
+	% predict/3 - predict class for an instance using a learned tree
+	% Instance is a list of Attribute-Value pairs
+	predict(Tree, Instance, Class) :-
+		predict_tree(Tree, Instance, Class).
+
+	% predict_tree/3 - traverse tree to find class
+	predict_tree(leaf(Class), _, Class).
+	predict_tree(tree(Attribute, threshold(Threshold), LeftTree, RightTree), Instance, Class) :-
+		!,
+		memberchk(Attribute-Value, Instance),
+		(	var(Value) ->
+			% Missing value: use majority voting from both branches
+			predict_tree(LeftTree, Instance, LeftClass),
+			predict_tree(RightTree, Instance, RightClass),
+			majority_vote([LeftClass, RightClass], Class)
+		;	Value =< Threshold ->
+			predict_tree(LeftTree, Instance, Class)
+		;	predict_tree(RightTree, Instance, Class)
+		).
+	predict_tree(tree(Attribute, Subtrees), Instance, Class) :-
+		memberchk(Attribute-Value, Instance),
+		(	var(Value) ->
+			% Missing value: use majority voting from all subtrees
+			findall(C, (member(_-Subtree, Subtrees), predict_tree(Subtree, Instance, C)), Classes),
+			majority_vote(Classes, Class)
+		;	memberchk(Value-Subtree, Subtrees),
+			predict_tree(Subtree, Instance, Class)
+		).
+
+	% majority_vote/2 - find the most common class in a list
+	majority_vote([Class], Class) :-
+		!.
+	majority_vote(Classes, MajorityClass) :-
+		msort(Classes, Sorted),
+		count_occurrences(Sorted, Counts),
+		max_count(Counts, MajorityClass).
 
 	:- uses(numberlist, [
 		min/2, max/2
@@ -393,8 +403,8 @@
 		select_best(Rest, CurrentBest, CurrentGR, Best).
 
 
-	% tree_to_clauses/4 - convert tree to list of clauses
-	tree_to_clauses(Dataset, Tree, Functor, Clauses) :-
+	% classifier_to_clauses/4 - convert tree to list of clauses
+	classifier_to_clauses(Dataset, Tree, Functor, Clauses) :-
 		dataset_attributes(Dataset, Attributes),
 		keys(Attributes, AttributeNames),
 		tree_to_clauses_(Tree, Functor, AttributeNames, [], Clauses).
@@ -459,8 +469,8 @@
 		list_to_conjunction(Goals, Rest).
 
 	% tree_to_file/4 - export tree as clauses to a file
-	tree_to_file(Dataset, Tree, Functor, File) :-
-		tree_to_clauses(Dataset, Tree, Functor, Clauses),
+	classifier_to_file(Dataset, Tree, Functor, File) :-
+		classifier_to_clauses(Dataset, Tree, Functor, Clauses),
 		open(File, write, Stream),
 		write_comment_header(Dataset, Functor, Stream),
 		write_clauses(Clauses, Stream),
@@ -494,21 +504,21 @@
 		format(Stream, '~q.~n', [Clause]),
 		write_clauses(Clauses, Stream).
 
-	% print_tree/1 - pretty print the tree
-	print_tree(Tree) :-
-		print_tree(Tree, 0).
+	% print_classifier/1 - pretty print the tree
+	print_classifier(Tree) :-
+		print_classifier(Tree, 0).
 
-	print_tree(leaf(Class), Indent) :-
+	print_classifier(leaf(Class), Indent) :-
 		Spaces is Indent * 2,
 		format('~*c=> ~w~n', [Spaces, 32, Class]).
-	print_tree(tree(Attribute, threshold(Threshold), LeftTree, RightTree), Indent) :-
+	print_classifier(tree(Attribute, threshold(Threshold), LeftTree, RightTree), Indent) :-
 		Spaces is Indent * 2,
 		Indent1 is Indent + 1,
 		format('~*c~w =< ~w:~n', [Spaces, 32, Attribute, Threshold]),
-		print_tree(LeftTree, Indent1),
+		print_classifier(LeftTree, Indent1),
 		format('~*c~w > ~w:~n', [Spaces, 32, Attribute, Threshold]),
-		print_tree(RightTree, Indent1).
-	print_tree(tree(Attribute, Subtrees), Indent) :-
+		print_classifier(RightTree, Indent1).
+	print_classifier(tree(Attribute, Subtrees), Indent) :-
 		print_subtrees(Subtrees, Attribute, Indent).
 
 	print_subtrees([], _, _).
@@ -516,7 +526,7 @@
 		Spaces is Indent * 2,
 		format('~*c~w = ~w:~n', [Spaces, 32, Attribute, Value]),
 		Indent1 is Indent + 1,
-		print_tree(Subtree, Indent1),
+		print_classifier(Subtree, Indent1),
 		print_subtrees(Subtrees, Attribute, Indent).
 
 	dataset_attributes(Dataset, Attributes) :-

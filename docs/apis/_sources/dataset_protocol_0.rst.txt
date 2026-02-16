@@ -11,7 +11,7 @@
 Protocol for datasets used with the C4.5 decision tree learning algorithm.
 
 | **Availability:** 
-|    ``logtalk_load(c45(loader))``
+|    ``logtalk_load(classifier_protocols(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0

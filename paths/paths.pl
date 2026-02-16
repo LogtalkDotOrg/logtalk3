@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on February 15, 2026
+%  Last updated on February 16, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -112,9 +112,10 @@ logtalk_library_path(base58, library('base58/')).
 logtalk_library_path(base64, library('base64/')).
 logtalk_library_path(base85, library('base85/')).
 logtalk_library_path(basic_types, library('basic_types/')).
-logtalk_library_path(coroutining, library('coroutining/')).
 logtalk_library_path(c45, library('c45/')).
 logtalk_library_path(cbor, library('cbor/')).
+logtalk_library_path(classifier_protocols, library('classifier_protocols/')).
+logtalk_library_path(coroutining, library('coroutining/')).
 logtalk_library_path(ccsds, library('ccsds/')).
 logtalk_library_path(csv, library('csv/')).
 logtalk_library_path(datalog, library('datalog/')).

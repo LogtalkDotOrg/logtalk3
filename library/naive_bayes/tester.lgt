@@ -24,7 +24,7 @@
 	logtalk_load(types(loader)),
 	logtalk_load(statistics(loader)),
 	logtalk_load(format(loader)),
-	logtalk_load(c45(dataset_protocol)),
+	logtalk_load(classifier_protocols(loader)),
 	logtalk_load([
 		'test_files/nb_weather_dataset',
 		'test_files/nb_iris_dataset',

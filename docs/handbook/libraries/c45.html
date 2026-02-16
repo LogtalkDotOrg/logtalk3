@@ -92,6 +92,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ccsds.html"><code class="docutils literal notranslate"><span class="pre">ccsds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="classifier_protocols.html"><code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="core.html"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
@@ -211,21 +212,14 @@ is an extension of the ID3 algorithm that uses information gain ratio
 instead of information gain for attribute selection, which avoids bias
 towards attributes with many values. The implementation supports both
 discrete (categorical) and continuous (numeric) attributes.</p>
-<p>The library provides predicates for learning a decision tree from a
-dataset and exporting the learned tree as a list of predicate clauses or
-to a file.</p>
+<p>The library implements the <code class="docutils literal notranslate"><span class="pre">classifier_protocol</span></code> defined in the
+<code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code> library. It provides predicates for learning a
+decision tree from a dataset, optionally prune it, using it to make
+predictions, and exporting it as a list of predicate clauses or to a
+file.</p>
 <p>Datasets are represented as objects implementing the
-<code class="docutils literal notranslate"><span class="pre">dataset_protocol</span></code> protocol. This protocol defines the following
-predicates:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">attribute_values/2</span></code> - enumerates attributes and their possible
-values; for discrete attributes, the values is a list of possible
-values; for continuous attributes, the value is the atom
-<code class="docutils literal notranslate"><span class="pre">continuous</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">class/1</span></code> - returns the name of the target class attribute</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">class_values/1</span></code> - returns the list of possible class values</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">example/3</span></code> - enumerates the examples in the dataset</p></li>
-</ul>
+<code class="docutils literal notranslate"><span class="pre">dataset_protocol</span></code> protocol from the <code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code> library.
+See <code class="docutils literal notranslate"><span class="pre">test_files</span></code> directory for examples.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -259,7 +253,8 @@ midpoints between consecutive sorted values)</p></li>
 variables): examples with missing values for an attribute are
 distributed to all branches during tree construction; gain ratio
 computation uses only examples with known values for the attribute
-being evaluated</p></li>
+being evaluated; prediction with missing values uses majority voting
+by exploring all possible branches and selecting the most common class</p></li>
 <li><p>Tree pruning using pessimistic error pruning (PEP): estimates error
 rates using the upper confidence bound of the binomial distribution
 (Wilson score interval) with a configurable confidence factor (default
@@ -355,6 +350,12 @@ instances per leaf:</p>
 <p>To print the tree to the current output:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> c45<span class="o">::</span>learn(play_tennis, <span class="nv">Tree</span>),
      c45<span class="o">::</span>print_tree(<span class="nv">Tree</span>).
+</pre></div>
+</div>
+<p>To predict the class for a new instance (as a list of attribute-value
+pairs):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> c45<span class="o">::</span>learn(play_tennis, <span class="nv">Tree</span>),
+     c45<span class="o">::</span>predict(<span class="nv">Tree</span>, [outlook<span class="o">-</span>sunny, temperature<span class="o">-</span>hot, humidity<span class="o">-</span>high, wind<span class="o">-</span>weak], <span class="nv">Class</span>).
 </pre></div>
 </div>
 </section>

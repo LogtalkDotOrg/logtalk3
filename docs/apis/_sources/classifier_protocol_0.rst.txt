@@ -1,0 +1,154 @@
+.. index:: single: classifier_protocol
+.. _classifier_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``classifier_protocol``
+=======================
+
+Protocol for datasets used with classifiers.
+
+| **Availability:** 
+|    ``logtalk_load(classifier_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-16
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/2
+.. _classifier_protocol/0::learn/2:
+
+``learn/2``
+^^^^^^^^^^^
+
+Learns a classifier from the given dataset object.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Classifier)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound)`` - ``one``
+
+
+------------
+
+.. index:: predict/3
+.. _classifier_protocol/0::predict/3:
+
+``predict/3``
+^^^^^^^^^^^^^
+
+Predicts the class label for a new instance using the learned classifier. The instance is a list of ``Attribute-Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predict(Classifier,Instance,Class)``
+| **Mode and number of proofs:**
+|    ``predict(+compound,+list,-atom)`` - ``one``
+
+
+------------
+
+.. index:: classifier_to_clauses/4
+.. _classifier_protocol/0::classifier_to_clauses/4:
+
+``classifier_to_clauses/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a classifier into a list of predicate clauses. ``Functor`` is the functor for the generated clause.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``classifier_to_clauses(Dataset,Classifier,Functor,Clauses)``
+| **Mode and number of proofs:**
+|    ``classifier_to_clauses(+object_identifier,+compound,+callable,-list(clause))`` - ``one``
+
+
+------------
+
+.. index:: classifier_to_file/4
+.. _classifier_protocol/0::classifier_to_file/4:
+
+``classifier_to_file/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Exports a classifier to a file. ``Functor`` is the functor for the generated predicate clauses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``classifier_to_file(Dataset,Classifier,Functor,File)``
+| **Mode and number of proofs:**
+|    ``classifier_to_file(+object_identifier,+compound,+callable,+atom)`` - ``one``
+
+
+------------
+
+.. index:: print_classifier/1
+.. _classifier_protocol/0::print_classifier/1:
+
+``print_classifier/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Prints a classifier to the current output stream in a human-readable format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_classifier(Classifier)``
+| **Mode and number of proofs:**
+|    ``print_classifier(+compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`c45 <c45/0>`, :ref:`naive_bayes <naive_bayes/0>`
+

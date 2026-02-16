@@ -22,8 +22,16 @@ ________________________________________________________________________
 =============
 
 Naive Bayes classifier supporting both categorical and continuous (Gaussian)
-features with Laplace smoothing. Uses the same dataset representation and
-similar API as the `c45` library to simplify comparing learned classifiers.
+features with Laplace smoothing.
+
+The library implements the `classifier_protocol` defined in the
+`classifier_protocols` library. It provides predicates for learning a 
+classifier from a dataset, using it to make predications, and exporting
+it as a list of predicate clauses or to a file.
+
+Datasets are represented as objects implementing the `dataset_protocol`
+protocol from the `classifier_protocols` library. See `test_files` directory
+for examples.
 
 
 API documentation
@@ -52,18 +60,10 @@ To test this library predicates, load the `tester.lgt` file:
 Features
 --------
 
-- **Dataset Protocol**: Uses the same `dataset_protocol` as the `c45` library
 - **Categorical Features**: Handles discrete-valued features with Laplace smoothing
 - **Continuous Features**: Uses Gaussian (normal) distribution for numeric features
 - **Classifier Export**: Learned classifiers can be exported as predicate clauses
 - **Probability Estimation**: Provides both class predictions and probability distributions
-
-
-Dataset Format
---------------
-
-Datasets are defined as Logtalk objects implementing the `dataset_protocol`
-protocol defined by the `c45` library. See `test_files` directory for examples.
 
 
 Usage
@@ -132,18 +132,6 @@ Where:
 - `AttributeNames`: List of attribute names in order
 - `FeatureTypes`: List of types (`categorical` or `continuous`)
 - `FeatureParams`: List of learned parameters for each feature
-
-
-Comparison with C4.5
---------------------
-
-| Aspect | Naive Bayes | C4.5 |
-|--------|-------------|------|
-| **Speed** | Very fast | Slower (tree construction) |
-| **Interpretability** | Probability-based | Decision rules |
-| **Continuous Features** | Native (Gaussian) | Threshold splits |
-| **Feature Dependencies** | Ignored | Captured through splits |
-| **Export Format** | Clauses | Clauses |
 
 
 References

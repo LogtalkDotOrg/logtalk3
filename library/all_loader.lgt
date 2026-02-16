@@ -80,6 +80,7 @@
 		json_ld(loader),
 		yaml(loader),
 		toon(loader),
+		classifier_protocols(loader),
 		c45(loader),
 		naive_bayes(loader),
 		cbor(loader),

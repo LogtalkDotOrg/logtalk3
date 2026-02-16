@@ -82,6 +82,7 @@
 <li class="toctree-l2"><a class="reference internal" href="c45.html"><code class="docutils literal notranslate"><span class="pre">c45</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ccsds.html"><code class="docutils literal notranslate"><span class="pre">ccsds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="classifier_protocols.html"><code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="core.html"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
@@ -126,7 +127,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dataset-format">Dataset Format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#learning-a-classifier">Learning a Classifier</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#making-predictions">Making Predictions</a></li>
@@ -135,7 +135,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#classifier-representation">Classifier Representation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#comparison-with-c4-5">Comparison with C4.5</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
@@ -214,9 +213,14 @@
   <section id="naive-bayes">
 <span id="library-naive-bayes"></span><h1><code class="docutils literal notranslate"><span class="pre">naive_bayes</span></code><a class="headerlink" href="#naive-bayes" title="Link to this heading"></a></h1>
 <p>Naive Bayes classifier supporting both categorical and continuous
-(Gaussian) features with Laplace smoothing. Uses the same dataset
-representation and similar API as the <code class="docutils literal notranslate"><span class="pre">c45</span></code> library to simplify
-comparing learned classifiers.</p>
+(Gaussian) features with Laplace smoothing.</p>
+<p>The library implements the <code class="docutils literal notranslate"><span class="pre">classifier_protocol</span></code> defined in the
+<code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code> library. It provides predicates for learning a
+classifier from a dataset, using it to make predications, and exporting
+it as a list of predicate clauses or to a file.</p>
+<p>Datasets are represented as objects implementing the
+<code class="docutils literal notranslate"><span class="pre">dataset_protocol</span></code> protocol from the <code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code> library.
+See <code class="docutils literal notranslate"><span class="pre">test_files</span></code> directory for examples.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -240,8 +244,6 @@ link in a web browser.</p>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><strong>Dataset Protocol</strong>: Uses the same <code class="docutils literal notranslate"><span class="pre">dataset_protocol</span></code> as the
-<code class="docutils literal notranslate"><span class="pre">c45</span></code> library</p></li>
 <li><p><strong>Categorical Features</strong>: Handles discrete-valued features with
 Laplace smoothing</p></li>
 <li><p><strong>Continuous Features</strong>: Uses Gaussian (normal) distribution for
@@ -251,12 +253,6 @@ predicate clauses</p></li>
 <li><p><strong>Probability Estimation</strong>: Provides both class predictions and
 probability distributions</p></li>
 </ul>
-</section>
-<section id="dataset-format">
-<h2>Dataset Format<a class="headerlink" href="#dataset-format" title="Link to this heading"></a></h2>
-<p>Datasets are defined as Logtalk objects implementing the
-<code class="docutils literal notranslate"><span class="pre">dataset_protocol</span></code> protocol defined by the <code class="docutils literal notranslate"><span class="pre">c45</span></code> library. See
-<code class="docutils literal notranslate"><span class="pre">test_files</span></code> directory for examples.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
@@ -329,39 +325,6 @@ For example, assuming the <code class="docutils literal notranslate"><span class
 <li><p><code class="docutils literal notranslate"><span class="pre">FeatureTypes</span></code>: List of types (<code class="docutils literal notranslate"><span class="pre">categorical</span></code> or <code class="docutils literal notranslate"><span class="pre">continuous</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">FeatureParams</span></code>: List of learned parameters for each feature</p></li>
 </ul>
-</section>
-<section id="comparison-with-c4-5">
-<span id="comparison-with-c45"></span><h2>Comparison with C4.5<a class="headerlink" href="#comparison-with-c4-5" title="Link to this heading"></a></h2>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Aspect</p></th>
-<th class="head"><p>Naive Bayes</p></th>
-<th class="head"><p>C4.5</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Speed</strong></p></td>
-<td><p>Very fast</p></td>
-<td><p>Slower (tree construction)</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Interpretability</strong></p></td>
-<td><p>Probability-based</p></td>
-<td><p>Decision rules</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Continuous Features</strong></p></td>
-<td><p>Native (Gaussian)</p></td>
-<td><p>Threshold splits</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Feature Dependencies</strong></p></td>
-<td><p>Ignored</p></td>
-<td><p>Captured through splits</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Export Format</strong></p></td>
-<td><p>Clauses</p></td>
-<td><p>Clauses</p></td>
-</tr>
-</tbody>
-</table>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>

@@ -40,6 +40,7 @@ directory in the ``NOTES.md`` file.
    c45
    cbor
    ccsds
+   classifier_protocols
    core
    coroutining
    csv

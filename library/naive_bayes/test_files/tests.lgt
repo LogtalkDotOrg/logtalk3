@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-15,
+		date is 2026-02-16,
 		comment is 'Unit tests for the "naive_bayes" library.'
 	]).
 
@@ -117,19 +117,19 @@
 		naive_bayes::predict_probabilities(Classifier, [age-48, income-80000, student-no, credit_rating-excellent], Probabilities),
 		memberchk(yes-ProbabilityYes, Probabilities).
 
-	% Test classifier_to_clauses/3 - verify exported clause works with predict/3
+	% Test classifier_to_clauses/4 - verify exported clause works with predict/3
 	test(naive_bayes_classifier_to_clauses_3, true(Prediction == yes)) :-
 		naive_bayes::learn(nb_weather_dataset, Classifier),
-		naive_bayes::classifier_to_clauses(Classifier, classify, [Clause]),
+		naive_bayes::classifier_to_clauses(_Dataset, Classifier, classify, [Clause]),
 		% Extract classifier from the exported clause and use it
 		Clause = classify(ExportedClassifier),
 		naive_bayes::predict(ExportedClassifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
 
-	% Test classifier_to_file/3 - verify exported clause works with predict/3
+	% Test classifier_to_file/4 - verify exported clause works with predict/3
 	test(naive_bayes_classifier_to_file_3, true(Prediction == yes)) :-
 		^^file_path('test_output.pl', File),
 		naive_bayes::learn(nb_weather_dataset, Classifier),
-		naive_bayes::classifier_to_file(Classifier, classify, File),
+		naive_bayes::classifier_to_file(_Dataset, Classifier, classify, File),
 		logtalk_load(File),
 		{classify(ExportedClassifier)},
 		naive_bayes::predict(ExportedClassifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).

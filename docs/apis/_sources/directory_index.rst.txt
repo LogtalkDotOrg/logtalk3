@@ -198,7 +198,6 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    c45 <c45_0>
-   dataset_protocol <dataset_protocol_0>
 
 ``library/cbor/``
 -----------------
@@ -222,6 +221,17 @@ To load an entity, always load the library that includes it using the goal ``log
    ccsds <ccsds_0>
    ccsds(SecondaryHeaderLength) <ccsds_1>
    ccsds_types <ccsds_types_0>
+
+``library/classifier_protocols/``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   classifier_protocol <classifier_protocol_0>
+   dataset_protocol <dataset_protocol_0>
 
 ``library/coroutining/``
 ------------------------
