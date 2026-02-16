@@ -90,6 +90,7 @@ directory in the ``NOTES.md`` file.
    protobuf
    queues
    random
+   random_forest
    reader
    recorded_database
    redis

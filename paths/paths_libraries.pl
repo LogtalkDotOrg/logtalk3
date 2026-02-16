@@ -94,6 +94,7 @@ logtalk_library_path(process, library('process/')).
 logtalk_library_path(protobuf, library('protobuf/')).
 logtalk_library_path(queues, library('queues/')).
 logtalk_library_path(random, library('random/')).
+logtalk_library_path(random_forest, library('random_forest/')).
 logtalk_library_path(reader, library('reader/')).
 logtalk_library_path(recorded_database, library('recorded_database/')).
 logtalk_library_path(redis, library('redis/')).

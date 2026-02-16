@@ -82,6 +82,7 @@
 		toon(loader),
 		classifier_protocols(loader),
 		c45(loader),
+		random_forest(loader),
 		knn(loader),
 		naive_bayes(loader),
 		cbor(loader),

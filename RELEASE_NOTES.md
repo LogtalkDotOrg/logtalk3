@@ -73,6 +73,9 @@ Library
 * ADDED: New `c45` library implementing the C4.5 algorithm for learning
 decision trees.
 
+* ADDED: New `random_forest` library implementing the Random Forest algorithm
+for learning decision trees.
+
 * ADDED: New `knn` library implementing k-Nearest Neighbors (kNN) Classifier.
 
 * ADDED: New `naive_bayes` library implementing a Naive Bayes classifier.
