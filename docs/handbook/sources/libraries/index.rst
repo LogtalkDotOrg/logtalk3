@@ -79,6 +79,7 @@ directory in the ``NOTES.md`` file.
    meta
    meta_compiler
    mutations
+   naive_bayes
    nested_dictionaries
    optionals
    options

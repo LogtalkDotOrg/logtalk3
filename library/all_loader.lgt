@@ -81,6 +81,7 @@
 		yaml(loader),
 		toon(loader),
 		c45(loader),
+		naive_bayes(loader),
 		cbor(loader),
 		ccsds(loader),
 		avro(loader),

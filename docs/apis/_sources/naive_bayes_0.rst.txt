@@ -1,0 +1,180 @@
+.. index:: single: naive_bayes
+.. _naive_bayes/0:
+
+.. rst-class:: right
+
+**object**
+
+``naive_bayes``
+===============
+
+Naive Bayes classifier with Laplace smoothing and Gaussian distribution support. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.
+
+| **Availability:** 
+|    ``logtalk_load(naive_bayes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-15
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`pairs <pairs/0>`
+|    :ref:`population <population/0>`
+
+| **Remarks:**
+
+   - Algorithm: Naive Bayes is a probabilistic classifier based on Bayes theorem with strong (naive) independence assumptions between features.
+   - Categorical features: Uses Laplace smoothing to handle unseen feature values.
+   - Continuous features: Uses Gaussian (normal) distribution to model numeric features.
+   - Classifier representation: The learned classifier is represented as ``Functor(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams)`` where ``FeatureParams`` contains the learned probabilities or statistics for each feature.
+   - Export format: The classifier can be exported as a list of clauses.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/2
+.. _naive_bayes/0::learn/2:
+
+``learn/2``
+^^^^^^^^^^^
+
+Learns a Naive Bayes classifier from the given dataset object.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Classifier)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound)`` - ``one``
+
+
+------------
+
+.. index:: predict/3
+.. _naive_bayes/0::predict/3:
+
+``predict/3``
+^^^^^^^^^^^^^
+
+Predicts the class label for a new instance using the learned classifier. The instance is a list of ``Attribute-Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predict(Classifier,Instance,Class)``
+| **Mode and number of proofs:**
+|    ``predict(+compound,+list,-atom)`` - ``one``
+
+
+------------
+
+.. index:: predict_probabilities/3
+.. _naive_bayes/0::predict_probabilities/3:
+
+``predict_probabilities/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Predicts class probabilities for a new instance using the learned classifier. Returns a list of ``Class-Probability`` pairs. The instance is a list of ``Attribute-Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predict_probabilities(Classifier,Instance,Probabilities)``
+| **Mode and number of proofs:**
+|    ``predict_probabilities(+compound,+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: classifier_to_clauses/3
+.. _naive_bayes/0::classifier_to_clauses/3:
+
+``classifier_to_clauses/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a Naive Bayes classifier into a list of predicate clauses. ``Functor`` is the functor for the generated clause. Returns a list with a single clause ``Functor(Classifier)`` that can be loaded and used with the ``predict/3`` and ``predict_probability/3`` predicates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``classifier_to_clauses(Classifier,Functor,Clauses)``
+| **Mode and number of proofs:**
+|    ``classifier_to_clauses(+compound,+callable,-list(clause))`` - ``one``
+
+
+------------
+
+.. index:: classifier_to_file/3
+.. _naive_bayes/0::classifier_to_file/3:
+
+``classifier_to_file/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Exports a Naive Bayes classifier to a file. ``Functor`` is the functor for the generated clause. The exported clauses can be loaded and used with the ``predict/3`` and ``predict_probability/3`` predicates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``classifier_to_file(Classifier,Functor,File)``
+| **Mode and number of proofs:**
+|    ``classifier_to_file(+compound,+callable,+atom)`` - ``one``
+
+
+------------
+
+.. index:: print_classifier/1
+.. _naive_bayes/0::print_classifier/1:
+
+``print_classifier/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Prints a Naive Bayes classifier to the current output stream in a human-readable format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_classifier(Classifier)``
+| **Mode and number of proofs:**
+|    ``print_classifier(+compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`c45 <c45/0>`
+

@@ -1477,6 +1477,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`class_hierarchyp <class_hierarchyp/0::classes/1>`
 
+``classifier_to_clauses/3``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`naive_bayes <naive_bayes/0::classifier_to_clauses/3>`
+
+``classifier_to_file/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`naive_bayes <naive_bayes/0::classifier_to_file/3>`
+
 ``clause/5``
 ------------
 
@@ -6498,6 +6518,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`c45 <c45/0::learn/2>`
 * :ref:`metagol <metagol/0::learn/2>`
+* :ref:`naive_bayes <naive_bayes/0::learn/2>`
 
 ``learn/3``
 -----------
@@ -9278,6 +9299,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`dead_code_scanner <dead_code_scanner/0::predicates/2>`
 
+``predict/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`naive_bayes <naive_bayes/0::predict/3>`
+
+``predict_probabilities/3``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`naive_bayes <naive_bayes/0::predict_probabilities/3>`
+
 ``prefix/0``
 ------------
 
@@ -9378,6 +9419,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`subsequences_protocol <subsequences_protocol/0::previous_permutation/2>`
+
+``print_classifier/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`naive_bayes <naive_bayes/0::print_classifier/1>`
 
 ``print_flags/0``
 -----------------

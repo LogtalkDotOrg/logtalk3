@@ -1,0 +1,136 @@
+.. index:: single: dataset_protocol
+.. _dataset_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``dataset_protocol``
+====================
+
+Protocol for datasets used with the C4.5 decision tree learning algorithm.
+
+| **Availability:** 
+|    ``logtalk_load(c45(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-14
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: attribute_values/2
+.. _dataset_protocol/0::attribute_values/2:
+
+``attribute_values/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates by backtracking the attributes and their possible values. For discrete attributes, ``Values`` is a list of possible values. For continuous (numeric) attributes, ``Values`` is the atom ``continuous``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``attribute_values(Attribute,Values)``
+| **Mode and number of proofs:**
+|    ``attribute_values(?atom,-list(atom))`` - ``zero_or_more``
+|    ``attribute_values(?atom,-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: class/1
+.. _dataset_protocol/0::class/1:
+
+``class/1``
+^^^^^^^^^^^
+
+Returns the name of the target class attribute.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``class(Class)``
+| **Mode and number of proofs:**
+|    ``class(-atom)`` - ``one``
+
+
+------------
+
+.. index:: class_values/1
+.. _dataset_protocol/0::class_values/1:
+
+``class_values/1``
+^^^^^^^^^^^^^^^^^^
+
+Returns the list of possible values for the target class attribute.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``class_values(Values)``
+| **Mode and number of proofs:**
+|    ``class_values(-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: example/3
+.. _dataset_protocol/0::example/3:
+
+``example/3``
+^^^^^^^^^^^^^
+
+Enumerates by backtracking the examples in the dataset. Each example has an ``Id``, a ``Class`` value, and a list of ``Attribute-Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``example(Id,Class,AttributeValues)``
+| **Mode and number of proofs:**
+|    ``example(-integer,-atom,-list(pair))`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`c45 <c45/0>`
+
