@@ -98,7 +98,7 @@
 			Examples
 		),
 		% Extract instances and labels (Labels include instance features for kNN)
-		examples_to_instances_labels(Examples, AttributeNames, _Instances, Labels),
+		examples_to_instances_labels(Examples, AttributeNames, Labels),
 		% Determine feature types from dataset attributes
 		determine_feature_types_from_dataset(Attributes, FeatureTypes),
 		% Build classifier term
@@ -112,10 +112,10 @@
 		).
 
 	% Convert examples to instances (list of values) and labels
-	examples_to_instances_labels([], _, [], []).
-	examples_to_instances_labels([_-Class-AttributeValues| Examples], AttributeNames, [Instance| Instances], [Instance-Class| Labels]) :-
+	examples_to_instances_labels([], _, []).
+	examples_to_instances_labels([_-Class-AttributeValues| Examples], AttributeNames, [Instance-Class| Labels]) :-
 		extract_values(AttributeNames, AttributeValues, Instance),
-		examples_to_instances_labels(Examples, AttributeNames, Instances, Labels).
+		examples_to_instances_labels(Examples, AttributeNames, Labels).
 
 	extract_values([], _, []).
 	extract_values([Attribute| Attributes], AttributeValues, [Value| Values]) :-

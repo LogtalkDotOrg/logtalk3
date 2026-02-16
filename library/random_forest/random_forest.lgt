@@ -145,8 +145,8 @@
 	create_bootstrap_dataset(Dataset, SelectedNames, SelectedAttributes, BootstrapDataset) :-
 		% Get all examples
 		findall(
-			Id-Class-AVs,
-			Dataset::example(Id, Class, AVs),
+			Id-Class-AttributeValues,
+			Dataset::example(Id, Class, AttributeValues),
 			Examples
 		),
 		length(Examples, N),
@@ -163,12 +163,12 @@
 
 	bootstrap_sample(_, _, 0, []) :-
 		!.
-	bootstrap_sample(Examples, TotalExamples, Remaining, [NewIdx-Class-AVs| BootstrapExamples]) :-
+	bootstrap_sample(Examples, TotalExamples, Remaining, [NewIdx-Class-AttributeValues| BootstrapExamples]) :-
 		random_between(1, TotalExamples, Idx),
 		nth1(Idx, Examples, Example),
 		NewRemaining is Remaining - 1,
 		NewIdx is TotalExamples - Remaining + 1,
-		Example = _-Class-AVs,
+		Example = _-Class-AttributeValues,
 		bootstrap_sample(Examples, TotalExamples, NewRemaining, BootstrapExamples).
 
 	create_bootstrap_object(Name, SelectedNames, SelectedAttributes, ClassName, ClassValues, Examples) :-
@@ -191,14 +191,14 @@
 		build_attribute_clauses(Names, Attrs, Clauses).
 
 	build_example_clauses([], _, []).
-	build_example_clauses([Id-Class-AVs| Examples], SelectedNames, [example(Id, Class, FilteredAVs)| Clauses]) :-
-		filter_attribute_values(SelectedNames, AVs, FilteredAVs),
+	build_example_clauses([Id-Class-AttributeValues| Examples], SelectedNames, [example(Id, Class, FilteredAttributeValues)| Clauses]) :-
+		filter_attribute_values(SelectedNames, AttributeValues, FilteredAttributeValues),
 		build_example_clauses(Examples, SelectedNames, Clauses).
 
 	filter_attribute_values([], _, []).
-	filter_attribute_values([Name| Names], AVs, [Name-Value| FilteredAVs]) :-
-		memberchk(Name-Value, AVs),
-		filter_attribute_values(Names, AVs, FilteredAVs).
+	filter_attribute_values([Name| Names], AttributeValues, [Name-Value| FilteredAttributeValues]) :-
+		memberchk(Name-Value, AttributeValues),
+		filter_attribute_values(Names, AttributeValues, FilteredAttributeValues).
 
 	% predict/3 - predicts the class for an instance using majority voting
 	predict(Classifier, Instance, Class) :-

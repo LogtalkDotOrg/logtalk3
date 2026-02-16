@@ -28,7 +28,7 @@
 	logtalk_load(options(loader)),
 	logtalk_load(random(loader)),
 	logtalk_load(classifier_protocols(loader)),
-	logtalk_load('../c45/c45', [optimize(on)]),
+	logtalk_load(c45(loader)),
 	logtalk_load(random_forest, [source_data(on), debug(on)]),
 	logtalk_load([
 		'test_files/play_tennis',

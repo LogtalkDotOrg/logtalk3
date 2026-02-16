@@ -34,7 +34,7 @@
 		source_data(on),
 		debug(on)
 	]),
-	logtalk_load([knn], [source_data(on), debug(on)]),
+	logtalk_load(knn, [source_data(on), debug(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load('test_files/tests', [hook(lgtunit)]),
 	tests::run

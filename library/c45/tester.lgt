@@ -21,10 +21,8 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
 	logtalk_load(types(loader)),
 	logtalk_load(format(loader)),
-	logtalk_load(os(loader)),
 	logtalk_load(classifier_protocols(loader)),
 	logtalk_load(c45, [source_data(on), debug(on)]),
 	logtalk_load([
@@ -36,6 +34,7 @@
 		source_data(on),
 		debug(on)
 	]),
+	logtalk_load(lgtunit(loader)),
 	logtalk_load('test_files/tests', [hook(lgtunit)]),
 	tests::run
 )).
