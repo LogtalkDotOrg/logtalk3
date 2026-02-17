@@ -343,15 +343,15 @@ Options: <code class="docutils literal notranslate"><span class="pre">uniform</s
 <p>The learned classifier is represented as a compound term with the
 functor chosen by the user when exporting the classifier and arity 4.
 For example, assuming the <code class="docutils literal notranslate"><span class="pre">my_classifier/1</span></code> functor:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>knn_classifier(<span class="nv">AttributeNames</span>, <span class="nv">FeatureTypes</span>, <span class="nv">Labels</span>, <span class="nv">Options</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>knn_classifier(<span class="nv">AttributeNames</span>, <span class="nv">FeatureTypes</span>, <span class="nv">Instances</span>)
 </pre></div>
 </div>
 <p>Where:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">AttributeNames</span></code>: List of attribute names in order</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">FeatureTypes</span></code>: List of types (<code class="docutils literal notranslate"><span class="pre">numeric</span></code> or <code class="docutils literal notranslate"><span class="pre">categorical</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Labels</span></code>: List of <code class="docutils literal notranslate"><span class="pre">Instance-Class</span></code> pairs (the training data)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Options</span></code>: List of options used during learning</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Instances</span></code>: List of <code class="docutils literal notranslate"><span class="pre">Values-Class</span></code> pairs (the training data in
+compact form)</p></li>
 </ul>
 </section>
 <section id="references">

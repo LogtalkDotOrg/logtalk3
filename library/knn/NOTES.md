@@ -146,14 +146,13 @@ The learned classifier is represented as a compound term with the functor chosen
 by the user when exporting the classifier and arity 4. For example, assuming the
 `my_classifier/1` functor:
 
-    knn_classifier(AttributeNames, FeatureTypes, Labels, Options)
+    knn_classifier(AttributeNames, FeatureTypes, Instances)
 
 Where:
 
 - `AttributeNames`: List of attribute names in order
 - `FeatureTypes`: List of types (`numeric` or `categorical`)
-- `Labels`: List of `Instance-Class` pairs (the training data)
-- `Options`: List of options used during learning
+- `Instances`: List of `Values-Class` pairs (the training data in compact form)
 
 
 References
