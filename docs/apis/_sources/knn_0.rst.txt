@@ -15,7 +15,7 @@ k-Nearest Neighbors classifier with multiple distance metrics and weighting opti
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-16
+| **Date:** 2026-02-17
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -37,7 +37,7 @@ k-Nearest Neighbors classifier with multiple distance metrics and weighting opti
    - Distance metrics: Supports Euclidean, Manhattan, Chebyshev, and Minkowski distance metrics.
    - Weighting schemes: Supports uniform, distance-based, and Gaussian weighting of neighbors.
    - Feature types: Automatically handles numeric and categorical features.
-   - Classifier representation: The learned classifier is represented as ``knn_classifier(AttributeNames, FeatureTypes, Instances, Options)`` where ``Instances`` contains the training data.
+   - Classifier representation: The learned classifier is represented as ``knn_classifier(AttributeNames, FeatureTypes, Instances)`` where ``Instances`` contains the training data.
 
 | **Inherited public predicates:**
 |     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`classifier_protocol/0::classifier_to_clauses/4`  :ref:`classifier_protocol/0::classifier_to_file/4`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`classifier_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
@@ -48,25 +48,6 @@ k-Nearest Neighbors classifier with multiple distance metrics and weighting opti
 
 Public predicates
 -----------------
-
-.. index:: learn/3
-.. _knn/0::learn/3:
-
-``learn/3``
-^^^^^^^^^^^
-
-Learns a classifier from the given dataset object using the specified options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``learn(Dataset,Classifier,Options)``
-| **Mode and number of proofs:**
-|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
-
-
-------------
 
 .. index:: predict/4
 .. _knn/0::predict/4:

@@ -26,23 +26,16 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-16,
+		date is 2026-02-17,
 		comment is 'k-Nearest Neighbors classifier with multiple distance metrics and weighting options. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'k-NN is a lazy learning algorithm that classifies instances based on the majority class among the k nearest training instances.',
 			'Distance metrics' - 'Supports Euclidean, Manhattan, Chebyshev, and Minkowski distance metrics.',
 			'Weighting schemes' - 'Supports uniform, distance-based, and Gaussian weighting of neighbors.',
 			'Feature types' - 'Automatically handles numeric and categorical features.',
-			'Classifier representation' - 'The learned classifier is represented as ``knn_classifier(AttributeNames, FeatureTypes, Instances, Options)`` where ``Instances`` contains the training data.'
+			'Classifier representation' - 'The learned classifier is represented as ``knn_classifier(AttributeNames, FeatureTypes, Instances)`` where ``Instances`` contains the training data.'
 		],
 		see_also is [dataset_protocol, c45, naive_bayes]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
-	:- info(learn/3, [
-		comment is 'Learns a classifier from the given dataset object using the specified options.',
-		argnames is ['Dataset', 'Classifier', 'Options']
 	]).
 
 	:- public(predict/4).
@@ -83,11 +76,6 @@
 	]).
 
 	learn(Dataset, Classifier) :-
-		learn(Dataset, Classifier, []).
-
-	learn(Dataset, Classifier, UserOptions) :-
-		^^check_options(UserOptions),
-		^^merge_options(UserOptions, Options),
 		% Get attribute information from dataset
 		dataset_attributes(Dataset, Attributes),
 		keys(Attributes, AttributeNames),
@@ -98,11 +86,11 @@
 			Examples
 		),
 		% Extract instances and labels (Labels include instance features for kNN)
-		examples_to_instances_labels(Examples, AttributeNames, Labels),
+		examples_to_instances(Examples, AttributeNames, Instances),
 		% Determine feature types from dataset attributes
 		determine_feature_types_from_dataset(Attributes, FeatureTypes),
 		% Build classifier term
-		Classifier = knn_classifier(AttributeNames, FeatureTypes, Labels, Options).
+		Classifier = knn_classifier(AttributeNames, FeatureTypes, Instances).
 
 	dataset_attributes(Dataset, Attributes) :-
 		findall(
@@ -112,10 +100,10 @@
 		).
 
 	% Convert examples to instances (list of values) and labels
-	examples_to_instances_labels([], _, []).
-	examples_to_instances_labels([_-Class-AttributeValues| Examples], AttributeNames, [Instance-Class| Labels]) :-
+	examples_to_instances([], _, []).
+	examples_to_instances([_-Class-AttributeValues| Examples], AttributeNames, [Instance-Class| Instances]) :-
 		extract_values(AttributeNames, AttributeValues, Instance),
-		examples_to_instances_labels(Examples, AttributeNames, Labels).
+		examples_to_instances(Examples, AttributeNames, Instances).
 
 	extract_values([], _, []).
 	extract_values([Attribute| Attributes], AttributeValues, [Value| Values]) :-
@@ -144,26 +132,26 @@
 	predict_probabilities(Classifier, Instance, Probabilities, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		Classifier = knn_classifier(AttributeNames, FeatureTypes, Labels, _ClassifierOptions),
+		Classifier = knn_classifier(AttributeNames, FeatureTypes, Instances),
 		% Extract values from instance in correct order
 		extract_values(AttributeNames, Instance, Values),
 		% Get k value
 		^^option(k(K), Options),
 		% Find k nearest neighbors
-		find_k_nearest(Values, Labels, FeatureTypes, K, Neighbors, Options),
+		find_k_nearest(Values, Instances, FeatureTypes, K, Neighbors, Options),
 		% Compute class weights
 		compute_class_weights(Neighbors, Probabilities, Options).
 
-	find_k_nearest(Instance, Labels, FeatureTypes, K, KNearest, Options) :-
+	find_k_nearest(Instance, Instances, FeatureTypes, K, Neighbors, Options) :-
 		findall(
 			Distance-Class,
-			(	member(Features-Class, Labels),
+			(	member(Features-Class, Instances),
 				compute_distance(Instance, Features, FeatureTypes, Distance, Options)
 			),
 			AllDistances
 		),
 		keysort(AllDistances, SortedDistances),
-		take(K, SortedDistances, KNearest).
+		take(K, SortedDistances, Neighbors).
 
 	compute_distance(Instance1, Instance2, FeatureTypes, Distance, Options) :-
 		^^option(distance_metric(Metric), Options),
@@ -335,21 +323,13 @@
 		write_clauses(Clauses, Stream).
 
 	print_classifier(Classifier) :-
-		Classifier = knn_classifier(AttributeNames, FeatureTypes, Labels, Options),
+		Classifier = knn_classifier(AttributeNames, FeatureTypes, Instances),
 		format('k-Nearest Neighbors Classifier~n', []),
 		format('==============================~n~n', []),
-		length(Labels, NumInstances),
+		length(Instances, NumInstances),
 		format('Training instances: ~w~n~n', [NumInstances]),
-		format('Options:~n', []),
-		print_options(Options),
-		nl,
 		format('Features:~n', []),
 		print_features(AttributeNames, FeatureTypes).
-
-	print_options([]).
-	print_options([Option| Options]) :-
-		format('  ~w~n', [Option]),
-		print_options(Options).
 
 	print_features([], []).
 	print_features([Name| Names], [Type| Types]) :-

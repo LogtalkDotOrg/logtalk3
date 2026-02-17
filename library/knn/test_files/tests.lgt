@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-16,
+		date is 2026-02-17,
 		comment is 'Unit tests for the "knn" library.'
 	]).
 
@@ -45,10 +45,6 @@
 	% Test learn/2 with continuous iris dataset
 	test(knn_learn_2_iris, true(ground(Classifier))) :-
 		knn::learn(nb_iris_dataset, Classifier).
-
-	% Test learn/3 with options
-	test(knn_learn_3_with_options, true(ground(Classifier))) :-
-		knn::learn(nb_iris_dataset, Classifier, [k(5), distance_metric(manhattan)]).
 
 	% Test predict/3 with iris dataset (continuous features)
 	test(knn_predict_3_iris_setosa, true(Prediction == setosa)) :-

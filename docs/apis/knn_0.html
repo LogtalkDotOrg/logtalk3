@@ -235,7 +235,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-02-16</div>
+<div class="line"><strong>Date:</strong> 2026-02-17</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -269,7 +269,7 @@
 <li><p>Distance metrics: Supports Euclidean, Manhattan, Chebyshev, and Minkowski distance metrics.</p></li>
 <li><p>Weighting schemes: Supports uniform, distance-based, and Gaussian weighting of neighbors.</p></li>
 <li><p>Feature types: Automatically handles numeric and categorical features.</p></li>
-<li><p>Classifier representation: The learned classifier is represented as <code class="docutils literal notranslate"><span class="pre">knn_classifier(AttributeNames,</span> <span class="pre">FeatureTypes,</span> <span class="pre">Instances,</span> <span class="pre">Options)</span></code> where <code class="docutils literal notranslate"><span class="pre">Instances</span></code> contains the training data.</p></li>
+<li><p>Classifier representation: The learned classifier is represented as <code class="docutils literal notranslate"><span class="pre">knn_classifier(AttributeNames,</span> <span class="pre">FeatureTypes,</span> <span class="pre">Instances)</span></code> where <code class="docutils literal notranslate"><span class="pre">Instances</span></code> contains the training data.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -282,42 +282,20 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#learn-3" id="id2"><code class="docutils literal notranslate"><span class="pre">learn/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#predict-4" id="id3"><code class="docutils literal notranslate"><span class="pre">predict/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#predict-probabilities-3" id="id4"><code class="docutils literal notranslate"><span class="pre">predict_probabilities/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#predict-probabilities-4" id="id5"><code class="docutils literal notranslate"><span class="pre">predict_probabilities/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#predict-4" id="id2"><code class="docutils literal notranslate"><span class="pre">predict/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#predict-probabilities-3" id="id3"><code class="docutils literal notranslate"><span class="pre">predict_probabilities/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#predict-probabilities-4" id="id4"><code class="docutils literal notranslate"><span class="pre">predict_probabilities/4</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id6">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id7">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id8">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id5">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id6">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id7">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="learn-3">
-<span id="knn-0-learn-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn/3</span></code></a><a class="headerlink" href="#learn-3" title="Link to this heading"></a></h3>
-<p>Learns a classifier from the given dataset object using the specified options.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(Dataset,Classifier,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(+object_identifier,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
 <section id="predict-4">
-<span id="knn-0-predict-4"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predict/4</span></code></a><a class="headerlink" href="#predict-4" title="Link to this heading"></a></h3>
+<span id="knn-0-predict-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predict/4</span></code></a><a class="headerlink" href="#predict-4" title="Link to this heading"></a></h3>
 <p>Predicts the class label for a new instance using the learned classifier and the given options. The instance is a list of <code class="docutils literal notranslate"><span class="pre">Attribute-Value</span></code> pairs.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -338,7 +316,7 @@
 <hr class="docutils" />
 </section>
 <section id="predict-probabilities-3">
-<span id="knn-0-predict-probabilities-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predict_probabilities/3</span></code></a><a class="headerlink" href="#predict-probabilities-3" title="Link to this heading"></a></h3>
+<span id="knn-0-predict-probabilities-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predict_probabilities/3</span></code></a><a class="headerlink" href="#predict-probabilities-3" title="Link to this heading"></a></h3>
 <p>Predicts class probabilities for a new instance using the learned classifier and default options. Returns a list of <code class="docutils literal notranslate"><span class="pre">Class-Probability</span></code> pairs. The instance is a list of <code class="docutils literal notranslate"><span class="pre">Attribute-Value</span></code> pairs.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -359,7 +337,7 @@
 <hr class="docutils" />
 </section>
 <section id="predict-probabilities-4">
-<span id="knn-0-predict-probabilities-4"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predict_probabilities/4</span></code></a><a class="headerlink" href="#predict-probabilities-4" title="Link to this heading"></a></h3>
+<span id="knn-0-predict-probabilities-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predict_probabilities/4</span></code></a><a class="headerlink" href="#predict-probabilities-4" title="Link to this heading"></a></h3>
 <p>Predicts class probabilities for a new instance using the learned classifier and the given options. Returns a list of <code class="docutils literal notranslate"><span class="pre">Class-Probability</span></code> pairs. The instance is a list of <code class="docutils literal notranslate"><span class="pre">Attribute-Value</span></code> pairs.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
