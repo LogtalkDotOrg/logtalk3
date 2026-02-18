@@ -63,7 +63,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, member/2, nth1/3, sort/4, take/3
+		length/2, member/2, memberchk/2, nth1/3, sort/4, take/3
 	]).
 
 	:- uses(numberlist, [
