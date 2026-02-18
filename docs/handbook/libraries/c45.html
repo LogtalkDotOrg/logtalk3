@@ -86,7 +86,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#implemented-features">Implemented features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#test-datasets">Test datasets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
@@ -213,7 +212,9 @@
 is an extension of the ID3 algorithm that uses information gain ratio
 instead of information gain for attribute selection, which avoids bias
 towards attributes with many values. The implementation supports both
-discrete (categorical) and continuous (numeric) attributes.</p>
+discrete (categorical) and continuous (numeric) attributes. It also
+supports missing attribute values, represented using anonymous variables
+(see below for implementation details).</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">classifier_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code> library. It provides predicates for learning a
 decision tree from a dataset, optionally prune it, using it to make
@@ -284,41 +285,6 @@ new examples are added)</p></li>
 Kaufmann Publishers. <a class="reference external" href="https://doi.org/10.1016/C2009-0-27846-9">https://doi.org/10.1016/C2009-0-27846-9</a></p></li>
 <li><p>Mitchell, T.M. (1997). <em>Machine Learning</em>. McGraw-Hill. Chapter 3:
 Decision Tree Learning.</p></li>
-</ul>
-</section>
-<section id="test-datasets">
-<h2>Test datasets<a class="headerlink" href="#test-datasets" title="Link to this heading"></a></h2>
-<p>Four sample datasets are included in the <code class="docutils literal notranslate"><span class="pre">test_files</span></code> directory:</p>
-<ul class="simple">
-<li><p><strong>Play Tennis</strong> — The classic weather/tennis dataset with 14 examples
-and 4 discrete attributes (outlook, temperature, humidity, wind).
-Originally from Quinlan (1986) and widely used in machine learning
-textbooks including Mitchell (1997). Also available from the UCI
-Machine Learning Repository:
-<a class="reference external" href="https://archive.ics.uci.edu/dataset/349/tennis+major+tournament+match+statistics">https://archive.ics.uci.edu/dataset/349/tennis+major+tournament+match+statistics</a></p></li>
-<li><p><strong>Contact Lenses</strong> — A dataset with 24 examples and 4 discrete
-attributes (age, spectacle prescription, astigmatism, tear production
-rate) for deciding the type of contact lenses to prescribe. Originally
-from Cendrowska, J. (1987). PRISM: An algorithm for inducing modular
-rules. <em>International Journal of Man-Machine Studies</em>, 27(4), 349-370.
-Available from the UCI Machine Learning Repository:
-<a class="reference external" href="https://archive.ics.uci.edu/dataset/58/lenses">https://archive.ics.uci.edu/dataset/58/lenses</a></p></li>
-<li><p><strong>Iris</strong> — The classic Iris flower dataset with 150 examples and 4
-continuous attributes (sepal length, sepal width, petal length, petal
-width) for classifying iris species (setosa, versicolor, virginica).
-Originally from Fisher, R.A. (1936). The use of multiple measurements
-in taxonomic problems. <em>Annals of Eugenics</em>, 7(2), 179-188. Available
-from the UCI Machine Learning Repository:
-<a class="reference external" href="https://archive.ics.uci.edu/dataset/53/iris">https://archive.ics.uci.edu/dataset/53/iris</a></p></li>
-<li><p><strong>Breast Cancer</strong> — A dataset with 286 examples and 9 discrete
-attributes (age, menopause, tumor size, inv-nodes, node-caps, degree
-of malignancy, breast, breast quadrant, irradiation) for predicting
-breast cancer recurrence events. Contains missing values (9 examples
-with missing values in the node-caps and breast-quad attributes,
-represented using anonymous variables). Originally from the Institute
-of Oncology, University Medical Centre, Ljubljana, Yugoslavia. Donors:
-Ming Tan and Jeff Schlimmer. Available from the UCI Machine Learning
-Repository: <a class="reference external" href="https://archive.ics.uci.edu/dataset/14/breast+cancer">https://archive.ics.uci.edu/dataset/14/breast+cancer</a></p></li>
 </ul>
 </section>
 <section id="usage">

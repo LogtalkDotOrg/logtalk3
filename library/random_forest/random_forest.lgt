@@ -26,13 +26,13 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-16,
+		date is 2026-02-18,
 		comment is 'Random Forest classifier using C4.5 decision trees as base learners. Builds an ensemble of decision trees trained on bootstrap samples with random feature subsets and combines their predictions through majority voting.',
 		remarks is [
 			'Algorithm' - 'Random Forest is an ensemble learning method that constructs multiple decision trees during training and outputs the class that is the mode of the classes predicted by individual trees.',
 			'Bootstrap sampling' - 'Each tree is trained on a bootstrap sample (random sample with replacement) of the training data.',
 			'Feature randomization' - 'At each tree, a random subset of features is selected. The default number of features is sqrt(total_features).',
-			'Classifier representation' - 'The learned classifier is represented as ``random_forest_classifier(Trees, ClassValues, Options)`` where ``Trees`` is a list of ``tree(Tree, AttributeNames)`` pairs.'
+			'Classifier representation' - 'The learned classifier is represented by default as a ``rf_classifier(Trees, ClassValues, Options)`` term.'
 		],
 		see_also is [dataset_protocol, c45, knn, naive_bayes]
 	]).
@@ -101,7 +101,7 @@
 		% Build the forest
 		build_forest(Dataset, NumTrees, Attributes, AttributeNames, MaxFeatures, Trees),
 		% Create classifier term
-		Classifier = random_forest_classifier(Trees, ClassValues, Options).
+		Classifier = rf_classifier(Trees, ClassValues, Options).
 
 	dataset_attributes(Dataset, Attributes) :-
 		findall(
@@ -207,7 +207,7 @@
 
 	% predict_probabilities/3 - returns class probabilities based on tree votes
 	predict_probabilities(Classifier, Instance, Probabilities) :-
-		Classifier = random_forest_classifier(Trees, ClassValues, _Options),
+		Classifier =.. [_, Trees, ClassValues, _Options],
 		% Collect predictions from all trees
 		collect_predictions(Trees, Instance, Predictions),
 		% Count votes for each class
@@ -264,7 +264,8 @@
 
 	% classifier_to_clauses/4 - exports classifier as a clause
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
-		Clause =.. [Functor, Classifier].
+		Classifier =.. [_, Trees, ClassValues, Options],
+		Clause =.. [Functor, Trees, ClassValues, Options].
 
 	% classifier_to_file/4 - exports classifier to a file
 	classifier_to_file(Dataset, Classifier, Functor, File) :-
@@ -275,12 +276,12 @@
 		close(Stream).
 
 	write_file_header(Classifier, Functor, Stream) :-
-		Classifier = random_forest_classifier(Trees, _, _),
+		Classifier =.. [_, Trees, _, _],
 		length(Trees, NumTrees),
 		format(Stream, '%% Random Forest classifier exported by random_forest library~n', []),
 		format(Stream, '%% Number of trees: ~w~n', [NumTrees]),
 		format(Stream, '%% Load this file and use the classifier with:~n', []),
-		format(Stream, '%%   ~w(Classifier),~n', [Functor]),
+		format(Stream, '%%   ~w(Trees, ClassValues. Options),~n', [Functor]),
 		format(Stream, '%%   random_forest::predict(Classifier, Instance, Class)~n', []),
 		format(Stream, '%%   random_forest::predict_probabilities(Classifier, Instance, Probabilities)~n~n', []).
 
@@ -291,13 +292,11 @@
 
 	% print_classifier/1 - pretty prints the classifier
 	print_classifier(Classifier) :-
-		Classifier = random_forest_classifier(Trees, ClassValues, Options),
-		length(Trees, NumTrees),
+		Classifier =.. [_, Trees, ClassValues, Options],
 		format('Random Forest Classifier~n', []),
 		format('========================~n~n', []),
-		format('Number of trees: ~w~n', [NumTrees]),
+		format('Learning options: ~w~n~n', [Options]),
 		format('Class values: ~w~n', [ClassValues]),
-		format('Options: ~w~n~n', [Options]),
 		format('Trees:~n', []),
 		print_trees(Trees, 1).
 

@@ -15,7 +15,7 @@ Protocol for datasets used with classifiers.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-16
+| **Date:** 2026-02-18
 
 | **Compilation flags:**
 |    ``static``
@@ -82,7 +82,7 @@ Predicts the class label for a new instance using the learned classifier. The in
 ``classifier_to_clauses/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Converts a classifier into a list of predicate clauses. ``Functor`` is the functor for the generated clause.
+Converts a classifier into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses.
 
 | **Compilation flags:**
 |    ``static``

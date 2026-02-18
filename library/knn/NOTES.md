@@ -131,7 +131,7 @@ to access the original training dataset.
 Options
 -------
 
-The following options can be passed to the `learn/3`, `predict/4`, and
+The following options can be passed to the `predict/4` and
 `predict_probabilities/4` predicates:
 
 - `k(K)`: Number of neighbors to consider (default: 3)
@@ -143,8 +143,8 @@ Classifier Representation
 -------------------------
 
 The learned classifier is represented as a compound term with the functor chosen
-by the user when exporting the classifier and arity 4. For example, assuming the
-`my_classifier/1` functor:
+by the user when exporting the classifier and arity 3. The default functor is
+`knn_classifier/3`:
 
     knn_classifier(AttributeNames, FeatureTypes, Instances)
 

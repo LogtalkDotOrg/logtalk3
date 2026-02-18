@@ -19,13 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(nb_mixed_dataset,
+:- object(mixed,
 	implements(dataset_protocol)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-15,
+		date is 2026-02-18,
 		comment is 'Mixed dataset (categorical + continuous features) for Naive Bayes testing.'
 	]).
 

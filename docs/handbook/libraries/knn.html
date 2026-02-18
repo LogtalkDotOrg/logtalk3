@@ -328,8 +328,8 @@ needing to access the original training dataset.</p>
 </section>
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
-<p>The following options can be passed to the <code class="docutils literal notranslate"><span class="pre">learn/3</span></code>, <code class="docutils literal notranslate"><span class="pre">predict/4</span></code>,
-and <code class="docutils literal notranslate"><span class="pre">predict_probabilities/4</span></code> predicates:</p>
+<p>The following options can be passed to the <code class="docutils literal notranslate"><span class="pre">predict/4</span></code> and
+<code class="docutils literal notranslate"><span class="pre">predict_probabilities/4</span></code> predicates:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">k(K)</span></code>: Number of neighbors to consider (default: 3)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">distance_metric(Metric)</span></code>: Distance metric to use. Options:
@@ -341,8 +341,8 @@ Options: <code class="docutils literal notranslate"><span class="pre">uniform</s
 <section id="classifier-representation">
 <h2>Classifier Representation<a class="headerlink" href="#classifier-representation" title="Link to this heading"></a></h2>
 <p>The learned classifier is represented as a compound term with the
-functor chosen by the user when exporting the classifier and arity 4.
-For example, assuming the <code class="docutils literal notranslate"><span class="pre">my_classifier/1</span></code> functor:</p>
+functor chosen by the user when exporting the classifier and arity 3.
+The default functor is <code class="docutils literal notranslate"><span class="pre">knn_classifier/3</span></code>:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>knn_classifier(<span class="nv">AttributeNames</span>, <span class="nv">FeatureTypes</span>, <span class="nv">Instances</span>)
 </pre></div>
 </div>

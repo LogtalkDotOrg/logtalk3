@@ -120,8 +120,8 @@ Classifier Representation
 -------------------------
 
 The learned classifier is represented as a compound term with the functor chosen
-by the user when exporting the classifier and arity 5. For example, assuming the
-`my_classifier/1` functor:
+by the user when exporting the classifier and arity 5. The default functor is
+`nb_classifier`:
 
     nb_classifier(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams)
 

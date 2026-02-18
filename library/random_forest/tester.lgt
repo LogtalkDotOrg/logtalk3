@@ -31,14 +31,14 @@
 	logtalk_load(c45(loader)),
 	logtalk_load(random_forest, [source_data(on), debug(on)]),
 	logtalk_load([
-		'test_files/play_tennis',
-		'test_files/contact_lenses',
-		'test_files/iris',
-		'test_files/breast_cancer'
+		classifier_protocols('test_datasets/play_tennis'),
+		classifier_protocols('test_datasets/contact_lenses'),
+		classifier_protocols('test_datasets/iris'),
+		classifier_protocols('test_datasets/breast_cancer')
 	], [
 		source_data(on),
 		debug(on)
 	]),
-	logtalk_load('test_files/tests', [hook(lgtunit)]),
+	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).

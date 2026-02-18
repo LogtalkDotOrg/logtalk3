@@ -27,15 +27,15 @@
 	logtalk_load(options(loader)),
 	logtalk_load(classifier_protocols(loader)),
 	logtalk_load([
-		'test_files/nb_weather_dataset',
-		'test_files/nb_iris_dataset',
-		'test_files/nb_mixed_dataset'
+		classifier_protocols('test_datasets/weather'),
+		classifier_protocols('test_datasets/iris_small'),
+		classifier_protocols('test_datasets/mixed')
 	], [
 		source_data(on),
 		debug(on)
 	]),
 	logtalk_load(knn, [source_data(on), debug(on)]),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load('test_files/tests', [hook(lgtunit)]),
+	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).

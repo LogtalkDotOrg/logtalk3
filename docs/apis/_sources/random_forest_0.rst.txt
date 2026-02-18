@@ -15,7 +15,7 @@ Random Forest classifier using C4.5 decision trees as base learners. Builds an e
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-16
+| **Date:** 2026-02-18
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -38,7 +38,7 @@ Random Forest classifier using C4.5 decision trees as base learners. Builds an e
    - Algorithm: Random Forest is an ensemble learning method that constructs multiple decision trees during training and outputs the class that is the mode of the classes predicted by individual trees.
    - Bootstrap sampling: Each tree is trained on a bootstrap sample (random sample with replacement) of the training data.
    - Feature randomization: At each tree, a random subset of features is selected. The default number of features is sqrt(total_features).
-   - Classifier representation: The learned classifier is represented as ``random_forest_classifier(Trees, ClassValues, Options)`` where ``Trees`` is a list of ``tree(Tree, AttributeNames)`` pairs.
+   - Classifier representation: The learned classifier is represented by default as a ``rf_classifier(Trees, ClassValues, Options)`` term.
 
 | **Inherited public predicates:**
 |     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`classifier_protocol/0::classifier_to_clauses/4`  :ref:`classifier_protocol/0::classifier_to_file/4`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`classifier_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  

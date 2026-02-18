@@ -67,7 +67,7 @@ Prunes a decision tree using pessimistic error pruning (PEP). This post-pruning 
 
     - Confidence factor: The confidence factor controls the aggressiveness of pruning. It must be in the range ``(0.0, 1.0)``. Lower values result in more aggressive pruning (smaller, simpler trees), while higher values result in less pruning (larger, more complex trees). The default value is ``0.25``.
     - Minimum instances per leaf: The minimum number of instances required at a leaf node. When a node has fewer instances than this value, the node may be pruned. It must be a positive integer. The default value is ``2``.
-    - Statistical basis: The pruning uses the upper confidence bound of the binomial distribution to estimate the true error rate. Given observed errors E and total instances N, the upper bound is calculated using: ``UCF = (f + z²/(2N) + z*sqrt(f*(1-f)/N + z²/(4N²))) / (1 + z²/N)`` where ``f = E/N`` is the observed error rate and ``z`` is the z-score corresponding to the confidence factor.
+    - Statistical basis: The pruning uses the upper confidence bound of the binomial distribution to estimate the true error rate.
 
 
 ------------
@@ -112,5 +112,5 @@ Operators
 
 .. seealso::
 
-   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`knn <knn/0>`, :ref:`naive_bayes <naive_bayes/0>`
+   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`knn <knn/0>`, :ref:`naive_bayes <naive_bayes/0>`, :ref:`random_forest <random_forest/0>`
 

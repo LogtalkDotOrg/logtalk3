@@ -25,15 +25,15 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-16,
+		date is 2026-02-18,
 		comment is 'Naive Bayes classifier with Laplace smoothing and Gaussian distribution support. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Naive Bayes is a probabilistic classifier based on Bayes theorem with strong (naive) independence assumptions between features.',
 			'Categorical features' - 'Uses Laplace smoothing to handle unseen feature values.',
 			'Continuous features' - 'Uses Gaussian (normal) distribution to model numeric features.',
-			'Classifier representation' - 'The learned classifier is represented as ``Functor(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams)`` where ``FeatureParams`` contains the learned probabilities or statistics for each feature.'
+			'Classifier representation' - 'The learned classifier is represented by default as ``nb_classifier(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams)`` where ``FeatureParams`` contains the learned probabilities or statistics for each feature.'
 		],
-		see_also is [dataset_protocol, c45, knn]
+		see_also is [dataset_protocol, c45, knn, random_forest]
 	]).
 
 	:- public(predict_probabilities/3).
@@ -177,7 +177,7 @@
 		max_probability(Probabilities, Class, _).
 
 	predict_probabilities(Classifier, Instance, Probabilities) :-
-		Classifier = nb_classifier(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams),
+		Classifier =.. [_, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams],
 		extract_values(AttributeNames, Instance, Values),
 		compute_posteriors(Values, Classes, ClassPriors, FeatureTypes, FeatureParams, Probabilities).
 
@@ -263,7 +263,8 @@
 		).
 
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
-		Clause =.. [Functor, Classifier].
+		Classifier =.. [_, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams],
+		Clause =.. [Functor, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams].
 
 	classifier_to_file(Dataset, Classifier, Functor, File) :-
 		classifier_to_clauses(Dataset, Classifier, Functor, Clauses),
@@ -285,7 +286,7 @@
 		write_clauses(Clauses, Stream).
 
 	print_classifier(Classifier) :-
-		Classifier = nb_classifier(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams),
+		Classifier =.. [_, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams],
 		format('Naive Bayes Classifier~n', []),
 		format('======================~n~n', []),
 		format('Classes: ~w~n~n', [Classes]),

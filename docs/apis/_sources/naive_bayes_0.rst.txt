@@ -15,7 +15,7 @@ Naive Bayes classifier with Laplace smoothing and Gaussian distribution support.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-16
+| **Date:** 2026-02-18
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -34,7 +34,7 @@ Naive Bayes classifier with Laplace smoothing and Gaussian distribution support.
    - Algorithm: Naive Bayes is a probabilistic classifier based on Bayes theorem with strong (naive) independence assumptions between features.
    - Categorical features: Uses Laplace smoothing to handle unseen feature values.
    - Continuous features: Uses Gaussian (normal) distribution to model numeric features.
-   - Classifier representation: The learned classifier is represented as ``Functor(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams)`` where ``FeatureParams`` contains the learned probabilities or statistics for each feature.
+   - Classifier representation: The learned classifier is represented by default as ``nb_classifier(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams)`` where ``FeatureParams`` contains the learned probabilities or statistics for each feature.
 
 | **Inherited public predicates:**
 |     :ref:`classifier_protocol/0::classifier_to_clauses/4`  :ref:`classifier_protocol/0::classifier_to_file/4`  :ref:`classifier_protocol/0::learn/2`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  
@@ -82,5 +82,5 @@ Operators
 
 .. seealso::
 
-   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`c45 <c45/0>`, :ref:`knn <knn/0>`
+   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`c45 <c45/0>`, :ref:`knn <knn/0>`, :ref:`random_forest <random_forest/0>`
 

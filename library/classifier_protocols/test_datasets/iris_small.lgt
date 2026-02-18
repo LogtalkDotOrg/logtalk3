@@ -19,13 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(nb_iris_dataset,
+:- object(iris_small,
 	implements(dataset_protocol)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-15,
+		date is 2026-02-18,
 		comment is 'Simplified Iris dataset for Naive Bayes testing (continuous features).'
 	]).
 

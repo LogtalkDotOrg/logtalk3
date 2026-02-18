@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-16,
+		date is 2026-02-18,
 		comment is 'Protocol for datasets used with classifiers.',
 		see_also is [c45, naive_bayes]
 	]).
@@ -46,7 +46,7 @@
 	:- public(classifier_to_clauses/4).
 	:- mode(classifier_to_clauses(+object_identifier, +compound, +callable, -list(clause)), one).
 	:- info(classifier_to_clauses/4, [
-		comment is 'Converts a classifier into a list of predicate clauses. ``Functor`` is the functor for the generated clause.',
+		comment is 'Converts a classifier into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses.',
 		argnames is ['Dataset', 'Classifier', 'Functor', 'Clauses']
 	]).
 

@@ -34,7 +34,7 @@
 			'Missing values' - 'Missing attribute values are represented using anonymous variables. During tree construction, examples with missing values for the split attribute are distributed to all branches. Entropy and gain calculations use only examples with known values for the attribute being evaluated.',
 			'Tree pruning' - 'The ``prune/3`` and ``prune/5`` predicates implement pessimistic error pruning (PEP), which estimates error rates using the upper confidence bound of the binomial distribution (Wilson score interval) with a configurable confidence factor (default 0.25, range ``(0.0, 1.0)``) and minimum instances per leaf (default 2). Subtrees are replaced with leaf nodes when doing so would not increase the estimated error.'
 		],
-		see_also is [dataset_protocol, knn, naive_bayes]
+		see_also is [dataset_protocol, knn, naive_bayes, random_forest]
 	]).
 
 	:- public(prune/5).
@@ -45,7 +45,7 @@
 		remarks is [
 			'Confidence factor' - 'The confidence factor controls the aggressiveness of pruning. It must be in the range ``(0.0, 1.0)``. Lower values result in more aggressive pruning (smaller, simpler trees), while higher values result in less pruning (larger, more complex trees). The default value is ``0.25``.',
 			'Minimum instances per leaf' - 'The minimum number of instances required at a leaf node. When a node has fewer instances than this value, the node may be pruned. It must be a positive integer. The default value is ``2``.',
-			'Statistical basis' - 'The pruning uses the upper confidence bound of the binomial distribution to estimate the true error rate. Given observed errors E and total instances N, the upper bound is calculated using: ``UCF = (f + z²/(2N) + z*sqrt(f*(1-f)/N + z²/(4N²))) / (1 + z²/N)`` where ``f = E/N`` is the observed error rate and ``z`` is the z-score corresponding to the confidence factor.'
+			'Statistical basis' - 'The pruning uses the upper confidence bound of the binomial distribution to estimate the true error rate.'
 		]
 	]).
 

@@ -140,7 +140,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#classifier-representation">Classifier Representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#test-datasets">Test datasets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#learning-a-classifier">Learning a Classifier</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#making-predictions">Making Predictions</a></li>
@@ -279,8 +278,10 @@ consider per tree (default: sqrt(total_features))</p></li>
 </section>
 <section id="classifier-representation">
 <h2>Classifier Representation<a class="headerlink" href="#classifier-representation" title="Link to this heading"></a></h2>
-<p>The learned classifier is represented as a compound term:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>random_forest_classifier(<span class="nv">Trees</span>, <span class="nv">ClassValues</span>, <span class="nv">Options</span>)
+<p>The learned classifier is represented as a compound term with the
+functor chosen by the user when exporting the classifier and arity 2.
+The default functor is <code class="docutils literal notranslate"><span class="pre">rf_classifier/3</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>rf_classifier(<span class="nv">Trees</span>, <span class="nv">ClassValues</span>)
 </pre></div>
 </div>
 <p>Where:</p>
@@ -299,37 +300,6 @@ International Conference on Document Analysis and Recognition.</p></li>
 <li><p>Quinlan, J.R. (1993). “C4.5: Programs for Machine Learning”. Morgan
 Kaufmann.</p></li>
 </ol>
-</section>
-<section id="test-datasets">
-<h2>Test datasets<a class="headerlink" href="#test-datasets" title="Link to this heading"></a></h2>
-<p>Four sample datasets are included in the <code class="docutils literal notranslate"><span class="pre">test_files</span></code> directory:</p>
-<ul class="simple">
-<li><p><strong>Play Tennis</strong> — The classic weather/tennis dataset with 14 examples
-and 4 discrete attributes (outlook, temperature, humidity, wind).
-Originally from Quinlan (1986) and widely used in machine learning
-textbooks including Mitchell (1997).</p></li>
-<li><p><strong>Contact Lenses</strong> — A dataset with 24 examples and 4 discrete
-attributes (age, spectacle prescription, astigmatism, tear production
-rate) for deciding the type of contact lenses to prescribe. Originally
-from Cendrowska, J. (1987). PRISM: An algorithm for inducing modular
-rules. <em>International Journal of Man-Machine Studies</em>, 27(4), 349-370.
-Available from the UCI Machine Learning Repository:
-<a class="reference external" href="https://archive.ics.uci.edu/dataset/58/lenses">https://archive.ics.uci.edu/dataset/58/lenses</a></p></li>
-<li><p><strong>Iris</strong> — The classic Iris flower dataset with 150 examples and 4
-continuous attributes (sepal length, sepal width, petal length, petal
-width) for classifying iris species (setosa, versicolor, virginica).
-Originally from Fisher, R.A. (1936). The use of multiple measurements
-in taxonomic problems. <em>Annals of Eugenics</em>, 7(2), 179-188. Available
-from the UCI Machine Learning Repository:
-<a class="reference external" href="https://archive.ics.uci.edu/dataset/53/iris">https://archive.ics.uci.edu/dataset/53/iris</a></p></li>
-<li><p><strong>Breast Cancer</strong> — A dataset with 286 examples and 9 discrete
-attributes (age, menopause, tumor size, inv-nodes, node-caps, degree
-of malignancy, breast, breast quadrant, irradiation) for predicting
-breast cancer recurrence events. Contains missing values. Originally
-from the Institute of Oncology, University Medical Centre, Ljubljana.
-Available from the UCI Machine Learning Repository:
-<a class="reference external" href="https://archive.ics.uci.edu/dataset/14/breast+cancer">https://archive.ics.uci.edu/dataset/14/breast+cancer</a></p></li>
-</ul>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>

@@ -15,7 +15,7 @@ k-Nearest Neighbors classifier with multiple distance metrics and weighting opti
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-17
+| **Date:** 2026-02-18
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -37,7 +37,7 @@ k-Nearest Neighbors classifier with multiple distance metrics and weighting opti
    - Distance metrics: Supports Euclidean, Manhattan, Chebyshev, and Minkowski distance metrics.
    - Weighting schemes: Supports uniform, distance-based, and Gaussian weighting of neighbors.
    - Feature types: Automatically handles numeric and categorical features.
-   - Classifier representation: The learned classifier is represented as ``knn_classifier(AttributeNames, FeatureTypes, Instances)`` where ``Instances`` contains the training data.
+   - Classifier representation: The learned classifier is represented (by default) as a ``knn_classifier(AttributeNames, FeatureTypes, Instances)`` where ``Instances`` contains the training data.
 
 | **Inherited public predicates:**
 |     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`classifier_protocol/0::classifier_to_clauses/4`  :ref:`classifier_protocol/0::classifier_to_file/4`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`classifier_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
@@ -123,5 +123,5 @@ Operators
 
 .. seealso::
 
-   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`c45 <c45/0>`, :ref:`naive_bayes <naive_bayes/0>`
+   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`c45 <c45/0>`, :ref:`naive_bayes <naive_bayes/0>`, :ref:`random_forest <random_forest/0>`
 

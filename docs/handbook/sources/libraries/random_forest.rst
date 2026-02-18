@@ -73,11 +73,13 @@ The following options can be passed to the ``learn/3`` predicate:
 Classifier Representation
 -------------------------
 
-The learned classifier is represented as a compound term:
+The learned classifier is represented as a compound term with the
+functor chosen by the user when exporting the classifier and arity 2.
+The default functor is ``rf_classifier/3``:
 
 ::
 
-   random_forest_classifier(Trees, ClassValues, Options)
+   rf_classifier(Trees, ClassValues)
 
 Where:
 
@@ -93,40 +95,6 @@ References
    International Conference on Document Analysis and Recognition.
 3. Quinlan, J.R. (1993). "C4.5: Programs for Machine Learning". Morgan
    Kaufmann.
-
-Test datasets
--------------
-
-Four sample datasets are included in the ``test_files`` directory:
-
-- **Play Tennis** — The classic weather/tennis dataset with 14 examples
-  and 4 discrete attributes (outlook, temperature, humidity, wind).
-  Originally from Quinlan (1986) and widely used in machine learning
-  textbooks including Mitchell (1997).
-
-- **Contact Lenses** — A dataset with 24 examples and 4 discrete
-  attributes (age, spectacle prescription, astigmatism, tear production
-  rate) for deciding the type of contact lenses to prescribe. Originally
-  from Cendrowska, J. (1987). PRISM: An algorithm for inducing modular
-  rules. *International Journal of Man-Machine Studies*, 27(4), 349-370.
-  Available from the UCI Machine Learning Repository:
-  https://archive.ics.uci.edu/dataset/58/lenses
-
-- **Iris** — The classic Iris flower dataset with 150 examples and 4
-  continuous attributes (sepal length, sepal width, petal length, petal
-  width) for classifying iris species (setosa, versicolor, virginica).
-  Originally from Fisher, R.A. (1936). The use of multiple measurements
-  in taxonomic problems. *Annals of Eugenics*, 7(2), 179-188. Available
-  from the UCI Machine Learning Repository:
-  https://archive.ics.uci.edu/dataset/53/iris
-
-- **Breast Cancer** — A dataset with 286 examples and 9 discrete
-  attributes (age, menopause, tumor size, inv-nodes, node-caps, degree
-  of malignancy, breast, breast quadrant, irradiation) for predicting
-  breast cancer recurrence events. Contains missing values. Originally
-  from the Institute of Oncology, University Medical Centre, Ljubljana.
-  Available from the UCI Machine Learning Repository:
-  https://archive.ics.uci.edu/dataset/14/breast+cancer
 
 Usage
 -----

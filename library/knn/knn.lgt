@@ -26,16 +26,16 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-17,
+		date is 2026-02-18,
 		comment is 'k-Nearest Neighbors classifier with multiple distance metrics and weighting options. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'k-NN is a lazy learning algorithm that classifies instances based on the majority class among the k nearest training instances.',
 			'Distance metrics' - 'Supports Euclidean, Manhattan, Chebyshev, and Minkowski distance metrics.',
 			'Weighting schemes' - 'Supports uniform, distance-based, and Gaussian weighting of neighbors.',
 			'Feature types' - 'Automatically handles numeric and categorical features.',
-			'Classifier representation' - 'The learned classifier is represented as ``knn_classifier(AttributeNames, FeatureTypes, Instances)`` where ``Instances`` contains the training data.'
+			'Classifier representation' - 'The learned classifier is represented (by default) as a ``knn_classifier(AttributeNames, FeatureTypes, Instances)`` where ``Instances`` contains the training data.'
 		],
-		see_also is [dataset_protocol, c45, naive_bayes]
+		see_also is [dataset_protocol, c45, naive_bayes, random_forest]
 	]).
 
 	:- public(predict/4).
@@ -132,7 +132,7 @@
 	predict_probabilities(Classifier, Instance, Probabilities, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		Classifier = knn_classifier(AttributeNames, FeatureTypes, Instances),
+		Classifier =.. [_, AttributeNames, FeatureTypes, Instances],
 		% Extract values from instance in correct order
 		extract_values(AttributeNames, Instance, Values),
 		% Get k value
@@ -301,7 +301,8 @@
 		).
 
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
-		Clause =.. [Functor, Classifier].
+		Classifier =.. [_, AttributeNames, FeatureTypes, Instances],
+		Clause =.. [Functor, AttributeNames, FeatureTypes, Instances].
 
 	classifier_to_file(Dataset, Classifier, Functor, File) :-
 		classifier_to_clauses(Dataset, Classifier, Functor, Clauses),
@@ -323,7 +324,7 @@
 		write_clauses(Clauses, Stream).
 
 	print_classifier(Classifier) :-
-		Classifier = knn_classifier(AttributeNames, FeatureTypes, Instances),
+		Classifier =.. [_, AttributeNames, FeatureTypes, Instances],
 		format('k-Nearest Neighbors Classifier~n', []),
 		format('==============================~n~n', []),
 		length(Instances, NumInstances),

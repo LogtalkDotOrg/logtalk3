@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-16,
+		date is 2026-02-18,
 		comment is 'Unit tests for the "random_forest" library.'
 	]).
 
@@ -47,26 +47,23 @@
 	test(random_forest_learn_2_play_tennis, true(ground(Classifier))) :-
 		random_forest::learn(play_tennis, Classifier).
 
-	test(random_forest_learn_2_classifier_structure, true) :-
-		random_forest::learn(play_tennis, Classifier),
-		Classifier = random_forest_classifier(Trees, ClassValues, _Options),
-		ground(Trees),
-		ground(ClassValues).
+	test(random_forest_learn_2_classifier_structure, true(functor(Classifier, rf_classifier, 3))) :-
+		random_forest::learn(play_tennis, Classifier).
 
 	test(random_forest_learn_2_default_num_trees, true(NumTrees == 10)) :-
 		random_forest::learn(play_tennis, Classifier),
-		Classifier = random_forest_classifier(Trees, _, _),
+		Classifier = rf_classifier(Trees, _, _),
 		length(Trees, NumTrees).
 
 	test(random_forest_learn_2_class_values, true(ClassValues == [yes, no])) :-
 		random_forest::learn(play_tennis, Classifier),
-		Classifier = random_forest_classifier(_, ClassValues, _).
+		Classifier = rf_classifier(_, ClassValues, _).
 
 	% learn/3 tests - with options
 
 	test(random_forest_learn_3_custom_num_trees, true(NumTrees == 5)) :-
 		random_forest::learn(play_tennis, Classifier, [number_of_trees(5)]),
-		Classifier = random_forest_classifier(Trees, _, _),
+		Classifier = rf_classifier(Trees, _, _),
 		length(Trees, NumTrees).
 
 	test(random_forest_learn_3_custom_max_features, true(ground(Classifier))) :-
@@ -76,17 +73,18 @@
 
 	test(random_forest_ensemble_has_multiple_trees, true(NumTrees > 1)) :-
 		random_forest::learn(play_tennis, Classifier, [number_of_trees(5)]),
-		Classifier = random_forest_classifier(Trees, _, _),
+		Classifier = rf_classifier(Trees, _, _),
 		length(Trees, NumTrees).
 
 	test(random_forest_trees_have_different_features, true) :-
 		% With random feature selection, trees should potentially use different features
 		random_forest::learn(iris, Classifier, [number_of_trees(3), maximum_features_per_tree(2)]),
-		Classifier = random_forest_classifier(Trees, _, _),
+		Classifier = rf_classifier(Trees, _, _),
 		% Just verify the structure - each tree has associated feature names
+		^^assertion(length(Trees, 3)),
 		forall(
-			memberchk(tree(Tree, FeatureNames), Trees),
-			(ground(Tree), ground(FeatureNames))
+			(memberchk(tree(_Tree, FeatureNames), Trees), length(FeatureNames, Max)),
+			^^assertion(Max =< 2)
 		).
 
 	% predict/3 tests - ensemble predictions
@@ -136,36 +134,33 @@
 
 	% classifier_to_clauses/4 tests
 
-	test(random_forest_classifier_to_clauses_4, true(length(Clauses, 1))) :-
+	test(rf_classifier_to_clauses_4, true(length(Clauses, 1))) :-
 		random_forest::learn(play_tennis, Classifier),
 		random_forest::classifier_to_clauses(play_tennis, Classifier, classify, Clauses).
 
-	test(random_forest_classifier_to_clauses_4_structure, true) :-
+	test(rf_classifier_to_clauses_4_structure, true(functor(Clause, my_forest, 3))) :-
 		random_forest::learn(play_tennis, Classifier),
-		random_forest::classifier_to_clauses(play_tennis, Classifier, my_forest, [Clause]),
-		Clause = my_forest(ExportedClassifier),
-		ExportedClassifier = random_forest_classifier(_, _, _).
+		random_forest::classifier_to_clauses(play_tennis, Classifier, my_forest, [Clause]).
 
-	test(random_forest_classifier_to_clauses_4_usable, true(ground(Prediction))) :-
+	test(rf_classifier_to_clauses_4_usable, true(ground(Prediction))) :-
 		random_forest::learn(play_tennis, Classifier),
 		random_forest::classifier_to_clauses(_Dataset, Classifier, classify, [Clause]),
-		Clause = classify(ExportedClassifier),
-		random_forest::predict(ExportedClassifier, [outlook-overcast, temperature-hot, humidity-high, wind-weak], Prediction).
+		random_forest::predict(Clause, [outlook-overcast, temperature-hot, humidity-high, wind-weak], Prediction).
 
 	% classifier_to_file/4 tests
 
-	test(random_forest_classifier_to_file_4, deterministic) :-
+	test(rf_classifier_to_file_4, deterministic) :-
 		^^file_path('test_output.pl', File),
 		random_forest::learn(play_tennis, Classifier),
 		random_forest::classifier_to_file(play_tennis, Classifier, classify, File).
 
-	test(random_forest_classifier_to_file_4_loadable, true(ground(Prediction))) :-
+	test(rf_classifier_to_file_4_loadable, true(ground(Prediction))) :-
 		^^file_path('test_output.pl', File),
 		random_forest::learn(play_tennis, Classifier),
 		random_forest::classifier_to_file(play_tennis, Classifier, classify, File),
 		logtalk_load(File),
-		{classify(LoadedClassifier)},
-		random_forest::predict(LoadedClassifier, [outlook-overcast, temperature-hot, humidity-high, wind-weak], Prediction).
+		{classify(Trees, ClassValues, Options)},
+		random_forest::predict(classify(Trees, ClassValues, Options), [outlook-overcast, temperature-hot, humidity-high, wind-weak], Prediction).
 
 	% print_classifier/1 tests
 

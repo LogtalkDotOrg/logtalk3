@@ -19,39 +19,38 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(play_tennis,
+:- object(weather,
 	implements(dataset_protocol)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-14,
-		comment is 'Classic "Play Tennis" dataset used for testing decision tree learning algorithms. Based on the example from Quinlan (1986) and Mitchell (1997).'
+		date is 2026-02-18,
+		comment is 'Weather dataset for Naive Bayes testing (categorical features).'
 	]).
 
-	attribute_values(outlook, [sunny, overcast, rain]).
+	attribute_values(outlook, [sunny, overcast, rainy]).
 	attribute_values(temperature, [hot, mild, cool]).
 	attribute_values(humidity, [high, normal]).
 	attribute_values(wind, [weak, strong]).
 
-	class(play_tennis).
+	class(play).
 
 	class_values([yes, no]).
 
 	example( 1, no,  [outlook-sunny,    temperature-hot,  humidity-high,   wind-weak]).
 	example( 2, no,  [outlook-sunny,    temperature-hot,  humidity-high,   wind-strong]).
 	example( 3, yes, [outlook-overcast, temperature-hot,  humidity-high,   wind-weak]).
-	example( 4, yes, [outlook-rain,     temperature-mild, humidity-high,   wind-weak]).
-	example( 5, yes, [outlook-rain,     temperature-cool, humidity-normal, wind-weak]).
-	example( 6, no,  [outlook-rain,     temperature-cool, humidity-normal, wind-strong]).
+	example( 4, yes, [outlook-rainy,    temperature-mild, humidity-high,   wind-weak]).
+	example( 5, yes, [outlook-rainy,    temperature-cool, humidity-normal, wind-weak]).
+	example( 6, no,  [outlook-rainy,    temperature-cool, humidity-normal, wind-strong]).
 	example( 7, yes, [outlook-overcast, temperature-cool, humidity-normal, wind-strong]).
 	example( 8, no,  [outlook-sunny,    temperature-mild, humidity-high,   wind-weak]).
 	example( 9, yes, [outlook-sunny,    temperature-cool, humidity-normal, wind-weak]).
-	example(10, yes, [outlook-rain,     temperature-mild, humidity-normal, wind-weak]).
+	example(10, yes, [outlook-rainy,    temperature-mild, humidity-normal, wind-weak]).
 	example(11, yes, [outlook-sunny,    temperature-mild, humidity-normal, wind-strong]).
 	example(12, yes, [outlook-overcast, temperature-mild, humidity-high,   wind-strong]).
 	example(13, yes, [outlook-overcast, temperature-hot,  humidity-normal, wind-weak]).
-	example(14, no,  [outlook-rain,     temperature-mild, humidity-high,   wind-strong]).
+	example(14, no,  [outlook-rainy,    temperature-mild, humidity-high,   wind-strong]).
 
 :- end_object.
-
