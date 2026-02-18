@@ -365,7 +365,7 @@
 		% Empty value
 		[].
 
-	% Helper: parse value after anchor and store anchor
+	% Auxiliary predicate to parse value after anchor and store anchor
 	block_mapping_value_anchor(Indent, Value, AnchorName, S0, S) -->
 		% Value is on the same line (after anchor)
 		peek_non_newline_char,
@@ -1521,7 +1521,7 @@
 
 	% auxiliary predicates
 
-	% Helper to output a list of codes
+	% Auxiliary predicate to output a list of codes
 	codes([]) --> [].
 	codes([Code| Codes]) --> [Code], codes(Codes).
 

@@ -33,7 +33,7 @@
 			'Continuous features' - 'Uses Gaussian (normal) distribution to model numeric features.',
 			'Classifier representation' - 'The learned classifier is represented by default as ``nb_classifier(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams)`` where ``FeatureParams`` contains the learned probabilities or statistics for each feature.'
 		],
-		see_also is [dataset_protocol, c45, knn, random_forest]
+		see_also is [dataset_protocol, c45, knn, nearest_centroid, random_forest]
 	]).
 
 	:- public(predict_probabilities/3).
@@ -216,7 +216,7 @@
 		Probability is Coefficient * exp(Exponent).
 	gaussian_probability(_, _, _, 1.0). % Handle zero variance
 
-	% Helper predicates
+	% Auxiliary predicates
 	count_occurrences([], _, 0).
 	count_occurrences([Head| Tail], Element, Count) :-
 		(	Head == Element ->
@@ -269,16 +269,12 @@
 	classifier_to_file(Dataset, Classifier, Functor, File) :-
 		classifier_to_clauses(Dataset, Classifier, Functor, Clauses),
 		open(File, write, Stream),
-		write_file_header(Functor, Stream),
+		write_comment_header(Functor, Stream),
 		write_clauses(Clauses, Stream),
 		close(Stream).
 
-	write_file_header(Functor, Stream) :-
-		format(Stream, '%% Naive Bayes classifier exported by naive_bayes library~n', []),
-		format(Stream, '%% Load this file and use the classifier with:~n', []),
-		format(Stream, '%%   ~w(Classifier),~n', [Functor]),
-		format(Stream, '%%   naive_bayes::predict(Classifier, Instance, Class)~n', []),
-		format(Stream, '%%   naive_bayes::predict_probability(Classifier, Instance, Probabilities)~n~n', []).
+	write_comment_header(Functor, Stream) :-
+		format(Stream, '% ~q(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams)~n', [Functor]).
 
 	write_clauses([], _).
 	write_clauses([Clause| Clauses], Stream) :-

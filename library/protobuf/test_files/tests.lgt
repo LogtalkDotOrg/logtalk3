@@ -595,14 +595,14 @@
 		generate(bytes(Bytes), OuterSchema, [person-[name-'Charlie']]),
 		parse(bytes(Bytes), OuterSchema, Data).
 
-	% Helper predicates
+	% Auxiliary predicates
 
-	% Helper to get the person schema
+	% Auxiliary predicate to get the person schema
 	person_schema(Schema) :-
 		^^file_path('person.json', Path),
 		json_parse(file(Path), Schema).
 
-	% Helper to get the addressbook schema
+	% Auxiliary predicate to get the addressbook schema
 	addressbook_schema(Schema) :-
 		^^file_path('addressbook.json', Path),
 		json_parse(file(Path), Schema).

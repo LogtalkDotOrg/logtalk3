@@ -308,14 +308,12 @@
 		^^clean_file('test_output.avro'),
 		^^clean_file('test_stream.avro').
 
-	% Helper predicates
+	% Auxiliary predicates
 
-	% Helper to get the user schema by reading from user.avsc file
 	user_schema(Schema) :-
 		^^file_path('user.avsc', Path),
 		json_parse(file(Path), Schema).
 
-	% Helper to get user data by reading from user.jsonl file (returns each record on backtracking)
 	user_data(Data) :-
 		^^file_path('user.jsonl', Path),
 		json_lines_parse(file(Path), Records),

@@ -302,7 +302,7 @@
 		Index < Total,
 		nth_permutation_helper(List, Index, Permutation).
 
-	% Helper using factorial number system (Lehmer code)
+	% Auxiliary predicate using factorial number system (Lehmer code)
 	nth_permutation_helper([], _, []) :-
 		!.
 	nth_permutation_helper(List, Index, [Head| Permutation]) :-
@@ -321,7 +321,7 @@
 		Index < Total,
 		nth_combination_helper(K, List, Index, Combination).
 
-	% Helper using combinatorial number system
+	% Auxiliary predicate using combinatorial number system
 	% Algorithm: For each element in the combination, find which element from the list to pick
 	% such that the remaining elements can form valid combinations
 	nth_combination_helper(0, _, _, []) :-
@@ -389,7 +389,7 @@
 		length(Permutation, N),
 		permutation_index_helper(List, Permutation, 0, Index).
 
-	% Helper using factorial number system (Lehmer code) - inverse of nth_permutation_helper
+	% Auxiliary predicate using factorial number system (Lehmer code) - inverse of nth_permutation_helper
 	permutation_index_helper([], [], Index, Index) :-
 		!.
 	permutation_index_helper(List, [Head| Permutation], Index0, Index) :-
@@ -427,7 +427,7 @@
 	longest_increasing_subsequence(List, LIS) :-
 		lis_helper(List, [], LIS).
 
-	% Helper for LIS using patience sorting approach
+	% Auxiliary predicate for LIS using patience sorting approach
 	lis_helper([], LIS0, LIS) :-
 		longest_list(LIS0, LIS).
 	lis_helper([Head| Tail], LIS0, LIS) :-

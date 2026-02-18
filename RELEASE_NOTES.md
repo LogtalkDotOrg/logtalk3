@@ -80,6 +80,9 @@ for learning decision trees.
 
 * ADDED: New `naive_bayes` library implementing a Naive Bayes classifier.
 
+* ADDED: New `nearest_centroid` library implementing a Nearest Centroid
+classifier.
+
 * ADDED: New `datalog` library intended for educational purposes and
 non-demanding applications.
 

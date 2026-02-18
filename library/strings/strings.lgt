@@ -444,7 +444,7 @@
 			strip_all_padding(RawSubStrings, PadCodes, SubStrings)
 		).
 
-	% Helper to find intersection of two code lists
+	% Auxiliary predicate to find intersection of two code lists
 	intersection_codes([], _, []).
 	intersection_codes([Code| Codes], List2, Result) :-
 		(	member_code(Code, List2) ->

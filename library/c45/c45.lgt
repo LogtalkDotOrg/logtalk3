@@ -34,7 +34,7 @@
 			'Missing values' - 'Missing attribute values are represented using anonymous variables. During tree construction, examples with missing values for the split attribute are distributed to all branches. Entropy and gain calculations use only examples with known values for the attribute being evaluated.',
 			'Tree pruning' - 'The ``prune/3`` and ``prune/5`` predicates implement pessimistic error pruning (PEP), which estimates error rates using the upper confidence bound of the binomial distribution (Wilson score interval) with a configurable confidence factor (default 0.25, range ``(0.0, 1.0)``) and minimum instances per leaf (default 2). Subtrees are replaced with leaf nodes when doing so would not increase the estimated error.'
 		],
-		see_also is [dataset_protocol, knn, naive_bayes, random_forest]
+		see_also is [dataset_protocol, knn, naive_bayes, nearest_centroid, random_forest]
 	]).
 
 	:- public(prune/5).
@@ -484,7 +484,7 @@
 		),
 		title_case(Arguments, TitleCaseArguments),
 		Template =.. [Functor| TitleCaseArguments],
-		format(Stream, '% ~w~n', [Template]).
+		format(Stream, '% ~q~n', [Template]).
 
 	% assumes ASCII attribute names
 	title_case([], []).

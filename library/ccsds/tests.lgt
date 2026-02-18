@@ -394,7 +394,7 @@
 		[n(100)]
 	).
 
-	% Helper predicates for QuickCheck tests
+	% Auxiliary predicates for QuickCheck tests
 
 	roundtrip_property(Bytes) :-
 		ccsds::parse(bytes(Bytes), Packets),

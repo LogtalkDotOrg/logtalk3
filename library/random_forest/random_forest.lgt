@@ -34,7 +34,7 @@
 			'Feature randomization' - 'At each tree, a random subset of features is selected. The default number of features is sqrt(total_features).',
 			'Classifier representation' - 'The learned classifier is represented by default as a ``rf_classifier(Trees, ClassValues, Options)`` term.'
 		],
-		see_also is [dataset_protocol, c45, knn, naive_bayes]
+		see_also is [dataset_protocol, c45, knn, naive_bayes, nearest_centroid]
 	]).
 
 	:- public(learn/3).
@@ -271,19 +271,12 @@
 	classifier_to_file(Dataset, Classifier, Functor, File) :-
 		classifier_to_clauses(Dataset, Classifier, Functor, Clauses),
 		open(File, write, Stream),
-		write_file_header(Classifier, Functor, Stream),
+		write_comment_header(Functor, Stream),
 		write_clauses(Clauses, Stream),
 		close(Stream).
 
-	write_file_header(Classifier, Functor, Stream) :-
-		Classifier =.. [_, Trees, _, _],
-		length(Trees, NumTrees),
-		format(Stream, '%% Random Forest classifier exported by random_forest library~n', []),
-		format(Stream, '%% Number of trees: ~w~n', [NumTrees]),
-		format(Stream, '%% Load this file and use the classifier with:~n', []),
-		format(Stream, '%%   ~w(Trees, ClassValues. Options),~n', [Functor]),
-		format(Stream, '%%   random_forest::predict(Classifier, Instance, Class)~n', []),
-		format(Stream, '%%   random_forest::predict_probabilities(Classifier, Instance, Probabilities)~n~n', []).
+	write_comment_header(Functor, Stream) :-
+		format(Stream, '% ~q(Trees, ClassValues, Options)~n', [Functor]).
 
 	write_clauses([], _).
 	write_clauses([Clause| Clauses], Stream) :-

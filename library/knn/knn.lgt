@@ -35,7 +35,7 @@
 			'Feature types' - 'Automatically handles numeric and categorical features.',
 			'Classifier representation' - 'The learned classifier is represented (by default) as a ``knn_classifier(AttributeNames, FeatureTypes, Instances)`` where ``Instances`` contains the training data.'
 		],
-		see_also is [dataset_protocol, c45, naive_bayes, random_forest]
+		see_also is [dataset_protocol, c45, naive_bayes, nearest_centroid, random_forest]
 	]).
 
 	:- public(predict/4).
@@ -307,16 +307,12 @@
 	classifier_to_file(Dataset, Classifier, Functor, File) :-
 		classifier_to_clauses(Dataset, Classifier, Functor, Clauses),
 		open(File, write, Stream),
-		write_file_header(Functor, Stream),
+		write_comment_header(Functor, Stream),
 		write_clauses(Clauses, Stream),
 		close(Stream).
 
-	write_file_header(Functor, Stream) :-
-		format(Stream, '%% k-Nearest Neighbors classifier exported by knn library~n', []),
-		format(Stream, '%% Load this file and use the classifier with:~n', []),
-		format(Stream, '%%   ~w(Classifier),~n', [Functor]),
-		format(Stream, '%%   knn::predict(Classifier, Instance, Class)~n', []),
-		format(Stream, '%%   knn::predict_probabilities(Classifier, Instance, Probabilities)~n~n', []).
+	write_comment_header(Functor, Stream) :-
+		format(Stream, '% ~q(AttributeNames, FeatureTypes, Instances)~n', [Functor]).
 
 	write_clauses([], _).
 	write_clauses([Clause| Clauses], Stream) :-

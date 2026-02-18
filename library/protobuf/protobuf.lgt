@@ -673,7 +673,7 @@
 		bytes_rest(Bytes).
 
 	% =========================================================================
-	% Helper DCGs for byte sequences
+	% Auxiliary DCGs for byte sequences
 	% =========================================================================
 
 	% Emit/consume a list of bytes

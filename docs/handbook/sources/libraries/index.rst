@@ -82,6 +82,7 @@ directory in the ``NOTES.md`` file.
    meta_compiler
    mutations
    naive_bayes
+   nearest_centroid
    nested_dictionaries
    optionals
    options

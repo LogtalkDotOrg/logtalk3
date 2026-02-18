@@ -9318,6 +9318,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`knn <knn/0::predict/4>`
+* :ref:`nearest_centroid <nearest_centroid/0::predict/4>`
 
 ``predict_probabilities/3``
 ---------------------------
@@ -9329,6 +9330,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`knn <knn/0::predict_probabilities/3>`
 * :ref:`naive_bayes <naive_bayes/0::predict_probabilities/3>`
+* :ref:`nearest_centroid <nearest_centroid/0::predict_probabilities/3>`
 * :ref:`random_forest <random_forest/0::predict_probabilities/3>`
 
 ``predict_probabilities/4``
@@ -9340,6 +9342,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`knn <knn/0::predict_probabilities/4>`
+* :ref:`nearest_centroid <nearest_centroid/0::predict_probabilities/4>`
 
 ``prefix/0``
 ------------

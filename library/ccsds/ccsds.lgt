@@ -196,7 +196,7 @@
 	generate(Sink, _) :-
 		domain_error(ccsds_sink, Sink).
 
-	% Helper to generate all packets to a stream
+	% Auxiliary predicate to generate all packets to a stream
 	generate_all_stream([Packet| Packets], Stream) :-
 		(	var(Packet) ->
 			instantiation_error
@@ -207,7 +207,7 @@
 		).
 	generate_all_stream([], _).
 
-	% Helper to generate all packets to a byte list
+	% Auxiliary predicate to generate all packets to a byte list
 	generate_all_bytes([Packet| Packets], Bytes) :-
 		(	var(Packet) ->
 			instantiation_error
@@ -225,7 +225,7 @@
 		;	domain_error(ccsds_packet_term, Packet)
 		).
 
-	% Helper predicate to write bytes to a stream
+	% Auxiliary predicate to write bytes to a stream
 	write_bytes([], _).
 	write_bytes([Byte| Bytes], Stream) :-
 		put_byte(Stream, Byte),
@@ -261,7 +261,7 @@
 
 	secondary_header(ccsds_packet(_, _, _, _, _, _, SecHeader, _), SecHeader).
 
-	% Helper to get secondary header length
+	% Auxiliary predicate to get secondary header length
 	secondary_header_length(none, 0).
 	secondary_header_length(secondary_header(Bytes), Length) :-
 		length(Bytes, Length).
@@ -374,7 +374,7 @@
 		},
 		[Byte0, Byte1, Byte2, Byte3, Byte4, Byte5].
 
-	% Helper DCG for reading/writing byte lists
+	% Auxiliary DCG for reading/writing byte lists
 	bytes([]) -->
 		[].
 	bytes([Byte| Bytes]) -->

@@ -705,7 +705,7 @@
 		findall(Template, (tuple_(Tuple), once(retract(tuple_(Tuple)))), List).
 
 	% ==========================================================================
-	% Helper predicates
+	% Auxiliary predicates
 	% ==========================================================================
 
 	find_matching_tuple([Pattern| Patterns], Match) :-
@@ -995,7 +995,7 @@
 	stream_ready(Stream) :-
 		catch(peek_char(Stream, _), _, fail).
 
-	% Helper to wait for result with optional timeout
+	% Auxiliary predicate to wait for result with optional timeout
 	wait_for_result(Input, Result, Context) :-
 		(	client_timeout_(Timeout), Timeout \== off ->
 			Timeout = Seconds:Milliseconds,

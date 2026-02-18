@@ -85,6 +85,7 @@
 		random_forest(loader),
 		knn(loader),
 		naive_bayes(loader),
+		nearest_centroid(loader),
 		cbor(loader),
 		ccsds(loader),
 		avro(loader),

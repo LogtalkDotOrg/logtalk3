@@ -1,0 +1,127 @@
+.. index:: single: nearest_centroid
+.. _nearest_centroid/0:
+
+.. rst-class:: right
+
+**object**
+
+``nearest_centroid``
+====================
+
+Nearest Centroid classifier with multiple distance metrics. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.
+
+| **Availability:** 
+|    ``logtalk_load(nearest_centroid(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-18
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`classifier_protocol <classifier_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`pairs <pairs/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Algorithm: Assign to an instance the the class of the training samples whose mean (centroid) is closest to the instance.
+   - Distance metrics: Supports Euclidean, Manhattan, and cosine distance metrics.
+   - Feature types: Automatically handles numeric and categorical features.
+   - Classifier representation: The learned classifier is represented by default as a ``nc_classifier(AttributeNames, FeatureTypes, Centroids)`` term.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`classifier_protocol/0::classifier_to_clauses/4`  :ref:`classifier_protocol/0::classifier_to_file/4`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`classifier_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: predict/4
+.. _nearest_centroid/0::predict/4:
+
+``predict/4``
+^^^^^^^^^^^^^
+
+Predicts the class label for a new instance using the learned classifier and the given options. The instance is a list of ``Attribute-Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predict(Classifier,Instance,Class,Options)``
+| **Mode and number of proofs:**
+|    ``predict(+compound,+list,-atom,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: predict_probabilities/3
+.. _nearest_centroid/0::predict_probabilities/3:
+
+``predict_probabilities/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Predicts class probabilities for a new instance using the learned classifier and default options. Returns a list of ``Class-Probability`` pairs. The instance is a list of ``Attribute-Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predict_probabilities(Classifier,Instance,Probabilities)``
+| **Mode and number of proofs:**
+|    ``predict_probabilities(+compound,+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: predict_probabilities/4
+.. _nearest_centroid/0::predict_probabilities/4:
+
+``predict_probabilities/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Predicts class probabilities for a new instance using the learned classifier and the given options. Returns a list of ``Class-Probability`` pairs. The instance is a list of ``Attribute-Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predict_probabilities(Classifier,Instance,Probabilities,Options)``
+| **Mode and number of proofs:**
+|    ``predict_probabilities(+compound,+list,-list,+list(compound))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`c45 <c45/0>`, :ref:`knn <knn/0>`, :ref:`naive_bayes <naive_bayes/0>`, :ref:`random_forest <random_forest/0>`
+

@@ -133,6 +133,7 @@
 <li class="toctree-l2"><a class="reference internal" href="meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="mutations.html"><code class="docutils literal notranslate"><span class="pre">mutations</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="naive_bayes.html"><code class="docutils literal notranslate"><span class="pre">naive_bayes</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nearest_centroid.html"><code class="docutils literal notranslate"><span class="pre">nearest_centroid</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="nested_dictionaries.html"><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
@@ -211,10 +212,8 @@
 <p>This library implements the C4.5 decision tree learning algorithm. C4.5
 is an extension of the ID3 algorithm that uses information gain ratio
 instead of information gain for attribute selection, which avoids bias
-towards attributes with many values. The implementation supports both
-discrete (categorical) and continuous (numeric) attributes. It also
-supports missing attribute values, represented using anonymous variables
-(see below for implementation details).</p>
+towards attributes with many values (see below for implementation
+details).</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">classifier_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code> library. It provides predicates for learning a
 decision tree from a dataset, optionally prune it, using it to make
@@ -264,8 +263,7 @@ rates using the upper confidence bound of the binomial distribution
 0.25) and minimum instances per leaf (default 2); replaces subtrees
 with leaf nodes when doing so would not increase the estimated error;
 helps reduce overfitting and improve generalization</p></li>
-<li><p>Export of learned decision trees as lists of predicate clauses or to
-files</p></li>
+<li><p>Export of learned decision trees as predicate clauses</p></li>
 <li><p>Pretty-printing of learned decision trees</p></li>
 </ul>
 </section>

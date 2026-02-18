@@ -181,7 +181,7 @@
 		socket::close(ClientInput2, ClientOutput2),
 		socket::server_close(ServerSocket).
 
-	% Helper predicates for threaded tests
+	% Auxiliary predicates for threaded tests
 
 	client_connect_and_close_binary(Port) :-
 		catch(

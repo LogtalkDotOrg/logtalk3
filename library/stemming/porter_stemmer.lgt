@@ -355,7 +355,7 @@
 		).
 
 	% -----------------------------------------------------------------
-	% Helper predicates
+	% Auxiliary predicates
 	% -----------------------------------------------------------------
 
 	% Check if a character is a vowel (a, e, i, o, u, or y preceded by consonant)

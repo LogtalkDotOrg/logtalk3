@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on February 15, 2026
+##   Last updated on February 18, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -127,6 +127,7 @@ Foreach-Object {
 (Get-Content ../../../library/meta_compiler/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/meta_compiler.rst
 (Get-Content ../../../library/mutations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mutations.rst
 (Get-Content ../../../library/naive_bayes/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/naive_bayes.rst
+(Get-Content ../../../library/nearest_centroid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nearest_centroid.rst
 (Get-Content ../../../library/nested_dictionaries/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nested_dictionaries.rst
 (Get-Content ../../../library/optionals/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/optionals.rst
 (Get-Content ../../../library/options/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/options.rst

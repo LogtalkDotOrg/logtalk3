@@ -192,22 +192,21 @@
 		Instance = [outlook-sunny, temperature-cool, humidity-normal, wind-weak],
 		random_forest::predict(Classifier, Instance, PredictedClass),
 		random_forest::predict_probabilities(Classifier, Instance, Probabilities),
-		max_prob_class(Probabilities, MaxProbClass).
+		max_probability_class(Probabilities, MaxProbClass).
 
-	% Helper predicates
+	% Auxiliary predicates
 
 	sum_probabilities([], Sum, Sum).
-	sum_probabilities([_-Prob| Rest], Acc, Sum) :-
-		NewAcc is Acc + Prob,
-		sum_probabilities(Rest, NewAcc, Sum).
+	sum_probabilities([_-Probability| Rest], Sum0, Sum) :-
+		Sum1 is Sum0 + Probability,
+		sum_probabilities(Rest, Sum1, Sum).
 
-	max_prob_class([Class-Prob], Class) :-
-		Prob >= 0.
-	max_prob_class([C1-P1, C2-P2| Rest], MaxClass) :-
-		(	P1 >= P2 ->
-			max_prob_class([C1-P1| Rest], MaxClass)
-		;	max_prob_class([C2-P2| Rest], MaxClass)
+	max_probability_class([Class-Probability], Class) :-
+		Probability >= 0.
+	max_probability_class([Class1-Probability1, Class2-Probability2| Rest], Class) :-
+		(	Probability1 >= Probability2 ->
+			max_probability_class([Class1-Probability1| Rest], Class)
+		;	max_probability_class([Class2-Probability2| Rest], Class)
 		).
 
 :- end_object.
-

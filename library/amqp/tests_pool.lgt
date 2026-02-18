@@ -276,7 +276,7 @@
 		^^assertion(max_size, MaxSize == 0).
 
 	% ==========================================================================
-	% Helper Predicates
+	% Auxiliary Predicates
 	% ==========================================================================
 
 	test_channel_operations(Connection) :-
