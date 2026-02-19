@@ -118,7 +118,7 @@
 			AllAVs
 		),
 		% Compute ranges from known values for imputation
-		compute_attribute_ranges(AllAVs, AttributeNames, Attributes, Ranges),
+		compute_attribute_ranges(AttributeNames, AllAVs, Attributes, Ranges),
 		% Convert to numeric vectors with random imputation of missing values
 		to_numeric_vectors(AllAVs, AttributeNames, Attributes, Ranges, Vectors),
 		length(Vectors, NumInstances),
@@ -146,7 +146,7 @@
 	% branches and computing a weighted average path length
 	score(Model, Instance, Score) :-
 		Model =.. [_, Trees, Psi, AttributeNames, Attributes, Ranges, _Options],
-		to_numeric_vector_with_missing(Instance, AttributeNames, Attributes, Vector, MissingMask),
+		to_numeric_vector_with_missing(AttributeNames, Instance, Attributes, Vector, MissingMask),
 		% Compute average path length across all trees
 		compute_average_path_length(Trees, Vector, MissingMask, Ranges, AvgPathLength),
 		% Compute anomaly score: s(x) = 2^(-E(h(x)) / c(psi))
@@ -184,7 +184,7 @@
 		findall(
 			Score-Id-Class,
 			(	Dataset::example(Id, Class, AVs),
-				to_numeric_vector_with_missing(AVs, AttributeNames, Attributes, Vector, MissingMask),
+				to_numeric_vector_with_missing(AttributeNames, AVs, Attributes, Vector, MissingMask),
 				score_vector(Model, Vector, MissingMask, Ranges, Score)
 			),
 			UnsortedPairs
@@ -307,11 +307,8 @@
 	% to_numeric_vector_with_missing/5 - convert attribute-value pairs to numeric vector
 	% and a missing value mask for scoring. Missing values get a placeholder (0.0)
 	% and the mask indicates which dimensions are missing.
-	to_numeric_vector_with_missing(AVs, AttributeNames, Attributes, Vector, MissingMask) :-
-		to_numeric_vector_with_missing_(AttributeNames, AVs, Attributes, Vector, MissingMask).
-
-	to_numeric_vector_with_missing_([], _, _, [], []).
-	to_numeric_vector_with_missing_([Name| Names], AVs, Attributes, [NumValue| Rest], [Missing| MaskRest]) :-
+	to_numeric_vector_with_missing([], _, _, [], []).
+	to_numeric_vector_with_missing([Name| Names], AVs, Attributes, [NumValue| Rest], [Missing| MaskRest]) :-
 		memberchk(Name-Value, AVs),
 		memberchk(Name-AttrType, Attributes),
 		(	var(Value) ->
@@ -327,15 +324,12 @@
 			Missing = false,
 			NumValue is float(Index)
 		),
-		to_numeric_vector_with_missing_(Names, AVs, Attributes, Rest, MaskRest).
+		to_numeric_vector_with_missing(Names, AVs, Attributes, Rest, MaskRest).
 
 	% compute_attribute_ranges/4 - compute min/max ranges for each attribute
 	% from known (non-missing) values across all examples
-	compute_attribute_ranges(AllAVs, AttributeNames, Attributes, Ranges) :-
-		compute_attribute_ranges_(AttributeNames, AllAVs, Attributes, Ranges).
-
-	compute_attribute_ranges_([], _, _, []).
-	compute_attribute_ranges_([Name| Names], AllAVs, Attributes, [Name-Min-Max| Rest]) :-
+	compute_attribute_ranges([], _, _, []).
+	compute_attribute_ranges([Name| Names], AllAVs, Attributes, [Name-Min-Max| Rest]) :-
 		memberchk(Name-AttrType, Attributes),
 		findall(
 			NumVal,
@@ -356,7 +350,7 @@
 		;	min(KnownValues, Min),
 			max(KnownValues, Max)
 		),
-		compute_attribute_ranges_(Names, AllAVs, Attributes, Rest).
+		compute_attribute_ranges(Names, AllAVs, Attributes, Rest).
 
 	% max_depth/2 - compute max tree depth: ceil(log2(psi))
 	max_depth(Psi, MaxDepth) :-
@@ -368,18 +362,18 @@
 	% build_forest/7 - build the specified number of isolation trees
 	build_forest(Vectors, NumTrees, Psi, MaxDepth, NumDimensions, ExtLevel, Trees) :-
 		length(Vectors, N),
-		build_forest_(NumTrees, Vectors, N, Psi, MaxDepth, NumDimensions, ExtLevel, [], Trees).
+		build_forest_(NumTrees, Vectors, N, Psi, MaxDepth, NumDimensions, ExtLevel, Trees).
 
-	build_forest_(0, _, _, _, _, _, _, Trees, Trees) :-
+	build_forest_(0, _, _, _, _, _, _, []) :-
 		!.
-	build_forest_(I, Vectors, N, Psi, MaxDepth, NumDimensions, ExtLevel, Acc, Trees) :-
+	build_forest_(I, Vectors, N, Psi, MaxDepth, NumDimensions, ExtLevel, [Tree| Trees]) :-
 		I > 0,
 		% Subsample
 		subsample(Vectors, N, Psi, Sample),
 		% Build isolation tree
 		build_itree(Sample, MaxDepth, 0, NumDimensions, ExtLevel, Tree),
 		I1 is I - 1,
-		build_forest_(I1, Vectors, N, Psi, MaxDepth, NumDimensions, ExtLevel, [Tree| Acc], Trees).
+		build_forest_(I1, Vectors, N, Psi, MaxDepth, NumDimensions, ExtLevel, Trees).
 
 	% subsample/4 - take a random subsample of size Psi from vectors
 	subsample(Vectors, N, Psi, Sample) :-
@@ -447,7 +441,8 @@
 	% fill_normal_vector/5 - create a vector of length N, placing components
 	% at active dimension positions and 0.0 at inactive positions
 	fill_normal_vector(N, I, _, _, []) :-
-		I > N, !.
+		I > N,
+		!.
 	fill_normal_vector(N, I, [I| ActiveRest], [C| CompRest], [C| Rest]) :-
 		!,
 		I1 is I + 1,
@@ -463,18 +458,18 @@
 
 	% compute_ranges/3 - compute min/max for each dimension
 	compute_ranges(Data, NumDimensions, Ranges) :-
-		compute_ranges_(1, NumDimensions, Data, Ranges).
+		compute_ranges(1, NumDimensions, Data, Ranges).
 
-	compute_ranges_(I, N, _, []) :-
+	compute_ranges(I, N, _, []) :-
 		I > N,
 		!.
-	compute_ranges_(I, N, Data, [Min-Max| Ranges]) :-
+	compute_ranges(I, N, Data, [Min-Max| Ranges]) :-
 		I =< N,
 		extract_dimension(Data, I, Values),
 		min(Values, Min),
 		max(Values, Max),
 		I1 is I + 1,
-		compute_ranges_(I1, N, Data, Ranges).
+		compute_ranges(I1, N, Data, Ranges).
 
 	extract_dimension([], _, []).
 	extract_dimension([Vector| Vectors], I, [Value| Values]) :-
@@ -503,12 +498,12 @@
 
 	% dot_shifted/4 - compute (x - p) . n
 	dot_shifted(X, P, N, Dot) :-
-		dot_shifted_(X, P, N, 0.0, Dot).
+		dot_shifted(X, P, N, 0.0, Dot).
 
-	dot_shifted_([], [], [], Dot, Dot).
-	dot_shifted_([Xi| Xs], [Pi| Ps], [Ni| Ns], Dot0, Dot) :-
+	dot_shifted([], [], [], Dot, Dot).
+	dot_shifted([Xi| Xs], [Pi| Ps], [Ni| Ns], Dot0, Dot) :-
 		Dot1 is Dot0 + (Xi - Pi) * Ni,
-		dot_shifted_(Xs, Ps, Ns, Dot1, Dot).
+		dot_shifted(Xs, Ps, Ns, Dot1, Dot).
 
 	% compute_average_path_length/5 - compute average path length across all trees
 	% handling missing values
@@ -571,16 +566,16 @@
 
 	% dot_shifted_masked/5 - compute (x - p) . n skipping missing dimensions
 	dot_shifted_masked(X, P, N, Mask, Dot) :-
-		dot_shifted_masked_(X, P, N, Mask, 0.0, Dot).
+		dot_shifted_masked(X, P, N, Mask, 0.0, Dot).
 
-	dot_shifted_masked_([], [], [], [], Dot, Dot).
-	dot_shifted_masked_([_| Xs], [_| Ps], [_| Ns], [true| Ms], Dot0, Dot) :-
+	dot_shifted_masked([], [], [], [], Dot, Dot).
+	dot_shifted_masked([_| Xs], [_| Ps], [_| Ns], [true| Ms], Dot0, Dot) :-
 		!,
 		% Skip missing dimension (zero contribution)
-		dot_shifted_masked_(Xs, Ps, Ns, Ms, Dot0, Dot).
-	dot_shifted_masked_([Xi| Xs], [Pi| Ps], [Ni| Ns], [false| Ms], Dot0, Dot) :-
+		dot_shifted_masked(Xs, Ps, Ns, Ms, Dot0, Dot).
+	dot_shifted_masked([Xi| Xs], [Pi| Ps], [Ni| Ns], [false| Ms], Dot0, Dot) :-
 		Dot1 is Dot0 + (Xi - Pi) * Ni,
-		dot_shifted_masked_(Xs, Ps, Ns, Ms, Dot1, Dot).
+		dot_shifted_masked(Xs, Ps, Ns, Ms, Dot1, Dot).
 
 	% average_path_length_bst/2 - average path length of unsuccessful search
 	% in a Binary Search Tree (BST) with n nodes
