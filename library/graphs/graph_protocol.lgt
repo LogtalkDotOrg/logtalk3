@@ -168,4 +168,25 @@
 		argnames is ['Vertex1', 'Vertex2', 'Graph', 'Path', 'Cost']
 	]).
 
+	:- public(is_complete/1).
+	:- mode(is_complete(+graph), zero_or_one).
+	:- info(is_complete/1, [
+		comment is 'True iff every pair of distinct vertices in the graph is connected by an edge.',
+		argnames is ['Graph']
+	]).
+
+	:- public(is_bipartite/1).
+	:- mode(is_bipartite(+graph), zero_or_one).
+	:- info(is_bipartite/1, [
+		comment is 'True iff the graph is bipartite, i.e. its vertices can be partitioned into two sets such that every edge connects a vertex in one set to a vertex in the other.',
+		argnames is ['Graph']
+	]).
+
+	:- public(is_sparse/1).
+	:- mode(is_sparse(+graph), zero_or_one).
+	:- info(is_sparse/1, [
+		comment is 'True iff the graph is sparse, i.e. the number of edges is at most ``|V| * log2(|V|)``. The cutoff ``|E| = |V| * log2(|V|)`` separates sparse graphs (where adjacency lists are efficient) from dense graphs (where adjacency matrix representations may be preferable).',
+		argnames is ['Graph']
+	]).
+
 :- end_protocol.

@@ -116,4 +116,72 @@
 			unvisited(Ns, Visited, Rest)
 		).
 
+	% === Completeness ===
+
+	is_complete(Graph) :-
+		::vertices(Graph, Vertices),
+		length(Vertices, N),
+		N > 0,
+		Expected is N - 1,
+		is_complete_check(Vertices, Graph, Expected).
+
+	is_complete_check([], _, _).
+	is_complete_check([Vertex| Vertices], Graph, Expected) :-
+		::neighbors(Vertex, Graph, Neighbors),
+		length(Neighbors, Expected),
+		is_complete_check(Vertices, Graph, Expected).
+
+	% === Bipartiteness (BFS 2-coloring) ===
+
+	is_bipartite(Graph) :-
+		::vertices(Graph, Vertices),
+		is_bipartite_components(Vertices, Graph, []).
+
+	% Process each connected component
+	is_bipartite_components([], _, _).
+	is_bipartite_components([Vertex| Vertices], Graph, Colors) :-
+		(	bipartite_color(Vertex, Colors, _) ->
+			% Already colored by a previous component
+			is_bipartite_components(Vertices, Graph, Colors)
+		;	% Start BFS from Vertex with color 0
+			bipartite_bfs([Vertex], Graph, [Vertex-0|Colors], NewColors),
+			is_bipartite_components(Vertices, Graph, NewColors)
+		).
+
+	bipartite_bfs([], _, Colors, Colors).
+	bipartite_bfs([Vertex| Queue], Graph, Colors, FinalColors) :-
+		bipartite_color(Vertex, Colors, VColor),
+		OtherColor is 1 - VColor,
+		::neighbors(Vertex, Graph, Neighbors),
+		bipartite_check_neighbors(Neighbors, OtherColor, Queue, Colors, NewQueue, NewColors),
+		bipartite_bfs(NewQueue, Graph, NewColors, FinalColors).
+
+	bipartite_check_neighbors([], _, Queue, Colors, Queue, Colors).
+	bipartite_check_neighbors([Neighbor| Neighbors], ExpectedColor, Queue, Colors, FinalQueue, FinalColors) :-
+		(	bipartite_color(Neighbor, Colors, NeighborColor) ->
+			% Already colored: check for conflict
+			NeighborColor == ExpectedColor,
+			bipartite_check_neighbors(Neighbors, ExpectedColor, Queue, Colors, FinalQueue, FinalColors)
+		;	% Not yet colored: assign and enqueue
+			bipartite_check_neighbors(Neighbors, ExpectedColor, [Neighbor| Queue], [Neighbor-ExpectedColor| Colors], FinalQueue, FinalColors)
+		).
+
+	bipartite_color(Neighbor, [Vertex-Color| Colors], NeighborColor) :-
+		(	Neighbor == Vertex ->
+			NeighborColor = Color
+		;	bipartite_color(Neighbor, Colors, NeighborColor)
+		).
+
+	% === Density (cutoff: |E| = |V| * log2(|V|)) ===
+
+	is_sparse(Graph) :-
+		::vertices(Graph, Vertices),
+		::edges(Graph, Edges),
+		length(Vertices, V),
+		length(Edges, E),
+		(	V =< 1 ->
+			true
+		;	E =< V * log(V) / log(2)
+		).
+
 :- end_category.

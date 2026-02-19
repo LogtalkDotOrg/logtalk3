@@ -418,6 +418,63 @@ Finds the maximum cost acyclic path from ``Vertex1`` to ``Vertex2``. For unweigh
 
 ------------
 
+.. index:: is_complete/1
+.. _graph_protocol/0::is_complete/1:
+
+``is_complete/1``
+^^^^^^^^^^^^^^^^^
+
+True iff every pair of distinct vertices in the graph is connected by an edge.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_complete(Graph)``
+| **Mode and number of proofs:**
+|    ``is_complete(+graph)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: is_bipartite/1
+.. _graph_protocol/0::is_bipartite/1:
+
+``is_bipartite/1``
+^^^^^^^^^^^^^^^^^^
+
+True iff the graph is bipartite, i.e. its vertices can be partitioned into two sets such that every edge connects a vertex in one set to a vertex in the other.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_bipartite(Graph)``
+| **Mode and number of proofs:**
+|    ``is_bipartite(+graph)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: is_sparse/1
+.. _graph_protocol/0::is_sparse/1:
+
+``is_sparse/1``
+^^^^^^^^^^^^^^^
+
+True iff the graph is sparse, i.e. the number of edges is at most ``|V| * log2(|V|)``. The cutoff ``|E| = |V| * log2(|V|)`` separates sparse graphs (where adjacency lists are efficient) from dense graphs (where adjacency matrix representations may be preferable).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_sparse(Graph)``
+| **Mode and number of proofs:**
+|    ``is_sparse(+graph)`` - ``zero_or_one``
+
+
+------------
+
 Protected predicates
 --------------------
 

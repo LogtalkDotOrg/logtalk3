@@ -28,7 +28,7 @@ Protocol for directed graph predicates such as transpose, closures, topological 
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`graph_protocol/0::add_edges/3`  :ref:`graph_protocol/0::add_vertex/3`  :ref:`graph_protocol/0::add_vertices/3`  :ref:`graph_protocol/0::delete_edges/3`  :ref:`graph_protocol/0::delete_vertex/3`  :ref:`graph_protocol/0::delete_vertices/3`  :ref:`graph_protocol/0::edges/2`  :ref:`graph_protocol/0::empty/1`  :ref:`graph_protocol/0::has_path/3`  :ref:`graph_protocol/0::max_path/5`  :ref:`graph_protocol/0::min_path/5`  :ref:`graph_protocol/0::neighbors/3`  :ref:`graph_protocol/0::new/1`  :ref:`graph_protocol/0::new/2`  :ref:`graph_protocol/0::new/3`  :ref:`graph_protocol/0::number_of_edges/2`  :ref:`graph_protocol/0::number_of_vertices/2`  :ref:`graph_protocol/0::path/3`  :ref:`graph_protocol/0::reachable/3`  :ref:`graph_protocol/0::vertices/2`  
+|     :ref:`graph_protocol/0::add_edges/3`  :ref:`graph_protocol/0::add_vertex/3`  :ref:`graph_protocol/0::add_vertices/3`  :ref:`graph_protocol/0::delete_edges/3`  :ref:`graph_protocol/0::delete_vertex/3`  :ref:`graph_protocol/0::delete_vertices/3`  :ref:`graph_protocol/0::edges/2`  :ref:`graph_protocol/0::empty/1`  :ref:`graph_protocol/0::has_path/3`  :ref:`graph_protocol/0::is_bipartite/1`  :ref:`graph_protocol/0::is_complete/1`  :ref:`graph_protocol/0::is_sparse/1`  :ref:`graph_protocol/0::max_path/5`  :ref:`graph_protocol/0::min_path/5`  :ref:`graph_protocol/0::neighbors/3`  :ref:`graph_protocol/0::new/1`  :ref:`graph_protocol/0::new/2`  :ref:`graph_protocol/0::new/3`  :ref:`graph_protocol/0::number_of_edges/2`  :ref:`graph_protocol/0::number_of_vertices/2`  :ref:`graph_protocol/0::path/3`  :ref:`graph_protocol/0::reachable/3`  :ref:`graph_protocol/0::vertices/2`  
 
 .. contents::
    :local:
@@ -151,11 +151,11 @@ Unifies ``Degree`` with the number of outgoing edges from ``Vertex``. Fails if `
 
 ------------
 
-.. index:: is_dag/1
-.. _directed_graph_protocol/0::is_dag/1:
+.. index:: is_acyclic/1
+.. _directed_graph_protocol/0::is_acyclic/1:
 
-``is_dag/1``
-^^^^^^^^^^^^
+``is_acyclic/1``
+^^^^^^^^^^^^^^^^
 
 True iff the graph is a directed acyclic graph (DAG).
 
@@ -163,9 +163,9 @@ True iff the graph is a directed acyclic graph (DAG).
 |    ``static``
 
 | **Template:**
-|    ``is_dag(Graph)``
+|    ``is_acyclic(Graph)``
 | **Mode and number of proofs:**
-|    ``is_dag(+graph)`` - ``zero_or_one``
+|    ``is_acyclic(+graph)`` - ``zero_or_one``
 
 
 ------------

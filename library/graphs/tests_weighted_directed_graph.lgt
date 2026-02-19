@@ -49,8 +49,11 @@
 		number_of_vertices/2, number_of_edges/2,
 		path/3, has_path/3,
 		in_degree/3, out_degree/3,
-		is_dag/1,
-		strongly_connected_components/2
+		is_acyclic/1,
+		strongly_connected_components/2,
+		is_complete/1,
+		is_bipartite/1,
+		is_sparse/1
 	]).
 
 	cover(weighted_directed_graph(_DictionaryObject_)).
@@ -324,15 +327,15 @@
 		new([(1-2)-5, (1-3)-10], Graph),
 		out_degree(3, Graph, D).
 
-	% is_dag/1 tests
+	% is_acyclic/1 tests
 
-	test(wdg_is_dag_1_01, true) :-
+	test(wdg_is_acyclic_1_01, true) :-
 		new([(1-2)-5, (2-3)-10], Graph),
-		is_dag(Graph).
+		is_acyclic(Graph).
 
-	test(wdg_is_dag_1_02, false) :-
+	test(wdg_is_acyclic_1_02, false) :-
 		new([(1-2)-5, (2-3)-10, (3-1)-7], Graph),
-		is_dag(Graph).
+		is_acyclic(Graph).
 
 	% strongly_connected_components/2 tests
 
@@ -343,5 +346,47 @@
 	test(wdg_strongly_connected_components_2_02, true(Components == [[1,2,3]])) :-
 		new([(1-2)-5, (2-3)-10, (3-1)-7], Graph),
 		strongly_connected_components(Graph, Components).
+
+	% is_complete/1 tests
+
+	test(wdg_is_complete_1_01, true) :-
+		new([(1-2)-5, (2-1)-3, (1-3)-10, (3-1)-7, (2-3)-4, (3-2)-6], Graph),
+		is_complete(Graph).
+
+	test(wdg_is_complete_1_02, false) :-
+		new([(1-2)-5, (2-3)-10], Graph),
+		is_complete(Graph).
+
+	test(wdg_is_complete_1_03, true) :-
+		new([(1-2)-5, (2-1)-3], Graph),
+		is_complete(Graph).
+
+	% is_bipartite/1 tests
+
+	test(wdg_is_bipartite_1_01, true) :-
+		new([(1-2)-5, (2-1)-3, (1-4)-10, (4-1)-7, (3-2)-4, (2-3)-6, (3-4)-8, (4-3)-2], Graph),
+		is_bipartite(Graph).
+
+	test(wdg_is_bipartite_1_02, false) :-
+		new([(1-2)-5, (2-3)-10, (3-1)-7], Graph),
+		is_bipartite(Graph).
+
+	test(wdg_is_bipartite_1_03, true) :-
+		new(Graph),
+		is_bipartite(Graph).
+
+	% is_sparse/1 tests
+
+	test(wdg_is_sparse_1_01, true) :-
+		new([(1-2)-5, (2-3)-10, (3-4)-7], Graph),
+		is_sparse(Graph).
+
+	test(wdg_is_sparse_1_02, false) :-
+		new([(1-2)-1,(1-3)-1,(1-4)-1,(2-1)-1,(2-3)-1,(2-4)-1,(3-1)-1,(3-2)-1,(3-4)-1,(4-1)-1,(4-2)-1,(4-3)-1], Graph),
+		is_sparse(Graph).
+
+	test(wdg_is_sparse_1_03, true) :-
+		new(Graph),
+		is_sparse(Graph).
 
 :- end_object.

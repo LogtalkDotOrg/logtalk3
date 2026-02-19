@@ -52,7 +52,7 @@
 
 	% === DAG test ===
 
-	is_dag(Graph) :-
+	is_acyclic(Graph) :-
 		::topological_sort(Graph, Sorted),
 		::vertices(Graph, Vertices),
 		length(Sorted, N1),

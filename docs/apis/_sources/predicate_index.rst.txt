@@ -6008,6 +6008,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::is_absolute_file_name/1>`
 
+``is_acyclic/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`directed_graph_protocol <directed_graph_protocol/0::is_acyclic/1>`
+
 ``is_alpha/1``
 --------------
 
@@ -6058,6 +6068,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`characterp <characterp/0::is_bin_digit/1>`
 
+``is_bipartite/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::is_bipartite/1>`
+
+``is_complete/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::is_complete/1>`
+
 ``is_connected/1``
 ------------------
 
@@ -6078,16 +6108,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`characterp <characterp/0::is_control/1>`
-
-``is_dag/1``
-------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`directed_graph_protocol <directed_graph_protocol/0::is_dag/1>`
 
 ``is_dec_digit/1``
 ------------------
@@ -6308,6 +6328,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`json_rpc <json_rpc/0::is_response/1>`
+
+``is_sparse/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::is_sparse/1>`
 
 ``is_subsequence_of/2``
 -----------------------

@@ -71,9 +71,9 @@
 		argnames is ['Vertex', 'Graph', 'Degree']
 	]).
 
-	:- public(is_dag/1).
-	:- mode(is_dag(+graph), zero_or_one).
-	:- info(is_dag/1, [
+	:- public(is_acyclic/1).
+	:- mode(is_acyclic(+graph), zero_or_one).
+	:- info(is_acyclic/1, [
 		comment is 'True iff the graph is a directed acyclic graph (DAG).',
 		argnames is ['Graph']
 	]).

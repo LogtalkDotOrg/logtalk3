@@ -46,7 +46,10 @@
 		min_path/5, max_path/5,
 		degree/3,
 		is_connected/1,
-		connected_components/2
+		connected_components/2,
+		is_complete/1,
+		is_bipartite/1,
+		is_sparse/1
 	]).
 
 	:- uses(list, [
@@ -334,5 +337,48 @@
 	test(wug_connected_components_2_02, true(length(Components, 2))) :-
 		new([(1-2)-5, (3-4)-10], Graph),
 		connected_components(Graph, Components).
+
+	% is_complete/1 tests
+
+	test(wug_is_complete_1_01, true) :-
+		new([(1-2)-5, (1-3)-10, (2-3)-7], Graph),
+		is_complete(Graph).
+
+	test(wug_is_complete_1_02, false) :-
+		new([(1-2)-5, (2-3)-10], Graph),
+		is_complete(Graph).
+
+	test(wug_is_complete_1_03, true) :-
+		new([(1-2)-5], Graph),
+		is_complete(Graph).
+
+	% is_bipartite/1 tests
+
+	test(wug_is_bipartite_1_01, true) :-
+		new([(1-2)-5, (1-4)-10, (3-2)-7, (3-4)-3], Graph),
+		is_bipartite(Graph).
+
+	test(wug_is_bipartite_1_02, false) :-
+		new([(1-2)-5, (2-3)-10, (1-3)-7], Graph),
+		is_bipartite(Graph).
+
+	test(wug_is_bipartite_1_03, true) :-
+		new(Graph),
+		is_bipartite(Graph).
+
+	% is_sparse/1 tests
+
+	test(wug_is_sparse_1_01, true) :-
+		new([(1-2)-5, (2-3)-10, (3-4)-7], Graph),
+		is_sparse(Graph).
+
+	test(wug_is_sparse_1_02, false) :-
+		% K7: 7 vertices, 21 undirected edges > 7*log2(7) ~= 19.65
+		new([(1-2)-1,(1-3)-1,(1-4)-1,(1-5)-1,(1-6)-1,(1-7)-1,(2-3)-1,(2-4)-1,(2-5)-1,(2-6)-1,(2-7)-1,(3-4)-1,(3-5)-1,(3-6)-1,(3-7)-1,(4-5)-1,(4-6)-1,(4-7)-1,(5-6)-1,(5-7)-1,(6-7)-1], Graph),
+		is_sparse(Graph).
+
+	test(wug_is_sparse_1_03, true) :-
+		new(Graph),
+		is_sparse(Graph).
 
 :- end_object.

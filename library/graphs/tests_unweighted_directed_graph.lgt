@@ -47,9 +47,12 @@
 		path/3, has_path/3,
 		min_path/5, max_path/5,
 		in_degree/3, out_degree/3,
-		is_dag/1,
+		is_acyclic/1,
 		strongly_connected_components/2,
-		transitive_reduction/2
+		transitive_reduction/2,
+		is_complete/1,
+		is_bipartite/1,
+		is_sparse/1
 	]).
 
 	cover(unweighted_directed_graph(_DictionaryObject_)).
@@ -409,15 +412,15 @@
 		new([1-2,1-3], Graph),
 		out_degree(3, Graph, D).
 
-	% is_dag/1 tests
+	% is_acyclic/1 tests
 
-	test(udg_is_dag_1_01, true) :-
+	test(udg_is_acyclic_1_01, true) :-
 		new([1-2,2-3], Graph),
-		is_dag(Graph).
+		is_acyclic(Graph).
 
-	test(udg_is_dag_1_02, false) :-
+	test(udg_is_acyclic_1_02, false) :-
 		new([1-2,2-3,3-1], Graph),
-		is_dag(Graph).
+		is_acyclic(Graph).
 
 	% strongly_connected_components/2 tests
 
@@ -446,5 +449,53 @@
 		new([1-2,2-3], Graph),
 		transitive_reduction(Graph, Reduced),
 		edges(Reduced, Edges).
+
+	% is_complete/1 tests
+
+	test(udg_is_complete_1_01, true) :-
+		new([1-2, 2-1, 1-3, 3-1, 2-3, 3-2], Graph),
+		is_complete(Graph).
+
+	test(udg_is_complete_1_02, false) :-
+		new([1-2, 2-3], Graph),
+		is_complete(Graph).
+
+	test(udg_is_complete_1_03, true) :-
+		new([1-2, 2-1], Graph),
+		is_complete(Graph).
+
+	% is_bipartite/1 tests
+
+	test(udg_is_bipartite_1_01, true) :-
+		new([1-2, 2-1, 1-4, 4-1, 3-2, 2-3, 3-4, 4-3], Graph),
+		is_bipartite(Graph).
+
+	test(udg_is_bipartite_1_02, false) :-
+		new([1-2, 2-3, 3-1], Graph),
+		is_bipartite(Graph).
+
+	test(udg_is_bipartite_1_03, true) :-
+		new(Graph),
+		is_bipartite(Graph).
+
+	test(udg_is_bipartite_1_04, false) :-
+		new([1-2, 2-3, 3-1, 1-3], Graph),
+		is_bipartite(Graph).
+
+	% is_sparse/1 tests
+
+	test(udg_is_sparse_1_01, true) :-
+		% 4 vertices, 3 edges =< 4*log2(4) = 8
+		new([1-2, 2-3, 3-4], Graph),
+		is_sparse(Graph).
+
+	test(udg_is_sparse_1_02, false) :-
+		% K4: 12 directed edges > 8
+		new([1-2, 1-3, 1-4, 2-1, 2-3, 2-4, 3-1, 3-2, 3-4, 4-1, 4-2, 4-3], Graph),
+		is_sparse(Graph).
+
+	test(udg_is_sparse_1_03, true) :-
+		new(Graph),
+		is_sparse(Graph).
 
 :- end_object.
