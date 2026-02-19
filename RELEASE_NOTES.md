@@ -83,6 +83,9 @@ for learning decision trees.
 * ADDED: New `nearest_centroid` library implementing a Nearest Centroid
 classifier.
 
+* ADDED: New `isolation_forest` library implementing the Isolation forest
+algorithm for anomaly detection.
+
 * ADDED: New `datalog` library intended for educational purposes and
 non-demanding applications.
 

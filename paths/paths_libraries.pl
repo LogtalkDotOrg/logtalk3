@@ -70,6 +70,7 @@ logtalk_library_path(hook_objects, library('hook_objects/')).
 logtalk_library_path(html, library('html/')).
 logtalk_library_path(ids, library('ids/')).
 logtalk_library_path(intervals, library('intervals/')).
+logtalk_library_path(isolation_forest, library('isolation_forest/')).
 logtalk_library_path(java, library('java/')).
 logtalk_library_path(json, library('json/')).
 logtalk_library_path(json_rpc, library('json_rpc/')).

@@ -86,6 +86,7 @@
 		knn(loader),
 		naive_bayes(loader),
 		nearest_centroid(loader),
+		isolation_forest(loader),
 		cbor(loader),
 		ccsds(loader),
 		avro(loader),

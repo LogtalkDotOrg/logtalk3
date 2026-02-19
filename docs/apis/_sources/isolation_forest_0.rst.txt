@@ -1,0 +1,186 @@
+.. index:: single: isolation_forest
+.. _isolation_forest/0:
+
+.. rst-class:: right
+
+**object**
+
+``isolation_forest``
+====================
+
+Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the improved version described by Hariri et al. (2019) that uses random hyperplane cuts instead of axis-aligned cuts, eliminating score bias artifacts. Builds an ensemble of isolation trees from a dataset object implementing the ``dataset_protocol`` protocol. Missing attribute values are represented using anonymous variables.
+
+| **Availability:** 
+|    ``logtalk_load(isolation_forest(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:1:0
+| **Date:** 2026-02-19
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`fast_random <fast_random/0>`
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`pairs <pairs/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Algorithm: The Extended Isolation Forest builds an ensemble of isolation trees (iTrees) by recursively partitioning the data using random hyperplanes. Anomalous points, being few and different, require fewer partitions (shorter path lengths) to be isolated.
+   - Extended vs Original: The original Isolation Forest uses axis-aligned splits (random attribute + random value), which introduces bias in anomaly scores along coordinate axes. The extended version uses random hyperplane cuts with arbitrary slopes, producing more consistent and reliable anomaly scores.
+   - Extension level: The extension level controls the dimensionality of the random hyperplane cuts. Level 0 corresponds to the original axis-aligned Isolation Forest. The default level is ``d - 1`` (fully extended) where ``d`` is the number of dimensions.
+   - Anomaly score: The anomaly score ``s(x)`` is computed as ``s(x) = 2^(-E(h(x))/c(psi))`` where ``E(h(x))`` is the average path length across all trees, ``c(psi)`` is the average path length of unsuccessful searches in a BST, and ``psi`` is the subsample size. Scores close to 1 indicate anomalies; scores below 0.5 indicate normal points.
+   - Discrete attributes: Discrete (categorical) attributes are mapped to numeric indices based on their position in the attribute value list declared by the dataset. This allows the algorithm to handle datasets with mixed attribute types.
+   - Missing values: Missing attribute values are represented using anonymous variables. During tree construction, missing values are replaced with random values drawn from the observed range of the corresponding attribute. During scoring, instances with missing values are sent down both branches of the tree and the path length is computed as the weighted average of the two branches.
+   - Classifier representation: The learned model is represented as an ``if_model(Trees, SubsampleSize, AttributeNames, Attributes, Ranges, Options)`` compound term.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/2
+.. _isolation_forest/0::learn/2:
+
+``learn/2``
+^^^^^^^^^^^
+
+Learns an isolation forest model from the given dataset object using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Model)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound)`` - ``one``
+
+
+------------
+
+.. index:: learn/3
+.. _isolation_forest/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns an isolation forest model from the given dataset object using the specified options. Valid options are ``number_of_trees/1`` (default: ``100``), ``subsample_size/1`` (default: ``256`` or the number of instances if smaller), ``extension_level/1`` (default: ``d - 1`` where ``d`` is the number of dimensions), and ``anomaly_threshold/1`` (default: ``0.5``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Model,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: score/3
+.. _isolation_forest/0::score/3:
+
+``score/3``
+^^^^^^^^^^^
+
+Computes the anomaly score for a given instance using the learned model. The instance is a list of ``Attribute-Value`` pairs where missing values are represented using anonymous variables. The score is in the range ``[0.0, 1.0]``. Scores close to ``1.0`` indicate anomalies. Scores close to ``0.5`` or below indicate normal instances.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score(Model,Instance,Score)``
+| **Mode and number of proofs:**
+|    ``score(+compound,+list,-float)`` - ``one``
+
+
+------------
+
+.. index:: predict/3
+.. _isolation_forest/0::predict/3:
+
+``predict/3``
+^^^^^^^^^^^^^
+
+Predicts whether an instance is an anomaly or normal using the learned model and the anomaly threshold from the model options. The instance is a list of ``Attribute-Value`` pairs where missing values are represented using anonymous variables. Returns ``anomaly`` if the anomaly score is above the threshold, ``normal`` otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predict(Model,Instance,Prediction)``
+| **Mode and number of proofs:**
+|    ``predict(+compound,+list,-atom)`` - ``one``
+
+
+------------
+
+.. index:: score_all/3
+.. _isolation_forest/0::score_all/3:
+
+``score_all/3``
+^^^^^^^^^^^^^^^
+
+Computes the anomaly scores for all instances in the dataset. Returns a list of ``Id-Class-Score`` triples sorted by descending anomaly score.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_all(Dataset,Model,Scores)``
+| **Mode and number of proofs:**
+|    ``score_all(+object_identifier,+compound,-list)`` - ``one``
+
+
+------------
+
+.. index:: print_model/1
+.. _isolation_forest/0::print_model/1:
+
+``print_model/1``
+^^^^^^^^^^^^^^^^^
+
+Prints a summary of the isolation forest model to the current output stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_model(Model)``
+| **Mode and number of proofs:**
+|    ``print_model(+compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`c45 <c45/0>`, :ref:`random_forest <random_forest/0>`
+

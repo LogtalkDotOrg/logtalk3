@@ -66,6 +66,7 @@ directory in the ``NOTES.md`` file.
    html
    ids
    intervals
+   isolation_forest
    java
    json
    json_ld
