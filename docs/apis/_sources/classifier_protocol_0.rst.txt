@@ -8,14 +8,14 @@
 ``classifier_protocol``
 =======================
 
-Protocol for datasets used with classifiers.
+Protocol for machine learning classifiers.
 
 | **Availability:** 
 |    ``logtalk_load(classifier_protocols(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-18
+| **Date:** 2026-02-19
 
 | **Compilation flags:**
 |    ``static``
@@ -150,5 +150,5 @@ Operators
 
 .. seealso::
 
-   :ref:`c45 <c45/0>`, :ref:`naive_bayes <naive_bayes/0>`
+   :ref:`c45 <c45/0>`, :ref:`isolation_forest <isolation_forest/0>`, :ref:`knn <knn/0>`, :ref:`naive_bayes <naive_bayes/0>`, :ref:`nearest_centroid <nearest_centroid/0>`, :ref:`random_forest <random_forest/0>`
 

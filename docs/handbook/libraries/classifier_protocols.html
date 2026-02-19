@@ -207,14 +207,14 @@
   <section id="classifier-protocols">
 <span id="library-classifier-protocols"></span><h1><code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code><a class="headerlink" href="#classifier-protocols" title="Link to this heading"></a></h1>
 <p>This library provides protocols used in the implementation of machine
-learning algorithms, aka classifiers. Datasets are represented as
-objects implementing the <code class="docutils literal notranslate"><span class="pre">dataset_protocol</span></code> protocol. Classifiers are
+learning classifier algorithms. Datasets are represented as objects
+implementing the <code class="docutils literal notranslate"><span class="pre">dataset_protocol</span></code> protocol. Classifiers are
 represented as objects implementing the <code class="docutils literal notranslate"><span class="pre">classifier_protocol</span></code>
 protocol.</p>
 <p>This library also provides test datasets. See below for details.</p>
-<p>Logtalk currently provides <code class="docutils literal notranslate"><span class="pre">c45</span></code>, <code class="docutils literal notranslate"><span class="pre">knn</span></code>, <code class="docutils literal notranslate"><span class="pre">naive_bayes</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">random_forest</span></code> classifiers. See these libraries documentation for
-details.</p>
+<p>Logtalk currently provides several classifiers including <code class="docutils literal notranslate"><span class="pre">c45</span></code>,
+<code class="docutils literal notranslate"><span class="pre">knn</span></code>, <code class="docutils literal notranslate"><span class="pre">naive_bayes</span></code>, <code class="docutils literal notranslate"><span class="pre">nearest_centroid</span></code>, and <code class="docutils literal notranslate"><span class="pre">random_forest</span></code>.
+See these libraries documentation for details.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -261,6 +261,31 @@ represented using anonymous variables). Originally from the Institute
 of Oncology, University Medical Centre, Ljubljana, Yugoslavia. Donors:
 Ming Tan and Jeff Schlimmer. Available from the UCI Machine Learning
 Repository: <a class="reference external" href="https://archive.ics.uci.edu/dataset/14/breast+cancer">https://archive.ics.uci.edu/dataset/14/breast+cancer</a></p></li>
+<li><p><strong>Gaussian Anomalies</strong> — A synthetic 2D anomaly detection dataset with
+50 examples and 2 continuous attributes (x, y). Normal points are
+sampled from a standard normal distribution centered at the origin.
+Anomalous points are placed far from the cluster center. Inspired by
+the canonical test case used in the Extended Isolation Forest paper by
+Hariri et al. (2019).</p></li>
+<li><p><strong>Shuttle Anomalies</strong> — A subset of the Statlog Shuttle dataset with
+50 examples and 9 continuous attributes representing sensor readings
+from the NASA Space Shuttle. Class 1 (Rad Flow) is the majority class
+(normal), while all other classes are treated as anomalies. Originally
+from Catlett, J. (1991). Available from the UCI Machine Learning
+Repository: <a class="reference external" href="https://archive.ics.uci.edu/dataset/148/statlog+shuttle">https://archive.ics.uci.edu/dataset/148/statlog+shuttle</a></p></li>
+<li><p><strong>Water Potability</strong> — A water potability dataset with 50 examples and
+9 continuous attributes (pH, hardness, solids, chloramines, sulfate,
+conductivity, organic carbon, trihalomethanes, turbidity). Normal
+instances represent potable water samples within acceptable ranges.
+Anomalous instances represent water samples with hazardous
+contamination levels. Based on the publicly available Water Quality
+dataset (Kadiwal, A., 2020, Kaggle).</p></li>
+<li><p><strong>Sensor Anomalies</strong> — A synthetic industrial sensor anomaly dataset
+with 40 examples and 3 continuous attributes (temperature, pressure,
+vibration). Contains missing values (14 examples with missing values,
+represented using anonymous variables). Normal readings cluster around
+typical operating ranges. Anomalous readings show extreme values
+indicating equipment malfunction.</p></li>
 </ul>
 </section>
 </section>

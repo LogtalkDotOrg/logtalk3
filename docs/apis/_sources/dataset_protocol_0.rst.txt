@@ -8,14 +8,14 @@
 ``dataset_protocol``
 ====================
 
-Protocol for datasets used with the C4.5 decision tree learning algorithm.
+Protocol for datasets used with classifier algorithms.
 
 | **Availability:** 
 |    ``logtalk_load(classifier_protocols(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-14
+| **Date:** 2026-02-19
 
 | **Compilation flags:**
 |    ``static``
@@ -129,8 +129,4 @@ Operators
 ---------
 
 (none)
-
-.. seealso::
-
-   :ref:`c45 <c45/0>`
 

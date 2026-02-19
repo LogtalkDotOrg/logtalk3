@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-18,
+		date is 2026-02-19,
 		comment is 'Unit tests for the "nearest_centroid" library.'
 	]).
 
@@ -102,8 +102,14 @@
 		% Extract classifier from the exported clause and use it
 		nearest_centroid::predict(ExportedClassifier, [sepal_length-5.0, sepal_width-3.3, petal_length-1.4, petal_width-0.2], Prediction).
 
+	% Test classifier_to_file/4 - verify file is written
+	test(nearest_centroid_classifier_to_file_4_written, deterministic(os::file_exists(File))) :-
+		^^file_path('test_output.pl', File),
+		nearest_centroid::learn(iris_small, Classifier),
+		nearest_centroid::classifier_to_file(iris_small, Classifier, classify, File).
+
 	% Test classifier_to_file/4 - verify exported classifier works with predict/3
-	test(nearest_centroid_classifier_to_file_4, true(ground(Prediction))) :-
+	test(nearest_centroid_classifier_to_file_4_loaded, true(ground(Prediction))) :-
 		^^file_path('test_output.pl', File),
 		nearest_centroid::learn(iris_small, Classifier),
 		nearest_centroid::classifier_to_file(_Dataset, Classifier, classify, File),

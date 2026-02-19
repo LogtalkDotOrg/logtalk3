@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-11,
+		date is 2026-02-19,
 		comment is 'AMQP connection pool category. Import this category into an object to create a named connection pool with automatic connection management.'
 	]).
 
@@ -246,10 +246,8 @@
 		).
 
 	% ==========================================================================
-	% Private Helpers
+	% Auxiliary predicates
 	% ==========================================================================
-
-	:- private(create_initial_connections/4).
 
 	create_initial_connections(_, _, _, 0) :-
 		!.
@@ -265,8 +263,6 @@
 		N1 is N - 1,
 		create_initial_connections(Host, Port, Options, N1).
 
-	:- private(create_connections/4).
-
 	create_connections(_, _, _, 0) :-
 		!.
 	create_connections(Host, Port, Options, N) :-
@@ -276,8 +272,6 @@
 		N1 is N - 1,
 		create_connections(Host, Port, Options, N1).
 
-	:- private(total_connections/1).
-
 	total_connections(Total) :-
 		findall(Connection, ::available(Connection), AvailableList),
 		findall(Connection, ::in_use(Connection, _), InUseList),
@@ -285,13 +279,9 @@
 		length(InUseList, InUse),
 		Total is Available + InUse.
 
-	:- private(current_timestamp/1).
-
 	current_timestamp(Timestamp) :-
 		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
 		Timestamp = timestamp(Year, Month, Day, Hours, Minutes, Seconds).
-
-	:- private(option/3).
 
 	option(Option, Options, _) :-
 		member(Option, Options),

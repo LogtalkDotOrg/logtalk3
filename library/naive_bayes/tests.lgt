@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-16,
+		date is 2026-02-19,
 		comment is 'Unit tests for the "naive_bayes" library.'
 	]).
 
@@ -123,8 +123,14 @@
 		naive_bayes::classifier_to_clauses(_Dataset, Classifier, classify, [Clause]),
 		naive_bayes::predict(Clause, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
 
+	% Test classifier_to_file/4 - verify file is written
+	test(naive_bayes_classifier_to_file_4_written, deterministic(os::file_exists(File))) :-
+		^^file_path('test_output.pl', File),
+		naive_bayes::learn(weather, Classifier),
+		naive_bayes::classifier_to_file(weather, Classifier, classify, File).
+
 	% Test classifier_to_file/4 - verify exported clause works with predict/3
-	test(naive_bayes_classifier_to_file_3, true(Prediction == yes)) :-
+	test(naive_bayes_classifier_to_file_3_loaded, true(Prediction == yes)) :-
 		^^file_path('test_output.pl', File),
 		naive_bayes::learn(weather, Classifier),
 		naive_bayes::classifier_to_file(_Dataset, Classifier, classify, File),

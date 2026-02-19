@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-11,
+		date is 2026-02-19,
 		comment is 'Portable AMQP 0-9-1 (Advanced Message Queuing Protocol) client. Uses the sockets library for TCP communication.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM (same as the sockets library).',
@@ -459,7 +459,7 @@
 	% ==========================================================================
 
 	:- uses(list, [
-		append/2, append/3, length/2, member/2, reverse/2, valid/1 as is_list/1
+		append/2, append/3, length/2, member/2, valid/1 as is_list/1
 	]).
 
 	:- uses(term_io, [

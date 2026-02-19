@@ -15,7 +15,7 @@ AMQP connection pool category. Import this category into an object to create a n
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-11
+| **Date:** 2026-02-19
 
 | **Compilation flags:**
 |    ``static``
@@ -247,66 +247,6 @@ Tracks connections currently in use along with their acquisition timestamp.
 |    ``in_use(Connection,AcquireTimestamp)``
 | **Mode and number of proofs:**
 |    ``in_use(?compound,?compound)`` - ``zero_or_more``
-
-
-------------
-
-.. index:: create_initial_connections/4
-.. _amqp_pool/0::create_initial_connections/4:
-
-``create_initial_connections/4``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-------------
-
-.. index:: create_connections/4
-.. _amqp_pool/0::create_connections/4:
-
-``create_connections/4``
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-------------
-
-.. index:: total_connections/1
-.. _amqp_pool/0::total_connections/1:
-
-``total_connections/1``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-------------
-
-.. index:: current_timestamp/1
-.. _amqp_pool/0::current_timestamp/1:
-
-``current_timestamp/1``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-------------
-
-.. index:: option/3
-.. _amqp_pool/0::option/3:
-
-``option/3``
-^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
 
 
 ------------

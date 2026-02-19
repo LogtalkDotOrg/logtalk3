@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-18,
+		date is 2026-02-19,
 		comment is 'Unit tests for the "random_forest" library.'
 	]).
 
@@ -149,7 +149,7 @@
 
 	% classifier_to_file/4 tests
 
-	test(rf_classifier_to_file_4, deterministic) :-
+	test(rf_classifier_to_file_4_written, deterministic(os::file_exists(File))) :-
 		^^file_path('test_output.pl', File),
 		random_forest::learn(play_tennis, Classifier),
 		random_forest::classifier_to_file(play_tennis, Classifier, classify, File).

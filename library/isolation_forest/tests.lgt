@@ -23,17 +23,20 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-02-19,
 		comment is 'Unit tests for the "isolation_forest" library.'
 	]).
 
 	:- uses(list, [
-		length/2, member/2, memberchk/2, take/3
+		length/2, take/3
 	]).
 
 	cover(isolation_forest).
+
+	cleanup :-
+		^^clean_file('test_output.pl').
 
 	% ===================================================================
 	% learn/2 tests - gaussian_anomalies dataset
@@ -187,13 +190,74 @@
 		count_class(TopScores, anomaly, AnomalyCount).
 
 	% ===================================================================
-	% print_model/1 tests
+	% predict/4 tests - with options
 	% ===================================================================
 
-	test(isolation_forest_print_model_1, deterministic) :-
+	test(isolation_forest_predict_4_gaussian_custom_threshold_low, true(Prediction == anomaly)) :-
+		% A low threshold should make more points classified as anomalies
+		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(100)]),
+		isolation_forest::predict(Model, [x-0.12, y-0.34], Prediction, [anomaly_threshold(0.1)]).
+
+	test(isolation_forest_predict_4_gaussian_custom_threshold_high, true(Prediction == normal)) :-
+		% A high threshold should make more points classified as normal
+		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(100)]),
+		isolation_forest::predict(Model, [x-4.50, y-4.20], Prediction, [anomaly_threshold(0.99)]).
+
+	test(isolation_forest_predict_4_overrides_model_threshold, true(Prediction == anomaly)) :-
+		% The options threshold should override the model threshold
+		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(100), anomaly_threshold(0.99)]),
+		isolation_forest::predict(Model, [x-4.50, y-4.20], Prediction, [anomaly_threshold(0.5)]).
+
+	test(isolation_forest_predict_4_sensor_missing_values, true(Prediction == anomaly)) :-
+		% predict/4 should work with missing values
+		isolation_forest::learn(sensor_anomalies, Model, [number_of_trees(100)]),
+		isolation_forest::predict(Model, [temperature-102.0, pressure-45.0, vibration- _], Prediction, [anomaly_threshold(0.5)]).
+
+	% ===================================================================
+	% classifier_to_clauses/4 tests
+	% ===================================================================
+
+	test(isolation_forest_classifier_to_clauses_4_gaussian, true(N == 1)) :-
+		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(10)]),
+		isolation_forest::classifier_to_clauses(gaussian_anomalies, Model, iforest, Clauses),
+		length(Clauses, N).
+
+	test(isolation_forest_classifier_to_clauses_4_clause_is_ground, true(ground(Clauses))) :-
+		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(10)]),
+		isolation_forest::classifier_to_clauses(gaussian_anomalies, Model, iforest, Clauses).
+
+	test(isolation_forest_classifier_to_clauses_4_clause_functor, true(Functor == iforest)) :-
+		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(10)]),
+		isolation_forest::classifier_to_clauses(gaussian_anomalies, Model, iforest, [Clause]),
+		functor(Clause, Functor, _).
+
+	test(isolation_forest_classifier_to_clauses_4_clause_arity, true(Arity == 6)) :-
+		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(10)]),
+		isolation_forest::classifier_to_clauses(gaussian_anomalies, Model, iforest, [Clause]),
+		functor(Clause, _, Arity).
+
+	test(isolation_forest_classifier_to_clauses_4_sensor, true(N == 1)) :-
+		isolation_forest::learn(sensor_anomalies, Model, [number_of_trees(10)]),
+		isolation_forest::classifier_to_clauses(sensor_anomalies, Model, detect, Clauses),
+		length(Clauses, N).
+
+	% ===================================================================
+	% classifier_to_file/4 tests
+	% ===================================================================
+
+	test(isolation_forest_classifier_to_file_4_gaussian, deterministic(os::file_exists(File))) :-
+		^^file_path('test_output.pl', File),
+		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(10)]),
+		isolation_forest::classifier_to_file(gaussian_anomalies, Model, iforest, File).
+
+	% ===================================================================
+	% print_classifier/1 tests
+	% ===================================================================
+
+	test(isolation_forest_print_classifier_1, deterministic) :-
 		^^suppress_text_output,
 		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(5)]),
-		isolation_forest::print_model(Model).
+		isolation_forest::print_classifier(Model).
 
 	% ===================================================================
 	% Extension level tests

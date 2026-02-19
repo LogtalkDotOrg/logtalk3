@@ -24,9 +24,9 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-18,
-		comment is 'Protocol for datasets used with classifiers.',
-		see_also is [c45, naive_bayes]
+		date is 2026-02-19,
+		comment is 'Protocol for machine learning classifiers.',
+		see_also is [c45, isolation_forest, knn, naive_bayes, nearest_centroid, random_forest]
 	]).
 
 	:- public(learn/2).

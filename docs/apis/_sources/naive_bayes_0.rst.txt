@@ -15,7 +15,7 @@ Naive Bayes classifier with Laplace smoothing and Gaussian distribution support.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-18
+| **Date:** 2026-02-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -82,5 +82,5 @@ Operators
 
 .. seealso::
 
-   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`c45 <c45/0>`, :ref:`knn <knn/0>`, :ref:`nearest_centroid <nearest_centroid/0>`, :ref:`random_forest <random_forest/0>`
+   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`isolation_forest <isolation_forest/0>`, :ref:`c45 <c45/0>`, :ref:`knn <knn/0>`, :ref:`nearest_centroid <nearest_centroid/0>`, :ref:`random_forest <random_forest/0>`
 

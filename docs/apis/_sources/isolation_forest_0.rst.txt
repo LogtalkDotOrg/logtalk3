@@ -14,18 +14,21 @@ Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the 
 |    ``logtalk_load(isolation_forest(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
+| **Version:** 1:0:0
 | **Date:** 2026-02-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
+| **Implements:**
+|    ``public`` :ref:`classifier_protocol <classifier_protocol/0>`
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
-|    :ref:`fast_random <fast_random/0>`
+|    :ref:`fast_random(Algorithm) <fast_random/1>`
 |    :ref:`format <format/0>`
+|    :ref:`integer <integer/0>`
 |    :ref:`list <list/0>`
 |    :ref:`numberlist <numberlist/0>`
 |    :ref:`pairs <pairs/0>`
@@ -36,13 +39,14 @@ Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the 
    - Algorithm: The Extended Isolation Forest builds an ensemble of isolation trees (iTrees) by recursively partitioning the data using random hyperplanes. Anomalous points, being few and different, require fewer partitions (shorter path lengths) to be isolated.
    - Extended vs Original: The original Isolation Forest uses axis-aligned splits (random attribute + random value), which introduces bias in anomaly scores along coordinate axes. The extended version uses random hyperplane cuts with arbitrary slopes, producing more consistent and reliable anomaly scores.
    - Extension level: The extension level controls the dimensionality of the random hyperplane cuts. Level 0 corresponds to the original axis-aligned Isolation Forest. The default level is ``d - 1`` (fully extended) where ``d`` is the number of dimensions.
+   - Prediction: The ``predict/3`` predicate returns ``anomaly`` if the anomaly score is above the threshold (default: 0.5) and ``normal`` otherwise. The ``score_all/3`` predicate returns a sorted list of all instances with their corresponding scores and class labels. Predictions use by default the learned model options but can override them using the ``anomaly_threshold/1`` option.
    - Anomaly score: The anomaly score ``s(x)`` is computed as ``s(x) = 2^(-E(h(x))/c(psi))`` where ``E(h(x))`` is the average path length across all trees, ``c(psi)`` is the average path length of unsuccessful searches in a BST, and ``psi`` is the subsample size. Scores close to 1 indicate anomalies; scores below 0.5 indicate normal points.
    - Discrete attributes: Discrete (categorical) attributes are mapped to numeric indices based on their position in the attribute value list declared by the dataset. This allows the algorithm to handle datasets with mixed attribute types.
    - Missing values: Missing attribute values are represented using anonymous variables. During tree construction, missing values are replaced with random values drawn from the observed range of the corresponding attribute. During scoring, instances with missing values are sent down both branches of the tree and the path length is computed as the weighted average of the two branches.
    - Classifier representation: The learned model is represented as an ``if_model(Trees, SubsampleSize, AttributeNames, Attributes, Ranges, Options)`` compound term.
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`classifier_protocol/0::classifier_to_clauses/4`  :ref:`classifier_protocol/0::classifier_to_file/4`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`classifier_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -50,25 +54,6 @@ Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the 
 
 Public predicates
 -----------------
-
-.. index:: learn/2
-.. _isolation_forest/0::learn/2:
-
-``learn/2``
-^^^^^^^^^^^
-
-Learns an isolation forest model from the given dataset object using default options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``learn(Dataset,Model)``
-| **Mode and number of proofs:**
-|    ``learn(+object_identifier,-compound)`` - ``one``
-
-
-------------
 
 .. index:: learn/3
 .. _isolation_forest/0::learn/3:
@@ -85,6 +70,25 @@ Learns an isolation forest model from the given dataset object using the specifi
 |    ``learn(Dataset,Model,Options)``
 | **Mode and number of proofs:**
 |    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: predict/4
+.. _isolation_forest/0::predict/4:
+
+``predict/4``
+^^^^^^^^^^^^^
+
+Predicts whether an instance is an anomaly or normal using the learned model and the anomaly threshold with the given options. The instance is a list of ``Attribute-Value`` pairs where missing values are represented using anonymous variables. Returns ``anomaly`` if the anomaly score is above the threshold, ``normal`` otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predict(Model,Instance,Prediction,Options)``
+| **Mode and number of proofs:**
+|    ``predict(+compound,+list,-atom,+list(compound))`` - ``one``
 
 
 ------------
@@ -108,25 +112,6 @@ Computes the anomaly score for a given instance using the learned model. The ins
 
 ------------
 
-.. index:: predict/3
-.. _isolation_forest/0::predict/3:
-
-``predict/3``
-^^^^^^^^^^^^^
-
-Predicts whether an instance is an anomaly or normal using the learned model and the anomaly threshold from the model options. The instance is a list of ``Attribute-Value`` pairs where missing values are represented using anonymous variables. Returns ``anomaly`` if the anomaly score is above the threshold, ``normal`` otherwise.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``predict(Model,Instance,Prediction)``
-| **Mode and number of proofs:**
-|    ``predict(+compound,+list,-atom)`` - ``one``
-
-
-------------
-
 .. index:: score_all/3
 .. _isolation_forest/0::score_all/3:
 
@@ -142,25 +127,6 @@ Computes the anomaly scores for all instances in the dataset. Returns a list of 
 |    ``score_all(Dataset,Model,Scores)``
 | **Mode and number of proofs:**
 |    ``score_all(+object_identifier,+compound,-list)`` - ``one``
-
-
-------------
-
-.. index:: print_model/1
-.. _isolation_forest/0::print_model/1:
-
-``print_model/1``
-^^^^^^^^^^^^^^^^^
-
-Prints a summary of the isolation forest model to the current output stream.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``print_model(Model)``
-| **Mode and number of proofs:**
-|    ``print_model(+compound)`` - ``one``
 
 
 ------------

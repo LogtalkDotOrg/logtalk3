@@ -6517,7 +6517,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`classifier_protocol <classifier_protocol/0::learn/2>`
-* :ref:`isolation_forest <isolation_forest/0::learn/2>`
 * :ref:`metagol <metagol/0::learn/2>`
 
 ``learn/3``
@@ -9310,7 +9309,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`classifier_protocol <classifier_protocol/0::predict/3>`
-* :ref:`isolation_forest <isolation_forest/0::predict/3>`
 
 ``predict/4``
 -------------
@@ -9320,6 +9318,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`isolation_forest <isolation_forest/0::predict/4>`
 * :ref:`knn <knn/0::predict/4>`
 * :ref:`nearest_centroid <nearest_centroid/0::predict/4>`
 
@@ -9508,16 +9507,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`logtalk <logtalk/0::print_message_tokens/3>`
-
-``print_model/1``
------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`isolation_forest <isolation_forest/0::print_model/1>`
 
 ``product/2``
 -------------

@@ -23,14 +23,15 @@ ________________________________________________________________________
 ======================
 
 This library provides protocols used in the implementation of machine
-learning algorithms, aka classifiers. Datasets are represented as objects
+learning classifier algorithms. Datasets are represented as objects
 implementing the `dataset_protocol` protocol. Classifiers are represented
 as objects implementing the `classifier_protocol` protocol.
 
 This library also provides test datasets. See below for details.
 
-Logtalk currently provides `c45`, `knn`, `naive_bayes`, and `random_forest`
-classifiers. See these libraries documentation for details.
+Logtalk currently provides several classifiers including `c45`, `knn`,
+`naive_bayes`, `nearest_centroid`, and `random_forest`. See these
+libraries documentation for details.
 
 
 API documentation
@@ -86,3 +87,33 @@ Several sample datasets are included in the `test_files` directory:
   Ming Tan and Jeff Schlimmer. Available from the UCI Machine Learning
   Repository:
   https://archive.ics.uci.edu/dataset/14/breast+cancer
+
+- **Gaussian Anomalies** — A synthetic 2D anomaly detection dataset with
+  50 examples and 2 continuous attributes (x, y). Normal points are sampled
+  from a standard normal distribution centered at the origin. Anomalous
+  points are placed far from the cluster center. Inspired by the canonical
+  test case used in the Extended Isolation Forest paper by Hariri et al.
+  (2019).
+
+- **Shuttle Anomalies** — A subset of the Statlog Shuttle dataset with 50
+  examples and 9 continuous attributes representing sensor readings from
+  the NASA Space Shuttle. Class 1 (Rad Flow) is the majority class
+  (normal), while all other classes are treated as anomalies. Originally
+  from Catlett, J. (1991). Available from the UCI Machine Learning
+  Repository:
+  https://archive.ics.uci.edu/dataset/148/statlog+shuttle
+
+- **Water Potability** — A water potability dataset with 50 examples and
+  9 continuous attributes (pH, hardness, solids, chloramines, sulfate,
+  conductivity, organic carbon, trihalomethanes, turbidity). Normal
+  instances represent potable water samples within acceptable ranges.
+  Anomalous instances represent water samples with hazardous contamination
+  levels. Based on the publicly available Water Quality dataset (Kadiwal,
+  A., 2020, Kaggle).
+
+- **Sensor Anomalies** — A synthetic industrial sensor anomaly dataset
+  with 40 examples and 3 continuous attributes (temperature, pressure,
+  vibration). Contains missing values (14 examples with missing values,
+  represented using anonymous variables). Normal readings cluster around
+  typical operating ranges. Anomalous readings show extreme values
+  indicating equipment malfunction.

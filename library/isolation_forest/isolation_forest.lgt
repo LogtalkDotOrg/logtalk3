@@ -20,10 +20,11 @@
 
 
 :- object(isolation_forest,
+	implements(classifier_protocol),
 	imports(options)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-02-19,
 		comment is 'Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the improved version described by Hariri et al. (2019) that uses random hyperplane cuts instead of axis-aligned cuts, eliminating score bias artifacts. Builds an ensemble of isolation trees from a dataset object implementing the ``dataset_protocol`` protocol. Missing attribute values are represented using anonymous variables.',
@@ -31,19 +32,13 @@
 			'Algorithm' - 'The Extended Isolation Forest builds an ensemble of isolation trees (iTrees) by recursively partitioning the data using random hyperplanes. Anomalous points, being few and different, require fewer partitions (shorter path lengths) to be isolated.',
 			'Extended vs Original' - 'The original Isolation Forest uses axis-aligned splits (random attribute + random value), which introduces bias in anomaly scores along coordinate axes. The extended version uses random hyperplane cuts with arbitrary slopes, producing more consistent and reliable anomaly scores.',
 			'Extension level' - 'The extension level controls the dimensionality of the random hyperplane cuts. Level 0 corresponds to the original axis-aligned Isolation Forest. The default level is ``d - 1`` (fully extended) where ``d`` is the number of dimensions.',
+			'Prediction' - 'The ``predict/3`` predicate returns ``anomaly`` if the anomaly score is above the threshold (default: 0.5) and ``normal`` otherwise. The ``score_all/3`` predicate returns a sorted list of all instances with their corresponding scores and class labels. Predictions use by default the learned model options but can override them using the ``anomaly_threshold/1`` option.',
 			'Anomaly score' - 'The anomaly score ``s(x)`` is computed as ``s(x) = 2^(-E(h(x))/c(psi))`` where ``E(h(x))`` is the average path length across all trees, ``c(psi)`` is the average path length of unsuccessful searches in a BST, and ``psi`` is the subsample size. Scores close to 1 indicate anomalies; scores below 0.5 indicate normal points.',
 			'Discrete attributes' - 'Discrete (categorical) attributes are mapped to numeric indices based on their position in the attribute value list declared by the dataset. This allows the algorithm to handle datasets with mixed attribute types.',
 			'Missing values' - 'Missing attribute values are represented using anonymous variables. During tree construction, missing values are replaced with random values drawn from the observed range of the corresponding attribute. During scoring, instances with missing values are sent down both branches of the tree and the path length is computed as the weighted average of the two branches.',
 			'Classifier representation' - 'The learned model is represented as an ``if_model(Trees, SubsampleSize, AttributeNames, Attributes, Ranges, Options)`` compound term.'
 		],
 		see_also is [dataset_protocol, c45, random_forest]
-	]).
-
-	:- public(learn/2).
-	:- mode(learn(+object_identifier, -compound), one).
-	:- info(learn/2, [
-		comment is 'Learns an isolation forest model from the given dataset object using default options.',
-		argnames is ['Dataset', 'Model']
 	]).
 
 	:- public(learn/3).
@@ -53,18 +48,18 @@
 		argnames is ['Dataset', 'Model', 'Options']
 	]).
 
+	:- public(predict/4).
+	:- mode(predict(+compound, +list, -atom, +list(compound)), one).
+	:- info(predict/4, [
+		comment is 'Predicts whether an instance is an anomaly or normal using the learned model and the anomaly threshold with the given options. The instance is a list of ``Attribute-Value`` pairs where missing values are represented using anonymous variables. Returns ``anomaly`` if the anomaly score is above the threshold, ``normal`` otherwise.',
+		argnames is ['Model', 'Instance', 'Prediction', 'Options']
+	]).
+
 	:- public(score/3).
 	:- mode(score(+compound, +list, -float), one).
 	:- info(score/3, [
 		comment is 'Computes the anomaly score for a given instance using the learned model. The instance is a list of ``Attribute-Value`` pairs where missing values are represented using anonymous variables. The score is in the range ``[0.0, 1.0]``. Scores close to ``1.0`` indicate anomalies. Scores close to ``0.5`` or below indicate normal instances.',
 		argnames is ['Model', 'Instance', 'Score']
-	]).
-
-	:- public(predict/3).
-	:- mode(predict(+compound, +list, -atom), one).
-	:- info(predict/3, [
-		comment is 'Predicts whether an instance is an anomaly or normal using the learned model and the anomaly threshold from the model options. The instance is a list of ``Attribute-Value`` pairs where missing values are represented using anonymous variables. Returns ``anomaly`` if the anomaly score is above the threshold, ``normal`` otherwise.',
-		argnames is ['Model', 'Instance', 'Prediction']
 	]).
 
 	:- public(score_all/3).
@@ -74,18 +69,8 @@
 		argnames is ['Dataset', 'Model', 'Scores']
 	]).
 
-	:- public(print_model/1).
-	:- mode(print_model(+compound), one).
-	:- info(print_model/1, [
-		comment is 'Prints a summary of the isolation forest model to the current output stream.',
-		argnames is ['Model']
-	]).
-
 	:- uses(fast_random(xoshiro128pp), [
-		normal/3 as random_normal/3,
-		random/3 as random_float/3,
-		between/3 as random_between/3,
-		permutation/2 as random_permutation/2
+		normal/3 as random_normal/3, random/3 as random_float/3, permutation/2 as random_permutation/2
 	]).
 
 	:- uses(format, [
@@ -97,8 +82,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, memberchk/2,
-		msort/2, nth1/3, take/3
+		length/2, member/2, memberchk/2, msort/2, nth1/3, reverse/2, take/3, valid/1 as is_list/1
 	]).
 
 	:- uses(numberlist, [
@@ -106,7 +90,7 @@
 	]).
 
 	:- uses(pairs, [
-		keys/2, keys_values/3
+		keys/2
 	]).
 
 	:- uses(type, [
@@ -161,7 +145,7 @@
 	% Missing values are handled by sending the instance down both
 	% branches and computing a weighted average path length
 	score(Model, Instance, Score) :-
-		Model = if_model(Trees, Psi, AttributeNames, Attributes, Ranges, _Options),
+		Model =.. [_, Trees, Psi, AttributeNames, Attributes, Ranges, _Options],
 		to_numeric_vector_with_missing(Instance, AttributeNames, Attributes, Vector, MissingMask),
 		% Compute average path length across all trees
 		compute_average_path_length(Trees, Vector, MissingMask, Ranges, AvgPathLength),
@@ -172,14 +156,23 @@
 		;	Score = 0.5
 		).
 
-	% predict/3 - predict anomaly or normal
+	% predict/3 - predict anomaly or normal using default options
 	predict(Model, Instance, Prediction) :-
-		Model = if_model(_, _, _, _, _, Options),
-		score(Model, Instance, Score),
-		(	^^option(anomaly_threshold(Threshold), Options) ->
-			true
-		;	Threshold = 0.5
+		Model =.. [_, _, _, _, _, _, Options],
+		predict(Model, Instance, Prediction, Options).
+
+	% predict/4 - predict anomaly or normal using specified options
+	predict(Model, Instance, Prediction, UserOptions) :-
+		^^check_options(UserOptions),
+		Model =.. [_, _, _, _, _, _, ModelOptions],
+		(	member(anomaly_threshold(_), UserOptions) ->
+			UpdateUserOptions = UserOptions
+		;	memberchk(anomaly_threshold(ModelThreshold), ModelOptions),
+			UpdateUserOptions = [anomaly_threshold(ModelThreshold)| UserOptions]
 		),
+		^^merge_options(UpdateUserOptions, Options),
+		^^option(anomaly_threshold(Threshold), Options),
+		score(Model, Instance, Score),
 		(	Score >= Threshold ->
 			Prediction = anomaly
 		;	Prediction = normal
@@ -187,7 +180,7 @@
 
 	% score_all/3 - compute scores for all instances
 	score_all(Dataset, Model, SortedScores) :-
-		Model = if_model(_, _, AttributeNames, Attributes, Ranges, _),
+		Model =.. [_, _, _, AttributeNames, Attributes, Ranges, _],
 		findall(
 			Score-Id-Class,
 			(	Dataset::example(Id, Class, AVs),
@@ -197,7 +190,7 @@
 			UnsortedPairs
 		),
 		msort(UnsortedPairs, SortedPairsAsc),
-		reverse_list(SortedPairsAsc, SortedPairsDesc),
+		reverse(SortedPairsAsc, SortedPairsDesc),
 		extract_scores(SortedPairsDesc, SortedScores).
 
 	score_vector(if_model(Trees, Psi, _, _, _, _), Vector, MissingMask, Ranges, Score) :-
@@ -212,16 +205,29 @@
 	extract_scores([Score-Id-Class| Rest], [Id-Class-Score| Scores]) :-
 		extract_scores(Rest, Scores).
 
-	reverse_list(List, Reversed) :-
-		reverse_list(List, [], Reversed).
+	% classifier_to_clauses/4 - exports classifier as a clause
+	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
+		Classifier =.. [_, Trees, Psi, AttributeNames, Attributes, Ranges, Options],
+		Clause =.. [Functor, Trees, Psi, AttributeNames, Attributes, Ranges, Options].
 
-	reverse_list([], Acc, Acc).
-	reverse_list([H| T], Acc, Reversed) :-
-		reverse_list(T, [H| Acc], Reversed).
+	% classifier_to_file/4 - exports classifier to a file
+	classifier_to_file(Dataset, Classifier, Functor, File) :-
+		classifier_to_clauses(Dataset, Classifier, Functor, Clauses),
+		open(File, write, Stream),
+		write_comment_header(Functor, Stream),
+		write_clauses(Clauses, Stream),
+		close(Stream).
 
-	% print_model/1 - print model summary
-	print_model(Model) :-
-		Model = if_model(Trees, Psi, AttributeNames, _Attributes, _Ranges, Options),
+	write_comment_header(Functor, Stream) :-
+		format(Stream, '% ~q(Trees, Psi, AttributeNames, Attributes, Ranges, Options)~n', [Functor]).
+
+	write_clauses([], _).
+	write_clauses([Clause| Clauses], Stream) :-
+		format(Stream, '~q.~n', [Clause]),
+		write_clauses(Clauses, Stream).
+
+	print_classifier(Model) :-
+		Model =.. [_, Trees, Psi, AttributeNames, _Attributes, _Ranges, Options],
 		length(Trees, NumTrees),
 		length(AttributeNames, NumDimensions),
 		format('Extended Isolation Forest Model~n', []),
@@ -293,7 +299,7 @@
 			NumValue is float(Value)
 		;	% Discrete: map to index position
 			is_list(AttrType),
-			nth1_index(AttrType, Value, 1, Index),
+			once(nth1(Index, AttrType, Value)),
 			NumValue is float(Index)
 		),
 		to_numeric_vector_impute_(Names, AVs, Attributes, Ranges, Rest).
@@ -317,7 +323,7 @@
 			NumValue is float(Value)
 		;	% Discrete: map to index position
 			is_list(AttrType),
-			nth1_index(AttrType, Value, 1, Index),
+			once(nth1(Index, AttrType, Value)),
 			Missing = false,
 			NumValue is float(Index)
 		),
@@ -339,7 +345,7 @@
 				(	AttrType == continuous ->
 					NumVal is float(Value)
 				;	is_list(AttrType),
-					nth1_index(AttrType, Value, 1, Index),
+					once(nth1(Index, AttrType, Value)),
 					NumVal is float(Index)
 				)
 			),
@@ -351,14 +357,6 @@
 			max(KnownValues, Max)
 		),
 		compute_attribute_ranges_(Names, AllAVs, Attributes, Rest).
-
-	nth1_index([V| _], V, N, N) :- !.
-	nth1_index([_| Vs], V, N, Index) :-
-		N1 is N + 1,
-		nth1_index(Vs, V, N1, Index).
-
-	is_list([]).
-	is_list([_| _]).
 
 	% max_depth/2 - compute max tree depth: ceil(log2(psi))
 	max_depth(Psi, MaxDepth) :-
@@ -372,7 +370,8 @@
 		length(Vectors, N),
 		build_forest_(NumTrees, Vectors, N, Psi, MaxDepth, NumDimensions, ExtLevel, [], Trees).
 
-	build_forest_(0, _, _, _, _, _, _, Trees, Trees) :- !.
+	build_forest_(0, _, _, _, _, _, _, Trees, Trees) :-
+		!.
 	build_forest_(I, Vectors, N, Psi, MaxDepth, NumDimensions, ExtLevel, Acc, Trees) :-
 		I > 0,
 		% Subsample

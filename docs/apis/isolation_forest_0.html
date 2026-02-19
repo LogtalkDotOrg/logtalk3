@@ -236,7 +236,7 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:1:0</div>
+<div class="line"><strong>Version:</strong> 1:0:0</div>
 <div class="line"><strong>Date:</strong> 2026-02-19</div>
 </div>
 <div class="line-block">
@@ -246,14 +246,19 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Implements:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0"><span class="std std-ref">classifier_protocol</span></a></div>
+</div>
 <div class="line"><strong>Imports:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="options_0.html#options-0"><span class="std std-ref">options</span></a></div>
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
-<div class="line"><a class="reference internal" href="fast_random_0.html#fast-random-0"><span class="std std-ref">fast_random</span></a></div>
+<div class="line"><a class="reference internal" href="fast_random_1.html#fast-random-1"><span class="std std-ref">fast_random(Algorithm)</span></a></div>
 <div class="line"><a class="reference internal" href="format_0.html#format-0"><span class="std std-ref">format</span></a></div>
+<div class="line"><a class="reference internal" href="integer_0.html#integer-0"><span class="std std-ref">integer</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="numberlist_0.html#numberlist-0"><span class="std std-ref">numberlist</span></a></div>
 <div class="line"><a class="reference internal" href="pairs_0.html#pairs-0"><span class="std std-ref">pairs</span></a></div>
@@ -268,6 +273,7 @@
 <li><p>Algorithm: The Extended Isolation Forest builds an ensemble of isolation trees (iTrees) by recursively partitioning the data using random hyperplanes. Anomalous points, being few and different, require fewer partitions (shorter path lengths) to be isolated.</p></li>
 <li><p>Extended vs Original: The original Isolation Forest uses axis-aligned splits (random attribute + random value), which introduces bias in anomaly scores along coordinate axes. The extended version uses random hyperplane cuts with arbitrary slopes, producing more consistent and reliable anomaly scores.</p></li>
 <li><p>Extension level: The extension level controls the dimensionality of the random hyperplane cuts. Level 0 corresponds to the original axis-aligned Isolation Forest. The default level is <code class="docutils literal notranslate"><span class="pre">d</span> <span class="pre">-</span> <span class="pre">1</span></code> (fully extended) where <code class="docutils literal notranslate"><span class="pre">d</span></code> is the number of dimensions.</p></li>
+<li><p>Prediction: The <code class="docutils literal notranslate"><span class="pre">predict/3</span></code> predicate returns <code class="docutils literal notranslate"><span class="pre">anomaly</span></code> if the anomaly score is above the threshold (default: 0.5) and <code class="docutils literal notranslate"><span class="pre">normal</span></code> otherwise. The <code class="docutils literal notranslate"><span class="pre">score_all/3</span></code> predicate returns a sorted list of all instances with their corresponding scores and class labels. Predictions use by default the learned model options but can override them using the <code class="docutils literal notranslate"><span class="pre">anomaly_threshold/1</span></code> option.</p></li>
 <li><p>Anomaly score: The anomaly score <code class="docutils literal notranslate"><span class="pre">s(x)</span></code> is computed as <code class="docutils literal notranslate"><span class="pre">s(x)</span> <span class="pre">=</span> <span class="pre">2^(-E(h(x))/c(psi))</span></code> where <code class="docutils literal notranslate"><span class="pre">E(h(x))</span></code> is the average path length across all trees, <code class="docutils literal notranslate"><span class="pre">c(psi)</span></code> is the average path length of unsuccessful searches in a BST, and <code class="docutils literal notranslate"><span class="pre">psi</span></code> is the subsample size. Scores close to 1 indicate anomalies; scores below 0.5 indicate normal points.</p></li>
 <li><p>Discrete attributes: Discrete (categorical) attributes are mapped to numeric indices based on their position in the attribute value list declared by the dataset. This allows the algorithm to handle datasets with mixed attribute types.</p></li>
 <li><p>Missing values: Missing attribute values are represented using anonymous variables. During tree construction, missing values are replaced with random values drawn from the observed range of the corresponding attribute. During scoring, instances with missing values are sent down both branches of the tree and the path length is computed as the weighted average of the two branches.</p></li>
@@ -277,51 +283,28 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
+<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-classifier-to-clauses-4"><span class="std std-ref">classifier_to_clauses/4</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-classifier-to-file-4"><span class="std std-ref">classifier_to_file/4</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-learn-2"><span class="std std-ref">learn/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-predict-3"><span class="std std-ref">predict/3</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-print-classifier-1"><span class="std std-ref">print_classifier/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#learn-2" id="id2"><code class="docutils literal notranslate"><span class="pre">learn/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#learn-3" id="id3"><code class="docutils literal notranslate"><span class="pre">learn/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#learn-3" id="id2"><code class="docutils literal notranslate"><span class="pre">learn/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#predict-4" id="id3"><code class="docutils literal notranslate"><span class="pre">predict/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#score-3" id="id4"><code class="docutils literal notranslate"><span class="pre">score/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#predict-3" id="id5"><code class="docutils literal notranslate"><span class="pre">predict/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#score-all-3" id="id6"><code class="docutils literal notranslate"><span class="pre">score_all/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#print-model-1" id="id7"><code class="docutils literal notranslate"><span class="pre">print_model/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#score-all-3" id="id5"><code class="docutils literal notranslate"><span class="pre">score_all/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id8">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id9">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id10">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id6">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id7">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id8">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="learn-2">
-<span id="isolation-forest-0-learn-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn/2</span></code></a><a class="headerlink" href="#learn-2" title="Link to this heading"></a></h3>
-<p>Learns an isolation forest model from the given dataset object using default options.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(Dataset,Model)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(+object_identifier,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
 <section id="learn-3">
-<span id="isolation-forest-0-learn-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn/3</span></code></a><a class="headerlink" href="#learn-3" title="Link to this heading"></a></h3>
+<span id="isolation-forest-0-learn-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn/3</span></code></a><a class="headerlink" href="#learn-3" title="Link to this heading"></a></h3>
 <p>Learns an isolation forest model from the given dataset object using the specified options. Valid options are <code class="docutils literal notranslate"><span class="pre">number_of_trees/1</span></code> (default: <code class="docutils literal notranslate"><span class="pre">100</span></code>), <code class="docutils literal notranslate"><span class="pre">subsample_size/1</span></code> (default: <code class="docutils literal notranslate"><span class="pre">256</span></code> or the number of instances if smaller), <code class="docutils literal notranslate"><span class="pre">extension_level/1</span></code> (default: <code class="docutils literal notranslate"><span class="pre">d</span> <span class="pre">-</span> <span class="pre">1</span></code> where <code class="docutils literal notranslate"><span class="pre">d</span></code> is the number of dimensions), and <code class="docutils literal notranslate"><span class="pre">anomaly_threshold/1</span></code> (default: <code class="docutils literal notranslate"><span class="pre">0.5</span></code>).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -337,6 +320,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">learn(+object_identifier,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="predict-4">
+<span id="isolation-forest-0-predict-4"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predict/4</span></code></a><a class="headerlink" href="#predict-4" title="Link to this heading"></a></h3>
+<p>Predicts whether an instance is an anomaly or normal using the learned model and the anomaly threshold with the given options. The instance is a list of <code class="docutils literal notranslate"><span class="pre">Attribute-Value</span></code> pairs where missing values are represented using anonymous variables. Returns <code class="docutils literal notranslate"><span class="pre">anomaly</span></code> if the anomaly score is above the threshold, <code class="docutils literal notranslate"><span class="pre">normal</span></code> otherwise.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predict(Model,Instance,Prediction,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predict(+compound,+list,-atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -362,29 +366,8 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="predict-3">
-<span id="isolation-forest-0-predict-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predict/3</span></code></a><a class="headerlink" href="#predict-3" title="Link to this heading"></a></h3>
-<p>Predicts whether an instance is an anomaly or normal using the learned model and the anomaly threshold from the model options. The instance is a list of <code class="docutils literal notranslate"><span class="pre">Attribute-Value</span></code> pairs where missing values are represented using anonymous variables. Returns <code class="docutils literal notranslate"><span class="pre">anomaly</span></code> if the anomaly score is above the threshold, <code class="docutils literal notranslate"><span class="pre">normal</span></code> otherwise.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">predict(Model,Instance,Prediction)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">predict(+compound,+list,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
 <section id="score-all-3">
-<span id="isolation-forest-0-score-all-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">score_all/3</span></code></a><a class="headerlink" href="#score-all-3" title="Link to this heading"></a></h3>
+<span id="isolation-forest-0-score-all-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">score_all/3</span></code></a><a class="headerlink" href="#score-all-3" title="Link to this heading"></a></h3>
 <p>Computes the anomaly scores for all instances in the dataset. Returns a list of <code class="docutils literal notranslate"><span class="pre">Id-Class-Score</span></code> triples sorted by descending anomaly score.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -400,27 +383,6 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">score_all(+object_identifier,+compound,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="print-model-1">
-<span id="isolation-forest-0-print-model-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">print_model/1</span></code></a><a class="headerlink" href="#print-model-1" title="Link to this heading"></a></h3>
-<p>Prints a summary of the isolation forest model to the current output stream.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">print_model(Model)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">print_model(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </section>

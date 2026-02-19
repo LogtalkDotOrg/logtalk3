@@ -24,9 +24,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-14,
-		comment is 'Protocol for datasets used with the C4.5 decision tree learning algorithm.',
-		see_also is [c45]
+		date is 2026-02-19,
+		comment is 'Protocol for datasets used with classifier algorithms.'
 	]).
 
 	:- public(attribute_values/2).

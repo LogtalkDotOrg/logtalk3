@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-16,
+		date is 2026-02-19,
 		comment is 'Unit tests for the "c45" library.'
 	]).
 
@@ -80,7 +80,7 @@
 
 	% classifier_to_file/4 tests
 
-	test(c45_classifier_to_file_4_play_tennis, deterministic) :-
+	test(c45_classifier_to_file_4_play_tennis, deterministic(os::file_exists(File))) :-
 		^^file_path('test_output.pl', File),
 		c45::learn(play_tennis, Tree),
 		c45::classifier_to_file(play_tennis, Tree, classify, File).
