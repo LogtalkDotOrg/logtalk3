@@ -1,0 +1,59 @@
+.. index:: single: graph_common
+.. _graph_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``graph_common``
+================
+
+Common graph predicates shared by all graph objects. Uses self-dispatch to call object-specific predicates such as ``neighbors/3``, ``vertices/2``, and ``edges/2``.
+
+| **Availability:** 
+|    ``logtalk_load(graphs(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-19
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`graph_protocol <graph_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`set <set/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`graph_protocol/0::add_edges/3`  :ref:`graph_protocol/0::add_vertex/3`  :ref:`graph_protocol/0::add_vertices/3`  :ref:`graph_protocol/0::delete_edges/3`  :ref:`graph_protocol/0::delete_vertex/3`  :ref:`graph_protocol/0::delete_vertices/3`  :ref:`graph_protocol/0::edges/2`  :ref:`graph_protocol/0::empty/1`  :ref:`graph_protocol/0::has_path/3`  :ref:`graph_protocol/0::max_path/5`  :ref:`graph_protocol/0::min_path/5`  :ref:`graph_protocol/0::neighbors/3`  :ref:`graph_protocol/0::new/1`  :ref:`graph_protocol/0::new/2`  :ref:`graph_protocol/0::new/3`  :ref:`graph_protocol/0::number_of_edges/2`  :ref:`graph_protocol/0::number_of_vertices/2`  :ref:`graph_protocol/0::path/3`  :ref:`graph_protocol/0::reachable/3`  :ref:`graph_protocol/0::vertices/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

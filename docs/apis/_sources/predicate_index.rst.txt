@@ -242,6 +242,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`subject <subject/0::addDependent/1>`
 
+``add_edge/4``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`unweighted_graph_protocol <unweighted_graph_protocol/0::add_edge/4>`
+
+``add_edge/5``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`weighted_graph_protocol <weighted_graph_protocol/0::add_edge/5>`
+
+``add_edges/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::add_edges/3>`
+
 ``add_rule/3``
 --------------
 
@@ -251,6 +281,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`datalog_protocol <datalog_protocol/0::add_rule/3>`
+
+``add_vertex/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::add_vertex/3>`
+
+``add_vertices/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::add_vertices/3>`
 
 ``after/2``
 -----------
@@ -1870,6 +1920,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`logtalk <logtalk/0::compile_predicate_indicators/3>`
 
+``complement/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`unweighted_graph_protocol <unweighted_graph_protocol/0::complement/2>`
+
 ``completion/2``
 ----------------
 
@@ -1889,6 +1949,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`help <help/0::completions/2>`
+
+``compose/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`unweighted_directed_graph(Dictionary) <unweighted_directed_graph/1::compose/3>`
 
 ``confirm_select/1``
 --------------------
@@ -1941,6 +2011,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`amqp <amqp/0::connect/4>`
 * :ref:`stomp <stomp/0::connect/4>`
+
+``connected_components/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`unweighted_undirected_graph(Dictionary) <unweighted_undirected_graph/1::connected_components/2>`
+* :ref:`weighted_undirected_graph(Dictionary) <weighted_undirected_graph/1::connected_components/2>`
 
 ``connection_alive/1``
 ----------------------
@@ -2497,6 +2578,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`flags <flags/0::defined_flag/6>`
 
+``degree/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`unweighted_undirected_graph(Dictionary) <unweighted_undirected_graph/1::degree/3>`
+* :ref:`weighted_undirected_graph(Dictionary) <weighted_undirected_graph/1::degree/3>`
+
 ``del/3``
 ---------
 
@@ -2691,6 +2783,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::delete_directory_contents/1>`
 
+``delete_edge/4``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`unweighted_graph_protocol <unweighted_graph_protocol/0::delete_edge/4>`
+
+``delete_edge/5``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`weighted_graph_protocol <weighted_graph_protocol/0::delete_edge/5>`
+
+``delete_edges/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::delete_edges/3>`
+
 ``delete_file/1``
 -----------------
 
@@ -2740,6 +2862,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dictionaryp <dictionaryp/0::delete_min/4>`
+
+``delete_vertex/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::delete_vertex/3>`
+
+``delete_vertices/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::delete_vertices/3>`
 
 ``dependents/1``
 ----------------
@@ -3265,6 +3407,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`iso8601 <iso8601/0::easter_day/3>`
 
+``edge/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`unweighted_graph_protocol <unweighted_graph_protocol/0::edge/3>`
+
+``edge/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`weighted_graph_protocol <weighted_graph_protocol/0::edge/4>`
+
 ``edge/6``
 ----------
 
@@ -3284,6 +3446,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`arbitrary <arbitrary/0::edge_case/2>`
+
+``edges/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::edges/2>`
 
 ``edit_similarity/3``
 ---------------------
@@ -3325,6 +3497,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`deque_protocol <deque_protocol/0::empty/1>`
 * :ref:`dictionaryp <dictionaryp/0::empty/1>`
+* :ref:`graph_protocol <graph_protocol/0::empty/1>`
 * :ref:`heap_protocol <heap_protocol/0::empty/1>`
 * :ref:`listp <listp/0::empty/1>`
 * :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::empty/1>`
@@ -5060,6 +5233,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`statisticsp <statisticsp/0::harmonic_mean/2>`
 
+``has_path/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::has_path/3>`
+
 ``hdel/4``
 ----------
 
@@ -5311,6 +5494,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`linda <linda/0::in/2>`
+
+``in_degree/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`directed_graph_protocol <directed_graph_protocol/0::in_degree/3>`
 
 ``in_list/2``
 -------------
@@ -5865,6 +6058,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`characterp <characterp/0::is_bin_digit/1>`
 
+``is_connected/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`unweighted_undirected_graph(Dictionary) <unweighted_undirected_graph/1::is_connected/1>`
+* :ref:`weighted_undirected_graph(Dictionary) <weighted_undirected_graph/1::is_connected/1>`
+
 ``is_control/1``
 ----------------
 
@@ -5874,6 +6078,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`characterp <characterp/0::is_control/1>`
+
+``is_dag/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`directed_graph_protocol <directed_graph_protocol/0::is_dag/1>`
 
 ``is_dec_digit/1``
 ------------------
@@ -6590,6 +6804,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`hierarchyp <hierarchyp/0::leaves/1>`
+
+``leaves/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`unweighted_directed_graph(Dictionary) <unweighted_directed_graph/1::leaves/2>`
 
 ``length/2``
 ------------
@@ -7423,6 +7647,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`metagol <metagol/0::max_inv_preds/1>`
 
+``max_path/5``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::max_path/5>`
+
 ``max_size/1``
 --------------
 
@@ -7432,6 +7666,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`arbitrary <arbitrary/0::max_size/1>`
+
+``max_tree/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`weighted_undirected_graph(Dictionary) <weighted_undirected_graph/1::max_tree/3>`
 
 ``maybe/0``
 -----------
@@ -7792,6 +8036,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`numberlistp <numberlistp/0::min_max/3>`
 * :ref:`statisticsp <statisticsp/0::min_max/3>`
 
+``min_path/5``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::min_path/5>`
+
+``min_paths/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`weighted_directed_graph(Dictionary) <weighted_directed_graph/1::min_paths/3>`
+
+``min_tree/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`weighted_undirected_graph(Dictionary) <weighted_undirected_graph/1::min_tree/3>`
+
 ``modes/2``
 -----------
 
@@ -7955,6 +8229,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`number_grammars(Format) <number_grammars/1::natural//1>`
 
+``neighbors/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::neighbors/3>`
+
 ``new/1``
 ---------
 
@@ -7963,6 +8247,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`graph_protocol <graph_protocol/0::new/1>`
 * :ref:`java_access_protocol <java_access_protocol/0::new/1>`
 * :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::new/1>`
 * :ref:`streamvars <streamvars/0::new/1>`
@@ -7976,6 +8261,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`graph_protocol <graph_protocol/0::new/2>`
 * :ref:`java_access_protocol <java_access_protocol/0::new/2>`
 * :ref:`streamvars <streamvars/0::new/2>`
 * :ref:`union_find_protocol <union_find_protocol/0::new/2>`
@@ -7988,6 +8274,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`graph_protocol <graph_protocol/0::new/3>`
 * :ref:`intervalp <intervalp/0::new/3>`
 
 ``new_line//0``
@@ -8405,6 +8692,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`number_grammars(Format) <number_grammars/1::number//1>`
 
+``number_of_edges/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::number_of_edges/2>`
+
 ``number_of_tests/1``
 ---------------------
 
@@ -8414,6 +8711,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`lgtunit <lgtunit/0::number_of_tests/1>`
+
+``number_of_vertices/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::number_of_vertices/2>`
 
 ``number_string/2``
 -------------------
@@ -8699,6 +9006,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`linda <linda/0::out/1>`
 
+``out_degree/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`directed_graph_protocol <directed_graph_protocol/0::out_degree/3>`
+
 ``outdated/0``
 --------------
 
@@ -8966,6 +9283,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`metap <metap/0::partition/6>`
+
+``path/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::path/3>`
 
 ``path_concat/3``
 -----------------
@@ -9990,6 +10317,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`code_metric <code_metric/0::rdirectory_score/2>`
+
+``reachable/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::reachable/3>`
 
 ``read_file/2``
 ---------------
@@ -12010,6 +12347,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`redis <redis/0::strlen/3>`
 
+``strongly_connected_components/2``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`directed_graph_protocol <directed_graph_protocol/0::strongly_connected_components/2>`
+
 ``sub_string/5``
 ----------------
 
@@ -12297,6 +12644,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`setp <setp/0::symdiff/3>`
 
+``symmetric_closure/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`directed_graph_protocol <directed_graph_protocol/0::symmetric_closure/2>`
+
 ``tab//0``
 ----------
 
@@ -12518,6 +12875,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`heap_protocol <heap_protocol/0::top_next/5>`
 
+``topological_sort/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`directed_graph_protocol <directed_graph_protocol/0::topological_sort/2>`
+
+``topological_sort/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`unweighted_directed_graph(Dictionary) <unweighted_directed_graph/1::topological_sort/3>`
+
 ``touch/3``
 -----------
 
@@ -12548,6 +12925,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`logtalk <logtalk/0::trace_event/2>`
 
+``transitive_closure/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`directed_graph_protocol <directed_graph_protocol/0::transitive_closure/2>`
+
+``transitive_reduction/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`unweighted_directed_graph(Dictionary) <unweighted_directed_graph/1::transitive_reduction/2>`
+
 ``transpose/2``
 ---------------
 
@@ -12556,6 +12953,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`directed_graph_protocol <directed_graph_protocol/0::transpose/2>`
 * :ref:`pairs <pairs/0::transpose/2>`
 
 ``triangular/4``
@@ -12787,6 +13185,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`setp <setp/0::union/3>`
+* :ref:`unweighted_directed_graph(Dictionary) <unweighted_directed_graph/1::union/3>`
 
 ``union/4``
 -----------
@@ -13234,6 +13633,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`packs <packs/0::versions/3>`
 
+``vertices/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::vertices/2>`
+
 ``void/1``
 ----------
 
@@ -13393,6 +13802,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`sequence_grammars <sequence_grammars/0::without//2>`
+
+``wneighbors/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`weighted_graph_protocol <weighted_graph_protocol/0::wneighbors/3>`
 
 ``working_directory/1``
 -----------------------

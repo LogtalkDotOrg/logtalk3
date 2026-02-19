@@ -59,6 +59,7 @@ directory in the ``NOTES.md`` file.
    gensym
    git
    grammars
+   graphs
    heaps
    hierarchies
    hook_flows

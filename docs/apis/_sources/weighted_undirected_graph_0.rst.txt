@@ -1,0 +1,56 @@
+.. index:: single: weighted_undirected_graph
+.. _weighted_undirected_graph/0:
+
+.. rst-class:: right
+
+**object**
+
+``weighted_undirected_graph``
+=============================
+
+Weighted undirected graph predicates using the AVL tree dictionary representation. Each edge is stored in both directions. Edge weights use a pair representation (Vertex-Weight in neighbor lists, (V1-V2)-Weight for edge lists).
+
+| **Availability:** 
+|    ``logtalk_load(graphs(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-19
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`weighted_undirected_graph(avltree) <weighted_undirected_graph/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`weighted_graph_protocol/0::add_edge/5`  :ref:`graph_protocol/0::add_edges/3`  :ref:`graph_protocol/0::add_vertex/3`  :ref:`graph_protocol/0::add_vertices/3`  :ref:`weighted_undirected_graph/1::connected_components/2`  :ref:`weighted_undirected_graph/1::degree/3`  :ref:`weighted_graph_protocol/0::delete_edge/5`  :ref:`graph_protocol/0::delete_edges/3`  :ref:`graph_protocol/0::delete_vertex/3`  :ref:`graph_protocol/0::delete_vertices/3`  :ref:`weighted_graph_protocol/0::edge/4`  :ref:`graph_protocol/0::edges/2`  :ref:`graph_protocol/0::empty/1`  :ref:`graph_protocol/0::has_path/3`  :ref:`weighted_undirected_graph/1::is_connected/1`  :ref:`graph_protocol/0::max_path/5`  :ref:`weighted_undirected_graph/1::max_tree/3`  :ref:`graph_protocol/0::min_path/5`  :ref:`weighted_undirected_graph/1::min_tree/3`  :ref:`graph_protocol/0::neighbors/3`  :ref:`graph_protocol/0::new/1`  :ref:`graph_protocol/0::new/2`  :ref:`graph_protocol/0::new/3`  :ref:`graph_protocol/0::number_of_edges/2`  :ref:`graph_protocol/0::number_of_vertices/2`  :ref:`graph_protocol/0::path/3`  :ref:`graph_protocol/0::reachable/3`  :ref:`graph_protocol/0::vertices/2`  :ref:`weighted_graph_protocol/0::wneighbors/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

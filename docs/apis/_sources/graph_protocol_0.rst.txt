@@ -1,0 +1,435 @@
+.. index:: single: graph_protocol
+.. _graph_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``graph_protocol``
+==================
+
+Common protocol for all types of graphs. Graphs are represented using a dictionary where keys are vertices and values are sorted lists of neighbors (implicitly defining edges).
+
+| **Availability:** 
+|    ``logtalk_load(graphs(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-19
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: new/1
+.. _graph_protocol/0::new/1:
+
+``new/1``
+^^^^^^^^^
+
+Creates a new empty graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new(Graph)``
+| **Mode and number of proofs:**
+|    ``new(-graph)`` - ``one``
+
+
+------------
+
+.. index:: new/2
+.. _graph_protocol/0::new/2:
+
+``new/2``
+^^^^^^^^^
+
+Creates a new graph from a list of edges. Vertices are defined implicitly by edges.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new(Edges,Graph)``
+| **Mode and number of proofs:**
+|    ``new(+list(edge),-graph)`` - ``one``
+
+
+------------
+
+.. index:: new/3
+.. _graph_protocol/0::new/3:
+
+``new/3``
+^^^^^^^^^
+
+Creates a new graph from a list of vertices and a list of edges. Vertices may also be defined implicitly by edges.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new(Vertices,Edges,Graph)``
+| **Mode and number of proofs:**
+|    ``new(+list(vertex),+list(edge),-graph)`` - ``one``
+
+
+------------
+
+.. index:: empty/1
+.. _graph_protocol/0::empty/1:
+
+``empty/1``
+^^^^^^^^^^^
+
+True iff the given graph is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``empty(Graph)``
+| **Mode and number of proofs:**
+|    ``empty(@graph)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: vertices/2
+.. _graph_protocol/0::vertices/2:
+
+``vertices/2``
+^^^^^^^^^^^^^^
+
+Unifies ``Vertices`` with a sorted list of all vertices in the graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``vertices(Graph,Vertices)``
+| **Mode and number of proofs:**
+|    ``vertices(+graph,-list(vertex))`` - ``one``
+
+
+------------
+
+.. index:: edges/2
+.. _graph_protocol/0::edges/2:
+
+``edges/2``
+^^^^^^^^^^^
+
+Unifies ``Edges`` with a list of all edges in the graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``edges(Graph,Edges)``
+| **Mode and number of proofs:**
+|    ``edges(+graph,-list(edge))`` - ``one``
+
+
+------------
+
+.. index:: add_vertex/3
+.. _graph_protocol/0::add_vertex/3:
+
+``add_vertex/3``
+^^^^^^^^^^^^^^^^
+
+Adds a vertex to the graph. If the vertex already exists, the graph is unchanged.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_vertex(Graph,Vertex,NewGraph)``
+| **Mode and number of proofs:**
+|    ``add_vertex(+graph,+vertex,-graph)`` - ``one``
+
+
+------------
+
+.. index:: add_vertices/3
+.. _graph_protocol/0::add_vertices/3:
+
+``add_vertices/3``
+^^^^^^^^^^^^^^^^^^
+
+Adds a list of vertices to the graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_vertices(Graph,Vertices,NewGraph)``
+| **Mode and number of proofs:**
+|    ``add_vertices(+graph,+list(vertex),-graph)`` - ``one``
+
+
+------------
+
+.. index:: delete_vertex/3
+.. _graph_protocol/0::delete_vertex/3:
+
+``delete_vertex/3``
+^^^^^^^^^^^^^^^^^^^
+
+Deletes a vertex and all edges incident to it from the graph. If the vertex does not exist, the graph is unchanged.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_vertex(Graph,Vertex,NewGraph)``
+| **Mode and number of proofs:**
+|    ``delete_vertex(+graph,+vertex,-graph)`` - ``one``
+
+
+------------
+
+.. index:: delete_vertices/3
+.. _graph_protocol/0::delete_vertices/3:
+
+``delete_vertices/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Deletes a list of vertices and all edges incident to them from the graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_vertices(Graph,Vertices,NewGraph)``
+| **Mode and number of proofs:**
+|    ``delete_vertices(+graph,+list(vertex),-graph)`` - ``one``
+
+
+------------
+
+.. index:: add_edges/3
+.. _graph_protocol/0::add_edges/3:
+
+``add_edges/3``
+^^^^^^^^^^^^^^^
+
+Adds a list of edges to the graph. Vertices referenced by edges are added implicitly.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_edges(Graph,Edges,NewGraph)``
+| **Mode and number of proofs:**
+|    ``add_edges(+graph,+list(edge),-graph)`` - ``one``
+
+
+------------
+
+.. index:: delete_edges/3
+.. _graph_protocol/0::delete_edges/3:
+
+``delete_edges/3``
+^^^^^^^^^^^^^^^^^^
+
+Deletes a list of edges from the graph. Vertices are not deleted. Non-existing edges are silently ignored.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_edges(Graph,Edges,NewGraph)``
+| **Mode and number of proofs:**
+|    ``delete_edges(+graph,+list(edge),-graph)`` - ``one``
+
+
+------------
+
+.. index:: neighbors/3
+.. _graph_protocol/0::neighbors/3:
+
+``neighbors/3``
+^^^^^^^^^^^^^^^
+
+Unifies ``Neighbors`` with a sorted list of the neighbors of ``Vertex`` in the graph. Fails if ``Vertex`` is not in the graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``neighbors(Vertex,Graph,Neighbors)``
+| **Mode and number of proofs:**
+|    ``neighbors(+vertex,+graph,-list(vertex))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: reachable/3
+.. _graph_protocol/0::reachable/3:
+
+``reachable/3``
+^^^^^^^^^^^^^^^
+
+Unifies ``Vertices`` with a sorted list of vertices reachable from ``Vertex`` (including ``Vertex`` itself). Fails if ``Vertex`` is not in the graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``reachable(Vertex,Graph,Vertices)``
+| **Mode and number of proofs:**
+|    ``reachable(+vertex,+graph,-list(vertex))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: number_of_vertices/2
+.. _graph_protocol/0::number_of_vertices/2:
+
+``number_of_vertices/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Unifies ``N`` with the number of vertices in the graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``number_of_vertices(Graph,N)``
+| **Mode and number of proofs:**
+|    ``number_of_vertices(+graph,-integer)`` - ``one``
+
+
+------------
+
+.. index:: number_of_edges/2
+.. _graph_protocol/0::number_of_edges/2:
+
+``number_of_edges/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Unifies ``N`` with the number of edges in the graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``number_of_edges(Graph,N)``
+| **Mode and number of proofs:**
+|    ``number_of_edges(+graph,-integer)`` - ``one``
+
+
+------------
+
+.. index:: path/3
+.. _graph_protocol/0::path/3:
+
+``path/3``
+^^^^^^^^^^
+
+Returns a maximal path (list of vertices) rooted at ``Vertex``, enumerating different paths on backtracking. Fails if ``Vertex`` is not in the graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``path(Vertex,Graph,Path)``
+| **Mode and number of proofs:**
+|    ``path(+vertex,+graph,-list(vertex))`` - ``zero_or_more``
+
+
+------------
+
+.. index:: has_path/3
+.. _graph_protocol/0::has_path/3:
+
+``has_path/3``
+^^^^^^^^^^^^^^
+
+True iff there is a path from ``Vertex1`` to ``Vertex2`` in the graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``has_path(Vertex1,Vertex2,Graph)``
+| **Mode and number of proofs:**
+|    ``has_path(+vertex,+vertex,+graph)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: min_path/5
+.. _graph_protocol/0::min_path/5:
+
+``min_path/5``
+^^^^^^^^^^^^^^
+
+Finds the minimum cost path from ``Vertex1`` to ``Vertex2``. For unweighted graphs, cost is the number of edges. Fails if no path exists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``min_path(Vertex1,Vertex2,Graph,Path,Cost)``
+| **Mode and number of proofs:**
+|    ``min_path(+vertex,+vertex,+graph,-list(vertex),-number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: max_path/5
+.. _graph_protocol/0::max_path/5:
+
+``max_path/5``
+^^^^^^^^^^^^^^
+
+Finds the maximum cost acyclic path from ``Vertex1`` to ``Vertex2``. For unweighted graphs, cost is the number of edges. Fails if no path exists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``max_path(Vertex1,Vertex2,Graph,Path,Cost)``
+| **Mode and number of proofs:**
+|    ``max_path(+vertex,+vertex,+graph,-list(vertex),-number)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

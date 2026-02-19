@@ -1,0 +1,206 @@
+.. index:: single: directed_graph_protocol
+.. _directed_graph_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``directed_graph_protocol``
+===========================
+
+Protocol for directed graph predicates such as transpose, closures, topological sorting, degree queries, and strongly connected components.
+
+| **Availability:** 
+|    ``logtalk_load(graphs(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-19
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`graph_protocol <graph_protocol/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`graph_protocol/0::add_edges/3`  :ref:`graph_protocol/0::add_vertex/3`  :ref:`graph_protocol/0::add_vertices/3`  :ref:`graph_protocol/0::delete_edges/3`  :ref:`graph_protocol/0::delete_vertex/3`  :ref:`graph_protocol/0::delete_vertices/3`  :ref:`graph_protocol/0::edges/2`  :ref:`graph_protocol/0::empty/1`  :ref:`graph_protocol/0::has_path/3`  :ref:`graph_protocol/0::max_path/5`  :ref:`graph_protocol/0::min_path/5`  :ref:`graph_protocol/0::neighbors/3`  :ref:`graph_protocol/0::new/1`  :ref:`graph_protocol/0::new/2`  :ref:`graph_protocol/0::new/3`  :ref:`graph_protocol/0::number_of_edges/2`  :ref:`graph_protocol/0::number_of_vertices/2`  :ref:`graph_protocol/0::path/3`  :ref:`graph_protocol/0::reachable/3`  :ref:`graph_protocol/0::vertices/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: transpose/2
+.. _directed_graph_protocol/0::transpose/2:
+
+``transpose/2``
+^^^^^^^^^^^^^^^
+
+Unifies ``NewGraph`` with a graph obtained by reversing all edges.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``transpose(Graph,NewGraph)``
+| **Mode and number of proofs:**
+|    ``transpose(+graph,-graph)`` - ``one``
+
+
+------------
+
+.. index:: transitive_closure/2
+.. _directed_graph_protocol/0::transitive_closure/2:
+
+``transitive_closure/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates the transitive closure of the graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``transitive_closure(Graph,Closure)``
+| **Mode and number of proofs:**
+|    ``transitive_closure(+graph,-graph)`` - ``one``
+
+
+------------
+
+.. index:: symmetric_closure/2
+.. _directed_graph_protocol/0::symmetric_closure/2:
+
+``symmetric_closure/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates the symmetric closure of the graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``symmetric_closure(Graph,Closure)``
+| **Mode and number of proofs:**
+|    ``symmetric_closure(+graph,-graph)`` - ``one``
+
+
+------------
+
+.. index:: topological_sort/2
+.. _directed_graph_protocol/0::topological_sort/2:
+
+``topological_sort/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Unifies ``Sorted`` with a topological sort of the vertices in the graph. Assumes the graph is a DAG.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``topological_sort(Graph,Sorted)``
+| **Mode and number of proofs:**
+|    ``topological_sort(+graph,-list(vertex))`` - ``one``
+
+
+------------
+
+.. index:: in_degree/3
+.. _directed_graph_protocol/0::in_degree/3:
+
+``in_degree/3``
+^^^^^^^^^^^^^^^
+
+Unifies ``Degree`` with the number of incoming edges to ``Vertex``. Fails if ``Vertex`` is not in the graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``in_degree(Vertex,Graph,Degree)``
+| **Mode and number of proofs:**
+|    ``in_degree(+vertex,+graph,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: out_degree/3
+.. _directed_graph_protocol/0::out_degree/3:
+
+``out_degree/3``
+^^^^^^^^^^^^^^^^
+
+Unifies ``Degree`` with the number of outgoing edges from ``Vertex``. Fails if ``Vertex`` is not in the graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``out_degree(Vertex,Graph,Degree)``
+| **Mode and number of proofs:**
+|    ``out_degree(+vertex,+graph,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: is_dag/1
+.. _directed_graph_protocol/0::is_dag/1:
+
+``is_dag/1``
+^^^^^^^^^^^^
+
+True iff the graph is a directed acyclic graph (DAG).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_dag(Graph)``
+| **Mode and number of proofs:**
+|    ``is_dag(+graph)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: strongly_connected_components/2
+.. _directed_graph_protocol/0::strongly_connected_components/2:
+
+``strongly_connected_components/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the strongly connected components of the graph using Tarjan's algorithm. Each component is a sorted list of vertices. Components are returned in topological order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``strongly_connected_components(Graph,SCCs)``
+| **Mode and number of proofs:**
+|    ``strongly_connected_components(+graph,-list(list(vertex)))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

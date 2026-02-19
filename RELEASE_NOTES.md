@@ -92,6 +92,9 @@ non-demanding applications.
 * ADDED: New `deques` library implementing double-ended queues represented
 using difference lists.
 
+* ADDED: New `graphs` library implementing directed/undirected
+weighted/unweighted graph predicates represented using dictionaries.
+
 * ADDED: New `subsequences` library implementing predicates over sequences
 represented as lists.
 

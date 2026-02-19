@@ -31,12 +31,15 @@ Categories
    dead_code_scanner_messages <dead_code_scanner_messages_0>
    debugger_messages <debugger_messages_0>
    diagram(Format) <diagram_1>
+   directed_graph_common <directed_graph_common_0>
    directory_diagram(Format) <directory_diagram_1>
    file_diagram(Format) <file_diagram_1>
    flags <flags_0>
    flatting <flatting_0>
    genint_core <genint_core_0>
    gensym_core <gensym_core_0>
+   graph_common <graph_common_0>
+   graph_types <graph_types_0>
    html <html_0>
    lgtdoc_messages <lgtdoc_messages_0>
    lgtunit_messages <lgtunit_messages_0>
@@ -299,6 +302,10 @@ Objects
    ulid <ulid_0>
    ulid(Representation) <ulid_1>
    union_find <union_find_0>
+   unweighted_directed_graph <unweighted_directed_graph_0>
+   unweighted_directed_graph(Dictionary) <unweighted_directed_graph_1>
+   unweighted_undirected_graph <unweighted_undirected_graph_0>
+   unweighted_undirected_graph(Dictionary) <unweighted_undirected_graph_1>
    upn_metric <upn_metric_0>
    url(Representation) <url_1>
    user <user_0>
@@ -307,6 +314,10 @@ Objects
    uuid <uuid_0>
    uuid(Representation) <uuid_1>
    varlist <varlist_0>
+   weighted_directed_graph <weighted_directed_graph_0>
+   weighted_directed_graph(Dictionary) <weighted_directed_graph_1>
+   weighted_undirected_graph <weighted_undirected_graph_0>
+   weighted_undirected_graph(Dictionary) <weighted_undirected_graph_1>
    wrapper <wrapper_0>
    write_to_file_hook(File) <write_to_file_hook_1>
    write_to_file_hook(File,Options) <write_to_file_hook_2>
@@ -345,12 +356,14 @@ Protocols
    debuggerp <debuggerp_0>
    deque_protocol <deque_protocol_0>
    dictionaryp <dictionaryp_0>
+   directed_graph_protocol <directed_graph_protocol_0>
    event_registryp <event_registryp_0>
    expanding <expanding_0>
    flags_validator <flags_validator_0>
    forwarding <forwarding_0>
    git_protocol <git_protocol_0>
    graph_language_protocol <graph_language_protocol_0>
+   graph_protocol <graph_protocol_0>
    heap_protocol <heap_protocol_0>
    heapp <heapp_0>
    hierarchyp <hierarchyp_0>
@@ -392,8 +405,10 @@ Protocols
    tsv_protocol <tsv_protocol_0>
    ulid_protocol <ulid_protocol_0>
    union_find_protocol <union_find_protocol_0>
+   unweighted_graph_protocol <unweighted_graph_protocol_0>
    uuid_protocol <uuid_protocol_0>
    varlistp <varlistp_0>
+   weighted_graph_protocol <weighted_graph_protocol_0>
    yaml_protocol <yaml_protocol_0>
    zipperp <zipperp_0>
 

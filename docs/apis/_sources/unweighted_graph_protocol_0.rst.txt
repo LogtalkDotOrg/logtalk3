@@ -1,0 +1,130 @@
+.. index:: single: unweighted_graph_protocol
+.. _unweighted_graph_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``unweighted_graph_protocol``
+=============================
+
+Protocol for unweighted graph predicates, extending the common graph protocol with unweighted edge operations.
+
+| **Availability:** 
+|    ``logtalk_load(graphs(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-19
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`graph_protocol <graph_protocol/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`graph_protocol/0::add_edges/3`  :ref:`graph_protocol/0::add_vertex/3`  :ref:`graph_protocol/0::add_vertices/3`  :ref:`graph_protocol/0::delete_edges/3`  :ref:`graph_protocol/0::delete_vertex/3`  :ref:`graph_protocol/0::delete_vertices/3`  :ref:`graph_protocol/0::edges/2`  :ref:`graph_protocol/0::empty/1`  :ref:`graph_protocol/0::has_path/3`  :ref:`graph_protocol/0::max_path/5`  :ref:`graph_protocol/0::min_path/5`  :ref:`graph_protocol/0::neighbors/3`  :ref:`graph_protocol/0::new/1`  :ref:`graph_protocol/0::new/2`  :ref:`graph_protocol/0::new/3`  :ref:`graph_protocol/0::number_of_edges/2`  :ref:`graph_protocol/0::number_of_vertices/2`  :ref:`graph_protocol/0::path/3`  :ref:`graph_protocol/0::reachable/3`  :ref:`graph_protocol/0::vertices/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: edge/3
+.. _unweighted_graph_protocol/0::edge/3:
+
+``edge/3``
+^^^^^^^^^^
+
+True iff there is an edge between ``Vertex1`` and ``Vertex2`` in ``Graph``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``edge(Vertex1,Vertex2,Graph)``
+| **Mode and number of proofs:**
+|    ``edge(+vertex,+vertex,+graph)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: add_edge/4
+.. _unweighted_graph_protocol/0::add_edge/4:
+
+``add_edge/4``
+^^^^^^^^^^^^^^
+
+Adds an edge between ``Vertex1`` and ``Vertex2`` to the graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_edge(Graph,Vertex1,Vertex2,NewGraph)``
+| **Mode and number of proofs:**
+|    ``add_edge(+graph,+vertex,+vertex,-graph)`` - ``one``
+
+
+------------
+
+.. index:: delete_edge/4
+.. _unweighted_graph_protocol/0::delete_edge/4:
+
+``delete_edge/4``
+^^^^^^^^^^^^^^^^^
+
+Deletes the edge between ``Vertex1`` and ``Vertex2`` from the graph. The graph is unchanged if the edge does not exist.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_edge(Graph,Vertex1,Vertex2,NewGraph)``
+| **Mode and number of proofs:**
+|    ``delete_edge(+graph,+vertex,+vertex,-graph)`` - ``one``
+
+
+------------
+
+.. index:: complement/2
+.. _unweighted_graph_protocol/0::complement/2:
+
+``complement/2``
+^^^^^^^^^^^^^^^^
+
+Unifies ``NewGraph`` with the complement graph where there is an edge between all pairs of vertices not connected in the original graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``complement(Graph,NewGraph)``
+| **Mode and number of proofs:**
+|    ``complement(+graph,-graph)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -100,10 +100,11 @@ Foreach-Object {
 (Get-Content ../../../library/expand_library_alias_paths/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/expand_library_alias_paths.rst
 (Get-Content ../../../library/expecteds/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/expecteds.rst
 (Get-Content ../../../library/format/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/format.rst
+(Get-Content ../../../library/genint/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/genint.rst
+(Get-Content ../../../library/gensym/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/gensym.rst
 (Get-Content ../../../library/git/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/git.rst
 (Get-Content ../../../library/grammars/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/grammars.rst
-(Get-Content ../../../library/gensym/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/gensym.rst
-(Get-Content ../../../library/genint/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/genint.rst
+(Get-Content ../../../library/graphs/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/graphs.rst
 (Get-Content ../../../library/heaps/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/heaps.rst
 (Get-Content ../../../library/hierarchies/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/hierarchies.rst
 (Get-Content ../../../library/hook_flows/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/hook_flows.rst

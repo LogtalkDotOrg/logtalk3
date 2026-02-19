@@ -40,6 +40,7 @@
 		heaps(loader),
 		queues(loader),
 		sets(loader),
+		graphs(loader),
 		hierarchies(loader),
 		meta(loader),
 		loops(loader),

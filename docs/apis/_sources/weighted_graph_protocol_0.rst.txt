@@ -1,0 +1,130 @@
+.. index:: single: weighted_graph_protocol
+.. _weighted_graph_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``weighted_graph_protocol``
+===========================
+
+Protocol for weighted graph predicates, extending the common graph protocol with weighted edge operations.
+
+| **Availability:** 
+|    ``logtalk_load(graphs(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-19
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`graph_protocol <graph_protocol/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`graph_protocol/0::add_edges/3`  :ref:`graph_protocol/0::add_vertex/3`  :ref:`graph_protocol/0::add_vertices/3`  :ref:`graph_protocol/0::delete_edges/3`  :ref:`graph_protocol/0::delete_vertex/3`  :ref:`graph_protocol/0::delete_vertices/3`  :ref:`graph_protocol/0::edges/2`  :ref:`graph_protocol/0::empty/1`  :ref:`graph_protocol/0::has_path/3`  :ref:`graph_protocol/0::max_path/5`  :ref:`graph_protocol/0::min_path/5`  :ref:`graph_protocol/0::neighbors/3`  :ref:`graph_protocol/0::new/1`  :ref:`graph_protocol/0::new/2`  :ref:`graph_protocol/0::new/3`  :ref:`graph_protocol/0::number_of_edges/2`  :ref:`graph_protocol/0::number_of_vertices/2`  :ref:`graph_protocol/0::path/3`  :ref:`graph_protocol/0::reachable/3`  :ref:`graph_protocol/0::vertices/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: edge/4
+.. _weighted_graph_protocol/0::edge/4:
+
+``edge/4``
+^^^^^^^^^^
+
+True iff there is an edge between ``Vertex1`` and ``Vertex2`` with weight ``Weight`` in ``Graph``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``edge(Vertex1,Vertex2,Weight,Graph)``
+| **Mode and number of proofs:**
+|    ``edge(+vertex,+vertex,?number,+graph)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: add_edge/5
+.. _weighted_graph_protocol/0::add_edge/5:
+
+``add_edge/5``
+^^^^^^^^^^^^^^
+
+Adds a weighted edge between ``Vertex1`` and ``Vertex2`` with weight ``Weight``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_edge(Graph,Vertex1,Vertex2,Weight,NewGraph)``
+| **Mode and number of proofs:**
+|    ``add_edge(+graph,+vertex,+vertex,+number,-graph)`` - ``one``
+
+
+------------
+
+.. index:: delete_edge/5
+.. _weighted_graph_protocol/0::delete_edge/5:
+
+``delete_edge/5``
+^^^^^^^^^^^^^^^^^
+
+Deletes the weighted edge between ``Vertex1`` and ``Vertex2``. Unifies ``Weight`` with the weight of the deleted edge. The graph is unchanged if the edge does not exist.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_edge(Graph,Vertex1,Vertex2,Weight,NewGraph)``
+| **Mode and number of proofs:**
+|    ``delete_edge(+graph,+vertex,+vertex,?number,-graph)`` - ``one``
+
+
+------------
+
+.. index:: wneighbors/3
+.. _weighted_graph_protocol/0::wneighbors/3:
+
+``wneighbors/3``
+^^^^^^^^^^^^^^^^
+
+Unifies ``WNeighbors`` with a list of ``NeighborVertex-Weight`` pairs for the neighbors of ``Vertex``. Fails if ``Vertex`` is not in the graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``wneighbors(Vertex,Graph,WNeighbors)``
+| **Mode and number of proofs:**
+|    ``wneighbors(+vertex,+graph,-list(pair))`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

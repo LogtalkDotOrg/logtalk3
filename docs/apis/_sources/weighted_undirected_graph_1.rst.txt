@@ -1,0 +1,153 @@
+.. index:: single: weighted_undirected_graph(Dictionary)
+.. _weighted_undirected_graph/1:
+
+.. rst-class:: right
+
+**object**
+
+``weighted_undirected_graph(Dictionary)``
+=========================================
+
+Weighted undirected graph predicates using a dictionary representation. Each edge is stored in both directions. Edge weights use a pair representation (Vertex-Weight in neighbor lists, (V1-V2)-Weight for edge lists). The parametric object parameter is the dictionary to use for the graph representation.
+
+| **Availability:** 
+|    ``logtalk_load(graphs(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-19
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`weighted_graph_protocol <weighted_graph_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`graph_common <graph_common/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`weighted_graph_protocol/0::add_edge/5`  :ref:`graph_protocol/0::add_edges/3`  :ref:`graph_protocol/0::add_vertex/3`  :ref:`graph_protocol/0::add_vertices/3`  :ref:`weighted_graph_protocol/0::delete_edge/5`  :ref:`graph_protocol/0::delete_edges/3`  :ref:`graph_protocol/0::delete_vertex/3`  :ref:`graph_protocol/0::delete_vertices/3`  :ref:`weighted_graph_protocol/0::edge/4`  :ref:`graph_protocol/0::edges/2`  :ref:`graph_protocol/0::empty/1`  :ref:`graph_protocol/0::has_path/3`  :ref:`graph_protocol/0::max_path/5`  :ref:`graph_protocol/0::min_path/5`  :ref:`graph_protocol/0::neighbors/3`  :ref:`graph_protocol/0::new/1`  :ref:`graph_protocol/0::new/2`  :ref:`graph_protocol/0::new/3`  :ref:`graph_protocol/0::number_of_edges/2`  :ref:`graph_protocol/0::number_of_vertices/2`  :ref:`graph_protocol/0::path/3`  :ref:`graph_protocol/0::reachable/3`  :ref:`graph_protocol/0::vertices/2`  :ref:`weighted_graph_protocol/0::wneighbors/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: degree/3
+.. _weighted_undirected_graph/1::degree/3:
+
+``degree/3``
+^^^^^^^^^^^^
+
+Returns the degree (number of edges incident to the vertex) of ``Vertex`` in ``Graph``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``degree(Vertex,Graph,Degree)``
+| **Mode and number of proofs:**
+|    ``degree(+vertex,+graph,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: is_connected/1
+.. _weighted_undirected_graph/1::is_connected/1:
+
+``is_connected/1``
+^^^^^^^^^^^^^^^^^^
+
+True if ``Graph`` is connected (all vertices are reachable from any vertex).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_connected(Graph)``
+| **Mode and number of proofs:**
+|    ``is_connected(+graph)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: connected_components/2
+.. _weighted_undirected_graph/1::connected_components/2:
+
+``connected_components/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the list of connected components (each a list of vertices).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``connected_components(Graph,Components)``
+| **Mode and number of proofs:**
+|    ``connected_components(+graph,-list(list))`` - ``one``
+
+
+------------
+
+.. index:: min_tree/3
+.. _weighted_undirected_graph/1::min_tree/3:
+
+``min_tree/3``
+^^^^^^^^^^^^^^
+
+Constructs a minimum spanning tree and returns its total weight.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``min_tree(Graph,Tree,Cost)``
+| **Mode and number of proofs:**
+|    ``min_tree(+graph,-graph,-number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: max_tree/3
+.. _weighted_undirected_graph/1::max_tree/3:
+
+``max_tree/3``
+^^^^^^^^^^^^^^
+
+Constructs a maximum spanning tree and returns its total weight.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``max_tree(Graph,Tree,Cost)``
+| **Mode and number of proofs:**
+|    ``max_tree(+graph,-graph,-number)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
