@@ -240,18 +240,21 @@ link in a web browser.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">random(Algorithm)</span></code> and <code class="docutils literal notranslate"><span class="pre">fast_random(Algorithm)</span></code> parametric
 objects support the following pseudo-random number generator algorithms:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">as183</span></code> - Algorithm AS 183 from Applied Statistics. 32-bit PRNG with
-period 2^60.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">splitmix64</span></code> - SplitMix64 64-bit PRNG primarily used for seeding
+<li><p><code class="docutils literal notranslate"><span class="pre">as183</span></code> - Algorithm AS 183 from Applied Statistics. 3x32-bit PRNG
+with period 2^60.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">splitmix64</span></code> - SplitMix64 1x64-bit PRNG primarily used for seeding
 other generators. Algorithm by Guy L. Steele Jr. et al.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">xoshiro128pp</span></code> - Xoshiro128++ 32-bit state-of-the-art PRNG with
+<li><p><code class="docutils literal notranslate"><span class="pre">xoshiro128pp</span></code> - Xoshiro128++ 4x32-bit state-of-the-art PRNG with
 period 2^128-1. Algorithm by David Blackman and Sebastiano Vigna.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">xoshiro128ss</span></code> - Xoshiro128** 32-bit state-of-the-art PRNG with
+<li><p><code class="docutils literal notranslate"><span class="pre">xoshiro128ss</span></code> - Xoshiro128** 4x32-bit state-of-the-art PRNG with
 period 2^128-1. Algorithm by David Blackman and Sebastiano Vigna.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">xoshiro256pp</span></code> - Xoshiro256++ 64-bit state-of-the-art PRNG with
+<li><p><code class="docutils literal notranslate"><span class="pre">xoshiro256pp</span></code> - Xoshiro256++ 4x64-bit state-of-the-art PRNG with
 period 2^256-1. Algorithm by David Blackman and Sebastiano Vigna.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">xoshiro256ss</span></code> - Xoshiro256** 64-bit state-of-the-art PRNG with
+<li><p><code class="docutils literal notranslate"><span class="pre">xoshiro256ss</span></code> - Xoshiro256** 4x64-bit state-of-the-art PRNG with
 period 2^256-1. Algorithm by David Blackman and Sebastiano Vigna.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">well512a</span></code> - WELL512a 16x32-bit state-of-the-art PRNG with period
+2^512-1. Algorithm by by François Panneton, Pierre L’Ecuyer, and
+Makoto Matsumoto.</p></li>
 </ul>
 <p>Note that none of the above algorithms are cryptographically secure.</p>
 <p>The SplitMix64, Xoshiro256++, and Xoshiro256** algorithms require a

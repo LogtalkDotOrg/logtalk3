@@ -152,7 +152,7 @@ predicates.
 `list` and `difflist` library objects.
 
 * ADDED: Support for the SplitMix64, Xoshiro128++, Xoshiro128**, Xoshiro256++,
-and Xoshiro256** algorithms to the `random` library.
+Xoshiro256**, and WELL512a algorithms to the `random` library.
 
 * ADDED: Support for version 7 UUIDs to the `uuid` library. Also added
 `uuid_nil/1` and `uuid_max/1` predicates per RFC 9562.

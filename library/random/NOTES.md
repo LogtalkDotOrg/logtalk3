@@ -59,12 +59,13 @@ Algorithms
 The `random(Algorithm)` and `fast_random(Algorithm)` parametric objects
 support the following pseudo-random number generator algorithms:
 
-* `as183` - Algorithm AS 183 from Applied Statistics. 32-bit PRNG with period 2^60.
-* `splitmix64` - SplitMix64 64-bit PRNG primarily used for seeding other generators. Algorithm by Guy L. Steele Jr. et al.
-* `xoshiro128pp` - Xoshiro128++ 32-bit state-of-the-art PRNG with period 2^128-1. Algorithm by David Blackman and Sebastiano Vigna.
-* `xoshiro128ss` - Xoshiro128** 32-bit state-of-the-art PRNG with period 2^128-1. Algorithm by David Blackman and Sebastiano Vigna.
-* `xoshiro256pp` - Xoshiro256++ 64-bit state-of-the-art PRNG with period 2^256-1. Algorithm by David Blackman and Sebastiano Vigna.
-* `xoshiro256ss` - Xoshiro256** 64-bit state-of-the-art PRNG with period 2^256-1. Algorithm by David Blackman and Sebastiano Vigna.
+* `as183` - Algorithm AS 183 from Applied Statistics. 3x32-bit PRNG with period 2^60.
+* `splitmix64` - SplitMix64 1x64-bit PRNG primarily used for seeding other generators. Algorithm by Guy L. Steele Jr. et al.
+* `xoshiro128pp` - Xoshiro128++ 4x32-bit state-of-the-art PRNG with period 2^128-1. Algorithm by David Blackman and Sebastiano Vigna.
+* `xoshiro128ss` - Xoshiro128** 4x32-bit state-of-the-art PRNG with period 2^128-1. Algorithm by David Blackman and Sebastiano Vigna.
+* `xoshiro256pp` - Xoshiro256++ 4x64-bit state-of-the-art PRNG with period 2^256-1. Algorithm by David Blackman and Sebastiano Vigna.
+* `xoshiro256ss` - Xoshiro256** 4x64-bit state-of-the-art PRNG with period 2^256-1. Algorithm by David Blackman and Sebastiano Vigna.
+* `well512a` - WELL512a 16x32-bit state-of-the-art PRNG with period 2^512-1. Algorithm by by François Panneton, Pierre L'Ecuyer, and Makoto Matsumoto.
 
 Note that none of the above algorithms are cryptographically secure.
 
