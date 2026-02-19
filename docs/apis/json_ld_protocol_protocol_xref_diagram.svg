@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-151 535,-151 535,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol json_ld_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;02&#45;19, 01:18</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;02&#45;19, 03:15</text>
 <g id="clust1" class="cluster">
 <title>cluster_json_ld_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="json_ld_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 511,-54.25 511,-54.25 517,-54.25 523,-60.25 523,-66.25 523,-66.25 523,-127 523,-127 523,-133 517,-139 511,-139 511,-139 20,-139 20,-139 14,-139 8,-133 8,-127 8,-127 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a87cc66aca2146423118a22d16bc116d2a34b094/library/json_ld/json_ld_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a87cc66aca2146423118a22d16bc116d2a34b094/library/json_ld/json_ld_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6dc587eec58c3e4f072df88a3ff1a98358b69cfe/library/json_ld/json_ld_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6dc587eec58c3e4f072df88a3ff1a98358b69cfe/library/json_ld/json_ld_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-121.5" font-family="Monospace" font-size="10.00" fill="dimgray">json_ld_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>parse/2</title>
 <polygon fill="springgreen" stroke="black" points="91.88,-100.25 18.12,-100.25 18.12,-64.25 91.88,-64.25 91.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="26.12" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a87cc66aca2146423118a22d16bc116d2a34b094/library/json_ld/json_ld_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a87cc66aca2146423118a22d16bc116d2a34b094/library/json_ld/json_ld_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6dc587eec58c3e4f072df88a3ff1a98358b69cfe/library/json_ld/json_ld_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6dc587eec58c3e4f072df88a3ff1a98358b69cfe/library/json_ld/json_ld_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="31.38" y="-84.17" font-family="Monospace" font-size="11.00">parse/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>generate/2</title>
 <polygon fill="springgreen" stroke="black" points="204,-100.25 110,-100.25 110,-64.25 204,-64.25 204,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="118" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a87cc66aca2146423118a22d16bc116d2a34b094/library/json_ld/json_ld_protocol.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a87cc66aca2146423118a22d16bc116d2a34b094/library/json_ld/json_ld_protocol.lgt#L42">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6dc587eec58c3e4f072df88a3ff1a98358b69cfe/library/json_ld/json_ld_protocol.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6dc587eec58c3e4f072df88a3ff1a98358b69cfe/library/json_ld/json_ld_protocol.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="123.25" y="-84.17" font-family="Monospace" font-size="11.00">generate/2</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>expand/2</title>
 <polygon fill="springgreen" stroke="black" points="302.25,-100.25 221.75,-100.25 221.75,-64.25 302.25,-64.25 302.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="229.75" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a87cc66aca2146423118a22d16bc116d2a34b094/library/json_ld/json_ld_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a87cc66aca2146423118a22d16bc116d2a34b094/library/json_ld/json_ld_protocol.lgt#L53">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6dc587eec58c3e4f072df88a3ff1a98358b69cfe/library/json_ld/json_ld_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6dc587eec58c3e4f072df88a3ff1a98358b69cfe/library/json_ld/json_ld_protocol.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="235" y="-84.17" font-family="Monospace" font-size="11.00">expand/2</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>compact/3</title>
 <polygon fill="springgreen" stroke="black" points="407.62,-100.25 320.38,-100.25 320.38,-64.25 407.62,-64.25 407.62,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="328.38" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a87cc66aca2146423118a22d16bc116d2a34b094/library/json_ld/json_ld_protocol.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a87cc66aca2146423118a22d16bc116d2a34b094/library/json_ld/json_ld_protocol.lgt#L63">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6dc587eec58c3e4f072df88a3ff1a98358b69cfe/library/json_ld/json_ld_protocol.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6dc587eec58c3e4f072df88a3ff1a98358b69cfe/library/json_ld/json_ld_protocol.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="333.62" y="-84.17" font-family="Monospace" font-size="11.00">compact/3</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>flatten/2</title>
 <polygon fill="springgreen" stroke="black" points="512.62,-100.25 425.38,-100.25 425.38,-64.25 512.62,-64.25 512.62,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="433.38" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a87cc66aca2146423118a22d16bc116d2a34b094/library/json_ld/json_ld_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a87cc66aca2146423118a22d16bc116d2a34b094/library/json_ld/json_ld_protocol.lgt#L74">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6dc587eec58c3e4f072df88a3ff1a98358b69cfe/library/json_ld/json_ld_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6dc587eec58c3e4f072df88a3ff1a98358b69cfe/library/json_ld/json_ld_protocol.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="438.62" y="-84.17" font-family="Monospace" font-size="11.00">flatten/2</text>
 </a>
 </g>
