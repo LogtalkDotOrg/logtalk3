@@ -73,17 +73,17 @@
 
 	new(Vertices, Edges, Graph) :-
 		::new(Empty),
-		add_vertices(Empty, Vertices, G1),
-		::add_edges(G1, Edges, Graph).
+		add_vertices(Empty, Vertices, Graph0),
+		::add_edges(Graph0, Edges, Graph).
 
 	% === Vertex list operations ===
 
-	add_vertices(Graph, [], Graph).
+	add_vertices(NewGraph, [], NewGraph).
 	add_vertices(Graph, [Vertex| Vertices], NewGraph) :-
 		::add_vertex(Graph, Vertex, NewGraph0),
 		add_vertices(NewGraph0, Vertices, NewGraph).
 
-	delete_vertices(Graph, [], Graph).
+	delete_vertices(NewGraph, [], NewGraph).
 	delete_vertices(Graph, [Vertex| Vertices], NewGraph) :-
 		::delete_vertex(Graph, Vertex, NewGraph0),
 		delete_vertices(NewGraph0, Vertices, NewGraph).
@@ -91,12 +91,12 @@
 	% === Graph metrics ===
 
 	number_of_vertices(Graph, N) :-
-		::vertices(Graph, Vs),
-		length(Vs, N).
+		::vertices(Graph, Vertices),
+		length(Vertices, N).
 
 	number_of_edges(Graph, N) :-
-		::edges(Graph, Es),
-		length(Es, N).
+		::edges(Graph, Edges),
+		length(Edges, N).
 
 	% === Reachability ===
 

@@ -65,15 +65,15 @@
 	% --- Graph coloring helpers ---
 
 	color_vertices([], _, Coloring, Coloring, NumberOfColors, NumberOfColors).
-	color_vertices([Vertex| Vertices], Graph, Acc, Coloring, NumberOfColors0, NumberOfColors) :-
+	color_vertices([Vertex| Vertices], Graph, Coloring0, Coloring, NumberOfColors0, NumberOfColors) :-
 		::neighbors(Vertex, Graph, Neighbors),
-		neighbor_colors(Neighbors, Acc, UsedColors),
+		neighbor_colors(Neighbors, Coloring0, UsedColors),
 		smallest_color(1, UsedColors, Color),
 		(	Color > NumberOfColors0 ->
 			NumberOfColors1 = Color
 		;	NumberOfColors1 = NumberOfColors0
 		),
-		color_vertices(Vertices, Graph, [Vertex-Color| Acc], Coloring, NumberOfColors1, NumberOfColors).
+		color_vertices(Vertices, Graph, [Vertex-Color| Coloring0], Coloring, NumberOfColors1, NumberOfColors).
 
 	neighbor_colors([], _, []).
 	neighbor_colors([Neighbor| Neighbors], Coloring, Colors) :-
@@ -89,11 +89,11 @@
 	color_lookup(Neighbor, [_| Coloring], Color) :-
 		color_lookup(Neighbor, Coloring, Color).
 
-	smallest_color(C, UsedColors, Color) :-
-		(	member(C, UsedColors) ->
-			C1 is C + 1,
-			smallest_color(C1, UsedColors, Color)
-		;	Color = C
+	smallest_color(Color0, UsedColors, Color) :-
+		(	member(Color0, UsedColors) ->
+			Color1 is Color0 + 1,
+			smallest_color(Color1, UsedColors, Color)
+		;	Color = Color0
 		).
 
 :- end_category.

@@ -57,6 +57,10 @@
 		member/2, reverse/2
 	]).
 
+	:- uses(pairs, [
+		keys/2 as strip_weights/2
+	]).
+
 	% === Graph creation (new/1 only; new/2, new/3 from graph_common) ===
 
 	new(Graph) :-
@@ -244,26 +248,22 @@
 	wfind([_| Rest], Vertex, Weight) :-
 		wfind(Rest, Vertex, Weight).
 
-	strip_weights([], []).
-	strip_weights([V-_|WNs], [V|Ns]) :-
-		strip_weights(WNs, Ns).
-
 	% --- Remove vertex from all weighted neighbor lists ---
 
 	wremove_vertex_from_all([], _, []).
-	wremove_vertex_from_all([V-WNs|Pairs], Vertex, [V-NewWNs|NewPairs]) :-
+	wremove_vertex_from_all([Vertex0-WNs| Pairs], Vertex, [Vertex0-NewWNs| NewPairs]) :-
 		wsubtract_vertex(WNs, Vertex, NewWNs),
 		wremove_vertex_from_all(Pairs, Vertex, NewPairs).
 
 	wsubtract_vertex([], _, []).
-	wsubtract_vertex([V0-W0|Rest], V, Result) :-
-		compare(Order, V0, V),
+	wsubtract_vertex([Vertex0-Weight0| Rest], Vertex, Result) :-
+		compare(Order, Vertex0, Vertex),
 		(	Order == (=) ->
-			wsubtract_vertex(Rest, V, Result)
+			wsubtract_vertex(Rest, Vertex, Result)
 		;	Order == (<) ->
-			Result = [V0-W0|Rest1],
-			wsubtract_vertex(Rest, V, Rest1)
-		;	Result = [V0-W0|Rest]
+			Result = [Vertex0-Weight0| Rest1],
+			wsubtract_vertex(Rest, Vertex, Rest1)
+		;	Result = [Vertex0-Weight0| Rest]
 		).
 
 	% --- Transpose ---
@@ -444,8 +444,8 @@
 
 	% --- DFS max_path (weighted) ---
 
-	max_wpath_dfs(V, Target, _Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost) :-
-		V == Target,
+	max_wpath_dfs(Vertex, Target, _Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost) :-
+		Vertex == Target,
 		!,
 		(	BestCost0 == none ->
 			BestCost = CurrCost,
@@ -456,16 +456,16 @@
 		;	BestCost = BestCost0,
 			BestPath = BestPath0
 		).
-	max_wpath_dfs(V, Target, Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost) :-
-		dict_lookup(V, WNeighbors, Graph),
+	max_wpath_dfs(Vertex, Target, Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost) :-
+		dict_lookup(Vertex, WNeighbors, Graph),
 		max_wpath_try(WNeighbors, Target, Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost).
 
 	max_wpath_try([], _, _, _, _, BestPath, BestCost, BestPath, BestCost).
-	max_wpath_try([N-W|WNs], Target, Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost) :-
+	max_wpath_try([N-W| WNs], Target, Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost) :-
 		(	member(N, Visited) ->
 			max_wpath_try(WNs, Target, Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost)
 		;	NewCost is CurrCost + W,
-			max_wpath_dfs(N, Target, Graph, [N|Visited], NewCost, BestPath0, BestCost0, BestPath1, BestCost1),
+			max_wpath_dfs(N, Target, Graph, [N| Visited], NewCost, BestPath0, BestCost0, BestPath1, BestCost1),
 			max_wpath_try(WNs, Target, Graph, Visited, CurrCost, BestPath1, BestCost1, BestPath, BestCost)
 		).
 

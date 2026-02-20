@@ -85,6 +85,10 @@
 		length/2, member/2, memberchk/2, msort/2, reverse/2, subtract/3
 	]).
 
+	:- uses(pairs, [
+		keys/2 as strip_weights/2
+	]).
+
 	% === Graph creation (new/1 only; new/2, new/3 from graph_common) ===
 
 	new(Graph) :-
@@ -195,15 +199,15 @@
 
 	% === Min Path (Dijkstra) ===
 
-	min_path(V1, V2, Graph, Path, Cost) :-
-		(	V1 == V2 ->
-			neighbors(V1, Graph, _),
-			Path = [V1], Cost = 0
+	min_path(Vertex1, Vertex2, Graph, Path, Cost) :-
+		(	Vertex1 == Vertex2 ->
+			neighbors(Vertex1, Graph, _),
+			Path = [Vertex1], Cost = 0
 		;	dict_new(Dist0),
-			dict_insert(Dist0, V1, 0-none, Dist1),
-			dijkstra([0-V1], V2, Graph, Dist1, FinalDist),
-			dict_lookup(V2, Cost-_, FinalDist),
-			trace_back(V2, V1, FinalDist, [V2], Path)
+			dict_insert(Dist0, Vertex1, 0-none, Dist1),
+			dijkstra([0-Vertex1], Vertex2, Graph, Dist1, FinalDist),
+			dict_lookup(Vertex2, Cost-_, FinalDist),
+			trace_back(Vertex2, Vertex1, FinalDist, [Vertex2], Path)
 		).
 
 	% === Max Path (DFS exploring all simple paths) ===
@@ -248,44 +252,40 @@
 
 	% --- Weighted neighbor list operations ---
 
-	winsert_neighbor([], V, W, [V-W]).
-	winsert_neighbor([V0-W0| Rest], V, W, Result) :-
-		compare(Order, V, V0),
+	winsert_neighbor([], Vertex, Weight, [Vertex-Weight]).
+	winsert_neighbor([Vertex0-Weight0| Rest], Vertex, Weight, Result) :-
+		compare(Order, Vertex, Vertex0),
 		(	Order == (<) ->
-			Result = [V-W, V0-W0| Rest]
+			Result = [Vertex-Weight, Vertex0-Weight0| Rest]
 		;	Order == (=) ->
-			Result = [V-W| Rest]
-		;	Result = [V0-W0| Rest1],
-			winsert_neighbor(Rest, V, W, Rest1)
+			Result = [Vertex-Weight| Rest]
+		;	Result = [Vertex0-Weight0| Rest1],
+			winsert_neighbor(Rest, Vertex, Weight, Rest1)
 		).
 
-	wremove_neighbor([V0-W0| Rest], V, W, Result) :-
-		compare(Order, V0, V),
+	wremove_neighbor([Vertex0-Weight0| Rest], Vertex, Weight, Result) :-
+		compare(Order, Vertex0, Vertex),
 		(	Order == (=) ->
-			W = W0,
+			Weight = Weight0,
 			Result = Rest
 		;	Order == (<) ->
-			Result = [V0-W0| Rest1],
-			wremove_neighbor(Rest, V, W, Rest1)
+			Result = [Vertex0-Weight0| Rest1],
+			wremove_neighbor(Rest, Vertex, Weight, Rest1)
 		;	fail
 		).
 
-	wfind([V0-W0|_], V, W) :-
-		V0 == V,
+	wfind([Vertex0-Weight0|_], Vertex, Weight) :-
+		Vertex0 == Vertex,
 		!,
-		W = W0.
-	wfind([_| Rest], V, W) :-
-		wfind(Rest, V, W).
-
-	strip_weights([], []).
-	strip_weights([Vertex-_| WNeighbors], [Vertex| Neighbors]) :-
-		strip_weights(WNeighbors, Neighbors).
+		Weight = Weight0.
+	wfind([_| Rest], Vertex, Weight) :-
+		wfind(Rest, Vertex, Weight).
 
 	% Remove duplicate undirected edges: keep only V1-(V2-W) where V1 @< V2
 	canonical_wedges([], []).
-	canonical_wedges([(V1-V2)-W|Edges], Result) :-
-		(	V1 @< V2 ->
-			Result = [(V1-V2)-W|Rest],
+	canonical_wedges([(Vertex1-Vertex2)-Weight| Edges], Result) :-
+		(	Vertex1 @< Vertex2 ->
+			Result = [(Vertex1-Vertex2)-Weight| Rest],
 			canonical_wedges(Edges, Rest)
 		;	canonical_wedges(Edges, Result)
 		).
@@ -293,19 +293,19 @@
 	% --- Remove vertex from all weighted neighbor lists ---
 
 	wremove_vertex_from_all([], _, []).
-	wremove_vertex_from_all([V-WNeighbors| Pairs], Vertex, [V-NewWNeighbors| NewPairs]) :-
+	wremove_vertex_from_all([Vertex0-WNeighbors| Pairs], Vertex, [Vertex0-NewWNeighbors| NewPairs]) :-
 		wsubtract_vertex(WNeighbors, Vertex, NewWNeighbors),
 		wremove_vertex_from_all(Pairs, Vertex, NewPairs).
 
 	wsubtract_vertex([], _, []).
-	wsubtract_vertex([V0-W0|Rest], V, Result) :-
-		compare(Order, V0, V),
+	wsubtract_vertex([Vertex0-Weight0| Rest], Vertex, Result) :-
+		compare(Order, Vertex0, Vertex),
 		(	Order == (=) ->
-			wsubtract_vertex(Rest, V, Result)
+			wsubtract_vertex(Rest, Vertex, Result)
 		;	Order == (<) ->
-			Result = [V0-W0|Rest1],
-			wsubtract_vertex(Rest, V, Rest1)
-		;	Result = [V0-W0|Rest]
+			Result = [Vertex0-Weight0| Rest1],
+			wsubtract_vertex(Rest, Vertex, Rest1)
+		;	Result = [Vertex0-Weight0| Rest]
 		).
 
 	% --- Connected components ---
@@ -345,14 +345,14 @@
 		).
 
 	relax_neighbors([], _, _, Queue, Dist, Queue, Dist).
-	relax_neighbors([N-W|WNs], V, D, Queue, Dist, FinalQueue, FinalDist) :-
-		NewD is D + W,
-		(	dict_lookup(N, OldD-_, Dist),
+	relax_neighbors([Neighbor-Weight| WNeighbors], V, D, Queue, Dist, FinalQueue, FinalDist) :-
+		NewD is D + Weight,
+		(	dict_lookup(Neighbor, OldD-_, Dist),
 			OldD =< NewD ->
-			relax_neighbors(WNs, V, D, Queue, Dist, FinalQueue, FinalDist)
-		;	dict_insert(Dist, N, NewD-V, Dist1),
-			pq_insert(Queue, NewD-N, Queue1),
-			relax_neighbors(WNs, V, D, Queue1, Dist1, FinalQueue, FinalDist)
+			relax_neighbors(WNeighbors, V, D, Queue, Dist, FinalQueue, FinalDist)
+		;	dict_insert(Dist, Neighbor, NewD-V, Dist1),
+			pq_insert(Queue, NewD-Neighbor, Queue1),
+			relax_neighbors(WNeighbors, V, D, Queue1, Dist1, FinalQueue, FinalDist)
 		).
 
 	pq_insert([], Item, [Item]).
@@ -383,17 +383,17 @@
 		;	BestCost = BestCost0,
 			BestPath = BestPath0
 		).
-	max_wpath_dfs(V, Target, Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost) :-
-		dict_lookup(V, WNeighbors, Graph),
+	max_wpath_dfs(Vertex, Target, Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost) :-
+		dict_lookup(Vertex, WNeighbors, Graph),
 		max_wpath_try(WNeighbors, Target, Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost).
 
 	max_wpath_try([], _, _, _, _, BestPath, BestCost, BestPath, BestCost).
-	max_wpath_try([N-W|WNs], Target, Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost) :-
-		(	memberchk(N, Visited) ->
-			max_wpath_try(WNs, Target, Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost)
-		;	NewCost is CurrCost + W,
-			max_wpath_dfs(N, Target, Graph, [N|Visited], NewCost, BestPath0, BestCost0, BestPath1, BestCost1),
-			max_wpath_try(WNs, Target, Graph, Visited, CurrCost, BestPath1, BestCost1, BestPath, BestCost)
+	max_wpath_try([Neighbor-Weight| WNeighbors], Target, Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost) :-
+		(	memberchk(Neighbor, Visited) ->
+			max_wpath_try(WNeighbors, Target, Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost)
+		;	NewCost is CurrCost + Weight,
+			max_wpath_dfs(Neighbor, Target, Graph, [Neighbor| Visited], NewCost, BestPath0, BestCost0, BestPath1, BestCost1),
+			max_wpath_try(WNeighbors, Target, Graph, Visited, CurrCost, BestPath1, BestCost1, BestPath, BestCost)
 		).
 
 	% --- Kruskal's algorithm ---

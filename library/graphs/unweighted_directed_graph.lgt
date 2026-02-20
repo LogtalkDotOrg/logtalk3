@@ -87,7 +87,7 @@
 	]).
 
 	:- uses(pairs, [
-		keys/2
+		keys/2, transpose/2 as invert_edges/2
 	]).
 
 	% Sorted set operations
@@ -296,14 +296,14 @@
 	% --- Complement ---
 
 	complement_pairs([], _, []).
-	complement_pairs([Vertex-Neighbors| Pairs], AllVertices, [Vertex-CompNs| NewPairs]) :-
+	complement_pairs([Vertex-Neighbors| Pairs], AllVertices, [Vertex-ComplementNeighbors| NewPairs]) :-
 		set_insert(Neighbors, Vertex, NeighborsWithSelf),
-		set_subtract(AllVertices, NeighborsWithSelf, CompNs),
+		set_subtract(AllVertices, NeighborsWithSelf, ComplementNeighbors),
 		complement_pairs(Pairs, AllVertices, NewPairs).
 
 	% --- Transpose ---
 
-	add_empty_vertices_from_pairs([], Graph, Graph).
+	add_empty_vertices_from_pairs([], NewGraph, NewGraph).
 	add_empty_vertices_from_pairs([Vertex-_| Pairs], Graph, NewGraph) :-
 		(	dict_lookup(Vertex, _, Graph) ->
 			add_empty_vertices_from_pairs(Pairs, Graph, NewGraph)
@@ -316,14 +316,14 @@
 		add_reversed_neighbors(Neighbors, Vertex, Graph, NewGraph0),
 		add_transposed_edges(Pairs, NewGraph0, NewGraph).
 
-	add_reversed_neighbors([], _, Graph, Graph).
-	add_reversed_neighbors([N| Ns], V, Graph, NewGraph) :-
-		(	dict_lookup(N, NNs, Graph) ->
-			set_insert(NNs, V, NewNNs),
-			dict_insert(Graph, N, NewNNs, G1)
-		;	dict_insert(Graph, N, [V], G1)
+	add_reversed_neighbors([], _, NewGraph, NewGraph).
+	add_reversed_neighbors([Neighbor| Neighbors], Vertex, Graph, NewGraph) :-
+		(	dict_lookup(Neighbor, NeighborNeighbors, Graph) ->
+			set_insert(NeighborNeighbors, Vertex, NewNeighborNeighbors),
+			dict_insert(Graph, Neighbor, NewNeighborNeighbors, NewGraph0)
+		;	dict_insert(Graph, Neighbor, [Vertex], NewGraph0)
 		),
-		add_reversed_neighbors(Ns, V, G1, NewGraph).
+		add_reversed_neighbors(Neighbors, Vertex, NewGraph0, NewGraph).
 
 	% --- Warshall ---
 
@@ -336,52 +336,46 @@
 		warshall(Vertices, NewGraph, Closure).
 
 	warshall_update_pairs([], _, _, []).
-	warshall_update_pairs([X-XNs| Pairs], V, VNs, [X-NewXNs| NewPairs]) :-
-		(	set_member(V, XNs) ->
+	warshall_update_pairs([X-XNs| Pairs], Vertex, VNs, [X-NewXNs| NewPairs]) :-
+		(	set_member(Vertex, XNs) ->
 			set_union(XNs, VNs, NewXNs)
 		;	NewXNs = XNs
 		),
-		warshall_update_pairs(Pairs, V, VNs, NewPairs).
-
-	% --- Invert edges ---
-
-	invert_edges([], []).
-	invert_edges([Vertex1-Vertex2|Edges], [Vertex2-Vertex1|InvertedEdges]) :-
-		invert_edges(Edges, InvertedEdges).
+		warshall_update_pairs(Pairs, Vertex, VNs, NewPairs).
 
 	% --- Compose ---
 
 	compose_vertices([], _, _, []).
-	compose_vertices([Vertex| Vertices], G1, G2, [Vertex-CompNeighbors| Rest]) :-
-		(	dict_lookup(Vertex, Neighbors1, G1) ->
-			compose_through_neighbors(Neighbors1, G2, [], CompNeighbors)
+	compose_vertices([Vertex| Vertices], Graph1, Graph2, [Vertex-CompNeighbors| Rest]) :-
+		(	dict_lookup(Vertex, Neighbors1, Graph1) ->
+			compose_through_neighbors(Neighbors1, Graph2, [], CompNeighbors)
 		;	CompNeighbors = []
 		),
-		compose_vertices(Vertices, G1, G2, Rest).
+		compose_vertices(Vertices, Graph1, Graph2, Rest).
 
 	compose_through_neighbors([], _, Acc, Acc).
-	compose_through_neighbors([N| Ns], G2, Acc, Result) :-
-		(	dict_lookup(N, Neighbors2, G2) ->
+	compose_through_neighbors([Neighbor1| Neighbors1], Graph2, Acc, Result) :-
+		(	dict_lookup(Neighbor1, Neighbors2, Graph2) ->
 			set_union(Acc, Neighbors2, NewAcc)
 		;	NewAcc = Acc
 		),
-		compose_through_neighbors(Ns, G2, NewAcc, Result).
+		compose_through_neighbors(Neighbors1, Graph2, NewAcc, Result).
 
 	% --- Merge graph pairs (for union) ---
 
 	merge_graph_pairs([], Pairs2, Pairs2).
 	merge_graph_pairs(Pairs1, [], Pairs1).
-	merge_graph_pairs([Vertex1-Ns1| P1], [Vertex2-Ns2| P2], Merged) :-
+	merge_graph_pairs([Vertex1-Neighbors1| Pairs1], [Vertex2-Neighbors2| Pairs2], Merged) :-
 		compare(Order, Vertex1, Vertex2),
 		(	Order == (=) ->
-			set_union(Ns1, Ns2, MergedNs),
-			Merged = [Vertex1-MergedNs| Rest],
-			merge_graph_pairs(P1, P2, Rest)
+			set_union(Neighbors1, Neighbors2, MergedNeighbors),
+			Merged = [Vertex1-MergedNeighbors| Rest],
+			merge_graph_pairs(Pairs1, Pairs2, Rest)
 		;	Order == (<) ->
-			Merged = [Vertex1-Ns1| Rest],
-			merge_graph_pairs(P1, [Vertex2-Ns2| P2], Rest)
-		;	Merged = [Vertex2-Ns2| Rest],
-			merge_graph_pairs([Vertex1-Ns1| P1], P2, Rest)
+			Merged = [Vertex1-Neighbors1| Rest],
+			merge_graph_pairs(Pairs1, [Vertex2-Neighbors2| Pairs2], Rest)
+		;	Merged = [Vertex2-Neighbors2| Rest],
+			merge_graph_pairs([Vertex1-Neighbors1| Pairs1], Pairs2, Rest)
 		).
 
 	% --- Topological sort predicates ---
@@ -405,7 +399,7 @@
 		incr_list(Neighbors, Vertices, Counts0, Counts1).
 
 	select_zeros([], [], []).
-	select_zeros([0| Counts], [V| Vertices], [V| Zeros]) :-
+	select_zeros([0| Counts], [Vertex| Vertices], [Vertex| Zeros]) :-
 		!,
 		select_zeros(Counts, Vertices, Zeros).
 	select_zeros([_| Counts], [_| Vertices], Zeros) :-

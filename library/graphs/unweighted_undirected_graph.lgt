@@ -131,7 +131,7 @@
 		add_directed_edge(Graph, Vertex1, Vertex2, NewGraph0),
 		add_directed_edge(NewGraph0, Vertex2, Vertex1, NewGraph).
 
-	add_edges(Graph, [], Graph).
+	add_edges(NewGraph, [], NewGraph).
 	add_edges(Graph, [Vertex1-Vertex2| Edges], NewGraph) :-
 		add_edge(Graph, Vertex1, Vertex2, NewGraph0),
 		add_edges(NewGraph0, Edges, NewGraph).
@@ -140,7 +140,7 @@
 		delete_directed_edge(Graph, Vertex1, Vertex2, NewGraph0),
 		delete_directed_edge(NewGraph0, Vertex2, Vertex1, NewGraph).
 
-	delete_edges(Graph, [], Graph).
+	delete_edges(NewGraph, [], NewGraph).
 	delete_edges(Graph, [Vertex1-Vertex2| Edges], NewGraph) :-
 		delete_edge(Graph, Vertex1, Vertex2, NewGraph0),
 		delete_edges(NewGraph0, Edges, NewGraph).
@@ -251,9 +251,9 @@
 	% --- Complement ---
 
 	complement_pairs([], _, []).
-	complement_pairs([Vertex-Neighbors| Pairs], AllVertices, [Vertex-CompNs|NewPairs]) :-
-		set_insert(Neighbors, Vertex, NsWithSelf),
-		set_subtract(AllVertices, NsWithSelf, CompNs),
+	complement_pairs([Vertex-Neighbors| Pairs], AllVertices, [Vertex-ComplementNeighbors|NewPairs]) :-
+		set_insert(Neighbors, Vertex, NeighborsWithSelf),
+		set_subtract(AllVertices, NeighborsWithSelf, ComplementNeighbors),
 		complement_pairs(Pairs, AllVertices, NewPairs).
 
 	% --- Connected components ---
@@ -307,9 +307,9 @@
 			BestLength = Length, BestPath = Visited
 		;	BestLength = BestLength0, BestPath = BestPath0
 		).
-	max_path_dfs(V, Target, Graph, Visited, BestPath0, BestLen0, BestPath, BestLen) :-
-		neighbors(V, Graph, Ns),
-		max_path_try(Ns, Target, Graph, Visited, BestPath0, BestLen0, BestPath, BestLen).
+	max_path_dfs(Vertex, Target, Graph, Visited, BestPath0, BestLength0, BestPath, BestLength) :-
+		neighbors(Vertex, Graph, Neighbors),
+		max_path_try(Neighbors, Target, Graph, Visited, BestPath0, BestLength0, BestPath, BestLength).
 
 	max_path_try([], _, _, _, BestPath, BestLength, BestPath, BestLength).
 	max_path_try([Neighbor| Neighbors], Target, Graph, Visited, BestPath0, BestLength0, BestPath, BestLength) :-
