@@ -49,7 +49,9 @@
 		connected_components/2,
 		is_complete/1,
 		is_bipartite/1,
-		is_sparse/1
+		is_sparse/1,
+		is_tree/1,
+		graph_coloring/3
 	]).
 
 	:- uses(list, [
@@ -57,6 +59,7 @@
 	]).
 
 	cover(weighted_undirected_graph(_DictionaryObject_)).
+	cover(undirected_graph_common).
 
 	% new/1 tests
 
@@ -380,5 +383,59 @@
 	test(wug_is_sparse_1_03, true) :-
 		new(Graph),
 		is_sparse(Graph).
+
+	% is_tree/1 tests
+
+	test(wug_is_tree_1_01, true) :-
+		% path graph: 3 vertices, 2 edges, connected
+		new([(1-2)-5, (2-3)-10], Graph),
+		is_tree(Graph).
+
+	test(wug_is_tree_1_02, false) :-
+		% cycle: 3 vertices, 3 edges
+		new([(1-2)-5, (2-3)-10, (3-1)-7], Graph),
+		is_tree(Graph).
+
+	test(wug_is_tree_1_03, false) :-
+		% forest: 4 vertices, 2 edges, not connected
+		new([(1-2)-5, (3-4)-10], Graph),
+		is_tree(Graph).
+
+	test(wug_is_tree_1_04, true) :-
+		% single vertex
+		new([1], [], Graph),
+		is_tree(Graph).
+
+	test(wug_is_tree_1_05, false) :-
+		% empty graph
+		new(Graph),
+		is_tree(Graph).
+
+	% graph_coloring/3 tests
+
+	test(wug_graph_coloring_3_01, true(NumberOfColors == 3)) :-
+		% triangle requires 3 colors
+		new([(1-2)-5, (2-3)-10, (3-1)-7], Graph),
+		graph_coloring(Graph, _Coloring, NumberOfColors).
+
+	test(wug_graph_coloring_3_02, true(NumberOfColors == 2)) :-
+		% 4-cycle is bipartite, needs 2 colors
+		new([(1-2)-5, (2-3)-10, (3-4)-7, (4-1)-3], Graph),
+		graph_coloring(Graph, _Coloring, NumberOfColors).
+
+	test(wug_graph_coloring_3_03, true(NumberOfColors == 1)) :-
+		% isolated vertices need 1 color
+		new([1, 2, 3], [], Graph),
+		graph_coloring(Graph, _Coloring, NumberOfColors).
+
+	test(wug_graph_coloring_3_04, true(NumberOfColors == 0)) :-
+		% empty graph needs 0 colors
+		new(Graph),
+		graph_coloring(Graph, _Coloring, NumberOfColors).
+
+	test(wug_graph_coloring_3_05, true(NumberOfColors == 2)) :-
+		% path graph is bipartite
+		new([(1-2)-5, (2-3)-10, (3-4)-7], Graph),
+		graph_coloring(Graph, _Coloring, NumberOfColors).
 
 :- end_object.

@@ -119,7 +119,7 @@
 
 	edges(Graph, Edges) :-
 		dict_as_list(Graph, Pairs),
-		pairs_to_edges(Pairs, Edges).
+		^^pairs_to_edges(Pairs, Edges).
 
 	% === Vertex operations (add_vertices/3, delete_vertices/3 from graph_common) ===
 
@@ -281,17 +281,6 @@
 	% ===========================================================
 	% Auxiliary predicates
 	% ===========================================================
-
-	% --- Edge conversion from dictionary pairs ---
-
-	pairs_to_edges([], []).
-	pairs_to_edges([Vertex-Neighbors| Pairs], Edges) :-
-		vertex_neighbors_to_edges(Neighbors, Vertex, Edges, RestEdges),
-		pairs_to_edges(Pairs, RestEdges).
-
-	vertex_neighbors_to_edges([], _, Edges, Edges).
-	vertex_neighbors_to_edges([Neighbor| Neighbors], Vertex, [Vertex-Neighbor| Edges], RestEdges) :-
-		vertex_neighbors_to_edges(Neighbors, Vertex, Edges, RestEdges).
 
 	% --- Remove vertex from all neighbor lists ---
 

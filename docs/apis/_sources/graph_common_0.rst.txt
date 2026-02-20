@@ -45,7 +45,81 @@ Public predicates
 Protected predicates
 --------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: pairs_to_edges/2
+.. _graph_common/0::pairs_to_edges/2:
+
+``pairs_to_edges/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Converts a list of ``Vertex-Neighbors`` pairs from a dictionary into a flat list of ``Vertex1-Vertex2`` edges.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pairs_to_edges(Pairs,Edges)``
+| **Mode and number of proofs:**
+|    ``pairs_to_edges(+list(pair),-list)`` - ``one``
+
+
+------------
+
+.. index:: vertex_neighbors_to_edges/4
+.. _graph_common/0::vertex_neighbors_to_edges/4:
+
+``vertex_neighbors_to_edges/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a neighbor list for a vertex into edges using a difference list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``vertex_neighbors_to_edges(Neighbors,Vertex,Edges,RestEdges)``
+| **Mode and number of proofs:**
+|    ``vertex_neighbors_to_edges(+list,+vertex,-list,-list)`` - ``one``
+
+
+------------
+
+.. index:: wpairs_to_edges/2
+.. _graph_common/0::wpairs_to_edges/2:
+
+``wpairs_to_edges/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Converts a list of ``Vertex-WNeighbors`` pairs from a dictionary into a flat list of ``(Vertex1-Vertex2)-Weight`` weighted edges.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``wpairs_to_edges(Pairs,Edges)``
+| **Mode and number of proofs:**
+|    ``wpairs_to_edges(+list(pair),-list)`` - ``one``
+
+
+------------
+
+.. index:: wvertex_neighbors_to_edges/4
+.. _graph_common/0::wvertex_neighbors_to_edges/4:
+
+``wvertex_neighbors_to_edges/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a weighted neighbor list for a vertex into weighted edges using a difference list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``wvertex_neighbors_to_edges(WNeighbors,Vertex,Edges,RestEdges)``
+| **Mode and number of proofs:**
+|    ``wvertex_neighbors_to_edges(+list,+vertex,-list,-list)`` - ``one``
+
+
+------------
 
 Private predicates
 ------------------

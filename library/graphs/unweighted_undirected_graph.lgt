@@ -21,12 +21,12 @@
 
 :- object(unweighted_undirected_graph(_Dictionary_),
 	implements(unweighted_graph_protocol),
-	imports(graph_common)).
+	imports((graph_common, undirected_graph_common))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-02-20,
 		comment is 'Unweighted undirected graph predicates using a dictionary representation. Undirected edges are stored as two directed edges. The parametric object parameter is the dictionary to use for the graph representation.',
 		parnames is ['Dictionary']
 	]).
@@ -99,10 +99,10 @@
 	vertices(Graph, Vertices) :-
 		dict_keys(Graph, Vertices).
 
-	% For undirected graphs, return each edge only once (V1 @< V2 or V1 == V2)
+	% For undirected graphs, return each edge only once (Vertex1 @< Vertex2 or Vertex1 == Vertex2)
 	edges(Graph, Edges) :-
 		dict_as_list(Graph, Pairs),
-		pairs_to_edges(Pairs, AllEdges),
+		^^pairs_to_edges(Pairs, AllEdges),
 		remove_duplicate_edges(AllEdges, Edges).
 
 	% === Vertex operations (add_vertices/3, delete_vertices/3 from graph_common) ===
@@ -123,26 +123,26 @@
 
 	% === Edge operations (add both directions) ===
 
-	edge(V1, V2, Graph) :-
-		dict_lookup(V1, Neighbors, Graph),
-		set_memberchk(V2, Neighbors).
+	edge(Vertex1, Vertex2, Graph) :-
+		dict_lookup(Vertex1, Neighbors, Graph),
+		set_memberchk(Vertex2, Neighbors).
 
-	add_edge(Graph, V1, V2, NewGraph) :-
-		add_directed_edge(Graph, V1, V2, G1),
-		add_directed_edge(G1, V2, V1, NewGraph).
+	add_edge(Graph, Vertex1, Vertex2, NewGraph) :-
+		add_directed_edge(Graph, Vertex1, Vertex2, G1),
+		add_directed_edge(G1, Vertex2, Vertex1, NewGraph).
 
 	add_edges(Graph, [], Graph).
-	add_edges(Graph, [V1-V2|Edges], NewGraph) :-
-		add_edge(Graph, V1, V2, G1),
+	add_edges(Graph, [Vertex1-Vertex2| Edges], NewGraph) :-
+		add_edge(Graph, Vertex1, Vertex2, G1),
 		add_edges(G1, Edges, NewGraph).
 
-	delete_edge(Graph, V1, V2, NewGraph) :-
-		delete_directed_edge(Graph, V1, V2, G1),
-		delete_directed_edge(G1, V2, V1, NewGraph).
+	delete_edge(Graph, Vertex1, Vertex2, NewGraph) :-
+		delete_directed_edge(Graph, Vertex1, Vertex2, G1),
+		delete_directed_edge(G1, Vertex2, Vertex1, NewGraph).
 
 	delete_edges(Graph, [], Graph).
-	delete_edges(Graph, [V1-V2|Edges], NewGraph) :-
-		delete_edge(Graph, V1, V2, G1),
+	delete_edges(Graph, [Vertex1-Vertex2| Edges], NewGraph) :-
+		delete_edge(Graph, Vertex1, Vertex2, G1),
 		delete_edges(G1, Edges, NewGraph).
 
 	% === Neighbor queries (exclude self-loops) ===
@@ -171,8 +171,8 @@
 		dict_keys(Graph, Vertices),
 		(	Vertices == [] ->
 			true
-		;	Vertices = [V|_],
-			^^reachable(V, Graph, Reachable),
+		;	Vertices = [Vertex| _],
+			^^reachable(Vertex, Graph, Reachable),
 			length(Vertices, N),
 			length(Reachable, N)
 		).
@@ -183,25 +183,27 @@
 
 	% === Min Path (BFS for unweighted) ===
 
-	min_path(V1, V2, Graph, Path, Length) :-
-		(	V1 == V2 ->
-			neighbors(V1, Graph, _),
-			Path = [V1], Length = 0
+	min_path(Vertex1, Vertex2, Graph, Path, Length) :-
+		(	Vertex1 == Vertex2 ->
+			neighbors(Vertex1, Graph, _),
+			Path = [Vertex1],
+			Length = 0
 		;	bfs_new(Visited0),
-			bfs_insert(Visited0, V1, true, Visited1),
+			bfs_insert(Visited0, Vertex1, true, Visited1),
 			bfs_new(Pred0),
-			bfs_shortest([V1], [], V2, Graph, Visited1, Pred0, Pred),
-			bfs_trace(V2, V1, Pred, [V2], Path),
-			length(Path, N), Length is N - 1
+			bfs_shortest([Vertex1], [], Vertex2, Graph, Visited1, Pred0, Pred),
+			bfs_trace(Vertex2, Vertex1, Pred, [Vertex2], Path),
+			length(Path, N),
+			Length is N - 1
 		).
 
 	% === Max Path (DFS for unweighted) ===
 
-	max_path(V1, V2, Graph, Path, Length) :-
-		(	V1 == V2 ->
-			neighbors(V1, Graph, _),
-			Path = [V1], Length = 0
-		;	max_path_dfs(V1, V2, Graph, [V1], none, -1, RevPath, Length),
+	max_path(Vertex1, Vertex2, Graph, Path, Length) :-
+		(	Vertex1 == Vertex2 ->
+			neighbors(Vertex1, Graph, _),
+			Path = [Vertex1], Length = 0
+		;	max_path_dfs(Vertex1, Vertex2, Graph, [Vertex1], none, -1, RevPath, Length),
 			Length >= 0,
 			reverse(RevPath, Path)
 		).
@@ -212,41 +214,30 @@
 
 	% --- Directed edge helpers (internal) ---
 
-	add_directed_edge(Graph, V1, V2, NewGraph) :-
-		(	dict_lookup(V1, Ns, Graph) ->
-			set_insert(Ns, V2, NewNs)
-		;	NewNs = [V2]
+	add_directed_edge(Graph, Vertex1, Vertex2, NewGraph) :-
+		(	dict_lookup(Vertex1, Ns, Graph) ->
+			set_insert(Ns, Vertex2, NewNs)
+		;	NewNs = [Vertex2]
 		),
-		dict_insert(Graph, V1, NewNs, G1),
-		(	dict_lookup(V2, _, G1) ->
+		dict_insert(Graph, Vertex1, NewNs, G1),
+		(	dict_lookup(Vertex2, _, G1) ->
 			NewGraph = G1
-		;	dict_insert(G1, V2, [], NewGraph)
+		;	dict_insert(G1, Vertex2, [], NewGraph)
 		).
 
-	delete_directed_edge(Graph, V1, V2, NewGraph) :-
-		(	dict_lookup(V1, Ns, Graph) ->
-			set_subtract(Ns, [V2], NewNs),
-			dict_insert(Graph, V1, NewNs, NewGraph)
+	delete_directed_edge(Graph, Vertex1, Vertex2, NewGraph) :-
+		(	dict_lookup(Vertex1, Ns, Graph) ->
+			set_subtract(Ns, [Vertex2], NewNs),
+			dict_insert(Graph, Vertex1, NewNs, NewGraph)
 		;	NewGraph = Graph
 		).
 
-	% --- Edge conversion ---
-
-	pairs_to_edges([], []).
-	pairs_to_edges([V-Ns|Pairs], Edges) :-
-		vertex_neighbors_to_edges(Ns, V, Edges, RestEdges),
-		pairs_to_edges(Pairs, RestEdges).
-
-	vertex_neighbors_to_edges([], _, Es, Es).
-	vertex_neighbors_to_edges([N|Ns], V, [V-N|Es], RestEs) :-
-		vertex_neighbors_to_edges(Ns, V, Es, RestEs).
-
-	% Only keep edges where V1 @< V2 or V1 == V2 (self-loops)
+	% Only keep edges where Vertex1 @< Vertex2 or Vertex1 == Vertex2 (self-loops)
 	remove_duplicate_edges([], []).
-	remove_duplicate_edges([V1-V2|Edges], Result) :-
-		(	V1 @> V2 ->
+	remove_duplicate_edges([Vertex1-Vertex2|Edges], Result) :-
+		(	Vertex1 @> Vertex2 ->
 			Result = Rest
-		;	Result = [V1-V2|Rest]
+		;	Result = [Vertex1-Vertex2|Rest]
 		),
 		remove_duplicate_edges(Edges, Rest).
 
@@ -268,23 +259,23 @@
 	% --- Connected components ---
 
 	find_components([], _, []).
-	find_components([V|Vs], Graph, [Component|Rest]) :-
-		^^reachable(V, Graph, Component),
-		subtract(Vs, Component, Remaining),
-		find_components(Remaining, Graph, Rest).
+	find_components([Vertex| Vertices], Graph, [Component| Components]) :-
+		^^reachable(Vertex, Graph, Component),
+		subtract(Vertices, Component, Remaining),
+		find_components(Remaining, Graph, Components).
 
 	% --- BFS min_path helpers ---
 
 	bfs_shortest([], Next, Target, Graph, Visited, Pred0, Pred) :-
 		Next \== [],
 		bfs_shortest(Next, [], Target, Graph, Visited, Pred0, Pred).
-	bfs_shortest([V|Vs], Next0, Target, Graph, Visited0, Pred0, Pred) :-
+	bfs_shortest([V|Vertices], Next0, Target, Graph, Visited0, Pred0, Pred) :-
 		dict_lookup(V, AllNs, Graph),
 		set_subtract(AllNs, [V], Ns),
 		bfs_expand(Ns, V, Target, Visited0, Pred0, Next0, Visited1, Pred1, Next1, Found),
 		(	Found == true ->
 			Pred = Pred1
-		;	bfs_shortest(Vs, Next1, Target, Graph, Visited1, Pred1, Pred)
+		;	bfs_shortest(Vertices, Next1, Target, Graph, Visited1, Pred1, Pred)
 		).
 
 	bfs_expand([], _, _, Visited, Pred, Next, Visited, Pred, Next, false).

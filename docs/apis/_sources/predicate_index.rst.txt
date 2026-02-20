@@ -5103,6 +5103,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expanding <expanding/0::goal_expansion/2>`
 
+``graph_coloring/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`undirected_graph_common <undirected_graph_common/0::graph_coloring/3>`
+
 ``graph_footer/5``
 ------------------
 
@@ -6358,6 +6368,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`subsequences_protocol <subsequences_protocol/0::is_suffix_of/2>`
+
+``is_tree/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`undirected_graph_common <undirected_graph_common/0::is_tree/1>`
 
 ``is_true/1``
 -------------

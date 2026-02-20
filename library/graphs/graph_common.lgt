@@ -35,7 +35,35 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, memberchk/2, reverse/2
+		append/3, length/2, member/2, reverse/2
+	]).
+
+	:- protected(pairs_to_edges/2).
+	:- mode(pairs_to_edges(+list(pair), -list), one).
+	:- info(pairs_to_edges/2, [
+		comment is 'Converts a list of ``Vertex-Neighbors`` pairs from a dictionary into a flat list of ``Vertex1-Vertex2`` edges.',
+		argnames is ['Pairs', 'Edges']
+	]).
+
+	:- protected(vertex_neighbors_to_edges/4).
+	:- mode(vertex_neighbors_to_edges(+list, +vertex, -list, -list), one).
+	:- info(vertex_neighbors_to_edges/4, [
+		comment is 'Converts a neighbor list for a vertex into edges using a difference list.',
+		argnames is ['Neighbors', 'Vertex', 'Edges', 'RestEdges']
+	]).
+
+	:- protected(wpairs_to_edges/2).
+	:- mode(wpairs_to_edges(+list(pair), -list), one).
+	:- info(wpairs_to_edges/2, [
+		comment is 'Converts a list of ``Vertex-WNeighbors`` pairs from a dictionary into a flat list of ``(Vertex1-Vertex2)-Weight`` weighted edges.',
+		argnames is ['Pairs', 'Edges']
+	]).
+
+	:- protected(wvertex_neighbors_to_edges/4).
+	:- mode(wvertex_neighbors_to_edges(+list, +vertex, -list, -list), one).
+	:- info(wvertex_neighbors_to_edges/4, [
+		comment is 'Converts a weighted neighbor list for a vertex into weighted edges using a difference list.',
+		argnames is ['WNeighbors', 'Vertex', 'Edges', 'RestEdges']
 	]).
 
 	% === Graph creation ===
@@ -51,14 +79,14 @@
 	% === Vertex list operations ===
 
 	add_vertices(Graph, [], Graph).
-	add_vertices(Graph, [V|Vs], NewGraph) :-
-		::add_vertex(Graph, V, G1),
-		add_vertices(G1, Vs, NewGraph).
+	add_vertices(Graph, [Vertex| Vertices], NewGraph) :-
+		::add_vertex(Graph, Vertex, NewGraph0),
+		add_vertices(NewGraph0, Vertices, NewGraph).
 
 	delete_vertices(Graph, [], Graph).
-	delete_vertices(Graph, [V|Vs], NewGraph) :-
-		::delete_vertex(Graph, V, G1),
-		delete_vertices(G1, Vs, NewGraph).
+	delete_vertices(Graph, [Vertex| Vertices], NewGraph) :-
+		::delete_vertex(Graph, Vertex, NewGraph0),
+		delete_vertices(NewGraph0, Vertices, NewGraph).
 
 	% === Graph metrics ===
 
@@ -77,20 +105,20 @@
 		reachable_aux([Vertex], Graph, [Vertex], Vertices).
 
 	reachable_aux([], _, Visited, Visited).
-	reachable_aux([V|Vs], Graph, Visited, Reachable) :-
-		(	::neighbors(V, Graph, Neighbors) ->
+	reachable_aux([Vertex| Vertices], Graph, Visited, Reachable) :-
+		(	::neighbors(Vertex, Graph, Neighbors) ->
 			set_union(Visited, Neighbors, NewVisited, NewVertices),
-			append(Vs, NewVertices, NextToVisit)
+			append(Vertices, NewVertices, NextToVisit)
 		;	NewVisited = Visited,
-			NextToVisit = Vs
+			NextToVisit = Vertices
 		),
 		reachable_aux(NextToVisit, Graph, NewVisited, Reachable).
 
 	% === Path existence ===
 
-	has_path(V1, V2, Graph) :-
-		reachable(V1, Graph, Reachable),
-		set_memberchk(V2, Reachable).
+	has_path(Vertex1, Vertex2, Graph) :-
+		reachable(Vertex1, Graph, Reachable),
+		set_memberchk(Vertex2, Reachable).
 
 	% === Nondeterministic maximal paths ===
 
@@ -100,20 +128,20 @@
 		reverse(RevPath, Path).
 
 	path_extend(Current, Graph, Visited, Path) :-
-		::neighbors(Current, Graph, Ns),
-		unvisited(Ns, Visited, Unvisited),
+		::neighbors(Current, Graph, Neighbors),
+		unvisited(Neighbors, Visited, Unvisited),
 		(	Unvisited == [] ->
 			Path = Visited
 		;	member(Next, Unvisited),
-			path_extend(Next, Graph, [Next|Visited], Path)
+			path_extend(Next, Graph, [Next| Visited], Path)
 		).
 
 	unvisited([], _, []).
-	unvisited([N|Ns], Visited, Result) :-
-		(	memberchk(N, Visited) ->
-			unvisited(Ns, Visited, Result)
-		;	Result = [N|Rest],
-			unvisited(Ns, Visited, Rest)
+	unvisited([Neighbor| Neighbors], Visited, Result) :-
+		(	member(Neighbor, Visited) ->
+			unvisited(Neighbors, Visited, Result)
+		;	Result = [Neighbor|Rest],
+			unvisited(Neighbors, Visited, Rest)
 		).
 
 	% === Completeness ===
@@ -183,5 +211,27 @@
 			true
 		;	E =< V * log(V) / log(2)
 		).
+
+	% === Edge conversion from dictionary pairs ===
+
+	pairs_to_edges([], []).
+	pairs_to_edges([Vertex-Neighbors| Pairs], Edges) :-
+		vertex_neighbors_to_edges(Neighbors, Vertex, Edges, RestEdges),
+		pairs_to_edges(Pairs, RestEdges).
+
+	vertex_neighbors_to_edges([], _, Edges, Edges).
+	vertex_neighbors_to_edges([Neighbor| Neighbors], Vertex, [Vertex-Neighbor| Edges], RestEdges) :-
+		vertex_neighbors_to_edges(Neighbors, Vertex, Edges, RestEdges).
+
+	% === Weighted edge conversion from dictionary pairs ===
+
+	wpairs_to_edges([], []).
+	wpairs_to_edges([Vertex-WNeighbors| Pairs], Edges) :-
+		wvertex_neighbors_to_edges(WNeighbors, Vertex, Edges, RestEdges),
+		wpairs_to_edges(Pairs, RestEdges).
+
+	wvertex_neighbors_to_edges([], _, Edges, Edges).
+	wvertex_neighbors_to_edges([Neighbor-Weight| WNeighbors], Vertex, [(Vertex-Neighbor)-Weight| Edges], RestEdges) :-
+		wvertex_neighbors_to_edges(WNeighbors, Vertex, Edges, RestEdges).
 
 :- end_category.

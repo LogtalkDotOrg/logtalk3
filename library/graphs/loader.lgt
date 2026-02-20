@@ -32,6 +32,7 @@
 		directed_graph_protocol,
 		graph_common,
 		directed_graph_common,
+		undirected_graph_common,
 		unweighted_directed_graph,
 		unweighted_undirected_graph,
 		weighted_directed_graph,

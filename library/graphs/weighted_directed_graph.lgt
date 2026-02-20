@@ -72,7 +72,7 @@
 
 	edges(Graph, Edges) :-
 		dict_as_list(Graph, Pairs),
-		wpairs_to_edges(Pairs, Edges).
+		^^wpairs_to_edges(Pairs, Edges).
 
 	% === Vertex operations (add_vertices/3, delete_vertices/3 from graph_common) ===
 
@@ -247,17 +247,6 @@
 	strip_weights([], []).
 	strip_weights([V-_|WNs], [V|Ns]) :-
 		strip_weights(WNs, Ns).
-
-	% --- Edge conversion ---
-
-	wpairs_to_edges([], []).
-	wpairs_to_edges([V-WNs|Pairs], Edges) :-
-		wvertex_neighbors_to_edges(WNs, V, Edges, RestEdges),
-		wpairs_to_edges(Pairs, RestEdges).
-
-	wvertex_neighbors_to_edges([], _, Es, Es).
-	wvertex_neighbors_to_edges([N-W|WNs], V, [(V-N)-W|Es], RestEs) :-
-		wvertex_neighbors_to_edges(WNs, V, Es, RestEs).
 
 	% --- Remove vertex from all weighted neighbor lists ---
 

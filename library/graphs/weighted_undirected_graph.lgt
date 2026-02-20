@@ -21,12 +21,12 @@
 
 :- object(weighted_undirected_graph(_Dictionary_),
 	implements(weighted_graph_protocol),
-	imports(graph_common)).
+	imports((graph_common, undirected_graph_common))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-02-20,
 		comment is 'Weighted undirected graph predicates using a dictionary representation. Each edge is stored in both directions. Edge weights use a pair representation (Vertex-Weight in neighbor lists, (V1-V2)-Weight for edge lists). The parametric object parameter is the dictionary to use for the graph representation.',
 		parnames is ['Dictionary']
 	]).
@@ -100,7 +100,7 @@
 
 	edges(Graph, Edges) :-
 		dict_as_list(Graph, Pairs),
-		wpairs_to_edges(Pairs, AllEdges),
+		^^wpairs_to_edges(Pairs, AllEdges),
 		canonical_wedges(AllEdges, Edges).
 
 	% === Vertex operations (add_vertices/3, delete_vertices/3 from graph_common) ===
@@ -280,17 +280,6 @@
 	strip_weights([], []).
 	strip_weights([Vertex-_| WNeighbors], [Vertex| Neighbors]) :-
 		strip_weights(WNeighbors, Neighbors).
-
-	% --- Edge conversion ---
-
-	wpairs_to_edges([], []).
-	wpairs_to_edges([V-WNs|Pairs], Edges) :-
-		wvertex_neighbors_to_edges(WNs, V, Edges, RestEdges),
-		wpairs_to_edges(Pairs, RestEdges).
-
-	wvertex_neighbors_to_edges([], _, Es, Es).
-	wvertex_neighbors_to_edges([N-W|WNs], V, [(V-N)-W|Es], RestEs) :-
-		wvertex_neighbors_to_edges(WNs, V, Es, RestEs).
 
 	% Remove duplicate undirected edges: keep only V1-(V2-W) where V1 @< V2
 	canonical_wedges([], []).
