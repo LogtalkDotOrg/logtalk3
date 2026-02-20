@@ -1,0 +1,173 @@
+.. index:: single: weighted_graph_common(Dictionary)
+.. _weighted_graph_common/1:
+
+.. rst-class:: right
+
+**category**
+
+``weighted_graph_common(Dictionary)``
+=====================================
+
+Common weighted graph predicates shared by both weighted directed and weighted undirected graph objects. Uses self-dispatch to call object-specific predicates such as ``add_edge/5``, ``delete_edge/5``, and ``edges/2``.
+
+| **Availability:** 
+|    ``logtalk_load(graphs(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-20
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`weighted_graph_protocol <weighted_graph_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`graph_common <graph_common/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`pairs <pairs/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`weighted_graph_protocol/0::add_edge/5`  :ref:`graph_protocol/0::add_edges/3`  :ref:`graph_protocol/0::add_vertex/3`  :ref:`graph_protocol/0::add_vertices/3`  :ref:`weighted_graph_protocol/0::delete_edge/5`  :ref:`graph_protocol/0::delete_edges/3`  :ref:`graph_protocol/0::delete_vertex/3`  :ref:`graph_protocol/0::delete_vertices/3`  :ref:`weighted_graph_protocol/0::edge/4`  :ref:`graph_protocol/0::edges/2`  :ref:`graph_protocol/0::empty/1`  :ref:`graph_protocol/0::has_path/3`  :ref:`graph_protocol/0::is_bipartite/1`  :ref:`graph_protocol/0::is_complete/1`  :ref:`graph_protocol/0::is_sparse/1`  :ref:`graph_protocol/0::max_path/5`  :ref:`graph_protocol/0::min_path/5`  :ref:`graph_protocol/0::neighbors/3`  :ref:`graph_protocol/0::new/1`  :ref:`graph_protocol/0::new/2`  :ref:`graph_protocol/0::new/3`  :ref:`graph_protocol/0::number_of_edges/2`  :ref:`graph_protocol/0::number_of_vertices/2`  :ref:`graph_protocol/0::path/3`  :ref:`graph_protocol/0::reachable/3`  :ref:`graph_protocol/0::vertices/2`  :ref:`weighted_graph_protocol/0::wneighbors/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: winsert_neighbor/4
+.. _weighted_graph_common/1::winsert_neighbor/4:
+
+``winsert_neighbor/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Inserts a weighted neighbor into a sorted weighted neighbor list, replacing any existing entry for the same vertex.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``winsert_neighbor(WNeighbors,Vertex,Weight,NewWNeighbors)``
+| **Mode and number of proofs:**
+|    ``winsert_neighbor(+list,+vertex,+number,-list)`` - ``one``
+
+
+------------
+
+.. index:: wremove_neighbor/4
+.. _weighted_graph_common/1::wremove_neighbor/4:
+
+``wremove_neighbor/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Removes a vertex from a sorted weighted neighbor list, unifying the weight. Fails if the vertex is not found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``wremove_neighbor(WNeighbors,Vertex,Weight,NewWNeighbors)``
+| **Mode and number of proofs:**
+|    ``wremove_neighbor(+list,+vertex,-number,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: wfind/3
+.. _weighted_graph_common/1::wfind/3:
+
+``wfind/3``
+^^^^^^^^^^^
+
+Finds the weight associated with a vertex in a weighted neighbor list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``wfind(WNeighbors,Vertex,Weight)``
+| **Mode and number of proofs:**
+|    ``wfind(+list,+vertex,-number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: wremove_vertex_from_all/3
+.. _weighted_graph_common/1::wremove_vertex_from_all/3:
+
+``wremove_vertex_from_all/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Removes a vertex from all weighted neighbor lists in a list of vertex-neighbors pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``wremove_vertex_from_all(Pairs,Vertex,NewPairs)``
+| **Mode and number of proofs:**
+|    ``wremove_vertex_from_all(+list(pair),+vertex,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: relax_neighbors/7
+.. _weighted_graph_common/1::relax_neighbors/7:
+
+``relax_neighbors/7``
+^^^^^^^^^^^^^^^^^^^^^
+
+Relaxes neighbors during Dijkstra shortest path computation, updating distances and priority queue.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``relax_neighbors(WNeighbors,Vertex,Distance,Queue,Dist,NewQueue,NewDist)``
+| **Mode and number of proofs:**
+|    ``relax_neighbors(+list,+vertex,+number,+list,+dictionary,-list,-dictionary)`` - ``one``
+
+
+------------
+
+.. index:: pq_insert/3
+.. _weighted_graph_common/1::pq_insert/3:
+
+``pq_insert/3``
+^^^^^^^^^^^^^^^
+
+Inserts an element into a sorted priority queue (list of Distance-Vertex pairs).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pq_insert(Queue,Item,NewQueue)``
+| **Mode and number of proofs:**
+|    ``pq_insert(+list,+pair,-list)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

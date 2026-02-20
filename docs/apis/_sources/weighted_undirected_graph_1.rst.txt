@@ -8,7 +8,7 @@
 ``weighted_undirected_graph(Dictionary)``
 =========================================
 
-Weighted undirected graph predicates using a dictionary representation. Each edge is stored in both directions. Edge weights use a pair representation (Vertex-Weight in neighbor lists, (V1-V2)-Weight for edge lists). The parametric object parameter is the dictionary to use for the graph representation.
+Weighted undirected graph predicates using a dictionary representation. Each edge is stored in both directions. Edge weights use a pair representation (``Vertex-Weight`` in neighbor lists, ``(Vertex1-Vertex2)-Weight`` for edge lists). The parametric object parameter is the dictionary to use for the graph representation.
 
 | **Availability:** 
 |    ``logtalk_load(graphs(loader))``
@@ -21,10 +21,8 @@ Weighted undirected graph predicates using a dictionary representation. Each edg
 |    ``static, context_switching_calls``
 
 
-| **Implements:**
-|    ``public`` :ref:`weighted_graph_protocol <weighted_graph_protocol/0>`
 | **Imports:**
-|    ``public`` :ref:`graph_common <graph_common/0>`
+|    ``public`` :ref:`weighted_graph_common(Dictionary) <weighted_graph_common/1>`
 |    ``public`` :ref:`undirected_graph_common <undirected_graph_common/0>`
 | **Uses:**
 |    :ref:`list <list/0>`

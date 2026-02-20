@@ -15,21 +15,17 @@ Unweighted directed graph predicates using a dictionary representation. The para
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-19
+| **Date:** 2026-02-20
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
-| **Implements:**
-|    ``public`` :ref:`unweighted_graph_protocol <unweighted_graph_protocol/0>`
-|    ``public`` :ref:`directed_graph_protocol <directed_graph_protocol/0>`
 | **Imports:**
-|    ``public`` :ref:`graph_common <graph_common/0>`
+|    ``public`` :ref:`unweighted_graph_common(Dictionary) <unweighted_graph_common/1>`
 |    ``public`` :ref:`directed_graph_common <directed_graph_common/0>`
 | **Uses:**
-|    :ref:`avltree <avltree/0>`
-|    :ref:`list <list/0>`
+|    :ref:`pairs <pairs/0>`
 |    :ref:`set <set/0>`
 
 | **Remarks:**

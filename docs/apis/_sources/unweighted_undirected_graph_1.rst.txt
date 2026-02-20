@@ -21,13 +21,10 @@ Unweighted undirected graph predicates using a dictionary representation. Undire
 |    ``static, context_switching_calls``
 
 
-| **Implements:**
-|    ``public`` :ref:`unweighted_graph_protocol <unweighted_graph_protocol/0>`
 | **Imports:**
-|    ``public`` :ref:`graph_common <graph_common/0>`
+|    ``public`` :ref:`unweighted_graph_common(Dictionary) <unweighted_graph_common/1>`
 |    ``public`` :ref:`undirected_graph_common <undirected_graph_common/0>`
 | **Uses:**
-|    :ref:`avltree <avltree/0>`
 |    :ref:`list <list/0>`
 |    :ref:`set <set/0>`
 

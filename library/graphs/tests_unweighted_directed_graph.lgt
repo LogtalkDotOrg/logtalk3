@@ -56,6 +56,7 @@
 	]).
 
 	cover(unweighted_directed_graph(_DictionaryObject_)).
+	cover(unweighted_graph_common(_DictionaryObject_)).
 
 	% new/1 tests
 

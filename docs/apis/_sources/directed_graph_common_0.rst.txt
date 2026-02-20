@@ -23,6 +23,8 @@ Common directed graph predicates shared by directed graph objects. Uses self-dis
 
 | **Implements:**
 |    ``public`` :ref:`directed_graph_protocol <directed_graph_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`graph_common <graph_common/0>`
 | **Uses:**
 |    :ref:`avltree <avltree/0>`
 |    :ref:`list <list/0>`

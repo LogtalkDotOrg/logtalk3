@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>unweighted_directed_graph &mdash; Logtalk 3.98.0</title>
+  <title>weighted_graph_common(Dictionary) &mdash; Logtalk 3.98.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="unweighted_directed_graph(Dictionary)" href="unweighted_directed_graph_1.html" />
-    <link rel="prev" title="undirected_graph_common" href="undirected_graph_common_0.html" />
+    <link rel="next" title="weighted_graph_protocol" href="weighted_graph_protocol_0.html" />
+    <link rel="prev" title="weighted_directed_graph(Dictionary)" href="weighted_directed_graph_1.html" />
    
 </head>
 
@@ -110,7 +110,7 @@
 <li class="toctree-l3"><a class="reference internal" href="graph_protocol_0.html">graph_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="graph_types_0.html">graph_types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="undirected_graph_common_0.html">undirected_graph_common</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">unweighted_directed_graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unweighted_directed_graph_0.html">unweighted_directed_graph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="unweighted_directed_graph_1.html">unweighted_directed_graph(Dictionary)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="unweighted_graph_common_1.html">unweighted_graph_common(Dictionary)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="unweighted_graph_protocol_0.html">unweighted_graph_protocol</a></li>
@@ -118,7 +118,7 @@
 <li class="toctree-l3"><a class="reference internal" href="unweighted_undirected_graph_1.html">unweighted_undirected_graph(Dictionary)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="weighted_directed_graph_0.html">weighted_directed_graph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="weighted_directed_graph_1.html">weighted_directed_graph(Dictionary)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="weighted_graph_common_1.html">weighted_graph_common(Dictionary)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">weighted_graph_common(Dictionary)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="weighted_graph_protocol_0.html">weighted_graph_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="weighted_undirected_graph_0.html">weighted_undirected_graph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="weighted_undirected_graph_1.html">weighted_undirected_graph(Dictionary)</a></li>
@@ -232,9 +232,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">unweighted_directed_graph</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">weighted_graph_common(Dictionary)</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/unweighted_directed_graph_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/weighted_graph_common_1.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -242,10 +242,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="unweighted-directed-graph-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="unweighted-directed-graph">
-<h1><code class="docutils literal notranslate"><span class="pre">unweighted_directed_graph</span></code><a class="headerlink" href="#unweighted-directed-graph" title="Link to this heading"></a></h1>
-<p>Unweighted directed graph predicates using the AVL tree dictionary representation.</p>
+  <p class="right" id="weighted-graph-common-1"><span id="index-0"></span><strong>category</strong></p>
+<section id="weighted-graph-common-dictionary">
+<h1><code class="docutils literal notranslate"><span class="pre">weighted_graph_common(Dictionary)</span></code><a class="headerlink" href="#weighted-graph-common-dictionary" title="Link to this heading"></a></h1>
+<p>Common weighted graph predicates shared by both weighted directed and weighted undirected graph objects. Uses self-dispatch to call object-specific predicates such as <code class="docutils literal notranslate"><span class="pre">add_edge/5</span></code>, <code class="docutils literal notranslate"><span class="pre">delete_edge/5</span></code>, and <code class="docutils literal notranslate"><span class="pre">edges/2</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -255,18 +255,27 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-02-19</div>
+<div class="line"><strong>Date:</strong> 2026-02-20</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Implements:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="weighted_graph_protocol_0.html#weighted-graph-protocol-0"><span class="std std-ref">weighted_graph_protocol</span></a></div>
+</div>
 <div class="line"><strong>Extends:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="unweighted_directed_graph_1.html#unweighted-directed-graph-1"><span class="std std-ref">unweighted_directed_graph(avltree)</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="graph_common_0.html#graph-common-0"><span class="std std-ref">graph_common</span></a></div>
+</div>
+<div class="line"><strong>Uses:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="pairs_0.html#pairs-0"><span class="std std-ref">pairs</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -278,15 +287,24 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="unweighted_graph_protocol_0.html#unweighted-graph-protocol-0-add-edge-4"><span class="std std-ref">add_edge/4</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-add-edges-3"><span class="std std-ref">add_edges/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-add-vertex-3"><span class="std std-ref">add_vertex/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-add-vertices-3"><span class="std std-ref">add_vertices/3</span></a>  <a class="reference internal" href="unweighted_graph_protocol_0.html#unweighted-graph-protocol-0-complement-2"><span class="std std-ref">complement/2</span></a>  <a class="reference internal" href="unweighted_directed_graph_1.html#unweighted-directed-graph-1-compose-3"><span class="std std-ref">compose/3</span></a>  <a class="reference internal" href="unweighted_graph_protocol_0.html#unweighted-graph-protocol-0-delete-edge-4"><span class="std std-ref">delete_edge/4</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-delete-edges-3"><span class="std std-ref">delete_edges/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-delete-vertex-3"><span class="std std-ref">delete_vertex/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-delete-vertices-3"><span class="std std-ref">delete_vertices/3</span></a>  <a class="reference internal" href="unweighted_graph_protocol_0.html#unweighted-graph-protocol-0-edge-3"><span class="std std-ref">edge/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-edges-2"><span class="std std-ref">edges/2</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-empty-1"><span class="std std-ref">empty/1</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-has-path-3"><span class="std std-ref">has_path/3</span></a>  <a class="reference internal" href="directed_graph_protocol_0.html#directed-graph-protocol-0-in-degree-3"><span class="std std-ref">in_degree/3</span></a>  <a class="reference internal" href="directed_graph_protocol_0.html#directed-graph-protocol-0-is-acyclic-1"><span class="std std-ref">is_acyclic/1</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-is-bipartite-1"><span class="std std-ref">is_bipartite/1</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-is-complete-1"><span class="std std-ref">is_complete/1</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-is-sparse-1"><span class="std std-ref">is_sparse/1</span></a>  <a class="reference internal" href="unweighted_directed_graph_1.html#unweighted-directed-graph-1-leaves-2"><span class="std std-ref">leaves/2</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-max-path-5"><span class="std std-ref">max_path/5</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-min-path-5"><span class="std std-ref">min_path/5</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-neighbors-3"><span class="std std-ref">neighbors/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-new-1"><span class="std std-ref">new/1</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-new-2"><span class="std std-ref">new/2</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-new-3"><span class="std std-ref">new/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-number-of-edges-2"><span class="std std-ref">number_of_edges/2</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-number-of-vertices-2"><span class="std std-ref">number_of_vertices/2</span></a>  <a class="reference internal" href="directed_graph_protocol_0.html#directed-graph-protocol-0-out-degree-3"><span class="std std-ref">out_degree/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-path-3"><span class="std std-ref">path/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-reachable-3"><span class="std std-ref">reachable/3</span></a>  <a class="reference internal" href="directed_graph_protocol_0.html#directed-graph-protocol-0-strongly-connected-components-2"><span class="std std-ref">strongly_connected_components/2</span></a>  <a class="reference internal" href="directed_graph_protocol_0.html#directed-graph-protocol-0-symmetric-closure-2"><span class="std std-ref">symmetric_closure/2</span></a>  <a class="reference internal" href="directed_graph_protocol_0.html#directed-graph-protocol-0-topological-sort-2"><span class="std std-ref">topological_sort/2</span></a>  <a class="reference internal" href="unweighted_directed_graph_1.html#unweighted-directed-graph-1-topological-sort-3"><span class="std std-ref">topological_sort/3</span></a>  <a class="reference internal" href="directed_graph_protocol_0.html#directed-graph-protocol-0-transitive-closure-2"><span class="std std-ref">transitive_closure/2</span></a>  <a class="reference internal" href="unweighted_directed_graph_1.html#unweighted-directed-graph-1-transitive-reduction-2"><span class="std std-ref">transitive_reduction/2</span></a>  <a class="reference internal" href="directed_graph_protocol_0.html#directed-graph-protocol-0-transpose-2"><span class="std std-ref">transpose/2</span></a>  <a class="reference internal" href="unweighted_directed_graph_1.html#unweighted-directed-graph-1-union-3"><span class="std std-ref">union/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-vertices-2"><span class="std std-ref">vertices/2</span></a></div>
+<div class="line"> <a class="reference internal" href="weighted_graph_protocol_0.html#weighted-graph-protocol-0-add-edge-5"><span class="std std-ref">add_edge/5</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-add-edges-3"><span class="std std-ref">add_edges/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-add-vertex-3"><span class="std std-ref">add_vertex/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-add-vertices-3"><span class="std std-ref">add_vertices/3</span></a>  <a class="reference internal" href="weighted_graph_protocol_0.html#weighted-graph-protocol-0-delete-edge-5"><span class="std std-ref">delete_edge/5</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-delete-edges-3"><span class="std std-ref">delete_edges/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-delete-vertex-3"><span class="std std-ref">delete_vertex/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-delete-vertices-3"><span class="std std-ref">delete_vertices/3</span></a>  <a class="reference internal" href="weighted_graph_protocol_0.html#weighted-graph-protocol-0-edge-4"><span class="std std-ref">edge/4</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-edges-2"><span class="std std-ref">edges/2</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-empty-1"><span class="std std-ref">empty/1</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-has-path-3"><span class="std std-ref">has_path/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-is-bipartite-1"><span class="std std-ref">is_bipartite/1</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-is-complete-1"><span class="std std-ref">is_complete/1</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-is-sparse-1"><span class="std std-ref">is_sparse/1</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-max-path-5"><span class="std std-ref">max_path/5</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-min-path-5"><span class="std std-ref">min_path/5</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-neighbors-3"><span class="std std-ref">neighbors/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-new-1"><span class="std std-ref">new/1</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-new-2"><span class="std std-ref">new/2</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-new-3"><span class="std std-ref">new/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-number-of-edges-2"><span class="std std-ref">number_of_edges/2</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-number-of-vertices-2"><span class="std std-ref">number_of_vertices/2</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-path-3"><span class="std std-ref">path/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-reachable-3"><span class="std std-ref">reachable/3</span></a>  <a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-vertices-2"><span class="std std-ref">vertices/2</span></a>  <a class="reference internal" href="weighted_graph_protocol_0.html#weighted-graph-protocol-0-wneighbors-3"><span class="std std-ref">wneighbors/3</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id4">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#winsert-neighbor-4" id="id3"><code class="docutils literal notranslate"><span class="pre">winsert_neighbor/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#wremove-neighbor-4" id="id4"><code class="docutils literal notranslate"><span class="pre">wremove_neighbor/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#wfind-3" id="id5"><code class="docutils literal notranslate"><span class="pre">wfind/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#wremove-vertex-from-all-3" id="id6"><code class="docutils literal notranslate"><span class="pre">wremove_vertex_from_all/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#relax-neighbors-7" id="id7"><code class="docutils literal notranslate"><span class="pre">relax_neighbors/7</span></code></a></p></li>
+<li><p><a class="reference internal" href="#pq-insert-3" id="id8"><code class="docutils literal notranslate"><span class="pre">pq_insert/3</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#private-predicates" id="id9">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id10">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -295,8 +313,133 @@
 </section>
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<section id="winsert-neighbor-4">
+<span id="weighted-graph-common-1-winsert-neighbor-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">winsert_neighbor/4</span></code></a><a class="headerlink" href="#winsert-neighbor-4" title="Link to this heading"></a></h3>
+<p>Inserts a weighted neighbor into a sorted weighted neighbor list, replacing any existing entry for the same vertex.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">winsert_neighbor(WNeighbors,Vertex,Weight,NewWNeighbors)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">winsert_neighbor(+list,+vertex,+number,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
 </section>
+<section id="wremove-neighbor-4">
+<span id="weighted-graph-common-1-wremove-neighbor-4"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">wremove_neighbor/4</span></code></a><a class="headerlink" href="#wremove-neighbor-4" title="Link to this heading"></a></h3>
+<p>Removes a vertex from a sorted weighted neighbor list, unifying the weight. Fails if the vertex is not found.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">wremove_neighbor(WNeighbors,Vertex,Weight,NewWNeighbors)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">wremove_neighbor(+list,+vertex,-number,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="wfind-3">
+<span id="weighted-graph-common-1-wfind-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">wfind/3</span></code></a><a class="headerlink" href="#wfind-3" title="Link to this heading"></a></h3>
+<p>Finds the weight associated with a vertex in a weighted neighbor list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">wfind(WNeighbors,Vertex,Weight)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">wfind(+list,+vertex,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="wremove-vertex-from-all-3">
+<span id="weighted-graph-common-1-wremove-vertex-from-all-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">wremove_vertex_from_all/3</span></code></a><a class="headerlink" href="#wremove-vertex-from-all-3" title="Link to this heading"></a></h3>
+<p>Removes a vertex from all weighted neighbor lists in a list of vertex-neighbors pairs.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">wremove_vertex_from_all(Pairs,Vertex,NewPairs)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">wremove_vertex_from_all(+list(pair),+vertex,-list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="relax-neighbors-7">
+<span id="weighted-graph-common-1-relax-neighbors-7"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">relax_neighbors/7</span></code></a><a class="headerlink" href="#relax-neighbors-7" title="Link to this heading"></a></h3>
+<p>Relaxes neighbors during Dijkstra shortest path computation, updating distances and priority queue.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">relax_neighbors(WNeighbors,Vertex,Distance,Queue,Dist,NewQueue,NewDist)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">relax_neighbors(+list,+vertex,+number,+list,+dictionary,-list,-dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="pq-insert-3">
+<span id="weighted-graph-common-1-pq-insert-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">pq_insert/3</span></code></a><a class="headerlink" href="#pq-insert-3" title="Link to this heading"></a></h3>
+<p>Inserts an element into a sorted priority queue (list of Distance-Vertex pairs).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">pq_insert(Queue,Item,NewQueue)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">pq_insert(+list,+pair,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
@@ -311,8 +454,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="undirected_graph_common_0.html" class="btn btn-neutral float-left" title="undirected_graph_common" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="unweighted_directed_graph_1.html" class="btn btn-neutral float-right" title="unweighted_directed_graph(Dictionary)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="weighted_directed_graph_1.html" class="btn btn-neutral float-left" title="weighted_directed_graph(Dictionary)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="weighted_graph_protocol_0.html" class="btn btn-neutral float-right" title="weighted_graph_protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

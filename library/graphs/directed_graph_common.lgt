@@ -20,7 +20,8 @@
 
 
 :- category(directed_graph_common,
-	implements(directed_graph_protocol)).
+	implements(directed_graph_protocol),
+	extends(graph_common)).
 
 	:- info([
 		version is 1:0:0,

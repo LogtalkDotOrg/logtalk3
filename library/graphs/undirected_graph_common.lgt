@@ -19,7 +19,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- category(undirected_graph_common).
+:- category(undirected_graph_common,
+	extends(graph_common)).
 
 	:- info([
 		version is 1:0:0,

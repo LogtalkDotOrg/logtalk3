@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-02-20,
 		comment is 'Unit tests for the "unweighted_undirected_graph" library predicates.',
 		parnames is ['DictionaryObject']
 	]).
@@ -53,11 +53,8 @@
 		graph_coloring/3
 	]).
 
-	:- uses(list, [
-		length/2
-	]).
-
 	cover(unweighted_undirected_graph(_DictionaryObject_)).
+	cover(unweighted_graph_common(_DictionaryObject_)).
 	cover(undirected_graph_common).
 
 	% new/1 tests
@@ -320,11 +317,11 @@
 
 	% connected_components/2 tests
 
-	test(uug_connected_components_2_01, true(length(Components, 1))) :-
+	test(uug_connected_components_2_01, subsumes([_], Components)) :-
 		new([1-2,2-3], Graph),
 		connected_components(Graph, Components).
 
-	test(uug_connected_components_2_02, true(length(Components, 2))) :-
+	test(uug_connected_components_2_02, subsumes([_, _], Components)) :-
 		new([1-2,3-4], Graph),
 		connected_components(Graph, Components).
 

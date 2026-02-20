@@ -20,14 +20,13 @@
 
 
 :- object(weighted_undirected_graph(_Dictionary_),
-	implements(weighted_graph_protocol),
-	imports((graph_common, undirected_graph_common))).
+	imports((weighted_graph_common(_Dictionary_), undirected_graph_common))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-02-20,
-		comment is 'Weighted undirected graph predicates using a dictionary representation. Each edge is stored in both directions. Edge weights use a pair representation (Vertex-Weight in neighbor lists, (V1-V2)-Weight for edge lists). The parametric object parameter is the dictionary to use for the graph representation.',
+		comment is 'Weighted undirected graph predicates using a dictionary representation. Each edge is stored in both directions. Edge weights use a pair representation (``Vertex-Weight`` in neighbor lists, ``(Vertex1-Vertex2)-Weight`` for edge lists). The parametric object parameter is the dictionary to use for the graph representation.',
 		parnames is ['Dictionary']
 	]).
 
@@ -72,110 +71,50 @@
 
 	:- uses(_Dictionary_, [
 		new/1 as dict_new/1,
-		empty/1 as dict_empty/1,
 		insert/4 as dict_insert/4,
 		lookup/3 as dict_lookup/3,
-		delete/4 as dict_delete/4,
 		keys/2 as dict_keys/2,
-		as_list/2 as dict_as_list/2,
-		as_dictionary/2 as dict_as_dictionary/2
+		as_list/2 as dict_as_list/2
 	]).
 
 	:- uses(list, [
-		length/2, member/2, memberchk/2, msort/2, reverse/2, subtract/3
+		length/2, member/2, msort/2, subtract/3
 	]).
 
-	:- uses(pairs, [
-		keys/2 as strip_weights/2
-	]).
-
-	% === Graph creation (new/1 only; new/2, new/3 from graph_common) ===
-
-	new(Graph) :-
-		dict_new(Graph).
-
-	% === Basic queries ===
-
-	empty(Graph) :-
-		dict_empty(Graph).
-
-	vertices(Graph, Vertices) :-
-		dict_keys(Graph, Vertices).
+	% === Edges (undirected: deduplicate) ===
 
 	edges(Graph, Edges) :-
 		dict_as_list(Graph, Pairs),
 		^^wpairs_to_edges(Pairs, AllEdges),
 		canonical_wedges(AllEdges, Edges).
 
-	% === Vertex operations (add_vertices/3, delete_vertices/3 from graph_common) ===
-
-	add_vertex(Graph, Vertex, NewGraph) :-
-		(	dict_lookup(Vertex, _, Graph) ->
-			NewGraph = Graph
-		;	dict_insert(Graph, Vertex, [], NewGraph)
-		).
-
-	delete_vertex(Graph, Vertex, NewGraph) :-
-		(	dict_delete(Graph, Vertex, _, NewGraph0) ->
-			dict_as_list(NewGraph0, Pairs),
-			wremove_vertex_from_all(Pairs, Vertex, NewPairs),
-			dict_as_dictionary(NewPairs, NewGraph)
-		;	NewGraph = Graph
-		).
-
 	% === Edge operations (undirected: edges stored in both directions) ===
-
-	edge(Vertex1, Vertex2, Weight, Graph) :-
-		dict_lookup(Vertex1, WNeighbors, Graph),
-		wfind(WNeighbors, Vertex2, Weight).
 
 	add_edge(Graph, Vertex1, Vertex2, Weight, NewGraph) :-
 		% Ensure Vertex1 is in graph
 		(	dict_lookup(Vertex1, WNs1, Graph) ->
-			winsert_neighbor(WNs1, Vertex2, Weight, NewWNs1)
+			^^winsert_neighbor(WNs1, Vertex2, Weight, NewWNs1)
 		;	NewWNs1 = [Vertex2-Weight]
 		),
 		dict_insert(Graph, Vertex1, NewWNs1, NewGraph0),
 		% Also add reverse direction
 		(	dict_lookup(Vertex2, WNs2, NewGraph0) ->
-			winsert_neighbor(WNs2, Vertex1, Weight, NewWNs2)
+			^^winsert_neighbor(WNs2, Vertex1, Weight, NewWNs2)
 		;	NewWNs2 = [Vertex1-Weight]
 		),
 		dict_insert(NewGraph0, Vertex2, NewWNs2, NewGraph).
 
-	add_edges(Graph, [], Graph).
-	add_edges(Graph, [(Vertex1-Vertex2)-Weight| Edges], NewGraph) :-
-		add_edge(Graph, Vertex1, Vertex2, Weight, NewGraph0),
-		add_edges(NewGraph0, Edges, NewGraph).
-
 	delete_edge(Graph, Vertex1, Vertex2, Weight, NewGraph) :-
 		(	dict_lookup(Vertex1, WNs1, Graph),
-			wremove_neighbor(WNs1, Vertex2, Weight, NewWNs1) ->
+			^^wremove_neighbor(WNs1, Vertex2, Weight, NewWNs1) ->
 			dict_insert(Graph, Vertex1, NewWNs1, NewGraph0),
 			(	dict_lookup(Vertex2, WNs2, NewGraph0),
-				wremove_neighbor(WNs2, Vertex1, _, NewWNs2) ->
+				^^wremove_neighbor(WNs2, Vertex1, _, NewWNs2) ->
 				dict_insert(NewGraph0, Vertex2, NewWNs2, NewGraph)
 			;	NewGraph = NewGraph0
 			)
 		;	NewGraph = Graph
 		).
-
-	delete_edges(Graph, [], Graph).
-	delete_edges(Graph, [(Vertex1-Vertex2)-Weight| Edges], NewGraph) :-
-		(	delete_edge(Graph, Vertex1, Vertex2, Weight, NewGraph0) ->
-			true
-		;	NewGraph0 = Graph
-		),
-		delete_edges(NewGraph0, Edges, NewGraph).
-
-	% === Neighbor queries ===
-
-	neighbors(Vertex, Graph, Neighbors) :-
-		dict_lookup(Vertex, WNeighbors, Graph),
-		strip_weights(WNeighbors, Neighbors).
-
-	wneighbors(Vertex, Graph, WNeighbors) :-
-		dict_lookup(Vertex, WNeighbors, Graph).
 
 	% === Degree ===
 
@@ -197,30 +136,8 @@
 		dict_keys(Graph, Vertices),
 		connected_components_loop(Vertices, Graph, [], Components).
 
-	% === Min Path (Dijkstra) ===
-
-	min_path(Vertex1, Vertex2, Graph, Path, Cost) :-
-		(	Vertex1 == Vertex2 ->
-			neighbors(Vertex1, Graph, _),
-			Path = [Vertex1], Cost = 0
-		;	dict_new(Dist0),
-			dict_insert(Dist0, Vertex1, 0-none, Dist1),
-			dijkstra([0-Vertex1], Vertex2, Graph, Dist1, FinalDist),
-			dict_lookup(Vertex2, Cost-_, FinalDist),
-			trace_back(Vertex2, Vertex1, FinalDist, [Vertex2], Path)
-		).
-
-	% === Max Path (DFS exploring all simple paths) ===
-
-	max_path(V1, V2, Graph, Path, Cost) :-
-		(	V1 == V2 ->
-			neighbors(V1, Graph, _),
-			Path = [V1], Cost = 0
-		;	max_wpath_dfs(V1, V2, Graph, [V1], 0, none, none, FinalPath, FinalCost),
-			FinalPath \== none,
-			Path = FinalPath,
-			Cost = FinalCost
-		).
+	% === Min Path (Dijkstra) — from weighted_graph_common ===
+	% === Max Path (DFS) — from weighted_graph_common ===
 
 	% === Minimum Spanning Tree (Kruskal) ===
 
@@ -230,7 +147,7 @@
 		dict_keys(Graph, Vertices),
 		init_uf(Vertices, UF0),
 		kruskal(SortedEdges, UF0, [], TotalCost, 0, TreeEdges),
-		new(Tree0),
+		^^new(Tree0),
 		add_vertices_from_list(Vertices, Tree0, Tree1),
 		add_tree_edges(TreeEdges, Tree1, Tree).
 
@@ -242,7 +159,7 @@
 		dict_keys(Graph, Vertices),
 		init_uf(Vertices, UF0),
 		kruskal(SortedEdges, UF0, [], TotalCost, 0, TreeEdges),
-		new(Tree0),
+		^^new(Tree0),
 		add_vertices_from_list(Vertices, Tree0, Tree1),
 		add_tree_edges(TreeEdges, Tree1, Tree).
 
@@ -250,62 +167,13 @@
 	% Auxiliary predicates
 	% ===========================================================
 
-	% --- Weighted neighbor list operations ---
-
-	winsert_neighbor([], Vertex, Weight, [Vertex-Weight]).
-	winsert_neighbor([Vertex0-Weight0| Rest], Vertex, Weight, Result) :-
-		compare(Order, Vertex, Vertex0),
-		(	Order == (<) ->
-			Result = [Vertex-Weight, Vertex0-Weight0| Rest]
-		;	Order == (=) ->
-			Result = [Vertex-Weight| Rest]
-		;	Result = [Vertex0-Weight0| Rest1],
-			winsert_neighbor(Rest, Vertex, Weight, Rest1)
-		).
-
-	wremove_neighbor([Vertex0-Weight0| Rest], Vertex, Weight, Result) :-
-		compare(Order, Vertex0, Vertex),
-		(	Order == (=) ->
-			Weight = Weight0,
-			Result = Rest
-		;	Order == (<) ->
-			Result = [Vertex0-Weight0| Rest1],
-			wremove_neighbor(Rest, Vertex, Weight, Rest1)
-		;	fail
-		).
-
-	wfind([Vertex0-Weight0|_], Vertex, Weight) :-
-		Vertex0 == Vertex,
-		!,
-		Weight = Weight0.
-	wfind([_| Rest], Vertex, Weight) :-
-		wfind(Rest, Vertex, Weight).
-
-	% Remove duplicate undirected edges: keep only V1-(V2-W) where V1 @< V2
+	% Remove duplicate undirected edges: keep only (V1-V2)-W where V1 @< V2
 	canonical_wedges([], []).
 	canonical_wedges([(Vertex1-Vertex2)-Weight| Edges], Result) :-
 		(	Vertex1 @< Vertex2 ->
 			Result = [(Vertex1-Vertex2)-Weight| Rest],
 			canonical_wedges(Edges, Rest)
 		;	canonical_wedges(Edges, Result)
-		).
-
-	% --- Remove vertex from all weighted neighbor lists ---
-
-	wremove_vertex_from_all([], _, []).
-	wremove_vertex_from_all([Vertex0-WNeighbors| Pairs], Vertex, [Vertex0-NewWNeighbors| NewPairs]) :-
-		wsubtract_vertex(WNeighbors, Vertex, NewWNeighbors),
-		wremove_vertex_from_all(Pairs, Vertex, NewPairs).
-
-	wsubtract_vertex([], _, []).
-	wsubtract_vertex([Vertex0-Weight0| Rest], Vertex, Result) :-
-		compare(Order, Vertex0, Vertex),
-		(	Order == (=) ->
-			wsubtract_vertex(Rest, Vertex, Result)
-		;	Order == (<) ->
-			Result = [Vertex0-Weight0| Rest1],
-			wsubtract_vertex(Rest, Vertex, Rest1)
-		;	Result = [Vertex0-Weight0| Rest]
 		).
 
 	% --- Connected components ---
@@ -323,77 +191,6 @@
 		(	member(Vertex, Component) ->
 			true
 		;	vertex_in_component(Vertex, Components)
-		).
-
-	% --- Dijkstra (min path) ---
-
-	dijkstra([], _, _, _, _) :-
-		fail.
-	dijkstra([_D-V|_Queue], Target, _Graph, Dist, Dist) :-
-		V == Target,
-		!.
-	dijkstra([D-V|Queue], Target, Graph, Dist, FinalDist) :-
-		dict_lookup(V, BestD-_, Dist),
-		(	D > BestD ->
-			dijkstra(Queue, Target, Graph, Dist, FinalDist)
-		;	(	dict_lookup(V, WNeighbors, Graph) ->
-				relax_neighbors(WNeighbors, V, D, Queue, Dist, NewQueue, NewDist)
-			;	NewQueue = Queue,
-				NewDist = Dist
-			),
-			dijkstra(NewQueue, Target, Graph, NewDist, FinalDist)
-		).
-
-	relax_neighbors([], _, _, Queue, Dist, Queue, Dist).
-	relax_neighbors([Neighbor-Weight| WNeighbors], V, D, Queue, Dist, FinalQueue, FinalDist) :-
-		NewD is D + Weight,
-		(	dict_lookup(Neighbor, OldD-_, Dist),
-			OldD =< NewD ->
-			relax_neighbors(WNeighbors, V, D, Queue, Dist, FinalQueue, FinalDist)
-		;	dict_insert(Dist, Neighbor, NewD-V, Dist1),
-			pq_insert(Queue, NewD-Neighbor, Queue1),
-			relax_neighbors(WNeighbors, V, D, Queue1, Dist1, FinalQueue, FinalDist)
-		).
-
-	pq_insert([], Item, [Item]).
-	pq_insert([D2-V2|Rest], D1-V1, Result) :-
-		(	D1 =< D2 ->
-			Result = [D1-V1, D2-V2|Rest]
-		;	Result = [D2-V2|Rest1],
-			pq_insert(Rest, D1-V1, Rest1)
-		).
-
-	trace_back(Vertex, Vertex, _, Path, Path) :-
-		!.
-	trace_back(Vertex, Start, Dist, Acc, Path) :-
-		dict_lookup(Vertex, _-Prev, Dist),
-		trace_back(Prev, Start, Dist, [Prev|Acc], Path).
-
-	% --- DFS max_path (weighted) ---
-
-	max_wpath_dfs(Vertex, Target, _Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost) :-
-		Vertex == Target,
-		!,
-		(	BestCost0 == none ->
-			BestCost = CurrCost,
-			reverse(Visited, BestPath)
-		;	CurrCost > BestCost0 ->
-			BestCost = CurrCost,
-			reverse(Visited, BestPath)
-		;	BestCost = BestCost0,
-			BestPath = BestPath0
-		).
-	max_wpath_dfs(Vertex, Target, Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost) :-
-		dict_lookup(Vertex, WNeighbors, Graph),
-		max_wpath_try(WNeighbors, Target, Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost).
-
-	max_wpath_try([], _, _, _, _, BestPath, BestCost, BestPath, BestCost).
-	max_wpath_try([Neighbor-Weight| WNeighbors], Target, Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost) :-
-		(	memberchk(Neighbor, Visited) ->
-			max_wpath_try(WNeighbors, Target, Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost)
-		;	NewCost is CurrCost + Weight,
-			max_wpath_dfs(Neighbor, Target, Graph, [Neighbor| Visited], NewCost, BestPath0, BestCost0, BestPath1, BestCost1),
-			max_wpath_try(WNeighbors, Target, Graph, Visited, CurrCost, BestPath1, BestCost1, BestPath, BestCost)
 		).
 
 	% --- Kruskal's algorithm ---
@@ -448,13 +245,13 @@
 		dict_insert(UF0, Vertex, Vertex-0, UF1),
 		uf_init_vertices(Vertices, UF1, UF).
 
-	find(V, UF0, Root, UF) :-
-		dict_lookup(V, Parent-Rank, UF0),
-		(	Parent == V ->
-			Root = V,
+	find(Vertex, UF0, Root, UF) :-
+		dict_lookup(Vertex, Parent-Rank, UF0),
+		(	Parent == Vertex ->
+			Root = Vertex,
 			UF = UF0
 		;	find(Parent, UF0, Root, UF1),
-			dict_insert(UF1, V, Root-Rank, UF)
+			dict_insert(UF1, Vertex, Root-Rank, UF)
 		).
 
 	union(Root1, Root2, UF0, UF) :-
@@ -473,7 +270,7 @@
 
 	add_vertices_from_list([], Tree, Tree).
 	add_vertices_from_list([Vertex| Vertices], Tree0, Tree) :-
-		add_vertex(Tree0, Vertex, Tree1),
+		^^add_vertex(Tree0, Vertex, Tree1),
 		add_vertices_from_list(Vertices, Tree1, Tree).
 
 	add_tree_edges([], Tree, Tree).

@@ -54,11 +54,8 @@
 		graph_coloring/3
 	]).
 
-	:- uses(list, [
-		length/2
-	]).
-
 	cover(weighted_undirected_graph(_DictionaryObject_)).
+	cover(weighted_graph_common(_DictionaryObject_)).
 	cover(undirected_graph_common).
 
 	% new/1 tests
@@ -333,11 +330,11 @@
 
 	% connected_components/2 tests
 
-	test(wug_connected_components_2_01, true(length(Components, 1))) :-
+	test(wug_connected_components_2_01, subsumes([_], Components)) :-
 		new([(1-2)-5, (2-3)-10], Graph),
 		connected_components(Graph, Components).
 
-	test(wug_connected_components_2_02, true(length(Components, 2))) :-
+	test(wug_connected_components_2_02, subsumes([_, _], Components)) :-
 		new([(1-2)-5, (3-4)-10], Graph),
 		connected_components(Graph, Components).
 
