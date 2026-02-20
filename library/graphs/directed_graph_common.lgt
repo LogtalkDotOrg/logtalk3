@@ -36,7 +36,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, memberchk/2
+		length/2, member/2
 	]).
 
 	% === Degree queries ===
@@ -47,8 +47,8 @@
 		count_incoming(Vertices, Vertex, Graph, 0, Degree).
 
 	out_degree(Vertex, Graph, Degree) :-
-		::neighbors(Vertex, Graph, Ns),
-		length(Ns, Degree).
+		::neighbors(Vertex, Graph, Neighbors),
+		length(Neighbors, Degree).
 
 	% === DAG test ===
 
@@ -70,71 +70,71 @@
 	% Auxiliary predicates
 	% ===========================================================
 
-	% --- In-degree helpers ---
+	% --- In-degree predicates ---
 
-	count_incoming([], _, _, D, D).
-	count_incoming([V|Vs], Target, Graph, Acc, D) :-
-		(	::neighbors(V, Graph, Ns),
-			memberchk(Target, Ns) ->
-			Acc1 is Acc + 1
-		;	Acc1 = Acc
+	count_incoming([], _, _, Degree, Degree).
+	count_incoming([Vertex| Vertices], Target, Graph, Degree0, Degree) :-
+		(	::neighbors(Vertex, Graph, Neighbors),
+			member(Target, Neighbors) ->
+			Degree1 is Degree0 + 1
+		;	Degree1 = Degree0
 		),
-		count_incoming(Vs, Target, Graph, Acc1, D).
+		count_incoming(Vertices, Target, Graph, Degree1, Degree).
 
 	% --- Tarjan's SCC ---
 
 	tarjan_all([], _, Info, Index, Stack, SCCs, Info, Index, Stack, SCCs).
-	tarjan_all([V|Vs], Graph, Info0, Index0, Stack0, SCCs0, Info, Index, Stack, SCCs) :-
-		(	scc_lookup(V, _, Info0) ->
-			tarjan_all(Vs, Graph, Info0, Index0, Stack0, SCCs0, Info, Index, Stack, SCCs)
-		;	strongconnect(V, Graph, Info0, Index0, Stack0, SCCs0, Info1, Index1, Stack1, SCCs1),
-			tarjan_all(Vs, Graph, Info1, Index1, Stack1, SCCs1, Info, Index, Stack, SCCs)
+	tarjan_all([Vertex| Vertices], Graph, Info0, Index0, Stack0, SCCs0, Info, Index, Stack, SCCs) :-
+		(	scc_lookup(Vertex, _, Info0) ->
+			tarjan_all(Vertices, Graph, Info0, Index0, Stack0, SCCs0, Info, Index, Stack, SCCs)
+		;	strongconnect(Vertex, Graph, Info0, Index0, Stack0, SCCs0, Info1, Index1, Stack1, SCCs1),
+			tarjan_all(Vertices, Graph, Info1, Index1, Stack1, SCCs1, Info, Index, Stack, SCCs)
 		).
 
-	strongconnect(V, Graph, Info0, Index0, Stack0, SCCs0, Info, Index, Stack, SCCs) :-
-		scc_insert(Info0, V, scc(Index0, Index0, true), Info1),
+	strongconnect(Vertex, Graph, Info0, Index0, Stack0, SCCs0, Info, Index, Stack, SCCs) :-
+		scc_insert(Info0, Vertex, scc(Index0, Index0, true), Info1),
 		Index1 is Index0 + 1,
-		Stack1 = [V|Stack0],
-		::neighbors(V, Graph, Neighbors),
-		process_scc_neighbors(Neighbors, V, Graph, Info1, Index1, Stack1, SCCs0, Info2, Index2, Stack2, SCCs1),
-		scc_lookup(V, scc(VIndex, VLowlink, _), Info2),
+		Stack1 = [Vertex| Stack0],
+		::neighbors(Vertex, Graph, Neighbors),
+		process_scc_neighbors(Neighbors, Vertex, Graph, Info1, Index1, Stack1, SCCs0, Info2, Index2, Stack2, SCCs1),
+		scc_lookup(Vertex, scc(VIndex, VLowlink, _), Info2),
 		(	VIndex =:= VLowlink ->
-			pop_scc(Stack2, V, [], SCC0, Stack3),
+			pop_scc(Stack2, Vertex, [], SCC0, Stack3),
 			sort(SCC0, SCC),
 			mark_off_stack(SCC, Info2, Info3),
-			Info = Info3, Index = Index2, Stack = Stack3, SCCs = [SCC|SCCs1]
+			Info = Info3, Index = Index2, Stack = Stack3, SCCs = [SCC| SCCs1]
 		;	Info = Info2, Index = Index2, Stack = Stack2, SCCs = SCCs1
 		).
 
 	process_scc_neighbors([], _, _, Info, Index, Stack, SCCs, Info, Index, Stack, SCCs).
-	process_scc_neighbors([W|Ws], V, Graph, Info0, Index0, Stack0, SCCs0, Info, Index, Stack, SCCs) :-
-		(	scc_lookup(W, scc(WIndex, _, WOnStack), Info0) ->
+	process_scc_neighbors([Neighbor| Neighbors], Vertex, Graph, Info0, Index0, Stack0, SCCs0, Info, Index, Stack, SCCs) :-
+		(	scc_lookup(Neighbor, scc(WIndex, _, WOnStack), Info0) ->
 			(	WOnStack == true ->
-				scc_lookup(V, scc(VIndex, VLowlink, VOnStack), Info0),
+				scc_lookup(Vertex, scc(VIndex, VLowlink, VOnStack), Info0),
 				NewVLowlink is min(VLowlink, WIndex),
-				scc_insert(Info0, V, scc(VIndex, NewVLowlink, VOnStack), Info1),
-				process_scc_neighbors(Ws, V, Graph, Info1, Index0, Stack0, SCCs0, Info, Index, Stack, SCCs)
-			;	process_scc_neighbors(Ws, V, Graph, Info0, Index0, Stack0, SCCs0, Info, Index, Stack, SCCs)
+				scc_insert(Info0, Vertex, scc(VIndex, NewVLowlink, VOnStack), Info1),
+				process_scc_neighbors(Neighbors, Vertex, Graph, Info1, Index0, Stack0, SCCs0, Info, Index, Stack, SCCs)
+			;	process_scc_neighbors(Neighbors, Vertex, Graph, Info0, Index0, Stack0, SCCs0, Info, Index, Stack, SCCs)
 			)
-		;	strongconnect(W, Graph, Info0, Index0, Stack0, SCCs0, Info1, Index1, Stack1, SCCs1),
-			scc_lookup(V, scc(VIndex, VLowlink, VOnStack), Info1),
-			scc_lookup(W, scc(_, WLowlink, _), Info1),
+		;	strongconnect(Neighbor, Graph, Info0, Index0, Stack0, SCCs0, Info1, Index1, Stack1, SCCs1),
+			scc_lookup(Vertex, scc(VIndex, VLowlink, VOnStack), Info1),
+			scc_lookup(Neighbor, scc(_, WLowlink, _), Info1),
 			NewVLowlink is min(VLowlink, WLowlink),
-			scc_insert(Info1, V, scc(VIndex, NewVLowlink, VOnStack), Info2),
-			process_scc_neighbors(Ws, V, Graph, Info2, Index1, Stack1, SCCs1, Info, Index, Stack, SCCs)
+			scc_insert(Info1, Vertex, scc(VIndex, NewVLowlink, VOnStack), Info2),
+			process_scc_neighbors(Neighbors, Vertex, Graph, Info2, Index1, Stack1, SCCs1, Info, Index, Stack, SCCs)
 		).
 
-	pop_scc([W|Stack], Target, Acc, SCC, RestStack) :-
+	pop_scc([W| Stack], Target, Acc, SCC, RestStack) :-
 		(	W == Target ->
-			SCC = [W|Acc],
+			SCC = [W| Acc],
 			RestStack = Stack
-		;	pop_scc(Stack, Target, [W|Acc], SCC, RestStack)
+		;	pop_scc(Stack, Target, [W| Acc], SCC, RestStack)
 		).
 
 	mark_off_stack([], Info, Info).
-	mark_off_stack([V|Vs], Info0, Info) :-
-		scc_lookup(V, scc(VIndex, VLowlink, _), Info0),
-		scc_insert(Info0, V, scc(VIndex, VLowlink, false), Info1),
-		mark_off_stack(Vs, Info1, Info).
+	mark_off_stack([Vertex| Vertices], Info0, Info) :-
+		scc_lookup(Vertex, scc(VIndex, VLowlink, _), Info0),
+		scc_insert(Info0, Vertex, scc(VIndex, VLowlink, false), Info1),
+		mark_off_stack(Vertices, Info1, Info).
 
 :- end_category.

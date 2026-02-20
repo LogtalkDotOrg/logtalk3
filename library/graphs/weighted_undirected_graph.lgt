@@ -112,8 +112,8 @@
 		).
 
 	delete_vertex(Graph, Vertex, NewGraph) :-
-		(	dict_delete(Graph, Vertex, _, G1) ->
-			dict_as_list(G1, Pairs),
+		(	dict_delete(Graph, Vertex, _, NewGraph0) ->
+			dict_as_list(NewGraph0, Pairs),
 			wremove_vertex_from_all(Pairs, Vertex, NewPairs),
 			dict_as_dictionary(NewPairs, NewGraph)
 		;	NewGraph = Graph
@@ -131,38 +131,38 @@
 			winsert_neighbor(WNs1, Vertex2, Weight, NewWNs1)
 		;	NewWNs1 = [Vertex2-Weight]
 		),
-		dict_insert(Graph, Vertex1, NewWNs1, G1),
+		dict_insert(Graph, Vertex1, NewWNs1, NewGraph0),
 		% Also add reverse direction
-		(	dict_lookup(Vertex2, WNs2, G1) ->
+		(	dict_lookup(Vertex2, WNs2, NewGraph0) ->
 			winsert_neighbor(WNs2, Vertex1, Weight, NewWNs2)
 		;	NewWNs2 = [Vertex1-Weight]
 		),
-		dict_insert(G1, Vertex2, NewWNs2, NewGraph).
+		dict_insert(NewGraph0, Vertex2, NewWNs2, NewGraph).
 
 	add_edges(Graph, [], Graph).
 	add_edges(Graph, [(Vertex1-Vertex2)-Weight| Edges], NewGraph) :-
-		add_edge(Graph, Vertex1, Vertex2, Weight, G1),
-		add_edges(G1, Edges, NewGraph).
+		add_edge(Graph, Vertex1, Vertex2, Weight, NewGraph0),
+		add_edges(NewGraph0, Edges, NewGraph).
 
 	delete_edge(Graph, Vertex1, Vertex2, Weight, NewGraph) :-
 		(	dict_lookup(Vertex1, WNs1, Graph),
 			wremove_neighbor(WNs1, Vertex2, Weight, NewWNs1) ->
-			dict_insert(Graph, Vertex1, NewWNs1, G1),
-			(	dict_lookup(Vertex2, WNs2, G1),
+			dict_insert(Graph, Vertex1, NewWNs1, NewGraph0),
+			(	dict_lookup(Vertex2, WNs2, NewGraph0),
 				wremove_neighbor(WNs2, Vertex1, _, NewWNs2) ->
-				dict_insert(G1, Vertex2, NewWNs2, NewGraph)
-			;	NewGraph = G1
+				dict_insert(NewGraph0, Vertex2, NewWNs2, NewGraph)
+			;	NewGraph = NewGraph0
 			)
 		;	NewGraph = Graph
 		).
 
 	delete_edges(Graph, [], Graph).
 	delete_edges(Graph, [(Vertex1-Vertex2)-Weight| Edges], NewGraph) :-
-		(	delete_edge(Graph, Vertex1, Vertex2, Weight, G1) ->
+		(	delete_edge(Graph, Vertex1, Vertex2, Weight, NewGraph0) ->
 			true
-		;	G1 = Graph
+		;	NewGraph0 = Graph
 		),
-		delete_edges(G1, Edges, NewGraph).
+		delete_edges(NewGraph0, Edges, NewGraph).
 
 	% === Neighbor queries ===
 
@@ -293,8 +293,8 @@
 	% --- Remove vertex from all weighted neighbor lists ---
 
 	wremove_vertex_from_all([], _, []).
-	wremove_vertex_from_all([V-WNs|Pairs], Vertex, [V-NewWNs|NewPairs]) :-
-		wsubtract_vertex(WNs, Vertex, NewWNs),
+	wremove_vertex_from_all([V-WNeighbors| Pairs], Vertex, [V-NewWNeighbors| NewPairs]) :-
+		wsubtract_vertex(WNeighbors, Vertex, NewWNeighbors),
 		wremove_vertex_from_all(Pairs, Vertex, NewPairs).
 
 	wsubtract_vertex([], _, []).
@@ -363,15 +363,16 @@
 			pq_insert(Rest, D1-V1, Rest1)
 		).
 
-	trace_back(V, V, _, Path, Path) :- !.
-	trace_back(V, Start, Dist, Acc, Path) :-
-		dict_lookup(V, _-Prev, Dist),
+	trace_back(Vertex, Vertex, _, Path, Path) :-
+		!.
+	trace_back(Vertex, Start, Dist, Acc, Path) :-
+		dict_lookup(Vertex, _-Prev, Dist),
 		trace_back(Prev, Start, Dist, [Prev|Acc], Path).
 
 	% --- DFS max_path (weighted) ---
 
-	max_wpath_dfs(V, Target, _Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost) :-
-		V == Target,
+	max_wpath_dfs(Vertex, Target, _Graph, Visited, CurrCost, BestPath0, BestCost0, BestPath, BestCost) :-
+		Vertex == Target,
 		!,
 		(	BestCost0 == none ->
 			BestCost = CurrCost,
@@ -472,8 +473,8 @@
 
 	add_vertices_from_list([], Tree, Tree).
 	add_vertices_from_list([Vertex| Vertices], Tree0, Tree) :-
-		add_vertex(Tree0, Vertex, T1),
-		add_vertices_from_list(Vertices, T1, Tree).
+		add_vertex(Tree0, Vertex, Tree1),
+		add_vertices_from_list(Vertices, Tree1, Tree).
 
 	add_tree_edges([], Tree, Tree).
 	add_tree_edges([(Vertex1-Vertex2)-Weight| Edges], Tree0, Tree) :-

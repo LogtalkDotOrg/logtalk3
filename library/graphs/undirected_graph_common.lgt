@@ -64,16 +64,16 @@
 
 	% --- Graph coloring helpers ---
 
-	color_vertices([], _, Coloring, Coloring, Max, Max).
-	color_vertices([V| Vs], Graph, Acc, Coloring, MaxSoFar, NumberOfColors) :-
-		::neighbors(V, Graph, Neighbors),
+	color_vertices([], _, Coloring, Coloring, NumberOfColors, NumberOfColors).
+	color_vertices([Vertex| Vertices], Graph, Acc, Coloring, NumberOfColors0, NumberOfColors) :-
+		::neighbors(Vertex, Graph, Neighbors),
 		neighbor_colors(Neighbors, Acc, UsedColors),
 		smallest_color(1, UsedColors, Color),
-		(	Color > MaxSoFar ->
-			NewMax = Color
-		;	NewMax = MaxSoFar
+		(	Color > NumberOfColors0 ->
+			NumberOfColors1 = Color
+		;	NumberOfColors1 = NumberOfColors0
 		),
-		color_vertices(Vs, Graph, [V-Color| Acc], Coloring, NewMax, NumberOfColors).
+		color_vertices(Vertices, Graph, [Vertex-Color| Acc], Coloring, NumberOfColors1, NumberOfColors).
 
 	neighbor_colors([], _, []).
 	neighbor_colors([Neighbor| Neighbors], Coloring, Colors) :-

@@ -86,6 +86,10 @@
 		member/2 as list_member/2
 	]).
 
+	:- uses(pairs, [
+		keys/2
+	]).
+
 	% Sorted set operations
 
 	:- uses(set, [
@@ -130,8 +134,8 @@
 		).
 
 	delete_vertex(Graph, Vertex, NewGraph) :-
-		(	dict_delete(Graph, Vertex, _, G1) ->
-			dict_as_list(G1, Pairs),
+		(	dict_delete(Graph, Vertex, _, NewGraph0) ->
+			dict_as_list(NewGraph0, Pairs),
 			remove_vertex_from_all(Pairs, Vertex, NewPairs),
 			dict_as_dictionary(NewPairs, NewGraph)
 		;	NewGraph = Graph
@@ -144,20 +148,20 @@
 		set_memberchk(Vertex2, Neighbors).
 
 	add_edge(Graph, Vertex1, Vertex2, NewGraph) :-
-		(	dict_lookup(Vertex1, Ns, Graph) ->
-			set_insert(Ns, Vertex2, NewNs)
-		;	NewNs = [Vertex2]
+		(	dict_lookup(Vertex1, Neighbors, Graph) ->
+			set_insert(Neighbors, Vertex2, NewNeighbors)
+		;	NewNeighbors = [Vertex2]
 		),
-		dict_insert(Graph, Vertex1, NewNs, G1),
-		(	dict_lookup(Vertex2, _, G1) ->
-			NewGraph = G1
-		;	dict_insert(G1, Vertex2, [], NewGraph)
+		dict_insert(Graph, Vertex1, NewNeighbors, NewGraph0),
+		(	dict_lookup(Vertex2, _, NewGraph0) ->
+			NewGraph = NewGraph0
+		;	dict_insert(NewGraph0, Vertex2, [], NewGraph)
 		).
 
-	add_edges(Graph, [], Graph).
+	add_edges(NewGraph, [], NewGraph).
 	add_edges(Graph, [Vertex1-Vertex2|Edges], NewGraph) :-
-		add_edge(Graph, Vertex1, Vertex2, G1),
-		add_edges(G1, Edges, NewGraph).
+		add_edge(Graph, Vertex1, Vertex2, NewGraph0),
+		add_edges(NewGraph0, Edges, NewGraph).
 
 	delete_edge(Graph, Vertex1, Vertex2, NewGraph) :-
 		(	dict_lookup(Vertex1, Ns, Graph) ->
@@ -166,10 +170,10 @@
 		;	NewGraph = Graph
 		).
 
-	delete_edges(Graph, [], Graph).
+	delete_edges(NewGraph, [], NewGraph).
 	delete_edges(Graph, [Vertex1-Vertex2| Edges], NewGraph) :-
-		delete_edge(Graph, Vertex1, Vertex2, G1),
-		delete_edges(G1, Edges, NewGraph).
+		delete_edge(Graph, Vertex1, Vertex2, NewGraph0),
+		delete_edges(NewGraph0, Edges, NewGraph).
 
 	% === Neighbor queries ===
 
@@ -188,9 +192,9 @@
 
 	transpose(Graph, NewGraph) :-
 		dict_as_list(Graph, Pairs),
-		dict_new(G0),
-		add_empty_vertices_from_pairs(Pairs, G0, G1),
-		add_transposed_edges(Pairs, G1, NewGraph).
+		dict_new(NewGraph0),
+		add_empty_vertices_from_pairs(Pairs, NewGraph0, NewGraph1),
+		add_transposed_edges(Pairs, NewGraph1, NewGraph).
 
 	% === Transitive Closure (Warshall) ===
 
@@ -229,7 +233,7 @@
 
 	topological_sort(Graph, Sorted0, Sorted) :-
 		dict_as_list(Graph, Pairs),
-		extract_keys(Pairs, Vertices),
+		keys(Pairs, Vertices),
 		zeros(Vertices, Counts0),
 		count_edges(Pairs, Vertices, Counts0, Counts1),
 		select_zeros(Counts1, Vertices, Zeros),
@@ -285,32 +289,32 @@
 	% --- Remove vertex from all neighbor lists ---
 
 	remove_vertex_from_all([], _, []).
-	remove_vertex_from_all([V-Ns| Pairs], Vertex, [V-NewNs| NewPairs]) :-
-		set_subtract(Ns, [Vertex], NewNs),
+	remove_vertex_from_all([Vertex0-Neighbors| Pairs], Vertex, [Vertex0-NewNeighbors| NewPairs]) :-
+		set_subtract(Neighbors, [Vertex], NewNeighbors),
 		remove_vertex_from_all(Pairs, Vertex, NewPairs).
 
 	% --- Complement ---
 
 	complement_pairs([], _, []).
-	complement_pairs([V-Ns| Pairs], AllVertices, [V-CompNs| NewPairs]) :-
-		set_insert(Ns, V, NsWithSelf),
-		set_subtract(AllVertices, NsWithSelf, CompNs),
+	complement_pairs([Vertex-Neighbors| Pairs], AllVertices, [Vertex-CompNs| NewPairs]) :-
+		set_insert(Neighbors, Vertex, NeighborsWithSelf),
+		set_subtract(AllVertices, NeighborsWithSelf, CompNs),
 		complement_pairs(Pairs, AllVertices, NewPairs).
 
 	% --- Transpose ---
 
 	add_empty_vertices_from_pairs([], Graph, Graph).
-	add_empty_vertices_from_pairs([V-_|Pairs], Graph, NewGraph) :-
-		(	dict_lookup(V, _, Graph) ->
+	add_empty_vertices_from_pairs([Vertex-_| Pairs], Graph, NewGraph) :-
+		(	dict_lookup(Vertex, _, Graph) ->
 			add_empty_vertices_from_pairs(Pairs, Graph, NewGraph)
-		;	dict_insert(Graph, V, [], G1),
-			add_empty_vertices_from_pairs(Pairs, G1, NewGraph)
+		;	dict_insert(Graph, Vertex, [], NewGraph0),
+			add_empty_vertices_from_pairs(Pairs, NewGraph0, NewGraph)
 		).
 
-	add_transposed_edges([], Graph, Graph).
-	add_transposed_edges([V-Ns| Pairs], Graph, NewGraph) :-
-		add_reversed_neighbors(Ns, V, Graph, G1),
-		add_transposed_edges(Pairs, G1, NewGraph).
+	add_transposed_edges([], NewGraph, NewGraph).
+	add_transposed_edges([Vertex-Neighbors| Pairs], Graph, NewGraph) :-
+		add_reversed_neighbors(Neighbors, Vertex, Graph, NewGraph0),
+		add_transposed_edges(Pairs, NewGraph0, NewGraph).
 
 	add_reversed_neighbors([], _, Graph, Graph).
 	add_reversed_neighbors([N| Ns], V, Graph, NewGraph) :-
@@ -324,10 +328,10 @@
 	% --- Warshall ---
 
 	warshall([], Graph, Graph).
-	warshall([V|Vertices], Graph, Closure) :-
-		dict_lookup(V, VNeighbors, Graph),
+	warshall([Vertex| Vertices], Graph, Closure) :-
+		dict_lookup(Vertex, VNeighbors, Graph),
 		dict_as_list(Graph, Pairs),
-		warshall_update_pairs(Pairs, V, VNeighbors, NewPairs),
+		warshall_update_pairs(Pairs, Vertex, VNeighbors, NewPairs),
 		dict_as_dictionary(NewPairs, NewGraph),
 		warshall(Vertices, NewGraph, Closure).
 
@@ -380,18 +384,14 @@
 			merge_graph_pairs([Vertex1-Ns1| P1], P2, Rest)
 		).
 
-	% --- Topological sort helpers ---
-
-	extract_keys([], []).
-	extract_keys([K-_|Pairs], [K|Keys]) :-
-		extract_keys(Pairs, Keys).
+	% --- Topological sort predicates ---
 
 	zeros([], []).
-	zeros([_|Vertices], [0|Zs]) :-
-		zeros(Vertices, Zs).
+	zeros([_| Vertices], [0| Zeros]) :-
+		zeros(Vertices, Zeros).
 
 	count_edges([], _, Counts, Counts).
-	count_edges([_-Neighbors|Pairs], Vertices, Counts0, Counts2) :-
+	count_edges([_-Neighbors| Pairs], Vertices, Counts0, Counts2) :-
 		incr_list(Neighbors, Vertices, Counts0, Counts1),
 		count_edges(Pairs, Vertices, Counts1, Counts2).
 
@@ -405,14 +405,14 @@
 		incr_list(Neighbors, Vertices, Counts0, Counts1).
 
 	select_zeros([], [], []).
-	select_zeros([0|Counts], [V| Vertices], [V|Zeros]) :-
+	select_zeros([0| Counts], [V| Vertices], [V| Zeros]) :-
 		!,
 		select_zeros(Counts, Vertices, Zeros).
-	select_zeros([_|Counts], [_| Vertices], Zeros) :-
+	select_zeros([_| Counts], [_| Vertices], Zeros) :-
 		select_zeros(Counts, Vertices, Zeros).
 
 	top_sort_loop([], Sorted0, Sorted0, _, _, _).
-	top_sort_loop([Zero|Zeros], [Zero| Sorted], Sorted0, Graph, Vertices, Counts1) :-
+	top_sort_loop([Zero| Zeros], [Zero| Sorted], Sorted0, Graph, Vertices, Counts1) :-
 		dict_lookup(Zero, Neighbors, Graph),
 		decr_list(Neighbors, Vertices, Counts1, Counts2, Zeros, NewZeros),
 		top_sort_loop(NewZeros, Sorted, Sorted0, Graph, Vertices, Counts2).
@@ -422,7 +422,7 @@
 		Vertex1 == Vertex2,
 		!,
 		decr_list(Neighbors, Vertices, Counts1, Counts2, [Vertex2|Zi], Zo).
-	decr_list([Vertex1|Neighbors], [Vertex2|Vertices], [N|Counts1], [M|Counts2], Zi, Zo) :-
+	decr_list([Vertex1| Neighbors], [Vertex2| Vertices], [N| Counts1], [M| Counts2], Zi, Zo) :-
 		Vertex1 == Vertex2,
 		!,
 		M is N - 1,
@@ -453,43 +453,44 @@
 		).
 
 	bfs_expand([], _, _, Visited, Pred, Next, Visited, Pred, Next, false).
-	bfs_expand([N| Ns], V, Target, Visited0, Pred0, Next0, Visited, Pred, Next, Found) :-
-		(	bfs_lookup(N, _, Visited0) ->
-			bfs_expand(Ns, V, Target, Visited0, Pred0, Next0, Visited, Pred, Next, Found)
-		;	bfs_insert(Visited0, N, true, Visited1),
-			bfs_insert(Pred0, N, V, Pred1),
-			(	N == Target ->
+	bfs_expand([Neighbor| Neighbors], Vertex, Target, Visited0, Pred0, Next0, Visited, Pred, Next, Found) :-
+		(	bfs_lookup(Neighbor, _, Visited0) ->
+			bfs_expand(Neighbors, Vertex, Target, Visited0, Pred0, Next0, Visited, Pred, Next, Found)
+		;	bfs_insert(Visited0, Neighbor, true, Visited1),
+			bfs_insert(Pred0, Neighbor, Vertex, Pred1),
+			(	Neighbor == Target ->
 				Found = true, Visited = Visited1, Pred = Pred1, Next = Next0
-			;	bfs_expand(Ns, V, Target, Visited1, Pred1, [N|Next0], Visited, Pred, Next, Found)
+			;	bfs_expand(Neighbors, Vertex, Target, Visited1, Pred1, [Neighbor| Next0], Visited, Pred, Next, Found)
 			)
 		).
 
-	bfs_trace(V, V, _, Path, Path) :- !.
-	bfs_trace(V, Start, Pred, Acc, Path) :-
-		bfs_lookup(V, Prev, Pred),
-		bfs_trace(Prev, Start, Pred, [Prev|Acc], Path).
+	bfs_trace(Vertex, Vertex, _, Path, Path) :-
+		!.
+	bfs_trace(Vertex, Start, Pred, Acc, Path) :-
+		bfs_lookup(Vertex, Previous, Pred),
+		bfs_trace(Previous, Start, Pred, [Previous| Acc], Path).
 
 	% --- DFS max_path helpers ---
 
-	max_path_dfs(V, Target, _Graph, Visited, BestPath0, BestLen0, BestPath, BestLen) :-
-		V == Target,
+	max_path_dfs(Vertex, Target, _Graph, Visited, BestPath0, BestLength0, BestPath, BestLength) :-
+		Vertex == Target,
 		!,
 		length(Visited, N),
-		Len is N - 1,
-		(	Len > BestLen0 ->
-			BestLen = Len, BestPath = Visited
-		;	BestLen = BestLen0, BestPath = BestPath0
+		Length is N - 1,
+		(	Length > BestLength0 ->
+			BestLength = Length, BestPath = Visited
+		;	BestLength = BestLength0, BestPath = BestPath0
 		).
-	max_path_dfs(V, Target, Graph, Visited, BestPath0, BestLen0, BestPath, BestLen) :-
-		dict_lookup(V, Ns, Graph),
-		max_path_try(Ns, Target, Graph, Visited, BestPath0, BestLen0, BestPath, BestLen).
+	max_path_dfs(Vertex, Target, Graph, Visited, BestPath0, BestLength0, BestPath, BestLength) :-
+		dict_lookup(Vertex, Neighbors, Graph),
+		max_path_try(Neighbors, Target, Graph, Visited, BestPath0, BestLength0, BestPath, BestLength).
 
 	max_path_try([], _, _, _, BestPath, BestLen, BestPath, BestLen).
-	max_path_try([N| Ns], Target, Graph, Visited, BestPath0, BestLen0, BestPath, BestLen) :-
-		(	list_member(N, Visited) ->
-			max_path_try(Ns, Target, Graph, Visited, BestPath0, BestLen0, BestPath, BestLen)
-		;	max_path_dfs(N, Target, Graph, [N|Visited], BestPath0, BestLen0, BestPath1, BestLen1),
-			max_path_try(Ns, Target, Graph, Visited, BestPath1, BestLen1, BestPath, BestLen)
+	max_path_try([Neighbor| Neighbors], Target, Graph, Visited, BestPath0, BestLength0, BestPath, BestLength) :-
+		(	list_member(Neighbor, Visited) ->
+			max_path_try(Neighbors, Target, Graph, Visited, BestPath0, BestLength0, BestPath, BestLength)
+		;	max_path_dfs(Neighbor, Target, Graph, [Neighbor| Visited], BestPath0, BestLength0, BestPath1, BestLength1),
+			max_path_try(Neighbors, Target, Graph, Visited, BestPath1, BestLength1, BestPath, BestLength)
 		).
 
 :- end_object.
