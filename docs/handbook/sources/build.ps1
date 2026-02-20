@@ -74,6 +74,7 @@ Foreach-Object {
 }
 
 (Get-Content ../../../library/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/overview.rst
+(Get-Content ../../../library/ada_boost/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ada_boost.rst
 (Get-Content ../../../library/amqp/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/amqp.rst
 (Get-Content ../../../library/arbitrary/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/arbitrary.rst
 (Get-Content ../../../library/assignvars/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/assignvars.rst

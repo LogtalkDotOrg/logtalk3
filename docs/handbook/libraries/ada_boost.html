@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ada_boost &mdash; Logtalk 3.98.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fd83a980"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="amqp" href="amqp.html" />
+    <link rel="prev" title="Overview" href="overview.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.98.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ada_boost</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classifier-representation">Classifier Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#learning-a-classifier">Learning a Classifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#making-predictions">Making Predictions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exporting-the-classifier">Exporting the Classifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-a-saved-classifier">Using a Saved Classifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#printing-the-classifier">Printing the Classifier</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="amqp.html"><code class="docutils literal notranslate"><span class="pre">amqp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignvars.html"><code class="docutils literal notranslate"><span class="pre">assignvars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="avro.html"><code class="docutils literal notranslate"><span class="pre">avro</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base32.html"><code class="docutils literal notranslate"><span class="pre">base32</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base58.html"><code class="docutils literal notranslate"><span class="pre">base58</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base64.html"><code class="docutils literal notranslate"><span class="pre">base64</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base85.html"><code class="docutils literal notranslate"><span class="pre">base85</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="c45.html"><code class="docutils literal notranslate"><span class="pre">c45</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds.html"><code class="docutils literal notranslate"><span class="pre">ccsds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="classifier_protocols.html"><code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line_options.html"><code class="docutils literal notranslate"><span class="pre">command_line_options</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="datalog.html"><code class="docutils literal notranslate"><span class="pre">datalog</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependents.html"><code class="docutils literal notranslate"><span class="pre">dependents</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="deques.html"><code class="docutils literal notranslate"><span class="pre">deques</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dictionaries.html"><code class="docutils literal notranslate"><span class="pre">dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dif.html"><code class="docutils literal notranslate"><span class="pre">dif</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html"><code class="docutils literal notranslate"><span class="pre">edcg</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html"><code class="docutils literal notranslate"><span class="pre">events</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="format.html"><code class="docutils literal notranslate"><span class="pre">format</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="genint.html"><code class="docutils literal notranslate"><span class="pre">genint</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphs.html"><code class="docutils literal notranslate"><span class="pre">graphs</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchies.html"><code class="docutils literal notranslate"><span class="pre">hierarchies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ids.html"><code class="docutils literal notranslate"><span class="pre">ids</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="isolation_forest.html"><code class="docutils literal notranslate"><span class="pre">isolation_forest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="java.html"><code class="docutils literal notranslate"><span class="pre">java</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_ld.html"><code class="docutils literal notranslate"><span class="pre">json_ld</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_lines.html"><code class="docutils literal notranslate"><span class="pre">json_lines</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_rpc.html"><code class="docutils literal notranslate"><span class="pre">json_rpc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_schema.html"><code class="docutils literal notranslate"><span class="pre">json_schema</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="knn.html"><code class="docutils literal notranslate"><span class="pre">knn</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linda.html"><code class="docutils literal notranslate"><span class="pre">linda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="listing.html"><code class="docutils literal notranslate"><span class="pre">listing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loops.html"><code class="docutils literal notranslate"><span class="pre">loops</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="memcached.html"><code class="docutils literal notranslate"><span class="pre">memcached</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutations.html"><code class="docutils literal notranslate"><span class="pre">mutations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="naive_bayes.html"><code class="docutils literal notranslate"><span class="pre">naive_bayes</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nearest_centroid.html"><code class="docutils literal notranslate"><span class="pre">nearest_centroid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nested_dictionaries.html"><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html"><code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="docutils literal notranslate"><span class="pre">process</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="protobuf.html"><code class="docutils literal notranslate"><span class="pre">protobuf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random_forest.html"><code class="docutils literal notranslate"><span class="pre">random_forest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reader.html"><code class="docutils literal notranslate"><span class="pre">reader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorded_database.html"><code class="docutils literal notranslate"><span class="pre">recorded_database</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sockets.html"><code class="docutils literal notranslate"><span class="pre">sockets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stemming.html"><code class="docutils literal notranslate"><span class="pre">stemming</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stomp.html"><code class="docutils literal notranslate"><span class="pre">stomp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="string_distance.html"><code class="docutils literal notranslate"><span class="pre">string_distance</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings.html"><code class="docutils literal notranslate"><span class="pre">strings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="subsequences.html"><code class="docutils literal notranslate"><span class="pre">subsequences</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="toon.html"><code class="docutils literal notranslate"><span class="pre">toon</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tsv.html"><code class="docutils literal notranslate"><span class="pre">tsv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ulid.html"><code class="docutils literal notranslate"><span class="pre">ulid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html"><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="union_find.html"><code class="docutils literal notranslate"><span class="pre">union_find</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="url.html"><code class="docutils literal notranslate"><span class="pre">url</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="uuid.html"><code class="docutils literal notranslate"><span class="pre">uuid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html"><code class="docutils literal notranslate"><span class="pre">yaml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="zippers.html"><code class="docutils literal notranslate"><span class="pre">zippers</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../apis/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Libraries</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">ada_boost</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/ada_boost.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ada-boost">
+<span id="library-ada-boost"></span><h1><code class="docutils literal notranslate"><span class="pre">ada_boost</span></code><a class="headerlink" href="#ada-boost" title="Link to this heading"></a></h1>
+<p>AdaBoost (Adaptive Boosting) classifier using C4.5 decision trees as
+base learners. Implements the SAMME (Stagewise Additive Modeling using a
+Multi-class Exponential loss function) variant, which supports
+multi-class classification. Builds an ensemble of weighted decision
+trees where each subsequent tree focuses on the examples misclassified
+by previous trees.</p>
+<p>The library implements the <code class="docutils literal notranslate"><span class="pre">classifier_protocol</span></code> defined in the
+<code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code> library. It provides predicates for learning an
+ensemble classifier from a dataset, using it to make predictions (with
+class probabilities), and exporting it as a list of predicate clauses or
+to a file.</p>
+<p>Datasets are represented as objects implementing the
+<code class="docutils literal notranslate"><span class="pre">dataset_protocol</span></code> protocol from the <code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code> library.
+See <code class="docutils literal notranslate"><span class="pre">test_files</span></code> directory for examples.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../docs/library_index.html#ada_boost">../../docs/library_index.html#ada_boost</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ada_boost(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ada_boost(tester)).
+</pre></div>
+</div>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Adaptive Boosting</strong>: Iteratively trains weighted decision trees,
+focusing on misclassified examples</p></li>
+<li><p><strong>SAMME Algorithm</strong>: Supports multi-class classification via the SAMME
+variant of AdaBoost</p></li>
+<li><p><strong>C4.5 Base Learners</strong>: Uses C4.5 decision trees as weak learners for
+each boosting round</p></li>
+<li><p><strong>Weighted Voting</strong>: Final predictions determined by weighted voting
+where more accurate learners have higher weight</p></li>
+<li><p><strong>Probability Estimation</strong>: Provides confidence scores based on
+weighted vote proportions</p></li>
+<li><p><strong>Early Stopping</strong>: Training stops early if a perfect classifier is
+found or if a base learner is worse than random</p></li>
+<li><p><strong>Configurable Options</strong>: Number of estimators (boosting rounds)
+configurable via predicate options</p></li>
+<li><p><strong>Classifier Export</strong>: Learned classifiers can be exported as
+predicate clauses</p></li>
+</ul>
+</section>
+<section id="options">
+<h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
+<p>The following options can be passed to the <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">number_of_estimators(N)</span></code>: Number of boosting rounds / weak learners
+(default: 10)</p></li>
+</ul>
+</section>
+<section id="classifier-representation">
+<h2>Classifier Representation<a class="headerlink" href="#classifier-representation" title="Link to this heading"></a></h2>
+<p>The learned classifier is represented as a compound term with the
+functor chosen by the user when exporting the classifier and arity 3.
+The default functor is <code class="docutils literal notranslate"><span class="pre">ab_classifier/3</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>ab_classifier(<span class="nv">WeightedTrees</span>, <span class="nv">ClassValues</span>, <span class="nv">Options</span>)
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">WeightedTrees</span></code>: List of
+<code class="docutils literal notranslate"><span class="pre">weighted_tree(Alpha,</span> <span class="pre">C45Tree,</span> <span class="pre">AttributeNames)</span></code> elements</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ClassValues</span></code>: List of possible class values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Options</span></code>: List of options used during learning</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Freund, Y. and Schapire, R.E. (1997). “A Decision-Theoretic
+Generalization of On-Line Learning and an Application to Boosting”.
+Journal of Computer and System Sciences, 55(1), 119-139.</p></li>
+<li><p>Zhu, J., Zou, H., Rosset, S., and Hastie, T. (2009). “Multi-class
+AdaBoost”. Statistics and Its Interface, 2(3), 349-360.</p></li>
+<li><p>Quinlan, J.R. (1993). “C4.5: Programs for Machine Learning”. Morgan
+Kaufmann.</p></li>
+</ol>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="learning-a-classifier">
+<h3>Learning a Classifier<a class="headerlink" href="#learning-a-classifier" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Learn an AdaBoost classifier with default options (10 estimators)</span>
+| <span class="o">?-</span> ada_boost<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>).
+...
+
+<span class="c">% Learn with custom options</span>
+| <span class="o">?-</span> ada_boost<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>, [number_of_estimators(<span class="m">20</span>)]).
+...
+</pre></div>
+</div>
+</section>
+<section id="making-predictions">
+<h3>Making Predictions<a class="headerlink" href="#making-predictions" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Predict class for a new instance</span>
+| <span class="o">?-</span> ada_boost<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>),
+     ada_boost<span class="o">::</span>predict(<span class="nv">Classifier</span>, [outlook<span class="o">-</span>sunny, temperature<span class="o">-</span>hot, humidity<span class="o">-</span>high, wind<span class="o">-</span>weak], <span class="nv">Class</span>).
+<span class="nv">Class</span> <span class="o">=</span> no
+...
+
+<span class="c">% Get probability distribution from weighted voting</span>
+| <span class="o">?-</span> ada_boost<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>),
+     ada_boost<span class="o">::</span>predict_probabilities(<span class="nv">Classifier</span>, [outlook<span class="o">-</span>overcast, temperature<span class="o">-</span>mild, humidity<span class="o">-</span>normal, wind<span class="o">-</span>weak], <span class="nv">Probabilities</span>).
+<span class="nv">Probabilities</span> <span class="o">=</span> [yes<span class="o">-</span><span class="m">0.9</span>, no<span class="o">-</span><span class="m">0.1</span>]
+...
+</pre></div>
+</div>
+</section>
+<section id="exporting-the-classifier">
+<h3>Exporting the Classifier<a class="headerlink" href="#exporting-the-classifier" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Export as predicate clauses</span>
+| <span class="o">?-</span> ada_boost<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>),
+     ada_boost<span class="o">::</span>classifier_to_clauses(play_tennis, <span class="nv">Classifier</span>, my_boost, <span class="nv">Clauses</span>).
+...
+
+<span class="c">% Export to a file</span>
+| <span class="o">?-</span> ada_boost<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>),
+     ada_boost<span class="o">::</span>classifier_to_file(play_tennis, <span class="nv">Classifier</span>, my_boost, <span class="s">&#39;boost.pl&#39;</span>).
+...
+</pre></div>
+</div>
+</section>
+<section id="using-a-saved-classifier">
+<h3>Using a Saved Classifier<a class="headerlink" href="#using-a-saved-classifier" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Load and use a previously saved classifier</span>
+| <span class="o">?-</span> <span class="k">logtalk_load</span>(<span class="s">&#39;boost.pl&#39;</span>),
+     my_boost(<span class="nv">Classifier</span>),
+     ada_boost<span class="o">::</span>predict(<span class="nv">Classifier</span>, [outlook<span class="o">-</span>sunny, temperature<span class="o">-</span>cool, humidity<span class="o">-</span>normal, wind<span class="o">-</span>weak], <span class="nv">Class</span>).
+<span class="nv">Class</span> <span class="o">=</span> yes
+...
+</pre></div>
+</div>
+</section>
+<section id="printing-the-classifier">
+<h3>Printing the Classifier<a class="headerlink" href="#printing-the-classifier" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Print a summary of the AdaBoost classifier</span>
+| <span class="o">?-</span> ada_boost<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>),
+     ada_boost<span class="o">::</span>print_classifier(<span class="nv">Classifier</span>).
+
+<span class="nv">AdaBoost</span> <span class="nv">Classifier</span>
+<span class="o">===================</span>
+
+<span class="nv">Learning</span> options<span class="o">:</span> [number_of_estimators(<span class="m">10</span>)]
+
+<span class="nv">Class</span> values<span class="o">:</span> [yes,no]
+<span class="nv">Number</span> of estimators<span class="o">:</span> <span class="m">10</span>
+
+<span class="nv">Weighted</span> trees<span class="o">:</span>
+  <span class="nv">Estimator</span> <span class="m">1</span> (alpha<span class="o">=</span><span class="m">1.2345</span>, features<span class="o">:</span> [outlook,temperature,humidity,wind])<span class="o">:</span>
+    <span class="o">-&gt;</span> tree rooted at outlook
+  ...
+...
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="overview.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="amqp.html" class="btn btn-neutral float-right" title="amqp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2026, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

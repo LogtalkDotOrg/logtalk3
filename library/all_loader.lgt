@@ -84,6 +84,7 @@
 		classifier_protocols(loader),
 		c45(loader),
 		random_forest(loader),
+		ada_boost(loader),
 		knn(loader),
 		naive_bayes(loader),
 		nearest_centroid(loader),

@@ -28,6 +28,7 @@ directory in the ``NOTES.md`` file.
    :maxdepth: 2
 
    overview
+   ada_boost
    amqp
    arbitrary
    assignvars

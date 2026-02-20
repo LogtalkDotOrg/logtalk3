@@ -76,6 +76,10 @@ decision trees.
 * ADDED: New `random_forest` library implementing the Random Forest algorithm
 for learning decision trees.
 
+* ADDED: New `ada_boost` library implementing Adaptive Boosting using the
+SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss
+function) variant.
+
 * ADDED: New `knn` library implementing k-Nearest Neighbors (kNN) Classifier.
 
 * ADDED: New `naive_bayes` library implementing a Naive Bayes classifier.

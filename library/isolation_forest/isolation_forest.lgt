@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-02-20,
 		comment is 'Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the improved version described by Hariri et al. (2019) that uses random hyperplane cuts instead of axis-aligned cuts, eliminating score bias artifacts. Builds an ensemble of isolation trees from a dataset object implementing the ``dataset_protocol`` protocol. Missing attribute values are represented using anonymous variables.',
 		remarks is [
 			'Algorithm' - 'The Extended Isolation Forest builds an ensemble of isolation trees (iTrees) by recursively partitioning the data using random hyperplanes. Anomalous points, being few and different, require fewer partitions (shorter path lengths) to be isolated.',
@@ -38,7 +38,7 @@
 			'Missing values' - 'Missing attribute values are represented using anonymous variables. During tree construction, missing values are replaced with random values drawn from the observed range of the corresponding attribute. During scoring, instances with missing values are sent down both branches of the tree and the path length is computed as the weighted average of the two branches.',
 			'Classifier representation' - 'The learned model is represented as an ``if_model(Trees, SubsampleSize, AttributeNames, Attributes, Ranges, Options)`` compound term.'
 		],
-		see_also is [dataset_protocol, c45, random_forest]
+		see_also is [dataset_protocol, c45, random_forest, ada_boost]
 	]).
 
 	:- public(learn/3).

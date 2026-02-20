@@ -33,6 +33,7 @@
 
 logtalk_library_path(library, logtalk_user('library/')).
 
+logtalk_library_path(ada_boost, library('ada_boost/')).
 logtalk_library_path(amqp, library('amqp/')).
 logtalk_library_path(arbitrary, library('arbitrary/')).
 logtalk_library_path(assignvars, library('assignvars/')).

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-02-20,
 		comment is 'C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes, handles missing values, and supports tree pruning.',
 		remarks is [
 			'Algorithm' - 'C4.5 is an extension of the ID3 algorithm that uses information gain ratio instead of information gain for attribute selection, which avoids bias towards attributes with many values.',
@@ -34,7 +34,7 @@
 			'Missing values' - 'Missing attribute values are represented using anonymous variables. During tree construction, examples with missing values for the split attribute are distributed to all branches. Entropy and gain calculations use only examples with known values for the attribute being evaluated.',
 			'Tree pruning' - 'The ``prune/3`` and ``prune/5`` predicates implement pessimistic error pruning (PEP), which estimates error rates using the upper confidence bound of the binomial distribution (Wilson score interval) with a configurable confidence factor (default 0.25, range ``(0.0, 1.0)``) and minimum instances per leaf (default 2). Subtrees are replaced with leaf nodes when doing so would not increase the estimated error.'
 		],
-		see_also is [dataset_protocol, isolation_forest, knn, naive_bayes, nearest_centroid, random_forest]
+		see_also is [dataset_protocol, isolation_forest, knn, naive_bayes, nearest_centroid, random_forest, ada_boost]
 	]).
 
 	:- public(prune/5).

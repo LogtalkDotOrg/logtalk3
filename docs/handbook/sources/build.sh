@@ -74,6 +74,7 @@ done
 rm -f temp0
 
 sed '1,19d' ../../../library/NOTES.md | pandoc -f gfm -t rst -o libraries/overview.rst
+sed '1,19d' ../../../library/ada_boost/NOTES.md | pandoc -f gfm -t rst -o libraries/ada_boost.rst
 sed '1,19d' ../../../library/amqp/NOTES.md | pandoc -f gfm -t rst -o libraries/amqp.rst
 sed '1,19d' ../../../library/arbitrary/NOTES.md | pandoc -f gfm -t rst -o libraries/arbitrary.rst
 sed '1,19d' ../../../library/assignvars/NOTES.md | pandoc -f gfm -t rst -o libraries/assignvars.rst

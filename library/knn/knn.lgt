@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-02-20,
 		comment is 'k-Nearest Neighbors classifier with multiple distance metrics and weighting options. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'k-NN is a lazy learning algorithm that classifies instances based on the majority class among the k nearest training instances.',
@@ -35,7 +35,7 @@
 			'Feature types' - 'Automatically handles numeric and categorical features.',
 			'Classifier representation' - 'The learned classifier is represented (by default) as a ``knn_classifier(AttributeNames, FeatureTypes, Instances)`` where ``Instances`` contains the training data.'
 		],
-		see_also is [dataset_protocol, c45, isolation_forest, naive_bayes, nearest_centroid, random_forest]
+		see_also is [dataset_protocol, c45, isolation_forest, naive_bayes, nearest_centroid, random_forest, ada_boost]
 	]).
 
 	:- public(predict/4).

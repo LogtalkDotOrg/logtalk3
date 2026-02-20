@@ -15,7 +15,7 @@ Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-19
+| **Date:** 2026-02-20
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -148,5 +148,5 @@ Operators
 
 .. seealso::
 
-   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`c45 <c45/0>`, :ref:`random_forest <random_forest/0>`
+   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`c45 <c45/0>`, :ref:`random_forest <random_forest/0>`, :ref:`ada_boost <ada_boost/0>`
 
