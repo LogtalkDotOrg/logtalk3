@@ -138,6 +138,10 @@ SWI-Prolog, Trealla Prolog, and XVM.
 * ADDED: New `linda` library implementing the classic Linda coordination model
 for process communication. Supports SWI-Prolog, Trealla Prolog, and XVM.
 
+* ADDED: New `command_line_options` library for parsing and generating help
+for command-line options. Adapted from the SWI-Prolog `optparse` library
+by Marcus Uneson.
+
 * ADDED: New `stemming` library implementing Porter and Lovins algorithms for
 computing stems for English words.
 

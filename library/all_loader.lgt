@@ -107,6 +107,7 @@
 		amqp(loader),
 		stomp(loader),
 		linda(loader),
+		command_line_options(loader),
 		cloning,
 		counters,
 		streamvars

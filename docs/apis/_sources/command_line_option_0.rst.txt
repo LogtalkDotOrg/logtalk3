@@ -1,0 +1,226 @@
+.. index:: single: command_line_option
+.. _command_line_option/0:
+
+.. rst-class:: right
+
+**category**
+
+``command_line_option``
+=======================
+
+Category for defining command-line options. Import this category into objects that represent individual command-line options and override the predicates as needed.
+
+| **Availability:** 
+|    ``logtalk_load(command_line_options(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-20
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: check/0
+.. _command_line_option/0::check/0:
+
+``check/0``
+^^^^^^^^^^^
+
+Checks if the command-line option definition is valid. Throws an error if the definition is invalid.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``check`` - ``one_or_error``
+
+
+------------
+
+.. index:: valid/0
+.. _command_line_option/0::valid/0:
+
+``valid/0``
+^^^^^^^^^^^
+
+Succeeds if the command-line option definition is valid. Fails otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``valid`` - ``zero_or_one``
+
+
+------------
+
+.. index:: name/1
+.. _command_line_option/0::name/1:
+
+``name/1``
+^^^^^^^^^^
+
+Name used to identify this option in the parsed results. This predicate must be overridden. No default.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``name(Name)``
+| **Mode and number of proofs:**
+|    ``name(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: short_flags/1
+.. _command_line_option/0::short_flags/1:
+
+``short_flags/1``
+^^^^^^^^^^^^^^^^^
+
+List of single-character short flags for this option (e.g., ``[v]`` for ``-v``). Default is an empty list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``short_flags(Flags)``
+| **Mode and number of proofs:**
+|    ``short_flags(-list(character))`` - ``one``
+
+
+------------
+
+.. index:: long_flags/1
+.. _command_line_option/0::long_flags/1:
+
+``long_flags/1``
+^^^^^^^^^^^^^^^^
+
+List of long flags for this option (e.g., ``[verbose]`` for ``--verbose``). Default is an empty list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``long_flags(Flags)``
+| **Mode and number of proofs:**
+|    ``long_flags(-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: type/1
+.. _command_line_option/0::type/1:
+
+``type/1``
+^^^^^^^^^^
+
+Option value type. One of ``boolean``, ``atom``, ``integer``, ``float``, or ``term``. Default is ``term``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``type(Type)``
+| **Mode and number of proofs:**
+|    ``type(-atom)`` - ``one``
+
+
+------------
+
+.. index:: default/1
+.. _command_line_option/0::default/1:
+
+``default/1``
+^^^^^^^^^^^^^
+
+Default value for this option if any.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``default(Default)``
+| **Mode and number of proofs:**
+|    ``default(-term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: meta/1
+.. _command_line_option/0::meta/1:
+
+``meta/1``
+^^^^^^^^^^
+
+Metasyntactic variable name for the help text (e.g., ``'FILE'``). Default is an empty atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``meta(Meta)``
+| **Mode and number of proofs:**
+|    ``meta(-atom)`` - ``one``
+
+
+------------
+
+.. index:: help/1
+.. _command_line_option/0::help/1:
+
+``help/1``
+^^^^^^^^^^
+
+Help text for this option. Can be an atom or a list of atoms for pre-broken lines. Default is an empty atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``help(Help)``
+| **Mode and number of proofs:**
+|    ``help(-atom)`` - ``one``
+|    ``help(-list(atom))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`command_line_options <command_line_options/0>`
+

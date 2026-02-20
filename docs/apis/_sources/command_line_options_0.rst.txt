@@ -1,0 +1,142 @@
+.. index:: single: command_line_options
+.. _command_line_options/0:
+
+.. rst-class:: right
+
+**object**
+
+``command_line_options``
+========================
+
+Command line options parsing predicates. Uses object-based option specifications with the ``command_line_option`` category.
+
+| **Availability:** 
+|    ``logtalk_load(command_line_options(loader))``
+
+| **Author:** Marcus Uneson and Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-20
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`atom <atom/0>`
+|    :ref:`list <list/0>`
+|    :ref:`meta <meta/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`term_io <term_io/0>`
+|    :ref:`type <type/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/4
+.. _command_line_options/0::parse/4:
+
+``parse/4``
+^^^^^^^^^^^
+
+Parses the arguments ``ApplArguments`` according to the option objects ``OptionObjects`` using default parsing options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(OptionObjects,ApplArguments,Options,PositionalArguments)``
+| **Mode and number of proofs:**
+|    ``parse(+list(object),+list(atom),-list,-list(atom))`` - ``one_or_error``
+
+
+------------
+
+.. index:: parse/5
+.. _command_line_options/0::parse/5:
+
+``parse/5``
+^^^^^^^^^^^
+
+Parses the arguments ``ApplArguments`` according to the option objects ``OptionObjects`` and the parsing options ``ParseOptions``. ``Options`` is a list of parsed options as ``Name(Value)`` terms by default (or ``Func(Name,Value)`` when the ``output_functor(Func)`` parse option is used). ``PositionalArguments`` are the remaining non-dashed arguments. ``ParseOptions`` include ``output_functor(Func)``, ``duplicated_flags(Keep)`` (one of ``keepfirst``, ``keeplast``, ``keepall``; default ``keeplast``), and ``allow_empty_flag_spec(Bool)`` (default ``true``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(OptionObjects,ApplArguments,Options,PositionalArguments,ParseOptions)``
+| **Mode and number of proofs:**
+|    ``parse(+list(object),+list(atom),-list,-list(atom),+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: help/2
+.. _command_line_options/0::help/2:
+
+``help/2``
+^^^^^^^^^^
+
+Synthesizes a help text ``Help`` as an atom from the option objects ``OptionObjects`` using default help options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``help(OptionObjects,Help)``
+| **Mode and number of proofs:**
+|    ``help(+list(object),-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: help/3
+.. _command_line_options/0::help/3:
+
+``help/3``
+^^^^^^^^^^
+
+Synthesizes a help text ``Help`` as an atom from the option objects ``OptionObjects`` using the given ``HelpOptions``. ``HelpOptions`` include ``line_width(Width)`` (default 80), ``min_help_width(Width)`` (default 40), ``break_long_flags(Boolean)`` (default ``false``), and ``suppress_empty_meta(Boolean)`` (default ``true``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``help(OptionObjects,Help,HelpOptions)``
+| **Mode and number of proofs:**
+|    ``help(+list(object),-atom,+list)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`command_line_option <command_line_option/0>`
+

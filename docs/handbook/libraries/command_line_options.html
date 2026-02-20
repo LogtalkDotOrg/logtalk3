@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>command_line_options &mdash; Logtalk 3.98.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fd83a980"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="core" href="core.html" />
+    <link rel="prev" title="classifier_protocols" href="classifier_protocols.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.98.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="amqp.html"><code class="docutils literal notranslate"><span class="pre">amqp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignvars.html"><code class="docutils literal notranslate"><span class="pre">assignvars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="avro.html"><code class="docutils literal notranslate"><span class="pre">avro</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base32.html"><code class="docutils literal notranslate"><span class="pre">base32</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base58.html"><code class="docutils literal notranslate"><span class="pre">base58</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base64.html"><code class="docutils literal notranslate"><span class="pre">base64</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base85.html"><code class="docutils literal notranslate"><span class="pre">base85</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="c45.html"><code class="docutils literal notranslate"><span class="pre">c45</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds.html"><code class="docutils literal notranslate"><span class="pre">ccsds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="classifier_protocols.html"><code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">command_line_options</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#terminology">Terminology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-option-objects">Defining option objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validating-option-definitions">Validating option definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-option-objects">Example option objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parsing-command-line-arguments">Parsing command-line arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generating-help-text">Generating help text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#help-options">Help options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parse-options">Parse options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#notes-and-tips">Notes and tips</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="datalog.html"><code class="docutils literal notranslate"><span class="pre">datalog</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependents.html"><code class="docutils literal notranslate"><span class="pre">dependents</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="deques.html"><code class="docutils literal notranslate"><span class="pre">deques</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dictionaries.html"><code class="docutils literal notranslate"><span class="pre">dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dif.html"><code class="docutils literal notranslate"><span class="pre">dif</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html"><code class="docutils literal notranslate"><span class="pre">edcg</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html"><code class="docutils literal notranslate"><span class="pre">events</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="format.html"><code class="docutils literal notranslate"><span class="pre">format</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="genint.html"><code class="docutils literal notranslate"><span class="pre">genint</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphs.html"><code class="docutils literal notranslate"><span class="pre">graphs</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchies.html"><code class="docutils literal notranslate"><span class="pre">hierarchies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ids.html"><code class="docutils literal notranslate"><span class="pre">ids</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="isolation_forest.html"><code class="docutils literal notranslate"><span class="pre">isolation_forest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="java.html"><code class="docutils literal notranslate"><span class="pre">java</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_ld.html"><code class="docutils literal notranslate"><span class="pre">json_ld</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_lines.html"><code class="docutils literal notranslate"><span class="pre">json_lines</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_rpc.html"><code class="docutils literal notranslate"><span class="pre">json_rpc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_schema.html"><code class="docutils literal notranslate"><span class="pre">json_schema</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="knn.html"><code class="docutils literal notranslate"><span class="pre">knn</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linda.html"><code class="docutils literal notranslate"><span class="pre">linda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="listing.html"><code class="docutils literal notranslate"><span class="pre">listing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loops.html"><code class="docutils literal notranslate"><span class="pre">loops</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="memcached.html"><code class="docutils literal notranslate"><span class="pre">memcached</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutations.html"><code class="docutils literal notranslate"><span class="pre">mutations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="naive_bayes.html"><code class="docutils literal notranslate"><span class="pre">naive_bayes</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nearest_centroid.html"><code class="docutils literal notranslate"><span class="pre">nearest_centroid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nested_dictionaries.html"><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html"><code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="docutils literal notranslate"><span class="pre">process</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="protobuf.html"><code class="docutils literal notranslate"><span class="pre">protobuf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random_forest.html"><code class="docutils literal notranslate"><span class="pre">random_forest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reader.html"><code class="docutils literal notranslate"><span class="pre">reader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorded_database.html"><code class="docutils literal notranslate"><span class="pre">recorded_database</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sockets.html"><code class="docutils literal notranslate"><span class="pre">sockets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stemming.html"><code class="docutils literal notranslate"><span class="pre">stemming</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stomp.html"><code class="docutils literal notranslate"><span class="pre">stomp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="string_distance.html"><code class="docutils literal notranslate"><span class="pre">string_distance</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings.html"><code class="docutils literal notranslate"><span class="pre">strings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="subsequences.html"><code class="docutils literal notranslate"><span class="pre">subsequences</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="toon.html"><code class="docutils literal notranslate"><span class="pre">toon</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tsv.html"><code class="docutils literal notranslate"><span class="pre">tsv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ulid.html"><code class="docutils literal notranslate"><span class="pre">ulid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html"><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="union_find.html"><code class="docutils literal notranslate"><span class="pre">union_find</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="url.html"><code class="docutils literal notranslate"><span class="pre">url</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="uuid.html"><code class="docutils literal notranslate"><span class="pre">uuid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html"><code class="docutils literal notranslate"><span class="pre">yaml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="zippers.html"><code class="docutils literal notranslate"><span class="pre">zippers</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../apis/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Libraries</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">command_line_options</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/command_line_options.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p id="library-command-line-options">“AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+<hr class="docutils" />
+<section id="command-line-options">
+<h1><code class="docutils literal notranslate"><span class="pre">command_line_options</span></code><a class="headerlink" href="#command-line-options" title="Link to this heading"></a></h1>
+<p>This library provides command-line parsing predicates where command-line
+options are defined as objects that import the <code class="docutils literal notranslate"><span class="pre">command_line_option</span></code>
+category. Predicates are also provided for generating help text.</p>
+<p>Parsed options are returned by default as a list of <code class="docutils literal notranslate"><span class="pre">Name(Value)</span></code>
+terms. A parser option, <code class="docutils literal notranslate"><span class="pre">output_functor(Functor)</span></code>, allows returning
+options as <code class="docutils literal notranslate"><span class="pre">Functor(Key,</span> <span class="pre">Value)</span></code> terms instead.</p>
+<p>Adapted with significant changes from the SWI-Prolog <code class="docutils literal notranslate"><span class="pre">optparse</span></code>
+library by Marcus Uneson. Most documentation, parsing options, and help
+options retained from the original library. Command line options
+specification changed to an object-based representation. Parsing
+simplified, no longer using DCGs. Comprehensive set of tests added,
+based on documentation examples. Full portability to all supported
+backends.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#command_line_options">../../apis/library_index.html#command_line_options</a>
+file in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> utility
+file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(command_line_options(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(command_line_options(tester)).
+</pre></div>
+</div>
+</section>
+<section id="terminology">
+<h2>Terminology<a class="headerlink" href="#terminology" title="Link to this heading"></a></h2>
+<p>The terminology is partly borrowed from Python (see
+<a class="reference external" href="http://docs.python.org/library/optparse.html#terminology">http://docs.python.org/library/optparse.html#terminology</a>). <em>Arguments</em>
+are what you provide on the command line and for many Prolog systems
+show up as a list of atoms <code class="docutils literal notranslate"><span class="pre">Args</span></code> in
+<code class="docutils literal notranslate"><span class="pre">current_prolog_flag(argv,</span> <span class="pre">Args)</span></code>. They can be divided into:</p>
+<ul class="simple">
+<li><p><em>Runtime arguments</em>, which control the Prolog runtime; conventionally
+terminated by <code class="docutils literal notranslate"><span class="pre">--</span></code>.</p></li>
+<li><p><em>Options</em>, which are key-value pairs (with a boolean value possibly
+implicit) intended to control your program.</p></li>
+<li><p><em>Positional arguments</em>, which are what remains after all runtime
+arguments and options have been removed (with implicit arguments
+<code class="docutils literal notranslate"><span class="pre">true</span></code>/<code class="docutils literal notranslate"><span class="pre">false</span></code> for booleans filled in).</p></li>
+</ul>
+<p>Positional arguments are used for mandatory arguments without sensible
+defaults (e.g., input file names). Options offer flexibility by letting
+you change a default setting. This library has no notion of mandatory or
+required options.</p>
+</section>
+<section id="defining-option-objects">
+<h2>Defining option objects<a class="headerlink" href="#defining-option-objects" title="Link to this heading"></a></h2>
+<p>Define command-line options by creating objects that import the
+<code class="docutils literal notranslate"><span class="pre">command_line_option</span></code> category. Each object represents one
+command-line option and overrides the predicates to specify its
+properties.</p>
+<p>Create an object that imports <code class="docutils literal notranslate"><span class="pre">command_line_option</span></code> and override the
+following predicates:</p>
+<ul class="simple">
+<li><p><strong>``key/1``</strong>: The key used to identify this option in the result.
+This predicate must be overridden.</p></li>
+<li><p><strong>``short_flags/1``</strong>: List of single-character short flags (e.g.,
+<code class="docutils literal notranslate"><span class="pre">[v]</span></code> for <code class="docutils literal notranslate"><span class="pre">-v</span></code>). Default: <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p></li>
+<li><p><strong>``long_flags/1``</strong>: List of long flags (e.g., <code class="docutils literal notranslate"><span class="pre">[verbose]</span></code> for
+<code class="docutils literal notranslate"><span class="pre">--verbose</span></code>). Default: <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p></li>
+<li><p><strong>``type/1``</strong>: Option value type. One of <code class="docutils literal notranslate"><span class="pre">boolean</span></code>, <code class="docutils literal notranslate"><span class="pre">atom</span></code>,
+<code class="docutils literal notranslate"><span class="pre">integer</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, or <code class="docutils literal notranslate"><span class="pre">term</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">term</span></code>.</p></li>
+<li><p><strong>``default/1``</strong>: Default value. Optional.</p></li>
+<li><p><strong>``meta/1``</strong>: Metasyntactic variable name for help text. Default:
+<code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
+<li><p><strong>``help/1``</strong>: Help text (atom or list of atoms for pre-broken
+lines). Default: <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
+</ul>
+</section>
+<section id="validating-option-definitions">
+<h2>Validating option definitions<a class="headerlink" href="#validating-option-definitions" title="Link to this heading"></a></h2>
+<p>Option objects provide two predicates for validating their definitions:</p>
+<ul class="simple">
+<li><p><strong>``check/0``</strong>: Validates the option definition, throwing an error if
+invalid. The validation checks:</p>
+<ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">key/1</span></code> predicate is defined (not just using the default).</p></li>
+<li><p>All short flags are single characters.</p></li>
+<li><p>The type is a known type (supported by the <code class="docutils literal notranslate"><span class="pre">type</span></code> library).</p></li>
+<li><p>If a default value is defined and the type is not <code class="docutils literal notranslate"><span class="pre">term</span></code>, the
+default value matches the declared type.</p></li>
+</ul>
+</li>
+<li><p><strong>``valid/0``</strong>: Succeeds deterministically if the option definition
+is valid, fails otherwise. This is useful when you want to check
+validity without handling exceptions.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">parse/4-5</span></code> and <code class="docutils literal notranslate"><span class="pre">help/2-3</span></code> predicates automatically call
+<code class="docutils literal notranslate"><span class="pre">check/0</span></code> on all option objects before processing, ensuring invalid
+definitions are caught early with clear error messages.</p>
+<p>Example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> verbose_option<span class="o">::</span>check.
+yes
+
+| <span class="o">?-</span> verbose_option<span class="o">::</span>valid.
+yes
+</pre></div>
+</div>
+</section>
+<section id="example-option-objects">
+<h2>Example option objects<a class="headerlink" href="#example-option-objects" title="Link to this heading"></a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(verbose_option,
+    <span class="k">imports</span>(command_line_option)).
+
+    key(verbose).
+    short_flags([v]).
+    long_flags([verbosity]).
+    type(integer).
+    default(<span class="m">2</span>).
+    meta(<span class="s">&#39;V&#39;</span>).
+    help(<span class="s">&#39;verbosity level, 1 &lt;= V &lt;= 3&#39;</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+
+
+<span class="p">:- </span><span class="k">object</span>(mode_option,
+    <span class="k">imports</span>(command_line_option)).
+
+    key(mode).
+    short_flags([m]).
+    long_flags([mode]).
+    type(atom).
+    default(<span class="s">&#39;SCAN&#39;</span>).
+    help([<span class="s">&#39;data gathering mode, one of&#39;</span>,
+          <span class="s">&#39;  SCAN: do this&#39;</span>,
+          <span class="s">&#39;  READ: do that&#39;</span>,
+          <span class="s">&#39;  MAKE: fabricate numbers&#39;</span>,
+          <span class="s">&#39;  WAIT: do nothing&#39;</span>]).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+
+
+<span class="p">:- </span><span class="k">object</span>(cache_option,
+    <span class="k">imports</span>(command_line_option)).
+
+    key(cache).
+    short_flags([r]).
+    long_flags([<span class="s">&#39;rebuild-cache&#39;</span>]).
+    type(boolean).
+    default(<span class="k">true</span>).
+    help(<span class="s">&#39;rebuild cache in each iteration&#39;</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+
+
+<span class="p">:- </span><span class="k">object</span>(outfile_option,
+    <span class="k">imports</span>(command_line_option)).
+
+    key(outfile).
+    short_flags([o]).
+    long_flags([<span class="s">&#39;output-file&#39;</span>]).
+    type(atom).
+    meta(<span class="s">&#39;FILE&#39;</span>).
+    help(<span class="s">&#39;write output to FILE&#39;</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+
+
+<span class="c">% Configuration parameter without command-line flags</span>
+<span class="p">:- </span><span class="k">object</span>(path_option,
+    <span class="k">imports</span>(command_line_option)).
+
+    key(path).
+    default(<span class="s">&#39;/some/file/path/&#39;</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+</section>
+<section id="parsing-command-line-arguments">
+<h2>Parsing command-line arguments<a class="headerlink" href="#parsing-command-line-arguments" title="Link to this heading"></a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">command_line_options</span></code> object <code class="docutils literal notranslate"><span class="pre">parse/4-5</span></code> predicates:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> command_line_options<span class="o">::</span>parse(
+         [verbose_option, mode_option, cache_option, outfile_option],
+         [<span class="s">&#39;-v&#39;</span>, <span class="s">&#39;5&#39;</span>, <span class="s">&#39;-m&#39;</span>, <span class="s">&#39;READ&#39;</span>, <span class="s">&#39;-ooutput.txt&#39;</span>, <span class="s">&#39;input.txt&#39;</span>],
+         <span class="nv">Options</span>,
+         <span class="nv">PositionalArguments</span>
+     ).
+
+<span class="nv">Options</span> <span class="o">=</span> [verbose(<span class="m">5</span>), mode(<span class="s">&#39;READ&#39;</span>), cache(<span class="k">true</span>), outfile(<span class="s">&#39;output.txt&#39;</span>)],
+<span class="nv">PositionalArguments</span> <span class="o">=</span> [<span class="s">&#39;input.txt&#39;</span>].
+</pre></div>
+</div>
+</section>
+<section id="generating-help-text">
+<h2>Generating help text<a class="headerlink" href="#generating-help-text" title="Link to this heading"></a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">command_line_options::help/2</span></code> predicate for default
+formatting:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> command_line_options<span class="o">::</span>help([verbose_option, mode_option, cache_option], <span class="nv">Help</span>).
+</pre></div>
+</div>
+<p>Or use <code class="docutils literal notranslate"><span class="pre">command_line_options::help/3</span></code> with custom help options:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> command_line_options<span class="o">::</span>help([verbose_option, mode_option], <span class="nv">Help</span>, [line_width(<span class="m">100</span>)]).
+</pre></div>
+</div>
+</section>
+<section id="help-options">
+<h2>Help options<a class="headerlink" href="#help-options" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">help/3</span></code> predicate supports the following help options:</p>
+<ul class="simple">
+<li><p><strong>``line_width(Width)``</strong>: Maximum line width for help text. Default:
+<code class="docutils literal notranslate"><span class="pre">80</span></code>.</p></li>
+<li><p><strong>``min_help_width(Width)``</strong>: Minimum width for help text column.
+Default: <code class="docutils literal notranslate"><span class="pre">40</span></code>.</p></li>
+<li><p><strong>``break_long_flags(Boolean)``</strong>: If <code class="docutils literal notranslate"><span class="pre">true</span></code>, break long flags
+across multiple lines. Default: <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><strong>``suppress_empty_meta(Boolean)``</strong>: If <code class="docutils literal notranslate"><span class="pre">true</span></code> (default), suppress
+empty metasyntactic variables in help output.</p></li>
+</ul>
+</section>
+<section id="parse-options">
+<h2>Parse options<a class="headerlink" href="#parse-options" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">parse/5</span></code> predicate supports the following parse options:</p>
+<ul class="simple">
+<li><p><strong>``output_functor(Functor)``</strong>: When defined, options are returned as
+<code class="docutils literal notranslate"><span class="pre">Functor(Key,</span> <span class="pre">Value)</span></code> terms instead of <code class="docutils literal notranslate"><span class="pre">Key(Value)</span></code> terms. No
+default.</p></li>
+<li><p><strong>``duplicated_flags(Keep)``</strong>: How to handle duplicate options. One
+of <code class="docutils literal notranslate"><span class="pre">keepfirst</span></code>, <code class="docutils literal notranslate"><span class="pre">keeplast</span></code>, <code class="docutils literal notranslate"><span class="pre">keepall</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">keeplast</span></code>.</p></li>
+<li><p><strong>``allow_empty_flag_spec(Boolean)``</strong>: If <code class="docutils literal notranslate"><span class="pre">true</span></code> (default), options
+without flags are allowed (useful for configuration parameters). Set
+to <code class="docutils literal notranslate"><span class="pre">false</span></code> to raise errors on empty flags.</p></li>
+</ul>
+</section>
+<section id="notes-and-tips">
+<h2>Notes and tips<a class="headerlink" href="#notes-and-tips" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The default type is <code class="docutils literal notranslate"><span class="pre">term</span></code>, which subsumes <code class="docutils literal notranslate"><span class="pre">integer</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">atom</span></code>. However, always specifying types is recommended for
+reliable parsing and clear error messages.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-sbar</span></code> is taken as <code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">bar</span></code>, not as <code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">-b</span> <span class="pre">-a</span> <span class="pre">-r</span></code> (no
+clustering).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-s=foo</span></code> is disallowed.</p></li>
+<li><p>Duplicate flags default to <code class="docutils literal notranslate"><span class="pre">keeplast</span></code> (controllable via the
+<code class="docutils literal notranslate"><span class="pre">duplicated_flags</span></code> parse option).</p></li>
+<li><p>Unknown flags (not in the specification) will raise errors.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="classifier_protocols.html" class="btn btn-neutral float-left" title="classifier_protocols" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="core.html" class="btn btn-neutral float-right" title="core" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2026, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

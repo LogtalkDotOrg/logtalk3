@@ -41,6 +41,7 @@ directory in the ``NOTES.md`` file.
    cbor
    ccsds
    classifier_protocols
+   command_line_options
    core
    coroutining
    csv

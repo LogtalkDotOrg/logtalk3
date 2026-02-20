@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on February 19, 2026
+%  Last updated on February 20, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -115,6 +115,7 @@ logtalk_library_path(basic_types, library('basic_types/')).
 logtalk_library_path(c45, library('c45/')).
 logtalk_library_path(cbor, library('cbor/')).
 logtalk_library_path(classifier_protocols, library('classifier_protocols/')).
+logtalk_library_path(command_line_options, library('command_line_options/')).
 logtalk_library_path(coroutining, library('coroutining/')).
 logtalk_library_path(ccsds, library('ccsds/')).
 logtalk_library_path(csv, library('csv/')).

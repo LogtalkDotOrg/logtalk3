@@ -233,6 +233,17 @@ To load an entity, always load the library that includes it using the goal ``log
    classifier_protocol <classifier_protocol_0>
    dataset_protocol <dataset_protocol_0>
 
+``library/command_line_options/``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   command_line_option <command_line_option_0>
+   command_line_options <command_line_options_0>
+
 ``library/coroutining/``
 ------------------------
 

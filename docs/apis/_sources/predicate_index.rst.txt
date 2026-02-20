@@ -1345,6 +1345,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`numberlistp <numberlistp/0::chebyshev_norm/2>`
 
+``check/0``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`command_line_option <command_line_option/0::check/0>`
+
 ``check/1``
 -----------
 
@@ -2525,6 +2535,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`counters <counters/0::decrement_counter/1>`
+
+``default/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`command_line_option <command_line_option/0::default/1>`
 
 ``default_option/1``
 --------------------
@@ -5294,6 +5314,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`help <help/0::help/0>`
 * :ref:`packs_common <packs_common/0::help/0>`
 
+``help/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`command_line_option <command_line_option/0::help/1>`
+
+``help/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`command_line_options <command_line_options/0::help/2>`
+
+``help/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`command_line_options <command_line_options/0::help/3>`
+
 ``hex_digit//1``
 ----------------
 
@@ -7295,6 +7345,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`packs_common <packs_common/0::logtalk_packs/1>`
 
+``long_flags/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`command_line_option <command_line_option/0::long_flags/1>`
+
 ``longest_common_increasing_subsequence/3``
 -------------------------------------------
 
@@ -7962,6 +8022,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`intervalp <intervalp/0::met_by/2>`
 
+``meta/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`command_line_option <command_line_option/0::meta/1>`
+
 ``meta_type/3``
 ---------------
 
@@ -8246,6 +8316,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`command_line_option <command_line_option/0::name/1>`
 * :ref:`pack_protocol <pack_protocol/0::name/1>`
 * :ref:`registry_protocol <registry_protocol/0::name/1>`
 
@@ -9223,6 +9294,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`avro <avro/0::parse/3>`
 * :ref:`protobuf <protobuf/0::parse/3>`
 * :ref:`xml <xml/0::parse/3>`
+
+``parse/4``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`command_line_options <command_line_options/0::parse/4>`
+
+``parse/5``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`command_line_options <command_line_options/0::parse/5>`
 
 ``parse_all/2``
 ---------------
@@ -11734,6 +11825,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`doclet <doclet/0::shell_command/1>`
 
+``short_flags/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`command_line_option <command_line_option/0::short_flags/1>`
+
 ``shrink/3``
 ------------
 
@@ -13134,6 +13235,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`command_line_option <command_line_option/0::type/1>`
 * :ref:`type <type/0::type/1>`
 
 ``type/2``
@@ -13454,6 +13556,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`uuid_protocol <uuid_protocol/0::uuid_v7/1>`
+
+``valid/0``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`command_line_option <command_line_option/0::valid/0>`
 
 ``valid/1``
 -----------
