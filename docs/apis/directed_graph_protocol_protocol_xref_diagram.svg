@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-151 1282,-151 1282,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol directed_graph_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;02&#45;20, 19:21</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;02&#45;20, 20:07</text>
 <g id="clust1" class="cluster">
 <title>cluster_directed_graph_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="directed_graph_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 1258,-54.25 1258,-54.25 1264,-54.25 1270,-60.25 1270,-66.25 1270,-66.25 1270,-127 1270,-127 1270,-133 1264,-139 1258,-139 1258,-139 20,-139 20,-139 14,-139 8,-133 8,-127 8,-127 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/949e183887c87d639e176c86a24ff2ec9ae4c42b/library/graphs/directed_graph_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/949e183887c87d639e176c86a24ff2ec9ae4c42b/library/graphs/directed_graph_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/21b3ccf7df831d84945e77c3c4676c0a9b0bd4db/library/graphs/directed_graph_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/21b3ccf7df831d84945e77c3c4676c0a9b0bd4db/library/graphs/directed_graph_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-121.5" font-family="Monospace" font-size="10.00" fill="dimgray">directed_graph_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>transpose/2</title>
 <polygon fill="springgreen" stroke="black" points="118.38,-100.25 17.62,-100.25 17.62,-64.25 118.38,-64.25 118.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="25.62" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/949e183887c87d639e176c86a24ff2ec9ae4c42b/library/graphs/directed_graph_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/949e183887c87d639e176c86a24ff2ec9ae4c42b/library/graphs/directed_graph_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/21b3ccf7df831d84945e77c3c4676c0a9b0bd4db/library/graphs/directed_graph_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/21b3ccf7df831d84945e77c3c4676c0a9b0bd4db/library/graphs/directed_graph_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="30.88" y="-84.17" font-family="Monospace" font-size="11.00">transpose/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>transitive_closure/2</title>
 <polygon fill="springgreen" stroke="black" points="297.75,-100.25 136.25,-100.25 136.25,-64.25 297.75,-64.25 297.75,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="144.25" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/949e183887c87d639e176c86a24ff2ec9ae4c42b/library/graphs/directed_graph_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/949e183887c87d639e176c86a24ff2ec9ae4c42b/library/graphs/directed_graph_protocol.lgt#L39">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/21b3ccf7df831d84945e77c3c4676c0a9b0bd4db/library/graphs/directed_graph_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/21b3ccf7df831d84945e77c3c4676c0a9b0bd4db/library/graphs/directed_graph_protocol.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="149.5" y="-84.17" font-family="Monospace" font-size="11.00">transitive_closure/2</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>symmetric_closure/2</title>
 <polygon fill="springgreen" stroke="black" points="470.38,-100.25 315.62,-100.25 315.62,-64.25 470.38,-64.25 470.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="323.62" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/949e183887c87d639e176c86a24ff2ec9ae4c42b/library/graphs/directed_graph_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/949e183887c87d639e176c86a24ff2ec9ae4c42b/library/graphs/directed_graph_protocol.lgt#L46">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/21b3ccf7df831d84945e77c3c4676c0a9b0bd4db/library/graphs/directed_graph_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/21b3ccf7df831d84945e77c3c4676c0a9b0bd4db/library/graphs/directed_graph_protocol.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="328.88" y="-84.17" font-family="Monospace" font-size="11.00">symmetric_closure/2</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>topological_sort/2</title>
 <polygon fill="springgreen" stroke="black" points="636,-100.25 488,-100.25 488,-64.25 636,-64.25 636,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="496" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/949e183887c87d639e176c86a24ff2ec9ae4c42b/library/graphs/directed_graph_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/949e183887c87d639e176c86a24ff2ec9ae4c42b/library/graphs/directed_graph_protocol.lgt#L53">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/21b3ccf7df831d84945e77c3c4676c0a9b0bd4db/library/graphs/directed_graph_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/21b3ccf7df831d84945e77c3c4676c0a9b0bd4db/library/graphs/directed_graph_protocol.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="501.25" y="-84.17" font-family="Monospace" font-size="11.00">topological_sort/2</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>in_degree/3</title>
 <polygon fill="springgreen" stroke="black" points="754.38,-100.25 653.62,-100.25 653.62,-64.25 754.38,-64.25 754.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="661.62" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/949e183887c87d639e176c86a24ff2ec9ae4c42b/library/graphs/directed_graph_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/949e183887c87d639e176c86a24ff2ec9ae4c42b/library/graphs/directed_graph_protocol.lgt#L60">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/21b3ccf7df831d84945e77c3c4676c0a9b0bd4db/library/graphs/directed_graph_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/21b3ccf7df831d84945e77c3c4676c0a9b0bd4db/library/graphs/directed_graph_protocol.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="666.88" y="-84.17" font-family="Monospace" font-size="11.00">in_degree/3</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>out_degree/3</title>
 <polygon fill="springgreen" stroke="black" points="879.75,-100.25 772.25,-100.25 772.25,-64.25 879.75,-64.25 879.75,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="780.25" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/949e183887c87d639e176c86a24ff2ec9ae4c42b/library/graphs/directed_graph_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/949e183887c87d639e176c86a24ff2ec9ae4c42b/library/graphs/directed_graph_protocol.lgt#L67">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/21b3ccf7df831d84945e77c3c4676c0a9b0bd4db/library/graphs/directed_graph_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/21b3ccf7df831d84945e77c3c4676c0a9b0bd4db/library/graphs/directed_graph_protocol.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="785.5" y="-84.17" font-family="Monospace" font-size="11.00">out_degree/3</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>is_acyclic/1</title>
 <polygon fill="springgreen" stroke="black" points="1005.75,-100.25 898.25,-100.25 898.25,-64.25 1005.75,-64.25 1005.75,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="906.25" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/949e183887c87d639e176c86a24ff2ec9ae4c42b/library/graphs/directed_graph_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/949e183887c87d639e176c86a24ff2ec9ae4c42b/library/graphs/directed_graph_protocol.lgt#L74">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/21b3ccf7df831d84945e77c3c4676c0a9b0bd4db/library/graphs/directed_graph_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/21b3ccf7df831d84945e77c3c4676c0a9b0bd4db/library/graphs/directed_graph_protocol.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="911.5" y="-84.17" font-family="Monospace" font-size="11.00">is_acyclic/1</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>strongly_connected_components/2</title>
 <polygon fill="springgreen" stroke="black" points="1259.88,-100.25 1024.12,-100.25 1024.12,-64.25 1259.88,-64.25 1259.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1032.12" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/949e183887c87d639e176c86a24ff2ec9ae4c42b/library/graphs/directed_graph_protocol.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/949e183887c87d639e176c86a24ff2ec9ae4c42b/library/graphs/directed_graph_protocol.lgt#L81">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/21b3ccf7df831d84945e77c3c4676c0a9b0bd4db/library/graphs/directed_graph_protocol.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/21b3ccf7df831d84945e77c3c4676c0a9b0bd4db/library/graphs/directed_graph_protocol.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="1037.38" y="-84.17" font-family="Monospace" font-size="11.00">strongly_connected_components/2</text>
 </a>
 </g>
