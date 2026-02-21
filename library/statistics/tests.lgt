@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2022-06-20,
+		date is 2026-02-20,
 		comment is 'Unit tests for the "statistics" library.'
 	]).
 
@@ -265,5 +265,177 @@
 
 	test(sample_valid_1_03, deterministic) :-
 		sample::valid([1,2,3]).
+
+	% percentile/3 tests
+
+	test(sample_percentile_3_01, false) :-
+		sample::percentile(50, [], _).
+
+	test(sample_percentile_3_02, false) :-
+		sample::percentile(0, [1,2,3], _).
+
+	test(sample_percentile_3_03, false) :-
+		sample::percentile(100, [1,2,3], _).
+
+	test(sample_percentile_3_04, deterministic(Percentile == 7)) :-
+		sample::percentile(25, [3, 6, 7, 8, 8, 10, 13, 15, 16, 20], Percentile).
+
+	test(sample_percentile_3_05, deterministic(Percentile == 8)) :-
+		sample::percentile(50, [3, 6, 7, 8, 8, 10, 13, 15, 16, 20], Percentile).
+
+	test(sample_percentile_3_06, deterministic(Percentile == 15)) :-
+		sample::percentile(75, [3, 6, 7, 8, 8, 10, 13, 15, 16, 20], Percentile).
+
+	% quartiles/4 tests
+
+	test(sample_quartiles_4_01, false) :-
+		sample::quartiles([], _, _, _).
+
+	test(sample_quartiles_4_02, false) :-
+		sample::quartiles([1], _, _, _).
+
+	test(sample_quartiles_4_03, deterministic((Q1 =~= 1.5, Q2 =~= 2.5, Q3 =~= 3.5))) :-
+		sample::quartiles([1,2,3,4], Q1, Q2, Q3).
+
+	test(sample_quartiles_4_04, deterministic((Q1 =~= 1.5, Q2 =~= 3.0, Q3 =~= 4.5))) :-
+		sample::quartiles([1,2,3,4,5], Q1, Q2, Q3).
+
+	test(sample_quartiles_4_05, deterministic((Q1 =~= 2.5, Q2 =~= 4.5, Q3 =~= 6.5))) :-
+		sample::quartiles([1,2,3,4,5,6,7,8], Q1, Q2, Q3).
+
+	% interquartile_range/2 tests
+
+	test(sample_interquartile_range_2_01, false) :-
+		sample::interquartile_range([], _).
+
+	test(sample_interquartile_range_2_02, deterministic(IQR =~= 2.0)) :-
+		sample::interquartile_range([1,2,3,4], IQR).
+
+	test(sample_interquartile_range_2_03, deterministic(IQR =~= 4.0)) :-
+		sample::interquartile_range([1,2,3,4,5,6,7,8], IQR).
+
+	% covariance/3 tests
+
+	test(sample_covariance_3_01, false) :-
+		sample::covariance([], [], _).
+
+	test(sample_covariance_3_02, deterministic(Covariance =~= 1.5)) :-
+		sample::covariance([1,2,3,4,5], [2,4,5,4,5], Covariance).
+
+	test(population_covariance_3_01, deterministic(Covariance =~= 1.2)) :-
+		population::covariance([1,2,3,4,5], [2,4,5,4,5], Covariance).
+
+	% correlation/3 tests
+
+	test(sample_correlation_3_01, false) :-
+		sample::correlation([], [], _).
+
+	test(sample_correlation_3_02, deterministic(Correlation =~= 0.7745966692414834)) :-
+		sample::correlation([1,2,3,4,5], [2,4,5,4,5], Correlation).
+
+	test(population_correlation_3_01, deterministic(Correlation =~= 0.7745966692414834)) :-
+		population::correlation([1,2,3,4,5], [2,4,5,4,5], Correlation).
+
+	% rank_correlation/3 tests
+
+	test(sample_rank_correlation_3_01, false) :-
+		sample::rank_correlation([], [], _).
+
+	test(sample_rank_correlation_3_02, deterministic(Correlation =~= 0.7378647873726218)) :-
+		sample::rank_correlation([1,2,3,4,5], [2,4,5,4,5], Correlation).
+
+	test(sample_rank_correlation_3_03, deterministic(Correlation =~= 1.0)) :-
+		sample::rank_correlation([1,2,3,4,5], [10,20,30,40,50], Correlation).
+
+	% trimmed_mean/3 tests
+
+	test(sample_trimmed_mean_3_01, false) :-
+		sample::trimmed_mean(0.1, [], _).
+
+	test(sample_trimmed_mean_3_02, deterministic(Mean =~= 51.0)) :-
+		sample::trimmed_mean(0.0, [35,36,46,68,70], Mean).
+
+	test(sample_trimmed_mean_3_03, deterministic(Mean =~= 50.0)) :-
+		sample::trimmed_mean(0.2, [35,36,46,68,70], Mean).
+
+	test(sample_trimmed_mean_3_04, deterministic(Mean =~= 5.5)) :-
+		sample::trimmed_mean(0.1, [1,2,3,4,5,6,7,8,9,10], Mean).
+
+	% sum_of_squares/2 tests
+
+	test(sample_sum_of_squares_2_01, false) :-
+		sample::sum_of_squares([], _).
+
+	test(sample_sum_of_squares_2_02, deterministic(Sum =~= 1156.0)) :-
+		sample::sum_of_squares([35,36,46,68,70], Sum).
+
+	% central_moment/3 tests
+
+	test(sample_central_moment_3_01, false) :-
+		sample::central_moment(2, [], _).
+
+	test(sample_central_moment_3_02, deterministic(Moment =~= 231.2)) :-
+		sample::central_moment(2, [35,36,46,68,70], Moment).
+
+	test(sample_central_moment_3_03, deterministic(Moment =~= 835.2)) :-
+		sample::central_moment(3, [35,36,46,68,70], Moment).
+
+	% min_max_normalization/2 tests
+
+	test(sample_min_max_normalization_2_01, false) :-
+		sample::min_max_normalization([], _).
+
+	test(sample_min_max_normalization_2_02, false) :-
+		sample::min_max_normalization([5,5,5], _).
+
+	test(sample_min_max_normalization_2_03, deterministic(Normalized =~= [0.0, 0.5, 1.0])) :-
+		sample::min_max_normalization([1,2,3], Normalized).
+
+	test(sample_min_max_normalization_2_04, deterministic(Normalized =~= [0.0, 0.02857142857142857, 0.3142857142857143, 0.9428571428571428, 1.0])) :-
+		sample::min_max_normalization([35,36,46,68,70], Normalized).
+
+	% frequency_distribution/2 tests
+
+	test(sample_frequency_distribution_2_01, false) :-
+		sample::frequency_distribution([], _).
+
+	test(sample_frequency_distribution_2_02, deterministic(Distribution == [1-2, 2-3, 3-1])) :-
+		sample::frequency_distribution([1,2,1,2,3,2], Distribution).
+
+	test(sample_frequency_distribution_2_03, deterministic(Distribution == [1-1, 2-1, 3-1])) :-
+		sample::frequency_distribution([3,1,2], Distribution).
+
+	% standard_error/2 tests
+
+	test(sample_standard_error_2_01, false) :-
+		sample::standard_error([], _).
+
+	test(sample_standard_error_2_02, deterministic(Error =~= 7.6026310920975)) :-
+		sample::standard_error([35,36,46,68,70], Error).
+
+	test(population_standard_error_2_01, deterministic(Error =~= 6.7999999999999)) :-
+		population::standard_error([35,36,46,68,70], Error).
+
+	% mean_squared_error/3 tests
+
+	test(sample_mean_squared_error_3_01, false) :-
+		sample::mean_squared_error([], [], _).
+
+	test(sample_mean_squared_error_3_02, deterministic(MSE =~= 1.0)) :-
+		sample::mean_squared_error([1,2,3], [2,3,4], MSE).
+
+	test(sample_mean_squared_error_3_03, deterministic(MSE =~= 0.5)) :-
+		sample::mean_squared_error([1,2,3,4], [1,3,3,5], MSE).
+
+	% root_mean_squared_error/3 tests
+
+	test(sample_root_mean_squared_error_3_01, false) :-
+		sample::root_mean_squared_error([], [], _).
+
+	test(sample_root_mean_squared_error_3_02, deterministic(RMSE =~= 1.0)) :-
+		sample::root_mean_squared_error([1,2,3], [2,3,4], RMSE).
+
+	test(sample_root_mean_squared_error_3_03, deterministic(RMSE =~= 0.7071067811865476)) :-
+		sample::root_mean_squared_error([1,2,3,4], [1,3,3,5], RMSE).
 
 :- end_object.

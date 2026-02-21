@@ -171,6 +171,12 @@ Xoshiro256**, and WELL512a algorithms to the `random` library.
 * ADDED: Support for version 7 UUIDs to the `uuid` library. Also added
 `uuid_nil/1` and `uuid_max/1` predicates per RFC 9562.
 
+* ADDED: New `statistics` library predicates `percentile/3`, `quartiles/4`,
+`interquartile_range/2`, `covariance/3`, `correlation/3`, `rank_correlation/3`,
+`trimmed_mean/3`, `sum_of_squares/2`, `central_moment/3`, `standard_error/2`,
+`min_max_normalization/2`, `frequency_distribution/2`, `mean_squared_error/3`,
+and `root_mean_squared_error/3`.
+
 * ADDED: Wrapper predicates for commonly used Redis operations across multiple
 data types to the `redis` library.
 

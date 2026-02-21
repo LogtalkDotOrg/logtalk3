@@ -1265,6 +1265,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`maybe <maybe/0::cat/2>`
 
+``central_moment/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::central_moment/3>`
+
 ``change_directory/1``
 ----------------------
 
@@ -2104,6 +2114,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::copy_file/2>`
 
+``correlation/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::correlation/3>`
+
 ``cosine_similarity/3``
 -----------------------
 
@@ -2164,6 +2184,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`counters <counters/0::counter/2>`
 * :ref:`mutations_store <mutations_store/0::counter/2>`
+
+``covariance/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::covariance/3>`
 
 ``cover/1``
 -----------
@@ -4759,6 +4789,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`coroutining <coroutining/0::freeze/2>`
 
+``frequency_distribution/2``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::frequency_distribution/2>`
+
 ``from_generator/2``
 --------------------
 
@@ -5956,6 +5996,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::internal_os_path/2>`
+
+``interquartile_range/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::interquartile_range/2>`
 
 ``intersect/2``
 ---------------
@@ -7848,6 +7898,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`statisticsp <statisticsp/0::mean_deviation/2>`
 
+``mean_squared_error/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::mean_squared_error/3>`
+
 ``median/2``
 ------------
 
@@ -8156,6 +8216,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`numberlistp <numberlistp/0::min_max/3>`
 * :ref:`statisticsp <statisticsp/0::min_max/3>`
+
+``min_max_normalization/2``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::min_max_normalization/2>`
 
 ``min_path/5``
 --------------
@@ -9466,6 +9536,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`deque_protocol <deque_protocol/0::peek_front/2>`
 
+``percentile/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::percentile/3>`
+
 ``permutation/2``
 -----------------
 
@@ -10119,6 +10199,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`deque_protocol <deque_protocol/0::push_front/3>`
 
+``quartiles/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::quartiles/4>`
+
 ``query/1``
 -----------
 
@@ -10349,6 +10439,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`statisticsp <statisticsp/0::range/2>`
+
+``rank_correlation/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::rank_correlation/3>`
 
 ``rd/1``
 --------
@@ -11164,6 +11264,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`datalog_protocol <datalog_protocol/0::rollback/0>`
+
+``root_mean_squared_error/3``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::root_mean_squared_error/3>`
 
 ``rpop/3``
 ----------
@@ -12189,6 +12299,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`statisticsp <statisticsp/0::standard_deviation/2>`
 
+``standard_error/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::standard_error/2>`
+
 ``standard_exponential/1``
 --------------------------
 
@@ -12737,6 +12857,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`numberlistp <numberlistp/0::sum/2>`
 * :ref:`statisticsp <statisticsp/0::sum/2>`
 
+``sum_of_squares/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::sum_of_squares/2>`
+
 ``superclass/1``
 ----------------
 
@@ -13178,6 +13308,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`string(Representation) <string/1::trim_right/3>`
+
+``trimmed_mean/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`statisticsp <statisticsp/0::trimmed_mean/3>`
 
 ``true/1``
 ----------

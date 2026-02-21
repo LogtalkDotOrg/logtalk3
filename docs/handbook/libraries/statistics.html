@@ -147,6 +147,20 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api-overview">API overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#aggregation">Aggregation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#extremes-and-range">Extremes and Range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#central-tendency">Central Tendency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#measures-of-position-quantiles">Measures of Position / Quantiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#measures-of-dispersion">Measures of Dispersion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#measures-of-shape">Measures of Shape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#measures-of-association">Measures of Association</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-metrics">Error Metrics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#normalization">Normalization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#frequency-counting">Frequency / Counting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#validation">Validation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="stemming.html"><code class="docutils literal notranslate"><span class="pre">stemming</span></code></a></li>
@@ -211,9 +225,15 @@
 <span id="library-statistics"></span><h1><code class="docutils literal notranslate"><span class="pre">statistics</span></code><a class="headerlink" href="#statistics" title="Link to this heading"></a></h1>
 <p>The entities in this library define some useful predicates for
 descriptive statistics. Data is represented as a list of numbers
-(integers or floats). Use the object <code class="docutils literal notranslate"><span class="pre">sample</span></code> of your data represents
+(integers or floats). Use the object <code class="docutils literal notranslate"><span class="pre">sample</span></code> if your data represents
 a sample. Use the object <code class="docutils literal notranslate"><span class="pre">population</span></code> if your data represents a
 population.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">variance/2</span></code>, <code class="docutils literal notranslate"><span class="pre">standard_deviation/2</span></code>, <code class="docutils literal notranslate"><span class="pre">skewness/2</span></code>,
+<code class="docutils literal notranslate"><span class="pre">kurtosis/2</span></code>, <code class="docutils literal notranslate"><span class="pre">covariance/3</span></code>, <code class="docutils literal notranslate"><span class="pre">standard_error/2</span></code>,
+<code class="docutils literal notranslate"><span class="pre">correlation/3</span></code>, and <code class="docutils literal notranslate"><span class="pre">rank_correlation/3</span></code> predicates use different
+formulas depending on whether the data represents a sample (dividing by
+<em>N-1</em>) or a population (dividing by <em>N</em>). All other predicates share the
+same implementation.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -233,6 +253,262 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(statistics(tester)).
 </pre></div>
 </div>
+</section>
+<section id="api-overview">
+<h2>API overview<a class="headerlink" href="#api-overview" title="Link to this heading"></a></h2>
+<section id="aggregation">
+<h3>Aggregation<a class="headerlink" href="#aggregation" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Predicate</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">product/2</span></code></p></td>
+<td><p>Product of all list numbers</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sum/2</span></code></p></td>
+<td><p>Sum of all list numbers</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="extremes-and-range">
+<h3>Extremes and Range<a class="headerlink" href="#extremes-and-range" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Predicate</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">min/2</span></code></p></td>
+<td><p>Minimum value</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">max/2</span></code></p></td>
+<td><p>Maximum value</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">min_max/3</span></code></p></td>
+<td><p>Minimum and maximum values</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">range/2</span></code></p></td>
+<td><p>Range (max - min)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="central-tendency">
+<h3>Central Tendency<a class="headerlink" href="#central-tendency" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Predicate</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">arithmetic_mean/2</span></code></p></td>
+<td><p>Arithmetic mean</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">geometric_mean/2</span></code></p></td>
+<td><p>Geometric mean</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">harmonic_mean/2</span></code></p></td>
+<td><p>Harmonic mean</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">weighted_mean/3</span></code></p></td>
+<td><p>Weighted mean</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">trimmed_mean/3</span></code></p></td>
+<td><p>Trimmed mean (removing a fraction of extreme
+values)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">median/2</span></code></p></td>
+<td><p>Median</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">modes/2</span></code></p></td>
+<td><p>Modes (in ascending order)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="measures-of-position-quantiles">
+<span id="id1"></span><h3>Measures of Position / Quantiles<a class="headerlink" href="#measures-of-position-quantiles" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Predicate</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fractile/3</span></code></p></td>
+<td><p>Fractile (quantile given a fraction in
+(0.0, 1.0))</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">percentile/3</span></code></p></td>
+<td><p>Percentile (quantile given a value in
+(0, 100))</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">quartiles/4</span></code></p></td>
+<td><p>Quartiles (Q1, Q2, Q3)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">interquartile_range/2</span></code></p></td>
+<td><p>Interquartile range (Q3 - Q1)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="measures-of-dispersion">
+<h3>Measures of Dispersion<a class="headerlink" href="#measures-of-dispersion" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Predicate</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">variance/2</span></code></p></td>
+<td><p>Variance (sample or population)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">standard_deviation/2</span></code></p></td>
+<td><p>Standard deviation (sample or
+population)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mean_deviation/2</span></code></p></td>
+<td><p>Mean absolute deviation</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">median_deviation/2</span></code></p></td>
+<td><p>Median absolute deviation</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">average_deviation/3</span></code></p></td>
+<td><p>Average absolute deviation from
+a given central tendency</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">coefficient_of_variation/2</span></code></p></td>
+<td><p>Coefficient of variation</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">relative_standard_deviation/2</span></code></p></td>
+<td><p>Relative standard deviation
+(percentage)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sum_of_squares/2</span></code></p></td>
+<td><p>Sum of squared deviations from
+the mean</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">standard_error/2</span></code></p></td>
+<td><p>Standard error of the mean</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="measures-of-shape">
+<h3>Measures of Shape<a class="headerlink" href="#measures-of-shape" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Predicate</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">skewness/2</span></code></p></td>
+<td><p>Moment skewness (sample or population)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">kurtosis/2</span></code></p></td>
+<td><p>Excess kurtosis (sample or population)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">central_moment/3</span></code></p></td>
+<td><p>K-th central moment</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="measures-of-association">
+<h3>Measures of Association<a class="headerlink" href="#measures-of-association" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Predicate</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">covariance/3</span></code></p></td>
+<td><p>Covariance (sample or population)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">correlation/3</span></code></p></td>
+<td><p>Pearson correlation coefficient</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rank_correlation/3</span></code></p></td>
+<td><p>Spearman rank correlation coefficient</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="error-metrics">
+<h3>Error Metrics<a class="headerlink" href="#error-metrics" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Predicate</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mean_squared_error/3</span></code></p></td>
+<td><p>Mean squared error between two lists</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">root_mean_squared_error/3</span></code></p></td>
+<td><p>Root mean squared error between two lists</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="normalization">
+<h3>Normalization<a class="headerlink" href="#normalization" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Predicate</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">z_normalization/2</span></code></p></td>
+<td><p>Z-score normalization (mean ~= 0, std ~= 1)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">min_max_normalization/2</span></code></p></td>
+<td><p>Min-max normalization (rescale to [0, 1])</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="frequency-counting">
+<span id="id2"></span><h3>Frequency / Counting<a class="headerlink" href="#frequency-counting" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Predicate</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">frequency_distribution/2</span></code></p></td>
+<td><p>Frequency distribution (Value-Count pairs)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="validation">
+<h3>Validation<a class="headerlink" href="#validation" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Predicate</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">valid/1</span></code></p></td>
+<td><p>Term is a closed list of numbers</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 </section>
 

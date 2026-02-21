@@ -22,9 +22,9 @@
 :- protocol(statisticsp).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2022-06-20,
+		date is 2026-02-20,
 		comment is 'Statistical calculations over a list of numbers protocol.',
 		see_also is [statistics, sample, population]
 	]).
@@ -96,7 +96,7 @@
 	:- public(weighted_mean/3).
 	:- mode(weighted_mean(+list(number), +list(number), -float), zero_or_one).
 	:- info(weighted_mean/3, [
-		comment is 'Calculates the weighted mean of a list of numbers. Fails if the list is empty or if the two lists have different lengths. Wights are assume to be non-negative.',
+		comment is 'Calculates the weighted mean of a list of numbers. Fails if the list is empty or if the two lists have different lengths. Weights are assumed to be non-negative.',
 		argnames is ['Weights', 'List', 'Mean']
 	]).
 
@@ -190,6 +190,104 @@
 	:- info(fractile/3, [
 		comment is 'Calculates the smallest value in a list of numbers such that the list elements in its fraction ``P`` are less or equal to that value (with ``P`` in the open interval ``(0.0, 1.0)``). Fails if the list is empty.',
 		argnames is ['P', 'List', 'Fractile']
+	]).
+
+	:- public(percentile/3).
+	:- mode(percentile(+number, +list(number), -number), zero_or_one).
+	:- info(percentile/3, [
+		comment is 'Calculates the P-th percentile of a list of numbers (with ``P`` in the open interval ``(0, 100)``). Fails if the list is empty.',
+		argnames is ['P', 'List', 'Percentile']
+	]).
+
+	:- public(quartiles/4).
+	:- mode(quartiles(+list(number), -number, -number, -number), zero_or_one).
+	:- info(quartiles/4, [
+		comment is 'Calculates the quartiles (Q1, Q2, Q3) of a list of numbers. Q2 is the median. Q1 and Q3 are the medians of the lower and upper halves, respectively. Fails if the list has fewer than two elements.',
+		argnames is ['List', 'Q1', 'Q2', 'Q3']
+	]).
+
+	:- public(interquartile_range/2).
+	:- mode(interquartile_range(+list(number), -number), zero_or_one).
+	:- info(interquartile_range/2, [
+		comment is 'Calculates the interquartile range (Q3 - Q1) of a list of numbers. Fails if the list has fewer than two elements.',
+		argnames is ['List', 'IQR']
+	]).
+
+	:- public(covariance/3).
+	:- mode(covariance(+list(number), +list(number), -float), zero_or_one).
+	:- info(covariance/3, [
+		comment is 'Calculates the covariance of two lists of numbers. Fails if the lists are empty or have different lengths.',
+		argnames is ['List1', 'List2', 'Covariance']
+	]).
+
+	:- public(correlation/3).
+	:- mode(correlation(+list(number), +list(number), -float), zero_or_one).
+	:- info(correlation/3, [
+		comment is 'Calculates the Pearson correlation coefficient of two lists of numbers. Fails if the lists are empty or have different lengths.',
+		argnames is ['List1', 'List2', 'Correlation']
+	]).
+
+	:- public(rank_correlation/3).
+	:- mode(rank_correlation(+list(number), +list(number), -float), zero_or_one).
+	:- info(rank_correlation/3, [
+		comment is 'Calculates the Spearman rank correlation coefficient of two lists of numbers. Handles ties using average ranks. Fails if the lists are empty or have different lengths.',
+		argnames is ['List1', 'List2', 'Correlation']
+	]).
+
+	:- public(trimmed_mean/3).
+	:- mode(trimmed_mean(+float, +list(number), -float), zero_or_one).
+	:- info(trimmed_mean/3, [
+		comment is 'Calculates the trimmed mean of a list of numbers by removing a fraction of extreme values from both ends (with the fraction in the half-open interval ``[0.0, 0.5)``). Fails if the list is empty or if too many elements would be trimmed.',
+		argnames is ['Fraction', 'List', 'Mean']
+	]).
+
+	:- public(sum_of_squares/2).
+	:- mode(sum_of_squares(+list(number), -float), zero_or_one).
+	:- info(sum_of_squares/2, [
+		comment is 'Calculates the sum of squared deviations from the arithmetic mean of a list of numbers. Fails if the list is empty.',
+		argnames is ['List', 'Sum']
+	]).
+
+	:- public(central_moment/3).
+	:- mode(central_moment(+positive_integer, +list(number), -float), zero_or_one).
+	:- info(central_moment/3, [
+		comment is 'Calculates the K-th central moment of a list of numbers. The K-th central moment is the mean of the deviations from the mean raised to the power K (with ``K > 0``). Fails if the list is empty.',
+		argnames is ['K', 'List', 'Moment']
+	]).
+
+	:- public(min_max_normalization/2).
+	:- mode(min_max_normalization(+list(number), -list(float)), zero_or_one).
+	:- info(min_max_normalization/2, [
+		comment is 'Normalizes a list of numbers to the interval ``[0.0, 1.0]`` using min-max normalization. Fails if the list is empty or if all values are equal.',
+		argnames is ['List', 'NormalizedList']
+	]).
+
+	:- public(frequency_distribution/2).
+	:- mode(frequency_distribution(+list(number), -list(pair(number,integer))), zero_or_one).
+	:- info(frequency_distribution/2, [
+		comment is 'Computes the frequency distribution of a list of numbers, returning a list of ``Value-Count`` pairs in ascending order of value. Fails if the list is empty.',
+		argnames is ['List', 'Distribution']
+	]).
+
+	:- public(standard_error/2).
+	:- mode(standard_error(+list(number), -float), zero_or_one).
+	:- info(standard_error/2, [
+		comment is 'Calculates the standard error of the mean of a list of numbers. Fails if the list is empty.',
+		argnames is ['List', 'Error']
+	]).
+
+	:- public(mean_squared_error/3).
+	:- mode(mean_squared_error(+list(number), +list(number), -float), zero_or_one).
+	:- info(mean_squared_error/3, [
+		comment is 'Calculates the mean squared error between two lists of numbers. Fails if the lists are empty or have different lengths.',
+		argnames is ['List1', 'List2', 'Error']
+	]).
+
+	:- public(root_mean_squared_error/3).
+	:- mode(root_mean_squared_error(+list(number), +list(number), -float), zero_or_one).
+	:- info(root_mean_squared_error/3, [
+		comment is 'Calculates the root mean squared error between two lists of numbers. Fails if the lists are empty or have different lengths.',
+		argnames is ['List1', 'List2', 'Error']
 	]).
 
 	:- public(valid/1).

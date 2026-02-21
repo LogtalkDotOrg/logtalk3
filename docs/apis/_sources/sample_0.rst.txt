@@ -14,8 +14,8 @@ Statistical sample represented as a list of numbers.
 |    ``logtalk_load(statistics(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:4:0
-| **Date:** 2020-02-02
+| **Version:** 1:5:0
+| **Date:** 2026-02-20
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,7 +28,7 @@ Statistical sample represented as a list of numbers.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`statisticsp/0::arithmetic_mean/2`  :ref:`statisticsp/0::average_deviation/3`  :ref:`statisticsp/0::coefficient_of_variation/2`  :ref:`statisticsp/0::fractile/3`  :ref:`statisticsp/0::geometric_mean/2`  :ref:`statisticsp/0::harmonic_mean/2`  :ref:`statisticsp/0::kurtosis/2`  :ref:`statisticsp/0::max/2`  :ref:`statisticsp/0::mean_deviation/2`  :ref:`statisticsp/0::median/2`  :ref:`statisticsp/0::median_deviation/2`  :ref:`statisticsp/0::min/2`  :ref:`statisticsp/0::min_max/3`  :ref:`statisticsp/0::modes/2`  :ref:`statisticsp/0::product/2`  :ref:`statisticsp/0::range/2`  :ref:`statisticsp/0::relative_standard_deviation/2`  :ref:`statisticsp/0::skewness/2`  :ref:`statisticsp/0::standard_deviation/2`  :ref:`statisticsp/0::sum/2`  :ref:`statisticsp/0::valid/1`  :ref:`statisticsp/0::variance/2`  :ref:`statisticsp/0::weighted_mean/3`  :ref:`statisticsp/0::z_normalization/2`  
+|     :ref:`statisticsp/0::arithmetic_mean/2`  :ref:`statisticsp/0::average_deviation/3`  :ref:`statisticsp/0::central_moment/3`  :ref:`statisticsp/0::coefficient_of_variation/2`  :ref:`statisticsp/0::correlation/3`  :ref:`statisticsp/0::covariance/3`  :ref:`statisticsp/0::fractile/3`  :ref:`statisticsp/0::frequency_distribution/2`  :ref:`statisticsp/0::geometric_mean/2`  :ref:`statisticsp/0::harmonic_mean/2`  :ref:`statisticsp/0::interquartile_range/2`  :ref:`statisticsp/0::kurtosis/2`  :ref:`statisticsp/0::max/2`  :ref:`statisticsp/0::mean_deviation/2`  :ref:`statisticsp/0::mean_squared_error/3`  :ref:`statisticsp/0::median/2`  :ref:`statisticsp/0::median_deviation/2`  :ref:`statisticsp/0::min/2`  :ref:`statisticsp/0::min_max/3`  :ref:`statisticsp/0::min_max_normalization/2`  :ref:`statisticsp/0::modes/2`  :ref:`statisticsp/0::percentile/3`  :ref:`statisticsp/0::product/2`  :ref:`statisticsp/0::quartiles/4`  :ref:`statisticsp/0::range/2`  :ref:`statisticsp/0::rank_correlation/3`  :ref:`statisticsp/0::relative_standard_deviation/2`  :ref:`statisticsp/0::root_mean_squared_error/3`  :ref:`statisticsp/0::skewness/2`  :ref:`statisticsp/0::standard_deviation/2`  :ref:`statisticsp/0::standard_error/2`  :ref:`statisticsp/0::sum/2`  :ref:`statisticsp/0::sum_of_squares/2`  :ref:`statisticsp/0::trimmed_mean/3`  :ref:`statisticsp/0::valid/1`  :ref:`statisticsp/0::variance/2`  :ref:`statisticsp/0::weighted_mean/3`  :ref:`statisticsp/0::z_normalization/2`  
 
 .. contents::
    :local:

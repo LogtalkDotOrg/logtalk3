@@ -14,8 +14,8 @@ Statistical calculations over a list of numbers.
 |    ``logtalk_load(statistics(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:7:1
-| **Date:** 2023-05-29
+| **Version:** 1:8:0
+| **Date:** 2026-02-20
 
 | **Compilation flags:**
 |    ``static``
@@ -31,7 +31,7 @@ Statistical calculations over a list of numbers.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`statisticsp/0::arithmetic_mean/2`  :ref:`statisticsp/0::average_deviation/3`  :ref:`statisticsp/0::coefficient_of_variation/2`  :ref:`statisticsp/0::fractile/3`  :ref:`statisticsp/0::geometric_mean/2`  :ref:`statisticsp/0::harmonic_mean/2`  :ref:`statisticsp/0::kurtosis/2`  :ref:`statisticsp/0::max/2`  :ref:`statisticsp/0::mean_deviation/2`  :ref:`statisticsp/0::median/2`  :ref:`statisticsp/0::median_deviation/2`  :ref:`statisticsp/0::min/2`  :ref:`statisticsp/0::min_max/3`  :ref:`statisticsp/0::modes/2`  :ref:`statisticsp/0::product/2`  :ref:`statisticsp/0::range/2`  :ref:`statisticsp/0::relative_standard_deviation/2`  :ref:`statisticsp/0::skewness/2`  :ref:`statisticsp/0::standard_deviation/2`  :ref:`statisticsp/0::sum/2`  :ref:`statisticsp/0::valid/1`  :ref:`statisticsp/0::variance/2`  :ref:`statisticsp/0::weighted_mean/3`  :ref:`statisticsp/0::z_normalization/2`  
+|     :ref:`statisticsp/0::arithmetic_mean/2`  :ref:`statisticsp/0::average_deviation/3`  :ref:`statisticsp/0::central_moment/3`  :ref:`statisticsp/0::coefficient_of_variation/2`  :ref:`statisticsp/0::correlation/3`  :ref:`statisticsp/0::covariance/3`  :ref:`statisticsp/0::fractile/3`  :ref:`statisticsp/0::frequency_distribution/2`  :ref:`statisticsp/0::geometric_mean/2`  :ref:`statisticsp/0::harmonic_mean/2`  :ref:`statisticsp/0::interquartile_range/2`  :ref:`statisticsp/0::kurtosis/2`  :ref:`statisticsp/0::max/2`  :ref:`statisticsp/0::mean_deviation/2`  :ref:`statisticsp/0::mean_squared_error/3`  :ref:`statisticsp/0::median/2`  :ref:`statisticsp/0::median_deviation/2`  :ref:`statisticsp/0::min/2`  :ref:`statisticsp/0::min_max/3`  :ref:`statisticsp/0::min_max_normalization/2`  :ref:`statisticsp/0::modes/2`  :ref:`statisticsp/0::percentile/3`  :ref:`statisticsp/0::product/2`  :ref:`statisticsp/0::quartiles/4`  :ref:`statisticsp/0::range/2`  :ref:`statisticsp/0::rank_correlation/3`  :ref:`statisticsp/0::relative_standard_deviation/2`  :ref:`statisticsp/0::root_mean_squared_error/3`  :ref:`statisticsp/0::skewness/2`  :ref:`statisticsp/0::standard_deviation/2`  :ref:`statisticsp/0::standard_error/2`  :ref:`statisticsp/0::sum/2`  :ref:`statisticsp/0::sum_of_squares/2`  :ref:`statisticsp/0::trimmed_mean/3`  :ref:`statisticsp/0::valid/1`  :ref:`statisticsp/0::variance/2`  :ref:`statisticsp/0::weighted_mean/3`  :ref:`statisticsp/0::z_normalization/2`  
 
 .. contents::
    :local:
@@ -122,6 +122,177 @@ Auxiliary predicate for computing the variance.
 |    ``variance(List,Length0,Length,Mean,M20,M2)``
 | **Mode and number of proofs:**
 |    ``variance(+list(number),+integer,-integer,+float,+float,-float)`` - ``one``
+
+
+------------
+
+.. index:: cross_deviation_sum/6
+.. _statistics/0::cross_deviation_sum/6:
+
+``cross_deviation_sum/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Auxiliary predicate for computing the cross-deviation sum for covariance.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cross_deviation_sum(List1,List2,Mean1,Mean2,Sum0,Sum)``
+| **Mode and number of proofs:**
+|    ``cross_deviation_sum(+list(number),+list(number),+float,+float,+float,-float)`` - ``one``
+
+
+------------
+
+.. index:: sorted_median/3
+.. _statistics/0::sorted_median/3:
+
+``sorted_median/3``
+^^^^^^^^^^^^^^^^^^^
+
+Auxiliary predicate for computing the median of an already sorted list with known length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sorted_median(Sorted,Length,Median)``
+| **Mode and number of proofs:**
+|    ``sorted_median(+list(number),+integer,-number)`` - ``one``
+
+
+------------
+
+.. index:: sum_of_squares/4
+.. _statistics/0::sum_of_squares/4:
+
+``sum_of_squares/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Auxiliary predicate for computing the sum of squared deviations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sum_of_squares(List,Mean,Sum0,Sum)``
+| **Mode and number of proofs:**
+|    ``sum_of_squares(+list(number),+float,+float,-float)`` - ``one``
+
+
+------------
+
+.. index:: central_moment_sum/7
+.. _statistics/0::central_moment_sum/7:
+
+``central_moment_sum/7``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Auxiliary predicate for computing central moments.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``central_moment_sum(List,K,Mean,N0,Sum0,N,Sum)``
+| **Mode and number of proofs:**
+|    ``central_moment_sum(+list(number),+positive_integer,+float,+integer,+float,-integer,-float)`` - ``one``
+
+
+------------
+
+.. index:: min_max_normalize/4
+.. _statistics/0::min_max_normalize/4:
+
+``min_max_normalize/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Auxiliary predicate for min-max normalization.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``min_max_normalize(List,Min,Range,NormalizedList)``
+| **Mode and number of proofs:**
+|    ``min_max_normalize(+list(number),+number,+number,-list(float))`` - ``one``
+
+
+------------
+
+.. index:: count_frequencies/4
+.. _statistics/0::count_frequencies/4:
+
+``count_frequencies/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Auxiliary predicate for computing frequency distribution.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``count_frequencies(List,CurrentValue,CurrentCount,Distribution)``
+| **Mode and number of proofs:**
+|    ``count_frequencies(+list(number),+number,+integer,-list(pair(number,integer)))`` - ``one``
+
+
+------------
+
+.. index:: squared_error_sum/6
+.. _statistics/0::squared_error_sum/6:
+
+``squared_error_sum/6``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Auxiliary predicate for computing mean squared error.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``squared_error_sum(List1,List2,N0,Sum0,N,Sum)``
+| **Mode and number of proofs:**
+|    ``squared_error_sum(+list(number),+list(number),+integer,+float,-integer,-float)`` - ``one``
+
+
+------------
+
+.. index:: compute_ranks/3
+.. _statistics/0::compute_ranks/3:
+
+``compute_ranks/3``
+^^^^^^^^^^^^^^^^^^^
+
+Auxiliary predicate for computing ranks of elements in a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``compute_ranks(List,All,Ranks)``
+| **Mode and number of proofs:**
+|    ``compute_ranks(+list(number),+list(number),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: count_less_equal/6
+.. _statistics/0::count_less_equal/6:
+
+``count_less_equal/6``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Auxiliary predicate for counting elements less than and equal to a value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``count_less_equal(List,Value,Less0,Less,Equal0,Equal)``
+| **Mode and number of proofs:**
+|    ``count_less_equal(+list(number),+number,+integer,-integer,+integer,-integer)`` - ``one``
 
 
 ------------

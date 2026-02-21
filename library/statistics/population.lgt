@@ -23,9 +23,9 @@
 	imports(statistics)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-02-02,
+		date is 2026-02-20,
 		comment is 'Statistical population represented as a list of numbers.',
 		see_also is [sample]
 	]).
@@ -54,5 +54,12 @@
 	variance([X| Xs], Variance) :-
 		^^variance(Xs, 1, N, X, 0, M2),
 		Variance is float(M2 / N).
+
+	covariance([X1| Xs1], [X2| Xs2], Covariance) :-
+		^^arithmetic_mean(Xs1, 1, N, X1, Mean1),
+		^^arithmetic_mean(Xs2, 1, N, X2, Mean2),
+		CrossDev is (X1 - Mean1) * (X2 - Mean2),
+		^^cross_deviation_sum(Xs1, Xs2, Mean1, Mean2, CrossDev, Sum),
+		Covariance is float(Sum / N).
 
 :- end_object.

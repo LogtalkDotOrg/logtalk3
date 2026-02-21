@@ -14,8 +14,8 @@ Statistical calculations over a list of numbers protocol.
 |    ``logtalk_load(statistics(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:3:0
-| **Date:** 2022-06-20
+| **Version:** 1:4:0
+| **Date:** 2026-02-20
 
 | **Compilation flags:**
 |    ``static``
@@ -215,7 +215,7 @@ Calculates the harmonic mean of a list of numbers. Fails if the list is empty.
 ``weighted_mean/3``
 ^^^^^^^^^^^^^^^^^^^
 
-Calculates the weighted mean of a list of numbers. Fails if the list is empty or if the two lists have different lengths. Wights are assume to be non-negative.
+Calculates the weighted mean of a list of numbers. Fails if the list is empty or if the two lists have different lengths. Weights are assumed to be non-negative.
 
 | **Compilation flags:**
 |    ``static``
@@ -472,6 +472,272 @@ Calculates the smallest value in a list of numbers such that the list elements i
 | **Mode and number of proofs:**
 |    ``fractile(+float,+list(integer),-integer)`` - ``zero_or_one``
 |    ``fractile(+float,+list(float),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: percentile/3
+.. _statisticsp/0::percentile/3:
+
+``percentile/3``
+^^^^^^^^^^^^^^^^
+
+Calculates the P-th percentile of a list of numbers (with ``P`` in the open interval ``(0, 100)``). Fails if the list is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``percentile(P,List,Percentile)``
+| **Mode and number of proofs:**
+|    ``percentile(+number,+list(number),-number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: quartiles/4
+.. _statisticsp/0::quartiles/4:
+
+``quartiles/4``
+^^^^^^^^^^^^^^^
+
+Calculates the quartiles (Q1, Q2, Q3) of a list of numbers. Q2 is the median. Q1 and Q3 are the medians of the lower and upper halves, respectively. Fails if the list has fewer than two elements.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``quartiles(List,Q1,Q2,Q3)``
+| **Mode and number of proofs:**
+|    ``quartiles(+list(number),-number,-number,-number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: interquartile_range/2
+.. _statisticsp/0::interquartile_range/2:
+
+``interquartile_range/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Calculates the interquartile range (Q3 - Q1) of a list of numbers. Fails if the list has fewer than two elements.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``interquartile_range(List,IQR)``
+| **Mode and number of proofs:**
+|    ``interquartile_range(+list(number),-number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: covariance/3
+.. _statisticsp/0::covariance/3:
+
+``covariance/3``
+^^^^^^^^^^^^^^^^
+
+Calculates the covariance of two lists of numbers. Fails if the lists are empty or have different lengths.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``covariance(List1,List2,Covariance)``
+| **Mode and number of proofs:**
+|    ``covariance(+list(number),+list(number),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: correlation/3
+.. _statisticsp/0::correlation/3:
+
+``correlation/3``
+^^^^^^^^^^^^^^^^^
+
+Calculates the Pearson correlation coefficient of two lists of numbers. Fails if the lists are empty or have different lengths.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``correlation(List1,List2,Correlation)``
+| **Mode and number of proofs:**
+|    ``correlation(+list(number),+list(number),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: rank_correlation/3
+.. _statisticsp/0::rank_correlation/3:
+
+``rank_correlation/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Calculates the Spearman rank correlation coefficient of two lists of numbers. Handles ties using average ranks. Fails if the lists are empty or have different lengths.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rank_correlation(List1,List2,Correlation)``
+| **Mode and number of proofs:**
+|    ``rank_correlation(+list(number),+list(number),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: trimmed_mean/3
+.. _statisticsp/0::trimmed_mean/3:
+
+``trimmed_mean/3``
+^^^^^^^^^^^^^^^^^^
+
+Calculates the trimmed mean of a list of numbers by removing a fraction of extreme values from both ends (with the fraction in the half-open interval ``[0.0, 0.5)``). Fails if the list is empty or if too many elements would be trimmed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``trimmed_mean(Fraction,List,Mean)``
+| **Mode and number of proofs:**
+|    ``trimmed_mean(+float,+list(number),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: sum_of_squares/2
+.. _statisticsp/0::sum_of_squares/2:
+
+``sum_of_squares/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Calculates the sum of squared deviations from the arithmetic mean of a list of numbers. Fails if the list is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sum_of_squares(List,Sum)``
+| **Mode and number of proofs:**
+|    ``sum_of_squares(+list(number),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: central_moment/3
+.. _statisticsp/0::central_moment/3:
+
+``central_moment/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Calculates the K-th central moment of a list of numbers. The K-th central moment is the mean of the deviations from the mean raised to the power K (with ``K > 0``). Fails if the list is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``central_moment(K,List,Moment)``
+| **Mode and number of proofs:**
+|    ``central_moment(+positive_integer,+list(number),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: min_max_normalization/2
+.. _statisticsp/0::min_max_normalization/2:
+
+``min_max_normalization/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes a list of numbers to the interval ``[0.0, 1.0]`` using min-max normalization. Fails if the list is empty or if all values are equal.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``min_max_normalization(List,NormalizedList)``
+| **Mode and number of proofs:**
+|    ``min_max_normalization(+list(number),-list(float))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: frequency_distribution/2
+.. _statisticsp/0::frequency_distribution/2:
+
+``frequency_distribution/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the frequency distribution of a list of numbers, returning a list of ``Value-Count`` pairs in ascending order of value. Fails if the list is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``frequency_distribution(List,Distribution)``
+| **Mode and number of proofs:**
+|    ``frequency_distribution(+list(number),-list(pair(number,integer)))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: standard_error/2
+.. _statisticsp/0::standard_error/2:
+
+``standard_error/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Calculates the standard error of the mean of a list of numbers. Fails if the list is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_error(List,Error)``
+| **Mode and number of proofs:**
+|    ``standard_error(+list(number),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: mean_squared_error/3
+.. _statisticsp/0::mean_squared_error/3:
+
+``mean_squared_error/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Calculates the mean squared error between two lists of numbers. Fails if the lists are empty or have different lengths.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mean_squared_error(List1,List2,Error)``
+| **Mode and number of proofs:**
+|    ``mean_squared_error(+list(number),+list(number),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: root_mean_squared_error/3
+.. _statisticsp/0::root_mean_squared_error/3:
+
+``root_mean_squared_error/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Calculates the root mean squared error between two lists of numbers. Fails if the lists are empty or have different lengths.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``root_mean_squared_error(List1,List2,Error)``
+| **Mode and number of proofs:**
+|    ``root_mean_squared_error(+list(number),+list(number),-float)`` - ``zero_or_one``
 
 
 ------------
