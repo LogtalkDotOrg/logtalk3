@@ -241,8 +241,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:5:0</div>
-<div class="line"><strong>Date:</strong> 2020-01-06</div>
+<div class="line"><strong>Version:</strong> 1:6:0</div>
+<div class="line"><strong>Date:</strong> 2026-02-21</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -287,11 +287,22 @@
 <li><p><a class="reference internal" href="#or-else-call-2" id="id15"><code class="docutils literal notranslate"><span class="pre">or_else_call/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#or-else-throw-1" id="id16"><code class="docutils literal notranslate"><span class="pre">or_else_throw/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#or-else-fail-1" id="id17"><code class="docutils literal notranslate"><span class="pre">or_else_fail/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#filter-3" id="id18"><code class="docutils literal notranslate"><span class="pre">filter/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#map-unexpected-2" id="id19"><code class="docutils literal notranslate"><span class="pre">map_unexpected/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#map-catching-2" id="id20"><code class="docutils literal notranslate"><span class="pre">map_catching/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#map-both-3" id="id21"><code class="docutils literal notranslate"><span class="pre">map_both/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#swap-1" id="id22"><code class="docutils literal notranslate"><span class="pre">swap/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#map-or-else-3" id="id23"><code class="docutils literal notranslate"><span class="pre">map_or_else/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#or-2" id="id24"><code class="docutils literal notranslate"><span class="pre">or/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#or-else-throw-2" id="id25"><code class="docutils literal notranslate"><span class="pre">or_else_throw/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#zip-3" id="id26"><code class="docutils literal notranslate"><span class="pre">zip/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#to-optional-1" id="id27"><code class="docutils literal notranslate"><span class="pre">to_optional/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#flatten-1" id="id28"><code class="docutils literal notranslate"><span class="pre">flatten/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id18">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id19">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id20">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id29">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id30">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id31">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -658,6 +669,265 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_fail(--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="filter-3">
+<span id="expected-1-filter-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">filter/3</span></code></a><a class="headerlink" href="#filter-3" title="Link to this heading"></a></h3>
+<p>When the expected term holds a value and the value satisfies the closure, returns the same expected term. When the expected term holds a value that does not satisfy the closure, returns an expected term with the given error. When the expected term holds an error, returns the same expected term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">filter(Closure,Error,NewExpected)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">filter(1,*,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">filter(+callable,&#64;term,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="map-unexpected-2">
+<span id="expected-1-map-unexpected-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">map_unexpected/2</span></code></a><a class="headerlink" href="#map-unexpected-2" title="Link to this heading"></a></h3>
+<p>When the expected term holds an error and mapping a closure with the error and the new error as additional arguments is successful, returns an expected term with the new error. Otherwise returns the same expected term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map_unexpected(Closure,NewExpected)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map_unexpected(2,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map_unexpected(+callable,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="map-catching-2">
+<span id="expected-1-map-catching-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">map_catching/2</span></code></a><a class="headerlink" href="#map-catching-2" title="Link to this heading"></a></h3>
+<p>When the expected term holds a value, applies a closure to it. Returns an expected term with the new value if the closure succeeds. Returns an expected term with the error if the closure throws an error. Returns an expected term with the atom <code class="docutils literal notranslate"><span class="pre">fail</span></code> as error if the closure fails. When the expected term holds an error, returns the same expected term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map_catching(Closure,NewExpected)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map_catching(2,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map_catching(+callable,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="map-both-3">
+<span id="expected-1-map-both-3"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">map_both/3</span></code></a><a class="headerlink" href="#map-both-3" title="Link to this heading"></a></h3>
+<p>When the expected term holds a value and mapping <code class="docutils literal notranslate"><span class="pre">ExpectedClosure</span></code> with the value is successful, returns an expected term with the new value. When the expected term holds an error and mapping <code class="docutils literal notranslate"><span class="pre">UnexpectedClosure</span></code> with the error is successful, returns an expected term with the new error. Otherwise returns the same expected term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map_both(ExpectedClosure,UnexpectedClosure,NewExpected)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map_both(2,2,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map_both(+callable,+callable,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="swap-1">
+<span id="expected-1-swap-1"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">swap/1</span></code></a><a class="headerlink" href="#swap-1" title="Link to this heading"></a></h3>
+<p>Swaps the expected and unexpected terms. If the expected term holds a value, returns an unexpected term with that value. If the expected term holds an error, returns an expected term with that error.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">swap(NewExpected)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">swap(--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="map-or-else-3">
+<span id="expected-1-map-or-else-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">map_or_else/3</span></code></a><a class="headerlink" href="#map-or-else-3" title="Link to this heading"></a></h3>
+<p>When the expected term holds a value and mapping a closure with the value and the new value as additional arguments is successful, returns the new value. Otherwise returns the given default value.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map_or_else(Closure,Default,Value)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map_or_else(2,*,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map_or_else(+callable,&#64;term,--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="or-2">
+<span id="expected-1-or-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">or/2</span></code></a><a class="headerlink" href="#or-2" title="Link to this heading"></a></h3>
+<p>Returns the same expected term if it holds a value. Otherwise calls closure to generate a new expected term. Fails if the expected term holds an error and calling the closure fails or throws an error.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or(NewExpected,Closure)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or(*,1)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or(--term,&#64;callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="or-else-throw-2">
+<span id="expected-1-or-else-throw-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">or_else_throw/2</span></code></a><a class="headerlink" href="#or-else-throw-2" title="Link to this heading"></a></h3>
+<p>Returns the value hold by the expected term if present. Throws the given error otherwise, ignoring any error hold by the expected term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_throw(Value,Error)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">or_else_throw(--term,&#64;nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="zip-3">
+<span id="expected-1-zip-3"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zip/3</span></code></a><a class="headerlink" href="#zip-3" title="Link to this heading"></a></h3>
+<p>When both this expected and the other expected hold values and applying a closure with both values and the new value as additional arguments is successful, returns an expected term with the new value. Otherwise returns the first expected term that holds an error.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zip(Closure,OtherExpected,NewExpected)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zip(3,*,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zip(+callable,+nonvar,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="to-optional-1">
+<span id="expected-1-to-optional-1"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">to_optional/1</span></code></a><a class="headerlink" href="#to-optional-1" title="Link to this heading"></a></h3>
+<p>Converts the expected term to an optional term. Returns a non-empty optional term holding the value if the expected term holds a value. Returns an empty optional term if the expected term holds an error.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">to_optional(Optional)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">to_optional(--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="flatten-1">
+<span id="expected-1-flatten-1"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">flatten/1</span></code></a><a class="headerlink" href="#flatten-1" title="Link to this heading"></a></h3>
+<p>Flattens a nested expected term. When the expected term holds a value that is itself an expected term, returns the inner expected term. When the expected term holds a non-expected value, returns the same expected term. When the expected term holds an error, returns the same expected term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flatten(NewExpected)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flatten(--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </section>

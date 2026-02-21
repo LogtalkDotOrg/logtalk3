@@ -23,6 +23,7 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(basic_types(loader)),
 	logtalk_load(arbitrary(loader)),
+	logtalk_load(optionals(loader)),
 	logtalk_load([expected, either], [source_data(on), debug(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),

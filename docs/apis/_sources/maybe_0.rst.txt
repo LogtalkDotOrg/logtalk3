@@ -14,8 +14,8 @@ Types and predicates for type-checking and handling optional terms. Inspired by 
 |    ``logtalk_load(optionals(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:7:0
-| **Date:** 2021-01-03
+| **Version:** 0:9:0
+| **Date:** 2025-06-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -26,6 +26,9 @@ Types and predicates for type-checking and handling optional terms. Inspired by 
 |    :ref:`type::check/2 <type/0::check/2>`
 |    :ref:`arbitrary::arbitrary/1 <arbitrary/0::arbitrary/1>`
 |    :ref:`arbitrary::arbitrary/2 <arbitrary/0::arbitrary/2>`
+|    :ref:`arbitrary::shrinker/1 <arbitrary/0::shrinker/1>`
+|    :ref:`arbitrary::shrink/3 <arbitrary/0::shrink/3>`
+|    :ref:`arbitrary::edge_case/2 <arbitrary/0::edge_case/2>`
 | **Uses:**
 |    :ref:`optional <optional/0>`
 |    :ref:`optional(Optional) <optional/1>`
@@ -35,7 +38,7 @@ Types and predicates for type-checking and handling optional terms. Inspired by 
 | **Remarks:**
 
    - Type-checking support: Defines type ``maybe(Type)`` for checking optional terms where the value hold by the optional term must be of the given type.
-   - QuickCheck support: Defines clauses for the ``arbitrary::arbitrary/1-2`` predicates to allow generating random values for the ``maybe(Type)`` type.
+   - QuickCheck support: Defines clauses for the ``arbitrary::arbitrary/1-2``, ``arbitrary::shrinker/1``, ``arbitrary::shrink/3``, and ``arbitrary::edge_case/2`` predicates to allow generating random values for the ``maybe(Type)`` type.
 
 | **Inherited public predicates:**
 |    (none)
@@ -62,6 +65,46 @@ Returns the values stored in the non-empty optional terms.
 |    ``cat(Optionals,Values)``
 | **Mode and number of proofs:**
 |    ``cat(+list(optional),-list)`` - ``one``
+
+
+------------
+
+.. index:: sequence/2
+.. _maybe/0::sequence/2:
+
+``sequence/2``
+^^^^^^^^^^^^^^
+
+Returns an optional term with a list of all values when all optional terms are not empty. Otherwise returns an empty optional term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sequence(Optionals,Optional)``
+| **Mode and number of proofs:**
+|    ``sequence(+list(optional),--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: traverse/3
+.. _maybe/0::traverse/3:
+
+``traverse/3``
+^^^^^^^^^^^^^^
+
+Applies a closure to each list element to generate optional terms and then sequences them into a single optional term holding all values or an empty optional term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``traverse(Closure,Terms,Optional)``
+| **Meta-predicate template:**
+|    ``traverse(2,*,*)``
+| **Mode and number of proofs:**
+|    ``traverse(+callable,+list,--nonvar)`` - ``one``
 
 
 ------------

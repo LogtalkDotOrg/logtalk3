@@ -14,8 +14,8 @@ Types and predicates for extended type-checking and handling of expected terms.
 |    ``logtalk_load(expecteds(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:7:0
-| **Date:** 2021-01-03
+| **Version:** 0:9:0
+| **Date:** 2025-06-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -26,6 +26,9 @@ Types and predicates for extended type-checking and handling of expected terms.
 |    :ref:`type::check/2 <type/0::check/2>`
 |    :ref:`arbitrary::arbitrary/1 <arbitrary/0::arbitrary/1>`
 |    :ref:`arbitrary::arbitrary/2 <arbitrary/0::arbitrary/2>`
+|    :ref:`arbitrary::shrinker/1 <arbitrary/0::shrinker/1>`
+|    :ref:`arbitrary::shrink/3 <arbitrary/0::shrink/3>`
+|    :ref:`arbitrary::edge_case/2 <arbitrary/0::edge_case/2>`
 | **Uses:**
 |    :ref:`expected <expected/0>`
 |    :ref:`expected(Expected) <expected/1>`
@@ -35,7 +38,7 @@ Types and predicates for extended type-checking and handling of expected terms.
 | **Remarks:**
 
    - Type-checking support: Defines a ``either(ValueType, ErrorType)`` type for checking expected terms where the value and error terms must be of the given types.
-   - QuickCheck support: Defines clauses for the ``type::arbitrary/1-2`` predicates to allow generating random values for the ``either(ValueType, ErrorType)`` type.
+   - QuickCheck support: Defines clauses for the ``type::arbitrary/1-2``, ``arbitrary::shrinker/1``, ``arbitrary::shrink/3``, and ``arbitrary::edge_case/2`` predicates to allow generating random values for the ``either(ValueType, ErrorType)`` type.
 
 | **Inherited public predicates:**
 |    (none)
@@ -100,6 +103,46 @@ Retrieves and partitions the values and errors hold by the expected terms.
 |    ``partition(Expecteds,Values,Errors)``
 | **Mode and number of proofs:**
 |    ``partition(+list(expected),-list,-list)`` - ``one``
+
+
+------------
+
+.. index:: sequence/2
+.. _either/0::sequence/2:
+
+``sequence/2``
+^^^^^^^^^^^^^^
+
+Returns an expected term with a list of all values when all expected terms hold values. Otherwise returns the first expected term holding an error.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sequence(Expecteds,Expected)``
+| **Mode and number of proofs:**
+|    ``sequence(+list(expected),--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: traverse/3
+.. _either/0::traverse/3:
+
+``traverse/3``
+^^^^^^^^^^^^^^
+
+Applies a closure to each list element to generate expected terms and then sequences them into a single expected term holding all values or the first error.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``traverse(Closure,Terms,Expected)``
+| **Meta-predicate template:**
+|    ``traverse(2,*,*)``
+| **Mode and number of proofs:**
+|    ``traverse(+callable,+list,--nonvar)`` - ``one``
 
 
 ------------

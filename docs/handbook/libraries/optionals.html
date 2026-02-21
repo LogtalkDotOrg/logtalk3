@@ -264,7 +264,103 @@ yes
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">maybe</span></code> object provides types and predicates for type-checking of
 the term held by optional terms. It also provides some predicates for
-handling lists of optional terms.</p>
+handling lists of optional terms, including <code class="docutils literal notranslate"><span class="pre">sequence/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">traverse/3</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">optional/1</span></code> parametric object also provides <code class="docutils literal notranslate"><span class="pre">map_or_else/3</span></code> for
+applying a closure to the value held by the optional term if not empty,
+returning a default value otherwise:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> optional<span class="o">::</span>of(a, <span class="nv">Optional</span>),
+|    optional(<span class="nv">Optional</span>)<span class="o">::</span>map_or_else(char_code, <span class="m">0</span>, <span class="nv">Value</span>).
+<span class="nv">Value</span> <span class="o">=</span> <span class="m">97</span>
+yes
+
+| <span class="o">?-</span> optional<span class="o">::</span>empty(<span class="nv">Optional</span>),
+|    optional(<span class="nv">Optional</span>)<span class="o">::</span>map_or_else(char_code, <span class="m">0</span>, <span class="nv">Value</span>).
+<span class="nv">Value</span> <span class="o">=</span> <span class="m">0</span>
+yes
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">zip/3</span></code> predicate combines two optional terms using a closure when
+both are not empty:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> optional<span class="o">::</span>of(<span class="m">1</span>, <span class="nv">O1</span>), optional<span class="o">::</span>of(<span class="m">3</span>, <span class="nv">O2</span>),
+|    optional(<span class="nv">O1</span>)<span class="o">::</span>zip([<span class="nv">X</span>,<span class="nv">Y</span>,<span class="nv">Z</span>]<span class="o">&gt;&gt;</span>(<span class="nv">Z</span> <span class="k">is</span> <span class="nv">X</span><span class="o">+</span><span class="nv">Y</span>), <span class="nv">O2</span>, <span class="nv">NewOptional</span>).
+<span class="nv">NewOptional</span> <span class="o">=</span> optional(<span class="m">4</span>)
+yes
+
+| <span class="o">?-</span> optional<span class="o">::</span>of(<span class="m">1</span>, <span class="nv">O1</span>), optional<span class="o">::</span>empty(<span class="nv">O2</span>),
+|    optional(<span class="nv">O1</span>)<span class="o">::</span>zip([<span class="nv">X</span>,<span class="nv">Y</span>,<span class="nv">Z</span>]<span class="o">&gt;&gt;</span>(<span class="nv">Z</span> <span class="k">is</span> <span class="nv">X</span><span class="o">+</span><span class="nv">Y</span>), <span class="nv">O2</span>, <span class="nv">NewOptional</span>).
+<span class="nv">NewOptional</span> <span class="o">=</span> empty
+yes
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">flatten/1</span></code> predicate unwraps a nested optional term:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> optional<span class="o">::</span>of(<span class="m">1</span>, <span class="nv">Inner</span>), optional<span class="o">::</span>of(<span class="nv">Inner</span>, <span class="nv">Outer</span>),
+|    optional(<span class="nv">Outer</span>)<span class="o">::</span>flatten(<span class="nv">NewOptional</span>).
+<span class="nv">NewOptional</span> <span class="o">=</span> optional(<span class="m">1</span>)
+yes
+
+| <span class="o">?-</span> optional<span class="o">::</span>empty(<span class="nv">Inner</span>), optional<span class="o">::</span>of(<span class="nv">Inner</span>, <span class="nv">Outer</span>),
+|    optional(<span class="nv">Outer</span>)<span class="o">::</span>flatten(<span class="nv">NewOptional</span>).
+<span class="nv">NewOptional</span> <span class="o">=</span> empty
+yes
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">to_expected/2</span></code> predicate converts an optional to an expected
+term:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> optional<span class="o">::</span>of(<span class="m">1</span>, <span class="nv">Optional</span>),
+|    optional(<span class="nv">Optional</span>)<span class="o">::</span>to_expected(missing, <span class="nv">Expected</span>).
+<span class="nv">Expected</span> <span class="o">=</span> expected(<span class="m">1</span>)
+yes
+
+| <span class="o">?-</span> optional<span class="o">::</span>empty(<span class="nv">Optional</span>),
+|    optional(<span class="nv">Optional</span>)<span class="o">::</span>to_expected(missing, <span class="nv">Expected</span>).
+<span class="nv">Expected</span> <span class="o">=</span> unexpected(missing)
+yes
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">from_goal/3</span></code> and <code class="docutils literal notranslate"><span class="pre">from_goal/2</span></code> constructors silently convert
+goal exceptions to empty optional terms. Use <code class="docutils literal notranslate"><span class="pre">from_goal_or_throw/3</span></code> or
+<code class="docutils literal notranslate"><span class="pre">from_goal_or_throw/2</span></code> if exceptions should be propagated instead:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> optional<span class="o">::</span>from_goal_or_throw(<span class="nv">Y</span> <span class="k">is</span> <span class="m">1</span><span class="o">+</span><span class="m">2</span>, <span class="nv">Y</span>, <span class="nv">Optional</span>).
+<span class="nv">Optional</span> <span class="o">=</span> optional(<span class="m">3</span>)
+yes
+
+| <span class="o">?-</span> optional<span class="o">::</span>from_goal_or_throw(<span class="m">2</span> <span class="k">is</span> <span class="m">3</span>, <span class="nv">_</span>, <span class="nv">Optional</span>).
+<span class="nv">Optional</span> <span class="o">=</span> empty
+yes
+
+| <span class="o">?-</span> <span class="k">catch</span>(
+|      optional<span class="o">::</span>from_goal_or_throw(<span class="nv">Y</span> <span class="k">is</span> <span class="nv">_</span>, <span class="nv">Y</span>, <span class="nv">_</span>),
+|      <span class="nv">Error</span>,
+|      <span class="k">true</span>
+|    ).
+<span class="nv">Error</span> <span class="o">=</span> error(<span class="k">instantiation_error</span>, ...)
+yes
+</pre></div>
+</div>
+<p>Examples:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> optional<span class="o">::</span>of(<span class="m">1</span>, <span class="nv">O1</span>), optional<span class="o">::</span>of(<span class="m">2</span>, <span class="nv">O2</span>),
+|    maybe<span class="o">::</span>sequence([<span class="nv">O1</span>, <span class="nv">O2</span>], <span class="nv">Optional</span>).
+<span class="nv">Optional</span> <span class="o">=</span> optional([<span class="m">1</span>,<span class="m">2</span>])
+yes
+
+| <span class="o">?-</span> maybe<span class="o">::</span>traverse(<span class="k">{</span>optional<span class="k">}</span><span class="o">/</span>[<span class="nv">X</span>,<span class="nv">O</span>]<span class="o">&gt;&gt;</span>optional<span class="o">::</span>of(<span class="nv">X</span>, <span class="nv">O</span>), [<span class="m">1</span>,<span class="m">2</span>], <span class="nv">Optional</span>).
+<span class="nv">Optional</span> <span class="o">=</span> optional([<span class="m">1</span>,<span class="m">2</span>])
+yes
+
+| <span class="o">?-</span> maybe<span class="o">::</span>traverse(<span class="k">{</span>optional<span class="k">}</span><span class="o">/</span>[<span class="nv">X</span>,<span class="nv">O</span>]<span class="o">&gt;&gt;</span>(
+|      <span class="k">integer</span>(<span class="nv">X</span>) <span class="o">-&gt;</span> optional<span class="o">::</span>of(<span class="nv">X</span>, <span class="nv">O</span>)
+|    <span class="o">;</span> optional<span class="o">::</span>empty(<span class="nv">O</span>)
+|    ), [<span class="m">1</span>,a,<span class="m">2</span>], <span class="nv">Optional</span>).
+<span class="nv">Optional</span> <span class="o">=</span> empty
+yes
+
+| <span class="o">?-</span> optional<span class="o">::</span>of(<span class="m">1</span>, <span class="nv">O1</span>), optional<span class="o">::</span>empty(<span class="nv">O2</span>),
+|    maybe<span class="o">::</span>sequence([<span class="nv">O1</span>, <span class="nv">O2</span>], <span class="nv">Optional</span>).
+<span class="nv">Optional</span> <span class="o">=</span> empty
+yes
+</pre></div>
+</div>
 </section>
 <section id="see-also">
 <h2>See also<a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>

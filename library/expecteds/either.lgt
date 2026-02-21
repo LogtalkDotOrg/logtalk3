@@ -22,13 +22,13 @@
 :- object(either).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:9:0,
 		author is 'Paulo Moura',
-		date is 2021-01-03,
+		date is 2025-06-19,
 		comment is 'Types and predicates for extended type-checking and handling of expected terms.',
 		remarks is [
 			'Type-checking support' - 'Defines a ``either(ValueType, ErrorType)`` type for checking expected terms where the value and error terms must be of the given types.',
-			'QuickCheck support' - 'Defines clauses for the ``type::arbitrary/1-2`` predicates to allow generating random values for the ``either(ValueType, ErrorType)`` type.'
+			'QuickCheck support' - 'Defines clauses for the ``type::arbitrary/1-2``, ``arbitrary::shrinker/1``, ``arbitrary::shrink/3``, and ``arbitrary::edge_case/2`` predicates to allow generating random values for the ``either(ValueType, ErrorType)`` type.'
 		],
 		see_also is [expected, expected(_), type, arbitrary]
 	]).
@@ -54,6 +54,21 @@
 		argnames is ['Expecteds', 'Values', 'Errors']
 	]).
 
+	:- public(sequence/2).
+	:- mode(sequence(+list(expected), --nonvar), one).
+	:- info(sequence/2, [
+		comment is 'Returns an expected term with a list of all values when all expected terms hold values. Otherwise returns the first expected term holding an error.',
+		argnames is ['Expecteds', 'Expected']
+	]).
+
+	:- public(traverse/3).
+	:- meta_predicate(traverse(2, *, *)).
+	:- mode(traverse(+callable, +list, --nonvar), one).
+	:- info(traverse/3, [
+		comment is 'Applies a closure to each list element to generate expected terms and then sequences them into a single expected term holding all values or the first error.',
+		argnames is ['Closure', 'Terms', 'Expected']
+	]).
+
 	:- multifile(type::type/1).
 	type::type(either(_, _)).
 
@@ -74,6 +89,21 @@
 		;	type::arbitrary(ErrorType, Error),
 			expected::of_unexpected(Error, Arbitrary)
 		).
+
+	:- multifile(arbitrary::shrinker/1).
+	arbitrary::shrinker(either(_, _)).
+
+	:- multifile(arbitrary::shrink/3).
+	arbitrary::shrink(either(ValueType, _ErrorType), expected(Large), expected(Small)) :-
+		type::shrink(ValueType, Large, Small).
+	arbitrary::shrink(either(_ValueType, ErrorType), unexpected(Large), unexpected(Small)) :-
+		type::shrink(ErrorType, Large, Small).
+
+	:- multifile(arbitrary::edge_case/2).
+	arbitrary::edge_case(either(ValueType, _ErrorType), expected(Term)) :-
+		type::edge_case(ValueType, Term).
+	arbitrary::edge_case(either(_ValueType, ErrorType), unexpected(Term)) :-
+		type::edge_case(ErrorType, Term).
 
 	expecteds([], []).
 	expecteds([Expected| Expecteds], Values) :-
@@ -102,5 +132,27 @@
 			Errors = [Error| RestErrors]
 		),
 		partition(Expecteds, RestValues, RestErrors).
+
+	sequence([], expected([])).
+	sequence([Expected| Expecteds], Sequenced) :-
+		( 	Expected = expected(Value) ->
+			sequence(Expecteds, RestSequenced),
+			( 	RestSequenced = expected(RestValues) ->
+				Sequenced = expected([Value| RestValues])
+			; 	Sequenced = RestSequenced
+			)
+		; 	Expected = unexpected(_),
+			Sequenced = Expected
+		).
+
+	traverse(Closure, Terms, Sequenced) :-
+		traverse_(Terms, Closure, Expecteds),
+		sequence(Expecteds, Sequenced).
+
+	:- meta_predicate(traverse_(*, 2, *)).
+	traverse_([], _, []).
+	traverse_([Term| Terms], Closure, [Expected| Expecteds]) :-
+		call(Closure, Term, Expected),
+		traverse_(Terms, Closure, Expecteds).
 
 :- end_object.

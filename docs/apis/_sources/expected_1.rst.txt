@@ -14,8 +14,8 @@ Expected term predicates. Requires passing an expected term (constructed using t
 |    ``logtalk_load(expecteds(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:5:0
-| **Date:** 2020-01-06
+| **Version:** 1:6:0
+| **Date:** 2026-02-21
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -343,6 +343,229 @@ Returns the value hold by the expected term if it does not hold an error. Fails 
 |    ``or_else_fail(Value)``
 | **Mode and number of proofs:**
 |    ``or_else_fail(--term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: filter/3
+.. _expected/1::filter/3:
+
+``filter/3``
+^^^^^^^^^^^^
+
+When the expected term holds a value and the value satisfies the closure, returns the same expected term. When the expected term holds a value that does not satisfy the closure, returns an expected term with the given error. When the expected term holds an error, returns the same expected term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``filter(Closure,Error,NewExpected)``
+| **Meta-predicate template:**
+|    ``filter(1,*,*)``
+| **Mode and number of proofs:**
+|    ``filter(+callable,@term,--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: map_unexpected/2
+.. _expected/1::map_unexpected/2:
+
+``map_unexpected/2``
+^^^^^^^^^^^^^^^^^^^^
+
+When the expected term holds an error and mapping a closure with the error and the new error as additional arguments is successful, returns an expected term with the new error. Otherwise returns the same expected term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``map_unexpected(Closure,NewExpected)``
+| **Meta-predicate template:**
+|    ``map_unexpected(2,*)``
+| **Mode and number of proofs:**
+|    ``map_unexpected(+callable,--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: map_catching/2
+.. _expected/1::map_catching/2:
+
+``map_catching/2``
+^^^^^^^^^^^^^^^^^^
+
+When the expected term holds a value, applies a closure to it. Returns an expected term with the new value if the closure succeeds. Returns an expected term with the error if the closure throws an error. Returns an expected term with the atom ``fail`` as error if the closure fails. When the expected term holds an error, returns the same expected term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``map_catching(Closure,NewExpected)``
+| **Meta-predicate template:**
+|    ``map_catching(2,*)``
+| **Mode and number of proofs:**
+|    ``map_catching(+callable,--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: map_both/3
+.. _expected/1::map_both/3:
+
+``map_both/3``
+^^^^^^^^^^^^^^
+
+When the expected term holds a value and mapping ``ExpectedClosure`` with the value is successful, returns an expected term with the new value. When the expected term holds an error and mapping ``UnexpectedClosure`` with the error is successful, returns an expected term with the new error. Otherwise returns the same expected term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``map_both(ExpectedClosure,UnexpectedClosure,NewExpected)``
+| **Meta-predicate template:**
+|    ``map_both(2,2,*)``
+| **Mode and number of proofs:**
+|    ``map_both(+callable,+callable,--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: swap/1
+.. _expected/1::swap/1:
+
+``swap/1``
+^^^^^^^^^^
+
+Swaps the expected and unexpected terms. If the expected term holds a value, returns an unexpected term with that value. If the expected term holds an error, returns an expected term with that error.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``swap(NewExpected)``
+| **Mode and number of proofs:**
+|    ``swap(--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: map_or_else/3
+.. _expected/1::map_or_else/3:
+
+``map_or_else/3``
+^^^^^^^^^^^^^^^^^
+
+When the expected term holds a value and mapping a closure with the value and the new value as additional arguments is successful, returns the new value. Otherwise returns the given default value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``map_or_else(Closure,Default,Value)``
+| **Meta-predicate template:**
+|    ``map_or_else(2,*,*)``
+| **Mode and number of proofs:**
+|    ``map_or_else(+callable,@term,--term)`` - ``one``
+
+
+------------
+
+.. index:: or/2
+.. _expected/1::or/2:
+
+``or/2``
+^^^^^^^^
+
+Returns the same expected term if it holds a value. Otherwise calls closure to generate a new expected term. Fails if the expected term holds an error and calling the closure fails or throws an error.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``or(NewExpected,Closure)``
+| **Meta-predicate template:**
+|    ``or(*,1)``
+| **Mode and number of proofs:**
+|    ``or(--term,@callable)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: or_else_throw/2
+.. _expected/1::or_else_throw/2:
+
+``or_else_throw/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the value hold by the expected term if present. Throws the given error otherwise, ignoring any error hold by the expected term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``or_else_throw(Value,Error)``
+| **Mode and number of proofs:**
+|    ``or_else_throw(--term,@nonvar)`` - ``one_or_error``
+
+
+------------
+
+.. index:: zip/3
+.. _expected/1::zip/3:
+
+``zip/3``
+^^^^^^^^^
+
+When both this expected and the other expected hold values and applying a closure with both values and the new value as additional arguments is successful, returns an expected term with the new value. Otherwise returns the first expected term that holds an error.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zip(Closure,OtherExpected,NewExpected)``
+| **Meta-predicate template:**
+|    ``zip(3,*,*)``
+| **Mode and number of proofs:**
+|    ``zip(+callable,+nonvar,--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: to_optional/1
+.. _expected/1::to_optional/1:
+
+``to_optional/1``
+^^^^^^^^^^^^^^^^^
+
+Converts the expected term to an optional term. Returns a non-empty optional term holding the value if the expected term holds a value. Returns an empty optional term if the expected term holds an error.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``to_optional(Optional)``
+| **Mode and number of proofs:**
+|    ``to_optional(--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: flatten/1
+.. _expected/1::flatten/1:
+
+``flatten/1``
+^^^^^^^^^^^^^
+
+Flattens a nested expected term. When the expected term holds a value that is itself an expected term, returns the inner expected term. When the expected term holds a non-expected value, returns the same expected term. When the expected term holds an error, returns the same expected term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``flatten(NewExpected)``
+| **Mode and number of proofs:**
+|    ``flatten(--nonvar)`` - ``one``
 
 
 ------------

@@ -4326,6 +4326,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`optional(Optional) <optional/1::filter/2>`
 
+``filter/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Expected) <expected/1::filter/3>`
+
 ``find/4``
 ----------
 
@@ -4446,6 +4456,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected(Expected) <expected/1::flat_map/2>`
 * :ref:`optional(Optional) <optional/1::flat_map/2>`
+
+``flatten/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Expected) <expected/1::flatten/1>`
+* :ref:`optional(Optional) <optional/1::flatten/1>`
 
 ``flatten/2``
 -------------
@@ -4862,6 +4883,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`expected <expected/0::from_goal/4>`
+
+``from_goal_or_throw/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`optional <optional/0::from_goal_or_throw/2>`
+
+``from_goal_or_throw/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`optional <optional/0::from_goal_or_throw/3>`
+
+``from_optional/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected <expected/0::from_optional/3>`
 
 ``frozen/2``
 ------------
@@ -7736,6 +7787,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`metap <metap/0::map/8>`
 
+``map_both/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Expected) <expected/1::map_both/3>`
+
+``map_catching/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Expected) <expected/1::map_catching/2>`
+
 ``map_element/2``
 -----------------
 
@@ -7746,6 +7817,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`java_utils_protocol <java_utils_protocol/0::map_element/2>`
 
+``map_or_else/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Expected) <expected/1::map_or_else/3>`
+* :ref:`optional(Optional) <optional/1::map_or_else/3>`
+
 ``map_reduce/5``
 ----------------
 
@@ -7755,6 +7837,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`metap <metap/0::map_reduce/5>`
+
+``map_unexpected/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Expected) <expected/1::map_unexpected/2>`
 
 ``materialize/0``
 -----------------
@@ -9102,6 +9194,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`expected(Expected) <expected/1::or/2>`
 * :ref:`optional(Optional) <optional/1::or/2>`
 
 ``or_else/2``
@@ -9166,6 +9259,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`expected(Expected) <expected/1::or_else_throw/2>`
 * :ref:`optional(Optional) <optional/1::or_else_throw/2>`
 
 ``orphaned/0``
@@ -11633,6 +11727,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`amqp <amqp/0::send_heartbeat/1>`
 * :ref:`stomp <stomp/0::send_heartbeat/1>`
 
+``sequence/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`either <either/0::sequence/2>`
+* :ref:`maybe <maybe/0::sequence/2>`
+
 ``sequence/3``
 --------------
 
@@ -12897,6 +13002,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`monitorp <monitorp/0::suspend_monitor/0>`
 
+``swap/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Expected) <expected/1::swap/1>`
+
 ``swap/2``
 ----------
 
@@ -13097,6 +13212,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ulid_protocol <ulid_protocol/0::timestamp/8>`
 
+``to_expected/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`optional(Optional) <optional/1::to_expected/2>`
+
+``to_optional/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`expected(Expected) <expected/1::to_optional/1>`
+
 ``today/3``
 -----------
 
@@ -13238,6 +13373,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`directed_graph_protocol <directed_graph_protocol/0::transpose/2>`
 * :ref:`pairs <pairs/0::transpose/2>`
+
+``traverse/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`either <either/0::traverse/3>`
+* :ref:`maybe <maybe/0::traverse/3>`
 
 ``triangular/4``
 ----------------
@@ -14327,6 +14473,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`expected(Expected) <expected/1::zip/3>`
+* :ref:`optional(Optional) <optional/1::zip/3>`
 * :ref:`zipperp <zipperp/0::zip/3>`
 
 ``zip_at_index/4``

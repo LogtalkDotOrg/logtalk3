@@ -79,7 +79,101 @@ parametric object. For example:
 
 The `maybe` object provides types and predicates for type-checking of the
 term held by optional terms. It also provides some predicates for handling
-lists of optional terms.
+lists of optional terms, including `sequence/2` and `traverse/3`.
+
+The `optional/1` parametric object also provides `map_or_else/3` for
+applying a closure to the value held by the optional term if not empty,
+returning a default value otherwise:
+
+	| ?- optional::of(a, Optional),
+	|    optional(Optional)::map_or_else(char_code, 0, Value).
+	Value = 97
+	yes
+
+	| ?- optional::empty(Optional),
+	|    optional(Optional)::map_or_else(char_code, 0, Value).
+	Value = 0
+	yes
+
+The `zip/3` predicate combines two optional terms using a closure when
+both are not empty:
+
+	| ?- optional::of(1, O1), optional::of(3, O2),
+	|    optional(O1)::zip([X,Y,Z]>>(Z is X+Y), O2, NewOptional).
+	NewOptional = optional(4)
+	yes
+
+	| ?- optional::of(1, O1), optional::empty(O2),
+	|    optional(O1)::zip([X,Y,Z]>>(Z is X+Y), O2, NewOptional).
+	NewOptional = empty
+	yes
+
+The `flatten/1` predicate unwraps a nested optional term:
+
+	| ?- optional::of(1, Inner), optional::of(Inner, Outer),
+	|    optional(Outer)::flatten(NewOptional).
+	NewOptional = optional(1)
+	yes
+
+	| ?- optional::empty(Inner), optional::of(Inner, Outer),
+	|    optional(Outer)::flatten(NewOptional).
+	NewOptional = empty
+	yes
+
+The `to_expected/2` predicate converts an optional to an expected term:
+
+	| ?- optional::of(1, Optional),
+	|    optional(Optional)::to_expected(missing, Expected).
+	Expected = expected(1)
+	yes
+
+	| ?- optional::empty(Optional),
+	|    optional(Optional)::to_expected(missing, Expected).
+	Expected = unexpected(missing)
+	yes
+
+The `from_goal/3` and `from_goal/2` constructors silently convert goal
+exceptions to empty optional terms. Use `from_goal_or_throw/3` or
+`from_goal_or_throw/2` if exceptions should be propagated instead:
+
+	| ?- optional::from_goal_or_throw(Y is 1+2, Y, Optional).
+	Optional = optional(3)
+	yes
+
+	| ?- optional::from_goal_or_throw(2 is 3, _, Optional).
+	Optional = empty
+	yes
+
+	| ?- catch(
+	|      optional::from_goal_or_throw(Y is _, Y, _),
+	|      Error,
+	|      true
+	|    ).
+	Error = error(instantiation_error, ...)
+	yes
+
+Examples:
+
+	| ?- optional::of(1, O1), optional::of(2, O2),
+	|    maybe::sequence([O1, O2], Optional).
+	Optional = optional([1,2])
+	yes
+
+	| ?- maybe::traverse({optional}/[X,O]>>optional::of(X, O), [1,2], Optional).
+	Optional = optional([1,2])
+	yes
+
+	| ?- maybe::traverse({optional}/[X,O]>>(
+	|      integer(X) -> optional::of(X, O)
+	|    ; optional::empty(O)
+	|    ), [1,a,2], Optional).
+	Optional = empty
+	yes
+
+	| ?- optional::of(1, O1), optional::empty(O2),
+	|    maybe::sequence([O1, O2], Optional).
+	Optional = empty
+	yes
 
 
 See also

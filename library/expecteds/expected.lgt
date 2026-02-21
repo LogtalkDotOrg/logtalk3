@@ -22,9 +22,9 @@
 :- object(expected).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Paulo Moura',
-		date is 2021-01-03,
+		date is 2026-02-21,
 		comment is 'Constructors for expected terms. An expected term contains either a value or an error. Expected terms should be regarded as opaque terms and always used with the ``expected/1`` object by passing the expected term as a parameter.',
 		remarks is [
 			'Type-checking support' - 'This object also defines a type ``expected`` for use with the ``type`` library object.'
@@ -94,6 +94,13 @@
 		argnames is ['Closure', 'Expected']
 	]).
 
+	:- public(from_optional/3).
+	:- mode(from_optional(+nonvar, @term, --nonvar), one).
+	:- info(from_optional/3, [
+		comment is 'Converts an optional term to an expected term. Returns an expected term holding the value if the optional term is not empty. Returns an expected term with the given error otherwise.',
+		argnames is ['Optional', 'Error', 'Expected']
+	]).
+
 	of_unexpected(Error, unexpected(Error)).
 
 	of_expected(Value, expected(Value)).
@@ -152,6 +159,12 @@
 		).
 	from_generator(_, unexpected(fail)).
 
+	from_optional(Optional, Error, Expected) :-
+		(	Optional = optional(Value) ->
+			Expected = expected(Value)
+		;	Expected = unexpected(Error)
+		).
+
 	:- multifile(type::type/1).
 	% clauses for the type::type/1 predicate must always be defined with
 	% an instantiated first argument to keep calls deterministic by taking
@@ -178,9 +191,9 @@
 :- object(expected(_Expected)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2020-01-06,
+		date is 2026-02-21,
 		comment is 'Expected term predicates. Requires passing an expected term (constructed using the ``expected`` object predicates) as a parameter.',
 		parnames is ['Expected'],
 		see_also is [expected]
@@ -300,6 +313,90 @@
 		argnames is ['Value']
 	]).
 
+	:- public(filter/3).
+	:- meta_predicate(filter(1, *, *)).
+	:- mode(filter(+callable, @term, --nonvar), one).
+	:- info(filter/3, [
+		comment is 'When the expected term holds a value and the value satisfies the closure, returns the same expected term. When the expected term holds a value that does not satisfy the closure, returns an expected term with the given error. When the expected term holds an error, returns the same expected term.',
+		argnames is ['Closure', 'Error', 'NewExpected']
+	]).
+
+	:- public(map_unexpected/2).
+	:- meta_predicate(map_unexpected(2, *)).
+	:- mode(map_unexpected(+callable, --nonvar), one).
+	:- info(map_unexpected/2, [
+		comment is 'When the expected term holds an error and mapping a closure with the error and the new error as additional arguments is successful, returns an expected term with the new error. Otherwise returns the same expected term.',
+		argnames is ['Closure', 'NewExpected']
+	]).
+
+	:- public(map_catching/2).
+	:- meta_predicate(map_catching(2, *)).
+	:- mode(map_catching(+callable, --nonvar), one).
+	:- info(map_catching/2, [
+		comment is 'When the expected term holds a value, applies a closure to it. Returns an expected term with the new value if the closure succeeds. Returns an expected term with the error if the closure throws an error. Returns an expected term with the atom ``fail`` as error if the closure fails. When the expected term holds an error, returns the same expected term.',
+		argnames is ['Closure', 'NewExpected']
+	]).
+
+	:- public(map_both/3).
+	:- meta_predicate(map_both(2, 2, *)).
+	:- mode(map_both(+callable, +callable, --nonvar), one).
+	:- info(map_both/3, [
+		comment is 'When the expected term holds a value and mapping ``ExpectedClosure`` with the value is successful, returns an expected term with the new value. When the expected term holds an error and mapping ``UnexpectedClosure`` with the error is successful, returns an expected term with the new error. Otherwise returns the same expected term.',
+		argnames is ['ExpectedClosure', 'UnexpectedClosure', 'NewExpected']
+	]).
+
+	:- public(swap/1).
+	:- mode(swap(--nonvar), one).
+	:- info(swap/1, [
+		comment is 'Swaps the expected and unexpected terms. If the expected term holds a value, returns an unexpected term with that value. If the expected term holds an error, returns an expected term with that error.',
+		argnames is ['NewExpected']
+	]).
+
+	:- public(map_or_else/3).
+	:- meta_predicate(map_or_else(2, *, *)).
+	:- mode(map_or_else(+callable, @term, --term), one).
+	:- info(map_or_else/3, [
+		comment is 'When the expected term holds a value and mapping a closure with the value and the new value as additional arguments is successful, returns the new value. Otherwise returns the given default value.',
+		argnames is ['Closure', 'Default', 'Value']
+	]).
+
+	:- public(or/2).
+	:- meta_predicate(or(*, 1)).
+	:- mode(or(--term, @callable), zero_or_one).
+	:- info(or/2, [
+		comment is 'Returns the same expected term if it holds a value. Otherwise calls closure to generate a new expected term. Fails if the expected term holds an error and calling the closure fails or throws an error.',
+		argnames is ['NewExpected', 'Closure']
+	]).
+
+	:- public(or_else_throw/2).
+	:- mode(or_else_throw(--term, @nonvar), one_or_error).
+	:- info(or_else_throw/2, [
+		comment is 'Returns the value hold by the expected term if present. Throws the given error otherwise, ignoring any error hold by the expected term.',
+		argnames is ['Value', 'Error']
+	]).
+
+	:- public(zip/3).
+	:- meta_predicate(zip(3, *, *)).
+	:- mode(zip(+callable, +nonvar, --nonvar), one).
+	:- info(zip/3, [
+		comment is 'When both this expected and the other expected hold values and applying a closure with both values and the new value as additional arguments is successful, returns an expected term with the new value. Otherwise returns the first expected term that holds an error.',
+		argnames is ['Closure', 'OtherExpected', 'NewExpected']
+	]).
+
+	:- public(to_optional/1).
+	:- mode(to_optional(--nonvar), one).
+	:- info(to_optional/1, [
+		comment is 'Converts the expected term to an optional term. Returns a non-empty optional term holding the value if the expected term holds a value. Returns an empty optional term if the expected term holds an error.',
+		argnames is ['Optional']
+	]).
+
+	:- public(flatten/1).
+	:- mode(flatten(--nonvar), one).
+	:- info(flatten/1, [
+		comment is 'Flattens a nested expected term. When the expected term holds a value that is itself an expected term, returns the inner expected term. When the expected term holds a non-expected value, returns the same expected term. When the expected term holds an error, returns the same expected term.',
+		argnames is ['NewExpected']
+	]).
+
 	is_unexpected :-
 		parameter(1, unexpected(_)).
 
@@ -407,5 +504,106 @@
 
 	or_else_fail(Value) :-
 		parameter(1, expected(Value)).
+
+	filter(Closure, Error, NewExpected) :-
+		parameter(1, Expected),
+		(	Expected = expected(Value) ->
+			(	call(Closure, Value) ->
+				NewExpected = Expected
+			;	NewExpected = unexpected(Error)
+			)
+		;	NewExpected = Expected
+		).
+
+	map_unexpected(Closure, NewExpected) :-
+		parameter(1, Expected),
+		(	Expected = unexpected(Error),
+			catch(call(Closure, Error, NewError), _, fail) ->
+			NewExpected = unexpected(NewError)
+		;	NewExpected = Expected
+		).
+
+	map_catching(Closure, NewExpected) :-
+		parameter(1, Expected),
+		(	Expected = expected(Value) ->
+			(	catch(call(Closure, Value, NewValue), Error, true) ->
+				(	var(Error) ->
+					NewExpected = expected(NewValue)
+				;	NewExpected = unexpected(Error)
+				)
+			;	NewExpected = unexpected(fail)
+			)
+		;	NewExpected = Expected
+		).
+
+	map_both(ExpectedClosure, UnexpectedClosure, NewExpected) :-
+		parameter(1, Expected),
+		(	Expected = expected(Value) ->
+			(	catch(call(ExpectedClosure, Value, NewValue), _, fail) ->
+				NewExpected = expected(NewValue)
+			;	NewExpected = Expected
+			)
+		;	Expected = unexpected(Error),
+			(	catch(call(UnexpectedClosure, Error, NewError), _, fail) ->
+				NewExpected = unexpected(NewError)
+			;	NewExpected = Expected
+			)
+		).
+
+	map_or_else(Closure, Default, Value) :-
+		parameter(1, Expected),
+		(	Expected = expected(Term),
+			catch(call(Closure, Term, Value), _, fail) ->
+			true
+		;	Value = Default
+		).
+
+	or(NewExpected, Closure) :-
+		parameter(1, Expected),
+		(	Expected = expected(_) ->
+			NewExpected = Expected
+		;	catch(call(Closure, NewExpected), _, fail)
+		).
+
+	or_else_throw(Value, Error) :-
+		parameter(1, Expected),
+		(	Expected = expected(Value) ->
+			true
+		;	throw(Error)
+		).
+
+	zip(Closure, OtherExpected, NewExpected) :-
+		parameter(1, Expected),
+		(	Expected = expected(Value1),
+			OtherExpected = expected(Value2),
+			catch(call(Closure, Value1, Value2, NewValue), _, fail) ->
+			NewExpected = expected(NewValue)
+		;	Expected = unexpected(_) ->
+			NewExpected = Expected
+		;	NewExpected = OtherExpected
+		).
+
+	swap(NewExpected) :-
+		parameter(1, Expected),
+		(	Expected = expected(Value) ->
+			NewExpected = unexpected(Value)
+		;	Expected = unexpected(Error),
+			NewExpected = expected(Error)
+		).
+
+	to_optional(Optional) :-
+		parameter(1, Expected),
+		(	Expected = expected(Value) ->
+			Optional = optional(Value)
+		;	Optional = empty
+		).
+
+	flatten(NewExpected) :-
+		parameter(1, Expected),
+		(	Expected = expected(Inner),
+			(Inner = expected(_) ; Inner = unexpected(_)) ->
+			NewExpected = Inner
+		;	NewExpected = Expected
+		).
 
 :- end_object.

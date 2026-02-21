@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Paulo Moura',
-		date is 2022-05-06,
+		date is 2026-02-21,
 		comment is 'Unit tests for the "expecteds" library.'
 	]).
 
@@ -312,6 +312,194 @@
 		expected::of_expected(1, Expected),
 		expected(Expected)::or_else_fail(Value).
 
+	% map_unexpected/2 tests
+
+	test(expected_map_unexpected_2_01, true(Value == 1)) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::map_unexpected(map_unexpected_closure, NewExpected),
+		expected(NewExpected)::expected(Value).
+
+	test(expected_map_unexpected_2_02, true(Error == 1)) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::map_unexpected(map_unexpected_closure, NewExpected),
+		expected(NewExpected)::unexpected(Error).
+
+	% map_catching/2 tests
+
+	test(expected_map_catching_2_01, true(NewExpected == Expected)) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::map_catching(char_code, NewExpected).
+
+	test(expected_map_catching_2_02, true(Value == 97)) :-
+		expected::of_expected(a, Expected),
+		expected(Expected)::map_catching(char_code, NewExpected),
+		expected(NewExpected)::expected(Value).
+
+	test(expected_map_catching_2_03, true) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::map_catching(char_code, NewExpected),
+		expected(NewExpected)::is_unexpected.
+
+	test(expected_map_catching_2_04, true(Error == fail)) :-
+		expected::of_expected(a, Expected),
+		expected(Expected)::map_catching(failing_closure, NewExpected),
+		expected(NewExpected)::unexpected(Error).
+
+	% map_both/3 tests
+
+	test(expected_map_both_3_01, true(Value == 2)) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::map_both(map_both_value_closure, map_unexpected_closure, NewExpected),
+		expected(NewExpected)::expected(Value).
+
+	test(expected_map_both_3_02, true(Error == 1)) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::map_both(map_both_value_closure, map_unexpected_closure, NewExpected),
+		expected(NewExpected)::unexpected(Error).
+
+	% swap/1 tests
+
+	test(expected_swap_1_01, true(Error == 1)) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::swap(NewExpected),
+		expected(NewExpected)::unexpected(Error).
+
+	test(expected_swap_1_02, true(Value == -1)) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::swap(NewExpected),
+		expected(NewExpected)::expected(Value).
+
+	% to_optional/1 tests
+
+	test(expected_to_optional_1_01, true(Value == 1)) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::to_optional(Optional),
+		optional(Optional)::get(Value).
+
+	test(expected_to_optional_1_02, true) :-
+		expected::of_unexpected(error, Expected),
+		expected(Expected)::to_optional(Optional),
+		optional(Optional)::is_empty.
+
+	% from_optional/3 tests
+
+	test(expected_from_optional_3_01, true(Value == 1)) :-
+		optional::of(1, Optional),
+		expected::from_optional(Optional, missing, Expected),
+		expected(Expected)::expected(Value).
+
+	test(expected_from_optional_3_02, true(Error == missing)) :-
+		optional::empty(Optional),
+		expected::from_optional(Optional, missing, Expected),
+		expected(Expected)::unexpected(Error).
+
+	% flatten/1 tests
+
+	test(expected_flatten_1_01, true(Value == 1)) :-
+		expected::of_expected(1, Inner),
+		expected::of_expected(Inner, Outer),
+		expected(Outer)::flatten(NewExpected),
+		expected(NewExpected)::expected(Value).
+
+	test(expected_flatten_1_02, true(Error == oops)) :-
+		expected::of_unexpected(oops, Inner),
+		expected::of_expected(Inner, Outer),
+		expected(Outer)::flatten(NewExpected),
+		expected(NewExpected)::unexpected(Error).
+
+	test(expected_flatten_1_03, true(Error == -1)) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::flatten(NewExpected),
+		expected(NewExpected)::unexpected(Error).
+
+	test(expected_flatten_1_04, true(Value == 1)) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::flatten(NewExpected),
+		expected(NewExpected)::expected(Value).
+
+	% filter/3 tests
+
+	test(expected_filter_3_01, true(Value == 1)) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::filter(integer, not_integer, NewExpected),
+		expected(NewExpected)::expected(Value).
+
+	test(expected_filter_3_02, true(Error == not_integer)) :-
+		expected::of_expected(a, Expected),
+		expected(Expected)::filter(integer, not_integer, NewExpected),
+		expected(NewExpected)::unexpected(Error).
+
+	test(expected_filter_3_03, true(Error == -1)) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::filter(integer, not_integer, NewExpected),
+		expected(NewExpected)::unexpected(Error).
+
+	% map_or_else/3 tests
+
+	test(expected_map_or_else_3_01, true(Value == 97)) :-
+		expected::of_expected(a, Expected),
+		expected(Expected)::map_or_else(char_code, 0, Value).
+
+	test(expected_map_or_else_3_02, true(Value == 0)) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::map_or_else(char_code, 0, Value).
+
+	test(expected_map_or_else_3_03, true(Value == 0)) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::map_or_else(char_code, 0, Value).
+
+	% or/2 tests
+
+	test(expected_or_2_01, true(NewExpected == Expected)) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::or(NewExpected, expected::of_expected(2)).
+
+	test(expected_or_2_02, true(Value == 2)) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::or(NewExpected, expected::of_expected(2)),
+		expected(NewExpected)::expected(Value).
+
+	test(expected_or_2_03, true) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::or(NewExpected, expected::of_unexpected(-2)),
+		expected(NewExpected)::is_unexpected.
+
+	% or_else_throw/2 tests
+
+	test(expected_or_else_throw_2_01, true(Value == 1)) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::or_else_throw(Value, custom_error).
+
+	test(expected_or_else_throw_2_02, ball(custom_error)) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::or_else_throw(_, custom_error).
+
+	% zip/3 tests
+
+	test(expected_zip_3_01, true(Value == 4)) :-
+		expected::of_expected(1, Expected1),
+		expected::of_expected(3, Expected2),
+		expected(Expected1)::zip(zip_closure, Expected2, NewExpected),
+		expected(NewExpected)::expected(Value).
+
+	test(expected_zip_3_02, true(Error == -1)) :-
+		expected::of_unexpected(-1, Expected1),
+		expected::of_expected(3, Expected2),
+		expected(Expected1)::zip(zip_closure, Expected2, NewExpected),
+		expected(NewExpected)::unexpected(Error).
+
+	test(expected_zip_3_03, true(Error == -2)) :-
+		expected::of_expected(1, Expected1),
+		expected::of_unexpected(-2, Expected2),
+		expected(Expected1)::zip(zip_closure, Expected2, NewExpected),
+		expected(NewExpected)::unexpected(Error).
+
+	test(expected_zip_3_04, true(Error == -1)) :-
+		expected::of_unexpected(-1, Expected1),
+		expected::of_unexpected(-2, Expected2),
+		expected(Expected1)::zip(zip_closure, Expected2, NewExpected),
+		expected(NewExpected)::unexpected(Error).
+
 	% "expected" type tests
 
 	test(expected_type_checking_support_01, true) :-
@@ -386,6 +574,35 @@
 		expected::of_expected(2, Expected4),
 		either::partition([Expected1, Expected2, Expected3, Expected4], Values, Errors).
 
+	% sequence/2 tests
+
+	test(either_sequence_2_01, true(Values == [])) :-
+		either::sequence([], Expected),
+		expected(Expected)::expected(Values).
+
+	test(either_sequence_2_02, true(Values == [1,2])) :-
+		expected::of_expected(1, Expected1),
+		expected::of_expected(2, Expected2),
+		either::sequence([Expected1, Expected2], Expected),
+		expected(Expected)::expected(Values).
+
+	test(either_sequence_2_03, true(Error == e1)) :-
+		expected::of_expected(1, Expected1),
+		expected::of_unexpected(e1, Expected2),
+		expected::of_unexpected(e2, Expected3),
+		either::sequence([Expected1, Expected2, Expected3], Expected),
+		expected(Expected)::unexpected(Error).
+
+	% traverse/3 tests
+
+	test(either_traverse_3_01, true(Values == [1,2])) :-
+		either::traverse(traverse_expected_closure, [1,2], Expected),
+		expected(Expected)::expected(Values).
+
+	test(either_traverse_3_02, true(Error == not_integer(a))) :-
+		either::traverse(traverse_expected_closure, [1,a,2], Expected),
+		expected(Expected)::unexpected(Error).
+
 	% "either" type tests
 
 	test(either_type_checking_support_01, true) :-
@@ -455,6 +672,33 @@
 		type::arbitrary({either(integer, atom)}, -either(integer, atom))
 	).
 
+	% "either" shrinker tests
+
+	test(either_shrinker_1_01, true) :-
+		type::shrinker(either(integer, atom)).
+
+	test(either_shrink_3_01, all(type::check(either(integer, atom), Small))) :-
+		expected::of_expected(42, Expected),
+		type::shrink(either(integer, atom), Expected, Small).
+
+	test(either_shrink_3_02, all(type::check(either(integer, atom), Small))) :-
+		expected::of_unexpected(abc, Expected),
+		type::shrink(either(integer, atom), Expected, Small).
+
+	test(either_shrink_3_03, false) :-
+		expected::of_expected(0, Expected),
+		type::shrink(either(integer, atom), Expected, _).
+
+	test(either_shrink_3_04, false) :-
+		expected::of_unexpected('', Expected),
+		type::shrink(either(integer, atom), Expected, _).
+
+	% "either" edge case tests
+
+	test(either_edge_case_2_01, true) :-
+		findall(T, type::edge_case(either(integer, atom), T), Cases),
+		Cases \== [].
+
 	% auxiliary predicates
 
 	flat_map_closure(Value, NewExpected) :-
@@ -468,6 +712,24 @@
 	either_expected(Value, NewExpected) :-
 		NewValue is -Value,
 		expected::of_unexpected(NewValue, NewExpected).
+
+	map_unexpected_closure(Error, NewError) :-
+		NewError is abs(Error).
+
+	map_both_value_closure(Value, NewValue) :-
+		NewValue is Value + 1.
+
+	failing_closure(_, _) :-
+		fail.
+
+	zip_closure(X, Y, Z) :-
+		Z is X + Y.
+
+	traverse_expected_closure(Term, Expected) :-
+		( 	integer(Term) ->
+			expected::of_expected(Term, Expected)
+		; 	expected::of_unexpected(not_integer(Term), Expected)
+		).
 
 	a(1).
 	a(2).

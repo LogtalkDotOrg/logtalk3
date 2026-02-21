@@ -241,8 +241,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:7:0</div>
-<div class="line"><strong>Date:</strong> 2021-01-03</div>
+<div class="line"><strong>Version:</strong> 0:9:0</div>
+<div class="line"><strong>Date:</strong> 2025-06-19</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -257,6 +257,9 @@
 <div class="line"><a class="reference internal" href="type_0.html#type-0-check-2"><span class="std std-ref">type::check/2</span></a></div>
 <div class="line"><a class="reference internal" href="arbitrary_0.html#arbitrary-0-arbitrary-1"><span class="std std-ref">arbitrary::arbitrary/1</span></a></div>
 <div class="line"><a class="reference internal" href="arbitrary_0.html#arbitrary-0-arbitrary-2"><span class="std std-ref">arbitrary::arbitrary/2</span></a></div>
+<div class="line"><a class="reference internal" href="arbitrary_0.html#arbitrary-0-shrinker-1"><span class="std std-ref">arbitrary::shrinker/1</span></a></div>
+<div class="line"><a class="reference internal" href="arbitrary_0.html#arbitrary-0-shrink-3"><span class="std std-ref">arbitrary::shrink/3</span></a></div>
+<div class="line"><a class="reference internal" href="arbitrary_0.html#arbitrary-0-edge-case-2"><span class="std std-ref">arbitrary::edge_case/2</span></a></div>
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
@@ -272,7 +275,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Type-checking support: Defines type <code class="docutils literal notranslate"><span class="pre">maybe(Type)</span></code> for checking optional terms where the value hold by the optional term must be of the given type.</p></li>
-<li><p>QuickCheck support: Defines clauses for the <code class="docutils literal notranslate"><span class="pre">arbitrary::arbitrary/1-2</span></code> predicates to allow generating random values for the <code class="docutils literal notranslate"><span class="pre">maybe(Type)</span></code> type.</p></li>
+<li><p>QuickCheck support: Defines clauses for the <code class="docutils literal notranslate"><span class="pre">arbitrary::arbitrary/1-2</span></code>, <code class="docutils literal notranslate"><span class="pre">arbitrary::shrinker/1</span></code>, <code class="docutils literal notranslate"><span class="pre">arbitrary::shrink/3</span></code>, and <code class="docutils literal notranslate"><span class="pre">arbitrary::edge_case/2</span></code> predicates to allow generating random values for the <code class="docutils literal notranslate"><span class="pre">maybe(Type)</span></code> type.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -286,11 +289,13 @@
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
 <li><p><a class="reference internal" href="#cat-2" id="id2"><code class="docutils literal notranslate"><span class="pre">cat/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#sequence-2" id="id3"><code class="docutils literal notranslate"><span class="pre">sequence/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#traverse-3" id="id4"><code class="docutils literal notranslate"><span class="pre">traverse/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id3">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id4">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id5">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id5">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id6">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id7">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -312,6 +317,52 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">cat(+list(optional),-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="sequence-2">
+<span id="maybe-0-sequence-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sequence/2</span></code></a><a class="headerlink" href="#sequence-2" title="Link to this heading"></a></h3>
+<p>Returns an optional term with a list of all values when all optional terms are not empty. Otherwise returns an empty optional term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sequence(Optionals,Optional)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sequence(+list(optional),--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="traverse-3">
+<span id="maybe-0-traverse-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">traverse/3</span></code></a><a class="headerlink" href="#traverse-3" title="Link to this heading"></a></h3>
+<p>Applies a closure to each list element to generate optional terms and then sequences them into a single optional term holding all values or an empty optional term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">traverse(Closure,Terms,Optional)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">traverse(2,*,*)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">traverse(+callable,+list,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </section>

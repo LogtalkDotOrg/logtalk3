@@ -14,8 +14,8 @@ Optional term handling predicates. Requires passing an optional term (constructe
 |    ``logtalk_load(optionals(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:7:0
-| **Date:** 2019-11-26
+| **Version:** 1:9:0
+| **Date:** 2025-06-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -341,6 +341,86 @@ Returns the value hold by the optional term if not empty. Throws the given error
 |    ``or_else_throw(Value,Error)``
 | **Mode and number of proofs:**
 |    ``or_else_throw(--term,@nonvar)`` - ``one_or_error``
+
+
+------------
+
+.. index:: map_or_else/3
+.. _optional/1::map_or_else/3:
+
+``map_or_else/3``
+^^^^^^^^^^^^^^^^^
+
+When the optional term is not empty and mapping a closure with the value it holds and the new value as additional arguments is successful, returns the new value. Otherwise returns the given default value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``map_or_else(Closure,Default,Value)``
+| **Meta-predicate template:**
+|    ``map_or_else(2,*,*)``
+| **Mode and number of proofs:**
+|    ``map_or_else(+callable,@term,--term)`` - ``one``
+
+
+------------
+
+.. index:: zip/3
+.. _optional/1::zip/3:
+
+``zip/3``
+^^^^^^^^^
+
+When both this optional and the other optional hold values and applying a closure with both values and the new value as additional arguments is successful, returns an optional term with the new value. Otherwise returns an empty optional term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zip(Closure,OtherOptional,NewOptional)``
+| **Meta-predicate template:**
+|    ``zip(3,*,*)``
+| **Mode and number of proofs:**
+|    ``zip(+callable,+nonvar,--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: flatten/1
+.. _optional/1::flatten/1:
+
+``flatten/1``
+^^^^^^^^^^^^^
+
+Flattens a nested optional term. When the optional term holds a value that is itself an optional term, returns the inner optional term. When the optional term holds a non-optional value, returns the same optional term. When the optional term is empty, returns an empty optional term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``flatten(NewOptional)``
+| **Mode and number of proofs:**
+|    ``flatten(--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: to_expected/2
+.. _optional/1::to_expected/2:
+
+``to_expected/2``
+^^^^^^^^^^^^^^^^^
+
+Converts the optional term to an expected term. Returns an expected term holding the value if the optional term is not empty. Returns an expected term with the given error otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``to_expected(Error,Expected)``
+| **Mode and number of proofs:**
+|    ``to_expected(@term,--nonvar)`` - ``one``
 
 
 ------------

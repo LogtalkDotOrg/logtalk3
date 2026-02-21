@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Paulo Moura',
-		date is 2022-05-07,
+		date is 2026-02-21,
 		comment is 'Unit tests for the "optionals" library.'
 	]).
 
@@ -280,6 +280,116 @@
 		optional::of(1, Optional),
 		optional(Optional)::or_else_throw(Term, some_error).
 
+	% map_or_else/3 tests
+
+	test(optional_map_or_else_3_01, true(Value == 0)) :-
+		optional::empty(Optional),
+		optional(Optional)::map_or_else(char_code, 0, Value).
+
+	test(optional_map_or_else_3_02, true(Value == 97)) :-
+		optional::of(a, Optional),
+		optional(Optional)::map_or_else(char_code, 0, Value).
+
+	test(optional_map_or_else_3_03, true(Value == 0)) :-
+		optional::of(a, Optional),
+		optional(Optional)::map_or_else(is(_), 0, Value).
+
+	% zip/3 tests
+
+	test(optional_zip_3_01, true) :-
+		optional::empty(Optional1),
+		optional::of(2, Optional2),
+		optional(Optional1)::zip(zip_closure, Optional2, NewOptional),
+		optional(NewOptional)::is_empty.
+
+	test(optional_zip_3_02, true) :-
+		optional::of(1, Optional1),
+		optional::empty(Optional2),
+		optional(Optional1)::zip(zip_closure, Optional2, NewOptional),
+		optional(NewOptional)::is_empty.
+
+	test(optional_zip_3_03, true) :-
+		optional::empty(Optional1),
+		optional::empty(Optional2),
+		optional(Optional1)::zip(zip_closure, Optional2, NewOptional),
+		optional(NewOptional)::is_empty.
+
+	test(optional_zip_3_04, true(Value == 4)) :-
+		optional::of(1, Optional1),
+		optional::of(3, Optional2),
+		optional(Optional1)::zip(zip_closure, Optional2, NewOptional),
+		optional(NewOptional)::get(Value).
+
+	% from_goal_or_throw/3 tests
+
+	test(optional_from_goal_or_throw_3_01, true) :-
+		optional::from_goal_or_throw(Y is 1+2, Y, Optional),
+		optional(Optional)::is_present.
+
+	test(optional_from_goal_or_throw_3_02, true(Term == 3)) :-
+		optional::from_goal_or_throw(Y is 1+2, Y, Optional),
+		optional(Optional)::get(Term).
+
+	test(optional_from_goal_or_throw_3_03, true) :-
+		optional::from_goal_or_throw(2 is 3, _, Optional),
+		optional(Optional)::is_empty.
+
+	test(optional_from_goal_or_throw_3_04, error(instantiation_error)) :-
+		optional::from_goal_or_throw(Y is _, Y, _).
+
+	% from_goal_or_throw/2 tests
+
+	test(optional_from_goal_or_throw_2_01, true) :-
+		optional::from_goal_or_throw([Y]>>(Y is 1+2), Optional),
+		optional(Optional)::is_present.
+
+	test(optional_from_goal_or_throw_2_02, true(Term == 3)) :-
+		optional::from_goal_or_throw([Y]>>(Y is 1+2), Optional),
+		optional(Optional)::get(Term).
+
+	test(optional_from_goal_or_throw_2_03, true) :-
+		optional::from_goal_or_throw(nonvar, Optional),
+		optional(Optional)::is_empty.
+
+	test(optional_from_goal_or_throw_2_04, error(instantiation_error)) :-
+		optional::from_goal_or_throw(is(_), _).
+
+	% flatten/1 tests
+
+	test(optional_flatten_1_01, true) :-
+		optional::empty(Optional),
+		optional(Optional)::flatten(NewOptional),
+		optional(NewOptional)::is_empty.
+
+	test(optional_flatten_1_02, true(Value == 1)) :-
+		optional::of(1, Inner),
+		optional::of(Inner, Outer),
+		optional(Outer)::flatten(NewOptional),
+		optional(NewOptional)::get(Value).
+
+	test(optional_flatten_1_03, true) :-
+		optional::empty(Inner),
+		optional::of(Inner, Outer),
+		optional(Outer)::flatten(NewOptional),
+		optional(NewOptional)::is_empty.
+
+	test(optional_flatten_1_04, true(Value == 1)) :-
+		optional::of(1, Optional),
+		optional(Optional)::flatten(NewOptional),
+		optional(NewOptional)::get(Value).
+
+	% to_expected/2 tests
+
+	test(optional_to_expected_2_01, true(Value == 1)) :-
+		optional::of(1, Optional),
+		optional(Optional)::to_expected(missing, Expected),
+		expected(Expected)::expected(Value).
+
+	test(optional_to_expected_2_02, true(Error == missing)) :-
+		optional::empty(Optional),
+		optional(Optional)::to_expected(missing, Expected),
+		expected(Expected)::unexpected(Error).
+
 	% "optional" type tests
 
 	test(optional_type_checking_support_01, true) :-
@@ -322,6 +432,35 @@
 		optional::of(2, Optional4),
 		maybe::cat([Optional1, Optional2, Optional3, Optional4], Terms).
 
+	% sequence/2 tests
+
+	test(maybe_sequence_2_01, true(Terms == [])) :-
+		maybe::sequence([], Optional),
+		optional(Optional)::get(Terms).
+
+	test(maybe_sequence_2_02, true(Terms == [1,2])) :-
+		optional::of(1, Optional1),
+		optional::of(2, Optional2),
+		maybe::sequence([Optional1, Optional2], Optional),
+		optional(Optional)::get(Terms).
+
+	test(maybe_sequence_2_03, true) :-
+		optional::of(1, Optional1),
+		optional::empty(Optional2),
+		optional::of(2, Optional3),
+		maybe::sequence([Optional1, Optional2, Optional3], Optional),
+		optional(Optional)::is_empty.
+
+	% traverse/3 tests
+
+	test(maybe_traverse_3_01, true(Terms == [1,2])) :-
+		maybe::traverse(traverse_optional_closure, [1,2], Optional),
+		optional(Optional)::get(Terms).
+
+	test(maybe_traverse_3_02, true) :-
+		maybe::traverse(traverse_optional_closure, [1,a,2], Optional),
+		optional(Optional)::is_empty.
+
 	% "maybe" type tests
 
 	test(maybe_type_checking_support_01, true) :-
@@ -363,11 +502,51 @@
 		type::arbitrary({maybe(integer)}, -maybe(integer))
 	).
 
+	% "maybe" shrinker tests
+
+	test(maybe_shrinker_1_01, true) :-
+		type::shrinker(maybe(integer)).
+
+	test(maybe_shrink_3_01, true(type::check(maybe(integer), Small))) :-
+		optional::of(42, Optional),
+		type::shrink(maybe(integer), Optional, Small).
+
+	test(maybe_shrink_3_02, all(type::check(maybe(atom), Small))) :-
+		optional::of(abcde, Optional),
+		type::shrink(maybe(atom), Optional, Small).
+
+	test(maybe_shrink_3_03, false) :-
+		optional::empty(Optional),
+		type::shrink(maybe(integer), Optional, _).
+
+	test(maybe_shrink_3_04, false) :-
+		optional::of(0, Optional),
+		type::shrink(maybe(integer), Optional, _).
+
+	% "maybe" edge case tests
+
+	test(maybe_edge_case_2_01, true) :-
+		type::edge_case(maybe(integer), empty).
+
+	test(maybe_edge_case_2_02, true) :-
+		findall(T, type::edge_case(maybe(integer), T), Cases),
+		Cases = [empty| Rest],
+		Rest \== [].
+
 	% auxiliary predicates
 
 	flat_map_closure(Value, Optional) :-
 		char_code(Value, NewValue),
 		optional::of(NewValue, Optional).
+
+	zip_closure(X, Y, Z) :-
+		Z is X + Y.
+
+	traverse_optional_closure(Term, Optional) :-
+		( 	integer(Term) ->
+			optional::of(Term, Optional)
+		; 	optional::empty(Optional)
+		).
 
 	a(1).
 	a(2).

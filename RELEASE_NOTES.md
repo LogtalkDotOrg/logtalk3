@@ -177,6 +177,18 @@ Xoshiro256**, and WELL512a algorithms to the `random` library.
 `min_max_normalization/2`, `frequency_distribution/2`, `mean_squared_error/3`,
 and `root_mean_squared_error/3`.
 
+* ADDED: New `expecteds` library predicates `from_optional/3`, `to_optional/1`,
+`filter/3`, `map_unexpected/2`, `map_catching/2`, `map_both/3`, `swap/1`,
+`map_or_else/3`, `or/2`, `or_else_throw/2`, `zip/3`, `flatten/1`, `sequence/2`,
+and `traverse/3`.
+
+* ADDED: New `optionals` library predicates `from_goal_or_throw/2-3`,
+`map_or_else/3`, `zip/3`, `flatten/1`, `to_expected/2`, `sequence/2`,
+and `traverse/3`.
+
+* ADDED: Support for QuickCheck shrinking to the `expecteds` and `optionals`
+libraries.
+
 * ADDED: Wrapper predicates for commonly used Redis operations across multiple
 data types to the `redis` library.
 

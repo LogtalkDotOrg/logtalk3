@@ -77,10 +77,163 @@ parametric object. For example:
 	yes
 
 The `either` object provides types and predicates for extended type-checking
-and predicates for handling lists of expected terms.
+and predicates for handling lists of expected terms, including `sequence/2`
+and `traverse/3`.
 
+The `expected/1` parametric object provides `filter/3` for conditionally
+rejecting values, converting them to unexpected terms with a given error:
+
+	| ?- expected::of_expected(1, Expected),
+	|    expected(Expected)::filter(integer, not_integer, NewExpected).
+	NewExpected = expected(1)
+	yes
+
+	| ?- expected::of_expected(a, Expected),
+	|    expected(Expected)::filter(integer, not_integer, NewExpected).
+	NewExpected = unexpected(not_integer)
+	yes
+
+The `map_or_else/3` predicate applies a closure to the value if present,
+returning a default value otherwise (symmetric with the optionals library):
+
+	| ?- expected::of_expected(a, Expected),
+	|    expected(Expected)::map_or_else(char_code, 0, Value).
+	Value = 97
+	yes
+
+	| ?- expected::of_unexpected(-1, Expected),
+	|    expected(Expected)::map_or_else(char_code, 0, Value).
+	Value = 0
+	yes
+
+The `or/2` predicate chains expected terms, returning the current term if
+it holds a value, or calling a closure to produce an alternative otherwise:
+
+	| ?- expected::of_expected(1, Expected),
+	|    expected(Expected)::or(NewExpected, expected::of_expected(2)).
+	NewExpected = expected(1)
+	yes
+
+	| ?- expected::of_unexpected(-1, Expected),
+	|    expected(Expected)::or(NewExpected, expected::of_expected(2)).
+	NewExpected = expected(2)
+	yes
+
+The `zip/3` predicate combines two expected terms using a closure when
+both hold values, returning the first error otherwise:
+
+	| ?- expected::of_expected(1, E1), expected::of_expected(3, E2),
+	|    expected(E1)::zip([X,Y,Z]>>(Z is X+Y), E2, NewExpected).
+	NewExpected = expected(4)
+	yes
+
+	| ?- expected::of_unexpected(-1, E1), expected::of_expected(3, E2),
+	|    expected(E1)::zip([X,Y,Z]>>(Z is X+Y), E2, NewExpected).
+	NewExpected = unexpected(-1)
+	yes
+
+The `map_unexpected/2` predicate transforms the error held by an expected term:
+
+	| ?- expected::of_unexpected(-1, Expected),
+	|    expected(Expected)::map_unexpected([X,Y]>>(Y is abs(X)), NewExpected).
+	NewExpected = unexpected(1)
+	yes
+
+The `map_catching/2` predicate applies a closure that may throw an error,
+catching it and wrapping it as an unexpected term:
+
+	| ?- expected::of_expected(a, Expected),
+	|    expected(Expected)::map_catching(char_code, NewExpected).
+	NewExpected = expected(97)
+	yes
+
+	| ?- expected::of_expected(1, Expected),
+	|    expected(Expected)::map_catching(char_code, NewExpected),
+	|    expected(NewExpected)::is_unexpected.
+	yes
+
+The `map_both/3` predicate is a bifunctor map that transforms both the
+expected value and unexpected error using separate closures:
+
+	| ?- expected::of_expected(1, Expected),
+	|    expected(Expected)::map_both([X,Y]>>(Y is X+1), [X,Y]>>(Y is abs(X)), NewExpected).
+	NewExpected = expected(2)
+	yes
+
+The `swap/1` predicate swaps expected and unexpected terms:
+
+	| ?- expected::of_expected(1, Expected),
+	|    expected(Expected)::swap(NewExpected).
+	NewExpected = unexpected(1)
+	yes
+
+	| ?- expected::of_unexpected(error, Expected),
+	|    expected(Expected)::swap(NewExpected).
+	NewExpected = expected(error)
+	yes
+
+The `flatten/1` predicate unwraps a nested expected term:
+
+	| ?- expected::of_expected(1, Inner), expected::of_expected(Inner, Outer),
+	|    expected(Outer)::flatten(NewExpected).
+	NewExpected = expected(1)
+	yes
+
+	| ?- expected::of_unexpected(oops, Inner), expected::of_expected(Inner, Outer),
+	|    expected(Outer)::flatten(NewExpected).
+	NewExpected = unexpected(oops)
+	yes
+
+Conversion between expected and optional terms is provided by the
+`to_optional/1`, `from_optional/3`, and `optional/1::to_expected/2`
+predicates:
+
+	| ?- expected::of_expected(1, Expected),
+	|    expected(Expected)::to_optional(Optional).
+	Optional = optional(1)
+	yes
+
+	| ?- expected::of_unexpected(error, Expected),
+	|    expected(Expected)::to_optional(Optional).
+	Optional = empty
+	yes
+
+	| ?- optional::of(1, Optional),
+	|    expected::from_optional(Optional, missing, Expected).
+	Expected = expected(1)
+	yes
+
+	| ?- optional::empty(Optional),
+	|    expected::from_optional(Optional, missing, Expected).
+	Expected = unexpected(missing)
+	yes
+
+Examples:
+
+	| ?- expected::of_expected(1, E1), expected::of_expected(2, E2),
+	|    either::sequence([E1, E2], Expected).
+	Expected = expected([1,2])
+	yes
+
+	| ?- either::traverse({expected}/[X,E]>>expected::of_expected(X, E), [1,2], Expected).
+	Expected = expected([1,2])
+	yes
+
+	| ?- either::traverse({expected}/[X,E]>>(
+	|      integer(X) -> expected::of_expected(X, E)
+	|    ; expected::of_unexpected(not_integer(X), E)
+	|    ), [1,a,2], Expected).
+	Expected = unexpected(not_integer(a))
+	yes
+
+	| ?- expected::of_expected(1, E1), expected::of_unexpected(e, E2),
+	|    either::sequence([E1, E2], Expected).
+	Expected = unexpected(e)
+	yes
 
 See also
 --------
 
 The `optionals` library.
+
+The `validations` library.

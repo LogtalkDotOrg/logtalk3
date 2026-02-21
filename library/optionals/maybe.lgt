@@ -22,13 +22,13 @@
 :- object(maybe).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:9:0,
 		author is 'Paulo Moura',
-		date is 2021-01-03,
+		date is 2025-06-19,
 		comment is 'Types and predicates for type-checking and handling optional terms. Inspired by Haskell.',
 		remarks is [
 			'Type-checking support' - 'Defines type ``maybe(Type)`` for checking optional terms where the value hold by the optional term must be of the given type.',
-			'QuickCheck support' - 'Defines clauses for the ``arbitrary::arbitrary/1-2`` predicates to allow generating random values for the ``maybe(Type)`` type.'
+			'QuickCheck support' - 'Defines clauses for the ``arbitrary::arbitrary/1-2``, ``arbitrary::shrinker/1``, ``arbitrary::shrink/3``, and ``arbitrary::edge_case/2`` predicates to allow generating random values for the ``maybe(Type)`` type.'
 		],
 		see_also is [optional, optional(_), type, arbitrary]
 	]).
@@ -38,6 +38,21 @@
 	:- info(cat/2, [
 		comment is 'Returns the values stored in the non-empty optional terms.',
 		argnames is ['Optionals', 'Values']
+	]).
+
+	:- public(sequence/2).
+	:- mode(sequence(+list(optional), --nonvar), one).
+	:- info(sequence/2, [
+		comment is 'Returns an optional term with a list of all values when all optional terms are not empty. Otherwise returns an empty optional term.',
+		argnames is ['Optionals', 'Optional']
+	]).
+
+	:- public(traverse/3).
+	:- meta_predicate(traverse(2, *, *)).
+	:- mode(traverse(+callable, +list, --nonvar), one).
+	:- info(traverse/3, [
+		comment is 'Applies a closure to each list element to generate optional terms and then sequences them into a single optional term holding all values or an empty optional term.',
+		argnames is ['Closure', 'Terms', 'Optional']
 	]).
 
 	:- multifile(type::type/1).
@@ -59,6 +74,18 @@
 			optional::of(Term, Arbitrary)
 		).
 
+	:- multifile(arbitrary::shrinker/1).
+	arbitrary::shrinker(maybe(_)).
+
+	:- multifile(arbitrary::shrink/3).
+	arbitrary::shrink(maybe(Type), optional(Large), optional(Small)) :-
+		type::shrink(Type, Large, Small).
+
+	:- multifile(arbitrary::edge_case/2).
+	arbitrary::edge_case(maybe(_Type), empty).
+	arbitrary::edge_case(maybe(Type), optional(Term)) :-
+		type::edge_case(Type, Term).
+
 	cat([], []).
 	cat([Optional| Optionals], Values) :-
 		(	optional(Optional)::or_else_fail(Value) ->
@@ -66,5 +93,27 @@
 		;	Values = Rest
 		),
 		cat(Optionals, Rest).
+
+	sequence([], optional([])).
+	sequence([Optional| Optionals], Sequenced) :-
+		( 	Optional = optional(Value) ->
+			sequence(Optionals, RestSequenced),
+			( 	RestSequenced = optional(RestValues) ->
+				Sequenced = optional([Value| RestValues])
+			; 	Sequenced = empty
+			)
+		; 	Optional == empty,
+			Sequenced = empty
+		).
+
+	traverse(Closure, Terms, Sequenced) :-
+		traverse_(Terms, Closure, Optionals),
+		sequence(Optionals, Sequenced).
+
+	:- meta_predicate(traverse_(*, 2, *)).
+	traverse_([], _, []).
+	traverse_([Term| Terms], Closure, [Optional| Optionals]) :-
+		call(Closure, Term, Optional),
+		traverse_(Terms, Closure, Optionals).
 
 :- end_object.
