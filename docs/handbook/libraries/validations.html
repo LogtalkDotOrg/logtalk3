@@ -343,10 +343,10 @@ yes
 <p>Both this library and the <code class="docutils literal notranslate"><span class="pre">expecteds</span></code> library wrap computations that
 may succeed or fail. The fundamental difference is the <strong>error model</strong>:</p>
 <ul class="simple">
-<li><p><strong>``expecteds``</strong> carries a <em>single</em> error and <strong>short-circuits</strong> on
-the first failure (monadic error handling). Once an unexpected term is
+<li><p><code class="docutils literal notranslate"><span class="pre">expecteds</span></code> carries a <em>single</em> error and <strong>short-circuits</strong> on the
+first failure (monadic error handling). Once an unexpected term is
 produced, subsequent operations are skipped.</p></li>
-<li><p><strong>``validations``</strong> carries a <em>list</em> of errors and <strong>accumulates all
+<li><p><code class="docutils literal notranslate"><span class="pre">validations</span></code> carries a <em>list</em> of errors and <strong>accumulates all
 failures</strong> (applicative error handling). Operations such as <code class="docutils literal notranslate"><span class="pre">zip/3</span></code>,
 <code class="docutils literal notranslate"><span class="pre">sequence/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">traverse/3</span></code> collect every error.</p></li>
 </ul>

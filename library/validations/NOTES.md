@@ -154,11 +154,11 @@ Comparison with the `expecteds` library
 Both this library and the `expecteds` library wrap computations that may
 succeed or fail. The fundamental difference is the **error model**:
 
-- **`expecteds`** carries a *single* error and **short-circuits** on the
+- `expecteds` carries a *single* error and **short-circuits** on the
   first failure (monadic error handling). Once an unexpected term is
   produced, subsequent operations are skipped.
 
-- **`validations`** carries a *list* of errors and **accumulates all
+- `validations` carries a *list* of errors and **accumulates all
   failures** (applicative error handling). Operations such as `zip/3`,
   `sequence/2`, and `traverse/3` collect every error.
 
