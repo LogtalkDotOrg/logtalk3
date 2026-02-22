@@ -60,6 +60,7 @@
 		optionals(loader),
 		options(loader),
 		expecteds(loader),
+		validations(loader),
 		expand_library_alias_paths(loader),
 		edcg(loader),
 		dif(loader),

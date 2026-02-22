@@ -166,6 +166,7 @@
 <li class="toctree-l2"><a class="reference internal" href="union_find.html"><code class="docutils literal notranslate"><span class="pre">union_find</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="url.html"><code class="docutils literal notranslate"><span class="pre">url</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="uuid.html"><code class="docutils literal notranslate"><span class="pre">uuid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="validations.html"><code class="docutils literal notranslate"><span class="pre">validations</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="yaml.html"><code class="docutils literal notranslate"><span class="pre">yaml</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="zippers.html"><code class="docutils literal notranslate"><span class="pre">zippers</span></code></a></li>
 </ul>
@@ -269,12 +270,12 @@ including <code class="docutils literal notranslate"><span class="pre">sequence/
 conditionally rejecting values, converting them to unexpected terms with
 a given error:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> expected<span class="o">::</span>of_expected(<span class="m">1</span>, <span class="nv">Expected</span>),
-|    expected(<span class="nv">Expected</span>)<span class="o">::</span>filter(integer, not_integer, <span class="nv">NewExpected</span>).
+     expected(<span class="nv">Expected</span>)<span class="o">::</span>filter(integer, not_integer, <span class="nv">NewExpected</span>).
 <span class="nv">NewExpected</span> <span class="o">=</span> expected(<span class="m">1</span>)
 yes
 
 | <span class="o">?-</span> expected<span class="o">::</span>of_expected(a, <span class="nv">Expected</span>),
-|    expected(<span class="nv">Expected</span>)<span class="o">::</span>filter(integer, not_integer, <span class="nv">NewExpected</span>).
+     expected(<span class="nv">Expected</span>)<span class="o">::</span>filter(integer, not_integer, <span class="nv">NewExpected</span>).
 <span class="nv">NewExpected</span> <span class="o">=</span> unexpected(not_integer)
 yes
 </pre></div>
@@ -283,12 +284,12 @@ yes
 present, returning a default value otherwise (symmetric with the
 optionals library):</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> expected<span class="o">::</span>of_expected(a, <span class="nv">Expected</span>),
-|    expected(<span class="nv">Expected</span>)<span class="o">::</span>map_or_else(char_code, <span class="m">0</span>, <span class="nv">Value</span>).
+     expected(<span class="nv">Expected</span>)<span class="o">::</span>map_or_else(char_code, <span class="m">0</span>, <span class="nv">Value</span>).
 <span class="nv">Value</span> <span class="o">=</span> <span class="m">97</span>
 yes
 
 | <span class="o">?-</span> expected<span class="o">::</span>of_unexpected(<span class="o">-</span><span class="m">1</span>, <span class="nv">Expected</span>),
-|    expected(<span class="nv">Expected</span>)<span class="o">::</span>map_or_else(char_code, <span class="m">0</span>, <span class="nv">Value</span>).
+     expected(<span class="nv">Expected</span>)<span class="o">::</span>map_or_else(char_code, <span class="m">0</span>, <span class="nv">Value</span>).
 <span class="nv">Value</span> <span class="o">=</span> <span class="m">0</span>
 yes
 </pre></div>
@@ -297,12 +298,12 @@ yes
 if it holds a value, or calling a closure to produce an alternative
 otherwise:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> expected<span class="o">::</span>of_expected(<span class="m">1</span>, <span class="nv">Expected</span>),
-|    expected(<span class="nv">Expected</span>)<span class="o">::</span>or(<span class="nv">NewExpected</span>, expected<span class="o">::</span>of_expected(<span class="m">2</span>)).
+     expected(<span class="nv">Expected</span>)<span class="o">::</span>or(<span class="nv">NewExpected</span>, expected<span class="o">::</span>of_expected(<span class="m">2</span>)).
 <span class="nv">NewExpected</span> <span class="o">=</span> expected(<span class="m">1</span>)
 yes
 
 | <span class="o">?-</span> expected<span class="o">::</span>of_unexpected(<span class="o">-</span><span class="m">1</span>, <span class="nv">Expected</span>),
-|    expected(<span class="nv">Expected</span>)<span class="o">::</span>or(<span class="nv">NewExpected</span>, expected<span class="o">::</span>of_expected(<span class="m">2</span>)).
+     expected(<span class="nv">Expected</span>)<span class="o">::</span>or(<span class="nv">NewExpected</span>, expected<span class="o">::</span>of_expected(<span class="m">2</span>)).
 <span class="nv">NewExpected</span> <span class="o">=</span> expected(<span class="m">2</span>)
 yes
 </pre></div>
@@ -310,12 +311,12 @@ yes
 <p>The <code class="docutils literal notranslate"><span class="pre">zip/3</span></code> predicate combines two expected terms using a closure when
 both hold values, returning the first error otherwise:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> expected<span class="o">::</span>of_expected(<span class="m">1</span>, <span class="nv">E1</span>), expected<span class="o">::</span>of_expected(<span class="m">3</span>, <span class="nv">E2</span>),
-|    expected(<span class="nv">E1</span>)<span class="o">::</span>zip([<span class="nv">X</span>,<span class="nv">Y</span>,<span class="nv">Z</span>]<span class="o">&gt;&gt;</span>(<span class="nv">Z</span> <span class="k">is</span> <span class="nv">X</span><span class="o">+</span><span class="nv">Y</span>), <span class="nv">E2</span>, <span class="nv">NewExpected</span>).
+     expected(<span class="nv">E1</span>)<span class="o">::</span>zip([<span class="nv">X</span>,<span class="nv">Y</span>,<span class="nv">Z</span>]<span class="o">&gt;&gt;</span>(<span class="nv">Z</span> <span class="k">is</span> <span class="nv">X</span><span class="o">+</span><span class="nv">Y</span>), <span class="nv">E2</span>, <span class="nv">NewExpected</span>).
 <span class="nv">NewExpected</span> <span class="o">=</span> expected(<span class="m">4</span>)
 yes
 
 | <span class="o">?-</span> expected<span class="o">::</span>of_unexpected(<span class="o">-</span><span class="m">1</span>, <span class="nv">E1</span>), expected<span class="o">::</span>of_expected(<span class="m">3</span>, <span class="nv">E2</span>),
-|    expected(<span class="nv">E1</span>)<span class="o">::</span>zip([<span class="nv">X</span>,<span class="nv">Y</span>,<span class="nv">Z</span>]<span class="o">&gt;&gt;</span>(<span class="nv">Z</span> <span class="k">is</span> <span class="nv">X</span><span class="o">+</span><span class="nv">Y</span>), <span class="nv">E2</span>, <span class="nv">NewExpected</span>).
+     expected(<span class="nv">E1</span>)<span class="o">::</span>zip([<span class="nv">X</span>,<span class="nv">Y</span>,<span class="nv">Z</span>]<span class="o">&gt;&gt;</span>(<span class="nv">Z</span> <span class="k">is</span> <span class="nv">X</span><span class="o">+</span><span class="nv">Y</span>), <span class="nv">E2</span>, <span class="nv">NewExpected</span>).
 <span class="nv">NewExpected</span> <span class="o">=</span> unexpected(<span class="o">-</span><span class="m">1</span>)
 yes
 </pre></div>
@@ -323,7 +324,7 @@ yes
 <p>The <code class="docutils literal notranslate"><span class="pre">map_unexpected/2</span></code> predicate transforms the error held by an
 expected term:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> expected<span class="o">::</span>of_unexpected(<span class="o">-</span><span class="m">1</span>, <span class="nv">Expected</span>),
-|    expected(<span class="nv">Expected</span>)<span class="o">::</span>map_unexpected([<span class="nv">X</span>,<span class="nv">Y</span>]<span class="o">&gt;&gt;</span>(<span class="nv">Y</span> <span class="k">is</span> <span class="k">abs</span>(<span class="nv">X</span>)), <span class="nv">NewExpected</span>).
+     expected(<span class="nv">Expected</span>)<span class="o">::</span>map_unexpected([<span class="nv">X</span>,<span class="nv">Y</span>]<span class="o">&gt;&gt;</span>(<span class="nv">Y</span> <span class="k">is</span> <span class="k">abs</span>(<span class="nv">X</span>)), <span class="nv">NewExpected</span>).
 <span class="nv">NewExpected</span> <span class="o">=</span> unexpected(<span class="m">1</span>)
 yes
 </pre></div>
@@ -331,44 +332,44 @@ yes
 <p>The <code class="docutils literal notranslate"><span class="pre">map_catching/2</span></code> predicate applies a closure that may throw an
 error, catching it and wrapping it as an unexpected term:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> expected<span class="o">::</span>of_expected(a, <span class="nv">Expected</span>),
-|    expected(<span class="nv">Expected</span>)<span class="o">::</span>map_catching(char_code, <span class="nv">NewExpected</span>).
+     expected(<span class="nv">Expected</span>)<span class="o">::</span>map_catching(char_code, <span class="nv">NewExpected</span>).
 <span class="nv">NewExpected</span> <span class="o">=</span> expected(<span class="m">97</span>)
 yes
 
 | <span class="o">?-</span> expected<span class="o">::</span>of_expected(<span class="m">1</span>, <span class="nv">Expected</span>),
-|    expected(<span class="nv">Expected</span>)<span class="o">::</span>map_catching(char_code, <span class="nv">NewExpected</span>),
-|    expected(<span class="nv">NewExpected</span>)<span class="o">::</span>is_unexpected.
+     expected(<span class="nv">Expected</span>)<span class="o">::</span>map_catching(char_code, <span class="nv">NewExpected</span>),
+     expected(<span class="nv">NewExpected</span>)<span class="o">::</span>is_unexpected.
 yes
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">map_both/3</span></code> predicate is a bifunctor map that transforms both the
 expected value and unexpected error using separate closures:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> expected<span class="o">::</span>of_expected(<span class="m">1</span>, <span class="nv">Expected</span>),
-|    expected(<span class="nv">Expected</span>)<span class="o">::</span>map_both([<span class="nv">X</span>,<span class="nv">Y</span>]<span class="o">&gt;&gt;</span>(<span class="nv">Y</span> <span class="k">is</span> <span class="nv">X</span><span class="o">+</span><span class="m">1</span>), [<span class="nv">X</span>,<span class="nv">Y</span>]<span class="o">&gt;&gt;</span>(<span class="nv">Y</span> <span class="k">is</span> <span class="k">abs</span>(<span class="nv">X</span>)), <span class="nv">NewExpected</span>).
+     expected(<span class="nv">Expected</span>)<span class="o">::</span>map_both([<span class="nv">X</span>,<span class="nv">Y</span>]<span class="o">&gt;&gt;</span>(<span class="nv">Y</span> <span class="k">is</span> <span class="nv">X</span><span class="o">+</span><span class="m">1</span>), [<span class="nv">X</span>,<span class="nv">Y</span>]<span class="o">&gt;&gt;</span>(<span class="nv">Y</span> <span class="k">is</span> <span class="k">abs</span>(<span class="nv">X</span>)), <span class="nv">NewExpected</span>).
 <span class="nv">NewExpected</span> <span class="o">=</span> expected(<span class="m">2</span>)
 yes
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">swap/1</span></code> predicate swaps expected and unexpected terms:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> expected<span class="o">::</span>of_expected(<span class="m">1</span>, <span class="nv">Expected</span>),
-|    expected(<span class="nv">Expected</span>)<span class="o">::</span>swap(<span class="nv">NewExpected</span>).
+     expected(<span class="nv">Expected</span>)<span class="o">::</span>swap(<span class="nv">NewExpected</span>).
 <span class="nv">NewExpected</span> <span class="o">=</span> unexpected(<span class="m">1</span>)
 yes
 
 | <span class="o">?-</span> expected<span class="o">::</span>of_unexpected(error, <span class="nv">Expected</span>),
-|    expected(<span class="nv">Expected</span>)<span class="o">::</span>swap(<span class="nv">NewExpected</span>).
+     expected(<span class="nv">Expected</span>)<span class="o">::</span>swap(<span class="nv">NewExpected</span>).
 <span class="nv">NewExpected</span> <span class="o">=</span> expected(error)
 yes
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">flatten/1</span></code> predicate unwraps a nested expected term:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> expected<span class="o">::</span>of_expected(<span class="m">1</span>, <span class="nv">Inner</span>), expected<span class="o">::</span>of_expected(<span class="nv">Inner</span>, <span class="nv">Outer</span>),
-|    expected(<span class="nv">Outer</span>)<span class="o">::</span>flatten(<span class="nv">NewExpected</span>).
+     expected(<span class="nv">Outer</span>)<span class="o">::</span>flatten(<span class="nv">NewExpected</span>).
 <span class="nv">NewExpected</span> <span class="o">=</span> expected(<span class="m">1</span>)
 yes
 
 | <span class="o">?-</span> expected<span class="o">::</span>of_unexpected(oops, <span class="nv">Inner</span>), expected<span class="o">::</span>of_expected(<span class="nv">Inner</span>, <span class="nv">Outer</span>),
-|    expected(<span class="nv">Outer</span>)<span class="o">::</span>flatten(<span class="nv">NewExpected</span>).
+     expected(<span class="nv">Outer</span>)<span class="o">::</span>flatten(<span class="nv">NewExpected</span>).
 <span class="nv">NewExpected</span> <span class="o">=</span> unexpected(oops)
 yes
 </pre></div>
@@ -377,29 +378,29 @@ yes
 <code class="docutils literal notranslate"><span class="pre">to_optional/1</span></code>, <code class="docutils literal notranslate"><span class="pre">from_optional/3</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">optional/1::to_expected/2</span></code> predicates:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> expected<span class="o">::</span>of_expected(<span class="m">1</span>, <span class="nv">Expected</span>),
-|    expected(<span class="nv">Expected</span>)<span class="o">::</span>to_optional(<span class="nv">Optional</span>).
+     expected(<span class="nv">Expected</span>)<span class="o">::</span>to_optional(<span class="nv">Optional</span>).
 <span class="nv">Optional</span> <span class="o">=</span> optional(<span class="m">1</span>)
 yes
 
 | <span class="o">?-</span> expected<span class="o">::</span>of_unexpected(error, <span class="nv">Expected</span>),
-|    expected(<span class="nv">Expected</span>)<span class="o">::</span>to_optional(<span class="nv">Optional</span>).
+     expected(<span class="nv">Expected</span>)<span class="o">::</span>to_optional(<span class="nv">Optional</span>).
 <span class="nv">Optional</span> <span class="o">=</span> empty
 yes
 
 | <span class="o">?-</span> optional<span class="o">::</span>of(<span class="m">1</span>, <span class="nv">Optional</span>),
-|    expected<span class="o">::</span>from_optional(<span class="nv">Optional</span>, missing, <span class="nv">Expected</span>).
+     expected<span class="o">::</span>from_optional(<span class="nv">Optional</span>, missing, <span class="nv">Expected</span>).
 <span class="nv">Expected</span> <span class="o">=</span> expected(<span class="m">1</span>)
 yes
 
 | <span class="o">?-</span> optional<span class="o">::</span>empty(<span class="nv">Optional</span>),
-|    expected<span class="o">::</span>from_optional(<span class="nv">Optional</span>, missing, <span class="nv">Expected</span>).
+     expected<span class="o">::</span>from_optional(<span class="nv">Optional</span>, missing, <span class="nv">Expected</span>).
 <span class="nv">Expected</span> <span class="o">=</span> unexpected(missing)
 yes
 </pre></div>
 </div>
 <p>Examples:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> expected<span class="o">::</span>of_expected(<span class="m">1</span>, <span class="nv">E1</span>), expected<span class="o">::</span>of_expected(<span class="m">2</span>, <span class="nv">E2</span>),
-|    either<span class="o">::</span>sequence([<span class="nv">E1</span>, <span class="nv">E2</span>], <span class="nv">Expected</span>).
+     either<span class="o">::</span>sequence([<span class="nv">E1</span>, <span class="nv">E2</span>], <span class="nv">Expected</span>).
 <span class="nv">Expected</span> <span class="o">=</span> expected([<span class="m">1</span>,<span class="m">2</span>])
 yes
 
@@ -408,14 +409,14 @@ yes
 yes
 
 | <span class="o">?-</span> either<span class="o">::</span>traverse(<span class="k">{</span>expected<span class="k">}</span><span class="o">/</span>[<span class="nv">X</span>,<span class="nv">E</span>]<span class="o">&gt;&gt;</span>(
-|      <span class="k">integer</span>(<span class="nv">X</span>) <span class="o">-&gt;</span> expected<span class="o">::</span>of_expected(<span class="nv">X</span>, <span class="nv">E</span>)
-|    <span class="o">;</span> expected<span class="o">::</span>of_unexpected(not_integer(<span class="nv">X</span>), <span class="nv">E</span>)
-|    ), [<span class="m">1</span>,a,<span class="m">2</span>], <span class="nv">Expected</span>).
+       <span class="k">integer</span>(<span class="nv">X</span>) <span class="o">-&gt;</span> expected<span class="o">::</span>of_expected(<span class="nv">X</span>, <span class="nv">E</span>)
+     <span class="o">;</span> expected<span class="o">::</span>of_unexpected(not_integer(<span class="nv">X</span>), <span class="nv">E</span>)
+     ), [<span class="m">1</span>,a,<span class="m">2</span>], <span class="nv">Expected</span>).
 <span class="nv">Expected</span> <span class="o">=</span> unexpected(not_integer(a))
 yes
 
 | <span class="o">?-</span> expected<span class="o">::</span>of_expected(<span class="m">1</span>, <span class="nv">E1</span>), expected<span class="o">::</span>of_unexpected(<span class="o">e</span>, <span class="nv">E2</span>),
-|    either<span class="o">::</span>sequence([<span class="nv">E1</span>, <span class="nv">E2</span>], <span class="nv">Expected</span>).
+     either<span class="o">::</span>sequence([<span class="nv">E1</span>, <span class="nv">E2</span>], <span class="nv">Expected</span>).
 <span class="nv">Expected</span> <span class="o">=</span> unexpected(<span class="o">e</span>)
 yes
 </pre></div>
@@ -423,8 +424,7 @@ yes
 </section>
 <section id="see-also">
 <h2>See also<a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">optionals</span></code> library.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">validations</span></code> library.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">optionals</span></code> and <code class="docutils literal notranslate"><span class="pre">validations</span></code> libraries.</p>
 </section>
 </section>
 

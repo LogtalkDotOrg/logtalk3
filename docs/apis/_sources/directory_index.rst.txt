@@ -1136,6 +1136,18 @@ To load an entity, always load the library that includes it using the goal ``log
    uuid(Representation) <uuid_1>
    uuid_protocol <uuid_protocol_0>
 
+``library/validations/``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   validated <validated_0>
+   validation <validation_0>
+   validation(Validation) <validation_1>
+
 ``library/yaml/``
 -----------------
 

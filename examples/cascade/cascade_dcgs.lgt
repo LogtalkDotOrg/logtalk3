@@ -47,10 +47,12 @@
 	process_image(Image, Final) :-
 		% encapsulate the "image" in an expected term
 		expected::of_expected(Image, Final0),
+		writeq(final0-Final0), nl,
 		% apply a sequence of image filters
 		phrase(process, Final0, Final1),
 		% either return the final image or throw any exception
 		% that happened while applying one of the filters
+		writeq(final1-Final1), nl,
 		expected(Final1)::or_else_throw(Final).
 
 	process -->

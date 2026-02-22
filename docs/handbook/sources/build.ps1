@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on February 20, 2026
+##   Last updated on February 22, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -162,6 +162,7 @@ Foreach-Object {
 (Get-Content ../../../library/union_find/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/union_find.rst
 (Get-Content ../../../library/url/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/url.rst
 (Get-Content ../../../library/uuid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/uuid.rst
+(Get-Content ../../../library/validations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/validations.rst
 (Get-Content ../../../library/yaml/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/yaml.rst
 (Get-Content ../../../library/zippers/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/zippers.rst
 

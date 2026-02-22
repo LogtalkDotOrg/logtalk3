@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on February 20, 2026
+##   Last updated on February 22, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -162,6 +162,7 @@ sed '1,19d' ../../../library/ulid/NOTES.md | pandoc -f gfm -t rst -o libraries/u
 sed '1,19d' ../../../library/union_find/NOTES.md | pandoc -f gfm -t rst -o libraries/union_find.rst
 sed '1,19d' ../../../library/url/NOTES.md | pandoc -f gfm -t rst -o libraries/url.rst
 sed '1,19d' ../../../library/uuid/NOTES.md | pandoc -f gfm -t rst -o libraries/uuid.rst
+sed '1,19d' ../../../library/validations/NOTES.md | pandoc -f gfm -t rst -o libraries/validations.rst
 sed '1,19d' ../../../library/yaml/NOTES.md | pandoc -f gfm -t rst -o libraries/yaml.rst
 sed '1,19d' ../../../library/zippers/NOTES.md | pandoc -f gfm -t rst -o libraries/zippers.rst
 

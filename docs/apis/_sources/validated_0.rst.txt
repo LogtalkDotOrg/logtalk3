@@ -1,0 +1,209 @@
+.. index:: single: validated
+.. _validated/0:
+
+.. rst-class:: right
+
+**object**
+
+``validated``
+=============
+
+Types and predicates for type-checking and handling lists of validation terms. Inspired by Scala Cats and Kotlin Arrow.
+
+| **Availability:** 
+|    ``logtalk_load(validations(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-22
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Provides:**
+|    :ref:`type::type/1 <type/0::type/1>`
+|    :ref:`type::check/2 <type/0::check/2>`
+|    :ref:`arbitrary::arbitrary/1 <arbitrary/0::arbitrary/1>`
+|    :ref:`arbitrary::arbitrary/2 <arbitrary/0::arbitrary/2>`
+|    :ref:`arbitrary::shrinker/1 <arbitrary/0::shrinker/1>`
+|    :ref:`arbitrary::shrink/3 <arbitrary/0::shrink/3>`
+|    :ref:`arbitrary::edge_case/2 <arbitrary/0::edge_case/2>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`random <random/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Type-checking support: Defines a ``validated(ValueType, ErrorType)`` type for checking validation terms where the value and error terms must be of the given types.
+   - QuickCheck support: Defines clauses for the ``type::arbitrary/1-2``, ``arbitrary::shrinker/1``, ``arbitrary::shrink/3``, and ``arbitrary::edge_case/2`` predicates to allow generating random values for the ``validated(ValueType, ErrorType)`` type.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: valids/2
+.. _validated/0::valids/2:
+
+``valids/2``
+^^^^^^^^^^^^
+
+Returns the values stored in validation terms that hold valid values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valids(Validations,Values)``
+| **Mode and number of proofs:**
+|    ``valids(+list(validation),-list)`` - ``one``
+
+
+------------
+
+.. index:: invalids/2
+.. _validated/0::invalids/2:
+
+``invalids/2``
+^^^^^^^^^^^^^^
+
+Returns a flattened list with all errors stored in invalid validation terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``invalids(Validations,Errors)``
+| **Mode and number of proofs:**
+|    ``invalids(+list(validation),-list)`` - ``one``
+
+
+------------
+
+.. index:: partition/3
+.. _validated/0::partition/3:
+
+``partition/3``
+^^^^^^^^^^^^^^^
+
+Retrieves and partitions valid values and flattened accumulated errors from validation terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``partition(Validations,Values,Errors)``
+| **Mode and number of proofs:**
+|    ``partition(+list(validation),-list,-list)`` - ``one``
+
+
+------------
+
+.. index:: map/3
+.. _validated/0::map/3:
+
+``map/3``
+^^^^^^^^^
+
+Applies a closure to each list element to generate validation terms and returns a pair ``Values-Errors`` accumulating all valid values and all errors in one pass.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``map(Closure,Terms,ValuesErrors)``
+| **Meta-predicate template:**
+|    ``map(2,*,*)``
+| **Mode and number of proofs:**
+|    ``map(+callable,+list,--compound)`` - ``one``
+
+
+------------
+
+.. index:: map/4
+.. _validated/0::map/4:
+
+``map/4``
+^^^^^^^^^
+
+Applies a closure to each list element to generate validation terms and returns valid values and accumulated errors in one pass.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``map(Closure,Terms,Values,Errors)``
+| **Meta-predicate template:**
+|    ``map(2,*,*,*)``
+| **Mode and number of proofs:**
+|    ``map(+callable,+list,-list,-list)`` - ``one``
+
+
+------------
+
+.. index:: sequence/2
+.. _validated/0::sequence/2:
+
+``sequence/2``
+^^^^^^^^^^^^^^
+
+Sequences a list of validation terms into a single validation term, accumulating all errors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sequence(Validations,Validation)``
+| **Mode and number of proofs:**
+|    ``sequence(+list(validation),--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: traverse/3
+.. _validated/0::traverse/3:
+
+``traverse/3``
+^^^^^^^^^^^^^^
+
+Applies a closure to each list element to generate validation terms and then sequences them, accumulating all errors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``traverse(Closure,Terms,Validation)``
+| **Meta-predicate template:**
+|    ``traverse(2,*,*)``
+| **Mode and number of proofs:**
+|    ``traverse(+callable,+list,--nonvar)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`validation <validation/0>`, :ref:`validation(Validation) <validation/1>`, :ref:`type <type/0>`, :ref:`arbitrary <arbitrary/0>`
+

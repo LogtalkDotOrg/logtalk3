@@ -155,6 +155,9 @@ computing the distance between two strings.
 * ADDED: New `strings` compatibility library. Based on ECLiPSe and SWI-Prolog
 work and libraries.
 
+* ADDED: New `validations` library supporting accumulation of errors as
+a complement to the `expecteds` library fast-fail semantics.
+
 * ADDED: Types `text` and `text(CharSet)` to the `arbitrary` and `types`
 libraries. These types support representing text using atoms, character 
 lists, or character code lists.

@@ -77,12 +77,12 @@ returning a default value otherwise:
 ::
 
    | ?- optional::of(a, Optional),
-   |    optional(Optional)::map_or_else(char_code, 0, Value).
+        optional(Optional)::map_or_else(char_code, 0, Value).
    Value = 97
    yes
 
    | ?- optional::empty(Optional),
-   |    optional(Optional)::map_or_else(char_code, 0, Value).
+        optional(Optional)::map_or_else(char_code, 0, Value).
    Value = 0
    yes
 
@@ -92,12 +92,12 @@ both are not empty:
 ::
 
    | ?- optional::of(1, O1), optional::of(3, O2),
-   |    optional(O1)::zip([X,Y,Z]>>(Z is X+Y), O2, NewOptional).
+        optional(O1)::zip([X,Y,Z]>>(Z is X+Y), O2, NewOptional).
    NewOptional = optional(4)
    yes
 
    | ?- optional::of(1, O1), optional::empty(O2),
-   |    optional(O1)::zip([X,Y,Z]>>(Z is X+Y), O2, NewOptional).
+        optional(O1)::zip([X,Y,Z]>>(Z is X+Y), O2, NewOptional).
    NewOptional = empty
    yes
 
@@ -106,12 +106,12 @@ The ``flatten/1`` predicate unwraps a nested optional term:
 ::
 
    | ?- optional::of(1, Inner), optional::of(Inner, Outer),
-   |    optional(Outer)::flatten(NewOptional).
+        optional(Outer)::flatten(NewOptional).
    NewOptional = optional(1)
    yes
 
    | ?- optional::empty(Inner), optional::of(Inner, Outer),
-   |    optional(Outer)::flatten(NewOptional).
+        optional(Outer)::flatten(NewOptional).
    NewOptional = empty
    yes
 
@@ -121,12 +121,12 @@ term:
 ::
 
    | ?- optional::of(1, Optional),
-   |    optional(Optional)::to_expected(missing, Expected).
+        optional(Optional)::to_expected(missing, Expected).
    Expected = expected(1)
    yes
 
    | ?- optional::empty(Optional),
-   |    optional(Optional)::to_expected(missing, Expected).
+        optional(Optional)::to_expected(missing, Expected).
    Expected = unexpected(missing)
    yes
 
@@ -145,10 +145,10 @@ goal exceptions to empty optional terms. Use ``from_goal_or_throw/3`` or
    yes
 
    | ?- catch(
-   |      optional::from_goal_or_throw(Y is _, Y, _),
-   |      Error,
-   |      true
-   |    ).
+          optional::from_goal_or_throw(Y is _, Y, _),
+          Error,
+          true
+        ).
    Error = error(instantiation_error, ...)
    yes
 
@@ -157,7 +157,7 @@ Examples:
 ::
 
    | ?- optional::of(1, O1), optional::of(2, O2),
-   |    maybe::sequence([O1, O2], Optional).
+        maybe::sequence([O1, O2], Optional).
    Optional = optional([1,2])
    yes
 
@@ -166,18 +166,18 @@ Examples:
    yes
 
    | ?- maybe::traverse({optional}/[X,O]>>(
-   |      integer(X) -> optional::of(X, O)
-   |    ; optional::empty(O)
-   |    ), [1,a,2], Optional).
+          integer(X) -> optional::of(X, O)
+        ; optional::empty(O)
+        ), [1,a,2], Optional).
    Optional = empty
    yes
 
    | ?- optional::of(1, O1), optional::empty(O2),
-   |    maybe::sequence([O1, O2], Optional).
+        maybe::sequence([O1, O2], Optional).
    Optional = empty
    yes
 
 See also
 --------
 
-The ``expecteds`` library.
+The ``expecteds`` and ``validations`` libraries.

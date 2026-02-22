@@ -1,0 +1,588 @@
+.. index:: single: validation(Validation)
+.. _validation/1:
+
+.. rst-class:: right
+
+**object**
+
+``validation(Validation)``
+==========================
+
+Validation term predicates. Requires passing a validation term (constructed using the ``validation`` object predicates) as a parameter.
+
+| **Availability:** 
+|    ``logtalk_load(validations(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:2:0
+| **Date:** 2026-02-21
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: is_valid/0
+.. _validation/1::is_valid/0:
+
+``is_valid/0``
+^^^^^^^^^^^^^^
+
+True if the validation term holds a valid value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``is_valid`` - ``zero_or_one``
+
+
+------------
+
+.. index:: is_invalid/0
+.. _validation/1::is_invalid/0:
+
+``is_invalid/0``
+^^^^^^^^^^^^^^^^
+
+True if the validation term holds one or more errors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``is_invalid`` - ``zero_or_one``
+
+
+------------
+
+.. index:: if_valid/1
+.. _validation/1::if_valid/1:
+
+``if_valid/1``
+^^^^^^^^^^^^^^
+
+Applies a closure when the validation term holds a valid value using the value as argument. Succeeds otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``if_valid(Closure)``
+| **Meta-predicate template:**
+|    ``if_valid(1)``
+| **Mode and number of proofs:**
+|    ``if_valid(+callable)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: if_invalid/1
+.. _validation/1::if_invalid/1:
+
+``if_invalid/1``
+^^^^^^^^^^^^^^^^
+
+Applies a closure when the validation term holds errors using the errors list as argument. Succeeds otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``if_invalid(Closure)``
+| **Meta-predicate template:**
+|    ``if_invalid(1)``
+| **Mode and number of proofs:**
+|    ``if_invalid(+callable)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: if_valid_or_else/2
+.. _validation/1::if_valid_or_else/2:
+
+``if_valid_or_else/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Applies either ``ValidClosure`` or ``InvalidClosure`` depending on the validation term holding a value or errors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``if_valid_or_else(ValidClosure,InvalidClosure)``
+| **Meta-predicate template:**
+|    ``if_valid_or_else(1,1)``
+| **Mode and number of proofs:**
+|    ``if_valid_or_else(+callable,+callable)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: valid/1
+.. _validation/1::valid/1:
+
+``valid/1``
+^^^^^^^^^^^
+
+Returns the value hold by the validation term. Throws an error otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid(Value)``
+| **Mode and number of proofs:**
+|    ``valid(--term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Validation term holds errors:
+|        ``existence_error(valid_value,Validation)``
+
+
+------------
+
+.. index:: invalid/1
+.. _validation/1::invalid/1:
+
+``invalid/1``
+^^^^^^^^^^^^^
+
+Returns the errors hold by the validation term. Throws an error otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``invalid(Errors)``
+| **Mode and number of proofs:**
+|    ``invalid(--list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Validation term holds a valid value:
+|        ``existence_error(validation_errors,Validation)``
+
+
+------------
+
+.. index:: filter/3
+.. _validation/1::filter/3:
+
+``filter/3``
+^^^^^^^^^^^^
+
+When the validation term holds a value and the value satisfies the closure, returns the same validation term. When the validation term holds a value that does not satisfy the closure, returns an invalid term with the given error. When the validation term holds errors, returns the same validation term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``filter(Closure,Error,NewValidation)``
+| **Meta-predicate template:**
+|    ``filter(1,*,*)``
+| **Mode and number of proofs:**
+|    ``filter(+callable,@term,--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: map/2
+.. _validation/1::map/2:
+
+``map/2``
+^^^^^^^^^
+
+When the validation term holds a valid value and mapping a closure with the value and the new value as additional arguments succeeds, returns a new valid term. Otherwise returns the same validation term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``map(Closure,NewValidation)``
+| **Meta-predicate template:**
+|    ``map(2,*)``
+| **Mode and number of proofs:**
+|    ``map(+callable,--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: flat_map/2
+.. _validation/1::flat_map/2:
+
+``flat_map/2``
+^^^^^^^^^^^^^^
+
+When the validation term holds a valid value, applies a closure with the value and the new validation term as additional arguments. Returns the new validation term on success. When the validation term holds errors, short-circuits by returning the same validation term without calling the closure. This is the monadic escape hatch for dependent steps; use ``zip/3``, ``sequence/2``, or ``traverse/3`` for error accumulation on independent steps.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``flat_map(Closure,NewValidation)``
+| **Meta-predicate template:**
+|    ``flat_map(2,*)``
+| **Mode and number of proofs:**
+|    ``flat_map(+callable,--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: map_or_else/3
+.. _validation/1::map_or_else/3:
+
+``map_or_else/3``
+^^^^^^^^^^^^^^^^^
+
+When the validation term holds a value and mapping a closure with the value and the new value as additional arguments is successful, returns the new value. Otherwise returns the given default value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``map_or_else(Closure,Default,Value)``
+| **Meta-predicate template:**
+|    ``map_or_else(2,*,*)``
+| **Mode and number of proofs:**
+|    ``map_or_else(+callable,@term,--term)`` - ``one``
+
+
+------------
+
+.. index:: map_catching/2
+.. _validation/1::map_catching/2:
+
+``map_catching/2``
+^^^^^^^^^^^^^^^^^^
+
+When the validation term holds a value, applies a closure to it. Returns a valid term with the new value if the closure succeeds. Returns an invalid term with the error if the closure throws an error. Returns an invalid term with the atom ``fail`` as error if the closure fails. When the validation term holds errors, returns the same validation term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``map_catching(Closure,NewValidation)``
+| **Meta-predicate template:**
+|    ``map_catching(2,*)``
+| **Mode and number of proofs:**
+|    ``map_catching(+callable,--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: map_invalid/2
+.. _validation/1::map_invalid/2:
+
+``map_invalid/2``
+^^^^^^^^^^^^^^^^^
+
+When the validation term holds errors and mapping a closure with the errors list and the new errors list as additional arguments succeeds, returns a new invalid term. Otherwise returns the same validation term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``map_invalid(Closure,NewValidation)``
+| **Meta-predicate template:**
+|    ``map_invalid(2,*)``
+| **Mode and number of proofs:**
+|    ``map_invalid(+callable,--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: map_both/3
+.. _validation/1::map_both/3:
+
+``map_both/3``
+^^^^^^^^^^^^^^
+
+When the validation term holds a value and mapping ``ValidClosure`` with the value is successful, returns a valid term with the new value. When the validation term holds errors and mapping ``InvalidClosure`` with the errors list is successful, returns an invalid term with the new errors. Otherwise returns the same validation term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``map_both(ValidClosure,InvalidClosure,NewValidation)``
+| **Meta-predicate template:**
+|    ``map_both(2,2,*)``
+| **Mode and number of proofs:**
+|    ``map_both(+callable,+callable,--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: swap/1
+.. _validation/1::swap/1:
+
+``swap/1``
+^^^^^^^^^^
+
+Swaps the valid and invalid terms. If the validation term holds a value, returns an invalid term with a singleton list containing that value. If the validation term holds errors, returns a valid term with the errors list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``swap(NewValidation)``
+| **Mode and number of proofs:**
+|    ``swap(--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: or/2
+.. _validation/1::or/2:
+
+``or/2``
+^^^^^^^^
+
+Returns the same validation term if it holds a value. Otherwise calls closure to generate a new validation term. Fails if the validation term holds errors and calling the closure fails or throws an error.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``or(NewValidation,Closure)``
+| **Meta-predicate template:**
+|    ``or(*,1)``
+| **Mode and number of proofs:**
+|    ``or(--term,@callable)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: or_else/2
+.. _validation/1::or_else/2:
+
+``or_else/2``
+^^^^^^^^^^^^^
+
+Returns the valid value if present or the default value otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``or_else(Value,Default)``
+| **Mode and number of proofs:**
+|    ``or_else(--term,@term)`` - ``one``
+
+
+------------
+
+.. index:: or_else_get/2
+.. _validation/1::or_else_get/2:
+
+``or_else_get/2``
+^^^^^^^^^^^^^^^^^
+
+Returns the value hold by the validation term if valid. Otherwise applies a closure to compute the value. Throws an error when the validation term holds errors and a value cannot be computed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``or_else_get(Value,Closure)``
+| **Meta-predicate template:**
+|    ``or_else_get(*,1)``
+| **Mode and number of proofs:**
+|    ``or_else_get(--term,+callable)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Validation term holds errors and a value cannot be computed:
+|        ``existence_error(valid_value,Validation)``
+
+
+------------
+
+.. index:: or_else_call/2
+.. _validation/1::or_else_call/2:
+
+``or_else_call/2``
+^^^^^^^^^^^^^^^^^^
+
+Returns the value hold by the validation term if valid. Calls a goal deterministically otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``or_else_call(Value,Goal)``
+| **Meta-predicate template:**
+|    ``or_else_call(*,0)``
+| **Mode and number of proofs:**
+|    ``or_else_call(--term,+callable)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: or_else_fail/1
+.. _validation/1::or_else_fail/1:
+
+``or_else_fail/1``
+^^^^^^^^^^^^^^^^^^
+
+Returns the valid value if present. Fails otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``or_else_fail(Value)``
+| **Mode and number of proofs:**
+|    ``or_else_fail(--term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: or_else_throw/1
+.. _validation/1::or_else_throw/1:
+
+``or_else_throw/1``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the value hold by the validation term if valid. Throws the errors list hold by the validation term as an exception otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``or_else_throw(Value)``
+| **Mode and number of proofs:**
+|    ``or_else_throw(--term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: or_else_throw/2
+.. _validation/1::or_else_throw/2:
+
+``or_else_throw/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the value hold by the validation term if valid. Throws the given error otherwise, ignoring any errors hold by the validation term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``or_else_throw(Value,Error)``
+| **Mode and number of proofs:**
+|    ``or_else_throw(--term,@nonvar)`` - ``one_or_error``
+
+
+------------
+
+.. index:: zip/3
+.. _validation/1::zip/3:
+
+``zip/3``
+^^^^^^^^^
+
+When both this validation and the other validation hold values and applying a closure with both values and the new value as additional arguments is successful, returns a valid term with the new value. When both hold errors, returns an invalid term with all errors accumulated. Otherwise returns the first invalid term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zip(Closure,OtherValidation,NewValidation)``
+| **Meta-predicate template:**
+|    ``zip(3,*,*)``
+| **Mode and number of proofs:**
+|    ``zip(+callable,+nonvar,--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: flatten/1
+.. _validation/1::flatten/1:
+
+``flatten/1``
+^^^^^^^^^^^^^
+
+Flattens a nested validation term. When the validation term holds a value that is itself a validation term, returns the inner validation term. When the validation term holds a non-validation value, returns the same validation term. When the validation term holds errors, returns the same validation term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``flatten(NewValidation)``
+| **Mode and number of proofs:**
+|    ``flatten(--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: to_optional/1
+.. _validation/1::to_optional/1:
+
+``to_optional/1``
+^^^^^^^^^^^^^^^^^
+
+Converts the validation term to an optional term. Returns a non-empty optional term holding the value if the validation term holds a value. Returns an empty optional term if the validation term holds errors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``to_optional(Optional)``
+| **Mode and number of proofs:**
+|    ``to_optional(--nonvar)`` - ``one``
+
+
+------------
+
+.. index:: to_expected/1
+.. _validation/1::to_expected/1:
+
+``to_expected/1``
+^^^^^^^^^^^^^^^^^
+
+Converts the validation term to an expected term. Returns an expected term holding the value if the validation term holds a value. Returns an expected term with the errors list as the unexpected error otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``to_expected(Expected)``
+| **Mode and number of proofs:**
+|    ``to_expected(--nonvar)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`validation <validation/0>`, :ref:`validated <validated/0>`
+

@@ -4335,6 +4335,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`expected(Expected) <expected/1::filter/3>`
+* :ref:`validation(Validation) <validation/1::filter/3>`
 
 ``find/4``
 ----------
@@ -4456,6 +4457,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected(Expected) <expected/1::flat_map/2>`
 * :ref:`optional(Optional) <optional/1::flat_map/2>`
+* :ref:`validation(Validation) <validation/1::flat_map/2>`
 
 ``flatten/1``
 -------------
@@ -4467,6 +4469,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected(Expected) <expected/1::flatten/1>`
 * :ref:`optional(Optional) <optional/1::flatten/1>`
+* :ref:`validation(Validation) <validation/1::flatten/1>`
 
 ``flatten/2``
 -------------
@@ -4820,6 +4823,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`statisticsp <statisticsp/0::frequency_distribution/2>`
 
+``from_expected/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`validation <validation/0::from_expected/2>`
+
 ``from_generator/2``
 --------------------
 
@@ -4830,6 +4843,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected <expected/0::from_generator/2>`
 * :ref:`optional <optional/0::from_generator/2>`
+* :ref:`validation <validation/0::from_generator/2>`
 
 ``from_generator/3``
 --------------------
@@ -4841,6 +4855,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected <expected/0::from_generator/3>`
 * :ref:`optional <optional/0::from_generator/3>`
+* :ref:`validation <validation/0::from_generator/3>`
 
 ``from_generator/4``
 --------------------
@@ -4851,6 +4866,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`expected <expected/0::from_generator/4>`
+* :ref:`validation <validation/0::from_generator/4>`
 
 ``from_goal/2``
 ---------------
@@ -4862,6 +4878,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected <expected/0::from_goal/2>`
 * :ref:`optional <optional/0::from_goal/2>`
+* :ref:`validation <validation/0::from_goal/2>`
 
 ``from_goal/3``
 ---------------
@@ -4873,6 +4890,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected <expected/0::from_goal/3>`
 * :ref:`optional <optional/0::from_goal/3>`
+* :ref:`validation <validation/0::from_goal/3>`
 
 ``from_goal/4``
 ---------------
@@ -4883,6 +4901,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`expected <expected/0::from_goal/4>`
+* :ref:`validation <validation/0::from_goal/4>`
 
 ``from_goal_or_throw/2``
 ------------------------
@@ -4913,6 +4932,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`expected <expected/0::from_optional/3>`
+* :ref:`validation <validation/0::from_optional/3>`
 
 ``frozen/2``
 ------------
@@ -5596,6 +5616,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected(Expected) <expected/1::if_expected_or_else/2>`
 
+``if_invalid/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`validation(Validation) <validation/1::if_invalid/1>`
+
 ``if_present/1``
 ----------------
 
@@ -5625,6 +5655,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`expected(Expected) <expected/1::if_unexpected/1>`
+
+``if_valid/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`validation(Validation) <validation/1::if_valid/1>`
+
+``if_valid_or_else/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`validation(Validation) <validation/1::if_valid_or_else/2>`
 
 ``in/1``
 --------
@@ -6099,6 +6149,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`setp <setp/0::intersection/4>`
 
+``invalid/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`validation(Validation) <validation/1::invalid/1>`
+
 ``invalid_params/2``
 --------------------
 
@@ -6118,6 +6178,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`json_rpc <json_rpc/0::invalid_request/1>`
+
+``invalids/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`validated <validated/0::invalids/2>`
 
 ``invoke/1``
 ------------
@@ -6340,6 +6410,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`characterp <characterp/0::is_hex_digit/1>`
 
+``is_invalid/0``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`validation(Validation) <validation/1::is_invalid/0>`
+
 ``is_layout/1``
 ---------------
 
@@ -6559,6 +6639,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`characterp <characterp/0::is_upper_case/1>`
+
+``is_valid/0``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`validation(Validation) <validation/1::is_valid/0>`
 
 ``is_void/1``
 -------------
@@ -7722,6 +7812,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`metap <metap/0::map/2>`
 * :ref:`optional(Optional) <optional/1::map/2>`
 * :ref:`queuep <queuep/0::map/2>`
+* :ref:`validation(Validation) <validation/1::map/2>`
 
 ``map/3``
 ---------
@@ -7736,6 +7827,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`metap <metap/0::map/3>`
 * :ref:`pairs <pairs/0::map/3>`
 * :ref:`queuep <queuep/0::map/3>`
+* :ref:`validated <validated/0::map/3>`
 
 ``map/4``
 ---------
@@ -7746,6 +7838,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`metap <metap/0::map/4>`
+* :ref:`validated <validated/0::map/4>`
 
 ``map/5``
 ---------
@@ -7796,6 +7889,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`expected(Expected) <expected/1::map_both/3>`
+* :ref:`validation(Validation) <validation/1::map_both/3>`
 
 ``map_catching/2``
 ------------------
@@ -7806,6 +7900,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`expected(Expected) <expected/1::map_catching/2>`
+* :ref:`validation(Validation) <validation/1::map_catching/2>`
 
 ``map_element/2``
 -----------------
@@ -7817,6 +7912,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`java_utils_protocol <java_utils_protocol/0::map_element/2>`
 
+``map_invalid/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`validation(Validation) <validation/1::map_invalid/2>`
+
 ``map_or_else/3``
 -----------------
 
@@ -7827,6 +7932,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected(Expected) <expected/1::map_or_else/3>`
 * :ref:`optional(Optional) <optional/1::map_or_else/3>`
+* :ref:`validation(Validation) <validation/1::map_or_else/3>`
 
 ``map_reduce/5``
 ----------------
@@ -9086,6 +9192,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected <expected/0::of_expected/2>`
 
+``of_invalid/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`validation <validation/0::of_invalid/2>`
+
+``of_invalids/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`validation <validation/0::of_invalids/2>`
+
 ``of_unexpected/2``
 -------------------
 
@@ -9095,6 +9221,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`expected <expected/0::of_unexpected/2>`
+
+``of_valid/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`validation <validation/0::of_valid/2>`
 
 ``one_or_more//0``
 ------------------
@@ -9196,6 +9332,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected(Expected) <expected/1::or/2>`
 * :ref:`optional(Optional) <optional/1::or/2>`
+* :ref:`validation(Validation) <validation/1::or/2>`
 
 ``or_else/2``
 -------------
@@ -9207,6 +9344,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected(Expected) <expected/1::or_else/2>`
 * :ref:`optional(Optional) <optional/1::or_else/2>`
+* :ref:`validation(Validation) <validation/1::or_else/2>`
 
 ``or_else_call/2``
 ------------------
@@ -9218,6 +9356,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected(Expected) <expected/1::or_else_call/2>`
 * :ref:`optional(Optional) <optional/1::or_else_call/2>`
+* :ref:`validation(Validation) <validation/1::or_else_call/2>`
 
 ``or_else_fail/1``
 ------------------
@@ -9229,6 +9368,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected(Expected) <expected/1::or_else_fail/1>`
 * :ref:`optional(Optional) <optional/1::or_else_fail/1>`
+* :ref:`validation(Validation) <validation/1::or_else_fail/1>`
 
 ``or_else_get/2``
 -----------------
@@ -9240,6 +9380,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected(Expected) <expected/1::or_else_get/2>`
 * :ref:`optional(Optional) <optional/1::or_else_get/2>`
+* :ref:`validation(Validation) <validation/1::or_else_get/2>`
 
 ``or_else_throw/1``
 -------------------
@@ -9250,6 +9391,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`expected(Expected) <expected/1::or_else_throw/1>`
+* :ref:`validation(Validation) <validation/1::or_else_throw/1>`
 
 ``or_else_throw/2``
 -------------------
@@ -9261,6 +9403,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected(Expected) <expected/1::or_else_throw/2>`
 * :ref:`optional(Optional) <optional/1::or_else_throw/2>`
+* :ref:`validation(Validation) <validation/1::or_else_throw/2>`
 
 ``orphaned/0``
 --------------
@@ -9559,6 +9702,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`either <either/0::partition/3>`
+* :ref:`validated <validated/0::partition/3>`
 
 ``partition/4``
 ---------------
@@ -11737,6 +11881,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`either <either/0::sequence/2>`
 * :ref:`maybe <maybe/0::sequence/2>`
+* :ref:`validated <validated/0::sequence/2>`
 
 ``sequence/3``
 --------------
@@ -13011,6 +13156,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`expected(Expected) <expected/1::swap/1>`
+* :ref:`validation(Validation) <validation/1::swap/1>`
 
 ``swap/2``
 ----------
@@ -13212,6 +13358,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ulid_protocol <ulid_protocol/0::timestamp/8>`
 
+``to_expected/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`validation(Validation) <validation/1::to_expected/1>`
+
 ``to_expected/2``
 -----------------
 
@@ -13231,6 +13387,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`expected(Expected) <expected/1::to_optional/1>`
+* :ref:`validation(Validation) <validation/1::to_optional/1>`
 
 ``today/3``
 -----------
@@ -13384,6 +13541,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`either <either/0::traverse/3>`
 * :ref:`maybe <maybe/0::traverse/3>`
+* :ref:`validated <validated/0::traverse/3>`
 
 ``triangular/4``
 ----------------
@@ -13867,6 +14025,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`statisticsp <statisticsp/0::valid/1>`
 * :ref:`termp <termp/0::valid/1>`
 * :ref:`url(Representation) <url/1::valid/1>`
+* :ref:`validation(Validation) <validation/1::valid/1>`
 * :ref:`varlistp <varlistp/0::valid/1>`
 
 ``valid/2``
@@ -13949,6 +14108,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`json_schema_protocol <json_schema_protocol/0::validate/3>`
+
+``valids/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`validated <validated/0::valids/2>`
 
 ``value/1``
 -----------
@@ -14475,6 +14644,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected(Expected) <expected/1::zip/3>`
 * :ref:`optional(Optional) <optional/1::zip/3>`
+* :ref:`validation(Validation) <validation/1::zip/3>`
 * :ref:`zipperp <zipperp/0::zip/3>`
 
 ``zip_at_index/4``
