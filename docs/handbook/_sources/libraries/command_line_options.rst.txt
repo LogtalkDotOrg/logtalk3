@@ -1,18 +1,5 @@
 .. _library_command_line_options:
 
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
-PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
-OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
---------------
-
 ``command_line_options``
 ========================
 
@@ -91,32 +78,32 @@ properties.
 Create an object that imports ``command_line_option`` and override the
 following predicates:
 
-- **``key/1``**: The key used to identify this option in the result.
-  This predicate must be overridden.
+- ``key/1``: The key used to identify this option in the result. This
+  predicate must be overridden.
 
-- **``short_flags/1``**: List of single-character short flags (e.g.,
-  ``[v]`` for ``-v``). Default: ``[]``.
+- ``short_flags/1``: List of single-character short flags (e.g., ``[v]``
+  for ``-v``). Default: ``[]``.
 
-- **``long_flags/1``**: List of long flags (e.g., ``[verbose]`` for
+- ``long_flags/1``: List of long flags (e.g., ``[verbose]`` for
   ``--verbose``). Default: ``[]``.
 
-- **``type/1``**: Option value type. One of ``boolean``, ``atom``,
+- ``type/1``: Option value type. One of ``boolean``, ``atom``,
   ``integer``, ``float``, or ``term``. Default: ``term``.
 
-- **``default/1``**: Default value. Optional.
+- ``default/1``: Default value. Optional.
 
-- **``meta/1``**: Metasyntactic variable name for help text. Default:
+- ``meta/1``: Metasyntactic variable name for help text. Default:
   ``''``.
 
-- **``help/1``**: Help text (atom or list of atoms for pre-broken
-  lines). Default: ``''``.
+- ``help/1``: Help text (atom or list of atoms for pre-broken lines).
+  Default: ``''``.
 
 Validating option definitions
 -----------------------------
 
 Option objects provide two predicates for validating their definitions:
 
-- **``check/0``**: Validates the option definition, throwing an error if
+- ``check/0``: Validates the option definition, throwing an error if
   invalid. The validation checks:
 
   - The ``key/1`` predicate is defined (not just using the default).
@@ -125,9 +112,9 @@ Option objects provide two predicates for validating their definitions:
   - If a default value is defined and the type is not ``term``, the
     default value matches the declared type.
 
-- **``valid/0``**: Succeeds deterministically if the option definition
-  is valid, fails otherwise. This is useful when you want to check
-  validity without handling exceptions.
+- ``valid/0``: Succeeds deterministically if the option definition is
+  valid, fails otherwise. This is useful when you want to check validity
+  without handling exceptions.
 
 The ``parse/4-5`` and ``help/2-3`` predicates automatically call
 ``check/0`` on all option objects before processing, ensuring invalid
@@ -252,16 +239,16 @@ Help options
 
 The ``help/3`` predicate supports the following help options:
 
-- **``line_width(Width)``**: Maximum line width for help text. Default:
+- ``line_width(Width)``: Maximum line width for help text. Default:
   ``80``.
 
-- **``min_help_width(Width)``**: Minimum width for help text column.
+- ``min_help_width(Width)``: Minimum width for help text column.
   Default: ``40``.
 
-- **``break_long_flags(Boolean)``**: If ``true``, break long flags
-  across multiple lines. Default: ``false``.
+- ``break_long_flags(Boolean)``: If ``true``, break long flags across
+  multiple lines. Default: ``false``.
 
-- **``suppress_empty_meta(Boolean)``**: If ``true`` (default), suppress
+- ``suppress_empty_meta(Boolean)``: If ``true`` (default), suppress
   empty metasyntactic variables in help output.
 
 Parse options
@@ -269,14 +256,14 @@ Parse options
 
 The ``parse/5`` predicate supports the following parse options:
 
-- **``output_functor(Functor)``**: When defined, options are returned as
+- ``output_functor(Functor)``: When defined, options are returned as
   ``Functor(Key, Value)`` terms instead of ``Key(Value)`` terms. No
   default.
 
-- **``duplicated_flags(Keep)``**: How to handle duplicate options. One
-  of ``keepfirst``, ``keeplast``, ``keepall``. Default: ``keeplast``.
+- ``duplicated_flags(Keep)``: How to handle duplicate options. One of
+  ``keepfirst``, ``keeplast``, ``keepall``. Default: ``keeplast``.
 
-- **``allow_empty_flag_spec(Boolean)``**: If ``true`` (default), options
+- ``allow_empty_flag_spec(Boolean)``: If ``true`` (default), options
   without flags are allowed (useful for configuration parameters). Set
   to ``false`` to raise errors on empty flags.
 

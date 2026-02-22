@@ -217,19 +217,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p id="library-command-line-options">“AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
-PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
-OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
-<hr class="docutils" />
-<section id="command-line-options">
-<h1><code class="docutils literal notranslate"><span class="pre">command_line_options</span></code><a class="headerlink" href="#command-line-options" title="Link to this heading"></a></h1>
+  <section id="command-line-options">
+<span id="library-command-line-options"></span><h1><code class="docutils literal notranslate"><span class="pre">command_line_options</span></code><a class="headerlink" href="#command-line-options" title="Link to this heading"></a></h1>
 <p>This library provides command-line parsing predicates where command-line
 options are defined as objects that import the <code class="docutils literal notranslate"><span class="pre">command_line_option</span></code>
 category. Predicates are also provided for generating help text.</p>
@@ -294,26 +283,26 @@ properties.</p>
 <p>Create an object that imports <code class="docutils literal notranslate"><span class="pre">command_line_option</span></code> and override the
 following predicates:</p>
 <ul class="simple">
-<li><p><strong>``key/1``</strong>: The key used to identify this option in the result.
-This predicate must be overridden.</p></li>
-<li><p><strong>``short_flags/1``</strong>: List of single-character short flags (e.g.,
-<code class="docutils literal notranslate"><span class="pre">[v]</span></code> for <code class="docutils literal notranslate"><span class="pre">-v</span></code>). Default: <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p></li>
-<li><p><strong>``long_flags/1``</strong>: List of long flags (e.g., <code class="docutils literal notranslate"><span class="pre">[verbose]</span></code> for
+<li><p><code class="docutils literal notranslate"><span class="pre">key/1</span></code>: The key used to identify this option in the result. This
+predicate must be overridden.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">short_flags/1</span></code>: List of single-character short flags (e.g., <code class="docutils literal notranslate"><span class="pre">[v]</span></code>
+for <code class="docutils literal notranslate"><span class="pre">-v</span></code>). Default: <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">long_flags/1</span></code>: List of long flags (e.g., <code class="docutils literal notranslate"><span class="pre">[verbose]</span></code> for
 <code class="docutils literal notranslate"><span class="pre">--verbose</span></code>). Default: <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p></li>
-<li><p><strong>``type/1``</strong>: Option value type. One of <code class="docutils literal notranslate"><span class="pre">boolean</span></code>, <code class="docutils literal notranslate"><span class="pre">atom</span></code>,
+<li><p><code class="docutils literal notranslate"><span class="pre">type/1</span></code>: Option value type. One of <code class="docutils literal notranslate"><span class="pre">boolean</span></code>, <code class="docutils literal notranslate"><span class="pre">atom</span></code>,
 <code class="docutils literal notranslate"><span class="pre">integer</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, or <code class="docutils literal notranslate"><span class="pre">term</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">term</span></code>.</p></li>
-<li><p><strong>``default/1``</strong>: Default value. Optional.</p></li>
-<li><p><strong>``meta/1``</strong>: Metasyntactic variable name for help text. Default:
+<li><p><code class="docutils literal notranslate"><span class="pre">default/1</span></code>: Default value. Optional.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">meta/1</span></code>: Metasyntactic variable name for help text. Default:
 <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
-<li><p><strong>``help/1``</strong>: Help text (atom or list of atoms for pre-broken
-lines). Default: <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">help/1</span></code>: Help text (atom or list of atoms for pre-broken lines).
+Default: <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
 </ul>
 </section>
 <section id="validating-option-definitions">
 <h2>Validating option definitions<a class="headerlink" href="#validating-option-definitions" title="Link to this heading"></a></h2>
 <p>Option objects provide two predicates for validating their definitions:</p>
 <ul class="simple">
-<li><p><strong>``check/0``</strong>: Validates the option definition, throwing an error if
+<li><p><code class="docutils literal notranslate"><span class="pre">check/0</span></code>: Validates the option definition, throwing an error if
 invalid. The validation checks:</p>
 <ul>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">key/1</span></code> predicate is defined (not just using the default).</p></li>
@@ -323,9 +312,9 @@ invalid. The validation checks:</p>
 default value matches the declared type.</p></li>
 </ul>
 </li>
-<li><p><strong>``valid/0``</strong>: Succeeds deterministically if the option definition
-is valid, fails otherwise. This is useful when you want to check
-validity without handling exceptions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">valid/0</span></code>: Succeeds deterministically if the option definition is
+valid, fails otherwise. This is useful when you want to check validity
+without handling exceptions.</p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">parse/4-5</span></code> and <code class="docutils literal notranslate"><span class="pre">help/2-3</span></code> predicates automatically call
 <code class="docutils literal notranslate"><span class="pre">check/0</span></code> on all option objects before processing, ensuring invalid
@@ -440,13 +429,13 @@ formatting:</p>
 <h2>Help options<a class="headerlink" href="#help-options" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">help/3</span></code> predicate supports the following help options:</p>
 <ul class="simple">
-<li><p><strong>``line_width(Width)``</strong>: Maximum line width for help text. Default:
+<li><p><code class="docutils literal notranslate"><span class="pre">line_width(Width)</span></code>: Maximum line width for help text. Default:
 <code class="docutils literal notranslate"><span class="pre">80</span></code>.</p></li>
-<li><p><strong>``min_help_width(Width)``</strong>: Minimum width for help text column.
+<li><p><code class="docutils literal notranslate"><span class="pre">min_help_width(Width)</span></code>: Minimum width for help text column.
 Default: <code class="docutils literal notranslate"><span class="pre">40</span></code>.</p></li>
-<li><p><strong>``break_long_flags(Boolean)``</strong>: If <code class="docutils literal notranslate"><span class="pre">true</span></code>, break long flags
-across multiple lines. Default: <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
-<li><p><strong>``suppress_empty_meta(Boolean)``</strong>: If <code class="docutils literal notranslate"><span class="pre">true</span></code> (default), suppress
+<li><p><code class="docutils literal notranslate"><span class="pre">break_long_flags(Boolean)</span></code>: If <code class="docutils literal notranslate"><span class="pre">true</span></code>, break long flags across
+multiple lines. Default: <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">suppress_empty_meta(Boolean)</span></code>: If <code class="docutils literal notranslate"><span class="pre">true</span></code> (default), suppress
 empty metasyntactic variables in help output.</p></li>
 </ul>
 </section>
@@ -454,12 +443,12 @@ empty metasyntactic variables in help output.</p></li>
 <h2>Parse options<a class="headerlink" href="#parse-options" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">parse/5</span></code> predicate supports the following parse options:</p>
 <ul class="simple">
-<li><p><strong>``output_functor(Functor)``</strong>: When defined, options are returned as
+<li><p><code class="docutils literal notranslate"><span class="pre">output_functor(Functor)</span></code>: When defined, options are returned as
 <code class="docutils literal notranslate"><span class="pre">Functor(Key,</span> <span class="pre">Value)</span></code> terms instead of <code class="docutils literal notranslate"><span class="pre">Key(Value)</span></code> terms. No
 default.</p></li>
-<li><p><strong>``duplicated_flags(Keep)``</strong>: How to handle duplicate options. One
-of <code class="docutils literal notranslate"><span class="pre">keepfirst</span></code>, <code class="docutils literal notranslate"><span class="pre">keeplast</span></code>, <code class="docutils literal notranslate"><span class="pre">keepall</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">keeplast</span></code>.</p></li>
-<li><p><strong>``allow_empty_flag_spec(Boolean)``</strong>: If <code class="docutils literal notranslate"><span class="pre">true</span></code> (default), options
+<li><p><code class="docutils literal notranslate"><span class="pre">duplicated_flags(Keep)</span></code>: How to handle duplicate options. One of
+<code class="docutils literal notranslate"><span class="pre">keepfirst</span></code>, <code class="docutils literal notranslate"><span class="pre">keeplast</span></code>, <code class="docutils literal notranslate"><span class="pre">keepall</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">keeplast</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allow_empty_flag_spec(Boolean)</span></code>: If <code class="docutils literal notranslate"><span class="pre">true</span></code> (default), options
 without flags are allowed (useful for configuration parameters). Set
 to <code class="docutils literal notranslate"><span class="pre">false</span></code> to raise errors on empty flags.</p></li>
 </ul>

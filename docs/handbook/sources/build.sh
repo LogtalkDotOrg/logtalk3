@@ -89,7 +89,7 @@ sed '1,19d' ../../../library/coroutining/NOTES.md | pandoc -f gfm -t rst -o libr
 sed '1,19d' ../../../library/cbor/NOTES.md | pandoc -f gfm -t rst -o libraries/cbor.rst
 sed '1,19d' ../../../library/ccsds/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds.rst
 sed '1,19d' ../../../library/classifier_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/classifier_protocols.rst
-sed '1,19d' ../../../library/command_line_options/NOTES.md | pandoc -f gfm -t rst -o libraries/command_line_options.rst
+sed '1,32d' ../../../library/command_line_options/NOTES.md | pandoc -f gfm -t rst -o libraries/command_line_options.rst
 sed '1,19d' ../../../library/csv/NOTES.md | pandoc -f gfm -t rst -o libraries/csv.rst
 sed '1,19d' ../../../library/datalog/NOTES.md | pandoc -f gfm -t rst -o libraries/datalog.rst
 sed '1,19d' ../../../library/dates/NOTES.md | pandoc -f gfm -t rst -o libraries/dates.rst
