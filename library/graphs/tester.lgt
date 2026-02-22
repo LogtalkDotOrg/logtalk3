@@ -44,10 +44,10 @@
 		debug(on), source_data(on)
 	]),
 	logtalk_load([
-		tests_unweighted_directed_graph,
-		tests_unweighted_undirected_graph,
-		tests_weighted_directed_graph,
-		tests_weighted_undirected_graph
+		'test_files/tests_unweighted_directed_graph',
+		'test_files/tests_unweighted_undirected_graph',
+		'test_files/tests_weighted_directed_graph',
+		'test_files/tests_weighted_undirected_graph'
 	], [
 		hook(lgtunit)
 	]),
