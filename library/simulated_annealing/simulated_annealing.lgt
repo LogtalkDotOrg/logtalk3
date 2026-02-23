@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-22,
+		date is 2026-02-23,
 		comment is 'Simulated annealing optimization algorithm. Parameterized by a problem object implementing the ``simulated_annealing_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes the energy (cost) function defined by the problem. Custom cooling schedules, stop conditions, delta-energy neighbor generation, progress reporting, and reheating restarts can be defined by the problem object or configured via options; suitable defaults are used otherwise.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``simulated_annealing_protocol``.',
@@ -309,9 +309,10 @@
 	generate_neighbor(State, Energy, Neighbor, NeighborEnergy, DeltaE) :-
 		(	neighbor_state(State, Neighbor, DeltaE) ->
 			NeighborEnergy is Energy + DeltaE
-		;	neighbor_state(State, Neighbor),
+		;	neighbor_state(State, Neighbor) ->
 			state_energy(Neighbor, NeighborEnergy),
 			DeltaE is NeighborEnergy - Energy
+		;	fail
 		).
 
 	% --- Boltzmann acceptance criterion ---

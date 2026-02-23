@@ -46,7 +46,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, nth1/3
+		length/2
 	]).
 
 	% City coordinates
@@ -83,39 +83,37 @@
 
 	% Swap elements at positions I and J in a list
 	swap(List, I, J, Result) :-
-		nth1(I, List, ElemI),
-		nth1(J, List, ElemJ),
-		swap_elements(List, 1, I, J, ElemI, ElemJ, Result).
+		swap_elements(List, 1, I, J, _ElemI, _ElemJ, Result).
 
 	swap_elements([], _, _, _, _, _, []).
-	swap_elements([_| T], Pos, I, J, ElemI, ElemJ, [ElemJ| R]) :-
-		Pos =:= I, !,
+	swap_elements([ElemI| Tail0], I, I, J, ElemI, ElemJ, [ElemJ| Tail]) :-
+		!,
+		Pos is I + 1,
+		swap_elements(Tail0, Pos, I, J, ElemI, ElemJ, Tail).
+	swap_elements([ElemJ| Tail0], J, I, J, ElemI, ElemJ, [ElemI| Tail]) :-
+		!,
+		Pos is J + 1,
+		swap_elements(Tail0, Pos, I, J, ElemI, ElemJ, Tail).
+	swap_elements([Head| Tail0], Pos, I, J, ElemI, ElemJ, [Head| Tail]) :-
 		Pos1 is Pos + 1,
-		swap_elements(T, Pos1, I, J, ElemI, ElemJ, R).
-	swap_elements([_| T], Pos, I, J, ElemI, ElemJ, [ElemI| R]) :-
-		Pos =:= J, !,
-		Pos1 is Pos + 1,
-		swap_elements(T, Pos1, I, J, ElemI, ElemJ, R).
-	swap_elements([H| T], Pos, I, J, ElemI, ElemJ, [H| R]) :-
-		Pos1 is Pos + 1,
-		swap_elements(T, Pos1, I, J, ElemI, ElemJ, R).
+		swap_elements(Tail0, Pos1, I, J, ElemI, ElemJ, Tail).
 
 	% Compute total tour distance including return to start
 	tour_distance([City| Rest], Distance) :-
 		tour_distance_loop(Rest, City, City, 0.0, Distance).
 
-	tour_distance_loop([], LastCity, FirstCity, Acc, Distance) :-
+	tour_distance_loop([], LastCity, FirstCity, Distance0, Distance) :-
 		city_distance(LastCity, FirstCity, D),
-		Distance is Acc + D.
-	tour_distance_loop([City| Rest], PrevCity, FirstCity, Acc, Distance) :-
-		city_distance(PrevCity, City, D),
-		Acc1 is Acc + D,
-		tour_distance_loop(Rest, City, FirstCity, Acc1, Distance).
+		Distance is Distance0 + D.
+	tour_distance_loop([City| Rest], PrevCity, FirstCity, Distance0, Distance) :-
+		city_distance(PrevCity, City, CityDistance),
+		Distance1 is Distance0 + CityDistance,
+		tour_distance_loop(Rest, City, FirstCity, Distance1, Distance).
 
 	% Euclidean distance between two cities
-	city_distance(C1, C2, Distance) :-
-		city(C1, X1, Y1),
-		city(C2, X2, Y2),
+	city_distance(City1, City2, Distance) :-
+		city(City1, X1, Y1),
+		city(City2, X2, Y2),
 		DX is X1 - X2,
 		DY is Y1 - Y2,
 		Distance is sqrt(DX * DX + DY * DY).

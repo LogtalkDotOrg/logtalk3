@@ -38,8 +38,7 @@
 		'test_files/quadratic_progress',
 		'test_files/tsp'
 	], [
-		debug(on),
-		source_data(on)
+		optimize(on)
 	]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
