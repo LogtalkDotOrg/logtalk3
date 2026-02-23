@@ -42,6 +42,10 @@ would result in a compiler error. Thanks to Paul Brown for the bug report.
 included file contains `uses/2` or `use_module/2` directives that define
 operators would result in syntax errors.
 
+* FIXED: Runtime error in the `predicate_property/2` built-in method when the
+predicate argument is defined via a `uses/2` or `use_module/2` directive where
+the object or module argument is a parameter variable only bound at runtime.
+
 Prolog adapter and integration files
 ------------------------------------
 

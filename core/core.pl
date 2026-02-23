@@ -4028,6 +4028,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	'$lgt_uses_predicate_'(Entity, Other, Original, Pred, Ctx),
 	!,
+	% Other may be a parameter variable that will only be bound at runtime
+	callable(Other),
 	'$lgt_predicate_property'(Other, Original, Prop, Obj, p(p(p)), ExCtx).
 
 '$lgt_predicate_property'(Obj, Pred, Prop, Obj, _, ExCtx) :-
@@ -4035,6 +4037,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	'$lgt_use_module_predicate_'(Entity, Module, Original, Pred, Ctx),
 	!,
+	% Other may be a parameter variable that will only be bound at runtime
+	atom(Module),
 	'$lgt_predicate_property'(':'(Module, Original), Prop).
 
 '$lgt_predicate_property'(Obj, Pred, Prop, Sender, LookupScope, _) :-
