@@ -44,7 +44,7 @@
 	:- public(reset_seed/0).
 
 	:- uses(fast_random(xoshiro128pp), [
-		random/3, reset_seed/0
+		between/3, reset_seed/0
 	]).
 
 	:- uses(list, [
