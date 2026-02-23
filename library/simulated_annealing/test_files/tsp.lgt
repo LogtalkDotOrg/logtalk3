@@ -67,7 +67,7 @@
 		between(1, N1, J0),
 		(	J0 >= I ->
 			J is J0 + 1
-		;	J = J0
+		;	J is J0
 		),
 		swap(Tour, I, J, Neighbor).
 
@@ -100,15 +100,15 @@
 
 	% Compute total tour distance including return to start
 	tour_distance([City| Rest], Distance) :-
-		tour_distance_loop(Rest, City, City, 0.0, Distance).
+		tour_distance(Rest, City, City, 0.0, Distance).
 
-	tour_distance_loop([], LastCity, FirstCity, Distance0, Distance) :-
+	tour_distance([], LastCity, FirstCity, Distance0, Distance) :-
 		city_distance(LastCity, FirstCity, D),
 		Distance is Distance0 + D.
-	tour_distance_loop([City| Rest], PrevCity, FirstCity, Distance0, Distance) :-
+	tour_distance([City| Rest], PrevCity, FirstCity, Distance0, Distance) :-
 		city_distance(PrevCity, City, CityDistance),
 		Distance1 is Distance0 + CityDistance,
-		tour_distance_loop(Rest, City, FirstCity, Distance1, Distance).
+		tour_distance(Rest, City, FirstCity, Distance1, Distance).
 
 	% Euclidean distance between two cities
 	city_distance(City1, City2, Distance) :-

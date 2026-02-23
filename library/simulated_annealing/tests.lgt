@@ -98,7 +98,7 @@
 	test(sa_invalid_option_seed, error(domain_error(option, seed(-1)))) :-
 		simulated_annealing(quadratic)::run(_State, _Energy, [seed(-1)]).
 
-	% run/4 returns statistics (Proposal 3)
+	% run/4 returns statistics
 
 	test(sa_run_4_returns_statistics, true) :-
 		simulated_annealing(quadratic)::run(_State, _Energy, Statistics, []),
@@ -117,7 +117,7 @@
 		member(steps(Steps), Statistics),
 		member(acceptances(Acc), Statistics).
 
-	% min_temperature option (Proposal 1 and 5)
+	% min_temperature option
 
 	test(sa_min_temperature_stops_early, true(Steps < 10000)) :-
 		% A high min_temperature should cause the loop to stop before max_steps
@@ -131,7 +131,7 @@
 		simulated_annealing(quadratic)::run(_State, _Energy, Statistics, []),
 		member(steps(Steps), Statistics).
 
-	% seed option for reproducibility (Proposal 6)
+	% seed option for reproducibility
 
 	test(sa_seed_reproducible_results, true(Energy1 =:= Energy2)) :-
 		simulated_annealing(quadratic)::run(_State1, Energy1, [seed(42)]),
@@ -141,7 +141,7 @@
 		simulated_annealing(quadratic)::run(State1, _Energy1, [seed(42)]),
 		simulated_annealing(quadratic)::run(State2, _Energy2, [seed(42)]).
 
-	% neighbor_state/3 delta-energy variant (Proposal 4)
+	% neighbor_state/3 delta-energy variant
 
 	test(sa_delta_energy_run_2, true((number(Energy), Energy < 5.0))) :-
 		simulated_annealing(quadratic_delta)::run(_State, Energy).
@@ -154,7 +154,7 @@
 		% Delta-energy variant should produce quality comparable to standard variant
 		simulated_annealing(quadratic_delta)::run(_State, Energy, [seed(123)]).
 
-	% progress reporting (Proposal 2)
+	% progress reporting
 
 	test(sa_progress_updates_called, true(Count > 0)) :-
 		quadratic_progress::clear_log,
@@ -181,7 +181,7 @@
 		simulated_annealing(quadratic_progress)::run(_State, _Energy, [updates(5)]),
 		quadratic_progress::progress_log(Step, Temp, BestE, AccRate, ImpRate).
 
-	% reheating restarts (Proposal 7)
+	% reheating restarts
 
 	test(sa_restarts_zero_default, true((number(Energy), Energy < 5.0))) :-
 		% restarts(0) is the default, should work the same as before
@@ -205,7 +205,7 @@
 	test(sa_invalid_option_restarts, error(domain_error(option, restarts(-1)))) :-
 		simulated_annealing(quadratic)::run(_State, _Energy, [restarts(-1)]).
 
-	% auto-temperature estimation (Proposal 8)
+	% auto-temperature estimation
 
 	test(sa_estimate_temperature_1, true((float(T), T > 0.0))) :-
 		simulated_annealing(quadratic)::estimate_temperature(T).
