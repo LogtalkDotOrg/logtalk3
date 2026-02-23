@@ -25,8 +25,10 @@
 :- object(quadratic_stop,
 	implements(simulated_annealing_protocol)).
 
+	:- public(reset_seed/0).
+
 	:- uses(fast_random(xoshiro128pp), [
-		random/3
+		random/3, reset_seed/0
 	]).
 
 	initial_state(50.0).

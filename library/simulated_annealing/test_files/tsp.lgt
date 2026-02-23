@@ -41,8 +41,10 @@
 :- object(tsp,
 	implements(simulated_annealing_protocol)).
 
+	:- public(reset_seed/0).
+
 	:- uses(fast_random(xoshiro128pp), [
-		between/3
+		random/3, reset_seed/0
 	]).
 
 	:- uses(list, [

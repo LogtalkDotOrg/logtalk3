@@ -134,11 +134,15 @@
 	% seed option for reproducibility
 
 	test(sa_seed_reproducible_results, true(Energy1 =:= Energy2)) :-
+		quadratic::reset_seed,
 		simulated_annealing(quadratic)::run(_State1, Energy1, [seed(42)]),
+		quadratic::reset_seed,
 		simulated_annealing(quadratic)::run(_State2, Energy2, [seed(42)]).
 
 	test(sa_seed_reproducible_state, true(State1 =:= State2)) :-
+		quadratic::reset_seed,
 		simulated_annealing(quadratic)::run(State1, _Energy1, [seed(42)]),
+		quadratic::reset_seed,
 		simulated_annealing(quadratic)::run(State2, _Energy2, [seed(42)]).
 
 	% neighbor_state/3 delta-energy variant
@@ -152,6 +156,7 @@
 
 	test(sa_delta_energy_comparable, true((Energy < 5.0))) :-
 		% Delta-energy variant should produce quality comparable to standard variant
+		quadratic_delta::reset_seed,
 		simulated_annealing(quadratic_delta)::run(_State, Energy, [seed(123)]).
 
 	% progress reporting
@@ -195,11 +200,15 @@
 
 	test(sa_restarts_better_or_equal_energy, true(EnergyR =< EnergyNoR)) :-
 		% With restarts, energy should be better or equal to a single run
+		quadratic::reset_seed,
 		simulated_annealing(quadratic)::run(_S1, EnergyNoR, [seed(99), restarts(0)]),
+		quadratic::reset_seed,
 		simulated_annealing(quadratic)::run(_S2, EnergyR, [seed(99), restarts(2)]).
 
 	test(sa_restarts_seed_reproducible, true(E1 =:= E2)) :-
+		quadratic::reset_seed,
 		simulated_annealing(quadratic)::run(_S1, E1, [seed(77), restarts(1)]),
+		quadratic::reset_seed,
 		simulated_annealing(quadratic)::run(_S2, E2, [seed(77), restarts(1)]).
 
 	test(sa_invalid_option_restarts, error(domain_error(option, restarts(-1)))) :-
