@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-02-23,
 		comment is 'Unit tests for the "weighted_undirected_graph" library predicates.',
 		parnames is ['DictionaryObject']
 	]).
@@ -51,7 +51,9 @@
 		is_bipartite/1,
 		is_sparse/1,
 		is_tree/1,
-		graph_coloring/3
+		graph_coloring/3,
+		maximal_cliques/2,
+		maximum_cliques/2
 	]).
 
 	cover(weighted_undirected_graph(_DictionaryObject_)).
@@ -434,5 +436,54 @@
 		% path graph is bipartite
 		new([(1-2)-5, (2-3)-10, (3-4)-7], Graph),
 		graph_coloring(Graph, _Coloring, NumberOfColors).
+
+	% maximal_cliques/2 tests
+
+	test(wug_maximal_cliques_2_01, true(Cliques == [])) :-
+		% empty graph has no cliques
+		new(Graph),
+		maximal_cliques(Graph, Cliques).
+
+	test(wug_maximal_cliques_2_02, true(Cliques == [[1],[2],[3]])) :-
+		% isolated vertices: each is a maximal clique of size 1
+		new([1,2,3], [], Graph),
+		maximal_cliques(Graph, Cliques).
+
+	test(wug_maximal_cliques_2_03, true(Cliques == [[1,2,3]])) :-
+		% triangle: one maximal clique of size 3
+		new([(1-2)-5, (2-3)-10, (1-3)-7], Graph),
+		maximal_cliques(Graph, Cliques).
+
+	test(wug_maximal_cliques_2_04, true(Cliques == [[1,2],[2,3]])) :-
+		% path 1-2-3: two maximal cliques
+		new([(1-2)-5, (2-3)-10], Graph),
+		maximal_cliques(Graph, Cliques).
+
+	test(wug_maximal_cliques_2_05, true(Cliques == [[1,2,3,4]])) :-
+		% complete graph K4
+		new([(1-2)-1, (1-3)-2, (1-4)-3, (2-3)-4, (2-4)-5, (3-4)-6], Graph),
+		maximal_cliques(Graph, Cliques).
+
+	% maximum_cliques/2 tests
+
+	test(wug_maximum_cliques_2_01, true(Cliques == [])) :-
+		% empty graph
+		new(Graph),
+		maximum_cliques(Graph, Cliques).
+
+	test(wug_maximum_cliques_2_02, true(Cliques == [[1,2,3]])) :-
+		% triangle: one maximum clique
+		new([(1-2)-5, (2-3)-10, (1-3)-7], Graph),
+		maximum_cliques(Graph, Cliques).
+
+	test(wug_maximum_cliques_2_03, true(Cliques == [[1,2],[2,3]])) :-
+		% path 1-2-3: both maximal cliques are maximum (size 2)
+		new([(1-2)-5, (2-3)-10], Graph),
+		maximum_cliques(Graph, Cliques).
+
+	test(wug_maximum_cliques_2_04, true(Cliques == [[1,2,3,4]])) :-
+		% complete graph K4: the whole graph
+		new([(1-2)-1, (1-3)-2, (1-4)-3, (2-3)-4, (2-4)-5, (3-4)-6], Graph),
+		maximum_cliques(Graph, Cliques).
 
 :- end_object.

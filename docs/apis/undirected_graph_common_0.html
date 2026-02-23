@@ -259,7 +259,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-02-20</div>
+<div class="line"><strong>Date:</strong> 2026-02-23</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -275,6 +275,7 @@
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="set_0.html#set-0"><span class="std std-ref">set</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -295,11 +296,13 @@
 <ul>
 <li><p><a class="reference internal" href="#is-tree-1" id="id2"><code class="docutils literal notranslate"><span class="pre">is_tree/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#graph-coloring-3" id="id3"><code class="docutils literal notranslate"><span class="pre">graph_coloring/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#maximal-cliques-2" id="id4"><code class="docutils literal notranslate"><span class="pre">maximal_cliques/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#maximum-cliques-2" id="id5"><code class="docutils literal notranslate"><span class="pre">maximum_cliques/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id4">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id5">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id6">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id6">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id7">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id8">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -342,6 +345,48 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">graph_coloring(+graph,-list(pair),-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="maximal-cliques-2">
+<span id="undirected-graph-common-0-maximal-cliques-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">maximal_cliques/2</span></code></a><a class="headerlink" href="#maximal-cliques-2" title="Link to this heading"></a></h3>
+<p>Computes all maximal cliques of the graph using the Bron-Kerbosch algorithm with pivoting. A maximal clique is a clique that cannot be extended by adding another adjacent vertex. Each clique is a sorted list of vertices. The list of cliques is sorted in standard order.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">maximal_cliques(Graph,Cliques)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">maximal_cliques(+graph,-list(list(vertex)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="maximum-cliques-2">
+<span id="undirected-graph-common-0-maximum-cliques-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">maximum_cliques/2</span></code></a><a class="headerlink" href="#maximum-cliques-2" title="Link to this heading"></a></h3>
+<p>Computes all maximum cliques of the graph, i.e. the largest maximal cliques. Each clique is a sorted list of vertices. The list of cliques is sorted in standard order. For an empty graph, returns an empty list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">maximum_cliques(Graph,Cliques)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">maximum_cliques(+graph,-list(list(vertex)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </section>

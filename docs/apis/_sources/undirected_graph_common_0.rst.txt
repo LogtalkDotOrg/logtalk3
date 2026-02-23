@@ -15,7 +15,7 @@ Common predicates shared by undirected graph objects. Uses self-dispatch to call
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-20
+| **Date:** 2026-02-23
 
 | **Compilation flags:**
 |    ``static``
@@ -25,6 +25,7 @@ Common predicates shared by undirected graph objects. Uses self-dispatch to call
 |    ``public`` :ref:`graph_common <graph_common/0>`
 | **Uses:**
 |    :ref:`list <list/0>`
+|    :ref:`set <set/0>`
 
 | **Remarks:**
 |    (none)
@@ -73,6 +74,44 @@ Computes a greedy vertex coloring of the graph. ``Coloring`` is a list of ``Vert
 |    ``graph_coloring(Graph,Coloring,NumberOfColors)``
 | **Mode and number of proofs:**
 |    ``graph_coloring(+graph,-list(pair),-integer)`` - ``one``
+
+
+------------
+
+.. index:: maximal_cliques/2
+.. _undirected_graph_common/0::maximal_cliques/2:
+
+``maximal_cliques/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Computes all maximal cliques of the graph using the Bron-Kerbosch algorithm with pivoting. A maximal clique is a clique that cannot be extended by adding another adjacent vertex. Each clique is a sorted list of vertices. The list of cliques is sorted in standard order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``maximal_cliques(Graph,Cliques)``
+| **Mode and number of proofs:**
+|    ``maximal_cliques(+graph,-list(list(vertex)))`` - ``one``
+
+
+------------
+
+.. index:: maximum_cliques/2
+.. _undirected_graph_common/0::maximum_cliques/2:
+
+``maximum_cliques/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Computes all maximum cliques of the graph, i.e. the largest maximal cliques. Each clique is a sorted list of vertices. The list of cliques is sorted in standard order. For an empty graph, returns an empty list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``maximum_cliques(Graph,Cliques)``
+| **Mode and number of proofs:**
+|    ``maximum_cliques(+graph,-list(list(vertex)))`` - ``one``
 
 
 ------------

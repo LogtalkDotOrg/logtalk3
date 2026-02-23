@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-20,
+		date is 2026-02-23,
 		comment is 'Unit tests for the "unweighted_undirected_graph" library predicates.',
 		parnames is ['DictionaryObject']
 	]).
@@ -50,7 +50,9 @@
 		is_bipartite/1,
 		is_sparse/1,
 		is_tree/1,
-		graph_coloring/3
+		graph_coloring/3,
+		maximal_cliques/2,
+		maximum_cliques/2
 	]).
 
 	cover(unweighted_undirected_graph(_DictionaryObject_)).
@@ -426,5 +428,89 @@
 		% path graph is bipartite
 		new([1-2, 2-3, 3-4], Graph),
 		graph_coloring(Graph, _Coloring, NumberOfColors).
+
+	% maximal_cliques/2 tests
+
+	test(uug_maximal_cliques_2_01, true(Cliques == [])) :-
+		% empty graph has no cliques
+		new(Graph),
+		maximal_cliques(Graph, Cliques).
+
+	test(uug_maximal_cliques_2_02, true(Cliques == [[1],[2],[3]])) :-
+		% isolated vertices: each is a maximal clique of size 1
+		new([1,2,3], [], Graph),
+		maximal_cliques(Graph, Cliques).
+
+	test(uug_maximal_cliques_2_03, true(Cliques == [[1,2]])) :-
+		% single edge: one maximal clique
+		new([1-2], Graph),
+		maximal_cliques(Graph, Cliques).
+
+	test(uug_maximal_cliques_2_04, true(Cliques == [[1,2,3]])) :-
+		% triangle: one maximal clique of size 3
+		new([1-2, 2-3, 1-3], Graph),
+		maximal_cliques(Graph, Cliques).
+
+	test(uug_maximal_cliques_2_05, true(Cliques == [[1,2],[2,3]])) :-
+		% path 1-2-3: two maximal cliques {1,2} and {2,3}
+		new([1-2, 2-3], Graph),
+		maximal_cliques(Graph, Cliques).
+
+	test(uug_maximal_cliques_2_06, true(Cliques == [[1,2,3],[2,3,4]])) :-
+		% diamond without 1-4: cliques are {1,2,3} and {2,3,4}
+		new([1-2, 1-3, 2-3, 2-4, 3-4], Graph),
+		maximal_cliques(Graph, Cliques).
+
+	test(uug_maximal_cliques_2_07, true(Cliques == [[1,2,3,4]])) :-
+		% complete graph K4
+		new([1-2, 1-3, 1-4, 2-3, 2-4, 3-4], Graph),
+		maximal_cliques(Graph, Cliques).
+
+	test(uug_maximal_cliques_2_08, true(Cliques == [[1,2,3],[4]])) :-
+		% triangle plus isolated vertex
+		new([1,2,3,4], [1-2, 2-3, 1-3], Graph),
+		maximal_cliques(Graph, Cliques).
+
+	% maximum_cliques/2 tests
+
+	test(uug_maximum_cliques_2_01, true(Cliques == [])) :-
+		% empty graph
+		new(Graph),
+		maximum_cliques(Graph, Cliques).
+
+	test(uug_maximum_cliques_2_02, true(Cliques == [[1],[2],[3]])) :-
+		% isolated vertices: all are maximum (size 1)
+		new([1,2,3], [], Graph),
+		maximum_cliques(Graph, Cliques).
+
+	test(uug_maximum_cliques_2_03, true(Cliques == [[1,2,3]])) :-
+		% triangle: one maximum clique
+		new([1-2, 2-3, 1-3], Graph),
+		maximum_cliques(Graph, Cliques).
+
+	test(uug_maximum_cliques_2_04, true(Cliques == [[1,2],[2,3]])) :-
+		% path 1-2-3: both maximal cliques are maximum (size 2)
+		new([1-2, 2-3], Graph),
+		maximum_cliques(Graph, Cliques).
+
+	test(uug_maximum_cliques_2_05, true(Cliques == [[1,2,3],[2,3,4]])) :-
+		% diamond without 1-4: two maximum cliques of size 3
+		new([1-2, 1-3, 2-3, 2-4, 3-4], Graph),
+		maximum_cliques(Graph, Cliques).
+
+	test(uug_maximum_cliques_2_06, true(Cliques == [[1,2,3,4]])) :-
+		% complete graph K4: the whole graph is the only maximum clique
+		new([1-2, 1-3, 1-4, 2-3, 2-4, 3-4], Graph),
+		maximum_cliques(Graph, Cliques).
+
+	test(uug_maximum_cliques_2_07, true(Cliques == [[1,2,3]])) :-
+		% triangle plus isolated vertex: maximum clique is triangle
+		new([1,2,3,4], [1-2, 2-3, 1-3], Graph),
+		maximum_cliques(Graph, Cliques).
+
+	test(uug_maximum_cliques_2_08, true(Cliques == [[1,2,3],[4,5,6]])) :-
+		% two disjoint triangles: two maximum cliques of size 3
+		new([1-2, 2-3, 1-3, 4-5, 5-6, 4-6], Graph),
+		maximum_cliques(Graph, Cliques).
 
 :- end_object.
