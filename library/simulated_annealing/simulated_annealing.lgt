@@ -46,13 +46,6 @@
 		see_also is [simulated_annealing(_), simulated_annealing_protocol]
 	]).
 
-	:- public(run/2).
-	:- mode(run(-term, -number), one).
-	:- info(run/2, [
-		comment is 'Runs the simulated annealing algorithm using default options and returns the best state found and its energy.',
-		argnames is ['BestState', 'BestEnergy']
-	]).
-
 	:- public(estimate_temperature/1).
 	:- mode(estimate_temperature(-float), one).
 	:- info(estimate_temperature/1, [
@@ -69,6 +62,13 @@
 			'``samples(N)`` option' - 'Number of random neighbor transitions to sample (default: ``200``).',
 			'``acceptance_rate(P)`` option' - 'Target initial acceptance rate as an integer percentage between 1 and 99 (default: ``80``).'
 		]
+	]).
+
+	:- public(run/2).
+	:- mode(run(-term, -number), one).
+	:- info(run/2, [
+		comment is 'Runs the simulated annealing algorithm using default options and returns the best state found and its energy.',
+		argnames is ['BestState', 'BestEnergy']
 	]).
 
 	:- public(run/3).
@@ -108,9 +108,6 @@
 		valid/2
 	]).
 
-	run(BestState, BestEnergy) :-
-		run(BestState, BestEnergy, []).
-
 	estimate_temperature(Temperature) :-
 		estimate_temperature(Temperature, []).
 
@@ -136,17 +133,20 @@
 	% to explore the landscape.
 	sample_deltas(0, _State, _Energy, Count, Sum, Count, Sum) :-
 		!.
-	sample_deltas(N, State, Energy, CountIn, SumIn, CountOut, SumOut) :-
+	sample_deltas(N, State, Energy, Count0, Sum0, Count, Sum) :-
 		generate_neighbor(State, Energy, Neighbor, NeighborEnergy, DeltaE),
 		(	DeltaE > 0 ->
 			% Uphill move: accumulate the delta
-			CountIn1 is CountIn + 1,
-			SumIn1 is SumIn + DeltaE
-		;	CountIn1 is CountIn,
-			SumIn1 is SumIn
+			Count1 is Count0 + 1,
+			Sum1 is Sum0 + DeltaE
+		;	Count1 is Count0,
+			Sum1 is Sum0
 		),
 		N1 is N - 1,
-		sample_deltas(N1, Neighbor, NeighborEnergy, CountIn1, SumIn1, CountOut, SumOut).
+		sample_deltas(N1, Neighbor, NeighborEnergy, Count1, Sum1, Count, Sum).
+
+	run(BestState, BestEnergy) :-
+		run(BestState, BestEnergy, _Statistics, []).
 
 	run(BestState, BestEnergy, UserOptions) :-
 		run(BestState, BestEnergy, _Statistics, UserOptions).
