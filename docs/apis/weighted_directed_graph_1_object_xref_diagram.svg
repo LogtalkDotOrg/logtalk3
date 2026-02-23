@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-628 2490,-628 2490,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object weighted_directed_graph/1</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;02&#45;22, 12:25</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;02&#45;23, 00:01</text>
 <g id="clust1" class="cluster">
 <title>cluster_weighted_directed_graph_1_object</title>
 <g id="a_clust1"><a xlink:title="weighted_directed_graph(Dictionary)">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 2466,-54.25 2466,-54.25 2472,-54.25 2478,-60.25 2478,-66.25 2478,-66.25 2478,-604 2478,-604 2478,-610 2472,-616 2466,-616 2466,-616 20,-616 20,-616 14,-616 8,-610 8,-604 8,-604 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-598.5" font-family="Monospace" font-size="10.00" fill="dimgray">weighted_directed_graph(Dictionary)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>min_paths/3</title>
 <polygon fill="springgreen" stroke="black" points="392.38,-577.25 291.62,-577.25 291.62,-541.25 392.38,-541.25 392.38,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="299.62" y="-561.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L35" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L35">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L35" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L35">
 <text xml:space="preserve" text-anchor="start" x="304.88" y="-561.17" font-family="Monospace" font-size="11.00">min_paths/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>dijkstra_all/4</title>
 <polygon fill="cornsilk" stroke="black" points="139.5,-458 18.5,-458 18.5,-422 139.5,-422 139.5,-458"/>
 <text xml:space="preserve" text-anchor="start" x="26.5" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node24_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L257">
+<g id="a_node24_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L257">
 <text xml:space="preserve" text-anchor="start" x="31.75" y="-441.93" font-family="Monospace" font-size="11.00">dijkstra_all/4</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- min_paths/3&#45;&gt;dijkstra_all/4 -->
 <g id="edge11" class="edge">
 <title>min_paths/3&#45;&gt;dijkstra_all/4</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L122" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L122" xlink:title="calls">
 <path fill="none" stroke="black" d="M302.91,-540.82C256.42,-520.1 178.77,-485.48 128.23,-462.95"/>
 <polygon fill="black" stroke="black" points="129.82,-459.82 119.26,-458.95 126.97,-466.22 129.82,-459.82"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L122">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L122">
 <text xml:space="preserve" text-anchor="start" x="218.39" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>build_path_tree_edges/3</title>
 <polygon fill="cornsilk" stroke="black" points="338.88,-458 157.12,-458 157.12,-422 338.88,-422 338.88,-458"/>
 <text xml:space="preserve" text-anchor="start" x="165.12" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node25_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L272">
+<g id="a_node25_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L272">
 <text xml:space="preserve" text-anchor="start" x="170.38" y="-441.93" font-family="Monospace" font-size="11.00">build_path_tree_edges/3</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- min_paths/3&#45;&gt;build_path_tree_edges/3 -->
 <g id="edge12" class="edge">
 <title>min_paths/3&#45;&gt;build_path_tree_edges/3</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L122" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L122" xlink:title="calls">
 <path fill="none" stroke="black" d="M328.13,-540.95C312.51,-521.47 286.96,-489.59 268.91,-467.08"/>
 <polygon fill="black" stroke="black" points="271.86,-465.17 262.87,-459.55 266.4,-469.54 271.86,-465.17"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L122">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L122">
 <text xml:space="preserve" text-anchor="start" x="297.82" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>add_vertices_from_dist/3</title>
 <polygon fill="cornsilk" stroke="black" points="545.25,-458 356.75,-458 356.75,-422 545.25,-422 545.25,-458"/>
 <text xml:space="preserve" text-anchor="start" x="364.75" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node26_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L282" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L282">
+<g id="a_node26_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L282" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L282">
 <text xml:space="preserve" text-anchor="start" x="370" y="-441.93" font-family="Monospace" font-size="11.00">add_vertices_from_dist/3</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- min_paths/3&#45;&gt;add_vertices_from_dist/3 -->
 <g id="edge13" class="edge">
 <title>min_paths/3&#45;&gt;add_vertices_from_dist/3</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L122" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L122" xlink:title="calls">
 <path fill="none" stroke="black" d="M358.08,-540.95C376.28,-521.38 406.09,-489.31 427.03,-466.78"/>
 <polygon fill="black" stroke="black" points="429.57,-469.19 433.82,-459.48 424.45,-464.42 429.57,-469.19"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L122">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L122">
 <text xml:space="preserve" text-anchor="start" x="399.77" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,7 +124,7 @@
 <title>add_tree_edges/3</title>
 <polygon fill="cornsilk" stroke="black" points="698.25,-458 563.75,-458 563.75,-422 698.25,-422 698.25,-458"/>
 <text xml:space="preserve" text-anchor="start" x="571.75" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node27_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L290" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L290">
+<g id="a_node27_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L290" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L290">
 <text xml:space="preserve" text-anchor="start" x="577" y="-441.93" font-family="Monospace" font-size="11.00">add_tree_edges/3</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- min_paths/3&#45;&gt;add_tree_edges/3 -->
 <g id="edge14" class="edge">
 <title>min_paths/3&#45;&gt;add_tree_edges/3</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L122" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L122" xlink:title="calls">
 <path fill="none" stroke="black" d="M384.95,-540.82C436.36,-519.97 522.44,-485.05 577.95,-462.52"/>
 <polygon fill="black" stroke="black" points="578.93,-465.9 586.88,-458.9 576.3,-459.42 578.93,-465.9"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L122">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L122">
 <text xml:space="preserve" text-anchor="start" x="495.17" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -151,7 +151,7 @@
 <title>edges/2</title>
 <polygon fill="cornsilk" stroke="black" points="1541.88,-458 1468.12,-458 1468.12,-422 1541.88,-422 1541.88,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1476.12" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L59">
+<g id="a_node2_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="1481.38" y="-441.93" font-family="Monospace" font-size="11.00">edges/2</text>
 </a>
 </g>
@@ -174,12 +174,12 @@
 <!-- edges/2&#45;&gt;^^wpairs_to_edges/2 -->
 <g id="edge22" class="edge">
 <title>edges/2&#45;&gt;^^wpairs_to_edges/2</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L59" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M1512.82,-421.7C1521.43,-402.65 1535.4,-371.75 1545.52,-349.35"/>
 <polygon fill="black" stroke="black" points="1548.59,-351.05 1549.52,-340.5 1542.22,-348.17 1548.59,-351.05"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L59">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="1533.09" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -189,7 +189,7 @@
 <title>add_edge/5</title>
 <polygon fill="cornsilk" stroke="black" points="778,-338.75 684,-338.75 684,-302.75 778,-302.75 778,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="692" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L65">
+<g id="a_node3_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="697.25" y="-322.68" font-family="Monospace" font-size="11.00">add_edge/5</text>
 </a>
 </g>
@@ -212,12 +212,12 @@
 <!-- add_edge/5&#45;&gt;^^winsert_neighbor/4 -->
 <g id="edge23" class="edge">
 <title>add_edge/5&#45;&gt;^^winsert_neighbor/4</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L65" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L65" xlink:title="calls">
 <path fill="none" stroke="black" d="M752.4,-302.45C777.03,-282.53 817.67,-249.67 845.58,-227.1"/>
 <polygon fill="black" stroke="black" points="847.76,-229.83 853.34,-220.82 843.36,-224.39 847.76,-229.83"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L65">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="807.85" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -227,7 +227,7 @@
 <title>delete_edge/5</title>
 <polygon fill="cornsilk" stroke="black" points="854.12,-577.25 739.88,-577.25 739.88,-541.25 854.12,-541.25 854.12,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="747.88" y="-561.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L76">
+<g id="a_node4_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L76">
 <text xml:space="preserve" text-anchor="start" x="753.12" y="-561.17" font-family="Monospace" font-size="11.00">delete_edge/5</text>
 </a>
 </g>
@@ -250,12 +250,12 @@
 <!-- delete_edge/5&#45;&gt;^^wremove_neighbor/4 -->
 <g id="edge24" class="edge">
 <title>delete_edge/5&#45;&gt;^^wremove_neighbor/4</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L76" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L76" xlink:title="calls">
 <path fill="none" stroke="black" d="M797,-540.95C797,-522.25 797,-492.12 797,-469.83"/>
 <polygon fill="black" stroke="black" points="800.5,-469.89 797,-459.89 793.5,-469.89 800.5,-469.89"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L76">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L76">
 <text xml:space="preserve" text-anchor="start" x="797" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -265,7 +265,7 @@
 <title>transpose/2</title>
 <polygon fill="cornsilk" stroke="black" points="1167.38,-577.25 1066.62,-577.25 1066.62,-541.25 1167.38,-541.25 1167.38,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="1074.62" y="-561.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L85">
+<g id="a_node5_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="1079.88" y="-561.17" font-family="Monospace" font-size="11.00">transpose/2</text>
 </a>
 </g>
@@ -279,7 +279,7 @@
 <title>add_empty_vertices_from_pairs/3</title>
 <polygon fill="cornsilk" stroke="black" points="1131.88,-458 896.12,-458 896.12,-422 1131.88,-422 1131.88,-458"/>
 <text xml:space="preserve" text-anchor="start" x="904.12" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L138">
+<g id="a_node9_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L138">
 <text xml:space="preserve" text-anchor="start" x="909.38" y="-441.93" font-family="Monospace" font-size="11.00">add_empty_vertices_from_pairs/3</text>
 </a>
 </g>
@@ -291,12 +291,12 @@
 <!-- transpose/2&#45;&gt;add_empty_vertices_from_pairs/3 -->
 <g id="edge1" class="edge">
 <title>transpose/2&#45;&gt;add_empty_vertices_from_pairs/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L85" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L85" xlink:title="calls">
 <path fill="none" stroke="black" d="M1101.8,-540.95C1084.61,-521.38 1056.44,-489.31 1036.65,-466.78"/>
 <polygon fill="black" stroke="black" points="1039.49,-464.71 1030.26,-459.51 1034.23,-469.33 1039.49,-464.71"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L85">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="1068.59" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -306,7 +306,7 @@
 <title>add_transposed_wedges/3</title>
 <polygon fill="cornsilk" stroke="black" points="1331.88,-458 1150.12,-458 1150.12,-422 1331.88,-422 1331.88,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1158.12" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L146">
+<g id="a_node10_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L146">
 <text xml:space="preserve" text-anchor="start" x="1163.38" y="-441.93" font-family="Monospace" font-size="11.00">add_transposed_wedges/3</text>
 </a>
 </g>
@@ -318,12 +318,12 @@
 <!-- transpose/2&#45;&gt;add_transposed_wedges/3 -->
 <g id="edge2" class="edge">
 <title>transpose/2&#45;&gt;add_transposed_wedges/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L85" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L85" xlink:title="calls">
 <path fill="none" stroke="black" d="M1135.3,-540.95C1156.18,-521.21 1190.51,-488.74 1214.36,-466.19"/>
 <polygon fill="black" stroke="black" points="1216.67,-468.83 1221.53,-459.41 1211.86,-463.74 1216.67,-468.83"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L85">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="1182.72" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -333,7 +333,7 @@
 <title>transitive_closure/2</title>
 <polygon fill="cornsilk" stroke="black" points="1480.75,-577.25 1319.25,-577.25 1319.25,-541.25 1480.75,-541.25 1480.75,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="1327.25" y="-561.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L93">
+<g id="a_node6_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="1332.5" y="-561.17" font-family="Monospace" font-size="11.00">transitive_closure/2</text>
 </a>
 </g>
@@ -347,7 +347,7 @@
 <title>wwarshall/3</title>
 <polygon fill="cornsilk" stroke="black" points="1450.38,-458 1349.62,-458 1349.62,-422 1450.38,-422 1450.38,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1357.62" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L162">
+<g id="a_node12_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L162">
 <text xml:space="preserve" text-anchor="start" x="1362.88" y="-441.93" font-family="Monospace" font-size="11.00">wwarshall/3</text>
 </a>
 </g>
@@ -359,12 +359,12 @@
 <!-- transitive_closure/2&#45;&gt;wwarshall/3 -->
 <g id="edge3" class="edge">
 <title>transitive_closure/2&#45;&gt;wwarshall/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L93" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L93" xlink:title="calls">
 <path fill="none" stroke="black" d="M1400,-540.95C1400,-522.25 1400,-492.12 1400,-469.83"/>
 <polygon fill="black" stroke="black" points="1403.5,-469.89 1400,-459.89 1396.5,-469.89 1403.5,-469.89"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L93">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="1400" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -374,7 +374,7 @@
 <title>symmetric_closure/2</title>
 <polygon fill="cornsilk" stroke="black" points="1701.38,-577.25 1546.62,-577.25 1546.62,-541.25 1701.38,-541.25 1701.38,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="1554.62" y="-561.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L99">
+<g id="a_node7_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L99">
 <text xml:space="preserve" text-anchor="start" x="1559.88" y="-561.17" font-family="Monospace" font-size="11.00">symmetric_closure/2</text>
 </a>
 </g>
@@ -386,12 +386,12 @@
 <!-- symmetric_closure/2&#45;&gt;edges/2 -->
 <g id="edge4" class="edge">
 <title>symmetric_closure/2&#45;&gt;edges/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L99" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L99" xlink:title="calls">
 <path fill="none" stroke="black" d="M1606.44,-540.95C1586.4,-521.21 1553.45,-488.74 1530.57,-466.19"/>
 <polygon fill="black" stroke="black" points="1533.29,-463.96 1523.71,-459.43 1528.38,-468.95 1533.29,-463.96"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L99">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L99">
 <text xml:space="preserve" text-anchor="start" x="1568.07" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -401,7 +401,7 @@
 <title>invert_wedges/2</title>
 <polygon fill="cornsilk" stroke="black" points="1687.88,-458 1560.12,-458 1560.12,-422 1687.88,-422 1687.88,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1568.12" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L200">
+<g id="a_node16_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L200">
 <text xml:space="preserve" text-anchor="start" x="1573.38" y="-441.93" font-family="Monospace" font-size="11.00">invert_wedges/2</text>
 </a>
 </g>
@@ -413,12 +413,12 @@
 <!-- symmetric_closure/2&#45;&gt;invert_wedges/2 -->
 <g id="edge5" class="edge">
 <title>symmetric_closure/2&#45;&gt;invert_wedges/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L99" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L99" xlink:title="calls">
 <path fill="none" stroke="black" d="M1624,-540.95C1624,-522.25 1624,-492.12 1624,-469.83"/>
 <polygon fill="black" stroke="black" points="1627.5,-469.89 1624,-459.89 1620.5,-469.89 1627.5,-469.89"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L99">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L99">
 <text xml:space="preserve" text-anchor="start" x="1624" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -437,12 +437,12 @@
 <!-- symmetric_closure/2&#45;&gt;^^add_edges/3 -->
 <g id="edge25" class="edge">
 <title>symmetric_closure/2&#45;&gt;^^add_edges/3</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L99" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L99" xlink:title="calls">
 <path fill="none" stroke="black" d="M1644.51,-540.95C1668.12,-521.03 1707.08,-488.17 1733.84,-465.6"/>
 <polygon fill="black" stroke="black" points="1735.86,-468.47 1741.25,-459.35 1731.35,-463.12 1735.86,-468.47"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L99">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L99">
 <text xml:space="preserve" text-anchor="start" x="1697.67" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -452,7 +452,7 @@
 <title>topological_sort/2</title>
 <polygon fill="cornsilk" stroke="black" points="2200,-577.25 2052,-577.25 2052,-541.25 2200,-541.25 2200,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="2060" y="-561.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L106">
+<g id="a_node8_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L106">
 <text xml:space="preserve" text-anchor="start" x="2065.25" y="-561.17" font-family="Monospace" font-size="11.00">topological_sort/2</text>
 </a>
 </g>
@@ -466,7 +466,7 @@
 <title>strip_wpairs/2</title>
 <polygon fill="cornsilk" stroke="black" points="1959.5,-458 1838.5,-458 1838.5,-422 1959.5,-422 1959.5,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1846.5" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L206" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L206">
+<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L206" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L206">
 <text xml:space="preserve" text-anchor="start" x="1851.75" y="-441.93" font-family="Monospace" font-size="11.00">strip_wpairs/2</text>
 </a>
 </g>
@@ -478,12 +478,12 @@
 <!-- topological_sort/2&#45;&gt;strip_wpairs/2 -->
 <g id="edge6" class="edge">
 <title>topological_sort/2&#45;&gt;strip_wpairs/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="calls">
 <path fill="none" stroke="black" d="M2092.51,-540.95C2052.77,-520.43 1986.43,-486.16 1942.69,-463.57"/>
 <polygon fill="black" stroke="black" points="1944.47,-460.55 1933.98,-459.07 1941.26,-466.77 1944.47,-460.55"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L106">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L106">
 <text xml:space="preserve" text-anchor="start" x="2019.31" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -493,7 +493,7 @@
 <title>zeros/2</title>
 <polygon fill="cornsilk" stroke="black" points="2050.88,-458 1977.12,-458 1977.12,-422 2050.88,-422 2050.88,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1985.12" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L211">
+<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L211">
 <text xml:space="preserve" text-anchor="start" x="1990.38" y="-441.93" font-family="Monospace" font-size="11.00">zeros/2</text>
 </a>
 </g>
@@ -505,12 +505,12 @@
 <!-- topological_sort/2&#45;&gt;zeros/2 -->
 <g id="edge7" class="edge">
 <title>topological_sort/2&#45;&gt;zeros/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="calls">
 <path fill="none" stroke="black" d="M2109.47,-540.95C2090.7,-521.29 2059.87,-489.02 2038.35,-466.49"/>
 <polygon fill="black" stroke="black" points="2041.08,-464.28 2031.64,-459.47 2036.02,-469.11 2041.08,-464.28"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L106">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L106">
 <text xml:space="preserve" text-anchor="start" x="2073.36" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -520,7 +520,7 @@
 <title>count_edges/4</title>
 <polygon fill="cornsilk" stroke="black" points="2183.12,-458 2068.88,-458 2068.88,-422 2183.12,-422 2183.12,-458"/>
 <text xml:space="preserve" text-anchor="start" x="2076.88" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L215" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L215">
+<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L215" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L215">
 <text xml:space="preserve" text-anchor="start" x="2082.12" y="-441.93" font-family="Monospace" font-size="11.00">count_edges/4</text>
 </a>
 </g>
@@ -532,12 +532,12 @@
 <!-- topological_sort/2&#45;&gt;count_edges/4 -->
 <g id="edge8" class="edge">
 <title>topological_sort/2&#45;&gt;count_edges/4</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="calls">
 <path fill="none" stroke="black" d="M2126,-540.95C2126,-522.25 2126,-492.12 2126,-469.83"/>
 <polygon fill="black" stroke="black" points="2129.5,-469.89 2126,-459.89 2122.5,-469.89 2129.5,-469.89"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L106">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L106">
 <text xml:space="preserve" text-anchor="start" x="2126" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -547,7 +547,7 @@
 <title>select_zeros/3</title>
 <polygon fill="cornsilk" stroke="black" points="2322.5,-458 2201.5,-458 2201.5,-422 2322.5,-422 2322.5,-458"/>
 <text xml:space="preserve" text-anchor="start" x="2209.5" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node21_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L229">
+<g id="a_node21_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="2214.75" y="-441.93" font-family="Monospace" font-size="11.00">select_zeros/3</text>
 </a>
 </g>
@@ -559,12 +559,12 @@
 <!-- topological_sort/2&#45;&gt;select_zeros/3 -->
 <g id="edge9" class="edge">
 <title>topological_sort/2&#45;&gt;select_zeros/3</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="calls">
 <path fill="none" stroke="black" d="M2146.07,-540.95C2169.17,-521.03 2207.29,-488.17 2233.47,-465.6"/>
 <polygon fill="black" stroke="black" points="2235.42,-468.54 2240.7,-459.36 2230.84,-463.24 2235.42,-468.54"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L106">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L106">
 <text xml:space="preserve" text-anchor="start" x="2198.08" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -574,7 +574,7 @@
 <title>top_sort_loop/6</title>
 <polygon fill="cornsilk" stroke="black" points="2467.88,-458 2340.12,-458 2340.12,-422 2467.88,-422 2467.88,-458"/>
 <text xml:space="preserve" text-anchor="start" x="2348.12" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node22_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L236" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L236">
+<g id="a_node22_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L236" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L236">
 <text xml:space="preserve" text-anchor="start" x="2353.38" y="-441.93" font-family="Monospace" font-size="11.00">top_sort_loop/6</text>
 </a>
 </g>
@@ -586,12 +586,12 @@
 <!-- topological_sort/2&#45;&gt;top_sort_loop/6 -->
 <g id="edge10" class="edge">
 <title>topological_sort/2&#45;&gt;top_sort_loop/6</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="calls">
 <path fill="none" stroke="black" d="M2167.32,-540.82C2216.67,-520.01 2299.22,-485.19 2352.63,-462.66"/>
 <polygon fill="black" stroke="black" points="2353.66,-466.03 2361.51,-458.92 2350.94,-459.58 2353.66,-466.03"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L106">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L106">
 <text xml:space="preserve" text-anchor="start" x="2273.34" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -601,7 +601,7 @@
 <title>add_reversed_wneighbors/4</title>
 <polygon fill="cornsilk" stroke="black" points="1167.62,-338.75 972.38,-338.75 972.38,-302.75 1167.62,-302.75 1167.62,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="980.38" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L151">
+<g id="a_node11_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L151">
 <text xml:space="preserve" text-anchor="start" x="985.62" y="-322.68" font-family="Monospace" font-size="11.00">add_reversed_wneighbors/4</text>
 </a>
 </g>
@@ -613,12 +613,12 @@
 <!-- add_transposed_wedges/3&#45;&gt;add_reversed_wneighbors/4 -->
 <g id="edge15" class="edge">
 <title>add_transposed_wedges/3&#45;&gt;add_reversed_wneighbors/4</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L147" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L147" xlink:title="calls">
 <path fill="none" stroke="black" d="M1215.77,-421.7C1186.34,-401.52 1137.54,-368.06 1104.59,-345.47"/>
 <polygon fill="black" stroke="black" points="1106.81,-342.75 1096.58,-339.98 1102.85,-348.52 1106.81,-342.75"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L147">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L147">
 <text xml:space="preserve" text-anchor="start" x="1160.63" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -626,12 +626,12 @@
 <!-- add_reversed_wneighbors/4&#45;&gt;^^winsert_neighbor/4 -->
 <g id="edge26" class="edge">
 <title>add_reversed_wneighbors/4&#45;&gt;^^winsert_neighbor/4</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L152" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L152" xlink:title="calls">
 <path fill="none" stroke="black" d="M1041.37,-302.45C1007.7,-282.1 951.67,-248.23 914.29,-225.64"/>
 <polygon fill="black" stroke="black" points="916.41,-222.83 906.04,-220.65 912.79,-228.82 916.41,-222.83"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L152">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L152">
 <text xml:space="preserve" text-anchor="start" x="978.82" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -641,7 +641,7 @@
 <title>wwarshall_update_pairs/4</title>
 <polygon fill="cornsilk" stroke="black" points="1462.25,-338.75 1273.75,-338.75 1273.75,-302.75 1462.25,-302.75 1462.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1281.75" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L170">
+<g id="a_node13_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L170">
 <text xml:space="preserve" text-anchor="start" x="1287" y="-322.68" font-family="Monospace" font-size="11.00">wwarshall_update_pairs/4</text>
 </a>
 </g>
@@ -653,12 +653,12 @@
 <!-- wwarshall/3&#45;&gt;wwarshall_update_pairs/4 -->
 <g id="edge16" class="edge">
 <title>wwarshall/3&#45;&gt;wwarshall_update_pairs/4</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L163" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L163" xlink:title="calls">
 <path fill="none" stroke="black" d="M1395.28,-421.7C1390.13,-402.82 1381.8,-372.31 1375.7,-349.96"/>
 <polygon fill="black" stroke="black" points="1379.15,-349.31 1373.14,-340.58 1372.4,-351.15 1379.15,-349.31"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L163">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L163">
 <text xml:space="preserve" text-anchor="start" x="1384.96" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -668,7 +668,7 @@
 <title>wadd_through/4</title>
 <polygon fill="cornsilk" stroke="black" points="1376.5,-219.5 1255.5,-219.5 1255.5,-183.5 1376.5,-183.5 1376.5,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1263.5" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L178">
+<g id="a_node14_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="1268.75" y="-203.43" font-family="Monospace" font-size="11.00">wadd_through/4</text>
 </a>
 </g>
@@ -680,12 +680,12 @@
 <!-- wwarshall_update_pairs/4&#45;&gt;wadd_through/4 -->
 <g id="edge17" class="edge">
 <title>wwarshall_update_pairs/4&#45;&gt;wadd_through/4</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L171" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L171" xlink:title="calls">
 <path fill="none" stroke="black" d="M1360.33,-302.45C1351.88,-283.4 1338.18,-252.5 1328.24,-230.1"/>
 <polygon fill="black" stroke="black" points="1331.57,-228.98 1324.32,-221.26 1325.17,-231.82 1331.57,-228.98"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L171">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="1343.56" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -704,12 +704,12 @@
 <!-- wwarshall_update_pairs/4&#45;&gt;^^wfind/3 -->
 <g id="edge27" class="edge">
 <title>wwarshall_update_pairs/4&#45;&gt;^^wfind/3</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L171" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L171" xlink:title="calls">
 <path fill="none" stroke="black" d="M1378.33,-302.45C1389.81,-283.23 1408.48,-251.94 1421.89,-229.49"/>
 <polygon fill="black" stroke="black" points="1424.73,-231.55 1426.85,-221.17 1418.72,-227.96 1424.73,-231.55"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L171">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="1405.1" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -719,7 +719,7 @@
 <title>winsert_if_better/4</title>
 <polygon fill="cornsilk" stroke="black" points="1393.38,-100.25 1238.62,-100.25 1238.62,-64.25 1393.38,-64.25 1393.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1246.62" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L184">
+<g id="a_node15_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="1251.88" y="-84.17" font-family="Monospace" font-size="11.00">winsert_if_better/4</text>
 </a>
 </g>
@@ -731,12 +731,12 @@
 <!-- wadd_through/4&#45;&gt;winsert_if_better/4 -->
 <g id="edge18" class="edge">
 <title>wadd_through/4&#45;&gt;winsert_if_better/4</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L179" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L179" xlink:title="calls">
 <path fill="none" stroke="black" d="M1316,-183.2C1316,-164.5 1316,-134.37 1316,-112.08"/>
 <polygon fill="black" stroke="black" points="1319.5,-112.14 1316,-102.14 1312.5,-112.14 1319.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L179">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L179">
 <text xml:space="preserve" text-anchor="start" x="1316" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -758,12 +758,12 @@
 <!-- strip_wpairs/2&#45;&gt;pairs::keys/2 -->
 <g id="edge29" class="edge">
 <title>strip_wpairs/2&#45;&gt;pairs::keys/2</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L207" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L207" xlink:title="calls">
 <path fill="none" stroke="black" d="M1899,-421.7C1899,-403 1899,-372.87 1899,-350.58"/>
 <polygon fill="black" stroke="black" points="1902.5,-350.64 1899,-340.64 1895.5,-350.64 1902.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L207">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L207">
 <text xml:space="preserve" text-anchor="start" x="1899" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -773,7 +773,7 @@
 <title>incr_list/4</title>
 <polygon fill="cornsilk" stroke="black" points="2176.38,-338.75 2075.62,-338.75 2075.62,-302.75 2176.38,-302.75 2176.38,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="2083.62" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L220" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L220">
+<g id="a_node20_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L220" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L220">
 <text xml:space="preserve" text-anchor="start" x="2088.88" y="-322.68" font-family="Monospace" font-size="11.00">incr_list/4</text>
 </a>
 </g>
@@ -785,12 +785,12 @@
 <!-- count_edges/4&#45;&gt;incr_list/4 -->
 <g id="edge19" class="edge">
 <title>count_edges/4&#45;&gt;incr_list/4</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L216" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L216" xlink:title="calls">
 <path fill="none" stroke="black" d="M2126,-421.7C2126,-403 2126,-372.87 2126,-350.58"/>
 <polygon fill="black" stroke="black" points="2129.5,-350.64 2126,-340.64 2122.5,-350.64 2129.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L216">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L216">
 <text xml:space="preserve" text-anchor="start" x="2126" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -800,7 +800,7 @@
 <title>decr_list/6</title>
 <polygon fill="cornsilk" stroke="black" points="2454.38,-338.75 2353.62,-338.75 2353.62,-302.75 2454.38,-302.75 2454.38,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="2361.62" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node23_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L242" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L242">
+<g id="a_node23_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L242" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L242">
 <text xml:space="preserve" text-anchor="start" x="2366.88" y="-322.68" font-family="Monospace" font-size="11.00">decr_list/6</text>
 </a>
 </g>
@@ -812,12 +812,12 @@
 <!-- top_sort_loop/6&#45;&gt;decr_list/6 -->
 <g id="edge20" class="edge">
 <title>top_sort_loop/6&#45;&gt;decr_list/6</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L237" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L237" xlink:title="calls">
 <path fill="none" stroke="black" d="M2404,-421.7C2404,-403 2404,-372.87 2404,-350.58"/>
 <polygon fill="black" stroke="black" points="2407.5,-350.64 2404,-340.64 2400.5,-350.64 2407.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L237">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L237">
 <text xml:space="preserve" text-anchor="start" x="2404" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -836,12 +836,12 @@
 <!-- dijkstra_all/4&#45;&gt;^^relax_neighbors/7 -->
 <g id="edge28" class="edge">
 <title>dijkstra_all/4&#45;&gt;^^relax_neighbors/7</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L258" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L258" xlink:title="calls">
 <path fill="none" stroke="black" d="M81.36,-421.7C83.93,-402.91 88.06,-372.59 91.11,-350.27"/>
 <polygon fill="black" stroke="black" points="94.54,-351 92.42,-340.62 87.6,-350.06 94.54,-351"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L258" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L258">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L258" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L258">
 <text xml:space="preserve" text-anchor="start" x="87.48" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -849,12 +849,12 @@
 <!-- add_tree_edges/3&#45;&gt;add_edge/5 -->
 <g id="edge21" class="edge">
 <title>add_tree_edges/3&#45;&gt;add_edge/5</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L291" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L291" xlink:title="calls">
 <path fill="none" stroke="black" d="M645.76,-421.7C662.37,-402.22 689.56,-370.34 708.75,-347.83"/>
 <polygon fill="black" stroke="black" points="711.38,-350.15 715.2,-340.27 706.05,-345.61 711.38,-350.15"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/abbebdcda4b065585c0722eaa0412bfae256ca1a/library/graphs/weighted_directed_graph.lgt#L291">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/792cd1d576e4d359aa9dfda77f2414b294da8835/library/graphs/weighted_directed_graph.lgt#L291">
 <text xml:space="preserve" text-anchor="start" x="684" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
