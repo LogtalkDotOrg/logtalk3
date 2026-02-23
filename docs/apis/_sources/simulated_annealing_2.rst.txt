@@ -54,25 +54,6 @@ Simulated annealing optimization algorithm. Parameterized by a problem object im
 Public predicates
 -----------------
 
-.. index:: run/2
-.. _simulated_annealing/2::run/2:
-
-``run/2``
-^^^^^^^^^
-
-Runs the simulated annealing algorithm using default options and returns the best state found and its energy.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``run(BestState,BestEnergy)``
-| **Mode and number of proofs:**
-|    ``run(-term,-number)`` - ``one``
-
-
-------------
-
 .. index:: estimate_temperature/1
 .. _simulated_annealing/2::estimate_temperature/1:
 
@@ -112,6 +93,25 @@ Estimates an initial temperature by sampling random neighbor transitions. The te
 
     - ``samples(N)`` option: Number of random neighbor transitions to sample (default: ``200``).
     - ``acceptance_rate(P)`` option: Target initial acceptance rate as an integer percentage between 1 and 99 (default: ``80``).
+
+
+------------
+
+.. index:: run/2
+.. _simulated_annealing/2::run/2:
+
+``run/2``
+^^^^^^^^^
+
+Runs the simulated annealing algorithm using default options and returns the best state found and its energy.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestState,BestEnergy)``
+| **Mode and number of proofs:**
+|    ``run(-term,-number)`` - ``one``
 
 
 ------------

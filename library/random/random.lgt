@@ -25,10 +25,10 @@
 	:- info([
 		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2026-01-28,
+		date is 2026-02-23,
 		comment is 'Portable random number generator predicates.',
 		parameters is [
-			'Algorithm' - 'Random number generator algorithm. One of ``as183``, ``splitmix64``, ``xoshiro128pp``, ``xoshiro128ss``, ``xoshiro256pp``, ``xoshiro256ss``.'
+			'Algorithm' - 'Random number generator algorithm. One of ``as183``, ``splitmix64``, ``xoshiro128pp``, ``xoshiro128ss``, ``xoshiro256pp``, ``xoshiro256ss``, ``well512a``.'
 		],
 		remarks is [
 			'Multiple random number generators' - 'To define multiple random number generators, simply extend this object. The derived objects must send to *self* the ``reset_seed/0`` message.',
@@ -39,6 +39,7 @@
 			'``xoshiro256pp``' - 'Xoshiro256++ random number generator. 64-bit state-of-the-art PRNG with period 2^256-1. Algorithm by David Blackman and Sebastiano Vigna.',
 			'``xoshiro256ss``' - 'Xoshiro256** random number generator. 64-bit PRNG with period 2^256-1. Algorithm by David Blackman and Sebastiano Vigna.',
 			'``splitmix64``' - 'SplitMix64 random number generator. 64-bit PRNG primarily used for seeding other generators. Algorithm by Guy L. Steele Jr. et al.',
+			'``well512a``' - 'WELL512a 16x32-bit state-of-the-art PRNG with period 2^512-1. Algorithm by by François Panneton, Pierre L''Ecuyer, and Makoto Matsumoto.',
 			'Algorithms backend compatibility' - 'The SplitMix64, Xoshiro256++, and Xoshiro256** algorithms require support for unbound integer arithmetic.'
 		],
 		see_also is [random, fast_random(_), backend_random]
