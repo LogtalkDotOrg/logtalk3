@@ -936,6 +936,18 @@ To load an entity, always load the library that includes it using the goal ``log
    setp <setp_0>
    treap_set <treap_set_0>
 
+``library/simulated_annealing/``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   simulated_annealing(Problem) <simulated_annealing_1>
+   simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing_2>
+   simulated_annealing_protocol <simulated_annealing_protocol_0>
+
 ``library/sockets/``
 --------------------
 

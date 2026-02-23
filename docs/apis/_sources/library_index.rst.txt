@@ -1117,6 +1117,18 @@ To load any library (including developer tools, ports, and contributions), use t
    setp <setp_0>
    treap_set <treap_set_0>
 
+:ref:`simulated_annealing <library_simulated_annealing>`
+--------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   simulated_annealing(Problem) <simulated_annealing_1>
+   simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing_2>
+   simulated_annealing_protocol <simulated_annealing_protocol_0>
+
 :ref:`sockets <library_sockets>`
 --------------------------------
 

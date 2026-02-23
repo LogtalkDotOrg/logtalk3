@@ -1,0 +1,187 @@
+.. index:: single: simulated_annealing(Problem,RandomAlgorithm)
+.. _simulated_annealing/2:
+
+.. rst-class:: right
+
+**object**
+
+``simulated_annealing(Problem,RandomAlgorithm)``
+================================================
+
+* ``Problem`` - Problem object implementing ``simulated_annealing_protocol``.
+* ``RandomAlgorithm`` - Random number generator algorithm for the ``fast_random`` library (e.g. ``xoshiro128pp``, ``xoshiro256ss``, ``well512a``, ...).
+
+
+Simulated annealing optimization algorithm. Parameterized by a problem object implementing the ``simulated_annealing_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes the energy (cost) function defined by the problem. Custom cooling schedules, stop conditions, delta-energy neighbor generation, progress reporting, and reheating restarts can be defined by the problem object or configured via options; suitable defaults are used otherwise.
+
+| **Availability:** 
+|    ``logtalk_load(simulated_annealing(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-22
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Algorithm: Simulated annealing is a probabilistic metaheuristic for global optimization. It explores the solution space by iteratively generating neighbor states and accepting them based on an energy-dependent probability that decreases over time as the temperature cools.
+   - Acceptance criterion: Uses the standard Boltzmann acceptance criterion: a worse neighbor is accepted with probability ``exp(-DeltaE / Temperature)``.
+   - Default cooling schedule: Geometric cooling: ``NewTemp is Temp * 0.995``. Override by defining ``cooling_schedule/3`` in the problem object.
+   - Default stop condition: The search stops when the maximum number of steps is reached or the temperature drops below the minimum temperature. Override by defining ``stop_condition/3`` in the problem object.
+   - Delta-energy optimization: If the problem object defines ``neighbor_state/3``, the algorithm uses the returned delta energy directly instead of calling ``state_energy/2`` on the neighbor. This is useful when computing the energy change is cheaper than recomputing the full energy.
+   - Progress reporting: If the problem object defines ``progress/5``, it is called periodically with the current step, temperature, best energy, acceptance rate, and improvement rate. The reporting interval is controlled by the ``updates(N)`` option. A final report is always produced when the loop terminates.
+   - Best state tracking: The algorithm tracks the best state found across all iterations and across all restart cycles, not just the final state.
+   - Seed control: The ``seed(S)`` option initializes the random number generator for reproducible runs.
+   - Reheating restart: The ``restarts(N)`` option runs N additional SA cycles after the first. Each restart reheats the temperature to the initial value and begins from the best state found so far, allowing the search to escape local minima. Statistics accumulate across all cycles.
+   - Auto-temperature estimation: The ``estimate_temperature/1-2`` predicates sample random neighbor transitions and compute an initial temperature that would produce a target acceptance rate. This avoids manual tuning of the initial temperature.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: run/2
+.. _simulated_annealing/2::run/2:
+
+``run/2``
+^^^^^^^^^
+
+Runs the simulated annealing algorithm using default options and returns the best state found and its energy.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestState,BestEnergy)``
+| **Mode and number of proofs:**
+|    ``run(-term,-number)`` - ``one``
+
+
+------------
+
+.. index:: estimate_temperature/1
+.. _simulated_annealing/2::estimate_temperature/1:
+
+``estimate_temperature/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Estimates an initial temperature for the problem using default options (200 samples, 80% target acceptance rate).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``estimate_temperature(Temperature)``
+| **Mode and number of proofs:**
+|    ``estimate_temperature(-float)`` - ``one``
+
+
+------------
+
+.. index:: estimate_temperature/2
+.. _simulated_annealing/2::estimate_temperature/2:
+
+``estimate_temperature/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Estimates an initial temperature by sampling random neighbor transitions. The temperature is computed so that the Boltzmann acceptance probability for the average uphill move equals the target acceptance rate. Sampling starts from the problem initial state and follows a random walk.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``estimate_temperature(Temperature,Options)``
+| **Mode and number of proofs:**
+|    ``estimate_temperature(-float,+list(compound))`` - ``one``
+
+| **Remarks:**
+
+    - ``samples(N)`` option: Number of random neighbor transitions to sample (default: ``200``).
+    - ``acceptance_rate(P)`` option: Target initial acceptance rate as an integer percentage between 1 and 99 (default: ``80``).
+
+
+------------
+
+.. index:: run/3
+.. _simulated_annealing/2::run/3:
+
+``run/3``
+^^^^^^^^^
+
+Runs the simulated annealing algorithm using the given options and returns the best state found and its energy.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestState,BestEnergy,Options)``
+| **Mode and number of proofs:**
+|    ``run(-term,-number,+list(compound))`` - ``one``
+
+| **Remarks:**
+
+    - ``max_steps(N)`` option: Maximum number of iterations per cycle (default: ``10000``).
+    - ``min_temperature(T)`` option: Minimum temperature floor; search stops when temperature drops below this value (default: ``0.001``).
+    - ``updates(N)`` option: Number of progress reports during the run. Set to ``0`` to disable. Progress is reported by calling ``progress/5`` on the problem object (default: ``0``).
+    - ``seed(S)`` option: Positive integer seed for the random number generator, enabling reproducible runs (default: none).
+    - ``restarts(N)`` option: Number of additional SA cycles after the first. Each restart reheats the temperature and begins from the best state found so far (default: ``0``).
+
+
+------------
+
+.. index:: run/4
+.. _simulated_annealing/2::run/4:
+
+``run/4``
+^^^^^^^^^
+
+Runs the simulated annealing algorithm using the given options, returns the best state found and its energy, and returns run statistics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestState,BestEnergy,Statistics,Options)``
+| **Mode and number of proofs:**
+|    ``run(-term,-number,-list(compound),+list(compound))`` - ``one``
+
+| **Remarks:**
+
+    - Statistics list: A list of ``Key(Value)`` pairs: ``steps(N)`` is the number of steps executed, ``acceptances(A)`` is the number of accepted moves, ``improvements(I)`` is the number of moves that improved the best energy, and ``final_temperature(T)`` is the temperature at termination.
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`simulated_annealing(Problem) <simulated_annealing/1>`, :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0>`
+

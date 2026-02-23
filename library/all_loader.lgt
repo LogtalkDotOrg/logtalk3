@@ -110,6 +110,7 @@
 		stomp(loader),
 		linda(loader),
 		command_line_options(loader),
+		simulated_annealing(loader),
 		cloning,
 		counters,
 		streamvars

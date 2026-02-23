@@ -158,6 +158,8 @@ work and libraries.
 * ADDED: New `validations` library supporting accumulation of errors as
 a complement to the `expecteds` library fast-fail semantics.
 
+* ADDED: New `simulated_annealing` library.
+
 * ADDED: Types `text` and `text(CharSet)` to the `arbitrary` and `types`
 libraries. These types support representing text using atoms, character 
 lists, or character code lists.

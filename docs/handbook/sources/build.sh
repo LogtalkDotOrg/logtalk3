@@ -145,6 +145,7 @@ sed '1,19d' ../../../library/reader/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,19d' ../../../library/recorded_database/NOTES.md | pandoc -f gfm -t rst -o libraries/recorded_database.rst
 sed '1,19d' ../../../library/redis/NOTES.md | pandoc -f gfm -t rst -o libraries/redis.rst
 sed '1,19d' ../../../library/sets/NOTES.md | pandoc -f gfm -t rst -o libraries/sets.rst
+sed '1,19d' ../../../library/simulated_annealing/NOTES.md | pandoc -f gfm -t rst -o libraries/simulated_annealing.rst
 sed '1,19d' ../../../library/sockets/NOTES.md | pandoc -f gfm -t rst -o libraries/sockets.rst
 sed '1,19d' ../../../library/statistics/NOTES.md | pandoc -f gfm -t rst -o libraries/statistics.rst
 sed '1,19d' ../../../library/stemming/NOTES.md | pandoc -f gfm -t rst -o libraries/stemming.rst

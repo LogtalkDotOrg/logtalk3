@@ -2104,6 +2104,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`blank_grammars(Format) <blank_grammars/1::controls//0>`
 
+``cooling_schedule/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::cooling_schedule/3>`
+
 ``copy_file/2``
 ---------------
 
@@ -3840,6 +3850,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`lgtunit <lgtunit/0::essentially_equal/3>`
 * :ref:`number <number/0::essentially_equal/3>`
+
+``estimate_temperature/1``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2::estimate_temperature/1>`
+
+``estimate_temperature/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2::estimate_temperature/2>`
 
 ``euclidean_distance/3``
 ------------------------
@@ -5855,6 +5885,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`subsequences_protocol <subsequences_protocol/0::init_tails/2>`
+
+``initial_state/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::initial_state/1>`
+
+``initial_temperature/1``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::initial_temperature/1>`
 
 ``initialize/1``
 ----------------
@@ -8619,6 +8669,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`number_grammars(Format) <number_grammars/1::natural//1>`
 
+``neighbor_state/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::neighbor_state/2>`
+
+``neighbor_state/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::neighbor_state/3>`
+
 ``neighbors/3``
 ---------------
 
@@ -10327,6 +10397,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`metagol <metagol/0::program_to_clauses/2>`
 
+``progress/5``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::progress/5>`
+
 ``proper_prefix/2``
 -------------------
 
@@ -11602,6 +11682,27 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`lgtunit <lgtunit/0::run/2>`
+* :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2::run/2>`
+
+``run/3``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2::run/3>`
+
+``run/4``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2::run/4>`
 
 ``run_test_sets/1``
 -------------------
@@ -12640,6 +12741,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`intervalp <intervalp/0::starts/2>`
 
+``state_energy/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::state_energy/2>`
+
 ``stats/1``
 -----------
 
@@ -12699,6 +12810,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ports_profiler <ports_profiler/0::stop/0>`
+
+``stop_condition/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::stop_condition/3>`
 
 ``stop_redirect_to_file/0``
 ---------------------------

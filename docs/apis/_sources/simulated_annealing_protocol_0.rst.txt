@@ -1,0 +1,211 @@
+.. index:: single: simulated_annealing_protocol
+.. _simulated_annealing_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``simulated_annealing_protocol``
+================================
+
+Protocol for simulated annealing problem definitions. A problem object must define the four required predicates and may optionally define predicates to override cooling, stopping, neighbor generation with delta energy, and progress reporting defaults.
+
+| **Availability:** 
+|    ``logtalk_load(simulated_annealing(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-22
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: initial_state/1
+.. _simulated_annealing_protocol/0::initial_state/1:
+
+``initial_state/1``
+^^^^^^^^^^^^^^^^^^^
+
+Returns an initial state for the optimization problem.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initial_state(State)``
+| **Mode and number of proofs:**
+|    ``initial_state(-term)`` - ``one``
+
+
+------------
+
+.. index:: neighbor_state/2
+.. _simulated_annealing_protocol/0::neighbor_state/2:
+
+``neighbor_state/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Generates a neighboring state from the given state. This is the most problem-specific predicate and its definition determines the quality of the search.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``neighbor_state(State,Neighbor)``
+| **Mode and number of proofs:**
+|    ``neighbor_state(+term,-term)`` - ``one``
+
+
+------------
+
+.. index:: neighbor_state/3
+.. _simulated_annealing_protocol/0::neighbor_state/3:
+
+``neighbor_state/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Generates a neighboring state and returns the energy change (delta) directly, avoiding a full energy recomputation. Optional. When not defined by the problem, the algorithm calls ``neighbor_state/2`` and ``state_energy/2`` instead.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``neighbor_state(State,Neighbor,DeltaEnergy)``
+| **Mode and number of proofs:**
+|    ``neighbor_state(+term,-term,-number)`` - ``one``
+
+
+------------
+
+.. index:: state_energy/2
+.. _simulated_annealing_protocol/0::state_energy/2:
+
+``state_energy/2``
+^^^^^^^^^^^^^^^^^^
+
+Computes the energy (cost) of the given state. The algorithm minimizes this value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``state_energy(State,Energy)``
+| **Mode and number of proofs:**
+|    ``state_energy(+term,-number)`` - ``one``
+
+
+------------
+
+.. index:: initial_temperature/1
+.. _simulated_annealing_protocol/0::initial_temperature/1:
+
+``initial_temperature/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the initial temperature for the annealing schedule. Higher temperatures increase the probability of accepting worse solutions early on.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initial_temperature(Temperature)``
+| **Mode and number of proofs:**
+|    ``initial_temperature(-number)`` - ``one``
+
+
+------------
+
+.. index:: cooling_schedule/3
+.. _simulated_annealing_protocol/0::cooling_schedule/3:
+
+``cooling_schedule/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the next temperature from the current temperature and step number. Optional. When not defined by the problem, a default geometric cooling schedule is used (``NewTemp is Temp * 0.995``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cooling_schedule(Temperature,Step,NewTemperature)``
+| **Mode and number of proofs:**
+|    ``cooling_schedule(+number,+non_negative_integer,-number)`` - ``one``
+
+
+------------
+
+.. index:: stop_condition/3
+.. _simulated_annealing_protocol/0::stop_condition/3:
+
+``stop_condition/3``
+^^^^^^^^^^^^^^^^^^^^
+
+True when the search should stop given the current step, temperature, and best energy found so far. Optional. When not defined by the problem, the search runs until the maximum number of steps is reached or the minimum temperature is reached.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stop_condition(Step,Temperature,BestEnergy)``
+| **Mode and number of proofs:**
+|    ``stop_condition(+non_negative_integer,+number,+number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: progress/5
+.. _simulated_annealing_protocol/0::progress/5:
+
+``progress/5``
+^^^^^^^^^^^^^^
+
+Called periodically to report optimization progress. Optional. When not defined by the problem, progress reporting is skipped. The acceptance and improvement rates are values between 0.0 and 1.0 computed over the interval since the last progress report.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``progress(Step,Temperature,BestEnergy,AcceptanceRate,ImprovementRate)``
+| **Mode and number of proofs:**
+|    ``progress(+non_negative_integer,+number,+number,+number,+number)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`simulated_annealing(Problem) <simulated_annealing/1>`
+

@@ -1,0 +1,63 @@
+.. index:: single: simulated_annealing(Problem)
+.. _simulated_annealing/1:
+
+.. rst-class:: right
+
+**object**
+
+``simulated_annealing(Problem)``
+================================
+
+* ``Problem`` - Problem object implementing ``simulated_annealing_protocol``.
+
+
+Simulated annealing optimization algorithm using the Xoshiro128++ random number generator. Convenience object that extends ``simulated_annealing/2`` with the random algorithm bound to ``xoshiro128pp``.
+
+| **Availability:** 
+|    ``logtalk_load(simulated_annealing(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-22
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`simulated_annealing(Problem,xoshiro128pp) <simulated_annealing/2>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`simulated_annealing/2::estimate_temperature/1`  :ref:`simulated_annealing/2::estimate_temperature/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`simulated_annealing/2::run/2`  :ref:`simulated_annealing/2::run/3`  :ref:`simulated_annealing/2::run/4`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2>`, :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0>`
+

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>simulated_annealing &mdash; Logtalk 3.98.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fd83a980"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="statistics" href="statistics.html" />
+    <link rel="prev" title="sockets" href="sockets.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.98.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ada_boost.html"><code class="docutils literal notranslate"><span class="pre">ada_boost</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="amqp.html"><code class="docutils literal notranslate"><span class="pre">amqp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignvars.html"><code class="docutils literal notranslate"><span class="pre">assignvars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="avro.html"><code class="docutils literal notranslate"><span class="pre">avro</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base32.html"><code class="docutils literal notranslate"><span class="pre">base32</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base58.html"><code class="docutils literal notranslate"><span class="pre">base58</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base64.html"><code class="docutils literal notranslate"><span class="pre">base64</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base85.html"><code class="docutils literal notranslate"><span class="pre">base85</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="c45.html"><code class="docutils literal notranslate"><span class="pre">c45</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds.html"><code class="docutils literal notranslate"><span class="pre">ccsds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="classifier_protocols.html"><code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line_options.html"><code class="docutils literal notranslate"><span class="pre">command_line_options</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="datalog.html"><code class="docutils literal notranslate"><span class="pre">datalog</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependents.html"><code class="docutils literal notranslate"><span class="pre">dependents</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="deques.html"><code class="docutils literal notranslate"><span class="pre">deques</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dictionaries.html"><code class="docutils literal notranslate"><span class="pre">dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dif.html"><code class="docutils literal notranslate"><span class="pre">dif</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html"><code class="docutils literal notranslate"><span class="pre">edcg</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html"><code class="docutils literal notranslate"><span class="pre">events</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="format.html"><code class="docutils literal notranslate"><span class="pre">format</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="genint.html"><code class="docutils literal notranslate"><span class="pre">genint</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphs.html"><code class="docutils literal notranslate"><span class="pre">graphs</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchies.html"><code class="docutils literal notranslate"><span class="pre">hierarchies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ids.html"><code class="docutils literal notranslate"><span class="pre">ids</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="isolation_forest.html"><code class="docutils literal notranslate"><span class="pre">isolation_forest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="java.html"><code class="docutils literal notranslate"><span class="pre">java</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_ld.html"><code class="docutils literal notranslate"><span class="pre">json_ld</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_lines.html"><code class="docutils literal notranslate"><span class="pre">json_lines</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_rpc.html"><code class="docutils literal notranslate"><span class="pre">json_rpc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_schema.html"><code class="docutils literal notranslate"><span class="pre">json_schema</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="knn.html"><code class="docutils literal notranslate"><span class="pre">knn</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linda.html"><code class="docutils literal notranslate"><span class="pre">linda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="listing.html"><code class="docutils literal notranslate"><span class="pre">listing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loops.html"><code class="docutils literal notranslate"><span class="pre">loops</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="memcached.html"><code class="docutils literal notranslate"><span class="pre">memcached</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutations.html"><code class="docutils literal notranslate"><span class="pre">mutations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="naive_bayes.html"><code class="docutils literal notranslate"><span class="pre">naive_bayes</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nearest_centroid.html"><code class="docutils literal notranslate"><span class="pre">nearest_centroid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nested_dictionaries.html"><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html"><code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="docutils literal notranslate"><span class="pre">process</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="protobuf.html"><code class="docutils literal notranslate"><span class="pre">protobuf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random_forest.html"><code class="docutils literal notranslate"><span class="pre">random_forest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reader.html"><code class="docutils literal notranslate"><span class="pre">reader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorded_database.html"><code class="docutils literal notranslate"><span class="pre">recorded_database</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sockets.html"><code class="docutils literal notranslate"><span class="pre">sockets</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">simulated_annealing</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-a-problem">Defining a problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-statistics">Run statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#defining-a-problem-1">Defining a problem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-the-algorithm">Running the algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-with-custom-options">Running with custom options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-with-statistics">Running with statistics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reproducible-runs-with-seed">Reproducible runs with seed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reheating-restarts">Reheating restarts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#auto-temperature-estimation">Auto-temperature estimation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-a-custom-random-number-generator">Using a custom random number generator</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stemming.html"><code class="docutils literal notranslate"><span class="pre">stemming</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stomp.html"><code class="docutils literal notranslate"><span class="pre">stomp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="string_distance.html"><code class="docutils literal notranslate"><span class="pre">string_distance</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings.html"><code class="docutils literal notranslate"><span class="pre">strings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="subsequences.html"><code class="docutils literal notranslate"><span class="pre">subsequences</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="toon.html"><code class="docutils literal notranslate"><span class="pre">toon</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tsv.html"><code class="docutils literal notranslate"><span class="pre">tsv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ulid.html"><code class="docutils literal notranslate"><span class="pre">ulid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html"><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="union_find.html"><code class="docutils literal notranslate"><span class="pre">union_find</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="url.html"><code class="docutils literal notranslate"><span class="pre">url</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="uuid.html"><code class="docutils literal notranslate"><span class="pre">uuid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="validations.html"><code class="docutils literal notranslate"><span class="pre">validations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html"><code class="docutils literal notranslate"><span class="pre">yaml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="zippers.html"><code class="docutils literal notranslate"><span class="pre">zippers</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../apis/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Libraries</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">simulated_annealing</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/simulated_annealing.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="simulated-annealing">
+<span id="library-simulated-annealing"></span><h1><code class="docutils literal notranslate"><span class="pre">simulated_annealing</span></code><a class="headerlink" href="#simulated-annealing" title="Link to this heading"></a></h1>
+<p>Simulated annealing is a probabilistic meta-heuristic for approximating
+the global optimum of a given function. It is particularly useful for
+combinatorial optimization problems such as the Traveling Salesman
+Problem (TSP), graph coloring, and scheduling.</p>
+<p>The library provides the parametric object
+<code class="docutils literal notranslate"><span class="pre">simulated_annealing(Problem,</span> <span class="pre">RandomAlgorithm)</span></code> where <code class="docutils literal notranslate"><span class="pre">Problem</span></code> is
+an object implementing the <code class="docutils literal notranslate"><span class="pre">simulated_annealing_protocol</span></code> protocol and
+<code class="docutils literal notranslate"><span class="pre">RandomAlgorithm</span></code> is one of the algorithms supported by the
+<code class="docutils literal notranslate"><span class="pre">fast_random</span></code> library. The algorithm minimizes the energy (cost)
+function defined by the problem.</p>
+<p>A convenience object <code class="docutils literal notranslate"><span class="pre">simulated_annealing(Problem)</span></code> is also provided,
+using the Xoshiro128++ random number generator (<code class="docutils literal notranslate"><span class="pre">xoshiro128pp</span></code>) as the
+default.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../docs/library_index.html#simulated-annealing">../../docs/library_index.html#simulated-annealing</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(simulated_annealing(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(simulated_annealing(tester)).
+</pre></div>
+</div>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Configurable random number generator</strong> — the algorithm is
+parameterized by a <code class="docutils literal notranslate"><span class="pre">fast_random</span></code> algorithm. Available algorithms
+include <code class="docutils literal notranslate"><span class="pre">xoshiro128pp</span></code>, <code class="docutils literal notranslate"><span class="pre">xoshiro128ss</span></code>, <code class="docutils literal notranslate"><span class="pre">xoshiro256pp</span></code>,
+<code class="docutils literal notranslate"><span class="pre">xoshiro256ss</span></code>, <code class="docutils literal notranslate"><span class="pre">well512a</span></code>, <code class="docutils literal notranslate"><span class="pre">splitmix64</span></code>, and <code class="docutils literal notranslate"><span class="pre">as183</span></code>. The
+convenience object <code class="docutils literal notranslate"><span class="pre">simulated_annealing(Problem)</span></code> defaults to
+<code class="docutils literal notranslate"><span class="pre">xoshiro128pp</span></code>.</p></li>
+<li><p><strong>Boltzmann acceptance criterion</strong> — a worse neighbor is accepted with
+probability <code class="docutils literal notranslate"><span class="pre">exp(-DeltaE</span> <span class="pre">/</span> <span class="pre">Temperature)</span></code>, allowing the search to
+escape local minima early in the run while converging as the
+temperature cools.</p></li>
+<li><p><strong>Configurable cooling schedule</strong> — default geometric cooling
+(<code class="docutils literal notranslate"><span class="pre">NewTemp</span> <span class="pre">is</span> <span class="pre">Temp</span> <span class="pre">*</span> <span class="pre">0.995</span></code>), overridable by defining
+<code class="docutils literal notranslate"><span class="pre">cooling_schedule/3</span></code> in the problem object.</p></li>
+<li><p><strong>Custom stop conditions</strong> — the search stops when the maximum number
+of steps is reached or the temperature drops below the minimum
+temperature. A problem object can define <code class="docutils literal notranslate"><span class="pre">stop_condition/3</span></code> to
+terminate early (e.g. when a good-enough solution is found).</p></li>
+<li><p><strong>Delta-energy optimization</strong> — when the problem object defines
+<code class="docutils literal notranslate"><span class="pre">neighbor_state/3</span></code>, the algorithm uses the returned energy delta
+directly instead of recomputing the full energy. This is useful when
+computing the change is cheaper than evaluating the full cost (e.g. a
+2-opt swap in TSP).</p></li>
+<li><p><strong>Best state tracking</strong> — the algorithm tracks the best state found
+across all iterations and across all restart cycles, not just the
+final state.</p></li>
+<li><p><strong>Progress reporting</strong> — if the problem object defines <code class="docutils literal notranslate"><span class="pre">progress/5</span></code>,
+it is called periodically with the current step, temperature, best
+energy, acceptance rate, and improvement rate. A final report is
+always produced when the loop terminates.</p></li>
+<li><p><strong>Run statistics</strong> — the <code class="docutils literal notranslate"><span class="pre">run/4</span></code> predicate returns a list of
+statistics including the number of steps, acceptances, improvements,
+and the final temperature.</p></li>
+<li><p><strong>Seed control</strong> — the <code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> option initializes the random
+number generator for reproducible runs.</p></li>
+<li><p><strong>Reheating restarts</strong> — the <code class="docutils literal notranslate"><span class="pre">restarts(N)</span></code> option runs N additional
+SA cycles after the first. Each restart reheats the temperature to the
+initial value and begins from the best state found so far, allowing
+the search to escape deep local minima. Statistics accumulate across
+all cycles.</p></li>
+<li><p><strong>Auto-temperature estimation</strong> — the <code class="docutils literal notranslate"><span class="pre">estimate_temperature/1-2</span></code>
+predicates sample random neighbor transitions and compute an initial
+temperature that would produce a target acceptance rate, avoiding
+manual tuning.</p></li>
+</ul>
+</section>
+<section id="defining-a-problem">
+<h2>Defining a problem<a class="headerlink" href="#defining-a-problem" title="Link to this heading"></a></h2>
+<p>A problem object must implement the <code class="docutils literal notranslate"><span class="pre">simulated_annealing_protocol</span></code>
+protocol by defining (at least) the following four predicates:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_state(-State)</span></code> — returns the starting state.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">neighbor_state(+State,</span> <span class="pre">-Neighbor)</span></code> — generates a neighboring state.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">state_energy(+State,</span> <span class="pre">-Energy)</span></code> — computes the cost of a state (to
+be minimized).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_temperature(-Temperature)</span></code> — returns the starting
+temperature.</p></li>
+</ul>
+<p>Optionally, the problem object may also define:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">neighbor_state(+State,</span> <span class="pre">-Neighbor,</span> <span class="pre">-DeltaEnergy)</span></code> — generates a
+neighboring state and returns the energy change directly, avoiding a
+full energy recomputation. Useful when computing the delta is cheaper
+than recomputing the full energy (e.g. TSP with a 2-opt swap).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cooling_schedule(+Temperature,</span> <span class="pre">+Step,</span> <span class="pre">-NewTemperature)</span></code> — computes
+the next temperature. Default: geometric cooling
+(<code class="docutils literal notranslate"><span class="pre">NewTemp</span> <span class="pre">is</span> <span class="pre">Temp</span> <span class="pre">*</span> <span class="pre">0.995</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stop_condition(+Step,</span> <span class="pre">+Temperature,</span> <span class="pre">+BestEnergy)</span></code> — succeeds when
+the search should terminate early (e.g. when a good-enough solution is
+found). Default: the search runs until the maximum number of steps is
+reached or the temperature drops below the minimum temperature.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">progress(+Step,</span> <span class="pre">+Temperature,</span> <span class="pre">+BestEnergy,</span> <span class="pre">+AcceptanceRate,</span> <span class="pre">+ImprovementRate)</span></code>
+— called periodically during the optimization to report progress. A
+final report is always produced when the loop terminates. The
+acceptance and improvement rates are floats between 0.0 and 1.0.</p></li>
+</ul>
+</section>
+<section id="options">
+<h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
+<p>Options for the <code class="docutils literal notranslate"><span class="pre">run/3-4</span></code> predicates:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">max_steps(N)</span></code> — maximum number of iterations per cycle (default:
+<code class="docutils literal notranslate"><span class="pre">10000</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min_temperature(T)</span></code> — minimum temperature floor; the search stops
+when the temperature drops below this value (default: <code class="docutils literal notranslate"><span class="pre">0.001</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> — number of progress reports during the run. Progress
+is reported by calling <code class="docutils literal notranslate"><span class="pre">progress/5</span></code> on the problem object. Set to
+<code class="docutils literal notranslate"><span class="pre">0</span></code> to disable (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> — positive integer seed for the random number generator,
+enabling reproducible runs (default: none).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">restarts(N)</span></code> — number of additional SA cycles after the first. Each
+restart reheats the temperature to the initial value and begins from
+the best state found so far, allowing the search to escape local
+minima (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
+</ul>
+<p>Options for the <code class="docutils literal notranslate"><span class="pre">estimate_temperature/2</span></code> predicate:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">samples(N)</span></code> — number of random neighbor transitions to sample
+(default: <code class="docutils literal notranslate"><span class="pre">200</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">acceptance_rate(P)</span></code> — target initial acceptance rate as an integer
+percentage between 1 and 99 (default: <code class="docutils literal notranslate"><span class="pre">80</span></code>).</p></li>
+</ul>
+</section>
+<section id="run-statistics">
+<h2>Run statistics<a class="headerlink" href="#run-statistics" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">run/4</span></code> predicate returns a list of statistics about the completed
+run:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">steps(N)</span></code> — total number of steps executed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">acceptances(A)</span></code> — number of accepted moves (both improving and
+uphill).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">improvements(I)</span></code> — number of moves that strictly improved the best
+energy found.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">final_temperature(T)</span></code> — temperature at termination.</p></li>
+</ul>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="defining-a-problem-1">
+<span id="id1"></span><h3>Defining a problem<a class="headerlink" href="#defining-a-problem-1" title="Link to this heading"></a></h3>
+<p>Define an object implementing the <code class="docutils literal notranslate"><span class="pre">simulated_annealing_protocol</span></code>
+protocol. For example, a simple quadratic minimization problem:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(quadratic,
+    <span class="k">implements</span>(simulated_annealing_protocol)).
+
+    initial_state(<span class="m">50.0</span>).
+    neighbor_state(<span class="nv">X</span>, <span class="nv">Y</span>) <span class="o">:-</span>
+        random<span class="o">::</span>random(<span class="o">-</span><span class="m">5.0</span>, <span class="m">5.0</span>, <span class="nv">Delta</span>),
+        <span class="nv">Y</span> <span class="k">is</span> <span class="nv">X</span> <span class="o">+</span> <span class="nv">Delta</span>.
+    state_energy(<span class="nv">X</span>, <span class="nv">E</span>) <span class="o">:-</span>
+        <span class="nv">E</span> <span class="k">is</span> (<span class="nv">X</span> <span class="o">-</span> <span class="m">3.0</span>) <span class="o">*</span> (<span class="nv">X</span> <span class="o">-</span> <span class="m">3.0</span>).
+    initial_temperature(<span class="m">100.0</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+</section>
+<section id="running-the-algorithm">
+<h3>Running the algorithm<a class="headerlink" href="#running-the-algorithm" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> simulated_annealing(quadratic)<span class="o">::</span>run(<span class="nv">State</span>, <span class="nv">Energy</span>).
+<span class="nv">State</span> <span class="o">=</span> <span class="m">3.001</span>..., <span class="nv">Energy</span> <span class="o">=</span> <span class="m">0.000</span>...
+</pre></div>
+</div>
+</section>
+<section id="running-with-custom-options">
+<h3>Running with custom options<a class="headerlink" href="#running-with-custom-options" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> simulated_annealing(quadratic)<span class="o">::</span>run(<span class="nv">State</span>, <span class="nv">Energy</span>, [max_steps(<span class="m">50000</span>)]).
+<span class="nv">State</span> <span class="o">=</span> <span class="m">3.000</span>..., <span class="nv">Energy</span> <span class="o">=</span> <span class="m">0.000</span>...
+</pre></div>
+</div>
+</section>
+<section id="running-with-statistics">
+<h3>Running with statistics<a class="headerlink" href="#running-with-statistics" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> simulated_annealing(quadratic)<span class="o">::</span>run(<span class="nv">State</span>, <span class="nv">Energy</span>, <span class="nv">Stats</span>, []).
+<span class="nv">State</span> <span class="o">=</span> <span class="m">3.001</span>..., <span class="nv">Energy</span> <span class="o">=</span> <span class="m">0.000</span>...,
+<span class="nv">Stats</span> <span class="o">=</span> [steps(<span class="m">10000</span>), acceptances(...), improvements(...), final_temperature(...)]
+</pre></div>
+</div>
+</section>
+<section id="reproducible-runs-with-seed">
+<h3>Reproducible runs with seed<a class="headerlink" href="#reproducible-runs-with-seed" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> simulated_annealing(quadratic)<span class="o">::</span>run(<span class="nv">S1</span>, <span class="nv">E1</span>, [seed(<span class="m">42</span>)]),
+     simulated_annealing(quadratic)<span class="o">::</span>run(<span class="nv">S2</span>, <span class="nv">E2</span>, [seed(<span class="m">42</span>)]).
+<span class="nv">S1</span> <span class="o">=</span> <span class="nv">S2</span>, <span class="nv">E1</span> <span class="o">=</span> <span class="nv">E2</span>.
+</pre></div>
+</div>
+</section>
+<section id="reheating-restarts">
+<h3>Reheating restarts<a class="headerlink" href="#reheating-restarts" title="Link to this heading"></a></h3>
+<p>Run 3 SA cycles (1 initial + 2 restarts). Each restart reheats the
+temperature and begins from the best state found so far:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> simulated_annealing(quadratic)<span class="o">::</span>run(<span class="nv">State</span>, <span class="nv">Energy</span>, [restarts(<span class="m">2</span>)]).
+<span class="nv">State</span> <span class="o">=</span> <span class="m">3.000</span>..., <span class="nv">Energy</span> <span class="o">=</span> <span class="m">0.000</span>...
+</pre></div>
+</div>
+</section>
+<section id="auto-temperature-estimation">
+<h3>Auto-temperature estimation<a class="headerlink" href="#auto-temperature-estimation" title="Link to this heading"></a></h3>
+<p>Estimate a good initial temperature for the problem by sampling random
+neighbor transitions:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> simulated_annealing(quadratic)<span class="o">::</span>estimate_temperature(<span class="nv">T</span>).
+<span class="nv">T</span> <span class="o">=</span> ...
+</pre></div>
+</div>
+<p>With custom parameters (500 samples, 90% target acceptance rate):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> simulated_annealing(quadratic)<span class="o">::</span>estimate_temperature(<span class="nv">T</span>, [samples(<span class="m">500</span>), acceptance_rate(<span class="m">90</span>)]).
+<span class="nv">T</span> <span class="o">=</span> ...
+</pre></div>
+</div>
+</section>
+<section id="using-a-custom-random-number-generator">
+<h3>Using a custom random number generator<a class="headerlink" href="#using-a-custom-random-number-generator" title="Link to this heading"></a></h3>
+<p>Use the two-parameter version to select a specific <code class="docutils literal notranslate"><span class="pre">fast_random</span></code>
+algorithm:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> simulated_annealing(quadratic, well512a)<span class="o">::</span>run(<span class="nv">State</span>, <span class="nv">Energy</span>).
+<span class="nv">State</span> <span class="o">=</span> <span class="m">3.001</span>..., <span class="nv">Energy</span> <span class="o">=</span> <span class="m">0.000</span>...
+
+| <span class="o">?-</span> simulated_annealing(quadratic, xoshiro256ss)<span class="o">::</span>run(<span class="nv">State</span>, <span class="nv">Energy</span>, [seed(<span class="m">42</span>)]).
+<span class="nv">State</span> <span class="o">=</span> <span class="m">3.000</span>..., <span class="nv">Energy</span> <span class="o">=</span> <span class="m">0.000</span>...
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sockets.html" class="btn btn-neutral float-left" title="sockets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="statistics.html" class="btn btn-neutral float-right" title="statistics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2026, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -281,6 +281,8 @@ Objects
    shell <shell_0>
    shell(Interpreters) <shell_1>
    shell_expansion(Mode) <shell_expansion_1>
+   simulated_annealing(Problem) <simulated_annealing_1>
+   simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing_2>
    size_metric <size_metric_0>
    socket <socket_0>
    splaytree <splaytree_0>
@@ -404,6 +406,7 @@ Protocols
    registry_protocol <registry_protocol_0>
    sampling_protocol <sampling_protocol_0>
    setp <setp_0>
+   simulated_annealing_protocol <simulated_annealing_protocol_0>
    statisticsp <statisticsp_0>
    stemmer_protocol <stemmer_protocol_0>
    subsequences_protocol <subsequences_protocol_0>

@@ -101,6 +101,7 @@ directory in the ``NOTES.md`` file.
    redis
    sets
    sockets
+   simulated_annealing
    statistics
    stemming
    stomp

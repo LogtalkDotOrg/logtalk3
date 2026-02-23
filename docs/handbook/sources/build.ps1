@@ -145,6 +145,7 @@ Foreach-Object {
 (Get-Content ../../../library/recorded_database/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/recorded_database.rst
 (Get-Content ../../../library/redis/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/redis.rst
 (Get-Content ../../../library/sets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sets.rst
+(Get-Content ../../../library/simulated_annealing/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/simulated_annealing.rst
 (Get-Content ../../../library/sockets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sockets.rst
 (Get-Content ../../../library/statistics/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/statistics.rst
 (Get-Content ../../../library/stemming/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/stemming.rst
