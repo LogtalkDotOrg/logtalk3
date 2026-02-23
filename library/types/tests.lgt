@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:20:0,
+		version is 0:21:0,
 		author is 'Paulo Moura',
-		date is 2025-05-26,
+		date is 2026-02-23,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
@@ -308,6 +308,15 @@
 
 	test(numberlist_least_common_multiple_2_01, true(Multiple == 6)) :-
 		numberlist::least_common_multiple([2,3], Multiple).
+
+	test(numberlist_linear_regression_4_01, true([Slope, Intercept] =~= [1.0, 0.0])) :-
+		numberlist::linear_regression([1,2,3,4,5], [1,2,3,4,5], Slope, Intercept).
+
+	test(numberlist_linear_regression_4_02, true([Slope, Intercept] =~= [2.0, 1.0])) :-
+		numberlist::linear_regression([1,2,3,4,5], [3,5,7,9,11], Slope, Intercept).
+
+	test(numberlist_linear_regression_4_03, fail) :-
+		numberlist::linear_regression([1], [2], _, _).
 
 	test(pairs_keys_values_3_01, true(Keys-Values == [a,b,c]-[1,2,3])) :-
 		pairs::keys_values([a-1,b-2,c-3], Keys, Values).

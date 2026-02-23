@@ -24,9 +24,9 @@
 	extends(list)).
 
 	:- info([
-		version is 1:17:0,
+		version is 1:18:0,
 		author is 'Paulo Moura',
-		date is 2026-02-11,
+		date is 2026-02-23,
 		comment is 'List of numbers predicates.',
 		see_also is [list, list(_), varlist, difflist]
 	]).
@@ -299,6 +299,25 @@
 	softmax_exps_softmax([E| Es], Sum, [Y| Ys]) :-
 		Y is E / Sum,
 		softmax_exps_softmax(Es, Sum, Ys).
+
+	linear_regression([X1| Xs], [Y1| Ys], Slope, Intercept) :-
+		SumXX0 is X1 * X1,
+		SumXY0 is X1 * Y1,
+		linear_regression(Xs, Ys, X1, Y1, 1, X1, Y1, SumXX0, SumXY0, Slope, Intercept).
+
+	linear_regression([], [], _, _, N, SumX, SumY, SumXX, SumXY, Slope, Intercept) :-
+		N >= 2,
+		Denominator is N * SumXX - SumX * SumX,
+		Denominator =\= 0,
+		Slope is float((N * SumXY - SumX * SumY) / Denominator),
+		Intercept is float((SumY - Slope * SumX) / N).
+	linear_regression([X| Xs], [Y| Ys], _, _, N0, SumX0, SumY0, SumXX0, SumXY0, Slope, Intercept) :-
+		N1 is N0 + 1,
+		SumX1 is SumX0 + X,
+		SumY1 is SumY0 + Y,
+		SumXX1 is SumXX0 + X * X,
+		SumXY1 is SumXY0 + X * Y,
+		linear_regression(Xs, Ys, X, Y, N1, SumX1, SumY1, SumXX1, SumXY1, Slope, Intercept).
 
 	valid((-)) :-
 		% catch variables and lists with unbound tails

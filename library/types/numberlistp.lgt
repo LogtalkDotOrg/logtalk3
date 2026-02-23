@@ -22,9 +22,9 @@
 :- protocol(numberlistp).
 
 	:- info([
-		version is 1:10:0,
+		version is 1:11:0,
 		author is 'Paulo Moura',
-		date is 2025-03-13,
+		date is 2026-02-23,
 		comment is 'List of numbers protocol.',
 		see_also is [numberlist, listp, varlistp]
 	]).
@@ -199,6 +199,13 @@
 			'``Temperature < 1.0``' - 'Makes the distribution more concentrated on the largest values.',
 			'``Temperature = 1.0``' - 'Standard softmax behavior.'
 		]
+	]).
+
+	:- public(linear_regression/4).
+	:- mode(linear_regression(+list(number), +list(number), -float, -float), zero_or_one).
+	:- info(linear_regression/4, [
+		comment is 'Computes the simple linear regression for the given lists of X and Y coordinates, returning the slope and the intercept. Fails if the lists have less than two elements, are not of the same length, or if all X values are the same.',
+		argnames is ['Xs', 'Ys', 'Slope', 'Intercept']
 	]).
 
 :- end_protocol.

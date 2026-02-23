@@ -263,8 +263,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:10:0</div>
-<div class="line"><strong>Date:</strong> 2025-03-13</div>
+<div class="line"><strong>Version:</strong> 1:11:0</div>
+<div class="line"><strong>Date:</strong> 2026-02-23</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -317,11 +317,12 @@
 <li><p><a class="reference internal" href="#least-common-multiple-2" id="id22"><code class="docutils literal notranslate"><span class="pre">least_common_multiple/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#softmax-2" id="id23"><code class="docutils literal notranslate"><span class="pre">softmax/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#softmax-3" id="id24"><code class="docutils literal notranslate"><span class="pre">softmax/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#linear-regression-4" id="id25"><code class="docutils literal notranslate"><span class="pre">linear_regression/4</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id25">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id26">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id27">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id26">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id27">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id28">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -823,6 +824,27 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">Temperature</span> <span class="pre">=</span> <span class="pre">1.0</span></code>: Standard softmax behavior.</p></li>
 </ul>
 </div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="linear-regression-4">
+<span id="numberlistp-0-linear-regression-4"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">linear_regression/4</span></code></a><a class="headerlink" href="#linear-regression-4" title="Link to this heading"></a></h3>
+<p>Computes the simple linear regression for the given lists of X and Y coordinates, returning the slope and the intercept. Fails if the lists have less than two elements, are not of the same length, or if all X values are the same.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">linear_regression(Xs,Ys,Slope,Intercept)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">linear_regression(+list(number),+list(number),-float,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </section>
 </section>
 <hr class="docutils" />

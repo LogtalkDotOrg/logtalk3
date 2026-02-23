@@ -171,6 +171,8 @@ lists, or character code lists.
 * ADDED: New `natural` library object `factorial/2` and `binomial/3`
 predicates.
 
+* ADDED: New `numberlist` library object `linear_regression/4` predicate.
+
 * ADDED: New `take/4` predicate to the `listp` library protocol and to the
 `list` and `difflist` library objects.
 

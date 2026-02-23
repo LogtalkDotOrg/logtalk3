@@ -14,8 +14,8 @@ List of numbers protocol.
 |    ``logtalk_load(types(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:10:0
-| **Date:** 2025-03-13
+| **Version:** 1:11:0
+| **Date:** 2026-02-23
 
 | **Compilation flags:**
 |    ``static``
@@ -483,6 +483,25 @@ Computes the softmax of a list of floats with the given temperature, returning a
     - ``Temperature > 1.0``: Makes the distribution more uniform.
     - ``Temperature < 1.0``: Makes the distribution more concentrated on the largest values.
     - ``Temperature = 1.0``: Standard softmax behavior.
+
+
+------------
+
+.. index:: linear_regression/4
+.. _numberlistp/0::linear_regression/4:
+
+``linear_regression/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the simple linear regression for the given lists of X and Y coordinates, returning the slope and the intercept. Fails if the lists have less than two elements, are not of the same length, or if all X values are the same.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``linear_regression(Xs,Ys,Slope,Intercept)``
+| **Mode and number of proofs:**
+|    ``linear_regression(+list(number),+list(number),-float,-float)`` - ``zero_or_one``
 
 
 ------------
