@@ -23,15 +23,16 @@
 	imports(options)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
 		date is 2026-02-24,
-		comment is 'MCP (Model Context Protocol) server for Logtalk applications. Exposes Logtalk objects implementing the ``mcp_tool_protocol`` protocol as MCP tool providers over stdio transport with Content-Length framing. Implements the MCP 2025-03-26 specification. Uses the ``json_rpc`` library for JSON-RPC 2.0 message handling.',
+		comment is 'MCP (Model Context Protocol) server for Logtalk applications. Exposes Logtalk objects implementing the ``mcp_tool_protocol`` and optionally ``mcp_prompt_protocol`` protocols as MCP tool and prompt providers over stdio transport with Content-Length framing. Implements the MCP 2025-03-26 specification. Uses the ``json_rpc`` library for JSON-RPC 2.0 message handling.',
 		remarks is [
 			'MCP specification' - 'Implements the Model Context Protocol 2025-03-26: https://spec.modelcontextprotocol.io/specification/2025-03-26/',
 			'Transport' - 'Uses stdio (standard input/output) with Content-Length header framing as defined by the MCP specification.',
-			'Capabilities' - 'Supports the tools capability (``tools/list`` and ``tools/call``). Optionally supports the elicitation capability (``elicitation/create``) when the application declares it via ``capabilities/1``.',
+			'Capabilities' - 'Supports the tools capability (``tools/list`` and ``tools/call``). Optionally supports the prompts capability (``prompts/list`` and ``prompts/get``) when the application declares it via ``capabilities/1`` and implements ``mcp_prompt_protocol``. Optionally supports the elicitation capability (``elicitation/create``) when the application declares it via ``capabilities/1``.',
 			'Tool discovery' - 'Tools are discovered from objects implementing the ``mcp_tool_protocol``. Tool metadata (descriptions, parameter schemas) is derived from ``info/2`` and ``mode/2`` directives.',
+			'Prompt discovery' - 'Prompts are discovered from objects implementing the ``mcp_prompt_protocol``. Prompt metadata (names, descriptions, arguments) is declared via the ``prompts/1`` predicate.',
 			'Auto-dispatch' - 'When an object does not define ``tool_call/3`` or ``tool_call/4`` for a tool, the server auto-dispatches: it calls the predicate as a message to the object, collects output-mode arguments, and returns them as text content.',
 			'Elicitation' - 'When the application declares ``elicitation`` in its ``capabilities/1``, the server constructs an elicit closure and passes it to ``tool_call/4``. The closure sends ``elicitation/create`` requests to the client and reads back the user response. This enables interactive tools that can ask the user questions during execution.',
 			'Error handling' - 'Predicate failures and exceptions both result in MCP tool-level errors with ``isError`` set to ``true``.'
@@ -199,6 +200,10 @@
 			handle_tools_list(Id, Output)
 		;	Method == 'tools/call' ->
 			handle_tools_call(Message, Id, Input, Output)
+		;	Method == 'prompts/list' ->
+			handle_prompts_list(Id, Output)
+		;	Method == 'prompts/get' ->
+			handle_prompts_get(Message, Id, Output)
 		;	% Unknown method
 			method_not_found(Id, ErrorResponse),
 			write_message(Output, ErrorResponse)
@@ -238,10 +243,19 @@
 
 	% Build capabilities curly-term from base tools + application-requested caps
 	build_capabilities(AppCaps, Capabilities) :-
+		% Start with tools (always present)
+		CapsList0 = [tools-{}],
+		% Add prompts if requested
+		(	member(prompts, AppCaps) ->
+			CapsList1 = [prompts-{}| CapsList0]
+		;	CapsList1 = CapsList0
+		),
+		% Add elicitation if requested
 		(	member(elicitation, AppCaps) ->
-			Capabilities = {tools-{}, elicitation-{}}
-		;	Capabilities = {tools-{}}
-		).
+			CapsList2 = [elicitation-{}| CapsList1]
+		;	CapsList2 = CapsList1
+		),
+		pairs_to_curly(CapsList2, Capabilities).
 
 	% Server ping
 
@@ -434,6 +448,94 @@
 		;	write_to_atom(Error, ErrorText)
 		),
 		format_content_items(Rest, ContentRest).
+
+	% Handle prompts/list requests
+
+	handle_prompts_list(Id, Output) :-
+		application_(Application),
+		(	catch(Application::prompts(PromptDescriptors), _, fail) ->
+			prompt_descriptors_to_json(PromptDescriptors, JsonPrompts)
+		;	JsonPrompts = []
+		),
+		Result = {prompts-JsonPrompts},
+		response(Result, Id, Response),
+		write_message(Output, Response).
+
+	% Convert a list of prompt(Name, Description, Arguments) descriptors to MCP JSON prompt definitions
+	prompt_descriptors_to_json([], []).
+	prompt_descriptors_to_json([prompt(Name, Description, Arguments)| Rest], [JsonPrompt| JsonRest]) :-
+		prompt_arguments_to_json(Arguments, JsonArguments),
+		JsonPrompt = {name-Name, description-Description, arguments-JsonArguments},
+		prompt_descriptors_to_json(Rest, JsonRest).
+
+	prompt_arguments_to_json([], []).
+	prompt_arguments_to_json([argument(ArgName, ArgDescription, Required)| Rest], [JsonArg| JsonRest]) :-
+		bool_to_json(Required, JsonRequired),
+		JsonArg = {name-ArgName, description-ArgDescription, required-JsonRequired},
+		prompt_arguments_to_json(Rest, JsonRest).
+
+	bool_to_json(true, @true).
+	bool_to_json(false, @false).
+
+	% Handle prompts/get requests
+
+	handle_prompts_get(Message, Id, Output) :-
+		(	params(Message, Params) ->
+			true
+		;	Params = {}
+		),
+		(	has_pair(Params, name, PromptName) ->
+			true
+		;	invalid_params(Id, ErrorResponse),
+			write_message(Output, ErrorResponse),
+			!
+		),
+		(	has_pair(Params, arguments, PromptArguments) ->
+			true
+		;	PromptArguments = {}
+		),
+		application_(Application),
+		% Check the prompt exists
+		(	catch(Application::prompts(PromptDescriptors), _, fail),
+			member(prompt(PromptName, _, _), PromptDescriptors) ->
+			execute_prompt_get(Application, PromptName, PromptArguments, Id, Output)
+		;	% Prompt not found
+			error_response(-32601, 'Prompt not found', Id, ErrorResponse),
+			write_message(Output, ErrorResponse)
+		).
+
+	execute_prompt_get(Application, PromptName, PromptArguments, Id, Output) :-
+		curly_to_pairs(PromptArguments, ArgPairs),
+		(	catch(
+				Application::prompt_get(PromptName, ArgPairs, PromptResult),
+				Error,
+				PromptResult = error(Error)
+			) ->
+			format_prompt_result(PromptResult, Id, Response)
+		;	% prompt_get/3 failed
+			error_response(-32603, 'Prompt execution failed', Id, Response)
+		),
+		write_message(Output, Response).
+
+	% Prompt result formatting
+
+	format_prompt_result(messages(Messages), Id, Response) :-
+		format_prompt_messages(Messages, JsonMessages),
+		response({messages-JsonMessages}, Id, Response).
+	format_prompt_result(messages(Description, Messages), Id, Response) :-
+		format_prompt_messages(Messages, JsonMessages),
+		response({description-Description, messages-JsonMessages}, Id, Response).
+	format_prompt_result(error(Error), Id, Response) :-
+		(	atom(Error) ->
+			ErrorText = Error
+		;	write_to_atom(Error, ErrorText)
+		),
+		error_response(-32603, ErrorText, Id, Response).
+
+	format_prompt_messages([], []).
+	format_prompt_messages([message(Role, text(Text))| Rest], [JsonMsg| JsonRest]) :-
+		JsonMsg = {role-Role, content-{type-text, text-Text}},
+		format_prompt_messages(Rest, JsonRest).
 
 	% Elicitation
 

@@ -164,6 +164,95 @@
 :- end_object.
 
 
+% Test application with prompts support
+
+:- object(test_prompt_tools,
+	implements([mcp_tool_protocol, mcp_prompt_protocol])).
+
+	capabilities([prompts]).
+
+	tools([]).
+
+	prompts([
+		prompt(greet_prompt, 'Generates a greeting prompt', [
+			argument(name, 'The name to greet', true)
+		]),
+		prompt(simple_prompt, 'A simple prompt with no arguments', []),
+		prompt(multi_turn_prompt, 'A multi-turn conversation prompt', [
+			argument(topic, 'The topic to discuss', true),
+			argument(style, 'The conversation style', false)
+		])
+	]).
+
+	prompt_get(greet_prompt, Arguments, Result) :-
+		(	member(name-Name, Arguments) ->
+			atom_concat('Please greet ', Name, Temp),
+			atom_concat(Temp, ' warmly.', Text)
+		;	Text = 'Please greet someone.'
+		),
+		Result = messages([message(user, text(Text))]).
+
+	prompt_get(simple_prompt, _Arguments, Result) :-
+		Result = messages(
+			'A simple test prompt',
+			[message(user, text('This is a simple test prompt.'))]
+		).
+
+	prompt_get(multi_turn_prompt, Arguments, Result) :-
+		(	member(topic-Topic, Arguments) ->
+			atom_concat('Let us discuss ', Topic, Temp),
+			atom_concat(Temp, '.', UserText)
+		;	UserText = 'Let us discuss something.'
+		),
+		Result = messages([
+			message(user, text(UserText)),
+			message(assistant, text('I would be happy to discuss that topic. What would you like to know?'))
+		]).
+
+	:- uses(list, [member/2]).
+
+:- end_object.
+
+
+% Test application with both tools and prompts
+
+:- object(test_tools_and_prompts,
+	implements([mcp_tool_protocol, mcp_prompt_protocol])).
+
+	capabilities([prompts]).
+
+	:- public(add/3).
+	:- mode(add(+number, +number, -number), one).
+	:- info(add/3, [
+		comment is 'Adds two numbers.',
+		argnames is ['X', 'Y', 'Sum']
+	]).
+
+	tools([
+		tool(add, add, 3)
+	]).
+
+	add(X, Y, Sum) :-
+		Sum is X + Y.
+
+	prompts([
+		prompt(summarize, 'Summarizes a given text', [
+			argument(text, 'The text to summarize', true)
+		])
+	]).
+
+	prompt_get(summarize, Arguments, Result) :-
+		(	member(text-Text, Arguments) ->
+			atom_concat('Please summarize the following text:\n\n', Text, PromptText)
+		;	PromptText = 'Please summarize a text.'
+		),
+		Result = messages([message(user, text(PromptText))]).
+
+	:- uses(list, [member/2]).
+
+:- end_object.
+
+
 % Test application with multi-result and exception tools
 
 :- object(test_result_tools,

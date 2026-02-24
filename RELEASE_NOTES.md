@@ -269,8 +269,8 @@ to write error messages to `stderr` instead of `stdout`.
 Examples
 --------
 
-ADDED: New `birds_mcp` example illustrating how to publish an application as
-a MCP server using the the bird identification expert system defined in the
+ADDED: New `birds_mcp` example illustrating how to publish an application
+as a MCP server using the bird identification expert system defined in the
 `birds` example.
 
 Tests

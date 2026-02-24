@@ -6,7 +6,7 @@
 MCP (Model Context Protocol) server library for Logtalk applications.
 Makes any Logtalk application available as a local MCP server using
 stdio transport with Content-Length framing. Implements the MCP
-2025-03-26 specification (tools and elicitation capabilities).
+2025-03-26 specification (tools, prompts, and elicitation capabilities).
 
 The library uses the ``json_rpc`` library for JSON-RPC 2.0 message
 handling as currently required by the MCP specification.
@@ -265,6 +265,85 @@ the user's response matching the requested schema.
 See the ``examples/birds_mcp/`` example for a complete demonstration of
 elicitation with a bird identification expert system.
 
+Prompts (prompt templates)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MCP prompts are templates for structured LLM interactions. They allow an
+application to expose reusable prompt templates that MCP clients can
+discover and use. To add prompts, implement ``mcp_prompt_protocol`` in
+addition to ``mcp_tool_protocol``, and declare ``prompts`` in
+capabilities:
+
+.. code:: logtalk
+
+   :- object(my_prompts,
+       implements([mcp_tool_protocol, mcp_prompt_protocol])).
+
+       capabilities([prompts]).
+
+       tools([]).
+
+       prompts([
+           prompt(code_review, 'Reviews code for potential issues', [
+               argument(code, 'The code to review', true),
+               argument(language, 'The programming language', false)
+           ]),
+           prompt(summarize, 'Summarizes a given text', [
+               argument(text, 'The text to summarize', true)
+           ])
+       ]).
+
+       prompt_get(code_review, Arguments, Result) :-
+           (   member(code-Code, Arguments) ->
+               atom_concat('Please review the following code for potential issues:\n\n', Code, Text)
+           ;   Text = 'Please provide code to review.'
+           ),
+           Result = messages([message(user, text(Text))]).
+
+       prompt_get(summarize, Arguments, Result) :-
+           (   member(text-Text, Arguments) ->
+               atom_concat('Please summarize the following text:\n\n', Text, PromptText)
+           ;   PromptText = 'Please provide text to summarize.'
+           ),
+           Result = messages([message(user, text(PromptText))]).
+
+       :- uses(list, [member/2]).
+
+   :- end_object.
+
+The ``prompts/1`` predicate returns a list of
+``prompt(Name, Description, Arguments)`` descriptors:
+
+- ``Name`` — the MCP prompt name (an atom)
+- ``Description`` — a human-readable description (an atom)
+- ``Arguments`` — a list of
+  ``argument(ArgName, ArgDescription, Required)`` terms where
+  ``Required`` is ``true`` or ``false``
+
+The ``prompt_get/3`` predicate handles prompt get requests. Its result
+term can be:
+
+- ``messages(MessageList)`` — a list of prompt messages
+- ``messages(Description, MessageList)`` — a list of messages with a
+  description
+
+Each message in the list is a ``message(Role, Content)`` term where:
+
+- ``Role`` — ``user`` or ``assistant``
+- ``Content`` — ``text(Text)`` where ``Text`` is an atom
+
+Multi-turn prompts can return multiple messages:
+
+.. code:: logtalk
+
+   prompt_get(debate, Arguments, Result) :-
+       member(topic-Topic, Arguments),
+       atom_concat('Let us debate: ', Topic, UserText),
+       Result = messages([
+           message(user, text(UserText)),
+           message(assistant, text('I would be happy to debate that topic. What is your position?'))
+       ]).
+
 Error handling
 --------------
 
@@ -272,6 +351,7 @@ Error handling
   ``isError: true``.
 - Predicate exceptions result in a tool-level error with the exception
   term serialized as the error text.
+- Prompt execution failures result in a JSON-RPC error response.
 
 Protocol
 --------
@@ -279,13 +359,19 @@ Protocol
 The ``mcp_tool_protocol`` protocol defines the following predicates:
 
 - ``capabilities/1`` — returns the list of additional capabilities
-  needed by the application (e.g. ``[elicitation]``); optional, defaults
-  to ``[]``
+  needed by the application (e.g. ``[elicitation]``, ``[prompts]``, or
+  ``[prompts, elicitation]``); optional, defaults to ``[]``
 - ``tools/1`` — returns the list of tool descriptors
 - ``tool_call/3`` — handles a tool call (optional; auto-dispatch is used
   when not defined)
 - ``tool_call/4`` — handles a tool call with an elicitation closure
-  (optional; requires ``capabilities([elicitation])``)
+  (optional; requires ``capabilities([elicitation])`` or
+  ``capabilities([..., elicitation])``)
+
+The ``mcp_prompt_protocol`` protocol defines the following predicates:
+
+- ``prompts/1`` — returns the list of prompt descriptors
+- ``prompt_get/3`` — handles a prompt get request
 
 Supported MCP methods
 ---------------------
@@ -298,5 +384,7 @@ Method                 Type         Description
 ``ping``               Request      Server liveness check
 ``tools/list``         Request      Lists available tools
 ``tools/call``         Request      Calls a tool
+``prompts/list``       Request      Lists available prompts
+``prompts/get``        Request      Gets a prompt with arguments
 ``elicitation/create`` Request (=>) Asks the client for user input
 ====================== ============ ==============================
