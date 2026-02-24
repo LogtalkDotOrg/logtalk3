@@ -56,6 +56,9 @@ Prolog adapter and integration files
 from the `aggregate` library instead of defining it locally, thus avoiding
 a predicate redefinition warning when this library is imported.
 
+* FIXED: The `logtalk_setup_env.sh` integration helper script to write error
+messages to `stderr` instead of `stdout`.
+
 Documentation
 -------------
 
@@ -256,6 +259,9 @@ for the prefix used by Homebrew on Apple Silicon.
 
 * FIXED: Avoid portability warnings when loading the `debugger` and `lgtunit`
 tools due to the necessary use of backend specific features.
+
+* FIXED: The `lgtdoc` tool `logtalk_setup_env.sh` integration helper script
+to write error messages to `stderr` instead of `stdout`.
 
 Tests
 -----
