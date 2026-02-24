@@ -1,0 +1,96 @@
+.. index:: single: mcp_resource_protocol
+.. _mcp_resource_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``mcp_resource_protocol``
+=========================
+
+Protocol for Logtalk objects that provide resources to be exposed via an MCP (Model Context Protocol) server. Implementing objects must define the set of resources available and handle resource read requests. Resources expose data and content from the application that MCP clients can access.
+
+| **Availability:** 
+|    ``logtalk_load(mcp_server(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2026-02-24
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Capabilities: Objects providing resources must declare ``resources`` in their ``capabilities/1`` predicate (from the ``mcp_tool_protocol`` protocol). The server will then advertise the ``resources`` capability and handle ``resources/list`` and ``resources/read`` requests.
+   - Resource descriptors: Each resource is described by a ``resource(URI, Name, Description, MimeType)`` term where ``URI`` is the resource identifier (an atom), ``Name`` is a human-readable name (an atom), ``Description`` is a human-readable description (an atom), and ``MimeType`` is the MIME type of the resource content (an atom, e.g. ``'text/plain'``).
+   - Resource contents: The ``resource_read/3`` predicate must return a result term. The result must be ``contents(ContentList)`` where each item is ``text_content(URI, MimeType, Text)`` for text resources or ``blob_content(URI, MimeType, Base64Data)`` for binary resources encoded as base64.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: resources/1
+.. _mcp_resource_protocol/0::resources/1:
+
+``resources/1``
+^^^^^^^^^^^^^^^
+
+Returns a list of resource descriptors available from this object. Each descriptor is a compound term ``resource(URI, Name, Description, MimeType)`` where ``URI`` is the resource identifier (an atom, typically a URI like ``logtalk://my-app/data``), ``Name`` is a human-readable name (an atom), ``Description`` is a human-readable description (an atom), and ``MimeType`` is the MIME type (an atom, e.g. ``'text/plain'``, ``'application/json'``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``resources(Resources)``
+| **Mode and number of proofs:**
+|    ``resources(-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: resource_read/3
+.. _mcp_resource_protocol/0::resource_read/3:
+
+``resource_read/3``
+^^^^^^^^^^^^^^^^^^^
+
+Handles a resource read request. ``URI`` is the resource identifier (as declared in ``resources/1``), ``Arguments`` is a list of ``ArgumentName-Value`` pairs (currently unused but reserved for future use), and ``Result`` is unified with the resource result. The result must be ``contents(ContentList)`` where each content item is either ``text_content(URI, MimeType, Text)`` for text resources or ``blob_content(URI, MimeType, Base64Data)`` for binary resources encoded as base64. ``Text`` and ``Base64Data`` must be atoms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``resource_read(URI,Arguments,Result)``
+| **Mode and number of proofs:**
+|    ``resource_read(+atom,+list(pair),--compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

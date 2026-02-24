@@ -1,0 +1,96 @@
+.. index:: single: mcp_prompt_protocol
+.. _mcp_prompt_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``mcp_prompt_protocol``
+=======================
+
+Protocol for Logtalk objects that provide prompts to be exposed via an MCP (Model Context Protocol) server. Implementing objects must define the set of prompts available and handle prompt get requests. Prompts are templates for structured LLM interactions that can accept arguments to customize their behavior.
+
+| **Availability:** 
+|    ``logtalk_load(mcp_server(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2026-02-24
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Capabilities: Objects providing prompts must declare ``prompts`` in their ``capabilities/1`` predicate (from the ``mcp_tool_protocol`` protocol). The server will then advertise the ``prompts`` capability and handle ``prompts/list`` and ``prompts/get`` requests.
+   - Prompt descriptors: Each prompt is described by a ``prompt(Name, Description, Arguments)`` term where ``Name`` is an atom, ``Description`` is a human-readable atom, and ``Arguments`` is a list of ``argument(ArgName, ArgDescription, Required)`` terms.
+   - Prompt messages: The ``prompt_get/3`` predicate must return a result term containing a list of messages. Each message is a ``message(Role, Content)`` term where ``Role`` is ``user`` or ``assistant`` and ``Content`` is ``text(Text)`` where ``Text`` is an atom.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: prompts/1
+.. _mcp_prompt_protocol/0::prompts/1:
+
+``prompts/1``
+^^^^^^^^^^^^^
+
+Returns a list of prompt descriptors available from this object. Each descriptor is a compound term ``prompt(Name, Description, Arguments)`` where ``Name`` is the MCP prompt name (an atom), ``Description`` is a human-readable description (an atom), and ``Arguments`` is a list of ``argument(ArgName, ArgDescription, Required)`` terms describing the prompt arguments. ``ArgName`` and ``ArgDescription`` are atoms, and ``Required`` is the boolean ``true`` or ``false``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prompts(Prompts)``
+| **Mode and number of proofs:**
+|    ``prompts(-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: prompt_get/3
+.. _mcp_prompt_protocol/0::prompt_get/3:
+
+``prompt_get/3``
+^^^^^^^^^^^^^^^^
+
+Handles a prompt get request. ``Name`` is the MCP prompt name (as declared in ``prompts/1``), ``Arguments`` is a list of ``ArgumentName-Value`` pairs provided by the client, and ``Result`` is unified with the prompt result. The result must be one of: ``messages(MessageList)`` for a list of prompt messages, or ``messages(Description, MessageList)`` to also include a description. Each message in the list must be a ``message(Role, Content)`` term where ``Role`` is ``user`` or ``assistant`` and ``Content`` is ``text(Text)`` where ``Text`` is an atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prompt_get(Name,Arguments,Result)``
+| **Mode and number of proofs:**
+|    ``prompt_get(+atom,+list(pair),--compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
