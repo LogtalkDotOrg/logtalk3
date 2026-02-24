@@ -174,6 +174,9 @@ Follows a short description of each included example (in alphabetical order):
 	bird identification expert system
 	(example adapted from the "Adventure in Prolog" Amzi! book)
 
+- `birds_mcp`  
+	bird identification expert system published as a MCP server
+
 - `blocks`  
 	simpler version of the `bricks` example; illustrates how to use events
 	to avoid breaking object encapsulation when handling object relations

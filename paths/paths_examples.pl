@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on March 19, 2025
+%  Last updated on February 24, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -48,6 +48,7 @@ logtalk_library_path(barriers, threads('barriers/')).
 logtalk_library_path(bench, examples('bench/')).
 logtalk_library_path(benchmarks, examples('benchmarks/')).
 logtalk_library_path(birds, examples('birds/')).
+logtalk_library_path(birds_mcp, examples('birds_mcp/')).
 logtalk_library_path(birthdays, threads('birthdays/')).
 logtalk_library_path(blackboard, threads('blackboard/')).
 logtalk_library_path(blocks, examples('blocks/')).

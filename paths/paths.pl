@@ -212,6 +212,7 @@ logtalk_library_path(barriers, threads('barriers/')).
 logtalk_library_path(bench, examples('bench/')).
 logtalk_library_path(benchmarks, examples('benchmarks/')).
 logtalk_library_path(birds, examples('birds/')).
+logtalk_library_path(birds_mcp, examples('birds_mcp/')).
 logtalk_library_path(birthdays, threads('birthdays/')).
 logtalk_library_path(blackboard, threads('blackboard/')).
 logtalk_library_path(blocks, examples('blocks/')).

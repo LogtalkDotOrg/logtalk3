@@ -163,6 +163,7 @@ configure it as a stdio server. Example ``claude_desktop_config.json``:
            "my-server": {
                "command": "swilgt",
                "args": [
+                   "-q",
                    "-g", "logtalk_load(my_mcp_server(loader))",
                    "-t", "halt"
                ],
@@ -190,6 +191,7 @@ instead:
            "my-server": {
                "command": "xvmlgt",
                "args": [
+                   "-q",
                    "-g", "logtalk_load(my_mcp_server(loader)), halt.",
                ],
                "env": {
