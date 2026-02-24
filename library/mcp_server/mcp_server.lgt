@@ -23,13 +23,14 @@
 	imports(options)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
 		date is 2026-02-24,
 		comment is 'MCP (Model Context Protocol) server for Logtalk applications. Exposes Logtalk objects implementing the ``mcp_tool_protocol`` and optionally ``mcp_prompt_protocol`` and ``mcp_resource_protocol`` protocols as MCP tool, prompt, and resource providers over stdio transport with Content-Length framing. Implements the MCP 2025-03-26 specification. Uses the ``json_rpc`` library for JSON-RPC 2.0 message handling.',
 		remarks is [
 			'MCP specification' - 'Implements the Model Context Protocol 2025-03-26: https://spec.modelcontextprotocol.io/specification/2025-03-26/',
 			'Transport' - 'Uses stdio (standard input/output) with Content-Length header framing as defined by the MCP specification.',
+			'Version negotiation' - 'During initialization, the server performs protocol version negotiation. The client sends its highest supported version in the ``initialize`` request. The server selects the highest version it supports that is compatible (i.e., less than or equal to the client version). If no compatible version exists, the server responds with error ``-32602`` (\"Unsupported protocol version\") including a ``data`` field with the list of supported versions.',
 			'Capabilities' - 'Supports the tools capability (``tools/list`` and ``tools/call``). Optionally supports the prompts capability (``prompts/list`` and ``prompts/get``) when the application declares it via ``capabilities/1`` and implements ``mcp_prompt_protocol``. Optionally supports the resources capability (``resources/list`` and ``resources/read``) when the application declares it via ``capabilities/1`` and implements ``mcp_resource_protocol``. Optionally supports the elicitation capability (``elicitation/create``) when the application declares it via ``capabilities/1``.',
 			'Tool discovery' - 'Tools are discovered from objects implementing the ``mcp_tool_protocol``. Tool metadata (descriptions, parameter schemas) is derived from ``info/2`` and ``mode/2`` directives.',
 			'Prompt discovery' - 'Prompts are discovered from objects implementing the ``mcp_prompt_protocol``. Prompt metadata (names, descriptions, arguments) is declared via the ``prompts/1`` predicate.',
@@ -90,11 +91,11 @@
 	:- private(elicit_counter_/1).
 	:- dynamic(elicit_counter_/1).
 
-	:- private(app_capabilities_/1).
-	:- dynamic(app_capabilities_/1).
+	:- private(application_capabilities_/1).
+	:- dynamic(application_capabilities_/1).
 
 	:- uses(json_rpc, [
-		request/4, response/3, error_response/4, method_not_found/2, invalid_params/2, is_request/1,
+		request/4, response/3, error_response/4, error_response/5, method_not_found/2, invalid_params/2, is_request/1,
 		is_notification/1, is_response/1, id/2, method/2, params/2, result/2, write_message/2,
 		read_message/2
 	]).
@@ -141,7 +142,7 @@
 		retractall(server_name_(_)),
 		retractall(server_version_(_)),
 		retractall(elicit_counter_(_)),
-		retractall(app_capabilities_(_)),
+		retractall(application_capabilities_(_)),
 		assertz(application_(Application)),
 		assertz(server_name_(Name)),
 %		^^option(server_name(Name), Options),
@@ -149,9 +150,9 @@
 		assertz(server_version_(Version)),
 		assertz(elicit_counter_(0)),
 		% Query application capabilities (default: no extra capabilities)
-		(	catch(Application::capabilities(AppCaps), _, fail) ->
-			assertz(app_capabilities_(AppCaps))
-		;	assertz(app_capabilities_([]))
+		(	catch(Application::capabilities(ApplicationCapabilities), _, fail) ->
+			assertz(application_capabilities_(ApplicationCapabilities))
+		;	assertz(application_capabilities_([]))
 		).
 
 	cleanup_state :-
@@ -160,7 +161,7 @@
 		retractall(server_name_(_)),
 		retractall(server_version_(_)),
 		retractall(elicit_counter_(_)),
-		retractall(app_capabilities_(_)).
+		retractall(application_capabilities_(_)).
 
 	% Main server loop
 
@@ -226,46 +227,78 @@
 			true
 		).
 
+	% Supported protocol versions (in chronological/lexicographic order)
+	supported_protocol_versions(['2025-03-26']).
+
 	% Server initialization
 
-	handle_initialize(_Message, Id, Output) :-
-		assertz(initialized_),
-		server_name_(Name),
-		server_version_(Version),
-		% Build capabilities based on application requirements
-		app_capabilities_(AppCaps),
-		build_capabilities(AppCaps, Capabilities),
-		Result = {
-			protocolVersion-'2025-03-26',
-			capabilities-Capabilities,
-			serverInfo-{
-				name-Name,
-				version-Version
-			}
-		},
-		response(Result, Id, Response),
-		write_message(Output, Response).
+	handle_initialize(Message, Id, Output) :-
+		% Extract the client's protocol version from the request params
+		(	params(Message, Params),
+			has_pair(Params, protocolVersion, ClientVersion) ->
+			true
+		;	ClientVersion = ''
+		),
+		supported_protocol_versions(Supported),
+		% Check if the client version is compatible:
+		% the client sends the highest version it supports; the server
+		% picks the highest version it supports that is <= the client's
+		% version. If no supported version satisfies this, reject.
+		(	best_supported_version(Supported, ClientVersion, NegotiatedVersion) ->
+			assertz(initialized_),
+			server_name_(Name),
+			server_version_(Version),
+			% Build capabilities based on application requirements
+			application_capabilities_(ApplicationCapabilities),
+			build_capabilities(ApplicationCapabilities, Capabilities),
+			Result = {
+				protocolVersion-NegotiatedVersion,
+				capabilities-Capabilities,
+				serverInfo-{
+					name-Name,
+					version-Version
+				}
+			},
+			response(Result, Id, Response),
+			write_message(Output, Response)
+		;	% No compatible version: reject with error -32602
+			error_response(-32602, 'Unsupported protocol version', {supported-Supported}, Id, ErrorResponse),
+			write_message(Output, ErrorResponse)
+		).
+
+	% Find the best (highest) supported version that is =< ClientVersion.
+	% Versions are date strings so lexicographic comparison is chronological.
+	best_supported_version(Supported, ClientVersion, Best) :-
+		best_supported_version(Supported, ClientVersion, '', Best),
+		Best \== ''.
+
+	best_supported_version([], _, Best, Best).
+	best_supported_version([Version| Versions], ClientVersion, Best0, Best) :-
+		(	Version @=< ClientVersion, Version @> Best0 ->
+			best_supported_version(Versions, ClientVersion, Version, Best)
+		;	best_supported_version(Versions, ClientVersion, Best0, Best)
+		).
 
 	% Build capabilities curly-term from base tools + application-requested caps
-	build_capabilities(AppCaps, Capabilities) :-
+	build_capabilities(ApplicationCapabilities, Capabilities) :-
 		% Start with tools (always present)
-		CapsList0 = [tools-{}],
+		Capabilities0 = [tools-{}],
 		% Add prompts if requested
-		(	member(prompts, AppCaps) ->
-			CapsList1 = [prompts-{}| CapsList0]
-		;	CapsList1 = CapsList0
+		(	member(prompts, ApplicationCapabilities) ->
+			Capabilities1 = [prompts-{}| Capabilities0]
+		;	Capabilities1 = Capabilities0
 		),
 		% Add resources if requested
-		(	member(resources, AppCaps) ->
-			CapsList2 = [resources-{}| CapsList1]
-		;	CapsList2 = CapsList1
+		(	member(resources, ApplicationCapabilities) ->
+			Capabilities2 = [resources-{}| Capabilities1]
+		;	Capabilities2 = Capabilities1
 		),
 		% Add elicitation if requested
-		(	member(elicitation, AppCaps) ->
-			CapsList3 = [elicitation-{}| CapsList2]
-		;	CapsList3 = CapsList2
+		(	member(elicitation, ApplicationCapabilities) ->
+			Capabilities3 = [elicitation-{}| Capabilities2]
+		;	Capabilities3 = Capabilities2
 		),
-		pairs_to_curly(CapsList3, Capabilities).
+		pairs_to_curly(Capabilities3, Capabilities).
 
 	% Server ping
 
@@ -284,7 +317,8 @@
 		write_message(Output, Response).
 
 	% Convert a list of tool(Name, Functor, Arity) descriptors to MCP JSON tool definitions
-	tool_descriptors_to_json(_, [], []).
+	tool_descriptors_to_json(_, [], []) :-
+		!.
 	tool_descriptors_to_json(Application, [tool(Name, Functor, Arity)| Rest], [JsonTool| JsonRest]) :-
 		tool_descriptor_to_json(Application, Name, Functor, Arity, JsonTool),
 		tool_descriptors_to_json(Application, Rest, JsonRest).
@@ -377,8 +411,8 @@
 
 	execute_tool(Application, ToolName, Functor, Arity, ToolArguments, Input, Output, Result) :-
 		curly_to_pairs(ToolArguments, ArgPairs),
-		app_capabilities_(AppCaps),
-		(	member(elicitation, AppCaps) ->
+		application_capabilities_(ApplicationCapabilities),
+		(	member(elicitation, ApplicationCapabilities) ->
 			% Try tool_call/4 with elicit closure first
 			(	catch(
 					(Application::tool_call(ToolName, ArgPairs, {Input, Output}/[Message, Schema, Answer]>>(mcp_server::elicit_request(Input, Output, Message, Schema, Answer)), Result)),
@@ -663,7 +697,8 @@
 	% Argument binding and collection
 
 	% Bind input-mode arguments in Goal from the JSON arguments object
-	bind_input_arguments(_, [], [], _, _).
+	bind_input_arguments(_, [], [], _, _) :-
+		!.
 	bind_input_arguments(Goal, [ArgName| ArgNames], [Mode| Modes], N, ToolArguments) :-
 		(	is_input_mode(Mode) ->
 			(	has_pair(ToolArguments, ArgName, Value) ->
@@ -676,7 +711,8 @@
 		bind_input_arguments(Goal, ArgNames, Modes, N1, ToolArguments).
 
 	% Collect output-mode arguments from a called Goal
-	collect_output_arguments(_, [], [], _, []).
+	collect_output_arguments(_, [], [], _, []) :-
+		!.
 	collect_output_arguments(Goal, [ArgName| ArgNames], [Mode| Modes], N, Pairs) :-
 		(	is_output_mode(Mode) ->
 			arg(N, Goal, Value),
@@ -788,8 +824,8 @@
 	info_pair_value([Pair| _], Key, Value) :-
 		Pair =.. [Key, Value],
 		!.
-	info_pair_value([_| Rest], Key, Value) :-
-		info_pair_value(Rest, Key, Value).
+	info_pair_value([_| Pairs], Key, Value) :-
+		info_pair_value(Pairs, Key, Value).
 
 	% curly-term pair lookup (same as json_rpc internal)
 	has_pair({Pairs}, Key, Value) :-
@@ -797,9 +833,9 @@
 
 	curly_member(Pair, (Pair, _)) :-
 		!.
-	curly_member(Pair, (_, Rest)) :-
+	curly_member(Pair, (_, Pairs)) :-
 		!,
-		curly_member(Pair, Rest).
+		curly_member(Pair, Pairs).
 	curly_member(Pair, Pair).
 
 	% Convert curly-term to list of pairs
@@ -808,9 +844,9 @@
 	curly_to_pairs({Pairs}, List) :-
 		curly_pairs_to_list(Pairs, List).
 
-	curly_pairs_to_list((Key-Value, Rest), [Key-Value| RestList]) :-
+	curly_pairs_to_list((Key-Value, CurlyPairs), [Key-Value| Pairs]) :-
 		!,
-		curly_pairs_to_list(Rest, RestList).
+		curly_pairs_to_list(CurlyPairs, Pairs).
 	curly_pairs_to_list(Key-Value, [Key-Value]).
 
 	% Convert list of pairs to curly-term
@@ -821,23 +857,23 @@
 
 	list_to_curly_pairs([Key-Value], Key-Value) :-
 		!.
-	list_to_curly_pairs([Key-Value| Rest], (Key-Value, RestCurly)) :-
-		list_to_curly_pairs(Rest, RestCurly).
+	list_to_curly_pairs([Key-Value| Pairs], (Key-Value, CurlyPairs)) :-
+		list_to_curly_pairs(Pairs, CurlyPairs).
 
 	% Extract keys from a list of Key-Value pairs
 	pairs_keys([], []).
-	pairs_keys([Key-_| Rest], [Key| Keys]) :-
-		pairs_keys(Rest, Keys).
+	pairs_keys([Key-_| Pairs], [Key| Keys]) :-
+		pairs_keys(Pairs, Keys).
 
 	% Format output argument pairs as text
 	format_output_pairs([], '').
-	format_output_pairs([Name-Value| Rest], Text) :-
+	format_output_pairs([Name-Value| Pairs], Text) :-
 		write_to_atom(Value, ValueAtom),
-		(	Rest == [] ->
+		(	Pairs == [] ->
 			atomic_list_concat([Name, ': ', ValueAtom], Text)
 		;	atomic_list_concat([Name, ': ', ValueAtom], Line),
-			format_output_pairs(Rest, RestText),
-			atomic_list_concat([Line, '\n', RestText], Text)
+			format_output_pairs(Pairs, PairsText),
+			atomic_list_concat([Line, '\n', PairsText], Text)
 		).
 
 	default_option(server_name('logtalk-mcp-server')).

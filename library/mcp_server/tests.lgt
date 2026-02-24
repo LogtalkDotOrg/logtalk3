@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
 		date is 2026-02-24,
 		comment is 'Unit tests for the "mcp_server" library.'
@@ -31,7 +31,7 @@
 
 	:- uses(json_rpc, [
 		request/4, request/3, notification/3, response/3, is_request/1, is_response/1, is_error_response/1,
-		method/2, params/2, result/2, id/2, error_code/2, write_message/2, read_message/2
+		method/2, params/2, result/2, id/2, error_code/2, error_data/2, write_message/2, read_message/2
 	]).
 
 	:- uses(list, [
@@ -105,6 +105,52 @@
 		has_pair(Result, protocolVersion, '2025-03-26'),
 		has_pair(Result, serverInfo, ServerInfo),
 		has_pair(ServerInfo, name, 'test-server').
+
+	% Protocol version negotiation tests
+
+	% Client sends a newer version; server should negotiate down to its supported version
+	test(mcp_server_initialize_newer_version_01, true) :-
+		run_mcp_exchange(
+			[initialize_version_request('2026-01-01', 1)],
+			[Response]
+		),
+		is_response(Response),
+		\+ is_error_response(Response),
+		id(Response, 1),
+		result(Response, Result),
+		has_pair(Result, protocolVersion, '2025-03-26').
+
+	% Client sends an older unsupported version; server should reject with error -32602
+	test(mcp_server_initialize_older_version_01, true) :-
+		run_mcp_exchange(
+			[initialize_version_request('2024-11-05', 1)],
+			[Response]
+		),
+		is_error_response(Response),
+		id(Response, 1),
+		error_code(Response, -32602).
+
+	% Rejected initialization should include supported versions in data
+	test(mcp_server_initialize_rejected_version_data_01, true) :-
+		run_mcp_exchange(
+			[initialize_version_request('2024-11-05', 1)],
+			[Response]
+		),
+		is_error_response(Response),
+		error_data(Response, Data),
+		has_pair(Data, supported, Supported),
+		member('2025-03-26', Supported).
+
+	% Client sends the exact supported version; should succeed
+	test(mcp_server_initialize_exact_version_01, true) :-
+		run_mcp_exchange(
+			[initialize_version_request('2025-03-26', 1)],
+			[Response]
+		),
+		is_response(Response),
+		\+ is_error_response(Response),
+		result(Response, Result),
+		has_pair(Result, protocolVersion, '2025-03-26').
 
 	test(mcp_server_ping_01, true) :-
 		run_mcp_exchange(
@@ -713,6 +759,13 @@
 		request(
 			initialize,
 			{protocolVersion-'2025-03-26', capabilities-{}, clientInfo-{name-test, version-'1.0'}},
+			Id,
+			Message
+		).
+	spec_to_message(initialize_version_request(Version, Id), Message) :-
+		request(
+			initialize,
+			{protocolVersion-Version, capabilities-{}, clientInfo-{name-test, version-'1.0'}},
 			Id,
 			Message
 		).

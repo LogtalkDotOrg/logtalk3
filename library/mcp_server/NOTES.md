@@ -23,8 +23,8 @@ ________________________________________________________________________
 
 MCP (Model Context Protocol) server library for Logtalk applications.
 Makes any Logtalk application available as a local MCP server using stdio
-transport with Content-Length framing. Implements the MCP 2025-03-26
-specification (tools, prompts, resources, and elicitation capabilities).
+transport. Implements the MCP 2025-03-26 specification (tools, prompts,
+resources, and elicitation capabilities). Supports version negotiation.
 
 The library uses the `json_rpc` library for JSON-RPC 2.0 message handling
 as currently required by the MCP specification.
