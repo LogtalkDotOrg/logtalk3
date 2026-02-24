@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on January 26, 2026
+##   Last updated on February 24, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -53,7 +53,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 15.1"
+	Write-Output "$myName 16.0"
 }
 
 Function Format-Decimal {
@@ -615,6 +615,7 @@ if (Test-Path "$results/tester_versions.txt") {
 
 if ($o -eq "verbose") {
 	$start_date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+	$start_time = Get-Date
 	Write-Output "% Batch testing started @ $start_date"
 	& $logtalk $backend_options $logtalk_option $versions_goal | Out-File $results/tester_versions.txt
 	Select-String -Path $results/tester_versions.txt -Pattern "Logtalk version:" -Raw -SimpleMatch
@@ -822,8 +823,11 @@ Write-Output "% $total tests: $skipped skipped, $passed passed, $failed failed (
 
 if ($o -eq "verbose") {
 	$end_date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+	$runtime = (Get-Date) - $start_time
+	$runtime_str = "{0}h:{1:D2}m:{2:D2}s" -f [int][Math]::Floor($runtime.TotalHours), $runtime.Minutes, $runtime.Seconds
 	Write-Output "%"
 	Write-Output "% Batch testing ended @ $end_date"
+	Write-Output "% Batch runtime took $runtime_str"
 }
 
 Pop-Location

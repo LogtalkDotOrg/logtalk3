@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on February 15, 2026
+##   Last updated on February 24, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -33,7 +33,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 23.2"
+	echo "$(basename "$0") 24.0"
 	exit 0
 }
 
@@ -609,6 +609,7 @@ rm -f "$results"/tester_versions.txt
 
 if [ "$output" == 'verbose' ] ; then
 	start_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
+	start_time=$(date +%s)
 	echo "% Batch testing started @ $start_date"
 	$logtalk_call $versions_goal > "$results"/tester_versions.txt 2> /dev/null
 	grep -a "Logtalk version:" "$results"/tester_versions.txt
@@ -736,8 +737,14 @@ echo "% $total tests: $skipped skipped, $passed passed, $failed failed ($flaky f
 
 if [ "$output" == 'verbose' ] ; then
 	end_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
+	end_time=$(date +%s)
+	runtime=$((end_time - start_time))
+	hours=$((runtime / 3600))
+	minutes=$(( (runtime % 3600) / 60 ))
+	seconds=$((runtime % 60))
 	echo "%"
 	echo "% Batch testing ended @ $end_date"
+	echo "% Batch runtime took $(printf '%dh:%02dm:%02ds' $hours $minutes $seconds)"
 fi
 
 if [ "$crashed" -gt 0 ] ; then
