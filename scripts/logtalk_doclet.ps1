@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation automation script
-##   Last updated on March 26, 2025
+##   Last updated on February 24, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -40,7 +40,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 2.7"
+	Write-Output "$myName 3.0"
 }
 
 Function Invoke-Doclets() {
@@ -247,6 +247,7 @@ if (Test-Path "$d/tester_versions.txt") {
 }
 
 $start_date = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
+$start_time = Get-Date
 
 Write-Output '*******************************************************************************'
 Write-Output "***** Batch documentation processing started @ $start_date"
@@ -294,8 +295,11 @@ Write-Output "***** $doclets doclets: $timeouts timeouts, $crashes crashes, $fai
 Write-Output "*******************************************************************************"
 
 $end_date = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
+$runtime = (Get-Date) - $start_time
+$runtime_str = "{0}h:{1:D2}m:{2:D2}s" -f [int][Math]::Floor($runtime.TotalHours), $runtime.Minutes, $runtime.Seconds
 
 Write-Output "***** Batch documentation processing ended @ $end_date"
+Write-Output "***** Batch documentation processing took $runtime_str"
 Write-Output '*******************************************************************************'
 
 Pop-Location

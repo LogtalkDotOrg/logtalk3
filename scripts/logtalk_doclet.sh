@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation automation script
-##   Last updated on November 16, 2025
+##   Last updated on February 24, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -31,7 +31,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 2.8"
+	echo "$(basename "$0") 3.0"
 	exit 0
 }
 
@@ -264,6 +264,7 @@ touch "$results"/*.results
 touch "$results"/*.errors
 
 start_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
+start_time=$(date +%s)
 
 echo '*******************************************************************************'
 echo "***** Batch documentation processing started @ $start_date"
@@ -309,8 +310,14 @@ echo "***** $doclets doclets: $timeouts timeouts, $crashes crashes, $failures fa
 echo "*******************************************************************************"
 
 end_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
+end_time=$(date +%s)
+runtime=$((end_time - start_time))
+hours=$((runtime / 3600))
+minutes=$(( (runtime % 3600) / 60 ))
+seconds=$((runtime % 60))
 
 echo "***** Batch documentation processing ended @ $end_date"
+echo "***** Batch documentation processing took $(printf '%dh:%02dm:%02ds' $hours $minutes $seconds)"
 echo '*******************************************************************************'
 
 if [ "$crashes" -gt 0 ] ; then
