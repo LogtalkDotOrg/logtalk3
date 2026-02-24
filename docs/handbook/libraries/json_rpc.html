@@ -127,9 +127,18 @@
 <li class="toctree-l4"><a class="reference internal" href="#message-classification">Message classification</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#field-extraction">Field extraction</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#stream-i-o-client-and-server-api">Stream I/O (client and server API)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#content-length-framed-i-o-lsp-mcp-protocols">Content-Length framed I/O (LSP/MCP protocols)</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#api-summary">API summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api-summary">API summary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#message-construction">Message construction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#standard-error-responses">Standard error responses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#encoding-and-decoding-1">Encoding and decoding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#message-classification-1">Message classification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#field-extraction-1">Field extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stream-i-o">Stream I/O</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="json_schema.html"><code class="docutils literal notranslate"><span class="pre">json_schema</span></code></a></li>
@@ -225,7 +234,9 @@
 for constructing, parsing, classifying, and inspecting JSON-RPC 2.0
 messages (requests, notifications, responses, and error responses). Also
 provides stream-based message I/O for implementing JSON-RPC clients and
-servers. Uses the <code class="docutils literal notranslate"><span class="pre">json</span></code> library for JSON parsing and generation.</p>
+servers, including Content-Length header framing as used by the Language
+Server Protocol (LSP) and the Model Context Protocol (MCP). Uses the
+<code class="docutils literal notranslate"><span class="pre">json</span></code> library for JSON parsing and generation.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -350,9 +361,30 @@ link in a web browser.</p>
 <p>These predicates can be used with any stream, including socket streams
 from the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library, to implement JSON-RPC clients and servers.</p>
 </section>
+<section id="content-length-framed-i-o-lsp-mcp-protocols">
+<h3>Content-Length framed I/O (LSP/MCP protocols)<a class="headerlink" href="#content-length-framed-i-o-lsp-mcp-protocols" title="Link to this heading"></a></h3>
+<p>Write and read JSON-RPC messages using <code class="docutils literal notranslate"><span class="pre">Content-Length</span></code> header framing
+as defined by the Language Server Protocol (LSP) and the Model Context
+Protocol (MCP). Each message is preceded by a
+<code class="docutils literal notranslate"><span class="pre">Content-Length:</span> <span class="pre">N\r\n\r\n</span></code> header where <code class="docutils literal notranslate"><span class="pre">N</span></code> is the byte length of
+the JSON body:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> json_rpc<span class="o">::</span>write_framed_message(<span class="nv">Output</span>, <span class="nv">Message</span>).
+...
+
+| <span class="o">?-</span> json_rpc<span class="o">::</span>read_framed_message(<span class="nv">Input</span>, <span class="nv">Message</span>).
+...
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">read_framed_message/2</span></code> fails at end of stream or if the header is
+missing or malformed.</p>
+</section>
 </section>
 <section id="api-summary">
 <h2>API summary<a class="headerlink" href="#api-summary" title="Link to this heading"></a></h2>
+<section id="message-construction">
+<h3>Message construction<a class="headerlink" href="#message-construction" title="Link to this heading"></a></h3>
+<p>Predicates for building JSON-RPC 2.0 message terms. Requests include an
+<code class="docutils literal notranslate"><span class="pre">id</span></code> for matching responses; notifications do not.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">request(+Method,</span> <span class="pre">+Params,</span> <span class="pre">+Id,</span> <span class="pre">--Request)</span></code> - Construct a request</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">request(+Method,</span> <span class="pre">+Id,</span> <span class="pre">--Request)</span></code> - Construct a request with no
@@ -367,22 +399,42 @@ response</p></li>
 an error response</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">error_response(+Code,</span> <span class="pre">+Message,</span> <span class="pre">+Data,</span> <span class="pre">+Id,</span> <span class="pre">--ErrorResponse)</span></code> -
 Construct an error response with data</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">parse_error(--ErrorResponse)</span></code> - Construct a parse error (-32700)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">invalid_request(--ErrorResponse)</span></code> - Construct an invalid request
-error (-32600)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">method_not_found(+Id,</span> <span class="pre">--ErrorResponse)</span></code> - Construct a method not
-found error (-32601)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">invalid_params(+Id,</span> <span class="pre">--ErrorResponse)</span></code> - Construct an invalid params
-error (-32602)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">internal_error(+Id,</span> <span class="pre">--ErrorResponse)</span></code> - Construct an internal error
-(-32603)</p></li>
+</ul>
+</section>
+<section id="standard-error-responses">
+<h3>Standard error responses<a class="headerlink" href="#standard-error-responses" title="Link to this heading"></a></h3>
+<p>Convenience predicates for the five standard JSON-RPC 2.0 error codes.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">parse_error(--ErrorResponse)</span></code> - Parse error (-32700)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">invalid_request(--ErrorResponse)</span></code> - Invalid request (-32600)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">method_not_found(+Id,</span> <span class="pre">--ErrorResponse)</span></code> - Method not found (-32601)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">invalid_params(+Id,</span> <span class="pre">--ErrorResponse)</span></code> - Invalid params (-32602)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">internal_error(+Id,</span> <span class="pre">--ErrorResponse)</span></code> - Internal error (-32603)</p></li>
+</ul>
+</section>
+<section id="encoding-and-decoding-1">
+<span id="id1"></span><h3>Encoding and decoding<a class="headerlink" href="#encoding-and-decoding-1" title="Link to this heading"></a></h3>
+<p>Convert between JSON-RPC message terms and JSON atoms (strings).</p>
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">encode(+Term,</span> <span class="pre">--JSON)</span></code> - Encode a JSON-RPC term to a JSON atom</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">decode(+JSON,</span> <span class="pre">--Term)</span></code> - Decode a JSON atom to a JSON-RPC term</p></li>
+</ul>
+</section>
+<section id="message-classification-1">
+<span id="id2"></span><h3>Message classification<a class="headerlink" href="#message-classification-1" title="Link to this heading"></a></h3>
+<p>Test what kind of JSON-RPC message a term represents.</p>
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">is_request(+Term)</span></code> - Test if a term is a request</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">is_notification(+Term)</span></code> - Test if a term is a notification</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">is_response(+Term)</span></code> - Test if a term is a successful response</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">is_error_response(+Term)</span></code> - Test if a term is an error response</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">is_batch(+Term)</span></code> - Test if a term is a batch (non-empty list)</p></li>
+</ul>
+</section>
+<section id="field-extraction-1">
+<span id="id3"></span><h3>Field extraction<a class="headerlink" href="#field-extraction-1" title="Link to this heading"></a></h3>
+<p>Extract individual fields from JSON-RPC message terms.</p>
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">id(+Message,</span> <span class="pre">--Id)</span></code> - Extract the id field</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">method(+Message,</span> <span class="pre">--Method)</span></code> - Extract the method field</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">params(+Message,</span> <span class="pre">--Params)</span></code> - Extract the params field</p></li>
@@ -392,11 +444,24 @@ error (-32602)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">error_message(+Message,</span> <span class="pre">--ErrorMessage)</span></code> - Extract the error
 message</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">error_data(+Message,</span> <span class="pre">--Data)</span></code> - Extract the error data</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">write_message(+Output,</span> <span class="pre">+Message)</span></code> - Write a JSON-RPC message to a
-stream</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">read_message(+Input,</span> <span class="pre">--Message)</span></code> - Read a JSON-RPC message from a
-stream</p></li>
 </ul>
+</section>
+<section id="stream-i-o">
+<h3>Stream I/O<a class="headerlink" href="#stream-i-o" title="Link to this heading"></a></h3>
+<p>Read and write JSON-RPC messages over streams. The newline-delimited
+variants are suitable for socket-based communication. The Content-Length
+framed variants implement the header-based framing used by the Language
+Server Protocol (LSP) and the Model Context Protocol (MCP).</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">write_message(+Output,</span> <span class="pre">+Message)</span></code> - Write a newline-delimited
+message</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">read_message(+Input,</span> <span class="pre">--Message)</span></code> - Read a newline-delimited message</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write_framed_message(+Output,</span> <span class="pre">+Message)</span></code> - Write a message with
+Content-Length framing</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">read_framed_message(+Input,</span> <span class="pre">--Message)</span></code> - Read a message with
+Content-Length framing</p></li>
+</ul>
+</section>
 </section>
 </section>
 

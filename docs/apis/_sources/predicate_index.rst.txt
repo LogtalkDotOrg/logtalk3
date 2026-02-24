@@ -10964,6 +10964,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`csv_protocol <csv_protocol/0::read_file_by_line/3>`
 * :ref:`tsv_protocol <tsv_protocol/0::read_file_by_line/3>`
 
+``read_framed_message/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::read_framed_message/2>`
+
 ``read_from_atom/2``
 --------------------
 
@@ -14603,6 +14613,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`csv_protocol <csv_protocol/0::write_file/3>`
 * :ref:`tsv_protocol <tsv_protocol/0::write_file/3>`
+
+``write_framed_message/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_rpc <json_rpc/0::write_framed_message/2>`
 
 ``write_max_depth/1``
 ---------------------

@@ -15,7 +15,7 @@ JSON-RPC 2.0 protocol encoding and decoding. Provides predicates for constructin
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-14
+| **Date:** 2026-02-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -594,6 +594,44 @@ Reads a JSON-RPC 2.0 message from an input stream. Reads a line of JSON text and
 |    ``read_message(Input,Message)``
 | **Mode and number of proofs:**
 |    ``read_message(+stream,--compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: write_framed_message/2
+.. _json_rpc/0::write_framed_message/2:
+
+``write_framed_message/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Writes a JSON-RPC 2.0 message to an output stream using Content-Length framing (as used by LSP and MCP protocols). The message is preceded by a ``Content-Length: N\r\n\r\n`` header where ``N`` is the byte length of the JSON body. Flushes the output stream after writing.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``write_framed_message(Output,Message)``
+| **Mode and number of proofs:**
+|    ``write_framed_message(+stream,+compound)`` - ``one``
+
+
+------------
+
+.. index:: read_framed_message/2
+.. _json_rpc/0::read_framed_message/2:
+
+``read_framed_message/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Reads a JSON-RPC 2.0 message from an input stream using Content-Length framing (as used by LSP and MCP protocols). Reads a ``Content-Length: N\r\n\r\n`` header followed by exactly ``N`` bytes of JSON body. Fails at end of stream or if the header is missing or malformed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``read_framed_message(Input,Message)``
+| **Mode and number of proofs:**
+|    ``read_framed_message(+stream,--compound)`` - ``zero_or_one``
 
 
 ------------

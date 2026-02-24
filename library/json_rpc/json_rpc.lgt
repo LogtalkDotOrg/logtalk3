@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-14,
+		date is 2026-02-24,
 		comment is 'JSON-RPC 2.0 protocol encoding and decoding. Provides predicates for constructing and parsing JSON-RPC 2.0 request, notification, response, and error objects. Uses the ``json`` library for JSON parsing and generation.',
 		remarks is [
 			'Specification' - 'Implements the JSON-RPC 2.0 specification: https://www.jsonrpc.org/specification',
@@ -43,7 +43,7 @@
 	]).
 
 	:- uses(list, [
-		valid/1 as is_list/1
+		append/3, length/2, valid/1 as is_list/1
 	]).
 
 	:- uses(reader, [
@@ -375,6 +375,39 @@
 		Atom \== end_of_file,
 		parse(atom(Atom), Message).
 
+	% Content-Length framed stream I/O (for LSP/MCP style protocols)
+
+	:- public(write_framed_message/2).
+	:- mode(write_framed_message(+stream, +compound), one).
+	:- info(write_framed_message/2, [
+		comment is 'Writes a JSON-RPC 2.0 message to an output stream using Content-Length framing (as used by LSP and MCP protocols). The message is preceded by a ``Content-Length: N\\r\\n\\r\\n`` header where ``N`` is the byte length of the JSON body. Flushes the output stream after writing.',
+		argnames is ['Output', 'Message']
+	]).
+
+	:- public(read_framed_message/2).
+	:- mode(read_framed_message(+stream, --compound), zero_or_one).
+	:- info(read_framed_message/2, [
+		comment is 'Reads a JSON-RPC 2.0 message from an input stream using Content-Length framing (as used by LSP and MCP protocols). Reads a ``Content-Length: N\\r\\n\\r\\n`` header followed by exactly ``N`` bytes of JSON body. Fails at end of stream or if the header is missing or malformed.',
+		argnames is ['Input', 'Message']
+	]).
+
+	write_framed_message(Output, Message) :-
+		generate(codes(Codes), Message),
+		length(Codes, Length),
+		write(Output, 'Content-Length: '),
+		write(Output, Length),
+		put_code(Output, 0'\r), put_code(Output, 0'\n),
+		put_code(Output, 0'\r), put_code(Output, 0'\n),
+		write_codes(Codes, Output),
+		flush_output(Output).
+
+	read_framed_message(Input, Message) :-
+		read_content_length_header(Input, Length),
+		Length > 0,
+		read_n_codes(Input, Length, Codes),
+		atom_codes(Atom, Codes),
+		parse(atom(Atom), Message).
+
 	% auxiliary predicates for curly-term pair lookup
 
 	has_pair({Pairs}, Key, Value) :-
@@ -398,5 +431,78 @@
 	write_codes([Code| Codes], Stream) :-
 		put_code(Stream, Code),
 		write_codes(Codes, Stream).
+
+	% Read the Content-Length header line(s) and return the length
+	% Format: Content-Length: N\r\n\r\n
+	% Skips any other headers until the blank line separator
+	read_content_length_header(Input, Length) :-
+		read_header_line(Input, Line),
+		(	Line == end_of_file ->
+			fail
+		;	parse_content_length(Line, Length) ->
+			skip_to_blank_line(Input)
+		;	% skip unknown header, keep reading
+			read_content_length_header(Input, Length)
+		).
+
+	% Read a header line (terminated by \r\n or \n) into a list of codes
+	read_header_line(Input, Line) :-
+		get_code(Input, Code),
+		(	Code =:= -1 ->
+			Line = end_of_file
+		;	Code =:= 0'\n ->
+			Line = []
+		;	Code =:= 0'\r ->
+			get_code(Input, Code2),
+			(	Code2 =:= 0'\n ->
+				Line = []
+			;	read_header_line_rest(Input, Rest),
+				Line = [Code, Code2| Rest]
+			)
+		;	read_header_line_rest(Input, Rest),
+			Line = [Code| Rest]
+		).
+
+	read_header_line_rest(Input, Line) :-
+		get_code(Input, Code),
+		(	Code =:= -1 ->
+			Line = []
+		;	Code =:= 0'\n ->
+			Line = []
+		;	Code =:= 0'\r ->
+			get_code(Input, Code2),
+			(	Code2 =:= 0'\n ->
+				Line = []
+			;	read_header_line_rest(Input, Rest),
+				Line = [Code, Code2| Rest]
+			)
+		;	read_header_line_rest(Input, Rest),
+			Line = [Code| Rest]
+		).
+
+	% Parse "Content-Length: N" from a list of codes
+	parse_content_length(Codes, Length) :-
+		atom_codes('Content-Length: ', Prefix),
+		append(Prefix, LengthCodes, Codes),
+		number_codes(Length, LengthCodes).
+
+	% Skip header lines until we find an empty line (\r\n or \n)
+	skip_to_blank_line(Input) :-
+		read_header_line(Input, Line),
+		(	Line == [] ->
+			true
+		;	Line == end_of_file ->
+			true
+		;	skip_to_blank_line(Input)
+		).
+
+	% Read exactly N codes from a stream
+	read_n_codes(_, 0, []) :- !.
+	read_n_codes(Input, N, [Code| Codes]) :-
+		N > 0,
+		get_code(Input, Code),
+		Code =\= -1,
+		N1 is N - 1,
+		read_n_codes(Input, N1, Codes).
 
 :- end_object.

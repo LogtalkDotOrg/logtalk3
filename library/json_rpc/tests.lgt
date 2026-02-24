@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-14,
+		date is 2026-02-24,
 		comment is 'Unit tests for the "json_rpc" library.'
 	]).
 
@@ -34,7 +34,10 @@
 	cleanup :-
 		^^clean_file('test_json_rpc.tmp'),
 		^^clean_file('test_json_rpc_multi.tmp'),
-		^^clean_file('test_json_rpc_eof.tmp').
+		^^clean_file('test_json_rpc_eof.tmp'),
+		^^clean_file('test_json_rpc_framed.tmp'),
+		^^clean_file('test_json_rpc_framed_multi.tmp'),
+		^^clean_file('test_json_rpc_framed_eof.tmp').
 
 	% request construction tests
 
@@ -315,12 +318,128 @@
 		json_rpc::method(ReadMsg1, M1),
 		json_rpc::method(ReadMsg2, M2).
 
-	test(json_rpc_read_message_eof_01, fail) :-
+	test(json_rpc_read_message_eof_01, false, [cleanup(close(in))]) :-
 		^^file_path('test_json_rpc_eof.tmp', File),
 		open(File, write, Output),
 		close(Output),
+		open(File, read, Input, [alias(in)]),
+		json_rpc::read_message(Input, _).
+
+	% Content-Length framed I/O tests
+
+	% Write and read back a single framed request
+	test(json_rpc_write_read_framed_message_01, true(json_rpc::is_request(ReadMsg))) :-
+		json_rpc::request(subtract, [42,23], 1, Request),
+		^^file_path('test_json_rpc_framed.tmp', File),
+		open(File, write, Output),
+		json_rpc::write_framed_message(Output, Request),
+		close(Output),
 		open(File, read, Input),
-		json_rpc::read_message(Input, _),
+		json_rpc::read_framed_message(Input, ReadMsg),
 		close(Input).
+
+	% Verify field values survive the framed write/read roundtrip
+	test(json_rpc_write_read_framed_message_02, true(Method-Id == subtract-1)) :-
+		json_rpc::request(subtract, [42,23], 1, Request),
+		^^file_path('test_json_rpc_framed.tmp', File),
+		open(File, write, Output),
+		json_rpc::write_framed_message(Output, Request),
+		close(Output),
+		open(File, read, Input),
+		json_rpc::read_framed_message(Input, ReadMsg),
+		close(Input),
+		json_rpc::method(ReadMsg, Method),
+		json_rpc::id(ReadMsg, Id).
+
+	% Framed roundtrip preserves a response with a structured result
+	test(json_rpc_write_read_framed_message_03, true(Result == 19)) :-
+		json_rpc::response(19, 1, Response),
+		^^file_path('test_json_rpc_framed.tmp', File),
+		open(File, write, Output),
+		json_rpc::write_framed_message(Output, Response),
+		close(Output),
+		open(File, read, Input),
+		json_rpc::read_framed_message(Input, ReadMsg),
+		close(Input),
+		json_rpc::result(ReadMsg, Result).
+
+	% Framed roundtrip preserves an error response
+	test(json_rpc_write_read_framed_message_04, true(Code == -32601)) :-
+		json_rpc::error_response(-32601, 'Method not found', 1, ErrorResponse),
+		^^file_path('test_json_rpc_framed.tmp', File),
+		open(File, write, Output),
+		json_rpc::write_framed_message(Output, ErrorResponse),
+		close(Output),
+		open(File, read, Input),
+		json_rpc::read_framed_message(Input, ReadMsg),
+		close(Input),
+		json_rpc::error_code(ReadMsg, Code).
+
+	% Framed roundtrip preserves a notification (no id)
+	test(json_rpc_write_read_framed_message_05, true(json_rpc::is_notification(ReadMsg))) :-
+		json_rpc::notification(update, [1,2,3], Notification),
+		^^file_path('test_json_rpc_framed.tmp', File),
+		open(File, write, Output),
+		json_rpc::write_framed_message(Output, Notification),
+		close(Output),
+		open(File, read, Input),
+		json_rpc::read_framed_message(Input, ReadMsg),
+		close(Input).
+
+	% Write and read multiple framed messages sequentially
+	test(json_rpc_write_read_framed_multiple_01, true(M1-M2 == subtract-update)) :-
+		json_rpc::request(subtract, [42,23], 1, Request),
+		json_rpc::notification(update, [1,2,3], Notification),
+		^^file_path('test_json_rpc_framed_multi.tmp', File),
+		open(File, write, Output),
+		json_rpc::write_framed_message(Output, Request),
+		json_rpc::write_framed_message(Output, Notification),
+		close(Output),
+		open(File, read, Input),
+		json_rpc::read_framed_message(Input, ReadMsg1),
+		json_rpc::read_framed_message(Input, ReadMsg2),
+		close(Input),
+		json_rpc::method(ReadMsg1, M1),
+		json_rpc::method(ReadMsg2, M2).
+
+	% Three framed messages in sequence with mixed types
+	test(json_rpc_write_read_framed_multiple_02, true(R1-R2-R3 == request-response-notification)) :-
+		json_rpc::request(foo, [1], 1, Req),
+		json_rpc::response(42, 1, Resp),
+		json_rpc::notification(bar, [2], Notif),
+		^^file_path('test_json_rpc_framed_multi.tmp', File),
+		open(File, write, Output),
+		json_rpc::write_framed_message(Output, Req),
+		json_rpc::write_framed_message(Output, Resp),
+		json_rpc::write_framed_message(Output, Notif),
+		close(Output),
+		open(File, read, Input),
+		json_rpc::read_framed_message(Input, R1Msg),
+		json_rpc::read_framed_message(Input, R2Msg),
+		json_rpc::read_framed_message(Input, R3Msg),
+		close(Input),
+		(json_rpc::is_request(R1Msg) -> R1 = request ; R1 = other),
+		(json_rpc::is_response(R2Msg) -> R2 = response ; R2 = other),
+		(json_rpc::is_notification(R3Msg) -> R3 = notification ; R3 = other).
+
+	% Reading from an empty file fails
+	test(json_rpc_read_framed_message_eof_01, false, [cleanup(close(in))]) :-
+		^^file_path('test_json_rpc_framed_eof.tmp', File),
+		open(File, write, Output),
+		close(Output),
+		open(File, read, Input, [alias(in)]),
+		json_rpc::read_framed_message(Input, _).
+
+	% After reading all framed messages, a subsequent read fails
+	test(json_rpc_read_framed_message_eof_02, false, [cleanup(close(in))]) :-
+		json_rpc::request(foo, [1], 1, Request),
+		^^file_path('test_json_rpc_framed_eof.tmp', File),
+		open(File, write, Output),
+		json_rpc::write_framed_message(Output, Request),
+		close(Output),
+		open(File, read, Input, [alias(in)]),
+		json_rpc::read_framed_message(Input, _),
+		% Second read should fail (no more messages)
+		json_rpc::read_framed_message(Input, _).
 
 :- end_object.
