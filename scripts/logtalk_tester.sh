@@ -744,7 +744,7 @@ if [ "$output" == 'verbose' ] ; then
 	seconds=$((runtime % 60))
 	echo "%"
 	echo "% Batch testing ended @ $end_date"
-	echo "% Batch runtime took $(printf '%dh:%02dm:%02ds' $hours $minutes $seconds)"
+	echo "% Batch run took $(printf '%dh:%02dm:%02ds' $hours $minutes $seconds)"
 fi
 
 if [ "$crashed" -gt 0 ] ; then

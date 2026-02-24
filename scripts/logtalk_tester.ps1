@@ -827,7 +827,7 @@ if ($o -eq "verbose") {
 	$runtime_str = "{0}h:{1:D2}m:{2:D2}s" -f [int][Math]::Floor($runtime.TotalHours), $runtime.Minutes, $runtime.Seconds
 	Write-Output "%"
 	Write-Output "% Batch testing ended @ $end_date"
-	Write-Output "% Batch runtime took $runtime_str"
+	Write-Output "% Batch run took $runtime_str"
 }
 
 Pop-Location
