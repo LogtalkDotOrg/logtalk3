@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
 		date is 2026-02-24,
 		comment is 'Unit tests for the "mcp_server" library.'
@@ -31,7 +31,7 @@
 
 	:- uses(json_rpc, [
 		request/4, request/3, notification/3, response/3, is_request/1, is_response/1, is_error_response/1,
-		method/2, params/2, result/2, id/2, error_code/2, error_data/2, write_message/2, read_message/2
+		method/2, params/2, result/2, id/2, error_code/2, write_message/2, read_message/2
 	]).
 
 	:- uses(list, [
@@ -102,7 +102,7 @@
 		is_response(Response),
 		id(Response, 1),
 		result(Response, Result),
-		has_pair(Result, protocolVersion, '2025-03-26'),
+		has_pair(Result, protocolVersion, '2025-06-18'),
 		has_pair(Result, serverInfo, ServerInfo),
 		has_pair(ServerInfo, name, 'test-server').
 
@@ -118,39 +118,30 @@
 		\+ is_error_response(Response),
 		id(Response, 1),
 		result(Response, Result),
-		has_pair(Result, protocolVersion, '2025-03-26').
+		has_pair(Result, protocolVersion, '2025-06-18').
 
-	% Client sends an older unsupported version; server should reject with error -32602
+	% Client sends an older unsupported version; server should respond with its latest version
 	test(mcp_server_initialize_older_version_01, true) :-
 		run_mcp_exchange(
 			[initialize_version_request('2024-11-05', 1)],
 			[Response]
 		),
-		is_error_response(Response),
+		is_response(Response),
+		\+ is_error_response(Response),
 		id(Response, 1),
-		error_code(Response, -32602).
-
-	% Rejected initialization should include supported versions in data
-	test(mcp_server_initialize_rejected_version_data_01, true) :-
-		run_mcp_exchange(
-			[initialize_version_request('2024-11-05', 1)],
-			[Response]
-		),
-		is_error_response(Response),
-		error_data(Response, Data),
-		has_pair(Data, supported, Supported),
-		member('2025-03-26', Supported).
+		result(Response, Result),
+		has_pair(Result, protocolVersion, '2025-06-18').
 
 	% Client sends the exact supported version; should succeed
 	test(mcp_server_initialize_exact_version_01, true) :-
 		run_mcp_exchange(
-			[initialize_version_request('2025-03-26', 1)],
+			[initialize_version_request('2025-06-18', 1)],
 			[Response]
 		),
 		is_response(Response),
 		\+ is_error_response(Response),
 		result(Response, Result),
-		has_pair(Result, protocolVersion, '2025-03-26').
+		has_pair(Result, protocolVersion, '2025-06-18').
 
 	test(mcp_server_ping_01, true) :-
 		run_mcp_exchange(
@@ -722,6 +713,210 @@
 		has_pair(Result, contents, [ContentItem]),
 		has_pair(ContentItem, text, Text).
 
+	% MCP 2025-06-18: Tool title tests
+
+	% Tool with title in info/2 should include title in descriptor
+	test(mcp_server_tool_title_from_info_01, true(Title == 'Division Tool')) :-
+		run_mcp_exchange_with(
+			test_structured_tools,
+			[tools_list_request(1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, tools, Tools),
+		member(Tool, Tools),
+		has_pair(Tool, name, divide),
+		has_pair(Tool, title, Title).
+
+	% Tool without explicit title in info/2 should use the predicate name as title
+	test(mcp_server_tool_title_fallback_01, true(Title == square)) :-
+		run_mcp_exchange_with(
+			test_structured_tools,
+			[tools_list_request(1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, tools, Tools),
+		member(Tool, Tools),
+		has_pair(Tool, name, square),
+		has_pair(Tool, title, Title).
+
+	% All tools should have a title field
+	test(mcp_server_tool_title_always_present_01, true) :-
+		run_mcp_exchange(
+			[tools_list_request(1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, tools, Tools),
+		Tools = [Tool| _],
+		has_pair(Tool, title, _).
+
+	% MCP 2025-06-18: Output schema tests
+
+	% Tool with output_schema should include outputSchema in descriptor
+	test(mcp_server_tool_output_schema_01, true) :-
+		run_mcp_exchange_with(
+			test_structured_tools,
+			[tools_list_request(1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, tools, Tools),
+		member(Tool, Tools),
+		has_pair(Tool, name, divide),
+		has_pair(Tool, outputSchema, Schema),
+		has_pair(Schema, type, object).
+
+	% Tool without output_schema should not include outputSchema
+	test(mcp_server_tool_no_output_schema_01, true) :-
+		run_mcp_exchange(
+			[tools_list_request(1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, tools, Tools),
+		member(Tool, Tools),
+		has_pair(Tool, name, factorial),
+		\+ has_pair(Tool, outputSchema, _).
+
+	% MCP 2025-06-18: Structured content tests
+
+	% structured/1 result should include structuredContent
+	test(mcp_server_structured_content_01, true) :-
+		run_mcp_exchange_with(
+			test_structured_tools,
+			[tools_call_request(divide, {'X'-10, 'Y'-2}, 1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, structuredContent, StructuredContent),
+		has_pair(StructuredContent, quotient, 5.0).
+
+	% structured/1 result should also include auto-generated text content
+	test(mcp_server_structured_content_auto_text_01, true) :-
+		run_mcp_exchange_with(
+			test_structured_tools,
+			[tools_call_request(divide, {'X'-10, 'Y'-2}, 1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, content, [ContentItem| _]),
+		has_pair(ContentItem, type, text),
+		has_pair(ContentItem, text, _).
+
+	% structured/2 result should include both user-provided content and structuredContent
+	test(mcp_server_structured_content_with_items_01, true) :-
+		run_mcp_exchange_with(
+			test_structured_tools,
+			[tools_call_request(square, {'N'-5}, 1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, content, Content),
+		Content = [ContentItem| _],
+		has_pair(ContentItem, text, _),
+		has_pair(Result, structuredContent, StructuredContent),
+		has_pair(StructuredContent, result, 25).
+
+	% MCP 2025-06-18: Resource link content tests
+
+	% resource_link/2 content item in tool results
+	test(mcp_server_resource_link_01, true) :-
+		run_mcp_exchange_with(
+			test_resource_link_tools,
+			[tools_call_request(find_docs, {'Topic'-logtalk}, 1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, content, Content),
+		member(ContentItem, Content),
+		has_pair(ContentItem, type, resource_link),
+		has_pair(ContentItem, uri, 'logtalk://docs/logtalk'),
+		has_pair(ContentItem, name, logtalk).
+
+	% resource_link/4 content item includes description and mimeType
+	test(mcp_server_resource_link_with_details_01, true) :-
+		run_mcp_exchange_with(
+			test_resource_link_tools,
+			[tools_call_request(find_docs, {'Topic'-logtalk}, 1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, content, Content),
+		member(ContentItem, Content),
+		has_pair(ContentItem, type, resource_link),
+		has_pair(ContentItem, description, 'Documentation page'),
+		has_pair(ContentItem, mimeType, 'text/html').
+
+	% MCP 2025-06-18: Prompt title tests
+
+	% 4-arg prompt descriptor should include title
+	test(mcp_server_prompt_title_01, true(Title == 'Explain Tool')) :-
+		run_mcp_exchange_with(
+			test_structured_tools,
+			[prompts_list_request(1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, prompts, Prompts),
+		member(Prompt, Prompts),
+		has_pair(Prompt, name, explain),
+		has_pair(Prompt, title, Title).
+
+	% MCP 2025-06-18: Resource title tests
+
+	% 5-arg resource descriptor should include title
+	test(mcp_server_resource_title_01, true(Title == 'System Status')) :-
+		run_mcp_exchange_with(
+			test_structured_tools,
+			[resources_list_request(1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, resources, Resources),
+		member(Resource, Resources),
+		has_pair(Resource, uri, 'logtalk://test/status'),
+		has_pair(Resource, title, Title).
+
+	% MCP 2025-06-18: Server title tests
+
+	% Server title should be included in serverInfo when provided
+	test(mcp_server_server_title_01, true(Title == 'Test Server Title')) :-
+		run_mcp_exchange_with_options(
+			test_tools,
+			[server_title('Test Server Title')],
+			[initialize_request(1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, serverInfo, ServerInfo),
+		has_pair(ServerInfo, title, Title).
+
+	% Server without explicit title should not include title in serverInfo
+	test(mcp_server_server_no_title_01, true) :-
+		run_mcp_exchange(
+			[initialize_request(1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, serverInfo, ServerInfo),
+		\+ has_pair(ServerInfo, title, _).
+
 	% Test auxiliary predicates
 
 	% Run an MCP exchange using the public start/4 API with file streams
@@ -730,6 +925,10 @@
 
 	% Run an MCP exchange with a specific application object
 	run_mcp_exchange_with(Application, RequestSpecs, Responses) :-
+		run_mcp_exchange_with_options(Application, [], RequestSpecs, Responses).
+
+	% Run an MCP exchange with a specific application object and options
+	run_mcp_exchange_with_options(Application, Options, RequestSpecs, Responses) :-
 		^^file_path('mcp_input.tmp', InputFile),
 		^^file_path('mcp_output.tmp', OutputFile),
 		% Write all requests to input file
@@ -739,7 +938,7 @@
 		% Run server with file streams using the public API
 		open(InputFile, read, In),
 		open(OutputFile, write, OutStream),
-		mcp_server::start('test-server', Application, In, OutStream),
+		mcp_server::start('test-server', Application, In, OutStream, Options),
 		close(In),
 		close(OutStream),
 		% Read all responses from output file
@@ -758,7 +957,7 @@
 	spec_to_message(initialize_request(Id), Message) :-
 		request(
 			initialize,
-			{protocolVersion-'2025-03-26', capabilities-{}, clientInfo-{name-test, version-'1.0'}},
+			{protocolVersion-'2025-06-18', capabilities-{}, clientInfo-{name-test, version-'1.0'}},
 			Id,
 			Message
 		).

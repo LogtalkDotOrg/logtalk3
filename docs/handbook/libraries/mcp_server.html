@@ -130,6 +130,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#implementing-the-tool-protocol">Implementing the tool protocol</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#auto-dispatch-vs-custom-tool-call-3">Auto-dispatch vs. custom <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output-schemas-structured-tool-output">Output schemas (structured tool output)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#starting-the-server-for-debugging">Starting the server for debugging</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mcp-client-configuration">MCP client configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#elicitation-interactive-tools">Elicitation (interactive tools)</a></li>
@@ -227,9 +228,9 @@
 <span id="library-mcp-server"></span><h1><code class="docutils literal notranslate"><span class="pre">mcp_server</span></code><a class="headerlink" href="#mcp-server" title="Link to this heading"></a></h1>
 <p>MCP (Model Context Protocol) server library for Logtalk applications.
 Makes any Logtalk application available as a local MCP server using
-stdio transport. Implements the MCP 2025-03-26 specification (tools,
-prompts, resources, and elicitation capabilities). Supports version
-negotiation.</p>
+stdio transport. Implements the MCP 2025-06-18 specification (tools,
+prompts, resources, elicitation, structured output, and resource links).
+Supports version negotiation.</p>
 <p>The library uses the <code class="docutils literal notranslate"><span class="pre">json_rpc</span></code> library for JSON-RPC 2.0 message
 handling as currently required by the MCP specification.</p>
 <section id="api-documentation">
@@ -293,6 +294,9 @@ are exposed as MCP tools:</p>
 <p>Tool descriptions and parameter schemas are automatically derived from
 the <code class="docutils literal notranslate"><span class="pre">info/2</span></code> and <code class="docutils literal notranslate"><span class="pre">mode/2</span></code> directives. This must be accurate to allow
 correct derivation of inout and output arguments and types.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">title</span></code> key in the predicate’s <code class="docutils literal notranslate"><span class="pre">info/2</span></code> directive provides a
+human-friendly display name for the tool. If omitted, the predicate
+functor is used as the title.</p>
 <p>The supported predicates types and their corresponding JSON types are:</p>
 <table class="docutils align-default">
 <thead>
@@ -363,9 +367,27 @@ them as text content.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">text(Atom)</span></code> — a text result</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">error(Atom)</span></code> — a tool-level error (sets <code class="docutils literal notranslate"><span class="pre">isError:</span> <span class="pre">true</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">results(List)</span></code> — a list of content items (<code class="docutils literal notranslate"><span class="pre">text(Atom)</span></code> or
-<code class="docutils literal notranslate"><span class="pre">error(Atom)</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">results(List)</span></code> — a list of content items (<code class="docutils literal notranslate"><span class="pre">text(Atom)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">error(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">resource_link(URI,</span> <span class="pre">Name)</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">resource_link(URI,</span> <span class="pre">Name,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">structured(StructuredContent)</span></code> — a structured result (the server
+auto-generates a text representation for the <code class="docutils literal notranslate"><span class="pre">content</span></code> field)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">structured(Items,</span> <span class="pre">StructuredContent)</span></code> — a structured result with
+explicit content items for the <code class="docutils literal notranslate"><span class="pre">content</span></code> field</p></li>
 </ul>
+</section>
+<section id="output-schemas-structured-tool-output">
+<h3>Output schemas (structured tool output)<a class="headerlink" href="#output-schemas-structured-tool-output" title="Link to this heading"></a></h3>
+<p>Tools can declare an output schema by defining <code class="docutils literal notranslate"><span class="pre">output_schema/2</span></code> in
+their application object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>output_schema(divide, <span class="k">{</span>type<span class="o">-</span>object, properties<span class="o">-</span><span class="k">{</span>quotient<span class="o">-</span><span class="k">{</span>type<span class="o">-</span>number<span class="k">}}</span>, required<span class="o">-</span>[quotient]<span class="k">}</span>).
+</pre></div>
+</div>
+<p>When an output schema is declared, the tool descriptor includes an
+<code class="docutils literal notranslate"><span class="pre">outputSchema</span></code> field. The tool’s <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code> can then return
+<code class="docutils literal notranslate"><span class="pre">structured(StructuredContent)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">structured(Items,</span> <span class="pre">StructuredContent)</span></code> results. The
+<code class="docutils literal notranslate"><span class="pre">StructuredContent</span></code> must be a curly-term matching the schema.</p>
 </section>
 <section id="starting-the-server-for-debugging">
 <h3>Starting the server for debugging<a class="headerlink" href="#starting-the-server-for-debugging" title="Link to this heading"></a></h3>
@@ -374,7 +396,7 @@ them as text content.</p>
 </pre></div>
 </div>
 <p>With options:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mcp_server<span class="o">::</span>start(<span class="s">&#39;my-server&#39;</span>, my_tools, [version(<span class="s">&#39;2.0.0&#39;</span>)]).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mcp_server<span class="o">::</span>start(<span class="s">&#39;my-server&#39;</span>, my_tools, [version(<span class="s">&#39;2.0.0&#39;</span>), server_title(<span class="s">&#39;My Server&#39;</span>)]).
 </pre></div>
 </div>
 <p>There should either be no output or only a Prolog backend term input
@@ -530,10 +552,15 @@ capabilities:</p>
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">prompts/1</span></code> predicate returns a list of
-<code class="docutils literal notranslate"><span class="pre">prompt(Name,</span> <span class="pre">Description,</span> <span class="pre">Arguments)</span></code> descriptors:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">prompts/1</span></code> predicate returns a list of prompt descriptors:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">prompt(Name,</span> <span class="pre">Description,</span> <span class="pre">Arguments)</span></code> — without title</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prompt(Name,</span> <span class="pre">Title,</span> <span class="pre">Description,</span> <span class="pre">Arguments)</span></code> — with title</p></li>
+</ul>
+<p>Where:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Name</span></code> — the MCP prompt name (an atom)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Title</span></code> — a human-friendly display name (an atom, optional)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Description</span></code> — a human-readable description (an atom)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Arguments</span></code> — a list of
 <code class="docutils literal notranslate"><span class="pre">argument(ArgName,</span> <span class="pre">ArgDescription,</span> <span class="pre">Required)</span></code> terms where
@@ -593,12 +620,17 @@ declare <code class="docutils literal notranslate"><span class="pre">resources</
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">resources/1</span></code> predicate returns a list of
-<code class="docutils literal notranslate"><span class="pre">resource(URI,</span> <span class="pre">Name,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code> descriptors:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">resources/1</span></code> predicate returns a list of resource descriptors:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">resource(URI,</span> <span class="pre">Name,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code> — without title</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resource(URI,</span> <span class="pre">Name,</span> <span class="pre">Title,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code> — with title</p></li>
+</ul>
+<p>Where:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">URI</span></code> — the resource identifier (an atom, typically a URI like
 <code class="docutils literal notranslate"><span class="pre">logtalk://my-app/data</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Name</span></code> — a human-readable name (an atom)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Title</span></code> — a human-friendly display name (an atom, optional)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Description</span></code> — a human-readable description (an atom)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MimeType</span></code> — the MIME type of the resource content (an atom, e.g.
 <code class="docutils literal notranslate"><span class="pre">'text/plain'</span></code>, <code class="docutils literal notranslate"><span class="pre">'application/json'</span></code>)</p></li>
@@ -646,6 +678,9 @@ when not defined)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tool_call/4</span></code> — handles a tool call with an elicitation closure
 (optional; requires <code class="docutils literal notranslate"><span class="pre">capabilities([elicitation])</span></code> or
 <code class="docutils literal notranslate"><span class="pre">capabilities([...,</span> <span class="pre">elicitation])</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output_schema/2</span></code> — declares a JSON Schema for structured tool
+output (optional; when defined, the tool descriptor includes
+<code class="docutils literal notranslate"><span class="pre">outputSchema</span></code>)</p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">mcp_prompt_protocol</span></code> protocol defines the following predicates:</p>
 <ul class="simple">

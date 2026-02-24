@@ -8,13 +8,13 @@
 ``mcp_tool_protocol``
 =====================
 
-Protocol for Logtalk objects that provide tools to be exposed via an MCP (Model Context Protocol) server. Implementing objects must define the set of tools available and handle tool calls. Tool metadata (names, descriptions, parameter schemas) can be derived automatically from ``info/2`` and ``mode/2`` directives on the tool predicates, or can be specified explicitly via the ``tool/1`` predicate.
+Protocol for Logtalk objects that provide tools to be exposed via an MCP (Model Context Protocol) server. Implements the MCP 2025-06-18 specification. Implementing objects must define the set of tools available and handle tool calls. Tool metadata (names, titles, descriptions, parameter schemas) can be derived automatically from ``info/2`` and ``mode/2`` directives on the tool predicates, or can be specified explicitly via the ``tool/1`` predicate.
 
 | **Availability:** 
 |    ``logtalk_load(mcp_server(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:2:0
+| **Version:** 0:3:0
 | **Date:** 2026-02-24
 
 | **Compilation flags:**
@@ -28,6 +28,9 @@ Protocol for Logtalk objects that provide tools to be exposed via an MCP (Model 
 | **Remarks:**
 
    - Capabilities: Objects can optionally define ``capabilities/1`` to declare which MCP capabilities they require. Currently supported: ``elicitation`` (allows the server to ask the user questions during tool execution via MCP elicitation). If ``capabilities/1`` is not defined, only the ``tools`` capability is advertised.
+   - Tool title: The tool title (human-friendly display name) is derived from a ``title`` key in the predicate ``info/2`` directive. If not specified, the predicate name (functor) is used as the title.
+   - Structured output: Tools can declare an output schema via ``output_schema/2`` and return ``structured(StructuredContent)`` or ``structured(ContentItems, StructuredContent)`` results. The structured content is included in the ``structuredContent`` field of the tool call response alongside the ``content`` array.
+   - Resource links: Tool results can include ``resource_link(URI, Name)`` or ``resource_link(URI, Name, Description, MimeType)`` content items in ``results/1`` lists.
    - Elicitation: Tools that need user interaction during execution should define ``tool_call/4`` instead of ``tool_call/3``. The extra argument is an elicitation closure that can be called as ``call(Elicit, Message, Schema, Answer)`` where ``Message`` is the prompt text (an atom), ``Schema`` is a JSON Schema curly-term for the requested input, and ``Answer`` is unified with ``accept(Content)``, ``decline``, or ``cancel``.
 
 | **Inherited public predicates:**
@@ -65,7 +68,7 @@ Returns a list of MCP capabilities required by this tool provider. Currently sup
 ``tools/1``
 ^^^^^^^^^^^
 
-Returns a list of tool descriptors available from this object. Each descriptor is a compound term ``tool(Name, Functor, Arity)`` where ``Name`` is the MCP tool name (an atom), ``Functor`` is the predicate functor, and ``Arity`` is the predicate arity. By default, the tool name is the predicate functor. Tool descriptions and parameter schemas are derived from the ``info/2`` and ``mode/2`` directives of the corresponding predicates.
+Returns a list of tool descriptors available from this object. Each descriptor is a compound term ``tool(Name, Functor, Arity)`` where ``Name`` is the MCP tool name (an atom), ``Functor`` is the predicate functor, and ``Arity`` is the predicate arity. By default, the tool name is the predicate functor. Tool titles are derived from ``info/2`` ``title`` keys (falling back to the predicate name). Tool descriptions and parameter schemas are derived from the ``info/2`` and ``mode/2`` directives of the corresponding predicates.
 
 | **Compilation flags:**
 |    ``static``
@@ -84,7 +87,7 @@ Returns a list of tool descriptors available from this object. Each descriptor i
 ``tool_call/3``
 ^^^^^^^^^^^^^^^
 
-Handles a tool call. ``Name`` is the MCP tool name (as declared in ``tools/1``), ``Arguments`` is a list of ``ArgumentName-Value`` pairs, and ``Result`` is unified with the tool result. The result must be one of: ``text(Atom)`` for a text result, ``error(Atom)`` for an error result, or ``results(List)`` for a list of content items where each item is ``text(Atom)`` or ``error(Atom)``. If this predicate is not defined for a tool, the MCP server will use auto-dispatch: it calls the tool predicate as a message to the implementing object, collects output arguments, and returns them as a text result.
+Handles a tool call. ``Name`` is the MCP tool name (as declared in ``tools/1``), ``Arguments`` is a list of ``ArgumentName-Value`` pairs, and ``Result`` is unified with the tool result. The result must be one of: ``text(Atom)`` for a text result, ``error(Atom)`` for an error result, ``results(List)`` for a list of content items where each item is ``text(Atom)``, ``error(Atom)``, ``resource_link(URI, Name)``, or ``resource_link(URI, Name, Description, MimeType)``, ``structured(StructuredContent)`` for structured output with auto-generated text, or ``structured(ContentItems, StructuredContent)`` for structured output with explicit content items. If this predicate is not defined for a tool, the MCP server will use auto-dispatch: it calls the tool predicate as a message to the implementing object, collects output arguments, and returns them as a text result.
 
 | **Compilation flags:**
 |    ``static``
@@ -112,6 +115,25 @@ Handles a tool call with elicitation support. Same as ``tool_call/3`` but receiv
 |    ``tool_call(Name,Arguments,Elicit,Result)``
 | **Mode and number of proofs:**
 |    ``tool_call(+atom,+list(pair),+callable,--compound)`` - ``one``
+
+
+------------
+
+.. index:: output_schema/2
+.. _mcp_tool_protocol/0::output_schema/2:
+
+``output_schema/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the JSON output schema for the given tool name. Optional; when defined, the schema is included in the tool descriptor as ``outputSchema`` and the tool can return ``structured(StructuredContent)`` or ``structured(ContentItems, StructuredContent)`` results. The schema must be a curly-term following JSON Schema format (e.g. ``{type-object, properties-{temperature-{type-number}}, required-[temperature]}``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``output_schema(Name,Schema)``
+| **Mode and number of proofs:**
+|    ``output_schema(+atom,-compound)`` - ``zero_or_one``
 
 
 ------------

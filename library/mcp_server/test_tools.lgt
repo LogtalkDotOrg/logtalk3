@@ -59,7 +59,8 @@
 		tool(always_fails, always_fails, 1)
 	]).
 
-	factorial(0, 1) :- !.
+	factorial(0, 1) :-
+		!.
 	factorial(N, F) :-
 		N > 0,
 		N1 is N - 1,
@@ -91,12 +92,16 @@
 		argnames is ['N', 'Result']
 	]).
 
+	:- uses(list, [
+		memberchk/2
+	]).
+
 	tools([
 		tool(double, double, 2)
 	]).
 
 	tool_call(double, Arguments, Result) :-
-		member('N'-N, Arguments),
+		memberchk('N'-N, Arguments),
 		D is N * 2,
 		number_codes(D, Codes),
 		atom_codes(DAtom, Codes),
@@ -105,8 +110,6 @@
 
 	double(N, D) :-
 		D is N * 2.
-
-	:- uses(list, [member/2]).
 
 :- end_object.
 
@@ -137,6 +140,7 @@
 	]).
 
 	:- meta_predicate(tool_call(*, *, 3, *)).
+
 	tool_call(ask_name, _Arguments, Elicit, Result) :-
 		Schema = {type-object, properties-{name-{type-string}}, required-[name]},
 		call(Elicit, 'What is your name?', Schema, Answer),
@@ -155,7 +159,8 @@
 	has_pair({Pairs}, Key, Value) :-
 		curly_member(Key-Value, Pairs).
 
-	curly_member(Pair, (Pair, _)) :- !.
+	curly_member(Pair, (Pair, _)) :-
+		!.
 	curly_member(Pair, (_, Rest)) :-
 		!,
 		curly_member(Pair, Rest).
@@ -168,6 +173,10 @@
 
 :- object(test_prompt_tools,
 	implements([mcp_tool_protocol, mcp_prompt_protocol])).
+
+	:- uses(list, [
+		member/2
+	]).
 
 	capabilities([prompts]).
 
@@ -209,8 +218,6 @@
 			message(assistant, text('I would be happy to discuss that topic. What would you like to know?'))
 		]).
 
-	:- uses(list, [member/2]).
-
 :- end_object.
 
 
@@ -226,6 +233,10 @@
 	:- info(add/3, [
 		comment is 'Adds two numbers.',
 		argnames is ['X', 'Y', 'Sum']
+	]).
+
+	:- uses(list, [
+		member/2
 	]).
 
 	tools([
@@ -247,8 +258,6 @@
 		;	PromptText = 'Please summarize a text.'
 		),
 		Result = messages([message(user, text(PromptText))]).
-
-	:- uses(list, [member/2]).
 
 :- end_object.
 
@@ -323,6 +332,124 @@
 		Result = contents([
 			text_content('logtalk://test/data', 'text/plain', 'Some test data')
 		]).
+
+:- end_object.
+
+
+% Test application with tool titles, output schemas, structured results, and resource links
+
+:- object(test_structured_tools,
+	implements([mcp_tool_protocol, mcp_prompt_protocol, mcp_resource_protocol])).
+
+	capabilities([prompts, resources]).
+
+	:- public(divide/3).
+	:- mode(divide(+number, +number, -number), zero_or_one).
+	:- info(divide/3, [
+		comment is 'Divides two numbers.',
+		title is 'Division Tool',
+		argnames is ['X', 'Y', 'Quotient']
+	]).
+
+	:- public(square/2).
+	:- mode(square(+number, -number), one).
+	:- info(square/2, [
+		comment is 'Computes the square of a number.',
+		argnames is ['N', 'Square']
+	]).
+
+	:- uses(list, [
+		member/2
+	]).
+
+	tools([
+		tool(divide, divide, 3),
+		tool(square, square, 2)
+	]).
+
+	output_schema(divide, {type-object, properties-{quotient-{type-number}}, required-[quotient]}).
+
+	tool_call(divide, Arguments, Result) :-
+		member('X'-X, Arguments),
+		member('Y'-Y, Arguments),
+		(	Y =:= 0 ->
+			Result = error('Division by zero')
+		;	Q is float(X / Y),
+			Result = structured({quotient-Q})
+		).
+
+	tool_call(square, Arguments, Result) :-
+		member('N'-N, Arguments),
+		S is N * N,
+		number_codes(S, Codes),
+		atom_codes(SAtom, Codes),
+		atom_concat('The square is: ', SAtom, Text),
+		Result = structured([text(Text)], {result-S}).
+
+	divide(X, Y, Q) :-
+		Y =\= 0,
+		Q is X / Y.
+
+	square(N, S) :-
+		S is N * N.
+
+	% Prompts with title (4-arg descriptor)
+	prompts([
+		prompt(explain, 'Explain Tool', 'Explains a concept in detail', [
+			argument(concept, 'The concept to explain', true)
+		])
+	]).
+
+	prompt_get(explain, Arguments, Result) :-
+		(	member(concept-Concept, Arguments) ->
+			atom_concat('Please explain: ', Concept, Text)
+		;	Text = 'Please explain something.'
+		),
+		Result = messages([message(user, text(Text))]).
+
+	% Resources with title (5-arg descriptor)
+	resources([
+		resource('logtalk://test/status', status, 'System Status', 'Current system status', 'application/json')
+	]).
+
+	resource_read('logtalk://test/status', _Arguments, Result) :-
+		Result = contents([
+			text_content('logtalk://test/status', 'application/json', '{"status": "ok"}')
+		]).
+
+:- end_object.
+
+
+% Test application with resource_link content items
+
+:- object(test_resource_link_tools,
+	implements(mcp_tool_protocol)).
+
+	:- public(find_docs/2).
+	:- mode(find_docs(+atom, -atom), one).
+	:- info(find_docs/2, [
+		comment is 'Finds documentation for a topic.',
+		argnames is ['Topic', 'Result']
+	]).
+
+	:- uses(list, [
+		member/2
+	]).
+
+	tools([
+		tool(find_docs, find_docs, 2)
+	]).
+
+	tool_call(find_docs, Arguments, Result) :-
+		member('Topic'-Topic, Arguments),
+		atom_concat('logtalk://docs/', Topic, URI),
+		Result = results([
+			text('Found documentation:'),
+			resource_link(URI, Topic),
+			resource_link(URI, Topic, 'Documentation page', 'text/html')
+		]).
+
+	find_docs(_, found).
 
 :- end_object.
 

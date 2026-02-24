@@ -51,7 +51,7 @@
 	:- public(start/3).
 	:- mode(start(+atom, +object_identifier, +list), one).
 	:- info(start/3, [
-		comment is 'Starts the MCP server with the given server name, application object, and options. Currently supported options: ``version(Version)`` to set the server version (default ``''1.0.0''``).',
+		comment is 'Starts the MCP server with the given server name, application object, and options. Currently supported options: ``server_version(Version)`` to set the server version (default ``''1.0.0''``), ``server_title(Title)`` to set the server display title (default ``''''``, omitted when empty).',
 		argnames is ['Name', 'Application', 'Options']
 	]).
 
@@ -88,6 +88,9 @@
 	:- private(server_version_/1).
 	:- dynamic(server_version_/1).
 
+	:- private(server_title_/1).
+	:- dynamic(server_title_/1).
+
 	:- private(elicit_counter_/1).
 	:- dynamic(elicit_counter_/1).
 
@@ -95,13 +98,13 @@
 	:- dynamic(application_capabilities_/1).
 
 	:- uses(json_rpc, [
-		request/4, response/3, error_response/4, error_response/5, method_not_found/2, invalid_params/2, is_request/1,
+		request/4, response/3, error_response/4, method_not_found/2, invalid_params/2, is_request/1,
 		is_notification/1, is_response/1, id/2, method/2, params/2, result/2, write_message/2,
 		read_message/2
 	]).
 
 	:- uses(list, [
-		length/2, member/2
+		last/2, length/2, member/2
 	]).
 
 	:- uses(term_io, [
@@ -141,6 +144,7 @@
 		retractall(application_(_)),
 		retractall(server_name_(_)),
 		retractall(server_version_(_)),
+		retractall(server_title_(_)),
 		retractall(elicit_counter_(_)),
 		retractall(application_capabilities_(_)),
 		assertz(application_(Application)),
@@ -148,6 +152,8 @@
 %		^^option(server_name(Name), Options),
 		^^option(server_version(Version), Options),
 		assertz(server_version_(Version)),
+		^^option(server_title(Title), Options),
+		assertz(server_title_(Title)),
 		assertz(elicit_counter_(0)),
 		% Query application capabilities (default: no extra capabilities)
 		(	catch(Application::capabilities(ApplicationCapabilities), _, fail) ->
@@ -160,6 +166,7 @@
 		retractall(application_(_)),
 		retractall(server_name_(_)),
 		retractall(server_version_(_)),
+		retractall(server_title_(_)),
 		retractall(elicit_counter_(_)),
 		retractall(application_capabilities_(_)).
 
@@ -228,7 +235,7 @@
 		).
 
 	% Supported protocol versions (in chronological/lexicographic order)
-	supported_protocol_versions(['2025-03-26']).
+	supported_protocol_versions(['2025-06-18']).
 
 	% Server initialization
 
@@ -243,28 +250,32 @@
 		% Check if the client version is compatible:
 		% the client sends the highest version it supports; the server
 		% picks the highest version it supports that is <= the client's
-		% version. If no supported version satisfies this, reject.
+		% version. If no supported version satisfies this, respond with
+		% the latest supported version and let the client decide.
 		(	best_supported_version(Supported, ClientVersion, NegotiatedVersion) ->
-			assertz(initialized_),
-			server_name_(Name),
-			server_version_(Version),
-			% Build capabilities based on application requirements
-			application_capabilities_(ApplicationCapabilities),
-			build_capabilities(ApplicationCapabilities, Capabilities),
-			Result = {
-				protocolVersion-NegotiatedVersion,
-				capabilities-Capabilities,
-				serverInfo-{
-					name-Name,
-					version-Version
-				}
-			},
-			response(Result, Id, Response),
-			write_message(Output, Response)
-		;	% No compatible version: reject with error -32602
-			error_response(-32602, 'Unsupported protocol version', {supported-Supported}, Id, ErrorResponse),
-			write_message(Output, ErrorResponse)
-		).
+			true
+		;	% Client version older than all supported; respond with latest
+			last(Supported, NegotiatedVersion)
+		),
+		assertz(initialized_),
+		server_name_(Name),
+		server_version_(Version),
+		server_title_(Title),
+		% Build capabilities based on application requirements
+		application_capabilities_(ApplicationCapabilities),
+		build_capabilities(ApplicationCapabilities, Capabilities),
+		% Build serverInfo with optional title
+		(	Title == '' ->
+			ServerInfo = {name-Name, version-Version}
+		;	ServerInfo = {name-Name, title-Title, version-Version}
+		),
+		Result = {
+			protocolVersion-NegotiatedVersion,
+			capabilities-Capabilities,
+			serverInfo-ServerInfo
+		},
+		response(Result, Id, Response),
+		write_message(Output, Response).
 
 	% Find the best (highest) supported version that is =< ClientVersion.
 	% Versions are date strings so lexicographic comparison is chronological.
@@ -324,6 +335,11 @@
 		tool_descriptors_to_json(Application, Rest, JsonRest).
 
 	tool_descriptor_to_json(Application, Name, Functor, Arity, JsonTool) :-
+		% Get title from info/2 title key, fallback to predicate name
+		(	tool_predicate_title(Application, Functor, Arity, Title) ->
+			true
+		;	Title = Functor
+		),
 		% Get description from info/2 directive
 		(	tool_predicate_comment(Application, Functor, Arity, Description) ->
 			true
@@ -331,11 +347,28 @@
 		),
 		% Build input schema from info/2 and mode/2
 		tool_input_schema(Application, Functor, Arity, InputSchema),
-		JsonTool = {
-			name-Name,
-			description-Description,
-			inputSchema-InputSchema
-		}.
+		% Check for output schema
+		(	catch(Application::output_schema(Name, OutputSchema), _, fail) ->
+			JsonTool = {
+				name-Name,
+				title-Title,
+				description-Description,
+				inputSchema-InputSchema,
+				outputSchema-OutputSchema
+			}
+		;	JsonTool = {
+				name-Name,
+				title-Title,
+				description-Description,
+				inputSchema-InputSchema
+			}
+		).
+
+	% Extract title from predicate info/2
+	tool_predicate_title(Application, Functor, Arity, Title) :-
+		functor(Head, Functor, Arity),
+		Application::predicate_property(Head, info(InfoPairs)),
+		info_pair_value(InfoPairs, title, Title).
 
 	% Extract comment from predicate info/2
 	tool_predicate_comment(Application, Functor, Arity, Comment) :-
@@ -482,6 +515,13 @@
 	format_tool_result(results(Items), Id, Response) :-
 		format_content_items(Items, Content),
 		response({content-Content}, Id, Response).
+	format_tool_result(structured(StructuredContent), Id, Response) :-
+		write_to_atom(StructuredContent, Text),
+		Content = [{type-text, text-Text}],
+		response({content-Content, structuredContent-StructuredContent}, Id, Response).
+	format_tool_result(structured(Items, StructuredContent), Id, Response) :-
+		format_content_items(Items, Content),
+		response({content-Content, structuredContent-StructuredContent}, Id, Response).
 
 	format_content_items([], []).
 	format_content_items([text(Text)| Rest], [{type-text, text-Text}| ContentRest]) :-
@@ -491,6 +531,11 @@
 			ErrorText = Error
 		;	write_to_atom(Error, ErrorText)
 		),
+		format_content_items(Rest, ContentRest).
+	format_content_items([resource_link(URI, Name)| Rest], [{type-resource_link, uri-URI, name-Name}| ContentRest]) :-
+		format_content_items(Rest, ContentRest).
+	format_content_items([resource_link(URI, Name, Description, MimeType)| Rest],
+			[{type-resource_link, uri-URI, name-Name, description-Description, mimeType-MimeType}| ContentRest]) :-
 		format_content_items(Rest, ContentRest).
 
 	% Handle prompts/list requests
@@ -505,8 +550,14 @@
 		response(Result, Id, Response),
 		write_message(Output, Response).
 
-	% Convert a list of prompt(Name, Description, Arguments) descriptors to MCP JSON prompt definitions
+	% Convert a list of prompt descriptors to MCP JSON prompt definitions
+	% Supports both prompt(Name, Description, Arguments) and prompt(Name, Title, Description, Arguments)
 	prompt_descriptors_to_json([], []).
+	prompt_descriptors_to_json([prompt(Name, Title, Description, Arguments)| Rest], [JsonPrompt| JsonRest]) :-
+		!,
+		prompt_arguments_to_json(Arguments, JsonArguments),
+		JsonPrompt = {name-Name, title-Title, description-Description, arguments-JsonArguments},
+		prompt_descriptors_to_json(Rest, JsonRest).
 	prompt_descriptors_to_json([prompt(Name, Description, Arguments)| Rest], [JsonPrompt| JsonRest]) :-
 		prompt_arguments_to_json(Arguments, JsonArguments),
 		JsonPrompt = {name-Name, description-Description, arguments-JsonArguments},
@@ -539,9 +590,9 @@
 		;	PromptArguments = {}
 		),
 		application_(Application),
-		% Check the prompt exists
+		% Check the prompt exists (supports both 3-arg and 4-arg descriptors)
 		(	catch(Application::prompts(PromptDescriptors), _, fail),
-			member(prompt(PromptName, _, _), PromptDescriptors) ->
+			(member(prompt(PromptName, _, _), PromptDescriptors) ; member(prompt(PromptName, _, _, _), PromptDescriptors)) ->
 			execute_prompt_get(Application, PromptName, PromptArguments, Id, Output)
 		;	% Prompt not found
 			error_response(-32601, 'Prompt not found', Id, ErrorResponse),
@@ -593,8 +644,13 @@
 		response(Result, Id, Response),
 		write_message(Output, Response).
 
-	% Convert a list of resource(URI, Name, Description, MimeType) descriptors to MCP JSON
+	% Convert a list of resource descriptors to MCP JSON
+	% Supports both resource(URI, Name, Description, MimeType) and resource(URI, Name, Title, Description, MimeType)
 	resource_descriptors_to_json([], []).
+	resource_descriptors_to_json([resource(URI, Name, Title, Description, MimeType)| Rest], [JsonRes| JsonRest]) :-
+		!,
+		JsonRes = {uri-URI, name-Name, title-Title, description-Description, mimeType-MimeType},
+		resource_descriptors_to_json(Rest, JsonRest).
 	resource_descriptors_to_json([resource(URI, Name, Description, MimeType)| Rest], [JsonRes| JsonRest]) :-
 		JsonRes = {uri-URI, name-Name, description-Description, mimeType-MimeType},
 		resource_descriptors_to_json(Rest, JsonRest).
@@ -613,9 +669,9 @@
 			!
 		),
 		application_(Application),
-		% Check the resource exists
+		% Check the resource exists (supports both 4-arg and 5-arg descriptors)
 		(	catch(Application::resources(ResourceDescriptors), _, fail),
-			member(resource(URI, _, _, _), ResourceDescriptors) ->
+			(member(resource(URI, _, _, _), ResourceDescriptors) ; member(resource(URI, _, _, _, _), ResourceDescriptors)) ->
 			execute_resource_read(Application, URI, Id, Output)
 		;	% Resource not found
 			error_response(-32601, 'Resource not found', Id, ErrorResponse),
@@ -878,10 +934,13 @@
 
 	default_option(server_name('logtalk-mcp-server')).
 	default_option(server_version('1.0.0')).
+	default_option(server_title('')).
 
 	valid_option(server_name(Name)) :-
 		atom(Name).
 	valid_option(server_version(Version)) :-
 		atom(Version).
+	valid_option(server_title(Title)) :-
+		atom(Title).
 
 :- end_object.

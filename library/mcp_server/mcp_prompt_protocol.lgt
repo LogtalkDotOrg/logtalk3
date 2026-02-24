@@ -22,13 +22,13 @@
 :- protocol(mcp_prompt_protocol).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
 		date is 2026-02-24,
-		comment is 'Protocol for Logtalk objects that provide prompts to be exposed via an MCP (Model Context Protocol) server. Implementing objects must define the set of prompts available and handle prompt get requests. Prompts are templates for structured LLM interactions that can accept arguments to customize their behavior.',
+		comment is 'Protocol for Logtalk objects that provide prompts to be exposed via an MCP (Model Context Protocol) server. Implements the MCP 2025-06-18 specification. Implementing objects must define the set of prompts available and handle prompt get requests. Prompts are templates for structured LLM interactions that can accept arguments to customize their behavior.',
 		remarks is [
 			'Capabilities' - 'Objects providing prompts must declare ``prompts`` in their ``capabilities/1`` predicate (from the ``mcp_tool_protocol`` protocol). The server will then advertise the ``prompts`` capability and handle ``prompts/list`` and ``prompts/get`` requests.',
-			'Prompt descriptors' - 'Each prompt is described by a ``prompt(Name, Description, Arguments)`` term where ``Name`` is an atom, ``Description`` is a human-readable atom, and ``Arguments`` is a list of ``argument(ArgName, ArgDescription, Required)`` terms.',
+			'Prompt descriptors' - 'Each prompt is described by a ``prompt(Name, Description, Arguments)`` or ``prompt(Name, Title, Description, Arguments)`` term where ``Name`` is an atom, ``Title`` is an optional human-friendly display name (an atom), ``Description`` is a human-readable atom, and ``Arguments`` is a list of ``argument(ArgName, ArgDescription, Required)`` terms.',
 			'Prompt messages' - 'The ``prompt_get/3`` predicate must return a result term containing a list of messages. Each message is a ``message(Role, Content)`` term where ``Role`` is ``user`` or ``assistant`` and ``Content`` is ``text(Text)`` where ``Text`` is an atom.'
 		]
 	]).
@@ -36,7 +36,7 @@
 	:- public(prompts/1).
 	:- mode(prompts(-list(compound)), one).
 	:- info(prompts/1, [
-		comment is 'Returns a list of prompt descriptors available from this object. Each descriptor is a compound term ``prompt(Name, Description, Arguments)`` where ``Name`` is the MCP prompt name (an atom), ``Description`` is a human-readable description (an atom), and ``Arguments`` is a list of ``argument(ArgName, ArgDescription, Required)`` terms describing the prompt arguments. ``ArgName`` and ``ArgDescription`` are atoms, and ``Required`` is the boolean ``true`` or ``false``.',
+		comment is 'Returns a list of prompt descriptors available from this object. Each descriptor is a compound term ``prompt(Name, Description, Arguments)`` or ``prompt(Name, Title, Description, Arguments)`` where ``Name`` is the MCP prompt name (an atom), ``Title`` is an optional human-friendly display name (an atom), ``Description`` is a human-readable description (an atom), and ``Arguments`` is a list of ``argument(ArgName, ArgDescription, Required)`` terms describing the prompt arguments. ``ArgName`` and ``ArgDescription`` are atoms, and ``Required`` is the boolean ``true`` or ``false``.',
 		argnames is ['Prompts']
 	]).
 

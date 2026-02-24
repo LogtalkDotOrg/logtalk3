@@ -77,7 +77,7 @@ Starts the MCP server with the given server name and application object. The app
 ``start/3``
 ^^^^^^^^^^^
 
-Starts the MCP server with the given server name, application object, and options. Currently supported options: ``version(Version)`` to set the server version (default ``'1.0.0'``).
+Starts the MCP server with the given server name, application object, and options. Currently supported options: ``server_version(Version)`` to set the server version (default ``'1.0.0'``), ``server_title(Title)`` to set the server display title (default ``''``, omitted when empty).
 
 | **Compilation flags:**
 |    ``static``
@@ -203,6 +203,18 @@ Private predicates
 
 ------------
 
+.. index:: server_title_/1
+.. _mcp_server/0::server_title_/1:
+
+``server_title_/1``
+^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
 .. index:: elicit_counter_/1
 .. _mcp_server/0::elicit_counter_/1:
 
@@ -215,11 +227,11 @@ Private predicates
 
 ------------
 
-.. index:: app_capabilities_/1
-.. _mcp_server/0::app_capabilities_/1:
+.. index:: application_capabilities_/1
+.. _mcp_server/0::application_capabilities_/1:
 
-``app_capabilities_/1``
-^^^^^^^^^^^^^^^^^^^^^^^
+``application_capabilities_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``dynamic``

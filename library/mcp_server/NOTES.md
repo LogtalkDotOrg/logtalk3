@@ -23,8 +23,9 @@ ________________________________________________________________________
 
 MCP (Model Context Protocol) server library for Logtalk applications.
 Makes any Logtalk application available as a local MCP server using stdio
-transport. Implements the MCP 2025-03-26 specification (tools, prompts,
-resources, and elicitation capabilities). Supports version negotiation.
+transport. Implements the MCP 2025-06-18 specification (tools, prompts,
+resources, elicitation, structured output, and resource links).
+Supports version negotiation.
 
 The library uses the `json_rpc` library for JSON-RPC 2.0 message handling
 as currently required by the MCP specification.
@@ -97,6 +98,10 @@ Tool descriptions and parameter schemas are automatically derived from
 the `info/2` and `mode/2` directives. This must be accurate to allow
 correct derivation of inout and output arguments and types.
 
+A `title` key in the predicate's `info/2` directive provides a
+human-friendly display name for the tool. If omitted, the predicate
+functor is used as the title.
+
 The supported predicates types and their corresponding JSON types are:
 
 | Logtalk type | JSON type |
@@ -138,7 +143,26 @@ tool_call(factorial, Arguments, Result) :-
 The `Result` term can be:
 - `text(Atom)` — a text result
 - `error(Atom)` — a tool-level error (sets `isError: true`)
-- `results(List)` — a list of content items (`text(Atom)` or `error(Atom)`)
+- `results(List)` — a list of content items (`text(Atom)`, `error(Atom)`,
+  `resource_link(URI, Name)`, or `resource_link(URI, Name, Description, MimeType)`)
+- `structured(StructuredContent)` — a structured result (the server
+  auto-generates a text representation for the `content` field)
+- `structured(Items, StructuredContent)` — a structured result with
+  explicit content items for the `content` field
+
+### Output schemas (structured tool output)
+
+Tools can declare an output schema by defining `output_schema/2` in their
+application object:
+
+```logtalk
+output_schema(divide, {type-object, properties-{quotient-{type-number}}, required-[quotient]}).
+```
+
+When an output schema is declared, the tool descriptor includes an
+`outputSchema` field. The tool's `tool_call/3` can then return
+`structured(StructuredContent)` or `structured(Items, StructuredContent)`
+results. The `StructuredContent` must be a curly-term matching the schema.
 
 ### Starting the server for debugging
 
@@ -151,7 +175,7 @@ Start the MCP server from a Logtalk top-level or script:
 With options:
 
 ```logtalk
-| ?- mcp_server::start('my-server', my_tools, [version('2.0.0')]).
+| ?- mcp_server::start('my-server', my_tools, [version('2.0.0'), server_title('My Server')]).
 ```
 
 There should either be no output or only a Prolog backend term input prompt.
@@ -314,10 +338,15 @@ addition to `mcp_tool_protocol`, and declare `prompts` in capabilities:
 :- end_object.
 ```
 
-The `prompts/1` predicate returns a list of `prompt(Name, Description, Arguments)`
-descriptors:
+The `prompts/1` predicate returns a list of prompt descriptors:
+
+- `prompt(Name, Description, Arguments)` — without title
+- `prompt(Name, Title, Description, Arguments)` — with title
+
+Where:
 
 - `Name` — the MCP prompt name (an atom)
+- `Title` — a human-friendly display name (an atom, optional)
 - `Description` — a human-readable description (an atom)
 - `Arguments` — a list of `argument(ArgName, ArgDescription, Required)`
   terms where `Required` is `true` or `false`
@@ -380,12 +409,17 @@ capabilities:
 :- end_object.
 ```
 
-The `resources/1` predicate returns a list of
-`resource(URI, Name, Description, MimeType)` descriptors:
+The `resources/1` predicate returns a list of resource descriptors:
+
+- `resource(URI, Name, Description, MimeType)` — without title
+- `resource(URI, Name, Title, Description, MimeType)` — with title
+
+Where:
 
 - `URI` — the resource identifier (an atom, typically a URI like
   `logtalk://my-app/data`)
 - `Name` — a human-readable name (an atom)
+- `Title` — a human-friendly display name (an atom, optional)
 - `Description` — a human-readable description (an atom)
 - `MimeType` — the MIME type of the resource content (an atom, e.g.
   `'text/plain'`, `'application/json'`)
@@ -432,6 +466,8 @@ The `mcp_tool_protocol` protocol defines the following predicates:
 - `tool_call/4` — handles a tool call with an elicitation closure
   (optional; requires `capabilities([elicitation])` or
   `capabilities([..., elicitation])`)
+- `output_schema/2` — declares a JSON Schema for structured tool output
+  (optional; when defined, the tool descriptor includes `outputSchema`)
 
 The `mcp_prompt_protocol` protocol defines the following predicates:
 

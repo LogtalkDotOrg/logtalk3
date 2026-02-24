@@ -236,7 +236,7 @@
   <p class="right" id="mcp-tool-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
 <section id="mcp-tool-protocol">
 <h1><code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code><a class="headerlink" href="#mcp-tool-protocol" title="Link to this heading"></a></h1>
-<p>Protocol for Logtalk objects that provide tools to be exposed via an MCP (Model Context Protocol) server. Implementing objects must define the set of tools available and handle tool calls. Tool metadata (names, descriptions, parameter schemas) can be derived automatically from <code class="docutils literal notranslate"><span class="pre">info/2</span></code> and <code class="docutils literal notranslate"><span class="pre">mode/2</span></code> directives on the tool predicates, or can be specified explicitly via the <code class="docutils literal notranslate"><span class="pre">tool/1</span></code> predicate.</p>
+<p>Protocol for Logtalk objects that provide tools to be exposed via an MCP (Model Context Protocol) server. Implements the MCP 2025-06-18 specification. Implementing objects must define the set of tools available and handle tool calls. Tool metadata (names, titles, descriptions, parameter schemas) can be derived automatically from <code class="docutils literal notranslate"><span class="pre">info/2</span></code> and <code class="docutils literal notranslate"><span class="pre">mode/2</span></code> directives on the tool predicates, or can be specified explicitly via the <code class="docutils literal notranslate"><span class="pre">tool/1</span></code> predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -245,7 +245,7 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:2:0</div>
+<div class="line"><strong>Version:</strong> 0:3:0</div>
 <div class="line"><strong>Date:</strong> 2026-02-24</div>
 </div>
 <div class="line-block">
@@ -266,6 +266,9 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Capabilities: Objects can optionally define <code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code> to declare which MCP capabilities they require. Currently supported: <code class="docutils literal notranslate"><span class="pre">elicitation</span></code> (allows the server to ask the user questions during tool execution via MCP elicitation). If <code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code> is not defined, only the <code class="docutils literal notranslate"><span class="pre">tools</span></code> capability is advertised.</p></li>
+<li><p>Tool title: The tool title (human-friendly display name) is derived from a <code class="docutils literal notranslate"><span class="pre">title</span></code> key in the predicate <code class="docutils literal notranslate"><span class="pre">info/2</span></code> directive. If not specified, the predicate name (functor) is used as the title.</p></li>
+<li><p>Structured output: Tools can declare an output schema via <code class="docutils literal notranslate"><span class="pre">output_schema/2</span></code> and return <code class="docutils literal notranslate"><span class="pre">structured(StructuredContent)</span></code> or <code class="docutils literal notranslate"><span class="pre">structured(ContentItems,</span> <span class="pre">StructuredContent)</span></code> results. The structured content is included in the <code class="docutils literal notranslate"><span class="pre">structuredContent</span></code> field of the tool call response alongside the <code class="docutils literal notranslate"><span class="pre">content</span></code> array.</p></li>
+<li><p>Resource links: Tool results can include <code class="docutils literal notranslate"><span class="pre">resource_link(URI,</span> <span class="pre">Name)</span></code> or <code class="docutils literal notranslate"><span class="pre">resource_link(URI,</span> <span class="pre">Name,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code> content items in <code class="docutils literal notranslate"><span class="pre">results/1</span></code> lists.</p></li>
 <li><p>Elicitation: Tools that need user interaction during execution should define <code class="docutils literal notranslate"><span class="pre">tool_call/4</span></code> instead of <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code>. The extra argument is an elicitation closure that can be called as <code class="docutils literal notranslate"><span class="pre">call(Elicit,</span> <span class="pre">Message,</span> <span class="pre">Schema,</span> <span class="pre">Answer)</span></code> where <code class="docutils literal notranslate"><span class="pre">Message</span></code> is the prompt text (an atom), <code class="docutils literal notranslate"><span class="pre">Schema</span></code> is a JSON Schema curly-term for the requested input, and <code class="docutils literal notranslate"><span class="pre">Answer</span></code> is unified with <code class="docutils literal notranslate"><span class="pre">accept(Content)</span></code>, <code class="docutils literal notranslate"><span class="pre">decline</span></code>, or <code class="docutils literal notranslate"><span class="pre">cancel</span></code>.</p></li>
 </ul>
 </div></blockquote>
@@ -283,11 +286,12 @@
 <li><p><a class="reference internal" href="#tools-1" id="id3"><code class="docutils literal notranslate"><span class="pre">tools/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#tool-call-3" id="id4"><code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#tool-call-4" id="id5"><code class="docutils literal notranslate"><span class="pre">tool_call/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#output-schema-2" id="id6"><code class="docutils literal notranslate"><span class="pre">output_schema/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id6">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id7">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id8">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id7">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id8">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id9">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -315,7 +319,7 @@
 </section>
 <section id="tools-1">
 <span id="mcp-tool-protocol-0-tools-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">tools/1</span></code></a><a class="headerlink" href="#tools-1" title="Link to this heading"></a></h3>
-<p>Returns a list of tool descriptors available from this object. Each descriptor is a compound term <code class="docutils literal notranslate"><span class="pre">tool(Name,</span> <span class="pre">Functor,</span> <span class="pre">Arity)</span></code> where <code class="docutils literal notranslate"><span class="pre">Name</span></code> is the MCP tool name (an atom), <code class="docutils literal notranslate"><span class="pre">Functor</span></code> is the predicate functor, and <code class="docutils literal notranslate"><span class="pre">Arity</span></code> is the predicate arity. By default, the tool name is the predicate functor. Tool descriptions and parameter schemas are derived from the <code class="docutils literal notranslate"><span class="pre">info/2</span></code> and <code class="docutils literal notranslate"><span class="pre">mode/2</span></code> directives of the corresponding predicates.</p>
+<p>Returns a list of tool descriptors available from this object. Each descriptor is a compound term <code class="docutils literal notranslate"><span class="pre">tool(Name,</span> <span class="pre">Functor,</span> <span class="pre">Arity)</span></code> where <code class="docutils literal notranslate"><span class="pre">Name</span></code> is the MCP tool name (an atom), <code class="docutils literal notranslate"><span class="pre">Functor</span></code> is the predicate functor, and <code class="docutils literal notranslate"><span class="pre">Arity</span></code> is the predicate arity. By default, the tool name is the predicate functor. Tool titles are derived from <code class="docutils literal notranslate"><span class="pre">info/2</span></code> <code class="docutils literal notranslate"><span class="pre">title</span></code> keys (falling back to the predicate name). Tool descriptions and parameter schemas are derived from the <code class="docutils literal notranslate"><span class="pre">info/2</span></code> and <code class="docutils literal notranslate"><span class="pre">mode/2</span></code> directives of the corresponding predicates.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -336,7 +340,7 @@
 </section>
 <section id="tool-call-3">
 <span id="mcp-tool-protocol-0-tool-call-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code></a><a class="headerlink" href="#tool-call-3" title="Link to this heading"></a></h3>
-<p>Handles a tool call. <code class="docutils literal notranslate"><span class="pre">Name</span></code> is the MCP tool name (as declared in <code class="docutils literal notranslate"><span class="pre">tools/1</span></code>), <code class="docutils literal notranslate"><span class="pre">Arguments</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">ArgumentName-Value</span></code> pairs, and <code class="docutils literal notranslate"><span class="pre">Result</span></code> is unified with the tool result. The result must be one of: <code class="docutils literal notranslate"><span class="pre">text(Atom)</span></code> for a text result, <code class="docutils literal notranslate"><span class="pre">error(Atom)</span></code> for an error result, or <code class="docutils literal notranslate"><span class="pre">results(List)</span></code> for a list of content items where each item is <code class="docutils literal notranslate"><span class="pre">text(Atom)</span></code> or <code class="docutils literal notranslate"><span class="pre">error(Atom)</span></code>. If this predicate is not defined for a tool, the MCP server will use auto-dispatch: it calls the tool predicate as a message to the implementing object, collects output arguments, and returns them as a text result.</p>
+<p>Handles a tool call. <code class="docutils literal notranslate"><span class="pre">Name</span></code> is the MCP tool name (as declared in <code class="docutils literal notranslate"><span class="pre">tools/1</span></code>), <code class="docutils literal notranslate"><span class="pre">Arguments</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">ArgumentName-Value</span></code> pairs, and <code class="docutils literal notranslate"><span class="pre">Result</span></code> is unified with the tool result. The result must be one of: <code class="docutils literal notranslate"><span class="pre">text(Atom)</span></code> for a text result, <code class="docutils literal notranslate"><span class="pre">error(Atom)</span></code> for an error result, <code class="docutils literal notranslate"><span class="pre">results(List)</span></code> for a list of content items where each item is <code class="docutils literal notranslate"><span class="pre">text(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">error(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">resource_link(URI,</span> <span class="pre">Name)</span></code>, or <code class="docutils literal notranslate"><span class="pre">resource_link(URI,</span> <span class="pre">Name,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code>, <code class="docutils literal notranslate"><span class="pre">structured(StructuredContent)</span></code> for structured output with auto-generated text, or <code class="docutils literal notranslate"><span class="pre">structured(ContentItems,</span> <span class="pre">StructuredContent)</span></code> for structured output with explicit content items. If this predicate is not defined for a tool, the MCP server will use auto-dispatch: it calls the tool predicate as a message to the implementing object, collects output arguments, and returns them as a text result.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -372,6 +376,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">tool_call(+atom,+list(pair),+callable,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="output-schema-2">
+<span id="mcp-tool-protocol-0-output-schema-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">output_schema/2</span></code></a><a class="headerlink" href="#output-schema-2" title="Link to this heading"></a></h3>
+<p>Returns the JSON output schema for the given tool name. Optional; when defined, the schema is included in the tool descriptor as <code class="docutils literal notranslate"><span class="pre">outputSchema</span></code> and the tool can return <code class="docutils literal notranslate"><span class="pre">structured(StructuredContent)</span></code> or <code class="docutils literal notranslate"><span class="pre">structured(ContentItems,</span> <span class="pre">StructuredContent)</span></code> results. The schema must be a curly-term following JSON Schema format (e.g. <code class="docutils literal notranslate"><span class="pre">{type-object,</span> <span class="pre">properties-{temperature-{type-number}},</span> <span class="pre">required-[temperature]}</span></code>).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">output_schema(Name,Schema)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">output_schema(+atom,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </section>
