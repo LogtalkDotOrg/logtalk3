@@ -375,19 +375,19 @@
 		Atom \== end_of_file,
 		parse(atom(Atom), Message).
 
-	% Content-Length framed stream I/O (for LSP/MCP style protocols)
+	% Content-Length framed stream I/O (for LSP style protocols)
 
 	:- public(write_framed_message/2).
 	:- mode(write_framed_message(+stream, +compound), one).
 	:- info(write_framed_message/2, [
-		comment is 'Writes a JSON-RPC 2.0 message to an output stream using Content-Length framing (as used by LSP and MCP protocols). The message is preceded by a ``Content-Length: N\\r\\n\\r\\n`` header where ``N`` is the byte length of the JSON body. Flushes the output stream after writing.',
+		comment is 'Writes a JSON-RPC 2.0 message to an output stream using Content-Length framing (as used by LSP style protocols). The message is preceded by a ``Content-Length: N\\r\\n\\r\\n`` header where ``N`` is the byte length of the JSON body. Flushes the output stream after writing.',
 		argnames is ['Output', 'Message']
 	]).
 
 	:- public(read_framed_message/2).
 	:- mode(read_framed_message(+stream, --compound), zero_or_one).
 	:- info(read_framed_message/2, [
-		comment is 'Reads a JSON-RPC 2.0 message from an input stream using Content-Length framing (as used by LSP and MCP protocols). Reads a ``Content-Length: N\\r\\n\\r\\n`` header followed by exactly ``N`` bytes of JSON body. Fails at end of stream or if the header is missing or malformed.',
+		comment is 'Reads a JSON-RPC 2.0 message from an input stream using Content-Length framing (as used by LSP style protocols). Reads a ``Content-Length: N\\r\\n\\r\\n`` header followed by exactly ``N`` bytes of JSON body. Fails at end of stream or if the header is missing or malformed.',
 		argnames is ['Input', 'Message']
 	]).
 

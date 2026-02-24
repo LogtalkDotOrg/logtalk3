@@ -134,6 +134,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#listing"><span class="xref std std-ref">listing</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#logging"><span class="xref std std-ref">logging</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#mcp-server"><span class="xref std std-ref">mcp_server</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#memcached"><span class="xref std std-ref">memcached</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta"><span class="xref std std-ref">meta</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta-compiler"><span class="xref std std-ref">meta_compiler</span></a></li>
@@ -934,7 +935,7 @@
 </section>
 <section id="write-framed-message-2">
 <span id="json-rpc-0-write-framed-message-2"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">write_framed_message/2</span></code></a><a class="headerlink" href="#write-framed-message-2" title="Link to this heading"></a></h3>
-<p>Writes a JSON-RPC 2.0 message to an output stream using Content-Length framing (as used by LSP and MCP protocols). The message is preceded by a <code class="docutils literal notranslate"><span class="pre">Content-Length:</span> <span class="pre">N\r\n\r\n</span></code> header where <code class="docutils literal notranslate"><span class="pre">N</span></code> is the byte length of the JSON body. Flushes the output stream after writing.</p>
+<p>Writes a JSON-RPC 2.0 message to an output stream using Content-Length framing (as used by LSP style protocols). The message is preceded by a <code class="docutils literal notranslate"><span class="pre">Content-Length:</span> <span class="pre">N\r\n\r\n</span></code> header where <code class="docutils literal notranslate"><span class="pre">N</span></code> is the byte length of the JSON body. Flushes the output stream after writing.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -955,7 +956,7 @@
 </section>
 <section id="read-framed-message-2">
 <span id="json-rpc-0-read-framed-message-2"></span><span id="index-31"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">read_framed_message/2</span></code></a><a class="headerlink" href="#read-framed-message-2" title="Link to this heading"></a></h3>
-<p>Reads a JSON-RPC 2.0 message from an input stream using Content-Length framing (as used by LSP and MCP protocols). Reads a <code class="docutils literal notranslate"><span class="pre">Content-Length:</span> <span class="pre">N\r\n\r\n</span></code> header followed by exactly <code class="docutils literal notranslate"><span class="pre">N</span></code> bytes of JSON body. Fails at end of stream or if the header is missing or malformed.</p>
+<p>Reads a JSON-RPC 2.0 message from an input stream using Content-Length framing (as used by LSP style protocols). Reads a <code class="docutils literal notranslate"><span class="pre">Content-Length:</span> <span class="pre">N\r\n\r\n</span></code> header followed by exactly <code class="docutils literal notranslate"><span class="pre">N</span></code> bytes of JSON body. Fails at end of stream or if the header is missing or malformed.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

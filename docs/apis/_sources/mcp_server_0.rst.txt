@@ -1,0 +1,231 @@
+.. index:: single: mcp_server
+.. _mcp_server/0:
+
+.. rst-class:: right
+
+**object**
+
+``mcp_server``
+==============
+
+MCP (Model Context Protocol) server for Logtalk applications. Exposes Logtalk objects implementing the ``mcp_tool_protocol`` protocol as MCP tool providers over stdio transport with Content-Length framing. Implements the MCP 2025-03-26 specification. Uses the ``json_rpc`` library for JSON-RPC 2.0 message handling.
+
+| **Availability:** 
+|    ``logtalk_load(mcp_server(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:2:0
+| **Date:** 2026-02-24
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`json_rpc <json_rpc/0>`
+|    :ref:`list <list/0>`
+|    :ref:`term_io <term_io/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+
+   - MCP specification: Implements the Model Context Protocol 2025-03-26: https://spec.modelcontextprotocol.io/specification/2025-03-26/
+   - Transport: Uses stdio (standard input/output) with Content-Length header framing as defined by the MCP specification.
+   - Capabilities: Supports the tools capability (``tools/list`` and ``tools/call``). Optionally supports the elicitation capability (``elicitation/create``) when the application declares it via ``capabilities/1``.
+   - Tool discovery: Tools are discovered from objects implementing the ``mcp_tool_protocol``. Tool metadata (descriptions, parameter schemas) is derived from ``info/2`` and ``mode/2`` directives.
+   - Auto-dispatch: When an object does not define ``tool_call/3`` or ``tool_call/4`` for a tool, the server auto-dispatches: it calls the predicate as a message to the object, collects output-mode arguments, and returns them as text content.
+   - Elicitation: When the application declares ``elicitation`` in its ``capabilities/1``, the server constructs an elicit closure and passes it to ``tool_call/4``. The closure sends ``elicitation/create`` requests to the client and reads back the user response. This enables interactive tools that can ask the user questions during execution.
+   - Error handling: Predicate failures and exceptions both result in MCP tool-level errors with ``isError`` set to ``true``.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: start/2
+.. _mcp_server/0::start/2:
+
+``start/2``
+^^^^^^^^^^^
+
+Starts the MCP server with the given server name and application object. The application object must implement the ``mcp_tool_protocol`` protocol. Reads JSON-RPC messages from standard input and writes responses to standard output using Content-Length framing. Blocks until the client disconnects or an exit signal is received.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``start(Name,Application)``
+| **Mode and number of proofs:**
+|    ``start(+atom,+object_identifier)`` - ``one``
+
+
+------------
+
+.. index:: start/3
+.. _mcp_server/0::start/3:
+
+``start/3``
+^^^^^^^^^^^
+
+Starts the MCP server with the given server name, application object, and options. Currently supported options: ``version(Version)`` to set the server version (default ``'1.0.0'``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``start(Name,Application,Options)``
+| **Mode and number of proofs:**
+|    ``start(+atom,+object_identifier,+list)`` - ``one``
+
+
+------------
+
+.. index:: start/4
+.. _mcp_server/0::start/4:
+
+``start/4``
+^^^^^^^^^^^
+
+Starts the MCP server with custom input and output streams. Useful for testing or non-stdio transports. Uses default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``start(Name,Application,Input,Output)``
+| **Mode and number of proofs:**
+|    ``start(+atom,+object_identifier,+stream,+stream)`` - ``one``
+
+
+------------
+
+.. index:: start/5
+.. _mcp_server/0::start/5:
+
+``start/5``
+^^^^^^^^^^^
+
+Starts the MCP server with custom input and output streams and options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``start(Name,Application,Input,Output,Options)``
+| **Mode and number of proofs:**
+|    ``start(+atom,+object_identifier,+stream,+stream,+list)`` - ``one``
+
+
+------------
+
+.. index:: elicit_request/5
+.. _mcp_server/0::elicit_request/5:
+
+``elicit_request/5``
+^^^^^^^^^^^^^^^^^^^^
+
+Sends an ``elicitation/create`` request to the MCP client and reads the response. ``Input`` and ``Output`` are the I/O streams. ``Message`` is the prompt text (an atom). ``RequestedSchema`` is a curly-term JSON Schema describing the input to request from the user (e.g., ``{type-object, properties-{answer-{type-string, enum-[yes, no]}}, required-[answer]}``). ``Answer`` is unified with ``accept(Content)`` (where ``Content`` is the user response as a curly-term), ``decline``, or ``cancel``. This predicate is typically not called directly but through the elicit closure passed to ``tool_call/4``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``elicit_request(Input,Output,Message,RequestedSchema,Answer)``
+| **Mode and number of proofs:**
+|    ``elicit_request(+stream,+stream,+atom,+compound,--compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: initialized_/0
+.. _mcp_server/0::initialized_/0:
+
+``initialized_/0``
+^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: application_/1
+.. _mcp_server/0::application_/1:
+
+``application_/1``
+^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: server_name_/1
+.. _mcp_server/0::server_name_/1:
+
+``server_name_/1``
+^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: server_version_/1
+.. _mcp_server/0::server_version_/1:
+
+``server_version_/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: elicit_counter_/1
+.. _mcp_server/0::elicit_counter_/1:
+
+``elicit_counter_/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: app_capabilities_/1
+.. _mcp_server/0::app_capabilities_/1:
+
+``app_capabilities_/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

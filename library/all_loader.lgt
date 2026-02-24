@@ -111,6 +111,7 @@
 		linda(loader),
 		command_line_options(loader),
 		simulated_annealing(loader),
+		mcp_server(loader),
 		cloning,
 		counters,
 		streamvars

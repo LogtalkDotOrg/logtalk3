@@ -1,0 +1,133 @@
+.. index:: single: mcp_tool_protocol
+.. _mcp_tool_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``mcp_tool_protocol``
+=====================
+
+Protocol for Logtalk objects that provide tools to be exposed via an MCP (Model Context Protocol) server. Implementing objects must define the set of tools available and handle tool calls. Tool metadata (names, descriptions, parameter schemas) can be derived automatically from ``info/2`` and ``mode/2`` directives on the tool predicates, or can be specified explicitly via the ``tool/1`` predicate.
+
+| **Availability:** 
+|    ``logtalk_load(mcp_server(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:2:0
+| **Date:** 2026-02-24
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Capabilities: Objects can optionally define ``capabilities/1`` to declare which MCP capabilities they require. Currently supported: ``elicitation`` (allows the server to ask the user questions during tool execution via MCP elicitation). If ``capabilities/1`` is not defined, only the ``tools`` capability is advertised.
+   - Elicitation: Tools that need user interaction during execution should define ``tool_call/4`` instead of ``tool_call/3``. The extra argument is an elicitation closure that can be called as ``call(Elicit, Message, Schema, Answer)`` where ``Message`` is the prompt text (an atom), ``Schema`` is a JSON Schema curly-term for the requested input, and ``Answer`` is unified with ``accept(Content)``, ``decline``, or ``cancel``.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: capabilities/1
+.. _mcp_tool_protocol/0::capabilities/1:
+
+``capabilities/1``
+^^^^^^^^^^^^^^^^^^
+
+Returns a list of MCP capabilities required by this tool provider. Currently supported capabilities: ``elicitation`` (server can ask the user questions during tool execution). If not defined, only the ``tools`` capability is advertised. The server uses this to build the ``capabilities`` field in the ``initialize`` response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``capabilities(Capabilities)``
+| **Mode and number of proofs:**
+|    ``capabilities(-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: tools/1
+.. _mcp_tool_protocol/0::tools/1:
+
+``tools/1``
+^^^^^^^^^^^
+
+Returns a list of tool descriptors available from this object. Each descriptor is a compound term ``tool(Name, Functor, Arity)`` where ``Name`` is the MCP tool name (an atom), ``Functor`` is the predicate functor, and ``Arity`` is the predicate arity. By default, the tool name is the predicate functor. Tool descriptions and parameter schemas are derived from the ``info/2`` and ``mode/2`` directives of the corresponding predicates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tools(Tools)``
+| **Mode and number of proofs:**
+|    ``tools(-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: tool_call/3
+.. _mcp_tool_protocol/0::tool_call/3:
+
+``tool_call/3``
+^^^^^^^^^^^^^^^
+
+Handles a tool call. ``Name`` is the MCP tool name (as declared in ``tools/1``), ``Arguments`` is a list of ``ArgumentName-Value`` pairs, and ``Result`` is unified with the tool result. The result must be one of: ``text(Atom)`` for a text result, ``error(Atom)`` for an error result, or ``results(List)`` for a list of content items where each item is ``text(Atom)`` or ``error(Atom)``. If this predicate is not defined for a tool, the MCP server will use auto-dispatch: it calls the tool predicate as a message to the implementing object, collects output arguments, and returns them as a text result.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tool_call(Name,Arguments,Result)``
+| **Mode and number of proofs:**
+|    ``tool_call(+atom,+list(pair),--compound)`` - ``one``
+
+
+------------
+
+.. index:: tool_call/4
+.. _mcp_tool_protocol/0::tool_call/4:
+
+``tool_call/4``
+^^^^^^^^^^^^^^^
+
+Handles a tool call with elicitation support. Same as ``tool_call/3`` but receives an ``Elicit`` closure as the third argument. The closure can be called as ``call(Elicit, Message, Schema, Answer)`` where ``Message`` is a prompt text (an atom), ``Schema`` is a curly-term JSON Schema describing the requested input (e.g., ``{type-object, properties-{answer-{type-string, enum-[yes, no]}}, required-[answer]}``), and ``Answer`` is unified with ``accept(Content)`` (where ``Content`` is the user response as a curly-term), ``decline``, or ``cancel``. Only available when the application declares ``elicitation`` in its ``capabilities/1``. Falls back to ``tool_call/3`` and then auto-dispatch if not defined.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tool_call(Name,Arguments,Elicit,Result)``
+| **Mode and number of proofs:**
+|    ``tool_call(+atom,+list(pair),+callable,--compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

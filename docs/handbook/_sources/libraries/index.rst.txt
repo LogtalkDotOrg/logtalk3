@@ -81,6 +81,7 @@ directory in the ``NOTES.md`` file.
    listing
    logging
    loops
+   mcp_server
    memcached
    meta
    meta_compiler

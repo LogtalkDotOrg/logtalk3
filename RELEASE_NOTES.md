@@ -77,6 +77,9 @@ sets.
 Library
 -------
 
+* ADDED: New `mcp_server` library for deploying Logtalk applications as MCP
+servers.
+
 * ADDED: New `c45` library implementing the C4.5 algorithm for learning
 decision trees.
 

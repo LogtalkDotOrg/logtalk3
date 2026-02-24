@@ -719,6 +719,17 @@ To load an entity, always load the library that includes it using the goal ``log
    loop <loop_0>
    loopp <loopp_0>
 
+``library/mcp_server/``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   mcp_server <mcp_server_0>
+   mcp_tool_protocol <mcp_tool_protocol_0>
+
 ``library/memcached/``
 ----------------------
 

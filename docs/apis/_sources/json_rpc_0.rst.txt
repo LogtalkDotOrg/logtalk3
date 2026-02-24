@@ -604,7 +604,7 @@ Reads a JSON-RPC 2.0 message from an input stream. Reads a line of JSON text and
 ``write_framed_message/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Writes a JSON-RPC 2.0 message to an output stream using Content-Length framing (as used by LSP and MCP protocols). The message is preceded by a ``Content-Length: N\r\n\r\n`` header where ``N`` is the byte length of the JSON body. Flushes the output stream after writing.
+Writes a JSON-RPC 2.0 message to an output stream using Content-Length framing (as used by LSP style protocols). The message is preceded by a ``Content-Length: N\r\n\r\n`` header where ``N`` is the byte length of the JSON body. Flushes the output stream after writing.
 
 | **Compilation flags:**
 |    ``static``
@@ -623,7 +623,7 @@ Writes a JSON-RPC 2.0 message to an output stream using Content-Length framing (
 ``read_framed_message/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Reads a JSON-RPC 2.0 message from an input stream using Content-Length framing (as used by LSP and MCP protocols). Reads a ``Content-Length: N\r\n\r\n`` header followed by exactly ``N`` bytes of JSON body. Fails at end of stream or if the header is missing or malformed.
+Reads a JSON-RPC 2.0 message from an input stream using Content-Length framing (as used by LSP style protocols). Reads a ``Content-Length: N\r\n\r\n`` header followed by exactly ``N`` bytes of JSON body. Fails at end of stream or if the header is missing or malformed.
 
 | **Compilation flags:**
 |    ``static``

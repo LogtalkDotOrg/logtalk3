@@ -1235,6 +1235,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`timeout <timeout/0::call_with_timeout/3>`
 
+``capabilities/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_tool_protocol <mcp_tool_protocol/0::capabilities/1>`
+
 ``cartesian_product/3``
 -----------------------
 
@@ -3546,6 +3556,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`expected(Expected) <expected/1::either/3>`
+
+``elicit_request/5``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server <mcp_server/0::elicit_request/5>`
 
 ``empty/1``
 -----------
@@ -12751,6 +12771,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ports_profiler <ports_profiler/0::start/0>`
 * :ref:`shell <shell/0::start/0>`
 
+``start/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server <mcp_server/0::start/2>`
+
+``start/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server <mcp_server/0::start/3>`
+
+``start/4``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server <mcp_server/0::start/4>`
+
+``start/5``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server <mcp_server/0::start/5>`
+
 ``start_redirect_to_file/2``
 ----------------------------
 
@@ -13581,6 +13641,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`help <help/0::tool/1>`
 
+``tool_call/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_tool_protocol <mcp_tool_protocol/0::tool_call/3>`
+
+``tool_call/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_tool_protocol <mcp_tool_protocol/0::tool_call/4>`
+
 ``tools/0``
 -----------
 
@@ -13590,6 +13670,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`help <help/0::tools/0>`
+
+``tools/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_tool_protocol <mcp_tool_protocol/0::tools/1>`
 
 ``top/3``
 ---------

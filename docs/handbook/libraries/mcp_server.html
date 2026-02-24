@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mcp_server &mdash; Logtalk 3.98.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fd83a980"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="memcached" href="memcached.html" />
+    <link rel="prev" title="loops" href="loops.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.98.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ada_boost.html"><code class="docutils literal notranslate"><span class="pre">ada_boost</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="amqp.html"><code class="docutils literal notranslate"><span class="pre">amqp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignvars.html"><code class="docutils literal notranslate"><span class="pre">assignvars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="avro.html"><code class="docutils literal notranslate"><span class="pre">avro</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base32.html"><code class="docutils literal notranslate"><span class="pre">base32</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base58.html"><code class="docutils literal notranslate"><span class="pre">base58</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base64.html"><code class="docutils literal notranslate"><span class="pre">base64</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base85.html"><code class="docutils literal notranslate"><span class="pre">base85</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="c45.html"><code class="docutils literal notranslate"><span class="pre">c45</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds.html"><code class="docutils literal notranslate"><span class="pre">ccsds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="classifier_protocols.html"><code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line_options.html"><code class="docutils literal notranslate"><span class="pre">command_line_options</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="datalog.html"><code class="docutils literal notranslate"><span class="pre">datalog</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependents.html"><code class="docutils literal notranslate"><span class="pre">dependents</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="deques.html"><code class="docutils literal notranslate"><span class="pre">deques</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dictionaries.html"><code class="docutils literal notranslate"><span class="pre">dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dif.html"><code class="docutils literal notranslate"><span class="pre">dif</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html"><code class="docutils literal notranslate"><span class="pre">edcg</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html"><code class="docutils literal notranslate"><span class="pre">events</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="format.html"><code class="docutils literal notranslate"><span class="pre">format</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="genint.html"><code class="docutils literal notranslate"><span class="pre">genint</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphs.html"><code class="docutils literal notranslate"><span class="pre">graphs</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchies.html"><code class="docutils literal notranslate"><span class="pre">hierarchies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ids.html"><code class="docutils literal notranslate"><span class="pre">ids</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="isolation_forest.html"><code class="docutils literal notranslate"><span class="pre">isolation_forest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="java.html"><code class="docutils literal notranslate"><span class="pre">java</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_ld.html"><code class="docutils literal notranslate"><span class="pre">json_ld</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_lines.html"><code class="docutils literal notranslate"><span class="pre">json_lines</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_rpc.html"><code class="docutils literal notranslate"><span class="pre">json_rpc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_schema.html"><code class="docutils literal notranslate"><span class="pre">json_schema</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="knn.html"><code class="docutils literal notranslate"><span class="pre">knn</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linda.html"><code class="docutils literal notranslate"><span class="pre">linda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="listing.html"><code class="docutils literal notranslate"><span class="pre">listing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loops.html"><code class="docutils literal notranslate"><span class="pre">loops</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">mcp_server</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#implementing-the-tool-protocol">Implementing the tool protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#auto-dispatch-vs-custom-tool-call-3">Auto-dispatch vs. custom <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#starting-the-server-for-debugging">Starting the server for debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcp-client-configuration">MCP client configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#elicitation-interactive-tools">Elicitation (interactive tools)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#error-handling">Error handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#protocol">Protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#supported-mcp-methods">Supported MCP methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="memcached.html"><code class="docutils literal notranslate"><span class="pre">memcached</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutations.html"><code class="docutils literal notranslate"><span class="pre">mutations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="naive_bayes.html"><code class="docutils literal notranslate"><span class="pre">naive_bayes</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nearest_centroid.html"><code class="docutils literal notranslate"><span class="pre">nearest_centroid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nested_dictionaries.html"><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html"><code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="docutils literal notranslate"><span class="pre">process</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="protobuf.html"><code class="docutils literal notranslate"><span class="pre">protobuf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random_forest.html"><code class="docutils literal notranslate"><span class="pre">random_forest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reader.html"><code class="docutils literal notranslate"><span class="pre">reader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorded_database.html"><code class="docutils literal notranslate"><span class="pre">recorded_database</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sockets.html"><code class="docutils literal notranslate"><span class="pre">sockets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulated_annealing.html"><code class="docutils literal notranslate"><span class="pre">simulated_annealing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stemming.html"><code class="docutils literal notranslate"><span class="pre">stemming</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stomp.html"><code class="docutils literal notranslate"><span class="pre">stomp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="string_distance.html"><code class="docutils literal notranslate"><span class="pre">string_distance</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings.html"><code class="docutils literal notranslate"><span class="pre">strings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="subsequences.html"><code class="docutils literal notranslate"><span class="pre">subsequences</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="toon.html"><code class="docutils literal notranslate"><span class="pre">toon</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tsv.html"><code class="docutils literal notranslate"><span class="pre">tsv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ulid.html"><code class="docutils literal notranslate"><span class="pre">ulid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html"><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="union_find.html"><code class="docutils literal notranslate"><span class="pre">union_find</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="url.html"><code class="docutils literal notranslate"><span class="pre">url</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="uuid.html"><code class="docutils literal notranslate"><span class="pre">uuid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="validations.html"><code class="docutils literal notranslate"><span class="pre">validations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html"><code class="docutils literal notranslate"><span class="pre">yaml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="zippers.html"><code class="docutils literal notranslate"><span class="pre">zippers</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../apis/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Libraries</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">mcp_server</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/mcp_server.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mcp-server">
+<span id="library-mcp-server"></span><h1><code class="docutils literal notranslate"><span class="pre">mcp_server</span></code><a class="headerlink" href="#mcp-server" title="Link to this heading"></a></h1>
+<p>MCP (Model Context Protocol) server library for Logtalk applications.
+Makes any Logtalk application available as a local MCP server using
+stdio transport with Content-Length framing. Implements the MCP
+2025-03-26 specification (tools and elicitation capabilities).</p>
+<p>The library uses the <code class="docutils literal notranslate"><span class="pre">json_rpc</span></code> library for JSON-RPC 2.0 message
+handling as currently required by the MCP specification.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#mcp_server">../../apis/library_index.html#mcp_server</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(mcp_server(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(mcp_server(tester)).
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="implementing-the-tool-protocol">
+<h3>Implementing the tool protocol<a class="headerlink" href="#implementing-the-tool-protocol" title="Link to this heading"></a></h3>
+<p>To expose a Logtalk object as an MCP tool provider, implement the
+<code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code> protocol:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(my_tools,
+    <span class="k">implements</span>(mcp_tool_protocol)).
+
+<span class="p">    :- </span><span class="k">public</span>(factorial<span class="o">/</span><span class="m">2</span>).
+<span class="p">    :- </span><span class="k">mode</span>(factorial(<span class="o">+</span>integer, <span class="o">-</span>integer), one).
+<span class="p">    :- </span><span class="k">info</span>(factorial<span class="o">/</span><span class="m">2</span>, [
+        comment <span class="k">is</span> <span class="s">&#39;Computes the factorial of a non-negative integer.&#39;</span>,
+        argnames <span class="k">is</span> [<span class="s">&#39;N&#39;</span>, <span class="s">&#39;F&#39;</span>]
+    ]).
+
+    tools([
+        tool(factorial, factorial, <span class="m">2</span>)
+    ]).
+
+    factorial(<span class="m">0</span>, <span class="m">1</span>) <span class="o">:-</span> <span class="o">!</span>.
+    factorial(<span class="nv">N</span>, <span class="nv">F</span>) <span class="o">:-</span>
+        <span class="nv">N</span> <span class="o">&gt;</span> <span class="m">0</span>,
+        <span class="nv">N1</span> <span class="k">is</span> <span class="nv">N</span> <span class="o">-</span> <span class="m">1</span>,
+        factorial(<span class="nv">N1</span>, <span class="nv">F1</span>),
+        <span class="nv">F</span> <span class="k">is</span> <span class="nv">N</span> <span class="o">*</span> <span class="nv">F1</span>.
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">tools/1</span></code> predicate returns a list of
+<code class="docutils literal notranslate"><span class="pre">tool(Name,</span> <span class="pre">Functor,</span> <span class="pre">Arity)</span></code> descriptors that declare which predicates
+are exposed as MCP tools:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Name</span></code> — the MCP tool name (an atom)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Functor</span></code> — the predicate functor</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Arity</span></code> — the predicate arity</p></li>
+</ul>
+<p>Tool descriptions and parameter schemas are automatically derived from
+the <code class="docutils literal notranslate"><span class="pre">info/2</span></code> and <code class="docutils literal notranslate"><span class="pre">mode/2</span></code> directives. This must be accurate to allow
+correct derivation of inout and output arguments and types.</p>
+<p>The supported predicates types and their corresponding JSON types are:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Logtalk type</p></th>
+<th class="head"><p>JSON type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">integer</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">integer</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">atom</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">array</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">list(_)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">array</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">compound</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">object</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nonvar</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">term</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">chars</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">codes</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>(other)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="auto-dispatch-vs-custom-tool-call-3">
+<span id="auto-dispatch-vs-custom-tool-call3"></span><h3>Auto-dispatch vs. custom <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code><a class="headerlink" href="#auto-dispatch-vs-custom-tool-call-3" title="Link to this heading"></a></h3>
+<p>By default, when an MCP client calls a tool, the server auto-dispatches:
+it calls the corresponding predicate as a message to the application
+object, collects output-mode arguments (<code class="docutils literal notranslate"><span class="pre">-</span></code> and <code class="docutils literal notranslate"><span class="pre">--</span></code>), and returns
+them as text content.</p>
+<p>For custom result formatting, implement <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>tool_call(factorial, <span class="nv">Arguments</span>, <span class="nv">Result</span>) <span class="o">:-</span>
+    member(<span class="s">&#39;N&#39;</span><span class="o">-</span><span class="nv">N</span>, <span class="nv">Arguments</span>),
+    factorial(<span class="nv">N</span>, <span class="nv">F</span>),
+    <span class="k">number_codes</span>(<span class="nv">F</span>, <span class="nv">Codes</span>),
+    <span class="k">atom_codes</span>(<span class="nv">FAtom</span>, <span class="nv">Codes</span>),
+    <span class="k">atom_concat</span>(<span class="s">&#39;The factorial is: &#39;</span>, <span class="nv">FAtom</span>, <span class="nv">Text</span>),
+    <span class="nv">Result</span> <span class="o">=</span> text(<span class="nv">Text</span>).
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Result</span></code> term can be:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">text(Atom)</span></code> — a text result</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">error(Atom)</span></code> — a tool-level error (sets <code class="docutils literal notranslate"><span class="pre">isError:</span> <span class="pre">true</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">results(List)</span></code> — a list of content items (<code class="docutils literal notranslate"><span class="pre">text(Atom)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">error(Atom)</span></code>)</p></li>
+</ul>
+</section>
+<section id="starting-the-server-for-debugging">
+<h3>Starting the server for debugging<a class="headerlink" href="#starting-the-server-for-debugging" title="Link to this heading"></a></h3>
+<p>Start the MCP server from a Logtalk top-level or script:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mcp_server<span class="o">::</span>start(<span class="s">&#39;my-server&#39;</span>, my_tools).
+</pre></div>
+</div>
+<p>With options:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mcp_server<span class="o">::</span>start(<span class="s">&#39;my-server&#39;</span>, my_tools, [version(<span class="s">&#39;2.0.0&#39;</span>)]).
+</pre></div>
+</div>
+<p>There should either be no output or only a Prolog backend term input
+prompt. Other than that, any spurious output will break the connection
+between a MCP client and the MCP server.</p>
+</section>
+<section id="mcp-client-configuration">
+<h3>MCP client configuration<a class="headerlink" href="#mcp-client-configuration" title="Link to this heading"></a></h3>
+<p>To use the server with an MCP client (e.g., VSCode or Claude Desktop),
+configure it as a stdio server. Example <code class="docutils literal notranslate"><span class="pre">claude_desktop_config.json</span></code>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;mcpServers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;my-server&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;swilgt&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;-g&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;logtalk_load(my_mcp_server(loader))&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;-t&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;halt&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;LOGTALKHOME&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/usr/local/share/logtalk&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;LOGTALKUSER&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/Users/jdoe/logtalk&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">env</span></code> definition of the <code class="docutils literal notranslate"><span class="pre">LOGTALKHOME</span></code> and <code class="docutils literal notranslate"><span class="pre">LOGTALKUSER</span></code>
+environment variables may or may not be required (it’s usually necessary
+on macOS). When required, replace the values above with the actual
+values on your Logtalk setup.</p>
+<p>The actual arguments to the integration script (<code class="docutils literal notranslate"><span class="pre">swilgt</span></code> in the
+example above) depend on the Prolog backend. For example, XVM requires
+instead:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;mcpServers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;my-server&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xvmlgt&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;-g&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;logtalk_load(my_mcp_server(loader)), halt.&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;LOGTALKHOME&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/usr/local/share/logtalk&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;LOGTALKUSER&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/Users/jdoe/logtalk&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="elicitation-interactive-tools">
+<h3>Elicitation (interactive tools)<a class="headerlink" href="#elicitation-interactive-tools" title="Link to this heading"></a></h3>
+<p>Tools that need to ask the user questions during execution can use MCP
+elicitation <strong>if</strong> the MCP client supports it (tested and working with
+VSCode Copilot). The application declares the <code class="docutils literal notranslate"><span class="pre">elicitation</span></code> capability
+and implements <code class="docutils literal notranslate"><span class="pre">tool_call/4</span></code> instead of <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(interactive_tools,
+    <span class="k">implements</span>(mcp_tool_protocol)).
+
+    capabilities([elicitation]).
+
+    tools([
+        tool(ask_name, ask_name, <span class="m">0</span>)
+    ]).
+
+<span class="p">    :- </span><span class="k">public</span>(ask_name<span class="o">/</span><span class="m">0</span>).
+<span class="p">    :- </span><span class="k">info</span>(ask_name<span class="o">/</span><span class="m">0</span>, [
+        comment <span class="k">is</span> <span class="s">&#39;Asks the user for their name and greets them.&#39;</span>
+    ]).
+
+    tool_call(ask_name, <span class="nv">_Arguments</span>, <span class="nv">Elicit</span>, <span class="nv">Result</span>) <span class="o">:-</span>
+        <span class="nv">Schema</span> <span class="o">=</span> <span class="k">{</span>
+            type<span class="o">-</span>object,
+            properties<span class="o">-</span><span class="k">{</span>name<span class="o">-</span><span class="k">{</span>type<span class="o">-</span>string<span class="k">}}</span>,
+            required<span class="o">-</span>[name]
+        <span class="k">}</span>,
+        <span class="k">call</span>(<span class="nv">Elicit</span>, <span class="s">&#39;What is your name?&#39;</span>, <span class="nv">Schema</span>, <span class="nv">Answer</span>),
+        (   <span class="nv">Answer</span> <span class="o">=</span> accept(<span class="nv">Content</span>),
+            has_pair(<span class="nv">Content</span>, name, <span class="nv">Name</span>) <span class="o">-&gt;</span>
+            <span class="k">atom_concat</span>(<span class="s">&#39;Hello, &#39;</span>, <span class="nv">Name</span>, <span class="nv">Greeting</span>),
+            <span class="k">atom_concat</span>(<span class="nv">Greeting</span>, <span class="s">&#39;!&#39;</span>, <span class="nv">Text</span>),
+            <span class="nv">Result</span> <span class="o">=</span> text(<span class="nv">Text</span>)
+        <span class="o">;</span>   <span class="nv">Result</span> <span class="o">=</span> text(<span class="s">&#39;No name provided.&#39;</span>)
+        ).
+
+    has_pair(<span class="k">{</span><span class="nv">Pairs</span><span class="k">}</span>, <span class="nv">Key</span>, <span class="nv">Value</span>) <span class="o">:-</span>
+        curly_member(<span class="nv">Key</span><span class="o">-</span><span class="nv">Value</span>, <span class="nv">Pairs</span>).
+
+    curly_member(<span class="nv">Pair</span>, (<span class="nv">Pair</span>, <span class="nv">_</span>)) <span class="o">:-</span> <span class="o">!</span>.
+    curly_member(<span class="nv">Pair</span>, (<span class="nv">_</span>, <span class="nv">Rest</span>)) <span class="o">:-</span>
+        <span class="o">!</span>, curly_member(<span class="nv">Pair</span>, <span class="nv">Rest</span>).
+    curly_member(<span class="nv">Pair</span>, <span class="nv">Pair</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Elicit</span></code> closure is called as
+<code class="docutils literal notranslate"><span class="pre">call(Elicit,</span> <span class="pre">Message,</span> <span class="pre">Schema,</span> <span class="pre">Answer)</span></code> where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Message</span></code> — an atom with the prompt text</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Schema</span></code> — a curly-term JSON Schema for the requested input</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Answer</span></code> — unified with <code class="docutils literal notranslate"><span class="pre">accept(Content)</span></code>, <code class="docutils literal notranslate"><span class="pre">decline</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">cancel</span></code></p></li>
+</ul>
+<p>When <code class="docutils literal notranslate"><span class="pre">accept(Content)</span></code> is returned, <code class="docutils literal notranslate"><span class="pre">Content</span></code> is a curly-term with
+the user’s response matching the requested schema.</p>
+<p>See the <code class="docutils literal notranslate"><span class="pre">examples/birds_mcp/</span></code> example for a complete demonstration of
+elicitation with a bird identification expert system.</p>
+</section>
+</section>
+<section id="error-handling">
+<h2>Error handling<a class="headerlink" href="#error-handling" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Predicate failures result in a tool-level error with
+<code class="docutils literal notranslate"><span class="pre">isError:</span> <span class="pre">true</span></code>.</p></li>
+<li><p>Predicate exceptions result in a tool-level error with the exception
+term serialized as the error text.</p></li>
+</ul>
+</section>
+<section id="protocol">
+<h2>Protocol<a class="headerlink" href="#protocol" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code> protocol defines the following predicates:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code> — returns the list of additional capabilities
+needed by the application (e.g. <code class="docutils literal notranslate"><span class="pre">[elicitation]</span></code>); optional, defaults
+to <code class="docutils literal notranslate"><span class="pre">[]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tools/1</span></code> — returns the list of tool descriptors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code> — handles a tool call (optional; auto-dispatch is used
+when not defined)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tool_call/4</span></code> — handles a tool call with an elicitation closure
+(optional; requires <code class="docutils literal notranslate"><span class="pre">capabilities([elicitation])</span></code>)</p></li>
+</ul>
+</section>
+<section id="supported-mcp-methods">
+<h2>Supported MCP methods<a class="headerlink" href="#supported-mcp-methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">initialize</span></code></p></td>
+<td><p>Request</p></td>
+<td><p>MCP handshake</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">initialized</span></code></p></td>
+<td><p>Notification</p></td>
+<td><p>Client acknowledgment</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ping</span></code></p></td>
+<td><p>Request</p></td>
+<td><p>Server liveness check</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tools/list</span></code></p></td>
+<td><p>Request</p></td>
+<td><p>Lists available tools</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tools/call</span></code></p></td>
+<td><p>Request</p></td>
+<td><p>Calls a tool</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">elicitation/create</span></code></p></td>
+<td><p>Request (=&gt;)</p></td>
+<td><p>Asks the client for user input</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="loops.html" class="btn btn-neutral float-left" title="loops" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="memcached.html" class="btn btn-neutral float-right" title="memcached" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2026, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
