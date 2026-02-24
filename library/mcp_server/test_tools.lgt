@@ -253,6 +253,80 @@
 :- end_object.
 
 
+% Test application with resources support
+
+:- object(test_resource_tools,
+	implements([mcp_tool_protocol, mcp_resource_protocol])).
+
+	capabilities([resources]).
+
+	tools([]).
+
+	resources([
+		resource('logtalk://test/greeting', greeting, 'A greeting message', 'text/plain'),
+		resource('logtalk://test/config', config, 'Application configuration', 'application/json'),
+		resource('logtalk://test/multi', multi, 'Multiple content items', 'text/plain')
+	]).
+
+	resource_read('logtalk://test/greeting', _Arguments, Result) :-
+		Result = contents([
+			text_content('logtalk://test/greeting', 'text/plain', 'Hello from Logtalk!')
+		]).
+
+	resource_read('logtalk://test/config', _Arguments, Result) :-
+		Result = contents([
+			text_content('logtalk://test/config', 'application/json', '{"name": "test", "version": "1.0"}')
+		]).
+
+	resource_read('logtalk://test/multi', _Arguments, Result) :-
+		Result = contents([
+			text_content('logtalk://test/multi', 'text/plain', 'First part'),
+			text_content('logtalk://test/multi', 'text/plain', 'Second part')
+		]).
+
+:- end_object.
+
+
+% Test application with tools, prompts, and resources
+
+:- object(test_all_capabilities,
+	implements([mcp_tool_protocol, mcp_prompt_protocol, mcp_resource_protocol])).
+
+	capabilities([prompts, resources]).
+
+	:- public(add/3).
+	:- mode(add(+number, +number, -number), one).
+	:- info(add/3, [
+		comment is 'Adds two numbers.',
+		argnames is ['X', 'Y', 'Sum']
+	]).
+
+	tools([
+		tool(add, add, 3)
+	]).
+
+	add(X, Y, Sum) :-
+		Sum is X + Y.
+
+	prompts([
+		prompt(helper, 'A helper prompt', [])
+	]).
+
+	prompt_get(helper, _Arguments, Result) :-
+		Result = messages([message(user, text('Help me with something.'))]).
+
+	resources([
+		resource('logtalk://test/data', data, 'Some data', 'text/plain')
+	]).
+
+	resource_read('logtalk://test/data', _Arguments, Result) :-
+		Result = contents([
+			text_content('logtalk://test/data', 'text/plain', 'Some test data')
+		]).
+
+:- end_object.
+
+
 % Test application with multi-result and exception tools
 
 :- object(test_result_tools,

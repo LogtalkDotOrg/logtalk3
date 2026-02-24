@@ -24,7 +24,7 @@ ________________________________________________________________________
 MCP (Model Context Protocol) server library for Logtalk applications.
 Makes any Logtalk application available as a local MCP server using stdio
 transport with Content-Length framing. Implements the MCP 2025-03-26
-specification (tools, prompts, and elicitation capabilities).
+specification (tools, prompts, resources, and elicitation capabilities).
 
 The library uses the `json_rpc` library for JSON-RPC 2.0 message handling
 as currently required by the MCP specification.
@@ -347,6 +347,67 @@ prompt_get(debate, Arguments, Result) :-
 ```
 
 
+### Resources (data exposure)
+
+MCP resources expose data and content from the application that MCP
+clients can access. To add resources, implement `mcp_resource_protocol`
+in addition to `mcp_tool_protocol`, and declare `resources` in
+capabilities:
+
+```logtalk
+:- object(my_resources,
+	implements([mcp_tool_protocol, mcp_resource_protocol])).
+
+	capabilities([resources]).
+
+	tools([]).
+
+	resources([
+		resource('logtalk://my-app/config', config, 'Application configuration', 'application/json'),
+		resource('logtalk://my-app/readme', readme, 'Application readme', 'text/plain')
+	]).
+
+	resource_read('logtalk://my-app/config', _Arguments, Result) :-
+		Result = contents([
+			text_content('logtalk://my-app/config', 'application/json', '{"name": "my-app", "version": "1.0"}')
+		]).
+
+	resource_read('logtalk://my-app/readme', _Arguments, Result) :-
+		Result = contents([
+			text_content('logtalk://my-app/readme', 'text/plain', 'Welcome to my application.')
+		]).
+
+:- end_object.
+```
+
+The `resources/1` predicate returns a list of
+`resource(URI, Name, Description, MimeType)` descriptors:
+
+- `URI` — the resource identifier (an atom, typically a URI like
+  `logtalk://my-app/data`)
+- `Name` — a human-readable name (an atom)
+- `Description` — a human-readable description (an atom)
+- `MimeType` — the MIME type of the resource content (an atom, e.g.
+  `'text/plain'`, `'application/json'`)
+
+The `resource_read/3` predicate handles resource read requests. Its
+result term must be `contents(ContentList)` where each content item is:
+
+- `text_content(URI, MimeType, Text)` — for text resources
+- `blob_content(URI, MimeType, Base64Data)` — for binary resources
+  encoded as base64
+
+A resource can return multiple content items:
+
+```logtalk
+resource_read('logtalk://my-app/logs', _Arguments, Result) :-
+	Result = contents([
+		text_content('logtalk://my-app/logs', 'text/plain', 'Log entry 1'),
+		text_content('logtalk://my-app/logs', 'text/plain', 'Log entry 2')
+	]).
+```
+
+
 Error handling
 --------------
 
@@ -354,6 +415,7 @@ Error handling
 - Predicate exceptions result in a tool-level error with the exception
   term serialized as the error text.
 - Prompt execution failures result in a JSON-RPC error response.
+- Resource read failures result in a JSON-RPC error response.
 
 
 Protocol
@@ -362,8 +424,8 @@ Protocol
 The `mcp_tool_protocol` protocol defines the following predicates:
 
 - `capabilities/1` — returns the list of additional capabilities needed
-  by the application (e.g. `[elicitation]`, `[prompts]`, or
-  `[prompts, elicitation]`); optional, defaults to `[]`
+  by the application (e.g. `[elicitation]`, `[prompts]`, `[resources]`,
+  or `[prompts, resources, elicitation]`); optional, defaults to `[]`
 - `tools/1` — returns the list of tool descriptors
 - `tool_call/3` — handles a tool call (optional; auto-dispatch is used
   when not defined)
@@ -375,6 +437,11 @@ The `mcp_prompt_protocol` protocol defines the following predicates:
 
 - `prompts/1` — returns the list of prompt descriptors
 - `prompt_get/3` — handles a prompt get request
+
+The `mcp_resource_protocol` protocol defines the following predicates:
+
+- `resources/1` — returns the list of resource descriptors
+- `resource_read/3` — handles a resource read request
 
 
 Supported MCP methods
@@ -389,4 +456,6 @@ Supported MCP methods
 | `tools/call`        | Request      | Calls a tool                      |
 | `prompts/list`      | Request      | Lists available prompts           |
 | `prompts/get`       | Request      | Gets a prompt with arguments      |
+| `resources/list`    | Request      | Lists available resources         |
+| `resources/read`    | Request      | Reads a resource by URI           |
 | `elicitation/create`| Request (=>) | Asks the client for user input    |

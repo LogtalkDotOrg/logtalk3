@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
 		date is 2026-02-24,
 		comment is 'Unit tests for the "mcp_server" library.'
@@ -524,6 +524,158 @@
 		has_pair(Message, content, Content),
 		has_pair(Content, text, Text).
 
+	% Resource capability tests
+
+	% With resources capability, capabilities should include resources
+	test(mcp_server_initialize_resource_capabilities_01, true) :-
+		run_mcp_exchange_with(
+			test_resource_tools,
+			[initialize_request(1)],
+			[Response]
+		),
+		result(Response, Result),
+		has_pair(Result, capabilities, Caps),
+		has_pair(Caps, tools, _),
+		has_pair(Caps, resources, _).
+
+	% Without resources capability, capabilities should not include resources
+	test(mcp_server_initialize_no_resource_capabilities_01, true) :-
+		run_mcp_exchange(
+			[initialize_request(1)],
+			[Response]
+		),
+		result(Response, Result),
+		has_pair(Result, capabilities, Caps),
+		\+ has_pair(Caps, resources, _).
+
+	% Resources/list tests
+
+	% List resources from resource-capable application
+	test(mcp_server_resources_list_01, true) :-
+		run_mcp_exchange_with(
+			test_resource_tools,
+			[resources_list_request(1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, resources, Resources),
+		Resources = [_| _],
+		member(Resource, Resources),
+		has_pair(Resource, uri, 'logtalk://test/greeting').
+
+	% Resources list includes all declared resources
+	test(mcp_server_resources_list_02, true(list::length(Resources, 3))) :-
+		run_mcp_exchange_with(
+			test_resource_tools,
+			[resources_list_request(1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, resources, Resources).
+
+	% Resources list from non-resource application returns empty list
+	test(mcp_server_resources_list_03, true(Resources == [])) :-
+		run_mcp_exchange(
+			[resources_list_request(1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, resources, Resources).
+
+	% Resource descriptor includes all fields
+	test(mcp_server_resources_list_fields_01, true) :-
+		run_mcp_exchange_with(
+			test_resource_tools,
+			[resources_list_request(1)],
+			[Response]
+		),
+		result(Response, Result),
+		has_pair(Result, resources, Resources),
+		member(Resource, Resources),
+		has_pair(Resource, uri, 'logtalk://test/greeting'),
+		has_pair(Resource, name, greeting),
+		has_pair(Resource, description, 'A greeting message'),
+		has_pair(Resource, mimeType, 'text/plain').
+
+	% Resources/read tests
+
+	% Read a text resource
+	test(mcp_server_resources_read_01, true(Text == 'Hello from Logtalk!')) :-
+		run_mcp_exchange_with(
+			test_resource_tools,
+			[resources_read_request('logtalk://test/greeting', 1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, contents, [ContentItem| _]),
+		has_pair(ContentItem, uri, 'logtalk://test/greeting'),
+		has_pair(ContentItem, mimeType, 'text/plain'),
+		has_pair(ContentItem, text, Text).
+
+	% Read a JSON resource
+	test(mcp_server_resources_read_02, true) :-
+		run_mcp_exchange_with(
+			test_resource_tools,
+			[resources_read_request('logtalk://test/config', 1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, contents, [ContentItem]),
+		has_pair(ContentItem, mimeType, 'application/json'),
+		has_pair(ContentItem, text, _).
+
+	% Read a resource with multiple content items
+	test(mcp_server_resources_read_multi_01, true(list::length(Contents, 2))) :-
+		run_mcp_exchange_with(
+			test_resource_tools,
+			[resources_read_request('logtalk://test/multi', 1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, contents, Contents).
+
+	% Resource not found returns error
+	test(mcp_server_resources_read_not_found_01, true) :-
+		run_mcp_exchange_with(
+			test_resource_tools,
+			[resources_read_request('logtalk://test/nonexistent', 1)],
+			[Response]
+		),
+		is_error_response(Response).
+
+	% Combined tools, prompts, and resources tests
+
+	% Application with all capabilities: all advertised
+	test(mcp_server_all_capabilities_01, true) :-
+		run_mcp_exchange_with(
+			test_all_capabilities,
+			[initialize_request(1)],
+			[Response]
+		),
+		result(Response, Result),
+		has_pair(Result, capabilities, Caps),
+		has_pair(Caps, tools, _),
+		has_pair(Caps, prompts, _),
+		has_pair(Caps, resources, _).
+
+	% Application with all capabilities: resources work
+	test(mcp_server_all_capabilities_resource_read_01, true(Text == 'Some test data')) :-
+		run_mcp_exchange_with(
+			test_all_capabilities,
+			[resources_read_request('logtalk://test/data', 1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, contents, [ContentItem]),
+		has_pair(ContentItem, text, Text).
+
 	% Test auxiliary predicates
 
 	% Run an MCP exchange using the public start/4 API with file streams
@@ -584,6 +736,10 @@
 		request('prompts/get', {name-PromptName, arguments-Arguments}, Id, Message).
 	spec_to_message(prompts_get_request(PromptName, Id), Message) :-
 		request('prompts/get', {name-PromptName}, Id, Message).
+	spec_to_message(resources_list_request(Id), Message) :-
+		request('resources/list', {}, Id, Message).
+	spec_to_message(resources_read_request(URI, Id), Message) :-
+		request('resources/read', {uri-URI}, Id, Message).
 
 	% Read all framed messages from a stream
 	read_all_framed(Stream, Messages) :-

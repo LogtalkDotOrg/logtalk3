@@ -33,7 +33,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="mcp_tool_protocol" href="mcp_tool_protocol_0.html" />
-    <link rel="prev" title="mcp_prompt_protocol" href="mcp_prompt_protocol_0.html" />
+    <link rel="prev" title="mcp_resource_protocol" href="mcp_resource_protocol_0.html" />
    
 </head>
 
@@ -133,6 +133,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#mcp-server"><span class="xref std std-ref">mcp_server</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="mcp_prompt_protocol_0.html">mcp_prompt_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_resource_protocol_0.html">mcp_resource_protocol</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">mcp_server</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_tool_protocol_0.html">mcp_tool_protocol</a></li>
 </ul>
@@ -235,7 +236,7 @@
   <p class="right" id="mcp-server-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="mcp-server">
 <h1><code class="docutils literal notranslate"><span class="pre">mcp_server</span></code><a class="headerlink" href="#mcp-server" title="Link to this heading"></a></h1>
-<p>MCP (Model Context Protocol) server for Logtalk applications. Exposes Logtalk objects implementing the <code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code> and optionally <code class="docutils literal notranslate"><span class="pre">mcp_prompt_protocol</span></code> protocols as MCP tool and prompt providers over stdio transport with Content-Length framing. Implements the MCP 2025-03-26 specification. Uses the <code class="docutils literal notranslate"><span class="pre">json_rpc</span></code> library for JSON-RPC 2.0 message handling.</p>
+<p>MCP (Model Context Protocol) server for Logtalk applications. Exposes Logtalk objects implementing the <code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code> and optionally <code class="docutils literal notranslate"><span class="pre">mcp_prompt_protocol</span></code> and <code class="docutils literal notranslate"><span class="pre">mcp_resource_protocol</span></code> protocols as MCP tool, prompt, and resource providers over stdio transport with Content-Length framing. Implements the MCP 2025-03-26 specification. Uses the <code class="docutils literal notranslate"><span class="pre">json_rpc</span></code> library for JSON-RPC 2.0 message handling.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -244,7 +245,7 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:3:0</div>
+<div class="line"><strong>Version:</strong> 0:4:0</div>
 <div class="line"><strong>Date:</strong> 2026-02-24</div>
 </div>
 <div class="line-block">
@@ -273,9 +274,10 @@
 <div><ul class="simple">
 <li><p>MCP specification: Implements the Model Context Protocol 2025-03-26: <a class="reference external" href="https://spec.modelcontextprotocol.io/specification/2025-03-26/">https://spec.modelcontextprotocol.io/specification/2025-03-26/</a></p></li>
 <li><p>Transport: Uses stdio (standard input/output) with Content-Length header framing as defined by the MCP specification.</p></li>
-<li><p>Capabilities: Supports the tools capability (<code class="docutils literal notranslate"><span class="pre">tools/list</span></code> and <code class="docutils literal notranslate"><span class="pre">tools/call</span></code>). Optionally supports the prompts capability (<code class="docutils literal notranslate"><span class="pre">prompts/list</span></code> and <code class="docutils literal notranslate"><span class="pre">prompts/get</span></code>) when the application declares it via <code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code> and implements <code class="docutils literal notranslate"><span class="pre">mcp_prompt_protocol</span></code>. Optionally supports the elicitation capability (<code class="docutils literal notranslate"><span class="pre">elicitation/create</span></code>) when the application declares it via <code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code>.</p></li>
+<li><p>Capabilities: Supports the tools capability (<code class="docutils literal notranslate"><span class="pre">tools/list</span></code> and <code class="docutils literal notranslate"><span class="pre">tools/call</span></code>). Optionally supports the prompts capability (<code class="docutils literal notranslate"><span class="pre">prompts/list</span></code> and <code class="docutils literal notranslate"><span class="pre">prompts/get</span></code>) when the application declares it via <code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code> and implements <code class="docutils literal notranslate"><span class="pre">mcp_prompt_protocol</span></code>. Optionally supports the resources capability (<code class="docutils literal notranslate"><span class="pre">resources/list</span></code> and <code class="docutils literal notranslate"><span class="pre">resources/read</span></code>) when the application declares it via <code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code> and implements <code class="docutils literal notranslate"><span class="pre">mcp_resource_protocol</span></code>. Optionally supports the elicitation capability (<code class="docutils literal notranslate"><span class="pre">elicitation/create</span></code>) when the application declares it via <code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code>.</p></li>
 <li><p>Tool discovery: Tools are discovered from objects implementing the <code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code>. Tool metadata (descriptions, parameter schemas) is derived from <code class="docutils literal notranslate"><span class="pre">info/2</span></code> and <code class="docutils literal notranslate"><span class="pre">mode/2</span></code> directives.</p></li>
 <li><p>Prompt discovery: Prompts are discovered from objects implementing the <code class="docutils literal notranslate"><span class="pre">mcp_prompt_protocol</span></code>. Prompt metadata (names, descriptions, arguments) is declared via the <code class="docutils literal notranslate"><span class="pre">prompts/1</span></code> predicate.</p></li>
+<li><p>Resource discovery: Resources are discovered from objects implementing the <code class="docutils literal notranslate"><span class="pre">mcp_resource_protocol</span></code>. Resource metadata (URIs, names, descriptions, MIME types) is declared via the <code class="docutils literal notranslate"><span class="pre">resources/1</span></code> predicate.</p></li>
 <li><p>Auto-dispatch: When an object does not define <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code> or <code class="docutils literal notranslate"><span class="pre">tool_call/4</span></code> for a tool, the server auto-dispatches: it calls the predicate as a message to the object, collects output-mode arguments, and returns them as text content.</p></li>
 <li><p>Elicitation: When the application declares <code class="docutils literal notranslate"><span class="pre">elicitation</span></code> in its <code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code>, the server constructs an elicit closure and passes it to <code class="docutils literal notranslate"><span class="pre">tool_call/4</span></code>. The closure sends <code class="docutils literal notranslate"><span class="pre">elicitation/create</span></code> requests to the client and reads back the user response. This enables interactive tools that can ask the user questions during execution.</p></li>
 <li><p>Error handling: Predicate failures and exceptions both result in MCP tool-level errors with <code class="docutils literal notranslate"><span class="pre">isError</span></code> set to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
@@ -497,7 +499,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="mcp_prompt_protocol_0.html" class="btn btn-neutral float-left" title="mcp_prompt_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mcp_resource_protocol_0.html" class="btn btn-neutral float-left" title="mcp_resource_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="mcp_tool_protocol_0.html" class="btn btn-neutral float-right" title="mcp_tool_protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

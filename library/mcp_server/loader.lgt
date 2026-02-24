@@ -27,6 +27,7 @@
 	logtalk_load([
 		mcp_tool_protocol,
 		mcp_prompt_protocol,
+		mcp_resource_protocol,
 		mcp_server
 	], [
 		optimize(on)

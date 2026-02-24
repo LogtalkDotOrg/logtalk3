@@ -23,16 +23,17 @@
 	imports(options)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
 		date is 2026-02-24,
-		comment is 'MCP (Model Context Protocol) server for Logtalk applications. Exposes Logtalk objects implementing the ``mcp_tool_protocol`` and optionally ``mcp_prompt_protocol`` protocols as MCP tool and prompt providers over stdio transport with Content-Length framing. Implements the MCP 2025-03-26 specification. Uses the ``json_rpc`` library for JSON-RPC 2.0 message handling.',
+		comment is 'MCP (Model Context Protocol) server for Logtalk applications. Exposes Logtalk objects implementing the ``mcp_tool_protocol`` and optionally ``mcp_prompt_protocol`` and ``mcp_resource_protocol`` protocols as MCP tool, prompt, and resource providers over stdio transport with Content-Length framing. Implements the MCP 2025-03-26 specification. Uses the ``json_rpc`` library for JSON-RPC 2.0 message handling.',
 		remarks is [
 			'MCP specification' - 'Implements the Model Context Protocol 2025-03-26: https://spec.modelcontextprotocol.io/specification/2025-03-26/',
 			'Transport' - 'Uses stdio (standard input/output) with Content-Length header framing as defined by the MCP specification.',
-			'Capabilities' - 'Supports the tools capability (``tools/list`` and ``tools/call``). Optionally supports the prompts capability (``prompts/list`` and ``prompts/get``) when the application declares it via ``capabilities/1`` and implements ``mcp_prompt_protocol``. Optionally supports the elicitation capability (``elicitation/create``) when the application declares it via ``capabilities/1``.',
+			'Capabilities' - 'Supports the tools capability (``tools/list`` and ``tools/call``). Optionally supports the prompts capability (``prompts/list`` and ``prompts/get``) when the application declares it via ``capabilities/1`` and implements ``mcp_prompt_protocol``. Optionally supports the resources capability (``resources/list`` and ``resources/read``) when the application declares it via ``capabilities/1`` and implements ``mcp_resource_protocol``. Optionally supports the elicitation capability (``elicitation/create``) when the application declares it via ``capabilities/1``.',
 			'Tool discovery' - 'Tools are discovered from objects implementing the ``mcp_tool_protocol``. Tool metadata (descriptions, parameter schemas) is derived from ``info/2`` and ``mode/2`` directives.',
 			'Prompt discovery' - 'Prompts are discovered from objects implementing the ``mcp_prompt_protocol``. Prompt metadata (names, descriptions, arguments) is declared via the ``prompts/1`` predicate.',
+			'Resource discovery' - 'Resources are discovered from objects implementing the ``mcp_resource_protocol``. Resource metadata (URIs, names, descriptions, MIME types) is declared via the ``resources/1`` predicate.',
 			'Auto-dispatch' - 'When an object does not define ``tool_call/3`` or ``tool_call/4`` for a tool, the server auto-dispatches: it calls the predicate as a message to the object, collects output-mode arguments, and returns them as text content.',
 			'Elicitation' - 'When the application declares ``elicitation`` in its ``capabilities/1``, the server constructs an elicit closure and passes it to ``tool_call/4``. The closure sends ``elicitation/create`` requests to the client and reads back the user response. This enables interactive tools that can ask the user questions during execution.',
 			'Error handling' - 'Predicate failures and exceptions both result in MCP tool-level errors with ``isError`` set to ``true``.'
@@ -204,6 +205,10 @@
 			handle_prompts_list(Id, Output)
 		;	Method == 'prompts/get' ->
 			handle_prompts_get(Message, Id, Output)
+		;	Method == 'resources/list' ->
+			handle_resources_list(Id, Output)
+		;	Method == 'resources/read' ->
+			handle_resources_read(Message, Id, Output)
 		;	% Unknown method
 			method_not_found(Id, ErrorResponse),
 			write_message(Output, ErrorResponse)
@@ -250,12 +255,17 @@
 			CapsList1 = [prompts-{}| CapsList0]
 		;	CapsList1 = CapsList0
 		),
-		% Add elicitation if requested
-		(	member(elicitation, AppCaps) ->
-			CapsList2 = [elicitation-{}| CapsList1]
+		% Add resources if requested
+		(	member(resources, AppCaps) ->
+			CapsList2 = [resources-{}| CapsList1]
 		;	CapsList2 = CapsList1
 		),
-		pairs_to_curly(CapsList2, Capabilities).
+		% Add elicitation if requested
+		(	member(elicitation, AppCaps) ->
+			CapsList3 = [elicitation-{}| CapsList2]
+		;	CapsList3 = CapsList2
+		),
+		pairs_to_curly(CapsList3, Capabilities).
 
 	% Server ping
 
@@ -536,6 +546,79 @@
 	format_prompt_messages([message(Role, text(Text))| Rest], [JsonMsg| JsonRest]) :-
 		JsonMsg = {role-Role, content-{type-text, text-Text}},
 		format_prompt_messages(Rest, JsonRest).
+
+	% Handle resources/list requests
+
+	handle_resources_list(Id, Output) :-
+		application_(Application),
+		(	catch(Application::resources(ResourceDescriptors), _, fail) ->
+			resource_descriptors_to_json(ResourceDescriptors, JsonResources)
+		;	JsonResources = []
+		),
+		Result = {resources-JsonResources},
+		response(Result, Id, Response),
+		write_message(Output, Response).
+
+	% Convert a list of resource(URI, Name, Description, MimeType) descriptors to MCP JSON
+	resource_descriptors_to_json([], []).
+	resource_descriptors_to_json([resource(URI, Name, Description, MimeType)| Rest], [JsonRes| JsonRest]) :-
+		JsonRes = {uri-URI, name-Name, description-Description, mimeType-MimeType},
+		resource_descriptors_to_json(Rest, JsonRest).
+
+	% Handle resources/read requests
+
+	handle_resources_read(Message, Id, Output) :-
+		(	params(Message, Params) ->
+			true
+		;	Params = {}
+		),
+		(	has_pair(Params, uri, URI) ->
+			true
+		;	invalid_params(Id, ErrorResponse),
+			write_message(Output, ErrorResponse),
+			!
+		),
+		application_(Application),
+		% Check the resource exists
+		(	catch(Application::resources(ResourceDescriptors), _, fail),
+			member(resource(URI, _, _, _), ResourceDescriptors) ->
+			execute_resource_read(Application, URI, Id, Output)
+		;	% Resource not found
+			error_response(-32601, 'Resource not found', Id, ErrorResponse),
+			write_message(Output, ErrorResponse)
+		).
+
+	execute_resource_read(Application, URI, Id, Output) :-
+		(	catch(
+				Application::resource_read(URI, [], ResourceResult),
+				Error,
+				ResourceResult = error(Error)
+			) ->
+			format_resource_result(ResourceResult, Id, Response)
+		;	% resource_read/3 failed
+			error_response(-32603, 'Resource read failed', Id, Response)
+		),
+		write_message(Output, Response).
+
+	% Resource result formatting
+
+	format_resource_result(contents(Contents), Id, Response) :-
+		format_resource_contents(Contents, JsonContents),
+		response({contents-JsonContents}, Id, Response).
+	format_resource_result(error(Error), Id, Response) :-
+		(	atom(Error) ->
+			ErrorText = Error
+		;	write_to_atom(Error, ErrorText)
+		),
+		error_response(-32603, ErrorText, Id, Response).
+
+	format_resource_contents([], []).
+	format_resource_contents([text_content(URI, MimeType, Text)| Rest], [JsonContent| JsonRest]) :-
+		JsonContent = {uri-URI, mimeType-MimeType, text-Text},
+		format_resource_contents(Rest, JsonRest).
+	format_resource_contents([blob_content(URI, MimeType, Base64Data)| Rest], [JsonContent| JsonRest]) :-
+		JsonContent = {uri-URI, mimeType-MimeType, blob-Base64Data},
+		format_resource_contents(Rest, JsonRest).
 
 	% Elicitation
 

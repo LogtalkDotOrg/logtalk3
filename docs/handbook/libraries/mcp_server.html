@@ -134,6 +134,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#mcp-client-configuration">MCP client configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#elicitation-interactive-tools">Elicitation (interactive tools)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#prompts-prompt-templates">Prompts (prompt templates)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resources-data-exposure">Resources (data exposure)</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#error-handling">Error handling</a></li>
@@ -227,7 +228,8 @@
 <p>MCP (Model Context Protocol) server library for Logtalk applications.
 Makes any Logtalk application available as a local MCP server using
 stdio transport with Content-Length framing. Implements the MCP
-2025-03-26 specification (tools, prompts, and elicitation capabilities).</p>
+2025-03-26 specification (tools, prompts, resources, and elicitation
+capabilities).</p>
 <p>The library uses the <code class="docutils literal notranslate"><span class="pre">json_rpc</span></code> library for JSON-RPC 2.0 message
 handling as currently required by the MCP specification.</p>
 <section id="api-documentation">
@@ -560,6 +562,64 @@ description</p></li>
 </pre></div>
 </div>
 </section>
+<section id="resources-data-exposure">
+<h3>Resources (data exposure)<a class="headerlink" href="#resources-data-exposure" title="Link to this heading"></a></h3>
+<p>MCP resources expose data and content from the application that MCP
+clients can access. To add resources, implement
+<code class="docutils literal notranslate"><span class="pre">mcp_resource_protocol</span></code> in addition to <code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code>, and
+declare <code class="docutils literal notranslate"><span class="pre">resources</span></code> in capabilities:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(my_resources,
+    <span class="k">implements</span>([mcp_tool_protocol, mcp_resource_protocol])).
+
+    capabilities([resources]).
+
+    tools([]).
+
+    resources([
+        resource(<span class="s">&#39;logtalk://my-app/config&#39;</span>, config, <span class="s">&#39;Application configuration&#39;</span>, <span class="s">&#39;application/json&#39;</span>),
+        resource(<span class="s">&#39;logtalk://my-app/readme&#39;</span>, readme, <span class="s">&#39;Application readme&#39;</span>, <span class="s">&#39;text/plain&#39;</span>)
+    ]).
+
+    resource_read(<span class="s">&#39;logtalk://my-app/config&#39;</span>, <span class="nv">_Arguments</span>, <span class="nv">Result</span>) <span class="o">:-</span>
+        <span class="nv">Result</span> <span class="o">=</span> contents([
+            text_content(<span class="s">&#39;logtalk://my-app/config&#39;</span>, <span class="s">&#39;application/json&#39;</span>, <span class="s">&#39;{&quot;name&quot;: &quot;my-app&quot;, &quot;version&quot;: &quot;1.0&quot;}&#39;</span>)
+        ]).
+
+    resource_read(<span class="s">&#39;logtalk://my-app/readme&#39;</span>, <span class="nv">_Arguments</span>, <span class="nv">Result</span>) <span class="o">:-</span>
+        <span class="nv">Result</span> <span class="o">=</span> contents([
+            text_content(<span class="s">&#39;logtalk://my-app/readme&#39;</span>, <span class="s">&#39;text/plain&#39;</span>, <span class="s">&#39;Welcome to my application.&#39;</span>)
+        ]).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">resources/1</span></code> predicate returns a list of
+<code class="docutils literal notranslate"><span class="pre">resource(URI,</span> <span class="pre">Name,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code> descriptors:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">URI</span></code> — the resource identifier (an atom, typically a URI like
+<code class="docutils literal notranslate"><span class="pre">logtalk://my-app/data</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Name</span></code> — a human-readable name (an atom)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Description</span></code> — a human-readable description (an atom)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MimeType</span></code> — the MIME type of the resource content (an atom, e.g.
+<code class="docutils literal notranslate"><span class="pre">'text/plain'</span></code>, <code class="docutils literal notranslate"><span class="pre">'application/json'</span></code>)</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">resource_read/3</span></code> predicate handles resource read requests. Its
+result term must be <code class="docutils literal notranslate"><span class="pre">contents(ContentList)</span></code> where each content item
+is:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">text_content(URI,</span> <span class="pre">MimeType,</span> <span class="pre">Text)</span></code> — for text resources</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blob_content(URI,</span> <span class="pre">MimeType,</span> <span class="pre">Base64Data)</span></code> — for binary resources
+encoded as base64</p></li>
+</ul>
+<p>A resource can return multiple content items:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>resource_read(<span class="s">&#39;logtalk://my-app/logs&#39;</span>, <span class="nv">_Arguments</span>, <span class="nv">Result</span>) <span class="o">:-</span>
+    <span class="nv">Result</span> <span class="o">=</span> contents([
+        text_content(<span class="s">&#39;logtalk://my-app/logs&#39;</span>, <span class="s">&#39;text/plain&#39;</span>, <span class="s">&#39;Log entry 1&#39;</span>),
+        text_content(<span class="s">&#39;logtalk://my-app/logs&#39;</span>, <span class="s">&#39;text/plain&#39;</span>, <span class="s">&#39;Log entry 2&#39;</span>)
+    ]).
+</pre></div>
+</div>
+</section>
 </section>
 <section id="error-handling">
 <h2>Error handling<a class="headerlink" href="#error-handling" title="Link to this heading"></a></h2>
@@ -569,6 +629,7 @@ description</p></li>
 <li><p>Predicate exceptions result in a tool-level error with the exception
 term serialized as the error text.</p></li>
 <li><p>Prompt execution failures result in a JSON-RPC error response.</p></li>
+<li><p>Resource read failures result in a JSON-RPC error response.</p></li>
 </ul>
 </section>
 <section id="protocol">
@@ -576,8 +637,9 @@ term serialized as the error text.</p></li>
 <p>The <code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code> protocol defines the following predicates:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code> — returns the list of additional capabilities
-needed by the application (e.g. <code class="docutils literal notranslate"><span class="pre">[elicitation]</span></code>, <code class="docutils literal notranslate"><span class="pre">[prompts]</span></code>, or
-<code class="docutils literal notranslate"><span class="pre">[prompts,</span> <span class="pre">elicitation]</span></code>); optional, defaults to <code class="docutils literal notranslate"><span class="pre">[]</span></code></p></li>
+needed by the application (e.g. <code class="docutils literal notranslate"><span class="pre">[elicitation]</span></code>, <code class="docutils literal notranslate"><span class="pre">[prompts]</span></code>,
+<code class="docutils literal notranslate"><span class="pre">[resources]</span></code>, or <code class="docutils literal notranslate"><span class="pre">[prompts,</span> <span class="pre">resources,</span> <span class="pre">elicitation]</span></code>); optional,
+defaults to <code class="docutils literal notranslate"><span class="pre">[]</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tools/1</span></code> — returns the list of tool descriptors</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code> — handles a tool call (optional; auto-dispatch is used
 when not defined)</p></li>
@@ -589,6 +651,11 @@ when not defined)</p></li>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">prompts/1</span></code> — returns the list of prompt descriptors</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">prompt_get/3</span></code> — handles a prompt get request</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">mcp_resource_protocol</span></code> protocol defines the following predicates:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">resources/1</span></code> — returns the list of resource descriptors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resource_read/3</span></code> — handles a resource read request</p></li>
 </ul>
 </section>
 <section id="supported-mcp-methods">
@@ -628,6 +695,14 @@ when not defined)</p></li>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">prompts/get</span></code></p></td>
 <td><p>Request</p></td>
 <td><p>Gets a prompt with arguments</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resources/list</span></code></p></td>
+<td><p>Request</p></td>
+<td><p>Lists available resources</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resources/read</span></code></p></td>
+<td><p>Request</p></td>
+<td><p>Reads a resource by URI</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">elicitation/create</span></code></p></td>
 <td><p>Request (=&gt;)</p></td>
