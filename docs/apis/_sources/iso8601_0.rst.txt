@@ -13,9 +13,9 @@ ISO 8601 (and European civil calendar) compliant library of date predicates.
 | **Availability:** 
 |    ``logtalk_load(iso8601(loader))``
 
-| **Author:** Daniel L. Dudley
-| **Version:** 1:0:3
-| **Date:** 2019-10-09
+| **Author:** Daniel L. Dudley and Paulo Moura
+| **Version:** 1:1:0
+| **Date:** 2026-02-25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -345,6 +345,70 @@ Conversion between an ISO 8601 compliant date string and its components (truncat
 |    Week, reduced, extended (section 5.2.3.2)
 |      ``date_string('YYYY-Www',Components,'2004-W09')``
 |      ``Components=[2004,9]``
+
+
+------------
+
+.. index:: duration_string/2
+.. _iso8601/0::duration_string/2:
+
+``duration_string/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Conversion between an ISO 8601 duration string and a ``duration(Years,Months,Days,Hours,Minutes,Seconds)`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``duration_string(Duration,String)``
+| **Mode and number of proofs:**
+|    ``duration_string(++compound,?atom)`` - ``zero_or_one``
+|    ``duration_string(?compound,+atom)`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - Duration string: An ISO 8601 duration string encodes a length of time (not a calendar date), starting with ``P`` and optionally using date and time parts such as ``P3D`` or ``P1Y2M3DT4H5M6S``.
+
+| **Examples:**
+|    Parse a duration string
+|      ``duration_string(Duration,'PT45M')``
+|      ``Duration=duration(0,0,0,0,45,0)``
+|    Format a duration term
+|      ``duration_string(duration(1,2,3,4,5,6),String)``
+|      ``String='P1Y2M3DT4H5M6S'``
+
+
+------------
+
+.. index:: interval_string/2
+.. _iso8601/0::interval_string/2:
+
+``interval_string/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Conversion between an ISO 8601 interval string and an ``interval(Start,End)``, ``interval(Start,Duration)``, or ``interval(Duration,End)`` term where date endpoints are ``[Year,Month,Day]`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``interval_string(Interval,String)``
+| **Mode and number of proofs:**
+|    ``interval_string(++compound,?atom)`` - ``zero_or_one``
+|    ``interval_string(?compound,+atom)`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - Interval string: An ISO 8601 interval string encodes a time interval using two parts separated by ``/``; each part is a date or a duration, e.g. ``2026-02-25/2026-03-01`` or ``2026-02-25/P3D``.
+
+| **Examples:**
+|    Parse a start/date + duration interval
+|      ``interval_string(Interval,'2026-02-25/P3D')``
+|      ``Interval=interval([2026,2,25],duration(0,0,3,0,0,0))``
+|    Format a date/date interval
+|      ``interval_string(interval([2026,2,25],[2026,3,1]),String)``
+|      ``String='2026-02-25/2026-03-01'``
 
 
 ------------

@@ -177,6 +177,11 @@ over coordinates.
 libraries. These types support representing text using atoms, character 
 lists, or character code lists.
 
+* ADDED: New `dates` library `date_time_to_unix/2`, `unix_to_date_time/2`,
+`add_duration/3`, `subtract_duration/3`, `duration_between/3`,
+`utc_to_local/3`, `local_to_utc/3`, `day_of_year/2`, `week_of_year_iso/2`,
+`weekday/2`, `normalize_date_time/2`, and `valid_date_time/1` predicates.
+
 * ADDED: New `natural` library object `factorial/2` and `binomial/3`
 predicates.
 
@@ -277,6 +282,12 @@ Examples
 ADDED: New `birds_mcp` example illustrating how to publish an application
 as a MCP server using the bird identification expert system defined in the
 `birds` example.
+
+Contributions
+-------------
+
+* ADDED: New `iso8601` library `duration_string/2` and `interval_string/2`
+predicates.
 
 Tests
 -----

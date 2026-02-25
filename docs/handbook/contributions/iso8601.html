@@ -124,9 +124,21 @@
 <span id="library-iso8601"></span><h1><code class="docutils literal notranslate"><span class="pre">iso8601</span></code><a class="headerlink" href="#iso8601" title="Link to this heading"></a></h1>
 <p>ISO 8601 (and European civil calendar) compliant library of date and
 time (clock) related predicates. That is, an ISO 8601 handler.</p>
+<p>The library supports date representations plus ISO 8601 duration and
+interval string conversions using <code class="docutils literal notranslate"><span class="pre">duration_string/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">interval_string/2</span></code>.</p>
+<p>An <strong>ISO 8601 duration string</strong> represents a time amount (e.g. <code class="docutils literal notranslate"><span class="pre">P3D</span></code>
+for three days or <code class="docutils literal notranslate"><span class="pre">P1Y2M3DT4H5M6S</span></code> for a mixed date/time duration).</p>
+<p>An <strong>ISO 8601 interval string</strong> represents a time interval using two
+parts separated by <code class="docutils literal notranslate"><span class="pre">/</span></code>, where each part can be a date or a duration
+(e.g. <code class="docutils literal notranslate"><span class="pre">2026-02-25/2026-03-01</span></code> or <code class="docutils literal notranslate"><span class="pre">2026-02-25/P3D</span></code>).</p>
 <p>Author: Daniel L. Dudley Created: 2004-02-18</p>
-<p>Modified: 2014-09-26 (to use the library “os” object to get the current
-date)</p>
+<div class="line-block">
+<div class="line">Modified: 2014-09-26 (to use the <code class="docutils literal notranslate"><span class="pre">os</span></code> library object to get the
+current date)</div>
+<div class="line">Modified: 2026-02-25 (to add <code class="docutils literal notranslate"><span class="pre">duration_string/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">interval_string/2</span></code> predicates)</div>
+</div>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

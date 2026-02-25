@@ -6,10 +6,23 @@
 ISO 8601 (and European civil calendar) compliant library of date and
 time (clock) related predicates. That is, an ISO 8601 handler.
 
+The library supports date representations plus ISO 8601 duration and
+interval string conversions using ``duration_string/2`` and
+``interval_string/2``.
+
+An **ISO 8601 duration string** represents a time amount (e.g. ``P3D``
+for three days or ``P1Y2M3DT4H5M6S`` for a mixed date/time duration).
+
+An **ISO 8601 interval string** represents a time interval using two
+parts separated by ``/``, where each part can be a date or a duration
+(e.g. ``2026-02-25/2026-03-01`` or ``2026-02-25/P3D``).
+
 Author: Daniel L. Dudley Created: 2004-02-18
 
-Modified: 2014-09-26 (to use the library "os" object to get the current
-date)
+| Modified: 2014-09-26 (to use the ``os`` library object to get the
+  current date)
+| Modified: 2026-02-25 (to add ``duration_string/2`` and
+  ``interval_string/2`` predicates)
 
 API documentation
 -----------------

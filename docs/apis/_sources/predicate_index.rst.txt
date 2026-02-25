@@ -242,6 +242,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`subject <subject/0::addDependent/1>`
 
+``add_duration/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::add_duration/3>`
+
 ``add_edge/4``
 --------------
 
@@ -2557,6 +2567,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::date_time/7>`
 
+``date_time_to_unix/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::date_time_to_unix/2>`
+
+``day_of_year/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::day_of_year/2>`
+
 ``days_in_month/3``
 -------------------
 
@@ -3679,6 +3709,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`listp <listp/0::drop/3>`
+
+``duration_between/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::duration_between/3>`
+
+``duration_string/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`iso8601 <iso8601/0::duration_string/2>`
 
 ``during/2``
 ------------
@@ -6533,6 +6583,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`setp <setp/0::intersection/4>`
 
+``interval_string/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`iso8601 <iso8601/0::interval_string/2>`
+
 ``invalid/1``
 -------------
 
@@ -7850,6 +7910,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`logtalk <logtalk/0::loaded_files_topological_sort/2>`
+
+``local_to_utc/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::local_to_utc/3>`
 
 ``log/3``
 ---------
@@ -9401,6 +9471,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`geospatial_protocol <geospatial_protocol/0::normalize_coordinate/2>`
+
+``normalize_date_time/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::normalize_date_time/2>`
 
 ``normalize_polygon_orientation/3``
 -----------------------------------
@@ -13990,6 +14070,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`setp <setp/0::subtract/3>`
 * :ref:`varlistp <varlistp/0::subtract/3>`
 
+``subtract_duration/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::subtract_duration/3>`
+
 ``succ/2``
 ----------
 
@@ -14761,6 +14851,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`union_find_protocol <union_find_protocol/0::union_all/3>`
 
+``unix_to_date_time/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::unix_to_date_time/2>`
+
 ``unpin/0``
 -----------
 
@@ -14898,6 +14998,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::user_data/2>`
 
+``utc_to_local/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::utc_to_local/3>`
+
 ``uuid_max/1``
 --------------
 
@@ -15023,6 +15133,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`iso8601 <iso8601/0::valid_date/3>`
+
+``valid_date_time/1``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::valid_date_time/1>`
+
+``valid_date_time/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::valid_date_time/2>`
 
 ``valid_option/1``
 ------------------
@@ -15306,6 +15436,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`directed_graph_protocol <directed_graph_protocol/0::weakly_connected_components/2>`
+
+``week_of_year_iso/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::week_of_year_iso/2>`
+
+``weekday/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::weekday/2>`
 
 ``weibull/3``
 -------------

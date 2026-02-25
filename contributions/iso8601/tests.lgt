@@ -23,15 +23,17 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura and Daniel L. Dudley',
-		date is 2020-10-20,
+		date is 2026-02-25,
 		comment is 'Unit tests for the iso8601 library.'
 	]).
 
 	:- uses(iso8601, [
 		date/4, date/5, date/6, date/7,
 		date_string/3,
+		duration_string/2,
+		interval_string/2,
 		valid_date/3,
 		leap_year/1, calendar_month/3, easter_day/3
 	]).
@@ -43,35 +45,30 @@
 		date(JD, Y, M, D),
 		JD == 2453471, Y == 2005, M == 4, D == 10.
 
-	test(iso8601_date_4_02) :-
+	test(iso8601_date_4_02, deterministic(JD == 2451604)) :-
 		% Convert a date to its Julian day number
-		date(JD, 2000, 2, 29),
-		JD == 2451604.
+		date(JD, 2000, 2, 29).
 
 	test(iso8601_date_4_03) :-
 		% Convert a Julian day number to its date
 		date(2451604, Yr, Mth, Day),
 		Yr == 2000, Mth == 2, Day == 29.
 
-	test(iso8601_date_4_04) :-
+	test(iso8601_date_4_04, deterministic(JD == 2451604)) :-
 		% What is the date of day # 60 in year 2000?
-		date(J, 2000, 1, 60),
-		J == 2451604.
+		date(JD, 2000, 1, 60).
 
-	test(iso8601_date_4_05) :-
+	test(iso8601_date_4_05, deterministic(JD == 2451544)) :-
 		% What is the Julian of the 1st day prior to 2000-1-1?
-		date(J, 2000, 1, 0),
-		J == 2451544.
+		date(JD, 2000, 1, 0).
 
-	test(iso8601_date_4_06) :-
+	test(iso8601_date_4_06, deterministic(JD == 2451485)) :-
 		% What is the Julian of the 60th day prior to 2000-1-1?
-		date(J, 2000, 1, -59),
-		J == 2451485.
+		date(JD, 2000, 1, -59).
 
-	test(iso8601_date_4_07) :-
+	test(iso8601_date_4_07, deterministic(JD == 2415080)) :-
 		% Illegal date is auto-adjusted (see also next query)
-		date(JD, 1900, 2, 29),
-		JD == 2415080.
+		date(JD, 1900, 2, 29).
 
 	test(iso8601_date_4_08) :-
 		% This is the correct date!
@@ -89,10 +86,9 @@
 		% Check the validity of a given date (day-of-week is 2, not 4)
 		\+ date(_, 2002, 3, 5, 4).
 
-	test(iso8601_date_5_03) :-
+	test(iso8601_date_5_03, deterministic(JD == 2453065)) :-
 		% Get the Julian day of a given date if it is a Sunday
-		date(JD, 2004, 2, 29, 7),
-		JD == 2453065.
+		date(JD, 2004, 2, 29, 7).
 
 	test(iso8601_date_5_04) :-
 		% Get the date and day-of-week # of a Julian
@@ -181,10 +177,9 @@
 		date(JD, 2004, 10, 18, DoW, _, DoY),
 		JD == 2453297, DoW == 1, DoY == 292.
 
-	- test(iso8601_date_7_05) :-
+	- test(iso8601_date_7_05, deterministic(DoY == 54)) :-
 		% Get today''s day-of-year
-		date(_, _, _, _, _, _, DoY),
-		DoY == 54.
+		date(_, _, _, _, _, _, DoY).
 
 	test(iso8601_date_7_06) :-
 		% Get all missing date data (excl. Julian number) for the 60th calendar day of 2004
@@ -202,135 +197,134 @@
 
 	% date_string/3 tests
 
-	test(iso8601_date_string_3_01) :-
+	test(iso8601_date_string_3_01, deterministic(String == '20040229')) :-
 		% Date, complete, basic (section 5.2.1.1)
-		date_string('YYYYMMDD', [2004,2,29], Str),
-		Str == '20040229'.
+		date_string('YYYYMMDD', [2004,2,29], String).
 
-	test(iso8601_date_string_3_02) :-
+	test(iso8601_date_string_3_02, deterministic(Day == [2004,2,29])) :-
 		% Date, complete, basic (section 5.2.1.1)
-		date_string('YYYYMMDD', Day, '20040229'),
-		Day == [2004,2,29].
+		date_string('YYYYMMDD', Day, '20040229').
 
-	test(iso8601_date_string_3_03) :-
+	test(iso8601_date_string_3_03, deterministic(String == '2003-12-16')) :-
 		% Date, complete, extended (section 5.2.1.1)
-		date_string('YYYY-MM-DD', [2003,12,16], Str),
-		Str == '2003-12-16'.
+		date_string('YYYY-MM-DD', [2003,12,16], String).
 
-	test(iso8601_date_string_3_04) :-
+	test(iso8601_date_string_3_04, deterministic(Day == [2003,12,16])) :-
 		% Date, complete, extended (section 5.2.1.1)
-		date_string('YYYY-MM-DD', Day, '2003-12-16'),
-		Day == [2003,12,16].
+		date_string('YYYY-MM-DD', Day, '2003-12-16').
 
-	- test(iso8601_date_string_3_05) :-
+	- test(iso8601_date_string_3_05, deterministic(String == '2004-02-17')) :-
 		% Date, complete, extended (section 5.2.1.1)
-		date_string('YYYY-MM-DD', _, Str),
-		Str == '2004-02-17'.
+		date_string('YYYY-MM-DD', _, String).
 
-	test(iso8601_date_string_3_06) :-
+	test(iso8601_date_string_3_06, deterministic(Day == [2004,2,17])) :-
 		% Date, complete, extended (section 5.2.1.1)
-		date_string('YYYY-MM-DD', Day, '2004-02-17'),
-		Day == [2004,2,17].
+		date_string('YYYY-MM-DD', Day, '2004-02-17').
 
-	test(iso8601_date_string_3_07) :-
+	test(iso8601_date_string_3_07, deterministic(String == '2004-09')) :-
 		% Date, reduced, month (section 5.2.1.2 a)
-		date_string('YYYY-MM',[2004,9,18],Str),
-		Str == '2004-09'.
+		date_string('YYYY-MM', [2004,9,18], String).
 
-	test(iso8601_date_string_3_08) :-
+	test(iso8601_date_string_3_08, deterministic(Day == [2004,9])) :-
 		% Date, reduced, month (section 5.2.1.2 a)
-		date_string('YYYY-MM',Day,'2004-09'),
-		Day == [2004,9].
+		date_string('YYYY-MM',Day,'2004-09').
 
-	test(iso8601_date_string_3_09) :-
+	test(iso8601_date_string_3_09, deterministic(String == '1900')) :-
 		% Date, reduced, year (section 5.2.1.2 b)
-		date_string('YYYY', [1900,7,24], Str),
-		Str == '1900'.
+		date_string('YYYY', [1900,7,24], String).
 
-	test(iso8601_date_string_3_10) :-
+	test(iso8601_date_string_3_10, deterministic(Day == [1900])) :-
 		% Date, reduced, year (section 5.2.1.2 b)
-		date_string('YYYY', Day, '1900'),
-		Day == [1900].
+		date_string('YYYY', Day, '1900').
 
-	test(iso8601_date_string_3_11) :-
+	test(iso8601_date_string_3_11, deterministic(String == '20')) :-
 		% Date, reduced, century (section 5.2.1.2 c)
-		date_string('YY',2456557,Str),
-		Str == '20'.
+		date_string('YY', 2456557, String).
 
-	test(iso8601_date_string_3_12) :-
+	test(iso8601_date_string_3_12, deterministic(Day == [20])) :-
 		% Date, reduced, century (section 5.2.1.2 c)
-		date_string('YY', Day, '20'),
-		Day == [20].
+		date_string('YY', Day, '20').
 
-	test(iso8601_date_string_3_13) :-
+	test(iso8601_date_string_3_13, deterministic(String == '2005084')) :-
 		% Date, ordinal, complete (section 5.2.2.1)
-		date_string('YYYYDDD', [2005,3,25], Str),
-		Str == '2005084'.
+		date_string('YYYYDDD', [2005,3,25], String).
 
-	test(iso8601_date_string_3_14) :-
+	test(iso8601_date_string_3_14, deterministic(Day == [2005,84])) :-
 		% Date, ordinal, complete (section 5.2.2.1)
-		date_string('YYYYDDD', Day, '2005084'),
-		Day == [2005,84].
+		date_string('YYYYDDD', Day, '2005084').
 
-	test(iso8601_date_string_3_15) :-
+	test(iso8601_date_string_3_15, deterministic(String == '1854-338')) :-
 		% Date, ordinal, extended (section 5.2.2.1)
-		date_string('YYYY-DDD', [1854,12,4], Str),
-		Str == '1854-338'.
+		date_string('YYYY-DDD', [1854,12,4], String).
 
-	test(iso8601_date_string_3_16) :-
+	test(iso8601_date_string_3_16, deterministic(Day == [1854,338])) :-
 		% Date, ordinal, extended (section 5.2.2.1)
-		date_string('YYYY-DDD', Day, '1854-338'),
-		Day == [1854,338].
+		date_string('YYYY-DDD', Day, '1854-338').
 
-	test(iso8601_date_string_3_17) :-
+	test(iso8601_date_string_3_17, deterministic(String == '1999W527')) :-
 		% Week, complete, basic (section 5.2.3.1)
-		date_string('YYYYWwwD', [2000,1,2], Str),
-		Str == '1999W527'.
+		date_string('YYYYWwwD', [2000,1,2], String).
 
-	test(iso8601_date_string_3_18) :-
+	test(iso8601_date_string_3_18, deterministic(Day == [1999,52,7])) :-
 		% Week, complete, basic (section 5.2.3.1)
-		date_string('YYYYWwwD', Day, '1999W527'),
-		Day == [1999,52,7].
+		date_string('YYYYWwwD', Day, '1999W527').
 
-	test(iso8601_date_string_3_19) :-
+	test(iso8601_date_string_3_19, deterministic(Str == '2004-W01-1')) :-
 		% Week, complete, extended (section 5.2.3.1)
-		date_string('YYYY-Www-D', [2003,12,29], Str),
-		Str == '2004-W01-1'.
+		date_string('YYYY-Www-D', [2003,12,29], Str).
 
-	test(iso8601_date_string_3_20) :-
+	test(iso8601_date_string_3_20, deterministic(Day == [2004,1,1])) :-
 		% Week, complete, extended (section 5.2.3.1)
-		date_string('YYYY-Www-D', Day, '2004-W01-1'),
-		Day == [2004,1,1].
+		date_string('YYYY-Www-D', Day, '2004-W01-1').
 
-	test(iso8601_date_string_3_21) :-
+	test(iso8601_date_string_3_21, deterministic(String == '2004-W24-4')) :-
 		% Week, complete, extended (section 5.2.3.1)
-		date_string('YYYY-Www-D', 2453167, Str),
-		Str == '2004-W24-4'.
+		date_string('YYYY-Www-D', 2453167, String).
 
-	test(iso8601_date_string_3_22) :-
+	test(iso8601_date_string_3_22, deterministic(Day == [2004,24,4])) :-
 		% Week, complete, extended (section 5.2.3.1)
-		date_string('YYYY-Www-D', Day, '2004-W24-4'),
-		Day == [2004,24,4].
+		date_string('YYYY-Www-D', Day, '2004-W24-4').
 
-	test(iso8601_date_string_3_23) :-
+	test(iso8601_date_string_3_23, deterministic(String == '2004W09')) :-
 		% Week, reduced, basic (section 5.2.3.2)
-		date_string('YYYYWww', [2004,2,29], Str),
-		Str == '2004W09'.
+		date_string('YYYYWww', [2004,2,29], String).
 
-	test(iso8601_date_string_3_24) :-
+	test(iso8601_date_string_3_24, deterministic(Day == [2004,9])) :-
 		% Week, reduced, basic (section 5.2.3.2)
-		date_string('YYYYWww', Day, '2004W09'),
-		Day == [2004,9].
+		date_string('YYYYWww', Day, '2004W09').
 
-	test(iso8601_date_string_3_25) :-
+	test(iso8601_date_string_3_25, deterministic(String == '2004-W09')) :-
 		% Week, reduced, extended (section 5.2.3.2)
-		date_string('YYYY-Www', [2004,2,29], Str),
-		Str == '2004-W09'.
+		date_string('YYYY-Www', [2004,2,29], String).
 
-	test(iso8601_date_string_3_26) :-
+	test(iso8601_date_string_3_26, deterministic(Day == [2004,9])) :-
 		% Week, reduced, extended (section 5.2.3.2)
-		date_string('YYYY-Www', Day, '2004-W09'),
-		Day == [2004,9].
+		date_string('YYYY-Www', Day, '2004-W09').
+
+	% duration_string/2 tests
+
+	test(iso8601_duration_string_2_01, deterministic(String == 'P1Y2M3DT4H5M6S')) :-
+		duration_string(duration(1, 2, 3, 4, 5, 6), String).
+
+	test(iso8601_duration_string_2_02, deterministic(Duration == duration(0, 0, 0, 0, 45, 0))) :-
+		duration_string(Duration, 'PT45M').
+
+	test(iso8601_duration_string_2_03, deterministic(String == 'PT0S')) :-
+		duration_string(duration(0, 0, 0, 0, 0, 0), String).
+
+	% interval_string/2 tests
+
+	test(iso8601_interval_string_2_01, deterministic(String == '2026-02-25/2026-03-01')) :-
+		interval_string(interval([2026,2,25], [2026,3,1]), String).
+
+	test(iso8601_interval_string_2_02, deterministic(String == '2026-02-25/P3D')) :-
+		interval_string(interval([2026,2,25], duration(0, 0, 3, 0, 0, 0)), String).
+
+	test(iso8601_interval_string_2_03, deterministic(String == 'P3D/2026-02-25')) :-
+		interval_string(interval(duration(0, 0, 3, 0, 0, 0), [2026,2,25]), String).
+
+	test(iso8601_interval_string_2_04, deterministic(Interval == interval([2026,2,25], duration(0, 0, 3, 0, 0, 0)))) :-
+		interval_string(Interval, '2026-02-25/P3D').
 
 	% valid_date/3 tests
 

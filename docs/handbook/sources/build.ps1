@@ -194,7 +194,7 @@ Foreach-Object {
 }
 
 (Get-Content ../../../contributions/flags/NOTES.md) | pandoc -f gfm -t rst -o contributions/flags.rst
-(Get-Content ../../../contributions/iso8601/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o contributions/iso8601.rst
+(Get-Content ../../../contributions/iso8601/NOTES.md | Select-Object -Skip 20) | pandoc -f gfm -t rst -o contributions/iso8601.rst
 (Get-Content ../../../contributions/pddl_parser/README.txt) | pandoc -f gfm -t rst -o contributions/pddl_parser.rst
 (Get-Content ../../../contributions/verdi_neruda/README.txt) | pandoc -f gfm -t rst -o contributions/verdi_neruda.rst
 (Get-Content ../../../contributions/xml_parser/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o contributions/xml_parser.rst

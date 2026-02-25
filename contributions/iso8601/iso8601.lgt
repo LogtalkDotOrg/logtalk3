@@ -1,6 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 2014-2026 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2004-2005 Daniel L. Dudley
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -31,6 +32,7 @@
 	Created: 2004-02-18
 
 	Modified: 2014-09-26 (to use the library "os" object to get the current date)
+	Modified: 2026-02-25 (to add `duration_string/2` and `interval_string/2` predicates)
 
 ******************************************************************************/
 
@@ -38,9 +40,9 @@
 :- object(iso8601).
 
 	:- info([
-		version is 1:0:3,
-		author is 'Daniel L. Dudley',
-		date is 2019-10-09,
+		version is 1:1:0,
+		author is 'Daniel L. Dudley and Paulo Moura',
+		date is 2026-02-25,
 		comment is 'ISO 8601 (and European civil calendar) compliant library of date predicates.',
 		remarks is [
 			'Scope' - 'This object currently provides a powerful, versatile and efficient set of date-handling predicates, which--thanks to Logtalk--may be used as is on a wide range of Prolog compilers. Besides taking time to familiarize oneself with each predicate, the user should take note of the following information.',
@@ -186,6 +188,36 @@
 			'Week, reduced, basic (section 5.2.3.2)' - date_string('YYYYWww',Day,'2004W09') - {Day = [2004,9]},
 			'Week, reduced, extended (section 5.2.3.2)' - date_string('YYYY-Www',[2004,2,29],Str) - {Str = '2004-W09'},
 			'Week, reduced, extended (section 5.2.3.2)' - date_string('YYYY-Www',Day,'2004-W09') - {Day = [2004,9]}
+		]
+	]).
+
+	:- public(duration_string/2).
+	:- mode(duration_string(++compound, ?atom), zero_or_one).
+	:- mode(duration_string(?compound, +atom), zero_or_one).
+	:- info(duration_string/2, [
+		comment is 'Conversion between an ISO 8601 duration string and a ``duration(Years,Months,Days,Hours,Minutes,Seconds)`` term.',
+		argnames is ['Duration', 'String'],
+		remarks is [
+			'Duration string' - 'An ISO 8601 duration string encodes a length of time (not a calendar date), starting with ``P`` and optionally using date and time parts such as ``P3D`` or ``P1Y2M3DT4H5M6S``.'
+		],
+		examples is [
+			'Parse a duration string' - duration_string(Duration, 'PT45M') - {Duration = duration(0,0,0,0,45,0)},
+			'Format a duration term' - duration_string(duration(1,2,3,4,5,6), String) - {String = 'P1Y2M3DT4H5M6S'}
+		]
+	]).
+
+	:- public(interval_string/2).
+	:- mode(interval_string(++compound, ?atom), zero_or_one).
+	:- mode(interval_string(?compound, +atom), zero_or_one).
+	:- info(interval_string/2, [
+		comment is 'Conversion between an ISO 8601 interval string and an ``interval(Start,End)``, ``interval(Start,Duration)``, or ``interval(Duration,End)`` term where date endpoints are ``[Year,Month,Day]`` terms.',
+		argnames is ['Interval', 'String'],
+		remarks is [
+			'Interval string' - 'An ISO 8601 interval string encodes a time interval using two parts separated by ``/``; each part is a date or a duration, e.g. ``2026-02-25/2026-03-01`` or ``2026-02-25/P3D``.'
+		],
+		examples is [
+			'Parse a start/date + duration interval' - interval_string(Interval, '2026-02-25/P3D') - {Interval = interval([2026,2,25],duration(0,0,3,0,0,0))},
+			'Format a date/date interval' - interval_string(interval([2026,2,25],[2026,3,1]), String) - {String = '2026-02-25/2026-03-01'}
 		]
 	]).
 
@@ -489,6 +521,162 @@
 			List = [Y1,[45,87],Wk1],
 			list_of_lists_to_atom(List,String)
 		).
+
+
+	%==============================================================================
+	% duration_string(?Duration, ?String)
+
+	duration_string(Duration, String) :-
+		(	atom(String) ->
+			atom_codes(String, Codes),
+			parse_duration_codes(Codes, Duration)
+		;	nonvar(Duration),
+			format_duration_codes(Duration, Codes),
+			atom_codes(String, Codes)
+		).
+
+
+	%==============================================================================
+	% interval_string(?Interval, ?String)
+
+	interval_string(interval(Start, End), String) :-
+		(	atom(String) ->
+			atom_codes(String, Codes),
+			split_once(Codes, 0'/, StartCodes, EndCodes),
+			parse_interval_part(StartCodes, Start, StartType),
+			parse_interval_part(EndCodes, End, EndType),
+			valid_interval_types(StartType, EndType)
+		;	nonvar(Start), nonvar(End),
+			format_interval_part(Start, StartCodes, StartType),
+			format_interval_part(End, EndCodes, EndType),
+			valid_interval_types(StartType, EndType),
+			append_lists(StartCodes, [0'/| EndCodes], Codes),
+			atom_codes(String, Codes)
+		).
+
+	parse_duration_codes([0'P| Codes], duration(Years, Months, Days, Hours, Minutes, Seconds)) :-
+		split_duration_codes(Codes, DateCodes, TimeCodes),
+		parse_duration_date_codes(DateCodes, Years, Months, Days, DatePresent),
+		parse_duration_time_codes(TimeCodes, Hours, Minutes, Seconds, TimePresent),
+		(DatePresent == true; TimePresent == true).
+
+	format_duration_codes(duration(Years, Months, Days, Hours, Minutes, Seconds), Codes) :-
+		integer(Years), Years >= 0,
+		integer(Months), Months >= 0,
+		integer(Days), Days >= 0,
+		integer(Hours), Hours >= 0,
+		integer(Minutes), Minutes >= 0,
+		integer(Seconds), Seconds >= 0,
+		(	Years =:= 0, Months =:= 0, Days =:= 0, Hours =:= 0, Minutes =:= 0, Seconds =:= 0 ->
+			Codes = [0'P,0'T,0'0,0'S]
+		;	format_duration_date_codes(Years, Months, Days, DateCodes),
+			format_duration_time_codes(Hours, Minutes, Seconds, TimeCodes),
+			(	TimeCodes == [] ->
+				append_lists([0'P], DateCodes, Codes)
+			;	append_lists([0'P], DateCodes, Codes0),
+				append_lists(Codes0, [0'T| TimeCodes], Codes)
+			)
+		).
+
+	split_duration_codes(Codes, DateCodes, TimeCodes) :-
+		( 	append_lists(DateCodes, [0'T| TimeCodes], Codes) ->
+			true
+		;	DateCodes = Codes,
+			TimeCodes = []
+		).
+
+	parse_duration_date_codes(Codes, Years, Months, Days, Present) :-
+		parse_duration_component(Codes, 0'Y, Years, Codes1, PresentYears),
+		parse_duration_component(Codes1, 0'M, Months, Codes2, PresentMonths),
+		parse_duration_component(Codes2, 0'D, Days, Codes3, PresentDays),
+		Codes3 == [],
+		((PresentYears ; PresentMonths ; PresentDays) -> Present = true ; Present = false).
+
+	parse_duration_time_codes(Codes, Hours, Minutes, Seconds, Present) :-
+		parse_duration_component(Codes, 0'H, Hours, Codes1, PresentHours),
+		parse_duration_component(Codes1, 0'M, Minutes, Codes2, PresentMinutes),
+		parse_duration_component(Codes2, 0'S, Seconds, Codes3, PresentSeconds),
+		Codes3 == [],
+		((PresentHours ; PresentMinutes ; PresentSeconds) -> Present = true ; Present = false).
+
+	parse_duration_component(Codes, Unit, Value, Rest, Present) :-
+		extract_leading_digits(Codes, Digits, AfterDigits),
+		(	Digits == [] ->
+			Value = 0,
+			Rest = Codes,
+			Present = false
+		;	AfterDigits = [Unit| Rest] ->
+			number_codes(Value, Digits),
+			Present = true
+		;	Value = 0,
+			Rest = Codes,
+			Present = false
+		).
+
+	format_duration_date_codes(Years, Months, Days, Codes) :-
+		format_duration_component(Years, 0'Y, YearsCodes),
+		format_duration_component(Months, 0'M, MonthsCodes),
+		format_duration_component(Days, 0'D, DaysCodes),
+		append_lists(YearsCodes, MonthsCodes, Codes0),
+		append_lists(Codes0, DaysCodes, Codes).
+
+	format_duration_time_codes(Hours, Minutes, Seconds, Codes) :-
+		format_duration_component(Hours, 0'H, HoursCodes),
+		format_duration_component(Minutes, 0'M, MinutesCodes),
+		format_duration_component(Seconds, 0'S, SecondsCodes),
+		append_lists(HoursCodes, MinutesCodes, Codes0),
+		append_lists(Codes0, SecondsCodes, Codes).
+
+	format_duration_component(0, _, []) :- !.
+	format_duration_component(Value, Unit, Codes) :-
+		number_codes(Value, ValueCodes),
+		append_lists(ValueCodes, [Unit], Codes).
+
+	extract_leading_digits([Code| Codes], [Code| Digits], Rest) :-
+		Code >= 0'0,
+		Code =< 0'9,
+		!,
+		extract_leading_digits(Codes, Digits, Rest).
+	extract_leading_digits(Codes, [], Codes).
+
+	split_once(Codes, Separator, Left, Right) :-
+		append_lists(Left, [Separator| Right], Codes),
+		\+ member_of(Separator, Left),
+		\+ member_of(Separator, Right),
+		!.
+
+	append_lists([], Tail, Tail).
+	append_lists([Head| Tail], List, [Head| Result]) :-
+		append_lists(Tail, List, Result).
+
+	member_of(Item, [Item| _]).
+	member_of(Item, [_| Tail]) :-
+		member_of(Item, Tail).
+
+	parse_interval_part(Codes, Part, date) :-
+		atom_codes(Atom, Codes),
+		date_string('YYYY-MM-DD', Part, Atom),
+		Part = [_, _, _],
+		!.
+	parse_interval_part(Codes, Part, duration) :-
+		atom_codes(Atom, Codes),
+		duration_string(Part, Atom),
+		Part = duration(_, _, _, _, _, _),
+		!.
+
+	format_interval_part(Part, Codes, date) :-
+		Part = [_, _, _],
+		!,
+		date_string('YYYY-MM-DD', Part, Atom),
+		atom_codes(Atom, Codes).
+	format_interval_part(Part, Codes, duration) :-
+		Part = duration(_, _, _, _, _, _),
+		duration_string(Part, Atom),
+		atom_codes(Atom, Codes).
+
+	valid_interval_types(date, date) :- !.
+	valid_interval_types(date, duration) :- !.
+	valid_interval_types(duration, date).
 
 
 	%-----------------------------------

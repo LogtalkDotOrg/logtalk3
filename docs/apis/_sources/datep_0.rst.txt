@@ -14,8 +14,8 @@ Date protocol.
 |    ``logtalk_load(dates(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2005-03-17
+| **Version:** 1:2:0
+| **Date:** 2026-02-25
 
 | **Compilation flags:**
 |    ``static``
@@ -148,6 +148,253 @@ True if the arguments represent a valid date.
 |    ``valid(Year,Month,Day)``
 | **Mode and number of proofs:**
 |    ``valid(@integer,@integer,@integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: date_time_to_unix/2
+.. _datep/0::date_time_to_unix/2:
+
+``date_time_to_unix/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a UTC date-time term ``date_time(Year,Month,Day,Hours,Minutes,Seconds)`` to Unix epoch seconds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``date_time_to_unix(DateTime,UnixTime)``
+| **Mode and number of proofs:**
+|    ``date_time_to_unix(+compound,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: unix_to_date_time/2
+.. _datep/0::unix_to_date_time/2:
+
+``unix_to_date_time/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts Unix epoch seconds to a UTC date-time term ``date_time(Year,Month,Day,Hours,Minutes,Seconds)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``unix_to_date_time(UnixTime,DateTime)``
+| **Mode and number of proofs:**
+|    ``unix_to_date_time(+integer,-compound)`` - ``one``
+
+
+------------
+
+.. index:: add_duration/3
+.. _datep/0::add_duration/3:
+
+``add_duration/3``
+^^^^^^^^^^^^^^^^^^
+
+Adds a duration to a datetime. Duration can be integer seconds or ``duration(Days,Hours,Minutes,Seconds)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_duration(DateTime,Duration,ResultDateTime)``
+| **Mode and number of proofs:**
+|    ``add_duration(+compound,+nonvar,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: subtract_duration/3
+.. _datep/0::subtract_duration/3:
+
+``subtract_duration/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Subtracts a duration from a datetime. Duration can be integer seconds or ``duration(Days,Hours,Minutes,Seconds)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``subtract_duration(DateTime,Duration,ResultDateTime)``
+| **Mode and number of proofs:**
+|    ``subtract_duration(+compound,+nonvar,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: duration_between/3
+.. _datep/0::duration_between/3:
+
+``duration_between/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the difference between two datetimes as integer seconds or as ``duration(Days,Hours,Minutes,Seconds)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``duration_between(StartDateTime,EndDateTime,Duration)``
+| **Mode and number of proofs:**
+|    ``duration_between(+compound,+compound,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: utc_to_local/3
+.. _datep/0::utc_to_local/3:
+
+``utc_to_local/3``
+^^^^^^^^^^^^^^^^^^
+
+Converts a UTC datetime to a local datetime using an explicit timezone offset atom (``Z`` or ``±HH:MM``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``utc_to_local(UTCDateTime,Offset,LocalDateTime)``
+| **Mode and number of proofs:**
+|    ``utc_to_local(+compound,+atom,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: local_to_utc/3
+.. _datep/0::local_to_utc/3:
+
+``local_to_utc/3``
+^^^^^^^^^^^^^^^^^^
+
+Converts a local datetime to UTC using an explicit timezone offset atom (``Z`` or ``±HH:MM``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_to_utc(LocalDateTime,Offset,UTCDateTime)``
+| **Mode and number of proofs:**
+|    ``local_to_utc(+compound,+atom,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: day_of_year/2
+.. _datep/0::day_of_year/2:
+
+``day_of_year/2``
+^^^^^^^^^^^^^^^^^
+
+Computes the day of year (1-366) for a ``date(Year,Month,Day)`` or ``date_time(...)`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``day_of_year(DateLike,DayOfYear)``
+| **Mode and number of proofs:**
+|    ``day_of_year(+compound,?integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: week_of_year_iso/2
+.. _datep/0::week_of_year_iso/2:
+
+``week_of_year_iso/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes ISO week for a ``date(Year,Month,Day)`` or ``date_time(...)`` term as ``week(Week,Year)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``week_of_year_iso(DateLike,ISOWeek)``
+| **Mode and number of proofs:**
+|    ``week_of_year_iso(+compound,?compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: weekday/2
+.. _datep/0::weekday/2:
+
+``weekday/2``
+^^^^^^^^^^^^^
+
+Computes ISO weekday number (Monday=1, ..., Sunday=7) for a ``date(Year,Month,Day)`` or ``date_time(...)`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``weekday(DateLike,Weekday)``
+| **Mode and number of proofs:**
+|    ``weekday(+compound,?integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: normalize_date_time/2
+.. _datep/0::normalize_date_time/2:
+
+``normalize_date_time/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes a datetime term by carrying overflows/underflows in date and time fields.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_date_time(DateTime,NormalizedDateTime)``
+| **Mode and number of proofs:**
+|    ``normalize_date_time(+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: valid_date_time/1
+.. _datep/0::valid_date_time/1:
+
+``valid_date_time/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+True iff a datetime term is valid in strict mode.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_date_time(DateTime)``
+| **Mode and number of proofs:**
+|    ``valid_date_time(@compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_date_time/2
+.. _datep/0::valid_date_time/2:
+
+``valid_date_time/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Validates a datetime term in ``strict`` or ``relaxed`` mode.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_date_time(DateTime,Mode)``
+| **Mode and number of proofs:**
+|    ``valid_date_time(@compound,+atom)`` - ``zero_or_one``
 
 
 ------------

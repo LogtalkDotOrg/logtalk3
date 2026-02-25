@@ -246,8 +246,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:1:0</div>
-<div class="line"><strong>Date:</strong> 2005-03-17</div>
+<div class="line"><strong>Version:</strong> 1:2:0</div>
+<div class="line"><strong>Date:</strong> 2026-02-25</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -283,11 +283,24 @@
 <li><p><a class="reference internal" href="#name-of-month-3" id="id5"><code class="docutils literal notranslate"><span class="pre">name_of_month/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#days-in-month-3" id="id6"><code class="docutils literal notranslate"><span class="pre">days_in_month/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#valid-3" id="id7"><code class="docutils literal notranslate"><span class="pre">valid/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#date-time-to-unix-2" id="id8"><code class="docutils literal notranslate"><span class="pre">date_time_to_unix/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#unix-to-date-time-2" id="id9"><code class="docutils literal notranslate"><span class="pre">unix_to_date_time/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#add-duration-3" id="id10"><code class="docutils literal notranslate"><span class="pre">add_duration/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#subtract-duration-3" id="id11"><code class="docutils literal notranslate"><span class="pre">subtract_duration/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#duration-between-3" id="id12"><code class="docutils literal notranslate"><span class="pre">duration_between/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#utc-to-local-3" id="id13"><code class="docutils literal notranslate"><span class="pre">utc_to_local/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#local-to-utc-3" id="id14"><code class="docutils literal notranslate"><span class="pre">local_to_utc/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#day-of-year-2" id="id15"><code class="docutils literal notranslate"><span class="pre">day_of_year/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#week-of-year-iso-2" id="id16"><code class="docutils literal notranslate"><span class="pre">week_of_year_iso/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#weekday-2" id="id17"><code class="docutils literal notranslate"><span class="pre">weekday/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#normalize-date-time-2" id="id18"><code class="docutils literal notranslate"><span class="pre">normalize_date_time/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-date-time-1" id="id19"><code class="docutils literal notranslate"><span class="pre">valid_date_time/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-date-time-2" id="id20"><code class="docutils literal notranslate"><span class="pre">valid_date_time/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id8">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id9">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id10">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id21">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id22">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id23">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -414,6 +427,279 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">valid(&#64;integer,&#64;integer,&#64;integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="date-time-to-unix-2">
+<span id="datep-0-date-time-to-unix-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">date_time_to_unix/2</span></code></a><a class="headerlink" href="#date-time-to-unix-2" title="Link to this heading"></a></h3>
+<p>Converts a UTC date-time term <code class="docutils literal notranslate"><span class="pre">date_time(Year,Month,Day,Hours,Minutes,Seconds)</span></code> to Unix epoch seconds.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">date_time_to_unix(DateTime,UnixTime)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">date_time_to_unix(+compound,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="unix-to-date-time-2">
+<span id="datep-0-unix-to-date-time-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">unix_to_date_time/2</span></code></a><a class="headerlink" href="#unix-to-date-time-2" title="Link to this heading"></a></h3>
+<p>Converts Unix epoch seconds to a UTC date-time term <code class="docutils literal notranslate"><span class="pre">date_time(Year,Month,Day,Hours,Minutes,Seconds)</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">unix_to_date_time(UnixTime,DateTime)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">unix_to_date_time(+integer,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="add-duration-3">
+<span id="datep-0-add-duration-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">add_duration/3</span></code></a><a class="headerlink" href="#add-duration-3" title="Link to this heading"></a></h3>
+<p>Adds a duration to a datetime. Duration can be integer seconds or <code class="docutils literal notranslate"><span class="pre">duration(Days,Hours,Minutes,Seconds)</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">add_duration(DateTime,Duration,ResultDateTime)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">add_duration(+compound,+nonvar,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="subtract-duration-3">
+<span id="datep-0-subtract-duration-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">subtract_duration/3</span></code></a><a class="headerlink" href="#subtract-duration-3" title="Link to this heading"></a></h3>
+<p>Subtracts a duration from a datetime. Duration can be integer seconds or <code class="docutils literal notranslate"><span class="pre">duration(Days,Hours,Minutes,Seconds)</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subtract_duration(DateTime,Duration,ResultDateTime)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subtract_duration(+compound,+nonvar,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="duration-between-3">
+<span id="datep-0-duration-between-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">duration_between/3</span></code></a><a class="headerlink" href="#duration-between-3" title="Link to this heading"></a></h3>
+<p>Computes the difference between two datetimes as integer seconds or as <code class="docutils literal notranslate"><span class="pre">duration(Days,Hours,Minutes,Seconds)</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">duration_between(StartDateTime,EndDateTime,Duration)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">duration_between(+compound,+compound,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="utc-to-local-3">
+<span id="datep-0-utc-to-local-3"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">utc_to_local/3</span></code></a><a class="headerlink" href="#utc-to-local-3" title="Link to this heading"></a></h3>
+<p>Converts a UTC datetime to a local datetime using an explicit timezone offset atom (<code class="docutils literal notranslate"><span class="pre">Z</span></code> or <code class="docutils literal notranslate"><span class="pre">±HH:MM</span></code>).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">utc_to_local(UTCDateTime,Offset,LocalDateTime)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">utc_to_local(+compound,+atom,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="local-to-utc-3">
+<span id="datep-0-local-to-utc-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">local_to_utc/3</span></code></a><a class="headerlink" href="#local-to-utc-3" title="Link to this heading"></a></h3>
+<p>Converts a local datetime to UTC using an explicit timezone offset atom (<code class="docutils literal notranslate"><span class="pre">Z</span></code> or <code class="docutils literal notranslate"><span class="pre">±HH:MM</span></code>).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">local_to_utc(LocalDateTime,Offset,UTCDateTime)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">local_to_utc(+compound,+atom,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="day-of-year-2">
+<span id="datep-0-day-of-year-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">day_of_year/2</span></code></a><a class="headerlink" href="#day-of-year-2" title="Link to this heading"></a></h3>
+<p>Computes the day of year (1-366) for a <code class="docutils literal notranslate"><span class="pre">date(Year,Month,Day)</span></code> or <code class="docutils literal notranslate"><span class="pre">date_time(...)</span></code> term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">day_of_year(DateLike,DayOfYear)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">day_of_year(+compound,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="week-of-year-iso-2">
+<span id="datep-0-week-of-year-iso-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">week_of_year_iso/2</span></code></a><a class="headerlink" href="#week-of-year-iso-2" title="Link to this heading"></a></h3>
+<p>Computes ISO week for a <code class="docutils literal notranslate"><span class="pre">date(Year,Month,Day)</span></code> or <code class="docutils literal notranslate"><span class="pre">date_time(...)</span></code> term as <code class="docutils literal notranslate"><span class="pre">week(Week,Year)</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">week_of_year_iso(DateLike,ISOWeek)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">week_of_year_iso(+compound,?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="weekday-2">
+<span id="datep-0-weekday-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">weekday/2</span></code></a><a class="headerlink" href="#weekday-2" title="Link to this heading"></a></h3>
+<p>Computes ISO weekday number (Monday=1, …, Sunday=7) for a <code class="docutils literal notranslate"><span class="pre">date(Year,Month,Day)</span></code> or <code class="docutils literal notranslate"><span class="pre">date_time(...)</span></code> term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">weekday(DateLike,Weekday)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">weekday(+compound,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="normalize-date-time-2">
+<span id="datep-0-normalize-date-time-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">normalize_date_time/2</span></code></a><a class="headerlink" href="#normalize-date-time-2" title="Link to this heading"></a></h3>
+<p>Normalizes a datetime term by carrying overflows/underflows in date and time fields.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">normalize_date_time(DateTime,NormalizedDateTime)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">normalize_date_time(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="valid-date-time-1">
+<span id="datep-0-valid-date-time-1"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_date_time/1</span></code></a><a class="headerlink" href="#valid-date-time-1" title="Link to this heading"></a></h3>
+<p>True iff a datetime term is valid in strict mode.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_date_time(DateTime)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_date_time(&#64;compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="valid-date-time-2">
+<span id="datep-0-valid-date-time-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_date_time/2</span></code></a><a class="headerlink" href="#valid-date-time-2" title="Link to this heading"></a></h3>
+<p>Validates a datetime term in <code class="docutils literal notranslate"><span class="pre">strict</span></code> or <code class="docutils literal notranslate"><span class="pre">relaxed</span></code> mode.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_date_time(DateTime,Mode)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_date_time(&#64;compound,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </section>

@@ -135,6 +135,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#adddependent-1"><code class="docutils literal notranslate"><span class="pre">addDependent/1</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#add-duration-3"><code class="docutils literal notranslate"><span class="pre">add_duration/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#add-edge-4"><code class="docutils literal notranslate"><span class="pre">add_edge/4</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -819,6 +822,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#date-time-7"><code class="docutils literal notranslate"><span class="pre">date_time/7</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#date-time-to-unix-2"><code class="docutils literal notranslate"><span class="pre">date_time_to_unix/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#day-of-year-2"><code class="docutils literal notranslate"><span class="pre">day_of_year/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#days-in-month-3"><code class="docutils literal notranslate"><span class="pre">days_in_month/3</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -1144,6 +1153,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#drop-3"><code class="docutils literal notranslate"><span class="pre">drop/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#duration-between-3"><code class="docutils literal notranslate"><span class="pre">duration_between/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#duration-string-2"><code class="docutils literal notranslate"><span class="pre">duration_string/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#during-2"><code class="docutils literal notranslate"><span class="pre">during/2</span></code></a><ul class="simple">
@@ -1980,6 +1995,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#intersection-4"><code class="docutils literal notranslate"><span class="pre">intersection/4</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#interval-string-2"><code class="docutils literal notranslate"><span class="pre">interval_string/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#invalid-1"><code class="docutils literal notranslate"><span class="pre">invalid/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -2365,6 +2383,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#loaded-files-topological-sort-2"><code class="docutils literal notranslate"><span class="pre">loaded_files_topological_sort/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#local-to-utc-3"><code class="docutils literal notranslate"><span class="pre">local_to_utc/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#log-3"><code class="docutils literal notranslate"><span class="pre">log/3</span></code></a><ul class="simple">
@@ -2818,6 +2839,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#normalize-coordinate-2"><code class="docutils literal notranslate"><span class="pre">normalize_coordinate/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#normalize-date-time-2"><code class="docutils literal notranslate"><span class="pre">normalize_date_time/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#normalize-polygon-orientation-3"><code class="docutils literal notranslate"><span class="pre">normalize_polygon_orientation/3</span></code></a><ul class="simple">
@@ -4164,6 +4188,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#subtract-3"><code class="docutils literal notranslate"><span class="pre">subtract/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#subtract-duration-3"><code class="docutils literal notranslate"><span class="pre">subtract_duration/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#succ-2"><code class="docutils literal notranslate"><span class="pre">succ/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -4392,6 +4419,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#union-all-3"><code class="docutils literal notranslate"><span class="pre">union_all/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#unix-to-date-time-2"><code class="docutils literal notranslate"><span class="pre">unix_to_date_time/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#unpin-0"><code class="docutils literal notranslate"><span class="pre">unpin/0</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -4431,6 +4461,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#user-data-2"><code class="docutils literal notranslate"><span class="pre">user_data/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#utc-to-local-3"><code class="docutils literal notranslate"><span class="pre">utc_to_local/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#uuid-max-1"><code class="docutils literal notranslate"><span class="pre">uuid_max/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -4465,6 +4498,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#valid-date-3"><code class="docutils literal notranslate"><span class="pre">valid_date/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#valid-date-time-1"><code class="docutils literal notranslate"><span class="pre">valid_date_time/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#valid-date-time-2"><code class="docutils literal notranslate"><span class="pre">valid_date_time/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#valid-option-1"><code class="docutils literal notranslate"><span class="pre">valid_option/1</span></code></a><ul class="simple">
@@ -4549,6 +4588,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#weakly-connected-components-2"><code class="docutils literal notranslate"><span class="pre">weakly_connected_components/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#week-of-year-iso-2"><code class="docutils literal notranslate"><span class="pre">week_of_year_iso/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#weekday-2"><code class="docutils literal notranslate"><span class="pre">weekday/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#weibull-3"><code class="docutils literal notranslate"><span class="pre">weibull/3</span></code></a><ul class="simple">
@@ -4900,6 +4945,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="subject_0.html#subject-0-adddependent-1"><span class="std std-ref">subject</span></a></p></li>
+</ul>
+</section>
+<section id="add-duration-3">
+<h2><code class="docutils literal notranslate"><span class="pre">add_duration/3</span></code><a class="headerlink" href="#add-duration-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="datep_0.html#datep-0-add-duration-3"><span class="std std-ref">datep</span></a></p></li>
 </ul>
 </section>
 <section id="add-edge-4">
@@ -6761,6 +6814,22 @@
 <li><p><a class="reference internal" href="osp_0.html#osp-0-date-time-7"><span class="std std-ref">osp</span></a></p></li>
 </ul>
 </section>
+<section id="date-time-to-unix-2">
+<h2><code class="docutils literal notranslate"><span class="pre">date_time_to_unix/2</span></code><a class="headerlink" href="#date-time-to-unix-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="datep_0.html#datep-0-date-time-to-unix-2"><span class="std std-ref">datep</span></a></p></li>
+</ul>
+</section>
+<section id="day-of-year-2">
+<h2><code class="docutils literal notranslate"><span class="pre">day_of_year/2</span></code><a class="headerlink" href="#day-of-year-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="datep_0.html#datep-0-day-of-year-2"><span class="std std-ref">datep</span></a></p></li>
+</ul>
+</section>
 <section id="days-in-month-3">
 <h2><code class="docutils literal notranslate"><span class="pre">days_in_month/3</span></code><a class="headerlink" href="#days-in-month-3" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -7664,6 +7733,22 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="listp_0.html#listp-0-drop-3"><span class="std std-ref">listp</span></a></p></li>
+</ul>
+</section>
+<section id="duration-between-3">
+<h2><code class="docutils literal notranslate"><span class="pre">duration_between/3</span></code><a class="headerlink" href="#duration-between-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="datep_0.html#datep-0-duration-between-3"><span class="std std-ref">datep</span></a></p></li>
+</ul>
+</section>
+<section id="duration-string-2">
+<h2><code class="docutils literal notranslate"><span class="pre">duration_string/2</span></code><a class="headerlink" href="#duration-string-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="iso8601_0.html#iso8601-0-duration-string-2"><span class="std std-ref">iso8601</span></a></p></li>
 </ul>
 </section>
 <section id="during-2">
@@ -9963,6 +10048,14 @@
 <li><p><a class="reference internal" href="setp_0.html#setp-0-intersection-4"><span class="std std-ref">setp</span></a></p></li>
 </ul>
 </section>
+<section id="interval-string-2">
+<h2><code class="docutils literal notranslate"><span class="pre">interval_string/2</span></code><a class="headerlink" href="#interval-string-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="iso8601_0.html#iso8601-0-interval-string-2"><span class="std std-ref">iso8601</span></a></p></li>
+</ul>
+</section>
 <section id="invalid-1">
 <h2><code class="docutils literal notranslate"><span class="pre">invalid/1</span></code><a class="headerlink" href="#invalid-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -11021,6 +11114,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="logtalk_0.html#logtalk-0-loaded-files-topological-sort-2"><span class="std std-ref">logtalk</span></a></p></li>
+</ul>
+</section>
+<section id="local-to-utc-3">
+<h2><code class="docutils literal notranslate"><span class="pre">local_to_utc/3</span></code><a class="headerlink" href="#local-to-utc-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="datep_0.html#datep-0-local-to-utc-3"><span class="std std-ref">datep</span></a></p></li>
 </ul>
 </section>
 <section id="log-3">
@@ -12270,6 +12371,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="geospatial_protocol_0.html#geospatial-protocol-0-normalize-coordinate-2"><span class="std std-ref">geospatial_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="normalize-date-time-2">
+<h2><code class="docutils literal notranslate"><span class="pre">normalize_date_time/2</span></code><a class="headerlink" href="#normalize-date-time-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="datep_0.html#datep-0-normalize-date-time-2"><span class="std std-ref">datep</span></a></p></li>
 </ul>
 </section>
 <section id="normalize-polygon-orientation-3">
@@ -15964,6 +16073,14 @@
 <li><p><a class="reference internal" href="varlistp_0.html#varlistp-0-subtract-3"><span class="std std-ref">varlistp</span></a></p></li>
 </ul>
 </section>
+<section id="subtract-duration-3">
+<h2><code class="docutils literal notranslate"><span class="pre">subtract_duration/3</span></code><a class="headerlink" href="#subtract-duration-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="datep_0.html#datep-0-subtract-duration-3"><span class="std std-ref">datep</span></a></p></li>
+</ul>
+</section>
 <section id="succ-2">
 <h2><code class="docutils literal notranslate"><span class="pre">succ/2</span></code><a class="headerlink" href="#succ-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -16583,6 +16700,14 @@
 <li><p><a class="reference internal" href="union_find_protocol_0.html#union-find-protocol-0-union-all-3"><span class="std std-ref">union_find_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="unix-to-date-time-2">
+<h2><code class="docutils literal notranslate"><span class="pre">unix_to_date_time/2</span></code><a class="headerlink" href="#unix-to-date-time-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="datep_0.html#datep-0-unix-to-date-time-2"><span class="std std-ref">datep</span></a></p></li>
+</ul>
+</section>
 <section id="unpin-0">
 <h2><code class="docutils literal notranslate"><span class="pre">unpin/0</span></code><a class="headerlink" href="#unpin-0" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -16694,6 +16819,14 @@
 <li><p><a class="reference internal" href="ccsds_1.html#ccsds-1-user-data-2"><span class="std std-ref">ccsds(SecondaryHeaderLength)</span></a></p></li>
 </ul>
 </section>
+<section id="utc-to-local-3">
+<h2><code class="docutils literal notranslate"><span class="pre">utc_to_local/3</span></code><a class="headerlink" href="#utc-to-local-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="datep_0.html#datep-0-utc-to-local-3"><span class="std std-ref">datep</span></a></p></li>
+</ul>
+</section>
 <section id="uuid-max-1">
 <h2><code class="docutils literal notranslate"><span class="pre">uuid_max/1</span></code><a class="headerlink" href="#uuid-max-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -16794,6 +16927,22 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="iso8601_0.html#iso8601-0-valid-date-3"><span class="std std-ref">iso8601</span></a></p></li>
+</ul>
+</section>
+<section id="valid-date-time-1">
+<h2><code class="docutils literal notranslate"><span class="pre">valid_date_time/1</span></code><a class="headerlink" href="#valid-date-time-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="datep_0.html#datep-0-valid-date-time-1"><span class="std std-ref">datep</span></a></p></li>
+</ul>
+</section>
+<section id="valid-date-time-2">
+<h2><code class="docutils literal notranslate"><span class="pre">valid_date_time/2</span></code><a class="headerlink" href="#valid-date-time-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="datep_0.html#datep-0-valid-date-time-2"><span class="std std-ref">datep</span></a></p></li>
 </ul>
 </section>
 <section id="valid-option-1">
@@ -17021,6 +17170,22 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="directed_graph_protocol_0.html#directed-graph-protocol-0-weakly-connected-components-2"><span class="std std-ref">directed_graph_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="week-of-year-iso-2">
+<h2><code class="docutils literal notranslate"><span class="pre">week_of_year_iso/2</span></code><a class="headerlink" href="#week-of-year-iso-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="datep_0.html#datep-0-week-of-year-iso-2"><span class="std std-ref">datep</span></a></p></li>
+</ul>
+</section>
+<section id="weekday-2">
+<h2><code class="docutils literal notranslate"><span class="pre">weekday/2</span></code><a class="headerlink" href="#weekday-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="datep_0.html#datep-0-weekday-2"><span class="std std-ref">datep</span></a></p></li>
 </ul>
 </section>
 <section id="weibull-3">
