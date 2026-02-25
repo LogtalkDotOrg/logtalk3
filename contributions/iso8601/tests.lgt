@@ -40,19 +40,17 @@
 
 	% date/4 tests
 
-	- test(iso8601_date_4_01) :-
+	- test(iso8601_date_4_01, deterministic(t(JD,Year,Month,Day) == t(2453471,2005,4,10))) :-
 		% Current date (i.e., today)
-		date(JD, Y, M, D),
-		JD == 2453471, Y == 2005, M == 4, D == 10.
+		date(JD, Year, Month, Day).
 
 	test(iso8601_date_4_02, deterministic(JD == 2451604)) :-
 		% Convert a date to its Julian day number
 		date(JD, 2000, 2, 29).
 
-	test(iso8601_date_4_03) :-
+	test(iso8601_date_4_03, deterministic(d(Year,Month,Day) == d(2000,2,29))) :-
 		% Convert a Julian day number to its date
-		date(2451604, Yr, Mth, Day),
-		Yr == 2000, Mth == 2, Day == 29.
+		date(2451604, Year, Month, Day).
 
 	test(iso8601_date_4_04, deterministic(JD == 2451604)) :-
 		% What is the date of day # 60 in year 2000?
@@ -70,130 +68,111 @@
 		% Illegal date is auto-adjusted (see also next query)
 		date(JD, 1900, 2, 29).
 
-	test(iso8601_date_4_08) :-
+	test(iso8601_date_4_08, deterministic(d(Year,Month,Day) == d(1900,3,1))) :-
 		% This is the correct date!
-		date(2415080, Y, M, D),
-		Y == 1900, M == 3, D == 1.
+		date(2415080, Year, Month, Day).
 
 	% date/5 tests
 
-	test(iso8601_date_5_01) :-
+	test(iso8601_date_5_01, deterministic(JD-DoW == 2451604-2)) :-
 		% Get the Julian and the day-of-week # of a date
-		date(JD, 2000, 2, 29, DoW),
-		JD == 2451604, DoW == 2.
+		date(JD, 2000, 2, 29, DoW).
 
-	test(iso8601_date_5_02) :-
+	test(iso8601_date_5_02, false) :-
 		% Check the validity of a given date (day-of-week is 2, not 4)
-		\+ date(_, 2002, 3, 5, 4).
+		date(_, 2002, 3, 5, 4).
 
 	test(iso8601_date_5_03, deterministic(JD == 2453065)) :-
 		% Get the Julian day of a given date if it is a Sunday
 		date(JD, 2004, 2, 29, 7).
 
-	test(iso8601_date_5_04) :-
+	test(iso8601_date_5_04, deterministic(d(Year,Month,Day,DoW) == d(2000,1,1,6))) :-
 		% Get the date and day-of-week # of a Julian
-		date(2451545, Y, M, D, DoW),
-		Y == 2000, M == 1, D == 1, DoW == 6.
+		date(2451545, Year, Month, Day, DoW).
 
 	% date/6 tests
 
-	test(iso8601_date_6_01) :-
+	test(iso8601_date_6_01, deterministic(DoW-Week == 6-week(52,1999))) :-
 		% Get the day-of-week and week number of a date
-		date(_, 2000, 1, 1, DoW, Wk),
-		DoW == 6, Wk == week(52,1999).
+		date(_, 2000, 1, 1, DoW, Week).
 
-	- test(iso8601_date_6_02) :-
+	- test(iso8601_date_6_02, deterministic(Week == week(7, 2004))) :-
 		% Get the week number and year of this week
-		date(_, _, _, _, _, Wk),
-		Wk == week(7, 2004).
+		date(_, _, _, _, _, Week).
 
-	test(iso8601_date_6_03) :-
+	test(iso8601_date_6_03, deterministic(JD-Week == 2453065-week(9,2004))) :-
 		% Get the Julian number and the week of a date if it is a Sunday
-		date(JD, 2004, 2, 29, 7, Wk),
-		JD == 2453065, Wk == week(9,2004).
+		date(JD, 2004, 2, 29, 7, Week).
 
-	test(iso8601_date_6_04) :-
+	test(iso8601_date_6_04, deterministic(DoW-Week == 1-week(10,2004))) :-
 		% Get the day-of-week and week of a Julian day number
-		date(2453066, _, _, _, DoW, Wk),
-		DoW == 1, Wk == week(10,2004).
+		date(2453066, _, _, _, DoW, Week).
 
-	test(iso8601_date_6_05) :-
+	test(iso8601_date_6_05, deterministic) :-
 		% Check that given date data matches
 		date(_, 2004, 3, 1, 1, week(10,2004)).
 
-	test(iso8601_date_6_06) :-
+	test(iso8601_date_6_06, deterministic(d(Year,Month,Day,DoW) == d(2004,6,21,1))) :-
 		% What is the date of a day of week (default is 1) in given week # and year?
-		date(_, Y, M, D, DoW, week(26,2004)),
-		Y == 2004, M == 6, D == 21, DoW == 1.
+		date(_, Year, Month, Day, DoW, week(26,2004)).
 
-	test(iso8601_date_6_07) :-
+	test(iso8601_date_6_07, deterministic(d(Year,Month,Day) == d(2005,1,9))) :-
 		% Ditto for Sunday
-		date(_, Y, M, D, 7, week(1,2005)),
-		Y == 2005, M == 1, D == 9.
+		date(_, Year, Month, Day, 7, week(1,2005)).
 
-	test(iso8601_date_6_08) :-
+	test(iso8601_date_6_08, deterministic(d(Year,Month,Day) == d(2005,1,11))) :-
 		% Ditto for Tuesday in following week
-		date(_, Y, M, D, 9, week(1,2005)),
-		Y == 2005, M == 1, D == 11.
+		date(_, Year, Month, Day, 9, week(1,2005)).
 
-	test(iso8601_date_6_09) :-
+	test(iso8601_date_6_09, deterministic(d(Year,Month,Day) == d(2004,12,30))) :-
 		% Ditto for Thursday in the prior week
-		date(_, Y, M, D, 4, week(0,2005)),
-		Y == 2004, M == 12, D == 30.
+		date(_, Year, Month, Day, 4, week(0,2005)).
 
-	test(iso8601_date_6_10) :-
+	test(iso8601_date_6_10, deterministic(d(Year,Month,Day) == d(2004,12,21))) :-
 		% Ditto for Tuesday two weeks prior
-		date(_, Y, M, D, 2, week(-1,2005)),
-		Y == 2004, M == 12, D == 21.
+		date(_, Year, Month, Day, 2, week(-1,2005)).
 
-	test(iso8601_date_6_11) :-
+	test(iso8601_date_6_11, deterministic(d(Year,Month,Day) == d(2005,1,1))) :-
 		% Ditto for Saturday
-		date(_, Y, M, D, 6, week(53,2004)),
-		Y == 2005, M == 1, D == 1.
+		date(_, Year, Month, Day, 6, week(53,2004)).
 
-	test(iso8601_date_6_12) :-
+	test(iso8601_date_6_12, deterministic(d(Year,Month,Day) == d(2005,2,14))) :-
 		% Ditto for Monday (note automatic compensation of nonexistent week number)
-		date(_, Y, M, D, 1, week(60,2004)),
-		Y == 2005, M == 2, D == 14.
+		date(_, Year, Month, Day, 1, week(60,2004)).
 
 	% date/7 tests
 
-	test(iso8601_date_7_01) :-
+	test(iso8601_date_7_01, deterministic(d(Year,Month,Day,DoY) == d(2000,4,14,105))) :-
 		% Get the date and day-of-year of a Julian number
-		date(2451649, Year, Month, Day, _, _, DoY),
-		Year == 2000, Month == 4, Day == 14, DoY == 105.
+		date(2451649, Year, Month, Day, _, _, DoY).
 
-	test(iso8601_date_7_02) :-
+	test(iso8601_date_7_02, deterministic(d(JD,Week,DoY) == d(2453065,week(9,2004),60))) :-
 		% Get the Julian number, week number and day-of-year of a date, confirming that it is a Sunday
-		date(JD, 2004, 2, 29, 7, Wk, DoY),
-		JD == 2453065, Wk == week(9,2004), DoY == 60.
+		date(JD, 2004, 2, 29, 7, Week, DoY).
 
-	test(iso8601_date_7_03) :-
+	test(iso8601_date_7_03, deterministic) :-
 		% Confirm that a date is, in fact, a specific day-of-year
 		date(_, 2004, 3, 1, _, _, 61).
 
-	test(iso8601_date_7_04) :-
+	test(iso8601_date_7_04, deterministic(d(JD,DoW,DoY) == d(2453297,1,292))) :-
 		% Get the Julian number, week day and day-of-year of a date
-		date(JD, 2004, 10, 18, DoW, _, DoY),
-		JD == 2453297, DoW == 1, DoY == 292.
+		date(JD, 2004, 10, 18, DoW, _, DoY).
 
 	- test(iso8601_date_7_05, deterministic(DoY == 54)) :-
 		% Get today''s day-of-year
 		date(_, _, _, _, _, _, DoY).
 
-	test(iso8601_date_7_06) :-
+	test(iso8601_date_7_06, deterministic(d(Month,Day,DoW,Week) == d(2,29,7,week(9,2004)))) :-
 		% Get all missing date data (excl. Julian number) for the 60th calendar day of 2004
-		date(_, 2004, Month, Day, DoW, Week, 60),
-		Month == 2, Day == 29, DoW == 7, Week == week(9,2004).
+		date(_, 2004, Month, Day, DoW, Week, 60).
 
-	test(iso8601_date_7_07) :-
+	test(iso8601_date_7_07, deterministic(d(Day,DoW,Week) == d(1,1,week(10,2004)))) :-
 		% Match given date data and, if true, return the missing data (excl. Julian number)
-		date(_, 2004, 3, Day, DoW, Week, 61),
-		Day == 1, DoW == 1, Week == week(10,2004).
+		date(_, 2004, 3, Day, DoW, Week, 61).
 
-	test(iso8601_date_7_08) :-
+	test(iso8601_date_7_08, false) :-
 		% Ditto (the 61st day-of-year cannot be both day 1 and 2 of the month)
-		\+ date(_, 2004, _Month, 2, _DoW, _Week, 61).
+		date(_, 2004, _Month, 2, _DoW, _Week, 61).
 
 	% date_string/3 tests
 
@@ -328,58 +307,57 @@
 
 	% valid_date/3 tests
 
-	test(iso8601_valid_date_3_01) :-
+	test(iso8601_valid_date_3_01, deterministic) :-
 		% Yes, the recent millennium was a leap year
 		valid_date(2000, 2, 29).
 
-	test(iso8601_valid_date_3_02) :-
+	test(iso8601_valid_date_3_02, deterministic) :-
 		% 2004 was also a leap year
 		valid_date(2004, 2, 29).
 
-	test(iso8601_valid_date_3_03) :-
+	test(iso8601_valid_date_3_03, false) :-
 		% Only 30 days in April
-		\+ valid_date(2004, 4, 31).
+		valid_date(2004, 4, 31).
 
-	test(iso8601_valid_date_3_04) :-
+	test(iso8601_valid_date_3_04, deterministic) :-
 		% 1 BC was a leap year
 		valid_date(-1, 2, 29).
 
 	% leap_year/1
 
-	test(iso8601_leap_year_1_01) :-
+	test(iso8601_leap_year_1_01, false) :-
 		% No, the prior centenary was not a leap year
-		\+ leap_year(1900).
+		leap_year(1900).
 
-	test(iso8601_leap_year_1_02) :-
+	test(iso8601_leap_year_1_02, deterministic) :-
 		% The recent millennium
 		leap_year(2000).
 
-	- test(iso8601_leap_year_1_03) :-
+	- test(iso8601_leap_year_1_03, deterministic(Year == 2004)) :-
 		% This year
-		leap_year(Year),
-		Year == 2004.
+		leap_year(Year).
 
-	- test(iso8601_leap_year_1_04) :-
+	- test(iso8601_leap_year_1_04, deterministic) :-
 		% This year (equivalent to prior query)
 		leap_year(_).
 
-	test(iso8601_leap_year_1_05) :-
+	test(iso8601_leap_year_1_05, false) :-
 		% Next centennial
-		\+ leap_year(2100).
+		leap_year(2100).
 
-	test(iso8601_leap_year_1_06) :-
+	test(iso8601_leap_year_1_06, deterministic) :-
 		% Year 0, equivalent to 1 BC
 		leap_year(0).
 
-	test(iso8601_leap_year_1_07) :-
+	test(iso8601_leap_year_1_07, deterministic) :-
 		% 1 BC
 		leap_year(-1).
 
-	test(iso8601_leap_year_1_08) :-
+	test(iso8601_leap_year_1_08, false) :-
 		% 4 BC
-		\+ leap_year(-4).
+		leap_year(-4).
 
-	test(iso8601_leap_year_1_09) :-
+	test(iso8601_leap_year_1_09, deterministic) :-
 		% 5 BC
 		leap_year(-5).
 
@@ -388,25 +366,23 @@
 	test(iso8601_calendar_month_3_01) :-
 		% Compute the calendar of March, 2005
 		calendar_month(2005, 3, Calendar),
-		Calendar == m(2005, 3, [
+		^^assertion(Calendar == m(2005, 3, [
 			w( 9, [ 0,  1,  2,  3,  4,  5,  6]),
 			w(10, [ 7,  8,  9, 10, 11, 12, 13]),
 			w(11, [14, 15, 16, 17, 18, 19, 20]),
 			w(12, [21, 22, 23, 24, 25, 26, 27]),
 			w(13, [28, 29, 30, 31,  0,  0,  0]),
 			w( 0, [ 0,  0,  0,  0,  0,  0,  0])
-		]).
+		])).
 
 	% easter_day/3 tests
 
-	test(iso8601_easter_day_3_01) :-
+	test(iso8601_easter_day_3_01, deterministic(Month-Day == 4-16)) :-
 		% Compute Easter Sunday for a particular year
-		easter_day(2006, Month, Day),
-		Month == 4, Day == 16.
+		easter_day(2006, Month, Day).
 
-	- test(iso8601_easter_day_3_02) :-
+	- test(iso8601_easter_day_3_02, deterministic(d(Year,Month,Day) == d(2005,3,27))) :-
 		% Compute Easter Sunday for the current year
-		easter_day(Year, Month, Day),
-		Year == 2005, Month == 3, Day == 27.
+		easter_day(Year, Month, Day).
 
 :- end_object.
