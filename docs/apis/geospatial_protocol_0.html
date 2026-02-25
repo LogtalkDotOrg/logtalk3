@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>geospatial_protocol &mdash; Logtalk 3.98.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=fd83a980"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="git" href="git_0.html" />
+    <link rel="prev" title="geospatial" href="geospatial_0.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Logtalk APIs
+              <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.98.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ada-boost"><span class="xref std std-ref">ada_boost</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#amqp"><span class="xref std std-ref">amqp</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#arbitrary"><span class="xref std std-ref">arbitrary</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><span class="xref std std-ref">assertions</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#assignvars"><span class="xref std std-ref">assignvars</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#avro"><span class="xref std std-ref">avro</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#base32"><span class="xref std std-ref">base32</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#base58"><span class="xref std std-ref">base58</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#base64"><span class="xref std std-ref">base64</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#base85"><span class="xref std std-ref">base85</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#c45"><span class="xref std std-ref">c45</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#cbor"><span class="xref std std-ref">cbor</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ccsds"><span class="xref std std-ref">ccsds</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#classifier-protocols"><span class="xref std std-ref">classifier_protocols</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><span class="xref std std-ref">code_metrics</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#command-line-options"><span class="xref std std-ref">command_line_options</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><span class="xref std std-ref">core</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#coroutining"><span class="xref std std-ref">coroutining</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#csv"><span class="xref std std-ref">csv</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#datalog"><span class="xref std std-ref">datalog</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dates"><span class="xref std std-ref">dates</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><span class="xref std std-ref">dead_code_scanner</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debug-messages"><span class="xref std std-ref">debug_messages</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><span class="xref std std-ref">debugger</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dependents"><span class="xref std std-ref">dependents</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#deques"><span class="xref std std-ref">deques</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><span class="xref std std-ref">diagrams</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dictionaries"><span class="xref std std-ref">dictionaries</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#dif"><span class="xref std std-ref">dif</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><span class="xref std std-ref">doclet</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#edcg"><span class="xref std std-ref">edcg</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#events"><span class="xref std std-ref">events</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#expand-library-alias-paths"><span class="xref std std-ref">expand_library_alias_paths</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#expecteds"><span class="xref std std-ref">expecteds</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#fcube"><span class="xref std std-ref">fcube</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><span class="xref std std-ref">flags</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#format"><span class="xref std std-ref">format</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#genint"><span class="xref std std-ref">genint</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#gensym"><span class="xref std std-ref">gensym</span></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#geospatial"><span class="xref std std-ref">geospatial</span></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="geospatial_0.html">geospatial</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">geospatial_protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#git"><span class="xref std std-ref">git</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#grammars"><span class="xref std std-ref">grammars</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#graphs"><span class="xref std std-ref">graphs</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#heaps"><span class="xref std std-ref">heaps</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><span class="xref std std-ref">help</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#hierarchies"><span class="xref std std-ref">hierarchies</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#hook-flows"><span class="xref std std-ref">hook_flows</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#hook-objects"><span class="xref std std-ref">hook_objects</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#html"><span class="xref std std-ref">html</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ids"><span class="xref std std-ref">ids</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#intervals"><span class="xref std std-ref">intervals</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><span class="xref std std-ref">iso8601</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#isolation-forest"><span class="xref std std-ref">isolation_forest</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#issue-creator"><span class="xref std std-ref">issue_creator</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#java"><span class="xref std std-ref">java</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#json"><span class="xref std std-ref">json</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#json-ld"><span class="xref std std-ref">json_ld</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#json-lines"><span class="xref std std-ref">json_lines</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#json-rpc"><span class="xref std std-ref">json_rpc</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#json-schema"><span class="xref std std-ref">json_schema</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#knn"><span class="xref std std-ref">knn</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><span class="xref std std-ref">lgtdoc</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><span class="xref std std-ref">library</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#linda"><span class="xref std std-ref">linda</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#listing"><span class="xref std std-ref">listing</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#logging"><span class="xref std std-ref">logging</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#mcp-server"><span class="xref std std-ref">mcp_server</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#memcached"><span class="xref std std-ref">memcached</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#meta"><span class="xref std std-ref">meta</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#meta-compiler"><span class="xref std std-ref">meta_compiler</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#naive-bayes"><span class="xref std std-ref">naive_bayes</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#nearest-centroid"><span class="xref std std-ref">nearest_centroid</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#nested-dictionaries"><span class="xref std std-ref">nested_dictionaries</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#optionals"><span class="xref std std-ref">optionals</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#options"><span class="xref std std-ref">options</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#os"><span class="xref std std-ref">os</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#packs"><span class="xref std std-ref">packs</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><span class="xref std std-ref">pddl_parser</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ports-profiler"><span class="xref std std-ref">ports_profiler</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#process"><span class="xref std std-ref">process</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#protobuf"><span class="xref std std-ref">protobuf</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#queues"><span class="xref std std-ref">queues</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#random"><span class="xref std std-ref">random</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#random-forest"><span class="xref std std-ref">random_forest</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#reader"><span class="xref std std-ref">reader</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#recorded-database"><span class="xref std std-ref">recorded_database</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#redis"><span class="xref std std-ref">redis</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#sets"><span class="xref std std-ref">sets</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#simulated-annealing"><span class="xref std std-ref">simulated_annealing</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#sockets"><span class="xref std std-ref">sockets</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#statistics"><span class="xref std std-ref">statistics</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#stemming"><span class="xref std std-ref">stemming</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#stomp"><span class="xref std std-ref">stomp</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#string-distance"><span class="xref std std-ref">string_distance</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#strings"><span class="xref std std-ref">strings</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#subsequences"><span class="xref std std-ref">subsequences</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#timeout"><span class="xref std std-ref">timeout</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#toon"><span class="xref std std-ref">toon</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><span class="xref std std-ref">tutor</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#types"><span class="xref std std-ref">types</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ulid"><span class="xref std std-ref">ulid</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#union-find"><span class="xref std std-ref">union_find</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#url"><span class="xref std std-ref">url</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#uuid"><span class="xref std std-ref">uuid</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#validations"><span class="xref std std-ref">validations</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#verdi-neruda"><span class="xref std std-ref">verdi_neruda</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#wrapper"><span class="xref std std-ref">wrapper</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#xml-parser"><span class="xref std std-ref">xml_parser</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#yaml"><span class="xref std std-ref">yaml</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#zippers"><span class="xref std std-ref">zippers</span></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directory_index.html">Directories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entity_index.html">Entities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate_index.html">Predicates</a></li>
+</ul>
+
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="core_inheritance_diagram.svg">Core diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="library_inheritance_diagram.svg">Libraries diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="tools_inheritance_diagram.svg">Tools diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="ports_inheritance_diagram.svg">Ports diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="contributions_inheritance_diagram.svg">Contributions diagram</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+    </ul>
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../handbook/index.html">Handbook</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Logtalk APIs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">geospatial_protocol</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/geospatial_protocol_0.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p class="right" id="geospatial-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
+<section id="geospatial-protocol">
+<h1><code class="docutils literal notranslate"><span class="pre">geospatial_protocol</span></code><a class="headerlink" href="#geospatial-protocol" title="Link to this heading"></a></h1>
+<p>Geospatial predicates protocol.</p>
+<div class="line-block">
+<div class="line"><strong>Availability:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(geospatial(loader))</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
+<div class="line"><strong>Version:</strong> 0:2:0</div>
+<div class="line"><strong>Date:</strong> 2026-02-25</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Dependencies:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Inherited public predicates:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
+</div>
+</div>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#valid-coordinate-1" id="id2"><code class="docutils literal notranslate"><span class="pre">valid_coordinate/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#normalize-coordinate-2" id="id3"><code class="docutils literal notranslate"><span class="pre">normalize_coordinate/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#equirectangular-projection-4" id="id4"><code class="docutils literal notranslate"><span class="pre">equirectangular_projection/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#equirectangular-inverse-4" id="id5"><code class="docutils literal notranslate"><span class="pre">equirectangular_inverse/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#haversine-distance-3" id="id6"><code class="docutils literal notranslate"><span class="pre">haversine_distance/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#vincenty-distance-3" id="id7"><code class="docutils literal notranslate"><span class="pre">vincenty_distance/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rhumb-distance-3" id="id8"><code class="docutils literal notranslate"><span class="pre">rhumb_distance/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rhumb-bearing-3" id="id9"><code class="docutils literal notranslate"><span class="pre">rhumb_bearing/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rhumb-destination-point-4" id="id10"><code class="docutils literal notranslate"><span class="pre">rhumb_destination_point/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#interpolate-rhumb-4" id="id11"><code class="docutils literal notranslate"><span class="pre">interpolate_rhumb/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rhumb-midpoint-3" id="id12"><code class="docutils literal notranslate"><span class="pre">rhumb_midpoint/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#distance-4" id="id13"><code class="docutils literal notranslate"><span class="pre">distance/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#distance-5" id="id14"><code class="docutils literal notranslate"><span class="pre">distance/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#initial-bearing-3" id="id15"><code class="docutils literal notranslate"><span class="pre">initial_bearing/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#final-bearing-3" id="id16"><code class="docutils literal notranslate"><span class="pre">final_bearing/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#midpoint-3" id="id17"><code class="docutils literal notranslate"><span class="pre">midpoint/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#destination-point-4" id="id18"><code class="docutils literal notranslate"><span class="pre">destination_point/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#interpolate-great-circle-4" id="id19"><code class="docutils literal notranslate"><span class="pre">interpolate_great_circle/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#cross-track-distance-4" id="id20"><code class="docutils literal notranslate"><span class="pre">cross_track_distance/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#along-track-distance-4" id="id21"><code class="docutils literal notranslate"><span class="pre">along_track_distance/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#within-distance-4" id="id22"><code class="docutils literal notranslate"><span class="pre">within_distance/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nearest-coordinate-5" id="id23"><code class="docutils literal notranslate"><span class="pre">nearest_coordinate/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mean-center-2" id="id24"><code class="docutils literal notranslate"><span class="pre">mean_center/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#minimum-enclosing-circle-3" id="id25"><code class="docutils literal notranslate"><span class="pre">minimum_enclosing_circle/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#coordinates-bounding-box-2" id="id26"><code class="docutils literal notranslate"><span class="pre">coordinates_bounding_box/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#point-in-polygon-2" id="id27"><code class="docutils literal notranslate"><span class="pre">point_in_polygon/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polygon-area-2" id="id28"><code class="docutils literal notranslate"><span class="pre">polygon_area/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polygon-centroid-2" id="id29"><code class="docutils literal notranslate"><span class="pre">polygon_centroid/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polygon-bounding-box-2" id="id30"><code class="docutils literal notranslate"><span class="pre">polygon_bounding_box/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#close-polygon-2" id="id31"><code class="docutils literal notranslate"><span class="pre">close_polygon/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polygon-orientation-2" id="id32"><code class="docutils literal notranslate"><span class="pre">polygon_orientation/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-clockwise-polygon-1" id="id33"><code class="docutils literal notranslate"><span class="pre">is_clockwise_polygon/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#normalize-polygon-orientation-3" id="id34"><code class="docutils literal notranslate"><span class="pre">normalize_polygon_orientation/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#clockwise-polygon-2" id="id35"><code class="docutils literal notranslate"><span class="pre">clockwise_polygon/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#counterclockwise-polygon-2" id="id36"><code class="docutils literal notranslate"><span class="pre">counterclockwise_polygon/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-valid-polygon-1" id="id37"><code class="docutils literal notranslate"><span class="pre">is_valid_polygon/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bbox-contains-2" id="id38"><code class="docutils literal notranslate"><span class="pre">bbox_contains/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bbox-intersects-2" id="id39"><code class="docutils literal notranslate"><span class="pre">bbox_intersects/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bbox-union-3" id="id40"><code class="docutils literal notranslate"><span class="pre">bbox_union/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bbox-expand-3" id="id41"><code class="docutils literal notranslate"><span class="pre">bbox_expand/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bbox-from-coordinates-2" id="id42"><code class="docutils literal notranslate"><span class="pre">bbox_from_coordinates/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#point-to-polyline-distance-3" id="id43"><code class="docutils literal notranslate"><span class="pre">point_to_polyline_distance/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nearest-point-on-segment-4" id="id44"><code class="docutils literal notranslate"><span class="pre">nearest_point_on_segment/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nearest-point-on-polyline-4" id="id45"><code class="docutils literal notranslate"><span class="pre">nearest_point_on_polyline/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polyline-length-2" id="id46"><code class="docutils literal notranslate"><span class="pre">polyline_length/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polyline-length-3" id="id47"><code class="docutils literal notranslate"><span class="pre">polyline_length/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polyline-simplify-3" id="id48"><code class="docutils literal notranslate"><span class="pre">polyline_simplify/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polyline-split-at-distance-4" id="id49"><code class="docutils literal notranslate"><span class="pre">polyline_split_at_distance/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polyline-resample-3" id="id50"><code class="docutils literal notranslate"><span class="pre">polyline_resample/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polygon-perimeter-2" id="id51"><code class="docutils literal notranslate"><span class="pre">polygon_perimeter/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polygon-perimeter-3" id="id52"><code class="docutils literal notranslate"><span class="pre">polygon_perimeter/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polygons-intersect-2" id="id53"><code class="docutils literal notranslate"><span class="pre">polygons_intersect/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bounding-box-3" id="id54"><code class="docutils literal notranslate"><span class="pre">bounding_box/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#route-distance-2" id="id55"><code class="docutils literal notranslate"><span class="pre">route_distance/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#route-distance-3" id="id56"><code class="docutils literal notranslate"><span class="pre">route_distance/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#route-distance-4" id="id57"><code class="docutils literal notranslate"><span class="pre">route_distance/4</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id58">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id59">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id60">Operators</a></p></li>
+</ul>
+</nav>
+<section id="public-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
+<section id="valid-coordinate-1">
+<span id="geospatial-protocol-0-valid-coordinate-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_coordinate/1</span></code></a><a class="headerlink" href="#valid-coordinate-1" title="Link to this heading"></a></h3>
+<p>True if the argument is a valid geographic coordinate represented as <code class="docutils literal notranslate"><span class="pre">(Latitude,Longitude)</span></code> with latitude in the <code class="docutils literal notranslate"><span class="pre">[-90.0,90.0]</span></code> range and longitude in the <code class="docutils literal notranslate"><span class="pre">[-180.0,180.0]</span></code> range.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_coordinate(Coordinate)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_coordinate(&#64;compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="normalize-coordinate-2">
+<span id="geospatial-protocol-0-normalize-coordinate-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">normalize_coordinate/2</span></code></a><a class="headerlink" href="#normalize-coordinate-2" title="Link to this heading"></a></h3>
+<p>Normalizes a coordinate by wrapping longitude to the <code class="docutils literal notranslate"><span class="pre">[-180.0,180.0]</span></code> range and reflecting latitude over the poles when necessary.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">normalize_coordinate(Coordinate,NormalizedCoordinate)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">normalize_coordinate(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="equirectangular-projection-4">
+<span id="geospatial-protocol-0-equirectangular-projection-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">equirectangular_projection/4</span></code></a><a class="headerlink" href="#equirectangular-projection-4" title="Link to this heading"></a></h3>
+<p>Projects a coordinate to local equirectangular planar coordinates in kilometers using a reference latitude in degrees.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">equirectangular_projection(Coordinate,ReferenceLatitude,X,Y)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">equirectangular_projection(+compound,+float,-float,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="equirectangular-inverse-4">
+<span id="geospatial-protocol-0-equirectangular-inverse-4"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">equirectangular_inverse/4</span></code></a><a class="headerlink" href="#equirectangular-inverse-4" title="Link to this heading"></a></h3>
+<p>Converts local equirectangular planar coordinates in kilometers to a geographic coordinate using a reference latitude in degrees.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">equirectangular_inverse(X,Y,ReferenceLatitude,Coordinate)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">equirectangular_inverse(+float,+float,+float,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="haversine-distance-3">
+<span id="geospatial-protocol-0-haversine-distance-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">haversine_distance/3</span></code></a><a class="headerlink" href="#haversine-distance-3" title="Link to this heading"></a></h3>
+<p>Computes the great-circle distance in kilometers between two coordinates using the Haversine formula.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">haversine_distance(Coordinate1,Coordinate2,Distance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">haversine_distance(+compound,+compound,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="vincenty-distance-3">
+<span id="geospatial-protocol-0-vincenty-distance-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">vincenty_distance/3</span></code></a><a class="headerlink" href="#vincenty-distance-3" title="Link to this heading"></a></h3>
+<p>Computes the geodesic distance in kilometers between two coordinates using the Vincenty inverse formula over the WGS84 ellipsoid. Fails if the iterative method does not converge.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">vincenty_distance(Coordinate1,Coordinate2,Distance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">vincenty_distance(+compound,+compound,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="rhumb-distance-3">
+<span id="geospatial-protocol-0-rhumb-distance-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rhumb_distance/3</span></code></a><a class="headerlink" href="#rhumb-distance-3" title="Link to this heading"></a></h3>
+<p>Computes the rhumb-line (loxodrome) distance in kilometers between two coordinates on a spherical Earth model.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rhumb_distance(Coordinate1,Coordinate2,Distance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rhumb_distance(+compound,+compound,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="rhumb-bearing-3">
+<span id="geospatial-protocol-0-rhumb-bearing-3"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rhumb_bearing/3</span></code></a><a class="headerlink" href="#rhumb-bearing-3" title="Link to this heading"></a></h3>
+<p>Computes the rhumb-line initial bearing in degrees in the <code class="docutils literal notranslate"><span class="pre">[0.0,360.0[</span></code> range from the first coordinate to the second coordinate.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rhumb_bearing(Coordinate1,Coordinate2,Bearing)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rhumb_bearing(+compound,+compound,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="rhumb-destination-point-4">
+<span id="geospatial-protocol-0-rhumb-destination-point-4"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rhumb_destination_point/4</span></code></a><a class="headerlink" href="#rhumb-destination-point-4" title="Link to this heading"></a></h3>
+<p>Computes the destination coordinate from a start coordinate, a rhumb-line bearing in degrees, and a distance in kilometers on a spherical Earth model.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rhumb_destination_point(Start,Bearing,Distance,Destination)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rhumb_destination_point(+compound,+float,+float,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="interpolate-rhumb-4">
+<span id="geospatial-protocol-0-interpolate-rhumb-4"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">interpolate_rhumb/4</span></code></a><a class="headerlink" href="#interpolate-rhumb-4" title="Link to this heading"></a></h3>
+<p>Computes an intermediate coordinate along the rhumb-line path between two coordinates using a fraction in the <code class="docutils literal notranslate"><span class="pre">[0.0,1.0]</span></code> range.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interpolate_rhumb(Coordinate1,Coordinate2,Fraction,Coordinate)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interpolate_rhumb(+compound,+compound,+float,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="rhumb-midpoint-3">
+<span id="geospatial-protocol-0-rhumb-midpoint-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rhumb_midpoint/3</span></code></a><a class="headerlink" href="#rhumb-midpoint-3" title="Link to this heading"></a></h3>
+<p>Computes the midpoint along the rhumb-line path between two coordinates.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rhumb_midpoint(Coordinate1,Coordinate2,Midpoint)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rhumb_midpoint(+compound,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="distance-4">
+<span id="geospatial-protocol-0-distance-4"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">distance/4</span></code></a><a class="headerlink" href="#distance-4" title="Link to this heading"></a></h3>
+<p>Computes the distance in kilometers between two coordinates using a selected metric. Supported metrics are <code class="docutils literal notranslate"><span class="pre">haversine</span></code>, <code class="docutils literal notranslate"><span class="pre">vincenty</span></code>, and <code class="docutils literal notranslate"><span class="pre">rhumb</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">distance(Coordinate1,Coordinate2,Metric,Distance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">distance(+compound,+compound,+atom,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="distance-5">
+<span id="geospatial-protocol-0-distance-5"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">distance/5</span></code></a><a class="headerlink" href="#distance-5" title="Link to this heading"></a></h3>
+<p>Computes the distance between two coordinates using a selected metric and output unit. Supported metrics are <code class="docutils literal notranslate"><span class="pre">haversine</span></code>, <code class="docutils literal notranslate"><span class="pre">vincenty</span></code>, and <code class="docutils literal notranslate"><span class="pre">rhumb</span></code>. Valid <code class="docutils literal notranslate"><span class="pre">Unit</span></code> argument values are <code class="docutils literal notranslate"><span class="pre">kilometers</span></code>, <code class="docutils literal notranslate"><span class="pre">meters</span></code>, <code class="docutils literal notranslate"><span class="pre">miles</span></code>, and <code class="docutils literal notranslate"><span class="pre">nautical_miles</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">distance(Coordinate1,Coordinate2,Metric,Unit,Distance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">distance(+compound,+compound,+atom,+atom,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="initial-bearing-3">
+<span id="geospatial-protocol-0-initial-bearing-3"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">initial_bearing/3</span></code></a><a class="headerlink" href="#initial-bearing-3" title="Link to this heading"></a></h3>
+<p>Computes the initial bearing in degrees in the <code class="docutils literal notranslate"><span class="pre">[0.0,360.0[</span></code> range from the first coordinate to the second coordinate.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">initial_bearing(Coordinate1,Coordinate2,Bearing)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">initial_bearing(+compound,+compound,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="final-bearing-3">
+<span id="geospatial-protocol-0-final-bearing-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">final_bearing/3</span></code></a><a class="headerlink" href="#final-bearing-3" title="Link to this heading"></a></h3>
+<p>Computes the final bearing in degrees in the <code class="docutils literal notranslate"><span class="pre">[0.0,360.0[</span></code> range when arriving at the second coordinate from the first coordinate.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">final_bearing(Coordinate1,Coordinate2,Bearing)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">final_bearing(+compound,+compound,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="midpoint-3">
+<span id="geospatial-protocol-0-midpoint-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">midpoint/3</span></code></a><a class="headerlink" href="#midpoint-3" title="Link to this heading"></a></h3>
+<p>Computes the geographic midpoint between two coordinates using a spherical Earth model.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">midpoint(Coordinate1,Coordinate2,Midpoint)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">midpoint(+compound,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="destination-point-4">
+<span id="geospatial-protocol-0-destination-point-4"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">destination_point/4</span></code></a><a class="headerlink" href="#destination-point-4" title="Link to this heading"></a></h3>
+<p>Computes the destination coordinate from a start coordinate, an initial bearing in degrees, and a distance in kilometers using a spherical Earth model.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">destination_point(Start,Bearing,Distance,Destination)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">destination_point(+compound,+float,+float,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="interpolate-great-circle-4">
+<span id="geospatial-protocol-0-interpolate-great-circle-4"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">interpolate_great_circle/4</span></code></a><a class="headerlink" href="#interpolate-great-circle-4" title="Link to this heading"></a></h3>
+<p>Computes an intermediate coordinate along the great-circle path between two coordinates using a fraction in the <code class="docutils literal notranslate"><span class="pre">[0.0,1.0]</span></code> range.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interpolate_great_circle(Coordinate1,Coordinate2,Fraction,Coordinate)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interpolate_great_circle(+compound,+compound,+float,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="cross-track-distance-4">
+<span id="geospatial-protocol-0-cross-track-distance-4"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">cross_track_distance/4</span></code></a><a class="headerlink" href="#cross-track-distance-4" title="Link to this heading"></a></h3>
+<p>Computes the signed cross-track distance in kilometers from a coordinate to the great-circle path defined by a start and end coordinate.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cross_track_distance(Coordinate,Start,End,Distance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cross_track_distance(+compound,+compound,+compound,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="along-track-distance-4">
+<span id="geospatial-protocol-0-along-track-distance-4"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">along_track_distance/4</span></code></a><a class="headerlink" href="#along-track-distance-4" title="Link to this heading"></a></h3>
+<p>Computes the along-track distance in kilometers from the start coordinate to the closest point to a coordinate on the great-circle path defined by a start and end coordinate.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">along_track_distance(Coordinate,Start,End,Distance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">along_track_distance(+compound,+compound,+compound,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="within-distance-4">
+<span id="geospatial-protocol-0-within-distance-4"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">within_distance/4</span></code></a><a class="headerlink" href="#within-distance-4" title="Link to this heading"></a></h3>
+<p>True when the distance between two coordinates is less than or equal to the given radius in kilometers using the selected metric.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">within_distance(Coordinate1,Coordinate2,Radius,Metric)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">within_distance(+compound,+compound,+float,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="nearest-coordinate-5">
+<span id="geospatial-protocol-0-nearest-coordinate-5"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nearest_coordinate/5</span></code></a><a class="headerlink" href="#nearest-coordinate-5" title="Link to this heading"></a></h3>
+<p>Finds the nearest coordinate to the origin coordinate in a list using the selected metric, returning the nearest coordinate and distance in kilometers.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nearest_coordinate(Origin,Coordinates,Metric,Nearest,Distance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nearest_coordinate(+compound,+list(compound),+atom,-compound,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="mean-center-2">
+<span id="geospatial-protocol-0-mean-center-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mean_center/2</span></code></a><a class="headerlink" href="#mean-center-2" title="Link to this heading"></a></h3>
+<p>Computes the arithmetic mean center of a list of one or more coordinates.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">mean_center(Coordinates,Center)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">mean_center(+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="minimum-enclosing-circle-3">
+<span id="geospatial-protocol-0-minimum-enclosing-circle-3"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">minimum_enclosing_circle/3</span></code></a><a class="headerlink" href="#minimum-enclosing-circle-3" title="Link to this heading"></a></h3>
+<p>Computes an approximate minimum enclosing circle for a list of one or more coordinates, returning the circle center coordinate and radius in kilometers.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">minimum_enclosing_circle(Coordinates,Center,Radius)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">minimum_enclosing_circle(+list(compound),-compound,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="coordinates-bounding-box-2">
+<span id="geospatial-protocol-0-coordinates-bounding-box-2"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">coordinates_bounding_box/2</span></code></a><a class="headerlink" href="#coordinates-bounding-box-2" title="Link to this heading"></a></h3>
+<p>Computes the axis-aligned latitude/longitude bounding box for a list of one or more coordinates.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">coordinates_bounding_box(Coordinates,BoundingBox)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">coordinates_bounding_box(+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="point-in-polygon-2">
+<span id="geospatial-protocol-0-point-in-polygon-2"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">point_in_polygon/2</span></code></a><a class="headerlink" href="#point-in-polygon-2" title="Link to this heading"></a></h3>
+<p>True when a coordinate is inside (or on the boundary of) a polygon represented as a list of coordinates. Uses a planar ray-casting algorithm over latitude/longitude coordinates.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">point_in_polygon(Point,Polygon)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">point_in_polygon(+compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="polygon-area-2">
+<span id="geospatial-protocol-0-polygon-area-2"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polygon_area/2</span></code></a><a class="headerlink" href="#polygon-area-2" title="Link to this heading"></a></h3>
+<p>Computes an approximate polygon area in square kilometers by projecting coordinates to a local equirectangular plane and applying the shoelace formula.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polygon_area(Polygon,Area)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polygon_area(+list(compound),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="polygon-centroid-2">
+<span id="geospatial-protocol-0-polygon-centroid-2"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polygon_centroid/2</span></code></a><a class="headerlink" href="#polygon-centroid-2" title="Link to this heading"></a></h3>
+<p>Computes an approximate polygon centroid by using a local equirectangular projection and planar centroid formula.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polygon_centroid(Polygon,Centroid)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polygon_centroid(+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="polygon-bounding-box-2">
+<span id="geospatial-protocol-0-polygon-bounding-box-2"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polygon_bounding_box/2</span></code></a><a class="headerlink" href="#polygon-bounding-box-2" title="Link to this heading"></a></h3>
+<p>Computes the axis-aligned latitude/longitude bounding box for a polygon represented as a list of coordinates.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polygon_bounding_box(Polygon,BoundingBox)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polygon_bounding_box(+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="close-polygon-2">
+<span id="geospatial-protocol-0-close-polygon-2"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">close_polygon/2</span></code></a><a class="headerlink" href="#close-polygon-2" title="Link to this heading"></a></h3>
+<p>Returns a closed polygon ring by ensuring the first coordinate is repeated at the end of the list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">close_polygon(Polygon,ClosedPolygon)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">close_polygon(+list(compound),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="polygon-orientation-2">
+<span id="geospatial-protocol-0-polygon-orientation-2"></span><span id="index-31"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polygon_orientation/2</span></code></a><a class="headerlink" href="#polygon-orientation-2" title="Link to this heading"></a></h3>
+<p>Computes polygon ring orientation as <code class="docutils literal notranslate"><span class="pre">clockwise</span></code> or <code class="docutils literal notranslate"><span class="pre">counterclockwise</span></code> using a local projected signed area approximation.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polygon_orientation(Polygon,Orientation)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polygon_orientation(+list(compound),-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="is-clockwise-polygon-1">
+<span id="geospatial-protocol-0-is-clockwise-polygon-1"></span><span id="index-32"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">is_clockwise_polygon/1</span></code></a><a class="headerlink" href="#is-clockwise-polygon-1" title="Link to this heading"></a></h3>
+<p>True when a polygon ring orientation is clockwise.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_clockwise_polygon(Polygon)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_clockwise_polygon(+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="normalize-polygon-orientation-3">
+<span id="geospatial-protocol-0-normalize-polygon-orientation-3"></span><span id="index-33"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">normalize_polygon_orientation/3</span></code></a><a class="headerlink" href="#normalize-polygon-orientation-3" title="Link to this heading"></a></h3>
+<p>Normalizes a polygon ring orientation to <code class="docutils literal notranslate"><span class="pre">clockwise</span></code> or <code class="docutils literal notranslate"><span class="pre">counterclockwise</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">normalize_polygon_orientation(Polygon,Orientation,OrientedPolygon)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">normalize_polygon_orientation(+list(compound),+atom,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="clockwise-polygon-2">
+<span id="geospatial-protocol-0-clockwise-polygon-2"></span><span id="index-34"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">clockwise_polygon/2</span></code></a><a class="headerlink" href="#clockwise-polygon-2" title="Link to this heading"></a></h3>
+<p>Returns a polygon ring with clockwise orientation.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">clockwise_polygon(Polygon,ClockwisePolygon)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">clockwise_polygon(+list(compound),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="counterclockwise-polygon-2">
+<span id="geospatial-protocol-0-counterclockwise-polygon-2"></span><span id="index-35"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">counterclockwise_polygon/2</span></code></a><a class="headerlink" href="#counterclockwise-polygon-2" title="Link to this heading"></a></h3>
+<p>Returns a polygon ring with counterclockwise orientation.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">counterclockwise_polygon(Polygon,CounterclockwisePolygon)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">counterclockwise_polygon(+list(compound),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="is-valid-polygon-1">
+<span id="geospatial-protocol-0-is-valid-polygon-1"></span><span id="index-36"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">is_valid_polygon/1</span></code></a><a class="headerlink" href="#is-valid-polygon-1" title="Link to this heading"></a></h3>
+<p>True when a polygon has at least three valid coordinates after normalizing optional closure.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_valid_polygon(Polygon)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_valid_polygon(+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="bbox-contains-2">
+<span id="geospatial-protocol-0-bbox-contains-2"></span><span id="index-37"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bbox_contains/2</span></code></a><a class="headerlink" href="#bbox-contains-2" title="Link to this heading"></a></h3>
+<p>True when a coordinate is inside or on the boundary of a bounding box term <code class="docutils literal notranslate"><span class="pre">bbox((MinLatitude,MinLongitude),(MaxLatitude,MaxLongitude))</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_contains(BoundingBox,Coordinate)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_contains(+compound,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="bbox-intersects-2">
+<span id="geospatial-protocol-0-bbox-intersects-2"></span><span id="index-38"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bbox_intersects/2</span></code></a><a class="headerlink" href="#bbox-intersects-2" title="Link to this heading"></a></h3>
+<p>True when two bounding boxes intersect or touch.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_intersects(BoundingBox1,BoundingBox2)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_intersects(+compound,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="bbox-union-3">
+<span id="geospatial-protocol-0-bbox-union-3"></span><span id="index-39"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bbox_union/3</span></code></a><a class="headerlink" href="#bbox-union-3" title="Link to this heading"></a></h3>
+<p>Computes the minimal bounding box containing two bounding boxes.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_union(BoundingBox1,BoundingBox2,BoundingBox)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_union(+compound,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="bbox-expand-3">
+<span id="geospatial-protocol-0-bbox-expand-3"></span><span id="index-40"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bbox_expand/3</span></code></a><a class="headerlink" href="#bbox-expand-3" title="Link to this heading"></a></h3>
+<p>Expands a bounding box by a distance in kilometers on all sides using a local spherical approximation.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_expand(BoundingBox,Distance,ExpandedBoundingBox)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_expand(+compound,+number,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="bbox-from-coordinates-2">
+<span id="geospatial-protocol-0-bbox-from-coordinates-2"></span><span id="index-41"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bbox_from_coordinates/2</span></code></a><a class="headerlink" href="#bbox-from-coordinates-2" title="Link to this heading"></a></h3>
+<p>Computes a bounding box from a list of one or more coordinates.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_from_coordinates(Coordinates,BoundingBox)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_from_coordinates(+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="point-to-polyline-distance-3">
+<span id="geospatial-protocol-0-point-to-polyline-distance-3"></span><span id="index-42"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">point_to_polyline_distance/3</span></code></a><a class="headerlink" href="#point-to-polyline-distance-3" title="Link to this heading"></a></h3>
+<p>Computes the minimum distance in kilometers from a coordinate to a polyline with two or more coordinates.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">point_to_polyline_distance(Point,Polyline,Distance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">point_to_polyline_distance(+compound,+list(compound),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="nearest-point-on-segment-4">
+<span id="geospatial-protocol-0-nearest-point-on-segment-4"></span><span id="index-43"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nearest_point_on_segment/4</span></code></a><a class="headerlink" href="#nearest-point-on-segment-4" title="Link to this heading"></a></h3>
+<p>Computes the nearest coordinate on a segment to a coordinate using a local equirectangular approximation.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nearest_point_on_segment(Point,SegmentStart,SegmentEnd,NearestPoint)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nearest_point_on_segment(+compound,+compound,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="nearest-point-on-polyline-4">
+<span id="geospatial-protocol-0-nearest-point-on-polyline-4"></span><span id="index-44"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nearest_point_on_polyline/4</span></code></a><a class="headerlink" href="#nearest-point-on-polyline-4" title="Link to this heading"></a></h3>
+<p>Computes the nearest coordinate on a polyline to a coordinate and the corresponding distance in kilometers.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nearest_point_on_polyline(Point,Polyline,NearestPoint,Distance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nearest_point_on_polyline(+compound,+list(compound),-compound,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="polyline-length-2">
+<span id="geospatial-protocol-0-polyline-length-2"></span><span id="index-45"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polyline_length/2</span></code></a><a class="headerlink" href="#polyline-length-2" title="Link to this heading"></a></h3>
+<p>Computes the polyline length in kilometers for a list of two or more coordinates using the default <code class="docutils literal notranslate"><span class="pre">haversine</span></code> metric.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polyline_length(Coordinates,Length)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polyline_length(+list(compound),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="polyline-length-3">
+<span id="geospatial-protocol-0-polyline-length-3"></span><span id="index-46"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polyline_length/3</span></code></a><a class="headerlink" href="#polyline-length-3" title="Link to this heading"></a></h3>
+<p>Computes the polyline length in kilometers for a list of two or more coordinates using the selected metric.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polyline_length(Coordinates,Metric,Length)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polyline_length(+list(compound),+atom,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="polyline-simplify-3">
+<span id="geospatial-protocol-0-polyline-simplify-3"></span><span id="index-47"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polyline_simplify/3</span></code></a><a class="headerlink" href="#polyline-simplify-3" title="Link to this heading"></a></h3>
+<p>Simplifies a polyline using the Douglas-Peucker algorithm with a tolerance in kilometers.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polyline_simplify(Coordinates,Tolerance,SimplifiedCoordinates)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polyline_simplify(+list(compound),+number,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="polyline-split-at-distance-4">
+<span id="geospatial-protocol-0-polyline-split-at-distance-4"></span><span id="index-48"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polyline_split_at_distance/4</span></code></a><a class="headerlink" href="#polyline-split-at-distance-4" title="Link to this heading"></a></h3>
+<p>Splits a polyline at a distance in kilometers from its first coordinate, returning left and right polylines that share the split coordinate.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polyline_split_at_distance(Coordinates,Distance,LeftCoordinates,RightCoordinates)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polyline_split_at_distance(+list(compound),+number,-list(compound),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="polyline-resample-3">
+<span id="geospatial-protocol-0-polyline-resample-3"></span><span id="index-49"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polyline_resample/3</span></code></a><a class="headerlink" href="#polyline-resample-3" title="Link to this heading"></a></h3>
+<p>Resamples a polyline using a fixed step in kilometers, preserving first and last coordinates.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polyline_resample(Coordinates,Step,ResampledCoordinates)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polyline_resample(+list(compound),+number,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="polygon-perimeter-2">
+<span id="geospatial-protocol-0-polygon-perimeter-2"></span><span id="index-50"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polygon_perimeter/2</span></code></a><a class="headerlink" href="#polygon-perimeter-2" title="Link to this heading"></a></h3>
+<p>Computes the polygon perimeter in kilometers using the default <code class="docutils literal notranslate"><span class="pre">haversine</span></code> metric.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polygon_perimeter(Polygon,Perimeter)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polygon_perimeter(+list(compound),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="polygon-perimeter-3">
+<span id="geospatial-protocol-0-polygon-perimeter-3"></span><span id="index-51"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polygon_perimeter/3</span></code></a><a class="headerlink" href="#polygon-perimeter-3" title="Link to this heading"></a></h3>
+<p>Computes the polygon perimeter in kilometers using the selected metric.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polygon_perimeter(Polygon,Metric,Perimeter)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polygon_perimeter(+list(compound),+atom,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="polygons-intersect-2">
+<span id="geospatial-protocol-0-polygons-intersect-2"></span><span id="index-52"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polygons_intersect/2</span></code></a><a class="headerlink" href="#polygons-intersect-2" title="Link to this heading"></a></h3>
+<p>True when two polygons intersect or one polygon is contained in the other.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polygons_intersect(Polygon1,Polygon2)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polygons_intersect(+list(compound),+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="bounding-box-3">
+<span id="geospatial-protocol-0-bounding-box-3"></span><span id="index-53"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bounding_box/3</span></code></a><a class="headerlink" href="#bounding-box-3" title="Link to this heading"></a></h3>
+<p>Computes a spherical bounding box around a center coordinate for a given radius in kilometers. The returned bounding box term is <code class="docutils literal notranslate"><span class="pre">bbox((MinLatitude,MinLongitude),(MaxLatitude,MaxLongitude))</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bounding_box(Center,Radius,BoundingBox)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bounding_box(+compound,+positive_number,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="route-distance-2">
+<span id="geospatial-protocol-0-route-distance-2"></span><span id="index-54"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_distance/2</span></code></a><a class="headerlink" href="#route-distance-2" title="Link to this heading"></a></h3>
+<p>Computes the route distance in kilometers for a list of two or more coordinates using the default <code class="docutils literal notranslate"><span class="pre">haversine</span></code> metric.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">route_distance(Coordinates,Distance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">route_distance(+list(compound),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="route-distance-3">
+<span id="geospatial-protocol-0-route-distance-3"></span><span id="index-55"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_distance/3</span></code></a><a class="headerlink" href="#route-distance-3" title="Link to this heading"></a></h3>
+<p>Computes the route distance in kilometers for a list of two or more coordinates using the selected metric. Supported metrics are <code class="docutils literal notranslate"><span class="pre">haversine</span></code>, <code class="docutils literal notranslate"><span class="pre">vincenty</span></code>, and <code class="docutils literal notranslate"><span class="pre">rhumb</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">route_distance(Coordinates,Metric,Distance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">route_distance(+list(compound),+atom,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="route-distance-4">
+<span id="geospatial-protocol-0-route-distance-4"></span><span id="index-56"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_distance/4</span></code></a><a class="headerlink" href="#route-distance-4" title="Link to this heading"></a></h3>
+<p>Computes the route distance for a list of two or more coordinates using the selected metric and output unit. Supported metrics are <code class="docutils literal notranslate"><span class="pre">haversine</span></code>, <code class="docutils literal notranslate"><span class="pre">vincenty</span></code>, and <code class="docutils literal notranslate"><span class="pre">rhumb</span></code>. Valid <code class="docutils literal notranslate"><span class="pre">Unit</span></code> argument values are <code class="docutils literal notranslate"><span class="pre">kilometers</span></code>, <code class="docutils literal notranslate"><span class="pre">meters</span></code>, <code class="docutils literal notranslate"><span class="pre">miles</span></code>, and <code class="docutils literal notranslate"><span class="pre">nautical_miles</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">route_distance(Coordinates,Metric,Unit,Distance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">route_distance(+list(compound),+atom,+atom,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="protected-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
+<p>(none)</p>
+</section>
+<section id="private-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
+<p>(none)</p>
+</section>
+<section id="operators">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
+<p>(none)</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="geospatial_0.html#geospatial-0"><span class="std std-ref">geospatial</span></a>, <a class="reference internal" href="numberlistp_0.html#numberlistp-0"><span class="std std-ref">numberlistp</span></a>, <a class="reference internal" href="listp_0.html#listp-0"><span class="std std-ref">listp</span></a></p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="geospatial_0.html" class="btn btn-neutral float-left" title="geospatial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="git_0.html" class="btn btn-neutral float-right" title="git" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2026, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

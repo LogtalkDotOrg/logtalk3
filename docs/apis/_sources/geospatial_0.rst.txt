@@ -1,0 +1,100 @@
+.. index:: single: geospatial
+.. _geospatial/0:
+
+.. rst-class:: right
+
+**object**
+
+``geospatial``
+==============
+
+Geospatial predicates over geographic coordinates represented as ``(Latitude,Longitude)``.
+
+| **Availability:** 
+|    ``logtalk_load(geospatial(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:2:0
+| **Date:** 2026-02-25
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`geospatial_protocol <geospatial_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+
+   - Distance unit: Kilometers.
+   - Coordinate ranges: Latitude values must be in the ``[-90.0,90.0]`` range and longitude values in the ``[-180.0,180.0]`` range.
+
+| **Inherited public predicates:**
+|     :ref:`geospatial_protocol/0::along_track_distance/4`  :ref:`geospatial_protocol/0::bbox_contains/2`  :ref:`geospatial_protocol/0::bbox_expand/3`  :ref:`geospatial_protocol/0::bbox_from_coordinates/2`  :ref:`geospatial_protocol/0::bbox_intersects/2`  :ref:`geospatial_protocol/0::bbox_union/3`  :ref:`geospatial_protocol/0::bounding_box/3`  :ref:`geospatial_protocol/0::clockwise_polygon/2`  :ref:`geospatial_protocol/0::close_polygon/2`  :ref:`geospatial_protocol/0::coordinates_bounding_box/2`  :ref:`geospatial_protocol/0::counterclockwise_polygon/2`  :ref:`geospatial_protocol/0::cross_track_distance/4`  :ref:`geospatial_protocol/0::destination_point/4`  :ref:`geospatial_protocol/0::equirectangular_inverse/4`  :ref:`geospatial_protocol/0::equirectangular_projection/4`  :ref:`geospatial_protocol/0::final_bearing/3`  :ref:`geospatial_protocol/0::haversine_distance/3`  :ref:`geospatial_protocol/0::initial_bearing/3`  :ref:`geospatial_protocol/0::interpolate_great_circle/4`  :ref:`geospatial_protocol/0::interpolate_rhumb/4`  :ref:`geospatial_protocol/0::is_clockwise_polygon/1`  :ref:`geospatial_protocol/0::is_valid_polygon/1`  :ref:`geospatial_protocol/0::mean_center/2`  :ref:`geospatial_protocol/0::midpoint/3`  :ref:`geospatial_protocol/0::minimum_enclosing_circle/3`  :ref:`geospatial_protocol/0::nearest_coordinate/5`  :ref:`geospatial_protocol/0::nearest_point_on_polyline/4`  :ref:`geospatial_protocol/0::nearest_point_on_segment/4`  :ref:`geospatial_protocol/0::normalize_coordinate/2`  :ref:`geospatial_protocol/0::normalize_polygon_orientation/3`  :ref:`geospatial_protocol/0::point_in_polygon/2`  :ref:`geospatial_protocol/0::point_to_polyline_distance/3`  :ref:`geospatial_protocol/0::polygon_area/2`  :ref:`geospatial_protocol/0::polygon_bounding_box/2`  :ref:`geospatial_protocol/0::polygon_centroid/2`  :ref:`geospatial_protocol/0::polygon_orientation/2`  :ref:`geospatial_protocol/0::polygon_perimeter/2`  :ref:`geospatial_protocol/0::polygon_perimeter/3`  :ref:`geospatial_protocol/0::polygons_intersect/2`  :ref:`geospatial_protocol/0::polyline_length/2`  :ref:`geospatial_protocol/0::polyline_length/3`  :ref:`geospatial_protocol/0::polyline_resample/3`  :ref:`geospatial_protocol/0::polyline_simplify/3`  :ref:`geospatial_protocol/0::polyline_split_at_distance/4`  :ref:`geospatial_protocol/0::rhumb_bearing/3`  :ref:`geospatial_protocol/0::rhumb_destination_point/4`  :ref:`geospatial_protocol/0::rhumb_distance/3`  :ref:`geospatial_protocol/0::rhumb_midpoint/3`  :ref:`geospatial_protocol/0::route_distance/2`  :ref:`geospatial_protocol/0::route_distance/3`  :ref:`geospatial_protocol/0::route_distance/4`  :ref:`geospatial_protocol/0::valid_coordinate/1`  :ref:`geospatial_protocol/0::vincenty_distance/3`  :ref:`geospatial_protocol/0::within_distance/4`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: distance/4
+.. _geospatial/0::distance/4:
+
+``distance/4``
+^^^^^^^^^^^^^^
+
+Computes the distance in kilometers between two coordinates using a selected metric. Supported metrics are ``haversine``, ``vincenty``, and ``rhumb``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distance(Coordinate1,Coordinate2,Metric,Distance)``
+| **Mode and number of proofs:**
+|    ``distance(+compound,+compound,+atom,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: distance/5
+.. _geospatial/0::distance/5:
+
+``distance/5``
+^^^^^^^^^^^^^^
+
+Computes the distance between two coordinates using a selected metric and output unit. Supported metrics are ``haversine``, ``vincenty``, and ``rhumb``. Valid ``Unit`` argument values are ``kilometers``, ``meters``, ``miles``, and ``nautical_miles``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distance(Coordinate1,Coordinate2,Metric,Unit,Distance)``
+| **Mode and number of proofs:**
+|    ``distance(+compound,+compound,+atom,+atom,-float)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`geospatial_protocol <geospatial_protocol/0>`, :ref:`numberlist <numberlist/0>`
+

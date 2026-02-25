@@ -1,0 +1,1123 @@
+.. index:: single: geospatial_protocol
+.. _geospatial_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``geospatial_protocol``
+=======================
+
+Geospatial predicates protocol.
+
+| **Availability:** 
+|    ``logtalk_load(geospatial(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:2:0
+| **Date:** 2026-02-25
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: valid_coordinate/1
+.. _geospatial_protocol/0::valid_coordinate/1:
+
+``valid_coordinate/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+True if the argument is a valid geographic coordinate represented as ``(Latitude,Longitude)`` with latitude in the ``[-90.0,90.0]`` range and longitude in the ``[-180.0,180.0]`` range.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_coordinate(Coordinate)``
+| **Mode and number of proofs:**
+|    ``valid_coordinate(@compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: normalize_coordinate/2
+.. _geospatial_protocol/0::normalize_coordinate/2:
+
+``normalize_coordinate/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes a coordinate by wrapping longitude to the ``[-180.0,180.0]`` range and reflecting latitude over the poles when necessary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_coordinate(Coordinate,NormalizedCoordinate)``
+| **Mode and number of proofs:**
+|    ``normalize_coordinate(+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: equirectangular_projection/4
+.. _geospatial_protocol/0::equirectangular_projection/4:
+
+``equirectangular_projection/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Projects a coordinate to local equirectangular planar coordinates in kilometers using a reference latitude in degrees.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``equirectangular_projection(Coordinate,ReferenceLatitude,X,Y)``
+| **Mode and number of proofs:**
+|    ``equirectangular_projection(+compound,+float,-float,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: equirectangular_inverse/4
+.. _geospatial_protocol/0::equirectangular_inverse/4:
+
+``equirectangular_inverse/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts local equirectangular planar coordinates in kilometers to a geographic coordinate using a reference latitude in degrees.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``equirectangular_inverse(X,Y,ReferenceLatitude,Coordinate)``
+| **Mode and number of proofs:**
+|    ``equirectangular_inverse(+float,+float,+float,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: haversine_distance/3
+.. _geospatial_protocol/0::haversine_distance/3:
+
+``haversine_distance/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the great-circle distance in kilometers between two coordinates using the Haversine formula.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``haversine_distance(Coordinate1,Coordinate2,Distance)``
+| **Mode and number of proofs:**
+|    ``haversine_distance(+compound,+compound,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: vincenty_distance/3
+.. _geospatial_protocol/0::vincenty_distance/3:
+
+``vincenty_distance/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the geodesic distance in kilometers between two coordinates using the Vincenty inverse formula over the WGS84 ellipsoid. Fails if the iterative method does not converge.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``vincenty_distance(Coordinate1,Coordinate2,Distance)``
+| **Mode and number of proofs:**
+|    ``vincenty_distance(+compound,+compound,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: rhumb_distance/3
+.. _geospatial_protocol/0::rhumb_distance/3:
+
+``rhumb_distance/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Computes the rhumb-line (loxodrome) distance in kilometers between two coordinates on a spherical Earth model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rhumb_distance(Coordinate1,Coordinate2,Distance)``
+| **Mode and number of proofs:**
+|    ``rhumb_distance(+compound,+compound,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: rhumb_bearing/3
+.. _geospatial_protocol/0::rhumb_bearing/3:
+
+``rhumb_bearing/3``
+^^^^^^^^^^^^^^^^^^^
+
+Computes the rhumb-line initial bearing in degrees in the ``[0.0,360.0[`` range from the first coordinate to the second coordinate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rhumb_bearing(Coordinate1,Coordinate2,Bearing)``
+| **Mode and number of proofs:**
+|    ``rhumb_bearing(+compound,+compound,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: rhumb_destination_point/4
+.. _geospatial_protocol/0::rhumb_destination_point/4:
+
+``rhumb_destination_point/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the destination coordinate from a start coordinate, a rhumb-line bearing in degrees, and a distance in kilometers on a spherical Earth model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rhumb_destination_point(Start,Bearing,Distance,Destination)``
+| **Mode and number of proofs:**
+|    ``rhumb_destination_point(+compound,+float,+float,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: interpolate_rhumb/4
+.. _geospatial_protocol/0::interpolate_rhumb/4:
+
+``interpolate_rhumb/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes an intermediate coordinate along the rhumb-line path between two coordinates using a fraction in the ``[0.0,1.0]`` range.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``interpolate_rhumb(Coordinate1,Coordinate2,Fraction,Coordinate)``
+| **Mode and number of proofs:**
+|    ``interpolate_rhumb(+compound,+compound,+float,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: rhumb_midpoint/3
+.. _geospatial_protocol/0::rhumb_midpoint/3:
+
+``rhumb_midpoint/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Computes the midpoint along the rhumb-line path between two coordinates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rhumb_midpoint(Coordinate1,Coordinate2,Midpoint)``
+| **Mode and number of proofs:**
+|    ``rhumb_midpoint(+compound,+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: distance/4
+.. _geospatial_protocol/0::distance/4:
+
+``distance/4``
+^^^^^^^^^^^^^^
+
+Computes the distance in kilometers between two coordinates using a selected metric. Supported metrics are ``haversine``, ``vincenty``, and ``rhumb``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distance(Coordinate1,Coordinate2,Metric,Distance)``
+| **Mode and number of proofs:**
+|    ``distance(+compound,+compound,+atom,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: distance/5
+.. _geospatial_protocol/0::distance/5:
+
+``distance/5``
+^^^^^^^^^^^^^^
+
+Computes the distance between two coordinates using a selected metric and output unit. Supported metrics are ``haversine``, ``vincenty``, and ``rhumb``. Valid ``Unit`` argument values are ``kilometers``, ``meters``, ``miles``, and ``nautical_miles``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distance(Coordinate1,Coordinate2,Metric,Unit,Distance)``
+| **Mode and number of proofs:**
+|    ``distance(+compound,+compound,+atom,+atom,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: initial_bearing/3
+.. _geospatial_protocol/0::initial_bearing/3:
+
+``initial_bearing/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Computes the initial bearing in degrees in the ``[0.0,360.0[`` range from the first coordinate to the second coordinate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initial_bearing(Coordinate1,Coordinate2,Bearing)``
+| **Mode and number of proofs:**
+|    ``initial_bearing(+compound,+compound,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: final_bearing/3
+.. _geospatial_protocol/0::final_bearing/3:
+
+``final_bearing/3``
+^^^^^^^^^^^^^^^^^^^
+
+Computes the final bearing in degrees in the ``[0.0,360.0[`` range when arriving at the second coordinate from the first coordinate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``final_bearing(Coordinate1,Coordinate2,Bearing)``
+| **Mode and number of proofs:**
+|    ``final_bearing(+compound,+compound,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: midpoint/3
+.. _geospatial_protocol/0::midpoint/3:
+
+``midpoint/3``
+^^^^^^^^^^^^^^
+
+Computes the geographic midpoint between two coordinates using a spherical Earth model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``midpoint(Coordinate1,Coordinate2,Midpoint)``
+| **Mode and number of proofs:**
+|    ``midpoint(+compound,+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: destination_point/4
+.. _geospatial_protocol/0::destination_point/4:
+
+``destination_point/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the destination coordinate from a start coordinate, an initial bearing in degrees, and a distance in kilometers using a spherical Earth model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``destination_point(Start,Bearing,Distance,Destination)``
+| **Mode and number of proofs:**
+|    ``destination_point(+compound,+float,+float,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: interpolate_great_circle/4
+.. _geospatial_protocol/0::interpolate_great_circle/4:
+
+``interpolate_great_circle/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes an intermediate coordinate along the great-circle path between two coordinates using a fraction in the ``[0.0,1.0]`` range.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``interpolate_great_circle(Coordinate1,Coordinate2,Fraction,Coordinate)``
+| **Mode and number of proofs:**
+|    ``interpolate_great_circle(+compound,+compound,+float,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: cross_track_distance/4
+.. _geospatial_protocol/0::cross_track_distance/4:
+
+``cross_track_distance/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the signed cross-track distance in kilometers from a coordinate to the great-circle path defined by a start and end coordinate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cross_track_distance(Coordinate,Start,End,Distance)``
+| **Mode and number of proofs:**
+|    ``cross_track_distance(+compound,+compound,+compound,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: along_track_distance/4
+.. _geospatial_protocol/0::along_track_distance/4:
+
+``along_track_distance/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the along-track distance in kilometers from the start coordinate to the closest point to a coordinate on the great-circle path defined by a start and end coordinate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``along_track_distance(Coordinate,Start,End,Distance)``
+| **Mode and number of proofs:**
+|    ``along_track_distance(+compound,+compound,+compound,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: within_distance/4
+.. _geospatial_protocol/0::within_distance/4:
+
+``within_distance/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+True when the distance between two coordinates is less than or equal to the given radius in kilometers using the selected metric.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``within_distance(Coordinate1,Coordinate2,Radius,Metric)``
+| **Mode and number of proofs:**
+|    ``within_distance(+compound,+compound,+float,+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: nearest_coordinate/5
+.. _geospatial_protocol/0::nearest_coordinate/5:
+
+``nearest_coordinate/5``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Finds the nearest coordinate to the origin coordinate in a list using the selected metric, returning the nearest coordinate and distance in kilometers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nearest_coordinate(Origin,Coordinates,Metric,Nearest,Distance)``
+| **Mode and number of proofs:**
+|    ``nearest_coordinate(+compound,+list(compound),+atom,-compound,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: mean_center/2
+.. _geospatial_protocol/0::mean_center/2:
+
+``mean_center/2``
+^^^^^^^^^^^^^^^^^
+
+Computes the arithmetic mean center of a list of one or more coordinates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mean_center(Coordinates,Center)``
+| **Mode and number of proofs:**
+|    ``mean_center(+list(compound),-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: minimum_enclosing_circle/3
+.. _geospatial_protocol/0::minimum_enclosing_circle/3:
+
+``minimum_enclosing_circle/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes an approximate minimum enclosing circle for a list of one or more coordinates, returning the circle center coordinate and radius in kilometers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``minimum_enclosing_circle(Coordinates,Center,Radius)``
+| **Mode and number of proofs:**
+|    ``minimum_enclosing_circle(+list(compound),-compound,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: coordinates_bounding_box/2
+.. _geospatial_protocol/0::coordinates_bounding_box/2:
+
+``coordinates_bounding_box/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the axis-aligned latitude/longitude bounding box for a list of one or more coordinates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``coordinates_bounding_box(Coordinates,BoundingBox)``
+| **Mode and number of proofs:**
+|    ``coordinates_bounding_box(+list(compound),-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: point_in_polygon/2
+.. _geospatial_protocol/0::point_in_polygon/2:
+
+``point_in_polygon/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+True when a coordinate is inside (or on the boundary of) a polygon represented as a list of coordinates. Uses a planar ray-casting algorithm over latitude/longitude coordinates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``point_in_polygon(Point,Polygon)``
+| **Mode and number of proofs:**
+|    ``point_in_polygon(+compound,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: polygon_area/2
+.. _geospatial_protocol/0::polygon_area/2:
+
+``polygon_area/2``
+^^^^^^^^^^^^^^^^^^
+
+Computes an approximate polygon area in square kilometers by projecting coordinates to a local equirectangular plane and applying the shoelace formula.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``polygon_area(Polygon,Area)``
+| **Mode and number of proofs:**
+|    ``polygon_area(+list(compound),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: polygon_centroid/2
+.. _geospatial_protocol/0::polygon_centroid/2:
+
+``polygon_centroid/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes an approximate polygon centroid by using a local equirectangular projection and planar centroid formula.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``polygon_centroid(Polygon,Centroid)``
+| **Mode and number of proofs:**
+|    ``polygon_centroid(+list(compound),-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: polygon_bounding_box/2
+.. _geospatial_protocol/0::polygon_bounding_box/2:
+
+``polygon_bounding_box/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the axis-aligned latitude/longitude bounding box for a polygon represented as a list of coordinates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``polygon_bounding_box(Polygon,BoundingBox)``
+| **Mode and number of proofs:**
+|    ``polygon_bounding_box(+list(compound),-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: close_polygon/2
+.. _geospatial_protocol/0::close_polygon/2:
+
+``close_polygon/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns a closed polygon ring by ensuring the first coordinate is repeated at the end of the list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close_polygon(Polygon,ClosedPolygon)``
+| **Mode and number of proofs:**
+|    ``close_polygon(+list(compound),-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: polygon_orientation/2
+.. _geospatial_protocol/0::polygon_orientation/2:
+
+``polygon_orientation/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes polygon ring orientation as ``clockwise`` or ``counterclockwise`` using a local projected signed area approximation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``polygon_orientation(Polygon,Orientation)``
+| **Mode and number of proofs:**
+|    ``polygon_orientation(+list(compound),-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: is_clockwise_polygon/1
+.. _geospatial_protocol/0::is_clockwise_polygon/1:
+
+``is_clockwise_polygon/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a polygon ring orientation is clockwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_clockwise_polygon(Polygon)``
+| **Mode and number of proofs:**
+|    ``is_clockwise_polygon(+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: normalize_polygon_orientation/3
+.. _geospatial_protocol/0::normalize_polygon_orientation/3:
+
+``normalize_polygon_orientation/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes a polygon ring orientation to ``clockwise`` or ``counterclockwise``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_polygon_orientation(Polygon,Orientation,OrientedPolygon)``
+| **Mode and number of proofs:**
+|    ``normalize_polygon_orientation(+list(compound),+atom,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: clockwise_polygon/2
+.. _geospatial_protocol/0::clockwise_polygon/2:
+
+``clockwise_polygon/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a polygon ring with clockwise orientation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``clockwise_polygon(Polygon,ClockwisePolygon)``
+| **Mode and number of proofs:**
+|    ``clockwise_polygon(+list(compound),-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: counterclockwise_polygon/2
+.. _geospatial_protocol/0::counterclockwise_polygon/2:
+
+``counterclockwise_polygon/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a polygon ring with counterclockwise orientation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``counterclockwise_polygon(Polygon,CounterclockwisePolygon)``
+| **Mode and number of proofs:**
+|    ``counterclockwise_polygon(+list(compound),-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: is_valid_polygon/1
+.. _geospatial_protocol/0::is_valid_polygon/1:
+
+``is_valid_polygon/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+True when a polygon has at least three valid coordinates after normalizing optional closure.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_valid_polygon(Polygon)``
+| **Mode and number of proofs:**
+|    ``is_valid_polygon(+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: bbox_contains/2
+.. _geospatial_protocol/0::bbox_contains/2:
+
+``bbox_contains/2``
+^^^^^^^^^^^^^^^^^^^
+
+True when a coordinate is inside or on the boundary of a bounding box term ``bbox((MinLatitude,MinLongitude),(MaxLatitude,MaxLongitude))``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bbox_contains(BoundingBox,Coordinate)``
+| **Mode and number of proofs:**
+|    ``bbox_contains(+compound,+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: bbox_intersects/2
+.. _geospatial_protocol/0::bbox_intersects/2:
+
+``bbox_intersects/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+True when two bounding boxes intersect or touch.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bbox_intersects(BoundingBox1,BoundingBox2)``
+| **Mode and number of proofs:**
+|    ``bbox_intersects(+compound,+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: bbox_union/3
+.. _geospatial_protocol/0::bbox_union/3:
+
+``bbox_union/3``
+^^^^^^^^^^^^^^^^
+
+Computes the minimal bounding box containing two bounding boxes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bbox_union(BoundingBox1,BoundingBox2,BoundingBox)``
+| **Mode and number of proofs:**
+|    ``bbox_union(+compound,+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: bbox_expand/3
+.. _geospatial_protocol/0::bbox_expand/3:
+
+``bbox_expand/3``
+^^^^^^^^^^^^^^^^^
+
+Expands a bounding box by a distance in kilometers on all sides using a local spherical approximation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bbox_expand(BoundingBox,Distance,ExpandedBoundingBox)``
+| **Mode and number of proofs:**
+|    ``bbox_expand(+compound,+number,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: bbox_from_coordinates/2
+.. _geospatial_protocol/0::bbox_from_coordinates/2:
+
+``bbox_from_coordinates/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes a bounding box from a list of one or more coordinates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bbox_from_coordinates(Coordinates,BoundingBox)``
+| **Mode and number of proofs:**
+|    ``bbox_from_coordinates(+list(compound),-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: point_to_polyline_distance/3
+.. _geospatial_protocol/0::point_to_polyline_distance/3:
+
+``point_to_polyline_distance/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the minimum distance in kilometers from a coordinate to a polyline with two or more coordinates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``point_to_polyline_distance(Point,Polyline,Distance)``
+| **Mode and number of proofs:**
+|    ``point_to_polyline_distance(+compound,+list(compound),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: nearest_point_on_segment/4
+.. _geospatial_protocol/0::nearest_point_on_segment/4:
+
+``nearest_point_on_segment/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the nearest coordinate on a segment to a coordinate using a local equirectangular approximation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nearest_point_on_segment(Point,SegmentStart,SegmentEnd,NearestPoint)``
+| **Mode and number of proofs:**
+|    ``nearest_point_on_segment(+compound,+compound,+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: nearest_point_on_polyline/4
+.. _geospatial_protocol/0::nearest_point_on_polyline/4:
+
+``nearest_point_on_polyline/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the nearest coordinate on a polyline to a coordinate and the corresponding distance in kilometers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nearest_point_on_polyline(Point,Polyline,NearestPoint,Distance)``
+| **Mode and number of proofs:**
+|    ``nearest_point_on_polyline(+compound,+list(compound),-compound,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: polyline_length/2
+.. _geospatial_protocol/0::polyline_length/2:
+
+``polyline_length/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Computes the polyline length in kilometers for a list of two or more coordinates using the default ``haversine`` metric.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``polyline_length(Coordinates,Length)``
+| **Mode and number of proofs:**
+|    ``polyline_length(+list(compound),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: polyline_length/3
+.. _geospatial_protocol/0::polyline_length/3:
+
+``polyline_length/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Computes the polyline length in kilometers for a list of two or more coordinates using the selected metric.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``polyline_length(Coordinates,Metric,Length)``
+| **Mode and number of proofs:**
+|    ``polyline_length(+list(compound),+atom,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: polyline_simplify/3
+.. _geospatial_protocol/0::polyline_simplify/3:
+
+``polyline_simplify/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Simplifies a polyline using the Douglas-Peucker algorithm with a tolerance in kilometers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``polyline_simplify(Coordinates,Tolerance,SimplifiedCoordinates)``
+| **Mode and number of proofs:**
+|    ``polyline_simplify(+list(compound),+number,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: polyline_split_at_distance/4
+.. _geospatial_protocol/0::polyline_split_at_distance/4:
+
+``polyline_split_at_distance/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Splits a polyline at a distance in kilometers from its first coordinate, returning left and right polylines that share the split coordinate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``polyline_split_at_distance(Coordinates,Distance,LeftCoordinates,RightCoordinates)``
+| **Mode and number of proofs:**
+|    ``polyline_split_at_distance(+list(compound),+number,-list(compound),-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: polyline_resample/3
+.. _geospatial_protocol/0::polyline_resample/3:
+
+``polyline_resample/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Resamples a polyline using a fixed step in kilometers, preserving first and last coordinates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``polyline_resample(Coordinates,Step,ResampledCoordinates)``
+| **Mode and number of proofs:**
+|    ``polyline_resample(+list(compound),+number,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: polygon_perimeter/2
+.. _geospatial_protocol/0::polygon_perimeter/2:
+
+``polygon_perimeter/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the polygon perimeter in kilometers using the default ``haversine`` metric.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``polygon_perimeter(Polygon,Perimeter)``
+| **Mode and number of proofs:**
+|    ``polygon_perimeter(+list(compound),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: polygon_perimeter/3
+.. _geospatial_protocol/0::polygon_perimeter/3:
+
+``polygon_perimeter/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the polygon perimeter in kilometers using the selected metric.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``polygon_perimeter(Polygon,Metric,Perimeter)``
+| **Mode and number of proofs:**
+|    ``polygon_perimeter(+list(compound),+atom,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: polygons_intersect/2
+.. _geospatial_protocol/0::polygons_intersect/2:
+
+``polygons_intersect/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when two polygons intersect or one polygon is contained in the other.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``polygons_intersect(Polygon1,Polygon2)``
+| **Mode and number of proofs:**
+|    ``polygons_intersect(+list(compound),+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: bounding_box/3
+.. _geospatial_protocol/0::bounding_box/3:
+
+``bounding_box/3``
+^^^^^^^^^^^^^^^^^^
+
+Computes a spherical bounding box around a center coordinate for a given radius in kilometers. The returned bounding box term is ``bbox((MinLatitude,MinLongitude),(MaxLatitude,MaxLongitude))``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bounding_box(Center,Radius,BoundingBox)``
+| **Mode and number of proofs:**
+|    ``bounding_box(+compound,+positive_number,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: route_distance/2
+.. _geospatial_protocol/0::route_distance/2:
+
+``route_distance/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Computes the route distance in kilometers for a list of two or more coordinates using the default ``haversine`` metric.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``route_distance(Coordinates,Distance)``
+| **Mode and number of proofs:**
+|    ``route_distance(+list(compound),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: route_distance/3
+.. _geospatial_protocol/0::route_distance/3:
+
+``route_distance/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Computes the route distance in kilometers for a list of two or more coordinates using the selected metric. Supported metrics are ``haversine``, ``vincenty``, and ``rhumb``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``route_distance(Coordinates,Metric,Distance)``
+| **Mode and number of proofs:**
+|    ``route_distance(+list(compound),+atom,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: route_distance/4
+.. _geospatial_protocol/0::route_distance/4:
+
+``route_distance/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Computes the route distance for a list of two or more coordinates using the selected metric and output unit. Supported metrics are ``haversine``, ``vincenty``, and ``rhumb``. Valid ``Unit`` argument values are ``kilometers``, ``meters``, ``miles``, and ``nautical_miles``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``route_distance(Coordinates,Metric,Unit,Distance)``
+| **Mode and number of proofs:**
+|    ``route_distance(+list(compound),+atom,+atom,-float)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`geospatial <geospatial/0>`, :ref:`numberlistp <numberlistp/0>`, :ref:`listp <listp/0>`
+

@@ -170,6 +170,9 @@ a complement to the `expecteds` library fast-fail semantics.
 
 * ADDED: New `simulated_annealing` library.
 
+* ADDED: New `geospatial` library providing common geographic computations
+over coordinates.
+
 * ADDED: Types `text` and `text(CharSet)` to the `arbitrary` and `types`
 libraries. These types support representing text using atoms, character 
 lists, or character code lists.

@@ -420,6 +420,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`code_metric <code_metric/0::all_score/1>`
 
+``along_track_distance/4``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::along_track_distance/4>`
+
 ``alternating_subsequence/2``
 -----------------------------
 
@@ -983,6 +993,56 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`amqp <amqp/0::basic_reject/3>`
 
+``bbox_contains/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::bbox_contains/2>`
+
+``bbox_expand/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::bbox_expand/3>`
+
+``bbox_from_coordinates/2``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::bbox_from_coordinates/2>`
+
+``bbox_intersects/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::bbox_intersects/2>`
+
+``bbox_union/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::bbox_union/3>`
+
 ``before/2``
 ------------
 
@@ -1174,6 +1234,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`metagol <metagol/0::body_pred/1>`
+
+``bounding_box/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::bounding_box/3>`
 
 ``branch/2``
 ------------
@@ -1709,6 +1779,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`socket <socket/0::client_open/5>`
 
+``clockwise_polygon/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::clockwise_polygon/2>`
+
 ``clone/1``
 -----------
 
@@ -1779,6 +1859,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`linda <linda/0::close_client/0>`
+
+``close_polygon/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::close_polygon/2>`
 
 ``coefficient_of_variation/2``
 ------------------------------
@@ -2174,6 +2264,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::cooling_schedule/3>`
 
+``coordinates_bounding_box/2``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::coordinates_bounding_box/2>`
+
 ``copy_file/2``
 ---------------
 
@@ -2255,6 +2355,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`counters <counters/0::counter/2>`
 * :ref:`mutations_store <mutations_store/0::counter/2>`
 
+``counterclockwise_polygon/2``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::counterclockwise_polygon/2>`
+
 ``covariance/3``
 ----------------
 
@@ -2295,6 +2405,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`process <process/0::create/3>`
+
+``cross_track_distance/4``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::cross_track_distance/4>`
 
 ``current/2``
 -------------
@@ -3177,6 +3297,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`pack_protocol <pack_protocol/0::description/1>`
 * :ref:`registry_protocol <registry_protocol/0::description/1>`
 
+``destination_point/4``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::destination_point/4>`
+
 ``destroy/0``
 -------------
 
@@ -3467,6 +3597,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`union_find_protocol <union_find_protocol/0::disjoint_sets/2>`
+
+``distance/4``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial <geospatial/0::distance/4>`
+* :ref:`geospatial_protocol <geospatial_protocol/0::distance/4>`
+
+``distance/5``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial <geospatial/0::distance/5>`
+* :ref:`geospatial_protocol <geospatial_protocol/0::distance/5>`
 
 ``doc_goal/1``
 --------------
@@ -3860,6 +4012,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`intervalp <intervalp/0::equal/2>`
 * :ref:`setp <setp/0::equal/2>`
+
+``equirectangular_inverse/4``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::equirectangular_inverse/4>`
+
+``equirectangular_projection/4``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::equirectangular_projection/4>`
 
 ``erase/1``
 -----------
@@ -4457,6 +4629,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected(Expected) <expected/1::filter/3>`
 * :ref:`validation(Validation) <validation/1::filter/3>`
+
+``final_bearing/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::final_bearing/3>`
 
 ``find/4``
 ----------
@@ -5526,6 +5708,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`graph_protocol <graph_protocol/0::has_path/3>`
 
+``haversine_distance/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::haversine_distance/3>`
+
 ``hdel/4``
 ----------
 
@@ -5998,6 +6190,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`subsequences_protocol <subsequences_protocol/0::init_tails/2>`
 
+``initial_bearing/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::initial_bearing/3>`
+
 ``initial_state/1``
 -------------------
 
@@ -6260,6 +6462,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::internal_os_path/2>`
 
+``interpolate_great_circle/4``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::interpolate_great_circle/4>`
+
+``interpolate_rhumb/4``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::interpolate_rhumb/4>`
+
 ``interquartile_range/2``
 -------------------------
 
@@ -6470,6 +6692,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`graph_protocol <graph_protocol/0::is_bipartite/1>`
+
+``is_clockwise_polygon/1``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::is_clockwise_polygon/1>`
 
 ``is_complete/1``
 -----------------
@@ -6811,6 +7043,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`validation(Validation) <validation/1::is_valid/0>`
+
+``is_valid_polygon/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::is_valid_polygon/1>`
 
 ``is_void/1``
 -------------
@@ -8278,6 +8520,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`random_protocol <random_protocol/0::maybe_call/2>`
 
+``mean_center/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::mean_center/2>`
+
 ``mean_deviation/2``
 --------------------
 
@@ -8564,6 +8816,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`memcached <memcached/0::mget/3>`
 * :ref:`redis <redis/0::mget/3>`
 
+``midpoint/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::midpoint/3>`
+
 ``min/2``
 ---------
 
@@ -8676,6 +8938,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`weighted_undirected_graph(Dictionary) <weighted_undirected_graph/1::min_tree/3>`
+
+``minimum_enclosing_circle/3``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::minimum_enclosing_circle/3>`
 
 ``modes/2``
 -----------
@@ -8840,6 +9112,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`number_grammars(Format) <number_grammars/1::natural//1>`
+
+``nearest_coordinate/5``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::nearest_coordinate/5>`
+
+``nearest_point_on_polyline/4``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::nearest_point_on_polyline/4>`
+
+``nearest_point_on_segment/4``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::nearest_point_on_segment/4>`
 
 ``neighbor_state/2``
 --------------------
@@ -9089,6 +9391,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`url(Representation) <url/1::normalize/2>`
+
+``normalize_coordinate/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::normalize_coordinate/2>`
+
+``normalize_polygon_orientation/3``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::normalize_polygon_orientation/3>`
 
 ``normalize_range/2``
 ---------------------
@@ -10149,6 +10471,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`integer <integer/0::plus/3>`
 
+``point_in_polygon/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::point_in_polygon/2>`
+
+``point_to_polyline_distance/3``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::point_to_polyline_distance/3>`
+
 ``poisson/2``
 -------------
 
@@ -10158,6 +10500,126 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`sampling_protocol <sampling_protocol/0::poisson/2>`
+
+``polygon_area/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::polygon_area/2>`
+
+``polygon_bounding_box/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::polygon_bounding_box/2>`
+
+``polygon_centroid/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::polygon_centroid/2>`
+
+``polygon_orientation/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::polygon_orientation/2>`
+
+``polygon_perimeter/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::polygon_perimeter/2>`
+
+``polygon_perimeter/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::polygon_perimeter/3>`
+
+``polygons_intersect/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::polygons_intersect/2>`
+
+``polyline_length/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::polyline_length/2>`
+
+``polyline_length/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::polyline_length/3>`
+
+``polyline_resample/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::polyline_resample/3>`
+
+``polyline_simplify/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::polyline_simplify/3>`
+
+``polyline_split_at_distance/4``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::polyline_split_at_distance/4>`
 
 ``pop_back/3``
 --------------
@@ -11747,6 +12209,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`zipperp <zipperp/0::rewind/3>`
 
+``rhumb_bearing/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::rhumb_bearing/3>`
+
+``rhumb_destination_point/4``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::rhumb_destination_point/4>`
+
+``rhumb_distance/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::rhumb_distance/3>`
+
+``rhumb_midpoint/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::rhumb_midpoint/3>`
+
 ``rlibraries/1``
 ----------------
 
@@ -11824,6 +12326,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`statisticsp <statisticsp/0::root_mean_squared_error/3>`
+
+``route_distance/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::route_distance/2>`
+
+``route_distance/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::route_distance/3>`
+
+``route_distance/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::route_distance/4>`
 
 ``rpop/3``
 ----------
@@ -14472,6 +15004,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`datep <datep/0::valid/3>`
 * :ref:`timep <timep/0::valid/3>`
 
+``valid_coordinate/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::valid_coordinate/1>`
+
 ``valid_date/3``
 ----------------
 
@@ -14685,6 +15227,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`graph_protocol <graph_protocol/0::vertices/2>`
 
+``vincenty_distance/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::vincenty_distance/3>`
+
 ``void/1``
 ----------
 
@@ -14844,6 +15396,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`term_io_protocol <term_io_protocol/0::with_output_to/2>`
+
+``within_distance/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::within_distance/4>`
 
 ``without//2``
 --------------

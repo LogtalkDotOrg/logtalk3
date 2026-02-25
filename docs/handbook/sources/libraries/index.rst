@@ -59,6 +59,7 @@ directory in the ``NOTES.md`` file.
    format
    genint
    gensym
+   geospatial
    git
    grammars
    graphs
