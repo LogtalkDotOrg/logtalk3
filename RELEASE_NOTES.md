@@ -281,6 +281,9 @@ as a MCP server using the bird identification expert system defined in the
 Tests
 -----
 
+* ADDED: Additional tests for the ISO Prolog standard `atom_chars/2` and
+`atom_codes/2` built-in predicates.
+
 * FIXED: Workaround a crash using the SICStus Prolog backend when running the
 tests for the ISO Prolog standard `is/2` built-in predicate.
 

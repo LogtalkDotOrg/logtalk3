@@ -111,4 +111,7 @@
 	test(lgt_atom_codes_2_24, true(Tail == [])) :-
 		{atom_codes('ABC', [65,66,67| Tail])}.
 
+	test(lgt_atom_codes_2_25, false) :-
+		{atom_codes(a, [_, _])}.
+
 :- end_object.
