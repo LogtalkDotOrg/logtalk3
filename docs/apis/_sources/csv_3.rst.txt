@@ -1,39 +1,28 @@
-.. index:: single: csv(Header,Separator,IgnoreQuotes)
+.. index:: single: csv(A,B,C)
 .. _csv/3:
 
 .. rst-class:: right
 
 **object**
 
-``csv(Header,Separator,IgnoreQuotes)``
-======================================
+``csv(A,B,C)``
+==============
 
-* ``Header`` - Header handling option with possible values ``missing``, ``skip``, and ``keep`` (default).
-* ``Separator`` - Separator handling option with possible values ``comma`` (default for non ``.tsv`` and non ``.tab`` files or when no file name extension is available), ``tab`` (default for ``.tsv`` and ``.tab`` files), ``semicolon``, and ``colon``.
-* ``IgnoreQuotes`` - Double-quotes handling option to ignore (``true``) or preserve (``false``; default) double quotes surrounding data.
-
-
-CSV file and stream reading and writing predicates.
+Backward-compatible parametric object equivalent to using ``csv(_Header_, _Separator_, _IgnoreQuotes_, false)``.
 
 | **Availability:** 
 |    ``logtalk_load(csv(loader))``
 
-| **Author:** Jacinto Dávila and Paulo Moura
-| **Version:** 2:1:0
-| **Date:** 2023-11-15
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
-| **Implements:**
-|    ``public`` :ref:`csv_protocol <csv_protocol/0>`
-| **Uses:**
-|    :ref:`list <list/0>`
-|    :ref:`logtalk <logtalk/0>`
-|    :ref:`os <os/0>`
-|    :ref:`reader <reader/0>`
-|    :ref:`type <type/0>`
+| **Extends:**
+|    ``public`` :ref:`csv(A,B,C,false) <csv/4>`
 
 | **Remarks:**
 |    (none)

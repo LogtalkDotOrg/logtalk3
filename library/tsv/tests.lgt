@@ -27,12 +27,13 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:1,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2023-11-15,
+		date is 2026-02-25,
 		comment is 'Tests for the ``tsv`` library.'
 	]).
 
+	cover(tsv(_, _)).
 	cover(tsv(_)).
 	cover(tsv).
 
@@ -81,12 +82,32 @@
 		^^file_path('test_files/escapes.tsv', Path),
 		tsv(keep)::read_file(Path, Rows).
 
+	test(tsv_read_file_2_comments_default_false, true(Rows == [['# persons table with comments'], ['Name','Age','Address'], ['# data rows'], ['Paul',58,'Sunset Street'], ['# another comment'], ['Anna',52,'Central Plaza'], ['Zeke',45,'Main Street'], ['Lucy',42,'Old Oak'], ['# end marker']])) :-
+		^^suppress_text_output,
+		^^file_path('test_files/comments.tsv', Path),
+		tsv(keep)::read_file(Path, Rows).
+
+	test(tsv_read_file_2_comments_true_keep_header, true(Rows == [['Name','Age','Address'], ['Paul',58,'Sunset Street'], ['Anna',52,'Central Plaza'], ['Zeke',45,'Main Street'], ['Lucy',42,'Old Oak']])) :-
+		^^suppress_text_output,
+		^^file_path('test_files/comments.tsv', Path),
+		tsv(keep, true)::read_file(Path, Rows).
+
+	test(tsv_read_file_2_comments_true_skip_header, true(Rows == [['Paul',58,'Sunset Street'], ['Anna',52,'Central Plaza'], ['Zeke',45,'Main Street'], ['Lucy',42,'Old Oak']])) :-
+		^^suppress_text_output,
+		^^file_path('test_files/comments.tsv', Path),
+		tsv(skip, true)::read_file(Path, Rows).
+
 	% read_file_by_line/2 tests
 
 	test(tsv_read_file_by_line_2_lf_ending, true(Rows == [['Name','Age','Address'], ['Paul',58,'Sunset Street'], ['Anna',52,'Central Plaza'], ['Zeke',45,'Main Street'], ['Lucy',42,'Old Oak']])) :-
 		^^suppress_text_output,
 		^^file_path('test_files/lf_ending.tsv', Path),
 		tsv(keep)::read_file_by_line(Path, Rows).
+
+	test(tsv_read_file_by_line_2_comments_true_skip_header, true(Rows == [['Paul',58,'Sunset Street'], ['Anna',52,'Central Plaza'], ['Zeke',45,'Main Street'], ['Lucy',42,'Old Oak']])) :-
+		^^suppress_text_output,
+		^^file_path('test_files/comments.tsv', Path),
+		tsv(skip, true)::read_file_by_line(Path, Rows).
 
 	% read_stream/2 tests
 
@@ -97,6 +118,13 @@
 		tsv(skip)::read_stream(Stream, Rows),
 		close(Stream).
 
+	test(tsv_read_stream_2_comments_true_skip_header, true(Rows == [['Paul',58,'Sunset Street'], ['Anna',52,'Central Plaza'], ['Zeke',45,'Main Street'], ['Lucy',42,'Old Oak']])) :-
+		^^suppress_text_output,
+		^^file_path('test_files/comments.tsv', Path),
+		open(Path, read, Stream),
+		tsv(skip, true)::read_stream(Stream, Rows),
+		close(Stream).
+
 	% read_stream_by_line/2 tests
 
 	test(tsv_read_stream_by_line_2_crlf_ending, true(Rows == [['Paul',58,'Sunset Street'], ['Anna',52,'Central Plaza'], ['Zeke',45,'Main Street'], ['Lucy',42,'Old Oak']])) :-
@@ -104,6 +132,13 @@
 		^^file_path('test_files/crlf_ending.tsv', Path),
 		open(Path, read, Stream),
 		tsv(skip)::read_stream_by_line(Stream, Rows),
+		close(Stream).
+
+	test(tsv_read_stream_by_line_2_comments_true_skip_header, true(Rows == [['Paul',58,'Sunset Street'], ['Anna',52,'Central Plaza'], ['Zeke',45,'Main Street'], ['Lucy',42,'Old Oak']])) :-
+		^^suppress_text_output,
+		^^file_path('test_files/comments.tsv', Path),
+		open(Path, read, Stream),
+		tsv(skip, true)::read_stream_by_line(Stream, Rows),
 		close(Stream).
 
 	test(tsv_read_file_2_empty_beginning, true(Rows == [['',58,'Sunset Street'], ['Anna',52,'Central Plaza'], ['',45,'Main Street'], ['Lucy',42,'Old Oak']])) :-

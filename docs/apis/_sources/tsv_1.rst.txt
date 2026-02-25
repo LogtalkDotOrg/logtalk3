@@ -1,36 +1,28 @@
-.. index:: single: tsv(Header)
+.. index:: single: tsv(A)
 .. _tsv/1:
 
 .. rst-class:: right
 
 **object**
 
-``tsv(Header)``
-===============
+``tsv(A)``
+==========
 
-* ``Header`` - Header handling option with possible values ``skip`` and ``keep`` (default).
-
-
-TSV file and stream reading and writing predicates.
+Backward-compatible parametric object equivalent to using ``tsv(_Header_, false)``.
 
 | **Availability:** 
 |    ``logtalk_load(tsv(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:1
-| **Date:** 2024-03-11
+| **Version:** 1:0:0
+| **Date:** 2026-02-25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
-| **Implements:**
-|    ``public`` :ref:`tsv_protocol <tsv_protocol/0>`
-| **Uses:**
-|    :ref:`list <list/0>`
-|    :ref:`logtalk <logtalk/0>`
-|    :ref:`reader <reader/0>`
-|    :ref:`type <type/0>`
+| **Extends:**
+|    ``public`` :ref:`tsv(A,false) <tsv/2>`
 
 | **Remarks:**
 |    (none)

@@ -20,16 +20,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tsv(_Header_),
+:- object(tsv(_Header_, _Comments_),
 	implements(tsv_protocol)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2024-03-11,
+		date is 2026-02-25,
 		comment is 'TSV file and stream reading and writing predicates.',
 		parameters is [
-			'Header' - 'Header handling option with possible values ``skip`` and ``keep`` (default).'
+			'Header' - 'Header handling option with possible values ``skip`` and ``keep`` (default).',
+			'Comments' - 'Comment handling option with possible values ``true`` and ``false`` (default). When ``true``, lines starting with ``#`` are skipped when reading TSV files and streams.'
 		]
 	]).
 
@@ -79,7 +80,7 @@
 		(	_Header_ == skip ->
 			N = 2,
 			catch(
-				reader::line_to_codes(Stream, _),
+				read_header_line(Stream),
 				Error,
 				(close(Stream), throw(Error))
 			)
@@ -99,7 +100,7 @@
 		ensure_bound_options,
 		(	_Header_ == skip ->
 			N = 2,
-			reader::line_to_codes(Stream, _)
+			read_header_line(Stream)
 		;	N = 1
 		),
 		read_assert_line_by_line(Stream, Object, Predicate, N),
@@ -113,7 +114,7 @@
 		(	_Header_ == skip ->
 			N = 2,
 			catch(
-				reader::line_to_codes(Stream, _),
+				read_header_line(Stream),
 				Error,
 				(close(Stream), throw(Error))
 			)
@@ -131,11 +132,23 @@
 		ensure_bound_options,
 		(	_Header_ == skip ->
 			N = 2,
-			reader::line_to_codes(Stream, _)
+			read_header_line(Stream)
 		;	N = 1
 		),
 		read_line_by_line(Stream, Rows, N),
 		dbg('All the stream has been read'-[Stream,Rows]).
+
+	read_header_line(Stream) :-
+		reader::line_to_codes(Stream, LineCodes),
+		(	LineCodes == end_of_file ->
+			true
+		;	LineCodes == [] ->
+			read_header_line(Stream)
+		;	_Comments_ == true,
+			LineCodes = [0'#| _] ->
+			read_header_line(Stream)
+		;	true
+		).
 
 	write_file(File, Object, Predicate) :-
 		context(Context),
@@ -197,22 +210,38 @@
 	% Given that the number of tabs per line must be constant.
 
 	tsv(Rows) -->
-		tsv(_Header_, Rows).
+		tsv(_Header_, _Comments_, Rows).
 
-	tsv(skip, Rows) -->
-		records([_| Rows]).
+	tsv(skip, Comments, Rows) -->
+		records(Comments, [_| Rows]).
 
-	tsv(keep, Rows) -->
-		records(Rows).
+	tsv(keep, Comments, Rows) -->
+		records(Comments, Rows).
 
-	records([Record| Records]) -->
-		record(Record, false), !, {dbg('New Record'-Record)}, rest_records(Records).
-	records([]) -->
+	records(true, Records) -->
+		comment_line, !,
+		records(true, Records).
+	records(Comments, [Record| Records]) -->
+		record(Record, false), !, {dbg('New Record'-Record)}, rest_records(Comments, Records).
+	records(_, []) -->
 		cr_lf_optional, {dbg('Empty Record'-'')}.
 
-	rest_records(Records) -->
-		cr_lf, !, records(Records).
-	rest_records([]) -->
+	rest_records(Comments, Records) -->
+		cr_lf, !, records(Comments, Records).
+	rest_records(_, []) -->
+		[].
+
+	comment_line -->
+		[0'#],
+		comment_data,
+		cr_lf_optional.
+
+	comment_data -->
+		[Code],
+		{Code =\= 0'\r, Code =\= 0'\n},
+		!,
+		comment_data.
+	comment_data -->
 		[].
 
 	record([Field| Fields], _Next) -->
@@ -263,6 +292,9 @@
 			dbg('Final line at'-N)
 		;	LineCodes == [] ->
 			read_assert_line_by_line(Stream, Object, Name/Arity, N)
+		;	_Comments_ == true,
+			LineCodes = [0'#| _] ->
+			read_assert_line_by_line(Stream, Object, Name/Arity, N)
 		;	phrase(record(Row, false), LineCodes),
 			dbg('Read Line'-N),
 			list::length(Row, Arity) ->
@@ -281,6 +313,9 @@
 			dbg('Final line at'-N),
 			Rows = []
 		;	LineCodes == [] ->
+			read_line_by_line(Stream, Rows, N)
+		;	_Comments_ == true,
+			LineCodes = [0'#| _] ->
 			read_line_by_line(Stream, Rows, N)
 		;	phrase(record(Row, false), LineCodes) ->
 			Rows = [Row| RestRows],
@@ -328,13 +363,27 @@
 		write_data(Fields, Next, Stream).
 
 	ensure_bound_options :-
-		(var(_Header_) -> _Header_ = keep; true).
+		(var(_Header_) -> _Header_ = keep; true),
+		(var(_Comments_) -> _Comments_ = false; true).
+
+:- end_object.
+
+
+:- object(tsv(_Header_),
+	extends(tsv(_Header_, false))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-02-25,
+		comment is 'Backward-compatible parametric object equivalent to using ``tsv(_Header_, false)``.'
+	]).
 
 :- end_object.
 
 
 :- object(tsv,
-	extends(tsv(keep))).
+	extends(tsv(keep, false))).
 
 	:- info([
 		version is 1:0:0,

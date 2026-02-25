@@ -27,10 +27,14 @@ and streams:
 
 https://www.iana.org/assignments/media-types/text/tab-separated-values
 
-The main object, `tsv/1`, is a parametric object allowing passing a single
-option for the handling of the header of the file (`keep` or `skip`). The
-`tvs` object extends the `tsv/1` parametric object using the default `keep`
-option value.
+The main object, `tsv/2`, is a parametric object allowing passing two options:
+header handling (`keep` or `skip`) and comment handling (`false` or `true`).
+When comment handling is `true`, lines starting with the `#` character are
+skipped when reading files and streams.
+
+The `tsv/1` parametric object is kept for backward compatibility and extends
+`tsv/2` by setting the comments option to `false`. The `tsv` object extends
+the `tsv/2` parametric object using the default options `keep` and `false`.
 
 Files and streams can be read into a list of rows (with each row being
 represented by a list of fields) or asserted using a user-defined dynamic
@@ -84,6 +88,9 @@ predicate (that must be previously declared). For example:
 	yes
 
 	| ?- tsv(skip)::read_file('test_files/data.tsv', user, p/3).
+	yes
+
+	| ?- tsv(skip, true)::read_file('test_files/data_with_comments.tsv', user, p/3).
 	yes
 
 	| ?-  p(A,B,C).

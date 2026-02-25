@@ -1,0 +1,68 @@
+.. index:: single: csv(Header,Separator,IgnoreQuotes,Comments)
+.. _csv/4:
+
+.. rst-class:: right
+
+**object**
+
+``csv(Header,Separator,IgnoreQuotes,Comments)``
+===============================================
+
+* ``Header`` - Header handling option with possible values ``missing``, ``skip``, and ``keep`` (default).
+* ``Separator`` - Separator handling option with possible values ``comma`` (default for non ``.tsv`` and non ``.tab`` files or when no file name extension is available), ``tab`` (default for ``.tsv`` and ``.tab`` files), ``semicolon``, and ``colon``.
+* ``IgnoreQuotes`` - Double-quotes handling option to ignore (``true``) or preserve (``false``; default) double quotes surrounding data.
+* ``Comments`` - Comment handling option with possible values ``true`` and ``false`` (default). When ``true``, lines starting with ``#`` are skipped when reading CSV files and streams.
+
+
+CSV file and stream reading and writing predicates.
+
+| **Availability:** 
+|    ``logtalk_load(csv(loader))``
+
+| **Author:** Jacinto Dávila and Paulo Moura
+| **Version:** 2:2:0
+| **Date:** 2026-02-25
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`csv_protocol <csv_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`os <os/0>`
+|    :ref:`reader <reader/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`csv_protocol/0::guess_arity/2`  :ref:`csv_protocol/0::guess_separator/2`  :ref:`csv_protocol/0::read_file/2`  :ref:`csv_protocol/0::read_file/3`  :ref:`csv_protocol/0::read_file_by_line/2`  :ref:`csv_protocol/0::read_file_by_line/3`  :ref:`csv_protocol/0::read_stream/2`  :ref:`csv_protocol/0::read_stream/3`  :ref:`csv_protocol/0::read_stream_by_line/2`  :ref:`csv_protocol/0::read_stream_by_line/3`  :ref:`csv_protocol/0::write_file/3`  :ref:`csv_protocol/0::write_stream/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

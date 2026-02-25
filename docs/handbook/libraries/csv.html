@@ -216,10 +216,15 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">csv</span></code> library provides predicates for reading and writing CSV
 files and streams:</p>
 <p><a class="reference external" href="https://www.rfc-editor.org/rfc/rfc4180.txt">https://www.rfc-editor.org/rfc/rfc4180.txt</a></p>
-<p>The main object, <code class="docutils literal notranslate"><span class="pre">csv/3</span></code>, is a parametric object allowing passing
+<p>The main object, <code class="docutils literal notranslate"><span class="pre">csv/4</span></code>, is a parametric object allowing passing
 options for the handling of the header of the file, the fields
-separator, and the handling of double-quoted fields. The <code class="docutils literal notranslate"><span class="pre">cvs</span></code> object
-extends the <code class="docutils literal notranslate"><span class="pre">csv/3</span></code> parametric object using default option values.</p>
+separator, the handling of double-quoted fields, and comments handling.
+When comments handling is <code class="docutils literal notranslate"><span class="pre">true</span></code>, lines starting with the <code class="docutils literal notranslate"><span class="pre">#</span></code>
+character are skipped when reading files and streams.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">csv/3</span></code> parametric object is kept for backward compatibility and
+extends <code class="docutils literal notranslate"><span class="pre">csv/4</span></code> by setting the comments option to <code class="docutils literal notranslate"><span class="pre">false</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">csv</span></code> object extends the <code class="docutils literal notranslate"><span class="pre">csv/4</span></code> parametric object using default
+option values.</p>
 <p>The library also includes predicates to guess the separator and guess
 the number of columns in a given CSV file.</p>
 <p>Files and streams can be read into a list of rows (with each row being
@@ -253,8 +258,8 @@ link in a web browser.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">csv(Header,</span> <span class="pre">Separator,</span> <span class="pre">IgnoreQuotes)</span></code> parametric object allows
-passing the following options:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">csv(Header,</span> <span class="pre">Separator,</span> <span class="pre">IgnoreQuotes,</span> <span class="pre">Comments)</span></code> parametric object
+allows passing the following options:</p>
 <ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Header</span></code>: possible values are <code class="docutils literal notranslate"><span class="pre">missing</span></code>, <code class="docutils literal notranslate"><span class="pre">skip</span></code>, and <code class="docutils literal notranslate"><span class="pre">keep</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Separator</span></code>: possible values are <code class="docutils literal notranslate"><span class="pre">comma</span></code>, <code class="docutils literal notranslate"><span class="pre">tab</span></code>, <code class="docutils literal notranslate"><span class="pre">semicolon</span></code>,
@@ -262,9 +267,11 @@ and <code class="docutils literal notranslate"><span class="pre">colon</span></c
 <li><p><code class="docutils literal notranslate"><span class="pre">IgnoreQuotes</span></code>: possible values are <code class="docutils literal notranslate"><span class="pre">true</span></code> to ignore double
 quotes surrounding field data and <code class="docutils literal notranslate"><span class="pre">false</span></code> to preserve the double
 quotes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Comments</span></code>: possible values are <code class="docutils literal notranslate"><span class="pre">false</span></code> (default) and <code class="docutils literal notranslate"><span class="pre">true</span></code> to
+skip lines starting with <code class="docutils literal notranslate"><span class="pre">#</span></code>.</p></li>
 </ol>
-<p>The <code class="docutils literal notranslate"><span class="pre">csv</span></code> object uses the default values <code class="docutils literal notranslate"><span class="pre">keep</span></code>, <code class="docutils literal notranslate"><span class="pre">comma</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">csv</span></code> object uses the default values <code class="docutils literal notranslate"><span class="pre">keep</span></code>, <code class="docutils literal notranslate"><span class="pre">comma</span></code>,
+<code class="docutils literal notranslate"><span class="pre">false</span></code>, and <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
 <p>When writing CSV files or streams, set the quoted fields option to
 <code class="docutils literal notranslate"><span class="pre">false</span></code> to write all non-numeric fields double-quoted (i.e., escaped).</p>
 <p>The library objects can also be used to guess the separator used in a
@@ -279,6 +286,10 @@ CSV file if necessary. For example:</p>
 <p>This information can then be used to read the CSV file returning a list
 of rows:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> csv(keep, comma, <span class="k">true</span>)<span class="o">::</span>read_file(<span class="s">&#39;test_files/crlf_ending.csv&#39;</span>, <span class="nv">Rows</span>).
+
+<span class="nv">Rows</span> <span class="o">=</span> [[aaa,bbb,ccc],[zzz,yyy,xxx]] <span class="o">?</span>
+
+| <span class="o">?-</span> csv(keep, comma, <span class="k">true</span>, <span class="k">true</span>)<span class="o">::</span>read_file(<span class="s">&#39;test_files/comments.csv&#39;</span>, <span class="nv">Rows</span>).
 
 <span class="nv">Rows</span> <span class="o">=</span> [[aaa,bbb,ccc],[zzz,yyy,xxx]] <span class="o">?</span>
 </pre></div>

@@ -116,7 +116,8 @@ Objects
    coupling_metric <coupling_metric_0>
    coverage_report <coverage_report_0>
    csv <csv_0>
-   csv(Header,Separator,IgnoreQuotes) <csv_3>
+   csv(A,B,C) <csv_3>
+   csv(Header,Separator,IgnoreQuotes,Comments) <csv_4>
    d2_graph_language <d2_graph_language_0>
    datalog <datalog_0>
    date <date_0>
@@ -305,7 +306,8 @@ Objects
    toychrdb <toychrdb_0>
    treap_set <treap_set_0>
    tsv <tsv_0>
-   tsv(Header) <tsv_1>
+   tsv(A) <tsv_1>
+   tsv(Header,Comments) <tsv_2>
    tutor <tutor_0>
    type <type_0>
    ulid <ulid_0>

@@ -216,10 +216,15 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">tsv</span></code> library provides predicates for reading and writing TSV
 files and streams:</p>
 <p><a class="reference external" href="https://www.iana.org/assignments/media-types/text/tab-separated-values">https://www.iana.org/assignments/media-types/text/tab-separated-values</a></p>
-<p>The main object, <code class="docutils literal notranslate"><span class="pre">tsv/1</span></code>, is a parametric object allowing passing a
-single option for the handling of the header of the file (<code class="docutils literal notranslate"><span class="pre">keep</span></code> or
-<code class="docutils literal notranslate"><span class="pre">skip</span></code>). The <code class="docutils literal notranslate"><span class="pre">tvs</span></code> object extends the <code class="docutils literal notranslate"><span class="pre">tsv/1</span></code> parametric object
-using the default <code class="docutils literal notranslate"><span class="pre">keep</span></code> option value.</p>
+<p>The main object, <code class="docutils literal notranslate"><span class="pre">tsv/2</span></code>, is a parametric object allowing passing two
+options: header handling (<code class="docutils literal notranslate"><span class="pre">keep</span></code> or <code class="docutils literal notranslate"><span class="pre">skip</span></code>) and comment handling
+(<code class="docutils literal notranslate"><span class="pre">false</span></code> or <code class="docutils literal notranslate"><span class="pre">true</span></code>). When comment handling is <code class="docutils literal notranslate"><span class="pre">true</span></code>, lines
+starting with the <code class="docutils literal notranslate"><span class="pre">#</span></code> character are skipped when reading files and
+streams.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">tsv/1</span></code> parametric object is kept for backward compatibility and
+extends <code class="docutils literal notranslate"><span class="pre">tsv/2</span></code> by setting the comments option to <code class="docutils literal notranslate"><span class="pre">false</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">tsv</span></code> object extends the <code class="docutils literal notranslate"><span class="pre">tsv/2</span></code> parametric object using the default
+options <code class="docutils literal notranslate"><span class="pre">keep</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
 <p>Files and streams can be read into a list of rows (with each row being
 represented by a list of fields) or asserted using a user-defined
 dynamic predicate. Reading can be done by first loading the whole file
@@ -264,6 +269,9 @@ object predicate (that must be previously declared). For example:</p>
 yes
 
 | <span class="o">?-</span> tsv(skip)<span class="o">::</span>read_file(<span class="s">&#39;test_files/data.tsv&#39;</span>, user, p<span class="o">/</span><span class="m">3</span>).
+yes
+
+| <span class="o">?-</span> tsv(skip, <span class="k">true</span>)<span class="o">::</span>read_file(<span class="s">&#39;test_files/data_with_comments.tsv&#39;</span>, user, p<span class="o">/</span><span class="m">3</span>).
 yes
 
 | <span class="o">?-</span>  p(<span class="nv">A</span>,<span class="nv">B</span>,<span class="nv">C</span>).

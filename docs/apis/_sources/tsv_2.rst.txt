@@ -1,28 +1,37 @@
-.. index:: single: tsv
-.. _tsv/0:
+.. index:: single: tsv(Header,Comments)
+.. _tsv/2:
 
 .. rst-class:: right
 
 **object**
 
-``tsv``
-=======
+``tsv(Header,Comments)``
+========================
 
-TSV files reading and writing predicates using the option ``Header-keep``.
+* ``Header`` - Header handling option with possible values ``skip`` and ``keep`` (default).
+* ``Comments`` - Comment handling option with possible values ``true`` and ``false`` (default). When ``true``, lines starting with ``#`` are skipped when reading TSV files and streams.
+
+
+TSV file and stream reading and writing predicates.
 
 | **Availability:** 
 |    ``logtalk_load(tsv(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2023-11-15
+| **Version:** 1:1:0
+| **Date:** 2026-02-25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
-| **Extends:**
-|    ``public`` :ref:`tsv(keep,false) <tsv/2>`
+| **Implements:**
+|    ``public`` :ref:`tsv_protocol <tsv_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`reader <reader/0>`
+|    :ref:`type <type/0>`
 
 | **Remarks:**
 |    (none)

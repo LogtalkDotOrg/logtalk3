@@ -27,12 +27,13 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Jacinto Dávila',
-		date is 2023-11-21,
+		date is 2026-02-25,
 		comment is 'Tests for the CSV library.'
 	]).
 
+	cover(csv(_, _, _, _)).
 	cover(csv(_, _, _)).
 	cover(csv).
 
@@ -110,6 +111,33 @@
 		^^suppress_text_output,
 		^^file_path('test_files/with_header.csv', Path),
 		csv(skip, comma, true)::read_file(Path, Rows).
+
+	test(csv_read_sample_csv_comments_default_false, true(Rows == [['# sample with comments'], [field1, field2, field3], ['# data rows'], [aaa, bbb, ccc], [zzz, yyy, xxx], ['# end marker']])) :-
+		^^suppress_text_output,
+		^^file_path('test_files/comments.csv', Path),
+		csv(keep, comma, true)::read_file(Path, Rows).
+
+	test(csv_read_sample_csv_comments_true_keep_header, true(Rows == [[field1, field2, field3], [aaa, bbb, ccc], [zzz, yyy, xxx]])) :-
+		^^suppress_text_output,
+		^^file_path('test_files/comments.csv', Path),
+		csv(keep, comma, true, true)::read_file(Path, Rows).
+
+	test(csv_read_sample_csv_comments_true_skip_header, true(Rows == [[aaa, bbb, ccc], [zzz, yyy, xxx]])) :-
+		^^suppress_text_output,
+		^^file_path('test_files/comments.csv', Path),
+		csv(skip, comma, true, true)::read_file(Path, Rows).
+
+	test(csv_read_file_by_line_csv_comments_true_skip_header, true(Rows == [[aaa, bbb, ccc], [zzz, yyy, xxx]])) :-
+		^^suppress_text_output,
+		^^file_path('test_files/comments.csv', Path),
+		csv(skip, comma, true, true)::read_file_by_line(Path, Rows).
+
+	test(csv_read_stream_by_line_csv_comments_true_skip_header, true(Rows == [[aaa, bbb, ccc], [zzz, yyy, xxx]])) :-
+		^^suppress_text_output,
+		^^file_path('test_files/comments.csv', Path),
+		open(Path, read, Stream),
+		csv(skip, comma, true, true)::read_stream_by_line(Stream, Rows),
+		close(Stream).
 
 	%4.  Within the header and each record, there may be one or more
 	%    fields, separated by commas.  Each line should contain the same

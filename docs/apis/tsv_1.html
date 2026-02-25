@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tsv(Header) &mdash; Logtalk 3.98.0</title>
+  <title>tsv(A) &mdash; Logtalk 3.98.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,7 +32,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="tsv_protocol" href="tsv_protocol_0.html" />
+    <link rel="next" title="tsv(Header,Comments)" href="tsv_2.html" />
     <link rel="prev" title="tsv" href="tsv_0.html" />
    
 </head>
@@ -169,7 +169,8 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="tsv_0.html">tsv</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">tsv(Header)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">tsv(A)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tsv_2.html">tsv(Header,Comments)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tsv_protocol_0.html">tsv_protocol</a></li>
 </ul>
 </li>
@@ -222,7 +223,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">tsv(Header)</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">tsv(A)</span></code></li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/tsv_1.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -233,12 +234,9 @@
            <div itemprop="articleBody">
              
   <p class="right" id="tsv-1"><span id="index-0"></span><strong>object</strong></p>
-<section id="tsv-header">
-<h1><code class="docutils literal notranslate"><span class="pre">tsv(Header)</span></code><a class="headerlink" href="#tsv-header" title="Link to this heading"></a></h1>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Header</span></code> - Header handling option with possible values <code class="docutils literal notranslate"><span class="pre">skip</span></code> and <code class="docutils literal notranslate"><span class="pre">keep</span></code> (default).</p></li>
-</ul>
-<p>TSV file and stream reading and writing predicates.</p>
+<section id="tsv-a">
+<h1><code class="docutils literal notranslate"><span class="pre">tsv(A)</span></code><a class="headerlink" href="#tsv-a" title="Link to this heading"></a></h1>
+<p>Backward-compatible parametric object equivalent to using <code class="docutils literal notranslate"><span class="pre">tsv(_Header_,</span> <span class="pre">false)</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -247,8 +245,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:1</div>
-<div class="line"><strong>Date:</strong> 2024-03-11</div>
+<div class="line"><strong>Version:</strong> 1:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-02-25</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -257,16 +255,9 @@
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Implements:</strong></div>
+<div class="line"><strong>Extends:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="tsv_protocol_0.html#tsv-protocol-0"><span class="std std-ref">tsv_protocol</span></a></div>
-</div>
-<div class="line"><strong>Uses:</strong></div>
-<div class="line-block">
-<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
-<div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0"><span class="std std-ref">logtalk</span></a></div>
-<div class="line"><a class="reference internal" href="reader_0.html#reader-0"><span class="std std-ref">reader</span></a></div>
-<div class="line"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="tsv_2.html#tsv-2"><span class="std std-ref">tsv(A,false)</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -312,7 +303,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="tsv_0.html" class="btn btn-neutral float-left" title="tsv" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="tsv_protocol_0.html" class="btn btn-neutral float-right" title="tsv_protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="tsv_2.html" class="btn btn-neutral float-right" title="tsv(Header,Comments)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

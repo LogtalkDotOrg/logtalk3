@@ -20,18 +20,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(csv(_Header_, _Separator_, _IgnoreQuotes_),
+:- object(csv(_Header_, _Separator_, _IgnoreQuotes_, _Comments_),
 	implements(csv_protocol)).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Jacinto Dávila and Paulo Moura',
-		date is 2023-11-15,
+		date is 2026-02-25,
 		comment is 'CSV file and stream reading and writing predicates.',
 		parameters is [
 			'Header' - 'Header handling option with possible values ``missing``, ``skip``, and ``keep`` (default).',
 			'Separator' - 'Separator handling option with possible values ``comma`` (default for non ``.tsv`` and non ``.tab`` files or when no file name extension is available), ``tab`` (default for ``.tsv`` and ``.tab`` files), ``semicolon``, and ``colon``.',
-			'IgnoreQuotes' - 'Double-quotes handling option to ignore (``true``) or preserve (``false``; default) double quotes surrounding data.'
+			'IgnoreQuotes' - 'Double-quotes handling option to ignore (``true``) or preserve (``false``; default) double quotes surrounding data.',
+			'Comments' - 'Comment handling option with possible values ``true`` and ``false`` (default). When ``true``, lines starting with ``#`` are skipped when reading CSV files and streams.'
 		]
 	]).
 
@@ -85,7 +86,7 @@
 		(	_Header_ == skip ->
 			N = 2,
 			catch(
-				reader::line_to_codes(Stream, _),
+				read_header_line(Stream),
 				Error,
 				(close(Stream), throw(Error))
 			)
@@ -105,7 +106,7 @@
 		ensure_bound_options,
 		(	_Header_ == skip ->
 			N = 2,
-			reader::line_to_codes(Stream, _)
+			read_header_line(Stream)
 		;	N = 1
 		),
 		read_assert_line_by_line(Stream, Object, Predicate, N),
@@ -119,7 +120,7 @@
 		(	_Header_ == skip ->
 			N = 2,
 			catch(
-				reader::line_to_codes(Stream, _),
+				read_header_line(Stream),
 				Error,
 				(close(Stream), throw(Error))
 			)
@@ -137,11 +138,23 @@
 		ensure_bound_options,
 		(	_Header_ == skip ->
 			N = 2,
-			reader::line_to_codes(Stream, _)
+			read_header_line(Stream)
 		;	N = 1
 		),
 		read_line_by_line(Stream, Rows, N),
 		dbg('All the stream has been read'-[Stream,Rows]).
+
+	read_header_line(Stream) :-
+		reader::line_to_codes(Stream, LineCodes),
+		(	LineCodes == end_of_file ->
+			true
+		;	LineCodes == [] ->
+			read_header_line(Stream)
+		;	_Comments_ == true,
+			LineCodes = [35| _] ->
+			read_header_line(Stream)
+		;	true
+		).
 
 	write_file(File, Object, Predicate) :-
 		context(Context),
@@ -216,25 +229,41 @@
 	%   TEXTDATA =  %x20-21 / %x23-2B / %x2D-7E */
 
 	csv(Rows) -->
-		csv(_Header_, Rows).
+		csv(_Header_, _Comments_, Rows).
 
-	csv(missing, Rows) -->
-		records(Rows).
+	csv(missing, Comments, Rows) -->
+		records(Comments, Rows).
 
-	csv(skip, Rows) -->
-		records([_| Rows]).
+	csv(skip, Comments, Rows) -->
+		records(Comments, [_| Rows]).
 
-	csv(keep, Rows) -->
-		records(Rows).
+	csv(keep, Comments, Rows) -->
+		records(Comments, Rows).
 
-	records([Record| Records]) -->
-		record(Record, false), !, {dbg('New Record'-Record)}, rest_records(Records).
-	records([]) -->
+	records(true, Records) -->
+		comment_line, !,
+		records(true, Records).
+	records(Comments, [Record| Records]) -->
+		record(Record, false), !, {dbg('New Record'-Record)}, rest_records(Comments, Records).
+	records(_, []) -->
 		cr_lf_optional, {dbg('Empty Record'-'')}.
 
-	rest_records(Records) -->
-		cr_lf, !, records(Records).
-	rest_records([]) -->
+	rest_records(Comments, Records) -->
+		cr_lf, !, records(Comments, Records).
+	rest_records(_, []) -->
+		[].
+
+	comment_line -->
+		[35],
+		comment_data,
+		cr_lf_optional.
+
+	comment_data -->
+		[Code],
+		{Code =\= 0'\r, Code =\= 0'\n},
+		!,
+		comment_data.
+	comment_data -->
 		[].
 
 	record([Field| Fields], _Next) -->
@@ -320,6 +349,9 @@
 			dbg('Final line at'-N)
 		;	LineCodes == [] ->
 			read_assert_line_by_line(Stream, Object, Name/Arity, N)
+		;	_Comments_ == true,
+			LineCodes = [35| _] ->
+			read_assert_line_by_line(Stream, Object, Name/Arity, N)
 		;	phrase(record(Row, false), LineCodes),
 			dbg('Read Line'-N),
 			list::length(Row, Arity) ->
@@ -338,6 +370,9 @@
 			dbg('Final line at'-N),
 			Rows = []
 		;	LineCodes == [] ->
+			read_line_by_line(Stream, Rows, N)
+		;	_Comments_ == true,
+			LineCodes = [35| _] ->
 			read_line_by_line(Stream, Rows, N)
 		;	phrase(record(Row, false), LineCodes) ->
 			Rows = [Row| RestRows],
@@ -516,18 +551,33 @@
 			;	_Separator_ = comma
 			)
 		),
-		(var(_IgnoreQuotes_) -> _IgnoreQuotes_ = false; true).
+		(var(_IgnoreQuotes_) -> _IgnoreQuotes_ = false; true),
+		(var(_Comments_) -> _Comments_ = false; true).
 
 	ensure_bound_options :-
 		(var(_Header_) -> _Header_ = keep; true),
 		(var(_Separator_) -> _Separator_ = comma; true),
-		(var(_IgnoreQuotes_) -> _IgnoreQuotes_ = false; true).
+		(var(_IgnoreQuotes_) -> _IgnoreQuotes_ = false; true),
+		(var(_Comments_) -> _Comments_ = false; true).
+
+:- end_object.
+
+
+:- object(csv(_Header_, _Separator_, _IgnoreQuotes_),
+	extends(csv(_Header_, _Separator_, _IgnoreQuotes_, false))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-02-25,
+		comment is 'Backward-compatible parametric object equivalent to using ``csv(_Header_, _Separator_, _IgnoreQuotes_, false)``.'
+	]).
 
 :- end_object.
 
 
 :- object(csv,
-	extends(csv(keep, comma, false))).
+	extends(csv(keep, comma, false, false))).
 
 	:- info([
 		version is 1:0:0,
