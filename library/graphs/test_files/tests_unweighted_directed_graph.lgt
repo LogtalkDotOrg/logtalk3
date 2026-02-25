@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-02-25,
 		comment is 'Unit tests for the "unweighted_directed_graph" library predicates.',
 		parnames is ['DictionaryObject']
 	]).
@@ -39,16 +39,22 @@
 		edge/3, add_edge/4,
 		add_edges/3, delete_edge/4, delete_edges/3,
 		neighbors/3, reachable/3,
+		breadth_first_order/3, depth_first_order/3,
 		complement/2, compose/3, union/3, transpose/2,
 		transitive_closure/2, symmetric_closure/2,
 		topological_sort/2, topological_sort/3,
+		all_pairs_min_paths/2,
+		all_pairs_min_predecessors/2,
 		leaves/2,
 		number_of_vertices/2, number_of_edges/2,
 		path/3, has_path/3,
 		min_path/5, max_path/5,
+		min_distances/3, min_predecessors/3,
 		in_degree/3, out_degree/3,
 		is_acyclic/1,
+		has_cycle/1, cycle/2,
 		strongly_connected_components/2,
+		weakly_connected_components/2,
 		transitive_reduction/2,
 		is_complete/1,
 		is_bipartite/1,
@@ -243,6 +249,26 @@
 		new([1,2,3,4,5], [1-3,1-5,2-4,4-5], Graph),
 		reachable(6, Graph, _).
 
+	% breadth_first_order/3 tests
+
+	test(udg_breadth_first_order_3_01, true(Vertices == [1,2,3,4,5])) :-
+		new([1-2,1-3,2-4,3-5], Graph),
+		breadth_first_order(1, Graph, Vertices).
+
+	test(udg_breadth_first_order_3_02, false) :-
+		new([1-2,1-3,2-4,3-5], Graph),
+		breadth_first_order(42, Graph, _).
+
+	% depth_first_order/3 tests
+
+	test(udg_depth_first_order_3_01, true(Vertices == [1,2,4,3,5])) :-
+		new([1-2,1-3,2-4,3-5], Graph),
+		depth_first_order(1, Graph, Vertices).
+
+	test(udg_depth_first_order_3_02, false) :-
+		new([1-2,1-3,2-4,3-5], Graph),
+		depth_first_order(42, Graph, _).
+
 	% complement/2 tests
 
 	test(udg_complement_2_01, true((Vertices == [1,2,3,4], Edges == [1-3,2-1,2-3,2-4,3-1,3-2,3-4,4-1,4-2,4-3]))) :-
@@ -309,6 +335,26 @@
 	test(udg_topological_sort_3_01, true(Vertices == [1,2,3,4,5])) :-
 		new([1,2,3], [1-2,2-3], Graph),
 		topological_sort(Graph, [4,5], Vertices).
+
+	% all_pairs_min_paths/2 tests
+
+	test(udg_all_pairs_min_paths_2_01, true(Pairs == [((1-1)-0),((1-2)-1),((1-3)-2),((2-2)-0),((2-3)-1),((3-3)-0)])) :-
+		new([1-2,2-3], Graph),
+		all_pairs_min_paths(Graph, Pairs).
+
+	test(udg_all_pairs_min_paths_2_02, true(Pairs == [((1-1)-0),((2-2)-0)])) :-
+		new([1,2], [], Graph),
+		all_pairs_min_paths(Graph, Pairs).
+
+	% all_pairs_min_predecessors/2 tests
+
+	test(udg_all_pairs_min_predecessors_2_01, true(Pairs == [((1-1)-none),((1-2)-1),((1-3)-2),((2-2)-none),((2-3)-2),((3-3)-none)])) :-
+		new([1-2,2-3], Graph),
+		all_pairs_min_predecessors(Graph, Pairs).
+
+	test(udg_all_pairs_min_predecessors_2_02, true(Pairs == [((1-1)-none),((2-2)-none)])) :-
+		new([1,2], [], Graph),
+		all_pairs_min_predecessors(Graph, Pairs).
 
 	% leaves/2 tests
 
@@ -379,6 +425,18 @@
 		new([1-2,3-4], Graph),
 		min_path(1, 4, Graph, _, _).
 
+	% min_distances/3 tests
+
+	test(udg_min_distances_3_01, true(Distances == [1-0,2-1,3-2])) :-
+		new([1-2,2-3], Graph),
+		min_distances(1, Graph, Distances).
+
+	% min_predecessors/3 tests
+
+	test(udg_min_predecessors_3_01, true(Predecessors == [1-none,2-1,3-2])) :-
+		new([1-2,2-3], Graph),
+		min_predecessors(1, Graph, Predecessors).
+
 	% max_path/5 tests
 
 	test(udg_max_path_5_01, true((Path == [1,4,5,3], Cost == 3))) :-
@@ -423,6 +481,26 @@
 		new([1-2,2-3,3-1], Graph),
 		is_acyclic(Graph).
 
+	% has_cycle/1 tests
+
+	test(udg_has_cycle_1_01, true) :-
+		new([1-2,2-3,3-1], Graph),
+		has_cycle(Graph).
+
+	test(udg_has_cycle_1_02, false) :-
+		new([1-2,2-3], Graph),
+		has_cycle(Graph).
+
+	% cycle/2 tests
+
+	test(udg_cycle_2_01, true(Cycle == [1,2,3,1])) :-
+		new([1-2,2-3,3-1], Graph),
+		cycle(Graph, Cycle).
+
+	test(udg_cycle_2_02, false) :-
+		new([1-2,2-3], Graph),
+		cycle(Graph, _).
+
 	% strongly_connected_components/2 tests
 
 	test(udg_strongly_connected_components_2_01, true(Components == [[1],[2],[3]])) :-
@@ -438,6 +516,16 @@
 		strongly_connected_components(Graph, Components),
 		list::msort(Components, Sorted),
 		Sorted == [[1,2,3],[4]].
+
+	% weakly_connected_components/2 tests
+
+	test(udg_weakly_connected_components_2_01, subsumes([_], Components)) :-
+		new([1-2,2-3], Graph),
+		weakly_connected_components(Graph, Components).
+
+	test(udg_weakly_connected_components_2_02, subsumes([_, _], Components)) :-
+		new([1-2,3-4], Graph),
+		weakly_connected_components(Graph, Components).
 
 	% transitive_reduction/2 tests
 

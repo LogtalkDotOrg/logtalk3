@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-02-25,
 		comment is 'Protocol for directed graph predicates such as transpose, closures, topological sorting, degree queries, and strongly connected components.'
 	]).
 
@@ -78,11 +78,32 @@
 		argnames is ['Graph']
 	]).
 
+	:- public(has_cycle/1).
+	:- mode(has_cycle(+graph), zero_or_one).
+	:- info(has_cycle/1, [
+		comment is 'True iff the graph contains at least one directed cycle.',
+		argnames is ['Graph']
+	]).
+
+	:- public(cycle/2).
+	:- mode(cycle(+graph, -list(vertex)), zero_or_more).
+	:- info(cycle/2, [
+		comment is 'Enumerates directed cycles as lists of vertices where the first and last vertices are the same.',
+		argnames is ['Graph', 'Cycle']
+	]).
+
 	:- public(strongly_connected_components/2).
 	:- mode(strongly_connected_components(+graph, -list(list(vertex))), one).
 	:- info(strongly_connected_components/2, [
 		comment is 'Computes the strongly connected components of the graph using Tarjan''s algorithm. Each component is a sorted list of vertices. Components are returned in topological order.',
 		argnames is ['Graph', 'SCCs']
+	]).
+
+	:- public(weakly_connected_components/2).
+	:- mode(weakly_connected_components(+graph, -list(list(vertex))), one).
+	:- info(weakly_connected_components/2, [
+		comment is 'Computes the weakly connected components of the graph by considering edge directions as undirected. Each component is returned as a sorted list of vertices.',
+		argnames is ['Graph', 'Components']
 	]).
 
 :- end_protocol.

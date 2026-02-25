@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-23,
+		date is 2026-02-25,
 		comment is 'Unit tests for the "unweighted_undirected_graph" library predicates.',
 		parnames is ['DictionaryObject']
 	]).
@@ -39,17 +39,24 @@
 		edge/3, add_edge/4,
 		add_edges/3, delete_edge/4, delete_edges/3,
 		neighbors/3, reachable/3,
+		breadth_first_order/3, depth_first_order/3,
+		all_pairs_min_paths/2,
+		all_pairs_min_predecessors/2,
 		complement/2,
 		number_of_vertices/2, number_of_edges/2,
 		path/3, has_path/3,
 		min_path/5, max_path/5,
+		min_distances/3, min_predecessors/3,
 		degree/3,
 		is_connected/1,
 		connected_components/2,
+		articulation_points/2,
+		bridges/2,
 		is_complete/1,
 		is_bipartite/1,
 		is_sparse/1,
 		is_tree/1,
+		has_cycle/1, cycle/2,
 		graph_coloring/3,
 		maximal_cliques/2,
 		maximum_cliques/2
@@ -214,12 +221,52 @@
 		new([1,2,3], [1-2], Graph),
 		reachable(42, Graph, _).
 
+	% breadth_first_order/3 tests
+
+	test(uug_breadth_first_order_3_01, true(Vertices == [1,2,3,4,5])) :-
+		new([1-2,1-3,2-4,3-5], Graph),
+		breadth_first_order(1, Graph, Vertices).
+
+	test(uug_breadth_first_order_3_02, false) :-
+		new([1-2,1-3,2-4,3-5], Graph),
+		breadth_first_order(42, Graph, _).
+
+	% depth_first_order/3 tests
+
+	test(uug_depth_first_order_3_01, true(Vertices == [1,2,4,3,5])) :-
+		new([1-2,1-3,2-4,3-5], Graph),
+		depth_first_order(1, Graph, Vertices).
+
+	test(uug_depth_first_order_3_02, false) :-
+		new([1-2,1-3,2-4,3-5], Graph),
+		depth_first_order(42, Graph, _).
+
 	% complement/2 tests
 
 	test(uug_complement_2_01, true(Edges == [1-3,2-3])) :-
 		new([1,2,3], [1-2], Graph),
 		complement(Graph, NewGraph),
 		edges(NewGraph, Edges).
+
+	% all_pairs_min_paths/2 tests
+
+	test(uug_all_pairs_min_paths_2_01, true(Pairs == [((1-1)-0),((1-2)-1),((1-3)-2),((2-1)-1),((2-2)-0),((2-3)-1),((3-1)-2),((3-2)-1),((3-3)-0)])) :-
+		new([1-2,2-3], Graph),
+		all_pairs_min_paths(Graph, Pairs).
+
+	test(uug_all_pairs_min_paths_2_02, true(Pairs == [((1-1)-0),((2-2)-0)])) :-
+		new([1,2], [], Graph),
+		all_pairs_min_paths(Graph, Pairs).
+
+	% all_pairs_min_predecessors/2 tests
+
+	test(uug_all_pairs_min_predecessors_2_01, true(Pairs == [((1-1)-none),((1-2)-1),((1-3)-2),((2-1)-2),((2-2)-none),((2-3)-2),((3-1)-2),((3-2)-3),((3-3)-none)])) :-
+		new([1-2,2-3], Graph),
+		all_pairs_min_predecessors(Graph, Pairs).
+
+	test(uug_all_pairs_min_predecessors_2_02, true(Pairs == [((1-1)-none),((2-2)-none)])) :-
+		new([1,2], [], Graph),
+		all_pairs_min_predecessors(Graph, Pairs).
 
 	% number_of_vertices/2 tests
 
@@ -279,6 +326,18 @@
 		new([1-2,3-4], Graph),
 		min_path(1, 4, Graph, _, _).
 
+	% min_distances/3 tests
+
+	test(uug_min_distances_3_01, true(Distances == [1-0,2-1,3-2])) :-
+		new([1-2,2-3], Graph),
+		min_distances(1, Graph, Distances).
+
+	% min_predecessors/3 tests
+
+	test(uug_min_predecessors_3_01, true(Predecessors == [1-none,2-1,3-2])) :-
+		new([1-2,2-3], Graph),
+		min_predecessors(1, Graph, Predecessors).
+
 	% max_path/5 tests
 
 	test(uug_max_path_5_01, true((Path == [1,2,3], Cost == 2))) :-
@@ -326,6 +385,26 @@
 	test(uug_connected_components_2_02, subsumes([_, _], Components)) :-
 		new([1-2,3-4], Graph),
 		connected_components(Graph, Components).
+
+	% articulation_points/2 tests
+
+	test(uug_articulation_points_2_01, true(Points == [2])) :-
+		new([1-2,2-3,2-4], Graph),
+		articulation_points(Graph, Points).
+
+	test(uug_articulation_points_2_02, true(Points == [])) :-
+		new([1-2,2-3,3-1], Graph),
+		articulation_points(Graph, Points).
+
+	% bridges/2 tests
+
+	test(uug_bridges_2_01, true(Bridges == [1-2,2-3,2-4])) :-
+		new([1-2,2-3,2-4], Graph),
+		bridges(Graph, Bridges).
+
+	test(uug_bridges_2_02, true(Bridges == [])) :-
+		new([1-2,2-3,3-1], Graph),
+		bridges(Graph, Bridges).
 
 	% is_complete/1 tests
 
@@ -401,6 +480,26 @@
 		% empty graph
 		new(Graph),
 		is_tree(Graph).
+
+	% has_cycle/1 tests
+
+	test(uug_has_cycle_1_01, true) :-
+		new([1-2, 2-3, 3-1], Graph),
+		has_cycle(Graph).
+
+	test(uug_has_cycle_1_02, false) :-
+		new([1-2, 2-3], Graph),
+		has_cycle(Graph).
+
+	% cycle/2 tests
+
+	test(uug_cycle_2_01, true(Cycle == [1,2,3,1])) :-
+		new([1-2, 2-3, 3-1], Graph),
+		cycle(Graph, Cycle).
+
+	test(uug_cycle_2_02, false) :-
+		new([1-2, 2-3], Graph),
+		cycle(Graph, _).
 
 	% graph_coloring/3 tests
 

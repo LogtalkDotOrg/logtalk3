@@ -15,7 +15,7 @@ Protocol for weighted graph predicates, extending the common graph protocol with
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-19
+| **Date:** 2026-02-25
 
 | **Compilation flags:**
 |    ``static``
@@ -28,7 +28,7 @@ Protocol for weighted graph predicates, extending the common graph protocol with
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`graph_protocol/0::add_edges/3`  :ref:`graph_protocol/0::add_vertex/3`  :ref:`graph_protocol/0::add_vertices/3`  :ref:`graph_protocol/0::delete_edges/3`  :ref:`graph_protocol/0::delete_vertex/3`  :ref:`graph_protocol/0::delete_vertices/3`  :ref:`graph_protocol/0::edges/2`  :ref:`graph_protocol/0::empty/1`  :ref:`graph_protocol/0::has_path/3`  :ref:`graph_protocol/0::is_bipartite/1`  :ref:`graph_protocol/0::is_complete/1`  :ref:`graph_protocol/0::is_sparse/1`  :ref:`graph_protocol/0::max_path/5`  :ref:`graph_protocol/0::min_path/5`  :ref:`graph_protocol/0::neighbors/3`  :ref:`graph_protocol/0::new/1`  :ref:`graph_protocol/0::new/2`  :ref:`graph_protocol/0::new/3`  :ref:`graph_protocol/0::number_of_edges/2`  :ref:`graph_protocol/0::number_of_vertices/2`  :ref:`graph_protocol/0::path/3`  :ref:`graph_protocol/0::reachable/3`  :ref:`graph_protocol/0::vertices/2`  
+|     :ref:`graph_protocol/0::add_edges/3`  :ref:`graph_protocol/0::add_vertex/3`  :ref:`graph_protocol/0::add_vertices/3`  :ref:`graph_protocol/0::all_pairs_min_paths/2`  :ref:`graph_protocol/0::all_pairs_min_predecessors/2`  :ref:`graph_protocol/0::breadth_first_order/3`  :ref:`graph_protocol/0::delete_edges/3`  :ref:`graph_protocol/0::delete_vertex/3`  :ref:`graph_protocol/0::delete_vertices/3`  :ref:`graph_protocol/0::depth_first_order/3`  :ref:`graph_protocol/0::edges/2`  :ref:`graph_protocol/0::empty/1`  :ref:`graph_protocol/0::has_path/3`  :ref:`graph_protocol/0::is_bipartite/1`  :ref:`graph_protocol/0::is_complete/1`  :ref:`graph_protocol/0::is_sparse/1`  :ref:`graph_protocol/0::max_path/5`  :ref:`graph_protocol/0::min_distances/3`  :ref:`graph_protocol/0::min_path/5`  :ref:`graph_protocol/0::min_predecessors/3`  :ref:`graph_protocol/0::neighbors/3`  :ref:`graph_protocol/0::new/1`  :ref:`graph_protocol/0::new/2`  :ref:`graph_protocol/0::new/3`  :ref:`graph_protocol/0::number_of_edges/2`  :ref:`graph_protocol/0::number_of_vertices/2`  :ref:`graph_protocol/0::path/3`  :ref:`graph_protocol/0::reachable/3`  :ref:`graph_protocol/0::vertices/2`  
 
 .. contents::
    :local:
@@ -109,6 +109,44 @@ Unifies ``WNeighbors`` with a list of ``NeighborVertex-Weight`` pairs for the ne
 |    ``wneighbors(Vertex,Graph,WNeighbors)``
 | **Mode and number of proofs:**
 |    ``wneighbors(+vertex,+graph,-list(pair))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: min_path_bellman_ford/5
+.. _weighted_graph_protocol/0::min_path_bellman_ford/5:
+
+``min_path_bellman_ford/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Finds the minimum cost path from ``Vertex1`` to ``Vertex2`` using the Bellman-Ford algorithm. Supports negative edge weights and fails if no path exists or if a reachable negative cycle makes the optimum undefined.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``min_path_bellman_ford(Vertex1,Vertex2,Graph,Path,Cost)``
+| **Mode and number of proofs:**
+|    ``min_path_bellman_ford(+vertex,+vertex,+graph,-list(vertex),-number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: has_negative_cycle/1
+.. _weighted_graph_protocol/0::has_negative_cycle/1:
+
+``has_negative_cycle/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff ``Graph`` contains a negative-weight cycle.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``has_negative_cycle(Graph)``
+| **Mode and number of proofs:**
+|    ``has_negative_cycle(+graph)`` - ``zero_or_one``
 
 
 ------------

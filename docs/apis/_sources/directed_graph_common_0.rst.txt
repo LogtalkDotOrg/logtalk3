@@ -15,7 +15,7 @@ Common directed graph predicates shared by directed graph objects. Uses self-dis
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-19
+| **Date:** 2026-02-25
 
 | **Compilation flags:**
 |    ``static``
@@ -33,7 +33,7 @@ Common directed graph predicates shared by directed graph objects. Uses self-dis
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`graph_protocol/0::add_edges/3`  :ref:`graph_protocol/0::add_vertex/3`  :ref:`graph_protocol/0::add_vertices/3`  :ref:`graph_protocol/0::delete_edges/3`  :ref:`graph_protocol/0::delete_vertex/3`  :ref:`graph_protocol/0::delete_vertices/3`  :ref:`graph_protocol/0::edges/2`  :ref:`graph_protocol/0::empty/1`  :ref:`graph_protocol/0::has_path/3`  :ref:`directed_graph_protocol/0::in_degree/3`  :ref:`directed_graph_protocol/0::is_acyclic/1`  :ref:`graph_protocol/0::is_bipartite/1`  :ref:`graph_protocol/0::is_complete/1`  :ref:`graph_protocol/0::is_sparse/1`  :ref:`graph_protocol/0::max_path/5`  :ref:`graph_protocol/0::min_path/5`  :ref:`graph_protocol/0::neighbors/3`  :ref:`graph_protocol/0::new/1`  :ref:`graph_protocol/0::new/2`  :ref:`graph_protocol/0::new/3`  :ref:`graph_protocol/0::number_of_edges/2`  :ref:`graph_protocol/0::number_of_vertices/2`  :ref:`directed_graph_protocol/0::out_degree/3`  :ref:`graph_protocol/0::path/3`  :ref:`graph_protocol/0::reachable/3`  :ref:`directed_graph_protocol/0::strongly_connected_components/2`  :ref:`directed_graph_protocol/0::symmetric_closure/2`  :ref:`directed_graph_protocol/0::topological_sort/2`  :ref:`directed_graph_protocol/0::transitive_closure/2`  :ref:`directed_graph_protocol/0::transpose/2`  :ref:`graph_protocol/0::vertices/2`  
+|     :ref:`graph_protocol/0::add_edges/3`  :ref:`graph_protocol/0::add_vertex/3`  :ref:`graph_protocol/0::add_vertices/3`  :ref:`graph_protocol/0::all_pairs_min_paths/2`  :ref:`graph_protocol/0::all_pairs_min_predecessors/2`  :ref:`graph_protocol/0::breadth_first_order/3`  :ref:`directed_graph_protocol/0::cycle/2`  :ref:`graph_protocol/0::delete_edges/3`  :ref:`graph_protocol/0::delete_vertex/3`  :ref:`graph_protocol/0::delete_vertices/3`  :ref:`graph_protocol/0::depth_first_order/3`  :ref:`graph_protocol/0::edges/2`  :ref:`graph_protocol/0::empty/1`  :ref:`directed_graph_protocol/0::has_cycle/1`  :ref:`graph_protocol/0::has_path/3`  :ref:`directed_graph_protocol/0::in_degree/3`  :ref:`directed_graph_protocol/0::is_acyclic/1`  :ref:`graph_protocol/0::is_bipartite/1`  :ref:`graph_protocol/0::is_complete/1`  :ref:`graph_protocol/0::is_sparse/1`  :ref:`graph_protocol/0::max_path/5`  :ref:`graph_protocol/0::min_distances/3`  :ref:`graph_protocol/0::min_path/5`  :ref:`graph_protocol/0::min_predecessors/3`  :ref:`graph_protocol/0::neighbors/3`  :ref:`graph_protocol/0::new/1`  :ref:`graph_protocol/0::new/2`  :ref:`graph_protocol/0::new/3`  :ref:`graph_protocol/0::number_of_edges/2`  :ref:`graph_protocol/0::number_of_vertices/2`  :ref:`directed_graph_protocol/0::out_degree/3`  :ref:`graph_protocol/0::path/3`  :ref:`graph_protocol/0::reachable/3`  :ref:`directed_graph_protocol/0::strongly_connected_components/2`  :ref:`directed_graph_protocol/0::symmetric_closure/2`  :ref:`directed_graph_protocol/0::topological_sort/2`  :ref:`directed_graph_protocol/0::transitive_closure/2`  :ref:`directed_graph_protocol/0::transpose/2`  :ref:`graph_protocol/0::vertices/2`  :ref:`directed_graph_protocol/0::weakly_connected_components/2`  
 
 .. contents::
    :local:

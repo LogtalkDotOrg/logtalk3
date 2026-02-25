@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-02-25,
 		comment is 'Common protocol for all types of graphs. Graphs are represented using a dictionary where keys are vertices and values are sorted lists of neighbors (implicitly defining edges).'
 	]).
 
@@ -126,6 +126,20 @@
 		argnames is ['Vertex', 'Graph', 'Vertices']
 	]).
 
+	:- public(breadth_first_order/3).
+	:- mode(breadth_first_order(+vertex, +graph, -list(vertex)), zero_or_one).
+	:- info(breadth_first_order/3, [
+		comment is 'Unifies ``Vertices`` with the breadth-first traversal order rooted at ``Vertex``. Fails if ``Vertex`` is not in the graph.',
+		argnames is ['Vertex', 'Graph', 'Vertices']
+	]).
+
+	:- public(depth_first_order/3).
+	:- mode(depth_first_order(+vertex, +graph, -list(vertex)), zero_or_one).
+	:- info(depth_first_order/3, [
+		comment is 'Unifies ``Vertices`` with the depth-first traversal order rooted at ``Vertex``. Fails if ``Vertex`` is not in the graph.',
+		argnames is ['Vertex', 'Graph', 'Vertices']
+	]).
+
 	:- public(number_of_vertices/2).
 	:- mode(number_of_vertices(+graph, -integer), one).
 	:- info(number_of_vertices/2, [
@@ -166,6 +180,34 @@
 	:- info(max_path/5, [
 		comment is 'Finds the maximum cost acyclic path from ``Vertex1`` to ``Vertex2``. For unweighted graphs, cost is the number of edges. Fails if no path exists.',
 		argnames is ['Vertex1', 'Vertex2', 'Graph', 'Path', 'Cost']
+	]).
+
+	:- public(min_distances/3).
+	:- mode(min_distances(+vertex, +graph, -list(pair)), zero_or_one).
+	:- info(min_distances/3, [
+		comment is 'Computes minimum path costs from ``Vertex`` to all reachable vertices. Returns a list of ``Target-Cost`` pairs including ``Vertex-0``.',
+		argnames is ['Vertex', 'Graph', 'Distances']
+	]).
+
+	:- public(min_predecessors/3).
+	:- mode(min_predecessors(+vertex, +graph, -list(pair)), zero_or_one).
+	:- info(min_predecessors/3, [
+		comment is 'Computes predecessor links for minimum paths rooted at ``Vertex``. Returns a list of ``Target-Predecessor`` pairs; the source predecessor is ``none``.',
+		argnames is ['Vertex', 'Graph', 'Predecessors']
+	]).
+
+	:- public(all_pairs_min_paths/2).
+	:- mode(all_pairs_min_paths(+graph, -list(pair)), one).
+	:- info(all_pairs_min_paths/2, [
+		comment is 'Computes minimum path costs for all ordered pairs of vertices with a path between them. Returns a list of ``(Vertex1-Vertex2)-Cost`` terms.',
+		argnames is ['Graph', 'Pairs']
+	]).
+
+	:- public(all_pairs_min_predecessors/2).
+	:- mode(all_pairs_min_predecessors(+graph, -list(pair)), one).
+	:- info(all_pairs_min_predecessors/2, [
+		comment is 'Computes predecessor links for minimum paths for all ordered source-target pairs with a path. Returns a list of ``(Vertex1-Vertex2)-Predecessor`` terms.',
+		argnames is ['Graph', 'Pairs']
 	]).
 
 	:- public(is_complete/1).

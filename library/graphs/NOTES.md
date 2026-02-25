@@ -1,7 +1,7 @@
----
+________________________________________________________________________
 
-This file is part of Logtalk <https://logtalk.org/>  
-Copyright 1998-2026 Paulo Moura <pmoura@logtalk.org>  
+This file is part of Logtalk <https://logtalk.org/>
+SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,10 +15,11 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+________________________________________________________________________
 
----
 
-# `graphs`
+`graphs`
+========
 
 The `graphs` library implements predicates for handling directed/undirected
 weighted/unweighted graphs. Graphs are represented using a dictionary where
@@ -39,18 +40,21 @@ Additional predicates specific to each graph type (e.g., `transpose/2`,
 `topological_sort/2`, `min_path/5`, `min_tree/3`) are declared in the
 individual graph objects.
 
-## API documentation
+API documentation
+-----------------
 
 Open the [../../apis/library_index.html#graphs](../../apis/library_index.html#graphs)
 link in a web browser.
 
-## Loading
+Loading
+-------
 
 To load all entities in this library, load the `loader.lgt` file:
 
     | ?- logtalk_load(graphs(loader)).
 
-## Testing
+Testing
+-------
 
 To test this library predicates, load the `tester.lgt` file:
 
@@ -59,7 +63,8 @@ To test this library predicates, load the `tester.lgt` file:
 This library provides also a `graph_types` category for type-checking and
 arbitrary generation of graph-related terms.
 
-## Usage
+Usage
+-----
 
 ### Graph types
 

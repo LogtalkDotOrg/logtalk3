@@ -15,7 +15,7 @@ Common protocol for all types of graphs. Graphs are represented using a dictiona
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-19
+| **Date:** 2026-02-25
 
 | **Compilation flags:**
 |    ``static``
@@ -304,6 +304,44 @@ Unifies ``Vertices`` with a sorted list of vertices reachable from ``Vertex`` (i
 
 ------------
 
+.. index:: breadth_first_order/3
+.. _graph_protocol/0::breadth_first_order/3:
+
+``breadth_first_order/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Unifies ``Vertices`` with the breadth-first traversal order rooted at ``Vertex``. Fails if ``Vertex`` is not in the graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``breadth_first_order(Vertex,Graph,Vertices)``
+| **Mode and number of proofs:**
+|    ``breadth_first_order(+vertex,+graph,-list(vertex))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: depth_first_order/3
+.. _graph_protocol/0::depth_first_order/3:
+
+``depth_first_order/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Unifies ``Vertices`` with the depth-first traversal order rooted at ``Vertex``. Fails if ``Vertex`` is not in the graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``depth_first_order(Vertex,Graph,Vertices)``
+| **Mode and number of proofs:**
+|    ``depth_first_order(+vertex,+graph,-list(vertex))`` - ``zero_or_one``
+
+
+------------
+
 .. index:: number_of_vertices/2
 .. _graph_protocol/0::number_of_vertices/2:
 
@@ -414,6 +452,82 @@ Finds the maximum cost acyclic path from ``Vertex1`` to ``Vertex2``. For unweigh
 |    ``max_path(Vertex1,Vertex2,Graph,Path,Cost)``
 | **Mode and number of proofs:**
 |    ``max_path(+vertex,+vertex,+graph,-list(vertex),-number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: min_distances/3
+.. _graph_protocol/0::min_distances/3:
+
+``min_distances/3``
+^^^^^^^^^^^^^^^^^^^
+
+Computes minimum path costs from ``Vertex`` to all reachable vertices. Returns a list of ``Target-Cost`` pairs including ``Vertex-0``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``min_distances(Vertex,Graph,Distances)``
+| **Mode and number of proofs:**
+|    ``min_distances(+vertex,+graph,-list(pair))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: min_predecessors/3
+.. _graph_protocol/0::min_predecessors/3:
+
+``min_predecessors/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes predecessor links for minimum paths rooted at ``Vertex``. Returns a list of ``Target-Predecessor`` pairs; the source predecessor is ``none``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``min_predecessors(Vertex,Graph,Predecessors)``
+| **Mode and number of proofs:**
+|    ``min_predecessors(+vertex,+graph,-list(pair))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: all_pairs_min_paths/2
+.. _graph_protocol/0::all_pairs_min_paths/2:
+
+``all_pairs_min_paths/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes minimum path costs for all ordered pairs of vertices with a path between them. Returns a list of ``(Vertex1-Vertex2)-Cost`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``all_pairs_min_paths(Graph,Pairs)``
+| **Mode and number of proofs:**
+|    ``all_pairs_min_paths(+graph,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: all_pairs_min_predecessors/2
+.. _graph_protocol/0::all_pairs_min_predecessors/2:
+
+``all_pairs_min_predecessors/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes predecessor links for minimum paths for all ordered source-target pairs with a path. Returns a list of ``(Vertex1-Vertex2)-Predecessor`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``all_pairs_min_predecessors(Graph,Pairs)``
+| **Mode and number of proofs:**
+|    ``all_pairs_min_predecessors(+graph,-list(pair))`` - ``one``
 
 
 ------------

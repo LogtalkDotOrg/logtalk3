@@ -25,12 +25,18 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-23,
+		date is 2026-02-25,
 		comment is 'Common predicates shared by undirected graph objects. Uses self-dispatch to call object-specific predicates such as ``is_connected/1``, ``vertices/2``, ``edges/2``, and ``neighbors/3``.'
 	]).
 
 	:- uses(list, [
-		length/2, member/2, msort/2
+		length/2, member/2, msort/2, reverse/2
+	]).
+
+	:- uses(avltree, [
+		new/1 as dfs_new/1,
+		insert/4 as dfs_insert/4,
+		lookup/3 as dfs_lookup/3
 	]).
 
 	:- uses(set, [
@@ -51,11 +57,39 @@
 		argnames is ['Graph']
 	]).
 
+	:- public(has_cycle/1).
+	:- mode(has_cycle(+graph), zero_or_one).
+	:- info(has_cycle/1, [
+		comment is 'True iff the graph contains at least one cycle.',
+		argnames is ['Graph']
+	]).
+
+	:- public(cycle/2).
+	:- mode(cycle(+graph, -list(vertex)), zero_or_more).
+	:- info(cycle/2, [
+		comment is 'Enumerates cycles as lists of vertices where the first and last vertices are the same.',
+		argnames is ['Graph', 'Cycle']
+	]).
+
 	:- public(graph_coloring/3).
 	:- mode(graph_coloring(+graph, -list(pair), -integer), one).
 	:- info(graph_coloring/3, [
 		comment is 'Computes a greedy vertex coloring of the graph. ``Coloring`` is a list of ``Vertex-Color`` pairs where colors are integers starting from 1. ``NumberOfColors`` is the total number of colors used.',
 		argnames is ['Graph', 'Coloring', 'NumberOfColors']
+	]).
+
+	:- public(articulation_points/2).
+	:- mode(articulation_points(+graph, -list(vertex)), one).
+	:- info(articulation_points/2, [
+		comment is 'Computes all articulation points (cut vertices) of the graph. The result is a sorted list of vertices.',
+		argnames is ['Graph', 'Points']
+	]).
+
+	:- public(bridges/2).
+	:- mode(bridges(+graph, -list(edge)), one).
+	:- info(bridges/2, [
+		comment is 'Computes all bridges (cut edges) of the graph. Each bridge is returned once as ``Vertex1-Vertex2`` with ``Vertex1 @< Vertex2``.',
+		argnames is ['Graph', 'Bridges']
 	]).
 
 	:- public(maximal_cliques/2).
@@ -82,6 +116,28 @@
 		length(Edges, E),
 		E =:= V - 1.
 
+	has_cycle(Graph) :-
+		cycle(Graph, _),
+		!.
+
+	cycle(Graph, Cycle) :-
+		::vertices(Graph, Vertices),
+		member(Start, Vertices),
+		undirected_cycle_from(Start, none, Start, Graph, [Start], ReverseCycle),
+		reverse(ReverseCycle, Cycle).
+
+	articulation_points(Graph, Points) :-
+		::vertices(Graph, Vertices),
+		dfs_new(Disc0),
+		dfs_new(Low0),
+		ap_all(Vertices, Graph, 0, Disc0, Low0, [], [], _Disc, _Low, Points).
+
+	bridges(Graph, Bridges) :-
+		::vertices(Graph, Vertices),
+		dfs_new(Disc0),
+		dfs_new(Low0),
+		bridges_all(Vertices, Graph, 0, Disc0, Low0, [], [], _Disc, _Low, Bridges).
+
 	% === Graph coloring (greedy) ===
 
 	graph_coloring(Graph, Coloring, NumberOfColors) :-
@@ -89,6 +145,84 @@
 		color_vertices(Vertices, Graph, [], Coloring, 0, NumberOfColors).
 
 	% --- Graph coloring helpers ---
+
+	undirected_cycle_from(Current, Parent, Start, Graph, Visited, ReverseCycle) :-
+		::neighbors(Current, Graph, Neighbors),
+		member(Next, Neighbors),
+		( Next == Parent ->
+			fail
+		; Next == Start ->
+			length(Visited, N),
+			N >= 3,
+			ReverseCycle = [Start| Visited]
+		; \+ member(Next, Visited),
+			undirected_cycle_from(Next, Current, Start, Graph, [Next| Visited], ReverseCycle)
+		).
+
+	ap_all([], _, _, Disc, Low, Points, _, Disc, Low, Points).
+	ap_all([Vertex| Vertices], Graph, Time0, Disc0, Low0, Points0, Bridges0, Disc, Low, Points) :-
+		( dfs_lookup(Vertex, _, Disc0) ->
+			ap_all(Vertices, Graph, Time0, Disc0, Low0, Points0, Bridges0, Disc, Low, Points)
+		;	dfs_visit(Vertex, none, Graph, Time0, Disc0, Low0, Points0, Bridges0, Time1, Disc1, Low1, Points1, _),
+			ap_all(Vertices, Graph, Time1, Disc1, Low1, Points1, Bridges0, Disc, Low, Points)
+		).
+
+	bridges_all([], _, _, Disc, Low, _, Bridges, Disc, Low, Bridges).
+	bridges_all([Vertex| Vertices], Graph, Time0, Disc0, Low0, Points0, Bridges0, Disc, Low, Bridges) :-
+		( dfs_lookup(Vertex, _, Disc0) ->
+			bridges_all(Vertices, Graph, Time0, Disc0, Low0, Points0, Bridges0, Disc, Low, Bridges)
+		;	dfs_visit(Vertex, none, Graph, Time0, Disc0, Low0, Points0, Bridges0, Time1, Disc1, Low1, _, Bridges1),
+			bridges_all(Vertices, Graph, Time1, Disc1, Low1, Points0, Bridges1, Disc, Low, Bridges)
+		).
+
+	dfs_visit(Vertex, Parent, Graph, Time0, Disc0, Low0, Points0, Bridges0, Time, Disc, Low, Points, Bridges) :-
+		dfs_insert(Disc0, Vertex, Time0, Disc1),
+		dfs_insert(Low0, Vertex, Time0, Low1),
+		Time1 is Time0 + 1,
+		::neighbors(Vertex, Graph, Neighbors),
+		dfs_neighbors(Neighbors, Vertex, Parent, Graph, Time1, Disc1, Low1, Time2, Disc2, Low2, Time0, 0, ChildCount, Points0, Points1, Bridges0, Bridges1),
+		( Parent == none,
+		  ChildCount > 1 ->
+			set_insert(Points1, Vertex, Points)
+		;	Points = Points1
+		),
+		Time = Time2,
+		Disc = Disc2,
+		Low = Low2,
+		Bridges = Bridges1.
+
+	dfs_neighbors([], _, _, _, Time, Disc, Low, Time, Disc, Low, _, ChildCount, ChildCount, Points, Points, Bridges, Bridges).
+	dfs_neighbors([Neighbor| Neighbors], Vertex, Parent, Graph, Time0, Disc0, Low0, Time, Disc, Low, VertexDisc, ChildCount0, ChildCount, Points0, Points, Bridges0, Bridges) :-
+		( Neighbor == Parent ->
+			dfs_neighbors(Neighbors, Vertex, Parent, Graph, Time0, Disc0, Low0, Time, Disc, Low, VertexDisc, ChildCount0, ChildCount, Points0, Points, Bridges0, Bridges)
+		; dfs_lookup(Neighbor, NeighborDisc, Disc0) ->
+			dfs_lookup(Vertex, VertexLow0, Low0),
+			NewVertexLow is min(VertexLow0, NeighborDisc),
+			dfs_insert(Low0, Vertex, NewVertexLow, Low1),
+			dfs_neighbors(Neighbors, Vertex, Parent, Graph, Time0, Disc0, Low1, Time, Disc, Low, VertexDisc, ChildCount0, ChildCount, Points0, Points, Bridges0, Bridges)
+		;	dfs_visit(Neighbor, Vertex, Graph, Time0, Disc0, Low0, Points0, Bridges0, Time1, Disc1, Low1, Points1, Bridges1),
+			dfs_lookup(Vertex, VertexLow0, Low1),
+			dfs_lookup(Neighbor, NeighborLow, Low1),
+			NewVertexLow is min(VertexLow0, NeighborLow),
+			dfs_insert(Low1, Vertex, NewVertexLow, Low2),
+			( Parent \== none,
+			  NeighborLow >= VertexDisc ->
+				set_insert(Points1, Vertex, Points2)
+			;	Points2 = Points1
+			),
+			( NeighborLow > VertexDisc ->
+				canonical_edge(Vertex, Neighbor, Edge),
+				set_insert(Bridges1, Edge, Bridges2)
+			;	Bridges2 = Bridges1
+			),
+			ChildCount1 is ChildCount0 + 1,
+			dfs_neighbors(Neighbors, Vertex, Parent, Graph, Time1, Disc1, Low2, Time, Disc, Low, VertexDisc, ChildCount1, ChildCount, Points2, Points, Bridges2, Bridges)
+		).
+
+	canonical_edge(Vertex1, Vertex2, Vertex1-Vertex2) :-
+		Vertex1 @< Vertex2,
+		!.
+	canonical_edge(Vertex1, Vertex2, Vertex2-Vertex1).
 
 	color_vertices([], _, Coloring, Coloring, NumberOfColors, NumberOfColors).
 	color_vertices([Vertex| Vertices], Graph, Coloring0, Coloring, NumberOfColors0, NumberOfColors) :-

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-02-25,
 		comment is 'Protocol for weighted graph predicates, extending the common graph protocol with weighted edge operations.'
 	]).
 
@@ -55,6 +55,20 @@
 	:- info(wneighbors/3, [
 		comment is 'Unifies ``WNeighbors`` with a list of ``NeighborVertex-Weight`` pairs for the neighbors of ``Vertex``. Fails if ``Vertex`` is not in the graph.',
 		argnames is ['Vertex', 'Graph', 'WNeighbors']
+	]).
+
+	:- public(min_path_bellman_ford/5).
+	:- mode(min_path_bellman_ford(+vertex, +vertex, +graph, -list(vertex), -number), zero_or_one).
+	:- info(min_path_bellman_ford/5, [
+		comment is 'Finds the minimum cost path from ``Vertex1`` to ``Vertex2`` using the Bellman-Ford algorithm. Supports negative edge weights and fails if no path exists or if a reachable negative cycle makes the optimum undefined.',
+		argnames is ['Vertex1', 'Vertex2', 'Graph', 'Path', 'Cost']
+	]).
+
+	:- public(has_negative_cycle/1).
+	:- mode(has_negative_cycle(+graph), zero_or_one).
+	:- info(has_negative_cycle/1, [
+		comment is 'True iff ``Graph`` contains a negative-weight cycle.',
+		argnames is ['Graph']
 	]).
 
 :- end_protocol.

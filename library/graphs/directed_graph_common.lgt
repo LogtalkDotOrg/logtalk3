@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-02-25,
 		comment is 'Common directed graph predicates shared by directed graph objects. Uses self-dispatch to call object-specific predicates and avltree for internal bookkeeping.'
 	]).
 
@@ -37,7 +37,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, member/2
+		length/2, member/2, reverse/2, subtract/3
 	]).
 
 	% === Degree queries ===
@@ -60,12 +60,29 @@
 		length(Vertices, N2),
 		N1 =:= N2.
 
+	has_cycle(Graph) :-
+		cycle(Graph, _),
+		!.
+
+	cycle(Graph, Cycle) :-
+		::vertices(Graph, Vertices),
+		member(Start, Vertices),
+		directed_cycle_from(Start, Start, Graph, [Start], ReverseCycle),
+		reverse(ReverseCycle, Cycle).
+
 	% === Strongly Connected Components (Tarjan's algorithm) ===
 
 	strongly_connected_components(Graph, SCCs) :-
 		::vertices(Graph, Vertices),
 		scc_new(Info0),
 		tarjan_all(Vertices, Graph, Info0, 0, [], [], _Info, _Index, _Stack, SCCs).
+
+	% === Weakly Connected Components ===
+
+	weakly_connected_components(Graph, Components) :-
+		::vertices(Graph, Vertices),
+		::symmetric_closure(Graph, Closure),
+		weakly_connected_components_loop(Vertices, Closure, [], Components).
 
 	% ===========================================================
 	% Auxiliary predicates
@@ -83,6 +100,30 @@
 		count_incoming(Vertices, Target, Graph, Degree1, Degree).
 
 	% --- Tarjan's SCC ---
+
+	directed_cycle_from(Current, Start, Graph, Visited, ReverseCycle) :-
+		::neighbors(Current, Graph, Neighbors),
+		member(Next, Neighbors),
+		( Next == Start ->
+			ReverseCycle = [Start| Visited]
+		; \+ member(Next, Visited),
+			directed_cycle_from(Next, Start, Graph, [Next| Visited], ReverseCycle)
+		).
+
+	weakly_connected_components_loop([], _, Components, Components).
+	weakly_connected_components_loop([Vertex| Vertices], Graph, Components0, Components) :-
+		( vertex_in_component(Vertex, Components0) ->
+			weakly_connected_components_loop(Vertices, Graph, Components0, Components)
+		;	::reachable(Vertex, Graph, Reachable),
+			subtract(Vertices, Reachable, Remaining),
+			weakly_connected_components_loop(Remaining, Graph, [Reachable| Components0], Components)
+		).
+
+	vertex_in_component(Vertex, [Component| Components]) :-
+		( member(Vertex, Component) ->
+			true
+		;	vertex_in_component(Vertex, Components)
+		).
 
 	tarjan_all([], _, Info, Index, Stack, SCCs, Info, Index, Stack, SCCs).
 	tarjan_all([Vertex| Vertices], Graph, Info0, Index0, Stack0, SCCs0, Info, Index, Stack, SCCs) :-

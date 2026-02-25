@@ -390,6 +390,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`diagram(Format) <diagram/1::all_libraries/1>`
 * :ref:`diagrams(Format) <diagrams/1::all_libraries/1>`
 
+``all_pairs_min_paths/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::all_pairs_min_paths/2>`
+
+``all_pairs_min_predecessors/2``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::all_pairs_min_predecessors/2>`
+
 ``all_score/1``
 ---------------
 
@@ -624,6 +644,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`java_utils_protocol <java_utils_protocol/0::array_to_terms/3>`
+
+``articulation_points/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`undirected_graph_common <undirected_graph_common/0::articulation_points/2>`
 
 ``as_curly_bracketed/2``
 ------------------------
@@ -1154,6 +1184,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`git_protocol <git_protocol/0::branch/2>`
+
+``breadth_first_order/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::breadth_first_order/3>`
+
+``bridges/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`undirected_graph_common <undirected_graph_common/0::bridges/2>`
 
 ``built_in_directive/4``
 ------------------------
@@ -2266,6 +2316,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`socket <socket/0::current_host/1>`
 
+``cycle/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`directed_graph_protocol <directed_graph_protocol/0::cycle/2>`
+* :ref:`undirected_graph_common <undirected_graph_common/0::cycle/2>`
+
 ``damerau_levenshtein/3``
 -------------------------
 
@@ -2993,6 +3054,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`termp <termp/0::depth/2>`
+
+``depth_first_order/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::depth_first_order/3>`
 
 ``derangement/2``
 -----------------
@@ -5423,6 +5494,27 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`statisticsp <statisticsp/0::harmonic_mean/2>`
+
+``has_cycle/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`directed_graph_protocol <directed_graph_protocol/0::has_cycle/1>`
+* :ref:`undirected_graph_common <undirected_graph_common/0::has_cycle/1>`
+
+``has_negative_cycle/1``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`weighted_graph_protocol <weighted_graph_protocol/0::has_negative_cycle/1>`
 
 ``has_path/3``
 --------------
@@ -8504,6 +8596,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`metagol <metagol/0::min_clauses/1>`
 
+``min_distances/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::min_distances/3>`
+
 ``min_max/3``
 -------------
 
@@ -8535,6 +8637,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`graph_protocol <graph_protocol/0::min_path/5>`
 
+``min_path_bellman_ford/5``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`weighted_graph_protocol <weighted_graph_protocol/0::min_path_bellman_ford/5>`
+
 ``min_paths/3``
 ---------------
 
@@ -8544,6 +8656,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`weighted_directed_graph(Dictionary) <weighted_directed_graph/1::min_paths/3>`
+
+``min_predecessors/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`graph_protocol <graph_protocol/0::min_predecessors/3>`
 
 ``min_tree/3``
 --------------
@@ -14622,6 +14744,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::wall_time/1>`
+
+``weakly_connected_components/2``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`directed_graph_protocol <directed_graph_protocol/0::weakly_connected_components/2>`
 
 ``weibull/3``
 -------------

@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-20,
+		date is 2026-02-25,
 		comment is 'Common weighted graph predicates shared by both weighted directed and weighted undirected graph objects. Uses self-dispatch to call object-specific predicates such as ``add_edge/5``, ``delete_edge/5``, and ``edges/2``.',
 		parnames is ['Dictionary']
 	]).
@@ -45,7 +45,7 @@
 	]).
 
 	:- uses(list, [
-		member/2, reverse/2
+		member/2, reverse/2, length/2
 	]).
 
 	:- uses(pairs, [
@@ -158,15 +158,41 @@
 	% === Min Path (Dijkstra) ===
 
 	min_path(Vertex1, Vertex2, Graph, Path, Cost) :-
+		(	has_negative_edge(Graph) ->
+			min_path_bellman_ford(Vertex1, Vertex2, Graph, Path, Cost)
+		;	(	Vertex1 == Vertex2 ->
+				neighbors(Vertex1, Graph, _),
+				Path = [Vertex1], Cost = 0
+			;	dict_new(Dist0),
+				dict_insert(Dist0, Vertex1, 0-none, Dist1),
+				dijkstra([0-Vertex1], Vertex2, Graph, Dist1, FinalDist),
+				dict_lookup(Vertex2, Cost-_, FinalDist),
+				trace_back(Vertex2, Vertex1, FinalDist, [Vertex2], Path)
+			)
+		).
+
+	min_path_bellman_ford(Vertex1, Vertex2, Graph, Path, Cost) :-
 		(	Vertex1 == Vertex2 ->
 			neighbors(Vertex1, Graph, _),
 			Path = [Vertex1], Cost = 0
-		;	dict_new(Dist0),
-			dict_insert(Dist0, Vertex1, 0-none, Dist1),
-			dijkstra([0-Vertex1], Vertex2, Graph, Dist1, FinalDist),
-			dict_lookup(Vertex2, Cost-_, FinalDist),
-			trace_back(Vertex2, Vertex1, FinalDist, [Vertex2], Path)
+		;	vertices(Graph, Vertices),
+			init_distance_map(Vertices, Vertex1, Dist0),
+			length(Vertices, NumberOfVertices),
+			Iterations is max(0, NumberOfVertices - 1),
+			bellman_ford_relax(Iterations, Vertices, Graph, Dist0, Dist1),
+			\+ bellman_ford_relaxable(Vertices, Graph, Dist1),
+			dict_lookup(Vertex2, Cost-_, Dist1),
+			Cost \== inf,
+			trace_back(Vertex2, Vertex1, Dist1, [Vertex2], Path)
 		).
+
+	has_negative_cycle(Graph) :-
+		vertices(Graph, Vertices),
+		init_zero_distance_map(Vertices, Dist0),
+		length(Vertices, NumberOfVertices),
+		Iterations is max(0, NumberOfVertices - 1),
+		bellman_ford_relax(Iterations, Vertices, Graph, Dist0, Dist1),
+		bellman_ford_relaxable(Vertices, Graph, Dist1).
 
 	% === Max Path (DFS exploring all simple paths) ===
 
@@ -271,10 +297,107 @@
 			pq_insert(Rest, D1-Vertex1, Rest1)
 		).
 
+	% --- Bellman-Ford shortest path and cycle detection ---
+
+	has_negative_edge(Graph) :-
+		vertices(Graph, Vertices),
+		has_negative_edge_from_vertices(Vertices, Graph).
+
+	has_negative_edge_from_vertices([Vertex| _], Graph) :-
+		wnighbors_with_negative_weight(Vertex, Graph),
+		!.
+	has_negative_edge_from_vertices([_| Vertices], Graph) :-
+		has_negative_edge_from_vertices(Vertices, Graph).
+
+	wnighbors_with_negative_weight(Vertex, Graph) :-
+		dict_lookup(Vertex, WNeighbors, Graph),
+		member(_-Weight, WNeighbors),
+		Weight < 0.
+
+	init_distance_map([], _, Dist) :-
+		dict_new(Dist).
+	init_distance_map([Vertex| Vertices], Source, Dist) :-
+		init_distance_map(Vertices, Source, Dist0),
+		(	Vertex == Source ->
+			dict_insert(Dist0, Vertex, 0-none, Dist)
+		;	dict_insert(Dist0, Vertex, inf-none, Dist)
+		).
+
+	init_zero_distance_map([], Dist) :-
+		dict_new(Dist).
+	init_zero_distance_map([Vertex| Vertices], Dist) :-
+		init_zero_distance_map(Vertices, Dist0),
+		dict_insert(Dist0, Vertex, 0-none, Dist).
+
+	bellman_ford_relax(0, _, _, Dist, Dist) :-
+		!.
+	bellman_ford_relax(Iterations, Vertices, Graph, Dist0, Dist) :-
+		bellman_ford_relax_vertices(Vertices, Graph, Dist0, Dist1, Changed),
+		(Changed == true ->
+			NextIterations is Iterations - 1,
+			bellman_ford_relax(NextIterations, Vertices, Graph, Dist1, Dist)
+		;	Dist = Dist1
+		).
+
+	bellman_ford_relax_vertices([], _, Dist, Dist, false).
+	bellman_ford_relax_vertices([Vertex| Vertices], Graph, Dist0, Dist, Changed) :-
+		dict_lookup(Vertex, Distance-_, Dist0),
+		(	dict_lookup(Vertex, WNeighbors, Graph) ->
+			bellman_ford_relax_wneighbors(WNeighbors, Vertex, Distance, Dist0, Dist1, Changed0)
+		;	Dist1 = Dist0,
+			Changed0 = false
+		),
+		bellman_ford_relax_vertices(Vertices, Graph, Dist1, Dist2, Changed1),
+		(Changed0 == true ->
+			Changed = true
+		;	Changed = Changed1
+		),
+		Dist = Dist2.
+
+	bellman_ford_relax_wneighbors([], _, _, Dist, Dist, false).
+	bellman_ford_relax_wneighbors([Neighbor-Weight| WNeighbors], Vertex, Distance, Dist0, Dist, Changed) :-
+		dict_lookup(Neighbor, NeighborDistance-_, Dist0),
+		bellman_relax_step(Distance, Weight, NeighborDistance, Better, NewNeighborDistance),
+		(	Better == true ->
+			dict_insert(Dist0, Neighbor, NewNeighborDistance-Vertex, Dist1),
+			bellman_ford_relax_wneighbors(WNeighbors, Vertex, Distance, Dist1, Dist2, ChangedRest),
+			Changed = true
+		;	bellman_ford_relax_wneighbors(WNeighbors, Vertex, Distance, Dist0, Dist2, ChangedRest),
+			Changed = ChangedRest
+		),
+		Dist = Dist2.
+
+	bellman_relax_step(inf, _, _, false, _).
+	bellman_relax_step(Distance1, _, _, false, _) :-
+		\+ number(Distance1),
+		!.
+	bellman_relax_step(Distance1, Weight, inf, true, NewDistance2) :-
+		number(Distance1),
+		NewDistance2 is Distance1 + Weight.
+	bellman_relax_step(Distance1, Weight, Distance2, Better, NewDistance2) :-
+		number(Distance1),
+		number(Distance2),
+		NewDistance2 is Distance1 + Weight,
+		(	NewDistance2 < Distance2 ->
+			Better = true
+		;	Better = false
+		).
+
+	bellman_ford_relaxable([Vertex| _], Graph, Dist) :-
+		dict_lookup(Vertex, Distance-_, Dist),
+		dict_lookup(Vertex, WNeighbors, Graph),
+		member(Neighbor-Weight, WNeighbors),
+		dict_lookup(Neighbor, NeighborDistance-_, Dist),
+		bellman_relax_step(Distance, Weight, NeighborDistance, true, _),
+		!.
+	bellman_ford_relaxable([_| Vertices], Graph, Dist) :-
+		bellman_ford_relaxable(Vertices, Graph, Dist).
+
 	trace_back(Vertex, Vertex, _, Path, Path) :-
 		!.
 	trace_back(Vertex, Start, Dist, Acc, Path) :-
 		dict_lookup(Vertex, _-Previous, Dist),
+		Previous \== none,
 		trace_back(Previous, Start, Dist, [Previous| Acc], Path).
 
 	% --- DFS max_path (weighted) ---

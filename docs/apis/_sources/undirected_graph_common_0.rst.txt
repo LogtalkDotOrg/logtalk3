@@ -15,7 +15,7 @@ Common predicates shared by undirected graph objects. Uses self-dispatch to call
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-23
+| **Date:** 2026-02-25
 
 | **Compilation flags:**
 |    ``static``
@@ -24,6 +24,7 @@ Common predicates shared by undirected graph objects. Uses self-dispatch to call
 | **Extends:**
 |    ``public`` :ref:`graph_common <graph_common/0>`
 | **Uses:**
+|    :ref:`avltree <avltree/0>`
 |    :ref:`list <list/0>`
 |    :ref:`set <set/0>`
 
@@ -31,7 +32,7 @@ Common predicates shared by undirected graph objects. Uses self-dispatch to call
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`graph_protocol/0::add_edges/3`  :ref:`graph_protocol/0::add_vertex/3`  :ref:`graph_protocol/0::add_vertices/3`  :ref:`graph_protocol/0::delete_edges/3`  :ref:`graph_protocol/0::delete_vertex/3`  :ref:`graph_protocol/0::delete_vertices/3`  :ref:`graph_protocol/0::edges/2`  :ref:`graph_protocol/0::empty/1`  :ref:`graph_protocol/0::has_path/3`  :ref:`graph_protocol/0::is_bipartite/1`  :ref:`graph_protocol/0::is_complete/1`  :ref:`graph_protocol/0::is_sparse/1`  :ref:`graph_protocol/0::max_path/5`  :ref:`graph_protocol/0::min_path/5`  :ref:`graph_protocol/0::neighbors/3`  :ref:`graph_protocol/0::new/1`  :ref:`graph_protocol/0::new/2`  :ref:`graph_protocol/0::new/3`  :ref:`graph_protocol/0::number_of_edges/2`  :ref:`graph_protocol/0::number_of_vertices/2`  :ref:`graph_protocol/0::path/3`  :ref:`graph_protocol/0::reachable/3`  :ref:`graph_protocol/0::vertices/2`  
+|     :ref:`graph_protocol/0::add_edges/3`  :ref:`graph_protocol/0::add_vertex/3`  :ref:`graph_protocol/0::add_vertices/3`  :ref:`graph_protocol/0::all_pairs_min_paths/2`  :ref:`graph_protocol/0::all_pairs_min_predecessors/2`  :ref:`graph_protocol/0::breadth_first_order/3`  :ref:`graph_protocol/0::delete_edges/3`  :ref:`graph_protocol/0::delete_vertex/3`  :ref:`graph_protocol/0::delete_vertices/3`  :ref:`graph_protocol/0::depth_first_order/3`  :ref:`graph_protocol/0::edges/2`  :ref:`graph_protocol/0::empty/1`  :ref:`graph_protocol/0::has_path/3`  :ref:`graph_protocol/0::is_bipartite/1`  :ref:`graph_protocol/0::is_complete/1`  :ref:`graph_protocol/0::is_sparse/1`  :ref:`graph_protocol/0::max_path/5`  :ref:`graph_protocol/0::min_distances/3`  :ref:`graph_protocol/0::min_path/5`  :ref:`graph_protocol/0::min_predecessors/3`  :ref:`graph_protocol/0::neighbors/3`  :ref:`graph_protocol/0::new/1`  :ref:`graph_protocol/0::new/2`  :ref:`graph_protocol/0::new/3`  :ref:`graph_protocol/0::number_of_edges/2`  :ref:`graph_protocol/0::number_of_vertices/2`  :ref:`graph_protocol/0::path/3`  :ref:`graph_protocol/0::reachable/3`  :ref:`graph_protocol/0::vertices/2`  
 
 .. contents::
    :local:
@@ -59,6 +60,44 @@ True iff the graph is a tree, i.e. it is connected and has exactly ``|V| - 1`` e
 
 ------------
 
+.. index:: has_cycle/1
+.. _undirected_graph_common/0::has_cycle/1:
+
+``has_cycle/1``
+^^^^^^^^^^^^^^^
+
+True iff the graph contains at least one cycle.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``has_cycle(Graph)``
+| **Mode and number of proofs:**
+|    ``has_cycle(+graph)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: cycle/2
+.. _undirected_graph_common/0::cycle/2:
+
+``cycle/2``
+^^^^^^^^^^^
+
+Enumerates cycles as lists of vertices where the first and last vertices are the same.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cycle(Graph,Cycle)``
+| **Mode and number of proofs:**
+|    ``cycle(+graph,-list(vertex))`` - ``zero_or_more``
+
+
+------------
+
 .. index:: graph_coloring/3
 .. _undirected_graph_common/0::graph_coloring/3:
 
@@ -74,6 +113,44 @@ Computes a greedy vertex coloring of the graph. ``Coloring`` is a list of ``Vert
 |    ``graph_coloring(Graph,Coloring,NumberOfColors)``
 | **Mode and number of proofs:**
 |    ``graph_coloring(+graph,-list(pair),-integer)`` - ``one``
+
+
+------------
+
+.. index:: articulation_points/2
+.. _undirected_graph_common/0::articulation_points/2:
+
+``articulation_points/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes all articulation points (cut vertices) of the graph. The result is a sorted list of vertices.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``articulation_points(Graph,Points)``
+| **Mode and number of proofs:**
+|    ``articulation_points(+graph,-list(vertex))`` - ``one``
+
+
+------------
+
+.. index:: bridges/2
+.. _undirected_graph_common/0::bridges/2:
+
+``bridges/2``
+^^^^^^^^^^^^^
+
+Computes all bridges (cut edges) of the graph. Each bridge is returned once as ``Vertex1-Vertex2`` with ``Vertex1 @< Vertex2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bridges(Graph,Bridges)``
+| **Mode and number of proofs:**
+|    ``bridges(+graph,-list(edge))`` - ``one``
 
 
 ------------

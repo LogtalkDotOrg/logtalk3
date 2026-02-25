@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-02-25,
 		comment is 'Common graph predicates shared by all graph objects. Uses self-dispatch to call object-specific predicates such as ``neighbors/3``, ``vertices/2``, and ``edges/2``.'
 	]).
 
@@ -104,6 +104,16 @@
 		::neighbors(Vertex, Graph, _),
 		reachable_aux([Vertex], Graph, [Vertex], Vertices).
 
+	breadth_first_order(Vertex, Graph, Vertices) :-
+		::neighbors(Vertex, Graph, _),
+		breadth_first_order_aux([Vertex], Graph, [Vertex], [], ReverseVertices),
+		reverse(ReverseVertices, Vertices).
+
+	depth_first_order(Vertex, Graph, Vertices) :-
+		::neighbors(Vertex, Graph, _),
+		depth_first_order_aux([Vertex], Graph, [Vertex], [], ReverseVertices),
+		reverse(ReverseVertices, Vertices).
+
 	reachable_aux([], _, Visited, Visited).
 	reachable_aux([Vertex| Vertices], Graph, Visited, Reachable) :-
 		(	::neighbors(Vertex, Graph, Neighbors) ->
@@ -114,11 +124,58 @@
 		),
 		reachable_aux(NextToVisit, Graph, NewVisited, Reachable).
 
+	breadth_first_order_aux([], _, _, ReverseVertices, ReverseVertices).
+	breadth_first_order_aux([Vertex| Queue], Graph, Visited, ReverseVertices0, ReverseVertices) :-
+		::neighbors(Vertex, Graph, Neighbors),
+		bfs_collect_unvisited(Neighbors, Visited, [], NewVertices, NewVisited),
+		append(Queue, NewVertices, NextQueue),
+		breadth_first_order_aux(NextQueue, Graph, NewVisited, [Vertex| ReverseVertices0], ReverseVertices).
+
+	bfs_collect_unvisited([], Visited, NewVertices, NewVertices, Visited).
+	bfs_collect_unvisited([Neighbor| Neighbors], Visited0, NewVertices0, NewVertices, Visited) :-
+		(	member(Neighbor, Visited0) ->
+			bfs_collect_unvisited(Neighbors, Visited0, NewVertices0, NewVertices, Visited)
+		;	append(NewVertices0, [Neighbor], NewVertices1),
+			bfs_collect_unvisited(Neighbors, [Neighbor| Visited0], NewVertices1, NewVertices, Visited)
+		).
+
+	depth_first_order_aux([], _, _, ReverseVertices, ReverseVertices).
+	depth_first_order_aux([Vertex| Stack], Graph, Visited, ReverseVertices0, ReverseVertices) :-
+		::neighbors(Vertex, Graph, Neighbors),
+		reverse(Neighbors, ReversedNeighbors),
+		dfs_push_unvisited(ReversedNeighbors, Visited, Stack, NextStack, NewVisited),
+		depth_first_order_aux(NextStack, Graph, NewVisited, [Vertex| ReverseVertices0], ReverseVertices).
+
+	dfs_push_unvisited([], Visited, Stack, Stack, Visited).
+	dfs_push_unvisited([Neighbor| Neighbors], Visited0, Stack0, Stack, Visited) :-
+		(	member(Neighbor, Visited0) ->
+			dfs_push_unvisited(Neighbors, Visited0, Stack0, Stack, Visited)
+		;	dfs_push_unvisited(Neighbors, [Neighbor| Visited0], [Neighbor| Stack0], Stack, Visited)
+		).
+
 	% === Path existence ===
 
 	has_path(Vertex1, Vertex2, Graph) :-
 		reachable(Vertex1, Graph, Reachable),
 		set_memberchk(Vertex2, Reachable).
+
+	min_distances(Vertex, Graph, Distances) :-
+		::neighbors(Vertex, Graph, _),
+		::vertices(Graph, Vertices),
+		min_distances_from_vertices(Vertices, Vertex, Graph, Distances).
+
+	min_predecessors(Vertex, Graph, Predecessors) :-
+		::neighbors(Vertex, Graph, _),
+		::vertices(Graph, Vertices),
+		min_predecessors_from_vertices(Vertices, Vertex, Graph, Predecessors).
+
+	all_pairs_min_paths(Graph, Pairs) :-
+		::vertices(Graph, Vertices),
+		all_pairs_min_paths_sources(Vertices, Graph, Pairs).
+
+	all_pairs_min_predecessors(Graph, Pairs) :-
+		::vertices(Graph, Vertices),
+		all_pairs_min_predecessors_sources(Vertices, Graph, Pairs).
 
 	% === Nondeterministic maximal paths ===
 
@@ -143,6 +200,53 @@
 		;	Result = [Neighbor|Rest],
 			unvisited(Neighbors, Visited, Rest)
 		).
+
+	min_distances_from_vertices([], _, _, []).
+	min_distances_from_vertices([Target| Targets], Source, Graph, [Target-Cost| Distances]) :-
+		::min_path(Source, Target, Graph, _, Cost),
+		!,
+		min_distances_from_vertices(Targets, Source, Graph, Distances).
+	min_distances_from_vertices([_| Targets], Source, Graph, Distances) :-
+		min_distances_from_vertices(Targets, Source, Graph, Distances).
+
+	min_predecessors_from_vertices([], _, _, []).
+	min_predecessors_from_vertices([Target| Targets], Source, Graph, [Target-Predecessor| Predecessors]) :-
+		::min_path(Source, Target, Graph, Path, _),
+		!,
+		path_predecessor(Path, Source, Predecessor),
+		min_predecessors_from_vertices(Targets, Source, Graph, Predecessors).
+	min_predecessors_from_vertices([_| Targets], Source, Graph, Predecessors) :-
+		min_predecessors_from_vertices(Targets, Source, Graph, Predecessors).
+
+	path_predecessor([Source], Source, none) :-
+		!.
+	path_predecessor([First,Second], _, First) :-
+		Second \== none,
+		!.
+	path_predecessor([_| Tail], Source, Predecessor) :-
+		path_predecessor(Tail, Source, Predecessor).
+
+	all_pairs_min_paths_sources([], _, []).
+	all_pairs_min_paths_sources([Source| Sources], Graph, Pairs) :-
+		::min_distances(Source, Graph, Distances),
+		tag_distances(Source, Distances, SourcePairs),
+		all_pairs_min_paths_sources(Sources, Graph, RestPairs),
+		append(SourcePairs, RestPairs, Pairs).
+
+	tag_distances(_, [], []).
+	tag_distances(Source, [Target-Cost| Distances], [((Source-Target)-Cost)| Pairs]) :-
+		tag_distances(Source, Distances, Pairs).
+
+	all_pairs_min_predecessors_sources([], _, []).
+	all_pairs_min_predecessors_sources([Source| Sources], Graph, Pairs) :-
+		::min_predecessors(Source, Graph, Predecessors),
+		tag_predecessors(Source, Predecessors, SourcePairs),
+		all_pairs_min_predecessors_sources(Sources, Graph, RestPairs),
+		append(SourcePairs, RestPairs, Pairs).
+
+	tag_predecessors(_, [], []).
+	tag_predecessors(Source, [Target-Predecessor| Predecessors], [((Source-Target)-Predecessor)| Pairs]) :-
+		tag_predecessors(Source, Predecessors, Pairs).
 
 	% === Completeness ===
 

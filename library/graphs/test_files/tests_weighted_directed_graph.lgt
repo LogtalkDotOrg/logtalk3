@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-02-25,
 		comment is 'Unit tests for the "weighted_directed_graph" library predicates.',
 		parnames is ['DictionaryObject']
 	]).
@@ -40,20 +40,28 @@
 		add_edges/3, delete_edge/5, delete_edges/3,
 		neighbors/3, wneighbors/3,
 		reachable/3,
+		breadth_first_order/3, depth_first_order/3,
 		transpose/2,
 		transitive_closure/2,
 		symmetric_closure/2,
 		topological_sort/2,
+		all_pairs_min_paths/2,
+		all_pairs_min_predecessors/2,
 		min_path/5, max_path/5,
+		min_path_bellman_ford/5,
 		min_paths/3,
+		min_distances/3, min_predecessors/3,
 		number_of_vertices/2, number_of_edges/2,
 		path/3, has_path/3,
 		in_degree/3, out_degree/3,
 		is_acyclic/1,
+		has_cycle/1, cycle/2,
 		strongly_connected_components/2,
+		weakly_connected_components/2,
 		is_complete/1,
 		is_bipartite/1,
-		is_sparse/1
+		is_sparse/1,
+		has_negative_cycle/1
 	]).
 
 	cover(weighted_directed_graph(_DictionaryObject_)).
@@ -194,6 +202,26 @@
 		new([(1-2)-5], Graph),
 		reachable(42, Graph, _).
 
+	% breadth_first_order/3 tests
+
+	test(wdg_breadth_first_order_3_01, true(Vertices == [1,2,3,4,5])) :-
+		new([(1-2)-1, (1-3)-1, (2-4)-1, (3-5)-1], Graph),
+		breadth_first_order(1, Graph, Vertices).
+
+	test(wdg_breadth_first_order_3_02, false) :-
+		new([(1-2)-1, (1-3)-1, (2-4)-1, (3-5)-1], Graph),
+		breadth_first_order(42, Graph, _).
+
+	% depth_first_order/3 tests
+
+	test(wdg_depth_first_order_3_01, true(Vertices == [1,2,4,3,5])) :-
+		new([(1-2)-1, (1-3)-1, (2-4)-1, (3-5)-1], Graph),
+		depth_first_order(1, Graph, Vertices).
+
+	test(wdg_depth_first_order_3_02, false) :-
+		new([(1-2)-1, (1-3)-1, (2-4)-1, (3-5)-1], Graph),
+		depth_first_order(42, Graph, _).
+
 	% transpose/2 tests
 
 	test(wdg_transpose_2_01, true(Edges == [(2-1)-5, (3-1)-10])) :-
@@ -206,6 +234,26 @@
 	test(wdg_topological_sort_2_01, true(Sorted == [1,2,3])) :-
 		new([(1-2)-5, (2-3)-10], Graph),
 		topological_sort(Graph, Sorted).
+
+	% all_pairs_min_paths/2 tests
+
+	test(wdg_all_pairs_min_paths_2_01, true(Pairs == [((1-1)-0),((1-2)-4),((1-3)-2),((2-2)-0),((2-3)-(-2)),((3-3)-0)])) :-
+		new([(1-2)-4, (1-3)-5, (2-3)-(-2)], Graph),
+		all_pairs_min_paths(Graph, Pairs).
+
+	test(wdg_all_pairs_min_paths_2_02, true(Pairs == [((1-1)-0),((2-2)-0)])) :-
+		new([1,2], [], Graph),
+		all_pairs_min_paths(Graph, Pairs).
+
+	% all_pairs_min_predecessors/2 tests
+
+	test(wdg_all_pairs_min_predecessors_2_01, true(Pairs == [((1-1)-none),((1-2)-1),((1-3)-2),((2-2)-none),((2-3)-2),((3-3)-none)])) :-
+		new([(1-2)-4, (1-3)-5, (2-3)-(-2)], Graph),
+		all_pairs_min_predecessors(Graph, Pairs).
+
+	test(wdg_all_pairs_min_predecessors_2_02, true(Pairs == [((1-1)-none),((2-2)-none)])) :-
+		new([1,2], [], Graph),
+		all_pairs_min_predecessors(Graph, Pairs).
 
 	% min_path/5 tests
 
@@ -220,6 +268,42 @@
 	test(wdg_min_path_5_03, false) :-
 		new([(1-2)-5, (3-4)-10], Graph),
 		min_path(1, 4, Graph, _, _).
+
+	test(wdg_min_path_5_04, true((Path == [1,2,3], Cost == 2))) :-
+		new([(1-2)-4, (1-3)-5, (2-3)-(-2)], Graph),
+		min_path(1, 3, Graph, Path, Cost).
+
+	% min_distances/3 tests
+
+	test(wdg_min_distances_3_01, true(Distances == [1-0,2-4,3-2])) :-
+		new([(1-2)-4, (1-3)-5, (2-3)-(-2)], Graph),
+		min_distances(1, Graph, Distances).
+
+	% min_predecessors/3 tests
+
+	test(wdg_min_predecessors_3_01, true(Predecessors == [1-none,2-1,3-2])) :-
+		new([(1-2)-4, (1-3)-5, (2-3)-(-2)], Graph),
+		min_predecessors(1, Graph, Predecessors).
+
+	% min_path_bellman_ford/5 tests
+
+	test(wdg_min_path_bellman_ford_5_01, true((Path == [1,2,3], Cost == 2))) :-
+		new([(1-2)-4, (1-3)-5, (2-3)-(-2)], Graph),
+		min_path_bellman_ford(1, 3, Graph, Path, Cost).
+
+	test(wdg_min_path_bellman_ford_5_02, false) :-
+		new([(1-2)-1, (2-3)-(-2), (3-2)-(-2)], Graph),
+		min_path_bellman_ford(1, 3, Graph, _, _).
+
+	% has_negative_cycle/1 tests
+
+	test(wdg_has_negative_cycle_1_01, true) :-
+		new([(1-2)-1, (2-3)-(-2), (3-1)-(-2)], Graph),
+		has_negative_cycle(Graph).
+
+	test(wdg_has_negative_cycle_1_02, false) :-
+		new([(1-2)-5, (2-3)-(-1), (1-3)-10], Graph),
+		has_negative_cycle(Graph).
 
 	% edge/4 additional test (wfind lookup past first neighbor)
 
@@ -338,6 +422,26 @@
 		new([(1-2)-5, (2-3)-10, (3-1)-7], Graph),
 		is_acyclic(Graph).
 
+	% has_cycle/1 tests
+
+	test(wdg_has_cycle_1_01, true) :-
+		new([(1-2)-5, (2-3)-10, (3-1)-7], Graph),
+		has_cycle(Graph).
+
+	test(wdg_has_cycle_1_02, false) :-
+		new([(1-2)-5, (2-3)-10], Graph),
+		has_cycle(Graph).
+
+	% cycle/2 tests
+
+	test(wdg_cycle_2_01, true(Cycle == [1,2,3,1])) :-
+		new([(1-2)-5, (2-3)-10, (3-1)-7], Graph),
+		cycle(Graph, Cycle).
+
+	test(wdg_cycle_2_02, false) :-
+		new([(1-2)-5, (2-3)-10], Graph),
+		cycle(Graph, _).
+
 	% strongly_connected_components/2 tests
 
 	test(wdg_strongly_connected_components_2_01, true(Components == [[1],[2],[3]])) :-
@@ -347,6 +451,16 @@
 	test(wdg_strongly_connected_components_2_02, true(Components == [[1,2,3]])) :-
 		new([(1-2)-5, (2-3)-10, (3-1)-7], Graph),
 		strongly_connected_components(Graph, Components).
+
+	% weakly_connected_components/2 tests
+
+	test(wdg_weakly_connected_components_2_01, subsumes([_], Components)) :-
+		new([(1-2)-5, (2-3)-10], Graph),
+		weakly_connected_components(Graph, Components).
+
+	test(wdg_weakly_connected_components_2_02, subsumes([_, _], Components)) :-
+		new([(1-2)-5, (3-4)-10], Graph),
+		weakly_connected_components(Graph, Components).
 
 	% is_complete/1 tests
 
