@@ -30,7 +30,7 @@
 		parameters is [
 			'Representation' - 'Text representation for the UUID. Possible values are ``atom``, ``chars``, and ``codes``.'
 		],
-		see_also is [uuid, ids(_, _), nanoid(_, _, _), ulid(_)]
+		see_also is [uuid, cuid2(_, _, _), ksuid(_, _), ids(_, _), nanoid(_, _, _), ulid(_)]
 	]).
 
 	uuid_v1([Byte11, Byte12, Byte13, Byte14, Byte15, Byte16], UUID) :-
@@ -222,7 +222,7 @@
 		author is 'Paulo Moura',
 		date is 2026-02-26,
 		comment is 'Universally unique identifier (UUID) generator using an atom representation.',
-		see_also is [uuid(_), ids, nanoid, ulid]
+		see_also is [uuid(_), cuid2, ksuid, ids, nanoid, ulid]
 	]).
 
 :- end_object.

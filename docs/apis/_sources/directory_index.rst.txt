@@ -289,6 +289,18 @@ To load an entity, always load the library that includes it using the goal ``log
    csv_guess_questions <csv_guess_questions_0>
    csv_protocol <csv_protocol_0>
 
+``library/cuid2/``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   cuid2 <cuid2_0>
+   cuid2(Representation,Size,Alphabet) <cuid2_3>
+   cuid2_protocol <cuid2_protocol_0>
+
 ``library/datalog/``
 --------------------
 
@@ -698,6 +710,18 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    knn <knn_0>
+
+``library/ksuid/``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   ksuid <ksuid_0>
+   ksuid(Representation,Alphabet) <ksuid_2>
+   ksuid_protocol <ksuid_protocol_0>
 
 ``library/linda/``
 ------------------

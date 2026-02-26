@@ -119,6 +119,8 @@ Objects
    csv <csv_0>
    csv(A,B,C) <csv_3>
    csv(Header,Separator,IgnoreQuotes,Comments) <csv_4>
+   cuid2 <cuid2_0>
+   cuid2(Representation,Size,Alphabet) <cuid2_3>
    d2_graph_language <d2_graph_language_0>
    datalog <datalog_0>
    date <date_0>
@@ -209,6 +211,8 @@ Objects
    json_schema(StringRepresentation) <json_schema_1>
    json_schema(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_schema_3>
    knn <knn_0>
+   ksuid <ksuid_0>
+   ksuid(Representation,Alphabet) <ksuid_2>
    lgtdoc <lgtdoc_0>
    lgtunit <lgtunit_0>
    library_dependency_diagram <library_dependency_diagram_0>
@@ -371,6 +375,7 @@ Protocols
    combinations_protocol <combinations_protocol_0>
    comparingp <comparingp_0>
    csv_protocol <csv_protocol_0>
+   cuid2_protocol <cuid2_protocol_0>
    databasep <databasep_0>
    datalog_protocol <datalog_protocol_0>
    dataset_protocol <dataset_protocol_0>
@@ -398,6 +403,7 @@ Protocols
    json_lines_protocol <json_lines_protocol_0>
    json_protocol <json_protocol_0>
    json_schema_protocol <json_schema_protocol_0>
+   ksuid_protocol <ksuid_protocol_0>
    lgtdocp <lgtdocp_0>
    listp <listp_0>
    loggingp <loggingp_0>

@@ -51,6 +51,7 @@ logtalk_library_path(command_line_options, library('command_line_options/')).
 logtalk_library_path(coroutining, library('coroutining/')).
 logtalk_library_path(ccsds, library('ccsds/')).
 logtalk_library_path(csv, library('csv/')).
+logtalk_library_path(cuid2, library('cuid2/')).
 logtalk_library_path(datalog, library('datalog/')).
 logtalk_library_path(dates, library('dates/')).
 logtalk_library_path(dependents, library('dependents/')).
@@ -83,6 +84,7 @@ logtalk_library_path(json_lines, library('json_lines/')).
 logtalk_library_path(json_schema, library('json_schema/')).
 logtalk_library_path(json_ld, library('json_ld/')).
 logtalk_library_path(knn, library('knn/')).
+logtalk_library_path(ksuid, library('ksuid/')).
 logtalk_library_path(linda, library('linda/')).
 logtalk_library_path(listing, library('listing/')).
 logtalk_library_path(logging, library('logging/')).

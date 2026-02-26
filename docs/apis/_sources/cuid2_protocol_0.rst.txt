@@ -1,0 +1,74 @@
+.. index:: single: cuid2_protocol
+.. _cuid2_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``cuid2_protocol``
+==================
+
+Cuid2 generator protocol.
+
+| **Availability:** 
+|    ``logtalk_load(cuid2(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-26
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: generate/1
+.. _cuid2_protocol/0::generate/1:
+
+``generate/1``
+^^^^^^^^^^^^^^
+
+Returns a Cuid2 identifier.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Cuid2)``
+| **Mode and number of proofs:**
+|    ``generate(--ground)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

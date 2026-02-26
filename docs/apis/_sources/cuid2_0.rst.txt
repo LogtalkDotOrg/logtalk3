@@ -1,0 +1,60 @@
+.. index:: single: cuid2
+.. _cuid2/0:
+
+.. rst-class:: right
+
+**object**
+
+``cuid2``
+=========
+
+Cuid2 generator using atom representation, 24 symbols, and a lowercase alphanumeric alphabet.
+
+| **Availability:** 
+|    ``logtalk_load(cuid2(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-26
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`cuid2(atom,24,abcdefghijklmnopqrstuvwxyz0123456789) <cuid2/3>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`cuid2_protocol/0::generate/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`cuid2(Representation,Size,Alphabet) <cuid2/3>`, :ref:`ksuid <ksuid/0>`, :ref:`nanoid <nanoid/0>`, :ref:`ids <ids/0>`, :ref:`ulid <ulid/0>`, :ref:`uuid <uuid/0>`
+

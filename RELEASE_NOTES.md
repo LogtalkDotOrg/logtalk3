@@ -176,7 +176,8 @@ over coordinates.
 * ADDED: New `time_scales` library providing predicates for converting
 between UTC, TAI, TT, UT1, TDB, GPS, GST, TCG, and TCB instants.
 
-* ADDED: New `nanoid` library implementing the NanoID spec.
+* ADDED: New `cuid2`, `ksuid`, and `nanoid` libraries implementing,
+respectively, the Cuid2, KSUID, and NanoID specs.
 
 * ADDED: Types `text` and `text(CharSet)` to the `arbitrary` and `types`
 libraries. These types support representing text using atoms, character 

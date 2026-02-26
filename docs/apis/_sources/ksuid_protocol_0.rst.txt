@@ -1,0 +1,74 @@
+.. index:: single: ksuid_protocol
+.. _ksuid_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``ksuid_protocol``
+==================
+
+KSUID generator protocol.
+
+| **Availability:** 
+|    ``logtalk_load(ksuid(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-26
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: generate/1
+.. _ksuid_protocol/0::generate/1:
+
+``generate/1``
+^^^^^^^^^^^^^^
+
+Returns a KSUID.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(KSUID)``
+| **Mode and number of proofs:**
+|    ``generate(--ground)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

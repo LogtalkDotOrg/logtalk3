@@ -241,6 +241,18 @@ To load any library (including developer tools, ports, and contributions), use t
    csv_guess_questions <csv_guess_questions_0>
    csv_protocol <csv_protocol_0>
 
+:ref:`cuid2 <library_cuid2>`
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   cuid2 <cuid2_0>
+   cuid2(Representation,Size,Alphabet) <cuid2_3>
+   cuid2_protocol <cuid2_protocol_0>
+
 :ref:`datalog <library_datalog>`
 --------------------------------
 
@@ -786,6 +798,18 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    knn <knn_0>
+
+:ref:`ksuid <library_ksuid>`
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   ksuid <ksuid_0>
+   ksuid(Representation,Alphabet) <ksuid_2>
+   ksuid_protocol <ksuid_protocol_0>
 
 :ref:`lgtdoc <library_lgtdoc>`
 ------------------------------

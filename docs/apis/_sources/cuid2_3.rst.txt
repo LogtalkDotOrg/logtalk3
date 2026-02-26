@@ -1,0 +1,69 @@
+.. index:: single: cuid2(Representation,Size,Alphabet)
+.. _cuid2/3:
+
+.. rst-class:: right
+
+**object**
+
+``cuid2(Representation,Size,Alphabet)``
+=======================================
+
+* ``Representation`` - Text representation for the Cuid2 identifier. Possible values are ``atom``, ``chars``, and ``codes``.
+* ``Size`` - Number of symbols in the Cuid2 identifier.
+* ``Alphabet`` - Alphabet used for generating Cuid2 identifiers represented as an atom, list of characters, or list of character codes.
+
+
+Cuid2 generator.
+
+| **Availability:** 
+|    ``logtalk_load(cuid2(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-26
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`cuid2_protocol <cuid2_protocol/0>`
+| **Uses:**
+|    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`cuid2_protocol/0::generate/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`cuid2 <cuid2/0>`, :ref:`ksuid(Representation,Alphabet) <ksuid/2>`, :ref:`nanoid(Representation,Size,Alphabet) <nanoid/3>`, :ref:`ids(Representation,Bytes) <ids/2>`, :ref:`ulid(Representation) <ulid/1>`, :ref:`uuid(Representation) <uuid/1>`
+

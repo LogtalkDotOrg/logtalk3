@@ -27,7 +27,8 @@ sortability characteristics.
 UUIDs can be generated as atoms, lists of characters, or lists of
 character codes.
 
-See also the ``ids``, ``nanoid``, and ``ulid`` libraries.
+See also the ``cuid2``, ``ksuid``, ``ids``, ``nanoid``, and ``ulid``
+libraries.
 
 API documentation
 -----------------

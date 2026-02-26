@@ -47,6 +47,7 @@ directory in the ``NOTES.md`` file.
    core
    coroutining
    csv
+   cuid2
    datalog
    dates
    dependents
@@ -79,6 +80,7 @@ directory in the ``NOTES.md`` file.
    json_rpc
    json_schema
    knn
+   ksuid
    linda
    listing
    logging
