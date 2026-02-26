@@ -38,7 +38,7 @@ randomized using the current wall time.
 ULIDs can be generated as atoms, lists of characters, or lists of
 character codes.
 
-See also the `ids` and `uuid` libraries.
+See also the `ids`, `nanoid`, and `uuid` libraries.
 
 
 API documentation

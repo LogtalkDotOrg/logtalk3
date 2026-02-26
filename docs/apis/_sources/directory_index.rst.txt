@@ -812,6 +812,18 @@ To load an entity, always load the library that includes it using the goal ``log
 
    naive_bayes <naive_bayes_0>
 
+``library/nanoid/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   nanoid <nanoid_0>
+   nanoid(Representation,Size,Alphabet) <nanoid_3>
+   nanoid_protocol <nanoid_protocol_0>
+
 ``library/nearest_centroid/``
 -----------------------------
 

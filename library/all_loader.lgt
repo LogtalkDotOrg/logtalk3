@@ -44,6 +44,7 @@
 		sets(loader),
 		graphs(loader),
 		hierarchies(loader),
+		nanoid(loader),
 		meta(loader),
 		loops(loader),
 		random(loader),

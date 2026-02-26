@@ -14,8 +14,8 @@ Universally unique identifier (UUID) generator using an atom representation.
 |    ``logtalk_load(uuid(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:2:0
-| **Date:** 2022-11-23
+| **Version:** 1:0:0
+| **Date:** 2026-02-26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -56,5 +56,5 @@ Operators
 
 .. seealso::
 
-   :ref:`uuid(Representation) <uuid/1>`, :ref:`ulid <ulid/0>`, :ref:`ulid(Representation) <ulid/1>`, :ref:`ids <ids/0>`, :ref:`ids(Representation,Bytes) <ids/2>`
+   :ref:`uuid(Representation) <uuid/1>`, :ref:`ids <ids/0>`, :ref:`nanoid <nanoid/0>`, :ref:`ulid <ulid/0>`
 

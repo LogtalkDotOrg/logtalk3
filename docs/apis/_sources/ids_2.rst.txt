@@ -18,8 +18,8 @@ Generator of random identifiers.
 |    ``logtalk_load(ids(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2022-11-23
+| **Version:** 1:1:0
+| **Date:** 2026-02-26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -80,5 +80,5 @@ Operators
 
 .. seealso::
 
-   :ref:`ids <ids/0>`, :ref:`uuid <uuid/0>`, :ref:`ulid <ulid/0>`
+   :ref:`ids <ids/0>`, :ref:`nanoid(Representation,Size,Alphabet) <nanoid/3>`, :ref:`uuid(Representation) <uuid/1>`, :ref:`ulid(Representation) <ulid/1>`
 

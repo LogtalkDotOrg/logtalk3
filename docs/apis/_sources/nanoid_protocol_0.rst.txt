@@ -1,0 +1,74 @@
+.. index:: single: nanoid_protocol
+.. _nanoid_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``nanoid_protocol``
+===================
+
+NanoID generator protocol.
+
+| **Availability:** 
+|    ``logtalk_load(nanoid(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2026-02-26
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: generate/1
+.. _nanoid_protocol/0::generate/1:
+
+``generate/1``
+^^^^^^^^^^^^^^
+
+Returns a NanoID.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(NanoID)``
+| **Mode and number of proofs:**
+|    ``generate(--ground)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

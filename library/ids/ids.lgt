@@ -22,15 +22,15 @@
 :- object(ids(_Representation_, _Bytes_)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2022-11-23,
+		date is 2026-02-26,
 		comment is 'Generator of random identifiers.',
 		parameters is [
 			'Representation' - 'Text representation for the identifier. Possible values are ``atom``, ``chars``, and ``codes``.',
 			'Bytes' - 'Number of bytes of randomness.'
 		],
-		see_also is [ids, uuid, ulid]
+		see_also is [ids, nanoid(_, _, _), uuid(_), ulid(_)]
 	]).
 
 	:- public(generate/1).
@@ -77,11 +77,11 @@
 	extends(ids(atom, 20))).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2025-06-03,
+		date is 2026-02-26,
 		comment is 'Generator of random identifiers represented as atoms with 160 bits (20 bytes) of randomness.',
-		see_also is [ids(_, _), uuid, ulid]
+		see_also is [ids(_, _), nanoid, uuid, ulid]
 	]).
 
 :- end_object.

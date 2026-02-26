@@ -14,8 +14,8 @@ Generator of random identifiers represented as atoms with 160 bits (20 bytes) of
 |    ``logtalk_load(ids(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2025-06-03
+| **Version:** 1:2:0
+| **Date:** 2026-02-26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -56,5 +56,5 @@ Operators
 
 .. seealso::
 
-   :ref:`ids(Representation,Bytes) <ids/2>`, :ref:`uuid <uuid/0>`, :ref:`ulid <ulid/0>`
+   :ref:`ids(Representation,Bytes) <ids/2>`, :ref:`nanoid <nanoid/0>`, :ref:`uuid <uuid/0>`, :ref:`ulid <ulid/0>`
 

@@ -1,0 +1,60 @@
+.. index:: single: nanoid
+.. _nanoid/0:
+
+.. rst-class:: right
+
+**object**
+
+``nanoid``
+==========
+
+NanoID generator using atom representation, 21 symbols, and the standard URL alphabet.
+
+| **Availability:** 
+|    ``logtalk_load(nanoid(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-26
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`nanoid(atom,21,_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ) <nanoid/3>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`nanoid_protocol/0::generate/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`nanoid(Representation,Size,Alphabet) <nanoid/3>`, :ref:`ids <ids/0>`, :ref:`ulid <ulid/0>`, :ref:`uuid <uuid/0>`
+

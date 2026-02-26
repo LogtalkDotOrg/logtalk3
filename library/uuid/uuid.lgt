@@ -23,14 +23,14 @@
 	implements(uuid_protocol)).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:8:0,
 		author is 'Paulo Moura',
-		date is 2026-02-04,
+		date is 2026-02-26,
 		comment is 'Universally unique identifier (UUID) generator.',
 		parameters is [
 			'Representation' - 'Text representation for the UUID. Possible values are ``atom``, ``chars``, and ``codes``.'
 		],
-		see_also is [uuid, ulid, ulid(_), ids, ids(_, _)]
+		see_also is [uuid, ids(_, _), nanoid(_, _, _), ulid(_)]
 	]).
 
 	uuid_v1([Byte11, Byte12, Byte13, Byte14, Byte15, Byte16], UUID) :-
@@ -218,11 +218,11 @@
 	extends(uuid(atom))).
 
 	:- info([
-		version is 0:2:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2022-11-23,
+		date is 2026-02-26,
 		comment is 'Universally unique identifier (UUID) generator using an atom representation.',
-		see_also is [uuid(_), ulid, ulid(_), ids, ids(_, _)]
+		see_also is [uuid(_), ids, nanoid, ulid]
 	]).
 
 :- end_object.

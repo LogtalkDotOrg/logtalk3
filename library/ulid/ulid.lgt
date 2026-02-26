@@ -23,14 +23,14 @@
 	implements(ulid_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2023-05-19,
+		date is 2026-02-26,
 		comment is 'Universally Unique Lexicographically Sortable Identifier (ULID) generator.',
 		parameters is [
 			'Representation' - 'Text representation for the ULID. Possible values are ``atom``, ``chars``, and ``codes``.'
 		],
-		see_also is [ulid, ulid_types, uuid(_), uuid, ids, ids(_, _)]
+		see_also is [ulid, ulid_types, nanoid(_, _, _), uuid(_), ids(_, _)]
 	]).
 
 	generate(ULID) :-
@@ -178,11 +178,11 @@
 	extends(ulid(atom))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2023-05-19,
+		date is 2026-02-26,
 		comment is 'Universally Unique Lexicographically Sortable Identifier (ULID) generator using an atom representation.',
-		see_also is [ulid(_), ulid_types, uuid, uuid(_), ids, ids(_, _)]
+		see_also is [ulid(_), ulid_types, ids, nanoid, uuid]
 	]).
 
 :- end_object.
