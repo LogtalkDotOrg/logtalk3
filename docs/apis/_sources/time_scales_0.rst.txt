@@ -1,0 +1,65 @@
+.. index:: single: time_scales
+.. _time_scales/0:
+
+.. rst-class:: right
+
+**object**
+
+``time_scales``
+===============
+
+Time scale conversions for UTC, TAI, TT, UT1, TDB, GPS, GST, TCG, and TCB using bundled and optional override data.
+
+| **Availability:** 
+|    ``logtalk_load(time_scales(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-26
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`time_scales_protocol <time_scales_protocol/0>`
+| **Uses:**
+|    :ref:`date <date/0>`
+|    :ref:`time_scales_data <time_scales_data/0>`
+
+| **Remarks:**
+
+   - Supported UTC range: From 1972-01-01T00:00:00Z onwards.
+   - Time representation: Instants are represented as ``instant(Scale,Seconds,fraction(Numerator,Denominator))`` with normalized fractional part in the ``[0,1[`` interval.
+
+| **Inherited public predicates:**
+|     :ref:`time_scales_protocol/0::check_conversion/3`  :ref:`time_scales_protocol/0::check_convert/4`  :ref:`time_scales_protocol/0::check_instant/1`  :ref:`time_scales_protocol/0::check_offset/3`  :ref:`time_scales_protocol/0::clear_dut1_override/0`  :ref:`time_scales_protocol/0::clear_leap_seconds_override/0`  :ref:`time_scales_protocol/0::convert/4`  :ref:`time_scales_protocol/0::dut1_entries/1`  :ref:`time_scales_protocol/0::dut1_source/1`  :ref:`time_scales_protocol/0::instant_to_utc_date_time/2`  :ref:`time_scales_protocol/0::leap_second_date/2`  :ref:`time_scales_protocol/0::leap_seconds_entries/1`  :ref:`time_scales_protocol/0::leap_seconds_source/1`  :ref:`time_scales_protocol/0::load_dut1_override/1`  :ref:`time_scales_protocol/0::load_leap_seconds_override/1`  :ref:`time_scales_protocol/0::offset/3`  :ref:`time_scales_protocol/0::save_dut1_entries/1`  :ref:`time_scales_protocol/0::save_leap_seconds_entries/1`  :ref:`time_scales_protocol/0::supported_range/2`  :ref:`time_scales_protocol/0::utc_date_time_to_instant/2`  :ref:`time_scales_protocol/0::valid_conversion/3`  :ref:`time_scales_protocol/0::valid_instant/1`  :ref:`time_scales_protocol/0::valid_scale/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`time_scales_protocol <time_scales_protocol/0>`, :ref:`date <date/0>`
+

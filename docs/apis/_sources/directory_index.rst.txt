@@ -1060,6 +1060,18 @@ To load an entity, always load the library that includes it using the goal ``log
    term_io <term_io_0>
    term_io_protocol <term_io_protocol_0>
 
+``library/time_scales/``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   time_scales <time_scales_0>
+   time_scales_data <time_scales_data_0>
+   time_scales_protocol <time_scales_protocol_0>
+
 ``library/timeout/``
 --------------------
 

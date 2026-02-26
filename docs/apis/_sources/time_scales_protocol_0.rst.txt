@@ -1,0 +1,612 @@
+.. index:: single: time_scales_protocol
+.. _time_scales_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``time_scales_protocol``
+========================
+
+Time scales conversion protocol for UTC, TAI, TT, UT1, TDB, GPS, GST, TCG, and TCB.
+
+| **Availability:** 
+|    ``logtalk_load(time_scales(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-25
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: valid_scale/1
+.. _time_scales_protocol/0::valid_scale/1:
+
+``valid_scale/1``
+^^^^^^^^^^^^^^^^^
+
+True when the argument is a supported time scale (``utc``, ``tai``, ``tt``, ``ut1``, ``tdb``, ``gps``, ``gst``, ``tcg``, or ``tcb``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_scale(Scale)``
+| **Mode and number of proofs:**
+|    ``valid_scale(@atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: supported_range/2
+.. _time_scales_protocol/0::supported_range/2:
+
+``supported_range/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the supported UTC datetime range as ``date_time(Year,Month,Day,Hour,Minute,Second)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``supported_range(StartUTC,EndUTC)``
+| **Mode and number of proofs:**
+|    ``supported_range(-compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: leap_second_date/2
+.. _time_scales_protocol/0::leap_second_date/2:
+
+``leap_second_date/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates UTC effective dates for ``TAI-UTC`` step changes and their resulting offset in SI seconds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``leap_second_date(UTCDateTime,OffsetSeconds)``
+| **Mode and number of proofs:**
+|    ``leap_second_date(?compound,?integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: load_leap_seconds_override/1
+.. _time_scales_protocol/0::load_leap_seconds_override/1:
+
+``load_leap_seconds_override/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Loads leap-second override data from a user-provided file containing ``leap(UnixSeconds,OffsetSeconds).`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``load_leap_seconds_override(File)``
+| **Mode and number of proofs:**
+|    ``load_leap_seconds_override(+atom)`` - ``one``
+
+
+------------
+
+.. index:: clear_leap_seconds_override/0
+.. _time_scales_protocol/0::clear_leap_seconds_override/0:
+
+``clear_leap_seconds_override/0``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Clears any previously loaded leap-second override data and reverts to bundled data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``clear_leap_seconds_override`` - ``one``
+
+
+------------
+
+.. index:: leap_seconds_source/1
+.. _time_scales_protocol/0::leap_seconds_source/1:
+
+``leap_seconds_source/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the active leap-seconds data source as either ``bundled`` or ``override``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``leap_seconds_source(Source)``
+| **Mode and number of proofs:**
+|    ``leap_seconds_source(-atom)`` - ``one``
+
+
+------------
+
+.. index:: leap_seconds_entries/1
+.. _time_scales_protocol/0::leap_seconds_entries/1:
+
+``leap_seconds_entries/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the active leap-seconds table as an ordered list of ``leap(UnixSeconds,OffsetSeconds)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``leap_seconds_entries(Entries)``
+| **Mode and number of proofs:**
+|    ``leap_seconds_entries(-list)`` - ``one``
+
+
+------------
+
+.. index:: save_leap_seconds_entries/1
+.. _time_scales_protocol/0::save_leap_seconds_entries/1:
+
+``save_leap_seconds_entries/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Saves the active leap-seconds table to a file as ``leap(UnixSeconds,OffsetSeconds).`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``save_leap_seconds_entries(File)``
+| **Mode and number of proofs:**
+|    ``save_leap_seconds_entries(+atom)`` - ``one``
+
+
+------------
+
+.. index:: load_dut1_override/1
+.. _time_scales_protocol/0::load_dut1_override/1:
+
+``load_dut1_override/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Loads DUT1 override data from a user-provided file containing ``dut1(UnixSeconds,Numerator,Denominator).`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``load_dut1_override(File)``
+| **Mode and number of proofs:**
+|    ``load_dut1_override(+atom)`` - ``one``
+
+
+------------
+
+.. index:: clear_dut1_override/0
+.. _time_scales_protocol/0::clear_dut1_override/0:
+
+``clear_dut1_override/0``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Clears any previously loaded DUT1 override data and reverts to bundled data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``clear_dut1_override`` - ``one``
+
+
+------------
+
+.. index:: dut1_source/1
+.. _time_scales_protocol/0::dut1_source/1:
+
+``dut1_source/1``
+^^^^^^^^^^^^^^^^^
+
+Returns the active DUT1 data source as either ``bundled`` or ``override``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dut1_source(Source)``
+| **Mode and number of proofs:**
+|    ``dut1_source(-atom)`` - ``one``
+
+
+------------
+
+.. index:: dut1_entries/1
+.. _time_scales_protocol/0::dut1_entries/1:
+
+``dut1_entries/1``
+^^^^^^^^^^^^^^^^^^
+
+Returns the active DUT1 table as an ordered list of ``dut1(UnixSeconds,Numerator,Denominator)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dut1_entries(Entries)``
+| **Mode and number of proofs:**
+|    ``dut1_entries(-list)`` - ``one``
+
+
+------------
+
+.. index:: save_dut1_entries/1
+.. _time_scales_protocol/0::save_dut1_entries/1:
+
+``save_dut1_entries/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Saves the active DUT1 table to a file as ``dut1(UnixSeconds,Numerator,Denominator).`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``save_dut1_entries(File)``
+| **Mode and number of proofs:**
+|    ``save_dut1_entries(+atom)`` - ``one``
+
+
+------------
+
+.. index:: utc_date_time_to_instant/2
+.. _time_scales_protocol/0::utc_date_time_to_instant/2:
+
+``utc_date_time_to_instant/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a UTC datetime term to an instant represented as ``instant(utc,Seconds,fraction(Numerator,Denominator))`` where ``Seconds`` are Unix epoch seconds and the fractional component is normalized.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``utc_date_time_to_instant(UTCDateTime,Instant)``
+| **Mode and number of proofs:**
+|    ``utc_date_time_to_instant(+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_instant/1
+.. _time_scales_protocol/0::valid_instant/1:
+
+``valid_instant/1``
+^^^^^^^^^^^^^^^^^^^
+
+True when the argument is a valid supported instant term ``instant(Scale,Seconds,fraction(Numerator,Denominator))``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_instant(Instant)``
+| **Mode and number of proofs:**
+|    ``valid_instant(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: check_instant/1
+.. _time_scales_protocol/0::check_instant/1:
+
+``check_instant/1``
+^^^^^^^^^^^^^^^^^^^
+
+Checks an instant term and throws an error instead of failing on invalid input.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_instant(Instant)``
+| **Mode and number of proofs:**
+|    ``check_instant(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Instant`` is a variable:
+|        ``instantiation_error``
+|    ``Instant`` is not a valid instant term:
+|        ``domain_error(instant,Instant)``
+|    ``Scale`` in ``Instant`` is neither a variable nor an atom:
+|        ``type_error(atom,Scale)``
+|    ``Scale`` in ``Instant`` is not supported:
+|        ``domain_error(time_scale,Scale)``
+|    ``Seconds`` in ``Instant`` is neither a variable nor an integer:
+|        ``type_error(integer,Seconds)``
+|    ``Seconds`` in ``Instant`` is before supported UTC epoch:
+|        ``domain_error(utc_unix_seconds,Seconds)``
+|    Fraction term in ``Instant`` is not of the form ``fraction(Numerator,Denominator)``:
+|        ``domain_error(fraction,Fraction)``
+|    ``Numerator`` in ``Instant`` is neither a variable nor an integer:
+|        ``type_error(integer,Numerator)``
+|    ``Denominator`` in ``Instant`` is neither a variable nor an integer:
+|        ``type_error(integer,Denominator)``
+|    ``Denominator`` in ``Instant`` is not positive:
+|        ``domain_error(positive_denominator,Denominator)``
+|    Normalized fraction in ``Instant`` is not in the ``[0,1[`` interval:
+|        ``domain_error(normalized_fraction,Fraction)``
+
+
+------------
+
+.. index:: valid_conversion/3
+.. _time_scales_protocol/0::valid_conversion/3:
+
+``valid_conversion/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+True when an instant is valid for ``FromScale`` and conversion to ``ToScale`` is admissible.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_conversion(Instant,FromScale,ToScale)``
+| **Mode and number of proofs:**
+|    ``valid_conversion(+compound,+atom,+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: check_conversion/3
+.. _time_scales_protocol/0::check_conversion/3:
+
+``check_conversion/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Checks a conversion request and throws an error instead of failing on invalid input.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_conversion(Instant,FromScale,ToScale)``
+| **Mode and number of proofs:**
+|    ``check_conversion(+compound,+atom,+atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Instant``, ``FromScale``, or ``ToScale`` is a variable:
+|        ``instantiation_error``
+|    ``FromScale`` is neither a variable nor an atom:
+|        ``type_error(atom,FromScale)``
+|    ``ToScale`` is neither a variable nor an atom:
+|        ``type_error(atom,ToScale)``
+|    ``FromScale`` is not supported:
+|        ``domain_error(time_scale,FromScale)``
+|    ``ToScale`` is not supported:
+|        ``domain_error(time_scale,ToScale)``
+|    ``Instant`` is not a valid instant term:
+|        ``domain_error(instant,Instant)``
+|    ``Scale`` in ``Instant`` is neither a variable nor an atom:
+|        ``type_error(atom,Scale)``
+|    ``Scale`` in ``Instant`` is not supported:
+|        ``domain_error(time_scale,Scale)``
+|    ``Seconds`` in ``Instant`` is neither a variable nor an integer:
+|        ``type_error(integer,Seconds)``
+|    ``Seconds`` in ``Instant`` is before supported UTC epoch:
+|        ``domain_error(utc_unix_seconds,Seconds)``
+|    Fraction term in ``Instant`` is not of the form ``fraction(Numerator,Denominator)``:
+|        ``domain_error(fraction,Fraction)``
+|    ``Numerator`` in ``Instant`` is neither a variable nor an integer:
+|        ``type_error(integer,Numerator)``
+|    ``Denominator`` in ``Instant`` is neither a variable nor an integer:
+|        ``type_error(integer,Denominator)``
+|    ``Denominator`` in ``Instant`` is not positive:
+|        ``domain_error(positive_denominator,Denominator)``
+|    Normalized fraction in ``Instant`` is not in the ``[0,1[`` interval:
+|        ``domain_error(normalized_fraction,Fraction)``
+|    ``Instant`` scale does not match ``FromScale``:
+|        ``domain_error(scale_mismatch,instant_scale(InstantScale,FromScale))``
+
+
+------------
+
+.. index:: instant_to_utc_date_time/2
+.. _time_scales_protocol/0::instant_to_utc_date_time/2:
+
+``instant_to_utc_date_time/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts an UTC instant represented as ``instant(utc,Seconds,fraction(Numerator,Denominator))`` to a UTC datetime term. Requires zero fractional part.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``instant_to_utc_date_time(Instant,UTCDateTime)``
+| **Mode and number of proofs:**
+|    ``instant_to_utc_date_time(+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: convert/4
+.. _time_scales_protocol/0::convert/4:
+
+``convert/4``
+^^^^^^^^^^^^^
+
+Converts an ``instant(Scale,Seconds,fraction(Numerator,Denominator))`` from ``FromScale`` to ``ToScale``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``convert(Instant,FromScale,ToScale,ConvertedInstant)``
+| **Mode and number of proofs:**
+|    ``convert(+compound,+atom,+atom,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: check_convert/4
+.. _time_scales_protocol/0::check_convert/4:
+
+``check_convert/4``
+^^^^^^^^^^^^^^^^^^^
+
+Converts an instant from ``FromScale`` to ``ToScale`` and throws an error instead of failing on invalid input.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_convert(Instant,FromScale,ToScale,ConvertedInstant)``
+| **Mode and number of proofs:**
+|    ``check_convert(+compound,+atom,+atom,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Instant``, ``FromScale``, or ``ToScale`` is a variable:
+|        ``instantiation_error``
+|    ``FromScale`` is neither a variable nor an atom:
+|        ``type_error(atom,FromScale)``
+|    ``ToScale`` is neither a variable nor an atom:
+|        ``type_error(atom,ToScale)``
+|    ``FromScale`` is not supported:
+|        ``domain_error(time_scale,FromScale)``
+|    ``ToScale`` is not supported:
+|        ``domain_error(time_scale,ToScale)``
+|    ``Instant`` is not a valid instant term:
+|        ``domain_error(instant,Instant)``
+|    ``Scale`` in ``Instant`` is neither a variable nor an atom:
+|        ``type_error(atom,Scale)``
+|    ``Scale`` in ``Instant`` is not supported:
+|        ``domain_error(time_scale,Scale)``
+|    ``Seconds`` in ``Instant`` is neither a variable nor an integer:
+|        ``type_error(integer,Seconds)``
+|    ``Seconds`` in ``Instant`` is before supported UTC epoch:
+|        ``domain_error(utc_unix_seconds,Seconds)``
+|    Fraction term in ``Instant`` is not of the form ``fraction(Numerator,Denominator)``:
+|        ``domain_error(fraction,Fraction)``
+|    ``Numerator`` in ``Instant`` is neither a variable nor an integer:
+|        ``type_error(integer,Numerator)``
+|    ``Denominator`` in ``Instant`` is neither a variable nor an integer:
+|        ``type_error(integer,Denominator)``
+|    ``Denominator`` in ``Instant`` is not positive:
+|        ``domain_error(positive_denominator,Denominator)``
+|    Normalized fraction in ``Instant`` is not in the ``[0,1[`` interval:
+|        ``domain_error(normalized_fraction,Fraction)``
+|    ``Instant`` scale does not match ``FromScale``:
+|        ``domain_error(scale_mismatch,instant_scale(InstantScale,FromScale))``
+
+
+------------
+
+.. index:: offset/3
+.. _time_scales_protocol/0::offset/3:
+
+``offset/3``
+^^^^^^^^^^^^
+
+Returns the offset required to convert an instant to a target scale as ``rational(Numerator,Denominator)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``offset(Instant,ToScale,Offset)``
+| **Mode and number of proofs:**
+|    ``offset(+compound,+atom,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: check_offset/3
+.. _time_scales_protocol/0::check_offset/3:
+
+``check_offset/3``
+^^^^^^^^^^^^^^^^^^
+
+Returns the conversion offset and throws an error instead of failing on invalid input.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_offset(Instant,ToScale,Offset)``
+| **Mode and number of proofs:**
+|    ``check_offset(+compound,+atom,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Instant`` or ``ToScale`` is a variable:
+|        ``instantiation_error``
+|    ``ToScale`` is neither a variable nor an atom:
+|        ``type_error(atom,ToScale)``
+|    ``ToScale`` is not supported:
+|        ``domain_error(time_scale,ToScale)``
+|    ``Instant`` is not a valid instant term:
+|        ``domain_error(instant,Instant)``
+|    ``Scale`` in ``Instant`` is neither a variable nor an atom:
+|        ``type_error(atom,Scale)``
+|    ``Scale`` in ``Instant`` is not supported:
+|        ``domain_error(time_scale,Scale)``
+|    ``Seconds`` in ``Instant`` is neither a variable nor an integer:
+|        ``type_error(integer,Seconds)``
+|    ``Seconds`` in ``Instant`` is before supported UTC epoch:
+|        ``domain_error(utc_unix_seconds,Seconds)``
+|    Fraction term in ``Instant`` is not of the form ``fraction(Numerator,Denominator)``:
+|        ``domain_error(fraction,Fraction)``
+|    ``Numerator`` in ``Instant`` is neither a variable nor an integer:
+|        ``type_error(integer,Numerator)``
+|    ``Denominator`` in ``Instant`` is neither a variable nor an integer:
+|        ``type_error(integer,Denominator)``
+|    ``Denominator`` in ``Instant`` is not positive:
+|        ``domain_error(positive_denominator,Denominator)``
+|    Normalized fraction in ``Instant`` is not in the ``[0,1[`` interval:
+|        ``domain_error(normalized_fraction,Fraction)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`time_scales <time_scales/0>`, :ref:`date <date/0>`
+

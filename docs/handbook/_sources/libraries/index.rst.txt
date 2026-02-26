@@ -111,6 +111,7 @@ directory in the ``NOTES.md`` file.
    strings
    subsequences
    term_io
+   time_scales
    timeout
    toon
    tsv

@@ -71,6 +71,7 @@
 		timeout(loader),
 		gensym(loader),
 		genint(loader),
+		time_scales(loader),
 		geospatial(loader),
 		git(loader),
 		grammars(loader),

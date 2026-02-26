@@ -1536,6 +1536,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`type <type/0::check/3>`
 
+``check_conversion/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_protocol <time_scales_protocol/0::check_conversion/3>`
+
+``check_convert/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_protocol <time_scales_protocol/0::check_convert/4>`
+
+``check_instant/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_protocol <time_scales_protocol/0::check_instant/1>`
+
+``check_offset/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_protocol <time_scales_protocol/0::check_offset/3>`
+
 ``check_option/1``
 ------------------
 
@@ -1768,6 +1808,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`datalog_protocol <datalog_protocol/0::clear/0>`
+
+``clear_dut1_override/0``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_data <time_scales_data/0::clear_dut1_override/0>`
+* :ref:`time_scales_protocol <time_scales_protocol/0::clear_dut1_override/0>`
+
+``clear_leap_seconds_override/0``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_data <time_scales_data/0::clear_leap_seconds_override/0>`
+* :ref:`time_scales_protocol <time_scales_protocol/0::clear_leap_seconds_override/0>`
 
 ``client_open/4``
 -----------------
@@ -2263,6 +2325,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`blank_grammars(Format) <blank_grammars/1::controls//0>`
+
+``convert/4``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_protocol <time_scales_protocol/0::convert/4>`
 
 ``cooling_schedule/3``
 ----------------------
@@ -3739,6 +3811,38 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`intervalp <intervalp/0::during/2>`
+
+``dut1_entries/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_data <time_scales_data/0::dut1_entries/1>`
+* :ref:`time_scales_protocol <time_scales_protocol/0::dut1_entries/1>`
+
+``dut1_offset_at_utc_unix/3``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_data <time_scales_data/0::dut1_offset_at_utc_unix/3>`
+
+``dut1_source/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_data <time_scales_data/0::dut1_source/1>`
+* :ref:`time_scales_protocol <time_scales_protocol/0::dut1_source/1>`
 
 ``easter_day/3``
 ----------------
@@ -6482,6 +6586,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`class_hierarchyp <class_hierarchyp/0::instances/1>`
 
+``instant_to_utc_date_time/2``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_protocol <time_scales_protocol/0::instant_to_utc_date_time/2>`
+
 ``integer//1``
 --------------
 
@@ -7446,6 +7560,58 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`class_hierarchyp <class_hierarchyp/0::leaf_instances/1>`
 
+``leap_effective_date/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_data <time_scales_data/0::leap_effective_date/2>`
+
+``leap_offset_at_utc_unix/2``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_data <time_scales_data/0::leap_offset_at_utc_unix/2>`
+
+``leap_second_date/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_protocol <time_scales_protocol/0::leap_second_date/2>`
+
+``leap_seconds_entries/1``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_data <time_scales_data/0::leap_seconds_entries/1>`
+* :ref:`time_scales_protocol <time_scales_protocol/0::leap_seconds_entries/1>`
+
+``leap_seconds_source/1``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_data <time_scales_data/0::leap_seconds_source/1>`
+* :ref:`time_scales_protocol <time_scales_protocol/0::leap_seconds_source/1>`
+
 ``leap_year/1``
 ---------------
 
@@ -7859,6 +8025,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`redis <redis/0::llen/3>`
+
+``load_dut1_override/1``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_data <time_scales_data/0::load_dut1_override/1>`
+* :ref:`time_scales_protocol <time_scales_protocol/0::load_dut1_override/1>`
+
+``load_leap_seconds_override/1``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_data <time_scales_data/0::load_leap_seconds_override/1>`
+* :ref:`time_scales_protocol <time_scales_protocol/0::load_leap_seconds_override/1>`
 
 ``load_program/1``
 ------------------
@@ -9875,6 +10063,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`validation <validation/0::of_valid/2>`
+
+``offset/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_protocol <time_scales_protocol/0::offset/3>`
 
 ``one_or_more//0``
 ------------------
@@ -12620,6 +12818,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`packs <packs/0::save/2>`
 
+``save_dut1_entries/1``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_data <time_scales_data/0::save_dut1_entries/1>`
+* :ref:`time_scales_protocol <time_scales_protocol/0::save_dut1_entries/1>`
+
+``save_leap_seconds_entries/1``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_data <time_scales_data/0::save_leap_seconds_entries/1>`
+* :ref:`time_scales_protocol <time_scales_protocol/0::save_leap_seconds_entries/1>`
+
 ``scalar_product/3``
 --------------------
 
@@ -14152,6 +14372,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`class_hierarchyp <class_hierarchyp/0::superclasses/1>`
 
+``supported_range/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_protocol <time_scales_protocol/0::supported_range/2>`
+
 ``suspend_monitor/0``
 ---------------------
 
@@ -14233,6 +14463,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`blank_grammars(Format) <blank_grammars/1::tabs//0>`
 
+``tai_minus_utc_for_tai_unix/2``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_data <time_scales_data/0::tai_minus_utc_for_tai_unix/2>`
+
 ``tail/2``
 ----------
 
@@ -14292,6 +14532,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`listp <listp/0::take/4>`
+
+``tcb_minus_tdb_approx/3``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_data <time_scales_data/0::tcb_minus_tdb_approx/3>`
+
+``tcg_minus_tt_approx/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_data <time_scales_data/0::tcg_minus_tt_approx/3>`
+
+``tdb_minus_tt_approx/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_data <time_scales_data/0::tdb_minus_tt_approx/3>`
 
 ``temporary_directory/1``
 -------------------------
@@ -14678,6 +14948,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`java_utils_protocol <java_utils_protocol/0::true/1>`
 
+``tt_minus_tai/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_data <time_scales_data/0::tt_minus_tai/2>`
+
 ``ttl/3``
 ---------
 
@@ -14998,6 +15278,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::user_data/2>`
 
+``utc_date_time_to_instant/2``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_protocol <time_scales_protocol/0::utc_date_time_to_instant/2>`
+
 ``utc_to_local/3``
 ------------------
 
@@ -15114,6 +15404,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`datep <datep/0::valid/3>`
 * :ref:`timep <timep/0::valid/3>`
 
+``valid_conversion/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_protocol <time_scales_protocol/0::valid_conversion/3>`
+
 ``valid_coordinate/1``
 ----------------------
 
@@ -15154,6 +15454,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`datep <datep/0::valid_date_time/2>`
 
+``valid_instant/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_protocol <time_scales_protocol/0::valid_instant/1>`
+
 ``valid_option/1``
 ------------------
 
@@ -15173,6 +15483,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`options_protocol <options_protocol/0::valid_options/1>`
+
+``valid_scale/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`time_scales_protocol <time_scales_protocol/0::valid_scale/1>`
 
 ``validate/1``
 --------------
