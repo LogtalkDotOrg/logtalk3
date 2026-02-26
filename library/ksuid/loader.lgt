@@ -19,10 +19,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(basic_types(loader)),
-	logtalk_load(iso8601(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(random(loader)),
-	logtalk_load([ksuid_protocol, ksuid], [optimize(on)])
-)).
+:- if(current_prolog_flag(bounded, false)).
+
+	:- initialization((
+		logtalk_load(basic_types(loader)),
+		logtalk_load(iso8601(loader)),
+		logtalk_load(os(loader)),
+		logtalk_load(random(loader)),
+		logtalk_load([ksuid_protocol, ksuid], [optimize(on)])
+	)).
+
+:- else.
+
+	:- initialization((write('(KSUID library requires unbounded integer arithmetic support from the backend Prolog compiler)'), nl)).
+
+:- endif.

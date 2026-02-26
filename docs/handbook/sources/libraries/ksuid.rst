@@ -7,6 +7,9 @@ This library generates random KSUID identifiers:
 
 https://github.com/segmentio/ksuid
 
+**This library requires a backend supporting unbounded integer
+arithmetic.**
+
 By default, identifiers are represented as atoms and encoded using the
 canonical Base62 alphabet:
 
