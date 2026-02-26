@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-151 2046,-151 2046,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol datalog_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;02&#45;26, 12:44</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;02&#45;26, 16:18</text>
 <g id="clust1" class="cluster">
 <title>cluster_datalog_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="datalog_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 2022,-54.25 2022,-54.25 2028,-54.25 2034,-60.25 2034,-66.25 2034,-66.25 2034,-127 2034,-127 2034,-133 2028,-139 2022,-139 2022,-139 20,-139 20,-139 14,-139 8,-133 8,-127 8,-127 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-121.5" font-family="Monospace" font-size="10.00" fill="dimgray">datalog_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>clear/0</title>
 <polygon fill="springgreen" stroke="black" points="91.88,-100.25 18.12,-100.25 18.12,-64.25 91.88,-64.25 91.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="26.12" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L36">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="31.38" y="-84.17" font-family="Monospace" font-size="11.00">clear/0</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>load_program/1</title>
 <polygon fill="springgreen" stroke="black" points="230.5,-100.25 109.5,-100.25 109.5,-64.25 230.5,-64.25 230.5,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="117.5" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L42">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="122.75" y="-84.17" font-family="Monospace" font-size="11.00">load_program/1</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>add_rule/3</title>
 <polygon fill="springgreen" stroke="black" points="343,-100.25 249,-100.25 249,-64.25 343,-64.25 343,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="257" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L49">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="262.25" y="-84.17" font-family="Monospace" font-size="11.00">add_rule/3</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>remove_rule/1</title>
 <polygon fill="springgreen" stroke="black" points="475.12,-100.25 360.88,-100.25 360.88,-64.25 475.12,-64.25 475.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="368.88" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L56">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="374.12" y="-84.17" font-family="Monospace" font-size="11.00">remove_rule/1</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>begin/0</title>
 <polygon fill="springgreen" stroke="black" points="566.88,-100.25 493.12,-100.25 493.12,-64.25 566.88,-64.25 566.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="501.12" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L63">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="506.38" y="-84.17" font-family="Monospace" font-size="11.00">begin/0</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>commit/0</title>
 <polygon fill="springgreen" stroke="black" points="665.25,-100.25 584.75,-100.25 584.75,-64.25 665.25,-64.25 665.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="592.75" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L69">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L69">
 <text xml:space="preserve" text-anchor="start" x="598" y="-84.17" font-family="Monospace" font-size="11.00">commit/0</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>rollback/0</title>
 <polygon fill="springgreen" stroke="black" points="777,-100.25 683,-100.25 683,-64.25 777,-64.25 777,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="691" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L75">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L75">
 <text xml:space="preserve" text-anchor="start" x="696.25" y="-84.17" font-family="Monospace" font-size="11.00">rollback/0</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>assert_fact/1</title>
 <polygon fill="springgreen" stroke="black" points="909.12,-100.25 794.88,-100.25 794.88,-64.25 909.12,-64.25 909.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="802.88" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L81">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="808.12" y="-84.17" font-family="Monospace" font-size="11.00">assert_fact/1</text>
 </a>
 </g>
@@ -141,7 +141,7 @@
 <title>retract_fact/1</title>
 <polygon fill="springgreen" stroke="black" points="1048.5,-100.25 927.5,-100.25 927.5,-64.25 1048.5,-64.25 1048.5,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="935.5" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L88">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="940.75" y="-84.17" font-family="Monospace" font-size="11.00">retract_fact/1</text>
 </a>
 </g>
@@ -155,7 +155,7 @@
 <title>materialize/0</title>
 <polygon fill="springgreen" stroke="black" points="1181.12,-100.25 1066.88,-100.25 1066.88,-64.25 1181.12,-64.25 1181.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1074.88" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L95">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1080.12" y="-84.17" font-family="Monospace" font-size="11.00">materialize/0</text>
 </a>
 </g>
@@ -169,7 +169,7 @@
 <title>update/3</title>
 <polygon fill="springgreen" stroke="black" points="1279.25,-100.25 1198.75,-100.25 1198.75,-64.25 1279.25,-64.25 1279.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1206.75" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L101">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L101">
 <text xml:space="preserve" text-anchor="start" x="1212" y="-84.17" font-family="Monospace" font-size="11.00">update/3</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <title>query/1</title>
 <polygon fill="springgreen" stroke="black" points="1370.88,-100.25 1297.12,-100.25 1297.12,-64.25 1370.88,-64.25 1370.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1305.12" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L108">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L108">
 <text xml:space="preserve" text-anchor="start" x="1310.38" y="-84.17" font-family="Monospace" font-size="11.00">query/1</text>
 </a>
 </g>
@@ -197,7 +197,7 @@
 <title>query/2</title>
 <polygon fill="springgreen" stroke="black" points="1462.88,-100.25 1389.12,-100.25 1389.12,-64.25 1462.88,-64.25 1462.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1397.12" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L115">
+<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L115">
 <text xml:space="preserve" text-anchor="start" x="1402.38" y="-84.17" font-family="Monospace" font-size="11.00">query/2</text>
 </a>
 </g>
@@ -211,7 +211,7 @@
 <title>explain/2</title>
 <polygon fill="springgreen" stroke="black" points="1568.62,-100.25 1481.38,-100.25 1481.38,-64.25 1568.62,-64.25 1568.62,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1489.38" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L122">
+<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L122">
 <text xml:space="preserve" text-anchor="start" x="1494.62" y="-84.17" font-family="Monospace" font-size="11.00">explain/2</text>
 </a>
 </g>
@@ -225,7 +225,7 @@
 <title>rules/1</title>
 <polygon fill="springgreen" stroke="black" points="1660.88,-100.25 1587.12,-100.25 1587.12,-64.25 1660.88,-64.25 1660.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1595.12" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L129">
+<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="1600.38" y="-84.17" font-family="Monospace" font-size="11.00">rules/1</text>
 </a>
 </g>
@@ -239,7 +239,7 @@
 <title>facts/1</title>
 <polygon fill="springgreen" stroke="black" points="1752.88,-100.25 1679.12,-100.25 1679.12,-64.25 1752.88,-64.25 1752.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1687.12" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L136">
+<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L136">
 <text xml:space="preserve" text-anchor="start" x="1692.38" y="-84.17" font-family="Monospace" font-size="11.00">facts/1</text>
 </a>
 </g>
@@ -253,7 +253,7 @@
 <title>predicate_stratum/3</title>
 <polygon fill="springgreen" stroke="black" points="1925.38,-100.25 1770.62,-100.25 1770.62,-64.25 1925.38,-64.25 1925.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1778.62" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L143">
+<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L143">
 <text xml:space="preserve" text-anchor="start" x="1783.88" y="-84.17" font-family="Monospace" font-size="11.00">predicate_stratum/3</text>
 </a>
 </g>
@@ -267,7 +267,7 @@
 <title>strata/1</title>
 <polygon fill="springgreen" stroke="black" points="2024.25,-100.25 1943.75,-100.25 1943.75,-64.25 2024.25,-64.25 2024.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1951.75" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/datalog/datalog_protocol.lgt#L150">
+<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/datalog/datalog_protocol.lgt#L150">
 <text xml:space="preserve" text-anchor="start" x="1957" y="-84.17" font-family="Monospace" font-size="11.00">strata/1</text>
 </a>
 </g>

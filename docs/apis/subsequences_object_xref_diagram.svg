@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-508.75 4232,-508.75 4232,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object subsequences</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;02&#45;26, 12:44</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;02&#45;26, 16:18</text>
 <g id="clust1" class="cluster">
 <title>cluster_subsequences_object</title>
 <g id="a_clust1"><a xlink:title="subsequences">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 4208,-54.25 4208,-54.25 4214,-54.25 4220,-60.25 4220,-66.25 4220,-66.25 4220,-484.75 4220,-484.75 4220,-490.75 4214,-496.75 4208,-496.75 4208,-496.75 20,-496.75 20,-496.75 14,-496.75 8,-490.75 8,-484.75 8,-484.75 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-479.25" font-family="Monospace" font-size="10.00" fill="dimgray">subsequences</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>random_subsequence/2</title>
 <polygon fill="cornsilk" stroke="black" points="202.75,-458 41.25,-458 41.25,-422 202.75,-422 202.75,-458"/>
 <text xml:space="preserve" text-anchor="start" x="49.25" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L289" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L289">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L289" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L289">
 <text xml:space="preserve" text-anchor="start" x="54.5" y="-441.93" font-family="Monospace" font-size="11.00">random_subsequence/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>random_subsequence_helper/2</title>
 <polygon fill="cornsilk" stroke="black" points="226.38,-338.75 17.62,-338.75 17.62,-302.75 226.38,-302.75 226.38,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="25.62" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node46_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L292" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L292">
+<g id="a_node46_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L292" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L292">
 <text xml:space="preserve" text-anchor="start" x="30.88" y="-322.68" font-family="Monospace" font-size="11.00">random_subsequence_helper/2</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- random_subsequence/2&#45;&gt;random_subsequence_helper/2 -->
 <g id="edge33" class="edge">
 <title>random_subsequence/2&#45;&gt;random_subsequence_helper/2</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L289" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L289" xlink:title="calls">
 <path fill="none" stroke="black" d="M122,-421.7C122,-403 122,-372.87 122,-350.58"/>
 <polygon fill="black" stroke="black" points="125.5,-350.64 122,-340.64 118.5,-350.64 125.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L289" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L289">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L289" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L289">
 <text xml:space="preserve" text-anchor="start" x="122" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>subsequence_at_indices/3</title>
 <polygon fill="cornsilk" stroke="black" points="433.25,-458 244.75,-458 244.75,-422 433.25,-422 433.25,-458"/>
 <text xml:space="preserve" text-anchor="start" x="252.75" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L219">
+<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L219">
 <text xml:space="preserve" text-anchor="start" x="258" y="-441.93" font-family="Monospace" font-size="11.00">subsequence_at_indices/3</text>
 </a>
 </g>
@@ -84,7 +84,7 @@
 <title>subsequence_at_indices/4</title>
 <polygon fill="cornsilk" stroke="black" points="433.25,-338.75 244.75,-338.75 244.75,-302.75 433.25,-302.75 433.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="252.75" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node35_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L222" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L222">
+<g id="a_node35_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L222" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L222">
 <text xml:space="preserve" text-anchor="start" x="258" y="-322.68" font-family="Monospace" font-size="11.00">subsequence_at_indices/4</text>
 </a>
 </g>
@@ -96,12 +96,12 @@
 <!-- subsequence_at_indices/3&#45;&gt;subsequence_at_indices/4 -->
 <g id="edge27" class="edge">
 <title>subsequence_at_indices/3&#45;&gt;subsequence_at_indices/4</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L219" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L219" xlink:title="calls">
 <path fill="none" stroke="black" d="M339,-421.7C339,-403 339,-372.87 339,-350.58"/>
 <polygon fill="black" stroke="black" points="342.5,-350.64 339,-340.64 335.5,-350.64 342.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L219">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L219">
 <text xml:space="preserve" text-anchor="start" x="339" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -111,7 +111,7 @@
 <title>longest_repeating_subsequence/2</title>
 <polygon fill="cornsilk" stroke="black" points="3189.88,-338.75 2954.12,-338.75 2954.12,-302.75 3189.88,-302.75 3189.88,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="2962.12" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L183" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L183">
+<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L183" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L183">
 <text xml:space="preserve" text-anchor="start" x="2967.38" y="-322.68" font-family="Monospace" font-size="11.00">longest_repeating_subsequence/2</text>
 </a>
 </g>
@@ -125,7 +125,7 @@
 <title>lrs_helper/5</title>
 <polygon fill="cornsilk" stroke="black" points="2933.75,-219.5 2826.25,-219.5 2826.25,-183.5 2933.75,-183.5 2933.75,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="2834.25" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node32_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L187" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L187">
+<g id="a_node32_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L187" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L187">
 <text xml:space="preserve" text-anchor="start" x="2839.5" y="-203.43" font-family="Monospace" font-size="11.00">lrs_helper/5</text>
 </a>
 </g>
@@ -137,12 +137,12 @@
 <!-- longest_repeating_subsequence/2&#45;&gt;lrs_helper/5 -->
 <g id="edge25" class="edge">
 <title>longest_repeating_subsequence/2&#45;&gt;lrs_helper/5</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L183" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L183" xlink:title="calls">
 <path fill="none" stroke="black" d="M3043.67,-302.45C3010.35,-282.1 2954.89,-248.23 2917.89,-225.64"/>
 <polygon fill="black" stroke="black" points="2920.1,-222.89 2909.74,-220.66 2916.45,-228.86 2920.1,-222.89"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L183" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L183">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L183" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L183">
 <text xml:space="preserve" text-anchor="start" x="2981.76" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -152,7 +152,7 @@
 <title>longest_decreasing_subsequence/2</title>
 <polygon fill="cornsilk" stroke="black" points="3817.25,-458 3574.75,-458 3574.75,-422 3817.25,-422 3817.25,-458"/>
 <text xml:space="preserve" text-anchor="start" x="3582.75" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L156" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L156">
+<g id="a_node4_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L156" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L156">
 <text xml:space="preserve" text-anchor="start" x="3588" y="-441.93" font-family="Monospace" font-size="11.00">longest_decreasing_subsequence/2</text>
 </a>
 </g>
@@ -166,7 +166,7 @@
 <title>lds_helper/3</title>
 <polygon fill="cornsilk" stroke="black" points="3749.75,-338.75 3642.25,-338.75 3642.25,-302.75 3749.75,-302.75 3749.75,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="3650.25" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node28_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L159">
+<g id="a_node28_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L159">
 <text xml:space="preserve" text-anchor="start" x="3655.5" y="-322.68" font-family="Monospace" font-size="11.00">lds_helper/3</text>
 </a>
 </g>
@@ -178,12 +178,12 @@
 <!-- longest_decreasing_subsequence/2&#45;&gt;lds_helper/3 -->
 <g id="edge19" class="edge">
 <title>longest_decreasing_subsequence/2&#45;&gt;lds_helper/3</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L156" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L156" xlink:title="calls">
 <path fill="none" stroke="black" d="M3696,-421.7C3696,-403 3696,-372.87 3696,-350.58"/>
 <polygon fill="black" stroke="black" points="3699.5,-350.64 3696,-340.64 3692.5,-350.64 3699.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L156" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L156">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L156" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L156">
 <text xml:space="preserve" text-anchor="start" x="3696" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -193,7 +193,7 @@
 <title>longest_increasing_subsequence/2</title>
 <polygon fill="cornsilk" stroke="black" points="3556.25,-458 3313.75,-458 3313.75,-422 3556.25,-422 3556.25,-458"/>
 <text xml:space="preserve" text-anchor="start" x="3321.75" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L126">
+<g id="a_node5_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="3327" y="-441.93" font-family="Monospace" font-size="11.00">longest_increasing_subsequence/2</text>
 </a>
 </g>
@@ -207,7 +207,7 @@
 <title>lis_helper/3</title>
 <polygon fill="cornsilk" stroke="black" points="3623.75,-338.75 3516.25,-338.75 3516.25,-302.75 3623.75,-302.75 3623.75,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="3524.25" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node25_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L130">
+<g id="a_node25_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L130">
 <text xml:space="preserve" text-anchor="start" x="3529.5" y="-322.68" font-family="Monospace" font-size="11.00">lis_helper/3</text>
 </a>
 </g>
@@ -219,12 +219,12 @@
 <!-- longest_increasing_subsequence/2&#45;&gt;lis_helper/3 -->
 <g id="edge16" class="edge">
 <title>longest_increasing_subsequence/2&#45;&gt;lis_helper/3</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L126" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L126" xlink:title="calls">
 <path fill="none" stroke="black" d="M3454.92,-421.7C3477.75,-401.87 3515.36,-369.2 3541.34,-346.64"/>
 <polygon fill="black" stroke="black" points="3543.6,-349.31 3548.86,-340.11 3539.01,-344.03 3543.6,-349.31"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L126">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="3506.55" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -234,7 +234,7 @@
 <title>longest_common_subsequence/3</title>
 <polygon fill="cornsilk" stroke="black" points="4209.75,-338.75 3994.25,-338.75 3994.25,-302.75 4209.75,-302.75 4209.75,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="4002.25" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L105">
+<g id="a_node6_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="4007.5" y="-322.68" font-family="Monospace" font-size="11.00">longest_common_subsequence/3</text>
 </a>
 </g>
@@ -248,7 +248,7 @@
 <title>lcs_dp/3</title>
 <polygon fill="cornsilk" stroke="black" points="4210.25,-219.5 4129.75,-219.5 4129.75,-183.5 4210.25,-183.5 4210.25,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="4137.75" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node24_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L109">
+<g id="a_node24_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L109">
 <text xml:space="preserve" text-anchor="start" x="4143" y="-203.43" font-family="Monospace" font-size="11.00">lcs_dp/3</text>
 </a>
 </g>
@@ -260,12 +260,12 @@
 <!-- longest_common_subsequence/3&#45;&gt;lcs_dp/3 -->
 <g id="edge15" class="edge">
 <title>longest_common_subsequence/3&#45;&gt;lcs_dp/3</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L105" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L105" xlink:title="calls">
 <path fill="none" stroke="black" d="M4112.03,-302.45C4123.13,-283.31 4141.16,-252.22 4154.17,-229.79"/>
 <polygon fill="black" stroke="black" points="4157.18,-231.59 4159.17,-221.18 4151.12,-228.08 4157.18,-231.59"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L105">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="4138.04" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -275,7 +275,7 @@
 <title>subsequences/2</title>
 <polygon fill="cornsilk" stroke="black" points="2568.5,-338.75 2447.5,-338.75 2447.5,-302.75 2568.5,-302.75 2568.5,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="2455.5" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L42">
+<g id="a_node7_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="2460.75" y="-322.68" font-family="Monospace" font-size="11.00">subsequences/2</text>
 </a>
 </g>
@@ -289,7 +289,7 @@
 <title>subsequence/2</title>
 <polygon fill="cornsilk" stroke="black" points="2283.12,-219.5 2168.88,-219.5 2168.88,-183.5 2283.12,-183.5 2283.12,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="2176.88" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L45">
+<g id="a_node8_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="2182.12" y="-203.43" font-family="Monospace" font-size="11.00">subsequence/2</text>
 </a>
 </g>
@@ -301,12 +301,12 @@
 <!-- subsequences/2&#45;&gt;subsequence/2 -->
 <g id="edge1" class="edge">
 <title>subsequences/2&#45;&gt;subsequence/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L42" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L42" xlink:title="calls">
 <path fill="none" stroke="black" d="M2466.09,-302.32C2416.03,-281.51 2332.28,-246.69 2278.11,-224.16"/>
 <polygon fill="black" stroke="black" points="2279.66,-221.02 2269.08,-220.41 2276.97,-227.48 2279.66,-221.02"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L42">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="2375.46" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -316,7 +316,7 @@
 <title>subsequences/3</title>
 <polygon fill="cornsilk" stroke="black" points="2480.5,-458 2359.5,-458 2359.5,-422 2480.5,-422 2480.5,-458"/>
 <text xml:space="preserve" text-anchor="start" x="2367.5" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L51">
+<g id="a_node9_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L51">
 <text xml:space="preserve" text-anchor="start" x="2372.75" y="-441.93" font-family="Monospace" font-size="11.00">subsequences/3</text>
 </a>
 </g>
@@ -328,12 +328,12 @@
 <!-- subsequences/3&#45;&gt;subsequence/2 -->
 <g id="edge2" class="edge">
 <title>subsequences/3&#45;&gt;subsequence/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L51" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L51" xlink:title="calls">
 <path fill="none" stroke="black" d="M2391.42,-421.63C2363.67,-403.63 2321.75,-373.34 2293.75,-338.75 2266.75,-305.4 2246.74,-259.51 2235.71,-230.43"/>
 <polygon fill="black" stroke="black" points="2239.06,-229.4 2232.33,-221.23 2232.5,-231.82 2239.06,-229.4"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L51">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L51">
 <text xml:space="preserve" text-anchor="start" x="2293.75" y="-317.82" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -343,7 +343,7 @@
 <title>apply_order/3</title>
 <polygon fill="cornsilk" stroke="black" points="2763.12,-338.75 2648.88,-338.75 2648.88,-302.75 2763.12,-302.75 2763.12,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="2656.88" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node58_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L367" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L367">
+<g id="a_node58_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L367" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L367">
 <text xml:space="preserve" text-anchor="start" x="2662.12" y="-322.68" font-family="Monospace" font-size="11.00">apply_order/3</text>
 </a>
 </g>
@@ -355,12 +355,12 @@
 <!-- subsequences/3&#45;&gt;apply_order/3 -->
 <g id="edge3" class="edge">
 <title>subsequences/3&#45;&gt;apply_order/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L51" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L51" xlink:title="calls">
 <path fill="none" stroke="black" d="M2462.51,-421.57C2513.28,-400.76 2598.21,-365.94 2653.15,-343.41"/>
 <polygon fill="black" stroke="black" points="2654.4,-346.69 2662.32,-339.66 2651.74,-340.21 2654.4,-346.69"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L51">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L51">
 <text xml:space="preserve" text-anchor="start" x="2571.58" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -370,7 +370,7 @@
 <title>subsequence/3</title>
 <polygon fill="cornsilk" stroke="black" points="2705.12,-458 2590.88,-458 2590.88,-422 2705.12,-422 2705.12,-458"/>
 <text xml:space="preserve" text-anchor="start" x="2598.88" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L55">
+<g id="a_node10_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L55">
 <text xml:space="preserve" text-anchor="start" x="2604.12" y="-441.93" font-family="Monospace" font-size="11.00">subsequence/3</text>
 </a>
 </g>
@@ -382,12 +382,12 @@
 <!-- subsequence/3&#45;&gt;subsequence/2 -->
 <g id="edge4" class="edge">
 <title>subsequence/3&#45;&gt;subsequence/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L55" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L55" xlink:title="calls">
 <path fill="none" stroke="black" d="M2633.79,-421.59C2626.08,-411.59 2616.77,-398.56 2610,-386 2591.19,-351.11 2607.26,-329.5 2578,-302.75 2536.57,-264.87 2384.64,-231.52 2294.49,-214.5"/>
 <polygon fill="black" stroke="black" points="2295.23,-211.08 2284.76,-212.68 2293.95,-217.96 2295.23,-211.08"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L55">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L55">
 <text xml:space="preserve" text-anchor="start" x="2597.5" y="-317.82" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -395,12 +395,12 @@
 <!-- subsequence/3&#45;&gt;apply_order/3 -->
 <g id="edge5" class="edge">
 <title>subsequence/3&#45;&gt;apply_order/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L55" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L55" xlink:title="calls">
 <path fill="none" stroke="black" d="M2656.56,-421.7C2665.98,-402.65 2681.27,-371.75 2692.35,-349.35"/>
 <polygon fill="black" stroke="black" points="2695.44,-350.99 2696.74,-340.48 2689.16,-347.89 2695.44,-350.99"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L55">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L55">
 <text xml:space="preserve" text-anchor="start" x="2678.74" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -410,7 +410,7 @@
 <title>nonempty_subsequences/2</title>
 <polygon fill="cornsilk" stroke="black" points="2071.88,-458 1890.12,-458 1890.12,-422 2071.88,-422 2071.88,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1898.12" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L60">
+<g id="a_node11_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="1903.38" y="-441.93" font-family="Monospace" font-size="11.00">nonempty_subsequences/2</text>
 </a>
 </g>
@@ -424,7 +424,7 @@
 <title>nonempty_subsequence/2</title>
 <polygon fill="cornsilk" stroke="black" points="2068.5,-338.75 1893.5,-338.75 1893.5,-302.75 2068.5,-302.75 2068.5,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1901.5" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L63">
+<g id="a_node12_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="1906.75" y="-322.68" font-family="Monospace" font-size="11.00">nonempty_subsequence/2</text>
 </a>
 </g>
@@ -436,12 +436,12 @@
 <!-- nonempty_subsequences/2&#45;&gt;nonempty_subsequence/2 -->
 <g id="edge6" class="edge">
 <title>nonempty_subsequences/2&#45;&gt;nonempty_subsequence/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L60" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M1981,-421.7C1981,-403 1981,-372.87 1981,-350.58"/>
 <polygon fill="black" stroke="black" points="1984.5,-350.64 1981,-340.64 1977.5,-350.64 1984.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L60">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="1981" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -449,12 +449,12 @@
 <!-- nonempty_subsequence/2&#45;&gt;subsequence/2 -->
 <g id="edge7" class="edge">
 <title>nonempty_subsequence/2&#45;&gt;subsequence/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L63" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M2017.41,-302.32C2060.54,-281.68 2132.45,-247.27 2179.55,-224.73"/>
 <polygon fill="black" stroke="black" points="2180.91,-227.96 2188.42,-220.48 2177.89,-221.64 2180.91,-227.96"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L63">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="2110.85" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -464,7 +464,7 @@
 <title>power_set/2</title>
 <polygon fill="cornsilk" stroke="black" points="2429.38,-338.75 2328.62,-338.75 2328.62,-302.75 2429.38,-302.75 2429.38,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="2336.62" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L68">
+<g id="a_node13_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L68">
 <text xml:space="preserve" text-anchor="start" x="2341.88" y="-322.68" font-family="Monospace" font-size="11.00">power_set/2</text>
 </a>
 </g>
@@ -476,12 +476,12 @@
 <!-- power_set/2&#45;&gt;subsequence/2 -->
 <g id="edge8" class="edge">
 <title>power_set/2&#45;&gt;subsequence/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L68" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L68" xlink:title="calls">
 <path fill="none" stroke="black" d="M2356.42,-302.45C2330.32,-282.45 2287.18,-249.38 2257.71,-226.8"/>
 <polygon fill="black" stroke="black" points="2259.94,-224.1 2249.87,-220.79 2255.68,-229.65 2259.94,-224.1"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L68">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L68">
 <text xml:space="preserve" text-anchor="start" x="2307.09" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -491,7 +491,7 @@
 <title>inits/2</title>
 <polygon fill="cornsilk" stroke="black" points="735.88,-338.75 662.12,-338.75 662.12,-302.75 735.88,-302.75 735.88,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="670.12" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L71">
+<g id="a_node14_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L71">
 <text xml:space="preserve" text-anchor="start" x="675.38" y="-322.68" font-family="Monospace" font-size="11.00">inits/2</text>
 </a>
 </g>
@@ -505,7 +505,7 @@
 <title>init/2</title>
 <polygon fill="cornsilk" stroke="black" points="773.5,-219.5 706.5,-219.5 706.5,-183.5 773.5,-183.5 773.5,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="714.5" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L74">
+<g id="a_node15_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="719.75" y="-203.43" font-family="Monospace" font-size="11.00">init/2</text>
 </a>
 </g>
@@ -517,12 +517,12 @@
 <!-- inits/2&#45;&gt;init/2 -->
 <g id="edge9" class="edge">
 <title>inits/2&#45;&gt;init/2</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L71" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M705.05,-302.45C711.65,-283.57 722.32,-253.06 730.13,-230.71"/>
 <polygon fill="black" stroke="black" points="733.43,-231.9 733.43,-221.3 726.82,-229.58 733.43,-231.9"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L71">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L71">
 <text xml:space="preserve" text-anchor="start" x="720.73" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -544,12 +544,12 @@
 <!-- init/2&#45;&gt;list::append/3 -->
 <g id="edge44" class="edge">
 <title>init/2&#45;&gt;list::append/3</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L74" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L74" xlink:title="calls">
 <path fill="none" stroke="black" d="M755.49,-183.2C773.02,-163.63 801.74,-131.56 821.91,-109.03"/>
 <polygon fill="black" stroke="black" points="824.37,-111.53 828.43,-101.75 819.16,-106.86 824.37,-111.53"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L74">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="795.65" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -559,7 +559,7 @@
 <title>tails/2</title>
 <polygon fill="cornsilk" stroke="black" points="925.88,-338.75 852.12,-338.75 852.12,-302.75 925.88,-302.75 925.88,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="860.12" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L77">
+<g id="a_node16_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L77">
 <text xml:space="preserve" text-anchor="start" x="865.38" y="-322.68" font-family="Monospace" font-size="11.00">tails/2</text>
 </a>
 </g>
@@ -573,7 +573,7 @@
 <title>tail/2</title>
 <polygon fill="cornsilk" stroke="black" points="983.5,-219.5 916.5,-219.5 916.5,-183.5 983.5,-183.5 983.5,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="924.5" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L80">
+<g id="a_node17_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="929.75" y="-203.43" font-family="Monospace" font-size="11.00">tail/2</text>
 </a>
 </g>
@@ -585,12 +585,12 @@
 <!-- tails/2&#45;&gt;tail/2 -->
 <g id="edge10" class="edge">
 <title>tails/2&#45;&gt;tail/2</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L77" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L77" xlink:title="calls">
 <path fill="none" stroke="black" d="M898,-302.45C907.96,-283.31 924.13,-252.22 935.8,-229.79"/>
 <polygon fill="black" stroke="black" points="938.75,-231.7 940.26,-221.21 932.54,-228.47 938.75,-231.7"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L77">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L77">
 <text xml:space="preserve" text-anchor="start" x="921.33" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -598,12 +598,12 @@
 <!-- tail/2&#45;&gt;list::append/3 -->
 <g id="edge45" class="edge">
 <title>tail/2&#45;&gt;list::append/3</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L80" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M934.51,-183.2C916.98,-163.63 888.26,-131.56 868.09,-109.03"/>
 <polygon fill="black" stroke="black" points="870.84,-106.86 861.57,-101.75 865.63,-111.53 870.84,-106.86"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L80">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="900.65" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -613,7 +613,7 @@
 <title>inits1/2</title>
 <polygon fill="cornsilk" stroke="black" points="834.25,-338.75 753.75,-338.75 753.75,-302.75 834.25,-302.75 834.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="761.75" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L83">
+<g id="a_node18_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="767" y="-322.68" font-family="Monospace" font-size="11.00">inits1/2</text>
 </a>
 </g>
@@ -625,12 +625,12 @@
 <!-- inits1/2&#45;&gt;init/2 -->
 <g id="edge11" class="edge">
 <title>inits1/2&#45;&gt;init/2</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L83" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M786.03,-302.45C777.26,-283.4 763.03,-252.5 752.71,-230.1"/>
 <polygon fill="black" stroke="black" points="756,-228.87 748.63,-221.25 749.64,-231.79 756,-228.87"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L83">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="768.62" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -640,7 +640,7 @@
 <title>init1/2</title>
 <polygon fill="cornsilk" stroke="black" points="643.88,-338.75 570.12,-338.75 570.12,-302.75 643.88,-302.75 643.88,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="578.12" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L86">
+<g id="a_node19_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L86">
 <text xml:space="preserve" text-anchor="start" x="583.38" y="-322.68" font-family="Monospace" font-size="11.00">init1/2</text>
 </a>
 </g>
@@ -652,12 +652,12 @@
 <!-- init1/2&#45;&gt;init/2 -->
 <g id="edge12" class="edge">
 <title>init1/2&#45;&gt;init/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L86" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L86" xlink:title="calls">
 <path fill="none" stroke="black" d="M626.62,-302.45C649.12,-282.62 686.17,-249.95 711.76,-227.39"/>
 <polygon fill="black" stroke="black" points="713.97,-230.11 719.16,-220.87 709.34,-224.86 713.97,-230.11"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L86">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L86">
 <text xml:space="preserve" text-anchor="start" x="677.49" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -667,7 +667,7 @@
 <title>tails1/2</title>
 <polygon fill="cornsilk" stroke="black" points="1024.25,-338.75 943.75,-338.75 943.75,-302.75 1024.25,-302.75 1024.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="951.75" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L90">
+<g id="a_node20_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L90">
 <text xml:space="preserve" text-anchor="start" x="957" y="-322.68" font-family="Monospace" font-size="11.00">tails1/2</text>
 </a>
 </g>
@@ -679,12 +679,12 @@
 <!-- tails1/2&#45;&gt;tail/2 -->
 <g id="edge13" class="edge">
 <title>tails1/2&#45;&gt;tail/2</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L90" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L90" xlink:title="calls">
 <path fill="none" stroke="black" d="M978.98,-302.45C973.51,-283.57 964.66,-253.06 958.18,-230.71"/>
 <polygon fill="black" stroke="black" points="961.61,-229.95 955.46,-221.33 954.88,-231.9 961.61,-229.95"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L90">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L90">
 <text xml:space="preserve" text-anchor="start" x="968.02" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -694,7 +694,7 @@
 <title>tail1/2</title>
 <polygon fill="cornsilk" stroke="black" points="1115.88,-338.75 1042.12,-338.75 1042.12,-302.75 1115.88,-302.75 1115.88,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1050.12" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node21_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L93">
+<g id="a_node21_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="1055.38" y="-322.68" font-family="Monospace" font-size="11.00">tail1/2</text>
 </a>
 </g>
@@ -706,12 +706,12 @@
 <!-- tail1/2&#45;&gt;tail/2 -->
 <g id="edge14" class="edge">
 <title>tail1/2&#45;&gt;tail/2</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L93" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L93" xlink:title="calls">
 <path fill="none" stroke="black" d="M1059.97,-302.45C1038.15,-282.62 1002.21,-249.95 977.39,-227.39"/>
 <polygon fill="black" stroke="black" points="979.99,-225.03 970.23,-220.89 975.28,-230.21 979.99,-225.03"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L93">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="1018.37" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -721,7 +721,7 @@
 <title>init_tails/2</title>
 <polygon fill="cornsilk" stroke="black" points="898.75,-219.5 791.25,-219.5 791.25,-183.5 898.75,-183.5 898.75,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="799.25" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node22_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L97">
+<g id="a_node22_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L97">
 <text xml:space="preserve" text-anchor="start" x="804.5" y="-203.43" font-family="Monospace" font-size="11.00">init_tails/2</text>
 </a>
 </g>
@@ -733,12 +733,12 @@
 <!-- init_tails/2&#45;&gt;list::append/3 -->
 <g id="edge46" class="edge">
 <title>init_tails/2&#45;&gt;list::append/3</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L97" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L97" xlink:title="calls">
 <path fill="none" stroke="black" d="M845,-183.2C845,-164.5 845,-134.37 845,-112.08"/>
 <polygon fill="black" stroke="black" points="848.5,-112.14 845,-102.14 841.5,-112.14 848.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L97">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L97">
 <text xml:space="preserve" text-anchor="start" x="845" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -748,7 +748,7 @@
 <title>init_tail/2</title>
 <polygon fill="cornsilk" stroke="black" points="1102.38,-219.5 1001.62,-219.5 1001.62,-183.5 1102.38,-183.5 1102.38,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1009.62" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node23_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L100">
+<g id="a_node23_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="1014.88" y="-203.43" font-family="Monospace" font-size="11.00">init_tail/2</text>
 </a>
 </g>
@@ -760,12 +760,12 @@
 <!-- init_tail/2&#45;&gt;list::append/3 -->
 <g id="edge47" class="edge">
 <title>init_tail/2&#45;&gt;list::append/3</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L100" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M1021.46,-183.2C985.45,-162.81 925.49,-128.84 885.6,-106.25"/>
 <polygon fill="black" stroke="black" points="887.41,-103.25 876.99,-101.37 883.96,-109.34 887.41,-103.25"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L100">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="954.71" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -787,12 +787,12 @@
 <!-- lcs_dp/3&#45;&gt;list::length/2 -->
 <g id="edge48" class="edge">
 <title>lcs_dp/3&#45;&gt;list::length/2</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L116" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L116" xlink:title="calls">
 <path fill="none" stroke="black" d="M4129.3,-185.58C4126.51,-184.81 4123.73,-184.1 4121,-183.5 3915.98,-138.28 3860.19,-153.95 3651,-136.25 3393.85,-114.49 3087.88,-95.51 2951.61,-87.42"/>
 <polygon fill="black" stroke="black" points="2952.22,-83.95 2942.03,-86.85 2951.81,-90.93 2952.22,-83.95"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L116">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="3839.63" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -802,7 +802,7 @@
 <title>insert_or_extend/3</title>
 <polygon fill="cornsilk" stroke="black" points="3426,-219.5 3278,-219.5 3278,-183.5 3426,-183.5 3426,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="3286" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node26_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L136">
+<g id="a_node26_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L136">
 <text xml:space="preserve" text-anchor="start" x="3291.25" y="-203.43" font-family="Monospace" font-size="11.00">insert_or_extend/3</text>
 </a>
 </g>
@@ -814,12 +814,12 @@
 <!-- lis_helper/3&#45;&gt;insert_or_extend/3 -->
 <g id="edge18" class="edge">
 <title>lis_helper/3&#45;&gt;insert_or_extend/3</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L132" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L132" xlink:title="calls">
 <path fill="none" stroke="black" d="M3515.92,-304.46C3466.01,-290.2 3398.85,-270.57 3393.75,-266.75 3381.19,-257.34 3371.34,-242.96 3364.37,-230.18"/>
 <polygon fill="black" stroke="black" points="3367.53,-228.66 3359.88,-221.33 3361.28,-231.83 3367.53,-228.66"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L132">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="3393.75" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -829,7 +829,7 @@
 <title>longest_list/2</title>
 <polygon fill="cornsilk" stroke="black" points="3565.5,-219.5 3444.5,-219.5 3444.5,-183.5 3565.5,-183.5 3565.5,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="3452.5" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node27_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L145">
+<g id="a_node27_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L145">
 <text xml:space="preserve" text-anchor="start" x="3457.75" y="-203.43" font-family="Monospace" font-size="11.00">longest_list/2</text>
 </a>
 </g>
@@ -841,12 +841,12 @@
 <!-- lis_helper/3&#45;&gt;longest_list/2 -->
 <g id="edge17" class="edge">
 <title>lis_helper/3&#45;&gt;longest_list/2</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L130" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L130" xlink:title="calls">
 <path fill="none" stroke="black" d="M3560.41,-302.45C3549.8,-283.31 3532.56,-252.22 3520.13,-229.79"/>
 <polygon fill="black" stroke="black" points="3523.27,-228.24 3515.36,-221.2 3517.15,-231.64 3523.27,-228.24"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L130">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L130">
 <text xml:space="preserve" text-anchor="start" x="3539.45" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -854,12 +854,12 @@
 <!-- longest_list/2&#45;&gt;list::length/2 -->
 <g id="edge49" class="edge">
 <title>longest_list/2&#45;&gt;list::length/2</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L146" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L146" xlink:title="calls">
 <path fill="none" stroke="black" d="M3444.34,-185.54C3441.19,-184.83 3438.06,-184.15 3435,-183.5 3262.4,-146.99 3057.82,-112.21 2951.78,-94.81"/>
 <polygon fill="black" stroke="black" points="2952.52,-91.39 2942.09,-93.23 2951.39,-98.29 2952.52,-91.39"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L146">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L146">
 <text xml:space="preserve" text-anchor="start" x="3252.46" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -867,12 +867,12 @@
 <!-- lds_helper/3&#45;&gt;longest_list/2 -->
 <g id="edge20" class="edge">
 <title>lds_helper/3&#45;&gt;longest_list/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L159" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L159" xlink:title="calls">
 <path fill="none" stroke="black" d="M3667.82,-302.45C3634.67,-282.1 3579.5,-248.23 3542.7,-225.64"/>
 <polygon fill="black" stroke="black" points="3544.94,-222.91 3534.59,-220.66 3541.28,-228.88 3544.94,-222.91"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L159">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L159">
 <text xml:space="preserve" text-anchor="start" x="3606.23" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -882,7 +882,7 @@
 <title>insert_or_extend_decreasing/3</title>
 <polygon fill="cornsilk" stroke="black" points="3806.12,-219.5 3583.88,-219.5 3583.88,-183.5 3806.12,-183.5 3806.12,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="3591.88" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node29_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L165">
+<g id="a_node29_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L165">
 <text xml:space="preserve" text-anchor="start" x="3597.12" y="-203.43" font-family="Monospace" font-size="11.00">insert_or_extend_decreasing/3</text>
 </a>
 </g>
@@ -894,12 +894,12 @@
 <!-- lds_helper/3&#45;&gt;insert_or_extend_decreasing/3 -->
 <g id="edge21" class="edge">
 <title>lds_helper/3&#45;&gt;insert_or_extend_decreasing/3</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L161" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L161" xlink:title="calls">
 <path fill="none" stroke="black" d="M3695.85,-302.45C3695.69,-283.75 3695.44,-253.62 3695.25,-231.33"/>
 <polygon fill="black" stroke="black" points="3698.75,-231.35 3695.16,-221.39 3691.75,-231.41 3698.75,-231.35"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L161">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L161">
 <text xml:space="preserve" text-anchor="start" x="3695.53" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -909,7 +909,7 @@
 <title>longest_common_increasing_subsequence/3</title>
 <polygon fill="cornsilk" stroke="black" points="3497.88,-338.75 3208.12,-338.75 3208.12,-302.75 3497.88,-302.75 3497.88,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="3216.12" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node30_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L173">
+<g id="a_node30_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L173">
 <text xml:space="preserve" text-anchor="start" x="3221.38" y="-322.68" font-family="Monospace" font-size="11.00">longest_common_increasing_subsequence/3</text>
 </a>
 </g>
@@ -921,12 +921,12 @@
 <!-- longest_common_increasing_subsequence/3&#45;&gt;subsequence/2 -->
 <g id="edge22" class="edge">
 <title>longest_common_increasing_subsequence/3&#45;&gt;subsequence/2</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L173" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L173" xlink:title="calls">
 <path fill="none" stroke="black" d="M3207.93,-303.56C3204.93,-303.28 3201.95,-303.01 3199,-302.75 3078.04,-292.09 2769.64,-303 2653.75,-266.75 2644.47,-263.85 2644.18,-258.69 2635,-255.5 2603.64,-244.6 2403,-221.67 2294.85,-209.87"/>
 <polygon fill="black" stroke="black" points="2295.24,-206.39 2284.92,-208.78 2294.48,-213.35 2295.24,-206.39"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L173">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L173">
 <text xml:space="preserve" text-anchor="start" x="2653.75" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -934,12 +934,12 @@
 <!-- longest_common_increasing_subsequence/3&#45;&gt;longest_list/2 -->
 <g id="edge24" class="edge">
 <title>longest_common_increasing_subsequence/3&#45;&gt;longest_list/2</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L173" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L173" xlink:title="calls">
 <path fill="none" stroke="black" d="M3375.43,-302.45C3401.36,-282.45 3444.22,-249.38 3473.49,-226.8"/>
 <polygon fill="black" stroke="black" points="3475.5,-229.68 3481.28,-220.8 3471.23,-224.13 3475.5,-229.68"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L173">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L173">
 <text xml:space="preserve" text-anchor="start" x="3433.56" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -949,7 +949,7 @@
 <title>is_increasing/1</title>
 <polygon fill="cornsilk" stroke="black" points="3079.88,-219.5 2952.12,-219.5 2952.12,-183.5 3079.88,-183.5 3079.88,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="2960.12" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node31_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L177">
+<g id="a_node31_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L177">
 <text xml:space="preserve" text-anchor="start" x="2965.38" y="-203.43" font-family="Monospace" font-size="11.00">is_increasing/1</text>
 </a>
 </g>
@@ -961,12 +961,12 @@
 <!-- longest_common_increasing_subsequence/3&#45;&gt;is_increasing/1 -->
 <g id="edge23" class="edge">
 <title>longest_common_increasing_subsequence/3&#45;&gt;is_increasing/1</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L173" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L173" xlink:title="calls">
 <path fill="none" stroke="black" d="M3302.91,-302.32C3242.68,-281.37 3141.63,-246.21 3076.94,-223.7"/>
 <polygon fill="black" stroke="black" points="3078.11,-220.4 3067.52,-220.42 3075.81,-227.02 3078.11,-220.4"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L173">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L173">
 <text xml:space="preserve" text-anchor="start" x="3194.6" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -974,12 +974,12 @@
 <!-- lrs_helper/5&#45;&gt;list::length/2 -->
 <g id="edge50" class="edge">
 <title>lrs_helper/5&#45;&gt;list::length/2</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L195" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L195" xlink:title="calls">
 <path fill="none" stroke="black" d="M2880,-183.2C2880,-164.5 2880,-134.37 2880,-112.08"/>
 <polygon fill="black" stroke="black" points="2883.5,-112.14 2880,-102.14 2876.5,-112.14 2883.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L195">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L195">
 <text xml:space="preserve" text-anchor="start" x="2880" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -989,7 +989,7 @@
 <title>is_subsequence_of/2</title>
 <polygon fill="cornsilk" stroke="black" points="2936.38,-338.75 2781.62,-338.75 2781.62,-302.75 2936.38,-302.75 2936.38,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="2789.62" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node33_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L207">
+<g id="a_node33_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L207">
 <text xml:space="preserve" text-anchor="start" x="2794.88" y="-322.68" font-family="Monospace" font-size="11.00">is_subsequence_of/2</text>
 </a>
 </g>
@@ -1003,7 +1003,7 @@
 <title>proper_subsequence/2</title>
 <polygon fill="cornsilk" stroke="black" points="2939.75,-458 2778.25,-458 2778.25,-422 2939.75,-422 2939.75,-458"/>
 <text xml:space="preserve" text-anchor="start" x="2786.25" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node34_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L215" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L215">
+<g id="a_node34_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L215" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L215">
 <text xml:space="preserve" text-anchor="start" x="2791.5" y="-441.93" font-family="Monospace" font-size="11.00">proper_subsequence/2</text>
 </a>
 </g>
@@ -1015,12 +1015,12 @@
 <!-- proper_subsequence/2&#45;&gt;is_subsequence_of/2 -->
 <g id="edge26" class="edge">
 <title>proper_subsequence/2&#45;&gt;is_subsequence_of/2</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L215" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L215" xlink:title="calls">
 <path fill="none" stroke="black" d="M2859,-421.7C2859,-403 2859,-372.87 2859,-350.58"/>
 <polygon fill="black" stroke="black" points="2862.5,-350.64 2859,-340.64 2855.5,-350.64 2862.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L215" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L215">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L215" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L215">
 <text xml:space="preserve" text-anchor="start" x="2859" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1042,12 +1042,12 @@
 <!-- subsequence_at_indices/4&#45;&gt;list::nth1/3 -->
 <g id="edge51" class="edge">
 <title>subsequence_at_indices/4&#45;&gt;list::nth1/3</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L223" xlink:title="calls">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L223" xlink:title="calls">
 <path fill="none" stroke="black" d="M339,-302.45C339,-283.75 339,-253.62 339,-231.33"/>
 <polygon fill="black" stroke="black" points="342.5,-231.39 339,-221.39 335.5,-231.39 342.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L223" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L223">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L223" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L223">
 <text xml:space="preserve" text-anchor="start" x="339" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1057,7 +1057,7 @@
 <title>common_subsequences/3</title>
 <polygon fill="cornsilk" stroke="black" points="1875.12,-338.75 1706.88,-338.75 1706.88,-302.75 1875.12,-302.75 1875.12,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1714.88" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node36_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L229">
+<g id="a_node36_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="1720.12" y="-322.68" font-family="Monospace" font-size="11.00">common_subsequences/3</text>
 </a>
 </g>
@@ -1069,12 +1069,12 @@
 <!-- common_subsequences/3&#45;&gt;subsequence/2 -->
 <g id="edge28" class="edge">
 <title>common_subsequences/3&#45;&gt;subsequence/2</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L229" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L229" xlink:title="calls">
 <path fill="none" stroke="black" d="M1873.25,-302.28C1917.02,-292.59 1971.66,-279.86 2020,-266.75 2068.35,-253.63 2122.41,-236.69 2163.01,-223.49"/>
 <polygon fill="black" stroke="black" points="2163.96,-226.86 2172.38,-220.43 2161.79,-220.21 2163.96,-226.86"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L229">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="2059.73" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1084,7 +1084,7 @@
 <title>common_subsequence/3</title>
 <polygon fill="cornsilk" stroke="black" points="2247.75,-338.75 2086.25,-338.75 2086.25,-302.75 2247.75,-302.75 2247.75,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="2094.25" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node37_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L232">
+<g id="a_node37_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L232">
 <text xml:space="preserve" text-anchor="start" x="2099.5" y="-322.68" font-family="Monospace" font-size="11.00">common_subsequence/3</text>
 </a>
 </g>
@@ -1096,12 +1096,12 @@
 <!-- common_subsequence/3&#45;&gt;subsequence/2 -->
 <g id="edge29" class="edge">
 <title>common_subsequence/3&#45;&gt;subsequence/2</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L232" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L232" xlink:title="calls">
 <path fill="none" stroke="black" d="M2175.71,-302.45C2185.29,-283.4 2200.84,-252.5 2212.11,-230.1"/>
 <polygon fill="black" stroke="black" points="2215.21,-231.73 2216.58,-221.22 2208.96,-228.58 2215.21,-231.73"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L232">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L232">
 <text xml:space="preserve" text-anchor="start" x="2198.27" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1111,7 +1111,7 @@
 <title>count_distinct_subsequences/3</title>
 <polygon fill="cornsilk" stroke="black" points="1686.12,-219.5 1463.88,-219.5 1463.88,-183.5 1686.12,-183.5 1686.12,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1471.88" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node38_43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L237">
+<g id="a_node38_43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L237">
 <text xml:space="preserve" text-anchor="start" x="1477.12" y="-203.43" font-family="Monospace" font-size="11.00">count_distinct_subsequences/3</text>
 </a>
 </g>
@@ -1125,7 +1125,7 @@
 <title>count_distinct_subseq_dp/5</title>
 <polygon fill="cornsilk" stroke="black" points="1676,-100.25 1474,-100.25 1474,-64.25 1676,-64.25 1676,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1482" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node39_44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L242" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L242">
+<g id="a_node39_44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L242" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L242">
 <text xml:space="preserve" text-anchor="start" x="1487.25" y="-84.17" font-family="Monospace" font-size="11.00">count_distinct_subseq_dp/5</text>
 </a>
 </g>
@@ -1137,12 +1137,12 @@
 <!-- count_distinct_subsequences/3&#45;&gt;count_distinct_subseq_dp/5 -->
 <g id="edge30" class="edge">
 <title>count_distinct_subsequences/3&#45;&gt;count_distinct_subseq_dp/5</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L237" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L237" xlink:title="calls">
 <path fill="none" stroke="black" d="M1575,-183.2C1575,-164.5 1575,-134.37 1575,-112.08"/>
 <polygon fill="black" stroke="black" points="1578.5,-112.14 1575,-102.14 1571.5,-112.14 1578.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L237">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L237">
 <text xml:space="preserve" text-anchor="start" x="1575" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1150,12 +1150,12 @@
 <!-- count_distinct_subsequences/3&#45;&gt;list::length/2 -->
 <g id="edge52" class="edge">
 <title>count_distinct_subsequences/3&#45;&gt;list::length/2</title>
-<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L237" xlink:title="calls">
+<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L237" xlink:title="calls">
 <path fill="none" stroke="black" d="M1598.39,-183.21C1620.81,-167.73 1656.25,-146.01 1690.75,-136.25 1797.82,-105.97 2566.3,-89.13 2807.66,-84.54"/>
 <polygon fill="black" stroke="black" points="2807.64,-88.05 2817.57,-84.36 2807.51,-81.05 2807.64,-88.05"/>
 </a>
 </g>
-<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L237">
+<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L237">
 <text xml:space="preserve" text-anchor="start" x="1690.75" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1165,7 +1165,7 @@
 <title>is_prefix_of/2</title>
 <polygon fill="cornsilk" stroke="black" points="3187.5,-458 3066.5,-458 3066.5,-422 3187.5,-422 3187.5,-458"/>
 <text xml:space="preserve" text-anchor="start" x="3074.5" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node40_45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L258" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L258">
+<g id="a_node40_45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L258" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L258">
 <text xml:space="preserve" text-anchor="start" x="3079.75" y="-441.93" font-family="Monospace" font-size="11.00">is_prefix_of/2</text>
 </a>
 </g>
@@ -1179,7 +1179,7 @@
 <title>is_suffix_of/2</title>
 <polygon fill="cornsilk" stroke="black" points="688.5,-219.5 567.5,-219.5 567.5,-183.5 688.5,-183.5 688.5,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="575.5" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node41_46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L262" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L262">
+<g id="a_node41_46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L262" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L262">
 <text xml:space="preserve" text-anchor="start" x="580.75" y="-203.43" font-family="Monospace" font-size="11.00">is_suffix_of/2</text>
 </a>
 </g>
@@ -1191,12 +1191,12 @@
 <!-- is_suffix_of/2&#45;&gt;list::append/3 -->
 <g id="edge53" class="edge">
 <title>is_suffix_of/2&#45;&gt;list::append/3</title>
-<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L262" xlink:title="calls">
+<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L262" xlink:title="calls">
 <path fill="none" stroke="black" d="M660.02,-183.2C697.92,-162.72 761.16,-128.55 802.97,-105.96"/>
 <polygon fill="black" stroke="black" points="804.38,-109.17 811.52,-101.34 801.06,-103.02 804.38,-109.17"/>
 </a>
 </g>
-<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L262" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L262">
+<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L262" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L262">
 <text xml:space="preserve" text-anchor="start" x="743.01" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1206,7 +1206,7 @@
 <title>subslices/2</title>
 <polygon fill="cornsilk" stroke="black" points="552.38,-338.75 451.62,-338.75 451.62,-302.75 552.38,-302.75 552.38,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="459.62" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node42_47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L269">
+<g id="a_node42_47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L269">
 <text xml:space="preserve" text-anchor="start" x="464.88" y="-322.68" font-family="Monospace" font-size="11.00">subslices/2</text>
 </a>
 </g>
@@ -1220,7 +1220,7 @@
 <title>subslice/2</title>
 <polygon fill="cornsilk" stroke="black" points="549,-219.5 455,-219.5 455,-183.5 549,-183.5 549,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="463" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node43_48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L272">
+<g id="a_node43_48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L272">
 <text xml:space="preserve" text-anchor="start" x="468.25" y="-203.43" font-family="Monospace" font-size="11.00">subslice/2</text>
 </a>
 </g>
@@ -1232,12 +1232,12 @@
 <!-- subslices/2&#45;&gt;subslice/2 -->
 <g id="edge31" class="edge">
 <title>subslices/2&#45;&gt;subslice/2</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L269" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L269" xlink:title="calls">
 <path fill="none" stroke="black" d="M502,-302.45C502,-283.75 502,-253.62 502,-231.33"/>
 <polygon fill="black" stroke="black" points="505.5,-231.39 502,-221.39 498.5,-231.39 505.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L269">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L269">
 <text xml:space="preserve" text-anchor="start" x="502" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1245,12 +1245,12 @@
 <!-- subslice/2&#45;&gt;list::append/3 -->
 <g id="edge54" class="edge">
 <title>subslice/2&#45;&gt;list::append/3</title>
-<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L272" xlink:title="calls">
+<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L272" xlink:title="calls">
 <path fill="none" stroke="black" d="M549.33,-184.32C610.18,-163.52 715.96,-127.36 783.12,-104.4"/>
 <polygon fill="black" stroke="black" points="784.2,-107.73 792.53,-101.18 781.94,-101.11 784.2,-107.73"/>
 </a>
 </g>
-<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L272">
+<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L272">
 <text xml:space="preserve" text-anchor="start" x="683.78" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1260,7 +1260,7 @@
 <title>sliding_window/3</title>
 <polygon fill="cornsilk" stroke="black" points="1268.25,-338.75 1133.75,-338.75 1133.75,-302.75 1268.25,-302.75 1268.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1141.75" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node44_49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L279">
+<g id="a_node44_49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L279">
 <text xml:space="preserve" text-anchor="start" x="1147" y="-322.68" font-family="Monospace" font-size="11.00">sliding_window/3</text>
 </a>
 </g>
@@ -1274,7 +1274,7 @@
 <title>sliding_window_gen/3</title>
 <polygon fill="cornsilk" stroke="black" points="1281.75,-219.5 1120.25,-219.5 1120.25,-183.5 1281.75,-183.5 1281.75,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1128.25" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node45_50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L282" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L282">
+<g id="a_node45_50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L282" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L282">
 <text xml:space="preserve" text-anchor="start" x="1133.5" y="-203.43" font-family="Monospace" font-size="11.00">sliding_window_gen/3</text>
 </a>
 </g>
@@ -1286,12 +1286,12 @@
 <!-- sliding_window/3&#45;&gt;sliding_window_gen/3 -->
 <g id="edge32" class="edge">
 <title>sliding_window/3&#45;&gt;sliding_window_gen/3</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L279" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L279" xlink:title="calls">
 <path fill="none" stroke="black" d="M1201,-302.45C1201,-283.75 1201,-253.62 1201,-231.33"/>
 <polygon fill="black" stroke="black" points="1204.5,-231.39 1201,-221.39 1197.5,-231.39 1204.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L279">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L279">
 <text xml:space="preserve" text-anchor="start" x="1201" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1299,12 +1299,12 @@
 <!-- sliding_window_gen/3&#45;&gt;list::append/3 -->
 <g id="edge56" class="edge">
 <title>sliding_window_gen/3&#45;&gt;list::append/3</title>
-<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L282" xlink:title="calls">
+<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L282" xlink:title="calls">
 <path fill="none" stroke="black" d="M1148.09,-183.07C1084.2,-162.03 976.83,-126.67 908.53,-104.17"/>
 <polygon fill="black" stroke="black" points="909.94,-100.95 899.35,-101.15 907.75,-107.6 909.94,-100.95"/>
 </a>
 </g>
-<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L282" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L282">
+<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L282" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L282">
 <text xml:space="preserve" text-anchor="start" x="1033.67" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1312,12 +1312,12 @@
 <!-- sliding_window_gen/3&#45;&gt;list::length/2 -->
 <g id="edge55" class="edge">
 <title>sliding_window_gen/3&#45;&gt;list::length/2</title>
-<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L282" xlink:title="calls">
+<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L282" xlink:title="calls">
 <path fill="none" stroke="black" d="M1276.98,-183.02C1346.32,-167.84 1451.84,-146.72 1544.75,-136.25 1792.7,-108.31 2566.67,-89.9 2807.64,-84.74"/>
 <polygon fill="black" stroke="black" points="2807.61,-88.24 2817.53,-84.53 2807.46,-81.24 2807.61,-88.24"/>
 </a>
 </g>
-<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L282" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L282">
+<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L282" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L282">
 <text xml:space="preserve" text-anchor="start" x="1544.75" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1339,12 +1339,12 @@
 <!-- random_subsequence_helper/2&#45;&gt;fast_random(Algorithm)::maybe/0 -->
 <g id="edge57" class="edge">
 <title>random_subsequence_helper/2&#45;&gt;fast_random(Algorithm)::maybe/0</title>
-<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L293" xlink:title="calls">
+<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L293" xlink:title="calls">
 <path fill="none" stroke="black" d="M125.1,-302.45C128.46,-283.66 133.89,-253.34 137.89,-231.02"/>
 <polygon fill="black" stroke="black" points="141.3,-231.82 139.62,-221.36 134.41,-230.59 141.3,-231.82"/>
 </a>
 </g>
-<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L293">
+<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L293">
 <text xml:space="preserve" text-anchor="start" x="133.13" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1354,7 +1354,7 @@
 <title>subsequences_with_min_span/3</title>
 <polygon fill="cornsilk" stroke="black" points="4050.75,-458 3835.25,-458 3835.25,-422 4050.75,-422 4050.75,-458"/>
 <text xml:space="preserve" text-anchor="start" x="3843.25" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node47_52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L302" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L302">
+<g id="a_node47_52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L302" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L302">
 <text xml:space="preserve" text-anchor="start" x="3848.5" y="-441.93" font-family="Monospace" font-size="11.00">subsequences_with_min_span/3</text>
 </a>
 </g>
@@ -1368,7 +1368,7 @@
 <title>subsequence_with_min_span/4</title>
 <polygon fill="cornsilk" stroke="black" points="3976.38,-338.75 3767.62,-338.75 3767.62,-302.75 3976.38,-302.75 3976.38,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="3775.62" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node48_53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L305" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L305">
+<g id="a_node48_53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L305" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L305">
 <text xml:space="preserve" text-anchor="start" x="3780.88" y="-322.68" font-family="Monospace" font-size="11.00">subsequence_with_min_span/4</text>
 </a>
 </g>
@@ -1380,12 +1380,12 @@
 <!-- subsequences_with_min_span/3&#45;&gt;subsequence_with_min_span/4 -->
 <g id="edge34" class="edge">
 <title>subsequences_with_min_span/3&#45;&gt;subsequence_with_min_span/4</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L302" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L302" xlink:title="calls">
 <path fill="none" stroke="black" d="M3932.52,-421.7C3920.88,-402.48 3901.94,-371.19 3888.34,-348.74"/>
 <polygon fill="black" stroke="black" points="3891.48,-347.16 3883.3,-340.42 3885.49,-350.78 3891.48,-347.16"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L302" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L302">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L302" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L302">
 <text xml:space="preserve" text-anchor="start" x="3909.63" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1395,7 +1395,7 @@
 <title>drop_until/4</title>
 <polygon fill="cornsilk" stroke="black" points="3931.75,-219.5 3824.25,-219.5 3824.25,-183.5 3931.75,-183.5 3931.75,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="3832.25" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node49_54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L314" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L314">
+<g id="a_node49_54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L314" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L314">
 <text xml:space="preserve" text-anchor="start" x="3837.5" y="-203.43" font-family="Monospace" font-size="11.00">drop_until/4</text>
 </a>
 </g>
@@ -1407,12 +1407,12 @@
 <!-- subsequence_with_min_span/4&#45;&gt;drop_until/4 -->
 <g id="edge35" class="edge">
 <title>subsequence_with_min_span/4&#45;&gt;drop_until/4</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L306" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L306" xlink:title="calls">
 <path fill="none" stroke="black" d="M3872.89,-302.45C3873.84,-283.75 3875.38,-253.62 3876.52,-231.33"/>
 <polygon fill="black" stroke="black" points="3880.02,-231.55 3877.03,-221.38 3873.03,-231.19 3880.02,-231.55"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L306">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L306">
 <text xml:space="preserve" text-anchor="start" x="3875.18" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1422,7 +1422,7 @@
 <title>alternating_subsequences/2</title>
 <polygon fill="cornsilk" stroke="black" points="1695,-458 1493,-458 1493,-422 1695,-422 1695,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1501" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node50_55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L321">
+<g id="a_node50_55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L321">
 <text xml:space="preserve" text-anchor="start" x="1506.25" y="-441.93" font-family="Monospace" font-size="11.00">alternating_subsequences/2</text>
 </a>
 </g>
@@ -1436,7 +1436,7 @@
 <title>alternating_subsequence/2</title>
 <polygon fill="cornsilk" stroke="black" points="1688.62,-338.75 1493.38,-338.75 1493.38,-302.75 1688.62,-302.75 1688.62,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1501.38" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node51_56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L324" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L324">
+<g id="a_node51_56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L324" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L324">
 <text xml:space="preserve" text-anchor="start" x="1506.62" y="-322.68" font-family="Monospace" font-size="11.00">alternating_subsequence/2</text>
 </a>
 </g>
@@ -1448,12 +1448,12 @@
 <!-- alternating_subsequences/2&#45;&gt;alternating_subsequence/2 -->
 <g id="edge36" class="edge">
 <title>alternating_subsequences/2&#45;&gt;alternating_subsequence/2</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L321" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L321" xlink:title="calls">
 <path fill="none" stroke="black" d="M1593.56,-421.7C1593.08,-403 1592.31,-372.87 1591.74,-350.58"/>
 <polygon fill="black" stroke="black" points="1595.24,-350.54 1591.48,-340.63 1588.24,-350.72 1595.24,-350.54"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L321">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L321">
 <text xml:space="preserve" text-anchor="start" x="1592.59" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1461,12 +1461,12 @@
 <!-- alternating_subsequence/2&#45;&gt;subsequence/2 -->
 <g id="edge37" class="edge">
 <title>alternating_subsequence/2&#45;&gt;subsequence/2</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L324" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L324" xlink:title="calls">
 <path fill="none" stroke="black" d="M1688.96,-304.15C1692.01,-303.68 1695.03,-303.21 1698,-302.75 1804.16,-286.32 1831.4,-286.42 1937,-266.75 1958.51,-262.74 2079.22,-235.65 2157.68,-217.95"/>
 <polygon fill="black" stroke="black" points="2157.99,-221.47 2166.97,-215.85 2156.45,-214.64 2157.99,-221.47"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L324" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L324">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L324" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L324">
 <text xml:space="preserve" text-anchor="start" x="1985.79" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1476,7 +1476,7 @@
 <title>is_alternating/1</title>
 <polygon fill="cornsilk" stroke="black" points="1901.25,-219.5 1766.75,-219.5 1766.75,-183.5 1901.25,-183.5 1901.25,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1774.75" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node52_57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L330" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L330">
+<g id="a_node52_57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L330" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L330">
 <text xml:space="preserve" text-anchor="start" x="1780" y="-203.43" font-family="Monospace" font-size="11.00">is_alternating/1</text>
 </a>
 </g>
@@ -1488,12 +1488,12 @@
 <!-- alternating_subsequence/2&#45;&gt;is_alternating/1 -->
 <g id="edge38" class="edge">
 <title>alternating_subsequence/2&#45;&gt;is_alternating/1</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L324" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L324" xlink:title="calls">
 <path fill="none" stroke="black" d="M1641.61,-302.35C1667.58,-292.84 1699.47,-280.26 1727,-266.75 1751.57,-254.69 1777.95,-238.89 1798.37,-225.97"/>
 <polygon fill="black" stroke="black" points="1800.06,-229.04 1806.6,-220.71 1796.29,-223.15 1800.06,-229.04"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L324" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L324">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L324" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L324">
 <text xml:space="preserve" text-anchor="start" x="1748.17" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1503,7 +1503,7 @@
 <title>k_distinct_subsequences/3</title>
 <polygon fill="cornsilk" stroke="black" points="1474.62,-458 1279.38,-458 1279.38,-422 1474.62,-422 1474.62,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1287.38" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node53_58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L339" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L339">
+<g id="a_node53_58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L339" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L339">
 <text xml:space="preserve" text-anchor="start" x="1292.62" y="-441.93" font-family="Monospace" font-size="11.00">k_distinct_subsequences/3</text>
 </a>
 </g>
@@ -1517,7 +1517,7 @@
 <title>k_distinct_subsequence/3</title>
 <polygon fill="cornsilk" stroke="black" points="1475.25,-338.75 1286.75,-338.75 1286.75,-302.75 1475.25,-302.75 1475.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1294.75" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node54_59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L342" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L342">
+<g id="a_node54_59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L342" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L342">
 <text xml:space="preserve" text-anchor="start" x="1300" y="-322.68" font-family="Monospace" font-size="11.00">k_distinct_subsequence/3</text>
 </a>
 </g>
@@ -1529,12 +1529,12 @@
 <!-- k_distinct_subsequences/3&#45;&gt;k_distinct_subsequence/3 -->
 <g id="edge39" class="edge">
 <title>k_distinct_subsequences/3&#45;&gt;k_distinct_subsequence/3</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L339" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L339" xlink:title="calls">
 <path fill="none" stroke="black" d="M1377.59,-421.7C1378.23,-403 1379.26,-372.87 1380.02,-350.58"/>
 <polygon fill="black" stroke="black" points="1383.51,-350.75 1380.36,-340.63 1376.52,-350.51 1383.51,-350.75"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L339" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L339">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L339" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L339">
 <text xml:space="preserve" text-anchor="start" x="1379.12" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1542,12 +1542,12 @@
 <!-- k_distinct_subsequence/3&#45;&gt;subsequence/2 -->
 <g id="edge40" class="edge">
 <title>k_distinct_subsequence/3&#45;&gt;subsequence/2</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L342" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L342" xlink:title="calls">
 <path fill="none" stroke="black" d="M1475.55,-303.99C1478.4,-303.56 1481.22,-303.15 1484,-302.75 1614.3,-284.03 1647.51,-284.1 1778,-266.75 1912.5,-248.87 2069.39,-225.88 2157.26,-212.81"/>
 <polygon fill="black" stroke="black" points="2157.54,-216.3 2166.92,-211.37 2156.51,-209.38 2157.54,-216.3"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L342" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L342">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L342" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L342">
 <text xml:space="preserve" text-anchor="start" x="1851.39" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1557,7 +1557,7 @@
 <title>all_distinct/1</title>
 <polygon fill="cornsilk" stroke="black" points="1441.5,-219.5 1320.5,-219.5 1320.5,-183.5 1441.5,-183.5 1441.5,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1328.5" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node55_60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L347">
+<g id="a_node55_60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L347">
 <text xml:space="preserve" text-anchor="start" x="1333.75" y="-203.43" font-family="Monospace" font-size="11.00">all_distinct/1</text>
 </a>
 </g>
@@ -1569,12 +1569,12 @@
 <!-- k_distinct_subsequence/3&#45;&gt;all_distinct/1 -->
 <g id="edge41" class="edge">
 <title>k_distinct_subsequence/3&#45;&gt;all_distinct/1</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L342" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L342" xlink:title="calls">
 <path fill="none" stroke="black" d="M1381,-302.45C1381,-283.75 1381,-253.62 1381,-231.33"/>
 <polygon fill="black" stroke="black" points="1384.5,-231.39 1381,-221.39 1377.5,-231.39 1384.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L342" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L342">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L342" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L342">
 <text xml:space="preserve" text-anchor="start" x="1381" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1582,12 +1582,12 @@
 <!-- k_distinct_subsequence/3&#45;&gt;list::length/2 -->
 <g id="edge58" class="edge">
 <title>k_distinct_subsequence/3&#45;&gt;list::length/2</title>
-<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L342" xlink:title="calls">
+<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L342" xlink:title="calls">
 <path fill="none" stroke="black" d="M1473.02,-302.27C1538.27,-287.13 1626.12,-260.98 1695,-219.5 1714.59,-207.7 1710.98,-193.05 1731.75,-183.5 1924.64,-94.78 2586.72,-84.26 2807.61,-83.26"/>
 <polygon fill="black" stroke="black" points="2807.54,-86.76 2817.53,-83.22 2807.51,-79.76 2807.54,-86.76"/>
 </a>
 </g>
-<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L342" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L342">
+<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L342" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L342">
 <text xml:space="preserve" text-anchor="start" x="1731.75" y="-198.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1609,12 +1609,12 @@
 <!-- all_distinct/1&#45;&gt;list::member/2 -->
 <g id="edge59" class="edge">
 <title>all_distinct/1&#45;&gt;list::member/2</title>
-<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L348" xlink:title="calls">
+<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L348" xlink:title="calls">
 <path fill="none" stroke="black" d="M1381,-183.2C1381,-164.5 1381,-134.37 1381,-112.08"/>
 <polygon fill="black" stroke="black" points="1384.5,-112.14 1381,-102.14 1377.5,-112.14 1384.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L348" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L348">
+<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L348" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L348">
 <text xml:space="preserve" text-anchor="start" x="1381" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1624,7 +1624,7 @@
 <title>count_subsequences/2</title>
 <polygon fill="cornsilk" stroke="black" points="4111.75,-219.5 3950.25,-219.5 3950.25,-183.5 4111.75,-183.5 4111.75,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="3958.25" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node56_62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L354">
+<g id="a_node56_62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L354">
 <text xml:space="preserve" text-anchor="start" x="3963.5" y="-203.43" font-family="Monospace" font-size="11.00">count_subsequences/2</text>
 </a>
 </g>
@@ -1636,12 +1636,12 @@
 <!-- count_subsequences/2&#45;&gt;list::length/2 -->
 <g id="edge60" class="edge">
 <title>count_subsequences/2&#45;&gt;list::length/2</title>
-<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L354" xlink:title="calls">
+<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L354" xlink:title="calls">
 <path fill="none" stroke="black" d="M3950.11,-184.85C3947.03,-184.38 3943.99,-183.92 3941,-183.5 3570.97,-131.18 3124.35,-99.02 2952.35,-87.77"/>
 <polygon fill="black" stroke="black" points="2952.65,-84.28 2942.45,-87.12 2952.2,-91.27 2952.65,-84.28"/>
 </a>
 </g>
-<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L354">
+<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L354">
 <text xml:space="preserve" text-anchor="start" x="3621.22" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1651,7 +1651,7 @@
 <title>subsequence_length/2</title>
 <polygon fill="cornsilk" stroke="black" points="3259.75,-219.5 3098.25,-219.5 3098.25,-183.5 3259.75,-183.5 3259.75,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="3106.25" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node57_63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L358" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L358">
+<g id="a_node57_63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L358" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L358">
 <text xml:space="preserve" text-anchor="start" x="3111.5" y="-203.43" font-family="Monospace" font-size="11.00">subsequence_length/2</text>
 </a>
 </g>
@@ -1663,12 +1663,12 @@
 <!-- subsequence_length/2&#45;&gt;list::length/2 -->
 <g id="edge61" class="edge">
 <title>subsequence_length/2&#45;&gt;list::length/2</title>
-<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L358" xlink:title="calls">
+<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L358" xlink:title="calls">
 <path fill="none" stroke="black" d="M3134.56,-183.07C3081.37,-162.22 2992.32,-127.3 2934.89,-104.77"/>
 <polygon fill="black" stroke="black" points="2936.19,-101.53 2925.61,-101.13 2933.64,-108.04 2936.19,-101.53"/>
 </a>
 </g>
-<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L358" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L358">
+<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L358" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L358">
 <text xml:space="preserve" text-anchor="start" x="3038.47" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1678,7 +1678,7 @@
 <title>map_with_length/2</title>
 <polygon fill="cornsilk" stroke="black" points="2808.62,-219.5 2667.38,-219.5 2667.38,-183.5 2808.62,-183.5 2808.62,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="2675.38" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node59_64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L375" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L375">
+<g id="a_node59_64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L375" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L375">
 <text xml:space="preserve" text-anchor="start" x="2680.62" y="-203.43" font-family="Monospace" font-size="11.00">map_with_length/2</text>
 </a>
 </g>
@@ -1690,12 +1690,12 @@
 <!-- apply_order/3&#45;&gt;map_with_length/2 -->
 <g id="edge42" class="edge">
 <title>apply_order/3&#45;&gt;map_with_length/2</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L370" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L370" xlink:title="calls">
 <path fill="none" stroke="black" d="M2717.09,-302.32C2722.88,-292.31 2729.47,-279.27 2733,-266.75 2736.21,-255.36 2737.62,-242.42 2738.17,-231.15"/>
 <polygon fill="black" stroke="black" points="2741.66,-231.33 2738.43,-221.24 2734.67,-231.14 2741.66,-231.33"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L370">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L370">
 <text xml:space="preserve" text-anchor="start" x="2735.36" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1705,7 +1705,7 @@
 <title>unmap_length/2</title>
 <polygon fill="cornsilk" stroke="black" points="2649.5,-219.5 2528.5,-219.5 2528.5,-183.5 2649.5,-183.5 2649.5,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="2536.5" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node60_65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L380" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L380">
+<g id="a_node60_65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L380" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L380">
 <text xml:space="preserve" text-anchor="start" x="2541.75" y="-203.43" font-family="Monospace" font-size="11.00">unmap_length/2</text>
 </a>
 </g>
@@ -1717,12 +1717,12 @@
 <!-- apply_order/3&#45;&gt;unmap_length/2 -->
 <g id="edge43" class="edge">
 <title>apply_order/3&#45;&gt;unmap_length/2</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L370" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L370" xlink:title="calls">
 <path fill="none" stroke="black" d="M2703.59,-302.53C2700.87,-288.54 2695.26,-268.98 2684,-255.5 2673.57,-243.02 2659.41,-232.93 2645.2,-225.05"/>
 <polygon fill="black" stroke="black" points="2647.23,-222.16 2636.75,-220.64 2644,-228.37 2647.23,-222.16"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L370">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L370">
 <text xml:space="preserve" text-anchor="start" x="2691.18" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1744,12 +1744,12 @@
 <!-- apply_order/3&#45;&gt;list::msort/2 -->
 <g id="edge62" class="edge">
 <title>apply_order/3&#45;&gt;list::msort/2</title>
-<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L368" xlink:title="calls">
+<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L368" xlink:title="calls">
 <path fill="none" stroke="black" d="M2674.43,-302.33C2644.93,-286.15 2602.98,-263.4 2586,-255.5 2561.86,-244.27 2534.64,-233.16 2511.15,-224.04"/>
 <polygon fill="black" stroke="black" points="2512.64,-220.86 2502.05,-220.54 2510.12,-227.39 2512.64,-220.86"/>
 </a>
 </g>
-<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L368" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L368">
+<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L368" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L368">
 <text xml:space="preserve" text-anchor="start" x="2606.22" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1757,12 +1757,12 @@
 <!-- map_with_length/2&#45;&gt;list::length/2 -->
 <g id="edge63" class="edge">
 <title>map_with_length/2&#45;&gt;list::length/2</title>
-<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L376" xlink:title="calls">
+<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L376" xlink:title="calls">
 <path fill="none" stroke="black" d="M2758.95,-183.2C2783.07,-163.28 2822.87,-130.42 2850.21,-107.85"/>
 <polygon fill="black" stroke="black" points="2852.31,-110.65 2857.79,-101.59 2847.85,-105.25 2852.31,-110.65"/>
 </a>
 </g>
-<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L376" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f94146ca70935280c6fdeb14a7266e3e03b4f66b/library/subsequences/subsequences.lgt#L376">
+<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L376" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1eae41f872f4daa77a82bb433ab0edd63eccb7c6/library/subsequences/subsequences.lgt#L376">
 <text xml:space="preserve" text-anchor="start" x="2813.26" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
