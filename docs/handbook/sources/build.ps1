@@ -88,6 +88,7 @@ Foreach-Object {
 (Get-Content ../../../library/cbor/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/cbor.rst
 (Get-Content ../../../library/ccsds/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ccsds.rst
 (Get-Content ../../../library/classifier_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/classifier_protocols.rst
+(Get-Content ../../../library/combinations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/combinations.rst
 (Get-Content ../../../library/command_line_options/NOTES.md | Select-Object -Skip 32) | pandoc -f gfm -t rst -o libraries/command_line_options.rst
 (Get-Content ../../../library/coroutining/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/coroutining.rst
 (Get-Content ../../../library/csv/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/csv.rst
@@ -138,6 +139,7 @@ Foreach-Object {
 (Get-Content ../../../library/optionals/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/optionals.rst
 (Get-Content ../../../library/options/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/options.rst
 (Get-Content ../../../library/os/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/os.rst
+(Get-Content ../../../library/permutations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/permutations.rst
 (Get-Content ../../../library/process/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/process.rst
 (Get-Content ../../../library/protobuf/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/protobuf.rst
 (Get-Content ../../../library/queues/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/queues.rst

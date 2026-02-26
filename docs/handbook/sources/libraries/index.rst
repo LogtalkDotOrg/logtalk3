@@ -42,6 +42,7 @@ directory in the ``NOTES.md`` file.
    cbor
    ccsds
    classifier_protocols
+   combinations
    command_line_options
    core
    coroutining
@@ -93,6 +94,7 @@ directory in the ``NOTES.md`` file.
    optionals
    options
    os
+   permutations
    process
    protobuf
    queues

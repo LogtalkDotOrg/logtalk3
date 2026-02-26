@@ -1,0 +1,378 @@
+.. index:: single: combinations_protocol
+.. _combinations_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``combinations_protocol``
+=========================
+
+Protocol for combinations operations over lists.
+
+| **Availability:** 
+|    ``logtalk_load(combinations(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-26
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: combinations/3
+.. _combinations_protocol/0::combinations/3:
+
+``combinations/3``
+^^^^^^^^^^^^^^^^^^
+
+Generates all K-element combinations of a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``combinations(K,List,Combinations)``
+| **Mode and number of proofs:**
+|    ``combinations(+integer,+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: combination/3
+.. _combinations_protocol/0::combination/3:
+
+``combination/3``
+^^^^^^^^^^^^^^^^^
+
+True iff the third argument is a K-element combination of a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``combination(K,List,Combination)``
+| **Mode and number of proofs:**
+|    ``combination(+integer,+list,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: combinations/4
+.. _combinations_protocol/0::combinations/4:
+
+``combinations/4``
+^^^^^^^^^^^^^^^^^^
+
+Generates all K-element combinations with the given order: ``default``, ``lexicographic``, or ``shortlex``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``combinations(K,List,Order,Combinations)``
+| **Mode and number of proofs:**
+|    ``combinations(+integer,+list,+atom,-list)`` - ``one``
+
+
+------------
+
+.. index:: combination/4
+.. _combinations_protocol/0::combination/4:
+
+``combination/4``
+^^^^^^^^^^^^^^^^^
+
+True iff the fourth argument is a K-element combination with the given order: ``default``, ``lexicographic``, or ``shortlex``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``combination(K,List,Order,Combination)``
+| **Mode and number of proofs:**
+|    ``combination(+integer,+list,+atom,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: combinations_with_replacement/3
+.. _combinations_protocol/0::combinations_with_replacement/3:
+
+``combinations_with_replacement/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates all K-element combinations with replacement.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``combinations_with_replacement(K,List,Combinations)``
+| **Mode and number of proofs:**
+|    ``combinations_with_replacement(+integer,+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: combinations_with_replacement/4
+.. _combinations_protocol/0::combinations_with_replacement/4:
+
+``combinations_with_replacement/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates all K-element combinations with replacement with the given order: ``default``, ``lexicographic``, or ``shortlex``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``combinations_with_replacement(K,List,Order,Combinations)``
+| **Mode and number of proofs:**
+|    ``combinations_with_replacement(+integer,+list,+atom,-list)`` - ``one``
+
+
+------------
+
+.. index:: combination_with_replacement/3
+.. _combinations_protocol/0::combination_with_replacement/3:
+
+``combination_with_replacement/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the third argument is a K-element combination with replacement.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``combination_with_replacement(K,List,Combination)``
+| **Mode and number of proofs:**
+|    ``combination_with_replacement(+integer,+list,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: combination_with_replacement/4
+.. _combinations_protocol/0::combination_with_replacement/4:
+
+``combination_with_replacement/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the fourth argument is a K-element combination with replacement with the given order: ``default``, ``lexicographic``, or ``shortlex``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``combination_with_replacement(K,List,Order,Combination)``
+| **Mode and number of proofs:**
+|    ``combination_with_replacement(+integer,+list,+atom,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: distinct_combinations/3
+.. _combinations_protocol/0::distinct_combinations/3:
+
+``distinct_combinations/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates all distinct K-element combinations of a list (deduplicating equal-valued combinations).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_combinations(K,List,Combinations)``
+| **Mode and number of proofs:**
+|    ``distinct_combinations(+integer,+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: distinct_combination/3
+.. _combinations_protocol/0::distinct_combination/3:
+
+``distinct_combination/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the third argument is a distinct K-element combination of a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_combination(K,List,Combination)``
+| **Mode and number of proofs:**
+|    ``distinct_combination(+integer,+list,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: distinct_combinations/4
+.. _combinations_protocol/0::distinct_combinations/4:
+
+``distinct_combinations/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates all distinct K-element combinations with the given order: ``default``, ``lexicographic``, or ``shortlex``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_combinations(K,List,Order,Combinations)``
+| **Mode and number of proofs:**
+|    ``distinct_combinations(+integer,+list,+atom,-list)`` - ``one``
+
+
+------------
+
+.. index:: distinct_combination/4
+.. _combinations_protocol/0::distinct_combination/4:
+
+``distinct_combination/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the fourth argument is a distinct K-element combination with the given order: ``default``, ``lexicographic``, or ``shortlex``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_combination(K,List,Order,Combination)``
+| **Mode and number of proofs:**
+|    ``distinct_combination(+integer,+list,+atom,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: nth_combination/4
+.. _combinations_protocol/0::nth_combination/4:
+
+``nth_combination/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the combination at a given zero-based index.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nth_combination(K,List,Index,Combination)``
+| **Mode and number of proofs:**
+|    ``nth_combination(+integer,+list,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: combination_index/4
+.. _combinations_protocol/0::combination_index/4:
+
+``combination_index/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the zero-based index of a combination.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``combination_index(K,List,Combination,Index)``
+| **Mode and number of proofs:**
+|    ``combination_index(+integer,+list,+list,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: count_combinations/3
+.. _combinations_protocol/0::count_combinations/3:
+
+``count_combinations/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Counts the number of K-element combinations of a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``count_combinations(K,List,Count)``
+| **Mode and number of proofs:**
+|    ``count_combinations(+integer,+list,-integer)`` - ``one``
+
+
+------------
+
+.. index:: count_combinations_with_replacement/3
+.. _combinations_protocol/0::count_combinations_with_replacement/3:
+
+``count_combinations_with_replacement/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Counts the number of K-element combinations with replacement of a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``count_combinations_with_replacement(K,List,Count)``
+| **Mode and number of proofs:**
+|    ``count_combinations_with_replacement(+integer,+list,-integer)`` - ``one``
+
+
+------------
+
+.. index:: random_combination/3
+.. _combinations_protocol/0::random_combination/3:
+
+``random_combination/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a random K-element combination of a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``random_combination(K,List,Combination)``
+| **Mode and number of proofs:**
+|    ``random_combination(+integer,+list,-list)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

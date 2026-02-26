@@ -27,6 +27,8 @@
 		string_distance(loader),
 		stemming(loader),
 		subsequences(loader),
+		combinations(loader),
+		permutations(loader),
 		os(loader),
 		process(loader),
 		sockets(loader),

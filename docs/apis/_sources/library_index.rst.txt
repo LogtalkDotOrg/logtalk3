@@ -180,6 +180,17 @@ To load any library (including developer tools, ports, and contributions), use t
    size_metric <size_metric_0>
    upn_metric <upn_metric_0>
 
+:ref:`combinations <library_combinations>`
+------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   combinations <combinations_0>
+   combinations_protocol <combinations_protocol_0>
+
 :ref:`command_line_options <library_command_line_options>`
 ----------------------------------------------------------
 
@@ -1029,6 +1040,17 @@ To load any library (including developer tools, ports, and contributions), use t
 
    pddl <pddl_0>
    read_file <read_file_0>
+
+:ref:`permutations <library_permutations>`
+------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   permutations <permutations_0>
+   permutations_protocol <permutations_protocol_0>
 
 :ref:`ports_profiler <library_ports_profiler>`
 ----------------------------------------------

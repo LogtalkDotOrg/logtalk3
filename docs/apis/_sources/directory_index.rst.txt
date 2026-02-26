@@ -243,6 +243,17 @@ To load an entity, always load the library that includes it using the goal ``log
    classifier_protocol <classifier_protocol_0>
    dataset_protocol <dataset_protocol_0>
 
+``library/combinations/``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   combinations <combinations_0>
+   combinations_protocol <combinations_protocol_0>
+
 ``library/command_line_options/``
 ---------------------------------
 
@@ -858,6 +869,17 @@ To load an entity, always load the library that includes it using the goal ``log
    os <os_0>
    os_types <os_types_0>
    osp <osp_0>
+
+``library/permutations/``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   permutations <permutations_0>
+   permutations_protocol <permutations_protocol_0>
 
 ``library/process/``
 --------------------

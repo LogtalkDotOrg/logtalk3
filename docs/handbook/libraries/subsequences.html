@@ -84,6 +84,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ccsds.html"><code class="docutils literal notranslate"><span class="pre">ccsds</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="classifier_protocols.html"><code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="combinations.html"><code class="docutils literal notranslate"><span class="pre">combinations</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="command_line_options.html"><code class="docutils literal notranslate"><span class="pre">command_line_options</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="core.html"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
@@ -135,6 +136,7 @@
 <li class="toctree-l2"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="os.html"><code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="permutations.html"><code class="docutils literal notranslate"><span class="pre">permutations</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="process.html"><code class="docutils literal notranslate"><span class="pre">process</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="protobuf.html"><code class="docutils literal notranslate"><span class="pre">protobuf</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
@@ -215,11 +217,12 @@
   <section id="subsequences">
 <span id="library-subsequences"></span><h1><code class="docutils literal notranslate"><span class="pre">subsequences</span></code><a class="headerlink" href="#subsequences" title="Link to this heading"></a></h1>
 <p>This library provides predicates for working with subsequences
-represented using lists. The following categories of predicates are
-provided:</p>
+represented using lists, including generation, search, contiguous
+subsequence operations, and random selection. The following categories
+of predicates are provided:</p>
 <ul class="simple">
-<li><p><strong>Generation operations</strong> - Predicates for generating all subsequences
-or variants thereof.</p></li>
+<li><p><strong>Generation operations</strong> - Predicates for generating subsequences and
+variants thereof.</p></li>
 <li><p><strong>Ordering variants</strong> - Predicates that support an additional order
 argument (<code class="docutils literal notranslate"><span class="pre">default</span></code>, <code class="docutils literal notranslate"><span class="pre">lexicographic</span></code>, or <code class="docutils literal notranslate"><span class="pre">shortlex</span></code>) for
 controlling output order.</p></li>
@@ -236,8 +239,11 @@ subsequences (subslices, sliding windows).</p></li>
 <li><p><strong>Random selection</strong> - Predicates for randomly selecting subsequences.</p></li>
 <li><p><strong>Constrained operations</strong> - Predicates for generating subsequences
 with specific constraints.</p></li>
-<li><p><strong>Utility predicates</strong> - Helper predicates for subsequence operations.</p></li>
+<li><p><strong>Utility predicates</strong> - Predicates that support subsequence
+operations.</p></li>
 </ul>
+<p>Dedicated <code class="docutils literal notranslate"><span class="pre">combinations</span></code> and <code class="docutils literal notranslate"><span class="pre">permutations</span></code> libraries are also
+available for focused APIs on those operations.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

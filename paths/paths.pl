@@ -116,6 +116,7 @@ logtalk_library_path(basic_types, library('basic_types/')).
 logtalk_library_path(c45, library('c45/')).
 logtalk_library_path(cbor, library('cbor/')).
 logtalk_library_path(classifier_protocols, library('classifier_protocols/')).
+logtalk_library_path(combinations, library('combinations/')).
 logtalk_library_path(command_line_options, library('command_line_options/')).
 logtalk_library_path(coroutining, library('coroutining/')).
 logtalk_library_path(ccsds, library('ccsds/')).
@@ -167,6 +168,7 @@ logtalk_library_path(nested_dictionaries, library('nested_dictionaries/')).
 logtalk_library_path(optionals, library('optionals/')).
 logtalk_library_path(options, library('options/')).
 logtalk_library_path(os, library('os/')).
+logtalk_library_path(permutations, library('permutations/')).
 logtalk_library_path(process, library('process/')).
 logtalk_library_path(protobuf, library('protobuf/')).
 logtalk_library_path(queues, library('queues/')).

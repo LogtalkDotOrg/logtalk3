@@ -24,13 +24,11 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-01-30,
+		date is 2026-02-26,
 		comment is 'Protocol for subsequence operations over lists.',
 		remarks is [
 			'Generation operations' - 'Predicates for generating all subsequences or variants thereof.',
 			'Ordering variants' - 'Predicates that support an additional Order argument (default, lexicographic, or shortlex) for controlling output order.',
-			'Filtered generation' - 'Predicates for generating specific types of subsequences (combinations, permutations).',
-			'Indexed access' - 'Predicates for direct access to subsequences at specific positions.',
 			'Searching and matching' - 'Predicates for finding specific subsequences with desired properties.',
 			'Prefix and suffix operations' - 'Predicates for checking and finding prefixes and suffixes.',
 			'Contiguous subsequences' - 'Predicates for working with contiguous subsequences (subslices, sliding windows).',
@@ -214,233 +212,6 @@
 		]
 	]).
 
-	% filtered subsequence generation
-
-	:- public(combinations/3).
-	:- mode(combinations(+integer, +list, -list), one).
-	:- info(combinations/3, [
-		comment is 'Generates all K-element subsequences (combinations) of a list. Order of elements is preserved from the original list, but position selection varies. No repetitions allowed.',
-		argnames is ['K', 'List', 'Combination'],
-		examples is [
-			'2-combinations' - combinations(2, [a,b,c], Combinations) - {Combinations = [[a,b],[a,c],[b,c]]},
-			'Empty combination' - combinations(0, [a,b], C) - {C = [[]]},
-			'Impossible combinations' - combinations(3, [a,b], C) - {false}
-		]
-	]).
-
-	:- public(combination/3).
-	:- mode(combination(+integer, +list, -list), one_or_more).
-	:- info(combination/3, [
-		comment is 'True iff the third argument is a K-element subsequence (combinations) of a list. Order of elements is preserved from the original list, but position selection varies. No repetitions allowed.',
-		argnames is ['K', 'List', 'Combination'],
-		examples is [
-			'2-combination' - combination(2, [a,b,c], Combination) - {Combination = [a,b]}
-		]
-	]).
-
-	:- public(combinations/4).
-	:- mode(combinations(+integer, +list, +atom, -list), one).
-	:- info(combinations/4, [
-		comment is 'Generates all K-element combinations with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.',
-		argnames is ['K', 'List', 'Order', 'Combinations'],
-		examples is [
-			'Lexicographic 2-combinations' - combinations(2, [a,b,c], lexicographic, Combinations) - {Combinations = [[a,b],[a,c],[b,c]]}
-		]
-	]).
-
-	:- public(combination/4).
-	:- mode(combination(+integer, +list, +atom, -list), one_or_more).
-	:- info(combination/4, [
-		comment is 'True iff the fourth argument is a K-element combination with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.',
-		argnames is ['K', 'List', 'Order', 'Combination'],
-		examples is [
-			'Lexicographic 2-combination' - combination(2, [a,b,c], lexicographic, Combination) - {Combination = [a,b]}
-		]
-	]).
-
-	:- public(combinations_with_replacement/3).
-	:- mode(combinations_with_replacement(+integer, +list, -list), one).
-	:- mode(combinations_with_replacement(+integer, +list, ?list), zero_or_more).
-	:- info(combinations_with_replacement/3, [
-		comment is 'Generates all K-element subsequences with replacement allowed. Elements can be repeated.',
-		argnames is ['K', 'List', 'Combination'],
-		examples is [
-			'2-combinations with replacement' - combinations_with_replacement(2, [a,b], Combinations) - {Combinations = [[a,a],[a,b],[b,b]]}
-		]
-	]).
-
-	:- public(permutations/2).
-	:- mode(permutations(+list, -list), one).
-	:- info(permutations/2, [
-		comment is 'Generates all permutations of a list with default ordering. Unlike subsequences, permutations rearrange all elements without preserving relative order.',
-		argnames is ['List', 'Permutations'],
-		examples is [
-			'All permutations' - permutations([a,b,c], Permutations) - {Permutations = [[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]}
-		]
-	]).
-
-	:- public(permutation/2).
-	:- mode(permutation(+list, -list), one_or_more).
-	:- info(permutation/2, [
-		comment is 'True iff the second argument is a permutation of a list with default ordering. Unlike subsequences, permutations rearrange all elements without preserving relative order.',
-		argnames is ['List', 'Permutation'],
-		examples is [
-			'A permutation' - permutation([1,2], Permutation) - {Permutation = [2,1]}
-		]
-	]).
-
-	:- public(permutations/3).
-	:- mode(permutations(+list, +atom, -list), one).
-	:- info(permutations/3, [
-		comment is 'Generates all permutations of a list with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.',
-		argnames is ['List', 'Order', 'Permutations'],
-		examples is [
-			'All lexicographic permutations' - permutations([a,b,c], lexicographic, Permutations) - {Permutations = [[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]}
-		]
-	]).
-
-	:- public(permutation/3).
-	:- mode(permutation(+list, +atom, -list), one_or_more).
-	:- info(permutation/3, [
-		comment is 'True iff the third argument is a permutation of a list with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.',
-		argnames is ['List', 'Order', 'Permutation'],
-		examples is [
-			'A lexicographic permutations' - permutation([a,b,c], lexicographic, Permutation) - {Permutation = [a,b,c]}
-		]
-	]).
-
-	:- public(k_permutations/3).
-	:- mode(k_permutations(+integer, +list, -list), one).
-	:- info(k_permutations/3, [
-		comment is 'Generates all K-element permutations of a list. These are ordered selections where order matters.',
-		argnames is ['K', 'List', 'Permutations'],
-		examples is [
-			'2-permutations' - k_permutations(2, [a,b,c], Permutations) - {Permutations = [[a,b],[a,c],[b,a],[b,c],[c,a],[c,b]]}
-		]
-	]).
-
-	:- public(k_permutation/3).
-	:- mode(k_permutation(+integer, +list, -list), one_or_more).
-	:- info(k_permutation/3, [
-		comment is 'True iff the third argument is a K-element permutations of a list. These are ordered selections where order matters.',
-		argnames is ['K', 'List', 'Permutation'],
-		examples is [
-			'2-permutations' - k_permutation(2, [a,b,c], Permutation) - {Permutation = [a,b]}
-		]
-	]).
-
-	:- public(k_permutations/4).
-	:- mode(k_permutations(+integer, +list, +atom, -list), one).
-	:- info(k_permutations/4, [
-		comment is 'Generates all K-element permutations of a list with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.',
-		argnames is ['K', 'List', 'Order', 'Permutations'],
-		examples is [
-			'Lexicographic 2-permutations' - k_permutations(2, [a,b,c], lexicographic, Permutations) - {Permutations = [[a,b],[a,c],[b,a],[b,c],[c,a],[c,b]]}
-		]
-	]).
-
-	:- public(k_permutation/4).
-	:- mode(k_permutation(+integer, +list, +atom, -list), one_or_more).
-	:- info(k_permutation/4, [
-		comment is 'True iff the fourth argument is a K-element permutation of a list with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.',
-		argnames is ['K', 'List', 'Order', 'Permutation'],
-		examples is [
-			'Lexicographic 2-permutations' - k_permutation(2, [a,b,c], lexicographic, Permutation) - {Permutation = [a,b]}
-		]
-	]).
-
-	:- public(cartesian_product/3).
-	:- mode(cartesian_product(+integer, +list, -list), one).
-	:- info(cartesian_product/3, [
-		comment is 'Generates all K-element tuples from the list with replacement and where order matters (Cartesian product of the list with itself K times).',
-		argnames is ['K', 'List', 'Tuples'],
-		examples is [
-			'2-tuples' - cartesian_product(2, [a,b], Tuples) - {Tuples = [[a,a],[a,b],[b,a],[b,b]]}
-		]
-	]).
-
-	:- public(derangements/2).
-	:- mode(derangements(+list, -list), one).
-	:- info(derangements/2, [
-		comment is 'Generates all derangements of a list. A derangement is a permutation where no element appears in its original position.',
-		argnames is ['List', 'Derangements'],
-		examples is [
-			'All derangements' - derangements([a,b,c], Derangements) - {Derangements = [[b,c,a],[c,a,b]]}
-		]
-	]).
-
-	:- public(derangement/2).
-	:- mode(derangement(+list, -list), one).
-	:- info(derangement/2, [
-		comment is 'True iff the second argument is a derangement of the first argument. A derangement is a permutation where no element appears in its original position.',
-		argnames is ['List', 'Derangement'],
-		examples is [
-			'A derangement' - derangement([a,b,c], Derangement) - {Derangement = [b,c,a]}
-		]
-	]).
-
-	:- public(next_permutation/2).
-	:- mode(next_permutation(+list, -list), zero_or_one).
-	:- info(next_permutation/2, [
-		comment is 'Computes the next permutation in lexicographic order. Fails if the input is the last permutation.',
-		argnames is ['Permutation', 'NextPermutation'],
-		examples is [
-			'Next permutation' - next_permutation([a,b,c], Next) - {Next = [a,c,b]}
-		]
-	]).
-
-	:- public(previous_permutation/2).
-	:- mode(previous_permutation(+list, -list), zero_or_one).
-	:- info(previous_permutation/2, [
-		comment is 'Computes the previous permutation in lexicographic order. Fails if the input is the first permutation.',
-		argnames is ['Permutation', 'PrevPermutation'],
-		examples is [
-			'Previous permutation' - previous_permutation([a,c,b], Previous) - {Previous = [a,b,c]}
-		]
-	]).
-
-	% indexed access to subsequences
-
-	:- public(nth_combination/4).
-	:- mode(nth_combination(+integer, +list, +integer, -list), zero_or_one).
-	:- info(nth_combination/4, [
-		comment is 'Directly computes the Nth K-element combination in lexicographic order without generating all previous ones. Index starts at 0.',
-		argnames is ['K', 'List', 'Index', 'Combination'],
-		examples is [
-			'Second 2-combination' - nth_combination(2, [a,b,c,d], 1, Combination) - {Combination = [a,c]} % (0:[a,b], 1:[a,c], 2:[a,d], ...)
-		]
-	]).
-
-	:- public(nth_permutation/3).
-	:- mode(nth_permutation(+list, +integer, -list), zero_or_one).
-	:- info(nth_permutation/3, [
-		comment is 'Directly computes the Nth permutation in lexicographic order. Index starts at 0.',
-		argnames is ['List', 'Index', 'Permutation'],
-		examples is [
-			'Third permutation' - nth_permutation([a,b,c], 2, Permutation) - {Permutation = [b,a,c]}
-		]
-	]).
-
-	:- public(combination_index/4).
-	:- mode(combination_index(+integer, +list, +list, -integer), zero_or_one).
-	:- info(combination_index/4, [
-		comment is 'Finds the lexicographic index of a given K-element combination from the original list. Inverse of nth_combination/4.',
-		argnames is ['K', 'List', 'Combination', 'Index'],
-		examples is [
-			'Index of combination' - combination_index(2, [a,b,c,d], [a,c], Index) - {Index = 1}
-		]
-	]).
-
-	:- public(permutation_index/3).
-	:- mode(permutation_index(+list, +list, -integer), zero_or_one).
-	:- info(permutation_index/3, [
-		comment is 'Finds the lexicographic index of a given permutation. Inverse of nth_permutation/3.',
-		argnames is ['List', 'Permutation', 'Index'],
-		examples is [
-			'Index of permutation' - permutation_index([a,b,c], [b,a,c], Index) - {Index = 2}
-		]
-	]).
-
 	% searching and matching subsequences
 
 	:- public(longest_common_subsequence/3).
@@ -501,6 +272,27 @@
 		examples is [
 			'Valid subsequence' - is_subsequence_of([a,c], [a,b,c]) - {true},
 			'Invalid subsequence' - is_subsequence_of([c,a], [a,b,c]) - {false}
+		]
+	]).
+
+	:- public(proper_subsequence/2).
+	:- mode(proper_subsequence(+list, +list), zero_or_one).
+	:- info(proper_subsequence/2, [
+		comment is 'Checks if the first list is a proper subsequence of the second list (i.e., subsequence and not equal).',
+		argnames is ['Subsequence', 'List'],
+		examples is [
+			'Proper subsequence' - proper_subsequence([a,c], [a,b,c]) - {true},
+			'Not proper (equal lists)' - proper_subsequence([a,b,c], [a,b,c]) - {false}
+		]
+	]).
+
+	:- public(subsequence_at_indices/3).
+	:- mode(subsequence_at_indices(+list, +list, -list), zero_or_one).
+	:- info(subsequence_at_indices/3, [
+		comment is 'Extracts a subsequence using a strictly increasing list of 1-based indices.',
+		argnames is ['List', 'Indices', 'Subsequence'],
+		examples is [
+			'Indices selection' - subsequence_at_indices([a,b,c,d], [1,3], Subsequence) - {Subsequence = [a,c]}
 		]
 	]).
 
@@ -584,26 +376,6 @@
 
 	% random selection
 
-	:- public(random_combination/3).
-	:- mode(random_combination(+integer, +list, -list), one).
-	:- info(random_combination/3, [
-		comment is 'Randomly selects one K-element combination uniformly from all possible combinations.',
-		argnames is ['K', 'List', 'Combination'],
-		examples is [
-			'Random 2-combination' - random_combination(2, [a,b,c,d], Combination) - {Combination = [b,d]}
-		]
-	]).
-
-	:- public(random_permutation/2).
-	:- mode(random_permutation(+list, -list), one).
-	:- info(random_permutation/2, [
-		comment is 'Randomly selects one permutation uniformly from all possible permutations. Also known as shuffling.',
-		argnames is ['List', 'Permutation'],
-		examples is [
-			'Random permutation' - random_permutation([a,b,c], Permutation) - {Permutation = [c,a,b]}
-		]
-	]).
-
 	:- public(random_subsequence/2).
 	:- mode(random_subsequence(+list, -list), one).
 	:- info(random_subsequence/2, [
@@ -676,26 +448,6 @@
 		argnames is ['List', 'Count'],
 		examples is [
 			'Count' - count_subsequences([a,b,c], N) - {N = 8}
-		]
-	]).
-
-	:- public(count_combinations/3).
-	:- mode(count_combinations(+integer, +list, -integer), one).
-	:- info(count_combinations/3, [
-		comment is 'Counts the number of K-element combinations: C(N,K) = N!/(K!(N-K)!).',
-		argnames is ['K', 'List', 'Count'],
-		examples is [
-			'C(4,2)' - count_combinations(2, [a,b,c,d], N) - {N = 6}
-		]
-	]).
-
-	:- public(count_permutations/2).
-	:- mode(count_permutations(+list, -integer), one).
-	:- info(count_permutations/2, [
-		comment is 'Counts the number of permutations (always N! for a list of length N).',
-		argnames is ['List', 'Count'],
-		examples is [
-			'Count' - count_permutations([a,b,c], N) - {N = 6}
 		]
 	]).
 

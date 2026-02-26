@@ -109,8 +109,8 @@ using difference lists.
 * ADDED: New `graphs` library implementing directed/undirected
 weighted/unweighted graph predicates represented using dictionaries.
 
-* ADDED: New `subsequences` library implementing predicates over sequences
-represented as lists.
+* ADDED: New `subsequences`, `combinations`, and `permutations` libraries
+implementing predicates over sequences represented as lists.
 
 * ADDED: New `avro` library implementing for parsing and generating files in
 the Apache Avro binary format.

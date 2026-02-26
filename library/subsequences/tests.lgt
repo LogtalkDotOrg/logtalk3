@@ -25,12 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-03,
+		date is 2026-02-26,
 		comment is 'Unit tests for the "subsequences" library.'
 	]).
 
 	:- uses(list, [
-		length/2, member/2, msort/2
+		length/2
 	]).
 
 	cover(subsequences).
@@ -137,105 +137,6 @@
 	test(subsequences_init_tail_2_backtracking, true(Pairs == [[]-[1,2],[1]-[2],[1,2]-[]])) :-
 		findall(Pair, subsequences::init_tail([1,2], Pair), Pairs).
 
-	% combinations/3 tests
-
-	test(subsequences_combinations_3_two_of_three, deterministic(Combinations == [[a,b],[a,c],[b,c]])) :-
-		subsequences::combinations(2, [a,b,c], Combinations).
-
-	test(subsequences_combinations_3_zero_of_any, deterministic(Combinations == [[]])) :-
-		subsequences::combinations(0, [a,b,c], Combinations).
-
-	test(subsequences_combinations_3_all_elements, deterministic(Combinations == [[a,b,c]])) :-
-		subsequences::combinations(3, [a,b,c], Combinations).
-
-	test(subsequences_combinations_3_none, deterministic(Combinations == [])) :-
-		subsequences::combinations(4, [a,b,c], Combinations).
-
-	test(subsequences_combinations_3_single_element, true(length(Combinations, 3))) :-
-		subsequences::combinations(1, [a,b,c], Combinations).
-
-	test(subsequences_combinations_3_1_of_4, true(length(Combinations, 4))) :-
-		subsequences::combinations(1, [a,b,c,d], Combinations).
-
-	% combination/3 tests
-
-	test(subsequences_combination_3_all, true(Combinations == [[a,b],[a,c],[b,c]])) :-
-		findall(Comb, subsequences::combination(2, [a,b,c], Comb), Combinations).
-
-	% combinations_with_replacement/3 tests
-
-	test(subsequences_combinations_with_replacement_3_two_of_two, true(Combinations == [[a,a],[a,b],[b,b]])) :-
-		subsequences::combinations_with_replacement(2, [a,b], Combinations).
-
-	test(subsequences_combinations_with_replacement_3_zero_of_any, true(Combinations == [[]])) :-
-		subsequences::combinations_with_replacement(0, [a,b], Combinations).
-
-	test(subsequences_combinations_with_replacement_3_three_of_two, true(Combinations == [[a,a,a],[a,a,b],[a,b,b],[b,b,b]])) :-
-		subsequences::combinations_with_replacement(3, [a,b], Combinations).
-
-	test(subsequences_combinations_with_replacement_3_single_element, true(Combinations == [[a,a],[a,b],[b,b]])) :-
-		subsequences::combinations_with_replacement(2, [a,b], Combinations).
-
-	% permutations/2 tests
-
-	test(subsequences_permutations_2_all_of_two, true(sort(Permutations, [[1,2],[2,1]]))) :-
-		subsequences::permutations([1,2], Permutations).
-
-	test(subsequences_permutations_2_all_of_three, true(length(Permutations, 6))) :-
-		subsequences::permutations([a,b,c], Permutations).
-
-	test(subsequences_permutations_2_empty, deterministic(Permutations == [[]])) :-
-		subsequences::permutations([], Permutations).
-
-	test(subsequences_permutations_2_single, deterministic(Permutations == [[a]])) :-
-		subsequences::permutations([a], Permutations).
-
-	% permutation/2 tests
-
-	test(subsequences_permutation_2_all, true(Permutations == [[a,b],[b,a]])) :-
-		findall(Permutation, subsequences::permutation([a,b], Permutation), Permutations).
-
-	% k_permutations/3 tests
-
-	test(subsequences_k_permutations_3_two_of_three, deterministic(length(Permutations, 6))) :-
-		subsequences::k_permutations(2, [a,b,c], Permutations).
-
-	test(subsequences_k_permutations_3_zero_of_any, deterministic(Permutations == [[]])) :-
-		subsequences::k_permutations(0, [a,b,c], Permutations).
-
-	test(subsequences_k_permutations_3_all_elements, deterministic(length(Permutations, 6))) :-
-		subsequences::k_permutations(3, [a,b,c], Permutations).
-
-	test(subsequences_k_permutations_3_one_of_any, deterministic(Permutations == [[a],[b],[c]])) :-
-		subsequences::k_permutations(1, [a,b,c], Permutations).
-
-	% k_permutation/3 tests
-
-	test(subsequences_k_permutation_3_one_of_any, true(Permutations == [[a],[b],[c]])) :-
-		findall(Permutation, subsequences::k_permutation(1, [a,b,c], Permutation), Permutations).
-
-	% derangements/2 tests
-
-	test(subsequences_derangements_of_3, deterministic(Derangements == [[b,c,a],[c,a,b]])) :-
-		subsequences::derangements([a,b,c], Derangements).
-
-	test(subsequences_derangements_empty, deterministic(Derangements == [[]])) :-
-		subsequences::derangements([], Derangements).
-
-	test(subsequences_derangements_single, deterministic(Derangements == [])) :-
-		subsequences::derangements([a], Derangements).
-
-	test(subsequences_derangements_of_two, deterministic(Derangements == [[b,a]])) :-
-		subsequences::derangements([a,b], Derangements).
-
-	% derangement/2 tests
-
-	test(subsequences_derangement_2_of_3, exists(Derangement == [c,a,b])) :-
-		subsequences::derangement([a,b,c], Derangement).
-
-	test(subsequences_derangement_2_fails, false) :-
-		subsequences::derangement([a,b,c], [c,b,a]).
-
 	% is_subsequence_of/2 tests
 
 	test(subsequences_is_subsequence_of_2_valid, deterministic) :-
@@ -255,6 +156,28 @@
 
 	test(subsequences_is_subsequence_of_2_longer_than_list, false) :-
 		subsequences::is_subsequence_of([a,b,c,d], [a,b,c]).
+
+	% proper_subsequence/2 tests
+
+	test(subsequences_proper_subsequence_2_valid, deterministic) :-
+		subsequences::proper_subsequence([a,c], [a,b,c]).
+
+	test(subsequences_proper_subsequence_2_equal_fails, false) :-
+		subsequences::proper_subsequence([a,b,c], [a,b,c]).
+
+	test(subsequences_proper_subsequence_2_invalid, false) :-
+		subsequences::proper_subsequence([c,a], [a,b,c]).
+
+	% subsequence_at_indices/3 tests
+
+	test(subsequences_subsequence_at_indices_3_basic, deterministic(Subsequence == [a,c])) :-
+		subsequences::subsequence_at_indices([a,b,c,d], [1,3], Subsequence).
+
+	test(subsequences_subsequence_at_indices_3_empty_indices, deterministic(Subsequence == [])) :-
+		subsequences::subsequence_at_indices([a,b,c], [], Subsequence).
+
+	test(subsequences_subsequence_at_indices_3_nonincreasing_fails, false) :-
+		subsequences::subsequence_at_indices([a,b,c], [2,2], _).
 
 	% longest_common_subsequence/3 tests
 
@@ -330,31 +253,6 @@
 	test(subsequences_count_subsequences_2_single, true(Count == 2)) :-
 		subsequences::count_subsequences([a], Count).
 
-	% count_combinations/3 tests
-
-	test(subsequences_count_combinations_2_of_4, deterministic(Count == 6)) :-
-		subsequences::count_combinations(2, [a,b,c,d], Count).
-
-	test(subsequences_count_combinations_0_of_any, deterministic(Count == 1)) :-
-		subsequences::count_combinations(0, [a,b,c], Count).
-
-	test(subsequences_count_combinations_all, deterministic(Count == 1)) :-
-		subsequences::count_combinations(3, [a,b,c], Count).
-
-	test(subsequences_count_combinations_impossible, deterministic(Count == 0)) :-
-		subsequences::count_combinations(5, [a,b,c], Count).
-
-	% count_permutations/2 tests
-
-	test(subsequences_count_permutations_2_of_three, deterministic(Count == 6)) :-
-		subsequences::count_permutations([a,b,c], Count).
-
-	test(subsequences_count_permutations_2_empty, deterministic(Count == 1)) :-
-		subsequences::count_permutations([], Count).
-
-	test(subsequences_count_permutations_2_of_four, deterministic(Count == 24)) :-
-		subsequences::count_permutations([a,b,c,d], Count).
-
 	% subsequence_length/2 tests
 
 	test(subsequences_subsequence_length_2_of_three, deterministic(Length == 3)) :-
@@ -365,80 +263,6 @@
 
 	test(subsequences_subsequence_length_2_single, deterministic(Length == 1)) :-
 		subsequences::subsequence_length([x], Length).
-
-	% nth_permutation/3 tests
-
-	test(subsequences_nth_permutation_3_first, deterministic(Permutation == [a,b,c])) :-
-		subsequences::nth_permutation([a,b,c], 0, Permutation).
-
-	test(subsequences_nth_permutation_3_second, deterministic(Permutation == [a,c,b])) :-
-		subsequences::nth_permutation([a,b,c], 1, Permutation).
-
-	test(subsequences_nth_permutation_3_last, deterministic(Permutation == [c,b,a])) :-
-		subsequences::nth_permutation([a,b,c], 5, Permutation).
-
-	test(subsequences_nth_permutation_3_out_of_range, false) :-
-		subsequences::nth_permutation([a,b,c], 10, _).
-
-	% permutation_index/3 tests
-
-	test(subsequences_permutation_index_3_first, deterministic(Index == 0)) :-
-		subsequences::permutation_index([a,b,c], [a,b,c], Index).
-
-	test(subsequences_permutation_index_3_second, deterministic(Index == 1)) :-
-		subsequences::permutation_index([a,b,c], [a,c,b], Index).
-
-	test(subsequences_permutation_index_3_last, deterministic(Index == 5)) :-
-		subsequences::permutation_index([a,b,c], [c,b,a], Index).
-
-	test(subsequences_permutation_index_3_inverse_of_nth, deterministic(Permutation == [a,b,c])) :-
-		subsequences::nth_permutation([a,b,c], 0, Permutation),
-		subsequences::permutation_index([a,b,c], Permutation, 0).
-
-	test(subsequences_permutation_index_3_roundtrip_one, deterministic(Index == 1)) :-
-		subsequences::nth_permutation([a,b,c], 1, Permutation),
-		subsequences::permutation_index([a,b,c], Permutation, Index).
-
-	test(subsequences_permutation_index_3_roundtrip_last, deterministic(Index == 5)) :-
-		subsequences::nth_permutation([a,b,c], 5, Permutation),
-		subsequences::permutation_index([a,b,c], Permutation, Index).
-
-	% nth_combination/4 tests
-
-	test(subsequences_nth_combination_4_zero, deterministic(Combination == [a,b])) :-
-		subsequences::nth_combination(2, [a,b,c,d], 0, Combination).
-
-	test(subsequences_nth_combination_4_one, deterministic(Combination == [a,c])) :-
-		subsequences::nth_combination(2, [a,b,c,d], 1, Combination).
-
-	test(subsequences_nth_combination_4_two, deterministic(Combination == [a,d])) :-
-		subsequences::nth_combination(2, [a,b,c,d], 2, Combination).
-
-	test(subsequences_nth_combination_4_three, deterministic(Combination == [b,c])) :-
-		subsequences::nth_combination(2, [a,b,c,d], 3, Combination).
-
-	test(subsequences_nth_combination_4_five, deterministic(Combination == [c,d])) :-
-		subsequences::nth_combination(2, [a,b,c,d], 5, Combination).
-
-	test(subsequences_nth_combination_4_out_of_range, false) :-
-		subsequences::nth_combination(2, [a,b,c], 10, _).
-
-	% combination_index/4 tests
-
-	test(subsequences_combination_4_index_first, deterministic(Index == 0)) :-
-		subsequences::combination_index(2, [a,b,c,d], [a,b], Index).
-
-	test(subsequences_combination_4_index_second, deterministic(Index == 1)) :-
-		subsequences::combination_index(2, [a,b,c,d], [a,c], Index).
-
-	test(subsequences_combination_4_index_third, deterministic(Index == 2)) :-
-		subsequences::combination_index(2, [a,b,c,d], [a,d], Index).
-
-	test(subsequences_combination_4_index_fourth, deterministic(Index == 3)) :-
-		subsequences::combination_index(2, [a,b,c,d], [b,c], Index).
-
-	test(subsequences_combination_4_index_last, deterministic(Index == 5)) :-
-		subsequences::combination_index(2, [a,b,c,d], [c,d], Index).
 
 	% subsequences_with_min_span/3 tests
 
@@ -506,90 +330,6 @@
 
 	test(subsequences_power_set_empty, true(PS == [[]])) :-
 		subsequences::power_set([], PS).
-
-	% combinations/4 (ordering variants) tests
-
-	test(subsequences_combinations_4_default, deterministic(Combinations == [[a,b],[a,c],[b,c]])) :-
-		subsequences::combinations(2, [a,b,c], default, Combinations).
-
-	test(subsequences_combinations_4_lexicographic, true(length(Combinations, 3))) :-
-		subsequences::combinations(2, [a,b,c], lexicographic, Combinations).
-
-	% combination/4 (ordering variants) tests
-
-	test(subsequences_combination_4_default, true(Combination == [a,b])) :-
-		subsequences::combination(2, [a,b,c], default, Combination).
-
-	test(subsequences_combination_4_lexicographic, true(length(Combination, 2))) :-
-		subsequences::combination(2, [a,b,c], lexicographic, Combination).
-
-	% permutations/3 (ordering variants) tests
-
-	test(subsequences_permutations_3_default, true(length(Permutations, 6))) :-
-		subsequences::permutations([a,b,c], default, Permutations).
-
-	test(subsequences_permutations_3_lexicographic, true(length(Permutations, 6))) :-
-		subsequences::permutations([a,b,c], lexicographic, Permutations).
-
-	% permutation/3 (ordering variants) tests
-
-	test(subsequences_permutation_3_default, exists(Permutation == [c,b,a])) :-
-		subsequences::permutation([a,b,c], default, Permutation).
-
-	test(subsequences_permutation_3_lexicographic, exists(Permutation == [c,a,b])) :-
-		subsequences::permutation([a,b,c], lexicographic, Permutation).
-
-	% k_permutations/4 (ordering variants) tests
-
-	test(subsequences_k_permutations_4_default, true(length(Permutations, 6))) :-
-		subsequences::k_permutations(2, [a,b,c], default, Permutations).
-
-	test(subsequences_k_permutations_4_lexicographic, true(length(Permutations, 6))) :-
-		subsequences::k_permutations(2, [a,b,c], lexicographic, Permutations).
-
-	% k_permutation/4 (ordering variants) tests
-
-	test(subsequences_k_permutation_4_default, exists(Permutation == [c,b])) :-
-		subsequences::k_permutation(2, [a,b,c], default, Permutation).
-
-	test(subsequences_k_permutation_4_lexicographic, exists(Permutation == [c,b])) :-
-		subsequences::k_permutation(2, [a,b,c], lexicographic, Permutation).
-
-	% cartesian_product/3 tests
-
-	test(subsequences_cartesian_product_3_two_of_two, deterministic(Tuples == [[a,a],[a,b],[b,a],[b,b]])) :-
-		subsequences::cartesian_product(2, [a,b], Tuples).
-
-	test(subsequences_cartesian_product_3_zero_of_any, deterministic(Tuples == [[]])) :-
-		subsequences::cartesian_product(0, [a,b,c], Tuples).
-
-	test(subsequences_cartesian_product_3_one_of_three, deterministic(Tuples == [[a],[b],[c]])) :-
-		subsequences::cartesian_product(1, [a,b,c], Tuples).
-
-	test(subsequences_cartesian_product_3_three_of_two, true(length(Tuples, 8))) :-
-		subsequences::cartesian_product(3, [a,b], Tuples).
-
-	% next_permutation/2 tests
-
-	test(subsequences_next_permutation_2_abc, deterministic(Next == [a,c,b])) :-
-		subsequences::next_permutation([a,b,c], Next).
-
-	test(subsequences_next_permutation_2_acb, deterministic(Next == [b,a,c])) :-
-		subsequences::next_permutation([a,c,b], Next).
-
-	test(subsequences_next_permutation_2_last, false) :-
-		subsequences::next_permutation([c,b,a], _).
-
-	% previous_permutation/2 tests
-
-	test(subsequences_previous_permutation_2_acb, deterministic(Previous == [a,b,c])) :-
-		subsequences::previous_permutation([a,c,b], Previous).
-
-	test(subsequences_previous_permutation_2_bac, deterministic(Previous == [a,c,b])) :-
-		subsequences::previous_permutation([b,a,c], Previous).
-
-	test(subsequences_previous_permutation_2_first, false) :-
-		subsequences::previous_permutation([a,b,c], _).
 
 	% longest_decreasing_subsequence/2 tests
 
@@ -668,17 +408,6 @@
 
 	test(subsequences_sliding_window_3_one_of_three, deterministic(Windows == [[a],[b],[c]])) :-
 		subsequences::sliding_window(1, [a,b,c], Windows).
-
-	% random_combination/3 tests
-
-	test(subsequences_random_combination_3_two_of_three, true(length(Combination, 2))) :-
-		subsequences::random_combination(2, [a,b,c], Combination).
-
-	% random_permutation/2 tests
-
-	test(subsequences_random_permutation_2_three, true(Sorted == [a,b,c])) :-
-		subsequences::random_permutation([a,b,c], Permutation),
-		msort(Permutation, Sorted).
 
 	% random_subsequence/2 tests
 

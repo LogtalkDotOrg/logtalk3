@@ -1,0 +1,60 @@
+.. index:: single: permutations
+.. _permutations/0:
+
+.. rst-class:: right
+
+**object**
+
+``permutations``
+================
+
+Implementation of permutations operations over lists.
+
+| **Availability:** 
+|    ``logtalk_load(permutations(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-26
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`permutations_protocol <permutations_protocol/0>`
+| **Uses:**
+|    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`list <list/0>`
+|    :ref:`natural <natural/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`permutations_protocol/0::cartesian_product/3`  :ref:`permutations_protocol/0::count_permutations/2`  :ref:`permutations_protocol/0::derangement/2`  :ref:`permutations_protocol/0::derangements/2`  :ref:`permutations_protocol/0::distinct_permutation/2`  :ref:`permutations_protocol/0::distinct_permutation/3`  :ref:`permutations_protocol/0::distinct_permutations/2`  :ref:`permutations_protocol/0::distinct_permutations/3`  :ref:`permutations_protocol/0::k_permutation/3`  :ref:`permutations_protocol/0::k_permutation/4`  :ref:`permutations_protocol/0::k_permutations/3`  :ref:`permutations_protocol/0::k_permutations/4`  :ref:`permutations_protocol/0::next_permutation/2`  :ref:`permutations_protocol/0::nth_permutation/3`  :ref:`permutations_protocol/0::permutation/2`  :ref:`permutations_protocol/0::permutation/3`  :ref:`permutations_protocol/0::permutation_index/3`  :ref:`permutations_protocol/0::permutations/2`  :ref:`permutations_protocol/0::permutations/3`  :ref:`permutations_protocol/0::previous_permutation/2`  :ref:`permutations_protocol/0::random_permutation/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

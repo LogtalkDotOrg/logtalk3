@@ -25,20 +25,16 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-03,
+		date is 2026-02-26,
 		comment is 'Implementation of subsequence operations over lists.'
 	]).
 
-	:- uses(natural, [
-		binomial/3, factorial/2
-	]).
-
 	:- uses(list, [
-		append/3, drop/3, length/2, member/2, msort/2, nth0/3, nth0/4, nth1/3, reverse/2, select/3
+		append/3, length/2, member/2, msort/2, nth1/3
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [
-		between/3 as random_between/3, maybe/0, set/4 as random_set/4
+		maybe/0
 	]).
 
 	% generation operations - Creating all subsequences
@@ -103,303 +99,6 @@
 
 	init_tail(List, Init-Tail) :-
 		append(Init, Tail, List).
-
-	% filtered subsequence generation
-
-	combinations(K, List, Combinations) :-
-		combinations(K, List, default, Combinations).
-
-	combination(0, _, []).
-	combination(K, [Head| Tail], [Head| Combination]) :-
-		K > 0,
-		K1 is K - 1,
-		combination(K1, Tail, Combination).
-	combination(K, [_| Tail], Combination) :-
-		K > 0,
-		combination(K, Tail, Combination).
-
-	combinations(K, List, Order, Combinations) :-
-		findall(Combination, combination(K, List, Combination), Combinations0),
-		apply_order(Order, Combinations0, Combinations).
-
-	combination(K, List, Order, Combination) :-
-		combination(K, List, Combination0),
-		apply_order(Order, [Combination0], [Combination]).
-
-	combinations_with_replacement(K, List, Combinations) :-
-		findall(Combination, combination_with_replacement(K, List, Combination), Combinations).
-
-	combination_with_replacement(0, _, []).
-	combination_with_replacement(K, List, [Head| Combination]) :-
-		K > 0,
-		K1 is K - 1,
-		append(_, [Head| Tail], List),  % Select element H and everything after
-		combination_with_replacement(K1, [Head| Tail], Combination).  % Can reuse H
-
-	permutations(List, Permutations) :-
-		findall(Permutation, permutation(List, Permutation), Permutations).
-
-	permutation([], []).
-	permutation(List, [Head| Permutation]) :-
-		select(Head, List, Rest),
-		permutation(Rest, Permutation).
-
-	permutations(List, Order, Permutations) :-
-		findall(Permutation, permutation(List, Permutation), Permutations0),
-		apply_order(Order, Permutations0, Permutations).
-
-	permutation(List, Order, Permutation) :-
-		permutation(List, Permutation0),
-		apply_order(Order, [Permutation0], [Permutation]).
-
-	k_permutations(K, List, Permutations) :-
-		findall(Permutation, k_permutation(K, List, Permutation), Permutations).
-
-	k_permutation(0, _, []) :-
-		!.
-	k_permutation(K, List, [Head| Permutation]) :-
-		K > 0,
-		K1 is K - 1,
-		select(Head, List, Rest),
-		k_permutation(K1, Rest, Permutation).
-
-	k_permutations(K, List, Order, Permutations) :-
-		findall(Permutation, k_permutation(K, List, Permutation), Permutations0),
-		apply_order(Order, Permutations0, Permutations).
-
-	k_permutation(K, List, Order, Permutation) :-
-		k_permutation(K, List, Permutation0),
-		apply_order(Order, [Permutation0], [Permutation]).
-
-	% Cartesian product - K-tuples with replacement where order matters
-	cartesian_product(K, List, Tuples) :-
-		findall(Tuple, cartesian_tuple(K, List, Tuple), Tuples).
-
-	cartesian_tuple(0, _, []).
-	cartesian_tuple(K, List, [H| Tuple]) :-
-		K > 0,
-		K1 is K - 1,
-		member(H, List),
-		cartesian_tuple(K1, List, Tuple).
-
-	derangements(List, Derangements) :-
-		findall(Derang, derangement(List, Derang), Derangements).
-
-	derangement(List, Derang) :-
-		permutation(List, Derang),
-		is_derangement(List, Derang).
-
-	is_derangement([], []).
-	is_derangement([Head1| Tail1], [Head2| Tail2]) :-
-		Head1 \== Head2,
-		is_derangement(Tail1, Tail2).
-
-	% Next permutation in lexicographic order (C++ STL algorithm)
-	% Algorithm:
-	% 1. Find largest index i such that Perm[i] < Perm[i+1] (the pivot)
-	% 2. Find largest index j > i such that Perm[i] < Perm[j]
-	% 3. Swap Perm[i] and Perm[j]
-	% 4. Reverse the suffix starting at Perm[i+1]
-	next_permutation(Perm, Next) :-
-		append(Prefix, [Pivot|Suffix], Perm),
-		Suffix \= [],
-		has_greater(Pivot, Suffix),
-		\+ has_greater_in_prefix(Prefix, [Pivot|Suffix]),
-		!,
-		find_rightmost_greater(Pivot, Suffix, Swap, SuffixWithoutSwap),
-		% Insert Pivot where Swap was (at the end, since Swap is rightmost greater)
-		append(SuffixWithoutSwap, [Pivot], NewSuffix),
-		reverse(NewSuffix, RevSuffix),
-		append(Prefix, [Swap|RevSuffix], Next).
-
-	% Check if there's an element greater than Pivot in the suffix
-	has_greater(Pivot, [Head| _]) :-
-		Head @> Pivot,
-		!.
-	has_greater(Pivot, [_| Tail]) :-
-		has_greater(Pivot, Tail).
-
-	% Check if there's a valid pivot point later in the list
-	has_greater_in_prefix(Prefix, Suffix) :-
-		append(Prefix, Suffix, Full),
-		append(NewPrefix, [P|S], Full),
-		length(NewPrefix, L1),
-		length(Prefix, L2),
-		L1 > L2,
-		S \= [],
-		has_greater(P, S).
-
-	% Find rightmost element greater than Pivot and remove it from suffix
-	find_rightmost_greater(Pivot, Suffix, Swap, SuffixWithoutSwap) :-
-		reverse(Suffix, RevSuffix),
-		RevSuffix = [H|T],
-		(	H @> Pivot ->
-			Swap = H,
-			reverse(T, SuffixWithoutSwap)
-		;	find_rightmost_greater_helper(Pivot, RevSuffix, Swap, RevNewSuffix),
-			reverse(RevNewSuffix, SuffixWithoutSwap)
-		).
-
-	find_rightmost_greater_helper(Pivot, [H| T], Swap, [H| Rest]) :-
-		H @=< Pivot,
-		!,
-		find_rightmost_greater_helper(Pivot, T, Swap, Rest).
-	find_rightmost_greater_helper(Pivot, [H| T], H, T) :-
-		H @> Pivot.
-
-	% Previous permutation in lexicographic order
-	% Algorithm: similar to next but with reversed comparisons
-	% 1. Find largest index i such that Perm[i] > Perm[i+1]
-	% 2. Find largest index j > i such that Perm[i] > Perm[j] (largest element smaller than pivot)
-	% 3. Swap Perm[i] and Perm[j]
-	% 4. Reverse the suffix starting at Perm[i+1]
-	previous_permutation(Perm, Prev) :-
-		append(Prefix, [Pivot| Suffix], Perm),
-		Suffix \= [],
-		has_smaller(Pivot, Suffix),
-		\+ has_smaller_in_prefix(Prefix, [Pivot| Suffix]),
-		!,
-		% Find rightmost element smaller than pivot and swap with pivot in suffix
-		replace_rightmost_smaller(Pivot, Suffix, Swap, SwappedSuffix),
-		reverse(SwappedSuffix, RevSuffix),
-		append(Prefix, [Swap| RevSuffix], Prev).
-
-	has_smaller(Pivot, [Head| _]) :-
-		Head @< Pivot,
-		!.
-	has_smaller(Pivot, [_| Tail]) :-
-		has_smaller(Pivot, Tail).
-
-	has_smaller_in_prefix(Prefix, Suffix) :-
-		append(Prefix, Suffix, Full),
-		append(NewPrefix, [P| S], Full),
-		length(NewPrefix, Length1),
-		length(Prefix, Length2),
-		Length1 > Length2,
-		S \= [],
-		has_smaller(P, S).
-
-	% Replace the rightmost element smaller than Pivot with Pivot
-	% Returns the element that was replaced (Swap) and the new suffix
-	replace_rightmost_smaller(Pivot, Suffix, Swap, SwappedSuffix) :-
-		reverse(Suffix, RevSuffix),
-		replace_first_smaller(Pivot, RevSuffix, Swap, RevSwapped),
-		reverse(RevSwapped, SwappedSuffix).
-
-	replace_first_smaller(Pivot, [Head| Tail], Head, [Pivot| Tail]) :-
-		Head @< Pivot,
-		!.
-	replace_first_smaller(Pivot, [Head| Tail], Swap, [Head| Rest]) :-
-		Head @>= Pivot,
-		replace_first_smaller(Pivot, Tail, Swap, Rest).
-
-	% indexed access to subsequences
-
-	nth_permutation(List, Index, Permutation) :-
-		length(List, N),
-		factorial(N, Total),
-		Index >= 0,
-		Index < Total,
-		nth_permutation_helper(List, Index, Permutation).
-
-	% Auxiliary predicate using factorial number system (Lehmer code)
-	nth_permutation_helper([], _, []) :-
-		!.
-	nth_permutation_helper(List, Index, [Head| Permutation]) :-
-		length(List, N),
-		N1 is N - 1,
-		factorial(N1, F),
-		Pos is Index // F,
-		nth0(Pos, List, Head, Rest),
-		Index1 is Index mod F,
-		nth_permutation_helper(Rest, Index1, Permutation).
-
-	nth_combination(K, List, Index, Combination) :-
-		length(List, N),
-		Index >= 0,
-		binomial(N, K, Total),
-		Index < Total,
-		nth_combination_helper(K, List, Index, Combination).
-
-	% Auxiliary predicate using combinatorial number system
-	% Algorithm: For each element in the combination, find which element from the list to pick
-	% such that the remaining elements can form valid combinations
-	nth_combination_helper(0, _, _, []) :-
-		!.
-	nth_combination_helper(K, List, Index, [Head| Comb]) :-
-		K > 0,
-		length(List, N),
-		% We need to find position C in the current list
-		% Count how many combinations start with each position
-		find_comb_position(N, K, Index, C, IndexRemainder),
-		nth0(C, List, Head),
-		C1 is C + 1,
-		drop(C1, List, Rest),
-		K1 is K - 1,
-		nth_combination_helper(K1, Rest, IndexRemainder, Comb).
-
-	% Find the position C where the first element comes from
-	% Also return the adjusted index for the remaining elements
-	find_comb_position(N, K, Index, C, IndexRemainder) :-
-		find_comb_position_loop(0, N, K, Index, 0, C, IndexRemainder).
-
-	find_comb_position_loop(Pos, N, _K, Index, _Count, C, IndexRemainder) :-
-		Pos >= N,
-		!,
-		C is N - 1,
-		IndexRemainder = Index.
-	find_comb_position_loop(Pos, N, K, Index, Count, C, IndexRemainder) :-
-		Pos < N,
-		K1 is K - 1,
-		Remaining is N - Pos - 1,
-		binomial(Remaining, K1, CombsAtPos),
-		NewCount is Count + CombsAtPos,
-		(	NewCount > Index ->
-			C = Pos,
-			IndexRemainder is Index - Count
-		;	Pos1 is Pos + 1,
-			find_comb_position_loop(Pos1, N, K, Index, NewCount, C, IndexRemainder)
-		).
-
-	combination_index(K, List, Combination, Index) :-
-		length(Combination, K),
-		combination_index_helper(K, List, Combination, 0, Index).
-
-	% Base case: empty combination
-	combination_index_helper(0, _, [], Index, Index) :-
-		!.
-	% Recursive case: find position of first element and count skipped combinations
-	combination_index_helper(K, [Head| Tail], [Head| Comb], Index0, Index) :-
-		% First element matches - continue with rest
-		K > 0,
-		!,
-		K1 is K - 1,
-		combination_index_helper(K1, Tail, Comb, Index0, Index).
-	combination_index_helper(K, [_| Tail], Combination, Index0, Index) :-
-		% First element doesn't match - count combinations we're skipping
-		K > 0,
-		length(Tail, N),
-		K1 is K - 1,
-		binomial(N, K1, Skip),
-		Index1 is Index0 + Skip,
-		combination_index_helper(K, Tail, Combination, Index1, Index).
-
-	permutation_index(List, Permutation, Index) :-
-		length(List, N),
-		length(Permutation, N),
-		permutation_index_helper(List, Permutation, 0, Index).
-
-	% Auxiliary predicate using factorial number system (Lehmer code) - inverse of nth_permutation_helper
-	permutation_index_helper([], [], Index, Index) :-
-		!.
-	permutation_index_helper(List, [Head| Permutation], Index0, Index) :-
-		List \= [],
-		length(List, N),
-		once(nth0(Pos, List, Head, Rest)),
-		N1 is N - 1,
-		factorial(N1, F),
-		Index1 is Index0 + Pos * F,
-		permutation_index_helper(Rest, Permutation, Index1, Index).
 
 	% searching and matching subsequences
 
@@ -513,6 +212,20 @@
 	is_subsequence_of(Subsequence, [_| Tail]) :-
 		is_subsequence_of(Subsequence, Tail).
 
+	proper_subsequence(Subsequence, List) :-
+		is_subsequence_of(Subsequence, List),
+		Subsequence \== List.
+
+	subsequence_at_indices(List, Indices, Subsequence) :-
+		subsequence_at_indices(Indices, 0, List, Subsequence).
+
+	subsequence_at_indices([], _, _, []).
+	subsequence_at_indices([Index| Indices], Previous, List, [Element| Subsequence]) :-
+		integer(Index),
+		Index > Previous,
+		nth1(Index, List, Element),
+		subsequence_at_indices(Indices, Index, List, Subsequence).
+
 	common_subsequences(List1, List2, CommonSubsequences) :-
 		findall(Subsequence, (subsequence(List1, Subsequence), subsequence(List2, Subsequence)), CommonSubsequences).
 
@@ -573,29 +286,6 @@
 
 	% random selection
 
-	random_combination(K, List, Combination) :-
-		length(List, N),
-		K =< N,
-		random_set(K, 1, N, Indices),
-		select_by_indices(Indices, List, Combination).
-
-	select_by_indices([], _, []).
-	select_by_indices([Indice| Indices], List, [Element| Elements]) :-
-		nth1(Indice, List, Element),
-		select_by_indices(Indices, List, Elements).
-
-	random_permutation(List, Permutation) :-
-		random_permutation_helper(List, [], Permutation).
-
-	random_permutation_helper([], Permutation, Permutation) :-
-		!.
-	random_permutation_helper(List, Permutation0, Permutation) :-
-		length(List, N),
-		N1 is N - 1,
-		random_between(0, N1, Indice),
-		nth0(Indice, List, Element, Rest),
-		random_permutation_helper(Rest, [Element| Permutation0], Permutation).
-
 	random_subsequence(List, Subsequence) :-
 		random_subsequence_helper(List, Subsequence).
 
@@ -650,7 +340,8 @@
 		findall(Sub, k_distinct_subsequence(K, List, Sub), Subsequences).
 
 	k_distinct_subsequence(K, List, Subsequence) :-
-		combination(K, List, Subsequence),
+		subsequence(List, Subsequence),
+		length(Subsequence, K),
 		all_distinct(Subsequence).
 
 	all_distinct([]).
@@ -663,17 +354,6 @@
 	count_subsequences(List, Count) :-
 		length(List, N),
 		Count is 2 ^ N.
-
-	count_combinations(K, List, Count) :-
-		length(List, N),
-		(	N >= K, K >= 0 ->
-			binomial(N, K, Count)
-		;	Count = 0
-		).
-
-	count_permutations(List, Count) :-
-		length(List, N),
-		factorial(N, Count).
 
 	subsequence_length(Subsequence, Length) :-
 		length(Subsequence, Length).

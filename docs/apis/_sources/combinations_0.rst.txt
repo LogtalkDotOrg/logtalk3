@@ -1,0 +1,60 @@
+.. index:: single: combinations
+.. _combinations/0:
+
+.. rst-class:: right
+
+**object**
+
+``combinations``
+================
+
+Implementation of combinations operations over lists.
+
+| **Availability:** 
+|    ``logtalk_load(combinations(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-26
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`combinations_protocol <combinations_protocol/0>`
+| **Uses:**
+|    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`list <list/0>`
+|    :ref:`natural <natural/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`combinations_protocol/0::combination/3`  :ref:`combinations_protocol/0::combination/4`  :ref:`combinations_protocol/0::combination_index/4`  :ref:`combinations_protocol/0::combination_with_replacement/3`  :ref:`combinations_protocol/0::combination_with_replacement/4`  :ref:`combinations_protocol/0::combinations/3`  :ref:`combinations_protocol/0::combinations/4`  :ref:`combinations_protocol/0::combinations_with_replacement/3`  :ref:`combinations_protocol/0::combinations_with_replacement/4`  :ref:`combinations_protocol/0::count_combinations/3`  :ref:`combinations_protocol/0::count_combinations_with_replacement/3`  :ref:`combinations_protocol/0::distinct_combination/3`  :ref:`combinations_protocol/0::distinct_combination/4`  :ref:`combinations_protocol/0::distinct_combinations/3`  :ref:`combinations_protocol/0::distinct_combinations/4`  :ref:`combinations_protocol/0::nth_combination/4`  :ref:`combinations_protocol/0::random_combination/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

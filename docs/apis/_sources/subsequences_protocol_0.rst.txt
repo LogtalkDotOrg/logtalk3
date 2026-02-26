@@ -15,7 +15,7 @@ Protocol for subsequence operations over lists.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-01-30
+| **Date:** 2026-02-26
 
 | **Compilation flags:**
 |    ``static``
@@ -29,8 +29,6 @@ Protocol for subsequence operations over lists.
 
    - Generation operations: Predicates for generating all subsequences or variants thereof.
    - Ordering variants: Predicates that support an additional Order argument (default, lexicographic, or shortlex) for controlling output order.
-   - Filtered generation: Predicates for generating specific types of subsequences (combinations, permutations).
-   - Indexed access: Predicates for direct access to subsequences at specific positions.
    - Searching and matching: Predicates for finding specific subsequences with desired properties.
    - Prefix and suffix operations: Predicates for checking and finding prefixes and suffixes.
    - Contiguous subsequences: Predicates for working with contiguous subsequences (subslices, sliding windows).
@@ -458,541 +456,6 @@ True iff (Init,Tail) represents a split of the list where Init+Tail equals the o
 
 ------------
 
-.. index:: combinations/3
-.. _subsequences_protocol/0::combinations/3:
-
-``combinations/3``
-^^^^^^^^^^^^^^^^^^
-
-Generates all K-element subsequences (combinations) of a list. Order of elements is preserved from the original list, but position selection varies. No repetitions allowed.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``combinations(K,List,Combination)``
-| **Mode and number of proofs:**
-|    ``combinations(+integer,+list,-list)`` - ``one``
-
-| **Examples:**
-|    2-combinations
-|      ``combinations(2,[a,b,c],Combination)``
-|      ``Combination=[[a,b],[a,c],[b,c]]``
-|    Empty combination
-|      ``combinations(0,[a,b],Combination)``
-|      ``Combination=[[]]``
-|    Impossible combinations
-|      ``combinations(3,[a,b],_)``
-|      ``false``
-
-
-------------
-
-.. index:: combination/3
-.. _subsequences_protocol/0::combination/3:
-
-``combination/3``
-^^^^^^^^^^^^^^^^^
-
-True iff the third argument is a K-element subsequence (combinations) of a list. Order of elements is preserved from the original list, but position selection varies. No repetitions allowed.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``combination(K,List,Combination)``
-| **Mode and number of proofs:**
-|    ``combination(+integer,+list,-list)`` - ``one_or_more``
-
-| **Examples:**
-|    2-combination
-|      ``combination(2,[a,b,c],Combination)``
-|      ``Combination=[a,b]``
-
-
-------------
-
-.. index:: combinations/4
-.. _subsequences_protocol/0::combinations/4:
-
-``combinations/4``
-^^^^^^^^^^^^^^^^^^
-
-Generates all K-element combinations with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``combinations(K,List,Order,Combinations)``
-| **Mode and number of proofs:**
-|    ``combinations(+integer,+list,+atom,-list)`` - ``one``
-
-| **Examples:**
-|    Lexicographic 2-combinations
-|      ``combinations(2,[a,b,c],lexicographic,Combinations)``
-|      ``Combinations=[[a,b],[a,c],[b,c]]``
-
-
-------------
-
-.. index:: combination/4
-.. _subsequences_protocol/0::combination/4:
-
-``combination/4``
-^^^^^^^^^^^^^^^^^
-
-True iff the fourth argument is a K-element combination with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``combination(K,List,Order,Combination)``
-| **Mode and number of proofs:**
-|    ``combination(+integer,+list,+atom,-list)`` - ``one_or_more``
-
-| **Examples:**
-|    Lexicographic 2-combination
-|      ``combination(2,[a,b,c],lexicographic,Combination)``
-|      ``Combination=[a,b]``
-
-
-------------
-
-.. index:: combinations_with_replacement/3
-.. _subsequences_protocol/0::combinations_with_replacement/3:
-
-``combinations_with_replacement/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Generates all K-element subsequences with replacement allowed. Elements can be repeated.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``combinations_with_replacement(K,List,Combination)``
-| **Mode and number of proofs:**
-|    ``combinations_with_replacement(+integer,+list,-list)`` - ``one``
-|    ``combinations_with_replacement(+integer,+list,?list)`` - ``zero_or_more``
-
-| **Examples:**
-|    2-combinations with replacement
-|      ``combinations_with_replacement(2,[a,b],Combination)``
-|      ``Combination=[[a,a],[a,b],[b,b]]``
-
-
-------------
-
-.. index:: permutations/2
-.. _subsequences_protocol/0::permutations/2:
-
-``permutations/2``
-^^^^^^^^^^^^^^^^^^
-
-Generates all permutations of a list with default ordering. Unlike subsequences, permutations rearrange all elements without preserving relative order.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``permutations(List,Permutations)``
-| **Mode and number of proofs:**
-|    ``permutations(+list,-list)`` - ``one``
-
-| **Examples:**
-|    All permutations
-|      ``permutations([a,b,c],Permutations)``
-|      ``Permutations=[[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]``
-
-
-------------
-
-.. index:: permutation/2
-.. _subsequences_protocol/0::permutation/2:
-
-``permutation/2``
-^^^^^^^^^^^^^^^^^
-
-True iff the second argument is a permutation of a list with default ordering. Unlike subsequences, permutations rearrange all elements without preserving relative order.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``permutation(List,Permutation)``
-| **Mode and number of proofs:**
-|    ``permutation(+list,-list)`` - ``one_or_more``
-
-| **Examples:**
-|    A permutation
-|      ``permutation([1,2],Permutation)``
-|      ``Permutation=[2,1]``
-
-
-------------
-
-.. index:: permutations/3
-.. _subsequences_protocol/0::permutations/3:
-
-``permutations/3``
-^^^^^^^^^^^^^^^^^^
-
-Generates all permutations of a list with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``permutations(List,Order,Permutations)``
-| **Mode and number of proofs:**
-|    ``permutations(+list,+atom,-list)`` - ``one``
-
-| **Examples:**
-|    All lexicographic permutations
-|      ``permutations([a,b,c],lexicographic,Permutations)``
-|      ``Permutations=[[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]``
-
-
-------------
-
-.. index:: permutation/3
-.. _subsequences_protocol/0::permutation/3:
-
-``permutation/3``
-^^^^^^^^^^^^^^^^^
-
-True iff the third argument is a permutation of a list with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``permutation(List,Order,Permutation)``
-| **Mode and number of proofs:**
-|    ``permutation(+list,+atom,-list)`` - ``one_or_more``
-
-| **Examples:**
-|    A lexicographic permutations
-|      ``permutation([a,b,c],lexicographic,Permutation)``
-|      ``Permutation=[a,b,c]``
-
-
-------------
-
-.. index:: k_permutations/3
-.. _subsequences_protocol/0::k_permutations/3:
-
-``k_permutations/3``
-^^^^^^^^^^^^^^^^^^^^
-
-Generates all K-element permutations of a list. These are ordered selections where order matters.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``k_permutations(K,List,Permutations)``
-| **Mode and number of proofs:**
-|    ``k_permutations(+integer,+list,-list)`` - ``one``
-
-| **Examples:**
-|    2-permutations
-|      ``k_permutations(2,[a,b,c],Permutations)``
-|      ``Permutations=[[a,b],[a,c],[b,a],[b,c],[c,a],[c,b]]``
-
-
-------------
-
-.. index:: k_permutation/3
-.. _subsequences_protocol/0::k_permutation/3:
-
-``k_permutation/3``
-^^^^^^^^^^^^^^^^^^^
-
-True iff the third argument is a K-element permutations of a list. These are ordered selections where order matters.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``k_permutation(K,List,Permutation)``
-| **Mode and number of proofs:**
-|    ``k_permutation(+integer,+list,-list)`` - ``one_or_more``
-
-| **Examples:**
-|    2-permutations
-|      ``k_permutation(2,[a,b,c],Permutation)``
-|      ``Permutation=[a,b]``
-
-
-------------
-
-.. index:: k_permutations/4
-.. _subsequences_protocol/0::k_permutations/4:
-
-``k_permutations/4``
-^^^^^^^^^^^^^^^^^^^^
-
-Generates all K-element permutations of a list with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``k_permutations(K,List,Order,Permutations)``
-| **Mode and number of proofs:**
-|    ``k_permutations(+integer,+list,+atom,-list)`` - ``one``
-
-| **Examples:**
-|    Lexicographic 2-permutations
-|      ``k_permutations(2,[a,b,c],lexicographic,Permutations)``
-|      ``Permutations=[[a,b],[a,c],[b,a],[b,c],[c,a],[c,b]]``
-
-
-------------
-
-.. index:: k_permutation/4
-.. _subsequences_protocol/0::k_permutation/4:
-
-``k_permutation/4``
-^^^^^^^^^^^^^^^^^^^
-
-True iff the fourth argument is a K-element permutation of a list with specified ordering: ``default``, ``lexicographic``, or ``shortlex``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``k_permutation(K,List,Order,Permutation)``
-| **Mode and number of proofs:**
-|    ``k_permutation(+integer,+list,+atom,-list)`` - ``one_or_more``
-
-| **Examples:**
-|    Lexicographic 2-permutations
-|      ``k_permutation(2,[a,b,c],lexicographic,Permutation)``
-|      ``Permutation=[a,b]``
-
-
-------------
-
-.. index:: cartesian_product/3
-.. _subsequences_protocol/0::cartesian_product/3:
-
-``cartesian_product/3``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Generates all K-element tuples from the list with replacement and where order matters (Cartesian product of the list with itself K times).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``cartesian_product(K,List,Tuples)``
-| **Mode and number of proofs:**
-|    ``cartesian_product(+integer,+list,-list)`` - ``one``
-
-| **Examples:**
-|    2-tuples
-|      ``cartesian_product(2,[a,b],Tuples)``
-|      ``Tuples=[[a,a],[a,b],[b,a],[b,b]]``
-
-
-------------
-
-.. index:: derangements/2
-.. _subsequences_protocol/0::derangements/2:
-
-``derangements/2``
-^^^^^^^^^^^^^^^^^^
-
-Generates all derangements of a list. A derangement is a permutation where no element appears in its original position.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``derangements(List,Derangements)``
-| **Mode and number of proofs:**
-|    ``derangements(+list,-list)`` - ``one``
-
-| **Examples:**
-|    All derangements
-|      ``derangements([a,b,c],Derangements)``
-|      ``Derangements=[[b,c,a],[c,a,b]]``
-
-
-------------
-
-.. index:: derangement/2
-.. _subsequences_protocol/0::derangement/2:
-
-``derangement/2``
-^^^^^^^^^^^^^^^^^
-
-True iff the second argument is a derangement of the first argument. A derangement is a permutation where no element appears in its original position.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``derangement(List,Derangement)``
-| **Mode and number of proofs:**
-|    ``derangement(+list,-list)`` - ``one``
-
-| **Examples:**
-|    A derangement
-|      ``derangement([a,b,c],Derangement)``
-|      ``Derangement=[b,c,a]``
-
-
-------------
-
-.. index:: next_permutation/2
-.. _subsequences_protocol/0::next_permutation/2:
-
-``next_permutation/2``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Computes the next permutation in lexicographic order. Fails if the input is the last permutation.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``next_permutation(Permutation,NextPermutation)``
-| **Mode and number of proofs:**
-|    ``next_permutation(+list,-list)`` - ``zero_or_one``
-
-| **Examples:**
-|    Next permutation
-|      ``next_permutation([a,b,c],NextPermutation)``
-|      ``NextPermutation=[a,c,b]``
-
-
-------------
-
-.. index:: previous_permutation/2
-.. _subsequences_protocol/0::previous_permutation/2:
-
-``previous_permutation/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Computes the previous permutation in lexicographic order. Fails if the input is the first permutation.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``previous_permutation(Permutation,PrevPermutation)``
-| **Mode and number of proofs:**
-|    ``previous_permutation(+list,-list)`` - ``zero_or_one``
-
-| **Examples:**
-|    Previous permutation
-|      ``previous_permutation([a,c,b],PrevPermutation)``
-|      ``PrevPermutation=[a,b,c]``
-
-
-------------
-
-.. index:: nth_combination/4
-.. _subsequences_protocol/0::nth_combination/4:
-
-``nth_combination/4``
-^^^^^^^^^^^^^^^^^^^^^
-
-Directly computes the Nth K-element combination in lexicographic order without generating all previous ones. Index starts at 0.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``nth_combination(K,List,Index,Combination)``
-| **Mode and number of proofs:**
-|    ``nth_combination(+integer,+list,+integer,-list)`` - ``zero_or_one``
-
-| **Examples:**
-|    Second 2-combination
-|      ``nth_combination(2,[a,b,c,d],1,Combination)``
-|      ``Combination=[a,c]``
-
-
-------------
-
-.. index:: nth_permutation/3
-.. _subsequences_protocol/0::nth_permutation/3:
-
-``nth_permutation/3``
-^^^^^^^^^^^^^^^^^^^^^
-
-Directly computes the Nth permutation in lexicographic order. Index starts at 0.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``nth_permutation(List,Index,Permutation)``
-| **Mode and number of proofs:**
-|    ``nth_permutation(+list,+integer,-list)`` - ``zero_or_one``
-
-| **Examples:**
-|    Third permutation
-|      ``nth_permutation([a,b,c],2,Permutation)``
-|      ``Permutation=[b,a,c]``
-
-
-------------
-
-.. index:: combination_index/4
-.. _subsequences_protocol/0::combination_index/4:
-
-``combination_index/4``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Finds the lexicographic index of a given K-element combination from the original list. Inverse of nth_combination/4.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``combination_index(K,List,Combination,Index)``
-| **Mode and number of proofs:**
-|    ``combination_index(+integer,+list,+list,-integer)`` - ``zero_or_one``
-
-| **Examples:**
-|    Index of combination
-|      ``combination_index(2,[a,b,c,d],[a,c],Index)``
-|      ``Index=1``
-
-
-------------
-
-.. index:: permutation_index/3
-.. _subsequences_protocol/0::permutation_index/3:
-
-``permutation_index/3``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Finds the lexicographic index of a given permutation. Inverse of nth_permutation/3.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``permutation_index(List,Permutation,Index)``
-| **Mode and number of proofs:**
-|    ``permutation_index(+list,+list,-integer)`` - ``zero_or_one``
-
-| **Examples:**
-|    Index of permutation
-|      ``permutation_index([a,b,c],[b,a,c],Index)``
-|      ``Index=2``
-
-
-------------
-
 .. index:: longest_common_subsequence/3
 .. _subsequences_protocol/0::longest_common_subsequence/3:
 
@@ -1136,6 +599,57 @@ Checks if the first list is a subsequence of the second list. All elements must 
 |    Invalid subsequence
 |      ``is_subsequence_of([c,a],[a,b,c])``
 |      ``false``
+
+
+------------
+
+.. index:: proper_subsequence/2
+.. _subsequences_protocol/0::proper_subsequence/2:
+
+``proper_subsequence/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks if the first list is a proper subsequence of the second list (i.e., subsequence and not equal).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``proper_subsequence(Subsequence,List)``
+| **Mode and number of proofs:**
+|    ``proper_subsequence(+list,+list)`` - ``zero_or_one``
+
+| **Examples:**
+|    Proper subsequence
+|      ``proper_subsequence([a,c],[a,b,c])``
+|      ``true``
+|    Not proper (equal lists)
+|      ``proper_subsequence([a,b,c],[a,b,c])``
+|      ``false``
+
+
+------------
+
+.. index:: subsequence_at_indices/3
+.. _subsequences_protocol/0::subsequence_at_indices/3:
+
+``subsequence_at_indices/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts a subsequence using a strictly increasing list of 1-based indices.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``subsequence_at_indices(List,Indices,Subsequence)``
+| **Mode and number of proofs:**
+|    ``subsequence_at_indices(+list,+list,-list)`` - ``zero_or_one``
+
+| **Examples:**
+|    Indices selection
+|      ``subsequence_at_indices([a,b,c,d],[1,3],Subsequence)``
+|      ``Subsequence=[a,c]``
 
 
 ------------
@@ -1316,54 +830,6 @@ Generates all contiguous windows of size N from a list. Fails if N is larger tha
 
 ------------
 
-.. index:: random_combination/3
-.. _subsequences_protocol/0::random_combination/3:
-
-``random_combination/3``
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-Randomly selects one K-element combination uniformly from all possible combinations.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``random_combination(K,List,Combination)``
-| **Mode and number of proofs:**
-|    ``random_combination(+integer,+list,-list)`` - ``one``
-
-| **Examples:**
-|    Random 2-combination
-|      ``random_combination(2,[a,b,c,d],Combination)``
-|      ``Combination=[b,d]``
-
-
-------------
-
-.. index:: random_permutation/2
-.. _subsequences_protocol/0::random_permutation/2:
-
-``random_permutation/2``
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-Randomly selects one permutation uniformly from all possible permutations. Also known as shuffling.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``random_permutation(List,Permutation)``
-| **Mode and number of proofs:**
-|    ``random_permutation(+list,-list)`` - ``one``
-
-| **Examples:**
-|    Random permutation
-|      ``random_permutation([a,b,c],Permutation)``
-|      ``Permutation=[c,a,b]``
-
-
-------------
-
 .. index:: random_subsequence/2
 .. _subsequences_protocol/0::random_subsequence/2:
 
@@ -1529,54 +995,6 @@ Counts the total number of subsequences (always 2^N for a list of length N).
 |    Count
 |      ``count_subsequences([a,b,c],Count)``
 |      ``Count=8``
-
-
-------------
-
-.. index:: count_combinations/3
-.. _subsequences_protocol/0::count_combinations/3:
-
-``count_combinations/3``
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-Counts the number of K-element combinations: C(N,K) = N!/(K!(N-K)!).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``count_combinations(K,List,Count)``
-| **Mode and number of proofs:**
-|    ``count_combinations(+integer,+list,-integer)`` - ``one``
-
-| **Examples:**
-|    C(4,2)
-|      ``count_combinations(2,[a,b,c,d],Count)``
-|      ``Count=6``
-
-
-------------
-
-.. index:: count_permutations/2
-.. _subsequences_protocol/0::count_permutations/2:
-
-``count_permutations/2``
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-Counts the number of permutations (always N! for a list of length N).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``count_permutations(List,Count)``
-| **Mode and number of proofs:**
-|    ``count_permutations(+list,-integer)`` - ``one``
-
-| **Examples:**
-|    Count
-|      ``count_permutations([a,b,c],Count)``
-|      ``Count=6``
 
 
 ------------
