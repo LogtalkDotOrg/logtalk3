@@ -32,7 +32,7 @@
 			'Size' - 'Number of symbols in the Cuid2 identifier.',
 			'Alphabet' - 'Alphabet used for generating Cuid2 identifiers represented as an atom, list of characters, or list of character codes.'
 		],
-		see_also is [cuid2, ksuid(_, _), nanoid(_, _, _), ids(_, _), ulid(_), uuid(_)]
+		see_also is [cuid2, ids(_,_), ksuid(_,_), nanoid(_,_,_), snowflakeid(_,_,_,_,_,_,_), ulid(_), uuid(_)]
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [
@@ -255,7 +255,7 @@
 		author is 'Paulo Moura',
 		date is 2026-02-26,
 		comment is 'Cuid2 generator using atom representation, 24 symbols, and a lowercase alphanumeric alphabet.',
-		see_also is [cuid2(_, _, _), ksuid, nanoid, ids, ulid, uuid]
+		see_also is [cuid2(_, _, _), ids, ksuid, nanoid, snowflakeid, ulid, uuid]
 	]).
 
 :- end_object.

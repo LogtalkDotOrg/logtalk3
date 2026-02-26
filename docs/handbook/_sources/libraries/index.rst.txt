@@ -107,6 +107,7 @@ directory in the ``NOTES.md`` file.
    recorded_database
    redis
    sets
+   snowflakeid
    sockets
    simulated_annealing
    statistics

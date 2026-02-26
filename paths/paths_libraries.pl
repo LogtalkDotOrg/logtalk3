@@ -112,6 +112,7 @@ logtalk_library_path(recorded_database, library('recorded_database/')).
 logtalk_library_path(redis, library('redis/')).
 logtalk_library_path(sets, library('sets/')).
 logtalk_library_path(simulated_annealing, library('simulated_annealing/')).
+logtalk_library_path(snowflakeid, library('snowflakeid/')).
 logtalk_library_path(sockets, library('sockets/')).
 logtalk_library_path(statistics, library('statistics/')).
 logtalk_library_path(stemming, library('stemming/')).

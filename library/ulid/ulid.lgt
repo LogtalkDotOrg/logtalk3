@@ -30,7 +30,7 @@
 		parameters is [
 			'Representation' - 'Text representation for the ULID. Possible values are ``atom``, ``chars``, and ``codes``.'
 		],
-		see_also is [ulid, ulid_types, cuid2(_, _, _), ids(_, _), ksuid(_, _), nanoid(_, _, _), uuid(_)]
+		see_also is [ulid, ulid_types, cuid2(_,_,_), ids(_,_), ksuid(_,_), nanoid(_,_,_), snowflakeid(_,_,_,_,_,_,_), uuid(_)]
 	]).
 
 	generate(ULID) :-
@@ -182,7 +182,7 @@
 		author is 'Paulo Moura',
 		date is 2026-02-26,
 		comment is 'Universally Unique Lexicographically Sortable Identifier (ULID) generator using an atom representation.',
-		see_also is [ulid(_), ulid_types, cuid2, ids, ksuid, nanoid, uuid]
+		see_also is [ulid(_), ulid_types, cuid2, ids, ksuid, nanoid, snowflakeid, uuid]
 	]).
 
 :- end_object.

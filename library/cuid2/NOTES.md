@@ -38,7 +38,7 @@ generator when available. This includes macOS, Linux, *BSD, and other POSIX
 operating systems. On Windows, a pseudo-random generator is used, randomized
 using the current wall time.
 
-See also the `ids`, `nanoid`, `ksuid`, `uuid`, and `ulid` libraries.
+See also the `ids`, `nanoid`, `ksuid`, `snowflakeid`, `uuid`, and `ulid` libraries.
 
 
 API documentation

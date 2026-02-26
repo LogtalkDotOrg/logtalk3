@@ -73,6 +73,7 @@
 		reader(loader),
 		term_io(loader),
 		timeout(loader),
+		snowflakeid(loader),
 		gensym(loader),
 		genint(loader),
 		time_scales(loader),

@@ -1,0 +1,82 @@
+.. index:: single: snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node)
+.. _snowflakeid/7:
+
+.. rst-class:: right
+
+**object**
+
+``snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node)``
+===============================================================================================================
+
+* ``Representation`` - Snowflake ID representation. Possible values are ``integer``, ``atom``, ``chars``, and ``codes``.
+* ``EpochMilliseconds`` - Custom epoch in Unix milliseconds.
+* ``TimeUnitMilliseconds`` - Timestamp unit in milliseconds.
+* ``TimestampBits`` - Number of timestamp bits.
+* ``NodeBits`` - Number of node bits.
+* ``SequenceBits`` - Number of sequence bits.
+* ``Node`` - Node identifier value.
+
+
+Snowflake ID generic generator.
+
+| **Availability:** 
+|    ``logtalk_load(snowflakeid(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-26
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`snowflakeid_protocol <snowflakeid_protocol/0>`
+| **Uses:**
+|    :ref:`iso8601 <iso8601/0>`
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`snowflakeid_protocol/0::generate/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: last_time_sequence_/2
+.. _snowflakeid/7::last_time_sequence_/2:
+
+``last_time_sequence_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`snowflakeid <snowflakeid/0>`, :ref:`snowflakeid_twitter <snowflakeid_twitter/0>`, :ref:`snowflakeid_sonyflake <snowflakeid_sonyflake/0>`, :ref:`snowflakeid_instagram <snowflakeid_instagram/0>`, :ref:`ksuid(Representation,Alphabet) <ksuid/2>`, :ref:`cuid2(Representation,Size,Alphabet) <cuid2/3>`, :ref:`nanoid(Representation,Size,Alphabet) <nanoid/3>`
+

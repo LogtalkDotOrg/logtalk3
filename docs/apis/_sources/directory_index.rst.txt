@@ -1031,6 +1031,24 @@ To load an entity, always load the library that includes it using the goal ``log
    simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing_2>
    simulated_annealing_protocol <simulated_annealing_protocol_0>
 
+``library/snowflakeid/``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   snowflakeid <snowflakeid_0>
+   snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node) <snowflakeid_7>
+   snowflakeid_instagram <snowflakeid_instagram_0>
+   snowflakeid_instagram(A) <snowflakeid_instagram_1>
+   snowflakeid_protocol <snowflakeid_protocol_0>
+   snowflakeid_sonyflake <snowflakeid_sonyflake_0>
+   snowflakeid_sonyflake(A) <snowflakeid_sonyflake_1>
+   snowflakeid_twitter <snowflakeid_twitter_0>
+   snowflakeid_twitter(A) <snowflakeid_twitter_1>
+
 ``library/sockets/``
 --------------------
 

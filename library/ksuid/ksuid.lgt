@@ -31,7 +31,7 @@
 			'Representation' - 'Text representation for the KSUID. Possible values are ``atom``, ``chars``, and ``codes``.',
 			'Alphabet' - 'Base62 alphabet used for encoding KSUIDs represented as an atom, list of characters, or list of character codes.'
 		],
-		see_also is [ksuid, cuid2(_, _, _), nanoid(_, _, _), ids(_, _), ulid(_), uuid(_)]
+		see_also is [ksuid, cuid2(_,_,_), nanoid(_,_,_), ids(_,_), ulid(_), snowflakeid(_,_,_,_,_,_,_), uuid(_)]
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [
@@ -205,7 +205,7 @@
 		author is 'Paulo Moura',
 		date is 2026-02-26,
 		comment is 'KSUID generator using atom representation and the canonical Base62 alphabet.',
-		see_also is [ksuid(_, _), cuid2, nanoid, ids, ulid, uuid]
+		see_also is [ksuid(_, _), cuid2, nanoid, ids, ulid, snowflakeid, uuid]
 	]).
 
 :- end_object.

@@ -1,0 +1,60 @@
+.. index:: single: snowflakeid_sonyflake
+.. _snowflakeid_sonyflake/0:
+
+.. rst-class:: right
+
+**object**
+
+``snowflakeid_sonyflake``
+=========================
+
+Sonyflake-style Snowflake profile using atom representation.
+
+| **Availability:** 
+|    ``logtalk_load(snowflakeid(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-26
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`snowflakeid_sonyflake(atom) <snowflakeid_sonyflake/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`snowflakeid_protocol/0::generate/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`snowflakeid_sonyflake(A) <snowflakeid_sonyflake/1>`, :ref:`snowflakeid_twitter <snowflakeid_twitter/0>`, :ref:`snowflakeid_instagram <snowflakeid_instagram/0>`
+

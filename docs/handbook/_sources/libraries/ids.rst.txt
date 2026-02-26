@@ -15,8 +15,8 @@ used, but randomized using the current wall time.
 Identifiers can be generated as atoms, lists of characters, or lists of
 character codes.
 
-See also the ``cuid2``, ``ksuid``, ``nanoid``, ``uuid``, and ``ulid``
-libraries.
+See also the ``cuid2``, ``ksuid``, ``nanoid``, ``snowflakeid``,
+``uuid``, and ``ulid`` libraries.
 
 API documentation
 -----------------

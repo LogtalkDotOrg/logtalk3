@@ -80,5 +80,5 @@ Operators
 
 .. seealso::
 
-   :ref:`ids <ids/0>`, :ref:`nanoid(Representation,Size,Alphabet) <nanoid/3>`, :ref:`cuid2(Representation,Size,Alphabet) <cuid2/3>`, :ref:`ksuid(Representation,Alphabet) <ksuid/2>`, :ref:`uuid(Representation) <uuid/1>`, :ref:`ulid(Representation) <ulid/1>`
+   :ref:`ids <ids/0>`, :ref:`nanoid(Representation,Size,Alphabet) <nanoid/3>`, :ref:`cuid2(Representation,Size,Alphabet) <cuid2/3>`, :ref:`ksuid(Representation,Alphabet) <ksuid/2>`, :ref:`uuid(Representation) <uuid/1>`, :ref:`snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node) <snowflakeid/7>`, :ref:`ulid(Representation) <ulid/1>`
 
