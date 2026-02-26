@@ -154,13 +154,13 @@
 <li class="toctree-l2"><a class="reference internal" href="subsequences.html"><code class="docutils literal notranslate"><span class="pre">subsequences</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">time_scales</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#representation">Representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
@@ -224,33 +224,51 @@ reference data and optional user-provided override files.</p>
 <p>The library is designed to complement (not replace) the <code class="docutils literal notranslate"><span class="pre">dates</span></code> and
 <code class="docutils literal notranslate"><span class="pre">iso8601</span></code> libraries:</p>
 <ul class="simple">
-<li><p>use <code class="docutils literal notranslate"><span class="pre">dates</span></code> for civil date-time arithmetic and Unix epoch
-conversions;</p></li>
-<li><p>use <code class="docutils literal notranslate"><span class="pre">iso8601</span></code> for string parsing and formatting;</p></li>
-<li><p>use <code class="docutils literal notranslate"><span class="pre">time_scales</span></code> for physical time-scale conversions.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">dates</span></code> for civil date-time arithmetic and Unix epoch
+conversions.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">iso8601</span></code> for string parsing and formatting.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">time_scales</span></code> for physical time-scale conversions.</p></li>
 </ul>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#time_scales">../../apis/library_index.html#time_scales</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(time_scales(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(time_scales(tester)).
+</pre></div>
+</div>
+</section>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <p>Current feature set:</p>
 <ul class="simple">
-<li><p>supported scales: <code class="docutils literal notranslate"><span class="pre">utc</span></code>, <code class="docutils literal notranslate"><span class="pre">tai</span></code>, <code class="docutils literal notranslate"><span class="pre">tt</span></code>, <code class="docutils literal notranslate"><span class="pre">ut1</span></code>, <code class="docutils literal notranslate"><span class="pre">tdb</span></code>, <code class="docutils literal notranslate"><span class="pre">gps</span></code>,
-<code class="docutils literal notranslate"><span class="pre">gst</span></code>, <code class="docutils literal notranslate"><span class="pre">tcg</span></code>, and <code class="docutils literal notranslate"><span class="pre">tcb</span></code>;</p></li>
-<li><p>UTC support starts at <code class="docutils literal notranslate"><span class="pre">1972-01-01T00:00:00Z</span></code>;</p></li>
-<li><p>leap seconds are provided by a bundled static table with optional
-override file;</p></li>
+<li><p>Supported scales: <code class="docutils literal notranslate"><span class="pre">utc</span></code>, <code class="docutils literal notranslate"><span class="pre">tai</span></code>, <code class="docutils literal notranslate"><span class="pre">tt</span></code>, <code class="docutils literal notranslate"><span class="pre">ut1</span></code>, <code class="docutils literal notranslate"><span class="pre">tdb</span></code>, <code class="docutils literal notranslate"><span class="pre">gps</span></code>,
+<code class="docutils literal notranslate"><span class="pre">gst</span></code>, <code class="docutils literal notranslate"><span class="pre">tcg</span></code>, and <code class="docutils literal notranslate"><span class="pre">tcb</span></code>.</p></li>
+<li><p>UTC support starts at <code class="docutils literal notranslate"><span class="pre">1972-01-01T00:00:00Z</span></code>.</p></li>
+<li><p>Leap seconds are provided by a bundled static table with optional
+override file.</p></li>
 <li><p>DUT1 (<code class="docutils literal notranslate"><span class="pre">UT1-UTC</span></code>) is provided by bundled data with optional override
-file;</p></li>
-<li><p>active leap-second and DUT1 tables can be queried as ordered term
-lists for reproducibility;</p></li>
-<li><p>active leap-second and DUT1 tables can be saved to deterministic term
-files and reloaded as overrides;</p></li>
-<li><p>fail-based validation helper predicates are available for checking
-instant terms and conversion requests;</p></li>
-<li><p>strict <code class="docutils literal notranslate"><span class="pre">check_*</span></code> predicates are available and throw typed errors for
-invalid arguments;</p></li>
+file.</p></li>
+<li><p>Active leap-second and DUT1 tables can be queried as ordered term
+lists for reproducibility.</p></li>
+<li><p>Active leap-second and DUT1 tables can be saved to deterministic term
+files and reloaded as overrides.</p></li>
+<li><p>Fail- and error-based validation predicates for validating and
+type-checking instant terms and conversion requests.</p></li>
 <li><p>TDB conversions use a practical TT/TDB approximation suitable for
-application-level use;</p></li>
-<li><p>real-valued approximation offsets are converted to rationals using
+application-level use.</p></li>
+<li><p>Real-valued approximation offsets converted to rationals using
 high-resolution nanosecond scaling.</p></li>
 </ul>
 </section>
@@ -258,8 +276,8 @@ high-resolution nanosecond scaling.</p></li>
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <p>Current non-implemented features:</p>
 <ul class="simple">
-<li><p>UTC coverage before 1972-01-01T00:00:00Z is not implemented;</p></li>
-<li><p>network-driven leap-second and DUT1 data updates are not implemented;</p></li>
+<li><p>UTC coverage before 1972-01-01T00:00:00Z is not implemented.</p></li>
+<li><p>network-driven leap-second and DUT1 data updates are not implemented.</p></li>
 <li><p>high-precision ephemeris-based relativistic modeling (beyond the
 current practical approximation formulas) is not implemented.</p></li>
 </ul>
@@ -354,26 +372,6 @@ unbounded integer arithmetic is required.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> time_scales<span class="o">::</span>valid_instant(instant(utc, <span class="m">1483228800</span>, fraction(<span class="m">0</span>,<span class="m">1</span>))).
 
 | <span class="o">?-</span> time_scales<span class="o">::</span>valid_conversion(instant(tai, <span class="m">1483228837</span>, fraction(<span class="m">0</span>,<span class="m">1</span>)), tai, tdb).
-</pre></div>
-</div>
-</section>
-<section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
-<p>Open the
-<a class="reference external" href="../../apis/library_index.html#time_scales">../../apis/library_index.html#time_scales</a>
-link in a web browser.</p>
-</section>
-<section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
-<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(time_scales(loader)).
-</pre></div>
-</div>
-</section>
-<section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
-<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(time_scales(tester)).
 </pre></div>
 </div>
 </section>

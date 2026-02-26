@@ -10,34 +10,57 @@ reference data and optional user-provided override files.
 The library is designed to complement (not replace) the ``dates`` and
 ``iso8601`` libraries:
 
-- use ``dates`` for civil date-time arithmetic and Unix epoch
-  conversions;
-- use ``iso8601`` for string parsing and formatting;
-- use ``time_scales`` for physical time-scale conversions.
+- Use ``dates`` for civil date-time arithmetic and Unix epoch
+  conversions.
+- Use ``iso8601`` for string parsing and formatting.
+- Use ``time_scales`` for physical time-scale conversions.
+
+API documentation
+-----------------
+
+Open the
+`../../apis/library_index.html#time_scales <../../apis/library_index.html#time_scales>`__
+link in a web browser.
+
+Loading
+-------
+
+To load all entities in this library, load the ``loader.lgt`` file:
+
+::
+
+   | ?- logtalk_load(time_scales(loader)).
+
+Testing
+-------
+
+To test this library predicates, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(time_scales(tester)).
 
 Features
 --------
 
 Current feature set:
 
-- supported scales: ``utc``, ``tai``, ``tt``, ``ut1``, ``tdb``, ``gps``,
-  ``gst``, ``tcg``, and ``tcb``;
-- UTC support starts at ``1972-01-01T00:00:00Z``;
-- leap seconds are provided by a bundled static table with optional
-  override file;
+- Supported scales: ``utc``, ``tai``, ``tt``, ``ut1``, ``tdb``, ``gps``,
+  ``gst``, ``tcg``, and ``tcb``.
+- UTC support starts at ``1972-01-01T00:00:00Z``.
+- Leap seconds are provided by a bundled static table with optional
+  override file.
 - DUT1 (``UT1-UTC``) is provided by bundled data with optional override
-  file;
-- active leap-second and DUT1 tables can be queried as ordered term
-  lists for reproducibility;
-- active leap-second and DUT1 tables can be saved to deterministic term
-  files and reloaded as overrides;
-- fail-based validation helper predicates are available for checking
-  instant terms and conversion requests;
-- strict ``check_*`` predicates are available and throw typed errors for
-  invalid arguments;
+  file.
+- Active leap-second and DUT1 tables can be queried as ordered term
+  lists for reproducibility.
+- Active leap-second and DUT1 tables can be saved to deterministic term
+  files and reloaded as overrides.
+- Fail- and error-based validation predicates for validating and
+  type-checking instant terms and conversion requests.
 - TDB conversions use a practical TT/TDB approximation suitable for
-  application-level use;
-- real-valued approximation offsets are converted to rationals using
+  application-level use.
+- Real-valued approximation offsets converted to rationals using
   high-resolution nanosecond scaling.
 
 Limitations
@@ -45,8 +68,8 @@ Limitations
 
 Current non-implemented features:
 
-- UTC coverage before 1972-01-01T00:00:00Z is not implemented;
-- network-driven leap-second and DUT1 data updates are not implemented;
+- UTC coverage before 1972-01-01T00:00:00Z is not implemented.
+- network-driven leap-second and DUT1 data updates are not implemented.
 - high-precision ephemeris-based relativistic modeling (beyond the
   current practical approximation formulas) is not implemented.
 
@@ -177,28 +200,3 @@ Validate an instant or conversion request:
    | ?- time_scales::valid_instant(instant(utc, 1483228800, fraction(0,1))).
 
    | ?- time_scales::valid_conversion(instant(tai, 1483228837, fraction(0,1)), tai, tdb).
-
-API documentation
------------------
-
-Open the
-`../../apis/library_index.html#time_scales <../../apis/library_index.html#time_scales>`__
-link in a web browser.
-
-Loading
--------
-
-To load all entities in this library, load the ``loader.lgt`` file:
-
-::
-
-   | ?- logtalk_load(time_scales(loader)).
-
-Testing
--------
-
-To test this library predicates, load the ``tester.lgt`` file:
-
-::
-
-   | ?- logtalk_load(time_scales(tester)).
