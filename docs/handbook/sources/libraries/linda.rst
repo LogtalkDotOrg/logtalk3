@@ -236,7 +236,8 @@ Server predicates
 ~~~~~~~~~~~~~~~~~
 
 - ``linda`` - Start server on automatic port
-- ``linda(+Options)`` - Start server with options
+- ``linda(+Options)`` - Start server with options (see API
+  documentation)
 
 Client predicates
 ~~~~~~~~~~~~~~~~~

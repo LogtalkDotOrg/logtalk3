@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-12,
+		date is 2026-02-26,
 		comment is 'Linda tuple-space implementation for process communication. Provides a server that acts as a shared blackboard where clients can write (``out/1``), read (``rd/1``), and remove (``in/1``) tuples. Uses threaded engines for the server implementation and the sockets library for network communication.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog (requires both multi-threading and sockets support).',
@@ -56,6 +56,7 @@
 		comment is 'Starts a Linda server with the given options. The predicate succeeds when all clients have disconnected after a shutdown request.',
 		argnames is ['Options'],
 		remarks is [
+			'Option ``port(Port)``' - 'Use ``Port`` as the server port. Must be an integer and an available port.',
 			'Option ``Address-Goal``' - '``Address`` is unified with ``Host:Port`` and ``Goal`` is called when the server starts. Useful for saving the address or starting clients.',
 			'Option ``accept_hook(Client,Stream,Goal)``' - 'When a client connects, ``Client`` is unified with the client address, ``Stream`` with the connection stream, and ``Goal`` is called. If ``Goal`` fails, the connection is rejected.'
 		]
@@ -394,6 +395,7 @@
 	linda_(Options) :-
 		context(Context),
 		% Start socket server
+		ignore(memberchk(port(Port), Options)),
 		socket::server_open(Port, ServerSocket, [type(text)]),
 		assertz(server_socket_(ServerSocket)),
 		assertz(server_running_),
@@ -444,6 +446,9 @@
 
 	:- meta_predicate(process_server_option(::, *)).
 
+	process_server_option(port(Port), Port) :-
+		!,
+		integer(Port).
 	process_server_option(Address-Goal, Address) :-
 		!,
 		call(Goal).
