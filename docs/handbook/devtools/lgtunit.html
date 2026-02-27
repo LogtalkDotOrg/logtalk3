@@ -110,11 +110,19 @@
 <li class="toctree-l3"><a class="reference internal" href="#debugging-failed-tests">Debugging failed tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#code-coverage">Code coverage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#utility-predicates">Utility predicates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#exporting-test-results-in-xunit-xml-format">Exporting test results in xUnit XML format</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#exporting-test-results-in-the-tap-output-format">Exporting test results in the TAP output format</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#exporting-test-results-in-the-ctrf-json-format">Exporting test results in the CTRF JSON format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exporting-test-results">Exporting test results</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#xunit-xml-format">xUnit XML format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tap-output-format">TAP output format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ctrf-json-format">CTRF JSON format</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#generating-allure-reports">Generating Allure reports</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#exporting-code-coverage-results-in-xml-format">Exporting code coverage results in XML format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exporting-code-coverage-results">Exporting code coverage results</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#simple-xml-format">Simple XML format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cobertura-xml-format">Cobertura XML format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lcov-format">LCOV format</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#automatically-creating-bug-reports-at-issue-trackers">Automatically creating bug reports at issue trackers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#minimizing-test-results-output">Minimizing test results output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#help-with-warnings">Help with warnings</a></li>
@@ -1821,8 +1829,10 @@ directive to the object (or category) calling it:</p>
 <p>Consult the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object API documentation for more details on
 these predicates.</p>
 </section>
-<section id="exporting-test-results-in-xunit-xml-format">
-<h2>Exporting test results in xUnit XML format<a class="headerlink" href="#exporting-test-results-in-xunit-xml-format" title="Link to this heading"></a></h2>
+<section id="exporting-test-results">
+<h2>Exporting test results<a class="headerlink" href="#exporting-test-results" title="Link to this heading"></a></h2>
+<section id="xunit-xml-format">
+<h3>xUnit XML format<a class="headerlink" href="#xunit-xml-format" title="Link to this heading"></a></h3>
 <p>To output test results in the xUnit XML format (from JUnit; see e.g.
 <a class="reference external" href="https://github.com/windyroad/JUnit-Schema">https://github.com/windyroad/JUnit-Schema</a> or
 <a class="reference external" href="https://llg.cubic.org/docs/junit/">https://llg.cubic.org/docs/junit/</a>), simply load the <code class="docutils literal notranslate"><span class="pre">xunit_output.lgt</span></code>
@@ -1854,8 +1864,8 @@ in a single report)</p></li>
 <li><p><a class="reference external" href="https://plugins.jenkins.io/xunit">https://plugins.jenkins.io/xunit</a></p></li>
 </ul>
 </section>
-<section id="exporting-test-results-in-the-tap-output-format">
-<h2>Exporting test results in the TAP output format<a class="headerlink" href="#exporting-test-results-in-the-tap-output-format" title="Link to this heading"></a></h2>
+<section id="tap-output-format">
+<h3>TAP output format<a class="headerlink" href="#tap-output-format" title="Link to this heading"></a></h3>
 <p>To output test results in the TAP (Test Anything Protocol) format,
 simply load the <code class="docutils literal notranslate"><span class="pre">tap_output.lgt</span></code> file before running the tests. This
 file defines an object, <code class="docutils literal notranslate"><span class="pre">tap_output</span></code>, that intercepts and rewrites
@@ -1880,8 +1890,8 @@ HTML files for easy browsing. For example:</p>
 <li><p><a class="reference external" href="https://plugins.jenkins.io/tap/">https://plugins.jenkins.io/tap/</a></p></li>
 </ul>
 </section>
-<section id="exporting-test-results-in-the-ctrf-json-format">
-<h2>Exporting test results in the CTRF JSON format<a class="headerlink" href="#exporting-test-results-in-the-ctrf-json-format" title="Link to this heading"></a></h2>
+<section id="ctrf-json-format">
+<h3>CTRF JSON format<a class="headerlink" href="#ctrf-json-format" title="Link to this heading"></a></h3>
 <p>To output test results in the CTRF (Common Test Report Format) JSON
 format, simply load the <code class="docutils literal notranslate"><span class="pre">ctrf_output.lgt</span></code> file before running the
 tests. This file defines an object, <code class="docutils literal notranslate"><span class="pre">ctrf_output</span></code>, that intercepts and
@@ -1897,6 +1907,7 @@ directories.</p>
 <p>When running a set of test suites as a single unified suite, the single
 CTRF report is created in the directory of the first test suite object
 in the set.</p>
+</section>
 </section>
 <section id="generating-allure-reports">
 <h2>Generating Allure reports<a class="headerlink" href="#generating-allure-reports" title="Link to this heading"></a></h2>
@@ -2001,9 +2012,24 @@ the <code class="docutils literal notranslate"><span class="pre">xunit_net_v2</s
 instead of their run order, and dates are displayed as “unknown” in the
 overview page.</p>
 </section>
-<section id="exporting-code-coverage-results-in-xml-format">
-<h2>Exporting code coverage results in XML format<a class="headerlink" href="#exporting-code-coverage-results-in-xml-format" title="Link to this heading"></a></h2>
-<p>To export code coverage results in XML format, load the
+<section id="exporting-code-coverage-results">
+<h2>Exporting code coverage results<a class="headerlink" href="#exporting-code-coverage-results" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool can export code coverage stats in three formats by
+loading the corresponding report object before running tests:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">coverage_report.lgt</span></code> for a simple XML report
+(<code class="docutils literal notranslate"><span class="pre">coverage_report.xml</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cobertura_report.lgt</span></code> for a Cobertura XML report
+(<code class="docutils literal notranslate"><span class="pre">cobertura.xml</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lcov_report.lgt</span></code> for an LCOV report (<code class="docutils literal notranslate"><span class="pre">lcov.info</span></code>)</p></li>
+</ul>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation scripts, select the report
+format using the <code class="docutils literal notranslate"><span class="pre">-c</span></code> option with one of the values <code class="docutils literal notranslate"><span class="pre">xml</span></code>,
+<code class="docutils literal notranslate"><span class="pre">cobertura</span></code>, or <code class="docutils literal notranslate"><span class="pre">lcov</span></code> (or <code class="docutils literal notranslate"><span class="pre">none</span></code> to disable code coverage
+reports).</p>
+<section id="simple-xml-format">
+<h3>Simple XML format<a class="headerlink" href="#simple-xml-format" title="Link to this heading"></a></h3>
+<p>To export code coverage results in simple XML format, load the
 <code class="docutils literal notranslate"><span class="pre">coverage_report.lgt</span></code> file before running the tests. A file named
 <code class="docutils literal notranslate"><span class="pre">coverage_report.xml</span></code> will be created in the same directory as the
 object defining the tests.</p>
@@ -2051,6 +2077,29 @@ the <code class="docutils literal notranslate"><span class="pre">$HOME</span></c
 servers, the <code class="docutils literal notranslate"><span class="pre">url</span></code> parameter may not contain a <code class="docutils literal notranslate"><span class="pre">bitbucket</span></code>,
 <code class="docutils literal notranslate"><span class="pre">github</span></code>, or <code class="docutils literal notranslate"><span class="pre">gitlab</span></code> string. In this case, you can use the XSLT
 parameter <code class="docutils literal notranslate"><span class="pre">host</span></code> to indicate which service you are running.</p>
+</section>
+<section id="cobertura-xml-format">
+<h3>Cobertura XML format<a class="headerlink" href="#cobertura-xml-format" title="Link to this heading"></a></h3>
+<p>To export code coverage results in Cobertura XML format, load the
+<code class="docutils literal notranslate"><span class="pre">cobertura_report.lgt</span></code> file before running the tests. A file named
+<code class="docutils literal notranslate"><span class="pre">cobertura.xml</span></code> will be created in the same directory as the object
+defining the tests.</p>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation scripts, use the option:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">-</span>c cobertura
+</pre></div>
+</div>
+</section>
+<section id="lcov-format">
+<h3>LCOV format<a class="headerlink" href="#lcov-format" title="Link to this heading"></a></h3>
+<p>To export code coverage results in LCOV format, load the
+<code class="docutils literal notranslate"><span class="pre">lcov_report.lgt</span></code> file before running the tests. A file named
+<code class="docutils literal notranslate"><span class="pre">lcov.info</span></code> will be created in the same directory as the object
+defining the tests.</p>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation scripts, use the option:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">-</span>c lcov
+</pre></div>
+</div>
+</section>
 </section>
 <section id="automatically-creating-bug-reports-at-issue-trackers">
 <h2>Automatically creating bug reports at issue trackers<a class="headerlink" href="#automatically-creating-bug-reports-at-issue-trackers" title="Link to this heading"></a></h2>

@@ -1,0 +1,129 @@
+.. index:: single: cobertura_report
+.. _cobertura_report/0:
+
+.. rst-class:: right
+
+**object**
+
+``cobertura_report``
+====================
+
+Intercepts unit test execution messages and generates a ``cobertura.xml`` file with code coverage results.
+
+| **Availability:** 
+|    ``logtalk_load(lgtunit(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-02-27
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Provides:**
+|    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+| **Uses:**
+|    :ref:`logtalk <logtalk/0>`
+
+| **Remarks:**
+
+   - Usage: Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(cobertura_report))``.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: timestamp_/6
+.. _cobertura_report/0::timestamp_/6:
+
+``timestamp_/6``
+^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: class_/5
+.. _cobertura_report/0::class_/5:
+
+``class_/5``
+^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: method_/7
+.. _cobertura_report/0::method_/7:
+
+``method_/7``
+^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: lines_covered_/1
+.. _cobertura_report/0::lines_covered_/1:
+
+``lines_covered_/1``
+^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: lines_total_/1
+.. _cobertura_report/0::lines_total_/1:
+
+``lines_total_/1``
+^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: summary_/2
+.. _cobertura_report/0::summary_/2:
+
+``summary_/2``
+^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

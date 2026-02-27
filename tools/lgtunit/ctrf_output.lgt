@@ -32,7 +32,7 @@
 :- object(ctrf_output).
 
 	:- info([
-		version is 0:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-02-27,
 		comment is 'Intercepts unit test execution messages and outputs a report using the CTRF JSON format to the current output stream.',
@@ -322,8 +322,8 @@
 		escape_json_characters(Chars).
 
 	sum([], Sum, Sum).
-	sum([X| Xs], Acc, Sum) :-
-		Acc2 is Acc + X,
-		sum(Xs, Acc2, Sum).
+	sum([X| Xs], Sum0, Sum) :-
+		Sum1 is Sum0 + X,
+		sum(Xs, Sum1, Sum).
 
 :- end_object.

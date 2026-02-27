@@ -1840,8 +1840,11 @@ directive to the object (or category) calling it:
 Consult the ``lgtunit`` object API documentation for more details on
 these predicates.
 
-Exporting test results in xUnit XML format
-------------------------------------------
+Exporting test results
+----------------------
+
+xUnit XML format
+~~~~~~~~~~~~~~~~
 
 To output test results in the xUnit XML format (from JUnit; see e.g.
 https://github.com/windyroad/JUnit-Schema or
@@ -1877,8 +1880,8 @@ HTML files for easy browsing. For example:
 - https://github.com/JatechUK/NUnit-HTML-Report-Generator
 - https://plugins.jenkins.io/xunit
 
-Exporting test results in the TAP output format
------------------------------------------------
+TAP output format
+~~~~~~~~~~~~~~~~~
 
 To output test results in the TAP (Test Anything Protocol) format,
 simply load the ``tap_output.lgt`` file before running the tests. This
@@ -1908,8 +1911,8 @@ HTML files for easy browsing. For example:
 - https://github.com/Quobject/tap-to-html
 - https://plugins.jenkins.io/tap/
 
-Exporting test results in the CTRF JSON format
-----------------------------------------------
+CTRF JSON format
+~~~~~~~~~~~~~~~~
 
 To output test results in the CTRF (Common Test Report Format) JSON
 format, simply load the ``ctrf_output.lgt`` file before running the
@@ -2056,10 +2059,27 @@ the ``xunit_net_v2`` format, tests are reported in a random order
 instead of their run order, and dates are displayed as "unknown" in the
 overview page.
 
-Exporting code coverage results in XML format
----------------------------------------------
+Exporting code coverage results
+-------------------------------
 
-To export code coverage results in XML format, load the
+The ``lgtunit`` tool can export code coverage stats in three formats by
+loading the corresponding report object before running tests:
+
+- ``coverage_report.lgt`` for a simple XML report
+  (``coverage_report.xml``)
+- ``cobertura_report.lgt`` for a Cobertura XML report
+  (``cobertura.xml``)
+- ``lcov_report.lgt`` for an LCOV report (``lcov.info``)
+
+When using the ``logtalk_tester`` automation scripts, select the report
+format using the ``-c`` option with one of the values ``xml``,
+``cobertura``, or ``lcov`` (or ``none`` to disable code coverage
+reports).
+
+Simple XML format
+~~~~~~~~~~~~~~~~~
+
+To export code coverage results in simple XML format, load the
 ``coverage_report.lgt`` file before running the tests. A file named
 ``coverage_report.xml`` will be created in the same directory as the
 object defining the tests.
@@ -2117,6 +2137,34 @@ If you are using Bitbucket, GitHub, or GitLab hosted on your own
 servers, the ``url`` parameter may not contain a ``bitbucket``,
 ``github``, or ``gitlab`` string. In this case, you can use the XSLT
 parameter ``host`` to indicate which service you are running.
+
+Cobertura XML format
+~~~~~~~~~~~~~~~~~~~~
+
+To export code coverage results in Cobertura XML format, load the
+``cobertura_report.lgt`` file before running the tests. A file named
+``cobertura.xml`` will be created in the same directory as the object
+defining the tests.
+
+When using the ``logtalk_tester`` automation scripts, use the option:
+
+::
+
+   $ logtalk_tester -c cobertura
+
+LCOV format
+~~~~~~~~~~~
+
+To export code coverage results in LCOV format, load the
+``lcov_report.lgt`` file before running the tests. A file named
+``lcov.info`` will be created in the same directory as the object
+defining the tests.
+
+When using the ``logtalk_tester`` automation scripts, use the option:
+
+::
+
+   $ logtalk_tester -c lcov
 
 Automatically creating bug reports at issue trackers
 ----------------------------------------------------

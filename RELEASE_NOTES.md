@@ -28,6 +28,9 @@ RELEASE NOTES
 Tools
 -----
 
+* ADDED: Support to the `lgtunit` tool for exporting code coverage stats in
+Cobertura XML and LCOV formats.
+
 * ADDED: Support to the `lgtunit` tool for exporting tests results in the CTRF
 (Common Test Report Format) JSON format.
 

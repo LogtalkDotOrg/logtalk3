@@ -78,6 +78,8 @@ also available in the Logtalk website.
 	that can then be processed by continuous integration servers;
 	known issue: the output of some multi-threading examples may interfere
 	with the computation of the test/skipped/passed/failed totals;
+	it can export code coverage reports in simple XML, Cobertura XML, and LCOV
+	formats using the `-c xml`, `-c cobertura`, and `-c lcov` options;
 	if the script detects either a `timeout` or a `gtimeout` command (provided
 	by the GNU `coreutils` package), it will use it to run each test set if the
 	`timeout` option is set to a value greater than zero;

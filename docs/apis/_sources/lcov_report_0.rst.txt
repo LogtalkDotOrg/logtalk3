@@ -1,14 +1,14 @@
-.. index:: single: ctrf_report
-.. _ctrf_report/0:
+.. index:: single: lcov_report
+.. _lcov_report/0:
 
 .. rst-class:: right
 
 **object**
 
-``ctrf_report``
+``lcov_report``
 ===============
 
-Intercepts unit test execution messages and generates a ``ctrf_report.json`` file using the CTRF JSON format in the same directory as the tests object file.
+Intercepts unit test execution messages and generates a ``lcov.info`` file with code coverage results.
 
 | **Availability:** 
 |    ``logtalk_load(lgtunit(loader))``
@@ -28,7 +28,7 @@ Intercepts unit test execution messages and generates a ``ctrf_report.json`` fil
 
 | **Remarks:**
 
-   - Usage: Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(ctrf_report))``.
+   - Usage: Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(lcov_report))``.
 
 | **Inherited public predicates:**
 |    (none)
@@ -50,21 +50,26 @@ Protected predicates
 Private predicates
 ------------------
 
-.. index:: message_cache_/1
-.. _ctrf_report/0::message_cache_/1:
+.. index:: entity_file_/2
+.. _lcov_report/0::entity_file_/2:
 
-``message_cache_/1``
-^^^^^^^^^^^^^^^^^^^^
-
-Table of messages emitted by the lgtunit tool when running tests.
+``entity_file_/2``
+^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``dynamic``
 
-| **Template:**
-|    ``message_cache_(Message)``
-| **Mode and number of proofs:**
-|    ``message_cache_(?callable)`` - ``zero_or_more``
+
+------------
+
+.. index:: predicate_coverage_/7
+.. _lcov_report/0::predicate_coverage_/7:
+
+``predicate_coverage_/7``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
 
 
 ------------

@@ -113,6 +113,8 @@ format_goal=$format_default_goal
 
 coverage_default_goal="true"
 coverage_xml_goal="logtalk_load(lgtunit(coverage_report))"
+coverage_cobertura_goal="logtalk_load(lgtunit(cobertura_report))"
+coverage_lcov_goal="logtalk_load(lgtunit(lcov_report))"
 coverage_goal=$coverage_default_goal
 
 format_decimal() {
@@ -367,7 +369,7 @@ usage_help() {
 	echo "  -b bug report server (valid values are github and gitlab; no default; requires -u option)"
 	echo "  -u base URL to generate links to test files (no default)"
 	echo "  -c code coverage report (default is $coverage)"
-	echo "     (valid values are none and xml)"
+	echo "     (valid values are none, xml, cobertura, and lcov)"
 	echo "  -l directory depth level to look for test sets (default is to recurse into all sub-directories)"
 	echo "     (level 1 means current directory only)"
 	echo "  -e exclude directories matching a POSIX-extended regular expression"
@@ -543,6 +545,12 @@ if [ "$c_arg" == "none" ] ; then
 elif [ "$c_arg" == "xml" ] ; then
 	coverage='xml'
 	coverage_goal=$coverage_xml_goal
+elif [ "$c_arg" == "cobertura" ] ; then
+	coverage='cobertura'
+	coverage_goal=$coverage_cobertura_goal
+elif [ "$c_arg" == "lcov" ] ; then
+	coverage='lcov'
+	coverage_goal=$coverage_lcov_goal
 elif [ "$c_arg" != "" ] ; then
 	echo "Error! Unknown coverage report: $c_arg" >&2
 	usage_help
