@@ -55,7 +55,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 17.0"
+	Write-Output "$myName 17.1"
 }
 
 Function Format-Decimal {
@@ -629,9 +629,10 @@ if (Test-Path "$results/tester_versions.txt") {
 	Remove-Item -Path "$results/tester_versions.txt" -Force
 }
 
+$start_time = Get-Date
+
 if ($o -eq "verbose") {
 	$start_date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-	$start_time = Get-Date
 	Write-Output "% Batch testing started @ $start_date"
 	& $logtalk $backend_options $logtalk_option $versions_goal | Out-File $results/tester_versions.txt
 	Select-String -Path $results/tester_versions.txt -Pattern "Logtalk version:" -Raw -SimpleMatch
@@ -667,7 +668,7 @@ if ($max_jobs -eq 1) {
 	} else {
 		$counter = 1
 		$driver_files | ForEach-Object {
-			Write-Host -NoNewline "% running $testsets test sets: "
+			Write-Host -NoNewline "% Running $testsets test sets: "
 			Write-Host -NoNewline "$counter`r"
 			Invoke-TestSet $_.FullName
 			$counter++
@@ -718,7 +719,7 @@ if ($max_jobs -eq 1) {
 				$script:completed++
 
 				if ($o -eq 'minimal') {
-					Write-Host -NoNewline "% running $testsets test sets: "
+					Write-Host -NoNewline "% Running $testsets test sets: "
 					Write-Host -NoNewline "$completed`r"
 				}
 			}
@@ -732,7 +733,7 @@ if ($max_jobs -eq 1) {
 		}
 		& $reap_completed_workers
 		if ($o -eq 'minimal') {
-			Write-Host -NoNewline "% running $testsets test sets: "
+			Write-Host -NoNewline "% Running $testsets test sets: "
 			Write-Host -NoNewline "$counter`r"
 		}
 		$unit = (Split-Path -Path $_.FullName) -replace '\\', '/'
@@ -872,14 +873,16 @@ Write-Output "%"
 Write-Output "% $testsets test sets: $testsetruns completed, $testsetskipped skipped, $broken broken, $timeouts timedout, $crashed crashed"
 Write-Output "% $total tests: $skipped skipped, $passed passed, $failed failed ($flaky flaky)"
 
+$runtime = (Get-Date) - $start_time
+$runtime_str = "{0}h:{1:D2}m:{2:D2}s" -f [int][Math]::Floor($runtime.TotalHours), $runtime.Minutes, $runtime.Seconds
+
 if ($o -eq "verbose") {
 	$end_date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-	$runtime = (Get-Date) - $start_time
-	$runtime_str = "{0}h:{1:D2}m:{2:D2}s" -f [int][Math]::Floor($runtime.TotalHours), $runtime.Minutes, $runtime.Seconds
 	Write-Output "%"
 	Write-Output "% Batch testing ended @ $end_date"
-	Write-Output "% Batch run took $runtime_str"
 }
+
+Write-Output "% Batch run took $runtime_str"
 
 Pop-Location
 

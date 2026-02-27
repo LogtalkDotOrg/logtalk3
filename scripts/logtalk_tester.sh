@@ -33,7 +33,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 25.0"
+	echo "$(basename "$0") 25.1"
 	exit 0
 }
 
@@ -620,9 +620,10 @@ rm -f "$results"/*.totals
 rm -f "$results"/errors.all
 rm -f "$results"/tester_versions.txt
 
+start_time=$(date +%s)
+
 if [ "$output" == 'verbose' ] ; then
 	start_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
-	start_time=$(date +%s)
 	echo "% Batch testing started @ $start_date"
 	$logtalk_call $versions_goal > "$results"/tester_versions.txt 2> /dev/null
 	grep -a "Logtalk version:" "$results"/tester_versions.txt
@@ -670,7 +671,7 @@ if [ "$jobs" -eq 1 ] ; then
 	else
 		counter=1
 		while read -r file && [ "$file" != "" ]; do
-			echo -ne "% running $testsets test sets: "
+			echo -ne "% Running $testsets test sets: "
 			echo -ne "$counter"'\r'
 			run_testset "$file"
 			((counter++))
@@ -705,7 +706,7 @@ else
 				any_reaped=1
 
 				if [ "$output" == 'minimal' ] ; then
-					echo -ne "% running $testsets test sets: "
+					echo -ne "% Running $testsets test sets: "
 					echo -ne "$completed"'\r'
 				fi
 			fi
@@ -724,7 +725,7 @@ else
 		done
 		reap_completed_jobs
 		if [ "$output" == 'minimal' ] ; then
-			echo -ne "% running $testsets test sets: "
+			echo -ne "% Running $testsets test sets: "
 			echo -ne "$counter"'\r'
 		fi
 		(run_testset "$file") > "$results/$name.console" 2>&1 &
@@ -820,17 +821,19 @@ echo "%"
 echo "% $testsets test sets: $testsetruns completed, $testsetskipped skipped, $broken broken, $timeouts timedout, $crashed crashed"
 echo "% $total tests: $skipped skipped, $passed passed, $failed failed ($flaky flaky)"
 
+end_time=$(date +%s)
+runtime=$((end_time - start_time))
+hours=$((runtime / 3600))
+minutes=$(( (runtime % 3600) / 60 ))
+seconds=$((runtime % 60))
+
 if [ "$output" == 'verbose' ] ; then
 	end_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
-	end_time=$(date +%s)
-	runtime=$((end_time - start_time))
-	hours=$((runtime / 3600))
-	minutes=$(( (runtime % 3600) / 60 ))
-	seconds=$((runtime % 60))
 	echo "%"
 	echo "% Batch testing ended @ $end_date"
-	echo "% Batch run took $(printf '%dh:%02dm:%02ds' $hours $minutes $seconds)"
 fi
+
+echo "% Batch run took $(printf '%dh:%02dm:%02ds' $hours $minutes $seconds)"
 
 if [ "$crashed" -gt 0 ] ; then
 	exit 7

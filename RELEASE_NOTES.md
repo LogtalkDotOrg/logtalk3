@@ -31,6 +31,9 @@ Tools
 * ADDED: Support to the `logtalk_tester.sh` and `logtalk_tester.ps1` testing
 automation scripts for concurrent running of tests sets with a new `-j` option.
 
+* UPDATED: The `logtalk_tester.sh` and `logtalk_tester.ps1` testing automation
+scripts to also print the batch run time when using the `-o minimal` option.
+
 
 3.98.0 - February 27, 2026
 ==========================
