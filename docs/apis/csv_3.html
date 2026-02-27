@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>csv(A,B,C) &mdash; Logtalk 3.99.0</title>
+  <title>csv(Header,Separator,IgnoreQuotes) &mdash; Logtalk 3.99.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -85,7 +85,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#coroutining"><span class="xref std std-ref">coroutining</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#csv"><span class="xref std std-ref">csv</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="csv_0.html">csv</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">csv(A,B,C)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">csv(Header,Separator,IgnoreQuotes)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="csv_4.html">csv(Header,Separator,IgnoreQuotes,Comments)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="csv_guess_questions_0.html">csv_guess_questions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="csv_protocol_0.html">csv_protocol</a></li>
@@ -232,7 +232,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">csv(A,B,C)</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">csv(Header,Separator,IgnoreQuotes)</span></code></li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/csv_3.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -243,8 +243,13 @@
            <div itemprop="articleBody">
              
   <p class="right" id="csv-3"><span id="index-0"></span><strong>object</strong></p>
-<section id="csv-a-b-c">
-<h1><code class="docutils literal notranslate"><span class="pre">csv(A,B,C)</span></code><a class="headerlink" href="#csv-a-b-c" title="Link to this heading"></a></h1>
+<section id="csv-header-separator-ignorequotes">
+<h1><code class="docutils literal notranslate"><span class="pre">csv(Header,Separator,IgnoreQuotes)</span></code><a class="headerlink" href="#csv-header-separator-ignorequotes" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Header</span></code> - Header handling option with possible values <code class="docutils literal notranslate"><span class="pre">missing</span></code>, <code class="docutils literal notranslate"><span class="pre">skip</span></code>, and <code class="docutils literal notranslate"><span class="pre">keep</span></code> (default).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Separator</span></code> - Separator handling option with possible values <code class="docutils literal notranslate"><span class="pre">comma</span></code> (default for non <code class="docutils literal notranslate"><span class="pre">.tsv</span></code> and non <code class="docutils literal notranslate"><span class="pre">.tab</span></code> files or when no file name extension is available), <code class="docutils literal notranslate"><span class="pre">tab</span></code> (default for <code class="docutils literal notranslate"><span class="pre">.tsv</span></code> and <code class="docutils literal notranslate"><span class="pre">.tab</span></code> files), <code class="docutils literal notranslate"><span class="pre">semicolon</span></code>, and <code class="docutils literal notranslate"><span class="pre">colon</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IgnoreQuotes</span></code> - Double-quotes handling option to ignore (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or preserve (<code class="docutils literal notranslate"><span class="pre">false</span></code>; default) double quotes surrounding data.</p></li>
+</ul>
 <p>Backward-compatible parametric object equivalent to using <code class="docutils literal notranslate"><span class="pre">csv(_Header_,</span> <span class="pre">_Separator_,</span> <span class="pre">_IgnoreQuotes_,</span> <span class="pre">false)</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
@@ -254,8 +259,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-02-25</div>
+<div class="line"><strong>Version:</strong> 1:0:1</div>
+<div class="line"><strong>Date:</strong> 2026-02-27</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -266,7 +271,7 @@
 <div class="line-block">
 <div class="line"><strong>Extends:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="csv_4.html#csv-4"><span class="std std-ref">csv(A,B,C,false)</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="csv_4.html#csv-4"><span class="std std-ref">csv(Header,Separator,IgnoreQuotes,false)</span></a></div>
 </div>
 </div>
 <div class="line-block">

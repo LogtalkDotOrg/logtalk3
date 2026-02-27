@@ -373,10 +373,13 @@
 	extends(tsv(_Header_, false))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-25,
-		comment is 'Backward-compatible parametric object equivalent to using ``tsv(_Header_, false)``.'
+		date is 2026-02-27,
+		comment is 'Backward-compatible parametric object equivalent to using ``tsv(_Header_, false)``.',
+		parameters is [
+			'Header' - 'Header handling option with possible values ``skip`` and ``keep`` (default).'
+		]
 	]).
 
 :- end_object.

@@ -284,7 +284,7 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    csv <csv_0>
-   csv(A,B,C) <csv_3>
+   csv(Header,Separator,IgnoreQuotes) <csv_3>
    csv(Header,Separator,IgnoreQuotes,Comments) <csv_4>
    csv_guess_questions <csv_guess_questions_0>
    csv_protocol <csv_protocol_0>
@@ -1042,12 +1042,12 @@ To load an entity, always load the library that includes it using the goal ``log
    snowflakeid <snowflakeid_0>
    snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node) <snowflakeid_7>
    snowflakeid_instagram <snowflakeid_instagram_0>
-   snowflakeid_instagram(A) <snowflakeid_instagram_1>
+   snowflakeid_instagram(Representation) <snowflakeid_instagram_1>
    snowflakeid_protocol <snowflakeid_protocol_0>
    snowflakeid_sonyflake <snowflakeid_sonyflake_0>
-   snowflakeid_sonyflake(A) <snowflakeid_sonyflake_1>
+   snowflakeid_sonyflake(Representation) <snowflakeid_sonyflake_1>
    snowflakeid_twitter <snowflakeid_twitter_0>
-   snowflakeid_twitter(A) <snowflakeid_twitter_1>
+   snowflakeid_twitter(Representation) <snowflakeid_twitter_1>
 
 ``library/sockets/``
 --------------------
@@ -1180,7 +1180,7 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    tsv <tsv_0>
-   tsv(A) <tsv_1>
+   tsv(Header) <tsv_1>
    tsv(Header,Comments) <tsv_2>
    tsv_protocol <tsv_protocol_0>
 

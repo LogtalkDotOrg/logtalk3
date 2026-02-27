@@ -1,12 +1,15 @@
-.. index:: single: tsv(A)
+.. index:: single: tsv(Header)
 .. _tsv/1:
 
 .. rst-class:: right
 
 **object**
 
-``tsv(A)``
-==========
+``tsv(Header)``
+===============
+
+* ``Header`` - Header handling option with possible values ``skip`` and ``keep`` (default).
+
 
 Backward-compatible parametric object equivalent to using ``tsv(_Header_, false)``.
 
@@ -14,15 +17,15 @@ Backward-compatible parametric object equivalent to using ``tsv(_Header_, false)
 |    ``logtalk_load(tsv(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-25
+| **Version:** 1:0:1
+| **Date:** 2026-02-27
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Extends:**
-|    ``public`` :ref:`tsv(A,false) <tsv/2>`
+|    ``public`` :ref:`tsv(Header,false) <tsv/2>`
 
 | **Remarks:**
 |    (none)

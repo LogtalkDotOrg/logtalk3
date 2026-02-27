@@ -567,10 +567,15 @@
 	extends(csv(_Header_, _Separator_, _IgnoreQuotes_, false))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-25,
-		comment is 'Backward-compatible parametric object equivalent to using ``csv(_Header_, _Separator_, _IgnoreQuotes_, false)``.'
+		date is 2026-02-27,
+		comment is 'Backward-compatible parametric object equivalent to using ``csv(_Header_, _Separator_, _IgnoreQuotes_, false)``.',
+		parameters is [
+			'Header' - 'Header handling option with possible values ``missing``, ``skip``, and ``keep`` (default).',
+			'Separator' - 'Separator handling option with possible values ``comma`` (default for non ``.tsv`` and non ``.tab`` files or when no file name extension is available), ``tab`` (default for ``.tsv`` and ``.tab`` files), ``semicolon``, and ``colon``.',
+			'IgnoreQuotes' - 'Double-quotes handling option to ignore (``true``) or preserve (``false``; default) double quotes surrounding data.'
+		]
 	]).
 
 :- end_object.

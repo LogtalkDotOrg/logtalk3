@@ -1,12 +1,17 @@
-.. index:: single: csv(A,B,C)
+.. index:: single: csv(Header,Separator,IgnoreQuotes)
 .. _csv/3:
 
 .. rst-class:: right
 
 **object**
 
-``csv(A,B,C)``
-==============
+``csv(Header,Separator,IgnoreQuotes)``
+======================================
+
+* ``Header`` - Header handling option with possible values ``missing``, ``skip``, and ``keep`` (default).
+* ``Separator`` - Separator handling option with possible values ``comma`` (default for non ``.tsv`` and non ``.tab`` files or when no file name extension is available), ``tab`` (default for ``.tsv`` and ``.tab`` files), ``semicolon``, and ``colon``.
+* ``IgnoreQuotes`` - Double-quotes handling option to ignore (``true``) or preserve (``false``; default) double quotes surrounding data.
+
 
 Backward-compatible parametric object equivalent to using ``csv(_Header_, _Separator_, _IgnoreQuotes_, false)``.
 
@@ -14,15 +19,15 @@ Backward-compatible parametric object equivalent to using ``csv(_Header_, _Separ
 |    ``logtalk_load(csv(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-25
+| **Version:** 1:0:1
+| **Date:** 2026-02-27
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Extends:**
-|    ``public`` :ref:`csv(A,B,C,false) <csv/4>`
+|    ``public`` :ref:`csv(Header,Separator,IgnoreQuotes,false) <csv/4>`
 
 | **Remarks:**
 |    (none)

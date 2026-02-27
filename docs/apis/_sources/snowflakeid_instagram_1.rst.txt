@@ -1,12 +1,15 @@
-.. index:: single: snowflakeid_instagram(A)
+.. index:: single: snowflakeid_instagram(Representation)
 .. _snowflakeid_instagram/1:
 
 .. rst-class:: right
 
 **object**
 
-``snowflakeid_instagram(A)``
-============================
+``snowflakeid_instagram(Representation)``
+=========================================
+
+* ``Representation`` - Snowflake ID representation. Possible values are ``integer``, ``atom``, ``chars``, and ``codes``.
+
 
 Instagram-style Snowflake profile.
 
@@ -14,15 +17,15 @@ Instagram-style Snowflake profile.
 |    ``logtalk_load(snowflakeid(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-26
+| **Version:** 1:0:1
+| **Date:** 2026-02-27
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Extends:**
-|    ``public`` :ref:`snowflakeid(A,1314220021721,1,41,13,10,1) <snowflakeid/7>`
+|    ``public`` :ref:`snowflakeid(Representation,1314220021721,1,41,13,10,1) <snowflakeid/7>`
 
 | **Remarks:**
 |    (none)

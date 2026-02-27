@@ -118,7 +118,7 @@ Objects
    coupling_metric <coupling_metric_0>
    coverage_report <coverage_report_0>
    csv <csv_0>
-   csv(A,B,C) <csv_3>
+   csv(Header,Separator,IgnoreQuotes) <csv_3>
    csv(Header,Separator,IgnoreQuotes,Comments) <csv_4>
    ctrf_output <ctrf_output_0>
    ctrf_report <ctrf_report_0>
@@ -302,11 +302,11 @@ Objects
    snowflakeid <snowflakeid_0>
    snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node) <snowflakeid_7>
    snowflakeid_instagram <snowflakeid_instagram_0>
-   snowflakeid_instagram(A) <snowflakeid_instagram_1>
+   snowflakeid_instagram(Representation) <snowflakeid_instagram_1>
    snowflakeid_sonyflake <snowflakeid_sonyflake_0>
-   snowflakeid_sonyflake(A) <snowflakeid_sonyflake_1>
+   snowflakeid_sonyflake(Representation) <snowflakeid_sonyflake_1>
    snowflakeid_twitter <snowflakeid_twitter_0>
-   snowflakeid_twitter(A) <snowflakeid_twitter_1>
+   snowflakeid_twitter(Representation) <snowflakeid_twitter_1>
    socket <socket_0>
    splaytree <splaytree_0>
    stomp <stomp_0>
@@ -329,7 +329,7 @@ Objects
    toychrdb <toychrdb_0>
    treap_set <treap_set_0>
    tsv <tsv_0>
-   tsv(A) <tsv_1>
+   tsv(Header) <tsv_1>
    tsv(Header,Comments) <tsv_2>
    tutor <tutor_0>
    type <type_0>

@@ -1,12 +1,15 @@
-.. index:: single: snowflakeid_sonyflake(A)
+.. index:: single: snowflakeid_sonyflake(Representation)
 .. _snowflakeid_sonyflake/1:
 
 .. rst-class:: right
 
 **object**
 
-``snowflakeid_sonyflake(A)``
-============================
+``snowflakeid_sonyflake(Representation)``
+=========================================
+
+* ``Representation`` - Snowflake ID representation. Possible values are ``integer``, ``atom``, ``chars``, and ``codes``.
+
 
 Sonyflake-style Snowflake profile.
 
@@ -14,15 +17,15 @@ Sonyflake-style Snowflake profile.
 |    ``logtalk_load(snowflakeid(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-26
+| **Version:** 1:0:1
+| **Date:** 2026-02-27
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Extends:**
-|    ``public`` :ref:`snowflakeid(A,1409529600000,10,39,16,8,1) <snowflakeid/7>`
+|    ``public`` :ref:`snowflakeid(Representation,1409529600000,10,39,16,8,1) <snowflakeid/7>`
 
 | **Remarks:**
 |    (none)

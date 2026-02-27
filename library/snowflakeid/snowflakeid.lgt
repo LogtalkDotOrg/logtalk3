@@ -36,7 +36,10 @@
 			'SequenceBits' - 'Number of sequence bits.',
 			'Node' - 'Node identifier value.'
 		],
-		see_also is [snowflakeid, snowflakeid_twitter, snowflakeid_sonyflake, snowflakeid_instagram, ksuid(_, _), cuid2(_, _, _), nanoid(_, _, _)]
+		see_also is [
+			snowflakeid, snowflakeid_twitter, snowflakeid_sonyflake, snowflakeid_instagram, ksuid(_, _),
+			cuid2(_, _, _), nanoid(_, _, _)
+		]
 	]).
 
 	:- uses(iso8601, [
@@ -216,11 +219,16 @@
 	extends(snowflakeid(_Representation_, 1288834974657, 1, 41, 10, 12, 1))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-02-27,
 		comment is 'Twitter-style Snowflake profile.',
-		see_also is [snowflakeid(_, _, _, _, _, _, _), snowflakeid_twitter, snowflakeid_sonyflake, snowflakeid_instagram]
+		parameters is [
+			'Representation' - 'Snowflake ID representation. Possible values are ``integer``, ``atom``, ``chars``, and ``codes``.'
+		],
+		see_also is [
+			snowflakeid(_, _, _, _, _, _, _), snowflakeid_twitter, snowflakeid_sonyflake, snowflakeid_instagram
+		]
 	]).
 
 :- end_object.
@@ -244,11 +252,16 @@
 	extends(snowflakeid(_Representation_, 1409529600000, 10, 39, 16, 8, 1))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-02-27,
 		comment is 'Sonyflake-style Snowflake profile.',
-		see_also is [snowflakeid(_, _, _, _, _, _, _), snowflakeid_twitter, snowflakeid_sonyflake, snowflakeid_instagram]
+		parameters is [
+			'Representation' - 'Snowflake ID representation. Possible values are ``integer``, ``atom``, ``chars``, and ``codes``.'
+		],
+		see_also is [
+			snowflakeid(_, _, _, _, _, _, _), snowflakeid_twitter, snowflakeid_sonyflake, snowflakeid_instagram
+		]
 	]).
 
 :- end_object.
@@ -272,11 +285,16 @@
 	extends(snowflakeid(_Representation_, 1314220021721, 1, 41, 13, 10, 1))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-02-27,
 		comment is 'Instagram-style Snowflake profile.',
-		see_also is [snowflakeid(_, _, _, _, _, _, _), snowflakeid_twitter, snowflakeid_sonyflake, snowflakeid_instagram]
+		parameters is [
+			'Representation' - 'Snowflake ID representation. Possible values are ``integer``, ``atom``, ``chars``, and ``codes``.'
+		],
+		see_also is [
+			snowflakeid(_, _, _, _, _, _, _), snowflakeid_twitter, snowflakeid_sonyflake, snowflakeid_instagram
+		]
 	]).
 
 :- end_object.
@@ -304,7 +322,9 @@
 		author is 'Paulo Moura',
 		date is 2026-02-26,
 		comment is 'Snowflake ID generator using the Twitter-style profile and atom representation.',
-		see_also is [snowflakeid(_, _, _, _, _, _, _), snowflakeid_twitter, snowflakeid_sonyflake, snowflakeid_instagram]
+		see_also is [
+			snowflakeid(_, _, _, _, _, _, _), snowflakeid_twitter, snowflakeid_sonyflake, snowflakeid_instagram
+		]
 	]).
 
 :- end_object.
