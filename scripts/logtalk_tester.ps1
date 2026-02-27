@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on February 24, 2026
+##   Last updated on February 27, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -34,6 +34,7 @@ param(
 	[String]$d,
 	# disable timeouts to maintain backward compatibility
 	[String]$t = 0,
+	[String]$j = 1,
 	[String]$n = "tester",
 	[String]$s,
 	[String]$b,
@@ -44,6 +45,7 @@ param(
 	[String]$i,
 	[String]$g = "true",
 	[String]$r,
+	[String]$testset,
 	[Switch]$w,
 	[String[]]$a,
 	[Switch]$v,
@@ -53,7 +55,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 16.0"
+	Write-Output "$myName 17.0"
 }
 
 Function Format-Decimal {
@@ -291,7 +293,7 @@ Function Write-Usage-Help() {
 	Write-Output "The `"tester.sh`" file is sourced with all the parameters passed to the script."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output "  $myName -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-e exclude] [-i options] [-g goal] [-r seed] [-w] [-a arguments]"
+	Write-Output "  $myName -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-j jobs] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-e exclude] [-i options] [-g goal] [-r seed] [-w] [-a arguments]"
 	Write-Output "  $myName -v"
 	Write-Output "  $myName -h"
 	Write-Output ""
@@ -307,6 +309,7 @@ Function Write-Usage-Help() {
 	Write-Output "     (valid values are default, tap, xunit, and xunit_net_v2)"
 	Write-Output "  -d directory to store the test logs (default is $results)"
 	Write-Output "  -t timeout in seconds for running each test set (default is $t; i.e. disabled)"
+	Write-Output "  -j maximum number of concurrent test set processes (default is $j)"
 	Write-Output "  -n name of the test driver and sourced files (minus file name extensions; default is $n)"
 	Write-Output "  -s suppress path prefix (default is $prefix)"
 	Write-Output "  -b bug report server (valid values are github and gitlab; no default; requires -u option)"
@@ -433,6 +436,12 @@ Function Confirm-Parameters() {
 
 	if ($m -ne "optimal" -and $m -ne "normal" -and $m -ne "debug" -and $m -ne "all") {
 		Write-Error "Error! Unknown compilation mode: $m"
+		Write-Usage-Help
+		Exit 1
+	}
+
+	if (-not ($j -match '^[1-9][0-9]*$')) {
+		Write-Error "Error! Jobs must be an integer equal or greater than 1: $j"
 		Write-Usage-Help
 		Exit 1
 	}
@@ -580,6 +589,8 @@ $prefix = "$env:USERPROFILE/" -replace '\\', '/'
 
 Confirm-Parameters
 
+$max_jobs = [int]$j
+
 if ($p -eq "swipack") {
 	$initialization_goal = "use_module(library(logtalk)),$initialization_goal"
 }
@@ -589,6 +600,11 @@ $versions_goal = "logtalk_load(library(tester_versions)),halt$dot"
 $tester_optimal_goal = "set_logtalk_flag(optimize,on),logtalk_load($n),halt$dot"
 $tester_normal_goal = "logtalk_load($n),halt$dot"
 $tester_debug_goal = "set_logtalk_flag(debug,on),logtalk_load($n),halt$dot"
+
+if ($testset -ne "") {
+	Invoke-TestSet $testset
+	Exit 0
+}
 
 try {
 	New-Item -Path $results -ItemType directory -Force > $null
@@ -623,88 +639,123 @@ if ($o -eq "verbose") {
 	Select-String -Path $results/tester_versions.txt -Pattern "OS version:" -Raw -SimpleMatch
 }
 
-if ($exclude -eq "") {
-	$testsets = (Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Recurse | Measure-Object).count
+if ($l -eq "") {
+	$driver_files = Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Recurse
 } else {
-	$testsets = (Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Recurse | where-object{$_.fullname -notmatch $exclude} | Measure-Object).count
+	$driver_files = Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Depth $level
 }
 
-if ($l -eq "") {
-	if ($o -eq "verbose") {
-		if ($exclude -eq "") {
-			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Recurse |
-			Foreach-Object {
-				Invoke-TestSet $_.FullName
-			}
-		} else {
-			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Recurse | where-object{$_.fullname -notmatch $exclude} |
-			Foreach-Object {
-				Invoke-TestSet $_.FullName
-			}
-		}
-	} else {
-		$counter = 1
-		if ($exclude -eq "") {
-			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Recurse |
-			Foreach-Object {
-				Write-Host -NoNewline "% running $testsets test sets: "
-				Write-Host -NoNewline "$counter`r"
-				Invoke-TestSet $_.FullName
-				$counter++
-			}
-		} else {
-			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Recurse | where-object{$_.fullname -notmatch $exclude} |
-			Foreach-Object {
-				Write-Host -NoNewline "% running $testsets test sets: "
-				Write-Host -NoNewline "$counter`r"
-				Invoke-TestSet $_.FullName
-				$counter++
-			}
-		}
-		Write-Output "%"
-	}
-} else {
-	if ($o -eq "verbose") {
-		if ($exclude -eq "") {
-			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Depth $level |
-			Foreach-Object {
-				Invoke-TestSet $_.FullName
-			}
-		} else {
-			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Depth $level | where-object{$_.fullname -notmatch $exclude} |
-			Foreach-Object {
-				Invoke-TestSet $_.FullName
-			}
-		}
-	} else {
-		$counter = 1
-		if ($exclude -eq "") {
-			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Depth $level |
-			Foreach-Object {
-				Write-Host -NoNewline "% running $testsets test sets: "
-				Write-Host -NoNewline "$counter`r"
-				Invoke-TestSet $_.FullName
-				$counter++
-				Write-Output "%"
-			}
-		} else {
-			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Depth $level | where-object{$_.fullname -notmatch $exclude} |
-			Foreach-Object {
-				Write-Host -NoNewline "% running $testsets test sets: "
-				Write-Host -NoNewline "$counter`r"
-				Invoke-TestSet $_.FullName
-				$counter++
-				Write-Output "%"
-			}
-		}
-	}
+if ($exclude -ne "") {
+	$driver_files = $driver_files | Where-Object {$_.fullname -notmatch $exclude}
 }
+
+$driver_files = $driver_files | Sort-Object -Property FullName
+$testsets = ($driver_files | Measure-Object).Count
 
 if ($testsets -eq 0) {
 	Write-Output "%"
 	Write-Output "% 0 test sets: 0 completed, 0 skipped, 0 broken, 0 timedout, 0 crashed"
 	Write-Output "% 0 tests: 0 skipped, 0 passed, 0 failed"
 	Exit 0
+}
+
+if ($max_jobs -eq 1) {
+	if ($o -eq "verbose") {
+		$driver_files | ForEach-Object {
+			Invoke-TestSet $_.FullName
+		}
+	} else {
+		$counter = 1
+		$driver_files | ForEach-Object {
+			Write-Host -NoNewline "% running $testsets test sets: "
+			Write-Host -NoNewline "$counter`r"
+			Invoke-TestSet $_.FullName
+			$counter++
+		}
+		Write-Output "%"
+	}
+} else {
+	$worker_arguments = @('-NoProfile', '-File', $PSCommandPath, '-p', $p, '-o', $o, '-m', $m, '-f', $f, '-d', $results, '-t', $t, '-j', '1', '-n', $n, '-c', $c)
+	if ($s -ne "") { $worker_arguments += @('-s', $s) }
+	if ($b -ne "") { $worker_arguments += @('-b', $b) }
+	if ($u -ne "") { $worker_arguments += @('-u', $u) }
+	if ($l -ne "") { $worker_arguments += @('-l', $l) }
+	if ($e -ne "") { $worker_arguments += @('-e', $e) }
+	if ($i -ne "") { $worker_arguments += @('-i', $i) }
+	if ($g -ne "") { $worker_arguments += @('-g', $g) }
+	if ($r -ne "") { $worker_arguments += @('-r', $r) }
+	if ($w -eq $true) { $worker_arguments += '-w' }
+	if ($null -ne $a -and $a.Count -gt 0) { $worker_arguments += @('-a', ($a -join ',')) }
+
+	$workers = @()
+	$completed = 0
+	$counter = 1
+	$pwsh_executable = (Get-Command pwsh).Source
+
+	$reap_completed_workers = {
+		for ($i = 0; $i -lt $workers.Count; $i++) {
+			$worker = $workers[$i]
+			if ($worker.Done) {
+				continue
+			}
+
+			if ($worker.Process.HasExited) {
+				if ($worker.Process.ExitCode -ne 0) {
+					$error_path = "$results/$($worker.Name).errors"
+					if (!(Test-Path $error_path) -or !(Select-String -Path $error_path -Pattern 'LOGTALK_TIMEOUT|LOGTALK_CRASH|LOGTALK_BROKEN' -Quiet)) {
+						Add-Content -Path $error_path -Value "LOGTALK_CRASH"
+					}
+				}
+
+				if ($o -eq 'verbose') {
+					$console_file = "$results/$($worker.Name).console"
+					if (Test-Path $console_file) {
+						Get-Content -Path $console_file
+					}
+				}
+
+				$workers[$i].Done = $true
+				$script:completed++
+
+				if ($o -eq 'minimal') {
+					Write-Host -NoNewline "% running $testsets test sets: "
+					Write-Host -NoNewline "$completed`r"
+				}
+			}
+		}
+	}
+
+	$driver_files | ForEach-Object {
+		while ((($workers | Where-Object { -not $_.Done -and -not $_.Process.HasExited }) | Measure-Object).Count -ge $max_jobs) {
+			& $reap_completed_workers
+			Start-Sleep -Milliseconds 100
+		}
+		& $reap_completed_workers
+		if ($o -eq 'minimal') {
+			Write-Host -NoNewline "% running $testsets test sets: "
+			Write-Host -NoNewline "$counter`r"
+		}
+		$unit = (Split-Path -Path $_.FullName) -replace '\\', '/'
+		$name = (($unit -replace '/', '__') -replace '\\', '__') -replace ':', '___'
+		$console_file = "$results/$name.console"
+		$error_file = "$results/$name.console.err"
+		$arguments = @($worker_arguments + @('-testset', $_.FullName))
+		$process = Start-Process -FilePath $pwsh_executable -ArgumentList $arguments -NoNewWindow -RedirectStandardOutput $console_file -RedirectStandardError $error_file -PassThru
+		$workers += [PSCustomObject]@{ Process = $process; Name = $name; Done = $false }
+		$counter++
+	}
+
+	while ($completed -lt $testsets) {
+		& $reap_completed_workers
+		Start-Sleep -Milliseconds 50
+	}
+
+	if ($o -eq 'minimal') {
+		Write-Output "%"
+	}
+
+	Get-ChildItem -Path $results -Filter '*.console' -ErrorAction SilentlyContinue | Remove-Item -Force -ErrorAction SilentlyContinue
+	Get-ChildItem -Path $results -Filter '*.console.err' -ErrorAction SilentlyContinue | Remove-Item -Force -ErrorAction SilentlyContinue
 }
 
 Push-Location $results

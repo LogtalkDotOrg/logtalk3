@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "January 15, 2026" "Logtalk 3.98.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "February 27, 2026" "Logtalk 3.99.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -12,6 +12,7 @@ logtalk_tester \- Logtalk script for automating running unit tests
 [\fB-f \fIformat\fR]
 [\fB-d \fIresults\fR]
 [\fB-t \fItimeout\fR]
+[\fB-j \fIjobs\fR]
 [\fB-n \fIdriver\fR]
 [\fB-s \fIprefix\fR]
 [\fB-b \fItracker\fR]
@@ -52,6 +53,9 @@ Directory to store the test results. Default is the local \fI./logtalk_tester_lo
 .TP
 .BI \-t
 Timeout in seconds for running each test set. Default is \fI0\fR (i.e., disabled).
+.TP
+.BI \-j
+Maximum number of concurrent test set processes. Default is \fI1\fR. This option is not compatible with using the \fI-g\fR option to set the \fIclean\fR flag to \fIoff\fR.
 .TP
 .BI \-n
 Name of the tests driver and sourced files (minus file name extensions). Default is \fItester\fR.

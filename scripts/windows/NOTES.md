@@ -70,13 +70,13 @@ as the value of the `Start in` shortcut setting.
 The installer can be run in silent mode when executed at the command-line
 by using the option `/SILENT` (progress window is shown) or `/VERYSILENT`
 (no progress window). The installer can also be run in system context. For
-example, assuming version 3.98.0:
+example, assuming version 3.99.0:
 
 	# Run Command Prompt as Administrator first, then:
 	psexec -i -s cmd.exe
 
 	# In the new SYSTEM context cmd window, run:
-	logtalk-3.98.0.exe /SP- /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /COMPONENTS="base" /LOG="C:\Temp\LogtalkInstall.log"
+	logtalk-3.99.0.exe /SP- /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /COMPONENTS="base" /LOG="C:\Temp\LogtalkInstall.log"
 
 The installation directory can be set at the command-line by using
 the option `/DIR=path` or by defining the value of the `LOGTALKHOME`

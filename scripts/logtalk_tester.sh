@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on February 24, 2026
+##   Last updated on February 27, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -33,7 +33,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 24.0"
+	echo "$(basename "$0") 25.0"
 	exit 0
 }
 
@@ -91,6 +91,7 @@ initialization_goal="true"
 wipe='false'
 # disable timeouts to maintain backward compatibility
 timeout=0
+jobs=1
 prefix="$HOME/"
 issue_server=""
 issue_labels="bug"
@@ -319,7 +320,7 @@ usage_help() {
 	echo "The timeout option requires availability of the GNU coreutils timeout command."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-e exclude] [-i options] [-g goal] [-r seed] [-w] [-- arguments]"
+	echo "  $(basename "$0") -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-j jobs] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-e exclude] [-i options] [-g goal] [-r seed] [-w] [-- arguments]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -336,6 +337,7 @@ usage_help() {
 	echo "     (valid values are default, tap, xunit, and xunit_net_v2)"
 	echo "  -d directory to store the test logs (default is ./logtalk_tester_logs)"
 	echo "  -t timeout in seconds for running each test set (default is $timeout; i.e. disabled)"
+	echo "  -j maximum number of concurrent test set processes (default is $jobs)"
 	echo "  -n name of the test driver and sourced files (minus file name extensions; default is $driver)"
 	echo "  -s suppress path prefix (default is $prefix)"
 	echo "  -b bug report server (valid values are github and gitlab; no default; requires -u option)"
@@ -355,7 +357,7 @@ usage_help() {
 	echo
 }
 
-while getopts "vp:o:m:f:d:t:n:s:b:u:c:l:e:g:r:i:wh" option; do
+while getopts "vp:o:m:f:d:t:j:n:s:b:u:c:l:e:g:r:i:wh" option; do
 	case $option in
 		v) print_version;;
 		p) p_arg="$OPTARG";;
@@ -364,6 +366,7 @@ while getopts "vp:o:m:f:d:t:n:s:b:u:c:l:e:g:r:i:wh" option; do
 		f) f_arg="$OPTARG";;
 		d) d_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
+		j) j_arg="$OPTARG";;
 		n) n_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
 		b) b_arg="$OPTARG";;
@@ -527,6 +530,16 @@ if [ "$t_arg" != "" ] ; then
 	timeout="$t_arg"
 fi
 
+if [ "$j_arg" != "" ] ; then
+	if [[ "$j_arg" =~ ^[1-9][0-9]*$ ]] ; then
+		jobs="$j_arg"
+	else
+		echo "Error! Jobs must be an integer equal or greater than 1: $j_arg" >&2
+		usage_help
+		exit 1
+	fi
+fi
+
 if [ "$s_arg" != "" ] ; then
 	prefix="$s_arg"
 fi
@@ -617,48 +630,120 @@ if [ "$output" == 'verbose' ] ; then
 	grep -a "OS version:" "$results"/tester_versions.txt
 fi
 
-declare drivers
+declare drivers_file
 declare testsets
 if [ "$exclude" == "" ] ; then
-	drivers="$(find -L "$base" $level -type f -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
-	testsets=$(find -L "$base" $level -type f -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
+	drivers_file=$(mktemp)
+	find -L "$base" $level -type f \( -name "$driver.lgt" -or -name "$driver.logtalk" \) | LC_ALL=C sort > "$drivers_file"
 	find_exit=$?
 elif [ "$(uname)" == "Darwin" ] ; then
-	drivers="$(find -L -E "$base" $level -type f -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
-	testsets=$(find -L -E "$base" $level -type f -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
+	drivers_file=$(mktemp)
+	find -L -E "$base" $level -type f -not -regex "$exclude" \( -name "$driver.lgt" -or -name "$driver.logtalk" \) | LC_ALL=C sort > "$drivers_file"
 	find_exit=$?
 else
-	drivers="$(find -L "$base" $level -type f -regextype posix-extended -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
-	testsets=$(find -L "$base" $level -type f -regextype posix-extended -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
+	drivers_file=$(mktemp)
+	find -L "$base" $level -type f -regextype posix-extended -not -regex "$exclude" \( -name "$driver.lgt" -or -name "$driver.logtalk" \) | LC_ALL=C sort > "$drivers_file"
 	find_exit=$?
 fi
 
 if [ "$find_exit" -gt 0 ] ; then
 	echo "%         find command returned code $find_exit"
+	rm -f "$drivers_file"
 	exit 11
 fi
 
+testsets=$(wc -l < "$drivers_file" | tr -d ' ')
+
 if  [ "$testsets" -eq 0 ] ; then
+	rm -f "$drivers_file"
 	echo "%"
 	echo "% 0 test sets: 0 completed, 0 skipped, 0 broken, 0 timedout, 0 crashed"
 	echo "% 0 tests: 0 skipped, 0 passed, 0 failed"
 	exit 0
 fi
 
-if [ "$output" == 'verbose' ] ; then
-	while read -r file && [ "$file" != "" ]; do
-		run_testset "$file"
-	done <<< "$drivers"
+if [ "$jobs" -eq 1 ] ; then
+	if [ "$output" == 'verbose' ] ; then
+		while read -r file && [ "$file" != "" ]; do
+			run_testset "$file"
+		done < "$drivers_file"
+	else
+		counter=1
+		while read -r file && [ "$file" != "" ]; do
+			echo -ne "% running $testsets test sets: "
+			echo -ne "$counter"'\r'
+			run_testset "$file"
+			((counter++))
+		done < "$drivers_file"
+		echo
+	fi
 else
+	declare -a job_pids
+	declare -a job_names
+	completed=0
+
+	reap_completed_jobs() {
+		local any_reaped=0
+		for i in "${!job_pids[@]}"; do
+			pid="${job_pids[$i]}"
+			[ -z "$pid" ] && continue
+
+			if ! kill -0 "$pid" 2>/dev/null ; then
+				if ! wait "$pid" ; then
+					if ! grep -q -s -a -E 'LOGTALK_(TIMEOUT|CRASH|BROKEN)' "$results/${job_names[$i]}.errors" ; then
+						echo "LOGTALK_CRASH" >> "$results/${job_names[$i]}.errors"
+					fi
+				fi
+
+				if [ "$output" == 'verbose' ] && [ -f "$results/${job_names[$i]}.console" ] ; then
+					cat "$results/${job_names[$i]}.console"
+				fi
+				rm -f "$results/${job_names[$i]}.console"
+
+				job_pids[$i]=""
+				((completed++))
+				any_reaped=1
+
+				if [ "$output" == 'minimal' ] ; then
+					echo -ne "% running $testsets test sets: "
+					echo -ne "$completed"'\r'
+				fi
+			fi
+		done
+
+		return $any_reaped
+	}
 	counter=1
 	while read -r file && [ "$file" != "" ]; do
-		echo -ne "% running $testsets test sets: "
-		echo -ne "$counter"'\r'
-		run_testset "$file"
+		unit=$(dirname "$file")
+		name=${unit////__}
+		name=${name/:/__}
+		while [ "$(jobs -pr | wc -l | tr -d ' ')" -ge "$jobs" ]; do
+			reap_completed_jobs
+			sleep 0.05
+		done
+		reap_completed_jobs
+		if [ "$output" == 'minimal' ] ; then
+			echo -ne "% running $testsets test sets: "
+			echo -ne "$counter"'\r'
+		fi
+		(run_testset "$file") > "$results/$name.console" 2>&1 &
+		job_pids+=("$!")
+		job_names+=("$name")
 		((counter++))
-	done <<< "$drivers"
-	echo
+	done < "$drivers_file"
+
+	while [ "$completed" -lt "$testsets" ]; do
+		reap_completed_jobs
+		sleep 0.05
+	done
+
+	if [ "$output" == 'minimal' ] ; then
+		echo
+	fi
 fi
+
+rm -f "$drivers_file"
 
 cd "$results" || exit 1
 testsetskipped=$(cat -- *.results | grep -c 'tests skipped')
