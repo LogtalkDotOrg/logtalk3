@@ -1908,6 +1908,28 @@ HTML files for easy browsing. For example:
 - https://github.com/Quobject/tap-to-html
 - https://plugins.jenkins.io/tap/
 
+Exporting test results in the CTRF JSON format
+----------------------------------------------
+
+To output test results in the CTRF (Common Test Report Format) JSON
+format, simply load the ``ctrf_output.lgt`` file before running the
+tests. This file defines an object, ``ctrf_output``, that intercepts and
+rewrites unit test execution messages, converting them to the CTRF JSON
+format.
+
+To export the test results to a file using the CTRF JSON format, load
+instead the ``ctrf_report.lgt`` file before running the tests. A file
+named ``ctrf_report.json`` will be created in the same directory as the
+object defining the tests.
+
+When using the ``logtalk_tester`` automation script, use the ``-f ctrf``
+option to generate the ``ctrf_report.json`` files in the test set
+directories.
+
+When running a set of test suites as a single unified suite, the single
+CTRF report is created in the directory of the first test suite object
+in the set.
+
 Generating Allure reports
 -------------------------
 

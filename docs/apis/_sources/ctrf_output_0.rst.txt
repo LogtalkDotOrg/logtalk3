@@ -1,0 +1,74 @@
+.. index:: single: ctrf_output
+.. _ctrf_output/0:
+
+.. rst-class:: right
+
+**object**
+
+``ctrf_output``
+===============
+
+Intercepts unit test execution messages and outputs a report using the CTRF JSON format to the current output stream.
+
+| **Availability:** 
+|    ``logtalk_load(lgtunit(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2026-02-27
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Provides:**
+|    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+
+| **Remarks:**
+
+   - Usage: Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(ctrf_output))``.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: message_cache_/1
+.. _ctrf_output/0::message_cache_/1:
+
+``message_cache_/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Table of messages emitted by the lgtunit tool when running tests.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``message_cache_(Message)``
+| **Mode and number of proofs:**
+|    ``message_cache_(?callable)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

@@ -28,6 +28,9 @@ RELEASE NOTES
 Tools
 -----
 
+* ADDED: Support to the `lgtunit` tool for exporting tests results in the CTRF
+(Common Test Report Format) JSON format.
+
 * ADDED: Support to the `logtalk_tester.sh` and `logtalk_tester.ps1` testing
 automation scripts for concurrent running of tests sets with a new `-j` option.
 

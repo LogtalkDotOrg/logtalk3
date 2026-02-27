@@ -33,7 +33,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 25.1"
+	echo "$(basename "$0") 26.0"
 	exit 0
 }
 
@@ -108,6 +108,7 @@ format_default_goal="true"
 format_tap_goal="logtalk_load(lgtunit(tap_report))"
 format_xunit_goal="logtalk_load(lgtunit(xunit_report))"
 format_xunit_net_v2_goal="logtalk_load(lgtunit(xunit_net_v2_report))"
+format_ctrf_goal="logtalk_load(lgtunit(ctrf_report))"
 format_goal=$format_default_goal
 
 coverage_default_goal="true"
@@ -306,6 +307,29 @@ ensure_format_report() {
 	elif [ "$format" == "tap" ] ; then
 		echo "TAP version 13" > "$directory/tap_report.xml"
 		echo "Bail out! $unit $error" >> "$directory/tap_report.xml"
+	elif [ "$format" == "ctrf" ] ; then
+		timestamp_ms=$(($(date +%s) * 1000))
+		echo "{" > "$directory/ctrf_report.json"
+		echo "  \"reportFormat\": \"CTRF\"," >> "$directory/ctrf_report.json"
+		echo "  \"specVersion\": \"1.0.0\"," >> "$directory/ctrf_report.json"
+		echo "  \"results\": {" >> "$directory/ctrf_report.json"
+		echo "    \"tool\": {\"name\": \"lgtunit\"}," >> "$directory/ctrf_report.json"
+		echo "    \"summary\": {" >> "$directory/ctrf_report.json"
+		echo "      \"tests\": 1," >> "$directory/ctrf_report.json"
+		echo "      \"passed\": 0," >> "$directory/ctrf_report.json"
+		echo "      \"failed\": 1," >> "$directory/ctrf_report.json"
+		echo "      \"skipped\": 0," >> "$directory/ctrf_report.json"
+		echo "      \"pending\": 0," >> "$directory/ctrf_report.json"
+		echo "      \"other\": 0," >> "$directory/ctrf_report.json"
+		echo "      \"start\": $timestamp_ms," >> "$directory/ctrf_report.json"
+		echo "      \"stop\": $timestamp_ms," >> "$directory/ctrf_report.json"
+		echo "      \"duration\": 0" >> "$directory/ctrf_report.json"
+		echo "    }," >> "$directory/ctrf_report.json"
+		echo "    \"tests\": [" >> "$directory/ctrf_report.json"
+		echo "      {\"name\": \"$name\", \"suite\": [\"$short/tests.lgt\"], \"status\": \"failed\", \"duration\": 0, \"filePath\": \"$short/tests.lgt\", \"line\": 0, \"message\": \"$error\", \"trace\": \"$error\"}" >> "$directory/ctrf_report.json"
+		echo "    ]" >> "$directory/ctrf_report.json"
+		echo "  }" >> "$directory/ctrf_report.json"
+		echo "}" >> "$directory/ctrf_report.json"
 	fi
 }
 
@@ -334,7 +358,7 @@ usage_help() {
 	echo "  -m compilation mode (default is $mode)"
 	echo "     (valid values are optimal, normal, debug, and all)"
 	echo "  -f format for writing the test results (default is $format)"
-	echo "     (valid values are default, tap, xunit, and xunit_net_v2)"
+	echo "     (valid values are default, tap, xunit, xunit_net_v2, and ctrf)"
 	echo "  -d directory to store the test logs (default is ./logtalk_tester_logs)"
 	echo "  -t timeout in seconds for running each test set (default is $timeout; i.e. disabled)"
 	echo "  -j maximum number of concurrent test set processes (default is $jobs)"
@@ -504,6 +528,9 @@ elif [ "$f_arg" == "xunit" ] ; then
 elif [ "$f_arg" == "xunit_net_v2" ] ; then
 	format='xunit_net_v2'
 	format_goal=$format_xunit_net_v2_goal
+elif [ "$f_arg" == "ctrf" ] ; then
+	format='ctrf'
+	format_goal=$format_ctrf_goal
 elif [ "$f_arg" != "" ] ; then
 	echo "Error! Unknown format: $f_arg" >&2
 	usage_help

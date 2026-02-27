@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lgtunit &mdash; Logtalk 3.98.0</title>
+  <title>lgtunit &mdash; Logtalk 3.99.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=fd83a980"></script>
+        <script src="../_static/documentation_options.js?v=8c56e3d9"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -50,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.98.0
+                3.99.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -112,6 +112,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#utility-predicates">Utility predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#exporting-test-results-in-xunit-xml-format">Exporting test results in xUnit XML format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#exporting-test-results-in-the-tap-output-format">Exporting test results in the TAP output format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exporting-test-results-in-the-ctrf-json-format">Exporting test results in the CTRF JSON format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generating-allure-reports">Generating Allure reports</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#exporting-code-coverage-results-in-xml-format">Exporting code coverage results in XML format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#automatically-creating-bug-reports-at-issue-trackers">Automatically creating bug reports at issue trackers</a></li>
@@ -1878,6 +1879,24 @@ HTML files for easy browsing. For example:</p>
 <li><p><a class="reference external" href="https://github.com/Quobject/tap-to-html">https://github.com/Quobject/tap-to-html</a></p></li>
 <li><p><a class="reference external" href="https://plugins.jenkins.io/tap/">https://plugins.jenkins.io/tap/</a></p></li>
 </ul>
+</section>
+<section id="exporting-test-results-in-the-ctrf-json-format">
+<h2>Exporting test results in the CTRF JSON format<a class="headerlink" href="#exporting-test-results-in-the-ctrf-json-format" title="Link to this heading"></a></h2>
+<p>To output test results in the CTRF (Common Test Report Format) JSON
+format, simply load the <code class="docutils literal notranslate"><span class="pre">ctrf_output.lgt</span></code> file before running the
+tests. This file defines an object, <code class="docutils literal notranslate"><span class="pre">ctrf_output</span></code>, that intercepts and
+rewrites unit test execution messages, converting them to the CTRF JSON
+format.</p>
+<p>To export the test results to a file using the CTRF JSON format, load
+instead the <code class="docutils literal notranslate"><span class="pre">ctrf_report.lgt</span></code> file before running the tests. A file
+named <code class="docutils literal notranslate"><span class="pre">ctrf_report.json</span></code> will be created in the same directory as the
+object defining the tests.</p>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script, use the <code class="docutils literal notranslate"><span class="pre">-f</span> <span class="pre">ctrf</span></code>
+option to generate the <code class="docutils literal notranslate"><span class="pre">ctrf_report.json</span></code> files in the test set
+directories.</p>
+<p>When running a set of test suites as a single unified suite, the single
+CTRF report is created in the directory of the first test suite object
+in the set.</p>
 </section>
 <section id="generating-allure-reports">
 <h2>Generating Allure reports<a class="headerlink" href="#generating-allure-reports" title="Link to this heading"></a></h2>

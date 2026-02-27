@@ -55,7 +55,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 17.1"
+	Write-Output "$myName 18.0"
 }
 
 Function Format-Decimal {
@@ -277,6 +277,30 @@ param(
 		New-Item -Path . -Name "$directory/tap_report.txt" -ItemType "file" -Force > $null
 		Add-Content -Path "$directory/tap_report.txt" -Value "TAP version 13"
 		Add-Content -Path "$directory/tap_report.txt" -Value "Bail out! $unit $exception"
+	} elseif ($format -eq "ctrf") {
+		$timestamp_ms = [int64]([DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds())
+		New-Item -Path . -Name "$directory/ctrf_report.json" -ItemType "file" -Force > $null
+		Add-Content -Path "$directory/ctrf_report.json" -Value "{"
+		Add-Content -Path "$directory/ctrf_report.json" -Value "  `"reportFormat`": `"CTRF`","
+		Add-Content -Path "$directory/ctrf_report.json" -Value "  `"specVersion`": `"1.0.0`","
+		Add-Content -Path "$directory/ctrf_report.json" -Value "  `"results`": {"
+		Add-Content -Path "$directory/ctrf_report.json" -Value "    `"tool`": {`"name`": `"lgtunit`"},"
+		Add-Content -Path "$directory/ctrf_report.json" -Value "    `"summary`": {"
+		Add-Content -Path "$directory/ctrf_report.json" -Value "      `"tests`": 1,"
+		Add-Content -Path "$directory/ctrf_report.json" -Value "      `"passed`": 0,"
+		Add-Content -Path "$directory/ctrf_report.json" -Value "      `"failed`": 1,"
+		Add-Content -Path "$directory/ctrf_report.json" -Value "      `"skipped`": 0,"
+		Add-Content -Path "$directory/ctrf_report.json" -Value "      `"pending`": 0,"
+		Add-Content -Path "$directory/ctrf_report.json" -Value "      `"other`": 0,"
+		Add-Content -Path "$directory/ctrf_report.json" -Value "      `"start`": $timestamp_ms,"
+		Add-Content -Path "$directory/ctrf_report.json" -Value "      `"stop`": $timestamp_ms,"
+		Add-Content -Path "$directory/ctrf_report.json" -Value "      `"duration`": 0"
+		Add-Content -Path "$directory/ctrf_report.json" -Value "    },"
+		Add-Content -Path "$directory/ctrf_report.json" -Value "    `"tests`": ["
+		Add-Content -Path "$directory/ctrf_report.json" -Value "      {`"name`": `"$name`", `"suite`": [`"$short/tests.lgt`"], `"status`": `"failed`", `"duration`": 0, `"filePath`": `"$short/tests.lgt`", `"line`": 0, `"message`": `"$exception`", `"trace`": `"$exception`"}"
+		Add-Content -Path "$directory/ctrf_report.json" -Value "    ]"
+		Add-Content -Path "$directory/ctrf_report.json" -Value "  }"
+		Add-Content -Path "$directory/ctrf_report.json" -Value "}"
 	}
 }
 
@@ -306,7 +330,7 @@ Function Write-Usage-Help() {
 	Write-Output "  -m compilation mode (default is $m)"
 	Write-Output "     (valid values are optimal, normal, debug, and all)"
 	Write-Output "  -f format for writing the test results (default is $f)"
-	Write-Output "     (valid values are default, tap, xunit, and xunit_net_v2)"
+	Write-Output "     (valid values are default, tap, xunit, xunit_net_v2, and ctrf)"
 	Write-Output "  -d directory to store the test logs (default is $results)"
 	Write-Output "  -t timeout in seconds for running each test set (default is $t; i.e. disabled)"
 	Write-Output "  -j maximum number of concurrent test set processes (default is $j)"
@@ -454,6 +478,8 @@ Function Confirm-Parameters() {
 		$script:format_goal = $format_xunit_goal
 	} elseif ($f -eq "xunit_net_v2") {
 		$script:format_goal = $format_xunit_net_v2_goal
+	} elseif ($f -eq "ctrf") {
+		$script:format_goal = $format_ctrf_goal
 	} else {
 		Write-Error "Error! Unknown format: $f"
 		Write-Usage-Help
@@ -578,6 +604,7 @@ $format_default_goal = "true"
 $format_tap_goal = "logtalk_load(lgtunit(tap_report))"
 $format_xunit_goal = "logtalk_load(lgtunit(xunit_report))"
 $format_xunit_net_v2_goal = "logtalk_load(lgtunit(xunit_net_v2_report))"
+$format_ctrf_goal = "logtalk_load(lgtunit(ctrf_report))"
 $format_goal = $format_default_goal
 
 $coverage_default_goal = "true"
