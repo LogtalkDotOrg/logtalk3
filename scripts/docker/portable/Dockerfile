@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on December 30, 2025
+##   Last updated on February 27, 2026
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2026 Paulo Moura <pmoura@logtalk.org>
@@ -62,6 +62,8 @@ RUN apt-get update \
         gnupg2 \
         graphviz \
         lynx \
+        w3m \
+        links2 \
         info \
         libarchive-tools \
         python3-pip \
