@@ -2,7 +2,7 @@
 ##
 ##   Logtalk script for updating the HTML library and tools SVG diagrams
 ##
-##   Last updated on May 28, 2025
+##   Last updated on February 27, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>

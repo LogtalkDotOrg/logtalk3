@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-866.5 1159,-866.5 1159,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object snowflakeid/7</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;02&#45;27, 19:43</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;02&#45;27, 22:36</text>
 <g id="clust1" class="cluster">
 <title>cluster_snowflakeid_7_object</title>
 <g id="a_clust1"><a xlink:title="snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node)">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 1135,-54.25 1135,-54.25 1141,-54.25 1147,-60.25 1147,-66.25 1147,-66.25 1147,-842.5 1147,-842.5 1147,-848.5 1141,-854.5 1135,-854.5 1135,-854.5 20,-854.5 20,-854.5 14,-854.5 8,-848.5 8,-842.5 8,-842.5 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-837" font-family="Monospace" font-size="10.00" fill="dimgray">snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>last_time_sequence_/2</title>
 <polygon fill="#ff6a6a" stroke="black" points="369.12,-815.75 200.88,-815.75 200.88,-779.75 369.12,-779.75 369.12,-815.75"/>
 <text xml:space="preserve" text-anchor="start" x="208.88" y="-800.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L50">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="214.12" y="-799.67" font-family="Monospace" font-size="11.00">last_time_sequence_/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>generate/1</title>
 <polygon fill="cornsilk" stroke="black" points="657,-815.75 563,-815.75 563,-779.75 657,-779.75 657,-815.75"/>
 <text xml:space="preserve" text-anchor="start" x="571" y="-800.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="576.25" y="-799.67" font-family="Monospace" font-size="11.00">generate/1</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>check_representation/1</title>
 <polygon fill="cornsilk" stroke="black" points="323.5,-696.5 148.5,-696.5 148.5,-660.5 323.5,-660.5 323.5,-696.5"/>
 <text xml:space="preserve" text-anchor="start" x="156.5" y="-681.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L62">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="161.75" y="-680.42" font-family="Monospace" font-size="11.00">check_representation/1</text>
 </a>
 </g>
@@ -69,12 +69,12 @@
 <!-- generate/1&#45;&gt;check_representation/1 -->
 <g id="edge1" class="edge">
 <title>generate/1&#45;&gt;check_representation/1</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56" xlink:title="calls">
 <path fill="none" stroke="black" d="M562.63,-781.9C496.78,-761.26 377.26,-723.78 302.49,-700.35"/>
 <polygon fill="black" stroke="black" points="303.83,-697.1 293.24,-697.45 301.74,-703.78 303.83,-697.1"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="434.21" y="-735.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -84,7 +84,7 @@
 <title>check_configuration/1</title>
 <polygon fill="cornsilk" stroke="black" points="510.12,-696.5 341.88,-696.5 341.88,-660.5 510.12,-660.5 510.12,-696.5"/>
 <text xml:space="preserve" text-anchor="start" x="349.88" y="-681.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L76">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="355.12" y="-680.42" font-family="Monospace" font-size="11.00">check_configuration/1</text>
 </a>
 </g>
@@ -96,12 +96,12 @@
 <!-- generate/1&#45;&gt;check_configuration/1 -->
 <g id="edge2" class="edge">
 <title>generate/1&#45;&gt;check_configuration/1</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56" xlink:title="calls">
 <path fill="none" stroke="black" d="M582.85,-779.45C551.05,-759.19 498.22,-725.52 462.77,-702.93"/>
 <polygon fill="black" stroke="black" points="464.85,-700.11 454.54,-697.68 461.09,-706.01 464.85,-700.11"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="523.52" y="-735.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -111,7 +111,7 @@
 <title>current_time_unit/2</title>
 <polygon fill="cornsilk" stroke="black" points="656.38,-338.75 501.62,-338.75 501.62,-302.75 656.38,-302.75 656.38,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="509.62" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L137">
+<g id="a_node10_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="514.88" y="-322.68" font-family="Monospace" font-size="11.00">current_time_unit/2</text>
 </a>
 </g>
@@ -123,12 +123,12 @@
 <!-- generate/1&#45;&gt;current_time_unit/2 -->
 <g id="edge3" class="edge">
 <title>generate/1&#45;&gt;current_time_unit/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56" xlink:title="calls">
 <path fill="none" stroke="black" d="M602.34,-779.25C593.16,-756.67 579,-715.93 579,-679.5 579,-679.5 579,-679.5 579,-439 579,-408.84 579,-374.31 579,-350.58"/>
 <polygon fill="black" stroke="black" points="582.5,-350.74 579,-340.74 575.5,-350.74 582.5,-350.74"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="579" y="-556.33" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -138,7 +138,7 @@
 <title>next_time_sequence/4</title>
 <polygon fill="cornsilk" stroke="black" points="771.75,-696.5 610.25,-696.5 610.25,-660.5 771.75,-660.5 771.75,-696.5"/>
 <text xml:space="preserve" text-anchor="start" x="618.25" y="-681.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L150">
+<g id="a_node11_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="623.5" y="-680.42" font-family="Monospace" font-size="11.00">next_time_sequence/4</text>
 </a>
 </g>
@@ -150,12 +150,12 @@
 <!-- generate/1&#45;&gt;next_time_sequence/4 -->
 <g id="edge4" class="edge">
 <title>generate/1&#45;&gt;next_time_sequence/4</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56" xlink:title="calls">
 <path fill="none" stroke="black" d="M621.95,-779.45C635.29,-760.14 657.04,-728.66 672.56,-706.19"/>
 <polygon fill="black" stroke="black" points="675.33,-708.33 678.14,-698.12 669.58,-704.36 675.33,-708.33"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="652.93" y="-735.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -165,7 +165,7 @@
 <title>pack_id/3</title>
 <polygon fill="cornsilk" stroke="black" points="876.62,-696.5 789.38,-696.5 789.38,-660.5 876.62,-660.5 876.62,-696.5"/>
 <text xml:space="preserve" text-anchor="start" x="797.38" y="-681.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L185">
+<g id="a_node14_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L188">
 <text xml:space="preserve" text-anchor="start" x="802.62" y="-680.42" font-family="Monospace" font-size="11.00">pack_id/3</text>
 </a>
 </g>
@@ -177,12 +177,12 @@
 <!-- generate/1&#45;&gt;pack_id/3 -->
 <g id="edge5" class="edge">
 <title>generate/1&#45;&gt;pack_id/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56" xlink:title="calls">
 <path fill="none" stroke="black" d="M642.9,-779.45C681.85,-758.97 746.84,-724.8 789.81,-702.21"/>
 <polygon fill="black" stroke="black" points="791.4,-705.33 798.62,-697.58 788.14,-699.13 791.4,-705.33"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="728.19" y="-735.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -192,7 +192,7 @@
 <title>integer_to_representation/3</title>
 <polygon fill="cornsilk" stroke="black" points="1120.38,-696.5 911.62,-696.5 911.62,-660.5 1120.38,-660.5 1120.38,-696.5"/>
 <text xml:space="preserve" text-anchor="start" x="919.62" y="-681.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L190">
+<g id="a_node15_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L193">
 <text xml:space="preserve" text-anchor="start" x="924.88" y="-680.42" font-family="Monospace" font-size="11.00">integer_to_representation/3</text>
 </a>
 </g>
@@ -204,12 +204,12 @@
 <!-- generate/1&#45;&gt;integer_to_representation/3 -->
 <g id="edge6" class="edge">
 <title>generate/1&#45;&gt;integer_to_representation/3</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56" xlink:title="calls">
 <path fill="none" stroke="black" d="M657.37,-783.07C728.13,-762.63 861.96,-723.98 944.62,-700.11"/>
 <polygon fill="black" stroke="black" points="945.34,-703.55 953.98,-697.41 943.4,-696.82 945.34,-703.55"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L53">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="825.17" y="-735.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -219,7 +219,7 @@
 <title>check_epoch/1</title>
 <polygon fill="cornsilk" stroke="black" points="132.12,-577.25 17.87,-577.25 17.87,-541.25 132.12,-541.25 132.12,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="25.88" y="-561.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L82">
+<g id="a_node5_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="31.12" y="-561.17" font-family="Monospace" font-size="11.00">check_epoch/1</text>
 </a>
 </g>
@@ -231,12 +231,12 @@
 <!-- check_configuration/1&#45;&gt;check_epoch/1 -->
 <g id="edge7" class="edge">
 <title>check_configuration/1&#45;&gt;check_epoch/1</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L76" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L79" xlink:title="calls">
 <path fill="none" stroke="black" d="M373.83,-660.07C310.97,-639.07 205.42,-603.81 138.05,-581.31"/>
 <polygon fill="black" stroke="black" points="139.2,-578.01 128.6,-578.16 136.98,-584.64 139.2,-578.01"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L76">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="261.02" y="-615.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -246,7 +246,7 @@
 <title>check_time_unit/1</title>
 <polygon fill="cornsilk" stroke="black" points="291.62,-577.25 150.38,-577.25 150.38,-541.25 291.62,-541.25 291.62,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="158.38" y="-561.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L93">
+<g id="a_node6_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L96">
 <text xml:space="preserve" text-anchor="start" x="163.62" y="-561.17" font-family="Monospace" font-size="11.00">check_time_unit/1</text>
 </a>
 </g>
@@ -258,12 +258,12 @@
 <!-- check_configuration/1&#45;&gt;check_time_unit/1 -->
 <g id="edge8" class="edge">
 <title>check_configuration/1&#45;&gt;check_time_unit/1</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L76" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L79" xlink:title="calls">
 <path fill="none" stroke="black" d="M395.75,-660.2C360.1,-639.81 300.71,-605.84 261.21,-583.25"/>
 <polygon fill="black" stroke="black" points="263.1,-580.3 252.69,-578.37 259.63,-586.38 263.1,-580.3"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L76">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="329.65" y="-615.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -273,7 +273,7 @@
 <title>check_bits/1</title>
 <polygon fill="cornsilk" stroke="black" points="416.75,-577.25 309.25,-577.25 309.25,-541.25 416.75,-541.25 416.75,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="317.25" y="-561.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L104">
+<g id="a_node7_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L107">
 <text xml:space="preserve" text-anchor="start" x="322.5" y="-561.17" font-family="Monospace" font-size="11.00">check_bits/1</text>
 </a>
 </g>
@@ -285,12 +285,12 @@
 <!-- check_configuration/1&#45;&gt;check_bits/1 -->
 <g id="edge9" class="edge">
 <title>check_configuration/1&#45;&gt;check_bits/1</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L76" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L79" xlink:title="calls">
 <path fill="none" stroke="black" d="M416.7,-660.2C406.42,-641.06 389.72,-609.97 377.67,-587.54"/>
 <polygon fill="black" stroke="black" points="380.87,-586.11 373.05,-578.95 374.7,-589.42 380.87,-586.11"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L76">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="396.39" y="-615.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -300,7 +300,7 @@
 <title>check_node/1</title>
 <polygon fill="cornsilk" stroke="black" points="542.75,-577.25 435.25,-577.25 435.25,-541.25 542.75,-541.25 542.75,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="443.25" y="-561.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L125">
+<g id="a_node9_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L128">
 <text xml:space="preserve" text-anchor="start" x="448.5" y="-561.17" font-family="Monospace" font-size="11.00">check_node/1</text>
 </a>
 </g>
@@ -312,12 +312,12 @@
 <!-- check_configuration/1&#45;&gt;check_node/1 -->
 <g id="edge10" class="edge">
 <title>check_configuration/1&#45;&gt;check_node/1</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L76" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L79" xlink:title="calls">
 <path fill="none" stroke="black" d="M435.3,-660.2C445.58,-641.06 462.28,-609.97 474.33,-587.54"/>
 <polygon fill="black" stroke="black" points="477.3,-589.42 478.95,-578.95 471.13,-586.11 477.3,-589.42"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L76">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="459.39" y="-615.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -327,7 +327,7 @@
 <title>check_bit_size/2</title>
 <polygon fill="cornsilk" stroke="black" points="430.25,-458 295.75,-458 295.75,-422 430.25,-422 430.25,-458"/>
 <text xml:space="preserve" text-anchor="start" x="303.75" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L114">
+<g id="a_node8_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="309" y="-441.93" font-family="Monospace" font-size="11.00">check_bit_size/2</text>
 </a>
 </g>
@@ -339,12 +339,12 @@
 <!-- check_bits/1&#45;&gt;check_bit_size/2 -->
 <g id="edge11" class="edge">
 <title>check_bits/1&#45;&gt;check_bit_size/2</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L104" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L107" xlink:title="calls">
 <path fill="none" stroke="black" d="M363,-540.95C363,-522.25 363,-492.12 363,-469.83"/>
 <polygon fill="black" stroke="black" points="366.5,-469.89 363,-459.89 359.5,-469.89 366.5,-469.89"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L104">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L107">
 <text xml:space="preserve" text-anchor="start" x="363" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -354,7 +354,7 @@
 <title>current_timestamp_milliseconds/1</title>
 <polygon fill="cornsilk" stroke="black" points="700.25,-219.5 457.75,-219.5 457.75,-183.5 700.25,-183.5 700.25,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="465.75" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L200">
+<g id="a_node16_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L203">
 <text xml:space="preserve" text-anchor="start" x="471" y="-203.43" font-family="Monospace" font-size="11.00">current_timestamp_milliseconds/1</text>
 </a>
 </g>
@@ -366,12 +366,12 @@
 <!-- current_time_unit/2&#45;&gt;current_timestamp_milliseconds/1 -->
 <g id="edge12" class="edge">
 <title>current_time_unit/2&#45;&gt;current_timestamp_milliseconds/1</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L137" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L140" xlink:title="calls">
 <path fill="none" stroke="black" d="M579,-302.45C579,-283.75 579,-253.62 579,-231.33"/>
 <polygon fill="black" stroke="black" points="582.5,-231.39 579,-221.39 575.5,-231.39 582.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L137">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="579" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -381,7 +381,7 @@
 <title>next_time_sequence/7</title>
 <polygon fill="cornsilk" stroke="black" points="784.75,-577.25 623.25,-577.25 623.25,-541.25 784.75,-541.25 784.75,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="631.25" y="-561.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L160" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L160">
+<g id="a_node12_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L163">
 <text xml:space="preserve" text-anchor="start" x="636.5" y="-561.17" font-family="Monospace" font-size="11.00">next_time_sequence/7</text>
 </a>
 </g>
@@ -393,12 +393,12 @@
 <!-- next_time_sequence/4&#45;&gt;next_time_sequence/7 -->
 <g id="edge13" class="edge">
 <title>next_time_sequence/4&#45;&gt;next_time_sequence/7</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L150" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L153" xlink:title="calls">
 <path fill="none" stroke="black" d="M692.92,-660.2C695,-641.41 698.36,-611.09 700.84,-588.77"/>
 <polygon fill="black" stroke="black" points="704.28,-589.45 701.91,-579.13 697.33,-588.68 704.28,-589.45"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L150">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="697.89" y="-615.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -408,7 +408,7 @@
 <title>::last_time_sequence_/2</title>
 <polygon fill="cornsilk" stroke="black" points="984.88,-577.25 803.12,-577.25 803.12,-541.25 984.88,-541.25 984.88,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="811.12" y="-561.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L150">
+<g id="a_node18_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="816.38" y="-561.17" font-family="Monospace" font-size="11.00">::last_time_sequence_/2</text>
 </a>
 </g>
@@ -420,12 +420,12 @@
 <!-- next_time_sequence/4&#45;&gt;::last_time_sequence_/2 -->
 <g id="edge20" class="edge">
 <title>next_time_sequence/4&#45;&gt;::last_time_sequence_/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L150" xlink:title="updates">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L153" xlink:title="updates">
 <path fill="none" stroke="black" d="M720.95,-660.2C755.81,-640.07 813.57,-606.7 852.68,-584.12"/>
 <polygon fill="black" stroke="black" points="852.75,-584.07 855.95,-577.61 863.14,-578.07 859.95,-584.54 852.75,-584.07"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L150">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="798.59" y="-615.95" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -435,7 +435,7 @@
 <title>wait_next_time_unit/3</title>
 <polygon fill="cornsilk" stroke="black" points="788.12,-458 619.88,-458 619.88,-422 788.12,-422 788.12,-458"/>
 <text xml:space="preserve" text-anchor="start" x="627.88" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L177">
+<g id="a_node13_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L180">
 <text xml:space="preserve" text-anchor="start" x="633.12" y="-441.93" font-family="Monospace" font-size="11.00">wait_next_time_unit/3</text>
 </a>
 </g>
@@ -447,12 +447,12 @@
 <!-- next_time_sequence/7&#45;&gt;wait_next_time_unit/3 -->
 <g id="edge14" class="edge">
 <title>next_time_sequence/7&#45;&gt;wait_next_time_unit/3</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L160" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L163" xlink:title="calls">
 <path fill="none" stroke="black" d="M704,-540.95C704,-522.25 704,-492.12 704,-469.83"/>
 <polygon fill="black" stroke="black" points="707.5,-469.89 704,-459.89 700.5,-469.89 707.5,-469.89"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L160" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L160">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L163">
 <text xml:space="preserve" text-anchor="start" x="704" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -460,12 +460,12 @@
 <!-- wait_next_time_unit/3&#45;&gt;current_time_unit/2 -->
 <g id="edge15" class="edge">
 <title>wait_next_time_unit/3&#45;&gt;current_time_unit/2</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L177" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L180" xlink:title="calls">
 <path fill="none" stroke="black" d="M685.56,-421.7C664.51,-401.96 629.9,-369.49 605.85,-346.94"/>
 <polygon fill="black" stroke="black" points="608.31,-344.45 598.62,-340.16 603.52,-349.55 608.31,-344.45"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L177">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L180">
 <text xml:space="preserve" text-anchor="start" x="645.25" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -487,12 +487,12 @@
 <!-- wait_next_time_unit/3&#45;&gt;os::sleep/1 -->
 <g id="edge17" class="edge">
 <title>wait_next_time_unit/3&#45;&gt;os::sleep/1</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L177" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L180" xlink:title="calls">
 <path fill="none" stroke="black" d="M707.1,-421.7C710.46,-402.91 715.89,-372.59 719.89,-350.27"/>
 <polygon fill="black" stroke="black" points="723.3,-351.07 721.62,-340.61 716.41,-349.84 723.3,-351.07"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L177">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L180">
 <text xml:space="preserve" text-anchor="start" x="715.13" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -502,7 +502,7 @@
 <title>codes_to_chars/2</title>
 <polygon fill="cornsilk" stroke="black" points="1137.25,-577.25 1002.75,-577.25 1002.75,-541.25 1137.25,-541.25 1137.25,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="1010.75" y="-561.95" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L207">
+<g id="a_node17_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L210">
 <text xml:space="preserve" text-anchor="start" x="1016" y="-561.17" font-family="Monospace" font-size="11.00">codes_to_chars/2</text>
 </a>
 </g>
@@ -514,12 +514,12 @@
 <!-- integer_to_representation/3&#45;&gt;codes_to_chars/2 -->
 <g id="edge16" class="edge">
 <title>integer_to_representation/3&#45;&gt;codes_to_chars/2</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L194" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L197" xlink:title="calls">
 <path fill="none" stroke="black" d="M1023.97,-660.2C1032.74,-641.15 1046.97,-610.25 1057.29,-587.85"/>
 <polygon fill="black" stroke="black" points="1060.36,-589.54 1061.37,-579 1054,-586.62 1060.36,-589.54"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L194" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L194">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L197">
 <text xml:space="preserve" text-anchor="start" x="1044.62" y="-615.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -541,12 +541,12 @@
 <!-- current_timestamp_milliseconds/1&#45;&gt;os::date_time/7 -->
 <g id="edge18" class="edge">
 <title>current_timestamp_milliseconds/1&#45;&gt;os::date_time/7</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L200" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L203" xlink:title="calls">
 <path fill="none" stroke="black" d="M570,-183.2C560.04,-164.06 543.87,-132.97 532.2,-110.54"/>
 <polygon fill="black" stroke="black" points="535.46,-109.22 527.74,-101.96 529.25,-112.45 535.46,-109.22"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L200">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L203">
 <text xml:space="preserve" text-anchor="start" x="550.33" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -568,12 +568,12 @@
 <!-- current_timestamp_milliseconds/1&#45;&gt;iso8601::date/4 -->
 <g id="edge19" class="edge">
 <title>current_timestamp_milliseconds/1&#45;&gt;iso8601::date/4</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L200" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L203" xlink:title="calls">
 <path fill="none" stroke="black" d="M591.54,-183.2C605.54,-163.89 628.36,-132.41 644.65,-109.94"/>
 <polygon fill="black" stroke="black" points="647.48,-112 650.52,-101.85 641.81,-107.89 647.48,-112"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2e2fa6fa89605c6e592c720ec7b7d2021157c794/library/snowflakeid/snowflakeid.lgt#L200">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/29ac9510a291fc7cccbc927a2d3b5b668568bf57/library/snowflakeid/snowflakeid.lgt#L203">
 <text xml:space="preserve" text-anchor="start" x="624.05" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
