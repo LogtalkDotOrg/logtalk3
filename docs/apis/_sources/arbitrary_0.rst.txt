@@ -54,7 +54,7 @@ Adds predicates for generating and shrinking random values for selected types to
    - Type ``constrain(Type,Closure)`` notes: Generate a random term for the given type that satisfy the given closure.
    - Registering new types: Add clauses for the ``arbitrary/1-2`` multifile predicates and optionally for the ``shrinker/1`` and ``shrink/3`` multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.
    - Shrinking values: The ``shrink/3`` should either succeed or fail but never throw an exception.
-   - Character sets: ``ascii_identifier``, ``ascii_printable``, ``ascii_full``, ``hex``, ``byte``, ``unicode_bmp``, ``unicode_full``.
+   - Character sets: ``ascii_identifier``, ``ascii_printable``, ``ascii_full``, ``hexadecimal``, ``byte``, ``unicode_bmp``, ``unicode_full``.
    - Default character sets: The default character set when using a parameterizable type that takes a character set parameter depends on the type.
    - Default character sets: Entity, predicate, and non-terminal identifier types plus compound and callable types default to an ``ascii_identifier`` functor. Character and character code types default to ``ascii_full``. Other types default to ``ascii_printable``.
    - Caveats: The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.

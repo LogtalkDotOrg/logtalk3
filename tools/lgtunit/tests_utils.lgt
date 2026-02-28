@@ -27,9 +27,9 @@ a(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 3:4:0,
+		version is 3:5:0,
 		author is 'Paulo Moura',
-		date is 2023-12-07,
+		date is 2026-02-28,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -559,6 +559,18 @@ a(1).
 
 	test(quick_check_1_06, false) :-
 		quick_check(type::foo42(+integer)).
+
+	% file_path/2 tests
+
+	test(file_path_2_01, true(os::is_absolute_file_name(Path))) :-
+		self(This),
+		object_property(This, file(File, _)),
+		^^file_path(File, Path).
+
+	test(file_path_2_02, true(os::file_exists(Path))) :-
+		self(This),
+		object_property(This, file(File, _)),
+		^^file_path(File, Path).
 
 	% clean_file/1 tests
 

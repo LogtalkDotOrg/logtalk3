@@ -14,8 +14,8 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 |    ``logtalk_load(lgtunit(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 22:4:0
-| **Date:** 2026-02-11
+| **Version:** 22:5:0
+| **Date:** 2026-02-28
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -779,6 +779,25 @@ Returns the absolute path for a file path that is relative to the tests object p
 | **See also:**
 |    :ref:`lgtunit/0::clean_file/1`
 |    :ref:`lgtunit/0::clean_directory/1`
+
+
+------------
+
+.. index:: file_url/2
+.. _lgtunit/0::file_url/2:
+
+``file_url/2``
+^^^^^^^^^^^^^^
+
+Returns the URL for a file path that can be either absolute or relative to the tests object path. When the file path is an absolute path, it is expanded to resolve any remaining relative file path parts.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``file_url(File,URL)``
+| **Mode and number of proofs:**
+|    ``file_url(+atom,-atom)`` - ``one``
 
 
 ------------

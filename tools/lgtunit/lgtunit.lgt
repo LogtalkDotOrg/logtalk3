@@ -28,9 +28,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 22:4:0,
+		version is 22:5:0,
 		author is 'Paulo Moura',
-		date is 2026-02-11,
+		date is 2026-02-28,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -327,6 +327,13 @@
 		comment is 'Returns the absolute path for a file path that is relative to the tests object path. When the file path is already an absolute path, it is expanded to resolve any remaining relative file path parts.',
 		argnames is ['File', 'Path'],
 		see_also is [clean_file/1, clean_directory/1]
+	]).
+
+	:- protected(file_url/2).
+	:- mode(file_url(+atom, -atom), one).
+	:- info(file_url/2, [
+		comment is 'Returns the URL for a file path that can be either absolute or relative to the tests object path. When the file path is an absolute path, it is expanded to resolve any remaining relative file path parts.',
+		argnames is ['File', 'URL']
 	]).
 
 	:- protected(suppress_text_output/0).
@@ -2906,6 +2913,31 @@
 			atom_concat(Directory, File, Path0),
 			os::absolute_file_name(Path0, Path)
 		).
+
+	% support for computing URLs for test data files
+
+	file_url(File, URL) :-
+		file_path(File, Path),
+		(	sub_atom(Path, 0, _, _, '//C/') ->
+			% assume ECLiPSe running on Windows
+			atom_concat('//C/', Path1, Path),
+			atom_concat('file://C:/', Path1, URL0)
+		;	% most common case
+			atom_concat('file://', Path, URL0)
+		),
+		encode_spaces(URL0, URL).
+
+	encode_spaces(URL0, URL) :-
+		atom_chars(URL0, Chars0),
+		encode_spaces_in_list(Chars0, Chars),
+		atom_chars(URL, Chars).
+
+	encode_spaces_in_list([], []).
+	encode_spaces_in_list([' '| Chars0], ['%','2','0'| Chars]) :-
+		!,
+		encode_spaces_in_list(Chars0, Chars).
+	encode_spaces_in_list([Char| Chars0], [Char| Chars]) :-
+		encode_spaces_in_list(Chars0, Chars).
 
 	% support for suppressing output
 
