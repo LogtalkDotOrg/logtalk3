@@ -250,8 +250,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2:37:0</div>
-<div class="line"><strong>Date:</strong> 2026-02-11</div>
+<div class="line"><strong>Version:</strong> 2:38:0</div>
+<div class="line"><strong>Date:</strong> 2026-02-28</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -300,7 +300,7 @@
 <li><p>Type <code class="docutils literal notranslate"><span class="pre">constrain(Type,Closure)</span></code> notes: Generate a random term for the given type that satisfy the given closure.</p></li>
 <li><p>Registering new types: Add clauses for the <code class="docutils literal notranslate"><span class="pre">arbitrary/1-2</span></code> multifile predicates and optionally for the <code class="docutils literal notranslate"><span class="pre">shrinker/1</span></code> and <code class="docutils literal notranslate"><span class="pre">shrink/3</span></code> multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.</p></li>
 <li><p>Shrinking values: The <code class="docutils literal notranslate"><span class="pre">shrink/3</span></code> should either succeed or fail but never throw an exception.</p></li>
-<li><p>Character sets: <code class="docutils literal notranslate"><span class="pre">ascii_identifier</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_printable</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_full</span></code>, <code class="docutils literal notranslate"><span class="pre">byte</span></code>, <code class="docutils literal notranslate"><span class="pre">unicode_bmp</span></code>, <code class="docutils literal notranslate"><span class="pre">unicode_full</span></code>.</p></li>
+<li><p>Character sets: <code class="docutils literal notranslate"><span class="pre">ascii_identifier</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_printable</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_full</span></code>, <code class="docutils literal notranslate"><span class="pre">hex</span></code>, <code class="docutils literal notranslate"><span class="pre">byte</span></code>, <code class="docutils literal notranslate"><span class="pre">unicode_bmp</span></code>, <code class="docutils literal notranslate"><span class="pre">unicode_full</span></code>.</p></li>
 <li><p>Default character sets: The default character set when using a parameterizable type that takes a character set parameter depends on the type.</p></li>
 <li><p>Default character sets: Entity, predicate, and non-terminal identifier types plus compound and callable types default to an <code class="docutils literal notranslate"><span class="pre">ascii_identifier</span></code> functor. Character and character code types default to <code class="docutils literal notranslate"><span class="pre">ascii_full</span></code>. Other types default to <code class="docutils literal notranslate"><span class="pre">ascii_printable</span></code>.</p></li>
 <li><p>Caveats: The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.</p></li>

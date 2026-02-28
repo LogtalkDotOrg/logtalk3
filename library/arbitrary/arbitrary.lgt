@@ -28,9 +28,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:37:0,
+		version is 2:38:0,
 		author is 'Paulo Moura',
-		date is 2026-02-11,
+		date is 2026-02-28,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -56,7 +56,7 @@
 			'Type ``constrain(Type,Closure)`` notes' - 'Generate a random term for the given type that satisfy the given closure.',
 			'Registering new types' - 'Add clauses for the ``arbitrary/1-2`` multifile predicates and optionally for the ``shrinker/1`` and ``shrink/3`` multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.',
 			'Shrinking values' - 'The ``shrink/3`` should either succeed or fail but never throw an exception.',
-			'Character sets' - '``ascii_identifier``, ``ascii_printable``, ``ascii_full``, ``byte``, ``unicode_bmp``, ``unicode_full``.',
+			'Character sets' - '``ascii_identifier``, ``ascii_printable``, ``ascii_full``, ``hexadecimal``, ``byte``, ``unicode_bmp``, ``unicode_full``.',
 			'Default character sets' - 'The default character set when using a parameterizable type that takes a character set parameter depends on the type.',
 			'Default character sets' - 'Entity, predicate, and non-terminal identifier types plus compound and callable types default to an ``ascii_identifier`` functor. Character and character code types default to ``ascii_full``. Other types default to ``ascii_printable``.',
 			'Caveats' - 'The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.',
@@ -528,6 +528,8 @@
 			identifier_characters(Characters),
 			member(Character, Characters),
 			char_code(Character, Arbitrary)
+		;	CharSet == hexadecimal ->
+			arbitrary(hex_code, Arbitrary)
 		;	CharSet == byte ->
 			between(First, 255, Arbitrary)
 		;	CharSet == unicode_bmp ->
@@ -544,7 +546,9 @@
 		;	CharSet == ascii_printable ->
 			Low = 32, High = 126
 		;	CharSet == ascii_identifier ->
-			Low = 1, High = 64
+			Low = 48, High = 122
+		;	CharSet == hexadecimal ->
+			Low = 48, High = 102
 		;	CharSet == byte ->
 			Low = 1, High = 255
 		;	CharSet == unicode_bmp ->
@@ -569,7 +573,7 @@
 		between(0, 1200, Arbitrary).
 
 	arbitrary(hex_code, Arbitrary) :-
-		member(Arbitrary, [0'0, 0'1, 0'2, 0'3, 0'4, 0'5, 0'6, 0'7, 0'8, 0'9, 0'a, 0'b, 0'c, 0'd, 0'e, 0'f]).
+		member(Arbitrary, [0'0, 0'1, 0'2, 0'3, 0'4, 0'5, 0'6, 0'7, 0'8, 0'9, 0'a, 0'b, 0'c, 0'd, 0'e, 0'f, 0'A, 0'B, 0'C, 0'D, 0'E, 0'F]).
 
 	% compound derived types
 

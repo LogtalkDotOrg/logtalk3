@@ -25,6 +25,12 @@ RELEASE NOTES
 3.99.0 - March ??, 2026
 =======================
 
+Library
+-------
+
+* ADDED: New character set, `hexadecimal`, to the `type` library object and to
+the `arbitrary` library category.
+
 Tools
 -----
 

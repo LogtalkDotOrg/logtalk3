@@ -272,8 +272,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2:7:0</div>
-<div class="line"><strong>Date:</strong> 2026-01-23</div>
+<div class="line"><strong>Version:</strong> 2:8:0</div>
+<div class="line"><strong>Date:</strong> 2026-02-28</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -327,7 +327,7 @@
 <li><p>Error context: The built-in execution-context method <code class="docutils literal notranslate"><span class="pre">context/1</span></code> can be used to provide the calling context for errors when using the predicate <code class="docutils literal notranslate"><span class="pre">check/3</span></code>.</p></li>
 <li><p>Registering new types: New types can be registered by defining clauses for the <code class="docutils literal notranslate"><span class="pre">type/1</span></code> and <code class="docutils literal notranslate"><span class="pre">check/2</span></code> multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.</p></li>
 <li><p>Meta-types: Meta-types are types that have one or more sub-type arguments. E.g. <code class="docutils literal notranslate"><span class="pre">var_or(Type)</span></code>. The sub-types of a meta-type can be enumerated by defining a clause for the <code class="docutils literal notranslate"><span class="pre">meta_type/3</span></code> multifile predicate.</p></li>
-<li><p>Character sets: When testing character or character code based terms (e.g., atom), it is possible to choose a character set (<code class="docutils literal notranslate"><span class="pre">ascii_identifier</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_printable</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_full</span></code>, <code class="docutils literal notranslate"><span class="pre">byte</span></code>, <code class="docutils literal notranslate"><span class="pre">unicode_bmp</span></code>, or <code class="docutils literal notranslate"><span class="pre">unicode_full</span></code>) using the parameterizable types.</p></li>
+<li><p>Character sets: When testing character or character code based terms (e.g., atom), it is possible to choose a character set (<code class="docutils literal notranslate"><span class="pre">ascii_identifier</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_printable</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_full</span></code>, <code class="docutils literal notranslate"><span class="pre">hex</span></code>, <code class="docutils literal notranslate"><span class="pre">byte</span></code>, <code class="docutils literal notranslate"><span class="pre">unicode_bmp</span></code>, or <code class="docutils literal notranslate"><span class="pre">unicode_full</span></code>) using the parameterizable types.</p></li>
 <li><p>Caveats: The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.</p></li>
 <li><p>Unicode limitations: Currently, correct character/code type-checking is only ensured for SWI-Prolog and XVM as other backends do not provide support for querying a Unicode code point category.</p></li>
 <li><p>Random seed: When setting the random generator seed using the <code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code> predicate inherited from the <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> category, the seed must be a valid value for the portable random generator provided by the <code class="docutils literal notranslate"><span class="pre">random</span></code> library.</p></li>

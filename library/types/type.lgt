@@ -27,9 +27,9 @@
 :- object(type).
 
 	:- info([
-		version is 2:7:0,
+		version is 2:8:0,
 		author is 'Paulo Moura',
-		date is 2026-01-23,
+		date is 2026-02-28,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -67,7 +67,7 @@
 			'Error context' - 'The built-in execution-context method ``context/1`` can be used to provide the calling context for errors when using the predicate ``check/3``.',
 			'Registering new types' - 'New types can be registered by defining clauses for the ``type/1`` and ``check/2`` multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.',
 			'Meta-types' - 'Meta-types are types that have one or more sub-type arguments. E.g. ``var_or(Type)``. The sub-types of a meta-type can be enumerated by defining a clause for the ``meta_type/3`` multifile predicate.',
-			'Character sets' - 'When testing character or character code based terms (e.g., atom), it is possible to choose a character set (``ascii_identifier``, ``ascii_printable``, ``ascii_full``, ``byte``, ``unicode_bmp``, or ``unicode_full``) using the parameterizable types.',
+			'Character sets' - 'When testing character or character code based terms (e.g., atom), it is possible to choose a character set (``ascii_identifier``, ``ascii_printable``, ``ascii_full``, ``hexadecimal``, ``byte``, ``unicode_bmp``, or ``unicode_full``) using the parameterizable types.',
 			'Caveats' - 'The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.',
 			'Unicode limitations' - 'Currently, correct character/code type-checking is only ensured for SWI-Prolog and XVM as other backends do not provide support for querying a Unicode code point category.',
 			'Random seed' - 'When setting the random generator seed using the ``set_seed/1`` predicate inherited from the ``arbitrary`` category, the seed must be a valid value for the portable random generator provided by the ``random`` library.'
@@ -1338,6 +1338,12 @@
 		;	65 =< Code, Code =< 90
 		;	Code =:= 95
 		;	97 =< Code, Code =< 122
+		)).
+	valid_character_code(hexadecimal, Code) :-
+		once((
+			48 =< Code, Code =< 57
+		;	65 =< Code, Code =< 70
+		;	97 =< Code, Code =< 102
 		)).
 	valid_character_code(byte, Code) :-
 		0 =< Code, Code =< 255.
