@@ -19,13 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(permutations).
+:- object(list_permutations).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paul Tarau; adapted to Logtalk by Paulo Moura',
-		date is 2024-12-10,
-		comment is 'Benchmarks based on list permutations.'
+		date is 2026-03-02,
+		comment is 'List permutation predicates for benchmarking.'
 	]).
 
 	:- public(backtracking/1).

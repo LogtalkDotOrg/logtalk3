@@ -19,33 +19,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests(_Size_, _Repetitions_, _Clock_),
-	extends(lgtunit)).
-
-	:- info([
-		version is 1:0:0,
-		author is 'Paul Tarau; adapted to Logtalk by Paulo Moura',
-		date is 2024-12-06,
-		comment is 'Unit tests for the "permutations" example.'
-	]).
-
-	:- uses(lgtunit, [
-		benchmark/4
-	]).
-
-	test(backtracking, true) :-
-		benchmark(permutations::backtracking(_Size_), _Repetitions_, _Clock_, _).
-
-	test(list, true) :-
-		benchmark(permutations::list(_Size_, _), _Repetitions_, _Clock_, _).
-
-	test(all, true) :-
-		benchmark(permutations::all(_Size_, _), _Repetitions_, _Clock_, _).
-
-	test(map, true) :-
-		benchmark(permutations::map(_Size_, _), _Repetitions_, _Clock_, _).
-
-	test(copy, true) :-
-		benchmark(permutations::copy(_Size_), _Repetitions_, _Clock_, _).
-
-:- end_object.
+:- initialization((
+	logtalk_load(basic_types(loader)),
+	logtalk_load(meta(loader)),
+	logtalk_load(list_permutations, [optimize(on)])
+)).

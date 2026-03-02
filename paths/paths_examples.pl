@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on February 24, 2026
+%  Last updated on March 2, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -118,6 +118,7 @@ logtalk_library_path(lambdas_compiled, examples('lambdas_compiled/')).
 logtalk_library_path(laptops, examples('laptops/')).
 logtalk_library_path(lazy, engines('lazy/')).
 logtalk_library_path(lips, examples('lips/')).
+logtalk_library_path(list_permutations, examples('list_permutations/')).
 logtalk_library_path(lo_planner, examples('lo/planner/')).
 logtalk_library_path(lo_travellers, examples('lo/travellers/')).
 logtalk_library_path(localizations, examples('localizations/')).
@@ -153,7 +154,6 @@ logtalk_library_path(pardicts, examples('pardicts/')).
 logtalk_library_path(parvars, examples('parvars/')).
 logtalk_library_path(pengines, examples('pengines/')).
 logtalk_library_path(people, examples('people/')).
-logtalk_library_path(permutations, examples('permutations/')).
 logtalk_library_path(persistency, examples('persistency/')).
 logtalk_library_path(philosophers, threads('philosophers/')).
 logtalk_library_path(ping_pong, threads('ping_pong/')).
