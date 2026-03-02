@@ -51,9 +51,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:102:0,
+		version is 1:102:1,
 		author is 'Paulo Moura',
-		date is 2025-11-15,
+		date is 2026-03-02,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -513,7 +513,12 @@
 			{shell(Command)}.
 
 		absolute_file_name(Path, ExpandedPath) :-
-			{absolute_file_name(Path, ExpandedPath)}.
+			{absolute_file_name(Path, ExpandedPath0)},
+			(	sub_atom(Path, _, 1, 0, '/'),
+				\+ sub_atom(ExpandedPath0, _, 1, 0, '/') ->
+				atom_concat(ExpandedPath0, '/', ExpandedPath)
+			;	ExpandedPath = ExpandedPath0
+			).
 
 		internal_os_path(Path, OSPath) :-
 			internal_os_path_portable(Path, OSPath).
@@ -802,8 +807,13 @@
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{	current_directory(Directory),
-				absolute_file_name(Path, ExpandedPath, [relative_to(Directory)])
-			}.
+				absolute_file_name(Path, ExpandedPath0, [relative_to(Directory)])
+			},
+			(	sub_atom(Path, _, 1, 0, '/'),
+				\+ sub_atom(ExpandedPath0, _, 1, 0, '/') ->
+				atom_concat(ExpandedPath0, '/', ExpandedPath)
+			;	ExpandedPath = ExpandedPath0
+			).
 
 		internal_os_path(Path, OSPath) :-
 			internal_os_path_portable(Path, OSPath).
@@ -929,8 +939,13 @@
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{	os_file_name(InternalPath, Path),
-				canonical_path_name(InternalPath, ExpandedPath)
-			}.
+				canonical_path_name(InternalPath, ExpandedPath0)
+			},
+			(	sub_atom(Path, _, 1, 0, '/'),
+				\+ sub_atom(ExpandedPath0, _, 1, 0, '/') ->
+				atom_concat(ExpandedPath0, '/', ExpandedPath)
+			;	ExpandedPath = ExpandedPath0
+			).
 
 		internal_os_path(InternalPath, OSPath) :-
 			{os_file_name(InternalPath, OSPath)}.
@@ -1096,7 +1111,12 @@
 			{shell(Command)}.
 
 		absolute_file_name(Path, ExpandedPath) :-
-			{absolute_file_name(Path, ExpandedPath)}.
+			{absolute_file_name(Path, ExpandedPath0)},
+			(	sub_atom(Path, _, 1, 0, '/'),
+				\+ sub_atom(ExpandedPath0, _, 1, 0, '/') ->
+				atom_concat(ExpandedPath0, '/', ExpandedPath)
+			;	ExpandedPath = ExpandedPath0
+			).
 
 		internal_os_path(Path, OSPath) :-
 			internal_os_path_portable(Path, OSPath).
@@ -1234,7 +1254,12 @@
 			{os_run(Command)}.
 
 		absolute_file_name(Path, ExpandedPath) :-
-			{absolute_file_name(Path, ExpandedPath)}.
+			{absolute_file_name(Path, ExpandedPath0)},
+			(	sub_atom(Path, _, 1, 0, '/'),
+				\+ sub_atom(ExpandedPath0, _, 1, 0, '/') ->
+				atom_concat(ExpandedPath0, '/', ExpandedPath)
+			;	ExpandedPath = ExpandedPath0
+			).
 
 		internal_os_path(Path, OSPath) :-
 			internal_os_path_portable(Path, OSPath).
@@ -1525,7 +1550,12 @@
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath0)},
-			convert_file_path(ExpandedPath0, ExpandedPath).
+			convert_file_path(ExpandedPath0, ExpandedPath1),
+			(	sub_atom(Path, _, 1, 0, '/'),
+				\+ sub_atom(ExpandedPath1, _, 1, 0, '/') ->
+				atom_concat(ExpandedPath1, '/', ExpandedPath)
+			;	ExpandedPath = ExpandedPath1
+			).
 
 		convert_file_path(File, Converted) :-
 			atom_codes(File, FileCodes),
@@ -1631,7 +1661,7 @@
 			throw(not_available(command_line_arguments/1)).
 
 		sleep(Seconds) :-
-			Milliseconds is Seconds * 1000,
+			Milliseconds is round(Seconds * 1000),
 			{sleep(Milliseconds)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, tau)).
@@ -1646,7 +1676,12 @@
 			{shell(Command)}.
 
 		absolute_file_name(Path, ExpandedPath) :-
-			{absolute_file_name(Path, ExpandedPath)}.
+			{absolute_file_name(Path, ExpandedPath0)},
+			(	sub_atom(Path, _, 1, 0, '/'),
+				\+ sub_atom(ExpandedPath0, _, 1, 0, '/') ->
+				atom_concat(ExpandedPath0, '/', ExpandedPath)
+			;	ExpandedPath = ExpandedPath0
+			).
 
 		internal_os_path(Path, OSPath) :-
 			internal_os_path_portable(Path, OSPath).
@@ -1767,7 +1802,12 @@
 			{shell(Command)}.
 
 		absolute_file_name(Path, ExpandedPath) :-
-			{absolute_file_name(Path, ExpandedPath, [expand(true)])}.
+			{absolute_file_name(Path, ExpandedPath0, [expand(true)])},
+			(	sub_atom(Path, _, 1, 0, '/'),
+				\+ sub_atom(ExpandedPath0, _, 1, 0, '/') ->
+				atom_concat(ExpandedPath0, '/', ExpandedPath)
+			;	ExpandedPath = ExpandedPath0
+			).
 
 		internal_os_path(Path, OSPath) :-
 			internal_os_path_portable(Path, OSPath).

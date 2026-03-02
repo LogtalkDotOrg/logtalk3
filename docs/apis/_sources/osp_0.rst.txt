@@ -14,8 +14,8 @@ Portable operating-system access protocol.
 |    ``logtalk_load(os(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:41:0
-| **Date:** 2025-05-19
+| **Version:** 1:42:0
+| **Date:** 2026-03-02
 
 | **Compilation flags:**
 |    ``static``
@@ -122,7 +122,7 @@ True iff the argument is an absolute file path. On POSIX systems, this predicate
 ``absolute_file_name/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Expands a file name to an absolute file path. An environment variable at the beginning of the file name is also expanded.
+Expands a file name to an absolute file path. An environment variable at the beginning of the file name is also expanded. A slash at the end of ``File`` is preserved in ``Path``.
 
 | **Compilation flags:**
 |    ``static``

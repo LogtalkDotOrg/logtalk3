@@ -25,6 +25,7 @@ Intercepts unit test execution messages and outputs a Subunit v2 binary stream t
 |    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
 | **Uses:**
 |    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
 |    :ref:`term_io <term_io/0>`
 |    :ref:`user <user/0>`
 

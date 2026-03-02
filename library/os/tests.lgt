@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:40:1,
+		version is 0:41:0,
 		author is 'Paulo Moura',
-		date is 2025-11-13,
+		date is 2026-03-02,
 		comment is 'Unit tests for the "os" library.'
 	]).
 
@@ -478,7 +478,13 @@
 	test(os_absolute_file_name_2_07, true(ExpandedPath == '/a/b/c/d'), [condition(only_posix_systems)]) :-
 		os::absolute_file_name('/a/b/c/././d', ExpandedPath).
 
-	test(os_absolute_file_name_2_08, error(instantiation_error)) :-
+	test(os_absolute_file_name_2_08, true(ExpandedPath == '/a/b/c/d')) :-
+		os::absolute_file_name('/a/b/c/d', ExpandedPath).
+
+	test(os_absolute_file_name_2_09, true(ExpandedPath == '/a/b/c/d/')) :-
+		os::absolute_file_name('/a/b/c/d/', ExpandedPath).
+
+	test(os_absolute_file_name_2_10, error(instantiation_error)) :-
 		os::absolute_file_name(_, _).
 
 	test(os_temporary_directory_1_01, true) :-

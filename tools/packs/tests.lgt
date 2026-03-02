@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:35:0,
+		version is 0:36:0,
 		author is 'Paulo Moura',
-		date is 2025-05-23,
+		date is 2026-03-02,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -80,15 +80,11 @@
 	% we start with no defined registries or installed packs
 
 	test(packs_registries_logtalk_packs_1_01, true(LogtalkPacks == Storage)) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		atom_concat(Directory, 'test_files/logtalk_packs/', Storage),
+		^^file_path('test_files/logtalk_packs/', Storage),
 		registries::logtalk_packs(LogtalkPacks).
 
 	test(packs_packs_logtalk_packs_1_01, true(LogtalkPacks == Storage)) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		atom_concat(Directory, 'test_files/logtalk_packs/', Storage),
+		^^file_path('test_files/logtalk_packs/', Storage),
 		packs::logtalk_packs(LogtalkPacks).
 
 	test(packs_registries_logtalk_packs_0_01, true) :-
@@ -169,15 +165,11 @@
 	% now we add a local registry
 
 	test(packs_registries_add_1_01, true) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		file_to_url(Directory, 'test_files/local_1_d', URL),
+		^^file_url('test_files/local_1_d', URL),
 		registries::add(URL).
 
 	test(packs_registries_add_3_01, true) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		file_to_url(Directory, 'test_files/local_1_d', URL),
+		^^file_url('test_files/local_1_d', URL),
 		registries::add(local_1_d, URL, [update(true)]).
 
 	test(packs_registries_defined_4_02, true(Registries == [local_1_d])) :-
@@ -202,11 +194,9 @@
 	% registry readme
 
 	test(packs_registries_readme_2_01, true((Readme == FileUpperCase; Readme == FileLowerCase))) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		atom_concat(Directory, 'test_files/logtalk_packs/registries/local_1_d/README.md', FileUpperCase),
+		^^file_path('test_files/logtalk_packs/registries/local_1_d/README.md', FileUpperCase),
 		% some backends convert paths to lower case on Windows
-		atom_concat(Directory, 'test_files/logtalk_packs/registries/local_1_d/readme.md', FileLowerCase),
+		^^file_path('test_files/logtalk_packs/registries/local_1_d/readme.md', FileLowerCase),
 		registries::readme(local_1_d, Readme).
 
 	test(packs_registries_readme_1_01, true) :-
@@ -286,9 +276,7 @@
 	% add a second local registry
 
 	test(packs_registries_add_2_01, true) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		file_to_url(Directory, 'test_files/local_2_d.zip', URL),
+		^^file_url('test_files/local_2_d.zip', URL),
 		registries::add(local_2_d, URL).
 
 	test(packs_registries_defined_4_03, true(Registries == [local_1_d, local_2_d])) :-
@@ -478,9 +466,7 @@
 	test(packs_packs_save_2_01, true(os::file_exists(Setup))) :-
 		% avoid asking for passphrase when restoring due to the gpg encrypted pack
 		packs::uninstall(gpg),
-		this(This),
-		object_property(This, file(_, Directory)),
-		atom_concat(Directory, 'test_files/setup.txt', Setup),
+		^^file_path('test_files/setup.txt', Setup),
 		packs::save(Setup).
 
 	test(packs_packs_restore_2_01, true) :-
@@ -496,9 +482,7 @@
 		registries::defined(_, _, _, _).
 
 	test(packs_packs_restore_2_04, true) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		atom_concat(Directory, 'test_files/setup.txt', Setup),
+		^^file_path('test_files/setup.txt', Setup),
 		packs::restore(Setup, [compatible(false)]).
 
 	test(packs_packs_restore_2_05, true(HowDefined-Pinned == directory-true)) :-
@@ -516,9 +500,7 @@
 	% broken registry and pack specs
 
 	test(packs_registries_add_1_02, true) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		file_to_url(Directory, 'test_files/broken_d', URL),
+		^^file_url('test_files/broken_d', URL),
 		registries::add(URL).
 
 	test(packs_registries_lint_1_02, false) :-

@@ -31,6 +31,13 @@ Library
 * ADDED: New character set, `hexadecimal`, to the `type` library object and to
 the `arbitrary` library category.
 
+* FIXED: The implementation of the `os::absolute_file_name/2` predicate for
+the Ciao Prolog, CxProlog, ECLiPSe, GNU Prolog, JIProlog, SICStus Prolog,
+Tau Prolog, and Trealla Prolog backends to preserve a slash at the end of
+the input argument in the expanded path.
+
+* FIXED: The implementation of the `os::sleep/1` predicate for JIProlog.
+
 Tools
 -----
 

@@ -22,9 +22,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:41:0,
+		version is 1:42:0,
 		author is 'Paulo Moura',
-		date is 2025-05-19,
+		date is 2026-03-02,
 		comment is 'Portable operating-system access protocol.',
 		remarks is [
 			'Error handling' - 'Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.',
@@ -64,7 +64,7 @@
 	:- public(absolute_file_name/2).
 	:- mode(absolute_file_name(+atom, -atom), one).
 	:- info(absolute_file_name/2, [
-		comment is 'Expands a file name to an absolute file path. An environment variable at the beginning of the file name is also expanded.',
+		comment is 'Expands a file name to an absolute file path. An environment variable at the beginning of the file name is also expanded. A slash at the end of ``File`` is preserved in ``Path``.',
 		argnames is ['File', 'Path']
 	]).
 
