@@ -24,6 +24,7 @@
 	logtalk_load([types(characterp), types(character)], [optimize(on)]),
 	logtalk_load(os(loader)),
 	logtalk_load(options(loader)),
+	logtalk_load(git(loader)),
 	logtalk_load([
 		safety_hooks,
 		pack_protocol,

@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:87:1,
+		version is 0:88:0,
 		author is 'Paulo Moura',
-		date is 2025-08-20,
+		date is 2026-03-02,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -471,8 +471,12 @@
 	:- public(save/2).
 	:- mode(save(+atom, ++list(compound)), one_or_error).
 	:- info(save/2, [
-		comment is 'Saves a list of all installed packs and registries plus pinning status to a file using the given options. Registries without installed packs are saved when using the option ``save(all)`` and skipped when using the option ``save(installed)`` (default).',
+		comment is 'Saves a list of all installed packs and registries plus pinning status to a file using the given options.',
 		argnames is ['File', 'Options'],
+		remarks is [
+			'``lock(Boolean)`` option' - 'Save lock extension facts (lockfile version, git registry commits, and pack integrity hashes) in addition to the standard requirements facts. Default is ``false``.',
+			'``save(What)`` option' - 'Save registries without installed packs when ``What`` is ``all`` and skip them when ``What`` is ``installed``. Default is ``installed``.'
+		],
 		exceptions is [
 			'``File`` is a variable' - instantiation_error,
 			'``File`` is neither a variable nor an atom' - type_error(atom, 'File'),
@@ -504,6 +508,7 @@
 		comment is 'Restores a list of registries and packs plus their pinning status from a file using the given options. Fails if restoring is not possible.',
 		argnames is ['File', 'Options'],
 		remarks is [
+			'``lock(Boolean)`` option' - 'Require lock extension facts and enforce strict restoring (exact versions, git registry commits, and pack integrity hashes). Default is ``false``.',
 			'``force(Boolean)`` option' - 'Force restoring if a registry is already defined or a pack is already installed. Default is ``true``.',
 			'``compatible(Boolean)`` option' - 'Restrict installation to compatible packs. Default is ``true``.',
 			'``clean(Boolean)`` option' - 'Clean registry and pack archives after restoring. Default is ``false``.',
@@ -617,6 +622,10 @@
 
 	:- uses(logtalk, [
 		print_message/3
+	]).
+
+	:- uses(git, [
+		commit_hash/2
 	]).
 
 	:- uses(os, [
@@ -1400,17 +1409,44 @@
 			PacksData0
 		),
 		sort(PacksData0, PacksData),
-		forall(
-			member(PackData, PacksData),
-			(writeq(Stream, PackData), write(Stream, '.\n'))
-		),
-		forall(
+		write_terms(Stream, PacksData),
+		findall(
+			pinned_registry(Registry),
 			(member(Registry, SortedRegistries), registries::defined(Registry, _, _, true)),
-			(writeq(Stream, pinned_registry(Registry)), write(Stream, '.\n'))
+			PinnedRegistries0
 		),
-		forall(
+		sort(PinnedRegistries0, PinnedRegistries),
+		write_terms(Stream, PinnedRegistries),
+		findall(
+			pinned_pack(Pack),
 			installed_pack(_, Pack, _, true),
-			(writeq(Stream, pinned_pack(Pack)), write(Stream, '.\n'))
+			PinnedPacks0
+		),
+		sort(PinnedPacks0, PinnedPacks),
+		write_terms(Stream, PinnedPacks),
+		( 	^^option(lock(true), Options) ->
+			write_terms(Stream, [lockfile_version(1)]),
+			findall(
+				lock_registry_commit(Registry, Commit),
+				(	member(Registry, SortedRegistries),
+					registries::defined(Registry, _, git, _),
+					registries::directory(Registry, Directory),
+					commit_hash(Directory, Commit)
+				),
+				RegistryCommitFacts0
+			),
+			sort(RegistryCommitFacts0, RegistryCommitFacts),
+			write_terms(Stream, RegistryCommitFacts),
+			findall(
+				lock_integrity(Registry, Pack, Version, Algorithm, Digest),
+				(	member(pack(Registry, Pack, Version), PacksData),
+					lock_pack_integrity(Registry, Pack, Version, Algorithm, Digest)
+				),
+				LockIntegrities0
+			),
+			sort(LockIntegrities0, LockIntegrities),
+			write_terms(Stream, LockIntegrities)
+		; 	true
 		),
 		close(Stream),
 		print_message(comment, packs, @'Saved current setup').
@@ -1429,48 +1465,163 @@
 		),
 		^^merge_options(UpdatedOptions, Options),
 		open(File, read, Stream),
-		read(Stream, Term),
-		restore(Term, Stream, Options),
+		read_terms(Stream, Terms),
+		close(Stream),
+		( 	^^option(lock(true), Options) ->
+			restore_locked(Terms, Options)
+		; 	restore_terms(Terms, Options)
+		),
 		print_message(comment, packs, @'Restored setup').
 
 	restore(File) :-
 		restore(File, []).
 
-	restore(end_of_file, Stream, _) :-
+	read_terms(Stream, Terms) :-
+		read(Stream, Term),
+		( 	Term == end_of_file ->
+			Terms = []
+		; 	Terms = [Term| Rest],
+			read_terms(Stream, Rest)
+		).
+
+	write_terms(_, []).
+	write_terms(Stream, [Term| Terms]) :-
+		writeq(Stream, Term), write(Stream, '.\n'),
+		write_terms(Stream, Terms).
+
+	restore_terms([], _).
+	restore_terms([Term| Terms], Options) :-
+		restore_term(Term, Options),
+		restore_terms(Terms, Options).
+
+	restore_term(registry(Registry, URL), Options) :-
+		registries_restore_options(Options, RegistriesOptions),
+		( 	registries::add(Registry, URL, RegistriesOptions) ->
+			true
+		; 	print_message(error, packs, 'Restoring registries/packs setup failed while adding the ~q registry'+[Registry]),
+			fail
+		).
+	restore_term(pack(Registry, Pack, Version), Options) :-
+		( 	install(Registry, Pack, Version, Options) ->
+			true
+		; 	print_message(error, packs, 'Restoring registries/packs setup failed while installing the ~q pack'+[Pack]),
+			fail
+		).
+	restore_term(pinned_registry(Registry), _) :-
+		( 	registries::pin(Registry) ->
+			true
+		; 	print_message(error, packs, 'Restoring registries/packs setup failed while pinning the ~q registry'+[Registry]),
+			fail
+		).
+	restore_term(pinned_pack(Pack), _) :-
+		( 	pin(Pack) ->
+			true
+		; 	print_message(error, packs, 'Restoring registries/packs setup failed while pinning the ~q pack'+[Pack]),
+			fail
+		).
+	restore_term(lockfile_version(_), _).
+	restore_term(lock_registry_commit(_, _), _).
+	restore_term(lock_integrity(_, _, _, _, _), _).
+	restore_term(Term, _) :-
+		print_message(error, packs, invalid_requirements_file_term(Term)),
+		fail.
+
+	restore_locked(Terms, Options) :-
+		check_lockfile_version(Terms),
+		restore_locked_terms(Terms, Terms, Options).
+
+	restore_locked_terms([], _, _).
+	restore_locked_terms([Term| Terms], LockTerms, Options) :-
+		restore_locked_term(Term, LockTerms, Options),
+		restore_locked_terms(Terms, LockTerms, Options).
+
+	restore_locked_term(registry(Registry, URL), LockTerms, Options) :-
+		registry_restore_options(Registry, LockTerms, Options, LockRegistryOptions),
+		registries_restore_options(LockRegistryOptions, RegistryOptions),
+		( 	registries::add(Registry, URL, RegistryOptions) ->
+			true
+		; 	print_message(error, packs, 'Restoring registries/packs setup failed while adding the ~q registry'+[Registry]),
+			fail
+		).
+	restore_locked_term(pack(Registry, Pack, Version), LockTerms, Options) :-
+		check_lock_integrity(Registry, Pack, Version, LockTerms),
+		( 	install(Registry, Pack, Version, Options) ->
+			true
+		; 	print_message(error, packs, 'Restoring registries/packs setup failed while installing the ~q pack'+[Pack]),
+			fail
+		).
+	restore_locked_term(pinned_registry(Registry), _, _) :-
+		( 	registries::pin(Registry) ->
+			true
+		; 	print_message(error, packs, 'Restoring registries/packs setup failed while pinning the ~q registry'+[Registry]),
+			fail
+		).
+	restore_locked_term(pinned_pack(Pack), _, _) :-
+		( 	pin(Pack) ->
+			true
+		; 	print_message(error, packs, 'Restoring registries/packs setup failed while pinning the ~q pack'+[Pack]),
+			fail
+		).
+	restore_locked_term(lockfile_version(_), _, _).
+	restore_locked_term(lock_registry_commit(_, _), _, _).
+	restore_locked_term(lock_integrity(_, _, _, _, _), _, _).
+	restore_locked_term(Term, _, _) :-
+		print_message(error, packs, invalid_requirements_file_term(Term)),
+		fail.
+
+	check_lockfile_version(Terms) :-
+		findall(Version, member(lockfile_version(Version), Terms), Versions),
+		( 	Versions == [] ->
+			print_message(error, packs, missing_lockfile_version),
+			fail
+		; 	forall(member(Version, Versions), Version == 1) ->
+			true
+		; 	member(UnsupportedVersion, Versions),
+			UnsupportedVersion \== 1,
+			print_message(error, packs, unsupported_lockfile_version(UnsupportedVersion)),
+			fail
+		).
+
+	registry_restore_options(Registry, LockTerms, Options, [commit(Commit)| Options]) :-
+		member(lock_registry_commit(Registry, Commit), LockTerms),
+		!.
+	registry_restore_options(_, _, Options, Options).
+
+	registries_restore_options([], []).
+	registries_restore_options([lock(_)| Options], RegistriesOptions) :-
 		!,
-		close(Stream).
-	restore(registry(Registry, URL), Stream, Options) :-
-		(	registries::add(Registry, URL, Options) ->
-			read(Stream, Term),
-			restore(Term, Stream, Options)
-		;	close(Stream),
-			print_message(error, packs, 'Restoring registries/packs setup failed while adding the ~q registry'+[Registry]),
+		registries_restore_options(Options, RegistriesOptions).
+	registries_restore_options([Option| Options], [Option| RegistriesOptions]) :-
+		registries_restore_options(Options, RegistriesOptions).
+
+	check_lock_integrity(Registry, Pack, Version, LockTerms) :-
+		( 	member(lock_integrity(Registry, Pack, Version, LockedAlgorithm, LockedDigest), LockTerms) ->
+			( 	registry_pack(Registry, Pack, PackObject),
+				PackObject::version(Version, _, _, CheckSum, _, _) ->
+				lock_checksum(CheckSum, Algorithm, Digest),
+				( 	Algorithm == LockedAlgorithm,
+					Digest == LockedDigest ->
+					true
+				; 	print_message(error, packs, lock_integrity_mismatch(Registry, Pack, Version)),
+					fail
+				)
+			; 	print_message(error, packs, missing_pack_version_integrity_data(Registry, Pack, Version)),
+				fail
+			)
+		; 	print_message(error, packs, missing_lock_integrity(Registry, Pack, Version)),
 			fail
 		).
-	restore(pack(Registry, Pack, Version), Stream, Options) :-
-		(	install(Registry, Pack, Version, Options) ->
-			read(Stream, Term),
-			restore(Term, Stream, Options)
-		;	close(Stream),
-			print_message(error, packs, 'Restoring registries/packs setup failed while installing the ~q pack'+[Pack]),
+
+	lock_pack_integrity(Registry, Pack, Version, Algorithm, Digest) :-
+		registry_pack(Registry, Pack, PackObject),
+		( 	PackObject::version(Version, _, _, CheckSum, _, _) ->
+			lock_checksum(CheckSum, Algorithm, Digest)
+		; 	print_message(error, packs, missing_pack_version_integrity_data(Registry, Pack, Version)),
 			fail
 		).
-	restore(pinned_registry(Registry), Stream, Options) :-
-		(	registries::pin(Registry) ->
-			read(Stream, Term),
-			restore(Term, Stream, Options)
-		;	close(Stream),
-			print_message(error, packs, 'Restoring registries/packs setup failed while pinning the ~q registry'+[Registry]),
-			fail
-		).
-	restore(pinned_pack(Pack), Stream, Options) :-
-		(	pin(Pack) ->
-			read(Stream, Term),
-			restore(Term, Stream, Options)
-		;	close(Stream),
-			print_message(error, packs, 'Restoring registries/packs setup failed while pinning the ~q pack'+[Pack]),
-			fail
-		).
+
+	lock_checksum(none, none, '').
+	lock_checksum(sha256-Digest, sha256, Digest).
 
 	% orphaned pack predicates
 
@@ -2529,6 +2680,7 @@
 	default_option(force(false)).
 	default_option(checksum(true)).
 	default_option(checksig(false)).
+	default_option(lock(false)).
 	default_option(save(installed)).
 	default_option(git('')).
 	default_option(downloader(curl)).
@@ -2555,8 +2707,13 @@
 		valid(boolean, Boolean).
 	valid_option(checksig(Boolean)) :-
 		valid(boolean, Boolean).
+	valid_option(lock(Boolean)) :-
+		valid(boolean, Boolean).
 	valid_option(save(What)) :-
 		once((What == all; What == installed)).
+	valid_option(commit(Hash)) :-
+		% SHA1 and SHA256 checksums
+		valid(types([atom(hexadecimal,40), atom(hexadecimal,64)]), Hash).
 	valid_option(git(Atom)) :-
 		atom(Atom).
 	valid_option(downloader(Downloader)) :-

@@ -41,6 +41,9 @@ the input argument in the expanded path.
 Tools
 -----
 
+* ADDED: Support to the `packs` tool for lock files for deterministic installs
+and CI/CD reproducibility.
+
 * ADDED: Support to the `lgtunit` tool for exporting code coverage stats in
 Cobertura XML and LCOV formats.
 

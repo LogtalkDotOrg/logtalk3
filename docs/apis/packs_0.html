@@ -257,8 +257,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:87:1</div>
-<div class="line"><strong>Date:</strong> 2025-08-20</div>
+<div class="line"><strong>Version:</strong> 0:88:0</div>
+<div class="line"><strong>Date:</strong> 2026-03-02</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -274,6 +274,7 @@
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
+<div class="line"><a class="reference internal" href="git_0.html#git-0"><span class="std std-ref">git</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0"><span class="std std-ref">logtalk</span></a></div>
 <div class="line"><a class="reference internal" href="os_0.html#os-0"><span class="std std-ref">os</span></a></div>
@@ -1677,7 +1678,7 @@
 </section>
 <section id="save-2">
 <span id="packs-0-save-2"></span><span id="index-33"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">save/2</span></code></a><a class="headerlink" href="#save-2" title="Link to this heading"></a></h3>
-<p>Saves a list of all installed packs and registries plus pinning status to a file using the given options. Registries without installed packs are saved when using the option <code class="docutils literal notranslate"><span class="pre">save(all)</span></code> and skipped when using the option <code class="docutils literal notranslate"><span class="pre">save(installed)</span></code> (default).</p>
+<p>Saves a list of all installed packs and registries plus pinning status to a file using the given options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1731,6 +1732,15 @@
 </div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lock(Boolean)</span></code> option: Save lock extension facts (lockfile version, git registry commits, and pack integrity hashes) in addition to the standard requirements facts. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">save(What)</span></code> option: Save registries without installed packs when <code class="docutils literal notranslate"><span class="pre">What</span></code> is <code class="docutils literal notranslate"><span class="pre">all</span></code> and skip them when <code class="docutils literal notranslate"><span class="pre">What</span></code> is <code class="docutils literal notranslate"><span class="pre">installed</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">installed</span></code>.</p></li>
+</ul>
+</div></blockquote>
 <hr class="docutils" />
 </section>
 <section id="save-1">
@@ -1842,6 +1852,7 @@
 </div>
 <blockquote>
 <div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lock(Boolean)</span></code> option: Require lock extension facts and enforce strict restoring (exact versions, git registry commits, and pack integrity hashes). Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">force(Boolean)</span></code> option: Force restoring if a registry is already defined or a pack is already installed. Default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">compatible(Boolean)</span></code> option: Restrict installation to compatible packs. Default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">clean(Boolean)</span></code> option: Clean registry and pack archives after restoring. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>

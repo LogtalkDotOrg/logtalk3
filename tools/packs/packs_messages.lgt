@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:41:0,
+		version is 0:42:0,
 		author is 'Paulo Moura',
-		date is 2025-05-23,
+		date is 2026-03-02,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -153,6 +153,12 @@
 
 	message_tokens(registry_archive_uncompress_failed(Registry, Path)) -->
 		['Registry archive uncompress failed: ~q (~q)'-[Registry, Path], nl].
+
+	message_tokens(commit_option_requires_git_registry(Registry, Commit)) -->
+		['Commit option requires git registry: ~q (~q)'-[Registry, Commit], nl].
+
+	message_tokens(registry_checkout_failed(Registry, Commit)) -->
+		['Registry commit checkout failed: ~q (~q)'-[Registry, Commit], nl].
 
 	message_tokens(cannot_update_pinned_registry(Registry)) -->
 		['Cannot update pinned registry: ~q'-[Registry], nl].
@@ -365,6 +371,24 @@
 
 	message_tokens(pack_archive_uncompress_failed(Pack, Archive)) -->
 		['Pack archive uncompress failed: ~q (~q)'-[Pack, Archive], nl].
+
+	message_tokens(invalid_requirements_file_term(Term)) -->
+		['Invalid requirements/lock file term: ~q'-[Term], nl].
+
+	message_tokens(missing_lockfile_version) -->
+		['Missing lockfile version fact: lockfile_version(1).'-[], nl].
+
+	message_tokens(unsupported_lockfile_version(Version)) -->
+		['Unsupported lockfile version: ~q'-[Version], nl].
+
+	message_tokens(missing_lock_integrity(Registry, Pack, Version)) -->
+		['Missing lock integrity fact for pack: ~q::~q@~q'-[Registry, Pack, Version], nl].
+
+	message_tokens(missing_pack_version_integrity_data(Registry, Pack, Version)) -->
+		['Missing pack version integrity data in manifest: ~q::~q@~q'-[Registry, Pack, Version], nl].
+
+	message_tokens(lock_integrity_mismatch(Registry, Pack, Version)) -->
+		['Lock integrity mismatch for pack: ~q::~q@~q'-[Registry, Pack, Version], nl].
 
 	% pack describe messages
 

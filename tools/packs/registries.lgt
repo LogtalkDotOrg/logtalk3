@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:62:0,
+		version is 0:64:0,
 		author is 'Paulo Moura',
-		date is 2025-08-20,
+		date is 2026-03-02,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -67,6 +67,7 @@
 		remarks is [
 			'Registry name' - 'Must be the URL basename when using a git URL or a local directory URL. Must also be the declared registry name in the registry specification object.',
 			'HTTPS URLs' - 'Must end with either a ``.git`` extension or an archive extension.',
+			'``commit(Hash)`` option' - 'When present, checkout the registry git repository at the specified commit hash after cloning.',
 			'``update(Boolean)`` option' - 'Update registry if already defined. Default is ``false``. Overrides the ``force/1`` option.',
 			'``force(Boolean)`` option' - 'Force registry re-installation if already defined by first deleting the previous installation. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean registry archive after updating. Default is ``false``.',
@@ -128,6 +129,7 @@
 		comment is 'Updates a defined registry using the specified options. Fails if the registry is not defined.',
 		argnames is ['Registry', 'Options'],
 		remarks is [
+			'``commit(Hash)`` option' - 'When present, checkout the registry git repository at the specified commit hash after updating.',
 			'``force(Boolean)`` option' - 'Force update if the registry is pinned. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean registry archive after updating. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.',
@@ -461,8 +463,14 @@
 				atomic_list_concat(['git clone -v ', URL, ' "', OSPath, '"'], Command)
 			;	atomic_list_concat(['git clone -q ', URL, ' "', OSPath, '"'], Command)
 			),
-			^^command(Command, registry_cloning_failed(Registry, URL))
+			^^command(Command, registry_cloning_failed(Registry, URL)),
+			checkout_commit(Registry, Path, Options)
 		;	operating_system_type(windows) ->
+			(	^^option(commit(Commit), Options) ->
+				print_message(error, packs, commit_option_requires_git_registry(Registry, Commit)),
+				fail
+			;	true
+			),
 			internal_os_path(Directory, OSDirectory),
 			(	^^option(verbose(true), Options) ->
 				atomic_list_concat(['xcopy /E /I /Y "', OSDirectory, '" "', OSPath, '"'], Command)
@@ -470,6 +478,11 @@
 			),
 			^^command(Command, registry_directory_copy_failed(Registry, URL))
 		;	internal_os_path(Directory, OSDirectory),
+			(	^^option(commit(Commit), Options) ->
+				print_message(error, packs, commit_option_requires_git_registry(Registry, Commit)),
+				fail
+			;	true
+			),
 			(	^^option(verbose(true), Options) ->
 				atomic_list_concat(['cp -R -v "', OSDirectory, '/." "', OSPath, '"'], Command)
 			;	atomic_list_concat(['cp -R "', OSDirectory, '/." "', OSPath, '"'], Command)
@@ -607,6 +620,9 @@
 		path_concat(Directory, '.git', Git),
 		(	directory_exists(Git) ->
 			update_clone(Registry, URL, Path, Updated, Options)
+		;	^^option(commit(Commit), Options) ->
+			print_message(error, packs, commit_option_requires_git_registry(Registry, Commit)),
+			fail
 		;	operating_system_type(windows) ->
 			internal_os_path(Directory, OSDirectory),
 			internal_os_path(Path, OSPath),
@@ -626,6 +642,17 @@
 			Updated = true
 		).
 
+	update_clone(Registry, URL, Path, true, Options) :-
+		^^option(commit(_), Options),
+		!,
+		print_message(comment, packs, updating_registry(Registry, URL)),
+		internal_os_path(Path, OSPath),
+		( 	^^option(verbose(true), Options) ->
+			atomic_list_concat(['git -C "', OSPath, '" fetch --all --tags --prune --verbose'], Command)
+		; 	atomic_list_concat(['git -C "', OSPath, '" fetch --all --tags --prune --quiet'], Command)
+		),
+		^^command(Command, registry_clone_pull_failed(Registry, OSPath)),
+		checkout_commit(Registry, Path, Options).
 	update_clone(_, _, Path, false, _) :-
 		internal_os_path(Path, OSPath),
 		(	operating_system_type(windows) ->
@@ -644,6 +671,11 @@
 		^^command(Command, registry_clone_pull_failed(Registry, OSPath)).
 
 	update_archive(Registry, URL, true, Options) :-
+		(	^^option(commit(Commit), Options) ->
+			print_message(error, packs, commit_option_requires_git_registry(Registry, Commit)),
+			fail
+		;	true
+		),
 		print_message(comment, packs, updating_registry(Registry, URL)),
 		download(Registry, URL, Archive, Options),
 		uncompress(Registry, Archive, _, Options).
@@ -736,6 +768,9 @@
 		valid(boolean, Boolean).
 	valid_option(save(What)) :-
 		once((What == all; What == installed)).
+	valid_option(commit(Hash)) :-
+		% SHA1 and SHA256 checksums
+		valid(types([atom(hexadecimal,40), atom(hexadecimal,64)]), Hash).
 	valid_option(git(Atom)) :-
 		atom(Atom).
 	valid_option(downloader(Downloader)) :-
@@ -944,7 +979,19 @@
 			atomic_list_concat(['git clone -v ', URL, ' "', OSPath, '"'], Command)
 		;	atomic_list_concat(['git clone -q ', URL, ' "', OSPath, '"'], Command)
 		),
-		^^command(Command, registry_cloning_failed(Registry, URL)).
+		^^command(Command, registry_cloning_failed(Registry, URL)),
+		checkout_commit(Registry, Path, Options).
+
+	checkout_commit(Registry, Path, Options) :-
+		^^option(commit(Commit), Options),
+		!,
+		internal_os_path(Path, OSPath),
+		(	^^option(verbose(true), Options) ->
+			atomic_list_concat(['git -C "', OSPath, '" checkout --force --detach ', Commit], Command)
+		;	atomic_list_concat(['git -C "', OSPath, '" checkout --quiet --force --detach ', Commit], Command)
+		),
+		^^command(Command, registry_checkout_failed(Registry, Commit)).
+	checkout_commit(_, _, _).
 
 	download(Registry, URL, Archive, Options) :-
 		^^logtalk_packs(LogtalkPacks),

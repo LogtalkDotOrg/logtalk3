@@ -69,11 +69,18 @@
 		packs::reset,
 		^^clean_file('.gpg'),
 		^^clean_file('test_files/setup.txt'),
+		^^clean_file('test_files/setup_lock.txt'),
+		^^clean_file('test_files/setup_repo_lock.txt'),
 		^^clean_file('test_files/asc/v1.0.0.tar.gz.asc'),
 		^^clean_file('test_files/sig/v1.0.0.tar.gz.sig'),
 		object_property(packs, file(_, Directory)),
 		atomic_list_concat([Directory, '.ring'], Ring),
 		os::delete_directory_and_contents(Ring),
+		atomic_list_concat([Directory, 'test_files/repo'], Repo),
+		(   os::directory_exists(Repo) ->
+			os::delete_directory_and_contents(Repo)
+		;   true
+		),
 		atomic_list_concat([Directory, 'test_files/logtalk_packs'], LogtalkPacks),
 		os::delete_directory_and_contents(LogtalkPacks).
 
@@ -161,6 +168,28 @@
 
 	test(packs_packs_verify_commands_availability_0_01, true) :-
 		packs::verify_commands_availability.
+
+	% commit option validation
+
+	test(packs_registries_add_3_02, error(domain_error(option, commit('')))) :-
+		^^file_url('test_files/local_1_d', URL),
+		registries::add(local_1_d, URL, [commit('')]).
+
+	test(packs_registries_add_3_03, error(domain_error(option, commit('abc123')))) :-
+		^^file_url('test_files/local_1_d', URL),
+		registries::add(local_1_d, URL, [commit('abc123')]).
+
+	test(packs_registries_add_3_04, error(domain_error(option, commit('gggggggggggggggggggggggggggggggggggggggg')))) :-
+		^^file_url('test_files/local_1_d', URL),
+		registries::add(local_1_d, URL, [commit('gggggggggggggggggggggggggggggggggggggggg')]).
+
+	test(packs_registries_add_3_05, false) :-
+		^^file_url('test_files/local_1_d', URL),
+		registries::add(local_1_d, URL, [commit('0123456789abcdef0123456789abcdef01234567')]).
+
+	test(packs_registries_add_3_06, false) :-
+		^^file_url('test_files/local_1_d', URL),
+		registries::add(local_1_d, URL, [commit('0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef')]).
 
 	% now we add a local registry
 
@@ -497,6 +526,80 @@
 	test(packs_packs_restore_2_08, true(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(local_2_d, baz, Version, Pinned).
 
+	test(packs_packs_save_2_02, true(os::file_exists(Setup))) :-
+		^^file_path('test_files/setup_lock.txt', Setup),
+		packs::save(Setup, [lock(true)]).
+
+	test(packs_packs_restore_2_09, true) :-
+		packs::uninstall,
+		packs::clean,
+		registries::delete,
+		registries::clean.
+
+	test(packs_packs_restore_2_10, true) :-
+		^^file_path('test_files/setup_lock.txt', Setup),
+		packs::restore(Setup, [lock(true), compatible(false)]).
+
+	test(packs_packs_restore_2_11, true(HowDefined-Pinned == directory-true)) :-
+		registries::defined(local_1_d, _, HowDefined, Pinned).
+
+	test(packs_packs_restore_2_12, true(HowDefined-Pinned == archive-true)) :-
+		registries::defined(local_2_d, _, HowDefined, Pinned).
+
+	test(packs_packs_restore_2_13, true(Version-Pinned == (2:0:0)-false)) :-
+		packs::installed(local_1_d, foo, Version, Pinned).
+
+	test(packs_packs_restore_2_14, true(Version-Pinned == (1:0:0)-false)) :-
+		packs::installed(local_2_d, baz, Version, Pinned).
+
+	% git registry lockfile setup and restore
+
+	test(packs_packs_restore_2_15, true) :-
+		packs::uninstall,
+		packs::clean,
+		registries::delete,
+		registries::clean.
+
+	test(packs_registries_add_1_03, true(os::directory_exists(RepoDirectory))) :-
+		^^file_path('test_files/logtalk_packs/repo_fixture', Destination),
+		(   os::directory_exists(Destination) ->
+			os::delete_directory_and_contents(Destination)
+		;   true
+		),
+		os::make_directory_path(Destination),
+		^^file_path('test_files/repo.zip', Archive),
+		unzip_archive(Archive, Destination),
+		^^file_path('test_files/logtalk_packs/repo_fixture/repo', RepoDirectory).
+
+	test(packs_registries_add_3_07, true) :-
+		first_repo_commit(Commit),
+		^^file_url('test_files/logtalk_packs/repo_fixture/repo', URL),
+		writeq(URL), nl,
+		registries::add(repo, URL, [commit(Commit)]).
+
+	test(packs_packs_install_1_03, true) :-
+		packs::install(repo).
+
+	test(packs_packs_install_4_13, true(Version-Pinned == (1:0:0)-false)) :-
+		packs::installed(repo, repo, Version, Pinned).
+
+	test(packs_packs_save_2_03, true(os::file_exists(Setup))) :-
+		^^file_path('test_files/setup_repo_lock.txt', Setup),
+		packs::save(Setup, [lock(true)]).
+
+	test(packs_packs_restore_2_16, true) :-
+		packs::uninstall,
+		packs::clean,
+		registries::delete,
+		registries::clean.
+
+	test(packs_packs_restore_2_17, true) :-
+		^^file_path('test_files/setup_repo_lock.txt', Setup),
+		packs::restore(Setup, [lock(true)]).
+
+	test(packs_packs_restore_2_18, true(Version-Pinned == (1:0:0)-false)) :-
+		packs::installed(repo, repo, Version, Pinned).
+
 	% broken registry and pack specs
 
 	test(packs_registries_add_1_02, true) :-
@@ -523,7 +626,10 @@
 		registries::unpin.
 
 	test(packs_registries_delete_1_01, true) :-
-		registries::delete(local_1_d).
+		(   registries::defined(local_1_d, _, _, _) ->
+			registries::delete(local_1_d)
+		;   true
+		).
 
 	% suppress all packs tool messages to not pollute the unit tests output
 
@@ -534,26 +640,20 @@
 
 	% auxiliary predicates
 
-	encode_spaces(URL0, URL) :-
-		atom_chars(URL0, Chars0),
-		encode_spaces_in_list(Chars0, Chars),
-		atom_chars(URL, Chars).
+	first_repo_commit('95d1f1c90e86f04c0682a2c6fe33e1823eb7bea2').
 
-	encode_spaces_in_list([], []).
-	encode_spaces_in_list([' '| Chars0], ['%','2','0'| Chars]) :-
-		!,
-		encode_spaces_in_list(Chars0, Chars).
-	encode_spaces_in_list([Char| Chars0], [Char| Chars]) :-
-		encode_spaces_in_list(Chars0, Chars).
+	:- if(os::operating_system_type(windows)).
 
-	file_to_url(Directory, File, URL) :-
-		(	sub_atom(Directory, 0, _, _, '//C/') ->
-			% assume ECLiPSe running on Windows
-			atom_concat('//C/', Directory1, Directory),
-			atomic_list_concat(['file://C:/', Directory1, File], URL0)
-		;	% most common case
-			atomic_list_concat(['file://', Directory, File], URL0)
-		),
-		encode_spaces(URL0, URL).
+		unzip_archive(Archive, Destination) :-
+			atomic_list_concat(['tar -xf "', Archive, '" --directory "', Destination, '"'], Command),
+			os::shell(Command).
+
+	:- else.
+
+		unzip_archive(Archive, Destination) :-
+			atomic_list_concat(['bsdtar -xf "', Archive, '" --directory "', Destination, '"'], Command),
+			os::shell(Command).
+
+	:- endif.
 
 :- end_object.

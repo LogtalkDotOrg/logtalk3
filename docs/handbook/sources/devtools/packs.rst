@@ -239,7 +239,7 @@ existing ``.env`` file when changing to its directory. For example:
 
 A virtual environment setup (i.e., the currently defined registries and
 installed packs) can be saved into a file (e.g., ``requirements.lgt``)
-using the ``packs::save/1`` predicate:
+using the ``packs::save/1-2`` predicates. For example:
 
 ::
 
@@ -285,6 +285,25 @@ entering the required passphrases. Although the ``restore/2`` predicate
 accepts a list of options that include the ``gpg/1`` option, this only
 allows specifying a single and common passphrase when interactive
 entering of passphrases is not convenient or possible.
+
+Lock files
+----------
+
+For deterministic installs and CI/CD reproducibility when working with
+virtual environments, the ``save/2`` and ``restore/2`` predicates
+support a ``lock(true)`` option. Saving with this option writes lock
+extension facts in addition to the requirements facts:
+
+::
+
+   lockfile_version(1).
+   lock_registry_commit(talkshow, '0123456789abcdef0123456789abcdef01234567').
+   lock_integrity(talkshow, lflat, 2:1:0, sha256, '8774b3863efc03bb6c85dcf34f69f1156d2496a3').
+
+The ``lock_registry_commit/2`` facts are generated only for registries
+defined from git URLs. Restoring with ``lock(true)`` enforces lock
+extension facts, including exact pack versions, integrity hashes, and
+git registry commits.
 
 Registry specification
 ----------------------
@@ -473,6 +492,11 @@ If the directory is a git repo, the tool will clone it when adding it.
 Otherwise, the files in the directory are copied to the registry
 definition directory. This allows the registry to be added and deleted
 without consequences for the original registry source files.
+
+The ``registries::add/3`` and ``registries::update/2`` predicates also
+accept a ``commit(Hash)`` option. This option checks out a git registry
+at an exact commit hash. Using this option with non-git registries fails
+with an error message.
 
 To check your registry specifications, use the ``registries::lint/0-1``
 predicates after adding the registry.

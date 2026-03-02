@@ -14,8 +14,8 @@ Registry handling predicates.
 |    ``logtalk_load(packs(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:62:0
-| **Date:** 2025-08-20
+| **Version:** 0:64:0
+| **Date:** 2026-03-02
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -155,6 +155,7 @@ Adds a new registry using the given options. Fails if the registry cannot be add
 
     - Registry name: Must be the URL basename when using a git URL or a local directory URL. Must also be the declared registry name in the registry specification object.
     - HTTPS URLs: Must end with either a ``.git`` extension or an archive extension.
+    - ``commit(Hash)`` option: When present, checkout the registry git repository at the specified commit hash after cloning.
     - ``update(Boolean)`` option: Update registry if already defined. Default is ``false``. Overrides the ``force/1`` option.
     - ``force(Boolean)`` option: Force registry re-installation if already defined by first deleting the previous installation. Default is ``false``.
     - ``clean(Boolean)`` option: Clean registry archive after updating. Default is ``false``.
@@ -270,6 +271,7 @@ Updates a defined registry using the specified options. Fails if the registry is
 
 | **Remarks:**
 
+    - ``commit(Hash)`` option: When present, checkout the registry git repository at the specified commit hash after updating.
     - ``force(Boolean)`` option: Force update if the registry is pinned. Default is ``false``.
     - ``clean(Boolean)`` option: Clean registry archive after updating. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose updating steps. Default is ``false``.

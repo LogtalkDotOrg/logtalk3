@@ -91,6 +91,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#registries-and-packs-storage">Registries and packs storage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#virtual-environments">Virtual environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lock-files">Lock files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#registry-specification">Registry specification</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#registry-handling">Registry handling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#registry-development">Registry development</a></li>
@@ -352,7 +353,7 @@ existing <code class="docutils literal notranslate"><span class="pre">.env</span
 </div>
 <p>A virtual environment setup (i.e., the currently defined registries and
 installed packs) can be saved into a file (e.g., <code class="docutils literal notranslate"><span class="pre">requirements.lgt</span></code>)
-using the <code class="docutils literal notranslate"><span class="pre">packs::save/1</span></code> predicate:</p>
+using the <code class="docutils literal notranslate"><span class="pre">packs::save/1-2</span></code> predicates. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>save(<span class="s">&#39;requirements.lgt&#39;</span>).
 ...
 </pre></div>
@@ -390,6 +391,22 @@ entering the required passphrases. Although the <code class="docutils literal no
 accepts a list of options that include the <code class="docutils literal notranslate"><span class="pre">gpg/1</span></code> option, this only
 allows specifying a single and common passphrase when interactive
 entering of passphrases is not convenient or possible.</p>
+</section>
+<section id="lock-files">
+<h2>Lock files<a class="headerlink" href="#lock-files" title="Link to this heading"></a></h2>
+<p>For deterministic installs and CI/CD reproducibility when working with
+virtual environments, the <code class="docutils literal notranslate"><span class="pre">save/2</span></code> and <code class="docutils literal notranslate"><span class="pre">restore/2</span></code> predicates
+support a <code class="docutils literal notranslate"><span class="pre">lock(true)</span></code> option. Saving with this option writes lock
+extension facts in addition to the requirements facts:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>lockfile_version(<span class="m">1</span>).
+lock_registry_commit(talkshow, <span class="s">&#39;0123456789abcdef0123456789abcdef01234567&#39;</span>).
+lock_integrity(talkshow, lflat, <span class="m">2</span><span class="o">:</span><span class="m">1</span><span class="o">:</span><span class="m">0</span>, sha256, <span class="s">&#39;8774b3863efc03bb6c85dcf34f69f1156d2496a3&#39;</span>).
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">lock_registry_commit/2</span></code> facts are generated only for registries
+defined from git URLs. Restoring with <code class="docutils literal notranslate"><span class="pre">lock(true)</span></code> enforces lock
+extension facts, including exact pack versions, integrity hashes, and
+git registry commits.</p>
 </section>
 <section id="registry-specification">
 <h2>Registry specification<a class="headerlink" href="#registry-specification" title="Link to this heading"></a></h2>
@@ -550,6 +567,10 @@ example:</p>
 Otherwise, the files in the directory are copied to the registry
 definition directory. This allows the registry to be added and deleted
 without consequences for the original registry source files.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">registries::add/3</span></code> and <code class="docutils literal notranslate"><span class="pre">registries::update/2</span></code> predicates also
+accept a <code class="docutils literal notranslate"><span class="pre">commit(Hash)</span></code> option. This option checks out a git registry
+at an exact commit hash. Using this option with non-git registries fails
+with an error message.</p>
 <p>To check your registry specifications, use the <code class="docutils literal notranslate"><span class="pre">registries::lint/0-1</span></code>
 predicates after adding the registry.</p>
 </section>

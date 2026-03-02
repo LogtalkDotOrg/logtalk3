@@ -257,8 +257,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:62:0</div>
-<div class="line"><strong>Date:</strong> 2025-08-20</div>
+<div class="line"><strong>Version:</strong> 0:64:0</div>
+<div class="line"><strong>Date:</strong> 2026-03-02</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -483,6 +483,7 @@
 <div><ul class="simple">
 <li><p>Registry name: Must be the URL basename when using a git URL or a local directory URL. Must also be the declared registry name in the registry specification object.</p></li>
 <li><p>HTTPS URLs: Must end with either a <code class="docutils literal notranslate"><span class="pre">.git</span></code> extension or an archive extension.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">commit(Hash)</span></code> option: When present, checkout the registry git repository at the specified commit hash after cloning.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">update(Boolean)</span></code> option: Update registry if already defined. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>. Overrides the <code class="docutils literal notranslate"><span class="pre">force/1</span></code> option.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">force(Boolean)</span></code> option: Force registry re-installation if already defined by first deleting the previous installation. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">clean(Boolean)</span></code> option: Clean registry archive after updating. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
@@ -657,6 +658,7 @@
 </div>
 <blockquote>
 <div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">commit(Hash)</span></code> option: When present, checkout the registry git repository at the specified commit hash after updating.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">force(Boolean)</span></code> option: Force update if the registry is pinned. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">clean(Boolean)</span></code> option: Clean registry archive after updating. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">verbose(Boolean)</span></code> option: Verbose updating steps. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
