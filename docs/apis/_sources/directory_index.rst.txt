@@ -1496,6 +1496,10 @@ To load an entity, always load the library that includes it using the goal ``log
    lgtunit <lgtunit_0>
    lgtunit_messages <lgtunit_messages_0>
    minimal_output <minimal_output_0>
+   subunit_v1_output <subunit_v1_output_0>
+   subunit_v1_report <subunit_v1_report_0>
+   subunit_v2_output <subunit_v2_output_0>
+   subunit_v2_report <subunit_v2_report_0>
    tap_output <tap_output_0>
    tap_report <tap_report_0>
    xunit_net_v2_output <xunit_net_v2_output_0>

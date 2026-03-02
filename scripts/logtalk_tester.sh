@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on February 27, 2026
+##   Last updated on March 2, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -33,7 +33,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 26.0"
+	echo "$(basename "$0") 26.1"
 	exit 0
 }
 
@@ -109,6 +109,8 @@ format_tap_goal="logtalk_load(lgtunit(tap_report))"
 format_xunit_goal="logtalk_load(lgtunit(xunit_report))"
 format_xunit_net_v2_goal="logtalk_load(lgtunit(xunit_net_v2_report))"
 format_ctrf_goal="logtalk_load(lgtunit(ctrf_report))"
+format_subunit_v1_goal="logtalk_load(lgtunit(subunit_v1_report))"
+format_subunit_v2_goal="logtalk_load(lgtunit(subunit_v2_report))"
 format_goal=$format_default_goal
 
 coverage_default_goal="true"
@@ -332,6 +334,12 @@ ensure_format_report() {
 		echo "    ]" >> "$directory/ctrf_report.json"
 		echo "  }" >> "$directory/ctrf_report.json"
 		echo "}" >> "$directory/ctrf_report.json"
+	elif [ "$format" == "subunit_v1" ] ; then
+		echo "test: $name [$short/tests.lgt]" > "$directory/subunit_v1_report.txt"
+		echo "error: $name [$error]" >> "$directory/subunit_v1_report.txt"
+	elif [ "$format" == "subunit_v2" ] ; then
+		# fallback placeholder report for broken/timeout/crash runs
+		printf "subunit_v2_error:%s:%s\n" "$name" "$error" > "$directory/subunit_v2_report.bin"
 	fi
 }
 
@@ -360,7 +368,7 @@ usage_help() {
 	echo "  -m compilation mode (default is $mode)"
 	echo "     (valid values are optimal, normal, debug, and all)"
 	echo "  -f format for writing the test results (default is $format)"
-	echo "     (valid values are default, tap, xunit, xunit_net_v2, and ctrf)"
+	echo "     (valid values are default, tap, xunit, xunit_net_v2, ctrf, subunit_v1, and subunit_v2)"
 	echo "  -d directory to store the test logs (default is ./logtalk_tester_logs)"
 	echo "  -t timeout in seconds for running each test set (default is $timeout; i.e. disabled)"
 	echo "  -j maximum number of concurrent test set processes (default is $jobs)"
@@ -533,6 +541,12 @@ elif [ "$f_arg" == "xunit_net_v2" ] ; then
 elif [ "$f_arg" == "ctrf" ] ; then
 	format='ctrf'
 	format_goal=$format_ctrf_goal
+elif [ "$f_arg" == "subunit_v1" ] ; then
+	format='subunit_v1'
+	format_goal=$format_subunit_v1_goal
+elif [ "$f_arg" == "subunit_v2" ] ; then
+	format='subunit_v2'
+	format_goal=$format_subunit_v2_goal
 elif [ "$f_arg" != "" ] ; then
 	echo "Error! Unknown format: $f_arg" >&2
 	usage_help

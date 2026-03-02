@@ -1655,7 +1655,6 @@ HTML files for easy browsing. For example:
 - https://github.com/JatechUK/NUnit-HTML-Report-Generator
 - https://plugins.jenkins.io/xunit
 
-
 ### TAP output format
 
 To output test results in the TAP (Test Anything Protocol) format, simply
@@ -1702,6 +1701,27 @@ generate the `ctrf_report.json` files in the test set directories.
 
 When running a set of test suites as a single unified suite, the single CTRF
 report is created in the directory of the first test suite object in the set.
+
+### Subunit formats
+
+To output test results in the Subunit v1 text streaming format, simply load
+the `subunit_v1_output.lgt` file before running the tests. This file defines an
+object, `subunit_v1_output`, that intercepts and rewrites unit test execution
+messages, converting them to a Subunit text stream.
+
+To output test results in the Subunit v2 binary streaming format, load the
+`subunit_v2_output.lgt` file before running the tests. This file defines an
+object, `subunit_v2_output`, that intercepts and rewrites unit test execution
+messages, converting them to Subunit v2 binary packets.
+
+These adapters write directly to the current output stream and are intended
+for piping test execution output to tools that parse Subunit streams.
+
+To export test results to files using Subunit streaming formats, load instead
+the `subunit_v1_report.lgt` file (Subunit text stream) or the
+`subunit_v2_report.lgt` file (Subunit v2 binary stream) before running the
+tests. Files named `subunit_v1_report.txt` and `subunit_v2_report.bin` are
+created in the same directory as the object defining the tests.
 
 
 Generating Allure reports

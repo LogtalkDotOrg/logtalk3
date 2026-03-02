@@ -37,8 +37,8 @@ Tools
 * ADDED: Support to the `lgtunit` tool for exporting code coverage stats in
 Cobertura XML and LCOV formats.
 
-* ADDED: Support to the `lgtunit` tool for exporting tests results in the CTRF
-(Common Test Report Format) JSON format.
+* ADDED: Support to the `lgtunit` tool for exporting tests results in the
+Subunit and CTRF (Common Test Report Format) formats.
 
 * ADDED: New `lgtunit` tool `file_url/2` protected predicate.
 

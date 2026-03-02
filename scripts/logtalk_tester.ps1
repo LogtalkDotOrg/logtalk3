@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on February 27, 2026
+##   Last updated on March 2, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -55,7 +55,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 18.0"
+	Write-Output "$myName 18.1"
 }
 
 Function Format-Decimal {
@@ -301,6 +301,13 @@ param(
 		Add-Content -Path "$directory/ctrf_report.json" -Value "    ]"
 		Add-Content -Path "$directory/ctrf_report.json" -Value "  }"
 		Add-Content -Path "$directory/ctrf_report.json" -Value "}"
+	} elseif ($format -eq "subunit_v1") {
+		New-Item -Path . -Name "$directory/subunit_v1_report.txt" -ItemType "file" -Force > $null
+		Add-Content -Path "$directory/subunit_v1_report.txt" -Value "test: $name [$short/tests.lgt]"
+		Add-Content -Path "$directory/subunit_v1_report.txt" -Value "error: $name [$exception]"
+	} elseif ($format -eq "subunit_v2") {
+		New-Item -Path . -Name "$directory/subunit_v2_report.bin" -ItemType "file" -Force > $null
+		Add-Content -Path "$directory/subunit_v2_report.bin" -Value "subunit_v2_error:$($name):$($exception)"
 	}
 }
 
@@ -330,7 +337,7 @@ Function Write-Usage-Help() {
 	Write-Output "  -m compilation mode (default is $m)"
 	Write-Output "     (valid values are optimal, normal, debug, and all)"
 	Write-Output "  -f format for writing the test results (default is $f)"
-	Write-Output "     (valid values are default, tap, xunit, xunit_net_v2, and ctrf)"
+	Write-Output "     (valid values are default, tap, xunit, xunit_net_v2, ctrf, subunit_v1, and subunit_v2)"
 	Write-Output "  -d directory to store the test logs (default is $results)"
 	Write-Output "  -t timeout in seconds for running each test set (default is $t; i.e. disabled)"
 	Write-Output "  -j maximum number of concurrent test set processes (default is $j)"
@@ -480,6 +487,10 @@ Function Confirm-Parameters() {
 		$script:format_goal = $format_xunit_net_v2_goal
 	} elseif ($f -eq "ctrf") {
 		$script:format_goal = $format_ctrf_goal
+	} elseif ($f -eq "subunit_v1") {
+		$script:format_goal = $format_subunit_v1_goal
+	} elseif ($f -eq "subunit_v2") {
+		$script:format_goal = $format_subunit_v2_goal
 	} else {
 		Write-Error "Error! Unknown format: $f"
 		Write-Usage-Help
@@ -609,6 +620,8 @@ $format_tap_goal = "logtalk_load(lgtunit(tap_report))"
 $format_xunit_goal = "logtalk_load(lgtunit(xunit_report))"
 $format_xunit_net_v2_goal = "logtalk_load(lgtunit(xunit_net_v2_report))"
 $format_ctrf_goal = "logtalk_load(lgtunit(ctrf_report))"
+$format_subunit_v1_goal = "logtalk_load(lgtunit(subunit_v1_report))"
+$format_subunit_v2_goal = "logtalk_load(lgtunit(subunit_v2_report))"
 $format_goal = $format_default_goal
 
 $coverage_default_goal = "true"

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ctrf_output &mdash; Logtalk 3.99.0</title>
+  <title>subunit_v2_report &mdash; Logtalk 3.99.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ctrf_report" href="ctrf_report_0.html" />
-    <link rel="prev" title="coverage_report" href="coverage_report_0.html" />
+    <link rel="next" title="tap_output" href="tap_output_0.html" />
+    <link rel="prev" title="subunit_v2_output" href="subunit_v2_output_0.html" />
    
 </head>
 
@@ -133,7 +133,7 @@
 <li class="toctree-l3"><a class="reference internal" href="automation_report_0.html">automation_report</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cobertura_report_0.html">cobertura_report</a></li>
 <li class="toctree-l3"><a class="reference internal" href="coverage_report_0.html">coverage_report</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">ctrf_output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ctrf_output_0.html">ctrf_output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ctrf_report_0.html">ctrf_report</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lcov_report_0.html">lcov_report</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lgtunit_0.html">lgtunit</a></li>
@@ -142,7 +142,7 @@
 <li class="toctree-l3"><a class="reference internal" href="subunit_v1_output_0.html">subunit_v1_output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="subunit_v1_report_0.html">subunit_v1_report</a></li>
 <li class="toctree-l3"><a class="reference internal" href="subunit_v2_output_0.html">subunit_v2_output</a></li>
-<li class="toctree-l3"><a class="reference internal" href="subunit_v2_report_0.html">subunit_v2_report</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">subunit_v2_report</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tap_output_0.html">tap_output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tap_report_0.html">tap_report</a></li>
 <li class="toctree-l3"><a class="reference internal" href="xunit_net_v2_output_0.html">xunit_net_v2_output</a></li>
@@ -246,9 +246,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">ctrf_output</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">subunit_v2_report</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/ctrf_output_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/subunit_v2_report_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -256,10 +256,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="ctrf-output-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="ctrf-output">
-<h1><code class="docutils literal notranslate"><span class="pre">ctrf_output</span></code><a class="headerlink" href="#ctrf-output" title="Link to this heading"></a></h1>
-<p>Intercepts unit test execution messages and outputs a report using the CTRF JSON format to the current output stream.</p>
+  <p class="right" id="subunit-v2-report-0"><span id="index-0"></span><strong>object</strong></p>
+<section id="subunit-v2-report">
+<h1><code class="docutils literal notranslate"><span class="pre">subunit_v2_report</span></code><a class="headerlink" href="#subunit-v2-report" title="Link to this heading"></a></h1>
+<p>Intercepts unit test execution messages and generates a <code class="docutils literal notranslate"><span class="pre">subunit_v2_report.bin</span></code> file using the Subunit v2 binary streaming format in the same directory as the tests object file.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -269,7 +269,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-02-27</div>
+<div class="line"><strong>Date:</strong> 2026-03-02</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -282,13 +282,20 @@
 <div class="line-block">
 <div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0-message-hook-4"><span class="std std-ref">logtalk::message_hook/4</span></a></div>
 </div>
+<div class="line"><strong>Uses:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0"><span class="std std-ref">logtalk</span></a></div>
+<div class="line"><a class="reference internal" href="term_io_0.html#term-io-0"><span class="std std-ref">term_io</span></a></div>
+<div class="line"><a class="reference internal" href="user_0.html#user-0"><span class="std std-ref">user</span></a></div>
+</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Usage: Simply load this object before running your tests using the goal <code class="docutils literal notranslate"><span class="pre">logtalk_load(lgtunit(ctrf_output))</span></code>.</p></li>
+<li><p>Usage: Simply load this object before running your tests using the goal <code class="docutils literal notranslate"><span class="pre">logtalk_load([basic_types(loader),term_io(loader),lgtunit(subunit_v2_report)])</span></code>.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -301,12 +308,8 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
 <li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p>
-<ul>
-<li><p><a class="reference internal" href="#message-cache-1" id="id4"><code class="docutils literal notranslate"><span class="pre">message_cache_/1</span></code></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#operators" id="id5">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id4">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -319,28 +322,8 @@
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<section id="message-cache-1">
-<span id="ctrf-output-0-message-cache-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">message_cache_/1</span></code></a><a class="headerlink" href="#message-cache-1" title="Link to this heading"></a></h3>
-<p>Table of messages emitted by the lgtunit tool when running tests.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">message_cache_(Message)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">message_cache_(?callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
-</section>
-<hr class="docutils" />
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
@@ -351,8 +334,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="coverage_report_0.html" class="btn btn-neutral float-left" title="coverage_report" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="ctrf_report_0.html" class="btn btn-neutral float-right" title="ctrf_report" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="subunit_v2_output_0.html" class="btn btn-neutral float-left" title="subunit_v2_output" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tap_output_0.html" class="btn btn-neutral float-right" title="tap_output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

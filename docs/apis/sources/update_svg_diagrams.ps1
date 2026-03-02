@@ -2,7 +2,7 @@
 ##
 ##   Logtalk script for updating the HTML library and tools SVG diagrams
 ##
-##   Last updated on February 27, 2026
+##   Last updated on March 2, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -38,7 +38,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 0.30"
+	Write-Output "$myName 0.31"
 }
 
 function Write-Usage-Help() {
@@ -131,9 +131,9 @@ if ($i -eq $true) {
 }
 
 if ($env:LOGTALKPACKS -ne "") {
-	$tools_goal = "git_hash(Hash,[]), atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub), logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report)]), inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'),node_type_captions(true),zoom(true),output_directory('./'),path_url_prefixes('$env:LOGTALKUSER/',GitHub,'https://logtalk.org/library/'),output_directory('./'),path_url_prefixes('$env:LOGTALKHOME/',GitHub,'https://logtalk.org/library/'),omit_path_prefixes(['$env:LOGTALKUSER/','$env:LOGTALKHOME/','$env:USERPROFILE/']),exclude_directories(['$env:USERPROFILE/logtalk_packs/','$env:LOGTALKPACKS/'])]), halt."
+	$tools_goal = "git_hash(Hash,[]), atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub), logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),lgtunit(subunit_v1_output),lgtunit(subunit_v1_report),lgtunit(subunit_v2_output),lgtunit(subunit_v2_report)]), inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'),node_type_captions(true),zoom(true),output_directory('./'),path_url_prefixes('$env:LOGTALKUSER/',GitHub,'https://logtalk.org/library/'),output_directory('./'),path_url_prefixes('$env:LOGTALKHOME/',GitHub,'https://logtalk.org/library/'),omit_path_prefixes(['$env:LOGTALKUSER/','$env:LOGTALKHOME/','$env:USERPROFILE/']),exclude_directories(['$env:USERPROFILE/logtalk_packs/','$env:LOGTALKPACKS/'])]), halt."
 } else {
-	$tools_goal = "git_hash(Hash,[]), atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub), logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report)]), inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'),node_type_captions(true),zoom(true),output_directory('./'),path_url_prefixes('$env:LOGTALKUSER/',GitHub,'https://logtalk.org/library/'),output_directory('./'),path_url_prefixes('$env:LOGTALKHOME/',GitHub,'https://logtalk.org/library/'),omit_path_prefixes(['$env:LOGTALKUSER/','$env:LOGTALKHOME/','$env:USERPROFILE/']),exclude_directories(['$env:USERPROFILE/logtalk_packs/'])]), halt."
+	$tools_goal = "git_hash(Hash,[]), atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub), logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),lgtunit(subunit_v1_output),lgtunit(subunit_v1_report),lgtunit(subunit_v2_output),lgtunit(subunit_v2_report)]), inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'),node_type_captions(true),zoom(true),output_directory('./'),path_url_prefixes('$env:LOGTALKUSER/',GitHub,'https://logtalk.org/library/'),output_directory('./'),path_url_prefixes('$env:LOGTALKHOME/',GitHub,'https://logtalk.org/library/'),omit_path_prefixes(['$env:LOGTALKUSER/','$env:LOGTALKHOME/','$env:USERPROFILE/']),exclude_directories(['$env:USERPROFILE/logtalk_packs/'])]), halt."
 }
 
 $ports_goal = "git_hash(Hash,[]), atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub), logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), logtalk_load(ports(loader)), inheritance_diagram::rlibrary(ports, [title('Logtalk ports of third-party software'),node_type_captions(true),zoom(true),output_directory('./'),path_url_prefixes('$env:LOGTALKUSER/',GitHub,'https://logtalk.org/library/'),output_directory('./'),path_url_prefixes('$env:LOGTALKHOME/',GitHub,'https://logtalk.org/library/'),omit_path_prefixes(['$env:LOGTALKUSER/','$env:LOGTALKHOME/','$env:USERPROFILE/'])]), halt."

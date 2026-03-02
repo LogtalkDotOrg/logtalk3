@@ -114,6 +114,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#xunit-xml-format">xUnit XML format</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tap-output-format">TAP output format</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ctrf-json-format">CTRF JSON format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#subunit-formats">Subunit formats</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#generating-allure-reports">Generating Allure reports</a></li>
@@ -1907,6 +1908,28 @@ directories.</p>
 <p>When running a set of test suites as a single unified suite, the single
 CTRF report is created in the directory of the first test suite object
 in the set.</p>
+</section>
+<section id="subunit-formats">
+<h3>Subunit formats<a class="headerlink" href="#subunit-formats" title="Link to this heading"></a></h3>
+<p>To output test results in the Subunit v1 text streaming format, simply
+load the <code class="docutils literal notranslate"><span class="pre">subunit_v1_output.lgt</span></code> file before running the tests. This
+file defines an object, <code class="docutils literal notranslate"><span class="pre">subunit_v1_output</span></code>, that intercepts and
+rewrites unit test execution messages, converting them to a Subunit text
+stream.</p>
+<p>To output test results in the Subunit v2 binary streaming format, load
+the <code class="docutils literal notranslate"><span class="pre">subunit_v2_output.lgt</span></code> file before running the tests. This file
+defines an object, <code class="docutils literal notranslate"><span class="pre">subunit_v2_output</span></code>, that intercepts and rewrites
+unit test execution messages, converting them to Subunit v2 binary
+packets.</p>
+<p>These adapters write directly to the current output stream and are
+intended for piping test execution output to tools that parse Subunit
+streams.</p>
+<p>To export test results to files using Subunit streaming formats, load
+instead the <code class="docutils literal notranslate"><span class="pre">subunit_v1_report.lgt</span></code> file (Subunit text stream) or the
+<code class="docutils literal notranslate"><span class="pre">subunit_v2_report.lgt</span></code> file (Subunit v2 binary stream) before running
+the tests. Files named <code class="docutils literal notranslate"><span class="pre">subunit_v1_report.txt</span></code> and
+<code class="docutils literal notranslate"><span class="pre">subunit_v2_report.bin</span></code> are created in the same directory as the
+object defining the tests.</p>
 </section>
 </section>
 <section id="generating-allure-reports">
