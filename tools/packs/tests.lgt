@@ -574,7 +574,6 @@
 	test(packs_registries_add_3_07, true) :-
 		first_repo_commit(Commit),
 		^^file_url('test_files/logtalk_packs/repo_fixture/repo', URL),
-		writeq(URL), nl,
 		registries::add(repo, URL, [commit(Commit)]).
 
 	test(packs_packs_install_1_03, true) :-
