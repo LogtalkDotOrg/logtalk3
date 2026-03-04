@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:36:0,
+		version is 0:36:1,
 		author is 'Paulo Moura',
-		date is 2026-03-02,
+		date is 2026-03-04,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -644,13 +644,13 @@
 	:- if(os::operating_system_type(windows)).
 
 		unzip_archive(Archive, Destination) :-
-			atomic_list_concat(['tar -xf "', Archive, '" --directory "', Destination, '"'], Command),
+			atomic_list_concat(['tar --no-same-owner -xf "', Archive, '" --directory "', Destination, '"'], Command),
 			os::shell(Command).
 
 	:- else.
 
 		unzip_archive(Archive, Destination) :-
-			atomic_list_concat(['bsdtar -xf "', Archive, '" --directory "', Destination, '"'], Command),
+			atomic_list_concat(['bsdtar --no-same-owner -xf "', Archive, '" --directory "', Destination, '"'], Command),
 			os::shell(Command).
 
 	:- endif.
