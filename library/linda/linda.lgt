@@ -22,9 +22,9 @@
 :- object(linda).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-03-06,
 		comment is 'Linda tuple-space implementation for process communication. Provides a server that acts as a shared blackboard where clients can write (``out/1``), read (``rd/1``), and remove (``in/1``) tuples. Uses threaded engines for the server implementation and the sockets library for network communication.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog (requires both multi-threading and sockets support).',
@@ -631,7 +631,7 @@
 		write(Output, '.\n'),
 		flush_output(Output).
 
-	handle_request(shutdown, _ClientId, Output) :-
+	handle_request(shutdown, ClientId, Output) :-
 		!,
 		assertz(server_shutdown_),
 		% Send response first
@@ -640,7 +640,7 @@
 		flush_output(Output),
 		% Write end_of_file term to all client input streams to terminate engines
 		forall(
-			client_connection_(_, Input, _),
+			(client_connection_(OtherClientId, Input, _), OtherClientId \== ClientId),
 			(write_canonical(Input, exit), write(Input, '.\n'), flush_output(Input))
 		).
 

@@ -38,6 +38,9 @@ the input argument in the expanded path.
 
 * FIXED: The implementation of the `os::sleep/1` predicate for JIProlog.
 
+* FIXED: Bug in the `linda` library where a permission error would be thrown
+in the server when a client sent the `linda::shutdown_server/0` message.
+
 Tools
 -----
 
