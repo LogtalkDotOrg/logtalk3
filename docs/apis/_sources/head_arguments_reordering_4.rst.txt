@@ -1,17 +1,17 @@
-.. index:: single: head_arguments_reordering(Entity,Predicate,Occurrence,PrintMutatedTerm)
+.. index:: single: head_arguments_reordering(Entity,Predicate,Occurrence,PrintMutation)
 .. _head_arguments_reordering/4:
 
 .. rst-class:: right
 
 **object**
 
-``head_arguments_reordering(Entity,Predicate,Occurrence,PrintMutatedTerm)``
-===========================================================================
+``head_arguments_reordering(Entity,Predicate,Occurrence,PrintMutation)``
+========================================================================
 
 * ``Entity`` - Identifier of the entity being mutated.
 * ``Predicate`` - Predicate or non-terminal indicator selecting clauses to mutate.
 * ``Occurrence`` - 1-based mutation occurrence index to target within selected predicate clauses.
-* ``PrintMutatedTerm`` - Boolean flag to print the original and mutated term plus source location.
+* ``PrintMutation`` - Boolean flag to print the original and mutated term plus source location.
 
 
 Hook object implementing the ``head_arguments_reordering`` mutator by swapping the first two arguments in matching rule or grammar rule heads.

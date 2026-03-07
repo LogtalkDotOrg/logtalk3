@@ -7,7 +7,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(clause_order_reordering(_Entity_, _Predicate_, _Occurrence_, _PrintMutatedTerm_),
+:- object(clause_order_reordering(_Entity_, _Predicate_, _Occurrence_, _PrintMutation_),
 	implements(expanding),
 	imports(mutator_common)).
 
@@ -20,7 +20,7 @@
 			'Entity' - 'Identifier of the entity being mutated.',
 			'Predicate' - 'Predicate or non-terminal indicator selecting clauses to mutate.',
 			'Occurrence' - '1-based clause index selecting which clause is swapped with its successor (last swaps with first).',
-			'PrintMutatedTerm' - 'Boolean flag to print the original and mutated term plus source location.'
+			'PrintMutation' - 'Boolean flag to print the original and mutated term plus source location.'
 		]
 	]).
 
@@ -72,7 +72,7 @@
 		(   mutation(clauses(Clauses), Reordered),
 			next_occurrence(Occurrence),
 			Occurrence =:= _Occurrence_,
-			^^print_mutated_term(_PrintMutatedTerm_, Clauses, Reordered),
+			^^print_mutation(_PrintMutation_, Clauses, Reordered),
 			append(Reordered, Tail, Expanded)
 		;   append(Clauses, Tail, Expanded)
 		).

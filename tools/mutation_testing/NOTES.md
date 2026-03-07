@@ -134,7 +134,7 @@ Run with custom options:
 		max_mutators(100),
 		threshold(60.0),
 		verbose(true),
-        print_mutated_term(true)
+        print_mutation(true)
 	]).
 
 Run campaigns for all loaded entities from a specific library:
@@ -215,7 +215,7 @@ Options
 	The extension is inferred from `format/1` (`text` -> `.txt`, `json` -> `.json`).
 	When not absolute, the file is saved in the tests driver directory.
 
-- `print_mutated_term(Boolean)`  
+- `print_mutation(Boolean)`  
 	When `true`, prints original and mutated terms with source location for mutators. This option is only effective when `verbose(true)` (default `false`).
 
 - `tester_file_name(Tester)`  
@@ -297,7 +297,7 @@ Defining new mutators
 Define a new mutator as parametric object implementing the `expanding` protocol
 and importing the `mutator_common` category:
 
-	:- object(my_mutator(_Entity_, _Predicate_, _Occurrence_, Occurrence_, _PrintMutatedTerm_),
+	:- object(my_mutator(_Entity_, _Predicate_, _Occurrence_, Occurrence_, _PrintMutation_),
 		implements(expanding),
         imports(mutator_common)).
 

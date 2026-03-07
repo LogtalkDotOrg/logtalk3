@@ -749,15 +749,15 @@
 	execute_mutant(mutant(Entity, Predicate, Mutator, Occurrence), Options, Status) :-
 		^^option(timeout(Timeout), Options),
 		^^option(verbose(Verbose), Options),
-		^^option(print_mutated_term(PrintMutatedTerm), Options),
+		^^option(print_mutation(PrintMutation), Options),
 		entity_file(Entity, File),
-		% when both verbose(true) and print_mutated_term(true), apply the
+		% when both verbose(true) and print_mutation(true), apply the
 		% mutator hook in the main process to print original and mutated terms;
 		% reset the random seed first so that the mutation is deterministic and
 		% matches the one produced by the subprocess (which starts fresh)
-		(	Verbose == true, PrintMutatedTerm == true ->
+		(	Verbose == true, PrintMutation == true ->
 			reset_seed,
-			print_mutated_terms(Entity, Predicate, Mutator, Occurrence, File)
+			print_mutations(Entity, Predicate, Mutator, Occurrence, File)
 		;	true
 		),
 		% set up unique temp directory for this mutant
@@ -781,7 +781,7 @@
 			Status = error(subprocess_failed)
 		).
 
-	print_mutated_terms(Entity, Predicate, Mutator, Occurrence, File) :-
+	print_mutations(Entity, Predicate, Mutator, Occurrence, File) :-
 		mutator_hook(Mutator, Entity, Predicate, Occurrence, true, Hook),
 		prepare_mutator_hook(Hook),
 		load_options(LoadOptions),
@@ -791,8 +791,8 @@
 		;	catch(logtalk_load(File, RevertOptions), _, true)
 		).
 
-	mutator_hook(Mutator, Entity, Predicate, Occurrence, PrintMutatedTerm, Hook) :-
-		Hook =.. [Mutator, Entity, Predicate, Occurrence, PrintMutatedTerm].
+	mutator_hook(Mutator, Entity, Predicate, Occurrence, PrintMutation, Hook) :-
+		Hook =.. [Mutator, Entity, Predicate, Occurrence, PrintMutation].
 
 	mutant_occurrence(point(_Predicate, _Mutator, occurrence(Occurrence)), Occurrence) :-
 		integer(Occurrence),
@@ -1242,7 +1242,7 @@
 	% by default, print summary only:
 	default_option(verbose(false)).
 	% by default, don't print mutated terms:
-	default_option(print_mutated_term(false)).
+	default_option(print_mutation(false)).
 	% by default, cap each lgtunit runner mutant execution:
 	default_option(timeout(300)).
 	% by default, execute all mutants:
@@ -1272,7 +1272,7 @@
 		valid(list(atom), Mutators),
 		forall(
 			(	member(Mutator, Mutators),
-				mutator_hook(Mutator, _Entity, _Predicate, _Occurrence, _PrintMutatedTerm, Hook)
+				mutator_hook(Mutator, _Entity, _Predicate, _Occurrence, _PrintMutation, Hook)
 			),
 			conforms_to_protocol(Hook, mutator_protocol)
 		).
@@ -1282,8 +1282,8 @@
 		Threshold =< 100.0.
 	valid_option(verbose(Verbose)) :-
 		valid(boolean, Verbose).
-	valid_option(print_mutated_term(PrintMutatedTerm)) :-
-		valid(boolean, PrintMutatedTerm).
+	valid_option(print_mutation(PrintMutation)) :-
+		valid(boolean, PrintMutation).
 	valid_option(timeout(Timeout)) :-
 		number(Timeout),
 		Timeout > 0.

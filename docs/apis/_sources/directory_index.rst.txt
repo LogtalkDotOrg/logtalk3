@@ -1529,14 +1529,14 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
 
-   arithmetic_operator_replacement(Entity,Predicate,Occurrence,PrintMutatedTerm) <arithmetic_operator_replacement_4>
-   clause_order_reordering(Entity,Predicate,Occurrence,PrintMutatedTerm) <clause_order_reordering_4>
-   fail_insertion(Entity,Predicate,Occurrence,PrintMutatedTerm) <fail_insertion_4>
-   head_arguments_mutation(Entity,Predicate,Occurrence,PrintMutatedTerm) <head_arguments_mutation_4>
-   head_arguments_reordering(Entity,Predicate,Occurrence,PrintMutatedTerm) <head_arguments_reordering_4>
-   predicate_negation(Entity,Predicate,Occurrence,PrintMutatedTerm) <predicate_negation_4>
-   relational_operator_replacement(Entity,Predicate,Occurrence,PrintMutatedTerm) <relational_operator_replacement_4>
-   truth_literal_flip(Entity,Predicate,Occurrence,PrintMutatedTerm) <truth_literal_flip_4>
+   arithmetic_operator_replacement(Entity,Predicate,Occurrence,PrintMutation) <arithmetic_operator_replacement_4>
+   clause_order_reordering(Entity,Predicate,Occurrence,PrintMutation) <clause_order_reordering_4>
+   fail_insertion(Entity,Predicate,Occurrence,PrintMutation) <fail_insertion_4>
+   head_arguments_mutation(Entity,Predicate,Occurrence,PrintMutation) <head_arguments_mutation_4>
+   head_arguments_reordering(Entity,Predicate,Occurrence,PrintMutation) <head_arguments_reordering_4>
+   predicate_negation(Entity,Predicate,Occurrence,PrintMutation) <predicate_negation_4>
+   relational_operator_replacement(Entity,Predicate,Occurrence,PrintMutation) <relational_operator_replacement_4>
+   truth_literal_flip(Entity,Predicate,Occurrence,PrintMutation) <truth_literal_flip_4>
 
 ``tools/packs/``
 ----------------

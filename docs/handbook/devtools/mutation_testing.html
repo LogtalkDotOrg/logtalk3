@@ -271,7 +271,7 @@ following public predicates:</p>
     max_mutators(<span class="m">100</span>),
     threshold(<span class="m">60.0</span>),
     verbose(<span class="k">true</span>),
-    print_mutated_term(<span class="k">true</span>)
+    print_mutation(<span class="k">true</span>)
 ]).
 </pre></div>
 </div>
@@ -387,7 +387,7 @@ extension is inferred from <code class="docutils literal notranslate"><span clas
 <code class="docutils literal notranslate"><span class="pre">json</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">.json</span></code>). When not absolute, the file is saved in the
 tests driver directory.</p></li>
 <li><div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">print_mutated_term(Boolean)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">print_mutation(Boolean)</span></code></div>
 <div class="line">When <code class="docutils literal notranslate"><span class="pre">true</span></code>, prints original and mutated terms with source
 location for mutators. This option is only effective when
 <code class="docutils literal notranslate"><span class="pre">verbose(true)</span></code> (default <code class="docutils literal notranslate"><span class="pre">false</span></code>).</div>
@@ -470,7 +470,7 @@ select the same subset. When all mutants are executed, (using
 <h2>Defining new mutators<a class="headerlink" href="#defining-new-mutators" title="Link to this heading"></a></h2>
 <p>Define a new mutator as parametric object implementing the <code class="docutils literal notranslate"><span class="pre">expanding</span></code>
 protocol and importing the <code class="docutils literal notranslate"><span class="pre">mutator_common</span></code> category:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(my_mutator(<span class="nv">_Entity_</span>, <span class="nv">_Predicate_</span>, <span class="nv">_Occurrence_</span>, <span class="nv">Occurrence_</span>, <span class="nv">_PrintMutatedTerm_</span>),
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(my_mutator(<span class="nv">_Entity_</span>, <span class="nv">_Predicate_</span>, <span class="nv">_Occurrence_</span>, <span class="nv">Occurrence_</span>, <span class="nv">_PrintMutation_</span>),
     <span class="k">implements</span>(expanding),
     <span class="k">imports</span>(mutator_common)).
 

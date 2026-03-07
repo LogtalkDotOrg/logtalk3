@@ -7,7 +7,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(head_arguments_reordering(_Entity_, _Predicate_, _Occurrence_, _PrintMutatedTerm_),
+:- object(head_arguments_reordering(_Entity_, _Predicate_, _Occurrence_, _PrintMutation_),
 	implements(expanding),
 	imports(mutator_common)).
 
@@ -20,7 +20,7 @@
 			'Entity' - 'Identifier of the entity being mutated.',
 			'Predicate' - 'Predicate or non-terminal indicator selecting clauses to mutate.',
 			'Occurrence' - '1-based mutation occurrence index to target within selected predicate clauses.',
-			'PrintMutatedTerm' - 'Boolean flag to print the original and mutated term plus source location.'
+			'PrintMutation' - 'Boolean flag to print the original and mutated term plus source location.'
 		]
 	]).
 
@@ -32,7 +32,7 @@
 		mutation(Term, Mutation),
 		next_occurrence(Occurrence),
 		Occurrence =:= _Occurrence_,
-		^^print_mutated_term(_PrintMutatedTerm_, Term, Mutation).
+		^^print_mutation(_PrintMutation_, Term, Mutation).
 
 	mutation((Head :- Body), (MutatedHead :- Body)) :-
 		!,

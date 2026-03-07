@@ -170,6 +170,7 @@
 	% predicate/3 tests
 
 	test(mt_predicate_3_01, deterministic) :-
+		^^suppress_text_output,
 		mutation_testing::predicate(mt_sample, check/1, [
 			mutators([fail_insertion]),
 			sampling(count(1)),
@@ -183,6 +184,7 @@
 	% entity/2 tests
 
 	test(mt_entity_2_01, deterministic) :-
+		^^suppress_text_output,
 		mutation_testing::entity(mt_sample, [
 			mutators([fail_insertion]),
 			sampling(count(3)),
@@ -198,6 +200,7 @@
 	% library/2 tests
 
 	test(mt_library_2_01, deterministic) :-
+		^^suppress_text_output,
 		loaded_test_library(Library),
 		mutation_testing::library(Library, [
 			include_entities([this_entity_is_not_loaded]),
@@ -215,6 +218,7 @@
 	% directory/2 tests
 
 	test(mt_directory_2_01, deterministic) :-
+		^^suppress_text_output,
 		loaded_test_directory(Directory),
 		mutation_testing::directory(Directory, [
 			include_entities([this_entity_is_not_loaded]),
@@ -454,6 +458,7 @@
 		]).
 
 	test(mt_format_option_02, deterministic(os::file_exists(Report))) :-
+		^^suppress_text_output,
 		^^file_path('mutation_text_report.txt', Report),
 		mutation_testing::predicate(mt_sample, check/1, [
 			mutators([fail_insertion]),
@@ -465,6 +470,7 @@
 		]).
 
 	test(mt_format_option_03, deterministic(os::file_exists(Report))) :-
+		^^suppress_text_output,
 		^^file_path('mutation_json_report.json', Report),
 		mutation_testing::predicate(mt_sample, check/1, [
 			mutators([fail_insertion]),
@@ -490,6 +496,7 @@
 		^^assertion(Mutants \== []).
 
 	test(mt_report_file_name_option_01, deterministic(os::file_exists(Report))) :-
+		^^suppress_text_output,
 		^^file_path('mutation_absolute_report', BasePath),
 		atom_concat(BasePath, '.txt', Report),
 		mutation_testing::predicate(mt_sample, check/1, [
@@ -501,10 +508,10 @@
 			tester_file_name('subprocess_tester.lgt')
 		]).
 
-	test(mt_print_mutated_term_option_01, deterministic) :-
+	test(mt_print_mutation_option_01, deterministic) :-
 		mutation_testing::report_predicate(mt_other_sample, check/1, _, [
 			mutators([relational_operator_replacement]),
-			print_mutated_term(true),
+			print_mutation(true),
 			verbose(true),
 			tester_file_name('subprocess_tester.lgt')
 		]).

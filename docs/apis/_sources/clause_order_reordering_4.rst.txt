@@ -1,17 +1,17 @@
-.. index:: single: clause_order_reordering(Entity,Predicate,Occurrence,PrintMutatedTerm)
+.. index:: single: clause_order_reordering(Entity,Predicate,Occurrence,PrintMutation)
 .. _clause_order_reordering/4:
 
 .. rst-class:: right
 
 **object**
 
-``clause_order_reordering(Entity,Predicate,Occurrence,PrintMutatedTerm)``
-=========================================================================
+``clause_order_reordering(Entity,Predicate,Occurrence,PrintMutation)``
+======================================================================
 
 * ``Entity`` - Identifier of the entity being mutated.
 * ``Predicate`` - Predicate or non-terminal indicator selecting clauses to mutate.
 * ``Occurrence`` - 1-based clause index selecting which clause is swapped with its successor (last swaps with first).
-* ``PrintMutatedTerm`` - Boolean flag to print the original and mutated term plus source location.
+* ``PrintMutation`` - Boolean flag to print the original and mutated term plus source location.
 
 
 Hook object implementing the ``clause_order_reordering`` mutator by reordering the clauses of a non-discontiguous predicate or non-terminal definition.

@@ -44,11 +44,11 @@ Public predicates
 Protected predicates
 --------------------
 
-.. index:: print_mutated_term/3
-.. _mutator_common/0::print_mutated_term/3:
+.. index:: print_mutation/3
+.. _mutator_common/0::print_mutation/3:
 
-``print_mutated_term/3``
-^^^^^^^^^^^^^^^^^^^^^^^^
+``print_mutation/3``
+^^^^^^^^^^^^^^^^^^^^
 
 Prints a term and its mutation when ``Flag`` is true. Succeeds otherwise
 
@@ -56,9 +56,9 @@ Prints a term and its mutation when ``Flag`` is true. Succeeds otherwise
 |    ``static``
 
 | **Template:**
-|    ``print_mutated_term(Flag,Original,Mutation)``
+|    ``print_mutation(Flag,Original,Mutation)``
 | **Mode and number of proofs:**
-|    ``print_mutated_term(+boolean,@callable,@callable)`` - ``one``
+|    ``print_mutation(+boolean,@callable,@callable)`` - ``one``
 
 
 ------------

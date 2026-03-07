@@ -1,17 +1,17 @@
-.. index:: single: fail_insertion(Entity,Predicate,Occurrence,PrintMutatedTerm)
+.. index:: single: fail_insertion(Entity,Predicate,Occurrence,PrintMutation)
 .. _fail_insertion/4:
 
 .. rst-class:: right
 
 **object**
 
-``fail_insertion(Entity,Predicate,Occurrence,PrintMutatedTerm)``
-================================================================
+``fail_insertion(Entity,Predicate,Occurrence,PrintMutation)``
+=============================================================
 
 * ``Entity`` - Identifier of the entity being mutated.
 * ``Predicate`` - Predicate or non-terminal indicator selecting clauses to mutate.
 * ``Occurrence`` - 1-based mutation occurrence index to target within selected predicate clauses.
-* ``PrintMutatedTerm`` - Boolean flag to print the original and mutated term plus source location.
+* ``PrintMutation`` - Boolean flag to print the original and mutated term plus source location.
 
 
 Hook object implementing the ``fail_insertion`` mutator by inserting fail at deterministic body positions for matching predicate clauses.
