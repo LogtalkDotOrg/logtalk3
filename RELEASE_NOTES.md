@@ -25,6 +25,12 @@ RELEASE NOTES
 3.99.0 - March ??, 2026
 =======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: The portability linter warning for the `write_term/3` predicate
+`variable_names/1` option when its value is bound at runtime.
+
 Library
 -------
 

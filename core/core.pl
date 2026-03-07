@@ -27273,10 +27273,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	Boolean == false
 	).
 '$lgt_iso_spec_write_term_option'(variable_names(Pairs)) :-
-	'$lgt_is_list'(Pairs),
-	forall(
-		'$lgt_member'(Pair, Pairs),
-		(Pair = (Name = Variable), atom(Name), var(Variable))
+	(	var(Pairs) ->
+		true
+	;	'$lgt_is_list'(Pairs),
+		forall(
+			('$lgt_member'(Pair, Pairs), nonvar(Pair)),
+			(Pair = (Name = Variable), atom(Name), var(Variable))
+		)
 	).
 
 
