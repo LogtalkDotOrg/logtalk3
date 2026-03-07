@@ -1219,9 +1219,9 @@
 		prepare_mutator_hook(Hook),
 		load_options(LoadOptions),
 		revert_options(RevertOptions),
-		(   catch(logtalk_load(SourceFile, [hook(Hook)| LoadOptions]), _, fail) ->
+		(   catch(logtalk_load(SourceFile, [report(off), hook(Hook)| LoadOptions]), _, fail) ->
 			retractall(capturing_mutated_terms_),
-			catch(logtalk_load(SourceFile, RevertOptions), _, true),
+			catch(logtalk_load(SourceFile, [report(off)| RevertOptions]), _, true),
 			captured_mutated_terms_(Original, Mutation, Variables, File, StartLine-EndLine)
 		;   retractall(capturing_mutated_terms_),
 			fail
