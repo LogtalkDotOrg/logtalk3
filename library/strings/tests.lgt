@@ -105,13 +105,13 @@
 
 	% string_length/2 tests
 
-	test(string_length_2_01, true(Length == 5)) :-
+	test(string_length_2_01, deterministic(Length == 5)) :-
 		string::string_length("hello", Length).
 
-	test(string_length_2_02, true(Length == 0)) :-
+	test(string_length_2_02, deterministic(Length == 0)) :-
 		string::string_length("", Length).
 
-	test(string_length_2_03, true(Length == 11)) :-
+	test(string_length_2_03, deterministic(Length == 11)) :-
 		string::string_length("hello world", Length).
 
 	% sub_string/5 tests
@@ -136,131 +136,131 @@
 
 	% string_upper/2 tests
 
-	test(string_upper_2_01, true(Upper == "HELLO")) :-
+	test(string_upper_2_01, deterministic(Upper == "HELLO")) :-
 		string::string_upper("hello", Upper).
 
-	test(string_upper_2_02, true(Upper == "HELLO")) :-
+	test(string_upper_2_02, deterministic(Upper == "HELLO")) :-
 		string::string_upper("Hello", Upper).
 
-	test(string_upper_2_03, true(Upper == "HELLO")) :-
+	test(string_upper_2_03, deterministic(Upper == "HELLO")) :-
 		string::string_upper("HELLO", Upper).
 
-	test(string_upper_2_04, true(Upper == "")) :-
+	test(string_upper_2_04, deterministic(Upper == "")) :-
 		string::string_upper("", Upper).
 
-	test(string_upper_2_05, true(Upper == "HELLO123")) :-
+	test(string_upper_2_05, deterministic(Upper == "HELLO123")) :-
 		string::string_upper("hello123", Upper).
 
 	% string_lower/2 tests
 
-	test(string_lower_2_01, true(Lower == "hello")) :-
+	test(string_lower_2_01, deterministic(Lower == "hello")) :-
 		string::string_lower("HELLO", Lower).
 
-	test(string_lower_2_02, true(Lower == "hello")) :-
+	test(string_lower_2_02, deterministic(Lower == "hello")) :-
 		string::string_lower("Hello", Lower).
 
-	test(string_lower_2_03, true(Lower == "hello")) :-
+	test(string_lower_2_03, deterministic(Lower == "hello")) :-
 		string::string_lower("hello", Lower).
 
-	test(string_lower_2_04, true(Lower == "")) :-
+	test(string_lower_2_04, deterministic(Lower == "")) :-
 		string::string_lower("", Lower).
 
-	test(string_lower_2_05, true(Lower == "hello123")) :-
+	test(string_lower_2_05, deterministic(Lower == "hello123")) :-
 		string::string_lower("HELLO123", Lower).
 
 	% split_string/4 tests (from ECLiPSe documentation examples)
 
 	% split at every /
-	test(split_string_4_01, true(L == ["", "usr", "local", "eclipse"])) :-
+	test(split_string_4_01, deterministic(L == ["", "usr", "local", "eclipse"])) :-
 		string::split_string("/usr/local/eclipse", "/", "", L).
 
 	% split at every sequence of /
-	test(split_string_4_02, true(L == ["usr", "local", "eclipse"])) :-
+	test(split_string_4_02, deterministic(L == ["usr", "local", "eclipse"])) :-
 		string::split_string("/usr/local//eclipse/", "/", "/", L).
 
 	% split and strip padding
-	test(split_string_4_03, true(L == ["comma", "separated", "data items"])) :-
+	test(split_string_4_03, deterministic(L == ["comma", "separated", "data items"])) :-
 		string::split_string(" comma, separated , data items ", ",", " ", L).
 
 	% just strip padding
-	test(split_string_4_04, true(L == ["Hello world"])) :-
+	test(split_string_4_04, deterministic(L == ["Hello world"])) :-
 		string::split_string("   Hello world...", "", " .", L).
 
 	% empty string
-	test(split_string_4_05, true(L == [])) :-
+	test(split_string_4_05, deterministic(L == [])) :-
 		string::split_string("", ",", " ", L).
 
 	% no separators in string
-	test(split_string_4_06, true(L == ["hello"])) :-
+	test(split_string_4_06, deterministic(L == ["hello"])) :-
 		string::split_string("hello", ",", "", L).
 
 	% only separators
-	test(split_string_4_07, true(L == ["", "", ""])) :-
+	test(split_string_4_07, deterministic(L == ["", "", ""])) :-
 		string::split_string(",,", ",", "", L).
 
 	% atomics_to_string/2 tests (from ECLiPSe documentation examples)
 
-	test(atomics_to_string_2_01, true(S == "abcdef")) :-
+	test(atomics_to_string_2_01, deterministic(S == "abcdef")) :-
 		string::atomics_to_string([abc, def], S).
 
-	test(atomics_to_string_2_02, true(S == "theman is aged 20")) :-
+	test(atomics_to_string_2_02, deterministic(S == "theman is aged 20")) :-
 		string::atomics_to_string([the, man, " is aged ", 20], S).
 
-	test(atomics_to_string_2_03, true(S == "123")) :-
+	test(atomics_to_string_2_03, deterministic(S == "123")) :-
 		string::atomics_to_string([1, 2, 3], S).
 
-	test(atomics_to_string_2_04, true(S == "")) :-
+	test(atomics_to_string_2_04, deterministic(S == "")) :-
 		string::atomics_to_string([], S).
 
-	test(atomics_to_string_2_05, true(S == "hello")) :-
+	test(atomics_to_string_2_05, deterministic(S == "hello")) :-
 		string::atomics_to_string([hello], S).
 
 	% atomics_to_string/3 tests (from ECLiPSe documentation examples)
 
-	test(atomics_to_string_3_01, true(S == "usr/local/bin")) :-
+	test(atomics_to_string_3_01, deterministic(S == "usr/local/bin")) :-
 		string::atomics_to_string([usr, local, bin], "/", S).
 
-	test(atomics_to_string_3_02, true(S == "1 -> 2 -> 3")) :-
+	test(atomics_to_string_3_02, deterministic(S == "1 -> 2 -> 3")) :-
 		string::atomics_to_string([1, 2, 3], " -> ", S).
 
-	test(atomics_to_string_3_03, true(S == "")) :-
+	test(atomics_to_string_3_03, deterministic(S == "")) :-
 		string::atomics_to_string([], ",", S).
 
-	test(atomics_to_string_3_04, true(S == "hello")) :-
+	test(atomics_to_string_3_04, deterministic(S == "hello")) :-
 		string::atomics_to_string([hello], ",", S).
 
-	test(atomics_to_string_3_05, true(S == "a,b,c")) :-
+	test(atomics_to_string_3_05, deterministic(S == "a,b,c")) :-
 		string::atomics_to_string([a, b, c], ",", S).
 
 	% trim/2-3 tests
 
-	test(trim_2_01, true(Trimmed == "hello")) :-
+	test(trim_2_01, deterministic(Trimmed == "hello")) :-
 		string::trim("  hello  ", Trimmed).
 
-	test(trim_3_01, true(Trimmed == "hello")) :-
+	test(trim_3_01, deterministic(Trimmed == "hello")) :-
 		string::trim("--hello--", "-", Trimmed).
 
-	test(trim_3_02, true(Trimmed == "hello")) :-
+	test(trim_3_02, deterministic(Trimmed == "hello")) :-
 		string::trim("-.-hello-.-", "-.", Trimmed).
 
 	% trim_left/2-3 tests
 
-	test(trim_left_2_01, true(Trimmed == "hello  ")) :-
+	test(trim_left_2_01, deterministic(Trimmed == "hello  ")) :-
 		string::trim_left("  hello  ", Trimmed).
 
-	test(trim_left_3_01, true(Trimmed == "hello--")) :-
+	test(trim_left_3_01, deterministic(Trimmed == "hello--")) :-
 		string::trim_left("--hello--", "-", Trimmed).
 
-	test(trim_left_3_02, true(Trimmed == "hello-.-")) :-
+	test(trim_left_3_02, deterministic(Trimmed == "hello-.-")) :-
 		string::trim_left("-.-hello-.-", "-.", Trimmed).
 
 	% trim_right/2-3 tests
 
-	test(trim_right_2_01, true(Trimmed == "  hello")) :-
+	test(trim_right_2_01, deterministic(Trimmed == "  hello")) :-
 		string::trim_right("  hello  ", Trimmed).
 
-	test(trim_right_3_01, true(Trimmed == "--hello")) :-
+	test(trim_right_3_01, deterministic(Trimmed == "--hello")) :-
 		string::trim_right("--hello--", "-", Trimmed).
 
-	test(trim_right_3_02, true(Trimmed == "-.-hello")) :-
+	test(trim_right_3_02, deterministic(Trimmed == "-.-hello")) :-
 		string::trim_right("-.-hello-.-", "-.", Trimmed).

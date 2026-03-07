@@ -22,9 +22,9 @@
 :- object(string(_Representation_)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-03,
+		date is 2026-03-07,
 		comment is 'String manipulation predicates supporting different string representations.',
 		parameters is [
 			'Representation' - 'String representation. Valid values are ``atom``, ``codes``, and ``chars``.'
@@ -329,31 +329,31 @@
 	% atomics_to_string/2
 
 	atomics_to_string(List, String) :-
-		atomics_to_string(_Representation_, List, String).
+		atomics_to_string_2(_Representation_, List, String).
 
-	atomics_to_string(atom, List, Atom) :-
+	atomics_to_string_2(atom, List, Atom) :-
 		atomics_to_codes(List, Codes),
 		atom_codes(Atom, Codes).
-	atomics_to_string(chars, List, Chars) :-
+	atomics_to_string_2(chars, List, Chars) :-
 		atomics_to_codes(List, Codes),
 		codes_to_chars(Codes, Chars).
-	atomics_to_string(codes, List, Codes) :-
+	atomics_to_string_2(codes, List, Codes) :-
 		atomics_to_codes(List, Codes).
 
 	% atomics_to_string/3
 
 	atomics_to_string(List, Separator, String) :-
-		atomics_to_string(_Representation_, List, Separator, String).
+		atomics_to_string_3(_Representation_, List, Separator, String).
 
-	atomics_to_string(atom, List, Separator, Atom) :-
+	atomics_to_string_3(atom, List, Separator, Atom) :-
 		atom_codes(Separator, SeparatorCodes),
 		atomics_to_codes_with_glue(List, SeparatorCodes, Codes),
 		atom_codes(Atom, Codes).
-	atomics_to_string(chars, List, Separator, Chars) :-
+	atomics_to_string_3(chars, List, Separator, Chars) :-
 		chars_to_codes(Separator, SeparatorCodes),
 		atomics_to_codes_with_glue(List, SeparatorCodes, Codes),
 		codes_to_chars(Codes, Chars).
-	atomics_to_string(codes, List, Separator, Codes) :-
+	atomics_to_string_3(codes, List, Separator, Codes) :-
 		atomics_to_codes_with_glue(List, Separator, Codes).
 
 	% auxiliary predicates
@@ -404,12 +404,13 @@
 	% Convert a list of atomics to codes with glue between elements
 	atomics_to_codes_with_glue([], _, []).
 	atomics_to_codes_with_glue([Atomic], _, Codes) :-
+		!,
 		atomic_to_codes(Atomic, Codes).
 	atomics_to_codes_with_glue([Atomic1, Atomic2| Atomics], SeparatorCodes, Codes) :-
 		atomic_to_codes(Atomic1, Codes1),
 		append(Codes1, SeparatorCodes, Codes1WithSeparator),
-		atomics_to_codes_with_glue([Atomic2| Atomics], SeparatorCodes, RestCodes),
-		append(Codes1WithSeparator, RestCodes, Codes).
+		append(Codes1WithSeparator, RestCodes, Codes),
+		atomics_to_codes_with_glue([Atomic2| Atomics], SeparatorCodes, RestCodes).
 
 	% Convert a single atomic to codes
 	atomic_to_codes(Atomic, Codes) :-

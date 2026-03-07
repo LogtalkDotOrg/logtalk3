@@ -27,6 +27,7 @@ Mutation testing tool.
 |    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
 | **Uses:**
 |    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`json(ObjectRepresentation,PairRepresentation,StringRepresentation) <json/3>`
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
 |    :ref:`os <os/0>`
@@ -554,7 +555,7 @@ Captured original and mutated terms, variable names, and source location for one
 |    ``dynamic``
 
 | **Mode and number of proofs:**
-|    ``captured_mutated_terms_(-callable,-callable,-list,-atom,-integer)`` - ``zero_or_one``
+|    ``captured_mutated_terms_(-callable,-callable,-list,-atom,-compound)`` - ``zero_or_one``
 
 
 ------------

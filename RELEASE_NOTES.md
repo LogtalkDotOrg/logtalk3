@@ -47,6 +47,9 @@ the input argument in the expanded path.
 * FIXED: Bug in the `linda` library where a permission error would be thrown
 in the server when a client sent the `linda::shutdown_server/0` message.
 
+* FIXED: Non-determinism bug in the `strings` library `atomics_to_string/3`
+predicate. Thanks to Felix Weitkämper for the bug report.
+
 Tools
 -----
 
