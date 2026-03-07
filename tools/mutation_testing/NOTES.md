@@ -134,6 +134,15 @@ Run campaigns for all loaded entities from a specific directory:
 
 	| ?- mutation_testing::directory('/path/to/sources').
 
+Pretty-print a report term using the default text format:
+
+	| ?- mutation_testing::report_entity(my_object, Report, []),
+	     mutation_testing::format_report(Report).
+
+Suppress report formatting output for campaign predicates:
+
+	| ?- mutation_testing::entity(my_object, [format(none)]).
+
 For the built-in mutators listed above, mutation apply/revert is handled automatically:
 
 	| ?- mutation_testing::entity(my_object, [mutators([fail_insertion])]).
@@ -154,6 +163,7 @@ Limitations
 - Built-in mutation apply/revert currently targets loaded source entities (objects/categories), not protocols.
 - Nested `lgtunit` runs may affect per-mutant `killed` vs `survived` status classification.
 - Reports are currently in-memory terms and messages only (no built-in persistent report export).
+- Report terms can be pretty-printed using the `format_report/1-3` predicates.
 
 
 Options
@@ -189,6 +199,9 @@ Options
 - `verbose(Boolean)`  
 	Print per-mutant results (default `false`).
 
+- `format(Format)`
+	Controls report formatting output for campaign predicates (`none` or `text`; default `text`).
+
 - `print_mutated_term(Boolean)`  
 	When `true`, prints original and mutated terms with source location for mutators. This option is only effective when `verbose(true)` (default `false`).
 
@@ -210,6 +223,11 @@ executed** in a mutation campaign. It is a post-generation selection step:
 
 Because of this design, `sampling(...)` affects campaign execution goals such
 as `entity/2`, `library/2`, `directory/2`, and `report_entity/3`.
+
+The `format(Format)` option affects only campaign predicates that execute and
+report in one step (`entity/2`, `predicate/3`, `library/2`, `directory/2`).
+It does not affect the `*_mutants` predicates or the `report_*` predicates,
+which only compute and return terms.
 
 The `mutants/2-3` predicates are still useful for inspecting the generated
 deterministic mutant list itself; they are not execution/reporting predicates.

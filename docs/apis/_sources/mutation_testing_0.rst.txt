@@ -15,7 +15,7 @@ Mutation testing tool.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-03-06
+| **Date:** 2026-03-07
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -274,6 +274,63 @@ Runs mutation testing for loaded entities from a directory and returns structure
 
 ------------
 
+.. index:: format_report/3
+.. _mutation_testing/0::format_report/3:
+
+``format_report/3``
+^^^^^^^^^^^^^^^^^^^
+
+Formats a mutation testing report term to the given stream using the given format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``format_report(Stream,Format,Report)``
+| **Mode and number of proofs:**
+|    ``format_report(+stream_or_alias,+atom,+compound)`` - ``one``
+
+
+------------
+
+.. index:: format_report/2
+.. _mutation_testing/0::format_report/2:
+
+``format_report/2``
+^^^^^^^^^^^^^^^^^^^
+
+Formats a mutation testing report term to the current output stream using the given format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``format_report(Format,Report)``
+| **Mode and number of proofs:**
+|    ``format_report(+atom,+compound)`` - ``one``
+
+
+------------
+
+.. index:: format_report/1
+.. _mutation_testing/0::format_report/1:
+
+``format_report/1``
+^^^^^^^^^^^^^^^^^^^
+
+Formats a mutation testing report term to the current output stream using the text format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``format_report(Report)``
+| **Mode and number of proofs:**
+|    ``format_report(+compound)`` - ``one``
+
+
+------------
+
 .. index:: entity_mutants/2
 .. _mutation_testing/0::entity_mutants/2:
 
@@ -464,6 +521,40 @@ True iff we are currently probing for mutations (suppresses printing).
 
 | **Mode and number of proofs:**
 |    ``probing_`` - ``zero_or_one``
+
+
+------------
+
+.. index:: capturing_mutated_terms_/0
+.. _mutation_testing/0::capturing_mutated_terms_/0:
+
+``capturing_mutated_terms_/0``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff we are capturing original and mutated terms while formatting reports.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``capturing_mutated_terms_`` - ``zero_or_one``
+
+
+------------
+
+.. index:: captured_mutated_terms_/5
+.. _mutation_testing/0::captured_mutated_terms_/5:
+
+``captured_mutated_terms_/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Captured original and mutated terms, variable names, and source location for one mutant.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``captured_mutated_terms_(-callable,-callable,-list,-atom,-integer)`` - ``zero_or_one``
 
 
 ------------

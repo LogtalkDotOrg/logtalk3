@@ -273,6 +273,15 @@ the defaults don’t work in your particular case.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mutation_testing<span class="o">::</span>directory(<span class="s">&#39;/path/to/sources&#39;</span>).
 </pre></div>
 </div>
+<p>Pretty-print a report term using the default text format:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mutation_testing<span class="o">::</span>report_entity(my_object, <span class="nv">Report</span>, []),
+     mutation_testing<span class="o">::</span>format_report(<span class="nv">Report</span>).
+</pre></div>
+</div>
+<p>Suppress report formatting output for campaign predicates:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mutation_testing<span class="o">::</span>entity(my_object, [format(none)]).
+</pre></div>
+</div>
 <p>For the built-in mutators listed above, mutation apply/revert is handled
 automatically:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mutation_testing<span class="o">::</span>entity(my_object, [mutators([fail_insertion])]).
@@ -301,6 +310,8 @@ entities (objects/categories), not protocols.</p></li>
 <code class="docutils literal notranslate"><span class="pre">survived</span></code> status classification.</p></li>
 <li><p>Reports are currently in-memory terms and messages only (no built-in
 persistent report export).</p></li>
+<li><p>Report terms can be pretty-printed using the <code class="docutils literal notranslate"><span class="pre">format_report/1-3</span></code>
+predicates.</p></li>
 </ul>
 </section>
 <section id="options">
@@ -364,6 +375,8 @@ default <code class="docutils literal notranslate"><span class="pre">300</span><
 <div class="line">Print per-mutant results (default <code class="docutils literal notranslate"><span class="pre">false</span></code>).</div>
 </div>
 </li>
+<li><p><code class="docutils literal notranslate"><span class="pre">format(Format)</span></code> Controls report formatting output for campaign
+predicates (<code class="docutils literal notranslate"><span class="pre">none</span></code> or <code class="docutils literal notranslate"><span class="pre">text</span></code>; default <code class="docutils literal notranslate"><span class="pre">text</span></code>).</p></li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">print_mutated_term(Boolean)</span></code></div>
 <div class="line">When <code class="docutils literal notranslate"><span class="pre">true</span></code>, prints original and mutated terms with source
@@ -399,6 +412,11 @@ entities/predicates/mutators.</p></li>
 <p>Because of this design, <code class="docutils literal notranslate"><span class="pre">sampling(...)</span></code> affects campaign execution
 goals such as <code class="docutils literal notranslate"><span class="pre">entity/2</span></code>, <code class="docutils literal notranslate"><span class="pre">library/2</span></code>, <code class="docutils literal notranslate"><span class="pre">directory/2</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">report_entity/3</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">format(Format)</span></code> option affects only campaign predicates that
+execute and report in one step (<code class="docutils literal notranslate"><span class="pre">entity/2</span></code>, <code class="docutils literal notranslate"><span class="pre">predicate/3</span></code>,
+<code class="docutils literal notranslate"><span class="pre">library/2</span></code>, <code class="docutils literal notranslate"><span class="pre">directory/2</span></code>). It does not affect the <code class="docutils literal notranslate"><span class="pre">*_mutants</span></code>
+predicates or the <code class="docutils literal notranslate"><span class="pre">report_*</span></code> predicates, which only compute and return
+terms.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">mutants/2-3</span></code> predicates are still useful for inspecting the
 generated deterministic mutant list itself; they are not
 execution/reporting predicates.</p>

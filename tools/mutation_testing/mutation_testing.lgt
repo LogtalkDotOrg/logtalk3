@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-06,
+		date is 2026-03-07,
 		comment is 'Mutation testing tool.'
 	]).
 
@@ -113,6 +113,27 @@
 		argnames is ['Directory', 'Report', 'Options']
 	]).
 
+	:- public(format_report/3).
+	:- mode(format_report(+stream_or_alias, +atom, +compound), one).
+	:- info(format_report/3, [
+		comment is 'Formats a mutation testing report term to the given stream using the given format.',
+		argnames is ['Stream', 'Format', 'Report']
+	]).
+
+	:- public(format_report/2).
+	:- mode(format_report(+atom, +compound), one).
+	:- info(format_report/2, [
+		comment is 'Formats a mutation testing report term to the current output stream using the given format.',
+		argnames is ['Format', 'Report']
+	]).
+
+	:- public(format_report/1).
+	:- mode(format_report(+compound), one).
+	:- info(format_report/1, [
+		comment is 'Formats a mutation testing report term to the current output stream using the text format.',
+		argnames is ['Report']
+	]).
+
 	:- public(entity_mutants/2).
 	:- mode(entity_mutants(+entity_identifier, -list(compound)), zero_or_one).
 	:- info(entity_mutants/2, [
@@ -183,6 +204,20 @@
 		comment is 'True iff we are currently probing for mutations (suppresses printing).'
 	]).
 
+	:- private(capturing_mutated_terms_/0).
+	:- dynamic(capturing_mutated_terms_/0).
+	:- mode(capturing_mutated_terms_, zero_or_one).
+	:- info(capturing_mutated_terms_/0, [
+		comment is 'True iff we are capturing original and mutated terms while formatting reports.'
+	]).
+
+	:- private(captured_mutated_terms_/5).
+	:- dynamic(captured_mutated_terms_/5).
+	:- mode(captured_mutated_terms_(-callable, -callable, -list, -atom, -integer), zero_or_one).
+	:- info(captured_mutated_terms_/5, [
+		comment is 'Captured original and mutated terms, variable names, and source location for one mutant.'
+	]).
+
 	:- uses(list, [
 		append/3, length/2, member/2, reverse/2, take/3
 	]).
@@ -214,7 +249,15 @@
 	logtalk::message_hook(mutated_term(_Mutator, _Original, _Mutation, _Variables, _File, _Line), _, mutation_testing, _) :-
 		retractall(probe_mutation_happened_),
 		assertz(probe_mutation_happened_),
-		probing_.
+		(   probing_ ->
+			true
+		;   false
+		).
+
+	logtalk::message_hook(mutated_term(_Mutator, Original, Mutation, Variables, File, Line), _, mutation_testing, _) :-
+		capturing_mutated_terms_,
+		retractall(captured_mutated_terms_(_, _, _, _, _)),
+		assertz(captured_mutated_terms_(Original, Mutation, Variables, File, Line)).
 
 	library(Library) :-
 		library(Library, []).
@@ -245,7 +288,7 @@
 
 	entity(Entity, UserOptions) :-
 		report_entity(Entity, Report, UserOptions),
-		print_report(Report),
+		maybe_format_report(Report, UserOptions),
 		Report = report(_, summary(_, _, _, _, _, _, _, _, _, Passed), _),
 		Passed == true,
 		!.
@@ -255,7 +298,7 @@
 
 	predicate(Entity, Predicate, UserOptions) :-
 		report_predicate(Entity, Predicate, Report, UserOptions),
-		print_report(Report),
+		maybe_format_report(Report, UserOptions),
 		Report = report(_, summary(_, _, _, _, _, _, _, _, _, Passed), _),
 		Passed == true,
 		!.
@@ -361,12 +404,20 @@
 	run_entities([], _, Passed, Passed).
 	run_entities([Entity| Entities], Options, Passed0, Passed) :-
 		report_entity(Entity, Report, Options),
-		print_report(Report),
+		maybe_format_report(Report, Options),
 		(   Report = report(_, summary(_, _, _, _, _, _, _, _, _, true), _) ->
 			Passed1 = Passed0
 		;   Passed1 = false
 		),
 		run_entities(Entities, Options, Passed1, Passed).
+
+	maybe_format_report(Report, UserOptions) :-
+		^^merge_options(UserOptions, Options),
+		^^option(format(Format), Options),
+		(   Format == none ->
+			true
+		;   format_report(Format, Report)
+		).
 
 	loaded_entities(Entities) :-
 		findall(Entity, (current_object(Entity), atom(Entity)), Objects),
@@ -861,14 +912,101 @@
 		Killed0, Survived0, Untested0, Timeout0, NoCoverage0, Errors) :-
 		Errors is Errors0 + 1.
 
-	print_report(report(Entity, summary(Total, Killed, Survived, Untested, Timeout, NoCoverage, Errors, Score, Threshold, Passed), _)) :-
-		print_message(comment, mutation_testing, campaign_started(Entity)),
-		print_message(comment, mutation_testing, summary(Entity, Total, Killed, Survived, Untested, Timeout, NoCoverage, Errors, Score, Threshold)),
+	format_report(Report) :-
+		format_report(text, Report).
+
+	format_report(Format, Report) :-
+		current_output(Stream),
+		format_report(Stream, Format, Report).
+
+	format_report(Stream, text, report(Container, Reports)) :-
+		valid(list, Reports),
+		!,
+		write(Stream, 'Mutation testing report for '),
+		writeq(Stream, Container),
+		nl(Stream),
+		nl(Stream),
+		format_reports(Reports, Stream).
+	format_report(Stream, text, report(Entity, summary(Total, Killed, Survived, Untested, Timeout, NoCoverage, Errors, Score, Threshold, Passed), Results)) :-
+		write(Stream, 'Mutation testing report for '),
+		writeq(Stream, Entity),
+		nl(Stream),
+		write(Stream, 'Run result: '),
 		(   Passed == true ->
-			print_message(comment, mutation_testing, threshold_passed(Entity, Score, Threshold))
-		;   print_message(error, mutation_testing, threshold_failed(Entity, Score, Threshold))
+			write(Stream, 'passed')
+		;   write(Stream, 'failed')
 		),
-		print_message(comment, mutation_testing, campaign_ended(Entity)).
+		nl(Stream),
+		write(Stream, 'Summary: total='), write(Stream, Total),
+		write(Stream, ', killed='), write(Stream, Killed),
+		write(Stream, ', survived='), write(Stream, Survived),
+		write(Stream, ', untested='), write(Stream, Untested),
+		write(Stream, ', timeout='), write(Stream, Timeout),
+		write(Stream, ', no_coverage='), write(Stream, NoCoverage),
+		write(Stream, ', errors='), write(Stream, Errors),
+		nl(Stream),
+		write(Stream, 'Score: '), write(Stream, Score),
+		write(Stream, ' (threshold '), write(Stream, Threshold), write(Stream, ')'),
+		nl(Stream),
+		write(Stream, 'Mutants:'),
+		nl(Stream),
+		format_mutant_results(Results, Stream),
+		nl(Stream).
+
+	format_reports([], _Stream).
+	format_reports([Report| Reports], Stream) :-
+		format_report(Stream, text, Report),
+		format_reports(Reports, Stream).
+
+	format_mutant_results([], Stream) :-
+		write(Stream, '  (none)'),
+		nl(Stream).
+	format_mutant_results([mutant_result(Index, Mutant, Status)| Results], Stream) :-
+		write(Stream, '  #'), write(Stream, Index), write(Stream, ' '),
+		writeq(Stream, Mutant), write(Stream, ' => '), writeq(Stream, Status),
+		nl(Stream),
+		format_mutant_terms(Stream, Mutant),
+		format_mutant_results_nonempty(Results, Stream).
+
+	format_mutant_results_nonempty([], _).
+	format_mutant_results_nonempty([mutant_result(Index, Mutant, Status)| Results], Stream) :-
+		write(Stream, '  #'), write(Stream, Index), write(Stream, ' '),
+		writeq(Stream, Mutant), write(Stream, ' => '), writeq(Stream, Status),
+		nl(Stream),
+		format_mutant_terms(Stream, Mutant),
+		format_mutant_results_nonempty(Results, Stream).
+
+	format_mutant_terms(Stream, Mutant) :-
+		(   mutant_terms(Mutant, Original, Mutation, Variables, File, Line) ->
+			write(Stream, '     original: '),
+			write_term(Stream, Original, [quoted(true), variable_names(Variables)]),
+			nl(Stream),
+			write(Stream, '     mutation: '),
+			write_term(Stream, Mutation, [quoted(true), variable_names(Variables)]),
+			nl(Stream),
+			write(Stream, '     location: '),
+			writeq(Stream, File),
+			write(Stream, ':'),
+			write(Stream, Line),
+			nl(Stream)
+		;   true
+		).
+
+	mutant_terms(mutant(Entity, Predicate, Mutator, Occurrence), Original, Mutation, Variables, File, Line) :-
+		entity_file(Entity, SourceFile),
+		retractall(captured_mutated_terms_(_, _, _, _, _)),
+		assertz(capturing_mutated_terms_),
+		mutator_hook(Mutator, Entity, Predicate, Occurrence, true, Hook),
+		prepare_mutator_hook(Hook),
+		load_options(LoadOptions),
+		revert_options(RevertOptions),
+		(   catch(logtalk_load(SourceFile, [hook(Hook)| LoadOptions]), _, fail) ->
+			retractall(capturing_mutated_terms_),
+			catch(logtalk_load(SourceFile, RevertOptions), _, true),
+			captured_mutated_terms_(Original, Mutation, Variables, File, Line)
+		;   retractall(capturing_mutated_terms_),
+			fail
+		).
 
 	% by default, include all loaded entities:
 	default_option(include_entities([])).
@@ -892,6 +1030,8 @@
 	default_option(sampling(all)).
 	% default pseudo-random generator seed:
 	default_option(seed(123456789)).
+	% by default, print text report output:
+	default_option(format(text)).
 	% default tester file name
 	default_option(tester_file_name('tester.lgt')).
 
@@ -936,6 +1076,8 @@
 		Rate =< 1.0.
 	valid_option(seed(Seed)) :-
 		integer(Seed).
+	valid_option(format(Format)) :-
+		member(Format, [none, text]).
 	valid_option(tester_file_name(Tester)) :-
 		atom(Tester).
 	valid_option(tester_directory(Directory)) :-

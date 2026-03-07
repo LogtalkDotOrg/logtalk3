@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-06,
+		date is 2026-03-07,
 		comment is 'Unit tests for the "mutation_testing" tool.'
 	]).
 
@@ -33,6 +33,9 @@
 	cover(head_arguments_mutation(_, _, _, _)).
 	cover(head_arguments_reordering(_, _, _, _)).
 	cover(clause_order_reordering(_, _, _, _)).
+
+	cleanup :-
+		^^clean_file('mutation_testing_report.txt').
 
 	% predicate_mutants/3 tests
 
@@ -437,6 +440,28 @@
 			verbose(true),
 			tester_file_name('subprocess_tester.lgt')
 		]).
+
+	test(mt_format_option_01, deterministic) :-
+		mutation_testing::predicate(mt_sample, check/1, [
+			mutators([fail_insertion]),
+			sampling(count(1)),
+			threshold(0.0),
+			format(none),
+			tester_file_name('subprocess_tester.lgt')
+		]).
+
+	test(mt_format_option_02, deterministic(os::file_exists(Report))) :-
+		^^file_path('mutation_testing_report.txt', Report),
+		mutation_testing::report_predicate(mt_sample, check/1, ReportTerm, [
+			mutators([fail_insertion]),
+			sampling(count(1)),
+			threshold(0.0),
+			format(none),
+			tester_file_name('subprocess_tester.lgt')
+		]),
+		open(Report, write, Stream),
+		mutation_testing::format_report(Stream, text, ReportTerm),
+		close(Stream).
 
 	test(mt_print_mutated_term_option_01, deterministic) :-
 		mutation_testing::report_predicate(mt_other_sample, check/1, _, [
