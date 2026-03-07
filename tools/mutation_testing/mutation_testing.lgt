@@ -406,16 +406,6 @@
 		report_for_predicates(Entity, Predicates, Options, Report),
 		reports_for_entities(Entities, Options, Reports).
 
-	run_entities([], _, Passed, Passed).
-	run_entities([Entity| Entities], Options, Passed0, Passed) :-
-		report_entity(Entity, Report, Options),
-		maybe_format_report(Report, Options),
-		(   Report = report(_, summary(_, _, _, _, _, _, _, _, _, true), _) ->
-			Passed1 = Passed0
-		;   Passed1 = false
-		),
-		run_entities(Entities, Options, Passed1, Passed).
-
 	reports_passed([], Passed, Passed).
 	reports_passed([report(_, summary(_, _, _, _, _, _, _, _, _, true), _)| Reports], Passed0, Passed) :-
 		reports_passed(Reports, Passed0, Passed).
@@ -478,7 +468,7 @@
 		close(Stream).
 
 	loaded_entities(Entities) :-
-		findall(Entity, (current_object(Entity), atom(Entity)), Objects),
+		findall(Entity, (current_object(Entity), \+ extends_object(Entity, lgtunit)), Objects),
 		findall(Entity, (current_category(Entity), atom(Entity)), Categories),
 		append(Objects, Categories, Unsorted),
 		sort(Unsorted, Entities).
@@ -542,6 +532,7 @@
 	entity_file(Entity, File) :-
 		category_property(Entity, file(File)).
 	entity_file(Entity, File) :-
+		atom(Entity),
 		protocol_property(Entity, file(File)).
 
 	apply_entity_filters(Entities0, Options, Entities) :-
