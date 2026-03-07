@@ -41,7 +41,7 @@ Features
   plus ``seed/1``).
 - Mutation score computation (killed versus survived mutants).
 - Threshold gating suitable for CI/CD checks.
-- Source-level mutation apply/revert for built-in mutators.
+- Exporting of mutation campaign reports in plain text and JSON formats.
 
 Default mutators
 ----------------
@@ -92,6 +92,16 @@ Both the name of the tests driver file and its directory can be set
 using the ``tester_file_name/1`` and ``tester_directory/1`` options if
 the defaults don't work in your particular case.
 
+In this tool documentation, **campaign predicates** refers to the
+following public predicates:
+
+- ``entity/1-2``
+- ``predicate/2-3``
+- ``library/1-2``
+- ``directory/1-2``
+
+These predicates run mutants and report results in one step.
+
 Run mutation testing for one entity using defaults:
 
 ::
@@ -115,7 +125,8 @@ Run with custom options:
        seed(20260303),
        max_mutators(100),
        threshold(60.0),
-       verbose(true)
+       verbose(true),
+       print_mutated_term(true)
    ]).
 
 Run campaigns for all loaded entities from a specific library:
@@ -143,13 +154,6 @@ Suppress report formatting output for campaign predicates:
 
    | ?- mutation_testing::entity(my_object, [format(none)]).
 
-For the built-in mutators listed above, mutation apply/revert is handled
-automatically:
-
-::
-
-   | ?- mutation_testing::entity(my_object, [mutators([fail_insertion])]).
-
 Execution uses ``lgtunit`` test sets only. When using
 ``timeout(Timeout)``, timeout handling is best-effort.
 
@@ -172,10 +176,6 @@ Limitations
   entities (objects/categories), not protocols.
 - Nested ``lgtunit`` runs may affect per-mutant ``killed`` vs
   ``survived`` status classification.
-- Reports are currently in-memory terms and messages only (no built-in
-  persistent report export).
-- Report terms can be pretty-printed using the ``format_report/1-3``
-  predicates.
 
 Options
 -------
@@ -218,8 +218,17 @@ Options
 - | ``verbose(Boolean)``
   | Print per-mutant results (default ``false``).
 
-- ``format(Format)`` Controls report formatting output for campaign
-  predicates (``none`` or ``text``; default ``text``).
+- ``format(Format)`` Controls report formatting output (``none``,
+  ``text``, or ``json``; default ``text``). When set to ``text`` or
+  ``json``, a report file is generated automatically for campaign
+  predicates. The ``json`` format implements the Stryker Mutation
+  Testing Framework report format: https://stryker-mutator.io/
+
+- ``report_file_name(FileName)`` Report output file base name or path
+  without extension (atom; default ``mutation_test_report``). The
+  extension is inferred from ``format/1`` (``text`` -> ``.txt``,
+  ``json`` -> ``.json``). When not absolute, the file is saved in the
+  tests driver directory.
 
 - | ``print_mutated_term(Boolean)``
   | When ``true``, prints original and mutated terms with source
@@ -246,15 +255,22 @@ selection step:
 2. Apply ``sampling(...)`` to select a subset (or all).
 3. Execute only the selected mutants.
 
-Because of this design, ``sampling(...)`` affects campaign execution
-goals such as ``entity/2``, ``library/2``, ``directory/2``, and
-``report_entity/3``.
+Because of this design, ``sampling(...)`` affects campaign predicates
+(``entity/2``, ``predicate/3``, ``library/2``, ``directory/2``).
 
 The ``format(Format)`` option affects only campaign predicates that
 execute and report in one step (``entity/2``, ``predicate/3``,
 ``library/2``, ``directory/2``). It does not affect the ``*_mutants``
 predicates or the ``report_*`` predicates, which only compute and return
 terms.
+
+For campaign predicates, a report file is written automatically unless
+``format(none)`` is used.
+
+For ``report_library/3`` and ``report_directory/3``, call
+``format_report/2-3`` explicitly if you want to persist the computed
+report term. A single ``format_report(..., Report)`` call always
+generates a single output document (including JSON).
 
 The ``mutants/2-3`` predicates are still useful for inspecting the
 generated deterministic mutant list itself; they are not

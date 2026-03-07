@@ -12,6 +12,7 @@
 	:- initialization((
 		set_logtalk_flag(report, warnings),
 		logtalk_load(basic_types(loader)),
+		logtalk_load(json(loader)),
 		logtalk_load(mutations(loader)),
 		logtalk_load(options(loader)),
 		logtalk_load(os(loader)),

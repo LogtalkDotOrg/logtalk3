@@ -35,7 +35,10 @@
 	cover(clause_order_reordering(_, _, _, _)).
 
 	cleanup :-
-		^^clean_file('mutation_testing_report.txt').
+		^^clean_file('mutation_test_report.txt'),
+		^^clean_file('mutation_text_report.txt'),
+		^^clean_file('mutation_json_report.json'),
+		^^clean_file('mutation_absolute_report.txt').
 
 	% predicate_mutants/3 tests
 
@@ -451,17 +454,52 @@
 		]).
 
 	test(mt_format_option_02, deterministic(os::file_exists(Report))) :-
-		^^file_path('mutation_testing_report.txt', Report),
-		mutation_testing::report_predicate(mt_sample, check/1, ReportTerm, [
+		^^file_path('mutation_text_report.txt', Report),
+		mutation_testing::predicate(mt_sample, check/1, [
 			mutators([fail_insertion]),
 			sampling(count(1)),
 			threshold(0.0),
-			format(none),
+			format(text),
+			report_file_name('mutation_text_report'),
+			tester_file_name('subprocess_tester.lgt')
+		]).
+
+	test(mt_format_option_03, deterministic(os::file_exists(Report))) :-
+		^^file_path('mutation_json_report.json', Report),
+		mutation_testing::predicate(mt_sample, check/1, [
+			mutators([fail_insertion]),
+			sampling(count(1)),
+			threshold(60.0),
+			format(json),
+			report_file_name('mutation_json_report'),
 			tester_file_name('subprocess_tester.lgt')
 		]),
-		open(Report, write, Stream),
-		mutation_testing::format_report(Stream, text, ReportTerm),
-		close(Stream).
+		json(list, dash, atom)::parse(file(Report), JSON),
+		JSON = json(Pairs),
+		memberchk('schemaVersion'-_, Pairs),
+		memberchk('thresholds'-json(Thresholds), Pairs),
+		memberchk('high'-_, Thresholds),
+		memberchk('low'-_, Thresholds),
+		memberchk('files'-json(FilePairs), Pairs),
+		FilePairs = [File-FileReport| _],
+		^^assertion(File \== ''),
+		FileReport = json(FileReportPairs),
+		memberchk('language'-_, FileReportPairs),
+		memberchk('source'-_, FileReportPairs),
+		memberchk('mutants'-Mutants, FileReportPairs),
+		^^assertion(Mutants \== []).
+
+	test(mt_report_file_name_option_01, deterministic(os::file_exists(Report))) :-
+		^^file_path('mutation_absolute_report', BasePath),
+		atom_concat(BasePath, '.txt', Report),
+		mutation_testing::predicate(mt_sample, check/1, [
+			mutators([fail_insertion]),
+			sampling(count(1)),
+			threshold(0.0),
+			format(text),
+			report_file_name(BasePath),
+			tester_file_name('subprocess_tester.lgt')
+		]).
 
 	test(mt_print_mutated_term_option_01, deterministic) :-
 		mutation_testing::report_predicate(mt_other_sample, check/1, _, [

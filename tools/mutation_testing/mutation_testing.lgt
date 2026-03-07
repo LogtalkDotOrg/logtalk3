@@ -213,7 +213,7 @@
 
 	:- private(captured_mutated_terms_/5).
 	:- dynamic(captured_mutated_terms_/5).
-	:- mode(captured_mutated_terms_(-callable, -callable, -list, -atom, -integer), zero_or_one).
+	:- mode(captured_mutated_terms_(-callable, -callable, -list, -atom, -compound), zero_or_one).
 	:- info(captured_mutated_terms_/5, [
 		comment is 'Captured original and mutated terms, variable names, and source location for one mutant.'
 	]).
@@ -236,7 +236,8 @@
 
 	:- uses(os, [
 		directory_exists/1, make_directory_path/1,
-		path_concat/3, pid/1, shell/2, temporary_directory/1, wall_time/1
+		path_concat/3, pid/1, shell/2, temporary_directory/1, wall_time/1,
+		is_absolute_file_name/1
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [
@@ -246,7 +247,7 @@
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
 
-	logtalk::message_hook(mutated_term(_Mutator, _Original, _Mutation, _Variables, _File, _Line), _, mutation_testing, _) :-
+	logtalk::message_hook(mutated_term(_Mutator, _Original, _Mutation, _Variables, _File, _StartLine-_EndLine), _, mutation_testing, _) :-
 		retractall(probe_mutation_happened_),
 		assertz(probe_mutation_happened_),
 		(   probing_ ->
@@ -254,10 +255,10 @@
 		;   false
 		).
 
-	logtalk::message_hook(mutated_term(_Mutator, Original, Mutation, Variables, File, Line), _, mutation_testing, _) :-
+	logtalk::message_hook(mutated_term(_Mutator, Original, Mutation, Variables, File, StartLine-EndLine), _, mutation_testing, _) :-
 		capturing_mutated_terms_,
 		retractall(captured_mutated_terms_(_, _, _, _, _)),
-		assertz(captured_mutated_terms_(Original, Mutation, Variables, File, Line)).
+		assertz(captured_mutated_terms_(Original, Mutation, Variables, File, StartLine-EndLine)).
 
 	library(Library) :-
 		library(Library, []).
@@ -267,7 +268,9 @@
 		^^merge_options(UserOptions, Options),
 		loaded_library_entities(Library, Entities0),
 		apply_entity_filters(Entities0, Options, Entities),
-		run_entities(Entities, Options, true, Passed),
+		reports_for_entities(Entities, Options, Reports),
+		maybe_format_report(report(library(Library), Reports), Options),
+		reports_passed(Reports, true, Passed),
 		Passed == true,
 		!.
 
@@ -279,7 +282,9 @@
 		^^merge_options(UserOptions, Options),
 		loaded_directory_entities(Directory, Entities0),
 		apply_entity_filters(Entities0, Options, Entities),
-		run_entities(Entities, Options, true, Passed),
+		reports_for_entities(Entities, Options, Reports),
+		maybe_format_report(report(directory(Directory), Reports), Options),
+		reports_passed(Reports, true, Passed),
 		Passed == true,
 		!.
 
@@ -411,13 +416,66 @@
 		),
 		run_entities(Entities, Options, Passed1, Passed).
 
+	reports_passed([], Passed, Passed).
+	reports_passed([report(_, summary(_, _, _, _, _, _, _, _, _, true), _)| Reports], Passed0, Passed) :-
+		reports_passed(Reports, Passed0, Passed).
+	reports_passed([report(_, summary(_, _, _, _, _, _, _, _, _, false), _)| Reports], _Passed0, Passed) :-
+		reports_passed(Reports, false, Passed).
+
 	maybe_format_report(Report, UserOptions) :-
 		^^merge_options(UserOptions, Options),
 		^^option(format(Format), Options),
 		(   Format == none ->
 			true
-		;   format_report(Format, Report)
+		;   format_report(Format, Report),
+			report_file_path(Report, Options, File),
+			write_report_file(File, Format, Report)
 		).
+
+	report_file_path(Report, Options, File) :-
+		^^option(format(Format), Options),
+		report_extension(Format, Extension),
+		^^option(report_file_name(FileName), Options),
+		base_report_file_path(Report, Options, FileName, BasePath),
+		with_extension(BasePath, Extension, File).
+
+	base_report_file_path(_Report, _Options, FileName, FileName) :-
+		is_absolute_file_name(FileName),
+		!.
+	base_report_file_path(Report, Options, FileName, File) :-
+		report_tester_directory(Report, Options, Directory),
+		path_concat(Directory, FileName, File).
+
+	report_tester_directory(Report, Options, Directory) :-
+		report_source_file(Report, SourceFile),
+		!,
+		tester_directory(SourceFile, Directory, Options).
+	report_tester_directory(_Report, Options, Directory) :-
+		(   ^^option(tester_directory(Directory), Options),
+			os::directory_exists(Directory) ->
+			true
+		;   logtalk::expand_library_path(startup, Directory)
+		).
+
+	report_source_file(report(Entity, _Summary, _Results), SourceFile) :-
+		entity_file(Entity, SourceFile).
+	report_source_file(report(_Container, [Report| _]), SourceFile) :-
+		report_source_file(Report, SourceFile).
+
+	report_extension(text, '.txt').
+	report_extension(json, '.json').
+
+	with_extension(Path, Extension, File) :-
+		os::decompose_file_name(Path, Directory, Name, _),
+		atom_concat(Name, Extension, FileName),
+		path_concat(Directory, FileName, File).
+
+	write_report_file(File, Format, Report) :-
+		os::decompose_file_name(File, Directory, _Name, _Extension),
+		make_directory_path(Directory),
+		open(File, write, Stream),
+		format_report(Stream, Format, Report),
+		close(Stream).
 
 	loaded_entities(Entities) :-
 		findall(Entity, (current_object(Entity), atom(Entity)), Objects),
@@ -951,7 +1009,175 @@
 		write(Stream, 'Mutants:'),
 		nl(Stream),
 		format_mutant_results(Results, Stream),
-		nl(Stream).
+		nl(Stream),
+		!.
+
+	format_report(Stream, json, Report) :-
+		stryker_json_report(Report, JSON),
+		json(list, dash, atom)::generate(stream(Stream), JSON),
+		nl(Stream),
+		!.
+
+	stryker_json_report(report(Container, Reports), JSON) :-
+		valid(list, Reports),
+		!,
+		container_reports_file_results(Reports, FileResults0),
+		merge_file_results(FileResults0, MergedFileResults),
+		file_results_pairs(MergedFileResults, FilePairs),
+		container_thresholds(Reports, High, Low),
+		container_framework(Container, Framework),
+		JSON = json([
+			'schemaVersion'-'2.0',
+			'thresholds'-json(['high'-High, 'low'-Low]),
+			'files'-json(FilePairs),
+			'framework'-json(['name'-Framework])
+		]).
+	stryker_json_report(report(Entity, summary(_Total, _Killed, _Survived, _Untested, _Timeout, _NoCoverage, _Errors, _Score, Threshold, _Passed), Results), JSON) :-
+		report_file_result(report(Entity, summary(_, _, _, _, _, _, _, _, Threshold, _), Results), FileResult),
+		FileResult = file_result(File, Language, Source, Mutants),
+		High is max(0, min(100, round(Threshold))),
+		JSON = json([
+			'schemaVersion'-'2.0',
+			'thresholds'-json(['high'-High, 'low'-0]),
+			'files'-json([
+				File-json([
+					'language'-Language,
+					'source'-Source,
+					'mutants'-Mutants
+				])
+			]),
+			'framework'-json(['name'-'Logtalk "mutation_testing" tool'])
+		]).
+
+	container_reports_file_results([], []).
+	container_reports_file_results([Report| Reports], [FileResult| FileResults]) :-
+		report_file_result(Report, FileResult),
+		container_reports_file_results(Reports, FileResults).
+
+	report_file_result(report(Entity, _Summary, Results), file_result(File, logtalk, Source, Mutants)) :-
+		entity_file(Entity, File),
+		file_source(File, Source),
+		results_mutants_json(Results, Mutants).
+
+	file_source(File, Source) :-
+		(   catch(read_file_codes(File, Codes), _, fail) ->
+			atom_codes(Source, Codes)
+		;   Source = ''
+		).
+
+	read_file_codes(File, Codes) :-
+		open(File, read, Stream),
+		read_stream_codes(Stream, Codes),
+		close(Stream).
+
+	read_stream_codes(Stream, Codes) :-
+		get_code(Stream, Code),
+		(   Code == -1 ->
+			Codes = []
+		;   Codes = [Code| Rest],
+			read_stream_codes(Stream, Rest)
+		).
+
+	results_mutants_json([], []).
+	results_mutants_json([mutant_result(Index, Mutant, Status)| Results], [JSONMutant| JSONMutants]) :-
+		mutant_json(Index, Mutant, Status, JSONMutant),
+		results_mutants_json(Results, JSONMutants).
+
+	mutant_json(Index, Mutant, Status, json(Pairs)) :-
+		normalize_mutant(Mutant, Entity, Predicate, Mutator, Occurrence),
+		index_id(Index, Id),
+		status_name(Status, StatusName),
+		mutant_location(Entity, Predicate, Mutator, Occurrence, Location),
+		Pairs = [
+			'id'-Id,
+			'mutatorName'-Mutator,
+			'location'-Location,
+			'status'-StatusName
+		].
+
+	normalize_mutant(mutant(Entity, Predicate, Mutator, Occurrence), Entity, Predicate, Mutator, Occurrence) :-
+		!.
+	normalize_mutant(mutant(Entity, Predicate, Point, Mutator), Entity, Predicate, Mutator, Occurrence) :-
+		mutant_occurrence(Point, Occurrence).
+
+	index_id(Index, Id) :-
+		number_codes(Index, Codes),
+		atom_codes(Id, Codes).
+
+	status_name(killed, 'Killed').
+	status_name(survived, 'Survived').
+	status_name(no_coverage, 'NoCoverage').
+	status_name(timeout, 'Timeout').
+	status_name(untested(_), 'Pending').
+	status_name(untested, 'Pending').
+	status_name(error(_), 'RuntimeError').
+
+	mutant_location(Entity, Predicate, Mutator, Occurrence, Location) :-
+		(   mutant_terms(mutant(Entity, Predicate, Mutator, Occurrence), _Original, _Mutation, _Variables, _File, StartLine0-EndLine0) ->
+			StartLine is max(1, StartLine0),
+			EndLine is max(StartLine, EndLine0)
+		;   StartLine = 1,
+			EndLine = 1
+		),
+		(   StartLine == EndLine ->
+			EndLineForJSON is EndLine + 1
+		;   EndLineForJSON = EndLine
+		),
+		Location = json([
+			'start'-json(['line'-StartLine, 'column'-0]),
+			'end'-json(['line'-EndLineForJSON, 'column'-0])
+		]).
+
+	container_thresholds([], 0, 0).
+	container_thresholds(Reports, High, 0) :-
+		findall(
+			Rounded,
+			(
+				member(report(_Entity, summary(_, _, _, _, _, _, _, _, Threshold, _), _), Reports),
+				Rounded is max(0, min(100, round(Threshold)))
+			),
+			Thresholds
+		),
+		(   Thresholds == [] ->
+			High = 0
+		;   thresholds_maximum(Thresholds, High)
+		).
+
+	thresholds_maximum([Threshold| Thresholds], Maximum) :-
+		thresholds_maximum(Thresholds, Threshold, Maximum).
+
+	thresholds_maximum([], Maximum, Maximum).
+	thresholds_maximum([Threshold| Thresholds], Maximum0, Maximum) :-
+		(   Threshold > Maximum0 ->
+			Maximum1 = Threshold
+		;   Maximum1 = Maximum0
+		),
+		thresholds_maximum(Thresholds, Maximum1, Maximum).
+
+	container_framework(library(_), 'Logtalk mutation_testing').
+	container_framework(directory(_), 'Logtalk mutation_testing').
+	container_framework(_Container, 'Logtalk mutation_testing').
+
+	merge_file_results([], []).
+	merge_file_results([file_result(File, Language, Source, Mutants)| FileResults], Merged) :-
+		merge_file_results(FileResults, Merged0),
+		merge_one_file_result(file_result(File, Language, Source, Mutants), Merged0, Merged).
+
+	merge_one_file_result(file_result(File, Language, Source, Mutants), [], [file_result(File, Language, Source, Mutants)]).
+	merge_one_file_result(file_result(File, _Language, _Source, Mutants), [file_result(File, Language0, Source0, Mutants0)| Tail], [file_result(File, Language0, Source0, Mutants1)| Tail]) :-
+		!,
+		append(Mutants0, Mutants, Mutants1).
+	merge_one_file_result(FileResult, [Head| Tail], [Head| MergedTail]) :-
+		merge_one_file_result(FileResult, Tail, MergedTail).
+
+	file_results_pairs([], []).
+	file_results_pairs([file_result(File, Language, Source, Mutants)| FileResults], [File-FileJSON| Pairs]) :-
+		FileJSON = json([
+			'language'-Language,
+			'source'-Source,
+			'mutants'-Mutants
+		]),
+		file_results_pairs(FileResults, Pairs).
 
 	format_reports([], _Stream).
 	format_reports([Report| Reports], Stream) :-
@@ -977,7 +1203,7 @@
 		format_mutant_results_nonempty(Results, Stream).
 
 	format_mutant_terms(Stream, Mutant) :-
-		(   mutant_terms(Mutant, Original, Mutation, Variables, File, Line) ->
+		(   mutant_terms(Mutant, Original, Mutation, Variables, File, StartLine-EndLine) ->
 			write(Stream, '     original: '),
 			write_term(Stream, Original, [quoted(true), variable_names(Variables)]),
 			nl(Stream),
@@ -987,12 +1213,14 @@
 			write(Stream, '     location: '),
 			writeq(Stream, File),
 			write(Stream, ':'),
-			write(Stream, Line),
+			write(Stream, StartLine),
+			write(Stream, '-'),
+			write(Stream, EndLine),
 			nl(Stream)
 		;   true
 		).
 
-	mutant_terms(mutant(Entity, Predicate, Mutator, Occurrence), Original, Mutation, Variables, File, Line) :-
+	mutant_terms(mutant(Entity, Predicate, Mutator, Occurrence), Original, Mutation, Variables, File, StartLine-EndLine) :-
 		entity_file(Entity, SourceFile),
 		retractall(captured_mutated_terms_(_, _, _, _, _)),
 		assertz(capturing_mutated_terms_),
@@ -1003,7 +1231,7 @@
 		(   catch(logtalk_load(SourceFile, [hook(Hook)| LoadOptions]), _, fail) ->
 			retractall(capturing_mutated_terms_),
 			catch(logtalk_load(SourceFile, RevertOptions), _, true),
-			captured_mutated_terms_(Original, Mutation, Variables, File, Line)
+			captured_mutated_terms_(Original, Mutation, Variables, File, StartLine-EndLine)
 		;   retractall(capturing_mutated_terms_),
 			fail
 		).
@@ -1032,6 +1260,8 @@
 	default_option(seed(123456789)).
 	% by default, print text report output:
 	default_option(format(text)).
+	% default report file base name:
+	default_option(report_file_name('mutation_test_report')).
 	% default tester file name
 	default_option(tester_file_name('tester.lgt')).
 
@@ -1077,7 +1307,9 @@
 	valid_option(seed(Seed)) :-
 		integer(Seed).
 	valid_option(format(Format)) :-
-		member(Format, [none, text]).
+		member(Format, [none, text, json]).
+	valid_option(report_file_name(FileName)) :-
+		atom(FileName).
 	valid_option(tester_file_name(Tester)) :-
 		atom(Tester).
 	valid_option(tester_directory(Directory)) :-

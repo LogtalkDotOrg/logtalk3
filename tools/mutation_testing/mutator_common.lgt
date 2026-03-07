@@ -29,8 +29,8 @@
 		functor(Self, Mutator, _),
 		logtalk_load_context(variable_names(Original), Variables),
 		logtalk_load_context(file, File),
-		logtalk_load_context(term_position, Line-_),
-		logtalk::print_message(information, mutation_testing, mutated_term(Mutator, Original, Mutation, Variables, File, Line)).
+		logtalk_load_context(term_position, StartLine-EndLine),
+		logtalk::print_message(information, mutation_testing, mutated_term(Mutator, Original, Mutation, Variables, File, StartLine-EndLine)).
 	print_mutated_term(false, _Original, _Mutation).
 
 	:- protected(target_predicate/3).

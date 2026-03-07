@@ -43,8 +43,8 @@
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
 
-	logtalk::message_tokens(mutated_term(Mutator, Original, Mutation, Variables, File, Line), mutation_testing) -->
-		['Mutated term using ~q at ~q:~d'-[Mutator, File, Line], nl],
+	logtalk::message_tokens(mutated_term(Mutator, Original, Mutation, Variables, File, StartLine-EndLine), mutation_testing) -->
+		['Mutated term using ~q at ~q:~d-~d'-[Mutator, File, StartLine, EndLine], nl],
 		['  Original: '-[], term(Original, [quoted(true), variable_names(Variables)]), nl],
 		['  Mutation: '-[], term(Mutation, [quoted(true), variable_names(Variables)]), nl].
 
