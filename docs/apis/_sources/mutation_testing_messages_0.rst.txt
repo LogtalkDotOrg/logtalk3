@@ -1,0 +1,57 @@
+.. index:: single: mutation_testing_messages
+.. _mutation_testing_messages/0:
+
+.. rst-class:: right
+
+**category**
+
+``mutation_testing_messages``
+=============================
+
+Default message translations for the ``mutation_testing`` tool.
+
+| **Availability:** 
+|    ``logtalk_load(mutation_testing(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-03-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Provides:**
+|    :ref:`logtalk::message_prefix_stream/4 <logtalk/0::message_prefix_stream/4>`
+|    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

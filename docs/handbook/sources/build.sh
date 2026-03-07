@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on February 26, 2026
+##   Last updated on March 6, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -58,6 +58,7 @@ sed '1,19d' ../../../tools/lgtdoc/NOTES.md | pandoc -f gfm -t rst -o devtools/lg
 sed '1,19d' ../../../tools/lgtunit/NOTES.md | pandoc -f gfm -t rst -o devtools/lgtunit.rst
 sed '1,19d' ../../../tools/linter/NOTES.md | pandoc -f gfm -t rst -o devtools/linter.rst
 sed '1,19d' ../../../tools/make/NOTES.md | pandoc -f gfm -t rst -o devtools/make.rst
+sed '1,19d' ../../../tools/mutation_testing/NOTES.md | pandoc -f gfm -t rst -o devtools/mutation_testing.rst
 sed '1,19d' ../../../tools/packs/NOTES.md | pandoc -f gfm -t rst -o devtools/packs.rst
 sed '1,19d' ../../../tools/ports_profiler/NOTES.md | pandoc -f gfm -t rst -o devtools/ports_profiler.rst
 sed '1,19d' ../../../tools/profiler/NOTES.md | pandoc -f gfm -t rst -o devtools/profiler.rst

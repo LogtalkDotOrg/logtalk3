@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the developer tools
-%  Last updated on January 13, 2022
+%  Last updated on February 3, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -44,6 +44,7 @@ logtalk_library_path(help, tools('help/')).
 logtalk_library_path(issue_creator, tools('issue_creator/')).
 logtalk_library_path(lgtdoc, tools('lgtdoc/')).
 logtalk_library_path(lgtunit, tools('lgtunit/')).
+logtalk_library_path(mutation_testing, tools('mutation_testing/')).
 logtalk_library_path(packs, tools('packs/')).
 logtalk_library_path(ports_profiler, tools('ports_profiler/')).
 logtalk_library_path(profiler, tools('profiler/')).

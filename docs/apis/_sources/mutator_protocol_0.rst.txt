@@ -1,0 +1,91 @@
+.. index:: single: mutator_protocol
+.. _mutator_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``mutator_protocol``
+====================
+
+Mutator protocol
+
+| **Availability:** 
+|    ``logtalk_load(mutation_testing(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-03-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: reset/0
+.. _mutator_protocol/0::reset/0:
+
+``reset/0``
+^^^^^^^^^^^
+
+Resets any mutator internal state used while expanding terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``reset`` - ``one``
+
+
+------------
+
+.. index:: mutation/2
+.. _mutator_protocol/0::mutation/2:
+
+``mutation/2``
+^^^^^^^^^^^^^^
+
+Generates by backtracking zero or more mutations for a given term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mutation(Term,Mutation)``
+| **Mode and number of proofs:**
+|    ``mutation(@callable,@callable)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

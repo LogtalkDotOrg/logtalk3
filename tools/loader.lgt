@@ -34,6 +34,7 @@
 		help(loader),
 		lgtdoc(loader),
 		lgtunit(loader),
+		mutation_testing(loader),
 		packs(loader)
 	])
 )).

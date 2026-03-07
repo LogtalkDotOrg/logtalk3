@@ -1507,6 +1507,37 @@ To load an entity, always load the library that includes it using the goal ``log
    xunit_output <xunit_output_0>
    xunit_report <xunit_report_0>
 
+``tools/mutation_testing/``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   mutation_testing <mutation_testing_0>
+   mutation_testing_messages <mutation_testing_messages_0>
+   mutator_common <mutator_common_0>
+   mutator_protocol <mutator_protocol_0>
+   subprocess_mutation_hook <subprocess_mutation_hook_0>
+
+``tools/mutation_testing/mutators/``
+------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   arithmetic_operator_replacement(Entity,Predicate,Occurrence,PrintMutatedTerm) <arithmetic_operator_replacement_4>
+   clause_order_reordering(Entity,Predicate,Occurrence,PrintMutatedTerm) <clause_order_reordering_4>
+   fail_insertion(Entity,Predicate,Occurrence,PrintMutatedTerm) <fail_insertion_4>
+   head_arguments_mutation(Entity,Predicate,Occurrence,PrintMutatedTerm) <head_arguments_mutation_4>
+   head_arguments_reordering(Entity,Predicate,Occurrence,PrintMutatedTerm) <head_arguments_reordering_4>
+   predicate_negation(Entity,Predicate,Occurrence,PrintMutatedTerm) <predicate_negation_4>
+   relational_operator_replacement(Entity,Predicate,Occurrence,PrintMutatedTerm) <relational_operator_replacement_4>
+   truth_literal_flip(Entity,Predicate,Occurrence,PrintMutatedTerm) <truth_literal_flip_4>
+
 ``tools/packs/``
 ----------------
 

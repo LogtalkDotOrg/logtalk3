@@ -1,0 +1,111 @@
+.. index:: single: subprocess_mutation_hook
+.. _subprocess_mutation_hook/0:
+
+.. rst-class:: right
+
+**object**
+
+``subprocess_mutation_hook``
+============================
+
+Subprocess mutation hook object. Loaded in mutation testing subprocesses to set up the mutator hook and record test results to a status file.
+
+| **Availability:** 
+|    ``logtalk_load(mutation_testing(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-03-06
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Provides:**
+|    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+| **Uses:**
+|    :ref:`fast_random(Algorithm) <fast_random/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: load_config/1
+.. _subprocess_mutation_hook/0::load_config/1:
+
+``load_config/1``
+^^^^^^^^^^^^^^^^^
+
+Loads a mutation config file and sets up the mutator hook for the subprocess.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``load_config(ConfigFile)``
+| **Mode and number of proofs:**
+|    ``load_config(+atom)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: status_file_/1
+.. _subprocess_mutation_hook/0::status_file_/1:
+
+``status_file_/1``
+^^^^^^^^^^^^^^^^^^
+
+Holds the status file path for the current subprocess.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``status_file_(StatusFile)``
+| **Mode and number of proofs:**
+|    ``status_file_(?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: failed_count_/1
+.. _subprocess_mutation_hook/0::failed_count_/1:
+
+``failed_count_/1``
+^^^^^^^^^^^^^^^^^^^
+
+Accumulates the number of failed tests reported by lgtunit.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``failed_count_(Failed)``
+| **Mode and number of proofs:**
+|    ``failed_count_(?integer)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

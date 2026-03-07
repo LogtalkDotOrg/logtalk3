@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on February 26, 2026
+##   Last updated on March 6, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -57,6 +57,7 @@ Remove-Item ../contributions -Recurse
 (Get-Content ../../../tools/lgtunit/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o devtools/lgtunit.rst
 (Get-Content ../../../tools/linter/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o devtools/linter.rst
 (Get-Content ../../../tools/make/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o devtools/make.rst
+(Get-Content ../../../tools/mutation_testing/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o devtools/mutation_testing.rst
 (Get-Content ../../../tools/packs/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o devtools/packs.rst
 (Get-Content ../../../tools/ports_profiler/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o devtools/ports_profiler.rst
 (Get-Content ../../../tools/profiler/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o devtools/profiler.rst

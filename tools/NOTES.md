@@ -40,6 +40,7 @@ documentation files:
 - `lgtunit`
 - `linter`
 - `make`
+- `mutation_testing`
 - `packs`
 - `ports_profiler`
 - `profiler`

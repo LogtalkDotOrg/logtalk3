@@ -20,6 +20,7 @@ The following developer tools are available, each one with its own
 - ``lgtunit``
 - ``linter``
 - ``make``
+- ``mutation_testing``
 - ``packs``
 - ``ports_profiler``
 - ``profiler``

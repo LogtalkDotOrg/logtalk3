@@ -1,0 +1,74 @@
+.. index:: single: truth_literal_flip(Entity,Predicate,Occurrence,PrintMutatedTerm)
+.. _truth_literal_flip/4:
+
+.. rst-class:: right
+
+**object**
+
+``truth_literal_flip(Entity,Predicate,Occurrence,PrintMutatedTerm)``
+====================================================================
+
+* ``Entity`` - Identifier of the entity being mutated.
+* ``Predicate`` - Predicate or non-terminal indicator selecting clauses to mutate.
+* ``Occurrence`` - 1-based mutation occurrence index to target within selected predicate clauses.
+* ``PrintMutatedTerm`` - Boolean flag to print the original and mutated term plus source location.
+
+
+Hook object implementing the ``truth_literal_flip`` mutator for matching predicate clauses.
+
+| **Availability:** 
+|    ``logtalk_load(mutation_testing(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-03-06
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`expanding <expanding/0>`
+| **Imports:**
+|    ``public`` :ref:`mutator_common <mutator_common/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`expanding/0::goal_expansion/2`  :ref:`mutator_protocol/0::mutation/2`  :ref:`mutator_protocol/0::reset/0`  :ref:`expanding/0::term_expansion/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: seen_/1
+.. _truth_literal_flip/4::seen_/1:
+
+``seen_/1``
+^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

@@ -44,6 +44,8 @@ in the server when a client sent the `linda::shutdown_server/0` message.
 Tools
 -----
 
+* ADDED: New `mutation_testing` tool for mutation-based testing.
+
 * ADDED: Support to the `packs` tool for lock files for deterministic installs
 and CI/CD reproducibility.
 

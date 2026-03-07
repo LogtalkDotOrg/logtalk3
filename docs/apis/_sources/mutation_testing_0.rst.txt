@@ -1,0 +1,475 @@
+.. index:: single: mutation_testing
+.. _mutation_testing/0:
+
+.. rst-class:: right
+
+**object**
+
+``mutation_testing``
+====================
+
+Mutation testing tool.
+
+| **Availability:** 
+|    ``logtalk_load(mutation_testing(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-03-06
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Provides:**
+|    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+| **Uses:**
+|    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`os <os/0>`
+|    :ref:`type <type/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: library/1
+.. _mutation_testing/0::library/1:
+
+``library/1``
+^^^^^^^^^^^^^
+
+Runs mutation testing for all loaded entities from a given library using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``library(Library)``
+| **Mode and number of proofs:**
+|    ``library(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: library/2
+.. _mutation_testing/0::library/2:
+
+``library/2``
+^^^^^^^^^^^^^
+
+Runs mutation testing for all loaded entities from a given library using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``library(Library,Options)``
+| **Mode and number of proofs:**
+|    ``library(+atom,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: directory/1
+.. _mutation_testing/0::directory/1:
+
+``directory/1``
+^^^^^^^^^^^^^^^
+
+Runs mutation testing for all loaded entities from a given directory using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``directory(Directory)``
+| **Mode and number of proofs:**
+|    ``directory(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: directory/2
+.. _mutation_testing/0::directory/2:
+
+``directory/2``
+^^^^^^^^^^^^^^^
+
+Runs mutation testing for all loaded entities from a given directory using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``directory(Directory,Options)``
+| **Mode and number of proofs:**
+|    ``directory(+atom,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: entity/1
+.. _mutation_testing/0::entity/1:
+
+``entity/1``
+^^^^^^^^^^^^
+
+Runs mutation testing for a loaded entity using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``entity(Entity)``
+| **Mode and number of proofs:**
+|    ``entity(+entity_identifier)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: entity/2
+.. _mutation_testing/0::entity/2:
+
+``entity/2``
+^^^^^^^^^^^^
+
+Runs mutation testing for a loaded entity using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``entity(Entity,Options)``
+| **Mode and number of proofs:**
+|    ``entity(+entity_identifier,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: predicate/2
+.. _mutation_testing/0::predicate/2:
+
+``predicate/2``
+^^^^^^^^^^^^^^^
+
+Runs mutation testing for a loaded entity predicate using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predicate(Entity,Predicate)``
+| **Mode and number of proofs:**
+|    ``predicate(+entity_identifier,+predicate_indicator)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: predicate/3
+.. _mutation_testing/0::predicate/3:
+
+``predicate/3``
+^^^^^^^^^^^^^^^
+
+Runs mutation testing for a loaded entity predicate using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predicate(Entity,Predicate,Options)``
+| **Mode and number of proofs:**
+|    ``predicate(+entity_identifier,+predicate_indicator,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: report_entity/3
+.. _mutation_testing/0::report_entity/3:
+
+``report_entity/3``
+^^^^^^^^^^^^^^^^^^^
+
+Runs mutation testing for an entity and returns a structured report term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``report_entity(Entity,Report,Options)``
+| **Mode and number of proofs:**
+|    ``report_entity(+entity_identifier,-compound,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: report_predicate/4
+.. _mutation_testing/0::report_predicate/4:
+
+``report_predicate/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Runs mutation testing for an entity predicate and returns a structured report term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``report_predicate(Entity,Predicate,Report,Options)``
+| **Mode and number of proofs:**
+|    ``report_predicate(+entity_identifier,+predicate_indicator,-compound,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: report_library/3
+.. _mutation_testing/0::report_library/3:
+
+``report_library/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Runs mutation testing for loaded entities from a library and returns structured report terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``report_library(Library,Report,Options)``
+| **Mode and number of proofs:**
+|    ``report_library(+atom,-compound,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: report_directory/3
+.. _mutation_testing/0::report_directory/3:
+
+``report_directory/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Runs mutation testing for loaded entities from a directory and returns structured report terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``report_directory(Directory,Report,Options)``
+| **Mode and number of proofs:**
+|    ``report_directory(+atom,-compound,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: entity_mutants/2
+.. _mutation_testing/0::entity_mutants/2:
+
+``entity_mutants/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the deterministic list of mutants for an entity using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``entity_mutants(Entity,Mutants)``
+| **Mode and number of proofs:**
+|    ``entity_mutants(+entity_identifier,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: entity_mutants/3
+.. _mutation_testing/0::entity_mutants/3:
+
+``entity_mutants/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the deterministic list of mutants for an entity using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``entity_mutants(Entity,Mutants,Options)``
+| **Mode and number of proofs:**
+|    ``entity_mutants(+entity_identifier,-list(compound),+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: predicate_mutants/3
+.. _mutation_testing/0::predicate_mutants/3:
+
+``predicate_mutants/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the deterministic list of mutants for an entity predicate using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predicate_mutants(Entity,Predicate,Mutants)``
+| **Mode and number of proofs:**
+|    ``predicate_mutants(+entity_identifier,+predicate_indicator,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: predicate_mutants/4
+.. _mutation_testing/0::predicate_mutants/4:
+
+``predicate_mutants/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the deterministic list of mutants for an entity predicate using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predicate_mutants(Entity,Predicate,Mutants,Options)``
+| **Mode and number of proofs:**
+|    ``predicate_mutants(+entity_identifier,+predicate_indicator,-list(compound),+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: library_mutants/2
+.. _mutation_testing/0::library_mutants/2:
+
+``library_mutants/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the deterministic list of mutants for loaded entities from a given library using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``library_mutants(Library,Mutants)``
+| **Mode and number of proofs:**
+|    ``library_mutants(+atom,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: library_mutants/3
+.. _mutation_testing/0::library_mutants/3:
+
+``library_mutants/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the deterministic list of mutants for loaded entities from a given library using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``library_mutants(Library,Mutants,Options)``
+| **Mode and number of proofs:**
+|    ``library_mutants(+atom,-list(compound),+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: directory_mutants/2
+.. _mutation_testing/0::directory_mutants/2:
+
+``directory_mutants/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the deterministic list of mutants for loaded entities from a given directory using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``directory_mutants(Directory,Mutants)``
+| **Mode and number of proofs:**
+|    ``directory_mutants(+atom,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: directory_mutants/3
+.. _mutation_testing/0::directory_mutants/3:
+
+``directory_mutants/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the deterministic list of mutants for loaded entities from a given directory using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``directory_mutants(Directory,Mutants,Options)``
+| **Mode and number of proofs:**
+|    ``directory_mutants(+atom,-list(compound),+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: probe_mutation_happened_/0
+.. _mutation_testing/0::probe_mutation_happened_/0:
+
+``probe_mutation_happened_/0``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff a mutation happened.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``probe_mutation_happened_`` - ``zero_or_one``
+
+
+------------
+
+.. index:: probing_/0
+.. _mutation_testing/0::probing_/0:
+
+``probing_/0``
+^^^^^^^^^^^^^^
+
+True iff we are currently probing for mutations (suppresses printing).
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``probing_`` - ``zero_or_one``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

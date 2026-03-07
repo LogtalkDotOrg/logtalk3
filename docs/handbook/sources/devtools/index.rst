@@ -41,6 +41,7 @@ directory in the ``NOTES.md`` file.
    lgtunit
    linter
    make
+   mutation_testing
    packs
    ports_profiler
    profiler

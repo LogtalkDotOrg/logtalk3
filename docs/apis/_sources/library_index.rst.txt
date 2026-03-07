@@ -961,6 +961,28 @@ To load any library (including developer tools, ports, and contributions), use t
    metagol <metagol_0>
    metagol_example_protocol <metagol_example_protocol_0>
 
+:ref:`mutation_testing <library_mutation_testing>`
+--------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   arithmetic_operator_replacement(Entity,Predicate,Occurrence,PrintMutatedTerm) <arithmetic_operator_replacement_4>
+   clause_order_reordering(Entity,Predicate,Occurrence,PrintMutatedTerm) <clause_order_reordering_4>
+   fail_insertion(Entity,Predicate,Occurrence,PrintMutatedTerm) <fail_insertion_4>
+   head_arguments_mutation(Entity,Predicate,Occurrence,PrintMutatedTerm) <head_arguments_mutation_4>
+   head_arguments_reordering(Entity,Predicate,Occurrence,PrintMutatedTerm) <head_arguments_reordering_4>
+   mutation_testing <mutation_testing_0>
+   mutation_testing_messages <mutation_testing_messages_0>
+   mutator_common <mutator_common_0>
+   mutator_protocol <mutator_protocol_0>
+   predicate_negation(Entity,Predicate,Occurrence,PrintMutatedTerm) <predicate_negation_4>
+   relational_operator_replacement(Entity,Predicate,Occurrence,PrintMutatedTerm) <relational_operator_replacement_4>
+   subprocess_mutation_hook <subprocess_mutation_hook_0>
+   truth_literal_flip(Entity,Predicate,Occurrence,PrintMutatedTerm) <truth_literal_flip_4>
+
 :ref:`mutations <library_mutations>`
 ------------------------------------
 

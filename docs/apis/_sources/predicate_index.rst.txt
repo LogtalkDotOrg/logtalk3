@@ -3589,6 +3589,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`diagram(Format) <diagram/1::directory/1>`
 * :ref:`diagrams(Format) <diagrams/1::directory/1>`
 * :ref:`lgtdocp <lgtdocp/0::directory/1>`
+* :ref:`mutation_testing <mutation_testing/0::directory/1>`
 * :ref:`packs_common <packs_common/0::directory/1>`
 * :ref:`wrapper <wrapper/0::directory/1>`
 
@@ -3605,6 +3606,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`diagram(Format) <diagram/1::directory/2>`
 * :ref:`diagrams(Format) <diagrams/1::directory/2>`
 * :ref:`lgtdocp <lgtdocp/0::directory/2>`
+* :ref:`mutation_testing <mutation_testing/0::directory/2>`
 * :ref:`packs_common <packs_common/0::directory/2>`
 * :ref:`wrapper <wrapper/0::directory/2>`
 
@@ -3648,6 +3650,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::directory_files/3>`
+
+``directory_mutants/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mutation_testing <mutation_testing/0::directory_mutants/2>`
+
+``directory_mutants/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mutation_testing <mutation_testing/0::directory_mutants/3>`
 
 ``directory_score/2``
 ---------------------
@@ -4184,6 +4206,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`code_metric <code_metric/0::entity/1>`
 * :ref:`dead_code_scanner <dead_code_scanner/0::entity/1>`
 * :ref:`help <help/0::entity/1>`
+* :ref:`mutation_testing <mutation_testing/0::entity/1>`
 * :ref:`xref_diagram(Format) <xref_diagram/1::entity/1>`
 
 ``entity/2``
@@ -4194,6 +4217,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`mutation_testing <mutation_testing/0::entity/2>`
 * :ref:`xref_diagram(Format) <xref_diagram/1::entity/2>`
 
 ``entity_info_pair_score_hook/3``
@@ -4215,6 +4239,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`doc_metric <doc_metric/0::entity_info_score_hook/2>`
+
+``entity_mutants/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mutation_testing <mutation_testing/0::entity_mutants/2>`
+
+``entity_mutants/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mutation_testing <mutation_testing/0::entity_mutants/3>`
 
 ``entity_predicates_weights_hook/2``
 ------------------------------------
@@ -7943,6 +7987,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`diagrams(Format) <diagrams/1::library/1>`
 * :ref:`help <help/0::library/1>`
 * :ref:`lgtdocp <lgtdocp/0::library/1>`
+* :ref:`mutation_testing <mutation_testing/0::library/1>`
 
 ``library/2``
 -------------
@@ -7957,6 +8002,27 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`diagram(Format) <diagram/1::library/2>`
 * :ref:`diagrams(Format) <diagrams/1::library/2>`
 * :ref:`lgtdocp <lgtdocp/0::library/2>`
+* :ref:`mutation_testing <mutation_testing/0::library/2>`
+
+``library_mutants/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mutation_testing <mutation_testing/0::library_mutants/2>`
+
+``library_mutants/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mutation_testing <mutation_testing/0::library_mutants/3>`
 
 ``library_score/2``
 -------------------
@@ -8149,6 +8215,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`redis <redis/0::llen/3>`
+
+``load_config/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subprocess_mutation_hook <subprocess_mutation_hook/0::load_config/1>`
 
 ``load_dut1_override/1``
 ------------------------
@@ -9431,6 +9507,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`listp <listp/0::msort/3>`
+
+``mutation/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mutator_protocol <mutator_protocol/0::mutation/2>`
 
 ``mutation/3``
 --------------
@@ -11142,6 +11228,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dead_code_scanner <dead_code_scanner/0::predicate/2>`
+* :ref:`mutation_testing <mutation_testing/0::predicate/2>`
+
+``predicate/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mutation_testing <mutation_testing/0::predicate/3>`
 
 ``predicate_info_pair_score_hook/4``
 ------------------------------------
@@ -11182,6 +11279,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`doc_metric <doc_metric/0::predicate_mode_score_hook/5>`
+
+``predicate_mutants/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mutation_testing <mutation_testing/0::predicate_mutants/3>`
+
+``predicate_mutants/4``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mutation_testing <mutation_testing/0::predicate_mutants/4>`
 
 ``predicate_stratum/3``
 -----------------------
@@ -12356,6 +12473,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`atom <atom/0::replace_sub_atom/4>`
 
+``report_directory/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mutation_testing <mutation_testing/0::report_directory/3>`
+
+``report_entity/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mutation_testing <mutation_testing/0::report_entity/3>`
+
+``report_library/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mutation_testing <mutation_testing/0::report_library/3>`
+
+``report_predicate/4``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mutation_testing <mutation_testing/0::report_predicate/4>`
+
 ``request/3``
 -------------
 
@@ -12396,6 +12553,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`counter <counter/0::reset/0>`
 * :ref:`debuggerp <debuggerp/0::reset/0>`
+* :ref:`mutator_protocol <mutator_protocol/0::reset/0>`
 * :ref:`packs_common <packs_common/0::reset/0>`
 * :ref:`ports_profiler <ports_profiler/0::reset/0>`
 
