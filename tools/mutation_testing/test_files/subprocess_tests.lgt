@@ -15,11 +15,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-06,
+		date is 2026-03-07,
 		comment is 'Tests exercising test entities, run by mutation testing subprocesses to detect mutants.'
 	]).
+
+	cover(mt_sample).
+	cover(mt_other_sample).
+	cover(mt_dcg_sample).
+	cover(mt_code_coverage).
 
 	test(mt_check_positive, true) :-
 		mt_sample::check(1).
@@ -71,5 +76,8 @@
 
 	test(mt_other_check_zero, fail) :-
 		mt_other_sample::check(0).
+
+	test(mt_code_coverage, true) :-
+		mt_code_coverage::p(3, 4).
 
 :- end_object.

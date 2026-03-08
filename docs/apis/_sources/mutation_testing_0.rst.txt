@@ -554,8 +554,29 @@ Captured original and mutated terms, variable names, and source location for one
 | **Compilation flags:**
 |    ``dynamic``
 
+| **Template:**
+|    ``captured_mutated_terms_(Original,Mutation,Variables,File,Lines)``
 | **Mode and number of proofs:**
 |    ``captured_mutated_terms_(-callable,-callable,-list,-atom,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: baseline_coverage_/4
+.. _mutation_testing/0::baseline_coverage_/4:
+
+``baseline_coverage_/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Coverage baseline cache for an entity and predicate: covered clauses and total clauses.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``baseline_coverage_(Entity,Predicate,CoveredClauses,TotalClauses)``
+| **Mode and number of proofs:**
+|    ``baseline_coverage_(?entity_identifier,?predicate_indicator,?list(integer),?integer)`` - ``zero_or_more``
 
 
 ------------

@@ -215,7 +215,16 @@
 	:- dynamic(captured_mutated_terms_/5).
 	:- mode(captured_mutated_terms_(-callable, -callable, -list, -atom, -compound), zero_or_one).
 	:- info(captured_mutated_terms_/5, [
-		comment is 'Captured original and mutated terms, variable names, and source location for one mutant.'
+		comment is 'Captured original and mutated terms, variable names, and source location for one mutant.',
+		argnames is ['Original', 'Mutation', 'Variables', 'File', 'Lines']
+	]).
+
+	:- private(baseline_coverage_/4).
+	:- dynamic(baseline_coverage_/4).
+	:- mode(baseline_coverage_(?entity_identifier, ?predicate_indicator, ?list(integer), ?integer), zero_or_more).
+	:- info(baseline_coverage_/4, [
+		comment is 'Coverage baseline cache for an entity and predicate: covered clauses and total clauses.',
+		argnames is ['Entity', 'Predicate', 'CoveredClauses', 'TotalClauses']
 	]).
 
 	:- uses(list, [
@@ -384,10 +393,25 @@
 		print_message(comment, mutation_testing, phase_mutations_discovery),
 		mutants_for_predicates(Entity, Predicates, Options, Mutants0),
 		apply_sample_mutants(Mutants0, Options, Mutants),
+		collect_baseline_coverage(Entity, Predicates, Options, CoverageAvailable),
 		print_message(comment, mutation_testing, phase_mutations_testing),
-		run_mutants(Mutants, Options, 1, [], Results0),
+		run_mutants(Mutants, Options, CoverageAvailable, 1, [], Results0),
 		reverse(Results0, Results),
 		summary(Results, Options, Summary).
+
+	collect_baseline_coverage(Entity, Predicates, Options, CoverageAvailable) :-
+		retractall(baseline_coverage_(_, _, _, _)),
+		(   run_baseline_coverage_subprocess(Entity, Options) ->
+			coverage_available_for_predicates(Predicates, Entity, CoverageAvailable)
+		;   CoverageAvailable = false
+		).
+
+	coverage_available_for_predicates([], _Entity, false).
+	coverage_available_for_predicates([Predicate| Predicates], Entity, CoverageAvailable) :-
+		(   baseline_coverage_(Entity, Predicate, _, _) ->
+			CoverageAvailable = true
+		;   coverage_available_for_predicates(Predicates, Entity, CoverageAvailable)
+		).
 
 	mutants_for_predicates(Entity, Predicates, Options, Mutants) :-
 		mutators_for_options(Options, Mutators),
@@ -616,7 +640,7 @@
 	discovered_mutator(Name) :-
 		conforms_to_protocol(Mutator, mutator_protocol),
 		current_object(Mutator),
-		functor(Mutator, Name, 4).
+		functor(Mutator, Name, 5).
 
 	select_mutators(all, Mutators, Mutators) :-
 		!.
@@ -642,7 +666,8 @@
 		!.
 	build_occurrence_mutants(Remaining, Occurrence, Entity, Predicate, Mutator, Mutants0, Mutants, Generated0, Generated) :-
 		(   probe_mutation_occurrence(Entity, Predicate, Mutator, Occurrence) ->
-			Mutants1 = [mutant(Entity, Predicate, Mutator, Occurrence)| Mutants0],
+			ClauseIndex = Occurrence,
+			Mutants1 = [mutant(Entity, Predicate, ClauseIndex, Mutator, Occurrence)| Mutants0],
 			NextOccurrence is Occurrence + 1,
 			decrement_remaining(Remaining, NextRemaining),
 			Generated1 is Generated0 + 1,
@@ -660,7 +685,8 @@
 		entity_file(Entity, File),
 		retractall(probe_mutation_happened_),
 		assertz(probing_),
-		mutator_hook(Mutator, Entity, Predicate, Occurrence, true, Hook),
+		ClauseIndex = Occurrence,
+		mutator_hook(Mutator, Entity, Predicate, ClauseIndex, Occurrence, true, Hook),
 		prepare_mutator_hook(Hook),
 		load_options(LoadOptions),
 		revert_options(RevertOptions),
@@ -712,22 +738,34 @@
 		),
 		set_seed(PreviousSeed).
 
-	run_mutants([], _, _, Results, Results).
-	run_mutants([Mutant| Mutants], Options, Index, Results0, Results) :-
+	run_mutants([], _, _, _, Results, Results).
+	run_mutants([Mutant| Mutants], Options, CoverageAvailable, Index, Results0, Results) :-
 		print_message(comment, mutation_testing, testing_mutation(Mutant)),
 		(   ^^option(verbose(true), Options) ->
 			print_message(comment, mutation_testing, running_mutant(Index, Mutant)),
 			print_mutant_reproduction(Mutant)
 		;   true
 		),
-		execute_mutant(Mutant, Options, Status),
+		(   CoverageAvailable == true,
+			mutant_not_covered(Mutant) ->
+			Status = no_coverage
+		;   execute_mutant(Mutant, Options, Status)
+		),
 		Result = mutant_result(Index, Mutant, Status),
 		(   ^^option(verbose(true), Options) ->
 			print_message(comment, mutation_testing, mutant_result(Index, Mutant, Status))
 		;   true
 		),
 		NextIndex is Index + 1,
-		run_mutants(Mutants, Options, NextIndex, [Result| Results0], Results).
+		run_mutants(Mutants, Options, CoverageAvailable, NextIndex, [Result| Results0], Results).
+
+	mutant_not_covered(mutant(Entity, Predicate, ClauseIndex, Mutator, Occurrence)) :-
+		mutator_hook(Mutator, Entity, Predicate, ClauseIndex, Occurrence, false, Hook),
+		catch(Hook::coverage_clause_mutator, _, fail),
+		baseline_coverage_(Entity, Predicate, CoveredClauses, TotalClauses),
+		integer(TotalClauses),
+		TotalClauses > 0,
+		\+ member(ClauseIndex, CoveredClauses).
 
 	print_mutant_reproduction(Mutant) :-
 		(   mutant_reproduction_commands(Mutant, ApplyCommand, RevertCommand) ->
@@ -735,18 +773,15 @@
 		;   true
 		).
 
-	mutant_reproduction_commands(mutant(Entity, Predicate, Mutator, Occurrence), ApplyCommand, RevertCommand) :-
+	mutant_reproduction_commands(mutant(Entity, Predicate, ClauseIndex, Mutator, Occurrence), ApplyCommand, RevertCommand) :-
 		entity_file(Entity, File),
-		mutator_hook(Mutator, Entity, Predicate, Occurrence, false, Hook),
+		mutator_hook(Mutator, Entity, Predicate, ClauseIndex, Occurrence, false, Hook),
 		load_options(LoadOptions),
 		revert_options(RevertOptions),
 		ApplyCommand = logtalk_load(File, [hook(Hook)| LoadOptions]),
 		RevertCommand = logtalk_load(File, RevertOptions).
-	mutant_reproduction_commands(mutant(Entity, Predicate, Point, Mutator), ApplyCommand, RevertCommand) :-
-		mutant_occurrence(Point, Occurrence),
-		mutant_reproduction_commands(mutant(Entity, Predicate, Mutator, Occurrence), ApplyCommand, RevertCommand).
 
-	execute_mutant(mutant(Entity, Predicate, Mutator, Occurrence), Options, Status) :-
+	execute_mutant(mutant(Entity, Predicate, ClauseIndex, Mutator, Occurrence), Options, Status) :-
 		^^option(timeout(Timeout), Options),
 		^^option(verbose(Verbose), Options),
 		^^option(print_mutation(PrintMutation), Options),
@@ -757,13 +792,13 @@
 		% matches the one produced by the subprocess (which starts fresh)
 		(	Verbose == true, PrintMutation == true ->
 			reset_seed,
-			print_mutations(Entity, Predicate, Mutator, Occurrence, File)
+			print_mutations(Entity, Predicate, ClauseIndex, Mutator, Occurrence, File)
 		;	true
 		),
 		% set up unique temp directory for this mutant
 		create_temp_dir(TempDir),
 		% write config file
-		write_mutation_config(TempDir, Entity, Predicate, Mutator, Occurrence, File),
+		write_mutation_config(TempDir, Entity, Predicate, ClauseIndex, Mutator, Occurrence, File),
 		% build and run the subprocess
 		(	catch(
 				run_subprocess(TempDir, File, Timeout, Verbose, ExitStatus, Options),
@@ -781,8 +816,8 @@
 			Status = error(subprocess_failed)
 		).
 
-	print_mutations(Entity, Predicate, Mutator, Occurrence, File) :-
-		mutator_hook(Mutator, Entity, Predicate, Occurrence, true, Hook),
+	print_mutations(Entity, Predicate, ClauseIndex, Mutator, Occurrence, File) :-
+		mutator_hook(Mutator, Entity, Predicate, ClauseIndex, Occurrence, true, Hook),
 		prepare_mutator_hook(Hook),
 		load_options(LoadOptions),
 		revert_options(RevertOptions),
@@ -791,14 +826,8 @@
 		;	catch(logtalk_load(File, RevertOptions), _, true)
 		).
 
-	mutator_hook(Mutator, Entity, Predicate, Occurrence, PrintMutation, Hook) :-
-		Hook =.. [Mutator, Entity, Predicate, Occurrence, PrintMutation].
-
-	mutant_occurrence(point(_Predicate, _Mutator, occurrence(Occurrence)), Occurrence) :-
-		integer(Occurrence),
-		Occurrence > 0,
-		!.
-	mutant_occurrence(_Point, 1).
+	mutator_hook(Mutator, Entity, Predicate, ClauseIndex, Occurrence, PrintMutation, Hook) :-
+		Hook =.. [Mutator, Entity, Predicate, ClauseIndex, Occurrence, PrintMutation].
 
 	prepare_mutator_hook(Hook) :-
 		catch(Hook::reset, _, true).
@@ -818,21 +847,98 @@
 		path_concat(SysTmp, DirName, TempDir),
 		make_directory_path(TempDir).
 
-	write_mutation_config(TempDir, Entity, Predicate, Mutator, Occurrence, SourceFile) :-
+	write_mutation_config(TempDir, Entity, Predicate, ClauseIndex, Mutator, Occurrence, SourceFile) :-
 		path_concat(TempDir, 'mutation_config.pl', ConfigFile),
 		path_concat(TempDir, 'status.txt', StatusFile),
 		% find the mutator file path
-		mutator_hook(Mutator, _E, _P, _O, false, Hook),
+		mutator_hook(Mutator, _E, _P, _CI, _O, false, Hook),
 		object_property(Hook, file(MutatorFile)),
 		open(ConfigFile, write, Stream),
 		writeq(Stream, mutation_entity(Entity)), write(Stream, '.'), nl(Stream),
 		writeq(Stream, mutation_predicate(Predicate)), write(Stream, '.'), nl(Stream),
 		writeq(Stream, mutation_mutator(Mutator)), write(Stream, '.'), nl(Stream),
+		writeq(Stream, mutation_clause_index(ClauseIndex)), write(Stream, '.'), nl(Stream),
 		writeq(Stream, mutation_occurrence(Occurrence)), write(Stream, '.'), nl(Stream),
 		writeq(Stream, mutation_source_file(SourceFile)), write(Stream, '.'), nl(Stream),
 		writeq(Stream, mutation_status_file(StatusFile)), write(Stream, '.'), nl(Stream),
 		writeq(Stream, mutation_mutator_file(MutatorFile)), write(Stream, '.'), nl(Stream),
 		close(Stream).
+
+	run_baseline_coverage_subprocess(Entity, Options) :-
+		entity_file(Entity, SourceFile),
+		create_temp_dir(TempDir),
+		path_concat(TempDir, 'coverage.txt', CoverageFile),
+		write_baseline_coverage_config(TempDir, CoverageFile),
+		^^option(timeout(Timeout), Options),
+		^^option(verbose(Verbose), Options),
+		(   catch(run_coverage_subprocess(TempDir, SourceFile, Timeout, Verbose, _ExitStatus, Options), _, fail) ->
+			catch(read_baseline_coverage(CoverageFile, Entity), _, fail),
+			cleanup_temp_dir(TempDir)
+		;   cleanup_temp_dir(TempDir),
+			fail
+		).
+
+	write_baseline_coverage_config(TempDir, CoverageFile) :-
+		path_concat(TempDir, 'coverage_config.pl', ConfigFile),
+		open(ConfigFile, write, Stream),
+		writeq(Stream, baseline_coverage_file(CoverageFile)), write(Stream, '.'), nl(Stream),
+		close(Stream).
+
+	run_coverage_subprocess(TempDir, SourceFile, Timeout, Verbose, ExitStatus, Options) :-
+		tester_directory(SourceFile, Directory, Options),
+		^^option(tester_file_name(Tester), Options),
+		os::decompose_file_name(Tester, _, TesterName, _),
+		current_logtalk_flag(prolog_dialect, Dialect),
+		path_concat(TempDir, 'coverage_config.pl', ConfigFile),
+		path_concat(TempDir, 'logs', LogsDir),
+		make_directory_path(LogsDir),
+		initialization_goal_coverage(ConfigFile, Goal),
+		(   Verbose == true ->
+			Redirect = ''
+		;   Redirect = ' > /dev/null 2>&1'
+		),
+		atomic_list_concat([
+			'cd "', Directory, '" && logtalk_tester',
+			' -p ', Dialect,
+			' -n ', TesterName,
+			' -g "', Goal, '"',
+			' -d "', LogsDir, '"',
+			' -t ', Timeout,
+			Redirect
+		], Command),
+		print_message(silent, mutation_testing, subprocess_command(Command)),
+		shell(Command, ExitStatus).
+
+	initialization_goal_coverage(ConfigFile, Goal) :-
+		atomic_list_concat([
+			'logtalk_load(mutation_testing(loader)),',
+			'logtalk_load(mutation_testing(subprocess_coverage_hook)),',
+			'subprocess_coverage_hook::load_coverage_config(''', ConfigFile, ''')'
+		], Goal).
+
+	read_baseline_coverage(CoverageFile, Entity) :-
+		open(CoverageFile, read, Stream),
+		read_baseline_coverage_terms(Stream, Entity),
+		close(Stream).
+
+	read_baseline_coverage_terms(Stream, Entity) :-
+		read_term(Stream, Term, []),
+		(   Term == end_of_file ->
+			true
+		;   Term = baseline_coverage(CoverageEntity, Predicate, CoveredClauses0, TotalClauses),
+			valid(list(integer), CoveredClauses0),
+			integer(TotalClauses) ->
+			retractall(baseline_coverage_(CoverageEntity, Predicate, _, _)),
+			assertz(baseline_coverage_(CoverageEntity, Predicate, CoveredClauses0, TotalClauses)),
+			read_baseline_coverage_terms(Stream, Entity)
+		;   Term = baseline_coverage(Predicate, CoveredClauses0, TotalClauses),
+			valid(list(integer), CoveredClauses0),
+			integer(TotalClauses) ->
+			retractall(baseline_coverage_(Entity, Predicate, _, _)),
+			assertz(baseline_coverage_(Entity, Predicate, CoveredClauses0, TotalClauses)),
+			read_baseline_coverage_terms(Stream, Entity)
+		;   read_baseline_coverage_terms(Stream, Entity)
+		).
 
 	run_subprocess(TempDir, SourceFile, Timeout, Verbose, ExitStatus, Options) :-
 		% derive test directory from source file or startup directory
@@ -1075,10 +1181,10 @@
 		results_mutants_json(Results, JSONMutants).
 
 	mutant_json(Index, Mutant, Status, json(Pairs)) :-
-		normalize_mutant(Mutant, Entity, Predicate, Mutator, Occurrence),
+		normalize_mutant(Mutant, Entity, Predicate, ClauseIndex, Mutator, Occurrence),
 		index_id(Index, Id),
 		status_name(Status, StatusName),
-		mutant_location(Entity, Predicate, Mutator, Occurrence, Location),
+		mutant_location(Entity, Predicate, ClauseIndex, Mutator, Occurrence, Location),
 		Pairs = [
 			'id'-Id,
 			'mutatorName'-Mutator,
@@ -1086,10 +1192,7 @@
 			'status'-StatusName
 		].
 
-	normalize_mutant(mutant(Entity, Predicate, Mutator, Occurrence), Entity, Predicate, Mutator, Occurrence) :-
-		!.
-	normalize_mutant(mutant(Entity, Predicate, Point, Mutator), Entity, Predicate, Mutator, Occurrence) :-
-		mutant_occurrence(Point, Occurrence).
+	normalize_mutant(mutant(Entity, Predicate, ClauseIndex, Mutator, Occurrence), Entity, Predicate, ClauseIndex, Mutator, Occurrence).
 
 	index_id(Index, Id) :-
 		number_codes(Index, Codes),
@@ -1103,8 +1206,8 @@
 	status_name(untested, 'Pending').
 	status_name(error(_), 'RuntimeError').
 
-	mutant_location(Entity, Predicate, Mutator, Occurrence, Location) :-
-		(   mutant_terms(mutant(Entity, Predicate, Mutator, Occurrence), _Original, _Mutation, _Variables, _File, StartLine0-EndLine0) ->
+	mutant_location(Entity, Predicate, ClauseIndex, Mutator, Occurrence, Location) :-
+		(   mutant_terms(mutant(Entity, Predicate, ClauseIndex, Mutator, Occurrence), _Original, _Mutation, _Variables, _File, StartLine0-EndLine0) ->
 			StartLine is max(1, StartLine0),
 			EndLine is max(StartLine, EndLine0)
 		;   StartLine = 1,
@@ -1211,11 +1314,11 @@
 		;   true
 		).
 
-	mutant_terms(mutant(Entity, Predicate, Mutator, Occurrence), Original, Mutation, Variables, File, StartLine-EndLine) :-
+	mutant_terms(mutant(Entity, Predicate, ClauseIndex, Mutator, Occurrence), Original, Mutation, Variables, File, StartLine-EndLine) :-
 		entity_file(Entity, SourceFile),
 		retractall(captured_mutated_terms_(_, _, _, _, _)),
 		assertz(capturing_mutated_terms_),
-		mutator_hook(Mutator, Entity, Predicate, Occurrence, true, Hook),
+		mutator_hook(Mutator, Entity, Predicate, ClauseIndex, Occurrence, true, Hook),
 		prepare_mutator_hook(Hook),
 		load_options(LoadOptions),
 		revert_options(RevertOptions),
@@ -1272,7 +1375,7 @@
 		valid(list(atom), Mutators),
 		forall(
 			(	member(Mutator, Mutators),
-				mutator_hook(Mutator, _Entity, _Predicate, _Occurrence, _PrintMutation, Hook)
+				mutator_hook(Mutator, _Entity, _Predicate, _ClauseIndex, _Occurrence, _PrintMutation, Hook)
 			),
 			conforms_to_protocol(Hook, mutator_protocol)
 		).

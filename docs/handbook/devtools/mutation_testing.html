@@ -179,6 +179,7 @@ mutator.</p></li>
 <li><p>Deterministic sampled execution (<code class="docutils literal notranslate"><span class="pre">sampling(all|count(N)|rate(R))</span></code>
 plus <code class="docutils literal notranslate"><span class="pre">seed/1</span></code>).</p></li>
 <li><p>Mutation score computation (killed versus survived mutants).</p></li>
+<li><p>Mutation generation guided by code coverage stats.</p></li>
 <li><p>Threshold gating suitable for CI/CD checks.</p></li>
 <li><p>Exporting of mutation campaign reports in plain text and JSON formats.</p></li>
 </ul>
@@ -470,7 +471,7 @@ select the same subset. When all mutants are executed, (using
 <h2>Defining new mutators<a class="headerlink" href="#defining-new-mutators" title="Link to this heading"></a></h2>
 <p>Define a new mutator as parametric object implementing the <code class="docutils literal notranslate"><span class="pre">expanding</span></code>
 protocol and importing the <code class="docutils literal notranslate"><span class="pre">mutator_common</span></code> category:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(my_mutator(<span class="nv">_Entity_</span>, <span class="nv">_Predicate_</span>, <span class="nv">_Occurrence_</span>, <span class="nv">Occurrence_</span>, <span class="nv">_PrintMutation_</span>),
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(my_mutator(<span class="nv">_Entity_</span>, <span class="nv">_Predicate_</span>, <span class="nv">_ClauseIndex_</span>, <span class="nv">_Occurrence_</span>, <span class="nv">_PrintMutation_</span>),
     <span class="k">implements</span>(expanding),
     <span class="k">imports</span>(mutator_common)).
 

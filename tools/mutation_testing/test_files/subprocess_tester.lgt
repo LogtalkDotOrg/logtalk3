@@ -12,7 +12,8 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
-	logtalk_load(test_entities, [optimize(on)]),
+	% Clause coverage collection requires trace events from debug-compiled entities.
+	logtalk_load(test_entities, [debug(on), source_data(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(subprocess_tests, [hook(lgtunit), optimize(on)]),
 	subprocess_tests::run

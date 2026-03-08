@@ -15,7 +15,7 @@ Mutator protocol
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-03-06
+| **Date:** 2026-03-07
 
 | **Compilation flags:**
 |    ``static``
@@ -70,6 +70,23 @@ Generates by backtracking zero or more mutations for a given term.
 |    ``mutation(Term,Mutation)``
 | **Mode and number of proofs:**
 |    ``mutation(@callable,@callable)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: coverage_clause_mutator/0
+.. _mutator_protocol/0::coverage_clause_mutator/0:
+
+``coverage_clause_mutator/0``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when mutation occurrences map directly to predicate clause numbers and can use baseline clause coverage for skipping uncovered mutants.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``coverage_clause_mutator`` - ``zero_or_one``
 
 
 ------------

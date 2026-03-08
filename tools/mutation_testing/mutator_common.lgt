@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-06,
+		date is 2026-03-07,
 		comment is 'Mutator common predicate utilities.'
 	]).
 
@@ -40,6 +40,19 @@
 		argnames is ['Term', 'Entity', 'Predicate']
 	]).
 
+	:- protected(target_predicate_clause_index/4).
+	:- mode(target_predicate_clause_index(@callable, @entity_identifier, @predicate_indicator, -integer), zero_or_one).
+	:- info(target_predicate_clause_index/4, [
+		comment is 'True iff ``Term`` is a candidate for mutation while also returning its current 1-based contiguous clause index for the matching predicate or non-terminal.',
+		argnames is ['Term', 'Entity', 'Predicate', 'ClauseIndex']
+	]).
+
+	:- private(current_predicate_clause_index_/2).
+	:- dynamic(current_predicate_clause_index_/2).
+
+	:- private(update_target_predicate_clause_index_/2).
+	:- mode(update_target_predicate_clause_index_(@predicate_indicator, -integer), one).
+
 	target_predicate((Head :- _Body), Entity, Predicate) :-
 		!,
 		target_predicate(Head, Entity, Predicate).
@@ -56,7 +69,23 @@
 		)),
 		functor(Head, Name, Arity).
 
-	% by default, reset/0 does nothing
-	reset.
+	target_predicate_clause_index(Term, Entity, Predicate, ClauseIndex) :-
+		target_predicate(Term, Entity, Predicate),
+		update_target_predicate_clause_index_(Predicate, ClauseIndex).
+
+	update_target_predicate_clause_index_(Predicate, ClauseIndex) :-
+		(   ::retract(current_predicate_clause_index_(Predicate, Previous)) ->
+			ClauseIndex is Previous + 1
+		;   ::retractall(current_predicate_clause_index_(_, _)),
+			ClauseIndex = 1
+		),
+		::assertz(current_predicate_clause_index_(Predicate, ClauseIndex)).
+
+	reset :-
+		::retractall(current_predicate_clause_index_(_, _)).
+
+	% by default, mutators do not map mutation occurrences to clause numbers
+	coverage_clause_mutator :-
+		fail.
 
 :- end_category.

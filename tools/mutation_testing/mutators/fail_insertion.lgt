@@ -7,18 +7,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(fail_insertion(_Entity_, _Predicate_, _Occurrence_, _PrintMutation_),
+:- object(fail_insertion(_Entity_, _Predicate_, _ClauseIndex_, _Occurrence_, _PrintMutation_),
 	implements(expanding),
 	imports(mutator_common)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-06,
+		date is 2026-03-07,
 		comment is 'Hook object implementing the ``fail_insertion`` mutator by inserting fail at deterministic body positions for matching predicate clauses.',
 		parameters is [
 			'Entity' - 'Identifier of the entity being mutated.',
 			'Predicate' - 'Predicate or non-terminal indicator selecting clauses to mutate.',
+			'ClauseIndex' - '1-based clause index for the selected mutation (equal to ``Occurrence`` for this mutator).',
 			'Occurrence' - '1-based mutation occurrence index to target within selected predicate clauses.',
 			'PrintMutation' - 'Boolean flag to print the original and mutated term plus source location.'
 		]
@@ -27,9 +28,12 @@
 	:- private(seen_/1).
 	:- dynamic(seen_/1).
 
+	coverage_clause_mutator.
+
 	term_expansion(Term, Mutation) :-
-		^^target_predicate(Term, _Entity_, _Predicate_),
+		^^target_predicate_clause_index(Term, _Entity_, _Predicate_, ClauseIndex),
 		next_occurrence(Occurrence),
+		ClauseIndex =:= _ClauseIndex_,
 		Occurrence =:= _Occurrence_,
 		fail_insertion_kind(Occurrence, Kind),
 		mutation_with_kind(Term, Kind, Mutation),
@@ -61,6 +65,7 @@
 	fail_insertion_kind(middle).
 
 	reset :-
+		^^reset,
 		retractall(seen_(_)),
 		assertz(seen_(0)).
 

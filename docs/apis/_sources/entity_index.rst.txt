@@ -78,7 +78,7 @@ Objects
    ada_boost <ada_boost_0>
    after_event_registry <after_event_registry_0>
    amqp <amqp_0>
-   arithmetic_operator_replacement(Entity,Predicate,Occurrence,PrintMutation) <arithmetic_operator_replacement_4>
+   arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <arithmetic_operator_replacement_5>
    assertions <assertions_0>
    assertions(Mode) <assertions_1>
    assignvars <assignvars_0>
@@ -111,7 +111,7 @@ Objects
    ccsds <ccsds_0>
    ccsds(SecondaryHeaderLength) <ccsds_1>
    character <character_0>
-   clause_order_reordering(Entity,Predicate,Occurrence,PrintMutation) <clause_order_reordering_4>
+   clause_order_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <clause_order_reordering_5>
    cobertura_report <cobertura_report_0>
    code_metrics <code_metrics_0>
    combinations <combinations_0>
@@ -165,7 +165,7 @@ Objects
    expand_library_alias_paths <expand_library_alias_paths_0>
    expected <expected_0>
    expected(Expected) <expected_1>
-   fail_insertion(Entity,Predicate,Occurrence,PrintMutation) <fail_insertion_4>
+   fail_insertion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <fail_insertion_5>
    fast_random <fast_random_0>
    fast_random(Algorithm) <fast_random_1>
    fcube <fcube_0>
@@ -183,8 +183,8 @@ Objects
    graph_language_registry <graph_language_registry_0>
    halstead_metric <halstead_metric_0>
    halstead_metric(Stroud) <halstead_metric_1>
-   head_arguments_mutation(Entity,Predicate,Occurrence,PrintMutation) <head_arguments_mutation_4>
-   head_arguments_reordering(Entity,Predicate,Occurrence,PrintMutation) <head_arguments_reordering_4>
+   head_arguments_mutation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_mutation_5>
+   head_arguments_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_reordering_5>
    heap(Order) <heap_1>
    help <help_0>
    heuristic_expansion(Mode) <heuristic_expansion_1>
@@ -282,7 +282,7 @@ Objects
    population <population_0>
    porter_stemmer(Representation) <porter_stemmer_1>
    ports_profiler <ports_profiler_0>
-   predicate_negation(Entity,Predicate,Occurrence,PrintMutation) <predicate_negation_4>
+   predicate_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <predicate_negation_5>
    print_goal_hook <print_goal_hook_0>
    process <process_0>
    prolog_module_hook(Module) <prolog_module_hook_1>
@@ -297,7 +297,7 @@ Objects
    redis <redis_0>
    registries <registries_0>
    registry_loader_hook <registry_loader_hook_0>
-   relational_operator_replacement(Entity,Predicate,Occurrence,PrintMutation) <relational_operator_replacement_4>
+   relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <relational_operator_replacement_5>
    rule_expansion(Mode) <rule_expansion_1>
    sample <sample_0>
    sequence_grammars <sequence_grammars_0>
@@ -343,7 +343,7 @@ Objects
    toon(ObjectRepresentation,PairRepresentation,StringRepresentation) <toon_3>
    toychrdb <toychrdb_0>
    treap_set <treap_set_0>
-   truth_literal_flip(Entity,Predicate,Occurrence,PrintMutation) <truth_literal_flip_4>
+   truth_literal_flip(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <truth_literal_flip_5>
    tsv <tsv_0>
    tsv(Header) <tsv_1>
    tsv(Header,Comments) <tsv_2>

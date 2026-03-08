@@ -15,7 +15,7 @@ Mutator common predicate utilities.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-03-06
+| **Date:** 2026-03-07
 
 | **Compilation flags:**
 |    ``static``
@@ -30,7 +30,7 @@ Mutator common predicate utilities.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`mutator_protocol/0::mutation/2`  :ref:`mutator_protocol/0::reset/0`  
+|     :ref:`mutator_protocol/0::coverage_clause_mutator/0`  :ref:`mutator_protocol/0::mutation/2`  :ref:`mutator_protocol/0::reset/0`  
 
 .. contents::
    :local:
@@ -82,10 +82,54 @@ True iff ``Term`` is a candidate for mutation.
 
 ------------
 
+.. index:: target_predicate_clause_index/4
+.. _mutator_common/0::target_predicate_clause_index/4:
+
+``target_predicate_clause_index/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff ``Term`` is a candidate for mutation while also returning its current 1-based contiguous clause index for the matching predicate or non-terminal.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``target_predicate_clause_index(Term,Entity,Predicate,ClauseIndex)``
+| **Mode and number of proofs:**
+|    ``target_predicate_clause_index(@callable,@entity_identifier,@predicate_indicator,-integer)`` - ``zero_or_one``
+
+
+------------
+
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: current_predicate_clause_index_/2
+.. _mutator_common/0::current_predicate_clause_index_/2:
+
+``current_predicate_clause_index_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: update_target_predicate_clause_index_/2
+.. _mutator_common/0::update_target_predicate_clause_index_/2:
+
+``update_target_predicate_clause_index_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``update_target_predicate_clause_index_(@predicate_indicator,-integer)`` - ``one``
+
+
+------------
 
 Operators
 ---------

@@ -56,6 +56,7 @@ Features
 - Configurable mutator sets and campaign size limits.
 - Deterministic sampled execution (`sampling(all|count(N)|rate(R))` plus `seed/1`).
 - Mutation score computation (killed versus survived mutants).
+- Mutation generation guided by code coverage stats.
 - Threshold gating suitable for CI/CD checks.
 - Exporting of mutation campaign reports in plain text and JSON formats.
 
@@ -297,7 +298,7 @@ Defining new mutators
 Define a new mutator as parametric object implementing the `expanding` protocol
 and importing the `mutator_common` category:
 
-	:- object(my_mutator(_Entity_, _Predicate_, _Occurrence_, Occurrence_, _PrintMutation_),
+	:- object(my_mutator(_Entity_, _Predicate_, _ClauseIndex_, _Occurrence_, _PrintMutation_),
 		implements(expanding),
         imports(mutator_common)).
 

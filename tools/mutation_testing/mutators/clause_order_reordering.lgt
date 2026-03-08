@@ -7,7 +7,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(clause_order_reordering(_Entity_, _Predicate_, _Occurrence_, _PrintMutation_),
+:- object(clause_order_reordering(_Entity_, _Predicate_, _ClauseIndex_, _Occurrence_, _PrintMutation_),
 	implements(expanding),
 	imports(mutator_common)).
 
@@ -19,6 +19,7 @@
 		parameters is [
 			'Entity' - 'Identifier of the entity being mutated.',
 			'Predicate' - 'Predicate or non-terminal indicator selecting clauses to mutate.',
+			'ClauseIndex' - '1-based clause index selecting which clause is swapped with its successor (last swaps with first).',
 			'Occurrence' - '1-based clause index selecting which clause is swapped with its successor (last swaps with first).',
 			'PrintMutation' - 'Boolean flag to print the original and mutated term plus source location.'
 		]
@@ -78,6 +79,7 @@
 		).
 
 	reset :-
+		^^reset,
 		retractall(clauses_(_)),
 		reset_seen.
 

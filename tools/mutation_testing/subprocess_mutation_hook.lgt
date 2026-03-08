@@ -65,6 +65,10 @@
 		{mutation_entity(Entity)},
 		{mutation_predicate(Predicate)},
 		{mutation_mutator(Mutator)},
+		(   {mutation_clause_index(ClauseIndex)} ->
+			true
+		;   {mutation_occurrence(ClauseIndex)}
+		),
 		{mutation_occurrence(Occurrence)},
 		{mutation_mutator_file(MutatorFile)},
 		{mutation_status_file(StatusFile)},
@@ -81,7 +85,7 @@
 		% reset the random seed to ensure the mutation matches
 		% the one printed by the main process
 		reset_seed,
-		Hook =.. [Mutator, Entity, Predicate, Occurrence, false],
+		Hook =.. [Mutator, Entity, Predicate, ClauseIndex, Occurrence, false],
 		Hook::reset,
 		set_logtalk_flag(hook, Hook).
 
