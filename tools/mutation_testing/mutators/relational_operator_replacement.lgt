@@ -14,12 +14,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-07,
+		date is 2026-03-08,
 		comment is 'Hook object implementing the ``relational_operator_replacement`` mutator for matching predicate clauses.',
 		parameters is [
 			'Entity' - 'Identifier of the entity being mutated.',
 			'Predicate' - 'Predicate or non-terminal indicator selecting clauses to mutate.',
-			'ClauseIndex' - '1-based clause index for the selected mutation (equal to ``Occurrence`` for this mutator).',
+			'ClauseIndex' - '1-based clause index for the selected mutation.',
 			'Occurrence' - '1-based mutation occurrence index to target within selected predicate clauses.',
 			'PrintMutation' - 'Boolean flag to print the original and mutated term plus source location.'
 		]
@@ -105,7 +105,6 @@
 		nonvar(Goal),
 		Goal =.. [Operator, Left, Right],
 		relational_operator_replacement(Operator, Replacement),
-		!,
 		Replaced =.. [Replacement, Left, Right].
 	replace_relational_operators(Goal, Goal, false).
 
@@ -157,16 +156,43 @@
 	replace_dcg_relational_operators(Goal, Goal, false).
 
 	relational_operator_replacement((>), (=<)).
+	relational_operator_replacement((>), (<)).
+	relational_operator_replacement((>), (>=)).
+
 	relational_operator_replacement((<), (>=)).
+	relational_operator_replacement((<), (>)).
+	relational_operator_replacement((<), (=<)).
+
 	relational_operator_replacement((>=), (<)).
+	relational_operator_replacement((>=), (=<)).
+	relational_operator_replacement((>=), (>)).
+
 	relational_operator_replacement((=<), (>)).
+	relational_operator_replacement((=<), (>=)).
+	relational_operator_replacement((=<), (<)).
+
 	relational_operator_replacement((=:=), (=\=)).
+
 	relational_operator_replacement((=\=), (=:=)).
+
 	relational_operator_replacement((@>), (@=<)).
+	relational_operator_replacement((@>), (@<)).
+	relational_operator_replacement((@>), (@>=)).
+
 	relational_operator_replacement((@<), (@>=)).
+	relational_operator_replacement((@<), (@>)).
+	relational_operator_replacement((@<), (@=<)).
+
 	relational_operator_replacement((@>=), (@<)).
+	relational_operator_replacement((@>=), (@=<)).
+	relational_operator_replacement((@>=), (@>)).
+
 	relational_operator_replacement((@=<), (@>)).
+	relational_operator_replacement((@=<), (@>=)).
+	relational_operator_replacement((@=<), (@<)).
+
 	relational_operator_replacement((==), (\==)).
+
 	relational_operator_replacement((\==), (==)).
 
 :- end_object.

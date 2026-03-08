@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-07,
+		date is 2026-03-08,
 		comment is 'Mutation testing tool.'
 	]).
 
@@ -228,7 +228,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, reverse/2, take/3
+		append/3, length/2, member/2, memberchk/2, reverse/2, take/3
 	]).
 
 	:- uses(logtalk, [
@@ -654,24 +654,32 @@
 
 	build_mutants([], _, _, _, Mutants, Mutants).
 	build_mutants([Predicate| Predicates], Entity, Mutators, Limit, Mutants0, Mutants) :-
-		build_predicate_mutants(Mutators, Entity, Predicate, Limit, Mutants0, Mutants1),
+		(	current_object(Entity) ->
+			object_property(Entity, defines(Predicate, Properties))
+		;	current_category(Entity),
+			category_property(Entity, defines(Predicate, Properties))
+		), !,
+		memberchk(number_of_clauses(NumberOfClauses), Properties),
+		build_predicate_mutants(Mutators, Entity, Predicate, NumberOfClauses, Limit, Mutants0, Mutants1),
 		build_mutants(Predicates, Entity, Mutators, Limit, Mutants1, Mutants).
 
-	build_predicate_mutants([], _, _, _, Mutants, Mutants).
-	build_predicate_mutants([Mutator| Mutators], Entity, Predicate, Limit, Mutants0, Mutants) :-
-		build_occurrence_mutants(Limit, 1, Entity, Predicate, Mutator, Mutants0, Mutants1, 0, _Generated),
-		build_predicate_mutants(Mutators, Entity, Predicate, Limit, Mutants1, Mutants).
+	build_predicate_mutants([], _, _, _, _, Mutants, Mutants).
+	build_predicate_mutants([Mutator| Mutators], Entity, Predicate, NumberOfClauses, Limit, Mutants0, Mutants) :-
+		build_occurrence_mutants(NumberOfClauses, 1, Limit, 1, Entity, Predicate, Mutator, Mutants0, Mutants1, 0, _Generated),
+		build_predicate_mutants(Mutators, Entity, Predicate, NumberOfClauses, Limit, Mutants1, Mutants).
 
-	build_occurrence_mutants(0, _Occurrence, _Entity, _Predicate, _Mutator, Mutants, Mutants, Generated, Generated) :-
+	build_occurrence_mutants(_, _, 0, _Occurrence, _Entity, _Predicate, _Mutator, Mutants, Mutants, Generated, Generated) :-
 		!.
-	build_occurrence_mutants(Remaining, Occurrence, Entity, Predicate, Mutator, Mutants0, Mutants, Generated0, Generated) :-
-		(   probe_mutation_occurrence(Entity, Predicate, Mutator, Occurrence) ->
-			ClauseIndex = Occurrence,
+	build_occurrence_mutants(NumberOfClauses, ClauseIndex, Remaining, Occurrence, Entity, Predicate, Mutator, Mutants0, Mutants, Generated0, Generated) :-
+		(   probe_mutation_occurrence(Entity, Predicate, ClauseIndex, Mutator, Occurrence) ->
 			Mutants1 = [mutant(Entity, Predicate, ClauseIndex, Mutator, Occurrence)| Mutants0],
 			NextOccurrence is Occurrence + 1,
 			decrement_remaining(Remaining, NextRemaining),
 			Generated1 is Generated0 + 1,
-			build_occurrence_mutants(NextRemaining, NextOccurrence, Entity, Predicate, Mutator, Mutants1, Mutants, Generated1, Generated)
+			build_occurrence_mutants(NumberOfClauses, ClauseIndex, NextRemaining, NextOccurrence, Entity, Predicate, Mutator, Mutants1, Mutants, Generated1, Generated)
+		;	ClauseIndex < NumberOfClauses ->
+			NextClauseIndex is ClauseIndex + 1,
+			build_occurrence_mutants(NumberOfClauses, NextClauseIndex, Remaining, Occurrence, Entity, Predicate, Mutator, Mutants0, Mutants, Generated0, Generated)
 		;   Mutants = Mutants0,
 			Generated = Generated0
 		).
@@ -681,11 +689,10 @@
 	decrement_remaining(Remaining, NextRemaining) :-
 		NextRemaining is max(0, Remaining - 1).
 
-	probe_mutation_occurrence(Entity, Predicate, Mutator, Occurrence) :-
+	probe_mutation_occurrence(Entity, Predicate, ClauseIndex, Mutator, Occurrence) :-
 		entity_file(Entity, File),
 		retractall(probe_mutation_happened_),
 		assertz(probing_),
-		ClauseIndex = Occurrence,
 		mutator_hook(Mutator, Entity, Predicate, ClauseIndex, Occurrence, true, Hook),
 		prepare_mutator_hook(Hook),
 		load_options(LoadOptions),

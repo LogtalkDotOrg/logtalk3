@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-07,
+		date is 2026-03-08,
 		comment is 'Unit tests for the "mutation_testing" tool.'
 	]).
 
@@ -277,25 +277,25 @@
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
 		^^assertion(mt_dcg_sample::dcg_guard_check).
 
-	test(mt_mutator_relational_operator_replacement_01, deterministic) :-
+	test(mt_mutator_relational_operator_replacement_01, true) :-
 		load_with_hook(relational_operator_replacement(mt_sample, target/2, 1, 1, false)),
 		^^assertion(\+ mt_sample::check(1)),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
 		^^assertion(mt_sample::check(1)).
 
-	test(mt_mutator_relational_operator_replacement_02, deterministic) :-
+	test(mt_mutator_relational_operator_replacement_02, true) :-
 		load_with_hook(relational_operator_replacement(mt_sample, term_target/2, 1, 1, false)),
 		^^assertion(\+ mt_sample::term_check),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
 		^^assertion(mt_sample::term_check).
 
-	test(mt_mutator_relational_operator_replacement_03, deterministic) :-
+	test(mt_mutator_relational_operator_replacement_03, true) :-
 		load_with_hook(relational_operator_replacement(mt_sample, disj_cmp/1, 1, 1, false)),
 		^^assertion(\+ mt_sample::disj_cmp_check),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
 		^^assertion(mt_sample::disj_cmp_check).
 
-	test(mt_mutator_relational_operator_replacement_dcg_01, deterministic) :-
+	test(mt_mutator_relational_operator_replacement_dcg_01, true) :-
 		load_with_hook(relational_operator_replacement(mt_dcg_sample, dcg_guard//0, 1, 1, false)),
 		^^assertion(\+ mt_dcg_sample::dcg_guard_check),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
@@ -384,7 +384,7 @@
 	% options validation tests
 
 	test(mt_max_mutators_option_01, deterministic) :-
-		mutation_testing::entity_mutants(mt_sample, _, [
+		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [
 			max_mutators(1)
 		]).
 
@@ -563,31 +563,31 @@
 		^^assertion(Results = [mutant_result(1, _, _), mutant_result(2, _, _), mutant_result(3, _, _)]).
 
 	test(mt_sampling_seed_reproducibility_01, deterministic) :-
-		mutation_testing::report_entity(mt_sample, report(mt_sample, summary(Total1, _Killed1, _Survived1, _Untested1, _Timeout1, _NoCoverage1, _Errors1, _Score1, _Threshold1, _Passed1), Results1), [
-			mutators([arithmetic_operator_replacement, relational_operator_replacement]),
-			sampling(count(4)),
+		mutation_testing::report_predicate(mt_other_sample, check/1, report(mt_other_sample, summary(Total1, _Killed1, _Survived1, _Untested1, _Timeout1, _NoCoverage1, _Errors1, _Score1, _Threshold1, _Passed1), Results1), [
+			mutators([relational_operator_replacement]),
+			sampling(count(2)),
 			seed(20260303),
 			tester_file_name('subprocess_tester.lgt')
 		]),
-		mutation_testing::report_entity(mt_sample, report(mt_sample, summary(Total2, _Killed2, _Survived2, _Untested2, _Timeout2, _NoCoverage2, _Errors2, _Score2, _Threshold2, _Passed2), Results2), [
-			mutators([arithmetic_operator_replacement, relational_operator_replacement]),
-			sampling(count(4)),
+		mutation_testing::report_predicate(mt_other_sample, check/1, report(mt_other_sample, summary(Total2, _Killed2, _Survived2, _Untested2, _Timeout2, _NoCoverage2, _Errors2, _Score2, _Threshold2, _Passed2), Results2), [
+			mutators([relational_operator_replacement]),
+			sampling(count(2)),
 			seed(20260303),
 			tester_file_name('subprocess_tester.lgt')
 		]),
-		^^assertion(total1, Total1 == 4),
-		^^assertion(total2, Total2 == 4),
+		^^assertion(total1, Total1 == 2),
+		^^assertion(total2, Total2 == 2),
 		^^assertion(results, Results1 == Results2).
 
 	test(mt_sampling_all_seed_invariance_01, deterministic) :-
-		mutation_testing::report_entity(mt_sample, report(mt_sample, summary(Total1, _Killed1, _Survived1, _Untested1, _Timeout1, _NoCoverage1, _Errors1, _Score1, _Threshold1, _Passed1), Results1), [
-			mutators([arithmetic_operator_replacement, relational_operator_replacement]),
+		mutation_testing::report_predicate(mt_other_sample, check/1, report(mt_other_sample, summary(Total1, _Killed1, _Survived1, _Untested1, _Timeout1, _NoCoverage1, _Errors1, _Score1, _Threshold1, _Passed1), Results1), [
+			mutators([relational_operator_replacement]),
 			sampling(all),
 			seed(1),
 			tester_file_name('subprocess_tester.lgt')
 		]),
-		mutation_testing::report_entity(mt_sample, report(mt_sample, summary(Total2, _Killed2, _Survived2, _Untested2, _Timeout2, _NoCoverage2, _Errors2, _Score2, _Threshold2, _Passed2), Results2), [
-			mutators([arithmetic_operator_replacement, relational_operator_replacement]),
+		mutation_testing::report_predicate(mt_other_sample, check/1, report(mt_other_sample, summary(Total2, _Killed2, _Survived2, _Untested2, _Timeout2, _NoCoverage2, _Errors2, _Score2, _Threshold2, _Passed2), Results2), [
+			mutators([relational_operator_replacement]),
 			sampling(all),
 			seed(9999),
 			tester_file_name('subprocess_tester.lgt')
