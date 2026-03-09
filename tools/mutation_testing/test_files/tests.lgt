@@ -117,13 +117,14 @@
 	% report_entity/3 tests
 
 	test(mt_report_entity_3_01, deterministic) :-
-		mutation_testing::report_entity(mt_sample, report(mt_sample, summary(Total, Killed, Survived, Untested, Timeout, NoCoverage, Errors, _Score, Threshold, Passed), Results), [
+		mutation_testing::report_entity(mt_other_sample, report(mt_other_sample, summary(Total, Killed, Survived, Untested, Timeout, NoCoverage, Errors, _Score, Threshold, Passed), Results), [
 			mutators([fail_insertion]),
 			sampling(count(3)),
 			threshold(0.0),
 			tester_file_name('subprocess_tester.lgt')
 		]),
-		^^assertion(Total == 3),
+		^^assertion(Total == 2),
+		^^assertion(Killed == 2),
 		Accounted is Killed + Survived + Untested + Timeout + NoCoverage + Errors,
 		^^assertion(Accounted == Total),
 		^^assertion(Threshold == 0.0),
@@ -132,13 +133,15 @@
 
 	test(mt_report_entity_3_02, deterministic) :-
 		mt_mutation_state::set(original),
-		mutation_testing::report_entity(mt_sample, report(mt_sample, summary(Total, Killed, Survived, Untested, Timeout, NoCoverage, Errors, _Score, _Threshold, _Passed), _), [
-			mutators([fail_insertion, predicate_negation]),
+		mutation_testing::report_entity(mt_other_sample, report(mt_other_sample, summary(Total, Killed, Survived, Untested, Timeout, NoCoverage, Errors, _Score, _Threshold, _Passed), _), [
+			mutators([fail_insertion, relational_operator_replacement]),
+			max_mutations_per_mutator(1),
 			sampling(count(2)),
 			threshold(0.0),
 			tester_file_name('subprocess_tester.lgt')
 		]),
 		^^assertion(Total == 2),
+		^^assertion(Killed == 2),
 		Accounted is Killed + Survived + Untested + Timeout + NoCoverage + Errors,
 		^^assertion(Accounted == Total),
 		% verify subprocess execution didn't affect main process state
