@@ -19,7 +19,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(\+current_logtalk_flag(prolog_dialect, quintus)).
+:- if(\+ current_logtalk_flag(prolog_dialect, quintus)).
+
+	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
+		:- use_module(library(process), []).
+	:- endif.
 
 	:- initialization((
 		logtalk_load(basic_types(loader)),
