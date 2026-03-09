@@ -86,4 +86,7 @@
 	test(mt_clauses_reordering, true(L == [1,2,3])) :-
 		findall(X, mt_clauses_reordering::p(X), L).
 
+	test(mt_body_goal_negation, true) :-
+		mt_body_goal_negation::a.
+
 :- end_object.

@@ -1531,11 +1531,11 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <arithmetic_operator_replacement_5>
+   body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <body_goal_negation_5>
    clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <clauses_reordering_5>
    fail_insertion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <fail_insertion_5>
    head_arguments_mutation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_mutation_5>
    head_arguments_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_reordering_5>
-   predicate_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <predicate_negation_5>
    relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <relational_operator_replacement_5>
    truth_literal_flip(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <truth_literal_flip_5>
 

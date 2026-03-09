@@ -970,6 +970,7 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <arithmetic_operator_replacement_5>
+   body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <body_goal_negation_5>
    clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <clauses_reordering_5>
    fail_insertion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <fail_insertion_5>
    head_arguments_mutation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_mutation_5>
@@ -978,7 +979,6 @@ To load any library (including developer tools, ports, and contributions), use t
    mutation_testing_messages <mutation_testing_messages_0>
    mutator_common <mutator_common_0>
    mutator_protocol <mutator_protocol_0>
-   predicate_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <predicate_negation_5>
    relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <relational_operator_replacement_5>
    subprocess_coverage_hook <subprocess_coverage_hook_0>
    subprocess_mutation_hook <subprocess_mutation_hook_0>

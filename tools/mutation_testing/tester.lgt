@@ -28,7 +28,7 @@
 			mutator_protocol,
 			mutator_common,
 			'mutators/fail_insertion',
-			'mutators/predicate_negation',
+			'mutators/body_goal_negation',
 			'mutators/relational_operator_replacement',
 			'mutators/arithmetic_operator_replacement',
 			'mutators/truth_literal_flip',

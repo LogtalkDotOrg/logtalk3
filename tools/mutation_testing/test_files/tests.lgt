@@ -26,7 +26,7 @@
 	cover(mutator_common).
 	% default mutators
 	cover(fail_insertion(_, _, _, _, _)).
-	cover(predicate_negation(_, _, _, _, _)).
+	cover(body_goal_negation(_, _, _, _, _)).
 	cover(relational_operator_replacement(_, _, _, _, _)).
 	cover(arithmetic_operator_replacement(_, _, _, _, _)).
 	cover(truth_literal_flip(_, _, _, _, _)).
@@ -76,17 +76,17 @@
 		mutation_testing::entity_mutants(mt_other_sample, Mutants, [mutators([fail_insertion])]).
 
 	test(mt_entity_mutants_ordering_01, deterministic) :-
-		mutation_testing::entity_mutants(mt_other_sample, Mutants, [mutators([fail_insertion, predicate_negation])]),
+		mutation_testing::entity_mutants(mt_other_sample, Mutants, [mutators([fail_insertion, body_goal_negation])]),
 		^^assertion(Mutants == [
 			mutant(mt_other_sample, check/1, 1, fail_insertion, 1),
 			mutant(mt_other_sample, check/1, 1, fail_insertion, 2),
-			mutant(mt_other_sample, check/1, 1, predicate_negation, 1)
+			mutant(mt_other_sample, check/1, 1, body_goal_negation, 1)
 		]).
 
 	test(mt_entity_mutants_occurrence_02, deterministic) :-
-		mutation_testing::entity_mutants(mt_other_sample, Mutants, [mutators([fail_insertion, predicate_negation, relational_operator_replacement])]),
+		mutation_testing::entity_mutants(mt_other_sample, Mutants, [mutators([fail_insertion, body_goal_negation, relational_operator_replacement])]),
 		memberchk(mutant(mt_other_sample, check/1, 1, fail_insertion, 1), Mutants),
-		memberchk(mutant(mt_other_sample, check/1, 1, predicate_negation, 1), Mutants),
+		memberchk(mutant(mt_other_sample, check/1, 1, body_goal_negation, 1), Mutants),
 		memberchk(mutant(mt_other_sample, check/1, 1, relational_operator_replacement, 1), Mutants).
 
 	test(mt_entity_mutants_head_arguments_mutation_occurrence_01, deterministic) :-
@@ -269,22 +269,30 @@
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
 		^^assertion(mt_dcg_sample::dcg_multi_check(b)).
 
-	test(mt_mutator_predicate_negation_01, deterministic) :-
-		load_with_hook(predicate_negation(mt_sample, check/1, 1, 1, false)),
+	test(mt_mutator_body_goal_negation_01, deterministic) :-
+		load_with_hook(body_goal_negation(mt_sample, check/1, 1, 1, false)),
 		^^assertion(\+ mt_sample::check(1)),
 		^^assertion(mt_other_sample::check(1)),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
 		^^assertion(mt_sample::check(1)),
 		^^assertion(mt_other_sample::check(1)).
 
-	test(mt_mutator_predicate_negation_02, deterministic) :-
-		load_with_hook(predicate_negation(mt_sample, neg_multi/1, 1, 1, false)),
+	test(mt_mutator_body_goal_negation_02, deterministic) :-
+		load_with_hook(body_goal_negation(mt_sample, neg_multi/1, 1, 1, false)),
 		^^assertion(mt_sample::neg_multi_check),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
 		^^assertion(mt_sample::neg_multi_check).
 
-	test(mt_mutator_predicate_negation_dcg_01, deterministic) :-
-		load_with_hook(predicate_negation(mt_dcg_sample, dcg_guard//0, 1, 1, false)),
+	test(mt_mutator_body_goal_negation_03, deterministic) :-
+		load_with_hook(body_goal_negation(mt_sample, check/1, 1, 2, false)),
+		^^assertion(\+ mt_sample::check(1)),
+		^^assertion(mt_other_sample::check(1)),
+		logtalk_load(test_entities, [reload(always), source_data(on)]),
+		^^assertion(mt_sample::check(1)),
+		^^assertion(mt_other_sample::check(1)).
+
+	test(mt_mutator_body_goal_negation_dcg_01, deterministic) :-
+		load_with_hook(body_goal_negation(mt_dcg_sample, dcg_guard//0, 1, 1, false)),
 		^^assertion(\+ mt_dcg_sample::dcg_guard_check),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
 		^^assertion(mt_dcg_sample::dcg_guard_check).
@@ -397,6 +405,10 @@
 		mutation_testing::predicate_mutants(mt_clauses_reordering, p/1, Mutants, [mutators([clauses_reordering])]),
 		length(Mutants, Length).
 
+	test(mt_mutator_body_goal_negation_04, deterministic(Length == 3)) :-
+		mutation_testing::predicate_mutants(mt_body_goal_negation, a/0, Mutants, [mutators([body_goal_negation])]),
+		length(Mutants, Length).
+
 	% options validation tests
 
 	test(mt_max_mutators_option_01, deterministic) :-
@@ -408,7 +420,7 @@
 		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([fail_insertion])]).
 
 	test(mt_mutators_option_02, deterministic) :-
-		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([predicate_negation])]).
+		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([body_goal_negation])]).
 
 	test(mt_mutators_option_03, deterministic) :-
 		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([relational_operator_replacement])]).
@@ -444,11 +456,11 @@
 
 	test(mt_max_mutations_per_mutator_option_03, deterministic) :-
 		mutation_testing::entity_mutants(mt_sample, Mutants, [
-			mutators([fail_insertion, predicate_negation]),
+			mutators([fail_insertion, body_goal_negation]),
 			max_mutations_per_mutator(1)
 		]),
 		once(member(mutant(mt_sample, check/1, 1, fail_insertion, 1), Mutants)),
-		once(member(mutant(mt_sample, check/1, 1, predicate_negation, 1), Mutants)).
+		once(member(mutant(mt_sample, check/1, 1, body_goal_negation, 1), Mutants)).
 
 	test(mt_threshold_option_01, deterministic) :-
 		mutation_testing::report_predicate(mt_other_sample, check/1, _, [

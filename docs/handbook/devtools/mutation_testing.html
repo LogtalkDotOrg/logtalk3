@@ -194,7 +194,7 @@ plus <code class="docutils literal notranslate"><span class="pre">seed/1</span><
 </div>
 </li>
 <li><div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">predicate_negation</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">body_goal_negation</span></code></div>
 <div class="line">Negates the selected predicate/non-terminal clause behavior.</div>
 </div>
 </li>
@@ -265,7 +265,7 @@ following public predicates:</p>
 </div>
 <p>Run with custom options:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mutation_testing<span class="o">::</span>entity(my_object, [
-    mutators([fail_insertion, predicate_negation]),
+    mutators([fail_insertion, body_goal_negation]),
     max_mutations_per_mutator(<span class="m">5</span>),
     sampling(count(<span class="m">100</span>)),
     seed(<span class="m">20260303</span>),
@@ -496,7 +496,7 @@ imported <code class="docutils literal notranslate"><span class="pre">mutator_co
 <p>For implementation examples, see the default mutator hooks:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="mutators/fail_insertion_hook.lgt">mutators/fail_insertion_hook.lgt</a></p></li>
-<li><p><a class="reference external" href="mutators/predicate_negation_hook.lgt">mutators/predicate_negation_hook.lgt</a></p></li>
+<li><p><a class="reference external" href="mutators/body_goal_negation_hook.lgt">mutators/body_goal_negation_hook.lgt</a></p></li>
 <li><p><a class="reference external" href="mutators/relational_operator_replacement_hook.lgt">mutators/relational_operator_replacement_hook.lgt</a></p></li>
 <li><p><a class="reference external" href="mutators/arithmetic_operator_replacement_hook.lgt">mutators/arithmetic_operator_replacement_hook.lgt</a></p></li>
 <li><p><a class="reference external" href="mutators/truth_literal_flip_hook.lgt">mutators/truth_literal_flip_hook.lgt</a></p></li>

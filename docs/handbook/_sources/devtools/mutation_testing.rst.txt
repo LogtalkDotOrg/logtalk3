@@ -52,7 +52,7 @@ The default mutators are:
 - | ``fail_insertion``
   | Inserts failure in the selected predicate/non-terminal rule bodies.
 
-- | ``predicate_negation``
+- | ``body_goal_negation``
   | Negates the selected predicate/non-terminal clause behavior.
 
 - | ``relational_operator_replacement``
@@ -120,7 +120,7 @@ Run with custom options:
 ::
 
    | ?- mutation_testing::entity(my_object, [
-       mutators([fail_insertion, predicate_negation]),
+       mutators([fail_insertion, body_goal_negation]),
        max_mutations_per_mutator(5),
        sampling(count(100)),
        seed(20260303),
@@ -345,7 +345,7 @@ imported ``mutator_common`` category).
 For implementation examples, see the default mutator hooks:
 
 - `mutators/fail_insertion_hook.lgt <mutators/fail_insertion_hook.lgt>`__
-- `mutators/predicate_negation_hook.lgt <mutators/predicate_negation_hook.lgt>`__
+- `mutators/body_goal_negation_hook.lgt <mutators/body_goal_negation_hook.lgt>`__
 - `mutators/relational_operator_replacement_hook.lgt <mutators/relational_operator_replacement_hook.lgt>`__
 - `mutators/arithmetic_operator_replacement_hook.lgt <mutators/arithmetic_operator_replacement_hook.lgt>`__
 - `mutators/truth_literal_flip_hook.lgt <mutators/truth_literal_flip_hook.lgt>`__

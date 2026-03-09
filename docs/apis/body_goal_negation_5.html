@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>predicate_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) &mdash; Logtalk 3.99.0</title>
+  <title>body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) &mdash; Logtalk 3.99.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)" href="relational_operator_replacement_5.html" />
-    <link rel="prev" title="mutator_protocol" href="mutator_protocol_0.html" />
+    <link rel="next" title="clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)" href="clauses_reordering_5.html" />
+    <link rel="prev" title="arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)" href="arithmetic_operator_replacement_5.html" />
    
 </head>
 
@@ -142,6 +142,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#mutation-testing"><span class="xref std std-ref">mutation_testing</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="arithmetic_operator_replacement_5.html">arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="clauses_reordering_5.html">clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="fail_insertion_5.html">fail_insertion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="head_arguments_mutation_5.html">head_arguments_mutation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
@@ -150,7 +151,6 @@
 <li class="toctree-l3"><a class="reference internal" href="mutation_testing_messages_0.html">mutation_testing_messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mutator_common_0.html">mutator_common</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mutator_protocol_0.html">mutator_protocol</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">predicate_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="relational_operator_replacement_5.html">relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="subprocess_coverage_hook_0.html">subprocess_coverage_hook</a></li>
 <li class="toctree-l3"><a class="reference internal" href="subprocess_mutation_hook_0.html">subprocess_mutation_hook</a></li>
@@ -242,9 +242,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">predicate_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/predicate_negation_5.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/body_goal_negation_5.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -252,9 +252,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="predicate-negation-5"><span id="index-0"></span><strong>object</strong></p>
-<section id="predicate-negation-entity-predicate-clauseindex-occurrence-printmutation">
-<h1><code class="docutils literal notranslate"><span class="pre">predicate_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</span></code><a class="headerlink" href="#predicate-negation-entity-predicate-clauseindex-occurrence-printmutation" title="Link to this heading"></a></h1>
+  <p class="right" id="body-goal-negation-5"><span id="index-0"></span><strong>object</strong></p>
+<section id="body-goal-negation-entity-predicate-clauseindex-occurrence-printmutation">
+<h1><code class="docutils literal notranslate"><span class="pre">body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</span></code><a class="headerlink" href="#body-goal-negation-entity-predicate-clauseindex-occurrence-printmutation" title="Link to this heading"></a></h1>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Entity</span></code> - Identifier of the entity being mutated.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> - Predicate or non-terminal indicator selecting clauses to mutate.</p></li>
@@ -262,7 +262,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">Occurrence</span></code> - 1-based mutation occurrence index to target within selected predicate clauses.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">PrintMutation</span></code> - Boolean flag to print the original and mutated term plus source location.</p></li>
 </ul>
-<p>Hook object implementing the predicate_negation mutator by negating matching predicate clause bodies.</p>
+<p>Hook object implementing the body_goal_negation mutator by negating matching predicate clause bodies.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -332,8 +332,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="mutator_protocol_0.html" class="btn btn-neutral float-left" title="mutator_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="relational_operator_replacement_5.html" class="btn btn-neutral float-right" title="relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="arithmetic_operator_replacement_5.html" class="btn btn-neutral float-left" title="arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="clauses_reordering_5.html" class="btn btn-neutral float-right" title="clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

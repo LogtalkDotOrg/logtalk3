@@ -102,6 +102,7 @@ Objects
    binary_heap_min <binary_heap_min_0>
    bintree <bintree_0>
    blank_grammars(Format) <blank_grammars_1>
+   body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <body_goal_negation_5>
    bup_interpreter <bup_interpreter_0>
    c45 <c45_0>
    callable <callable_0>
@@ -282,7 +283,6 @@ Objects
    population <population_0>
    porter_stemmer(Representation) <porter_stemmer_1>
    ports_profiler <ports_profiler_0>
-   predicate_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <predicate_negation_5>
    print_goal_hook <print_goal_hook_0>
    process <process_0>
    prolog_module_hook(Module) <prolog_module_hook_1>

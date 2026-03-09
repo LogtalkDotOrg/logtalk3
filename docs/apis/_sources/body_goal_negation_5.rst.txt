@@ -1,11 +1,11 @@
-.. index:: single: predicate_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)
-.. _predicate_negation/5:
+.. index:: single: body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)
+.. _body_goal_negation/5:
 
 .. rst-class:: right
 
 **object**
 
-``predicate_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)``
+``body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)``
 =============================================================================
 
 * ``Entity`` - Identifier of the entity being mutated.
@@ -15,7 +15,7 @@
 * ``PrintMutation`` - Boolean flag to print the original and mutated term plus source location.
 
 
-Hook object implementing the predicate_negation mutator by negating matching predicate clause bodies.
+Hook object implementing the body_goal_negation mutator by negating matching predicate clause bodies.
 
 | **Availability:** 
 |    ``logtalk_load(mutation_testing(loader))``

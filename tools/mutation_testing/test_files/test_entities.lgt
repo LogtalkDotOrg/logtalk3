@@ -224,3 +224,15 @@
 	p(3).
 
 :- end_object.
+
+
+:- object(mt_body_goal_negation).
+
+	:- public(a/0).
+	a :- b, c.
+
+	b.
+
+	c.
+
+:- end_object.
