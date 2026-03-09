@@ -14,7 +14,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-07,
+		date is 2026-03-09,
 		comment is 'Hook object implementing the ``fail_insertion`` mutator by inserting fail at deterministic body positions for matching predicate clauses.',
 		parameters is [
 			'Entity' - 'Identifier of the entity being mutated.',
@@ -32,11 +32,10 @@
 
 	term_expansion(Term, Mutation) :-
 		^^target_predicate_clause_index(Term, _Entity_, _Predicate_, ClauseIndex),
+		mutation(Term, Mutation),
 		next_occurrence(Occurrence),
 		ClauseIndex =:= _ClauseIndex_,
 		Occurrence =:= _Occurrence_,
-		fail_insertion_kind(Occurrence, Kind),
-		mutation_with_kind(Term, Kind, Mutation),
 		^^print_mutation(_PrintMutation_, Term, Mutation).
 
 	mutation((Head :- Body), (Head :- MutatedBody)) :-
@@ -50,19 +49,9 @@
 		Head \= (:- _),
 		Head \= (_ :- _).
 
-	mutation_with_kind((Head :- Body), Kind, (Head :- MutatedBody)) :-
-		insert_fail(Kind, Body, MutatedBody).
-	mutation_with_kind((Head --> Body), Kind, (Head --> MutatedBody)) :-
-		insert_dcg_fail(Kind, Body, MutatedBody).
-	mutation_with_kind(Head, _Kind, (Head :- fail)) :-
-		nonvar(Head),
-		Head \= (:- _),
-		Head \= (_ :- _).
-
 	fail_insertion_kind(replace).
-	fail_insertion_kind(prepend).
-	fail_insertion_kind(append).
 	fail_insertion_kind(middle).
+	fail_insertion_kind(append).
 
 	reset :-
 		^^reset,
@@ -77,35 +66,22 @@
 		Occurrence is Previous + 1,
 		assertz(seen_(Occurrence)).
 
-	fail_insertion_kind(Occurrence, replace) :-
-		0 is (Occurrence - 1) mod 4,
+	insert_fail(replace, _Body, fail).
+	insert_fail(append, Body, (Body, fail)).
+	insert_fail(middle, Body, (Body, fail)) :-
+		Body \= (_, _),
 		!.
-	fail_insertion_kind(Occurrence, prepend) :-
-		1 is (Occurrence - 1) mod 4,
-		!.
-	fail_insertion_kind(Occurrence, append) :-
-		2 is (Occurrence - 1) mod 4,
-		!.
-	fail_insertion_kind(_Occurrence, middle).
+	insert_fail(middle, (A, B), (A, (fail, B))).
+	insert_fail(middle, (A, B), (A, BB)) :-
+		insert_fail(middle, B, BB).
 
-	insert_fail(replace, _Body, fail) :-
+	insert_dcg_fail(replace, _Body, {fail}).
+	insert_dcg_fail(append, Body, (Body, {fail})).
+	insert_dcg_fail(middle, Body, (Body, {fail})) :-
+		Body \= (_, _),
 		!.
-	insert_fail(prepend, Body, (fail, Body)) :-
-		!.
-	insert_fail(append, Body, (Body, fail)) :-
-		!.
-	insert_fail(middle, (A, B), (A, (fail, B))) :-
-		!.
-	insert_fail(middle, Body, (Body, fail)).
-
-	insert_dcg_fail(replace, _Body, {fail}) :-
-		!.
-	insert_dcg_fail(prepend, Body, ({fail}, Body)) :-
-		!.
-	insert_dcg_fail(append, Body, (Body, {fail})) :-
-		!.
-	insert_dcg_fail(middle, (A, B), (A, ({fail}, B))) :-
-		!.
-	insert_dcg_fail(middle, Body, (Body, {fail})).
+	insert_dcg_fail(middle, (A, B), (A, ({fail}, B))).
+	insert_dcg_fail(middle, (A, B), (A, BB)) :-
+		insert_dcg_fail(middle, B, BB).
 
 :- end_object.
