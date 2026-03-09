@@ -260,7 +260,7 @@
 		^^assertion(mt_sample::multi_clause_check).
 
 	test(mt_mutator_fail_insertion_dcg_01, true) :-
-		load_with_hook(fail_insertion(mt_dcg_sample, dcg_multi//0, 2, 2, false)),
+		load_with_hook(fail_insertion(mt_dcg_sample, dcg_multi//0, 2, 4, false)),
 		^^assertion(\+ mt_dcg_sample::dcg_multi_check(b)),
 		^^assertion(mt_dcg_sample::dcg_multi_check(a)),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
@@ -542,7 +542,7 @@
 		^^assertion(NoCoverage >= 1),
 		^^assertion(member(mutant_result(_, mutant(mt_sample, multi_clause/1, 1, fail_insertion, 1), no_coverage), Results)).
 
-	+ test(mt_code_coverage_guided_mutants_01, deterministic) :-
+	test(mt_code_coverage_guided_mutants_01, deterministic) :-
 		mutation_testing::report_predicate(mt_code_coverage, p/2, report(mt_code_coverage, summary(Total, Killed, Survived, Untested, Timeout, NoCoverage, Errors, _Score, _Threshold, _Passed), Results), [
 			mutators([fail_insertion]),
 			sampling(all),
