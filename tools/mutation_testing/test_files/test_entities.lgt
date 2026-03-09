@@ -200,3 +200,17 @@
 	p(3, X) :- X > 3.
 
 :- end_object.
+
+
+:- object(mt_fail_insertion).
+
+	:- public(a/0).
+	a :- b, c, d.
+
+	b.
+
+	c.
+
+	d.
+
+:- end_object.

@@ -80,4 +80,7 @@
 	test(mt_code_coverage, true) :-
 		mt_code_coverage::p(3, 4).
 
+	test(mt_fail_insertion, true) :-
+		mt_fail_insertion::a.
+
 :- end_object.

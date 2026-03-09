@@ -68,20 +68,22 @@
 
 	insert_fail(replace, _Body, fail).
 	insert_fail(append, Body, (Body, fail)).
-	insert_fail(middle, Body, (Body, fail)) :-
+	insert_fail(middle, Body, _) :-
 		Body \= (_, _),
-		!.
+		!,
+		fail.
 	insert_fail(middle, (A, B), (A, (fail, B))).
-	insert_fail(middle, (A, B), (A, BB)) :-
-		insert_fail(middle, B, BB).
+	insert_fail(middle, (A, B, C), (A, BB)) :-
+		insert_fail(middle, (B, C), BB).
 
 	insert_dcg_fail(replace, _Body, {fail}).
 	insert_dcg_fail(append, Body, (Body, {fail})).
-	insert_dcg_fail(middle, Body, (Body, {fail})) :-
+	insert_dcg_fail(middle, Body, _) :-
 		Body \= (_, _),
-		!.
+		!,
+		fail.
 	insert_dcg_fail(middle, (A, B), (A, ({fail}, B))).
-	insert_dcg_fail(middle, (A, B), (A, BB)) :-
-		insert_dcg_fail(middle, B, BB).
+	insert_dcg_fail(middle, (A, B, C), (A, BB)) :-
+		insert_dcg_fail(middle, (B, C), BB).
 
 :- end_object.

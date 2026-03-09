@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-08,
+		date is 2026-03-09,
 		comment is 'Unit tests for the "mutation_testing" tool.'
 	]).
 
@@ -53,10 +53,18 @@
 		mutation_testing::predicate_mutants(mt_sample, check/1, Mutants, [mutators([fail_insertion])]),
 		Mutants = [mutant(mt_sample, check/1, _, fail_insertion, _)| _].
 
+	test(mt_predicate_mutants_4_02, deterministic(Length == 4)) :-
+		mutation_testing::predicate_mutants(mt_fail_insertion, a/0, Mutants, [mutators([fail_insertion])]),
+		length(Mutants, Length).
+
 	% entity_mutants/2 tests
 
-	test(mt_mutants_2_01, deterministic(Mutants \== [])) :-
+	test(mt_entity_mutants_2_01, deterministic(Mutants \== [])) :-
 		mutation_testing::entity_mutants(mt_other_sample, Mutants).
+
+	test(mt_entity_mutants_2_02, deterministic(Length == 7)) :-
+		mutation_testing::entity_mutants(mt_fail_insertion, Mutants, [mutators([fail_insertion])]),
+		length(Mutants, Length).
 
 	% entity_mutants/3 tests
 
@@ -64,13 +72,14 @@
 		mutation_testing::entity_mutants(mt_other_sample, Mutants, [mutators([fail_insertion])]),
 		memberchk(Mutant, Mutants).
 
-	test(mt_entity_mutants_occurrence_01, deterministic(Mutants == [mutant(mt_other_sample, check/1, 1, fail_insertion, 1)])) :-
+	test(mt_entity_mutants_occurrence_01, deterministic(Mutants == [mutant(mt_other_sample, check/1, 1, fail_insertion, 1), mutant(mt_other_sample, check/1, 1, fail_insertion, 2)])) :-
 		mutation_testing::entity_mutants(mt_other_sample, Mutants, [mutators([fail_insertion])]).
 
 	test(mt_entity_mutants_ordering_01, deterministic) :-
 		mutation_testing::entity_mutants(mt_other_sample, Mutants, [mutators([fail_insertion, predicate_negation])]),
 		^^assertion(Mutants == [
 			mutant(mt_other_sample, check/1, 1, fail_insertion, 1),
+			mutant(mt_other_sample, check/1, 1, fail_insertion, 2),
 			mutant(mt_other_sample, check/1, 1, predicate_negation, 1)
 		]).
 
@@ -250,7 +259,7 @@
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
 		^^assertion(mt_sample::multi_clause_check).
 
-	test(mt_mutator_fail_insertion_dcg_01, deterministic) :-
+	test(mt_mutator_fail_insertion_dcg_01, true) :-
 		load_with_hook(fail_insertion(mt_dcg_sample, dcg_multi//0, 2, 2, false)),
 		^^assertion(\+ mt_dcg_sample::dcg_multi_check(b)),
 		^^assertion(mt_dcg_sample::dcg_multi_check(a)),
@@ -533,22 +542,27 @@
 		^^assertion(NoCoverage >= 1),
 		^^assertion(member(mutant_result(_, mutant(mt_sample, multi_clause/1, 1, fail_insertion, 1), no_coverage), Results)).
 
-	test(mt_code_coverage_guided_mutants_01, deterministic) :-
+	+ test(mt_code_coverage_guided_mutants_01, deterministic) :-
 		mutation_testing::report_predicate(mt_code_coverage, p/2, report(mt_code_coverage, summary(Total, Killed, Survived, Untested, Timeout, NoCoverage, Errors, _Score, _Threshold, _Passed), Results), [
 			mutators([fail_insertion]),
 			sampling(all),
+			max_mutations_per_mutator(5),
 			tester_file_name('subprocess_tester.lgt')
 		]),
-		^^assertion(Total == 3),
+		^^assertion(Total == 5),
 		^^assertion(Killed == 1),
 		^^assertion(Survived == 0),
 		^^assertion(Untested == 0),
 		^^assertion(Timeout == 0),
-		^^assertion(NoCoverage == 2),
+		^^assertion(NoCoverage == 4),
 		^^assertion(Errors == 0),
-		^^assertion(member(mutant_result(_, mutant(mt_code_coverage, p/2, 1, fail_insertion, 1), no_coverage), Results)),
-		^^assertion(member(mutant_result(_, mutant(mt_code_coverage, p/2, 2, fail_insertion, 2), no_coverage), Results)),
-		^^assertion(member(mutant_result(_, mutant(mt_code_coverage, p/2, 3, fail_insertion, 3), killed), Results)).
+		^^assertion(Results == [
+			mutant_result(1, mutant(mt_code_coverage, p/2, 1, fail_insertion, 1), no_coverage),
+			mutant_result(2, mutant(mt_code_coverage, p/2, 1, fail_insertion, 2), no_coverage),
+			mutant_result(3, mutant(mt_code_coverage, p/2, 2, fail_insertion, 3), no_coverage),
+			mutant_result(4, mutant(mt_code_coverage, p/2, 2, fail_insertion, 4), no_coverage),
+			mutant_result(5, mutant(mt_code_coverage, p/2, 3, fail_insertion, 5), killed)
+		]).
 
 	test(mt_sampling_option_01, deterministic) :-
 		mutation_testing::report_entity(mt_sample, report(mt_sample, summary(Total, Killed, Survived, Untested, Timeout, NoCoverage, Errors, _Score, _Threshold, _Passed), Results), [
