@@ -49,6 +49,7 @@ are currently supported:
 * ``flags`` - the list of the explicit flags used for the compilation of the source file
 * ``term`` - the source file term being compiled
 * ``term_position`` - the position of the term being compiled (``StartLine-EndLine``)
+* ``term_position(Term)`` - the position of the term being compiled (``StartLine-EndLine``)
 * ``variables`` - the variables of the term being compiled (``[Variable1, ...]``)
 * ``variable_names`` - the variable names of the term being compiled (``[Name1=Variable1, ...]``)
 * ``variable_names(Term)`` - the variable names of the term being compiled (``[Name1=Variable1, ...]``)

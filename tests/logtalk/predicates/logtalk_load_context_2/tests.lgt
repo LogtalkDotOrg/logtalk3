@@ -68,6 +68,10 @@
 		logtalk_load_context(term_position, Position),
 		assertz(result(term_position, Position)),
 		fail.
+	term_expansion(a(_,_,_,_,_), _) :-
+		logtalk_load_context(term_position(Term), Position),
+		assertz(result(term_position(Term), Position)),
+		fail.
 	term_expansion((:- end_object), _) :-
 		logtalk_load_context(source, Path),
 		assertz(result(source, Path)),
@@ -135,9 +139,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2024-11-07,
+		date is 2026-03-09,
 		comment is 'Unit tests for the logtalk_load_context/2 built-in predicate.'
 	]).
 
@@ -219,76 +223,79 @@
 	test(logtalk_load_context_2_18, true(ground(TermPosition))) :-
 		result(term_position, TermPosition).
 
+	test(logtalk_load_context_2_19, true(ground(TermPosition))) :-
+		result(term_position(_), TermPosition).
+
 	% calls from initialization/1 directives
 
-	test(logtalk_load_context_2_19, true(Source0 == Source)) :-
+	test(logtalk_load_context_2_20, true(Source0 == Source)) :-
 		object_property(hook, file(Source0)),
 		logtalk_library_path(hook_source, Source).
 
-	test(logtalk_load_context_2_20, true(Directory0 == Directory)) :-
+	test(logtalk_load_context_2_21, true(Directory0 == Directory)) :-
 		object_property(hook, file(_, Directory0)),
 		logtalk_library_path(hook_directory, Directory).
 
-	test(logtalk_load_context_2_21, true(Basename0 == Basename)) :-
+	test(logtalk_load_context_2_22, true(Basename0 == Basename)) :-
 		object_property(hook, file(Basename0,_)),
 		logtalk_library_path(hook_basename, Basename).
 
-	test(logtalk_load_context_2_22, true(File0 == File)) :-
+	test(logtalk_load_context_2_23, true(File0 == File)) :-
 		object_property(hook, file(File0)),
 		logtalk_library_path(hook_file, File).
 
 	% entity relation key
 
-	test(logtalk_load_context_2_23, true(Relations == [r(ptc2,ptc1,(public))])) :-
+	test(logtalk_load_context_2_24, true(Relations == [r(ptc2,ptc1,(public))])) :-
 		findall(
 			r(Protocol, ParentProtocol, Scope),
 			result(entity_relation, extends_protocol(Protocol, ParentProtocol, Scope)),
 			Relations
 		).
 
-	test(logtalk_load_context_2_24, true(Relations == [r(ctg2,ptc1,(public)), r(obj1,ptc1,(public)), r(obj1,ptc2,(public)), r(obj3,ptc2,(public))])) :-
+	test(logtalk_load_context_2_25, true(Relations == [r(ctg2,ptc1,(public)), r(obj1,ptc1,(public)), r(obj1,ptc2,(public)), r(obj3,ptc2,(public))])) :-
 		findall(
 			r(Entity, Protocol, Scope),
 			result(entity_relation, implements_protocol(Entity, Protocol, Scope)),
 			Relations
 		).
 
-	test(logtalk_load_context_2_25, true(Relations == [r(ctg2,ctg1,protected)])) :-
+	test(logtalk_load_context_2_26, true(Relations == [r(ctg2,ctg1,protected)])) :-
 		findall(
 			r(Category, ParentCategory, Scope),
 			result(entity_relation, extends_category(Category, ParentCategory, Scope)),
 			Relations
 		).
 
-	test(logtalk_load_context_2_26, true(Relations == [r(obj1,ctg1,(public)), r(obj3,ctg2,private)])) :-
+	test(logtalk_load_context_2_27, true(Relations == [r(obj1,ctg1,(public)), r(obj3,ctg2,private)])) :-
 		findall(
 			r(Object, Category, Scope),
 			result(entity_relation, imports_category(Object, Category, Scope)),
 			Relations
 		).
 
-	test(logtalk_load_context_2_27, true(Relations == [r(obj1,obj2,private)])) :-
+	test(logtalk_load_context_2_28, true(Relations == [r(obj1,obj2,private)])) :-
 		findall(
 			r(Prototype, Parent, Scope),
 			result(entity_relation, extends_object(Prototype, Parent, Scope)),
 			Relations
 		).
 
-	test(logtalk_load_context_2_28, true(Relations == [r(obj3,obj4,(public))])) :-
+	test(logtalk_load_context_2_29, true(Relations == [r(obj3,obj4,(public))])) :-
 		findall(
 			r(Instance, Class, Scope),
 			result(entity_relation, instantiates_class(Instance, Class, Scope)),
 			Relations
 		).
 
-	test(logtalk_load_context_2_29, true(Relations == [r(obj3,obj5,(public))])) :-
+	test(logtalk_load_context_2_30, true(Relations == [r(obj3,obj5,(public))])) :-
 		findall(
 			r(Class, Superclass, Scope),
 			result(entity_relation, specializes_class(Class, Superclass, Scope)),
 			Relations
 		).
 
-	test(logtalk_load_context_2_30, true(Relations == [r(ctg3,obj3)])) :-
+	test(logtalk_load_context_2_31, true(Relations == [r(ctg3,obj3)])) :-
 		findall(
 			r(Category, Object),
 			result(entity_relation, complements_object(Category, Object)),
@@ -297,21 +304,21 @@
 
 	% calls from initialization/1 directives
 
-	test(logtalk_load_context_2_31, true(Directory == AssertedDirectory)) :-
+	test(logtalk_load_context_2_32, true(Directory == AssertedDirectory)) :-
 		this(This),
 		object_property(This, file(_, Directory)),
 		{logtalk_load_context_directory(AssertedDirectory)}.
 
-	test(logtalk_load_context_2_32, true(Object == obj1)) :-
+	test(logtalk_load_context_2_33, true(Object == obj1)) :-
 		{logtalk_load_context_entity_identifier(Object)}.
 
 	% errors
 
-	test(logtalk_load_context_2_33, error(type_error(callable,1))) :-
+	test(logtalk_load_context_2_34, error(type_error(callable,1))) :-
 		wrong_key_type(Key),
 		logtalk_load_context(Key, _).
 
-	test(logtalk_load_context_2_34, error(domain_error(logtalk_load_context_key,foo))) :-
+	test(logtalk_load_context_2_35, error(domain_error(logtalk_load_context_key,foo))) :-
 		wrong_key_name(Key),
 		logtalk_load_context(Key, _).
 

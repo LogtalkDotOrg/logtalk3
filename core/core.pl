@@ -3607,6 +3607,10 @@ logtalk_load_context(Key, Value) :-
 	% term position of the full file term being compiled
 	'$lgt_pp_term_source_data_'(_, _, _, _, Lines).
 
+'$lgt_logtalk_load_context_checked'(term_position(Term), Lines) :-
+	% term position of the full file term being compiled
+	'$lgt_pp_term_source_data_'(Term, _, _, _, Lines).
+
 '$lgt_logtalk_load_context_checked'(stream, Stream) :-
 	% avoid a spurious choice-point with some backend Prolog compilers
 	stream_property(Stream, alias(logtalk_compiler_input)), !.
@@ -3652,6 +3656,7 @@ logtalk_load_context(Key, Value) :-
 '$lgt_valid_logtalk_load_context_key'(flags).
 '$lgt_valid_logtalk_load_context_key'(term).
 '$lgt_valid_logtalk_load_context_key'(term_position).
+'$lgt_valid_logtalk_load_context_key'(term_position(_)).
 '$lgt_valid_logtalk_load_context_key'(variables).
 '$lgt_valid_logtalk_load_context_key'(parameter_variables).
 '$lgt_valid_logtalk_load_context_key'(variable_names).
