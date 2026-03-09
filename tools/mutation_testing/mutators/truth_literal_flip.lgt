@@ -14,7 +14,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-07,
+		date is 2026-03-09,
 		comment is 'Hook object implementing the ``truth_literal_flip`` mutator for matching predicate clauses.',
 		parameters is [
 			'Entity' - 'Identifier of the entity being mutated.',
@@ -25,15 +25,12 @@
 		]
 	]).
 
-	:- private(seen_/1).
-	:- dynamic(seen_/1).
-
 	coverage_clause_mutator.
 
 	term_expansion(Term, Mutation) :-
 		^^target_predicate_clause_index(Term, _Entity_, _Predicate_, ClauseIndex),
 		mutation(Term, Mutation),
-		next_occurrence(Occurrence),
+		^^next_occurrence(Occurrence),
 		ClauseIndex =:= _ClauseIndex_,
 		Occurrence =:= _Occurrence_,
 		^^print_mutation(_PrintMutation_, Term, Mutation).
@@ -42,19 +39,6 @@
 		flip_truth_literals(Body, ReplacedBody, true).
 	mutation((Head --> Body), (Head --> ReplacedBody)) :-
 		flip_dcg_truth_literals(Body, ReplacedBody, true).
-
-	reset :-
-		^^reset,
-		retractall(seen_(_)),
-		assertz(seen_(0)).
-
-	next_occurrence(Occurrence) :-
-		(   retract(seen_(Previous)) ->
-			true
-		;   Previous = 0
-		),
-		Occurrence is Previous + 1,
-		assertz(seen_(Occurrence)).
 
 	flip_truth_literals(Goal, Goal, false) :-
 		var(Goal),

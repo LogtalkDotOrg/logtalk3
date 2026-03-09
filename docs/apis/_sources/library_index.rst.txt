@@ -970,7 +970,7 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <arithmetic_operator_replacement_5>
-   clause_order_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <clause_order_reordering_5>
+   clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <clauses_reordering_5>
    fail_insertion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <fail_insertion_5>
    head_arguments_mutation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_mutation_5>
    head_arguments_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_reordering_5>

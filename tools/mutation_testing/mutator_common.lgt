@@ -24,15 +24,6 @@
 		argnames is ['Flag', 'Original', 'Mutation']
 	]).
 
-	print_mutation(true, Original, Mutation) :-
-		self(Self),
-		functor(Self, Mutator, _),
-		logtalk_load_context(variable_names(Original), Variables),
-		logtalk_load_context(file, File),
-		logtalk_load_context(term_position, StartLine-EndLine),
-		logtalk::print_message(information, mutation_testing, mutated_term(Mutator, Original, Mutation, Variables, File, StartLine-EndLine)).
-	print_mutation(false, _Original, _Mutation).
-
 	:- protected(target_predicate/3).
 	:- mode(target_predicate(@callable, @entity_identifier, @predicate_indicator), one).
 	:- info(target_predicate/3, [
@@ -47,11 +38,47 @@
 		argnames is ['Term', 'Entity', 'Predicate', 'ClauseIndex']
 	]).
 
+	:- protected(next_occurrence/1).
+	:- mode(next_occurrence(-integer), one).
+	:- info(next_occurrence/1, [
+		comment is 'Next mutation occurrence.',
+		argnames is ['Occurrence']
+	]).
+
 	:- private(current_predicate_clause_index_/2).
 	:- dynamic(current_predicate_clause_index_/2).
 
 	:- private(update_target_predicate_clause_index_/2).
 	:- mode(update_target_predicate_clause_index_(@predicate_indicator, -integer), one).
+
+	:- private(seen_/1).
+	:- dynamic(seen_/1).
+
+	reset :-
+		::retractall(current_predicate_clause_index_(_, _)),
+		::retractall(seen_(_)),
+		::assertz(seen_(0)).
+
+	% by default, mutators do not map mutation occurrences to clause numbers
+	coverage_clause_mutator :-
+		fail.
+
+	print_mutation(true, Original, Mutation) :-
+		self(Self),
+		functor(Self, Mutator, _),
+		(	logtalk_load_context(variable_names(Original), Variables) ->
+			true
+		;	% e.g., a mutant such as clauses_reordering that is not single term based
+			Variables = []
+		),
+		logtalk_load_context(file, File),
+		(	logtalk_load_context(term_position(Original), StartLine-EndLine) ->
+			true
+		;	% e.g., a mutant such as clauses_reordering that is not single term based
+			StartLine-EndLine = 0-0
+		),
+		logtalk::print_message(information, mutation_testing, mutated_term(Mutator, Original, Mutation, Variables, File, StartLine-EndLine)).
+	print_mutation(false, _Original, _Mutation).
 
 	target_predicate((Head :- _Body), Entity, Predicate) :-
 		!,
@@ -81,11 +108,12 @@
 		),
 		::assertz(current_predicate_clause_index_(Predicate, ClauseIndex)).
 
-	reset :-
-		::retractall(current_predicate_clause_index_(_, _)).
-
-	% by default, mutators do not map mutation occurrences to clause numbers
-	coverage_clause_mutator :-
-		fail.
+	next_occurrence(Occurrence) :-
+		(   ::retract(seen_(Previous)) ->
+			true
+		;   Previous = 0
+		),
+		Occurrence is Previous + 1,
+		::assertz(seen_(Occurrence)).
 
 :- end_category.

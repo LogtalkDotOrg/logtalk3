@@ -17,7 +17,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-07,
+		date is 2026-03-09,
 		comment is 'Tests exercising test entities, run by mutation testing subprocesses to detect mutants.'
 	]).
 
@@ -82,5 +82,8 @@
 
 	test(mt_fail_insertion, true) :-
 		mt_fail_insertion::a.
+
+	test(mt_clauses_reordering, true(L == [1,2,3])) :-
+		findall(X, mt_clauses_reordering::p(X), L).
 
 :- end_object.

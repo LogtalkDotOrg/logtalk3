@@ -32,7 +32,7 @@
 	cover(truth_literal_flip(_, _, _, _, _)).
 	cover(head_arguments_mutation(_, _, _, _, _)).
 	cover(head_arguments_reordering(_, _, _, _, _)).
-	cover(clause_order_reordering(_, _, _, _, _)).
+	cover(clauses_reordering(_, _, _, _, _)).
 
 	cleanup :-
 		^^clean_file('mutation_test_report.txt'),
@@ -377,21 +377,25 @@
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
 		^^assertion(mt_dcg_sample::dcg_pair_check).
 
-	test(mt_mutator_clause_order_reordering_01, deterministic) :-
-		load_with_hook(clause_order_reordering(mt_sample, ordered_choice/1, 1, 1, false)),
+	test(mt_mutator_clauses_reordering_01, deterministic) :-
+		load_with_hook(clauses_reordering(mt_sample, ordered_choice/1, 1, 1, false)),
 		mt_sample::ordered_choice_check(Value),
 		^^assertion(Value == second),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
 		mt_sample::ordered_choice_check(OriginalValue),
 		^^assertion(OriginalValue == first).
 
-	test(mt_mutator_clause_order_reordering_dcg_01, deterministic) :-
-		load_with_hook(clause_order_reordering(mt_dcg_sample, dcg_ordered_choice//1, 1, 1, false)),
+	test(mt_mutator_clauses_reordering_dcg_01, deterministic) :-
+		load_with_hook(clauses_reordering(mt_dcg_sample, dcg_ordered_choice//1, 1, 1, false)),
 		mt_dcg_sample::dcg_ordered_choice_check(Value),
 		^^assertion(Value == second),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
 		mt_dcg_sample::dcg_ordered_choice_check(OriginalValue),
 		^^assertion(OriginalValue == first).
+
+	test(mt_mutator_clauses_reordering_02, deterministic(Length == 5)) :-
+		mutation_testing::predicate_mutants(mt_clauses_reordering, p/1, Mutants, [mutators([clauses_reordering])]),
+		length(Mutants, Length).
 
 	% options validation tests
 
@@ -422,7 +426,7 @@
 		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([head_arguments_reordering])]).
 
 	test(mt_mutators_option_08, deterministic) :-
-		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([clause_order_reordering])]).
+		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([clauses_reordering])]).
 
 	test(mt_max_mutations_per_mutator_option_01, deterministic) :-
 		mutation_testing::entity_mutants(mt_sample, Mutants, [

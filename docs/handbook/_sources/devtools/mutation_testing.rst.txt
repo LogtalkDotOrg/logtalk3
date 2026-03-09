@@ -72,7 +72,7 @@ The default mutators are:
 - | ``head_arguments_reordering``
   | Reorders head arguments (swapping the first two arguments).
 
-- | ``clause_order_reordering``
+- | ``clauses_reordering``
   | Reorders predicate/non-terminal clauses/rules by swapping a clause
     with its successor.
 
@@ -351,4 +351,4 @@ For implementation examples, see the default mutator hooks:
 - `mutators/truth_literal_flip_hook.lgt <mutators/truth_literal_flip_hook.lgt>`__
 - `mutators/head_arguments_mutation_hook.lgt <mutators/head_arguments_mutation_hook.lgt>`__
 - `mutators/head_arguments_reordering_hook.lgt <mutators/head_arguments_reordering_hook.lgt>`__
-- `mutators/clause_order_reordering_hook.lgt <mutators/clause_order_reordering_hook.lgt>`__
+- `mutators/clauses_reordering_hook.lgt <mutators/clauses_reordering_hook.lgt>`__

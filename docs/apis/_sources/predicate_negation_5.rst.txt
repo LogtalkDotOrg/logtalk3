@@ -22,7 +22,7 @@ Hook object implementing the predicate_negation mutator by negating matching pre
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-03-07
+| **Date:** 2026-03-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -56,17 +56,7 @@ Protected predicates
 Private predicates
 ------------------
 
-.. index:: seen_/1
-.. _predicate_negation/5::seen_/1:
-
-``seen_/1``
-^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``dynamic``
-
-
-------------
+(no local declarations; see entity ancestors if any)
 
 Operators
 ---------

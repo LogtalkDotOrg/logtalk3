@@ -214,3 +214,13 @@
 	d.
 
 :- end_object.
+
+
+:- object(mt_clauses_reordering).
+
+	:- public(p/1).
+	p(1).
+	p(2).
+	p(3).
+
+:- end_object.

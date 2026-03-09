@@ -14,7 +14,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-06,
+		date is 2026-03-09,
 		comment is 'Hook object implementing the ``head_arguments_mutation`` mutator by mutating one compile-time bound predicate/non-terminal head argument using the ``type::mutation/3`` predicate.',
 		parameters is [
 			'Entity' - 'Identifier of the entity being mutated.',
@@ -31,7 +31,7 @@
 	term_expansion(Term, Mutation) :-
 		^^target_predicate_clause_index(Term, _Entity_, _Predicate_, ClauseIndex),
 		mutation(Term, Mutation),
-		next_occurrence(Occurrence),
+		^^next_occurrence(Occurrence),
 		ClauseIndex =:= _ClauseIndex_,
 		Occurrence =:= _Occurrence_,
 		^^print_mutation(_PrintMutation_, Term, Mutation).
@@ -44,19 +44,6 @@
 		mutate_head_arguments(Head, MutatedHead).
 	mutation(Head, MutatedHead) :-
 		mutate_head_arguments(Head, MutatedHead).
-
-	reset :-
-		^^reset,
-		retractall(seen_(_)),
-		assertz(seen_(0)).
-
-	next_occurrence(Occurrence) :-
-		(   retract(seen_(Previous)) ->
-			true
-		;   Previous = 0
-		),
-		Occurrence is Previous + 1,
-		assertz(seen_(Occurrence)).
 
 	mutate_head_arguments(Head, MutatedHead) :-
 		Head =.. [Functor| Arguments],

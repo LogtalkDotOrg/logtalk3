@@ -1,12 +1,12 @@
-.. index:: single: clause_order_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)
-.. _clause_order_reordering/5:
+.. index:: single: clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)
+.. _clauses_reordering/5:
 
 .. rst-class:: right
 
 **object**
 
-``clause_order_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)``
-==================================================================================
+``clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)``
+=============================================================================
 
 * ``Entity`` - Identifier of the entity being mutated.
 * ``Predicate`` - Predicate or non-terminal indicator selecting clauses to mutate.
@@ -15,14 +15,14 @@
 * ``PrintMutation`` - Boolean flag to print the original and mutated term plus source location.
 
 
-Hook object implementing the ``clause_order_reordering`` mutator by reordering the clauses of a non-discontiguous predicate or non-terminal definition.
+Hook object implementing the ``clauses_reordering`` mutator by reordering the clauses of a non-discontiguous predicate or non-terminal definition.
 
 | **Availability:** 
 |    ``logtalk_load(mutation_testing(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-03-06
+| **Date:** 2026-03-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -59,22 +59,10 @@ Private predicates
 ------------------
 
 .. index:: clauses_/1
-.. _clause_order_reordering/5::clauses_/1:
+.. _clauses_reordering/5::clauses_/1:
 
 ``clauses_/1``
 ^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``dynamic``
-
-
-------------
-
-.. index:: seen_/1
-.. _clause_order_reordering/5::seen_/1:
-
-``seen_/1``
-^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``dynamic``

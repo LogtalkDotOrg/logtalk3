@@ -44,7 +44,7 @@
 			'mutators/truth_literal_flip',
 			'mutators/head_arguments_mutation',
 			'mutators/head_arguments_reordering',
-			'mutators/clause_order_reordering'
+			'mutators/clauses_reordering'
 		], [optimize(on)])
 	)).
 

@@ -25,15 +25,12 @@
 		]
 	]).
 
-	:- private(seen_/1).
-	:- dynamic(seen_/1).
-
 	coverage_clause_mutator.
 
 	term_expansion(Term, Mutation) :-
 		^^target_predicate_clause_index(Term, _Entity_, _Predicate_, ClauseIndex),
 		mutation(Term, Mutation),
-		next_occurrence(Occurrence),
+		^^next_occurrence(Occurrence),
 		ClauseIndex =:= _ClauseIndex_,
 		Occurrence =:= _Occurrence_,
 		^^print_mutation(_PrintMutation_, Term, Mutation).
@@ -52,19 +49,6 @@
 	fail_insertion_kind(replace).
 	fail_insertion_kind(middle).
 	fail_insertion_kind(append).
-
-	reset :-
-		^^reset,
-		retractall(seen_(_)),
-		assertz(seen_(0)).
-
-	next_occurrence(Occurrence) :-
-		(   retract(seen_(Previous)) ->
-			true
-		;   Previous = 0
-		),
-		Occurrence is Previous + 1,
-		assertz(seen_(Occurrence)).
 
 	insert_fail(replace, _Body, fail).
 	insert_fail(middle, Body, _) :-
