@@ -980,6 +980,7 @@ To load any library (including developer tools, ports, and contributions), use t
    mutator_protocol <mutator_protocol_0>
    predicate_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <predicate_negation_5>
    relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <relational_operator_replacement_5>
+   subprocess_coverage_hook <subprocess_coverage_hook_0>
    subprocess_mutation_hook <subprocess_mutation_hook_0>
    truth_literal_flip(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <truth_literal_flip_5>
 

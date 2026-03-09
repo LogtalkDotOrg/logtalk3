@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mutation_testing_messages &mdash; Logtalk 3.99.0</title>
+  <title>clause_order_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) &mdash; Logtalk 3.99.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="mutator_common" href="mutator_common_0.html" />
-    <link rel="prev" title="mutation_testing" href="mutation_testing_0.html" />
+    <link rel="next" title="fail_insertion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)" href="fail_insertion_5.html" />
+    <link rel="prev" title="arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)" href="arithmetic_operator_replacement_5.html" />
    
 </head>
 
@@ -142,12 +142,12 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#mutation-testing"><span class="xref std std-ref">mutation_testing</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="arithmetic_operator_replacement_5.html">arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="clause_order_reordering_5.html">clause_order_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">clause_order_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="fail_insertion_5.html">fail_insertion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="head_arguments_mutation_5.html">head_arguments_mutation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="head_arguments_reordering_5.html">head_arguments_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mutation_testing_0.html">mutation_testing</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">mutation_testing_messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mutation_testing_messages_0.html">mutation_testing_messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mutator_common_0.html">mutator_common</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mutator_protocol_0.html">mutator_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="predicate_negation_5.html">predicate_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
@@ -242,9 +242,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">mutation_testing_messages</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">clause_order_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/mutation_testing_messages_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/clause_order_reordering_5.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -252,10 +252,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="mutation-testing-messages-0"><span id="index-0"></span><strong>category</strong></p>
-<section id="mutation-testing-messages">
-<h1><code class="docutils literal notranslate"><span class="pre">mutation_testing_messages</span></code><a class="headerlink" href="#mutation-testing-messages" title="Link to this heading"></a></h1>
-<p>Default message translations for the <code class="docutils literal notranslate"><span class="pre">mutation_testing</span></code> tool.</p>
+  <p class="right" id="clause-order-reordering-5"><span id="index-0"></span><strong>object</strong></p>
+<section id="clause-order-reordering-entity-predicate-clauseindex-occurrence-printmutation">
+<h1><code class="docutils literal notranslate"><span class="pre">clause_order_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</span></code><a class="headerlink" href="#clause-order-reordering-entity-predicate-clauseindex-occurrence-printmutation" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Entity</span></code> - Identifier of the entity being mutated.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> - Predicate or non-terminal indicator selecting clauses to mutate.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ClauseIndex</span></code> - 1-based clause index selecting which clause is swapped with its successor (last swaps with first).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Occurrence</span></code> - 1-based clause index selecting which clause is swapped with its successor (last swaps with first).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PrintMutation</span></code> - Boolean flag to print the original and mutated term plus source location.</p></li>
+</ul>
+<p>Hook object implementing the <code class="docutils literal notranslate"><span class="pre">clause_order_reordering</span></code> mutator by reordering the clauses of a non-discontiguous predicate or non-terminal definition.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -270,14 +277,21 @@
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Provides:</strong></div>
+<div class="line"><strong>Implements:</strong></div>
 <div class="line-block">
-<div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0-message-prefix-stream-4"><span class="std std-ref">logtalk::message_prefix_stream/4</span></a></div>
-<div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0-message-tokens-2"><span class="std std-ref">logtalk::message_tokens//2</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="expanding_0.html#expanding-0"><span class="std std-ref">expanding</span></a></div>
+</div>
+<div class="line"><strong>Imports:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="mutator_common_0.html#mutator-common-0"><span class="std std-ref">mutator_common</span></a></div>
+</div>
+<div class="line"><strong>Uses:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -289,15 +303,20 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line">(none)</div>
+<div class="line"> <a class="reference internal" href="mutator_protocol_0.html#mutator-protocol-0-coverage-clause-mutator-0"><span class="std std-ref">coverage_clause_mutator/0</span></a>  <a class="reference internal" href="expanding_0.html#expanding-0-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a>  <a class="reference internal" href="mutator_protocol_0.html#mutator-protocol-0-mutation-2"><span class="std std-ref">mutation/2</span></a>  <a class="reference internal" href="mutator_protocol_0.html#mutator-protocol-0-reset-0"><span class="std std-ref">reset/0</span></a>  <a class="reference internal" href="expanding_0.html#expanding-0-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
 <li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id4">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#clauses-1" id="id4"><code class="docutils literal notranslate"><span class="pre">clauses_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seen-1" id="id5"><code class="docutils literal notranslate"><span class="pre">seen_/1</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#operators" id="id6">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -310,8 +329,27 @@
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<section id="clauses-1">
+<span id="clause-order-reordering-5-clauses-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">clauses_/1</span></code></a><a class="headerlink" href="#clauses-1" title="Link to this heading"></a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
 </section>
+<section id="seen-1">
+<span id="clause-order-reordering-5-seen-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seen_/1</span></code></a><a class="headerlink" href="#seen-1" title="Link to this heading"></a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
@@ -322,8 +360,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="mutation_testing_0.html" class="btn btn-neutral float-left" title="mutation_testing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="mutator_common_0.html" class="btn btn-neutral float-right" title="mutator_common" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="arithmetic_operator_replacement_5.html" class="btn btn-neutral float-left" title="arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fail_insertion_5.html" class="btn btn-neutral float-right" title="fail_insertion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

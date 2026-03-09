@@ -1519,6 +1519,7 @@ To load an entity, always load the library that includes it using the goal ``log
    mutation_testing_messages <mutation_testing_messages_0>
    mutator_common <mutator_common_0>
    mutator_protocol <mutator_protocol_0>
+   subprocess_coverage_hook <subprocess_coverage_hook_0>
    subprocess_mutation_hook <subprocess_mutation_hook_0>
 
 ``tools/mutation_testing/mutators/``

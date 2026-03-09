@@ -1,27 +1,28 @@
-.. index:: single: truth_literal_flip(Entity,Predicate,Occurrence,PrintMutation)
-.. _truth_literal_flip/4:
+.. index:: single: arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)
+.. _arithmetic_operator_replacement/5:
 
 .. rst-class:: right
 
 **object**
 
-``truth_literal_flip(Entity,Predicate,Occurrence,PrintMutation)``
-=================================================================
+``arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)``
+==========================================================================================
 
 * ``Entity`` - Identifier of the entity being mutated.
 * ``Predicate`` - Predicate or non-terminal indicator selecting clauses to mutate.
+* ``ClauseIndex`` - 1-based clause index for the selected mutation (equal to ``Occurrence`` for this mutator).
 * ``Occurrence`` - 1-based mutation occurrence index to target within selected predicate clauses.
 * ``PrintMutation`` - Boolean flag to print the original and mutated term plus source location.
 
 
-Hook object implementing the ``truth_literal_flip`` mutator for matching predicate clauses.
+Hook object implementing the ``arithmetic_operator_replacement`` mutator for matching predicate clauses.
 
 | **Availability:** 
 |    ``logtalk_load(mutation_testing(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-03-06
+| **Date:** 2026-03-07
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -36,7 +37,7 @@ Hook object implementing the ``truth_literal_flip`` mutator for matching predica
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`expanding/0::goal_expansion/2`  :ref:`mutator_protocol/0::mutation/2`  :ref:`mutator_protocol/0::reset/0`  :ref:`expanding/0::term_expansion/2`  
+|     :ref:`mutator_protocol/0::coverage_clause_mutator/0`  :ref:`expanding/0::goal_expansion/2`  :ref:`mutator_protocol/0::mutation/2`  :ref:`mutator_protocol/0::reset/0`  :ref:`expanding/0::term_expansion/2`  
 
 .. contents::
    :local:
@@ -56,7 +57,7 @@ Private predicates
 ------------------
 
 .. index:: seen_/1
-.. _truth_literal_flip/4::seen_/1:
+.. _arithmetic_operator_replacement/5::seen_/1:
 
 ``seen_/1``
 ^^^^^^^^^^^

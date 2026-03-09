@@ -8266,6 +8266,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`subprocess_mutation_hook <subprocess_mutation_hook/0::load_config/1>`
 
+``load_coverage_config/1``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`subprocess_coverage_hook <subprocess_coverage_hook/0::load_coverage_config/1>`
+
 ``load_dut1_override/1``
 ------------------------
 

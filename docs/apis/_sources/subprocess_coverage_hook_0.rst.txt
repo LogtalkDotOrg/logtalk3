@@ -1,0 +1,109 @@
+.. index:: single: subprocess_coverage_hook
+.. _subprocess_coverage_hook/0:
+
+.. rst-class:: right
+
+**object**
+
+``subprocess_coverage_hook``
+============================
+
+Subprocess coverage hook object. Loaded in baseline coverage subprocesses to capture lgtunit coverage and persist it to a file.
+
+| **Availability:** 
+|    ``logtalk_load(mutation_testing(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-03-07
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Provides:**
+|    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: load_coverage_config/1
+.. _subprocess_coverage_hook/0::load_coverage_config/1:
+
+``load_coverage_config/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Loads a baseline coverage config file and enables coverage collection in the subprocess.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``load_coverage_config(ConfigFile)``
+| **Mode and number of proofs:**
+|    ``load_coverage_config(+atom)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: coverage_file_/1
+.. _subprocess_coverage_hook/0::coverage_file_/1:
+
+``coverage_file_/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Holds the baseline coverage output file path for the current subprocess.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``coverage_file_(CoverageFile)``
+| **Mode and number of proofs:**
+|    ``coverage_file_(?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: coverage_entry_/4
+.. _subprocess_coverage_hook/0::coverage_entry_/4:
+
+``coverage_entry_/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Captured lgtunit coverage for one entity predicate: covered clauses and total clauses.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``coverage_entry_(Entity,Predicate,CoveredClauses,TotalClauses)``
+| **Mode and number of proofs:**
+|    ``coverage_entry_(?entity_identifier,?predicate_indicator,?list(integer),?integer)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+
