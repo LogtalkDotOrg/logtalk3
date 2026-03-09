@@ -78,6 +78,12 @@ Examples
 * RENAMED: The `permutations` example to `list_permutations` to avoid a library
 alias clash with the new `permutations` library.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: The Context7 MCP server `context7.json` support file to the latest
+format.
+
 
 3.98.0 - February 27, 2026
 ==========================
