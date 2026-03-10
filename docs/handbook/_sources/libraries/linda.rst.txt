@@ -10,13 +10,14 @@ Prolog, and XVM.
 
 The tuple-space is a shared blackboard where processes can:
 
-- **Write** tuples using ``out/1``
-- **Read** tuples (without removing) using ``rd/1`` and ``rd_noblock/1``
-- **Remove** tuples using ``in/1`` and ``in_noblock/1``
+- **Write** tuples using ``out/1-2``
+- **Read** tuples (without removing) using ``rd/1-2`` and
+  ``rd_noblock/1-2``
+- **Remove** tuples using ``in/1-2`` and ``in_noblock/1-2``
 
-The blocking operations (``in/1``, ``rd/1``) suspend the process until a
-matching tuple becomes available. The non-blocking variants
-(``in_noblock/1``, ``rd_noblock/1``) fail immediately if no matching
+The blocking operations (``in/1-2``, ``rd/1-2``) suspend the process
+until a matching tuple becomes available. The non-blocking variants
+(``in_noblock/1-2``, ``rd_noblock/1-2``) fail immediately if no matching
 tuple is found.
 
 Tuples are matched using standard Prolog unification, allowing patterns
@@ -58,7 +59,7 @@ To start a Linda server that prints its address:
 ::
 
    | ?- linda::linda.
-   localhost:54321
+   % Server started at localhost:54321
    ...
 
 To start a server with a callback when it starts:
@@ -247,10 +248,8 @@ Client predicates
 - ``shutdown_server`` - Request server shutdown
 - ``linda_timeout(?Old, +New)`` - Get/set timeout
 
-.. _tuple-operations-1:
-
-Tuple operations
-~~~~~~~~~~~~~~~~
+Tuple operations (single/default server)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - ``out(+Tuple)`` - Add tuple to space
 - ``in(?Tuple)`` - Remove matching tuple (blocking)
@@ -267,6 +266,12 @@ Tuple operations
   matching tuples (atomic read)
 - ``findall_in_noblock(?Template, +Tuple, ?List)`` - Collect and remove
   all matching tuples (atomic remove)
+
+Tuple operations (multiple servers)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Variants of the predicates above with an additional first argument for
+the server address.
 
 Known issues
 ------------

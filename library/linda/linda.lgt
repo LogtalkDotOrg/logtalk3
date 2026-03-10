@@ -22,16 +22,17 @@
 :- object(linda).
 
 	:- info([
-		version is 1:0:1,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-06,
-		comment is 'Linda tuple-space implementation for process communication. Provides a server that acts as a shared blackboard where clients can write (``out/1``), read (``rd/1``), and remove (``in/1``) tuples. Uses threaded engines for the server implementation and the sockets library for network communication.',
+		date is 2026-03-10,
+		comment is 'Linda tuple-space implementation for process communication. Provides a server that acts as a shared blackboard where clients can write (``out/1-2``), read (``rd/1-2``), and remove (``in/1-2``) tuples. Uses threaded engines for the server implementation and the sockets library for network communication.',
 		remarks is [
-			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog (requires both multi-threading and sockets support).',
-			'Linda operations' - 'The basic operations are ``out/1`` (write tuple), ``in/1`` (remove tuple, blocking), ``rd/1`` (read tuple, blocking), ``in_noblock/1`` (remove tuple, non-blocking), and ``rd_noblock/1`` (read tuple, non-blocking).',
+			'Supported backends' - 'SWI-Prolog, Trealla Prolog, and XVM (requires both multi-threading and sockets support).',
+			'Linda operations' - 'The basic operations are ``out/1-2`` (write tuple), ``in/1-2`` (remove tuple, blocking), ``rd/1-2`` (read tuple, blocking), ``in_noblock/1-2`` (remove tuple, non-blocking), and ``rd_noblock/1-2`` (read tuple, non-blocking).',
 			'Tuple matching' - 'Tuples are matched using unification.',
-			'Blocking behavior' - 'The ``in/1`` and ``rd/1`` predicates block until a matching tuple is available. The ``in_noblock/1`` and ``rd_noblock/1`` predicates fail immediately if no matching tuple is found.',
-			'Multiple clients' - 'Multiple clients can connect to the same server. A tuple removed by ``in/1`` or ``in_noblock/1`` is only removed for one client.',
+			'Blocking behavior' - 'The ``in/1-2`` and ``rd/1-2`` predicates block until a matching tuple is available. The ``in_noblock/1-2`` and ``rd_noblock/1-2`` predicates fail immediately if no matching tuple is found.',
+			'Multiple clients' - 'Multiple clients can connect to the same server. A tuple removed by the ``in/1-2`` or ``in_noblock/1-2`` predicates is only removed for one client.',
+			'Multiple servers' - 'A client can connect to multiple servers. The first server it connects to, becomes the default server.',
 			'API compatibility' - 'The API is inspired by the SICStus Prolog Linda library.',
 			'Network communication' - 'Uses TCP sockets for client-server communication, allowing processes to run on different machines.'
 		]
@@ -77,16 +78,33 @@
 		]
 	]).
 
+	:- public(close_client/1).
+	:- mode(close_client(+compound), one).
+	:- info(close_client/1, [
+		comment is 'Closes the connection to the given Linda server.',
+		argnames is ['Address']
+	]).
+
 	:- public(close_client/0).
 	:- mode(close_client, one).
 	:- info(close_client/0, [
-		comment is 'Closes the connection to the Linda server.'
+		comment is 'Closes the connection to the default Linda server.'
+	]).
+
+	:- public(shutdown_server/1).
+	:- mode(shutdown_server(+compound), one_or_error).
+	:- info(shutdown_server/1, [
+		comment is 'Sends a shutdown signal to the given server. The server stops accepting new connections but continues serving existing clients until they all disconnect. Call ``close_client/1`` after this predicate.',
+		argnames is ['Address'],
+		exceptions is [
+			'Not connected' - linda_error(not_connected)
+		]
 	]).
 
 	:- public(shutdown_server/0).
 	:- mode(shutdown_server, one_or_error).
 	:- info(shutdown_server/0, [
-		comment is 'Sends a shutdown signal to the server. The server stops accepting new connections but continues serving existing clients until they all disconnect. Call ``close_client/0`` after this predicate.',
+		comment is 'Sends a shutdown signal to the default server. The server stops accepting new connections but continues serving existing clients until they all disconnect. Call ``close_client/0`` after this predicate.',
 		exceptions is [
 			'Not connected' - linda_error(not_connected)
 		]
@@ -103,67 +121,109 @@
 	% Tuple-space operations (client-side)
 	% ==========================================================================
 
+	:- public(out/2).
+	:- mode(out(++compound, +term), one).
+	:- info(out/2, [
+		comment is 'Places the tuple ``Tuple`` in the tuple-space of the given server.',
+		argnames is ['Address', 'Tuple']
+	]).
+
 	:- public(out/1).
 	:- mode(out(+term), one).
 	:- info(out/1, [
-		comment is 'Places the tuple ``Tuple`` in the tuple-space.',
+		comment is 'Places the tuple ``Tuple`` in the tuple-space of the default server.',
 		argnames is ['Tuple']
+	]).
+
+	:- public(in/2).
+	:- mode(in(++compound, ?term), one).
+	:- info(in/2, [
+		comment is 'Removes a tuple matching ``Tuple`` from the tuple-space of the given server. Blocks if no matching tuple is available.',
+		argnames is ['Address', 'Tuple']
 	]).
 
 	:- public(in/1).
 	:- mode(in(?term), one).
 	:- info(in/1, [
-		comment is 'Removes a tuple matching ``Tuple`` from the tuple-space. Blocks if no matching tuple is available.',
+		comment is 'Removes a tuple matching ``Tuple`` from the tuple-space of the default server. Blocks if no matching tuple is available.',
 		argnames is ['Tuple']
+	]).
+
+	:- public(in_noblock/2).
+	:- mode(in_noblock(++compound, ?term), zero_or_one).
+	:- info(in_noblock/2, [
+		comment is 'Removes a tuple matching ``Tuple`` from the tuple-space of the default server. Fails if no matching tuple is available.',
+		argnames is ['Address', 'Tuple']
 	]).
 
 	:- public(in_noblock/1).
 	:- mode(in_noblock(?term), zero_or_one).
 	:- info(in_noblock/1, [
-		comment is 'Removes a tuple matching ``Tuple`` from the tuple-space. Fails if no matching tuple is available.',
+		comment is 'Removes a tuple matching ``Tuple`` from the tuple-space of the default server. Fails if no matching tuple is available.',
 		argnames is ['Tuple']
 	]).
 
-	:- public(in/2).
-	:- mode(in(+list, ?term), one).
-	:- info(in/2, [
-		comment is 'Removes a tuple matching one of the patterns in ``TupleList`` from the tuple-space. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.',
-		argnames is ['TupleList', 'Tuple']
+	:- public(in_list/3).
+	:- mode(in_list(++compound, +list, ?term), one).
+	:- info(in_list/3, [
+		comment is 'Removes a tuple matching one of the patterns in ``TupleList`` from the tuple-space of the given server. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.',
+		argnames is ['Address', 'TupleList', 'Tuple']
 	]).
 
 	:- public(in_list/2).
 	:- mode(in_list(+list, ?term), one).
 	:- info(in_list/2, [
-		comment is 'Removes a tuple matching one of the patterns in ``TupleList`` from the tuple-space. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.',
+		comment is 'Removes a tuple matching one of the patterns in ``TupleList`` from the tuple-space of the default server. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.',
 		argnames is ['TupleList', 'Tuple']
+	]).
+
+	:- public(rd/2).
+	:- mode(rd(++compound, ?term), one).
+	:- info(rd/2, [
+		comment is 'Reads a tuple matching ``Tuple`` from the tuple-space of the given server without removing it. Blocks if no matching tuple is available.',
+		argnames is ['Address', 'Tuple']
 	]).
 
 	:- public(rd/1).
 	:- mode(rd(?term), one).
 	:- info(rd/1, [
-		comment is 'Reads a tuple matching ``Tuple`` from the tuple-space without removing it. Blocks if no matching tuple is available.',
+		comment is 'Reads a tuple matching ``Tuple`` from the tuple-space of the default server without removing it. Blocks if no matching tuple is available.',
 		argnames is ['Tuple']
+	]).
+
+	:- public(rd_noblock/2).
+	:- mode(rd_noblock(++compound, ?term), zero_or_one).
+	:- info(rd_noblock/2, [
+		comment is 'Reads a tuple matching ``Tuple`` from the tuple-space of the given server without removing it. Fails if no matching tuple is available.',
+		argnames is ['Address', 'Tuple']
 	]).
 
 	:- public(rd_noblock/1).
 	:- mode(rd_noblock(?term), zero_or_one).
 	:- info(rd_noblock/1, [
-		comment is 'Reads a tuple matching ``Tuple`` from the tuple-space without removing it. Fails if no matching tuple is available.',
+		comment is 'Reads a tuple matching ``Tuple`` from the tuple-space of the default server without removing it. Fails if no matching tuple is available.',
 		argnames is ['Tuple']
 	]).
 
-	:- public(rd/2).
-	:- mode(rd(+list, ?term), one).
-	:- info(rd/2, [
-		comment is 'Reads a tuple matching one of the patterns in ``TupleList`` from the tuple-space without removing it. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.',
-		argnames is ['TupleList', 'Tuple']
+	:- public(rd_list/3).
+	:- mode(rd_list(++compound, +list, ?term), one).
+	:- info(rd_list/3, [
+		comment is 'Reads a tuple matching one of the patterns in ``TupleList`` from the tuple-space of the given server without removing it. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.',
+		argnames is ['Address', 'TupleList', 'Tuple']
 	]).
 
 	:- public(rd_list/2).
 	:- mode(rd_list(+list, ?term), one).
 	:- info(rd_list/2, [
-		comment is 'Reads a tuple matching one of the patterns in ``TupleList`` from the tuple-space without removing it. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.',
+		comment is 'Reads a tuple matching one of the patterns in ``TupleList`` from the tuple-space of the default server without removing it. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.',
 		argnames is ['TupleList', 'Tuple']
+	]).
+
+	:- public(findall_rd_noblock/4).
+	:- mode(findall_rd_noblock(++compound, ?term, +term, ?list), one).
+	:- info(findall_rd_noblock/4, [
+		comment is 'Returns a list of all instances of ``Template`` for tuples matching ``Tuple`` in the tuple-space. The operation is atomic.',
+		argnames is ['Address', 'Template', 'Tuple', 'List']
 	]).
 
 	:- public(findall_rd_noblock/3).
@@ -171,6 +231,13 @@
 	:- info(findall_rd_noblock/3, [
 		comment is 'Returns a list of all instances of ``Template`` for tuples matching ``Tuple`` in the tuple-space. The operation is atomic.',
 		argnames is ['Template', 'Tuple', 'List']
+	]).
+
+	:- public(findall_in_noblock/4).
+	:- mode(findall_in_noblock(++compound, ?term, +term, ?list), one).
+	:- info(findall_in_noblock/4, [
+		comment is 'Removes and returns a list of all instances of ``Template`` for tuples matching ``Tuple`` in the tuple-space. The operation is atomic - all matching tuples are removed in one synchronized operation.',
+		argnames is ['Address', 'Template', 'Tuple', 'List']
 	]).
 
 	:- public(findall_in_noblock/3).
@@ -208,11 +275,12 @@
 		argnames is ['Hook']
 	]).
 
-	:- private(server_running_/0).
-	:- dynamic(server_running_/0).
-	:- mode(server_running_, zero_or_one).
-	:- info(server_running_/0, [
-		comment is 'Flag indicating the server is running.'
+	:- private(server_running_/1).
+	:- dynamic(server_running_/1).
+	:- mode(server_running_(?compound), zero_or_one).
+	:- info(server_running_/1, [
+		comment is 'Flag indicating the server is running.',
+		argnames is ['Address']
 	]).
 
 	:- private(server_shutdown_/0).
@@ -238,14 +306,6 @@
 		argnames is ['ClientId', 'Request', 'OutputStream']
 	]).
 
-	:- private(engine_counter_/1).
-	:- dynamic(engine_counter_/1).
-	:- mode(engine_counter_(?integer), zero_or_one).
-	:- info(engine_counter_/1, [
-		comment is 'Counter for generating unique client engine names.',
-		argnames is ['Counter']
-	]).
-
 	:- private(client_engine_/2).
 	:- dynamic(client_engine_/2).
 	:- mode(client_engine_(?term, ?atom), zero_or_more).
@@ -258,20 +318,20 @@
 	% Private client state
 	% ==========================================================================
 
-	:- private(client_connection_input_/1).
-	:- dynamic(client_connection_input_/1).
-	:- mode(client_connection_input_(?term), zero_or_one).
-	:- info(client_connection_input_/1, [
+	:- private(client_connection_input_/2).
+	:- dynamic(client_connection_input_/2).
+	:- mode(client_connection_input_(?compound, ?term), zero_or_more).
+	:- info(client_connection_input_/2, [
 		comment is 'Stores the input stream for the client connection to the server.',
-		argnames is ['InputStream']
+		argnames is ['Address', 'InputStream']
 	]).
 
-	:- private(client_connection_output_/1).
-	:- dynamic(client_connection_output_/1).
-	:- mode(client_connection_output_(?term), zero_or_one).
-	:- info(client_connection_output_/1, [
+	:- private(client_connection_output_/2).
+	:- dynamic(client_connection_output_/2).
+	:- mode(client_connection_output_(?compound, ?term), zero_or_more).
+	:- info(client_connection_output_/2, [
 		comment is 'Stores the output stream for the client connection to the server.',
-		argnames is ['OutputStream']
+		argnames is ['Address', 'OutputStream']
 	]).
 
 	:- private(client_timeout_/1).
@@ -384,8 +444,10 @@
 	% ==========================================================================
 
 	linda :-
-		linda([(Host:Port)-true]),
-		print_message(information, linda, 'Server started at ~w:~w~n'+[Host, Port]).
+		linda([(Address)-true]),
+		sleep(1),
+		server_running_(Address),
+		print_message(information, linda, 'Server started at ~w~n'+[Address]).
 
 	linda(Options) :-
 		threaded_ignore(linda_(Options)).
@@ -398,8 +460,8 @@
 		ignore(memberchk(port(Port), Options)),
 		socket::server_open(Port, ServerSocket, [type(text)]),
 		assertz(server_socket_(ServerSocket)),
-		assertz(server_running_),
 		socket::current_host(Host),
+		assertz(server_running_(Host:Port)),
 		% Print server address
 		dbg(Host-Port),
 		% Process options
@@ -427,13 +489,12 @@
 			catch(threaded_engine_destroy(EngineName), _, true)
 		),
 		retractall(server_socket_(_)),
-		retractall(server_running_),
+		retractall(server_running_(_)),
 		retractall(server_shutdown_),
 		retractall(tuple_(_)),
-		retractall(waiting_(_,_,_)),
-		retractall(client_connection_(_,_,_)),
+		retractall(waiting_(_ ,_, _)),
+		retractall(client_connection_(_, _, _)),
 		retractall(accept_hook_(_)),
-		retractall(engine_counter_(_)),
 		catch(socket::server_close(ServerSocket), _, true).
 
 	:- meta_predicate(process_server_options(::, *)).
@@ -485,19 +546,10 @@
 	create_client_engine(ClientId, Input, Output) :-
 		% Register client connection
 		assertz(client_connection_(ClientId, Input, Output)),
-		% Generate unique engine name
-		(   retract(engine_counter_(N)) ->
-			N1 is N + 1
-		;   N1 = 1
-		),
-		assertz(engine_counter_(N1)),
-		number_codes(N1, Codes),
-		atom_codes(NAtom, Codes),
-		atom_concat(client_engine_, NAtom, EngineName),
-		assertz(client_engine_(ClientId, EngineName)),
-		dbg('Client connected'::['ClientId'-ClientId, 'EngineName'-EngineName]),
 		% Create engine that reads directly from its socket
-		threaded_engine_create(_, client_engine_loop(ClientId, Input, Output, EngineName), EngineName).
+		threaded_engine_create(_, client_engine_loop(ClientId, Input, Output, EngineName), EngineName),
+		assertz(client_engine_(ClientId, EngineName)),
+		dbg('Client connected'::['ClientId'-ClientId, 'EngineName'-EngineName]).
 
 	% Each client engine reads directly from its socket (blocking read)
 	% The loop must be robust - failures in handle_request must not terminate the engine
@@ -798,21 +850,21 @@
 
 	linda_client(Host:Port) :-
 		context(Context),
-		(	client_connection_input_(_) ->
+		(	client_connection_input_(Host:Port, _) ->
 			throw(error(linda_error(already_connected), Context))
 		;	catch(
 				(	socket::client_open(Host, Port, Input, Output, [type(text)]),
-					assertz(client_connection_input_(Input)),
-					assertz(client_connection_output_(Output))
+					assertz(client_connection_input_(Host:Port, Input)),
+					assertz(client_connection_output_(Host:Port, Output))
 				),
 				Error,
 				throw(error(linda_error(connection_failed(Error)), Context))
 			)
 		).
 
-	close_client :-
-		(	retract(client_connection_input_(Input)),
-			retract(client_connection_output_(Output)) ->
+	close_client(Address) :-
+		(	retract(client_connection_input_(Address, Input)),
+			retract(client_connection_output_(Address, Output)) ->
 			write_canonical(Output, exit),
 			write(Output, '.\n'),
 			flush_output(Output),
@@ -820,14 +872,17 @@
 		;	true
 		).
 
-	shutdown_server :-
+	close_client :-
+		close_client(_).
+
+	shutdown_server(Address) :-
 		context(Context),
 		assertz(server_shutdown_),
-		(	client_connection_output_(Output) ->
+		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, shutdown),
 			write(Output, '.\n'),
 			flush_output(Output),
-			client_connection_input_(Input),
+			client_connection_input_(Address, Input),
 			read_term(Input, Response, []),
 			(	Response == ok ->
 				true
@@ -835,6 +890,9 @@
 			)
 		;	throw(error(linda_error(not_connected), Context))
 		).
+
+	shutdown_server :-
+		shutdown_server(_).
 
 	linda_timeout(OldTime, NewTime) :-
 		(	retract(client_timeout_(OldTime)) ->
@@ -847,13 +905,13 @@
 	% Client tuple-space operations
 	% ==========================================================================
 
-	out(Tuple) :-
+	out(Address, Tuple) :-
 		context(Context),
-		(	client_connection_output_(Output) ->
+		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, out(Tuple)),
 			write(Output, '.\n'),
 			flush_output(Output),
-			client_connection_input_(Input),
+			client_connection_input_(Address, Input),
 			read_term(Input, Response, []),
 			(	Response == ok ->
 				true
@@ -862,13 +920,16 @@
 		;	throw(error(linda_error(not_connected), Context))
 		).
 
-	in(Tuple) :-
+	out(Tuple) :-
+		out(_, Tuple).
+
+	in(Address, Tuple) :-
 		context(Context),
-		(	client_connection_output_(Output) ->
+		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, in(Tuple)),
 			write(Output, '.\n'),
 			flush_output(Output),
-			client_connection_input_(Input),
+			client_connection_input_(Address, Input),
 			wait_for_result(Input, Result, Context),
 			(	Result = result(Match) ->
 				Tuple = Match
@@ -877,13 +938,16 @@
 		;	throw(error(linda_error(not_connected), Context))
 		).
 
-	in_noblock(Tuple) :-
+	in(Tuple) :-
+		in(_, Tuple).
+
+	in_noblock(Address, Tuple) :-
 		context(Context),
-		(	client_connection_output_(Output) ->
+		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, in_noblock(Tuple)),
 			write(Output, '.\n'),
 			flush_output(Output),
-			client_connection_input_(Input),
+			client_connection_input_(Address, Input),
 			read_term(Input, Response, []),
 			(	Response = result(Match) ->
 				Tuple = Match
@@ -894,13 +958,16 @@
 		;	throw(error(linda_error(not_connected), Context))
 		).
 
-	in(TupleList, Tuple) :-
+	in_noblock(Tuple) :-
+		in_noblock(_, Tuple).
+
+	in_list(Address, TupleList, Tuple) :-
 		context(Context),
-		(	client_connection_output_(Output) ->
+		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, in_list(TupleList)),
 			write(Output, '.\n'),
 			flush_output(Output),
-			client_connection_input_(Input),
+			client_connection_input_(Address, Input),
 			wait_for_result(Input, Result, Context),
 			(	Result = result(Match) ->
 				Tuple = Match
@@ -909,13 +976,16 @@
 		;	throw(error(linda_error(not_connected), Context))
 		).
 
-	rd(Tuple) :-
+	in_list(TupleList, Tuple) :-
+		in_list(_, TupleList, Tuple).
+
+	rd(Address, Tuple) :-
 		context(Context),
-		(	client_connection_output_(Output) ->
+		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, rd(Tuple)),
 			write(Output, '.\n'),
 			flush_output(Output),
-			client_connection_input_(Input),
+			client_connection_input_(Address, Input),
 			wait_for_result(Input, Result, Context),
 			(	Result = result(Match) ->
 				Tuple = Match
@@ -924,13 +994,16 @@
 		;	throw(error(linda_error(not_connected), Context))
 		).
 
-	rd_noblock(Tuple) :-
+	rd(Tuple) :-
+		rd(_, Tuple).
+
+	rd_noblock(Address, Tuple) :-
 		context(Context),
-		(	client_connection_output_(Output) ->
+		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, rd_noblock(Tuple)),
 			write(Output, '.\n'),
 			flush_output(Output),
-			client_connection_input_(Input),
+			client_connection_input_(Address, Input),
 			read_term(Input, Response, []),
 			(	Response = result(Match) ->
 				Tuple = Match
@@ -941,13 +1014,16 @@
 		;	throw(error(linda_error(not_connected), Context))
 		).
 
-	rd(TupleList, Tuple) :-
+	rd_noblock(Tuple) :-
+		rd_noblock(_, Tuple).
+
+	rd_list(Address, TupleList, Tuple) :-
 		context(Context),
-		(	client_connection_output_(Output) ->
+		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, rd_list(TupleList)),
 			write(Output, '.\n'),
 			flush_output(Output),
-			client_connection_input_(Input),
+			client_connection_input_(Address, Input),
 			wait_for_result(Input, Result, Context),
 			(	Result = result(Match) ->
 				Tuple = Match
@@ -956,19 +1032,16 @@
 		;	throw(error(linda_error(not_connected), Context))
 		).
 
-	in_list(TupleList, Tuple) :-
-		in(TupleList, Tuple).
-
 	rd_list(TupleList, Tuple) :-
-		rd(TupleList, Tuple).
+		rd_list(_, TupleList, Tuple).
 
-	findall_rd_noblock(Template, Tuple, Bag) :-
+	findall_rd_noblock(Address, Template, Tuple, Bag) :-
 		context(Context),
-		(	client_connection_output_(Output) ->
+		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, findall_rd_noblock(Template, Tuple)),
 			write(Output, '.\n'),
 			flush_output(Output),
-			client_connection_input_(Input),
+			client_connection_input_(Address, Input),
 			read_term(Input, Response, []),
 			(	Response = result(ResultBag) ->
 				Bag = ResultBag
@@ -979,13 +1052,16 @@
 		;	throw(error(linda_error(not_connected), Context))
 		).
 
-	findall_in_noblock(Template, Tuple, Bag) :-
+	findall_rd_noblock(Template, Tuple, Bag) :-
+		findall_rd_noblock(_, Template, Tuple, Bag).
+
+	findall_in_noblock(Address, Template, Tuple, Bag) :-
 		context(Context),
-		(	client_connection_output_(Output) ->
+		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, findall_in_noblock(Template, Tuple)),
 			write(Output, '.\n'),
 			flush_output(Output),
-			client_connection_input_(Input),
+			client_connection_input_(Address, Input),
 			read_term(Input, Response, []),
 			(	Response = result(ResultBag) ->
 				Bag = ResultBag
@@ -995,6 +1071,9 @@
 			)
 		;	throw(error(linda_error(not_connected), Context))
 		).
+
+	findall_in_noblock(Template, Tuple, Bag) :-
+		findall_in_noblock(_, Template, Tuple, Bag).
 
 	% Check if stream has data ready (backend dependent)
 	stream_ready(Stream) :-

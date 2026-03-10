@@ -37,6 +37,9 @@ a term position while verifying that the position is for the given term.
 Library
 -------
 
+* ADDED: Support to the `linda` library for clients to connect to multiple
+servers.
+
 * ADDED: New character set, `hexadecimal`, to the `type` library object and to
 the `arbitrary` library category.
 

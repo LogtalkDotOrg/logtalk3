@@ -144,7 +144,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-summary">API Summary</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#server-predicates">Server predicates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#client-predicates">Client predicates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tuple-operations-1">Tuple operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tuple-operations-single-default-server">Tuple operations (single/default server)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tuple-operations-multiple-servers">Tuple operations (multiple servers)</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
@@ -248,13 +249,14 @@ multi-threading and sockets support. It supports SWI-Prolog, Trealla
 Prolog, and XVM.</p>
 <p>The tuple-space is a shared blackboard where processes can:</p>
 <ul class="simple">
-<li><p><strong>Write</strong> tuples using <code class="docutils literal notranslate"><span class="pre">out/1</span></code></p></li>
-<li><p><strong>Read</strong> tuples (without removing) using <code class="docutils literal notranslate"><span class="pre">rd/1</span></code> and <code class="docutils literal notranslate"><span class="pre">rd_noblock/1</span></code></p></li>
-<li><p><strong>Remove</strong> tuples using <code class="docutils literal notranslate"><span class="pre">in/1</span></code> and <code class="docutils literal notranslate"><span class="pre">in_noblock/1</span></code></p></li>
+<li><p><strong>Write</strong> tuples using <code class="docutils literal notranslate"><span class="pre">out/1-2</span></code></p></li>
+<li><p><strong>Read</strong> tuples (without removing) using <code class="docutils literal notranslate"><span class="pre">rd/1-2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">rd_noblock/1-2</span></code></p></li>
+<li><p><strong>Remove</strong> tuples using <code class="docutils literal notranslate"><span class="pre">in/1-2</span></code> and <code class="docutils literal notranslate"><span class="pre">in_noblock/1-2</span></code></p></li>
 </ul>
-<p>The blocking operations (<code class="docutils literal notranslate"><span class="pre">in/1</span></code>, <code class="docutils literal notranslate"><span class="pre">rd/1</span></code>) suspend the process until a
-matching tuple becomes available. The non-blocking variants
-(<code class="docutils literal notranslate"><span class="pre">in_noblock/1</span></code>, <code class="docutils literal notranslate"><span class="pre">rd_noblock/1</span></code>) fail immediately if no matching
+<p>The blocking operations (<code class="docutils literal notranslate"><span class="pre">in/1-2</span></code>, <code class="docutils literal notranslate"><span class="pre">rd/1-2</span></code>) suspend the process
+until a matching tuple becomes available. The non-blocking variants
+(<code class="docutils literal notranslate"><span class="pre">in_noblock/1-2</span></code>, <code class="docutils literal notranslate"><span class="pre">rd_noblock/1-2</span></code>) fail immediately if no matching
 tuple is found.</p>
 <p>Tuples are matched using standard Prolog unification, allowing patterns
 with variables.</p>
@@ -284,7 +286,7 @@ link in a web browser.</p>
 <h3>Starting a server<a class="headerlink" href="#starting-a-server" title="Link to this heading"></a></h3>
 <p>To start a Linda server that prints its address:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> linda<span class="o">::</span>linda.
-localhost<span class="o">:</span><span class="m">54321</span>
+<span class="c">% Server started at localhost:54321</span>
 ...
 </pre></div>
 </div>
@@ -435,8 +437,8 @@ documentation)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">linda_timeout(?Old,</span> <span class="pre">+New)</span></code> - Get/set timeout</p></li>
 </ul>
 </section>
-<section id="tuple-operations-1">
-<span id="id1"></span><h3>Tuple operations<a class="headerlink" href="#tuple-operations-1" title="Link to this heading"></a></h3>
+<section id="tuple-operations-single-default-server">
+<h3>Tuple operations (single/default server)<a class="headerlink" href="#tuple-operations-single-default-server" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">out(+Tuple)</span></code> - Add tuple to space</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">in(?Tuple)</span></code> - Remove matching tuple (blocking)</p></li>
@@ -454,6 +456,11 @@ matching tuples (atomic read)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">findall_in_noblock(?Template,</span> <span class="pre">+Tuple,</span> <span class="pre">?List)</span></code> - Collect and remove
 all matching tuples (atomic remove)</p></li>
 </ul>
+</section>
+<section id="tuple-operations-multiple-servers">
+<h3>Tuple operations (multiple servers)<a class="headerlink" href="#tuple-operations-multiple-servers" title="Link to this heading"></a></h3>
+<p>Variants of the predicates above with an additional first argument for
+the server address.</p>
 </section>
 </section>
 <section id="known-issues">

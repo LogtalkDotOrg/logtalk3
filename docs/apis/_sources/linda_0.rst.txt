@@ -8,14 +8,14 @@
 ``linda``
 =========
 
-Linda tuple-space implementation for process communication. Provides a server that acts as a shared blackboard where clients can write (``out/1``), read (``rd/1``), and remove (``in/1``) tuples. Uses threaded engines for the server implementation and the sockets library for network communication.
+Linda tuple-space implementation for process communication. Provides a server that acts as a shared blackboard where clients can write (``out/1-2``), read (``rd/1-2``), and remove (``in/1-2``) tuples. Uses threaded engines for the server implementation and the sockets library for network communication.
 
 | **Availability:** 
 |    ``logtalk_load(linda(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:1
-| **Date:** 2026-03-06
+| **Version:** 2:0:0
+| **Date:** 2026-03-10
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -31,11 +31,12 @@ Linda tuple-space implementation for process communication. Provides a server th
 
 | **Remarks:**
 
-   - Supported backends: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog (requires both multi-threading and sockets support).
-   - Linda operations: The basic operations are ``out/1`` (write tuple), ``in/1`` (remove tuple, blocking), ``rd/1`` (read tuple, blocking), ``in_noblock/1`` (remove tuple, non-blocking), and ``rd_noblock/1`` (read tuple, non-blocking).
+   - Supported backends: SWI-Prolog, Trealla Prolog, and XVM (requires both multi-threading and sockets support).
+   - Linda operations: The basic operations are ``out/1-2`` (write tuple), ``in/1-2`` (remove tuple, blocking), ``rd/1-2`` (read tuple, blocking), ``in_noblock/1-2`` (remove tuple, non-blocking), and ``rd_noblock/1-2`` (read tuple, non-blocking).
    - Tuple matching: Tuples are matched using unification.
-   - Blocking behavior: The ``in/1`` and ``rd/1`` predicates block until a matching tuple is available. The ``in_noblock/1`` and ``rd_noblock/1`` predicates fail immediately if no matching tuple is found.
-   - Multiple clients: Multiple clients can connect to the same server. A tuple removed by ``in/1`` or ``in_noblock/1`` is only removed for one client.
+   - Blocking behavior: The ``in/1-2`` and ``rd/1-2`` predicates block until a matching tuple is available. The ``in_noblock/1-2`` and ``rd_noblock/1-2`` predicates fail immediately if no matching tuple is found.
+   - Multiple clients: Multiple clients can connect to the same server. A tuple removed by the ``in/1-2`` or ``in_noblock/1-2`` predicates is only removed for one client.
+   - Multiple servers: A client can connect to multiple servers. The first server it connects to, becomes the default server.
    - API compatibility: The API is inspired by the SICStus Prolog Linda library.
    - Network communication: Uses TCP sockets for client-server communication, allowing processes to run on different machines.
 
@@ -118,13 +119,32 @@ Connects to a Linda server at the given address (``Host:Port``).
 
 ------------
 
+.. index:: close_client/1
+.. _linda/0::close_client/1:
+
+``close_client/1``
+^^^^^^^^^^^^^^^^^^
+
+Closes the connection to the given Linda server.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close_client(Address)``
+| **Mode and number of proofs:**
+|    ``close_client(+compound)`` - ``one``
+
+
+------------
+
 .. index:: close_client/0
 .. _linda/0::close_client/0:
 
 ``close_client/0``
 ^^^^^^^^^^^^^^^^^^
 
-Closes the connection to the Linda server.
+Closes the connection to the default Linda server.
 
 | **Compilation flags:**
 |    ``static``
@@ -135,13 +155,36 @@ Closes the connection to the Linda server.
 
 ------------
 
+.. index:: shutdown_server/1
+.. _linda/0::shutdown_server/1:
+
+``shutdown_server/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Sends a shutdown signal to the given server. The server stops accepting new connections but continues serving existing clients until they all disconnect. Call ``close_client/1`` after this predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``shutdown_server(Address)``
+| **Mode and number of proofs:**
+|    ``shutdown_server(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Not connected:
+|        ``linda_error(not_connected)``
+
+
+------------
+
 .. index:: shutdown_server/0
 .. _linda/0::shutdown_server/0:
 
 ``shutdown_server/0``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Sends a shutdown signal to the server. The server stops accepting new connections but continues serving existing clients until they all disconnect. Call ``close_client/0`` after this predicate.
+Sends a shutdown signal to the default server. The server stops accepting new connections but continues serving existing clients until they all disconnect. Call ``close_client/0`` after this predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -175,13 +218,32 @@ Gets or sets the client timeout. ``OldTime`` is unified with the current timeout
 
 ------------
 
+.. index:: out/2
+.. _linda/0::out/2:
+
+``out/2``
+^^^^^^^^^
+
+Places the tuple ``Tuple`` in the tuple-space of the given server.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``out(Address,Tuple)``
+| **Mode and number of proofs:**
+|    ``out(++compound,+term)`` - ``one``
+
+
+------------
+
 .. index:: out/1
 .. _linda/0::out/1:
 
 ``out/1``
 ^^^^^^^^^
 
-Places the tuple ``Tuple`` in the tuple-space.
+Places the tuple ``Tuple`` in the tuple-space of the default server.
 
 | **Compilation flags:**
 |    ``static``
@@ -194,13 +256,32 @@ Places the tuple ``Tuple`` in the tuple-space.
 
 ------------
 
+.. index:: in/2
+.. _linda/0::in/2:
+
+``in/2``
+^^^^^^^^
+
+Removes a tuple matching ``Tuple`` from the tuple-space of the given server. Blocks if no matching tuple is available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``in(Address,Tuple)``
+| **Mode and number of proofs:**
+|    ``in(++compound,?term)`` - ``one``
+
+
+------------
+
 .. index:: in/1
 .. _linda/0::in/1:
 
 ``in/1``
 ^^^^^^^^
 
-Removes a tuple matching ``Tuple`` from the tuple-space. Blocks if no matching tuple is available.
+Removes a tuple matching ``Tuple`` from the tuple-space of the default server. Blocks if no matching tuple is available.
 
 | **Compilation flags:**
 |    ``static``
@@ -213,13 +294,32 @@ Removes a tuple matching ``Tuple`` from the tuple-space. Blocks if no matching t
 
 ------------
 
+.. index:: in_noblock/2
+.. _linda/0::in_noblock/2:
+
+``in_noblock/2``
+^^^^^^^^^^^^^^^^
+
+Removes a tuple matching ``Tuple`` from the tuple-space of the default server. Fails if no matching tuple is available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``in_noblock(Address,Tuple)``
+| **Mode and number of proofs:**
+|    ``in_noblock(++compound,?term)`` - ``zero_or_one``
+
+
+------------
+
 .. index:: in_noblock/1
 .. _linda/0::in_noblock/1:
 
 ``in_noblock/1``
 ^^^^^^^^^^^^^^^^
 
-Removes a tuple matching ``Tuple`` from the tuple-space. Fails if no matching tuple is available.
+Removes a tuple matching ``Tuple`` from the tuple-space of the default server. Fails if no matching tuple is available.
 
 | **Compilation flags:**
 |    ``static``
@@ -232,21 +332,21 @@ Removes a tuple matching ``Tuple`` from the tuple-space. Fails if no matching tu
 
 ------------
 
-.. index:: in/2
-.. _linda/0::in/2:
+.. index:: in_list/3
+.. _linda/0::in_list/3:
 
-``in/2``
-^^^^^^^^
+``in_list/3``
+^^^^^^^^^^^^^
 
-Removes a tuple matching one of the patterns in ``TupleList`` from the tuple-space. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.
+Removes a tuple matching one of the patterns in ``TupleList`` from the tuple-space of the given server. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``in(TupleList,Tuple)``
+|    ``in_list(Address,TupleList,Tuple)``
 | **Mode and number of proofs:**
-|    ``in(+list,?term)`` - ``one``
+|    ``in_list(++compound,+list,?term)`` - ``one``
 
 
 ------------
@@ -257,7 +357,7 @@ Removes a tuple matching one of the patterns in ``TupleList`` from the tuple-spa
 ``in_list/2``
 ^^^^^^^^^^^^^
 
-Removes a tuple matching one of the patterns in ``TupleList`` from the tuple-space. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.
+Removes a tuple matching one of the patterns in ``TupleList`` from the tuple-space of the default server. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.
 
 | **Compilation flags:**
 |    ``static``
@@ -270,13 +370,32 @@ Removes a tuple matching one of the patterns in ``TupleList`` from the tuple-spa
 
 ------------
 
+.. index:: rd/2
+.. _linda/0::rd/2:
+
+``rd/2``
+^^^^^^^^
+
+Reads a tuple matching ``Tuple`` from the tuple-space of the given server without removing it. Blocks if no matching tuple is available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rd(Address,Tuple)``
+| **Mode and number of proofs:**
+|    ``rd(++compound,?term)`` - ``one``
+
+
+------------
+
 .. index:: rd/1
 .. _linda/0::rd/1:
 
 ``rd/1``
 ^^^^^^^^
 
-Reads a tuple matching ``Tuple`` from the tuple-space without removing it. Blocks if no matching tuple is available.
+Reads a tuple matching ``Tuple`` from the tuple-space of the default server without removing it. Blocks if no matching tuple is available.
 
 | **Compilation flags:**
 |    ``static``
@@ -289,13 +408,32 @@ Reads a tuple matching ``Tuple`` from the tuple-space without removing it. Block
 
 ------------
 
+.. index:: rd_noblock/2
+.. _linda/0::rd_noblock/2:
+
+``rd_noblock/2``
+^^^^^^^^^^^^^^^^
+
+Reads a tuple matching ``Tuple`` from the tuple-space of the given server without removing it. Fails if no matching tuple is available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rd_noblock(Address,Tuple)``
+| **Mode and number of proofs:**
+|    ``rd_noblock(++compound,?term)`` - ``zero_or_one``
+
+
+------------
+
 .. index:: rd_noblock/1
 .. _linda/0::rd_noblock/1:
 
 ``rd_noblock/1``
 ^^^^^^^^^^^^^^^^
 
-Reads a tuple matching ``Tuple`` from the tuple-space without removing it. Fails if no matching tuple is available.
+Reads a tuple matching ``Tuple`` from the tuple-space of the default server without removing it. Fails if no matching tuple is available.
 
 | **Compilation flags:**
 |    ``static``
@@ -308,21 +446,21 @@ Reads a tuple matching ``Tuple`` from the tuple-space without removing it. Fails
 
 ------------
 
-.. index:: rd/2
-.. _linda/0::rd/2:
+.. index:: rd_list/3
+.. _linda/0::rd_list/3:
 
-``rd/2``
-^^^^^^^^
+``rd_list/3``
+^^^^^^^^^^^^^
 
-Reads a tuple matching one of the patterns in ``TupleList`` from the tuple-space without removing it. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.
+Reads a tuple matching one of the patterns in ``TupleList`` from the tuple-space of the given server without removing it. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``rd(TupleList,Tuple)``
+|    ``rd_list(Address,TupleList,Tuple)``
 | **Mode and number of proofs:**
-|    ``rd(+list,?term)`` - ``one``
+|    ``rd_list(++compound,+list,?term)`` - ``one``
 
 
 ------------
@@ -333,7 +471,7 @@ Reads a tuple matching one of the patterns in ``TupleList`` from the tuple-space
 ``rd_list/2``
 ^^^^^^^^^^^^^
 
-Reads a tuple matching one of the patterns in ``TupleList`` from the tuple-space without removing it. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.
+Reads a tuple matching one of the patterns in ``TupleList`` from the tuple-space of the default server without removing it. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.
 
 | **Compilation flags:**
 |    ``static``
@@ -342,6 +480,25 @@ Reads a tuple matching one of the patterns in ``TupleList`` from the tuple-space
 |    ``rd_list(TupleList,Tuple)``
 | **Mode and number of proofs:**
 |    ``rd_list(+list,?term)`` - ``one``
+
+
+------------
+
+.. index:: findall_rd_noblock/4
+.. _linda/0::findall_rd_noblock/4:
+
+``findall_rd_noblock/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a list of all instances of ``Template`` for tuples matching ``Tuple`` in the tuple-space. The operation is atomic.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``findall_rd_noblock(Address,Template,Tuple,List)``
+| **Mode and number of proofs:**
+|    ``findall_rd_noblock(++compound,?term,+term,?list)`` - ``one``
 
 
 ------------
@@ -361,6 +518,25 @@ Returns a list of all instances of ``Template`` for tuples matching ``Tuple`` in
 |    ``findall_rd_noblock(Template,Tuple,List)``
 | **Mode and number of proofs:**
 |    ``findall_rd_noblock(?term,+term,?list)`` - ``one``
+
+
+------------
+
+.. index:: findall_in_noblock/4
+.. _linda/0::findall_in_noblock/4:
+
+``findall_in_noblock/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Removes and returns a list of all instances of ``Template`` for tuples matching ``Tuple`` in the tuple-space. The operation is atomic - all matching tuples are removed in one synchronized operation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``findall_in_noblock(Address,Template,Tuple,List)``
+| **Mode and number of proofs:**
+|    ``findall_in_noblock(++compound,?term,+term,?list)`` - ``one``
 
 
 ------------
@@ -449,10 +625,10 @@ Stores the optional accept hook goal to call when a client connects.
 
 ------------
 
-.. index:: server_running_/0
-.. _linda/0::server_running_/0:
+.. index:: server_running_/1
+.. _linda/0::server_running_/1:
 
-``server_running_/0``
+``server_running_/1``
 ^^^^^^^^^^^^^^^^^^^^^
 
 Flag indicating the server is running.
@@ -460,8 +636,10 @@ Flag indicating the server is running.
 | **Compilation flags:**
 |    ``dynamic``
 
+| **Template:**
+|    ``server_running_(Address)``
 | **Mode and number of proofs:**
-|    ``server_running_`` - ``zero_or_one``
+|    ``server_running_(?compound)`` - ``zero_or_one``
 
 
 ------------
@@ -521,25 +699,6 @@ Stores blocked clients waiting for tuples. Records the client ID, request patter
 
 ------------
 
-.. index:: engine_counter_/1
-.. _linda/0::engine_counter_/1:
-
-``engine_counter_/1``
-^^^^^^^^^^^^^^^^^^^^^
-
-Counter for generating unique client engine names.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Template:**
-|    ``engine_counter_(Counter)``
-| **Mode and number of proofs:**
-|    ``engine_counter_(?integer)`` - ``zero_or_one``
-
-
-------------
-
 .. index:: client_engine_/2
 .. _linda/0::client_engine_/2:
 
@@ -559,10 +718,10 @@ Maps client IDs to their corresponding threaded engine names.
 
 ------------
 
-.. index:: client_connection_input_/1
-.. _linda/0::client_connection_input_/1:
+.. index:: client_connection_input_/2
+.. _linda/0::client_connection_input_/2:
 
-``client_connection_input_/1``
+``client_connection_input_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Stores the input stream for the client connection to the server.
@@ -571,17 +730,17 @@ Stores the input stream for the client connection to the server.
 |    ``dynamic``
 
 | **Template:**
-|    ``client_connection_input_(InputStream)``
+|    ``client_connection_input_(Address,InputStream)``
 | **Mode and number of proofs:**
-|    ``client_connection_input_(?term)`` - ``zero_or_one``
+|    ``client_connection_input_(?compound,?term)`` - ``zero_or_more``
 
 
 ------------
 
-.. index:: client_connection_output_/1
-.. _linda/0::client_connection_output_/1:
+.. index:: client_connection_output_/2
+.. _linda/0::client_connection_output_/2:
 
-``client_connection_output_/1``
+``client_connection_output_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Stores the output stream for the client connection to the server.
@@ -590,9 +749,9 @@ Stores the output stream for the client connection to the server.
 |    ``dynamic``
 
 | **Template:**
-|    ``client_connection_output_(OutputStream)``
+|    ``client_connection_output_(Address,OutputStream)``
 | **Mode and number of proofs:**
-|    ``client_connection_output_(?term)`` - ``zero_or_one``
+|    ``client_connection_output_(?compound,?term)`` - ``zero_or_more``
 
 
 ------------
