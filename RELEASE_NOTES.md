@@ -58,6 +58,9 @@ Tools
 
 * ADDED: New `mutation_testing` tool for mutation-based testing.
 
+* ADDED: Support to the `diagrams` tool for exporting diagrams in the Cytoscape
+Exchange (CX2) JSON format.
+
 * ADDED: Support to the `packs` tool for lock files for deterministic installs
 and CI/CD reproducibility.
 

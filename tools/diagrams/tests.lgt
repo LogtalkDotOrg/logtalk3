@@ -38,6 +38,7 @@
 	cover(file_dependency_diagram(_)).
 	cover(file_diagram(_)).
 	cover(file_load_diagram(_)).
+	cover(cytoscapejs_graph_language).
 	cover(graph_language_registry).
 	cover(inheritance_diagram(_)).
 	cover(library_dependency_diagram(_)).

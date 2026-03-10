@@ -264,11 +264,21 @@ the ``diagrams`` tool. There's also preliminary support for Mermaid (its
 current version lacks several required features for parity with d2 and
 Graphviz, notably support for links on edges).
 
-The diagrams ``.d2`` and ``.dot`` files are created in the current
-directory by default. These files can be easily converted into a
-printable format such as SVG, PDF, or Postscript. Sample helper scripts
-are provided for converting a directory of ``.d2`` or ``.dot`` files to
-``.svg`` files:
+JSON output format is also supported for use with Cytoscape. The
+Cytoscape backend generates ``.cx2`` files using the Cytoscape Exchange
+Format version 2 (CX2), including core aspects such as
+``attributeDeclarations``, ``networkAttributes``, ``nodes``, ``edges``,
+``visualProperties``, and ``status``. Node and edge styling is exported
+using CX2 visual property mappings based on node and edge attributes.
+The JSON backend includes optional metadata such as title, description,
+generation timestamp, and Logtalk/Prolog version information. A default
+HTML viewer, ``cytoscapejs_viewer.html``, is provided for convenience.
+
+The diagrams ``.d2`` and ``.dot`` files are created by default in the
+``'./dot_dias'`` sub-directory of the current directory. These files can
+be easily converted into a printable format such as SVG, PDF, or
+Postscript. Sample helper scripts are provided for converting a
+directory of ``.d2`` or ``.dot`` files to ``.svg`` files:
 
 - ``lgt2svg.sh`` for POSIX systems
 - ``lgt2svg.ps1`` for Windows systems
@@ -337,6 +347,11 @@ fine-tuning the diagrams layout.
 
 Customization
 -------------
+
+This tool provides parametric objects implementing the different types
+of diagrams where the parameter is the export format: ``dot``, ``d2``,
+and ``cx2``. The non-parametric versions of the diagram objects default
+to ``dot``.
 
 A set of options is available to specify the details to include in the
 generated diagrams. For entity diagrams, the options are:

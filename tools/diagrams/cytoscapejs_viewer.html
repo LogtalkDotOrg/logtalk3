@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<!--
+  Logtalk diagram viewer for Cytoscape Exchange (CX2) files.
+  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+  SPDX-License-Identifier: Apache-2.0
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Logtalk Diagram - CX2 Viewer</title>
+<script src="https://unpkg.com/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
+<script src="https://unpkg.com/dagre@0.8.5/dist/dagre.min.js"></script>
+<script src="https://unpkg.com/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
+<script src="https://unpkg.com/cytoscape-node-html-label@1.2.2/dist/cytoscape-node-html-label.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Monospace, monospace; overflow: hidden; }
+#toolbar {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+  padding: 5px 10px; height: 42px;
+  background: #f0f0f0; border-bottom: 1px solid #ccc; font-size: 12px;
+}
+#toolbar label { display: flex; align-items: center; gap: 4px; }
+#toolbar input[type=file] { font-size: 11px; }
+#toolbar button { font-size: 11px; padding: 2px 8px; cursor: pointer; }
+#toolbar select { font-size: 11px; }
+#meta {
+  margin-left: auto; color: #666; font-size: 11px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 45%;
+}
+#cy { width: 100%; height: calc(100vh - 42px); background: #fff; }
+#placeholder {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  color: #bbb; font-size: 15px; pointer-events: none;
+}
+</style>
+</head>
+<body>
+<div id="toolbar">
+  <label>Open: <input type="file" id="filePicker" accept=".cx2,.json"></label>
+  <button id="fitBtn">Fit</button>
+  <button id="zoomInBtn">+</button>
+  <button id="zoomOutBtn">-</button>
+  <label>Layout:
+    <select id="layoutSel">
+      <option value="dagre-tb">Dagre top-down</option>
+      <option value="dagre-lr">Dagre left-right</option>
+      <option value="breadthfirst">Breadthfirst</option>
+      <option value="cose">CoSE (force-directed)</option>
+    </select>
+  </label>
+  <button id="applyBtn">Apply</button>
+  <span id="meta"></span>
+</div>
+<div style="position:relative">
+  <div id="cy"></div>
+  <div id="placeholder">Open a .cx2 file to view the diagram</div>
+</div>
+
+<script>
+'use strict';
+
+try { cytoscape.use(cytoscapeDagre); } catch (_) {}
+try { if (window.cytoscapeNodeHtmlLabel) { cytoscape.use(window.cytoscapeNodeHtmlLabel); } } catch (_) {}
+
+let cy = null;
+
+document.getElementById('filePicker').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const raw = JSON.parse(ev.target.result);
+      render(raw);
+    } catch (error) {
+      alert('Invalid JSON/CX2 file: ' + error.message);
+    }
+  };
+  reader.readAsText(file);
+});
+
+document.getElementById('fitBtn').onclick = () =>
+  cy && cy.fit(undefined, 30);
+document.getElementById('zoomInBtn').onclick = () =>
+  cy && cy.zoom({ level: cy.zoom() * 1.25, renderedPosition: { x: cy.width() / 2, y: cy.height() / 2 } });
+document.getElementById('zoomOutBtn').onclick = () =>
+  cy && cy.zoom({ level: cy.zoom() / 1.25, renderedPosition: { x: cy.width() / 2, y: cy.height() / 2 } });
+document.getElementById('applyBtn').onclick = () =>
+  cy && runLayout(document.getElementById('layoutSel').value);
+
+function runLayout(key) {
+  const layouts = {
+    'dagre-tb':   { name: 'dagre', rankDir: 'TB', nodeSep: 64, rankSep: 96, edgeSep: 20, padding: 36 },
+    'dagre-lr':   { name: 'dagre', rankDir: 'LR', nodeSep: 64, rankSep: 96, edgeSep: 20, padding: 36 },
+    breadthfirst: { name: 'breadthfirst', directed: true, padding: 30 },
+    cose:         { name: 'cose', padding: 30, nodeRepulsion: 8000, numIter: 1000 },
+  };
+  const options = layouts[key] || layouts.cose;
+  try {
+    cy.layout(options).run();
+  } catch (_) {
+    cy.layout(layouts.cose).run();
+  }
+}
+
+function getAspectList(cx2, aspectName) {
+  for (const aspect of cx2) {
+    if (aspect && Object.prototype.hasOwnProperty.call(aspect, aspectName)) {
+      return Array.isArray(aspect[aspectName]) ? aspect[aspectName] : [];
+    }
+  }
+  return [];
+}
+
+function getAspectObject(cx2, aspectName) {
+  const list = getAspectList(cx2, aspectName);
+  return list[0] || {};
+}
+
+function asStringId(id) {
+  return String(id);
+}
+
+function normalizeArrowShape(shape) {
+  if (!shape) return 'triangle';
+  const upper = String(shape).toUpperCase();
+  const map = {
+    NONE: 'none',
+    TRIANGLE: 'triangle',
+    DELTA: 'triangle',
+    ARROW: 'triangle',
+    VEE: 'vee',
+    CIRCLE: 'circle',
+    DIAMOND: 'diamond',
+    SQUARE: 'square',
+    T: 'tee',
+  };
+  return map[upper] || String(shape).toLowerCase();
+}
+
+function normalizeLineStyle(lineStyle) {
+  if (!lineStyle) return 'solid';
+  const style = String(lineStyle).toLowerCase();
+  if (style === 'dot') return 'dotted';
+  return style;
+}
+
+function parseCx2(cx2) {
+  const nodes = getAspectList(cx2, 'nodes').map(entry => {
+    const value = entry.v || {};
+    const data = {
+      id: asStringId(entry.id),
+      label: value.name || '',
+      name: value.name || '',
+      kind: value.kind || '',
+      shape: value.shape || 'rectangle',
+      color: value.color || '#f5f5f5',
+      border: value.border || 'solid',
+      url: value.url || '',
+      tooltip: value.tooltip || '',
+    };
+    const contentLines = Array.isArray(value.lines) ? value.lines : [];
+    if (contentLines.length > 0) {
+      data.lines = contentLines;
+    }
+    if (value.caption) {
+      data.caption = value.caption;
+    }
+    const title = data.name || '';
+    const caption = data.caption || '';
+    const longestLineLength = Math.max(
+      title.length,
+      caption.length,
+      ...contentLines.map(line => String(line).length),
+      12
+    );
+    const totalLines = 1 + (caption ? 1 : 0) + contentLines.length;
+    data.rich_label = caption !== '' || contentLines.length > 0;
+    data._title = title;
+    data._content = contentLines.join('\n');
+    data._width = Math.min(560, Math.max(170, 24 + longestLineLength * 7));
+    data._height = Math.min(420, Math.max(62, 34 + totalLines * 17));
+    if (value.parent !== undefined && value.parent !== null && value.parent !== 0) {
+      data.parent = asStringId(value.parent);
+    }
+    return { data };
+  });
+
+  const edges = getAspectList(cx2, 'edges').reduce((acc, entry) => {
+    const value = entry.v || {};
+    if (value.kind === 'contains') return acc;
+    acc.push({
+      data: {
+        id: 'edge:' + asStringId(entry.id),
+        source: asStringId(entry.s),
+        target: asStringId(entry.t),
+        label: value.label || '',
+        kind: value.kind || '',
+        color: value.color || '#666666',
+        line_style: normalizeLineStyle(value.line_style || 'solid'),
+        url: value.url || '',
+        tooltip: value.tooltip || '',
+      },
+    });
+    return acc;
+  }, []);
+
+  const net = getAspectObject(cx2, 'networkAttributes');
+  const visual = getAspectObject(cx2, 'visualProperties');
+  return {
+    metadata: {
+      title: net.name || '',
+      generated_at: net.generated_at || '',
+      description: net.description || '',
+    },
+    visual,
+    elements: { nodes, edges },
+  };
+}
+
+function passthroughAttribute(mapping, visualKey) {
+  const spec = mapping && mapping[visualKey];
+  if (!spec || spec.type !== 'PASSTHROUGH' || !spec.definition) return null;
+  return spec.definition.attribute || null;
+}
+
+function nodeDisplayLabel(ele, labelAttr) {
+  const title = ele.data(labelAttr) || '';
+  const caption = ele.data('caption') || '';
+  const lines = ele.data('lines');
+  const normalizedLines = Array.isArray(lines) ? lines.map(line => String(line)) : [];
+  const chunks = [title];
+  if (caption) chunks.push(caption);
+  if (normalizedLines.length > 0) chunks.push(...normalizedLines);
+  return chunks.filter(Boolean).join('\n');
+}
+
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function nodeHtmlContent(data) {
+  const title = escapeHtml(data._title || data.name || '');
+  const rawCaption = data.caption || '';
+  const lines = Array.isArray(data.lines) ? data.lines.map(line => String(line)) : [];
+  const caption = escapeHtml(rawCaption);
+  const body = lines.map(line => '<div class="cx2-label-line">' + escapeHtml(line) + '</div>').join('');
+  const captionHtml = caption ? '<div class="cx2-label-caption">' + caption + '</div>' : '';
+  const bodyHtml = body ? '<div class="cx2-label-body">' + body + '</div>' : '';
+  return '<div class="cx2-label-wrap">' +
+    '<div class="cx2-label-title">' + title + '</div>' +
+    captionHtml +
+    bodyHtml +
+    '</div>';
+}
+
+function applyHtmlLabels() {
+  if (!cy || typeof cy.nodeHtmlLabel !== 'function') return false;
+  cy.nodeHtmlLabel([
+    {
+      query: 'node[rich_label]:childless',
+      halign: 'center',
+      valign: 'center',
+      tpl: data => nodeHtmlContent(data),
+      cssClass: 'cx2-node-label',
+    },
+  ]);
+  return true;
+}
+
+function applyFallbackRichLabels(nodeLabelAttr) {
+  if (!cy) return;
+  cy.style()
+    .selector('node[rich_label]:childless')
+    .style({
+      'label': ele => nodeDisplayLabel(ele, nodeLabelAttr),
+    })
+    .selector(':parent[rich_label]')
+    .style({
+      'label': ele => nodeDisplayLabel(ele, nodeLabelAttr),
+    })
+    .update();
+}
+
+function buildStyle(visual) {
+  const defaults = visual.default || {};
+  const nodeMapping = visual.nodeMapping || {};
+  const edgeMapping = visual.edgeMapping || {};
+  const nodeDefault = defaults.node || {};
+  const edgeDefault = defaults.edge || {};
+  const networkDefault = defaults.network || {};
+
+  const nodeBorderWidth = Number(nodeDefault.NODE_BORDER_WIDTH || 1.2);
+  const edgeWidth = Number(edgeDefault.EDGE_WIDTH || 1.4);
+  const edgeColor = edgeDefault.EDGE_LINE_COLOR || '#666666';
+  const edgeArrowShape = normalizeArrowShape(edgeDefault.EDGE_TARGET_ARROW_SHAPE || 'triangle');
+  const nodeLabelAttr = passthroughAttribute(nodeMapping, 'NODE_LABEL') || 'name';
+  const nodeShapeAttr = passthroughAttribute(nodeMapping, 'NODE_SHAPE') || 'shape';
+  const nodeBgAttr = passthroughAttribute(nodeMapping, 'NODE_BACKGROUND_COLOR') || 'color';
+  const nodeBorderStyleAttr = passthroughAttribute(nodeMapping, 'NODE_BORDER_STYLE') || 'border';
+  const edgeLabelAttr = passthroughAttribute(edgeMapping, 'EDGE_LABEL') || 'label';
+  const edgeLineColorAttr = passthroughAttribute(edgeMapping, 'EDGE_LINE_COLOR') || 'color';
+  const edgeLineStyleAttr = passthroughAttribute(edgeMapping, 'EDGE_LINE_STYLE') || 'line_style';
+
+  document.getElementById('cy').style.background = networkDefault.NETWORK_BACKGROUND_COLOR || '#ffffff';
+
+  return [
+    {
+      selector: 'node',
+      style: {
+        'label': ele => nodeDisplayLabel(ele, nodeLabelAttr),
+        'background-color': ele => ele.data(nodeBgAttr) || nodeDefault.NODE_BACKGROUND_COLOR || '#f5f5f5',
+        'shape': ele => ele.data(nodeShapeAttr) || nodeDefault.NODE_SHAPE || 'rectangle',
+        'border-style': ele => ele.data(nodeBorderStyleAttr) || nodeDefault.NODE_BORDER_STYLE || 'solid',
+        'border-width': nodeBorderWidth,
+        'border-color': nodeDefault.NODE_BORDER_COLOR || '#666666',
+        'font-family': 'Monospace',
+        'font-size': '11px',
+        'text-wrap': 'wrap',
+        'text-max-width': '260px',
+        'text-valign': 'center',
+        'text-halign': 'center',
+        'width': ele => Number(ele.data('_width')) || 180,
+        'height': ele => Number(ele.data('_height')) || 64,
+        'padding': '12px',
+        'color': nodeDefault.NODE_LABEL_COLOR || '#202020',
+        'text-outline-color': '#ffffff',
+        'text-outline-width': 1,
+        'text-background-color': '#ffffff',
+        'text-background-opacity': 0.9,
+        'text-background-shape': 'round-rectangle',
+        'text-background-padding': '2px',
+        'z-compound-depth': 'top',
+        'z-index-compare': 'manual',
+        'z-index': 20,
+      },
+    },
+    {
+      selector: 'node[rich_label]:childless',
+      style: {
+        'label': '',
+      },
+    },
+    {
+      selector: ':parent',
+      style: {
+        'shape': ele => ele.data(nodeShapeAttr) || 'round-rectangle',
+        'background-color': ele => ele.data(nodeBgAttr) || nodeDefault.NODE_BACKGROUND_COLOR || '#f5f5f5',
+        'background-opacity': 0.2,
+        'border-style': ele => ele.data(nodeBorderStyleAttr) || nodeDefault.NODE_BORDER_STYLE || 'solid',
+        'border-width': nodeBorderWidth,
+        'border-color': nodeDefault.NODE_BORDER_COLOR || '#666666',
+        'label': ele => ele.data(nodeLabelAttr) || '',
+        'font-size': '12px',
+        'font-weight': 'bold',
+        'color': nodeDefault.NODE_LABEL_COLOR || '#202020',
+        'text-valign': 'top',
+        'text-halign': 'center',
+        'text-margin-y': 0,
+        'text-wrap': 'none',
+        'width': 'auto',
+        'height': 'auto',
+        'text-background-color': '#ffffff',
+        'text-background-opacity': 0.92,
+        'text-background-shape': 'round-rectangle',
+        'text-background-padding': '2px',
+        'z-compound-depth': 'top',
+        'z-index-compare': 'manual',
+        'z-index': 25,
+        'text-outline-width': 0,
+        'padding': '42px',
+      },
+    },
+    {
+      selector: ':parent[kind = "file"]',
+      style: {
+        'font-size': '11px',
+        'font-weight': '600',
+        'text-margin-y': -10,
+      },
+    },
+    {
+      selector: ':parent[rich_label]',
+      style: {
+        'label': ele => nodeDisplayLabel(ele, nodeLabelAttr),
+      },
+    },
+    {
+      selector: 'edge',
+      style: {
+        'curve-style': 'bezier',
+        'line-color': ele => ele.data(edgeLineColorAttr) || edgeColor,
+        'line-style': ele => normalizeLineStyle(ele.data(edgeLineStyleAttr) || edgeDefault.EDGE_LINE_STYLE || 'solid'),
+        'target-arrow-color': ele => ele.data(edgeLineColorAttr) || edgeColor,
+        'target-arrow-shape': edgeArrowShape,
+        'target-arrow-fill': 'filled',
+        'font-family': 'Monospace',
+        'font-size': '9px',
+        'label': ele => ele.data(edgeLabelAttr) || '',
+        'color': edgeDefault.EDGE_LABEL_COLOR || '#202020',
+        'text-rotation': 'autorotate',
+        'text-background-color': '#ffffff',
+        'text-background-opacity': 0.9,
+        'text-background-padding': '2px',
+        'width': edgeWidth,
+        'z-compound-depth': 'bottom',
+        'z-index-compare': 'manual',
+        'z-index': 1,
+      },
+    },
+  ];
+}
+
+function openElementUrl(ele) {
+  const url = ele.data('url');
+  if (url) {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
+}
+
+function render(rawData) {
+  const parsed = Array.isArray(rawData) ? parseCx2(rawData) : rawData;
+  if (!parsed || !parsed.elements || !parsed.elements.nodes || !parsed.elements.edges) {
+    throw new Error('Unsupported file format. Expected CX2 aspects with nodes/edges.');
+  }
+
+  const metadata = parsed.metadata || {};
+  const parts = [
+    metadata.title,
+    metadata.generated_at ? 'Generated: ' + metadata.generated_at : null,
+  ].filter(Boolean);
+  document.getElementById('meta').textContent = parts.join(' | ');
+  document.getElementById('placeholder').style.display = 'none';
+
+  if (cy) cy.destroy();
+
+  cy = cytoscape({
+    container: document.getElementById('cy'),
+    elements: parsed.elements,
+    style: buildStyle(parsed.visual || {}),
+    layout: { name: 'dagre', rankDir: 'TB', nodeSep: 64, rankSep: 96, edgeSep: 20, padding: 36 },
+  });
+
+  if (!applyHtmlLabels()) {
+    applyFallbackRichLabels(passthroughAttribute((parsed.visual || {}).nodeMapping || {}, 'NODE_LABEL') || 'name');
+  }
+
+  cy.on('tap', 'node, edge', evt => openElementUrl(evt.target));
+  cy.fit(undefined, 30);
+}
+</script>
+<style>
+.cx2-node-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 8px 10px;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.cx2-label-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  text-align: center;
+  line-height: 1.15;
+  min-width: 0;
+}
+
+.cx2-label-title {
+  font-family: Monospace, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 1px;
+  color: #0f172a;
+  letter-spacing: 0;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.cx2-label-caption {
+  font-family: Monospace, monospace;
+  font-size: 7px;
+  font-weight: 400;
+  color: #334155;
+  opacity: 0.95;
+  margin-top: 0;
+  margin-bottom: 3px;
+}
+
+.cx2-label-body {
+  font-family: Monospace, monospace;
+  font-size: 9px;
+  font-weight: 400;
+  white-space: normal;
+  overflow: visible;
+  color: #1f2937;
+}
+
+.cx2-label-line {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.cx2-label-line + .cx2-label-line {
+  margin-top: 2px;
+}
+</style>
+</body>
+</html>

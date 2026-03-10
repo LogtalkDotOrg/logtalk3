@@ -1,0 +1,194 @@
+.. index:: single: cytoscapejs_graph_language
+.. _cytoscapejs_graph_language/0:
+
+.. rst-class:: right
+
+**object**
+
+``cytoscapejs_graph_language``
+==============================
+
+Predicates for generating diagram files in the Cytoscape Exchange (CX2) JSON format.
+
+| **Availability:** 
+|    ``logtalk_load(diagrams(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-03-10
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`graph_language_protocol <graph_language_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Provides:**
+|    :ref:`graph_language_registry::language_object/2 <graph_language_registry/0::language_object/2>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+|    :ref:`term_io <term_io/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`graph_language_protocol/0::edge/6`  :ref:`graph_language_protocol/0::file_footer/3`  :ref:`graph_language_protocol/0::file_header/3`  :ref:`graph_language_protocol/0::graph_footer/5`  :ref:`graph_language_protocol/0::graph_header/5`  :ref:`graph_language_protocol/0::node/7`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`graph_language_protocol/0::output_file_name/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: section_started_/1
+.. _cytoscapejs_graph_language/0::section_started_/1:
+
+``section_started_/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Tracks whether a JSON array section (``nodes`` or ``edges``) has already emitted at least one element.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``section_started_(Section)``
+| **Mode and number of proofs:**
+|    ``section_started_(?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: in_nodes_section_/0
+.. _cytoscapejs_graph_language/0::in_nodes_section_/0:
+
+``in_nodes_section_/0``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Flag indicating if the exporter is currently writing the nodes section.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``in_nodes_section_`` - ``zero_or_one``
+
+
+------------
+
+.. index:: parent_stack_/1
+.. _cytoscapejs_graph_language/0::parent_stack_/1:
+
+``parent_stack_/1``
+^^^^^^^^^^^^^^^^^^^
+
+Current stack of open graph container identifiers.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``parent_stack_(Stack)``
+| **Mode and number of proofs:**
+|    ``parent_stack_(?list(nonvar))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: edge_counter_/1
+.. _cytoscapejs_graph_language/0::edge_counter_/1:
+
+``edge_counter_/1``
+^^^^^^^^^^^^^^^^^^^
+
+Current counter used to generate unique edge identifiers.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``edge_counter_(Counter)``
+| **Mode and number of proofs:**
+|    ``edge_counter_(?integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: node_counter_/1
+.. _cytoscapejs_graph_language/0::node_counter_/1:
+
+``node_counter_/1``
+^^^^^^^^^^^^^^^^^^^
+
+Current counter used to generate unique node identifiers.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``node_counter_(Counter)``
+| **Mode and number of proofs:**
+|    ``node_counter_(?integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: node_id_/2
+.. _cytoscapejs_graph_language/0::node_id_/2:
+
+``node_id_/2``
+^^^^^^^^^^^^^^
+
+Maps source node identifiers to generated CX2 numeric identifiers.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``node_id_(Identifier,NumericId)``
+| **Mode and number of proofs:**
+|    ``node_id_(?nonvar,?integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: containment_edge_/2
+.. _cytoscapejs_graph_language/0::containment_edge_/2:
+
+``containment_edge_/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Stores pending containment edges between parent and child nodes.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``containment_edge_(ParentId,ChildId)``
+| **Mode and number of proofs:**
+|    ``containment_edge_(?integer,?integer)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

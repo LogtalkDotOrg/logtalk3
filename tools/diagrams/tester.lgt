@@ -31,6 +31,7 @@
 	logtalk_load([
 		graph_language_registry,
 		graph_language_protocol,
+		cytoscapejs_graph_language,
 		d2_graph_language,
 		dot_graph_language,
 		mermaid_graph_language
@@ -60,6 +61,7 @@
 	]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	lgtunit::run_test_sets([
+		tests(cx2),
 		tests(d2),
 		tests(dot),
 		tests(mermaid)
