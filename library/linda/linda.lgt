@@ -554,6 +554,8 @@
 	% Each client engine reads directly from its socket (blocking read)
 	% The loop must be robust - failures in handle_request must not terminate the engine
 	client_engine_loop(ClientId, Input, Output, EngineName) :-
+		adopt_stream(Input),
+		adopt_stream(Output),
 		(   catch(read_term(Input, Request, []), ReadError, (Request = read_error(ReadError))) ->
 			dbg('Engine loop'::['EngineName'-EngineName, 'Request'-Request]),
 			(   Request = read_error(Error) ->
@@ -1105,5 +1107,13 @@
 				wait_for_result_loop(Input, Result, StartTime, TimeoutSeconds, Context)
 			)
 		).
+
+	:- if(current_logtalk_flag(prolog_dialect, xvm)).
+		% streams are thread-owned in XVM
+		adopt_stream(Stream) :-
+			{adopt_stream(Stream)}.
+	:- else.
+		adopt_stream(_).
+	:- endif.
 
 :- end_object.
