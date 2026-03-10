@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-08,
+		date is 2026-03-10,
 		comment is 'Mutation testing tool.'
 	]).
 
@@ -904,8 +904,9 @@
 			Redirect = ''
 		;   Redirect = ' > /dev/null 2>&1'
 		),
+		logtalk_tester_script_name(LogtalkTester),
 		atomic_list_concat([
-			'cd "', Directory, '" && logtalk_tester',
+			'cd "', Directory, '" && ', LogtalkTester,
 			' -p ', Dialect,
 			' -n ', TesterName,
 			' -g "', Goal, '"',
@@ -966,8 +967,9 @@
 			Redirect = ''
 		;	Redirect = ' > /dev/null 2>&1'
 		),
+		logtalk_tester_script_name(LogtalkTester),
 		atomic_list_concat([
-			'cd "', Directory, '" && logtalk_tester',
+			'cd "', Directory, '" && ', LogtalkTester,
 			' -p ', Dialect,
 			' -n ', TesterName,
 			' -g "', Goal, '"',
@@ -991,6 +993,16 @@
 		path_concat(Directory, Tester, Path),
 		os::file_exists(Path),
 		!.
+
+	logtalk_tester_script_name(LogtalkTester) :-
+		(	os::operating_system_type(windows) ->
+			LogtalkTester = 'logtalk_tester.ps1'
+		;	os::environment_variable('LOGTALKHOME', LOGTALKHOME),
+			os::environment_variable('LOGTALKUSER', LOGTALKUSER),
+			LOGTALKHOME == LOGTALKUSER ->
+			LogtalkTester = 'logtalk_tester.sh'
+		;	LogtalkTester = 'logtalk_tester'
+		).
 
 	initialization_goal(ConfigFile, Goal) :-
 		atomic_list_concat([
