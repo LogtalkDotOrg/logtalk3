@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:10:1,
+		version is 0:10:2,
 		author is 'Paulo Moura',
-		date is 2026-03-02,
+		date is 2026-03-10,
 		comment is 'Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.',
@@ -263,8 +263,8 @@
 		socket_bind(Socket, 'AF_INET'(_Host, Port)),
 		socket_listen(Socket, N).
 
-	server_accept_(server_socket(Socket, _), Input, Output, client(Host, Port), Options) :-
-		socket_accept(Socket, 'AF_INET'(Host, Port), Input, Output),
+	server_accept_(server_socket(Socket, _), Input, Output, client(Client), Options) :-
+		socket_accept(Socket, Client, Input, Output),
 		memberchk(type(Type), Options),
 		set_stream_type(Input, Type),
 		set_stream_type(Output, Type).
