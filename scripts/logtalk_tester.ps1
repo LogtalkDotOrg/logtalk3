@@ -66,6 +66,19 @@ Function Format-Decimal {
     return [Math]::Round($Number, $DecimalPlaces)
 }
 
+Function ConvertTo-ArgumentString {
+	param(
+		[Parameter(Mandatory = $true)]
+		[Object[]]$Arguments
+	)
+
+	# Build a fully quoted command line to preserve arguments containing spaces,
+	# which is critical when spawning worker processes on Windows.
+	return ($Arguments | ForEach-Object {
+		[System.Management.Automation.Language.CodeGeneration]::QuoteArgument([string]$_)
+	}) -join ' '
+}
+
 Function Invoke-TestSet() {
 param(
 	[Parameter(Position = 0)]
@@ -108,7 +121,7 @@ param(
 		$flag_goal = "logtalk_load(issue_creator(loader)),set_logtalk_flag(issue_server,'$issue_server'),set_logtalk_flag(issue_labels,'$issue_labels'),$flag_goal"
 	}
 	if ($u -ne "") {
-		$flag_goal = "set_logtalk_flag(tests_base_url,'$url'),$flag_goal"
+		$flag_goal = "set_logtalk_flag(tests_base_url,'$u'),$flag_goal"
 	}
 	if ($f -ne "default" -and $c -ne "none") {
 		$flag_goal = "set_logtalk_flag(tests_report_directory,'$unit/'),$flag_goal"
@@ -747,6 +760,7 @@ if ($max_jobs -eq 1) {
 			}
 
 			if ($worker.Process.HasExited) {
+				$error_file = "$results/$($worker.Name).console.err"
 				if ($worker.Process.ExitCode -ne 0) {
 					$error_path = "$results/$($worker.Name).errors"
 					if (!(Test-Path $error_path) -or !(Select-String -Path $error_path -Pattern 'LOGTALK_TIMEOUT|LOGTALK_CRASH|LOGTALK_BROKEN' -Quiet)) {
@@ -758,6 +772,9 @@ if ($max_jobs -eq 1) {
 					$console_file = "$results/$($worker.Name).console"
 					if (Test-Path $console_file) {
 						Get-Content -Path $console_file
+					}
+					if (Test-Path $error_file) {
+						Get-Content -Path $error_file
 					}
 				}
 
@@ -787,7 +804,8 @@ if ($max_jobs -eq 1) {
 		$console_file = "$results/$name.console"
 		$error_file = "$results/$name.console.err"
 		$arguments = @($worker_arguments + @('-testset', $_.FullName))
-		$process = Start-Process -FilePath $pwsh_executable -ArgumentList $arguments -NoNewWindow -RedirectStandardOutput $console_file -RedirectStandardError $error_file -PassThru
+		$argument_string = ConvertTo-ArgumentString -Arguments $arguments
+		$process = Start-Process -FilePath $pwsh_executable -ArgumentList $argument_string -NoNewWindow -RedirectStandardOutput $console_file -RedirectStandardError $error_file -PassThru
 		$workers += [PSCustomObject]@{ Process = $process; Name = $name; Done = $false }
 		$counter++
 	}
@@ -802,7 +820,12 @@ if ($max_jobs -eq 1) {
 	}
 
 	Get-ChildItem -Path $results -Filter '*.console' -ErrorAction SilentlyContinue | Remove-Item -Force -ErrorAction SilentlyContinue
-	Get-ChildItem -Path $results -Filter '*.console.err' -ErrorAction SilentlyContinue | Remove-Item -Force -ErrorAction SilentlyContinue
+	Get-ChildItem -Path $results -Filter '*.console.err' -ErrorAction SilentlyContinue |
+		Where-Object {
+			$error_path = ($_.FullName -replace '\.console\.err$', '.errors')
+			!(Test-Path $error_path)
+		} |
+		Remove-Item -Force -ErrorAction SilentlyContinue
 }
 
 Push-Location $results
