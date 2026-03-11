@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-10,
+		date is 2026-03-11,
 		comment is 'Mutation testing tool.'
 	]).
 
@@ -697,9 +697,9 @@
 		prepare_mutator_hook(Hook),
 		load_options(LoadOptions),
 		revert_options(RevertOptions),
-		(   catch(logtalk_load(File, [hook(Hook)| LoadOptions]), _, fail) ->
+		(   catch(logtalk_load(File, [report(off), hook(Hook)| LoadOptions]), _, fail) ->
 			retractall(probing_),
-			catch(logtalk_load(File, RevertOptions), _, true),
+			catch(logtalk_load(File, [report(off)| RevertOptions]), _, true),
 			probe_mutation_happened_
 		;   retractall(probing_),
 			false
@@ -785,8 +785,8 @@
 		mutator_hook(Mutator, Entity, Predicate, ClauseIndex, Occurrence, false, Hook),
 		load_options(LoadOptions),
 		revert_options(RevertOptions),
-		ApplyCommand = logtalk_load(File, [hook(Hook)| LoadOptions]),
-		RevertCommand = logtalk_load(File, RevertOptions).
+		ApplyCommand = logtalk_load(File, [report(off), hook(Hook)| LoadOptions]),
+		RevertCommand = logtalk_load(File, [report(off)| RevertOptions]).
 
 	execute_mutant(mutant(Entity, Predicate, ClauseIndex, Mutator, Occurrence), Options, Status) :-
 		^^option(timeout(Timeout), Options),
@@ -828,9 +828,9 @@
 		prepare_mutator_hook(Hook),
 		load_options(LoadOptions),
 		revert_options(RevertOptions),
-		(	catch(logtalk_load(File, [hook(Hook)| LoadOptions]), _, true) ->
-			catch(logtalk_load(File, RevertOptions), _, true)
-		;	catch(logtalk_load(File, RevertOptions), _, true)
+		(	catch(logtalk_load(File, [report(off), hook(Hook)| LoadOptions]), _, true) ->
+			catch(logtalk_load(File, [report(off)| RevertOptions]), _, true)
+		;	catch(logtalk_load(File, [report(off)| RevertOptions]), _, true)
 		).
 
 	mutator_hook(Mutator, Entity, Predicate, ClauseIndex, Occurrence, PrintMutation, Hook) :-
@@ -900,11 +900,8 @@
 		path_concat(TempDir, 'logs', LogsDir),
 		make_directory_path(LogsDir),
 		initialization_goal_coverage(ConfigFile, Goal),
-		(   Verbose == true ->
-			Redirect = ''
-		;   Redirect = ' > /dev/null 2>&1'
-		),
 		logtalk_tester_script_name(LogtalkTester),
+		redirect(Verbose, Redirect),
 		atomic_list_concat([
 			'cd "', Directory, '" && ', LogtalkTester,
 			' -p ', Dialect,
@@ -919,6 +916,7 @@
 
 	initialization_goal_coverage(ConfigFile, Goal) :-
 		atomic_list_concat([
+			'set_logtalk_flag(report,off),',
 			'logtalk_load(mutation_testing(loader)),',
 			'logtalk_load(mutation_testing(subprocess_coverage_hook)),',
 			'subprocess_coverage_hook::load_coverage_config(''', ConfigFile, ''')'
@@ -963,11 +961,8 @@
 		initialization_goal(ConfigFile, Goal),
 		% build the full command; redirect output to /dev/null to silence subprocess
 		% unless verbose mode is enabled
-		(	Verbose == true ->
-			Redirect = ''
-		;	Redirect = ' > /dev/null 2>&1'
-		),
 		logtalk_tester_script_name(LogtalkTester),
+		redirect(Verbose, Redirect),
 		atomic_list_concat([
 			'cd "', Directory, '" && ', LogtalkTester,
 			' -p ', Dialect,
@@ -996,7 +991,7 @@
 
 	logtalk_tester_script_name(LogtalkTester) :-
 		(	os::operating_system_type(windows) ->
-			LogtalkTester = 'logtalk_tester.ps1'
+			LogtalkTester = 'pwsh -File "%SystemRoot%/logtalk_tester.ps1"'
 		;	os::environment_variable('LOGTALKHOME', LOGTALKHOME),
 			os::environment_variable('LOGTALKUSER', LOGTALKUSER),
 			LOGTALKHOME == LOGTALKUSER ->
@@ -1004,8 +999,16 @@
 		;	LogtalkTester = 'logtalk_tester'
 		).
 
+	redirect(true, '').
+	redirect(false, Redirect) :-
+		(   os::operating_system_type(windows) ->
+			Redirect = ' > NUL 2>&1'
+		;   Redirect = ' > /dev/null 2>&1'
+		).
+
 	initialization_goal(ConfigFile, Goal) :-
 		atomic_list_concat([
+			'set_logtalk_flag(report,off),',
 			'logtalk_load(mutation_testing(loader)),',
 			'logtalk_load(mutation_testing(subprocess_mutation_hook)),',
 			'subprocess_mutation_hook::load_config(''', ConfigFile, ''')'
