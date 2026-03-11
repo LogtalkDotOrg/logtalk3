@@ -72,11 +72,27 @@ Function ConvertTo-ArgumentString {
 		[Object[]]$Arguments
 	)
 
-	# Build a fully quoted command line to preserve arguments containing spaces,
-	# which is critical when spawning worker processes on Windows.
-	return ($Arguments | ForEach-Object {
-		[System.Management.Automation.Language.CodeGeneration]::QuoteArgument([string]$_)
-	}) -join ' '
+	# Build a fully quoted command line to preserve arguments containing spaces
+	# and quotes when spawning worker processes on Windows.
+	$quoted = foreach ($argument in $Arguments) {
+		$arg = [string]$argument
+
+		if ($arg.Length -eq 0) {
+			'""'
+			continue
+		}
+
+		if ($arg -notmatch '[\s"]') {
+			$arg
+			continue
+		}
+
+		$escaped = $arg -replace '(\\*)"', '$1$1\\"'
+		$escaped = $escaped -replace '(\\+)$', '$1$1'
+		'"' + $escaped + '"'
+	}
+
+	return ($quoted -join ' ')
 }
 
 Function Invoke-TestSet() {
