@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-10,
+		date is 2026-03-11,
 		comment is 'Predicates for generating diagram files in the Cytoscape Exchange (CX2) JSON format.'
 	]).
 
@@ -559,7 +559,7 @@
 	json_escaped_char('"',  '"').
 	json_escaped_char('\\', '\\').
 	json_escaped_char('\n', 'n').
-	json_escaped_char('	', 't').
+	json_escaped_char('\t', 't').
 	json_escaped_char('\r', 'r').
 
 	write_json_array([], _).
