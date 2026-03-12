@@ -121,6 +121,8 @@ predicate (or non-terminal)
 - *inheritance diagrams* showing entity inheritance relations
 - *uses diagrams* showing which entities use resources from other entities
 
+Entity nodes can optionally show a coupling metrics overlay.
+
 The following library diagrams are supported:
 
 - *library loading diagrams* showing which libraries load other libraries
@@ -358,6 +360,9 @@ generated diagrams. For entity diagrams, the options are:
 
 - `node_type_captions(Boolean)`  
 	print node type captions (`true` or `false`; default is `true`)
+
+- `metrics_overlay(Boolean)`  
+	print coupling metrics overlay in entity nodes showing afferent coupling (Ca), efferent coupling (Ce), instability (I), and abstractness (A) values (`true` or `false`; default is `false`)
 
 - `inheritance_relations(Boolean)`  
 	print inheritance relations (`true` or `false`; default is `true` for entity inheritance diagrams and `false` for other entity diagrams)

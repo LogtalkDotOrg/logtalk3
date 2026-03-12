@@ -8,14 +8,14 @@
 ``coupling_metric``
 ===================
 
-Computes entity efferent coupling, afferent coupling, and instability.
+Computes entity efferent coupling, afferent coupling, instability, and abstractness.
 
 | **Availability:** 
 |    ``logtalk_load(code_metrics(loader))``
 
 | **Author:** Ebrahim Azarisooreh and Paulo Moura
-| **Version:** 0:14:0
-| **Date:** 2024-03-27
+| **Version:** 0:14:1
+| **Date:** 2026-03-12
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

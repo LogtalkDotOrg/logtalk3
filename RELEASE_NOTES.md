@@ -69,6 +69,9 @@ Tools
 
 * ADDED: Support for caller diagrams to the `diagrams` tool.
 
+* ADDED: Support to the `diagrams` tool for coupling metrics overlay in entity
+nodes.
+
 * ADDED: Support to the `diagrams` tool for exporting diagrams in the Cytoscape
 Exchange (CX2) JSON format.
 

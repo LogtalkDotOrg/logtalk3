@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:3:1,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2025-11-11,
+		date is 2026-03-12,
 		comment is 'Predicates for generating graph files using Mermaid.'
 	]).
 
@@ -168,6 +168,20 @@
 		;	true
 		),
 		write_node_lines(Contents, Stream),
+		(	member(metrics_overlay(Ce,Ca,I,A), Options) ->
+			nl(Stream),
+			write(Stream, '_Ca:'),
+			write(Stream, Ca),
+			write(Stream, ' Ce:'),
+			write(Stream, Ce),
+			write(Stream, ' I:'),
+			write(Stream, I),
+			write(Stream, ' A:'),
+			write(Stream, A),
+			write(Stream, '_'),
+			nl(Stream)
+		;	true
+		),
 		write(Stream, '`"]:::'),
 		write(Stream, Style),
 		nl(Stream),

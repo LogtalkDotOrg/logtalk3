@@ -267,6 +267,18 @@
 			write_json_id(Stream, Tooltip)
 		;	true
 		),
+		(	member(metrics_overlay(Ce,Ca,I,A), Options) ->
+			write(Stream, ', "metrics": "Ca:'),
+			write(Stream, Ca),
+			write(Stream, ' Ce:'),
+			write(Stream, Ce),
+			write(Stream, ' I:'),
+			write(Stream, I),
+			write(Stream, ' A:'),
+			write(Stream, A),
+			write(Stream, '"')
+		;	true
+		),
 		write(Stream, '}}').
 
 	remember_containment_edge(ParentId, ChildId) :-
@@ -525,8 +537,8 @@
 	node_style(class,                       rectangle,         yellow,               solid).
 	node_style(instance,                    rectangle,         yellow,               solid).
 	node_style(instance_and_class,          rectangle,         yellow,               solid).
-	node_style(protocol,                    ellipse,           aquamarine,           solid).
-	node_style(category,                    hexagon,           lightcyan,            solid).
+	node_style(protocol,                    rectangle,         aquamarine,           solid).
+	node_style(category,                    rectangle,         lightcyan,            solid).
 	node_style(module,                      rectangle,         plum,                 solid).
 	node_style(file,                        rectangle,         paleturquoise,        solid).
 	node_style(directory,                   'round-rectangle', lightsalmon,          solid).
@@ -536,8 +548,8 @@
 	node_style(external_class,              rectangle,         lightgoldenrodyellow, dashed).
 	node_style(external_instance,           rectangle,         lightgoldenrodyellow, dashed).
 	node_style(external_instance_and_class, rectangle,         lightgoldenrodyellow, dashed).
-	node_style(external_protocol,           ellipse,           mediumaquamarine,     dashed).
-	node_style(external_category,           hexagon,           cyan,                 dashed).
+	node_style(external_protocol,           rectangle,         mediumaquamarine,     dashed).
+	node_style(external_category,           rectangle,         cyan,                 dashed).
 	node_style(external_module,             rectangle,         thistle,              dashed).
 	node_style(external_file,               rectangle,         powderblue,           dashed).
 	node_style(external_directory,          'round-rectangle', salmon,               dashed).

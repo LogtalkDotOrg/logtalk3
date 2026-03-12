@@ -24,10 +24,10 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:14:0,
+		version is 0:14:1,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2024-03-27,
-		comment is 'Computes entity efferent coupling, afferent coupling, and instability.',
+		date is 2026-03-12,
+		comment is 'Computes entity efferent coupling, afferent coupling, instability, and abstractness.',
 		remarks is [
 			'Efferent coupling (Ce)' - 'Number of entities that an entity depends on.',
 			'Afferent coupling (Ca)' - 'Number of entities that depend on an entity.',

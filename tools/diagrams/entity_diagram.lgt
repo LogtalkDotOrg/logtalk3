@@ -23,7 +23,7 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2:61:0,
+		version is 2:62:0,
 		author is 'Paulo Moura',
 		date is 2026-03-12,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
@@ -333,6 +333,13 @@
 			EntityOptions = [url('')| Options]
 		).
 
+	add_metrics_overlay_option(Entity, Options, MetricsOptions) :-
+		(	member(metrics_overlay(true), Options),
+			coupling_metric::entity_score(Entity, ce_ca_i_a(Ce,Ca,I,A)) ->
+			MetricsOptions = [metrics_overlay(Ce,Ca,I,A)| Options]
+		;	MetricsOptions = Options
+		).
+
 	output_protocol(Protocol, Options) :-
 		^^ground_entity_identifier(protocol, Protocol, Name),
 		(	member(interface(true), Options) ->
@@ -350,7 +357,8 @@
 		;	% no locally declared predicates; xref diagram empty
 			NodeOptions = Options
 		),
-		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
+		add_metrics_overlay_option(Protocol, NodeOptions, MetricsOptions),
+		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| MetricsOptions]),
 		output_protocol_relations(Protocol, Options).
 
 	output_object(Object, Options) :-
@@ -392,7 +400,8 @@
 		;	% no locally declared/defined/provided predicates; xref diagram empty
 			NodeOptions = Options
 		),
-		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
+		add_metrics_overlay_option(Object, NodeOptions, MetricsOptions),
+		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| MetricsOptions]),
 		output_object_relations(Object, Options).
 
 	output_category(Category, Options) :-
@@ -434,7 +443,8 @@
 		;	% no locally declared/defined/provided predicates; xref diagram empty
 			NodeOptions = Options
 		),
-		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| NodeOptions]),
+		add_metrics_overlay_option(Category, NodeOptions, MetricsOptions),
+		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| MetricsOptions]),
 		output_category_relations(Category, Options).
 
 	output_module(Module, Options) :-
@@ -461,7 +471,8 @@
 		;	% no locally exported or defined predicates; xref diagram empty
 			NodeOptions = Options
 		),
-		^^output_node(Module, Module, module, Resources, module, [tooltip(module)| NodeOptions]),
+		add_metrics_overlay_option(Module, NodeOptions, MetricsOptions),
+		^^output_node(Module, Module, module, Resources, module, [tooltip(module)| MetricsOptions]),
 		output_module_relations(Module, Options).
 
 	fix_non_terminals([], _, _, []).
@@ -913,6 +924,8 @@
 	default_option(zoom(false)).
 	% by default, use a '.svg' extension for linked diagrams
 	default_option(zoom_url_suffix('.svg')).
+	% by default, don't show coupling metrics overlay:
+	default_option(metrics_overlay(false)).
 
 	diagram_description('Entity diagram').
 

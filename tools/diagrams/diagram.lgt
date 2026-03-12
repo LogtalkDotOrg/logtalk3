@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 3:16:1,
+		version is 3:17:0,
 		author is 'Paulo Moura',
-		date is 2025-11-26,
+		date is 2026-03-12,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -711,6 +711,8 @@
 		atom(Suffix).
 	valid_option(url_line_references(Provider)) :-
 		valid(one_of(atom, [bitbucket,github,gitlab]), Provider).
+	valid_option(metrics_overlay(Boolean)) :-
+		valid(boolean, Boolean).
 
 	fix_option(url_prefixes(CodePrefix0, DocPrefix0), url_prefixes(CodePrefix, DocPrefix)) :-
 		normalize_url_prefixes([CodePrefix0, DocPrefix0], [CodePrefix, DocPrefix]).

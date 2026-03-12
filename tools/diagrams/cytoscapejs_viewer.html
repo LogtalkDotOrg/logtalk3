@@ -633,6 +633,7 @@ function parseCx2(cx2) {
       code_url: value.code_url || '',
       zoom_url: value.zoom_url || '',
       tooltip: value.tooltip || '',
+      metrics: value.metrics || '',
     };
     data.has_zoom = String(data.zoom_url || '').trim() !== '';
     const contentLines = Array.isArray(value.lines) ? value.lines : [];
@@ -644,14 +645,16 @@ function parseCx2(cx2) {
     }
     const title = data.name || '';
     const caption = data.caption || '';
+    const metrics = data.metrics || '';
     const longestLineLength = Math.max(
       title.length,
       caption.length,
+      metrics.length,
       ...contentLines.map(line => String(line).length),
       12
     );
-    const totalLines = 1 + (caption ? 1 : 0) + contentLines.length;
-    data.rich_label = caption !== '' || contentLines.length > 0;
+    const totalLines = 1 + (caption ? 1 : 0) + contentLines.length + (metrics ? 1 : 0);
+    data.rich_label = caption !== '' || contentLines.length > 0 || metrics !== '';
     data._title = title;
     data._content = contentLines.join('\n');
     data._width = Math.min(560, Math.max(170, 24 + longestLineLength * 7));
@@ -714,11 +717,13 @@ function passthroughAttribute(mapping, visualKey) {
 function nodeDisplayLabel(ele, labelAttr) {
   const title = ele.data(labelAttr) || '';
   const caption = ele.data('caption') || '';
+  const metrics = ele.data('metrics') || '';
   const lines = ele.data('lines');
   const normalizedLines = Array.isArray(lines) ? lines.map(line => String(line)) : [];
   const chunks = [title];
   if (caption) chunks.push(caption);
   if (normalizedLines.length > 0) chunks.push(...normalizedLines);
+  if (metrics) chunks.push(metrics);
   return chunks.filter(Boolean).join('\n');
 }
 
@@ -736,13 +741,16 @@ function nodeHtmlContent(data) {
   const rawCaption = data.caption || '';
   const lines = Array.isArray(data.lines) ? data.lines.map(line => String(line)) : [];
   const caption = escapeHtml(rawCaption);
+  const metrics = escapeHtml(data.metrics || '');
   const body = lines.map(line => '<div class="cx2-label-line">' + escapeHtml(line) + '</div>').join('');
   const captionHtml = caption ? '<div class="cx2-label-caption">' + caption + '</div>' : '';
   const bodyHtml = body ? '<div class="cx2-label-body">' + body + '</div>' : '';
+  const metricsHtml = metrics ? '<div class="cx2-label-metrics">' + metrics + '</div>' : '';
   return '<div class="cx2-label-wrap">' +
     '<div class="cx2-label-title">' + title + '</div>' +
     captionHtml +
     bodyHtml +
+    metricsHtml +
     '</div>';
 }
 
@@ -1327,6 +1335,18 @@ function render(rawData, sourceUrl, sourceNativePath) {
   opacity: 0.95;
   margin-top: 0;
   margin-bottom: 3px;
+  padding-bottom: 3px;
+}
+
+.cx2-label-metrics {
+  font-family: Monospace, monospace;
+  font-size: 7px;
+  font-weight: 400;
+  color: #334155;
+  opacity: 0.95;
+  margin-top: 4px;
+  padding-top: 3px;
+  margin-bottom: 0;
 }
 
 .cx2-label-body {

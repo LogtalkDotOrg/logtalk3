@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 3:12:0,
+		version is 3:13:0,
 		author is 'Paulo Moura',
-		date is 2025-10-27,
+		date is 2026-03-12,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -229,6 +229,20 @@
 			true
 		;	write(Stream, '<TR><TD> </TD></TR>'),
 			write_node_lines(Contents, Stream, [quoted(Quoted)])
+		),
+		(	member(metrics_overlay(Ce,Ca,I,A), Options) ->
+			write(Stream, '<TR><TD> </TD></TR>'),
+			write(Stream, '<TR><TD> </TD><TD><FONT POINT-SIZE="7">'),
+			write(Stream, 'Ca:'),
+			write(Stream, Ca),
+			write(Stream, ' Ce:'),
+			write(Stream, Ce),
+			write(Stream, ' I:'),
+			write(Stream, I),
+			write(Stream, ' A:'),
+			write(Stream, A),
+			write(Stream, '</FONT></TD><TD> </TD></TR>')
+		;	true
 		),
 		write(Stream, '</TABLE>>]\n').
 
