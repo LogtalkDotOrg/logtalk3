@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>graph_language_registry &mdash; Logtalk 3.99.0</title>
+  <title>caller_diagram(Format) &mdash; Logtalk 3.99.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="inheritance_diagram" href="inheritance_diagram_0.html" />
-    <link rel="prev" title="graph_language_protocol" href="graph_language_protocol_0.html" />
+    <link rel="next" title="cytoscapejs_graph_language" href="cytoscapejs_graph_language_0.html" />
+    <link rel="prev" title="caller_diagram" href="caller_diagram_0.html" />
    
 </head>
 
@@ -94,7 +94,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#deques"><span class="xref std std-ref">deques</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#diagrams"><span class="xref std std-ref">diagrams</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="caller_diagram_0.html">caller_diagram</a></li>
-<li class="toctree-l3"><a class="reference internal" href="caller_diagram_1.html">caller_diagram(Format)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">caller_diagram(Format)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cytoscapejs_graph_language_0.html">cytoscapejs_graph_language</a></li>
 <li class="toctree-l3"><a class="reference internal" href="d2_graph_language_0.html">d2_graph_language</a></li>
 <li class="toctree-l3"><a class="reference internal" href="diagram_1.html">diagram(Format)</a></li>
@@ -114,7 +114,7 @@
 <li class="toctree-l3"><a class="reference internal" href="file_load_diagram_0.html">file_load_diagram</a></li>
 <li class="toctree-l3"><a class="reference internal" href="file_load_diagram_1.html">file_load_diagram(Format)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="graph_language_protocol_0.html">graph_language_protocol</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">graph_language_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graph_language_registry_0.html">graph_language_registry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="inheritance_diagram_0.html">inheritance_diagram</a></li>
 <li class="toctree-l3"><a class="reference internal" href="inheritance_diagram_1.html">inheritance_diagram(Format)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="library_dependency_diagram_0.html">library_dependency_diagram</a></li>
@@ -263,9 +263,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">graph_language_registry</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">caller_diagram(Format)</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/graph_language_registry_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/caller_diagram_1.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -273,10 +273,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="graph-language-registry-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="graph-language-registry">
-<h1><code class="docutils literal notranslate"><span class="pre">graph_language_registry</span></code><a class="headerlink" href="#graph-language-registry" title="Link to this heading"></a></h1>
-<p>Registry of implemented graph languages.</p>
+  <p class="right" id="caller-diagram-1"><span id="index-0"></span><strong>object</strong></p>
+<section id="caller-diagram-format">
+<h1><code class="docutils literal notranslate"><span class="pre">caller_diagram(Format)</span></code><a class="headerlink" href="#caller-diagram-format" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Format</span></code> - Graph language file format.</p></li>
+</ul>
+<p>Predicates for generating caller diagrams showing direct and indirect callers of a predicate or a non-terminal.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -285,8 +288,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:1</div>
-<div class="line"><strong>Date:</strong> 2020-03-25</div>
+<div class="line"><strong>Version:</strong> 1:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-03-12</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -295,9 +298,15 @@
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Dependencies:</strong></div>
+<div class="line"><strong>Imports:</strong></div>
 <div class="line-block">
-<div class="line">(none)</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="diagram_1.html#diagram-1"><span class="std std-ref">diagram(Format)</span></a></div>
+</div>
+<div class="line"><strong>Uses:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0"><span class="std std-ref">logtalk</span></a></div>
+<div class="line"><a class="reference internal" href="user_0.html#user-0"><span class="std std-ref">user</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -309,40 +318,66 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line">(none)</div>
+<div class="line"> <a class="reference internal" href="diagram_1.html#diagram-1-all-files-0"><span class="std std-ref">all_files/0</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-all-files-1"><span class="std std-ref">all_files/1</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-all-libraries-0"><span class="std std-ref">all_libraries/0</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-all-libraries-1"><span class="std std-ref">all_libraries/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-diagram-description-1"><span class="std std-ref">diagram_description/1</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-diagram-name-suffix-1"><span class="std std-ref">diagram_name_suffix/1</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-directories-2"><span class="std std-ref">directories/2</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-directories-3"><span class="std std-ref">directories/3</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-directory-1"><span class="std std-ref">directory/1</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-directory-2"><span class="std std-ref">directory/2</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-directory-3"><span class="std std-ref">directory/3</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-files-1"><span class="std std-ref">files/1</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-files-2"><span class="std std-ref">files/2</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-files-3"><span class="std std-ref">files/3</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-format-object-1"><span class="std std-ref">format_object/1</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-libraries-1"><span class="std std-ref">libraries/1</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-libraries-2"><span class="std std-ref">libraries/2</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-libraries-3"><span class="std std-ref">libraries/3</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-library-1"><span class="std std-ref">library/1</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-library-2"><span class="std std-ref">library/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-rdirectory-1"><span class="std std-ref">rdirectory/1</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-rdirectory-2"><span class="std std-ref">rdirectory/2</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-rdirectory-3"><span class="std std-ref">rdirectory/3</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-rlibrary-1"><span class="std std-ref">rlibrary/1</span></a>  <a class="reference internal" href="diagram_1.html#diagram-1-rlibrary-2"><span class="std std-ref">rlibrary/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#language-object-2" id="id2"><code class="docutils literal notranslate"><span class="pre">language_object/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#predicate-2" id="id2"><code class="docutils literal notranslate"><span class="pre">predicate/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#predicate-1" id="id3"><code class="docutils literal notranslate"><span class="pre">predicate/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id3">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id4">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id5">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id4">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id5">Private predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#included-caller-1" id="id6"><code class="docutils literal notranslate"><span class="pre">included_caller_/1</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#operators" id="id7">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="language-object-2">
-<span id="graph-language-registry-0-language-object-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">language_object/2</span></code></a><a class="headerlink" href="#language-object-2" title="Link to this heading"></a></h3>
-<p>Table of defined graph languages and their implementation objects.</p>
+<section id="predicate-2">
+<span id="caller-diagram-1-predicate-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predicate/2</span></code></a><a class="headerlink" href="#predicate-2" title="Link to this heading"></a></h3>
+<p>Creates a caller diagram for the given predicate or non-terminal using the specified options. Predicates are specified as <code class="docutils literal notranslate"><span class="pre">Entity::Name/Arity</span></code>. Non-terminals are specified as <code class="docutils literal notranslate"><span class="pre">Entity::Name//Arity</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">multifile</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">language_object(Language,Object)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predicate(QualifiedIndicator,Options)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">language_object(?atom,?object_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predicate(+qualified_predicate_indicator,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="predicate-1">
+<span id="caller-diagram-1-predicate-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predicate/1</span></code></a><a class="headerlink" href="#predicate-1" title="Link to this heading"></a></h3>
+<p>Creates a caller diagram for the given predicate using default options. Predicates are specified as <code class="docutils literal notranslate"><span class="pre">Entity::Name/Arity</span></code>. Non-terminals are specified as <code class="docutils literal notranslate"><span class="pre">Entity::Name//Arity</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predicate(QualifiedIndicator)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predicate(+qualified_predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </section>
@@ -350,15 +385,40 @@
 <hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
-<p>(none)</p>
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<p>(none)</p>
+<section id="included-caller-1">
+<span id="caller-diagram-1-included-caller-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">included_caller_/1</span></code></a><a class="headerlink" href="#included-caller-1" title="Link to this heading"></a></h3>
+<p>Table of callers already included in the diagram.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">included_caller_(Caller)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">included_caller_(?qualified_predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">included_caller_(?predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 </section>
+</section>
+<hr class="docutils" />
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="xref_diagram_1.html#xref-diagram-1"><span class="std std-ref">xref_diagram(Format)</span></a>, <a class="reference internal" href="entity_diagram_1.html#entity-diagram-1"><span class="std std-ref">entity_diagram(Format)</span></a></p>
+</div>
 </section>
 </section>
 
@@ -366,8 +426,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="graph_language_protocol_0.html" class="btn btn-neutral float-left" title="graph_language_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="inheritance_diagram_0.html" class="btn btn-neutral float-right" title="inheritance_diagram" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="caller_diagram_0.html" class="btn btn-neutral float-left" title="caller_diagram" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cytoscapejs_graph_language_0.html" class="btn btn-neutral float-right" title="cytoscapejs_graph_language" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

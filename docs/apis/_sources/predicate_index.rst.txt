@@ -11329,6 +11329,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`metagol <metagol/0::pprint/1>`
 
+``predicate/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`caller_diagram(Format) <caller_diagram/1::predicate/1>`
+
 ``predicate/2``
 ---------------
 
@@ -11337,6 +11347,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`caller_diagram(Format) <caller_diagram/1::predicate/2>`
 * :ref:`dead_code_scanner <dead_code_scanner/0::predicate/2>`
 * :ref:`mutation_testing <mutation_testing/0::predicate/2>`
 

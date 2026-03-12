@@ -23,12 +23,12 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:85:1,
+		version is 2:86:0,
 		author is 'Paulo Moura',
-		date is 2025-10-27,
+		date is 2026-03-12,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
-		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
+		see_also is [caller_diagram(_), entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
 	]).
 
 	:- uses(atom, [
@@ -857,11 +857,11 @@
 	extends(xref_diagram(dot))).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2014-01-01,
+		date is 2026-03-12,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams in DOT format.',
-		see_also is [entity_diagram, inheritance_diagram, uses_diagram]
+		see_also is [caller_diagram, entity_diagram, inheritance_diagram, uses_diagram]
 	]).
 
 :- end_object.

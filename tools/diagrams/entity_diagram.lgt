@@ -23,12 +23,12 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2:60:0,
+		version is 2:61:0,
 		author is 'Paulo Moura',
-		date is 2024-12-04,
+		date is 2026-03-12,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format.'],
-		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), library_diagram(_)]
+		see_also is [inheritance_diagram(_), uses_diagram(_), caller_diagram(_), xref_diagram(_), library_diagram(_)]
 	]).
 
 	:- uses(list, [
@@ -928,11 +928,11 @@
 	extends(entity_diagram(dot))).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2014-01-01,
+		date is 2026-03-12,
 		comment is 'Predicates for generating entity diagrams in DOT format with both inheritance and cross-referencing relation edges.',
-		see_also is [inheritance_diagram, uses_diagram, xref_diagram]
+		see_also is [inheritance_diagram, uses_diagram, caller_diagram, xref_diagram]
 	]).
 
 :- end_object.

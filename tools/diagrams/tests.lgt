@@ -49,6 +49,7 @@
 	:- endif.
 	cover(uses_diagram(_)).
 	cover(xref_diagram(_)).
+	cover(caller_diagram(_)).
 
 	setup :-
 		logtalk::expand_library_path(logtalk_user(scratch), Directory),
@@ -543,6 +544,14 @@
 	test(xref_diagram_file_1_01, deterministic) :-
 		object_property(xref_diagram, file(File)),
 		xref_diagram(_Format_)::file(File).
+
+	% caller_diagram tests
+
+	test(caller_diagram_predicate_2_01, deterministic) :-
+		caller_diagram(_Format_)::predicate(list::member/2, []).
+
+	test(caller_diagram_predicate_1_01, deterministic) :-
+		caller_diagram(_Format_)::predicate(list::member/2).
 
 	% suppress all messages from the "diagrams" tool
 	% component to not pollute the unit tests output

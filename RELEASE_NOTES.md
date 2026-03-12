@@ -67,6 +67,8 @@ Tools
 
 * ADDED: New `mutation_testing` tool for mutation-based testing.
 
+* ADDED: Support for caller diagrams to the `diagrams` tool.
+
 * ADDED: Support to the `diagrams` tool for exporting diagrams in the Cytoscape
 Exchange (CX2) JSON format.
 

@@ -43,6 +43,7 @@
 		diagram,
 		entity_diagram,
 		xref_diagram,
+		caller_diagram,
 		inheritance_diagram,
 		uses_diagram,
 		file_diagram,

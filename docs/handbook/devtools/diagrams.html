@@ -242,9 +242,12 @@ directory.</p>
 <p>The following entity diagrams are supported:</p>
 <ul class="simple">
 <li><p><em>entity diagrams</em> showing entity public interfaces, entity inheritance
-relations, and entity predicate cross-reference relations</p></li>
-<li><p><em>predicate cross-reference diagrams</em> (between entities or within an
-entity)</p></li>
+relations, and entity predicate (or non-terminal) cross-reference
+relations</p></li>
+<li><p><em>predicate/non-terminal cross-reference diagrams</em> (between entities or
+within an entity)</p></li>
+<li><p><em>caller diagrams</em> showing direct and indirect callers of a given
+predicate (or non-terminal)</p></li>
 <li><p><em>inheritance diagrams</em> showing entity inheritance relations</p></li>
 <li><p><em>uses diagrams</em> showing which entities use resources from other
 entities</p></li>
@@ -449,7 +452,9 @@ Format version 2 (CX2), including core aspects such as
 using CX2 visual property mappings based on node and edge attributes.
 The JSON backend includes optional metadata such as title, description,
 generation timestamp, and Logtalk/Prolog version information. A default
-HTML viewer, <code class="docutils literal notranslate"><span class="pre">cytoscapejs_viewer.html</span></code>, is provided for convenience.</p>
+HTML viewer, <code class="docutils literal notranslate"><span class="pre">cytoscapejs_viewer.html</span></code>, is provided for convenience.
+This viewer currently requires starting a local web server in the
+generated diagrams directory and manually entering the server address.</p>
 <p>The diagrams <code class="docutils literal notranslate"><span class="pre">.d2</span></code> and <code class="docutils literal notranslate"><span class="pre">.dot</span></code> files are created by default in the
 <code class="docutils literal notranslate"><span class="pre">'./dot_dias'</span></code> sub-directory of the current directory. These files can
 be easily converted into a printable format such as SVG, PDF, or
@@ -1066,6 +1071,16 @@ the Prolog file and then load it and create the diagram:</p>
 </section>
 <section id="other-notes">
 <h2>Other notes<a class="headerlink" href="#other-notes" title="Link to this heading"></a></h2>
+<p>Caller graph diagrams can be generated for a specific predicate using
+the <code class="docutils literal notranslate"><span class="pre">caller_diagram</span></code> object. For example, to generate a caller graph
+for the <code class="docutils literal notranslate"><span class="pre">list::member/2</span></code> predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> caller_diagram<span class="o">::</span>predicate(list<span class="o">::</span>member<span class="o">/</span><span class="m">2</span>).
+</pre></div>
+</div>
+<p>Non-terminal indicators can also be used. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> caller_diagram<span class="o">::</span>predicate(number_grammars(chars)<span class="o">::</span>digit<span class="o">//</span><span class="m">1</span>).
+</pre></div>
+</div>
 <p>Generating complete diagrams requires that all referenced entities are
 loaded. When that is not the case, notably when generating
 cross-referencing diagrams, missing entities can result in incomplete

@@ -14,8 +14,8 @@ Predicates for generating entity diagrams in DOT format with both inheritance an
 |    ``logtalk_load(diagrams(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:0:0
-| **Date:** 2014-01-01
+| **Version:** 2:1:0
+| **Date:** 2026-03-12
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -56,5 +56,5 @@ Operators
 
 .. seealso::
 
-   :ref:`inheritance_diagram <inheritance_diagram/0>`, :ref:`uses_diagram <uses_diagram/0>`, :ref:`xref_diagram <xref_diagram/0>`
+   :ref:`inheritance_diagram <inheritance_diagram/0>`, :ref:`uses_diagram <uses_diagram/0>`, :ref:`caller_diagram <caller_diagram/0>`, :ref:`xref_diagram <xref_diagram/0>`
 

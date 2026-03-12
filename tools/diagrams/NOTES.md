@@ -113,8 +113,11 @@ Supported diagrams
 The following entity diagrams are supported:
 
 - *entity diagrams* showing entity public interfaces, entity inheritance
-relations, and entity predicate cross-reference relations
-- *predicate cross-reference diagrams* (between entities or within an entity)
+relations, and entity predicate (or non-terminal) cross-reference relations
+- *predicate/non-terminal cross-reference diagrams* (between entities or
+within an entity)
+- *caller diagrams* showing direct and indirect callers of a given
+predicate (or non-terminal)
 - *inheritance diagrams* showing entity inheritance relations
 - *uses diagrams* showing which entities use resources from other entities
 
@@ -253,7 +256,8 @@ Node and edge styling is exported using CX2 visual property mappings based
 on node and edge attributes. The JSON backend includes optional metadata
 such as title, description, generation timestamp, and Logtalk/Prolog version
 information. A default HTML viewer, `cytoscapejs_viewer.html`, is provided
-for convenience.
+for convenience. This viewer currently requires starting a local web server
+in the generated diagrams directory and manually entering the server address.
 
 The diagrams `.d2` and `.dot` files are created by default in the `'./dot_dias'`
 sub-directory of the current directory. These files can be easily converted
@@ -680,6 +684,16 @@ An alternative is to use the `object_wrapper_hook` provided by the
 
 Other notes
 -----------
+
+Caller graph diagrams can be generated for a specific predicate using the
+`caller_diagram` object. For example, to generate a caller graph for the
+`list::member/2` predicate:
+
+	| ?- caller_diagram::predicate(list::member/2).
+
+Non-terminal indicators can also be used. For example:
+
+	| ?- caller_diagram::predicate(number_grammars(chars)::digit//1).
 
 Generating complete diagrams requires that all referenced entities are loaded.
 When that is not the case, notably when generating cross-referencing diagrams,

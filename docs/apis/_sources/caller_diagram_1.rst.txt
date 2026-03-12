@@ -1,0 +1,121 @@
+.. index:: single: caller_diagram(Format)
+.. _caller_diagram/1:
+
+.. rst-class:: right
+
+**object**
+
+``caller_diagram(Format)``
+==========================
+
+* ``Format`` - Graph language file format.
+
+
+Predicates for generating caller diagrams showing direct and indirect callers of a predicate or a non-terminal.
+
+| **Availability:** 
+|    ``logtalk_load(diagrams(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-03-12
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`diagram(Format) <diagram/1>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`diagram/1::all_files/0`  :ref:`diagram/1::all_files/1`  :ref:`diagram/1::all_libraries/0`  :ref:`diagram/1::all_libraries/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`diagram/1::diagram_description/1`  :ref:`diagram/1::diagram_name_suffix/1`  :ref:`diagram/1::directories/2`  :ref:`diagram/1::directories/3`  :ref:`diagram/1::directory/1`  :ref:`diagram/1::directory/2`  :ref:`diagram/1::directory/3`  :ref:`diagram/1::files/1`  :ref:`diagram/1::files/2`  :ref:`diagram/1::files/3`  :ref:`diagram/1::format_object/1`  :ref:`diagram/1::libraries/1`  :ref:`diagram/1::libraries/2`  :ref:`diagram/1::libraries/3`  :ref:`diagram/1::library/1`  :ref:`diagram/1::library/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`diagram/1::rdirectory/1`  :ref:`diagram/1::rdirectory/2`  :ref:`diagram/1::rdirectory/3`  :ref:`diagram/1::rlibrary/1`  :ref:`diagram/1::rlibrary/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: predicate/2
+.. _caller_diagram/1::predicate/2:
+
+``predicate/2``
+^^^^^^^^^^^^^^^
+
+Creates a caller diagram for the given predicate or non-terminal using the specified options. Predicates are specified as ``Entity::Name/Arity``. Non-terminals are specified as ``Entity::Name//Arity``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predicate(QualifiedIndicator,Options)``
+| **Mode and number of proofs:**
+|    ``predicate(+qualified_predicate_indicator,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: predicate/1
+.. _caller_diagram/1::predicate/1:
+
+``predicate/1``
+^^^^^^^^^^^^^^^
+
+Creates a caller diagram for the given predicate using default options. Predicates are specified as ``Entity::Name/Arity``. Non-terminals are specified as ``Entity::Name//Arity``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predicate(QualifiedIndicator)``
+| **Mode and number of proofs:**
+|    ``predicate(+qualified_predicate_indicator)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: included_caller_/1
+.. _caller_diagram/1::included_caller_/1:
+
+``included_caller_/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Table of callers already included in the diagram.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``included_caller_(Caller)``
+| **Mode and number of proofs:**
+|    ``included_caller_(?qualified_predicate_indicator)`` - ``zero_or_more``
+|    ``included_caller_(?predicate_indicator)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`xref_diagram(Format) <xref_diagram/1>`, :ref:`entity_diagram(Format) <entity_diagram/1>`
+

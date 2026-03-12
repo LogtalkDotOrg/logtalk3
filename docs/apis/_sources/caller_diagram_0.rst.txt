@@ -1,0 +1,60 @@
+.. index:: single: caller_diagram
+.. _caller_diagram/0:
+
+.. rst-class:: right
+
+**object**
+
+``caller_diagram``
+==================
+
+Predicates for generating caller diagrams in DOT format.
+
+| **Availability:** 
+|    ``logtalk_load(diagrams(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-03-12
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`caller_diagram(dot) <caller_diagram/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`diagram/1::all_files/0`  :ref:`diagram/1::all_files/1`  :ref:`diagram/1::all_libraries/0`  :ref:`diagram/1::all_libraries/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`diagram/1::diagram_description/1`  :ref:`diagram/1::diagram_name_suffix/1`  :ref:`diagram/1::directories/2`  :ref:`diagram/1::directories/3`  :ref:`diagram/1::directory/1`  :ref:`diagram/1::directory/2`  :ref:`diagram/1::directory/3`  :ref:`diagram/1::files/1`  :ref:`diagram/1::files/2`  :ref:`diagram/1::files/3`  :ref:`diagram/1::format_object/1`  :ref:`diagram/1::libraries/1`  :ref:`diagram/1::libraries/2`  :ref:`diagram/1::libraries/3`  :ref:`diagram/1::library/1`  :ref:`diagram/1::library/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`caller_diagram/1::predicate/1`  :ref:`caller_diagram/1::predicate/2`  :ref:`diagram/1::rdirectory/1`  :ref:`diagram/1::rdirectory/2`  :ref:`diagram/1::rdirectory/3`  :ref:`diagram/1::rlibrary/1`  :ref:`diagram/1::rlibrary/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`xref_diagram <xref_diagram/0>`, :ref:`entity_diagram <entity_diagram/0>`
+

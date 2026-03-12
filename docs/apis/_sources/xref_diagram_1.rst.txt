@@ -17,8 +17,8 @@ Predicates for generating predicate call cross-referencing diagrams.
 |    ``logtalk_load(diagrams(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:85:1
-| **Date:** 2025-10-27
+| **Version:** 2:86:0
+| **Date:** 2026-03-12
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -157,5 +157,5 @@ Operators
 
 .. seealso::
 
-   :ref:`entity_diagram(Format) <entity_diagram/1>`, :ref:`inheritance_diagram(Format) <inheritance_diagram/1>`, :ref:`uses_diagram(Format) <uses_diagram/1>`
+   :ref:`caller_diagram(Format) <caller_diagram/1>`, :ref:`entity_diagram(Format) <entity_diagram/1>`, :ref:`inheritance_diagram(Format) <inheritance_diagram/1>`, :ref:`uses_diagram(Format) <uses_diagram/1>`
 
