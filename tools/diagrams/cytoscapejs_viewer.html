@@ -22,6 +22,7 @@ body { font-family: Monospace, monospace; overflow: hidden; }
 }
 #toolbar label { display: flex; align-items: center; gap: 4px; }
 #toolbar input[type=file] { font-size: 11px; }
+#toolbar input[type=text] { font-size: 11px; padding: 1px 4px; }
 #toolbar button { font-size: 11px; padding: 2px 8px; cursor: pointer; }
 #toolbar select { font-size: 11px; }
 #meta {
@@ -29,15 +30,95 @@ body { font-family: Monospace, monospace; overflow: hidden; }
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 45%;
 }
 #cy { width: 100%; height: calc(100vh - 42px); background: #fff; }
+#zoomLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+.cx2-zoom-glyph {
+  position: absolute;
+  font-family: Monospace, monospace;
+  font-size: 11px;
+  line-height: 1;
+  color: #1f2937;
+  opacity: 0.95;
+}
 #placeholder {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
   color: #bbb; font-size: 15px; pointer-events: none;
+}
+#hoverTooltip {
+  position: fixed;
+  display: none;
+  max-width: 640px;
+  padding: 4px 7px;
+  border: 1px solid #666;
+  border-radius: 4px;
+  background: #fffffb;
+  color: #1f2937;
+  font-family: Monospace, monospace;
+  font-size: 11px;
+  line-height: 1.25;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+#errorPanel {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  width: min(760px, calc(100vw - 24px));
+  max-height: min(45vh, 360px);
+  display: none;
+  z-index: 10000;
+  background: #fffdf7;
+  border: 1px solid #b45309;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  padding: 8px;
+}
+#errorPanelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 11px;
+  color: #7c2d12;
+  font-weight: 700;
+}
+#errorPanelClose {
+  border: 1px solid #b45309;
+  background: #fff;
+  color: #7c2d12;
+  font-size: 10px;
+  padding: 1px 6px;
+  cursor: pointer;
+}
+#errorPanelBody {
+  width: 100%;
+  min-height: 90px;
+  max-height: 280px;
+  resize: vertical;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #111827;
+  font-family: Monospace, monospace;
+  font-size: 11px;
+  line-height: 1.3;
+  padding: 6px;
+  overflow: auto;
+  white-space: pre;
 }
 </style>
 </head>
 <body>
 <div id="toolbar">
   <label>Open: <input type="file" id="filePicker" accept=".cx2,.json"></label>
+  <label>Base: <input type="text" id="baseDirInput" size="36" placeholder="/path/to/diagrams or http://localhost:8000/"></label>
   <button id="fitBtn">Fit</button>
   <button id="zoomInBtn">+</button>
   <button id="zoomOutBtn">-</button>
@@ -54,7 +135,16 @@ body { font-family: Monospace, monospace; overflow: hidden; }
 </div>
 <div style="position:relative">
   <div id="cy"></div>
+  <div id="zoomLayer" aria-hidden="true"></div>
   <div id="placeholder">Open a .cx2 file to view the diagram</div>
+</div>
+<div id="hoverTooltip" aria-hidden="true"></div>
+<div id="errorPanel" role="alert" aria-live="polite">
+  <div id="errorPanelHeader">
+    <span>Viewer message</span>
+    <button id="errorPanelClose" type="button">Close</button>
+  </div>
+  <textarea id="errorPanelBody" readonly></textarea>
 </div>
 
 <script>
@@ -64,20 +154,392 @@ try { cytoscape.use(cytoscapeDagre); } catch (_) {}
 try { if (window.cytoscapeNodeHtmlLabel) { cytoscape.use(window.cytoscapeNodeHtmlLabel); } } catch (_) {}
 
 let cy = null;
+const hoverTooltip = document.getElementById('hoverTooltip');
+const zoomLayer = document.getElementById('zoomLayer');
+let hoveredElementId = null;
+let zoomGlyphRenderPending = false;
+let currentDiagramUrl = null;
+let currentRawData = null;
+const localDiagramMap = new Map();
+let currentNativeDiagramPath = null;
+let manualBaseDirectoryPath = '';
+let lastLocalLoadTriedUrls = [];
+const errorPanel = document.getElementById('errorPanel');
+const errorPanelBody = document.getElementById('errorPanelBody');
+const baseDirInput = document.getElementById('baseDirInput');
 
-document.getElementById('filePicker').addEventListener('change', function(e) {
+document.getElementById('errorPanelClose').addEventListener('click', () => {
+  if (!errorPanel) return;
+  errorPanel.style.display = 'none';
+});
+
+if (baseDirInput) {
+  baseDirInput.addEventListener('change', () => {
+    manualBaseDirectoryPath = String(baseDirInput.value || '').trim();
+  });
+}
+
+const LAST_DIAGRAM_META_KEY = 'logtalk.cx2.last.meta';
+const LAST_DIAGRAM_INLINE_KEY = 'logtalk.cx2.last.inline';
+const filePicker = document.getElementById('filePicker');
+
+function isAbsoluteUrl(url) {
+  return /^[a-zA-Z][a-zA-Z\d+.-]*:/.test(url) || String(url).startsWith('/');
+}
+
+function isHttpUrl(text) {
+  return /^https?:\/\//i.test(String(text || '').trim());
+}
+
+function showMessage(text) {
+  const message = String(text || '');
+  if (!errorPanel || !errorPanelBody) {
+    window.alert(message);
+    return;
+  }
+  errorPanelBody.value = message;
+  errorPanel.style.display = 'block';
+  errorPanelBody.focus();
+  errorPanelBody.select();
+}
+
+function hasRenderedGraph() {
+  return !!(cy && typeof cy.elements === 'function' && cy.elements().length > 0);
+}
+
+function normalizeLocalPath(path) {
+  return String(path || '')
+    .replace(/\\/g, '/')
+    .replace(/^\/+/, '')
+    .replace(/\/+$/, '');
+}
+
+function nativePathToLocalPath(path) {
+  const value = String(path || '').trim();
+  if (!value) return '';
+  return value.replace(/\\/g, '/').replace(/^\/+/, '');
+}
+
+function localPathToNativePath(path) {
+  const normalized = normalizeLocalPath(path);
+  if (!normalized) return '';
+  if (/^[A-Za-z]:\//.test(normalized)) {
+    return normalized;
+  }
+  return '/' + normalized;
+}
+
+function fileDirectoryPath(path) {
+  const normalized = String(path || '').replace(/\\/g, '/');
+  const index = normalized.lastIndexOf('/');
+  if (index === -1) return '';
+  return normalized.slice(0, index);
+}
+
+function fileNamePath(path) {
+  const normalized = String(path || '').replace(/\\/g, '/');
+  const index = normalized.lastIndexOf('/');
+  if (index === -1) return normalized;
+  return normalized.slice(index + 1);
+}
+
+function joinNativePath(parent, child) {
+  const a = String(parent || '').replace(/\\/g, '/').replace(/\/+$/, '');
+  const b = String(child || '').replace(/\\/g, '/').replace(/^\/+/, '');
+  if (!a) return b;
+  if (!b) return a;
+  return a + '/' + b;
+}
+
+function resolveNativeRelativePath(baseFilePath, relativePath) {
+  const baseDir = fileDirectoryPath(baseFilePath);
+  const joined = joinNativePath(baseDir, relativePath);
+  const isAbsolute = joined.startsWith('/') || /^[A-Za-z]:\//.test(joined);
+  const parts = [];
+  joined.split('/').forEach(part => {
+    if (!part || part === '.') return;
+    if (part === '..') {
+      parts.pop();
+      return;
+    }
+    parts.push(part);
+  });
+
+  const normalized = parts.join('/');
+  if (/^[A-Za-z]:/.test(normalized)) {
+    return normalized;
+  }
+  return isAbsolute ? '/' + normalized : normalized;
+}
+
+function resolveNativeRelativeToDirectory(baseDirectory, relativePath) {
+  const directory = String(baseDirectory || '').replace(/\\/g, '/');
+  if (!directory) return '';
+  return resolveNativeRelativePath(directory.replace(/\/+$/, '') + '/_base_.cx2', relativePath);
+}
+
+function resolveRelativeToBaseUrl(baseUrl, relativePath) {
+  try {
+    const normalizedBase = String(baseUrl || '').trim().replace(/\/+$/, '') + '/';
+    return new URL(String(relativePath || '').trim(), normalizedBase).toString();
+  } catch (_) {
+    return '';
+  }
+}
+
+function nativePathToFileUrl(path) {
+  const native = String(path || '').replace(/\\/g, '/');
+  if (!native) return '';
+  if (/^[A-Za-z]:\//.test(native)) {
+    return 'file:///' + encodeURI(native);
+  }
+  return 'file://' + encodeURI(native);
+}
+
+function candidateLocalFetchUrls(nativePath) {
+  const normalized = String(nativePath || '').replace(/\\/g, '/');
+  if (!normalized) return [];
+
+  const candidates = [];
+  const add = url => {
+    if (url && !candidates.includes(url)) {
+      candidates.push(url);
+    }
+  };
+
+  const encodedPath = encodeURI(normalized);
+  add(nativePathToFileUrl(normalized));
+
+  if (normalized.startsWith('/')) {
+    add(encodedPath);
+    try {
+      add(new URL(encodedPath, window.location.origin + '/').toString());
+    } catch (_) {}
+    add('vscode-file://vscode-app' + encodedPath);
+  } else if (/^[A-Za-z]:\//.test(normalized)) {
+    add('file:///' + encodedPath);
+    add('vscode-file://vscode-app/' + encodedPath);
+  }
+
+  return candidates;
+}
+
+async function tryFetchJsonFromNativePath(nativePath) {
+  const urls = candidateLocalFetchUrls(nativePath);
+  lastLocalLoadTriedUrls = urls.slice();
+
+  for (const url of urls) {
+    try {
+      const response = await fetch(url, { credentials: 'same-origin' });
+      if (!response.ok) {
+        continue;
+      }
+
+      const rawText = await response.text();
+      try {
+        return { data: JSON.parse(rawText), rawText, url };
+      } catch (_) {
+        continue;
+      }
+    } catch (_) {
+      // Try next candidate URL.
+    }
+  }
+
+  return null;
+}
+
+function selectedFileNativePath(file, inputElement) {
+  if (file && typeof file.path === 'string' && file.path.trim() !== '') {
+    return file.path.trim();
+  }
+
+  const inputValue = inputElement && typeof inputElement.value === 'string' ? inputElement.value.trim() : '';
+  if (inputValue && !/fakepath/i.test(inputValue)) {
+    return inputValue;
+  }
+
+  return '';
+}
+
+function makeLocalUrl(path) {
+  const normalized = normalizeLocalPath(path);
+  return 'local:///' + normalized;
+}
+
+function localUrlToPath(url) {
+  if (!String(url || '').startsWith('local:///')) return '';
+  return normalizeLocalPath(String(url).slice('local:///'.length));
+}
+
+function localParentPath(path) {
+  const normalized = normalizeLocalPath(path);
+  const index = normalized.lastIndexOf('/');
+  if (index === -1) return '';
+  return normalized.slice(0, index);
+}
+
+function localJoinPath(parent, child) {
+  const normalizedParent = normalizeLocalPath(parent);
+  const normalizedChild = normalizeLocalPath(child);
+  if (!normalizedParent) return normalizedChild;
+  if (!normalizedChild) return normalizedParent;
+  return normalizedParent + '/' + normalizedChild;
+}
+
+function localResolvePath(basePath, relativePath) {
+  const base = normalizeLocalPath(basePath);
+  const rel = normalizeLocalPath(relativePath);
+  const baseDir = localParentPath(base);
+  const joined = localJoinPath(baseDir, rel);
+  const parts = [];
+  joined.split('/').forEach(part => {
+    if (!part || part === '.') return;
+    if (part === '..') {
+      parts.pop();
+      return;
+    }
+    parts.push(part);
+  });
+  return parts.join('/');
+}
+
+function rememberLocalDiagram(path, rawText) {
+  const normalized = normalizeLocalPath(path);
+  if (!normalized) return;
+  localDiagramMap.set(normalized, rawText);
+}
+
+function localDiagramDataFromUrl(url) {
+  const path = localUrlToPath(url);
+  if (!path) return null;
+  const raw = localDiagramMap.get(path) || localDiagramMap.get(path.split('/').pop() || '');
+  if (!raw) return null;
+  return JSON.parse(raw);
+}
+
+async function tryLoadLocalDiagramFromDisk(localUrl, originalUrlText) {
+  if (!currentNativeDiagramPath && !manualBaseDirectoryPath) return null;
+
+  const localPath = localUrlToPath(localUrl);
+  if (!localPath) return null;
+
+  const nativeTarget = currentNativeDiagramPath
+    ? resolveNativeRelativePath(currentNativeDiagramPath, originalUrlText)
+    : resolveNativeRelativeToDirectory(manualBaseDirectoryPath, originalUrlText);
+  if (!nativeTarget) return null;
+
+  const fetched = await tryFetchJsonFromNativePath(nativeTarget);
+  if (!fetched) return null;
+
+  rememberLocalDiagram(localPath, fetched.rawText);
+  rememberLocalDiagram(fileNamePath(localPath), fetched.rawText);
+  return fetched.data;
+}
+
+function saveLastDiagramState(rawData, sourceUrl, sourceNativePath) {
+  if (!rawData) return;
+  const meta = {
+    sourceUrl: sourceUrl || null,
+    sourceNativePath: sourceNativePath || null,
+    manualBaseDirectoryPath: manualBaseDirectoryPath || null,
+    savedAt: Date.now(),
+  };
+  try {
+    sessionStorage.setItem(LAST_DIAGRAM_META_KEY, JSON.stringify(meta));
+    // Always persist inline data so browser Back can restore local diagrams
+    // even when original URL source cannot be re-fetched.
+    sessionStorage.setItem(LAST_DIAGRAM_INLINE_KEY, JSON.stringify(rawData));
+  } catch (_) {
+    // Ignore storage errors (private mode, quota exceeded, etc.).
+  }
+}
+
+function restoreLastDiagramState() {
+  let meta = null;
+  try {
+    meta = JSON.parse(sessionStorage.getItem(LAST_DIAGRAM_META_KEY) || 'null');
+  } catch (_) {
+    meta = null;
+  }
+
+  if (!meta) return false;
+
+  if (meta.sourceNativePath) {
+    currentNativeDiagramPath = meta.sourceNativePath;
+  }
+
+  if (meta.manualBaseDirectoryPath) {
+    manualBaseDirectoryPath = meta.manualBaseDirectoryPath;
+    if (baseDirInput) {
+      baseDirInput.value = manualBaseDirectoryPath;
+    }
+  }
+
+  // Prefer inline restore because it works for both local and remote sources
+  // even when re-fetching is blocked or source context was transient.
+  try {
+    const inline = sessionStorage.getItem(LAST_DIAGRAM_INLINE_KEY);
+    if (inline) {
+      const data = JSON.parse(inline);
+      render(data, meta.sourceUrl || null, currentNativeDiagramPath);
+      return true;
+    }
+  } catch (_) {
+    // Fallback to URL-based restore below.
+  }
+
+  if (meta.sourceUrl) {
+    loadDiagramFromUrl(meta.sourceUrl).catch(() => {
+      // Keep viewer available even when restoration fails.
+    });
+    return true;
+  }
+
+  return false;
+}
+
+filePicker.addEventListener('click', () => {
+  // Allow selecting the same file repeatedly and still trigger change.
+  filePicker.value = '';
+});
+
+filePicker.addEventListener('change', function(e) {
   const file = e.target.files[0];
   if (!file) return;
   const reader = new FileReader();
   reader.onload = ev => {
     try {
-      const raw = JSON.parse(ev.target.result);
-      render(raw);
+      const rawText = String(ev.target.result || '');
+      const raw = JSON.parse(rawText);
+      const nativePath = selectedFileNativePath(file, e.target);
+      const localPath = nativePath ? nativePathToLocalPath(nativePath) : file.name;
+      if (nativePath) {
+        manualBaseDirectoryPath = fileDirectoryPath(nativePath);
+        if (baseDirInput) {
+          baseDirInput.value = manualBaseDirectoryPath;
+        }
+      }
+      rememberLocalDiagram(localPath, rawText);
+      rememberLocalDiagram(file.name, rawText);
+      render(raw, makeLocalUrl(localPath), nativePath || null);
     } catch (error) {
-      alert('Invalid JSON/CX2 file: ' + error.message);
+      showMessage('Invalid JSON/CX2 file: ' + error.message);
     }
   };
   reader.readAsText(file);
+});
+
+window.addEventListener('pageshow', () => {
+  if (!hasRenderedGraph()) {
+    restoreLastDiagramState();
+  }
+});
+
+window.addEventListener('popstate', () => {
+  if (!hasRenderedGraph()) {
+    restoreLastDiagramState();
+  }
 });
 
 document.getElementById('fitBtn').onclick = () =>
@@ -147,7 +609,17 @@ function normalizeLineStyle(lineStyle) {
 }
 
 function parseCx2(cx2) {
-  const nodes = getAspectList(cx2, 'nodes').map(entry => {
+  const nodeById = new Map();
+
+  function scoreNode(data) {
+    return (data.has_zoom ? 8 : 0) +
+      (Array.isArray(data.lines) && data.lines.length > 0 ? 4 : 0) +
+      (data.caption ? 2 : 0) +
+      (data.url ? 1 : 0) +
+      (data.code_url ? 1 : 0);
+  }
+
+  getAspectList(cx2, 'nodes').forEach(entry => {
     const value = entry.v || {};
     const data = {
       id: asStringId(entry.id),
@@ -158,8 +630,11 @@ function parseCx2(cx2) {
       color: value.color || '#f5f5f5',
       border: value.border || 'solid',
       url: value.url || '',
+      code_url: value.code_url || '',
+      zoom_url: value.zoom_url || '',
       tooltip: value.tooltip || '',
     };
+    data.has_zoom = String(data.zoom_url || '').trim() !== '';
     const contentLines = Array.isArray(value.lines) ? value.lines : [];
     if (contentLines.length > 0) {
       data.lines = contentLines;
@@ -184,6 +659,16 @@ function parseCx2(cx2) {
     if (value.parent !== undefined && value.parent !== null && value.parent !== 0) {
       data.parent = asStringId(value.parent);
     }
+
+    const id = data.id;
+    const existing = nodeById.get(id);
+    if (!existing || scoreNode(data) >= scoreNode(existing)) {
+      nodeById.set(id, data);
+    }
+  });
+
+  const nodes = Array.from(nodeById.values()).map(data => {
+    data.has_zoom = String(data.zoom_url || '').trim() !== '';
     return { data };
   });
 
@@ -200,6 +685,7 @@ function parseCx2(cx2) {
         color: value.color || '#666666',
         line_style: normalizeLineStyle(value.line_style || 'solid'),
         url: value.url || '',
+        code_url: value.code_url || '',
         tooltip: value.tooltip || '',
       },
     });
@@ -288,6 +774,50 @@ function applyFallbackRichLabels(nodeLabelAttr) {
     .update();
 }
 
+function clearZoomGlyphs() {
+  if (!zoomLayer) return;
+  zoomLayer.textContent = '';
+}
+
+function renderZoomGlyphs() {
+  if (!cy || !zoomLayer) return;
+  clearZoomGlyphs();
+
+  const zoomLevel = cy.zoom();
+  const glyphFontSize = 11 * zoomLevel;
+  const glyphOffsetX = 6 * zoomLevel;
+  const glyphOffsetY = 5 * zoomLevel;
+
+  const fragment = document.createDocumentFragment();
+  cy.nodes('[?has_zoom]').forEach(node => {
+    const center = node.renderedPosition();
+    const width = node.renderedWidth();
+    const height = node.renderedHeight();
+    if (!Number.isFinite(center.x) || !Number.isFinite(center.y) || !Number.isFinite(width) || !Number.isFinite(height)) {
+      return;
+    }
+
+    const glyph = document.createElement('div');
+    glyph.className = 'cx2-zoom-glyph';
+    glyph.textContent = '🔍';
+    glyph.style.fontSize = glyphFontSize + 'px';
+    glyph.style.left = Math.round(center.x - width / 2 + glyphOffsetX) + 'px';
+    glyph.style.top = Math.round(center.y - height / 2 + glyphOffsetY) + 'px';
+    fragment.appendChild(glyph);
+  });
+
+  zoomLayer.appendChild(fragment);
+}
+
+function scheduleZoomGlyphRender() {
+  if (zoomGlyphRenderPending) return;
+  zoomGlyphRenderPending = true;
+  requestAnimationFrame(() => {
+    zoomGlyphRenderPending = false;
+    renderZoomGlyphs();
+  });
+}
+
 function buildStyle(visual) {
   const defaults = visual.default || {};
   const nodeMapping = visual.nodeMapping || {};
@@ -370,9 +900,9 @@ function buildStyle(visual) {
         'text-background-opacity': 0.92,
         'text-background-shape': 'round-rectangle',
         'text-background-padding': '2px',
-        'z-compound-depth': 'top',
+        'z-compound-depth': 'bottom',
         'z-index-compare': 'manual',
-        'z-index': 25,
+        'z-index': 5,
         'text-outline-width': 0,
         'padding': '42px',
       },
@@ -417,14 +947,277 @@ function buildStyle(visual) {
   ];
 }
 
-function openElementUrl(ele) {
-  const url = ele.data('url');
-  if (url) {
-    window.open(url, '_blank', 'noopener,noreferrer');
+function openElementUrl(link) {
+  if (!link) return;
+
+  const resolvedUrl = resolveDiagramUrl(link.url);
+
+  if (!link.inViewer) {
+    window.location.assign(resolvedUrl);
+    return;
+  }
+
+  loadDiagramFromUrl(link.url).catch(() => {
+    const raw = String(link.url || '').trim();
+    if (String(resolvedUrl).startsWith('local:///')) {
+      const details = [
+        'Failed to load linked diagram: ' + resolvedUrl,
+        'link: ' + raw,
+        'current diagram: ' + String(currentDiagramUrl || ''),
+        'current native path: ' + String(currentNativeDiagramPath || ''),
+        'manual base dir: ' + String(manualBaseDirectoryPath || ''),
+        'tried URLs: ' + (lastLocalLoadTriedUrls.length > 0 ? lastLocalLoadTriedUrls.join(' | ') : ''),
+      ].join('\n');
+      showMessage(details);
+      return;
+    }
+    showMessage('Failed to load linked diagram: ' + resolvedUrl);
+  });
+}
+
+function preferredElementLink(ele) {
+  const diagram = String(ele.data('zoom_url') || '').trim();
+  if (diagram) {
+    return { url: diagram, inViewer: true };
+  }
+
+  const primary = String(ele.data('url') || '').trim();
+  if (primary) {
+    return { url: primary, inViewer: isDiagramUrl(primary) };
+  }
+
+  const code = String(ele.data('code_url') || '').trim();
+  if (code) {
+    return { url: code, inViewer: isDiagramUrl(code) };
+  }
+
+  return null;
+}
+
+function preferredNodeLink(ele, renderedPosition) {
+  const diagram = String(ele.data('zoom_url') || '').trim();
+  const docs = String(ele.data('url') || '').trim();
+  const code = String(ele.data('code_url') || '').trim();
+
+  if (!diagram && !docs && !code) {
+    return null;
+  }
+
+  if (!renderedPosition) {
+    if (diagram) return { url: diagram, inViewer: true };
+    if (docs) return { url: docs, inViewer: isDiagramUrl(docs) };
+    if (code) return { url: code, inViewer: isDiagramUrl(code) };
+    return null;
+  }
+
+  const center = ele.renderedPosition();
+  const width = ele.renderedWidth();
+  const height = ele.renderedHeight();
+  const left = center.x - width / 2;
+  const top = center.y - height / 2;
+  const x = renderedPosition.x - left;
+  const y = renderedPosition.y - top;
+
+  const zoomHitSize = Math.max(10, 22 * (cy ? cy.zoom() : 1));
+  if (diagram && x >= 0 && y >= 0 && x <= zoomHitSize && y <= zoomHitSize) {
+    return { url: diagram, inViewer: true };
+  }
+
+  if (docs && code) {
+    const lines = Array.isArray(ele.data('lines')) ? ele.data('lines') : [];
+    const caption = String(ele.data('caption') || '').trim();
+    const estimatedTextHeight = Math.min(
+      height - 8,
+      Math.max(24, 18 + (caption ? 12 : 0) + lines.length * 12)
+    );
+    const horizontalPadding = Math.max(10, Math.min(24, width * 0.06));
+    const textBandLeft = horizontalPadding;
+    const textBandRight = width - horizontalPadding;
+    const textBandTop = Math.max(4, (height - estimatedTextHeight) / 2 - 4);
+    const textBandBottom = Math.min(height - 4, textBandTop + estimatedTextHeight + 8);
+    const inTextBand = x >= textBandLeft && x <= textBandRight && y >= textBandTop && y <= textBandBottom;
+
+    if (inTextBand) {
+      return { url: docs, inViewer: isDiagramUrl(docs) };
+    }
+    return { url: code, inViewer: isDiagramUrl(code) };
+  }
+
+  if (docs) {
+    return { url: docs, inViewer: isDiagramUrl(docs) };
+  }
+  if (code) {
+    return { url: code, inViewer: isDiagramUrl(code) };
+  }
+  if (diagram) {
+    return { url: diagram, inViewer: true };
+  }
+
+  return null;
+}
+
+function isDiagramUrl(url) {
+  const normalized = url.split('#')[0].split('?')[0].toLowerCase();
+  return normalized.endsWith('.cx2') || normalized.endsWith('.json');
+}
+
+function resolveDiagramUrl(url) {
+  const text = String(url || '').trim();
+  if (!text) return text;
+  if (isAbsoluteUrl(text)) return text;
+
+  if (!currentDiagramUrl) {
+    return text;
+  }
+
+  if (String(currentDiagramUrl).startsWith('local:///')) {
+    const basePath = localUrlToPath(currentDiagramUrl);
+
+    if (currentNativeDiagramPath) {
+      const nativeResolved = resolveNativeRelativePath(currentNativeDiagramPath, text);
+      if (nativeResolved) {
+        return makeLocalUrl(nativePathToLocalPath(nativeResolved));
+      }
+    }
+
+    if (manualBaseDirectoryPath) {
+      if (isHttpUrl(manualBaseDirectoryPath)) {
+        const absolute = resolveRelativeToBaseUrl(manualBaseDirectoryPath, text);
+        if (absolute) {
+          return absolute;
+        }
+      }
+
+      const nativeResolved = resolveNativeRelativeToDirectory(manualBaseDirectoryPath, text);
+      if (nativeResolved) {
+        return makeLocalUrl(nativePathToLocalPath(nativeResolved));
+      }
+    }
+
+    const resolvedPath = localResolvePath(basePath, text);
+    return makeLocalUrl(resolvedPath);
+  }
+
+  try {
+    return new URL(text, currentDiagramUrl).toString();
+  } catch (_) {
+    return text;
   }
 }
 
-function render(rawData) {
+async function loadDiagramFromUrl(url) {
+  const resolved = resolveDiagramUrl(url);
+
+  if (String(resolved).startsWith('local:///')) {
+    const localPath = localUrlToPath(resolved);
+    let resolvedNativePath = localPathToNativePath(localPath);
+
+    if (currentNativeDiagramPath) {
+      const rawUrl = String(url || '').trim();
+      if (rawUrl && !isAbsoluteUrl(rawUrl)) {
+        const nativeResolved = resolveNativeRelativePath(currentNativeDiagramPath, rawUrl);
+        if (nativeResolved) {
+          resolvedNativePath = nativeResolved;
+          const canonicalLocalUrl = makeLocalUrl(nativePathToLocalPath(nativeResolved));
+          if (canonicalLocalUrl !== resolved) {
+            const canonicalData = localDiagramDataFromUrl(canonicalLocalUrl);
+            if (canonicalData) {
+              render(canonicalData, canonicalLocalUrl, resolvedNativePath);
+              return;
+            }
+          }
+        }
+      }
+    }
+
+    if (!currentNativeDiagramPath && manualBaseDirectoryPath) {
+      const rawUrl = String(url || '').trim();
+      if (rawUrl && !isAbsoluteUrl(rawUrl)) {
+        const nativeResolved = resolveNativeRelativeToDirectory(manualBaseDirectoryPath, rawUrl);
+        if (nativeResolved) {
+          resolvedNativePath = nativeResolved;
+          const canonicalLocalUrl = makeLocalUrl(nativePathToLocalPath(nativeResolved));
+          if (canonicalLocalUrl !== resolved) {
+            const canonicalData = localDiagramDataFromUrl(canonicalLocalUrl);
+            if (canonicalData) {
+              render(canonicalData, canonicalLocalUrl, resolvedNativePath);
+              return;
+            }
+          }
+        }
+      }
+    }
+
+    let data = localDiagramDataFromUrl(resolved);
+    if (!data) {
+      data = await tryLoadLocalDiagramFromDisk(resolved, url);
+    }
+    if (!data) {
+      throw new Error('Linked local diagram not found: ' + resolved);
+    }
+    render(data, resolved, resolvedNativePath || currentNativeDiagramPath);
+    return;
+  }
+
+  const response = await fetch(resolved, { credentials: 'same-origin' });
+  if (!response.ok) {
+    throw new Error('Failed to fetch linked diagram: ' + response.status);
+  }
+  const data = await response.json();
+  render(data, resolved, null);
+}
+
+function elementTooltipText(ele) {
+  const tooltip = String(ele.data('tooltip') || '').trim();
+  const preferred = preferredElementLink(ele);
+
+  const lines = [];
+  if (tooltip) {
+    lines.push(tooltip);
+  }
+  if (preferred && preferred.url) {
+    lines.push(preferred.url);
+  }
+
+  return lines.join('\n');
+}
+
+function positionHoverTooltip(renderedPosition) {
+  if (!cy || !hoverTooltip || !renderedPosition) return;
+  const rect = cy.container().getBoundingClientRect();
+  const offset = 12;
+  const left = Math.round(rect.left + renderedPosition.x + offset);
+  const top = Math.round(rect.top + renderedPosition.y + offset);
+  hoverTooltip.style.left = left + 'px';
+  hoverTooltip.style.top = top + 'px';
+}
+
+function hideHoverTooltip() {
+  if (!hoverTooltip) return;
+  hoveredElementId = null;
+  hoverTooltip.style.display = 'none';
+  hoverTooltip.textContent = '';
+}
+
+function showHoverTooltip(ele, renderedPosition) {
+  if (!hoverTooltip) return;
+  const text = elementTooltipText(ele);
+  if (!text) {
+    hideHoverTooltip();
+    return;
+  }
+  hoveredElementId = ele.id();
+  hoverTooltip.textContent = text;
+  hoverTooltip.style.display = 'block';
+  positionHoverTooltip(renderedPosition);
+}
+
+function render(rawData, sourceUrl, sourceNativePath) {
+  currentDiagramUrl = sourceUrl || null;
+  currentRawData = rawData;
+  if (sourceNativePath !== undefined) {
+    currentNativeDiagramPath = sourceNativePath;
+  }
   const parsed = Array.isArray(rawData) ? parseCx2(rawData) : rawData;
   if (!parsed || !parsed.elements || !parsed.elements.nodes || !parsed.elements.edges) {
     throw new Error('Unsupported file format. Expected CX2 aspects with nodes/edges.');
@@ -437,6 +1230,10 @@ function render(rawData) {
   ].filter(Boolean);
   document.getElementById('meta').textContent = parts.join(' | ');
   document.getElementById('placeholder').style.display = 'none';
+  saveLastDiagramState(rawData, currentDiagramUrl, currentNativeDiagramPath);
+
+  hideHoverTooltip();
+  clearZoomGlyphs();
 
   if (cy) cy.destroy();
 
@@ -451,8 +1248,39 @@ function render(rawData) {
     applyFallbackRichLabels(passthroughAttribute((parsed.visual || {}).nodeMapping || {}, 'NODE_LABEL') || 'name');
   }
 
-  cy.on('tap', 'node, edge', evt => openElementUrl(evt.target));
+  scheduleZoomGlyphRender();
+  cy.on('zoom pan resize render layoutstop', scheduleZoomGlyphRender);
+  cy.on('position bounds add remove', 'node', scheduleZoomGlyphRender);
+
+  cy.on('mouseover', 'node, edge', evt => {
+    showHoverTooltip(evt.target, evt.renderedPosition);
+  });
+
+  cy.on('mousemove', 'node, edge', evt => {
+    if (hoveredElementId === evt.target.id()) {
+      positionHoverTooltip(evt.renderedPosition);
+    }
+  });
+
+  cy.on('mouseout', 'node, edge', () => {
+    hideHoverTooltip();
+  });
+
+  cy.on('tapstart drag pan zoom', () => {
+    hideHoverTooltip();
+  });
+
+  cy.on('tap', 'node', evt => {
+    const link = preferredNodeLink(evt.target, evt.renderedPosition);
+    openElementUrl(link);
+  });
+
+  cy.on('tap', 'edge', evt => {
+    const link = preferredElementLink(evt.target);
+    openElementUrl(link);
+  });
   cy.fit(undefined, 30);
+  scheduleZoomGlyphRender();
 }
 </script>
 <style>
@@ -468,6 +1296,7 @@ function render(rawData) {
 }
 
 .cx2-label-wrap {
+  position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;

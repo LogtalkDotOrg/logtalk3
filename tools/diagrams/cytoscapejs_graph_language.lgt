@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-11,
+		date is 2026-03-12,
 		comment is 'Predicates for generating diagram files in the Cytoscape Exchange (CX2) JSON format.'
 	]).
 
@@ -181,6 +181,19 @@
 			write_json_id(Stream, URL)
 		;	true
 		),
+		(	member(urls(CodeURL, _), Options),
+			CodeURL \== '' ->
+			write(Stream, ', "code_url": '),
+			write_json_id(Stream, CodeURL)
+		;	true
+		),
+		(	member(zoom_url(ZoomURL), Options),
+			ZoomURL \== '' ->
+			normalize_zoom_url(ZoomURL, NormalizedZoomURL),
+			write(Stream, ', "zoom_url": '),
+			write_json_id(Stream, NormalizedZoomURL)
+		;	true
+		),
 		write(Stream, '}}'),
 		retract(parent_stack_(Stack)),
 		assertz(parent_stack_([Identifier| Stack])).
@@ -234,7 +247,22 @@
 			URL \== '' ->
 			write(Stream, ', "url": '),
 			write_json_id(Stream, URL)
-		;	member(tooltip(Tooltip), Options) ->
+		;	true
+		),
+		(	member(urls(CodeURL, _), Options),
+			CodeURL \== '' ->
+			write(Stream, ', "code_url": '),
+			write_json_id(Stream, CodeURL)
+		;	true
+		),
+		(	member(zoom_url(ZoomURL), Options),
+			ZoomURL \== '' ->
+			normalize_zoom_url(ZoomURL, NormalizedZoomURL),
+			write(Stream, ', "zoom_url": '),
+			write_json_id(Stream, NormalizedZoomURL)
+		;	true
+		),
+		(	member(tooltip(Tooltip), Options) ->
 			write(Stream, ', "tooltip": '),
 			write_json_id(Stream, Tooltip)
 		;	true
@@ -306,7 +334,15 @@
 			URL \== '' ->
 			write(Stream, ', "url": '),
 			write_json_id(Stream, URL)
-		;	member(tooltip(Tooltip), Options) ->
+		;	true
+		),
+		(	member(urls(CodeURL, _), Options),
+			CodeURL \== '' ->
+			write(Stream, ', "code_url": '),
+			write_json_id(Stream, CodeURL)
+		;	true
+		),
+		(	member(tooltip(Tooltip), Options) ->
 			write(Stream, ', "tooltip": '),
 			write_json_id(Stream, Tooltip)
 		;	true
@@ -356,6 +392,8 @@
 		write(Stream, '        "caption": {"d": "string"},\n'),
 		write(Stream, '        "lines": {"d": "list_of_string"},\n'),
 		write(Stream, '        "url": {"d": "string"},\n'),
+		write(Stream, '        "code_url": {"d": "string"},\n'),
+		write(Stream, '        "zoom_url": {"d": "string"},\n'),
 		write(Stream, '        "tooltip": {"d": "string"}\n'),
 		write(Stream, '      },\n'),
 		write(Stream, '      "edges": {\n'),
@@ -364,6 +402,7 @@
 		write(Stream, '        "color": {"d": "string"},\n'),
 		write(Stream, '        "line_style": {"d": "string"},\n'),
 		write(Stream, '        "url": {"d": "string"},\n'),
+		write(Stream, '        "code_url": {"d": "string"},\n'),
 		write(Stream, '        "tooltip": {"d": "string"}\n'),
 		write(Stream, '      }\n'),
 		write(Stream, '    }\n'),
@@ -540,6 +579,14 @@
 	edge_style(loads_library,          '#228b22', solid).
 	edge_style(contains,               '#bbbbbb', dotted).
 	edge_style(_,                      '#666666', solid).
+
+	normalize_zoom_url(ZoomURL, NormalizedZoomURL) :-
+		(	atom(ZoomURL),
+			sub_atom(ZoomURL, _, 4, 0, '.svg') ->
+			sub_atom(ZoomURL, 0, _, 4, Base),
+			atom_concat(Base, '.cx2', NormalizedZoomURL)
+		;	NormalizedZoomURL = ZoomURL
+		).
 
 	write_json_id(Stream, Term) :-
 		write_term_to_chars(Term, Chars, [quoted(false)]),
