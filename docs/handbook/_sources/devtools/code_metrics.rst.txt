@@ -52,6 +52,7 @@ Currently, the following metrics are provided:
 - Depth of Inheritance (``dit_metric``)
 - Efferent coupling, afferent coupling, instability, and abstractness
   (``coupling_metric``)
+- Lack of cohesion of methods (``lcom_metric``)
 - Documentation (``doc_metric``)
 - Source code size (``size_metric``)
 - Halstead complexity (``halstead_metric`` and
@@ -123,6 +124,40 @@ scores, see, e.g., the original paper by Robert Martin:
 The coupling metric was also influenced by the metrics rating system in
 Microsoft Visual Studio and aims to eventually emulate the functionality
 of a maintainability index score.
+
+Lack of cohesion metric
+-----------------------
+
+The lack of cohesion of methods (LCOM4) metric is computed as the number
+of connected components in the undirected graph whose nodes are the
+locally defined (non-auxiliary) predicates of an object or category and
+whose edges represent direct internal calls between those predicates.
+The metric is reported as the compound term
+``lcom(Components, Predicates)`` where ``Components`` is the number of
+connected components and ``Predicates`` is the total number of locally
+defined predicates.
+
+An ``lcom(1, N)`` score indicates a fully cohesive entity: all
+predicates are reachable from any other predicate via internal calls.
+Higher ``Components`` values suggest the entity may benefit from being
+split into separate, more focused entities. Entities with no predicates
+or a single predicate always score ``lcom(1, N)``.
+
+Protocols are not scored by this metric (they never define predicate
+clauses). Only direct bare-predicate calls (as reported by the Logtalk
+reflection API) are counted as internal edges; external message-sends
+(``Object::Predicate``) are excluded.
+
+For more details on the LCOM4 variant, see:
+
+::
+
+   @inproceedings{Hitz:1995,
+       author = "Hitz, M. and Montazeri, B.",
+       title = "Measuring Coupling and Cohesion in Object-Oriented Systems",
+       booktitle = "Proceedings of the International Symposium on Applied Corporate Computing",
+       year = 1995
+   }
 
 Halstead metric
 ---------------

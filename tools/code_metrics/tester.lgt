@@ -43,6 +43,7 @@
 		size_metric,
 		cc_metric,
 		halstead_metric,
+		lcom_metric,
 		code_metrics
 	], [
 		source_data(on),
@@ -64,6 +65,7 @@
 		size_metric_tests,
 		cc_metric_tests,
 		halstead_metric_tests,
+		lcom_metric_tests,
 		code_metrics_tests
 	], [
 		hook(lgtunit), optimize(on)
@@ -78,6 +80,7 @@
 		size_metric_tests,
 		cc_metric_tests,
 		halstead_metric_tests,
+		lcom_metric_tests,
 		code_metrics_tests
 	])
 )).

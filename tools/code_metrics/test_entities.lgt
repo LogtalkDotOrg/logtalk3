@@ -229,3 +229,51 @@
 	% two predicate call arguments + two clause head arguments => CAn = 4
 
 :- end_object.
+
+
+% LCOM metric test entities
+
+% one connected component: p -> q -> r
+:- object(lcom_obj_1).
+
+	:- public([p/0, q/0, r/0]).
+
+	p :- q.
+	q :- r.
+	r.
+
+:- end_object.
+
+
+% two connected components: {p,q} and {r,s}
+:- object(lcom_obj_2).
+
+	:- public([p/0, q/0, r/0, s/0]).
+
+	p :- q.
+	q.
+	r :- s.
+	s.
+
+:- end_object.
+
+
+% one component, single predicate with no internal calls
+:- object(lcom_obj_3).
+
+	:- public(p/0).
+
+	p.
+
+:- end_object.
+
+
+% one component in a category: f -> g
+:- category(lcom_cat_1).
+
+	:- public([f/0, g/0]).
+
+	f :- g.
+	g.
+
+:- end_category.

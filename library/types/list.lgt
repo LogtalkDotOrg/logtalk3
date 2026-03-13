@@ -586,7 +586,7 @@
 
 	subtract([], _, []).
 	subtract([Head| Tail], List, Rest) :-
-		(	memberchk(Head, List) ->
+		(	member(Head, List) ->
 			subtract(Tail, List, Rest)
 		;	Rest = [Head| Tail2],
 			subtract(Tail, List, Tail2)

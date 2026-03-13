@@ -68,6 +68,9 @@ Tools
 * CHANGED: The `code_metrics` tool `coupling_metric` metric representation of
 entity scores to include the Distance from Main Sequence metric value.
 
+* ADDED: Implementation of the Lack of Cohesion Of Methods metric (LCOM4) to
+the `code_metrics` tool.
+
 * ADDED: New `mutation_testing` tool for mutation-based testing.
 
 * ADDED: Support for caller diagrams to the `diagrams` tool.

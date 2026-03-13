@@ -77,6 +77,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#available-metrics">Available metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#coupling-metrics">Coupling metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lack-of-cohesion-metric">Lack of cohesion metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#halstead-metric">Halstead metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#upn-metric">UPN metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cyclomatic-complexity-metric">Cyclomatic complexity metric</a></li>
@@ -189,6 +190,7 @@ standard output. A second set of predicates computes and returns a score
 <li><p>Depth of Inheritance (<code class="docutils literal notranslate"><span class="pre">dit_metric</span></code>)</p></li>
 <li><p>Efferent coupling, afferent coupling, instability, and abstractness
 (<code class="docutils literal notranslate"><span class="pre">coupling_metric</span></code>)</p></li>
+<li><p>Lack of cohesion of methods (<code class="docutils literal notranslate"><span class="pre">lcom_metric</span></code>)</p></li>
 <li><p>Documentation (<code class="docutils literal notranslate"><span class="pre">doc_metric</span></code>)</p></li>
 <li><p>Source code size (<code class="docutils literal notranslate"><span class="pre">size_metric</span></code>)</p></li>
 <li><p>Halstead complexity (<code class="docutils literal notranslate"><span class="pre">halstead_metric</span></code> and
@@ -253,6 +255,35 @@ scores, see, e.g., the original paper by Robert Martin:</p>
 <p>The coupling metric was also influenced by the metrics rating system in
 Microsoft Visual Studio and aims to eventually emulate the functionality
 of a maintainability index score.</p>
+</section>
+<section id="lack-of-cohesion-metric">
+<h2>Lack of cohesion metric<a class="headerlink" href="#lack-of-cohesion-metric" title="Link to this heading"></a></h2>
+<p>The lack of cohesion of methods (LCOM4) metric is computed as the number
+of connected components in the undirected graph whose nodes are the
+locally defined (non-auxiliary) predicates of an object or category and
+whose edges represent direct internal calls between those predicates.
+The metric is reported as the compound term
+<code class="docutils literal notranslate"><span class="pre">lcom(Components,</span> <span class="pre">Predicates)</span></code> where <code class="docutils literal notranslate"><span class="pre">Components</span></code> is the number of
+connected components and <code class="docutils literal notranslate"><span class="pre">Predicates</span></code> is the total number of locally
+defined predicates.</p>
+<p>An <code class="docutils literal notranslate"><span class="pre">lcom(1,</span> <span class="pre">N)</span></code> score indicates a fully cohesive entity: all
+predicates are reachable from any other predicate via internal calls.
+Higher <code class="docutils literal notranslate"><span class="pre">Components</span></code> values suggest the entity may benefit from being
+split into separate, more focused entities. Entities with no predicates
+or a single predicate always score <code class="docutils literal notranslate"><span class="pre">lcom(1,</span> <span class="pre">N)</span></code>.</p>
+<p>Protocols are not scored by this metric (they never define predicate
+clauses). Only direct bare-predicate calls (as reported by the Logtalk
+reflection API) are counted as internal edges; external message-sends
+(<code class="docutils literal notranslate"><span class="pre">Object::Predicate</span></code>) are excluded.</p>
+<p>For more details on the LCOM4 variant, see:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">@</span>inproceedings<span class="k">{</span><span class="nv">Hitz</span><span class="o">:</span><span class="m">1995</span>,
+    author <span class="o">=</span> <span class="s">&quot;Hitz, M. and Montazeri, B.&quot;</span>,
+    title <span class="o">=</span> <span class="s">&quot;Measuring Coupling and Cohesion in Object-Oriented Systems&quot;</span>,
+    booktitle <span class="o">=</span> <span class="s">&quot;Proceedings of the International Symposium on Applied Corporate Computing&quot;</span>,
+    year <span class="o">=</span> <span class="m">1995</span>
+<span class="k">}</span>
+</pre></div>
+</div>
 </section>
 <section id="halstead-metric">
 <h2>Halstead metric<a class="headerlink" href="#halstead-metric" title="Link to this heading"></a></h2>

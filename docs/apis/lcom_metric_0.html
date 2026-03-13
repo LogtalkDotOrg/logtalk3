@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>halstead_metric(Stroud) &mdash; Logtalk 3.99.0</title>
+  <title>lcom_metric &mdash; Logtalk 3.99.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="lcom_metric" href="lcom_metric_0.html" />
-    <link rel="prev" title="halstead_metric" href="halstead_metric_0.html" />
+    <link rel="next" title="noc_metric" href="noc_metric_0.html" />
+    <link rel="prev" title="halstead_metric(Stroud)" href="halstead_metric_1.html" />
    
 </head>
 
@@ -88,8 +88,8 @@
 <li class="toctree-l3"><a class="reference internal" href="dit_metric_0.html">dit_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="doc_metric_0.html">doc_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="halstead_metric_0.html">halstead_metric</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">halstead_metric(Stroud)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="lcom_metric_0.html">lcom_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="halstead_metric_1.html">halstead_metric(Stroud)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">lcom_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="noc_metric_0.html">noc_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nor_metric_0.html">nor_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="size_metric_0.html">size_metric</a></li>
@@ -243,9 +243,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">halstead_metric(Stroud)</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">lcom_metric</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/halstead_metric_1.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/lcom_metric_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -253,13 +253,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="halstead-metric-1"><span id="index-0"></span><strong>object</strong></p>
-<section id="halstead-metric-stroud">
-<h1><code class="docutils literal notranslate"><span class="pre">halstead_metric(Stroud)</span></code><a class="headerlink" href="#halstead-metric-stroud" title="Link to this heading"></a></h1>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Stroud</span></code> - Coefficient for computing the time required to program.</p></li>
-</ul>
-<p>Computes Halstead complexity numbers for an entity.</p>
+  <p class="right" id="lcom-metric-0"><span id="index-0"></span><strong>object</strong></p>
+<section id="lcom-metric">
+<h1><code class="docutils literal notranslate"><span class="pre">lcom_metric</span></code><a class="headerlink" href="#lcom-metric" title="Link to this heading"></a></h1>
+<p>Lack of Cohesion Of Methods metric (LCOM4).</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -268,8 +265,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:10:0</div>
-<div class="line"><strong>Date:</strong> 2025-01-04</div>
+<div class="line"><strong>Version:</strong> 1:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-03-13</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -283,11 +280,14 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="code_metrics_utilities_0.html#code-metrics-utilities-0"><span class="std std-ref">code_metrics_utilities</span></a></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="code_metric_0.html#code-metric-0"><span class="std std-ref">code_metric</span></a></div>
 </div>
+<div class="line"><strong>Provides:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0-message-tokens-2"><span class="std std-ref">logtalk::message_tokens//2</span></a></div>
+</div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
-<div class="line"><a class="reference internal" href="numberlist_0.html#numberlist-0"><span class="std std-ref">numberlist</span></a></div>
-<div class="line"><a class="reference internal" href="pairs_0.html#pairs-0"><span class="std std-ref">pairs</span></a></div>
+<div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0"><span class="std std-ref">logtalk</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -295,20 +295,9 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Definition of operators: Predicates declared, user-defined, and called are interpreted as operators. Built-in predicates and built-in control constructs are ignored.</p></li>
-<li><p>Definition of operands: Predicate arguments are abstracted and interpreted as operands. Note that this definition of operands is a significant deviation from the original definition, which used syntactic literals.</p></li>
-<li><p>Pn: Number of distinct predicates (declared, defined, called, or updated).</p></li>
-<li><p>PAn: Number of predicate arguments (assumed distinct).</p></li>
-<li><p>Cn: Number of predicate calls/updates + number of clauses.</p></li>
-<li><p>CAn: Number of predicate call/update arguments + number of clause head arguments.</p></li>
-<li><p>EV: Entity vocabulary: <code class="docutils literal notranslate"><span class="pre">EV</span> <span class="pre">=</span> <span class="pre">Pn</span> <span class="pre">+</span> <span class="pre">PAn</span></code>.</p></li>
-<li><p>EL: Entity length: <code class="docutils literal notranslate"><span class="pre">EL</span> <span class="pre">=</span> <span class="pre">Cn</span> <span class="pre">+</span> <span class="pre">CAn</span></code>.</p></li>
-<li><p>V: Volume: <code class="docutils literal notranslate"><span class="pre">V</span> <span class="pre">=</span> <span class="pre">EL</span> <span class="pre">*</span> <span class="pre">log2(EV)</span></code>.</p></li>
-<li><p>D: Difficulty: <code class="docutils literal notranslate"><span class="pre">D</span> <span class="pre">=</span> <span class="pre">(Pn/2)</span> <span class="pre">*</span> <span class="pre">(CAn/An)</span></code>.</p></li>
-<li><p>E: Effort: <code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">=</span> <span class="pre">D</span> <span class="pre">*</span> <span class="pre">V</span></code>.</p></li>
-<li><p>T: Time required to program: <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">=</span> <span class="pre">E/k</span></code> seconds (<code class="docutils literal notranslate"><span class="pre">k</span></code> is the Stroud number; defaults to 18).</p></li>
-<li><p>B: Number of delivered bugs: <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">=</span> <span class="pre">V/3000</span></code>.</p></li>
-<li><p>Entity score: Represented as the compound term <code class="docutils literal notranslate"><span class="pre">pn_pan_cn_can_ev_el_v_d_e_t_b/11</span></code>.</p></li>
+<li><p>Score computation: Computes the number of connected components in the undirected graph whose nodes are the locally defined predicates and whose edges represent direct internal calls between them.</p></li>
+<li><p>Score interpretation: A score of 1 indicates a fully cohesive entity. Higher scores indicate that the entity may benefit from being split. Protocols are not scored as they cannot define predicates.</p></li>
+<li><p>Score representation: The score is represented by the compound term <code class="docutils literal notranslate"><span class="pre">lcom(Components,</span> <span class="pre">Predicates)</span></code> where <code class="docutils literal notranslate"><span class="pre">Components</span></code> is the number of connected components and <code class="docutils literal notranslate"><span class="pre">Predicates</span></code> is the total number of locally defined (non-auxiliary) predicates.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -347,8 +336,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="halstead_metric_0.html" class="btn btn-neutral float-left" title="halstead_metric" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="lcom_metric_0.html" class="btn btn-neutral float-right" title="lcom_metric" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="halstead_metric_1.html" class="btn btn-neutral float-left" title="halstead_metric(Stroud)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="noc_metric_0.html" class="btn btn-neutral float-right" title="noc_metric" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

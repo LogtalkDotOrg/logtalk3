@@ -37,6 +37,7 @@
 		size_metric,
 		cc_metric,
 		halstead_metric,
+		lcom_metric,
 		code_metrics
 	], [
 		optimize(on)
