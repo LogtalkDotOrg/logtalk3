@@ -67,6 +67,6 @@
 		tests(d2),
 		tests(dot),
 		tests(mermaid),
-		tests(plantuml)
+		tests(puml)
 	])
 )).
