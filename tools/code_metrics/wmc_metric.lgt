@@ -20,18 +20,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(upn_metric,
+:- object(wmc_metric,
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:6:3,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-03-13,
-		comment is 'Number of unique predicates nodes metric. The nodes include called and updated predicates independently of where they are defined. The score is represented by a non-negative integer.'
+		comment is 'Weighted Methods per Class (WMC) metric. Uses unit weights, i.e., the score is the number of locally defined (non-auxiliary) predicates. Protocols are not scored as they cannot define predicates. The score is represented by a non-negative integer.',
+		remarks is [
+			'Unit weights' - 'Each predicate is assigned a weight of 1. A cyclomatic-complexity-weighted variant is not provided as the Logtalk reflection API does not expose intra-clause branching structure (if-then-else, disjunction), which would produce the same approximations as the ``cc_metric``.',
+			'Interpretation' - 'Higher scores indicate an entity with more responsibilities that may benefit from being split.',
+			'Aggregation' - 'When computing scores for files, directories, and libraries, the individual entity scores are summed.'
+		]
 	]).
 
 	:- uses(list, [
-		length/2, member/2
+		member/2, length/2
 	]).
 
 	:- uses(numberlist, [
@@ -48,27 +53,30 @@
 		;	true
 		),
 		^^entity_kind(Entity, Kind),
-		entity_score(Kind, Entity, Score).
+		Kind \== protocol,
+		entity_score_(Kind, Entity, Score).
 
-	entity_score(object, Entity, Score) :-
-		findall(Caller, (object_property(Entity, defines(Caller, Properties)), \+ member(auxiliary, Properties)), Bag0),
-		findall(Other::Predicate, (object_property(Entity, provides(Predicate, Other, Properties)), \+ member(auxiliary, Properties)), Bag1, Bag0),
-		findall(Callee, (object_property(Entity, calls(Callee, _)), ground(Callee)), Bag2, Bag1),
-		findall(Dynamic, (object_property(Entity, updates(Dynamic, _)), ground(Dynamic)), Bag, Bag2),
+	entity_score_(Kind, Entity, Score) :-
+		findall(
+			Predicate,
+			defined_predicate(Kind, Entity, Predicate),
+			Bag
+		),
 		sort(Bag, Sorted),
 		length(Sorted, Score).
-	entity_score(category, Entity, Score) :-
-		findall(Caller, (category_property(Entity, defines(Caller, Properties)), \+ member(auxiliary, Properties)), Bag0),
-		findall(Other::Predicate, (category_property(Entity, provides(Predicate, Other, Properties)), \+ member(auxiliary, Properties)), Bag1, Bag0),
-		findall(Callee, (category_property(Entity, calls(Callee, _)), ground(Callee)), Bag2, Bag1),
-		findall(Dynamic, (category_property(Entity, updates(Dynamic, _)), ground(Dynamic)), Bag, Bag2),
-		sort(Bag, Sorted),
-		length(Sorted, Score).
-	entity_score(protocol, _, 0).
+
+	defined_predicate(object, Entity, Predicate) :-
+		object_property(Entity, defines(Predicate, Properties)),
+		\+ member(auxiliary, Properties),
+		\+ member(number_of_clauses(0), Properties).
+	defined_predicate(category, Entity, Predicate) :-
+		category_property(Entity, defines(Predicate, Properties)),
+		\+ member(auxiliary, Properties),
+		\+ member(number_of_clauses(0), Properties).
 
 	process_entity(Kind, Entity) :-
-		entity_score(Kind, Entity, Score),
-		print_message(information, code_metrics, unique_predicates_nodes(Score)).
+		entity_score_(Kind, Entity, Score),
+		print_message(information, code_metrics, wmc(Score)).
 
 	file_score(File, Score, Options) :-
 		^^option(exclude_entities(ExcludedEntities), Options),
@@ -76,10 +84,10 @@
 			EntityScore,
 			(	loaded_file_property(File, object(Object)),
 				\+ member(Object, ExcludedEntities),
-				entity_score(object, Object, EntityScore)
+				entity_score_(object, Object, EntityScore)
 			;	loaded_file_property(File, category(Category)),
 				\+ member(Category, ExcludedEntities),
-				entity_score(category, Category, EntityScore)
+				entity_score_(category, Category, EntityScore)
 			),
 			EntityScores
 		),
@@ -87,7 +95,7 @@
 
 	process_file(File, Options) :-
 		file_score(File, Score, Options),
-		print_message(information, code_metrics, unique_predicates_nodes(Score)).
+		print_message(information, code_metrics, wmc(Score)).
 
 	directory_score(Directory, Score, Options) :-
 		findall(FileScore, directory_file_score(Directory, _, FileScore, Options), FileScores),
@@ -95,14 +103,14 @@
 
 	process_directory(Directory, Options) :-
 		directory_score(Directory, Score, Options),
-		print_message(information, code_metrics, unique_predicates_nodes(Score)).
+		print_message(information, code_metrics, wmc(Score)).
 
-	directory_file_score(Directory, File, Nocs, Options) :-
+	directory_file_score(Directory, File, Score, Options) :-
 		^^option(exclude_files(ExcludedFiles), Options),
 		loaded_file_property(File, directory(Directory)),
 		loaded_file_property(File, basename(Basename)),
 		^^not_excluded_file(ExcludedFiles, File, Basename),
-		file_score(File, Nocs, Options).
+		file_score(File, Score, Options).
 
 	rdirectory_score(Directory, Score, Options) :-
 		^^option(exclude_directories(ExcludedDirectories), Options),
@@ -130,7 +138,7 @@
 
 	process_rdirectory(Directory, Options) :-
 		rdirectory_score(Directory, Score, Options),
-		print_message(information, code_metrics, unique_predicates_nodes(Score)).
+		print_message(information, code_metrics, wmc(Score)).
 
 	library_score(Library, Score, Options) :-
 		expand_library_path(Library, Directory),
@@ -138,7 +146,7 @@
 
 	process_library(Library, Options) :-
 		library_score(Library, Score, Options),
-		print_message(information, code_metrics, unique_predicates_nodes(Score)).
+		print_message(information, code_metrics, wmc(Score)).
 
 	rlibrary_score(Library, Score, Options) :-
 		^^option(exclude_libraries(ExcludedLibraries), Options),
@@ -163,7 +171,7 @@
 
 	process_rlibrary(Library, Options) :-
 		rlibrary_score(Library, Score, Options),
-		print_message(information, code_metrics, unique_predicates_nodes(Score)).
+		print_message(information, code_metrics, wmc(Score)).
 
 	all_score(Score, Options) :-
 		^^option(exclude_files(ExcludedFiles), Options),
@@ -179,15 +187,15 @@
 
 	process_all(Options) :-
 		all_score(Score, Options),
-		print_message(information, code_metrics, unique_predicates_nodes(Score)).
+		print_message(information, code_metrics, wmc(Score)).
 
-	format_entity_score(_Entity, Total) -->
-		['Number of Unique Predicates Nodes: ~w'-[Total], nl].
+	format_entity_score(_Entity, Score) -->
+		['WMC: ~w'-[Score], nl].
 
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
 
-	logtalk::message_tokens(unique_predicates_nodes(Total), code_metrics) -->
-		['Number of Unique Predicates Nodes: ~w'-[Total], nl].
+	logtalk::message_tokens(wmc(Score), code_metrics) -->
+		['WMC: ~w'-[Score], nl].
 
 :- end_object.

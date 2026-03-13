@@ -44,7 +44,10 @@
 	]).
 
 	entity_score(Entity, lcom(Components, Total)) :-
-		^^current_entity(Entity),
+		(	var(Entity) ->
+			^^current_entity(Entity)
+		;	true
+		),
 		^^entity_kind(Entity, Kind),
 		Kind \== protocol,
 		entity_score_(Kind, Entity, Components, Total).

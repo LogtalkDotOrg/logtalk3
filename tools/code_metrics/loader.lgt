@@ -38,6 +38,7 @@
 		cc_metric,
 		halstead_metric,
 		lcom_metric,
+		wmc_metric,
 		code_metrics
 	], [
 		optimize(on)

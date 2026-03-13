@@ -23,9 +23,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:13:0,
+		version is 0:13:1,
 		author is 'Paulo Moura',
-		date is 2022-05-05,
+		date is 2026-03-13,
 		comment is 'Entity and entity predicates documentation score.',
 		remarks is [
 			'Score range' - 'Score is a integer percentage where a 100% score means that all expected documentation information is present.',
@@ -106,7 +106,10 @@
 	]).
 
 	entity_score(Entity, Score) :-
-		^^current_entity(Entity),
+		(	var(Entity) ->
+			^^current_entity(Entity)
+		;	true
+		),
 		score(Entity, Score).
 
 	score(Entity, Score) :-

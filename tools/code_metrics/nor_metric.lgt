@@ -24,9 +24,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:5:1,
+		version is 0:5:2,
 		author is 'Paulo Moura',
-		date is 2024-05-08,
+		date is 2026-03-13,
 		comment is 'Number of entity rules metric. The score is represented using the compound term ``number_of_rules(Total, User)``.'
 	]).
 
@@ -39,7 +39,10 @@
 	]).
 
 	entity_score(Entity, Score) :-
-		^^current_entity(Entity),
+		(	var(Entity) ->
+			^^current_entity(Entity)
+		;	true
+		),
 		^^entity_kind(Entity, Kind),
 		entity_score(Kind, Entity, Score).
 

@@ -53,6 +53,7 @@ Currently, the following metrics are provided:
 - Efferent coupling, afferent coupling, instability, and abstractness
   (``coupling_metric``)
 - Lack of cohesion of methods (``lcom_metric``)
+- Weighted Methods per Class (``wmc_metric``)
 - Documentation (``doc_metric``)
 - Source code size (``size_metric``)
 - Halstead complexity (``halstead_metric`` and
@@ -157,6 +158,36 @@ For more details on the LCOM4 variant, see:
        title = "Measuring Coupling and Cohesion in Object-Oriented Systems",
        booktitle = "Proceedings of the International Symposium on Applied Corporate Computing",
        year = 1995
+   }
+
+WMC metric
+----------
+
+The Weighted Methods per Class (WMC) metric counts the number of locally
+defined (non-auxiliary) predicates in an object or category. Unit
+weights are used: each predicate contributes 1 to the score regardless
+of its complexity. Protocols are not scored as they cannot define
+predicates.
+
+A cyclomatic-complexity-weighted variant is not provided. The Logtalk
+reflection API exposes inter-predicate call edges but not intra-clause
+branching structure (if-then-else, disjunction). A CC-weighted WMC would
+inherit the same approximation limitations already present in
+``cc_metric`` and would also be numerically equivalent to the number of
+user clauses reported by ``noc_metric``.
+
+For more details on the WMC metric, see the original CK paper:
+
+::
+
+   @article{Chidamber:1994,
+       author = "Chidamber, S. R. and Kemerer, C. F.",
+       title = "A Metrics Suite for Object Oriented Design",
+       journal = "IEEE Transactions on Software Engineering",
+       volume = 20,
+       number = 6,
+       pages = "476--493",
+       year = 1994
    }
 
 Halstead metric

@@ -71,6 +71,9 @@ entity scores to include the Distance from Main Sequence metric value.
 * ADDED: Implementation of the Lack of Cohesion Of Methods metric (LCOM4) to
 the `code_metrics` tool.
 
+* ADDED: Implementation of the Weighted Methods per Class (WMC) metric to the
+`code_metrics` tool.
+
 * ADDED: New `mutation_testing` tool for mutation-based testing.
 
 * ADDED: Support for caller diagrams to the `diagrams` tool.
@@ -113,6 +116,9 @@ predicate where the top directory score was ignored.
 
 * FIXED: Bug in the `code_metrics` tool `cc_metric::rlibrary_score/2` predicate
 where the `exclude_libraries/1` option was ignored.
+
+* FIXED: Spurious choice-point when calling the `code_metrics` tool metrics
+`entity_score/2` predicate.
 
 Examples
 --------

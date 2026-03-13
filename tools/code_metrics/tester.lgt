@@ -44,6 +44,7 @@
 		cc_metric,
 		halstead_metric,
 		lcom_metric,
+		wmc_metric,
 		code_metrics
 	], [
 		source_data(on),
@@ -66,6 +67,7 @@
 		cc_metric_tests,
 		halstead_metric_tests,
 		lcom_metric_tests,
+		wmc_metric_tests,
 		code_metrics_tests
 	], [
 		hook(lgtunit), optimize(on)
@@ -81,6 +83,7 @@
 		cc_metric_tests,
 		halstead_metric_tests,
 		lcom_metric_tests,
+		wmc_metric_tests,
 		code_metrics_tests
 	])
 )).

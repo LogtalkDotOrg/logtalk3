@@ -24,9 +24,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:7:1,
+		version is 0:7:2,
 		author is 'Paulo Moura',
-		date is 2024-05-08,
+		date is 2026-03-13,
 		comment is 'Source code size metric. Returned scores are upper bounds and based solely in source file sizes (expressed in bytes).'
 	]).
 
@@ -47,6 +47,10 @@
 	]).
 
 	entity_score(Entity, Size) :-
+		(	var(Entity) ->
+			^^current_entity(Entity)
+		;	true
+		),
 		^^entity_property(Entity, file(File)),
 		file_size(File, Size).
 

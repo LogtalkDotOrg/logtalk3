@@ -78,6 +78,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#available-metrics">Available metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#coupling-metrics">Coupling metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#lack-of-cohesion-metric">Lack of cohesion metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wmc-metric">WMC metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#halstead-metric">Halstead metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#upn-metric">UPN metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cyclomatic-complexity-metric">Cyclomatic complexity metric</a></li>
@@ -191,6 +192,7 @@ standard output. A second set of predicates computes and returns a score
 <li><p>Efferent coupling, afferent coupling, instability, and abstractness
 (<code class="docutils literal notranslate"><span class="pre">coupling_metric</span></code>)</p></li>
 <li><p>Lack of cohesion of methods (<code class="docutils literal notranslate"><span class="pre">lcom_metric</span></code>)</p></li>
+<li><p>Weighted Methods per Class (<code class="docutils literal notranslate"><span class="pre">wmc_metric</span></code>)</p></li>
 <li><p>Documentation (<code class="docutils literal notranslate"><span class="pre">doc_metric</span></code>)</p></li>
 <li><p>Source code size (<code class="docutils literal notranslate"><span class="pre">size_metric</span></code>)</p></li>
 <li><p>Halstead complexity (<code class="docutils literal notranslate"><span class="pre">halstead_metric</span></code> and
@@ -281,6 +283,32 @@ reflection API) are counted as internal edges; external message-sends
     title <span class="o">=</span> <span class="s">&quot;Measuring Coupling and Cohesion in Object-Oriented Systems&quot;</span>,
     booktitle <span class="o">=</span> <span class="s">&quot;Proceedings of the International Symposium on Applied Corporate Computing&quot;</span>,
     year <span class="o">=</span> <span class="m">1995</span>
+<span class="k">}</span>
+</pre></div>
+</div>
+</section>
+<section id="wmc-metric">
+<h2>WMC metric<a class="headerlink" href="#wmc-metric" title="Link to this heading"></a></h2>
+<p>The Weighted Methods per Class (WMC) metric counts the number of locally
+defined (non-auxiliary) predicates in an object or category. Unit
+weights are used: each predicate contributes 1 to the score regardless
+of its complexity. Protocols are not scored as they cannot define
+predicates.</p>
+<p>A cyclomatic-complexity-weighted variant is not provided. The Logtalk
+reflection API exposes inter-predicate call edges but not intra-clause
+branching structure (if-then-else, disjunction). A CC-weighted WMC would
+inherit the same approximation limitations already present in
+<code class="docutils literal notranslate"><span class="pre">cc_metric</span></code> and would also be numerically equivalent to the number of
+user clauses reported by <code class="docutils literal notranslate"><span class="pre">noc_metric</span></code>.</p>
+<p>For more details on the WMC metric, see the original CK paper:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">@</span>article<span class="k">{</span><span class="nv">Chidamber</span><span class="o">:</span><span class="m">1994</span>,
+    author <span class="o">=</span> <span class="s">&quot;Chidamber, S. R. and Kemerer, C. F.&quot;</span>,
+    title <span class="o">=</span> <span class="s">&quot;A Metrics Suite for Object Oriented Design&quot;</span>,
+    journal <span class="o">=</span> <span class="s">&quot;IEEE Transactions on Software Engineering&quot;</span>,
+    volume <span class="o">=</span> <span class="m">20</span>,
+    number <span class="o">=</span> <span class="m">6</span>,
+    pages <span class="o">=</span> <span class="s">&quot;476--493&quot;</span>,
+    year <span class="o">=</span> <span class="m">1994</span>
 <span class="k">}</span>
 </pre></div>
 </div>

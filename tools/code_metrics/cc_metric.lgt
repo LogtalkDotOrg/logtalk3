@@ -43,7 +43,10 @@
 	]).
 
 	entity_score(Entity, Score) :-
-		^^current_entity(Entity),
+		(	var(Entity) ->
+			^^current_entity(Entity)
+		;	true
+		),
 		^^entity_kind(Entity, Kind),
 		entity_score(Kind, Entity, Score).
 
