@@ -24,9 +24,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:5:2,
+		version is 0:5:3,
 		author is 'Paulo Moura',
-		date is 2024-05-15,
+		date is 2026-03-13,
 		comment is 'Cyclomatic complexity metric. All defined predicates that are not called or updated are counted as graph connected components (the reasoning being that these predicates can be considered entry points). The score is represented by a non-negative integer.'
 	]).
 
@@ -192,10 +192,14 @@
 
 	rdirectory_score(Directory, Score, Options) :-
 		^^option(exclude_directories(ExcludedDirectories), Options),
-		setof(
-			SubDirectory,
-			^^sub_directory(Directory, SubDirectory),
-			SubDirectories
+		directory_score(Directory, DirectoryScore, Options),
+		(	setof(
+				SubDirectory,
+				^^sub_directory(Directory, SubDirectory),
+				SubDirectories
+			) ->
+			true
+		;	SubDirectories = []
 		),
 		findall(
 			DirectoryScore,
@@ -208,7 +212,7 @@
 			),
 			DirectoryScores
 		),
-		sum(DirectoryScores, Score).
+		sum([DirectoryScore| DirectoryScores], Score).
 
 	process_rdirectory(Directory, Options) :-
 		rdirectory_score(Directory, Score, Options),
@@ -223,24 +227,25 @@
 		print_message(information, code_metrics, cyclomatic_complexity(Score)).
 
 	rlibrary_score(Library, Score, Options) :-
-		^^option(exclude_directories(ExcludedDirectories), Options),
-		setof(
-			Path,
-			^^sub_library(Library, Path),
-			Paths
+		^^option(exclude_libraries(ExcludedLibraries), Options),
+		library_score(Library, LibraryScore, Options),
+		(	setof(
+				SubLibrary,
+				^^sub_library(Library, SubLibrary),
+				SubLibraries
+			) ->
+			true
+		;	SubLibraries = []
 		),
 		findall(
-			DirectoryScore,
-			(	member(Path, Paths),
-				\+ (
-					member(ExcludedDirectory, ExcludedDirectories),
-					sub_atom(Path, 0, _, _, ExcludedDirectory)
-				),
-				directory_file_score(Path, _, DirectoryScore, Options)
+			SubLibraryScore,
+			(	member(SubLibrary, SubLibraries),
+				\+ member(SubLibrary, ExcludedLibraries),
+				library_score(SubLibrary, SubLibraryScore, Options)
 			),
-			DirectoryScores
+			SubLibraryScores
 		),
-		sum(DirectoryScores, Score).
+		sum([LibraryScore| SubLibraryScores], Score).
 
 	process_rlibrary(Library, Options) :-
 		rlibrary_score(Library, Score, Options),
