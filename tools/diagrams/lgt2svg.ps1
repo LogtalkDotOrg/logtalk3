@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   DOT and d2 diagram files to SVG files conversion script
-##   Last updated on March 26, 2025
+##   Last updated on March 13, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2026 Paulo Moura <pmoura@logtalk.org>
@@ -30,6 +30,7 @@ param(
 	[Parameter()]
 	[String]$c = "dot",
 	[String]$l = "elk",
+	[String]$f = "svg",
 	[String]$a = "",
 	[Switch]$v,
 	[Switch]$h
@@ -38,7 +39,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 0.14"
+	Write-Output "$myName 0.15"
 }
 
 function Get-Logtalkhome {
@@ -83,14 +84,15 @@ function Write-Usage-Help() {
 	Write-Output "This script converts .d2 and .dot files in the current directory to SVG files"
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output "  $myName [-c command] [-a arguments]"
-	Write-Output "  $myName [-l layout] [-a arguments]"
+	Write-Output "  $myName [-c command] [-f format] [-a arguments]"
+	Write-Output "  $myName [-l layout] [-f format] [-a arguments]"
 	Write-Output "  $myName -v"
 	Write-Output "  $myName -h"
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output "  -c Graphviz command (dot, circo, fdp, or neato; default is $c)"
 	Write-Output "  -l d2 layout (dagre, elk, or tala; default is $l)"
+	Write-Output "  -f output format (default is $f)"
 	Write-Output "  -a additional arguments wrapped as a string to be passed to the converter command (no default)"
 	Write-Output "  -v print version"
 	Write-Output "  -h print help"
@@ -186,19 +188,19 @@ if ($dot_count -gt 0) {
 	}
 }
 
-if ($d2_count -gt 0 -or $dot_count -gt 0) {
+if (($d2_count -gt 0 -or $dot_count -gt 0) -and $f -eq "svg") {
 	Copy-Item -Path "$env:LOGTALKUSER\tools\diagrams\diagrams.css" -Destination .
 }
 
 if ($d2_count -gt 0) {
-	Write-Output "Converting .d2 files to .svg files ..."
+	Write-Output "Converting .d2 files to .$f files ..."
 	Get-ChildItem -Path . -Filter *.d2 |
 	Foreach-Object {
 		Write-Host -NoNewline "  converting $($_.Name)"
 		if ($a -ne "") {
-			& d2 --layout $l (-Split $a) $_.Name "$($_.BaseName).svg"
+			& d2 --layout $l (-Split $a) $_.Name "$($_.BaseName).$f"
 		} else {
-			& d2 --layout $l $_.Name "$($_.BaseName).svg"
+			& d2 --layout $l $_.Name "$($_.BaseName).$f"
 		}
 		if ($?) {
 			Write-Output " done"
@@ -210,7 +212,7 @@ if ($d2_count -gt 0) {
 }
 
 if ($dot_count -gt 0) {
-	Write-Output "Converting .dot files to .svg files ..."
+	Write-Output "Converting .dot files to .$f files ..."
 	Get-ChildItem -Path . -Filter *.dot |
 	Foreach-Object {
 		Write-Host -NoNewline "  converting $($_.Name)"
@@ -221,9 +223,9 @@ if ($dot_count -gt 0) {
 		while (-not $converted -and $counter -gt 0) {
 			try {
 				if ($a -ne "") {
-					& $c -q -Tsvg -Gfontnames=svg -o "$($_.BaseName).svg" (-Split $a) $_.Name
+					& $c -q -T$f -Gfontnames=svg -o "$($_.BaseName).$f" (-Split $a) $_.Name
 				} else {
-					& $c -q -Tsvg -Gfontnames=svg -o "$($_.BaseName).svg" $_.Name
+					& $c -q -T$f -Gfontnames=svg -o "$($_.BaseName).$f" $_.Name
 				}
 
 				# Check if command succeeded

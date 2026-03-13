@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   DOT and d2 diagram files to SVG files conversion script
-##   Last updated on March 23, 2025
+##   Last updated on March 13, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -93,7 +93,7 @@ echo
 
 
 print_version() {
-	echo "$(basename "$0") 0.13"
+	echo "$(basename "$0") 0.15"
 	exit 0
 }
 
@@ -101,6 +101,7 @@ print_version() {
 # default argument values
 command="dot"
 layout="elk"
+format="svg"
 
 
 usage_help() {
@@ -108,14 +109,15 @@ usage_help() {
 	echo "This script converts .d2 and .dot files in the current directory to SVG files"
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-c command] [-- arguments]"
-	echo "  $(basename "$0") [-l layout] [-- arguments]"
+	echo "  $(basename "$0") [-c command] [-f format] [-- arguments]"
+	echo "  $(basename "$0") [-l layout] [-f format] [-- arguments]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -c Graphviz command (dot, circo, fdp, or neato; default is $command)"
 	echo "  -l d2 layout (dagre, elk, or tala; default is $layout)"
+	echo "  -f output format (default is $format)"
 	echo "  -- additional arguments to be passed to the converter command (no default)"
 	echo "  -v print version"
 	echo "  -h print help"
@@ -123,10 +125,11 @@ usage_help() {
 }
 
 
-while getopts "c:l:vh" option; do
+while getopts "c:l:f:vh" option; do
 	case $option in
 		c) c_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
+		f) f_arg="$OPTARG";;
 		v) print_version;;
 		h) usage_help; exit 0;;
 		*) usage_help; exit 1;;
@@ -162,6 +165,10 @@ case "$l_arg" in
 		;;
 esac
 
+if [ -n "$f_arg" ] ; then
+	format="$f_arg"
+fi
+
 d2_count=$(ls -1 ./*.d2 2>/dev/null | wc -l)
 dot_count=$(ls -1 ./*.dot 2>/dev/null | wc -l)
 
@@ -182,15 +189,15 @@ fi
 d2_failed_flag=0
 dot_failed_flag=0
 
-if [ $d2_count -ne 0 ] || [ $dot_count -ne 0 ] ; then
+if { [ $d2_count -ne 0 ] || [ $dot_count -ne 0 ]; } && [ "$format" = "svg" ] ; then
 	cp "$LOGTALKUSER/tools/diagrams/diagrams.css" .
 fi
 
 if [ $d2_count -ne 0 ] ; then
-	echo "Converting .d2 files to .svg files ..."
+	echo "Converting .d2 files to .$format files ..."
 	for file in ./*.d2; do
 		echo -n "  converting $(basename "$file")... "
-		d2 --layout "$layout" "${args[@]}" "$file" "${file%.*}.svg"  2>/dev/null | cat
+		d2 --layout "$layout" "${args[@]}" "$file" "${file%.*}.$format"  2>/dev/null | cat
 		if [ "${PIPESTATUS[0]}" == 0 ] ; then
 			echo "done"
 		else
@@ -201,13 +208,13 @@ if [ $d2_count -ne 0 ] ; then
 fi
 
 if [ $dot_count -ne 0 ] ; then
-	echo "Converting .dot files to .svg files ..."
+	echo "Converting .dot files to .$format files ..."
 	for file in ./*.dot; do
 		echo -n "  converting $(basename "$file") "
 		converted=0
 		counter=24
 		while [ $converted -eq 0 ] && [ $counter -gt 0 ] ; do
-			$command -q -Tsvg -Gfontnames=svg -o "${file%.*}.svg" "${args[@]}" "$file" 2>/dev/null | cat
+			$command -q -T"$format" -Gfontnames=svg -o "${file%.*}.$format" "${args[@]}" "$file" 2>/dev/null | cat
 			if [ "${PIPESTATUS[0]}" == 0 ] ; then
 				converted=1
 			fi

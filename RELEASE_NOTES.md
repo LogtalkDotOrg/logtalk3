@@ -82,6 +82,9 @@ Exchange (CX2) JSON format.
 * ADDED: Support to the `diagrams` tool for exporting diagrams in the PlantUML
 format.
 
+* ADDED: Support to the `diagrams` tool `lgt2svg.sh` and `lgt2svg.ps1` scripts
+to export diagrams in formats other than SVG.
+
 * ADDED: Support to the `packs` tool for lock files for deterministic installs
 and CI/CD reproducibility.
 
