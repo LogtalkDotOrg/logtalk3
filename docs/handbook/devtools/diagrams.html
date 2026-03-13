@@ -456,6 +456,15 @@ generation timestamp, and Logtalk/Prolog version information. A default
 HTML viewer, <code class="docutils literal notranslate"><span class="pre">cytoscapejs_viewer.html</span></code>, is provided for convenience.
 This viewer currently requires starting a local web server in the
 generated diagrams directory and manually entering the server address.</p>
+<p>PlantUML output is also supported. The PlantUML backend generates
+<code class="docutils literal notranslate"><span class="pre">.puml</span></code> files using custom stereotypes with spotted characters to
+distinguish Logtalk entity kinds (O/blue for objects, P/green for
+protocols, T/orange for categories). All five Logtalk relationships
+(implements, imports, extends, instantiates, specializes, complements)
+are mapped to distinct labeled arrow styles. A shared <code class="docutils literal notranslate"><span class="pre">logtalk.iuml</span></code>
+include file defines all skinparam blocks, stereotype colors, and CSS
+styles for consistent rendering. PlantUML version 1.2024.0 or later is
+recommended. See <a class="reference external" href="https://plantuml.com">https://plantuml.com</a> for installation instructions.</p>
 <p>The diagrams <code class="docutils literal notranslate"><span class="pre">.d2</span></code> and <code class="docutils literal notranslate"><span class="pre">.dot</span></code> files are created by default in the
 <code class="docutils literal notranslate"><span class="pre">'./dot_dias'</span></code> sub-directory of the current directory. These files can
 be easily converted into a printable format such as SVG, PDF, or
@@ -519,8 +528,8 @@ fine-tuning the diagrams layout.</p>
 <h2>Customization<a class="headerlink" href="#customization" title="Link to this heading"></a></h2>
 <p>This tool provides parametric objects implementing the different types
 of diagrams where the parameter is the export format: <code class="docutils literal notranslate"><span class="pre">dot</span></code>, <code class="docutils literal notranslate"><span class="pre">d2</span></code>,
-and <code class="docutils literal notranslate"><span class="pre">cx2</span></code>. The non-parametric versions of the diagram objects default
-to <code class="docutils literal notranslate"><span class="pre">dot</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">cx2</span></code>, and <code class="docutils literal notranslate"><span class="pre">puml</span></code>. The non-parametric versions of the diagram
+objects default to <code class="docutils literal notranslate"><span class="pre">dot</span></code>.</p>
 <p>A set of options is available to specify the details to include in the
 generated diagrams. For entity diagrams, the options are:</p>
 <ul>

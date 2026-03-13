@@ -261,6 +261,16 @@ information. A default HTML viewer, `cytoscapejs_viewer.html`, is provided
 for convenience. This viewer currently requires starting a local web server
 in the generated diagrams directory and manually entering the server address.
 
+PlantUML output is also supported. The PlantUML backend generates `.puml`
+files using custom stereotypes with spotted characters to distinguish Logtalk
+entity kinds (O/blue for objects, P/green for protocols, T/orange for
+categories). All five Logtalk relationships (implements, imports, extends,
+instantiates, specializes, complements) are mapped to distinct labeled arrow
+styles. A shared `logtalk.iuml` include file defines all skinparam blocks,
+stereotype colors, and CSS styles for consistent rendering. PlantUML version
+1.2024.0 or later is recommended. See https://plantuml.com for installation
+instructions.
+
 The diagrams `.d2` and `.dot` files are created by default in the `'./dot_dias'`
 sub-directory of the current directory. These files can be easily converted
 into a printable format such as SVG, PDF, or Postscript. Sample helper scripts
@@ -325,8 +335,8 @@ Customization
 -------------
 
 This tool provides parametric objects implementing the different types of
-diagrams where the parameter is the export format: `dot`, `d2`, and `cx2`.
-The non-parametric versions of the diagram objects default to `dot`.
+diagrams where the parameter is the export format: `dot`, `d2`, `cx2`, and
+`puml`. The non-parametric versions of the diagram objects default to `dot`.
 
 A set of options is available to specify the details to include in the
 generated diagrams. For entity diagrams, the options are:

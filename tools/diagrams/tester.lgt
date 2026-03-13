@@ -34,7 +34,8 @@
 		cytoscapejs_graph_language,
 		d2_graph_language,
 		dot_graph_language,
-		mermaid_graph_language
+		mermaid_graph_language,
+		plantuml_graph_language
 	], [
 		source_data(on),
 		debug(on)
@@ -65,6 +66,7 @@
 		tests(cx2),
 		tests(d2),
 		tests(dot),
-		tests(mermaid)
+		tests(mermaid),
+		tests(plantuml)
 	])
 )).

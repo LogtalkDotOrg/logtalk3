@@ -47,6 +47,7 @@
 	:- if(current_logtalk_flag(modules, supported)).
 		cover(modules_diagram_support).
 	:- endif.
+	cover(plantuml_graph_language).
 	cover(uses_diagram(_)).
 	cover(xref_diagram(_)).
 	cover(caller_diagram(_)).

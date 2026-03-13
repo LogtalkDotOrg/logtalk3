@@ -33,7 +33,8 @@
 		cytoscapejs_graph_language,
 		d2_graph_language,
 		dot_graph_language,
-		mermaid_graph_language
+		mermaid_graph_language,
+		plantuml_graph_language
 	], [
 		optimize(on)
 	]),
