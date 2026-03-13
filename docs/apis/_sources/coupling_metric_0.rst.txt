@@ -8,14 +8,14 @@
 ``coupling_metric``
 ===================
 
-Computes entity efferent coupling, afferent coupling, instability, and abstractness.
+Computes entity efferent coupling, afferent coupling, instability, abstractness, and distance from the main sequence.
 
 | **Availability:** 
 |    ``logtalk_load(code_metrics(loader))``
 
 | **Author:** Ebrahim Azarisooreh and Paulo Moura
-| **Version:** 0:14:1
-| **Date:** 2026-03-12
+| **Version:** 0:15:0
+| **Date:** 2026-03-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -33,7 +33,8 @@ Computes entity efferent coupling, afferent coupling, instability, and abstractn
    - Afferent coupling (Ca): Number of entities that depend on an entity.
    - Instability (I): Computed as ``Ce / (Ce + Ca)``. Measures the entity resilience to change. Ranging from 0 to 1, with 0 indicating a maximally stable entity and 1 indicating a maximally unstable entity. Ideally, an entity is either maximally stable or maximally unstable.
    - Abstractness (A): Computed as the ratio between the number of static predicates with scope directives without a local definition and the number of static predicates with scope directives. Measures the rigidity of an entity. Ranging from 0 to 1, with 0 indicating a fully concrete entity and 1 indicating a fully abstract entity.
-   - Entity score: Represented as the compound term ``ce_ca_i_a(Ce,Ca,I,A)``.
+   - Distance from main sequence (D): Computed as ``abs(A + I - 1)``. Measures how far an entity is from the idealized line ``A + I = 1``. Ranging from 0 to 1, with 0 indicating the entity is on the main sequence and 1 indicating it is as far as possible (either maximally abstract and stable, or maximally concrete and unstable).
+   - Entity score: Represented as the compound term ``ce_ca_i_a_d(Ce,Ca,I,A,D)``.
    - Dependencies count: Includes direct entity relations plus calls or dynamic updates to predicates in external objects or categories.
 
 | **Inherited public predicates:**

@@ -335,7 +335,7 @@
 
 	add_metrics_overlay_option(Entity, Options, MetricsOptions) :-
 		(	member(metrics_overlay(true), Options),
-			coupling_metric::entity_score(Entity, ce_ca_i_a(Ce,Ca,I,A)) ->
+			coupling_metric::entity_score(Entity, ce_ca_i_a_d(Ce,Ca,I,A,_D)) ->
 			MetricsOptions = [metrics_overlay(Ce,Ca,I,A)| Options]
 		;	MetricsOptions = Options
 		).

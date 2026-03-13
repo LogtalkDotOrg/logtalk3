@@ -65,6 +65,9 @@ predicate. Thanks to Felix Weitkämper for the bug report.
 Tools
 -----
 
+* CHANGED: The `code_metrics` tool `coupling_metric` metric representation of
+entity scores to include the Distance from Main Sequence metric value.
+
 * ADDED: New `mutation_testing` tool for mutation-based testing.
 
 * ADDED: Support for caller diagrams to the `diagrams` tool.

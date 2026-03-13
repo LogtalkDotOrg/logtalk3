@@ -255,7 +255,7 @@
   <p class="right" id="coupling-metric-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="coupling-metric">
 <h1><code class="docutils literal notranslate"><span class="pre">coupling_metric</span></code><a class="headerlink" href="#coupling-metric" title="Link to this heading"></a></h1>
-<p>Computes entity efferent coupling, afferent coupling, instability, and abstractness.</p>
+<p>Computes entity efferent coupling, afferent coupling, instability, abstractness, and distance from the main sequence.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -264,8 +264,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Ebrahim Azarisooreh and Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:14:1</div>
-<div class="line"><strong>Date:</strong> 2026-03-12</div>
+<div class="line"><strong>Version:</strong> 0:15:0</div>
+<div class="line"><strong>Date:</strong> 2026-03-13</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -293,7 +293,8 @@
 <li><p>Afferent coupling (Ca): Number of entities that depend on an entity.</p></li>
 <li><p>Instability (I): Computed as <code class="docutils literal notranslate"><span class="pre">Ce</span> <span class="pre">/</span> <span class="pre">(Ce</span> <span class="pre">+</span> <span class="pre">Ca)</span></code>. Measures the entity resilience to change. Ranging from 0 to 1, with 0 indicating a maximally stable entity and 1 indicating a maximally unstable entity. Ideally, an entity is either maximally stable or maximally unstable.</p></li>
 <li><p>Abstractness (A): Computed as the ratio between the number of static predicates with scope directives without a local definition and the number of static predicates with scope directives. Measures the rigidity of an entity. Ranging from 0 to 1, with 0 indicating a fully concrete entity and 1 indicating a fully abstract entity.</p></li>
-<li><p>Entity score: Represented as the compound term <code class="docutils literal notranslate"><span class="pre">ce_ca_i_a(Ce,Ca,I,A)</span></code>.</p></li>
+<li><p>Distance from main sequence (D): Computed as <code class="docutils literal notranslate"><span class="pre">abs(A</span> <span class="pre">+</span> <span class="pre">I</span> <span class="pre">-</span> <span class="pre">1)</span></code>. Measures how far an entity is from the idealized line <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">+</span> <span class="pre">I</span> <span class="pre">=</span> <span class="pre">1</span></code>. Ranging from 0 to 1, with 0 indicating the entity is on the main sequence and 1 indicating it is as far as possible (either maximally abstract and stable, or maximally concrete and unstable).</p></li>
+<li><p>Entity score: Represented as the compound term <code class="docutils literal notranslate"><span class="pre">ce_ca_i_a_d(Ce,Ca,I,A,D)</span></code>.</p></li>
 <li><p>Dependencies count: Includes direct entity relations plus calls or dynamic updates to predicates in external objects or categories.</p></li>
 </ul>
 </div></blockquote>

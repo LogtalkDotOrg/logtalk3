@@ -104,6 +104,14 @@ predicates with scope directives. Measures the rigidity of an entity. Ranging
 from 0.0 to 1.0, with 0.0 indicating a fully concrete entity and 1.0
 indicating a fully abstract entity.
 
+- Distance from main sequence: Computed as `abs(A + I - 1)`. Measures how
+far an entity is from the idealized line `A + I = 1` (the "main sequence").
+Ranging from 0.0 to 1.0, with 0.0 indicating the entity sits exactly on the
+main sequence and 1.0 indicating maximum deviation. Entities in the "zone of
+pain" (A =~ 0, I =~ 0: concrete and stable) are difficult to change; entities
+in the "zone of uselessness" (A =~ 1, I =~ 1: abstract and unstable) are not
+used. Ideally, entities should have a distance close to 0.0.
+
 The dependencies count includes direct entity relations plus predicate calls
 or dynamic updates to predicates in external objects or categories.
 

@@ -24,16 +24,17 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:14:1,
+		version is 0:15:0,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2026-03-12,
-		comment is 'Computes entity efferent coupling, afferent coupling, instability, and abstractness.',
+		date is 2026-03-13,
+		comment is 'Computes entity efferent coupling, afferent coupling, instability, abstractness, and distance from the main sequence.',
 		remarks is [
 			'Efferent coupling (Ce)' - 'Number of entities that an entity depends on.',
 			'Afferent coupling (Ca)' - 'Number of entities that depend on an entity.',
 			'Instability (I)' - 'Computed as ``Ce / (Ce + Ca)``. Measures the entity resilience to change. Ranging from 0 to 1, with 0 indicating a maximally stable entity and 1 indicating a maximally unstable entity. Ideally, an entity is either maximally stable or maximally unstable.',
 			'Abstractness (A)' - 'Computed as the ratio between the number of static predicates with scope directives without a local definition and the number of static predicates with scope directives. Measures the rigidity of an entity. Ranging from 0 to 1, with 0 indicating a fully concrete entity and 1 indicating a fully abstract entity.',
-			'Entity score' - 'Represented as the compound term ``ce_ca_i_a(Ce,Ca,I,A)``.',
+			'Distance from main sequence (D)' - 'Computed as ``abs(A + I - 1)``. Measures how far an entity is from the idealized line ``A + I = 1``. Ranging from 0 to 1, with 0 indicating the entity is on the main sequence and 1 indicating it is as far as possible (either maximally abstract and stable, or maximally concrete and unstable).',
+			'Entity score' - 'Represented as the compound term ``ce_ca_i_a_d(Ce,Ca,I,A,D)``.',
 			'Dependencies count' - 'Includes direct entity relations plus calls or dynamic updates to predicates in external objects or categories.'
 		]
 	]).
@@ -42,7 +43,7 @@
 		append/2, length/2, member/2, memberchk/2
 	]).
 
-	entity_score(Entity, ce_ca_i_a(Efferent,Afferent,Instability,Abstractness)) :-
+	entity_score(Entity, ce_ca_i_a_d(Efferent,Afferent,Instability,Abstractness,Distance)) :-
 		(	var(Entity) ->
 			^^current_entity(Entity)
 		;	true
@@ -54,7 +55,8 @@
 			Instability = 0.0
 		;	Instability is float(Efferent / (Efferent + Afferent))
 		),
-		abstractness(Kind, Entity, Abstractness).
+		abstractness(Kind, Entity, Abstractness),
+		Distance is abs(Abstractness + Instability - 1.0).
 
 	% efferent coupling
 
@@ -226,10 +228,11 @@
 		% but no explicit self updates
 		Entity \= Object.
 
-	format_entity_score(_Entity, ce_ca_i_a(Efferent,Afferent,Instability,Abstractness)) -->
+	format_entity_score(_Entity, ce_ca_i_a_d(Efferent,Afferent,Instability,Abstractness,Distance)) -->
 		['Efferent coupling: ~w'-[Efferent], nl],
 		['Afferent coupling: ~w'-[Afferent], nl],
 		['Instability: ~w'-[Instability], nl],
-		['Abstractness: ~w'-[Abstractness], nl].
+		['Abstractness: ~w'-[Abstractness], nl],
+		['Distance from main sequence: ~w'-[Distance], nl].
 
 :- end_object.
