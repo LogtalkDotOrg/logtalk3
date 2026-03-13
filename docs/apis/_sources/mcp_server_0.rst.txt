@@ -14,8 +14,8 @@ MCP (Model Context Protocol) server for Logtalk applications. Exposes Logtalk ob
 |    ``logtalk_load(mcp_server(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:5:0
-| **Date:** 2026-02-24
+| **Version:** 0:5:1
+| **Date:** 2026-03-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -161,8 +161,13 @@ Private predicates
 ``initialized_/0``
 ^^^^^^^^^^^^^^^^^^
 
+Flag indicating that the server has been initialized.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``initialized_`` - ``zero_or_one``
 
 
 ------------
@@ -173,8 +178,15 @@ Private predicates
 ``application_/1``
 ^^^^^^^^^^^^^^^^^^
 
+Current application object.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``application_(Application)``
+| **Mode and number of proofs:**
+|    ``application_(?object_identifier)`` - ``zero_or_one``
 
 
 ------------
@@ -185,8 +197,15 @@ Private predicates
 ``server_name_/1``
 ^^^^^^^^^^^^^^^^^^
 
+Current server name.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``server_name_(Name)``
+| **Mode and number of proofs:**
+|    ``server_name_(?atom)`` - ``zero_or_one``
 
 
 ------------
@@ -197,8 +216,15 @@ Private predicates
 ``server_version_/1``
 ^^^^^^^^^^^^^^^^^^^^^
 
+Current server version.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``server_version_(Version)``
+| **Mode and number of proofs:**
+|    ``server_version_(?atom)`` - ``zero_or_one``
 
 
 ------------
@@ -209,8 +235,15 @@ Private predicates
 ``server_title_/1``
 ^^^^^^^^^^^^^^^^^^^
 
+Current server display title.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``server_title_(Title)``
+| **Mode and number of proofs:**
+|    ``server_title_(?atom)`` - ``zero_or_one``
 
 
 ------------
@@ -221,8 +254,15 @@ Private predicates
 ``elicit_counter_/1``
 ^^^^^^^^^^^^^^^^^^^^^
 
+Counter for elicitation request identifiers.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``elicit_counter_(Counter)``
+| **Mode and number of proofs:**
+|    ``elicit_counter_(?integer)`` - ``zero_or_one``
 
 
 ------------
@@ -233,8 +273,15 @@ Private predicates
 ``application_capabilities_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Cached application capabilities list.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``application_capabilities_(Capabilities)``
+| **Mode and number of proofs:**
+|    ``application_capabilities_(?list)`` - ``zero_or_one``
 
 
 ------------

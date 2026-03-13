@@ -15,7 +15,7 @@ Intercepts unit test execution messages and generates a ``lcov.info`` file with 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-27
+| **Date:** 2026-03-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -56,8 +56,15 @@ Private predicates
 ``entity_file_/2``
 ^^^^^^^^^^^^^^^^^^
 
+Table of entity source files.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``entity_file_(Entity,File)``
+| **Mode and number of proofs:**
+|    ``entity_file_(?entity_identifier,?atom)`` - ``zero_or_more``
 
 
 ------------
@@ -68,8 +75,15 @@ Private predicates
 ``predicate_coverage_/7``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of predicate coverage data.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``predicate_coverage_(Entity,Predicate,Line,Covered,Total,Percentage,Clauses)``
+| **Mode and number of proofs:**
+|    ``predicate_coverage_(?entity_identifier,?predicate_indicator,?integer,?integer,?integer,?float,?list)`` - ``zero_or_more``
 
 
 ------------

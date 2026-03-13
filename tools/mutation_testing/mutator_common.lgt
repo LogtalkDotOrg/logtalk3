@@ -20,7 +20,7 @@
 	:- protected(print_mutation/3).
 	:- mode(print_mutation(+boolean, @callable, @callable), one).
 	:- info(print_mutation/3, [
-		comment is 'Prints a term and its mutation when ``Flag`` is true. Succeeds otherwise',
+		comment is 'Prints a term and its mutation when ``Flag`` is true. Succeeds otherwise.',
 		argnames is ['Flag', 'Original', 'Mutation']
 	]).
 
@@ -47,12 +47,26 @@
 
 	:- private(current_predicate_clause_index_/2).
 	:- dynamic(current_predicate_clause_index_/2).
+	:- mode(current_predicate_clause_index_(?predicate_indicator, ?integer), zero_or_one).
+	:- info(current_predicate_clause_index_/2, [
+		comment is 'Table of current clause indexes per predicate.',
+		argnames is ['Predicate', 'ClauseIndex']
+	]).
 
 	:- private(update_target_predicate_clause_index_/2).
 	:- mode(update_target_predicate_clause_index_(@predicate_indicator, -integer), one).
+	:- info(update_target_predicate_clause_index_/2, [
+		comment is 'Updates and returns the next clause index for the given predicate.',
+		argnames is ['Predicate', 'ClauseIndex']
+	]).
 
 	:- private(seen_/1).
 	:- dynamic(seen_/1).
+	:- mode(seen_(?integer), zero_or_one).
+	:- info(seen_/1, [
+		comment is 'Table of last seen mutation occurrence.',
+		argnames is ['Occurrence']
+	]).
 
 	reset :-
 		::retractall(current_predicate_clause_index_(_, _)),

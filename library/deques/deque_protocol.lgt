@@ -25,7 +25,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-02-08,
-		comment is 'Extracted protocol entity'
+		comment is 'Extracted protocol entity.'
 	]).
 
 	:- public(empty/1).

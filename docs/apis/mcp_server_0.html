@@ -254,8 +254,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:5:0</div>
-<div class="line"><strong>Date:</strong> 2026-02-24</div>
+<div class="line"><strong>Version:</strong> 0:5:1</div>
+<div class="line"><strong>Date:</strong> 2026-03-13</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -441,70 +441,143 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <section id="initialized-0">
 <span id="mcp-server-0-initialized-0"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">initialized_/0</span></code></a><a class="headerlink" href="#initialized-0" title="Link to this heading"></a></h3>
+<p>Flag indicating that the server has been initialized.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">initialized_</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="application-1">
 <span id="mcp-server-0-application-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">application_/1</span></code></a><a class="headerlink" href="#application-1" title="Link to this heading"></a></h3>
+<p>Current application object.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">application_(Application)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">application_(?object_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="server-name-1">
 <span id="mcp-server-0-server-name-1"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">server_name_/1</span></code></a><a class="headerlink" href="#server-name-1" title="Link to this heading"></a></h3>
+<p>Current server name.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">server_name_(Name)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">server_name_(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="server-version-1">
 <span id="mcp-server-0-server-version-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">server_version_/1</span></code></a><a class="headerlink" href="#server-version-1" title="Link to this heading"></a></h3>
+<p>Current server version.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">server_version_(Version)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">server_version_(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="server-title-1">
 <span id="mcp-server-0-server-title-1"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">server_title_/1</span></code></a><a class="headerlink" href="#server-title-1" title="Link to this heading"></a></h3>
+<p>Current server display title.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">server_title_(Title)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">server_title_(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="elicit-counter-1">
 <span id="mcp-server-0-elicit-counter-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">elicit_counter_/1</span></code></a><a class="headerlink" href="#elicit-counter-1" title="Link to this heading"></a></h3>
+<p>Counter for elicitation request identifiers.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">elicit_counter_(Counter)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">elicit_counter_(?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="application-capabilities-1">
 <span id="mcp-server-0-application-capabilities-1"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">application_capabilities_/1</span></code></a><a class="headerlink" href="#application-capabilities-1" title="Link to this heading"></a></h3>
+<p>Cached application capabilities list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">application_capabilities_(Capabilities)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">application_capabilities_(?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </section>

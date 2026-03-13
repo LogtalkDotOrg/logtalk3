@@ -13,7 +13,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-03-07,
-		comment is 'Mutator protocol'
+		comment is 'Mutator protocol.'
 	]).
 
 	:- public(reset/0).

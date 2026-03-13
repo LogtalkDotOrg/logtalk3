@@ -50,7 +50,7 @@ Protected predicates
 ``print_mutation/3``
 ^^^^^^^^^^^^^^^^^^^^
 
-Prints a term and its mutation when ``Flag`` is true. Succeeds otherwise
+Prints a term and its mutation when ``Flag`` is true. Succeeds otherwise.
 
 | **Compilation flags:**
 |    ``static``
@@ -129,8 +129,15 @@ Private predicates
 ``current_predicate_clause_index_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of current clause indexes per predicate.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``current_predicate_clause_index_(Predicate,ClauseIndex)``
+| **Mode and number of proofs:**
+|    ``current_predicate_clause_index_(?predicate_indicator,?integer)`` - ``zero_or_one``
 
 
 ------------
@@ -141,9 +148,13 @@ Private predicates
 ``update_target_predicate_clause_index_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Updates and returns the next clause index for the given predicate.
+
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``update_target_predicate_clause_index_(Predicate,ClauseIndex)``
 | **Mode and number of proofs:**
 |    ``update_target_predicate_clause_index_(@predicate_indicator,-integer)`` - ``one``
 
@@ -156,8 +167,15 @@ Private predicates
 ``seen_/1``
 ^^^^^^^^^^^
 
+Table of last seen mutation occurrence.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``seen_(Occurrence)``
+| **Mode and number of proofs:**
+|    ``seen_(?integer)`` - ``zero_or_one``
 
 
 ------------

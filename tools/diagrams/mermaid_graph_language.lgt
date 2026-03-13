@@ -44,6 +44,11 @@
 
 	:- private(edge_index_/1).
 	:- dynamic(edge_index_/1).
+	:- mode(edge_index_(?integer), zero_or_one).
+	:- info(edge_index_/1, [
+		comment is 'Current edge index counter.',
+		argnames is ['Index']
+	]).
 
 	:- multifile(graph_language_registry::language_object/2).
 	:- if(current_logtalk_flag(prolog_dialect, qp)).

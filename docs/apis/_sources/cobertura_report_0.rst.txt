@@ -15,7 +15,7 @@ Intercepts unit test execution messages and generates a ``cobertura.xml`` file w
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-02-27
+| **Date:** 2026-03-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -56,8 +56,15 @@ Private predicates
 ``timestamp_/6``
 ^^^^^^^^^^^^^^^^
 
+Test start date and time.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``timestamp_(Year,Month,Day,Hours,Minutes,Seconds)``
+| **Mode and number of proofs:**
+|    ``timestamp_(?integer,?integer,?integer,?integer,?integer,?integer)`` - ``zero_or_one``
 
 
 ------------
@@ -68,8 +75,15 @@ Private predicates
 ``class_/5``
 ^^^^^^^^^^^^
 
+Table of entity coverage data.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``class_(Entity,File,Line,Covered,Total)``
+| **Mode and number of proofs:**
+|    ``class_(?entity_identifier,?atom,?integer,?integer,?integer)`` - ``zero_or_more``
 
 
 ------------
@@ -80,8 +94,15 @@ Private predicates
 ``method_/7``
 ^^^^^^^^^^^^^
 
+Table of predicate coverage data.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``method_(Entity,Predicate,Line,Covered,Total,Percentage,Clauses)``
+| **Mode and number of proofs:**
+|    ``method_(?entity_identifier,?predicate_indicator,?integer,?integer,?integer,?float,?list)`` - ``zero_or_more``
 
 
 ------------
@@ -92,8 +113,15 @@ Private predicates
 ``lines_covered_/1``
 ^^^^^^^^^^^^^^^^^^^^
 
+Counter for total covered lines.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``lines_covered_(Covered)``
+| **Mode and number of proofs:**
+|    ``lines_covered_(?integer)`` - ``zero_or_one``
 
 
 ------------
@@ -104,8 +132,15 @@ Private predicates
 ``lines_total_/1``
 ^^^^^^^^^^^^^^^^^^
 
+Counter for total lines.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``lines_total_(Total)``
+| **Mode and number of proofs:**
+|    ``lines_total_(?integer)`` - ``zero_or_one``
 
 
 ------------
@@ -116,8 +151,15 @@ Private predicates
 ``summary_/2``
 ^^^^^^^^^^^^^^
 
+Coverage summary with covered and total entity counts.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``summary_(Covered,Total)``
+| **Mode and number of proofs:**
+|    ``summary_(?integer,?integer)`` - ``zero_or_one``
 
 
 ------------

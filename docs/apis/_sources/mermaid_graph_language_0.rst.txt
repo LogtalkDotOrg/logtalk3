@@ -62,8 +62,15 @@ Private predicates
 ``edge_index_/1``
 ^^^^^^^^^^^^^^^^^
 
+Current edge index counter.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``edge_index_(Index)``
+| **Mode and number of proofs:**
+|    ``edge_index_(?integer)`` - ``zero_or_one``
 
 
 ------------

@@ -35,7 +35,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-27,
+		date is 2026-03-13,
 		comment is 'Intercepts unit test execution messages and generates a ``lcov.info`` file with code coverage results.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(lcov_report))``.'
@@ -44,9 +44,19 @@
 
 	:- private(entity_file_/2).
 	:- dynamic(entity_file_/2).
+	:- mode(entity_file_(?entity_identifier, ?atom), zero_or_more).
+	:- info(entity_file_/2, [
+		comment is 'Table of entity source files.',
+		argnames is ['Entity', 'File']
+	]).
 
 	:- private(predicate_coverage_/7).
 	:- dynamic(predicate_coverage_/7).
+	:- mode(predicate_coverage_(?entity_identifier, ?predicate_indicator, ?integer, ?integer, ?integer, ?float, ?list), zero_or_more).
+	:- info(predicate_coverage_/7, [
+		comment is 'Table of predicate coverage data.',
+		argnames is ['Entity', 'Predicate', 'Line', 'Covered', 'Total', 'Percentage', 'Clauses']
+	]).
 
 	% intercept all messages from the "lgtunit" object while running tests
 

@@ -35,7 +35,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-27,
+		date is 2026-03-13,
 		comment is 'Intercepts unit test execution messages and generates a ``cobertura.xml`` file with code coverage results.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(cobertura_report))``.'
@@ -44,21 +44,51 @@
 
 	:- private(timestamp_/6).
 	:- dynamic(timestamp_/6).
+	:- mode(timestamp_(?integer, ?integer, ?integer, ?integer, ?integer, ?integer), zero_or_one).
+	:- info(timestamp_/6, [
+		comment is 'Test start date and time.',
+		argnames is ['Year', 'Month', 'Day', 'Hours', 'Minutes', 'Seconds']
+	]).
 
 	:- private(class_/5).
 	:- dynamic(class_/5).
+	:- mode(class_(?entity_identifier, ?atom, ?integer, ?integer, ?integer), zero_or_more).
+	:- info(class_/5, [
+		comment is 'Table of entity coverage data.',
+		argnames is ['Entity', 'File', 'Line', 'Covered', 'Total']
+	]).
 
 	:- private(method_/7).
 	:- dynamic(method_/7).
+	:- mode(method_(?entity_identifier, ?predicate_indicator, ?integer, ?integer, ?integer, ?float, ?list), zero_or_more).
+	:- info(method_/7, [
+		comment is 'Table of predicate coverage data.',
+		argnames is ['Entity', 'Predicate', 'Line', 'Covered', 'Total', 'Percentage', 'Clauses']
+	]).
 
 	:- private(lines_covered_/1).
 	:- dynamic(lines_covered_/1).
+	:- mode(lines_covered_(?integer), zero_or_one).
+	:- info(lines_covered_/1, [
+		comment is 'Counter for total covered lines.',
+		argnames is ['Covered']
+	]).
 
 	:- private(lines_total_/1).
 	:- dynamic(lines_total_/1).
+	:- mode(lines_total_(?integer), zero_or_one).
+	:- info(lines_total_/1, [
+		comment is 'Counter for total lines.',
+		argnames is ['Total']
+	]).
 
 	:- private(summary_/2).
 	:- dynamic(summary_/2).
+	:- mode(summary_(?integer, ?integer), zero_or_one).
+	:- info(summary_/2, [
+		comment is 'Coverage summary with covered and total entity counts.',
+		argnames is ['Covered', 'Total']
+	]).
 
 	% intercept all messages from the "lgtunit" object while running tests
 

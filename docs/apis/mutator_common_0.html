@@ -324,7 +324,7 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <section id="print-mutation-3">
 <span id="mutator-common-0-print-mutation-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">print_mutation/3</span></code></a><a class="headerlink" href="#print-mutation-3" title="Link to this heading"></a></h3>
-<p>Prints a term and its mutation when <code class="docutils literal notranslate"><span class="pre">Flag</span></code> is true. Succeeds otherwise</p>
+<p>Prints a term and its mutation when <code class="docutils literal notranslate"><span class="pre">Flag</span></code> is true. Succeeds otherwise.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -411,16 +411,28 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <section id="current-predicate-clause-index-2">
 <span id="mutator-common-0-current-predicate-clause-index-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">current_predicate_clause_index_/2</span></code></a><a class="headerlink" href="#current-predicate-clause-index-2" title="Link to this heading"></a></h3>
+<p>Table of current clause indexes per predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">current_predicate_clause_index_(Predicate,ClauseIndex)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">current_predicate_clause_index_(?predicate_indicator,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="update-target-predicate-clause-index-2">
 <span id="mutator-common-0-update-target-predicate-clause-index-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">update_target_predicate_clause_index_/2</span></code></a><a class="headerlink" href="#update-target-predicate-clause-index-2" title="Link to this heading"></a></h3>
+<p>Updates and returns the next clause index for the given predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -428,6 +440,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update_target_predicate_clause_index_(Predicate,ClauseIndex)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">update_target_predicate_clause_index_(&#64;predicate_indicator,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -437,10 +453,21 @@
 </section>
 <section id="seen-1">
 <span id="mutator-common-0-seen-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seen_/1</span></code></a><a class="headerlink" href="#seen-1" title="Link to this heading"></a></h3>
+<p>Table of last seen mutation occurrence.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seen_(Occurrence)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seen_(?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </section>

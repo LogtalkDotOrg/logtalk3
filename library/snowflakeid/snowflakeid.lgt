@@ -23,9 +23,9 @@
 	implements(snowflakeid_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-03-13,
 		comment is 'Snowflake ID generic generator.',
 		parameters is [
 			'Representation' - 'Snowflake ID representation. Possible values are ``integer``, ``atom``, ``chars``, and ``codes``.',
@@ -52,6 +52,11 @@
 
 	:- private(last_time_sequence_/2).
 	:- dynamic(last_time_sequence_/2).
+	:- mode(last_time_sequence_(?integer, ?integer), zero_or_one).
+	:- info(last_time_sequence_/2, [
+		comment is 'Last time and sequence.',
+		argnames is ['Time', 'Sequence']
+	]).
 
 	generate(ID) :-
 		context(Context),

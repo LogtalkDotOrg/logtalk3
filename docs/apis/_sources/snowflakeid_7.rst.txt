@@ -23,8 +23,8 @@ Snowflake ID generic generator.
 |    ``logtalk_load(snowflakeid(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-26
+| **Version:** 1:0:1
+| **Date:** 2026-03-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -65,8 +65,15 @@ Private predicates
 ``last_time_sequence_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Last time and sequence.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``last_time_sequence_(Time,Sequence)``
+| **Mode and number of proofs:**
+|    ``last_time_sequence_(?integer,?integer)`` - ``zero_or_one``
 
 
 ------------

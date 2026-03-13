@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:5:1,
 		author is 'Paulo Moura',
-		date is 2026-02-24,
+		date is 2026-03-13,
 		comment is 'MCP (Model Context Protocol) server for Logtalk applications. Exposes Logtalk objects implementing the ``mcp_tool_protocol`` and optionally ``mcp_prompt_protocol`` and ``mcp_resource_protocol`` protocols as MCP tool, prompt, and resource providers over stdio transport with Content-Length framing. Implements the MCP 2025-03-26 specification. Uses the ``json_rpc`` library for JSON-RPC 2.0 message handling.',
 		remarks is [
 			'MCP specification' - 'Implements the Model Context Protocol 2025-03-26: https://spec.modelcontextprotocol.io/specification/2025-03-26/',
@@ -78,24 +78,58 @@
 
 	:- private(initialized_/0).
 	:- dynamic(initialized_/0).
+	:- mode(initialized_, zero_or_one).
+	:- info(initialized_/0, [
+		comment is 'Flag indicating that the server has been initialized.'
+	]).
 
 	:- private(application_/1).
 	:- dynamic(application_/1).
+	:- mode(application_(?object_identifier), zero_or_one).
+	:- info(application_/1, [
+		comment is 'Current application object.',
+		argnames is ['Application']
+	]).
 
 	:- private(server_name_/1).
 	:- dynamic(server_name_/1).
+	:- mode(server_name_(?atom), zero_or_one).
+	:- info(server_name_/1, [
+		comment is 'Current server name.',
+		argnames is ['Name']
+	]).
 
 	:- private(server_version_/1).
 	:- dynamic(server_version_/1).
+	:- mode(server_version_(?atom), zero_or_one).
+	:- info(server_version_/1, [
+		comment is 'Current server version.',
+		argnames is ['Version']
+	]).
 
 	:- private(server_title_/1).
 	:- dynamic(server_title_/1).
+	:- mode(server_title_(?atom), zero_or_one).
+	:- info(server_title_/1, [
+		comment is 'Current server display title.',
+		argnames is ['Title']
+	]).
 
 	:- private(elicit_counter_/1).
 	:- dynamic(elicit_counter_/1).
+	:- mode(elicit_counter_(?integer), zero_or_one).
+	:- info(elicit_counter_/1, [
+		comment is 'Counter for elicitation request identifiers.',
+		argnames is ['Counter']
+	]).
 
 	:- private(application_capabilities_/1).
 	:- dynamic(application_capabilities_/1).
+	:- mode(application_capabilities_(?list), zero_or_one).
+	:- info(application_capabilities_/1, [
+		comment is 'Cached application capabilities list.',
+		argnames is ['Capabilities']
+	]).
 
 	:- uses(json_rpc, [
 		request/4, response/3, error_response/4, method_not_found/2, invalid_params/2, is_request/1,

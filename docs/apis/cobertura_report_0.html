@@ -270,7 +270,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-02-27</div>
+<div class="line"><strong>Date:</strong> 2026-03-13</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -331,60 +331,126 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <section id="timestamp-6">
 <span id="cobertura-report-0-timestamp-6"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">timestamp_/6</span></code></a><a class="headerlink" href="#timestamp-6" title="Link to this heading"></a></h3>
+<p>Test start date and time.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">timestamp_(Year,Month,Day,Hours,Minutes,Seconds)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">timestamp_(?integer,?integer,?integer,?integer,?integer,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="class-5">
 <span id="cobertura-report-0-class-5"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">class_/5</span></code></a><a class="headerlink" href="#class-5" title="Link to this heading"></a></h3>
+<p>Table of entity coverage data.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">class_(Entity,File,Line,Covered,Total)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">class_(?entity_identifier,?atom,?integer,?integer,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="method-7">
 <span id="cobertura-report-0-method-7"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">method_/7</span></code></a><a class="headerlink" href="#method-7" title="Link to this heading"></a></h3>
+<p>Table of predicate coverage data.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">method_(Entity,Predicate,Line,Covered,Total,Percentage,Clauses)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">method_(?entity_identifier,?predicate_indicator,?integer,?integer,?integer,?float,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="lines-covered-1">
 <span id="cobertura-report-0-lines-covered-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">lines_covered_/1</span></code></a><a class="headerlink" href="#lines-covered-1" title="Link to this heading"></a></h3>
+<p>Counter for total covered lines.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lines_covered_(Covered)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lines_covered_(?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="lines-total-1">
 <span id="cobertura-report-0-lines-total-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">lines_total_/1</span></code></a><a class="headerlink" href="#lines-total-1" title="Link to this heading"></a></h3>
+<p>Counter for total lines.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lines_total_(Total)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lines_total_(?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="summary-2">
 <span id="cobertura-report-0-summary-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">summary_/2</span></code></a><a class="headerlink" href="#summary-2" title="Link to this heading"></a></h3>
+<p>Coverage summary with covered and total entity counts.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">summary_(Covered,Total)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">summary_(?integer,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </section>
