@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 3:13:0,
+		version is 3:14:0,
 		author is 'Paulo Moura',
-		date is 2026-03-12,
+		date is 2026-03-13,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -291,6 +291,11 @@
 		write(Stream, End),
 		write(Stream, '" ['),
 		write_key_value_comma(Stream, arrowhead, ArrowHead),
+		(	member(color(Color), Options) ->
+			write_key_value_comma(Stream, color, Color),
+			write_key_value_comma(Stream, fontcolor, Color)
+		;	true
+		),
 		(	^^option(url(URL), Options),
 			URL \== '' ->
 			write_key_value_comma(Stream, 'URL', URL),

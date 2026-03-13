@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 3:17:0,
+		version is 3:18:0,
 		author is 'Paulo Moura',
-		date is 2026-03-12,
+		date is 2026-03-13,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -713,6 +713,8 @@
 		valid(one_of(atom, [bitbucket,github,gitlab]), Provider).
 	valid_option(metrics_overlay(Boolean)) :-
 		valid(boolean, Boolean).
+	valid_option(cycle_detection(Boolean)) :-
+		valid(boolean, Boolean).
 
 	fix_option(url_prefixes(CodePrefix0, DocPrefix0), url_prefixes(CodePrefix, DocPrefix)) :-
 		normalize_url_prefixes([CodePrefix0, DocPrefix0], [CodePrefix, DocPrefix]).
@@ -862,7 +864,8 @@
 	reset :-
 		::retractall(node_(_, _, _, _, _, _)),
 		::retractall(edge_(_, _, _, _, _)),
-		retractall(node_path_(_, _)).
+		retractall(node_path_(_, _)),
+		retractall(cycle_edge_(_, _)).
 
 	:- protected(output_node/6).
 	:- mode(output_node(+nonvar, +nonvar, +nonvar, +list(nonvar), +atom, +list(compound)), one).
@@ -933,6 +936,14 @@
 		argnames is ['From', 'To', 'Labels', 'Kind', 'Options']
 	]).
 
+	:- private(cycle_edge_/2).
+	:- dynamic(cycle_edge_/2).
+	:- mode(cycle_edge_(?nonvar, ?nonvar), zero_or_more).
+	:- info(cycle_edge_/2, [
+		comment is 'Table of edges that are part of a cycle.',
+		argnames is ['From', 'To']
+	]).
+
 	:- protected(output_edges/1).
 	:- mode(output_edges(+list(compound)), one).
 	:- info(output_edges/1, [
@@ -943,13 +954,19 @@
 	output_edges(Options) :-
 		^^option(externals(Externals), Options),
 		format_object(Format),
-		output_edges(Externals, Format).
+		(	member(cycle_detection(true), Options) ->
+			detect_cycle_edges
+		;	true
+		),
+		output_edges(Externals, Format),
+		retractall(cycle_edge_(_, _)).
 
 	output_edges(true, Format) :-
 		::retract(edge_(From, To, Labels, Kind, EdgeOptions)),
 		node_path(From, FromPath),
 		node_path(To, ToPath),
-		Format::edge(diagram_output_file, FromPath-From, ToPath-To, Labels, Kind, EdgeOptions),
+		add_cycle_edge_option(From, To, EdgeOptions, FinalOptions),
+		Format::edge(diagram_output_file, FromPath-From, ToPath-To, Labels, Kind, FinalOptions),
 		fail.
 	output_edges(false, Format) :-
 		::retract(edge_(From, To, Labels, Kind, EdgeOptions)),
@@ -957,9 +974,30 @@
 		\+ external_node_kind(ToKind),
 		node_path(From, FromPath),
 		node_path(To, ToPath),
-		Format::edge(diagram_output_file, FromPath-From, ToPath-To, Labels, Kind, EdgeOptions),
+		add_cycle_edge_option(From, To, EdgeOptions, FinalOptions),
+		Format::edge(diagram_output_file, FromPath-From, ToPath-To, Labels, Kind, FinalOptions),
 		fail.
 	output_edges(_, _).
+
+	detect_cycle_edges :-
+		::edge_(From, To, _, _, _),
+		has_path(To, From, [To]),
+		\+ cycle_edge_(From, To),
+		assertz(cycle_edge_(From, To)),
+		fail.
+	detect_cycle_edges.
+
+	has_path(From, To, _Visited) :-
+		::edge_(From, To, _, _, _).
+	has_path(From, To, Visited) :-
+		::edge_(From, Mid, _, _, _),
+		\+ member(Mid, Visited),
+		has_path(Mid, To, [Mid| Visited]).
+
+	add_cycle_edge_option(From, To, Options, [color(red)| Options]) :-
+		cycle_edge_(From, To),
+		!.
+	add_cycle_edge_option(_, _, Options, Options).
 
 	external_node_kind(external_prototype).
 	external_node_kind(external_class).

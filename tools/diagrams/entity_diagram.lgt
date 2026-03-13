@@ -23,9 +23,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2:62:0,
+		version is 2:63:0,
 		author is 'Paulo Moura',
-		date is 2026-03-12,
+		date is 2026-03-13,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), caller_diagram(_), xref_diagram(_), library_diagram(_)]
@@ -926,6 +926,8 @@
 	default_option(zoom_url_suffix('.svg')).
 	% by default, don't show coupling metrics overlay:
 	default_option(metrics_overlay(false)).
+	% by default, don't highlight cyclic relations:
+	default_option(cycle_detection(false)).
 
 	diagram_description('Entity diagram').
 

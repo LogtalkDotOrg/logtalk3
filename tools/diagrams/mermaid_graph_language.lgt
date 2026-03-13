@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2026-03-12,
+		date is 2026-03-13,
 		comment is 'Predicates for generating graph files using Mermaid.'
 	]).
 
@@ -42,6 +42,9 @@
 		atomic_list_concat/2
 	]).
 
+	:- private(edge_index_/1).
+	:- dynamic(edge_index_/1).
+
 	:- multifile(graph_language_registry::language_object/2).
 	:- if(current_logtalk_flag(prolog_dialect, qp)).
 		:- dynamic(graph_language_registry::language_object/2).
@@ -52,6 +55,8 @@
 		atom_concat(Name, '.html', File).
 
 	file_header(Stream, _Identifier, Options) :-
+		retractall(edge_index_(_)),
+		asserta(edge_index_(0)),
 		write(Stream, '<html>\n<body>\n'),
 		write(Stream, '<script type="module">\nimport mermaid from \'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs\';\nmermaid.initialize({ securityLevel: \'loose\', startOnLoad: true });\n</script>\n'),
 		write(Stream, '<pre class="mermaid">\n'),
@@ -241,6 +246,9 @@
 	node_shape_style_color(external_predicate, box, dashed, '#f5f5dc').
 
 	edge(Stream, Start, End, Labels, Kind, Options) :-
+		retract(edge_index_(N)),
+		N1 is N + 1,
+		asserta(edge_index_(N1)),
 		write_vertex(Start, Stream),
 		write(Stream, ' '),
 		edge_arrow(Kind, ArrowHead),
@@ -265,6 +273,15 @@
 				write(Stream, '"')
 			;	true
 			),
+			nl(Stream)
+		;	true
+		),
+		(	member(color(Color), Options) ->
+			write(Stream, 'linkStyle '),
+			write(Stream, N),
+			write(Stream, ' stroke:'),
+			write(Stream, Color),
+			write(Stream, ',stroke-width:2px'),
 			nl(Stream)
 		;	true
 		).

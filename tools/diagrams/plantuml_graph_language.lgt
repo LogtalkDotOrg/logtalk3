@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-03-12,
+		date is 2026-03-13,
 		comment is 'Predicates for generating diagrams in PlantUML format.'
 	]).
 
@@ -346,10 +346,16 @@
 	edge(Stream, _-Start, _-End, Labels, Kind, Options) :-
 		!,
 		edge(Stream, Start, End, Labels, Kind, Options).
-	edge(Stream, Start, End, Labels, Kind, _Options) :-
+	edge(Stream, Start, End, Labels, Kind, Options) :-
 		edge_arrow(Kind, Arrow, RelLabel),
 		write_identifier(Stream, Start),
 		write(Stream, ' '),
+		(	member(color(Color), Options) ->
+			write(Stream, '[#'),
+			write(Stream, Color),
+			write(Stream, ']')
+		;	true
+		),
 		write(Stream, Arrow),
 		write(Stream, ' '),
 		write_identifier(Stream, End),

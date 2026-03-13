@@ -70,7 +70,11 @@ Tools
 * ADDED: Support for caller diagrams to the `diagrams` tool.
 
 * ADDED: Support to the `diagrams` tool for coupling metrics overlay in entity
-nodes.
+nodes depending on the new `metrics_overlay(Boolean)` option.
+
+* ADDED: Support to the `diagrams` tool for highlighting cyclic relations in
+directory dependency diagrams, library dependency diagrams, and entity diagrams
+by coloring edges red depending on the new `cycle_detection(Boolean)` option.
 
 * ADDED: Support to the `diagrams` tool for exporting diagrams in the Cytoscape
 Exchange (CX2) JSON format.

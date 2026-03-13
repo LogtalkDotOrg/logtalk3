@@ -374,6 +374,9 @@ generated diagrams. For entity diagrams, the options are:
 - `metrics_overlay(Boolean)`  
 	print coupling metrics overlay in entity nodes showing afferent coupling (Ca), efferent coupling (Ce), instability (I), and abstractness (A) values (`true` or `false`; default is `false`)
 
+- `cycle_detection(Boolean)`  
+	highlight cyclic relations by coloring the edges red (`true` or `false`; default is `false`)
+
 - `inheritance_relations(Boolean)`  
 	print inheritance relations (`true` or `false`; default is `true` for entity inheritance diagrams and `false` for other entity diagrams)
 
@@ -484,6 +487,11 @@ For directory and file diagrams, the options are:
 - `zoom_url_suffix(Suffix)`  
 	extension for linked diagrams (an atom; default is `'.svg'`)
 
+For directory dependency diagrams, there is also the option:
+
+- `cycle_detection(Boolean)`  
+	highlight cyclic relations by coloring the edges red (`true` or `false`; default is `false`)
+
 For library diagrams, the options are:
 
 - `layout(Layout)`  
@@ -536,6 +544,11 @@ For library diagrams, the options are:
 
 - `zoom_url_suffix(Suffix)`  
 	extension for linked diagrams (an atom; default is `'.svg'`)
+
+For library dependency diagrams, there is also the option:
+
+- `cycle_detection(Boolean)`  
+	highlight cyclic relations by coloring the edges red (`true` or `false`; default is `false`)
 
 When using the `zoom(true)` option, the `layout(Layout)` option applies only
 to the top diagram; sub-diagrams will use their own layout default.

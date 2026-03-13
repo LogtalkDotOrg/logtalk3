@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-03-12,
+		date is 2026-03-13,
 		comment is 'Predicates for generating diagram files in the Cytoscape Exchange (CX2) JSON format.'
 	]).
 
@@ -319,7 +319,11 @@
 		before_edge(Stream),
 		ensure_node_id(Start, StartId),
 		ensure_node_id(End, EndId),
-		once(edge_style(Kind, EdgeColor, LineStyle)),
+		once(edge_style(Kind, EdgeColor0, LineStyle)),
+		(	member(color(Color), Options) ->
+			EdgeColor = Color
+		;	EdgeColor = EdgeColor0
+		),
 		retract(edge_counter_(N)),
 		N1 is N + 1,
 		assertz(edge_counter_(N1)),

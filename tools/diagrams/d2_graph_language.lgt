@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2026-03-12,
+		date is 2026-03-13,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -256,6 +256,10 @@
 		write(Stream, '" {\n'),
 		write_key_value(Stream, 'target-arrowhead.shape', ArrowHead),
 		write_key_value(Stream, 'target-arrowhead.style.filled', Filled),
+		(	member(color(Color), Options) ->
+			write_key_value(Stream, 'style.stroke', Color)
+		;	true
+		),
 		(	^^option(url(URL), Options),
 			URL \== '' ->
 			write_key_value_quoted(Stream, link, URL)

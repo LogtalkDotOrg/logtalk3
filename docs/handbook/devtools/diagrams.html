@@ -599,6 +599,12 @@ abstractness (A) values (<code class="docutils literal notranslate"><span class=
 </div>
 </li>
 <li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cycle_detection(Boolean)</span></code></div>
+<div class="line">highlight cyclic relations by coloring the edges red (<code class="docutils literal notranslate"><span class="pre">true</span></code> or
+<code class="docutils literal notranslate"><span class="pre">false</span></code>; default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">inheritance_relations(Boolean)</span></code></div>
 <div class="line">print inheritance relations (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default is
 <code class="docutils literal notranslate"><span class="pre">true</span></code> for entity inheritance diagrams and <code class="docutils literal notranslate"><span class="pre">false</span></code> for other
@@ -823,6 +829,12 @@ entity nodes (<code class="docutils literal notranslate"><span class="pre">true<
 </div>
 </li>
 </ul>
+<p>For directory dependency diagrams, there is also the option:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cycle_detection(Boolean)</span></code>
+highlight cyclic relations by coloring the edges red (<code class="docutils literal notranslate"><span class="pre">true</span></code> or
+<code class="docutils literal notranslate"><span class="pre">false</span></code>; default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
+</ul>
 <p>For library diagrams, the options are:</p>
 <ul>
 <li><div class="line-block">
@@ -927,6 +939,12 @@ entity nodes (<code class="docutils literal notranslate"><span class="pre">true<
 <div class="line">extension for linked diagrams (an atom; default is <code class="docutils literal notranslate"><span class="pre">'.svg'</span></code>)</div>
 </div>
 </li>
+</ul>
+<p>For library dependency diagrams, there is also the option:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cycle_detection(Boolean)</span></code>
+highlight cyclic relations by coloring the edges red (<code class="docutils literal notranslate"><span class="pre">true</span></code> or
+<code class="docutils literal notranslate"><span class="pre">false</span></code>; default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
 </ul>
 <p>When using the <code class="docutils literal notranslate"><span class="pre">zoom(true)</span></code> option, the <code class="docutils literal notranslate"><span class="pre">layout(Layout)</span></code> option
 applies only to the top diagram; sub-diagrams will use their own layout

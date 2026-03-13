@@ -17,8 +17,8 @@ Common predicates for generating diagrams.
 |    ``logtalk_load(diagrams(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 3:17:0
-| **Date:** 2026-03-12
+| **Version:** 3:18:0
+| **Date:** 2026-03-13
 
 | **Compilation flags:**
 |    ``static``
@@ -1112,6 +1112,25 @@ Table of saved edges.
 |    ``edge_(From,To,Labels,Kind,Options)``
 | **Mode and number of proofs:**
 |    ``edge_(?nonvar,?nonvar,?list(nonvar),?atom,?list(compound))`` - ``zero_or_more``
+
+
+------------
+
+.. index:: cycle_edge_/2
+.. _diagram/1::cycle_edge_/2:
+
+``cycle_edge_/2``
+^^^^^^^^^^^^^^^^^
+
+Table of edges that are part of a cycle.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``cycle_edge_(From,To)``
+| **Mode and number of proofs:**
+|    ``cycle_edge_(?nonvar,?nonvar)`` - ``zero_or_more``
 
 
 ------------
