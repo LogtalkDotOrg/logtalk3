@@ -40,6 +40,7 @@
 		lcom_metric,
 		wmc_metric,
 		rfc_metric,
+		cogc_metric,
 		code_metrics
 	], [
 		optimize(on)

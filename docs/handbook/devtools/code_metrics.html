@@ -80,6 +80,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#lack-of-cohesion-metric">Lack of cohesion metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#wmc-metric">WMC metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rfc-metric">RFC metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cognitive-complexity-metric">Cognitive complexity metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#halstead-metric">Halstead metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#upn-metric">UPN metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cyclomatic-complexity-metric">Cyclomatic complexity metric</a></li>
@@ -195,6 +196,7 @@ standard output. A second set of predicates computes and returns a score
 <li><p>Lack of cohesion of methods (<code class="docutils literal notranslate"><span class="pre">lcom_metric</span></code>)</p></li>
 <li><p>Weighted Methods per Class (<code class="docutils literal notranslate"><span class="pre">wmc_metric</span></code>)</p></li>
 <li><p>Response For a Class (<code class="docutils literal notranslate"><span class="pre">rfc_metric</span></code>)</p></li>
+<li><p>Cognitive complexity (<code class="docutils literal notranslate"><span class="pre">cogc_metric</span></code>)</p></li>
 <li><p>Documentation (<code class="docutils literal notranslate"><span class="pre">doc_metric</span></code>)</p></li>
 <li><p>Source code size (<code class="docutils literal notranslate"><span class="pre">size_metric</span></code>)</p></li>
 <li><p>Halstead complexity (<code class="docutils literal notranslate"><span class="pre">halstead_metric</span></code> and
@@ -347,6 +349,25 @@ footprints, which increases testing effort.</p>
 <span class="k">}</span>
 </pre></div>
 </div>
+</section>
+<section id="cognitive-complexity-metric">
+<h2>Cognitive complexity metric<a class="headerlink" href="#cognitive-complexity-metric" title="Link to this heading"></a></h2>
+<p>The cognitive complexity (<code class="docutils literal notranslate"><span class="pre">cogc_metric</span></code>) metric is an approximation of
+the Cognitive Complexity metric proposed by Campbell (2018). For each
+non-auxiliary predicate, the score contribution is the number of extra
+clauses (number of clauses minus one, representing multi-clause
+branching choices) plus one if the predicate is directly recursive (i.e.
+calls itself within the same entity). The entity score is the sum of all
+predicate contributions.</p>
+<p>A score of 0 means all predicates are single-clause and non-recursive.
+Higher scores indicate entities with more branching and recursion, which
+typically require more effort to understand and test.</p>
+<p><strong>Approximation note</strong>: the Logtalk reflection API does not expose the
+use of control constructs such as cuts, if-then-else, disjunction, or
+<code class="docutils literal notranslate"><span class="pre">catch/3</span></code> in the predicate clause bodies. Thus, these constructs
+cannot contribute to the score, which should be interpreted as a lower
+bound for the cognitive complexity of the entity.</p>
+<p>Protocols are not scored as they cannot define predicates.</p>
 </section>
 <section id="halstead-metric">
 <h2>Halstead metric<a class="headerlink" href="#halstead-metric" title="Link to this heading"></a></h2>

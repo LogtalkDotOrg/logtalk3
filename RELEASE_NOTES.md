@@ -69,8 +69,8 @@ Tools
 entity scores to include the Distance from Main Sequence metric value.
 
 * ADDED: Implementations of the Lack of Cohesion Of Methods (LCOM4), Weighted
-Methods per Class (WMC), and Response For a Class (RFC) metrics to the
-`code_metrics` tool.
+Methods per Class (WMC), Response For a Class (RFC), and Cognitive Complexity
+metrics to the `code_metrics` tool.
 
 * ADDED: New `mutation_testing` tool for mutation-based testing.
 

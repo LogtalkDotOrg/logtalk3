@@ -315,3 +315,66 @@
 	y.
 
 :- end_category.
+
+
+% Cognitive complexity metric test entities
+
+% single-clause predicate, no recursion: score = 0
+:- object(cogc_obj_1).
+
+	:- public(p/0).
+
+	p.
+
+:- end_object.
+
+
+% three-clause predicate, no recursion: (3-1) = 2; score = 2
+:- object(cogc_obj_2).
+
+	:- public(p/1).
+
+	p(a).
+	p(b).
+	p(c).
+
+:- end_object.
+
+
+% two-clause predicate with direct recursion: (2-1) + 1 = 2; score = 2
+:- object(cogc_obj_3).
+
+	:- public(p/1).
+
+	p([]).
+	p([_|T]) :- p(T).
+
+:- end_object.
+
+
+% a/0: 2 clauses, not recursive => 1
+% b/0: 1 clause, directly recursive => 1
+% total score = 2
+:- object(cogc_obj_4).
+
+	:- public([a/0, b/0]).
+
+	a.
+	a :- b.
+
+	b :- c, b.
+
+	c.
+
+:- end_object.
+
+
+% category: f/0 with 2 clauses, no recursion: score = 1
+:- category(cogc_cat_1).
+
+	:- public(f/1).
+
+	f(a).
+	f(b).
+
+:- end_category.

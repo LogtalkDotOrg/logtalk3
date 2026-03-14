@@ -73,6 +73,7 @@ Currently, the following metrics are provided:
 - Lack of cohesion of methods (`lcom_metric`)
 - Weighted Methods per Class (`wmc_metric`)
 - Response For a Class (`rfc_metric`)
+- Cognitive complexity (`cogc_metric`)
 - Documentation (`doc_metric`)
 - Source code size (`size_metric`)
 - Halstead complexity (`halstead_metric` and `halstead_metric(Stroud)`)
@@ -236,6 +237,29 @@ For more details on the RFC metric, see the original CK paper:
 		pages = "476--493",
 		year = 1994
 	}
+
+
+Cognitive complexity metric
+---------------------------
+
+The cognitive complexity (`cogc_metric`) metric is an approximation of the
+Cognitive Complexity metric proposed by Campbell (2018). For each non-auxiliary
+predicate, the score contribution is the number of extra clauses (number of
+clauses minus one, representing multi-clause branching choices) plus one if the
+predicate is directly recursive (i.e. calls itself within the same entity). The
+entity score is the sum of all predicate contributions.
+
+A score of 0 means all predicates are single-clause and non-recursive.
+Higher scores indicate entities with more branching and recursion, which
+typically require more effort to understand and test.
+
+**Approximation note**: the Logtalk reflection API does not expose the use of
+control constructs such as cuts, if-then-else, disjunction, or ``catch/3`` in
+the predicate clause bodies. Thus, these constructs cannot contribute to the
+score, which should be interpreted as a lower bound for the cognitive
+complexity of the entity.
+
+Protocols are not scored as they cannot define predicates.
 
 
 Halstead metric

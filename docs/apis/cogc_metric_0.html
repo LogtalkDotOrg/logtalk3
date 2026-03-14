@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lcom_metric &mdash; Logtalk 3.99.0</title>
+  <title>cogc_metric &mdash; Logtalk 3.99.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="noc_metric" href="noc_metric_0.html" />
-    <link rel="prev" title="halstead_metric(Stroud)" href="halstead_metric_1.html" />
+    <link rel="next" title="coupling_metric" href="coupling_metric_0.html" />
+    <link rel="prev" title="code_metrics_utilities" href="code_metrics_utilities_0.html" />
    
 </head>
 
@@ -84,13 +84,13 @@
 <li class="toctree-l3"><a class="reference internal" href="code_metrics_0.html">code_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="code_metrics_messages_0.html">code_metrics_messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="code_metrics_utilities_0.html">code_metrics_utilities</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cogc_metric_0.html">cogc_metric</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">cogc_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="coupling_metric_0.html">coupling_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dit_metric_0.html">dit_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="doc_metric_0.html">doc_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="halstead_metric_0.html">halstead_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="halstead_metric_1.html">halstead_metric(Stroud)</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">lcom_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lcom_metric_0.html">lcom_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="noc_metric_0.html">noc_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nor_metric_0.html">nor_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rfc_metric_0.html">rfc_metric</a></li>
@@ -246,9 +246,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">lcom_metric</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">cogc_metric</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/lcom_metric_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/cogc_metric_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -256,10 +256,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="lcom-metric-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="lcom-metric">
-<h1><code class="docutils literal notranslate"><span class="pre">lcom_metric</span></code><a class="headerlink" href="#lcom-metric" title="Link to this heading"></a></h1>
-<p>Lack of Cohesion Of Methods metric (LCOM4).</p>
+  <p class="right" id="cogc-metric-0"><span id="index-0"></span><strong>object</strong></p>
+<section id="cogc-metric">
+<h1><code class="docutils literal notranslate"><span class="pre">cogc_metric</span></code><a class="headerlink" href="#cogc-metric" title="Link to this heading"></a></h1>
+<p>Cognitive complexity metric (approximation). For each non-auxiliary predicate, the score contribution is the number of extra clauses (i.e. number of clauses minus one, for multi-clause branching) plus one if the predicate is directly recursive. The entity score is the sum of all predicate contributions. Protocols are not scored as they cannot define predicates.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -269,7 +269,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-03-13</div>
+<div class="line"><strong>Date:</strong> 2026-03-14</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -291,6 +291,7 @@
 <div class="line-block">
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0"><span class="std std-ref">logtalk</span></a></div>
+<div class="line"><a class="reference internal" href="numberlist_0.html#numberlist-0"><span class="std std-ref">numberlist</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -298,9 +299,11 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Score computation: Computes the number of connected components in the undirected graph whose nodes are the locally defined predicates and whose edges represent direct internal calls between them.</p></li>
-<li><p>Score interpretation: A score of 1 indicates a fully cohesive entity. Higher scores indicate that the entity may benefit from being split. Protocols are not scored as they cannot define predicates.</p></li>
-<li><p>Score representation: The score is represented by the compound term <code class="docutils literal notranslate"><span class="pre">lcom(Components,</span> <span class="pre">Predicates)</span></code> where <code class="docutils literal notranslate"><span class="pre">Components</span></code> is the number of connected components and <code class="docutils literal notranslate"><span class="pre">Predicates</span></code> is the total number of locally defined (non-auxiliary) predicates.</p></li>
+<li><p>Limitations: The reflection API does not expose control constructs such as cuts, conditionals, or disjunctions. This metric approximates cognitive complexity using only clause-level branching and direct recursion.</p></li>
+<li><p>Branching: A predicate with N clauses contributes N-1 to the score, representing the N-1 extra choices a reader must track.</p></li>
+<li><p>Recursion: A predicate that directly calls itself (within the same entity) contributes an additional 1 to the score.</p></li>
+<li><p>Score interpretation: The score is represented by a non-negative integer. Higher scores indicate predicates or entities that are harder to understand due to more branching choices or self-recursion. A score of 0 means all predicates are single-clause and non-recursive.</p></li>
+<li><p>Aggregation: File, directory, and library scores are computed by summing the individual entity scores.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -339,8 +342,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="halstead_metric_1.html" class="btn btn-neutral float-left" title="halstead_metric(Stroud)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="noc_metric_0.html" class="btn btn-neutral float-right" title="noc_metric" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="code_metrics_utilities_0.html" class="btn btn-neutral float-left" title="code_metrics_utilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="coupling_metric_0.html" class="btn btn-neutral float-right" title="coupling_metric" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -46,6 +46,7 @@
 		lcom_metric,
 		wmc_metric,
 		rfc_metric,
+		cogc_metric,
 		code_metrics
 	], [
 		source_data(on),
@@ -70,6 +71,7 @@
 		'test_files/lcom_metric_tests',
 		'test_files/wmc_metric_tests',
 		'test_files/rfc_metric_tests',
+		'test_files/cogc_metric_tests',
 		'test_files/code_metrics_tests'
 	], [
 		hook(lgtunit), optimize(on)
@@ -87,6 +89,7 @@
 		lcom_metric_tests,
 		wmc_metric_tests,
 		rfc_metric_tests,
+		cogc_metric_tests,
 		code_metrics_tests
 	])
 )).
