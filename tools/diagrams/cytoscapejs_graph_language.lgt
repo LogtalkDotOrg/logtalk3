@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-03-13,
+		date is 2026-03-14,
 		comment is 'Predicates for generating diagram files in the Cytoscape Exchange (CX2) JSON format.'
 	]).
 
@@ -267,15 +267,17 @@
 			write_json_id(Stream, Tooltip)
 		;	true
 		),
-		(	member(metrics_overlay(Ce,Ca,I,A), Options) ->
-			write(Stream, ', "metrics": "Ca:'),
-			write(Stream, Ca),
-			write(Stream, ' Ce:'),
+		(	member(metrics_overlay(Ce,Ca,I,A,D), Options) ->
+			write(Stream, ', "metrics": "Ce: '),
 			write(Stream, Ce),
-			write(Stream, ' I:'),
+			write(Stream, ' Ca: '),
+			write(Stream, Ca),
+			write(Stream, '\\nI: '),
 			write(Stream, I),
-			write(Stream, ' A:'),
+			write(Stream, ' A: '),
 			write(Stream, A),
+			write(Stream, ' D: '),
+			write(Stream, D),
 			write(Stream, '"')
 		;	true
 		),

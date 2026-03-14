@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:63:0,
 		author is 'Paulo Moura',
-		date is 2026-03-13,
+		date is 2026-03-14,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), caller_diagram(_), xref_diagram(_), library_diagram(_)]
@@ -335,8 +335,8 @@
 
 	add_metrics_overlay_option(Entity, Options, MetricsOptions) :-
 		(	member(metrics_overlay(true), Options),
-			coupling_metric::entity_score(Entity, ce_ca_i_a_d(Ce,Ca,I,A,_D)) ->
-			MetricsOptions = [metrics_overlay(Ce,Ca,I,A)| Options]
+			coupling_metric::entity_score(Entity, ce_ca_i_a_d(Ce,Ca,I,A,D)) ->
+			MetricsOptions = [metrics_overlay(Ce,Ca,I,A,D)| Options]
 		;	MetricsOptions = Options
 		).
 

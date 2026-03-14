@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-03-13,
+		date is 2026-03-14,
 		comment is 'Predicates for generating diagrams in PlantUML format.'
 	]).
 
@@ -261,7 +261,7 @@
 				write(Stream, '\n'),
 				write_metrics_overlay(Stream, Options),
 				write(Stream, '}\n')
-			;	member(metrics_overlay(_, _, _, _), Options) ->
+			;	member(metrics_overlay(_, _, _, _, _), Options) ->
 				write(Stream, ' {\n'),
 				write_metrics_overlay(Stream, Options),
 				write(Stream, '}\n')
@@ -295,16 +295,19 @@
 		).
 
 	write_metrics_overlay(Stream, Options) :-
-		(	member(metrics_overlay(Ce,Ca,I,A), Options) ->
+		(	member(metrics_overlay(Ce,Ca,I,A,D), Options) ->
 			write(Stream, '--\n'),
-			write(Stream, 'Ca:'),
-			write(Stream, Ca),
-			write(Stream, ' Ce:'),
+			write(Stream, 'Ce: '),
 			write(Stream, Ce),
-			write(Stream, ' I:'),
+			write(Stream, ' Ca: '),
+			write(Stream, Ca),
+			nl(Stream),
+			write(Stream, 'I: '),
 			write(Stream, I),
-			write(Stream, ' A:'),
+			write(Stream, ' A: '),
 			write(Stream, A),
+			write(Stream, ' D: '),
+			write(Stream, D),
 			nl(Stream)
 		;	true
 		).

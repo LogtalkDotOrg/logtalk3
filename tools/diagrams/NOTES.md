@@ -372,7 +372,7 @@ generated diagrams. For entity diagrams, the options are:
 	print node type captions (`true` or `false`; default is `true`)
 
 - `metrics_overlay(Boolean)`  
-	print coupling metrics overlay in entity nodes showing afferent coupling (Ca), efferent coupling (Ce), instability (I), and abstractness (A) values (`true` or `false`; default is `false`)
+	print coupling metrics overlay in entity nodes showing afferent coupling (Ca), efferent coupling (Ce), instability (I), abstractness (A), and distance from main sequence (D) values (`true` or `false`; default is `false`)
 
 - `cycle_detection(Boolean)`  
 	highlight cyclic relations by coloring the edges red (`true` or `false`; default is `false`)
