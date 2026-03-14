@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>upn_metric &mdash; Logtalk 3.99.0</title>
+  <title>rfc_metric &mdash; Logtalk 3.99.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="wmc_metric" href="wmc_metric_0.html" />
-    <link rel="prev" title="size_metric" href="size_metric_0.html" />
+    <link rel="next" title="size_metric" href="size_metric_0.html" />
+    <link rel="prev" title="nor_metric" href="nor_metric_0.html" />
    
 </head>
 
@@ -92,9 +92,9 @@
 <li class="toctree-l3"><a class="reference internal" href="lcom_metric_0.html">lcom_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="noc_metric_0.html">noc_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nor_metric_0.html">nor_metric</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rfc_metric_0.html">rfc_metric</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">rfc_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="size_metric_0.html">size_metric</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">upn_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upn_metric_0.html">upn_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="wmc_metric_0.html">wmc_metric</a></li>
 </ul>
 </li>
@@ -245,9 +245,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">upn_metric</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">rfc_metric</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/upn_metric_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/rfc_metric_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -255,10 +255,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="upn-metric-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="upn-metric">
-<h1><code class="docutils literal notranslate"><span class="pre">upn_metric</span></code><a class="headerlink" href="#upn-metric" title="Link to this heading"></a></h1>
-<p>Number of unique predicates nodes metric. The nodes include called and updated predicates independently of where they are defined. The score is represented by a non-negative integer.</p>
+  <p class="right" id="rfc-metric-0"><span id="index-0"></span><strong>object</strong></p>
+<section id="rfc-metric">
+<h1><code class="docutils literal notranslate"><span class="pre">rfc_metric</span></code><a class="headerlink" href="#rfc-metric" title="Link to this heading"></a></h1>
+<p>Response For a Class (RFC) metric. The score is the number of distinct predicates in the response set: the locally defined (non-auxiliary) predicates plus all distinct predicates they directly call or update. Protocols are not scored as they cannot define predicates. The score is represented by a non-negative integer.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -267,7 +267,7 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:6:3</div>
+<div class="line"><strong>Version:</strong> 1:0:0</div>
 <div class="line"><strong>Date:</strong> 2026-03-13</div>
 </div>
 <div class="line-block">
@@ -295,10 +295,14 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
-<div class="line-block">
-<div class="line">(none)</div>
 </div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Response set: The response set RS(E) for an entity E is the union of its locally defined (non-auxiliary) predicates and all predicates directly called or updated by those predicates.</p></li>
+<li><p>Score interpretation: Higher scores indicate entities with more potential execution paths in response to a message, which may increase testing effort.</p></li>
+<li><p>Aggregation: When computing scores for files, directories, and libraries, the individual entity scores are summed.</p></li>
+</ul>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
@@ -335,8 +339,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="size_metric_0.html" class="btn btn-neutral float-left" title="size_metric" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="wmc_metric_0.html" class="btn btn-neutral float-right" title="wmc_metric" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="nor_metric_0.html" class="btn btn-neutral float-left" title="nor_metric" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="size_metric_0.html" class="btn btn-neutral float-right" title="size_metric" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

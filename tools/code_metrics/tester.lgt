@@ -45,30 +45,32 @@
 		halstead_metric,
 		lcom_metric,
 		wmc_metric,
+		rfc_metric,
 		code_metrics
 	], [
 		source_data(on),
 		debug(on)
 	]),
 	logtalk_load([
-		test_entities,
-		third_party_test_entities
+		'test_files/test_entities',
+		'test_files/third_party_test_entities'
 	], [
-		source_data(on)
+		source_data(on), optimize(on)
 	]),
 	logtalk_load([
-		coupling_metric_tests,
-		dit_metric_tests,
-		doc_metric_tests,
-		noc_metric_tests,
-		nor_metric_tests,
-		upn_metric_tests,
-		size_metric_tests,
-		cc_metric_tests,
-		halstead_metric_tests,
-		lcom_metric_tests,
-		wmc_metric_tests,
-		code_metrics_tests
+		'test_files/coupling_metric_tests',
+		'test_files/dit_metric_tests',
+		'test_files/doc_metric_tests',
+		'test_files/noc_metric_tests',
+		'test_files/nor_metric_tests',
+		'test_files/upn_metric_tests',
+		'test_files/size_metric_tests',
+		'test_files/cc_metric_tests',
+		'test_files/halstead_metric_tests',
+		'test_files/lcom_metric_tests',
+		'test_files/wmc_metric_tests',
+		'test_files/rfc_metric_tests',
+		'test_files/code_metrics_tests'
 	], [
 		hook(lgtunit), optimize(on)
 	]),
@@ -84,6 +86,7 @@
 		halstead_metric_tests,
 		lcom_metric_tests,
 		wmc_metric_tests,
+		rfc_metric_tests,
 		code_metrics_tests
 	])
 )).

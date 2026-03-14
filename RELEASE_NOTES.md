@@ -68,10 +68,8 @@ Tools
 * CHANGED: The `code_metrics` tool `coupling_metric` metric representation of
 entity scores to include the Distance from Main Sequence metric value.
 
-* ADDED: Implementation of the Lack of Cohesion Of Methods metric (LCOM4) to
-the `code_metrics` tool.
-
-* ADDED: Implementation of the Weighted Methods per Class (WMC) metric to the
+* ADDED: Implementations of the Lack of Cohesion Of Methods (LCOM4), Weighted
+Methods per Class (WMC), and Response For a Class (RFC) metrics to the
 `code_metrics` tool.
 
 * ADDED: New `mutation_testing` tool for mutation-based testing.

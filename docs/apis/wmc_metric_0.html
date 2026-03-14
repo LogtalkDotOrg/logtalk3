@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>upn_metric &mdash; Logtalk 3.99.0</title>
+  <title>wmc_metric &mdash; Logtalk 3.99.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="wmc_metric" href="wmc_metric_0.html" />
-    <link rel="prev" title="size_metric" href="size_metric_0.html" />
+    <link rel="next" title="combinations" href="combinations_0.html" />
+    <link rel="prev" title="upn_metric" href="upn_metric_0.html" />
    
 </head>
 
@@ -94,8 +94,8 @@
 <li class="toctree-l3"><a class="reference internal" href="nor_metric_0.html">nor_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rfc_metric_0.html">rfc_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="size_metric_0.html">size_metric</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">upn_metric</a></li>
-<li class="toctree-l3"><a class="reference internal" href="wmc_metric_0.html">wmc_metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upn_metric_0.html">upn_metric</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">wmc_metric</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#combinations"><span class="xref std std-ref">combinations</span></a></li>
@@ -245,9 +245,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">upn_metric</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">wmc_metric</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/upn_metric_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/wmc_metric_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -255,10 +255,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="upn-metric-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="upn-metric">
-<h1><code class="docutils literal notranslate"><span class="pre">upn_metric</span></code><a class="headerlink" href="#upn-metric" title="Link to this heading"></a></h1>
-<p>Number of unique predicates nodes metric. The nodes include called and updated predicates independently of where they are defined. The score is represented by a non-negative integer.</p>
+  <p class="right" id="wmc-metric-0"><span id="index-0"></span><strong>object</strong></p>
+<section id="wmc-metric">
+<h1><code class="docutils literal notranslate"><span class="pre">wmc_metric</span></code><a class="headerlink" href="#wmc-metric" title="Link to this heading"></a></h1>
+<p>Weighted Methods per Class (WMC) metric. Uses unit weights, i.e., the score is the number of locally defined (non-auxiliary) predicates. Protocols are not scored as they cannot define predicates. The score is represented by a non-negative integer.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -267,7 +267,7 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:6:3</div>
+<div class="line"><strong>Version:</strong> 1:0:0</div>
 <div class="line"><strong>Date:</strong> 2026-03-13</div>
 </div>
 <div class="line-block">
@@ -295,10 +295,14 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
-<div class="line-block">
-<div class="line">(none)</div>
 </div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Unit weights: Each predicate is assigned a weight of 1. A cyclomatic-complexity-weighted variant is not provided as the Logtalk reflection API does not expose intra-clause branching structure (if-then-else, disjunction), which would produce the same approximations as the <code class="docutils literal notranslate"><span class="pre">cc_metric</span></code>.</p></li>
+<li><p>Interpretation: Higher scores indicate an entity with more responsibilities that may benefit from being split.</p></li>
+<li><p>Aggregation: When computing scores for files, directories, and libraries, the individual entity scores are summed.</p></li>
+</ul>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
@@ -335,8 +339,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="size_metric_0.html" class="btn btn-neutral float-left" title="size_metric" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="wmc_metric_0.html" class="btn btn-neutral float-right" title="wmc_metric" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="upn_metric_0.html" class="btn btn-neutral float-left" title="upn_metric" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="combinations_0.html" class="btn btn-neutral float-right" title="combinations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

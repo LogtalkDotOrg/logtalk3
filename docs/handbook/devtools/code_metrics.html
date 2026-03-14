@@ -79,6 +79,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#coupling-metrics">Coupling metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#lack-of-cohesion-metric">Lack of cohesion metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#wmc-metric">WMC metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rfc-metric">RFC metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#halstead-metric">Halstead metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#upn-metric">UPN metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cyclomatic-complexity-metric">Cyclomatic complexity metric</a></li>
@@ -193,6 +194,7 @@ standard output. A second set of predicates computes and returns a score
 (<code class="docutils literal notranslate"><span class="pre">coupling_metric</span></code>)</p></li>
 <li><p>Lack of cohesion of methods (<code class="docutils literal notranslate"><span class="pre">lcom_metric</span></code>)</p></li>
 <li><p>Weighted Methods per Class (<code class="docutils literal notranslate"><span class="pre">wmc_metric</span></code>)</p></li>
+<li><p>Response For a Class (<code class="docutils literal notranslate"><span class="pre">rfc_metric</span></code>)</p></li>
 <li><p>Documentation (<code class="docutils literal notranslate"><span class="pre">doc_metric</span></code>)</p></li>
 <li><p>Source code size (<code class="docutils literal notranslate"><span class="pre">size_metric</span></code>)</p></li>
 <li><p>Halstead complexity (<code class="docutils literal notranslate"><span class="pre">halstead_metric</span></code> and
@@ -301,6 +303,39 @@ inherit the same approximation limitations already present in
 <code class="docutils literal notranslate"><span class="pre">cc_metric</span></code> and would also be numerically equivalent to the number of
 user clauses reported by <code class="docutils literal notranslate"><span class="pre">noc_metric</span></code>.</p>
 <p>For more details on the WMC metric, see the original CK paper:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">@</span>article<span class="k">{</span><span class="nv">Chidamber</span><span class="o">:</span><span class="m">1994</span>,
+    author <span class="o">=</span> <span class="s">&quot;Chidamber, S. R. and Kemerer, C. F.&quot;</span>,
+    title <span class="o">=</span> <span class="s">&quot;A Metrics Suite for Object Oriented Design&quot;</span>,
+    journal <span class="o">=</span> <span class="s">&quot;IEEE Transactions on Software Engineering&quot;</span>,
+    volume <span class="o">=</span> <span class="m">20</span>,
+    number <span class="o">=</span> <span class="m">6</span>,
+    pages <span class="o">=</span> <span class="s">&quot;476--493&quot;</span>,
+    year <span class="o">=</span> <span class="m">1994</span>
+<span class="k">}</span>
+</pre></div>
+</div>
+</section>
+<section id="rfc-metric">
+<h2>RFC metric<a class="headerlink" href="#rfc-metric" title="Link to this heading"></a></h2>
+<p>The Response For a Class (RFC) metric is computed as the size of the
+response set for an object or category. The response set RS(E) for an
+entity E is the union of its locally defined (non-auxiliary) predicates
+and all distinct predicates directly called or updated by those
+predicates. RFC = |RS(E)|.</p>
+<p>Internal calls (to predicates within the entity) are included in the
+response set but are not double-counted: they are already part of the
+locally defined predicates. Only additional external callees increase
+the score beyond the WMC score of the same entity.</p>
+<p>When the receiver of a message is only bound at runtime (e.g.
+<code class="docutils literal notranslate"><span class="pre">Obj::foo/1</span></code> where <code class="docutils literal notranslate"><span class="pre">Obj</span></code> is a variable), all such calls for the same
+predicate indicator are counted as one callee entry, regardless of how
+many distinct call sites exist.</p>
+<p>Calls to built-in predicates are never returned by the Logtalk
+reflection API and therefore do not contribute to the score.</p>
+<p>Protocols are not scored as they cannot define predicates.</p>
+<p>Higher RFC scores indicate entities with larger potential execution
+footprints, which increases testing effort.</p>
+<p>For more details on the RFC metric, see the original CK paper:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">@</span>article<span class="k">{</span><span class="nv">Chidamber</span><span class="o">:</span><span class="m">1994</span>,
     author <span class="o">=</span> <span class="s">&quot;Chidamber, S. R. and Kemerer, C. F.&quot;</span>,
     title <span class="o">=</span> <span class="s">&quot;A Metrics Suite for Object Oriented Design&quot;</span>,

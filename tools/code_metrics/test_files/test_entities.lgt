@@ -277,3 +277,41 @@
 	g.
 
 :- end_category.
+
+
+% RFC metric test entities
+
+% only internal calls: p calls q (both in M)
+% response set = {p/0, q/0} => RFC = 2
+:- object(rfc_obj_1).
+
+	:- public([p/0, q/0]).
+
+	p :- q.
+	q.
+
+:- end_object.
+
+
+% one external call: a calls b (internal), b calls rfc_obj_1::p (external)
+% response set = {a/0, b/0, rfc_obj_1::p/0} => RFC = 3
+:- object(rfc_obj_2).
+
+	:- public([a/0, b/0]).
+
+	a :- b.
+	b :- rfc_obj_1::p.
+
+:- end_object.
+
+
+% only internal calls in a category: x calls y (both in M)
+% response set = {x/0, y/0} => RFC = 2
+:- category(rfc_cat_1).
+
+	:- public([x/0, y/0]).
+
+	x :- y.
+	y.
+
+:- end_category.

@@ -19,23 +19,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(wmc_metric,
+:- object(rfc_metric,
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-03-13,
-		comment is 'Weighted Methods per Class (WMC) metric. Uses unit weights, i.e., the score is the number of locally defined (non-auxiliary) predicates. Protocols are not scored as they cannot define predicates. The score is represented by a non-negative integer.',
+		comment is 'Response For a Class (RFC) metric. The score is the number of distinct predicates in the response set: the locally defined (non-auxiliary) predicates plus all distinct predicates they directly call or update. Protocols are not scored as they cannot define predicates. The score is represented by a non-negative integer.',
 		remarks is [
-			'Unit weights' - 'Each predicate is assigned a weight of 1. A cyclomatic-complexity-weighted variant is not provided as the Logtalk reflection API does not expose intra-clause branching structure (if-then-else, disjunction), which would produce the same approximations as the ``cc_metric``.',
-			'Interpretation' - 'Higher scores indicate an entity with more responsibilities that may benefit from being split.',
+			'Response set' - 'The response set RS(E) for an entity E is the union of its locally defined (non-auxiliary) predicates and all predicates directly called or updated by those predicates.',
+			'Score interpretation' - 'Higher scores indicate entities with more potential execution paths in response to a message, which may increase testing effort.',
 			'Aggregation' - 'When computing scores for files, directories, and libraries, the individual entity scores are summed.'
 		]
 	]).
 
 	:- uses(list, [
-		member/2, length/2
+		member/2, memberchk/2, length/2, subtract/3
 	]).
 
 	:- uses(numberlist, [
@@ -56,26 +56,88 @@
 		entity_score_(Kind, Entity, Score).
 
 	entity_score_(Kind, Entity, Score) :-
+		defined_predicates(Kind, Entity, Defined),
+		external_callees(Kind, Entity, Defined, External),
+		length(Defined, NM),
+		length(External, NE),
+		Score is NM + NE.
+
+	defined_predicates(object, Entity, Defined) :-
 		findall(
 			Predicate,
-			defined_predicate(Kind, Entity, Predicate),
+			(	object_property(Entity, defines(Predicate, Properties)),
+				\+ member(auxiliary, Properties)
+			),
 			Bag
 		),
-		sort(Bag, Sorted),
-		length(Sorted, Score).
+		sort(Bag, Defined).
+	defined_predicates(category, Entity, Defined) :-
+		findall(
+			Predicate,
+			(	category_property(Entity, defines(Predicate, Properties)),
+				\+ member(auxiliary, Properties)
+			),
+			Bag
+		),
+		sort(Bag, Defined).
 
-	defined_predicate(object, Entity, Predicate) :-
-		object_property(Entity, defines(Predicate, Properties)),
-		\+ member(auxiliary, Properties),
-		\+ member(number_of_clauses(0), Properties).
-	defined_predicate(category, Entity, Predicate) :-
-		category_property(Entity, defines(Predicate, Properties)),
-		\+ member(auxiliary, Properties),
-		\+ member(number_of_clauses(0), Properties).
+	% external_callees(+Kind, +Entity, +Defined, -External)
+	% External = callees called or updated by predicates in Defined, not already in Defined
+	external_callees(object, Entity, Defined, External) :-
+		findall(
+			NCallee,
+			(	object_property(Entity, calls(Callee, Properties)),
+				memberchk(caller(Caller), Properties),
+				memberchk(Caller, Defined),
+				normalize_callee(Callee, NCallee)
+			),
+			CalleeList
+		),
+		findall(
+			Callee,
+			(	object_property(Entity, updates(Callee, Properties)),
+				memberchk(updater(Caller), Properties),
+				memberchk(Caller, Defined)
+			),
+			UpdateList,
+			CalleeList
+		),
+		sort(UpdateList, AllSorted),
+		subtract(AllSorted, Defined, External).
+	external_callees(category, Entity, Defined, External) :-
+		findall(
+			NCallee,
+			(	category_property(Entity, calls(Callee, Properties)),
+				memberchk(caller(Caller), Properties),
+				memberchk(Caller, Defined),
+				normalize_callee(Callee, NCallee)
+			),
+			CalleeList
+		),
+		findall(
+			Callee,
+			(	category_property(Entity, updates(Callee, Properties)),
+				memberchk(updater(Caller), Properties),
+				memberchk(Caller, Defined)
+			),
+			UpdateList,
+			CalleeList
+		),
+		sort(UpdateList, AllSorted),
+		subtract(AllSorted, Defined, External).
+
+	% normalize_callee(+Callee, -Normalized)
+	% Replace an unbound receiver in a message send with the atom '_'
+	% so that all calls to an unknown target for the same predicate
+	% collapse into one entry after sorting.
+	normalize_callee(Receiver::Indicator, '_'::Indicator) :-
+		\+ ground(Receiver),
+		!.
+	normalize_callee(Callee, Callee).
 
 	process_entity(Kind, Entity) :-
 		entity_score_(Kind, Entity, Score),
-		print_message(information, code_metrics, wmc(Score)).
+		print_message(information, code_metrics, rfc(Score)).
 
 	file_score(File, Score, Options) :-
 		^^option(exclude_entities(ExcludedEntities), Options),
@@ -94,7 +156,7 @@
 
 	process_file(File, Options) :-
 		file_score(File, Score, Options),
-		print_message(information, code_metrics, wmc(Score)).
+		print_message(information, code_metrics, rfc(Score)).
 
 	directory_score(Directory, Score, Options) :-
 		findall(FileScore, directory_file_score(Directory, _, FileScore, Options), FileScores),
@@ -102,7 +164,7 @@
 
 	process_directory(Directory, Options) :-
 		directory_score(Directory, Score, Options),
-		print_message(information, code_metrics, wmc(Score)).
+		print_message(information, code_metrics, rfc(Score)).
 
 	directory_file_score(Directory, File, Score, Options) :-
 		^^option(exclude_files(ExcludedFiles), Options),
@@ -137,7 +199,7 @@
 
 	process_rdirectory(Directory, Options) :-
 		rdirectory_score(Directory, Score, Options),
-		print_message(information, code_metrics, wmc(Score)).
+		print_message(information, code_metrics, rfc(Score)).
 
 	library_score(Library, Score, Options) :-
 		expand_library_path(Library, Directory),
@@ -145,7 +207,7 @@
 
 	process_library(Library, Options) :-
 		library_score(Library, Score, Options),
-		print_message(information, code_metrics, wmc(Score)).
+		print_message(information, code_metrics, rfc(Score)).
 
 	rlibrary_score(Library, Score, Options) :-
 		^^option(exclude_libraries(ExcludedLibraries), Options),
@@ -170,7 +232,7 @@
 
 	process_rlibrary(Library, Options) :-
 		rlibrary_score(Library, Score, Options),
-		print_message(information, code_metrics, wmc(Score)).
+		print_message(information, code_metrics, rfc(Score)).
 
 	all_score(Score, Options) :-
 		^^option(exclude_files(ExcludedFiles), Options),
@@ -186,15 +248,15 @@
 
 	process_all(Options) :-
 		all_score(Score, Options),
-		print_message(information, code_metrics, wmc(Score)).
+		print_message(information, code_metrics, rfc(Score)).
 
 	format_entity_score(_Entity, Score) -->
-		['WMC: ~w'-[Score], nl].
+		['RFC: ~w'-[Score], nl].
 
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
 
-	logtalk::message_tokens(wmc(Score), code_metrics) -->
-		['WMC: ~w'-[Score], nl].
+	logtalk::message_tokens(rfc(Score), code_metrics) -->
+		['RFC: ~w'-[Score], nl].
 
 :- end_object.

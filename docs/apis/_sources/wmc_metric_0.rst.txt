@@ -1,0 +1,66 @@
+.. index:: single: wmc_metric
+.. _wmc_metric/0:
+
+.. rst-class:: right
+
+**object**
+
+``wmc_metric``
+==============
+
+Weighted Methods per Class (WMC) metric. Uses unit weights, i.e., the score is the number of locally defined (non-auxiliary) predicates. Protocols are not scored as they cannot define predicates. The score is represented by a non-negative integer.
+
+| **Availability:** 
+|    ``logtalk_load(code_metrics(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-03-13
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`code_metrics_utilities <code_metrics_utilities/0>`
+|    ``public`` :ref:`code_metric <code_metric/0>`
+| **Provides:**
+|    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`numberlist <numberlist/0>`
+
+| **Remarks:**
+
+   - Unit weights: Each predicate is assigned a weight of 1. A cyclomatic-complexity-weighted variant is not provided as the Logtalk reflection API does not expose intra-clause branching structure (if-then-else, disjunction), which would produce the same approximations as the ``cc_metric``.
+   - Interpretation: Higher scores indicate an entity with more responsibilities that may benefit from being split.
+   - Aggregation: When computing scores for files, directories, and libraries, the individual entity scores are summed.
+
+| **Inherited public predicates:**
+|     :ref:`code_metric/0::all/0`  :ref:`code_metric/0::all/1`  :ref:`code_metric/0::all_score/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`code_metric/0::directory/1`  :ref:`code_metric/0::directory/2`  :ref:`code_metric/0::directory_score/2`  :ref:`code_metric/0::entity/1`  :ref:`code_metric/0::entity_score/2`  :ref:`code_metric/0::file/1`  :ref:`code_metric/0::file/2`  :ref:`code_metric/0::file_score/2`  :ref:`code_metric/0::format_entity_score//2`  :ref:`code_metric/0::library/1`  :ref:`code_metric/0::library/2`  :ref:`code_metric/0::library_score/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`code_metric/0::rdirectory/1`  :ref:`code_metric/0::rdirectory/2`  :ref:`code_metric/0::rdirectory_score/2`  :ref:`code_metric/0::rlibrary/1`  :ref:`code_metric/0::rlibrary/2`  :ref:`code_metric/0::rlibrary_score/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

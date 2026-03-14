@@ -54,6 +54,7 @@ Currently, the following metrics are provided:
   (``coupling_metric``)
 - Lack of cohesion of methods (``lcom_metric``)
 - Weighted Methods per Class (``wmc_metric``)
+- Response For a Class (``rfc_metric``)
 - Documentation (``doc_metric``)
 - Source code size (``size_metric``)
 - Halstead complexity (``halstead_metric`` and
@@ -177,6 +178,47 @@ inherit the same approximation limitations already present in
 user clauses reported by ``noc_metric``.
 
 For more details on the WMC metric, see the original CK paper:
+
+::
+
+   @article{Chidamber:1994,
+       author = "Chidamber, S. R. and Kemerer, C. F.",
+       title = "A Metrics Suite for Object Oriented Design",
+       journal = "IEEE Transactions on Software Engineering",
+       volume = 20,
+       number = 6,
+       pages = "476--493",
+       year = 1994
+   }
+
+RFC metric
+----------
+
+The Response For a Class (RFC) metric is computed as the size of the
+response set for an object or category. The response set RS(E) for an
+entity E is the union of its locally defined (non-auxiliary) predicates
+and all distinct predicates directly called or updated by those
+predicates. RFC = \|RS(E)\|.
+
+Internal calls (to predicates within the entity) are included in the
+response set but are not double-counted: they are already part of the
+locally defined predicates. Only additional external callees increase
+the score beyond the WMC score of the same entity.
+
+When the receiver of a message is only bound at runtime (e.g.
+``Obj::foo/1`` where ``Obj`` is a variable), all such calls for the same
+predicate indicator are counted as one callee entry, regardless of how
+many distinct call sites exist.
+
+Calls to built-in predicates are never returned by the Logtalk
+reflection API and therefore do not contribute to the score.
+
+Protocols are not scored as they cannot define predicates.
+
+Higher RFC scores indicate entities with larger potential execution
+footprints, which increases testing effort.
+
+For more details on the RFC metric, see the original CK paper:
 
 ::
 
