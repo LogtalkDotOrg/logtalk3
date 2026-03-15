@@ -1,0 +1,69 @@
+.. index:: single: lines_metric
+.. _lines_metric/0:
+
+.. rst-class:: right
+
+**object**
+
+``lines_metric``
+================
+
+Computes the number of lines of code, comments, and blanks by calling cloc and parsing its report file output.
+
+| **Availability:** 
+|    ``logtalk_load(code_metrics(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-03-14
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`code_metrics_utilities <code_metrics_utilities/0>`
+|    ``public`` :ref:`code_metric <code_metric/0>`
+| **Provides:**
+|    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+| **Uses:**
+|    :ref:`atom <atom/0>`
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`os <os/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+
+   - Entity line range: Entity scores are computed by querying entity lines(BeginLine, EndLine) and running cloc on a temporary file containing only that line range.
+   - External dependency: Requires ``cloc`` to be available in ``PATH``.
+   - Entity score: Represented as the compound term ``lines(Code, Comments, Blanks)``.
+
+| **Inherited public predicates:**
+|     :ref:`code_metric/0::all/0`  :ref:`code_metric/0::all/1`  :ref:`code_metric/0::all_score/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`code_metric/0::directory/1`  :ref:`code_metric/0::directory/2`  :ref:`code_metric/0::directory_score/2`  :ref:`code_metric/0::entity/1`  :ref:`code_metric/0::entity_score/2`  :ref:`code_metric/0::file/1`  :ref:`code_metric/0::file/2`  :ref:`code_metric/0::file_score/2`  :ref:`code_metric/0::format_entity_score//2`  :ref:`code_metric/0::library/1`  :ref:`code_metric/0::library/2`  :ref:`code_metric/0::library_score/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`code_metric/0::rdirectory/1`  :ref:`code_metric/0::rdirectory/2`  :ref:`code_metric/0::rdirectory_score/2`  :ref:`code_metric/0::rlibrary/1`  :ref:`code_metric/0::rlibrary/2`  :ref:`code_metric/0::rlibrary_score/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

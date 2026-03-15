@@ -43,6 +43,8 @@
 		size_metric,
 		cc_metric,
 		halstead_metric,
+		lines_metric,
+		mi_metric,
 		lcom_metric,
 		wmc_metric,
 		rfc_metric,
@@ -68,6 +70,8 @@
 		'test_files/size_metric_tests',
 		'test_files/cc_metric_tests',
 		'test_files/halstead_metric_tests',
+		'test_files/lines_metric_tests',
+		'test_files/mi_metric_tests',
 		'test_files/lcom_metric_tests',
 		'test_files/wmc_metric_tests',
 		'test_files/rfc_metric_tests',
@@ -86,6 +90,8 @@
 		size_metric_tests,
 		cc_metric_tests,
 		halstead_metric_tests,
+		lines_metric_tests,
+		mi_metric_tests,
 		lcom_metric_tests,
 		wmc_metric_tests,
 		rfc_metric_tests,
@@ -93,7 +99,6 @@
 		code_metrics_tests
 	])
 )).
-
 
 :- initialization(
 	logtalk::retractall(message_hook(_Message, _Kind, code_metrics, _Tokens))

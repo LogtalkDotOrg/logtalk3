@@ -81,6 +81,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#wmc-metric">WMC metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rfc-metric">RFC metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cognitive-complexity-metric">Cognitive complexity metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lines-metric">Lines metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#maintainability-index-metric">Maintainability index metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#halstead-metric">Halstead metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#upn-metric">UPN metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cyclomatic-complexity-metric">Cyclomatic complexity metric</a></li>
@@ -198,7 +200,9 @@ standard output. A second set of predicates computes and returns a score
 <li><p>Response For a Class (<code class="docutils literal notranslate"><span class="pre">rfc_metric</span></code>)</p></li>
 <li><p>Cognitive complexity (<code class="docutils literal notranslate"><span class="pre">cogc_metric</span></code>)</p></li>
 <li><p>Documentation (<code class="docutils literal notranslate"><span class="pre">doc_metric</span></code>)</p></li>
+<li><p>Lines of code, comments, and blanks (<code class="docutils literal notranslate"><span class="pre">lines_metric</span></code>)</p></li>
 <li><p>Source code size (<code class="docutils literal notranslate"><span class="pre">size_metric</span></code>)</p></li>
+<li><p>Maintainability index (<code class="docutils literal notranslate"><span class="pre">mi_metric</span></code> and <code class="docutils literal notranslate"><span class="pre">mi_metric(Stroud)</span></code>)</p></li>
 <li><p>Halstead complexity (<code class="docutils literal notranslate"><span class="pre">halstead_metric</span></code> and
 <code class="docutils literal notranslate"><span class="pre">halstead_metric(Stroud)</span></code>)</p></li>
 </ul>
@@ -368,6 +372,36 @@ use of control constructs such as cuts, if-then-else, disjunction, or
 cannot contribute to the score, which should be interpreted as a lower
 bound for the cognitive complexity of the entity.</p>
 <p>Protocols are not scored as they cannot define predicates.</p>
+</section>
+<section id="lines-metric">
+<h2>Lines metric<a class="headerlink" href="#lines-metric" title="Link to this heading"></a></h2>
+<p>The lines metric (<code class="docutils literal notranslate"><span class="pre">lines_metric</span></code>) computes the number of code lines,
+comment lines, and blank lines, represented as the compound term
+<code class="docutils literal notranslate"><span class="pre">lines(Code,</span> <span class="pre">Comments,</span> <span class="pre">Blanks)</span></code>.</p>
+<p>The implementation calls the external <code class="docutils literal notranslate"><span class="pre">cloc</span></code> tool and parses its CSV
+report. For entity scores, it first obtains the entity source line range
+from the reflection API using the <code class="docutils literal notranslate"><span class="pre">lines(BeginLine,</span> <span class="pre">EndLine)</span></code>
+property, writes only that range to a temporary file, and runs <code class="docutils literal notranslate"><span class="pre">cloc</span></code>
+on that temporary file.</p>
+<p>For file, directory, and library scores, the metric computes and sums
+per-file <code class="docutils literal notranslate"><span class="pre">lines/3</span></code> scores.</p>
+<p>This metric requires the <code class="docutils literal notranslate"><span class="pre">cloc</span></code> and <code class="docutils literal notranslate"><span class="pre">sed</span></code> commands to be available
+in the operating system path.</p>
+</section>
+<section id="maintainability-index-metric">
+<h2>Maintainability index metric<a class="headerlink" href="#maintainability-index-metric" title="Link to this heading"></a></h2>
+<p>The maintainability index metric (<code class="docutils literal notranslate"><span class="pre">mi_metric</span></code>) computes the original
+maintainability index formula:</p>
+<p><code class="docutils literal notranslate"><span class="pre">MI</span> <span class="pre">=</span> <span class="pre">171</span> <span class="pre">-</span> <span class="pre">5.2</span> <span class="pre">*</span> <span class="pre">ln(V)</span> <span class="pre">-</span> <span class="pre">0.23</span> <span class="pre">*</span> <span class="pre">C</span> <span class="pre">-</span> <span class="pre">16.2</span> <span class="pre">*</span> <span class="pre">ln(L)</span></code></p>
+<p>where <code class="docutils literal notranslate"><span class="pre">V</span></code> is the Halstead volume, <code class="docutils literal notranslate"><span class="pre">C</span></code> is cyclomatic complexity, and
+<code class="docutils literal notranslate"><span class="pre">L</span></code> is the number of code lines. The score is represented as
+<code class="docutils literal notranslate"><span class="pre">mi(Index)</span></code>.</p>
+<p>The metric is available as <code class="docutils literal notranslate"><span class="pre">mi_metric</span></code> (default Stroud coefficient 18)
+and as <code class="docutils literal notranslate"><span class="pre">mi_metric(Stroud)</span></code> for a user-defined Stroud coefficient
+passed to the Halstead metric.</p>
+<p>Protocols are not scored as they cannot define predicates.</p>
+<p>This metric requires the lines metric and thus the <code class="docutils literal notranslate"><span class="pre">cloc</span></code> and <code class="docutils literal notranslate"><span class="pre">sed</span></code>
+commands to be available in the operating system path.</p>
 </section>
 <section id="halstead-metric">
 <h2>Halstead metric<a class="headerlink" href="#halstead-metric" title="Link to this heading"></a></h2>

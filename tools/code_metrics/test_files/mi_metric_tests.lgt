@@ -1,8 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2017-2026 Paulo Moura <pmoura@logtalk.org>
-%  SPDX-FileCopyrightText: 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>
+%  SPDX-FileCopyrightText: 2018-2026 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,31 +19,37 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(types(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load([
-		code_metrics_utilities,
-		code_metrics_messages,
-		code_metric,
-		dit_metric,
-		coupling_metric,
-		noc_metric,
-		nor_metric,
-		upn_metric,
-		doc_metric,
-		size_metric,
-		cc_metric,
-		halstead_metric,
-		lines_metric,
-		mi_metric,
-		lcom_metric,
-		wmc_metric,
-		rfc_metric,
-		cogc_metric,
-		code_metrics
-	], [
-		optimize(on)
-	])
-)).
+:- if(current_object(lines_metric)).
+
+:- object(mi_metric_tests,
+	extends(lgtunit)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-03-14,
+		comment is 'Unit tests for the mi_metric object.'
+	]).
+
+	:- uses(mi_metric, [
+		entity_score/2
+	]).
+
+	cover(code_metric).
+	cover(mi_metric).
+
+	test(mi_metric_entity_score_shape, true((number(MI), MI =< 171.0))) :-
+		entity_score(lcom_obj_1, mi(MI)).
+
+	test(mi_metric_protocol, fail) :-
+		entity_score(prot_a, _).
+
+:- end_object.
+
+:- else.
+
+:- object(mi_metric_tests,
+	extends(lgtunit)).
+:- end_object.
+
+:- endif.

@@ -75,7 +75,9 @@ Currently, the following metrics are provided:
 - Response For a Class (`rfc_metric`)
 - Cognitive complexity (`cogc_metric`)
 - Documentation (`doc_metric`)
+- Lines of code, comments, and blanks (`lines_metric`)
 - Source code size (`size_metric`)
+- Maintainability index (`mi_metric` and `mi_metric(Stroud)`)
 - Halstead complexity (`halstead_metric` and `halstead_metric(Stroud)`)
 
 A helper object, `code_metrics`, is also provided, allowing running all
@@ -260,6 +262,46 @@ score, which should be interpreted as a lower bound for the cognitive
 complexity of the entity.
 
 Protocols are not scored as they cannot define predicates.
+
+
+Lines metric
+------------
+
+The lines metric (`lines_metric`) computes the number of code lines,
+comment lines, and blank lines, represented as the compound term
+`lines(Code, Comments, Blanks)`.
+
+The implementation calls the external `cloc` tool and parses its CSV report.
+For entity scores, it first obtains the entity source line range from the
+reflection API using the `lines(BeginLine, EndLine)` property, writes only
+that range to a temporary file, and runs `cloc` on that temporary file.
+
+For file, directory, and library scores, the metric computes and sums
+per-file `lines/3` scores.
+
+This metric requires the `cloc` and `sed` commands to be available in the
+operating system path.
+
+
+Maintainability index metric
+----------------------------
+
+The maintainability index metric (`mi_metric`) computes the original
+maintainability index formula:
+
+`MI = 171 - 5.2 * ln(V) - 0.23 * C - 16.2 * ln(L)`
+
+where `V` is the Halstead volume, `C` is cyclomatic complexity, and `L`
+is the number of code lines. The score is represented as `mi(Index)`.
+
+The metric is available as `mi_metric` (default Stroud coefficient 18) and
+as `mi_metric(Stroud)` for a user-defined Stroud coefficient passed to the
+Halstead metric.
+
+Protocols are not scored as they cannot define predicates.
+
+This metric requires the lines metric and thus the `cloc` and `sed` commands
+to be available in the operating system path.
 
 
 Halstead metric
