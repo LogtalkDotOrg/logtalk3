@@ -111,6 +111,7 @@ not listed, see the dependency websites for installation instructions.
 
 ### Tool dependencies for full functionality
 
+- `code_metric`: `cloc`, `sed`
 - `diagrams`: d2, Graphviz
 - `help`: `lynx` `info`
 - `issue_creator`: `gh`, `glab`
@@ -132,6 +133,7 @@ documentation:
 
 ### macOS - MacPorts
 
+	$ sudo port install cloc
 	$ sudo port install d2 graphviz
 	$ sudo port install lynx texinfo pandoc
 	$ sudo port install libxslt fop texlive
@@ -141,6 +143,7 @@ documentation:
 
 ### macOS - Homebrew
 
+	$ brew install cloc
 	$ brew install d2 graphviz
 	$ brew install lynx texinfo pandoc
 	$ brew install libxslt fop texlive
@@ -150,6 +153,7 @@ documentation:
 
 ### Ubuntu
 
+    $ sudo apt install cloc
 	$ sudo apt install graphviz
 	$ sudo apt install lynx texinfo pandoc
 	$ sudo apt install xsltproc fop texlive-latex-extra tex-gyre latexmk
@@ -158,6 +162,7 @@ documentation:
 
 ### RedHat
 
+    $ sudo dnf install cloc
 	$ sudo dnf install graphviz
 	$ sudo dnf install lynx texinfo pandoc
 	$ sudo dnf install libxslt fop
@@ -165,13 +170,13 @@ documentation:
 
 ### Windows - Chocolatey
 
+	> choco install cloc sed
 	> choco install pandoc xsltproc
 	> choco install d2 graphviz
 	> choco install xsltproc apache-fop texlive
 	> choco install gnupg git
 	> choco install gh glab
 	> choco install wget
-	> choco install sed
 
 ### Installers
 
