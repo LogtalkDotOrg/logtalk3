@@ -21,8 +21,8 @@
 
 :- if(
 	(	os::operating_system_type(windows) ->
-		os::shell('where cloc > NUL 2>&1'),
-		os::shell('where sed > NUL 2>&1')
+		os::shell('where.exe cloc > NUL 2>&1'),
+		os::shell('where.exe sed > NUL 2>&1')
 	;	os::shell('command -v cloc >/dev/null 2>&1')
 	)
 ).
