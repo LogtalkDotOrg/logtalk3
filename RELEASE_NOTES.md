@@ -118,6 +118,9 @@ where the `exclude_libraries/1` option was ignored.
 * FIXED: Spurious choice-point when calling the `code_metrics` tool metrics
 `entity_score/2` predicate.
 
+* FIXED: Bug in the `logtalk_tester.ps1` PowerShell script where the test
+results summary will fail to account for all the tests that were run.
+
 Examples
 --------
 

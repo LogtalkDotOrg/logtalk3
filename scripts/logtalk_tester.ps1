@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on March 2, 2026
+##   Last updated on March 16, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -55,7 +55,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 18.1"
+	Write-Output "$myName 18.2"
 }
 
 Function Format-Decimal {
@@ -862,11 +862,14 @@ $flaky = 0
 
 Get-ChildItem -Path . -Filter *.totals |
 Foreach-Object {
-	if (Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Quiet) {
-		$skipped = $skipped + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("`t")[3])
-		$passed =  $passed  + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("`t")[4])
-		$failed =  $failed  + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("`t")[5])
-		$flaky =   $flaky   + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("`t")[6])
+	Get-Content -Path $_ |
+	Select-String -Pattern '^object' -CaseSensitive |
+	ForEach-Object {
+		$line = $_.Line.Split("`t")
+		$skipped = $skipped + [int]$line[3]
+		$passed =  $passed  + [int]$line[4]
+		$failed =  $failed  + [int]$line[5]
+		$flaky =   $flaky   + [int]$line[6]
 	}
 }
 
