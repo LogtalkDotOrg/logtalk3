@@ -261,6 +261,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Imports:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="options_0.html#options-0"><span class="std std-ref">options</span></a></div>
+</div>
 <div class="line"><strong>Provides:</strong></div>
 <div class="line-block">
 <div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0-message-prefix-stream-4"><span class="std std-ref">logtalk::message_prefix_stream/4</span></a></div>
@@ -291,90 +295,75 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line">(none)</div>
+<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id2">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#linda-0-linda-0" id="id3"><code class="docutils literal notranslate"><span class="pre">linda/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#linda-1" id="id4"><code class="docutils literal notranslate"><span class="pre">linda/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#linda-client-1" id="id5"><code class="docutils literal notranslate"><span class="pre">linda_client/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#close-client-1" id="id6"><code class="docutils literal notranslate"><span class="pre">close_client/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#close-client-0" id="id7"><code class="docutils literal notranslate"><span class="pre">close_client/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#shutdown-server-1" id="id8"><code class="docutils literal notranslate"><span class="pre">shutdown_server/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#shutdown-server-0" id="id9"><code class="docutils literal notranslate"><span class="pre">shutdown_server/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#linda-timeout-2" id="id10"><code class="docutils literal notranslate"><span class="pre">linda_timeout/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#out-2" id="id11"><code class="docutils literal notranslate"><span class="pre">out/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#out-1" id="id12"><code class="docutils literal notranslate"><span class="pre">out/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#in-2" id="id13"><code class="docutils literal notranslate"><span class="pre">in/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#in-1" id="id14"><code class="docutils literal notranslate"><span class="pre">in/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#in-noblock-2" id="id15"><code class="docutils literal notranslate"><span class="pre">in_noblock/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#in-noblock-1" id="id16"><code class="docutils literal notranslate"><span class="pre">in_noblock/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#in-list-3" id="id17"><code class="docutils literal notranslate"><span class="pre">in_list/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#in-list-2" id="id18"><code class="docutils literal notranslate"><span class="pre">in_list/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#rd-2" id="id19"><code class="docutils literal notranslate"><span class="pre">rd/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#rd-1" id="id20"><code class="docutils literal notranslate"><span class="pre">rd/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#rd-noblock-2" id="id21"><code class="docutils literal notranslate"><span class="pre">rd_noblock/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#rd-noblock-1" id="id22"><code class="docutils literal notranslate"><span class="pre">rd_noblock/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#rd-list-3" id="id23"><code class="docutils literal notranslate"><span class="pre">rd_list/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#rd-list-2" id="id24"><code class="docutils literal notranslate"><span class="pre">rd_list/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#findall-rd-noblock-4" id="id25"><code class="docutils literal notranslate"><span class="pre">findall_rd_noblock/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#findall-rd-noblock-3" id="id26"><code class="docutils literal notranslate"><span class="pre">findall_rd_noblock/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#findall-in-noblock-4" id="id27"><code class="docutils literal notranslate"><span class="pre">findall_in_noblock/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#findall-in-noblock-3" id="id28"><code class="docutils literal notranslate"><span class="pre">findall_in_noblock/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#linda-1" id="id3"><code class="docutils literal notranslate"><span class="pre">linda/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#linda-0-linda-0" id="id4"><code class="docutils literal notranslate"><span class="pre">linda/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#linda-client-2" id="id5"><code class="docutils literal notranslate"><span class="pre">linda_client/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#linda-client-1" id="id6"><code class="docutils literal notranslate"><span class="pre">linda_client/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#close-client-1" id="id7"><code class="docutils literal notranslate"><span class="pre">close_client/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#close-client-0" id="id8"><code class="docutils literal notranslate"><span class="pre">close_client/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#shutdown-server-1" id="id9"><code class="docutils literal notranslate"><span class="pre">shutdown_server/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#shutdown-server-0" id="id10"><code class="docutils literal notranslate"><span class="pre">shutdown_server/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#linda-timeout-2" id="id11"><code class="docutils literal notranslate"><span class="pre">linda_timeout/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#out-2" id="id12"><code class="docutils literal notranslate"><span class="pre">out/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#out-1" id="id13"><code class="docutils literal notranslate"><span class="pre">out/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#in-2" id="id14"><code class="docutils literal notranslate"><span class="pre">in/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#in-1" id="id15"><code class="docutils literal notranslate"><span class="pre">in/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#in-noblock-2" id="id16"><code class="docutils literal notranslate"><span class="pre">in_noblock/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#in-noblock-1" id="id17"><code class="docutils literal notranslate"><span class="pre">in_noblock/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#in-list-3" id="id18"><code class="docutils literal notranslate"><span class="pre">in_list/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#in-list-2" id="id19"><code class="docutils literal notranslate"><span class="pre">in_list/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rd-2" id="id20"><code class="docutils literal notranslate"><span class="pre">rd/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rd-1" id="id21"><code class="docutils literal notranslate"><span class="pre">rd/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rd-noblock-2" id="id22"><code class="docutils literal notranslate"><span class="pre">rd_noblock/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rd-noblock-1" id="id23"><code class="docutils literal notranslate"><span class="pre">rd_noblock/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rd-list-3" id="id24"><code class="docutils literal notranslate"><span class="pre">rd_list/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rd-list-2" id="id25"><code class="docutils literal notranslate"><span class="pre">rd_list/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#findall-rd-noblock-4" id="id26"><code class="docutils literal notranslate"><span class="pre">findall_rd_noblock/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#findall-rd-noblock-3" id="id27"><code class="docutils literal notranslate"><span class="pre">findall_rd_noblock/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#findall-in-noblock-4" id="id28"><code class="docutils literal notranslate"><span class="pre">findall_in_noblock/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#findall-in-noblock-3" id="id29"><code class="docutils literal notranslate"><span class="pre">findall_in_noblock/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id29">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id30">Private predicates</a></p>
+<li><p><a class="reference internal" href="#protected-predicates" id="id30">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id31">Private predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#server-socket-1" id="id31"><code class="docutils literal notranslate"><span class="pre">server_socket_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#client-connection-3" id="id32"><code class="docutils literal notranslate"><span class="pre">client_connection_/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#accept-hook-1" id="id33"><code class="docutils literal notranslate"><span class="pre">accept_hook_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#server-running-1" id="id34"><code class="docutils literal notranslate"><span class="pre">server_running_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#server-shutdown-0" id="id35"><code class="docutils literal notranslate"><span class="pre">server_shutdown_/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#tuple-1" id="id36"><code class="docutils literal notranslate"><span class="pre">tuple_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#waiting-3" id="id37"><code class="docutils literal notranslate"><span class="pre">waiting_/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#client-engine-2" id="id38"><code class="docutils literal notranslate"><span class="pre">client_engine_/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#client-connection-input-2" id="id39"><code class="docutils literal notranslate"><span class="pre">client_connection_input_/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#client-connection-output-2" id="id40"><code class="docutils literal notranslate"><span class="pre">client_connection_output_/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#client-timeout-1" id="id41"><code class="docutils literal notranslate"><span class="pre">client_timeout_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#ts-out-1" id="id42"><code class="docutils literal notranslate"><span class="pre">ts_out/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#ts-in-4" id="id43"><code class="docutils literal notranslate"><span class="pre">ts_in/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#ts-in-noblock-2" id="id44"><code class="docutils literal notranslate"><span class="pre">ts_in_noblock/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#ts-in-list-4" id="id45"><code class="docutils literal notranslate"><span class="pre">ts_in_list/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#ts-rd-4" id="id46"><code class="docutils literal notranslate"><span class="pre">ts_rd/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#ts-rd-noblock-2" id="id47"><code class="docutils literal notranslate"><span class="pre">ts_rd_noblock/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#ts-rd-list-4" id="id48"><code class="docutils literal notranslate"><span class="pre">ts_rd_list/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#ts-findall-rd-noblock-3" id="id49"><code class="docutils literal notranslate"><span class="pre">ts_findall_rd_noblock/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#ts-findall-in-noblock-3" id="id50"><code class="docutils literal notranslate"><span class="pre">ts_findall_in_noblock/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#server-socket-1" id="id32"><code class="docutils literal notranslate"><span class="pre">server_socket_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#client-connection-3" id="id33"><code class="docutils literal notranslate"><span class="pre">client_connection_/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#accept-hook-1" id="id34"><code class="docutils literal notranslate"><span class="pre">accept_hook_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#server-running-1" id="id35"><code class="docutils literal notranslate"><span class="pre">server_running_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#server-shutdown-0" id="id36"><code class="docutils literal notranslate"><span class="pre">server_shutdown_/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#tuple-1" id="id37"><code class="docutils literal notranslate"><span class="pre">tuple_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#waiting-3" id="id38"><code class="docutils literal notranslate"><span class="pre">waiting_/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#client-engine-2" id="id39"><code class="docutils literal notranslate"><span class="pre">client_engine_/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#client-connection-input-2" id="id40"><code class="docutils literal notranslate"><span class="pre">client_connection_input_/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#client-connection-output-2" id="id41"><code class="docutils literal notranslate"><span class="pre">client_connection_output_/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#client-connection-alias-2" id="id42"><code class="docutils literal notranslate"><span class="pre">client_connection_alias_/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#client-timeout-1" id="id43"><code class="docutils literal notranslate"><span class="pre">client_timeout_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ts-out-1" id="id44"><code class="docutils literal notranslate"><span class="pre">ts_out/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ts-in-4" id="id45"><code class="docutils literal notranslate"><span class="pre">ts_in/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ts-in-noblock-2" id="id46"><code class="docutils literal notranslate"><span class="pre">ts_in_noblock/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ts-in-list-4" id="id47"><code class="docutils literal notranslate"><span class="pre">ts_in_list/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ts-rd-4" id="id48"><code class="docutils literal notranslate"><span class="pre">ts_rd/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ts-rd-noblock-2" id="id49"><code class="docutils literal notranslate"><span class="pre">ts_rd_noblock/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ts-rd-list-4" id="id50"><code class="docutils literal notranslate"><span class="pre">ts_rd_list/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ts-findall-rd-noblock-3" id="id51"><code class="docutils literal notranslate"><span class="pre">ts_findall_rd_noblock/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ts-findall-in-noblock-3" id="id52"><code class="docutils literal notranslate"><span class="pre">ts_findall_in_noblock/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operators" id="id51">Operators</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id53">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="linda-0-linda-0">
-<span id="index-1"></span><span id="id1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">linda/0</span></code></a><a class="headerlink" href="#linda-0-linda-0" title="Link to this heading"></a></h3>
-<p>Starts a Linda server on an automatically assigned port. The server address (<code class="docutils literal notranslate"><span class="pre">Host:Port</span></code>) is written to the current output stream. The predicate succeeds when all clients have disconnected after a shutdown request.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">linda</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
 <section id="linda-1">
-<span id="linda-0-linda-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">linda/1</span></code></a><a class="headerlink" href="#linda-1" title="Link to this heading"></a></h3>
+<span id="linda-0-linda-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">linda/1</span></code></a><a class="headerlink" href="#linda-1" title="Link to this heading"></a></h3>
 <p>Starts a Linda server with the given options. The predicate succeeds when all clients have disconnected after a shutdown request.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -408,9 +397,68 @@
 </div></blockquote>
 <hr class="docutils" />
 </section>
+<section id="linda-0-linda-0">
+<span id="index-2"></span><span id="id1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">linda/0</span></code></a><a class="headerlink" href="#linda-0-linda-0" title="Link to this heading"></a></h3>
+<p>Starts a Linda server on an automatically assigned port using default options. The server address (<code class="docutils literal notranslate"><span class="pre">Host:Port</span></code>) is written to the current output stream. The predicate succeeds when all clients have disconnected after a shutdown request.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">linda</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="linda-client-2">
+<span id="linda-0-linda-client-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">linda_client/2</span></code></a><a class="headerlink" href="#linda-client-2" title="Link to this heading"></a></h3>
+<p>Connects to a Linda server at the given address (<code class="docutils literal notranslate"><span class="pre">Host:Port</span></code>) using the given options.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">linda_client(Address,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">linda_client(++address,++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Already connected:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">linda_error(already_connected)</span></code></div>
+</div>
+<div class="line">Connection failed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">linda_error(connection_failed(Error))</span></code></div>
+</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">alias(Alias)</span></code>: Use <code class="docutils literal notranslate"><span class="pre">Alias</span></code> as an alias to the server address. Default is <code class="docutils literal notranslate"><span class="pre">blackboard</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
 <section id="linda-client-1">
-<span id="linda-0-linda-client-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">linda_client/1</span></code></a><a class="headerlink" href="#linda-client-1" title="Link to this heading"></a></h3>
-<p>Connects to a Linda server at the given address (<code class="docutils literal notranslate"><span class="pre">Host:Port</span></code>).</p>
+<span id="linda-0-linda-client-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">linda_client/1</span></code></a><a class="headerlink" href="#linda-client-1" title="Link to this heading"></a></h3>
+<p>Connects to a Linda server at the given address (<code class="docutils literal notranslate"><span class="pre">Host:Port</span></code>) using default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -424,7 +472,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">linda_client(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">linda_client(++address)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -443,7 +491,7 @@
 <hr class="docutils" />
 </section>
 <section id="close-client-1">
-<span id="linda-0-close-client-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">close_client/1</span></code></a><a class="headerlink" href="#close-client-1" title="Link to this heading"></a></h3>
+<span id="linda-0-close-client-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">close_client/1</span></code></a><a class="headerlink" href="#close-client-1" title="Link to this heading"></a></h3>
 <p>Closes the connection to the given Linda server.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -458,13 +506,13 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">close_client(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">close_client(++address)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="close-client-0">
-<span id="linda-0-close-client-0"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">close_client/0</span></code></a><a class="headerlink" href="#close-client-0" title="Link to this heading"></a></h3>
+<span id="linda-0-close-client-0"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">close_client/0</span></code></a><a class="headerlink" href="#close-client-0" title="Link to this heading"></a></h3>
 <p>Closes the connection to the default Linda server.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -481,7 +529,7 @@
 <hr class="docutils" />
 </section>
 <section id="shutdown-server-1">
-<span id="linda-0-shutdown-server-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">shutdown_server/1</span></code></a><a class="headerlink" href="#shutdown-server-1" title="Link to this heading"></a></h3>
+<span id="linda-0-shutdown-server-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">shutdown_server/1</span></code></a><a class="headerlink" href="#shutdown-server-1" title="Link to this heading"></a></h3>
 <p>Sends a shutdown signal to the given server. The server stops accepting new connections but continues serving existing clients until they all disconnect. Call <code class="docutils literal notranslate"><span class="pre">close_client/1</span></code> after this predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -496,7 +544,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">shutdown_server(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">shutdown_server(++address)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -504,14 +552,14 @@
 <div class="line-block">
 <div class="line">Not connected:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">linda_error(not_connected)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">linda_error(not_connected(Address))</span></code></div>
 </div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="shutdown-server-0">
-<span id="linda-0-shutdown-server-0"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">shutdown_server/0</span></code></a><a class="headerlink" href="#shutdown-server-0" title="Link to this heading"></a></h3>
+<span id="linda-0-shutdown-server-0"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">shutdown_server/0</span></code></a><a class="headerlink" href="#shutdown-server-0" title="Link to this heading"></a></h3>
 <p>Sends a shutdown signal to the default server. The server stops accepting new connections but continues serving existing clients until they all disconnect. Call <code class="docutils literal notranslate"><span class="pre">close_client/0</span></code> after this predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -530,14 +578,14 @@
 <div class="line-block">
 <div class="line">Not connected:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">linda_error(not_connected)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">linda_error(not_connected(Address))</span></code></div>
 </div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="linda-timeout-2">
-<span id="linda-0-linda-timeout-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">linda_timeout/2</span></code></a><a class="headerlink" href="#linda-timeout-2" title="Link to this heading"></a></h3>
+<span id="linda-0-linda-timeout-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">linda_timeout/2</span></code></a><a class="headerlink" href="#linda-timeout-2" title="Link to this heading"></a></h3>
 <p>Gets or sets the client timeout. <code class="docutils literal notranslate"><span class="pre">OldTime</span></code> is unified with the current timeout and the timeout is set to <code class="docutils literal notranslate"><span class="pre">NewTime</span></code>. The timeout value is either <code class="docutils literal notranslate"><span class="pre">off</span></code> (no timeout, wait forever) or <code class="docutils literal notranslate"><span class="pre">Seconds:Milliseconds</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -558,7 +606,7 @@
 <hr class="docutils" />
 </section>
 <section id="out-2">
-<span id="linda-0-out-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">out/2</span></code></a><a class="headerlink" href="#out-2" title="Link to this heading"></a></h3>
+<span id="linda-0-out-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">out/2</span></code></a><a class="headerlink" href="#out-2" title="Link to this heading"></a></h3>
 <p>Places the tuple <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> in the tuple-space of the given server.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -569,17 +617,17 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">out(Address,Tuple)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">out(AddressOrALias,Tuple)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">out(++compound,+term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">out(++address_or_alias,+term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="out-1">
-<span id="linda-0-out-1"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">out/1</span></code></a><a class="headerlink" href="#out-1" title="Link to this heading"></a></h3>
+<span id="linda-0-out-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">out/1</span></code></a><a class="headerlink" href="#out-1" title="Link to this heading"></a></h3>
 <p>Places the tuple <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> in the tuple-space of the default server.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -600,7 +648,7 @@
 <hr class="docutils" />
 </section>
 <section id="in-2">
-<span id="linda-0-in-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">in/2</span></code></a><a class="headerlink" href="#in-2" title="Link to this heading"></a></h3>
+<span id="linda-0-in-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">in/2</span></code></a><a class="headerlink" href="#in-2" title="Link to this heading"></a></h3>
 <p>Removes a tuple matching <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> from the tuple-space of the given server. Blocks if no matching tuple is available.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -611,17 +659,17 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">in(Address,Tuple)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">in(AddressOrALias,Tuple)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">in(++compound,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">in(++address_or_alias,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="in-1">
-<span id="linda-0-in-1"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">in/1</span></code></a><a class="headerlink" href="#in-1" title="Link to this heading"></a></h3>
+<span id="linda-0-in-1"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">in/1</span></code></a><a class="headerlink" href="#in-1" title="Link to this heading"></a></h3>
 <p>Removes a tuple matching <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> from the tuple-space of the default server. Blocks if no matching tuple is available.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -642,7 +690,7 @@
 <hr class="docutils" />
 </section>
 <section id="in-noblock-2">
-<span id="linda-0-in-noblock-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">in_noblock/2</span></code></a><a class="headerlink" href="#in-noblock-2" title="Link to this heading"></a></h3>
+<span id="linda-0-in-noblock-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">in_noblock/2</span></code></a><a class="headerlink" href="#in-noblock-2" title="Link to this heading"></a></h3>
 <p>Removes a tuple matching <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> from the tuple-space of the default server. Fails if no matching tuple is available.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -653,17 +701,17 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">in_noblock(Address,Tuple)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">in_noblock(AddressOrALias,Tuple)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">in_noblock(++compound,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">in_noblock(++address_or_alias,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="in-noblock-1">
-<span id="linda-0-in-noblock-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">in_noblock/1</span></code></a><a class="headerlink" href="#in-noblock-1" title="Link to this heading"></a></h3>
+<span id="linda-0-in-noblock-1"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">in_noblock/1</span></code></a><a class="headerlink" href="#in-noblock-1" title="Link to this heading"></a></h3>
 <p>Removes a tuple matching <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> from the tuple-space of the default server. Fails if no matching tuple is available.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -684,7 +732,7 @@
 <hr class="docutils" />
 </section>
 <section id="in-list-3">
-<span id="linda-0-in-list-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">in_list/3</span></code></a><a class="headerlink" href="#in-list-3" title="Link to this heading"></a></h3>
+<span id="linda-0-in-list-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">in_list/3</span></code></a><a class="headerlink" href="#in-list-3" title="Link to this heading"></a></h3>
 <p>Removes a tuple matching one of the patterns in <code class="docutils literal notranslate"><span class="pre">TupleList</span></code> from the tuple-space of the given server. <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> is unified with the matched tuple. Blocks if no matching tuple is available.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -695,17 +743,17 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">in_list(Address,TupleList,Tuple)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">in_list(AddressOrALias,TupleList,Tuple)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">in_list(++compound,+list,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">in_list(++address_or_alias,+list,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="in-list-2">
-<span id="linda-0-in-list-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">in_list/2</span></code></a><a class="headerlink" href="#in-list-2" title="Link to this heading"></a></h3>
+<span id="linda-0-in-list-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">in_list/2</span></code></a><a class="headerlink" href="#in-list-2" title="Link to this heading"></a></h3>
 <p>Removes a tuple matching one of the patterns in <code class="docutils literal notranslate"><span class="pre">TupleList</span></code> from the tuple-space of the default server. <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> is unified with the matched tuple. Blocks if no matching tuple is available.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -726,7 +774,7 @@
 <hr class="docutils" />
 </section>
 <section id="rd-2">
-<span id="linda-0-rd-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rd/2</span></code></a><a class="headerlink" href="#rd-2" title="Link to this heading"></a></h3>
+<span id="linda-0-rd-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rd/2</span></code></a><a class="headerlink" href="#rd-2" title="Link to this heading"></a></h3>
 <p>Reads a tuple matching <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> from the tuple-space of the given server without removing it. Blocks if no matching tuple is available.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -737,17 +785,17 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">rd(Address,Tuple)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rd(AddressOrALias,Tuple)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">rd(++compound,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rd(++address_or_alias,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="rd-1">
-<span id="linda-0-rd-1"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rd/1</span></code></a><a class="headerlink" href="#rd-1" title="Link to this heading"></a></h3>
+<span id="linda-0-rd-1"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rd/1</span></code></a><a class="headerlink" href="#rd-1" title="Link to this heading"></a></h3>
 <p>Reads a tuple matching <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> from the tuple-space of the default server without removing it. Blocks if no matching tuple is available.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -768,7 +816,7 @@
 <hr class="docutils" />
 </section>
 <section id="rd-noblock-2">
-<span id="linda-0-rd-noblock-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rd_noblock/2</span></code></a><a class="headerlink" href="#rd-noblock-2" title="Link to this heading"></a></h3>
+<span id="linda-0-rd-noblock-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rd_noblock/2</span></code></a><a class="headerlink" href="#rd-noblock-2" title="Link to this heading"></a></h3>
 <p>Reads a tuple matching <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> from the tuple-space of the given server without removing it. Fails if no matching tuple is available.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -779,17 +827,17 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">rd_noblock(Address,Tuple)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rd_noblock(AddressOrALias,Tuple)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">rd_noblock(++compound,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rd_noblock(++address_or_alias,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="rd-noblock-1">
-<span id="linda-0-rd-noblock-1"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rd_noblock/1</span></code></a><a class="headerlink" href="#rd-noblock-1" title="Link to this heading"></a></h3>
+<span id="linda-0-rd-noblock-1"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rd_noblock/1</span></code></a><a class="headerlink" href="#rd-noblock-1" title="Link to this heading"></a></h3>
 <p>Reads a tuple matching <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> from the tuple-space of the default server without removing it. Fails if no matching tuple is available.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -810,7 +858,7 @@
 <hr class="docutils" />
 </section>
 <section id="rd-list-3">
-<span id="linda-0-rd-list-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rd_list/3</span></code></a><a class="headerlink" href="#rd-list-3" title="Link to this heading"></a></h3>
+<span id="linda-0-rd-list-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rd_list/3</span></code></a><a class="headerlink" href="#rd-list-3" title="Link to this heading"></a></h3>
 <p>Reads a tuple matching one of the patterns in <code class="docutils literal notranslate"><span class="pre">TupleList</span></code> from the tuple-space of the given server without removing it. <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> is unified with the matched tuple. Blocks if no matching tuple is available.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -821,17 +869,17 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">rd_list(Address,TupleList,Tuple)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rd_list(AddressOrALias,TupleList,Tuple)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">rd_list(++compound,+list,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rd_list(++address_or_alias,+list,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="rd-list-2">
-<span id="linda-0-rd-list-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rd_list/2</span></code></a><a class="headerlink" href="#rd-list-2" title="Link to this heading"></a></h3>
+<span id="linda-0-rd-list-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rd_list/2</span></code></a><a class="headerlink" href="#rd-list-2" title="Link to this heading"></a></h3>
 <p>Reads a tuple matching one of the patterns in <code class="docutils literal notranslate"><span class="pre">TupleList</span></code> from the tuple-space of the default server without removing it. <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> is unified with the matched tuple. Blocks if no matching tuple is available.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -852,7 +900,7 @@
 <hr class="docutils" />
 </section>
 <section id="findall-rd-noblock-4">
-<span id="linda-0-findall-rd-noblock-4"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">findall_rd_noblock/4</span></code></a><a class="headerlink" href="#findall-rd-noblock-4" title="Link to this heading"></a></h3>
+<span id="linda-0-findall-rd-noblock-4"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">findall_rd_noblock/4</span></code></a><a class="headerlink" href="#findall-rd-noblock-4" title="Link to this heading"></a></h3>
 <p>Returns a list of all instances of <code class="docutils literal notranslate"><span class="pre">Template</span></code> for tuples matching <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> in the tuple-space. The operation is atomic.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -863,17 +911,17 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">findall_rd_noblock(Address,Template,Tuple,List)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">findall_rd_noblock(AddressOrALias,Template,Tuple,List)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">findall_rd_noblock(++compound,?term,+term,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">findall_rd_noblock(++address_or_alias,?term,+term,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="findall-rd-noblock-3">
-<span id="linda-0-findall-rd-noblock-3"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">findall_rd_noblock/3</span></code></a><a class="headerlink" href="#findall-rd-noblock-3" title="Link to this heading"></a></h3>
+<span id="linda-0-findall-rd-noblock-3"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">findall_rd_noblock/3</span></code></a><a class="headerlink" href="#findall-rd-noblock-3" title="Link to this heading"></a></h3>
 <p>Returns a list of all instances of <code class="docutils literal notranslate"><span class="pre">Template</span></code> for tuples matching <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> in the tuple-space. The operation is atomic.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -894,7 +942,7 @@
 <hr class="docutils" />
 </section>
 <section id="findall-in-noblock-4">
-<span id="linda-0-findall-in-noblock-4"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">findall_in_noblock/4</span></code></a><a class="headerlink" href="#findall-in-noblock-4" title="Link to this heading"></a></h3>
+<span id="linda-0-findall-in-noblock-4"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">findall_in_noblock/4</span></code></a><a class="headerlink" href="#findall-in-noblock-4" title="Link to this heading"></a></h3>
 <p>Removes and returns a list of all instances of <code class="docutils literal notranslate"><span class="pre">Template</span></code> for tuples matching <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> in the tuple-space. The operation is atomic - all matching tuples are removed in one synchronized operation.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -905,17 +953,17 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">findall_in_noblock(Address,Template,Tuple,List)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">findall_in_noblock(AddressOrALias,Template,Tuple,List)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">findall_in_noblock(++compound,?term,+term,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">findall_in_noblock(++address_or_alias,?term,+term,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="findall-in-noblock-3">
-<span id="linda-0-findall-in-noblock-3"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">findall_in_noblock/3</span></code></a><a class="headerlink" href="#findall-in-noblock-3" title="Link to this heading"></a></h3>
+<span id="linda-0-findall-in-noblock-3"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">findall_in_noblock/3</span></code></a><a class="headerlink" href="#findall-in-noblock-3" title="Link to this heading"></a></h3>
 <p>Removes and returns a list of all instances of <code class="docutils literal notranslate"><span class="pre">Template</span></code> for tuples matching <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> in the tuple-space. The operation is atomic - all matching tuples are removed in one synchronized operation.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -943,7 +991,7 @@
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <section id="server-socket-1">
-<span id="linda-0-server-socket-1"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">server_socket_/1</span></code></a><a class="headerlink" href="#server-socket-1" title="Link to this heading"></a></h3>
+<span id="linda-0-server-socket-1"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">server_socket_/1</span></code></a><a class="headerlink" href="#server-socket-1" title="Link to this heading"></a></h3>
 <p>Stores the server socket descriptor.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -964,7 +1012,7 @@
 <hr class="docutils" />
 </section>
 <section id="client-connection-3">
-<span id="linda-0-client-connection-3"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">client_connection_/3</span></code></a><a class="headerlink" href="#client-connection-3" title="Link to this heading"></a></h3>
+<span id="linda-0-client-connection-3"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">client_connection_/3</span></code></a><a class="headerlink" href="#client-connection-3" title="Link to this heading"></a></h3>
 <p>Stores active client connections. Each client has an ID, input stream, and output stream.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -985,7 +1033,7 @@
 <hr class="docutils" />
 </section>
 <section id="accept-hook-1">
-<span id="linda-0-accept-hook-1"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">accept_hook_/1</span></code></a><a class="headerlink" href="#accept-hook-1" title="Link to this heading"></a></h3>
+<span id="linda-0-accept-hook-1"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">accept_hook_/1</span></code></a><a class="headerlink" href="#accept-hook-1" title="Link to this heading"></a></h3>
 <p>Stores the optional accept hook goal to call when a client connects.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1006,7 +1054,7 @@
 <hr class="docutils" />
 </section>
 <section id="server-running-1">
-<span id="linda-0-server-running-1"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">server_running_/1</span></code></a><a class="headerlink" href="#server-running-1" title="Link to this heading"></a></h3>
+<span id="linda-0-server-running-1"></span><span id="index-31"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">server_running_/1</span></code></a><a class="headerlink" href="#server-running-1" title="Link to this heading"></a></h3>
 <p>Flag indicating the server is running.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1021,13 +1069,13 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">server_running_(?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">server_running_(?address)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="server-shutdown-0">
-<span id="linda-0-server-shutdown-0"></span><span id="index-31"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">server_shutdown_/0</span></code></a><a class="headerlink" href="#server-shutdown-0" title="Link to this heading"></a></h3>
+<span id="linda-0-server-shutdown-0"></span><span id="index-32"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">server_shutdown_/0</span></code></a><a class="headerlink" href="#server-shutdown-0" title="Link to this heading"></a></h3>
 <p>Flag indicating the server has received a shutdown request.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1044,7 +1092,7 @@
 <hr class="docutils" />
 </section>
 <section id="tuple-1">
-<span id="linda-0-tuple-1"></span><span id="index-32"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">tuple_/1</span></code></a><a class="headerlink" href="#tuple-1" title="Link to this heading"></a></h3>
+<span id="linda-0-tuple-1"></span><span id="index-33"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">tuple_/1</span></code></a><a class="headerlink" href="#tuple-1" title="Link to this heading"></a></h3>
 <p>Stores tuples in the Linda tuple space.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1065,7 +1113,7 @@
 <hr class="docutils" />
 </section>
 <section id="waiting-3">
-<span id="linda-0-waiting-3"></span><span id="index-33"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">waiting_/3</span></code></a><a class="headerlink" href="#waiting-3" title="Link to this heading"></a></h3>
+<span id="linda-0-waiting-3"></span><span id="index-34"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">waiting_/3</span></code></a><a class="headerlink" href="#waiting-3" title="Link to this heading"></a></h3>
 <p>Stores blocked clients waiting for tuples. Records the client ID, request pattern, and output stream.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1086,7 +1134,7 @@
 <hr class="docutils" />
 </section>
 <section id="client-engine-2">
-<span id="linda-0-client-engine-2"></span><span id="index-34"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">client_engine_/2</span></code></a><a class="headerlink" href="#client-engine-2" title="Link to this heading"></a></h3>
+<span id="linda-0-client-engine-2"></span><span id="index-35"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">client_engine_/2</span></code></a><a class="headerlink" href="#client-engine-2" title="Link to this heading"></a></h3>
 <p>Maps client IDs to their corresponding threaded engine names.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1107,7 +1155,7 @@
 <hr class="docutils" />
 </section>
 <section id="client-connection-input-2">
-<span id="linda-0-client-connection-input-2"></span><span id="index-35"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">client_connection_input_/2</span></code></a><a class="headerlink" href="#client-connection-input-2" title="Link to this heading"></a></h3>
+<span id="linda-0-client-connection-input-2"></span><span id="index-36"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">client_connection_input_/2</span></code></a><a class="headerlink" href="#client-connection-input-2" title="Link to this heading"></a></h3>
 <p>Stores the input stream for the client connection to the server.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1122,13 +1170,13 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">client_connection_input_(?compound,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">client_connection_input_(?address,?stream)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="client-connection-output-2">
-<span id="linda-0-client-connection-output-2"></span><span id="index-36"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">client_connection_output_/2</span></code></a><a class="headerlink" href="#client-connection-output-2" title="Link to this heading"></a></h3>
+<span id="linda-0-client-connection-output-2"></span><span id="index-37"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">client_connection_output_/2</span></code></a><a class="headerlink" href="#client-connection-output-2" title="Link to this heading"></a></h3>
 <p>Stores the output stream for the client connection to the server.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1143,13 +1191,34 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">client_connection_output_(?compound,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">client_connection_output_(?address,?stream)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="client-connection-alias-2">
+<span id="linda-0-client-connection-alias-2"></span><span id="index-38"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">client_connection_alias_/2</span></code></a><a class="headerlink" href="#client-connection-alias-2" title="Link to this heading"></a></h3>
+<p>Stores the client connection server aliases.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">client_connection_alias_(Address,Alias)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">client_connection_alias_(?address,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="client-timeout-1">
-<span id="linda-0-client-timeout-1"></span><span id="index-37"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">client_timeout_/1</span></code></a><a class="headerlink" href="#client-timeout-1" title="Link to this heading"></a></h3>
+<span id="linda-0-client-timeout-1"></span><span id="index-39"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">client_timeout_/1</span></code></a><a class="headerlink" href="#client-timeout-1" title="Link to this heading"></a></h3>
 <p>Stores the timeout value for blocking client operations. Value is either <code class="docutils literal notranslate"><span class="pre">off</span></code> or <code class="docutils literal notranslate"><span class="pre">Seconds:Milliseconds</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1170,7 +1239,7 @@
 <hr class="docutils" />
 </section>
 <section id="ts-out-1">
-<span id="linda-0-ts-out-1"></span><span id="index-38"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ts_out/1</span></code></a><a class="headerlink" href="#ts-out-1" title="Link to this heading"></a></h3>
+<span id="linda-0-ts-out-1"></span><span id="index-40"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ts_out/1</span></code></a><a class="headerlink" href="#ts-out-1" title="Link to this heading"></a></h3>
 <p>Synchronized predicate to add a tuple to the tuple space and wake waiting clients.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1191,7 +1260,7 @@
 <hr class="docutils" />
 </section>
 <section id="ts-in-4">
-<span id="linda-0-ts-in-4"></span><span id="index-39"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ts_in/4</span></code></a><a class="headerlink" href="#ts-in-4" title="Link to this heading"></a></h3>
+<span id="linda-0-ts-in-4"></span><span id="index-41"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ts_in/4</span></code></a><a class="headerlink" href="#ts-in-4" title="Link to this heading"></a></h3>
 <p>Synchronized predicate to remove a matching tuple or register a waiting client.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1212,7 +1281,7 @@
 <hr class="docutils" />
 </section>
 <section id="ts-in-noblock-2">
-<span id="linda-0-ts-in-noblock-2"></span><span id="index-40"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ts_in_noblock/2</span></code></a><a class="headerlink" href="#ts-in-noblock-2" title="Link to this heading"></a></h3>
+<span id="linda-0-ts-in-noblock-2"></span><span id="index-42"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ts_in_noblock/2</span></code></a><a class="headerlink" href="#ts-in-noblock-2" title="Link to this heading"></a></h3>
 <p>Synchronized predicate to try removing a matching tuple without blocking.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1233,7 +1302,7 @@
 <hr class="docutils" />
 </section>
 <section id="ts-in-list-4">
-<span id="linda-0-ts-in-list-4"></span><span id="index-41"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ts_in_list/4</span></code></a><a class="headerlink" href="#ts-in-list-4" title="Link to this heading"></a></h3>
+<span id="linda-0-ts-in-list-4"></span><span id="index-43"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ts_in_list/4</span></code></a><a class="headerlink" href="#ts-in-list-4" title="Link to this heading"></a></h3>
 <p>Synchronized predicate to remove a tuple matching one of multiple patterns or register a waiting client.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1254,7 +1323,7 @@
 <hr class="docutils" />
 </section>
 <section id="ts-rd-4">
-<span id="linda-0-ts-rd-4"></span><span id="index-42"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ts_rd/4</span></code></a><a class="headerlink" href="#ts-rd-4" title="Link to this heading"></a></h3>
+<span id="linda-0-ts-rd-4"></span><span id="index-44"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ts_rd/4</span></code></a><a class="headerlink" href="#ts-rd-4" title="Link to this heading"></a></h3>
 <p>Synchronized predicate to read a matching tuple or register a waiting client.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1275,7 +1344,7 @@
 <hr class="docutils" />
 </section>
 <section id="ts-rd-noblock-2">
-<span id="linda-0-ts-rd-noblock-2"></span><span id="index-43"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ts_rd_noblock/2</span></code></a><a class="headerlink" href="#ts-rd-noblock-2" title="Link to this heading"></a></h3>
+<span id="linda-0-ts-rd-noblock-2"></span><span id="index-45"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ts_rd_noblock/2</span></code></a><a class="headerlink" href="#ts-rd-noblock-2" title="Link to this heading"></a></h3>
 <p>Synchronized predicate to try reading a matching tuple without blocking.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1296,7 +1365,7 @@
 <hr class="docutils" />
 </section>
 <section id="ts-rd-list-4">
-<span id="linda-0-ts-rd-list-4"></span><span id="index-44"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ts_rd_list/4</span></code></a><a class="headerlink" href="#ts-rd-list-4" title="Link to this heading"></a></h3>
+<span id="linda-0-ts-rd-list-4"></span><span id="index-46"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ts_rd_list/4</span></code></a><a class="headerlink" href="#ts-rd-list-4" title="Link to this heading"></a></h3>
 <p>Synchronized predicate to read a tuple matching one of multiple patterns or register a waiting client.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1317,7 +1386,7 @@
 <hr class="docutils" />
 </section>
 <section id="ts-findall-rd-noblock-3">
-<span id="linda-0-ts-findall-rd-noblock-3"></span><span id="index-45"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ts_findall_rd_noblock/3</span></code></a><a class="headerlink" href="#ts-findall-rd-noblock-3" title="Link to this heading"></a></h3>
+<span id="linda-0-ts-findall-rd-noblock-3"></span><span id="index-47"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ts_findall_rd_noblock/3</span></code></a><a class="headerlink" href="#ts-findall-rd-noblock-3" title="Link to this heading"></a></h3>
 <p>Synchronized predicate to collect all tuples matching a pattern.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1338,7 +1407,7 @@
 <hr class="docutils" />
 </section>
 <section id="ts-findall-in-noblock-3">
-<span id="linda-0-ts-findall-in-noblock-3"></span><span id="index-46"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ts_findall_in_noblock/3</span></code></a><a class="headerlink" href="#ts-findall-in-noblock-3" title="Link to this heading"></a></h3>
+<span id="linda-0-ts-findall-in-noblock-3"></span><span id="index-48"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ts_findall_in_noblock/3</span></code></a><a class="headerlink" href="#ts-findall-in-noblock-3" title="Link to this heading"></a></h3>
 <p>Synchronized predicate to collect and remove all tuples matching a pattern.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

@@ -271,7 +271,8 @@ Tuple operations (multiple servers)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Variants of the predicates above with an additional first argument for
-the server address.
+the server address or the server alias (an atom; default is
+``blackboard``).
 
 Known issues
 ------------

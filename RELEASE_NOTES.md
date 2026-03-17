@@ -37,8 +37,14 @@ a term position while verifying that the position is for the given term.
 Library
 -------
 
+* CHANGED: The `linda` library exception when a client is not connected from
+`linda_error(not_connected)` to `linda_error(not_connected(AddressOrAlias))`.
+
 * ADDED: Support to the `linda` library for clients to connect to multiple
 servers.
+
+* ADDED: Support to the `linda` library for clients to define aliases for
+servers connections.
 
 * ADDED: New character set, `hexadecimal`, to the `type` library object and to
 the `arbitrary` library category.

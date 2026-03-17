@@ -19,7 +19,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(linda).
+:- object(linda,
+	imports(options)).
 
 	:- info([
 		version is 2:0:0,
@@ -44,12 +45,6 @@
 	% Server predicates
 	% ==========================================================================
 
-	:- public(linda/0).
-	:- mode(linda, one).
-	:- info(linda/0, [
-		comment is 'Starts a Linda server on an automatically assigned port. The server address (``Host:Port``) is written to the current output stream. The predicate succeeds when all clients have disconnected after a shutdown request.'
-	]).
-
 	:- public(linda/1).
 	:- meta_predicate(linda(::)).
 	:- mode(linda(+list), one).
@@ -63,14 +58,34 @@
 		]
 	]).
 
+	:- public(linda/0).
+	:- mode(linda, one).
+	:- info(linda/0, [
+		comment is 'Starts a Linda server on an automatically assigned port using default options. The server address (``Host:Port``) is written to the current output stream. The predicate succeeds when all clients have disconnected after a shutdown request.'
+	]).
+
 	% ==========================================================================
 	% Client predicates
 	% ==========================================================================
 
+	:- public(linda_client/2).
+	:- mode(linda_client(++address, ++list(compound)), one_or_error).
+	:- info(linda_client/2, [
+		comment is 'Connects to a Linda server at the given address (``Host:Port``) using the given options.',
+		argnames is ['Address', 'Options'],
+		exceptions is [
+			'Already connected' - linda_error(already_connected),
+			'Connection failed' - linda_error(connection_failed('Error'))
+		],
+		remarks is [
+			'Option ``alias(Alias)``' - 'Use ``Alias`` as an alias to the server address. Default is ``blackboard``.'
+		]
+	]).
+
 	:- public(linda_client/1).
-	:- mode(linda_client(+compound), one_or_error).
+	:- mode(linda_client(++address), one_or_error).
 	:- info(linda_client/1, [
-		comment is 'Connects to a Linda server at the given address (``Host:Port``).',
+		comment is 'Connects to a Linda server at the given address (``Host:Port``) using default options.',
 		argnames is ['Address'],
 		exceptions is [
 			'Already connected' - linda_error(already_connected),
@@ -79,7 +94,7 @@
 	]).
 
 	:- public(close_client/1).
-	:- mode(close_client(+compound), one).
+	:- mode(close_client(++address), one).
 	:- info(close_client/1, [
 		comment is 'Closes the connection to the given Linda server.',
 		argnames is ['Address']
@@ -92,12 +107,12 @@
 	]).
 
 	:- public(shutdown_server/1).
-	:- mode(shutdown_server(+compound), one_or_error).
+	:- mode(shutdown_server(++address), one_or_error).
 	:- info(shutdown_server/1, [
 		comment is 'Sends a shutdown signal to the given server. The server stops accepting new connections but continues serving existing clients until they all disconnect. Call ``close_client/1`` after this predicate.',
 		argnames is ['Address'],
 		exceptions is [
-			'Not connected' - linda_error(not_connected)
+			'Not connected' - linda_error(not_connected('Address'))
 		]
 	]).
 
@@ -106,7 +121,7 @@
 	:- info(shutdown_server/0, [
 		comment is 'Sends a shutdown signal to the default server. The server stops accepting new connections but continues serving existing clients until they all disconnect. Call ``close_client/0`` after this predicate.',
 		exceptions is [
-			'Not connected' - linda_error(not_connected)
+			'Not connected' - linda_error(not_connected('Address'))
 		]
 	]).
 
@@ -122,10 +137,10 @@
 	% ==========================================================================
 
 	:- public(out/2).
-	:- mode(out(++compound, +term), one).
+	:- mode(out(++address_or_alias, +term), one).
 	:- info(out/2, [
 		comment is 'Places the tuple ``Tuple`` in the tuple-space of the given server.',
-		argnames is ['Address', 'Tuple']
+		argnames is ['AddressOrALias', 'Tuple']
 	]).
 
 	:- public(out/1).
@@ -136,10 +151,10 @@
 	]).
 
 	:- public(in/2).
-	:- mode(in(++compound, ?term), one).
+	:- mode(in(++address_or_alias, ?term), one).
 	:- info(in/2, [
 		comment is 'Removes a tuple matching ``Tuple`` from the tuple-space of the given server. Blocks if no matching tuple is available.',
-		argnames is ['Address', 'Tuple']
+		argnames is ['AddressOrALias', 'Tuple']
 	]).
 
 	:- public(in/1).
@@ -150,10 +165,10 @@
 	]).
 
 	:- public(in_noblock/2).
-	:- mode(in_noblock(++compound, ?term), zero_or_one).
+	:- mode(in_noblock(++address_or_alias, ?term), zero_or_one).
 	:- info(in_noblock/2, [
 		comment is 'Removes a tuple matching ``Tuple`` from the tuple-space of the default server. Fails if no matching tuple is available.',
-		argnames is ['Address', 'Tuple']
+		argnames is ['AddressOrALias', 'Tuple']
 	]).
 
 	:- public(in_noblock/1).
@@ -164,10 +179,10 @@
 	]).
 
 	:- public(in_list/3).
-	:- mode(in_list(++compound, +list, ?term), one).
+	:- mode(in_list(++address_or_alias, +list, ?term), one).
 	:- info(in_list/3, [
 		comment is 'Removes a tuple matching one of the patterns in ``TupleList`` from the tuple-space of the given server. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.',
-		argnames is ['Address', 'TupleList', 'Tuple']
+		argnames is ['AddressOrALias', 'TupleList', 'Tuple']
 	]).
 
 	:- public(in_list/2).
@@ -178,10 +193,10 @@
 	]).
 
 	:- public(rd/2).
-	:- mode(rd(++compound, ?term), one).
+	:- mode(rd(++address_or_alias, ?term), one).
 	:- info(rd/2, [
 		comment is 'Reads a tuple matching ``Tuple`` from the tuple-space of the given server without removing it. Blocks if no matching tuple is available.',
-		argnames is ['Address', 'Tuple']
+		argnames is ['AddressOrALias', 'Tuple']
 	]).
 
 	:- public(rd/1).
@@ -192,10 +207,10 @@
 	]).
 
 	:- public(rd_noblock/2).
-	:- mode(rd_noblock(++compound, ?term), zero_or_one).
+	:- mode(rd_noblock(++address_or_alias, ?term), zero_or_one).
 	:- info(rd_noblock/2, [
 		comment is 'Reads a tuple matching ``Tuple`` from the tuple-space of the given server without removing it. Fails if no matching tuple is available.',
-		argnames is ['Address', 'Tuple']
+		argnames is ['AddressOrALias', 'Tuple']
 	]).
 
 	:- public(rd_noblock/1).
@@ -206,10 +221,10 @@
 	]).
 
 	:- public(rd_list/3).
-	:- mode(rd_list(++compound, +list, ?term), one).
+	:- mode(rd_list(++address_or_alias, +list, ?term), one).
 	:- info(rd_list/3, [
 		comment is 'Reads a tuple matching one of the patterns in ``TupleList`` from the tuple-space of the given server without removing it. ``Tuple`` is unified with the matched tuple. Blocks if no matching tuple is available.',
-		argnames is ['Address', 'TupleList', 'Tuple']
+		argnames is ['AddressOrALias', 'TupleList', 'Tuple']
 	]).
 
 	:- public(rd_list/2).
@@ -220,10 +235,10 @@
 	]).
 
 	:- public(findall_rd_noblock/4).
-	:- mode(findall_rd_noblock(++compound, ?term, +term, ?list), one).
+	:- mode(findall_rd_noblock(++address_or_alias, ?term, +term, ?list), one).
 	:- info(findall_rd_noblock/4, [
 		comment is 'Returns a list of all instances of ``Template`` for tuples matching ``Tuple`` in the tuple-space. The operation is atomic.',
-		argnames is ['Address', 'Template', 'Tuple', 'List']
+		argnames is ['AddressOrALias', 'Template', 'Tuple', 'List']
 	]).
 
 	:- public(findall_rd_noblock/3).
@@ -234,10 +249,10 @@
 	]).
 
 	:- public(findall_in_noblock/4).
-	:- mode(findall_in_noblock(++compound, ?term, +term, ?list), one).
+	:- mode(findall_in_noblock(++address_or_alias, ?term, +term, ?list), one).
 	:- info(findall_in_noblock/4, [
 		comment is 'Removes and returns a list of all instances of ``Template`` for tuples matching ``Tuple`` in the tuple-space. The operation is atomic - all matching tuples are removed in one synchronized operation.',
-		argnames is ['Address', 'Template', 'Tuple', 'List']
+		argnames is ['AddressOrALias', 'Template', 'Tuple', 'List']
 	]).
 
 	:- public(findall_in_noblock/3).
@@ -277,7 +292,7 @@
 
 	:- private(server_running_/1).
 	:- dynamic(server_running_/1).
-	:- mode(server_running_(?compound), zero_or_one).
+	:- mode(server_running_(?address), zero_or_one).
 	:- info(server_running_/1, [
 		comment is 'Flag indicating the server is running.',
 		argnames is ['Address']
@@ -320,7 +335,7 @@
 
 	:- private(client_connection_input_/2).
 	:- dynamic(client_connection_input_/2).
-	:- mode(client_connection_input_(?compound, ?term), zero_or_more).
+	:- mode(client_connection_input_(?address, ?stream), zero_or_more).
 	:- info(client_connection_input_/2, [
 		comment is 'Stores the input stream for the client connection to the server.',
 		argnames is ['Address', 'InputStream']
@@ -328,10 +343,18 @@
 
 	:- private(client_connection_output_/2).
 	:- dynamic(client_connection_output_/2).
-	:- mode(client_connection_output_(?compound, ?term), zero_or_more).
+	:- mode(client_connection_output_(?address, ?stream), zero_or_more).
 	:- info(client_connection_output_/2, [
 		comment is 'Stores the output stream for the client connection to the server.',
 		argnames is ['Address', 'OutputStream']
+	]).
+
+	:- private(client_connection_alias_/2).
+	:- dynamic(client_connection_alias_/2).
+	:- mode(client_connection_alias_(?address, ?atom), zero_or_more).
+	:- info(client_connection_alias_/2, [
+		comment is 'Stores the client connection server aliases.',
+		argnames is ['Address', 'Alias']
 	]).
 
 	:- private(client_timeout_/1).
@@ -846,23 +869,31 @@
 	% Client implementation
 	% ==========================================================================
 
-	linda_client(Host:Port) :-
+	linda_client(Host:Port, UserOptions) :-
 		context(Context),
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
 		(	client_connection_input_(Host:Port, _) ->
 			throw(error(linda_error(already_connected), Context))
 		;	catch(
 				(	socket::client_open(Host, Port, Input, Output, [type(text)]),
 					assertz(client_connection_input_(Host:Port, Input)),
-					assertz(client_connection_output_(Host:Port, Output))
+					assertz(client_connection_output_(Host:Port, Output)),
+					^^option(alias(Alias), Options),
+					assertz(client_connection_alias_(Host:Port, Alias))
 				),
 				Error,
 				throw(error(linda_error(connection_failed(Error)), Context))
 			)
 		).
 
+	linda_client(Host:Port) :-
+		linda_client(Host:Port, []).
+
 	close_client(Address) :-
 		(	retract(client_connection_input_(Address, Input)),
-			retract(client_connection_output_(Address, Output)) ->
+			retract(client_connection_output_(Address, Output)),
+			retract(client_connection_alias_(Address, _Alias)) ->
 			write_canonical(Output, exit),
 			write(Output, '.\n'),
 			flush_output(Output),
@@ -886,7 +917,7 @@
 				true
 			;	throw(error(linda_error(shutdown_failed(Response)), Context))
 			)
-		;	throw(error(linda_error(not_connected), Context))
+		;	throw(error(linda_error(not_connected(Address)), Context))
 		).
 
 	shutdown_server :-
@@ -903,8 +934,9 @@
 	% Client tuple-space operations
 	% ==========================================================================
 
-	out(Address, Tuple) :-
+	out(AddressOrALias, Tuple) :-
 		context(Context),
+		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, out(Tuple)),
 			write(Output, '.\n'),
@@ -915,14 +947,15 @@
 				true
 			;	throw(error(linda_error(out_failed(Response)), Context))
 			)
-		;	throw(error(linda_error(not_connected), Context))
+		;	throw(error(linda_error(not_connected(Address)), Context))
 		).
 
 	out(Tuple) :-
-		out(_, Tuple).
+		out(blackboard, Tuple).
 
-	in(Address, Tuple) :-
+	in(AddressOrALias, Tuple) :-
 		context(Context),
+		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, in(Tuple)),
 			write(Output, '.\n'),
@@ -933,14 +966,15 @@
 				Tuple = Match
 			;	throw(error(linda_error(in_failed(Result)), Context))
 			)
-		;	throw(error(linda_error(not_connected), Context))
+		;	throw(error(linda_error(not_connected(Address)), Context))
 		).
 
 	in(Tuple) :-
-		in(_, Tuple).
+		in(blackboard, Tuple).
 
-	in_noblock(Address, Tuple) :-
+	in_noblock(AddressOrALias, Tuple) :-
 		context(Context),
+		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, in_noblock(Tuple)),
 			write(Output, '.\n'),
@@ -953,14 +987,15 @@
 				fail
 			;	throw(error(linda_error(in_noblock_failed(Response)), Context))
 			)
-		;	throw(error(linda_error(not_connected), Context))
+		;	throw(error(linda_error(not_connected(Address)), Context))
 		).
 
 	in_noblock(Tuple) :-
-		in_noblock(_, Tuple).
+		in_noblock(blackboard, Tuple).
 
-	in_list(Address, TupleList, Tuple) :-
+	in_list(AddressOrALias, TupleList, Tuple) :-
 		context(Context),
+		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, in_list(TupleList)),
 			write(Output, '.\n'),
@@ -971,14 +1006,15 @@
 				Tuple = Match
 			;	throw(error(linda_error(in_failed(Result)), Context))
 			)
-		;	throw(error(linda_error(not_connected), Context))
+		;	throw(error(linda_error(not_connected(Address)), Context))
 		).
 
 	in_list(TupleList, Tuple) :-
-		in_list(_, TupleList, Tuple).
+		in_list(blackboard, TupleList, Tuple).
 
-	rd(Address, Tuple) :-
+	rd(AddressOrALias, Tuple) :-
 		context(Context),
+		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, rd(Tuple)),
 			write(Output, '.\n'),
@@ -989,14 +1025,15 @@
 				Tuple = Match
 			;	throw(error(linda_error(rd_failed(Result)), Context))
 			)
-		;	throw(error(linda_error(not_connected), Context))
+		;	throw(error(linda_error(not_connected(Address)), Context))
 		).
 
 	rd(Tuple) :-
-		rd(_, Tuple).
+		rd(blackboard, Tuple).
 
-	rd_noblock(Address, Tuple) :-
+	rd_noblock(AddressOrALias, Tuple) :-
 		context(Context),
+		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, rd_noblock(Tuple)),
 			write(Output, '.\n'),
@@ -1009,14 +1046,15 @@
 				fail
 			;	throw(error(linda_error(rd_noblock_failed(Response)), Context))
 			)
-		;	throw(error(linda_error(not_connected), Context))
+		;	throw(error(linda_error(not_connected(Address)), Context))
 		).
 
 	rd_noblock(Tuple) :-
-		rd_noblock(_, Tuple).
+		rd_noblock(blackboard, Tuple).
 
-	rd_list(Address, TupleList, Tuple) :-
+	rd_list(AddressOrALias, TupleList, Tuple) :-
 		context(Context),
+		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, rd_list(TupleList)),
 			write(Output, '.\n'),
@@ -1027,14 +1065,15 @@
 				Tuple = Match
 			;	throw(error(linda_error(rd_failed(Result)), Context))
 			)
-		;	throw(error(linda_error(not_connected), Context))
+		;	throw(error(linda_error(not_connected(Address)), Context))
 		).
 
 	rd_list(TupleList, Tuple) :-
-		rd_list(_, TupleList, Tuple).
+		rd_list(blackboard, TupleList, Tuple).
 
-	findall_rd_noblock(Address, Template, Tuple, Bag) :-
+	findall_rd_noblock(AddressOrALias, Template, Tuple, Bag) :-
 		context(Context),
+		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, findall_rd_noblock(Template, Tuple)),
 			write(Output, '.\n'),
@@ -1047,14 +1086,15 @@
 				fail
 			;	throw(error(linda_error(findall_rd_noblock_failed(Response)), Context))
 			)
-		;	throw(error(linda_error(not_connected), Context))
+		;	throw(error(linda_error(not_connected(Address)), Context))
 		).
 
 	findall_rd_noblock(Template, Tuple, Bag) :-
-		findall_rd_noblock(_, Template, Tuple, Bag).
+		findall_rd_noblock(blackboard, Template, Tuple, Bag).
 
-	findall_in_noblock(Address, Template, Tuple, Bag) :-
+	findall_in_noblock(AddressOrALias, Template, Tuple, Bag) :-
 		context(Context),
+		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output) ->
 			write_canonical(Output, findall_in_noblock(Template, Tuple)),
 			write(Output, '.\n'),
@@ -1067,11 +1107,11 @@
 				fail
 			;	throw(error(linda_error(findall_in_noblock_failed(Response)), Context))
 			)
-		;	throw(error(linda_error(not_connected), Context))
+		;	throw(error(linda_error(not_connected(Address)), Context))
 		).
 
 	findall_in_noblock(Template, Tuple, Bag) :-
-		findall_in_noblock(_, Template, Tuple, Bag).
+		findall_in_noblock(blackboard, Template, Tuple, Bag).
 
 	% Check if stream has data ready (backend dependent)
 	stream_ready(Stream) :-
@@ -1103,6 +1143,23 @@
 				wait_for_result_loop(Input, Result, StartTime, TimeoutSeconds, Context)
 			)
 		).
+
+	resolve_alias(AddressOrALias, Address, Context) :-
+		(	var(AddressOrALias) ->
+			throw(error(instantiation_error, Context))
+		;	\+ atom(AddressOrALias) ->
+			Address = AddressOrALias
+		;	client_connection_alias_(Address, AddressOrALias) ->
+			true
+		;	client_connection_input_(_, _) ->
+			throw(error(linda_error(unknown_alias(AddressOrALias)), Context))
+		;	Address = AddressOrALias
+		).
+
+	default_option(alias(blackboard)).
+
+	valid_option(alias(Alias)) :-
+		atom(Alias).
 
 	:- if(current_logtalk_flag(prolog_dialect, xvm)).
 		% streams are thread-owned in XVM

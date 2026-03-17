@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2026-03-17,
 		comment is 'Unit tests for the "linda" library.'
@@ -379,6 +379,33 @@
 		linda::findall_in_noblock(X, data(_, X), List).
 
 	% ==========================================================================
+	% Alias tests
+	% ==========================================================================
+
+	test(linda_server_alias_01, true(X == 1)) :-
+		wait_for_server,
+		test_host_port_(Address),
+		catch(linda::close_client, _, true),
+		linda::linda_client(Address),
+		linda::out(blackboard, a(1)),
+		linda::in(blackboard, a(X)).
+
+	test(linda_server_alias_02, true(X == 1)) :-
+		wait_for_server,
+		test_host_port_(Address),
+		catch(linda::close_client, _, true),
+		linda::linda_client(Address, [alias(data)]),
+		linda::out(data, b(1)),
+		linda::in(data, b(X)).
+
+	test(linda_server_alias_03, error(linda_error(unknown_alias(unknown)))) :-
+		wait_for_server,
+		test_host_port_(Address),
+		catch(linda::close_client, _, true),
+		linda::linda_client(Address),
+		linda::out(unknown, c(1)).
+
+	% ==========================================================================
 	% Timeout tests
 	% ==========================================================================
 
@@ -393,15 +420,15 @@
 	% Error handling tests
 	% ==========================================================================
 
-	test(linda_not_connected_out_01, error(linda_error(not_connected))) :-
+	test(linda_not_connected_out_01, error(linda_error(not_connected(blackboard)))) :-
 		catch(linda::close_client, _, true),
 		linda::out(test).
 
-	test(linda_not_connected_in_01, error(linda_error(not_connected))) :-
+	test(linda_not_connected_in_01, error(linda_error(not_connected(blackboard)))) :-
 		catch(linda::close_client, _, true),
 		linda::in(test).
 
-	test(linda_not_connected_rd_01, error(linda_error(not_connected))) :-
+	test(linda_not_connected_rd_01, error(linda_error(not_connected(blackboard)))) :-
 		catch(linda::close_client, _, true),
 		linda::rd(test).
 
