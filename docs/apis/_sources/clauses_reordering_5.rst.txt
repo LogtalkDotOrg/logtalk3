@@ -22,7 +22,7 @@ Hook object implementing the ``clauses_reordering`` mutator by reordering the cl
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-03-09
+| **Date:** 2026-03-17
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -64,8 +64,15 @@ Private predicates
 ``clauses_/1``
 ^^^^^^^^^^^^^^
 
+Table of parsed clauses.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``clauses_(Clause)``
+| **Mode and number of proofs:**
+|    ``clauses_(?clause)`` - ``zero_or_more``
 
 
 ------------

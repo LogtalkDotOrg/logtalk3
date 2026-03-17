@@ -14,7 +14,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-09,
+		date is 2026-03-17,
 		comment is 'Hook object implementing the ``head_arguments_mutation`` mutator by mutating one compile-time bound predicate/non-terminal head argument using the ``type::mutation/3`` predicate.',
 		parameters is [
 			'Entity' - 'Identifier of the entity being mutated.',
@@ -24,9 +24,6 @@
 			'PrintMutation' - 'Boolean flag to print the original and mutated term plus source location.'
 		]
 	]).
-
-	:- private(seen_/1).
-	:- dynamic(seen_/1).
 
 	term_expansion(Term, Mutation) :-
 		^^target_predicate_clause_index(Term, _Entity_, _Predicate_, ClauseIndex),

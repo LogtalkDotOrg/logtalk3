@@ -14,7 +14,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-09,
+		date is 2026-03-17,
 		comment is 'Hook object implementing the ``clauses_reordering`` mutator by reordering the clauses of a non-discontiguous predicate or non-terminal definition.',
 		parameters is [
 			'Entity' - 'Identifier of the entity being mutated.',
@@ -27,6 +27,11 @@
 
 	:- private(clauses_/1).
 	:- dynamic(clauses_/1).
+	:- mode(clauses_(?clause), zero_or_more).
+	:- info(clauses_/1, [
+		comment is 'Table of parsed clauses.',
+		argnames is ['Clause']
+	]).
 
 	:- uses(list, [
 		append/3, length/2, reverse/2, select/3

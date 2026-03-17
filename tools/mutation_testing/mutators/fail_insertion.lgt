@@ -14,7 +14,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-09,
+		date is 2026-03-17,
 		comment is 'Hook object implementing the ``fail_insertion`` mutator by inserting fail at deterministic body positions for matching predicate clauses.',
 		parameters is [
 			'Entity' - 'Identifier of the entity being mutated.',
@@ -58,7 +58,8 @@
 	insert_fail(middle, (A, B), (A, (fail, B))).
 	insert_fail(middle, (A, B, C), (A, BB)) :-
 		insert_fail(middle, (B, C), BB).
-	insert_fail(append, Body, (Body, fail)).
+	insert_fail(append, Body, (Body, fail)) :-
+		\+ body_ends_with_fail_or_false(Body).
 
 	insert_dcg_fail(replace, _Body, {fail}).
 	insert_dcg_fail(middle, Body, _) :-
@@ -68,6 +69,17 @@
 	insert_dcg_fail(middle, (A, B), (A, ({fail}, B))).
 	insert_dcg_fail(middle, (A, B, C), (A, BB)) :-
 		insert_dcg_fail(middle, (B, C), BB).
-	insert_dcg_fail(append, Body, (Body, {fail})).
+	insert_dcg_fail(append, Body, (Body, {fail})) :-
+		\+ dcg_body_ends_with_fail_or_false(Body).
+
+	body_ends_with_fail_or_false((_, Tail)) :-
+		body_ends_with_fail_or_false(Tail).
+	body_ends_with_fail_or_false(fail).
+	body_ends_with_fail_or_false(false).
+
+	dcg_body_ends_with_fail_or_false((_, Tail)) :-
+		dcg_body_ends_with_fail_or_false(Tail).
+	dcg_body_ends_with_fail_or_false({fail}).
+	dcg_body_ends_with_fail_or_false({false}).
 
 :- end_object.
