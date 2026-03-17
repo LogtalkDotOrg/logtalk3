@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-12,
+		date is 2026-03-17,
 		comment is 'Unit tests for the "linda" library.'
 	]).
 
@@ -54,7 +54,7 @@
 		catch(linda::shutdown_server, _, true),
 		% Currently we need a client connection after the shutdown request to ensure that it's processed
 		test_host_port_(Address),
-		linda::linda_client(Address),
+		catch(linda::linda_client(Address), _, true),
 		catch(linda::close_client, _, true),
 		retractall(test_host_port_(_)).
 
@@ -231,9 +231,9 @@
 		test_host_port_(Address),
 		catch(linda::close_client, _, true),
 		linda::linda_client(Address),
-		linda::out(pair(a, 1)),
-		linda::out(pair(b, 2)),
-		linda::in_noblock(pair(X, 2)).
+		linda::out(pair1(a, 1)),
+		linda::out(pair1(b, 2)),
+		linda::in_noblock(pair1(X, 2)).
 
 	% ==========================================================================
 	% in_list/2 and rd_list/2 tests
@@ -321,10 +321,10 @@
 		test_host_port_(Address),
 		catch(linda::close_client, _, true),
 		linda::linda_client(Address),
-		linda::out(pair(1, a)),
-		linda::out(pair(2, b)),
-		linda::out(pair(3, c)),
-		linda::findall_in_noblock(X, pair(_, X), List).
+		linda::out(pair2(1, a)),
+		linda::out(pair2(2, b)),
+		linda::out(pair2(3, c)),
+		linda::findall_in_noblock(X, pair2(_, X), List).
 
 	% ==========================================================================
 	% findall_in_noblock tests

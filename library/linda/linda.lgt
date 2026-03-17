@@ -24,7 +24,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-10,
+		date is 2026-03-17,
 		comment is 'Linda tuple-space implementation for process communication. Provides a server that acts as a shared blackboard where clients can write (``out/1-2``), read (``rd/1-2``), and remove (``in/1-2``) tuples. Uses threaded engines for the server implementation and the sockets library for network communication.',
 		remarks is [
 			'Supported backends' - 'SWI-Prolog, Trealla Prolog, and XVM (requires both multi-threading and sockets support).',
@@ -714,16 +714,16 @@
 		wake_waiting_clients(Tuple).
 
 	ts_in(Tuple, ClientId, Output, Found) :-
-		(   retract(tuple_(Match)), copy_term(Tuple, TupleCopy), Match = TupleCopy ->
-			Found = yes(Match)
+		(   retract(tuple_(Tuple)) ->
+			Found = yes(Tuple)
 		;   % No matching tuple, client will block
 			assertz(waiting_(ClientId, in(Tuple), Output)),
 			Found = no
 		).
 
 	ts_in_noblock(Tuple, Found) :-
-		(   retract(tuple_(Match)), copy_term(Tuple, TupleCopy), Match = TupleCopy ->
-			Found = yes(Match)
+		(   retract(tuple_(Tuple)) ->
+			Found = yes(Tuple)
 		;   Found = no
 		).
 
@@ -735,15 +735,15 @@
 		).
 
 	ts_rd(Tuple, ClientId, Output, Found) :-
-		(   tuple_(Match), copy_term(Tuple, TupleCopy), Match = TupleCopy ->
-			Found = yes(Match)
+		(   tuple_(Tuple) ->
+			Found = yes(Tuple)
 		;   assertz(waiting_(ClientId, rd(Tuple), Output)),
 			Found = no
 		).
 
 	ts_rd_noblock(Tuple, Found) :-
-		(   tuple_(Match), copy_term(Tuple, TupleCopy), Match = TupleCopy ->
-			Found = yes(Match)
+		(   tuple_(Tuple) ->
+			Found = yes(Tuple)
 		;   Found = no
 		).
 
@@ -768,13 +768,13 @@
 	% ==========================================================================
 
 	find_matching_tuple([Pattern| Patterns], Match) :-
-		(   tuple_(Match), copy_term(Pattern, PatternCopy), Match = PatternCopy ->
+		(   tuple_(Match), \+ Match \= Pattern ->
 			true
 		;   find_matching_tuple(Patterns, Match)
 		).
 
 	find_matching_tuple_rd([Pattern| Patterns], Match) :-
-		(   tuple_(Match), copy_term(Pattern, PatternCopy), Match = PatternCopy ->
+		(   tuple_(Match), \+ Match \= Pattern ->
 			true
 		;   find_matching_tuple_rd(Patterns, Match)
 		).
@@ -796,13 +796,11 @@
 	wake_one_in_waiter(Tuple) :-
 		% Find the first matching in/1 or in_list/1 waiter
 		(   waiting_(ClientId, in(Pattern), Output),
-			copy_term(Pattern, PatternCopy),
-			Tuple = PatternCopy ->
+			\+ Tuple \= Pattern ->
 			Request = in(Pattern)
 		;   waiting_(ClientId, in_list(Patterns), Output),
 			member(Pattern, Patterns),
-			copy_term(Pattern, PatternCopy),
-			Tuple = PatternCopy ->
+			\+ Tuple \= Pattern ->
 			Request = in_list(Patterns)
 		;   fail
 		),
@@ -838,12 +836,10 @@
 
 	% Check if a request is a rd/1 or rd_list/1 that matches the tuple
 	is_rd_request(rd(Pattern), Tuple) :-
-		copy_term(Pattern, PatternCopy),
-		Tuple = PatternCopy.
+		\+ Tuple \= Pattern.
 	is_rd_request(rd_list(Patterns), Tuple) :-
 		member(Pattern, Patterns),
-		copy_term(Pattern, PatternCopy),
-		Tuple = PatternCopy,
+		\+ Tuple \= Pattern,
 		!.
 
 	% ==========================================================================

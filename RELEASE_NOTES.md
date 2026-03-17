@@ -62,6 +62,10 @@ predicate. Thanks to Felix Weitkämper for the bug report.
 * FIXED: Portability issue in the `isolation_forest` library when calling the
 `format/3` de facto standard predicate.
 
+* FIXED: Bug in the `linda` library where the `in/1` and `in_noblock/1`
+predicates would remove non-matching tuples. Thanks to Paul Brown for the
+bug report.
+
 Tools
 -----
 
