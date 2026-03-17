@@ -630,8 +630,7 @@
 	handle_request(out(Tuple), _ClientId, Output) :-
 		!,
 		ts_out(Tuple),
-		write_canonical(Output, ok),
-		write(Output, '.\n'),
+		write(Output, 'ok.\n'),
 		flush_output(Output).
 
 	handle_request(in(Tuple), ClientId, Output) :-
@@ -648,10 +647,10 @@
 		!,
 		ts_in_noblock(Tuple, Found),
 		(   Found = yes(Result) ->
-			write_canonical(Output, result(Result))
-		;   write_canonical(Output, fail)
+			write_canonical(Output, result(Result)),
+			write(Output, '.\n')
+		;   write(Output, 'fail.\n')
 		),
-		write(Output, '.\n'),
 		flush_output(Output).
 
 	handle_request(in_list(TupleList), ClientId, Output) :-
@@ -678,10 +677,10 @@
 		!,
 		ts_rd_noblock(Tuple, Found),
 		(   Found = yes(Result) ->
-			write_canonical(Output, result(Result))
-		;   write_canonical(Output, fail)
+			write_canonical(Output, result(Result)),
+			write(Output, '.\n')
+		;   write(Output, 'fail.\n')
 		),
-		write(Output, '.\n'),
 		flush_output(Output).
 
 	handle_request(rd_list(TupleList), ClientId, Output) :-
@@ -712,13 +711,12 @@
 		!,
 		assertz(server_shutdown_),
 		% Send response first
-		write_canonical(Output, ok),
-		write(Output, '.\n'),
+		write(Output, 'ok.\n'),
 		flush_output(Output),
 		% Write end_of_file term to all client input streams to terminate engines
 		forall(
 			(client_connection_(OtherClientId, Input, _), OtherClientId \== ClientId),
-			(write_canonical(Input, exit), write(Input, '.\n'), flush_output(Input))
+			(write(Input, 'exit.\n'), flush_output(Input))
 		).
 
 	handle_request(_, _ClientId, Output) :-
@@ -894,8 +892,7 @@
 		(	retract(client_connection_input_(Address, Input)),
 			retract(client_connection_output_(Address, Output)),
 			retract(client_connection_alias_(Address, _Alias)) ->
-			write_canonical(Output, exit),
-			write(Output, '.\n'),
+			write(Output, 'exit.\n'),
 			flush_output(Output),
 			catch(socket::close(Input, Output), _, true)
 		;	true
@@ -908,8 +905,7 @@
 		context(Context),
 		assertz(server_shutdown_),
 		(	client_connection_output_(Address, Output) ->
-			write_canonical(Output, shutdown),
-			write(Output, '.\n'),
+			write(Output, 'shutdown.\n'),
 			flush_output(Output),
 			client_connection_input_(Address, Input),
 			read_term(Input, Response, []),
