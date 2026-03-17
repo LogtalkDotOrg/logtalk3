@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2026-03-17,
 		comment is 'Unit tests for the "linda" library.'
@@ -234,6 +234,16 @@
 		linda::out(pair1(a, 1)),
 		linda::out(pair1(b, 2)),
 		linda::in_noblock(pair1(X, 2)).
+
+	test(linda_pattern_matching_02, true(X == 2)) :-
+		wait_for_server,
+		test_host_port_(Address),
+		catch(linda::close_client, _, true),
+		linda::linda_client(Address),
+		linda::out(n(1)),
+		linda::out(n(2)),
+		linda::in_noblock(n(_)),
+		linda::in_noblock(n(X)).
 
 	% ==========================================================================
 	% in_list/2 and rd_list/2 tests
