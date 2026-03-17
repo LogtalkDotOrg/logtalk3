@@ -15,7 +15,7 @@ Computes the number of lines of code, comments, and blanks by calling cloc and p
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-03-14
+| **Date:** 2026-03-17
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,7 +28,6 @@ Computes the number of lines of code, comments, and blanks by calling cloc and p
 |    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
 | **Uses:**
 |    :ref:`atom <atom/0>`
-|    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
 |    :ref:`os <os/0>`

@@ -33,7 +33,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-14,
+		date is 2026-03-17,
 		comment is 'Computes the number of lines of code, comments, and blanks by calling cloc and parsing its report file output.',
 		remarks is [
 			'Entity line range' - 'Entity scores are computed by querying entity lines(BeginLine, EndLine) and running cloc on a temporary file containing only that line range.',
@@ -188,11 +188,23 @@
 		!.
 	file_range_stats(File, BeginLine, EndLine, Code, Comments, Blanks) :-
 		temporary_file('stats', BeginLine, EndLine, '.csv', ReportFile),
-		atomic_list_concat([
-			'sed -n ''', BeginLine, ',', EndLine, 'p'' "', File,
-			'" | cloc --quiet --csv --by-file --stdin-name=range.lgt --report-file="', ReportFile, '" -'
-		], Command),
-		shell(Command),
+		( 	os::operating_system_type(windows) ->
+			temporary_file('range', BeginLine, EndLine, '.lgt', RangeFile),
+			atomic_list_concat([
+				'sed -n "', BeginLine, ',', EndLine, 'p" "', File, '" > "', RangeFile, '"'
+			], ExtractCommand),
+			shell(ExtractCommand),
+			atomic_list_concat([
+				'cloc --quiet --csv --by-file --report-file="', ReportFile, '" "', RangeFile, '"'
+			], ClocCommand),
+			shell(ClocCommand),
+			delete_file(RangeFile)
+		;	atomic_list_concat([
+				'sed -n ''', BeginLine, ',', EndLine, 'p'' "', File,
+				'" | cloc --quiet --csv --by-file --stdin-name=range.lgt --report-file="', ReportFile, '" -'
+			], Command),
+			shell(Command)
+		),
 		open(ReportFile, read, Stream),
 		find_sum_line(Stream, SumLineCodes),
 		close(Stream),
