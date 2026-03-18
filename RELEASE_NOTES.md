@@ -75,6 +75,8 @@ bug report.
 * FIXED: Predicate synchronization bug in the `linda` library when handling
 tuples.
 
+* FIXED: Spurious choice-points in the `url` library public predicates.
+
 Tools
 -----
 

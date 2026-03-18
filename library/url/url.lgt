@@ -22,9 +22,9 @@
 :- object(url(_Representation_)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-01-22,
+		date is 2026-03-18,
 		comment is 'URL validating, parsing, and normalizing predicates following RFC3986 nomenclature.',
 		parameters is [
 			'Representation' - 'URL and is components representation. Valid values are ``atom``, ``codes``, and ``chars``.'
@@ -251,16 +251,19 @@
 	parse(atom, URL, [scheme(Scheme)| Components]) :-
 		atom_codes(URL, Codes),
 		phrase(scheme(Scheme), Codes, Rest),
-		parse_url(Scheme, Rest, Components).
+		parse_url(Scheme, Rest, Components),
+		!.
 	parse(chars, URL, [scheme(Scheme)| Components]) :-
 		chars_to_codes(URL, Codes),
 		phrase(scheme(Scheme), Codes, Rest),
 		atom_chars(SchemeAtom, Scheme),
-		parse_url(SchemeAtom, Rest, Components).
+		parse_url(SchemeAtom, Rest, Components),
+		!.
 	parse(codes, URL, [scheme(Scheme)| Components]) :-
 		phrase(scheme(Scheme), URL, Rest),
 		atom_codes(SchemeAtom, Scheme),
-		parse_url(SchemeAtom, Rest, Components).
+		parse_url(SchemeAtom, Rest, Components),
+		!.
 
 	parse_url(http, Codes, [authority(Authority), path(Path), query(Query), fragment(Fragment)]) :-
 		phrase(http_components(Authority, Path, Query, Fragment), Codes).
@@ -536,12 +539,14 @@
 		[].
 
 	generate(Components, URL) :-
-		build_url_from_components(Components, URL).
+		build_url_from_components(Components, URL),
+		!.
 
 	normalize(URL, NormalizedURL) :-
 		parse(URL, Components),
 		normalize_components(Components, NormalizedComponents),
-		build_url_from_components(NormalizedComponents, NormalizedURL).
+		build_url_from_components(NormalizedComponents, NormalizedURL),
+		!.
 
 	normalize_components([], []).
 	normalize_components([Component| Components], [NormalizedComponent| NormalizedComponents]) :-
@@ -579,6 +584,7 @@
 
 	split_path([], CurrentSegment, [CurrentSegment]).
 	split_path([0'/|Rest], CurrentSegment, [CurrentSegment|Segments]) :-
+		!,
 		split_path(Rest, [], Segments).
 	split_path([Code|Rest], CurrentSegment, Segments) :-
 		append(CurrentSegment, [Code], NewSegment),
@@ -590,12 +596,15 @@
 	process_segments([], Acc, Processed) :-
 		reverse(Acc, Processed).
 	process_segments([[]|Segments], Acc, Processed) :-
+		!,
 		% Skip empty segments
 		process_segments(Segments, Acc, Processed).
 	process_segments([[0'., 0'.]|Segments], [_|Acc], Processed) :-
+		!,
 		% Handle '..' by removing the previous segment
 		process_segments(Segments, Acc, Processed).
 	process_segments([[0'.]|Segments], Acc, Processed) :-
+		!,
 		% Skip '.' segments
 		process_segments(Segments, Acc, Processed).
 	process_segments([Segment|Segments], Acc, Processed) :-
@@ -606,10 +615,12 @@
 		join_segments(Segments, [], TrailingSlash, PathCodes).
 
 	join_segments([], Acc, true, PathCodes) :-
+		!,
 		% Add trailing slash if needed
 		append(Acc, [0'/], PathCodes).
 	join_segments([], Acc, false, Acc).
-	join_segments([Segment|[]], Acc, TrailingSlash, PathCodes) :-
+	join_segments([Segment], Acc, TrailingSlash, PathCodes) :-
+		!,
 		append(Acc, Segment, Acc1),
 		join_segments([], Acc1, TrailingSlash, PathCodes).
 	join_segments([Segment|Segments], Acc, TrailingSlash, PathCodes) :-
@@ -621,7 +632,7 @@
 		build_url_from_components(Components, [], URLCodes),
 		convert_to_text(_Representation_, URLCodes, URL).
 
-	build_url_from_components([], Acc, Acc).
+	build_url_from_components([], URLCodes, URLCodes).
 	% Handle schemes that use only colon (mailto, news, tel, urn)
 	build_url_from_components([scheme(Scheme)| Components], Acc, URLCodes) :-
 		Components = [address(_)| _],
@@ -646,15 +657,18 @@
 		build_url_from_components(Components, Acc2, URLCodes).
 	% Handle standard schemes with authority (http, https, ftp, etc.)
 	build_url_from_components([scheme(Scheme)| Components], Acc, URLCodes) :-
+		!,
 		convert_to_text(_Representation_, SchemeCodes, Scheme),
 		append(Acc, SchemeCodes, Acc1),
 		append(Acc1, [0':,0'/,0'/], Acc2),
 		build_url_from_components(Components, Acc2, URLCodes).
 	build_url_from_components([authority(Authority)| Components], Acc, URLCodes) :-
+		!,
 		convert_to_text(_Representation_, AuthorityCodes, Authority),
 		append(Acc, AuthorityCodes, Acc1),
 		build_url_from_components(Components, Acc1, URLCodes).
 	build_url_from_components([path(Path)| Components], Acc, URLCodes) :-
+		!,
 		convert_to_text(_Representation_, PathCodes, Path),
 		(	PathCodes \== [] ->
 			(	PathCodes = [0'/|_] ->
@@ -666,6 +680,7 @@
 		),
 		build_url_from_components(Components, Acc1, URLCodes).
 	build_url_from_components([query(Query)| Components], Acc, URLCodes) :-
+		!,
 		convert_to_text(_Representation_, QueryCodes, Query),
 		(	QueryCodes \== [] ->
 			append(Acc, [0'?], Acc0),
@@ -674,6 +689,7 @@
 		),
 		build_url_from_components(Components, Acc1, URLCodes).
 	build_url_from_components([fragment(Fragment)| Components], Acc, URLCodes) :-
+		!,
 		convert_to_text(_Representation_, FragmentCodes, Fragment),
 		(	FragmentCodes \== [] ->
 			append(Acc, [0'#], Acc0),
@@ -683,11 +699,13 @@
 		build_url_from_components(Components, Acc1, URLCodes).
 	% Handle mailto address component
 	build_url_from_components([address(Address)| Components], Acc, URLCodes) :-
+		!,
 		convert_to_text(_Representation_, AddressCodes, Address),
 		append(Acc, AddressCodes, Acc1),
 		build_url_from_components(Components, Acc1, URLCodes).
 	% Handle tel number component
 	build_url_from_components([number(Number)| Components], Acc, URLCodes) :-
+		!,
 		convert_to_text(_Representation_, NumberCodes, Number),
 		append(Acc, NumberCodes, Acc1),
 		build_url_from_components(Components, Acc1, URLCodes).

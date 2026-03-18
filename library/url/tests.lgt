@@ -61,56 +61,56 @@
 
     % parse/2 tests
 
-    test(parse_2_01, true(Components == [scheme("http"), authority("example.com"), path(""), query(""), fragment("")])) :-
+    test(parse_2_01, deterministic(Components == [scheme("http"), authority("example.com"), path(""), query(""), fragment("")])) :-
         url::parse("http://example.com", Components).
 
-    test(parse_2_02, true(Components == [scheme("https"), authority("example.com"), path("/path/to"), query(""), fragment("")])) :-
+    test(parse_2_02, deterministic(Components == [scheme("https"), authority("example.com"), path("/path/to"), query(""), fragment("")])) :-
         url::parse("https://example.com/path/to", Components).
 
-    test(parse_2_03, true(Components == [scheme("http"), authority("example.com"), path("/path/to/file.html"), query(""), fragment("")])) :-
+    test(parse_2_03, deterministic(Components == [scheme("http"), authority("example.com"), path("/path/to/file.html"), query(""), fragment("")])) :-
         url::parse("http://example.com/path/to/file.html", Components).
 
-    test(parse_2_04, true(Components == [scheme("http"), authority("example.com"), path("/path/to/file.html"), query("param1=value1&param2=value2"), fragment("")])) :-
+    test(parse_2_04, deterministic(Components == [scheme("http"), authority("example.com"), path("/path/to/file.html"), query("param1=value1&param2=value2"), fragment("")])) :-
         url::parse("http://example.com/path/to/file.html?param1=value1&param2=value2", Components).
 
-    test(parse_2_05, true(Components == [scheme("http"), authority("example.com"), path("/path/to/file.html"), query("param=value"), fragment("section")])) :-
+    test(parse_2_05, deterministic(Components == [scheme("http"), authority("example.com"), path("/path/to/file.html"), query("param=value"), fragment("section")])) :-
         url::parse("http://example.com/path/to/file.html?param=value#section", Components).
 
-    test(parse_2_06, true(Components == [scheme("http"), authority("192.168.1.1"), path("/path/to/resource"), query(""), fragment("")])) :-
+    test(parse_2_06, deterministic(Components == [scheme("http"), authority("192.168.1.1"), path("/path/to/resource"), query(""), fragment("")])) :-
         url::parse("http://192.168.1.1/path/to/resource", Components).
 
-    test(parse_2_07, true(Components == [scheme("ftp"), authority("ftp.example.com"), path("/pub/file.zip")])) :-
+    test(parse_2_07, deterministic(Components == [scheme("ftp"), authority("ftp.example.com"), path("/pub/file.zip")])) :-
         url::parse("ftp://ftp.example.com/pub/file.zip", Components).
 
-    test(parse_2_08, true(Components == [scheme("rtsp"), authority("media.example.com"), path("/stream")])) :-
+    test(parse_2_08, deterministic(Components == [scheme("rtsp"), authority("media.example.com"), path("/stream")])) :-
         url::parse("rtsp://media.example.com/stream", Components).
 
     % File URI tests
-    test(parse_2_09, true) :-
+    test(parse_2_09, deterministic) :-
         url::parse("file:///home/user/document.txt", _Components).
 
     % Mailto URI tests
-    test(parse_2_10, true) :-
+    test(parse_2_10, deterministic) :-
         url::parse("mailto:user@example.com", _Components).
 
     % normalize/2 tests
 
-    test(normalize_2_01, true(NormalizedURL == "http://example.com")) :-
+    test(normalize_2_01, deterministic(NormalizedURL == "http://example.com")) :-
         url::normalize("HTTP://example.com", NormalizedURL).
 
-    test(normalize_2_02, true(NormalizedURL == "http://example.com/path/")) :-
+    test(normalize_2_02, deterministic(NormalizedURL == "http://example.com/path/")) :-
         url::normalize("http://example.com/path/", NormalizedURL).
 
-    test(normalize_2_03, true(NormalizedURL == "http://example.com/path/to/resource")) :-
+    test(normalize_2_03, deterministic(NormalizedURL == "http://example.com/path/to/resource")) :-
         url::normalize("http://example.com/path/to/resource", NormalizedURL).
 
-    test(normalize_2_04, true(NormalizedURL == "http://example.com/path/to/resource")) :-
+    test(normalize_2_04, deterministic(NormalizedURL == "http://example.com/path/to/resource")) :-
         url::normalize("http://example.com/path/to/../to/resource", NormalizedURL).
 
-    test(normalize_2_05, true(NormalizedURL == "http://example.com/resource")) :-
+    test(normalize_2_05, deterministic(NormalizedURL == "http://example.com/resource")) :-
         url::normalize("http://example.com/path/../resource", NormalizedURL).
 
-    test(normalize_2_06, true(NormalizedURL == "http://example.com/path/to/resource?query=value#fragment")) :-
+    test(normalize_2_06, deterministic(NormalizedURL == "http://example.com/path/to/resource?query=value#fragment")) :-
         url::normalize("http://example.com/path/to/resource?query=value#fragment", NormalizedURL).
 
     % Additional tests for edge cases
@@ -217,19 +217,19 @@
 
     % Parse URL tests for new schemes
 
-    test(parse_ldap_01, true(Components == [scheme("ldap"), authority("ldap.example.com"), path("/dc=example,dc=com"), query("")])) :-
+    test(parse_ldap_01, deterministic(Components == [scheme("ldap"), authority("ldap.example.com"), path("/dc=example,dc=com"), query("")])) :-
         url::parse("ldap://ldap.example.com/dc=example,dc=com", Components).
 
-    test(parse_news_01, true(Components == [scheme("news"), identifier("comp.infosystems.www.servers.unix")])) :-
+    test(parse_news_01, deterministic(Components == [scheme("news"), identifier("comp.infosystems.www.servers.unix")])) :-
         url::parse("news:comp.infosystems.www.servers.unix", Components).
 
-    test(parse_tel_01, true(Components == [scheme("tel"), number("+1-816-555-1212")])) :-
+    test(parse_tel_01, deterministic(Components == [scheme("tel"), number("+1-816-555-1212")])) :-
         url::parse("tel:+1-816-555-1212", Components).
 
-    test(parse_telnet_01, true(Components == [scheme("telnet"), authority("192.0.2.16:80"), path("/")])) :-
+    test(parse_telnet_01, deterministic(Components == [scheme("telnet"), authority("192.0.2.16:80"), path("/")])) :-
         url::parse("telnet://192.0.2.16:80/", Components).
 
-    test(parse_urn_01, true(Components == [scheme("urn"), identifier("oasis:names:specification:docbook:dtd:xml:4.1.2")])) :-
+    test(parse_urn_01, deterministic(Components == [scheme("urn"), identifier("oasis:names:specification:docbook:dtd:xml:4.1.2")])) :-
         url::parse("urn:oasis:names:specification:docbook:dtd:xml:4.1.2", Components).
 
     % Additional URL schemes tests
@@ -238,143 +238,143 @@
     test(url_scheme_ftps_01, true) :-
         url::valid("ftps://ftp.example.com/pub/file.zip").
 
-    test(parse_ftps_01, true(Components == [scheme("ftps"), authority("ftp.example.com"), path("/pub/file.zip")])) :-
+    test(parse_ftps_01, deterministic(Components == [scheme("ftps"), authority("ftp.example.com"), path("/pub/file.zip")])) :-
         url::parse("ftps://ftp.example.com/pub/file.zip", Components).
 
     % SFTP (SSH File Transfer Protocol)
     test(url_scheme_sftp_01, true) :-
         url::valid("sftp://user@server.example.com/path/to/file").
 
-    test(parse_sftp_01, true(Components == [scheme("sftp"), authority("user@server.example.com"), path("/path/to/file")])) :-
+    test(parse_sftp_01, deterministic(Components == [scheme("sftp"), authority("user@server.example.com"), path("/path/to/file")])) :-
         url::parse("sftp://user@server.example.com/path/to/file", Components).
 
     % SSH (Secure Shell)
     test(url_scheme_ssh_01, true) :-
         url::valid("ssh://user@host.example.com/").
 
-    test(parse_ssh_01, true(Components == [scheme("ssh"), authority("user@host.example.com"), path("/")])) :-
+    test(parse_ssh_01, deterministic(Components == [scheme("ssh"), authority("user@host.example.com"), path("/")])) :-
         url::parse("ssh://user@host.example.com/", Components).
 
     % LDAPS (LDAP Secure)
     test(url_scheme_ldaps_01, true) :-
         url::valid("ldaps://ldap.example.com/dc=example,dc=com").
 
-    test(parse_ldaps_01, true(Components == [scheme("ldaps"), authority("ldap.example.com"), path("/dc=example,dc=com"), query("")])) :-
+    test(parse_ldaps_01, deterministic(Components == [scheme("ldaps"), authority("ldap.example.com"), path("/dc=example,dc=com"), query("")])) :-
         url::parse("ldaps://ldap.example.com/dc=example,dc=com", Components).
 
     % RTMP (Real-Time Messaging Protocol)
     test(url_scheme_rtmp_01, true) :-
         url::valid("rtmp://media.example.com/live/stream").
 
-    test(parse_rtmp_01, true(Components == [scheme("rtmp"), authority("media.example.com"), path("/live/stream")])) :-
+    test(parse_rtmp_01, deterministic(Components == [scheme("rtmp"), authority("media.example.com"), path("/live/stream")])) :-
         url::parse("rtmp://media.example.com/live/stream", Components).
 
     % MMS (Microsoft Media Server)
     test(url_scheme_mms_01, true) :-
         url::valid("mms://media.example.com/stream").
 
-    test(parse_mms_01, true(Components == [scheme("mms"), authority("media.example.com"), path("/stream")])) :-
+    test(parse_mms_01, deterministic(Components == [scheme("mms"), authority("media.example.com"), path("/stream")])) :-
         url::parse("mms://media.example.com/stream", Components).
 
     % JDBC (Java Database Connectivity)
     test(url_scheme_jdbc_01, true) :-
         url::valid("jdbc://localhost:3306/database").
 
-    test(parse_jdbc_01, true(Components == [scheme("jdbc"), authority("localhost:3306"), path("/database")])) :-
+    test(parse_jdbc_01, deterministic(Components == [scheme("jdbc"), authority("localhost:3306"), path("/database")])) :-
         url::parse("jdbc://localhost:3306/database", Components).
 
     % MongoDB
     test(url_scheme_mongodb_01, true) :-
         url::valid("mongodb://localhost:27017/mydb").
 
-    test(parse_mongodb_01, true(Components == [scheme("mongodb"), authority("localhost:27017"), path("/mydb")])) :-
+    test(parse_mongodb_01, deterministic(Components == [scheme("mongodb"), authority("localhost:27017"), path("/mydb")])) :-
         url::parse("mongodb://localhost:27017/mydb", Components).
 
     % MySQL
     test(url_scheme_mysql_01, true) :-
         url::valid("mysql://user:password@localhost:3306/database").
 
-    test(parse_mysql_01, true(Components == [scheme("mysql"), authority("user:password@localhost:3306"), path("/database")])) :-
+    test(parse_mysql_01, deterministic(Components == [scheme("mysql"), authority("user:password@localhost:3306"), path("/database")])) :-
         url::parse("mysql://user:password@localhost:3306/database", Components).
 
     % PostgreSQL
     test(url_scheme_postgresql_01, true) :-
         url::valid("postgresql://localhost:5432/mydb").
 
-    test(parse_postgresql_01, true(Components == [scheme("postgresql"), authority("localhost:5432"), path("/mydb")])) :-
+    test(parse_postgresql_01, deterministic(Components == [scheme("postgresql"), authority("localhost:5432"), path("/mydb")])) :-
         url::parse("postgresql://localhost:5432/mydb", Components).
 
     % WebSocket (ws)
     test(url_scheme_ws_01, true) :-
         url::valid("ws://example.com/socket").
 
-    test(parse_ws_01, true(Components == [scheme("ws"), authority("example.com"), path("/socket"), query(""), fragment("")])) :-
+    test(parse_ws_01, deterministic(Components == [scheme("ws"), authority("example.com"), path("/socket"), query(""), fragment("")])) :-
         url::parse("ws://example.com/socket", Components).
 
     % WebSocket Secure (wss)
     test(url_scheme_wss_01, true) :-
         url::valid("wss://example.com/socket").
 
-    test(parse_wss_01, true(Components == [scheme("wss"), authority("example.com"), path("/socket"), query(""), fragment("")])) :-
+    test(parse_wss_01, deterministic(Components == [scheme("wss"), authority("example.com"), path("/socket"), query(""), fragment("")])) :-
         url::parse("wss://example.com/socket", Components).
 
     % Gopher
     test(url_scheme_gopher_01, true) :-
         url::valid("gopher://gopher.example.com/").
 
-    test(parse_gopher_01, true(Components == [scheme("gopher"), authority("gopher.example.com"), path("/")])) :-
+    test(parse_gopher_01, deterministic(Components == [scheme("gopher"), authority("gopher.example.com"), path("/")])) :-
         url::parse("gopher://gopher.example.com/", Components).
 
     % NNTP (Network News Transfer Protocol)
     test(url_scheme_nntp_01, true) :-
         url::valid("nntp://news.example.com/").
 
-    test(parse_nntp_01, true(Components == [scheme("nntp"), authority("news.example.com"), path("/")])) :-
+    test(parse_nntp_01, deterministic(Components == [scheme("nntp"), authority("news.example.com"), path("/")])) :-
         url::parse("nntp://news.example.com/", Components).
 
     % Git
     test(url_scheme_git_01, true) :-
         url::valid("git://github.com/user/repo.git").
 
-    test(parse_git_01, true(Components == [scheme("git"), authority("github.com"), path("/user/repo.git")])) :-
+    test(parse_git_01, deterministic(Components == [scheme("git"), authority("github.com"), path("/user/repo.git")])) :-
         url::parse("git://github.com/user/repo.git", Components).
 
     % generate/2 tests
 
-    test(generate_2_01, true(URL == "http://example.com")) :-
+    test(generate_2_01, deterministic(URL == "http://example.com")) :-
         url::generate([scheme("http"), authority("example.com"), path(""), query(""), fragment("")], URL).
 
-    test(generate_2_02, true(URL == "https://example.com/path/to")) :-
+    test(generate_2_02, deterministic(URL == "https://example.com/path/to")) :-
         url::generate([scheme("https"), authority("example.com"), path("/path/to"), query(""), fragment("")], URL).
 
-    test(generate_2_03, true(URL == "http://example.com/path/to/file.html")) :-
+    test(generate_2_03, deterministic(URL == "http://example.com/path/to/file.html")) :-
         url::generate([scheme("http"), authority("example.com"), path("/path/to/file.html"), query(""), fragment("")], URL).
 
-    test(generate_2_04, true(URL == "http://example.com/path/to/file.html?param1=value1&param2=value2")) :-
+    test(generate_2_04, deterministic(URL == "http://example.com/path/to/file.html?param1=value1&param2=value2")) :-
         url::generate([scheme("http"), authority("example.com"), path("/path/to/file.html"), query("param1=value1&param2=value2"), fragment("")], URL).
 
-    test(generate_2_05, true(URL == "http://example.com/path/to/file.html?param=value#section")) :-
+    test(generate_2_05, deterministic(URL == "http://example.com/path/to/file.html?param=value#section")) :-
         url::generate([scheme("http"), authority("example.com"), path("/path/to/file.html"), query("param=value"), fragment("section")], URL).
 
-    test(generate_2_06, true(URL == "ftp://ftp.example.com/pub/file.zip")) :-
+    test(generate_2_06, deterministic(URL == "ftp://ftp.example.com/pub/file.zip")) :-
         url::generate([scheme("ftp"), authority("ftp.example.com"), path("/pub/file.zip")], URL).
 
-    test(generate_2_07, true(URL == "mailto:user@example.com")) :-
+    test(generate_2_07, deterministic(URL == "mailto:user@example.com")) :-
         url::generate([scheme("mailto"), address("user@example.com")], URL).
 
-    test(generate_2_08, true(URL == "news:comp.infosystems.www.servers.unix")) :-
+    test(generate_2_08, deterministic(URL == "news:comp.infosystems.www.servers.unix")) :-
         url::generate([scheme("news"), identifier("comp.infosystems.www.servers.unix")], URL).
 
-    test(generate_2_09, true(URL == "tel:+1-816-555-1212")) :-
+    test(generate_2_09, deterministic(URL == "tel:+1-816-555-1212")) :-
         url::generate([scheme("tel"), number("+1-816-555-1212")], URL).
 
-    test(generate_2_10, true(URL == "urn:oasis:names:specification:docbook:dtd:xml:4.1.2")) :-
+    test(generate_2_10, deterministic(URL == "urn:oasis:names:specification:docbook:dtd:xml:4.1.2")) :-
         url::generate([scheme("urn"), identifier("oasis:names:specification:docbook:dtd:xml:4.1.2")], URL).
 
-    test(generate_2_11, true(URL == "ws://example.com/socket")) :-
+    test(generate_2_11, deterministic(URL == "ws://example.com/socket")) :-
         url::generate([scheme("ws"), authority("example.com"), path("/socket"), query(""), fragment("")], URL).
 
-    test(generate_2_12, true(URL == "wss://example.com/socket")) :-
+    test(generate_2_12, deterministic(URL == "wss://example.com/socket")) :-
         url::generate([scheme("wss"), authority("example.com"), path("/socket"), query(""), fragment("")], URL).
 
     % Roundtrip tests (parse then generate)
