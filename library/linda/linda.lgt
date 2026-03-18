@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-17,
+		date is 2026-03-18,
 		comment is 'Linda tuple-space implementation for process communication. Provides a server that acts as a shared blackboard where clients can write (``out/1-2``), read (``rd/1-2``), and remove (``in/1-2``) tuples. Uses threaded engines for the server implementation and the sockets library for network communication.',
 		remarks is [
 			'Supported backends' - 'SWI-Prolog, Trealla Prolog, and XVM (requires both multi-threading and sockets support).',
@@ -368,7 +368,6 @@
 	% Synchronized predicates for tuple space operations
 
 	:- private(ts_out/1).
-	:- synchronized(ts_out/1).
 	:- mode(ts_out(+term), one).
 	:- info(ts_out/1, [
 		comment is 'Synchronized predicate to add a tuple to the tuple space and wake waiting clients.',
@@ -376,7 +375,6 @@
 	]).
 
 	:- private(ts_in/4).
-	:- synchronized(ts_in/4).
 	:- mode(ts_in(+term, +term, +term, -compound), one).
 	:- info(ts_in/4, [
 		comment is 'Synchronized predicate to remove a matching tuple or register a waiting client.',
@@ -384,7 +382,6 @@
 	]).
 
 	:- private(ts_in_noblock/2).
-	:- synchronized(ts_in_noblock/2).
 	:- mode(ts_in_noblock(+term, -compound), zero_or_one).
 	:- info(ts_in_noblock/2, [
 		comment is 'Synchronized predicate to try removing a matching tuple without blocking.',
@@ -392,7 +389,6 @@
 	]).
 
 	:- private(ts_in_list/4).
-	:- synchronized(ts_in_list/4).
 	:- mode(ts_in_list(+list, +term, +term, -compound), one).
 	:- info(ts_in_list/4, [
 		comment is 'Synchronized predicate to remove a tuple matching one of multiple patterns or register a waiting client.',
@@ -400,7 +396,6 @@
 	]).
 
 	:- private(ts_rd/4).
-	:- synchronized(ts_rd/4).
 	:- mode(ts_rd(+term, +term, +term, -compound), one).
 	:- info(ts_rd/4, [
 		comment is 'Synchronized predicate to read a matching tuple or register a waiting client.',
@@ -408,7 +403,6 @@
 	]).
 
 	:- private(ts_rd_noblock/2).
-	:- synchronized(ts_rd_noblock/2).
 	:- mode(ts_rd_noblock(+term, -compound), zero_or_one).
 	:- info(ts_rd_noblock/2, [
 		comment is 'Synchronized predicate to try reading a matching tuple without blocking.',
@@ -416,7 +410,6 @@
 	]).
 
 	:- private(ts_rd_list/4).
-	:- synchronized(ts_rd_list/4).
 	:- mode(ts_rd_list(+list, +term, +term, -compound), one).
 	:- info(ts_rd_list/4, [
 		comment is 'Synchronized predicate to read a tuple matching one of multiple patterns or register a waiting client.',
@@ -424,7 +417,6 @@
 	]).
 
 	:- private(ts_findall_rd_noblock/3).
-	:- synchronized(ts_findall_rd_noblock/3).
 	:- mode(ts_findall_rd_noblock(+term, +term, -list), zero_or_more).
 	:- info(ts_findall_rd_noblock/3, [
 		comment is 'Synchronized predicate to collect all tuples matching a pattern.',
@@ -432,11 +424,22 @@
 	]).
 
 	:- private(ts_findall_in_noblock/3).
-	:- synchronized(ts_findall_in_noblock/3).
 	:- mode(ts_findall_in_noblock(+term, +term, -list), zero_or_more).
 	:- info(ts_findall_in_noblock/3, [
 		comment is 'Synchronized predicate to collect and remove all tuples matching a pattern.',
 		argnames is ['Template', 'Tuple', 'List']
+	]).
+
+	:- synchronized([
+		ts_out/1,
+		ts_in/4,
+		ts_in_noblock/2,
+		ts_in_list/4,
+		ts_rd/4,
+		ts_rd_noblock/2,
+		ts_rd_list/4,
+		ts_findall_rd_noblock/3,
+		ts_findall_in_noblock/3
 	]).
 
 	% ==========================================================================

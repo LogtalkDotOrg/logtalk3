@@ -72,6 +72,9 @@ predicate. Thanks to Felix Weitkämper for the bug report.
 predicates would remove non-matching tuples. Thanks to Paul Brown for the
 bug report.
 
+* FIXED: Predicate synchronization bug in the `linda` library when handling
+tuples.
+
 Tools
 -----
 
