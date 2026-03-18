@@ -84,6 +84,17 @@ details. The source code to be analyzed should be loaded with the
 `source_data` and `optimize` flags turned on (possibly set from a
 loader file).
 
+For machine-readable integrations, the `findings/2-3`, `finding/2-3`, and
+`summary/2-3` predicates can be used to collect dead-code results and post-
+filter counts without relying on printed messages.
+
+For machine-readable export integrations, the `export/3-4` predicates serialize
+scan results using the `json` library. Supported formats are `json` and
+`sarif`. The JSON export format is described by the
+`dead_code_scanner.schema.json` JSON Schema file in the tool directory.
+Runtime validation of exported JSON against that schema can be enabled using the
+`validate_export(true)` option. The default is `validate_export(false)`.
+
 As an example, assume that we want to scan an application with a library
 alias `my_app`. The following goals could be used:
 
@@ -126,6 +137,52 @@ looking for unused predicates (and non-terminals):
 
 - `exclude_entities(Entities)`  
 	list of entities to exclude (default is `[]`)
+
+- `exclude_predicates(Predicates)`  
+	list of predicate and non-terminal indicators to exclude from findings (default is `[]`); supports local indicators such as `foo/1` and `bar//2` plus qualified indicators such as `object::baz/2` and `module:qux/3`
+
+- `waive_findings(Findings)`  
+	list of finding patterns to suppress from the results (default is `[]`); intended for reusable CI baselines and supports partially instantiated terms such as `dead_predicate(object, some_object, helper/2, _, _)`
+
+- `validate_export(Boolean)`  
+	boolean option controlling runtime validation of `json` exports against the `dead_code_scanner.schema.json` file (default is `false`)
+
+
+Machine-readable summaries
+--------------------------
+
+The `summary/2-3` predicates return a term of the form:
+
+- `summary(Target, TotalEntities, TotalFindings, EntitySummaries)`
+
+where `EntitySummaries` is a list of terms of the form:
+
+- `entity_summary(Kind, Entity, FindingsCount)`
+
+The summary is computed after applying all exclusions and finding waivers,
+making it suitable for CI thresholds and regression tracking.
+
+
+Exports
+-------
+
+The `export/3-4` predicates serialize scan results in either `json` or `sarif`
+format to any sink supported by the `json::generate/2` predicate, including
+files, streams, atoms, chars, and codes.
+
+The `json` export is described by the `dead_code_scanner.schema.json` file,
+which can be used by third-party tools to validate and consume that export
+format. The `sarif` export uses the SARIF `2.1.0` JSON format and is suitable
+for code scanning integrations that consume SARIF reports. SARIF exports include
+a per-run UUID GUID, stable GUIDs for the SARIF driver and rule descriptor, and
+deterministic result fingerprints derived from the canonical finding
+representation. When the analyzed code is inside a git repository, the export
+also includes the current branch and commit hash as optional run properties.
+When the repository remote URI can also be derived, the export includes a
+`versionControlProvenance` entry with the repository URI, revision id, branch,
+and local repository root mapping; outside a git repository, or when the
+repository URI cannot be derived, these git-derived SARIF properties are simply
+omitted.
 
 
 Integration with the `make` tool

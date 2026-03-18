@@ -14,8 +14,8 @@ A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog 
 |    ``logtalk_load(dead_code_scanner(loader))``
 
 | **Author:** Barry Evans and Paulo Moura
-| **Version:** 0:15:2
-| **Date:** 2024-10-21
+| **Version:** 0:16:0
+| **Date:** 2026-03-18
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,10 +24,18 @@ A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog 
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
+|    :ref:`git <git/0>`
+|    :ref:`json <json/0>`
+|    :ref:`json_schema <json_schema/0>`
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
 |    :ref:`os <os/0>`
+|    :ref:`reader <reader/0>`
+|    :ref:`term_io <term_io/0>`
 |    :ref:`type <type/0>`
+|    :ref:`url(Representation) <url/1>`
+|    :ref:`user <user/0>`
+|    :ref:`uuid <uuid/0>`
 
 | **Remarks:**
 
@@ -60,6 +68,25 @@ Scans a loaded entity for dead code. Fails if the entity does not exist.
 |    ``entity(Entity)``
 | **Mode and number of proofs:**
 |    ``entity(+entity_identifier)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: entity/2
+.. _dead_code_scanner/0::entity/2:
+
+``entity/2``
+^^^^^^^^^^^^
+
+Scans a loaded entity for dead code using the given options. Fails if the entity does not exist.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``entity(Entity,Options)``
+| **Mode and number of proofs:**
+|    ``entity(+entity_identifier,+list(compound))`` - ``zero_or_one``
 
 
 ------------
@@ -290,6 +317,158 @@ Scans all entities for dead code using default options.
 
 ------------
 
+.. index:: findings/3
+.. _dead_code_scanner/0::findings/3:
+
+``findings/3``
+^^^^^^^^^^^^^^
+
+Returns an ordered set of findings for a scan target using the given options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``findings(Target,Findings,Options)``
+| **Mode and number of proofs:**
+|    ``findings(+nonvar,-list(compound),+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: findings/2
+.. _dead_code_scanner/0::findings/2:
+
+``findings/2``
+^^^^^^^^^^^^^^
+
+Returns an ordered set of findings for a scan target using default options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``findings(Target,Findings)``
+| **Mode and number of proofs:**
+|    ``findings(+nonvar,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: finding/3
+.. _dead_code_scanner/0::finding/3:
+
+``finding/3``
+^^^^^^^^^^^^^
+
+Enumerates, by backtracking, findings for a scan target using the given options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``finding(Target,Finding,Options)``
+| **Mode and number of proofs:**
+|    ``finding(+nonvar,-compound,+list(compound))`` - ``zero_or_more``
+
+
+------------
+
+.. index:: finding/2
+.. _dead_code_scanner/0::finding/2:
+
+``finding/2``
+^^^^^^^^^^^^^
+
+Enumerates, by backtracking, findings for a scan target using default options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``finding(Target,Finding)``
+| **Mode and number of proofs:**
+|    ``finding(+nonvar,-compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: summary/3
+.. _dead_code_scanner/0::summary/3:
+
+``summary/3``
+^^^^^^^^^^^^^
+
+Returns a machine-readable summary for a scan target using the given options. The summary term is of the form ``summary(Target, TotalEntities, TotalFindings, EntitySummaries)`` where ``EntitySummaries`` is a list of ``entity_summary(Kind, Entity, FindingsCount)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``summary(Target,Summary,Options)``
+| **Mode and number of proofs:**
+|    ``summary(+nonvar,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: summary/2
+.. _dead_code_scanner/0::summary/2:
+
+``summary/2``
+^^^^^^^^^^^^^
+
+Returns a machine-readable summary for a scan target using default options. The summary term is of the form ``summary(Target, TotalEntities, TotalFindings, EntitySummaries)`` where ``EntitySummaries`` is a list of ``entity_summary(Kind, Entity, FindingsCount)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``summary(Target,Summary)``
+| **Mode and number of proofs:**
+|    ``summary(+nonvar,-compound)`` - ``one``
+
+
+------------
+
+.. index:: export/4
+.. _dead_code_scanner/0::export/4:
+
+``export/4``
+^^^^^^^^^^^^
+
+Exports a scan target using the given options in the specified format to the specified sink. Supported formats are ``json`` and ``sarif``. Supported sinks are those accepted by the ``json`` library ``generate/2`` predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export(Target,Format,Sink,Options)``
+| **Mode and number of proofs:**
+|    ``export(+nonvar,+atom,++compound,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: export/3
+.. _dead_code_scanner/0::export/3:
+
+``export/3``
+^^^^^^^^^^^^
+
+Exports a scan target using default options in the specified format to the specified sink. Supported formats are ``json`` and ``sarif``. Supported sinks are those accepted by the ``json`` library ``generate/2`` predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export(Target,Format,Sink)``
+| **Mode and number of proofs:**
+|    ``export(+nonvar,+atom,++compound)`` - ``one``
+
+
+------------
+
 .. index:: predicates/2
 .. _dead_code_scanner/0::predicates/2:
 
@@ -309,6 +488,25 @@ Returns an ordered set of local predicates (and non-terminals) that are not used
 
 ------------
 
+.. index:: predicates/3
+.. _dead_code_scanner/0::predicates/3:
+
+``predicates/3``
+^^^^^^^^^^^^^^^^
+
+Returns an ordered set of local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predicates(Entity,Predicates,Options)``
+| **Mode and number of proofs:**
+|    ``predicates(+entity_identifier,-list(predicate_indicator),+list(compound))`` - ``one``
+
+
+------------
+
 .. index:: predicate/2
 .. _dead_code_scanner/0::predicate/2:
 
@@ -324,6 +522,25 @@ Enumerates, by backtracking, local predicates (and non-terminals) that are not u
 |    ``predicate(Entity,Predicate)``
 | **Mode and number of proofs:**
 |    ``predicate(+entity_identifier,?predicate_indicator)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: predicate/3
+.. _dead_code_scanner/0::predicate/3:
+
+``predicate/3``
+^^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predicate(Entity,Predicate,Options)``
+| **Mode and number of proofs:**
+|    ``predicate(+entity_identifier,?predicate_indicator,+list(compound))`` - ``zero_or_more``
 
 
 ------------

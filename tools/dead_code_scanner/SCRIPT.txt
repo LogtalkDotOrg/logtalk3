@@ -70,3 +70,26 @@ ________________________________________________________________________
 
 | ?- dead_code_scanner::predicate(logtalk, DeadPredicate).
 ...
+
+
+% get a machine-readable summary for a specific entity scan:
+
+| ?- dead_code_scanner::summary(entity(core_messages), Summary).
+...
+
+% export a specific entity scan as a JSON file:
+
+| ?- dead_code_scanner::export(entity(core_messages), json, file('report.json')).
+...
+
+
+% export a specific entity scan as a JSON file and validate it against the schema:
+
+| ?- dead_code_scanner::export(entity(core_messages), [validate_export(true)], json, file('report.json')).
+...
+
+
+% export a specific entity scan as a SARIF file:
+
+| ?- dead_code_scanner::export(entity(core_messages), sarif, file('sarif.json')).
+...

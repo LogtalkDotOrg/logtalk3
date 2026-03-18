@@ -4227,6 +4227,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`dead_code_scanner <dead_code_scanner/0::entity/2>`
 * :ref:`mutation_testing <mutation_testing/0::entity/2>`
 * :ref:`xref_diagram(Format) <xref_diagram/1::entity/2>`
 
@@ -4642,6 +4643,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`sampling_protocol <sampling_protocol/0::exponential/2>`
 
+``export/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dead_code_scanner <dead_code_scanner/0::export/3>`
+
+``export/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dead_code_scanner <dead_code_scanner/0::export/4>`
+
 ``extension/1``
 ---------------
 
@@ -5047,6 +5068,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`linda <linda/0::findall_rd_noblock/4>`
+
+``finding/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dead_code_scanner <dead_code_scanner/0::finding/2>`
+
+``finding/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dead_code_scanner <dead_code_scanner/0::finding/3>`
+
+``findings/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dead_code_scanner <dead_code_scanner/0::findings/2>`
+
+``findings/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dead_code_scanner <dead_code_scanner/0::findings/3>`
 
 ``finished_by/2``
 -----------------
@@ -11359,6 +11420,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`dead_code_scanner <dead_code_scanner/0::predicate/3>`
 * :ref:`mutation_testing <mutation_testing/0::predicate/3>`
 
 ``predicate_info_pair_score_hook/4``
@@ -11440,6 +11502,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dead_code_scanner <dead_code_scanner/0::predicates/2>`
+
+``predicates/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dead_code_scanner <dead_code_scanner/0::predicates/3>`
 
 ``predict/3``
 -------------
@@ -14794,6 +14866,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`statisticsp <statisticsp/0::sum_of_squares/2>`
+
+``summary/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dead_code_scanner <dead_code_scanner/0::summary/2>`
+
+``summary/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dead_code_scanner <dead_code_scanner/0::summary/3>`
 
 ``superclass/1``
 ----------------

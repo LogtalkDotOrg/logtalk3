@@ -24,21 +24,40 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:8:0,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2025-10-17,
+		date is 2026-03-18,
 		comment is 'Unit tests for the "dead_code_scanner" tool.'
 	]).
 
 	cover(dead_code_scanner).
 
 	:- uses(dead_code_scanner, [
-		predicates/2, predicate/2,
+		findings/2, findings/3, finding/2, finding/3,
+		summary/2, summary/3,
+		predicates/2, predicates/3, predicate/2, predicate/3,
 		all/0,
 		rlibrary/1, library/1,
 		rdirectory/2, rdirectory/1, directory/1,
 		file/1,
-		entity/1
+		entity/2, entity/1
+	]).
+
+	:- uses(list, [
+		length/2, member/2
+	]).
+
+	:- uses(json, [
+		parse/2 as json_parse/2
+	]).
+
+	:- uses(json_schema, [
+		parse/2 as json_schema_parse/2,
+		validate/2 as json_schema_validate/2
+	]).
+
+	:- uses(url(atom), [
+		valid/1 as valid_url/1
 	]).
 
 	% category tests
@@ -73,6 +92,254 @@
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
+		]).
+
+	test(dcs_findings_entity_01, deterministic) :-
+		findings(entity(category), Findings),
+		setof(Predicate, File^Lines^member(dead_predicate(category, category, Predicate, File, Lines), Findings), Predicates),
+		^^assertion(Predicates == [
+			dead_predicate/0,
+			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
+			dead_non_terminal//0
+		]).
+
+	test(dcs_findings_entity_02, deterministic) :-
+		findings(entity(category), Findings, [exclude_predicates([dead_predicate/0, dead_non_terminal//0])]),
+		setof(Predicate, File^Lines^member(dead_predicate(category, category, Predicate, File, Lines), Findings), Predicates),
+		^^assertion(Predicates == [
+			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0
+		]).
+
+	test(dcs_findings_entity_03, deterministic) :-
+		findings(entity(category), Findings, [waive_findings([dead_predicate(category, category, dead_predicate/0, _, _), dead_predicate(category, category, dead_non_terminal//0, _, _)])]),
+		setof(Predicate, File^Lines^member(dead_predicate(category, category, Predicate, File, Lines), Findings), Predicates),
+		^^assertion(Predicates == [
+			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0
+		]).
+
+	test(dcs_finding_entity_01, deterministic) :-
+		setof(Finding, finding(entity(category), Finding), Findings),
+		setof(Predicate, File^Lines^member(dead_predicate(category, category, Predicate, File, Lines), Findings), Predicates),
+		^^assertion(Predicates == [
+			dead_predicate/0,
+			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
+			dead_non_terminal//0
+		]).
+
+	test(dcs_finding_entity_02, deterministic) :-
+		setof(Finding, finding(entity(category), Finding, [waive_findings([dead_predicate(category, category, dead_predicate_1/0, _, _)])]), Findings),
+		setof(Predicate, File^Lines^member(dead_predicate(category, category, Predicate, File, Lines), Findings), Predicates),
+		^^assertion(Predicates == [
+			dead_predicate/0,
+			dead_predicate_2/0, dead_predicate_3/0,
+			dead_non_terminal//0
+		]).
+
+	test(dcs_summary_entity_01, deterministic) :-
+		summary(entity(category), Summary),
+		^^assertion(Summary == summary(entity(category), 1, 5, [entity_summary(category, category, 5)])).
+
+	test(dcs_summary_entity_02, deterministic) :-
+		summary(entity(category), Summary, [exclude_predicates([dead_predicate/0, dead_non_terminal//0])]),
+		^^assertion(Summary == summary(entity(category), 1, 3, [entity_summary(category, category, 3)])).
+
+	test(dcs_summary_entity_03, deterministic) :-
+		summary(entity(category), Summary, [waive_findings([dead_predicate(category, category, dead_predicate_1/0, _, _)])]),
+		^^assertion(Summary == summary(entity(category), 1, 4, [entity_summary(category, category, 4)])).
+
+	test(dcs_export_json_entity_01, deterministic) :-
+		dead_code_scanner::export(entity(category), json, atom(Atom)),
+		json_parse(atom(Atom), JSON),
+		JSON = {
+			formatVersion-'1.0.0',
+			tool-dead_code_scanner,
+			target-{kind-entity, value-category},
+			options-_,
+			summary-{totalEntities-1, totalFindings-5, entities-[EntitySummaryJSON]},
+			findings-Findings
+		},
+		^^assertion(EntitySummaryJSON == {kind-category, entity-category, findingsCount-5}),
+		^^assertion(subsumes_term([_, _, _, _, _], Findings)).
+
+	test(dcs_export_json_entity_02, deterministic) :-
+		dead_code_scanner::export(entity(category), json, atom(Atom), [exclude_predicates([dead_predicate/0, dead_non_terminal//0])]),
+		json_parse(atom(Atom), JSON),
+		JSON = {
+			formatVersion-'1.0.0',
+			tool-dead_code_scanner,
+			target-{kind-entity, value-category},
+			options-_,
+			summary-{totalEntities-1, totalFindings-3, entities-[EntitySummaryJSON]},
+			findings-Findings
+		},
+		^^assertion(EntitySummaryJSON == {kind-category, entity-category, findingsCount-3}),
+		^^assertion(subsumes_term([_, _, _], Findings)).
+
+	test(dcs_export_json_01, deterministic) :-
+		dead_code_scanner::export(entity(category), json, atom(Atom)),
+		json_parse(atom(Atom), JSON),
+		JSON = {
+			formatVersion-'1.0.0',
+			tool-dead_code_scanner,
+			target-{kind-entity, value-category},
+			options-{excludeDirectories-[], excludeFiles-[], excludeEntities-[], excludePredicates-[], excludeLibraries-[startup, scratch_directory], waiveFindings-[], validateExport- @false},
+			summary-{totalEntities-1, totalFindings-5, entities-[EntitySummaryJSON]},
+			findings-Findings
+		},
+		^^assertion(EntitySummaryJSON == {kind-category, entity-category, findingsCount-5}),
+		^^assertion(subsumes_term([_, _, _, _, _], Findings)).
+
+	test(dcs_export_json_02, deterministic) :-
+		dead_code_scanner::export(entity(category), json, atom(Atom), [waive_findings([dead_predicate(category, category, dead_predicate_1/0, _, _)])]),
+		json_parse(atom(Atom), JSON),
+		JSON = {
+			formatVersion-'1.0.0',
+			tool-dead_code_scanner,
+			target-{kind-entity, value-category},
+			options-{excludeDirectories-[], excludeFiles-[], excludeEntities-[], excludePredicates-[], excludeLibraries-[startup, scratch_directory], waiveFindings-['dead_predicate(category,category,dead_predicate_1/0,A,B)'], validateExport- @false},
+			summary-{totalEntities-1, totalFindings-4, entities-[EntitySummaryJSON]},
+			findings-Findings
+		},
+		^^assertion(EntitySummaryJSON = {kind-category, entity-category, findingsCount-4}),
+		^^assertion(subsumes_term([_, _, _, _], Findings)).
+
+	test(dcs_export_json_03, deterministic) :-
+		dead_code_scanner::export(entity(category), json, atom(Atom), [validate_export(true)]),
+		json_parse(atom(Atom), JSON),
+		^^assertion(subsumes_term({formatVersion-_, tool-_, target-_, options-{excludeDirectories-_, excludeFiles-_, excludeEntities-_, excludePredicates-_, excludeLibraries-_, waiveFindings-_, validateExport- @true}, summary-_, findings-_}, JSON)).
+
+	test(dcs_export_json_schema_01, deterministic) :-
+		dead_code_scanner::export(entity(category), json, atom(Atom)),
+		json_parse(atom(Atom), JSON),
+		schema_path(Path),
+		json_schema_parse(file(Path), Schema),
+		json_schema_validate(Schema, JSON).
+
+	test(dcs_export_json_schema_02, deterministic) :-
+		dead_code_scanner::export(entity(category), json, atom(Atom), [exclude_predicates([dead_predicate/0, dead_non_terminal//0])]),
+		json_parse(atom(Atom), JSON),
+		schema_path(Path),
+		json_schema_parse(file(Path), Schema),
+		json_schema_validate(Schema, JSON).
+
+	test(dcs_export_json_schema_03, deterministic) :-
+		dead_code_scanner::export(entity(category), json, atom(Atom), [validate_export(true)]),
+		json_parse(atom(Atom), JSON),
+		schema_path(Path),
+		json_schema_parse(file(Path), Schema),
+		json_schema_validate(Schema, JSON).
+
+	test(dcs_export_json_file_01, deterministic) :-
+		object_property(lgtunit, file(File)),
+		findings(file(File), Findings),
+		summary(file(File), summary(file(File), TotalEntities, TotalFindings, _)),
+		dead_code_scanner::export(file(File), json, atom(Atom)),
+		json_parse(atom(Atom), JSON),
+		^^assertion(ground(JSON)),
+		JSON = {
+			formatVersion-'1.0.0',
+			tool-dead_code_scanner,
+			target-{kind-file, value-File},
+			options-_,
+			summary-{totalEntities-TotalEntities, totalFindings-TotalFindings, entities-EntitiesJSON},
+			findings-FindingsJSON
+		},
+		length(Findings, TotalFindings),
+		^^assertion(length(FindingsJSON, TotalFindings)),
+		^^assertion(length(EntitiesJSON, TotalEntities)).
+
+	test(dcs_export_json_directory_01, deterministic) :-
+		logtalk::expand_library_path(lgtunit, Directory),
+		findings(directory(Directory), Findings),
+		summary(directory(Directory), summary(directory(Directory), TotalEntities, TotalFindings, _)),
+		dead_code_scanner::export(directory(Directory), json, atom(Atom), [validate_export(true)]),
+		json_parse(atom(Atom), JSON),
+		^^assertion(ground(JSON)),
+		JSON = {
+			formatVersion-'1.0.0',
+			tool-dead_code_scanner,
+			target-{kind-directory, value-Directory},
+			options-{excludeDirectories-_, excludeFiles-_, excludeEntities-_, excludePredicates-_, excludeLibraries-_, waiveFindings-_, validateExport- @true},
+			summary-{totalEntities-TotalEntities, totalFindings-TotalFindings, entities-EntitiesJSON},
+			findings-FindingsJSON
+		},
+		^^assertion(ground(JSON)),
+		length(Findings, TotalFindings),
+		^^assertion(length(FindingsJSON, TotalFindings)),
+		^^assertion(length(EntitiesJSON, TotalEntities)).
+
+	test(dcs_export_sarif_01, deterministic) :-
+		dead_code_scanner::export(entity(category), sarif, atom(Atom)),
+		json_parse(atom(Atom), SARIF),
+		^^assertion(ground(SARIF)),
+		SARIF = {
+			'$schema'-'https://json.schemastore.org/sarif-2.1.0.json',
+			version-'2.1.0',
+			runs-[Run]
+		},
+		sarif_run_ok(Run, Rule, Properties, Results),
+		^^assertion(subsumes_term({
+			id-dead_predicate,
+			guid-'f6fd0e53-0c2d-45fd-a6dd-7b2f2af3e2a1',
+			name-dead_predicate,
+			shortDescription-{text-_},
+			fullDescription-{text-_}
+		}, Rule)),
+		sarif_run_properties_ok(Properties),
+		Results = [FirstResult| _],
+		^^assertion(subsumes_term({
+			ruleId-dead_predicate,
+			ruleIndex-0,
+			level-warning,
+			message-{text-_},
+			locations-_,
+			partialFingerprints-{entityPredicateV1-_, locationV1-_},
+			fingerprints-{canonicalFindingV1-_},
+			properties-_
+		}, FirstResult)),
+		^^assertion(Results = [_, _, _, _, _]).
+
+	test(dcs_export_sarif_02, deterministic) :-
+		dead_code_scanner::export(entity(category), sarif, atom(Atom), [exclude_predicates([dead_predicate/0, dead_non_terminal//0])]),
+		json_parse(atom(Atom), SARIF),
+		^^assertion(ground(SARIF)),
+		SARIF = {'$schema'-_, version-_, runs-[Run]},
+		sarif_run_results(Run, Results),
+		^^assertion(subsumes_term([_, _, _], Results)).
+
+	test(dcs_export_sarif_file_01, deterministic) :-
+		object_property(lgtunit, file(File)),
+		findings(file(File), Findings),
+		dead_code_scanner::export(file(File), sarif, atom(Atom)),
+		json_parse(atom(Atom), SARIF),
+		^^assertion(ground(SARIF)),
+		SARIF = {'$schema'-_, version-'2.1.0', runs-[Run]},
+		sarif_run_ok(Run, _Rule, Properties, Results),
+		sarif_run_properties_ok(Properties),
+		^^assertion(length(Results, Length)),
+		^^assertion(length(Findings, Length)).
+
+	test(dcs_export_sarif_directory_01, deterministic) :-
+		logtalk::expand_library_path(lgtunit, Directory),
+		findings(directory(Directory), Findings, [exclude_predicates([logtalk::trace_event/2])]),
+		dead_code_scanner::export(directory(Directory), sarif, atom(Atom), [exclude_predicates([logtalk::trace_event/2])]),
+		json_parse(atom(Atom), SARIF),
+		^^assertion(ground(SARIF)),
+		SARIF = {'$schema'-_, version-'2.1.0', runs-[Run]},
+		sarif_run_results(Run, Results),
+		^^assertion(length(Results, Length)),
+		^^assertion(length(Findings, Length)).
+
+	test(dcs_category_03, deterministic) :-
+		predicates(category, Predicates, [exclude_predicates([dead_predicate/0, dead_non_terminal//0])]),
+		^^assertion(Predicates == [
+			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0
+		]).
+
+	test(dcs_category_04, deterministic) :-
+		setof(Predicate, predicate(category, Predicate, [exclude_predicates([dead_predicate/0, dead_non_terminal//0])]), Predicates),
+		^^assertion(Predicates == [
+			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0
 		]).
 
 	% prototype tests
@@ -200,6 +467,9 @@
 	test(dcs_entity_1_01, deterministic) :-
 		entity(lgtunit).
 
+	test(dcs_entity_2_01, deterministic) :-
+		entity(category, [exclude_predicates([dead_predicate/0])]).
+
 	test(dcs_entity_1_02, deterministic) :-
 		entity(lgtunit_messages).
 
@@ -232,10 +502,20 @@
 			setof(Predicate, predicate(predicate_directives, Predicate), Predicates),
 			^^assertion(Predicates == [some_module:bar/2, some_module:baz/2, list::app/3, list::member/2, logtalk::dbg/1]).
 
+		test(dcs_findings_uses_directive_01, deterministic) :-
+			setof(Finding, finding(entity(predicate_directives), Finding), Findings),
+			setof(Predicate, File^Lines^member(dead_predicate(object, predicate_directives, Predicate, File, Lines), Findings), Predicates),
+			^^assertion(Predicates == [some_module:bar/2, some_module:baz/2, list::app/3, list::member/2, logtalk::dbg/1]).
+
 	:- else.
 
 		test(dcs_uses_directive_01, deterministic) :-
 			setof(Predicate, predicate(predicate_directives, Predicate), Predicates),
+			^^assertion(Predicates == [list::app/3, list::member/2, logtalk::dbg/1]).
+
+		test(dcs_findings_uses_directive_01, deterministic) :-
+			setof(Finding, finding(entity(predicate_directives), Finding), Findings),
+			setof(Predicate, File^Lines^member(dead_predicate(object, predicate_directives, Predicate, File, Lines), Findings), Predicates),
 			^^assertion(Predicates == [list::app/3, list::member/2, logtalk::dbg/1]).
 
 	:- endif.
@@ -258,6 +538,18 @@
 		logtalk::expand_library_path(lgtunit, Directory),
 		rdirectory(Directory, [exclude_entities([foo, bar])]).
 
+	test(dcs_exclude_predicates_option_01, deterministic) :-
+		logtalk::expand_library_path(lgtunit, Directory),
+		rdirectory(Directory, [exclude_predicates([foo/1, bar//2])]).
+
+	test(dcs_waive_findings_option_01, deterministic) :-
+		logtalk::expand_library_path(lgtunit, Directory),
+		rdirectory(Directory, [waive_findings([dead_predicate(object, foo, bar/1, _, _)])]).
+
+	test(dcs_validate_export_option_01, deterministic) :-
+		logtalk::expand_library_path(lgtunit, Directory),
+		rdirectory(Directory, [validate_export(true)]).
+
 	% suppress all messages from the "dead_code_scanner"
 	% component to not pollute the unit tests output
 
@@ -265,5 +557,70 @@
 	:- dynamic(logtalk::message_hook/4).
 
 	logtalk::message_hook(_Message, _Kind, dead_code_scanner, _Tokens).
+
+	schema_path(Path) :-
+		this(This),
+		object_property(This, file(_, Directory)),
+		atom_concat(Directory, 'dead_code_scanner.schema.json', Path).
+
+	sarif_run_properties_ok({
+		fingerprintAlgorithm-canonical_finding_v1,
+		gitBranch-_,
+		gitCommitHash-_
+	}) :-
+		!.
+	sarif_run_properties_ok({
+		fingerprintAlgorithm-canonical_finding_v1
+	}).
+
+	sarif_run_ok({
+		tool-{driver-{name-dead_code_scanner, informationUri-'https://logtalk.org/', version-'0.22.0', guid-'91f50eb3-a092-43b5-b8e2-3c1f64bb7047', rules-[Rule]}},
+		automationDetails-{id-_, guid-_},
+		invocations-[{executionSuccessful- @true}],
+		versionControlProvenance-[VersionControlDetails| _],
+		properties-Properties,
+		results-Results
+	}, Rule, Properties, Results) :-
+		sarif_version_control_details_ok(VersionControlDetails),
+		!.
+	sarif_run_ok({
+		tool-{driver-{name-dead_code_scanner, informationUri-'https://logtalk.org/', version-'0.22.0', guid-'91f50eb3-a092-43b5-b8e2-3c1f64bb7047', rules-[Rule]}},
+		automationDetails-{id-_, guid-_},
+		invocations-[{executionSuccessful- @true}],
+		properties-Properties,
+		results-Results
+	}, Rule, Properties, Results).
+
+	sarif_run_results({
+		tool-_,
+		automationDetails-{id-_, guid-_},
+		invocations-_,
+		versionControlProvenance-_,
+		properties-_,
+		results-Results
+	}, Results) :-
+		!.
+	sarif_run_results({
+		tool-_,
+		automationDetails-{id-_, guid-_},
+		invocations-_,
+		properties-_,
+		results-Results
+	}, Results).
+
+	sarif_version_control_details_ok({
+		repositoryUri-RepositoryURI,
+		revisionId-RevisionId,
+		branch-_,
+		mappedTo-{uri-MappedToURI}
+	}) :-
+		absolute_uri(RepositoryURI),
+		RevisionId \== '',
+		absolute_uri(MappedToURI).
+
+	absolute_uri(URI) :-
+		valid_url(URI),
+		sub_atom(URI, _, 3, _, '://'),
+		!.
 
 :- end_object.

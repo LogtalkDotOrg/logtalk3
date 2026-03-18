@@ -1,0 +1,146 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "dead_code_scanner export format",
+  "type": "object",
+  "properties": {
+    "formatVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "tool": {
+      "type": "string",
+      "const": "dead_code_scanner"
+    },
+    "target": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["all", "entity", "file", "directory", "rdirectory", "library", "rlibrary", "custom"]
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": ["kind", "value"],
+      "additionalProperties": false
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "excludeDirectories": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "excludeFiles": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "excludeEntities": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "excludePredicates": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "excludeLibraries": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "waiveFindings": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "validateExport": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "excludeDirectories",
+        "excludeFiles",
+        "excludeEntities",
+        "excludePredicates",
+        "excludeLibraries",
+        "waiveFindings",
+        "validateExport"
+      ],
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "totalEntities": {
+          "type": "integer"
+        },
+        "totalFindings": {
+          "type": "integer"
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": ["object", "category"]
+              },
+              "entity": {
+                "type": "string"
+              },
+              "findingsCount": {
+                "type": "integer"
+              }
+            },
+            "required": ["kind", "entity", "findingsCount"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["totalEntities", "totalFindings", "entities"],
+      "additionalProperties": false
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "const": "dead_predicate"
+          },
+          "entityKind": {
+            "type": "string",
+            "enum": ["object", "category"]
+          },
+          "entity": {
+            "type": "string"
+          },
+          "predicate": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string"
+          },
+          "lines": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "integer"
+              },
+              "end": {
+                "type": "integer"
+              }
+            },
+            "required": ["start", "end"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["kind", "entityKind", "entity", "predicate", "file", "lines"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["formatVersion", "tool", "target", "options", "summary", "findings"],
+  "additionalProperties": false
+}

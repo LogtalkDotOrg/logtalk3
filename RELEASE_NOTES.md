@@ -93,6 +93,12 @@ entity scores to include the Distance from Main Sequence metric value.
 Of Methods (LCOM4), Weighted Methods per Class (WMC), Response For a Class
 (RFC), and Cognitive Complexity metrics to the `code_metrics` tool.
 
+* ADDED: New `dead_code_scanner` tool `findings/2-3`, `finding/2-3`, and
+`summary/2-3`, and `export/3-4` predicates.
+
+* ADDED: New `dead_code_scanner` tool support for exporting scan results
+in the JSON and SARIF formats. A schema is provided for the JSON format.
+
 * ADDED: New `mutation_testing` tool for mutation-based testing.
 
 * ADDED: Support for caller diagrams to the `diagrams` tool.
