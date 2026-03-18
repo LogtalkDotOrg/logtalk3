@@ -79,7 +79,7 @@ bug report.
 tuples.
 
 * FIXED: The `linda` library `shutdown_server/1` predicate to no longer
-require a followup client connection to complete server shutdown.
+require a follow-up client connection to complete server shutdown.
 
 * FIXED: Spurious choice-points in the `url` library public predicates.
 
