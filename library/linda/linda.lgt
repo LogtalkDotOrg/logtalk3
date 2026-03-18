@@ -94,32 +94,17 @@
 	]).
 
 	:- public(close_client/1).
-	:- mode(close_client(++address), one).
+	:- mode(close_client(++address_or_alias), one).
 	:- info(close_client/1, [
 		comment is 'Closes the connection to the given Linda server.',
 		argnames is ['Address']
 	]).
 
-	:- public(close_client/0).
-	:- mode(close_client, one).
-	:- info(close_client/0, [
-		comment is 'Closes the connection to the default Linda server.'
-	]).
-
 	:- public(shutdown_server/1).
-	:- mode(shutdown_server(++address), one_or_error).
+	:- mode(shutdown_server(++address_or_alias), one_or_error).
 	:- info(shutdown_server/1, [
 		comment is 'Sends a shutdown signal to the given server. The server stops accepting new connections but continues serving existing clients until they all disconnect. Call ``close_client/1`` after this predicate.',
 		argnames is ['Address'],
-		exceptions is [
-			'Not connected' - linda_error(not_connected('Address'))
-		]
-	]).
-
-	:- public(shutdown_server/0).
-	:- mode(shutdown_server, one_or_error).
-	:- info(shutdown_server/0, [
-		comment is 'Sends a shutdown signal to the default server. The server stops accepting new connections but continues serving existing clients until they all disconnect. Call ``close_client/0`` after this predicate.',
 		exceptions is [
 			'Not connected' - linda_error(not_connected('Address'))
 		]
@@ -482,6 +467,7 @@
 
 	linda_(Options) :-
 		context(Context),
+		retractall(server_shutdown_),
 		% Start socket server
 		ignore(memberchk(port(Port), Options)),
 		socket::server_open(Port, ServerSocket, [type(text)]),
@@ -503,9 +489,17 @@
 				throw(error(Error, Context))
 			)
 		),
+		wait_for_clients_to_disconnect,
 		% Cleanup
 		cleanup_server(ServerSocket),
 		threaded_engine_destroy(linda_server_engine).
+
+	wait_for_clients_to_disconnect :-
+		(	client_connection_(_, _, _) ->
+			sleep(0.01),
+			wait_for_clients_to_disconnect
+		;	true
+		).
 
 	cleanup_server(ServerSocket) :-
 		dbg(@'Cleaning up server'),
@@ -589,10 +583,6 @@
 				dbg('Engine loop'-['EngineName'-EngineName, 'Read error'-Error]),
 				remove_client(ClientId, Input, Output)
 			;   Request == exit ->
-				% Client disconnected
-				dbg('Client disconnected'-ClientId),
-				remove_client(ClientId, Input, Output)
-			;   Request == end_of_file ->
 				% Client disconnected
 				dbg('Client disconnected'-ClientId),
 				remove_client(ClientId, Input, Output)
@@ -713,10 +703,14 @@
 	handle_request(shutdown, ClientId, Output) :-
 		!,
 		assertz(server_shutdown_),
+		(	retract(server_socket_(ServerSocket)) ->
+			catch(socket::server_close(ServerSocket), _, true)
+		;	true
+		),
 		% Send response first
 		write(Output, 'ok.\n'),
 		flush_output(Output),
-		% Write end_of_file term to all client input streams to terminate engines
+		% Write exit term to all client input streams to terminate engines
 		forall(
 			(client_connection_(OtherClientId, Input, _), OtherClientId \== ClientId),
 			(write(Input, 'exit.\n'), flush_output(Input))
@@ -891,7 +885,9 @@
 	linda_client(Host:Port) :-
 		linda_client(Host:Port, []).
 
-	close_client(Address) :-
+	close_client(AddressOrALias) :-
+		context(Context),
+		resolve_alias(AddressOrALias, Address, Context),
 		(	retract(client_connection_input_(Address, Input)),
 			retract(client_connection_output_(Address, Output)),
 			retract(client_connection_alias_(Address, _Alias)) ->
@@ -901,26 +897,18 @@
 		;	true
 		).
 
-	close_client :-
-		close_client(_).
-
-	shutdown_server(Address) :-
+	shutdown_server(AddressOrALias) :-
 		context(Context),
-		assertz(server_shutdown_),
-		(	client_connection_output_(Address, Output) ->
+		resolve_alias(AddressOrALias, Address, Context),
+		(	client_connection_output_(Address, Output),
 			write(Output, 'shutdown.\n'),
 			flush_output(Output),
 			client_connection_input_(Address, Input),
 			read_term(Input, Response, []),
-			(	Response == ok ->
-				true
-			;	throw(error(linda_error(shutdown_failed(Response)), Context))
-			)
-		;	throw(error(linda_error(not_connected(Address)), Context))
+			Response == ok ->
+			true
+		;	throw(error(linda_error(shutdown_failed(Response)), Context))
 		).
-
-	shutdown_server :-
-		shutdown_server(_).
 
 	linda_timeout(OldTime, NewTime) :-
 		(	retract(client_timeout_(OldTime)) ->
@@ -1151,7 +1139,7 @@
 		;	client_connection_alias_(Address, AddressOrALias) ->
 			true
 		;	client_connection_input_(_, _) ->
-			throw(error(linda_error(unknown_alias(AddressOrALias)), Context))
+			throw(error(linda_error(not_connected(AddressOrALias)), Context))
 		;	Address = AddressOrALias
 		).
 

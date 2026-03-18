@@ -139,8 +139,7 @@ Close the client connection:
 
 Request server shutdown (server stops accepting new connections):
 
-	| ?- linda::shutdown_server,
-	   linda::close_client.
+	| ?- linda::shutdown_server, linda::close_client.
 
 ### Timeout control
 

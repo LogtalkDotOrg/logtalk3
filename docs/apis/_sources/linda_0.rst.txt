@@ -164,24 +164,7 @@ Closes the connection to the given Linda server.
 | **Template:**
 |    ``close_client(Address)``
 | **Mode and number of proofs:**
-|    ``close_client(++address)`` - ``one``
-
-
-------------
-
-.. index:: close_client/0
-.. _linda/0::close_client/0:
-
-``close_client/0``
-^^^^^^^^^^^^^^^^^^
-
-Closes the connection to the default Linda server.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``close_client`` - ``one``
+|    ``close_client(++address_or_alias)`` - ``one``
 
 
 ------------
@@ -200,28 +183,7 @@ Sends a shutdown signal to the given server. The server stops accepting new conn
 | **Template:**
 |    ``shutdown_server(Address)``
 | **Mode and number of proofs:**
-|    ``shutdown_server(++address)`` - ``one_or_error``
-
-| **Exceptions:**
-|    Not connected:
-|        ``linda_error(not_connected(Address))``
-
-
-------------
-
-.. index:: shutdown_server/0
-.. _linda/0::shutdown_server/0:
-
-``shutdown_server/0``
-^^^^^^^^^^^^^^^^^^^^^
-
-Sends a shutdown signal to the default server. The server stops accepting new connections but continues serving existing clients until they all disconnect. Call ``close_client/0`` after this predicate.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``shutdown_server`` - ``one_or_error``
+|    ``shutdown_server(++address_or_alias)`` - ``one_or_error``
 
 | **Exceptions:**
 |    Not connected:

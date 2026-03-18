@@ -37,6 +37,9 @@ a term position while verifying that the position is for the given term.
 Library
 -------
 
+* REMOVED: The `linda` library `shutdown_server/0` and `close_client/0`
+predicates.
+
 * CHANGED: The `linda` library exception when a client is not connected from
 `linda_error(not_connected)` to `linda_error(not_connected(AddressOrAlias))`.
 
@@ -74,6 +77,9 @@ bug report.
 
 * FIXED: Predicate synchronization bug in the `linda` library when handling
 tuples.
+
+* FIXED: The `linda` library `shutdown_server/1` predicate to no longer
+require a followup client connection to complete server shutdown.
 
 * FIXED: Spurious choice-points in the `url` library public predicates.
 

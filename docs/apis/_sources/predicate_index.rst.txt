@@ -1922,16 +1922,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`amqp <amqp/0::close/3>`
 
-``close_client/0``
-------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`linda <linda/0::close_client/0>`
-
 ``close_client/1``
 ------------------
 
@@ -13834,16 +13824,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`arbitrary <arbitrary/0::shrinker/1>`
-
-``shutdown_server/0``
----------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`linda <linda/0::shutdown_server/0>`
 
 ``shutdown_server/1``
 ---------------------
