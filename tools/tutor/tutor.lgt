@@ -22,10 +22,10 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:84:0,
+		version is 0:85:0,
 		author is 'Paulo Moura',
-		date is 2025-10-20,
-		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
+		date is 2026-03-19,
+		comment is 'This object adds explanations and suggestions to selected compiler and developer tool warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
 		]
@@ -49,6 +49,8 @@
 		message_hook(Message, Kind, lgtunit, Tokens).
 	logtalk::message_hook(Message, Kind, packs, Tokens) :-
 		message_hook(Message, Kind, packs, Tokens).
+	logtalk::message_hook(Message, Kind, dead_code_scanner, Tokens) :-
+		message_hook(Message, Kind, dead_code_scanner, Tokens).
 
 	message_hook(Message, Kind, Component, Tokens) :-
 		phrase(explain(Message), ExplanationTokens),
@@ -1205,6 +1207,35 @@
 			'output arguments bound, a premature cut may result in the wrong grammar'-[], nl,
 			'rule being used. If that''s the case, change the grammar rule to perform'-[], nl,
 			'output unifications after the cut.'-[], nl, nl
+		].
+
+	% dead_code_scanner tool messages
+
+	explain(dead_predicate(local_dead_code, _, _, _, _, _, _, _)) -->
+		[	'Calls from scoped predicates and non-terminals are used as the entry'-[], nl,
+			'points for dead code analysis. Predicates and non-terminals that are'-[], nl,
+			'unreachable from those entry points are reported as likely dead code.'-[], nl, nl
+		].
+	explain(dead_predicate(unused_uses_resource, _, Properties, _, _, _, _, _)) -->
+		{list::memberchk(resource(_), Properties)},
+		[	'No calls to the referenced object resource were found. The corresponding'-[], nl,
+			'uses/2 directive entry is likely redundant and can usually be deleted.'-[], nl, nl
+		].
+	explain(dead_predicate(unused_use_module_resource, _, Properties, _, _, _, _, _)) -->
+		{list::memberchk(module(_), Properties)},
+		[	'No calls to the referenced object resource were found. The corresponding'-[], nl,
+			'use_module/2 directive entry is likely redundant and can usually be deleted.'-[], nl, nl
+		].
+	explain(missing_analysis_prerequisite(_, source_data)) -->
+		[	'The dead code scanner relies on the source_data(on) compiler option to'-[], nl,
+			'access source file metadata for findings. Reload the analyzed code using'-[], nl,
+			'this option to get more complete results and accurate location data.'-[], nl, nl
+		].
+	explain(missing_analysis_prerequisite(_, optimize)) -->
+		[	'When the optimize(on) compiler option is not used, the compiler may record'-[], nl,
+			'less complete call graph information for dynamic and meta-call code. Reload'-[], nl,
+			'the analyzed code using this option to reduce false positives and improve'-[], nl,
+			'dead code scanning confidence.'-[], nl, nl
 		].
 
 	% make tool messages

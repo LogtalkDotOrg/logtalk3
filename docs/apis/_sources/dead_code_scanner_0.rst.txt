@@ -323,7 +323,7 @@ Scans all entities for dead code using default options.
 ``findings/3``
 ^^^^^^^^^^^^^^
 
-Returns an ordered set of findings for a scan target using the given options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Explanation, Properties, EntityKind, Entity, Predicate, File, Lines)``.
+Returns an ordered set of findings for a scan target using the given options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines)``.
 
 | **Compilation flags:**
 |    ``static``
@@ -342,7 +342,7 @@ Returns an ordered set of findings for a scan target using the given options. Su
 ``findings/2``
 ^^^^^^^^^^^^^^
 
-Returns an ordered set of findings for a scan target using default options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Explanation, Properties, EntityKind, Entity, Predicate, File, Lines)``.
+Returns an ordered set of findings for a scan target using default options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines)``.
 
 | **Compilation flags:**
 |    ``static``
@@ -361,7 +361,7 @@ Returns an ordered set of findings for a scan target using default options. Supp
 ``finding/3``
 ^^^^^^^^^^^^^
 
-Enumerates, by backtracking, findings for a scan target using the given options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Explanation, Properties, EntityKind, Entity, Predicate, File, Lines)``.
+Enumerates, by backtracking, findings for a scan target using the given options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines)``.
 
 | **Compilation flags:**
 |    ``static``
@@ -380,7 +380,7 @@ Enumerates, by backtracking, findings for a scan target using the given options.
 ``finding/2``
 ^^^^^^^^^^^^^
 
-Enumerates, by backtracking, findings for a scan target using default options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Explanation, Properties, EntityKind, Entity, Predicate, File, Lines)``.
+Enumerates, by backtracking, findings for a scan target using default options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines)``.
 
 | **Compilation flags:**
 |    ``static``
