@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-18,
+		date is 2026-03-19,
 		comment is 'Linda tuple-space implementation for process communication. Provides a server that acts as a shared blackboard where clients can write (``out/1-2``), read (``rd/1-2``), and remove (``in/1-2``) tuples. Uses threaded engines for the server implementation and the sockets library for network communication.',
 		remarks is [
 			'Supported backends' - 'SWI-Prolog, Trealla Prolog, and XVM (requires both multi-threading and sockets support).',
@@ -704,7 +704,7 @@
 		!,
 		assertz(server_shutdown_),
 		(	retract(server_socket_(ServerSocket)) ->
-			catch(socket::server_close(ServerSocket), _, true)
+			catch(socket::server_close(ServerSocket), Error, dbg('Server shutdown error'-Error))
 		;	true
 		),
 		% Send response first

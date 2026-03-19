@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2026-03-17,
+		date is 2026-03-19,
 		comment is 'Unit tests for the "linda" library.'
 	]).
 
@@ -440,6 +440,7 @@
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
 		linda::shutdown_server(Address),
+		sleep(0.1),
 		Address = Host:Port,
 		catch(
 			(	socket::client_open(Host, Port, Input, Output, [type(text)]),
