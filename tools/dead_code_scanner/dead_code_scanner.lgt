@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:16:0,
+		version is 0:17:0,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2026-03-18,
+		date is 2026-03-19,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
@@ -135,28 +135,28 @@
 	:- public(findings/3).
 	:- mode(findings(+nonvar, -list(compound), +list(compound)), one).
 	:- info(findings/3, [
-		comment is 'Returns an ordered set of findings for a scan target using the given options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``.',
+		comment is 'Returns an ordered set of findings for a scan target using the given options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines)``.',
 		argnames is ['Target', 'Findings', 'Options']
 	]).
 
 	:- public(findings/2).
 	:- mode(findings(+nonvar, -list(compound)), one).
 	:- info(findings/2, [
-		comment is 'Returns an ordered set of findings for a scan target using default options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``.',
+		comment is 'Returns an ordered set of findings for a scan target using default options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines)``.',
 		argnames is ['Target', 'Findings']
 	]).
 
 	:- public(finding/3).
 	:- mode(finding(+nonvar, -compound, +list(compound)), zero_or_more).
 	:- info(finding/3, [
-		comment is 'Enumerates, by backtracking, findings for a scan target using the given options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``.',
+		comment is 'Enumerates, by backtracking, findings for a scan target using the given options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines)``.',
 		argnames is ['Target', 'Finding', 'Options']
 	]).
 
 	:- public(finding/2).
 	:- mode(finding(+nonvar, -compound), zero_or_more).
 	:- info(finding/2, [
-		comment is 'Enumerates, by backtracking, findings for a scan target using default options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``.',
+		comment is 'Enumerates, by backtracking, findings for a scan target using default options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines)``.',
 		argnames is ['Target', 'Finding']
 	]).
 
@@ -269,6 +269,8 @@
 		uuid_v4/1
 	]).
 
+	:- discontiguous(predicate/5).
+
 	findings(Target, Findings, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
@@ -371,8 +373,39 @@
 		predicate(Entity, Predicate, []).
 
 	% local predicates not called, directly or indirectly, by scoped predicates
-	dead_code_finding(Kind, Entity, dead_predicate(Kind, Entity, Predicate, File, Lines), Options) :-
-		predicate(Entity, Predicate, File, Lines, Options).
+	dead_code_finding(Kind, Entity, dead_predicate(Class, Confidence, Properties, Kind, Entity, Predicate, File, Lines), Options) :-
+		local_dead_predicate(Entity, Predicate, File, Lines, Options),
+		Class = local_dead_code,
+		local_dead_code_confidence(Entity, File, Confidence),
+		finding_properties(Class, Entity, File, [], Properties).
+	dead_code_finding(Kind, Entity, dead_predicate(Class, Confidence, Properties, Kind, Entity, Predicate, File, Lines), Options) :-
+		unused_uses_resource(Entity, Object, Predicate, File, Lines, Options),
+		Class = unused_uses_resource,
+		Confidence = high,
+		finding_properties(Class, Entity, File, [resource(Object)], Properties).
+	dead_code_finding(Kind, Entity, dead_predicate(Class, Confidence, Properties, Kind, Entity, Predicate, File, Lines), Options) :-
+		unused_use_module_resource(Entity, Module, Predicate, File, Lines, Options),
+		Class = unused_use_module_resource,
+		Confidence = high,
+		finding_properties(Class, Entity, File, [module(Module)], Properties).
+
+	finding_properties(Class, Entity, File, ExtraProperties, [class(Class), source_data(SourceData), optimize(Optimize)| ExtraProperties]) :-
+		entity_analysis_settings(Entity, File, SourceData, Optimize).
+
+	local_dead_code_confidence(Entity, File, high) :-
+		entity_analysis_settings(Entity, File, _SourceData, on),
+		!.
+	local_dead_code_confidence(_Entity, _File, medium).
+
+	entity_analysis_settings(Entity, File, SourceData, Optimize) :-
+		(	entity_property(Entity, source_data) ->
+			SourceData = on
+		;	SourceData = off
+		),
+		(	loaded_file_property(File, mode(optimal)) ->
+			Optimize = on
+		;	Optimize = off
+		).
 
 	target_entities(Target, Entities, Options) :-
 		(	setof(entity(Kind, Entity), target_entity(Target, Kind, Entity, Options), Entities) ->
@@ -471,14 +504,18 @@
 		finding_json(Finding, FindingJSON),
 		findings_json(Findings, FindingsJSON).
 
-	finding_json(dead_predicate(EntityKind, Entity, Predicate, File, Start-End), {
+	finding_json(dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Start-End), {
 		kind-dead_predicate,
+		class-Class,
+		confidence-Confidence,
+		properties-PropertiesJSON,
 		entityKind-EntityKind,
 		entity-EntityAtom,
 		predicate-PredicateAtom,
 		file-FileAtom,
 		lines-{start-Start, end-End}
 	}) :-
+		terms_to_atoms(Properties, PropertiesJSON),
 		to_atom(Entity, EntityAtom),
 		to_atom(Predicate, PredicateAtom),
 		to_atom(File, FileAtom).
@@ -565,7 +602,7 @@
 		fingerprintAlgorithm-canonical_finding_v1
 	}).
 
-	sarif_git_metadata([dead_predicate(_, _, _, File, _)| _], Branch, CommitHash) :-
+	sarif_git_metadata([dead_predicate(_, _, _, _, _, _, File, _)| _], Branch, CommitHash) :-
 		decompose_file_name(File, Directory, _, _),
 		git_branch(Directory, Branch),
 		git_commit_hash(Directory, CommitHash).
@@ -576,7 +613,7 @@
 		;	VersionControlProvenance = []
 		).
 
-	sarif_version_control_directory([dead_predicate(_, _, _, File, _)| _], Directory) :-
+	sarif_version_control_directory([dead_predicate(_, _, _, _, _, _, File, _)| _], Directory) :-
 		decompose_file_name(File, Directory, _, _).
 	sarif_version_control_directory([_| Findings], Directory) :-
 		sarif_version_control_directory(Findings, Directory).
@@ -688,7 +725,7 @@
 		sarif_result(Finding, Result),
 		sarif_results(Findings, Results).
 
-	sarif_result(dead_predicate(EntityKind, Entity, Predicate, File, Start-End), {
+	sarif_result(dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Start-End), {
 		ruleId-dead_predicate,
 		ruleIndex-0,
 		level-warning,
@@ -700,15 +737,19 @@
 		partialFingerprints-PartialFingerprints,
 		fingerprints-Fingerprints,
 		properties-{
+			class-Class,
+			confidence-Confidence,
+			findingProperties-PropertiesJSON,
 			entityKind-EntityKind,
 			entity-EntityAtom,
 			predicate-PredicateAtom
 		}
 	}) :-
+		terms_to_atoms(Properties, PropertiesJSON),
 		to_atom(Entity, EntityAtom),
 		to_atom(Predicate, PredicateAtom),
 		to_atom(File, FileAtom),
-		sarif_message(EntityKind, EntityAtom, PredicateAtom, Message),
+		sarif_message(Class, EntityKind, EntityAtom, PredicateAtom, Confidence, Message),
 		sarif_file_uri(FileAtom, FileURI),
 		sarif_fingerprints(EntityKind, EntityAtom, PredicateAtom, FileURI, Start-End, PartialFingerprints, Fingerprints).
 
@@ -724,8 +765,12 @@
 			canonicalFindingV1-FindingFingerprint
 		}.
 
-	sarif_message(EntityKind, Entity, Predicate, Message) :-
-		atomic_list_concat(['Likely dead ', EntityKind, ' predicate ', Entity, '::', Predicate, '.'], Message).
+	sarif_message(local_dead_code, EntityKind, Entity, Predicate, Confidence, Message) :-
+		atomic_list_concat(['Likely dead ', EntityKind, ' predicate ', Entity, '::', Predicate, ' (confidence: ', Confidence, ').'], Message).
+	sarif_message(unused_uses_resource, EntityKind, Entity, Predicate, Confidence, Message) :-
+		atomic_list_concat(['Likely unused uses/2 resource in ', EntityKind, ' ', Entity, ': ', Predicate, ' (confidence: ', Confidence, ').'], Message).
+	sarif_message(unused_use_module_resource, EntityKind, Entity, Predicate, Confidence, Message) :-
+		atomic_list_concat(['Likely unused use_module/2 resource in ', EntityKind, ' ', Entity, ': ', Predicate, ' (confidence: ', Confidence, ').'], Message).
 
 	sarif_file_uri(File, URI) :-
 		internal_os_path(File, Path),
@@ -734,7 +779,7 @@
 		url_normalize(URI0, URI),
 		!.
 
-	predicate(Entity, Predicate, File, Lines, Options) :-
+	local_dead_predicate(Entity, Predicate, File, Lines, Options) :-
 		non_scoped_predicate(Entity, Predicate0, File, Lines),
 		% exclude coinduction user-defined hook predicates
 		Predicate0 \== coinductive_success_hook/1,
@@ -748,8 +793,11 @@
 		;	Predicate = Predicate0
 		),
 		\+ excluded_predicate(Predicate, Options).
+
+	predicate(Entity, Predicate, File, Lines, Options) :-
+		local_dead_predicate(Entity, Predicate, File, Lines, Options).
 	% unused predicates and non-terminals listed in the uses/2 directives
-	predicate(Entity, Object::Resource, File, Start-End, Options) :-
+	unused_uses_resource(Entity, Object, Object::Resource, File, Start-End, Options) :-
 		entity_property(Entity, calls(Object::Original, CallsProperties)),
 		(	member(caller(Original), CallsProperties) ->
 			Predicate = Original,
@@ -787,8 +835,11 @@
 		),
 		memberchk(lines(Start, End), CallsProperties),
 		\+ excluded_predicate(Object::Resource, Options).
+
+	predicate(Entity, Predicate, File, Lines, Options) :-
+		unused_uses_resource(Entity, _Object, Predicate, File, Lines, Options).
 	% unused predicates and non-terminals listed in the use_module/2 directives
-	predicate(Entity, ':'(Module,Resource), File, Start-End, Options) :-
+	unused_use_module_resource(Entity, Module, ':'(Module,Resource), File, Start-End, Options) :-
 		entity_property(Entity, calls(':'(Module,Original), CallsProperties)),
 		(	member(caller(Original), CallsProperties),
 			Predicate = Original,
@@ -826,6 +877,9 @@
 		),
 		memberchk(lines(Start, End), CallsProperties),
 		\+ excluded_predicate(':'(Module,Resource), Options).
+
+	predicate(Entity, Predicate, File, Lines, Options) :-
+		unused_use_module_resource(Entity, _Module, Predicate, File, Lines, Options).
 
 	non_scoped_predicate(Entity, Alias, File, Start-End) :-
 		entity_property(Entity, defines(Alias, Properties)),
@@ -963,6 +1017,7 @@
 		^^merge_options(UserOptions, Options),
 		(	expand_library_path(Library, TopPath) ->
 			write_scan_header('Recursive library'),
+			output_preflight_warnings(rlibrary(Library), Options),
 			output_rlibrary(TopPath, Options),
 			write_scan_footer('Recursive library')
 		;	print_message(warning, dead_code_scanner, unknown(library,Library)),
@@ -991,6 +1046,7 @@
 		^^merge_options(UserOptions, Options),
 		(	expand_library_path(Library, Path) ->
 			write_scan_header('Library'),
+			output_preflight_warnings(library(Library), Options),
 			output_directory_files(Path, Options),
 			write_scan_footer('Library')
 		;	print_message(warning, dead_code_scanner, unknown(library,Library)),
@@ -1006,6 +1062,7 @@
 		(	normalize_directory_path(Directory, Path),
 			directory_exists(Path) ->
 			write_scan_header('Recursive directory'),
+			output_preflight_warnings(rdirectory(Directory), Options),
 			output_rdirectory(Path, Options),
 			write_scan_footer('Recursive directory')
 		;	print_message(warning, dead_code_scanner, unknown(directory,Directory)),
@@ -1048,6 +1105,7 @@
 		(	normalize_directory_path(Directory, Path),
 			directory_exists(Path) ->
 			write_scan_header('Directory'),
+			output_preflight_warnings(directory(Directory), Options),
 			output_directory_files(Path, Options),
 			write_scan_footer('Directory')
 		;	print_message(warning, dead_code_scanner, unknown(directory,Directory)),
@@ -1080,6 +1138,7 @@
 			fail
 		),
 		write_scan_header('Entity'),
+		output_preflight_warnings(entity(Entity), Options),
 		process_entity(Kind, Entity, Options),
 		write_scan_footer('Entity').
 
@@ -1138,6 +1197,7 @@
 		^^merge_options(UserOptions, Options),
 		locate_file(Source, Path),
 		write_scan_header('File'),
+		output_preflight_warnings(file(Source), Options),
 		process_file(Path, Options),
 		write_scan_footer('File').
 
@@ -1223,6 +1283,7 @@
 	all(UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
+		output_preflight_warnings(all, Options),
 		^^option(exclude_entities(ExcludedEntities), Options),
 		(	current_object(Entity),
 			Kind = object
@@ -1250,6 +1311,48 @@
 		date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
 		print_message(silent, dead_code_scanner, scan_end_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)),
 		print_message(silent, dead_code_scanner, scan_ended).
+
+	output_preflight_warnings(Target, Options) :-
+		(	setof(File-Warning, target_analysis_warning(Target, Options, File, Warning), Warnings) ->
+			forall(
+				member(File-Warning, Warnings),
+				print_message(warning, dead_code_scanner, missing_analysis_prerequisite(File, Warning))
+			)
+		;	true
+		).
+
+	target_analysis_warning(file(Source), _Options, File, source_data) :-
+		locate_file(Source, File),
+		\+ file_has_source_data(File).
+	target_analysis_warning(file(Source), _Options, File, optimize) :-
+		locate_file(Source, File),
+		\+ loaded_file_property(File, mode(optimal)).
+
+	target_analysis_warning(Target, Options, File, source_data) :-
+		target_entity(Target, _Kind, Entity, Options),
+		entity_file(Entity, File),
+		\+ entity_property(Entity, source_data).
+	target_analysis_warning(Target, Options, File, optimize) :-
+		target_entity(Target, _Kind, Entity, Options),
+		entity_file(Entity, File),
+		\+ loaded_file_property(File, mode(optimal)).
+
+	entity_file(Entity, File) :-
+		( 	entity_property(Entity, file(File)) ->
+			true
+		;	loaded_file_property(File, object(Entity)) ->
+			true
+		;	loaded_file_property(File, category(Entity))
+		).
+
+	file_has_source_data(File) :-
+		loaded_file_property(File, object(_)),
+		!.
+	file_has_source_data(File) :-
+		loaded_file_property(File, category(_)),
+		!.
+	file_has_source_data(File) :-
+		loaded_file_property(File, protocol(_)).
 
 	% by default, don't exclude any directories:
 	default_option(exclude_directories([])).

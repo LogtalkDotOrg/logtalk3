@@ -79,6 +79,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#excluding-code-from-analysis">Excluding code from analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#machine-readable-summaries">Machine-readable summaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-classes-and-confidence">Finding classes and confidence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#exports">Exports</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#integration-with-the-make-tool">Integration with the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#caveats">Caveats</a></li>
@@ -204,14 +205,28 @@ loader file).</p>
 <p>For machine-readable integrations, the <code class="docutils literal notranslate"><span class="pre">findings/2-3</span></code>,
 <code class="docutils literal notranslate"><span class="pre">finding/2-3</span></code>, and <code class="docutils literal notranslate"><span class="pre">summary/2-3</span></code> predicates can be used to collect
 dead-code results and post- filter counts without relying on printed
-messages.</p>
+messages. Findings are returned as terms of the form:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dead_predicate(Class,</span> <span class="pre">Confidence,</span> <span class="pre">Properties,</span> <span class="pre">EntityKind,</span> <span class="pre">Entity,</span> <span class="pre">Predicate,</span> <span class="pre">File,</span> <span class="pre">Lines)</span></code></p></li>
+</ul>
+<p>where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Class</span></code> distinguishes local dead code from unused <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> resources</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Confidence</span></code> is a triage-oriented rating (<code class="docutils literal notranslate"><span class="pre">high</span></code>, <code class="docutils literal notranslate"><span class="pre">medium</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">low</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Properties</span></code> contains additional structured metadata, including the
+analysis settings seen for the source file and any class-specific
+details needed to explain the finding</p></li>
+</ul>
 <p>For machine-readable export integrations, the <code class="docutils literal notranslate"><span class="pre">export/3-4</span></code> predicates
 serialize scan results using the <code class="docutils literal notranslate"><span class="pre">json</span></code> library. Supported formats are
 <code class="docutils literal notranslate"><span class="pre">json</span></code> and <code class="docutils literal notranslate"><span class="pre">sarif</span></code>. The JSON export format is described by the
 <code class="docutils literal notranslate"><span class="pre">dead_code_scanner.schema.json</span></code> JSON Schema file in the tool
 directory. Runtime validation of exported JSON against that schema can
 be enabled using the <code class="docutils literal notranslate"><span class="pre">validate_export(true)</span></code> option. The default is
-<code class="docutils literal notranslate"><span class="pre">validate_export(false)</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">validate_export(false)</span></code>. The current JSON export format version is
+<code class="docutils literal notranslate"><span class="pre">1.0.0</span></code>.</p>
 <p>As an example, assume that we want to scan an application with a library
 alias <code class="docutils literal notranslate"><span class="pre">my_app</span></code>. The following goals could be used:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(source_data, on),
@@ -278,8 +293,8 @@ findings (default is <code class="docutils literal notranslate"><span class="pre
 <div class="line"><code class="docutils literal notranslate"><span class="pre">waive_findings(Findings)</span></code></div>
 <div class="line">list of finding patterns to suppress from the results (default is
 <code class="docutils literal notranslate"><span class="pre">[]</span></code>); intended for reusable CI baselines and supports partially
-instantiated terms such as
-<code class="docutils literal notranslate"><span class="pre">dead_predicate(object,</span> <span class="pre">some_object,</span> <span class="pre">helper/2,</span> <span class="pre">_,</span> <span class="pre">_)</span></code></div>
+instantiated structured finding terms such as
+<code class="docutils literal notranslate"><span class="pre">dead_predicate(local_dead_code,</span> <span class="pre">medium,</span> <span class="pre">_,</span> <span class="pre">object,</span> <span class="pre">some_object,</span> <span class="pre">helper/2,</span> <span class="pre">_,</span> <span class="pre">_)</span></code></div>
 </div>
 </li>
 <li><div class="line-block">
@@ -303,6 +318,54 @@ against the <code class="docutils literal notranslate"><span class="pre">dead_co
 </ul>
 <p>The summary is computed after applying all exclusions and finding
 waivers, making it suitable for CI thresholds and regression tracking.</p>
+</section>
+<section id="finding-classes-and-confidence">
+<h2>Finding classes and confidence<a class="headerlink" href="#finding-classes-and-confidence" title="Link to this heading"></a></h2>
+<p>The current finding classes are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">local_dead_code</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unused_uses_resource</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unused_use_module_resource</span></code></p></li>
+</ul>
+<p>Confidence is a triage-oriented rating attached to every finding. The
+JSON schema allows the values <code class="docutils literal notranslate"><span class="pre">high</span></code>, <code class="docutils literal notranslate"><span class="pre">medium</span></code>, and <code class="docutils literal notranslate"><span class="pre">low</span></code>, but the
+tool currently emits only <code class="docutils literal notranslate"><span class="pre">high</span></code> and <code class="docutils literal notranslate"><span class="pre">medium</span></code>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">high</span></code></p>
+<p>Used when the tool has stronger evidence that the reported code is
+really unused.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">medium</span></code></p>
+<p>Used when the result is still useful, but can be affected by missing
+compilation information such as optimized call graph data.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">low</span></code></p>
+<p>Reserved for future use. It is accepted by the export schema but is
+not currently generated by the scanner.</p>
+</li>
+</ul>
+<p>For <code class="docutils literal notranslate"><span class="pre">local_dead_code</span></code>, the confidence depends on the effective
+compilation mode of the analyzed file:</p>
+<ul class="simple">
+<li><p>If the file was loaded in normal mode, or otherwise not loaded with
+<code class="docutils literal notranslate"><span class="pre">optimize(on)</span></code>, the confidence is <code class="docutils literal notranslate"><span class="pre">medium</span></code>.</p></li>
+<li><p>If the file was loaded with <code class="docutils literal notranslate"><span class="pre">optimize(on)</span></code>, the confidence is
+upgraded to <code class="docutils literal notranslate"><span class="pre">high</span></code> because the compiler can provide more complete
+call graph information, reducing the risk of false positives caused by
+missed meta-calls.</p></li>
+</ul>
+<p>The effective mode is inferred from the loaded file itself, not from the
+current scanner defaults. Therefore, results reflect how the analyzed
+code was actually compiled.</p>
+<p>Unused <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> resources are always reported
+with <code class="docutils literal notranslate"><span class="pre">high</span></code> confidence because they are derived from the generated
+linking clauses and the recorded call graph rather than from heuristic
+reachability alone.</p>
+<p>When scanning using the text-based predicates such as <code class="docutils literal notranslate"><span class="pre">entity/1-2</span></code>,
+<code class="docutils literal notranslate"><span class="pre">file/1-2</span></code>, and <code class="docutils literal notranslate"><span class="pre">all/0-1</span></code>, the tool now emits preflight warnings
+whenever the analyzed files were not loaded with <code class="docutils literal notranslate"><span class="pre">source_data(on)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">optimize(on)</span></code> so that potentially less reliable results can be
+triaged more carefully.</p>
 </section>
 <section id="exports">
 <h2>Exports<a class="headerlink" href="#exports" title="Link to this heading"></a></h2>

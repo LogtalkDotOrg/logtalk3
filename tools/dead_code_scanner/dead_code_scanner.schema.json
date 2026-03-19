@@ -109,6 +109,18 @@
             "type": "string",
             "const": "dead_predicate"
           },
+          "class": {
+            "type": "string",
+            "enum": ["local_dead_code", "unused_uses_resource", "unused_use_module_resource"]
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["high", "medium", "low"]
+          },
+          "properties": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
           "entityKind": {
             "type": "string",
             "enum": ["object", "category"]
@@ -136,7 +148,7 @@
             "additionalProperties": false
           }
         },
-        "required": ["kind", "entityKind", "entity", "predicate", "file", "lines"],
+        "required": ["kind", "class", "confidence", "properties", "entityKind", "entity", "predicate", "file", "lines"],
         "additionalProperties": false
       }
     }

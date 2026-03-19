@@ -26,7 +26,7 @@
 	:- info([
 		version is 0:8:0,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2026-03-18,
+		date is 2026-03-19,
 		comment is 'Unit tests for the "dead_code_scanner" tool.'
 	]).
 
@@ -44,7 +44,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, member/2
+		length/2, member/2, memberchk/2
 	]).
 
 	:- uses(json, [
@@ -96,30 +96,35 @@
 
 	test(dcs_findings_entity_01, deterministic) :-
 		findings(entity(category), Findings),
-		setof(Predicate, File^Lines^member(dead_predicate(category, category, Predicate, File, Lines), Findings), Predicates),
+		setof(Predicate, Finding^(member(Finding, Findings), finding_predicate(category, category, Predicate, Finding)), Predicates),
+		setof(Class-Confidence, Predicate^File^Lines^member(dead_predicate(Class, Confidence, _Properties, category, category, Predicate, File, Lines), Findings), Metadata),
 		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		]).
+		]),
+		^^assertion(Metadata == [local_dead_code-medium]).
 
 	test(dcs_findings_entity_02, deterministic) :-
 		findings(entity(category), Findings, [exclude_predicates([dead_predicate/0, dead_non_terminal//0])]),
-		setof(Predicate, File^Lines^member(dead_predicate(category, category, Predicate, File, Lines), Findings), Predicates),
+		setof(Predicate, Finding^(member(Finding, Findings), finding_predicate(category, category, Predicate, Finding)), Predicates),
 		^^assertion(Predicates == [
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0
 		]).
 
 	test(dcs_findings_entity_03, deterministic) :-
-		findings(entity(category), Findings, [waive_findings([dead_predicate(category, category, dead_predicate/0, _, _), dead_predicate(category, category, dead_non_terminal//0, _, _)])]),
-		setof(Predicate, File^Lines^member(dead_predicate(category, category, Predicate, File, Lines), Findings), Predicates),
+		findings(entity(category), Findings, [waive_findings([
+			dead_predicate(local_dead_code, medium, _, category, category, dead_predicate/0, _, _),
+			dead_predicate(local_dead_code, medium, _, category, category, dead_non_terminal//0, _, _)
+		])]),
+		setof(Predicate, Finding^(member(Finding, Findings), finding_predicate(category, category, Predicate, Finding)), Predicates),
 		^^assertion(Predicates == [
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0
 		]).
 
 	test(dcs_finding_entity_01, deterministic) :-
 		setof(Finding, finding(entity(category), Finding), Findings),
-		setof(Predicate, File^Lines^member(dead_predicate(category, category, Predicate, File, Lines), Findings), Predicates),
+		setof(Predicate, Finding^(member(Finding, Findings), finding_predicate(category, category, Predicate, Finding)), Predicates),
 		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
@@ -127,8 +132,8 @@
 		]).
 
 	test(dcs_finding_entity_02, deterministic) :-
-		setof(Finding, finding(entity(category), Finding, [waive_findings([dead_predicate(category, category, dead_predicate_1/0, _, _)])]), Findings),
-		setof(Predicate, File^Lines^member(dead_predicate(category, category, Predicate, File, Lines), Findings), Predicates),
+		setof(Finding, finding(entity(category), Finding, [waive_findings([dead_predicate(local_dead_code, medium, _, category, category, dead_predicate_1/0, _, _)])]), Findings),
+		setof(Predicate, Finding^(member(Finding, Findings), finding_predicate(category, category, Predicate, Finding)), Predicates),
 		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_2/0, dead_predicate_3/0,
@@ -144,7 +149,7 @@
 		^^assertion(Summary == summary(entity(category), 1, 3, [entity_summary(category, category, 3)])).
 
 	test(dcs_summary_entity_03, deterministic) :-
-		summary(entity(category), Summary, [waive_findings([dead_predicate(category, category, dead_predicate_1/0, _, _)])]),
+		summary(entity(category), Summary, [waive_findings([dead_predicate(local_dead_code, medium, _, category, category, dead_predicate_1/0, _, _)])]),
 		^^assertion(Summary == summary(entity(category), 1, 4, [entity_summary(category, category, 4)])).
 
 	test(dcs_export_json_entity_01, deterministic) :-
@@ -159,6 +164,8 @@
 			findings-Findings
 		},
 		^^assertion(EntitySummaryJSON == {kind-category, entity-category, findingsCount-5}),
+		Findings = [FirstFinding| _],
+		^^assertion(subsumes_term({kind-dead_predicate, class-local_dead_code, confidence-medium, properties-_, entityKind-category, entity-category, predicate-_, file-_, lines-{start-_, end-_}}, FirstFinding)),
 		^^assertion(subsumes_term([_, _, _, _, _], Findings)).
 
 	test(dcs_export_json_entity_02, deterministic) :-
@@ -190,13 +197,13 @@
 		^^assertion(subsumes_term([_, _, _, _, _], Findings)).
 
 	test(dcs_export_json_02, deterministic) :-
-		dead_code_scanner::export(entity(category), json, atom(Atom), [waive_findings([dead_predicate(category, category, dead_predicate_1/0, _, _)])]),
+		dead_code_scanner::export(entity(category), json, atom(Atom), [waive_findings([dead_predicate(local_dead_code, medium, _, category, category, dead_predicate_1/0, _, _)])]),
 		json_parse(atom(Atom), JSON),
 		JSON = {
 			formatVersion-'1.0.0',
 			tool-dead_code_scanner,
 			target-{kind-entity, value-category},
-			options-{excludeDirectories-[], excludeFiles-[], excludeEntities-[], excludePredicates-[], excludeLibraries-[startup, scratch_directory], waiveFindings-['dead_predicate(category,category,dead_predicate_1/0,A,B)'], validateExport- @false},
+			options-{excludeDirectories-[], excludeFiles-[], excludeEntities-[], excludePredicates-[], excludeLibraries-[startup, scratch_directory], waiveFindings-['dead_predicate(local_dead_code,medium,A,category,category,dead_predicate_1/0,B,C)'], validateExport- @false},
 			summary-{totalEntities-1, totalFindings-4, entities-[EntitySummaryJSON]},
 			findings-Findings
 		},
@@ -295,7 +302,7 @@
 			locations-_,
 			partialFingerprints-{entityPredicateV1-_, locationV1-_},
 			fingerprints-{canonicalFindingV1-_},
-			properties-_
+			properties-{class-local_dead_code, confidence-medium, findingProperties-_, entityKind-_, entity-_, predicate-_}
 		}, FirstResult)),
 		^^assertion(Results = [_, _, _, _, _]).
 
@@ -504,8 +511,10 @@
 
 		test(dcs_findings_uses_directive_01, deterministic) :-
 			setof(Finding, finding(entity(predicate_directives), Finding), Findings),
-			setof(Predicate, File^Lines^member(dead_predicate(object, predicate_directives, Predicate, File, Lines), Findings), Predicates),
-			^^assertion(Predicates == [some_module:bar/2, some_module:baz/2, list::app/3, list::member/2, logtalk::dbg/1]).
+			setof(Predicate, Finding^(member(Finding, Findings), finding_predicate(object, predicate_directives, Predicate, Finding)), Predicates),
+			setof(Classification, Finding^(member(Finding, Findings), finding_classification(Finding, Classification)), ClassifiedPredicates),
+			^^assertion(Predicates == [some_module:bar/2, some_module:baz/2, list::app/3, list::member/2, logtalk::dbg/1]),
+			^^assertion(ClassifiedPredicates == [classification(unused_use_module_resource, some_module:bar/2), classification(unused_use_module_resource, some_module:baz/2), classification(unused_uses_resource, list::app/3), classification(unused_uses_resource, list::member/2), classification(unused_uses_resource, logtalk::dbg/1)]).
 
 	:- else.
 
@@ -515,8 +524,10 @@
 
 		test(dcs_findings_uses_directive_01, deterministic) :-
 			setof(Finding, finding(entity(predicate_directives), Finding), Findings),
-			setof(Predicate, File^Lines^member(dead_predicate(object, predicate_directives, Predicate, File, Lines), Findings), Predicates),
-			^^assertion(Predicates == [list::app/3, list::member/2, logtalk::dbg/1]).
+			setof(Predicate, Finding^(member(Finding, Findings), finding_predicate(object, predicate_directives, Predicate, Finding)), Predicates),
+			setof(Classification, Finding^(member(Finding, Findings), finding_classification(Finding, Classification)), ClassifiedPredicates),
+			^^assertion(Predicates == [list::app/3, list::member/2, logtalk::dbg/1]),
+			^^assertion(ClassifiedPredicates == [classification(unused_uses_resource, list::app/3), classification(unused_uses_resource, list::member/2), classification(unused_uses_resource, logtalk::dbg/1)]).
 
 	:- endif.
 
@@ -544,18 +555,67 @@
 
 	test(dcs_waive_findings_option_01, deterministic) :-
 		logtalk::expand_library_path(lgtunit, Directory),
-		rdirectory(Directory, [waive_findings([dead_predicate(object, foo, bar/1, _, _)])]).
+		rdirectory(Directory, [waive_findings([dead_predicate(local_dead_code, medium, _, object, foo, bar/1, _, _)])]).
 
 	test(dcs_validate_export_option_01, deterministic) :-
 		logtalk::expand_library_path(lgtunit, Directory),
 		rdirectory(Directory, [validate_export(true)]).
 
+	test(dcs_preflight_warning_01, deterministic) :-
+		retractall(preflight_warning(_)),
+		current_logtalk_flag(source_data, OldSourceData),
+		current_logtalk_flag(optimize, OldOptimize),
+		set_logtalk_flag(source_data, on),
+		set_logtalk_flag(optimize, on),
+		logtalk_load(test_entities, [reload(always), unknown_entities(silent)]),
+		file(test_entities),
+		set_logtalk_flag(source_data, OldSourceData),
+		set_logtalk_flag(optimize, OldOptimize),
+		logtalk_load(test_entities, [reload(always), source_data(on), unknown_entities(silent)]),
+		\+ preflight_warning(_).
+
+	test(dcs_preflight_warning_02, deterministic) :-
+		retractall(preflight_warning(_)),
+		current_logtalk_flag(source_data, OldSourceData),
+		current_logtalk_flag(optimize, OldOptimize),
+		set_logtalk_flag(source_data, off),
+		set_logtalk_flag(optimize, off),
+		logtalk_load(test_entities, [reload(always), unknown_entities(silent)]),
+		file(test_entities),
+		set_logtalk_flag(source_data, OldSourceData),
+		set_logtalk_flag(optimize, OldOptimize),
+		logtalk_load(test_entities, [reload(always), source_data(on), unknown_entities(silent)]),
+		setof(Warning, preflight_warning(Warning), Warnings),
+		^^assertion(subsumes_term([
+			missing_analysis_prerequisite(_, optimize),
+			missing_analysis_prerequisite(_, source_data)
+		], Warnings)).
+
+	test(dcs_local_dead_code_confidence_01, deterministic) :-
+		current_logtalk_flag(source_data, OldSourceData),
+		current_logtalk_flag(optimize, OldOptimize),
+		set_logtalk_flag(source_data, on),
+		set_logtalk_flag(optimize, on),
+		logtalk_load(test_entities, [reload(always), unknown_entities(silent)]),
+		findings(file(test_entities), Findings),
+		set_logtalk_flag(source_data, OldSourceData),
+		set_logtalk_flag(optimize, OldOptimize),
+		logtalk_load(test_entities, [reload(always), source_data(on), unknown_entities(silent)]),
+		memberchk(dead_predicate(local_dead_code, high, Properties, category, category, dead_predicate/0, _, _), Findings),
+		^^assertion(member(optimize(on), Properties)).
+
 	% suppress all messages from the "dead_code_scanner"
 	% component to not pollute the unit tests output
+
+	:- private(preflight_warning/1).
+	:- dynamic(preflight_warning/1).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
 
+	logtalk::message_hook(Message, _Kind, dead_code_scanner, _Tokens) :-
+		Message = missing_analysis_prerequisite(_, _),
+		assertz(preflight_warning(Message)).
 	logtalk::message_hook(_Message, _Kind, dead_code_scanner, _Tokens).
 
 	schema_path(Path) :-
@@ -622,5 +682,9 @@
 		valid_url(URI),
 		sub_atom(URI, _, 3, _, '://'),
 		!.
+
+	finding_predicate(EntityKind, Entity, Predicate, dead_predicate(_Class, _Confidence, _Properties, EntityKind, Entity, Predicate, _File, _Lines)).
+
+	finding_classification(dead_predicate(Class, _Confidence, _Properties, _EntityKind, _Entity, Predicate, _File, _Lines), classification(Class, Predicate)).
 
 :- end_object.

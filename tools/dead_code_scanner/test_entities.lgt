@@ -552,6 +552,7 @@
 
 	:- if(current_logtalk_flag(modules, supported)).
 
+		:- set_logtalk_flag(unknown_predicates, silent).
 		:- use_module(some_module, [
 			foo/2 as bar/2, baz/2
 		]).

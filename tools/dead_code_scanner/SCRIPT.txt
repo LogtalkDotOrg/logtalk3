@@ -77,6 +77,17 @@ ________________________________________________________________________
 | ?- dead_code_scanner::summary(entity(core_messages), Summary).
 ...
 
+
+% get triage-oriented machine-readable findings for a specific entity scan:
+
+| ?- dead_code_scanner::findings(entity(core_messages), Findings).
+...
+
+% finding terms now include a class, confidence, and properties:
+
+| ?- dead_code_scanner::finding(entity(core_messages), Finding).
+...
+
 % export a specific entity scan as a JSON file:
 
 | ?- dead_code_scanner::export(entity(core_messages), json, file('report.json')).

@@ -23,9 +23,9 @@
 :- category(dead_code_scanner_messages).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:9:0,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2024-05-07,
+		date is 2026-03-19,
 		comment is 'Logtalk ``dead_code_scanner`` tool default message translations.'
 	]).
 
@@ -87,9 +87,18 @@
 	message_tokens(scanning_entity(Kind, Entity)) -->
 		['Scanning ~q ~w ...'-[Entity, Kind], nl].
 
-	message_tokens(dead_predicate(Type, Entity, Predicate, File, Lines)) -->
-		likely_dead_predicate(Predicate),
+	message_tokens(dead_predicate(Class, Confidence, Properties, Type, Entity, Predicate, File, Lines)) -->
+		likely_dead_predicate(Class, Predicate, Confidence, Properties),
 		message_context(File, Lines, Type, Entity).
+
+	message_tokens(missing_analysis_prerequisite(File, source_data)) -->
+		[	'Analysis prerequisite missing for file ~w:'-[File], nl,
+		 	'  source_data(on) was not used when loading the file; findings may be incomplete or missing location data.'-[], nl, nl
+		].
+	message_tokens(missing_analysis_prerequisite(File, optimize)) -->
+		[	'Analysis advisory for file ~w:'-[File], nl,
+			'  optimize(on) was not used when loading the file; dynamic and meta-call code may produce false positives.'-[], nl, nl
+		].
 
 	message_tokens(unknown(library, Library)) -->
 		['Library not defined: ~q'-[Library], nl].
@@ -98,18 +107,22 @@
 	message_tokens(unknown(entity, Entity)) -->
 		['Entity not loaded: ~q'-[Entity], nl].
 
-	likely_dead_predicate(Object::Functor/Arity) -->
-		['Likely unused predicate: ~q'-[Object::Functor/Arity], nl].
-	likely_dead_predicate(Object::Functor//Arity) -->
-		['Likely unused non-terminal: ~q'-[Object::Functor//Arity], nl].
-	likely_dead_predicate(':'(Module,Functor/Arity)) -->
-		['Likely unused predicate: ~q'-[':'(Module,Functor/Arity)], nl].
-	likely_dead_predicate(':'(Module,Functor//Arity)) -->
-		['Likely unused non-terminal: ~q'-[':'(Module,Functor//Arity)], nl].
-	likely_dead_predicate(Functor/Arity) -->
-		['Likely dead predicate: ~q'-[Functor/Arity], nl].
-	likely_dead_predicate(Functor//Arity) -->
-		['Likely dead non-terminal: ~q'-[Functor//Arity], nl].
+	likely_dead_predicate(local_dead_code, Object::Functor/Arity, Confidence, _Properties) -->
+		['Likely unused predicate: ~q [class: local_dead_code, confidence: ~q]'-[Object::Functor/Arity, Confidence], nl].
+	likely_dead_predicate(local_dead_code, Object::Functor//Arity, Confidence, _Properties) -->
+		['Likely unused non-terminal: ~q [class: local_dead_code, confidence: ~q]'-[Object::Functor//Arity, Confidence], nl].
+	likely_dead_predicate(unused_use_module_resource, ':'(Module,Functor/Arity), Confidence, _Properties) -->
+		['Likely unused use_module/2 predicate: ~q [class: unused_use_module_resource, confidence: ~q]'-[':'(Module,Functor/Arity), Confidence], nl].
+	likely_dead_predicate(unused_use_module_resource, ':'(Module,Functor//Arity), Confidence, _Properties) -->
+		['Likely unused use_module/2 non-terminal: ~q [class: unused_use_module_resource, confidence: ~q]'-[':'(Module,Functor//Arity), Confidence], nl].
+	likely_dead_predicate(unused_uses_resource, Object::Functor/Arity, Confidence, _Properties) -->
+		['Likely unused uses/2 predicate: ~q [class: unused_uses_resource, confidence: ~q]'-[Object::Functor/Arity, Confidence], nl].
+	likely_dead_predicate(unused_uses_resource, Object::Functor//Arity, Confidence, _Properties) -->
+		['Likely unused uses/2 non-terminal: ~q [class: unused_uses_resource, confidence: ~q]'-[Object::Functor//Arity, Confidence], nl].
+	likely_dead_predicate(local_dead_code, Functor/Arity, Confidence, _Properties) -->
+		['Likely dead predicate: ~q [class: local_dead_code, confidence: ~q]'-[Functor/Arity, Confidence], nl].
+	likely_dead_predicate(local_dead_code, Functor//Arity, Confidence, _Properties) -->
+		['Likely dead non-terminal: ~q [class: local_dead_code, confidence: ~q]'-[Functor//Arity, Confidence], nl].
 
 	message_context(File, Lines, Type, Entity) -->
 		['  while compiling ~w ~q'-[Type, Entity], nl],
