@@ -34,7 +34,7 @@
 
 	:- uses(dead_code_scanner, [
 		findings/2, findings/3, finding/2, finding/3,
-		summary/2, summary/3,
+		summary/2, summary/3, preflight/2, preflight/3,
 		predicates/2, predicates/3, predicate/2, predicate/3,
 		all/0,
 		rlibrary/1, library/1,
@@ -142,15 +142,15 @@
 
 	test(dcs_summary_entity_01, deterministic) :-
 		summary(entity(category), Summary),
-		^^assertion(Summary == summary(entity(category), 1, 5, [entity_summary(category, category, 5)])).
+		^^assertion(Summary == summary(entity(category), 1, 5, finding_breakdown([class_count(local_dead_code, 5)], [confidence_count(medium, 5)]), [entity_summary(category, category, 5, finding_breakdown([class_count(local_dead_code, 5)], [confidence_count(medium, 5)]))])).
 
 	test(dcs_summary_entity_02, deterministic) :-
 		summary(entity(category), Summary, [exclude_predicates([dead_predicate/0, dead_non_terminal//0])]),
-		^^assertion(Summary == summary(entity(category), 1, 3, [entity_summary(category, category, 3)])).
+		^^assertion(Summary == summary(entity(category), 1, 3, finding_breakdown([class_count(local_dead_code, 3)], [confidence_count(medium, 3)]), [entity_summary(category, category, 3, finding_breakdown([class_count(local_dead_code, 3)], [confidence_count(medium, 3)]))])).
 
 	test(dcs_summary_entity_03, deterministic) :-
 		summary(entity(category), Summary, [waive_findings([dead_predicate(local_dead_code, medium, _, category, category, dead_predicate_1/0, _, _)])]),
-		^^assertion(Summary == summary(entity(category), 1, 4, [entity_summary(category, category, 4)])).
+		^^assertion(Summary == summary(entity(category), 1, 4, finding_breakdown([class_count(local_dead_code, 4)], [confidence_count(medium, 4)]), [entity_summary(category, category, 4, finding_breakdown([class_count(local_dead_code, 4)], [confidence_count(medium, 4)]))])).
 
 	test(dcs_export_json_entity_01, deterministic) :-
 		dead_code_scanner::export(entity(category), json, atom(Atom)),
@@ -160,10 +160,13 @@
 			tool-dead_code_scanner,
 			target-{kind-entity, value-category},
 			options-_,
-			summary-{totalEntities-1, totalFindings-5, entities-[EntitySummaryJSON]},
+			preflight-{warnings-PreflightWarnings},
+			summary-{totalEntities-1, totalFindings-5, breakdown-BreakdownJSON, entities-[EntitySummaryJSON]},
 			findings-Findings
 		},
-		^^assertion(EntitySummaryJSON == {kind-category, entity-category, findingsCount-5}),
+		^^assertion(PreflightWarnings = [_]),
+		^^assertion(BreakdownJSON == {classes-[{class-local_dead_code, findingsCount-5}], confidences-[{confidence-medium, findingsCount-5}]}),
+		^^assertion(EntitySummaryJSON == {kind-category, entity-category, findingsCount-5, breakdown-{classes-[{class-local_dead_code, findingsCount-5}], confidences-[{confidence-medium, findingsCount-5}]}}),
 		Findings = [FirstFinding| _],
 		^^assertion(subsumes_term({kind-dead_predicate, class-local_dead_code, confidence-medium, properties-_, entityKind-category, entity-category, predicate-_, file-_, lines-{start-_, end-_}}, FirstFinding)),
 		^^assertion(subsumes_term([_, _, _, _, _], Findings)).
@@ -176,10 +179,13 @@
 			tool-dead_code_scanner,
 			target-{kind-entity, value-category},
 			options-_,
-			summary-{totalEntities-1, totalFindings-3, entities-[EntitySummaryJSON]},
+			preflight-{warnings-PreflightWarnings},
+			summary-{totalEntities-1, totalFindings-3, breakdown-BreakdownJSON, entities-[EntitySummaryJSON]},
 			findings-Findings
 		},
-		^^assertion(EntitySummaryJSON == {kind-category, entity-category, findingsCount-3}),
+		^^assertion(PreflightWarnings = [_]),
+		^^assertion(BreakdownJSON == {classes-[{class-local_dead_code, findingsCount-3}], confidences-[{confidence-medium, findingsCount-3}]}),
+		^^assertion(EntitySummaryJSON == {kind-category, entity-category, findingsCount-3, breakdown-{classes-[{class-local_dead_code, findingsCount-3}], confidences-[{confidence-medium, findingsCount-3}]}}),
 		^^assertion(subsumes_term([_, _, _], Findings)).
 
 	test(dcs_export_json_01, deterministic) :-
@@ -190,10 +196,13 @@
 			tool-dead_code_scanner,
 			target-{kind-entity, value-category},
 			options-{excludeDirectories-[], excludeFiles-[], excludeEntities-[], excludePredicates-[], excludeLibraries-[startup, scratch_directory], waiveFindings-[], validateExport- @false},
-			summary-{totalEntities-1, totalFindings-5, entities-[EntitySummaryJSON]},
+			preflight-{warnings-PreflightWarnings},
+			summary-{totalEntities-1, totalFindings-5, breakdown-BreakdownJSON, entities-[EntitySummaryJSON]},
 			findings-Findings
 		},
-		^^assertion(EntitySummaryJSON == {kind-category, entity-category, findingsCount-5}),
+		^^assertion(PreflightWarnings = [_]),
+		^^assertion(BreakdownJSON == {classes-[{class-local_dead_code, findingsCount-5}], confidences-[{confidence-medium, findingsCount-5}]}),
+		^^assertion(EntitySummaryJSON == {kind-category, entity-category, findingsCount-5, breakdown-{classes-[{class-local_dead_code, findingsCount-5}], confidences-[{confidence-medium, findingsCount-5}]}}),
 		^^assertion(subsumes_term([_, _, _, _, _], Findings)).
 
 	test(dcs_export_json_02, deterministic) :-
@@ -204,16 +213,19 @@
 			tool-dead_code_scanner,
 			target-{kind-entity, value-category},
 			options-{excludeDirectories-[], excludeFiles-[], excludeEntities-[], excludePredicates-[], excludeLibraries-[startup, scratch_directory], waiveFindings-['dead_predicate(local_dead_code,medium,A,category,category,dead_predicate_1/0,B,C)'], validateExport- @false},
-			summary-{totalEntities-1, totalFindings-4, entities-[EntitySummaryJSON]},
+			preflight-{warnings-PreflightWarnings},
+			summary-{totalEntities-1, totalFindings-4, breakdown-BreakdownJSON, entities-[EntitySummaryJSON]},
 			findings-Findings
 		},
-		^^assertion(EntitySummaryJSON = {kind-category, entity-category, findingsCount-4}),
+		^^assertion(PreflightWarnings = [_]),
+		^^assertion(BreakdownJSON == {classes-[{class-local_dead_code, findingsCount-4}], confidences-[{confidence-medium, findingsCount-4}]}),
+		^^assertion(EntitySummaryJSON = {kind-category, entity-category, findingsCount-4, breakdown-{classes-[{class-local_dead_code, findingsCount-4}], confidences-[{confidence-medium, findingsCount-4}]}}),
 		^^assertion(subsumes_term([_, _, _, _], Findings)).
 
 	test(dcs_export_json_03, deterministic) :-
 		dead_code_scanner::export(entity(category), json, atom(Atom), [validate_export(true)]),
 		json_parse(atom(Atom), JSON),
-		^^assertion(subsumes_term({formatVersion-_, tool-_, target-_, options-{excludeDirectories-_, excludeFiles-_, excludeEntities-_, excludePredicates-_, excludeLibraries-_, waiveFindings-_, validateExport- @true}, summary-_, findings-_}, JSON)).
+		^^assertion(subsumes_term({formatVersion-_, tool-_, target-_, options-{excludeDirectories-_, excludeFiles-_, excludeEntities-_, excludePredicates-_, excludeLibraries-_, waiveFindings-_, validateExport- @true}, preflight-_, summary-_, findings-_}, JSON)).
 
 	test(dcs_export_json_schema_01, deterministic) :-
 		dead_code_scanner::export(entity(category), json, atom(Atom)),
@@ -239,7 +251,7 @@
 	test(dcs_export_json_file_01, deterministic) :-
 		object_property(lgtunit, file(File)),
 		findings(file(File), Findings),
-		summary(file(File), summary(file(File), TotalEntities, TotalFindings, _)),
+		summary(file(File), summary(file(File), TotalEntities, TotalFindings, _, _)),
 		dead_code_scanner::export(file(File), json, atom(Atom)),
 		json_parse(atom(Atom), JSON),
 		^^assertion(ground(JSON)),
@@ -248,7 +260,8 @@
 			tool-dead_code_scanner,
 			target-{kind-file, value-File},
 			options-_,
-			summary-{totalEntities-TotalEntities, totalFindings-TotalFindings, entities-EntitiesJSON},
+			preflight-_,
+			summary-{totalEntities-TotalEntities, totalFindings-TotalFindings, breakdown-_, entities-EntitiesJSON},
 			findings-FindingsJSON
 		},
 		length(Findings, TotalFindings),
@@ -258,7 +271,7 @@
 	test(dcs_export_json_directory_01, deterministic) :-
 		logtalk::expand_library_path(lgtunit, Directory),
 		findings(directory(Directory), Findings),
-		summary(directory(Directory), summary(directory(Directory), TotalEntities, TotalFindings, _)),
+		summary(directory(Directory), summary(directory(Directory), TotalEntities, TotalFindings, _, _)),
 		dead_code_scanner::export(directory(Directory), json, atom(Atom), [validate_export(true)]),
 		json_parse(atom(Atom), JSON),
 		^^assertion(ground(JSON)),
@@ -267,7 +280,8 @@
 			tool-dead_code_scanner,
 			target-{kind-directory, value-Directory},
 			options-{excludeDirectories-_, excludeFiles-_, excludeEntities-_, excludePredicates-_, excludeLibraries-_, waiveFindings-_, validateExport- @true},
-			summary-{totalEntities-TotalEntities, totalFindings-TotalFindings, entities-EntitiesJSON},
+			preflight-_,
+			summary-{totalEntities-TotalEntities, totalFindings-TotalFindings, breakdown-_, entities-EntitiesJSON},
 			findings-FindingsJSON
 		},
 		^^assertion(ground(JSON)),
@@ -284,27 +298,51 @@
 			version-'2.1.0',
 			runs-[Run]
 		},
-		sarif_run_ok(Run, Rule, Properties, Results),
+		sarif_run_ok(Run, Rules, Properties, Notifications, Results),
+		sarif_rule_ok(Rules, local_dead_code, Rule),
 		^^assertion(subsumes_term({
-			id-dead_predicate,
+			id-local_dead_code,
 			guid-'f6fd0e53-0c2d-45fd-a6dd-7b2f2af3e2a1',
-			name-dead_predicate,
+			name-local_dead_code,
 			shortDescription-{text-_},
-			fullDescription-{text-_}
+			fullDescription-{text-_},
+			defaultConfiguration-{level-warning}
 		}, Rule)),
 		sarif_run_properties_ok(Properties),
+		^^assertion(Notifications = [_]),
 		Results = [FirstResult| _],
 		^^assertion(subsumes_term({
-			ruleId-dead_predicate,
+			ruleId-local_dead_code,
 			ruleIndex-0,
-			level-warning,
+			level-note,
 			message-{text-_},
 			locations-_,
 			partialFingerprints-{entityPredicateV1-_, locationV1-_},
 			fingerprints-{canonicalFindingV1-_},
 			properties-{class-local_dead_code, confidence-medium, findingProperties-_, entityKind-_, entity-_, predicate-_}
 		}, FirstResult)),
-		^^assertion(Results = [_, _, _, _, _]).
+		^^assertion(subsumes_term([_, _, _, _, _], Results)).
+
+	test(dcs_export_sarif_03, deterministic) :-
+		dead_code_scanner::export(entity(predicate_directives), sarif, atom(Atom)),
+		json_parse(atom(Atom), SARIF),
+		^^assertion(ground(SARIF)),
+		SARIF = {'$schema'-_, version-'2.1.0', runs-[Run]},
+		sarif_run_ok(Run, Rules, Properties, Notifications, Results),
+		sarif_run_properties_ok(Properties),
+		^^assertion(subsumes_term([_], Notifications)),
+		sarif_result_ok(Results, unused_uses_resource, 1, error, high, _),
+		( 	current_logtalk_flag(modules, supported) ->
+			sarif_rule_ok(Rules, unused_uses_resource, UsesRule),
+			sarif_rule_ok(Rules, unused_use_module_resource, UseModuleRule),
+			sarif_result_ok(Results, unused_use_module_resource, 2, error, high, _),
+			^^assertion(subsumes_term({id-unused_uses_resource, guid-_, name-unused_uses_resource, shortDescription-_, fullDescription-_, defaultConfiguration-{level-error}}, UsesRule)),
+			^^assertion(subsumes_term({id-unused_use_module_resource, guid-_, name-unused_use_module_resource, shortDescription-_, fullDescription-_, defaultConfiguration-{level-error}}, UseModuleRule)),
+			^^assertion(length(Results, 5))
+		; 	sarif_rule_ok(Rules, unused_uses_resource, UsesRule),
+			^^assertion(subsumes_term({id-unused_uses_resource, guid-_, name-unused_uses_resource, shortDescription-_, fullDescription-_, defaultConfiguration-{level-error}}, UsesRule)),
+			^^assertion(length(Results, 3))
+		).
 
 	test(dcs_export_sarif_02, deterministic) :-
 		dead_code_scanner::export(entity(category), sarif, atom(Atom), [exclude_predicates([dead_predicate/0, dead_non_terminal//0])]),
@@ -312,19 +350,22 @@
 		^^assertion(ground(SARIF)),
 		SARIF = {'$schema'-_, version-_, runs-[Run]},
 		sarif_run_results(Run, Results),
-		^^assertion(subsumes_term([_, _, _], Results)).
+		^^assertion(subsumes_term([_, _, _], Results)),
+		!.
 
 	test(dcs_export_sarif_file_01, deterministic) :-
 		object_property(lgtunit, file(File)),
-		findings(file(File), Findings),
-		dead_code_scanner::export(file(File), sarif, atom(Atom)),
-		json_parse(atom(Atom), SARIF),
-		^^assertion(ground(SARIF)),
-		SARIF = {'$schema'-_, version-'2.1.0', runs-[Run]},
-		sarif_run_ok(Run, _Rule, Properties, Results),
-		sarif_run_properties_ok(Properties),
-		^^assertion(length(Results, Length)),
-		^^assertion(length(Findings, Length)).
+		once((
+			findings(file(File), Findings),
+			dead_code_scanner::export(file(File), sarif, atom(Atom)),
+			json_parse(atom(Atom), SARIF),
+			^^assertion(ground(SARIF)),
+			SARIF = {'$schema'-_, version-'2.1.0', runs-[Run]},
+			sarif_run_ok(Run, _Rule, Properties, _, Results),
+			sarif_run_properties_ok(Properties),
+			^^assertion(length(Results, Length)),
+			^^assertion(length(Findings, Length))
+		)).
 
 	test(dcs_export_sarif_directory_01, deterministic) :-
 		logtalk::expand_library_path(lgtunit, Directory),
@@ -334,8 +375,9 @@
 		^^assertion(ground(SARIF)),
 		SARIF = {'$schema'-_, version-'2.1.0', runs-[Run]},
 		sarif_run_results(Run, Results),
-		^^assertion(length(Results, Length)),
-		^^assertion(length(Findings, Length)).
+		length(Results, ResultsLength),
+		length(Findings, FindingsResults),
+		^^assertion(ResultsLength == FindingsResults).
 
 	test(dcs_category_03, deterministic) :-
 		predicates(category, Predicates, [exclude_predicates([dead_predicate/0, dead_non_terminal//0])]),
@@ -561,6 +603,33 @@
 		logtalk::expand_library_path(lgtunit, Directory),
 		rdirectory(Directory, [validate_export(true)]).
 
+	test(dcs_preflight_01, deterministic) :-
+		current_logtalk_flag(source_data, OldSourceData),
+		current_logtalk_flag(optimize, OldOptimize),
+		set_logtalk_flag(source_data, on),
+		set_logtalk_flag(optimize, on),
+		logtalk_load(test_entities, [reload(always), unknown_entities(silent)]),
+		preflight(file(test_entities), Warnings),
+		set_logtalk_flag(source_data, OldSourceData),
+		set_logtalk_flag(optimize, OldOptimize),
+		logtalk_load(test_entities, [reload(always), source_data(on), unknown_entities(silent)]),
+		^^assertion(Warnings == []).
+
+	test(dcs_preflight_02, deterministic) :-
+		current_logtalk_flag(source_data, OldSourceData),
+		current_logtalk_flag(optimize, OldOptimize),
+		set_logtalk_flag(source_data, off),
+		set_logtalk_flag(optimize, off),
+		logtalk_load(test_entities, [reload(always), unknown_entities(silent)]),
+		preflight(file(test_entities), Warnings),
+		set_logtalk_flag(source_data, OldSourceData),
+		set_logtalk_flag(optimize, OldOptimize),
+		logtalk_load(test_entities, [reload(always), source_data(on), unknown_entities(silent)]),
+		^^assertion(subsumes_term([
+			missing_analysis_prerequisite(_, optimize),
+			missing_analysis_prerequisite(_, source_data)
+		], Warnings)).
+
 	test(dcs_preflight_warning_01, deterministic) :-
 		retractall(preflight_warning(_)),
 		current_logtalk_flag(source_data, OldSourceData),
@@ -634,22 +703,50 @@
 	}).
 
 	sarif_run_ok({
-		tool-{driver-{name-dead_code_scanner, informationUri-'https://logtalk.org/', version-'0.22.0', guid-'91f50eb3-a092-43b5-b8e2-3c1f64bb7047', rules-[Rule]}},
+		tool-{driver-{name-dead_code_scanner, informationUri-'https://logtalk.org/', version-'0.22.0', guid-'91f50eb3-a092-43b5-b8e2-3c1f64bb7047', rules-Rules}},
 		automationDetails-{id-_, guid-_},
-		invocations-[{executionSuccessful- @true}],
+		invocations-[Invocation],
 		versionControlProvenance-[VersionControlDetails| _],
 		properties-Properties,
 		results-Results
-	}, Rule, Properties, Results) :-
+	}, Rules, Properties, Notifications, Results) :-
+		sarif_invocation_ok(Invocation, Notifications),
 		sarif_version_control_details_ok(VersionControlDetails),
 		!.
 	sarif_run_ok({
-		tool-{driver-{name-dead_code_scanner, informationUri-'https://logtalk.org/', version-'0.22.0', guid-'91f50eb3-a092-43b5-b8e2-3c1f64bb7047', rules-[Rule]}},
+		tool-{driver-{name-dead_code_scanner, informationUri-'https://logtalk.org/', version-'0.22.0', guid-'91f50eb3-a092-43b5-b8e2-3c1f64bb7047', rules-Rules}},
 		automationDetails-{id-_, guid-_},
-		invocations-[{executionSuccessful- @true}],
+		invocations-[Invocation],
 		properties-Properties,
 		results-Results
-	}, Rule, Properties, Results).
+	}, Rules, Properties, Notifications, Results) :-
+		sarif_invocation_ok(Invocation, Notifications),
+		!.
+
+	sarif_rule_ok([Rule| _], RuleId, Rule) :-
+		Rule = {id-RuleId, guid-_, name-RuleId, shortDescription-_, fullDescription-_, defaultConfiguration-{level-_}},
+		!.
+	sarif_rule_ok([_| Rules], RuleId, Rule) :-
+		sarif_rule_ok(Rules, RuleId, Rule).
+
+	sarif_result_ok([Result| _], RuleId, RuleIndex, Level, Confidence, Result) :-
+		Result = {
+			ruleId-RuleId,
+			ruleIndex-RuleIndex,
+			level-Level,
+			message-{text-_},
+			locations-_,
+			partialFingerprints-{entityPredicateV1-_, locationV1-_},
+			fingerprints-{canonicalFindingV1-_},
+			properties-{class-RuleId, confidence-Confidence, findingProperties-_, entityKind-_, entity-_, predicate-_}
+		},
+		!.
+	sarif_result_ok([_| Results], RuleId, RuleIndex, Level, Confidence, Result) :-
+		sarif_result_ok(Results, RuleId, RuleIndex, Level, Confidence, Result).
+
+	sarif_invocation_ok({executionSuccessful- @true}, []) :-
+		!.
+	sarif_invocation_ok({executionSuccessful- @true, toolExecutionNotifications-Notifications}, Notifications).
 
 	sarif_run_results({
 		tool-_,

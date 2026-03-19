@@ -163,14 +163,39 @@ Machine-readable summaries
 
 The `summary/2-3` predicates return a term of the form:
 
-- `summary(Target, TotalEntities, TotalFindings, EntitySummaries)`
+- `summary(Target, TotalEntities, TotalFindings, Breakdown, EntitySummaries)`
 
-where `EntitySummaries` is a list of terms of the form:
+where `Breakdown` is a term of the form:
 
-- `entity_summary(Kind, Entity, FindingsCount)`
+- `finding_breakdown(ClassCounts, ConfidenceCounts)`
+
+with `ClassCounts` containing `class_count(Class, Count)` terms and
+`ConfidenceCounts` containing `confidence_count(Confidence, Count)` terms.
+
+`EntitySummaries` is a list of terms of the form:
+
+- `entity_summary(Kind, Entity, FindingsCount, Breakdown)`
 
 The summary is computed after applying all exclusions and finding waivers,
 making it suitable for CI thresholds and regression tracking.
+
+
+Machine-readable preflight warnings
+-----------------------------------
+
+The `preflight/2-3` predicates return an ordered set of warnings describing
+analysis prerequisites that affect result quality for a target. Warning terms
+currently use the form:
+
+- `missing_analysis_prerequisite(File, Prerequisite)`
+
+where `Prerequisite` is currently one of:
+
+- `source_data`
+- `optimize`
+
+This API is intended for CI and editor integrations that need to surface
+analysis quality issues without scraping console messages.
 
 
 Finding classes and confidence
@@ -236,8 +261,34 @@ The `json` export is described by the `dead_code_scanner.schema.json` file,
 which can be used by third-party tools to validate and consume that export
 format. The `sarif` export uses the SARIF `2.1.0` JSON format and is suitable
 for code scanning integrations that consume SARIF reports. SARIF exports include
-a per-run UUID GUID, stable GUIDs for the SARIF driver and rule descriptor, and
-deterministic result fingerprints derived from the canonical finding
+a per-run UUID GUID, stable GUIDs for the SARIF driver and rule descriptors,
+and deterministic result fingerprints derived from the canonical finding.
+
+SARIF findings are exported using one rule descriptor per finding class:
+
+- `local_dead_code`
+- `unused_uses_resource`
+- `unused_use_module_resource`
+
+Result severities are also triage-aware instead of using a single static SARIF
+level for all findings:
+
+- `local_dead_code` with `high` confidence is exported as `warning`
+- `local_dead_code` with `medium` or `low` confidence is exported as `note`
+- `unused_uses_resource` with `high` confidence is exported as `error`
+- `unused_use_module_resource` with `high` confidence is exported as `error`
+
+This mapping allows CI consumers to distinguish advisory dead-code findings
+from stronger unused-resource findings without reinterpreting the custom
+`class` and `confidence` properties.
+
+JSON exports include an additive top-level `preflight` object with a `warnings`
+array. Each warning entry records the warning kind, file, prerequisite, and a
+machine-readable severity.
+
+SARIF exports include the same preflight information as invocation-level
+`toolExecutionNotifications`, allowing consumers to distinguish prerequisite
+warnings from dead code findings.
 representation. When the analyzed code is inside a git repository, the export
 also includes the current branch and commit hash as optional run properties.
 When the repository remote URI can also be derived, the export includes a

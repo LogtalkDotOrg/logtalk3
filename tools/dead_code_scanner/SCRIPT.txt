@@ -96,7 +96,7 @@ ________________________________________________________________________
 
 % export a specific entity scan as a JSON file and validate it against the schema:
 
-| ?- dead_code_scanner::export(entity(core_messages), [validate_export(true)], json, file('report.json')).
+| ?- dead_code_scanner::export(entity(core_messages), json, file('report.json'), [validate_export(true)]).
 ...
 
 
@@ -104,3 +104,10 @@ ________________________________________________________________________
 
 | ?- dead_code_scanner::export(entity(core_messages), sarif, file('sarif.json')).
 ...
+
+% SARIF exports use one rule descriptor per finding class and map confidence
+% to triage-aware result levels. For example, local dead code findings are
+% exported using the `local_dead_code` rule and medium-confidence results are
+% emitted as `note` level, while high-confidence unused resource findings use
+% the `unused_uses_resource` or `unused_use_module_resource` rules and are
+% emitted as `error` level.

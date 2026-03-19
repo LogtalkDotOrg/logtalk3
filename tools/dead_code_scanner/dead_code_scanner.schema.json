@@ -67,6 +67,38 @@
       ],
       "additionalProperties": false
     },
+    "preflight": {
+      "type": "object",
+      "properties": {
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "const": "missing_analysis_prerequisite"
+              },
+              "file": {
+                "type": "string"
+              },
+              "prerequisite": {
+                "type": "string",
+                "enum": ["source_data", "optimize"]
+              },
+              "severity": {
+                "type": "string",
+                "enum": ["warning", "note"]
+              }
+            },
+            "required": ["kind", "file", "prerequisite", "severity"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["warnings"],
+      "additionalProperties": false
+    },
     "summary": {
       "type": "object",
       "properties": {
@@ -75,6 +107,47 @@
         },
         "totalFindings": {
           "type": "integer"
+        },
+        "breakdown": {
+          "type": "object",
+          "properties": {
+            "classes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "class": {
+                    "type": "string",
+                    "enum": ["local_dead_code", "unused_uses_resource", "unused_use_module_resource"]
+                  },
+                  "findingsCount": {
+                    "type": "integer"
+                  }
+                },
+                "required": ["class", "findingsCount"],
+                "additionalProperties": false
+              }
+            },
+            "confidences": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "confidence": {
+                    "type": "string",
+                    "enum": ["high", "medium", "low"]
+                  },
+                  "findingsCount": {
+                    "type": "integer"
+                  }
+                },
+                "required": ["confidence", "findingsCount"],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": ["classes", "confidences"],
+          "additionalProperties": false
         },
         "entities": {
           "type": "array",
@@ -90,14 +163,55 @@
               },
               "findingsCount": {
                 "type": "integer"
+              },
+              "breakdown": {
+                "type": "object",
+                "properties": {
+                  "classes": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "class": {
+                          "type": "string",
+                          "enum": ["local_dead_code", "unused_uses_resource", "unused_use_module_resource"]
+                        },
+                        "findingsCount": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": ["class", "findingsCount"],
+                      "additionalProperties": false
+                    }
+                  },
+                  "confidences": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "confidence": {
+                          "type": "string",
+                          "enum": ["high", "medium", "low"]
+                        },
+                        "findingsCount": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": ["confidence", "findingsCount"],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": ["classes", "confidences"],
+                "additionalProperties": false
               }
             },
-            "required": ["kind", "entity", "findingsCount"],
+            "required": ["kind", "entity", "findingsCount", "breakdown"],
             "additionalProperties": false
           }
         }
       },
-      "required": ["totalEntities", "totalFindings", "entities"],
+      "required": ["totalEntities", "totalFindings", "breakdown", "entities"],
       "additionalProperties": false
     },
     "findings": {
@@ -153,6 +267,6 @@
       }
     }
   },
-  "required": ["formatVersion", "tool", "target", "options", "summary", "findings"],
+  "required": ["formatVersion", "tool", "target", "options", "preflight", "summary", "findings"],
   "additionalProperties": false
 }

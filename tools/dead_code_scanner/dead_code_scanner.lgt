@@ -163,28 +163,42 @@
 	:- public(summary/3).
 	:- mode(summary(+nonvar, -compound, +list(compound)), one).
 	:- info(summary/3, [
-		comment is 'Returns a machine-readable summary for a scan target using the given options. The summary term is of the form ``summary(Target, TotalEntities, TotalFindings, EntitySummaries)`` where ``EntitySummaries`` is a list of ``entity_summary(Kind, Entity, FindingsCount)`` terms.',
+		comment is 'Returns a machine-readable summary for a scan target using the given options. The summary term is of the form ``summary(Target, TotalEntities, TotalFindings, Breakdown, EntitySummaries)`` where ``Breakdown`` is a ``finding_breakdown(ClassCounts, ConfidenceCounts)`` term and ``EntitySummaries`` is a list of ``entity_summary(Kind, Entity, FindingsCount, Breakdown)`` terms.',
 		argnames is ['Target', 'Summary', 'Options']
 	]).
 
 	:- public(summary/2).
 	:- mode(summary(+nonvar, -compound), one).
 	:- info(summary/2, [
-		comment is 'Returns a machine-readable summary for a scan target using default options. The summary term is of the form ``summary(Target, TotalEntities, TotalFindings, EntitySummaries)`` where ``EntitySummaries`` is a list of ``entity_summary(Kind, Entity, FindingsCount)`` terms.',
+		comment is 'Returns a machine-readable summary for a scan target using default options. The summary term is of the form ``summary(Target, TotalEntities, TotalFindings, Breakdown, EntitySummaries)`` where ``Breakdown`` is a ``finding_breakdown(ClassCounts, ConfidenceCounts)`` term and ``EntitySummaries`` is a list of ``entity_summary(Kind, Entity, FindingsCount, Breakdown)`` terms.',
 		argnames is ['Target', 'Summary']
+	]).
+
+	:- public(preflight/3).
+	:- mode(preflight(+nonvar, -list(compound), +list(compound)), one).
+	:- info(preflight/3, [
+		comment is 'Returns an ordered set of machine-readable preflight warnings for a scan target using the given options. Warning terms currently use the form ``missing_analysis_prerequisite(File, Prerequisite)``.',
+		argnames is ['Target', 'Warnings', 'Options']
+	]).
+
+	:- public(preflight/2).
+	:- mode(preflight(+nonvar, -list(compound)), one).
+	:- info(preflight/2, [
+		comment is 'Returns an ordered set of machine-readable preflight warnings for a scan target using default options. Warning terms currently use the form ``missing_analysis_prerequisite(File, Prerequisite)``.',
+		argnames is ['Target', 'Warnings']
 	]).
 
 	:- public(export/4).
 	:- mode(export(+nonvar, +atom, ++compound, +list(compound)), one).
 	:- info(export/4, [
-		comment is 'Exports a scan target using the given options in the specified format to the specified sink. Supported formats are ``json`` and ``sarif``. Supported sinks are those accepted by the ``json`` library ``generate/2`` predicate.',
+		comment is 'Exports a scan target using the given options in the specified format to the specified sink. Supported formats are ``json`` and ``sarif``. Exports include both findings and machine-readable preflight warnings. SARIF exports use one rule descriptor per finding class and map finding confidence to triage-aware result levels. Supported sinks are those accepted by the ``json::generate/2`` library predicate.',
 		argnames is ['Target', 'Format', 'Sink', 'Options']
 	]).
 
 	:- public(export/3).
 	:- mode(export(+nonvar, +atom, ++compound), one).
 	:- info(export/3, [
-		comment is 'Exports a scan target using default options in the specified format to the specified sink. Supported formats are ``json`` and ``sarif``. Supported sinks are those accepted by the ``json`` library ``generate/2`` predicate.',
+		comment is 'Exports a scan target using default options in the specified format to the specified sink. Supported formats are ``json`` and ``sarif``. Exports include both findings and machine-readable preflight warnings. SARIF exports use one rule descriptor per finding class and map finding confidence to triage-aware result levels. Supported sinks are those accepted by the ``json::generate/2`` library predicate.',
 		argnames is ['Target', 'Format', 'Sink']
 	]).
 
@@ -292,24 +306,39 @@
 	finding(Target, Finding) :-
 		finding(Target, Finding, []).
 
-	summary(Target, summary(Target, TotalEntities, TotalFindings, EntitySummaries), UserOptions) :-
+	summary(Target, summary(Target, TotalEntities, TotalFindings, Breakdown, EntitySummaries), UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		target_entities(Target, Entities, Options),
 		length(Entities, TotalEntities),
-		entity_summaries(Entities, EntitySummaries, Options),
-		sum_entity_findings(EntitySummaries, TotalFindings).
+		findings(Target, Findings, Options),
+		length(Findings, TotalFindings),
+		findings_breakdown(Findings, Breakdown),
+		entity_summaries(Entities, Findings, EntitySummaries).
 
 	summary(Target, Summary) :-
 		summary(Target, Summary, []).
+
+	preflight(Target, Warnings, UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		( 	setof(Warning, preflight_warning(Target, Options, Warning), Warnings) ->
+			true
+		; 	Warnings = []
+		).
+
+	preflight(Target, Warnings) :-
+		preflight(Target, Warnings, []).
 
 	export_term(json, Target, JSON, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		findings(Target, Findings, Options),
+		preflight(Target, PreflightWarnings, Options),
 		summary(Target, Summary, Options),
 		target_json(Target, TargetJSON),
 		options_json(Options, OptionsJSON),
+		preflight_json(PreflightWarnings, PreflightJSON),
 		summary_json(Summary, SummaryJSON),
 		findings_json(Findings, FindingsJSON),
 		JSON = {
@@ -317,6 +346,7 @@
 			tool-dead_code_scanner,
 			target-TargetJSON,
 			options-OptionsJSON,
+			preflight-PreflightJSON,
 			summary-SummaryJSON,
 			findings-FindingsJSON
 		}.
@@ -324,13 +354,15 @@
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		findings(Target, Findings, Options),
+		preflight(Target, PreflightWarnings, Options),
 		target_sarif(Target, TargetSARIF),
 		uuid_v4(RunGUID),
 		sarif_run_properties(Findings, RunProperties),
 		sarif_run_version_control_provenance(Findings, VersionControlProvenance),
+		sarif_notifications(PreflightWarnings, Notifications),
 		sarif_results(Findings, Results),
 		sarif_tool_driver(Driver),
-		sarif_run(TargetSARIF, RunGUID, Driver, VersionControlProvenance, RunProperties, Results, Run),
+		sarif_run(TargetSARIF, RunGUID, Driver, VersionControlProvenance, RunProperties, Notifications, Results, Run),
 		SARIF = {
 			'$schema'-'https://json.schemastore.org/sarif-2.1.0.json',
 			version-'2.1.0',
@@ -413,25 +445,62 @@
 		;	Entities = []
 		).
 
-	entity_summaries([], [], _).
-	entity_summaries([entity(Kind, Entity)| Entities], [entity_summary(Kind, Entity, FindingsCount)| EntitySummaries], Options) :-
-		entity_findings_count(Kind, Entity, FindingsCount, Options),
-		entity_summaries(Entities, EntitySummaries, Options).
+	entity_summaries([], _, []).
+	entity_summaries([entity(Kind, Entity)| Entities], Findings, [entity_summary(Kind, Entity, FindingsCount, Breakdown)| EntitySummaries]) :-
+		entity_findings(Findings, Kind, Entity, EntityFindings),
+		length(EntityFindings, FindingsCount),
+		findings_breakdown(EntityFindings, Breakdown),
+		entity_summaries(Entities, Findings, EntitySummaries).
 
-	entity_findings_count(Kind, Entity, FindingsCount, Options) :-
-		findall(
-			Finding,
-			(	dead_code_finding(Kind, Entity, Finding, Options),
-				\+ waived_finding(Finding, Options)
-			),
-			Findings
+	entity_findings([], _Kind, _Entity, []).
+	entity_findings([Finding| Findings], Kind, Entity, EntityFindings) :-
+		(	Finding = dead_predicate(_, _, _, Kind, Entity, _, _, _) ->
+			EntityFindings = [Finding| Rest]
+		;	EntityFindings = Rest
 		),
-		length(Findings, FindingsCount).
+		entity_findings(Findings, Kind, Entity, Rest).
 
-	sum_entity_findings([], 0).
-	sum_entity_findings([entity_summary(_, _, FindingsCount)| EntitySummaries], TotalFindings) :-
-		sum_entity_findings(EntitySummaries, TotalFindings0),
-		TotalFindings is FindingsCount + TotalFindings0.
+	findings_breakdown(Findings, finding_breakdown(ClassCounts, ConfidenceCounts)) :-
+		findings_class_counts(Findings, ClassCounts),
+		findings_confidence_counts(Findings, ConfidenceCounts).
+
+	findings_class_counts(Findings, ClassCounts) :-
+		(	setof(Class, Confidence^Properties^EntityKind^Entity^Predicate^File^Lines^member(dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines), Findings), Classes) ->
+			findings_class_counts(Classes, Findings, ClassCounts)
+		;	ClassCounts = []
+		).
+
+	findings_class_counts([], _, []).
+	findings_class_counts([Class| Classes], Findings, [class_count(Class, Count)| ClassCounts]) :-
+		finding_class_count(Findings, Class, Count),
+		findings_class_counts(Classes, Findings, ClassCounts).
+
+	finding_class_count([], _Class, 0).
+	finding_class_count([dead_predicate(Class, _Confidence, _Properties, _EntityKind, _Entity, _Predicate, _File, _Lines)| Findings], Class, Count) :-
+		!,
+		finding_class_count(Findings, Class, Count0),
+		Count is Count0 + 1.
+	finding_class_count([_| Findings], Class, Count) :-
+		finding_class_count(Findings, Class, Count).
+
+	findings_confidence_counts(Findings, ConfidenceCounts) :-
+		(	setof(Confidence, Class^Properties^EntityKind^Entity^Predicate^File^Lines^member(dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines), Findings), Confidences) ->
+			findings_confidence_counts(Confidences, Findings, ConfidenceCounts)
+		;	ConfidenceCounts = []
+		).
+
+	findings_confidence_counts([], _, []).
+	findings_confidence_counts([Confidence| Confidences], Findings, [confidence_count(Confidence, Count)| ConfidenceCounts]) :-
+		finding_confidence_count(Findings, Confidence, Count),
+		findings_confidence_counts(Confidences, Findings, ConfidenceCounts).
+
+	finding_confidence_count([], _Confidence, 0).
+	finding_confidence_count([dead_predicate(_Class, Confidence, _Properties, _EntityKind, _Entity, _Predicate, _File, _Lines)| Findings], Confidence, Count) :-
+		!,
+		finding_confidence_count(Findings, Confidence, Count0),
+		Count is Count0 + 1.
+	finding_confidence_count([_| Findings], Confidence, Count) :-
+		finding_confidence_count(Findings, Confidence, Count).
 
 	target_json(all, {kind-all, value-all}) :-
 		!.
@@ -480,11 +549,13 @@
 		terms_to_atoms(ExcludeLibraries0, ExcludeLibraries),
 		terms_to_atoms(WaiveFindings0, WaiveFindings).
 
-	summary_json(summary(_, TotalEntities, TotalFindings, EntitySummaries), {
+	summary_json(summary(_, TotalEntities, TotalFindings, Breakdown, EntitySummaries), {
 		totalEntities-TotalEntities,
 		totalFindings-TotalFindings,
+		breakdown-BreakdownJSON,
 		entities-EntitiesJSON
 	}) :-
+		findings_breakdown_json(Breakdown, BreakdownJSON),
 		entity_summaries_json(EntitySummaries, EntitiesJSON).
 
 	entity_summaries_json([], []).
@@ -492,12 +563,41 @@
 		entity_summary_json(EntitySummary, EntitySummaryJSON),
 		entity_summaries_json(EntitySummaries, EntitiesJSON).
 
-	entity_summary_json(entity_summary(Kind, Entity, FindingsCount), {
+	entity_summary_json(entity_summary(Kind, Entity, FindingsCount, Breakdown), {
 		kind-Kind,
 		entity-EntityAtom,
-		findingsCount-FindingsCount
+		findingsCount-FindingsCount,
+		breakdown-BreakdownJSON
 	}) :-
+		findings_breakdown_json(Breakdown, BreakdownJSON),
 		to_atom(Entity, EntityAtom).
+
+	findings_breakdown_json(finding_breakdown(ClassCounts, ConfidenceCounts), {
+		classes-ClassesJSON,
+		confidences-ConfidencesJSON
+	}) :-
+		class_counts_json(ClassCounts, ClassesJSON),
+		confidence_counts_json(ConfidenceCounts, ConfidencesJSON).
+
+	class_counts_json([], []).
+	class_counts_json([ClassCount| ClassCounts], [ClassCountJSON| ClassesJSON]) :-
+		class_count_json(ClassCount, ClassCountJSON),
+		class_counts_json(ClassCounts, ClassesJSON).
+
+	class_count_json(class_count(Class, Count), {
+		class-Class,
+		findingsCount-Count
+	}).
+
+	confidence_counts_json([], []).
+	confidence_counts_json([ConfidenceCount| ConfidenceCounts], [ConfidenceCountJSON| ConfidencesJSON]) :-
+		confidence_count_json(ConfidenceCount, ConfidenceCountJSON),
+		confidence_counts_json(ConfidenceCounts, ConfidencesJSON).
+
+	confidence_count_json(confidence_count(Confidence, Count), {
+		confidence-Confidence,
+		findingsCount-Count
+	}).
 
 	findings_json([], []).
 	findings_json([Finding| Findings], [FindingJSON| FindingsJSON]) :-
@@ -525,6 +625,25 @@
 		to_atom(Term, Atom),
 		terms_to_atoms(Terms, Atoms).
 
+	preflight_json(Warnings, {
+		warnings-WarningsJSON
+	}) :-
+		preflight_warnings_json(Warnings, WarningsJSON).
+
+	preflight_warnings_json([], []).
+	preflight_warnings_json([Warning| Warnings], [WarningJSON| WarningsJSON]) :-
+		preflight_warning_json(Warning, WarningJSON),
+		preflight_warnings_json(Warnings, WarningsJSON).
+
+	preflight_warning_json(missing_analysis_prerequisite(File, Prerequisite), {
+		kind-missing_analysis_prerequisite,
+		file-FileAtom,
+		prerequisite-Prerequisite,
+		severity-Severity
+	}) :-
+		to_atom(File, FileAtom),
+		preflight_warning_severity(Prerequisite, Severity).
+
 	to_atom(Term, Atom) :-
 		(	atom(Term) ->
 			Atom = Term
@@ -537,7 +656,6 @@
 	boolean_json(false, @false).
 
 	validate_export_term(json, JSON, UserOptions) :-
-		!,
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		^^option(validate_export(Validate), Options),
@@ -560,35 +678,79 @@
 		target_json(Target, {kind-Kind, value-Value}),
 		to_atom(Kind-Value, Atom).
 
-	sarif_tool_driver({
-		name-dead_code_scanner,
-		informationUri-'https://logtalk.org/',
-		version-'0.22.0',
-		guid-'91f50eb3-a092-43b5-b8e2-3c1f64bb7047',
-		rules-[{
-			id-dead_predicate,
-			guid-'f6fd0e53-0c2d-45fd-a6dd-7b2f2af3e2a1',
-			name-dead_predicate,
-			shortDescription-{text-'Likely dead predicate or non-terminal.'},
-			fullDescription-{text-'Predicate or non-terminal appears to be unused after applying exclusions and waivers.'}
-		}]
+	sarif_tool_driver(Driver) :-
+		sarif_rules(Rules),
+		Driver = {
+			name-dead_code_scanner,
+			informationUri-'https://logtalk.org/',
+			version-'0.22.0',
+			guid-'91f50eb3-a092-43b5-b8e2-3c1f64bb7047',
+			rules-Rules
+		}.
+
+	sarif_rules([
+		LocalDeadCodeRule,
+		UnusedUsesResourceRule,
+		UnusedUseModuleResourceRule
+	]) :-
+		sarif_rule(local_dead_code, LocalDeadCodeRule),
+		sarif_rule(unused_uses_resource, UnusedUsesResourceRule),
+		sarif_rule(unused_use_module_resource, UnusedUseModuleResourceRule).
+
+	sarif_rule(local_dead_code, {
+		id-local_dead_code,
+		guid-'f6fd0e53-0c2d-45fd-a6dd-7b2f2af3e2a1',
+		name-local_dead_code,
+		shortDescription-{text-'Likely dead local predicate or non-terminal.'},
+		fullDescription-{text-'Predicate or non-terminal appears to be unreachable from the scoped public interface after applying exclusions and waivers.'},
+		defaultConfiguration-{level-warning}
+	}).
+	sarif_rule(unused_uses_resource, {
+		id-unused_uses_resource,
+		guid-'927db394-0a30-4f2d-b941-bcdd6f6c2c5d',
+		name-unused_uses_resource,
+		shortDescription-{text-'Likely unused uses/2 resource.'},
+		fullDescription-{text-'Generated linking clause for a uses/2 resource appears to be unused after applying exclusions and waivers.'},
+		defaultConfiguration-{level-error}
+	}).
+	sarif_rule(unused_use_module_resource, {
+		id-unused_use_module_resource,
+		guid-'10335d4f-a525-4a46-a733-4ef2af38d4c8',
+		name-unused_use_module_resource,
+		shortDescription-{text-'Likely unused use_module/2 resource.'},
+		fullDescription-{text-'Generated linking clause for a use_module/2 resource appears to be unused after applying exclusions and waivers.'},
+		defaultConfiguration-{level-error}
 	}).
 
-	sarif_run(TargetSARIF, RunGUID, Driver, [VersionControlDetails| VersionControlProvenance], RunProperties, Results, {
+	sarif_rule_index(local_dead_code, 0).
+	sarif_rule_index(unused_uses_resource, 1).
+	sarif_rule_index(unused_use_module_resource, 2).
+
+	sarif_run(TargetSARIF, RunGUID, Driver, [VersionControlDetails| VersionControlProvenance], RunProperties, Notifications, Results, {
 		tool-{driver-Driver},
 		automationDetails-{id-TargetSARIF, guid-RunGUID},
-		invocations-[{executionSuccessful- @true}],
+		invocations-[Invocation],
 		versionControlProvenance-[VersionControlDetails| VersionControlProvenance],
 		properties-RunProperties,
 		results-Results
 	}) :-
+		sarif_invocation(Notifications, Invocation),
 		!.
-	sarif_run(TargetSARIF, RunGUID, Driver, [], RunProperties, Results, {
+	sarif_run(TargetSARIF, RunGUID, Driver, [], RunProperties, Notifications, Results, {
 		tool-{driver-Driver},
 		automationDetails-{id-TargetSARIF, guid-RunGUID},
-		invocations-[{executionSuccessful- @true}],
+		invocations-[Invocation],
 		properties-RunProperties,
 		results-Results
+	}) :-
+		sarif_invocation(Notifications, Invocation).
+
+	sarif_invocation([], {
+		executionSuccessful- @true
+	}).
+	sarif_invocation([Notification| Notifications], {
+		executionSuccessful- @true,
+		toolExecutionNotifications-[Notification| Notifications]
 	}).
 
 	sarif_run_properties(Findings, {
@@ -647,8 +809,7 @@
 			true
 		;	URI = RemoteURI
 		),
-		url_normalize(URI, RepositoryURI),
-		!.
+		url_normalize(URI, RepositoryURI).
 
 	scp_like_git_repository_uri(RemoteURI, RepositoryURI) :-
 		sub_atom(RemoteURI, Before, 1, After, :),
@@ -726,9 +887,9 @@
 		sarif_results(Findings, Results).
 
 	sarif_result(dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Start-End), {
-		ruleId-dead_predicate,
-		ruleIndex-0,
-		level-warning,
+		ruleId-Class,
+		ruleIndex-RuleIndex,
+		level-Level,
 		message-{text-Message},
 		locations-[{physicalLocation-{
 			artifactLocation-{uri-FileURI},
@@ -745,6 +906,8 @@
 			predicate-PredicateAtom
 		}
 	}) :-
+		sarif_rule_index(Class, RuleIndex),
+		once(sarif_result_level(Class, Confidence, Level)),
 		terms_to_atoms(Properties, PropertiesJSON),
 		to_atom(Entity, EntityAtom),
 		to_atom(Predicate, PredicateAtom),
@@ -752,6 +915,48 @@
 		sarif_message(Class, EntityKind, EntityAtom, PredicateAtom, Confidence, Message),
 		sarif_file_uri(FileAtom, FileURI),
 		sarif_fingerprints(EntityKind, EntityAtom, PredicateAtom, FileURI, Start-End, PartialFingerprints, Fingerprints).
+
+	sarif_notifications([], []).
+	sarif_notifications([Warning| Warnings], [Notification| Notifications]) :-
+		sarif_notification(Warning, Notification),
+		sarif_notifications(Warnings, Notifications).
+
+	sarif_notification(missing_analysis_prerequisite(File, Prerequisite), {
+		level-Level,
+		message-{text-Message},
+		locations-[{physicalLocation-{artifactLocation-{uri-FileURI}}}],
+		properties-{
+			kind-missing_analysis_prerequisite,
+			prerequisite-Prerequisite,
+			severity-Level,
+			file-FileAtom
+		}
+	}) :-
+		preflight_warning_level(Prerequisite, Level),
+		preflight_warning_message(File, Prerequisite, Message),
+		to_atom(File, FileAtom),
+		sarif_file_uri(FileAtom, FileURI).
+
+	preflight_warning_message(File, source_data, Message) :-
+		atomic_list_concat(['Analysis prerequisite missing for file ', File, ': source_data(on) was not used when loading the file.'], Message).
+	preflight_warning_message(File, optimize, Message) :-
+		atomic_list_concat(['Analysis advisory for file ', File, ': optimize(on) was not used when loading the file.'], Message).
+
+	preflight_warning_severity(source_data, warning).
+	preflight_warning_severity(optimize, note).
+
+	preflight_warning_level(Prerequisite, Level) :-
+		preflight_warning_severity(Prerequisite, Level).
+
+	sarif_result_level(local_dead_code, high, warning).
+	sarif_result_level(local_dead_code, medium, note).
+	sarif_result_level(local_dead_code, low, note).
+	sarif_result_level(unused_uses_resource, high, error).
+	sarif_result_level(unused_uses_resource, medium, warning).
+	sarif_result_level(unused_uses_resource, low, note).
+	sarif_result_level(unused_use_module_resource, high, error).
+	sarif_result_level(unused_use_module_resource, medium, warning).
+	sarif_result_level(unused_use_module_resource, low, note).
 
 	sarif_fingerprints(EntityKind, EntityAtom, PredicateAtom, FileURI, Start-End, PartialFingerprints, Fingerprints) :-
 		to_atom(dead_predicate(EntityKind, EntityAtom, PredicateAtom), EntityPredicateFingerprint),
@@ -1313,13 +1518,16 @@
 		print_message(silent, dead_code_scanner, scan_ended).
 
 	output_preflight_warnings(Target, Options) :-
-		(	setof(File-Warning, target_analysis_warning(Target, Options, File, Warning), Warnings) ->
+		(	preflight(Target, Warnings, Options) ->
 			forall(
-				member(File-Warning, Warnings),
-				print_message(warning, dead_code_scanner, missing_analysis_prerequisite(File, Warning))
+				member(Warning, Warnings),
+				print_message(warning, dead_code_scanner, Warning)
 			)
 		;	true
 		).
+
+	preflight_warning(Target, Options, missing_analysis_prerequisite(File, Warning)) :-
+		target_analysis_warning(Target, Options, File, Warning).
 
 	target_analysis_warning(file(Source), _Options, File, source_data) :-
 		locate_file(Source, File),

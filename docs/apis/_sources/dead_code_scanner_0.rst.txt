@@ -399,7 +399,7 @@ Enumerates, by backtracking, findings for a scan target using default options. S
 ``summary/3``
 ^^^^^^^^^^^^^
 
-Returns a machine-readable summary for a scan target using the given options. The summary term is of the form ``summary(Target, TotalEntities, TotalFindings, EntitySummaries)`` where ``EntitySummaries`` is a list of ``entity_summary(Kind, Entity, FindingsCount)`` terms.
+Returns a machine-readable summary for a scan target using the given options. The summary term is of the form ``summary(Target, TotalEntities, TotalFindings, Breakdown, EntitySummaries)`` where ``Breakdown`` is a ``finding_breakdown(ClassCounts, ConfidenceCounts)`` term and ``EntitySummaries`` is a list of ``entity_summary(Kind, Entity, FindingsCount, Breakdown)`` terms.
 
 | **Compilation flags:**
 |    ``static``
@@ -418,7 +418,7 @@ Returns a machine-readable summary for a scan target using the given options. Th
 ``summary/2``
 ^^^^^^^^^^^^^
 
-Returns a machine-readable summary for a scan target using default options. The summary term is of the form ``summary(Target, TotalEntities, TotalFindings, EntitySummaries)`` where ``EntitySummaries`` is a list of ``entity_summary(Kind, Entity, FindingsCount)`` terms.
+Returns a machine-readable summary for a scan target using default options. The summary term is of the form ``summary(Target, TotalEntities, TotalFindings, Breakdown, EntitySummaries)`` where ``Breakdown`` is a ``finding_breakdown(ClassCounts, ConfidenceCounts)`` term and ``EntitySummaries`` is a list of ``entity_summary(Kind, Entity, FindingsCount, Breakdown)`` terms.
 
 | **Compilation flags:**
 |    ``static``
@@ -431,13 +431,51 @@ Returns a machine-readable summary for a scan target using default options. The 
 
 ------------
 
+.. index:: preflight/3
+.. _dead_code_scanner/0::preflight/3:
+
+``preflight/3``
+^^^^^^^^^^^^^^^
+
+Returns an ordered set of machine-readable preflight warnings for a scan target using the given options. Warning terms currently use the form ``missing_analysis_prerequisite(File, Prerequisite)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``preflight(Target,Warnings,Options)``
+| **Mode and number of proofs:**
+|    ``preflight(+nonvar,-list(compound),+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: preflight/2
+.. _dead_code_scanner/0::preflight/2:
+
+``preflight/2``
+^^^^^^^^^^^^^^^
+
+Returns an ordered set of machine-readable preflight warnings for a scan target using default options. Warning terms currently use the form ``missing_analysis_prerequisite(File, Prerequisite)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``preflight(Target,Warnings)``
+| **Mode and number of proofs:**
+|    ``preflight(+nonvar,-list(compound))`` - ``one``
+
+
+------------
+
 .. index:: export/4
 .. _dead_code_scanner/0::export/4:
 
 ``export/4``
 ^^^^^^^^^^^^
 
-Exports a scan target using the given options in the specified format to the specified sink. Supported formats are ``json`` and ``sarif``. Supported sinks are those accepted by the ``json`` library ``generate/2`` predicate.
+Exports a scan target using the given options in the specified format to the specified sink. Supported formats are ``json`` and ``sarif``. Exports include both findings and machine-readable preflight warnings. SARIF exports use one rule descriptor per finding class and map finding confidence to triage-aware result levels. Supported sinks are those accepted by the ``json::generate/2`` library predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -456,7 +494,7 @@ Exports a scan target using the given options in the specified format to the spe
 ``export/3``
 ^^^^^^^^^^^^
 
-Exports a scan target using default options in the specified format to the specified sink. Supported formats are ``json`` and ``sarif``. Supported sinks are those accepted by the ``json`` library ``generate/2`` predicate.
+Exports a scan target using default options in the specified format to the specified sink. Supported formats are ``json`` and ``sarif``. Exports include both findings and machine-readable preflight warnings. SARIF exports use one rule descriptor per finding class and map finding confidence to triage-aware result levels. Supported sinks are those accepted by the ``json::generate/2`` library predicate.
 
 | **Compilation flags:**
 |    ``static``
