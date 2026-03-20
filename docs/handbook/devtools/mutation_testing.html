@@ -231,6 +231,22 @@ with a complementary alternative.</div>
 with its successor.</div>
 </div>
 </li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">scope_directive_replacement</span></code></div>
+<div class="line">Replaces a matching predicate/non-terminal scope directive
+visibility with an alternative visibility.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">predicate_directive_suppression</span></code></div>
+<div class="line">Suppresses a matching predicate/non-terminal directive.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">uses_directive_resource_deletion</span></code></div>
+<div class="line">Deletes one matching resource from a <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive.</div>
+</div>
+</li>
 </ul>
 </section>
 <section id="usage">
@@ -470,9 +486,11 @@ select the same subset. When all mutants are executed, (using
 <section id="defining-new-mutators">
 <h2>Defining new mutators<a class="headerlink" href="#defining-new-mutators" title="Link to this heading"></a></h2>
 <p>Define a new mutator as parametric object implementing the <code class="docutils literal notranslate"><span class="pre">expanding</span></code>
-protocol and importing the <code class="docutils literal notranslate"><span class="pre">mutator_common</span></code> category:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(my_mutator(<span class="nv">_Entity_</span>, <span class="nv">_Predicate_</span>, <span class="nv">_ClauseIndex_</span>, <span class="nv">_Occurrence_</span>, <span class="nv">_PrintMutation_</span>),
-    <span class="k">implements</span>(expanding),
+protocol, either the <code class="docutils literal notranslate"><span class="pre">clause_mutator_protocol</span></code> or the
+<code class="docutils literal notranslate"><span class="pre">directive_mutator_protocol</span></code> marker protocol, and importing the
+<code class="docutils literal notranslate"><span class="pre">mutator_common</span></code> category:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(my_mutator(<span class="nv">_Entity_</span>, <span class="nv">_Predicate_</span>, <span class="nv">_TargetIndex_</span>, <span class="nv">_Occurrence_</span>, <span class="nv">_PrintMutation_</span>),
+    <span class="k">implements</span>((expanding, clause_mutator_protocol)),
     <span class="k">imports</span>(mutator_common)).
 
     <span class="c">% mutate code when loading it using this object as a hook object</span>
@@ -491,18 +509,19 @@ protocol and importing the <code class="docutils literal notranslate"><span clas
 </pre></div>
 </div>
 <p>New mutators are found by dynamically looking for objects that conform
-to the <code class="docutils literal notranslate"><span class="pre">mutator_protocol</span></code> protocol (which is implemented by the
-imported <code class="docutils literal notranslate"><span class="pre">mutator_common</span></code> category).</p>
-<p>For implementation examples, see the default mutator hooks:</p>
+to either the <code class="docutils literal notranslate"><span class="pre">clause_mutator_protocol</span></code> or the
+<code class="docutils literal notranslate"><span class="pre">directive_mutator_protocol</span></code> marker protocols.</p>
+<p>For implementation examples, see the default mutators:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="mutators/fail_insertion_hook.lgt">mutators/fail_insertion_hook.lgt</a></p></li>
-<li><p><a class="reference external" href="mutators/body_goal_negation_hook.lgt">mutators/body_goal_negation_hook.lgt</a></p></li>
-<li><p><a class="reference external" href="mutators/relational_operator_replacement_hook.lgt">mutators/relational_operator_replacement_hook.lgt</a></p></li>
-<li><p><a class="reference external" href="mutators/arithmetic_operator_replacement_hook.lgt">mutators/arithmetic_operator_replacement_hook.lgt</a></p></li>
-<li><p><a class="reference external" href="mutators/truth_literal_flip_hook.lgt">mutators/truth_literal_flip_hook.lgt</a></p></li>
-<li><p><a class="reference external" href="mutators/head_arguments_mutation_hook.lgt">mutators/head_arguments_mutation_hook.lgt</a></p></li>
-<li><p><a class="reference external" href="mutators/head_arguments_reordering_hook.lgt">mutators/head_arguments_reordering_hook.lgt</a></p></li>
-<li><p><a class="reference external" href="mutators/clauses_reordering_hook.lgt">mutators/clauses_reordering_hook.lgt</a></p></li>
+<li><p><a class="reference external" href="mutators/fail_insertion.lgt">mutators/fail_insertion.lgt</a></p></li>
+<li><p><a class="reference external" href="mutators/body_goal_negation.lgt">mutators/body_goal_negation.lgt</a></p></li>
+<li><p><a class="reference external" href="mutators/relational_operator_replacement.lgt">mutators/relational_operator_replacement.lgt</a></p></li>
+<li><p><a class="reference external" href="mutators/arithmetic_operator_replacement.lgt">mutators/arithmetic_operator_replacement.lgt</a></p></li>
+<li><p><a class="reference external" href="mutators/truth_literal_flip.lgt">mutators/truth_literal_flip.lgt</a></p></li>
+<li><p><a class="reference external" href="mutators/head_arguments_mutation.lgt">mutators/head_arguments_mutation.lgt</a></p></li>
+<li><p><a class="reference external" href="mutators/head_arguments_reordering.lgt">mutators/head_arguments_reordering.lgt</a></p></li>
+<li><p><a class="reference external" href="mutators/clauses_reordering.lgt">mutators/clauses_reordering.lgt</a></p></li>
+<li><p><a class="reference external" href="mutators/scope_directive_replacement.lgt">mutators/scope_directive_replacement.lgt</a></p></li>
 </ul>
 </section>
 </section>

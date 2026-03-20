@@ -27,7 +27,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-06,
+		date is 2026-03-20,
 		comment is 'Subprocess mutation hook object. Loaded in mutation testing subprocesses to set up the mutator hook and record test results to a status file.'
 	]).
 
@@ -65,10 +65,7 @@
 		{mutation_entity(Entity)},
 		{mutation_predicate(Predicate)},
 		{mutation_mutator(Mutator)},
-		(   {mutation_clause_index(ClauseIndex)} ->
-			true
-		;   {mutation_occurrence(ClauseIndex)}
-		),
+		{mutation_target(Target)},
 		{mutation_occurrence(Occurrence)},
 		{mutation_mutator_file(MutatorFile)},
 		{mutation_status_file(StatusFile)},
@@ -85,9 +82,15 @@
 		% reset the random seed to ensure the mutation matches
 		% the one printed by the main process
 		reset_seed,
-		Hook =.. [Mutator, Entity, Predicate, ClauseIndex, Occurrence, false],
+		target_index(Target, TargetIndex),
+		Hook =.. [Mutator, Entity, Predicate, TargetIndex, Occurrence, false],
 		Hook::reset,
 		set_logtalk_flag(hook, Hook).
+
+	target_index(clause(Index), Index) :-
+		!.
+	target_index(directive(Index), Index) :-
+		!.
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

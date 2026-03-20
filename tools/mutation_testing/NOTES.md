@@ -90,6 +90,15 @@ The default mutators are:
 - `clauses_reordering`  
 	Reorders predicate/non-terminal clauses/rules by swapping a clause with its successor.
 
+- `scope_directive_replacement`  
+	Replaces a matching predicate/non-terminal scope directive visibility with an alternative visibility.
+
+- `predicate_directive_suppression`  
+	Suppresses a matching predicate/non-terminal directive.
+
+- `uses_directive_resource_deletion`  
+	Deletes one matching resource from a `uses/2` directive.
+
 
 Usage
 -----
@@ -295,11 +304,12 @@ option, allowing reproducible selection.
 Defining new mutators
 ---------------------
 
-Define a new mutator as parametric object implementing the `expanding` protocol
-and importing the `mutator_common` category:
+Define a new mutator as parametric object implementing the `expanding` protocol,
+either the `clause_mutator_protocol` or the `directive_mutator_protocol` marker
+protocol, and importing the `mutator_common` category:
 
-	:- object(my_mutator(_Entity_, _Predicate_, _ClauseIndex_, _Occurrence_, _PrintMutation_),
-		implements(expanding),
+	:- object(my_mutator(_Entity_, _Predicate_, _TargetIndex_, _Occurrence_, _PrintMutation_),
+		implements((expanding, clause_mutator_protocol)),
         imports(mutator_common)).
 
         % mutate code when loading it using this object as a hook object
@@ -317,16 +327,17 @@ and importing the `mutator_common` category:
     :- end_object.
 
 New mutators are found by dynamically looking for objects that conform to
-the `mutator_protocol` protocol (which is implemented by the imported
-`mutator_common` category).
+either the `clause_mutator_protocol` or the `directive_mutator_protocol`
+marker protocols.
 
-For implementation examples, see the default mutator hooks:
+For implementation examples, see the default mutators:
 
-- [mutators/fail_insertion_hook.lgt](mutators/fail_insertion_hook.lgt)
-- [mutators/body_goal_negation_hook.lgt](mutators/body_goal_negation_hook.lgt)
-- [mutators/relational_operator_replacement_hook.lgt](mutators/relational_operator_replacement_hook.lgt)
-- [mutators/arithmetic_operator_replacement_hook.lgt](mutators/arithmetic_operator_replacement_hook.lgt)
-- [mutators/truth_literal_flip_hook.lgt](mutators/truth_literal_flip_hook.lgt)
-- [mutators/head_arguments_mutation_hook.lgt](mutators/head_arguments_mutation_hook.lgt)
-- [mutators/head_arguments_reordering_hook.lgt](mutators/head_arguments_reordering_hook.lgt)
-- [mutators/clauses_reordering_hook.lgt](mutators/clauses_reordering_hook.lgt)
+- [mutators/fail_insertion.lgt](mutators/fail_insertion.lgt)
+- [mutators/body_goal_negation.lgt](mutators/body_goal_negation.lgt)
+- [mutators/relational_operator_replacement.lgt](mutators/relational_operator_replacement.lgt)
+- [mutators/arithmetic_operator_replacement.lgt](mutators/arithmetic_operator_replacement.lgt)
+- [mutators/truth_literal_flip.lgt](mutators/truth_literal_flip.lgt)
+- [mutators/head_arguments_mutation.lgt](mutators/head_arguments_mutation.lgt)
+- [mutators/head_arguments_reordering.lgt](mutators/head_arguments_reordering.lgt)
+- [mutators/clauses_reordering.lgt](mutators/clauses_reordering.lgt)
+- [mutators/scope_directive_replacement.lgt](mutators/scope_directive_replacement.lgt)

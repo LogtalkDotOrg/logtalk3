@@ -292,6 +292,7 @@ Objects
    population <population_0>
    porter_stemmer(Representation) <porter_stemmer_1>
    ports_profiler <ports_profiler_0>
+   predicate_directive_suppression(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <predicate_directive_suppression_5>
    print_goal_hook <print_goal_hook_0>
    process <process_0>
    prolog_module_hook(Module) <prolog_module_hook_1>
@@ -310,6 +311,7 @@ Objects
    rfc_metric <rfc_metric_0>
    rule_expansion(Mode) <rule_expansion_1>
    sample <sample_0>
+   scope_directive_replacement(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <scope_directive_replacement_5>
    sequence_grammars <sequence_grammars_0>
    set <set_0>
    set(Type) <set_1>
@@ -372,6 +374,7 @@ Objects
    user <user_0>
    uses_diagram <uses_diagram_0>
    uses_diagram(Format) <uses_diagram_1>
+   uses_directive_resource_deletion(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <uses_directive_resource_deletion_5>
    uuid <uuid_0>
    uuid(Representation) <uuid_1>
    validated <validated_0>
@@ -411,6 +414,7 @@ Protocols
    characterp <characterp_0>
    class_hierarchyp <class_hierarchyp_0>
    classifier_protocol <classifier_protocol_0>
+   clause_mutator_protocol <clause_mutator_protocol_0>
    cloning <cloning_0>
    combinations_protocol <combinations_protocol_0>
    comparingp <comparingp_0>
@@ -424,6 +428,7 @@ Protocols
    deque_protocol <deque_protocol_0>
    dictionaryp <dictionaryp_0>
    directed_graph_protocol <directed_graph_protocol_0>
+   directive_mutator_protocol <directive_mutator_protocol_0>
    event_registryp <event_registryp_0>
    expanding <expanding_0>
    flags_validator <flags_validator_0>

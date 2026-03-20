@@ -624,7 +624,9 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#mutation-testing"><span class="xref std std-ref">mutation_testing</span></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="arithmetic_operator_replacement_5.html">arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="body_goal_negation_5.html">body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clause_mutator_protocol_0.html">clause_mutator_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="clauses_reordering_5.html">clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="directive_mutator_protocol_0.html">directive_mutator_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="fail_insertion_5.html">fail_insertion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="head_arguments_mutation_5.html">head_arguments_mutation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="head_arguments_reordering_5.html">head_arguments_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
@@ -632,10 +634,13 @@
 <li class="toctree-l3"><a class="reference internal" href="mutation_testing_messages_0.html">mutation_testing_messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mutator_common_0.html">mutator_common</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mutator_protocol_0.html">mutator_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="predicate_directive_suppression_5.html">predicate_directive_suppression(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="relational_operator_replacement_5.html">relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scope_directive_replacement_5.html">scope_directive_replacement(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="subprocess_coverage_hook_0.html">subprocess_coverage_hook</a></li>
 <li class="toctree-l3"><a class="reference internal" href="subprocess_mutation_hook_0.html">subprocess_mutation_hook</a></li>
 <li class="toctree-l3"><a class="reference internal" href="truth_literal_flip_5.html">truth_literal_flip(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uses_directive_resource_deletion_5.html">uses_directive_resource_deletion(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a><ul>
@@ -1737,6 +1742,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="directory_index.html#tools-mutation-testing"><code class="docutils literal notranslate"><span class="pre">tools/mutation_testing/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="clause_mutator_protocol_0.html">clause_mutator_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="directive_mutator_protocol_0.html">directive_mutator_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mutation_testing_0.html">mutation_testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mutation_testing_messages_0.html">mutation_testing_messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mutator_common_0.html">mutator_common</a></li>
@@ -1752,8 +1759,11 @@
 <li class="toctree-l3"><a class="reference internal" href="fail_insertion_5.html">fail_insertion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="head_arguments_mutation_5.html">head_arguments_mutation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="head_arguments_reordering_5.html">head_arguments_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="predicate_directive_suppression_5.html">predicate_directive_suppression(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="relational_operator_replacement_5.html">relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scope_directive_replacement_5.html">scope_directive_replacement(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="truth_literal_flip_5.html">truth_literal_flip(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uses_directive_resource_deletion_5.html">uses_directive_resource_deletion(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="directory_index.html#tools-packs"><code class="docutils literal notranslate"><span class="pre">tools/packs/</span></code></a><ul>
@@ -2053,6 +2063,7 @@
 <li class="toctree-l3"><a class="reference internal" href="population_0.html">population</a></li>
 <li class="toctree-l3"><a class="reference internal" href="porter_stemmer_1.html">porter_stemmer(Representation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ports_profiler_0.html">ports_profiler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="predicate_directive_suppression_5.html">predicate_directive_suppression(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="print_goal_hook_0.html">print_goal_hook</a></li>
 <li class="toctree-l3"><a class="reference internal" href="process_0.html">process</a></li>
 <li class="toctree-l3"><a class="reference internal" href="prolog_module_hook_1.html">prolog_module_hook(Module)</a></li>
@@ -2071,6 +2082,7 @@
 <li class="toctree-l3"><a class="reference internal" href="rfc_metric_0.html">rfc_metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rule_expansion_1.html">rule_expansion(Mode)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sample_0.html">sample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scope_directive_replacement_5.html">scope_directive_replacement(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sequence_grammars_0.html">sequence_grammars</a></li>
 <li class="toctree-l3"><a class="reference internal" href="set_0.html">set</a></li>
 <li class="toctree-l3"><a class="reference internal" href="set_1.html">set(Type)</a></li>
@@ -2133,6 +2145,7 @@
 <li class="toctree-l3"><a class="reference internal" href="user_0.html">user</a></li>
 <li class="toctree-l3"><a class="reference internal" href="uses_diagram_0.html">uses_diagram</a></li>
 <li class="toctree-l3"><a class="reference internal" href="uses_diagram_1.html">uses_diagram(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uses_directive_resource_deletion_5.html">uses_directive_resource_deletion(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="uuid_0.html">uuid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="uuid_1.html">uuid(Representation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="validated_0.html">validated</a></li>
@@ -2166,6 +2179,7 @@
 <li class="toctree-l3"><a class="reference internal" href="characterp_0.html">characterp</a></li>
 <li class="toctree-l3"><a class="reference internal" href="class_hierarchyp_0.html">class_hierarchyp</a></li>
 <li class="toctree-l3"><a class="reference internal" href="classifier_protocol_0.html">classifier_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clause_mutator_protocol_0.html">clause_mutator_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cloning_0.html">cloning</a></li>
 <li class="toctree-l3"><a class="reference internal" href="combinations_protocol_0.html">combinations_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="comparingp_0.html">comparingp</a></li>
@@ -2179,6 +2193,7 @@
 <li class="toctree-l3"><a class="reference internal" href="deque_protocol_0.html">deque_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dictionaryp_0.html">dictionaryp</a></li>
 <li class="toctree-l3"><a class="reference internal" href="directed_graph_protocol_0.html">directed_graph_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="directive_mutator_protocol_0.html">directive_mutator_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="event_registryp_0.html">event_registryp</a></li>
 <li class="toctree-l3"><a class="reference internal" href="expanding_0.html">expanding</a></li>
 <li class="toctree-l3"><a class="reference internal" href="flags_validator_0.html">flags_validator</a></li>
@@ -7162,7 +7177,7 @@
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
-<p>Generated on Thu Mar 19 21:03:57 WET 2026</p>
+<p>Generated on Thu Mar 19 23:15:34 WET 2026</p>
 </section>
 
 

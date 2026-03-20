@@ -1526,6 +1526,8 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
 
+   clause_mutator_protocol <clause_mutator_protocol_0>
+   directive_mutator_protocol <directive_mutator_protocol_0>
    mutation_testing <mutation_testing_0>
    mutation_testing_messages <mutation_testing_messages_0>
    mutator_common <mutator_common_0>
@@ -1547,8 +1549,11 @@ To load an entity, always load the library that includes it using the goal ``log
    fail_insertion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <fail_insertion_5>
    head_arguments_mutation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_mutation_5>
    head_arguments_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_reordering_5>
+   predicate_directive_suppression(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <predicate_directive_suppression_5>
    relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <relational_operator_replacement_5>
+   scope_directive_replacement(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <scope_directive_replacement_5>
    truth_literal_flip(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <truth_literal_flip_5>
+   uses_directive_resource_deletion(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <uses_directive_resource_deletion_5>
 
 ``tools/packs/``
 ----------------

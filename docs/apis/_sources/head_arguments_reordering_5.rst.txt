@@ -22,7 +22,7 @@ Hook object implementing the ``head_arguments_reordering`` mutator by swapping t
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-03-09
+| **Date:** 2026-03-20
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -30,6 +30,7 @@ Hook object implementing the ``head_arguments_reordering`` mutator by swapping t
 
 | **Implements:**
 |    ``public`` :ref:`expanding <expanding/0>`
+|    ``public`` :ref:`clause_mutator_protocol <clause_mutator_protocol/0>`
 | **Imports:**
 |    ``public`` :ref:`mutator_common <mutator_common/0>`
 | **Uses:**

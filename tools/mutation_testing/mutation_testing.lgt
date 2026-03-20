@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-11,
+		date is 2026-03-20,
 		comment is 'Mutation testing tool.'
 	]).
 
@@ -594,12 +594,18 @@
 		fail.
 
 	entity_has_predicate(Entity, Predicate) :-
-		entity_predicates(Entity, Predicates),
-		member(Predicate, Predicates),
+		entity_known_predicate(Entity, Predicate),
 		!.
 	entity_has_predicate(Entity, Predicate) :-
 		print_message(error, mutation_testing, unknown(predicate, Entity, Predicate)),
 		fail.
+
+	entity_known_predicate(Entity, Predicate) :-
+		entity_predicate_properties(Entity, Predicate0, Properties),
+		(   member(non_terminal(NonTerminal), Properties) ->
+			Predicate = NonTerminal
+		;   Predicate = Predicate0
+		).
 
 	entity_predicates(Entity, Predicates) :-
 		(   setof(Predicate, entity_predicate(Entity, Predicate), Predicates) ->
@@ -608,12 +614,26 @@
 		).
 
 	entity_predicate(Entity, Predicate) :-
-		entity_defines(Entity, Predicate0, Properties),
+		entity_predicate_properties(Entity, Predicate0, Properties),
 		\+ member(auxiliary, Properties),
 		(   member(non_terminal(NonTerminal), Properties) ->
 			Predicate = NonTerminal
 		;   Predicate = Predicate0
 		).
+
+	entity_predicate_properties(Entity, Predicate, Properties) :-
+		entity_defines(Entity, Predicate, Properties).
+	entity_predicate_properties(Entity, Predicate, Properties) :-
+		entity_declares(Entity, Predicate, Properties).
+	entity_predicate_properties(Entity, Predicate, Properties) :-
+		entity_provides(Entity, Predicate, Properties).
+
+	entity_declares(Entity, Predicate, Properties) :-
+		current_object(Entity),
+		object_property(Entity, declares(Predicate, Properties)).
+	entity_declares(Entity, Predicate, Properties) :-
+		current_category(Entity),
+		category_property(Entity, declares(Predicate, Properties)).
 
 	entity_defines(Entity, Predicate, Properties) :-
 		current_object(Entity),
@@ -621,6 +641,13 @@
 	entity_defines(Entity, Predicate, Properties) :-
 		current_category(Entity),
 		category_property(Entity, defines(Predicate, Properties)).
+
+	entity_provides(Entity, Predicate, Properties) :-
+		current_object(Entity),
+		object_property(Entity, provides(Predicate, _Other, Properties)).
+	entity_provides(Entity, Predicate, Properties) :-
+		current_category(Entity),
+		category_property(Entity, provides(Predicate, _Other, Properties)).
 
 	mutators_for_options(Options, Mutators) :-
 		^^option(mutators(SelectedMutators), Options),
@@ -638,9 +665,22 @@
 		).
 
 	discovered_mutator(Name) :-
-		conforms_to_protocol(Mutator, mutator_protocol),
+		mutator_name(Name).
+
+	mutator_name(Name) :-
+		clause_mutator_name(Name).
+	mutator_name(Name) :-
+		directive_mutator_name(Name).
+
+	clause_mutator_name(Name) :-
 		current_object(Mutator),
-		functor(Mutator, Name, 5).
+		functor(Mutator, Name, 5),
+		conforms_to_protocol(Mutator, clause_mutator_protocol).
+
+	directive_mutator_name(Name) :-
+		current_object(Mutator),
+		functor(Mutator, Name, 5),
+		conforms_to_protocol(Mutator, directive_mutator_protocol).
 
 	select_mutators(all, Mutators, Mutators) :-
 		!.
@@ -654,25 +694,33 @@
 
 	build_mutants([], _, _, _, Mutants, Mutants).
 	build_mutants([Predicate| Predicates], Entity, Mutators, Limit, Mutants0, Mutants) :-
-		(	current_object(Entity) ->
-			object_property(Entity, defines(Predicate, Properties))
-		;	current_category(Entity),
-			category_property(Entity, defines(Predicate, Properties))
-		), !,
-		memberchk(number_of_clauses(NumberOfClauses), Properties),
+		(   entity_defines(Entity, Predicate, Properties) ->
+			true
+		;   entity_declares(Entity, Predicate, Properties)
+		),
+		(   memberchk(number_of_clauses(NumberOfClauses), Properties) ->
+			true
+		;   NumberOfClauses = 0
+		),
 		build_predicate_mutants(Mutators, Entity, Predicate, NumberOfClauses, Limit, Mutants0, Mutants1),
 		build_mutants(Predicates, Entity, Mutators, Limit, Mutants1, Mutants).
 
 	build_predicate_mutants([], _, _, _, _, Mutants, Mutants).
 	build_predicate_mutants([Mutator| Mutators], Entity, Predicate, NumberOfClauses, Limit, Mutants0, Mutants) :-
-		build_occurrence_mutants(NumberOfClauses, 1, Limit, 1, Entity, Predicate, Mutator, Mutants0, Mutants1, 0, _Generated),
+		(   clause_mutator_name(Mutator) ->
+			build_occurrence_mutants(NumberOfClauses, 1, Limit, 1, Entity, Predicate, Mutator, Mutants0, Mutants1, 0, _Generated)
+		;   directive_mutator_name(Mutator) ->
+			build_directive_occurrence_mutants(1, Limit, 1, Entity, Predicate, Mutator, Mutants0, Mutants1, 0, _Generated)
+		;   Mutants1 = Mutants0
+		),
 		build_predicate_mutants(Mutators, Entity, Predicate, NumberOfClauses, Limit, Mutants1, Mutants).
 
 	build_occurrence_mutants(_, _, 0, _Occurrence, _Entity, _Predicate, _Mutator, Mutants, Mutants, Generated, Generated) :-
 		!.
 	build_occurrence_mutants(NumberOfClauses, ClauseIndex, Remaining, Occurrence, Entity, Predicate, Mutator, Mutants0, Mutants, Generated0, Generated) :-
-		(   probe_mutation_occurrence(Entity, Predicate, ClauseIndex, Mutator, Occurrence) ->
-			Mutants1 = [mutant(Entity, Predicate, ClauseIndex, Mutator, Occurrence)| Mutants0],
+		Target = clause(ClauseIndex),
+		(   probe_mutation_occurrence(Entity, Predicate, Target, Mutator, Occurrence) ->
+			Mutants1 = [mutant(Entity, Predicate, Target, Mutator, Occurrence)| Mutants0],
 			NextOccurrence is Occurrence + 1,
 			decrement_remaining(Remaining, NextRemaining),
 			Generated1 is Generated0 + 1,
@@ -684,16 +732,32 @@
 			Generated = Generated0
 		).
 
+	build_directive_occurrence_mutants(_, 0, _Occurrence, _Entity, _Predicate, _Mutator, Mutants, Mutants, Generated, Generated) :-
+		!.
+	build_directive_occurrence_mutants(DirectiveIndex, Remaining, Occurrence, Entity, Predicate, Mutator, Mutants0, Mutants, Generated0, Generated) :-
+		Target = directive(DirectiveIndex),
+		(   probe_mutation_occurrence(Entity, Predicate, Target, Mutator, Occurrence) ->
+			Mutants1 = [mutant(Entity, Predicate, Target, Mutator, Occurrence)| Mutants0],
+			NextOccurrence is Occurrence + 1,
+			decrement_remaining(Remaining, NextRemaining),
+			Generated1 is Generated0 + 1,
+			build_directive_occurrence_mutants(DirectiveIndex, NextRemaining, NextOccurrence, Entity, Predicate, Mutator, Mutants1, Mutants, Generated1, Generated)
+		;   Occurrence > 1 ->
+			NextDirectiveIndex is DirectiveIndex + 1,
+			build_directive_occurrence_mutants(NextDirectiveIndex, Remaining, 1, Entity, Predicate, Mutator, Mutants0, Mutants, Generated0, Generated)
+		;   Mutants = Mutants0,
+			Generated = Generated0
+		).
 	decrement_remaining(all, all) :-
 		!.
 	decrement_remaining(Remaining, NextRemaining) :-
 		NextRemaining is max(0, Remaining - 1).
 
-	probe_mutation_occurrence(Entity, Predicate, ClauseIndex, Mutator, Occurrence) :-
+	probe_mutation_occurrence(Entity, Predicate, Target, Mutator, Occurrence) :-
 		entity_file(Entity, File),
 		retractall(probe_mutation_happened_),
 		assertz(probing_),
-		mutator_hook(Mutator, Entity, Predicate, ClauseIndex, Occurrence, true, Hook),
+		mutator_hook(Mutator, Entity, Predicate, Target, Occurrence, true, Hook),
 		prepare_mutator_hook(Hook),
 		load_options(LoadOptions),
 		revert_options(RevertOptions),
@@ -766,8 +830,8 @@
 		NextIndex is Index + 1,
 		run_mutants(Mutants, Options, CoverageAvailable, NextIndex, [Result| Results0], Results).
 
-	mutant_not_covered(mutant(Entity, Predicate, ClauseIndex, Mutator, Occurrence)) :-
-		mutator_hook(Mutator, Entity, Predicate, ClauseIndex, Occurrence, false, Hook),
+	mutant_not_covered(mutant(Entity, Predicate, clause(ClauseIndex), Mutator, Occurrence)) :-
+		mutator_hook(Mutator, Entity, Predicate, clause(ClauseIndex), Occurrence, false, Hook),
 		catch(Hook::coverage_clause_mutator, _, fail),
 		baseline_coverage_(Entity, Predicate, CoveredClauses, TotalClauses),
 		integer(TotalClauses),
@@ -780,15 +844,15 @@
 		;   true
 		).
 
-	mutant_reproduction_commands(mutant(Entity, Predicate, ClauseIndex, Mutator, Occurrence), ApplyCommand, RevertCommand) :-
+	mutant_reproduction_commands(mutant(Entity, Predicate, Target, Mutator, Occurrence), ApplyCommand, RevertCommand) :-
 		entity_file(Entity, File),
-		mutator_hook(Mutator, Entity, Predicate, ClauseIndex, Occurrence, false, Hook),
+		mutator_hook(Mutator, Entity, Predicate, Target, Occurrence, false, Hook),
 		load_options(LoadOptions),
 		revert_options(RevertOptions),
 		ApplyCommand = logtalk_load(File, [report(off), hook(Hook)| LoadOptions]),
 		RevertCommand = logtalk_load(File, [report(off)| RevertOptions]).
 
-	execute_mutant(mutant(Entity, Predicate, ClauseIndex, Mutator, Occurrence), Options, Status) :-
+	execute_mutant(mutant(Entity, Predicate, Target, Mutator, Occurrence), Options, Status) :-
 		^^option(timeout(Timeout), Options),
 		^^option(verbose(Verbose), Options),
 		^^option(print_mutation(PrintMutation), Options),
@@ -799,13 +863,13 @@
 		% matches the one produced by the subprocess (which starts fresh)
 		(	Verbose == true, PrintMutation == true ->
 			reset_seed,
-			print_mutations(Entity, Predicate, ClauseIndex, Mutator, Occurrence, File)
+			print_mutations(Entity, Predicate, Target, Mutator, Occurrence, File)
 		;	true
 		),
 		% set up unique temp directory for this mutant
 		create_temp_dir(TempDir),
 		% write config file
-		write_mutation_config(TempDir, Entity, Predicate, ClauseIndex, Mutator, Occurrence, File),
+		write_mutation_config(TempDir, Entity, Predicate, Target, Mutator, Occurrence, File),
 		% build and run the subprocess
 		(	catch(
 				run_subprocess(TempDir, File, Timeout, Verbose, ExitStatus, Options),
@@ -823,8 +887,8 @@
 			Status = error(subprocess_failed)
 		).
 
-	print_mutations(Entity, Predicate, ClauseIndex, Mutator, Occurrence, File) :-
-		mutator_hook(Mutator, Entity, Predicate, ClauseIndex, Occurrence, true, Hook),
+	print_mutations(Entity, Predicate, Target, Mutator, Occurrence, File) :-
+		mutator_hook(Mutator, Entity, Predicate, Target, Occurrence, true, Hook),
 		prepare_mutator_hook(Hook),
 		load_options(LoadOptions),
 		revert_options(RevertOptions),
@@ -833,8 +897,10 @@
 		;	catch(logtalk_load(File, [report(off)| RevertOptions]), _, true)
 		).
 
-	mutator_hook(Mutator, Entity, Predicate, ClauseIndex, Occurrence, PrintMutation, Hook) :-
+	mutator_hook(Mutator, Entity, Predicate, clause(ClauseIndex), Occurrence, PrintMutation, Hook) :-
 		Hook =.. [Mutator, Entity, Predicate, ClauseIndex, Occurrence, PrintMutation].
+	mutator_hook(Mutator, Entity, Predicate, directive(DirectiveIndex), Occurrence, PrintMutation, Hook) :-
+		Hook =.. [Mutator, Entity, Predicate, DirectiveIndex, Occurrence, PrintMutation].
 
 	prepare_mutator_hook(Hook) :-
 		catch(Hook::reset, _, true).
@@ -854,17 +920,17 @@
 		path_concat(SysTmp, DirName, TempDir),
 		make_directory_path(TempDir).
 
-	write_mutation_config(TempDir, Entity, Predicate, ClauseIndex, Mutator, Occurrence, SourceFile) :-
+	write_mutation_config(TempDir, Entity, Predicate, Target, Mutator, Occurrence, SourceFile) :-
 		path_concat(TempDir, 'mutation_config.pl', ConfigFile),
 		path_concat(TempDir, 'status.txt', StatusFile),
 		% find the mutator file path
-		mutator_hook(Mutator, _E, _P, _CI, _O, false, Hook),
+		mutator_hook(Mutator, _E, _P, Target, _O, false, Hook),
 		object_property(Hook, file(MutatorFile)),
 		open(ConfigFile, write, Stream),
 		writeq(Stream, mutation_entity(Entity)), write(Stream, '.'), nl(Stream),
 		writeq(Stream, mutation_predicate(Predicate)), write(Stream, '.'), nl(Stream),
 		writeq(Stream, mutation_mutator(Mutator)), write(Stream, '.'), nl(Stream),
-		writeq(Stream, mutation_clause_index(ClauseIndex)), write(Stream, '.'), nl(Stream),
+		writeq(Stream, mutation_target(Target)), write(Stream, '.'), nl(Stream),
 		writeq(Stream, mutation_occurrence(Occurrence)), write(Stream, '.'), nl(Stream),
 		writeq(Stream, mutation_source_file(SourceFile)), write(Stream, '.'), nl(Stream),
 		writeq(Stream, mutation_status_file(StatusFile)), write(Stream, '.'), nl(Stream),
@@ -1202,10 +1268,10 @@
 		results_mutants_json(Results, JSONMutants).
 
 	mutant_json(Index, Mutant, Status, json(Pairs)) :-
-		normalize_mutant(Mutant, Entity, Predicate, ClauseIndex, Mutator, Occurrence),
+		normalize_mutant(Mutant, Entity, Predicate, Target, Mutator, Occurrence),
 		index_id(Index, Id),
 		status_name(Status, StatusName),
-		mutant_location(Entity, Predicate, ClauseIndex, Mutator, Occurrence, Location),
+		mutant_location(Entity, Predicate, Target, Mutator, Occurrence, Location),
 		Pairs = [
 			'id'-Id,
 			'mutatorName'-Mutator,
@@ -1213,7 +1279,8 @@
 			'status'-StatusName
 		].
 
-	normalize_mutant(mutant(Entity, Predicate, ClauseIndex, Mutator, Occurrence), Entity, Predicate, ClauseIndex, Mutator, Occurrence).
+	normalize_mutant(mutant(Entity, Predicate, Target, Mutator, Occurrence), Entity, Predicate, Target, Mutator, Occurrence) :-
+		compound(Target).
 
 	index_id(Index, Id) :-
 		number_codes(Index, Codes),
@@ -1227,8 +1294,8 @@
 	status_name(untested, 'Pending').
 	status_name(error(_), 'RuntimeError').
 
-	mutant_location(Entity, Predicate, ClauseIndex, Mutator, Occurrence, Location) :-
-		(   mutant_terms(mutant(Entity, Predicate, ClauseIndex, Mutator, Occurrence), _Original, _Mutation, _Variables, _File, StartLine0-EndLine0) ->
+	mutant_location(Entity, Predicate, Target, Mutator, Occurrence, Location) :-
+		(   mutant_terms(mutant(Entity, Predicate, Target, Mutator, Occurrence), _Original, _Mutation, _Variables, _File, StartLine0-EndLine0) ->
 			StartLine is max(1, StartLine0),
 			EndLine is max(StartLine, EndLine0)
 		;   StartLine = 1,
@@ -1335,11 +1402,11 @@
 		;   true
 		).
 
-	mutant_terms(mutant(Entity, Predicate, ClauseIndex, Mutator, Occurrence), Original, Mutation, Variables, File, StartLine-EndLine) :-
+	mutant_terms(mutant(Entity, Predicate, Target, Mutator, Occurrence), Original, Mutation, Variables, File, StartLine-EndLine) :-
 		entity_file(Entity, SourceFile),
 		retractall(captured_mutated_terms_(_, _, _, _, _)),
 		assertz(capturing_mutated_terms_),
-		mutator_hook(Mutator, Entity, Predicate, ClauseIndex, Occurrence, true, Hook),
+		mutator_hook(Mutator, Entity, Predicate, Target, Occurrence, true, Hook),
 		prepare_mutator_hook(Hook),
 		load_options(LoadOptions),
 		revert_options(RevertOptions),
@@ -1407,10 +1474,8 @@
 	valid_option(mutators(Mutators)) :-
 		valid(list(atom), Mutators),
 		forall(
-			(	member(Mutator, Mutators),
-				mutator_hook(Mutator, _Entity, _Predicate, _ClauseIndex, _Occurrence, _PrintMutation, Hook)
-			),
-			conforms_to_protocol(Hook, mutator_protocol)
+			member(Mutator, Mutators),
+			mutator_name(Mutator)
 		).
 	valid_option(threshold(Threshold)) :-
 		number(Threshold),

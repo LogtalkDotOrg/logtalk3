@@ -236,3 +236,37 @@
 	c.
 
 :- end_object.
+
+
+:- object(mt_uses_provider).
+
+	:- public(resource/1).
+	resource(ok).
+
+	:- public(other/1).
+	other(value).
+
+:- end_object.
+
+
+:- object(mt_predicate_directives_sample).
+
+	:- public(local_dynamic/1).
+	:- dynamic(local_dynamic/1).
+	local_dynamic(x).
+
+	:- public(local_dynamic_check/0).
+	local_dynamic_check :-
+		local_dynamic(x).
+
+	:- uses(mt_uses_provider, [resource/1, other/1 as resource_alias/1]).
+
+	:- public(resource_check/0).
+	resource_check :-
+		resource(ok).
+
+	:- public(resource_alias_check/0).
+	resource_alias_check :-
+		resource_alias(value).
+
+:- end_object.

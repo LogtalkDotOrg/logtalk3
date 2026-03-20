@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-09,
+		date is 2026-03-20,
 		comment is 'Unit tests for the "mutation_testing" tool.'
 	]).
 
@@ -33,6 +33,9 @@
 	cover(head_arguments_mutation(_, _, _, _, _)).
 	cover(head_arguments_reordering(_, _, _, _, _)).
 	cover(clauses_reordering(_, _, _, _, _)).
+	cover(scope_directive_replacement(_, _, _, _, _)).
+	cover(predicate_directive_suppression(_, _, _, _, _)).
+	cover(uses_directive_resource_deletion(_, _, _, _, _)).
 
 	cleanup :-
 		^^clean_file('mutation_test_report.txt'),
@@ -72,26 +75,39 @@
 		mutation_testing::entity_mutants(mt_other_sample, Mutants, [mutators([fail_insertion])]),
 		memberchk(Mutant, Mutants).
 
-	test(mt_entity_mutants_occurrence_01, deterministic(Mutants == [mutant(mt_other_sample, check/1, 1, fail_insertion, 1), mutant(mt_other_sample, check/1, 1, fail_insertion, 2)])) :-
+	test(mt_entity_mutants_occurrence_01, deterministic(Mutants == [mutant(mt_other_sample, check/1, clause(1), fail_insertion, 1), mutant(mt_other_sample, check/1, clause(1), fail_insertion, 2)])) :-
 		mutation_testing::entity_mutants(mt_other_sample, Mutants, [mutators([fail_insertion])]).
 
 	test(mt_entity_mutants_ordering_01, deterministic) :-
 		mutation_testing::entity_mutants(mt_other_sample, Mutants, [mutators([fail_insertion, body_goal_negation])]),
 		^^assertion(Mutants == [
-			mutant(mt_other_sample, check/1, 1, fail_insertion, 1),
-			mutant(mt_other_sample, check/1, 1, fail_insertion, 2),
-			mutant(mt_other_sample, check/1, 1, body_goal_negation, 1)
+			mutant(mt_other_sample, check/1, clause(1), fail_insertion, 1),
+			mutant(mt_other_sample, check/1, clause(1), fail_insertion, 2),
+			mutant(mt_other_sample, check/1, clause(1), body_goal_negation, 1)
 		]).
 
 	test(mt_entity_mutants_occurrence_02, deterministic) :-
 		mutation_testing::entity_mutants(mt_other_sample, Mutants, [mutators([fail_insertion, body_goal_negation, relational_operator_replacement])]),
-		memberchk(mutant(mt_other_sample, check/1, 1, fail_insertion, 1), Mutants),
-		memberchk(mutant(mt_other_sample, check/1, 1, body_goal_negation, 1), Mutants),
-		memberchk(mutant(mt_other_sample, check/1, 1, relational_operator_replacement, 1), Mutants).
+		memberchk(mutant(mt_other_sample, check/1, clause(1), fail_insertion, 1), Mutants),
+		memberchk(mutant(mt_other_sample, check/1, clause(1), body_goal_negation, 1), Mutants),
+		memberchk(mutant(mt_other_sample, check/1, clause(1), relational_operator_replacement, 1), Mutants).
 
 	test(mt_entity_mutants_head_arguments_mutation_occurrence_01, deterministic) :-
 		mutation_testing::entity_mutants(mt_sample, Mutants, [mutators([head_arguments_mutation])]),
 		memberchk(mutant(mt_sample, head_bound_atom_integer/2, _ClauseIndex, head_arguments_mutation, _Occurrence), Mutants).
+
+	test(mt_entity_mutants_scope_directive_replacement_occurrence_01, deterministic(Mutants == [mutant(mt_other_sample, check/1, directive(1), scope_directive_replacement, 1), mutant(mt_other_sample, check/1, directive(1), scope_directive_replacement, 2)])) :-
+		mutation_testing::entity_mutants(mt_other_sample, Mutants, [mutators([scope_directive_replacement])]).
+
+	test(mt_predicate_mutants_predicate_directive_suppression_01, deterministic(Length == 2)) :-
+		mutation_testing::predicate_mutants(mt_predicate_directives_sample, local_dynamic/1, Mutants, [mutators([predicate_directive_suppression])]),
+		length(Mutants, Length).
+
+	test(mt_predicate_mutants_uses_directive_resource_deletion_01, deterministic(Mutants == [mutant(mt_predicate_directives_sample, resource/1, directive(1), uses_directive_resource_deletion, 1)])) :-
+		mutation_testing::predicate_mutants(mt_predicate_directives_sample, resource/1, Mutants, [mutators([uses_directive_resource_deletion])]).
+
+	test(mt_predicate_mutants_uses_directive_resource_deletion_02, deterministic(Mutants == [mutant(mt_predicate_directives_sample, resource_alias/1, directive(1), uses_directive_resource_deletion, 1)])) :-
+		mutation_testing::predicate_mutants(mt_predicate_directives_sample, resource_alias/1, Mutants, [mutators([uses_directive_resource_deletion])]).
 
 	% library_mutants/3 tests
 
@@ -409,6 +425,50 @@
 		mutation_testing::predicate_mutants(mt_body_goal_negation, a/0, Mutants, [mutators([body_goal_negation])]),
 		length(Mutants, Length).
 
+	test(mt_mutator_scope_directive_replacement_01, deterministic) :-
+		load_with_hook(scope_directive_replacement(mt_other_sample, check/1, 1, 1, false)),
+		once(object_property(mt_other_sample, declares(check/1, Properties))),
+		^^assertion(memberchk(scope(protected), Properties)),
+		logtalk_load(test_entities, [reload(always), source_data(on)]),
+		^^assertion(mt_other_sample::check(1)).
+
+	test(mt_mutator_scope_directive_replacement_dcg_01, deterministic) :-
+		load_with_hook(scope_directive_replacement(mt_dcg_sample, dcg_multi//0, 1, 1, false)),
+		once(object_property(mt_dcg_sample, declares(dcg_multi/2, Properties))),
+		^^assertion(memberchk(scope(protected), Properties)),
+		^^assertion(memberchk(non_terminal(dcg_multi//0), Properties)),
+		logtalk_load(test_entities, [reload(always), source_data(on)]),
+		^^assertion(mt_dcg_sample::dcg_multi_check(a)).
+
+	test(mt_mutator_predicate_directive_suppression_01, deterministic) :-
+		load_with_hook(predicate_directive_suppression(mt_predicate_directives_sample, local_dynamic/1, 2, 1, false)),
+		once(object_property(mt_predicate_directives_sample, declares(local_dynamic/1, Properties))),
+		^^assertion(\+ memberchk(dynamic, Properties)),
+		logtalk_load(test_entities, [reload(always), source_data(on)]),
+		^^assertion(mt_predicate_directives_sample::local_dynamic_check).
+
+	test(mt_mutator_predicate_directive_suppression_02, fail) :-
+		predicate_directive_suppression(mt_predicate_directives_sample, local_dynamic/1, 1, 1, false)::mutation((:- object(foo)), _).
+
+	test(mt_mutator_uses_directive_resource_deletion_01, deterministic) :-
+		load_with_hook(uses_directive_resource_deletion(mt_predicate_directives_sample, resource/1, 1, 1, false)),
+		catch(mt_predicate_directives_sample::resource_check, error(existence_error(procedure, _), _), true),
+		^^assertion(mt_predicate_directives_sample::resource_alias_check),
+		logtalk_load(test_entities, [reload(always), source_data(on)]),
+		^^assertion(mt_predicate_directives_sample::resource_check),
+		^^assertion(mt_predicate_directives_sample::resource_alias_check).
+
+	test(mt_mutator_uses_directive_resource_deletion_02, deterministic) :-
+		load_with_hook(uses_directive_resource_deletion(mt_predicate_directives_sample, resource_alias/1, 1, 1, false)),
+		^^assertion(mt_predicate_directives_sample::resource_check),
+		catch(mt_predicate_directives_sample::resource_alias_check, error(existence_error(procedure, _), _), true),
+		logtalk_load(test_entities, [reload(always), source_data(on)]),
+		^^assertion(mt_predicate_directives_sample::resource_check),
+		^^assertion(mt_predicate_directives_sample::resource_alias_check).
+
+	test(mt_mutator_uses_directive_resource_deletion_03, fail) :-
+		uses_directive_resource_deletion(mt_predicate_directives_sample, resource/1, 1, 1, false)::mutation((:- uses(mt_uses_provider, [resource/1])), _).
+
 	% options validation tests
 
 	test(mt_max_mutators_option_01, deterministic) :-
@@ -440,27 +500,36 @@
 	test(mt_mutators_option_08, deterministic) :-
 		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([clauses_reordering])]).
 
+	test(mt_mutators_option_09, deterministic) :-
+		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([scope_directive_replacement])]).
+
+	test(mt_mutators_option_10, deterministic) :-
+		mutation_testing::predicate_mutants(mt_predicate_directives_sample, local_dynamic/1, _, [mutators([predicate_directive_suppression])]).
+
+	test(mt_mutators_option_11, deterministic) :-
+		mutation_testing::predicate_mutants(mt_predicate_directives_sample, resource/1, _, [mutators([uses_directive_resource_deletion])]).
+
 	test(mt_max_mutations_per_mutator_option_01, deterministic) :-
 		mutation_testing::entity_mutants(mt_sample, Mutants, [
 			mutators([fail_insertion]),
 			max_mutations_per_mutator(1)
 		]),
-		^^assertion(\+ member(mutant(mt_sample, multi_clause/1, 2, fail_insertion, 2), Mutants)).
+		^^assertion(\+ member(mutant(mt_sample, multi_clause/1, clause(2), fail_insertion, 2), Mutants)).
 
 	test(mt_max_mutations_per_mutator_option_02, deterministic) :-
 		mutation_testing::entity_mutants(mt_sample, Mutants, [
 			mutators([fail_insertion]),
 			max_mutations_per_mutator(all)
 		]),
-		^^assertion(member(mutant(mt_sample, multi_clause/1, 2, fail_insertion, 2), Mutants)).
+		^^assertion(member(mutant(mt_sample, multi_clause/1, clause(2), fail_insertion, 2), Mutants)).
 
 	test(mt_max_mutations_per_mutator_option_03, deterministic) :-
 		mutation_testing::entity_mutants(mt_sample, Mutants, [
 			mutators([fail_insertion, body_goal_negation]),
 			max_mutations_per_mutator(1)
 		]),
-		once(member(mutant(mt_sample, check/1, 1, fail_insertion, 1), Mutants)),
-		once(member(mutant(mt_sample, check/1, 1, body_goal_negation, 1), Mutants)).
+		once(member(mutant(mt_sample, check/1, clause(1), fail_insertion, 1), Mutants)),
+		once(member(mutant(mt_sample, check/1, clause(1), body_goal_negation, 1), Mutants)).
 
 	test(mt_threshold_option_01, deterministic) :-
 		mutation_testing::report_predicate(mt_other_sample, check/1, _, [
@@ -559,7 +628,7 @@
 		]),
 		^^assertion(Total >= 2),
 		^^assertion(NoCoverage >= 1),
-		^^assertion(member(mutant_result(_, mutant(mt_sample, multi_clause/1, 1, fail_insertion, 1), no_coverage), Results)).
+		^^assertion(member(mutant_result(_, mutant(mt_sample, multi_clause/1, clause(1), fail_insertion, 1), no_coverage), Results)).
 
 	test(mt_code_coverage_guided_mutants_01, deterministic) :-
 		mutation_testing::report_predicate(mt_code_coverage, p/2, report(mt_code_coverage, summary(Total, Killed, Survived, Untested, Timeout, NoCoverage, Errors, _Score, _Threshold, _Passed), Results), [
@@ -576,11 +645,11 @@
 		^^assertion(NoCoverage == 4),
 		^^assertion(Errors == 0),
 		^^assertion(Results == [
-			mutant_result(1, mutant(mt_code_coverage, p/2, 1, fail_insertion, 1), no_coverage),
-			mutant_result(2, mutant(mt_code_coverage, p/2, 1, fail_insertion, 2), no_coverage),
-			mutant_result(3, mutant(mt_code_coverage, p/2, 2, fail_insertion, 3), no_coverage),
-			mutant_result(4, mutant(mt_code_coverage, p/2, 2, fail_insertion, 4), no_coverage),
-			mutant_result(5, mutant(mt_code_coverage, p/2, 3, fail_insertion, 5), killed)
+			mutant_result(1, mutant(mt_code_coverage, p/2, clause(1), fail_insertion, 1), no_coverage),
+			mutant_result(2, mutant(mt_code_coverage, p/2, clause(1), fail_insertion, 2), no_coverage),
+			mutant_result(3, mutant(mt_code_coverage, p/2, clause(2), fail_insertion, 3), no_coverage),
+			mutant_result(4, mutant(mt_code_coverage, p/2, clause(2), fail_insertion, 4), no_coverage),
+			mutant_result(5, mutant(mt_code_coverage, p/2, clause(3), fail_insertion, 5), killed)
 		]).
 
 	test(mt_sampling_option_01, deterministic) :-

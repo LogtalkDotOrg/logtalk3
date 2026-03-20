@@ -15,7 +15,7 @@ Mutator common predicate utilities.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-03-07
+| **Date:** 2026-03-20
 
 | **Compilation flags:**
 |    ``static``
@@ -101,6 +101,120 @@ True iff ``Term`` is a candidate for mutation while also returning its current 1
 
 ------------
 
+.. index:: target_scope_directive/3
+.. _mutator_common/0::target_scope_directive/3:
+
+``target_scope_directive/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff ``Term`` is a matching predicate or non-terminal scope directive candidate for mutation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``target_scope_directive(Term,Entity,Predicate)``
+| **Mode and number of proofs:**
+|    ``target_scope_directive(@callable,@entity_identifier,@predicate_indicator)`` - ``one``
+
+
+------------
+
+.. index:: target_scope_directive_index/4
+.. _mutator_common/0::target_scope_directive_index/4:
+
+``target_scope_directive_index/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff ``Term`` is a matching predicate or non-terminal scope directive candidate for mutation while also returning its 1-based index among matching scope directives for the selected predicate or non-terminal.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``target_scope_directive_index(Term,Entity,Predicate,DirectiveIndex)``
+| **Mode and number of proofs:**
+|    ``target_scope_directive_index(@callable,@entity_identifier,@predicate_indicator,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: target_predicate_directive/3
+.. _mutator_common/0::target_predicate_directive/3:
+
+``target_predicate_directive/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff ``Term`` is a matching predicate or non-terminal directive candidate for mutation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``target_predicate_directive(Term,Entity,Predicate)``
+| **Mode and number of proofs:**
+|    ``target_predicate_directive(@callable,@entity_identifier,@predicate_indicator)`` - ``one``
+
+
+------------
+
+.. index:: target_predicate_directive_index/4
+.. _mutator_common/0::target_predicate_directive_index/4:
+
+``target_predicate_directive_index/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff ``Term`` is a matching predicate or non-terminal directive candidate for mutation while also returning its 1-based index among matching directives for the selected predicate or non-terminal.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``target_predicate_directive_index(Term,Entity,Predicate,DirectiveIndex)``
+| **Mode and number of proofs:**
+|    ``target_predicate_directive_index(@callable,@entity_identifier,@predicate_indicator,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: target_uses_directive/3
+.. _mutator_common/0::target_uses_directive/3:
+
+``target_uses_directive/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff ``Term`` is a matching ``uses/2`` directive candidate for mutation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``target_uses_directive(Term,Entity,Predicate)``
+| **Mode and number of proofs:**
+|    ``target_uses_directive(@callable,@entity_identifier,@predicate_indicator)`` - ``one``
+
+
+------------
+
+.. index:: target_uses_directive_index/4
+.. _mutator_common/0::target_uses_directive_index/4:
+
+``target_uses_directive_index/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff ``Term`` is a matching ``uses/2`` directive candidate for mutation while also returning its 1-based index among matching directives for the selected predicate or non-terminal.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``target_uses_directive_index(Term,Entity,Predicate,DirectiveIndex)``
+| **Mode and number of proofs:**
+|    ``target_uses_directive_index(@callable,@entity_identifier,@predicate_indicator,-integer)`` - ``zero_or_one``
+
+
+------------
+
 .. index:: next_occurrence/1
 .. _mutator_common/0::next_occurrence/1:
 
@@ -157,6 +271,120 @@ Updates and returns the next clause index for the given predicate.
 |    ``update_target_predicate_clause_index_(Predicate,ClauseIndex)``
 | **Mode and number of proofs:**
 |    ``update_target_predicate_clause_index_(@predicate_indicator,-integer)`` - ``one``
+
+
+------------
+
+.. index:: current_scope_directive_index_/2
+.. _mutator_common/0::current_scope_directive_index_/2:
+
+``current_scope_directive_index_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of current scope directive indexes per predicate.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``current_scope_directive_index_(Predicate,DirectiveIndex)``
+| **Mode and number of proofs:**
+|    ``current_scope_directive_index_(?predicate_indicator,?integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: update_target_scope_directive_index_/2
+.. _mutator_common/0::update_target_scope_directive_index_/2:
+
+``update_target_scope_directive_index_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Updates and returns the next scope directive index for the given predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update_target_scope_directive_index_(Predicate,DirectiveIndex)``
+| **Mode and number of proofs:**
+|    ``update_target_scope_directive_index_(@predicate_indicator,-integer)`` - ``one``
+
+
+------------
+
+.. index:: current_predicate_directive_index_/2
+.. _mutator_common/0::current_predicate_directive_index_/2:
+
+``current_predicate_directive_index_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of current predicate directive indexes per predicate.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``current_predicate_directive_index_(Predicate,DirectiveIndex)``
+| **Mode and number of proofs:**
+|    ``current_predicate_directive_index_(?predicate_indicator,?integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: update_target_predicate_directive_index_/2
+.. _mutator_common/0::update_target_predicate_directive_index_/2:
+
+``update_target_predicate_directive_index_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Updates and returns the next predicate directive index for the given predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update_target_predicate_directive_index_(Predicate,DirectiveIndex)``
+| **Mode and number of proofs:**
+|    ``update_target_predicate_directive_index_(@predicate_indicator,-integer)`` - ``one``
+
+
+------------
+
+.. index:: current_uses_directive_index_/2
+.. _mutator_common/0::current_uses_directive_index_/2:
+
+``current_uses_directive_index_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of current uses directive indexes per predicate.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``current_uses_directive_index_(Predicate,DirectiveIndex)``
+| **Mode and number of proofs:**
+|    ``current_uses_directive_index_(?predicate_indicator,?integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: update_target_uses_directive_index_/2
+.. _mutator_common/0::update_target_uses_directive_index_/2:
+
+``update_target_uses_directive_index_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Updates and returns the next uses directive index for the given predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update_target_uses_directive_index_(Predicate,DirectiveIndex)``
+| **Mode and number of proofs:**
+|    ``update_target_uses_directive_index_(@predicate_indicator,-integer)`` - ``one``
 
 
 ------------

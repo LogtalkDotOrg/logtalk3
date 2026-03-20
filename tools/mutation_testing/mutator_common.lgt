@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-07,
+		date is 2026-03-20,
 		comment is 'Mutator common predicate utilities.'
 	]).
 
@@ -38,6 +38,48 @@
 		argnames is ['Term', 'Entity', 'Predicate', 'ClauseIndex']
 	]).
 
+	:- protected(target_scope_directive/3).
+	:- mode(target_scope_directive(@callable, @entity_identifier, @predicate_indicator), one).
+	:- info(target_scope_directive/3, [
+		comment is 'True iff ``Term`` is a matching predicate or non-terminal scope directive candidate for mutation.',
+		argnames is ['Term', 'Entity', 'Predicate']
+	]).
+
+	:- protected(target_scope_directive_index/4).
+	:- mode(target_scope_directive_index(@callable, @entity_identifier, @predicate_indicator, -integer), zero_or_one).
+	:- info(target_scope_directive_index/4, [
+		comment is 'True iff ``Term`` is a matching predicate or non-terminal scope directive candidate for mutation while also returning its 1-based index among matching scope directives for the selected predicate or non-terminal.',
+		argnames is ['Term', 'Entity', 'Predicate', 'DirectiveIndex']
+	]).
+
+	:- protected(target_predicate_directive/3).
+	:- mode(target_predicate_directive(@callable, @entity_identifier, @predicate_indicator), one).
+	:- info(target_predicate_directive/3, [
+		comment is 'True iff ``Term`` is a matching predicate or non-terminal directive candidate for mutation.',
+		argnames is ['Term', 'Entity', 'Predicate']
+	]).
+
+	:- protected(target_predicate_directive_index/4).
+	:- mode(target_predicate_directive_index(@callable, @entity_identifier, @predicate_indicator, -integer), zero_or_one).
+	:- info(target_predicate_directive_index/4, [
+		comment is 'True iff ``Term`` is a matching predicate or non-terminal directive candidate for mutation while also returning its 1-based index among matching directives for the selected predicate or non-terminal.',
+		argnames is ['Term', 'Entity', 'Predicate', 'DirectiveIndex']
+	]).
+
+	:- protected(target_uses_directive/3).
+	:- mode(target_uses_directive(@callable, @entity_identifier, @predicate_indicator), one).
+	:- info(target_uses_directive/3, [
+		comment is 'True iff ``Term`` is a matching ``uses/2`` directive candidate for mutation.',
+		argnames is ['Term', 'Entity', 'Predicate']
+	]).
+
+	:- protected(target_uses_directive_index/4).
+	:- mode(target_uses_directive_index(@callable, @entity_identifier, @predicate_indicator, -integer), zero_or_one).
+	:- info(target_uses_directive_index/4, [
+		comment is 'True iff ``Term`` is a matching ``uses/2`` directive candidate for mutation while also returning its 1-based index among matching directives for the selected predicate or non-terminal.',
+		argnames is ['Term', 'Entity', 'Predicate', 'DirectiveIndex']
+	]).
+
 	:- protected(next_occurrence/1).
 	:- mode(next_occurrence(-integer), one).
 	:- info(next_occurrence/1, [
@@ -60,6 +102,51 @@
 		argnames is ['Predicate', 'ClauseIndex']
 	]).
 
+	:- private(current_scope_directive_index_/2).
+	:- dynamic(current_scope_directive_index_/2).
+	:- mode(current_scope_directive_index_(?predicate_indicator, ?integer), zero_or_one).
+	:- info(current_scope_directive_index_/2, [
+		comment is 'Table of current scope directive indexes per predicate.',
+		argnames is ['Predicate', 'DirectiveIndex']
+	]).
+
+	:- private(update_target_scope_directive_index_/2).
+	:- mode(update_target_scope_directive_index_(@predicate_indicator, -integer), one).
+	:- info(update_target_scope_directive_index_/2, [
+		comment is 'Updates and returns the next scope directive index for the given predicate.',
+		argnames is ['Predicate', 'DirectiveIndex']
+	]).
+
+	:- private(current_predicate_directive_index_/2).
+	:- dynamic(current_predicate_directive_index_/2).
+	:- mode(current_predicate_directive_index_(?predicate_indicator, ?integer), zero_or_one).
+	:- info(current_predicate_directive_index_/2, [
+		comment is 'Table of current predicate directive indexes per predicate.',
+		argnames is ['Predicate', 'DirectiveIndex']
+	]).
+
+	:- private(update_target_predicate_directive_index_/2).
+	:- mode(update_target_predicate_directive_index_(@predicate_indicator, -integer), one).
+	:- info(update_target_predicate_directive_index_/2, [
+		comment is 'Updates and returns the next predicate directive index for the given predicate.',
+		argnames is ['Predicate', 'DirectiveIndex']
+	]).
+
+	:- private(current_uses_directive_index_/2).
+	:- dynamic(current_uses_directive_index_/2).
+	:- mode(current_uses_directive_index_(?predicate_indicator, ?integer), zero_or_one).
+	:- info(current_uses_directive_index_/2, [
+		comment is 'Table of current uses directive indexes per predicate.',
+		argnames is ['Predicate', 'DirectiveIndex']
+	]).
+
+	:- private(update_target_uses_directive_index_/2).
+	:- mode(update_target_uses_directive_index_(@predicate_indicator, -integer), one).
+	:- info(update_target_uses_directive_index_/2, [
+		comment is 'Updates and returns the next uses directive index for the given predicate.',
+		argnames is ['Predicate', 'DirectiveIndex']
+	]).
+
 	:- private(seen_/1).
 	:- dynamic(seen_/1).
 	:- mode(seen_(?integer), zero_or_one).
@@ -70,6 +157,9 @@
 
 	reset :-
 		::retractall(current_predicate_clause_index_(_, _)),
+		::retractall(current_scope_directive_index_(_, _)),
+		::retractall(current_predicate_directive_index_(_, _)),
+		::retractall(current_uses_directive_index_(_, _)),
 		::retractall(seen_(_)),
 		::assertz(seen_(0)).
 
@@ -114,6 +204,30 @@
 		target_predicate(Term, Entity, Predicate),
 		update_target_predicate_clause_index_(Predicate, ClauseIndex).
 
+	target_scope_directive((:- Directive), Entity, Predicate) :-
+		logtalk_load_context(entity_identifier, Entity),
+		scope_directive_matches_predicate_(Directive, Predicate).
+
+	target_scope_directive_index(Term, Entity, Predicate, DirectiveIndex) :-
+		target_scope_directive(Term, Entity, Predicate),
+		update_target_scope_directive_index_(Predicate, DirectiveIndex).
+
+	target_predicate_directive((:- Directive), Entity, Predicate) :-
+		logtalk_load_context(entity_identifier, Entity),
+		predicate_directive_matches_predicate_(Directive, Predicate).
+
+	target_predicate_directive_index(Term, Entity, Predicate, DirectiveIndex) :-
+		target_predicate_directive(Term, Entity, Predicate),
+		update_target_predicate_directive_index_(Predicate, DirectiveIndex).
+
+	target_uses_directive((:- Directive), Entity, Predicate) :-
+		logtalk_load_context(entity_identifier, Entity),
+		uses_directive_matches_predicate_(Directive, Predicate).
+
+	target_uses_directive_index(Term, Entity, Predicate, DirectiveIndex) :-
+		target_uses_directive(Term, Entity, Predicate),
+		update_target_uses_directive_index_(Predicate, DirectiveIndex).
+
 	update_target_predicate_clause_index_(Predicate, ClauseIndex) :-
 		(   ::retract(current_predicate_clause_index_(Predicate, Previous)) ->
 			ClauseIndex is Previous + 1
@@ -121,6 +235,119 @@
 			ClauseIndex = 1
 		),
 		::assertz(current_predicate_clause_index_(Predicate, ClauseIndex)).
+
+	update_target_scope_directive_index_(Predicate, DirectiveIndex) :-
+		(   ::retract(current_scope_directive_index_(Predicate, Previous)) ->
+			DirectiveIndex is Previous + 1
+		;   DirectiveIndex = 1
+		),
+		::assertz(current_scope_directive_index_(Predicate, DirectiveIndex)).
+
+	update_target_predicate_directive_index_(Predicate, DirectiveIndex) :-
+		(   ::retract(current_predicate_directive_index_(Predicate, Previous)) ->
+			DirectiveIndex is Previous + 1
+		;   DirectiveIndex = 1
+		),
+		::assertz(current_predicate_directive_index_(Predicate, DirectiveIndex)).
+
+	update_target_uses_directive_index_(Predicate, DirectiveIndex) :-
+		(   ::retract(current_uses_directive_index_(Predicate, Previous)) ->
+			DirectiveIndex is Previous + 1
+		;   DirectiveIndex = 1
+		),
+		::assertz(current_uses_directive_index_(Predicate, DirectiveIndex)).
+
+	scope_directive_matches_predicate_(public(Resources), Predicate) :-
+		directive_resources_match_predicate_(Resources, Predicate).
+	scope_directive_matches_predicate_(protected(Resources), Predicate) :-
+		directive_resources_match_predicate_(Resources, Predicate).
+	scope_directive_matches_predicate_(private(Resources), Predicate) :-
+		directive_resources_match_predicate_(Resources, Predicate).
+
+	predicate_directive_matches_predicate_(alias(Resources), Predicate) :-
+		directive_resources_match_predicate_(Resources, Predicate).
+	predicate_directive_matches_predicate_(coinductive(Resources), Predicate) :-
+		directive_resources_match_predicate_(Resources, Predicate).
+	predicate_directive_matches_predicate_(discontiguous(Resources), Predicate) :-
+		directive_resources_match_predicate_(Resources, Predicate).
+	predicate_directive_matches_predicate_(dynamic(Resources), Predicate) :-
+		directive_resources_match_predicate_(Resources, Predicate).
+	predicate_directive_matches_predicate_(multifile(Resources), Predicate) :-
+		directive_resources_match_predicate_(Resources, Predicate).
+	predicate_directive_matches_predicate_(private(Resources), Predicate) :-
+		directive_resources_match_predicate_(Resources, Predicate).
+	predicate_directive_matches_predicate_(protected(Resources), Predicate) :-
+		directive_resources_match_predicate_(Resources, Predicate).
+	predicate_directive_matches_predicate_(public(Resources), Predicate) :-
+		directive_resources_match_predicate_(Resources, Predicate).
+	predicate_directive_matches_predicate_(synchronized(Resources), Predicate) :-
+		directive_resources_match_predicate_(Resources, Predicate).
+	predicate_directive_matches_predicate_(uses(_Object, Resources), Predicate) :-
+		directive_resources_match_predicate_(Resources, Predicate).
+	predicate_directive_matches_predicate_(use_module(_Module, Resources), Predicate) :-
+		directive_resources_match_predicate_(Resources, Predicate).
+	predicate_directive_matches_predicate_(info(Resource, _), Predicate) :-
+		directive_resource_matches_predicate_(Resource, Predicate).
+	predicate_directive_matches_predicate_(meta_predicate(Template), Predicate) :-
+		template_matches_predicate_(Template, predicate, Predicate).
+	predicate_directive_matches_predicate_(meta_non_terminal(Template), Predicate) :-
+		template_matches_predicate_(Template, non_terminal, Predicate).
+	predicate_directive_matches_predicate_(mode(Template, _), Predicate) :-
+		template_matches_predicate_(Template, predicate, Predicate).
+	predicate_directive_matches_predicate_(mode_non_terminal(Template, _), Predicate) :-
+		template_matches_predicate_(Template, non_terminal, Predicate).
+
+	uses_directive_matches_predicate_(uses(_Object, Resources), Predicate) :-
+		directive_resources_match_predicate_(Resources, Predicate).
+
+	directive_resources_match_predicate_(Resources, Predicate) :-
+		(   Resources = [_| _] ->
+			directive_resource_in_list_matches_predicate_(Resources, Predicate)
+		;   directive_resource_matches_predicate_(Resources, Predicate)
+		).
+
+	directive_resource_in_list_matches_predicate_([Resource| _], Predicate) :-
+		directive_resource_matches_predicate_(Resource, Predicate),
+		!.
+	directive_resource_in_list_matches_predicate_([_| Resources], Predicate) :-
+		directive_resource_in_list_matches_predicate_(Resources, Predicate).
+
+	directive_resource_matches_predicate_(Resource, Predicate) :-
+		resource_exposed_predicate_(Resource, Predicate).
+
+	resource_exposed_predicate_(Predicate, Predicate) :-
+		predicate_indicator_(Predicate).
+	resource_exposed_predicate_((_Original as Alias), Predicate) :-
+		alias_exposed_predicate_(Alias, Predicate).
+	resource_exposed_predicate_((_Original::Alias), Predicate) :-
+		alias_exposed_predicate_(Alias, Predicate).
+
+	alias_exposed_predicate_(Alias, Predicate) :-
+		predicate_indicator_(Alias),
+		Predicate = Alias.
+	alias_exposed_predicate_(Alias, Predicate) :-
+		nonvar(Alias),
+		Alias \= op(_, _, _),
+		Alias \= (_ as _),
+		Alias \= (_::_),
+		functor(Alias, Name, Arity),
+		Predicate = Name/Arity.
+
+	template_matches_predicate_(Template, predicate, Predicate) :-
+		nonvar(Template),
+		functor(Template, Name, Arity),
+		Predicate = Name/Arity.
+	template_matches_predicate_(Template, non_terminal, Predicate) :-
+		nonvar(Template),
+		functor(Template, Name, Arity),
+		Predicate = Name//Arity.
+
+	predicate_indicator_(Name/Arity) :-
+		atom(Name),
+		integer(Arity).
+	predicate_indicator_(Name//Arity) :-
+		atom(Name),
+		integer(Arity).
 
 	next_occurrence(Occurrence) :-
 		(   ::retract(seen_(Previous)) ->

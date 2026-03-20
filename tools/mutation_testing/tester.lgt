@@ -26,6 +26,8 @@
 			mutation_testing,
 			mutation_testing_messages,
 			mutator_protocol,
+			clause_mutator_protocol,
+			directive_mutator_protocol,
 			mutator_common,
 			'mutators/fail_insertion',
 			'mutators/body_goal_negation',
@@ -34,7 +36,10 @@
 			'mutators/truth_literal_flip',
 			'mutators/head_arguments_mutation',
 			'mutators/head_arguments_reordering',
-			'mutators/clauses_reordering'
+			'mutators/clauses_reordering',
+			'mutators/scope_directive_replacement',
+			'mutators/predicate_directive_suppression',
+			'mutators/uses_directive_resource_deletion'
 		], [
 			source_data(on),
 			debug(on)

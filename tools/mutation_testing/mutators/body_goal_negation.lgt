@@ -8,13 +8,13 @@
 
 
 :- object(body_goal_negation(_Entity_, _Predicate_, _ClauseIndex_, _Occurrence_, _PrintMutation_),
-	implements(expanding),
+	implements((expanding, clause_mutator_protocol)),
 	imports(mutator_common)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-09,
+		date is 2026-03-20,
 		comment is 'Hook object implementing the body_goal_negation mutator by negating matching predicate clause bodies.',
 		parameters is [
 			'Entity' - 'Identifier of the entity being mutated.',

@@ -8,13 +8,13 @@
 
 
 :- object(fail_insertion(_Entity_, _Predicate_, _ClauseIndex_, _Occurrence_, _PrintMutation_),
-	implements(expanding),
+	implements((expanding, clause_mutator_protocol)),
 	imports(mutator_common)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-17,
+		date is 2026-03-20,
 		comment is 'Hook object implementing the ``fail_insertion`` mutator by inserting fail at deterministic body positions for matching predicate clauses.',
 		parameters is [
 			'Entity' - 'Identifier of the entity being mutated.',
