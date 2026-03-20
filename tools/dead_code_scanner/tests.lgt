@@ -323,7 +323,7 @@
 		}, FirstResult)),
 		^^assertion(subsumes_term([_, _, _, _, _], Results)).
 
-	test(dcs_export_sarif_03, deterministic) :-
+	test(dcs_export_sarif_02, deterministic) :-
 		dead_code_scanner::export(entity(predicate_directives), sarif, atom(Atom)),
 		json_parse(atom(Atom), SARIF),
 		^^assertion(ground(SARIF)),
@@ -344,7 +344,7 @@
 			^^assertion(length(Results, 3))
 		).
 
-	test(dcs_export_sarif_02, deterministic) :-
+	test(dcs_export_sarif_03, deterministic) :-
 		dead_code_scanner::export(entity(category), sarif, atom(Atom), [exclude_predicates([dead_predicate/0, dead_non_terminal//0])]),
 		json_parse(atom(Atom), SARIF),
 		^^assertion(ground(SARIF)),

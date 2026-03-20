@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:17:0,
+		version is 0:17:1,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2026-03-19,
+		date is 2026-03-20,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
@@ -793,6 +793,9 @@
 		git_repository_root(Directory, RepositoryRoot),
 		git_repository_uri(Directory, RepositoryURI),
 		sarif_directory_uri(RepositoryRoot, RepositoryRootURI),
+		!,
+		sarif_version_control_details(Directories, VersionControlProvenance).
+	sarif_version_control_details([_| Directories], VersionControlProvenance) :-
 		sarif_version_control_details(Directories, VersionControlProvenance).
 
 	git_repository_root(Directory, RepositoryRoot) :-
