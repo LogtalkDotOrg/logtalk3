@@ -86,6 +86,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#caveats">Caveats</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scanning-prolog-modules">Scanning Prolog modules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scanning-plain-prolog-files">Scanning plain Prolog files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="debug_messages.html"><code class="docutils literal notranslate"><span class="pre">debug_messages</span></code></a></li>
@@ -491,6 +492,14 @@ the Prolog file and then load it in debug mode:</p>
 <p>With either wrapping solution, pay special attention to any compilation
 warnings that may signal issues that could prevent the plain Prolog from
 being fully analyzed when wrapped by an object.</p>
+</section>
+<section id="known-issues">
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
+<p>Some tests fail when using the ECLIPSe and Trealla Prolog backends due
+to their implementation of the <code class="docutils literal notranslate"><span class="pre">multifile/1</span></code> directive, specifically
+when the multifile predicates are also dynamic with clauses defined in a
+source file: reconsulting the file adds the new clauses to the old ones
+instead of replacing them.</p>
 </section>
 </section>
 

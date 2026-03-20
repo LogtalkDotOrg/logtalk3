@@ -355,3 +355,12 @@ library:
 With either wrapping solution, pay special attention to any compilation
 warnings that may signal issues that could prevent the plain Prolog from
 being fully analyzed when wrapped by an object.
+
+
+Known issues
+------------
+
+Some tests fail when using the ECLIPSe and Trealla Prolog backends due to their
+implementation of the `multifile/1` directive, specifically when the multifile
+predicates are also dynamic with clauses defined in a source file: reconsulting
+the file adds the new clauses to the old ones instead of replacing them.
