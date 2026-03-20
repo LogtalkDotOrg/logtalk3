@@ -21,6 +21,7 @@
 		logtalk_load(options(loader)),
 		logtalk_load(os(loader)),
 		logtalk_load(random(loader)),
+		logtalk_load(term_io(loader)),
 		logtalk_load([
 			subprocess_mutation_hook,
 			mutation_testing,

@@ -244,9 +244,14 @@
 	]).
 
 	:- uses(os, [
-		directory_exists/1, make_directory_path/1,
-		path_concat/3, pid/1, shell/2, temporary_directory/1, wall_time/1,
+		directory_exists/1, environment_variable/2, make_directory_path/1,
+		operating_system_machine/1, operating_system_name/1, operating_system_release/1,
+		operating_system_type/1, path_concat/3, pid/1, shell/2, temporary_directory/1, wall_time/1,
 		is_absolute_file_name/1
+	]).
+
+	:- uses(term_io, [
+		write_term_to_atom/3
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [
@@ -1209,28 +1214,160 @@
 		merge_file_results(FileResults0, MergedFileResults),
 		file_results_pairs(MergedFileResults, FilePairs),
 		container_thresholds(Reports, High, Low),
-		JSON = json([
-			'schemaVersion'-'2.0',
-			'thresholds'-json(['high'-High, 'low'-Low]),
-			'files'-json(FilePairs),
-			'framework'-json(['name'-'Logtalk "mutation_testing" tool'])
-		]).
+		report_json_pairs(MergedFileResults, FilePairs, High, Low, Pairs),
+		JSON = json(Pairs).
 	stryker_json_report(report(Entity, summary(_Total, _Killed, _Survived, _Untested, _Timeout, _NoCoverage, _Errors, _Score, Threshold, _Passed), Results), JSON) :-
 		report_file_result(report(Entity, summary(_, _, _, _, _, _, _, _, Threshold, _), Results), FileResult),
 		FileResult = file_result(File, Language, Source, Mutants),
 		High is max(0, min(100, round(Threshold))),
-		JSON = json([
-			'schemaVersion'-'2.0',
-			'thresholds'-json(['high'-High, 'low'-0]),
-			'files'-json([
-				File-json([
-					'language'-Language,
-					'source'-Source,
-					'mutants'-Mutants
-				])
-			]),
-			'framework'-json(['name'-'Logtalk "mutation_testing" tool'])
-		]).
+		FilePairs = [
+			File-json([
+				'language'-Language,
+				'source'-Source,
+				'mutants'-Mutants
+			])
+		],
+		report_json_pairs([FileResult], FilePairs, High, 0, Pairs),
+		JSON = json(Pairs).
+
+	report_json_pairs(FileResults, FilePairs, High, Low, [
+		'$schema'-'https://git.io/mutation-testing-schema',
+		'schemaVersion'-'2',
+		'thresholds'-json(['high'-High, 'low'-Low]),
+		'projectRoot'-ProjectRoot,
+		'files'-json(FilePairs),
+		'framework'-Framework,
+		'system'-System
+	]) :-
+		file_results_project_root(FileResults, ProjectRoot),
+		framework_json(Framework),
+		system_json(System).
+
+	file_results_project_root([file_result(File, _, _, _)| FileResults], ProjectRoot) :-
+		file_result_directory(File, Directory),
+		file_results_project_root(FileResults, [Directory], ProjectRoot).
+
+	file_results_project_root([], Directories, ProjectRoot) :-
+		common_directory(Directories, ProjectRoot).
+	file_results_project_root([file_result(File, _, _, _)| FileResults], Directories0, ProjectRoot) :-
+		file_result_directory(File, Directory),
+		file_results_project_root(FileResults, [Directory| Directories0], ProjectRoot).
+
+	file_result_directory(File, Directory) :-
+		os::decompose_file_name(File, Directory0, _Name, _Extension),
+		normalize_directory(Directory0, Directory).
+
+	common_directory([Directory], Directory) :-
+		!.
+	common_directory([Directory1, Directory2| Directories], CommonDirectory) :-
+		atom_split(Directory1, '/', Segments1),
+		atom_split(Directory2, '/', Segments2),
+		common_leading_segments(Segments1, Segments2, CommonSegments),
+		common_segments_directory(CommonSegments, IntermediateDirectory),
+		common_directory([IntermediateDirectory| Directories], CommonDirectory).
+
+	atom_split(Atom, Separator, Segments) :-
+		atomic_list_concat(Segments, Separator, Atom).
+
+	common_leading_segments([Segment| Segments1], [Segment| Segments2], [Segment| CommonSegments]) :-
+		!,
+		common_leading_segments(Segments1, Segments2, CommonSegments).
+	common_leading_segments(_, _, []).
+
+	common_segments_directory([''], '/') :-
+		!.
+	common_segments_directory(Segments, Directory) :-
+		atomic_list_concat(Segments, '/', Directory).
+
+	framework_json(json([
+		'name'-'Logtalk "mutation_testing" tool',
+		'version'-Version,
+		'branding'-json([
+			'homepageUrl'-'https://logtalk.org/'
+		]),
+		'dependencies'-json(Dependencies)
+	])) :-
+		mutation_testing_version(Version),
+		framework_dependencies(Dependencies).
+
+	framework_dependencies(['Logtalk'-LogtalkVersion, Prolog-PrologVersion]) :-
+		logtalk_version_atom(LogtalkVersion),
+		current_logtalk_flag(prolog_dialect, Dialect),
+		dialect_prolog_name(Dialect, Prolog),
+		prolog_version_atom(PrologVersion).
+
+	mutation_testing_version(Version) :-
+		this(This),
+		object_property(This, info(Info)),
+		memberchk(version(Major:Minor:Patch), Info),
+		!,
+		atomic_list_concat([Major, Minor, Patch], '.', Version).
+	% fallback if the tool was compiled with source_data off
+	mutation_testing_version('1.0.0').
+
+	logtalk_version_atom(Version) :-
+		current_logtalk_flag(version_data, logtalk(Major, Minor, Patch, _Status)),
+		atomic_list_concat([Major, Minor, Patch], '.', Version).
+
+	% Prolog backend identifier table
+	dialect_prolog_name(b,       'B-Prolog').
+	dialect_prolog_name(ciao,    'Ciao Prolog').
+	dialect_prolog_name(cx,      'CxProlog').
+	dialect_prolog_name(eclipse, 'ECLiPSe').
+	dialect_prolog_name(gnu,     'GNU Prolog').
+	dialect_prolog_name(ji,      'JIProlog').
+	dialect_prolog_name(quintus, 'Quintus Prolog').
+	dialect_prolog_name(sicstus, 'SICStus Prolog').
+	dialect_prolog_name(swi,     'SWI-Prolog').
+	dialect_prolog_name(tau,     'Tau Prolog').
+	dialect_prolog_name(trealla, 'Trealla Prolog').
+	dialect_prolog_name(xsb,     'XSB').
+	dialect_prolog_name(xvm,     'XVM').
+	dialect_prolog_name(yap,     'YAP').
+
+	prolog_version_atom(Version) :-
+		current_prolog_flag(version_data, VersionData),
+		VersionData =.. [_Dialect, Major, Minor, Patch| _],
+		atomic_list_concat([Major, Minor, Patch], '.', Version).
+
+	system_json(json([
+		'ci'-CI,
+		'os'-json([
+			'platform'-Platform
+		])
+	])) :-
+		ci_environment(CI),
+		operating_system_name(Name),
+		operating_system_machine(Machine),
+		operating_system_release(Release),
+		atomic_list_concat([Name, Machine, Release], ' ', Platform).
+
+	ci_environment(true) :-
+		ci_environment_variable('CI'),
+		!.
+	ci_environment(true) :-
+		ci_environment_variable('GITHUB_ACTIONS'),
+		!.
+	ci_environment(true) :-
+		ci_environment_variable('GITLAB_CI'),
+		!.
+	ci_environment(true) :-
+		ci_environment_variable('TRAVIS'),
+		!.
+	ci_environment(true) :-
+		ci_environment_variable('APPVEYOR'),
+		!.
+	ci_environment(true) :-
+		ci_environment_variable('CIRCLECI'),
+		!.
+	ci_environment(true) :-
+		ci_environment_variable('JENKINS_URL'),
+		!.
+	ci_environment(false).
+
+	ci_environment_variable(Name) :-
+		environment_variable(Name, Value),
+		Value \== ''.
 
 	container_reports_file_results([], []).
 	container_reports_file_results([Report| Reports], [FileResult| FileResults]) :-
@@ -1271,12 +1408,9 @@
 		index_id(Index, Id),
 		status_name(Status, StatusName),
 		mutant_location(Entity, Predicate, Target, Mutator, Occurrence, Location),
-		Pairs = [
-			'id'-Id,
-			'mutatorName'-Mutator,
-			'location'-Location,
-			'status'-StatusName
-		].
+		mutant_detail_pairs(Mutant, DetailPairs),
+		mutant_status_reason_pair(Status, ReasonPairs),
+		append(['id'-Id, 'mutatorName'-Mutator, 'location'-Location, 'status'-StatusName| DetailPairs], ReasonPairs, Pairs).
 
 	normalize_mutant(mutant(Entity, Predicate, Target, Mutator, Occurrence), Entity, Predicate, Target, Mutator, Occurrence) :-
 		compound(Target).
@@ -1292,6 +1426,33 @@
 	status_name(untested(_), 'Pending').
 	status_name(untested, 'Pending').
 	status_name(error(_), 'RuntimeError').
+
+	mutant_detail_pairs(Mutant, [
+		'description'-Description,
+		'replacement'-Replacement
+	]) :-
+		mutant_terms(Mutant, Original, Mutation, Variables, _File, _StartLine-_EndLine),
+		term_to_report_atom(Original, Variables, OriginalAtom),
+		term_to_report_atom(Mutation, Variables, Replacement),
+		atomic_list_concat(['Replaced ', OriginalAtom, ' with ', Replacement], Description),
+		!.
+	mutant_detail_pairs(_, []).
+
+	mutant_status_reason_pair(killed, []).
+	mutant_status_reason_pair(survived, []).
+	mutant_status_reason_pair(no_coverage, ['statusReason'-'Mutant was not covered by the baseline coverage data']).
+	mutant_status_reason_pair(timeout, ['statusReason'-'Mutation test execution timed out']).
+	mutant_status_reason_pair(untested(Reason), ['statusReason'-ReasonAtom]) :-
+		term_to_reason_atom(Reason, ReasonAtom).
+	mutant_status_reason_pair(untested, ['statusReason'-'Mutant was not executed']).
+	mutant_status_reason_pair(error(Error), ['statusReason'-ReasonAtom]) :-
+		term_to_reason_atom(Error, ReasonAtom).
+
+	term_to_report_atom(Term, Variables, Atom) :-
+		write_term_to_atom(Term, Atom, [quoted(true), variable_names(Variables)]).
+
+	term_to_reason_atom(Term, Atom) :-
+		write_term_to_atom(Term, Atom, [quoted(true)]).
 
 	mutant_location(Entity, Predicate, Target, Mutator, Occurrence, Location) :-
 		(   mutant_terms(mutant(Entity, Predicate, Target, Mutator, Occurrence), _Original, _Mutation, _Variables, _File, StartLine0-EndLine0) ->

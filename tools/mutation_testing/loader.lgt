@@ -32,6 +32,7 @@
 		logtalk_load(options(loader)),
 		logtalk_load(os(loader)),
 		logtalk_load(random(loader)),
+		logtalk_load(term_io(loader)),
 		logtalk_load([
 			mutation_testing,
 			mutation_testing_messages,
