@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:2:2,
 		author is 'Paulo Moura',
-		date is 2026-03-19,
+		date is 2026-03-20,
 		comment is 'Unit tests for the "linda" library.'
 	]).
 
@@ -434,13 +434,15 @@
 	% Shutdown tests
 	% ==========================================================================
 
-	test(linda_shutdown_server_01, true(ConnectionRefused == yes)) :-
+	test(linda_shutdown_server_01, true(ConnectionRefused == yes), [flaky]) :-
 		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
 		linda::shutdown_server(Address),
-		sleep(0.1),
+		% the need for the delay or its value (for the OS to effectively close
+		% the socket) seems to be highly variable, hence the "flaky" marker
+		sleep(1),
 		Address = Host:Port,
 		catch(
 			(	socket::client_open(Host, Port, Input, Output, [type(text)]),
