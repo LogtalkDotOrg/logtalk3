@@ -43,6 +43,10 @@
 		^^clean_file('mutation_json_report.json'),
 		^^clean_file('mutation_absolute_report.txt').
 
+	report_schema_available(Path) :-
+		^^file_path('mutation-testing-report-schema.json', Path),
+		os::file_exists(Path).
+
 	% predicate_mutants/3 tests
 
 	test(mt_predicate_mutants_3_01, deterministic) :-
@@ -604,6 +608,22 @@
 		Mutants = [json(MutantPairs)| _],
 		^^assertion(memberchk('description'-_, MutantPairs)),
 		^^assertion(memberchk('replacement'-_, MutantPairs)).
+
+	test(mt_format_option_04, deterministic, [condition(report_schema_available(_))]) :-
+		^^suppress_text_output,
+		report_schema_available(SchemaPath),
+		^^file_path('mutation_json_report.json', Report),
+		mutation_testing::predicate(mt_sample, check/1, [
+			mutators([fail_insertion]),
+			sampling(count(1)),
+			threshold(60.0),
+			format(json),
+			report_file_name('mutation_json_report'),
+			tester_file_name('subprocess_tester.lgt')
+		]),
+		json(list, dash, atom)::parse(file(Report), JSON),
+		^^assertion(json_schema::parse(file(SchemaPath), Schema)),
+		^^assertion(json_schema::validate(Schema, JSON)).
 
 	test(mt_report_file_name_option_01, deterministic(os::file_exists(Report))) :-
 		^^suppress_text_output,
