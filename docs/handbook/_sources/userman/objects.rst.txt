@@ -766,6 +766,8 @@ The following object properties are supported:
    Messages sent from the object generate events
 ``source_data``
    Source data available for the object
+``info(List)``
+   List of the compound term representation of the object ``info/1`` pairs with the key as functor.
 ``complements(Permission)``
    The object supports complementing categories with the specified
    permission (``allow`` or ``restrict``)

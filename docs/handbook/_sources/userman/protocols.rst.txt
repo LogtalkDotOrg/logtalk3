@@ -274,6 +274,8 @@ The following protocol properties are supported:
    The protocol is a built-in protocol (and thus always available)
 ``source_data``
    Source data available for the protocol
+``info(List)``
+   List of the compound term representation of the object ``info/1`` pairs with the key as functor.
 ``file(Path)``
    Absolute path of the source file defining the protocol (if
    applicable)

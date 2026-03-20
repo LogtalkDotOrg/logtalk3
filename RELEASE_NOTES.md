@@ -34,6 +34,12 @@ a term position while verifying that the position is for the given term.
 * FIXED: The portability linter warning for the `write_term/3` predicate
 `variable_names/1` option when its value is bound at runtime.
 
+Documentation
+-------------
+
+* FIXED: The Handbook sections on entity properties were missing the `info/1`
+property.
+
 Library
 -------
 

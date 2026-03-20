@@ -525,6 +525,8 @@ The following category properties are supported:
    Messages sent from the category generate events
 ``source_data``
    Source data available for the category
+``info(List)``
+   List of the compound term representation of the object ``info/1`` pairs with the key as functor.
 ``public(Resources)``
    List of public predicates and operators declared by the category
 ``protected(Resources)``
