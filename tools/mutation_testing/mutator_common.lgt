@@ -187,13 +187,14 @@
 	target_predicate((Head :- _Body), Entity, Predicate) :-
 		!,
 		target_predicate(Head, Entity, Predicate).
+	target_predicate((Head, _ --> _Body), Entity, Predicate) :-
+		!,
+		target_predicate(Head, Entity, Predicate).
 	target_predicate((Head --> _Body), Entity, Predicate) :-
 		!,
 		target_predicate(Head, Entity, Predicate).
 	target_predicate(Head, Entity, Predicate) :-
 		logtalk_load_context(entity_identifier, Entity),
-		nonvar(Head),
-		Head \= (:- _),
 		once((
 			Predicate = Name/Arity
 		;   Predicate = Name//Arity
@@ -206,7 +207,8 @@
 
 	target_scope_directive((:- Directive), Entity, Predicate) :-
 		logtalk_load_context(entity_identifier, Entity),
-		scope_directive_matches_predicate_(Directive, Predicate).
+		scope_directive_matches_predicate_(Directive, Predicate),
+		!.
 
 	target_scope_directive_index(Term, Entity, Predicate, DirectiveIndex) :-
 		target_scope_directive(Term, Entity, Predicate),
@@ -214,7 +216,8 @@
 
 	target_predicate_directive((:- Directive), Entity, Predicate) :-
 		logtalk_load_context(entity_identifier, Entity),
-		predicate_directive_matches_predicate_(Directive, Predicate).
+		predicate_directive_matches_predicate_(Directive, Predicate),
+		!.
 
 	target_predicate_directive_index(Term, Entity, Predicate, DirectiveIndex) :-
 		target_predicate_directive(Term, Entity, Predicate),
@@ -222,7 +225,8 @@
 
 	target_uses_directive((:- Directive), Entity, Predicate) :-
 		logtalk_load_context(entity_identifier, Entity),
-		uses_directive_matches_predicate_(Directive, Predicate).
+		uses_directive_matches_predicate_(Directive, Predicate),
+		!.
 
 	target_uses_directive_index(Term, Entity, Predicate, DirectiveIndex) :-
 		target_uses_directive(Term, Entity, Predicate),
@@ -315,39 +319,25 @@
 	directive_resource_matches_predicate_(Resource, Predicate) :-
 		resource_exposed_predicate_(Resource, Predicate).
 
-	resource_exposed_predicate_(Predicate, Predicate) :-
-		predicate_indicator_(Predicate).
+	resource_exposed_predicate_(Name/Arity, Name/Arity).
+	resource_exposed_predicate_(Name//Arity, Name//Arity).
 	resource_exposed_predicate_((_Original as Alias), Predicate) :-
 		alias_exposed_predicate_(Alias, Predicate).
 	resource_exposed_predicate_((_Original::Alias), Predicate) :-
 		alias_exposed_predicate_(Alias, Predicate).
 
+	alias_exposed_predicate_(Name/Arity, Name/Arity) :-
+		!.
+	alias_exposed_predicate_(Name//Arity, Name//Arity) :-
+		!.
 	alias_exposed_predicate_(Alias, Predicate) :-
-		predicate_indicator_(Alias),
-		Predicate = Alias.
-	alias_exposed_predicate_(Alias, Predicate) :-
-		nonvar(Alias),
-		Alias \= op(_, _, _),
-		Alias \= (_ as _),
-		Alias \= (_::_),
 		functor(Alias, Name, Arity),
 		Predicate = Name/Arity.
 
-	template_matches_predicate_(Template, predicate, Predicate) :-
-		nonvar(Template),
-		functor(Template, Name, Arity),
-		Predicate = Name/Arity.
-	template_matches_predicate_(Template, non_terminal, Predicate) :-
-		nonvar(Template),
-		functor(Template, Name, Arity),
-		Predicate = Name//Arity.
-
-	predicate_indicator_(Name/Arity) :-
-		atom(Name),
-		integer(Arity).
-	predicate_indicator_(Name//Arity) :-
-		atom(Name),
-		integer(Arity).
+	template_matches_predicate_(Template, predicate, Name/Arity) :-
+		functor(Template, Name, Arity).
+	template_matches_predicate_(Template, non_terminal, Name//Arity) :-
+		functor(Template, Name, Arity).
 
 	next_occurrence(Occurrence) :-
 		(   ::retract(seen_(Previous)) ->

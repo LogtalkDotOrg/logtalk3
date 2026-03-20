@@ -924,17 +924,17 @@
 		path_concat(TempDir, 'mutation_config.pl', ConfigFile),
 		path_concat(TempDir, 'status.txt', StatusFile),
 		% find the mutator file path
-		mutator_hook(Mutator, _E, _P, Target, _O, false, Hook),
+		mutator_hook(Mutator, _Entity, _Predicate, Target, _Occurrence, false, Hook),
 		object_property(Hook, file(MutatorFile)),
 		open(ConfigFile, write, Stream),
-		writeq(Stream, mutation_entity(Entity)), write(Stream, '.'), nl(Stream),
-		writeq(Stream, mutation_predicate(Predicate)), write(Stream, '.'), nl(Stream),
-		writeq(Stream, mutation_mutator(Mutator)), write(Stream, '.'), nl(Stream),
-		writeq(Stream, mutation_target(Target)), write(Stream, '.'), nl(Stream),
-		writeq(Stream, mutation_occurrence(Occurrence)), write(Stream, '.'), nl(Stream),
-		writeq(Stream, mutation_source_file(SourceFile)), write(Stream, '.'), nl(Stream),
-		writeq(Stream, mutation_status_file(StatusFile)), write(Stream, '.'), nl(Stream),
-		writeq(Stream, mutation_mutator_file(MutatorFile)), write(Stream, '.'), nl(Stream),
+		writeq(Stream, mutation_entity(Entity)), write(Stream, '.\n'),
+		writeq(Stream, mutation_predicate(Predicate)), write(Stream, '.\n'),
+		writeq(Stream, mutation_mutator(Mutator)), write(Stream, '.\n'),
+		writeq(Stream, mutation_target(Target)), write(Stream, '.\n'),
+		writeq(Stream, mutation_occurrence(Occurrence)), write(Stream, '.\n'),
+		writeq(Stream, mutation_source_file(SourceFile)), write(Stream, '.\n'),
+		writeq(Stream, mutation_status_file(StatusFile)), write(Stream, '.\n'),
+		writeq(Stream, mutation_mutator_file(MutatorFile)), write(Stream, '.\n'),
 		close(Stream).
 
 	run_baseline_coverage_subprocess(Entity, Options) :-
@@ -954,7 +954,7 @@
 	write_baseline_coverage_config(TempDir, CoverageFile) :-
 		path_concat(TempDir, 'coverage_config.pl', ConfigFile),
 		open(ConfigFile, write, Stream),
-		writeq(Stream, baseline_coverage_file(CoverageFile)), write(Stream, '.'), nl(Stream),
+		writeq(Stream, baseline_coverage_file(CoverageFile)), write(Stream, '.\n'),
 		close(Stream).
 
 	run_coverage_subprocess(TempDir, SourceFile, Timeout, Verbose, ExitStatus, Options) :-
@@ -1202,19 +1202,18 @@
 		nl(Stream),
 		!.
 
-	stryker_json_report(report(Container, Reports), JSON) :-
+	stryker_json_report(report(_Container, Reports), JSON) :-
 		valid(list, Reports),
 		!,
 		container_reports_file_results(Reports, FileResults0),
 		merge_file_results(FileResults0, MergedFileResults),
 		file_results_pairs(MergedFileResults, FilePairs),
 		container_thresholds(Reports, High, Low),
-		container_framework(Container, Framework),
 		JSON = json([
 			'schemaVersion'-'2.0',
 			'thresholds'-json(['high'-High, 'low'-Low]),
 			'files'-json(FilePairs),
-			'framework'-json(['name'-Framework])
+			'framework'-json(['name'-'Logtalk "mutation_testing" tool'])
 		]).
 	stryker_json_report(report(Entity, summary(_Total, _Killed, _Survived, _Untested, _Timeout, _NoCoverage, _Errors, _Score, Threshold, _Passed), Results), JSON) :-
 		report_file_result(report(Entity, summary(_, _, _, _, _, _, _, _, Threshold, _), Results), FileResult),
@@ -1336,10 +1335,6 @@
 		),
 		thresholds_maximum(Thresholds, Maximum1, Maximum).
 
-	container_framework(library(_), 'Logtalk mutation_testing').
-	container_framework(directory(_), 'Logtalk mutation_testing').
-	container_framework(_Container, 'Logtalk mutation_testing').
-
 	merge_file_results([], []).
 	merge_file_results([file_result(File, Language, Source, Mutants)| FileResults], Merged) :-
 		merge_file_results(FileResults, Merged0),
@@ -1367,8 +1362,7 @@
 		format_reports(Reports, Stream).
 
 	format_mutant_results([], Stream) :-
-		write(Stream, '  (none)'),
-		nl(Stream).
+		write(Stream, '  (none)\n').
 	format_mutant_results([mutant_result(Index, Mutant, Status)| Results], Stream) :-
 		write(Stream, '  #'), write(Stream, Index), write(Stream, ' '),
 		writeq(Stream, Mutant), write(Stream, ' => '), writeq(Stream, Status),
