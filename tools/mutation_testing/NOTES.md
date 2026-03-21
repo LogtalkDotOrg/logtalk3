@@ -52,7 +52,7 @@ To test this tool, load the `tester.lgt` file:
 Features
 --------
 
-- Deterministic mutant discovery per entity predicate/non-terminal and mutator.
+- Deterministic mutant discovery per entity predicate directive, predicate/non-terminal clause/rule, and mutator.
 - Configurable mutator sets and campaign size limits.
 - Deterministic sampled execution (`sampling(all|count(N)|rate(R))` plus `seed/1`).
 - Mutation score computation (killed versus survived mutants).
