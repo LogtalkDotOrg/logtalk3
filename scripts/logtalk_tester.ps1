@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on March 16, 2026
+##   Last updated on March 21, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -55,7 +55,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 18.2"
+	Write-Output "$myName 18.3"
 }
 
 Function Format-Decimal {
@@ -417,7 +417,7 @@ Function Confirm-Parameters() {
 		$script:logtalk = "cxlgt"
 		$script:logtalk_option = "--goal"
 	} elseif ($p -eq "eclipse") {
-		$script:backend = eclipse
+		$script:backend = 'eclipse'
 		$script:prolog = 'ECLiPSe'
 		$script:logtalk = "eclipselgt"
 		$script:logtalk_option = "-e"

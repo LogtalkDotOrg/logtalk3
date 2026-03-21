@@ -160,6 +160,9 @@ registries that are git repos would not be recognized as such.
 * FIXED: Bug in the `logtalk_tester.ps1` PowerShell script where the test
 results summary will fail to account for all the tests that were run.
 
+* FIXED: Bug in the `logtalk_tester.ps1` PowerShell script that prevented
+using the ECLiPSe backend.
+
 Examples
 --------
 
