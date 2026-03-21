@@ -69,13 +69,7 @@ GNU Prolog.
 * FIXED: The implementation of the `os::sleep/1` predicate for JIProlog.
 
 * FIXED: Bug in the `linda` library where a permission error would be thrown
-in the server when a client sent the `linda::shutdown_server/0` message.
-
-* FIXED: Non-determinism bug in the `strings` library `atomics_to_string/3`
-predicate. Thanks to Felix Weitkämper for the bug report.
-
-* FIXED: Portability issue in the `isolation_forest` library when calling the
-`format/3` de facto standard predicate.
+in the server when a client sent the `linda::shutdown_server/1` message.
 
 * FIXED: Bug in the `linda` library where the `in/1` and `in_noblock/1`
 predicates would remove non-matching tuples. Thanks to Paul Brown for the
@@ -86,6 +80,12 @@ tuples.
 
 * FIXED: The `linda` library `shutdown_server/1` predicate to no longer
 require a follow-up client connection to complete server shutdown.
+
+* FIXED: Non-determinism bug in the `strings` library `atomics_to_string/3`
+predicate. Thanks to Felix Weitkämper for the bug report.
+
+* FIXED: Portability issue in the `isolation_forest` library when calling the
+`format/3` de facto standard predicate.
 
 * FIXED: Spurious choice-points in the `url` library public predicates.
 

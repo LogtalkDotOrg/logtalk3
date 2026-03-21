@@ -1,6 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "dead_code_scanner export format",
+  "description": "Schema for the dead_code_scanner JSON export format only. SARIF exports follow the SARIF 2.1.0 specification and are not described by this schema.",
   "type": "object",
   "properties": {
     "formatVersion": {
