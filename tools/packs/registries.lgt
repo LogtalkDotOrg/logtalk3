@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:64:0,
+		version is 0:64:1,
 		author is 'Paulo Moura',
-		date is 2026-03-02,
+		date is 2026-03-21,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -326,8 +326,11 @@
 		member(Registry, Registries),
 		path_concat(Directory, Registry, Path),
 		read_url(Path, URL),
-		decompose_file_name(URL, _, _, Extension),
-		(	Extension == '.git' ->
+		(	decompose_file_name(URL, _, _, '.git') ->
+			HowDefined = git
+		;	sub_atom(URL, 0, _, _, 'file://'),
+			path_concat(Path, '.git', DotGit),
+			directory_exists(DotGit) ->
 			HowDefined = git
 		;	^^supported_url_archive(URL) ->
 			HowDefined = archive
