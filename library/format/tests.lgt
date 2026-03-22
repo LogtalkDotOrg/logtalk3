@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:2:1,
 		author is 'Paulo Moura',
-		date is 2021-11-25,
+		date is 2026-03-22,
 		comment is 'Unit tests for the "format" library.'
 	]).
 
@@ -35,39 +35,87 @@
 
 	cover(format).
 
-	test(format_format_2_atom, true(Assertion)) :-
-		^^set_text_output(''),
-		format('~w~n', [foo]),
-		^^text_output_assertion('foo\n', Assertion).
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, b),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
+	)).
 
-	test(format_format_2_codes, true(Assertion)) :-
-		^^set_text_output(''),
-		atom_codes('~w~n', Codes),
-		format(Codes, [foo]),
-		^^text_output_assertion('foo\n', Assertion).
+		test(format_format_2_atom, true(Assertion)) :-
+			^^set_text_output(''),
+			format('~w~n', [foo]),
+			^^text_output_assertion('foo\r\n', Assertion).
 
-	test(format_format_2_chars, true(Assertion)) :-
-		^^set_text_output(''),
-		atom_chars('~w~n', Chars),
-		format(Chars, [foo]),
-		^^text_output_assertion('foo\n', Assertion).
+		test(format_format_2_codes, true(Assertion)) :-
+			^^set_text_output(''),
+			atom_codes('~w~n', Codes),
+			format(Codes, [foo]),
+			^^text_output_assertion('foo\r\n', Assertion).
 
-	test(format_format_3_atom, true(Assertion)) :-
-		^^set_text_output(out, ''),
-		format(out, '~w~n', [bar]),
-		^^text_output_assertion(out, 'bar\n', Assertion).
+		test(format_format_2_chars, true(Assertion)) :-
+			^^set_text_output(''),
+			atom_chars('~w~n', Chars),
+			format(Chars, [foo]),
+			^^text_output_assertion('foo\r\n', Assertion).
 
-	test(format_format_3_codes, true(Assertion)) :-
-		^^set_text_output(out, ''),
-		atom_codes('~w~n', Codes),
-		format(out, Codes, [bar]),
-		^^text_output_assertion(out, 'bar\n', Assertion).
+		test(format_format_3_atom, true(Assertion)) :-
+			^^set_text_output(out, ''),
+			format(out, '~w~n', [bar]),
+			^^text_output_assertion(out, 'bar\r\n', Assertion).
 
-	test(format_format_3_chars, true(Assertion)) :-
-		^^set_text_output(out, ''),
-		atom_chars('~w~n', Chars),
-		format(out, Chars, [bar]),
-		^^text_output_assertion(out, 'bar\n', Assertion).
+		test(format_format_3_codes, true(Assertion)) :-
+			^^set_text_output(out, ''),
+			atom_codes('~w~n', Codes),
+			format(out, Codes, [bar]),
+			^^text_output_assertion(out, 'bar\r\n', Assertion).
+
+		test(format_format_3_chars, true(Assertion)) :-
+			^^set_text_output(out, ''),
+			atom_chars('~w~n', Chars),
+			format(out, Chars, [bar]),
+			^^text_output_assertion(out, 'bar\r\n', Assertion).
+
+	:- else.
+
+		test(format_format_2_atom, true(Assertion)) :-
+			^^set_text_output(''),
+			format('~w~n', [foo]),
+			^^text_output_assertion('foo\n', Assertion).
+
+		test(format_format_2_codes, true(Assertion)) :-
+			^^set_text_output(''),
+			atom_codes('~w~n', Codes),
+			format(Codes, [foo]),
+			^^text_output_assertion('foo\n', Assertion).
+
+		test(format_format_2_chars, true(Assertion)) :-
+			^^set_text_output(''),
+			atom_chars('~w~n', Chars),
+			format(Chars, [foo]),
+			^^text_output_assertion('foo\n', Assertion).
+
+		test(format_format_3_atom, true(Assertion)) :-
+			^^set_text_output(out, ''),
+			format(out, '~w~n', [bar]),
+			^^text_output_assertion(out, 'bar\n', Assertion).
+
+		test(format_format_3_codes, true(Assertion)) :-
+			^^set_text_output(out, ''),
+			atom_codes('~w~n', Codes),
+			format(out, Codes, [bar]),
+			^^text_output_assertion(out, 'bar\n', Assertion).
+
+		test(format_format_3_chars, true(Assertion)) :-
+			^^set_text_output(out, ''),
+			atom_chars('~w~n', Chars),
+			format(out, Chars, [bar]),
+			^^text_output_assertion(out, 'bar\n', Assertion).
+
+	:- endif.
 
 	cleanup :-
 		^^clean_text_output.

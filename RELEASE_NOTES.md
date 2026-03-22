@@ -89,6 +89,9 @@ predicate. Thanks to Felix Weitkämper for the bug report.
 
 * FIXED: Spurious choice-points in the `url` library public predicates.
 
+* FIXED: Tests for the `format` library when run on Windows with backends that
+use CRLF instead of LF.
+
 Tools
 -----
 
