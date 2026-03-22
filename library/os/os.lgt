@@ -51,9 +51,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:102:1,
+		version is 1:102:2,
 		author is 'Paulo Moura',
-		date is 2026-03-02,
+		date is 2026-03-22,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -2022,8 +2022,12 @@
 	is_absolute_file_name(Path) :-
 		operating_system_type(Type),
 		(	Type == windows ->
-			sub_atom(Path, 1, 1, _, ':'),
-			sub_atom(Path, 0, 1, _, Drive),
+			(	current_logtalk_flag(prolog_dialect, eclipse) ->
+				sub_atom(Path, 0, 2, _, '//'),
+				sub_atom(Path, 2, 1, _, Drive)
+			;	sub_atom(Path, 1, 1, _, ':'),
+				sub_atom(Path, 0, 1, _, Drive)
+			),
 			(	a @=< Drive, Drive @=< z ->
 				true
 			;	'A' @=< Drive, Drive @=< 'Z'

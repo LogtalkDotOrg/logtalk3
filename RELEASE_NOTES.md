@@ -66,6 +66,9 @@ the input argument in the expanded path.
 * FIXED: The implementation of the `socket::server_accept/4` predicate for
 GNU Prolog.
 
+* FIXED: The implementation of the `os::is_absolute_file_name/1` predicate
+for ECLiPSe when running on Windows.
+
 * FIXED: The implementation of the `os::sleep/1` predicate for JIProlog.
 
 * FIXED: Bug in the `linda` library where a permission error would be thrown
