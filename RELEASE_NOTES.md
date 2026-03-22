@@ -180,6 +180,12 @@ alias clash with the new `permutations` library.
 
 * FIXED: Tests for the `hello_world` examples when run on Windows.
 
+Tests
+-----
+
+* FIXED: Tests for the `format/2-3` de facto standard predicates when run on
+Windows with backends that use CRLF instead of LF.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

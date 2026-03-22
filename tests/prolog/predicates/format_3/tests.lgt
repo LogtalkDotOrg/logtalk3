@@ -991,10 +991,29 @@
 		{format(out, "^~|~`.tabc~95t~10+$",[])},
 		^^text_output_assertion(out, '^...abc____$', Assertion).
 
-	test(lgt_format_3_tab_table_pip_0110_23, true(Assertion)) :-
-		^^set_text_output(out, ''),
-		{format(out, "~*+.~n~3+.~n~*+.~n", [3,3])},
-		^^text_output_assertion(out, '   .\n   .\n   .\n', Assertion).
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, b),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
+	)).
+
+		test(lgt_format_3_tab_table_pip_0110_23, true(Assertion)) :-
+			^^set_text_output(out, ''),
+			{format(out, "~*+.~n~3+.~n~*+.~n", [3,3])},
+			^^text_output_assertion(out, '   .\r\n   .\r\n   .\r\n', Assertion).
+
+	:- else.
+
+		test(lgt_format_3_tab_table_pip_0110_23, true(Assertion)) :-
+			^^set_text_output(out, ''),
+			{format(out, "~*+.~n~3+.~n~*+.~n", [3,3])},
+			^^text_output_assertion(out, '   .\n   .\n   .\n', Assertion).
+
+	:- endif.
 
 	% ~W control sequence
 
