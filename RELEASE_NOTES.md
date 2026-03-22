@@ -175,6 +175,8 @@ Examples
 * RENAMED: The `permutations` example to `list_permutations` to avoid a library
 alias clash with the new `permutations` library.
 
+* FIXED: Tests for the `hello_world` examples when run on Windows.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
