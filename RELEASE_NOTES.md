@@ -95,6 +95,9 @@ use CRLF instead of LF.
 * FIXED: Tests for the `time_scales` library when run on Windows with some
 backends.
 
+* FIXED: Repeated test name for the `hook_objects` library when running on
+Windows.
+
 Tools
 -----
 

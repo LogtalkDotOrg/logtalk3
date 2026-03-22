@@ -38,9 +38,9 @@ goal_expansion(X = 1, X = 2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:9:1,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2026-03-22,
 		comment is 'Unit tests for the "hook_objects" library.'
 	]).
 
@@ -269,7 +269,7 @@ goal_expansion(X = 1, X = 2).
 		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
-	test(write_to_stream_hook_1_01, true(Assertion)) :-
+	test(write_to_file_hook_1_01, true(Assertion)) :-
 		^^file_path('test_files/target1.pl', Path),
 		write_to_file_hook(Path)::term_expansion(begin_of_file, _),
 		write_to_file_hook(Path)::term_expansion(x + y, _),
