@@ -163,6 +163,9 @@ results summary will fail to account for all the tests that were run.
 * FIXED: Bug in the `logtalk_tester.ps1` PowerShell script that prevented
 using the ECLiPSe backend.
 
+* FIXED: Tests for the `debug_messages` tool when run on Windows with backends
+that use CRLF instead of LF.
+
 Examples
 --------
 

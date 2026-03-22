@@ -28,9 +28,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2019-01-16,
+		date is 2026-03-21,
 		comment is 'Unit tests for the "debug_messages" tool.'
 	]).
 
@@ -49,17 +49,43 @@
 		logtalk::asserta(message_prefix_stream(debug,    _, '', test_output)),
 		logtalk::asserta(message_prefix_stream(debug(_), _, '', test_output)).
 
-	test(debug_messages_enable_1_01, true(Assertion)) :-
-		enable(foo),
-		^^set_text_output(test_output, ''),
-		print_message(debug, foo, @debug_messages_enable_1_01),
-		^^text_output_assertion(test_output, 'debug_messages_enable_1_01\n', Assertion).
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, b),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
+	)).
 
-	test(debug_messages_enable_1_02, true(Assertion)) :-
-		enable(foo),
-		^^set_text_output(test_output, ''),
-		print_message(debug(group), foo, @debug_messages_enable_1_02),
-		^^text_output_assertion(test_output, 'debug_messages_enable_1_02\n', Assertion).
+		test(debug_messages_enable_1_01, true(Assertion)) :-
+			enable(foo),
+			^^set_text_output(test_output, ''),
+			print_message(debug, foo, @debug_messages_enable_1_01),
+			^^text_output_assertion(test_output, 'debug_messages_enable_1_01\r\n', Assertion).
+
+		test(debug_messages_enable_1_02, true(Assertion)) :-
+			enable(foo),
+			^^set_text_output(test_output, ''),
+			print_message(debug(group), foo, @debug_messages_enable_1_02),
+			^^text_output_assertion(test_output, 'debug_messages_enable_1_02\r\n', Assertion).
+
+	:- else.
+
+		test(debug_messages_enable_1_01, true(Assertion)) :-
+			enable(foo),
+			^^set_text_output(test_output, ''),
+			print_message(debug, foo, @debug_messages_enable_1_01),
+			^^text_output_assertion(test_output, 'debug_messages_enable_1_01\n', Assertion).
+
+		test(debug_messages_enable_1_02, true(Assertion)) :-
+			enable(foo),
+			^^set_text_output(test_output, ''),
+			print_message(debug(group), foo, @debug_messages_enable_1_02),
+			^^text_output_assertion(test_output, 'debug_messages_enable_1_02\n', Assertion).
+
+	:- endif.
 
 	test(debug_messages_disable_1_01, true(Assertion)) :-
 		disable(foo),
@@ -77,11 +103,31 @@
 		enable(foo),
 		findall(Component, enabled(Component), Components).
 
-	test(debug_messages_enable_2_01, true(Assertion)) :-
-		enable(baz, group),
-		^^set_text_output(test_output, ''),
-		print_message(debug(group), baz, @debug_messages_enable_2_01),
-		^^text_output_assertion(test_output, 'debug_messages_enable_2_01\n', Assertion).
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, b),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
+	)).
+
+		test(debug_messages_enable_2_01, true(Assertion)) :-
+			enable(baz, group),
+			^^set_text_output(test_output, ''),
+			print_message(debug(group), baz, @debug_messages_enable_2_01),
+			^^text_output_assertion(test_output, 'debug_messages_enable_2_01\r\n', Assertion).
+
+	:- else.
+
+		test(debug_messages_enable_2_01, true(Assertion)) :-
+			enable(baz, group),
+			^^set_text_output(test_output, ''),
+			print_message(debug(group), baz, @debug_messages_enable_2_01),
+			^^text_output_assertion(test_output, 'debug_messages_enable_2_01\n', Assertion).
+
+	:- endif.
 
 	test(debug_messages_enable_2_02, true(Assertion)) :-
 		enable(baz, group),
