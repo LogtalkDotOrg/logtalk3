@@ -92,6 +92,9 @@ predicate. Thanks to Felix Weitkämper for the bug report.
 * FIXED: Tests for the `format` library when run on Windows with backends that
 use CRLF instead of LF.
 
+* FIXED: Tests for the `time_scales` library when run on Windows with some
+backends.
+
 Tools
 -----
 

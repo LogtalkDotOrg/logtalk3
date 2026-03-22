@@ -23,13 +23,17 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-03-22,
 		comment is 'Unit tests for the "time_scales" library.'
 	]).
 
 	cover(time_scales).
+
+	cleanup :-
+		^^clean_file('test_files/time_scales_leap_snapshot.pl'),
+		^^clean_file('test_files/logtalk_time_scales_dut1_snapshot.pl').
 
 	test(time_scales_valid_scale_1_01, true) :-
 		time_scales::valid_scale(utc).
@@ -338,7 +342,7 @@
 		time_scales::clear_dut1_override.
 
 	test(time_scales_save_leap_seconds_entries_1_01, true(Source == override)) :-
-		Snapshot = '/tmp/logtalk_time_scales_leap_snapshot.pl',
+		^^file_path('test_files/time_scales_leap_snapshot.pl', Snapshot),
 		time_scales::clear_leap_seconds_override,
 		time_scales::save_leap_seconds_entries(Snapshot),
 		time_scales::load_leap_seconds_override(Snapshot),
@@ -346,7 +350,7 @@
 		time_scales::clear_leap_seconds_override.
 
 	test(time_scales_save_dut1_entries_1_01, true(Source == override)) :-
-		Snapshot = '/tmp/logtalk_time_scales_dut1_snapshot.pl',
+		^^file_path('test_files/logtalk_time_scales_dut1_snapshot.pl', Snapshot),
 		time_scales::clear_dut1_override,
 		time_scales::save_dut1_entries(Snapshot),
 		time_scales::load_dut1_override(Snapshot),
