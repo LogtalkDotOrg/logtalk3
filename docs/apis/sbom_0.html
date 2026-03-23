@@ -275,7 +275,9 @@
 <div class="line"><a class="reference internal" href="os_0.html#os-0"><span class="std std-ref">os</span></a></div>
 <div class="line"><a class="reference internal" href="packs_0.html#packs-0"><span class="std std-ref">packs</span></a></div>
 <div class="line"><a class="reference internal" href="term_io_0.html#term-io-0"><span class="std std-ref">term_io</span></a></div>
+<div class="line"><a class="reference internal" href="url_1.html#url-1"><span class="std std-ref">url(Representation)</span></a></div>
 <div class="line"><a class="reference internal" href="user_0.html#user-0"><span class="std std-ref">user</span></a></div>
+<div class="line"><a class="reference internal" href="uuid_0.html#uuid-0"><span class="std std-ref">uuid</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -301,8 +303,12 @@
 </ul>
 </li>
 <li><p><a class="reference internal" href="#protected-predicates" id="id6">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id7">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id8">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id7">Private predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#spdx-license-schema-1" id="id8"><code class="docutils literal notranslate"><span class="pre">spdx_license_schema_/1</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#operators" id="id9">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -398,8 +404,28 @@
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<section id="spdx-license-schema-1">
+<span id="sbom-0-spdx-license-schema-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">spdx_license_schema_/1</span></code></a><a class="headerlink" href="#spdx-license-schema-1" title="Link to this heading"></a></h3>
+<p>Caches the parsed schema used to validate SPDX license identifiers for CycloneDX exports.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">spdx_license_schema_(Schema)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">spdx_license_schema_(-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </section>
+</section>
+<hr class="docutils" />
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>

@@ -66,7 +66,8 @@
 	]).
 
 	:- uses(list, [
-		append/3
+		append/3,
+		member/2
 	]).
 
 	:- uses(json, [
@@ -101,6 +102,14 @@
 		directory/2
 	]).
 
+	:- uses(uuid, [
+		uuid_v4/1
+	]).
+
+	:- uses(url(atom), [
+		valid/1 as valid_url/1
+	]).
+
 	document(Document, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
@@ -128,9 +137,9 @@
 		^^option(format(Format), Options),
 		sbom_data(Data, Options),
 		(	Format == spdx ->
-			spdx_document(Document, Data)
+			spdx_document(Document, Data, Options)
 		;	Format == cdx ->
-			cyclonedx_document(Document, Data)
+			cyclonedx_document(Document, Data, Options)
 		;	fail
 		).
 
@@ -151,12 +160,9 @@
 		backend_package(BackendLicense, BackendMetadata, BackendPackage),
 		loaded_pack_packages(Options, PackPackages).
 
-	spdx_document(Document, data(Name, Created, Creators, DocumentNamespace, ApplicationPackage, LogtalkPackage, BackendPackage, PackPackages)) :-
-		CreationInfo = {
-			created-Created,
-			creators-Creators
-		},
-		packages_json([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], Packages),
+	spdx_document(Document, data(Name, Created, _, DocumentNamespace, ApplicationPackage, LogtalkPackage, BackendPackage, PackPackages), Options) :-
+		spdx_creation_info(CreationInfo, Created, Options),
+		packages_json([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], Options, Packages),
 		relationships_json(PackPackages, Relationships),
 		Document = {
 			spdxVersion-'SPDX-2.3',
@@ -170,15 +176,19 @@
 			relationships-Relationships
 		}.
 
-	cyclonedx_document(Document, data(_, Created, Creators, _, ApplicationPackage, LogtalkPackage, BackendPackage, PackPackages)) :-
-		cyclonedx_metadata(Created, Creators, ApplicationPackage, Metadata),
+	cyclonedx_document(Document, data(_, Created, Creators, _, ApplicationPackage, LogtalkPackage, BackendPackage, PackPackages), Options) :-
+		cyclonedx_serial_number(SerialNumber),
+		cyclonedx_metadata(Created, Creators, ApplicationPackage, Options, Metadata),
+		cyclonedx_bom_external_references(Options, BomExternalReferences),
 		cyclonedx_components_json([LogtalkPackage, BackendPackage| PackPackages], Components),
 		cyclonedx_dependencies_json([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], Dependencies),
 		Document = {
 			bomFormat-'CycloneDX',
 			specVersion-'1.6',
+			serialNumber-SerialNumber,
 			version-1,
 			metadata-Metadata,
+			externalReferences-BomExternalReferences,
 			components-Components,
 			dependencies-Dependencies
 		}.
@@ -191,21 +201,108 @@
 			creators-Creators
 		}.
 
-	creators([Creator], Options) :-
-		^^option(creator(Creator), Options).
+	spdx_creation_info(CreationInfo, Created, Options) :-
+		spdx_creators(Creators, Options),
+		CreationInfo = {
+			created-Created,
+			creators-Creators
+		}.
 
-	cyclonedx_metadata(Created, Creators, ApplicationPackage, Metadata) :-
+	spdx_creators([Creator], Options) :-
+		(   ^^option(creator(Creator), Options) ->
+			true
+		;   spdx_default_creator(Creator)
+		).
+
+	creators([Creator], Options) :-
+		(   ^^option(creator(Creator), Options) ->
+			true
+		;   cyclonedx_default_creator(Creator)
+		).
+
+	spdx_default_creator(Creator) :-
+		sbom_tool_version(Version),
+		atomic_list_concat(['Tool: Logtalk SBOM generator', Version], '-', Creator).
+
+	cyclonedx_default_creator('Logtalk SBOM generator').
+
+	cyclonedx_metadata(Created, Creators, ApplicationPackage, Options, Metadata) :-
 		cyclonedx_authors(Creators, Authors),
-		cyclonedx_component_json(ApplicationPackage, ApplicationComponent),
+		cyclonedx_tool_component(ToolComponent),
+		cyclonedx_bom_license(BomLicense),
+		cyclonedx_application_component_json(ApplicationPackage, Options, ApplicationComponent),
 		Metadata = {
 			timestamp-Created,
 			authors-Authors,
+			tools-{components-[ToolComponent]},
+			licenses-[BomLicense],
 			component-ApplicationComponent
 		}.
 
 	cyclonedx_authors([], []).
 	cyclonedx_authors([Creator| Creators], [{name-Creator}| Authors]) :-
 		cyclonedx_authors(Creators, Authors).
+
+	cyclonedx_serial_number(SerialNumber) :-
+		uuid_v4(UUID),
+		atom_concat('urn:uuid:', UUID, SerialNumber).
+
+	cyclonedx_tool_component(ToolComponent) :-
+		sbom_tool_version(Version),
+		cyclonedx_component_pairs(
+			metadata(absent, absent, absent, absent, absent),
+			none,
+			'logtalk:tool:sbom',
+			sbom,
+			Version,
+			'NOASSERTION',
+			'APPLICATION',
+			excluded,
+			'Logtalk SBOM generator',
+			Pairs
+		),
+		json_object(Pairs, ToolComponent).
+
+	cyclonedx_bom_license(BomLicense) :-
+		cyclonedx_license_json('CC0-1.0', BomLicense).
+
+	cyclonedx_bom_external_references(Options, References) :-
+		DefaultReferences = [
+			{type-vcs, url-'https://github.com/LogtalkDotOrg/logtalk3'},
+			{type-website, url-'https://logtalk.org/'}
+		],
+		findall(
+			{type-Type, url-URL},
+			member(bom_external_reference(Type, URL), Options),
+			CustomReferences
+		),
+		append(DefaultReferences, CustomReferences, References0),
+		sort(References0, References).
+
+	cyclonedx_application_component_json(package(Reference, Name, Version, License, Checksum, Metadata, Purpose, Description), Options, JSON) :-
+		cyclonedx_component_pairs(Metadata, Checksum, Reference, Name, Version, License, Purpose, required, Description, Pairs0),
+		application_cyclonedx_external_reference_pairs(Options, ExternalReferencePairs),
+		append(Pairs0, ExternalReferencePairs, Pairs),
+		json_object(Pairs, JSON).
+
+	application_cyclonedx_external_reference_pairs(Options, [externalReferences-References]) :-
+		findall(
+			{type-Type, url-URL},
+			member(application_external_reference(Type, URL), Options),
+			References0
+		),
+		sort(References0, References),
+		References \== [],
+		!.
+	application_cyclonedx_external_reference_pairs(_, []).
+
+	sbom_tool_version(Version) :-
+		this(This),
+		object_property(This, info(Info)),
+		member(version(Major:Minor:Patch), Info),
+		!,
+		atomic_list_concat([Major, Minor, Patch], '.', Version).
+	sbom_tool_version('1.0.0').
 
 	creation_timestamp(Created) :-
 		date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
@@ -269,7 +366,7 @@
 
 	backend_package(LicenseOption, Metadata, package('SPDXRef-Backend', BackendName, Version, License, none, Metadata, 'FRAMEWORK', 'Backend Prolog compiler/runtime')) :-
 		current_logtalk_flag(prolog_dialect, Backend),
-		backend(Backend, BackendName, DefaultLicense),
+		backend(Backend, BackendName, DefaultLicense, _Website),
 		(   LicenseOption == default ->
 			License = DefaultLicense
 		;	License = LicenseOption
@@ -277,20 +374,20 @@
 		current_logtalk_flag(prolog_version, BackendVersion),
 		version_atom(BackendVersion, Version).
 
-	backend(b,       'B-Prolog',       'NOASSERTION').
-	backend(ciao,    'Ciao Prolog',    'LGPL-2.1').
-	backend(cx,      'CxProlog',       'GPL-2.0-or-later').
-	backend(eclipse, 'ECLiPSe',        'MPL-1.1').
-	backend(gnu,     'GNU Prolog',     'LGPL-3.0-or-later').
-	backend(ji,      'JIProlog',       'NOASSERTION').
-	backend(quintus, 'Quintus Prolog', 'NOASSERTION').
-	backend(sicstus, 'SICStus Prolog', 'NOASSERTION').
-	backend(swi,     'SWI-Prolog',     'BSD-2-Clause').
-	backend(tau,     'Tau Prolog',     'BSD-3-Clause').
-	backend(trealla, 'Trealla Prolog', 'MIT').
-	backend(xsb,     'XSB',            'LGPL-2.0').
-	backend(xvm,     'XVM',            'NOASSERTION').
-	backend(yap,     'YAP',            'Artistic-2.0').
+	backend(b,       'B-Prolog',       'NOASSERTION',      'http://www.picat-lang.org/bprolog/').
+	backend(ciao,    'Ciao Prolog',    'LGPL-2.1',         'http://ciao-lang.org/').
+	backend(cx,      'CxProlog',       'GPL-2.0-or-later', 'http://ctp.di.fct.unl.pt/~amd/cxprolog/').
+	backend(eclipse, 'ECLiPSe',        'MPL-1.1',          'https://eclipseclp.org/').
+	backend(gnu,     'GNU Prolog',     'LGPL-3.0-or-later','https://www.gprolog.org/').
+	backend(ji,      'JIProlog',       'NOASSERTION',      'http://www.jiprolog.com/').
+	backend(quintus, 'Quintus Prolog', 'NOASSERTION',      'https://quintus.sics.se/').
+	backend(sicstus, 'SICStus Prolog', 'NOASSERTION',      'https://sicstus.sics.se/').
+	backend(swi,     'SWI-Prolog',     'BSD-2-Clause',     'https://www.swi-prolog.org/').
+	backend(tau,     'Tau Prolog',     'BSD-3-Clause',     'http://tau-prolog.org/').
+	backend(trealla, 'Trealla Prolog', 'MIT',              'https://github.com/trealla-prolog/trealla').
+	backend(xsb,     'XSB',            'LGPL-2.0',         'https://xsb.sourceforge.net/').
+	backend(xvm,     'XVM',            'NOASSERTION',      'https://permion.ai/').
+	backend(yap,     'YAP',            'Artistic-2.0',     'https://github.com/vscosta').
 
 	loaded_pack_packages(Options, PackPackages) :-
 		findall(
@@ -349,13 +446,13 @@
 		),
 		!.
 
-	packages_json([], []).
-	packages_json([Package| Packages], [JSON| JSONs]) :-
-		package_json(Package, JSON),
-		packages_json(Packages, JSONs).
+	packages_json([], _, []).
+	packages_json([Package| Packages], Options, [JSON| JSONs]) :-
+		package_json(Package, Options, JSON),
+		packages_json(Packages, Options, JSONs).
 
-	package_json(package(SPDXID, Name, Version, License, Checksum, Metadata, Purpose, Description), JSON) :-
-		package_json_pairs(Metadata, Checksum, SPDXID, Name, Version, License, Purpose, Description, Pairs),
+	package_json(package(SPDXID, Name, Version, License, Checksum, Metadata, Purpose, Description), Options, JSON) :-
+		package_json_pairs(Metadata, Checksum, SPDXID, Name, Version, License, Purpose, Description, Options, Pairs),
 		json_object(Pairs, JSON).
 
 	cyclonedx_components_json([], []).
@@ -364,26 +461,29 @@
 		cyclonedx_components_json(Packages, JSONs).
 
 	cyclonedx_component_json(package(Reference, Name, Version, License, Checksum, Metadata, Purpose, Description), JSON) :-
-		cyclonedx_component_pairs(Metadata, Checksum, Reference, Name, Version, License, Purpose, Description, Pairs),
+		cyclonedx_component_pairs(Metadata, Checksum, Reference, Name, Version, License, Purpose, required, Description, Pairs),
 		json_object(Pairs, JSON).
 
-	cyclonedx_component_pairs(Metadata, Checksum, Reference, Name, Version, License, Purpose, Description, Pairs) :-
+	cyclonedx_component_pairs(Metadata, Checksum, Reference, Name, Version, License, Purpose, Scope, Description, Pairs) :-
 		cyclonedx_component_type(Purpose, Type),
 		BasePairs = [
 			type-Type,
 			'bom-ref'-Reference,
 			name-Name,
 			version-Version,
+			scope-Scope,
 			description-Description
 		],
 		cyclonedx_hash_pairs(Checksum, HashPairs),
 		cyclonedx_license_pairs(License, LicensePairs),
+		cyclonedx_external_reference_pairs(Reference, Name, Version, ExternalReferencePairs),
 		cyclonedx_entity_pairs(Metadata, EntityPairs),
 		cyclonedx_property_pairs(Metadata, PropertyPairs),
 		append(BasePairs, HashPairs, Pairs0),
 		append(Pairs0, LicensePairs, Pairs1),
-		append(Pairs1, EntityPairs, Pairs2),
-		append(Pairs2, PropertyPairs, Pairs).
+		append(Pairs1, ExternalReferencePairs, Pairs2),
+		append(Pairs2, EntityPairs, Pairs3),
+		append(Pairs3, PropertyPairs, Pairs).
 
 	cyclonedx_component_type('APPLICATION', application).
 	cyclonedx_component_type('FRAMEWORK', framework).
@@ -391,6 +491,31 @@
 
 	cyclonedx_hash_pairs(none, []).
 	cyclonedx_hash_pairs(checksum('SHA256', Value), [hashes-[{alg-'SHA-256', content-Value}]]).
+
+	cyclonedx_external_reference_pairs(Reference, Name, Version, [externalReferences-References]) :-
+		findall(ExternalReference, cyclonedx_external_reference(Reference, Name, Version, ExternalReference), References0),
+		sort(References0, References),
+		References \== [],
+		!.
+	cyclonedx_external_reference_pairs(_, _, _, []).
+
+	cyclonedx_external_reference('SPDXRef-Logtalk', _, _, {type-website, url-'https://logtalk.org/'}).
+	cyclonedx_external_reference('SPDXRef-Backend', Name, _, {type-website, url-URL}) :-
+		backend(_, Name, _, URL).
+	cyclonedx_external_reference('logtalk:tool:sbom', _, _, {type-website, url-'https://logtalk.org/'}).
+	cyclonedx_external_reference(Reference, Name, Version, ExternalReference) :-
+		sub_atom(Reference, 0, _, _, 'SPDXRef-Pack-'),
+		cyclonedx_pack_external_reference(Name, Version, ExternalReference).
+
+	cyclonedx_pack_external_reference(Name, _Version, {type-website, url-Home}) :-
+		installed(Registry, Name, _VersionTerm, _Pinned),
+		registry_pack_object(Registry, Name, PackObject),
+		PackObject::home(Home).
+	cyclonedx_pack_external_reference(Name, Version, {type-distribution, url-URL}) :-
+		installed(Registry, Name, VersionTerm, _Pinned),
+		version_atom(VersionTerm, Version),
+		registry_pack_object(Registry, Name, PackObject),
+		PackObject::version(VersionTerm, _, URL, _, _, _).
 
 	cyclonedx_license_pairs('NOASSERTION', []).
 	cyclonedx_license_pairs(License, [licenses-[LicenseJSON]]) :-
@@ -597,12 +722,13 @@
 			dependsOn-DependsOn
 		}.
 
-	package_json_pairs(Metadata, Checksum, SPDXID, Name, Version, License, Purpose, Description, Pairs) :-
+	package_json_pairs(Metadata, Checksum, SPDXID, Name, Version, License, Purpose, Description, Options, Pairs) :-
+		spdx_download_location_pairs(SPDXID, Name, Version, DownloadLocationPairs),
 		BasePairs = [
 			'SPDXID'-SPDXID,
 			name-Name,
 			versionInfo-Version,
-			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
+			DownloadLocation,
 			filesAnalyzed- @false
 		],
 		LicensePairs = [
@@ -613,12 +739,81 @@
 			primaryPackagePurpose-Purpose,
 			summary-Description
 		],
+		DownloadLocationPairs = [DownloadLocation],
+		spdx_homepage_pairs(SPDXID, Name, HomepagePairs),
+		spdx_external_reference_pairs(SPDXID, Name, Version, Options, ExternalReferencePairs),
 		checksum_pairs(Checksum, ChecksumPairs),
 		metadata_pairs(Metadata, MetadataPairs),
 		append(BasePairs, ChecksumPairs, Pairs0),
 		append(Pairs0, LicensePairs, Pairs1),
-		append(Pairs1, MetadataPairs, Pairs2),
-		append(Pairs2, TrailingPairs, Pairs).
+		append(Pairs1, HomepagePairs, Pairs2),
+		append(Pairs2, ExternalReferencePairs, Pairs3),
+		append(Pairs3, MetadataPairs, Pairs4),
+		append(Pairs4, TrailingPairs, Pairs).
+
+	spdx_download_location_pairs(SPDXID, Name, Version, [downloadLocation-URL]) :-
+		(   spdx_pack_download_location(SPDXID, Name, Version, URL) ->
+			true
+		;   URL = 'http://spdx.org/rdf/terms#noassertion'
+		).
+
+	spdx_homepage_pairs(SPDXID, Name, [homepage-URL]) :-
+		spdx_pack_homepage(SPDXID, Name, URL),
+		!.
+	spdx_homepage_pairs(_, _, []).
+
+	spdx_external_reference_pairs(SPDXID, Name, Version, Options, [externalRefs-References]) :-
+		findall(Reference, spdx_package_external_reference(SPDXID, Name, Version, Options, Reference), References0),
+		sort(References0, References),
+		References \== [],
+		!.
+	spdx_external_reference_pairs(_, _, _, _, []).
+
+	spdx_package_external_reference('SPDXRef-Application', _, _, Options, Reference) :-
+		member(application_external_reference(Type, URL), Options),
+		spdx_external_reference_json(Type, URL, Reference).
+	spdx_package_external_reference('SPDXRef-Logtalk', _, _, _, Reference) :-
+		spdx_external_reference_json(website, 'https://logtalk.org/', Reference).
+	spdx_package_external_reference('SPDXRef-Backend', Name, _, _, Reference) :-
+		backend(_, Name, _, URL),
+		spdx_external_reference_json(website, URL, Reference).
+	spdx_package_external_reference(SPDXID, Name, Version, _, Reference) :-
+		sub_atom(SPDXID, 0, _, _, 'SPDXRef-Pack-'),
+		spdx_pack_external_reference(Name, Version, Type, URL),
+		spdx_external_reference_json(Type, URL, Reference).
+
+	spdx_pack_external_reference(Name, _Version, website, Home) :-
+		installed(Registry, Name, _VersionTerm, _Pinned),
+		registry_pack_object(Registry, Name, PackObject),
+		PackObject::home(Home),
+		Home \== none.
+	spdx_pack_external_reference(Name, Version, distribution, URL) :-
+		installed(Registry, Name, VersionTerm, _Pinned),
+		version_atom(VersionTerm, Version),
+		registry_pack_object(Registry, Name, PackObject),
+		PackObject::version(VersionTerm, _, URL, _, _, _),
+		URL \== none.
+
+	spdx_external_reference_json(Type, URL, {
+		referenceCategory-'OTHER',
+		referenceType-Type,
+		referenceLocator-URL
+	}).
+
+	spdx_pack_download_location(SPDXID, Name, Version, URL) :-
+		sub_atom(SPDXID, 0, _, _, 'SPDXRef-Pack-'),
+		installed(Registry, Name, VersionTerm, _Pinned),
+		version_atom(VersionTerm, Version),
+		registry_pack_object(Registry, Name, PackObject),
+		PackObject::version(VersionTerm, _, URL, _, _, _),
+		URL \== none.
+
+	spdx_pack_homepage(SPDXID, Name, URL) :-
+		sub_atom(SPDXID, 0, _, _, 'SPDXRef-Pack-'),
+		installed(Registry, Name, _VersionTerm, _Pinned),
+		registry_pack_object(Registry, Name, PackObject),
+		PackObject::home(URL),
+		URL \== none.
 
 	checksum_pairs(none, []).
 	checksum_pairs(checksum(Algorithm, Value), [checksums-[{algorithm-Algorithm, checksumValue-Value}]]).
@@ -722,7 +917,6 @@
 	default_option(logtalk_license('Apache-2.0')).
 	default_option(backend_license(default)).
 	default_option(namespace('https://logtalk.org/spdxdocs/logtalk-sbom')).
-	default_option(creator('Logtalk "sbom" tool')).
 	default_option(validate_export(false)).
 
 	valid_option(name(Name)) :-
@@ -750,6 +944,18 @@
 	valid_option(application_originator(Originator)) :-
 		atom(Originator),
 		Originator \== none.
+	valid_option(application_external_reference(Type, URL)) :-
+		atom(Type),
+		Type \== none,
+		atom(URL),
+		URL \== none,
+		valid_url(URL).
+	valid_option(bom_external_reference(Type, URL)) :-
+		atom(Type),
+		Type \== none,
+		atom(URL),
+		URL \== none,
+		valid_url(URL).
 	valid_option(logtalk_built_date(BuiltDate)) :-
 		atom(BuiltDate),
 		BuiltDate \== none.

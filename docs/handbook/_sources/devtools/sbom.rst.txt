@@ -48,6 +48,34 @@ document describing:
 - the installed packs that contributed loaded files to the current
   session
 
+For CycloneDX exports, the generated BOM also includes a
+``serialNumber`` and records the Logtalk ``sbom`` generator itself under
+``metadata.tools.components``. The BOM document license is exported as
+``metadata.licenses`` with the SPDX identifier ``CC0-1.0``. The
+CycloneDX BOM itself also exports top-level ``externalReferences`` for
+the Logtalk website and the Logtalk git repository.
+
+- ``bom_external_reference(Type, URL)`` Adds a top-level CycloneDX
+  ``externalReferences`` entry to the generated BOM. This option is
+  ignored for SPDX exports. It can be repeated to export multiple
+  references. The built-in Logtalk website and git repository references
+  are still exported by default. Runtime components are exported with
+  explicit CycloneDX ``scope`` ``required``, while the ``sbom``
+  generator listed under ``metadata.tools.components`` is exported with
+  ``scope`` ``excluded``. When available from existing metadata,
+  CycloneDX components also export ``externalReferences``: Logtalk and
+  the ``sbom`` tool export a website reference, the backend component
+  exports a website reference from the bundled backend table, and loaded
+  packs export their ``home/1`` and version source URL values as website
+  and distribution references. For SPDX exports, the default
+  ``creationInfo.creators`` entry is a versioned tool identifier derived
+  from the ``sbom`` tool version. When URL metadata is available, SPDX
+  packages also export ``externalRefs``: the Logtalk and backend
+  packages export website references, loaded packs export website and
+  distribution references, and ``application_external_reference/2``
+  options are mapped to SPDX package external references for the
+  application package.
+
 The public predicates are:
 
 - ``document/1``
@@ -73,7 +101,9 @@ Global/application options:
 - ``application_license(License)`` Sets the application license.
   Exported as the SPDX application package ``licenseConcluded`` and
   ``licenseDeclared`` fields and, unless the value is ``NOASSERTION``,
-  as the CycloneDX ``metadata.component.licenses`` entry. Default is
+  as the CycloneDX ``metadata.component.licenses`` entry, using
+  ``license.id`` for SPDX license identifiers, ``expression`` for SPDX
+  license expressions, and ``license.name`` otherwise. Default is
   ``NOASSERTION``.
 - ``application_built_date(Date)`` Sets the application build date.
   Exported as the SPDX application package ``builtDate`` field and as
@@ -101,14 +131,23 @@ Global/application options:
   convention, and also as the custom property
   ``logtalk:sbom:originator``. Default is not exporting this
   information.
+- ``application_external_reference(Type, URL)`` Adds a CycloneDX
+  ``metadata.component.externalReferences`` entry for the application
+  component and a SPDX application package ``externalRefs`` entry. For
+  SPDX exports, ``Type`` is used as the ``referenceType``, ``URL`` as
+  the ``referenceLocator``, and ``referenceCategory`` is set to
+  ``OTHER``. This option can be repeated to export multiple references.
+  Default is not exporting this information.
 - ``namespace(Namespace)`` Sets the base document namespace URI. A
   process and timestamp suffix is added automatically to guarantee
   uniqueness. This option only applies to SPDX exports
   (``documentNamespace``) and is ignored for CycloneDX exports. Default
   is ``https://logtalk.org/spdxdocs/logtalk-sbom``.
 - ``creator(Creator)`` Sets the SPDX ``creationInfo.creators`` entry and
-  the CycloneDX ``metadata.authors`` entry. Default is
-  ``Logtalk "sbom" tool``.
+  the CycloneDX ``metadata.authors`` entry. Default for SPDX exports is
+  the versioned tool identifier
+  ``Tool: Logtalk SBOM generator-<version>``. Default for CycloneDX
+  exports is ``Logtalk SBOM generator``.
 - ``validate_export(Boolean)`` When ``true``, validates the generated
   document against the bundled schema for the selected format before
   exporting it. Default is ``false``.
@@ -118,7 +157,9 @@ Logtalk options:
 - ``logtalk_license(License)`` Sets the Logtalk component license.
   Exported as the SPDX Logtalk package ``licenseConcluded`` and
   ``licenseDeclared`` fields and, unless the value is ``NOASSERTION``,
-  as the CycloneDX component ``licenses`` entry. Default is
+  as the CycloneDX component ``licenses`` entry, using ``license.id``
+  for SPDX license identifiers, ``expression`` for SPDX license
+  expressions, and ``license.name`` otherwise. Default is
   ``Apache-2.0``.
 - ``logtalk_built_date(Date)`` Sets the Logtalk build date. Exported as
   the SPDX Logtalk package ``builtDate`` field and as the CycloneDX
@@ -150,7 +191,9 @@ Backend options:
 - ``backend_license(License)`` Sets the backend component license.
   Exported as the SPDX backend package ``licenseConcluded`` and
   ``licenseDeclared`` fields and, unless the value is ``NOASSERTION``,
-  as the CycloneDX component ``licenses`` entry. Default is the license
+  as the CycloneDX component ``licenses`` entry, using ``license.id``
+  for SPDX license identifiers, ``expression`` for SPDX license
+  expressions, and ``license.name`` otherwise. Default is the license
   specified in the ``backend/3`` table.
 - ``backend_built_date(Date)`` Sets the backend build date. Exported as
   the SPDX backend package ``builtDate`` field and as the CycloneDX
@@ -182,13 +225,20 @@ Pack options:
 - ``pack_license(Pack, License)`` Sets the license for a loaded pack
   named ``Pack``. Exported as the SPDX pack package ``licenseConcluded``
   and ``licenseDeclared`` fields and, unless the value is
-  ``NOASSERTION``, as the CycloneDX component ``licenses`` entry.
-  Default for packs without an explicit option is the result of sending
-  the pack specification object the message ``license(License)``,
-  falling back to ``NOASSERTION`` when no license is available. Loaded
-  packs also export a SPDX package checksum and a CycloneDX component
-  hash when the pack specification defines it in the ``version/6``
-  predicate as the fourth argument.
+  ``NOASSERTION``, as the CycloneDX component ``licenses`` entry, using
+  ``license.id`` for SPDX license identifiers, ``expression`` for SPDX
+  license expressions, and ``license.name`` otherwise. Default for packs
+  without an explicit option is the result of sending the pack
+  specification object the message ``license(License)``, falling back to
+  ``NOASSERTION`` when no license is available. Loaded packs also export
+  a SPDX package ``downloadLocation`` from the pack specification
+  ``version/6`` third argument and, when available, a SPDX ``homepage``
+  from the pack specification ``home/1`` predicate. Pack ``home/1`` and
+  ``version/6`` URLs are also exported as SPDX package ``externalRefs``
+  with ``website`` and ``distribution`` ``referenceType`` values. Pack
+  checksums are exported as SPDX package checksums and CycloneDX
+  component hashes when the pack specification defines them in the
+  ``version/6`` predicate fourth argument.
 - ``pack_built_date(Pack, Date)`` Sets the build date for the loaded
   pack named ``Pack``. Exported as the SPDX pack package ``builtDate``
   field and as the CycloneDX custom property
@@ -228,10 +278,10 @@ Examples:
 
    | ?- sbom::export(file('sbom.spdx.json')).
 
-   | ?- sbom::export(file('sbom.cdx.json'), [format(cyclonedx)]).
+   | ?- sbom::export(file('sbom.cdx.json'), [format(cdx)]).
 
    | ?- sbom::export(atom(Atom), [
-           format(cyclonedx),
+           format(cdx),
            name(my_app),
            version('1.2.3'),
            application_license('MIT'),
@@ -242,6 +292,9 @@ Examples:
            application_valid_until_date('2027-03-23T00:00:00Z'),
            application_supplier('Organization: Example Application'),
            application_originator('Person: Application Maintainer'),
+           bom_external_reference(documentation, 'https://example.com/my_app/sbom'),
+           application_external_reference(website, 'https://example.com/my_app'),
+           application_external_reference(vcs, 'https://example.com/my_app.git'),
            logtalk_supplier('Organization: Logtalk.org'),
            backend_supplier('Organization: Backend Vendor'),
            pack_license(my_pack, 'MIT'),
@@ -256,3 +309,12 @@ extension for CycloneDX exports.
 See the ``sbom-example.spdx.json`` file for a representative SPDX
 export. See the ``sbom-example.cdx.json`` file for a representative
 CycloneDX export.
+
+Known issues
+------------
+
+The ECLiPSe and GNU Prolog backends fail several ``sbom`` tests and
+cannot be used for CycloneDX exports. The root cause is that both
+backends are limited to the US-ASCII charset, which prevents processing
+the SPDX/CycloneDX schema data required for CycloneDX license validation
+and export validation.

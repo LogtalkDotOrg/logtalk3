@@ -30,6 +30,8 @@
 	logtalk_load(os(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(term_io(loader)),
+	logtalk_load(url(loader)),
+	logtalk_load(uuid(loader)),
 	logtalk_load(packs(loader)),
 	logtalk_load(sbom, [debug(on), source_data(on)]),
 	logtalk_load(lgtunit(loader)),

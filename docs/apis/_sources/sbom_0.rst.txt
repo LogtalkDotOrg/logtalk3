@@ -31,7 +31,9 @@ This tool generates a Software Bill of Materials (SBOM) for an application.
 |    :ref:`os <os/0>`
 |    :ref:`packs <packs/0>`
 |    :ref:`term_io <term_io/0>`
+|    :ref:`url(Representation) <url/1>`
 |    :ref:`user <user/0>`
+|    :ref:`uuid <uuid/0>`
 
 | **Remarks:**
 |    (none)
@@ -130,7 +132,24 @@ Protected predicates
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: spdx_license_schema_/1
+.. _sbom/0::spdx_license_schema_/1:
+
+``spdx_license_schema_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Caches the parsed schema used to validate SPDX license identifiers for CycloneDX exports.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``spdx_license_schema_(Schema)``
+| **Mode and number of proofs:**
+|    ``spdx_license_schema_(-term)`` - ``zero_or_one``
+
+
+------------
 
 Operators
 ---------

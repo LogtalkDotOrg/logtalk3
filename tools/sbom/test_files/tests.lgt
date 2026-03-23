@@ -97,12 +97,13 @@
 			'SPDXID'-'SPDXRef-DOCUMENT',
 			name-'loaded-application',
 			documentNamespace-_,
-			creationInfo-{created-_, creators-['Logtalk "sbom" tool']},
+			creationInfo-{created-_, creators-[Creator]},
 			documentDescribes-['SPDXRef-Application'],
 			packages-Packages,
 			relationships-Relationships
 		},
 		^^assertion(ground(Document)),
+		^^assertion(sub_atom(Creator, 0, _, _, 'Tool: Logtalk SBOM generator-')),
 		memberchk({
 			'SPDXID'-'SPDXRef-Application',
 			name-'loaded-application',
@@ -122,9 +123,11 @@
 			filesAnalyzed- @false,
 			licenseConcluded-'Apache-2.0',
 			licenseDeclared-'Apache-2.0',
+			externalRefs-LogtalkExternalReferences,
 			primaryPackagePurpose-'FRAMEWORK',
 			summary-'Logtalk runtime'
 		}, Packages),
+		memberchk({referenceCategory-'OTHER', referenceType-website, referenceLocator-'https://logtalk.org/'}, LogtalkExternalReferences),
 		memberchk({
 			'SPDXID'-'SPDXRef-Backend',
 			name-_,
@@ -133,10 +136,12 @@
 			filesAnalyzed- @false,
 			licenseConcluded-BackendLicense,
 			licenseDeclared-BackendLicense,
+			externalRefs-BackendExternalReferences,
 			primaryPackagePurpose-'FRAMEWORK',
 			summary-'Backend Prolog compiler/runtime'
 		}, Packages),
 		^^assertion(atom(BackendLicense)),
+		memberchk({referenceCategory-'OTHER', referenceType-website, referenceLocator-_}, BackendExternalReferences),
 		memberchk({spdxElementId-'SPDXRef-DOCUMENT', relationshipType-'DESCRIBES', relatedSpdxElement-'SPDXRef-Application'}, Relationships),
 		memberchk({spdxElementId-'SPDXRef-Application', relationshipType-'DEPENDS_ON', relatedSpdxElement-'SPDXRef-Logtalk'}, Relationships),
 		memberchk({spdxElementId-'SPDXRef-Application', relationshipType-'DEPENDS_ON', relatedSpdxElement-'SPDXRef-Backend'}, Relationships).
@@ -205,6 +210,7 @@
 			filesAnalyzed- @false,
 			licenseConcluded-'Apache-2.0',
 			licenseDeclared-'Apache-2.0',
+			externalRefs-LogtalkExternalReferences,
 			builtDate-'2026-03-22T00:00:00Z',
 			releaseDate-'2026-03-22T00:00:00Z',
 			validUntilDate-'2027-03-22T00:00:00Z',
@@ -213,6 +219,7 @@
 			primaryPackagePurpose-'FRAMEWORK',
 			summary-_
 		}, Packages),
+		memberchk({referenceCategory-'OTHER', referenceType-website, referenceLocator-'https://logtalk.org/'}, LogtalkExternalReferences),
 		memberchk({
 			'SPDXID'-'SPDXRef-Backend',
 			name-_,
@@ -221,6 +228,7 @@
 			filesAnalyzed- @false,
 			licenseConcluded-'BSD-2-Clause',
 			licenseDeclared-'BSD-2-Clause',
+			externalRefs-BackendExternalReferences,
 			builtDate-'2026-03-21T00:00:00Z',
 			releaseDate-'2026-03-21T00:00:00Z',
 			validUntilDate-'2027-03-21T00:00:00Z',
@@ -228,7 +236,8 @@
 			originator-'Organization: Backend Vendor',
 			primaryPackagePurpose-'FRAMEWORK',
 			summary-_
-		}, Packages).
+		}, Packages),
+		memberchk({referenceCategory-'OTHER', referenceType-website, referenceLocator-_}, BackendExternalReferences).
 
 	test(sbom_document_03, deterministic) :-
 		document(Document),
@@ -248,14 +257,18 @@
 			'SPDXID'-'SPDXRef-Pack-sbom_fixture_pack',
 			name-sbom_fixture_pack,
 			versionInfo-'1.0.0',
-			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
+			downloadLocation-'file://sbom_fixture_pack',
 			filesAnalyzed- @false,
 			checksums-[{algorithm-'SHA256', checksumValue-'0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'}],
 			licenseConcluded-'Apache-2.0',
 			licenseDeclared-'Apache-2.0',
+			homepage-'file://sbom_fixture_pack',
+			externalRefs-PackExternalReferences,
 			primaryPackagePurpose-'LIBRARY',
 			summary-'Loaded Logtalk pack sbom_fixture_pack'
 		}, Packages),
+		memberchk({referenceCategory-'OTHER', referenceType-website, referenceLocator-'file://sbom_fixture_pack'}, PackExternalReferences),
+		memberchk({referenceCategory-'OTHER', referenceType-distribution, referenceLocator-'file://sbom_fixture_pack'}, PackExternalReferences),
 		memberchk({
 			spdxElementId-'SPDXRef-Application',
 			relationshipType-'DEPENDS_ON',
@@ -287,11 +300,13 @@
 			'SPDXID'-'SPDXRef-Pack-sbom_fixture_pack',
 			name-sbom_fixture_pack,
 			versionInfo-'1.0.0',
-			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
+			downloadLocation-'file://sbom_fixture_pack',
 			filesAnalyzed- @false,
 			checksums-[{algorithm-'SHA256', checksumValue-'0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'}],
 			licenseConcluded-'Zlib',
 			licenseDeclared-'Zlib',
+			homepage-'file://sbom_fixture_pack',
+			externalRefs-PackExternalReferences,
 			builtDate-'2026-03-20T00:00:00Z',
 			releaseDate-'2026-03-20T00:00:00Z',
 			validUntilDate-'2027-03-20T00:00:00Z',
@@ -300,6 +315,8 @@
 			primaryPackagePurpose-'LIBRARY',
 			summary-'Loaded Logtalk pack sbom_fixture_pack'
 		}, Packages),
+		memberchk({referenceCategory-'OTHER', referenceType-website, referenceLocator-'file://sbom_fixture_pack'}, PackExternalReferences),
+		memberchk({referenceCategory-'OTHER', referenceType-distribution, referenceLocator-'file://sbom_fixture_pack'}, PackExternalReferences),
 		memberchk({
 			spdxElementId-'SPDXRef-Application',
 			relationshipType-'DEPENDS_ON',
@@ -324,13 +341,17 @@
 			'SPDXID'-'SPDXRef-Pack-sbom_fixture_no_checksum_pack',
 			name-sbom_fixture_no_checksum_pack,
 			versionInfo-'1.0.0',
-			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
+			downloadLocation-'file://sbom_fixture_no_checksum_pack',
 			filesAnalyzed- @false,
 			licenseConcluded-'MIT',
 			licenseDeclared-'MIT',
+			homepage-'file://sbom_fixture_no_checksum_pack',
+			externalRefs-PackExternalReferences,
 			primaryPackagePurpose-'LIBRARY',
 			summary-'Loaded Logtalk pack sbom_fixture_no_checksum_pack'
 		}, Packages),
+		memberchk({referenceCategory-'OTHER', referenceType-website, referenceLocator-'file://sbom_fixture_no_checksum_pack'}, PackExternalReferences),
+		memberchk({referenceCategory-'OTHER', referenceType-distribution, referenceLocator-'file://sbom_fixture_no_checksum_pack'}, PackExternalReferences),
 		memberchk({
 			spdxElementId-'SPDXRef-Application',
 			relationshipType-'DEPENDS_ON',
@@ -366,43 +387,104 @@
 
 	test(sbom_document_06, deterministic) :-
 		document(Document, [format(cdx)]),
+		current_logtalk_flag(prolog_dialect, Backend),
+		sbom<<backend(Backend, _, BackendLicense, BackendWebsite),
 		Document = {
 			bomFormat-'CycloneDX',
 			specVersion-'1.6',
+			serialNumber-SerialNumber,
 			version-1,
 			metadata-Metadata,
+			externalReferences-BomExternalReferences,
 			components-Components,
 			dependencies-Dependencies
 		},
 		^^assertion(ground(Document)),
+		^^assertion(sub_atom(SerialNumber, 0, _, _, 'urn:uuid:')),
+		memberchk({type-vcs, url-'https://github.com/LogtalkDotOrg/logtalk3'}, BomExternalReferences),
+		memberchk({type-website, url-'https://logtalk.org/'}, BomExternalReferences),
 		Metadata = {
 			timestamp-_,
-			authors-[{name-'Logtalk "sbom" tool'}],
+			authors-[{name-'Logtalk SBOM generator'}],
+			tools-{components-[ToolComponent]},
+			licenses-[{license-{id-'CC0-1.0'}}],
 			component-{
 				type-application,
 				'bom-ref'-'SPDXRef-Application',
 				name-'loaded-application',
 				version-'0.0.0',
+				scope-required,
 				description-_
 			}
 		},
+		ToolComponent = {
+			type-application,
+			'bom-ref'-'logtalk:tool:sbom',
+			name-sbom,
+			version-_,
+			scope-excluded,
+			description-'Logtalk SBOM generator',
+			externalReferences-ToolExternalReferences
+		},
+		memberchk({type-website, url-'https://logtalk.org/'}, ToolExternalReferences),
 		memberchk({
 			type-framework,
 			'bom-ref'-'SPDXRef-Logtalk',
 			name-'Logtalk',
 			version-_,
+			scope-required,
 			description-'Logtalk runtime',
-			licenses-[{license-{id-'Apache-2.0'}}]
+			licenses-[{license-{id-'Apache-2.0'}}],
+			externalReferences-LogtalkExternalReferences
 		}, Components),
+		memberchk({type-website, url-'https://logtalk.org/'}, LogtalkExternalReferences),
+		(   BackendLicense == 'NOASSERTION' ->
+			memberchk({
+				type-framework,
+				'bom-ref'-'SPDXRef-Backend',
+				name-_,
+				version-_,
+				scope-required,
+				description-'Backend Prolog compiler/runtime',
+				externalReferences-BackendExternalReferences
+			}, Components)
+		;   memberchk({
+				type-framework,
+				'bom-ref'-'SPDXRef-Backend',
+				name-_,
+				version-_,
+				scope-required,
+				description-'Backend Prolog compiler/runtime',
+				licenses-[{license-{id-BackendLicense}}],
+				externalReferences-BackendExternalReferences
+			}, Components)
+		),
+		memberchk({type-website, url-BackendWebsite}, BackendExternalReferences),
 		memberchk({
 			type-library,
 			'bom-ref'-'SPDXRef-Pack-sbom_fixture_pack',
 			name-sbom_fixture_pack,
 			version-'1.0.0',
+			scope-required,
 			description-'Loaded Logtalk pack sbom_fixture_pack',
 			hashes-[{alg-'SHA-256', content-'0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'}],
-			licenses-[{license-{id-'Apache-2.0'}}]
+			licenses-[{license-{id-'Apache-2.0'}}],
+			externalReferences-PackExternalReferences
 		}, Components),
+		memberchk({type-distribution, url-'file://sbom_fixture_pack'}, PackExternalReferences),
+		memberchk({type-website, url-'file://sbom_fixture_pack'}, PackExternalReferences),
+		memberchk({
+			type-library,
+			'bom-ref'-'SPDXRef-Pack-sbom_fixture_no_checksum_pack',
+			name-sbom_fixture_no_checksum_pack,
+			version-'1.0.0',
+			scope-required,
+			description-'Loaded Logtalk pack sbom_fixture_no_checksum_pack',
+			licenses-[{license-{id-'MIT'}}],
+			externalReferences-NoChecksumPackExternalReferences
+		}, Components),
+		memberchk({type-distribution, url-'file://sbom_fixture_no_checksum_pack'}, NoChecksumPackExternalReferences),
+		memberchk({type-website, url-'file://sbom_fixture_no_checksum_pack'}, NoChecksumPackExternalReferences),
 		memberchk({
 			ref-'SPDXRef-Application',
 			dependsOn-ApplicationDependsOn
@@ -423,8 +505,10 @@
 		JSON = {
 			bomFormat-'CycloneDX',
 			specVersion-'1.6',
+			serialNumber-_,
 			version-1,
 			metadata-_,
+			externalReferences-_,
 			components-_,
 			dependencies-_
 		},
@@ -440,19 +524,24 @@
 		Document = {
 			bomFormat-'CycloneDX',
 			specVersion-'1.6',
+			serialNumber-_,
 			version-1,
 			metadata-Metadata,
+			externalReferences-_,
 			components-_,
 			dependencies-_
 		},
 		Metadata = {
 			timestamp-_,
 			authors-_,
+			tools-_,
+			licenses-[{license-{id-'CC0-1.0'}}],
 			component-{
 				type-application,
 				'bom-ref'-'SPDXRef-Application',
 				name-'loaded-application',
 				version-'0.0.0',
+				scope-required,
 				description-_,
 				licenses-[{license-{name-'Acme Software License'}}]
 			}
@@ -467,23 +556,114 @@
 		Document = {
 			bomFormat-'CycloneDX',
 			specVersion-'1.6',
+			serialNumber-_,
 			version-1,
 			metadata-Metadata,
+			externalReferences-_,
 			components-_,
 			dependencies-_
 		},
 		Metadata = {
 			timestamp-_,
 			authors-_,
+			tools-_,
+			licenses-[{license-{id-'CC0-1.0'}}],
 			component-{
 				type-application,
 				'bom-ref'-'SPDXRef-Application',
 				name-'loaded-application',
 				version-'0.0.0',
+				scope-required,
 				description-_,
 				licenses-[{expression-'Apache-2.0 AND MIT'}]
 			}
 		}.
+
+	test(sbom_document_09, deterministic) :-
+		document(Document, [
+			format(cdx),
+			application_external_reference(website, 'https://example.com/app'),
+			application_external_reference(vcs, 'https://example.com/example-app.git')
+		]),
+		Document = {
+			bomFormat-'CycloneDX',
+			specVersion-'1.6',
+			serialNumber-_,
+			version-1,
+			metadata-Metadata,
+			externalReferences-_,
+			components-_,
+			dependencies-_
+		},
+		Metadata = {
+			timestamp-_,
+			authors-_,
+			tools-_,
+			licenses-[{license-{id-'CC0-1.0'}}],
+			component-{
+				type-application,
+				'bom-ref'-'SPDXRef-Application',
+				name-'loaded-application',
+				version-'0.0.0',
+				scope-required,
+				description-_,
+				externalReferences-ApplicationExternalReferences
+			}
+		},
+		memberchk({type-vcs, url-'https://example.com/example-app.git'}, ApplicationExternalReferences),
+		memberchk({type-website, url-'https://example.com/app'}, ApplicationExternalReferences).
+
+	test(sbom_document_10, deterministic) :-
+		document(Document, [
+			format(cdx),
+			bom_external_reference(documentation, 'https://example.com/sbom-docs'),
+			bom_external_reference(website, 'https://example.com/sbom-home')
+		]),
+		Document = {
+			bomFormat-'CycloneDX',
+			specVersion-'1.6',
+			serialNumber-_,
+			version-1,
+			metadata-_,
+			externalReferences-BomExternalReferences,
+			components-_,
+			dependencies-_
+		},
+		memberchk({type-vcs, url-'https://github.com/LogtalkDotOrg/logtalk3'}, BomExternalReferences),
+		memberchk({type-website, url-'https://logtalk.org/'}, BomExternalReferences),
+		memberchk({type-documentation, url-'https://example.com/sbom-docs'}, BomExternalReferences),
+		memberchk({type-website, url-'https://example.com/sbom-home'}, BomExternalReferences).
+
+	test(sbom_document_11, deterministic) :-
+		document(Document, [
+			application_external_reference(website, 'https://example.com/app'),
+			application_external_reference(vcs, 'https://example.com/example-app.git')
+		]),
+		Document = {
+			spdxVersion-'SPDX-2.3',
+			dataLicense-'CC0-1.0',
+			'SPDXID'-'SPDXRef-DOCUMENT',
+			name-'loaded-application',
+			documentNamespace-_,
+			creationInfo-_,
+			documentDescribes-['SPDXRef-Application'],
+			packages-Packages,
+			relationships-_
+		},
+		memberchk({
+			'SPDXID'-'SPDXRef-Application',
+			name-'loaded-application',
+			versionInfo-'0.0.0',
+			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
+			filesAnalyzed- @false,
+			licenseConcluded-'NOASSERTION',
+			licenseDeclared-'NOASSERTION',
+			externalRefs-ApplicationExternalReferences,
+			primaryPackagePurpose-'APPLICATION',
+			summary-_
+		}, Packages),
+		memberchk({referenceCategory-'OTHER', referenceType-website, referenceLocator-'https://example.com/app'}, ApplicationExternalReferences),
+		memberchk({referenceCategory-'OTHER', referenceType-vcs, referenceLocator-'https://example.com/example-app.git'}, ApplicationExternalReferences).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
