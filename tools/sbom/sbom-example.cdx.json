@@ -1,0 +1,68 @@
+{
+    "bomFormat": "CycloneDX",
+    "specVersion": "1.6",
+    "version": 1,
+    "metadata": {
+        "timestamp": "2026-03-23T14:53:59Z",
+        "authors": [
+            {
+                "name": "Logtalk \"sbom\" tool"
+            }
+        ],
+        "component": {
+            "type": "application",
+            "bom-ref": "SPDXRef-Application",
+            "name": "State-space searching framework",
+            "version": "1.4.0",
+            "description": "Logtalk application currently loaded in this session"
+        }
+    },
+    "components": [
+        {
+            "type": "framework",
+            "bom-ref": "SPDXRef-Logtalk",
+            "name": "Logtalk",
+            "version": "3.99.0-b01",
+            "description": "Logtalk runtime",
+            "licenses": [
+                {
+                    "license": {
+                        "name": "Apache-2.0"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "framework",
+            "bom-ref": "SPDXRef-Backend",
+            "name": "SWI-Prolog",
+            "version": "10.1.5",
+            "description": "Backend Prolog compiler/runtime",
+            "licenses": [
+                {
+                    "license": {
+                        "name": "BSD-2-Clause"
+                    }
+                }
+            ]
+        }
+    ],
+    "dependencies": [
+        {
+            "ref": "SPDXRef-Application",
+            "dependsOn": [
+                "SPDXRef-Logtalk",
+                "SPDXRef-Backend"
+            ]
+        },
+        {
+            "ref": "SPDXRef-Logtalk",
+            "dependsOn": [
+                "SPDXRef-Backend"
+            ]
+        },
+        {
+            "ref": "SPDXRef-Backend"
+        }
+    ]
+}
