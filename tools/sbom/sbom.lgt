@@ -1,0 +1,306 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- object(sbom,
+	imports(options)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-03-23,
+		comment is 'This tool generates a Software Bill of Materials (SBOM) for an application.'
+	]).
+
+	:- public(document/2).
+	:- mode(document(-compound, +list(compound)), one).
+	:- info(document/2, [
+		comment is 'Returns an SPDX 2.3 JSON term describing the currently loaded application using the given options.',
+		argnames is ['Document', 'Options']
+	]).
+
+	:- public(document/1).
+	:- mode(document(-compound), one).
+	:- info(document/1, [
+		comment is 'Returns an SPDX 2.3 JSON term describing the currently loaded application using default options.',
+		argnames is ['Document']
+	]).
+
+	:- public(export/2).
+	:- mode(export(++compound, +list(compound)), one).
+	:- info(export/2, [
+		comment is 'Exports an SPDX 2.3 JSON document describing the currently loaded application to the specified sink using the given options.',
+		argnames is ['Sink', 'Options']
+	]).
+
+	:- public(export/1).
+	:- mode(export(++compound), one).
+	:- info(export/1, [
+		comment is 'Exports an SPDX 2.3 JSON document describing the currently loaded application to the specified sink using default options.',
+		argnames is ['Sink']
+	]).
+
+	:- uses(list, [
+		append/3
+	]).
+
+	:- uses(json, [
+		generate/2 as json_generate/2
+	]).
+
+	:- uses(json_schema, [
+		parse/2 as json_schema_parse/2,
+		validate/2 as json_schema_validate/2
+	]).
+
+	:- uses(term_io, [
+		format_to_atom/3,
+		write_term_to_atom/3
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2,
+		atomic_list_concat/3
+	]).
+
+	:- uses(os, [
+		date_time/7,
+		decompose_file_name/3,
+		path_concat/3,
+		pid/1,
+		wall_time/1
+	]).
+
+	:- uses(packs, [
+		installed/4,
+		directory/2
+	]).
+
+	document(Document, UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		spdx_document(Document, Options).
+
+	document(Document) :-
+		document(Document, []).
+
+	export(Sink, UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		spdx_document(Document, Options),
+		(^^option(validate_export(true), Options) ->
+			validate_document(Document)
+		;	true
+		),
+		json_generate(Sink, Document).
+
+	export(Sink) :-
+		export(Sink, []).
+
+	spdx_document(Document, Options) :-
+		^^option(name(Name), Options),
+		^^option(version(Version), Options),
+		creation_info(CreationInfo, Options),
+		document_namespace(DocumentNamespace, Options),
+		application_package(Name, Version, ApplicationPackage),
+		logtalk_package(LogtalkPackage),
+		backend_package(BackendPackage),
+		loaded_pack_packages(PackPackages),
+		packages_json([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], Packages),
+		relationships_json(PackPackages, Relationships),
+		Document = {
+			spdxVersion-'SPDX-2.3',
+			dataLicense-'CC0-1.0',
+			'SPDXID'-'SPDXRef-DOCUMENT',
+			name-Name,
+			documentNamespace-DocumentNamespace,
+			creationInfo-CreationInfo,
+			documentDescribes-['SPDXRef-Application'],
+			packages-Packages,
+			relationships-Relationships
+		}.
+
+	creation_info(CreationInfo, Options) :-
+		creation_timestamp(Created),
+		creators(Creators, Options),
+		CreationInfo = {
+			created-Created,
+			creators-Creators
+		}.
+
+	creators([Creator], Options) :-
+		^^option(creator(Creator), Options).
+
+	creation_timestamp(Created) :-
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
+		format_to_atom('~|~`0t~d~4+-~|~`0t~d~2+-~|~`0t~d~2+T~|~`0t~d~2+:~|~`0t~d~2+:~|~`0t~d~2+Z', [Year, Month, Day, Hours, Minutes, Seconds], Created).
+
+	document_namespace(DocumentNamespace, Options) :-
+		^^option(namespace(BaseNamespace), Options),
+		pid(PID),
+		wall_time(Time),
+		TimeInteger is truncate(Time * 1000),
+		atomic_list_concat([PID, TimeInteger], '-', Suffix),
+		atomic_list_concat([BaseNamespace, Suffix], '/', DocumentNamespace).
+
+	application_package(Name, Version, package('SPDXRef-Application', Name, Version, 'APPLICATION', 'Logtalk application currently loaded in this session')).
+
+	logtalk_package(package('SPDXRef-Logtalk', 'Logtalk', Version, 'FRAMEWORK', 'Logtalk runtime')) :-
+		current_logtalk_flag(version_data, logtalk(Major, Minor, Patch, Status)),
+		version_atom(logtalk(Major, Minor, Patch, Status), Version).
+
+	backend_package(package('SPDXRef-Backend', BackendName, Version, 'FRAMEWORK', 'Backend Prolog compiler/runtime')) :-
+		current_logtalk_flag(prolog_dialect, Backend),
+		backend(Backend, BackendName),
+		current_logtalk_flag(prolog_version, BackendVersion),
+		version_atom(BackendVersion, Version).
+
+	backend(b,       'B-Prolog').
+	backend(ciao,    'Ciao Prolog').
+	backend(cx,      'CxProlog').
+	backend(eclipse, 'ECLiPSe').
+	backend(gnu,     'GNU Prolog').
+	backend(ji,      'JIProlog').
+	backend(quintus, 'Quintus Prolog').
+	backend(sicstus, 'SICStus Prolog').
+	backend(swi,     'SWI-Prolog').
+	backend(tau,     'Tau Prolog').
+	backend(trealla, 'Trealla Prolog').
+	backend(xsb,     'XSB').
+	backend(xvm,     'XVM').
+	backend(yap,     'YAP').
+
+	loaded_pack_packages(PackPackages) :-
+		findall(
+			package(SPDXID, Pack, VersionAtom, 'LIBRARY', Description),
+			loaded_pack_package(SPDXID, Pack, VersionAtom, Description),
+			PackPackages0
+		),
+		sort(PackPackages0, PackPackages).
+
+	loaded_pack_package(SPDXID, Pack, VersionAtom, Description) :-
+		installed(_Registry, Pack, Version, _Pinned),
+		directory(Pack, PackDirectory),
+		loaded_from_pack_directory(PackDirectory),
+		version_atom(Version, VersionAtom),
+		atomic_list_concat(['SPDXRef-Pack-', Pack], SPDXID),
+		atomic_list_concat(['Loaded Logtalk pack ', Pack], Description).
+
+	loaded_from_pack_directory(PackDirectory) :-
+		atom_concat(PackDirectory, '/', Prefix),
+		logtalk::loaded_file_property(_, directory(LoadedDirectory)),
+		(LoadedDirectory == PackDirectory ; sub_atom(LoadedDirectory, 0, _, _, Prefix)),
+		!.
+
+	packages_json([], []).
+	packages_json([Package| Packages], [JSON| JSONs]) :-
+		package_json(Package, JSON),
+		packages_json(Packages, JSONs).
+
+	package_json(package(SPDXID, Name, Version, Purpose, Description), JSON) :-
+		JSON = {
+			'SPDXID'-SPDXID,
+			name-Name,
+			versionInfo-Version,
+			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
+			filesAnalyzed- @false,
+			licenseConcluded-'NOASSERTION',
+			licenseDeclared-'NOASSERTION',
+			primaryPackagePurpose-Purpose,
+			summary-Description
+		}.
+
+	relationships_json(PackPackages, Relationships) :-
+		base_relationships(BaseRelationships),
+		pack_relationships(PackPackages, PackRelationships),
+		append(BaseRelationships, PackRelationships, Relationships).
+
+	base_relationships([
+		{spdxElementId-'SPDXRef-DOCUMENT', relationshipType-'DESCRIBES', relatedSpdxElement-'SPDXRef-Application'},
+		{spdxElementId-'SPDXRef-Application', relationshipType-'DEPENDS_ON', relatedSpdxElement-'SPDXRef-Logtalk'},
+		{spdxElementId-'SPDXRef-Application', relationshipType-'DEPENDS_ON', relatedSpdxElement-'SPDXRef-Backend'},
+		{spdxElementId-'SPDXRef-Logtalk', relationshipType-'DEPENDS_ON', relatedSpdxElement-'SPDXRef-Backend'}
+	]).
+
+	pack_relationships([], []).
+	pack_relationships([package(SPDXID, _, _, _, _)| PackPackages], [Relationship| Relationships]) :-
+		Relationship = {
+			spdxElementId-'SPDXRef-Application',
+			relationshipType-'DEPENDS_ON',
+			relatedSpdxElement-SPDXID
+		},
+		pack_relationships(PackPackages, Relationships).
+
+	validate_document(Document) :-
+		schema_path(Path),
+		json_schema_parse(file(Path), Schema),
+		json_schema_validate(Schema, Document).
+
+	schema_path(Path) :-
+		object_property(sbom, file(File)),
+		decompose_file_name(File, Directory, _),
+		path_concat(Directory, 'spdx-schema.json', Path).
+
+	version_atom(v(Major, Minor, Patch), Version) :-
+		!,
+		atomic_list_concat([Major, Minor, Patch], '.', Version).
+	version_atom(logtalk(Major, Minor, Patch, Status), Version) :-
+		!,
+		atomic_list_concat([Major, Minor, Patch], '.', BaseVersion),
+		atomic_list_concat([BaseVersion, Status], '-', Version).
+	version_atom(Major:Minor:Patch:Status, Version) :-
+		!,
+		atomic_list_concat([Major, Minor, Patch], '.', BaseVersion),
+		atomic_list_concat([BaseVersion, Status], '-', Version).
+	version_atom(Major:Minor:Patch, Version) :-
+		!,
+		atomic_list_concat([Major, Minor, Patch], '.', Version).
+	version_atom(Major:Minor, Version) :-
+		!,
+		atomic_list_concat([Major, Minor], '.', Version).
+	version_atom(Version, VersionAtom) :-
+		atom(Version),
+		!,
+		VersionAtom = Version.
+	version_atom(Version, VersionAtom) :-
+		number(Version),
+		!,
+		write_term_to_atom(Version, VersionAtom, []).
+	version_atom(Version, VersionAtom) :-
+		write_term_to_atom(Version, VersionAtom, [quoted(true)]).
+
+	default_option(name('loaded-application')).
+	default_option(version('0.0.0')).
+	default_option(namespace('https://logtalk.org/spdxdocs/logtalk-sbom')).
+	default_option(creator('Logtalk "sbom" tool')).
+	default_option(validate_export(false)).
+
+	valid_option(name(Name)) :-
+		atom(Name).
+	valid_option(version(Version)) :-
+		atom(Version).
+	valid_option(namespace(Namespace)) :-
+		atom(Namespace).
+	valid_option(creator(Creator)) :-
+		atom(Creator).
+	valid_option(validate_export(true)).
+	valid_option(validate_export(false)).
+
+:- end_object.

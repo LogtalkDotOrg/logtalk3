@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sbom &mdash; Logtalk 3.99.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8c56e3d9"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tutor" href="tutor.html" />
+    <link rel="prev" title="profiler" href="profiler.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.99.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asdf.html"><code class="docutils literal notranslate"><span class="pre">asdf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_metrics.html"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dead_code_scanner.html"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug_messages.html"><code class="docutils literal notranslate"><span class="pre">debug_messages</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugger.html"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagrams.html"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="doclet.html"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="help.html"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="issue_creator.html"><code class="docutils literal notranslate"><span class="pre">issue_creator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lgtdoc.html"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lgtunit.html"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linter.html"><code class="docutils literal notranslate"><span class="pre">linter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="make.html"><code class="docutils literal notranslate"><span class="pre">make</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutation_testing.html"><code class="docutils literal notranslate"><span class="pre">mutation_testing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="packs.html"><code class="docutils literal notranslate"><span class="pre">packs</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ports_profiler.html"><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiler.html"><code class="docutils literal notranslate"><span class="pre">profiler</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">sbom</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutor.html"><code class="docutils literal notranslate"><span class="pre">tutor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrapper.html"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../apis/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Developer Tools</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">sbom</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/devtools/sbom.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sbom">
+<span id="library-sbom"></span><h1><code class="docutils literal notranslate"><span class="pre">sbom</span></code><a class="headerlink" href="#sbom" title="Link to this heading"></a></h1>
+<p>This tool generates a Software Bill of Materials (SBOM) for an
+application, exported as a JSON file in the ISO/IEC 5962:2021 standard
+SPDX 2.3 format:</p>
+<p><a class="reference external" href="https://www.iso.org/standard/81870.html">https://www.iso.org/standard/81870.html</a></p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>This tool API documentation is available at:</p>
+<p><a class="reference external" href="../../apis/library_index.html#sbom">../../apis/library_index.html#sbom</a></p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>This tool can be loaded using the query:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(sbom(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To run the tool tests, use the query:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(sbom(tester)).
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>The tool inspects the current Logtalk session and generates an SPDX
+document describing:</p>
+<ul class="simple">
+<li><p>the loaded application</p></li>
+<li><p>the Logtalk version</p></li>
+<li><p>the backend Prolog system and version</p></li>
+<li><p>the installed packs that contributed loaded files to the current
+session</p></li>
+</ul>
+<p>The public predicates are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">document/1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">document/2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">export/1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">export/2</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">document/1-2</span></code> predicates return a JSON term. The <code class="docutils literal notranslate"><span class="pre">export/1-2</span></code>
+predicates write the JSON document to any sink accepted by the
+<code class="docutils literal notranslate"><span class="pre">json::generate/2</span></code> predicate, including <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>.</p>
+<p>Supported options are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name(Name)</span></code> Sets the application package name. Default is
+<code class="docutils literal notranslate"><span class="pre">loaded-application</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">version(Version)</span></code> Sets the application package version. Default is
+<code class="docutils literal notranslate"><span class="pre">0.0.0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">namespace(Namespace)</span></code> Sets the base document namespace URI. A
+process and timestamp suffix is added automatically to guarantee
+uniqueness. Default is <code class="docutils literal notranslate"><span class="pre">https://logtalk.org/spdxdocs/logtalk-sbom</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">creator(Creator)</span></code> Sets the <code class="docutils literal notranslate"><span class="pre">creationInfo.creators</span></code> entry. Default
+is <code class="docutils literal notranslate"><span class="pre">Tool:</span> <span class="pre">Logtalk</span> <span class="pre">sbom</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">validate_export(Boolean)</span></code> When <code class="docutils literal notranslate"><span class="pre">true</span></code>, validates the generated
+document against the bundled SPDX 2.3 JSON Schema before exporting it.
+Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> sbom<span class="o">::</span>document(<span class="nv">Document</span>).
+
+| <span class="o">?-</span> sbom<span class="o">::</span>document(<span class="nv">Document</span>, [name(my_app), version(<span class="s">&#39;1.2.3&#39;</span>)]).
+
+| <span class="o">?-</span> sbom<span class="o">::</span>export(file(<span class="s">&#39;sbom.json&#39;</span>)).
+
+| <span class="o">?-</span> sbom<span class="o">::</span>export(<span class="k">atom</span>(<span class="nv">Atom</span>), [
+        name(my_app),
+        version(<span class="s">&#39;1.2.3&#39;</span>),
+        creator(<span class="s">&#39;Tool: My build pipeline&#39;</span>),
+        validate_export(<span class="k">true</span>)
+     ]).
+</pre></div>
+</div>
+<p>See the <code class="docutils literal notranslate"><span class="pre">sbom-example.json</span></code> file for a representative exported
+document.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="profiler.html" class="btn btn-neutral float-left" title="profiler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutor.html" class="btn btn-neutral float-right" title="tutor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2026, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

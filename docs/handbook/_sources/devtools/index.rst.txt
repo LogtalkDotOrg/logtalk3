@@ -45,5 +45,6 @@ directory in the ``NOTES.md`` file.
    packs
    ports_profiler
    profiler
+   sbom
    tutor
    wrapper

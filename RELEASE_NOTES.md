@@ -119,6 +119,8 @@ in the JSON and SARIF formats. A schema is provided for the JSON format.
 
 * ADDED: New `mutation_testing` tool for mutation-based testing.
 
+* ADDED: New `sbom` tool for generating SBOMs for loaded applications.
+
 * ADDED: Support for caller diagrams to the `diagrams` tool.
 
 * ADDED: Support to the `diagrams` tool for coupling metrics overlay in entity

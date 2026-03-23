@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on March 3, 2026
+%  Last updated on March 23, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -100,6 +100,7 @@ logtalk_library_path(mutation_testing, tools('mutation_testing/')).
 logtalk_library_path(packs, tools('packs/')).
 logtalk_library_path(ports_profiler, tools('ports_profiler/')).
 logtalk_library_path(profiler, tools('profiler/')).
+logtalk_library_path(sbom, tools('sbom/')).
 logtalk_library_path(tutor, tools('tutor/')).
 logtalk_library_path(wrapper, tools('wrapper/')).
 

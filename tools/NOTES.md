@@ -44,6 +44,7 @@ documentation files:
 - `packs`
 - `ports_profiler`
 - `profiler`
+- `sbom`
 - `tutor`
 - `wrapper`
 
@@ -67,6 +68,8 @@ new users that need help understanding compiler warning and error messages.
 
 The `wrapper` tool is also not loaded by default, given its specialized purpose
 and beta status.
+
+The `sbom` tool is also not loaded by default, given its specialized purpose.
 
 To load a specific tool, either change your Prolog working directory to the
 tool folder and then compile and load the corresponding loader utility file

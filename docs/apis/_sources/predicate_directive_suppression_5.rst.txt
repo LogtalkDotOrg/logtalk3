@@ -1,0 +1,66 @@
+.. index:: single: predicate_directive_suppression(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation)
+.. _predicate_directive_suppression/5:
+
+.. rst-class:: right
+
+**object**
+
+``predicate_directive_suppression(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation)``
+=============================================================================================
+
+* ``Entity`` - Identifier of the entity being mutated.
+* ``Predicate`` - Predicate or non-terminal indicator selecting directives.
+* ``DirectiveIndex`` - 1-based index for the selected matching directive.
+* ``Occurrence`` - 1-based mutation occurrence index to target within selected matching directives.
+* ``PrintMutation`` - Boolean flag to print the original and mutated term plus source location.
+
+
+Hook object implementing the ``predicate_directive_suppression`` mutator by suppressing matching predicate or non-terminal directives.
+
+| **Availability:** 
+|    ``logtalk_load(mutation_testing(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-03-20
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`expanding <expanding/0>`
+|    ``public`` :ref:`directive_mutator_protocol <directive_mutator_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`mutator_common <mutator_common/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`mutator_protocol/0::coverage_clause_mutator/0`  :ref:`expanding/0::goal_expansion/2`  :ref:`mutator_protocol/0::mutation/2`  :ref:`mutator_protocol/0::reset/0`  :ref:`expanding/0::term_expansion/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

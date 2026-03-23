@@ -1,0 +1,73 @@
+{
+    "spdxVersion": "SPDX-2.3",
+    "dataLicense": "CC0-1.0",
+    "SPDXID": "SPDXRef-DOCUMENT",
+    "name": "State-space searching framework",
+    "documentNamespace": "https://logtalk.org/spdxdocs/logtalk-sbom/85263-26260",
+    "creationInfo": {
+        "created": "2026-03-23T00:35:23Z",
+        "creators": [
+            "Logtalk \"sbom\" tool"
+        ]
+    },
+    "documentDescribes": [
+        "SPDXRef-Application"
+    ],
+    "packages": [
+        {
+            "SPDXID": "SPDXRef-Application",
+            "name": "State-space searching framework",
+            "versionInfo": "1.4.0",
+            "downloadLocation": "http://spdx.org/rdf/terms#noassertion",
+            "filesAnalyzed": false,
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "primaryPackagePurpose": "APPLICATION",
+            "summary": "Logtalk application currently loaded in this session"
+        },
+        {
+            "SPDXID": "SPDXRef-Logtalk",
+            "name": "Logtalk",
+            "versionInfo": "3.99.0-b01",
+            "downloadLocation": "http://spdx.org/rdf/terms#noassertion",
+            "filesAnalyzed": false,
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "primaryPackagePurpose": "FRAMEWORK",
+            "summary": "Logtalk runtime"
+        },
+        {
+            "SPDXID": "SPDXRef-Backend",
+            "name": "SWI-Prolog",
+            "versionInfo": "10.1.5",
+            "downloadLocation": "http://spdx.org/rdf/terms#noassertion",
+            "filesAnalyzed": false,
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "primaryPackagePurpose": "FRAMEWORK",
+            "summary": "Backend Prolog compiler/runtime"
+        }
+    ],
+    "relationships": [
+        {
+            "spdxElementId": "SPDXRef-DOCUMENT",
+            "relationshipType": "DESCRIBES",
+            "relatedSpdxElement": "SPDXRef-Application"
+        },
+        {
+            "spdxElementId": "SPDXRef-Application",
+            "relationshipType": "DEPENDS_ON",
+            "relatedSpdxElement": "SPDXRef-Logtalk"
+        },
+        {
+            "spdxElementId": "SPDXRef-Application",
+            "relationshipType": "DEPENDS_ON",
+            "relatedSpdxElement": "SPDXRef-Backend"
+        },
+        {
+            "spdxElementId": "SPDXRef-Logtalk",
+            "relationshipType": "DEPENDS_ON",
+            "relatedSpdxElement": "SPDXRef-Backend"
+        }
+    ]
+}
