@@ -96,7 +96,8 @@
 	document(Document, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		spdx_document(Document, Options).
+		spdx_document(Document, Options),
+		!.
 
 	document(Document) :-
 		document(Document, []).
@@ -109,7 +110,8 @@
 			validate_document(Document)
 		;	true
 		),
-		json_generate(Sink, Document).
+		json_generate(Sink, Document),
+		!.
 
 	export(Sink) :-
 		export(Sink, []).
@@ -163,13 +165,13 @@
 		atomic_list_concat([PID, TimeInteger], '-', Suffix),
 		atomic_list_concat([BaseNamespace, Suffix], '/', DocumentNamespace).
 
-	application_package(Name, Version, License, package('SPDXRef-Application', Name, Version, License, 'APPLICATION', 'Logtalk application currently loaded in this session')).
+	application_package(Name, Version, License, package('SPDXRef-Application', Name, Version, License, none, 'APPLICATION', 'Logtalk application currently loaded in this session')).
 
-	logtalk_package(License, package('SPDXRef-Logtalk', 'Logtalk', Version, License, 'FRAMEWORK', 'Logtalk runtime')) :-
+	logtalk_package(License, package('SPDXRef-Logtalk', 'Logtalk', Version, License, none, 'FRAMEWORK', 'Logtalk runtime')) :-
 		current_logtalk_flag(version_data, logtalk(Major, Minor, Patch, Status)),
 		version_atom(logtalk(Major, Minor, Patch, Status), Version).
 
-	backend_package(LicenseOption, package('SPDXRef-Backend', BackendName, Version, License, 'FRAMEWORK', 'Backend Prolog compiler/runtime')) :-
+	backend_package(LicenseOption, package('SPDXRef-Backend', BackendName, Version, License, none, 'FRAMEWORK', 'Backend Prolog compiler/runtime')) :-
 		current_logtalk_flag(prolog_dialect, Backend),
 		backend(Backend, BackendName, DefaultLicense),
 		(   LicenseOption == default ->
@@ -196,23 +198,51 @@
 
 	loaded_pack_packages(Options, PackPackages) :-
 		findall(
-			package(SPDXID, Pack, VersionAtom, License, 'LIBRARY', Description),
-			loaded_pack_package(SPDXID, Pack, VersionAtom, License, Description, Options),
+			package(SPDXID, Pack, VersionAtom, License, Checksum, 'LIBRARY', Description),
+			loaded_pack_package(SPDXID, Pack, VersionAtom, License, Checksum, Description, Options),
 			PackPackages0
 		),
 		sort(PackPackages0, PackPackages).
 
-	loaded_pack_package(SPDXID, Pack, VersionAtom, License, Description, Options) :-
-		installed(_Registry, Pack, Version, _Pinned),
+	loaded_pack_package(SPDXID, Pack, VersionAtom, License, Checksum, Description, Options) :-
+		installed(Registry, Pack, Version, _Pinned),
 		directory(Pack, PackDirectory),
 		loaded_from_pack_directory(PackDirectory),
 		version_atom(Version, VersionAtom),
-		pack_license(Pack, Options, License),
+		pack_metadata(Registry, Pack, Version, DefaultLicense, Checksum),
+		pack_license(Pack, DefaultLicense, Options, License),
 		atomic_list_concat(['SPDXRef-Pack-', Pack], SPDXID),
 		atomic_list_concat(['Loaded Logtalk pack ', Pack], Description).
 
-	pack_license(Pack, Options, License) :-
-		^^option(pack_license(Pack, License), Options, pack_license(Pack, 'NOASSERTION')).
+	pack_license(Pack, DefaultLicense, Options, License) :-
+		^^option(pack_license(Pack, License), Options, pack_license(Pack, DefaultLicense)).
+
+	pack_metadata(Registry, Pack, Version, License, Checksum) :-
+		(   registry_pack_object(Registry, Pack, PackObject) ->
+			(   PackObject::license(PackLicense) ->
+				License = PackLicense
+			;   License = 'NOASSERTION'
+			),
+			(   PackObject::version(Version, _, _, PackChecksum, _, _) ->
+				normalize_pack_checksum(PackChecksum, Checksum)
+			;   Checksum = none
+			)
+		;   License = 'NOASSERTION',
+			Checksum = none
+		).
+
+	registry_pack_object(Registry, Pack, PackObject) :-
+		implements_protocol(RegistryObject, registry_protocol),
+		RegistryObject::name(Registry),
+		object_property(RegistryObject, file(_, Directory)),
+		once((
+			implements_protocol(PackObject, pack_protocol),
+			PackObject::name(Pack),
+			object_property(PackObject, file(_, Directory))
+		)).
+
+	normalize_pack_checksum(none, none).
+	normalize_pack_checksum(sha256-Digest, checksum('SHA256', Digest)).
 
 	loaded_from_pack_directory(PackDirectory) :-
 		atom_concat(PackDirectory, '/', Prefix),
@@ -225,7 +255,7 @@
 		package_json(Package, JSON),
 		packages_json(Packages, JSONs).
 
-	package_json(package(SPDXID, Name, Version, License, Purpose, Description), JSON) :-
+	package_json(package(SPDXID, Name, Version, License, none, Purpose, Description), JSON) :-
 		JSON = {
 			'SPDXID'-SPDXID,
 			name-Name,
@@ -237,6 +267,22 @@
 			primaryPackagePurpose-Purpose,
 			summary-Description
 		}.
+	package_json(package(SPDXID, Name, Version, License, Checksum, Purpose, Description), JSON) :-
+		checksum_json(Checksum, ChecksumJSON),
+		JSON = {
+			'SPDXID'-SPDXID,
+			name-Name,
+			versionInfo-Version,
+			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
+			filesAnalyzed- @false,
+			checksums-[ChecksumJSON],
+			licenseConcluded-License,
+			licenseDeclared-License,
+			primaryPackagePurpose-Purpose,
+			summary-Description
+		}.
+
+	checksum_json(checksum(Algorithm, Value), {algorithm-Algorithm, checksumValue-Value}).
 
 	relationships_json(PackPackages, Relationships) :-
 		base_relationships(BaseRelationships),
@@ -251,7 +297,7 @@
 	]).
 
 	pack_relationships([], []).
-	pack_relationships([package(SPDXID, _, _, _, _, _)| PackPackages], [Relationship| Relationships]) :-
+	pack_relationships([package(SPDXID, _, _, _, _, _, _)| PackPackages], [Relationship| Relationships]) :-
 		Relationship = {
 			spdxElementId-'SPDXRef-Application',
 			relationshipType-'DEPENDS_ON',

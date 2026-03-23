@@ -76,12 +76,18 @@
 		^^file_url('test_files/sbom_fixture_registry', URL),
 		add(sbom_fixture_registry, URL, [update(true)]),
 		install(sbom_fixture_registry, sbom_fixture_pack, 1:0:0, []),
+		install(sbom_fixture_registry, sbom_fixture_no_checksum_pack, 1:0:0, []),
 		directory(sbom_fixture_pack, PackDirectory),
 		path_concat(PackDirectory, 'loader.lgt', Loader),
-		logtalk_load(Loader).
+		logtalk_load(Loader),
+		directory(sbom_fixture_no_checksum_pack, NoChecksumPackDirectory),
+		path_concat(NoChecksumPackDirectory, 'loader.lgt', NoChecksumLoader),
+		logtalk_load(NoChecksumLoader),
+		!.
 
 	cleanup :-
-		reset.
+		reset,
+		!.
 
 	test(sbom_document_01, deterministic) :-
 		document(Document),
@@ -195,6 +201,38 @@
 		}, Packages).
 
 	test(sbom_document_03, deterministic) :-
+		document(Document),
+		Document = {
+			spdxVersion-_,
+			dataLicense-_,
+			'SPDXID'-_,
+			name-_,
+			documentNamespace-_,
+			creationInfo-_,
+			documentDescribes-_,
+			packages-Packages,
+			relationships-Relationships
+		},
+		^^assertion(ground(Document)),
+		memberchk({
+			'SPDXID'-'SPDXRef-Pack-sbom_fixture_pack',
+			name-sbom_fixture_pack,
+			versionInfo-'1.0.0',
+			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
+			filesAnalyzed- @false,
+			checksums-[{algorithm-'SHA256', checksumValue-'0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'}],
+			licenseConcluded-'Apache-2.0',
+			licenseDeclared-'Apache-2.0',
+			primaryPackagePurpose-'LIBRARY',
+			summary-'Loaded Logtalk pack sbom_fixture_pack'
+		}, Packages),
+		memberchk({
+			spdxElementId-'SPDXRef-Application',
+			relationshipType-'DEPENDS_ON',
+			relatedSpdxElement-'SPDXRef-Pack-sbom_fixture_pack'
+		}, Relationships).
+
+	test(sbom_document_04, deterministic) :-
 		document(Document, [pack_license(sbom_fixture_pack, 'Zlib')]),
 		Document = {
 			spdxVersion-_,
@@ -214,6 +252,7 @@
 			versionInfo-'1.0.0',
 			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
 			filesAnalyzed- @false,
+			checksums-[{algorithm-'SHA256', checksumValue-'0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'}],
 			licenseConcluded-'Zlib',
 			licenseDeclared-'Zlib',
 			primaryPackagePurpose-'LIBRARY',
@@ -224,6 +263,41 @@
 			relationshipType-'DEPENDS_ON',
 			relatedSpdxElement-'SPDXRef-Pack-sbom_fixture_pack'
 		}, Relationships).
+
+	test(sbom_document_05, deterministic) :-
+		document(Document),
+		Document = {
+			spdxVersion-_,
+			dataLicense-_,
+			'SPDXID'-_,
+			name-_,
+			documentNamespace-_,
+			creationInfo-_,
+			documentDescribes-_,
+			packages-Packages,
+			relationships-Relationships
+		},
+		^^assertion(ground(Document)),
+		memberchk({
+			'SPDXID'-'SPDXRef-Pack-sbom_fixture_no_checksum_pack',
+			name-sbom_fixture_no_checksum_pack,
+			versionInfo-'1.0.0',
+			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
+			filesAnalyzed- @false,
+			licenseConcluded-'MIT',
+			licenseDeclared-'MIT',
+			primaryPackagePurpose-'LIBRARY',
+			summary-'Loaded Logtalk pack sbom_fixture_no_checksum_pack'
+		}, Packages),
+		memberchk({
+			spdxElementId-'SPDXRef-Application',
+			relationshipType-'DEPENDS_ON',
+			relatedSpdxElement-'SPDXRef-Pack-sbom_fixture_no_checksum_pack'
+		}, Relationships),
+		\+ memberchk({
+			'SPDXID'-'SPDXRef-Pack-sbom_fixture_no_checksum_pack',
+			checksums-_
+		}, Packages).
 
 	test(sbom_export_01, deterministic) :-
 		export(atom(Atom)),

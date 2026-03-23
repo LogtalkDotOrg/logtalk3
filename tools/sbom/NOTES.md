@@ -91,7 +91,10 @@ Supported options are:
 - `pack_license(Pack, License)`
 	Sets the `licenseConcluded` and `licenseDeclared` SPDX identifiers for a
 	loaded pack named `Pack`. Default for packs without an explicit option is
-	`NOASSERTION`.
+	the result of sending the pack specification object the message
+	`license(License)`, falling back to `NOASSERTION` when no license is
+	available. Loaded packs also export a SPDX package checksum when the pack
+    specification defines it in the `version/6` predicate as the fourth argument.
 - `namespace(Namespace)`
   Sets the base document namespace URI. A process and timestamp suffix is added
   automatically to guarantee uniqueness. Default is

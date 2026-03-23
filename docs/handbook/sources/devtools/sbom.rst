@@ -75,7 +75,11 @@ Supported options are:
   is the license specified in the ``backend/3`` table.
 - ``pack_license(Pack, License)`` Sets the ``licenseConcluded`` and
   ``licenseDeclared`` SPDX identifiers for a loaded pack named ``Pack``.
-  Default for packs without an explicit option is ``NOASSERTION``.
+  Default for packs without an explicit option is the result of sending
+  the pack specification object the message ``license(License)``,
+  falling back to ``NOASSERTION`` when no license is available. Loaded
+  packs also export a SPDX package checksum when the pack specification
+  defines it in the ``version/6`` predicate as the fourth argument.
 - ``namespace(Namespace)`` Sets the base document namespace URI. A
   process and timestamp suffix is added automatically to guarantee
   uniqueness. Default is ``https://logtalk.org/spdxdocs/logtalk-sbom``.
