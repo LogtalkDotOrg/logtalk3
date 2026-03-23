@@ -200,6 +200,9 @@ is <code class="docutils literal notranslate"><span class="pre">Apache-2.0</span
 <li><p><code class="docutils literal notranslate"><span class="pre">backend_license(License)</span></code> Sets the backend Prolog package
 <code class="docutils literal notranslate"><span class="pre">licenseConcluded</span></code> and <code class="docutils literal notranslate"><span class="pre">licenseDeclared</span></code> SPDX identifiers. Default
 is the license specified in the <code class="docutils literal notranslate"><span class="pre">backend/3</span></code> table.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pack_license(Pack,</span> <span class="pre">License)</span></code> Sets the <code class="docutils literal notranslate"><span class="pre">licenseConcluded</span></code> and
+<code class="docutils literal notranslate"><span class="pre">licenseDeclared</span></code> SPDX identifiers for a loaded pack named <code class="docutils literal notranslate"><span class="pre">Pack</span></code>.
+Default for packs without an explicit option is <code class="docutils literal notranslate"><span class="pre">NOASSERTION</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">namespace(Namespace)</span></code> Sets the base document namespace URI. A
 process and timestamp suffix is added automatically to guarantee
 uniqueness. Default is <code class="docutils literal notranslate"><span class="pre">https://logtalk.org/spdxdocs/logtalk-sbom</span></code>.</p></li>
@@ -222,6 +225,7 @@ Default is <code class="docutils literal notranslate"><span class="pre">false</s
         application_license(<span class="s">&#39;MIT&#39;</span>),
         logtalk_license(<span class="s">&#39;Apache-2.0&#39;</span>),
         backend_license(<span class="s">&#39;BSD-2-Clause&#39;</span>),
+        pack_license(my_pack, <span class="s">&#39;MIT&#39;</span>),
         creator(<span class="s">&#39;Tool: My build pipeline&#39;</span>),
         validate_export(<span class="k">true</span>)
      ]).

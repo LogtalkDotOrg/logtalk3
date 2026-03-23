@@ -125,7 +125,7 @@
 		application_package(Name, Version, ApplicationLicense, ApplicationPackage),
 		logtalk_package(LogtalkLicense, LogtalkPackage),
 		backend_package(BackendLicense, BackendPackage),
-		loaded_pack_packages(PackPackages),
+		loaded_pack_packages(Options, PackPackages),
 		packages_json([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], Packages),
 		relationships_json(PackPackages, Relationships),
 		Document = {
@@ -194,21 +194,25 @@
 	backend(xvm,     'XVM',            'NOASSERTION').
 	backend(yap,     'YAP',            'Artistic-2.0').
 
-	loaded_pack_packages(PackPackages) :-
+	loaded_pack_packages(Options, PackPackages) :-
 		findall(
-			package(SPDXID, Pack, VersionAtom, 'NOASSERTION', 'LIBRARY', Description),
-			loaded_pack_package(SPDXID, Pack, VersionAtom, Description),
+			package(SPDXID, Pack, VersionAtom, License, 'LIBRARY', Description),
+			loaded_pack_package(SPDXID, Pack, VersionAtom, License, Description, Options),
 			PackPackages0
 		),
 		sort(PackPackages0, PackPackages).
 
-	loaded_pack_package(SPDXID, Pack, VersionAtom, Description) :-
+	loaded_pack_package(SPDXID, Pack, VersionAtom, License, Description, Options) :-
 		installed(_Registry, Pack, Version, _Pinned),
 		directory(Pack, PackDirectory),
 		loaded_from_pack_directory(PackDirectory),
 		version_atom(Version, VersionAtom),
+		pack_license(Pack, Options, License),
 		atomic_list_concat(['SPDXRef-Pack-', Pack], SPDXID),
 		atomic_list_concat(['Loaded Logtalk pack ', Pack], Description).
+
+	pack_license(Pack, Options, License) :-
+		^^option(pack_license(Pack, License), Options, pack_license(Pack, 'NOASSERTION')).
 
 	loaded_from_pack_directory(PackDirectory) :-
 		atom_concat(PackDirectory, '/', Prefix),
@@ -310,6 +314,10 @@
 		atom(License).
 	valid_option(logtalk_license(License)) :-
 		atom(License).
+	valid_option(pack_license(Pack, License)) :-
+		atom(Pack),
+		atom(License).
+	valid_option(backend_license(default)).
 	valid_option(backend_license(License)) :-
 		atom(License).
 	valid_option(namespace(Namespace)) :-

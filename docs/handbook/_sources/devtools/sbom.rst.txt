@@ -73,6 +73,9 @@ Supported options are:
 - ``backend_license(License)`` Sets the backend Prolog package
   ``licenseConcluded`` and ``licenseDeclared`` SPDX identifiers. Default
   is the license specified in the ``backend/3`` table.
+- ``pack_license(Pack, License)`` Sets the ``licenseConcluded`` and
+  ``licenseDeclared`` SPDX identifiers for a loaded pack named ``Pack``.
+  Default for packs without an explicit option is ``NOASSERTION``.
 - ``namespace(Namespace)`` Sets the base document namespace URI. A
   process and timestamp suffix is added automatically to guarantee
   uniqueness. Default is ``https://logtalk.org/spdxdocs/logtalk-sbom``.
@@ -98,6 +101,7 @@ Examples:
            application_license('MIT'),
            logtalk_license('Apache-2.0'),
            backend_license('BSD-2-Clause'),
+           pack_license(my_pack, 'MIT'),
            creator('Tool: My build pipeline'),
            validate_export(true)
         ]).

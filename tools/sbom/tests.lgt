@@ -36,6 +36,16 @@
 		export/1, export/2
 	]).
 
+	:- uses(registries, [
+		add/3
+	]).
+
+	:- uses(packs, [
+		directory/2,
+		install/4,
+		reset/0
+	]).
+
 	:- uses(list, [
 		memberchk/2
 	]).
@@ -50,9 +60,28 @@
 	]).
 
 	:- uses(os, [
+		change_directory/1,
 		decompose_file_name/3,
+		make_directory_path/1,
 		path_concat/3
 	]).
+
+	setup :-
+		object_property(tests, file(File)),
+		decompose_file_name(File, Directory, _),
+		change_directory(Directory),
+		^^file_path('test_files/logtalk_packs', LogtalkPacks),
+		make_directory_path(LogtalkPacks),
+		reset,
+		^^file_url('test_files/sbom_fixture_registry', URL),
+		add(sbom_fixture_registry, URL, [update(true)]),
+		install(sbom_fixture_registry, sbom_fixture_pack, 1:0:0, []),
+		directory(sbom_fixture_pack, PackDirectory),
+		path_concat(PackDirectory, 'loader.lgt', Loader),
+		logtalk_load(Loader).
+
+	cleanup :-
+		reset.
 
 	test(sbom_document_01, deterministic) :-
 		document(Document),
@@ -61,16 +90,13 @@
 			dataLicense-'CC0-1.0',
 			'SPDXID'-'SPDXRef-DOCUMENT',
 			name-'loaded-application',
-			documentNamespace-DocumentNamespace,
-			creationInfo-{created-Created, creators-['Logtalk "sbom" tool']},
+			documentNamespace-_,
+			creationInfo-{created-_, creators-['Logtalk "sbom" tool']},
 			documentDescribes-['SPDXRef-Application'],
 			packages-Packages,
 			relationships-Relationships
 		},
-		^^assertion(atom(DocumentNamespace)),
-		^^assertion(atom(Created)),
-		^^assertion(ground(Packages)),
-		^^assertion(ground(Relationships)),
+		^^assertion(ground(Document)),
 		memberchk({
 			'SPDXID'-'SPDXRef-Application',
 			name-'loaded-application',
@@ -99,11 +125,12 @@
 			versionInfo-_,
 			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
 			filesAnalyzed- @false,
-			licenseConcluded-'NOASSERTION',
-			licenseDeclared-'NOASSERTION',
+			licenseConcluded-BackendLicense,
+			licenseDeclared-BackendLicense,
 			primaryPackagePurpose-'FRAMEWORK',
 			summary-'Backend Prolog compiler/runtime'
 		}, Packages),
+		^^assertion(atom(BackendLicense)),
 		memberchk({spdxElementId-'SPDXRef-DOCUMENT', relationshipType-'DESCRIBES', relatedSpdxElement-'SPDXRef-Application'}, Relationships),
 		memberchk({spdxElementId-'SPDXRef-Application', relationshipType-'DEPENDS_ON', relatedSpdxElement-'SPDXRef-Logtalk'}, Relationships),
 		memberchk({spdxElementId-'SPDXRef-Application', relationshipType-'DEPENDS_ON', relatedSpdxElement-'SPDXRef-Backend'}, Relationships).
@@ -115,9 +142,11 @@
 			application_license('MIT'),
 			logtalk_license('Apache-2.0'),
 			backend_license('BSD-2-Clause'),
+			pack_license(dummy_pack, 'Zlib'),
 			creator('Tool: Custom exporter'),
 			namespace('https://example.com/spdx')
 		]),
+		^^assertion(ground(Document)),
 		Document = {
 			spdxVersion-'SPDX-2.3',
 			dataLicense-'CC0-1.0',
@@ -165,9 +194,41 @@
 			summary-_
 		}, Packages).
 
+	test(sbom_document_03, deterministic) :-
+		document(Document, [pack_license(sbom_fixture_pack, 'Zlib')]),
+		Document = {
+			spdxVersion-_,
+			dataLicense-_,
+			'SPDXID'-_,
+			name-_,
+			documentNamespace-_,
+			creationInfo-_,
+			documentDescribes-_,
+			packages-Packages,
+			relationships-Relationships
+		},
+		^^assertion(ground(Document)),
+		memberchk({
+			'SPDXID'-'SPDXRef-Pack-sbom_fixture_pack',
+			name-sbom_fixture_pack,
+			versionInfo-'1.0.0',
+			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
+			filesAnalyzed- @false,
+			licenseConcluded-'Zlib',
+			licenseDeclared-'Zlib',
+			primaryPackagePurpose-'LIBRARY',
+			summary-'Loaded Logtalk pack sbom_fixture_pack'
+		}, Packages),
+		memberchk({
+			spdxElementId-'SPDXRef-Application',
+			relationshipType-'DEPENDS_ON',
+			relatedSpdxElement-'SPDXRef-Pack-sbom_fixture_pack'
+		}, Relationships).
+
 	test(sbom_export_01, deterministic) :-
 		export(atom(Atom)),
 		json_parse(atom(Atom), JSON),
+		^^assertion(ground(JSON)),
 		JSON = {
 			spdxVersion-'SPDX-2.3',
 			dataLicense-'CC0-1.0',
@@ -186,6 +247,11 @@
 		schema_path(Path),
 		json_schema_parse(file(Path), Schema),
 		json_schema_validate(Schema, JSON).
+
+	:- multifile(logtalk::message_hook/4).
+	:- dynamic(logtalk::message_hook/4).
+
+	logtalk::message_hook(_Message, _Kind, packs, _Tokens).
 
 	schema_path(Path) :-
 		object_property(tests, file(File)),

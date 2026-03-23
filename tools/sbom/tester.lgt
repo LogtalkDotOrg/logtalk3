@@ -20,6 +20,10 @@
 
 
 :- initialization((
+	logtalk_load_context(directory, Directory),
+	atom_concat(Directory, 'test_files/logtalk_packs/', LogtalkPacks),
+	retractall(logtalk_library_path(logtalk_packs, _)),
+	assertz(logtalk_library_path(logtalk_packs, LogtalkPacks)),
 	set_logtalk_flag(report, warnings),
 	logtalk_load(json(loader)),
 	logtalk_load(json_schema(loader)),
