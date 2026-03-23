@@ -1,0 +1,8 @@
+{
+  "type": "object",
+  "properties": {
+    "shipping": {
+      "$ref": "address.json"
+    }
+  }
+}

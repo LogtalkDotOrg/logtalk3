@@ -341,7 +341,9 @@ no
 <p><strong>Schema References:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">$defs</span></code>/<code class="docutils literal notranslate"><span class="pre">definitions</span></code> - schema definitions</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">$ref</span></code> - local JSON Pointer references (e.g., <code class="docutils literal notranslate"><span class="pre">#/$defs/name</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$ref</span></code> - local JSON Pointer references and local file references
+(e.g., <code class="docutils literal notranslate"><span class="pre">#/$defs/name</span></code>, <code class="docutils literal notranslate"><span class="pre">address.json</span></code>,
+<code class="docutils literal notranslate"><span class="pre">common.json#/$defs/name</span></code>)</p></li>
 </ul>
 <p><strong>Format validation:</strong></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">format</span></code> keyword validates string formats. Non-string values pass

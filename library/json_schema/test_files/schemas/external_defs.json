@@ -1,0 +1,8 @@
+{
+  "$defs": {
+    "emailLike": {
+      "type": "string",
+      "minLength": 5
+    }
+  }
+}

@@ -23,9 +23,9 @@
 	implements(json_schema_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-03,
+		date is 2026-03-23,
 		comment is 'JSON Schema parser and validator supporting JSON Schema draft-07/draft-2019-09/draft-2020-12.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation used for JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -38,6 +38,10 @@
 		parse/2 as json_parse/2
 	]).
 
+	:- uses(os, [
+		decompose_file_name/3, expand_path/2, path_concat/3
+	]).
+
 	:- uses(list, [
 		append/3, length/2, member/2, msort/2, valid/1 as is_list/1
 	]).
@@ -45,7 +49,9 @@
 	% Parse a JSON schema from various sources
 	parse(Source, Schema) :-
 		json_parse(Source, JSON),
-		normalize_schema(JSON, Schema).
+		normalize_schema(JSON, NormalizedSchema),
+		schema_source_directory(Source, BaseDirectory),
+		annotate_schema_source(NormalizedSchema, BaseDirectory, Schema).
 
 	% Normalize schema to internal representation
 	normalize_schema(Schema, Schema) :-
@@ -67,10 +73,43 @@
 
 	% Validate JSON against schema returning errors
 	validate(Schema, JSON, Errors) :-
-		% Extract definitions from schema for reference resolution
 		extract_definitions(Schema, Defs),
-		validate_value(Schema, JSON, [], Defs, ErrorsUnsorted),
+		schema_resource(Schema, Defs, Resource),
+		validate_value(Schema, JSON, [], Resource, ErrorsUnsorted),
 		msort(ErrorsUnsorted, Errors).
+
+	annotate_schema_source(Schema, BaseDirectory, AnnotatedSchema) :-
+		nonvar(BaseDirectory),
+		is_schema_object(Schema),
+		!,
+		pair_term('$logtalk_source_path$', BaseDirectory, Pair),
+		add_pair_to_schema(Schema, Pair, AnnotatedSchema).
+	annotate_schema_source(Schema, _, Schema).
+
+	schema_source_directory(file(Path), BaseDirectory) :-
+		!,
+		expand_path(Path, ExpandedPath),
+		decompose_file_name(ExpandedPath, BaseDirectory, _).
+	schema_source_directory(_, _).
+
+	schema_resource(Schema, Defs, resource(Defs, BaseDirectory)) :-
+		is_schema_object(Schema),
+		schema_to_pairs(Schema, Pairs),
+		get_pair_value('$logtalk_source_path$', Pairs, BaseDirectory),
+		!.
+	schema_resource(_, Defs, resource(Defs, '')).
+
+	pair_term(Name, Value, Name-Value) :-
+		_PairRepresentation_ == dash,
+		!.
+	pair_term(Name, Value, Name=Value) :-
+		_PairRepresentation_ == equal,
+		!.
+	pair_term(Name, Value, ':'(Name, Value)).
+
+	add_pair_to_schema({}, Pair, {Pair}) :- !.
+	add_pair_to_schema({Pairs}, Pair, {(Pair, Pairs)}) :- !.
+	add_pair_to_schema(json(Pairs), Pair, json([Pair| Pairs])).
 
 	% Extract $defs or definitions from a schema
 	extract_definitions(Schema, Defs) :-
@@ -269,6 +308,7 @@
 	validate_keyword('$comment', _, _, _, _, []) :- !.
 	validate_keyword(definitions, _, _, _, _, []) :- !.
 	validate_keyword('$defs', _, _, _, _, []) :- !.
+	validate_keyword('$logtalk_source_path$', _, _, _, _, []) :- !.
 
 	% Format keyword (optional validation for portable formats)
 	validate_keyword(format, Format, JSON, Path, _Defs, Errors) :-
@@ -608,21 +648,54 @@
 
 	% =============== Schema reference ($ref) ===============
 
-	validate_ref(Ref, JSON, Path, Defs, Errors) :-
-		(	resolve_ref(Ref, Defs, ResolvedSchema) ->
-			validate_value(ResolvedSchema, JSON, Path, Defs, Errors)
+	validate_ref(Ref, JSON, Path, Resource, Errors) :-
+		(	resolve_ref(Ref, Resource, ResolvedSchema, ResolvedResource) ->
+			validate_value(ResolvedSchema, JSON, Path, ResolvedResource, Errors)
 		;	Errors = [error(Path, unresolved_ref(Ref))]
 		).
 
-	% Resolve a JSON Pointer reference to a schema
-	% Supports: #/$defs/name, #/definitions/name
-	resolve_ref(Ref, Defs, Schema) :-
+	% Resolve a local or external reference to a schema
+	resolve_ref(Ref, resource(Defs, BaseDirectory), Schema, Resource) :-
 		atom(Ref),
-		atom_codes(Ref, Codes),
+		split_ref_uri(Ref, FilePart, Fragment),
+		(	FilePart == '' ->
+			resolve_local_ref(Fragment, Defs, Schema),
+			Resource = resource(Defs, BaseDirectory)
+		;	resolve_external_ref(FilePart, Fragment, BaseDirectory, Schema, Resource)
+		).
+
+	resolve_external_ref(FilePart, Fragment, BaseDirectory, Schema, resource(Defs, ResolvedBaseDirectory)) :-
+		resolve_ref_file(FilePart, BaseDirectory, FilePath),
+		catch(parse(file(FilePath), RootSchema), _, fail),
+		extract_definitions(RootSchema, Defs),
+		schema_resource(RootSchema, Defs, resource(Defs, ResolvedBaseDirectory)),
+		resolve_external_fragment(Fragment, RootSchema, Defs, Schema).
+
+	resolve_ref_file(FilePart, '', FilePath) :-
+		!,
+		expand_path(FilePart, FilePath).
+	resolve_ref_file(FilePart, BaseDirectory, FilePath) :-
+		path_concat(BaseDirectory, FilePart, Path),
+		expand_path(Path, FilePath).
+
+	split_ref_uri(Ref, FilePart, Fragment) :-
+		(	sub_atom(Ref, Before, _, _, '#') ->
+			sub_atom(Ref, 0, Before, _, FilePart),
+			sub_atom(Ref, Before, _, 0, Fragment)
+		;	FilePart = Ref,
+			Fragment = '#'
+		).
+
+	resolve_local_ref(Fragment, Defs, Schema) :-
+		atom_codes(Fragment, Codes),
 		parse_json_pointer(Codes, Segments),
 		resolve_pointer_segments(Segments, Defs, Schema).
 
-	% Parse JSON Pointer: #/$defs/name or #/definitions/name
+	resolve_external_fragment('#', RootSchema, _, RootSchema) :- !.
+	resolve_external_fragment(Fragment, _, Defs, Schema) :-
+		resolve_local_ref(Fragment, Defs, Schema).
+
+	% Parse JSON Pointer fragments
 	parse_json_pointer([0'#, 0'/| Rest], Segments) :-
 		!,
 		split_by_slash(Rest, Segments).
@@ -633,7 +706,8 @@
 	split_by_slash([], []) :- !.
 	split_by_slash(Codes, [Segment| Rest]) :-
 		split_segment(Codes, SegmentCodes, Remaining),
-		atom_codes(Segment, SegmentCodes),
+		decode_pointer_segment_codes(SegmentCodes, DecodedCodes),
+		atom_codes(Segment, DecodedCodes),
 		split_by_slash(Remaining, Rest).
 
 	split_segment([], [], []) :- !.
@@ -641,7 +715,17 @@
 	split_segment([C| Cs], [C| Segment], Rest) :-
 		split_segment(Cs, Segment, Rest).
 
-	% Resolve pointer segments against definitions
+	decode_pointer_segment_codes([], []) :- !.
+	decode_pointer_segment_codes([0'~, 0'0| Codes], [0'~| DecodedCodes]) :-
+		!,
+		decode_pointer_segment_codes(Codes, DecodedCodes).
+	decode_pointer_segment_codes([0'~, 0'1| Codes], [0'/| DecodedCodes]) :-
+		!,
+		decode_pointer_segment_codes(Codes, DecodedCodes).
+	decode_pointer_segment_codes([Code| Codes], [Code| DecodedCodes]) :-
+		decode_pointer_segment_codes(Codes, DecodedCodes).
+
+	% Resolve pointer segments against schema definitions
 	resolve_pointer_segments(['$defs', Name], Defs, Schema) :-
 		!,
 		get_pair_value(Name, Defs, Schema).

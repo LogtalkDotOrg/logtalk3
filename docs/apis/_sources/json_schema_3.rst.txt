@@ -19,8 +19,8 @@ JSON Schema parser and validator supporting JSON Schema draft-07/draft-2019-09/d
 |    ``logtalk_load(json_schema(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-03
+| **Version:** 1:1:0
+| **Date:** 2026-03-23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -31,6 +31,7 @@ JSON Schema parser and validator supporting JSON Schema draft-07/draft-2019-09/d
 | **Uses:**
 |    :ref:`json(ObjectRepresentation,PairRepresentation,StringRepresentation) <json/3>`
 |    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
 |    :ref:`url(Representation) <url/1>`
 
 | **Remarks:**

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-01-29,
+		date is 2026-03-23,
 		comment is 'Tests for the json_schema library.'
 	]).
 
@@ -448,6 +448,33 @@
 	% Unresolved $ref returns error
 	test(validate_ref_unresolved, true(Errors \== [])) :-
 		parse(atom('{"properties": {"x": {"$ref": "#/$defs/nonexistent"}}}'), Schema),
+		validate(Schema, {x-1}, Errors).
+
+	% $ref to a local file root schema
+	test(validate_ref_local_file_valid, true) :-
+		^^file_path('test_files/schemas/ref_external_address.json', Path),
+		parse(file(Path), Schema),
+		validate(Schema, {shipping-{street-'Main St', city-'Boston', postalCode-'02108'}}).
+
+	test(validate_ref_local_file_invalid, false) :-
+		^^file_path('test_files/schemas/ref_external_address.json', Path),
+		parse(file(Path), Schema),
+		validate(Schema, {shipping-{street-'Main St', city-'Boston'}}).
+
+	% $ref to a local file fragment
+	test(validate_ref_local_file_fragment_valid, true) :-
+		^^file_path('test_files/schemas/ref_external_fragment.json', Path),
+		parse(file(Path), Schema),
+		validate(Schema, {contact-'alice@example.com'}).
+
+	test(validate_ref_local_file_fragment_invalid, false) :-
+		^^file_path('test_files/schemas/ref_external_fragment.json', Path),
+		parse(file(Path), Schema),
+		validate(Schema, {contact-hi}).
+
+	% Missing local file ref returns an unresolved ref error
+	test(validate_ref_local_file_missing, true(Errors \== [])) :-
+		parse(atom('{"properties": {"x": {"$ref": "missing_schema.json"}}}'), Schema),
 		validate(Schema, {x-1}, Errors).
 
 	% =============== Format Validation Tests ===============

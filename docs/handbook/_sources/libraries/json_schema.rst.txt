@@ -132,7 +132,9 @@ The library supports the following JSON Schema keywords:
 **Schema References:**
 
 - ``$defs``/``definitions`` - schema definitions
-- ``$ref`` - local JSON Pointer references (e.g., ``#/$defs/name``)
+- ``$ref`` - local JSON Pointer references and local file references
+  (e.g., ``#/$defs/name``, ``address.json``,
+  ``common.json#/$defs/name``)
 
 **Format validation:**
 

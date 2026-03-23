@@ -1,0 +1,8 @@
+{
+  "type": "object",
+  "properties": {
+    "contact": {
+      "$ref": "external_defs.json#/$defs/emailLike"
+    }
+  }
+}
