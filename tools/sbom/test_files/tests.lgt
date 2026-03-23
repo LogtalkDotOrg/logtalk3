@@ -70,10 +70,10 @@
 		object_property(tests, file(File)),
 		decompose_file_name(File, Directory, _),
 		change_directory(Directory),
-		^^file_path('test_files/logtalk_packs', LogtalkPacks),
+		^^file_path('logtalk_packs', LogtalkPacks),
 		make_directory_path(LogtalkPacks),
 		reset,
-		^^file_url('test_files/sbom_fixture_registry', URL),
+		^^file_url('sbom_fixture_registry', URL),
 		add(sbom_fixture_registry, URL, [update(true)]),
 		install(sbom_fixture_registry, sbom_fixture_pack, 1:0:0, []),
 		install(sbom_fixture_registry, sbom_fixture_no_checksum_pack, 1:0:0, []),
@@ -357,10 +357,80 @@
 			relationships-_
 		}.
 
-	test(sbom_export_02, deterministic) :-
+	+ test(sbom_export_02, deterministic) :-
 		export(atom(Atom), [validate_export(true)]),
 		json_parse(atom(Atom), JSON),
-		schema_path(Path),
+		^^file_path('spdx-schema.json', Path),
+		writeq(Path), nl,
+		json_schema_parse(file(Path), Schema),
+		json_schema_validate(Schema, JSON).
+
+	test(sbom_document_06, deterministic) :-
+		document(Document, [format(cdx)]),
+		Document = {
+			bomFormat-'CycloneDX',
+			specVersion-'1.6',
+			version-1,
+			metadata-Metadata,
+			components-Components,
+			dependencies-Dependencies
+		},
+		^^assertion(ground(Document)),
+		Metadata = {
+			timestamp-_,
+			authors-[{name-'Logtalk "sbom" tool'}],
+			component-{
+				type-application,
+				'bom-ref'-'SPDXRef-Application',
+				name-'loaded-application',
+				version-'0.0.0',
+				description-_
+			}
+		},
+		memberchk({
+			type-framework,
+			'bom-ref'-'SPDXRef-Logtalk',
+			name-'Logtalk',
+			version-_,
+			description-'Logtalk runtime',
+			licenses-[{license-{name-'Apache-2.0'}}]
+		}, Components),
+		memberchk({
+			type-library,
+			'bom-ref'-'SPDXRef-Pack-sbom_fixture_pack',
+			name-sbom_fixture_pack,
+			version-'1.0.0',
+			description-'Loaded Logtalk pack sbom_fixture_pack',
+			hashes-[{alg-'SHA-256', content-'0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'}],
+			licenses-[{license-{name-'Apache-2.0'}}]
+		}, Components),
+		memberchk({
+			ref-'SPDXRef-Application',
+			dependsOn-ApplicationDependsOn
+		}, Dependencies),
+		memberchk('SPDXRef-Logtalk', ApplicationDependsOn),
+		memberchk('SPDXRef-Backend', ApplicationDependsOn),
+		memberchk('SPDXRef-Pack-sbom_fixture_pack', ApplicationDependsOn),
+		memberchk({
+			ref-'SPDXRef-Logtalk',
+			dependsOn-['SPDXRef-Backend']
+		}, Dependencies),
+		memberchk({ref-'SPDXRef-Backend'}, Dependencies).
+
+	test(sbom_export_03, deterministic) :-
+		export(atom(Atom), [format(cdx), validate_export(true)]),
+		json_parse(atom(Atom), JSON),
+		^^assertion(ground(JSON)),
+		JSON = {
+			bomFormat-'CycloneDX',
+			specVersion-'1.6',
+			version-1,
+			metadata-_,
+			components-_,
+			dependencies-_
+		},
+		^^file_path('cyclonedx-1.6.schema.json', Path),
+		writeq(Path), nl,
 		json_schema_parse(file(Path), Schema),
 		json_schema_validate(Schema, JSON).
 
@@ -368,10 +438,5 @@
 	:- dynamic(logtalk::message_hook/4).
 
 	logtalk::message_hook(_Message, _Kind, packs, _Tokens).
-
-	schema_path(Path) :-
-		object_property(tests, file(File)),
-		decompose_file_name(File, Directory, _),
-		path_concat(Directory, 'spdx-schema.json', Path).
 
 :- end_object.

@@ -19,20 +19,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load_context(directory, Directory),
-	atom_concat(Directory, 'test_files/logtalk_packs/', LogtalkPacks),
-	retractall(logtalk_library_path(logtalk_packs, _)),
-	assertz(logtalk_library_path(logtalk_packs, LogtalkPacks)),
-	set_logtalk_flag(report, warnings),
-	logtalk_load(json(loader)),
-	logtalk_load(json_schema(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(term_io(loader)),
-	logtalk_load(packs(loader)),
-	logtalk_load(sbom, [debug(on), source_data(on)]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load('test_files/tests', [hook(lgtunit)]),
-	tests::run
-)).
+:- object(sbom_fixture_registry,
+	implements(registry_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-03-23,
+		comment is 'A local registry for sbom tool tests.'
+	]).
+
+	name(sbom_fixture_registry).
+
+	description('A local registry for sbom tool tests').
+
+	home('file://sbom_fixture_registry').
+
+	clone('file://sbom_fixture_registry').
+
+	archive('file://sbom_fixture_registry.zip').
+
+:- end_object.

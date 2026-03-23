@@ -96,7 +96,7 @@
 	document(Document, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		spdx_document(Document, Options),
+		sbom_document(Document, Options),
 		!.
 
 	document(Document) :-
@@ -105,9 +105,9 @@
 	export(Sink, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		spdx_document(Document, Options),
+		sbom_document(Document, Options),
 		(	^^option(validate_export(true), Options) ->
-			validate_document(Document)
+			validate_document(Document, Options)
 		;	true
 		),
 		json_generate(Sink, Document),
@@ -116,13 +116,24 @@
 	export(Sink) :-
 		export(Sink, []).
 
-	spdx_document(Document, Options) :-
+	sbom_document(Document, Options) :-
+		^^option(format(Format), Options),
+		sbom_data(Data, Options),
+		(	Format == spdx ->
+			spdx_document(Document, Data)
+		;	Format == cdx ->
+			cyclonedx_document(Document, Data)
+		;	fail
+		).
+
+	sbom_data(data(Name, Created, Creators, DocumentNamespace, ApplicationPackage, LogtalkPackage, BackendPackage, PackPackages), Options) :-
 		^^option(name(Name), Options),
 		^^option(version(Version), Options),
 		^^option(application_license(ApplicationLicense), Options),
 		^^option(logtalk_license(LogtalkLicense), Options),
 		^^option(backend_license(BackendLicense), Options),
-		creation_info(CreationInfo, Options),
+		creation_timestamp(Created),
+		creators(Creators, Options),
 		document_namespace(DocumentNamespace, Options),
 		application_metadata_options(Options, ApplicationMetadata),
 		logtalk_metadata_options(Options, LogtalkMetadata),
@@ -130,7 +141,13 @@
 		application_package(Name, Version, ApplicationLicense, ApplicationMetadata, ApplicationPackage),
 		logtalk_package(LogtalkLicense, LogtalkMetadata, LogtalkPackage),
 		backend_package(BackendLicense, BackendMetadata, BackendPackage),
-		loaded_pack_packages(Options, PackPackages),
+		loaded_pack_packages(Options, PackPackages).
+
+	spdx_document(Document, data(Name, Created, Creators, DocumentNamespace, ApplicationPackage, LogtalkPackage, BackendPackage, PackPackages)) :-
+		CreationInfo = {
+			created-Created,
+			creators-Creators
+		},
 		packages_json([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], Packages),
 		relationships_json(PackPackages, Relationships),
 		Document = {
@@ -145,6 +162,19 @@
 			relationships-Relationships
 		}.
 
+	cyclonedx_document(Document, data(_, Created, Creators, _, ApplicationPackage, LogtalkPackage, BackendPackage, PackPackages)) :-
+		cyclonedx_metadata(Created, Creators, ApplicationPackage, Metadata),
+		cyclonedx_components_json([LogtalkPackage, BackendPackage| PackPackages], Components),
+		cyclonedx_dependencies_json([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], Dependencies),
+		Document = {
+			bomFormat-'CycloneDX',
+			specVersion-'1.6',
+			version-1,
+			metadata-Metadata,
+			components-Components,
+			dependencies-Dependencies
+		}.
+
 	creation_info(CreationInfo, Options) :-
 		creation_timestamp(Created),
 		creators(Creators, Options),
@@ -155,6 +185,19 @@
 
 	creators([Creator], Options) :-
 		^^option(creator(Creator), Options).
+
+	cyclonedx_metadata(Created, Creators, ApplicationPackage, Metadata) :-
+		cyclonedx_authors(Creators, Authors),
+		cyclonedx_component_json(ApplicationPackage, ApplicationComponent),
+		Metadata = {
+			timestamp-Created,
+			authors-Authors,
+			component-ApplicationComponent
+		}.
+
+	cyclonedx_authors([], []).
+	cyclonedx_authors([Creator| Creators], [{name-Creator}| Authors]) :-
+		cyclonedx_authors(Creators, Authors).
 
 	creation_timestamp(Created) :-
 		date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
@@ -307,6 +350,120 @@
 		package_json_pairs(Metadata, Checksum, SPDXID, Name, Version, License, Purpose, Description, Pairs),
 		json_object(Pairs, JSON).
 
+	cyclonedx_components_json([], []).
+	cyclonedx_components_json([Package| Packages], [JSON| JSONs]) :-
+		cyclonedx_component_json(Package, JSON),
+		cyclonedx_components_json(Packages, JSONs).
+
+	cyclonedx_component_json(package(Reference, Name, Version, License, Checksum, Metadata, Purpose, Description), JSON) :-
+		cyclonedx_component_pairs(Metadata, Checksum, Reference, Name, Version, License, Purpose, Description, Pairs),
+		json_object(Pairs, JSON).
+
+	cyclonedx_component_pairs(Metadata, Checksum, Reference, Name, Version, License, Purpose, Description, Pairs) :-
+		cyclonedx_component_type(Purpose, Type),
+		BasePairs = [
+			type-Type,
+			'bom-ref'-Reference,
+			name-Name,
+			version-Version,
+			description-Description
+		],
+		cyclonedx_hash_pairs(Checksum, HashPairs),
+		cyclonedx_license_pairs(License, LicensePairs),
+		cyclonedx_entity_pairs(Metadata, EntityPairs),
+		cyclonedx_property_pairs(Metadata, PropertyPairs),
+		append(BasePairs, HashPairs, Pairs0),
+		append(Pairs0, LicensePairs, Pairs1),
+		append(Pairs1, EntityPairs, Pairs2),
+		append(Pairs2, PropertyPairs, Pairs).
+
+	cyclonedx_component_type('APPLICATION', application).
+	cyclonedx_component_type('FRAMEWORK', framework).
+	cyclonedx_component_type('LIBRARY', library).
+
+	cyclonedx_hash_pairs(none, []).
+	cyclonedx_hash_pairs(checksum('SHA256', Value), [hashes-[{alg-'SHA-256', content-Value}]]).
+
+	cyclonedx_license_pairs('NOASSERTION', []).
+	cyclonedx_license_pairs(License, [licenses-[{license-{name-License}}]]).
+
+	cyclonedx_entity_pairs(metadata(_, _, _, Supplier, Originator), Pairs) :-
+		cyclonedx_supplier_pairs(Supplier, SupplierPairs),
+		cyclonedx_originator_pairs(Originator, OriginatorPairs),
+		append(SupplierPairs, OriginatorPairs, Pairs).
+
+	cyclonedx_supplier_pairs(absent, []).
+	cyclonedx_supplier_pairs(Supplier, [supplier-{name-Name}]) :-
+		cyclonedx_organization_name(Supplier, Name),
+		!.
+	cyclonedx_supplier_pairs(_, []).
+
+	cyclonedx_originator_pairs(absent, []).
+	cyclonedx_originator_pairs(Originator, [manufacturer-{name-Name}]) :-
+		cyclonedx_organization_name(Originator, Name),
+		!.
+	cyclonedx_originator_pairs(Originator, [authors-[{name-Name}]]) :-
+		cyclonedx_person_name(Originator, Name),
+		!.
+	cyclonedx_originator_pairs(Originator, [authors-[{name-Originator}]]) :-
+		Originator \== absent.
+
+	cyclonedx_organization_name(Value, Name) :-
+		atom_concat('Organization: ', Name, Value).
+
+	cyclonedx_person_name(Value, Name) :-
+		atom_concat('Person: ', Name, Value).
+
+	cyclonedx_property_pairs(metadata(BuiltDate, ReleaseDate, ValidUntilDate, Supplier, Originator), [properties-Properties]) :-
+		findall(Property, cyclonedx_property(metadata(BuiltDate, ReleaseDate, ValidUntilDate, Supplier, Originator), Property), Properties),
+		Properties \== [],
+		!.
+	cyclonedx_property_pairs(_, []).
+
+	cyclonedx_property(metadata(Value, _, _, _, _), {name-'logtalk:sbom:built_date', value-Value}) :-
+		Value \== absent.
+	cyclonedx_property(metadata(_, Value, _, _, _), {name-'logtalk:sbom:release_date', value-Value}) :-
+		Value \== absent.
+	cyclonedx_property(metadata(_, _, Value, _, _), {name-'logtalk:sbom:valid_until_date', value-Value}) :-
+		Value \== absent.
+	cyclonedx_property(metadata(_, _, _, Value, _), {name-'logtalk:sbom:supplier', value-Value}) :-
+		Value \== absent.
+	cyclonedx_property(metadata(_, _, _, _, Value), {name-'logtalk:sbom:originator', value-Value}) :-
+		Value \== absent.
+
+	cyclonedx_dependencies_json(Packages, Dependencies) :-
+		pack_references(Packages, PackReferences),
+		cyclonedx_dependency_entries(Packages, PackReferences, Dependencies).
+
+	pack_references([], []).
+	pack_references([package(Reference, _, _, _, _, _, 'LIBRARY', _)| Packages], [Reference| References]) :-
+		!,
+		pack_references(Packages, References).
+	pack_references([_| Packages], References) :-
+		pack_references(Packages, References).
+
+	cyclonedx_dependency_entries([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], PackReferences, [ApplicationDependency, LogtalkDependency, BackendDependency| PackDependencies]) :-
+		ApplicationPackage = package(ApplicationReference, _, _, _, _, _, _, _),
+		LogtalkPackage = package(LogtalkReference, _, _, _, _, _, _, _),
+		BackendPackage = package(BackendReference, _, _, _, _, _, _, _),
+		cyclonedx_dependency_json(ApplicationReference, [LogtalkReference, BackendReference| PackReferences], ApplicationDependency),
+		cyclonedx_dependency_json(LogtalkReference, [BackendReference], LogtalkDependency),
+		cyclonedx_dependency_json(BackendReference, [], BackendDependency),
+		cyclonedx_pack_dependency_entries(PackPackages, PackDependencies).
+
+	cyclonedx_pack_dependency_entries([], []).
+	cyclonedx_pack_dependency_entries([package(Reference, _, _, _, _, _, _, _)| Packages], [Dependency| Dependencies]) :-
+		cyclonedx_dependency_json(Reference, [], Dependency),
+		cyclonedx_pack_dependency_entries(Packages, Dependencies).
+
+	cyclonedx_dependency_json(Reference, [], JSON) :-
+		JSON = {ref-Reference}.
+	cyclonedx_dependency_json(Reference, DependsOn, JSON) :-
+		JSON = {
+			ref-Reference,
+			dependsOn-DependsOn
+		}.
+
 	package_json_pairs(Metadata, Checksum, SPDXID, Name, Version, License, Purpose, Description, Pairs) :-
 		BasePairs = [
 			'SPDXID'-SPDXID,
@@ -378,15 +535,20 @@
 		},
 		pack_relationships(PackPackages, Relationships).
 
-	validate_document(Document) :-
-		schema_path(Path),
+	validate_document(Document, Options) :-
+		^^option(format(Format), Options),
+		schema_path(Format, Path),
 		json_schema_parse(file(Path), Schema),
 		json_schema_validate(Schema, Document).
 
-	schema_path(Path) :-
+	schema_path(spdx, Path) :-
 		object_property(sbom, file(File)),
 		decompose_file_name(File, Directory, _),
-		path_concat(Directory, 'spdx-schema.json', Path).
+		path_concat(Directory, 'test_files/spdx-schema.json', Path).
+	schema_path(cdx, Path) :-
+		object_property(sbom, file(File)),
+		decompose_file_name(File, Directory, _),
+		path_concat(Directory, 'test_files/cyclonedx-1.6.schema.json', Path).
 
 	version_atom(v(Major, Minor, Patch), Version) :-
 		!,
@@ -417,6 +579,7 @@
 		write_term_to_atom(Version, VersionAtom, [quoted(true)]).
 
 	default_option(name('loaded-application')).
+	default_option(format(spdx)).
 	default_option(version('0.0.0')).
 	default_option(application_license('NOASSERTION')).
 	default_option(logtalk_license('Apache-2.0')).
@@ -427,6 +590,8 @@
 
 	valid_option(name(Name)) :-
 		atom(Name).
+	valid_option(format(spdx)).
+	valid_option(format(cdx)).
 	valid_option(version(Version)) :-
 		atom(Version).
 	valid_option(application_license(License)) :-

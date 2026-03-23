@@ -20,19 +20,7 @@
 
 
 :- initialization((
-	logtalk_load_context(directory, Directory),
-	atom_concat(Directory, 'test_files/logtalk_packs/', LogtalkPacks),
-	retractall(logtalk_library_path(logtalk_packs, _)),
-	assertz(logtalk_library_path(logtalk_packs, LogtalkPacks)),
-	set_logtalk_flag(report, warnings),
-	logtalk_load(json(loader)),
-	logtalk_load(json_schema(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(term_io(loader)),
-	logtalk_load(packs(loader)),
-	logtalk_load(sbom, [debug(on), source_data(on)]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load('test_files/tests', [hook(lgtunit)]),
-	tests::run
+	logtalk_load(sbom_fixture_registry),
+	logtalk_load(sbom_fixture_pack),
+	logtalk_load(sbom_fixture_no_checksum_pack)
 )).
