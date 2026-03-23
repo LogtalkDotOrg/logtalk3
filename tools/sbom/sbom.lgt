@@ -106,7 +106,7 @@
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		spdx_document(Document, Options),
-		(^^option(validate_export(true), Options) ->
+		(	^^option(validate_export(true), Options) ->
 			validate_document(Document)
 		;	true
 		),
@@ -124,9 +124,12 @@
 		^^option(backend_license(BackendLicense), Options),
 		creation_info(CreationInfo, Options),
 		document_namespace(DocumentNamespace, Options),
-		application_package(Name, Version, ApplicationLicense, ApplicationPackage),
-		logtalk_package(LogtalkLicense, LogtalkPackage),
-		backend_package(BackendLicense, BackendPackage),
+		application_metadata_options(Options, ApplicationMetadata),
+		logtalk_metadata_options(Options, LogtalkMetadata),
+		backend_metadata_options(Options, BackendMetadata),
+		application_package(Name, Version, ApplicationLicense, ApplicationMetadata, ApplicationPackage),
+		logtalk_package(LogtalkLicense, LogtalkMetadata, LogtalkPackage),
+		backend_package(BackendLicense, BackendMetadata, BackendPackage),
 		loaded_pack_packages(Options, PackPackages),
 		packages_json([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], Packages),
 		relationships_json(PackPackages, Relationships),
@@ -165,13 +168,55 @@
 		atomic_list_concat([PID, TimeInteger], '-', Suffix),
 		atomic_list_concat([BaseNamespace, Suffix], '/', DocumentNamespace).
 
-	application_package(Name, Version, License, package('SPDXRef-Application', Name, Version, License, none, 'APPLICATION', 'Logtalk application currently loaded in this session')).
+	application_metadata_options(Options, metadata(BuiltDate, ReleaseDate, ValidUntilDate, Supplier, Originator)) :-
+		optional_metadata_option(application_built_date, Options, BuiltDate),
+		optional_metadata_option(application_release_date, Options, ReleaseDate),
+		optional_metadata_option(application_valid_until_date, Options, ValidUntilDate),
+		optional_metadata_option(application_supplier, Options, Supplier),
+		optional_metadata_option(application_originator, Options, Originator).
 
-	logtalk_package(License, package('SPDXRef-Logtalk', 'Logtalk', Version, License, none, 'FRAMEWORK', 'Logtalk runtime')) :-
+	logtalk_metadata_options(Options, metadata(BuiltDate, ReleaseDate, ValidUntilDate, Supplier, Originator)) :-
+		optional_metadata_option(logtalk_built_date, Options, BuiltDate),
+		optional_metadata_option(logtalk_release_date, Options, ReleaseDate),
+		optional_metadata_option(logtalk_valid_until_date, Options, ValidUntilDate),
+		optional_metadata_option(logtalk_supplier, Options, Supplier),
+		optional_metadata_option(logtalk_originator, Options, Originator).
+
+	backend_metadata_options(Options, metadata(BuiltDate, ReleaseDate, ValidUntilDate, Supplier, Originator)) :-
+		optional_metadata_option(backend_built_date, Options, BuiltDate),
+		optional_metadata_option(backend_release_date, Options, ReleaseDate),
+		optional_metadata_option(backend_valid_until_date, Options, ValidUntilDate),
+		optional_metadata_option(backend_supplier, Options, Supplier),
+		optional_metadata_option(backend_originator, Options, Originator).
+
+	pack_metadata_options(Pack, Options, metadata(BuiltDate, ReleaseDate, ValidUntilDate, Supplier, Originator)) :-
+		optional_pack_metadata_option(pack_built_date, Pack, Options, BuiltDate),
+		optional_pack_metadata_option(pack_release_date, Pack, Options, ReleaseDate),
+		optional_pack_metadata_option(pack_valid_until_date, Pack, Options, ValidUntilDate),
+		optional_pack_metadata_option(pack_supplier, Pack, Options, Supplier),
+		optional_pack_metadata_option(pack_originator, Pack, Options, Originator).
+
+	optional_metadata_option(Functor, Options, Value) :-
+		Template =.. [Functor, Value],
+		(   ^^option(Template, Options) ->
+			true
+		;   Value = absent
+		).
+
+	optional_pack_metadata_option(Functor, Pack, Options, Value) :-
+		Template =.. [Functor, Pack, Value],
+		(   ^^option(Template, Options) ->
+			true
+		;   Value = absent
+		).
+
+	application_package(Name, Version, License, Metadata, package('SPDXRef-Application', Name, Version, License, none, Metadata, 'APPLICATION', 'Logtalk application currently loaded in this session')).
+
+	logtalk_package(License, Metadata, package('SPDXRef-Logtalk', 'Logtalk', Version, License, none, Metadata, 'FRAMEWORK', 'Logtalk runtime')) :-
 		current_logtalk_flag(version_data, logtalk(Major, Minor, Patch, Status)),
 		version_atom(logtalk(Major, Minor, Patch, Status), Version).
 
-	backend_package(LicenseOption, package('SPDXRef-Backend', BackendName, Version, License, none, 'FRAMEWORK', 'Backend Prolog compiler/runtime')) :-
+	backend_package(LicenseOption, Metadata, package('SPDXRef-Backend', BackendName, Version, License, none, Metadata, 'FRAMEWORK', 'Backend Prolog compiler/runtime')) :-
 		current_logtalk_flag(prolog_dialect, Backend),
 		backend(Backend, BackendName, DefaultLicense),
 		(   LicenseOption == default ->
@@ -198,17 +243,18 @@
 
 	loaded_pack_packages(Options, PackPackages) :-
 		findall(
-			package(SPDXID, Pack, VersionAtom, License, Checksum, 'LIBRARY', Description),
-			loaded_pack_package(SPDXID, Pack, VersionAtom, License, Checksum, Description, Options),
+			package(SPDXID, Pack, VersionAtom, License, Checksum, Metadata, 'LIBRARY', Description),
+			loaded_pack_package(SPDXID, Pack, VersionAtom, License, Checksum, Metadata, Description, Options),
 			PackPackages0
 		),
 		sort(PackPackages0, PackPackages).
 
-	loaded_pack_package(SPDXID, Pack, VersionAtom, License, Checksum, Description, Options) :-
+	loaded_pack_package(SPDXID, Pack, VersionAtom, License, Checksum, Metadata, Description, Options) :-
 		installed(Registry, Pack, Version, _Pinned),
 		directory(Pack, PackDirectory),
 		loaded_from_pack_directory(PackDirectory),
 		version_atom(Version, VersionAtom),
+		pack_metadata_options(Pack, Options, Metadata),
 		pack_metadata(Registry, Pack, Version, DefaultLicense, Checksum),
 		pack_license(Pack, DefaultLicense, Options, License),
 		atomic_list_concat(['SPDXRef-Pack-', Pack], SPDXID),
@@ -247,7 +293,9 @@
 	loaded_from_pack_directory(PackDirectory) :-
 		atom_concat(PackDirectory, '/', Prefix),
 		logtalk::loaded_file_property(_, directory(LoadedDirectory)),
-		(LoadedDirectory == PackDirectory ; sub_atom(LoadedDirectory, 0, _, _, Prefix)),
+		(	LoadedDirectory == PackDirectory
+		;	sub_atom(LoadedDirectory, 0, _, _, Prefix)
+		),
 		!.
 
 	packages_json([], []).
@@ -255,34 +303,59 @@
 		package_json(Package, JSON),
 		packages_json(Packages, JSONs).
 
-	package_json(package(SPDXID, Name, Version, License, none, Purpose, Description), JSON) :-
-		JSON = {
-			'SPDXID'-SPDXID,
-			name-Name,
-			versionInfo-Version,
-			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
-			filesAnalyzed- @false,
-			licenseConcluded-License,
-			licenseDeclared-License,
-			primaryPackagePurpose-Purpose,
-			summary-Description
-		}.
-	package_json(package(SPDXID, Name, Version, License, Checksum, Purpose, Description), JSON) :-
-		checksum_json(Checksum, ChecksumJSON),
-		JSON = {
-			'SPDXID'-SPDXID,
-			name-Name,
-			versionInfo-Version,
-			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
-			filesAnalyzed- @false,
-			checksums-[ChecksumJSON],
-			licenseConcluded-License,
-			licenseDeclared-License,
-			primaryPackagePurpose-Purpose,
-			summary-Description
-		}.
+	package_json(package(SPDXID, Name, Version, License, Checksum, Metadata, Purpose, Description), JSON) :-
+		package_json_pairs(Metadata, Checksum, SPDXID, Name, Version, License, Purpose, Description, Pairs),
+		json_object(Pairs, JSON).
 
-	checksum_json(checksum(Algorithm, Value), {algorithm-Algorithm, checksumValue-Value}).
+	package_json_pairs(Metadata, Checksum, SPDXID, Name, Version, License, Purpose, Description, Pairs) :-
+		BasePairs = [
+			'SPDXID'-SPDXID,
+			name-Name,
+			versionInfo-Version,
+			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
+			filesAnalyzed- @false
+		],
+		LicensePairs = [
+			licenseConcluded-License,
+			licenseDeclared-License
+		],
+		TrailingPairs = [
+			primaryPackagePurpose-Purpose,
+			summary-Description
+		],
+		checksum_pairs(Checksum, ChecksumPairs),
+		metadata_pairs(Metadata, MetadataPairs),
+		append(BasePairs, ChecksumPairs, Pairs0),
+		append(Pairs0, LicensePairs, Pairs1),
+		append(Pairs1, MetadataPairs, Pairs2),
+		append(Pairs2, TrailingPairs, Pairs).
+
+	checksum_pairs(none, []).
+	checksum_pairs(checksum(Algorithm, Value), [checksums-[{algorithm-Algorithm, checksumValue-Value}]]).
+
+	metadata_pairs(metadata(BuiltDate, ReleaseDate, ValidUntilDate, Supplier, Originator), Pairs) :-
+		optional_pair(builtDate, BuiltDate, BuiltDatePairs),
+		optional_pair(releaseDate, ReleaseDate, ReleaseDatePairs),
+		optional_pair(validUntilDate, ValidUntilDate, ValidUntilDatePairs),
+		optional_pair(supplier, Supplier, SupplierPairs),
+		optional_pair(originator, Originator, OriginatorPairs),
+		append(BuiltDatePairs, ReleaseDatePairs, Pairs0),
+		append(Pairs0, ValidUntilDatePairs, Pairs1),
+		append(Pairs1, SupplierPairs, Pairs2),
+		append(Pairs2, OriginatorPairs, Pairs).
+
+	optional_pair(_, absent, []) :-
+		!.
+	optional_pair(Key, Value, [Key-Value]).
+
+	json_object([Pair| Pairs], JSON) :-
+		list_to_curly_pairs([Pair| Pairs], Term),
+		JSON = {Term}.
+
+	list_to_curly_pairs([Pair], Pair) :-
+		!.
+	list_to_curly_pairs([Pair| Pairs], (Pair, Rest)) :-
+		list_to_curly_pairs(Pairs, Rest).
 
 	relationships_json(PackPackages, Relationships) :-
 		base_relationships(BaseRelationships),
@@ -297,7 +370,7 @@
 	]).
 
 	pack_relationships([], []).
-	pack_relationships([package(SPDXID, _, _, _, _, _, _)| PackPackages], [Relationship| Relationships]) :-
+	pack_relationships([package(SPDXID, _, _, _, _, _, _, _)| PackPackages], [Relationship| Relationships]) :-
 		Relationship = {
 			spdxElementId-'SPDXRef-Application',
 			relationshipType-'DEPENDS_ON',
@@ -360,12 +433,77 @@
 		atom(License).
 	valid_option(logtalk_license(License)) :-
 		atom(License).
+	valid_option(application_built_date(BuiltDate)) :-
+		atom(BuiltDate),
+		BuiltDate \== none.
+	valid_option(application_release_date(ReleaseDate)) :-
+		atom(ReleaseDate),
+		ReleaseDate \== none.
+	valid_option(application_valid_until_date(ValidUntilDate)) :-
+		atom(ValidUntilDate),
+		ValidUntilDate \== none.
+	valid_option(application_supplier(Supplier)) :-
+		atom(Supplier),
+		Supplier \== none.
+	valid_option(application_originator(Originator)) :-
+		atom(Originator),
+		Originator \== none.
+	valid_option(logtalk_built_date(BuiltDate)) :-
+		atom(BuiltDate),
+		BuiltDate \== none.
+	valid_option(logtalk_release_date(ReleaseDate)) :-
+		atom(ReleaseDate),
+		ReleaseDate \== none.
+	valid_option(logtalk_valid_until_date(ValidUntilDate)) :-
+		atom(ValidUntilDate),
+		ValidUntilDate \== none.
+	valid_option(logtalk_supplier(Supplier)) :-
+		atom(Supplier),
+		Supplier \== none.
+	valid_option(logtalk_originator(Originator)) :-
+		atom(Originator),
+		Originator \== none.
 	valid_option(pack_license(Pack, License)) :-
 		atom(Pack),
 		atom(License).
+	valid_option(pack_built_date(Pack, BuiltDate)) :-
+		atom(Pack),
+		atom(BuiltDate),
+		BuiltDate \== none.
+	valid_option(pack_release_date(Pack, ReleaseDate)) :-
+		atom(Pack),
+		atom(ReleaseDate),
+		ReleaseDate \== none.
+	valid_option(pack_valid_until_date(Pack, ValidUntilDate)) :-
+		atom(Pack),
+		atom(ValidUntilDate),
+		ValidUntilDate \== none.
+	valid_option(pack_supplier(Pack, Supplier)) :-
+		atom(Pack),
+		atom(Supplier),
+		Supplier \== none.
+	valid_option(pack_originator(Pack, Originator)) :-
+		atom(Pack),
+		atom(Originator),
+		Originator \== none.
 	valid_option(backend_license(default)).
 	valid_option(backend_license(License)) :-
 		atom(License).
+	valid_option(backend_built_date(BuiltDate)) :-
+		atom(BuiltDate),
+		BuiltDate \== none.
+	valid_option(backend_release_date(ReleaseDate)) :-
+		atom(ReleaseDate),
+		ReleaseDate \== none.
+	valid_option(backend_valid_until_date(ValidUntilDate)) :-
+		atom(ValidUntilDate),
+		ValidUntilDate \== none.
+	valid_option(backend_supplier(Supplier)) :-
+		atom(Supplier),
+		Supplier \== none.
+	valid_option(backend_originator(Originator)) :-
+		atom(Originator),
+		Originator \== none.
 	valid_option(namespace(Namespace)) :-
 		atom(Namespace).
 	valid_option(creator(Creator)) :-

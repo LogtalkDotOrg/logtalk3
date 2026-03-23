@@ -148,6 +148,21 @@
 			application_license('MIT'),
 			logtalk_license('Apache-2.0'),
 			backend_license('BSD-2-Clause'),
+			application_built_date('2026-03-23T00:00:00Z'),
+			application_release_date('2026-03-23T00:00:00Z'),
+			application_valid_until_date('2027-03-23T00:00:00Z'),
+			application_supplier('Organization: Example Application'),
+			application_originator('Person: Application Maintainer'),
+			logtalk_built_date('2026-03-22T00:00:00Z'),
+			logtalk_release_date('2026-03-22T00:00:00Z'),
+			logtalk_valid_until_date('2027-03-22T00:00:00Z'),
+			logtalk_supplier('Organization: Logtalk.org'),
+			logtalk_originator('Person: Paulo Moura'),
+			backend_built_date('2026-03-21T00:00:00Z'),
+			backend_release_date('2026-03-21T00:00:00Z'),
+			backend_valid_until_date('2027-03-21T00:00:00Z'),
+			backend_supplier('Organization: Backend Vendor'),
+			backend_originator('Organization: Backend Vendor'),
 			pack_license(dummy_pack, 'Zlib'),
 			creator('Tool: Custom exporter'),
 			namespace('https://example.com/spdx')
@@ -174,6 +189,11 @@
 			filesAnalyzed- @false,
 			licenseConcluded-'MIT',
 			licenseDeclared-'MIT',
+			builtDate-'2026-03-23T00:00:00Z',
+			releaseDate-'2026-03-23T00:00:00Z',
+			validUntilDate-'2027-03-23T00:00:00Z',
+			supplier-'Organization: Example Application',
+			originator-'Person: Application Maintainer',
 			primaryPackagePurpose-'APPLICATION',
 			summary-_
 		}, Packages),
@@ -185,6 +205,11 @@
 			filesAnalyzed- @false,
 			licenseConcluded-'Apache-2.0',
 			licenseDeclared-'Apache-2.0',
+			builtDate-'2026-03-22T00:00:00Z',
+			releaseDate-'2026-03-22T00:00:00Z',
+			validUntilDate-'2027-03-22T00:00:00Z',
+			supplier-'Organization: Logtalk.org',
+			originator-'Person: Paulo Moura',
 			primaryPackagePurpose-'FRAMEWORK',
 			summary-_
 		}, Packages),
@@ -196,6 +221,11 @@
 			filesAnalyzed- @false,
 			licenseConcluded-'BSD-2-Clause',
 			licenseDeclared-'BSD-2-Clause',
+			builtDate-'2026-03-21T00:00:00Z',
+			releaseDate-'2026-03-21T00:00:00Z',
+			validUntilDate-'2027-03-21T00:00:00Z',
+			supplier-'Organization: Backend Vendor',
+			originator-'Organization: Backend Vendor',
 			primaryPackagePurpose-'FRAMEWORK',
 			summary-_
 		}, Packages).
@@ -233,7 +263,14 @@
 		}, Relationships).
 
 	test(sbom_document_04, deterministic) :-
-		document(Document, [pack_license(sbom_fixture_pack, 'Zlib')]),
+		document(Document, [
+			pack_license(sbom_fixture_pack, 'Zlib'),
+			pack_built_date(sbom_fixture_pack, '2026-03-20T00:00:00Z'),
+			pack_release_date(sbom_fixture_pack, '2026-03-20T00:00:00Z'),
+			pack_valid_until_date(sbom_fixture_pack, '2027-03-20T00:00:00Z'),
+			pack_supplier(sbom_fixture_pack, 'Organization: Fixture Registry'),
+			pack_originator(sbom_fixture_pack, 'Person: Fixture Author')
+		]),
 		Document = {
 			spdxVersion-_,
 			dataLicense-_,
@@ -255,6 +292,11 @@
 			checksums-[{algorithm-'SHA256', checksumValue-'0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'}],
 			licenseConcluded-'Zlib',
 			licenseDeclared-'Zlib',
+			builtDate-'2026-03-20T00:00:00Z',
+			releaseDate-'2026-03-20T00:00:00Z',
+			validUntilDate-'2027-03-20T00:00:00Z',
+			supplier-'Organization: Fixture Registry',
+			originator-'Person: Fixture Author',
 			primaryPackagePurpose-'LIBRARY',
 			summary-'Loaded Logtalk pack sbom_fixture_pack'
 		}, Packages),
