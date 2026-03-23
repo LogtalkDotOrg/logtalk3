@@ -191,11 +191,20 @@ predicates write the JSON document to any sink accepted by the
 <code class="docutils literal notranslate"><span class="pre">loaded-application</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">version(Version)</span></code> Sets the application package version. Default is
 <code class="docutils literal notranslate"><span class="pre">0.0.0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">application_license(License)</span></code> Sets the application package
+<code class="docutils literal notranslate"><span class="pre">licenseConcluded</span></code> and <code class="docutils literal notranslate"><span class="pre">licenseDeclared</span></code> SPDX identifiers. Default
+is <code class="docutils literal notranslate"><span class="pre">NOASSERTION</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">logtalk_license(License)</span></code> Sets the Logtalk package
+<code class="docutils literal notranslate"><span class="pre">licenseConcluded</span></code> and <code class="docutils literal notranslate"><span class="pre">licenseDeclared</span></code> SPDX identifiers. Default
+is <code class="docutils literal notranslate"><span class="pre">Apache-2.0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">backend_license(License)</span></code> Sets the backend Prolog package
+<code class="docutils literal notranslate"><span class="pre">licenseConcluded</span></code> and <code class="docutils literal notranslate"><span class="pre">licenseDeclared</span></code> SPDX identifiers. Default
+is the license specified in the <code class="docutils literal notranslate"><span class="pre">backend/3</span></code> table.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">namespace(Namespace)</span></code> Sets the base document namespace URI. A
 process and timestamp suffix is added automatically to guarantee
 uniqueness. Default is <code class="docutils literal notranslate"><span class="pre">https://logtalk.org/spdxdocs/logtalk-sbom</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">creator(Creator)</span></code> Sets the <code class="docutils literal notranslate"><span class="pre">creationInfo.creators</span></code> entry. Default
-is <code class="docutils literal notranslate"><span class="pre">Tool:</span> <span class="pre">Logtalk</span> <span class="pre">sbom</span></code>.</p></li>
+is <code class="docutils literal notranslate"><span class="pre">Logtalk</span> <span class="pre">&quot;sbom&quot;</span> <span class="pre">tool</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">validate_export(Boolean)</span></code> When <code class="docutils literal notranslate"><span class="pre">true</span></code>, validates the generated
 document against the bundled SPDX 2.3 JSON Schema before exporting it.
 Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
@@ -210,6 +219,9 @@ Default is <code class="docutils literal notranslate"><span class="pre">false</s
 | <span class="o">?-</span> sbom<span class="o">::</span>export(<span class="k">atom</span>(<span class="nv">Atom</span>), [
         name(my_app),
         version(<span class="s">&#39;1.2.3&#39;</span>),
+        application_license(<span class="s">&#39;MIT&#39;</span>),
+        logtalk_license(<span class="s">&#39;Apache-2.0&#39;</span>),
+        backend_license(<span class="s">&#39;BSD-2-Clause&#39;</span>),
         creator(<span class="s">&#39;Tool: My build pipeline&#39;</span>),
         validate_export(<span class="k">true</span>)
      ]).

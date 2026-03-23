@@ -3,9 +3,9 @@
     "dataLicense": "CC0-1.0",
     "SPDXID": "SPDXRef-DOCUMENT",
     "name": "State-space searching framework",
-    "documentNamespace": "https://logtalk.org/spdxdocs/logtalk-sbom/85263-26260",
+    "documentNamespace": "https://logtalk.org/spdxdocs/logtalk-sbom/31173-59283",
     "creationInfo": {
-        "created": "2026-03-23T00:35:23Z",
+        "created": "2026-03-23T08:00:22Z",
         "creators": [
             "Logtalk \"sbom\" tool"
         ]
@@ -31,8 +31,8 @@
             "versionInfo": "3.99.0-b01",
             "downloadLocation": "http://spdx.org/rdf/terms#noassertion",
             "filesAnalyzed": false,
-            "licenseConcluded": "NOASSERTION",
-            "licenseDeclared": "NOASSERTION",
+            "licenseConcluded": "Apache-2.0",
+            "licenseDeclared": "Apache-2.0",
             "primaryPackagePurpose": "FRAMEWORK",
             "summary": "Logtalk runtime"
         },
@@ -42,8 +42,8 @@
             "versionInfo": "10.1.5",
             "downloadLocation": "http://spdx.org/rdf/terms#noassertion",
             "filesAnalyzed": false,
-            "licenseConcluded": "NOASSERTION",
-            "licenseDeclared": "NOASSERTION",
+            "licenseConcluded": "BSD-2-Clause",
+            "licenseDeclared": "BSD-2-Clause",
             "primaryPackagePurpose": "FRAMEWORK",
             "summary": "Backend Prolog compiler/runtime"
         }

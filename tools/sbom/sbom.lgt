@@ -117,11 +117,14 @@
 	spdx_document(Document, Options) :-
 		^^option(name(Name), Options),
 		^^option(version(Version), Options),
+		^^option(application_license(ApplicationLicense), Options),
+		^^option(logtalk_license(LogtalkLicense), Options),
+		^^option(backend_license(BackendLicense), Options),
 		creation_info(CreationInfo, Options),
 		document_namespace(DocumentNamespace, Options),
-		application_package(Name, Version, ApplicationPackage),
-		logtalk_package(LogtalkPackage),
-		backend_package(BackendPackage),
+		application_package(Name, Version, ApplicationLicense, ApplicationPackage),
+		logtalk_package(LogtalkLicense, LogtalkPackage),
+		backend_package(BackendLicense, BackendPackage),
 		loaded_pack_packages(PackPackages),
 		packages_json([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], Packages),
 		relationships_json(PackPackages, Relationships),
@@ -160,36 +163,40 @@
 		atomic_list_concat([PID, TimeInteger], '-', Suffix),
 		atomic_list_concat([BaseNamespace, Suffix], '/', DocumentNamespace).
 
-	application_package(Name, Version, package('SPDXRef-Application', Name, Version, 'APPLICATION', 'Logtalk application currently loaded in this session')).
+	application_package(Name, Version, License, package('SPDXRef-Application', Name, Version, License, 'APPLICATION', 'Logtalk application currently loaded in this session')).
 
-	logtalk_package(package('SPDXRef-Logtalk', 'Logtalk', Version, 'FRAMEWORK', 'Logtalk runtime')) :-
+	logtalk_package(License, package('SPDXRef-Logtalk', 'Logtalk', Version, License, 'FRAMEWORK', 'Logtalk runtime')) :-
 		current_logtalk_flag(version_data, logtalk(Major, Minor, Patch, Status)),
 		version_atom(logtalk(Major, Minor, Patch, Status), Version).
 
-	backend_package(package('SPDXRef-Backend', BackendName, Version, 'FRAMEWORK', 'Backend Prolog compiler/runtime')) :-
+	backend_package(LicenseOption, package('SPDXRef-Backend', BackendName, Version, License, 'FRAMEWORK', 'Backend Prolog compiler/runtime')) :-
 		current_logtalk_flag(prolog_dialect, Backend),
-		backend(Backend, BackendName),
+		backend(Backend, BackendName, DefaultLicense),
+		(   LicenseOption == default ->
+			License = DefaultLicense
+		;	License = LicenseOption
+		),
 		current_logtalk_flag(prolog_version, BackendVersion),
 		version_atom(BackendVersion, Version).
 
-	backend(b,       'B-Prolog').
-	backend(ciao,    'Ciao Prolog').
-	backend(cx,      'CxProlog').
-	backend(eclipse, 'ECLiPSe').
-	backend(gnu,     'GNU Prolog').
-	backend(ji,      'JIProlog').
-	backend(quintus, 'Quintus Prolog').
-	backend(sicstus, 'SICStus Prolog').
-	backend(swi,     'SWI-Prolog').
-	backend(tau,     'Tau Prolog').
-	backend(trealla, 'Trealla Prolog').
-	backend(xsb,     'XSB').
-	backend(xvm,     'XVM').
-	backend(yap,     'YAP').
+	backend(b,       'B-Prolog',       'NOASSERTION').
+	backend(ciao,    'Ciao Prolog',    'LGPL-2.1').
+	backend(cx,      'CxProlog',       'GPL-2.0-or-later').
+	backend(eclipse, 'ECLiPSe',        'MPL-1.1').
+	backend(gnu,     'GNU Prolog',     'LGPL-3.0-or-later').
+	backend(ji,      'JIProlog',       'NOASSERTION').
+	backend(quintus, 'Quintus Prolog', 'NOASSERTION').
+	backend(sicstus, 'SICStus Prolog', 'NOASSERTION').
+	backend(swi,     'SWI-Prolog',     'BSD-2-Clause').
+	backend(tau,     'Tau Prolog',     'BSD-3-Clause').
+	backend(trealla, 'Trealla Prolog', 'MIT').
+	backend(xsb,     'XSB',            'LGPL-2.0').
+	backend(xvm,     'XVM',            'NOASSERTION').
+	backend(yap,     'YAP',            'Artistic-2.0').
 
 	loaded_pack_packages(PackPackages) :-
 		findall(
-			package(SPDXID, Pack, VersionAtom, 'LIBRARY', Description),
+			package(SPDXID, Pack, VersionAtom, 'NOASSERTION', 'LIBRARY', Description),
 			loaded_pack_package(SPDXID, Pack, VersionAtom, Description),
 			PackPackages0
 		),
@@ -214,15 +221,15 @@
 		package_json(Package, JSON),
 		packages_json(Packages, JSONs).
 
-	package_json(package(SPDXID, Name, Version, Purpose, Description), JSON) :-
+	package_json(package(SPDXID, Name, Version, License, Purpose, Description), JSON) :-
 		JSON = {
 			'SPDXID'-SPDXID,
 			name-Name,
 			versionInfo-Version,
 			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
 			filesAnalyzed- @false,
-			licenseConcluded-'NOASSERTION',
-			licenseDeclared-'NOASSERTION',
+			licenseConcluded-License,
+			licenseDeclared-License,
 			primaryPackagePurpose-Purpose,
 			summary-Description
 		}.
@@ -240,7 +247,7 @@
 	]).
 
 	pack_relationships([], []).
-	pack_relationships([package(SPDXID, _, _, _, _)| PackPackages], [Relationship| Relationships]) :-
+	pack_relationships([package(SPDXID, _, _, _, _, _)| PackPackages], [Relationship| Relationships]) :-
 		Relationship = {
 			spdxElementId-'SPDXRef-Application',
 			relationshipType-'DEPENDS_ON',
@@ -288,6 +295,9 @@
 
 	default_option(name('loaded-application')).
 	default_option(version('0.0.0')).
+	default_option(application_license('NOASSERTION')).
+	default_option(logtalk_license('Apache-2.0')).
+	default_option(backend_license(default)).
 	default_option(namespace('https://logtalk.org/spdxdocs/logtalk-sbom')).
 	default_option(creator('Logtalk "sbom" tool')).
 	default_option(validate_export(false)).
@@ -296,6 +306,12 @@
 		atom(Name).
 	valid_option(version(Version)) :-
 		atom(Version).
+	valid_option(application_license(License)) :-
+		atom(License).
+	valid_option(logtalk_license(License)) :-
+		atom(License).
+	valid_option(backend_license(License)) :-
+		atom(License).
 	valid_option(namespace(Namespace)) :-
 		atom(Namespace).
 	valid_option(creator(Creator)) :-

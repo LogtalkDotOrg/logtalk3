@@ -64,11 +64,20 @@ Supported options are:
   ``loaded-application``.
 - ``version(Version)`` Sets the application package version. Default is
   ``0.0.0``.
+- ``application_license(License)`` Sets the application package
+  ``licenseConcluded`` and ``licenseDeclared`` SPDX identifiers. Default
+  is ``NOASSERTION``.
+- ``logtalk_license(License)`` Sets the Logtalk package
+  ``licenseConcluded`` and ``licenseDeclared`` SPDX identifiers. Default
+  is ``Apache-2.0``.
+- ``backend_license(License)`` Sets the backend Prolog package
+  ``licenseConcluded`` and ``licenseDeclared`` SPDX identifiers. Default
+  is the license specified in the ``backend/3`` table.
 - ``namespace(Namespace)`` Sets the base document namespace URI. A
   process and timestamp suffix is added automatically to guarantee
   uniqueness. Default is ``https://logtalk.org/spdxdocs/logtalk-sbom``.
 - ``creator(Creator)`` Sets the ``creationInfo.creators`` entry. Default
-  is ``Tool: Logtalk sbom``.
+  is ``Logtalk "sbom" tool``.
 - ``validate_export(Boolean)`` When ``true``, validates the generated
   document against the bundled SPDX 2.3 JSON Schema before exporting it.
   Default is ``false``.
@@ -86,6 +95,9 @@ Examples:
    | ?- sbom::export(atom(Atom), [
            name(my_app),
            version('1.2.3'),
+           application_license('MIT'),
+           logtalk_license('Apache-2.0'),
+           backend_license('BSD-2-Clause'),
            creator('Tool: My build pipeline'),
            validate_export(true)
         ]).

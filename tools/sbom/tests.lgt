@@ -84,12 +84,12 @@
 		}, Packages),
 		memberchk({
 			'SPDXID'-'SPDXRef-Logtalk',
-			name-logtalk,
+			name-'Logtalk',
 			versionInfo-_,
 			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
 			filesAnalyzed- @false,
-			licenseConcluded-'NOASSERTION',
-			licenseDeclared-'NOASSERTION',
+			licenseConcluded-'Apache-2.0',
+			licenseDeclared-'Apache-2.0',
 			primaryPackagePurpose-'FRAMEWORK',
 			summary-'Logtalk runtime'
 		}, Packages),
@@ -109,7 +109,15 @@
 		memberchk({spdxElementId-'SPDXRef-Application', relationshipType-'DEPENDS_ON', relatedSpdxElement-'SPDXRef-Backend'}, Relationships).
 
 	test(sbom_document_02, deterministic) :-
-		document(Document, [name(sample_app), version('1.2.3'), creator('Tool: Custom exporter'), namespace('https://example.com/spdx')]),
+		document(Document, [
+			name(sample_app),
+			version('1.2.3'),
+			application_license('MIT'),
+			logtalk_license('Apache-2.0'),
+			backend_license('BSD-2-Clause'),
+			creator('Tool: Custom exporter'),
+			namespace('https://example.com/spdx')
+		]),
 		Document = {
 			spdxVersion-'SPDX-2.3',
 			dataLicense-'CC0-1.0',
@@ -129,9 +137,31 @@
 			versionInfo-'1.2.3',
 			downloadLocation-_,
 			filesAnalyzed- @false,
-			licenseConcluded-'NOASSERTION',
-			licenseDeclared-'NOASSERTION',
+			licenseConcluded-'MIT',
+			licenseDeclared-'MIT',
 			primaryPackagePurpose-'APPLICATION',
+			summary-_
+		}, Packages),
+		memberchk({
+			'SPDXID'-'SPDXRef-Logtalk',
+			name-'Logtalk',
+			versionInfo-_,
+			downloadLocation-_,
+			filesAnalyzed- @false,
+			licenseConcluded-'Apache-2.0',
+			licenseDeclared-'Apache-2.0',
+			primaryPackagePurpose-'FRAMEWORK',
+			summary-_
+		}, Packages),
+		memberchk({
+			'SPDXID'-'SPDXRef-Backend',
+			name-_,
+			versionInfo-_,
+			downloadLocation-_,
+			filesAnalyzed- @false,
+			licenseConcluded-'BSD-2-Clause',
+			licenseDeclared-'BSD-2-Clause',
+			primaryPackagePurpose-'FRAMEWORK',
 			summary-_
 		}, Packages).
 
