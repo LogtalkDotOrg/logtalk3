@@ -603,7 +603,8 @@
 		custom_spdx_reference(Token).
 
 	custom_spdx_reference(Token) :-
-		sub_atom(Token, 0, _, _, 'LicenseRef-').
+		sub_atom(Token, 0, _, _, 'LicenseRef-'),
+		!.
 	custom_spdx_reference(Token) :-
 		sub_atom(Token, 0, _, _, 'DocumentRef-'),
 		sub_atom(Token, _, _, _, ':LicenseRef-').
@@ -650,13 +651,15 @@
 		cyclonedx_originator_pairs(Originator, OriginatorPairs),
 		append(SupplierPairs, OriginatorPairs, Pairs).
 
-	cyclonedx_supplier_pairs(absent, []).
+	cyclonedx_supplier_pairs(absent, []) :-
+		!.
 	cyclonedx_supplier_pairs(Supplier, [supplier-{name-Name}]) :-
 		cyclonedx_organization_name(Supplier, Name),
 		!.
 	cyclonedx_supplier_pairs(_, []).
 
-	cyclonedx_originator_pairs(absent, []).
+	cyclonedx_originator_pairs(absent, []) :-
+		!.
 	cyclonedx_originator_pairs(Originator, [manufacturer-{name-Name}]) :-
 		cyclonedx_organization_name(Originator, Name),
 		!.
@@ -715,6 +718,7 @@
 		cyclonedx_pack_dependency_entries(Packages, Dependencies).
 
 	cyclonedx_dependency_json(Reference, [], JSON) :-
+		!,
 		JSON = {ref-Reference}.
 	cyclonedx_dependency_json(Reference, DependsOn, JSON) :-
 		JSON = {
