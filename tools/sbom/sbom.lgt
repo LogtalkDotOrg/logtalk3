@@ -549,7 +549,7 @@
 
 	spdx_or_expression_rest -->
 		spdx_blanks,
-		"OR",
+		[0'O,0'R],
 		spdx_required_blanks,
 		spdx_and_expression,
 		spdx_or_expression_rest.
@@ -561,7 +561,7 @@
 
 	spdx_and_expression_rest -->
 		spdx_blanks,
-		"AND",
+		[0'A,0'N,0'D],
 		spdx_required_blanks,
 		spdx_with_expression,
 		spdx_and_expression_rest.
@@ -573,7 +573,7 @@
 
 	spdx_with_expression_rest -->
 		spdx_required_blanks,
-		"WITH",
+		[0'W,0'I,0'T,0'H],
 		spdx_required_blanks,
 		spdx_license_token,
 		spdx_blanks.
@@ -581,11 +581,11 @@
 
 	spdx_primary_expression -->
 		spdx_blanks,
-		"(",
+		[0'(],
 		spdx_blanks,
 		spdx_or_expression,
 		spdx_blanks,
-		")",
+		[0')],
 		spdx_blanks.
 	spdx_primary_expression -->
 		spdx_blanks,
@@ -632,7 +632,7 @@
 		spdx_blanks.
 	spdx_blanks --> [].
 
-	is_space(0' ).
+	is_space(32).
 	is_space(0'\t).
 	is_space(0'\n).
 	is_space(0'\r).
