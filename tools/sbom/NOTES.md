@@ -93,8 +93,9 @@ Global/application options:
 - `application_license(License)`
 	Sets the application license. Exported as the SPDX application package
 	`licenseConcluded` and `licenseDeclared` fields and, unless the value is
-	`NOASSERTION`, as the CycloneDX `metadata.component.licenses` entry. Default
-	is `NOASSERTION`.
+	`NOASSERTION`, as the CycloneDX `metadata.component.licenses` entry, using
+	`license.id` for SPDX license identifiers, `expression` for SPDX license
+	expressions, and `license.name` otherwise. Default is `NOASSERTION`.
 - `application_built_date(Date)`
 	Sets the application build date. Exported as the SPDX application package
 	`builtDate` field and as the CycloneDX custom property
@@ -137,8 +138,9 @@ Logtalk options:
 - `logtalk_license(License)`
 	Sets the Logtalk component license. Exported as the SPDX Logtalk package
 	`licenseConcluded` and `licenseDeclared` fields and, unless the value is
-	`NOASSERTION`, as the CycloneDX component `licenses` entry. Default is
-	`Apache-2.0`.
+	`NOASSERTION`, as the CycloneDX component `licenses` entry, using
+	`license.id` for SPDX license identifiers, `expression` for SPDX license
+	expressions, and `license.name` otherwise. Default is `Apache-2.0`.
 - `logtalk_built_date(Date)`
 	Sets the Logtalk build date. Exported as the SPDX Logtalk package
 	`builtDate` field and as the CycloneDX custom property
@@ -168,8 +170,10 @@ Backend options:
 - `backend_license(License)`
 	Sets the backend component license. Exported as the SPDX backend package
 	`licenseConcluded` and `licenseDeclared` fields and, unless the value is
-	`NOASSERTION`, as the CycloneDX component `licenses` entry. Default is the
-	license specified in the `backend/3` table.
+	`NOASSERTION`, as the CycloneDX component `licenses` entry, using
+	`license.id` for SPDX license identifiers, `expression` for SPDX license
+	expressions, and `license.name` otherwise. Default is the license specified
+	in the `backend/3` table.
 - `backend_built_date(Date)`
 	Sets the backend build date. Exported as the SPDX backend package
 	`builtDate` field and as the CycloneDX custom property
@@ -199,8 +203,10 @@ Pack options:
 - `pack_license(Pack, License)`
 	Sets the license for a loaded pack named `Pack`. Exported as the SPDX pack
 	package `licenseConcluded` and `licenseDeclared` fields and, unless the value
-	is `NOASSERTION`, as the CycloneDX component `licenses` entry. Default for
-	packs without an explicit option is the result of sending the pack
+	is `NOASSERTION`, as the CycloneDX component `licenses` entry, using
+	`license.id` for SPDX license identifiers, `expression` for SPDX license
+	expressions, and `license.name` otherwise. Default for packs without an
+	explicit option is the result of sending the pack
 	specification object the message `license(License)`, falling back to
 	`NOASSERTION` when no license is available. Loaded packs also export a SPDX
 	package checksum and a CycloneDX component hash when the pack specification

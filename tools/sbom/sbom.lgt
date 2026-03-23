@@ -57,6 +57,14 @@
 		argnames is ['Sink']
 	]).
 
+	:- private(spdx_license_schema_/1).
+	:- dynamic(spdx_license_schema_/1).
+	:- mode(spdx_license_schema_(-term), zero_or_one).
+	:- info(spdx_license_schema_/1, [
+		comment is 'Caches the parsed schema used to validate SPDX license identifiers for CycloneDX exports.',
+		argnames is ['Schema']
+	]).
+
 	:- uses(list, [
 		append/3
 	]).
@@ -385,7 +393,132 @@
 	cyclonedx_hash_pairs(checksum('SHA256', Value), [hashes-[{alg-'SHA-256', content-Value}]]).
 
 	cyclonedx_license_pairs('NOASSERTION', []).
-	cyclonedx_license_pairs(License, [licenses-[{license-{name-License}}]]).
+	cyclonedx_license_pairs(License, [licenses-[LicenseJSON]]) :-
+		cyclonedx_license_json(License, LicenseJSON).
+
+	cyclonedx_license_json(License, {license-{id-License}}) :-
+		spdx_license_identifier(License),
+		!.
+	cyclonedx_license_json(License, {expression-License}) :-
+		spdx_license_expression(License),
+		!.
+	cyclonedx_license_json(License, {license-{name-License}}).
+
+	spdx_license_identifier(License) :-
+		spdx_license_schema(Schema),
+		json_schema_validate(Schema, License).
+
+	spdx_license_expression(License) :-
+		atom(License),
+		atom_codes(License, Codes),
+		phrase(spdx_expression, Codes).
+
+	spdx_expression -->
+		spdx_or_expression,
+		spdx_blanks,
+		eos.
+
+	spdx_or_expression -->
+		spdx_and_expression,
+		spdx_or_expression_rest.
+
+	spdx_or_expression_rest -->
+		spdx_blanks,
+		"OR",
+		spdx_required_blanks,
+		spdx_and_expression,
+		spdx_or_expression_rest.
+	spdx_or_expression_rest --> [].
+
+	spdx_and_expression -->
+		spdx_with_expression,
+		spdx_and_expression_rest.
+
+	spdx_and_expression_rest -->
+		spdx_blanks,
+		"AND",
+		spdx_required_blanks,
+		spdx_with_expression,
+		spdx_and_expression_rest.
+	spdx_and_expression_rest --> [].
+
+	spdx_with_expression -->
+		spdx_primary_expression,
+		spdx_with_expression_rest.
+
+	spdx_with_expression_rest -->
+		spdx_required_blanks,
+		"WITH",
+		spdx_required_blanks,
+		spdx_license_token,
+		spdx_blanks.
+	spdx_with_expression_rest --> [].
+
+	spdx_primary_expression -->
+		spdx_blanks,
+		"(",
+		spdx_blanks,
+		spdx_or_expression,
+		spdx_blanks,
+		")",
+		spdx_blanks.
+	spdx_primary_expression -->
+		spdx_blanks,
+		spdx_license_token,
+		spdx_blanks.
+
+	spdx_license_token -->
+		spdx_token_codes(Codes),
+		{ Codes \== [], atom_codes(Token, Codes), spdx_identifier_reference(Token) }.
+
+	spdx_identifier_reference(Token) :-
+		spdx_license_identifier(Token),
+		!.
+	spdx_identifier_reference(Token) :-
+		custom_spdx_reference(Token).
+
+	custom_spdx_reference(Token) :-
+		sub_atom(Token, 0, _, _, 'LicenseRef-').
+	custom_spdx_reference(Token) :-
+		sub_atom(Token, 0, _, _, 'DocumentRef-'),
+		sub_atom(Token, _, _, _, ':LicenseRef-').
+
+	spdx_token_codes([Code| Codes]) -->
+		[Code],
+		{ Code =\= 0'(, Code =\= 0'), \+ is_space(Code) },
+		spdx_token_codes_rest(Codes).
+
+	spdx_token_codes_rest([Code| Codes]) -->
+		[Code],
+		{ Code =\= 0'(, Code =\= 0'), \+ is_space(Code) },
+		!,
+		spdx_token_codes_rest(Codes).
+	spdx_token_codes_rest([]) --> [].
+
+	spdx_required_blanks -->
+		[Code],
+		{ is_space(Code) },
+		spdx_blanks.
+
+	spdx_blanks -->
+		[Code],
+		{ is_space(Code) },
+		!,
+		spdx_blanks.
+	spdx_blanks --> [].
+
+	is_space(0' ).
+	is_space(0'\t).
+	is_space(0'\n).
+	is_space(0'\r).
+
+	spdx_license_schema(Schema) :-
+		spdx_license_schema_(Schema),
+		!.
+	spdx_license_schema(Schema) :-
+		schema_path(cdx_spdx_license, Path),
+		json_schema_parse(file(Path), Schema),
+		assertz(spdx_license_schema_(Schema)).
 
 	cyclonedx_entity_pairs(metadata(_, _, _, Supplier, Originator), Pairs) :-
 		cyclonedx_supplier_pairs(Supplier, SupplierPairs),
@@ -549,6 +682,10 @@
 		object_property(sbom, file(File)),
 		decompose_file_name(File, Directory, _),
 		path_concat(Directory, 'test_files/cyclonedx-1.6.schema.json', Path).
+	schema_path(cdx_spdx_license, Path) :-
+		object_property(sbom, file(File)),
+		decompose_file_name(File, Directory, _),
+		path_concat(Directory, 'test_files/spdx.schema.json.cdx', Path).
 
 	version_atom(v(Major, Minor, Patch), Version) :-
 		!,

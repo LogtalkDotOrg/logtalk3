@@ -357,11 +357,10 @@
 			relationships-_
 		}.
 
-	+ test(sbom_export_02, deterministic) :-
+	test(sbom_export_02, deterministic) :-
 		export(atom(Atom), [validate_export(true)]),
 		json_parse(atom(Atom), JSON),
 		^^file_path('spdx-schema.json', Path),
-		writeq(Path), nl,
 		json_schema_parse(file(Path), Schema),
 		json_schema_validate(Schema, JSON).
 
@@ -393,7 +392,7 @@
 			name-'Logtalk',
 			version-_,
 			description-'Logtalk runtime',
-			licenses-[{license-{name-'Apache-2.0'}}]
+			licenses-[{license-{id-'Apache-2.0'}}]
 		}, Components),
 		memberchk({
 			type-library,
@@ -402,7 +401,7 @@
 			version-'1.0.0',
 			description-'Loaded Logtalk pack sbom_fixture_pack',
 			hashes-[{alg-'SHA-256', content-'0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'}],
-			licenses-[{license-{name-'Apache-2.0'}}]
+			licenses-[{license-{id-'Apache-2.0'}}]
 		}, Components),
 		memberchk({
 			ref-'SPDXRef-Application',
@@ -430,9 +429,61 @@
 			dependencies-_
 		},
 		^^file_path('cyclonedx-1.6.schema.json', Path),
-		writeq(Path), nl,
 		json_schema_parse(file(Path), Schema),
 		json_schema_validate(Schema, JSON).
+
+	test(sbom_document_07, deterministic) :-
+		document(Document, [
+			format(cdx),
+			application_license('Acme Software License')
+		]),
+		Document = {
+			bomFormat-'CycloneDX',
+			specVersion-'1.6',
+			version-1,
+			metadata-Metadata,
+			components-_,
+			dependencies-_
+		},
+		Metadata = {
+			timestamp-_,
+			authors-_,
+			component-{
+				type-application,
+				'bom-ref'-'SPDXRef-Application',
+				name-'loaded-application',
+				version-'0.0.0',
+				description-_,
+				licenses-[{license-{name-'Acme Software License'}}]
+			}
+		}.
+
+	test(sbom_document_08, deterministic) :-
+		document(Document, [
+			format(cdx),
+			application_license('Apache-2.0 AND MIT')
+		]),
+		^^assertion(ground(Document)),
+		Document = {
+			bomFormat-'CycloneDX',
+			specVersion-'1.6',
+			version-1,
+			metadata-Metadata,
+			components-_,
+			dependencies-_
+		},
+		Metadata = {
+			timestamp-_,
+			authors-_,
+			component-{
+				type-application,
+				'bom-ref'-'SPDXRef-Application',
+				name-'loaded-application',
+				version-'0.0.0',
+				description-_,
+				licenses-[{expression-'Apache-2.0 AND MIT'}]
+			}
+		}.
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
