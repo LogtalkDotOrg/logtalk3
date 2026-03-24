@@ -503,6 +503,33 @@
 		packs::installed(local_1_d, foo, Version, _),
 		packs::pack_property(local_1_d, foo, Version, loaded(true)).
 
+	test(packs_packs_pack_dependency_6_01, true(Dependencies == [local_2_d-baz-(1:0:0)])) :-
+		findall(
+			DependencyRegistry-DependencyPack-DependencyVersion,
+			packs::pack_dependency(local_1_d, foo, 2:0:0, DependencyRegistry, DependencyPack, DependencyVersion),
+			Dependencies0
+		),
+		msort(Dependencies0, Dependencies).
+
+	test(packs_packs_pack_dependency_6_02, true(Dependencies == [local_1_d-foo-(2:0:0)])) :-
+		findall(
+			DependencyRegistry-DependencyPack-DependencyVersion,
+			packs::pack_dependency(local_1_d, alt, 1:0:0, DependencyRegistry, DependencyPack, DependencyVersion),
+			Dependencies0
+		),
+		msort(Dependencies0, Dependencies).
+
+	test(packs_packs_loaded_pack_dependency_6_01, true(Dependencies == [local_2_d-baz-(1:0:0)])) :-
+		packs::directory(baz, Directory),
+		os::path_concat(Directory, 'loader.lgt', Loader),
+		logtalk_load(Loader),
+		findall(
+			DependencyRegistry-DependencyPack-DependencyVersion,
+			packs::loaded_pack_dependency(local_1_d, foo, 2:0:0, DependencyRegistry, DependencyPack, DependencyVersion),
+			Dependencies0
+		),
+		msort(Dependencies0, Dependencies).
+
 	% pin and unpin packs
 
 	test(packs_packs_pin_1_01, true) :-

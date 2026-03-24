@@ -288,6 +288,8 @@ as data instead of formatted text.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">pack_object/3</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">loaded_pack/3</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">loaded_pack_file/4</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pack_dependency/6</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loaded_pack_dependency/6</span></code></p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">pack_metadata/4</span></code> predicate enumerates installed packs and returns
 a resolved metadata term with the shape:</p>
@@ -347,10 +349,32 @@ can be used to inspect the files that justify that status.</p>
 ...
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">pack_dependency/6</span></code> predicate enumerates resolved direct
+pack-to-pack dependencies for installed pack versions using the same
+version comparison and dependency selection semantics used by the
+installation logic. Version ranges, alternatives, and conjunctions are
+resolved canonically. Non-pack dependencies on Logtalk, Prolog backends,
+and operating systems are ignored by this predicate.</p>
+<p>For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>pack_dependency(local_1_d, foo, <span class="m">2</span><span class="o">:</span><span class="m">0</span><span class="o">:</span><span class="m">0</span>, <span class="nv">DependencyRegistry</span>, <span class="nv">DependencyPack</span>, <span class="nv">DependencyVersion</span>).
+<span class="nv">DependencyRegistry</span> <span class="o">=</span> local_2_d,
+<span class="nv">DependencyPack</span> <span class="o">=</span> baz,
+<span class="nv">DependencyVersion</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">0</span><span class="o">:</span><span class="m">0.</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">loaded_pack_dependency/6</span></code> predicate is the loaded-session
+counterpart of <code class="docutils literal notranslate"><span class="pre">pack_dependency/6</span></code>. It only succeeds when both the
+source pack and the dependency pack contributed loaded files to the
+current session.</p>
+<p>For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>loaded_pack_dependency(<span class="nv">Registry</span>, <span class="nv">Pack</span>, <span class="nv">Version</span>, <span class="nv">DependencyRegistry</span>, <span class="nv">DependencyPack</span>, <span class="nv">DependencyVersion</span>).
+...
+</pre></div>
+</div>
 <p>These predicates are especially useful for tools such as <code class="docutils literal notranslate"><span class="pre">sbom</span></code>, which
-need to query resolved pack metadata and determine which installed packs
-contributed code to the current session without reconstructing that
-information manually.</p>
+need to query resolved pack metadata, determine which installed packs
+contributed code to the current session, and enumerate relationships
+between those packs without reconstructing that information manually.</p>
 </section>
 <section id="registries-and-packs-storage">
 <h2>Registries and packs storage<a class="headerlink" href="#registries-and-packs-storage" title="Link to this heading"></a></h2>

@@ -318,6 +318,47 @@
 	]).
 
 	:- public(search/1).
+
+	:- public(pack_dependency/6).
+	:- mode(pack_dependency(?atom, ?atom, ?compound, ?atom, ?atom, ?compound), zero_or_more).
+	:- info(pack_dependency/6, [
+		comment is 'Enumerates by backtracking resolved direct pack-to-pack dependencies for installed pack versions.',
+		argnames is ['Registry', 'Pack', 'Version', 'DependencyRegistry', 'DependencyPack', 'DependencyVersion'],
+		remarks is [
+			'Resolved dependency' - 'Dependencies are resolved against the current installed packs using the same version comparison semantics used by the tool installation logic.',
+			'Supported dependency forms' - 'Version ranges, alternatives, and conjunctions are resolved using the canonical packs dependency semantics.',
+			'Non-pack dependencies' - 'Dependencies on Logtalk, Prolog backends, and operating systems are ignored by this predicate and therefore do not produce results.'
+		],
+		exceptions is [
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
+			'``Version`` is neither a variable nor a compound term' - type_error(compound, 'Version'),
+			'``DependencyRegistry`` is neither a variable nor an atom' - type_error(atom, 'DependencyRegistry'),
+			'``DependencyPack`` is neither a variable nor an atom' - type_error(atom, 'DependencyPack'),
+			'``DependencyVersion`` is neither a variable nor a compound term' - type_error(compound, 'DependencyVersion')
+		],
+		see_also is [loaded_pack_dependency/6, pack_metadata/4, loaded_pack/3]
+	]).
+
+	:- public(loaded_pack_dependency/6).
+	:- mode(loaded_pack_dependency(?atom, ?atom, ?compound, ?atom, ?atom, ?compound), zero_or_more).
+	:- info(loaded_pack_dependency/6, [
+		comment is 'Enumerates by backtracking resolved direct pack-to-pack dependencies where both the source pack and the dependency pack contributed loaded files to the current session.',
+		argnames is ['Registry', 'Pack', 'Version', 'DependencyRegistry', 'DependencyPack', 'DependencyVersion'],
+		remarks is [
+			'Loaded dependency edge' - 'This predicate is the loaded-pack counterpart of ``pack_dependency/6`` and only succeeds when both endpoints are currently loaded.',
+			'Intended use' - 'This predicate is especially useful for tools that need to describe relationships between the installed packs that contributed code to the current session.'
+		],
+		exceptions is [
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
+			'``Version`` is neither a variable nor a compound term' - type_error(compound, 'Version'),
+			'``DependencyRegistry`` is neither a variable nor an atom' - type_error(atom, 'DependencyRegistry'),
+			'``DependencyPack`` is neither a variable nor an atom' - type_error(atom, 'DependencyPack'),
+			'``DependencyVersion`` is neither a variable nor a compound term' - type_error(compound, 'DependencyVersion')
+		],
+		see_also is [pack_dependency/6, loaded_pack/3]
+	]).
 	:- mode(search(+atom), one).
 	:- info(search/1, [
 		comment is 'Searches packs whose name or description includes the search term (case sensitive).',
@@ -1265,6 +1306,29 @@
 		installed_pack(Registry, Pack, Version, _),
 		directory(Pack, PackDirectory),
 		loaded_file_from_pack_directory(PackDirectory, File).
+
+	pack_dependency(Registry, Pack, Version, DependencyRegistry, DependencyPack, DependencyVersion) :-
+		check(var_or(atom), Registry),
+		check(var_or(atom), Pack),
+		check(var_or(compound), Version),
+		check(var_or(atom), DependencyRegistry),
+		check(var_or(atom), DependencyPack),
+		check(var_or(compound), DependencyVersion),
+		installed_pack(Registry, Pack, Version, _),
+		registry_pack(Registry, Pack, PackObject),
+		PackObject::version(Version, _, _, _, Dependencies, _),
+		resolved_pack_dependency(Dependencies, DependencyRegistry, DependencyPack, DependencyVersion).
+
+	loaded_pack_dependency(Registry, Pack, Version, DependencyRegistry, DependencyPack, DependencyVersion) :-
+		check(var_or(atom), Registry),
+		check(var_or(atom), Pack),
+		check(var_or(compound), Version),
+		check(var_or(atom), DependencyRegistry),
+		check(var_or(atom), DependencyPack),
+		check(var_or(compound), DependencyVersion),
+		loaded_pack(Registry, Pack, Version),
+		pack_dependency(Registry, Pack, Version, DependencyRegistry, DependencyPack, DependencyVersion),
+		loaded_pack(DependencyRegistry, DependencyPack, DependencyVersion).
 
 	describe_pack(Registry, Pack, PackObject) :-
 		PackObject::description(Description),
@@ -2523,6 +2587,82 @@
 		(	LoadedDirectory == PackDirectory
 		;	sub_atom(LoadedDirectory, 0, _, _, Prefix)
 		).
+
+	resolved_pack_dependency([Dependency1, Dependency2| _], DependencyRegistry, DependencyPack, DependencyVersion) :-
+		range_dependency(Dependency1, Dependency2, Resource, Lower, Operator1, Upper, Operator2),
+		resolved_pack_range_dependency(Resource, Lower, Operator1, Upper, Operator2, DependencyRegistry, DependencyPack, DependencyVersion).
+	resolved_pack_dependency([Dependency1, Dependency2| Dependencies], DependencyRegistry, DependencyPack, DependencyVersion) :-
+		range_dependency(Dependency1, Dependency2, _, _, _, _, _),
+		!,
+		resolved_pack_dependency(Dependencies, DependencyRegistry, DependencyPack, DependencyVersion).
+	resolved_pack_dependency([Dependency| _], DependencyRegistry, DependencyPack, DependencyVersion) :-
+		dependency_satisfied(Dependency),
+		resolved_pack_dependency(Dependency, DependencyRegistry, DependencyPack, DependencyVersion).
+	resolved_pack_dependency([_| Dependencies], DependencyRegistry, DependencyPack, DependencyVersion) :-
+		resolved_pack_dependency(Dependencies, DependencyRegistry, DependencyPack, DependencyVersion).
+
+	resolved_pack_dependency((Dependency; Dependencies), DependencyRegistry, DependencyPack, DependencyVersion) :-
+		!,
+		(	dependency_satisfied(Dependency) ->
+			resolved_pack_dependency(Dependency, DependencyRegistry, DependencyPack, DependencyVersion)
+		;	dependency_satisfied(Dependencies),
+			resolved_pack_dependency(Dependencies, DependencyRegistry, DependencyPack, DependencyVersion)
+		).
+	resolved_pack_dependency((Dependency, Dependencies), DependencyRegistry, DependencyPack, DependencyVersion) :-
+		!,
+		dependency_satisfied((Dependency, Dependencies)),
+		(	resolved_pack_dependency(Dependency, DependencyRegistry, DependencyPack, DependencyVersion)
+		;	resolved_pack_dependency(Dependencies, DependencyRegistry, DependencyPack, DependencyVersion)
+		).
+	resolved_pack_dependency(Dependency, DependencyRegistry, DependencyPack, DependencyVersion) :-
+		Dependency =.. [Operator, Resource, RequiredVersion],
+		resolved_pack_dependency(Resource, Operator, RequiredVersion, DependencyRegistry, DependencyPack, DependencyVersion).
+
+	resolved_pack_dependency(DependencyRegistry::DependencyPack, Operator, RequiredVersion, DependencyRegistry, DependencyPack, DependencyVersion) :-
+		satisfies_dependency(Operator, DependencyRegistry::DependencyPack, RequiredVersion, DependencyVersion).
+
+	resolved_pack_range_dependency(DependencyRegistry::DependencyPack, Lower, Operator1, Upper, Operator2, DependencyRegistry, DependencyPack, DependencyVersion) :-
+		installed_pack(DependencyRegistry, DependencyPack, DependencyVersion, _),
+		fix_version_for_comparison(Lower, DependencyVersion, LowerFixedVersion),
+		fix_version_for_comparison(Upper, DependencyVersion, UpperFixedVersion),
+		{call(Operator1, LowerFixedVersion, Lower)},
+		{call(Operator2, UpperFixedVersion, Upper)}.
+
+	dependency_satisfied((Dependency; Dependencies)) :-
+		!,
+		(	dependency_satisfied(Dependency) ->
+			true
+		;	dependency_satisfied(Dependencies)
+		).
+	dependency_satisfied((Dependency, Dependencies)) :-
+		!,
+		dependency_satisfied(Dependency),
+		dependency_satisfied(Dependencies).
+	dependency_satisfied(Dependency) :-
+		Dependency =.. [Operator, Resource, RequiredVersion],
+		satisfies_dependency(Operator, Resource, RequiredVersion, _).
+
+	satisfies_dependency(Operator, Registry::Pack, RequiredVersion, InstalledVersion) :-
+		!,
+		installed_pack(Registry, Pack, InstalledVersion, _),
+		fix_version_for_comparison(RequiredVersion, InstalledVersion, FixedVersion),
+		{call(Operator, FixedVersion, RequiredVersion)}.
+	satisfies_dependency(Operator, os(Name, Machine), RequiredVersion, RequiredVersion) :-
+		!,
+		operating_system_name(Name),
+		operating_system_machine(Machine),
+		operating_system_release(Version),
+		{call(Operator, Version, RequiredVersion)}.
+	satisfies_dependency(Operator, logtalk, RequiredVersion, RequiredVersion) :-
+		!,
+		current_logtalk_flag(version_data, logtalk(Major, Minor, Patch, _)),
+		fix_version_for_comparison(RequiredVersion, Major:Minor:Patch, FixedVersion),
+		{call(Operator, FixedVersion, RequiredVersion)}.
+	satisfies_dependency(Operator, Backend, RequiredVersion, RequiredVersion) :-
+		current_logtalk_flag(prolog_dialect, Backend),
+		current_logtalk_flag(prolog_version, v(Major, Minor, Patch)),
+		fix_version_for_comparison(RequiredVersion, Major:Minor:Patch, FixedVersion),
+		{call(Operator, FixedVersion, RequiredVersion)}.
 
 	pack_metadata_property(metadata(Name, _, _, _, _, _, _, _, _, _, _, _), name(Name)).
 	pack_metadata_property(metadata(_, Description, _, _, _, _, _, _, _, _, _, _), description(Description)).

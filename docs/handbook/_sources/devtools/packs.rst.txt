@@ -158,6 +158,8 @@ The main predicates are:
 - ``pack_object/3``
 - ``loaded_pack/3``
 - ``loaded_pack_file/4``
+- ``pack_dependency/6``
+- ``loaded_pack_dependency/6``
 
 The ``pack_metadata/4`` predicate enumerates installed packs and returns
 a resolved metadata term with the shape:
@@ -230,10 +232,38 @@ For example:
    | ?- packs::loaded_pack_file(Registry, Pack, Version, File).
    ...
 
+The ``pack_dependency/6`` predicate enumerates resolved direct
+pack-to-pack dependencies for installed pack versions using the same
+version comparison and dependency selection semantics used by the
+installation logic. Version ranges, alternatives, and conjunctions are
+resolved canonically. Non-pack dependencies on Logtalk, Prolog backends,
+and operating systems are ignored by this predicate.
+
+For example:
+
+::
+
+   | ?- packs::pack_dependency(local_1_d, foo, 2:0:0, DependencyRegistry, DependencyPack, DependencyVersion).
+   DependencyRegistry = local_2_d,
+   DependencyPack = baz,
+   DependencyVersion = 1:0:0.
+
+The ``loaded_pack_dependency/6`` predicate is the loaded-session
+counterpart of ``pack_dependency/6``. It only succeeds when both the
+source pack and the dependency pack contributed loaded files to the
+current session.
+
+For example:
+
+::
+
+   | ?- packs::loaded_pack_dependency(Registry, Pack, Version, DependencyRegistry, DependencyPack, DependencyVersion).
+   ...
+
 These predicates are especially useful for tools such as ``sbom``, which
-need to query resolved pack metadata and determine which installed packs
-contributed code to the current session without reconstructing that
-information manually.
+need to query resolved pack metadata, determine which installed packs
+contributed code to the current session, and enumerate relationships
+between those packs without reconstructing that information manually.
 
 Registries and packs storage
 ----------------------------
