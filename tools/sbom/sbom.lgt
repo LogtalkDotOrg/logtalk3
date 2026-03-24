@@ -204,23 +204,38 @@
 		}.
 
 	spdx_creation_info(CreationInfo, Created, Options) :-
-		spdx_creators(Creators, Options),
+		creators(Creators, Options, spdx),
 		CreationInfo = {
 			created-Created,
 			creators-Creators
 		}.
 
-	spdx_creators([Creator], Options) :-
-		(   ^^option(creator(Creator), Options) ->
-			true
-		;   spdx_default_creator(Creator)
+	creators(Creators, Options) :-
+		creators(Creators, Options, cyclonedx).
+
+	creators(Creators, Options, Format) :-
+		custom_creators(Options, CustomCreators),
+		(   CustomCreators == [] ->
+			default_creator(Format, Creator),
+			Creators = [Creator]
+		;   Creators = CustomCreators
 		).
 
-	creators([Creator], Options) :-
-		(   ^^option(creator(Creator), Options) ->
-			true
-		;   cyclonedx_default_creator(Creator)
-		).
+	custom_creators(Options, Creators) :-
+		custom_creators(Options, [], Creators).
+
+	custom_creators([], Creators, Creators).
+	custom_creators([creators(NewCreators)| Options], Creators0, Creators) :-
+		!,
+		append(Creators0, NewCreators, Creators1),
+		custom_creators(Options, Creators1, Creators).
+	custom_creators([_| Options], Creators0, Creators) :-
+		custom_creators(Options, Creators0, Creators).
+
+	default_creator(spdx, Creator) :-
+		spdx_default_creator(Creator).
+	default_creator(cyclonedx, Creator) :-
+		cyclonedx_default_creator(Creator).
 
 	spdx_default_creator(Creator) :-
 		sbom_tool_version(Version),
@@ -1050,9 +1065,14 @@
 		Originator \== none.
 	valid_option(namespace(Namespace)) :-
 		atom(Namespace).
-	valid_option(creator(Creator)) :-
-		atom(Creator).
+	valid_option(creators(Creators)) :-
+		valid_creators(Creators).
 	valid_option(validate_export(true)).
 	valid_option(validate_export(false)).
+
+	valid_creators([]).
+	valid_creators([Creator| Creators]) :-
+		atom(Creator),
+		valid_creators(Creators).
 
 :- end_object.

@@ -143,11 +143,12 @@ Global/application options:
   uniqueness. This option only applies to SPDX exports
   (``documentNamespace``) and is ignored for CycloneDX exports. Default
   is ``https://logtalk.org/spdxdocs/logtalk-sbom``.
-- ``creator(Creator)`` Sets the SPDX ``creationInfo.creators`` entry and
-  the CycloneDX ``metadata.authors`` entry. Default for SPDX exports is
-  the versioned tool identifier
-  ``Tool: Logtalk SBOM generator-<version>``. Default for CycloneDX
-  exports is ``Logtalk SBOM generator``.
+- ``creators(Creators)`` Adds all atoms in the list ``Creators`` to the
+  SPDX ``creationInfo.creators`` list and the CycloneDX
+  ``metadata.authors`` list. When no creator option is provided, the
+  default for SPDX exports is the versioned tool identifier
+  ``Tool: Logtalk SBOM generator-<version>`` and the default for
+  CycloneDX exports is ``Logtalk SBOM generator``.
 - ``validate_export(Boolean)`` When ``true``, validates the generated
   document against the bundled schema for the selected format before
   exporting it. Default is ``false``.
@@ -299,7 +300,7 @@ Examples:
            backend_supplier('Organization: Backend Vendor'),
            pack_license(my_pack, 'MIT'),
            pack_supplier(my_pack, 'Organization: Pack Maintainer'),
-           creator('Tool: My build pipeline'),
+           creators(['Tool: My build pipeline', 'Person: Release Manager', 'Organization: Example, Inc.']),
            validate_export(true)
         ]).
 

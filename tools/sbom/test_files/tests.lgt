@@ -168,7 +168,7 @@
 			backend_supplier('Organization: Backend Vendor'),
 			backend_originator('Organization: Backend Vendor'),
 			pack_license(dummy_pack, 'Zlib'),
-			creator('Tool: Custom exporter'),
+			creators(['Tool: Custom exporter']),
 			namespace('https://example.com/spdx')
 		]),
 		^^assertion(ground(Document)),
@@ -684,6 +684,48 @@
 		}, Packages),
 		memberchk({referenceCategory-'OTHER', referenceType-website, referenceLocator-'https://example.com/app'}, ApplicationExternalReferences),
 		memberchk({referenceCategory-'OTHER', referenceType-vcs, referenceLocator-'https://example.com/example-app.git'}, ApplicationExternalReferences).
+
+	test(sbom_document_12, deterministic) :-
+		document(Document, [
+			creators(['Tool: Build pipeline', 'Person: Alice Example', 'Organization: Example, Inc.'])
+		]),
+		Document = {
+			spdxVersion-'SPDX-2.3',
+			dataLicense-'CC0-1.0',
+			'SPDXID'-'SPDXRef-DOCUMENT',
+			name-'loaded-application',
+			documentNamespace-_,
+			creationInfo-{created-_, creators-['Tool: Build pipeline', 'Person: Alice Example', 'Organization: Example, Inc.']},
+			documentDescribes-['SPDXRef-Application'],
+			packages-_,
+			relationships-_
+		}.
+
+	test(sbom_document_13, deterministic) :-
+		document(Document, [
+			format(cdx),
+			creators(['Tool: Build pipeline', 'Person: Alice Example', 'Organization: Example, Inc.'])
+		]),
+		Document = {
+			bomFormat-'CycloneDX',
+			specVersion-'1.6',
+			serialNumber-_,
+			version-1,
+			metadata-{
+				timestamp-_,
+				authors-[
+					{name-'Tool: Build pipeline'},
+					{name-'Person: Alice Example'},
+					{name-'Organization: Example, Inc.'}
+				],
+				tools-_,
+				licenses-_,
+				component-_
+			},
+			externalReferences-_,
+			components-_,
+			dependencies-_
+		}.
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

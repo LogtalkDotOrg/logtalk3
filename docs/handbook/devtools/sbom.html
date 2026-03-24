@@ -270,11 +270,12 @@ process and timestamp suffix is added automatically to guarantee
 uniqueness. This option only applies to SPDX exports
 (<code class="docutils literal notranslate"><span class="pre">documentNamespace</span></code>) and is ignored for CycloneDX exports. Default
 is <code class="docutils literal notranslate"><span class="pre">https://logtalk.org/spdxdocs/logtalk-sbom</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">creator(Creator)</span></code> Sets the SPDX <code class="docutils literal notranslate"><span class="pre">creationInfo.creators</span></code> entry and
-the CycloneDX <code class="docutils literal notranslate"><span class="pre">metadata.authors</span></code> entry. Default for SPDX exports is
-the versioned tool identifier
-<code class="docutils literal notranslate"><span class="pre">Tool:</span> <span class="pre">Logtalk</span> <span class="pre">SBOM</span> <span class="pre">generator-&lt;version&gt;</span></code>. Default for CycloneDX
-exports is <code class="docutils literal notranslate"><span class="pre">Logtalk</span> <span class="pre">SBOM</span> <span class="pre">generator</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">creators(Creators)</span></code> Adds all atoms in the list <code class="docutils literal notranslate"><span class="pre">Creators</span></code> to the
+SPDX <code class="docutils literal notranslate"><span class="pre">creationInfo.creators</span></code> list and the CycloneDX
+<code class="docutils literal notranslate"><span class="pre">metadata.authors</span></code> list. When no creator option is provided, the
+default for SPDX exports is the versioned tool identifier
+<code class="docutils literal notranslate"><span class="pre">Tool:</span> <span class="pre">Logtalk</span> <span class="pre">SBOM</span> <span class="pre">generator-&lt;version&gt;</span></code> and the default for
+CycloneDX exports is <code class="docutils literal notranslate"><span class="pre">Logtalk</span> <span class="pre">SBOM</span> <span class="pre">generator</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">validate_export(Boolean)</span></code> When <code class="docutils literal notranslate"><span class="pre">true</span></code>, validates the generated
 document against the bundled schema for the selected format before
 exporting it. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
@@ -423,7 +424,7 @@ information.</p></li>
         backend_supplier(<span class="s">&#39;Organization: Backend Vendor&#39;</span>),
         pack_license(my_pack, <span class="s">&#39;MIT&#39;</span>),
         pack_supplier(my_pack, <span class="s">&#39;Organization: Pack Maintainer&#39;</span>),
-        creator(<span class="s">&#39;Tool: My build pipeline&#39;</span>),
+        creators([<span class="s">&#39;Tool: My build pipeline&#39;</span>, <span class="s">&#39;Person: Release Manager&#39;</span>, <span class="s">&#39;Organization: Example, Inc.&#39;</span>]),
         validate_export(<span class="k">true</span>)
      ]).
 </pre></div>
