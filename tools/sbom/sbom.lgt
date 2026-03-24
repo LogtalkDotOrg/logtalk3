@@ -25,35 +25,35 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-23,
+		date is 2026-03-24,
 		comment is 'This tool generates a Software Bill of Materials (SBOM) for an application.'
 	]).
 
 	:- public(document/2).
 	:- mode(document(-compound, +list(compound)), one).
 	:- info(document/2, [
-		comment is 'Returns an SPDX 2.3 JSON term describing the currently loaded application using the given options.',
+		comment is 'Returns an SPDX 2.3 or a CycloneDX 1.6 JSON term describing the currently loaded application using the given options. The JSON term represents objects using curly terms, pairs using a dash, and strings using atoms.',
 		argnames is ['Document', 'Options']
 	]).
 
 	:- public(document/1).
 	:- mode(document(-compound), one).
 	:- info(document/1, [
-		comment is 'Returns an SPDX 2.3 JSON term describing the currently loaded application using default options.',
+		comment is 'Returns an SPDX 2.3 JSON term describing the currently loaded application using default options. The JSON term represents objects using curly terms, pairs using a dash, and strings using atoms.',
 		argnames is ['Document']
 	]).
 
 	:- public(export/2).
 	:- mode(export(++compound, +list(compound)), one).
 	:- info(export/2, [
-		comment is 'Exports an SPDX 2.3 JSON document describing the currently loaded application to the specified sink using the given options.',
+		comment is 'Exports an SPDX 2.3 or a CycloneDX 1.6 JSON document describing the currently loaded application to the specified sink using the given options. Valid sinks are ``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, and ``atom(Atom)``.',
 		argnames is ['Sink', 'Options']
 	]).
 
 	:- public(export/1).
 	:- mode(export(++compound), one).
 	:- info(export/1, [
-		comment is 'Exports an SPDX 2.3 JSON document describing the currently loaded application to the specified sink using default options.',
+		comment is 'Exports an SPDX 2.3 JSON document describing the currently loaded application to the specified sink using default options. Valid sinks are ``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, and ``atom(Atom)``.',
 		argnames is ['Sink']
 	]).
 

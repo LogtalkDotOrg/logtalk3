@@ -15,7 +15,7 @@ This tool generates a Software Bill of Materials (SBOM) for an application.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-03-23
+| **Date:** 2026-03-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -54,7 +54,7 @@ Public predicates
 ``document/2``
 ^^^^^^^^^^^^^^
 
-Returns an SPDX 2.3 JSON term describing the currently loaded application using the given options.
+Returns an SPDX 2.3 or a CycloneDX 1.6 JSON term describing the currently loaded application using the given options. The JSON term represents objects using curly terms, pairs using a dash, and strings using atoms.
 
 | **Compilation flags:**
 |    ``static``
@@ -73,7 +73,7 @@ Returns an SPDX 2.3 JSON term describing the currently loaded application using 
 ``document/1``
 ^^^^^^^^^^^^^^
 
-Returns an SPDX 2.3 JSON term describing the currently loaded application using default options.
+Returns an SPDX 2.3 JSON term describing the currently loaded application using default options. The JSON term represents objects using curly terms, pairs using a dash, and strings using atoms.
 
 | **Compilation flags:**
 |    ``static``
@@ -92,7 +92,7 @@ Returns an SPDX 2.3 JSON term describing the currently loaded application using 
 ``export/2``
 ^^^^^^^^^^^^
 
-Exports an SPDX 2.3 JSON document describing the currently loaded application to the specified sink using the given options.
+Exports an SPDX 2.3 or a CycloneDX 1.6 JSON document describing the currently loaded application to the specified sink using the given options. Valid sinks are ``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, and ``atom(Atom)``.
 
 | **Compilation flags:**
 |    ``static``
@@ -111,7 +111,7 @@ Exports an SPDX 2.3 JSON document describing the currently loaded application to
 ``export/1``
 ^^^^^^^^^^^^
 
-Exports an SPDX 2.3 JSON document describing the currently loaded application to the specified sink using default options.
+Exports an SPDX 2.3 JSON document describing the currently loaded application to the specified sink using default options. Valid sinks are ``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, and ``atom(Atom)``.
 
 | **Compilation flags:**
 |    ``static``

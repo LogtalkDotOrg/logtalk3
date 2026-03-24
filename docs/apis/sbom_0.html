@@ -253,7 +253,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-03-23</div>
+<div class="line"><strong>Date:</strong> 2026-03-24</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -315,7 +315,7 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="document-2">
 <span id="sbom-0-document-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">document/2</span></code></a><a class="headerlink" href="#document-2" title="Link to this heading"></a></h3>
-<p>Returns an SPDX 2.3 JSON term describing the currently loaded application using the given options.</p>
+<p>Returns an SPDX 2.3 or a CycloneDX 1.6 JSON term describing the currently loaded application using the given options. The JSON term represents objects using curly terms, pairs using a dash, and strings using atoms.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -336,7 +336,7 @@
 </section>
 <section id="document-1">
 <span id="sbom-0-document-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">document/1</span></code></a><a class="headerlink" href="#document-1" title="Link to this heading"></a></h3>
-<p>Returns an SPDX 2.3 JSON term describing the currently loaded application using default options.</p>
+<p>Returns an SPDX 2.3 JSON term describing the currently loaded application using default options. The JSON term represents objects using curly terms, pairs using a dash, and strings using atoms.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -357,7 +357,7 @@
 </section>
 <section id="export-2">
 <span id="sbom-0-export-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">export/2</span></code></a><a class="headerlink" href="#export-2" title="Link to this heading"></a></h3>
-<p>Exports an SPDX 2.3 JSON document describing the currently loaded application to the specified sink using the given options.</p>
+<p>Exports an SPDX 2.3 or a CycloneDX 1.6 JSON document describing the currently loaded application to the specified sink using the given options. Valid sinks are <code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, and <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -378,7 +378,7 @@
 </section>
 <section id="export-1">
 <span id="sbom-0-export-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">export/1</span></code></a><a class="headerlink" href="#export-1" title="Link to this heading"></a></h3>
-<p>Exports an SPDX 2.3 JSON document describing the currently loaded application to the specified sink using default options.</p>
+<p>Exports an SPDX 2.3 JSON document describing the currently loaded application to the specified sink using default options. Valid sinks are <code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, and <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
