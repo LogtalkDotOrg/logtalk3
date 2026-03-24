@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-23,
+		date is 2026-03-24,
 		comment is 'A local pack for sbom tool tests.'
 	]).
 
@@ -42,7 +42,7 @@
 		stable,
 		'file://sbom_fixture_pack',
 		sha256-'0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef',
-		[logtalk @>= 3:0:0],
+		[logtalk @>= 3:0:0, sbom_fixture_registry::sbom_fixture_no_checksum_pack == 1:0:0],
 		all
 	).
 

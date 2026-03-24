@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-23,
+		date is 2026-03-24,
 		comment is 'Unit tests for the "sbom" tool.'
 	]).
 
@@ -76,7 +76,6 @@
 		^^file_url('sbom_fixture_registry', URL),
 		add(sbom_fixture_registry, URL, [update(true)]),
 		install(sbom_fixture_registry, sbom_fixture_pack, 1:0:0, []),
-		install(sbom_fixture_registry, sbom_fixture_no_checksum_pack, 1:0:0, []),
 		directory(sbom_fixture_pack, PackDirectory),
 		path_concat(PackDirectory, 'loader.lgt', Loader),
 		logtalk_load(Loader),
@@ -273,6 +272,11 @@
 			spdxElementId-'SPDXRef-Application',
 			relationshipType-'DEPENDS_ON',
 			relatedSpdxElement-'SPDXRef-Pack-sbom_fixture_pack'
+		}, Relationships),
+		memberchk({
+			spdxElementId-'SPDXRef-Pack-sbom_fixture_pack',
+			relationshipType-'DEPENDS_ON',
+			relatedSpdxElement-'SPDXRef-Pack-sbom_fixture_no_checksum_pack'
 		}, Relationships).
 
 	test(sbom_document_04, deterministic) :-
@@ -321,6 +325,11 @@
 			spdxElementId-'SPDXRef-Application',
 			relationshipType-'DEPENDS_ON',
 			relatedSpdxElement-'SPDXRef-Pack-sbom_fixture_pack'
+		}, Relationships),
+		memberchk({
+			spdxElementId-'SPDXRef-Pack-sbom_fixture_pack',
+			relationshipType-'DEPENDS_ON',
+			relatedSpdxElement-'SPDXRef-Pack-sbom_fixture_no_checksum_pack'
 		}, Relationships).
 
 	test(sbom_document_05, deterministic) :-
@@ -353,6 +362,11 @@
 		memberchk({referenceCategory-'OTHER', referenceType-website, referenceLocator-'file://sbom_fixture_no_checksum_pack'}, PackExternalReferences),
 		memberchk({referenceCategory-'OTHER', referenceType-distribution, referenceLocator-'file://sbom_fixture_no_checksum_pack'}, PackExternalReferences),
 		memberchk({
+			spdxElementId-'SPDXRef-Pack-sbom_fixture_pack',
+			relationshipType-'DEPENDS_ON',
+			relatedSpdxElement-'SPDXRef-Pack-sbom_fixture_no_checksum_pack'
+		}, Relationships),
+		\+ memberchk({
 			spdxElementId-'SPDXRef-Application',
 			relationshipType-'DEPENDS_ON',
 			relatedSpdxElement-'SPDXRef-Pack-sbom_fixture_no_checksum_pack'
@@ -492,10 +506,16 @@
 		memberchk('SPDXRef-Logtalk', ApplicationDependsOn),
 		memberchk('SPDXRef-Backend', ApplicationDependsOn),
 		memberchk('SPDXRef-Pack-sbom_fixture_pack', ApplicationDependsOn),
+		\+ memberchk('SPDXRef-Pack-sbom_fixture_no_checksum_pack', ApplicationDependsOn),
 		memberchk({
 			ref-'SPDXRef-Logtalk',
 			dependsOn-['SPDXRef-Backend']
 		}, Dependencies),
+		memberchk({
+			ref-'SPDXRef-Pack-sbom_fixture_pack',
+			dependsOn-['SPDXRef-Pack-sbom_fixture_no_checksum_pack']
+		}, Dependencies),
+		memberchk({ref-'SPDXRef-Pack-sbom_fixture_no_checksum_pack'}, Dependencies),
 		memberchk({ref-'SPDXRef-Backend'}, Dependencies).
 
 	test(sbom_export_03, deterministic) :-

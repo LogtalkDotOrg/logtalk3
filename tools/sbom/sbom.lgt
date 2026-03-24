@@ -67,7 +67,8 @@
 
 	:- uses(list, [
 		append/3,
-		member/2
+		member/2,
+		subtract/3
 	]).
 
 	:- uses(json, [
@@ -98,6 +99,7 @@
 	]).
 
 	:- uses(packs, [
+		loaded_pack_dependency/6,
 		loaded_pack/3,
 		pack_metadata/4
 	]).
@@ -143,7 +145,7 @@
 		;	fail
 		).
 
-	sbom_data(data(Name, Created, Creators, DocumentNamespace, ApplicationPackage, LogtalkPackage, BackendPackage, PackPackages), Options) :-
+	sbom_data(data(Name, Created, Creators, DocumentNamespace, ApplicationPackage, LogtalkPackage, BackendPackage, PackPackages, PackRecords), Options) :-
 		^^option(name(Name), Options),
 		^^option(version(Version), Options),
 		^^option(application_license(ApplicationLicense), Options),
@@ -158,12 +160,12 @@
 		application_package(Name, Version, ApplicationLicense, ApplicationMetadata, ApplicationPackage),
 		logtalk_package(LogtalkLicense, LogtalkMetadata, LogtalkPackage),
 		backend_package(BackendLicense, BackendMetadata, BackendPackage),
-		loaded_pack_packages(Options, PackPackages).
+		loaded_pack_packages(Options, PackPackages, PackRecords).
 
-	spdx_document(Document, data(Name, Created, _, DocumentNamespace, ApplicationPackage, LogtalkPackage, BackendPackage, PackPackages), Options) :-
+	spdx_document(Document, data(Name, Created, _, DocumentNamespace, ApplicationPackage, LogtalkPackage, BackendPackage, PackPackages, PackRecords), Options) :-
 		spdx_creation_info(CreationInfo, Created, Options),
 		packages_json([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], Options, Packages),
-		relationships_json(PackPackages, Relationships),
+		relationships_json(PackRecords, Relationships),
 		Document = {
 			spdxVersion-'SPDX-2.3',
 			dataLicense-'CC0-1.0',
@@ -176,12 +178,12 @@
 			relationships-Relationships
 		}.
 
-	cyclonedx_document(Document, data(_, Created, Creators, _, ApplicationPackage, LogtalkPackage, BackendPackage, PackPackages), Options) :-
+	cyclonedx_document(Document, data(_, Created, Creators, _, ApplicationPackage, LogtalkPackage, BackendPackage, PackPackages, PackRecords), Options) :-
 		cyclonedx_serial_number(SerialNumber),
 		cyclonedx_metadata(Created, Creators, ApplicationPackage, Options, Metadata),
 		cyclonedx_bom_external_references(Options, BomExternalReferences),
 		cyclonedx_components_json([LogtalkPackage, BackendPackage| PackPackages], Components),
-		cyclonedx_dependencies_json([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], Dependencies),
+		cyclonedx_dependencies_json([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], PackRecords, Dependencies),
 		Document = {
 			bomFormat-'CycloneDX',
 			specVersion-'1.6',
@@ -353,7 +355,7 @@
 
 	optional_pack_metadata_option(Functor, Pack, Options, Value) :-
 		Template =.. [Functor, Pack, Value],
-		(   ^^option(Template, Options) ->
+		(   member(Template, Options) ->
 			true
 		;   Value = absent
 		).
@@ -389,15 +391,16 @@
 	backend(xvm,     'XVM',            'NOASSERTION',      'https://permion.ai/').
 	backend(yap,     'YAP',            'Artistic-2.0',     'https://github.com/vscosta').
 
-	loaded_pack_packages(Options, PackPackages) :-
+	loaded_pack_packages(Options, PackPackages, PackRecords) :-
 		findall(
-			package(SPDXID, Pack, VersionAtom, License, Checksum, Metadata, 'LIBRARY', Description),
-			loaded_pack_package(SPDXID, Pack, VersionAtom, License, Checksum, Metadata, Description, Options),
-			PackPackages0
+			Package-PackRecord,
+			loaded_pack_package(Package, PackRecord, Options),
+			PackPairs0
 		),
-		sort(PackPackages0, PackPackages).
+		sort(PackPairs0, PackPairs),
+		pack_pairs(PackPairs, PackPackages, PackRecords).
 
-	loaded_pack_package(SPDXID, Pack, VersionAtom, License, Checksum, Metadata, Description, Options) :-
+	loaded_pack_package(package(SPDXID, Pack, VersionAtom, License, Checksum, Metadata, 'LIBRARY', Description), pack_record(SPDXID, Registry, Pack, Version), Options) :-
 		loaded_pack(Registry, Pack, Version),
 		version_atom(Version, VersionAtom),
 		pack_metadata_options(Pack, Options, Metadata),
@@ -406,8 +409,15 @@
 		atomic_list_concat(['SPDXRef-Pack-', Pack], SPDXID),
 		atomic_list_concat(['Loaded Logtalk pack ', Pack], Description).
 
+	pack_pairs([], [], []).
+	pack_pairs([Package-PackRecord| PackPairs], [Package| PackPackages], [PackRecord| PackRecords]) :-
+		pack_pairs(PackPairs, PackPackages, PackRecords).
+
 	pack_license(Pack, DefaultLicense, Options, License) :-
-		^^option(pack_license(Pack, License), Options, pack_license(Pack, DefaultLicense)).
+		(   member(pack_license(Pack, License), Options) ->
+			true
+		;   License = DefaultLicense
+		).
 
 	resolved_pack_metadata(Registry, Pack, Version, License, Checksum, Home, SourceURL) :-
 		pack_metadata(Registry, Pack, Version, metadata(_, _, License0, Home0, SourceURL0, PackChecksum, _, _, _, _, _, _)),
@@ -668,9 +678,9 @@
 	cyclonedx_property(metadata(_, _, _, _, Value), {name-'logtalk:sbom:originator', value-Value}) :-
 		Value \== absent.
 
-	cyclonedx_dependencies_json(Packages, Dependencies) :-
-		pack_references(Packages, PackReferences),
-		cyclonedx_dependency_entries(Packages, PackReferences, Dependencies).
+	cyclonedx_dependencies_json(Packages, PackRecords, Dependencies) :-
+		application_pack_references(PackRecords, ApplicationPackReferences),
+		cyclonedx_dependency_entries(Packages, PackRecords, ApplicationPackReferences, Dependencies).
 
 	pack_references([], []).
 	pack_references([package(Reference, _, _, _, _, _, 'LIBRARY', _)| Packages], [Reference| References]) :-
@@ -679,19 +689,20 @@
 	pack_references([_| Packages], References) :-
 		pack_references(Packages, References).
 
-	cyclonedx_dependency_entries([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], PackReferences, [ApplicationDependency, LogtalkDependency, BackendDependency| PackDependencies]) :-
+	cyclonedx_dependency_entries([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], PackRecords, ApplicationPackReferences, [ApplicationDependency, LogtalkDependency, BackendDependency| PackDependencies]) :-
 		ApplicationPackage = package(ApplicationReference, _, _, _, _, _, _, _),
 		LogtalkPackage = package(LogtalkReference, _, _, _, _, _, _, _),
 		BackendPackage = package(BackendReference, _, _, _, _, _, _, _),
-		cyclonedx_dependency_json(ApplicationReference, [LogtalkReference, BackendReference| PackReferences], ApplicationDependency),
+		cyclonedx_dependency_json(ApplicationReference, [LogtalkReference, BackendReference| ApplicationPackReferences], ApplicationDependency),
 		cyclonedx_dependency_json(LogtalkReference, [BackendReference], LogtalkDependency),
 		cyclonedx_dependency_json(BackendReference, [], BackendDependency),
-		cyclonedx_pack_dependency_entries(PackPackages, PackDependencies).
+		cyclonedx_pack_dependency_entries(PackPackages, PackRecords, PackDependencies).
 
-	cyclonedx_pack_dependency_entries([], []).
-	cyclonedx_pack_dependency_entries([package(Reference, _, _, _, _, _, _, _)| Packages], [Dependency| Dependencies]) :-
-		cyclonedx_dependency_json(Reference, [], Dependency),
-		cyclonedx_pack_dependency_entries(Packages, Dependencies).
+	cyclonedx_pack_dependency_entries([], _, []).
+	cyclonedx_pack_dependency_entries([package(Reference, _, _, _, _, _, _, _)| Packages], PackRecords, [Dependency| Dependencies]) :-
+		pack_dependency_references(PackRecords, Reference, DependencyReferences),
+		cyclonedx_dependency_json(Reference, DependencyReferences, Dependency),
+		cyclonedx_pack_dependency_entries(Packages, PackRecords, Dependencies).
 
 	cyclonedx_dependency_json(Reference, [], JSON) :-
 		!,
@@ -818,10 +829,14 @@
 	list_to_curly_pairs([Pair| Pairs], (Pair, Rest)) :-
 		list_to_curly_pairs(Pairs, Rest).
 
-	relationships_json(PackPackages, Relationships) :-
+	relationships_json(PackRecords, Relationships) :-
 		base_relationships(BaseRelationships),
-		pack_relationships(PackPackages, PackRelationships),
-		append(BaseRelationships, PackRelationships, Relationships).
+		application_pack_references(PackRecords, ApplicationPackReferences),
+		application_pack_relationships(ApplicationPackReferences, ApplicationRelationships),
+		pack_relationships(PackRecords, PackRelationships),
+		append(BaseRelationships, ApplicationRelationships, Relationships0),
+		append(Relationships0, PackRelationships, Relationships1),
+		sort(Relationships1, Relationships).
 
 	base_relationships([
 		{spdxElementId-'SPDXRef-DOCUMENT', relationshipType-'DESCRIBES', relatedSpdxElement-'SPDXRef-Application'},
@@ -830,14 +845,59 @@
 		{spdxElementId-'SPDXRef-Logtalk', relationshipType-'DEPENDS_ON', relatedSpdxElement-'SPDXRef-Backend'}
 	]).
 
-	pack_relationships([], []).
-	pack_relationships([package(SPDXID, _, _, _, _, _, _, _)| PackPackages], [Relationship| Relationships]) :-
+	application_pack_relationships([], []).
+	application_pack_relationships([SPDXID| SPDXIDs], [Relationship| Relationships]) :-
 		Relationship = {
 			spdxElementId-'SPDXRef-Application',
 			relationshipType-'DEPENDS_ON',
 			relatedSpdxElement-SPDXID
 		},
-		pack_relationships(PackPackages, Relationships).
+		application_pack_relationships(SPDXIDs, Relationships).
+
+	pack_relationships(PackRecords, Relationships) :-
+		pack_relationships(PackRecords, PackRecords, Relationships).
+
+	pack_relationships(_, [], []).
+	pack_relationships(AllPackRecords, [pack_record(SPDXID, _, _, _)| PackRecords], Relationships) :-
+		pack_dependency_references(AllPackRecords, SPDXID, DependencyReferences),
+		pack_dependency_relationships(SPDXID, DependencyReferences, PackRelationships),
+		pack_relationships(AllPackRecords, PackRecords, Relationships0),
+		append(PackRelationships, Relationships0, Relationships).
+
+	pack_dependency_relationships(_, [], []).
+	pack_dependency_relationships(SPDXID, [DependencyReference| DependencyReferences], [Relationship| Relationships]) :-
+		Relationship = {
+			spdxElementId-SPDXID,
+			relationshipType-'DEPENDS_ON',
+			relatedSpdxElement-DependencyReference
+		},
+		pack_dependency_relationships(SPDXID, DependencyReferences, Relationships).
+
+	application_pack_references(PackRecords, ApplicationPackReferences) :-
+		findall(SPDXID, member(pack_record(SPDXID, _, _, _), PackRecords), AllPackReferences0),
+		sort(AllPackReferences0, AllPackReferences),
+		findall(DependencyReference, (member(pack_record(SPDXID, _, _, _), PackRecords), pack_dependency_references(PackRecords, SPDXID, DependencyReferences), member(DependencyReference, DependencyReferences)), DependencyReferences0),
+		sort(DependencyReferences0, DependencyReferences),
+		subtract(AllPackReferences, DependencyReferences, ApplicationPackReferences0),
+		( 	ApplicationPackReferences0 == [], AllPackReferences \== [] ->
+			ApplicationPackReferences = AllPackReferences
+		;	ApplicationPackReferences = ApplicationPackReferences0
+		).
+
+	pack_dependency_references(PackRecords, SPDXID, DependencyReferences) :-
+		( 	member(pack_record(SPDXID, Registry, Pack, Version), PackRecords) ->
+			findall(
+				DependencyReference,
+				(
+					loaded_pack_dependency(Registry, Pack, Version, DependencyRegistry, DependencyPack, DependencyVersion),
+					member(pack_record(DependencyReference, DependencyRegistry, DependencyPack, DependencyVersion), PackRecords)
+				),
+				DependencyReferences0
+			),
+			sort(DependencyReferences0, DependencyReferences1),
+			subtract(DependencyReferences1, [SPDXID], DependencyReferences)
+		;	DependencyReferences = []
+		).
 
 	validate_document(Document, Options) :-
 		^^option(format(Format), Options),
