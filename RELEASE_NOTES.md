@@ -145,6 +145,8 @@ to export diagrams in formats other than SVG.
 * ADDED: Support to the `packs` tool for lock files for deterministic installs
 and CI/CD reproducibility.
 
+* ADDED: Programmatic query API to the `packs` tool.
+
 * ADDED: Support to the `lgtunit` tool for exporting code coverage stats in
 Cobertura XML and LCOV formats.
 

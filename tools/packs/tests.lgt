@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:36:1,
+		version is 0:37:0,
 		author is 'Paulo Moura',
-		date is 2026-03-04,
+		date is 2026-03-24,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -458,6 +458,50 @@
 
 	test(packs_packs_describe_1_01, true) :-
 		packs::describe(baz).
+
+	% pack query predicates
+
+	test(packs_packs_pack_object_3_01, true(PackObject == foo_pack)) :-
+		packs::pack_object(local_1_d, foo, PackObject).
+
+	test(packs_packs_pack_metadata_4_01, true(atom(Directory))) :-
+		packs::installed(local_1_d, foo, Version, Pinned),
+		packs::pack_metadata(local_1_d, foo, Version, metadata(Name, Description, License, Home, SourceURL, Checksum, Dependencies, Portability, Directory, Pinned, Installed, Loaded)),
+		^^assertion(Name == foo),
+		^^assertion(Description == 'A local pack for testing'),
+		^^assertion(License == 'Apache-2.0'),
+		^^assertion(Home == 'file://test_files/foo'),
+		^^assertion(SourceURL == 'file://test_files/foo'),
+		^^assertion(Checksum == none),
+		^^assertion(Dependencies == [logtalk @>= 3:42:0, local_2_d::baz @>= 1:0:0, local_2_d::baz @< 2:0:0]),
+		^^assertion(Portability == [eclipse, gnu, swi, sicstus, yap, trealla, xsb]),
+		^^assertion(Installed == true),
+		^^assertion(Loaded == false).
+
+	test(packs_packs_pack_property_4_01, true) :-
+		packs::installed(local_1_d, foo, Version, _),
+		packs::pack_property(local_1_d, foo, Version, license('Apache-2.0')).
+
+	test(packs_packs_pack_property_4_02, true) :-
+		packs::installed(local_1_d, foo, Version, _),
+		packs::pack_property(local_1_d, foo, Version, loaded(false)).
+
+	test(packs_packs_loaded_pack_3_01, true) :-
+		packs::directory(foo, Directory),
+		os::path_concat(Directory, 'loader.lgt', Loader),
+		logtalk_load(Loader),
+		packs::installed(local_1_d, foo, Version, _),
+		packs::loaded_pack(local_1_d, foo, Version).
+
+	test(packs_packs_loaded_pack_file_4_01, true(atom(File))) :-
+		packs::installed(local_1_d, foo, Version, _),
+		packs::loaded_pack_file(local_1_d, foo, Version, File),
+		packs::directory(foo, Directory),
+		^^assertion(sub_atom(File, 0, _, _, Directory)).
+
+	test(packs_packs_pack_property_4_03, true) :-
+		packs::installed(local_1_d, foo, Version, _),
+		packs::pack_property(local_1_d, foo, Version, loaded(true)).
 
 	% pin and unpin packs
 

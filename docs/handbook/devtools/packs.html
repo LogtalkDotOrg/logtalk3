@@ -90,6 +90,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#programmatic-query-api">Programmatic query API</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#registries-and-packs-storage">Registries and packs storage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#virtual-environments">Virtual environments</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#lock-files">Lock files</a></li>
@@ -272,6 +273,84 @@ automatically created.</p>
 <p>The tool provides two main objects, <code class="docutils literal notranslate"><span class="pre">registries</span></code> and <code class="docutils literal notranslate"><span class="pre">packs</span></code>, for
 handling, respectively, registries and packs. Both objects accept a
 <code class="docutils literal notranslate"><span class="pre">help/0</span></code> message that describes the most common queries.</p>
+</section>
+<section id="programmatic-query-api">
+<h2>Programmatic query API<a class="headerlink" href="#programmatic-query-api" title="Link to this heading"></a></h2>
+<p>Besides the user-facing predicates that print information (e.g.,
+<code class="docutils literal notranslate"><span class="pre">describe/1-2</span></code>), the <code class="docutils literal notranslate"><span class="pre">packs</span></code> object also provides a query API
+intended for programmatic use by tools and tests. This API exposes
+resolved installed-pack metadata and current-session load participation
+as data instead of formatted text.</p>
+<p>The main predicates are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pack_metadata/4</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pack_property/4</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pack_object/3</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loaded_pack/3</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loaded_pack_file/4</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">pack_metadata/4</span></code> predicate enumerates installed packs and returns
+a resolved metadata term with the shape:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>metadata(<span class="nv">Name</span>, <span class="nv">Description</span>, <span class="nv">License</span>, <span class="nv">Home</span>, <span class="nv">SourceURL</span>, <span class="nv">Checksum</span>, <span class="nv">Dependencies</span>, <span class="nv">Portability</span>, <span class="nv">Directory</span>, <span class="nv">Pinned</span>, <span class="nv">Installed</span>, <span class="nv">Loaded</span>)
+</pre></div>
+</div>
+<p>The term combines metadata declared by the pack specification object
+with the metadata selected from the installed version. Missing optional
+metadata is normalized to <code class="docutils literal notranslate"><span class="pre">none</span></code>. The <code class="docutils literal notranslate"><span class="pre">Installed</span></code> field is always
+<code class="docutils literal notranslate"><span class="pre">true</span></code> on success. The <code class="docutils literal notranslate"><span class="pre">Loaded</span></code> field reports if the installed pack
+contributed at least one currently loaded file to the session.</p>
+<p>For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>pack_metadata(<span class="nv">Registry</span>, <span class="nv">Pack</span>, <span class="nv">Version</span>, <span class="nv">Metadata</span>).
+...
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">pack_property/4</span></code> predicate provides selective access to resolved
+metadata using property terms. Supported properties are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name(Name)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description(Description)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">license(License)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">home(Home)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source_url(URL)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">checksum(Checksum)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dependencies(Dependencies)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">portability(Portability)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">directory(Directory)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pinned(Boolean)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">installed(Boolean)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loaded(Boolean)</span></code></p></li>
+</ul>
+<p>For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>pack_property(local_1_d, foo, <span class="nv">Version</span>, license(<span class="nv">License</span>)).
+<span class="nv">License</span> <span class="o">=</span> <span class="s">&#39;Apache-2.0&#39;</span>.
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">pack_object/3</span></code> predicate is a low-level bridge that returns the
+pack specification object implementing the <code class="docutils literal notranslate"><span class="pre">pack_protocol</span></code> for a given
+registry and pack. Most clients should prefer <code class="docutils literal notranslate"><span class="pre">pack_metadata/4</span></code> or
+<code class="docutils literal notranslate"><span class="pre">pack_property/4</span></code> unless direct access to the pack object is required.</p>
+<p>For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>pack_object(local_1_d, foo, <span class="nv">PackObject</span>).
+<span class="nv">PackObject</span> <span class="o">=</span> foo_pack.
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">loaded_pack/3</span></code> and <code class="docutils literal notranslate"><span class="pre">loaded_pack_file/4</span></code> predicates expose
+current-session pack participation. A pack is considered loaded iff at
+least one currently loaded file belongs to its installation directory.
+The first predicate is the high-level query, while the second predicate
+can be used to inspect the files that justify that status.</p>
+<p>For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>loaded_pack(<span class="nv">Registry</span>, <span class="nv">Pack</span>, <span class="nv">Version</span>).
+...
+
+| <span class="o">?-</span> packs<span class="o">::</span>loaded_pack_file(<span class="nv">Registry</span>, <span class="nv">Pack</span>, <span class="nv">Version</span>, <span class="nv">File</span>).
+...
+</pre></div>
+</div>
+<p>These predicates are especially useful for tools such as <code class="docutils literal notranslate"><span class="pre">sbom</span></code>, which
+need to query resolved pack metadata and determine which installed packs
+contributed code to the current session without reconstructing that
+information manually.</p>
 </section>
 <section id="registries-and-packs-storage">
 <h2>Registries and packs storage<a class="headerlink" href="#registries-and-packs-storage" title="Link to this heading"></a></h2>

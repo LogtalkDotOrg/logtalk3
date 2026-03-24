@@ -8500,6 +8500,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`logtalk <logtalk/0::loaded_files_topological_sort/2>`
 
+``loaded_pack/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`packs <packs/0::loaded_pack/3>`
+
+``loaded_pack_file/4``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`packs <packs/0::loaded_pack_file/4>`
+
 ``local_to_utc/3``
 ------------------
 
@@ -10797,6 +10817,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`intervalp <intervalp/0::overlaps/2>`
+
+``pack_metadata/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`packs <packs/0::pack_metadata/4>`
+
+``pack_object/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`packs <packs/0::pack_object/3>`
+
+``pack_property/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`packs <packs/0::pack_property/4>`
 
 ``params/2``
 ------------

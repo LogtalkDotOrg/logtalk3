@@ -142,6 +142,99 @@ The tool provides two main objects, ``registries`` and ``packs``, for
 handling, respectively, registries and packs. Both objects accept a
 ``help/0`` message that describes the most common queries.
 
+Programmatic query API
+----------------------
+
+Besides the user-facing predicates that print information (e.g.,
+``describe/1-2``), the ``packs`` object also provides a query API
+intended for programmatic use by tools and tests. This API exposes
+resolved installed-pack metadata and current-session load participation
+as data instead of formatted text.
+
+The main predicates are:
+
+- ``pack_metadata/4``
+- ``pack_property/4``
+- ``pack_object/3``
+- ``loaded_pack/3``
+- ``loaded_pack_file/4``
+
+The ``pack_metadata/4`` predicate enumerates installed packs and returns
+a resolved metadata term with the shape:
+
+::
+
+   metadata(Name, Description, License, Home, SourceURL, Checksum, Dependencies, Portability, Directory, Pinned, Installed, Loaded)
+
+The term combines metadata declared by the pack specification object
+with the metadata selected from the installed version. Missing optional
+metadata is normalized to ``none``. The ``Installed`` field is always
+``true`` on success. The ``Loaded`` field reports if the installed pack
+contributed at least one currently loaded file to the session.
+
+For example:
+
+::
+
+   | ?- packs::pack_metadata(Registry, Pack, Version, Metadata).
+   ...
+
+The ``pack_property/4`` predicate provides selective access to resolved
+metadata using property terms. Supported properties are:
+
+- ``name(Name)``
+- ``description(Description)``
+- ``license(License)``
+- ``home(Home)``
+- ``source_url(URL)``
+- ``checksum(Checksum)``
+- ``dependencies(Dependencies)``
+- ``portability(Portability)``
+- ``directory(Directory)``
+- ``pinned(Boolean)``
+- ``installed(Boolean)``
+- ``loaded(Boolean)``
+
+For example:
+
+::
+
+   | ?- packs::pack_property(local_1_d, foo, Version, license(License)).
+   License = 'Apache-2.0'.
+
+The ``pack_object/3`` predicate is a low-level bridge that returns the
+pack specification object implementing the ``pack_protocol`` for a given
+registry and pack. Most clients should prefer ``pack_metadata/4`` or
+``pack_property/4`` unless direct access to the pack object is required.
+
+For example:
+
+::
+
+   | ?- packs::pack_object(local_1_d, foo, PackObject).
+   PackObject = foo_pack.
+
+The ``loaded_pack/3`` and ``loaded_pack_file/4`` predicates expose
+current-session pack participation. A pack is considered loaded iff at
+least one currently loaded file belongs to its installation directory.
+The first predicate is the high-level query, while the second predicate
+can be used to inspect the files that justify that status.
+
+For example:
+
+::
+
+   | ?- packs::loaded_pack(Registry, Pack, Version).
+   ...
+
+   | ?- packs::loaded_pack_file(Registry, Pack, Version, File).
+   ...
+
+These predicates are especially useful for tools such as ``sbom``, which
+need to query resolved pack metadata and determine which installed packs
+contributed code to the current session without reconstructing that
+information manually.
+
 Registries and packs storage
 ----------------------------
 

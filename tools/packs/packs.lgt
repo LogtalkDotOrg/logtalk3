@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:88:0,
+		version is 0:89:0,
 		author is 'Paulo Moura',
-		date is 2026-03-02,
+		date is 2026-03-24,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -224,6 +224,97 @@
 			'``Pack`` is a variable' - instantiation_error,
 			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
 		]
+	]).
+
+	:- public(pack_metadata/4).
+	:- mode(pack_metadata(?atom, ?atom, ?compound, ?compound), zero_or_more).
+	:- info(pack_metadata/4, [
+		comment is 'Enumerates by backtracking resolved metadata for installed packs.',
+		argnames is ['Registry', 'Pack', 'Version', 'Metadata'],
+		remarks is [
+			'``Metadata``' - 'Resolved metadata term for the selected installed pack version.',
+			'Resolved fields' - 'The metadata term includes both version-independent pack metadata and version-specific metadata selected from the installed version.',
+			'Absent optional metadata' - 'Missing optional metadata is normalized to ``none`` instead of causing failure.',
+			'Metadata term' - 'Metadata is returned using the term ``metadata(Name, Description, License, Home, SourceURL, Checksum, Dependencies, Portability, Directory, Pinned, Installed, Loaded)``.'
+		],
+		exceptions is [
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
+			'``Version`` is neither a variable nor a compound term' - type_error(compound, 'Version'),
+			'``Metadata`` is neither a variable nor a compound term' - type_error(compound, 'Metadata')
+		],
+		see_also is [pack_property/4, pack_object/3, loaded_pack/3]
+	]).
+
+	:- public(pack_property/4).
+	:- mode(pack_property(?atom, ?atom, ?compound, ?compound), zero_or_more).
+	:- info(pack_property/4, [
+		comment is 'Enumerates by backtracking resolved properties for installed pack versions.',
+		argnames is ['Registry', 'Pack', 'Version', 'Property'],
+		remarks is [
+			'``Property``' - 'A resolved property term for the selected installed pack version.',
+			'Supported properties' - 'Supported properties are ``name(Name)``, ``description(Description)``, ``license(License)``, ``home(Home)``, ``source_url(URL)``, ``checksum(Checksum)``, ``dependencies(Dependencies)``, ``portability(Portability)``, ``directory(Directory)``, ``pinned(Boolean)``, ``installed(Boolean)``, and ``loaded(Boolean)``.',
+			'Absent optional metadata' - 'Missing optional metadata is normalized to ``none``.'
+		],
+		exceptions is [
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
+			'``Version`` is neither a variable nor a compound term' - type_error(compound, 'Version'),
+			'``Property`` is neither a variable nor a compound term' - type_error(compound, 'Property')
+		],
+		see_also is [pack_metadata/4, pack_object/3]
+	]).
+
+	:- public(pack_object/3).
+	:- mode(pack_object(?atom, ?atom, ?atom), zero_or_more).
+	:- info(pack_object/3, [
+		comment is 'Enumerates by backtracking pack specification objects for defined registry and pack pairs.',
+		argnames is ['Registry', 'Pack', 'PackObject'],
+		remarks is [
+			'``PackObject``' - 'Identifier of the object implementing the ``pack_protocol`` for the given registry and pack.',
+			'Intended use' - 'This predicate is a low-level bridge for advanced tools and should not be required by most consumers when ``pack_metadata/4`` or ``pack_property/4`` is sufficient.'
+		],
+		exceptions is [
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
+			'``PackObject`` is neither a variable nor an atom' - type_error(atom, 'PackObject')
+		],
+		see_also is [pack_metadata/4, pack_property/4]
+	]).
+
+	:- public(loaded_pack/3).
+	:- mode(loaded_pack(?atom, ?atom, ?compound), zero_or_more).
+	:- info(loaded_pack/3, [
+		comment is 'Enumerates by backtracking all installed packs that contributed loaded files to the current session.',
+		argnames is ['Registry', 'Pack', 'Version'],
+		remarks is [
+			'Loaded pack' - 'A pack is considered loaded iff at least one currently loaded file belongs to its installation directory.',
+			'``Version``' - 'Installed version of the loaded pack.'
+		],
+		exceptions is [
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
+			'``Version`` is neither a variable nor a compound term' - type_error(compound, 'Version')
+		],
+		see_also is [loaded_pack_file/4, pack_metadata/4, installed/3]
+	]).
+
+	:- public(loaded_pack_file/4).
+	:- mode(loaded_pack_file(?atom, ?atom, ?compound, ?atom), zero_or_more).
+	:- info(loaded_pack_file/4, [
+		comment is 'Enumerates by backtracking loaded files that belong to installed packs in the current session.',
+		argnames is ['Registry', 'Pack', 'Version', 'File'],
+		remarks is [
+			'``File``' - 'Absolute path of a currently loaded file belonging to the selected installed pack.',
+			'Intended use' - 'This predicate supports diagnostics, tests, and the definition of ``loaded_pack/3``.'
+		],
+		exceptions is [
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
+			'``Version`` is neither a variable nor a compound term' - type_error(compound, 'Version'),
+			'``File`` is neither a variable nor an atom' - type_error(atom, 'File')
+		],
+		see_also is [loaded_pack/3]
 	]).
 
 	:- public(search/1).
@@ -1114,6 +1205,66 @@
 				describe_pack(Registry, Pack, PackObject)
 			)
 		).
+
+	% pack query predicates
+
+	pack_metadata(Registry, Pack, Version, Metadata) :-
+		check(var_or(atom), Registry),
+		check(var_or(atom), Pack),
+		check(var_or(compound), Version),
+		check(var_or(compound), Metadata),
+		installed_pack(Registry, Pack, Version, Pinned),
+		registry_pack(Registry, Pack, PackObject),
+		directory(Pack, Directory),
+		PackObject::name(Name),
+		(	PackObject::description(Description0) ->
+			Description = Description0
+		;	Description = none
+		),
+		(	PackObject::license(License0) ->
+			License = License0
+		;	License = none
+		),
+		(	PackObject::home(Home0) ->
+			Home = Home0
+		;	Home = none
+		),
+		(	PackObject::version(Version, _, SourceURL0, Checksum0, Dependencies0, Portability0) ->
+			SourceURL = SourceURL0,
+			Checksum = Checksum0,
+			Dependencies = Dependencies0,
+			Portability = Portability0
+		;	fail
+		),
+		(	loaded_pack(Registry, Pack, Version) ->
+			Loaded = true
+		;	Loaded = false
+		),
+		Metadata = metadata(Name, Description, License, Home, SourceURL, Checksum, Dependencies, Portability, Directory, Pinned, true, Loaded).
+
+	pack_property(Registry, Pack, Version, Property) :-
+		check(var_or(atom), Registry),
+		check(var_or(atom), Pack),
+		check(var_or(compound), Version),
+		check(var_or(compound), Property),
+		pack_metadata(Registry, Pack, Version, Metadata),
+		pack_metadata_property(Metadata, Property).
+
+	loaded_pack(Registry, Pack, Version) :-
+		check(var_or(atom), Registry),
+		check(var_or(atom), Pack),
+		check(var_or(compound), Version),
+		installed_pack(Registry, Pack, Version, _),
+		once(loaded_pack_file(Registry, Pack, Version, _)).
+
+	loaded_pack_file(Registry, Pack, Version, File) :-
+		check(var_or(atom), Registry),
+		check(var_or(atom), Pack),
+		check(var_or(compound), Version),
+		check(var_or(atom), File),
+		installed_pack(Registry, Pack, Version, _),
+		directory(Pack, PackDirectory),
+		loaded_file_from_pack_directory(PackDirectory, File).
 
 	describe_pack(Registry, Pack, PackObject) :-
 		PackObject::description(Description),
@@ -2347,6 +2498,12 @@
 			fail
 		).
 
+	pack_object(Registry, Pack, PackObject) :-
+		check(var_or(atom), Registry),
+		check(var_or(atom), Pack),
+		check(var_or(atom), PackObject),
+		registry_pack(Registry, Pack, PackObject).
+
 	installed_pack(Registry, Pack, Version, Pinned) :-
 		^^logtalk_packs(LogtalkPacks),
 		path_concat(LogtalkPacks, packs, Directory),
@@ -2359,6 +2516,26 @@
 			Pinned = true
 		;	Pinned = false
 		).
+
+	loaded_file_from_pack_directory(PackDirectory, File) :-
+		atom_concat(PackDirectory, '/', Prefix),
+		logtalk::loaded_file_property(File, directory(LoadedDirectory)),
+		(	LoadedDirectory == PackDirectory
+		;	sub_atom(LoadedDirectory, 0, _, _, Prefix)
+		).
+
+	pack_metadata_property(metadata(Name, _, _, _, _, _, _, _, _, _, _, _), name(Name)).
+	pack_metadata_property(metadata(_, Description, _, _, _, _, _, _, _, _, _, _), description(Description)).
+	pack_metadata_property(metadata(_, _, License, _, _, _, _, _, _, _, _, _), license(License)).
+	pack_metadata_property(metadata(_, _, _, Home, _, _, _, _, _, _, _, _), home(Home)).
+	pack_metadata_property(metadata(_, _, _, _, SourceURL, _, _, _, _, _, _, _), source_url(SourceURL)).
+	pack_metadata_property(metadata(_, _, _, _, _, Checksum, _, _, _, _, _, _), checksum(Checksum)).
+	pack_metadata_property(metadata(_, _, _, _, _, _, Dependencies, _, _, _, _, _), dependencies(Dependencies)).
+	pack_metadata_property(metadata(_, _, _, _, _, _, _, Portability, _, _, _, _), portability(Portability)).
+	pack_metadata_property(metadata(_, _, _, _, _, _, _, _, Directory, _, _, _), directory(Directory)).
+	pack_metadata_property(metadata(_, _, _, _, _, _, _, _, _, Pinned, _, _), pinned(Pinned)).
+	pack_metadata_property(metadata(_, _, _, _, _, _, _, _, _, _, Installed, _), installed(Installed)).
+	pack_metadata_property(metadata(_, _, _, _, _, _, _, _, _, _, _, Loaded), loaded(Loaded)).
 
 	outdated_pack(Registry, Pack, Version, LatestVersion, Options) :-
 		installed_pack(Registry, Pack, Version, _),

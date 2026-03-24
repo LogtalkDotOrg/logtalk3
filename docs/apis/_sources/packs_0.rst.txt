@@ -14,8 +14,8 @@ Pack handling predicates.
 |    ``logtalk_load(packs(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:88:0
-| **Date:** 2026-03-02
+| **Version:** 0:89:0
+| **Date:** 2026-03-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -492,6 +492,196 @@ Describes a registered pack, including installed version if applicable. Fails if
 |        ``instantiation_error``
 |    ``Pack`` is neither a variable nor an atom:
 |        ``type_error(atom,Pack)``
+
+
+------------
+
+.. index:: pack_metadata/4
+.. _packs/0::pack_metadata/4:
+
+``pack_metadata/4``
+^^^^^^^^^^^^^^^^^^^
+
+Enumerates by backtracking resolved metadata for installed packs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pack_metadata(Registry,Pack,Version,Metadata)``
+| **Mode and number of proofs:**
+|    ``pack_metadata(?atom,?atom,?compound,?compound)`` - ``zero_or_more``
+
+| **Exceptions:**
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+|    ``Version`` is neither a variable nor a compound term:
+|        ``type_error(compound,Version)``
+|    ``Metadata`` is neither a variable nor a compound term:
+|        ``type_error(compound,Metadata)``
+
+| **Remarks:**
+
+    - ``Metadata``: Resolved metadata term for the selected installed pack version.
+    - Resolved fields: The metadata term includes both version-independent pack metadata and version-specific metadata selected from the installed version.
+    - Absent optional metadata: Missing optional metadata is normalized to ``none`` instead of causing failure.
+    - Metadata term: Metadata is returned using the term ``metadata(Name, Description, License, Home, SourceURL, Checksum, Dependencies, Portability, Directory, Pinned, Installed, Loaded)``.
+
+| **See also:**
+|    :ref:`packs/0::pack_property/4`
+|    :ref:`packs/0::pack_object/3`
+|    :ref:`packs/0::loaded_pack/3`
+
+
+------------
+
+.. index:: pack_property/4
+.. _packs/0::pack_property/4:
+
+``pack_property/4``
+^^^^^^^^^^^^^^^^^^^
+
+Enumerates by backtracking resolved properties for installed pack versions.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pack_property(Registry,Pack,Version,Property)``
+| **Mode and number of proofs:**
+|    ``pack_property(?atom,?atom,?compound,?compound)`` - ``zero_or_more``
+
+| **Exceptions:**
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+|    ``Version`` is neither a variable nor a compound term:
+|        ``type_error(compound,Version)``
+|    ``Property`` is neither a variable nor a compound term:
+|        ``type_error(compound,Property)``
+
+| **Remarks:**
+
+    - ``Property``: A resolved property term for the selected installed pack version.
+    - Supported properties: Supported properties are ``name(Name)``, ``description(Description)``, ``license(License)``, ``home(Home)``, ``source_url(URL)``, ``checksum(Checksum)``, ``dependencies(Dependencies)``, ``portability(Portability)``, ``directory(Directory)``, ``pinned(Boolean)``, ``installed(Boolean)``, and ``loaded(Boolean)``.
+    - Absent optional metadata: Missing optional metadata is normalized to ``none``.
+
+| **See also:**
+|    :ref:`packs/0::pack_metadata/4`
+|    :ref:`packs/0::pack_object/3`
+
+
+------------
+
+.. index:: pack_object/3
+.. _packs/0::pack_object/3:
+
+``pack_object/3``
+^^^^^^^^^^^^^^^^^
+
+Enumerates by backtracking pack specification objects for defined registry and pack pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pack_object(Registry,Pack,PackObject)``
+| **Mode and number of proofs:**
+|    ``pack_object(?atom,?atom,?atom)`` - ``zero_or_more``
+
+| **Exceptions:**
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+|    ``PackObject`` is neither a variable nor an atom:
+|        ``type_error(atom,PackObject)``
+
+| **Remarks:**
+
+    - ``PackObject``: Identifier of the object implementing the ``pack_protocol`` for the given registry and pack.
+    - Intended use: This predicate is a low-level bridge for advanced tools and should not be required by most consumers when ``pack_metadata/4`` or ``pack_property/4`` is sufficient.
+
+| **See also:**
+|    :ref:`packs/0::pack_metadata/4`
+|    :ref:`packs/0::pack_property/4`
+
+
+------------
+
+.. index:: loaded_pack/3
+.. _packs/0::loaded_pack/3:
+
+``loaded_pack/3``
+^^^^^^^^^^^^^^^^^
+
+Enumerates by backtracking all installed packs that contributed loaded files to the current session.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``loaded_pack(Registry,Pack,Version)``
+| **Mode and number of proofs:**
+|    ``loaded_pack(?atom,?atom,?compound)`` - ``zero_or_more``
+
+| **Exceptions:**
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+|    ``Version`` is neither a variable nor a compound term:
+|        ``type_error(compound,Version)``
+
+| **Remarks:**
+
+    - Loaded pack: A pack is considered loaded iff at least one currently loaded file belongs to its installation directory.
+    - ``Version``: Installed version of the loaded pack.
+
+| **See also:**
+|    :ref:`packs/0::loaded_pack_file/4`
+|    :ref:`packs/0::pack_metadata/4`
+|    :ref:`packs/0::installed/3`
+
+
+------------
+
+.. index:: loaded_pack_file/4
+.. _packs/0::loaded_pack_file/4:
+
+``loaded_pack_file/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates by backtracking loaded files that belong to installed packs in the current session.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``loaded_pack_file(Registry,Pack,Version,File)``
+| **Mode and number of proofs:**
+|    ``loaded_pack_file(?atom,?atom,?compound,?atom)`` - ``zero_or_more``
+
+| **Exceptions:**
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+|    ``Version`` is neither a variable nor a compound term:
+|        ``type_error(compound,Version)``
+|    ``File`` is neither a variable nor an atom:
+|        ``type_error(atom,File)``
+
+| **Remarks:**
+
+    - ``File``: Absolute path of a currently loaded file belonging to the selected installed pack.
+    - Intended use: This predicate supports diagnostics, tests, and the definition of ``loaded_pack/3``.
+
+| **See also:**
+|    :ref:`packs/0::loaded_pack/3`
 
 
 ------------
