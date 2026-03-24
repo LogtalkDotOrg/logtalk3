@@ -98,8 +98,8 @@
 	]).
 
 	:- uses(packs, [
-		installed/4,
-		directory/2
+		loaded_pack/3,
+		pack_metadata/4
 	]).
 
 	:- uses(uuid, [
@@ -398,12 +398,10 @@
 		sort(PackPackages0, PackPackages).
 
 	loaded_pack_package(SPDXID, Pack, VersionAtom, License, Checksum, Metadata, Description, Options) :-
-		installed(Registry, Pack, Version, _Pinned),
-		directory(Pack, PackDirectory),
-		loaded_from_pack_directory(PackDirectory),
+		loaded_pack(Registry, Pack, Version),
 		version_atom(Version, VersionAtom),
 		pack_metadata_options(Pack, Options, Metadata),
-		pack_metadata(Registry, Pack, Version, DefaultLicense, Checksum),
+		resolved_pack_metadata(Registry, Pack, Version, DefaultLicense, Checksum, _Home, _SourceURL),
 		pack_license(Pack, DefaultLicense, Options, License),
 		atomic_list_concat(['SPDXRef-Pack-', Pack], SPDXID),
 		atomic_list_concat(['Loaded Logtalk pack ', Pack], Description).
@@ -411,40 +409,18 @@
 	pack_license(Pack, DefaultLicense, Options, License) :-
 		^^option(pack_license(Pack, License), Options, pack_license(Pack, DefaultLicense)).
 
-	pack_metadata(Registry, Pack, Version, License, Checksum) :-
-		(   registry_pack_object(Registry, Pack, PackObject) ->
-			(   PackObject::license(PackLicense) ->
-				License = PackLicense
-			;   License = 'NOASSERTION'
-			),
-			(   PackObject::version(Version, _, _, PackChecksum, _, _) ->
-				normalize_pack_checksum(PackChecksum, Checksum)
-			;   Checksum = none
-			)
-		;   License = 'NOASSERTION',
-			Checksum = none
-		).
+	resolved_pack_metadata(Registry, Pack, Version, License, Checksum, Home, SourceURL) :-
+		pack_metadata(Registry, Pack, Version, metadata(_, _, License0, Home0, SourceURL0, PackChecksum, _, _, _, _, _, _)),
+		normalize_pack_license(License0, License),
+		normalize_pack_checksum(PackChecksum, Checksum),
+		Home = Home0,
+		SourceURL = SourceURL0.
 
-	registry_pack_object(Registry, Pack, PackObject) :-
-		implements_protocol(RegistryObject, registry_protocol),
-		RegistryObject::name(Registry),
-		object_property(RegistryObject, file(_, Directory)),
-		once((
-			implements_protocol(PackObject, pack_protocol),
-			PackObject::name(Pack),
-			object_property(PackObject, file(_, Directory))
-		)).
+	normalize_pack_license(none, 'NOASSERTION').
+	normalize_pack_license(License, License).
 
 	normalize_pack_checksum(none, none).
 	normalize_pack_checksum(sha256-Digest, checksum('SHA256', Digest)).
-
-	loaded_from_pack_directory(PackDirectory) :-
-		atom_concat(PackDirectory, '/', Prefix),
-		logtalk::loaded_file_property(_, directory(LoadedDirectory)),
-		(	LoadedDirectory == PackDirectory
-		;	sub_atom(LoadedDirectory, 0, _, _, Prefix)
-		),
-		!.
 
 	packages_json([], _, []).
 	packages_json([Package| Packages], Options, [JSON| JSONs]) :-
@@ -508,14 +484,14 @@
 		cyclonedx_pack_external_reference(Name, Version, ExternalReference).
 
 	cyclonedx_pack_external_reference(Name, _Version, {type-website, url-Home}) :-
-		installed(Registry, Name, _VersionTerm, _Pinned),
-		registry_pack_object(Registry, Name, PackObject),
-		PackObject::home(Home).
+		loaded_pack(Registry, Name, VersionTerm),
+		resolved_pack_metadata(Registry, Name, VersionTerm, _License, _Checksum, Home, _SourceURL),
+		Home \== none.
 	cyclonedx_pack_external_reference(Name, Version, {type-distribution, url-URL}) :-
-		installed(Registry, Name, VersionTerm, _Pinned),
+		loaded_pack(Registry, Name, VersionTerm),
 		version_atom(VersionTerm, Version),
-		registry_pack_object(Registry, Name, PackObject),
-		PackObject::version(VersionTerm, _, URL, _, _, _).
+		resolved_pack_metadata(Registry, Name, VersionTerm, _License, _Checksum, _Home, URL),
+		URL \== none.
 
 	cyclonedx_license_pairs('NOASSERTION', []).
 	cyclonedx_license_pairs(License, [licenses-[LicenseJSON]]) :-
@@ -787,15 +763,13 @@
 		spdx_external_reference_json(Type, URL, Reference).
 
 	spdx_pack_external_reference(Name, _Version, website, Home) :-
-		installed(Registry, Name, _VersionTerm, _Pinned),
-		registry_pack_object(Registry, Name, PackObject),
-		PackObject::home(Home),
+		loaded_pack(Registry, Name, VersionTerm),
+		resolved_pack_metadata(Registry, Name, VersionTerm, _License, _Checksum, Home, _SourceURL),
 		Home \== none.
 	spdx_pack_external_reference(Name, Version, distribution, URL) :-
-		installed(Registry, Name, VersionTerm, _Pinned),
+		loaded_pack(Registry, Name, VersionTerm),
 		version_atom(VersionTerm, Version),
-		registry_pack_object(Registry, Name, PackObject),
-		PackObject::version(VersionTerm, _, URL, _, _, _),
+		resolved_pack_metadata(Registry, Name, VersionTerm, _License, _Checksum, _Home, URL),
 		URL \== none.
 
 	spdx_external_reference_json(Type, URL, {
@@ -806,17 +780,15 @@
 
 	spdx_pack_download_location(SPDXID, Name, Version, URL) :-
 		sub_atom(SPDXID, 0, _, _, 'SPDXRef-Pack-'),
-		installed(Registry, Name, VersionTerm, _Pinned),
+		loaded_pack(Registry, Name, VersionTerm),
 		version_atom(VersionTerm, Version),
-		registry_pack_object(Registry, Name, PackObject),
-		PackObject::version(VersionTerm, _, URL, _, _, _),
+		resolved_pack_metadata(Registry, Name, VersionTerm, _License, _Checksum, _Home, URL),
 		URL \== none.
 
 	spdx_pack_homepage(SPDXID, Name, URL) :-
 		sub_atom(SPDXID, 0, _, _, 'SPDXRef-Pack-'),
-		installed(Registry, Name, _VersionTerm, _Pinned),
-		registry_pack_object(Registry, Name, PackObject),
-		PackObject::home(URL),
+		loaded_pack(Registry, Name, VersionTerm),
+		resolved_pack_metadata(Registry, Name, VersionTerm, _License, _Checksum, URL, _SourceURL),
 		URL \== none.
 
 	checksum_pairs(none, []).
