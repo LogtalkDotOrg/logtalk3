@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.8.0 or later versions
-%  Last updated on October 29, 2025
+%  Last updated on March 25, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -974,6 +974,9 @@ term_hash(_, _, _, _) :-
 {+o} :-
 	!,
 	logtalk_make(optimal).
+{+f} :-
+	!,
+	logtalk_make(force).
 {$} :-
 	!,
 	logtalk_make(caches).

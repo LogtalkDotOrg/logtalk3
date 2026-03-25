@@ -2912,6 +2912,8 @@ logtalk_make(Target) :-
 
 % reload of changed Logtalk source files
 '$lgt_valid_logtalk_make_target'(all).
+% force reload of all Logtalk source files
+'$lgt_valid_logtalk_make_target'(force).
 % recompile files in debug mode
 '$lgt_valid_logtalk_make_target'(debug).
 % recompile files in normal mode
@@ -3020,6 +3022,31 @@ logtalk_make(Target) :-
 	fail.
 '$lgt_logtalk_make'(all) :-
 	'$lgt_print_message'(comment(make), modified_files_reloaded).
+
+'$lgt_logtalk_make'(force) :-
+	'$lgt_print_message'(comment(make), reload_all_files),
+	'$lgt_compiler_flag'(reload, Current),
+	(	'$lgt_set_compiler_flag'(reload, always),
+		findall(
+			file(Path, Flags),
+			(	'$lgt_loaded_file_'(Basename, Directory, _, Flags, _, _, _),
+				atom_concat(Directory, Basename, Path)
+			),
+			Files
+		),
+		% filter files that will be reloaded by a parent file that will also be reloaded
+		'$lgt_member'(file(Path,Flags), Files),
+		\+ (
+			'$lgt_parent_file_'(Path, Parent),
+			'$lgt_member'(file(Parent,_), Files)
+		),
+		'$lgt_file_exists'(Path),
+		logtalk_load(Path, [reload(always)| Flags]),
+		fail
+	;	true
+	),
+	'$lgt_set_compiler_flag'(reload, Current),
+	'$lgt_print_message'(comment(make), all_files_reloaded).
 
 '$lgt_logtalk_make'(debug) :-
 	'$lgt_print_message'(comment(make), reload_files_in_mode(debug)),

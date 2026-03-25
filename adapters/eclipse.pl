@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on November 12, 2024
+%  Last updated on March 25, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -1149,6 +1149,9 @@ forall(Generate, Test) :-
 {+o} :-
 	!,
 	logtalk_make(optimal).
+{+f} :-
+	!,
+	logtalk_make(force).
 {$} :-
 	!,
 	logtalk_make(caches).

@@ -744,6 +744,9 @@ atomic_list_concat(Atomics, Glue, Atom) :-
 {+o} :-
 	!,
 	logtalk_make(optimal).
+{+f} :-
+	!,
+	logtalk_make(force).
 {$} :-
 	!,
 	logtalk_make(caches).

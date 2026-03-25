@@ -160,12 +160,15 @@ between pairs or trios of objects when called with the target
 <code class="docutils literal notranslate"><span class="pre">circular</span></code>, generating documentation when called with the target
 <code class="docutils literal notranslate"><span class="pre">documentation</span></code>, and deleting the <a class="reference internal" href="../../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> caches with
 the target <code class="docutils literal notranslate"><span class="pre">caches</span></code>.</p>
-<p>There are also three variants of the <code class="docutils literal notranslate"><span class="pre">all</span></code> target: <code class="docutils literal notranslate"><span class="pre">debug</span></code>,
-<code class="docutils literal notranslate"><span class="pre">normal</span></code>, and <code class="docutils literal notranslate"><span class="pre">optimal</span></code>. These targets change the compilation mode
-(by changing the default value of the <a class="reference internal" href="../../userman/programming.html#flag-debug"><span class="std std-ref">debug</span></a> and
+<p>There are also four variants of the <code class="docutils literal notranslate"><span class="pre">all</span></code> target: <code class="docutils literal notranslate"><span class="pre">debug</span></code>, <code class="docutils literal notranslate"><span class="pre">normal</span></code>,
+<code class="docutils literal notranslate"><span class="pre">optimal</span></code>, and <code class="docutils literal notranslate"><span class="pre">force</span></code>. The first three targets change the compilation
+mode (by changing the default value of the <a class="reference internal" href="../../userman/programming.html#flag-debug"><span class="std std-ref">debug</span></a> and
 <a class="reference internal" href="../../userman/programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flags) and reload all affected files
 (i.e., all files loaded without an explicit <code class="docutils literal notranslate"><span class="pre">debug/1</span></code> or <code class="docutils literal notranslate"><span class="pre">optimize/1</span></code>
-compiler option).</p>
+compiler option). The <code class="docutils literal notranslate"><span class="pre">force</span></code> traget forces reloading of all files that
+were loaded without an explicit <code class="docutils literal notranslate"><span class="pre">reload/1</span></code> compiler option. This target
+is typically used after changing some compiler linter flag (e.g., the
+<code class="docutils literal notranslate"><span class="pre">portability</span></code> flag).</p>
 <p>When using the <code class="docutils literal notranslate"><span class="pre">all</span></code> target, only source files loaded using the
 <a class="reference internal" href="logtalk_load_1.html#predicates-logtalk-load-1"><span class="std std-ref">logtalk_load/1</span></a> and <a class="reference internal" href="logtalk_load_2.html#predicates-logtalk-load-2"><span class="std std-ref">logtalk_load/2</span></a>
 predicates are reloaded. Non-modified files will also be reloaded when
@@ -210,6 +213,7 @@ shortcuts are usually defined:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">{+d}</span></code> - <code class="docutils literal notranslate"><span class="pre">logtalk_make(debug)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">{+n}</span></code> - <code class="docutils literal notranslate"><span class="pre">logtalk_make(normal)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">{+o}</span></code> - <code class="docutils literal notranslate"><span class="pre">logtalk_make(optimal)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{+f}</span></code> - <code class="docutils literal notranslate"><span class="pre">logtalk_make(force)</span></code></p></li>
 </ul>
 <p>Check the <a class="reference internal" href="../../glossary.html#term-adapter-file"><span class="xref std std-term">adapter files</span></a> for the availability of
 these shortcuts as they are not part of the language.</p>

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Trealla Prolog 2.84.29 and later versions
-%  Last updated on November 15, 2025
+%  Last updated on March 25, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -839,6 +839,9 @@ term_hash(_, _, _, _) :-
 {+o} :-
 	!,
 	logtalk_make(optimal).
+{+f} :-
+	!,
+	logtalk_make(force).
 {$} :-
 	!,
 	logtalk_make(caches).

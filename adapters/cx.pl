@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for CxProlog 0.98.2 or a later version
-%  Last updated on November 13, 2025
+%  Last updated on March 25, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -910,6 +910,9 @@ atomic_list_concat([], _, '').
 {+o} :-
 	!,
 	logtalk_make(optimal).
+{+f} :-
+	!,
+	logtalk_make(force).
 {$} :-
 	!,
 	logtalk_make(caches).

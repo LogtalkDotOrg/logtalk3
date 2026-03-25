@@ -46,12 +46,15 @@ between pairs or trios of objects when called with the target
 ``documentation``, and deleting the :term:`dynamic binding` caches with
 the target ``caches``.
 
-There are also three variants of the ``all`` target: ``debug``,
-``normal``, and ``optimal``. These targets change the compilation mode
-(by changing the default value of the :ref:`debug <flag_debug>` and
+There are also four variants of the ``all`` target: ``debug``, ``normal``,
+``optimal``, and ``force``. The first three targets change the compilation
+mode (by changing the default value of the :ref:`debug <flag_debug>` and
 :ref:`optimize <flag_optimize>` flags) and reload all affected files
 (i.e., all files loaded without an explicit ``debug/1`` or ``optimize/1``
-compiler option).
+compiler option). The ``force`` traget forces reloading of all files that
+were loaded without an explicit ``reload/1`` compiler option. This target
+is typically used after changing some compiler linter flag (e.g., the
+``portability`` flag).
 
 When using the ``all`` target, only source files loaded using the
 :ref:`predicates_logtalk_load_1` and :ref:`predicates_logtalk_load_2`
@@ -102,6 +105,7 @@ shortcuts are usually defined:
 * ``{+d}`` - ``logtalk_make(debug)``
 * ``{+n}`` - ``logtalk_make(normal)``
 * ``{+o}`` - ``logtalk_make(optimal)``
+* ``{+f}`` - ``logtalk_make(force)``
 
 Check the :term:`adapter files <adapter file>` for the availability of
 these shortcuts as they are not part of the language.

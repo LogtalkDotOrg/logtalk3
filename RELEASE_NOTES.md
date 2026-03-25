@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: New `force` target to the `logtalk_make/1` built-in predicate to
+force reloading of all files that were loaded without an explicit `reload/1`
+option.
+
 * ADDED: New `logtalk_load_context/2` key `term_position(Term)` to access
 a term position while verifying that the position is for the given term.
 
