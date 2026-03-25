@@ -161,7 +161,7 @@
 
 	spdx_document(Document, data(Name, Created, _, DocumentNamespace, ApplicationPackage, LogtalkPackage, BackendPackage, PackPackages, PackRecords), Options) :-
 		spdx_creation_info(CreationInfo, Created, Options),
-		packages_json([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], Options, Packages),
+		packages_json([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], Packages, Options),
 		relationships_json(PackRecords, Relationships),
 		Document = {
 			spdxVersion-'SPDX-2.3',
@@ -190,14 +190,6 @@
 			externalReferences-BomExternalReferences,
 			components-Components,
 			dependencies-Dependencies
-		}.
-
-	creation_info(CreationInfo, Options) :-
-		creation_timestamp(Created),
-		creators(Creators, Options),
-		CreationInfo = {
-			created-Created,
-			creators-Creators
 		}.
 
 	spdx_creation_info(CreationInfo, Created, Options) :-
@@ -302,20 +294,54 @@
 
 	cyclonedx_application_component_json(package(Reference, Name, Version, License, Checksum, Metadata, Purpose, Description), Options, JSON) :-
 		cyclonedx_component_pairs(Metadata, Checksum, Reference, Name, Version, License, Purpose, required, Description, Pairs0),
+		application_cyclonedx_identity_pairs(Options, IdentityPairs),
 		application_cyclonedx_external_reference_pairs(Options, ExternalReferencePairs),
-		append(Pairs0, ExternalReferencePairs, Pairs),
+		append(Pairs0, IdentityPairs, Pairs1),
+		append(Pairs1, ExternalReferencePairs, Pairs),
 		json_object(Pairs, JSON).
+
+	application_cyclonedx_identity_pairs(Options, Pairs) :-
+		application_cyclonedx_purl_pairs(Options, PurlPairs),
+		application_cyclonedx_omnibor_pairs(Options, OmniborPairs),
+		application_cyclonedx_swhid_pairs(Options, SwhidPairs),
+		append(PurlPairs, OmniborPairs, Pairs0),
+		append(Pairs0, SwhidPairs, Pairs).
+
+	application_cyclonedx_purl_pairs(Options, [purl-PURL]) :-
+		application_external_reference_values(purl, [PURL| _], Options),
+		!.
+	application_cyclonedx_purl_pairs(_, []).
+
+	application_cyclonedx_omnibor_pairs(Options, [omniborId-Identifiers]) :-
+		application_external_reference_values(gitoid, Identifiers, Options),
+		Identifiers \== [],
+		!.
+	application_cyclonedx_omnibor_pairs(_, []).
+
+	application_cyclonedx_swhid_pairs(Options, [swhid-Identifiers]) :-
+		application_external_reference_values(swh, Identifiers, Options),
+		Identifiers \== [],
+		!.
+	application_cyclonedx_swhid_pairs(_, []).
 
 	application_cyclonedx_external_reference_pairs(Options, [externalReferences-References]) :-
 		findall(
 			{type-Type, url-URL},
-			application_external_reference(Options, Type, URL),
+			cyclonedx_application_external_reference(Options, Type, URL),
 			References0
 		),
 		sort(References0, References),
 		References \== [],
 		!.
 	application_cyclonedx_external_reference_pairs(_, []).
+
+	cyclonedx_application_external_reference(Options, Type, URL) :-
+		application_external_reference(Type, URL, Options),
+		\+ cyclonedx_application_identity_type(Type).
+
+	cyclonedx_application_identity_type(purl).
+	cyclonedx_application_identity_type(gitoid).
+	cyclonedx_application_identity_type(swh).
 
 	sbom_tool_version(Version) :-
 		this(This),
@@ -441,20 +467,31 @@
 		Goal =.. [Property, Value],
 		Object::Goal.
 
-	application_external_reference(Options, Type, URL) :-
-		member(application_external_reference(Type, URL), Options).
-	application_external_reference(_, Type, URL) :-
+	application_external_reference(Type, Locator, Options) :-
+		member(application_external_reference(ApplicationType, Locator), Options),
+		application_external_reference_type(ApplicationType, Type).
+	application_external_reference(Type, Locator, _) :-
 		application_object(Object),
-		Object::external_reference(ApplicationType, URL),
+		Object::external_reference(ApplicationType, Locator),
 		application_external_reference_type(ApplicationType, Type).
 
 	application_external_reference_type(homepage, website) :-
 		!.
 	application_external_reference_type(distribution, distribution) :-
 		!.
+	application_external_reference_type(package, purl) :-
+		!.
 	application_external_reference_type(repository, vcs) :-
 		!.
+	application_external_reference_type(git_object_identifier, gitoid) :-
+		!.
+	application_external_reference_type(software_heritage_identifier, swh) :-
+		!.
 	application_external_reference_type(Type, Type).
+
+	application_external_reference_values(Type, Values, Options) :-
+		findall(Value, application_external_reference(Type, Value, Options), Values0),
+		sort(Values0, Values).
 
 	option_from_user_options(Option, Options) :-
 		functor(Option, Functor, Arity),
@@ -532,13 +569,13 @@
 	normalize_pack_checksum(none, none).
 	normalize_pack_checksum(sha256-Digest, checksum('SHA256', Digest)).
 
-	packages_json([], _, []).
-	packages_json([Package| Packages], Options, [JSON| JSONs]) :-
-		package_json(Package, Options, JSON),
-		packages_json(Packages, Options, JSONs).
+	packages_json([], [], _).
+	packages_json([Package| Packages], [JSON| JSONs], Options) :-
+		package_json(Package, JSON, Options),
+		packages_json(Packages, JSONs, Options).
 
-	package_json(package(SPDXID, Name, Version, License, Checksum, Metadata, Purpose, Description), Options, JSON) :-
-		package_json_pairs(Metadata, Checksum, SPDXID, Name, Version, License, Purpose, Description, Options, Pairs),
+	package_json(package(SPDXID, Name, Version, License, Checksum, Metadata, Purpose, Description), JSON, Options) :-
+		package_json_pairs(Metadata, Checksum, SPDXID, Name, Version, License, Purpose, Description, Pairs, Options),
 		json_object(Pairs, JSON).
 
 	cyclonedx_components_json([], []).
@@ -782,13 +819,6 @@
 		application_pack_references(PackRecords, ApplicationPackReferences),
 		cyclonedx_dependency_entries(Packages, PackRecords, ApplicationPackReferences, Dependencies).
 
-	pack_references([], []).
-	pack_references([package(Reference, _, _, _, _, _, 'LIBRARY', _)| Packages], [Reference| References]) :-
-		!,
-		pack_references(Packages, References).
-	pack_references([_| Packages], References) :-
-		pack_references(Packages, References).
-
 	cyclonedx_dependency_entries([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], PackRecords, ApplicationPackReferences, [ApplicationDependency, LogtalkDependency, BackendDependency| PackDependencies]) :-
 		ApplicationPackage = package(ApplicationReference, _, _, _, _, _, _, _),
 		LogtalkPackage = package(LogtalkReference, _, _, _, _, _, _, _),
@@ -813,7 +843,7 @@
 			dependsOn-DependsOn
 		}.
 
-	package_json_pairs(Metadata, Checksum, SPDXID, Name, Version, License, Purpose, Description, Options, Pairs) :-
+	package_json_pairs(Metadata, Checksum, SPDXID, Name, Version, License, Purpose, Description, Pairs, Options) :-
 		spdx_download_location_pairs(SPDXID, Name, Version, DownloadLocationPairs),
 		BasePairs = [
 			'SPDXID'-SPDXID,
@@ -860,21 +890,21 @@
 	spdx_homepage_pairs(_, _, []).
 
 	spdx_external_reference_pairs(SPDXID, Name, Version, Options, [externalRefs-References]) :-
-		findall(Reference, spdx_package_external_reference(SPDXID, Name, Version, Options, Reference), References0),
+		findall(Reference, spdx_package_external_reference(SPDXID, Name, Version, Reference, Options), References0),
 		sort(References0, References),
 		References \== [],
 		!.
 	spdx_external_reference_pairs(_, _, _, _, []).
 
-	spdx_package_external_reference('SPDXRef-Application', _, _, Options, Reference) :-
-		application_external_reference(Options, Type, URL),
+	spdx_package_external_reference('SPDXRef-Application', _, _, Reference, Options) :-
+		application_external_reference(Type, URL, Options),
 		spdx_external_reference_json(Type, URL, Reference).
-	spdx_package_external_reference('SPDXRef-Logtalk', _, _, _, Reference) :-
+	spdx_package_external_reference('SPDXRef-Logtalk', _, _, Reference, _) :-
 		spdx_external_reference_json(website, 'https://logtalk.org/', Reference).
-	spdx_package_external_reference('SPDXRef-Backend', Name, _, _, Reference) :-
+	spdx_package_external_reference('SPDXRef-Backend', Name, _, Reference, _) :-
 		backend(_, Name, _, URL),
 		spdx_external_reference_json(website, URL, Reference).
-	spdx_package_external_reference(SPDXID, Name, Version, _, Reference) :-
+	spdx_package_external_reference(SPDXID, Name, Version, Reference, _) :-
 		sub_atom(SPDXID, 0, _, _, 'SPDXRef-Pack-'),
 		spdx_pack_external_reference(Name, Version, Type, URL),
 		spdx_external_reference_json(Type, URL, Reference).
@@ -889,11 +919,20 @@
 		resolved_pack_metadata(Registry, Name, VersionTerm, _License, _Checksum, _Home, URL),
 		URL \== none.
 
-	spdx_external_reference_json(Type, URL, {
-		referenceCategory-'OTHER',
+	spdx_external_reference_json(Type, Locator, {
+		referenceCategory-Category,
 		referenceType-Type,
-		referenceLocator-URL
-	}).
+		referenceLocator-Locator
+	}) :-
+		spdx_external_reference_category(Type, Category).
+
+	spdx_external_reference_category(purl, 'PACKAGE-MANAGER') :-
+		!.
+	spdx_external_reference_category(gitoid, 'PERSISTENT-ID') :-
+		!.
+	spdx_external_reference_category(swh, 'PERSISTENT-ID') :-
+		!.
+	spdx_external_reference_category(_, 'OTHER').
 
 	spdx_pack_download_location(SPDXID, Name, Version, URL) :-
 		sub_atom(SPDXID, 0, _, _, 'SPDXRef-Pack-'),
@@ -1031,10 +1070,6 @@
 		!,
 		atomic_list_concat([Major, Minor, Patch], '.', BaseVersion),
 		atomic_list_concat([BaseVersion, Status], '-', Version).
-	version_atom(Major:Minor:Patch:Status, Version) :-
-		!,
-		atomic_list_concat([Major, Minor, Patch], '.', BaseVersion),
-		atomic_list_concat([BaseVersion, Status], '-', Version).
 	version_atom(Major:Minor:Patch, Version) :-
 		!,
 		atomic_list_concat([Major, Minor, Patch], '.', Version).
@@ -1086,12 +1121,12 @@
 	valid_option(application_originator(Originator)) :-
 		atom(Originator),
 		Originator \== none.
-	valid_option(application_external_reference(Type, URL)) :-
+	valid_option(application_external_reference(Type, Locator)) :-
 		atom(Type),
 		Type \== none,
-		atom(URL),
-		URL \== none,
-		valid_url(URL).
+		atom(Locator),
+		Locator \== none,
+		valid_application_external_reference_locator(Type, Locator).
 	valid_option(bom_external_reference(Type, URL)) :-
 		atom(Type),
 		Type \== none,
@@ -1128,6 +1163,7 @@
 		atom(Pack),
 		atom(ValidUntilDate),
 		ValidUntilDate \== none.
+
 	valid_option(pack_supplier(Pack, Supplier)) :-
 		atom(Pack),
 		atom(Supplier),
@@ -1160,6 +1196,17 @@
 		valid_creators(Creators).
 	valid_option(validate_export(true)).
 	valid_option(validate_export(false)).
+
+	valid_application_external_reference_locator(Type, _Locator) :-
+		application_external_reference_type(Type, MappedType),
+		spdx_identifier_reference_type(MappedType),
+		!.
+	valid_application_external_reference_locator(_, URL) :-
+		valid_url(URL).
+
+	spdx_identifier_reference_type(purl).
+	spdx_identifier_reference_type(gitoid).
+	spdx_identifier_reference_type(swh).
 
 	valid_creators([]).
 	valid_creators([Creator| Creators]) :-

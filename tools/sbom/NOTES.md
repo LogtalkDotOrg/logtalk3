@@ -176,16 +176,22 @@ Global/application options:
 	`logtalk:sbom:originator`. When exactly one object conforming to
 	`application_protocol` is loaded and declares `originator/1`, that value is
 	used by default. Otherwise, the default is not exporting this information.
-- `application_external_reference(Type, URL)`
-	Adds a CycloneDX `metadata.component.externalReferences` entry for the
-	application component and a SPDX application package `externalRefs` entry.
-	For SPDX exports, `Type` is used as the `referenceType`, `URL` as the
-	`referenceLocator`, and `referenceCategory` is set to `OTHER`. This option
-	can be repeated to export multiple references. When exactly one object
-	conforming to `application_protocol` is loaded, its declared
-	`external_reference/2` metadata is also exported. The `homepage/1`,
-	`distribution/1`, and `repository/1` predicates are mapped to `website`,
-	`distribution`, and `vcs` SBOM reference types, respectively.
+- `application_external_reference(Type, Locator)`
+	Adds application reference metadata. For SPDX exports, this becomes an
+	application package `externalRefs` entry. For CycloneDX exports, URL-based
+	references are exported under `metadata.component.externalReferences`, while
+	package and provenance identifiers use the dedicated component identity
+	fields. This option can be repeated to export multiple references. When
+	exactly one object conforming to `application_protocol` is loaded, its
+	declared `external_reference/2` metadata is also exported. The
+	`homepage/1`, `distribution/1`, `package/1`, `repository/1`,
+	`git_object_identifier/1`, and `software_heritage_identifier/1` predicates
+	are mapped to `website`, `distribution`, `purl`, `vcs`, `gitoid`, and `swh`
+	SBOM reference types, respectively. SPDX categories are inferred from the
+	reference type, with `purl` exported under `PACKAGE-MANAGER` and `gitoid`
+	and `swh` exported under `PERSISTENT-ID`. For CycloneDX exports,
+	`purl` is written to `metadata.component.purl`, `gitoid` values to
+	`metadata.component.omniborId`, and `swh` values to `metadata.component.swhid`.
 - `namespace(Namespace)`
     Sets the base document namespace URI. A process and timestamp suffix is added
     automatically to guarantee uniqueness. This option only applies to SPDX

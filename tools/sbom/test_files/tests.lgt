@@ -47,7 +47,7 @@
 	]).
 
 	:- uses(list, [
-		memberchk/2
+		member/2, memberchk/2
 	]).
 
 	:- uses(json, [
@@ -90,6 +90,7 @@
 
 	test(sbom_document_01, deterministic) :-
 		document(Document),
+		^^assertion(ground(Document)),
 		Document = {
 			spdxVersion-'SPDX-2.3',
 			dataLicense-'CC0-1.0',
@@ -101,7 +102,6 @@
 			packages-Packages,
 			relationships-Relationships
 		},
-		^^assertion(ground(Document)),
 		^^assertion(sub_atom(Creator, 0, _, _, 'Tool: Logtalk SBOM generator-')),
 		memberchk({
 			'SPDXID'-'SPDXRef-Application',
@@ -240,6 +240,7 @@
 
 	test(sbom_document_03, deterministic) :-
 		document(Document),
+		^^assertion(ground(Document)),
 		Document = {
 			spdxVersion-_,
 			dataLicense-_,
@@ -251,7 +252,6 @@
 			packages-Packages,
 			relationships-Relationships
 		},
-		^^assertion(ground(Document)),
 		memberchk({
 			'SPDXID'-'SPDXRef-Pack-sbom_fixture_pack',
 			name-sbom_fixture_pack,
@@ -288,6 +288,7 @@
 			pack_supplier(sbom_fixture_pack, 'Organization: Fixture Registry'),
 			pack_originator(sbom_fixture_pack, 'Person: Fixture Author')
 		]),
+		^^assertion(ground(Document)),
 		Document = {
 			spdxVersion-_,
 			dataLicense-_,
@@ -299,7 +300,6 @@
 			packages-Packages,
 			relationships-Relationships
 		},
-		^^assertion(ground(Document)),
 		memberchk({
 			'SPDXID'-'SPDXRef-Pack-sbom_fixture_pack',
 			name-sbom_fixture_pack,
@@ -401,6 +401,7 @@
 
 	test(sbom_document_06, deterministic) :-
 		document(Document, [format(cdx)]),
+		^^assertion(ground(Document)),
 		current_logtalk_flag(prolog_dialect, Backend),
 		sbom<<backend(Backend, _, BackendLicense, BackendWebsite),
 		Document = {
@@ -413,7 +414,6 @@
 			components-Components,
 			dependencies-Dependencies
 		},
-		^^assertion(ground(Document)),
 		^^assertion(sub_atom(SerialNumber, 0, _, _, 'urn:uuid:')),
 		memberchk({type-vcs, url-'https://github.com/LogtalkDotOrg/logtalk3'}, BomExternalReferences),
 		memberchk({type-website, url-'https://logtalk.org/'}, BomExternalReferences),
@@ -541,6 +541,7 @@
 			format(cdx),
 			application_license('Acme Software License')
 		]),
+		^^assertion(ground(Document)),
 		Document = {
 			bomFormat-'CycloneDX',
 			specVersion-'1.6',
@@ -605,6 +606,7 @@
 			application_external_reference(website, 'https://example.com/app'),
 			application_external_reference(vcs, 'https://example.com/example-app.git')
 		]),
+		^^assertion(ground(Document)),
 		Document = {
 			bomFormat-'CycloneDX',
 			specVersion-'1.6',
@@ -639,6 +641,7 @@
 			bom_external_reference(documentation, 'https://example.com/sbom-docs'),
 			bom_external_reference(website, 'https://example.com/sbom-home')
 		]),
+		^^assertion(ground(Document)),
 		Document = {
 			bomFormat-'CycloneDX',
 			specVersion-'1.6',
@@ -659,6 +662,7 @@
 			application_external_reference(website, 'https://example.com/app'),
 			application_external_reference(vcs, 'https://example.com/example-app.git')
 		]),
+		^^assertion(ground(Document)),
 		Document = {
 			spdxVersion-'SPDX-2.3',
 			dataLicense-'CC0-1.0',
@@ -689,6 +693,7 @@
 		document(Document, [
 			creators(['Tool: Build pipeline', 'Person: Alice Example', 'Organization: Example, Inc.'])
 		]),
+		^^assertion(ground(Document)),
 		Document = {
 			spdxVersion-'SPDX-2.3',
 			dataLicense-'CC0-1.0',
@@ -706,6 +711,7 @@
 			format(cdx),
 			creators(['Tool: Build pipeline', 'Person: Alice Example', 'Organization: Example, Inc.'])
 		]),
+		^^assertion(ground(Document)),
 		Document = {
 			bomFormat-'CycloneDX',
 			specVersion-'1.6',
@@ -735,15 +741,19 @@
 			license('BSD-3-Clause'),
 			homepage('https://example.com/sample'),
 			distribution('https://example.com/sample/download'),
+			package('pkg:generic/sample_application@3.2.1'),
 			creators(['Person: Application Author']),
 			supplier('Organization: Example Supplier'),
 			originator('Person: Example Originator'),
 			built_date('2026-03-24T00:00:00Z'),
 			release_date('2026-03-25T00:00:00Z'),
 			valid_until_date('2027-03-25T00:00:00Z'),
-			repository('https://example.com/sample.git')
+			repository('https://example.com/sample.git'),
+			git_object_identifier('gitoid:commit:sha1:0123456789abcdef0123456789abcdef01234567'),
+			software_heritage_identifier('swh:1:rev:0123456789abcdef0123456789abcdef01234567')
 		]),
 		document(Document),
+		^^assertion(ground(Document)),
 		Document = {
 			spdxVersion-'SPDX-2.3',
 			dataLicense-'CC0-1.0',
@@ -773,6 +783,9 @@
 			primaryPackagePurpose-'APPLICATION',
 			summary-'Sample application from metadata object'
 		}, Packages),
+		memberchk({referenceCategory-'PACKAGE-MANAGER', referenceType-purl, referenceLocator-'pkg:generic/sample_application@3.2.1'}, ApplicationExternalReferences),
+		memberchk({referenceCategory-'PERSISTENT-ID', referenceType-gitoid, referenceLocator-'gitoid:commit:sha1:0123456789abcdef0123456789abcdef01234567'}, ApplicationExternalReferences),
+		memberchk({referenceCategory-'PERSISTENT-ID', referenceType-swh, referenceLocator-'swh:1:rev:0123456789abcdef0123456789abcdef01234567'}, ApplicationExternalReferences),
 		memberchk({referenceCategory-'OTHER', referenceType-distribution, referenceLocator-'https://example.com/sample/download'}, ApplicationExternalReferences),
 		memberchk({referenceCategory-'OTHER', referenceType-vcs, referenceLocator-'https://example.com/sample.git'}, ApplicationExternalReferences),
 		memberchk({referenceCategory-'OTHER', referenceType-website, referenceLocator-'https://example.com/sample'}, ApplicationExternalReferences).
@@ -785,13 +798,16 @@
 			license('BSD-3-Clause'),
 			homepage('https://example.com/sample'),
 			distribution('https://example.com/sample/download'),
+			package('pkg:generic/sample_application@3.2.1'),
 			creators(['Person: Application Author']),
 			supplier('Organization: Example Supplier'),
 			originator('Person: Example Originator'),
 			built_date('2026-03-24T00:00:00Z'),
 			release_date('2026-03-25T00:00:00Z'),
 			valid_until_date('2027-03-25T00:00:00Z'),
-			repository('https://example.com/sample.git')
+			repository('https://example.com/sample.git'),
+			git_object_identifier('gitoid:commit:sha1:0123456789abcdef0123456789abcdef01234567'),
+			software_heritage_identifier('swh:1:rev:0123456789abcdef0123456789abcdef01234567')
 		]),
 		document(Document, [
 			format(cdx),
@@ -802,6 +818,7 @@
 			creators(['Tool: Override Creator']),
 			application_external_reference(documentation, 'https://example.com/sample/docs')
 		]),
+		^^assertion(ground(Document)),
 		Document = {
 			bomFormat-'CycloneDX',
 			specVersion-'1.6',
@@ -823,6 +840,9 @@
 					supplier-{name-'Example Supplier'},
 					manufacturer-{name-'Override Originator'},
 					properties-ApplicationProperties,
+					purl-'pkg:generic/sample_application@3.2.1',
+					omniborId-['gitoid:commit:sha1:0123456789abcdef0123456789abcdef01234567'],
+					swhid-['swh:1:rev:0123456789abcdef0123456789abcdef01234567'],
 					externalReferences-ApplicationExternalReferences
 				}
 			},
@@ -834,6 +854,9 @@
 		memberchk({type-distribution, url-'https://example.com/sample/download'}, ApplicationExternalReferences),
 		memberchk({type-vcs, url-'https://example.com/sample.git'}, ApplicationExternalReferences),
 		memberchk({type-website, url-'https://example.com/sample'}, ApplicationExternalReferences),
+		\+ member({type-purl, url-_}, ApplicationExternalReferences),
+		\+ member({type-gitoid, url-_}, ApplicationExternalReferences),
+		\+ member({type-swh, url-_}, ApplicationExternalReferences),
 		memberchk({name-'logtalk:sbom:built_date', value-'2026-03-24T00:00:00Z'}, ApplicationProperties),
 		memberchk({name-'logtalk:sbom:release_date', value-'2026-03-25T00:00:00Z'}, ApplicationProperties),
 		memberchk({name-'logtalk:sbom:valid_until_date', value-'2027-03-25T00:00:00Z'}, ApplicationProperties),
@@ -847,6 +870,7 @@
 		create_object(sbom_application_object_16_1, [implements(application_protocol), imports(application_common)], [], [name(first_application), version('1.0.0')]),
 		create_object(sbom_application_object_16_2, [implements(application_protocol), imports(application_common)], [], [name(second_application), version('2.0.0')]),
 		document(Document),
+		^^assertion(ground(Document)),
 		Document = {
 			spdxVersion-'SPDX-2.3',
 			dataLicense-'CC0-1.0',
@@ -874,6 +898,75 @@
 			'SPDXID'-'SPDXRef-Application',
 			externalRefs-_
 		}, Packages).
+
+	test(sbom_document_17, deterministic) :-
+		document(Document, [
+			application_external_reference(purl, 'pkg:generic/option_application@1.2.3'),
+			application_external_reference(gitoid, 'gitoid:commit:sha1:0123456789abcdef0123456789abcdef01234567'),
+			application_external_reference(swh, 'swh:1:rev:0123456789abcdef0123456789abcdef01234567')
+		]),
+		^^assertion(ground(Document)),
+		Document = {
+			spdxVersion-'SPDX-2.3',
+			dataLicense-'CC0-1.0',
+			'SPDXID'-'SPDXRef-DOCUMENT',
+			name-'loaded-application',
+			documentNamespace-_,
+			creationInfo-_,
+			documentDescribes-['SPDXRef-Application'],
+			packages-Packages,
+			relationships-_
+		},
+		memberchk({
+			'SPDXID'-'SPDXRef-Application',
+			name-'loaded-application',
+			versionInfo-'0.0.0',
+			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
+			filesAnalyzed- @false,
+			licenseConcluded-'NOASSERTION',
+			licenseDeclared-'NOASSERTION',
+			externalRefs-ApplicationExternalReferences,
+			primaryPackagePurpose-'APPLICATION',
+			summary-_
+		}, Packages),
+		memberchk({referenceCategory-'PACKAGE-MANAGER', referenceType-purl, referenceLocator-'pkg:generic/option_application@1.2.3'}, ApplicationExternalReferences),
+		memberchk({referenceCategory-'PERSISTENT-ID', referenceType-gitoid, referenceLocator-'gitoid:commit:sha1:0123456789abcdef0123456789abcdef01234567'}, ApplicationExternalReferences),
+		memberchk({referenceCategory-'PERSISTENT-ID', referenceType-swh, referenceLocator-'swh:1:rev:0123456789abcdef0123456789abcdef01234567'}, ApplicationExternalReferences).
+
+	test(sbom_document_18, deterministic) :-
+		document(Document, [
+			format(cdx),
+			application_external_reference(purl, 'pkg:generic/option_application@1.2.3'),
+			application_external_reference(gitoid, 'gitoid:commit:sha1:0123456789abcdef0123456789abcdef01234567'),
+			application_external_reference(swh, 'swh:1:rev:0123456789abcdef0123456789abcdef01234567')
+		]),
+		^^assertion(ground(Document)),
+		Document = {
+			bomFormat-'CycloneDX',
+			specVersion-'1.6',
+			serialNumber-_,
+			version-1,
+			metadata-{
+				timestamp-_,
+				authors-_,
+				tools-_,
+				licenses-_,
+				component-{
+					type-application,
+					'bom-ref'-'SPDXRef-Application',
+					name-'loaded-application',
+					version-'0.0.0',
+					scope-required,
+					description-_,
+					purl-'pkg:generic/option_application@1.2.3',
+					omniborId-['gitoid:commit:sha1:0123456789abcdef0123456789abcdef01234567'],
+					swhid-['swh:1:rev:0123456789abcdef0123456789abcdef01234567']
+				}
+			},
+			externalReferences-_,
+			components-_,
+			dependencies-_
+		}.
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
