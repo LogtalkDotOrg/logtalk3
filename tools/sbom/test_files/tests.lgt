@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-24,
+		date is 2026-03-25,
 		comment is 'Unit tests for the "sbom" tool.'
 	]).
 
@@ -726,6 +726,154 @@
 			components-_,
 			dependencies-_
 		}.
+
+	test(sbom_document_14, deterministic, [cleanup((current_object(sbom_application_object_14) -> abolish_object(sbom_application_object_14) ; true))]) :-
+		create_object(sbom_application_object_14, [implements(application_protocol), imports(application_common)], [], [
+			name(sample_application),
+			version('3.2.1'),
+			description('Sample application from metadata object'),
+			license('BSD-3-Clause'),
+			homepage('https://example.com/sample'),
+			distribution('https://example.com/sample/download'),
+			creators(['Person: Application Author']),
+			supplier('Organization: Example Supplier'),
+			originator('Person: Example Originator'),
+			built_date('2026-03-24T00:00:00Z'),
+			release_date('2026-03-25T00:00:00Z'),
+			valid_until_date('2027-03-25T00:00:00Z'),
+			repository('https://example.com/sample.git')
+		]),
+		document(Document),
+		Document = {
+			spdxVersion-'SPDX-2.3',
+			dataLicense-'CC0-1.0',
+			'SPDXID'-'SPDXRef-DOCUMENT',
+			name-sample_application,
+			documentNamespace-_,
+			creationInfo-{created-_, creators-['Person: Application Author']},
+			documentDescribes-['SPDXRef-Application'],
+			packages-Packages,
+			relationships-_
+		},
+		memberchk({
+			'SPDXID'-'SPDXRef-Application',
+			name-sample_application,
+			versionInfo-'3.2.1',
+			downloadLocation-'https://example.com/sample/download',
+			filesAnalyzed- @false,
+			licenseConcluded-'BSD-3-Clause',
+			licenseDeclared-'BSD-3-Clause',
+			homepage-'https://example.com/sample',
+			externalRefs-ApplicationExternalReferences,
+			builtDate-'2026-03-24T00:00:00Z',
+			releaseDate-'2026-03-25T00:00:00Z',
+			validUntilDate-'2027-03-25T00:00:00Z',
+			supplier-'Organization: Example Supplier',
+			originator-'Person: Example Originator',
+			primaryPackagePurpose-'APPLICATION',
+			summary-'Sample application from metadata object'
+		}, Packages),
+		memberchk({referenceCategory-'OTHER', referenceType-distribution, referenceLocator-'https://example.com/sample/download'}, ApplicationExternalReferences),
+		memberchk({referenceCategory-'OTHER', referenceType-vcs, referenceLocator-'https://example.com/sample.git'}, ApplicationExternalReferences),
+		memberchk({referenceCategory-'OTHER', referenceType-website, referenceLocator-'https://example.com/sample'}, ApplicationExternalReferences).
+
+	test(sbom_document_15, deterministic, [cleanup((current_object(sbom_application_object_15) -> abolish_object(sbom_application_object_15) ; true))]) :-
+		create_object(sbom_application_object_15, [implements(application_protocol), imports(application_common)], [], [
+			name(sample_application),
+			version('3.2.1'),
+			description('Sample application from metadata object'),
+			license('BSD-3-Clause'),
+			homepage('https://example.com/sample'),
+			distribution('https://example.com/sample/download'),
+			creators(['Person: Application Author']),
+			supplier('Organization: Example Supplier'),
+			originator('Person: Example Originator'),
+			built_date('2026-03-24T00:00:00Z'),
+			release_date('2026-03-25T00:00:00Z'),
+			valid_until_date('2027-03-25T00:00:00Z'),
+			repository('https://example.com/sample.git')
+		]),
+		document(Document, [
+			format(cdx),
+			name(overridden_application),
+			version('9.9.9'),
+			application_license('MIT'),
+			application_originator('Organization: Override Originator'),
+			creators(['Tool: Override Creator']),
+			application_external_reference(documentation, 'https://example.com/sample/docs')
+		]),
+		Document = {
+			bomFormat-'CycloneDX',
+			specVersion-'1.6',
+			serialNumber-_,
+			version-1,
+			metadata-{
+				timestamp-_,
+				authors-[{name-'Tool: Override Creator'}],
+				tools-_,
+				licenses-_,
+				component-{
+					type-application,
+					'bom-ref'-'SPDXRef-Application',
+					name-overridden_application,
+					version-'9.9.9',
+					scope-required,
+					description-'Sample application from metadata object',
+					licenses-[{license-{id-'MIT'}}],
+					supplier-{name-'Example Supplier'},
+					manufacturer-{name-'Override Originator'},
+					properties-ApplicationProperties,
+					externalReferences-ApplicationExternalReferences
+				}
+			},
+			externalReferences-_,
+			components-_,
+			dependencies-_
+		},
+		memberchk({type-documentation, url-'https://example.com/sample/docs'}, ApplicationExternalReferences),
+		memberchk({type-distribution, url-'https://example.com/sample/download'}, ApplicationExternalReferences),
+		memberchk({type-vcs, url-'https://example.com/sample.git'}, ApplicationExternalReferences),
+		memberchk({type-website, url-'https://example.com/sample'}, ApplicationExternalReferences),
+		memberchk({name-'logtalk:sbom:built_date', value-'2026-03-24T00:00:00Z'}, ApplicationProperties),
+		memberchk({name-'logtalk:sbom:release_date', value-'2026-03-25T00:00:00Z'}, ApplicationProperties),
+		memberchk({name-'logtalk:sbom:valid_until_date', value-'2027-03-25T00:00:00Z'}, ApplicationProperties),
+		memberchk({name-'logtalk:sbom:supplier', value-'Organization: Example Supplier'}, ApplicationProperties),
+		memberchk({name-'logtalk:sbom:originator', value-'Organization: Override Originator'}, ApplicationProperties).
+
+	test(sbom_document_16, deterministic, [cleanup((
+			(current_object(sbom_application_object_16_1) -> abolish_object(sbom_application_object_16_1) ; true),
+			(current_object(sbom_application_object_16_2) -> abolish_object(sbom_application_object_16_2) ; true)
+		))]) :-
+		create_object(sbom_application_object_16_1, [implements(application_protocol), imports(application_common)], [], [name(first_application), version('1.0.0')]),
+		create_object(sbom_application_object_16_2, [implements(application_protocol), imports(application_common)], [], [name(second_application), version('2.0.0')]),
+		document(Document),
+		Document = {
+			spdxVersion-'SPDX-2.3',
+			dataLicense-'CC0-1.0',
+			'SPDXID'-'SPDXRef-DOCUMENT',
+			name-'loaded-application',
+			documentNamespace-_,
+			creationInfo-{created-_, creators-[Creator]},
+			documentDescribes-['SPDXRef-Application'],
+			packages-Packages,
+			relationships-_
+		},
+		^^assertion(sub_atom(Creator, 0, _, _, 'Tool: Logtalk SBOM generator-')),
+		memberchk({
+			'SPDXID'-'SPDXRef-Application',
+			name-'loaded-application',
+			versionInfo-'0.0.0',
+			downloadLocation-'http://spdx.org/rdf/terms#noassertion',
+			filesAnalyzed- @false,
+			licenseConcluded-'NOASSERTION',
+			licenseDeclared-'NOASSERTION',
+			primaryPackagePurpose-'APPLICATION',
+			summary-'Logtalk application currently loaded in this session'
+		}, Packages),
+		\+ memberchk({
+			'SPDXID'-'SPDXRef-Application',
+			externalRefs-_
+		}, Packages).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

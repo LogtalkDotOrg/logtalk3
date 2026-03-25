@@ -20,6 +20,7 @@
 
 
 :- initialization((
+	logtalk_load(application(loader)),
 	logtalk_load(basic_types(loader)),
 	logtalk_load(json(loader)),
 	logtalk_load(json_schema(loader)),

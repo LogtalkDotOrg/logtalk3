@@ -25,6 +25,7 @@
 	retractall(logtalk_library_path(logtalk_packs, _)),
 	assertz(logtalk_library_path(logtalk_packs, LogtalkPacks)),
 	set_logtalk_flag(report, warnings),
+	logtalk_load(application(loader)),
 	logtalk_load(json(loader)),
 	logtalk_load(json_schema(loader)),
 	logtalk_load(os(loader)),

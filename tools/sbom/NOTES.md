@@ -65,6 +65,20 @@ describing:
 - the backend Prolog system and version
 - the installed packs that contributed loaded files to the current session
 
+When exactly one loaded object conforms to the `application_protocol`
+protocol from the `application` library, the tool also uses that object as the
+default source for application metadata. If no conforming object exists, or if
+multiple conforming objects are loaded, the tool falls back to the explicit
+`sbom` options and built-in defaults.
+
+For single-value application metadata such as `name/1`, `version/1`,
+`license/1`, `built_date/1`, `release_date/1`, `valid_until_date/1`,
+`supplier/1`, and `originator/1`, explicit `sbom` options override the values
+declared by the application object. For `creators/1`, explicit `creators/1`
+options override the application object creators list. Application external
+references declared by the object are combined with any
+`application_external_reference/2` options.
+
 For CycloneDX exports, the generated BOM also includes a `serialNumber` and
 records the Logtalk `sbom` generator itself under `metadata.tools.components`.
 The BOM document license is exported as `metadata.licenses` with the SPDX
@@ -107,53 +121,71 @@ Global/application options:
 
 - `name(Name)`
     Sets the application name. Exported as the SPDX application package name
-    and as the CycloneDX `metadata.component.name`. Default is
-    `loaded-application`.
+	and as the CycloneDX `metadata.component.name`. When exactly one object
+	conforming to `application_protocol` is loaded and declares `name/1`, that
+	value is used by default. Otherwise, the default is `loaded-application`.
 - `format(Format)`
 	Selects the export format. Possible values are `spdx` and `cyclonedx`.
 	Default is `spdx`.
 - `version(Version)`
     Sets the application version. Exported as the SPDX application package
-    `versionInfo` and as the CycloneDX `metadata.component.version`. Default is
-    `0.0.0`.
+	`versionInfo` and as the CycloneDX `metadata.component.version`. When
+	exactly one object conforming to `application_protocol` is loaded and
+	declares `version/1`, that value is used by default. Otherwise, the default
+	is `0.0.0`.
 - `application_license(License)`
 	Sets the application license. Exported as the SPDX application package
 	`licenseConcluded` and `licenseDeclared` fields and, unless the value is
 	`NOASSERTION`, as the CycloneDX `metadata.component.licenses` entry, using
 	`license.id` for SPDX license identifiers, `expression` for SPDX license
-	expressions, and `license.name` otherwise. Default is `NOASSERTION`.
+	expressions, and `license.name` otherwise. When exactly one object
+	conforming to `application_protocol` is loaded and declares `license/1`,
+	that value is used by default. Otherwise, the default is `NOASSERTION`.
 - `application_built_date(Date)`
 	Sets the application build date. Exported as the SPDX application package
 	`builtDate` field and as the CycloneDX custom property
-	`logtalk:sbom:built_date`. Default is not exporting this information.
+	`logtalk:sbom:built_date`. When exactly one object conforming to
+	`application_protocol` is loaded and declares `built_date/1`, that value is
+	used by default. Otherwise, the default is not exporting this information.
 - `application_release_date(Date)`
 	Sets the application release date. Exported as the SPDX application package
 	`releaseDate` field and as the CycloneDX custom property
-	`logtalk:sbom:release_date`. Default is not exporting this information.
+	`logtalk:sbom:release_date`. When exactly one object conforming to
+	`application_protocol` is loaded and declares `release_date/1`, that value is
+	used by default. Otherwise, the default is not exporting this information.
 - `application_valid_until_date(Date)`
 	Sets the application validity limit date. Exported as the SPDX application
 	package `validUntilDate` field and as the CycloneDX custom property
-	`logtalk:sbom:valid_until_date`. Default is not exporting this information.
+	`logtalk:sbom:valid_until_date`. When exactly one object conforming to
+	`application_protocol` is loaded and declares `valid_until_date/1`, that
+	value is used by default. Otherwise, the default is not exporting this
+	information.
 - `application_supplier(Supplier)`
 	Sets the application supplier. Exported as the SPDX application package
 	`supplier` field. For CycloneDX, exported as `metadata.component.supplier`
 	when using the `Organization: Name` convention and also as the custom
-	property `logtalk:sbom:supplier`. Default is not exporting this
-	information.
+	property `logtalk:sbom:supplier`. When exactly one object conforming to
+	`application_protocol` is loaded and declares `supplier/1`, that value is
+	used by default. Otherwise, the default is not exporting this information.
 - `application_originator(Originator)`
 	Sets the application originator. Exported as the SPDX application package
 	`originator` field. For CycloneDX, exported as
 	`metadata.component.manufacturer` when using the `Organization: Name`
 	convention, or as `metadata.component.authors` when using the
 	`Person: Name` convention, and also as the custom property
-	`logtalk:sbom:originator`. Default is not exporting this information.
+	`logtalk:sbom:originator`. When exactly one object conforming to
+	`application_protocol` is loaded and declares `originator/1`, that value is
+	used by default. Otherwise, the default is not exporting this information.
 - `application_external_reference(Type, URL)`
 	Adds a CycloneDX `metadata.component.externalReferences` entry for the
 	application component and a SPDX application package `externalRefs` entry.
 	For SPDX exports, `Type` is used as the `referenceType`, `URL` as the
 	`referenceLocator`, and `referenceCategory` is set to `OTHER`. This option
-	can be repeated to export multiple references. Default is not exporting this
-	information.
+	can be repeated to export multiple references. When exactly one object
+	conforming to `application_protocol` is loaded, its declared
+	`external_reference/2` metadata is also exported. The `homepage/1`,
+	`distribution/1`, and `repository/1` predicates are mapped to `website`,
+	`distribution`, and `vcs` SBOM reference types, respectively.
 - `namespace(Namespace)`
     Sets the base document namespace URI. A process and timestamp suffix is added
     automatically to guarantee uniqueness. This option only applies to SPDX
@@ -162,7 +194,9 @@ Global/application options:
 - `creators(Creators)`
 	Adds all atoms in the list `Creators` to the SPDX `creationInfo.creators`
 	list and the CycloneDX `metadata.authors` list. When no creator option is
-	provided, the default for SPDX exports is the versioned tool identifier
+	provided, and exactly one object conforming to `application_protocol` is
+	loaded with a declared `creators/1` predicate, that list is used. Otherwise,
+	the default for SPDX exports is the versioned tool identifier
 	`Tool: Logtalk SBOM generator-<version>` and the default for CycloneDX
 	exports is `Logtalk SBOM generator`.
 - `validate_export(Boolean)`

@@ -176,6 +176,19 @@ document describing:</p>
 <li><p>the installed packs that contributed loaded files to the current
 session</p></li>
 </ul>
+<p>When exactly one loaded object conforms to the <code class="docutils literal notranslate"><span class="pre">application_protocol</span></code>
+protocol from the <code class="docutils literal notranslate"><span class="pre">application</span></code> library, the tool also uses that
+object as the default source for application metadata. If no conforming
+object exists, or if multiple conforming objects are loaded, the tool
+falls back to the explicit <code class="docutils literal notranslate"><span class="pre">sbom</span></code> options and built-in defaults.</p>
+<p>For single-value application metadata such as <code class="docutils literal notranslate"><span class="pre">name/1</span></code>, <code class="docutils literal notranslate"><span class="pre">version/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">license/1</span></code>, <code class="docutils literal notranslate"><span class="pre">built_date/1</span></code>, <code class="docutils literal notranslate"><span class="pre">release_date/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">valid_until_date/1</span></code>, <code class="docutils literal notranslate"><span class="pre">supplier/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">originator/1</span></code>, explicit
+<code class="docutils literal notranslate"><span class="pre">sbom</span></code> options override the values declared by the application object.
+For <code class="docutils literal notranslate"><span class="pre">creators/1</span></code>, explicit <code class="docutils literal notranslate"><span class="pre">creators/1</span></code> options override the
+application object creators list. Application external references
+declared by the object are combined with any
+<code class="docutils literal notranslate"><span class="pre">application_external_reference/2</span></code> options.</p>
 <p>For CycloneDX exports, the generated BOM also includes a
 <code class="docutils literal notranslate"><span class="pre">serialNumber</span></code> and records the Logtalk <code class="docutils literal notranslate"><span class="pre">sbom</span></code> generator itself under
 <code class="docutils literal notranslate"><span class="pre">metadata.tools.components</span></code>. The BOM document license is exported as
@@ -219,44 +232,61 @@ predicates write the JSON document to any sink accepted by the
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">name(Name)</span></code> Sets the application name. Exported as the SPDX
 application package name and as the CycloneDX
-<code class="docutils literal notranslate"><span class="pre">metadata.component.name</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">loaded-application</span></code>.</p></li>
+<code class="docutils literal notranslate"><span class="pre">metadata.component.name</span></code>. When exactly one object conforming to
+<code class="docutils literal notranslate"><span class="pre">application_protocol</span></code> is loaded and declares <code class="docutils literal notranslate"><span class="pre">name/1</span></code>, that value
+is used by default. Otherwise, the default is <code class="docutils literal notranslate"><span class="pre">loaded-application</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">format(Format)</span></code> Selects the export format. Possible values are
 <code class="docutils literal notranslate"><span class="pre">spdx</span></code> and <code class="docutils literal notranslate"><span class="pre">cyclonedx</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">spdx</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">version(Version)</span></code> Sets the application version. Exported as the
 SPDX application package <code class="docutils literal notranslate"><span class="pre">versionInfo</span></code> and as the CycloneDX
-<code class="docutils literal notranslate"><span class="pre">metadata.component.version</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">0.0.0</span></code>.</p></li>
+<code class="docutils literal notranslate"><span class="pre">metadata.component.version</span></code>. When exactly one object conforming to
+<code class="docutils literal notranslate"><span class="pre">application_protocol</span></code> is loaded and declares <code class="docutils literal notranslate"><span class="pre">version/1</span></code>, that
+value is used by default. Otherwise, the default is <code class="docutils literal notranslate"><span class="pre">0.0.0</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">application_license(License)</span></code> Sets the application license.
 Exported as the SPDX application package <code class="docutils literal notranslate"><span class="pre">licenseConcluded</span></code> and
 <code class="docutils literal notranslate"><span class="pre">licenseDeclared</span></code> fields and, unless the value is <code class="docutils literal notranslate"><span class="pre">NOASSERTION</span></code>,
 as the CycloneDX <code class="docutils literal notranslate"><span class="pre">metadata.component.licenses</span></code> entry, using
 <code class="docutils literal notranslate"><span class="pre">license.id</span></code> for SPDX license identifiers, <code class="docutils literal notranslate"><span class="pre">expression</span></code> for SPDX
-license expressions, and <code class="docutils literal notranslate"><span class="pre">license.name</span></code> otherwise. Default is
-<code class="docutils literal notranslate"><span class="pre">NOASSERTION</span></code>.</p></li>
+license expressions, and <code class="docutils literal notranslate"><span class="pre">license.name</span></code> otherwise. When exactly one
+object conforming to <code class="docutils literal notranslate"><span class="pre">application_protocol</span></code> is loaded and declares
+<code class="docutils literal notranslate"><span class="pre">license/1</span></code>, that value is used by default. Otherwise, the default
+is <code class="docutils literal notranslate"><span class="pre">NOASSERTION</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">application_built_date(Date)</span></code> Sets the application build date.
 Exported as the SPDX application package <code class="docutils literal notranslate"><span class="pre">builtDate</span></code> field and as
-the CycloneDX custom property <code class="docutils literal notranslate"><span class="pre">logtalk:sbom:built_date</span></code>. Default is
-not exporting this information.</p></li>
+the CycloneDX custom property <code class="docutils literal notranslate"><span class="pre">logtalk:sbom:built_date</span></code>. When
+exactly one object conforming to <code class="docutils literal notranslate"><span class="pre">application_protocol</span></code> is loaded
+and declares <code class="docutils literal notranslate"><span class="pre">built_date/1</span></code>, that value is used by default.
+Otherwise, the default is not exporting this information.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">application_release_date(Date)</span></code> Sets the application release date.
 Exported as the SPDX application package <code class="docutils literal notranslate"><span class="pre">releaseDate</span></code> field and as
-the CycloneDX custom property <code class="docutils literal notranslate"><span class="pre">logtalk:sbom:release_date</span></code>. Default
-is not exporting this information.</p></li>
+the CycloneDX custom property <code class="docutils literal notranslate"><span class="pre">logtalk:sbom:release_date</span></code>. When
+exactly one object conforming to <code class="docutils literal notranslate"><span class="pre">application_protocol</span></code> is loaded
+and declares <code class="docutils literal notranslate"><span class="pre">release_date/1</span></code>, that value is used by default.
+Otherwise, the default is not exporting this information.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">application_valid_until_date(Date)</span></code> Sets the application validity
 limit date. Exported as the SPDX application package
 <code class="docutils literal notranslate"><span class="pre">validUntilDate</span></code> field and as the CycloneDX custom property
-<code class="docutils literal notranslate"><span class="pre">logtalk:sbom:valid_until_date</span></code>. Default is not exporting this
-information.</p></li>
+<code class="docutils literal notranslate"><span class="pre">logtalk:sbom:valid_until_date</span></code>. When exactly one object conforming
+to <code class="docutils literal notranslate"><span class="pre">application_protocol</span></code> is loaded and declares
+<code class="docutils literal notranslate"><span class="pre">valid_until_date/1</span></code>, that value is used by default. Otherwise, the
+default is not exporting this information.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">application_supplier(Supplier)</span></code> Sets the application supplier.
 Exported as the SPDX application package <code class="docutils literal notranslate"><span class="pre">supplier</span></code> field. For
 CycloneDX, exported as <code class="docutils literal notranslate"><span class="pre">metadata.component.supplier</span></code> when using the
 <code class="docutils literal notranslate"><span class="pre">Organization:</span> <span class="pre">Name</span></code> convention and also as the custom property
-<code class="docutils literal notranslate"><span class="pre">logtalk:sbom:supplier</span></code>. Default is not exporting this information.</p></li>
+<code class="docutils literal notranslate"><span class="pre">logtalk:sbom:supplier</span></code>. When exactly one object conforming to
+<code class="docutils literal notranslate"><span class="pre">application_protocol</span></code> is loaded and declares <code class="docutils literal notranslate"><span class="pre">supplier/1</span></code>, that
+value is used by default. Otherwise, the default is not exporting this
+information.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">application_originator(Originator)</span></code> Sets the application
 originator. Exported as the SPDX application package <code class="docutils literal notranslate"><span class="pre">originator</span></code>
 field. For CycloneDX, exported as <code class="docutils literal notranslate"><span class="pre">metadata.component.manufacturer</span></code>
 when using the <code class="docutils literal notranslate"><span class="pre">Organization:</span> <span class="pre">Name</span></code> convention, or as
 <code class="docutils literal notranslate"><span class="pre">metadata.component.authors</span></code> when using the <code class="docutils literal notranslate"><span class="pre">Person:</span> <span class="pre">Name</span></code>
 convention, and also as the custom property
-<code class="docutils literal notranslate"><span class="pre">logtalk:sbom:originator</span></code>. Default is not exporting this
+<code class="docutils literal notranslate"><span class="pre">logtalk:sbom:originator</span></code>. When exactly one object conforming to
+<code class="docutils literal notranslate"><span class="pre">application_protocol</span></code> is loaded and declares <code class="docutils literal notranslate"><span class="pre">originator/1</span></code>, that
+value is used by default. Otherwise, the default is not exporting this
 information.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">application_external_reference(Type,</span> <span class="pre">URL)</span></code> Adds a CycloneDX
 <code class="docutils literal notranslate"><span class="pre">metadata.component.externalReferences</span></code> entry for the application
@@ -264,7 +294,11 @@ component and a SPDX application package <code class="docutils literal notransla
 SPDX exports, <code class="docutils literal notranslate"><span class="pre">Type</span></code> is used as the <code class="docutils literal notranslate"><span class="pre">referenceType</span></code>, <code class="docutils literal notranslate"><span class="pre">URL</span></code> as
 the <code class="docutils literal notranslate"><span class="pre">referenceLocator</span></code>, and <code class="docutils literal notranslate"><span class="pre">referenceCategory</span></code> is set to
 <code class="docutils literal notranslate"><span class="pre">OTHER</span></code>. This option can be repeated to export multiple references.
-Default is not exporting this information.</p></li>
+When exactly one object conforming to <code class="docutils literal notranslate"><span class="pre">application_protocol</span></code> is
+loaded, its declared <code class="docutils literal notranslate"><span class="pre">external_reference/2</span></code> metadata is also
+exported. The <code class="docutils literal notranslate"><span class="pre">homepage/1</span></code>, <code class="docutils literal notranslate"><span class="pre">distribution/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">repository/1</span></code>
+predicates are mapped to <code class="docutils literal notranslate"><span class="pre">website</span></code>, <code class="docutils literal notranslate"><span class="pre">distribution</span></code>, and <code class="docutils literal notranslate"><span class="pre">vcs</span></code>
+SBOM reference types, respectively.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">namespace(Namespace)</span></code> Sets the base document namespace URI. A
 process and timestamp suffix is added automatically to guarantee
 uniqueness. This option only applies to SPDX exports
@@ -272,10 +306,12 @@ uniqueness. This option only applies to SPDX exports
 is <code class="docutils literal notranslate"><span class="pre">https://logtalk.org/spdxdocs/logtalk-sbom</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">creators(Creators)</span></code> Adds all atoms in the list <code class="docutils literal notranslate"><span class="pre">Creators</span></code> to the
 SPDX <code class="docutils literal notranslate"><span class="pre">creationInfo.creators</span></code> list and the CycloneDX
-<code class="docutils literal notranslate"><span class="pre">metadata.authors</span></code> list. When no creator option is provided, the
-default for SPDX exports is the versioned tool identifier
-<code class="docutils literal notranslate"><span class="pre">Tool:</span> <span class="pre">Logtalk</span> <span class="pre">SBOM</span> <span class="pre">generator-&lt;version&gt;</span></code> and the default for
-CycloneDX exports is <code class="docutils literal notranslate"><span class="pre">Logtalk</span> <span class="pre">SBOM</span> <span class="pre">generator</span></code>.</p></li>
+<code class="docutils literal notranslate"><span class="pre">metadata.authors</span></code> list. When no creator option is provided, and
+exactly one object conforming to <code class="docutils literal notranslate"><span class="pre">application_protocol</span></code> is loaded
+with a declared <code class="docutils literal notranslate"><span class="pre">creators/1</span></code> predicate, that list is used.
+Otherwise, the default for SPDX exports is the versioned tool
+identifier <code class="docutils literal notranslate"><span class="pre">Tool:</span> <span class="pre">Logtalk</span> <span class="pre">SBOM</span> <span class="pre">generator-&lt;version&gt;</span></code> and the default
+for CycloneDX exports is <code class="docutils literal notranslate"><span class="pre">Logtalk</span> <span class="pre">SBOM</span> <span class="pre">generator</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">validate_export(Boolean)</span></code> When <code class="docutils literal notranslate"><span class="pre">true</span></code>, validates the generated
 document against the bundled schema for the selected format before
 exporting it. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>

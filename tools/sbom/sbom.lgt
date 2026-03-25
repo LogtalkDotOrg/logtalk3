@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-24,
+		date is 2026-03-25,
 		comment is 'This tool generates a Software Bill of Materials (SBOM) for an application.'
 	]).
 
@@ -115,7 +115,7 @@
 	document(Document, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		sbom_document(Document, Options),
+		sbom_document(Document, UserOptions, Options),
 		!.
 
 	document(Document) :-
@@ -124,7 +124,7 @@
 	export(Sink, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		sbom_document(Document, Options),
+		sbom_document(Document, UserOptions, Options),
 		(	^^option(validate_export(true), Options) ->
 			validate_document(Document, Options)
 		;	true
@@ -135,9 +135,9 @@
 	export(Sink) :-
 		export(Sink, []).
 
-	sbom_document(Document, Options) :-
+	sbom_document(Document, UserOptions, Options) :-
 		^^option(format(Format), Options),
-		sbom_data(Data, Options),
+		sbom_data(Data, UserOptions, Options),
 		(	Format == spdx ->
 			spdx_document(Document, Data, Options)
 		;	Format == cdx ->
@@ -145,19 +145,16 @@
 		;	fail
 		).
 
-	sbom_data(data(Name, Created, Creators, DocumentNamespace, ApplicationPackage, LogtalkPackage, BackendPackage, PackPackages, PackRecords), Options) :-
-		^^option(name(Name), Options),
-		^^option(version(Version), Options),
-		^^option(application_license(ApplicationLicense), Options),
+	sbom_data(data(Name, Created, Creators, DocumentNamespace, ApplicationPackage, LogtalkPackage, BackendPackage, PackPackages, PackRecords), UserOptions, Options) :-
+		application_name(UserOptions, Options, Name),
 		^^option(logtalk_license(LogtalkLicense), Options),
 		^^option(backend_license(BackendLicense), Options),
 		creation_timestamp(Created),
 		creators(Creators, Options),
 		document_namespace(DocumentNamespace, Options),
-		application_metadata_options(Options, ApplicationMetadata),
 		logtalk_metadata_options(Options, LogtalkMetadata),
 		backend_metadata_options(Options, BackendMetadata),
-		application_package(Name, Version, ApplicationLicense, ApplicationMetadata, ApplicationPackage),
+		application_package(UserOptions, Options, ApplicationPackage),
 		logtalk_package(LogtalkLicense, LogtalkMetadata, LogtalkPackage),
 		backend_package(BackendLicense, BackendMetadata, BackendPackage),
 		loaded_pack_packages(Options, PackPackages, PackRecords).
@@ -216,10 +213,17 @@
 	creators(Creators, Options, Format) :-
 		custom_creators(Options, CustomCreators),
 		(   CustomCreators == [] ->
-			default_creator(Format, Creator),
-			Creators = [Creator]
+			(   application_creators(Creators) ->
+				true
+			;   default_creator(Format, Creator),
+				Creators = [Creator]
+			)
 		;   Creators = CustomCreators
 		).
+
+	application_creators(Creators) :-
+		application_property(creators, Creators),
+		Creators \== [].
 
 	custom_creators(Options, Creators) :-
 		custom_creators(Options, [], Creators).
@@ -305,7 +309,7 @@
 	application_cyclonedx_external_reference_pairs(Options, [externalReferences-References]) :-
 		findall(
 			{type-Type, url-URL},
-			member(application_external_reference(Type, URL), Options),
+			application_external_reference(Options, Type, URL),
 			References0
 		),
 		sort(References0, References),
@@ -333,12 +337,48 @@
 		atomic_list_concat([PID, TimeInteger], '-', Suffix),
 		atomic_list_concat([BaseNamespace, Suffix], '/', DocumentNamespace).
 
-	application_metadata_options(Options, metadata(BuiltDate, ReleaseDate, ValidUntilDate, Supplier, Originator)) :-
-		optional_metadata_option(application_built_date, Options, BuiltDate),
-		optional_metadata_option(application_release_date, Options, ReleaseDate),
-		optional_metadata_option(application_valid_until_date, Options, ValidUntilDate),
-		optional_metadata_option(application_supplier, Options, Supplier),
-		optional_metadata_option(application_originator, Options, Originator).
+	application_name(UserOptions, Options, Name) :-
+		(   option_from_user_options(name(Name), UserOptions) ->
+			true
+		;   application_property(name, Name) ->
+			true
+		;   ^^option(name(Name), Options)
+		).
+
+	application_version(UserOptions, Options, Version) :-
+		(   option_from_user_options(version(Version), UserOptions) ->
+			true
+		;   application_property(version, Version) ->
+			true
+		;   ^^option(version(Version), Options)
+		).
+
+	application_license(UserOptions, Options, License) :-
+		(   option_from_user_options(application_license(License), UserOptions) ->
+			true
+		;   application_property(license, License) ->
+			true
+		;   ^^option(application_license(License), Options)
+		).
+
+	application_description(Description) :-
+		(   application_property(description, Description) ->
+			true
+		;   Description = 'Logtalk application currently loaded in this session'
+		).
+
+	application_homepage(URL) :-
+		application_property(homepage, URL).
+
+	application_distribution(URL) :-
+		application_property(distribution, URL).
+
+	application_metadata_options(UserOptions, metadata(BuiltDate, ReleaseDate, ValidUntilDate, Supplier, Originator)) :-
+		optional_application_metadata_option(application_built_date, built_date, UserOptions, BuiltDate),
+		optional_application_metadata_option(application_release_date, release_date, UserOptions, ReleaseDate),
+		optional_application_metadata_option(application_valid_until_date, valid_until_date, UserOptions, ValidUntilDate),
+		optional_application_metadata_option(application_supplier, supplier, UserOptions, Supplier),
+		optional_application_metadata_option(application_originator, originator, UserOptions, Originator).
 
 	logtalk_metadata_options(Options, metadata(BuiltDate, ReleaseDate, ValidUntilDate, Supplier, Originator)) :-
 		optional_metadata_option(logtalk_built_date, Options, BuiltDate),
@@ -368,6 +408,15 @@
 		;   Value = absent
 		).
 
+	optional_application_metadata_option(OptionFunctor, PropertyFunctor, UserOptions, Value) :-
+		Template =.. [OptionFunctor, Value],
+		(   option_from_user_options(Template, UserOptions) ->
+			true
+		;   application_property(PropertyFunctor, Value) ->
+			true
+		;   Value = absent
+		).
+
 	optional_pack_metadata_option(Functor, Pack, Options, Value) :-
 		Template =.. [Functor, Pack, Value],
 		(   member(Template, Options) ->
@@ -375,7 +424,43 @@
 		;   Value = absent
 		).
 
-	application_package(Name, Version, License, Metadata, package('SPDXRef-Application', Name, Version, License, none, Metadata, 'APPLICATION', 'Logtalk application currently loaded in this session')).
+	application_package(UserOptions, Options, package('SPDXRef-Application', Name, Version, License, none, Metadata, 'APPLICATION', Description)) :-
+		application_name(UserOptions, Options, Name),
+		application_version(UserOptions, Options, Version),
+		application_license(UserOptions, Options, License),
+		application_metadata_options(UserOptions, Metadata),
+		application_description(Description).
+
+	application_object(Object) :-
+		findall(Candidate, (current_object(Candidate), conforms_to_protocol(Candidate, application_protocol)), Candidates0),
+		sort(Candidates0, Candidates),
+		Candidates = [Object].
+
+	application_property(Property, Value) :-
+		application_object(Object),
+		Goal =.. [Property, Value],
+		Object::Goal.
+
+	application_external_reference(Options, Type, URL) :-
+		member(application_external_reference(Type, URL), Options).
+	application_external_reference(_, Type, URL) :-
+		application_object(Object),
+		Object::external_reference(ApplicationType, URL),
+		application_external_reference_type(ApplicationType, Type).
+
+	application_external_reference_type(homepage, website) :-
+		!.
+	application_external_reference_type(distribution, distribution) :-
+		!.
+	application_external_reference_type(repository, vcs) :-
+		!.
+	application_external_reference_type(Type, Type).
+
+	option_from_user_options(Option, Options) :-
+		functor(Option, Functor, Arity),
+		functor(Template, Functor, Arity),
+		member(Template, Options),
+		Option = Template.
 
 	logtalk_package(License, Metadata, package('SPDXRef-Logtalk', 'Logtalk', Version, License, none, Metadata, 'FRAMEWORK', 'Logtalk runtime')) :-
 		current_logtalk_flag(version_data, logtalk(Major, Minor, Patch, Status)),
@@ -757,12 +842,18 @@
 		append(Pairs3, MetadataPairs, Pairs4),
 		append(Pairs4, TrailingPairs, Pairs).
 
+	spdx_download_location_pairs('SPDXRef-Application', _, _, [downloadLocation-URL]) :-
+		application_distribution(URL),
+		!.
 	spdx_download_location_pairs(SPDXID, Name, Version, [downloadLocation-URL]) :-
 		(   spdx_pack_download_location(SPDXID, Name, Version, URL) ->
 			true
 		;   URL = 'http://spdx.org/rdf/terms#noassertion'
 		).
 
+	spdx_homepage_pairs('SPDXRef-Application', _, [homepage-URL]) :-
+		application_homepage(URL),
+		!.
 	spdx_homepage_pairs(SPDXID, Name, [homepage-URL]) :-
 		spdx_pack_homepage(SPDXID, Name, URL),
 		!.
@@ -776,7 +867,7 @@
 	spdx_external_reference_pairs(_, _, _, _, []).
 
 	spdx_package_external_reference('SPDXRef-Application', _, _, Options, Reference) :-
-		member(application_external_reference(Type, URL), Options),
+		application_external_reference(Options, Type, URL),
 		spdx_external_reference_json(Type, URL, Reference).
 	spdx_package_external_reference('SPDXRef-Logtalk', _, _, _, Reference) :-
 		spdx_external_reference_json(website, 'https://logtalk.org/', Reference).
