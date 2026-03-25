@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on March 23, 2026
+##   Last updated on March 24, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -78,6 +78,7 @@ rm -f temp0
 sed '1,19d' ../../../library/NOTES.md | pandoc -f gfm -t rst -o libraries/overview.rst
 sed '1,19d' ../../../library/ada_boost/NOTES.md | pandoc -f gfm -t rst -o libraries/ada_boost.rst
 sed '1,19d' ../../../library/amqp/NOTES.md | pandoc -f gfm -t rst -o libraries/amqp.rst
+sed '1,19d' ../../../library/application/NOTES.md | pandoc -f gfm -t rst -o libraries/application.rst
 sed '1,19d' ../../../library/arbitrary/NOTES.md | pandoc -f gfm -t rst -o libraries/arbitrary.rst
 sed '1,19d' ../../../library/assignvars/NOTES.md | pandoc -f gfm -t rst -o libraries/assignvars.rst
 sed '1,19d' ../../../library/avro/NOTES.md | pandoc -f gfm -t rst -o libraries/avro.rst

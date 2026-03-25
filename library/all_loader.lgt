@@ -21,6 +21,7 @@
 
 :- initialization(
 	logtalk_load([
+		application(loader),
 		types(loader),
 		arbitrary(loader),
 		strings(loader),

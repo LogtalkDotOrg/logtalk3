@@ -1,0 +1,58 @@
+.. index:: single: application_common
+.. _application_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``application_common``
+======================
+
+Application metadata and provenance predicates.
+
+| **Availability:** 
+|    ``logtalk_load(application(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-03-24
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`application_protocol <application_protocol/0>`
+| **Uses:**
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`application_protocol/0::built_date/1`  :ref:`application_protocol/0::creators/1`  :ref:`application_protocol/0::description/1`  :ref:`application_protocol/0::distribution/1`  :ref:`application_protocol/0::external_reference/2`  :ref:`application_protocol/0::homepage/1`  :ref:`application_protocol/0::license/1`  :ref:`application_protocol/0::loader_file/1`  :ref:`application_protocol/0::name/1`  :ref:`application_protocol/0::originator/1`  :ref:`application_protocol/0::property/1`  :ref:`application_protocol/0::release_date/1`  :ref:`application_protocol/0::repository/1`  :ref:`application_protocol/0::repository_branch/1`  :ref:`application_protocol/0::repository_commit/1`  :ref:`application_protocol/0::repository_commit_abbreviated/1`  :ref:`application_protocol/0::repository_commit_author/1`  :ref:`application_protocol/0::repository_commit_date/1`  :ref:`application_protocol/0::repository_commit_message/1`  :ref:`application_protocol/0::supplier/1`  :ref:`application_protocol/0::valid_until_date/1`  :ref:`application_protocol/0::version/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

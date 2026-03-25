@@ -55,6 +55,8 @@ servers.
 * ADDED: Support to the `linda` library for clients to define aliases for
 servers connections.
 
+* ADDED: New `application` library for declaring application metadata.
+
 * ADDED: New character set, `hexadecimal`, to the `type` library object and to
 the `arbitrary` library category.
 

@@ -127,6 +127,17 @@ To load an entity, always load the library that includes it using the goal ``log
    amqp <amqp_0>
    amqp_pool <amqp_pool_0>
 
+``library/application/``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   application_common <application_common_0>
+   application_protocol <application_protocol_0>
+
 ``library/arbitrary/``
 ----------------------
 

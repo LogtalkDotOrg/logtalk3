@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on March 23, 2026
+%  Last updated on March 24, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -107,6 +107,7 @@ logtalk_library_path(wrapper, tools('wrapper/')).
 % libraries
 logtalk_library_path(ada_boost, library('ada_boost/')).
 logtalk_library_path(amqp, library('amqp/')).
+logtalk_library_path(application, library('application/')).
 logtalk_library_path(arbitrary, library('arbitrary/')).
 logtalk_library_path(assignvars, library('assignvars/')).
 logtalk_library_path(avro, library('avro/')).

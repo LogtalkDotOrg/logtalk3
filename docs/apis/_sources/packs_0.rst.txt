@@ -711,6 +711,92 @@ Searches packs whose name or description includes the search term (case sensitiv
 
 ------------
 
+.. index:: pack_dependency/6
+.. _packs/0::pack_dependency/6:
+
+``pack_dependency/6``
+^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates by backtracking resolved direct pack-to-pack dependencies for installed pack versions.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pack_dependency(Registry,Pack,Version,DependencyRegistry,DependencyPack,DependencyVersion)``
+| **Mode and number of proofs:**
+|    ``pack_dependency(?atom,?atom,?compound,?atom,?atom,?compound)`` - ``zero_or_more``
+
+| **Exceptions:**
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+|    ``Version`` is neither a variable nor a compound term:
+|        ``type_error(compound,Version)``
+|    ``DependencyRegistry`` is neither a variable nor an atom:
+|        ``type_error(atom,DependencyRegistry)``
+|    ``DependencyPack`` is neither a variable nor an atom:
+|        ``type_error(atom,DependencyPack)``
+|    ``DependencyVersion`` is neither a variable nor a compound term:
+|        ``type_error(compound,DependencyVersion)``
+
+| **Remarks:**
+
+    - Resolved dependency: Dependencies are resolved against the current installed packs using the same version comparison semantics used by the tool installation logic.
+    - Supported dependency forms: Version ranges, alternatives, and conjunctions are resolved using the canonical packs dependency semantics.
+    - Non-pack dependencies: Dependencies on Logtalk, Prolog backends, and operating systems are ignored by this predicate and therefore do not produce results.
+
+| **See also:**
+|    :ref:`packs/0::loaded_pack_dependency/6`
+|    :ref:`packs/0::pack_metadata/4`
+|    :ref:`packs/0::loaded_pack/3`
+
+
+------------
+
+.. index:: loaded_pack_dependency/6
+.. _packs/0::loaded_pack_dependency/6:
+
+``loaded_pack_dependency/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates by backtracking resolved direct pack-to-pack dependencies where both the source pack and the dependency pack contributed loaded files to the current session.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``loaded_pack_dependency(Registry,Pack,Version,DependencyRegistry,DependencyPack,DependencyVersion)``
+| **Mode and number of proofs:**
+|    ``loaded_pack_dependency(?atom,?atom,?compound,?atom,?atom,?compound)`` - ``zero_or_more``
+
+| **Exceptions:**
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+|    ``Version`` is neither a variable nor a compound term:
+|        ``type_error(compound,Version)``
+|    ``DependencyRegistry`` is neither a variable nor an atom:
+|        ``type_error(atom,DependencyRegistry)``
+|    ``DependencyPack`` is neither a variable nor an atom:
+|        ``type_error(atom,DependencyPack)``
+|    ``DependencyVersion`` is neither a variable nor a compound term:
+|        ``type_error(compound,DependencyVersion)``
+
+| **Remarks:**
+
+    - Loaded dependency edge: This predicate is the loaded-pack counterpart of ``pack_dependency/6`` and only succeeds when both endpoints are currently loaded.
+    - Intended use: This predicate is especially useful for tools that need to describe relationships between the installed packs that contributed code to the current session.
+
+| **See also:**
+|    :ref:`packs/0::pack_dependency/6`
+|    :ref:`packs/0::loaded_pack/3`
+
+
+------------
+
 .. index:: install/4
 .. _packs/0::install/4:
 

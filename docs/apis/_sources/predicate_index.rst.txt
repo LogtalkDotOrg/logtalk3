@@ -1285,6 +1285,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`undirected_graph_common <undirected_graph_common/0::bridges/2>`
 
+``built_date/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::built_date/1>`
+
 ``built_in_directive/4``
 ------------------------
 
@@ -2538,6 +2548,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`process <process/0::create/3>`
 
+``creators/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::creators/1>`
+
 ``cross_track_distance/4``
 --------------------------
 
@@ -3446,6 +3466,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`application_protocol <application_protocol/0::description/1>`
 * :ref:`pack_protocol <pack_protocol/0::description/1>`
 * :ref:`registry_protocol <registry_protocol/0::description/1>`
 
@@ -3873,6 +3894,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`permutations_protocol <permutations_protocol/0::distinct_permutations/3>`
+
+``distribution/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::distribution/1>`
 
 ``doc_goal/1``
 --------------
@@ -4722,6 +4753,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`proto_hierarchyp <proto_hierarchyp/0::extensions/1>`
+
+``external_reference/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::external_reference/2>`
 
 ``factorial/2``
 ---------------
@@ -6352,6 +6393,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`pack_protocol <pack_protocol/0::home/1>`
 * :ref:`registry_protocol <registry_protocol/0::home/1>`
+
+``homepage/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::homepage/1>`
 
 ``hset/5``
 ----------
@@ -8223,6 +8274,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`application_protocol <application_protocol/0::license/1>`
 * :ref:`pack_protocol <pack_protocol/0::license/1>`
 
 ``linda/0``
@@ -8510,6 +8562,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`packs <packs/0::loaded_pack/3>`
 
+``loaded_pack_dependency/6``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`packs <packs/0::loaded_pack_dependency/6>`
+
 ``loaded_pack_file/4``
 ----------------------
 
@@ -8519,6 +8581,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`packs <packs/0::loaded_pack_file/4>`
+
+``loader_file/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::loader_file/1>`
 
 ``local_to_utc/3``
 ------------------
@@ -9768,6 +9840,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`application_protocol <application_protocol/0::name/1>`
 * :ref:`command_line_option <command_line_option/0::name/1>`
 * :ref:`pack_protocol <pack_protocol/0::name/1>`
 * :ref:`registry_protocol <registry_protocol/0::name/1>`
@@ -10678,6 +10751,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`optional(Optional) <optional/1::or_else_throw/2>`
 * :ref:`validation(Validation) <validation/1::or_else_throw/2>`
 
+``originator/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::originator/1>`
+
 ``orphaned/0``
 --------------
 
@@ -10817,6 +10900,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`intervalp <intervalp/0::overlaps/2>`
+
+``pack_dependency/6``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`packs <packs/0::pack_dependency/6>`
 
 ``pack_metadata/4``
 -------------------
@@ -11943,6 +12036,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`listp <listp/0::proper_suffix/3>`
 
+``property/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::property/1>`
+
 ``prove/2``
 -----------
 
@@ -12715,6 +12818,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`amqp_pool <amqp_pool/0::release/1>`
 
+``release_date/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::release_date/1>`
+
 ``removeDependent/1``
 ---------------------
 
@@ -12835,6 +12948,76 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`mutation_testing <mutation_testing/0::report_predicate/4>`
+
+``repository/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::repository/1>`
+
+``repository_branch/1``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::repository_branch/1>`
+
+``repository_commit/1``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::repository_commit/1>`
+
+``repository_commit_abbreviated/1``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::repository_commit_abbreviated/1>`
+
+``repository_commit_author/1``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::repository_commit_author/1>`
+
+``repository_commit_date/1``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::repository_commit_date/1>`
+
+``repository_commit_message/1``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::repository_commit_message/1>`
 
 ``request/3``
 -------------
@@ -15017,6 +15200,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`class_hierarchyp <class_hierarchyp/0::superclasses/1>`
 
+``supplier/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::supplier/1>`
+
 ``supported_range/2``
 ---------------------
 
@@ -16139,6 +16332,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`time_scales_protocol <time_scales_protocol/0::valid_scale/1>`
 
+``valid_until_date/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::valid_until_date/1>`
+
 ``validate/1``
 --------------
 
@@ -16280,6 +16483,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`packs_common <packs_common/0::verify_commands_availability/0>`
+
+``version/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`application_protocol <application_protocol/0::version/1>`
 
 ``version/2``
 -------------

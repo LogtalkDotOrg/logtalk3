@@ -30,6 +30,7 @@ directory in the ``NOTES.md`` file.
    overview
    ada_boost
    amqp
+   application
    arbitrary
    assignvars
    avro

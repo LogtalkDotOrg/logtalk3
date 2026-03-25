@@ -1,0 +1,476 @@
+.. index:: single: application_protocol
+.. _application_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``application_protocol``
+========================
+
+Application metadata predicates, including optional source provenance facts.
+
+| **Availability:** 
+|    ``logtalk_load(application(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-03-24
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Explicit metadata: All predicates describe metadata declared by the application. The protocol does not require or imply reflection over the current and transient state of some application repository.
+   - Release metadata: Predicates such as ``name/1``, ``version/1``, ``description/1``, ``license/1``, ``distribution/1``, ``release_date/1``, and ``valid_until_date/1`` are intended for release-oriented metadata.
+   - Source provenance metadata: Predicates such as ``repository/1``, ``repository_branch/1``, ``repository_commit/1``, ``repository_commit_date/1``, ``repository_commit_author/1``, and ``repository_commit_message/1`` are optional explicit provenance facts about the source used for the application and may or may not correspond to the release artifact identity.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: name/1
+.. _application_protocol/0::name/1:
+
+``name/1``
+^^^^^^^^^^
+
+Application name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``name(Name)``
+| **Mode and number of proofs:**
+|    ``name(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: version/1
+.. _application_protocol/0::version/1:
+
+``version/1``
+^^^^^^^^^^^^^
+
+Application version.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``version(Version)``
+| **Mode and number of proofs:**
+|    ``version(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: description/1
+.. _application_protocol/0::description/1:
+
+``description/1``
+^^^^^^^^^^^^^^^^^
+
+Application short description.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``description(Description)``
+| **Mode and number of proofs:**
+|    ``description(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: license/1
+.. _application_protocol/0::license/1:
+
+``license/1``
+^^^^^^^^^^^^^
+
+Application license.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``license(License)``
+| **Mode and number of proofs:**
+|    ``license(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: homepage/1
+.. _application_protocol/0::homepage/1:
+
+``homepage/1``
+^^^^^^^^^^^^^^
+
+Application homepage URL.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``homepage(URL)``
+| **Mode and number of proofs:**
+|    ``homepage(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: distribution/1
+.. _application_protocol/0::distribution/1:
+
+``distribution/1``
+^^^^^^^^^^^^^^^^^^
+
+Application distribution or download location.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distribution(URL)``
+| **Mode and number of proofs:**
+|    ``distribution(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: loader_file/1
+.. _application_protocol/0::loader_file/1:
+
+``loader_file/1``
+^^^^^^^^^^^^^^^^^
+
+Application main loader file absolute path.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``loader_file(File)``
+| **Mode and number of proofs:**
+|    ``loader_file(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: creators/1
+.. _application_protocol/0::creators/1:
+
+``creators/1``
+^^^^^^^^^^^^^^
+
+Application creators, authors, or other credited producers of the application or its release metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``creators(Creators)``
+| **Mode and number of proofs:**
+|    ``creators(?list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: supplier/1
+.. _application_protocol/0::supplier/1:
+
+``supplier/1``
+^^^^^^^^^^^^^^
+
+Application supplier.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``supplier(Supplier)``
+| **Mode and number of proofs:**
+|    ``supplier(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: originator/1
+.. _application_protocol/0::originator/1:
+
+``originator/1``
+^^^^^^^^^^^^^^^^
+
+Original source of the application software when distinct from its creators.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``originator(Originator)``
+| **Mode and number of proofs:**
+|    ``originator(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: built_date/1
+.. _application_protocol/0::built_date/1:
+
+``built_date/1``
+^^^^^^^^^^^^^^^^
+
+Application build date.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``built_date(Date)``
+| **Mode and number of proofs:**
+|    ``built_date(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: release_date/1
+.. _application_protocol/0::release_date/1:
+
+``release_date/1``
+^^^^^^^^^^^^^^^^^^
+
+Application release date.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``release_date(Date)``
+| **Mode and number of proofs:**
+|    ``release_date(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_until_date/1
+.. _application_protocol/0::valid_until_date/1:
+
+``valid_until_date/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Application validity limit date.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_until_date(Date)``
+| **Mode and number of proofs:**
+|    ``valid_until_date(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: external_reference/2
+.. _application_protocol/0::external_reference/2:
+
+``external_reference/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Application explicit external references using the same vocabulary as the corresponding first-class metadata predicates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``external_reference(Type,URL)``
+| **Mode and number of proofs:**
+|    ``external_reference(?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: repository/1
+.. _application_protocol/0::repository/1:
+
+``repository/1``
+^^^^^^^^^^^^^^^^
+
+Application source provenance repository metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``repository(URL)``
+| **Mode and number of proofs:**
+|    ``repository(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: repository_branch/1
+.. _application_protocol/0::repository_branch/1:
+
+``repository_branch/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Application source provenance git branch metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``repository_branch(Branch)``
+| **Mode and number of proofs:**
+|    ``repository_branch(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: repository_commit/1
+.. _application_protocol/0::repository_commit/1:
+
+``repository_commit/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Application source provenance git commit metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``repository_commit(Hash)``
+| **Mode and number of proofs:**
+|    ``repository_commit(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: repository_commit_abbreviated/1
+.. _application_protocol/0::repository_commit_abbreviated/1:
+
+``repository_commit_abbreviated/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Application abbreviated source provenance git commit metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``repository_commit_abbreviated(Hash)``
+| **Mode and number of proofs:**
+|    ``repository_commit_abbreviated(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: repository_commit_date/1
+.. _application_protocol/0::repository_commit_date/1:
+
+``repository_commit_date/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Application source provenance git commit date metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``repository_commit_date(Date)``
+| **Mode and number of proofs:**
+|    ``repository_commit_date(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: repository_commit_author/1
+.. _application_protocol/0::repository_commit_author/1:
+
+``repository_commit_author/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Application source provenance git commit author metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``repository_commit_author(Author)``
+| **Mode and number of proofs:**
+|    ``repository_commit_author(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: repository_commit_message/1
+.. _application_protocol/0::repository_commit_message/1:
+
+``repository_commit_message/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Application source provenance git commit message metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``repository_commit_message(Message)``
+| **Mode and number of proofs:**
+|    ``repository_commit_message(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: property/1
+.. _application_protocol/0::property/1:
+
+``property/1``
+^^^^^^^^^^^^^^
+
+Enumerates declared application metadata and optional source provenance as individual property terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``property(Property)``
+| **Mode and number of proofs:**
+|    ``property(?compound)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
