@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-24,
+		date is 2026-03-25,
 		comment is 'Unit tests for the "application" library.'
 	]).
 
@@ -47,6 +47,7 @@
 			license('Apache-2.0'),
 			homepage('https://example.com/test_application'),
 			distribution('https://example.com/test_application/releases/download/v1.2.3/test_application.tgz'),
+			package('pkg:generic/test_application@1.2.3'),
 			loader_file('/path/to/test_application/loader.lgt'),
 			creators(['Tool: Build pipeline', 'Person: Alice Example']),
 			supplier('Organization: Example Application'),
@@ -60,7 +61,9 @@
 			repository_commit_abbreviated('02a812e'),
 			repository_commit_date('2020-11-12T16:02:00+00:00'),
 			repository_commit_author('John Doe'),
-			repository_commit_message('First commit\n')
+			repository_commit_message('First commit\n'),
+			git_object_identifier('gitoid:commit:sha1:02a812ed805949d3aaf15240254c27564eff35c5'),
+			software_heritage_identifier('swh:1:rev:02a812ed805949d3aaf15240254c27564eff35c5')
 		]),
 		create_object(sparse_application, [imports(application_common)], [], [
 			name(sparse_application),
@@ -99,12 +102,19 @@
 		path_concat(Directory, 'loader.lgt', ExpectedLoader),
 		implicit_loader_metadata::loader_file(Loader).
 
+	test(application_package_1_01, true(Identifier == 'pkg:generic/test_application@1.2.3')) :-
+		fixture_object(Object),
+		Object::package(Identifier).
+
 	test(application_external_reference_2_01, true) :-
 		fixture_object(Object),
 		findall(Type-URL, Object::external_reference(Type, URL), References),
 		memberchk(homepage-'https://example.com/test_application', References),
 		memberchk(distribution-'https://example.com/test_application/releases/download/v1.2.3/test_application.tgz', References),
-		memberchk(repository-'https://example.com/example-application.git', References).
+		memberchk(package-'pkg:generic/test_application@1.2.3', References),
+		memberchk(repository-'https://example.com/example-application.git', References),
+		memberchk(git_object_identifier-'gitoid:commit:sha1:02a812ed805949d3aaf15240254c27564eff35c5', References),
+		memberchk(software_heritage_identifier-'swh:1:rev:02a812ed805949d3aaf15240254c27564eff35c5', References).
 
 	test(application_repository_1_01, true(URL == 'https://example.com/example-application.git')) :-
 		fixture_object(Object),
@@ -134,12 +144,23 @@
 		fixture_object(Object),
 		Object::repository_commit_message(Message).
 
+	test(application_git_object_identifier_1_01, true(Identifier == 'gitoid:commit:sha1:02a812ed805949d3aaf15240254c27564eff35c5')) :-
+		fixture_object(Object),
+		Object::git_object_identifier(Identifier).
+
+	test(application_software_heritage_identifier_1_01, true(Identifier == 'swh:1:rev:02a812ed805949d3aaf15240254c27564eff35c5')) :-
+		fixture_object(Object),
+		Object::software_heritage_identifier(Identifier).
+
 	test(application_property_1_01, true) :-
 		fixture_object(Object),
 		Object::property(name(test_application)),
 		Object::property(creators(['Tool: Build pipeline', 'Person: Alice Example'])),
+		Object::property(package('pkg:generic/test_application@1.2.3')),
 		Object::property(repository_commit_author('John Doe')),
-		Object::property(repository('https://example.com/example-application.git')).
+		Object::property(repository('https://example.com/example-application.git')),
+		Object::property(git_object_identifier('gitoid:commit:sha1:02a812ed805949d3aaf15240254c27564eff35c5')),
+		Object::property(software_heritage_identifier('swh:1:rev:02a812ed805949d3aaf15240254c27564eff35c5')).
 
 	test(application_sparse_repository_1_01, false) :-
 		sparse_object(Object),
@@ -161,6 +182,18 @@
 		sparse_object(Object),
 		Object::repository_commit_message(_).
 
+	test(application_sparse_package_1_01, false) :-
+		sparse_object(Object),
+		Object::package(_).
+
+	test(application_sparse_git_object_identifier_1_01, false) :-
+		sparse_object(Object),
+		Object::git_object_identifier(_).
+
+	test(application_sparse_software_heritage_identifier_1_01, false) :-
+		sparse_object(Object),
+		Object::software_heritage_identifier(_).
+
 	test(application_sparse_repository_reference_1_01, false) :-
 		sparse_object(Object),
 		Object::external_reference(repository, _).
@@ -168,5 +201,17 @@
 	test(application_sparse_property_1_01, false) :-
 		sparse_object(Object),
 		Object::property(repository(_)).
+
+	test(application_sparse_package_reference_1_01, false) :-
+		sparse_object(Object),
+		Object::external_reference(package, _).
+
+	test(application_sparse_git_object_identifier_reference_1_01, false) :-
+		sparse_object(Object),
+		Object::external_reference(git_object_identifier, _).
+
+	test(application_sparse_software_heritage_identifier_reference_1_01, false) :-
+		sparse_object(Object),
+		Object::external_reference(software_heritage_identifier, _).
 
 :- end_object.

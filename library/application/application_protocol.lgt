@@ -22,14 +22,14 @@
 :- protocol(application_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-03-24,
+		date is 2026-03-25,
 		comment is 'Application metadata predicates, including optional source provenance facts.',
 		remarks is [
 			'Explicit metadata' - 'All predicates describe metadata declared by the application. The protocol does not require or imply reflection over the current and transient state of some application repository.',
-			'Release metadata' - 'Predicates such as ``name/1``, ``version/1``, ``description/1``, ``license/1``, ``distribution/1``, ``release_date/1``, and ``valid_until_date/1`` are intended for release-oriented metadata.',
-			'Source provenance metadata' - 'Predicates such as ``repository/1``, ``repository_branch/1``, ``repository_commit/1``, ``repository_commit_date/1``, ``repository_commit_author/1``, and ``repository_commit_message/1`` are optional explicit provenance facts about the source used for the application and may or may not correspond to the release artifact identity.'
+			'Release metadata' - 'Predicates such as ``name/1``, ``version/1``, ``description/1``, ``license/1``, ``distribution/1``, ``package/1``, ``release_date/1``, and ``valid_until_date/1`` are intended for release-oriented metadata.',
+			'Source provenance metadata' - 'Predicates such as ``repository/1``, ``repository_branch/1``, ``repository_commit/1``, ``repository_commit_date/1``, ``repository_commit_author/1``, ``repository_commit_message/1``, ``git_object_identifier/1``, and ``software_heritage_identifier/1`` are optional explicit provenance facts about the source used for the application and may or may not correspond to the release artifact identity.'
 		]
 	]).
 
@@ -73,6 +73,13 @@
 	:- info(distribution/1, [
 		comment is 'Application distribution or download location.',
 		argnames is ['URL']
+	]).
+
+	:- public(package/1).
+	:- mode(package(?atom), zero_or_one).
+	:- info(package/1, [
+		comment is 'Application package identifier as a PURL.',
+		argnames is ['PURL']
 	]).
 
 	:- public(loader_file/1).
@@ -127,8 +134,8 @@
 	:- public(external_reference/2).
 	:- mode(external_reference(?atom, ?atom), zero_or_more).
 	:- info(external_reference/2, [
-		comment is 'Application explicit external references using the same vocabulary as the corresponding first-class metadata predicates.',
-		argnames is ['Type', 'URL']
+		comment is 'Application explicit external references using the same vocabulary as the corresponding first-class metadata predicates. The second argument can be a URL or a non-URL identifier depending on the reference type.',
+		argnames is ['Type', 'Locator']
 	]).
 
 	:- public(repository/1).
@@ -178,6 +185,20 @@
 	:- info(repository_commit_message/1, [
 		comment is 'Application source provenance git commit message metadata.',
 		argnames is ['Message']
+	]).
+
+	:- public(git_object_identifier/1).
+	:- mode(git_object_identifier(?atom), zero_or_one).
+	:- info(git_object_identifier/1, [
+		comment is 'Application source provenance git object identifier metadata as a gitoid.',
+		argnames is ['GITOID']
+	]).
+
+	:- public(software_heritage_identifier/1).
+	:- mode(software_heritage_identifier(?atom), zero_or_one).
+	:- info(software_heritage_identifier/1, [
+		comment is 'Application source provenance Software Heritage identifier metadata as an SWHID.',
+		argnames is ['SWHID']
 	]).
 
 	:- public(property/1).

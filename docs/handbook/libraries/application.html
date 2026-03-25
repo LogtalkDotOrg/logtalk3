@@ -225,14 +225,16 @@
 <p>This library provides the <code class="docutils literal notranslate"><span class="pre">application_common</span></code> category and the
 <code class="docutils literal notranslate"><span class="pre">application_protocol</span></code> protocol for declaring application metadata,
 including optional git-related facts such as repository URL, branch,
-commit, author, and commit message. Application metadata is typically
-consumed by tools such as <code class="docutils literal notranslate"><span class="pre">sbom</span></code>.</p>
+commit, author, and commit message, plus optional package and archive
+identifiers. Application metadata is typically consumed by tools such as
+<code class="docutils literal notranslate"><span class="pre">sbom</span></code>.</p>
 <p>The library distinguishes two kinds of information:</p>
 <ul class="simple">
 <li><p>release metadata, such as name, version, description, license,
-distribution location, release date, and validity date</p></li>
+distribution location, package identifier, release date, and validity
+date</p></li>
 <li><p>optional source provenance metadata, such as repository URL, branch,
-commit, commit date, author, and commit message</p></li>
+commit, commit date, author, commit message, and archive identifiers</p></li>
 </ul>
 <p>Source provenance predicates are explicit facts declared by the
 application. They are not a reflection of the current status of a local
@@ -272,12 +274,15 @@ explicitly. For example:</p>
     license(<span class="s">&#39;Apache-2.0&#39;</span>).
     homepage(<span class="s">&#39;https://example.com/my_application&#39;</span>).
     distribution(<span class="s">&#39;https://example.com/my_application/releases/download/v1.2.3/my_application.tgz&#39;</span>).
+    package(<span class="s">&#39;pkg:generic/my_application@1.2.3&#39;</span>).
     creators([<span class="s">&#39;Tool: Build pipeline&#39;</span>, <span class="s">&#39;Person: Alice&#39;</span>]).
     supplier(<span class="s">&#39;Organization: Example Application&#39;</span>).
     originator(<span class="s">&#39;Organization: Upstream Project&#39;</span>).
     repository(<span class="s">&#39;https://example.com/my_application.git&#39;</span>).
     repository_branch(main).
     repository_commit(<span class="s">&#39;0123456789abcdef0123456789abcdef01234567&#39;</span>).
+    git_object_identifier(<span class="s">&#39;gitoid:commit:sha1:0123456789abcdef0123456789abcdef01234567&#39;</span>).
+    software_heritage_identifier(<span class="s">&#39;swh:1:rev:0123456789abcdef0123456789abcdef01234567&#39;</span>).
     repository_commit_author(<span class="s">&#39;Alice&#39;</span>).
 
 <span class="p">:- </span><span class="k">end_object</span>.
@@ -302,7 +307,32 @@ same vocabulary as the corresponding first-class predicates:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">external_reference(homepage,</span> <span class="pre">URL)</span></code> from <code class="docutils literal notranslate"><span class="pre">homepage/1</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">external_reference(distribution,</span> <span class="pre">URL)</span></code> from <code class="docutils literal notranslate"><span class="pre">distribution/1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">external_reference(package,</span> <span class="pre">Identifier)</span></code> from <code class="docutils literal notranslate"><span class="pre">package/1</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">external_reference(repository,</span> <span class="pre">URL)</span></code> from <code class="docutils literal notranslate"><span class="pre">repository/1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">external_reference(git_object_identifier,</span> <span class="pre">Identifier)</span></code> from
+<code class="docutils literal notranslate"><span class="pre">git_object_identifier/1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">external_reference(software_heritage_identifier,</span> <span class="pre">Identifier)</span></code> from
+<code class="docutils literal notranslate"><span class="pre">software_heritage_identifier/1</span></code></p></li>
+</ul>
+<p>The following predicates are intended to help tools such as <code class="docutils literal notranslate"><span class="pre">sbom</span></code>
+export stronger standardized references:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">package/1</span></code> Stores an application package identifier as a PURL. This
+is distinct from <code class="docutils literal notranslate"><span class="pre">distribution/1</span></code>, which stores a download location
+URL. Tools such as <code class="docutils literal notranslate"><span class="pre">sbom</span></code> can use <code class="docutils literal notranslate"><span class="pre">package/1</span></code> to export a package
+identity reference instead of only a release download location.
+Example: <code class="docutils literal notranslate"><span class="pre">package('pkg:generic/my_application&#64;1.2.3')</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git_object_identifier/1</span></code> Stores a standardized Git object
+identifier as a gitoid. This is distinct from <code class="docutils literal notranslate"><span class="pre">repository_commit/1</span></code>,
+which stores the raw commit hash as provenance metadata. Tools such as
+<code class="docutils literal notranslate"><span class="pre">sbom</span></code> can use <code class="docutils literal notranslate"><span class="pre">git_object_identifier/1</span></code> to export a stronger
+provenance reference. Example:
+<code class="docutils literal notranslate"><span class="pre">git_object_identifier('gitoid:commit:sha1:0123456789abcdef0123456789abcdef01234567')</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">software_heritage_identifier/1</span></code> Stores a Software Heritage
+identifier (SWHID) for an archived release or revision. Tools such as
+<code class="docutils literal notranslate"><span class="pre">sbom</span></code> can use it to export a stable archived source provenance
+reference when one is known. Example:
+<code class="docutils literal notranslate"><span class="pre">software_heritage_identifier('swh:1:rev:0123456789abcdef0123456789abcdef01234567')</span></code>.</p></li>
 </ul>
 <p>Git-related predicates are optional source provenance facts, not
 reflection over the current state of a local repository checkout.</p>
@@ -314,6 +344,7 @@ reflection over the current state of a local repository checkout.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">license/1</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">homepage/1</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">distribution/1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">package/1</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">creators/1</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">supplier/1</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">originator/1</span></code></p></li>
@@ -331,6 +362,8 @@ reflection over the current state of a local repository checkout.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">repository_commit_date/1</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">repository_commit_author/1</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">repository_commit_message/1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git_object_identifier/1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">software_heritage_identifier/1</span></code></p></li>
 </ul>
 </section>
 </section>

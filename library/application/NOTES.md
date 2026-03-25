@@ -24,15 +24,16 @@ ________________________________________________________________________
 This library provides the `application_common` category and the
 `application_protocol` protocol for declaring application metadata,
 including optional git-related facts such as repository URL, branch,
-commit, author, and commit message. Application metadata is typically
+commit, author, and commit message, plus optional package and archive
+identifiers. Application metadata is typically
 consumed by tools such as `sbom`.
 
 The library distinguishes two kinds of information:
 
 - release metadata, such as name, version, description, license,
-    distribution location, release date, and validity date
+	distribution location, package identifier, release date, and validity date
 - optional source provenance metadata, such as repository URL, branch,
-    commit, commit date, author, and commit message
+	commit, commit date, author, commit message, and archive identifiers
 
 Source provenance predicates are explicit facts declared by the application.
 They are not a reflection of the current status of a local git checkout and
@@ -78,12 +79,15 @@ category and declaring the metadata that is known explicitly. For example:
 		license('Apache-2.0').
 		homepage('https://example.com/my_application').
 		distribution('https://example.com/my_application/releases/download/v1.2.3/my_application.tgz').
+		package('pkg:generic/my_application@1.2.3').
 		creators(['Tool: Build pipeline', 'Person: Alice']).
 		supplier('Organization: Example Application').
 		originator('Organization: Upstream Project').
 		repository('https://example.com/my_application.git').
 		repository_branch(main).
 		repository_commit('0123456789abcdef0123456789abcdef01234567').
+		git_object_identifier('gitoid:commit:sha1:0123456789abcdef0123456789abcdef01234567').
+		software_heritage_identifier('swh:1:rev:0123456789abcdef0123456789abcdef01234567').
 		repository_commit_author('Alice').
 
 	:- end_object.
@@ -107,7 +111,31 @@ corresponding first-class predicates:
 
 - `external_reference(homepage, URL)` from `homepage/1`
 - `external_reference(distribution, URL)` from `distribution/1`
+- `external_reference(package, Identifier)` from `package/1`
 - `external_reference(repository, URL)` from `repository/1`
+- `external_reference(git_object_identifier, Identifier)` from `git_object_identifier/1`
+- `external_reference(software_heritage_identifier, Identifier)` from `software_heritage_identifier/1`
+
+The following predicates are intended to help tools such as `sbom`
+export stronger standardized references:
+
+- `package/1`
+	Stores an application package identifier as a PURL. This is distinct from
+	`distribution/1`, which stores a download location URL. Tools such as
+	`sbom` can use `package/1` to export a package identity reference instead of
+	only a release download location. Example:
+	`package('pkg:generic/my_application@1.2.3')`.
+- `git_object_identifier/1`
+	Stores a standardized Git object identifier as a gitoid. This is
+	distinct from `repository_commit/1`, which stores the raw commit hash as
+	provenance metadata. Tools such as `sbom` can use `git_object_identifier/1`
+	to export a stronger provenance reference. Example:
+	`git_object_identifier('gitoid:commit:sha1:0123456789abcdef0123456789abcdef01234567')`.
+- `software_heritage_identifier/1`
+	Stores a Software Heritage identifier (SWHID) for an archived release or
+	revision. Tools such as `sbom` can use it to export a stable archived source
+	provenance reference when one is known. Example:
+	`software_heritage_identifier('swh:1:rev:0123456789abcdef0123456789abcdef01234567')`.
 
 Git-related predicates are optional source provenance facts, not reflection
 over the current state of a local repository checkout.
@@ -120,6 +148,7 @@ Release-oriented metadata typically includes:
 - `license/1`
 - `homepage/1`
 - `distribution/1`
+- `package/1`
 - `creators/1`
 - `supplier/1`
 - `originator/1`
@@ -137,3 +166,5 @@ Optional source provenance metadata typically includes:
 - `repository_commit_date/1`
 - `repository_commit_author/1`
 - `repository_commit_message/1`
+- `git_object_identifier/1`
+- `software_heritage_identifier/1`

@@ -14,8 +14,8 @@ Application metadata predicates, including optional source provenance facts.
 |    ``logtalk_load(application(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-03-24
+| **Version:** 1:1:0
+| **Date:** 2026-03-25
 
 | **Compilation flags:**
 |    ``static``
@@ -28,8 +28,8 @@ Application metadata predicates, including optional source provenance facts.
 | **Remarks:**
 
    - Explicit metadata: All predicates describe metadata declared by the application. The protocol does not require or imply reflection over the current and transient state of some application repository.
-   - Release metadata: Predicates such as ``name/1``, ``version/1``, ``description/1``, ``license/1``, ``distribution/1``, ``release_date/1``, and ``valid_until_date/1`` are intended for release-oriented metadata.
-   - Source provenance metadata: Predicates such as ``repository/1``, ``repository_branch/1``, ``repository_commit/1``, ``repository_commit_date/1``, ``repository_commit_author/1``, and ``repository_commit_message/1`` are optional explicit provenance facts about the source used for the application and may or may not correspond to the release artifact identity.
+   - Release metadata: Predicates such as ``name/1``, ``version/1``, ``description/1``, ``license/1``, ``distribution/1``, ``package/1``, ``release_date/1``, and ``valid_until_date/1`` are intended for release-oriented metadata.
+   - Source provenance metadata: Predicates such as ``repository/1``, ``repository_branch/1``, ``repository_commit/1``, ``repository_commit_date/1``, ``repository_commit_author/1``, ``repository_commit_message/1``, ``git_object_identifier/1``, and ``software_heritage_identifier/1`` are optional explicit provenance facts about the source used for the application and may or may not correspond to the release artifact identity.
 
 | **Inherited public predicates:**
 |    (none)
@@ -151,6 +151,25 @@ Application distribution or download location.
 |    ``distribution(URL)``
 | **Mode and number of proofs:**
 |    ``distribution(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: package/1
+.. _application_protocol/0::package/1:
+
+``package/1``
+^^^^^^^^^^^^^
+
+Application package identifier as a PURL.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``package(PURL)``
+| **Mode and number of proofs:**
+|    ``package(?atom)`` - ``zero_or_one``
 
 
 ------------
@@ -294,13 +313,13 @@ Application validity limit date.
 ``external_reference/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Application explicit external references using the same vocabulary as the corresponding first-class metadata predicates.
+Application explicit external references using the same vocabulary as the corresponding first-class metadata predicates. The second argument can be a URL or a non-URL identifier depending on the reference type.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``external_reference(Type,URL)``
+|    ``external_reference(Type,Locator)``
 | **Mode and number of proofs:**
 |    ``external_reference(?atom,?atom)`` - ``zero_or_more``
 
@@ -436,6 +455,44 @@ Application source provenance git commit message metadata.
 |    ``repository_commit_message(Message)``
 | **Mode and number of proofs:**
 |    ``repository_commit_message(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: git_object_identifier/1
+.. _application_protocol/0::git_object_identifier/1:
+
+``git_object_identifier/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Application source provenance git object identifier metadata as a gitoid.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``git_object_identifier(GITOID)``
+| **Mode and number of proofs:**
+|    ``git_object_identifier(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: software_heritage_identifier/1
+.. _application_protocol/0::software_heritage_identifier/1:
+
+``software_heritage_identifier/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Application source provenance Software Heritage identifier metadata as an SWHID.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``software_heritage_identifier(SWHID)``
+| **Mode and number of proofs:**
+|    ``software_heritage_identifier(?atom)`` - ``zero_or_one``
 
 
 ------------

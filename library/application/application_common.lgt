@@ -23,9 +23,9 @@
 	implements(application_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-03-24,
+		date is 2026-03-25,
 		comment is 'Application metadata and provenance predicates.'
 	]).
 
@@ -44,8 +44,14 @@
 		::homepage(URL).
 	external_reference(distribution, URL) :-
 		::distribution(URL).
+	external_reference(package, Identifier) :-
+		::package(Identifier).
 	external_reference(repository, URL) :-
 		::repository(URL).
+	external_reference(git_object_identifier, Identifier) :-
+		::git_object_identifier(Identifier).
+	external_reference(software_heritage_identifier, Identifier) :-
+		::software_heritage_identifier(Identifier).
 
 	property(name(Name)) :-
 		::name(Name).
@@ -59,6 +65,8 @@
 		::homepage(URL).
 	property(distribution(URL)) :-
 		::distribution(URL).
+	property(package(Identifier)) :-
+		::package(Identifier).
 	property(loader_file(File)) :-
 		::loader_file(File).
 	property(creators(Creators)) :-
@@ -89,5 +97,9 @@
 		::repository_commit_author(Author).
 	property(repository_commit_message(Message)) :-
 		::repository_commit_message(Message).
+	property(git_object_identifier(Identifier)) :-
+		::git_object_identifier(Identifier).
+	property(software_heritage_identifier(Identifier)) :-
+		::software_heritage_identifier(Identifier).
 
 :- end_category.
