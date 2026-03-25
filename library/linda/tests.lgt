@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:2,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-03-20,
+		date is 2026-03-25,
 		comment is 'Unit tests for the "linda" library.'
 	]).
 
@@ -47,7 +47,8 @@
 
 	setup :-
 		% Start server in background thread
-		threaded_ignore(start_test_server).
+		threaded_ignore(start_test_server),
+		wait_for_server.
 
 	cleanup :-
 		% Clean up any remaining connections;
@@ -71,19 +72,16 @@
 	% ==========================================================================
 
 	test(linda_client_connect_01, true) :-
-		wait_for_server,
 		test_host_port_(Address),
 		linda::linda_client(Address).
 
 	test(linda_client_connect_02, error(linda_error(already_connected))) :-
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
 		linda::linda_client(Address).
 
 	test(linda_close_client_01, true) :-
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -94,14 +92,12 @@
 	% ==========================================================================
 
 	test(linda_out_01, true) :-
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
 		linda::out(test_tuple(1, a)).
 
 	test(linda_in_noblock_01, true(X == 1)) :-
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -109,14 +105,12 @@
 		linda::in_noblock(value(X)).
 
 	test(linda_in_noblock_02, false) :-
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
 		linda::in_noblock(nonexistent_tuple(_)).
 
 	test(linda_rd_noblock_01, true(X == hello)) :-
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -125,7 +119,6 @@
 
 	test(linda_rd_noblock_02, true(X == hello)) :-
 		% rd should not remove the tuple
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -134,7 +127,6 @@
 		linda::rd_noblock(persistent(X)).
 
 	test(linda_rd_noblock_03, fail) :-
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -146,7 +138,6 @@
 
 	test(linda_in_01, true(X == 42)) :-
 		% Basic in/1 test - remove a tuple that exists
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -155,7 +146,6 @@
 
 	test(linda_in_02, fail) :-
 		% Verify in/1 removes the tuple
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -165,7 +155,6 @@
 
 	test(linda_in_03, true([X, Y] == [alice, bob])) :-
 		% Pattern matching with variables
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -180,7 +169,6 @@
 
 	test(linda_rd_01, true(X == hello)) :-
 		% Basic rd/1 test - read a tuple that exists
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -189,7 +177,6 @@
 
 	test(linda_rd_02, true(X == world)) :-
 		% Verify rd/1 does not remove the tuple
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -199,7 +186,6 @@
 
 	test(linda_rd_03, true([A, B] == [foo, bar])) :-
 		% Pattern matching with variables
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -213,7 +199,6 @@
 	% ==========================================================================
 
 	test(linda_multiple_tuples_01, true) :-
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -225,7 +210,6 @@
 		linda::in_noblock(item(3)).
 
 	test(linda_pattern_matching_01, true(X == b)) :-
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -234,7 +218,6 @@
 		linda::in_noblock(pair1(X, 2)).
 
 	test(linda_pattern_matching_02, true(X == 2)) :-
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -249,7 +232,6 @@
 
 	test(linda_in_list_01, true(Tuple == task(1, a))) :-
 		% Test in_list/2 removes first matching tuple from list
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -258,7 +240,6 @@
 
 	test(linda_in_list_02, true(Tuple == task(2, b))) :-
 		% Test in_list/2 matches second pattern in list
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -267,7 +248,6 @@
 
 	test(linda_in_list_03, true(Tuple == done)) :-
 		% Test in_list/2 matches last pattern in list
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -276,7 +256,6 @@
 
 	test(linda_rd_list_01, true(Tuple == status(ready))) :-
 		% Test rd_list/2 reads first matching tuple from list
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -285,7 +264,6 @@
 
 	test(linda_rd_list_02, true(Tuple == status(ready))) :-
 		% Test rd_list/2 does not remove tuple
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -295,7 +273,6 @@
 
 	test(linda_rd_list_03, true(Tuple == msg(hello, world))) :-
 		% Test rd_list/2 with pattern unification
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -307,7 +284,6 @@
 	% ==========================================================================
 
 	test(linda_findall_rd_noblock_01, true(List == [1, 2, 3])) :-
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -317,7 +293,6 @@
 		linda::findall_rd_noblock(N, num(N), List).
 
 	test(linda_findall_rd_noblock_02, true(List == [])) :-
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -325,7 +300,6 @@
 
 	test(linda_findall_rd_noblock_03, true(List == [a, b, c])) :-
 		% Pattern matching with complex terms
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -339,7 +313,6 @@
 	% ==========================================================================
 
 	test(linda_findall_in_noblock_01, true(List == [10, 20, 30])) :-
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -350,7 +323,6 @@
 
 	test(linda_findall_in_noblock_02, false) :-
 		% Verify tuples were removed
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -359,7 +331,6 @@
 		linda::rd_noblock(temp(1)).
 
 	test(linda_findall_in_noblock_03, true(List == [])) :-
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -367,7 +338,6 @@
 
 	test(linda_findall_in_noblock_04, true(List == [a, b, c])) :-
 		% Pattern matching with complex terms
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -381,7 +351,6 @@
 	% ==========================================================================
 
 	test(linda_server_alias_01, true(X == 1)) :-
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -389,7 +358,6 @@
 		linda::in(blackboard, a(X)).
 
 	test(linda_server_alias_02, true(X == 1)) :-
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address, [alias(data)]),
@@ -397,7 +365,6 @@
 		linda::in(data, b(X)).
 
 	test(linda_server_alias_03, error(linda_error(not_connected(unknown)))) :-
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),
@@ -435,7 +402,6 @@
 	% ==========================================================================
 
 	test(linda_shutdown_server_01, true(ConnectionRefused == yes), [flaky]) :-
-		wait_for_server,
 		test_host_port_(Address),
 		catch(linda::close_client(Address), _, true),
 		linda::linda_client(Address),

@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-19,
+		date is 2026-03-25,
 		comment is 'Linda tuple-space implementation for process communication. Provides a server that acts as a shared blackboard where clients can write (``out/1-2``), read (``rd/1-2``), and remove (``in/1-2``) tuples. Uses threaded engines for the server implementation and the sockets library for network communication.',
 		remarks is [
 			'Supported backends' - 'SWI-Prolog, Trealla Prolog, and XVM (requires both multi-threading and sockets support).',
@@ -824,14 +824,10 @@
 		),
 		% Wake this one waiter
 		retract(waiting_(ClientId, Request, Output)),
-		catch(
-			(   write_canonical(Output, result(Tuple)),
-				write(Output, '.\n'),
-				flush_output(Output)
-			),
-			_,
-			true
-		).
+		adopt_stream(Output),
+		write_canonical(Output, result(Tuple)),
+		write(Output, '.\n'),
+		flush_output(Output).
 
 	% Wake all rd/1 and rd_list/1 waiters matching the tuple
 	wake_all_rd_waiters(Tuple) :-
@@ -840,14 +836,10 @@
 				is_rd_request(Request, Tuple)
 			),
 			(   retract(waiting_(ClientId, Request, Output)) ->
-				catch(
-					(   write_canonical(Output, result(Tuple)),
-						write(Output, '.\n'),
-						flush_output(Output)
-					),
-					_,
-					true
-				)
+				adopt_stream(Output),
+				write_canonical(Output, result(Tuple)),
+				write(Output, '.\n'),
+				flush_output(Output)
 			;   true
 			)
 		).
@@ -901,9 +893,11 @@
 		context(Context),
 		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output),
+			adopt_stream(Output),
 			write(Output, 'shutdown.\n'),
 			flush_output(Output),
 			client_connection_input_(Address, Input),
+			adopt_stream(Input),
 			read_term(Input, Response, []),
 			Response == ok ->
 			true
@@ -925,10 +919,12 @@
 		context(Context),
 		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output) ->
+			adopt_stream(Output),
 			write_canonical(Output, out(Tuple)),
 			write(Output, '.\n'),
 			flush_output(Output),
 			client_connection_input_(Address, Input),
+			adopt_stream(Input),
 			read_term(Input, Response, []),
 			(	Response == ok ->
 				true
@@ -944,6 +940,7 @@
 		context(Context),
 		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output) ->
+			adopt_stream(Output),
 			write_canonical(Output, in(Tuple)),
 			write(Output, '.\n'),
 			flush_output(Output),
@@ -963,10 +960,12 @@
 		context(Context),
 		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output) ->
+			adopt_stream(Output),
 			write_canonical(Output, in_noblock(Tuple)),
 			write(Output, '.\n'),
 			flush_output(Output),
 			client_connection_input_(Address, Input),
+			adopt_stream(Input),
 			read_term(Input, Response, []),
 			(	Response = result(Match) ->
 				Tuple = Match
@@ -984,6 +983,7 @@
 		context(Context),
 		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output) ->
+			adopt_stream(Output),
 			write_canonical(Output, in_list(TupleList)),
 			write(Output, '.\n'),
 			flush_output(Output),
@@ -1003,6 +1003,7 @@
 		context(Context),
 		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output) ->
+			adopt_stream(Output),
 			write_canonical(Output, rd(Tuple)),
 			write(Output, '.\n'),
 			flush_output(Output),
@@ -1022,10 +1023,12 @@
 		context(Context),
 		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output) ->
+			adopt_stream(Output),
 			write_canonical(Output, rd_noblock(Tuple)),
 			write(Output, '.\n'),
 			flush_output(Output),
 			client_connection_input_(Address, Input),
+			adopt_stream(Input),
 			read_term(Input, Response, []),
 			(	Response = result(Match) ->
 				Tuple = Match
@@ -1043,6 +1046,7 @@
 		context(Context),
 		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output) ->
+			adopt_stream(Output),
 			write_canonical(Output, rd_list(TupleList)),
 			write(Output, '.\n'),
 			flush_output(Output),
@@ -1062,10 +1066,12 @@
 		context(Context),
 		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output) ->
+			adopt_stream(Output),
 			write_canonical(Output, findall_rd_noblock(Template, Tuple)),
 			write(Output, '.\n'),
 			flush_output(Output),
 			client_connection_input_(Address, Input),
+			adopt_stream(Input),
 			read_term(Input, Response, []),
 			(	Response = result(ResultBag) ->
 				Bag = ResultBag
@@ -1083,10 +1089,12 @@
 		context(Context),
 		resolve_alias(AddressOrALias, Address, Context),
 		(	client_connection_output_(Address, Output) ->
+			adopt_stream(Output),
 			write_canonical(Output, findall_in_noblock(Template, Tuple)),
 			write(Output, '.\n'),
 			flush_output(Output),
 			client_connection_input_(Address, Input),
+			adopt_stream(Input),
 			read_term(Input, Response, []),
 			(	Response = result(ResultBag) ->
 				Bag = ResultBag
@@ -1111,6 +1119,7 @@
 			TotalSeconds is Seconds + Milliseconds / 1000,
 			wait_for_result_timeout(Input, Result, TotalSeconds, Context)
 		;	% No timeout, block until result
+			adopt_stream(Input),
 			read_term(Input, Result, [])
 		).
 
@@ -1120,6 +1129,7 @@
 
 	wait_for_result_loop(Input, Result, StartTime, TimeoutSeconds, Context) :-
 		(	stream_ready(Input) ->
+			adopt_stream(Input),
 			read_term(Input, Result, [])
 		;	cpu_time(CurrentTime),
 			Elapsed is CurrentTime - StartTime,
