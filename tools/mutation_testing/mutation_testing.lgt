@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-20,
+		date is 2026-03-26,
 		comment is 'Mutation testing tool.'
 	]).
 
@@ -1343,31 +1343,27 @@
 		atomic_list_concat([Name, Machine, Release], ' ', Platform).
 
 	ci_environment(true) :-
-		ci_environment_variable('CI'),
+		environment_variable('CI', _),
 		!.
 	ci_environment(true) :-
-		ci_environment_variable('GITHUB_ACTIONS'),
+		environment_variable('GITHUB_ACTIONS', _),
 		!.
 	ci_environment(true) :-
-		ci_environment_variable('GITLAB_CI'),
+		environment_variable('GITLAB_CI', _),
 		!.
 	ci_environment(true) :-
-		ci_environment_variable('TRAVIS'),
+		environment_variable('TRAVIS', _),
 		!.
 	ci_environment(true) :-
-		ci_environment_variable('APPVEYOR'),
+		environment_variable('APPVEYOR', _),
 		!.
 	ci_environment(true) :-
-		ci_environment_variable('CIRCLECI'),
+		environment_variable('CIRCLECI', _),
 		!.
 	ci_environment(true) :-
-		ci_environment_variable('JENKINS_URL'),
+		environment_variable('JENKINS_URL', _),
 		!.
 	ci_environment(false).
-
-	ci_environment_variable(Name) :-
-		environment_variable(Name, Value),
-		Value \== ''.
 
 	container_reports_file_results([], []).
 	container_reports_file_results([Report| Reports], [FileResult| FileResults]) :-
