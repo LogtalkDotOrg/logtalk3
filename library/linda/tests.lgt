@@ -35,6 +35,8 @@
 		sleep/1
 	]).
 
+	cover(linda_server).
+	cover(linda_client).
 	cover(linda).
 
 	% ==========================================================================
