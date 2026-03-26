@@ -145,8 +145,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-summary">API Summary</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#server-predicates">Server predicates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#client-predicates">Client predicates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tuple-operations-single-default-server">Tuple operations (single/default server)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tuple-operations-multiple-servers">Tuple operations (multiple servers)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tuple-predicates-single-default-server">Tuple predicates (single/default server)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tuple-predicates-multiple-servers">Tuple predicates (multiple servers)</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
@@ -250,17 +250,17 @@ multi-threading and sockets support. It supports SWI-Prolog, Trealla
 Prolog, and XVM.</p>
 <p>The tuple-space is a shared blackboard where processes can:</p>
 <ul class="simple">
-<li><p><strong>Write</strong> tuples using <code class="docutils literal notranslate"><span class="pre">out/1-2</span></code></p></li>
-<li><p><strong>Read</strong> tuples (without removing) using <code class="docutils literal notranslate"><span class="pre">rd/1-2</span></code> and
-<code class="docutils literal notranslate"><span class="pre">rd_noblock/1-2</span></code></p></li>
-<li><p><strong>Remove</strong> tuples using <code class="docutils literal notranslate"><span class="pre">in/1-2</span></code> and <code class="docutils literal notranslate"><span class="pre">in_noblock/1-2</span></code></p></li>
+<li><p><strong>Write</strong> tuples using the <code class="docutils literal notranslate"><span class="pre">out/1-2</span></code> predicates</p></li>
+<li><p><strong>Read</strong> tuples (without removing) using the <code class="docutils literal notranslate"><span class="pre">rd/1-2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">rd_noblock/1-2</span></code> predicates</p></li>
+<li><p><strong>Remove</strong> tuples using the <code class="docutils literal notranslate"><span class="pre">in/1-2</span></code> and <code class="docutils literal notranslate"><span class="pre">in_noblock/1-2</span></code>
+predicates</p></li>
 </ul>
-<p>The blocking operations (<code class="docutils literal notranslate"><span class="pre">in/1-2</span></code>, <code class="docutils literal notranslate"><span class="pre">rd/1-2</span></code>) suspend the process
+<p>The blocking predicates (<code class="docutils literal notranslate"><span class="pre">in/1-2</span></code>, <code class="docutils literal notranslate"><span class="pre">rd/1-2</span></code>) suspend the process
 until a matching tuple becomes available. The non-blocking variants
 (<code class="docutils literal notranslate"><span class="pre">in_noblock/1-2</span></code>, <code class="docutils literal notranslate"><span class="pre">rd_noblock/1-2</span></code>) fail immediately if no matching
-tuple is found.</p>
-<p>Tuples are matched using standard Prolog unification, allowing patterns
-with variables.</p>
+tuple is found. There are also additional predicates for list
+operations. Tuples are matched using unification.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -283,6 +283,11 @@ link in a web browser.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>The main library entities are the <code class="docutils literal notranslate"><span class="pre">linda_server</span></code> and <code class="docutils literal notranslate"><span class="pre">linda_client</span></code>
+categories. These categories provide a clean separation between server
+and client code. For backward compatibility with the previous version of
+this library, a <code class="docutils literal notranslate"><span class="pre">linda</span></code> object importing both categories is also
+provided. The usage examples that follow use this object.</p>
 <section id="starting-a-server">
 <h3>Starting a server<a class="headerlink" href="#starting-a-server" title="Link to this heading"></a></h3>
 <p>To start a Linda server that prints its address:</p>
@@ -424,41 +429,39 @@ no   <span class="c">% if no matching tuple exists</span>
 <h3>Server predicates<a class="headerlink" href="#server-predicates" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">linda</span></code> - Start server on automatic port</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">linda(+Options)</span></code> - Start server with options (see API
-documentation)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">linda(Options)</span></code> - Start server with options</p></li>
 </ul>
 </section>
 <section id="client-predicates">
 <h3>Client predicates<a class="headerlink" href="#client-predicates" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">linda_client(+Address)</span></code> - Connect to server at <code class="docutils literal notranslate"><span class="pre">Host:Port</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">linda_client(Address)</span></code> - Connect to server at <code class="docutils literal notranslate"><span class="pre">Host:Port</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">close_client</span></code> - Close connection</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">shutdown_server</span></code> - Request server shutdown</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">linda_timeout(?Old,</span> <span class="pre">+New)</span></code> - Get/set timeout</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">linda_timeout(Old,</span> <span class="pre">New)</span></code> - Get/set timeout</p></li>
 </ul>
 </section>
-<section id="tuple-operations-single-default-server">
-<h3>Tuple operations (single/default server)<a class="headerlink" href="#tuple-operations-single-default-server" title="Link to this heading"></a></h3>
+<section id="tuple-predicates-single-default-server">
+<h3>Tuple predicates (single/default server)<a class="headerlink" href="#tuple-predicates-single-default-server" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">out(+Tuple)</span></code> - Add tuple to space</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">in(?Tuple)</span></code> - Remove matching tuple (blocking)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">in_noblock(?Tuple)</span></code> - Remove matching tuple (non-blocking)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">in(+TupleList,</span> <span class="pre">?Tuple)</span></code> - Remove one of several tuples (blocking)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">in_list(+TupleList,</span> <span class="pre">?Tuple)</span></code> - Remove one of several tuples
+<li><p><code class="docutils literal notranslate"><span class="pre">out(Tuple)</span></code> - Add tuple to space</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">in(Tuple)</span></code> - Remove matching tuple (blocking)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">in_noblock(Tuple)</span></code> - Remove matching tuple (non-blocking)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">in(TupleList,</span> <span class="pre">Tuple)</span></code> - Remove one of several tuples (blocking)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">in_list(TupleList,</span> <span class="pre">Tuple)</span></code> - Remove one of several tuples
 (blocking)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">rd(?Tuple)</span></code> - Read matching tuple (blocking)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">rd_noblock(?Tuple)</span></code> - Read matching tuple (non-blocking)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">rd(+TupleList,</span> <span class="pre">?Tuple)</span></code> - Read one of several tuples (blocking)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">rd_list(+TupleList,</span> <span class="pre">?Tuple)</span></code> - Read one of several tuples
-(blocking)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">findall_rd_noblock(?Template,</span> <span class="pre">+Tuple,</span> <span class="pre">?List)</span></code> - Collect all
-matching tuples (atomic read)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">findall_in_noblock(?Template,</span> <span class="pre">+Tuple,</span> <span class="pre">?List)</span></code> - Collect and remove
-all matching tuples (atomic remove)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rd(Tuple)</span></code> - Read matching tuple (blocking)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rd_noblock(Tuple)</span></code> - Read matching tuple (non-blocking)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rd(TupleList,</span> <span class="pre">Tuple)</span></code> - Read one of several tuples (blocking)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rd_list(TupleList,</span> <span class="pre">Tuple)</span></code> - Read one of several tuples (blocking)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">findall_rd_noblock(Template,</span> <span class="pre">Tuple,</span> <span class="pre">List)</span></code> - Collect all matching
+tuples (atomic read)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">findall_in_noblock(Template,</span> <span class="pre">Tuple,</span> <span class="pre">List)</span></code> - Collect and remove all
+matching tuples (atomic remove)</p></li>
 </ul>
 </section>
-<section id="tuple-operations-multiple-servers">
-<h3>Tuple operations (multiple servers)<a class="headerlink" href="#tuple-operations-multiple-servers" title="Link to this heading"></a></h3>
+<section id="tuple-predicates-multiple-servers">
+<h3>Tuple predicates (multiple servers)<a class="headerlink" href="#tuple-predicates-multiple-servers" title="Link to this heading"></a></h3>
 <p>Variants of the predicates above with an additional first argument for
 the server address or the server alias (an atom; default is
 <code class="docutils literal notranslate"><span class="pre">blackboard</span></code>).</p>

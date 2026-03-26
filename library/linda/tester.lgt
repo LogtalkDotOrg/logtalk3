@@ -27,7 +27,7 @@
 		logtalk_load(options(loader)),
 		logtalk_load(os(loader)),
 		logtalk_load(sockets(loader)),
-		logtalk_load(linda, [debug(on), source_data(on), suspicious_calls(silent)]),
+		logtalk_load([linda_server, linda_client, linda], [debug(on), source_data(on), suspicious_calls(silent)]),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests, [hook(lgtunit)]),
 		tests::run

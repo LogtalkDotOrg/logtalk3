@@ -10,18 +10,17 @@ Prolog, and XVM.
 
 The tuple-space is a shared blackboard where processes can:
 
-- **Write** tuples using ``out/1-2``
-- **Read** tuples (without removing) using ``rd/1-2`` and
-  ``rd_noblock/1-2``
-- **Remove** tuples using ``in/1-2`` and ``in_noblock/1-2``
+- **Write** tuples using the ``out/1-2`` predicates
+- **Read** tuples (without removing) using the ``rd/1-2`` and
+  ``rd_noblock/1-2`` predicates
+- **Remove** tuples using the ``in/1-2`` and ``in_noblock/1-2``
+  predicates
 
-The blocking operations (``in/1-2``, ``rd/1-2``) suspend the process
+The blocking predicates (``in/1-2``, ``rd/1-2``) suspend the process
 until a matching tuple becomes available. The non-blocking variants
 (``in_noblock/1-2``, ``rd_noblock/1-2``) fail immediately if no matching
-tuple is found.
-
-Tuples are matched using standard Prolog unification, allowing patterns
-with variables.
+tuple is found. There are also additional predicates for list
+operations. Tuples are matched using unification.
 
 API documentation
 -----------------
@@ -50,6 +49,12 @@ To test this library predicates, load the ``tester.lgt`` file:
 
 Usage
 -----
+
+The main library entities are the ``linda_server`` and ``linda_client``
+categories. These categories provide a clean separation between server
+and client code. For backward compatibility with the previous version of
+this library, a ``linda`` object importing both categories is also
+provided. The usage examples that follow use this object.
 
 Starting a server
 ~~~~~~~~~~~~~~~~~
@@ -236,37 +241,35 @@ Server predicates
 ~~~~~~~~~~~~~~~~~
 
 - ``linda`` - Start server on automatic port
-- ``linda(+Options)`` - Start server with options (see API
-  documentation)
+- ``linda(Options)`` - Start server with options
 
 Client predicates
 ~~~~~~~~~~~~~~~~~
 
-- ``linda_client(+Address)`` - Connect to server at ``Host:Port``
+- ``linda_client(Address)`` - Connect to server at ``Host:Port``
 - ``close_client`` - Close connection
 - ``shutdown_server`` - Request server shutdown
-- ``linda_timeout(?Old, +New)`` - Get/set timeout
+- ``linda_timeout(Old, New)`` - Get/set timeout
 
-Tuple operations (single/default server)
+Tuple predicates (single/default server)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``out(+Tuple)`` - Add tuple to space
-- ``in(?Tuple)`` - Remove matching tuple (blocking)
-- ``in_noblock(?Tuple)`` - Remove matching tuple (non-blocking)
-- ``in(+TupleList, ?Tuple)`` - Remove one of several tuples (blocking)
-- ``in_list(+TupleList, ?Tuple)`` - Remove one of several tuples
+- ``out(Tuple)`` - Add tuple to space
+- ``in(Tuple)`` - Remove matching tuple (blocking)
+- ``in_noblock(Tuple)`` - Remove matching tuple (non-blocking)
+- ``in(TupleList, Tuple)`` - Remove one of several tuples (blocking)
+- ``in_list(TupleList, Tuple)`` - Remove one of several tuples
   (blocking)
-- ``rd(?Tuple)`` - Read matching tuple (blocking)
-- ``rd_noblock(?Tuple)`` - Read matching tuple (non-blocking)
-- ``rd(+TupleList, ?Tuple)`` - Read one of several tuples (blocking)
-- ``rd_list(+TupleList, ?Tuple)`` - Read one of several tuples
-  (blocking)
-- ``findall_rd_noblock(?Template, +Tuple, ?List)`` - Collect all
-  matching tuples (atomic read)
-- ``findall_in_noblock(?Template, +Tuple, ?List)`` - Collect and remove
-  all matching tuples (atomic remove)
+- ``rd(Tuple)`` - Read matching tuple (blocking)
+- ``rd_noblock(Tuple)`` - Read matching tuple (non-blocking)
+- ``rd(TupleList, Tuple)`` - Read one of several tuples (blocking)
+- ``rd_list(TupleList, Tuple)`` - Read one of several tuples (blocking)
+- ``findall_rd_noblock(Template, Tuple, List)`` - Collect all matching
+  tuples (atomic read)
+- ``findall_in_noblock(Template, Tuple, List)`` - Collect and remove all
+  matching tuples (atomic remove)
 
-Tuple operations (multiple servers)
+Tuple predicates (multiple servers)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Variants of the predicates above with an additional first argument for

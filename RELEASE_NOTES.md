@@ -50,6 +50,10 @@ Library
 * REMOVED: The `linda` library `shutdown_server/0` and `close_client/0`
 predicates.
 
+* CHANGED: The `linda` library to provide `linda_server` and `linda_client`
+categories. A default `linda` object importing both categories is provided
+for backward compatibility.
+
 * CHANGED: The `linda` library exception when a client is not connected from
 `linda_error(not_connected)` to `linda_error(not_connected(AddressOrAlias))`.
 

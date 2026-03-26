@@ -54,10 +54,16 @@
 		linda::linda_client(Address).
 
 	cleanup :-
-		% Clean up any remaining connections
-		test_server_address_(Address),
-		catch(linda::shutdown_server(Address), _, true),
-		catch(linda::close_client(Address), _, true),
+		% Clean up any remaining connections;
+		catch(
+			ignore((
+				test_server_address_(Address),
+				linda::linda_client(Address),
+				linda::shutdown_server(Address)
+			)),
+			_,
+			true
+		),
 		retractall(test_server_address_(_)).
 
 	start_test_server :-
