@@ -114,6 +114,9 @@ backends.
 * FIXED: Repeated test name for the `hook_objects` library when running on
 Windows.
 
+* FIXED: Bug in the `sockets` library with the SWI-Prolog backend where IPv4
+and IPv6 mismatches could happen between client and server.
+
 Tools
 -----
 

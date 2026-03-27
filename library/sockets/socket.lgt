@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:10:2,
+		version is 0:11:0,
 		author is 'Paulo Moura',
-		date is 2026-03-10,
+		date is 2026-03-27,
 		comment is 'Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.',
@@ -315,11 +315,10 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 
-	% SWI-Prolog: tcp_socket/1, tcp_connect/2, tcp_bind/2, tcp_listen/2, tcp_accept/3
+	% SWI-Prolog: tcp_connect/3, tcp_bind/2, tcp_listen/2, tcp_accept/3
 
-	client_open_(Host, Port, Input, Output, Options) :-
-		socket:tcp_socket(Socket),
-		socket:tcp_connect(Socket, Host:Port, StreamPair),
+	client_open_(Host, Port, StreamPair, StreamPair, Options) :-
+		socket:tcp_connect(Host:Port, StreamPair, [domain(inet), nodelay(true)]),
 		stream_pair(StreamPair, Input, Output),
 		memberchk(type(Type), Options),
 		set_stream(Input, type(Type)),
@@ -332,17 +331,18 @@
 		socket:tcp_bind(Socket, Port),
 		socket:tcp_listen(Socket, N).
 
-	server_accept_(server_socket(Socket, _), Input, Output, client(Client), Options) :-
+	server_accept_(server_socket(Socket, _), StreamPair, StreamPair, client(Client), Options) :-
 		socket:tcp_accept(Socket, ClientSocket, Peer),
-		socket:tcp_open_socket(ClientSocket, Input, Output),
+		socket:tcp_open_socket(ClientSocket, StreamPair),
+		stream_pair(StreamPair, Input, Output),
 		memberchk(type(Type), Options),
 		set_stream(Input, type(Type)),
 		set_stream(Output, type(Type)),
 		peer_to_host_port(Peer, Client).
 
-	peer_to_host_port(ip(A, B, C, D), Host) :-
-		!,
-		format(atom(Host), '~w.~w.~w.~w', [A, B, C, D]).
+	peer_to_host_port(Peer, Host) :-
+		socket:ip_name(Peer, Host),
+		!.
 	peer_to_host_port(Host, Host) :-
 		atom(Host),
 		!.
@@ -370,7 +370,7 @@
 			;	Port0 = Port,
 				sockets:socket_server_open(Port0, ServerSocket, [reuseaddr(true)])
 			),
-			% SICStus may return the port as an atom, convert to integer
+			% Trealla may return the port as an atom, convert to integer
 			(	atom(Port0) ->
 				{atom_codes(Port0, Codes), number_codes(PortInt, Codes)}
 			;	PortInt = Port0
