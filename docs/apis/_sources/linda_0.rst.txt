@@ -15,14 +15,13 @@ Linda tuple-space implementation for process communication. Provides a server th
 
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
-| **Date:** 2026-03-26
+| **Date:** 2026-03-27
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
 
 
 | **Imports:**
-|    ``public`` :ref:`options <options/0>`
 |    ``public`` :ref:`linda_server <linda_server/0>`
 |    ``public`` :ref:`linda_client <linda_client/0>`
 

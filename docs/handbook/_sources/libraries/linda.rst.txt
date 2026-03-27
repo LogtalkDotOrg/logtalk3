@@ -54,7 +54,9 @@ The main library entities are the ``linda_server`` and ``linda_client``
 categories. These categories provide a clean separation between server
 and client code. For backward compatibility with the previous version of
 this library, a ``linda`` object importing both categories is also
-provided. The usage examples that follow use this object.
+provided. The usage examples that follow use this object. An object
+importing the ``linda_server`` category must use the ``threaded/0``
+directive.
 
 Starting a server
 ~~~~~~~~~~~~~~~~~

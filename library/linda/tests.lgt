@@ -25,11 +25,9 @@
 	:- info([
 		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-03-26,
+		date is 2026-03-27,
 		comment is 'Unit tests for the "linda" library.'
 	]).
-
-	:- threaded.
 
 	:- uses(os, [
 		sleep/1
@@ -48,12 +46,12 @@
 	:- dynamic(test_server_address_/1).
 
 	setup :-
-		% Start server in background thread
-		threaded_ignore(start_test_server),
+		linda::linda([Address-assertz(test_server_address_(Address))]),
 		wait_for_server,
 		% Connect to the server for client tests
 		test_server_address_(Address),
-		linda::linda_client(Address).
+		linda::linda_client(Address),
+		wait_for_client.
 
 	cleanup :-
 		% Clean up any remaining connections;
@@ -61,21 +59,26 @@
 			ignore((
 				test_server_address_(Address),
 				linda::linda_client(Address),
-				linda::shutdown_server(Address)
+				linda::shutdown_server(Address),
+				linda::close_client(Address)
 			)),
 			_,
 			true
 		),
 		retractall(test_server_address_(_)).
 
-	start_test_server :-
-		linda::linda([Address-assertz(test_server_address_(Address))]).
-
 	wait_for_server :-
 		(	test_server_address_(_) ->
 			true
 		;	sleep(0.1),
 			wait_for_server
+		).
+
+	wait_for_client :-
+		(	catch(linda<<client_engine_(_, _), _, fail) ->
+			true
+		;	sleep(0.1),
+			wait_for_client
 		).
 
 	% ==========================================================================

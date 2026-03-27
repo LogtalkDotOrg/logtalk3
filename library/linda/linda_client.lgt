@@ -19,12 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- category(linda_client).
+:- category(linda_client,
+	extends(options)).
 
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-26,
+		date is 2026-03-27,
 		comment is 'Linda client predicates and client-side connection state. Import into a threaded object together with the linda_server category.'
 	]).
 
@@ -258,15 +259,15 @@
 
 	linda_client(Host:Port, UserOptions) :-
 		context(Context),
-		::check_options(UserOptions),
-		::merge_options(UserOptions, Options),
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
 		(	client_connection_input_(Host:Port, _) ->
 			throw(error(linda_error(already_connected), Context))
 		;	catch(
 				(	socket::client_open(Host, Port, Input, Output, [type(text)]),
 					assertz(client_connection_input_(Host:Port, Input)),
 					assertz(client_connection_output_(Host:Port, Output)),
-					::option(alias(Alias), Options),
+					^^option(alias(Alias), Options),
 					assertz(client_connection_alias_(Host:Port, Alias))
 				),
 				Error,
