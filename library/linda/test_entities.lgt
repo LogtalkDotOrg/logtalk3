@@ -19,25 +19,29 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(threads, supported)).
+:- object(server,
+	imports(linda_server)).
 
-	:- initialization((
-		set_logtalk_flag(report, warnings),
-		logtalk_load(basic_types(loader)),
-		logtalk_load(options(loader)),
-		logtalk_load(os(loader)),
-		logtalk_load(sockets(loader)),
-		logtalk_load([linda_server, linda_client, linda], [debug(on), source_data(on), suspicious_calls(silent)]),
-		logtalk_load(lgtunit(loader)),
-		logtalk_load(test_entities, [optimize(on)]),
-		logtalk_load(tests, [hook(lgtunit)]),
-		tests::run
-	)).
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-03-27,
+		comment is 'Description'
+	]).
 
-:- else.
+	:- threaded.
 
-	:- initialization((
-		write('(not applicable)'), nl
-	)).
+:- end_object.
 
-:- endif.
+
+:- object(client,
+	imports(linda_client)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-03-27,
+		comment is 'Description'
+	]).
+
+:- end_object.
