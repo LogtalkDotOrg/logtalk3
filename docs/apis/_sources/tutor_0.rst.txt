@@ -14,13 +14,15 @@ This object adds explanations and suggestions to selected compiler and developer
 |    ``logtalk_load(tutor(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:85:0
-| **Date:** 2026-03-19
+| **Version:** 0:86:0
+| **Date:** 2026-03-28
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
+| **Imports:**
+|    ``public`` :ref:`tutor_explanations <tutor_explanations/0>`
 | **Provides:**
 |    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
 | **Uses:**
@@ -32,7 +34,7 @@ This object adds explanations and suggestions to selected compiler and developer
    - Usage: Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`tutor_explanations/0::explain//1`  
 
 .. contents::
    :local:
@@ -41,24 +43,7 @@ This object adds explanations and suggestions to selected compiler and developer
 Public predicates
 -----------------
 
-.. index:: explain//1
-.. _tutor/0::explain//1:
-
-``explain//1``
-^^^^^^^^^^^^^^
-
-Generates an explanation for a message.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``explain(Message)``
-| **Mode and number of proofs:**
-|    ``explain(@callable)`` - ``zero_or_one``
-
-
-------------
+(no local declarations; see entity ancestors if any)
 
 Protected predicates
 --------------------

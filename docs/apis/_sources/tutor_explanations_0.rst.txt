@@ -1,0 +1,73 @@
+.. index:: single: tutor_explanations
+.. _tutor_explanations/0:
+
+.. rst-class:: right
+
+**category**
+
+``tutor_explanations``
+======================
+
+This category provides explanations and suggestions to selected compiler and developer tool warning and error messages.
+
+| **Availability:** 
+|    ``logtalk_load(tutor(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:86:0
+| **Date:** 2026-03-28
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: explain//1
+.. _tutor_explanations/0::explain//1:
+
+``explain//1``
+^^^^^^^^^^^^^^
+
+Generates an explanation for a message.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``explain(Message)``
+| **Mode and number of proofs:**
+|    ``explain(@callable)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

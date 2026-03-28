@@ -177,6 +177,10 @@ scripts to also print the batch run time when using the `-o minimal` option.
 * UPDATED: The `tutor` tool to explain the new `dead_code_scanner` tool linter
 warnings.
 
+* UPDATED: The `tutor` tool to provide a `tutor_explanations` category with
+the public `explain//1` non-terminal that can be used independently by other
+tools.
+
 * FIXED: Bug in the `code_metrics` tool `cc_metric::rdirectory_score/2`
 predicate where the top directory score was ignored.
 

@@ -21,5 +21,5 @@
 
 :- initialization((
 	logtalk_load(basic_types(loader)),
-	logtalk_load(tutor)
+	logtalk_load([tutor_explanations, tutor], [optimize(on)])
 )).
