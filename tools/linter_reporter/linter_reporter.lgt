@@ -19,14 +19,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	create_logtalk_flag(linter_reporter_file, './linter_warnings.sarif', [type(atom), keep(true)]),
-	create_logtalk_flag(linter_reporter_include_explanations, false, [type(boolean), keep(true)])
-)).
-
-
 :- object(linter_reporter,
-	imports(tutor_explanations)).
+	imports((tutor_explanations, options))).
 
 	:- info([
 		version is 1:0:0,
@@ -34,14 +28,21 @@
 		date is 2026-03-29,
 		comment is 'Intercepts compiler linter warnings and exports them as SARIF reports.',
 		remarks is [
-			'Usage' - 'Load this tool before compiling code to be checked by the built-in linter. Call ``enable/0`` before compiling code, ``disable/0`` when finished collecting warnings, and ``report/0-1`` to generate the SARIF report from the cached warnings.'
+			'Usage' - 'Load this tool before compiling code to be checked by the built-in linter. Call ``enable/0-1`` before compiling code, ``disable/0`` when finished collecting warnings, and ``report/0-1`` to generate the SARIF report from the cached warnings.'
 		]
 	]).
 
 	:- public(enable/0).
 	:- mode(enable, one).
 	:- info(enable/0, [
-		comment is 'Enables warning collection and starts a fresh warning collection session.'
+		comment is 'Enables warning collection and starts a fresh warning collection session using the default options.'
+	]).
+
+	:- public(enable/1).
+	:- mode(enable(+list(compound)), one_or_error).
+	:- info(enable/1, [
+		comment is 'Enables warning collection and starts a fresh warning collection session using the given options.',
+		argnames is ['Options']
 	]).
 
 	:- public(disable/0).
@@ -80,7 +81,7 @@
 	:- public(report/0).
 	:- mode(report, one).
 	:- info(report/0, [
-		comment is 'Writes a SARIF report for the currently cached warnings to the file configured by the ``linter_reporter_file`` flag.'
+		comment is 'Writes a SARIF report for the currently cached warnings to the default file ``./linter_warnings.sarif``.'
 	]).
 
 	:- public(report/1).
@@ -118,6 +119,14 @@
 	:- info(recorded_warning_/4, [
 		comment is 'Caches collected warnings together with their sequence number, flag, normalized message term, and printed message tokens.',
 		argnames is ['Sequence', 'Flag', 'Message', 'Tokens']
+	]).
+
+	:- private(collection_options_/1).
+	:- dynamic(collection_options_/1).
+	:- mode(collection_options_(-list(compound)), zero_or_one).
+	:- info(collection_options_/1, [
+		comment is 'Stores the merged options for the current warning collection session.',
+		argnames is ['Options']
 	]).
 
 	:- uses(git, [
@@ -162,7 +171,14 @@
 		fail.
 
 	enable :-
+		enable([]).
+
+	enable(UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
 		retractall(enabled_),
+		retractall(collection_options_(_)),
+		assertz(collection_options_(Options)),
 		assertz(enabled_),
 		reset.
 
@@ -189,8 +205,7 @@
 		flag_counts(Warnings, FlagCounts).
 
 	report :-
-		{current_logtalk_flag(linter_reporter_file, File)},
-		report(file(File)).
+		report(file('./linter_warnings.sarif')).
 
 	report(Sink) :-
 		assertz(reporting_),
@@ -261,7 +276,8 @@
 		logtalk::print_message_tokens(Stream, '', Tokens).
 
 	explanation_text(Message, ExplanationText) :-
-		{current_logtalk_flag(linter_reporter_include_explanations, true)},
+		collection_options_(Options),
+		^^option(explanations(true), Options),
 		phrase(^^explain(Message), Explanation),
 		warning_text(Explanation, ExplanationText).
 
@@ -504,5 +520,10 @@
 	ground_term_copy(Term, GroundTerm) :-
 		copy_term(Term, GroundTerm),
 		numbervars(GroundTerm, 0, _).
+
+	default_option(explanations(false)).
+
+	valid_option(explanations(true)).
+	valid_option(explanations(false)).
 
 :- end_object.

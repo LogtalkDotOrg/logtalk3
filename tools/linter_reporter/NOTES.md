@@ -41,14 +41,27 @@ Load the tool before loading the code to be checked:
 	| ?- logtalk_load(linter_reporter(loader)).
     ...
 
+Enable collecting linter warnings data using default options:
+
     | ?- linter_reporter::enable.
     true.
+
+Or using explicit options:
+
+    | ?- linter_reporter::enable([explanations(true)]).
+    true.
+
+Load the code for which you want a SARIF report generated:
 
     | ?- logtalk_load(my_application(loader)).
     ...
 
+Disable further collecting of linter warnings:
+
     | ?- linter_reporter::disable.
     true.
+
+Save the SARIF report:
 
     | ?- linter_reporter::report.
 
@@ -68,18 +81,16 @@ explanation-enabled configurations.
 Usage
 -----
 
-Load the tool, call `enable/0` before compiling the code to be checked, call
+Load the tool, call `enable/0-1` before compiling the code to be checked, call
 `disable/0` when warning collection is finished, and then call `report/0-1` to
-generate the SARIF report from the cached warnings.
+generate the SARIF report from the cached warnings. The `report/0` predicate
+writes the SARIF report to `./linter_warnings.sarif`.
 
 
-Runtime flags
--------------
+Options
+-------
 
-- `linter_reporter_file`
-  Path to the generated SARIF report file.
-
-- `linter_reporter_include_explanations`
-  Boolean flag. When set to `true` (default is `false`), the tool enriches
-  warnings with explanations from the `tutor_explanations` category provided
-  by the `tutor` tool.
+- `explanations(Boolean)`
+  Boolean option accepted by `enable/1`. When set to `true` (default is
+  `false`), the tool enriches warnings with explanations from the
+  `tutor_explanations` category provided by the `tutor` tool.

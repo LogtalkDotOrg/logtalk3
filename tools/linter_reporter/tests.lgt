@@ -30,7 +30,7 @@
 	]).
 
 	:- uses(linter_reporter, [
-		enable/0, disable/0, reset/0, warning/1, warnings/1, summary/1, report/1
+		enable/0, enable/1, disable/0, reset/0, warning/1, warnings/1, summary/1, report/0, report/1
 	]).
 
 	:- uses(json, [
@@ -57,7 +57,7 @@
 	cover(linter_reporter).
 
 	cleanup :-
-		^^clean_file('linter_reporter.sarif').
+		^^clean_file('linter_warnings.sarif').
 
 	test(lr_warnings_01, deterministic) :-
 		prepare_run(false),
@@ -97,11 +97,10 @@
 
 	test(lr_report_02, deterministic) :-
 		prepare_run(true),
-		^^file_path('linter_reporter.sarif', ReportFile),
+		^^file_path('linter_warnings.sarif', ReportFile),
 		report(file(ReportFile)),
 		assertion(os::file_exists(ReportFile)),
-		report(atom(Atom)),
-		json_parse(atom(Atom), SARIF),
+		json_parse(file(ReportFile), SARIF),
 		SARIF = {'$schema'-'https://json.schemastore.org/sarif-2.1.0.json', version-'2.1.0', runs-[Run]},
 		sarif_run_ok(Run, _Rules, _Properties, Results),
 		assertion(Results \== []).
@@ -114,7 +113,7 @@
 
 	test(lr_report_schema_02, deterministic) :-
 		prepare_run(true),
-		^^file_path('linter_reporter.sarif', ReportFile),
+		^^file_path('linter_warnings.sarif', ReportFile),
 		report(file(ReportFile)),
 		json_parse(file(ReportFile), SARIF),
 		validate_sarif(SARIF).
@@ -136,12 +135,10 @@
 		).
 
 	prepare_run(Explainations) :-
-		^^file_path('linter_reporter.sarif', ReportFile),
+		^^file_path('linter_warnings.sarif', ReportFile),
 		^^clean_file(ReportFile),
-		{set_logtalk_flag(linter_reporter_file, ReportFile)},
-		{set_logtalk_flag(linter_reporter_include_explanations, Explainations)},
 		reset,
-		enable,
+		enable([explanations(Explainations)]),
 		logtalk_load([errors(warnings), errors(main_include_compiler_warning)], [reload(always)]),
 		disable.
 

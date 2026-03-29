@@ -22,6 +22,7 @@
 :- initialization((
 	logtalk_load(git(loader)),
 	logtalk_load(json(loader)),
+	logtalk_load(options(loader)),
 	logtalk_load(os(loader)),
 	logtalk_load(term_io(loader)),
 	logtalk_load(tutor(tutor_explanations), [optimize(on)]),

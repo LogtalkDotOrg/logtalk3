@@ -267,6 +267,7 @@
 <div class="line"><strong>Imports:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="tutor_explanations_0.html#tutor-explanations-0"><span class="std std-ref">tutor_explanations</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="options_0.html#options-0"><span class="std std-ref">options</span></a></div>
 </div>
 <div class="line"><strong>Provides:</strong></div>
 <div class="line-block">
@@ -290,13 +291,13 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Usage: Load this tool before compiling code to be checked by the built-in linter. Call <code class="docutils literal notranslate"><span class="pre">enable/0</span></code> before compiling code, <code class="docutils literal notranslate"><span class="pre">disable/0</span></code> when finished collecting warnings, and <code class="docutils literal notranslate"><span class="pre">report/0-1</span></code> to generate the SARIF report from the cached warnings.</p></li>
+<li><p>Usage: Load this tool before compiling code to be checked by the built-in linter. Call <code class="docutils literal notranslate"><span class="pre">enable/0-1</span></code> before compiling code, <code class="docutils literal notranslate"><span class="pre">disable/0</span></code> when finished collecting warnings, and <code class="docutils literal notranslate"><span class="pre">report/0-1</span></code> to generate the SARIF report from the cached warnings.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="tutor_explanations_0.html#tutor-explanations-0-explain-1"><span class="std std-ref">explain//1</span></a></div>
+<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="tutor_explanations_0.html#tutor-explanations-0-explain-1"><span class="std std-ref">explain//1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
@@ -304,32 +305,34 @@
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
 <li><p><a class="reference internal" href="#enable-0" id="id2"><code class="docutils literal notranslate"><span class="pre">enable/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#disable-0" id="id3"><code class="docutils literal notranslate"><span class="pre">disable/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#reset-0" id="id4"><code class="docutils literal notranslate"><span class="pre">reset/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#warning-1" id="id5"><code class="docutils literal notranslate"><span class="pre">warning/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#warnings-1" id="id6"><code class="docutils literal notranslate"><span class="pre">warnings/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#summary-1" id="id7"><code class="docutils literal notranslate"><span class="pre">summary/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#report-0" id="id8"><code class="docutils literal notranslate"><span class="pre">report/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#report-1" id="id9"><code class="docutils literal notranslate"><span class="pre">report/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#enable-1" id="id3"><code class="docutils literal notranslate"><span class="pre">enable/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#disable-0" id="id4"><code class="docutils literal notranslate"><span class="pre">disable/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#reset-0" id="id5"><code class="docutils literal notranslate"><span class="pre">reset/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#warning-1" id="id6"><code class="docutils literal notranslate"><span class="pre">warning/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#warnings-1" id="id7"><code class="docutils literal notranslate"><span class="pre">warnings/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#summary-1" id="id8"><code class="docutils literal notranslate"><span class="pre">summary/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#report-0" id="id9"><code class="docutils literal notranslate"><span class="pre">report/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#report-1" id="id10"><code class="docutils literal notranslate"><span class="pre">report/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id10">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id11">Private predicates</a></p>
+<li><p><a class="reference internal" href="#protected-predicates" id="id11">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id12">Private predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#enabled-0" id="id12"><code class="docutils literal notranslate"><span class="pre">enabled_/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#reporting-0" id="id13"><code class="docutils literal notranslate"><span class="pre">reporting_/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#warning-sequence-1" id="id14"><code class="docutils literal notranslate"><span class="pre">warning_sequence_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#recorded-warning-4" id="id15"><code class="docutils literal notranslate"><span class="pre">recorded_warning_/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#enabled-0" id="id13"><code class="docutils literal notranslate"><span class="pre">enabled_/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#reporting-0" id="id14"><code class="docutils literal notranslate"><span class="pre">reporting_/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#warning-sequence-1" id="id15"><code class="docutils literal notranslate"><span class="pre">warning_sequence_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#recorded-warning-4" id="id16"><code class="docutils literal notranslate"><span class="pre">recorded_warning_/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#collection-options-1" id="id17"><code class="docutils literal notranslate"><span class="pre">collection_options_/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operators" id="id16">Operators</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id18">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="enable-0">
 <span id="linter-reporter-0-enable-0"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">enable/0</span></code></a><a class="headerlink" href="#enable-0" title="Link to this heading"></a></h3>
-<p>Enables warning collection and starts a fresh warning collection session.</p>
+<p>Enables warning collection and starts a fresh warning collection session using the default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -344,8 +347,29 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="enable-1">
+<span id="linter-reporter-0-enable-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">enable/1</span></code></a><a class="headerlink" href="#enable-1" title="Link to this heading"></a></h3>
+<p>Enables warning collection and starts a fresh warning collection session using the given options.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">enable(Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">enable(+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="disable-0">
-<span id="linter-reporter-0-disable-0"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">disable/0</span></code></a><a class="headerlink" href="#disable-0" title="Link to this heading"></a></h3>
+<span id="linter-reporter-0-disable-0"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">disable/0</span></code></a><a class="headerlink" href="#disable-0" title="Link to this heading"></a></h3>
 <p>Disables warning collection while preserving the cached warnings for later reporting.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -362,7 +386,7 @@
 <hr class="docutils" />
 </section>
 <section id="reset-0">
-<span id="linter-reporter-0-reset-0"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">reset/0</span></code></a><a class="headerlink" href="#reset-0" title="Link to this heading"></a></h3>
+<span id="linter-reporter-0-reset-0"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">reset/0</span></code></a><a class="headerlink" href="#reset-0" title="Link to this heading"></a></h3>
 <p>Clears all cached warnings collected in the current session.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -379,7 +403,7 @@
 <hr class="docutils" />
 </section>
 <section id="warning-1">
-<span id="linter-reporter-0-warning-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">warning/1</span></code></a><a class="headerlink" href="#warning-1" title="Link to this heading"></a></h3>
+<span id="linter-reporter-0-warning-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">warning/1</span></code></a><a class="headerlink" href="#warning-1" title="Link to this heading"></a></h3>
 <p>Enumerates normalized linter warnings collected in the current session.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -400,7 +424,7 @@
 <hr class="docutils" />
 </section>
 <section id="warnings-1">
-<span id="linter-reporter-0-warnings-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">warnings/1</span></code></a><a class="headerlink" href="#warnings-1" title="Link to this heading"></a></h3>
+<span id="linter-reporter-0-warnings-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">warnings/1</span></code></a><a class="headerlink" href="#warnings-1" title="Link to this heading"></a></h3>
 <p>Returns the collected normalized linter warnings.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -421,7 +445,7 @@
 <hr class="docutils" />
 </section>
 <section id="summary-1">
-<span id="linter-reporter-0-summary-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">summary/1</span></code></a><a class="headerlink" href="#summary-1" title="Link to this heading"></a></h3>
+<span id="linter-reporter-0-summary-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">summary/1</span></code></a><a class="headerlink" href="#summary-1" title="Link to this heading"></a></h3>
 <p>Returns a machine-readable summary for the collected linter warnings.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -442,8 +466,8 @@
 <hr class="docutils" />
 </section>
 <section id="report-0">
-<span id="linter-reporter-0-report-0"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">report/0</span></code></a><a class="headerlink" href="#report-0" title="Link to this heading"></a></h3>
-<p>Writes a SARIF report for the currently cached warnings to the file configured by the <code class="docutils literal notranslate"><span class="pre">linter_reporter_file</span></code> flag.</p>
+<span id="linter-reporter-0-report-0"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">report/0</span></code></a><a class="headerlink" href="#report-0" title="Link to this heading"></a></h3>
+<p>Writes a SARIF report for the currently cached warnings to the default file <code class="docutils literal notranslate"><span class="pre">./linter_warnings.sarif</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -459,7 +483,7 @@
 <hr class="docutils" />
 </section>
 <section id="report-1">
-<span id="linter-reporter-0-report-1"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">report/1</span></code></a><a class="headerlink" href="#report-1" title="Link to this heading"></a></h3>
+<span id="linter-reporter-0-report-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">report/1</span></code></a><a class="headerlink" href="#report-1" title="Link to this heading"></a></h3>
 <p>Writes a SARIF report for the currently cached warnings to the given sink accepted by the <code class="docutils literal notranslate"><span class="pre">json::generate/2</span></code> predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -487,7 +511,7 @@
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <section id="enabled-0">
-<span id="linter-reporter-0-enabled-0"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">enabled_/0</span></code></a><a class="headerlink" href="#enabled-0" title="Link to this heading"></a></h3>
+<span id="linter-reporter-0-enabled-0"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">enabled_/0</span></code></a><a class="headerlink" href="#enabled-0" title="Link to this heading"></a></h3>
 <p>True when warning collection is enabled.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -504,7 +528,7 @@
 <hr class="docutils" />
 </section>
 <section id="reporting-0">
-<span id="linter-reporter-0-reporting-0"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">reporting_/0</span></code></a><a class="headerlink" href="#reporting-0" title="Link to this heading"></a></h3>
+<span id="linter-reporter-0-reporting-0"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">reporting_/0</span></code></a><a class="headerlink" href="#reporting-0" title="Link to this heading"></a></h3>
 <p>True while a SARIF report is being generated.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -521,7 +545,7 @@
 <hr class="docutils" />
 </section>
 <section id="warning-sequence-1">
-<span id="linter-reporter-0-warning-sequence-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">warning_sequence_/1</span></code></a><a class="headerlink" href="#warning-sequence-1" title="Link to this heading"></a></h3>
+<span id="linter-reporter-0-warning-sequence-1"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">warning_sequence_/1</span></code></a><a class="headerlink" href="#warning-sequence-1" title="Link to this heading"></a></h3>
 <p>Stores the last assigned warning sequence number.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -542,7 +566,7 @@
 <hr class="docutils" />
 </section>
 <section id="recorded-warning-4">
-<span id="linter-reporter-0-recorded-warning-4"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">recorded_warning_/4</span></code></a><a class="headerlink" href="#recorded-warning-4" title="Link to this heading"></a></h3>
+<span id="linter-reporter-0-recorded-warning-4"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">recorded_warning_/4</span></code></a><a class="headerlink" href="#recorded-warning-4" title="Link to this heading"></a></h3>
 <p>Caches collected warnings together with their sequence number, flag, normalized message term, and printed message tokens.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -558,6 +582,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">recorded_warning_(?integer,?atom,?compound,?list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="collection-options-1">
+<span id="linter-reporter-0-collection-options-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">collection_options_/1</span></code></a><a class="headerlink" href="#collection-options-1" title="Link to this heading"></a></h3>
+<p>Stores the merged options for the current warning collection session.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">collection_options_(Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">collection_options_(-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </section>
