@@ -1,0 +1,281 @@
+.. index:: single: linter_reporter
+.. _linter_reporter/0:
+
+.. rst-class:: right
+
+**object**
+
+``linter_reporter``
+===================
+
+Intercepts compiler linter warnings and exports them as SARIF reports.
+
+| **Availability:** 
+|    ``logtalk_load(linter_reporter(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-03-29
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`tutor_explanations <tutor_explanations/0>`
+| **Provides:**
+|    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+| **Uses:**
+|    :ref:`git <git/0>`
+|    :ref:`json <json/0>`
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`os <os/0>`
+|    :ref:`term_io <term_io/0>`
+|    :ref:`url(Representation) <url/1>`
+|    :ref:`user <user/0>`
+|    :ref:`uuid <uuid/0>`
+
+| **Remarks:**
+
+   - Usage: Load this tool before compiling code to be checked by the built-in linter. Call ``enable/0`` before compiling code, ``disable/0`` when finished collecting warnings, and ``report/0-1`` to generate the SARIF report from the cached warnings.
+
+| **Inherited public predicates:**
+|     :ref:`tutor_explanations/0::explain//1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: enable/0
+.. _linter_reporter/0::enable/0:
+
+``enable/0``
+^^^^^^^^^^^^
+
+Enables warning collection and starts a fresh warning collection session.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``enable`` - ``one``
+
+
+------------
+
+.. index:: disable/0
+.. _linter_reporter/0::disable/0:
+
+``disable/0``
+^^^^^^^^^^^^^
+
+Disables warning collection while preserving the cached warnings for later reporting.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``disable`` - ``one``
+
+
+------------
+
+.. index:: reset/0
+.. _linter_reporter/0::reset/0:
+
+``reset/0``
+^^^^^^^^^^^
+
+Clears all cached warnings collected in the current session.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``reset`` - ``one``
+
+
+------------
+
+.. index:: warning/1
+.. _linter_reporter/0::warning/1:
+
+``warning/1``
+^^^^^^^^^^^^^
+
+Enumerates normalized linter warnings collected in the current session.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``warning(Warning)``
+| **Mode and number of proofs:**
+|    ``warning(-compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: warnings/1
+.. _linter_reporter/0::warnings/1:
+
+``warnings/1``
+^^^^^^^^^^^^^^
+
+Returns the collected normalized linter warnings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``warnings(Warnings)``
+| **Mode and number of proofs:**
+|    ``warnings(-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: summary/1
+.. _linter_reporter/0::summary/1:
+
+``summary/1``
+^^^^^^^^^^^^^
+
+Returns a machine-readable summary for the collected linter warnings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``summary(Summary)``
+| **Mode and number of proofs:**
+|    ``summary(-compound)`` - ``one``
+
+
+------------
+
+.. index:: report/0
+.. _linter_reporter/0::report/0:
+
+``report/0``
+^^^^^^^^^^^^
+
+Writes a SARIF report for the currently cached warnings to the file configured by the ``linter_reporter_file`` flag.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``report`` - ``one``
+
+
+------------
+
+.. index:: report/1
+.. _linter_reporter/0::report/1:
+
+``report/1``
+^^^^^^^^^^^^
+
+Writes a SARIF report for the currently cached warnings to the given sink accepted by the ``json::generate/2`` predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``report(Sink)``
+| **Mode and number of proofs:**
+|    ``report(++compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: enabled_/0
+.. _linter_reporter/0::enabled_/0:
+
+``enabled_/0``
+^^^^^^^^^^^^^^
+
+True when warning collection is enabled.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``enabled_`` - ``zero_or_one``
+
+
+------------
+
+.. index:: reporting_/0
+.. _linter_reporter/0::reporting_/0:
+
+``reporting_/0``
+^^^^^^^^^^^^^^^^
+
+True while a SARIF report is being generated.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``reporting_`` - ``zero_or_one``
+
+
+------------
+
+.. index:: warning_sequence_/1
+.. _linter_reporter/0::warning_sequence_/1:
+
+``warning_sequence_/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Stores the last assigned warning sequence number.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``warning_sequence_(Sequence)``
+| **Mode and number of proofs:**
+|    ``warning_sequence_(-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: recorded_warning_/4
+.. _linter_reporter/0::recorded_warning_/4:
+
+``recorded_warning_/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Caches collected warnings together with their sequence number, flag, normalized message term, and printed message tokens.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``recorded_warning_(Sequence,Flag,Message,Tokens)``
+| **Mode and number of proofs:**
+|    ``recorded_warning_(?integer,?atom,?compound,?list(compound))`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

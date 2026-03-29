@@ -99,6 +99,7 @@
 <li class="toctree-l2"><a class="reference internal" href="lgtdoc.html"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linter.html"><code class="docutils literal notranslate"><span class="pre">linter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linter_reporter.html"><code class="docutils literal notranslate"><span class="pre">linter_reporter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="make.html"><code class="docutils literal notranslate"><span class="pre">make</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="mutation_testing.html"><code class="docutils literal notranslate"><span class="pre">mutation_testing</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="packs.html"><code class="docutils literal notranslate"><span class="pre">packs</span></code></a></li>
@@ -169,6 +170,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">linter</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">linter_reporter</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">make</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mutation_testing</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">packs</span></code></p></li>
@@ -184,6 +186,8 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(tools(loader)).
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">linter_reporter</span></code> tool is not loaded by default as it’s mostly
+useful for CI/CD pipelines.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code> tool is not loaded by default; however, as it
 conflicts with the <code class="docutils literal notranslate"><span class="pre">debugger</span></code> tool as both provide a debug handler
 that must be unique in a running session.</p>

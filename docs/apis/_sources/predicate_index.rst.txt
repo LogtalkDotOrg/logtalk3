@@ -3722,6 +3722,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`sampling_protocol <sampling_protocol/0::dirichlet/2>`
 
+``disable/0``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linter_reporter <linter_reporter/0::disable/0>`
+
 ``disable/1``
 -------------
 
@@ -4165,6 +4175,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`queuep <queuep/0::empty/1>`
 * :ref:`setp <setp/0::empty/1>`
 * :ref:`varlistp <varlistp/0::empty/1>`
+
+``enable/0``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linter_reporter <linter_reporter/0::enable/0>`
 
 ``enable/1``
 ------------
@@ -12929,6 +12949,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`atom <atom/0::replace_sub_atom/4>`
 
+``report/0``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linter_reporter <linter_reporter/0::report/0>`
+
+``report/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linter_reporter <linter_reporter/0::report/1>`
+
 ``report_directory/3``
 ----------------------
 
@@ -13079,6 +13119,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`counter <counter/0::reset/0>`
 * :ref:`debuggerp <debuggerp/0::reset/0>`
+* :ref:`linter_reporter <linter_reporter/0::reset/0>`
 * :ref:`mutator_protocol <mutator_protocol/0::reset/0>`
 * :ref:`packs_common <packs_common/0::reset/0>`
 * :ref:`ports_profiler <ports_profiler/0::reset/0>`
@@ -15190,6 +15231,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`statisticsp <statisticsp/0::sum_of_squares/2>`
 
+``summary/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linter_reporter <linter_reporter/0::summary/1>`
+
 ``summary/2``
 -------------
 
@@ -16634,6 +16685,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::wall_time/1>`
+
+``warning/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linter_reporter <linter_reporter/0::warning/1>`
+
+``warnings/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linter_reporter <linter_reporter/0::warnings/1>`
 
 ``weakly_connected_components/2``
 ---------------------------------

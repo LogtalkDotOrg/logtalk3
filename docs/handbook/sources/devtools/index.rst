@@ -40,6 +40,7 @@ directory in the ``NOTES.md`` file.
    lgtdoc
    lgtunit
    linter
+   linter_reporter
    make
    mutation_testing
    packs

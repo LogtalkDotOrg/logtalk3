@@ -1531,6 +1531,16 @@ To load an entity, always load the library that includes it using the goal ``log
    xunit_output <xunit_output_0>
    xunit_report <xunit_report_0>
 
+``tools/linter_reporter/``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   linter_reporter <linter_reporter_0>
+
 ``tools/mutation_testing/``
 ---------------------------
 

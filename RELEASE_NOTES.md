@@ -137,6 +137,9 @@ in the JSON and SARIF formats. A schema is provided for the JSON format.
 
 * ADDED: New `sbom` tool for generating SBOMs for loaded applications.
 
+* ADDED: New `linter_reporter` tool for generating SARIF reports with linter
+warnings for use in CI/CD pipelines.
+
 * ADDED: Support for caller diagrams to the `diagrams` tool.
 
 * ADDED: Support to the `diagrams` tool for coupling metrics overlay in entity
