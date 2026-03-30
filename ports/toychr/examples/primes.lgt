@@ -37,6 +37,8 @@
 :- object(primes,
 	extends(toychrdb)).
 
+	:- include(operators).
+
 	candidate(1) <=> true.
 	candidate(N) <=> prime(N), N1 is N - 1, candidate(N1).
 

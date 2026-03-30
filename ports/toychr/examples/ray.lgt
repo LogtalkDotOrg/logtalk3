@@ -48,6 +48,8 @@
 :- object(ray,
 	extends(toychrdb)).
 
+	:- include(operators).
+
 	:- public(scene/1).
 
 	chr_option_allow_deep_guards.

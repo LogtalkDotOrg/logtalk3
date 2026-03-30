@@ -12,6 +12,8 @@
 :- object(family,
 	extends(toychrdb)).
 
+  :- include(operators).
+
 %:- constraints
 %  % extensional predicates:
 %     person/2, father/2, mother/2,

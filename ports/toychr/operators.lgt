@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2020-2021 Paulo Moura <pmoura@logtalk.org>
-%  SPDX-FileCopyrightText: 2003 Gregory J. Duck
+%  SPDX-FileCopyrightText: 2020-2024 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2004 Gregory J. Duck
 %  SPDX-License-Identifier: GPL-2.0-or-later
 %
 %  This program is free software; you can redistribute it and/or modify
@@ -22,17 +22,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- set_logtalk_flag(hook, toychrdb).
-
-
-:- object(leq,
-	extends(toychrdb)).
-
-	:- include(operators).
-
-	leq(X,X)            <=> true.
-	leq(X,Y), leq(Y,X)  <=> X = Y.
-	leq(X,Y) \ leq(X,Y) <=> true.
-	leq(X,Y), leq(Y,Z)  ==> leq(X,Z).
-
-:- end_object.
+:- op(1180, xfx, ==>).
+:- op(1180, xfx, <=>).
+:- op(1150, fx, constraints).
+:- op(1150, fx, chr_constraint).
+:- op(1150, fx, handler).
+:- op(1150, fx, rules).
+:- if(\+ current_op(_, _, '|')).
+	:- op(1105, xfy, '|').
+:- endif.
+:- op(1100, xfx, \).
+:- op(1200, xfx, @).

@@ -36,6 +36,8 @@
 :- object(fib,
 	extends(toychrdb)).
 
+	:- include(operators).
+
 	fib(N,M1), fib(N,M2) <=> M1 = M2, fib(N,M1).
 
 	fib(0,M) ==> M = 1.
