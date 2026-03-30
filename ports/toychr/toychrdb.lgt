@@ -117,21 +117,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 %---------------------------------------------------------------------------%
 
 
-:- op(1180, xfx, ==>).
-:- op(1180, xfx, <=>).
-:- op(1150, fx, constraints).
-:- op(1150, fx, chr_constraint).
-:- op(1150, fx, handler).
-:- op(1150, fx, rules).
-:- if(\+ current_op(_, _, '|')).
-	:- op(1105, xfy, '|').
-:- endif.
-:- op(1100, xfx, \).
-:- op(1200, xfx, @).
-
-
 :- object(toychrdb,
 	implements(expanding)).
+
+	:- include(operators).
 
 	:- info([
 		version is 0:7:1,

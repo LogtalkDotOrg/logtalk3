@@ -28,6 +28,8 @@
 :- object(gcd,
 	extends(toychrdb)).
 
+	:- include(operators).
+
 	gcd(0) <=> true.
 	gcd(N) \ gcd(M) <=> M >= N | P is M - N, gcd(P).
 

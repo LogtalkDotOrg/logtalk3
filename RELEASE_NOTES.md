@@ -213,6 +213,12 @@ alias clash with the new `permutations` library.
 
 * FIXED: Tests for the `hello_world` examples when run on Windows.
 
+Ports
+-----
+
+* CHANGED: The `toychr` port by moving its operator directives to a file that
+is included in the `toychrdb` and in the example objects.
+
 Tests
 -----
 

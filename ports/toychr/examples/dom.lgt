@@ -35,6 +35,8 @@
 :- object(dom,
 	extends(toychrdb)).
 
+	:- include(operators).
+
 	dom(_, []) <=> fail.
 	dom(N, [M]) <=> N = M.
 	dom(N, Domain) <=>
