@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on March 29, 2026
+##   Last updated on March 30, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -62,7 +62,9 @@ Remove-Item ../contributions -Recurse
 (Get-Content ../../../tools/packs/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o devtools/packs.rst
 (Get-Content ../../../tools/ports_profiler/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o devtools/ports_profiler.rst
 (Get-Content ../../../tools/profiler/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o devtools/profiler.rst
+(Get-Content ../../../tools/sarif/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o devtools/sarif.rst
 (Get-Content ../../../tools/sbom/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o devtools/sbom.rst
+(Get-Content ../../../tools/tool_diagnostics/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o devtools/tool_diagnostics.rst
 (Get-Content ../../../tools/tutor/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o devtools/tutor.rst
 (Get-Content ../../../tools/wrapper/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o devtools/wrapper.rst
 

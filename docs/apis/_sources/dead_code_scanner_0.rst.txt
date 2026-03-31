@@ -14,37 +14,33 @@ A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog 
 |    ``logtalk_load(dead_code_scanner(loader))``
 
 | **Author:** Barry Evans and Paulo Moura
-| **Version:** 0:17:1
-| **Date:** 2026-03-20
+| **Version:** 0:18:0
+| **Date:** 2026-03-31
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Imports:**
+|    ``public`` :ref:`tool_diagnostics_common <tool_diagnostics_common/0>`
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
-|    :ref:`git <git/0>`
-|    :ref:`json <json/0>`
-|    :ref:`json_schema <json_schema/0>`
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
 |    :ref:`os <os/0>`
-|    :ref:`reader <reader/0>`
 |    :ref:`term_io <term_io/0>`
 |    :ref:`type <type/0>`
-|    :ref:`url(Representation) <url/1>`
 |    :ref:`user <user/0>`
-|    :ref:`uuid <uuid/0>`
 
 | **Remarks:**
 
    - Dead code: A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.
+   - Diagnostics targets: The diagnostics predicates accept the targets ``all``, ``entity(Entity)``, ``file(File)``, ``directory(Directory)``, ``rdirectory(Directory)``, ``library(Library)``, and ``rlibrary(Library)``. The ``entity(Entity)`` target requires a loaded object or category. The ``file(File)`` target accepts a loaded source file specified by name, basename, full path, or library notation. Directory and library targets restrict diagnostics to loaded files found in the given directory, recursively in its sub-directories, in the given library, or recursively in its sub-libraries.
    - Known issues: Use of local meta-calls with goal arguments only know at runtime can result in false positives. Calls from non-standard meta-predicates may be missed if the meta-calls are not optimized.
    - Requirements: Source files must be compiled with the ``source_data`` flag turned on. To avoid false positives do to meta-calls, compilation of source files with the ``optimized`` flag turned on is also advised.
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`tool_diagnostics_protocol/0::diagnostic/2`  :ref:`tool_diagnostics_protocol/0::diagnostic/3`  :ref:`tool_diagnostics_protocol/0::diagnostic_rule/5`  :ref:`tool_diagnostics_protocol/0::diagnostic_rules/1`  :ref:`tool_diagnostics_protocol/0::diagnostic_target/1`  :ref:`tool_diagnostics_protocol/0::diagnostics/2`  :ref:`tool_diagnostics_protocol/0::diagnostics/3`  :ref:`tool_diagnostics_protocol/0::diagnostics_preflight/2`  :ref:`tool_diagnostics_protocol/0::diagnostics_preflight/3`  :ref:`tool_diagnostics_protocol/0::diagnostics_summary/2`  :ref:`tool_diagnostics_protocol/0::diagnostics_summary/3`  :ref:`tool_diagnostics_protocol/0::diagnostics_tool/5`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -313,196 +309,6 @@ Scans all entities for dead code using default options.
 
 | **Mode and number of proofs:**
 |    ``all`` - ``one``
-
-
-------------
-
-.. index:: findings/3
-.. _dead_code_scanner/0::findings/3:
-
-``findings/3``
-^^^^^^^^^^^^^^
-
-Returns an ordered set of findings for a scan target using the given options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines)``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``findings(Target,Findings,Options)``
-| **Mode and number of proofs:**
-|    ``findings(+nonvar,-list(compound),+list(compound))`` - ``one``
-
-
-------------
-
-.. index:: findings/2
-.. _dead_code_scanner/0::findings/2:
-
-``findings/2``
-^^^^^^^^^^^^^^
-
-Returns an ordered set of findings for a scan target using default options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines)``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``findings(Target,Findings)``
-| **Mode and number of proofs:**
-|    ``findings(+nonvar,-list(compound))`` - ``one``
-
-
-------------
-
-.. index:: finding/3
-.. _dead_code_scanner/0::finding/3:
-
-``finding/3``
-^^^^^^^^^^^^^
-
-Enumerates, by backtracking, findings for a scan target using the given options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines)``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``finding(Target,Finding,Options)``
-| **Mode and number of proofs:**
-|    ``finding(+nonvar,-compound,+list(compound))`` - ``zero_or_more``
-
-
-------------
-
-.. index:: finding/2
-.. _dead_code_scanner/0::finding/2:
-
-``finding/2``
-^^^^^^^^^^^^^
-
-Enumerates, by backtracking, findings for a scan target using default options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines)``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``finding(Target,Finding)``
-| **Mode and number of proofs:**
-|    ``finding(+nonvar,-compound)`` - ``zero_or_more``
-
-
-------------
-
-.. index:: summary/3
-.. _dead_code_scanner/0::summary/3:
-
-``summary/3``
-^^^^^^^^^^^^^
-
-Returns a machine-readable summary for a scan target using the given options. The summary term is of the form ``summary(Target, TotalEntities, TotalFindings, Breakdown, EntitySummaries)`` where ``Breakdown`` is a ``finding_breakdown(ClassCounts, ConfidenceCounts)`` term and ``EntitySummaries`` is a list of ``entity_summary(Kind, Entity, FindingsCount, Breakdown)`` terms.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``summary(Target,Summary,Options)``
-| **Mode and number of proofs:**
-|    ``summary(+nonvar,-compound,+list(compound))`` - ``one``
-
-
-------------
-
-.. index:: summary/2
-.. _dead_code_scanner/0::summary/2:
-
-``summary/2``
-^^^^^^^^^^^^^
-
-Returns a machine-readable summary for a scan target using default options. The summary term is of the form ``summary(Target, TotalEntities, TotalFindings, Breakdown, EntitySummaries)`` where ``Breakdown`` is a ``finding_breakdown(ClassCounts, ConfidenceCounts)`` term and ``EntitySummaries`` is a list of ``entity_summary(Kind, Entity, FindingsCount, Breakdown)`` terms.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``summary(Target,Summary)``
-| **Mode and number of proofs:**
-|    ``summary(+nonvar,-compound)`` - ``one``
-
-
-------------
-
-.. index:: preflight/3
-.. _dead_code_scanner/0::preflight/3:
-
-``preflight/3``
-^^^^^^^^^^^^^^^
-
-Returns an ordered set of machine-readable preflight warnings for a scan target using the given options. Warning terms currently use the form ``missing_analysis_prerequisite(File, Prerequisite)``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``preflight(Target,Warnings,Options)``
-| **Mode and number of proofs:**
-|    ``preflight(+nonvar,-list(compound),+list(compound))`` - ``one``
-
-
-------------
-
-.. index:: preflight/2
-.. _dead_code_scanner/0::preflight/2:
-
-``preflight/2``
-^^^^^^^^^^^^^^^
-
-Returns an ordered set of machine-readable preflight warnings for a scan target using default options. Warning terms currently use the form ``missing_analysis_prerequisite(File, Prerequisite)``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``preflight(Target,Warnings)``
-| **Mode and number of proofs:**
-|    ``preflight(+nonvar,-list(compound))`` - ``one``
-
-
-------------
-
-.. index:: export/4
-.. _dead_code_scanner/0::export/4:
-
-``export/4``
-^^^^^^^^^^^^
-
-Exports a scan target using the given options in the specified format to the specified sink. Supported formats are ``json`` and ``sarif``. Exports include both findings and machine-readable preflight warnings. SARIF exports use one rule descriptor per finding class and map finding confidence to triage-aware result levels. Supported sinks are those accepted by the ``json::generate/2`` library predicate.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``export(Target,Format,Sink,Options)``
-| **Mode and number of proofs:**
-|    ``export(+nonvar,+atom,++compound,+list(compound))`` - ``one``
-
-
-------------
-
-.. index:: export/3
-.. _dead_code_scanner/0::export/3:
-
-``export/3``
-^^^^^^^^^^^^
-
-Exports a scan target using default options in the specified format to the specified sink. Supported formats are ``json`` and ``sarif``. Exports include both findings and machine-readable preflight warnings. SARIF exports use one rule descriptor per finding class and map finding confidence to triage-aware result levels. Supported sinks are those accepted by the ``json::generate/2`` library predicate.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``export(Target,Format,Sink)``
-| **Mode and number of proofs:**
-|    ``export(+nonvar,+atom,++compound)`` - ``one``
 
 
 ------------

@@ -95,7 +95,9 @@
 <li class="toctree-l2"><a class="reference internal" href="packs.html"><code class="docutils literal notranslate"><span class="pre">packs</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ports_profiler.html"><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiler.html"><code class="docutils literal notranslate"><span class="pre">profiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sarif.html"><code class="docutils literal notranslate"><span class="pre">sarif</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="sbom.html"><code class="docutils literal notranslate"><span class="pre">sbom</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tool_diagnostics.html"><code class="docutils literal notranslate"><span class="pre">tool_diagnostics</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutor.html"><code class="docutils literal notranslate"><span class="pre">tutor</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="wrapper.html"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
 </ul>
@@ -142,8 +144,9 @@
              
   <section id="linter-reporter">
 <span id="library-linter-reporter"></span><h1><code class="docutils literal notranslate"><span class="pre">linter_reporter</span></code><a class="headerlink" href="#linter-reporter" title="Link to this heading"></a></h1>
-<p>This tool intercepts compiler linter warnings and caches them to
-generate SARIF reports that can be used in CI/CD pipelines.</p>
+<p>This tool intercepts compiler linter warnings and caches them as
+machine-readable diagnostics. These diagnostics can be queried directly
+or serialized as SARIF using the standalone <code class="docutils literal notranslate"><span class="pre">sarif</span></code> tool.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>This tool API documentation is available at:</p>
@@ -166,7 +169,7 @@ generate SARIF reports that can be used in CI/CD pipelines.</p>
 <span class="k">true</span>.
 </pre></div>
 </div>
-<p>Load the code for which you want a SARIF report generated:</p>
+<p>Load the code for which you want diagnostics collected:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(my_application(loader)).
 ...
 </pre></div>
@@ -176,8 +179,21 @@ generate SARIF reports that can be used in CI/CD pipelines.</p>
 <span class="k">true</span>.
 </pre></div>
 </div>
-<p>Save the SARIF report:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> linter_reporter<span class="o">::</span>report.
+<p>Query the cached diagnostics directly:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> linter_reporter<span class="o">::</span>diagnostics(all, <span class="nv">Diagnostics</span>).
+...
+</pre></div>
+</div>
+<p>Warnings originating in an included file are not always file-scoped.
+When the <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directive appears inside an entity, the
+diagnostic context can be that entity; otherwise the context is
+typically the included file.</p>
+<p>Or generate a SARIF report using the standalone <code class="docutils literal notranslate"><span class="pre">sarif</span></code> tool:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(sarif(loader)).
+...
+
+| <span class="o">?-</span> sarif<span class="o">::</span>generate(linter_reporter, all, file(<span class="s">&#39;./linter_warnings.sarif&#39;</span>), []).
+<span class="k">true</span>.
 </pre></div>
 </div>
 </section>
@@ -188,16 +204,18 @@ generate SARIF reports that can be used in CI/CD pipelines.</p>
 </pre></div>
 </div>
 <p>The test suite reuses <code class="docutils literal notranslate"><span class="pre">errors</span></code> example files to exercise
-representative built-in linter warnings and validates SARIF export in
-both explanation-disabled and explanation-enabled configurations.</p>
+representative built-in linter warnings and validates both the
+diagnostics API and standalone SARIF generation in explanation-disabled
+and explanation-enabled configurations.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>Load the tool, call <code class="docutils literal notranslate"><span class="pre">enable/0-1</span></code> before compiling the code to be
 checked, call <code class="docutils literal notranslate"><span class="pre">disable/0</span></code> when warning collection is finished, and
-then call <code class="docutils literal notranslate"><span class="pre">report/0-1</span></code> to generate the SARIF report from the cached
-warnings. The <code class="docutils literal notranslate"><span class="pre">report/0</span></code> predicate writes the SARIF report to
-<code class="docutils literal notranslate"><span class="pre">./linter_warnings.sarif</span></code>.</p>
+then query the cached warnings using either the legacy warning
+predicates or the diagnostics protocol predicates. To generate SARIF
+from the cached diagnostics, load the standalone <code class="docutils literal notranslate"><span class="pre">sarif</span></code> tool and call
+<code class="docutils literal notranslate"><span class="pre">sarif::generate(linter_reporter,</span> <span class="pre">all,</span> <span class="pre">file('./linter_warnings.sarif'),</span> <span class="pre">[]).</span></code></p>
 </section>
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>

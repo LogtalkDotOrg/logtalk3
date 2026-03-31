@@ -1,0 +1,140 @@
+.. index:: single: sarif
+.. _sarif/0:
+
+.. rst-class:: right
+
+**object**
+
+``sarif``
+=========
+
+Shared SARIF report generator for tools implementing the diagnostics protocol.
+
+| **Availability:** 
+|    ``logtalk_load(sarif(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-03-31
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`git <git/0>`
+|    :ref:`json(ObjectRepresentation,PairRepresentation,StringRepresentation) <json/3>`
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`os <os/0>`
+|    :ref:`reader <reader/0>`
+|    :ref:`term_io <term_io/0>`
+|    :ref:`type <type/0>`
+|    :ref:`url(Representation) <url/1>`
+|    :ref:`user <user/0>`
+|    :ref:`uuid <uuid/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: term/2
+.. _sarif/0::term/2:
+
+``term/2``
+^^^^^^^^^^
+
+Returns a SARIF 2.1.0 report term for the given list of diagnostics tool specifications. Each specification must be a ``tool_spec(Tool, Target, Options)`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``term(Specs,Term)``
+| **Mode and number of proofs:**
+|    ``term(+list(compound),-compound)`` - ``one``
+
+
+------------
+
+.. index:: term/4
+.. _sarif/0::term/4:
+
+``term/4``
+^^^^^^^^^^
+
+Returns a SARIF 2.1.0 report term for a diagnostics tool target using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``term(Tool,Target,Term,Options)``
+| **Mode and number of proofs:**
+|    ``term(+object_identifier,+nonvar,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: generate/2
+.. _sarif/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates a SARIF 2.1.0 report for the given list of diagnostics tool specifications and sink accepted by the json library. Each specification must be a ``tool_spec(Tool, Target, Options)`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Specs,Sink)``
+| **Mode and number of proofs:**
+|    ``generate(+list(compound),++compound)`` - ``one``
+
+
+------------
+
+.. index:: generate/4
+.. _sarif/0::generate/4:
+
+``generate/4``
+^^^^^^^^^^^^^^
+
+Generates a SARIF 2.1.0 report for a diagnostics tool target using the given options and sink accepted by the json library.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Tool,Target,Sink,Options)``
+| **Mode and number of proofs:**
+|    ``generate(+object_identifier,+nonvar,++compound,+list(compound))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

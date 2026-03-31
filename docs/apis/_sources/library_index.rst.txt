@@ -1257,6 +1257,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
    redis <redis_0>
 
+:ref:`sarif <library_sarif>`
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   sarif <sarif_0>
+
 :ref:`sbom <library_sbom>`
 --------------------------
 
@@ -1418,6 +1428,17 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    timeout <timeout_0>
+
+:ref:`tool_diagnostics <library_tool_diagnostics>`
+--------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   tool_diagnostics_common <tool_diagnostics_common_0>
+   tool_diagnostics_protocol <tool_diagnostics_protocol_0>
 
 :ref:`toon <library_toon>`
 --------------------------

@@ -20,15 +20,16 @@
 
 
 :- object(linter_reporter,
-	imports((tutor_explanations, options))).
+	imports((tool_diagnostics_common, tutor_explanations, options))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-29,
-		comment is 'Intercepts compiler linter warnings and exports them as SARIF reports.',
+		date is 2026-03-30,
+		comment is 'Intercepts compiler linter warnings and caches them as machine-readable diagnostics.',
 		remarks is [
-			'Usage' - 'Load this tool before compiling code to be checked by the built-in linter. Call ``enable/0-1`` before compiling code, ``disable/0`` when finished collecting warnings, and ``report/0-1`` to generate the SARIF report from the cached warnings.'
+			'Usage' - 'Load this tool before compiling code to be checked by the built-in linter. Call ``enable/0-1`` before compiling code, ``disable/0`` when finished collecting warnings, and then query the cached warnings using either the legacy warning predicates or the diagnostics protocol predicates. The standalone ``sarif`` tool can generate SARIF reports by querying these diagnostics.',
+			'Diagnostics targets' - 'The diagnostics predicates accept the targets ``all``, ``entity(Entity)``, ``file(File)``, ``directory(Directory)``, ``rdirectory(Directory)``, ``library(Library)``, and ``rlibrary(Library)``. These targets simply filter the cached diagnostics collected in the current warning collection session.'
 		]
 	]).
 
@@ -48,7 +49,7 @@
 	:- public(disable/0).
 	:- mode(disable, one).
 	:- info(disable/0, [
-		comment is 'Disables warning collection while preserving the cached warnings for later reporting.'
+		comment is 'Disables warning collection while preserving the cached warnings for later querying.'
 	]).
 
 	:- public(reset/0).
@@ -78,31 +79,11 @@
 		argnames is ['Summary']
 	]).
 
-	:- public(report/0).
-	:- mode(report, one).
-	:- info(report/0, [
-		comment is 'Writes a SARIF report for the currently cached warnings to the default file ``./linter_warnings.sarif``.'
-	]).
-
-	:- public(report/1).
-	:- mode(report(++compound), one).
-	:- info(report/1, [
-		comment is 'Writes a SARIF report for the currently cached warnings to the given sink accepted by the ``json::generate/2`` predicate.',
-		argnames is ['Sink']
-	]).
-
 	:- private(enabled_/0).
 	:- dynamic(enabled_/0).
 	:- mode(enabled_, zero_or_one).
 	:- info(enabled_/0, [
 		comment is 'True when warning collection is enabled.'
-	]).
-
-	:- private(reporting_/0).
-	:- dynamic(reporting_/0).
-	:- mode(reporting_, zero_or_one).
-	:- info(reporting_/0, [
-		comment is 'True while a SARIF report is being generated.'
 	]).
 
 	:- private(warning_sequence_/1).
@@ -129,36 +110,30 @@
 		argnames is ['Options']
 	]).
 
-	:- uses(git, [
-		branch/2 as git_branch/2, commit_hash/2 as git_commit_hash/2
-	]).
-
 	:- uses(list, [
 		length/2, member/2, memberchk/2
 	]).
 
 	:- uses(logtalk, [
-		print_message_tokens/3
+		expand_library_path/2, file_type_extension/2, print_message_tokens/3
 	]).
 
 	:- uses(os, [
-		decompose_file_name/3, internal_os_path/2
+		absolute_file_name/2,
+		decompose_file_name/3, decompose_file_name/4,
+		internal_os_path/2
 	]).
 
 	:- uses(term_io, [
-		with_output_to/2, write_term_to_atom/3
+		with_output_to/2
 	]).
 
-	:- uses(url(atom), [
-		generate/2 as url_generate/2, normalize/2 as url_normalize/2
+	:- uses(type, [
+		valid/2
 	]).
 
 	:- uses(user, [
-		atomic_list_concat/2
-	]).
-
-	:- uses(uuid, [
-		uuid_v4/1
+		atomic_list_concat/2, atomic_list_concat/3
 	]).
 
 	:- multifile(logtalk::message_hook/4).
@@ -166,7 +141,6 @@
 
 	logtalk::message_hook(Message, warning(Flag), core, Tokens) :-
 		enabled_,
-		\+ reporting_,
 		catch(handle_warning(Flag, Message, Tokens), _, true),
 		fail.
 
@@ -187,7 +161,6 @@
 
 	reset :-
 		retractall(recorded_warning_(_, _, _, _)),
-		retractall(reporting_),
 		retractall(warning_sequence_(_)),
 		assertz(warning_sequence_(0)).
 
@@ -204,17 +177,65 @@
 		rule_counts(Warnings, RuleCounts),
 		flag_counts(Warnings, FlagCounts).
 
-	report :-
-		report(file('./linter_warnings.sarif')).
+	diagnostics_tool(linter_reporter, linter_reporter, Version, 'https://logtalk.org/', [
+		guid('4fe3f47d-85c6-4b19-9bb5-07828934f2cb'),
+		fingerprint_algorithm(canonical_warning_v1),
+		count_key(totalWarnings)
+	]) :-
+		this(This),
+		object_property(This, info(Info)),
+		memberchk(version(Major:Minor:Patch), Info),
+		atomic_list_concat([Major, Minor, Patch], '.', Version).
 
-	report(Sink) :-
-		assertz(reporting_),
-		catch(
-			(report_term(Term), json::generate(Sink, Term)),
-			Error,
-			(retractall(reporting_), throw(Error))
-		),
-		retractall(reporting_).
+	diagnostic_rule(RuleId, ShortDescription, FullDescription, warning, []) :-
+		captured_rule_id(RuleId),
+		!,
+		rule_descriptions(RuleId, ShortDescription, FullDescription).
+
+	diagnostic_rules(Rules) :-
+		(	setof(RuleId, captured_rule_id(RuleId), RuleIds) ->
+			diagnostic_rules_from_ids(RuleIds, Rules)
+		;	Rules = []
+		).
+
+	diagnostic_rules_from_ids([], []).
+	diagnostic_rules_from_ids([RuleId| RuleIds], [diagnostic_rule(RuleId, ShortDescription, FullDescription, DefaultSeverity, Properties)| Rules]) :-
+		diagnostic_rule(RuleId, ShortDescription, FullDescription, DefaultSeverity, Properties),
+		diagnostic_rules_from_ids(RuleIds, Rules).
+
+	validate_diagnostics_options(UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, _).
+
+	diagnostic(Target, Diagnostic, UserOptions) :-
+		validate_diagnostics_options(UserOptions),
+		target_diagnostic(Target, Diagnostic).
+
+	diagnostic(Target, Diagnostic) :-
+		diagnostic(Target, Diagnostic, []).
+
+	diagnostics(Target, Diagnostics, UserOptions) :-
+		validate_diagnostics_options(UserOptions),
+		findall(Diagnostic, target_diagnostic(Target, Diagnostic), Diagnostics).
+
+	diagnostics(Target, Diagnostics) :-
+		diagnostics(Target, Diagnostics, []).
+
+	diagnostics_summary(Target, diagnostics_summary(Target, TotalContexts, TotalDiagnostics, Breakdown, ContextSummaries), UserOptions) :-
+		diagnostics(Target, Diagnostics, UserOptions),
+		length(Diagnostics, TotalDiagnostics),
+		^^diagnostics_breakdown(Diagnostics, Breakdown),
+		^^context_summaries(Diagnostics, ContextSummaries),
+		length(ContextSummaries, TotalContexts).
+
+	diagnostics_summary(Target, Summary) :-
+		diagnostics_summary(Target, Summary, []).
+
+	diagnostics_preflight(_Target, [], UserOptions) :-
+		validate_diagnostics_options(UserOptions).
+
+	diagnostics_preflight(Target, Issues) :-
+		diagnostics_preflight(Target, Issues, []).
 
 	handle_warning(Flag, Message, Tokens) :-
 		next_warning_sequence(Sequence),
@@ -238,7 +259,9 @@
 		(	Arguments = [File0, Lines0, Type, Entity| Details0],
 			atom(File0),
 			nonvar(Lines0),
-			Lines0 = _-_ ->
+			Lines0 = _-_,
+			entity_context_kind(Type) ->
+			% assume entity context but note that this assessment is heuristic
 			File = File0,
 			Lines = Lines0,
 			Context = context(Type, Entity),
@@ -249,13 +272,17 @@
 			Lines0 = _-_ ->
 			File = File0,
 			Lines = Lines0,
-			Context = context(file),
+			Context = context(file, File0),
 			Details = Details0
 		;	File = '',
 			Lines = 0-0,
-			Context = context(none),
+			Context = context(file, ''),
 			Details = Arguments
 		).
+
+	entity_context_kind(object).
+	entity_context_kind(category).
+	entity_context_kind(protocol).
 
 	warning_properties(Message, Lines, Details, MessageText, Properties) :-
 		BaseProperties = [message(MessageText), raw_term(Message), details(Details)],
@@ -281,174 +308,106 @@
 		phrase(^^explain(Message), Explanation),
 		warning_text(Explanation, ExplanationText).
 
-	report_term({
-		'$schema'-'https://json.schemastore.org/sarif-2.1.0.json',
-		version-'2.1.0',
-		runs-[Run]
-	}) :-
-		warnings(Warnings),
-		sarif_rule_ids(Warnings, RuleIds),
-		sarif_rules(RuleIds, Warnings, Rules),
-		sarif_results(Warnings, RuleIds, Results),
-		uuid_v4(RunGUID),
-		run_properties(Warnings, RunProperties),
-		Driver = {
-			name-linter_reporter,
-			informationUri-'https://logtalk.org/',
-			version-'0.1.0',
-			rules-Rules
-		},
-		Run = {
-			tool-{driver-Driver},
-			automationDetails-{id-linter_reporter, guid-RunGUID},
-			properties-RunProperties,
-			results-Results
-		}.
+	captured_rule_id(RuleId) :-
+		recorded_warning_(_Sequence, _Flag, Message, _Tokens),
+		functor(Message, RuleId, _).
 
-	run_properties(Warnings, {
-		totalWarnings-TotalWarnings,
-		fingerprintAlgorithm-canonical_warning_v1,
-		gitBranch-Branch,
-		gitCommitHash-CommitHash
-	}) :-
-		length(Warnings, TotalWarnings),
-		run_git_metadata(Warnings, Branch, CommitHash),
+	target_diagnostic(Target, diagnostic(RuleId, warning, not_applicable, MessageText, Context, File, Lines, [flag(Flag)| Properties])) :-
+		warning(linter_warning(Flag, RuleId, File, Lines, Context, Properties)),
+		target_matches(Target, Context, File),
+		memberchk(message(MessageText), Properties).
+
+	target_matches(all, _Context, _File).
+	target_matches(entity(Entity), context(Kind, Entity), _File) :-
+		Kind \== file.
+	target_matches(file(Source), _Context, File) :-
+		locate_target_file(Source, TargetFile),
+		diagnostic_file_path(File, TargetFile).
+	target_matches(directory(Directory0), _Context, File) :-
+		normalize_directory_path(Directory0, Directory),
+		diagnostic_file_directory(File, Directory).
+	target_matches(rdirectory(Directory0), _Context, File) :-
+		normalize_directory_path(Directory0, Directory),
+		diagnostic_file_directory(File, FileDirectory),
+		sub_atom(FileDirectory, 0, _, _, Directory).
+	target_matches(library(Library), _Context, File) :-
+		expand_library_path(Library, Directory),
+		diagnostic_file_directory(File, Directory).
+	target_matches(rlibrary(Library), _Context, File) :-
+		expand_library_path(Library, TopPath),
+		diagnostic_file_directory(File, Directory),
+		once((	Directory == TopPath
+		;	sub_library(TopPath, _SubLibrary, Directory)
+		)).
+
+	locate_target_file(LibraryNotation, Path) :-
+		compound(LibraryNotation),
+		!,
+		LibraryNotation =.. [Library, Name],
+		expand_library_path(Library, LibraryPath),
+		atom_concat(LibraryPath, Name, Source),
+		locate_target_file(Source, Path).
+	locate_target_file(Source, Path) :-
+		add_extension(Source, Basename),
+		captured_file(Path, Basename),
+		\+ (
+			captured_file(OtherPath, Basename),
+			Path \== OtherPath
+		),
 		!.
-	run_properties(Warnings, {
-		totalWarnings-TotalWarnings,
-		fingerprintAlgorithm-canonical_warning_v1
-	}) :-
-		length(Warnings, TotalWarnings).
+	locate_target_file(Source, Path) :-
+		add_extension(Source, SourceWithExtension),
+		captured_file(Path, Basename),
+		diagnostic_file_directory(Path, Directory),
+		atom_concat(Directory, Basename, SourceWithExtension),
+		!.
 
-	run_git_metadata([linter_warning(_Flag, _RuleId, File, _Lines, _Context, _Properties)| _], Branch, CommitHash) :-
-		File \== '',
-		decompose_file_name(File, Directory, _BaseName),
-		git_branch(Directory, Branch),
-		git_commit_hash(Directory, CommitHash).
-	run_git_metadata([_| Warnings], Branch, CommitHash) :-
-		run_git_metadata(Warnings, Branch, CommitHash).
+	captured_file(Path, Basename) :-
+		recorded_warning_(_Sequence, _Flag, Message, _Tokens),
+		warning_data(Message, _RuleId, File, _Lines, _Context, _Details),
+		diagnostic_file_path(File, Path),
+		decompose_file_name(Path, _Directory, Basename).
 
-	sarif_rule_ids(Warnings, RuleIds) :-
-		(	setof(RuleId, Flag^File^Lines^Context^Properties^member(linter_warning(Flag, RuleId, File, Lines, Context, Properties), Warnings), RuleIds0) ->
-			RuleIds = RuleIds0
-		;	RuleIds = []
+	diagnostic_file_path(File0, File) :-
+		File0 \== '',
+		internal_os_path(File1, File0),
+		absolute_file_name(File1, File).
+
+	diagnostic_file_directory(File0, Directory) :-
+		diagnostic_file_path(File0, File),
+		decompose_file_name(File, Directory, _).
+
+	add_extension(Source, SourceWithExtension) :-
+		atom(Source),
+		decompose_file_name(Source, _, _, SourceExtension),
+		(	file_type_extension(source, SourceExtension) ->
+			SourceWithExtension = Source
+		;	file_type_extension(source, Extension),
+			atom_concat(Source, Extension, SourceWithExtension)
 		).
 
-	sarif_rules([], _Warnings, []).
-	sarif_rules([RuleId| RuleIds], Warnings, [Rule| Rules]) :-
-		sarif_rule(RuleId, Warnings, Rule),
-		sarif_rules(RuleIds, Warnings, Rules).
+	sub_library(TopPath, Library, LibraryPath) :-
+		logtalk_library_path(Library, _),
+		expand_library_path(Library, LibraryPath),
+		atom_concat(TopPath, _RelativePath, LibraryPath).
 
-	sarif_rule(RuleId, Warnings, {
-		id-RuleId,
-		name-RuleId,
-		shortDescription-{text-ShortDescription},
-		fullDescription-{text-FullDescription},
-		defaultConfiguration-{level-warning}
-	}) :-
-		rule_descriptions(RuleId, Warnings, ShortDescription, FullDescription).
+	normalize_directory_path(Directory0, Directory) :-
+		internal_os_path(Directory1, Directory0),
+		absolute_file_name(Directory1, Directory2),
+		(	sub_atom(Directory2, _, _, 0, '/') ->
+			Directory = Directory2
+		;	atom_concat(Directory2, '/', Directory)
+		).
 
-	rule_descriptions(RuleId, Warnings, ShortDescription, FullDescription) :-
+	rule_descriptions(RuleId, ShortDescription, FullDescription) :-
 		atomic_list_concat(['Logtalk linter warning: ', RuleId, '.'], ShortDescription),
 		( 	once((
-				member(linter_warning(_Flag, RuleId, _File, _Lines, _Context, Properties), Warnings),
+				warning(linter_warning(_Flag, RuleId, _File, _Lines, _Context, Properties)),
 				member(explanation(Explanation), Properties)
 			)) ->
 			FullDescription = Explanation
 		;	atomic_list_concat(['Warnings emitted by the Logtalk compiler linter for rule family ', RuleId, '.'], FullDescription)
 		).
-
-	sarif_results([], _RuleIds, []).
-	sarif_results([Warning| Warnings], RuleIds, [Result| Results]) :-
-		sarif_result(Warning, RuleIds, Result),
-		sarif_results(Warnings, RuleIds, Results).
-
-	sarif_result(linter_warning(Flag, RuleId, File, Lines, Context, Properties), RuleIds, {
-		ruleId-RuleId,
-		ruleIndex-RuleIndex,
-		level-warning,
-		message-{text-MessageText},
-		partialFingerprints-PartialFingerprints,
-		fingerprints-Fingerprints,
-		properties-PropertiesJSON,
-		locations-[Location]
-	}) :-
-		File \== '',
-		rule_index(RuleId, RuleIds, RuleIndex),
-		memberchk(message(MessageText), Properties),
-		properties_json(Flag, Context, Properties, PropertiesJSON),
-		sarif_file_uri(File, FileURI),
-		sarif_location(FileURI, Lines, Location),
-		sarif_fingerprints(RuleId, FileURI, Lines, Context, Properties, PartialFingerprints, Fingerprints),
-		!.
-	sarif_result(linter_warning(Flag, RuleId, _File, Lines, Context, Properties), RuleIds, {
-		ruleId-RuleId,
-		ruleIndex-RuleIndex,
-		level-warning,
-		message-{text-MessageText},
-		partialFingerprints-PartialFingerprints,
-		fingerprints-Fingerprints,
-		properties-PropertiesJSON
-	}) :-
-		rule_index(RuleId, RuleIds, RuleIndex),
-		memberchk(message(MessageText), Properties),
-		properties_json(Flag, Context, Properties, PropertiesJSON),
-		sarif_fingerprints(RuleId, '', Lines, Context, Properties, PartialFingerprints, Fingerprints).
-
-	rule_index(RuleId, [RuleId| _], 0) :-
-		!.
-	rule_index(RuleId, [_| RuleIds], RuleIndex) :-
-		rule_index(RuleId, RuleIds, RuleIndex0),
-		RuleIndex is RuleIndex0 + 1.
-
-	sarif_location(FileURI, 0-0, {
-		physicalLocation-{
-			artifactLocation-{uri-FileURI}
-		}
-	}).
-	sarif_location(FileURI, Start-End, {
-		physicalLocation-{
-			artifactLocation-{uri-FileURI},
-			region-{startLine-Start, endLine-End}
-		}
-	}).
-
-	properties_json(Flag, Context, Properties, {
-		flag-Flag,
-		context-ContextAtom,
-		rawTerm-RawTermAtom,
-		details-DetailsAtoms,
-		auxiliaryClause-AuxiliaryClauseJSON,
-		hasExplanation-HasExplanationJSON,
-		explanation-ExplanationText,
-		warningProperties-PropertyAtoms
-	}) :-
-		to_atom(Context, ContextAtom),
-		memberchk(raw_term(RawTerm), Properties),
-		to_atom(RawTerm, RawTermAtom),
-		memberchk(details(Details), Properties),
-		terms_to_atoms(Details, DetailsAtoms),
-		(	member(auxiliary_clause(true), Properties) ->
-			AuxiliaryClauseJSON = @true
-		;	AuxiliaryClauseJSON = @false
-		),
-		(	member(explanation(Explanation), Properties) ->
-			HasExplanationJSON = @true,
-			ExplanationText = Explanation
-		;	HasExplanationJSON = @false,
-			ExplanationText = ''
-		),
-		terms_to_atoms(Properties, PropertyAtoms).
-
-	sarif_fingerprints(RuleId, FileURI, Lines, Context, Properties, {
-		ruleLocationV1-RuleLocationFingerprint,
-		contextV1-ContextFingerprint
-	}, {
-		canonicalWarningV1-CanonicalWarningFingerprint
-	}) :-
-		to_atom(rule_location(RuleId, FileURI, Lines), RuleLocationFingerprint),
-		to_atom(context(Context), ContextFingerprint),
-		to_atom(warning(RuleId, FileURI, Lines, Context, Properties), CanonicalWarningFingerprint).
 
 	rule_counts(Warnings, RuleCounts) :-
 		(	setof(RuleId, Flag^File^Lines^Context^Properties^member(linter_warning(Flag, RuleId, File, Lines, Context, Properties), Warnings), RuleIds) ->
@@ -489,41 +448,13 @@
 	flag_count([_| Warnings], Flag, Count) :-
 		flag_count(Warnings, Flag, Count).
 
-	terms_to_atoms([], []).
-	terms_to_atoms([Term| Terms], [Atom| Atoms]) :-
-		to_atom(Term, Atom),
-		terms_to_atoms(Terms, Atoms).
-
-	to_atom(Term, Atom) :-
-		(	atom(Term) ->
-			Atom = Term
-		;	copy_term(Term, Copy),
-			numbervars(Copy, 0, _),
-			write_term_to_atom(Copy, Atom, [numbervars(true), quoted(true)])
-		).
-
-	sarif_file_uri(File, URI) :-
-		internal_os_path(File, Path0),
-		file_url_path(Path0, Path),
-		url_generate([scheme(file), authority(''), path(Path)], URI0),
-		url_normalize(URI0, URI),
-		!.
-
-	file_url_path(Path0, Path) :-
-		(	sub_atom(Path0, 0, 1, _, '/') ->
-			Path = Path0
-		;	sub_atom(Path0, 1, 2, _, ':/') ->
-			atom_concat('/', Path0, Path)
-		;	Path = Path0
-		).
-
 	ground_term_copy(Term, GroundTerm) :-
 		copy_term(Term, GroundTerm),
 		numbervars(GroundTerm, 0, _).
 
 	default_option(explanations(false)).
 
-	valid_option(explanations(true)).
-	valid_option(explanations(false)).
+	valid_option(explanations(Boolean)) :-
+		valid(boolean, Boolean).
 
 :- end_object.

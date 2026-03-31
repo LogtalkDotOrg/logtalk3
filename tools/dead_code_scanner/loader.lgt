@@ -26,13 +26,8 @@
 	logtalk_load(basic_types(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(os(loader)),
-	logtalk_load(reader(loader)),
 	logtalk_load(term_io(loader)),
-	logtalk_load(git(loader)),
-	logtalk_load(url(loader)),
-	logtalk_load(json(loader)),
-	logtalk_load(json_schema(loader)),
-	logtalk_load(uuid(loader)),
+	logtalk_load(tool_diagnostics(loader)),
 	logtalk_load([dead_code_scanner, dead_code_scanner_messages], [optimize(on)])
 )).
 

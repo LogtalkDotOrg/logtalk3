@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-20,
+		date is 2026-03-30,
 		comment is 'Unit tests for the "mutation_testing" tool.'
 	]).
 
@@ -447,7 +447,7 @@
 	test(mt_mutator_predicate_directive_suppression_01, deterministic) :-
 		load_with_hook(predicate_directive_suppression(mt_predicate_directives_sample, local_dynamic/1, 2, 1, false)),
 		once(object_property(mt_predicate_directives_sample, declares(local_dynamic/1, Properties))),
-		^^assertion(\+ memberchk(dynamic, Properties)),
+		^^assertion(\+ member(dynamic, Properties)),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
 		^^assertion(mt_predicate_directives_sample::local_dynamic_check).
 

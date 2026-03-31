@@ -3510,6 +3510,126 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`lgtunit <lgtunit/0::deterministic/2>`
 
+``diagnostic/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostic/2>`
+
+``diagnostic/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostic/3>`
+
+``diagnostic_rule/5``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostic_rule/5>`
+
+``diagnostic_rules/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostic_rules/1>`
+
+``diagnostic_target/1``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostic_target/1>`
+
+``diagnostics/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostics/2>`
+
+``diagnostics/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostics/3>`
+
+``diagnostics_preflight/2``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostics_preflight/2>`
+
+``diagnostics_preflight/3``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostics_preflight/3>`
+
+``diagnostics_summary/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostics_summary/2>`
+
+``diagnostics_summary/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostics_summary/3>`
+
+``diagnostics_tool/5``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostics_tool/5>`
+
 ``diagram_description/1``
 -------------------------
 
@@ -4735,26 +4855,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`sbom <sbom/0::export/2>`
 
-``export/3``
-------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`dead_code_scanner <dead_code_scanner/0::export/3>`
-
-``export/4``
-------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`dead_code_scanner <dead_code_scanner/0::export/4>`
-
 ``extension/1``
 ---------------
 
@@ -5170,46 +5270,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`linda_client <linda_client/0::findall_rd_noblock/4>`
-
-``finding/2``
--------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`dead_code_scanner <dead_code_scanner/0::finding/2>`
-
-``finding/3``
--------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`dead_code_scanner <dead_code_scanner/0::finding/3>`
-
-``findings/2``
---------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`dead_code_scanner <dead_code_scanner/0::findings/2>`
-
-``findings/3``
---------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`dead_code_scanner <dead_code_scanner/0::findings/3>`
 
 ``finished_by/2``
 -----------------
@@ -5882,6 +5942,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`json_ld_protocol <json_ld_protocol/0::generate/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::generate/2>`
 * :ref:`json_protocol <json_protocol/0::generate/2>`
+* :ref:`sarif <sarif/0::generate/2>`
 * :ref:`toon_protocol <toon_protocol/0::generate/2>`
 * :ref:`ulid_protocol <ulid_protocol/0::generate/2>`
 * :ref:`url(Representation) <url/1::generate/2>`
@@ -5909,6 +5970,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`avro <avro/0::generate/4>`
 * :ref:`protobuf <protobuf/0::generate/4>`
+* :ref:`sarif <sarif/0::generate/4>`
 
 ``generate/8``
 --------------
@@ -11825,26 +11887,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`listp <listp/0::prefix/3>`
 
-``preflight/2``
----------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`dead_code_scanner <dead_code_scanner/0::preflight/2>`
-
-``preflight/3``
----------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`dead_code_scanner <dead_code_scanner/0::preflight/3>`
-
 ``preorder/2``
 --------------
 
@@ -12949,26 +12991,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`atom <atom/0::replace_sub_atom/4>`
-
-``report/0``
-------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`linter_reporter <linter_reporter/0::report/0>`
-
-``report/1``
-------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`linter_reporter <linter_reporter/0::report/1>`
 
 ``report_directory/3``
 ----------------------
@@ -15242,26 +15264,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`linter_reporter <linter_reporter/0::summary/1>`
 
-``summary/2``
--------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`dead_code_scanner <dead_code_scanner/0::summary/2>`
-
-``summary/3``
--------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`dead_code_scanner <dead_code_scanner/0::summary/3>`
-
 ``superclass/1``
 ----------------
 
@@ -15492,6 +15494,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::temporary_directory/1>`
+
+``term/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`sarif <sarif/0::term/2>`
+
+``term/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`sarif <sarif/0::term/4>`
 
 ``term_expansion/2``
 --------------------

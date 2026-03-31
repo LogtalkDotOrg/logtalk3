@@ -1,0 +1,288 @@
+.. index:: single: tool_diagnostics_protocol
+.. _tool_diagnostics_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``tool_diagnostics_protocol``
+=============================
+
+Common machine-readable diagnostics protocol for developer tools.
+
+| **Availability:** 
+|    ``logtalk_load(tool_diagnostics(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-03-31
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Targets and options: Implementing objects should enumerate supported targets using ``diagnostic_target/1`` and predicates taking an ``Options`` argument must accept ``explanations(Boolean)``.
+   - Tool metadata predicate: Tool metadata is exposed using ``diagnostics_tool/5``.
+   - Rule descriptor predicate: Rule descriptors are exposed using ``diagnostic_rule/5`` and collected in stable order using ``diagnostic_rules/1``.
+   - Diagnostic and preflight terms: Findings and analysis prerequisites are represented using ``diagnostic/8`` and ``preflight_issue/7`` terms.
+   - Summary term: Summaries are represented using ``diagnostics_summary/5`` terms with supporting breakdown and count terms.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: diagnostics_tool/5
+.. _tool_diagnostics_protocol/0::diagnostics_tool/5:
+
+``diagnostics_tool/5``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Returns tool metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics_tool(Id,Name,Version,InformationURI,Properties)``
+| **Mode and number of proofs:**
+|    ``diagnostics_tool(?atom,?atom,?atom,?atom,?list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: diagnostic_target/1
+.. _tool_diagnostics_protocol/0::diagnostic_target/1:
+
+``diagnostic_target/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates supported diagnostics target patterns.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostic_target(Target)``
+| **Mode and number of proofs:**
+|    ``diagnostic_target(?nonvar)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: diagnostic_rule/5
+.. _tool_diagnostics_protocol/0::diagnostic_rule/5:
+
+``diagnostic_rule/5``
+^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates diagnostic rule descriptors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostic_rule(RuleId,ShortDescription,FullDescription,DefaultSeverity,Properties)``
+| **Mode and number of proofs:**
+|    ``diagnostic_rule(?atom,?atom,?atom,?atom,?list(compound))`` - ``zero_or_more``
+
+
+------------
+
+.. index:: diagnostic_rules/1
+.. _tool_diagnostics_protocol/0::diagnostic_rules/1:
+
+``diagnostic_rules/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Returns all supported diagnostic rule descriptors in a stable order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostic_rules(Rules)``
+| **Mode and number of proofs:**
+|    ``diagnostic_rules(-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: diagnostic/3
+.. _tool_diagnostics_protocol/0::diagnostic/3:
+
+``diagnostic/3``
+^^^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, diagnostics for a target using the given options. Diagnostics are returned using terms of the form ``diagnostic(RuleId, Severity, Confidence, Message, Context, File, Lines, Properties)``. All implementations must accept the common option ``explanations(Boolean)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostic(Target,Diagnostic,Options)``
+| **Mode and number of proofs:**
+|    ``diagnostic(+nonvar,-compound,+list(compound))`` - ``zero_or_more``
+
+
+------------
+
+.. index:: diagnostic/2
+.. _tool_diagnostics_protocol/0::diagnostic/2:
+
+``diagnostic/2``
+^^^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, diagnostics for a target using default options. Diagnostics are returned using terms of the form ``diagnostic(RuleId, Severity, Confidence, Message, Context, File, Lines, Properties)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostic(Target,Diagnostic)``
+| **Mode and number of proofs:**
+|    ``diagnostic(+nonvar,-compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: diagnostics/3
+.. _tool_diagnostics_protocol/0::diagnostics/3:
+
+``diagnostics/3``
+^^^^^^^^^^^^^^^^^
+
+Returns an ordered set of diagnostics for a target using the given options. Diagnostics are returned using terms of the form ``diagnostic(RuleId, Severity, Confidence, Message, Context, File, Lines, Properties)``. All implementations must accept the common option ``explanations(Boolean)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics(Target,Diagnostics,Options)``
+| **Mode and number of proofs:**
+|    ``diagnostics(+nonvar,-list(compound),+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: diagnostics/2
+.. _tool_diagnostics_protocol/0::diagnostics/2:
+
+``diagnostics/2``
+^^^^^^^^^^^^^^^^^
+
+Returns an ordered set of diagnostics for a target using default options. Diagnostics are returned using terms of the form ``diagnostic(RuleId, Severity, Confidence, Message, Context, File, Lines, Properties)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics(Target,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``diagnostics(+nonvar,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: diagnostics_summary/3
+.. _tool_diagnostics_protocol/0::diagnostics_summary/3:
+
+``diagnostics_summary/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a machine-readable summary for a target using the given options. The summary counts diagnostics only and does not include preflight issues. All implementations must accept the common option ``explanations(Boolean)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics_summary(Target,Summary,Options)``
+| **Mode and number of proofs:**
+|    ``diagnostics_summary(+nonvar,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: diagnostics_summary/2
+.. _tool_diagnostics_protocol/0::diagnostics_summary/2:
+
+``diagnostics_summary/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a machine-readable summary for a target using default options. The summary counts diagnostics only and does not include preflight issues.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics_summary(Target,Summary)``
+| **Mode and number of proofs:**
+|    ``diagnostics_summary(+nonvar,-compound)`` - ``one``
+
+
+------------
+
+.. index:: diagnostics_preflight/3
+.. _tool_diagnostics_protocol/0::diagnostics_preflight/3:
+
+``diagnostics_preflight/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns an ordered set of machine-readable preflight issues for a target using the given options. Preflight issues are returned using terms of the form ``preflight_issue(Id, Severity, Message, Context, File, Lines, Properties)``. All implementations must accept the common option ``explanations(Boolean)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics_preflight(Target,Issues,Options)``
+| **Mode and number of proofs:**
+|    ``diagnostics_preflight(+nonvar,-list(compound),+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: diagnostics_preflight/2
+.. _tool_diagnostics_protocol/0::diagnostics_preflight/2:
+
+``diagnostics_preflight/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns an ordered set of machine-readable preflight issues for a target using default options. Preflight issues are returned using terms of the form ``preflight_issue(Id, Severity, Message, Context, File, Lines, Properties)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics_preflight(Target,Issues)``
+| **Mode and number of proofs:**
+|    ``diagnostics_preflight(+nonvar,-list(compound))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

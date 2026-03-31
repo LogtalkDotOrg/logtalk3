@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tool_diagnostics &mdash; Logtalk 3.99.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8c56e3d9"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tutor" href="tutor.html" />
+    <link rel="prev" title="sbom" href="sbom.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.99.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asdf.html"><code class="docutils literal notranslate"><span class="pre">asdf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html"><code class="docutils literal notranslate"><span class="pre">assertions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_metrics.html"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dead_code_scanner.html"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug_messages.html"><code class="docutils literal notranslate"><span class="pre">debug_messages</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugger.html"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagrams.html"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="doclet.html"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="help.html"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="issue_creator.html"><code class="docutils literal notranslate"><span class="pre">issue_creator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lgtdoc.html"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lgtunit.html"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linter.html"><code class="docutils literal notranslate"><span class="pre">linter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linter_reporter.html"><code class="docutils literal notranslate"><span class="pre">linter_reporter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="make.html"><code class="docutils literal notranslate"><span class="pre">make</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutation_testing.html"><code class="docutils literal notranslate"><span class="pre">mutation_testing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="packs.html"><code class="docutils literal notranslate"><span class="pre">packs</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ports_profiler.html"><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiler.html"><code class="docutils literal notranslate"><span class="pre">profiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sarif.html"><code class="docutils literal notranslate"><span class="pre">sarif</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sbom.html"><code class="docutils literal notranslate"><span class="pre">sbom</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">tool_diagnostics</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#protocol-overview">Protocol overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#term-conventions">Term conventions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutor.html"><code class="docutils literal notranslate"><span class="pre">tutor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrapper.html"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../apis/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Developer Tools</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">tool_diagnostics</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/devtools/tool_diagnostics.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tool-diagnostics">
+<span id="library-tool-diagnostics"></span><h1><code class="docutils literal notranslate"><span class="pre">tool_diagnostics</span></code><a class="headerlink" href="#tool-diagnostics" title="Link to this heading"></a></h1>
+<p>This tool provides the shared <code class="docutils literal notranslate"><span class="pre">tool_diagnostics_protocol</span></code> protocol and
+the <code class="docutils literal notranslate"><span class="pre">tool_diagnostics_common</span></code> category used by developer tools such as
+<code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code>, <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>, <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>, and <code class="docutils literal notranslate"><span class="pre">linter_reporter</span></code>
+to expose machine-readable diagnostics.</p>
+<p>The protocol is designed so that producer tools can keep their own
+internal semantics while still providing a common interface for querying
+diagnostics directly or for generating SARIF reports using the <code class="docutils literal notranslate"><span class="pre">sarif</span></code>
+tool.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>This tool API documentation is available at:</p>
+<p><a class="reference external" href="../../apis/library_index.html#tool_diagnostics_protocol">../../apis/library_index.html#tool_diagnostics_protocol</a></p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>Load the protocol and common category definitions using:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(tool_diagnostics(loader)).
+...
+</pre></div>
+</div>
+</section>
+<section id="protocol-overview">
+<h2>Protocol overview<a class="headerlink" href="#protocol-overview" title="Link to this heading"></a></h2>
+<p>The protocol defines predicates for reporting:</p>
+<ul class="simple">
+<li><p>tool metadata using <code class="docutils literal notranslate"><span class="pre">diagnostics_tool/5</span></code></p></li>
+<li><p>supported target patterns using <code class="docutils literal notranslate"><span class="pre">diagnostic_target/1</span></code></p></li>
+<li><p>rule descriptors using <code class="docutils literal notranslate"><span class="pre">diagnostic_rule/5</span></code> and
+<code class="docutils literal notranslate"><span class="pre">diagnostic_rules/1</span></code></p></li>
+<li><p>diagnostics using <code class="docutils literal notranslate"><span class="pre">diagnostic/2-3</span></code> and <code class="docutils literal notranslate"><span class="pre">diagnostics/2-3</span></code></p></li>
+<li><p>summaries using <code class="docutils literal notranslate"><span class="pre">diagnostics_summary/2-3</span></code></p></li>
+<li><p>preflight issues using <code class="docutils literal notranslate"><span class="pre">diagnostics_preflight/2-3</span></code></p></li>
+</ul>
+<p>Common target terms include <code class="docutils literal notranslate"><span class="pre">all</span></code>, <code class="docutils literal notranslate"><span class="pre">file(File)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">directory(Directory)</span></code>, <code class="docutils literal notranslate"><span class="pre">rdirectory(Directory)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">library(Library)</span></code>, <code class="docutils literal notranslate"><span class="pre">rlibrary(Library)</span></code>, <code class="docutils literal notranslate"><span class="pre">entity(Entity)</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">tests(Object)</span></code>.</p>
+<p>Predicates taking an <code class="docutils literal notranslate"><span class="pre">Options</span></code> argument must accept the common option
+<code class="docutils literal notranslate"><span class="pre">explanations(Boolean)</span></code>. Tools may use it to include
+<code class="docutils literal notranslate"><span class="pre">explanation(Text)</span></code> properties when available, but implementations
+that do not provide additional explanation text must still accept the
+option as a no-op.</p>
+</section>
+<section id="term-conventions">
+<h2>Term conventions<a class="headerlink" href="#term-conventions" title="Link to this heading"></a></h2>
+<p>Tool metadata uses terms of the form:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>diagnostics_tool(<span class="nv">Id</span>, <span class="nv">Name</span>, <span class="nv">Version</span>, <span class="nv">InformationURI</span>, <span class="nv">Properties</span>)
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Id</span></code> and <code class="docutils literal notranslate"><span class="pre">Name</span></code> arguments identify the tool. The <code class="docutils literal notranslate"><span class="pre">Version</span></code>
+argument should be derived reflectively from the implementing object
+<code class="docutils literal notranslate"><span class="pre">info/1</span></code> metadata using <code class="docutils literal notranslate"><span class="pre">object_property/2</span></code> instead of being
+hardcoded. The <code class="docutils literal notranslate"><span class="pre">InformationURI</span></code> argument is a stable tool home or
+documentation URI and is exported by the <code class="docutils literal notranslate"><span class="pre">sarif</span></code> tool as the SARIF
+<code class="docutils literal notranslate"><span class="pre">tool.driver.informationUri</span></code> value.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Properties</span></code> list is intended for exporter and post-processing
+hints. The current <code class="docutils literal notranslate"><span class="pre">sarif</span></code> tool interprets the following entries:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">guid(Guid)</span></code> sets the SARIF <code class="docutils literal notranslate"><span class="pre">tool.driver.guid</span></code> value when present.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fingerprint_algorithm(Algorithm)</span></code> sets the exported run
+<code class="docutils literal notranslate"><span class="pre">fingerprintAlgorithm</span></code> property and selects the canonical result
+fingerprint key. The current implementation distinguishes
+<code class="docutils literal notranslate"><span class="pre">canonical_finding_v1</span></code> from the default warning-oriented path and
+computes result identities from normalized relative locations instead
+of raw absolute file paths.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">automation_id(target)</span></code> requests that the SARIF
+<code class="docutils literal notranslate"><span class="pre">run.automationDetails.id</span></code> value be derived from the queried target
+term, allowing different targets of the same tool to produce distinct
+run identities.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">automation_id(tool)</span></code> denotes a tool-scoped automation identifier.
+In the current <code class="docutils literal notranslate"><span class="pre">sarif</span></code> implementation this is redundant because
+omitting <code class="docutils literal notranslate"><span class="pre">automation_id(target)</span></code> already falls back to the tool
+identifier.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">include_invocations(true)</span></code> requests a SARIF <code class="docutils literal notranslate"><span class="pre">invocations</span></code>
+section, including <code class="docutils literal notranslate"><span class="pre">toolExecutionNotifications</span></code> when preflight
+issues exist.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">include_git_metadata(true)</span></code> requests SARIF <code class="docutils literal notranslate"><span class="pre">gitBranch</span></code> and
+<code class="docutils literal notranslate"><span class="pre">gitCommitHash</span></code> run properties when a stable Git context can be
+inferred. When this succeeds, the <code class="docutils literal notranslate"><span class="pre">sarif</span></code> tool also normalizes
+artifact locations and fingerprint inputs relative to the repository
+root. The <code class="docutils literal notranslate"><span class="pre">gitBranch</span></code> value is descriptive metadata; the
+<code class="docutils literal notranslate"><span class="pre">gitCommitHash</span></code> value provides the stable revision identity used to
+disambiguate repository-relative paths.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">include_version_control_provenance(true)</span></code> requests SARIF
+<code class="docutils literal notranslate"><span class="pre">versionControlProvenance</span></code> data when repository details can be
+inferred from diagnostic file paths.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">count_key(Key)</span></code> selects the property name used for the exported
+count, e.g. <code class="docutils literal notranslate"><span class="pre">diagnosticsCount</span></code> or <code class="docutils literal notranslate"><span class="pre">totalWarnings</span></code>.</p></li>
+</ul>
+<p>When <code class="docutils literal notranslate"><span class="pre">include_git_metadata(true)</span></code> is not present or a stable Git
+context cannot be inferred, the <code class="docutils literal notranslate"><span class="pre">sarif</span></code> tool falls back to
+application-root-relative artifact locations and fingerprint inputs
+instead.</p>
+<p>Rule descriptors use terms of the form:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>diagnostic_rule(<span class="nv">RuleId</span>, <span class="nv">ShortDescription</span>, <span class="nv">FullDescription</span>, <span class="nv">DefaultSeverity</span>, <span class="nv">Properties</span>)
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">diagnostic_rules/1</span></code> predicate should return these descriptors in
+a stable order. Rule descriptor properties may contain terms such as
+<code class="docutils literal notranslate"><span class="pre">guid(Guid)</span></code>, <code class="docutils literal notranslate"><span class="pre">help(Text)</span></code>, <code class="docutils literal notranslate"><span class="pre">help_uri(URI)</span></code>, <code class="docutils literal notranslate"><span class="pre">tags(Tags)</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">precision(Precision)</span></code>.</p>
+<p>Diagnostics use terms of the form:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>diagnostic(<span class="nv">RuleId</span>, <span class="nv">Severity</span>, <span class="nv">Confidence</span>, <span class="nv">Message</span>, <span class="nv">Context</span>, <span class="nv">File</span>, <span class="nv">Lines</span>, <span class="nv">Properties</span>)
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Context</span></code> argument is represented using the term
+<code class="docutils literal notranslate"><span class="pre">context(Kind,</span> <span class="pre">Identifier)</span></code> where <code class="docutils literal notranslate"><span class="pre">Kind</span></code> is a tool-defined atom such
+as <code class="docutils literal notranslate"><span class="pre">file</span></code>, <code class="docutils literal notranslate"><span class="pre">object</span></code>, <code class="docutils literal notranslate"><span class="pre">category</span></code>, <code class="docutils literal notranslate"><span class="pre">protocol</span></code>, or <code class="docutils literal notranslate"><span class="pre">test_set</span></code>.
+For file-scoped diagnostics, <code class="docutils literal notranslate"><span class="pre">Identifier</span></code> is the source file path when
+available and the empty atom otherwise. Diagnostics originating in an
+included file may still use an entity context when the <code class="docutils literal notranslate"><span class="pre">include/1</span></code>
+directive appears inside that entity; otherwise they are file-scoped.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">File</span></code> argument is a source file path or the empty atom when
+unavailable. The <code class="docutils literal notranslate"><span class="pre">Lines</span></code> argument uses the <code class="docutils literal notranslate"><span class="pre">Start-End</span></code> notation. The
+value <code class="docutils literal notranslate"><span class="pre">0-0</span></code> means that no precise line information is available.</p>
+<p>Supported severity values are <code class="docutils literal notranslate"><span class="pre">error</span></code>, <code class="docutils literal notranslate"><span class="pre">warning</span></code>, and <code class="docutils literal notranslate"><span class="pre">note</span></code>.
+Supported confidence values are <code class="docutils literal notranslate"><span class="pre">high</span></code>, <code class="docutils literal notranslate"><span class="pre">medium</span></code>, <code class="docutils literal notranslate"><span class="pre">low</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">not_applicable</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Properties</span></code> argument should include stable structured metadata
+such as <code class="docutils literal notranslate"><span class="pre">raw_term(Term)</span></code>, <code class="docutils literal notranslate"><span class="pre">explanation(Text)</span></code>, <code class="docutils literal notranslate"><span class="pre">flag(Flag)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">directive(Directive)</span></code>, <code class="docutils literal notranslate"><span class="pre">indicator(Indicator)</span></code>, <code class="docutils literal notranslate"><span class="pre">key(Key)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">test(Test)</span></code>, <code class="docutils literal notranslate"><span class="pre">option(Option)</span></code>, and any other tool-specific facts
+useful for post-processing.</p>
+<p>Preflight issues use terms of the form:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>preflight_issue(<span class="nv">Id</span>, <span class="nv">Severity</span>, <span class="nv">Message</span>, <span class="nv">Context</span>, <span class="nv">File</span>, <span class="nv">Lines</span>, <span class="nv">Properties</span>)
+</pre></div>
+</div>
+<p>Preflight issues describe prerequisites or analysis quality issues
+instead of findings.</p>
+<p>Summaries use terms of the form:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>diagnostics_summary(<span class="nv">Target</span>, <span class="nv">TotalContexts</span>, <span class="nv">TotalDiagnostics</span>, <span class="nv">Breakdown</span>, <span class="nv">ContextSummaries</span>)
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Breakdown</span></code> argument uses a
+<code class="docutils literal notranslate"><span class="pre">diagnostic_breakdown(RuleCounts,</span> <span class="pre">SeverityCounts,</span> <span class="pre">ConfidenceCounts)</span></code>
+term and <code class="docutils literal notranslate"><span class="pre">ContextSummaries</span></code> is a list of
+<code class="docutils literal notranslate"><span class="pre">context_summary(Context,</span> <span class="pre">DiagnosticsCount,</span> <span class="pre">Breakdown)</span></code> terms.</p>
+<p>Rule counts use <code class="docutils literal notranslate"><span class="pre">rule_count(RuleId,</span> <span class="pre">Count)</span></code> terms, severity counts use
+<code class="docutils literal notranslate"><span class="pre">severity_count(Severity,</span> <span class="pre">Count)</span></code> terms, and confidence counts use
+<code class="docutils literal notranslate"><span class="pre">confidence_count(Confidence,</span> <span class="pre">Count)</span></code> terms.</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Tools implementing this protocol can be queried directly for diagnostics
+after compiling code that results in the production of diagnostics. For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(dead_code_scanner(loader)).
+...
+
+| <span class="o">?-</span> <span class="k">logtalk_load</span>(my_library(loader)).
+...
+
+| <span class="o">?-</span> dead_code_scanner<span class="o">::</span>diagnostics(library(my_library), <span class="nv">Diagnostics</span>).
+...
+</pre></div>
+</div>
+<p>To serialize diagnostics as SARIF, load the standalone <code class="docutils literal notranslate"><span class="pre">sarif</span></code> tool
+and generate a report from a diagnostics producer:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(sarif(loader)).
+...
+
+| <span class="o">?-</span> sarif<span class="o">::</span>generate(dead_code_scanner, entity(my_object), file(<span class="s">&#39;./report.sarif&#39;</span>), []).
+<span class="k">true</span>.
+</pre></div>
+</div>
+<p>To generate an explicit aggregate SARIF report with multiple diagnostics
+producers, pass a list of <code class="docutils literal notranslate"><span class="pre">tool_spec(Tool,</span> <span class="pre">Target,</span> <span class="pre">Options)</span></code> terms:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> sarif<span class="o">::</span>generate([
+|        tool_spec(linter_reporter, all, []),
+|        tool_spec(dead_code_scanner, entity(my_object), [])
+|    ], file(<span class="s">&#39;./aggregate.sarif&#39;</span>)).
+<span class="k">true</span>.
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sbom.html" class="btn btn-neutral float-left" title="sbom" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutor.html" class="btn btn-neutral float-right" title="tutor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2026, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

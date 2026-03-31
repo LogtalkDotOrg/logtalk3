@@ -8,41 +8,40 @@
 ``linter_reporter``
 ===================
 
-Intercepts compiler linter warnings and exports them as SARIF reports.
+Intercepts compiler linter warnings and caches them as machine-readable diagnostics.
 
 | **Availability:** 
 |    ``logtalk_load(linter_reporter(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-03-29
+| **Date:** 2026-03-30
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Imports:**
+|    ``public`` :ref:`tool_diagnostics_common <tool_diagnostics_common/0>`
 |    ``public`` :ref:`tutor_explanations <tutor_explanations/0>`
 |    ``public`` :ref:`options <options/0>`
 | **Provides:**
 |    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
 | **Uses:**
-|    :ref:`git <git/0>`
-|    :ref:`json <json/0>`
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
 |    :ref:`os <os/0>`
 |    :ref:`term_io <term_io/0>`
-|    :ref:`url(Representation) <url/1>`
+|    :ref:`type <type/0>`
 |    :ref:`user <user/0>`
-|    :ref:`uuid <uuid/0>`
 
 | **Remarks:**
 
-   - Usage: Load this tool before compiling code to be checked by the built-in linter. Call ``enable/0-1`` before compiling code, ``disable/0`` when finished collecting warnings, and ``report/0-1`` to generate the SARIF report from the cached warnings.
+   - Usage: Load this tool before compiling code to be checked by the built-in linter. Call ``enable/0-1`` before compiling code, ``disable/0`` when finished collecting warnings, and then query the cached warnings using either the legacy warning predicates or the diagnostics protocol predicates. The standalone ``sarif`` tool can generate SARIF reports by querying these diagnostics.
+   - Diagnostics targets: The diagnostics predicates accept the targets ``all``, ``entity(Entity)``, ``file(File)``, ``directory(Directory)``, ``rdirectory(Directory)``, ``library(Library)``, and ``rlibrary(Library)``. These targets simply filter the cached diagnostics collected in the current warning collection session.
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`tutor_explanations/0::explain//1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`tool_diagnostics_protocol/0::diagnostic/2`  :ref:`tool_diagnostics_protocol/0::diagnostic/3`  :ref:`tool_diagnostics_protocol/0::diagnostic_rule/5`  :ref:`tool_diagnostics_protocol/0::diagnostic_rules/1`  :ref:`tool_diagnostics_protocol/0::diagnostic_target/1`  :ref:`tool_diagnostics_protocol/0::diagnostics/2`  :ref:`tool_diagnostics_protocol/0::diagnostics/3`  :ref:`tool_diagnostics_protocol/0::diagnostics_preflight/2`  :ref:`tool_diagnostics_protocol/0::diagnostics_preflight/3`  :ref:`tool_diagnostics_protocol/0::diagnostics_summary/2`  :ref:`tool_diagnostics_protocol/0::diagnostics_summary/3`  :ref:`tool_diagnostics_protocol/0::diagnostics_tool/5`  :ref:`tutor_explanations/0::explain//1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -93,7 +92,7 @@ Enables warning collection and starts a fresh warning collection session using t
 ``disable/0``
 ^^^^^^^^^^^^^
 
-Disables warning collection while preserving the cached warnings for later reporting.
+Disables warning collection while preserving the cached warnings for later querying.
 
 | **Compilation flags:**
 |    ``static``
@@ -178,42 +177,6 @@ Returns a machine-readable summary for the collected linter warnings.
 
 ------------
 
-.. index:: report/0
-.. _linter_reporter/0::report/0:
-
-``report/0``
-^^^^^^^^^^^^
-
-Writes a SARIF report for the currently cached warnings to the default file ``./linter_warnings.sarif``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``report`` - ``one``
-
-
-------------
-
-.. index:: report/1
-.. _linter_reporter/0::report/1:
-
-``report/1``
-^^^^^^^^^^^^
-
-Writes a SARIF report for the currently cached warnings to the given sink accepted by the ``json::generate/2`` predicate.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``report(Sink)``
-| **Mode and number of proofs:**
-|    ``report(++compound)`` - ``one``
-
-
-------------
-
 Protected predicates
 --------------------
 
@@ -235,23 +198,6 @@ True when warning collection is enabled.
 
 | **Mode and number of proofs:**
 |    ``enabled_`` - ``zero_or_one``
-
-
-------------
-
-.. index:: reporting_/0
-.. _linter_reporter/0::reporting_/0:
-
-``reporting_/0``
-^^^^^^^^^^^^^^^^
-
-True while a SARIF report is being generated.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Mode and number of proofs:**
-|    ``reporting_`` - ``zero_or_one``
 
 
 ------------

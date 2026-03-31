@@ -64,6 +64,7 @@ Categories
    recorded_database_core <recorded_database_core_0>
    statistics <statistics_0>
    subject <subject_0>
+   tool_diagnostics_common <tool_diagnostics_common_0>
    tutor_explanations <tutor_explanations_0>
    ulid_types <ulid_types_0>
    undirected_graph_common <undirected_graph_common_0>
@@ -316,6 +317,7 @@ Objects
    rfc_metric <rfc_metric_0>
    rule_expansion(Mode) <rule_expansion_1>
    sample <sample_0>
+   sarif <sarif_0>
    sbom <sbom_0>
    scope_directive_replacement(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <scope_directive_replacement_5>
    sequence_grammars <sequence_grammars_0>
@@ -491,6 +493,7 @@ Protocols
    termp <termp_0>
    time_scales_protocol <time_scales_protocol_0>
    timep <timep_0>
+   tool_diagnostics_protocol <tool_diagnostics_protocol_0>
    toon_protocol <toon_protocol_0>
    tsv_protocol <tsv_protocol_0>
    ulid_protocol <ulid_protocol_0>

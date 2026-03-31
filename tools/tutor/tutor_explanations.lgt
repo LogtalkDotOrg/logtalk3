@@ -22,9 +22,9 @@
 :- category(tutor_explanations).
 
 	:- info([
-		version is 0:86:0,
+		version is 0:87:0,
 		author is 'Paulo Moura',
-		date is 2026-03-28,
+		date is 2026-03-30,
 		comment is 'This category provides explanations and suggestions to selected compiler and developer tool warning and error messages.'
 	]).
 
@@ -1252,6 +1252,15 @@
 
 	explain(assertion_is_always_error(_, _, _, _, _, _, _)) -->
 		['As-is, the assertion makes the test always throw an error. Typo in the assertion?'-[], nl, nl].
+
+	explain(non_instantiated_test_option(_, _, _, _, _)) -->
+		[ 	'Test options must be instantited; they cannot be variables.'-[], nl, nl
+		].
+
+	explain(invalid_test_option(_, _, _, _, _, _)) -->
+		[ 	'The option term is not one of the supported lgtunit test options. Check for a'-[], nl,
+			'typo or an outdated option name and then replace or remove the invalid option.'-[], nl, nl
+		].
 
 	explain(tests_run_differ_from_tests_total(_, _)) -->
 		[	'A number of tests run different from the total number of defined tests'-[], nl,

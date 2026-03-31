@@ -14,8 +14,8 @@ Documenting tool. Generates XML documenting files for loaded entities and for li
 |    ``logtalk_load(lgtdoc(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 11:2:1
-| **Date:** 2025-10-07
+| **Version:** 11:3:0
+| **Date:** 2026-03-31
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,12 +24,14 @@ Documenting tool. Generates XML documenting files for loaded entities and for li
 | **Implements:**
 |    ``public`` :ref:`lgtdocp <lgtdocp/0>`
 | **Imports:**
+|    ``public`` :ref:`tool_diagnostics_common <tool_diagnostics_common/0>`
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`date <date/0>`
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
 |    :ref:`os <os/0>`
+|    :ref:`term_io <term_io/0>`
 |    :ref:`type <type/0>`
 |    :ref:`user <user/0>`
 |    :ref:`varlist <varlist/0>`
@@ -38,7 +40,7 @@ Documenting tool. Generates XML documenting files for loaded entities and for li
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`lgtdocp/0::all/0`  :ref:`lgtdocp/0::all/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`lgtdocp/0::directories/1`  :ref:`lgtdocp/0::directories/2`  :ref:`lgtdocp/0::directory/1`  :ref:`lgtdocp/0::directory/2`  :ref:`lgtdocp/0::file/1`  :ref:`lgtdocp/0::file/2`  :ref:`lgtdocp/0::files/1`  :ref:`lgtdocp/0::files/2`  :ref:`options_protocol/0::fix_option/2`  :ref:`options_protocol/0::fix_options/2`  :ref:`lgtdocp/0::libraries/1`  :ref:`lgtdocp/0::libraries/2`  :ref:`lgtdocp/0::library/1`  :ref:`lgtdocp/0::library/2`  :ref:`options_protocol/0::merge_options/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`lgtdocp/0::rdirectories/1`  :ref:`lgtdocp/0::rdirectories/2`  :ref:`lgtdocp/0::rdirectory/1`  :ref:`lgtdocp/0::rdirectory/2`  :ref:`lgtdocp/0::rlibraries/1`  :ref:`lgtdocp/0::rlibraries/2`  :ref:`lgtdocp/0::rlibrary/1`  :ref:`lgtdocp/0::rlibrary/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`lgtdocp/0::all/0`  :ref:`lgtdocp/0::all/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`tool_diagnostics_common/0::context_summaries/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`tool_diagnostics_protocol/0::diagnostic/2`  :ref:`tool_diagnostics_protocol/0::diagnostic/3`  :ref:`tool_diagnostics_protocol/0::diagnostic_rule/5`  :ref:`tool_diagnostics_protocol/0::diagnostic_rules/1`  :ref:`tool_diagnostics_protocol/0::diagnostic_target/1`  :ref:`tool_diagnostics_protocol/0::diagnostics/2`  :ref:`tool_diagnostics_protocol/0::diagnostics/3`  :ref:`tool_diagnostics_common/0::diagnostics_breakdown/2`  :ref:`tool_diagnostics_protocol/0::diagnostics_preflight/2`  :ref:`tool_diagnostics_protocol/0::diagnostics_preflight/3`  :ref:`tool_diagnostics_protocol/0::diagnostics_summary/2`  :ref:`tool_diagnostics_protocol/0::diagnostics_summary/3`  :ref:`tool_diagnostics_protocol/0::diagnostics_tool/5`  :ref:`lgtdocp/0::directories/1`  :ref:`lgtdocp/0::directories/2`  :ref:`lgtdocp/0::directory/1`  :ref:`lgtdocp/0::directory/2`  :ref:`lgtdocp/0::file/1`  :ref:`lgtdocp/0::file/2`  :ref:`lgtdocp/0::files/1`  :ref:`lgtdocp/0::files/2`  :ref:`options_protocol/0::fix_option/2`  :ref:`options_protocol/0::fix_options/2`  :ref:`lgtdocp/0::libraries/1`  :ref:`lgtdocp/0::libraries/2`  :ref:`lgtdocp/0::library/1`  :ref:`lgtdocp/0::library/2`  :ref:`options_protocol/0::merge_options/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`lgtdocp/0::rdirectories/1`  :ref:`lgtdocp/0::rdirectories/2`  :ref:`lgtdocp/0::rdirectory/1`  :ref:`lgtdocp/0::rdirectory/2`  :ref:`lgtdocp/0::rlibraries/1`  :ref:`lgtdocp/0::rlibraries/2`  :ref:`lgtdocp/0::rlibrary/1`  :ref:`lgtdocp/0::rlibrary/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -129,6 +131,82 @@ Table of public predicates for all documented entities.
 |    ``predicate_entity_(Predicate,PrimarySortKey,SecondarySortKey,Entity)``
 | **Mode and number of proofs:**
 |    ``predicate_entity_(?predicate_indicator,?nonvar,?nonvar,?entity_identifier)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: cached_run_/5
+.. _lgtdoc/0::cached_run_/5:
+
+``cached_run_/5``
+^^^^^^^^^^^^^^^^^
+
+Cache of diagnostics collected while generating documentation for a target and merged options.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``cached_run_(Target,Options,Contexts,Diagnostics,PreflightIssues)``
+| **Mode and number of proofs:**
+|    ``cached_run_(?nonvar,?list(compound),?list(compound),?list(compound),?list(compound))`` - ``zero_or_more``
+
+
+------------
+
+.. index:: active_diagnostic_/1
+.. _lgtdoc/0::active_diagnostic_/1:
+
+``active_diagnostic_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Diagnostics collected during the current documentation run.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``active_diagnostic_(Diagnostic)``
+| **Mode and number of proofs:**
+|    ``active_diagnostic_(?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: active_preflight_issue_/1
+.. _lgtdoc/0::active_preflight_issue_/1:
+
+``active_preflight_issue_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Preflight issues collected during the current documentation run.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``active_preflight_issue_(Issue)``
+| **Mode and number of proofs:**
+|    ``active_preflight_issue_(?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: active_collection_mode_/1
+.. _lgtdoc/0::active_collection_mode_/1:
+
+``active_collection_mode_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Current diagnostics collection mode.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``active_collection_mode_(Mode)``
+| **Mode and number of proofs:**
+|    ``active_collection_mode_(?atom)`` - ``zero_or_one``
 
 
 ------------

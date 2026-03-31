@@ -21,16 +21,16 @@
 
 :- object(lgtunit,
 	implements(expanding),
-	imports(lgtunit_messages)).
+	imports((tool_diagnostics_common, lgtunit_messages, tutor_explanations, options))).
 
 	% avoid a catch-22 due to the local definition
 	% of the logtalk::trace_event/2 predicate
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 22:5:0,
+		version is 22:6:0,
 		author is 'Paulo Moura',
-		date is 2026-02-28,
+		date is 2026-03-31,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -810,6 +810,22 @@
 		argnames is ['Identifier']
 	]).
 
+	:- private(linter_warning_sequence_/1).
+	:- dynamic(linter_warning_sequence_/1).
+	:- mode(linter_warning_sequence_(?integer), zero_or_one).
+	:- info(linter_warning_sequence_/1, [
+		comment is 'Counter for cached test-compilation linter warnings.',
+		argnames is ['Sequence']
+	]).
+
+	:- private(recorded_linter_warning_/7).
+	:- dynamic(recorded_linter_warning_/7).
+	:- mode(recorded_linter_warning_(?integer, ?atom, ?atom, ?compound, ?atom, ?compound, ?list(compound)), zero_or_more).
+	:- info(recorded_linter_warning_/7, [
+		comment is 'Cache of test-compilation linter warnings.',
+		argnames is ['Sequence', 'RuleId', 'Message', 'Context', 'File', 'Lines', 'Properties']
+	]).
+
 	:- private(skipped_/1).
 	:- dynamic(skipped_/1).
 	:- mode(skipped_(?integer), zero_or_one).
@@ -860,17 +876,18 @@
 
 	% we use the structured printing mechanism in order to allow unit tests
 	% results to be intercepted for alternative reporting by e.g. GUI IDEs
-	:- uses(logtalk, [print_message/3]).
+	:- uses(logtalk, [expand_library_path/2, file_type_extension/2, print_message/3, print_message_tokens/3]).
 	% library support for quick check
 	:- uses(type, [check/2, check/3, valid/2, arbitrary/2, shrink/3, edge_case/2, get_seed/1, set_seed/1]).
 	% library support for reporting test execution time and suppressing test output
-	:- uses(os, [change_directory/1, working_directory/1, cpu_time/1, wall_time/1, null_device_path/1]).
+	:- uses(os, [absolute_file_name/2, change_directory/1, working_directory/1, cpu_time/1, wall_time/1, null_device_path/1, decompose_file_name/3, decompose_file_name/4, internal_os_path/2]).
 	% library list predicates
 	:- uses(list, [append/3, length/2, member/2, memberchk/2, nth1/3, select/3]).
 	% for QuickCheck support
 	:- uses(fast_random, [maybe/0]).
 	% for converting test identifiers into auxiliary predicate names
-	:- uses(user, [atomic_list_concat/2]).
+	:- uses(user, [atomic_list_concat/2, atomic_list_concat/3]).
+	:- uses(term_io, [with_output_to/2]).
 
 	:- if(current_logtalk_flag(prolog_dialect, gnu)).
 		% workaround gplc limitation when dealing with multifile predicates
@@ -878,6 +895,14 @@
 		:- multifile(type::type/1).
 		:- multifile(type::check/2).
 	:- endif.
+
+	:- multifile(logtalk::message_hook/4).
+	:- dynamic(logtalk::message_hook/4).
+
+	logtalk::message_hook(Message, warning, lgtunit, Tokens) :-
+		compilation_linter_warning(Message, RuleId, File, Lines, Context, Properties),
+		catch(handle_linter_warning(RuleId, Message, Tokens, File, Lines, Context, Properties), _, true),
+		fail.
 
 	% by default, run the unit tests
 	condition.
@@ -890,6 +915,218 @@
 
 	% by default, no note to be printed after test results
 	note('').
+
+	diagnostics_tool(lgtunit, lgtunit, Version, 'https://logtalk.org/', [
+		guid('c9e4184c-1b68-47c1-8a84-c6a1de16896f'),
+		automation_id(target),
+		include_invocations(true),
+		include_git_metadata(true),
+		include_version_control_provenance(true),
+		count_key(totalWarnings),
+		fingerprint_algorithm(canonical_warning_v1)
+	]) :-
+		this(This),
+		object_property(This, info(Info)),
+		memberchk(version(Major:Minor:Patch), Info),
+		atomic_list_concat([Major, Minor, Patch], '.', Version).
+
+	diagnostic_target(all).
+	diagnostic_target(entity(_)).
+	diagnostic_target(file(_)).
+	diagnostic_target(directory(_)).
+	diagnostic_target(rdirectory(_)).
+	diagnostic_target(library(_)).
+	diagnostic_target(rlibrary(_)).
+	diagnostic_target(tests(_)).
+
+	diagnostic_rule(no_code_coverage_for_protocols, 'Code coverage requested for protocol.', 'A cover/1 declaration requests code coverage for a protocol, which lgtunit does not support.', warning, []).
+	diagnostic_rule(unknown_entity_declared_covered, 'Unknown entity declared covered.', 'A cover/1 declaration references an unknown entity.', warning, []).
+	diagnostic_rule(assertion_uses_unification, 'Assertion uses unification.', 'A test assertion uses unification and may be weaker than intended.', warning, []).
+	diagnostic_rule(assertion_is_always_true, 'Assertion always true.', 'A compile-time evaluable test assertion will always succeed.', warning, []).
+	diagnostic_rule(assertion_is_always_false, 'Assertion always false.', 'A compile-time evaluable test assertion will always fail.', warning, []).
+	diagnostic_rule(assertion_is_always_error, 'Assertion always error.', 'A compile-time evaluable test assertion will always throw an error.', warning, []).
+	diagnostic_rule(non_instantiated_test_option, 'Non-instantiated test option.', 'A test declaration contains a variable option.', warning, []).
+	diagnostic_rule(invalid_test_option, 'Invalid test option.', 'A test declaration contains an unsupported option.', warning, []).
+
+	default_option(explanations(false)).
+
+	valid_option(explanations(Boolean)) :-
+		valid(boolean, Boolean).
+
+	validate_diagnostics_options(UserOptions, Options) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options).
+
+	diagnostic(Target, Diagnostic, UserOptions) :-
+		validate_diagnostics_options(UserOptions, Options),
+		target_diagnostic(Target, Diagnostic0),
+		diagnostics_options_properties(Diagnostic0, Diagnostic, Options).
+
+	diagnostic(Target, Diagnostic) :-
+		diagnostic(Target, Diagnostic, []).
+
+	diagnostics(Target, Diagnostics, UserOptions) :-
+		validate_diagnostics_options(UserOptions, Options),
+		findall(Diagnostic, (target_diagnostic(Target, Diagnostic0), diagnostics_options_properties(Diagnostic0, Diagnostic, Options)), Diagnostics).
+
+	diagnostics(Target, Diagnostics) :-
+		diagnostics(Target, Diagnostics, []).
+
+	diagnostics_summary(Target, diagnostics_summary(Target, TotalContexts, TotalDiagnostics, Breakdown, ContextSummaries), UserOptions) :-
+		diagnostics(Target, Diagnostics, UserOptions),
+		length(Diagnostics, TotalDiagnostics),
+		^^diagnostics_breakdown(Diagnostics, Breakdown),
+		^^context_summaries(Diagnostics, ContextSummaries),
+		length(ContextSummaries, TotalContexts).
+
+	diagnostics_summary(Target, Summary) :-
+		diagnostics_summary(Target, Summary, []).
+
+	diagnostics_preflight(_Target, [], UserOptions) :-
+		validate_diagnostics_options(UserOptions, _Options).
+
+	diagnostics_preflight(Target, Issues) :-
+		diagnostics_preflight(Target, Issues, []).
+
+	target_diagnostic(Target, diagnostic(RuleId, warning, not_applicable, Message, Context, File, Lines, Properties)) :-
+		target_warning(Target, RuleId, Message, Context, File, Lines, Properties).
+
+	diagnostics_options_properties(diagnostic(RuleId, Severity, Confidence, Message, Context, File, Lines, Properties0), diagnostic(RuleId, Severity, Confidence, Message, Context, File, Lines, Properties), Options) :-
+		diagnostic_properties(Properties0, Properties, Options).
+
+	diagnostic_properties(Properties0, Properties, Options) :-
+		( 	^^option(explanations(true), Options),
+			\+ member(explanation(_), Properties0),
+			memberchk(raw_term(RawTerm), Properties0),
+			explanation_text(RawTerm, ExplanationText) ->
+			Properties = [explanation(ExplanationText)| Properties0]
+		; 	Properties = Properties0
+		).
+
+	target_warning(Target, RuleId, Message, Context, File, Lines, Properties) :-
+		recorded_linter_warning_(_Sequence, RuleId, Message, Context, File, Lines, Properties),
+		target_matches(Target, Context, File).
+
+	target_matches(all, _Context, _File).
+	target_matches(entity(Entity), context(Kind, Entity), _File) :-
+		Kind \== file.
+	target_matches(file(TargetFile), _Context, File) :-
+		locate_target_file(TargetFile, FilePath),
+		diagnostic_file_path(File, FilePath).
+	target_matches(directory(Directory0), _Context, File) :-
+		normalize_directory_path(Directory0, Directory),
+		diagnostic_file_directory(File, Directory).
+	target_matches(rdirectory(Directory0), _Context, File) :-
+		normalize_directory_path(Directory0, Directory),
+		diagnostic_file_directory(File, FileDirectory),
+		sub_atom(FileDirectory, 0, _, _, Directory).
+	target_matches(library(Library), _Context, File) :-
+		expand_library_path(Library, Directory),
+		diagnostic_file_directory(File, Directory).
+	target_matches(rlibrary(Library), _Context, File) :-
+		expand_library_path(Library, TopPath),
+		diagnostic_file_directory(File, Directory),
+		once((	Directory == TopPath
+		;	sub_library(TopPath, _SubLibrary, Directory)
+		)).
+	target_matches(tests(Object), context(object, Object), _File).
+
+	locate_target_file(LibraryNotation, Path) :-
+		compound(LibraryNotation),
+		!,
+		LibraryNotation =.. [Library, Name],
+		expand_library_path(Library, LibraryPath),
+		atom_concat(LibraryPath, Name, Source),
+		locate_target_file(Source, Path).
+	locate_target_file(Source, Path) :-
+		add_extension(Source, Basename),
+		captured_file(Path, Basename),
+		\+ (
+			captured_file(OtherPath, Basename),
+			Path \== OtherPath
+		),
+		!.
+	locate_target_file(Source, Path) :-
+		add_extension(Source, SourceWithExtension),
+		captured_file(Path, Basename),
+		diagnostic_file_directory(Path, Directory),
+		atom_concat(Directory, Basename, SourceWithExtension),
+		!.
+
+	captured_file(Path, Basename) :-
+		recorded_linter_warning_(_Sequence, _RuleId, _Message, _Context, File, _Lines, _Properties),
+		diagnostic_file_path(File, Path),
+		decompose_file_name(Path, _Directory, Basename).
+
+	diagnostic_file_path(File0, File) :-
+		File0 \== '',
+		internal_os_path(File1, File0),
+		absolute_file_name(File1, File).
+
+	diagnostic_file_directory(File0, Directory) :-
+		diagnostic_file_path(File0, File),
+		decompose_file_name(File, Directory, _).
+
+	add_extension(Source, SourceWithExtension) :-
+		atom(Source),
+		decompose_file_name(Source, _, _, SourceExtension),
+		(	file_type_extension(source, SourceExtension) ->
+			SourceWithExtension = Source
+		;	file_type_extension(source, Extension),
+			atom_concat(Source, Extension, SourceWithExtension)
+		).
+
+	sub_library(TopPath, Library, LibraryPath) :-
+		logtalk_library_path(Library, _),
+		expand_library_path(Library, LibraryPath),
+		atom_concat(TopPath, _RelativePath, LibraryPath).
+
+	normalize_directory_path(Directory0, Directory) :-
+		internal_os_path(Directory1, Directory0),
+		absolute_file_name(Directory1, Directory2),
+		(	sub_atom(Directory2, _, _, 0, '/') ->
+			Directory = Directory2
+		;	atom_concat(Directory2, '/', Directory)
+		).
+
+	compilation_linter_warning(no_code_coverage_for_protocols(This, File, Lines, Type, Entity), no_code_coverage_for_protocols, File, Lines, context(Type, Entity), [covered_entity(This)]).
+	compilation_linter_warning(unknown_entity_declared_covered(This, File, Lines, Type, Entity, VariableNames), unknown_entity_declared_covered, File, Lines, context(Type, Entity), [covered_entity(This), variable_names(VariableNames)]).
+	compilation_linter_warning(assertion_uses_unification(Test, Assertion, File, Lines, Type, Entity, VariableNames), assertion_uses_unification, File, Lines, context(Type, Entity), [test(Test), assertion(Assertion), variable_names(VariableNames)]).
+	compilation_linter_warning(assertion_is_always_true(Test, Assertion, File, Lines, Type, Entity, VariableNames), assertion_is_always_true, File, Lines, context(Type, Entity), [test(Test), assertion(Assertion), variable_names(VariableNames)]).
+	compilation_linter_warning(assertion_is_always_false(Test, Assertion, File, Lines, Type, Entity, VariableNames), assertion_is_always_false, File, Lines, context(Type, Entity), [test(Test), assertion(Assertion), variable_names(VariableNames)]).
+	compilation_linter_warning(assertion_is_always_error(Test, Assertion, File, Lines, Type, Entity, VariableNames), assertion_is_always_error, File, Lines, context(Type, Entity), [test(Test), assertion(Assertion), variable_names(VariableNames)]).
+	compilation_linter_warning(non_instantiated_test_option(Test, File, Lines, Type, Entity), non_instantiated_test_option, File, Lines, context(Type, Entity), [test(Test)]).
+	compilation_linter_warning(invalid_test_option(Test, Option, File, Lines, Type, Entity), invalid_test_option, File, Lines, context(Type, Entity), [test(Test), option(Option)]).
+
+	handle_linter_warning(RuleId, Message, Tokens, File, Lines, Context, Properties) :-
+		next_linter_warning_sequence(Sequence),
+		warning_text(Tokens, WarningText),
+		ground_term_copy(Context, GroundContext),
+		ground_term_copy([raw_term(Message)| Properties], GroundProperties),
+		assertz(recorded_linter_warning_(Sequence, RuleId, WarningText, GroundContext, File, Lines, GroundProperties)).
+
+	next_linter_warning_sequence(Sequence) :-
+		( retract(linter_warning_sequence_(Current)) -> true ; Current = 0 ),
+		Sequence is Current + 1,
+		assertz(linter_warning_sequence_(Sequence)).
+
+	clear_linter_warnings(File) :-
+		retractall(recorded_linter_warning_(_, _, _, _, File, _, _)).
+
+	warning_text(Tokens, Text) :-
+		with_output_to(atom(Text), print_tokens(Tokens)).
+
+	explanation_text(Message, ExplanationText) :-
+		phrase(^^explain(Message), Explanation),
+		warning_text(Explanation, ExplanationText).
+
+	print_tokens(Tokens) :-
+		current_output(Stream),
+		logtalk::print_message_tokens(Stream, '', Tokens).
+
+	ground_term_copy(Term, GroundTerm) :-
+		copy_term(Term, GroundTerm),
+		numbervars(GroundTerm, 0, _).
 
 	run(File, Mode) :-
 		open(File, Mode, Stream, [alias(lgtunit_redirected_output)]),
@@ -1437,7 +1674,11 @@
 		term_expansion(Term, Expansion, VariableNames).
 
 	% ensure the source_data flag is turned on for the test object
-	term_expansion(begin_of_file, [begin_of_file, (:- set_logtalk_flag(source_data,on))], _).
+	term_expansion(begin_of_file, [begin_of_file, (:- set_logtalk_flag(source_data,on))], _) :-
+		( logtalk_load_context(file, File) ->
+			clear_linter_warnings(File)
+		; true
+		).
 	term_expansion((:- Directive), Terms, _) :-
 		% delegate to another predicate to take advantage of first-argument indexing
 		directive_expansion(Directive, Terms).

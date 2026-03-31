@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-13,
+		date is 2026-03-30,
 		comment is 'Lack of Cohesion Of Methods metric (LCOM4).',
 		remarks is [
 			'Score computation' - 'Computes the number of connected components in the undirected graph whose nodes are the locally defined predicates and whose edges represent direct internal calls between them.',
@@ -66,7 +66,7 @@
 		findall(
 			Predicate,
 			(	object_property(Entity, defines(Predicate, Properties)),
-				\+ memberchk(auxiliary, Properties)
+				\+ member(auxiliary, Properties)
 			),
 			Bag
 		),
@@ -75,7 +75,7 @@
 		findall(
 			Predicate,
 			(	category_property(Entity, defines(Predicate, Properties)),
-				\+ memberchk(auxiliary, Properties)
+				\+ member(auxiliary, Properties)
 			),
 			Bag
 		),

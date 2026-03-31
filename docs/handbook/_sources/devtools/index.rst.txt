@@ -46,6 +46,8 @@ directory in the ``NOTES.md`` file.
    packs
    ports_profiler
    profiler
+   sarif
    sbom
+   tool_diagnostics
    tutor
    wrapper

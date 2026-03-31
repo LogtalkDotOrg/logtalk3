@@ -23,9 +23,9 @@
 	implements(datalog_protocol)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:1:1,
 		author is 'Paulo Moura',
-		date is 2026-02-13,
+		date is 2026-03-30,
 		comment is 'Portable Datalog engine with stratified negation and incremental updates.'
 	]).
 
@@ -190,7 +190,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, memberchk/2, subtract/3, length/2, reverse/2
+		append/3, member/2, memberchk/2, subtract/3, length/2, reverse/2
 	]).
 
 	:- uses(numberlist, [
@@ -591,7 +591,7 @@
 	relax_aggregate_goals([], _, _, HeadStratum, Change, Change, HeadStratum).
 	relax_aggregate_goals([Goal| Goals], HeadName, HeadArity, HeadStratum, Change0, Change, FinalHeadStratum) :-
 		term_predicate(Goal, predicate(BodyName, BodyArity)),
-		( predicate_stratum_(BodyName, BodyArity, BodyStratum) ->
+		(	predicate_stratum_(BodyName, BodyArity, BodyStratum) ->
 			true
 		; 	BodyStratum = 0
 		),
@@ -774,7 +774,7 @@
 	apply_deletes([], Seeds, Seeds).
 	apply_deletes([Fact| Facts], Seeds0, Seeds) :-
 		retract_fact(Fact),
-		(	\+ fact_true_(Fact), \+ memberchk(Fact, Seeds0) ->
+		(	\+ fact_true_(Fact), \+ member(Fact, Seeds0) ->
 			Seeds1 = [Fact| Seeds0]
 		;	Seeds1 = Seeds0
 		),
@@ -786,7 +786,7 @@
 	apply_inserts([], _, Seeds, Seeds).
 	apply_inserts([Fact| Facts], OldFacts, Seeds0, Seeds) :-
 		assert_fact(Fact),
-		(	\+ memberchk(Fact, OldFacts), \+ memberchk(Fact, Seeds0) ->
+		(	\+ member(Fact, OldFacts), \+ member(Fact, Seeds0) ->
 			Seeds1 = [Fact| Seeds0]
 		;	Seeds1 = Seeds0
 		),
@@ -813,7 +813,7 @@
 	remove_edges([edge(DerivedFact, Id, Supports)| Edges], LostFacts0, LostFacts) :-
 		(	retract(support_edge_(DerivedFact, Id, Supports)) ->
 			decrement_support_count(DerivedFact, DerivedLost),
-			( DerivedLost == true, \+ memberchk(DerivedFact, LostFacts0) ->
+			(	DerivedLost == true, \+ member(DerivedFact, LostFacts0) ->
 				LostFacts1 = [DerivedFact| LostFacts0]
 			;	LostFacts1 = LostFacts0
 			)
@@ -828,7 +828,7 @@
 			assertz(support_count_(Fact, Count)),
 			Lost = false
 		;	retractall(idb_fact_(Fact)),
-			( edb_fact_(Fact) ->
+			(	edb_fact_(Fact) ->
 				Lost = false
 			;	Lost = true
 			)
@@ -867,7 +867,7 @@
 	add_derivations_collect_new_facts([], NewFacts, NewFacts).
 	add_derivations_collect_new_facts([derivation(Fact, Id, Supports)| Derivations], NewFacts0, NewFacts) :-
 		add_derivation_status(Fact, Id, Supports, Status),
-		( Status == new_fact ->
+		(	Status == new_fact ->
 			NewFacts1 = [Fact| NewFacts0]
 		;	NewFacts1 = NewFacts0
 		),
@@ -950,7 +950,7 @@
 
 	append_unique(List, [], List).
 	append_unique(List, [Head| Tail], Result) :-
-		(	memberchk(Head, List) ->
+		(	member(Head, List) ->
 			append_unique(List, Tail, Result)
 		;	append_unique([Head| List], Tail, Result)
 		).

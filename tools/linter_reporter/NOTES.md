@@ -21,8 +21,9 @@ ________________________________________________________________________
 `linter_reporter`
 =================
 
-This tool intercepts compiler linter warnings and caches them to generate
-SARIF reports that can be used in CI/CD pipelines.
+This tool intercepts compiler linter warnings and caches them as
+machine-readable diagnostics. These diagnostics can be queried directly or
+serialized as SARIF using the standalone `sarif` tool.
 
 
 API documentation
@@ -51,7 +52,7 @@ Or using explicit options:
     | ?- linter_reporter::enable([explanations(true)]).
     true.
 
-Load the code for which you want a SARIF report generated:
+Load the code for which you want diagnostics collected:
 
     | ?- logtalk_load(my_application(loader)).
     ...
@@ -61,9 +62,22 @@ Disable further collecting of linter warnings:
     | ?- linter_reporter::disable.
     true.
 
-Save the SARIF report:
+Query the cached diagnostics directly:
 
-    | ?- linter_reporter::report.
+    | ?- linter_reporter::diagnostics(all, Diagnostics).
+    ...
+
+Warnings originating in an included file are not always file-scoped. When the
+`include/1` directive appears inside an entity, the diagnostic context can be
+that entity; otherwise the context is typically the included file.
+
+Or generate a SARIF report using the standalone `sarif` tool:
+
+    | ?- logtalk_load(sarif(loader)).
+    ...
+
+    | ?- sarif::generate(linter_reporter, all, file('./linter_warnings.sarif'), []).
+    true.
 
 
 Testing
@@ -74,17 +88,19 @@ To test this tool, load the `tester.lgt` file:
 	| ?- logtalk_load(linter_reporter(tester)).
 
 The test suite reuses `errors` example files to exercise representative built-in
-linter warnings and validates SARIF export in both explanation-disabled and
-explanation-enabled configurations.
+linter warnings and validates both the diagnostics API and standalone SARIF
+generation in explanation-disabled and explanation-enabled configurations.
 
 
 Usage
 -----
 
 Load the tool, call `enable/0-1` before compiling the code to be checked, call
-`disable/0` when warning collection is finished, and then call `report/0-1` to
-generate the SARIF report from the cached warnings. The `report/0` predicate
-writes the SARIF report to `./linter_warnings.sarif`.
+`disable/0` when warning collection is finished, and then query the cached
+warnings using either the legacy warning predicates or the diagnostics protocol
+predicates. To generate SARIF from the cached diagnostics, load the standalone
+`sarif` tool and call
+`sarif::generate(linter_reporter, all, file('./linter_warnings.sarif'), []).`
 
 
 Options

@@ -14,8 +14,8 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 |    ``logtalk_load(lgtunit(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 22:5:0
-| **Date:** 2026-02-28
+| **Version:** 22:6:0
+| **Date:** 2026-03-31
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,14 +24,19 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 | **Implements:**
 |    ``public`` :ref:`expanding <expanding/0>`
 | **Imports:**
+|    ``public`` :ref:`tool_diagnostics_common <tool_diagnostics_common/0>`
 |    ``public`` :ref:`lgtunit_messages <lgtunit_messages/0>`
+|    ``public`` :ref:`tutor_explanations <tutor_explanations/0>`
+|    ``public`` :ref:`options <options/0>`
 | **Provides:**
+|    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
 |    :ref:`logtalk::trace_event/2 <logtalk/0::trace_event/2>`
 | **Uses:**
 |    :ref:`fast_random <fast_random/0>`
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
 |    :ref:`os <os/0>`
+|    :ref:`term_io <term_io/0>`
 |    :ref:`type <type/0>`
 |    :ref:`user <user/0>`
 
@@ -42,7 +47,7 @@ A unit test framework supporting predicate clause coverage, determinism testing,
    - Known issues: Parameter variables cannot currently be used in the definition of test options.
 
 | **Inherited public predicates:**
-|     :ref:`lgtunit_messages/0::failed_test_reason//1`  :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`tool_diagnostics_protocol/0::diagnostic/2`  :ref:`tool_diagnostics_protocol/0::diagnostic/3`  :ref:`tool_diagnostics_protocol/0::diagnostic_rule/5`  :ref:`tool_diagnostics_protocol/0::diagnostic_rules/1`  :ref:`tool_diagnostics_protocol/0::diagnostic_target/1`  :ref:`tool_diagnostics_protocol/0::diagnostics/2`  :ref:`tool_diagnostics_protocol/0::diagnostics/3`  :ref:`tool_diagnostics_protocol/0::diagnostics_preflight/2`  :ref:`tool_diagnostics_protocol/0::diagnostics_preflight/3`  :ref:`tool_diagnostics_protocol/0::diagnostics_summary/2`  :ref:`tool_diagnostics_protocol/0::diagnostics_summary/3`  :ref:`tool_diagnostics_protocol/0::diagnostics_tool/5`  :ref:`tutor_explanations/0::explain//1`  :ref:`lgtunit_messages/0::failed_test_reason//1`  :ref:`expanding/0::goal_expansion/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`expanding/0::term_expansion/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -2154,6 +2159,44 @@ Table of selected tests for execution.
 |    ``selected_test_(Identifier)``
 | **Mode and number of proofs:**
 |    ``selected_test_(?callable)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: linter_warning_sequence_/1
+.. _lgtunit/0::linter_warning_sequence_/1:
+
+``linter_warning_sequence_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Counter for cached test-compilation linter warnings.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``linter_warning_sequence_(Sequence)``
+| **Mode and number of proofs:**
+|    ``linter_warning_sequence_(?integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: recorded_linter_warning_/7
+.. _lgtunit/0::recorded_linter_warning_/7:
+
+``recorded_linter_warning_/7``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cache of test-compilation linter warnings.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``recorded_linter_warning_(Sequence,RuleId,Message,Context,File,Lines,Properties)``
+| **Mode and number of proofs:**
+|    ``recorded_linter_warning_(?integer,?atom,?atom,?compound,?atom,?compound,?list(compound))`` - ``zero_or_more``
 
 
 ------------

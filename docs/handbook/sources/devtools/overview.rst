@@ -25,7 +25,9 @@ The following developer tools are available, each one with its own
 - ``packs``
 - ``ports_profiler``
 - ``profiler``
+- ``sarif``
 - ``sbom``
+- ``tool_diagnostics``
 - ``tutor``
 - ``wrapper``
 
@@ -38,8 +40,8 @@ To load the main developer tools, use the following goal:
 
    | ?- logtalk_load(tools(loader)).
 
-The ``linter_reporter`` tool is not loaded by default as it's mostly
-useful for CI/CD pipelines.
+The ``linter_reporter`` and ``sarif`` tools are not loaded by default as
+they are mostly useful for CI/CD pipelines.
 
 The ``ports_profiler`` tool is not loaded by default; however, as it
 conflicts with the ``debugger`` tool as both provide a debug handler

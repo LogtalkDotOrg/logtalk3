@@ -1605,6 +1605,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    ports_profiler <ports_profiler_0>
 
+``tools/sarif/``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   sarif <sarif_0>
+
 ``tools/sbom/``
 ---------------
 
@@ -1614,6 +1624,17 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    sbom <sbom_0>
+
+``tools/tool_diagnostics/``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   tool_diagnostics_common <tool_diagnostics_common_0>
+   tool_diagnostics_protocol <tool_diagnostics_protocol_0>
 
 ``tools/tutor/``
 ----------------

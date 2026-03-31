@@ -21,15 +21,16 @@
 
 
 :- object(dead_code_scanner,
-	imports(options)).
+	imports((tool_diagnostics_common, options))).
 
 	:- info([
-		version is 0:17:1,
+		version is 0:18:0,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2026-03-20,
+		date is 2026-03-31,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
+			'Diagnostics targets' - 'The diagnostics predicates accept the targets ``all``, ``entity(Entity)``, ``file(File)``, ``directory(Directory)``, ``rdirectory(Directory)``, ``library(Library)``, and ``rlibrary(Library)``. The ``entity(Entity)`` target requires a loaded object or category. The ``file(File)`` target accepts a loaded source file specified by name, basename, full path, or library notation. Directory and library targets restrict diagnostics to loaded files found in the given directory, recursively in its sub-directories, in the given library, or recursively in its sub-libraries.',
 			'Known issues' - 'Use of local meta-calls with goal arguments only know at runtime can result in false positives. Calls from non-standard meta-predicates may be missed if the meta-calls are not optimized.',
 			'Requirements' - 'Source files must be compiled with the ``source_data`` flag turned on. To avoid false positives do to meta-calls, compilation of source files with the ``optimized`` flag turned on is also advised.'
 		]
@@ -132,76 +133,6 @@
 		comment is 'Scans all entities for dead code using default options.'
 	]).
 
-	:- public(findings/3).
-	:- mode(findings(+nonvar, -list(compound), +list(compound)), one).
-	:- info(findings/3, [
-		comment is 'Returns an ordered set of findings for a scan target using the given options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines)``.',
-		argnames is ['Target', 'Findings', 'Options']
-	]).
-
-	:- public(findings/2).
-	:- mode(findings(+nonvar, -list(compound)), one).
-	:- info(findings/2, [
-		comment is 'Returns an ordered set of findings for a scan target using default options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines)``.',
-		argnames is ['Target', 'Findings']
-	]).
-
-	:- public(finding/3).
-	:- mode(finding(+nonvar, -compound, +list(compound)), zero_or_more).
-	:- info(finding/3, [
-		comment is 'Enumerates, by backtracking, findings for a scan target using the given options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines)``.',
-		argnames is ['Target', 'Finding', 'Options']
-	]).
-
-	:- public(finding/2).
-	:- mode(finding(+nonvar, -compound), zero_or_more).
-	:- info(finding/2, [
-		comment is 'Enumerates, by backtracking, findings for a scan target using default options. Supported targets are ``all`` and the compound terms ``entity/1``, ``file/1``, ``directory/1``, ``rdirectory/1``, ``library/1``, and ``rlibrary/1``. Findings are returned as terms of the form ``dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines)``.',
-		argnames is ['Target', 'Finding']
-	]).
-
-	:- public(summary/3).
-	:- mode(summary(+nonvar, -compound, +list(compound)), one).
-	:- info(summary/3, [
-		comment is 'Returns a machine-readable summary for a scan target using the given options. The summary term is of the form ``summary(Target, TotalEntities, TotalFindings, Breakdown, EntitySummaries)`` where ``Breakdown`` is a ``finding_breakdown(ClassCounts, ConfidenceCounts)`` term and ``EntitySummaries`` is a list of ``entity_summary(Kind, Entity, FindingsCount, Breakdown)`` terms.',
-		argnames is ['Target', 'Summary', 'Options']
-	]).
-
-	:- public(summary/2).
-	:- mode(summary(+nonvar, -compound), one).
-	:- info(summary/2, [
-		comment is 'Returns a machine-readable summary for a scan target using default options. The summary term is of the form ``summary(Target, TotalEntities, TotalFindings, Breakdown, EntitySummaries)`` where ``Breakdown`` is a ``finding_breakdown(ClassCounts, ConfidenceCounts)`` term and ``EntitySummaries`` is a list of ``entity_summary(Kind, Entity, FindingsCount, Breakdown)`` terms.',
-		argnames is ['Target', 'Summary']
-	]).
-
-	:- public(preflight/3).
-	:- mode(preflight(+nonvar, -list(compound), +list(compound)), one).
-	:- info(preflight/3, [
-		comment is 'Returns an ordered set of machine-readable preflight warnings for a scan target using the given options. Warning terms currently use the form ``missing_analysis_prerequisite(File, Prerequisite)``.',
-		argnames is ['Target', 'Warnings', 'Options']
-	]).
-
-	:- public(preflight/2).
-	:- mode(preflight(+nonvar, -list(compound)), one).
-	:- info(preflight/2, [
-		comment is 'Returns an ordered set of machine-readable preflight warnings for a scan target using default options. Warning terms currently use the form ``missing_analysis_prerequisite(File, Prerequisite)``.',
-		argnames is ['Target', 'Warnings']
-	]).
-
-	:- public(export/4).
-	:- mode(export(+nonvar, +atom, ++compound, +list(compound)), one).
-	:- info(export/4, [
-		comment is 'Exports a scan target using the given options in the specified format to the specified sink. Supported formats are ``json`` and ``sarif``. Exports include both findings and machine-readable preflight warnings. SARIF exports use one rule descriptor per finding class and map finding confidence to triage-aware result levels. Supported sinks are those accepted by the ``json::generate/2`` library predicate.',
-		argnames is ['Target', 'Format', 'Sink', 'Options']
-	]).
-
-	:- public(export/3).
-	:- mode(export(+nonvar, +atom, ++compound), one).
-	:- info(export/3, [
-		comment is 'Exports a scan target using default options in the specified format to the specified sink. Supported formats are ``json`` and ``sarif``. Exports include both findings and machine-readable preflight warnings. SARIF exports use one rule descriptor per finding class and map finding confidence to triage-aware result levels. Supported sinks are those accepted by the ``json::generate/2`` library predicate.',
-		argnames is ['Target', 'Format', 'Sink']
-	]).
-
 	:- public(predicates/2).
 	:- mode(predicates(+entity_identifier, -list(predicate_indicator)), one).
 	:- info(predicates/2, [
@@ -234,16 +165,6 @@
 		length/2, member/2, memberchk/2
 	]).
 
-	:- uses(json_schema, [
-		parse/2 as json_schema_parse/2,
-		validate/2 as json_schema_validate/2
-	]).
-
-	:- uses(git, [
-		branch/2 as git_branch/2,
-		commit_hash/2 as git_commit_hash/2
-	]).
-
 	% Use the structured printing mechanism in order to allow results to be
 	% intercepted for alternative reporting by e.g. GUI IDEs
 	:- uses(logtalk, [
@@ -251,15 +172,8 @@
 	]).
 
 	:- uses(os, [
-		date_time/7,
-		decompose_file_name/3, decompose_file_name/4,
-		absolute_file_name/2, delete_file/1, directory_exists/1,
-		internal_os_path/2, path_concat/3, pid/1, shell/1,
-		temporary_directory/1
-	]).
-
-	:- uses(reader, [
-		line_to_codes/2
+		date_time/7, decompose_file_name/3, decompose_file_name/4, absolute_file_name/2, directory_exists/1,
+		internal_os_path/2
 	]).
 
 	:- uses(term_io, [
@@ -270,119 +184,85 @@
 		valid/2
 	]).
 
-	:- uses(url(atom), [
-		generate/2 as url_generate/2,
-		normalize/2 as url_normalize/2
-	]).
-
 	:- uses(user, [
-		atomic_list_concat/2
-	]).
-
-	:- uses(uuid, [
-		uuid_v4/1
+		atomic_list_concat/2, atomic_list_concat/3
 	]).
 
 	:- discontiguous(predicate/5).
 
-	findings(Target, Findings, UserOptions) :-
+	diagnostics_tool(dead_code_scanner, dead_code_scanner, Version, 'https://logtalk.org/', [
+		guid('91f50eb3-a092-43b5-b8e2-3c1f64bb7047'),
+		fingerprint_algorithm(canonical_finding_v1),
+		automation_id(target),
+		include_invocations(true),
+		include_git_metadata(true),
+		include_version_control_provenance(true)
+	]) :-
+		this(This),
+		object_property(This, info(Info)),
+		memberchk(version(Major:Minor:Patch), Info),
+		atomic_list_concat([Major, Minor, Patch], '.', Version).
+
+	diagnostic_rule(local_dead_code, 'Likely dead local predicate or non-terminal.', 'Predicate or non-terminal appears to be unreachable from the scoped public interface after applying exclusions and waivers.', warning, [guid('f6fd0e53-0c2d-45fd-a6dd-7b2f2af3e2a1')]).
+	diagnostic_rule(unused_uses_resource, 'Likely unused uses/2 resource.', 'Generated linking clause for a uses/2 resource appears to be unused after applying exclusions and waivers.', error, [guid('927db394-0a30-4f2d-b941-bcdd6f6c2c5d')]).
+	diagnostic_rule(unused_use_module_resource, 'Likely unused use_module/2 resource.', 'Generated linking clause for a use_module/2 resource appears to be unused after applying exclusions and waivers.', error, [guid('10335d4f-a525-4a46-a733-4ef2af38d4c8')]).
+
+	diagnostics(Target, Diagnostics, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		(	setof(Finding, finding(Target, Finding, Options), Findings) ->
+		(	setof(Diagnostic, target_diagnostic(Target, Diagnostic, Options), Diagnostics) ->
 			true
-		;	Findings = []
+		;	Diagnostics = []
 		).
 
-	findings(Target, Findings) :-
-		findings(Target, Findings, []).
+	diagnostics(Target, Diagnostics) :-
+		diagnostics(Target, Diagnostics, []).
 
-	finding(Target, Finding, UserOptions) :-
+	diagnostic(Target, Diagnostic, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
+		target_diagnostic(Target, Diagnostic, Options).
+
+	diagnostic(Target, Diagnostic) :-
+		diagnostic(Target, Diagnostic, []).
+
+	diagnostics_summary(Target, diagnostics_summary(Target, TotalContexts, TotalDiagnostics, Breakdown, ContextSummaries), UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		diagnostics(Target, Diagnostics, Options),
+		length(Diagnostics, TotalDiagnostics),
+		^^diagnostics_breakdown(Diagnostics, Breakdown),
+		^^context_summaries(Diagnostics, ContextSummaries),
+		length(ContextSummaries, TotalContexts).
+
+	diagnostics_summary(Target, Summary) :-
+		diagnostics_summary(Target, Summary, []).
+
+	diagnostics_preflight(Target, Issues, UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		( 	setof(Issue, diagnostic_preflight_issue(Target, Options, Issue), Issues) ->
+			true
+		; 	Issues = []
+		).
+
+	diagnostics_preflight(Target, Issues) :-
+		diagnostics_preflight(Target, Issues, []).
+
+	target_finding(Target, Finding, Options) :-
 		target_entity(Target, Kind, Entity, Options),
 		dead_code_finding(Kind, Entity, Finding, Options),
 		\+ waived_finding(Finding, Options).
 
-	finding(Target, Finding) :-
-		finding(Target, Finding, []).
+	target_diagnostic(Target, Diagnostic, Options) :-
+		target_finding(Target, Finding, Options),
+		finding_diagnostic(Finding, Diagnostic).
 
-	summary(Target, summary(Target, TotalEntities, TotalFindings, Breakdown, EntitySummaries), UserOptions) :-
-		^^check_options(UserOptions),
-		^^merge_options(UserOptions, Options),
-		target_entities(Target, Entities, Options),
-		length(Entities, TotalEntities),
-		findings(Target, Findings, Options),
-		length(Findings, TotalFindings),
-		findings_breakdown(Findings, Breakdown),
-		entity_summaries(Entities, Findings, EntitySummaries).
-
-	summary(Target, Summary) :-
-		summary(Target, Summary, []).
-
-	preflight(Target, Warnings, UserOptions) :-
-		^^check_options(UserOptions),
-		^^merge_options(UserOptions, Options),
-		( 	setof(Warning, preflight_warning(Target, Options, Warning), Warnings) ->
+	target_findings(Target, Findings, Options) :-
+		(	setof(Finding, target_finding(Target, Finding, Options), Findings) ->
 			true
-		; 	Warnings = []
+		;	Findings = []
 		).
-
-	preflight(Target, Warnings) :-
-		preflight(Target, Warnings, []).
-
-	export_term(json, Target, JSON, UserOptions) :-
-		^^check_options(UserOptions),
-		^^merge_options(UserOptions, Options),
-		findings(Target, Findings, Options),
-		preflight(Target, PreflightWarnings, Options),
-		summary(Target, Summary, Options),
-		target_json(Target, TargetJSON),
-		options_json(Options, OptionsJSON),
-		preflight_json(PreflightWarnings, PreflightJSON),
-		summary_json(Summary, SummaryJSON),
-		findings_json(Findings, FindingsJSON),
-		JSON = {
-			formatVersion-'1.0.0',
-			tool-dead_code_scanner,
-			target-TargetJSON,
-			options-OptionsJSON,
-			preflight-PreflightJSON,
-			summary-SummaryJSON,
-			findings-FindingsJSON
-		}.
-	export_term(sarif, Target, SARIF, UserOptions) :-
-		^^check_options(UserOptions),
-		^^merge_options(UserOptions, Options),
-		findings(Target, Findings, Options),
-		preflight(Target, PreflightWarnings, Options),
-		target_sarif(Target, TargetSARIF),
-		uuid_v4(RunGUID),
-		sarif_run_properties(Findings, RunProperties),
-		sarif_run_version_control_provenance(Findings, VersionControlProvenance),
-		sarif_notifications(PreflightWarnings, Notifications),
-		sarif_results(Findings, Results),
-		sarif_tool_driver(Driver),
-		sarif_run(TargetSARIF, RunGUID, Driver, VersionControlProvenance, RunProperties, Notifications, Results, Run),
-		SARIF = {
-			'$schema'-'https://json.schemastore.org/sarif-2.1.0.json',
-			version-'2.1.0',
-			runs-[Run]
-		}.
-
-	export(Target, Format, Sink, UserOptions) :-
-		( 	Format == json ->
-			export_term(json, Target, Term, UserOptions),
-			validate_export_term(json, Term, UserOptions),
-			json::generate(Sink, Term)
-		;	Format == sarif ->
-			export_term(sarif, Target, Term, UserOptions),
-			validate_export_term(sarif, Term, UserOptions),
-			json::generate(Sink, Term)
-		;	fail
-		).
-
-	export(Target, Format, Sink) :-
-		export(Target, Format, Sink, []).
 
 	predicates(Entity, Predicates, UserOptions) :-
 		^^check_options(UserOptions),
@@ -421,7 +301,7 @@
 		Confidence = high,
 		finding_properties(Class, Entity, File, [module(Module)], Properties).
 
-	finding_properties(Class, Entity, File, ExtraProperties, [class(Class), source_data(SourceData), optimize(Optimize)| ExtraProperties]) :-
+	finding_properties(_Class, Entity, File, ExtraProperties, [source_data(SourceData), optimize(Optimize)| ExtraProperties]) :-
 		entity_analysis_settings(Entity, File, SourceData, Optimize).
 
 	local_dead_code_confidence(Entity, File, high) :-
@@ -445,204 +325,36 @@
 		;	Entities = []
 		).
 
-	entity_summaries([], _, []).
-	entity_summaries([entity(Kind, Entity)| Entities], Findings, [entity_summary(Kind, Entity, FindingsCount, Breakdown)| EntitySummaries]) :-
-		entity_findings(Findings, Kind, Entity, EntityFindings),
-		length(EntityFindings, FindingsCount),
-		findings_breakdown(EntityFindings, Breakdown),
-		entity_summaries(Entities, Findings, EntitySummaries).
-
-	entity_findings([], _Kind, _Entity, []).
-	entity_findings([Finding| Findings], Kind, Entity, EntityFindings) :-
-		(	Finding = dead_predicate(_, _, _, Kind, Entity, _, _, _) ->
-			EntityFindings = [Finding| Rest]
-		;	EntityFindings = Rest
-		),
-		entity_findings(Findings, Kind, Entity, Rest).
-
-	findings_breakdown(Findings, finding_breakdown(ClassCounts, ConfidenceCounts)) :-
-		findings_class_counts(Findings, ClassCounts),
-		findings_confidence_counts(Findings, ConfidenceCounts).
-
-	findings_class_counts(Findings, ClassCounts) :-
-		(	setof(Class, Confidence^Properties^EntityKind^Entity^Predicate^File^Lines^member(dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines), Findings), Classes) ->
-			findings_class_counts(Classes, Findings, ClassCounts)
-		;	ClassCounts = []
-		).
-
-	findings_class_counts([], _, []).
-	findings_class_counts([Class| Classes], Findings, [class_count(Class, Count)| ClassCounts]) :-
-		finding_class_count(Findings, Class, Count),
-		findings_class_counts(Classes, Findings, ClassCounts).
-
-	finding_class_count([], _Class, 0).
-	finding_class_count([dead_predicate(Class, _Confidence, _Properties, _EntityKind, _Entity, _Predicate, _File, _Lines)| Findings], Class, Count) :-
-		!,
-		finding_class_count(Findings, Class, Count0),
-		Count is Count0 + 1.
-	finding_class_count([_| Findings], Class, Count) :-
-		finding_class_count(Findings, Class, Count).
-
-	findings_confidence_counts(Findings, ConfidenceCounts) :-
-		(	setof(Confidence, Class^Properties^EntityKind^Entity^Predicate^File^Lines^member(dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines), Findings), Confidences) ->
-			findings_confidence_counts(Confidences, Findings, ConfidenceCounts)
-		;	ConfidenceCounts = []
-		).
-
-	findings_confidence_counts([], _, []).
-	findings_confidence_counts([Confidence| Confidences], Findings, [confidence_count(Confidence, Count)| ConfidenceCounts]) :-
-		finding_confidence_count(Findings, Confidence, Count),
-		findings_confidence_counts(Confidences, Findings, ConfidenceCounts).
-
-	finding_confidence_count([], _Confidence, 0).
-	finding_confidence_count([dead_predicate(_Class, Confidence, _Properties, _EntityKind, _Entity, _Predicate, _File, _Lines)| Findings], Confidence, Count) :-
-		!,
-		finding_confidence_count(Findings, Confidence, Count0),
-		Count is Count0 + 1.
-	finding_confidence_count([_| Findings], Confidence, Count) :-
-		finding_confidence_count(Findings, Confidence, Count).
-
-	target_json(all, {kind-all, value-all}) :-
-		!.
-	target_json(entity(Entity), {kind-entity, value-Atom}) :-
-		!,
-		to_atom(Entity, Atom).
-	target_json(file(File), {kind-file, value-Atom}) :-
-		!,
-		to_atom(File, Atom).
-	target_json(directory(Directory), {kind-directory, value-Atom}) :-
-		!,
-		to_atom(Directory, Atom).
-	target_json(rdirectory(Directory), {kind-rdirectory, value-Atom}) :-
-		!,
-		to_atom(Directory, Atom).
-	target_json(library(Library), {kind-library, value-Atom}) :-
-		!,
-		to_atom(Library, Atom).
-	target_json(rlibrary(Library), {kind-rlibrary, value-Atom}) :-
-		!,
-		to_atom(Library, Atom).
-	target_json(Target, {kind-custom, value-Atom}) :-
-		to_atom(Target, Atom).
-
-	options_json(Options, {
-		excludeDirectories-ExcludeDirectories,
-		excludeFiles-ExcludeFiles,
-		excludeEntities-ExcludeEntities,
-		excludePredicates-ExcludePredicates,
-		excludeLibraries-ExcludeLibraries,
-		waiveFindings-WaiveFindings,
-		validateExport-ValidateExportJSON
-	}) :-
-		^^option(exclude_directories(ExcludeDirectories0), Options),
-		^^option(exclude_files(ExcludeFiles0), Options),
-		^^option(exclude_entities(ExcludeEntities0), Options),
-		^^option(exclude_predicates(ExcludePredicates0), Options),
-		^^option(exclude_libraries(ExcludeLibraries0), Options),
-		^^option(waive_findings(WaiveFindings0), Options),
-		^^option(validate_export(ValidateExport), Options),
-		boolean_json(ValidateExport, ValidateExportJSON),
-		terms_to_atoms(ExcludeDirectories0, ExcludeDirectories),
-		terms_to_atoms(ExcludeFiles0, ExcludeFiles),
-		terms_to_atoms(ExcludeEntities0, ExcludeEntities),
-		terms_to_atoms(ExcludePredicates0, ExcludePredicates),
-		terms_to_atoms(ExcludeLibraries0, ExcludeLibraries),
-		terms_to_atoms(WaiveFindings0, WaiveFindings).
-
-	summary_json(summary(_, TotalEntities, TotalFindings, Breakdown, EntitySummaries), {
-		totalEntities-TotalEntities,
-		totalFindings-TotalFindings,
-		breakdown-BreakdownJSON,
-		entities-EntitiesJSON
-	}) :-
-		findings_breakdown_json(Breakdown, BreakdownJSON),
-		entity_summaries_json(EntitySummaries, EntitiesJSON).
-
-	entity_summaries_json([], []).
-	entity_summaries_json([EntitySummary| EntitySummaries], [EntitySummaryJSON| EntitiesJSON]) :-
-		entity_summary_json(EntitySummary, EntitySummaryJSON),
-		entity_summaries_json(EntitySummaries, EntitiesJSON).
-
-	entity_summary_json(entity_summary(Kind, Entity, FindingsCount, Breakdown), {
-		kind-Kind,
-		entity-EntityAtom,
-		findingsCount-FindingsCount,
-		breakdown-BreakdownJSON
-	}) :-
-		findings_breakdown_json(Breakdown, BreakdownJSON),
-		to_atom(Entity, EntityAtom).
-
-	findings_breakdown_json(finding_breakdown(ClassCounts, ConfidenceCounts), {
-		classes-ClassesJSON,
-		confidences-ConfidencesJSON
-	}) :-
-		class_counts_json(ClassCounts, ClassesJSON),
-		confidence_counts_json(ConfidenceCounts, ConfidencesJSON).
-
-	class_counts_json([], []).
-	class_counts_json([ClassCount| ClassCounts], [ClassCountJSON| ClassesJSON]) :-
-		class_count_json(ClassCount, ClassCountJSON),
-		class_counts_json(ClassCounts, ClassesJSON).
-
-	class_count_json(class_count(Class, Count), {
-		class-Class,
-		findingsCount-Count
-	}).
-
-	confidence_counts_json([], []).
-	confidence_counts_json([ConfidenceCount| ConfidenceCounts], [ConfidenceCountJSON| ConfidencesJSON]) :-
-		confidence_count_json(ConfidenceCount, ConfidenceCountJSON),
-		confidence_counts_json(ConfidenceCounts, ConfidencesJSON).
-
-	confidence_count_json(confidence_count(Confidence, Count), {
-		confidence-Confidence,
-		findingsCount-Count
-	}).
-
-	findings_json([], []).
-	findings_json([Finding| Findings], [FindingJSON| FindingsJSON]) :-
-		finding_json(Finding, FindingJSON),
-		findings_json(Findings, FindingsJSON).
-
-	finding_json(dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Start-End), {
-		kind-dead_predicate,
-		class-Class,
-		confidence-Confidence,
-		properties-PropertiesJSON,
-		entityKind-EntityKind,
-		entity-EntityAtom,
-		predicate-PredicateAtom,
-		file-FileAtom,
-		lines-{start-Start, end-End}
-	}) :-
-		terms_to_atoms(Properties, PropertiesJSON),
+	finding_diagnostic(dead_predicate(Class, Confidence, FindingProperties, Kind, Entity, Predicate, File, Lines), diagnostic(Class, Severity, Confidence, Message, context(Kind, Entity), File, Lines, [finding_properties(FindingProperties), entity_kind(Kind), entity(Entity), predicate(Predicate)])) :-
+		diagnostic_severity(Class, Confidence, Severity),
 		to_atom(Entity, EntityAtom),
 		to_atom(Predicate, PredicateAtom),
-		to_atom(File, FileAtom).
+		diagnostic_message(Class, Kind, EntityAtom, PredicateAtom, Confidence, Message).
 
-	terms_to_atoms([], []).
-	terms_to_atoms([Term| Terms], [Atom| Atoms]) :-
-		to_atom(Term, Atom),
-		terms_to_atoms(Terms, Atoms).
+	diagnostic_severity(local_dead_code, high, warning).
+	diagnostic_severity(local_dead_code, medium, note).
+	diagnostic_severity(local_dead_code, low, note).
+	diagnostic_severity(unused_uses_resource, high, error).
+	diagnostic_severity(unused_uses_resource, medium, warning).
+	diagnostic_severity(unused_uses_resource, low, note).
+	diagnostic_severity(unused_use_module_resource, high, error).
+	diagnostic_severity(unused_use_module_resource, medium, warning).
+	diagnostic_severity(unused_use_module_resource, low, note).
 
-	preflight_json(Warnings, {
-		warnings-WarningsJSON
-	}) :-
-		preflight_warnings_json(Warnings, WarningsJSON).
+	diagnostic_message(local_dead_code, EntityKind, Entity, Predicate, Confidence, Message) :-
+		atomic_list_concat(['Likely dead ', EntityKind, ' predicate ', Entity, '::', Predicate, ' (confidence: ', Confidence, ').'], Message).
+	diagnostic_message(unused_uses_resource, EntityKind, Entity, Predicate, Confidence, Message) :-
+		atomic_list_concat(['Likely unused uses/2 resource in ', EntityKind, ' ', Entity, ': ', Predicate, ' (confidence: ', Confidence, ').'], Message).
+	diagnostic_message(unused_use_module_resource, EntityKind, Entity, Predicate, Confidence, Message) :-
+		atomic_list_concat(['Likely unused use_module/2 resource in ', EntityKind, ' ', Entity, ': ', Predicate, ' (confidence: ', Confidence, ').'], Message).
 
-	preflight_warnings_json([], []).
-	preflight_warnings_json([Warning| Warnings], [WarningJSON| WarningsJSON]) :-
-		preflight_warning_json(Warning, WarningJSON),
-		preflight_warnings_json(Warnings, WarningsJSON).
+	diagnostic_preflight_issue(Target, Options, Issue) :-
+		preflight_warning(Target, Options, Warning),
+		preflight_issue(Warning, Issue).
 
-	preflight_warning_json(missing_analysis_prerequisite(File, Prerequisite), {
-		kind-missing_analysis_prerequisite,
-		file-FileAtom,
-		prerequisite-Prerequisite,
-		severity-Severity
-	}) :-
-		to_atom(File, FileAtom),
-		preflight_warning_severity(Prerequisite, Severity).
+	preflight_issue(missing_analysis_prerequisite(File, Prerequisite), preflight_issue(missing_analysis_prerequisite, Severity, Message, context(file, File), File, 0-0, [prerequisite(Prerequisite)])) :-
+		preflight_warning_severity(Prerequisite, Severity),
+		preflight_warning_message(File, Prerequisite, Message).
 
 	to_atom(Term, Atom) :-
 		(	atom(Term) ->
@@ -652,294 +364,6 @@
 			write_term_to_atom(Copy, Atom, [numbervars(true), quoted(true)])
 		).
 
-	boolean_json(true, @true).
-	boolean_json(false, @false).
-
-	validate_export_term(json, JSON, UserOptions) :-
-		^^check_options(UserOptions),
-		^^merge_options(UserOptions, Options),
-		^^option(validate_export(Validate), Options),
-		( 	Validate == true ->
-			export_schema_path(Path),
-			json_schema_parse(file(Path), Schema),
-			json_schema_validate(Schema, JSON)
-		;	true
-		).
-	validate_export_term(sarif, _SARIF, _UserOptions).
-
-	export_schema_path(Path) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		atom_concat(Directory, 'dead_code_scanner.schema.json', Path).
-
-	target_sarif(all, all) :-
-		!.
-	target_sarif(Target, Atom) :-
-		target_json(Target, {kind-Kind, value-Value}),
-		to_atom(Kind-Value, Atom).
-
-	sarif_tool_driver(Driver) :-
-		sarif_rules(Rules),
-		Driver = {
-			name-dead_code_scanner,
-			informationUri-'https://logtalk.org/',
-			version-'0.22.0',
-			guid-'91f50eb3-a092-43b5-b8e2-3c1f64bb7047',
-			rules-Rules
-		}.
-
-	sarif_rules([
-		LocalDeadCodeRule,
-		UnusedUsesResourceRule,
-		UnusedUseModuleResourceRule
-	]) :-
-		sarif_rule(local_dead_code, LocalDeadCodeRule),
-		sarif_rule(unused_uses_resource, UnusedUsesResourceRule),
-		sarif_rule(unused_use_module_resource, UnusedUseModuleResourceRule).
-
-	sarif_rule(local_dead_code, {
-		id-local_dead_code,
-		guid-'f6fd0e53-0c2d-45fd-a6dd-7b2f2af3e2a1',
-		name-local_dead_code,
-		shortDescription-{text-'Likely dead local predicate or non-terminal.'},
-		fullDescription-{text-'Predicate or non-terminal appears to be unreachable from the scoped public interface after applying exclusions and waivers.'},
-		defaultConfiguration-{level-warning}
-	}).
-	sarif_rule(unused_uses_resource, {
-		id-unused_uses_resource,
-		guid-'927db394-0a30-4f2d-b941-bcdd6f6c2c5d',
-		name-unused_uses_resource,
-		shortDescription-{text-'Likely unused uses/2 resource.'},
-		fullDescription-{text-'Generated linking clause for a uses/2 resource appears to be unused after applying exclusions and waivers.'},
-		defaultConfiguration-{level-error}
-	}).
-	sarif_rule(unused_use_module_resource, {
-		id-unused_use_module_resource,
-		guid-'10335d4f-a525-4a46-a733-4ef2af38d4c8',
-		name-unused_use_module_resource,
-		shortDescription-{text-'Likely unused use_module/2 resource.'},
-		fullDescription-{text-'Generated linking clause for a use_module/2 resource appears to be unused after applying exclusions and waivers.'},
-		defaultConfiguration-{level-error}
-	}).
-
-	sarif_rule_index(local_dead_code, 0).
-	sarif_rule_index(unused_uses_resource, 1).
-	sarif_rule_index(unused_use_module_resource, 2).
-
-	sarif_run(TargetSARIF, RunGUID, Driver, [VersionControlDetails| VersionControlProvenance], RunProperties, Notifications, Results, {
-		tool-{driver-Driver},
-		automationDetails-{id-TargetSARIF, guid-RunGUID},
-		invocations-[Invocation],
-		versionControlProvenance-[VersionControlDetails| VersionControlProvenance],
-		properties-RunProperties,
-		results-Results
-	}) :-
-		sarif_invocation(Notifications, Invocation),
-		!.
-	sarif_run(TargetSARIF, RunGUID, Driver, [], RunProperties, Notifications, Results, {
-		tool-{driver-Driver},
-		automationDetails-{id-TargetSARIF, guid-RunGUID},
-		invocations-[Invocation],
-		properties-RunProperties,
-		results-Results
-	}) :-
-		sarif_invocation(Notifications, Invocation).
-
-	sarif_invocation([], {
-		executionSuccessful- @true
-	}).
-	sarif_invocation([Notification| Notifications], {
-		executionSuccessful- @true,
-		toolExecutionNotifications-[Notification| Notifications]
-	}).
-
-	sarif_run_properties(Findings, {
-		fingerprintAlgorithm-canonical_finding_v1,
-		gitBranch-Branch,
-		gitCommitHash-CommitHash
-	}) :-
-		sarif_git_metadata(Findings, Branch, CommitHash),
-		!.
-	sarif_run_properties(_Findings, {
-		fingerprintAlgorithm-canonical_finding_v1
-	}).
-
-	sarif_git_metadata([dead_predicate(_, _, _, _, _, _, File, _)| _], Branch, CommitHash) :-
-		decompose_file_name(File, Directory, _, _),
-		git_branch(Directory, Branch),
-		git_commit_hash(Directory, CommitHash).
-
-	sarif_run_version_control_provenance(Findings, VersionControlProvenance) :-
-		(	setof(Directory, sarif_version_control_directory(Findings, Directory), Directories) ->
-			sarif_version_control_details(Directories, VersionControlProvenance)
-		;	VersionControlProvenance = []
-		).
-
-	sarif_version_control_directory([dead_predicate(_, _, _, _, _, _, File, _)| _], Directory) :-
-		decompose_file_name(File, Directory, _, _).
-	sarif_version_control_directory([_| Findings], Directory) :-
-		sarif_version_control_directory(Findings, Directory).
-
-	sarif_version_control_details([], []).
-	sarif_version_control_details([Directory| Directories], [VersionControlDetails| VersionControlProvenance]) :-
-		VersionControlDetails = {
-			repositoryUri-RepositoryURI,
-			revisionId-CommitHash,
-			branch-Branch,
-			mappedTo-{uri-RepositoryRootURI}
-		},
-		git_branch(Directory, Branch),
-		git_commit_hash(Directory, CommitHash),
-		git_repository_root(Directory, RepositoryRoot),
-		git_repository_uri(Directory, RepositoryURI),
-		sarif_directory_uri(RepositoryRoot, RepositoryRootURI),
-		!,
-		sarif_version_control_details(Directories, VersionControlProvenance).
-	sarif_version_control_details([_| Directories], VersionControlProvenance) :-
-		sarif_version_control_details(Directories, VersionControlProvenance).
-
-	git_repository_root(Directory, RepositoryRoot) :-
-		git_command_clean_output(Directory, 'rev-parse --show-toplevel', RepositoryRoot),
-		RepositoryRoot \== ''.
-
-	git_repository_uri(Directory, RepositoryURI) :-
-		git_command_clean_output(Directory, 'config --get remote.origin.url', RemoteURI),
-		RemoteURI \== '',
-		normalize_git_repository_uri(RemoteURI, RepositoryURI).
-
-	normalize_git_repository_uri(RemoteURI, RepositoryURI) :-
-		(	scp_like_git_repository_uri(RemoteURI, URI) ->
-			true
-		;	URI = RemoteURI
-		),
-		url_normalize(URI, RepositoryURI).
-
-	scp_like_git_repository_uri(RemoteURI, RepositoryURI) :-
-		sub_atom(RemoteURI, Before, 1, After, :),
-		Before > 0,
-		After > 0,
-		sub_atom(RemoteURI, 0, Before, _, UserHost),
-		sub_atom(RemoteURI, _, After, 0, Path),
-		sub_atom(UserHost, _, _, _, @),
-		atomic_list_concat(['ssh://', UserHost, '/', Path], RepositoryURI).
-
-	sarif_directory_uri(Directory, URI) :-
-		internal_os_path(Directory, Path0),
-		directory_file_url_path(Path0, Path),
-		url_generate([scheme(file), authority(''), path(Path)], URI0),
-		url_normalize(URI0, URI),
-		!.
-
-	directory_file_url_path(Path0, Path) :-
-		file_url_path(Path0, Path1),
-		(	sub_atom(Path1, _, 1, 0, /) ->
-			Path = Path1
-		;	atom_concat(Path1, '/', Path)
-		).
-
-	file_url_path(Path0, Path) :-
-		(	sub_atom(Path0, 0, 1, _, /) ->
-			Path = Path0
-		;	sub_atom(Path0, 1, 2, _, ':/') ->
-			atom_concat('/', Path0, Path)
-		;	Path = Path0
-		).
-
-	:- if(os::operating_system_type(windows)).
-
-		git_command_clean_output(Directory, GitCommand, Output) :-
-			temporary_file(Temporary),
-			internal_os_path(Temporary, NativeTemporary),
-			atomic_list_concat(['git -C "', Directory, '" ', GitCommand, ' 2>nul > "', NativeTemporary, '"'], Command),
-			(	shell(Command) ->
-				open(Temporary, read, Stream),
-				line_to_codes(Stream, OutputCodes),
-				close(Stream),
-				atom_codes(Output, OutputCodes),
-				delete_file(Temporary)
-			;	delete_file(Temporary),
-				fail
-			).
-
-	:- else.
-
-		git_command_clean_output(Directory, GitCommand, Output) :-
-			temporary_file(Temporary),
-			atomic_list_concat(['git -C "', Directory, '" ', GitCommand, ' 2>/dev/null > "', Temporary, '"'], Command),
-			(	shell(Command) ->
-				open(Temporary, read, Stream),
-				line_to_codes(Stream, OutputCodes),
-				close(Stream),
-				atom_codes(Output, OutputCodes),
-				delete_file(Temporary)
-			;	delete_file(Temporary),
-				fail
-			).
-
-	:- endif.
-
-	temporary_file(Temporary) :-
-		pid(PID),
-		atomic_list_concat([logtalk_dead_code_scanner_git_, PID], Basename),
-		temporary_directory(Directory),
-		path_concat(Directory, Basename, Temporary).
-
-	sarif_results([], []).
-	sarif_results([Finding| Findings], [Result| Results]) :-
-		sarif_result(Finding, Result),
-		sarif_results(Findings, Results).
-
-	sarif_result(dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Start-End), {
-		ruleId-Class,
-		ruleIndex-RuleIndex,
-		level-Level,
-		message-{text-Message},
-		locations-[{physicalLocation-{
-			artifactLocation-{uri-FileURI},
-			region-{startLine-Start, endLine-End}
-		}}],
-		partialFingerprints-PartialFingerprints,
-		fingerprints-Fingerprints,
-		properties-{
-			class-Class,
-			confidence-Confidence,
-			findingProperties-PropertiesJSON,
-			entityKind-EntityKind,
-			entity-EntityAtom,
-			predicate-PredicateAtom
-		}
-	}) :-
-		sarif_rule_index(Class, RuleIndex),
-		once(sarif_result_level(Class, Confidence, Level)),
-		terms_to_atoms(Properties, PropertiesJSON),
-		to_atom(Entity, EntityAtom),
-		to_atom(Predicate, PredicateAtom),
-		to_atom(File, FileAtom),
-		sarif_message(Class, EntityKind, EntityAtom, PredicateAtom, Confidence, Message),
-		sarif_file_uri(FileAtom, FileURI),
-		sarif_fingerprints(EntityKind, EntityAtom, PredicateAtom, FileURI, Start-End, PartialFingerprints, Fingerprints).
-
-	sarif_notifications([], []).
-	sarif_notifications([Warning| Warnings], [Notification| Notifications]) :-
-		sarif_notification(Warning, Notification),
-		sarif_notifications(Warnings, Notifications).
-
-	sarif_notification(missing_analysis_prerequisite(File, Prerequisite), {
-		level-Level,
-		message-{text-Message},
-		locations-[{physicalLocation-{artifactLocation-{uri-FileURI}}}],
-		properties-{
-			kind-missing_analysis_prerequisite,
-			prerequisite-Prerequisite,
-			severity-Level,
-			file-FileAtom
-		}
-	}) :-
-		preflight_warning_level(Prerequisite, Level),
-		preflight_warning_message(File, Prerequisite, Message),
-		to_atom(File, FileAtom),
-		sarif_file_uri(FileAtom, FileURI).
-
 	preflight_warning_message(File, source_data, Message) :-
 		atomic_list_concat(['Analysis prerequisite missing for file ', File, ': source_data(on) was not used when loading the file.'], Message).
 	preflight_warning_message(File, optimize, Message) :-
@@ -947,45 +371,6 @@
 
 	preflight_warning_severity(source_data, warning).
 	preflight_warning_severity(optimize, note).
-
-	preflight_warning_level(Prerequisite, Level) :-
-		preflight_warning_severity(Prerequisite, Level).
-
-	sarif_result_level(local_dead_code, high, warning).
-	sarif_result_level(local_dead_code, medium, note).
-	sarif_result_level(local_dead_code, low, note).
-	sarif_result_level(unused_uses_resource, high, error).
-	sarif_result_level(unused_uses_resource, medium, warning).
-	sarif_result_level(unused_uses_resource, low, note).
-	sarif_result_level(unused_use_module_resource, high, error).
-	sarif_result_level(unused_use_module_resource, medium, warning).
-	sarif_result_level(unused_use_module_resource, low, note).
-
-	sarif_fingerprints(EntityKind, EntityAtom, PredicateAtom, FileURI, Start-End, PartialFingerprints, Fingerprints) :-
-		to_atom(dead_predicate(EntityKind, EntityAtom, PredicateAtom), EntityPredicateFingerprint),
-		to_atom(location(FileURI, Start-End), LocationFingerprint),
-		to_atom(dead_predicate(EntityKind, EntityAtom, PredicateAtom, FileURI, Start-End), FindingFingerprint),
-		PartialFingerprints = {
-			entityPredicateV1-EntityPredicateFingerprint,
-			locationV1-LocationFingerprint
-		},
-		Fingerprints = {
-			canonicalFindingV1-FindingFingerprint
-		}.
-
-	sarif_message(local_dead_code, EntityKind, Entity, Predicate, Confidence, Message) :-
-		atomic_list_concat(['Likely dead ', EntityKind, ' predicate ', Entity, '::', Predicate, ' (confidence: ', Confidence, ').'], Message).
-	sarif_message(unused_uses_resource, EntityKind, Entity, Predicate, Confidence, Message) :-
-		atomic_list_concat(['Likely unused uses/2 resource in ', EntityKind, ' ', Entity, ': ', Predicate, ' (confidence: ', Confidence, ').'], Message).
-	sarif_message(unused_use_module_resource, EntityKind, Entity, Predicate, Confidence, Message) :-
-		atomic_list_concat(['Likely unused use_module/2 resource in ', EntityKind, ' ', Entity, ': ', Predicate, ' (confidence: ', Confidence, ').'], Message).
-
-	sarif_file_uri(File, URI) :-
-		internal_os_path(File, Path),
-		file_url_path(Path, URLPath),
-		url_generate([scheme(file), authority(''), path(URLPath)], URI0),
-		url_normalize(URI0, URI),
-		!.
 
 	local_dead_predicate(Entity, Predicate, File, Lines, Options) :-
 		non_scoped_predicate(Entity, Predicate0, File, Lines),
@@ -1521,7 +906,7 @@
 		print_message(silent, dead_code_scanner, scan_ended).
 
 	output_preflight_warnings(Target, Options) :-
-		(	preflight(Target, Warnings, Options) ->
+		(	setof(Warning, preflight_warning(Target, Options, Warning), Warnings) ->
 			forall(
 				member(Warning, Warnings),
 				print_message(warning, dead_code_scanner, Warning)
@@ -1565,6 +950,8 @@
 	file_has_source_data(File) :-
 		loaded_file_property(File, protocol(_)).
 
+	% by default, don't request explanations for diagnostics:
+	default_option(explanations(false)).
 	% by default, don't exclude any directories:
 	default_option(exclude_directories([])).
 	% by default, don't exclude any source files:
@@ -1575,11 +962,11 @@
 	default_option(exclude_predicates([])).
 	% by default, don't waive any findings:
 	default_option(waive_findings([])).
-	% by default, don't validate exported JSON at runtime:
-	default_option(validate_export(false)).
 	% by default, exclude only the "startup" and "scratch_directory" libraries:
 	default_option(exclude_libraries([startup, scratch_directory])).
 
+	valid_option(explanations(Boolean)) :-
+		valid(boolean, Boolean).
 	valid_option(exclude_directories(Directories)) :-
 		valid(list(atom), Directories).
 	valid_option(exclude_files(Files)) :-
@@ -1590,8 +977,6 @@
 		valid(list(compound), Predicates).
 	valid_option(waive_findings(Findings)) :-
 		valid(list(compound), Findings).
-	valid_option(validate_export(true)).
-	valid_option(validate_export(false)).
 	valid_option(exclude_libraries(Libraries)) :-
 		valid(list(atom), Libraries).
 

@@ -25,21 +25,17 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-29,
+		date is 2026-03-31,
 		comment is 'Unit tests for the linter_reporter tool.'
 	]).
 
 	:- uses(linter_reporter, [
-		enable/0, enable/1, disable/0, reset/0, warning/1, warnings/1, summary/1, report/0, report/1
-	]).
-
-	:- uses(json, [
-		parse/2 as json_parse/2
-	]).
-
-	:- uses(json_schema, [
-		parse/2 as json_schema_parse/2,
-		validate/2 as json_schema_validate/2
+		enable/0, enable/1, disable/0, reset/0, warning/1, warnings/1, summary/1,
+		diagnostic_target/1, diagnostic_rule/5, diagnostic_rules/1,
+		diagnostic/2, diagnostic/3,
+		diagnostics/2, diagnostics/3,
+		diagnostics_summary/2, diagnostics_summary/3,
+		diagnostics_preflight/2, diagnostics_preflight/3
 	]).
 
 	:- uses(lgtunit, [
@@ -50,14 +46,75 @@
 		length/2, member/2, memberchk/2
 	]).
 
-	:- uses(os, [
-		delete_file/1, file_exists/1
+	:- uses(user, [
+		atomic_list_concat/3
 	]).
 
 	cover(linter_reporter).
 
-	cleanup :-
-		^^clean_file('linter_warnings.sarif').
+	test(lr_tool_info_01, deterministic) :-
+		object_property(linter_reporter, info(Info)),
+		memberchk(version(Major:Minor:Patch), Info),
+		atomic_list_concat([Major, Minor, Patch], '.', Version),
+		linter_reporter::diagnostics_tool(linter_reporter, linter_reporter, Version, 'https://logtalk.org/', Properties),
+		assertion(member(guid(_), Properties)),
+		assertion(member(fingerprint_algorithm(canonical_warning_v1), Properties)),
+		assertion(member(count_key(totalWarnings), Properties)).
+
+	test(lr_targets_01, deterministic) :-
+		assertion(diagnostic_target(all)),
+		assertion(diagnostic_target(entity(_))),
+		assertion(diagnostic_target(file(_))),
+		assertion(diagnostic_target(directory(_))),
+		assertion(diagnostic_target(rdirectory(_))),
+		assertion(diagnostic_target(library(_))),
+		assertion(diagnostic_target(rlibrary(_))).
+
+	test(lr_targets_02, deterministic) :-
+		prepare_target_run(false),
+		diagnostics(entity(misspell), Diagnostics),
+		assertion(Diagnostics \== []),
+		forall(
+			member(diagnostic(_RuleId, _Severity, _Confidence, _Message, Context, _File, _Lines, _Properties), Diagnostics),
+			assertion(Context == context(object, misspell))
+		).
+
+	test(lr_targets_03, deterministic) :-
+		prepare_target_run(false),
+		diagnostics(file(errors(warnings)), Diagnostics),
+		logtalk::expand_library_path(errors, Directory),
+		atom_concat(Directory, 'warnings.lgt', File),
+		assertion(Diagnostics \== []),
+		forall(
+			member(diagnostic(_RuleId, _Severity, _Confidence, _Message, _Context, DiagnosticFile, _Lines, _Properties), Diagnostics),
+			assertion(DiagnosticFile == File)
+		).
+
+	test(lr_targets_04, deterministic) :-
+		prepare_target_run(false),
+		diagnostics(rlibrary(tools), Diagnostics),
+		assertion(Diagnostics == []).
+
+	test(lr_targets_05, deterministic) :-
+		prepare_target_run(false),
+		logtalk::expand_library_path(tools, Directory),
+		diagnostics(rdirectory(Directory), Diagnostics),
+		assertion(Diagnostics == []).
+
+	test(lr_targets_06, deterministic) :-
+		prepare_target_run(false),
+		diagnostics(library(errors), Diagnostics),
+		assertion(Diagnostics \== []),
+		assertion(member(diagnostic(_RuleId, _Severity, _Confidence, _Message, context(object, misspell), _File, _Lines, _Properties), ErrorsDiagnostics)).
+
+	test(lr_targets_07, deterministic) :-
+		prepare_run(false),
+		diagnostics(file(errors(warnings)), Diagnostics),
+		logtalk::expand_library_path(errors, Directory),
+		atom_concat(Directory, 'warnings.lgt', File),
+		assertion(Diagnostics \== []),
+		assertion(member(diagnostic(singleton_variables, _Severity, _Confidence, _Message, context(file, File), File, _Lines, _Properties), Diagnostics)),
+		assertion(member(diagnostic(singleton_variables, _Severity, _Confidence, _Message, context(object, singletons(_)), File, _Lines, _Properties), Diagnostics)).
 
 	test(lr_warnings_01, deterministic) :-
 		prepare_run(false),
@@ -83,40 +140,61 @@
 		assertion(Warnings \== []),
 		assertion(warning_with_explanation(Warnings)).
 
-	test(lr_report_01, deterministic) :-
+	test(lr_diagnostics_01, deterministic) :-
 		prepare_run(false),
-		warnings(Warnings),
-		report(atom(Atom)),
-		assertion(ground(Atom)),
-		json_parse(atom(Atom), SARIF),
-		SARIF = {'$schema'-'https://json.schemastore.org/sarif-2.1.0.json', version-'2.1.0', runs-[Run]},
-		sarif_run_ok(Run, Rules, _Properties, Results),
+		diagnostics(all, Diagnostics),
+		length(Diagnostics, Count),
+		assertion(Count > 0),
+		setof(RuleId, Severity^Confidence^Message^Context^File^Lines^Properties^member(diagnostic(RuleId, Severity, Confidence, Message, Context, File, Lines, Properties), Diagnostics), RuleIds),
+		assertion(member(unknown_predicate_called_but_not_defined, RuleIds)),
+		assertion(member(singleton_variables, RuleIds)),
+		assertion(member(suspicious_call, RuleIds)).
+
+	test(lr_diagnostics_02, deterministic) :-
+		prepare_run(false),
+		diagnostics(all, Diagnostics),
+		forall(
+			member(diagnostic(_RuleId, warning, not_applicable, _Message, _Context, _File, _Lines, Properties), Diagnostics),
+			(	assertion(ground(Properties)),
+				assertion(member(flag(_), Properties)),
+				assertion(\+ member(explanation(_), Properties))
+			)
+		).
+
+	test(lr_diagnostics_03, deterministic) :-
+		prepare_run(true),
+		setof(Diagnostic, diagnostic(all, Diagnostic), Diagnostics),
+		assertion(Diagnostics \== []),
+		assertion(diagnostic_with_explanation(Diagnostics)).
+
+	test(lr_diagnostics_options_01, deterministic) :-
+		prepare_run(false),
+		diagnostics(all, Diagnostics, [explanations(true)]),
+		length(Diagnostics, Count),
+		assertion(Count > 0).
+
+	test(lr_diagnostics_options_02, deterministic) :-
+		prepare_run(false),
+		findall(Diagnostic, diagnostic(all, Diagnostic, [explanations(false)]), Enumerated),
+		assertion(Enumerated \== []).
+
+	test(lr_diagnostics_options_03, deterministic) :-
+		prepare_run(false),
+		diagnostics_summary(all, diagnostics_summary(all, TotalContexts, TotalDiagnostics, _Breakdown, _ContextSummaries), [explanations(true)]),
+		assertion(TotalContexts > 0),
+		assertion(TotalDiagnostics > 0).
+
+	test(lr_diagnostics_options_04, deterministic) :-
+		prepare_run(false),
+		diagnostics_preflight(all, Issues, [explanations(false)]),
+		assertion(Issues == []).
+
+	test(lr_rules_01, deterministic) :-
+		prepare_run(true),
+		diagnostic_rules(Rules),
 		assertion(Rules \== []),
-		length(Warnings, Count),
-		assertion(length(Results, Count)).
-
-	test(lr_report_02, deterministic) :-
-		prepare_run(true),
-		^^file_path('linter_warnings.sarif', ReportFile),
-		report(file(ReportFile)),
-		assertion(os::file_exists(ReportFile)),
-		json_parse(file(ReportFile), SARIF),
-		SARIF = {'$schema'-'https://json.schemastore.org/sarif-2.1.0.json', version-'2.1.0', runs-[Run]},
-		sarif_run_ok(Run, _Rules, _Properties, Results),
-		assertion(Results \== []).
-
-	test(lr_report_schema_01, deterministic) :-
-		prepare_run(false),
-		report(atom(Atom)),
-		json_parse(atom(Atom), SARIF),
-		validate_sarif(SARIF).
-
-	test(lr_report_schema_02, deterministic) :-
-		prepare_run(true),
-		^^file_path('linter_warnings.sarif', ReportFile),
-		report(file(ReportFile)),
-		json_parse(file(ReportFile), SARIF),
-		validate_sarif(SARIF).
+		assertion(member(diagnostic_rule(singleton_variables, _, _, warning, []), Rules)),
+		assertion(diagnostic_rule(singleton_variables, _, _, warning, [])).
 
 	test(lr_summary_01, deterministic) :-
 		prepare_run(false),
@@ -124,6 +202,31 @@
 		assertion(TotalWarnings > 0),
 		assertion(member(rule_count(singleton_variables, _), RuleCounts)),
 		assertion(member(flag_count(singleton_variables, _), FlagCounts)).
+
+	test(lr_diagnostics_summary_01, deterministic) :-
+		prepare_run(false),
+		diagnostics_summary(all, diagnostics_summary(all, TotalContexts, TotalDiagnostics, diagnostic_breakdown(RuleCounts, SeverityCounts, ConfidenceCounts), ContextSummaries)),
+		assertion(TotalContexts > 0),
+		assertion(TotalDiagnostics > 0),
+		assertion(member(rule_count(singleton_variables, _), RuleCounts)),
+		assertion(SeverityCounts == [severity_count(warning, TotalDiagnostics)]),
+		assertion(ConfidenceCounts == [confidence_count(not_applicable, TotalDiagnostics)]),
+		assertion(ContextSummaries \== []).
+
+	test(lr_diagnostics_summary_02, deterministic) :-
+		prepare_run(false),
+		diagnostics(all, Diagnostics),
+		diagnostics_summary(all, diagnostics_summary(all, TotalContexts, TotalDiagnostics, _Breakdown, ContextSummaries)),
+		setof(Context, RuleId^Severity^Confidence^Message^File^Lines^Properties^member(diagnostic(RuleId, Severity, Confidence, Message, Context, File, Lines, Properties), Diagnostics), Contexts),
+		findall(Context, member(context_summary(Context, _DiagnosticsCount, _ContextBreakdown), ContextSummaries), SummaryContexts),
+		assertion(length(Diagnostics, TotalDiagnostics)),
+		assertion(length(Contexts, TotalContexts)),
+		assertion(SummaryContexts == Contexts).
+
+	test(lr_preflight_01, deterministic) :-
+		prepare_run(false),
+		diagnostics_preflight(all, Issues),
+		assertion(Issues == []).
 
 	test(lr_warning_01, true) :-
 		prepare_run(true),
@@ -134,12 +237,19 @@
 			)
 		).
 
-	prepare_run(Explainations) :-
-		^^file_path('linter_warnings.sarif', ReportFile),
-		^^clean_file(ReportFile),
+	prepare_run(Explanations) :-
+		^^clean_file('linter_warnings.sarif'),
 		reset,
-		enable([explanations(Explainations)]),
+		enable([explanations(Explanations)]),
 		logtalk_load([errors(warnings), errors(main_include_compiler_warning)], [reload(always)]),
+		disable.
+
+	prepare_target_run(Explanations) :-
+		^^clean_file('linter_warnings.sarif'),
+		reset,
+		enable([explanations(Explanations)]),
+		logtalk_load([errors(warnings), errors(main_include_compiler_warning)], [reload(always)]),
+		logtalk_load(lgtunit('test_files/diagnostics_fixture'), [hook(lgtunit), reload(always)]),
 		disable.
 
 	% not all warnings have explanations
@@ -148,16 +258,9 @@
 		memberchk(explanation(_), Properties),
 		!.
 
-	validate_sarif(SARIF) :-
-		^^file_path('sarif-schema-2.1.0.json', Path),
-		json_schema_parse(file(Path), Schema),
-		json_schema_validate(Schema, SARIF).
-
-	sarif_run_ok({
-		tool-{driver-{name-linter_reporter, informationUri-'https://logtalk.org/', version-'0.1.0', rules-Rules}},
-		automationDetails-{id-linter_reporter, guid-_},
-		properties-Properties,
-		results-Results
-	}, Rules, Properties, Results).
+	diagnostic_with_explanation(Diagnostics) :-
+		member(diagnostic(_RuleId, _Severity, _Confidence, _Message, _Context, _File, _Lines, Properties), Diagnostics),
+		memberchk(explanation(_), Properties),
+		!.
 
 :- end_object.

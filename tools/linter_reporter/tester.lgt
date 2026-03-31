@@ -21,17 +21,13 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
-	logtalk_load(git(loader)),
-	logtalk_load(json(loader)),
-	logtalk_load(json_schema(loader)),
-	logtalk_load(lgtunit(loader)),
+	logtalk_load(basic_types(loader)),
 	logtalk_load(options(loader)),
-	logtalk_load(os(loader)),
 	logtalk_load(term_io(loader)),
+	logtalk_load(tool_diagnostics(loader)),
 	logtalk_load(tutor(tutor_explanations), [optimize(on)]),
-	logtalk_load(url(loader)),
-	logtalk_load(uuid(loader)),
-	logtalk_load(linter_reporter, [source_data(on), debug(on)]),
+	logtalk_load(linter_reporter, [debug(on), source_data(on)]),
+	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit), optimize(on)]),
 	tests::run
 )).

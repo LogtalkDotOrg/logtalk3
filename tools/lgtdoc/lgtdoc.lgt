@@ -21,12 +21,12 @@
 
 :- object(lgtdoc,
 	implements(lgtdocp),
-	imports(options)).
+	imports((tool_diagnostics_common, options))).
 
 	:- info([
-		version is 11:2:1,
+		version is 11:3:0,
 		author is 'Paulo Moura',
-		date is 2025-10-07,
+		date is 2026-03-31,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -62,12 +62,44 @@
 		argnames is ['Predicate', 'PrimarySortKey', 'SecondarySortKey', 'Entity']
 	]).
 
+	:- private(cached_run_/5).
+	:- dynamic(cached_run_/5).
+	:- mode(cached_run_(?nonvar, ?list(compound), ?list(compound), ?list(compound), ?list(compound)), zero_or_more).
+	:- info(cached_run_/5, [
+		comment is 'Cache of diagnostics collected while generating documentation for a target and merged options.',
+		argnames is ['Target', 'Options', 'Contexts', 'Diagnostics', 'PreflightIssues']
+	]).
+
+	:- private(active_diagnostic_/1).
+	:- dynamic(active_diagnostic_/1).
+	:- mode(active_diagnostic_(?compound), zero_or_more).
+	:- info(active_diagnostic_/1, [
+		comment is 'Diagnostics collected during the current documentation run.',
+		argnames is ['Diagnostic']
+	]).
+
+	:- private(active_preflight_issue_/1).
+	:- dynamic(active_preflight_issue_/1).
+	:- mode(active_preflight_issue_(?compound), zero_or_more).
+	:- info(active_preflight_issue_/1, [
+		comment is 'Preflight issues collected during the current documentation run.',
+		argnames is ['Issue']
+	]).
+
+	:- private(active_collection_mode_/1).
+	:- dynamic(active_collection_mode_/1).
+	:- mode(active_collection_mode_(?atom), zero_or_one).
+	:- info(active_collection_mode_/1, [
+		comment is 'Current diagnostics collection mode.',
+		argnames is ['Mode']
+	]).
+
 	:- uses(date, [
 		today/3, valid/3 as valid_date/3
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2, prefix/3, sort/4
+		length/2, member/2, memberchk/2, prefix/3, sort/4
 	]).
 
 	:- uses(logtalk, [
@@ -81,45 +113,300 @@
 		decompose_file_name/3, decompose_file_name/4
 	]).
 
+	:- uses(term_io, [
+		write_term_to_atom/3
+	]).
+
 	:- uses(type, [
 		valid/2
 	]).
 
 	:- uses(user, [
-		atomic_list_concat/2
+		atomic_list_concat/2, atomic_list_concat/3
 	]).
 
 	:- uses(varlist, [
 		memberchk/2 as member_var/2
 	]).
 
+	diagnostics_tool(lgtdoc, lgtdoc, Version, 'https://logtalk.org/', [
+		guid('52d4d8bc-b79e-4a18-a3aa-1c1f75cd0a2d'),
+		automation_id(target),
+		include_invocations(true),
+		include_git_metadata(true),
+		include_version_control_provenance(true),
+		count_key(diagnosticsCount)
+	]) :-
+		this(This),
+		object_property(This, info(Info)),
+		memberchk(version(Major:Minor:Patch), Info),
+		atomic_list_concat([Major, Minor, Patch], '.', Version).
+
+	diagnostic_target(all).
+	diagnostic_target(file(_)).
+	diagnostic_target(files(_)).
+	diagnostic_target(directory(_)).
+	diagnostic_target(directories(_)).
+	diagnostic_target(rdirectory(_)).
+	diagnostic_target(rdirectories(_)).
+	diagnostic_target(library(_)).
+	diagnostic_target(libraries(_)).
+	diagnostic_target(rlibrary(_)).
+	diagnostic_target(rlibraries(_)).
+
+	diagnostic_rule(missing_entity_directive, 'Missing entity directive.', 'Entity documentation is missing a required directive such as info/1.', warning, [guid('63d9d8ea-9fe0-4f08-8d89-2f1ff4e77be3')]).
+	diagnostic_rule(missing_predicate_directive, 'Missing predicate directive.', 'Predicate or non-terminal documentation is missing a required directive such as mode/2 or info/2.', warning, [guid('53ebf49d-94c0-4ba8-8a6f-9af62d98d04a')]).
+	diagnostic_rule(missing_entity_info_key, 'Missing entity info key.', 'Entity info/1 directive is missing a recommended key.', warning, [guid('737f52f9-3d6a-42f2-9a84-a9dfb6b9c4d7')]).
+	diagnostic_rule(missing_predicate_info_key, 'Missing predicate info key.', 'Predicate info/2 directive is missing a recommended key.', warning, [guid('61d60f24-b796-4471-9871-0e2456044045')]).
+	diagnostic_rule(missing_punctuation, 'Missing punctuation.', 'Documentation text should end with punctuation.', warning, [guid('de1c04ce-14bd-42d4-a50d-d65f919caf20')]).
+	diagnostic_rule(non_standard_exception, 'Non-standard exception.', 'Predicate documentation declares a non-standard exception term.', warning, [guid('878d4a76-a123-4ec8-8736-b62e5e8be950')]).
+	diagnostic_rule(invalid_date, 'Invalid date.', 'Entity documentation contains an invalid date value.', warning, [guid('2542d3bb-3989-4756-8db6-cb15ce6922e8')]).
+	diagnostic_rule(date_in_the_future, 'Date in the future.', 'Entity documentation contains a date that is later than today.', warning, [guid('df49bbf0-f32f-4229-9072-fa336e2d8a0a')]).
+
+	diagnostics(Target, Diagnostics, UserOptions) :-
+		ensure_target_diagnostics(Target, UserOptions, _Contexts, Diagnostics, _Issues).
+
+	diagnostics(Target, Diagnostics) :-
+		diagnostics(Target, Diagnostics, []).
+
+	diagnostic(Target, Diagnostic, UserOptions) :-
+		diagnostics(Target, Diagnostics, UserOptions),
+		member(Diagnostic, Diagnostics).
+
+	diagnostic(Target, Diagnostic) :-
+		diagnostic(Target, Diagnostic, []).
+
+	diagnostics_summary(Target, diagnostics_summary(Target, TotalContexts, TotalDiagnostics, Breakdown, ContextSummaries), UserOptions) :-
+		ensure_target_diagnostics(Target, UserOptions, _Contexts, Diagnostics, _Issues),
+		length(Diagnostics, TotalDiagnostics),
+		^^diagnostics_breakdown(Diagnostics, Breakdown),
+		^^context_summaries(Diagnostics, ContextSummaries),
+		length(ContextSummaries, TotalContexts).
+
+	diagnostics_summary(Target, Summary) :-
+		diagnostics_summary(Target, Summary, []).
+
+	diagnostics_preflight(Target, Issues, UserOptions) :-
+		ensure_target_diagnostics(Target, UserOptions, _Contexts, _Diagnostics, Issues).
+
+	diagnostics_preflight(Target, Issues) :-
+		diagnostics_preflight(Target, Issues, []).
+
 	rlibraries(Libraries, UserOptions) :-
+		document(rlibraries(Libraries), UserOptions).
+
+	rlibraries(Libraries) :-
+		rlibraries(Libraries, []).
+
+	rlibrary(Library, UserOptions) :-
+		document(rlibrary(Library), UserOptions).
+
+	rlibrary(Library) :-
+		rlibrary(Library, []).
+
+	libraries(Libraries, UserOptions) :-
+		document(libraries(Libraries), UserOptions).
+
+	libraries(Libraries) :-
+		libraries(Libraries, []).
+
+	library(Library, UserOptions) :-
+		document(library(Library), UserOptions).
+
+	library(Library) :-
+		library(Library, []).
+
+	rdirectories(Directories, UserOptions) :-
+		document(rdirectories(Directories), UserOptions).
+
+	rdirectories(Directories) :-
+		rdirectories(Directories, []).
+
+	rdirectory(Directory, UserOptions) :-
+		document(rdirectory(Directory), UserOptions).
+
+	rdirectory(Directory) :-
+		rdirectory(Directory, []).
+
+	directories(Directories, UserOptions) :-
+		document(directories(Directories), UserOptions).
+
+	directories(Directories) :-
+		directories(Directories, []).
+
+	directory(Directory, UserOptions) :-
+		document(directory(Directory), UserOptions).
+
+	directory(Directory) :-
+		directory(Directory, []).
+
+	files(Sources, UserOptions) :-
+		document(files(Sources), UserOptions).
+
+	files(Sources) :-
+		files(Sources, []).
+
+	file(Source, UserOptions) :-
+		document(file(Source), UserOptions).
+
+	file(Source) :-
+		file(Source, []).
+
+	all(UserOptions) :-
+		document(all, UserOptions).
+
+	all :-
+		all([]).
+
+	document(Target, UserOptions) :-
 		^^check_options(UserOptions),
-		reset,
 		^^merge_options(UserOptions, Options),
+		run_target(Target, Options, print_and_collect).
+
+	ensure_target_diagnostics(Target, UserOptions, Contexts, Diagnostics, Issues) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		ensure_cached_run(Target, Options),
+		cached_run_(Target, Options, Contexts, Diagnostics, Issues),
+		!.
+
+	ensure_cached_run(Target, Options) :-
+		cached_run_(Target, Options, _, _, _),
+		!.
+	ensure_cached_run(Target, Options) :-
+		run_target(Target, Options, collect_only).
+
+	run_target(Target, Options, Mode) :-
+		reset,
+		begin_collection(Mode),
+		catch(
+			(	generate_target(Target, Options) ->
+				finish_collection(Target, Options)
+			;	abort_collection,
+				fail
+			),
+			Error,
+			(	abort_collection,
+				throw(Error)
+			)
+		).
+
+	begin_collection(Mode) :-
+		retractall(active_diagnostic_(_)),
+		retractall(active_preflight_issue_(_)),
+		retractall(active_collection_mode_(_)),
+		assertz(active_collection_mode_(Mode)).
+
+	finish_collection(Target, Options) :-
+		(	setof(Context, collected_context(Context), Contexts) ->
+			true
+		;	Contexts = []
+		),
+		(	setof(Diagnostic, active_diagnostic_(Diagnostic), Diagnostics) ->
+			true
+		;	Diagnostics = []
+		),
+		(	setof(Issue, active_preflight_issue_(Issue), Issues) ->
+			true
+		;	Issues = []
+		),
+		retractall(cached_run_(Target, Options, _, _, _)),
+		assertz(cached_run_(Target, Options, Contexts, Diagnostics, Issues)),
+		cleanup_active_collection.
+
+	abort_collection :-
+		cleanup_active_collection.
+
+	cleanup_active_collection :-
+		retractall(active_diagnostic_(_)),
+		retractall(active_preflight_issue_(_)),
+		retractall(active_collection_mode_(_)).
+
+	collected_context(context(Type, Entity)) :-
+		type_entity_(Type, _, _, Entity).
+
+	prepare_output_directory(Options) :-
 		^^option(xml_docs_directory(XMLDirectory), Options),
-		make_directory(XMLDirectory),
+		make_directory(XMLDirectory).
+
+	generate_target(rlibraries(Libraries), Options) :-
+		prepare_output_directory(Options),
 		forall(
 			member(Library, Libraries),
 			(	expand_library_path(Library, TopPath),
 				output_rlibrary(TopPath, Options)
 			)
 		).
-
-	rlibraries(Libraries) :-
-		rlibraries(Libraries, []).
-
-	rlibrary(Library, UserOptions) :-
-		^^check_options(UserOptions),
-		reset,
+	generate_target(rlibrary(Library), Options) :-
+		prepare_output_directory(Options),
 		expand_library_path(Library, TopPath),
-		^^merge_options(UserOptions, Options),
-		^^option(xml_docs_directory(XMLDirectory), Options),
-		make_directory(XMLDirectory),
 		output_rlibrary(TopPath, Options).
-
-	rlibrary(Library) :-
-		rlibrary(Library, []).
+	generate_target(libraries(Libraries), Options) :-
+		prepare_output_directory(Options),
+		forall(
+			member(Library, Libraries),
+			(	expand_library_path(Library, Path),
+				output_directory_files(Path, Options),
+				write_indexes(Options)
+			)
+		).
+	generate_target(library(Library), Options) :-
+		prepare_output_directory(Options),
+		expand_library_path(Library, Path),
+		output_directory_files(Path, Options),
+		write_indexes(Options).
+	generate_target(rdirectories(Directories), Options) :-
+		prepare_output_directory(Options),
+		forall(
+			member(Directory, Directories),
+			(	absolute_file_name(Directory, Path),
+				output_rdirectory(Path, Options)
+			)
+		).
+	generate_target(rdirectory(Directory), Options) :-
+		prepare_output_directory(Options),
+		absolute_file_name(Directory, Path),
+		output_rdirectory(Path, Options).
+	generate_target(directories(Directories), Options) :-
+		prepare_output_directory(Options),
+		forall(
+			member(Directory, Directories),
+			(	absolute_file_name(Directory, Path),
+				output_directory_files(Path, Options),
+				write_indexes(Options)
+			)
+		).
+	generate_target(directory(Directory), Options) :-
+		prepare_output_directory(Options),
+		absolute_file_name(Directory, Path),
+		output_directory_files(Path, Options),
+		write_indexes(Options).
+	generate_target(files(Sources), Options) :-
+		prepare_output_directory(Options),
+		forall(
+			member(Source, Sources),
+			(	locate_file(Source, Basename, Directory, StreamOptions),
+				process(Basename, Directory, Options, StreamOptions)
+			)
+		).
+	generate_target(file(Source), Options) :-
+		prepare_output_directory(Options),
+		locate_file(Source, Basename, Directory, StreamOptions),
+		process(Basename, Directory, Options, StreamOptions).
+	generate_target(all, Options) :-
+		prepare_output_directory(Options),
+		^^option(exclude_prefixes(ExcludedPrefixes), Options),
+		(	loaded_file_property(Path, directory(Directory)),
+			\+ (
+				member(ExcludedPrefix, ExcludedPrefixes),
+				sub_atom(Directory, 0, _, _, ExcludedPrefix)
+			),
+			loaded_file_property(Path, basename(File)),
+			loaded_file_property(Path, text_properties(StreamOptions)),
+			process(File, Directory, Options, StreamOptions),
+			fail
+		;	write_indexes(Options)
+		).
 
 	output_rlibrary(TopPath, Options) :-
 		^^option(exclude_paths(ExcludedPaths), Options),
@@ -142,64 +429,6 @@
 			member(ExcludedPath, ExcludedPaths),
 			sub_atom(RelativePath, 0, _, _, ExcludedPath)
 		).
-
-	libraries(Libraries, UserOptions) :-
-		^^check_options(UserOptions),
-		reset,
-		^^merge_options(UserOptions, Options),
-		^^option(xml_docs_directory(XMLDirectory), Options),
-		make_directory(XMLDirectory),
-		forall(
-			member(Library, Libraries),
-			(	expand_library_path(Library, Path),
-				output_directory_files(Path, Options),
-				write_indexes(Options)
-			)
-		).
-
-	libraries(Libraries) :-
-		libraries(Libraries, []).
-
-	library(Library, UserOptions) :-
-		^^check_options(UserOptions),
-		reset,
-		expand_library_path(Library, Path),
-		^^merge_options(UserOptions, Options),
-		^^option(xml_docs_directory(XMLDirectory), Options),
-		make_directory(XMLDirectory),
-		output_directory_files(Path, Options),
-		write_indexes(Options).
-
-	library(Library) :-
-		library(Library, []).
-
-	rdirectories(Directories, UserOptions) :-
-		^^check_options(UserOptions),
-		reset,
-		^^merge_options(UserOptions, Options),
-		^^option(xml_docs_directory(XMLDirectory), Options),
-		make_directory(XMLDirectory),
-		forall(
-			member(Directory, Directories),
-			(	absolute_file_name(Directory, Path),
-				output_rdirectory(Path, Options)
-			)
-		).
-
-	rdirectories(Directories) :-
-		rdirectories(Directories, []).
-
-	rdirectory(Directory, UserOptions) :-
-		^^check_options(UserOptions),
-		reset,
-		absolute_file_name(Directory, Path),
-		^^merge_options(UserOptions, Options),
-		^^option(xml_docs_directory(XMLDirectory), Options),
-		make_directory(XMLDirectory),
-		output_rdirectory(Path, Options).
-
-	rdirectory(Directory) :-
-		rdirectory(Directory, []).
 
 	output_rdirectory(Directory, Options) :-
 		^^option(exclude_paths(ExcludedPaths), Options),
@@ -228,36 +457,6 @@
 		atom_concat(Directory, RelativePath, SubDirectory),
 		\+ member(RelativePath, ExcludedPaths).
 
-	directories(Directories, UserOptions) :-
-		^^check_options(UserOptions),
-		reset,
-		^^merge_options(UserOptions, Options),
-		^^option(xml_docs_directory(XMLDirectory), Options),
-		make_directory(XMLDirectory),
-		forall(
-			member(Directory, Directories),
-			(	absolute_file_name(Directory, Path),
-				output_directory_files(Path, Options),
-				write_indexes(Options)
-			)
-		).
-
-	directories(Directories) :-
-		directories(Directories, []).
-
-	directory(Directory, UserOptions) :-
-		^^check_options(UserOptions),
-		reset,
-		absolute_file_name(Directory, Path),
-		^^merge_options(UserOptions, Options),
-		^^option(xml_docs_directory(XMLDirectory), Options),
-		make_directory(XMLDirectory),
-		output_directory_files(Path, Options),
-		write_indexes(Options).
-
-	directory(Directory) :-
-		directory(Directory, []).
-
 	output_directory_files(Directory, Options) :-
 		(	sub_atom(Directory, _, 1, 0, '/') ->
 			DirectorySlash = Directory
@@ -274,56 +473,6 @@
 		process(Basename, DirectorySlash, Options, StreamOptions),
 		fail.
 	output_directory_files(_, _).
-
-	files(Sources, UserOptions) :-
-		^^check_options(UserOptions),
-		reset,
-		^^merge_options(UserOptions, Options),
-		^^option(xml_docs_directory(XMLDirectory), Options),
-		make_directory(XMLDirectory),
-		forall(
-			member(Source, Sources),
-			(	locate_file(Source, Basename, Directory, StreamOptions),
-				process(Basename, Directory, Options, StreamOptions)
-			)
-		).
-
-	files(Sources) :-
-		files(Sources, []).
-
-	file(Source, UserOptions) :-
-		^^check_options(UserOptions),
-		reset,
-		locate_file(Source, Basename, Directory, StreamOptions),
-		^^merge_options(UserOptions, Options),
-		^^option(xml_docs_directory(XMLDirectory), Options),
-		make_directory(XMLDirectory),
-		process(Basename, Directory, Options, StreamOptions).
-
-	file(Source) :-
-		file(Source, []).
-
-	all(UserOptions) :-
-		^^check_options(UserOptions),
-		reset,
-		^^merge_options(UserOptions, Options),
-		^^option(xml_docs_directory(XMLDirectory), Options),
-		^^option(exclude_prefixes(ExcludedPrefixes), Options),
-		make_directory(XMLDirectory),
-		(	loaded_file_property(Path, directory(Directory)),
-			\+ (
-				member(ExcludedPrefix, ExcludedPrefixes),
-				sub_atom(Directory, 0, _, _, ExcludedPrefix)
-			),
-			loaded_file_property(Path, basename(File)),
-			loaded_file_property(Path, text_properties(StreamOptions)),
-			process(File, Directory, Options, StreamOptions),
-			fail
-		;	write_indexes(Options)
-		).
-
-	all :-
-		all([]).
 
 	% file given in library notation
 	locate_file(LibraryNotation, Basename, Directory, StreamOptions) :-
@@ -1638,6 +1787,7 @@
 		write_xml_close_tag(Stream, entity),
 		write_index_key_entities(Entities, Stream).
 
+	default_option(explanations(false)).
 	default_option(entity_xsl_file('logtalk_entity_to_xml.xsl')).
 	default_option(index_xsl_file('logtalk_index_to_xml.xsl')).
 	default_option(xml_spec(dtd)).
@@ -1656,6 +1806,8 @@
 	default_option(exclude_entities([])).
 	default_option(sort_predicates(false)).
 
+	valid_option(explanations(Boolean)) :-
+		valid(boolean, Boolean).
 	valid_option(entity_xsl_file(File)) :-
 		atom(File).
 	valid_option(index_xsl_file(File)) :-
@@ -1709,9 +1861,129 @@
 		retractall(library_entity_(_, _, _, _)),
 		retractall(directory_entity_(_, _, _, _)),
 		retractall(type_entity_(_, _, _, _)),
-		retractall(predicate_entity_(_, _, _, _)).
+		retractall(predicate_entity_(_, _, _, _)),
+		retractall(active_diagnostic_(_)),
+		retractall(active_preflight_issue_(_)),
+		retractall(active_collection_mode_(_)),
+		retractall(cached_run_(_, _, _, _, _)).
 
 	% auxiliary predicates
+
+	line_range(Line, 0-0) :-
+		Line =< 0,
+		!.
+	line_range(Line, Line-Line).
+
+	entity_warning_properties(Flag, MessageTerm, Details, Type, Entity, [
+		flag(Flag),
+		raw_term(MessageTerm),
+		details(Details),
+		entity_kind(Type),
+		entity(Entity)
+	]).
+
+	predicate_warning_properties(Flag, MessageTerm, Details, Type, Entity, Indicator, [
+		flag(Flag),
+		raw_term(MessageTerm),
+		details(Details),
+		entity_kind(Type),
+		entity(Entity),
+		predicate(Indicator)
+	]).
+
+	emit_warning_diagnostic(MessageTerm, Diagnostic) :-
+		( 	active_collection_mode_(Mode) ->
+			assertz(active_diagnostic_(Diagnostic)),
+			( 	Mode == print_and_collect ->
+				print_message(warning, lgtdoc, MessageTerm)
+			; 	true
+			)
+		; 	print_message(warning, lgtdoc, MessageTerm)
+		).
+
+	missing_entity_directive_diagnostic(Directive, Type, Entity, File, Line, Diagnostic) :-
+		MessageTerm = missing_entity_directive(Directive, Type, Entity, File, Line),
+		to_atom(Directive, DirectiveAtom),
+		atomic_list_concat(['Missing directive: ', DirectiveAtom], Message),
+		line_range(Line, Lines),
+		entity_warning_properties(lgtdoc_missing_directives, MessageTerm, [directive(Directive)], Type, Entity, Properties),
+		Diagnostic = diagnostic(missing_entity_directive, warning, not_applicable, Message, context(Type, Entity), File, Lines, Properties).
+
+	missing_predicate_directive_diagnostic(Directive, Indicator, Type, Entity, File, Line, Diagnostic) :-
+		MessageTerm = missing_predicate_directive(Directive, Indicator, Type, Entity, File, Line),
+		to_atom(Directive, DirectiveAtom),
+		to_atom(Indicator, IndicatorAtom),
+		( 	Indicator = _//_ ->
+			atomic_list_concat(['Missing ', DirectiveAtom, ' directive for non-terminal: ', IndicatorAtom], Message)
+		; 	atomic_list_concat(['Missing ', DirectiveAtom, ' directive for predicate: ', IndicatorAtom], Message)
+		),
+		line_range(Line, Lines),
+		predicate_warning_properties(lgtdoc_missing_directives, MessageTerm, [directive(Directive)], Type, Entity, Indicator, Properties),
+		Diagnostic = diagnostic(missing_predicate_directive, warning, not_applicable, Message, context(Type, Entity), File, Lines, Properties).
+
+	missing_entity_info_key_diagnostic(Key, Type, Entity, File, Line, Diagnostic) :-
+		MessageTerm = missing_entity_info_key(Key, Type, Entity, File, Line),
+		to_atom(Key, KeyAtom),
+		atomic_list_concat(['Missing info/1 key: ', KeyAtom], Message),
+		line_range(Line, Lines),
+		entity_warning_properties(lgtdoc_missing_info_key, MessageTerm, [key(Key)], Type, Entity, Properties),
+		Diagnostic = diagnostic(missing_entity_info_key, warning, not_applicable, Message, context(Type, Entity), File, Lines, Properties).
+
+	missing_predicate_info_key_diagnostic(Indicator, Key, Type, Entity, File, Line, Diagnostic) :-
+		MessageTerm = missing_predicate_info_key(Indicator, Key, Type, Entity, File, Line),
+		to_atom(Indicator, IndicatorAtom),
+		to_atom(Key, KeyAtom),
+		( 	Indicator = _//_ ->
+			atomic_list_concat(['Missing key for non-terminal ', IndicatorAtom, ': ', KeyAtom], Message)
+		; 	atomic_list_concat(['Missing key for predicate ', IndicatorAtom, ': ', KeyAtom], Message)
+		),
+		line_range(Line, Lines),
+		predicate_warning_properties(lgtdoc_missing_info_key, MessageTerm, [key(Key)], Type, Entity, Indicator, Properties),
+		Diagnostic = diagnostic(missing_predicate_info_key, warning, not_applicable, Message, context(Type, Entity), File, Lines, Properties).
+
+	invalid_date_diagnostic(Date, Type, Entity, File, Line, Diagnostic) :-
+		MessageTerm = invalid_date(Date, Type, Entity, File, Line),
+		to_atom(Date, DateAtom),
+		atomic_list_concat(['Invalid date in info/1 directive: ', DateAtom], Message),
+		line_range(Line, Lines),
+		entity_warning_properties(lgtdoc_invalid_dates, MessageTerm, [date(Date)], Type, Entity, Properties),
+		Diagnostic = diagnostic(invalid_date, warning, not_applicable, Message, context(Type, Entity), File, Lines, Properties).
+
+	date_in_the_future_diagnostic(Date, Type, Entity, File, Line, Diagnostic) :-
+		MessageTerm = date_in_the_future(Date, Type, Entity, File, Line),
+		to_atom(Date, DateAtom),
+		atomic_list_concat(['Date in info/1 directive is in the future: ', DateAtom], Message),
+		line_range(Line, Lines),
+		entity_warning_properties(lgtdoc_invalid_dates, MessageTerm, [date(Date)], Type, Entity, Properties),
+		Diagnostic = diagnostic(date_in_the_future, warning, not_applicable, Message, context(Type, Entity), File, Lines, Properties).
+
+	missing_entity_punctuation_diagnostic(Text, Type, Entity, File, Line, Diagnostic) :-
+		MessageTerm = missing_punctuation(Text, Type, Entity, File, Line),
+		to_atom(Text, TextAtom),
+		atomic_list_concat(['Missing punctuation at the end of text: ', TextAtom], Message),
+		line_range(Line, Lines),
+		entity_warning_properties(lgtdoc_missing_punctuation, MessageTerm, [text(Text)], Type, Entity, Properties),
+		Diagnostic = diagnostic(missing_punctuation, warning, not_applicable, Message, context(Type, Entity), File, Lines, Properties).
+
+	missing_predicate_punctuation_diagnostic(Indicator, Text, Type, Entity, File, Line, Diagnostic) :-
+		MessageTerm = missing_punctuation(Text, Type, Entity, File, Line),
+		to_atom(Text, TextAtom),
+		atomic_list_concat(['Missing punctuation at the end of text: ', TextAtom], Message),
+		line_range(Line, Lines),
+		predicate_warning_properties(lgtdoc_missing_punctuation, MessageTerm, [text(Text)], Type, Entity, Indicator, Properties),
+		Diagnostic = diagnostic(missing_punctuation, warning, not_applicable, Message, context(Type, Entity), File, Lines, Properties).
+
+	non_standard_exception_diagnostic(Indicator, Exception, Type, Entity, File, Line, Diagnostic) :-
+		MessageTerm = non_standard_exception(Indicator, Exception, Type, Entity, File, Line),
+		to_atom(Indicator, IndicatorAtom),
+		to_atom(Exception, ExceptionAtom),
+		( 	Indicator = _//_ ->
+			atomic_list_concat(['Non-standard exception for non-terminal ', IndicatorAtom, ': ', ExceptionAtom], Message)
+		; 	atomic_list_concat(['Non-standard exception for predicate ', IndicatorAtom, ': ', ExceptionAtom], Message)
+		),
+		line_range(Line, Lines),
+		predicate_warning_properties(lgtdoc_non_standard_exceptions, MessageTerm, [exception(Exception)], Type, Entity, Indicator, Properties),
+		Diagnostic = diagnostic(non_standard_exception, warning, not_applicable, Message, context(Type, Entity), File, Lines, Properties).
 
 	date_to_padded_atom(Year-Month-Day, DateAtom) :-
 		integer_to_padded_atom(Month, MonthAtom),
@@ -1742,28 +2014,32 @@
 	warn_on_missing_entity_directive(Directive, Type, Entity) :-
 		(	current_logtalk_flag(lgtdoc_missing_directives, warning) ->
 			entity_file_line(Entity, File, Line),
-			print_message(warning, lgtdoc, missing_entity_directive(Directive, Type, Entity, File, Line))
+			missing_entity_directive_diagnostic(Directive, Type, Entity, File, Line, Diagnostic),
+			emit_warning_diagnostic(missing_entity_directive(Directive, Type, Entity, File, Line), Diagnostic)
 		;	true
 		).
 
 	warn_on_missing_predicate_directive(Directive, Indicator, Type, Entity) :-
 		(	current_logtalk_flag(lgtdoc_missing_directives, warning) ->
 			entity_predicate_file_line(Entity, Indicator, File, Line),
-			print_message(warning, lgtdoc, missing_predicate_directive(Directive, Indicator, Type, Entity, File, Line))
+			missing_predicate_directive_diagnostic(Directive, Indicator, Type, Entity, File, Line, Diagnostic),
+			emit_warning_diagnostic(missing_predicate_directive(Directive, Indicator, Type, Entity, File, Line), Diagnostic)
 		;	true
 		).
 
 	warn_on_missing_entity_info_key(Key, Type, Entity) :-
 		(	current_logtalk_flag(lgtdoc_missing_info_key, warning) ->
 			entity_file_line(Entity, File, Line),
-			print_message(warning, lgtdoc, missing_entity_info_key(Key, Type, Entity, File, Line))
+			missing_entity_info_key_diagnostic(Key, Type, Entity, File, Line, Diagnostic),
+			emit_warning_diagnostic(missing_entity_info_key(Key, Type, Entity, File, Line), Diagnostic)
 		;	true
 		).
 
 	warn_on_missing_predicate_info_key(Predicate, Key, Type, Entity) :-
 		(	current_logtalk_flag(lgtdoc_missing_info_key, warning) ->
 			entity_predicate_file_line(Entity, Predicate, File, Line),
-			print_message(warning, lgtdoc, missing_predicate_info_key(Predicate, Key, Type, Entity, File, Line))
+			missing_predicate_info_key_diagnostic(Predicate, Key, Type, Entity, File, Line, Diagnostic),
+			emit_warning_diagnostic(missing_predicate_info_key(Predicate, Key, Type, Entity, File, Line), Diagnostic)
 		;	true
 		).
 
@@ -1773,11 +2049,13 @@
 			Date = Year-Month-Day ->
 			(	\+ valid_date(Year, Month, Day) ->
 				entity_file_line(Entity, File, Line),
-				print_message(warning, lgtdoc, invalid_date(Date, Type, Entity, File, Line))
+				invalid_date_diagnostic(Date, Type, Entity, File, Line, Diagnostic),
+				emit_warning_diagnostic(invalid_date(Date, Type, Entity, File, Line), Diagnostic)
 			;	today(TodayYear, TodayMonth, TodayDay),
 				d(Year, Month, Day) @> d(TodayYear, TodayMonth, TodayDay) ->
 				entity_file_line(Entity, File, Line),
-				print_message(warning, lgtdoc, date_in_the_future(Date, Type, Entity, File, Line))
+				date_in_the_future_diagnostic(Date, Type, Entity, File, Line, Diagnostic),
+				emit_warning_diagnostic(date_in_the_future(Date, Type, Entity, File, Line), Diagnostic)
 			;	true
 			)
 		;	true
@@ -1791,7 +2069,8 @@
 			\+ sub_atom(Text, 0, _, _, 'http'),
 			\+ sub_atom(Text, 0, _, _, 'ftp') ->
 			entity_file_line(Entity, File, Line),
-			print_message(warning, lgtdoc, missing_punctuation(Text, Type, Entity, File, Line))
+			missing_entity_punctuation_diagnostic(Text, Type, Entity, File, Line, Diagnostic),
+			emit_warning_diagnostic(missing_punctuation(Text, Type, Entity, File, Line), Diagnostic)
 		;	true
 		).
 
@@ -1803,7 +2082,8 @@
 			\+ sub_atom(Text, 0, _, _, 'http'),
 			\+ sub_atom(Text, 0, _, _, 'ftp') ->
 			entity_predicate_file_line(Entity, Indicator, File, Line),
-			print_message(warning, lgtdoc, missing_punctuation(Text, Type, Entity, File, Line))
+			missing_predicate_punctuation_diagnostic(Indicator, Text, Type, Entity, File, Line, Diagnostic),
+			emit_warning_diagnostic(missing_punctuation(Text, Type, Entity, File, Line), Diagnostic)
 		;	true
 		).
 
@@ -1811,7 +2091,8 @@
 		(	current_logtalk_flag(lgtdoc_non_standard_exceptions, warning),
 			\+ standard_exception(Exception) ->
 			entity_predicate_file_line(Entity, Indicator, File, Line),
-			print_message(warning, lgtdoc, non_standard_exception(Indicator, Exception, Type, Entity, File, Line))
+			non_standard_exception_diagnostic(Indicator, Exception, Type, Entity, File, Line, Diagnostic),
+			emit_warning_diagnostic(non_standard_exception(Indicator, Exception, Type, Entity, File, Line), Diagnostic)
 		;	true
 		).
 
@@ -1853,6 +2134,11 @@
 		;	entity_property(Entity, file(File)),
 			Line = -1
 		).
+
+	to_atom(Term, Atom) :-
+		copy_term(Term, Copy),
+		numbervars(Copy, 0, _),
+		write_term_to_atom(Copy, Atom, [numbervars(true), quoted(true)]).
 
 :- end_object.
 

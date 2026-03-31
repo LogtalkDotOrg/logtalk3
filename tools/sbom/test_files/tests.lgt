@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-25,
+		date is 2026-03-30,
 		comment is 'Unit tests for the "sbom" tool.'
 	]).
 
@@ -366,12 +366,12 @@
 			relationshipType-'DEPENDS_ON',
 			relatedSpdxElement-'SPDXRef-Pack-sbom_fixture_no_checksum_pack'
 		}, Relationships),
-		\+ memberchk({
+		\+ member({
 			spdxElementId-'SPDXRef-Application',
 			relationshipType-'DEPENDS_ON',
 			relatedSpdxElement-'SPDXRef-Pack-sbom_fixture_no_checksum_pack'
 		}, Relationships),
-		\+ memberchk({
+		\+ member({
 			'SPDXID'-'SPDXRef-Pack-sbom_fixture_no_checksum_pack',
 			checksums-_
 		}, Packages).
@@ -506,7 +506,7 @@
 		memberchk('SPDXRef-Logtalk', ApplicationDependsOn),
 		memberchk('SPDXRef-Backend', ApplicationDependsOn),
 		memberchk('SPDXRef-Pack-sbom_fixture_pack', ApplicationDependsOn),
-		\+ memberchk('SPDXRef-Pack-sbom_fixture_no_checksum_pack', ApplicationDependsOn),
+		\+ member('SPDXRef-Pack-sbom_fixture_no_checksum_pack', ApplicationDependsOn),
 		memberchk({
 			ref-'SPDXRef-Logtalk',
 			dependsOn-['SPDXRef-Backend']
@@ -894,7 +894,7 @@
 			primaryPackagePurpose-'APPLICATION',
 			summary-'Logtalk application currently loaded in this session'
 		}, Packages),
-		\+ memberchk({
+		\+ member({
 			'SPDXID'-'SPDXRef-Application',
 			externalRefs-_
 		}, Packages).

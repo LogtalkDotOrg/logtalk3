@@ -84,26 +84,23 @@ details. The source code to be analyzed should be loaded with the
 `source_data` and `optimize` flags turned on (possibly set from a
 loader file).
 
-For machine-readable integrations, the `findings/2-3`, `finding/2-3`, and
-`summary/2-3` predicates can be used to collect dead-code results and post-
-filter counts without relying on printed messages. Findings are returned as
-terms of the form:
+For machine-readable integrations, the `diagnostics/2-3`, `diagnostic/2-3`,
+`diagnostics_summary/2-3`, and `diagnostics_preflight/2-3` predicates can be
+used to collect dead-code results and post-filter counts without relying on
+printed messages. Diagnostics are returned as terms of the form:
 
-- `dead_predicate(Class, Confidence, Properties, EntityKind, Entity, Predicate, File, Lines)`
+- `diagnostic(RuleId, Severity, Confidence, Message, Context, File, Lines, Properties)`
 
 where:
 
-- `Class` distinguishes local dead code from unused `uses/2` and `use_module/2` resources
+- `RuleId` distinguishes local dead code from unused `uses/2` and `use_module/2` resources
+- `Severity` is the reported diagnostic severity (`error`, `warning`, or `note`)
 - `Confidence` is a triage-oriented rating (`high`, `medium`, or `low`)
+- `Context` identifies the entity kind and entity where the diagnostic was found
 - `Properties` contains additional structured metadata, including the analysis settings seen for the source file and any class-specific details needed to explain the finding
 
 For machine-readable export integrations, the `export/3-4` predicates serialize
-scan results using the `json` library. Supported formats are `json` and
-`sarif`. The JSON export format is described by the
-`dead_code_scanner.schema.json` JSON Schema file in the tool directory.
-Runtime validation of exported JSON against that schema can be enabled using the
-`validate_export(true)` option. The default is `validate_export(false)`. The
-current JSON export format version is `1.0.0`.
+scan results in SARIF format using the `json` library.
 
 As an example, assume that we want to scan an application with a library
 alias `my_app`. The following goals could be used:
@@ -154,27 +151,24 @@ looking for unused predicates (and non-terminals):
 - `waive_findings(Findings)`  
 	list of finding patterns to suppress from the results (default is `[]`); intended for reusable CI baselines and supports partially instantiated structured finding terms such as `dead_predicate(local_dead_code, medium, _, object, some_object, helper/2, _, _)`
 
-- `validate_export(Boolean)`  
-	boolean option controlling runtime validation of `json` exports against the `dead_code_scanner.schema.json` file (default is `false`)
-
-
 Machine-readable summaries
 --------------------------
 
-The `summary/2-3` predicates return a term of the form:
+The `diagnostics_summary/2-3` predicates return a term of the form:
 
-- `summary(Target, TotalEntities, TotalFindings, Breakdown, EntitySummaries)`
+- `diagnostics_summary(Target, TotalContexts, TotalDiagnostics, Breakdown, ContextSummaries)`
 
 where `Breakdown` is a term of the form:
 
-- `finding_breakdown(ClassCounts, ConfidenceCounts)`
+- `diagnostic_breakdown(RuleCounts, SeverityCounts, ConfidenceCounts)`
 
-with `ClassCounts` containing `class_count(Class, Count)` terms and
+with `RuleCounts` containing `rule_count(RuleId, Count)` terms,
+`SeverityCounts` containing `severity_count(Severity, Count)` terms, and
 `ConfidenceCounts` containing `confidence_count(Confidence, Count)` terms.
 
-`EntitySummaries` is a list of terms of the form:
+`ContextSummaries` is a list of terms of the form:
 
-- `entity_summary(Kind, Entity, FindingsCount, Breakdown)`
+- `context_summary(Context, DiagnosticsCount, Breakdown)`
 
 The summary is computed after applying all exclusions and finding waivers,
 making it suitable for CI thresholds and regression tracking.
@@ -183,11 +177,11 @@ making it suitable for CI thresholds and regression tracking.
 Machine-readable preflight warnings
 -----------------------------------
 
-The `preflight/2-3` predicates return an ordered set of warnings describing
-analysis prerequisites that affect result quality for a target. Warning terms
-currently use the form:
+The `diagnostics_preflight/2-3` predicates return an ordered set of warnings
+describing analysis prerequisites that affect result quality for a target.
+Warning terms currently use the form:
 
-- `missing_analysis_prerequisite(File, Prerequisite)`
+- `preflight_issue(missing_analysis_prerequisite, Severity, Message, Context, File, Lines, Properties)`
 
 where `Prerequisite` is currently one of:
 
@@ -250,19 +244,19 @@ were not loaded with `source_data(on)` or `optimize(on)` so that potentially
 less reliable results can be triaged more carefully.
 
 
-Exports
--------
+SARIF reports
+-------------
 
-The `export/3-4` predicates serialize scan results in either `json` or `sarif`
-format to any sink supported by the `json::generate/2` predicate, including
-files, streams, atoms, chars, and codes.
+This tool is a diagnostics producer. To generate SARIF reports from its
+diagnostics, load the standalone `sarif` tool and call
+`sarif::generate(dead_code_scanner, Target, Sink, Options)` where `Target`
+and `Options` are the same ones accepted by the diagnostics predicates.
 
-The `json` export is described by the `dead_code_scanner.schema.json` file,
-which can be used by third-party tools to validate and consume that export
-format. The `sarif` export uses the SARIF `2.1.0` JSON format and is suitable
-for code scanning integrations that consume SARIF reports. SARIF exports include
-a per-run UUID GUID, stable GUIDs for the SARIF driver and rule descriptors,
-and deterministic result fingerprints derived from the canonical finding.
+The generated report uses the SARIF `2.1.0` JSON format and is suitable for
+code scanning integrations that consume SARIF reports. The shared generator
+includes deterministic result fingerprints derived from the canonical finding
+and preserves the rule descriptors and triage-oriented severity mapping
+described below.
 
 SARIF findings are exported using one rule descriptor per finding class:
 
@@ -282,20 +276,12 @@ This mapping allows CI consumers to distinguish advisory dead-code findings
 from stronger unused-resource findings without reinterpreting the custom
 `class` and `confidence` properties.
 
-JSON exports include an additive top-level `preflight` object with a `warnings`
-array. Each warning entry records the warning kind, file, prerequisite, and a
-machine-readable severity.
-
-SARIF exports include the same preflight information as invocation-level
+SARIF reports include the same preflight information as invocation-level
 `toolExecutionNotifications`, allowing consumers to distinguish prerequisite
 warnings from dead code findings.
-representation. When the analyzed code is inside a git repository, the export
-also includes the current branch and commit hash as optional run properties.
-When the repository remote URI can also be derived, the export includes a
-`versionControlProvenance` entry with the repository URI, revision id, branch,
-and local repository root mapping; outside a git repository, or when the
-repository URI cannot be derived, these git-derived SARIF properties are simply
-omitted.
+When the analyzed code is inside a git repository, the shared generator also
+includes the current branch and commit hash as optional run properties and a
+`versionControlProvenance` entry when the repository URI can be derived.
 
 
 Integration with the `make` tool

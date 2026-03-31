@@ -24,6 +24,7 @@
 	% be compiled with the source_data flag turned on
 	set_logtalk_flag(source_data, on),
 	logtalk_load([
+		tool_diagnostics(loader),
 		assertions(loader),
 		code_metrics(loader),
 		dead_code_scanner(loader),

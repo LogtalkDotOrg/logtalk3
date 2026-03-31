@@ -20,9 +20,11 @@
 
 
 :- initialization((
+	logtalk_load(tool_diagnostics(loader)),
 	logtalk_load(dates(loader)),
 	logtalk_load(types(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(os(loader)),
+	logtalk_load(term_io(loader)),
 	logtalk_load([lgtdocp, lgtdoc, lgtdoc_messages], [optimize(on)])
 )).

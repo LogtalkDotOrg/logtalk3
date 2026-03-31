@@ -167,6 +167,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#reader"><span class="xref std std-ref">reader</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#recorded-database"><span class="xref std std-ref">recorded_database</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#redis"><span class="xref std std-ref">redis</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#sarif"><span class="xref std std-ref">sarif</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#sbom"><span class="xref std std-ref">sbom</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#sets"><span class="xref std std-ref">sets</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#simulated-annealing"><span class="xref std std-ref">simulated_annealing</span></a></li>
@@ -181,6 +182,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#time-scales"><span class="xref std std-ref">time_scales</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#timeout"><span class="xref std std-ref">timeout</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tool-diagnostics"><span class="xref std std-ref">tool_diagnostics</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#toon"><span class="xref std std-ref">toon</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a></li>
@@ -255,8 +257,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Barry Evans and Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:17:1</div>
-<div class="line"><strong>Date:</strong> 2026-03-20</div>
+<div class="line"><strong>Version:</strong> 0:18:0</div>
+<div class="line"><strong>Date:</strong> 2026-03-31</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -267,22 +269,17 @@
 <div class="line-block">
 <div class="line"><strong>Imports:</strong></div>
 <div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="tool_diagnostics_common_0.html#tool-diagnostics-common-0"><span class="std std-ref">tool_diagnostics_common</span></a></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="options_0.html#options-0"><span class="std std-ref">options</span></a></div>
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
-<div class="line"><a class="reference internal" href="git_0.html#git-0"><span class="std std-ref">git</span></a></div>
-<div class="line"><a class="reference internal" href="json_0.html#json-0"><span class="std std-ref">json</span></a></div>
-<div class="line"><a class="reference internal" href="json_schema_0.html#json-schema-0"><span class="std std-ref">json_schema</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0"><span class="std std-ref">logtalk</span></a></div>
 <div class="line"><a class="reference internal" href="os_0.html#os-0"><span class="std std-ref">os</span></a></div>
-<div class="line"><a class="reference internal" href="reader_0.html#reader-0"><span class="std std-ref">reader</span></a></div>
 <div class="line"><a class="reference internal" href="term_io_0.html#term-io-0"><span class="std std-ref">term_io</span></a></div>
 <div class="line"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></div>
-<div class="line"><a class="reference internal" href="url_1.html#url-1"><span class="std std-ref">url(Representation)</span></a></div>
 <div class="line"><a class="reference internal" href="user_0.html#user-0"><span class="std std-ref">user</span></a></div>
-<div class="line"><a class="reference internal" href="uuid_0.html#uuid-0"><span class="std std-ref">uuid</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -291,6 +288,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Dead code: A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.</p></li>
+<li><p>Diagnostics targets: The diagnostics predicates accept the targets <code class="docutils literal notranslate"><span class="pre">all</span></code>, <code class="docutils literal notranslate"><span class="pre">entity(Entity)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(File)</span></code>, <code class="docutils literal notranslate"><span class="pre">directory(Directory)</span></code>, <code class="docutils literal notranslate"><span class="pre">rdirectory(Directory)</span></code>, <code class="docutils literal notranslate"><span class="pre">library(Library)</span></code>, and <code class="docutils literal notranslate"><span class="pre">rlibrary(Library)</span></code>. The <code class="docutils literal notranslate"><span class="pre">entity(Entity)</span></code> target requires a loaded object or category. The <code class="docutils literal notranslate"><span class="pre">file(File)</span></code> target accepts a loaded source file specified by name, basename, full path, or library notation. Directory and library targets restrict diagnostics to loaded files found in the given directory, recursively in its sub-directories, in the given library, or recursively in its sub-libraries.</p></li>
 <li><p>Known issues: Use of local meta-calls with goal arguments only know at runtime can result in false positives. Calls from non-standard meta-predicates may be missed if the meta-calls are not optimized.</p></li>
 <li><p>Requirements: Source files must be compiled with the <code class="docutils literal notranslate"><span class="pre">source_data</span></code> flag turned on. To avoid false positives do to meta-calls, compilation of source files with the <code class="docutils literal notranslate"><span class="pre">optimized</span></code> flag turned on is also advised.</p></li>
 </ul>
@@ -298,7 +296,7 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
+<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="tool_diagnostics_protocol_0.html#tool-diagnostics-protocol-0-diagnostic-2"><span class="std std-ref">diagnostic/2</span></a>  <a class="reference internal" href="tool_diagnostics_protocol_0.html#tool-diagnostics-protocol-0-diagnostic-3"><span class="std std-ref">diagnostic/3</span></a>  <a class="reference internal" href="tool_diagnostics_protocol_0.html#tool-diagnostics-protocol-0-diagnostic-rule-5"><span class="std std-ref">diagnostic_rule/5</span></a>  <a class="reference internal" href="tool_diagnostics_protocol_0.html#tool-diagnostics-protocol-0-diagnostic-rules-1"><span class="std std-ref">diagnostic_rules/1</span></a>  <a class="reference internal" href="tool_diagnostics_protocol_0.html#tool-diagnostics-protocol-0-diagnostic-target-1"><span class="std std-ref">diagnostic_target/1</span></a>  <a class="reference internal" href="tool_diagnostics_protocol_0.html#tool-diagnostics-protocol-0-diagnostics-2"><span class="std std-ref">diagnostics/2</span></a>  <a class="reference internal" href="tool_diagnostics_protocol_0.html#tool-diagnostics-protocol-0-diagnostics-3"><span class="std std-ref">diagnostics/3</span></a>  <a class="reference internal" href="tool_diagnostics_protocol_0.html#tool-diagnostics-protocol-0-diagnostics-preflight-2"><span class="std std-ref">diagnostics_preflight/2</span></a>  <a class="reference internal" href="tool_diagnostics_protocol_0.html#tool-diagnostics-protocol-0-diagnostics-preflight-3"><span class="std std-ref">diagnostics_preflight/3</span></a>  <a class="reference internal" href="tool_diagnostics_protocol_0.html#tool-diagnostics-protocol-0-diagnostics-summary-2"><span class="std std-ref">diagnostics_summary/2</span></a>  <a class="reference internal" href="tool_diagnostics_protocol_0.html#tool-diagnostics-protocol-0-diagnostics-summary-3"><span class="std std-ref">diagnostics_summary/3</span></a>  <a class="reference internal" href="tool_diagnostics_protocol_0.html#tool-diagnostics-protocol-0-diagnostics-tool-5"><span class="std std-ref">diagnostics_tool/5</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
@@ -319,25 +317,15 @@
 <li><p><a class="reference internal" href="#rlibrary-1" id="id13"><code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#all-1" id="id14"><code class="docutils literal notranslate"><span class="pre">all/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#all-0" id="id15"><code class="docutils literal notranslate"><span class="pre">all/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#findings-3" id="id16"><code class="docutils literal notranslate"><span class="pre">findings/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#findings-2" id="id17"><code class="docutils literal notranslate"><span class="pre">findings/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#finding-3" id="id18"><code class="docutils literal notranslate"><span class="pre">finding/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#finding-2" id="id19"><code class="docutils literal notranslate"><span class="pre">finding/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#summary-3" id="id20"><code class="docutils literal notranslate"><span class="pre">summary/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#summary-2" id="id21"><code class="docutils literal notranslate"><span class="pre">summary/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#preflight-3" id="id22"><code class="docutils literal notranslate"><span class="pre">preflight/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#preflight-2" id="id23"><code class="docutils literal notranslate"><span class="pre">preflight/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#export-4" id="id24"><code class="docutils literal notranslate"><span class="pre">export/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#export-3" id="id25"><code class="docutils literal notranslate"><span class="pre">export/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#predicates-2" id="id26"><code class="docutils literal notranslate"><span class="pre">predicates/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#predicates-3" id="id27"><code class="docutils literal notranslate"><span class="pre">predicates/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#predicate-2" id="id28"><code class="docutils literal notranslate"><span class="pre">predicate/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#predicate-3" id="id29"><code class="docutils literal notranslate"><span class="pre">predicate/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#predicates-2" id="id16"><code class="docutils literal notranslate"><span class="pre">predicates/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#predicates-3" id="id17"><code class="docutils literal notranslate"><span class="pre">predicates/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#predicate-2" id="id18"><code class="docutils literal notranslate"><span class="pre">predicate/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#predicate-3" id="id19"><code class="docutils literal notranslate"><span class="pre">predicate/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id30">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id31">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id32">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id20">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id21">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id22">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -632,218 +620,8 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="findings-3">
-<span id="dead-code-scanner-0-findings-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">findings/3</span></code></a><a class="headerlink" href="#findings-3" title="Link to this heading"></a></h3>
-<p>Returns an ordered set of findings for a scan target using the given options. Supported targets are <code class="docutils literal notranslate"><span class="pre">all</span></code> and the compound terms <code class="docutils literal notranslate"><span class="pre">entity/1</span></code>, <code class="docutils literal notranslate"><span class="pre">file/1</span></code>, <code class="docutils literal notranslate"><span class="pre">directory/1</span></code>, <code class="docutils literal notranslate"><span class="pre">rdirectory/1</span></code>, <code class="docutils literal notranslate"><span class="pre">library/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code>. Findings are returned as terms of the form <code class="docutils literal notranslate"><span class="pre">dead_predicate(Class,</span> <span class="pre">Confidence,</span> <span class="pre">Properties,</span> <span class="pre">EntityKind,</span> <span class="pre">Entity,</span> <span class="pre">Predicate,</span> <span class="pre">File,</span> <span class="pre">Lines)</span></code>.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">findings(Target,Findings,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">findings(+nonvar,-list(compound),+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="findings-2">
-<span id="dead-code-scanner-0-findings-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">findings/2</span></code></a><a class="headerlink" href="#findings-2" title="Link to this heading"></a></h3>
-<p>Returns an ordered set of findings for a scan target using default options. Supported targets are <code class="docutils literal notranslate"><span class="pre">all</span></code> and the compound terms <code class="docutils literal notranslate"><span class="pre">entity/1</span></code>, <code class="docutils literal notranslate"><span class="pre">file/1</span></code>, <code class="docutils literal notranslate"><span class="pre">directory/1</span></code>, <code class="docutils literal notranslate"><span class="pre">rdirectory/1</span></code>, <code class="docutils literal notranslate"><span class="pre">library/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code>. Findings are returned as terms of the form <code class="docutils literal notranslate"><span class="pre">dead_predicate(Class,</span> <span class="pre">Confidence,</span> <span class="pre">Properties,</span> <span class="pre">EntityKind,</span> <span class="pre">Entity,</span> <span class="pre">Predicate,</span> <span class="pre">File,</span> <span class="pre">Lines)</span></code>.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">findings(Target,Findings)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">findings(+nonvar,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="finding-3">
-<span id="dead-code-scanner-0-finding-3"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">finding/3</span></code></a><a class="headerlink" href="#finding-3" title="Link to this heading"></a></h3>
-<p>Enumerates, by backtracking, findings for a scan target using the given options. Supported targets are <code class="docutils literal notranslate"><span class="pre">all</span></code> and the compound terms <code class="docutils literal notranslate"><span class="pre">entity/1</span></code>, <code class="docutils literal notranslate"><span class="pre">file/1</span></code>, <code class="docutils literal notranslate"><span class="pre">directory/1</span></code>, <code class="docutils literal notranslate"><span class="pre">rdirectory/1</span></code>, <code class="docutils literal notranslate"><span class="pre">library/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code>. Findings are returned as terms of the form <code class="docutils literal notranslate"><span class="pre">dead_predicate(Class,</span> <span class="pre">Confidence,</span> <span class="pre">Properties,</span> <span class="pre">EntityKind,</span> <span class="pre">Entity,</span> <span class="pre">Predicate,</span> <span class="pre">File,</span> <span class="pre">Lines)</span></code>.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">finding(Target,Finding,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">finding(+nonvar,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="finding-2">
-<span id="dead-code-scanner-0-finding-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">finding/2</span></code></a><a class="headerlink" href="#finding-2" title="Link to this heading"></a></h3>
-<p>Enumerates, by backtracking, findings for a scan target using default options. Supported targets are <code class="docutils literal notranslate"><span class="pre">all</span></code> and the compound terms <code class="docutils literal notranslate"><span class="pre">entity/1</span></code>, <code class="docutils literal notranslate"><span class="pre">file/1</span></code>, <code class="docutils literal notranslate"><span class="pre">directory/1</span></code>, <code class="docutils literal notranslate"><span class="pre">rdirectory/1</span></code>, <code class="docutils literal notranslate"><span class="pre">library/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code>. Findings are returned as terms of the form <code class="docutils literal notranslate"><span class="pre">dead_predicate(Class,</span> <span class="pre">Confidence,</span> <span class="pre">Properties,</span> <span class="pre">EntityKind,</span> <span class="pre">Entity,</span> <span class="pre">Predicate,</span> <span class="pre">File,</span> <span class="pre">Lines)</span></code>.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">finding(Target,Finding)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">finding(+nonvar,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="summary-3">
-<span id="dead-code-scanner-0-summary-3"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">summary/3</span></code></a><a class="headerlink" href="#summary-3" title="Link to this heading"></a></h3>
-<p>Returns a machine-readable summary for a scan target using the given options. The summary term is of the form <code class="docutils literal notranslate"><span class="pre">summary(Target,</span> <span class="pre">TotalEntities,</span> <span class="pre">TotalFindings,</span> <span class="pre">Breakdown,</span> <span class="pre">EntitySummaries)</span></code> where <code class="docutils literal notranslate"><span class="pre">Breakdown</span></code> is a <code class="docutils literal notranslate"><span class="pre">finding_breakdown(ClassCounts,</span> <span class="pre">ConfidenceCounts)</span></code> term and <code class="docutils literal notranslate"><span class="pre">EntitySummaries</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">entity_summary(Kind,</span> <span class="pre">Entity,</span> <span class="pre">FindingsCount,</span> <span class="pre">Breakdown)</span></code> terms.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">summary(Target,Summary,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">summary(+nonvar,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="summary-2">
-<span id="dead-code-scanner-0-summary-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">summary/2</span></code></a><a class="headerlink" href="#summary-2" title="Link to this heading"></a></h3>
-<p>Returns a machine-readable summary for a scan target using default options. The summary term is of the form <code class="docutils literal notranslate"><span class="pre">summary(Target,</span> <span class="pre">TotalEntities,</span> <span class="pre">TotalFindings,</span> <span class="pre">Breakdown,</span> <span class="pre">EntitySummaries)</span></code> where <code class="docutils literal notranslate"><span class="pre">Breakdown</span></code> is a <code class="docutils literal notranslate"><span class="pre">finding_breakdown(ClassCounts,</span> <span class="pre">ConfidenceCounts)</span></code> term and <code class="docutils literal notranslate"><span class="pre">EntitySummaries</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">entity_summary(Kind,</span> <span class="pre">Entity,</span> <span class="pre">FindingsCount,</span> <span class="pre">Breakdown)</span></code> terms.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">summary(Target,Summary)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">summary(+nonvar,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="preflight-3">
-<span id="dead-code-scanner-0-preflight-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">preflight/3</span></code></a><a class="headerlink" href="#preflight-3" title="Link to this heading"></a></h3>
-<p>Returns an ordered set of machine-readable preflight warnings for a scan target using the given options. Warning terms currently use the form <code class="docutils literal notranslate"><span class="pre">missing_analysis_prerequisite(File,</span> <span class="pre">Prerequisite)</span></code>.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">preflight(Target,Warnings,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">preflight(+nonvar,-list(compound),+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="preflight-2">
-<span id="dead-code-scanner-0-preflight-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">preflight/2</span></code></a><a class="headerlink" href="#preflight-2" title="Link to this heading"></a></h3>
-<p>Returns an ordered set of machine-readable preflight warnings for a scan target using default options. Warning terms currently use the form <code class="docutils literal notranslate"><span class="pre">missing_analysis_prerequisite(File,</span> <span class="pre">Prerequisite)</span></code>.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">preflight(Target,Warnings)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">preflight(+nonvar,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="export-4">
-<span id="dead-code-scanner-0-export-4"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">export/4</span></code></a><a class="headerlink" href="#export-4" title="Link to this heading"></a></h3>
-<p>Exports a scan target using the given options in the specified format to the specified sink. Supported formats are <code class="docutils literal notranslate"><span class="pre">json</span></code> and <code class="docutils literal notranslate"><span class="pre">sarif</span></code>. Exports include both findings and machine-readable preflight warnings. SARIF exports use one rule descriptor per finding class and map finding confidence to triage-aware result levels. Supported sinks are those accepted by the <code class="docutils literal notranslate"><span class="pre">json::generate/2</span></code> library predicate.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">export(Target,Format,Sink,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">export(+nonvar,+atom,++compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="export-3">
-<span id="dead-code-scanner-0-export-3"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">export/3</span></code></a><a class="headerlink" href="#export-3" title="Link to this heading"></a></h3>
-<p>Exports a scan target using default options in the specified format to the specified sink. Supported formats are <code class="docutils literal notranslate"><span class="pre">json</span></code> and <code class="docutils literal notranslate"><span class="pre">sarif</span></code>. Exports include both findings and machine-readable preflight warnings. SARIF exports use one rule descriptor per finding class and map finding confidence to triage-aware result levels. Supported sinks are those accepted by the <code class="docutils literal notranslate"><span class="pre">json::generate/2</span></code> library predicate.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">export(Target,Format,Sink)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">export(+nonvar,+atom,++compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
 <section id="predicates-2">
-<span id="dead-code-scanner-0-predicates-2"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predicates/2</span></code></a><a class="headerlink" href="#predicates-2" title="Link to this heading"></a></h3>
+<span id="dead-code-scanner-0-predicates-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predicates/2</span></code></a><a class="headerlink" href="#predicates-2" title="Link to this heading"></a></h3>
 <p>Returns an ordered set of local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -864,7 +642,7 @@
 <hr class="docutils" />
 </section>
 <section id="predicates-3">
-<span id="dead-code-scanner-0-predicates-3"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predicates/3</span></code></a><a class="headerlink" href="#predicates-3" title="Link to this heading"></a></h3>
+<span id="dead-code-scanner-0-predicates-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predicates/3</span></code></a><a class="headerlink" href="#predicates-3" title="Link to this heading"></a></h3>
 <p>Returns an ordered set of local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity using the given options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -885,7 +663,7 @@
 <hr class="docutils" />
 </section>
 <section id="predicate-2">
-<span id="dead-code-scanner-0-predicate-2"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predicate/2</span></code></a><a class="headerlink" href="#predicate-2" title="Link to this heading"></a></h3>
+<span id="dead-code-scanner-0-predicate-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predicate/2</span></code></a><a class="headerlink" href="#predicate-2" title="Link to this heading"></a></h3>
 <p>Enumerates, by backtracking, local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -906,7 +684,7 @@
 <hr class="docutils" />
 </section>
 <section id="predicate-3">
-<span id="dead-code-scanner-0-predicate-3"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predicate/3</span></code></a><a class="headerlink" href="#predicate-3" title="Link to this heading"></a></h3>
+<span id="dead-code-scanner-0-predicate-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predicate/3</span></code></a><a class="headerlink" href="#predicate-3" title="Link to this heading"></a></h3>
 <p>Enumerates, by backtracking, local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity using the given options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

@@ -1,0 +1,94 @@
+.. index:: single: tool_diagnostics_common
+.. _tool_diagnostics_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``tool_diagnostics_common``
+===========================
+
+Default definitions for diagnostics targets, rule enumeration, and summary/breakdown helpers.
+
+| **Availability:** 
+|    ``logtalk_load(tool_diagnostics(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-03-31
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`tool_diagnostics_protocol/0::diagnostic/2`  :ref:`tool_diagnostics_protocol/0::diagnostic/3`  :ref:`tool_diagnostics_protocol/0::diagnostic_rule/5`  :ref:`tool_diagnostics_protocol/0::diagnostic_rules/1`  :ref:`tool_diagnostics_protocol/0::diagnostic_target/1`  :ref:`tool_diagnostics_protocol/0::diagnostics/2`  :ref:`tool_diagnostics_protocol/0::diagnostics/3`  :ref:`tool_diagnostics_protocol/0::diagnostics_preflight/2`  :ref:`tool_diagnostics_protocol/0::diagnostics_preflight/3`  :ref:`tool_diagnostics_protocol/0::diagnostics_summary/2`  :ref:`tool_diagnostics_protocol/0::diagnostics_summary/3`  :ref:`tool_diagnostics_protocol/0::diagnostics_tool/5`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: context_summaries/2
+.. _tool_diagnostics_common/0::context_summaries/2:
+
+``context_summaries/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a list of context summary terms for a list of diagnostics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``context_summaries(Diagnostics,ContextSummaries)``
+| **Mode and number of proofs:**
+|    ``context_summaries(+list(compound),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: diagnostics_breakdown/2
+.. _tool_diagnostics_common/0::diagnostics_breakdown/2:
+
+``diagnostics_breakdown/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a breakdown term with rule, severity, and confidence counts for a list of diagnostics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics_breakdown(Diagnostics,Breakdown)``
+| **Mode and number of proofs:**
+|    ``diagnostics_breakdown(+list(compound),-compound)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

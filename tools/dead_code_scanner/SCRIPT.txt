@@ -72,42 +72,35 @@ ________________________________________________________________________
 ...
 
 
-% get a machine-readable summary for a specific entity scan:
+% get a machine-readable diagnostics summary for a specific entity scan:
 
-| ?- dead_code_scanner::summary(entity(core_messages), Summary).
+| ?- dead_code_scanner::diagnostics_summary(entity(core_messages), Summary).
 ...
 
 
-% get triage-oriented machine-readable findings for a specific entity scan:
+% get triage-oriented machine-readable diagnostics for a specific entity scan:
 
-| ?- dead_code_scanner::findings(entity(core_messages), Findings).
+| ?- dead_code_scanner::diagnostics(entity(core_messages), Diagnostics).
 ...
 
-% finding terms now include a class, confidence, and properties:
+% individual diagnostic terms include the rule id, severity, confidence,
+% message, context, file, lines, and properties:
 
-| ?- dead_code_scanner::finding(entity(core_messages), Finding).
+| ?- dead_code_scanner::diagnostic(entity(core_messages), Diagnostic).
 ...
 
-% export a specific entity scan as a JSON file:
+% generate a SARIF report for a specific entity scan using the standalone
+% SARIF tool:
 
-| ?- dead_code_scanner::export(entity(core_messages), json, file('report.json')).
+| ?- logtalk_load(sarif(loader)).
 ...
 
-
-% export a specific entity scan as a JSON file and validate it against the schema:
-
-| ?- dead_code_scanner::export(entity(core_messages), json, file('report.json'), [validate_export(true)]).
+| ?- sarif::generate(dead_code_scanner, entity(core_messages), file('report.sarif.json'), []).
 ...
 
-
-% export a specific entity scan as a SARIF file:
-
-| ?- dead_code_scanner::export(entity(core_messages), sarif, file('sarif.json')).
-...
-
-% SARIF exports use one rule descriptor per finding class and map confidence
-% to triage-aware result levels. For example, local dead code findings are
-% exported using the `local_dead_code` rule and medium-confidence results are
-% emitted as `note` level, while high-confidence unused resource findings use
-% the `unused_uses_resource` or `unused_use_module_resource` rules and are
-% emitted as `error` level.
+% The generated SARIF report uses one rule descriptor per finding class and
+% maps confidence to triage-aware result levels. For example, local dead code
+% findings are exported using the `local_dead_code` rule and medium-confidence
+% results are emitted as `note` level, while high-confidence unused resource
+% findings use the `unused_uses_resource` or `unused_use_module_resource`
+% rules and are emitted as `error` level.

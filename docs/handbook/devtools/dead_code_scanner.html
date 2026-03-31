@@ -81,7 +81,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#machine-readable-summaries">Machine-readable summaries</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#machine-readable-preflight-warnings">Machine-readable preflight warnings</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#finding-classes-and-confidence">Finding classes and confidence</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#exports">Exports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sarif-reports">SARIF reports</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#integration-with-the-make-tool">Integration with the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#caveats">Caveats</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scanning-prolog-modules">Scanning Prolog modules</a></li>
@@ -104,7 +104,9 @@
 <li class="toctree-l2"><a class="reference internal" href="packs.html"><code class="docutils literal notranslate"><span class="pre">packs</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ports_profiler.html"><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiler.html"><code class="docutils literal notranslate"><span class="pre">profiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sarif.html"><code class="docutils literal notranslate"><span class="pre">sarif</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="sbom.html"><code class="docutils literal notranslate"><span class="pre">sbom</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tool_diagnostics.html"><code class="docutils literal notranslate"><span class="pre">tool_diagnostics</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutor.html"><code class="docutils literal notranslate"><span class="pre">tutor</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="wrapper.html"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a></li>
 </ul>
@@ -206,31 +208,30 @@ libraries, files, and directories. See the tool API documentation for
 details. The source code to be analyzed should be loaded with the
 <code class="docutils literal notranslate"><span class="pre">source_data</span></code> and <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flags turned on (possibly set from a
 loader file).</p>
-<p>For machine-readable integrations, the <code class="docutils literal notranslate"><span class="pre">findings/2-3</span></code>,
-<code class="docutils literal notranslate"><span class="pre">finding/2-3</span></code>, and <code class="docutils literal notranslate"><span class="pre">summary/2-3</span></code> predicates can be used to collect
-dead-code results and post- filter counts without relying on printed
-messages. Findings are returned as terms of the form:</p>
+<p>For machine-readable integrations, the <code class="docutils literal notranslate"><span class="pre">diagnostics/2-3</span></code>,
+<code class="docutils literal notranslate"><span class="pre">diagnostic/2-3</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostics_summary/2-3</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">diagnostics_preflight/2-3</span></code> predicates can be used to collect
+dead-code results and post-filter counts without relying on printed
+messages. Diagnostics are returned as terms of the form:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">dead_predicate(Class,</span> <span class="pre">Confidence,</span> <span class="pre">Properties,</span> <span class="pre">EntityKind,</span> <span class="pre">Entity,</span> <span class="pre">Predicate,</span> <span class="pre">File,</span> <span class="pre">Lines)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">diagnostic(RuleId,</span> <span class="pre">Severity,</span> <span class="pre">Confidence,</span> <span class="pre">Message,</span> <span class="pre">Context,</span> <span class="pre">File,</span> <span class="pre">Lines,</span> <span class="pre">Properties)</span></code></p></li>
 </ul>
 <p>where:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Class</span></code> distinguishes local dead code from unused <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> and
+<li><p><code class="docutils literal notranslate"><span class="pre">RuleId</span></code> distinguishes local dead code from unused <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> and
 <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> resources</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Severity</span></code> is the reported diagnostic severity (<code class="docutils literal notranslate"><span class="pre">error</span></code>,
+<code class="docutils literal notranslate"><span class="pre">warning</span></code>, or <code class="docutils literal notranslate"><span class="pre">note</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Confidence</span></code> is a triage-oriented rating (<code class="docutils literal notranslate"><span class="pre">high</span></code>, <code class="docutils literal notranslate"><span class="pre">medium</span></code>, or
 <code class="docutils literal notranslate"><span class="pre">low</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Context</span></code> identifies the entity kind and entity where the diagnostic
+was found</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Properties</span></code> contains additional structured metadata, including the
 analysis settings seen for the source file and any class-specific
 details needed to explain the finding</p></li>
 </ul>
 <p>For machine-readable export integrations, the <code class="docutils literal notranslate"><span class="pre">export/3-4</span></code> predicates
-serialize scan results using the <code class="docutils literal notranslate"><span class="pre">json</span></code> library. Supported formats are
-<code class="docutils literal notranslate"><span class="pre">json</span></code> and <code class="docutils literal notranslate"><span class="pre">sarif</span></code>. The JSON export format is described by the
-<code class="docutils literal notranslate"><span class="pre">dead_code_scanner.schema.json</span></code> JSON Schema file in the tool
-directory. Runtime validation of exported JSON against that schema can
-be enabled using the <code class="docutils literal notranslate"><span class="pre">validate_export(true)</span></code> option. The default is
-<code class="docutils literal notranslate"><span class="pre">validate_export(false)</span></code>. The current JSON export format version is
-<code class="docutils literal notranslate"><span class="pre">1.0.0</span></code>.</p>
+serialize scan results in SARIF format using the <code class="docutils literal notranslate"><span class="pre">json</span></code> library.</p>
 <p>As an example, assume that we want to scan an application with a library
 alias <code class="docutils literal notranslate"><span class="pre">my_app</span></code>. The following goals could be used:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(source_data, on),
@@ -301,42 +302,36 @@ instantiated structured finding terms such as
 <code class="docutils literal notranslate"><span class="pre">dead_predicate(local_dead_code,</span> <span class="pre">medium,</span> <span class="pre">_,</span> <span class="pre">object,</span> <span class="pre">some_object,</span> <span class="pre">helper/2,</span> <span class="pre">_,</span> <span class="pre">_)</span></code></div>
 </div>
 </li>
-<li><div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">validate_export(Boolean)</span></code></div>
-<div class="line">boolean option controlling runtime validation of <code class="docutils literal notranslate"><span class="pre">json</span></code> exports
-against the <code class="docutils literal notranslate"><span class="pre">dead_code_scanner.schema.json</span></code> file (default is
-<code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
-</div>
-</li>
 </ul>
 </section>
 <section id="machine-readable-summaries">
 <h2>Machine-readable summaries<a class="headerlink" href="#machine-readable-summaries" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">summary/2-3</span></code> predicates return a term of the form:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">diagnostics_summary/2-3</span></code> predicates return a term of the form:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">summary(Target,</span> <span class="pre">TotalEntities,</span> <span class="pre">TotalFindings,</span> <span class="pre">Breakdown,</span> <span class="pre">EntitySummaries)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">diagnostics_summary(Target,</span> <span class="pre">TotalContexts,</span> <span class="pre">TotalDiagnostics,</span> <span class="pre">Breakdown,</span> <span class="pre">ContextSummaries)</span></code></p></li>
 </ul>
 <p>where <code class="docutils literal notranslate"><span class="pre">Breakdown</span></code> is a term of the form:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">finding_breakdown(ClassCounts,</span> <span class="pre">ConfidenceCounts)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">diagnostic_breakdown(RuleCounts,</span> <span class="pre">SeverityCounts,</span> <span class="pre">ConfidenceCounts)</span></code></p></li>
 </ul>
-<p>with <code class="docutils literal notranslate"><span class="pre">ClassCounts</span></code> containing <code class="docutils literal notranslate"><span class="pre">class_count(Class,</span> <span class="pre">Count)</span></code> terms and
-<code class="docutils literal notranslate"><span class="pre">ConfidenceCounts</span></code> containing <code class="docutils literal notranslate"><span class="pre">confidence_count(Confidence,</span> <span class="pre">Count)</span></code>
-terms.</p>
-<p><code class="docutils literal notranslate"><span class="pre">EntitySummaries</span></code> is a list of terms of the form:</p>
+<p>with <code class="docutils literal notranslate"><span class="pre">RuleCounts</span></code> containing <code class="docutils literal notranslate"><span class="pre">rule_count(RuleId,</span> <span class="pre">Count)</span></code> terms,
+<code class="docutils literal notranslate"><span class="pre">SeverityCounts</span></code> containing <code class="docutils literal notranslate"><span class="pre">severity_count(Severity,</span> <span class="pre">Count)</span></code> terms,
+and <code class="docutils literal notranslate"><span class="pre">ConfidenceCounts</span></code> containing
+<code class="docutils literal notranslate"><span class="pre">confidence_count(Confidence,</span> <span class="pre">Count)</span></code> terms.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ContextSummaries</span></code> is a list of terms of the form:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">entity_summary(Kind,</span> <span class="pre">Entity,</span> <span class="pre">FindingsCount,</span> <span class="pre">Breakdown)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context_summary(Context,</span> <span class="pre">DiagnosticsCount,</span> <span class="pre">Breakdown)</span></code></p></li>
 </ul>
 <p>The summary is computed after applying all exclusions and finding
 waivers, making it suitable for CI thresholds and regression tracking.</p>
 </section>
 <section id="machine-readable-preflight-warnings">
 <h2>Machine-readable preflight warnings<a class="headerlink" href="#machine-readable-preflight-warnings" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">preflight/2-3</span></code> predicates return an ordered set of warnings
-describing analysis prerequisites that affect result quality for a
-target. Warning terms currently use the form:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">diagnostics_preflight/2-3</span></code> predicates return an ordered set of
+warnings describing analysis prerequisites that affect result quality
+for a target. Warning terms currently use the form:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">missing_analysis_prerequisite(File,</span> <span class="pre">Prerequisite)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">preflight_issue(missing_analysis_prerequisite,</span> <span class="pre">Severity,</span> <span class="pre">Message,</span> <span class="pre">Context,</span> <span class="pre">File,</span> <span class="pre">Lines,</span> <span class="pre">Properties)</span></code></p></li>
 </ul>
 <p>where <code class="docutils literal notranslate"><span class="pre">Prerequisite</span></code> is currently one of:</p>
 <ul class="simple">
@@ -394,18 +389,18 @@ whenever the analyzed files were not loaded with <code class="docutils literal n
 <code class="docutils literal notranslate"><span class="pre">optimize(on)</span></code> so that potentially less reliable results can be
 triaged more carefully.</p>
 </section>
-<section id="exports">
-<h2>Exports<a class="headerlink" href="#exports" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">export/3-4</span></code> predicates serialize scan results in either <code class="docutils literal notranslate"><span class="pre">json</span></code>
-or <code class="docutils literal notranslate"><span class="pre">sarif</span></code> format to any sink supported by the <code class="docutils literal notranslate"><span class="pre">json::generate/2</span></code>
-predicate, including files, streams, atoms, chars, and codes.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">json</span></code> export is described by the
-<code class="docutils literal notranslate"><span class="pre">dead_code_scanner.schema.json</span></code> file, which can be used by third-party
-tools to validate and consume that export format. The <code class="docutils literal notranslate"><span class="pre">sarif</span></code> export
-uses the SARIF <code class="docutils literal notranslate"><span class="pre">2.1.0</span></code> JSON format and is suitable for code scanning
-integrations that consume SARIF reports. SARIF exports include a per-run
-UUID GUID, stable GUIDs for the SARIF driver and rule descriptors, and
-deterministic result fingerprints derived from the canonical finding.</p>
+<section id="sarif-reports">
+<h2>SARIF reports<a class="headerlink" href="#sarif-reports" title="Link to this heading"></a></h2>
+<p>This tool is a diagnostics producer. To generate SARIF reports from its
+diagnostics, load the standalone <code class="docutils literal notranslate"><span class="pre">sarif</span></code> tool and call
+<code class="docutils literal notranslate"><span class="pre">sarif::generate(dead_code_scanner,</span> <span class="pre">Target,</span> <span class="pre">Sink,</span> <span class="pre">Options)</span></code> where
+<code class="docutils literal notranslate"><span class="pre">Target</span></code> and <code class="docutils literal notranslate"><span class="pre">Options</span></code> are the same ones accepted by the diagnostics
+predicates.</p>
+<p>The generated report uses the SARIF <code class="docutils literal notranslate"><span class="pre">2.1.0</span></code> JSON format and is
+suitable for code scanning integrations that consume SARIF reports. The
+shared generator includes deterministic result fingerprints derived from
+the canonical finding and preserves the rule descriptors and
+triage-oriented severity mapping described below.</p>
 <p>SARIF findings are exported using one rule descriptor per finding class:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">local_dead_code</span></code></p></li>
@@ -427,19 +422,13 @@ as <code class="docutils literal notranslate"><span class="pre">note</span></cod
 <p>This mapping allows CI consumers to distinguish advisory dead-code
 findings from stronger unused-resource findings without reinterpreting
 the custom <code class="docutils literal notranslate"><span class="pre">class</span></code> and <code class="docutils literal notranslate"><span class="pre">confidence</span></code> properties.</p>
-<p>JSON exports include an additive top-level <code class="docutils literal notranslate"><span class="pre">preflight</span></code> object with a
-<code class="docutils literal notranslate"><span class="pre">warnings</span></code> array. Each warning entry records the warning kind, file,
-prerequisite, and a machine-readable severity.</p>
-<p>SARIF exports include the same preflight information as invocation-level
+<p>SARIF reports include the same preflight information as invocation-level
 <code class="docutils literal notranslate"><span class="pre">toolExecutionNotifications</span></code>, allowing consumers to distinguish
-prerequisite warnings from dead code findings. representation. When the
-analyzed code is inside a git repository, the export also includes the
-current branch and commit hash as optional run properties. When the
-repository remote URI can also be derived, the export includes a
-<code class="docutils literal notranslate"><span class="pre">versionControlProvenance</span></code> entry with the repository URI, revision id,
-branch, and local repository root mapping; outside a git repository, or
-when the repository URI cannot be derived, these git-derived SARIF
-properties are simply omitted.</p>
+prerequisite warnings from dead code findings. When the analyzed code is
+inside a git repository, the shared generator also includes the current
+branch and commit hash as optional run properties and a
+<code class="docutils literal notranslate"><span class="pre">versionControlProvenance</span></code> entry when the repository URI can be
+derived.</p>
 </section>
 <section id="integration-with-the-make-tool">
 <h2>Integration with the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool<a class="headerlink" href="#integration-with-the-make-tool" title="Link to this heading"></a></h2>

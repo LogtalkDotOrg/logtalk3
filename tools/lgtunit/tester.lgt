@@ -24,16 +24,19 @@
 	set_logtalk_flag(optimize, on),
 	logtalk_load(loader),
 	logtalk_load([
-		tests_parametric,
-		tests_dialects,
-		tests_skipped,
-		tests_selected,
-		tests_utils,
-		tests_io_predicates
+		'test_files/diagnostics_fixture',
+		'test_files/tests_diagnostics',
+		'test_files/tests_parametric',
+		'test_files/tests_dialects',
+		'test_files/tests_skipped',
+		'test_files/tests_selected',
+		'test_files/tests_utils',
+		'test_files/tests_io_predicates'
 	], [
 		hook(lgtunit)
 	]),
 	lgtunit::run_test_sets([
+		tests_diagnostics,
 		tests_parametric(1),
 		tests_dialects,
 		tests_skipped,
