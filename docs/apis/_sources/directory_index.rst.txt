@@ -1192,9 +1192,6 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
 
-   tsv <tsv_0>
-   tsv(Header) <tsv_1>
-   tsv(Header,Comments) <tsv_2>
    tsv_protocol <tsv_protocol_0>
 
 ``library/types/``

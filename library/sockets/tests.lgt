@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2026-02-07,
+		date is 2026-04-01,
 		comment is 'Unit tests for the "sockets" library.'
 	]).
 
@@ -38,6 +38,23 @@
 
 	test(sockets_current_host_02, true(Host \== '')) :-
 		socket::current_host(Host).
+
+	% test server_open/4 and server_close/1
+
+	test(sockets_server_host_open_close_01, true) :-
+		% test opening and closing a server socket with explicit port
+		socket::server_open('127.0.0.1', 0, ServerSocket, []),
+		socket::server_close(ServerSocket).
+
+	test(sockets_server_host_open_close_02, true(integer(Port))) :-
+		% test that port 0 binds to an available port
+		socket::server_open('127.0.0.1', Port, ServerSocket, []),
+		socket::server_close(ServerSocket).
+
+	test(sockets_server_host_open_close_03, true(Port > 0)) :-
+		% test that the assigned port is a valid port number
+		socket::server_open('127.0.0.1', Port, ServerSocket, []),
+		socket::server_close(ServerSocket).
 
 	% test server_open/3 and server_close/1
 

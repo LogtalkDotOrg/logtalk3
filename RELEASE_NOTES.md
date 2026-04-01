@@ -22,7 +22,7 @@ RELEASE NOTES
 =============
 
 
-3.99.0 - March ??, 2026
+3.99.0 - April ??, 2026
 =======================
 
 Logtalk compiler and runtime
@@ -70,6 +70,8 @@ the `arbitrary` library category.
 
 * ADDED: Support to the `json_schema` library for schema references to local
 files.
+
+* ADDED: Predicate `server_open/4` to the `sockets` library.
 
 * FIXED: The implementation of the `os::absolute_file_name/2` predicate for
 the Ciao Prolog, CxProlog, ECLiPSe, GNU Prolog, JIProlog, SICStus Prolog,

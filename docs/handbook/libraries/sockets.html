@@ -284,7 +284,8 @@ same stream handle is returned in both arguments. Use
 </section>
 <section id="creating-a-server">
 <h3>Creating a server<a class="headerlink" href="#creating-a-server" title="Link to this heading"></a></h3>
-<p>To create a server that accepts connections using default options:</p>
+<p>To create a server that accepts connections using default options on all
+interfaces:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> socket<span class="o">::</span>server_open(<span class="m">8080</span>, <span class="nv">ServerSocket</span>),
    socket<span class="o">::</span>server_accept(<span class="nv">ServerSocket</span>, <span class="nv">Input</span>, <span class="nv">Output</span>, <span class="nv">ClientInfo</span>),
    <span class="c">% ... communicate with client using Input and Output ...</span>
@@ -292,8 +293,11 @@ same stream handle is returned in both arguments. Use
    socket<span class="o">::</span>server_close(<span class="nv">ServerSocket</span>).
 </pre></div>
 </div>
-<p>If the port is passed as a variable to <code class="docutils literal notranslate"><span class="pre">server_open/2-3</span></code>, an available
-port will be selected and unified with the variable.</p>
+<p>If the port is passed as a variable to the <code class="docutils literal notranslate"><span class="pre">server_open/2-3</span></code>
+predicates, an available port will be selected and unified with the
+variable.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">server_open/4</span></code> predicate can be used to accept a connection only
+on the given interface.</p>
 </section>
 <section id="getting-the-current-host-name">
 <h3>Getting the current host name<a class="headerlink" href="#getting-the-current-host-name" title="Link to this heading"></a></h3>
@@ -309,8 +313,10 @@ port will be selected and unified with the variable.</p>
 Connect to a server</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">client_open(+Host,</span> <span class="pre">+Port,</span> <span class="pre">-InputStream,</span> <span class="pre">-OutputStream)</span></code> - Connect
 to a server using default options</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">server_open(+Host,</span> <span class="pre">?Port,</span> <span class="pre">-ServerSocket,</span> <span class="pre">+Options)</span></code> - Create a
+server socket on the given interface</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">server_open(?Port,</span> <span class="pre">-ServerSocket,</span> <span class="pre">+Options)</span></code> - Create a server
-socket</p></li>
+socket on all interfaces</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">server_open(?Port,</span> <span class="pre">-ServerSocket)</span></code> - Create a server socket using
 default options</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">server_accept(+ServerSocket,</span> <span class="pre">-InputStream,</span> <span class="pre">-OutputStream,</span> <span class="pre">-ClientInfo,</span> <span class="pre">+Options)</span></code>

@@ -64,7 +64,8 @@ same stream handle is returned in both arguments. Use
 Creating a server
 ~~~~~~~~~~~~~~~~~
 
-To create a server that accepts connections using default options:
+To create a server that accepts connections using default options on all
+interfaces:
 
 ::
 
@@ -74,8 +75,12 @@ To create a server that accepts connections using default options:
       socket::close(Input, Output),
       socket::server_close(ServerSocket).
 
-If the port is passed as a variable to ``server_open/2-3``, an available
-port will be selected and unified with the variable.
+If the port is passed as a variable to the ``server_open/2-3``
+predicates, an available port will be selected and unified with the
+variable.
+
+The ``server_open/4`` predicate can be used to accept a connection only
+on the given interface.
 
 Getting the current host name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -91,8 +96,10 @@ API Summary
   Connect to a server
 - ``client_open(+Host, +Port, -InputStream, -OutputStream)`` - Connect
   to a server using default options
+- ``server_open(+Host, ?Port, -ServerSocket, +Options)`` - Create a
+  server socket on the given interface
 - ``server_open(?Port, -ServerSocket, +Options)`` - Create a server
-  socket
+  socket on all interfaces
 - ``server_open(?Port, -ServerSocket)`` - Create a server socket using
   default options
 - ``server_accept(+ServerSocket, -InputStream, -OutputStream, -ClientInfo, +Options)``

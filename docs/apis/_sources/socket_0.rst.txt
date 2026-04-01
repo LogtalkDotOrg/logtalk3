@@ -14,8 +14,8 @@ Portable abstraction over TCP sockets. Provides a high-level API for client and 
 |    ``logtalk_load(sockets(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:11:0
-| **Date:** 2026-03-27
+| **Version:** 0:12:0
+| **Date:** 2026-04-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -89,6 +89,29 @@ Opens a client connection to the specified host and port using default options. 
 
 | **Exceptions:**
 |    Connection refused or host not found:
+|        ``socket_error(Error)``
+
+
+------------
+
+.. index:: server_open/4
+.. _socket/0::server_open/4:
+
+``server_open/4``
+^^^^^^^^^^^^^^^^^
+
+Opens a server socket bound to the specified host and port using the given options. If ``Port`` is a variable, binds to an available port and unifies ``Port`` with the port number. Returns a ``ServerSocket`` handle to use with ``server_accept/4``. The default backlog (queue length) for pending connections is 5. Use the option ``backlog(N)`` to override. This option is not supported and thus ignored by the SICStus Prolog and Trealla Prolog backends.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``server_open(Host,Port,ServerSocket,Options)``
+| **Mode and number of proofs:**
+|    ``server_open(+atom,?integer,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Port already in use:
 |        ``socket_error(Error)``
 
 

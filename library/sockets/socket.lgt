@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Paulo Moura',
-		date is 2026-03-27,
+		date is 2026-04-01,
 		comment is 'Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.',
@@ -62,6 +62,16 @@
 	]).
 
 	% Server predicates
+
+	:- public(server_open/4).
+	:- mode(server_open(+atom, ?integer, --compound, +list), one_or_error).
+	:- info(server_open/4, [
+		comment is 'Opens a server socket bound to the specified host and port using the given options. If ``Port`` is a variable, binds to an available port and unifies ``Port`` with the port number. Returns a ``ServerSocket`` handle to use with ``server_accept/4``. The default backlog (queue length) for pending connections is 5. Use the option ``backlog(N)`` to override. This option is not supported and thus ignored by the SICStus Prolog and Trealla Prolog backends.',
+		argnames is ['Host', 'Port', 'ServerSocket', 'Options'],
+		exceptions is [
+			'Port already in use' - socket_error('Error')
+		]
+	]).
 
 	:- public(server_open/3).
 	:- mode(server_open(?integer, --compound, +list), one_or_error).
@@ -147,6 +157,16 @@
 	client_open(Host, Port, InputStream, OutputStream) :-
 		client_open(Host, Port, InputStream, OutputStream, []).
 
+	server_open(Host, Port, ServerSocket, UserOptions) :-
+		context(Context),
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		catch(
+			server_open_(Host, Port, ServerSocket, Options),
+			Error,
+			throw(error(socket_error(Error), Context))
+		).
+
 	server_open(Port, ServerSocket, UserOptions) :-
 		context(Context),
 		^^check_options(UserOptions),
@@ -226,11 +246,14 @@
 		;	true
 		).
 
-	server_open_(Port, server_socket(Socket, Port), Options) :-
+	server_open_(Host, Port, server_socket(Socket, Host:Port), Options) :-
 		memberchk(backlog(N), Options),
 		{socket(internet, stream, Socket)},
-		{bind(Socket, _Host/Port)},
+		{bind(Socket, Host/Port)},
 		{listen(Socket, N)}.
+
+	server_open_(Port, server_socket(Socket, Port), Options) :-
+		server_open_(_, Port, server_socket(Socket, _:Port), Options).
 
 	server_accept_(server_socket(Socket, _), ClientSocket, ClientSocket, client(Host, Port), Options) :-
 		{accept(Socket, Host/Port, ClientSocket)},
@@ -257,11 +280,14 @@
 		set_stream_type(Input, Type),
 		set_stream_type(Output, Type).
 
-	server_open_(Port, server_socket(Socket, Port), Options) :-
+	server_open_(Host, Port, server_socket(Socket, Host:Port), Options) :-
 		memberchk(backlog(N), Options),
 		socket('AF_INET', Socket),
-		socket_bind(Socket, 'AF_INET'(_Host, Port)),
+		socket_bind(Socket, 'AF_INET'(Host, Port)),
 		socket_listen(Socket, N).
+
+	server_open_(Port, server_socket(Socket, Port), Options) :-
+		server_open_(_, Port, server_socket(Socket, _:Port), Options).
 
 	server_accept_(server_socket(Socket, _), Input, Output, client(Client), Options) :-
 		socket_accept(Socket, Client, Input, Output),
@@ -282,6 +308,26 @@
 	client_open_(Host, Port, Stream, Stream, Options) :-
 		memberchk(type(Type), Options),
 		sockets:socket_client_open(inet(Host, Port), Stream, [type(Type)]).
+
+	server_open_(Host, Port, server_socket(ServerSocket, Host:PortInt), Options) :-
+		memberchk(backlog(_N), Options),
+		(	% Use internal variable for socket_server_open
+			(	var(Port) ->
+				sockets:socket_server_open(Host:Port0, ServerSocket, [reuseaddr(true)])
+			;	Port0 = Port,
+				sockets:socket_server_open(Host:Port0, ServerSocket, [reuseaddr(true)])
+			),
+			% SICStus may return the port as an atom, convert to integer
+			(	atom(Port0) ->
+				{atom_codes(Port0, Codes), number_codes(PortInt, Codes)}
+			;	PortInt = Port0
+			),
+			% Unify Port with the integer value if it was a variable
+			(	var(Port) ->
+				Port = PortInt
+			;	true
+			)
+		).
 
 	server_open_(Port, server_socket(ServerSocket, PortInt), Options) :-
 		memberchk(backlog(_N), Options),
@@ -324,6 +370,13 @@
 		set_stream(Input, type(Type)),
 		set_stream(Output, type(Type)).
 
+	server_open_(Host, Port, server_socket(Socket, Host:Port), Options) :-
+		memberchk(backlog(N), Options),
+		socket:tcp_socket(Socket),
+		socket:tcp_setopt(Socket, reuseaddr),
+		socket:tcp_bind(Socket, Host:Port),
+		socket:tcp_listen(Socket, N).
+
 	server_open_(Port, server_socket(Socket, Port), Options) :-
 		memberchk(backlog(N), Options),
 		socket:tcp_socket(Socket),
@@ -361,6 +414,26 @@
 	client_open_(Host, Port, Stream, Stream, Options) :-
 		memberchk(type(Type), Options),
 		sockets:socket_client_open(inet(Host, Port), Stream, [type(Type)]).
+
+	server_open_(Host, Port, server_socket(ServerSocket, Host:PortInt), Options) :-
+		memberchk(backlog(_N), Options),
+		(	% Use internal variable for socket_server_open
+			(	var(Port) ->
+				sockets:socket_server_open(Host:Port0, ServerSocket, [reuseaddr(true)])
+			;	Port0 = Port,
+				sockets:socket_server_open(Host:Port0, ServerSocket, [reuseaddr(true)])
+			),
+			% Trealla may return the port as an atom, convert to integer
+			(	atom(Port0) ->
+				{atom_codes(Port0, Codes), number_codes(PortInt, Codes)}
+			;	PortInt = Port0
+			),
+			% Unify Port with the integer value if it was a variable
+			(	var(Port) ->
+				Port = PortInt
+			;	true
+			)
+		).
 
 	server_open_(Port, server_socket(ServerSocket, PortInt), Options) :-
 		memberchk(backlog(_N), Options),
@@ -403,11 +476,14 @@
 		set_stream_type(Input, Type),
 		set_stream_type(Output, Type).
 
-	server_open_(Port, server_socket(Socket, Port), Options) :-
+	server_open_(Host, Port, server_socket(Socket, Host:Port), Options) :-
 		memberchk(backlog(N), Options),
 		socket('AF_INET', Socket),
-		socket_bind(Socket, 'AF_INET'(_Host, Port)),
+		socket_bind(Socket, 'AF_INET'(Host, Port)),
 		socket_listen(Socket, N).
+
+	server_open_(Port, server_socket(Socket, Port), Options) :-
+		server_open_(_, Port, server_socket(Socket, _:Port), Options).
 
 	server_accept_(server_socket(Socket, _), Input, Output, client(Client), Options) :-
 		socket_accept(Socket, Client, Input, Output),
