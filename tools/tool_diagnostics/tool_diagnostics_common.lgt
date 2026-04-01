@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-31,
+		date is 2026-04-01,
 		comment is 'Default definitions for diagnostics targets, rule enumeration, and summary/breakdown helpers.'
 	]).
 
@@ -44,7 +44,7 @@
 	]).
 
 	:- uses(list, [
-		member/2
+		length/2, member/2
 	]).
 
 	diagnostic_target(all).
