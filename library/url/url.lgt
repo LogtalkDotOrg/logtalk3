@@ -22,7 +22,7 @@
 :- object(url(_Representation_)).
 
 	:- info([
-		version is 1:0:2,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2026-04-01,
 		comment is 'URL validating, parsing, and normalizing predicates following RFC3986 nomenclature.',
@@ -59,8 +59,15 @@
 		argnames is ['URL', 'NormalizedURL']
 	]).
 
+	:- public(file_path_components/2).
+	:- mode(file_path_components(++text, -list(compound)), one).
+	:- info(file_path_components/2, [
+		comment is 'Converts a file-system path into file URL components represented as ``[authority(Authority), path(Path)]``. Windows drive-letter and UNC paths are normalized to RFC3986-compatible file URL components.',
+		argnames is ['FilePath', 'Components']
+	]).
+
 	:- uses(list, [
-		append/3, reverse/2
+		append/3, member/2, reverse/2
 	]).
 
 	valid(URL) :-
@@ -547,10 +554,49 @@
 		build_url_from_components(Components, NormalizedURL),
 		!.
 
+	file_path_components(FilePath, [authority(Authority), path(Path)]) :-
+		convert_to_text(_Representation_, FilePathCodes0, FilePath),
+		normalize_file_path_codes(FilePathCodes0, FilePathCodes),
+		file_path_components_codes(FilePathCodes, AuthorityCodes, PathCodes),
+		convert_to_text(_Representation_, AuthorityCodes, Authority),
+		convert_to_text(_Representation_, PathCodes, Path).
+
 	normalize_path(Path, NormalizedPath) :-
 		convert_to_text(_Representation_, PathCodes, Path),
 		normalize_path_codes(PathCodes, NormalizedPathCodes),
 		convert_to_text(_Representation_, NormalizedPathCodes, NormalizedPath).
+
+	normalize_file_path_codes([], []).
+	normalize_file_path_codes([0'\\| Codes0], [0'/| Codes]) :-
+		!,
+		normalize_file_path_codes(Codes0, Codes).
+	normalize_file_path_codes([Code| Codes0], [Code| Codes]) :-
+		normalize_file_path_codes(Codes0, Codes).
+
+	file_path_components_codes([0'/, 0'/| Codes], AuthorityCodes, [0'/| ShareCodes]) :-
+		append(AuthorityCodes, [0'/| ShareCodes], Codes),
+		AuthorityCodes \== [],
+		\+ member(0'/, AuthorityCodes),
+		!.
+	file_path_components_codes([Drive, 0':| Rest], [], [0'/, Drive, 0':| PathCodes]) :-
+		drive_letter_code(Drive),
+		drive_file_path_codes(Rest, PathCodes),
+		!.
+	file_path_components_codes([0'/| _]= Codes, [], Codes) :-
+		!.
+	file_path_components_codes(Codes, [], Codes).
+
+	drive_file_path_codes([0'/| Codes], [0'/| Codes]) :-
+		!.
+	drive_file_path_codes(Codes, Codes).
+
+	drive_letter_code(Code) :-
+		Code >= 0'A,
+		Code =< 0'Z,
+		!.
+	drive_letter_code(Code) :-
+		Code >= 0'a,
+		Code =< 0'z.
 
 	normalize_query(Query, NormalizedQuery) :-
 		normalize_text(query, Query, NormalizedQuery).
@@ -896,7 +942,10 @@
 	convert_to_text(atom, Data0, Data) :-
 		atom_codes(Data, Data0).
 	convert_to_text(chars, Data0, Data) :-
-		codes_to_chars(Data0, Data).
+		(	var(Data) ->
+			codes_to_chars(Data0, Data)
+		;	chars_to_codes(Data, Data0)
+		).
 	convert_to_text(codes, Data, Data).
 
 :- end_object.

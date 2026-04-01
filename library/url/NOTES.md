@@ -87,6 +87,10 @@ object where `_Representation_` can be one of:
 
 The parameter must be bound when sending messages to the object.
 
+The library also provides an utility predicate, `file_path_components/2`, for
+converting a file-system path into file URL components. This predicate also
+handles Windows drive-letter and UNC paths.
+
 
 API documentation
 -----------------

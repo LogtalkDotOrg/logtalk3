@@ -26,7 +26,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
 		date is 2026-04-01,
 		comment is 'Unit tests for the "url" library using an atom representation.'

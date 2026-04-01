@@ -89,6 +89,22 @@
     test(parse_2_09, deterministic) :-
         url::parse("file:///home/user/document.txt", _Components).
 
+    % file_path_components/2 tests
+    test(file_path_components_2_01, deterministic(Components == [authority(""), path("/home/user/document.txt")])) :-
+        url::file_path_components("/home/user/document.txt", Components).
+
+    test(file_path_components_2_02, deterministic(Components == [authority(""), path("/C:/Temp/app/file.txt")])) :-
+        url::file_path_components("C:\\Temp\\app\\file.txt", Components).
+
+    test(file_path_components_2_03, deterministic(Components == [authority("server"), path("/share/app/file.txt")])) :-
+        url::file_path_components("\\\\server\\share\\app\\file.txt", Components).
+
+    test(file_path_components_2_04, deterministic(Components == [authority(""), path("/C:/Temp/app/")])) :-
+        url::file_path_components("C:\\Temp\\app\\", Components).
+
+    test(file_path_components_2_05, deterministic(Components == [authority("server"), path("/share/app/")])) :-
+        url::file_path_components("\\\\server\\share\\app\\", Components).
+
     % Mailto URI tests
     test(parse_2_10, deterministic) :-
         url::parse("mailto:user@example.com", _Components).

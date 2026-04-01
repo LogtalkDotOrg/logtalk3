@@ -285,6 +285,10 @@ parametric object where <code class="docutils literal notranslate"><span class="
 <li><p><code class="docutils literal notranslate"><span class="pre">codes</span></code> - strings are represented as lists of character codes</p></li>
 </ul>
 <p>The parameter must be bound when sending messages to the object.</p>
+<p>The library also provides an utility predicate,
+<code class="docutils literal notranslate"><span class="pre">file_path_components/2</span></code>, for converting a file-system path into file
+URL components. This predicate also handles Windows drive-letter and UNC
+paths.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

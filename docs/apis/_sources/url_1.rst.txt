@@ -17,7 +17,7 @@ URL validating, parsing, and normalizing predicates following RFC3986 nomenclatu
 |    ``logtalk_load(url(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:2
+| **Version:** 1:1:0
 | **Date:** 2026-04-01
 
 | **Compilation flags:**
@@ -112,6 +112,25 @@ Normalizes a URL by standardizing its components. Normalization includes convert
 |    ``normalize(URL,NormalizedURL)``
 | **Mode and number of proofs:**
 |    ``normalize(++text,-text)`` - ``one``
+
+
+------------
+
+.. index:: file_path_components/2
+.. _url/1::file_path_components/2:
+
+``file_path_components/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a file-system path into file URL components represented as ``[authority(Authority), path(Path)]``. Windows drive-letter and UNC paths are normalized to RFC3986-compatible file URL components.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``file_path_components(FilePath,Components)``
+| **Mode and number of proofs:**
+|    ``file_path_components(++text,-list(compound))`` - ``one``
 
 
 ------------

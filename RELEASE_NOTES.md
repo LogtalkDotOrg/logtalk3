@@ -73,6 +73,10 @@ files.
 
 * ADDED: Predicate `server_open/4` to the `sockets` library.
 
+* ADDED: Predicate `file_path_components/2` to the `url` library for converting
+a file-system path into file URL components (handles Windows drive-letter and
+UNC paths).
+
 * FIXED: The implementation of the `os::absolute_file_name/2` predicate for
 the Ciao Prolog, CxProlog, ECLiPSe, GNU Prolog, JIProlog, SICStus Prolog,
 Tau Prolog, and Trealla Prolog backends to preserve a slash at the end of
