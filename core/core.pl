@@ -1351,7 +1351,7 @@ protocol_property(Ptc, Prop) :-
 
 create_object(Obj, Relations, Directives, Clauses) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	with_mutext('$lgt_runtime', '$lgt_create_object'(Obj, Relations, Directives, Clauses, ExCtx)).
+	with_mutex('$lgt_runtime', '$lgt_create_object'(Obj, Relations, Directives, Clauses, ExCtx)).
 
 
 '$lgt_create_object'(Obj, Relations, Directives, Clauses, ExCtx) :-
@@ -1416,7 +1416,7 @@ create_object(Obj, Relations, Directives, Clauses) :-
 
 create_category(Ctg, Relations, Directives, Clauses) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	with_mutext('$lgt_runtime', '$lgt_create_category'(Ctg, Relations, Directives, Clauses, ExCtx)).
+	with_mutex('$lgt_runtime', '$lgt_create_category'(Ctg, Relations, Directives, Clauses, ExCtx)).
 
 
 '$lgt_create_category'(Ctg, Relations, Directives, Clauses, ExCtx) :-
@@ -1482,7 +1482,7 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 
 create_protocol(Ptc, Relations, Directives) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	with_mutext('$lgt_runtime', '$lgt_create_protocol'(Ptc, Relations, Directives, ExCtx)).
+	with_mutex('$lgt_runtime', '$lgt_create_protocol'(Ptc, Relations, Directives, ExCtx)).
 
 
 '$lgt_create_protocol'(Ptc, Relations, Directives, ExCtx) :-
@@ -2459,7 +2459,7 @@ threaded_notify(Message) :-
 logtalk_compile(Files) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	'$lgt_current_directory'(Directory),
-	with_mutext('$lgt_compiler', '$lgt_logtalk_compile'(Files, Directory, ExCtx)).
+	with_mutex('$lgt_compiler', '$lgt_logtalk_compile'(Files, Directory, ExCtx)).
 
 
 '$lgt_logtalk_compile'(Files, Directory, ExCtx) :-
@@ -2502,7 +2502,7 @@ logtalk_compile(Files) :-
 logtalk_compile(Files, Flags) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	'$lgt_current_directory'(Directory),
-	with_mutext('$lgt_compiler', '$lgt_logtalk_compile'(Files, Flags, Directory, ExCtx)).
+	with_mutex('$lgt_compiler', '$lgt_logtalk_compile'(Files, Flags, Directory, ExCtx)).
 
 
 '$lgt_logtalk_compile'(Files, Flags, Directory, ExCtx) :-
@@ -2808,7 +2808,7 @@ logtalk_compile(Files, Flags) :-
 logtalk_load(Files) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	'$lgt_current_directory'(Directory),
-	with_mutext('$lgt_compiler', '$lgt_logtalk_load'(Files, Directory, ExCtx)).
+	with_mutex('$lgt_compiler', '$lgt_logtalk_load'(Files, Directory, ExCtx)).
 
 
 '$lgt_logtalk_load'(Files, Directory, ExCtx) :-
@@ -2853,7 +2853,7 @@ logtalk_load(Files) :-
 logtalk_load(Files, Flags) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	'$lgt_current_directory'(Directory),
-	with_mutext('$lgt_compiler', '$lgt_logtalk_load'(Files, Flags, Directory, ExCtx)).
+	with_mutex('$lgt_compiler', '$lgt_logtalk_load'(Files, Flags, Directory, ExCtx)).
 
 
 '$lgt_logtalk_load'(Files, Flags, Directory, ExCtx) :-
@@ -2903,7 +2903,7 @@ logtalk_make(Target) :-
 		'$lgt_print_message'(warning(make), no_make_target_specified),
 		fail
 	;	'$lgt_valid_logtalk_make_target'(Target) ->
-		with_mutext(
+		with_mutex(
 			'$lgt_make',
 			(	'$lgt_logtalk_make'(Target),
 				'$lgt_logtalk_make_target_actions'(Target)
