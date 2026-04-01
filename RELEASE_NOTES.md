@@ -38,6 +38,10 @@ a term position while verifying that the position is for the given term.
 * FIXED: The portability linter warning for the `write_term/3` predicate
 `variable_names/1` option when its value is bound at runtime.
 
+* FIXED: Protect file compilation/loading, make, dynamic entity creation, and
+dynamic binding cache update operations with mutexes when using multi-threaded
+backends. Thanks to Lindsey Spratt for help in debugging the race conditions.
+
 Documentation
 -------------
 
