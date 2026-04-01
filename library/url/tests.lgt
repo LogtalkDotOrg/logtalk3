@@ -113,6 +113,30 @@
     test(normalize_2_06, deterministic(NormalizedURL == "http://example.com/path/to/resource?query=value#fragment")) :-
         url::normalize("http://example.com/path/to/resource?query=value#fragment", NormalizedURL).
 
+    test(normalize_2_07, deterministic(NormalizedURL == "http://example.com/path%20with%20spaces")) :-
+        url::normalize("http://example.com/path with spaces", NormalizedURL).
+
+    test(normalize_2_08, deterministic(NormalizedURL == "http://example.com/path%5Bdraft%5D")) :-
+        url::normalize("http://example.com/path[draft]", NormalizedURL).
+
+    test(normalize_2_09, deterministic(NormalizedURL == "http://example.com/path/to/resource?query=value%20with%20spaces%7Cpipe")) :-
+        url::normalize("http://example.com/path/to/resource?query=value with spaces|pipe", NormalizedURL).
+
+    test(normalize_2_10, deterministic(NormalizedURL == "http://example.com/path/to/resource#fragment%20with%20spaces%5B2%5D")) :-
+        url::normalize("http://example.com/path/to/resource#fragment with spaces[2]", NormalizedURL).
+
+    test(normalize_2_11, deterministic(NormalizedURL == "http://example.com/path%20with%2Fencoded%25zz")) :-
+        url::normalize("http://example.com/path%20with%2fencoded%zz", NormalizedURL).
+
+    test(normalize_2_12, deterministic(NormalizedURL == "mailto:user%2Fname@example.com")) :-
+        url::normalize("MAILTO:user%2fname@example.com", NormalizedURL).
+
+    test(normalize_2_13, deterministic(NormalizedURL == "tel:+1%20816%20555%201212")) :-
+        url::normalize("TEL:+1 816 555 1212", NormalizedURL).
+
+    test(normalize_2_14, deterministic(NormalizedURL == "urn:example:hello%2Fworld")) :-
+        url::normalize("URN:example:hello%2fworld", NormalizedURL).
+
     % Additional tests for edge cases
 
     test(url_edge_case_01, true) :-
@@ -376,6 +400,24 @@
 
     test(generate_2_12, deterministic(URL == "wss://example.com/socket")) :-
         url::generate([scheme("wss"), authority("example.com"), path("/socket"), query(""), fragment("")], URL).
+
+    test(generate_2_13, deterministic(URL == "http://example.com/path%20with%20spaces")) :-
+        url::generate([scheme("HTTP"), authority("example.com"), path("/path with spaces"), query(""), fragment("")], URL).
+
+    test(generate_2_14, deterministic(URL == "http://example.com/resource?query=value%20with%20spaces%7Cpipe#fragment%20with%20spaces%5B2%5D")) :-
+        url::generate([scheme("HTTP"), authority("example.com"), path("/path/../resource"), query("query=value with spaces|pipe"), fragment("fragment with spaces[2]")], URL).
+
+    test(generate_2_15, deterministic(URL == "http://example.com/path%20with%2Fencoded%25zz")) :-
+        url::generate([scheme("HTTP"), authority("example.com"), path("/path%20with%2fencoded%zz"), query(""), fragment("")], URL).
+
+    test(generate_2_16, deterministic(URL == "mailto:user%20name@example.com")) :-
+        url::generate([scheme("MAILTO"), address("user name@example.com")], URL).
+
+    test(generate_2_17, deterministic(URL == "tel:+1%20816%20555%201212")) :-
+        url::generate([scheme("TEL"), number("+1 816 555 1212")], URL).
+
+    test(generate_2_18, deterministic(URL == "urn:example:hello%20world")) :-
+        url::generate([scheme("URN"), identifier("example:hello world")], URL).
 
     % Roundtrip tests (parse then generate)
 

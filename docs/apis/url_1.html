@@ -259,8 +259,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:1</div>
-<div class="line"><strong>Date:</strong> 2026-03-18</div>
+<div class="line"><strong>Version:</strong> 1:0:2</div>
+<div class="line"><strong>Date:</strong> 2026-04-01</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -351,7 +351,7 @@
 </section>
 <section id="generate-2">
 <span id="url-1-generate-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate/2</span></code></a><a class="headerlink" href="#generate-2" title="Link to this heading"></a></h3>
-<p>Generates a URL from a list of its components: <code class="docutils literal notranslate"><span class="pre">[scheme(Scheme),</span> <span class="pre">authority(Authority),</span> <span class="pre">path(Path),</span> <span class="pre">query(Query),</span> <span class="pre">fragment(Fragment)]</span></code> for standard URLs, or scheme-specific components for mailto, news, tel, and urn URLs. Fails if the components are invalid.</p>
+<p>Generates a normalized URL from a list of its components: <code class="docutils literal notranslate"><span class="pre">[scheme(Scheme),</span> <span class="pre">authority(Authority),</span> <span class="pre">path(Path),</span> <span class="pre">query(Query),</span> <span class="pre">fragment(Fragment)]</span></code> for standard URLs, or scheme-specific components for mailto, news, tel, and urn URLs. Fails if the components are invalid.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -372,7 +372,7 @@
 </section>
 <section id="normalize-2">
 <span id="url-1-normalize-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">normalize/2</span></code></a><a class="headerlink" href="#normalize-2" title="Link to this heading"></a></h3>
-<p>Normalizes a URL by standardizing its components. Normalization includes converting scheme and authority to lowercase, ensuring proper path separators, and handling relative paths.</p>
+<p>Normalizes a URL by standardizing its components. Normalization includes converting the scheme to lowercase, percent-encoding characters that require escaping, ensuring proper path separators, and handling relative paths.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

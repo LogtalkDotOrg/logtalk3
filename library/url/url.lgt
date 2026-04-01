@@ -22,9 +22,9 @@
 :- object(url(_Representation_)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2026-03-18,
+		date is 2026-04-01,
 		comment is 'URL validating, parsing, and normalizing predicates following RFC3986 nomenclature.',
 		parameters is [
 			'Representation' - 'URL and is components representation. Valid values are ``atom``, ``codes``, and ``chars``.'
@@ -48,14 +48,14 @@
 	:- public(generate/2).
 	:- mode(generate(++list(compound), -text), zero_or_one).
 	:- info(generate/2, [
-		comment is 'Generates a URL from a list of its components: ``[scheme(Scheme), authority(Authority), path(Path), query(Query), fragment(Fragment)]`` for standard URLs, or scheme-specific components for mailto, news, tel, and urn URLs. Fails if the components are invalid.',
+		comment is 'Generates a normalized URL from a list of its components: ``[scheme(Scheme), authority(Authority), path(Path), query(Query), fragment(Fragment)]`` for standard URLs, or scheme-specific components for mailto, news, tel, and urn URLs. Fails if the components are invalid.',
 		argnames is ['Components', 'URL']
 	]).
 
 	:- public(normalize/2).
 	:- mode(normalize(++text, -text), one).
 	:- info(normalize/2, [
-		comment is 'Normalizes a URL by standardizing its components. Normalization includes converting scheme and authority to lowercase, ensuring proper path separators, and handling relative paths.',
+		comment is 'Normalizes a URL by standardizing its components. Normalization includes converting the scheme to lowercase, percent-encoding characters that require escaping, ensuring proper path separators, and handling relative paths.',
 		argnames is ['URL', 'NormalizedURL']
 	]).
 
@@ -544,27 +544,33 @@
 
 	normalize(URL, NormalizedURL) :-
 		parse(URL, Components),
-		normalize_components(Components, NormalizedComponents),
-		build_url_from_components(NormalizedComponents, NormalizedURL),
+		build_url_from_components(Components, NormalizedURL),
 		!.
-
-	normalize_components([], []).
-	normalize_components([Component| Components], [NormalizedComponent| NormalizedComponents]) :-
-		normalize_component(Component, NormalizedComponent),
-		normalize_components(Components, NormalizedComponents).
-
-	normalize_component(scheme(Scheme), scheme(NormalizedScheme)) :-
-		downcase_text(Scheme, NormalizedScheme).
-	normalize_component(authority(Authority), authority(Authority)).
-	normalize_component(path(Path), path(NormalizedPath)) :-
-		normalize_path(Path, NormalizedPath).
-	normalize_component(query(Query), query(Query)).
-	normalize_component(fragment(Fragment), fragment(Fragment)).
 
 	normalize_path(Path, NormalizedPath) :-
 		convert_to_text(_Representation_, PathCodes, Path),
 		normalize_path_codes(PathCodes, NormalizedPathCodes),
 		convert_to_text(_Representation_, NormalizedPathCodes, NormalizedPath).
+
+	normalize_query(Query, NormalizedQuery) :-
+		normalize_text(query, Query, NormalizedQuery).
+
+	normalize_fragment(Fragment, NormalizedFragment) :-
+		normalize_text(fragment, Fragment, NormalizedFragment).
+
+	normalize_address(Address, NormalizedAddress) :-
+		normalize_text(mailto_address, Address, NormalizedAddress).
+
+	normalize_number(Number, NormalizedNumber) :-
+		normalize_text(phone_number, Number, NormalizedNumber).
+
+	normalize_identifier(Identifier, NormalizedIdentifier) :-
+		normalize_text(opaque_identifier, Identifier, NormalizedIdentifier).
+
+	normalize_text(Component, Text, NormalizedText) :-
+		convert_to_text(_Representation_, Codes, Text),
+		normalize_component_codes(Component, Codes, NormalizedCodes),
+		convert_to_text(_Representation_, NormalizedCodes, NormalizedText).
 
 	normalize_path_codes(PathCodes, NormalizedPathCodes) :-
 		% Check if path ends with a slash
@@ -576,8 +582,124 @@
 		split_path(PathCodes, Segments),
 		% Process segments (remove '.', handle '..')
 		process_segments(Segments, ProcessedSegments),
+		encode_path_segments(ProcessedSegments, EncodedSegments),
 		% Join segments back into a path
-		join_segments(ProcessedSegments, TrailingSlash, NormalizedPathCodes).
+		join_segments(EncodedSegments, TrailingSlash, NormalizedPathCodes).
+
+	encode_path_segments([], []).
+	encode_path_segments([Segment| Segments], [EncodedSegment| EncodedSegments]) :-
+		normalize_component_codes(path_segment, Segment, EncodedSegment),
+		encode_path_segments(Segments, EncodedSegments).
+
+	normalize_component_codes(_, [], []) :-
+		!.
+	normalize_component_codes(Component, [0'%, High0, Low0| Codes], [0'%, High, Low| NormalizedCodes]) :-
+		hexadecimal_code(High0, High),
+		hexadecimal_code(Low0, Low),
+		!,
+		normalize_component_codes(Component, Codes, NormalizedCodes).
+	normalize_component_codes(Component, [Code| Codes], [Code| NormalizedCodes]) :-
+		allowed_component_code(Component, Code),
+		!,
+		normalize_component_codes(Component, Codes, NormalizedCodes).
+	normalize_component_codes(Component, [Code| Codes], [0'%, High, Low| NormalizedCodes]) :-
+		percent_encoded_byte(Code, High, Low),
+		!,
+		normalize_component_codes(Component, Codes, NormalizedCodes).
+	normalize_component_codes(Component, [Code| Codes], [Code| NormalizedCodes]) :-
+		Code > 255,
+		normalize_component_codes(Component, Codes, NormalizedCodes).
+
+	allowed_component_code(path_segment, Code) :-
+		pchar_code(Code).
+	allowed_component_code(query, Code) :-
+		pchar_code(Code).
+	allowed_component_code(query, 0'/).
+	allowed_component_code(query, 0'?).
+	allowed_component_code(fragment, Code) :-
+		pchar_code(Code).
+	allowed_component_code(fragment, 0'/).
+	allowed_component_code(fragment, 0'?).
+	allowed_component_code(mailto_address, Code) :-
+		email_code(Code).
+	allowed_component_code(mailto_address, 0'@).
+	allowed_component_code(phone_number, Code) :-
+		phone_number_output_code(Code).
+	allowed_component_code(opaque_identifier, Code) :-
+		opaque_identifier_code(Code).
+
+	% RFC3986 pchar production used by path segments and as part of query/fragment.
+	pchar_code(Code) :-
+		unreserved_code(Code),
+		!.
+	pchar_code(Code) :-
+		sub_delimiter_code(Code),
+		!.
+	pchar_code(0':).
+	pchar_code(0'@).
+
+	unreserved_code(Code) :-
+		code(Code),
+		!.
+	unreserved_code(0'.).
+	unreserved_code(0'~).
+
+	sub_delimiter_code(0'!).
+	sub_delimiter_code(0'$).
+	sub_delimiter_code(0'&).
+	sub_delimiter_code(0'\').
+	sub_delimiter_code(0'().
+	sub_delimiter_code(0')).
+	sub_delimiter_code(0'*).
+	sub_delimiter_code(0'+).
+	sub_delimiter_code(0',).
+	sub_delimiter_code(0';).
+	sub_delimiter_code(0'=).
+
+	phone_number_output_code(Code) :-
+		Code @>= 0'0,
+		Code @=< 0'9,
+		!.
+	phone_number_output_code(0'+).
+	phone_number_output_code(0'-).
+	phone_number_output_code(0'().
+	phone_number_output_code(0')).
+	phone_number_output_code(0'.).
+
+	opaque_identifier_code(Code) :-
+		Code =\= 0'?,
+		Code =\= 0'#,
+		Code >= 33,
+		Code =< 126.
+
+	hexadecimal_code(Code, Code) :-
+		Code >= 0'0,
+		Code =< 0'9,
+		!.
+	hexadecimal_code(Code, Code) :-
+		Code >= 0'A,
+		Code =< 0'F,
+		!.
+	hexadecimal_code(Code, UpperCode) :-
+		Code >= 0'a,
+		Code =< 0'f,
+		UpperCode is Code - 32.
+
+	percent_encoded_byte(Code, High, Low) :-
+		Code >= 0,
+		Code =< 255,
+		HighNibble is Code // 16,
+		LowNibble is Code mod 16,
+		hexadecimal_digit_code(HighNibble, High),
+		hexadecimal_digit_code(LowNibble, Low).
+
+	hexadecimal_digit_code(Value, Code) :-
+		Value >= 0,
+		Value =< 9,
+		!,
+		Code is 0'0 + Value.
+	hexadecimal_digit_code(Value, Code) :-
+		Code is 0'A + Value - 10.
 
 	split_path(PathCodes, Segments) :-
 		split_path(PathCodes, [], Segments).
@@ -632,44 +754,68 @@
 		build_url_from_components(Components, [], URLCodes),
 		convert_to_text(_Representation_, URLCodes, URL).
 
+	component_output_codes(scheme(Scheme), SchemeCodes) :-
+		downcase_text(Scheme, NormalizedScheme),
+		convert_to_text(_Representation_, SchemeCodes, NormalizedScheme).
+	component_output_codes(authority(Authority), AuthorityCodes) :-
+		convert_to_text(_Representation_, AuthorityCodes, Authority).
+	component_output_codes(path(Path), PathCodes) :-
+		normalize_path(Path, NormalizedPath),
+		convert_to_text(_Representation_, PathCodes, NormalizedPath).
+	component_output_codes(query(Query), QueryCodes) :-
+		normalize_query(Query, NormalizedQuery),
+		convert_to_text(_Representation_, QueryCodes, NormalizedQuery).
+	component_output_codes(fragment(Fragment), FragmentCodes) :-
+		normalize_fragment(Fragment, NormalizedFragment),
+		convert_to_text(_Representation_, FragmentCodes, NormalizedFragment).
+	component_output_codes(address(Address), AddressCodes) :-
+		normalize_address(Address, NormalizedAddress),
+		convert_to_text(_Representation_, AddressCodes, NormalizedAddress).
+	component_output_codes(number(Number), NumberCodes) :-
+		normalize_number(Number, NormalizedNumber),
+		convert_to_text(_Representation_, NumberCodes, NormalizedNumber).
+	component_output_codes(identifier(Identifier), IdentifierCodes) :-
+		normalize_identifier(Identifier, NormalizedIdentifier),
+		convert_to_text(_Representation_, IdentifierCodes, NormalizedIdentifier).
+
 	build_url_from_components([], URLCodes, URLCodes).
 	% Handle schemes that use only colon (mailto, news, tel, urn)
 	build_url_from_components([scheme(Scheme)| Components], Acc, URLCodes) :-
 		Components = [address(_)| _],
 		!,
-		convert_to_text(_Representation_, SchemeCodes, Scheme),
+		component_output_codes(scheme(Scheme), SchemeCodes),
 		append(Acc, SchemeCodes, Acc1),
 		append(Acc1, [0':], Acc2),
 		build_url_from_components(Components, Acc2, URLCodes).
 	build_url_from_components([scheme(Scheme)| Components], Acc, URLCodes) :-
 		Components = [number(_)| _],
 		!,
-		convert_to_text(_Representation_, SchemeCodes, Scheme),
+		component_output_codes(scheme(Scheme), SchemeCodes),
 		append(Acc, SchemeCodes, Acc1),
 		append(Acc1, [0':], Acc2),
 		build_url_from_components(Components, Acc2, URLCodes).
 	build_url_from_components([scheme(Scheme)| Components], Acc, URLCodes) :-
 		Components = [identifier(_)| _],
 		!,
-		convert_to_text(_Representation_, SchemeCodes, Scheme),
+		component_output_codes(scheme(Scheme), SchemeCodes),
 		append(Acc, SchemeCodes, Acc1),
 		append(Acc1, [0':], Acc2),
 		build_url_from_components(Components, Acc2, URLCodes).
 	% Handle standard schemes with authority (http, https, ftp, etc.)
 	build_url_from_components([scheme(Scheme)| Components], Acc, URLCodes) :-
 		!,
-		convert_to_text(_Representation_, SchemeCodes, Scheme),
+		component_output_codes(scheme(Scheme), SchemeCodes),
 		append(Acc, SchemeCodes, Acc1),
 		append(Acc1, [0':,0'/,0'/], Acc2),
 		build_url_from_components(Components, Acc2, URLCodes).
 	build_url_from_components([authority(Authority)| Components], Acc, URLCodes) :-
 		!,
-		convert_to_text(_Representation_, AuthorityCodes, Authority),
+		component_output_codes(authority(Authority), AuthorityCodes),
 		append(Acc, AuthorityCodes, Acc1),
 		build_url_from_components(Components, Acc1, URLCodes).
 	build_url_from_components([path(Path)| Components], Acc, URLCodes) :-
 		!,
-		convert_to_text(_Representation_, PathCodes, Path),
+		component_output_codes(path(Path), PathCodes),
 		(	PathCodes \== [] ->
 			(	PathCodes = [0'/|_] ->
 				append(Acc, PathCodes, Acc1)
@@ -681,7 +827,7 @@
 		build_url_from_components(Components, Acc1, URLCodes).
 	build_url_from_components([query(Query)| Components], Acc, URLCodes) :-
 		!,
-		convert_to_text(_Representation_, QueryCodes, Query),
+		component_output_codes(query(Query), QueryCodes),
 		(	QueryCodes \== [] ->
 			append(Acc, [0'?], Acc0),
 			append(Acc0, QueryCodes, Acc1)
@@ -690,7 +836,7 @@
 		build_url_from_components(Components, Acc1, URLCodes).
 	build_url_from_components([fragment(Fragment)| Components], Acc, URLCodes) :-
 		!,
-		convert_to_text(_Representation_, FragmentCodes, Fragment),
+		component_output_codes(fragment(Fragment), FragmentCodes),
 		(	FragmentCodes \== [] ->
 			append(Acc, [0'#], Acc0),
 			append(Acc0, FragmentCodes, Acc1)
@@ -700,18 +846,18 @@
 	% Handle mailto address component
 	build_url_from_components([address(Address)| Components], Acc, URLCodes) :-
 		!,
-		convert_to_text(_Representation_, AddressCodes, Address),
+		component_output_codes(address(Address), AddressCodes),
 		append(Acc, AddressCodes, Acc1),
 		build_url_from_components(Components, Acc1, URLCodes).
 	% Handle tel number component
 	build_url_from_components([number(Number)| Components], Acc, URLCodes) :-
 		!,
-		convert_to_text(_Representation_, NumberCodes, Number),
+		component_output_codes(number(Number), NumberCodes),
 		append(Acc, NumberCodes, Acc1),
 		build_url_from_components(Components, Acc1, URLCodes).
 	% Handle news/urn identifier component
 	build_url_from_components([identifier(Identifier)| Components], Acc, URLCodes) :-
-		convert_to_text(_Representation_, IdentifierCodes, Identifier),
+		component_output_codes(identifier(Identifier), IdentifierCodes),
 		append(Acc, IdentifierCodes, Acc1),
 		build_url_from_components(Components, Acc1, URLCodes).
 

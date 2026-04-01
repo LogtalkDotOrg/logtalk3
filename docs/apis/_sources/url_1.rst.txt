@@ -17,8 +17,8 @@ URL validating, parsing, and normalizing predicates following RFC3986 nomenclatu
 |    ``logtalk_load(url(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:1
-| **Date:** 2026-03-18
+| **Version:** 1:0:2
+| **Date:** 2026-04-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -84,7 +84,7 @@ Parses a URL into a list of its components: ``[scheme(Scheme), authority(Authori
 ``generate/2``
 ^^^^^^^^^^^^^^
 
-Generates a URL from a list of its components: ``[scheme(Scheme), authority(Authority), path(Path), query(Query), fragment(Fragment)]`` for standard URLs, or scheme-specific components for mailto, news, tel, and urn URLs. Fails if the components are invalid.
+Generates a normalized URL from a list of its components: ``[scheme(Scheme), authority(Authority), path(Path), query(Query), fragment(Fragment)]`` for standard URLs, or scheme-specific components for mailto, news, tel, and urn URLs. Fails if the components are invalid.
 
 | **Compilation flags:**
 |    ``static``
@@ -103,7 +103,7 @@ Generates a URL from a list of its components: ``[scheme(Scheme), authority(Auth
 ``normalize/2``
 ^^^^^^^^^^^^^^^
 
-Normalizes a URL by standardizing its components. Normalization includes converting scheme and authority to lowercase, ensuring proper path separators, and handling relative paths.
+Normalizes a URL by standardizing its components. Normalization includes converting the scheme to lowercase, percent-encoding characters that require escaping, ensuring proper path separators, and handling relative paths.
 
 | **Compilation flags:**
 |    ``static``

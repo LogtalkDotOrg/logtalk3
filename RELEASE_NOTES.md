@@ -107,6 +107,11 @@ predicate. Thanks to Felix Weitkämper for the bug report.
 
 * FIXED: Spurious choice-points in the `url` library public predicates.
 
+* FIXED: The `url` library `generate/2` predicate to return a normalized URL.
+
+* FIXED: The `url` library `normalize/2` predicate to normalize all characters
+that must be percent-encoded.
+
 * FIXED: Tests for the `format` library when run on Windows with backends that
 use CRLF instead of LF.
 
