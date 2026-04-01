@@ -27,9 +27,13 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
-	logtalk_load(types(loader)),
-	logtalk_load(random(loader)),
+	logtalk_load(basic_types(loader)),
+	logtalk_load(options(loader)),
 	logtalk_load(os(loader)),
+	logtalk_load(random(loader)),
+	logtalk_load(term_io(loader)),
+	logtalk_load(tool_diagnostics(loader)),
+	logtalk_load(tutor(tutor_explanations), [optimize(on)]),
 	% load the "arbitrary" category in debug mode to support collecting code coverage data
 	logtalk_load(arbitrary, [debug(on), source_data(on), clean(on)]),
 	logtalk_load([lgtunit(lgtunit_messages), lgtunit(lgtunit)], [optimize(on)]),

@@ -27,10 +27,14 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
-	logtalk_load(types(loader)),
-	logtalk_load(random(loader)),
 	logtalk_load(arbitrary(loader)),
+	logtalk_load(basic_types(loader)),
+	logtalk_load(options(loader)),
+	logtalk_load(random(loader)),
+	logtalk_load(tool_diagnostics(loader)),
+	logtalk_load(tutor(tutor_explanations), [optimize(on)]),
 	logtalk_load([osp, os, os_types], [source_data(on), debug(on), portability(silent)]),
+	logtalk_load([term_io(term_io_protocol), term_io(term_io)], [optimize(on)]),
 	logtalk_load([lgtunit(lgtunit_messages), lgtunit(lgtunit)], [optimize(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

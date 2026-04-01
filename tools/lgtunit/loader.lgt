@@ -24,6 +24,7 @@
 	logtalk_load(basic_types(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(os(loader)),
+	logtalk_load(random(loader)),
 	logtalk_load(term_io(loader)),
 	logtalk_load(tool_diagnostics(loader)),
 	logtalk_load(tutor(tutor_explanations), [optimize(on)]),

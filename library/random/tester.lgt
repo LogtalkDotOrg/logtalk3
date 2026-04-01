@@ -35,6 +35,10 @@
 	logtalk_load(types(loader)),
 	logtalk_load([arbitrary(arbitrary)], [optimize(on)]),
 	logtalk_load(os(loader)),
+	logtalk_load(options(loader)),
+	logtalk_load(term_io(loader)),
+	logtalk_load(tool_diagnostics(loader)),
+	logtalk_load(tutor(tutor_explanations), [optimize(on)]),
 	logtalk_load([lgtunit(lgtunit_messages), lgtunit(lgtunit)], [optimize(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	(	current_prolog_flag(bounded, false) ->
