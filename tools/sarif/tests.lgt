@@ -324,6 +324,24 @@
 		sarif_schema(Schema),
 		json_schema_validate(Schema, JSON).
 
+	test(sarif_windows_drive_uri_01, deterministic) :-
+		generate(sarif_windows_path_fixture, directory('C:\\Temp\\app'), atom(Atom), []),
+		json_parse(atom(Atom), JSON),
+		sarif_schema(Schema),
+		json_schema_validate(Schema, JSON),
+		JSON = {'$schema'-_, version-'2.1.0', runs-[Run]},
+		sarif_base_uri_ok(Run, 'APP_ROOT', 'file:///C:/Temp/app/'),
+		sarif_result_uri_ok(Run, 'APP_ROOT', 'src/file.lgt').
+
+	test(sarif_windows_unc_uri_01, deterministic) :-
+		generate(sarif_windows_path_fixture, directory('\\\\server\\share\\app'), atom(Atom), []),
+		json_parse(atom(Atom), JSON),
+		sarif_schema(Schema),
+		json_schema_validate(Schema, JSON),
+		JSON = {'$schema'-_, version-'2.1.0', runs-[Run]},
+		sarif_base_uri_ok(Run, 'APP_ROOT', 'file://server/share/app/'),
+		sarif_result_uri_ok(Run, 'APP_ROOT', 'src/file.lgt').
+
 	test(sarif_error_01, error(domain_error(diagnostics_tool, sarif))) :-
 		generate(sarif, all, atom(_), []).
 
@@ -483,6 +501,21 @@
 		json_object_member(BaseInfo, uri, URI),
 		absolute_uri(URI).
 
+	sarif_base_uri_ok(Run, BaseId, ExpectedURI) :-
+		json_object_member(Run, originalUriBaseIds, OriginalURIBaseIds),
+		json_object_member(OriginalURIBaseIds, BaseId, BaseInfo),
+		json_object_member(BaseInfo, uri, URI),
+		assertion(URI == ExpectedURI).
+
+	sarif_result_uri_ok(Run, BaseId, ExpectedURI) :-
+		json_object_member(Run, results, [Result| _]),
+		json_object_member(Result, locations, [Location| _]),
+		json_object_member(Location, physicalLocation, PhysicalLocation),
+		json_object_member(PhysicalLocation, artifactLocation, ArtifactLocation),
+		json_object_member(ArtifactLocation, uriBaseId, BaseId),
+		json_object_member(ArtifactLocation, uri, URI),
+		assertion(URI == ExpectedURI).
+
 	sarif_relative_result_locations_ok([], _BaseId).
 	sarif_relative_result_locations_ok([Result| Results], BaseId) :-
 		json_object_member(Result, locations, [Location| _]),
@@ -535,5 +568,61 @@
 	:- dynamic(logtalk::message_hook/4).
 
 	logtalk::message_hook(_Message, _Kind, lgtdoc, _Tokens).
+
+:- end_object.
+
+
+:- object(sarif_windows_path_fixture,
+	imports(tool_diagnostics_common),
+	implements(tool_diagnostics_protocol)).
+
+	:- uses(list, [
+		length/2, member/2
+	]).
+
+	diagnostics_tool(sarif_windows_path_fixture, sarif_windows_path_fixture, '1.0.0', 'https://logtalk.org/', [
+		count_key(diagnosticsCount)
+	]).
+
+	diagnostic_rule(mock_rule, 'Mock rule.', 'Mock rule for Windows path URI regression tests.', warning, []).
+
+	diagnostics(Target, Diagnostics, []) :-
+		findall(Diagnostic, target_diagnostic(Target, Diagnostic), Diagnostics).
+
+	diagnostics(Target, Diagnostics) :-
+		diagnostics(Target, Diagnostics, []).
+
+	diagnostic(Target, Diagnostic, []) :-
+		target_diagnostic(Target, Diagnostic).
+
+	diagnostic(Target, Diagnostic) :-
+		diagnostic(Target, Diagnostic, []).
+
+	diagnostics_summary(Target, diagnostics_summary(Target, TotalContexts, TotalDiagnostics, Breakdown, ContextSummaries), []) :-
+		diagnostics(Target, Diagnostics, []),
+		length(Diagnostics, TotalDiagnostics),
+		^^diagnostics_breakdown(Diagnostics, Breakdown),
+		^^context_summaries(Diagnostics, ContextSummaries),
+		length(ContextSummaries, TotalContexts).
+
+	diagnostics_summary(Target, Summary) :-
+		diagnostics_summary(Target, Summary, []).
+
+	diagnostics_preflight(_Target, [], []).
+
+	diagnostics_preflight(Target, Issues) :-
+		diagnostics_preflight(Target, Issues, []).
+
+	target_diagnostic(directory('C:\\Temp\\app'), diagnostic(mock_rule, warning, not_applicable, 'Mock Windows drive diagnostic.', context(file, 'C:\\Temp\\app\\src\\file.lgt'), 'C:\\Temp\\app\\src\\file.lgt', 1-1, [])).
+	target_diagnostic(directory('\\\\server\\share\\app'), diagnostic(mock_rule, warning, not_applicable, 'Mock Windows UNC diagnostic.', context(file, '\\\\server\\share\\app\\src\\file.lgt'), '\\\\server\\share\\app\\src\\file.lgt', 1-1, [])).
+
+	diagnostic_target(directory(_)).
+
+	diagnostic_rules(Rules) :-
+		findall(
+			diagnostic_rule(RuleId, ShortDescription, FullDescription, DefaultSeverity, Properties),
+			diagnostic_rule(RuleId, ShortDescription, FullDescription, DefaultSeverity, Properties),
+			Rules
+		).
 
 :- end_object.

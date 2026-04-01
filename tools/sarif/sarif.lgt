@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-31,
+		date is 2026-04-01,
 		comment is 'Shared SARIF report generator for tools implementing the diagnostics protocol.'
 	]).
 
@@ -86,6 +86,7 @@
 	]).
 
 	:- uses(url(atom), [
+		file_path_components/2 as url_file_path_components/2,
 		generate/2 as url_generate/2, normalize/2 as url_normalize/2
 	]).
 
@@ -304,13 +305,14 @@
 
 	diagnostic_file([diagnostic(_RuleId, _Severity, _Confidence, _Message, _Context, File0, _Lines, _Properties)| _], File) :-
 		File0 \== '',
-		internal_os_path(File0, File).
+		normalized_internal_path(File0, File).
 	diagnostic_file([_| Diagnostics], File) :-
 		diagnostic_file(Diagnostics, File).
 
 	diagnostic_directory([diagnostic(_RuleId, _Severity, _Confidence, _Message, _Context, File0, _Lines, _Properties)| _], Directory) :-
 		File0 \== '',
-		decompose_file_name(File0, Directory0, _BaseName),
+		normalized_internal_path(File0, File),
+		decompose_file_name(File, Directory0, _BaseName),
 		normalized_directory_prefix(Directory0, Directory).
 	diagnostic_directory([_| Diagnostics], Directory) :-
 		diagnostic_directory(Diagnostics, Directory).
@@ -340,7 +342,7 @@
 		Parent \== Path.
 
 	normalized_directory_prefix(Directory, Prefix) :-
-		internal_os_path(Directory, Path0),
+		normalized_internal_path(Directory, Path0),
 		(	sub_atom(Path0, _, 1, 0, /) ->
 			Prefix = Path0
 		;	atom_concat(Path0, '/', Prefix)
@@ -392,7 +394,7 @@
 		sarif_file_uri(File, FileURI).
 
 	relative_artifact_uri(File0, Root, RelativeURI) :-
-		internal_os_path(File0, File),
+		normalized_internal_path(File0, File),
 		atom_concat(Root, RelativeURI, File),
 		RelativeURI \== ''.
 
@@ -562,7 +564,8 @@
 
 	sarif_version_control_directory([diagnostic(_RuleId, _Severity, _Confidence, _Message, _Context, File, _Lines, _Properties)| _], Directory) :-
 		File \== '',
-		decompose_file_name(File, Directory, _BaseName).
+		normalized_internal_path(File, InternalFile),
+		decompose_file_name(InternalFile, Directory, _BaseName).
 	sarif_version_control_directory([_| Diagnostics], Directory) :-
 		sarif_version_control_directory(Diagnostics, Directory).
 
@@ -609,33 +612,37 @@
 		atomic_list_concat(['ssh://', UserHost, '/', Path], RepositoryURI).
 
 	sarif_directory_uri(Directory, URI) :-
-		internal_os_path(Directory, Path0),
-		directory_file_url_path(Path0, Path),
-		url_generate([scheme(file), authority(''), path(Path)], URI0),
-		url_normalize(URI0, URI),
-		!.
+		normalized_internal_path(Directory, Path0),
+		ensure_directory_path(Path0, Path),
+		url_file_path_components(Path, Components0),
+		url_generate([scheme(file)| Components0], URI).
 
 	sarif_file_uri(File, URI) :-
-		internal_os_path(File, Path0),
-		file_url_path(Path0, Path),
-		url_generate([scheme(file), authority(''), path(Path)], URI0),
-		url_normalize(URI0, URI),
-		!.
+		normalized_internal_path(File, Path0),
+		url_file_path_components(Path0, Components0),
+		url_generate([scheme(file)| Components0], URI).
 
-	directory_file_url_path(Path0, Path) :-
-		file_url_path(Path0, Path1),
-		(	sub_atom(Path1, _, 1, 0, /) ->
-			Path = Path1
-		;	atom_concat(Path1, '/', Path)
-		).
-
-	file_url_path(Path0, Path) :-
-		(	sub_atom(Path0, 0, 1, _, /) ->
+	ensure_directory_path(Path0, Path) :-
+		(	sub_atom(Path0, _, 1, 0, /) ->
 			Path = Path0
-		;	sub_atom(Path0, 1, 2, _, ':/') ->
-			atom_concat('/', Path0, Path)
-		;	Path = Path0
+		;	atom_concat(Path0, '/', Path)
 		).
+
+	normalized_internal_path(Path0, Path) :-
+		internal_os_path(InternalPath, Path0),
+		normalize_path_separators(InternalPath, Path).
+
+	normalize_path_separators(Path0, Path) :-
+		atom_codes(Path0, Codes0),
+		normalize_path_separator_codes(Codes0, Codes),
+		atom_codes(Path, Codes).
+
+	normalize_path_separator_codes([], []).
+	normalize_path_separator_codes([0'\\| Codes0], [0'/| Codes]) :-
+		!,
+		normalize_path_separator_codes(Codes0, Codes).
+	normalize_path_separator_codes([Code| Codes0], [Code| Codes]) :-
+		normalize_path_separator_codes(Codes0, Codes).
 
 	:- if(os::operating_system_type(windows)).
 

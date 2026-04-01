@@ -57,8 +57,8 @@ validation against the SARIF 2.1.0 schema.
 Usage
 -----
 
-Use the `term/4` and `generate/4` predicates to generate a report for a
-single diagnostics producer, target, and options combination. These
+Use the `term/4` and `generate/4` predicates to generate a report for
+a single diagnostics producer, target, and options combination. These
 predicates generate a SARIF document with a single run.
 
 For example:
