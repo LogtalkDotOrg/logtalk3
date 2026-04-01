@@ -7299,7 +7299,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		fail
 	),
 	% compile and load the intermediate Prolog file
-	'$lgt_load_compiled_file'(SourceFile, ObjectFile),
+	'$lgt_load_compiled_file'(Basename, Directory, SourceFile, ObjectFile),
 	retractall('$lgt_file_loading_stack_'(SourceFile, _)),
 	retractall('$lgt_pp_file_paths_flags_'(_, _, _, _, _)),
 	% cleanup intermediate files if necessary
@@ -7322,7 +7322,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
-'$lgt_load_compiled_file'(SourceFile, ObjectFile) :-
+'$lgt_load_compiled_file'(Basename, Directory, SourceFile, ObjectFile) :-
 	% retrieve the backend Prolog specific file loading options
 	'$lgt_compiler_flag'(prolog_loader, DefaultOptions),
 	% loading a file can result in the redefinition of existing
@@ -7338,6 +7338,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% clean all runtime clauses as an initialization goal in the intermediate Prolog file
 	% that is loaded next may create dynamic entities
 	'$lgt_clean_pp_runtime_clauses',
+	% workaround mishandling of predicates that are both multifile and dynamic by some
+	% backends such as ECLiPSe and Trealla Prolog that don't keep track of the predicate
+	% clauses origin and thus don't remove them when resconsulting a file
+	retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)),
 	% load the generated intermediate Prolog file but cope with unexpected error or failure
 	(	(	catch('$lgt_load_prolog_code'(ObjectFile, SourceFile, Options), Error, true) ->
 			(	var(Error) ->
