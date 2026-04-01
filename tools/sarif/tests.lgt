@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-31,
+		date is 2026-04-01,
 		comment is 'Unit tests for the sarif tool.'
 	]).
 
@@ -77,7 +77,7 @@
 	cleanup :-
 		^^clean_file('aggregate_report.sarif'),
 		^^clean_file('linter_warnings.sarif'),
-		clean_xml_docs.
+		^^clean_directory('xml_docs').
 
 	test(sarif_dcs_01, deterministic) :-
 		generate(dead_code_scanner, entity(category), atom(Atom), []),
@@ -530,18 +530,6 @@
 	json_pairs_member((_Pair, Pairs), Key, Value) :-
 		json_pairs_member(Pairs, Key, Value).
 	json_pairs_member(Key-Value, Key, Value).
-
-	clean_xml_docs :-
-		^^file_path('xml_docs', XMLDocsDirectory),
-		(  os::directory_exists(XMLDocsDirectory) ->
-			os::directory_files(XMLDocsDirectory, XMLFiles, [paths(absolute), extensions(['.xml'])]),
-			forall(
-				list::member(XMLFile, XMLFiles),
-				os::delete_file(XMLFile)
-			),
-			os::delete_directory(XMLDocsDirectory)
-		;  true
-		).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

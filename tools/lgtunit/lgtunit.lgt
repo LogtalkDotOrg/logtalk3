@@ -28,9 +28,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 22:6:0,
+		version is 22:7:0,
 		author is 'Paulo Moura',
-		date is 2026-03-31,
+		date is 2026-04-01,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -739,7 +739,7 @@
 	:- protected(clean_directory/1).
 	:- mode(clean_directory(+atom), one).
 	:- info(clean_directory/1, [
-		comment is 'Deletes an empty directory if it exists. Relative directory paths are interpreted as relative to the tests object path.',
+		comment is 'Deletes a directory if it exists. Relative directory paths are interpreted as relative to the tests object path.',
 		argnames is ['Directory'],
 		see_also is [clean_file/1, file_path/2]
 	]).
@@ -3501,14 +3501,15 @@
 		(	os::is_absolute_file_name(Directory) ->
 			% the directory may still require expanding
 			os::absolute_file_name(Directory, Path)
-		;	self(Self),
+		;	% relative path to the tests file
+			self(Self),
 			object_property(Self, file(_, SelfDirectory)),
 			atom_concat(SelfDirectory, Directory, Path0),
 			os::absolute_file_name(Path0, Path)
 		),
 		% the directory may exist only if some unit test failed
 		(	os::directory_exists(Path) ->
-			os::delete_directory(Path)
+			os::delete_directory_and_contents(Path)
 		;	true
 		).
 

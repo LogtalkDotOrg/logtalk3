@@ -14,8 +14,8 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 |    ``logtalk_load(lgtunit(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 22:6:0
-| **Date:** 2026-03-31
+| **Version:** 22:7:0
+| **Date:** 2026-04-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -1974,7 +1974,7 @@ Closes any existing stream associated with the file and deletes the file if it e
 ``clean_directory/1``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Deletes an empty directory if it exists. Relative directory paths are interpreted as relative to the tests object path.
+Deletes a directory if it exists. Relative directory paths are interpreted as relative to the tests object path.
 
 | **Compilation flags:**
 |    ``static``

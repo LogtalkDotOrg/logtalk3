@@ -125,6 +125,9 @@ Tools
 * CHANGED: The `code_metrics` tool `coupling_metric` metric representation of
 entity scores to include the Distance from Main Sequence metric value.
 
+* CHANGED: The `lgtunit` tool `clean_directory/1` predicate to also delete
+non-empty directories.
+
 * ADDED: New `tool_diagnostics` tool for supporting generating diagnostics by
 other developer tools.
 
