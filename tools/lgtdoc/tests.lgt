@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:9:1,
 		author is 'Paulo Moura',
-		date is 2026-03-31,
+		date is 2026-04-01,
 		comment is 'Unit tests for the "lgtdoc" tool.'
 	]).
 
@@ -59,7 +59,7 @@
 	]).
 
 	:- uses(os, [
-		directory_files/3, delete_file/1, delete_directory/1,
+		directory_files/3, delete_file/1, delete_directory_and_contents/1,
 		directory_exists/1,
 		working_directory/1, path_concat/3
 	]).
@@ -77,6 +77,10 @@
 		working_directory(Directory),
 		path_concat(Directory, 'xml_docs/', XMLDocsDirectory),
 		assertz(xml_docs_directory_(XMLDocsDirectory)).
+
+	cleanup :-
+		xml_docs_directory_(XMLDocsDirectory),
+		delete_directory_and_contents(XMLDocsDirectory).
 
 	% the following tests ony check (for now) that the called
 	% predicates succeed as expected and are deterministic
@@ -157,11 +161,7 @@
 		xml_docs_directory_(XMLDocsDirectory),
 		directory_files(XMLDocsDirectory, XMLFiles, [paths(absolute), extensions(['.xml'])]),
 		^^assertion(XMLFiles \== []),
-		forall(
-			list::member(XMLFile, XMLFiles),
-			delete_file(XMLFile)
-		),
-		delete_directory(XMLDocsDirectory),
+		delete_directory_and_contents(XMLDocsDirectory),
 		diagnostics(file(File), Diagnostics),
 		^^assertion(length(Diagnostics, 11)),
 		^^assertion(\+ os::directory_exists(XMLDocsDirectory)).
@@ -216,18 +216,6 @@
 		^^file_path('diagnostics_fixture.lgt', File),
 		diagnostics_preflight(file(File), Issues0, [explanations(false)]),
 		^^assertion(Issues0 == []).
-
-	cleanup :-
-		xml_docs_directory_(XMLDocsDirectory),
-		( 	directory_exists(XMLDocsDirectory) ->
-			directory_files(XMLDocsDirectory, XMLFiles, [paths(absolute), extensions(['.xml'])]),
-			forall(
-				list::member(XMLFile, XMLFiles),
-				delete_file(XMLFile)
-			),
-			delete_directory(XMLDocsDirectory)
-		; 	true
-		).
 
 	% suppress all messages from the "lgtdoc" tool
 	% component to not pollute the unit tests output

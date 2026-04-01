@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:9:1,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2026-03-31,
+		date is 2026-04-01,
 		comment is 'Unit tests for the "dead_code_scanner" tool.'
 	]).
 
@@ -425,8 +425,8 @@
 		set_logtalk_flag(optimize, OldOptimize),
 		logtalk_load(test_entities, [reload(always), source_data(on), unknown_entities(silent)]),
 		^^assertion(length(Issues, 2)),
-		^^assertion(memberchk(preflight_issue(missing_analysis_prerequisite, note, _, context(file, _), _, 0-0, [prerequisite(optimize)]), Issues)),
-		^^assertion(memberchk(preflight_issue(missing_analysis_prerequisite, warning, _, context(file, _), _, 0-0, [prerequisite(source_data)]), Issues)).
+		^^assertion(member(preflight_issue(missing_analysis_prerequisite, note, _, context(file, _), _, 0-0, [prerequisite(optimize)]), Issues)),
+		^^assertion(member(preflight_issue(missing_analysis_prerequisite, warning, _, context(file, _), _, 0-0, [prerequisite(source_data)]), Issues)).
 
 	test(dcs_preflight_warning_01, deterministic) :-
 		retractall(preflight_warning(_)),
@@ -468,8 +468,8 @@
 		set_logtalk_flag(source_data, OldSourceData),
 		set_logtalk_flag(optimize, OldOptimize),
 		logtalk_load(test_entities, [reload(always), source_data(on), unknown_entities(silent)]),
-		memberchk(diagnostic(local_dead_code, warning, high, _, context(category, category), _, _, Properties), Diagnostics),
-		memberchk(finding_properties(FindingProperties), Properties),
+		^^assertion(member(diagnostic(local_dead_code, warning, high, _, context(category, category), _, _, Properties), Diagnostics)),
+		^^assertion(member(finding_properties(FindingProperties), Properties)),
 		^^assertion(member(optimize(on), FindingProperties)).
 
 	% suppress all messages from the "dead_code_scanner"
