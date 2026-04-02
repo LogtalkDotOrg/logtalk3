@@ -1352,7 +1352,7 @@ protocol_property(Ptc, Prop) :-
 create_object(Obj, Relations, Directives, Clauses) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	(	'$lgt_prolog_feature'(threads, supported) ->
-		with_mutex('$lgt_runtime', '$lgt_create_object'(Obj, Relations, Directives, Clauses, ExCtx))
+		with_mutex('$lgt_compiler', '$lgt_create_object'(Obj, Relations, Directives, Clauses, ExCtx))
 	;	'$lgt_create_object'(Obj, Relations, Directives, Clauses, ExCtx)
 	).
 
@@ -1420,7 +1420,7 @@ create_object(Obj, Relations, Directives, Clauses) :-
 create_category(Ctg, Relations, Directives, Clauses) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	(	'$lgt_prolog_feature'(threads, supported) ->
-		with_mutex('$lgt_runtime', '$lgt_create_category'(Ctg, Relations, Directives, Clauses, ExCtx))
+		with_mutex('$lgt_compiler', '$lgt_create_category'(Ctg, Relations, Directives, Clauses, ExCtx))
 	;	'$lgt_create_category'(Ctg, Relations, Directives, Clauses, ExCtx)
 	).
 
@@ -1489,7 +1489,7 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 create_protocol(Ptc, Relations, Directives) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
 	(	'$lgt_prolog_feature'(threads, supported) ->
-		with_mutex('$lgt_runtime', '$lgt_create_protocol'(Ptc, Relations, Directives, ExCtx))
+		with_mutex('$lgt_compiler', '$lgt_create_protocol'(Ptc, Relations, Directives, ExCtx))
 	;	'$lgt_create_protocol'(Ptc, Relations, Directives, ExCtx)
 	).
 
@@ -30107,7 +30107,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	'$lgt_prolog_feature'(threads, supported)
 		) ->
 		mutex_create(_, [alias('$lgt_compiler')]),
-		mutex_create(_, [alias('$lgt_runtime')]),
 		mutex_create(_, [alias('$lgt_caches')]),
 		mutex_create(_, [alias('$lgt_make')])
 	;	true
