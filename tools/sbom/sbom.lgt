@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-25,
+		date is 2026-04-02,
 		comment is 'This tool generates a Software Bill of Materials (SBOM) for an application.'
 	]).
 
@@ -43,16 +43,16 @@
 		argnames is ['Document']
 	]).
 
-	:- public(export/2).
+	:- public((export)/2).
 	:- mode(export(++compound, +list(compound)), one).
-	:- info(export/2, [
+	:- info((export)/2, [
 		comment is 'Exports an SPDX 2.3 or a CycloneDX 1.6 JSON document describing the currently loaded application to the specified sink using the given options. Valid sinks are ``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, and ``atom(Atom)``.',
 		argnames is ['Sink', 'Options']
 	]).
 
-	:- public(export/1).
+	:- public((export)/1).
 	:- mode(export(++compound), one).
-	:- info(export/1, [
+	:- info((export)/1, [
 		comment is 'Exports an SPDX 2.3 JSON document describing the currently loaded application to the specified sink using default options. Valid sinks are ``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, and ``atom(Atom)``.',
 		argnames is ['Sink']
 	]).

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-30,
+		date is 2026-04-02,
 		comment is 'Unit tests for the "sbom" tool.'
 	]).
 
@@ -33,7 +33,7 @@
 
 	:- uses(sbom, [
 		document/1, document/2,
-		export/1, export/2
+		(export)/1, (export)/2
 	]).
 
 	:- uses(registries, [
