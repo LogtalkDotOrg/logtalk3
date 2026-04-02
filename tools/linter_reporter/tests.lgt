@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-31,
+		date is 2026-04-02,
 		comment is 'Unit tests for the linter_reporter tool.'
 	]).
 
@@ -105,7 +105,7 @@
 		prepare_target_run(false),
 		diagnostics(library(errors), Diagnostics),
 		assertion(Diagnostics \== []),
-		assertion(member(diagnostic(_RuleId, _Severity, _Confidence, _Message, context(object, misspell), _File, _Lines, _Properties), ErrorsDiagnostics)).
+		assertion(member(diagnostic(_RuleId, _Severity, _Confidence, _Message, context(object, misspell), _File, _Lines, _Properties), Diagnostics)).
 
 	test(lr_targets_07, deterministic) :-
 		prepare_run(false),
