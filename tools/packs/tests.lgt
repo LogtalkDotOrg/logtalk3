@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:37:0,
+		version is 0:38:0,
 		author is 'Paulo Moura',
-		date is 2026-03-24,
+		date is 2026-04-02,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -51,16 +51,17 @@
 		os::change_directory(Directory),
 		% create a temporary key to test checking of pack signatures
 		os::make_directory_path('.ring'),
+		os::internal_os_path(Directory, DirectoryOS),
 		(	os::operating_system_type(windows) ->
-			atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --quick-gen-key --batch --passphrase "" test_packs@logtalk.org > nul 2>&1'], Command1)
-		;	atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --quick-gen-key --batch --passphrase "" test_packs@logtalk.org > /dev/null 2>&1'], Command1)
+			atomic_list_concat(['gpg -q --homedir "', DirectoryOS, '.ring" --quick-gen-key --batch --passphrase "" test_packs@logtalk.org > nul 2>&1'], Command1)
+		;	atomic_list_concat(['gpg -q --homedir "', DirectoryOS, '.ring" --quick-gen-key --batch --passphrase "" test_packs@logtalk.org > /dev/null 2>&1'], Command1)
 		),
 		os::shell(Command1),
 		(	os::operating_system_type(windows) ->
-			atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --armor --detach-sign --local-user test_packs@logtalk.org "', Directory, '/test_files/asc/v1.0.0.tar.gz" > nul 2>&1'], Command2),
-			atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --detach-sign --local-user test_packs@logtalk.org "', Directory, '/test_files/sig/v1.0.0.tar.gz" > nul 2>&1'], Command3)
-		;	atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --armor --detach-sign --local-user test_packs@logtalk.org "', Directory, '/test_files/asc/v1.0.0.tar.gz" > /dev/null 2>&1'], Command2),
-			atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --detach-sign --local-user test_packs@logtalk.org "', Directory, '/test_files/sig/v1.0.0.tar.gz" > /dev/null 2>&1'], Command3)
+			atomic_list_concat(['gpg -q --homedir "', DirectoryOS, '.ring" --armor --detach-sign --local-user test_packs@logtalk.org "', DirectoryOS, '\\test_files\\asc\\v1.0.0.tar.gz" > nul 2>&1'], Command2),
+			atomic_list_concat(['gpg -q --homedir "', DirectoryOS, '.ring" --detach-sign --local-user test_packs@logtalk.org "', DirectoryOS, '\\test_files\\sig\\v1.0.0.tar.gz" > nul 2>&1'], Command3)
+		;	atomic_list_concat(['gpg -q --homedir "', DirectoryOS, '.ring" --armor --detach-sign --local-user test_packs@logtalk.org "', DirectoryOS, '/test_files/asc/v1.0.0.tar.gz" > /dev/null 2>&1'], Command2),
+			atomic_list_concat(['gpg -q --homedir "', DirectoryOS, '.ring" --detach-sign --local-user test_packs@logtalk.org "', DirectoryOS, '/test_files/sig/v1.0.0.tar.gz" > /dev/null 2>&1'], Command3)
 		),
 		os::shell(Command2),
 		os::shell(Command3).
@@ -73,16 +74,9 @@
 		^^clean_file('test_files/setup_repo_lock.txt'),
 		^^clean_file('test_files/asc/v1.0.0.tar.gz.asc'),
 		^^clean_file('test_files/sig/v1.0.0.tar.gz.sig'),
-		object_property(packs, file(_, Directory)),
-		atomic_list_concat([Directory, '.ring'], Ring),
-		os::delete_directory_and_contents(Ring),
-		atomic_list_concat([Directory, 'test_files/repo'], Repo),
-		(   os::directory_exists(Repo) ->
-			os::delete_directory_and_contents(Repo)
-		;   true
-		),
-		atomic_list_concat([Directory, 'test_files/logtalk_packs'], LogtalkPacks),
-		os::delete_directory_and_contents(LogtalkPacks).
+		^^clean_directory('.ring'),
+		^^clean_directory('test_files/repo'),
+		^^clean_directory('test_files/logtalk_packs').
 
 	% we start with no defined registries or installed packs
 
