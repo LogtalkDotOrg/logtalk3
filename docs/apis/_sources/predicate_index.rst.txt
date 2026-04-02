@@ -1524,6 +1524,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`termp <termp/0::check/1>`
+* :ref:`two3tree <two3tree/0::check/1>`
 * :ref:`varlistp <varlistp/0::check/1>`
 
 ``check/2``
@@ -3346,6 +3347,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`termp <termp/0::depth/2>`
+* :ref:`two3tree <two3tree/0::depth/2>`
 
 ``depth_first_order/3``
 -----------------------
@@ -8926,6 +8928,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::lookup_in/3>`
 
+``lookup_nonvar/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`two3tree <two3tree/0::lookup_nonvar/3>`
+
 ``lower_upper/2``
 -----------------
 
@@ -10051,6 +10063,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::new/1>`
 * :ref:`streamvars <streamvars/0::new/1>`
 * :ref:`termp <termp/0::new/1>`
+* :ref:`two3tree <two3tree/0::new/1>`
 
 ``new/2``
 ---------
@@ -16070,6 +16083,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`setp <setp/0::union/3>`
+* :ref:`two3tree <two3tree/0::union/3>`
 * :ref:`unweighted_directed_graph(Dictionary) <unweighted_directed_graph/1::union/3>`
 
 ``union/4``
@@ -16341,6 +16355,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`intervalp <intervalp/0::valid/1>`
 * :ref:`statisticsp <statisticsp/0::valid/1>`
 * :ref:`termp <termp/0::valid/1>`
+* :ref:`two3tree <two3tree/0::valid/1>`
 * :ref:`url(Representation) <url/1::valid/1>`
 * :ref:`validation(Validation) <validation/1::valid/1>`
 * :ref:`varlistp <varlistp/0::valid/1>`

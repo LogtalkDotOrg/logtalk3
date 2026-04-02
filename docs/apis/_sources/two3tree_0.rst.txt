@@ -1,0 +1,671 @@
+.. index:: single: two3tree
+.. _two3tree/0:
+
+.. rst-class:: right
+
+**object**
+
+``two3tree``
+============
+
+2-3 tree implementation.
+
+| **Availability:** 
+|    ``logtalk_load(dictionaries(loader))``
+
+| **Author:** Michael T. Richter
+| **Version:** 1:0:0
+| **Date:** 2026-04-02
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`dictionaryp <dictionaryp/0>`
+| **Extends:**
+|    ``public`` :ref:`term <term/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`comparingp/0::(<)/2`  :ref:`comparingp/0::(=:=)/2`  :ref:`comparingp/0::(=<)/2`  :ref:`comparingp/0::(=\=)/2`  :ref:`comparingp/0::(>)/2`  :ref:`comparingp/0::(>=)/2`  :ref:`dictionaryp/0::apply/4`  :ref:`dictionaryp/0::as_curly_bracketed/2`  :ref:`dictionaryp/0::as_dictionary/2`  :ref:`dictionaryp/0::as_list/2`  :ref:`dictionaryp/0::clone/3`  :ref:`dictionaryp/0::clone/4`  :ref:`dictionaryp/0::delete/4`  :ref:`dictionaryp/0::delete_max/4`  :ref:`dictionaryp/0::delete_min/4`  :ref:`dictionaryp/0::empty/1`  :ref:`termp/0::ground/1`  :ref:`dictionaryp/0::insert/4`  :ref:`dictionaryp/0::intersection/2`  :ref:`dictionaryp/0::intersection/3`  :ref:`dictionaryp/0::keys/2`  :ref:`dictionaryp/0::lookup/2`  :ref:`dictionaryp/0::lookup/3`  :ref:`dictionaryp/0::lookup/4`  :ref:`dictionaryp/0::map/2`  :ref:`dictionaryp/0::map/3`  :ref:`dictionaryp/0::max/3`  :ref:`dictionaryp/0::min/3`  :ref:`dictionaryp/0::next/4`  :ref:`termp/0::numbervars/1`  :ref:`termp/0::numbervars/3`  :ref:`termp/0::occurs/2`  :ref:`dictionaryp/0::previous/4`  :ref:`termp/0::singletons/2`  :ref:`dictionaryp/0::size/2`  :ref:`termp/0::subsumes/2`  :ref:`termp/0::subterm/2`  :ref:`dictionaryp/0::update/3`  :ref:`dictionaryp/0::update/4`  :ref:`dictionaryp/0::update/5`  :ref:`dictionaryp/0::values/2`  :ref:`termp/0::variables/2`  :ref:`termp/0::variant/2`  :ref:`termp/0::varnumbers/2`  :ref:`termp/0::varnumbers/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: union/3
+.. _two3tree/0::union/3:
+
+``union/3``
+^^^^^^^^^^^
+
+Computes the union of two dictionaries. If a key appears in both, the value from the larger dictionary is kept.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``union(Tree1,Tree2,Union)``
+| **Mode and number of proofs:**
+|    ``union(+two3tree,+two3tree,-two3tree)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: check/1
+.. _two3tree/0::check/1:
+
+``check/1``
+^^^^^^^^^^^
+
+Checks the validity of a 2-3 tree, ensuring it is instantiated.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check(Tree)``
+| **Mode and number of proofs:**
+|    ``check(+term)`` - ``one``
+
+
+------------
+
+.. index:: depth/2
+.. _two3tree/0::depth/2:
+
+``depth/2``
+^^^^^^^^^^^
+
+Calculates the depth of a 2-3 tree.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``depth(Tree,Depth)``
+| **Mode and number of proofs:**
+|    ``depth(+term,-term)`` - ``one``
+
+
+------------
+
+.. index:: new/1
+.. _two3tree/0::new/1:
+
+``new/1``
+^^^^^^^^^
+
+Unifies the passed-in tree with an empty tree.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new(Tree)``
+| **Mode and number of proofs:**
+|    ``new(?term)`` - ``one``
+
+
+------------
+
+.. index:: valid/1
+.. _two3tree/0::valid/1:
+
+``valid/1``
+^^^^^^^^^^^
+
+Checks the validity of a 2-3 tree, does not check for instantiation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid(Tree)``
+| **Mode and number of proofs:**
+|    ``valid(?term)`` - ``one``
+
+
+------------
+
+.. index:: lookup_nonvar/3
+.. _two3tree/0::lookup_nonvar/3:
+
+``lookup_nonvar/3``
+^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``lookup_nonvar(@two3tree,+ground,?term)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: union_impl/3
+.. _two3tree/0::union_impl/3:
+
+``union_impl/3``
+^^^^^^^^^^^^^^^^
+
+Inserts all key‑value pairs of the smaller tree into the larger tree to compute the union.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``union_impl(+two3tree,+two3tree,-two3tree)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: union_impl_list/3
+.. _two3tree/0::union_impl_list/3:
+
+``union_impl_list/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Inserts a list of key‑value pairs into a dictionary one by one.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``union_impl_list(+list(pair),+two3tree,-two3tree)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: clone_impl/3
+.. _two3tree/0::clone_impl/3:
+
+``clone_impl/3``
+^^^^^^^^^^^^^^^^
+
+Recursively clones a tree, leaving all values unbound and collecting the pairs of the clone.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``clone_impl(+two3tree,-two3tree,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: clone_impl2/4
+.. _two3tree/0::clone_impl2/4:
+
+``clone_impl2/4``
+^^^^^^^^^^^^^^^^^
+
+Recursively clones a tree, returning both the original pairs and the clone’s pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``clone_impl2(+two3tree,-two3tree,-list(pair),-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: handle_root_underflow/2
+.. _two3tree/0::handle_root_underflow/2:
+
+``handle_root_underflow/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+After a deletion, if the root has become a 2‑node with a single child, replace it by that child; otherwise keep the root.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``handle_root_underflow(+term,-term)`` - ``one``
+
+
+------------
+
+.. index:: delete_impl/5
+.. _two3tree/0::delete_impl/5:
+
+``delete_impl/5``
+^^^^^^^^^^^^^^^^^
+
+Recursive deletion that returns the resulting tree and a flag indicating whether an underflow has occurred at the current node.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``delete_impl(+term,+term,?term,-term,-boolean)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: fix_node2_left_underflow/6
+.. _two3tree/0::fix_node2_left_underflow/6:
+
+``fix_node2_left_underflow/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Repairs an underflow after a deletion in the left subtree of a node2.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``fix_node2_left_underflow(+term,+term,+term,+term,-term,-boolean)`` - ``one``
+
+
+------------
+
+.. index:: fix_node2_right_underflow/6
+.. _two3tree/0::fix_node2_right_underflow/6:
+
+``fix_node2_right_underflow/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Repairs an underflow after a deletion in the right subtree of a node2.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``fix_node2_right_underflow(+term,+term,+term,+term,-term,-boolean)`` - ``one``
+
+
+------------
+
+.. index:: fix_node3_left_underflow/9
+.. _two3tree/0::fix_node3_left_underflow/9:
+
+``fix_node3_left_underflow/9``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Repairs an underflow after a deletion in the left subtree of a node3.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``fix_node3_left_underflow(+term,+term,+term,+term,+term,+term,+term,-term,-boolean)`` - ``one``
+
+
+------------
+
+.. index:: fix_node3_middle_underflow/9
+.. _two3tree/0::fix_node3_middle_underflow/9:
+
+``fix_node3_middle_underflow/9``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Repairs an underflow after a deletion in the middle subtree of a node3.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``fix_node3_middle_underflow(+term,+term,+term,+term,+term,+term,+term,-term,-boolean)`` - ``one``
+
+
+------------
+
+.. index:: fix_node3_right_underflow/9
+.. _two3tree/0::fix_node3_right_underflow/9:
+
+``fix_node3_right_underflow/9``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Repairs an underflow after a deletion in the right subtree of a node3.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``fix_node3_right_underflow(+term,+term,+term,+term,+term,+term,+term,-term,-boolean)`` - ``one``
+
+
+------------
+
+.. index:: as_curly_bracketed_impl/2
+.. _two3tree/0::as_curly_bracketed_impl/2:
+
+``as_curly_bracketed_impl/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds a curly‑bracketed term from a list of key‑value pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``as_curly_bracketed_impl(+list(pairs),-term)`` - ``one``
+
+
+------------
+
+.. index:: as_curly_bracketed_impl/3
+.. _two3tree/0::as_curly_bracketed_impl/3:
+
+``as_curly_bracketed_impl/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Helper that accumulates a comma‑separated list inside curly braces.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``as_curly_bracketed_impl(+list(pairs),+pair,-term)`` - ``one``
+
+
+------------
+
+.. index:: insert_impl/4
+.. _two3tree/0::insert_impl/4:
+
+``insert_impl/4``
+^^^^^^^^^^^^^^^^^
+
+Recursive insertion that may return a node4 on the way up.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``insert_impl(+term,+term,+term,-term)`` - ``one``
+
+
+------------
+
+.. index:: insert_empty/4
+.. _two3tree/0::insert_empty/4:
+
+``insert_empty/4``
+^^^^^^^^^^^^^^^^^^
+
+Inserts into an empty tree.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``insert_empty(+empty,+term,+term,-term)`` - ``one``
+
+
+------------
+
+.. index:: insert_node2_2/4
+.. _two3tree/0::insert_node2_2/4:
+
+``insert_node2_2/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Inserts a key‑value pair into a leaf 2‑node, creating a leaf 3‑node.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``insert_node2_2(+term,+term,+term,-term)`` - ``one``
+
+
+------------
+
+.. index:: insert_node2_4/4
+.. _two3tree/0::insert_node2_4/4:
+
+``insert_node2_4/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Inserts into a non‑leaf 2‑node, possibly splitting a child 4‑node.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``insert_node2_4(+term,+term,+term,-term)`` - ``one``
+
+
+------------
+
+.. index:: insert_node3_4/4
+.. _two3tree/0::insert_node3_4/4:
+
+``insert_node3_4/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Inserts a key‑value pair into a leaf 3‑node, creating a leaf 4‑node.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``insert_node3_4(+term,+term,+term,-term)`` - ``one``
+
+
+------------
+
+.. index:: insert_node3_7/4
+.. _two3tree/0::insert_node3_7/4:
+
+``insert_node3_7/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Inserts into a non‑leaf 3‑node, possibly splitting a child 4‑node.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``insert_node3_7(+term,+term,+term,-term)`` - ``one``
+
+
+------------
+
+.. index:: intersection_impl/4
+.. _two3tree/0::intersection_impl/4:
+
+``intersection_impl/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the intersection of a list of key‑value pairs with a tree, inserting common pairs into an accumulator.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``intersection_impl(+list(pair),+two3tree,+list(pair),-list(pair))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: is_node4/1
+.. _two3tree/0::is_node4/1:
+
+``is_node4/1``
+^^^^^^^^^^^^^^
+
+True if the term is a 4‑node (temporary representation).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``is_node4(+term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: map_impl/2
+.. _two3tree/0::map_impl/2:
+
+``map_impl/2``
+^^^^^^^^^^^^^^
+
+Traverses the tree and applies a closure to each key‑value pair.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Meta-predicate template:**
+|    ``map_impl(*,1)``
+| **Mode and number of proofs:**
+|    ``map_impl(+two3tree,@callable)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: map_impl/3
+.. _two3tree/0::map_impl/3:
+
+``map_impl/3``
+^^^^^^^^^^^^^^
+
+Traverses the tree, applies a closure to each key‑value pair, and builds a new tree with the results.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Meta-predicate template:**
+|    ``map_impl(*,2,*)``
+| **Mode and number of proofs:**
+|    ``map_impl(+two3tree,@callable,-two3tree)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: next_impl/5
+.. _two3tree/0::next_impl/5:
+
+``next_impl/5``
+^^^^^^^^^^^^^^^
+
+Recursively finds the next key‑value pair after a given key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``next_impl(+two3tree,+key,-key,-value,+term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: previous_impl/5
+.. _two3tree/0::previous_impl/5:
+
+``previous_impl/5``
+^^^^^^^^^^^^^^^^^^^
+
+Recursively finds the previous key‑value pair before a given key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``previous_impl(+two3tree,+key,-key,-value,+term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: node2_from_node4/2
+.. _two3tree/0::node2_from_node4/2:
+
+``node2_from_node4/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a 4‑node (temporary) into a balanced 2‑node with two 2‑node children.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``node2_from_node4(+term,-term)`` - ``one``
+
+
+------------
+
+.. index:: update_impl/3
+.. _two3tree/0::update_impl/3:
+
+``update_impl/3``
+^^^^^^^^^^^^^^^^^
+
+Updates a dictionary with a list of key‑value pairs sequentially.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``update_impl(@list(pair),+two3tree,-two3tree)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: collect/4
+.. _two3tree/0::collect/4:
+
+``collect/4``
+^^^^^^^^^^^^^
+
+In-order traversal accumulating selected projections of nodes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``collect(Tree,Selector,Accumulator,ReversedResult)``
+| **Mode and number of proofs:**
+|    ``collect(+two3tree,+selector,+list(term),-list(term))`` - ``one``
+
+
+------------
+
+.. index:: select/4
+.. _two3tree/0::select/4:
+
+``select/4``
+^^^^^^^^^^^^
+
+Projects a key-value pair according to the selector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``select(Selector,Key,Value,Element)``
+| **Mode and number of proofs:**
+|    ``select(+selector,+key,+value,-term)`` - ``one``
+
+
+------------
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`avltree <avltree/0>`, :ref:`bintree <bintree/0>`, :ref:`rbtree <rbtree/0>`, :ref:`splaytree <splaytree/0>`, :ref:`dictionaryp <dictionaryp/0>`
+

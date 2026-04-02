@@ -24,7 +24,7 @@
 	logtalk_load(basic_types(loader)),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(
-		[dictionaryp, avltree, bintree, rbtree, splaytree],
+		[dictionaryp, avltree, bintree, rbtree, splaytree, two3tree],
 		[debug(on), source_data(on)]
 	),
 	logtalk_load(tests, [hook(lgtunit)]),
@@ -32,6 +32,7 @@
 		tests(avltree),
 		tests(bintree),
 		tests(rbtree),
-		tests(splaytree)
+		tests(splaytree),
+		tests(two3tree)
 	])
 )).

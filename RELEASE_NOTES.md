@@ -64,6 +64,9 @@ for backward compatibility.
 * CHANGED: The `linda` library exception when a client is not connected from
 `linda_error(not_connected)` to `linda_error(not_connected(AddressOrAlias))`.
 
+* ADDED: A 2-3 tree implementation to the `dictionaries` library. Contributed
+by Michael T. Richter.
+
 * ADDED: Support to the `linda` library for clients to connect to multiple
 servers.
 

@@ -22,10 +22,10 @@ ________________________________________________________________________
 ==============
 
 This library provides a dictionary (also known as associative array, map,
-or symbol table) protocol and binary tree, AVL tree, Red–Black tree, and
-splay tree implementations. The different representations of a dictionary
-should be regarded as opaque terms and only accessed using the library
-predicates.
+or symbol table) protocol and binary tree, AVL tree, Red–Black tree, splay
+tree, ad 2-3 tree implementations. The different representations of a
+dictionary should be regarded as opaque terms and only accessed using the
+library predicates.
 
 
 API documentation
@@ -56,8 +56,8 @@ Usage
 
 First, select the dictionary implementation that you want to use. For cases
 where the number of elements is relatively small and performance is not
-critical, `bintree` can be a good choice. For other cases, `avltree` or
-`rbtree` are likely better choices. The `splaytree` implementation can be
+critical, `bintree` can be a good choice. For other cases, `avltree`, `rbtree`,
+or `two3tree` are likely better choices. The `splaytree` implementation can be
 a good choice when recently accessed elements are likely to be accessed
 again, as it moves accessed elements closer to the root. If you want to
 compare the performance of the implementations, either define an object
@@ -115,3 +115,5 @@ by Paulo Moura.
 
 The Red–Black tree implementation is an adaptation to Logtalk of the
 `rbtrees` Prolog library authored by Vitor Santos Costa.
+
+The 2-3 tree implementation is a contribution by Michael T. Richter.
