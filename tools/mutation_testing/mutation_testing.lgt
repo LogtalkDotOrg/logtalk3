@@ -986,7 +986,7 @@
 			Redirect
 		], Command),
 		print_message(silent, mutation_testing, subprocess_command(Command)),
-		run_subprocess(Command, ExitStatus).
+		shell(Command, ExitStatus).
 
 	initialization_goal_coverage(ConfigFile, Goal) :-
 		atomic_list_concat([
@@ -1050,7 +1050,7 @@
 		], Command),
 		print_message(silent, mutation_testing, subprocess_command(Command)),
 		% run subprocess and collect exit status
-		run_subprocess(Command, ExitStatus).
+		shell(Command, ExitStatus).
 
 	tester_directory(_SourceFile, Directory, Options) :-
 		^^option(tester_directory(Directory), Options),
@@ -1573,18 +1573,6 @@
 		;   retractall(capturing_mutated_terms_),
 			fail
 		).
-
-	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
-
-		run_subprocess(Command, ExitStatus) :-
-			{process:process_create(Command, [], [commandline(true), wait(exit(ExitStatus))])}.
-
-	:- else.
-
-		run_subprocess(Command, ExitStatus) :-
-			shell(Command, ExitStatus).
-
-	:- endif.
 
 	% by default, include all loaded entities:
 	default_option(include_entities([])).

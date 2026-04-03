@@ -15,7 +15,7 @@
 
 | **Author:** Michael T. Richter
 | **Version:** 1:0:0
-| **Date:** 2026-04-02
+| **Date:** 2026-04-03
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -165,7 +165,7 @@ Private predicates
 ``union_impl/3``
 ^^^^^^^^^^^^^^^^
 
-Inserts all key‑value pairs of the smaller tree into the larger tree to compute the union.
+Inserts all key-value pairs of the smaller tree into the larger tree to compute the union.
 
 | **Compilation flags:**
 |    ``static``
@@ -182,7 +182,7 @@ Inserts all key‑value pairs of the smaller tree into the larger tree to comput
 ``union_impl_list/3``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Inserts a list of key‑value pairs into a dictionary one by one.
+Inserts a list of key-value pairs into a dictionary one by one.
 
 | **Compilation flags:**
 |    ``static``
@@ -216,7 +216,7 @@ Recursively clones a tree, leaving all values unbound and collecting the pairs o
 ``clone_impl2/4``
 ^^^^^^^^^^^^^^^^^
 
-Recursively clones a tree, returning both the original pairs and the clone’s pairs.
+Recursively clones a tree, returning both the original pairs and the clone pairs.
 
 | **Compilation flags:**
 |    ``static``
@@ -233,7 +233,7 @@ Recursively clones a tree, returning both the original pairs and the clone’s p
 ``handle_root_underflow/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After a deletion, if the root has become a 2‑node with a single child, replace it by that child; otherwise keep the root.
+After a deletion, if the root has become a 2-node with a single child, replace it by that child; otherwise keep the root.
 
 | **Compilation flags:**
 |    ``static``
@@ -352,7 +352,7 @@ Repairs an underflow after a deletion in the right subtree of a node3.
 ``as_curly_bracketed_impl/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Builds a curly‑bracketed term from a list of key‑value pairs.
+Builds a curly-bracketed term from a list of key-value pairs.
 
 | **Compilation flags:**
 |    ``static``
@@ -369,7 +369,7 @@ Builds a curly‑bracketed term from a list of key‑value pairs.
 ``as_curly_bracketed_impl/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Helper that accumulates a comma‑separated list inside curly braces.
+Helper that accumulates a comma-separated list inside curly braces.
 
 | **Compilation flags:**
 |    ``static``
@@ -420,7 +420,7 @@ Inserts into an empty tree.
 ``insert_node2_2/4``
 ^^^^^^^^^^^^^^^^^^^^
 
-Inserts a key‑value pair into a leaf 2‑node, creating a leaf 3‑node.
+Inserts a key-value pair into a leaf 2-node, creating a leaf 3-node.
 
 | **Compilation flags:**
 |    ``static``
@@ -437,7 +437,7 @@ Inserts a key‑value pair into a leaf 2‑node, creating a leaf 3‑node.
 ``insert_node2_4/4``
 ^^^^^^^^^^^^^^^^^^^^
 
-Inserts into a non‑leaf 2‑node, possibly splitting a child 4‑node.
+Inserts into a non-leaf 2-node, possibly splitting a child 4-node.
 
 | **Compilation flags:**
 |    ``static``
@@ -454,7 +454,7 @@ Inserts into a non‑leaf 2‑node, possibly splitting a child 4‑node.
 ``insert_node3_4/4``
 ^^^^^^^^^^^^^^^^^^^^
 
-Inserts a key‑value pair into a leaf 3‑node, creating a leaf 4‑node.
+Inserts a key-value pair into a leaf 3-node, creating a leaf 4-node.
 
 | **Compilation flags:**
 |    ``static``
@@ -471,7 +471,7 @@ Inserts a key‑value pair into a leaf 3‑node, creating a leaf 4‑node.
 ``insert_node3_7/4``
 ^^^^^^^^^^^^^^^^^^^^
 
-Inserts into a non‑leaf 3‑node, possibly splitting a child 4‑node.
+Inserts into a non-leaf 3-node, possibly splitting a child 4-node.
 
 | **Compilation flags:**
 |    ``static``
@@ -488,7 +488,7 @@ Inserts into a non‑leaf 3‑node, possibly splitting a child 4‑node.
 ``intersection_impl/4``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Computes the intersection of a list of key‑value pairs with a tree, inserting common pairs into an accumulator.
+Computes the intersection of a list of key-value pairs with a tree, inserting common pairs into an accumulator.
 
 | **Compilation flags:**
 |    ``static``
@@ -505,7 +505,7 @@ Computes the intersection of a list of key‑value pairs with a tree, inserting 
 ``is_node4/1``
 ^^^^^^^^^^^^^^
 
-True if the term is a 4‑node (temporary representation).
+True if the term is a 4-node (temporary representation).
 
 | **Compilation flags:**
 |    ``static``
@@ -522,7 +522,7 @@ True if the term is a 4‑node (temporary representation).
 ``map_impl/2``
 ^^^^^^^^^^^^^^
 
-Traverses the tree and applies a closure to each key‑value pair.
+Traverses the tree and applies a closure to each key-value pair.
 
 | **Compilation flags:**
 |    ``static``
@@ -541,7 +541,7 @@ Traverses the tree and applies a closure to each key‑value pair.
 ``map_impl/3``
 ^^^^^^^^^^^^^^
 
-Traverses the tree, applies a closure to each key‑value pair, and builds a new tree with the results.
+Traverses the tree, applies a closure to each key-value pair, and builds a new tree with the results.
 
 | **Compilation flags:**
 |    ``static``
@@ -560,7 +560,7 @@ Traverses the tree, applies a closure to each key‑value pair, and builds a new
 ``next_impl/5``
 ^^^^^^^^^^^^^^^
 
-Recursively finds the next key‑value pair after a given key.
+Recursively finds the next key-value pair after a given key.
 
 | **Compilation flags:**
 |    ``static``
@@ -577,7 +577,7 @@ Recursively finds the next key‑value pair after a given key.
 ``previous_impl/5``
 ^^^^^^^^^^^^^^^^^^^
 
-Recursively finds the previous key‑value pair before a given key.
+Recursively finds the previous key-value pair before a given key.
 
 | **Compilation flags:**
 |    ``static``
@@ -594,7 +594,7 @@ Recursively finds the previous key‑value pair before a given key.
 ``node2_from_node4/2``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Converts a 4‑node (temporary) into a balanced 2‑node with two 2‑node children.
+Converts a 4-node (temporary) into a balanced 2-node with two 2-node children.
 
 | **Compilation flags:**
 |    ``static``
@@ -611,7 +611,7 @@ Converts a 4‑node (temporary) into a balanced 2‑node with two 2‑node child
 ``update_impl/3``
 ^^^^^^^^^^^^^^^^^
 
-Updates a dictionary with a list of key‑value pairs sequentially.
+Updates a dictionary with a list of key-value pairs sequentially.
 
 | **Compilation flags:**
 |    ``static``
