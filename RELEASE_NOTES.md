@@ -100,6 +100,10 @@ for ECLiPSe when running on Windows.
 
 * FIXED: The implementation of the `os::sleep/1` predicate for JIProlog.
 
+* FIXED: The implementation of the `os::temporary_directory/1` predicate for
+Windows to not try to use the system temporary directory as backup as it isn't
+writable by non-admin users.
+
 * FIXED: Bug in the `linda` library where a permission error would be thrown
 in the server when a client sent the `linda::shutdown_server/1` message.
 

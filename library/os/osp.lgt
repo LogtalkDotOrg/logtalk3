@@ -22,9 +22,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:42:0,
+		version is 1:43:0,
 		author is 'Paulo Moura',
-		date is 2026-03-02,
+		date is 2026-04-03,
 		comment is 'Portable operating-system access protocol.',
 		remarks is [
 			'Error handling' - 'Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.',
@@ -149,7 +149,7 @@
 	:- public(temporary_directory/1).
 	:- mode(temporary_directory(?atom), one).
 	:- info(temporary_directory/1, [
-		comment is 'Temporary directory. Tries first environment variables: ``TEMP`` and ``TMP`` on Windows systems; ``TMPDIR``, ``TMP``, ``TEMP``, and ``TEMPDIR`` on POSIX systems. When not defined, tries default locations. Returns the working directory as last resort.',
+		comment is 'Temporary directory. Tries first environment variables: ``TEMP`` and ``TMP`` on Windows systems; ``TMPDIR`` on POSIX systems. When not defined, tries default locations. Returns the working directory as last resort.',
 		argnames is ['Directory']
 	]).
 
