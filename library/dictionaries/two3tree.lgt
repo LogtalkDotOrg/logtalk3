@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Michael T. Richter',
-		date is 2026-04-02,
+		date is 2026-04-03,
 		comment is '2-3 tree implementation.',
 		see_also is [avltree, bintree, rbtree, splaytree, dictionaryp]
 	]).
@@ -66,9 +66,9 @@
 		intersection(T1, T2),
 		size(T1, S1),
 		size(T2, S2),
-		(   S1 > S2
-		->  union_impl(T1, T2, M)
-		;   union_impl(T2, T1, M)
+		(	S1 > S2
+		->	union_impl(T1, T2, M)
+		;	union_impl(T2, T1, M)
 		).
 
 	%-------------------
@@ -111,9 +111,9 @@
 	delete(T1, K, V, T2) :-
 		nonvar(T1), nonvar(K),
 		delete_impl(T1, K, V, T3, Underflow),
-		(   Underflow == true
-		->  handle_root_underflow(T3, T2)
-		;   T2 = T3
+		(	Underflow == true
+		->	handle_root_underflow(T3, T2)
+		;	T2 = T3
 		).
 
 	delete_max(T0, K, V, T1) :-
@@ -130,9 +130,9 @@
 	insert(T0, K, V, T2) :-
 		nonvar(T0), nonvar(K),
 		insert_impl(T0, K, V, T1),
-		(   is_node4(T1)
-		->  node2_from_node4(T1, T2)
-		;   T2 = T1
+		(	is_node4(T1)
+		->	node2_from_node4(T1, T2)
+		;	T2 = T1
 		).
 
 	intersection(T1, T2) :-
@@ -154,9 +154,9 @@
 	lookup([], _).
 
 	lookup(K, V, T) :-
-		(   nonvar(K)
-		->  lookup_nonvar(T, K, V)
-		;   as_list(T, L),
+		(	nonvar(K)
+		->	lookup_nonvar(T, K, V)
+		;	as_list(T, L),
 			list::member(K-V, L)
 		).
 
@@ -212,49 +212,49 @@
 
 	update(T0, K, V0, V1, T1) :-
 		nonvar(T0), nonvar(K),
-		(   T0 = node2(K, V0)
-		->  T1 = node2(K, V1)
-		;   T0 = node2(KN, VN, L, R)
-		->  (   K = KN
-			->  V0 = VN,
+		(	T0 = node2(K, V0)
+		->	T1 = node2(K, V1)
+		;	T0 = node2(KN, VN, L, R)
+		->	(	K = KN
+			->	V0 = VN,
 				T1 = node2(K, V1, L, R)
 
-			;   K @< KN
-			->  update(L, K, V0, V1, L1),
+			;	K @< KN
+			->	update(L, K, V0, V1, L1),
 				T1 = node2(KN, VN, L1, R)
 
-			;   update(R, K, V0, V1, R1),
+			;	update(R, K, V0, V1, R1),
 				T1 = node2(KN, VN, L, R1)
 			)
 
-		;   T0 = node3(KL, VL, KR, VR)
-		->  (   K = KL
-			->  V0 = VL,
+		;	T0 = node3(KL, VL, KR, VR)
+		->	(	K = KL
+			->	V0 = VL,
 				T1 = node3(K, V1, KR, VR)
 
-			;   K = KR,
+			;	K = KR,
 				V0 = VR,
 				T1 = node3(KL, VL, K, V1)
 			)
 
-		;   T0 = node3(KL, VL, KR, VR, L, M, R),
-			(   K = KL
-			->  V0 = VL,
+		;	T0 = node3(KL, VL, KR, VR, L, M, R),
+			(	K = KL
+			->	V0 = VL,
 				T1 = node3(K, V1, KR, VR, L, M, R)
 
-			;   K = KR
-			->  V0 = VR,
+			;	K = KR
+			->	V0 = VR,
 				T1 = node3(KL, VL, K, V1, L, M, R)
 
-			;   K @< KL
-			->  update(L, K, V0, V1, L1),
+			;	K @< KL
+			->	update(L, K, V0, V1, L1),
 				T1 = node3(KL, VL, KR, VR, L1, M, R)
 
-			;   K @< KR
-			->  update(M, K, V0, V1, M1),
+			;	K @< KR
+			->	update(M, K, V0, V1, M1),
 				T1 = node3(KL, VL, KR, VR, L, M1, R)
 
-			;   update(R, K, V0, V1, R1),
+			;	update(R, K, V0, V1, R1),
 				T1 = node3(KL, VL, KR, VR, L, M, R1)
 			)
 		).
@@ -274,11 +274,11 @@
 	]).
 
 	check(T) :-
-		( var(T)
-		->  instantiation_error
-		;   ( valid(T)
-			->  true
-			;   type_error(two3tree, T)
+		(	var(T)
+		->	instantiation_error
+		;	(	valid(T)
+			->	true
+			;	type_error(two3tree, T)
 			)
 		).
 
@@ -340,26 +340,26 @@
 
 	lookup_nonvar(node2(K, V), K, V).
 	lookup_nonvar(node2(NK, NV, L, R), K, V) :-
-		(   K = NK
-		->  V = NV
-		;   ( K @< NK
-			->  lookup_nonvar(L, K, V)
-			;   lookup_nonvar(R, K, V)
+		(	K = NK
+		->	V = NV
+		;	(	K @< NK
+			->	lookup_nonvar(L, K, V)
+			;	lookup_nonvar(R, K, V)
 			)
 		).
 	lookup_nonvar(node3(K, V, _, _), K, V) :-
 		!.
 	lookup_nonvar(node3(_, _, K, V), K, V).
 	lookup_nonvar(node3(KL, VL, KR, VR, L, M, R), K, V) :-
-		( K = KL
-		->  V = VL
-		;   ( K = KR
-			->  V = VR
-			;   ( K @< KL
-				->  lookup_nonvar(L, K, V)
-				;   ( K @< KR
-					->  lookup_nonvar(M, K, V)
-					;   lookup_nonvar(R, K, V)
+		(	K = KL
+		->	V = VL
+		;	(	K = KR
+			->	V = VR
+			;	(	K @< KL
+				->	lookup_nonvar(L, K, V)
+				;	(	K @< KR
+					->	lookup_nonvar(M, K, V)
+					;	lookup_nonvar(R, K, V)
 					)
 				)
 			)
@@ -372,7 +372,7 @@
 	:- private(union_impl/3).
 	:- mode(union_impl(+two3tree, +two3tree, -two3tree), zero_or_one).
 	:- info(union_impl/3, [
-		comment is 'Inserts all key‑value pairs of the smaller tree into the larger tree to compute the union.'
+		comment is 'Inserts all key-value pairs of the smaller tree into the larger tree to compute the union.'
 	]).
 
 	union_impl(T1, T2, U) :-
@@ -382,7 +382,7 @@
 	:- private(union_impl_list/3).
 	:- mode(union_impl_list(+list(pair), +two3tree, -two3tree), zero_or_one).
 	:- info(union_impl_list/3, [
-		comment is 'Inserts a list of key‑value pairs into a dictionary one by one.'
+		comment is 'Inserts a list of key-value pairs into a dictionary one by one.'
 	]).
 
 	union_impl_list([], U, U).
@@ -419,7 +419,7 @@
 	:- private(clone_impl2/4).
 	:- mode(clone_impl2(+two3tree, -two3tree, -list(pair), -list(pair)), one).
 	:- info(clone_impl2/4, [
-		comment is 'Recursively clones a tree, returning both the original pairs and the clone’s pairs.'
+		comment is 'Recursively clones a tree, returning both the original pairs and the clone pairs.'
 	]).
 
 	clone_impl2(empty, empty, [], []) :-
@@ -449,7 +449,7 @@
 	:- private(handle_root_underflow/2).
 	:- mode(handle_root_underflow(+term, -term), one).
 	:- info(handle_root_underflow/2, [
-		comment is 'After a deletion, if the root has become a 2‑node with a single child, replace it by that child; otherwise keep the root.'
+		comment is 'After a deletion, if the root has become a 2-node with a single child, replace it by that child; otherwise keep the root.'
 	]).
 
 	handle_root_underflow(node2(_, _, Child, empty), Child) :-
@@ -481,27 +481,27 @@
 		V = V0,
 		max(L, PK, PV),
 		delete_impl(L, PK, PV, L2, ChildUnderflow),
-		(   ChildUnderflow == true
-		->  fix_node2_left_underflow(L2, R, PK, PV, T2, Underflow)
-		;   T2 = node2(PK, PV, L2, R),
+		(	ChildUnderflow == true
+		->	fix_node2_left_underflow(L2, R, PK, PV, T2, Underflow)
+		;	T2 = node2(PK, PV, L2, R),
 			Underflow = false
 		).
 	% --- Internal node2: Search left ---
 	delete_impl(node2(K0, V0, L, R), K, V, T2, Underflow) :-
 		K @< K0, !,
 		delete_impl(L, K, V, L2, ChildUnderflow),
-		(   ChildUnderflow == true
-		->  fix_node2_left_underflow(L2, R, K0, V0, T2, Underflow)
-		;   T2 = node2(K0, V0, L2, R),
+		(	ChildUnderflow == true
+		->	fix_node2_left_underflow(L2, R, K0, V0, T2, Underflow)
+		;	T2 = node2(K0, V0, L2, R),
 			Underflow = false
 		).
 	% --- Internal node2: Search right ---
 	delete_impl(node2(K0, V0, L, R), K, V, T2, Underflow) :-
 		K @> K0, !,
 		delete_impl(R, K, V, R2, ChildUnderflow),
-		(   ChildUnderflow == true
-		->  fix_node2_right_underflow(L, R2, K0, V0, T2, Underflow)
-		;   T2 = node2(K0, V0, L, R2),
+		(	ChildUnderflow == true
+		->	fix_node2_right_underflow(L, R2, K0, V0, T2, Underflow)
+		;	T2 = node2(K0, V0, L, R2),
 			Underflow = false
 		).
 	% --- Internal node3: Left key found ---
@@ -510,9 +510,9 @@
 		V = VL0,
 		max(L, PK, PV),
 		delete_impl(L, PK, PV, L2, ChildUnderflow),
-		(   ChildUnderflow == true
-		->  fix_node3_left_underflow(L2, M, R, PK, PV, KR0, VR0, T2, Underflow)
-		;   T2 = node3(PK, PV, KR0, VR0, L2, M, R),
+		(	ChildUnderflow == true
+		->	fix_node3_left_underflow(L2, M, R, PK, PV, KR0, VR0, T2, Underflow)
+		;	T2 = node3(PK, PV, KR0, VR0, L2, M, R),
 			Underflow = false
 		).
 	% --- Internal node3: Right key found ---
@@ -521,36 +521,36 @@
 		V = VR0,
 		max(M, PK, PV),
 		delete_impl(M, PK, PV, M2, ChildUnderflow),
-		(   ChildUnderflow == true
-		->  fix_node3_middle_underflow(L, M2, R, KL0, VL0, PK, PV, T2, Underflow)
-		;   T2 = node3(KL0, VL0, PK, PV, L, M2, R),
+		(	ChildUnderflow == true
+		->	fix_node3_middle_underflow(L, M2, R, KL0, VL0, PK, PV, T2, Underflow)
+		;	T2 = node3(KL0, VL0, PK, PV, L, M2, R),
 			Underflow = false
 		).
 	% --- Internal node3: Search left ---
 	delete_impl(node3(KL, VL, KR, VR, L, M, R), K, V, T2, Underflow) :-
 		K @< KL, !,
 		delete_impl(L, K, V, L2, ChildUnderflow),
-		(   ChildUnderflow == true
-		->  fix_node3_left_underflow(L2, M, R, KL, VL, KR, VR, T2, Underflow)
-		;   T2 = node3(KL, VL, KR, VR, L2, M, R),
+		(	ChildUnderflow == true
+		->	fix_node3_left_underflow(L2, M, R, KL, VL, KR, VR, T2, Underflow)
+		;	T2 = node3(KL, VL, KR, VR, L2, M, R),
 			Underflow = false
 		).
 	% --- Internal node3: Search middle ---
 	delete_impl(node3(KL, VL, KR, VR, L, M, R), K, V, T2, Underflow) :-
 		K @> KL, K @< KR, !,
 		delete_impl(M, K, V, M2, ChildUnderflow),
-		(   ChildUnderflow == true
-		->  fix_node3_middle_underflow(L, M2, R, KL, VL, KR, VR, T2, Underflow)
-		;   T2 = node3(KL, VL, KR, VR, L, M2, R),
+		(	ChildUnderflow == true
+		->	fix_node3_middle_underflow(L, M2, R, KL, VL, KR, VR, T2, Underflow)
+		;	T2 = node3(KL, VL, KR, VR, L, M2, R),
 			Underflow = false
 		).
 	% --- Internal node3: Search right ---
 	delete_impl(node3(KL, VL, KR, VR, L, M, R), K, V, T2, Underflow) :-
 		K @> KR, !,
 		delete_impl(R, K, V, R2, ChildUnderflow),
-		(   ChildUnderflow == true
-		->  fix_node3_right_underflow(L, M, R2, KL, VL, KR, VR, T2, Underflow)
-		;   T2 = node3(KL, VL, KR, VR, L, M, R2),
+		(	ChildUnderflow == true
+		->	fix_node3_right_underflow(L, M, R2, KL, VL, KR, VR, T2, Underflow)
+		;	T2 = node3(KL, VL, KR, VR, L, M, R2),
 			Underflow = false
 		).
 
@@ -562,22 +562,22 @@
 
 	fix_node2_left_underflow(L, R, K0, V0, T2, Underflow) :-
 		% Try borrow from right if it's a 3-node
-		(   R = node3(KL, VL, KR, VR, RL, RM, RR)
-		->  % Borrow: rotate left
+		(	R = node3(KL, VL, KR, VR, RL, RM, RR)
+		->	% Borrow: rotate left
 			T2 = node2(KL, VL, node2(K0, V0, L, RL), node2(KR, VR, RM, RR)),
 			Underflow = false
-		;   ( R = node3(KL, VL, KR, VR)
-			->  % Borrow from leaf 3-node
+		;	(	R = node3(KL, VL, KR, VR)
+			->	% Borrow from leaf 3-node
 				T2 = node2(KL, VL, node2(K0, V0), node2(KR, VR)),
 				Underflow = false
-			;   % Merge with right (R is node2)
-				( R = node2(KR, VR, RL, RR)
-				->  T2 = node3(K0, V0, KR, VR, L, RL, RR),
+			;	% Merge with right (R is node2)
+				(	R = node2(KR, VR, RL, RR)
+				->	T2 = node3(K0, V0, KR, VR, L, RL, RR),
 					Underflow = true
-				;   ( R = node2(KR, VR)
-					->  T2 = node3(K0, V0, KR, VR),
+				;	(	R = node2(KR, VR)
+					->	T2 = node3(K0, V0, KR, VR),
 						Underflow = true
-					;   false
+					;	false
 					)
 				)
 			)
@@ -591,22 +591,22 @@
 
 	fix_node2_right_underflow(L, R, K0, V0, T2, Underflow) :-
 		% Try borrow from left if it's a 3-node
-		( L = node3(KL, VL, KR, VR, LL, LM, LR)
-		->  % Borrow: rotate right
+		(	L = node3(KL, VL, KR, VR, LL, LM, LR)
+		->	% Borrow: rotate right
 			T2 = node2(KR, VR, node2(KL, VL, LL, LM), node2(K0, V0, LR, R)),
 			Underflow = false
-		;   ( L = node3(KL, VL, KR, VR)
-			->  % Borrow from leaf 3-node
+		;	(	L = node3(KL, VL, KR, VR)
+			->	% Borrow from leaf 3-node
 				T2 = node2(KR, VR, node2(KL, VL), node2(K0, V0)),
 				Underflow = false
-			;   % Merge with left (L is node2)
-				( L = node2(KL, VL, LL, LR)
-				->  T2 = node3(KL, VL, K0, V0, LL, LR, R),
+			;	% Merge with left (L is node2)
+				(	L = node2(KL, VL, LL, LR)
+				->	T2 = node3(KL, VL, K0, V0, LL, LR, R),
 					Underflow = true
-				;   ( L = node2(KL, VL)
-					->  T2 = node3(KL, VL, K0, V0),
+				;	(	L = node2(KL, VL)
+					->	T2 = node3(KL, VL, K0, V0),
 						Underflow = true
-					;   false
+					;	false
 					)
 				)
 			)
@@ -620,27 +620,27 @@
 
 	fix_node3_left_underflow(L, M, R, KL, VL, KR, VR, T2, Underflow) :-
 		% Try borrow from middle
-		(   M = node3(KML, VML, KMR, VMR, ML, MM, MR)
-		->  % Borrow from middle
+		(	M = node3(KML, VML, KMR, VMR, ML, MM, MR)
+		->	% Borrow from middle
 			T2 = node3(KML, VML, KR, VR,
 					node2(KL, VL, L, ML),
 					node2(KMR, VMR, MM, MR),
 					R),
 			Underflow = false
-		;   ( M = node3(KML, VML, KMR, VMR)
-			->  T2 = node3(KML, VML, KR, VR,
+		;	(	M = node3(KML, VML, KMR, VMR)
+			->	T2 = node3(KML, VML, KR, VR,
 						node2(KL, VL),
 						node2(KMR, VMR),
 						R),
 				Underflow = false
-			;   % Merge L and M
-				( M = node2(KM, VM, ML, MR)
-				->  T2 = node2(KR, VR, node3(KL, VL, KM, VM, L, ML, MR), R),
+			;	% Merge L and M
+				(	M = node2(KM, VM, ML, MR)
+				->	T2 = node2(KR, VR, node3(KL, VL, KM, VM, L, ML, MR), R),
 					Underflow = true
-				;   ( M = node2(KM, VM)
-					->  T2 = node2(KR, VR, node3(KL, VL, KM, VM), R),
+				;	(	M = node2(KM, VM)
+					->	T2 = node2(KR, VR, node3(KL, VL, KM, VM), R),
 						Underflow = true
-					;   false
+					;	false
 					)
 				)
 			)
@@ -654,41 +654,41 @@
 
 	fix_node3_middle_underflow(L, M, R, KL, VL, KR, VR, T2, Underflow) :-
 		% Prefer borrow from left
-		(   L = node3(KLL, VLL, KLR, VLR, LL, LM, LR)
-		->  % Borrow from left
+		(	L = node3(KLL, VLL, KLR, VLR, LL, LM, LR)
+		->	% Borrow from left
 			T2 = node3(KLR, VLR, KR, VR,
 					node2(KLL, VLL, LL, LM),
 					node2(KL, VL, LR, M),
 					R),
 			Underflow = false
-		;   ( L = node3(KLL, VLL, KLR, VLR)
-			->  T2 = node3(KLR, VLR, KR, VR,
+		;	(	L = node3(KLL, VLL, KLR, VLR)
+			->	T2 = node3(KLR, VLR, KR, VR,
 						node2(KLL, VLL),
 						node2(KL, VL),
 						R),
 				Underflow = false
-			;   % Try borrow from right
-				( R = node3(KRL, VRL, KRR, VRR, RL, RM, RR)
-				->  % Borrow from right
+			;	% Try borrow from right
+				(	R = node3(KRL, VRL, KRR, VRR, RL, RM, RR)
+				->	% Borrow from right
 					T2 = node3(KL, VL, KRL, VRL,
 							L,
 							node2(KR, VR, M, RL),
 							node2(KRR, VRR, RM, RR)),
 					Underflow = false
-				;   ( R = node3(KRL, VRL, KRR, VRR)
-					->  T2 = node3(KL, VL, KRL, VRL,
+				;	(	R = node3(KRL, VRL, KRR, VRR)
+					->	T2 = node3(KL, VL, KRL, VRL,
 								L,
 								node2(KR, VR),
 								node2(KRR, VRR)),
 						Underflow = false
-					;   % Merge with left
-						( L = node2(KL2, VL2, LL, LR)
-						->  T2 = node2(KR, VR, node3(KL2, VL2, KL, VL, LL, LR, M), R),
+					;	% Merge with left
+						(	L = node2(KL2, VL2, LL, LR)
+						->	T2 = node2(KR, VR, node3(KL2, VL2, KL, VL, LL, LR, M), R),
 							Underflow = true
-						;   ( L = node2(KL2, VL2)
-							->  T2 = node2(KR, VR, node3(KL2, VL2, KL, VL), R),
+						;	(	L = node2(KL2, VL2)
+							->	T2 = node2(KR, VR, node3(KL2, VL2, KL, VL), R),
 								Underflow = true
-							;   false
+							;	false
 							)
 						)
 					)
@@ -704,27 +704,27 @@
 
 	fix_node3_right_underflow(L, M, R, KL, VL, KR, VR, T2, Underflow) :-
 		% Try borrow from middle
-		(   M = node3(KML, VML, KMR, VMR, ML, MM, MR)
-		->  % Borrow from middle
+		(	M = node3(KML, VML, KMR, VMR, ML, MM, MR)
+		->	% Borrow from middle
 			T2 = node3(KL, VL, KMR, VMR,
 					L,
 					node2(KML, VML, ML, MM),
 					node2(KR, VR, MR, R)),
 			Underflow = false
-		;   ( M = node3(KML, VML, KMR, VMR)
-			->  T2 = node3(KL, VL, KMR, VMR,
+		;	(	M = node3(KML, VML, KMR, VMR)
+			->	T2 = node3(KL, VL, KMR, VMR,
 						L,
 						node2(KML, VML),
 						node2(KR, VR)),
 				Underflow = false
-			;   % Merge M and R
-				( M = node2(KM, VM, ML, MR)
-				->  T2 = node2(KL, VL, L, node3(KM, VM, KR, VR, ML, MR, R)),
+			;	% Merge M and R
+				(	M = node2(KM, VM, ML, MR)
+				->	T2 = node2(KL, VL, L, node3(KM, VM, KR, VR, ML, MR, R)),
 					Underflow = true
-				;   ( M = node2(KM, VM)
-					->  T2 = node2(KL, VL, L, node3(KM, VM, KR, VR)),
+				;	(	M = node2(KM, VM)
+					->	T2 = node2(KL, VL, L, node3(KM, VM, KR, VR)),
 						Underflow = true
-					;   false
+					;	false
 					)
 				)
 			)
@@ -733,7 +733,7 @@
 	:- private(as_curly_bracketed_impl/2).
 	:- mode(as_curly_bracketed_impl(+list(pairs), -term), one).
 	:- info(as_curly_bracketed_impl/2, [
-		comment is 'Builds a curly‑bracketed term from a list of key‑value pairs.'
+		comment is 'Builds a curly-bracketed term from a list of key-value pairs.'
 	]).
 
 	as_curly_bracketed_impl([], {}).
@@ -743,7 +743,7 @@
 	:- private(as_curly_bracketed_impl/3).
 	:- mode(as_curly_bracketed_impl(+list(pairs), +pair, -term), one).
 	:- info(as_curly_bracketed_impl/3, [
-		comment is 'Helper that accumulates a comma‑separated list inside curly braces.'
+		comment is 'Helper that accumulates a comma-separated list inside curly braces.'
 	]).
 
 	as_curly_bracketed_impl([], P, P).
@@ -757,15 +757,15 @@
 	]).
 
 	insert_impl(T0, K, V, T1) :-
-		( T0 == empty
-		->  insert_empty(T0, K, V, T1)
-		;   ( T0 = node2(K0, _), K0 \= K
-			->  insert_node2_2(T0, K, V, T1)
-			;   ( T0 = node2(K0, _, _, _), K0 \= K
-				->  insert_node2_4(T0, K, V, T1)
-				;   ( T0 = node3(KL, _, KR, _), K \= KL, K \= KR
-					->  insert_node3_4(T0, K, V, T1)
-					;   insert_node3_7(T0, K, V, T1)
+		(	T0 == empty
+		->	insert_empty(T0, K, V, T1)
+		;	(	T0 = node2(K0, _), K0 \= K
+			->	insert_node2_2(T0, K, V, T1)
+			;	(	T0 = node2(K0, _, _, _), K0 \= K
+				->	insert_node2_4(T0, K, V, T1)
+				;	(	T0 = node3(KL, _, KR, _), K \= KL, K \= KR
+					->	insert_node3_4(T0, K, V, T1)
+					;	insert_node3_7(T0, K, V, T1)
 					)
 				)
 			)
@@ -782,43 +782,43 @@
 	:- private(insert_node2_2/4).
 	:- mode(insert_node2_2(+term, +term, +term, -term), one).
 	:- info(insert_node2_2/4, [
-		comment is 'Inserts a key‑value pair into a leaf 2‑node, creating a leaf 3‑node.'
+		comment is 'Inserts a key-value pair into a leaf 2-node, creating a leaf 3-node.'
 	]).
 
 	insert_node2_2(node2(K0, V0), K, V, T1) :-
-		( K @< K0
-		->  T1 = node3(K, V, K0, V0)
-		;   T1 = node3(K0, V0, K, V)
+		(	K @< K0
+		->	T1 = node3(K, V, K0, V0)
+		;	T1 = node3(K0, V0, K, V)
 		).
 
 	:- private(insert_node2_4/4).
 	:- mode(insert_node2_4(+term, +term, +term, -term), one).
 	:- info(insert_node2_4/4, [
-		comment is 'Inserts into a non‑leaf 2‑node, possibly splitting a child 4‑node.'
+		comment is 'Inserts into a non-leaf 2-node, possibly splitting a child 4-node.'
 	]).
 
 	insert_node2_4(node2(K0, V0, L0, R0), K, V, T1) :-
-		( K @< K0
-		->  insert_impl(L0, K, V, L1), R1 = R0
-		;   insert_impl(R0, K, V, R1), L1 = L0
+		(	K @< K0
+		->	insert_impl(L0, K, V, L1), R1 = R0
+		;	insert_impl(R0, K, V, R1), L1 = L0
 		),
-		( L1 = node4(KL, VL, KM, VM, KR, VR)
-		->  IL = node2(KL, VL),
+		(	L1 = node4(KL, VL, KM, VM, KR, VR)
+		->	IL = node2(KL, VL),
 			IR = node2(KR, VR),
 			T1 = node3(KM, VM, K0, V0, IL, IR, R0)
-		;   ( L1 = node4(KL, VL, KM, VM, KR, VR, FL, L, R, FR)
-			->  IL = node2(KL, VL, FL, L),
+		;	(	L1 = node4(KL, VL, KM, VM, KR, VR, FL, L, R, FR)
+			->	IL = node2(KL, VL, FL, L),
 				IR = node2(KR, VR, R, FR),
 				T1 = node3(KM, VM, K0, V0, IL, IR, R0)
-			;   ( R1 = node4(KL, VL, KM, VM, KR, VR, FL, L, R, FR)
-				->  IL = node2(KL, VL, FL, L),
+			;	(	R1 = node4(KL, VL, KM, VM, KR, VR, FL, L, R, FR)
+				->	IL = node2(KL, VL, FL, L),
 					IR = node2(KR, VR, R, FR),
 					T1 = node3(K0, V0, KM, VM, L0, IL, IR)
-				;   ( R1 = node4(KL, VL, KM, VM, KR, VR)
-					->  IL = node2(KL, VL),
+				;	(	R1 = node4(KL, VL, KM, VM, KR, VR)
+					->	IL = node2(KL, VL),
 						IR = node2(KR, VR),
 						T1 = node3(K0, V0, KM, VM, L0, IL, IR)
-					;   T1 = node2(K0, V0, L1, R1)
+					;	T1 = node2(K0, V0, L1, R1)
 					)
 				)
 			)
@@ -827,57 +827,57 @@
 	:- private(insert_node3_4/4).
 	:- mode(insert_node3_4(+term, +term, +term, -term), one).
 	:- info(insert_node3_4/4, [
-		comment is 'Inserts a key‑value pair into a leaf 3‑node, creating a leaf 4‑node.'
+		comment is 'Inserts a key-value pair into a leaf 3-node, creating a leaf 4-node.'
 	]).
 
 	insert_node3_4(node3(KL, VL, KR, VR), K, V, T1) :-
-		( K @< KL
-		->  T1 = node4(K, V, KL, VL, KR, VR)
-		;   ( K @< KR
-			->  T1 = node4(KL, VL, K, V, KR, VR)
-			;   T1 = node4(KL, VL, KR, VR, K, V)
+		(	K @< KL
+		->	T1 = node4(K, V, KL, VL, KR, VR)
+		;	(	K @< KR
+			->	T1 = node4(KL, VL, K, V, KR, VR)
+			;	T1 = node4(KL, VL, KR, VR, K, V)
 			)
 		).
 
 	:- private(insert_node3_7/4).
 	:- mode(insert_node3_7(+term, +term, +term, -term), one).
 	:- info(insert_node3_7/4, [
-		comment is 'Inserts into a non‑leaf 3‑node, possibly splitting a child 4‑node.'
+		comment is 'Inserts into a non-leaf 3-node, possibly splitting a child 4-node.'
 	]).
 
 	insert_node3_7(node3(KL0, VL0, KR0, VR0, L0, M0, R0), K, V, T1) :-
 		( K @< KL0
-		->  insert_impl(L0, K, V, L1), M1 = M0, R1 = R0
-		;   ( K @< KR0
-			->  insert_impl(M0, K, V, M1), L1 = L0, R1 = R0
-			;   insert_impl(R0, K, V, R1), L1 = L0, M1 = M0
+		->	insert_impl(L0, K, V, L1), M1 = M0, R1 = R0
+		;	(	K @< KR0
+			->	insert_impl(M0, K, V, M1), L1 = L0, R1 = R0
+			;	insert_impl(R0, K, V, R1), L1 = L0, M1 = M0
 			)
 		),
-		( L1 = node4(KL, VL, KM, VM, KR, VR, FL, L, R, FR)
-		->  IL = node2(KL, VL, FL, L),
+		(	L1 = node4(KL, VL, KM, VM, KR, VR, FL, L, R, FR)
+		->	IL = node2(KL, VL, FL, L),
 			IR = node2(KR, VR, R, FR),
 			T1 = node4(KM, VM, KL0, VL0, KR0, VR0, IL, IR, M0, R0)
-		;   ( L1 = node4(KL, VL, KM, VM, KR, VR)
-			->  IL = node2(KL, VL),
+		;	(	L1 = node4(KL, VL, KM, VM, KR, VR)
+			->	IL = node2(KL, VL),
 				IR = node2(KR, VR),
 				T1 = node4(KM, VM, KL0, VL0, KR0, VR0, IL, IR, M0, R0)
-			;   ( M1 = node4(KL, VL, KM, VM, KR, VR, FL, L, R, FR)
-				->  IL = node2(KL, VL, FL, L),
+			;	(	M1 = node4(KL, VL, KM, VM, KR, VR, FL, L, R, FR)
+				->	IL = node2(KL, VL, FL, L),
 					IR = node2(KR, VR, R, FR),
 					T1 = node4(KL0, VL0, KM, VM, KR0, VR0, L0, IL, IR, R0)
-				;   ( M1 = node4(KL, VL, KM, VM, KR, VR)
-					->  IL = node2(KL, VL),
+				;	(	M1 = node4(KL, VL, KM, VM, KR, VR)
+					->	IL = node2(KL, VL),
 						IR = node2(KR, VR),
 						T1 = node4(KL0, VL0, KM, VM, KR0, VR0, L0, IL, IR, R0)
-					;   ( R1 = node4(KL, VL, KM, VM, KR, VR, FL, L, R, FR)
-						->  IL = node2(KL, VL, FL, L),
+					;	(	R1 = node4(KL, VL, KM, VM, KR, VR, FL, L, R, FR)
+						->	IL = node2(KL, VL, FL, L),
 							IR = node2(KR, VR, R, FR),
 							T1 = node4(KL0, VL0, KR0, VR0, KM, VM, L0, M0, IL, IR)
-						;   ( R1 = node4(KL, VL, KM, VM, KR, VR)
-							->  IL = node2(KL, VL),
+						;	(	R1 = node4(KL, VL, KM, VM, KR, VR)
+							->	IL = node2(KL, VL),
 								IR = node2(KR, VR),
 								T1 = node4(KL0, VL0, KR0, VR0, KM, VM, L0, M0, IL, IR)
-							;   T1 = node3(KL0, VL0, KR0, VR0, L1, M1, R1)
+							;	T1 = node3(KL0, VL0, KR0, VR0, L1, M1, R1)
 							)
 						)
 					)
@@ -888,21 +888,21 @@
 	:- private(intersection_impl/4).
 	:- mode(intersection_impl(+list(pair), +two3tree, +list(pair), -list(pair)), zero_or_one).
 	:- info(intersection_impl/4, [
-		comment is 'Computes the intersection of a list of key‑value pairs with a tree, inserting common pairs into an accumulator.'
+		comment is 'Computes the intersection of a list of key-value pairs with a tree, inserting common pairs into an accumulator.'
 	]).
 
 	intersection_impl([], _, I, I).
 	intersection_impl([K-V0|KVs], T, I0, I) :-
-		( lookup(K, V1, T)
-		->  V0 = V1,
+		(	lookup(K, V1, T)
+		->	V0 = V1,
 			insert(I0, K, V1, I1)
-		;   I1 = I0 ),
+		;	I1 = I0 ),
 		intersection_impl(KVs, T, I1, I).
 
 	:- private(is_node4/1).
 	:- mode(is_node4(+term), zero_or_one).
 	:- info(is_node4/1, [
-		comment is 'True if the term is a 4‑node (temporary representation).'
+		comment is 'True if the term is a 4-node (temporary representation).'
 	]).
 
 	is_node4(node4(_, _, _, _, _, _)).
@@ -912,7 +912,7 @@
 	:- mode(map_impl(+two3tree, @callable), zero_or_more).
 	:- meta_predicate(map_impl(*, 1)).
 	:- info(map_impl/2, [
-		comment is 'Traverses the tree and applies a closure to each key‑value pair.'
+		comment is 'Traverses the tree and applies a closure to each key-value pair.'
 	]).
 
 	map_impl(empty, _).
@@ -936,7 +936,7 @@
 	:- mode(map_impl(+two3tree, @callable, -two3tree), zero_or_more).
 	:- meta_predicate(map_impl(*, 2, *)).
 	:- info(map_impl/3, [
-		comment is 'Traverses the tree, applies a closure to each key‑value pair, and builds a new tree with the results.'
+		comment is 'Traverses the tree, applies a closure to each key-value pair, and builds a new tree with the results.'
 	]).
 
 	map_impl(empty, _, empty).
@@ -963,7 +963,7 @@
 	:- private(next_impl/5).
 	:- mode(next_impl(+two3tree, +key, -key, -value, +term), zero_or_one).
 	:- info(next_impl/5, [
-		comment is 'Recursively finds the next key‑value pair after a given key.'
+		comment is 'Recursively finds the next key-value pair after a given key.'
 	]).
 
 	next_impl(empty, _, _, _, _) :-
@@ -979,24 +979,24 @@
 		min(R, NK, NV).
 	next_impl(node2(K0, V0, L, _), K, NK, NV, _) :-
 		K @< K0, !,
-		( next_impl(L, K, NK, NV, K0-V0)
-		->  true
-		;   NK = K0, NV = V0
+		(	next_impl(L, K, NK, NV, K0-V0)
+		->	true
+		;	NK = K0, NV = V0
 		).
 	next_impl(node2(K0, _, _, R), K, NK, NV, _) :-
 		K @> K0, !,
 		next_impl(R, K, NK, NV, _).
 	next_impl(node3(KL, VL, _, _, L, _, _), K, NK, NV, _) :-
 		K @< KL, !,
-		( next_impl(L, K, NK, NV, KL-VL)
-		->  true
-		;   NK = KL, NV = VL
+		(	next_impl(L, K, NK, NV, KL-VL)
+		->	true
+		;	NK = KL, NV = VL
 		).
 	next_impl(node3(KL, _, KR, VR, _, M, _), K, NK, NV, _) :-
 		K @> KL, K @< KR, !,
-		( next_impl(M, K, NK, NV, KR-VR)
-		->  true
-		;   NK = KR, NV = VR
+		(	next_impl(M, K, NK, NV, KR-VR)
+		->	true
+		;	NK = KR, NV = VR
 		).
 	next_impl(node3(_, _, KR, _, _, _, R), K, NK, NV, _) :-
 		K @> KR, !,
@@ -1004,38 +1004,38 @@
 	next_impl(node2(K0, _), K, NK, NV, Succ) :-
 		K @< K0, !,
 		( Succ \= none
-		->  Succ = NK-NV
-		;   fail
+		->	Succ = NK-NV
+		;	fail
 		).
 	next_impl(node3(KL, _, _, _), K, NK, NV, Succ) :-
 		K @< KL, !,
-		( Succ \= none
-		->  Succ = NK-NV
-		;   fail
+		(	Succ \= none
+		->	Succ = NK-NV
+		;	fail
 		).
 	next_impl(node3(KL, _, KR, VR), K, NK, NV, _) :-
 		K @> KL, K @< KR, !,
 		NK = KR, NV = VR.
 	next_impl(node2(K0, _), K, NK, NV, Succ) :-
 		K = K0, !,
-		( Succ \= none
-		->  Succ = NK-NV
-		;   fail
+		(	Succ \= none
+		->	Succ = NK-NV
+		;	fail
 		).
 	next_impl(node3(KL, _, KR, VR), K, NK, NV, _) :-
 		K = KL, !,
 		NK = KR, NV = VR.
 	next_impl(node3(_, _, KR, _), K, NK, NV, Succ) :-
 		K = KR, !,
-		( Succ \= none
-		->  Succ = NK-NV
-		;   fail
+		(	Succ \= none
+		->	Succ = NK-NV
+		;	fail
 		).
 
 	:- private(previous_impl/5).
 	:- mode(previous_impl(+two3tree, +key, -key, -value, +term), zero_or_one).
 	:- info(previous_impl/5, [
-		comment is 'Recursively finds the previous key‑value pair before a given key.'
+		comment is 'Recursively finds the previous key-value pair before a given key.'
 	]).
 
 	previous_impl(empty, _, _, _, _) :-
@@ -1051,39 +1051,39 @@
 		max(M, PK, PV).
 	previous_impl(node2(K0, V0, _, R), K, PK, PV, _) :-
 		K @> K0, !,
-		( previous_impl(R, K, PK, PV, K0-V0)
-		->  true
-		;   PK = K0, PV = V0
+		(	previous_impl(R, K, PK, PV, K0-V0)
+		->	true
+		;	PK = K0, PV = V0
 		).
 	previous_impl(node2(K0, _, L, _), K, PK, PV, _) :-
 		K @< K0, !,
 		previous_impl(L, K, PK, PV, _).
 	previous_impl(node3(_, _, KR, VR, _, _, R), K, PK, PV, _) :-
 		K @> KR, !,
-		( previous_impl(R, K, PK, PV, KR-VR)
-		->  true
-		;   PK = KR, PV = VR
+		(	previous_impl(R, K, PK, PV, KR-VR)
+		->	true
+		;	PK = KR, PV = VR
 		).
 	previous_impl(node3(KL, VL, KR, _, _, M, _), K, PK, PV, _) :-
 		K @> KL, K @< KR, !,
-		( previous_impl(M, K, PK, PV, KL-VL)
-		->  true
-		;   PK = KL, PV = VL
+		(	previous_impl(M, K, PK, PV, KL-VL)
+		->	true
+		;	PK = KL, PV = VL
 		).
 	previous_impl(node3(KL, _, _, _, L, _, _), K, PK, PV, _) :-
 		K @< KL, !,
 		previous_impl(L, K, PK, PV, _).
 	previous_impl(node2(K0, _), K, PK, PV, Succ) :-
 		K @> K0, !,
-		( Succ \= none
-		->  Succ = PK-PV
-		; fail
+		(	Succ \= none
+		->	Succ = PK-PV
+		;	fail
 		).
 	previous_impl(node3(_, _, KR, VR), K, PK, PV, Succ) :-
 		K @> KR, !,
-		( Succ \= none
-		->  Succ = PK-PV
-		;   PK = KR,
+		(	Succ \= none
+		->	Succ = PK-PV
+		;	PK = KR,
 			PV = VR
 		).
 	previous_impl(node3(KL, VL, KR, _), K, PK, PV, _) :-
@@ -1091,15 +1091,15 @@
 		PK = KL, PV = VL.
 	previous_impl(node2(K0, _), K, PK, PV, Succ) :-
 		K = K0, !,
-		( Succ \= none
-		->  Succ = PK-PV
-		;   fail
+		(	Succ \= none
+		->	Succ = PK-PV
+		;	fail
 		).
 	previous_impl(node3(KL, _, _, _), K, PK, PV, Succ) :-
 		K = KL, !,
-		( Succ \= none
-		->  Succ = PK-PV
-		;   fail
+		(	Succ \= none
+		->	Succ = PK-PV
+		;	fail
 		).
 	previous_impl(node3(KL, VL, KR, _), K, PK, PV, _) :-
 		K = KR, !,
@@ -1108,7 +1108,7 @@
 	:- private(node2_from_node4/2).
 	:- mode(node2_from_node4(+term, -term), one).
 	:- info(node2_from_node4/2, [
-		comment is 'Converts a 4‑node (temporary) into a balanced 2‑node with two 2‑node children.'
+		comment is 'Converts a 4-node (temporary) into a balanced 2-node with two 2-node children.'
 	]).
 
 	node2_from_node4(node4(KL, VL, KM, VM, KR, VR), node2(KM, VM, node2(KL, VL), node2(KR, VR))).
@@ -1117,7 +1117,7 @@
 	:- private(update_impl/3).
 	:- mode(update_impl(@list(pair), +two3tree, -two3tree), zero_or_one).
 	:- info(update_impl/3, [
-		comment is 'Updates a dictionary with a list of key‑value pairs sequentially.'
+		comment is 'Updates a dictionary with a list of key-value pairs sequentially.'
 	]).
 
 	update_impl([K-V|KVs], T0, T2) :-
