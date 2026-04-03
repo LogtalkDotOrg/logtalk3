@@ -14,8 +14,8 @@ Portable operating-system access protocol.
 |    ``logtalk_load(os(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:42:0
-| **Date:** 2026-03-02
+| **Version:** 1:43:0
+| **Date:** 2026-04-03
 
 | **Compilation flags:**
 |    ``static``
@@ -351,7 +351,7 @@ Current working directory.
 ``temporary_directory/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Temporary directory. Tries first environment variables: ``TEMP`` and ``TMP`` on Windows systems; ``TMPDIR``, ``TMP``, ``TEMP``, and ``TEMPDIR`` on POSIX systems. When not defined, tries default locations. Returns the working directory as last resort.
+Temporary directory. Tries first environment variables: ``TEMP`` and ``TMP`` on Windows systems; ``TMPDIR`` on POSIX systems. When not defined, tries default locations. Returns the working directory as last resort.
 
 | **Compilation flags:**
 |    ``static``
