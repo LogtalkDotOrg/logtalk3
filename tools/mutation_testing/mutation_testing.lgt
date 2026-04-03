@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-26,
+		date is 2026-04-03,
 		comment is 'Mutation testing tool.'
 	]).
 
@@ -244,10 +244,11 @@
 	]).
 
 	:- uses(os, [
-		directory_exists/1, environment_variable/2, make_directory_path/1,
+		file_exists/1, directory_exists/1, environment_variable/2, make_directory_path/1,
 		operating_system_machine/1, operating_system_name/1, operating_system_release/1,
 		operating_system_type/1, path_concat/3, pid/1, shell/2, temporary_directory/1, wall_time/1,
-		is_absolute_file_name/1
+		is_absolute_file_name/1, decompose_file_name/4, delete_directory_and_contents/1,
+		internal_os_path/2
 	]).
 
 	:- uses(term_io, [
@@ -471,7 +472,7 @@
 		tester_directory(SourceFile, Directory, Options).
 	report_tester_directory(_Report, Options, Directory) :-
 		(   ^^option(tester_directory(Directory), Options),
-			os::directory_exists(Directory) ->
+			directory_exists(Directory) ->
 			true
 		;   logtalk::expand_library_path(startup, Directory)
 		).
@@ -485,12 +486,12 @@
 	report_extension(json, '.json').
 
 	with_extension(Path, Extension, File) :-
-		os::decompose_file_name(Path, Directory, Name, _),
+		decompose_file_name(Path, Directory, Name, _),
 		atom_concat(Name, Extension, FileName),
 		path_concat(Directory, FileName, File).
 
 	write_report_file(File, Format, Report) :-
-		os::decompose_file_name(File, Directory, _Name, _Extension),
+		decompose_file_name(File, Directory, _Name, _Extension),
 		make_directory_path(Directory),
 		open(File, write, Stream),
 		format_report(Stream, Format, Report),
@@ -965,7 +966,7 @@
 	run_coverage_subprocess(TempDir, SourceFile, Timeout, Verbose, ExitStatus, Options) :-
 		tester_directory(SourceFile, Directory, Options),
 		^^option(tester_file_name(Tester), Options),
-		os::decompose_file_name(Tester, _, TesterName, _),
+		decompose_file_name(Tester, _, TesterName, _),
 		current_logtalk_flag(prolog_dialect, Dialect),
 		path_concat(TempDir, 'coverage_config.pl', ConfigFile),
 		path_concat(TempDir, 'logs', LogsDir),
@@ -973,12 +974,14 @@
 		initialization_goal_coverage(ConfigFile, Goal),
 		logtalk_tester_script_name(LogtalkTester),
 		redirect(Verbose, Redirect),
+		internal_os_path(Directory, DirectoryOS),
+		internal_os_path(LogsDir, LogsDirOS),
 		atomic_list_concat([
-			'cd "', Directory, '" && ', LogtalkTester,
+			'cd "', DirectoryOS, '" && ', LogtalkTester,
 			' -p ', Dialect,
 			' -n ', TesterName,
 			' -g "', Goal, '"',
-			' -d "', LogsDir, '"',
+			' -d "', LogsDirOS, '"',
 			' -t ', Timeout,
 			Redirect
 		], Command),
@@ -1021,7 +1024,7 @@
 		% derive test directory from source file or startup directory
 		tester_directory(SourceFile, Directory, Options),
 		^^option(tester_file_name(Tester), Options),
-		os::decompose_file_name(Tester, _, TesterName, _),
+		decompose_file_name(Tester, _, TesterName, _),
 		% auto-detect backend
 		current_logtalk_flag(prolog_dialect, Dialect),
 		% build paths
@@ -1034,12 +1037,14 @@
 		% unless verbose mode is enabled
 		logtalk_tester_script_name(LogtalkTester),
 		redirect(Verbose, Redirect),
+		internal_os_path(Directory, DirectoryOS),
+		internal_os_path(LogsDir, LogsDirOS),
 		atomic_list_concat([
-			'cd "', Directory, '" && ', LogtalkTester,
+			'cd "', DirectoryOS, '" && ', LogtalkTester,
 			' -p ', Dialect,
 			' -n ', TesterName,
 			' -g "', Goal, '"',
-			' -d "', LogsDir, '"',
+			' -d "', LogsDirOS, '"',
 			' -t ', Timeout,
 			Redirect
 		], Command),
@@ -1049,7 +1054,7 @@
 
 	tester_directory(_SourceFile, Directory, Options) :-
 		^^option(tester_directory(Directory), Options),
-		os::directory_exists(Directory),
+		directory_exists(Directory),
 		!.
 	tester_directory(SourceFile, Directory, Options) :-
 		^^option(tester_file_name(Tester), Options),
@@ -1057,14 +1062,14 @@
 		;	logtalk::expand_library_path(startup, Directory)
 		),
 		path_concat(Directory, Tester, Path),
-		os::file_exists(Path),
+		file_exists(Path),
 		!.
 
 	logtalk_tester_script_name(LogtalkTester) :-
-		(	os::operating_system_type(windows) ->
+		(	operating_system_type(windows) ->
 			LogtalkTester = 'pwsh -File "%SystemRoot%/logtalk_tester.ps1"'
-		;	os::environment_variable('LOGTALKHOME', LOGTALKHOME),
-			os::environment_variable('LOGTALKUSER', LOGTALKUSER),
+		;	environment_variable('LOGTALKHOME', LOGTALKHOME),
+			environment_variable('LOGTALKUSER', LOGTALKUSER),
 			LOGTALKHOME == LOGTALKUSER ->
 			LogtalkTester = 'logtalk_tester.sh'
 		;	LogtalkTester = 'logtalk_tester'
@@ -1072,7 +1077,7 @@
 
 	redirect(true, '').
 	redirect(false, Redirect) :-
-		(   os::operating_system_type(windows) ->
+		(   operating_system_type(windows) ->
 			Redirect = ' > NUL 2>&1'
 		;   Redirect = ' > /dev/null 2>&1'
 		).
@@ -1110,7 +1115,7 @@
 
 	cleanup_temp_dir(TempDir) :-
 		(	directory_exists(TempDir) ->
-			catch(os::delete_directory_and_contents(TempDir), _, true)
+			catch(delete_directory_and_contents(TempDir), _, true)
 		;	true
 		).
 
@@ -1254,7 +1259,7 @@
 		file_results_project_root(FileResults, [Directory| Directories0], ProjectRoot).
 
 	file_result_directory(File, Directory) :-
-		os::decompose_file_name(File, Directory0, _Name, _Extension),
+		decompose_file_name(File, Directory0, _Name, _Extension),
 		normalize_directory(Directory0, Directory).
 
 	common_directory([Directory], Directory) :-

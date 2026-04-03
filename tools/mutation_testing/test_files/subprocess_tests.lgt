@@ -17,7 +17,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-09,
+		date is 2026-04-03,
 		comment is 'Tests exercising test entities, run by mutation testing subprocesses to detect mutants.'
 	]).
 
@@ -26,67 +26,67 @@
 	cover(mt_dcg_sample).
 	cover(mt_code_coverage).
 
-	test(mt_check_positive, true) :-
+	test(mt_subprocess_check_positive, true) :-
 		mt_sample::check(1).
 
-	test(mt_check_negative, true) :-
+	test(mt_subprocess_check_negative, true) :-
 		mt_sample::check(-1).
 
-	test(mt_target_positive, true(Y == 2)) :-
+	test(mt_subprocess_target_positive, true(Y == 2)) :-
 		mt_sample::target(1, Y).
 
-	test(mt_target_negative, true(Y == -2)) :-
+	test(mt_subprocess_target_negative, true(Y == -2)) :-
 		mt_sample::target(-1, Y).
 
-	test(mt_term_check, true) :-
+	test(mt_subprocess_term_check, true) :-
 		mt_sample::term_check.
 
-	test(mt_always_true, true) :-
+	test(mt_subprocess_always_true, true) :-
 		mt_sample::always_true.
 
-	test(mt_always_false, fail) :-
+	test(mt_subprocess_always_false, fail) :-
 		mt_sample::always_false.
 
-	test(mt_multi_clause, true) :-
+	test(mt_subprocess_multi_clause, true) :-
 		mt_sample::multi_clause_check.
 
-	test(mt_neg_multi, true) :-
+	test(mt_subprocess_neg_multi, true) :-
 		mt_sample::neg_multi_check.
 
-	test(mt_disj_cmp, true) :-
+	test(mt_subprocess_disj_cmp, true) :-
 		mt_sample::disj_cmp_check.
 
-	test(mt_arithmetic_value, true(Value == 5)) :-
+	test(mt_subprocess_arithmetic_value, true(Value == 5)) :-
 		mt_sample::arithmetic_value(Value).
 
-	test(mt_truth_choice, true) :-
+	test(mt_subprocess_truth_choice, true) :-
 		mt_sample::truth_choice.
 
-	test(mt_pair_match, true) :-
+	test(mt_subprocess_pair_match, true) :-
 		mt_sample::pair_match_check.
 
-	test(mt_ordered_choice, true(Value == first)) :-
+	test(mt_subprocess_ordered_choice, true(Value == first)) :-
 		mt_sample::ordered_choice_check(Value).
 
-	test(mt_head_bound, true) :-
+	test(mt_subprocess_head_bound, true) :-
 		mt_sample::head_bound_atom_integer_check.
 
-	test(mt_other_check_positive, true) :-
+	test(mt_subprocess_other_check_positive, true) :-
 		mt_other_sample::check(1).
 
-	test(mt_other_check_zero, fail) :-
+	test(mt_subprocess_other_check_zero, fail) :-
 		mt_other_sample::check(0).
 
-	test(mt_code_coverage, true) :-
+	test(mt_subprocess_code_coverage, true) :-
 		mt_code_coverage::p(3, 4).
 
-	test(mt_fail_insertion, true) :-
+	test(mt_subprocess_fail_insertion, true) :-
 		mt_fail_insertion::a.
 
-	test(mt_clauses_reordering, true(L == [1,2,3])) :-
+	test(mt_subprocess_clauses_reordering, true(L == [1,2,3])) :-
 		findall(X, mt_clauses_reordering::p(X), L).
 
-	test(mt_body_goal_negation, true) :-
+	test(mt_subprocess_body_goal_negation, true) :-
 		mt_body_goal_negation::a.
 
 :- end_object.
