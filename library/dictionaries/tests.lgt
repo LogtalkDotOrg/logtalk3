@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:11:0,
+		version is 1:12:0,
 		author is 'Paulo Moura',
-		date is 2026-02-10,
+		date is 2026-04-04,
 		comment is 'Unit tests for the "dictionaries" library.',
 		parnames is ['DictionaryObject']
 	]).
@@ -538,6 +538,9 @@
 	deterministic(dictionary_valid_1_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		valid(Dictionary).
+
+	deterministic(dictionary_valid_1_03) :-
+		\+ valid(_).
 
 	% new/1 tests
 

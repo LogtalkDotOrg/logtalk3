@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Michael T. Richter',
-		date is 2026-04-03,
+		date is 2026-04-04,
 		comment is '2-3 tree implementation.',
 		see_also is [avltree, bintree, rbtree, splaytree, dictionaryp]
 	]).
@@ -266,29 +266,6 @@
 	% term extensions
 	%-------------------
 
-	:- public(check/1).
-	:- mode(check(+term), one).
-	:- info(check/1, [
-		comment is 'Checks the validity of a 2-3 tree, ensuring it is instantiated.',
-		argnames is ['Tree']
-	]).
-
-	check(T) :-
-		(	var(T)
-		->	instantiation_error
-		;	(	valid(T)
-			->	true
-			;	type_error(two3tree, T)
-			)
-		).
-
-	:- public(depth/2).
-	:- mode(depth(+term, -term), one).
-	:- info(depth/2, [
-		comment is 'Calculates the depth of a 2-3 tree.',
-		argnames is ['Tree', 'Depth']
-	]).
-
 	depth(empty, 0).
 	depth(node2(_, _), 1).
 	depth(node2(_, _, L, _), S1) :-
@@ -299,33 +276,23 @@
 		depth(L, S0),
 		S1 is S0 + 1.
 
-	:- public(new/1).
-	:- mode(new(?term), one).
-	:- info(new/1, [
-		comment is 'Unifies the passed-in tree with an empty tree.',
-		argnames is ['Tree']
-	]).
-
 	new(empty).
 
-	:- public(valid/1).
-	:- mode(valid(?term), one).
-	:- info(valid/1, [
-		comment is 'Checks the validity of a 2-3 tree, does not check for instantiation.',
-		argnames is ['Tree']
-	]).
+	valid(Term) :-
+		nonvar(Term),
+		valid_(Term).
 
-	valid(empty).
-	valid(node2(K, _)) :-
+	valid_(empty).
+	valid_(node2(K, _)) :-
 		nonvar(K).
-	valid(node2(K, _, L, R)) :-
+	valid_(node2(K, _, L, R)) :-
 		nonvar(K),
 		valid(L), valid(R),
 		depth(L, DL), depth(R, DR),
 		DL == DR.
-	valid(node3(KL, _, KR, _)) :-
+	valid_(node3(KL, _, KR, _)) :-
 		nonvar(KL), nonvar(KR).
-	valid(node3(KL, _, KR, _, L, M, R)) :-
+	valid_(node3(KL, _, KR, _, L, M, R)) :-
 		nonvar(KL), nonvar(KR),
 		valid(L), valid(M), valid(R),
 		depth(L, DL), depth(M, DM), depth(R, DR),
@@ -334,9 +301,6 @@
 	%-------------------
 	% Implementation helpers.
 	%-------------------
-
-	:- public(lookup_nonvar/3).  % used by next/4 and previous/4
-	:- mode(lookup_nonvar(@two3tree, +ground, ?term), zero_or_one).
 
 	lookup_nonvar(node2(K, V), K, V).
 	lookup_nonvar(node2(NK, NV, L, R), K, V) :-
