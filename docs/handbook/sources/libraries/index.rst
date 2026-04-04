@@ -66,6 +66,7 @@ directory in the ``NOTES.md`` file.
    git
    grammars
    graphs
+   hashes
    heaps
    hierarchies
    hook_flows

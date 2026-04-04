@@ -1,0 +1,320 @@
+.. index:: single: hash_common_32
+.. _hash_common_32/0:
+
+.. rst-class:: right
+
+**object**
+
+``hash_common_32``
+==================
+
+Auxiliary predicates for the hashes library 32-bit algorithms.
+
+| **Availability:** 
+|    ``logtalk_load(hashes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-04
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: word32_hex/2
+.. _hash_common_32/0::word32_hex/2:
+
+``word32_hex/2``
+^^^^^^^^^^^^^^^^
+
+Converts a 32-bit word into an 8-digit lowercase hexadecimal atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``word32_hex(Word,Hex)``
+| **Mode and number of proofs:**
+|    ``word32_hex(+integer,-atom)`` - ``one``
+
+
+------------
+
+.. index:: bytes_hex/2
+.. _hash_common_32/0::bytes_hex/2:
+
+``bytes_hex/2``
+^^^^^^^^^^^^^^^
+
+Converts a list of bytes into a lowercase hexadecimal atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bytes_hex(Bytes,Hex)``
+| **Mode and number of proofs:**
+|    ``bytes_hex(+list(integer),-atom)`` - ``one``
+
+
+------------
+
+.. index:: mask32/1
+.. _hash_common_32/0::mask32/1:
+
+``mask32/1``
+^^^^^^^^^^^^
+
+Returns the 32-bit mask value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mask32(Mask)``
+| **Mode and number of proofs:**
+|    ``mask32(-integer)`` - ``one``
+
+
+------------
+
+.. index:: add32/3
+.. _hash_common_32/0::add32/3:
+
+``add32/3``
+^^^^^^^^^^^
+
+Adds two integers modulo 2^32.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add32(A,B,Sum)``
+| **Mode and number of proofs:**
+|    ``add32(+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: add32/4
+.. _hash_common_32/0::add32/4:
+
+``add32/4``
+^^^^^^^^^^^
+
+Adds three integers modulo 2^32.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add32(A,B,C,Sum)``
+| **Mode and number of proofs:**
+|    ``add32(+integer,+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: add32/5
+.. _hash_common_32/0::add32/5:
+
+``add32/5``
+^^^^^^^^^^^
+
+Adds four integers modulo 2^32.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add32(A,B,C,D,Sum)``
+| **Mode and number of proofs:**
+|    ``add32(+integer,+integer,+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: mul32/3
+.. _hash_common_32/0::mul32/3:
+
+``mul32/3``
+^^^^^^^^^^^
+
+Multiplies two integers modulo 2^32.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mul32(A,B,Product)``
+| **Mode and number of proofs:**
+|    ``mul32(+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: rol32/3
+.. _hash_common_32/0::rol32/3:
+
+``rol32/3``
+^^^^^^^^^^^
+
+Rotates a 32-bit word left by the given number of bits.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rol32(Value,Shift,Rotated)``
+| **Mode and number of proofs:**
+|    ``rol32(+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: ror32/3
+.. _hash_common_32/0::ror32/3:
+
+``ror32/3``
+^^^^^^^^^^^
+
+Rotates a 32-bit word right by the given number of bits.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ror32(Value,Shift,Rotated)``
+| **Mode and number of proofs:**
+|    ``ror32(+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: little_endian_word32/2
+.. _hash_common_32/0::little_endian_word32/2:
+
+``little_endian_word32/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Decodes four bytes in little-endian order into a 32-bit word.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``little_endian_word32(Bytes,Word)``
+| **Mode and number of proofs:**
+|    ``little_endian_word32(+list(integer),-integer)`` - ``one``
+
+
+------------
+
+.. index:: big_endian_word32/2
+.. _hash_common_32/0::big_endian_word32/2:
+
+``big_endian_word32/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Decodes four bytes in big-endian order into a 32-bit word.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``big_endian_word32(Bytes,Word)``
+| **Mode and number of proofs:**
+|    ``big_endian_word32(+list(integer),-integer)`` - ``one``
+
+
+------------
+
+.. index:: integer_to_little_endian_bytes32/2
+.. _hash_common_32/0::integer_to_little_endian_bytes32/2:
+
+``integer_to_little_endian_bytes32/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Encodes a 32-bit word into four bytes in little-endian order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``integer_to_little_endian_bytes32(Integer,Bytes)``
+| **Mode and number of proofs:**
+|    ``integer_to_little_endian_bytes32(+integer,-list(integer))`` - ``one``
+
+
+------------
+
+.. index:: integer_to_big_endian_bytes32/2
+.. _hash_common_32/0::integer_to_big_endian_bytes32/2:
+
+``integer_to_big_endian_bytes32/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Encodes a 32-bit word into four bytes in big-endian order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``integer_to_big_endian_bytes32(Integer,Bytes)``
+| **Mode and number of proofs:**
+|    ``integer_to_big_endian_bytes32(+integer,-list(integer))`` - ``one``
+
+
+------------
+
+.. index:: pad_md/4
+.. _hash_common_32/0::pad_md/4:
+
+``pad_md/4``
+^^^^^^^^^^^^
+
+Pads a message using MD-style padding with a little-endian or big-endian length field.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pad_md(Endian,Bytes,LengthFieldBytes,PaddedBytes)``
+| **Mode and number of proofs:**
+|    ``pad_md(+little_big,+list(integer),+integer,-list(integer))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

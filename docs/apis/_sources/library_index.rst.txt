@@ -593,6 +593,33 @@ To load any library (including developer tools, ports, and contributions), use t
    weighted_undirected_graph <weighted_undirected_graph_0>
    weighted_undirected_graph(Dictionary) <weighted_undirected_graph_1>
 
+:ref:`hashes <library_hashes>`
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   crc32 <crc32_0>
+   djb2_32 <djb2_32_0>
+   djb2_64 <djb2_64_0>
+   fnv1a_32 <fnv1a_32_0>
+   fnv1a_64 <fnv1a_64_0>
+   hash_common_32 <hash_common_32_0>
+   hash_common_64 <hash_common_64_0>
+   hash_protocol <hash_protocol_0>
+   md5 <md5_0>
+   murmurhash3_x64_128 <murmurhash3_x64_128_0>
+   murmurhash3_x86_128 <murmurhash3_x86_128_0>
+   murmurhash3_x86_32 <murmurhash3_x86_32_0>
+   sdbm_32 <sdbm_32_0>
+   sdbm_64 <sdbm_64_0>
+   sha1 <sha1_0>
+   sha256 <sha256_0>
+   siphash_2_4 <siphash_2_4_0>
+   siphash_2_4(Key) <siphash_2_4_1>
+
 :ref:`heaps <library_heaps>`
 ----------------------------
 

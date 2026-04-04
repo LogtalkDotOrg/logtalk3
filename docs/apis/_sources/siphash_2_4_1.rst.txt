@@ -1,0 +1,66 @@
+.. index:: single: siphash_2_4(Key)
+.. _siphash_2_4/1:
+
+.. rst-class:: right
+
+**object**
+
+``siphash_2_4(Key)``
+====================
+
+* ``Key`` - A list of 16 bytes.
+
+
+SipHash-2-4 keyed hash function.
+
+| **Availability:** 
+|    ``logtalk_load(hashes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-04
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`hash_protocol <hash_protocol/0>`
+| **Uses:**
+|    :ref:`hash_common_64 <hash_common_64/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`hash_protocol/0::hash/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`siphash_2_4 <siphash_2_4/0>`, :ref:`fnv1a_64 <fnv1a_64/0>`, :ref:`crc32 <crc32/0>`
+

@@ -1,0 +1,63 @@
+.. index:: single: murmurhash3_x86_128
+.. _murmurhash3_x86_128/0:
+
+.. rst-class:: right
+
+**object**
+
+``murmurhash3_x86_128``
+=======================
+
+MurmurHash3 x86 128-bit hash function with seed 0.
+
+| **Availability:** 
+|    ``logtalk_load(hashes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-04
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`hash_protocol <hash_protocol/0>`
+| **Uses:**
+|    :ref:`hash_common_32 <hash_common_32/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`hash_protocol/0::hash/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`murmurhash3_x86_32 <murmurhash3_x86_32/0>`, :ref:`murmurhash3_x64_128 <murmurhash3_x64_128/0>`
+

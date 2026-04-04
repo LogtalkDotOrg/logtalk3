@@ -1,0 +1,74 @@
+.. index:: single: hash_protocol
+.. _hash_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``hash_protocol``
+=================
+
+Hashing protocol. Hash values are returned as lowercase hexadecimal atoms with the natural width of each algorithm output.
+
+| **Availability:** 
+|    ``logtalk_load(hashes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-04
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: hash/2
+.. _hash_protocol/0::hash/2:
+
+``hash/2``
+^^^^^^^^^^
+
+Computes the hash for a list of bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hash(Bytes,Hash)``
+| **Mode and number of proofs:**
+|    ``hash(+list(byte),--atom)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

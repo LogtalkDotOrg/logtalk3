@@ -1,0 +1,62 @@
+.. index:: single: crc32
+.. _crc32/0:
+
+.. rst-class:: right
+
+**object**
+
+``crc32``
+=========
+
+CRC32 hash function using the standard polynomial 0xEDB88320.
+
+| **Availability:** 
+|    ``logtalk_load(hashes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-04
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`hash_protocol <hash_protocol/0>`
+| **Uses:**
+|    :ref:`hash_common_32 <hash_common_32/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`hash_protocol/0::hash/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`murmurhash3_x86_32 <murmurhash3_x86_32/0>`, :ref:`fnv1a_32 <fnv1a_32/0>`
+

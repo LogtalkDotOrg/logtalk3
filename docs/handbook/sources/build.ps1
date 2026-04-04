@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on March 30, 2026
+##   Last updated on April 4, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -116,6 +116,7 @@ Foreach-Object {
 (Get-Content ../../../library/git/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/git.rst
 (Get-Content ../../../library/grammars/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/grammars.rst
 (Get-Content ../../../library/graphs/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/graphs.rst
+(Get-Content ../../../library/hashes/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/hashes.rst
 (Get-Content ../../../library/heaps/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/heaps.rst
 (Get-Content ../../../library/hierarchies/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/hierarchies.rst
 (Get-Content ../../../library/hook_flows/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/hook_flows.rst

@@ -107,6 +107,7 @@
 		base58(loader),
 		base64(loader),
 		base85(loader),
+		hashes(loader),
 		url(loader),
 		ulid(loader),
 		uuid(loader),

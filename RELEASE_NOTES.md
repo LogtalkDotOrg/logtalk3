@@ -64,6 +64,10 @@ for backward compatibility.
 * CHANGED: The `linda` library exception when a client is not connected from
 `linda_error(not_connected)` to `linda_error(not_connected(AddressOrAlias))`.
 
+* ADDED: New `application` library for declaring application metadata.
+
+* ADDED: New `hashes` library implementing commonly used hashing algorithms.
+
 * ADDED: A 2-3 tree implementation to the `dictionaries` library. Contributed
 by Michael T. Richter.
 
@@ -72,8 +76,6 @@ servers.
 
 * ADDED: Support to the `linda` library for clients to define aliases for
 servers connections.
-
-* ADDED: New `application` library for declaring application metadata.
 
 * ADDED: New character set, `hexadecimal`, to the `type` library object and to
 the `arbitrary` library category.

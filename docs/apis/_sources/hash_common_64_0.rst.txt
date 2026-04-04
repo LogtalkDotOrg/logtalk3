@@ -1,0 +1,169 @@
+.. index:: single: hash_common_64
+.. _hash_common_64/0:
+
+.. rst-class:: right
+
+**object**
+
+``hash_common_64``
+==================
+
+Auxiliary predicates for the hashes library 64-bit algorithms.
+
+| **Availability:** 
+|    ``logtalk_load(hashes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-04
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: word64_hex/2
+.. _hash_common_64/0::word64_hex/2:
+
+``word64_hex/2``
+^^^^^^^^^^^^^^^^
+
+Converts a 64-bit word into a 16-digit lowercase hexadecimal atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``word64_hex(Word,Hex)``
+| **Mode and number of proofs:**
+|    ``word64_hex(+integer,-atom)`` - ``one``
+
+
+------------
+
+.. index:: mask64/1
+.. _hash_common_64/0::mask64/1:
+
+``mask64/1``
+^^^^^^^^^^^^
+
+Returns the 64-bit mask value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mask64(Mask)``
+| **Mode and number of proofs:**
+|    ``mask64(-integer)`` - ``one``
+
+
+------------
+
+.. index:: add64/3
+.. _hash_common_64/0::add64/3:
+
+``add64/3``
+^^^^^^^^^^^
+
+Adds two integers modulo 2^64.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add64(A,B,Sum)``
+| **Mode and number of proofs:**
+|    ``add64(+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: mul64/3
+.. _hash_common_64/0::mul64/3:
+
+``mul64/3``
+^^^^^^^^^^^
+
+Multiplies two integers modulo 2^64.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mul64(A,B,Product)``
+| **Mode and number of proofs:**
+|    ``mul64(+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: rol64/3
+.. _hash_common_64/0::rol64/3:
+
+``rol64/3``
+^^^^^^^^^^^
+
+Rotates a 64-bit word left by the given number of bits.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rol64(Value,Shift,Rotated)``
+| **Mode and number of proofs:**
+|    ``rol64(+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: integer_to_big_endian_bytes64/2
+.. _hash_common_64/0::integer_to_big_endian_bytes64/2:
+
+``integer_to_big_endian_bytes64/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Encodes a 64-bit word into eight bytes in big-endian order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``integer_to_big_endian_bytes64(Integer,Bytes)``
+| **Mode and number of proofs:**
+|    ``integer_to_big_endian_bytes64(+integer,-list(integer))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

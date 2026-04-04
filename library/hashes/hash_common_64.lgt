@@ -1,0 +1,136 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- object(hash_common_64).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-04,
+		comment is 'Auxiliary predicates for the hashes library 64-bit algorithms.'
+	]).
+
+	:- public(word64_hex/2).
+	:- mode(word64_hex(+integer, -atom), one).
+	:- info(word64_hex/2, [
+		comment is 'Converts a 64-bit word into a 16-digit lowercase hexadecimal atom.',
+		argnames is ['Word', 'Hex']
+	]).
+
+	:- public(mask64/1).
+	:- mode(mask64(-integer), one).
+	:- info(mask64/1, [
+		comment is 'Returns the 64-bit mask value.',
+		argnames is ['Mask']
+	]).
+
+	:- public(add64/3).
+	:- mode(add64(+integer, +integer, -integer), one).
+	:- info(add64/3, [
+		comment is 'Adds two integers modulo 2^64.',
+		argnames is ['A', 'B', 'Sum']
+	]).
+
+	:- public(mul64/3).
+	:- mode(mul64(+integer, +integer, -integer), one).
+	:- info(mul64/3, [
+		comment is 'Multiplies two integers modulo 2^64.',
+		argnames is ['A', 'B', 'Product']
+	]).
+
+	:- public(rol64/3).
+	:- mode(rol64(+integer, +integer, -integer), one).
+	:- info(rol64/3, [
+		comment is 'Rotates a 64-bit word left by the given number of bits.',
+		argnames is ['Value', 'Shift', 'Rotated']
+	]).
+
+	:- public(integer_to_big_endian_bytes64/2).
+	:- mode(integer_to_big_endian_bytes64(+integer, -list(integer)), one).
+	:- info(integer_to_big_endian_bytes64/2, [
+		comment is 'Encodes a 64-bit word into eight bytes in big-endian order.',
+		argnames is ['Integer', 'Bytes']
+	]).
+
+	word64_hex(Word, Hex) :-
+		Mask is 0xFFFFFFFFFFFFFFFF,
+		Value is Word /\ Mask,
+		fixed_hex_atom(16, Value, Hex).
+
+	mask64(0xFFFFFFFFFFFFFFFF).
+
+	add64(A, B, Sum) :-
+		Mask is 0xFFFFFFFFFFFFFFFF,
+		Sum is (A + B) /\ Mask.
+
+	mul64(A, B, Product) :-
+		Mask is 0xFFFFFFFFFFFFFFFF,
+		Product is (A * B) /\ Mask.
+
+	rol64(Value, Shift, Rotated) :-
+		Mask is 0xFFFFFFFFFFFFFFFF,
+		Count is Shift /\ 63,
+		(   Count =:= 0 ->
+			Rotated is Value /\ Mask
+		;   Rotated is ((Value << Count) \/ (Value >> (64 - Count))) /\ Mask
+		).
+
+	integer_to_big_endian_bytes64(Integer, [B0, B1, B2, B3, B4, B5, B6, B7]) :-
+		B0 is (Integer >> 56) /\ 0xFF,
+		B1 is (Integer >> 48) /\ 0xFF,
+		B2 is (Integer >> 40) /\ 0xFF,
+		B3 is (Integer >> 32) /\ 0xFF,
+		B4 is (Integer >> 24) /\ 0xFF,
+		B5 is (Integer >> 16) /\ 0xFF,
+		B6 is (Integer >> 8) /\ 0xFF,
+		B7 is Integer /\ 0xFF.
+
+	fixed_hex_atom(Digits, Integer, Hex) :-
+		fixed_hex_codes(Digits, Integer, Codes),
+		atom_codes(Hex, Codes).
+
+	fixed_hex_codes(0, _, []) :-
+		!.
+	fixed_hex_codes(Digits, Integer, [Code| Codes]) :-
+		Shift is (Digits - 1) * 4,
+		Digit is (Integer >> Shift) /\ 0x0F,
+		hex_digit_code(Digit, Code),
+		NextDigits is Digits - 1,
+		fixed_hex_codes(NextDigits, Integer, Codes).
+
+	hex_digit_code( 0, 0'0).
+	hex_digit_code( 1, 0'1).
+	hex_digit_code( 2, 0'2).
+	hex_digit_code( 3, 0'3).
+	hex_digit_code( 4, 0'4).
+	hex_digit_code( 5, 0'5).
+	hex_digit_code( 6, 0'6).
+	hex_digit_code( 7, 0'7).
+	hex_digit_code( 8, 0'8).
+	hex_digit_code( 9, 0'9).
+	hex_digit_code(10, 0'a).
+	hex_digit_code(11, 0'b).
+	hex_digit_code(12, 0'c).
+	hex_digit_code(13, 0'd).
+	hex_digit_code(14, 0'e).
+	hex_digit_code(15, 0'f).
+
+:- end_object.

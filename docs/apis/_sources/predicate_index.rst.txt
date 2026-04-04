@@ -232,6 +232,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`memcached <memcached/0::add/5>`
 
+``add32/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_32 <hash_common_32/0::add32/3>`
+
+``add32/4``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_32 <hash_common_32/0::add32/4>`
+
+``add32/5``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_32 <hash_common_32/0::add32/5>`
+
+``add64/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_64 <hash_common_64/0::add64/3>`
+
 ``addDependent/1``
 ------------------
 
@@ -1184,6 +1224,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`float <float/0::between/4>`
 
+``big_endian_word32/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_32 <hash_common_32/0::big_endian_word32/2>`
+
 ``binomial/3``
 --------------
 
@@ -1344,6 +1394,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`help <help/0::built_in_predicate/4>`
+
+``bytes_hex/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_32 <hash_common_32/0::bytes_hex/2>`
 
 ``calendar_month/3``
 --------------------
@@ -6335,6 +6395,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`graph_protocol <graph_protocol/0::has_path/3>`
 
+``hash/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_protocol <hash_protocol/0::hash/2>`
+
 ``haversine_distance/3``
 ------------------------
 
@@ -7108,6 +7178,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`number_grammars(Format) <number_grammars/1::integer//1>`
+
+``integer_to_big_endian_bytes32/2``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_32 <hash_common_32/0::integer_to_big_endian_bytes32/2>`
+
+``integer_to_big_endian_bytes64/2``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_64 <hash_common_64/0::integer_to_big_endian_bytes64/2>`
+
+``integer_to_little_endian_bytes32/2``
+--------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_32 <hash_common_32/0::integer_to_little_endian_bytes32/2>`
 
 ``internal_error/2``
 --------------------
@@ -8552,6 +8652,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`listing <listing/0::listing/1>`
 
+``little_endian_word32/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_32 <hash_common_32/0::little_endian_word32/2>`
+
 ``llen/3``
 ----------
 
@@ -9221,6 +9331,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`expected(Expected) <expected/1::map_unexpected/2>`
+
+``mask32/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_32 <hash_common_32/0::mask32/1>`
+
+``mask64/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_64 <hash_common_64/0::mask64/1>`
 
 ``materialize/0``
 -----------------
@@ -9903,6 +10033,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`listp <listp/0::msort/3>`
+
+``mul32/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_32 <hash_common_32/0::mul32/3>`
+
+``mul64/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_64 <hash_common_64/0::mul64/3>`
 
 ``mutation/2``
 --------------
@@ -11053,6 +11203,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`application_protocol <application_protocol/0::package/1>`
+
+``pad_md/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_32 <hash_common_32/0::pad_md/4>`
 
 ``params/2``
 ------------
@@ -13477,6 +13637,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`code_metric <code_metric/0::rlibrary_score/2>`
 
+``rol32/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_32 <hash_common_32/0::rol32/3>`
+
+``rol64/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_64 <hash_common_64/0::rol64/3>`
+
 ``rollback/0``
 --------------
 
@@ -13496,6 +13676,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`statisticsp <statisticsp/0::root_mean_squared_error/3>`
+
+``ror32/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_32 <hash_common_32/0::ror32/3>`
 
 ``route_distance/2``
 --------------------
@@ -16899,6 +17089,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`weighted_graph_protocol <weighted_graph_protocol/0::wneighbors/3>`
+
+``word32_hex/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_32 <hash_common_32/0::word32_hex/2>`
+
+``word64_hex/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_64 <hash_common_64/0::word64_hex/2>`
 
 ``working_directory/1``
 -----------------------

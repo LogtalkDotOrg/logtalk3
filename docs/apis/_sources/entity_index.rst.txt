@@ -130,6 +130,7 @@ Objects
    counter <counter_0>
    coupling_metric <coupling_metric_0>
    coverage_report <coverage_report_0>
+   crc32 <crc32_0>
    csv <csv_0>
    csv(Header,Separator,IgnoreQuotes) <csv_3>
    csv(Header,Separator,IgnoreQuotes,Comments) <csv_4>
@@ -163,6 +164,8 @@ Objects
    directory_load_diagram <directory_load_diagram_0>
    directory_load_diagram(Format) <directory_load_diagram_1>
    dit_metric <dit_metric_0>
+   djb2_32 <djb2_32_0>
+   djb2_64 <djb2_64_0>
    doc_metric <doc_metric_0>
    doclet <doclet_0>
    dot_graph_language <dot_graph_language_0>
@@ -184,6 +187,8 @@ Objects
    file_load_diagram <file_load_diagram_0>
    file_load_diagram(Format) <file_load_diagram_1>
    float <float_0>
+   fnv1a_32 <fnv1a_32_0>
+   fnv1a_64 <fnv1a_64_0>
    format <format_0>
    genint <genint_0>
    gensym <gensym_0>
@@ -193,6 +198,8 @@ Objects
    graph_language_registry <graph_language_registry_0>
    halstead_metric <halstead_metric_0>
    halstead_metric(Stroud) <halstead_metric_1>
+   hash_common_32 <hash_common_32_0>
+   hash_common_64 <hash_common_64_0>
    head_arguments_mutation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_mutation_5>
    head_arguments_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_reordering_5>
    heap(Order) <heap_1>
@@ -255,6 +262,7 @@ Objects
    maxheap <maxheap_0>
    maybe <maybe_0>
    mcp_server <mcp_server_0>
+   md5 <md5_0>
    memcached <memcached_0>
    mermaid_graph_language <mermaid_graph_language_0>
    meta <meta_0>
@@ -265,6 +273,9 @@ Objects
    minheap <minheap_0>
    minimal_output <minimal_output_0>
    modules_diagram_support <modules_diagram_support_0>
+   murmurhash3_x64_128 <murmurhash3_x64_128_0>
+   murmurhash3_x86_128 <murmurhash3_x86_128_0>
+   murmurhash3_x86_32 <murmurhash3_x86_32_0>
    mutation_testing <mutation_testing_0>
    mutations_store <mutations_store_0>
    naive_bayes <naive_bayes_0>
@@ -320,14 +331,20 @@ Objects
    sarif <sarif_0>
    sbom <sbom_0>
    scope_directive_replacement(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <scope_directive_replacement_5>
+   sdbm_32 <sdbm_32_0>
+   sdbm_64 <sdbm_64_0>
    sequence_grammars <sequence_grammars_0>
    set <set_0>
    set(Type) <set_1>
+   sha1 <sha1_0>
+   sha256 <sha256_0>
    shell <shell_0>
    shell(Interpreters) <shell_1>
    shell_expansion(Mode) <shell_expansion_1>
    simulated_annealing(Problem) <simulated_annealing_1>
    simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing_2>
+   siphash_2_4 <siphash_2_4_0>
+   siphash_2_4(Key) <siphash_2_4_1>
    size_metric <size_metric_0>
    snowflakeid <snowflakeid_0>
    snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node) <snowflakeid_7>
@@ -447,6 +464,7 @@ Protocols
    git_protocol <git_protocol_0>
    graph_language_protocol <graph_language_protocol_0>
    graph_protocol <graph_protocol_0>
+   hash_protocol <hash_protocol_0>
    heap_protocol <heap_protocol_0>
    heapp <heapp_0>
    hierarchyp <hierarchyp_0>

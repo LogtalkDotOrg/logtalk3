@@ -1,0 +1,60 @@
+.. index:: single: siphash_2_4
+.. _siphash_2_4/0:
+
+.. rst-class:: right
+
+**object**
+
+``siphash_2_4``
+===============
+
+SipHash-2-4 hash function using the standard reference key 00 01 02 ... 0f.
+
+| **Availability:** 
+|    ``logtalk_load(hashes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-04
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`siphash_2_4([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]) <siphash_2_4/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`hash_protocol/0::hash/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`siphash_2_4(Key) <siphash_2_4/1>`, :ref:`fnv1a_64 <fnv1a_64/0>`, :ref:`crc32 <crc32/0>`
+
