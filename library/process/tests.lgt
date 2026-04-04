@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2025-01-29,
+		date is 2026-04-04,
 		comment is 'Unit tests for the "process" library.'
 	]).
 
@@ -40,25 +40,25 @@
 		% Windows tests
 
 		test(process_create_3_01, true(ground(Pid)), [cleanup(catch(kill(Pid), _, true))]) :-
-			create(path('cmd.exe'), ['/c', 'echo', 'hello'], [process(Pid)]).
+			create('cmd.exe', ['/c', 'echo', 'hello'], [process(Pid)]).
 
 		test(process_create_3_02, true, [cleanup(catch(close(Out), _, true))]) :-
-			create(path('cmd.exe'), ['/c', 'echo', 'hello'], [stdout(Out)]).
+			create('cmd.exe', ['/c', 'echo', 'hello'], [stdout(Out)]).
 
 		test(process_wait_2_01, true((Status == exit(0) ; Status == 0))) :-
-			create(path('cmd.exe'), ['/c', 'echo', 'hello'], [process(Pid)]),
+			create('cmd.exe', ['/c', 'echo', 'hello'], [process(Pid)]),
 			wait(Pid, Status).
 
 		test(process_kill_1_01, true) :-
-			create(path('cmd.exe'), ['/c', 'ping', '-n', '10', 'localhost'], [process(Pid)]),
+			create('cmd.exe', ['/c', 'ping', '-n', '10', 'localhost'], [process(Pid)]),
 			kill(Pid).
 
 		test(process_kill_2_01, true) :-
-			create(path('cmd.exe'), ['/c', 'ping', '-n', '10', 'localhost'], [process(Pid)]),
+			create('cmd.exe', ['/c', 'ping', '-n', '10', 'localhost'], [process(Pid)]),
 			kill(Pid, sigkill).
 
 		test(process_kill_2_02, true) :-
-			create(path('cmd.exe'), ['/c', 'ping', '-n', '10', 'localhost'], [process(Pid)]),
+			create('cmd.exe', ['/c', 'ping', '-n', '10', 'localhost'], [process(Pid)]),
 			kill(Pid, 9).
 
 	:- else.

@@ -104,6 +104,8 @@ for ECLiPSe when running on Windows.
 Windows to not try to use the system temporary directory as backup as it isn't
 writable by non-admin users.
 
+* FIXED: Portability of the `process` library on Windows systems.
+
 * FIXED: Bug in the `linda` library where a permission error would be thrown
 in the server when a client sent the `linda::shutdown_server/1` message.
 

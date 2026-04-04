@@ -22,7 +22,7 @@
 :- object(process).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
 		date is 2026-02-04,
 		comment is 'Portable process handling predicates.',
@@ -95,14 +95,23 @@
 			{wait(Pid, Status)}.
 
 		kill(Pid, Signal) :-
-			(	atom(Signal) ->
+			(	{getenv('COMSPEC', _)} ->
+				{integer_atom(Pid, PidAtom)},
+				atom_concat('taskkill /F /PID ', PidAtom, Command),
+				{sh(Command)}
+			;	atom(Signal) ->
 				signal_number(Signal, Number),
 				{kill(Pid, Number)}
 			;	{kill(Pid, Signal)}
 			).
 
 		kill(Pid) :-
-			{kill(Pid, 9)}.
+			(	{getenv('COMSPEC', _)} ->
+				{integer_atom(Pid, PidAtom)},
+				atom_concat('taskkill /F /PID ', PidAtom, Command),
+				{sh(Command)}
+			;	{kill(Pid, 9)}
+			).
 
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
 
@@ -134,20 +143,33 @@
 			{wait(Pid, Status)}.
 
 		kill(Pid, Signal) :-
-			(	atom(Signal) ->
+			(	{environ('COMSPEC', _)} ->
+				{write_to_atom(PidAtom, Pid)},
+				atom_concat('taskkill /F /PID ', PidAtom, Command),
+				{shell(Command)}
+			;	atom(Signal) ->
 				signal_number(Signal, Number),
 				{send_signal(Pid, Number)}
 			;	{send_signal(Pid, Signal)}
 			).
 
 		kill(Pid) :-
-			{send_signal(Pid, 9)}.
+			(	{environ('COMSPEC', _)} ->
+				{write_to_atom(PidAtom, Pid)},
+				atom_concat('taskkill /F /PID ', PidAtom, Command),
+				{shell(Command)}
+			;	{send_signal(Pid, 9)}
+			).
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
 		create(Executable, Arguments, Options) :-
+			(	{absolute_file_name(Executable, Executable)} ->
+				Path = Executable
+			;	Path = path(Executable)
+			),
 			translate_options(Options, NativeOptions),
-			{process:process_create(Executable, Arguments, NativeOptions)}.
+			{process:process_create(Path, Arguments, NativeOptions)}.
 
 		translate_options([], []).
 		translate_options([Option| Options], [NativeOption| NativeOptions]) :-
@@ -163,7 +185,9 @@
 			{process:process_wait(Process, Status)}.
 
 		kill(Process, Signal) :-
-			(	atom(Signal) ->
+			(	{environ('COMSPEC', _)} ->
+				catch({process:process_kill(Process)}, _, true)
+			;	atom(Signal) ->
 				signal_number(Signal, Number),
 				{process:process_kill(Process, Number)}
 			;	{process:process_kill(Process, Signal)}
@@ -171,6 +195,39 @@
 
 		kill(Process) :-
 			{process:process_kill(Process)}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, swi)).
+
+		create(Executable, Arguments, Options) :-
+			(	{is_absolute_file_name(Executable)} ->
+				Path = Executable
+			;	Path = path(Executable)
+			),
+			translate_options(Options, NativeOptions),
+			{process:process_create(Path, Arguments, NativeOptions)}.
+
+		translate_options([], []).
+		translate_options([Option| Options], [NativeOption| NativeOptions]) :-
+			translate_option(Option, NativeOption),
+			translate_options(Options, NativeOptions).
+
+		translate_option(process(Pid), process(Pid)).
+		translate_option(stdin(Stream), stdin(pipe(Stream))).
+		translate_option(stdout(Stream), stdout(pipe(Stream))).
+		translate_option(stderr(Stream), stderr(pipe(Stream))).
+
+		wait(Pid, Status) :-
+			{process:process_wait(Pid, Status)}.
+
+		kill(Pid, Signal) :-
+			(	atom(Signal) ->
+				signal_number(Signal, Number),
+				{process:process_kill(Pid, Number)}
+			;	{process:process_kill(Pid, Signal)}
+			).
+
+		kill(Pid) :-
+			{process:process_kill(Pid)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
 
@@ -205,35 +262,6 @@
 
 		kill(Pid) :-
 			{process_kill(Pid)}.
-
-	:- elif(current_logtalk_flag(prolog_dialect, swi)).
-
-		create(Executable, Arguments, Options) :-
-			translate_options(Options, NativeOptions),
-			{process:process_create(Executable, Arguments, NativeOptions)}.
-
-		translate_options([], []).
-		translate_options([Option| Options], [NativeOption| NativeOptions]) :-
-			translate_option(Option, NativeOption),
-			translate_options(Options, NativeOptions).
-
-		translate_option(process(Pid), process(Pid)).
-		translate_option(stdin(Stream), stdin(pipe(Stream))).
-		translate_option(stdout(Stream), stdout(pipe(Stream))).
-		translate_option(stderr(Stream), stderr(pipe(Stream))).
-
-		wait(Pid, Status) :-
-			{process:process_wait(Pid, Status)}.
-
-		kill(Pid, Signal) :-
-			(	atom(Signal) ->
-				signal_number(Signal, Number),
-				{process:process_kill(Pid, Number)}
-			;	{process:process_kill(Pid, Signal)}
-			).
-
-		kill(Pid) :-
-			{process:process_kill(Pid)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, xvm)).
 
