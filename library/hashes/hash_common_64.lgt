@@ -63,6 +63,48 @@
 		argnames is ['Value', 'Shift', 'Rotated']
 	]).
 
+	:- public(xor64/3).
+	:- mode(xor64(+integer, +integer, -integer), one).
+	:- info(xor64/3, [
+		comment is 'Computes the bitwise exclusive-or of two integers modulo 2^64.',
+		argnames is ['A', 'B', 'Xor']
+	]).
+
+	:- public(or64/3).
+	:- mode(or64(+integer, +integer, -integer), one).
+	:- info(or64/3, [
+		comment is 'Computes the bitwise disjunction of two integers modulo 2^64.',
+		argnames is ['A', 'B', 'Or']
+	]).
+
+	:- public(and64/3).
+	:- mode(and64(+integer, +integer, -integer), one).
+	:- info(and64/3, [
+		comment is 'Computes the bitwise conjunction of two integers modulo 2^64.',
+		argnames is ['A', 'B', 'And']
+	]).
+
+	:- public(not64/2).
+	:- mode(not64(+integer, -integer), one).
+	:- info(not64/2, [
+		comment is 'Computes the bitwise complement of an integer modulo 2^64.',
+		argnames is ['Value', 'Complement']
+	]).
+
+	:- public(shl64/3).
+	:- mode(shl64(+integer, +integer, -integer), one).
+	:- info(shl64/3, [
+		comment is 'Shifts a 64-bit word left by the given number of bits and masks the result.',
+		argnames is ['Value', 'Shift', 'Shifted']
+	]).
+
+	:- public(shr64/3).
+	:- mode(shr64(+integer, +integer, -integer), one).
+	:- info(shr64/3, [
+		comment is 'Shifts a 64-bit word right by the given number of bits after masking the input.',
+		argnames is ['Value', 'Shift', 'Shifted']
+	]).
+
 	:- public(integer_to_big_endian_bytes64/2).
 	:- mode(integer_to_big_endian_bytes64(+integer, -list(integer)), one).
 	:- info(integer_to_big_endian_bytes64/2, [
@@ -92,6 +134,30 @@
 			Rotated is Value /\ Mask
 		;   Rotated is ((Value << Count) \/ (Value >> (64 - Count))) /\ Mask
 		).
+
+	xor64(A, B, Xor) :-
+		Mask is 0xFFFFFFFFFFFFFFFF,
+		Xor is xor(A, B) /\ Mask.
+
+	or64(A, B, Or) :-
+		Mask is 0xFFFFFFFFFFFFFFFF,
+		Or is (A \/ B) /\ Mask.
+
+	and64(A, B, And) :-
+		Mask is 0xFFFFFFFFFFFFFFFF,
+		And is (A /\ B) /\ Mask.
+
+	not64(Value, Complement) :-
+		Mask is 0xFFFFFFFFFFFFFFFF,
+		Complement is (\ Value) /\ Mask.
+
+	shl64(Value, Shift, Shifted) :-
+		Mask is 0xFFFFFFFFFFFFFFFF,
+		Shifted is (Value << Shift) /\ Mask.
+
+	shr64(Value, Shift, Shifted) :-
+		Mask is 0xFFFFFFFFFFFFFFFF,
+		Shifted is (Value /\ Mask) >> Shift.
 
 	integer_to_big_endian_bytes64(Integer, [B0, B1, B2, B3, B4, B5, B6, B7]) :-
 		B0 is (Integer >> 56) /\ 0xFF,

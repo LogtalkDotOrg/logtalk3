@@ -241,14 +241,24 @@ hexadecimal atom.</p>
 <li><p>MurmurHash3 x86 32-bit (<code class="docutils literal notranslate"><span class="pre">murmurhash3_x86_32</span></code>)</p></li>
 <li><p>MurmurHash3 x86 128-bit (<code class="docutils literal notranslate"><span class="pre">murmurhash3_x86_128</span></code>)</p></li>
 <li><p>MurmurHash3 x64 128-bit (<code class="docutils literal notranslate"><span class="pre">murmurhash3_x64_128</span></code>)</p></li>
+<li><p>SHA3-224 (<code class="docutils literal notranslate"><span class="pre">sha3_224</span></code>)</p></li>
+<li><p>SHA3-256 (<code class="docutils literal notranslate"><span class="pre">sha3_256</span></code>)</p></li>
+<li><p>SHA3-384 (<code class="docutils literal notranslate"><span class="pre">sha3_384</span></code>)</p></li>
+<li><p>SHA3-512 (<code class="docutils literal notranslate"><span class="pre">sha3_512</span></code>)</p></li>
+<li><p>SHAKE128 (<code class="docutils literal notranslate"><span class="pre">shake128(OutputBytes)</span></code>)</p></li>
+<li><p>SHAKE256 (<code class="docutils literal notranslate"><span class="pre">shake256(OutputBytes)</span></code>)</p></li>
 <li><p>MD5 (<code class="docutils literal notranslate"><span class="pre">md5</span></code>)</p></li>
 <li><p>SHA1 (<code class="docutils literal notranslate"><span class="pre">sha1</span></code>)</p></li>
 <li><p>SHA256 (<code class="docutils literal notranslate"><span class="pre">sha256</span></code>)</p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">djb2_64</span></code>, <code class="docutils literal notranslate"><span class="pre">sdbm_64</span></code>, <code class="docutils literal notranslate"><span class="pre">fnv1a_64</span></code>, <code class="docutils literal notranslate"><span class="pre">siphash_2_4</span></code>,
-<code class="docutils literal notranslate"><span class="pre">murmurhash3_x86_128</span></code>, <code class="docutils literal notranslate"><span class="pre">murmurhash3_x64_128</span></code>, <code class="docutils literal notranslate"><span class="pre">sha1</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">sha256</span></code> objects are only loaded on backend Prolog compilers
-supporting unbounded integer arithmetic.</p>
+<code class="docutils literal notranslate"><span class="pre">murmurhash3_x86_128</span></code>, <code class="docutils literal notranslate"><span class="pre">murmurhash3_x64_128</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_224</span></code>,
+<code class="docutils literal notranslate"><span class="pre">sha3_256</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_384</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_512</span></code>, <code class="docutils literal notranslate"><span class="pre">shake128(OutputBytes)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">shake256(OutputBytes)</span></code>, <code class="docutils literal notranslate"><span class="pre">sha1</span></code>, and <code class="docutils literal notranslate"><span class="pre">sha256</span></code> objects are only
+loaded on backend Prolog compilers supporting unbounded integer
+arithmetic.</p>
+<p>The SHAKE objects are parametric extensible-output functions. Pass the
+number of output bytes to generate when constructing the object.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">siphash_2_4</span></code> object uses the standard reference key
 <code class="docutils literal notranslate"><span class="pre">00</span> <span class="pre">01</span> <span class="pre">02</span> <span class="pre">...</span> <span class="pre">0f</span></code>. For custom keys, use the parametric object
 <code class="docutils literal notranslate"><span class="pre">siphash_2_4(Key)</span></code> where <code class="docutils literal notranslate"><span class="pre">Key</span></code> is a list of 16 bytes.</p>
@@ -283,6 +293,14 @@ link in a web browser.</p>
      sha256<span class="o">::</span>hash(<span class="nv">Bytes</span>, <span class="nv">Hash</span>).
 <span class="nv">Bytes</span> <span class="o">=</span> [<span class="m">84</span>,<span class="m">104</span>,<span class="m">101</span>,<span class="m">32</span>,<span class="m">113</span>,<span class="m">117</span>,<span class="m">105</span>,<span class="m">99</span>,<span class="m">107</span>,<span class="m">32</span>,<span class="m">98</span>,<span class="m">114</span>,<span class="m">111</span>,<span class="m">119</span>,<span class="m">110</span>,<span class="m">32</span>,<span class="m">102</span>,<span class="m">111</span>,<span class="m">120</span>,<span class="m">32</span>,<span class="m">106</span>,<span class="m">117</span>,<span class="m">109</span>,<span class="m">112</span>,<span class="m">115</span>,<span class="m">32</span>,<span class="m">111</span>,<span class="m">118</span>,<span class="m">101</span>,<span class="m">114</span>,<span class="m">32</span>,<span class="m">116</span>,<span class="m">104</span>,<span class="m">101</span>,<span class="m">32</span>,<span class="m">108</span>,<span class="m">97</span>,<span class="m">122</span>,<span class="m">121</span>,<span class="m">32</span>,<span class="m">100</span>,<span class="m">111</span>,<span class="m">103</span>],
 <span class="nv">Hash</span> <span class="o">=</span> <span class="s">&#39;d7a8fbb307d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592&#39;</span>
+yes
+</pre></div>
+</div>
+<p>Compute a 32-byte SHAKE128 digest:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">atom_codes</span>(<span class="s">&#39;The quick brown fox jumps over the lazy dog&#39;</span>, <span class="nv">Bytes</span>),
+     shake128(<span class="m">32</span>)<span class="o">::</span>hash(<span class="nv">Bytes</span>, <span class="nv">Hash</span>).
+<span class="nv">Bytes</span> <span class="o">=</span> [<span class="m">84</span>,<span class="m">104</span>,<span class="m">101</span>,<span class="m">32</span>,<span class="m">113</span>,<span class="m">117</span>,<span class="m">105</span>,<span class="m">99</span>,<span class="m">107</span>,<span class="m">32</span>,<span class="m">98</span>,<span class="m">114</span>,<span class="m">111</span>,<span class="m">119</span>,<span class="m">110</span>,<span class="m">32</span>,<span class="m">102</span>,<span class="m">111</span>,<span class="m">120</span>,<span class="m">32</span>,<span class="m">106</span>,<span class="m">117</span>,<span class="m">109</span>,<span class="m">112</span>,<span class="m">115</span>,<span class="m">32</span>,<span class="m">111</span>,<span class="m">118</span>,<span class="m">101</span>,<span class="m">114</span>,<span class="m">32</span>,<span class="m">116</span>,<span class="m">104</span>,<span class="m">101</span>,<span class="m">32</span>,<span class="m">108</span>,<span class="m">97</span>,<span class="m">122</span>,<span class="m">121</span>,<span class="m">32</span>,<span class="m">100</span>,<span class="m">111</span>,<span class="m">103</span>],
+<span class="nv">Hash</span> <span class="o">=</span> <span class="s">&#39;f4202e3c5852f9182a0430fd8144f0a74b95e7417ecae17db0f8cfeed0e3e66e&#39;</span>
 yes
 </pre></div>
 </div>

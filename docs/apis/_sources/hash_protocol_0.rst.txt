@@ -8,7 +8,7 @@
 ``hash_protocol``
 =================
 
-Hashing protocol. Hash values are returned as lowercase hexadecimal atoms with the natural width of each algorithm output.
+Hashing protocol. Hash values are returned as lowercase hexadecimal atoms using the output width of each algorithm or extensible-output function instance.
 
 | **Availability:** 
 |    ``logtalk_load(hashes(loader))``

@@ -520,6 +520,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`hierarchyp <hierarchyp/0::ancestors/1>`
 
+``and64/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_64 <hash_common_64/0::and64/3>`
+
 ``apid/2``
 ----------
 
@@ -10517,6 +10527,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`debuggerp <debuggerp/0::nospyall/0>`
 
+``not64/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_64 <hash_common_64/0::not64/2>`
+
 ``note/2``
 ----------
 
@@ -10932,6 +10952,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`expected(Expected) <expected/1::or/2>`
 * :ref:`optional(Optional) <optional/1::or/2>`
 * :ref:`validation(Validation) <validation/1::or/2>`
+
+``or64/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_64 <hash_common_64/0::or64/3>`
 
 ``or_else/2``
 -------------
@@ -14444,6 +14474,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`doclet <doclet/0::shell_command/1>`
 
+``shl64/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_64 <hash_common_64/0::shl64/3>`
+
 ``short_flags/1``
 -----------------
 
@@ -14453,6 +14493,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`command_line_option <command_line_option/0::short_flags/1>`
+
+``shr64/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_64 <hash_common_64/0::shr64/3>`
 
 ``shrink/3``
 ------------
@@ -17251,6 +17301,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`term_io_protocol <term_io_protocol/0::write_to_codes/2>`
+
+``xor64/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_64 <hash_common_64/0::xor64/3>`
 
 ``z_normalization/2``
 ---------------------

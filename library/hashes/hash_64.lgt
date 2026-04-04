@@ -22,7 +22,9 @@
 :- object(djb2_64,
 	implements(hash_protocol)).
 
-	:- uses(hash_common_64, [word64_hex/2]).
+	:- uses(hash_common_64, [
+		word64_hex/2
+	]).
 
 	:- info([
 		version is 1:0:0,
@@ -47,7 +49,9 @@
 :- object(sdbm_64,
 	implements(hash_protocol)).
 
-	:- uses(hash_common_64, [word64_hex/2]).
+	:- uses(hash_common_64, [
+		word64_hex/2
+	]).
 
 	:- info([
 		version is 1:0:0,
@@ -72,7 +76,9 @@
 :- object(fnv1a_64,
 	implements(hash_protocol)).
 
-	:- uses(hash_common_64, [word64_hex/2, mul64/3]).
+	:- uses(hash_common_64, [
+		word64_hex/2, mul64/3
+	]).
 
 	:- info([
 		version is 1:0:0,
@@ -98,7 +104,9 @@
 :- object(siphash_2_4(_Key_),
 	implements(hash_protocol)).
 
-	:- uses(hash_common_64, [word64_hex/2, add64/3, rol64/3]).
+	:- uses(hash_common_64, [
+		add64/3, or64/3, rol64/3, shl64/3, word64_hex/2, xor64/3
+	]).
 
 	:- info([
 		version is 1:0:0,
@@ -118,18 +126,20 @@
 
 		siphash(Bytes, Hash) :-
 			key_words(_Key_, K0, K1),
-			V0_0 is xor(0x736F6D6570736575, K0),
-			V1_0 is xor(0x646F72616E646F6D, K1),
-			V2_0 is xor(0x6C7967656E657261, K0),
-			V3_0 is xor(0x7465646279746573, K1),
+			xor64(0x736F6D6570736575, K0, V0_0),
+			xor64(0x646F72616E646F6D, K1, V1_0),
+			xor64(0x6C7967656E657261, K0, V2_0),
+			xor64(0x7465646279746573, K1, V3_0),
 			process_blocks(Bytes, V0_0, V1_0, V2_0, V3_0, V0_1, V1_1, V2_1, V3_1, Last),
 			last_word(Bytes, Last, FinalM),
-			V3_2 is xor(V3_1, FinalM),
+			xor64(V3_1, FinalM, V3_2),
 			sip_rounds(2, V0_1, V1_1, V2_1, V3_2, V0_3, V1_3, V2_3, V3_3),
-			V0_4 is xor(V0_3, FinalM),
-			V2_4 is xor(V2_3, 0xFF),
+			xor64(V0_3, FinalM, V0_4),
+			xor64(V2_3, 0xFF, V2_4),
 			sip_rounds(4, V0_4, V1_3, V2_4, V3_3, V0_5, V1_5, V2_5, V3_5),
-			Hash is xor(xor(V0_5, V1_5), xor(V2_5, V3_5)) /\ 0xFFFFFFFFFFFFFFFF.
+			xor64(V0_5, V1_5, T01),
+			xor64(V2_5, V3_5, T23),
+			xor64(T01, T23, Hash).
 
 		process_blocks(Bytes, V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last) :-
 			process_blocks(Bytes, [], V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last).
@@ -138,48 +148,52 @@
 		process_blocks([Byte| Bytes], Acc0, V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last) :-
 			list::append(Acc0, [Byte], Acc1),
 			(   Acc1 = [B0, B1, B2, B3, B4, B5, B6, B7] ->
-				M is B0 \/ (B1 << 8) \/ (B2 << 16) \/ (B3 << 24) \/ (B4 << 32) \/ (B5 << 40) \/ (B6 << 48) \/ (B7 << 56),
-				V3_0 is xor(V3, M),
+				little_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], M),
+				xor64(V3, M, V3_0),
 				sip_rounds(2, V0, V1, V2, V3_0, V0_1, V1_1, V2_1, V3_1),
-				V0_2 is xor(V0_1, M),
+				xor64(V0_1, M, V0_2),
 				process_blocks(Bytes, [], V0_2, V1_1, V2_1, V3_1, FV0, FV1, FV2, FV3, Last)
 			;   process_blocks(Bytes, Acc1, V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last)
 			).
 
 		last_word(Bytes, Acc, Word) :-
 			list::length(Bytes, Length),
-			LastByte is (Length /\ 0xFF) << 56,
+			shl64(Length /\ 0xFF, 56, LastByte),
 			partial_word(Acc, 0, Partial),
-			Word is LastByte \/ Partial.
+			or64(LastByte, Partial, Word).
+
+		little_endian_word64(Bytes, Word) :-
+			partial_word(Bytes, 0, Word).
 
 		partial_word([], _, 0).
 		partial_word([Byte| Bytes], Shift, Word) :-
 			partial_word(Bytes, Shift + 8, Rest),
-			Word is (Byte << Shift) \/ Rest.
+			shl64(Byte, Shift, ShiftedByte),
+			or64(ShiftedByte, Rest, Word).
 
 		sip_rounds(0, V0, V1, V2, V3, V0, V1, V2, V3) :-
 			!.
 		sip_rounds(Count, V0_0, V1_0, V2_0, V3_0, V0, V1, V2, V3) :-
 			add64(V0_0, V1_0, A0),
 			rol64(V1_0, 13, A1),
-			B1 is xor(A1, A0),
+			xor64(A1, A0, B1),
 			rol64(A0, 32, B0),
 			add64(V2_0, V3_0, C0),
 			rol64(V3_0, 16, C1),
-			D1 is xor(C1, C0),
+			xor64(C1, C0, D1),
 			add64(B0, D1, E0),
 			rol64(D1, 21, E1),
-			F1 is xor(E1, E0),
+			xor64(E1, E0, F1),
 			add64(C0, B1, G0),
 			rol64(B1, 17, G1),
-			H1 is xor(G1, G0),
+			xor64(G1, G0, H1),
 			rol64(G0, 32, H0),
 			NextCount is Count - 1,
 			sip_rounds(NextCount, E0, H1, H0, F1, V0, V1, V2, V3).
 
 		key_words([K0, K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11, K12, K13, K14, K15], Word0, Word1) :-
-			Word0 is K0 \/ (K1 << 8) \/ (K2 << 16) \/ (K3 << 24) \/ (K4 << 32) \/ (K5 << 40) \/ (K6 << 48) \/ (K7 << 56),
-			Word1 is K8 \/ (K9 << 8) \/ (K10 << 16) \/ (K11 << 24) \/ (K12 << 32) \/ (K13 << 40) \/ (K14 << 48) \/ (K15 << 56).
+			little_endian_word64([K0, K1, K2, K3, K4, K5, K6, K7], Word0),
+			little_endian_word64([K8, K9, K10, K11, K12, K13, K14, K15], Word1).
 
 :- end_object.
 
@@ -201,7 +215,9 @@
 :- object(murmurhash3_x86_128,
 	implements(hash_protocol)).
 
-	:- uses(hash_common_32, [add32/3, add32/4, add32/5, little_endian_word32/2, mul32/3, rol32/3, word32_hex/2]).
+	:- uses(hash_common_32, [
+		add32/3, add32/4, add32/5, little_endian_word32/2, mul32/3, rol32/3, word32_hex/2
+	]).
 
 	:- info([
 		version is 1:0:0,
@@ -350,7 +366,9 @@
 :- object(murmurhash3_x64_128,
 	implements(hash_protocol)).
 
-	:- uses(hash_common_64, [add64/3, mul64/3, rol64/3, word64_hex/2]).
+	:- uses(hash_common_64, [
+		add64/3, mul64/3, or64/3, rol64/3, shl64/3, shr64/3, word64_hex/2, xor64/3
+	]).
 
 	:- info([
 		version is 1:0:0,
@@ -371,8 +389,8 @@
 		list::length(Bytes, Length),
 		body(Bytes, Seed, Seed, T1, T2, Tail),
 		tail(Tail, T1, T2, U1, U2),
-		F1_0 is xor(U1, Length),
-		F2_0 is xor(U2, Length),
+		xor64(U1, Length, F1_0),
+		xor64(U2, Length, F2_0),
 		add64(F1_0, F2_0, F1_1),
 		add64(F2_0, F1_1, F2_1),
 		fmix64(F1_1, M1),
@@ -387,7 +405,7 @@
 		mul64(K1_0, 0x87C37B91114253D5, K1_1),
 		rol64(K1_1, 31, K1_2),
 		mul64(K1_2, 0x4CF5AD432745937F, K1),
-		H1_X is xor(H1_0, K1),
+		xor64(H1_0, K1, H1_X),
 		rol64(H1_X, 27, H1_R),
 		add64(H1_R, H2_0, H1_S),
 		mul64(H1_S, 5, H1_M),
@@ -395,7 +413,7 @@
 		mul64(K2_0, 0x4CF5AD432745937F, K2_1),
 		rol64(K2_1, 33, K2_2),
 		mul64(K2_2, 0x87C37B91114253D5, K2),
-		H2_X is xor(H2_0, K2),
+		xor64(H2_0, K2, H2_X),
 		rol64(H2_X, 31, H2_R),
 		add64(H2_R, H1_1, H2_S),
 		mul64(H2_S, 5, H2_M),
@@ -414,7 +432,7 @@
 		mul64(K1_0, 0x87C37B91114253D5, K1_1),
 		rol64(K1_1, 31, K1_2),
 		mul64(K1_2, 0x4CF5AD432745937F, K1),
-		H1 is xor(H1_0, K1).
+		xor64(H1_0, K1, H1).
 
 	tail_mix_k2([], H2, H2).
 	tail_mix_k2([Byte| Bytes], H2_0, H2) :-
@@ -422,14 +440,17 @@
 		mul64(K2_0, 0x4CF5AD432745937F, K2_1),
 		rol64(K2_1, 33, K2_2),
 		mul64(K2_2, 0x87C37B91114253D5, K2),
-		H2 is xor(H2_0, K2).
+		xor64(H2_0, K2, H2).
 
 	fmix64(H0, H) :-
-		H1 is xor(H0, H0 >> 33),
+		shr64(H0, 33, H0Shift33),
+		xor64(H0, H0Shift33, H1),
 		mul64(H1, 0xFF51AFD7ED558CCD, H2),
-		H3 is xor(H2, H2 >> 33),
+		shr64(H2, 33, H2Shift33),
+		xor64(H2, H2Shift33, H3),
 		mul64(H3, 0xC4CEB9FE1A85EC53, H4),
-		H is xor(H4, H4 >> 33) /\ 0xFFFFFFFFFFFFFFFF.
+		shr64(H4, 33, H4Shift33),
+		xor64(H4, H4Shift33, H).
 
 	take_up_to(0, Rest, [], Rest) :-
 		!.
@@ -441,7 +462,370 @@
 	partial_word64([], _, 0).
 	partial_word64([Byte| Bytes], Shift, Word) :-
 		partial_word64(Bytes, Shift + 8, Rest),
-		Word is (Byte << Shift) \/ Rest.
+		shl64(Byte, Shift, ShiftedByte),
+		or64(ShiftedByte, Rest, Word).
+
+:- end_object.
+
+
+:- object(fips202_hash(_RateBytes_, _Suffix_, _OutputBytes_),
+	implements(hash_protocol)).
+
+	:- uses(hash_common_32, [
+		bytes_hex/2
+	]).
+	:- uses(hash_common_64, [
+		and64/3, mask64/1, not64/2, rol64/3, shl64/3, shr64/3, xor64/3
+	]).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-04,
+		comment is 'Common implementation of the standardized FIPS 202 SHA-3 and SHAKE variants using the Keccak-f[1600] permutation.'
+	]).
+
+	hash(Bytes, Hash) :-
+		integer(_OutputBytes_),
+		_OutputBytes_ >= 0,
+		absorb(Bytes, State),
+		squeeze(State, _OutputBytes_, DigestBytes),
+		bytes_hex(DigestBytes, Hash).
+
+	absorb(Bytes, State) :-
+		initial_state(State0),
+		absorb_full_blocks(Bytes, State0, State1, Tail),
+		padding_block(Tail, Block),
+		xor_block(Block, State1, State2),
+		keccak_f1600(State2, State).
+
+	absorb_full_blocks(Bytes, State0, State, Tail) :-
+		(   take_exact_prefix(_RateBytes_, Bytes, Block, Rest) ->
+			xor_block(Block, State0, State1),
+			keccak_f1600(State1, State2),
+			absorb_full_blocks(Rest, State2, State, Tail)
+		;   State = State0,
+			Tail = Bytes
+		).
+
+	padding_block(Tail, Block) :-
+		list::length(Tail, TailLength),
+		ZeroCount is _RateBytes_ - TailLength - 1,
+		zero_bytes(ZeroCount, Zeros),
+		list::append(Tail, [_Suffix_| Zeros], Block0),
+		xor_last_byte(Block0, 0x80, Block).
+
+	squeeze(_, 0, []) :-
+		!.
+	squeeze(State, OutputBytes, DigestBytes) :-
+		(   OutputBytes =< _RateBytes_ ->
+			state_prefix_bytes(State, OutputBytes, DigestBytes)
+		;   state_prefix_bytes(State, _RateBytes_, BlockBytes),
+			Remaining is OutputBytes - _RateBytes_,
+			keccak_f1600(State, NextState),
+			squeeze(NextState, Remaining, RestBytes),
+			list::append(BlockBytes, RestBytes, DigestBytes)
+		).
+
+	xor_block(Bytes, State0, State) :-
+		xor_block(Bytes, 0, State0, State).
+
+	xor_block([], _, State, State).
+	xor_block([Byte| Bytes], Offset, State0, State) :-
+		LaneIndex is Offset >> 3,
+		Shift is (Offset /\ 7) << 3,
+		state_lane(State0, LaneIndex, Lane0),
+		shl64(Byte, Shift, ShiftedByte),
+		xor64(Lane0, ShiftedByte, Lane1),
+		set_lane(State0, LaneIndex, Lane1, State1),
+		NextOffset is Offset + 1,
+		xor_block(Bytes, NextOffset, State1, State).
+
+	state_prefix_bytes(State, Count, Bytes) :-
+		state_prefix_bytes(0, Count, State, Bytes).
+
+	state_prefix_bytes(_, 0, _, []) :-
+		!.
+	state_prefix_bytes(Offset, Count, State, [Byte| Bytes]) :-
+		LaneIndex is Offset >> 3,
+		Shift is (Offset /\ 7) << 3,
+		state_lane(State, LaneIndex, Lane),
+		shr64(Lane, Shift, ShiftedLane),
+		Byte is ShiftedLane /\ 0xFF,
+		NextOffset is Offset + 1,
+		NextCount is Count - 1,
+		state_prefix_bytes(NextOffset, NextCount, State, Bytes).
+
+	keccak_f1600(State0, State) :-
+		round_constants(RoundConstants),
+		keccak_rounds(RoundConstants, State0, State).
+
+	keccak_rounds([], State, State).
+	keccak_rounds([RoundConstant| RoundConstants], State0, State) :-
+		theta(State0, State1),
+		rho_pi(State1, State2),
+		chi(State2, State3),
+		iota(State3, RoundConstant, State4),
+		keccak_rounds(RoundConstants, State4, State).
+
+	theta(State0, State) :-
+		column_parity(0, State0, C0),
+		column_parity(1, State0, C1),
+		column_parity(2, State0, C2),
+		column_parity(3, State0, C3),
+		column_parity(4, State0, C4),
+		rol64(C1, 1, RC1),
+		rol64(C2, 1, RC2),
+		rol64(C3, 1, RC3),
+		rol64(C4, 1, RC4),
+		rol64(C0, 1, RC0),
+		xor64(C4, RC1, D0),
+		xor64(C0, RC2, D1),
+		xor64(C1, RC3, D2),
+		xor64(C2, RC4, D3),
+		xor64(C3, RC0, D4),
+		apply_theta(0, State0, [D0, D1, D2, D3, D4], State).
+
+	column_parity(X, State, Parity) :-
+		X5 is X + 5,
+		X10 is X + 10,
+		X15 is X + 15,
+		X20 is X + 20,
+		state_lane(State, X, A0),
+		state_lane(State, X5, A1),
+		state_lane(State, X10, A2),
+		state_lane(State, X15, A3),
+		state_lane(State, X20, A4),
+		xor64(A3, A4, P34),
+		xor64(A2, P34, P234),
+		xor64(A1, P234, P1234),
+		xor64(A0, P1234, Parity).
+
+	apply_theta(25, _, _, []) :-
+		!.
+	apply_theta(Index, State0, Deltas, [Lane| State]) :-
+		X is Index mod 5,
+		state_lane(State0, Index, Lane0),
+		state_lane(Deltas, X, Delta),
+		xor64(Lane0, Delta, Lane),
+		NextIndex is Index + 1,
+		apply_theta(NextIndex, State0, Deltas, State).
+
+	rho_pi(State0, State) :-
+		rho_offsets(Offsets),
+		initial_state(BlankState),
+		rho_pi(0, Offsets, State0, BlankState, State).
+
+	rho_pi(25, [], _, State, State) :-
+		!.
+	rho_pi(Index, [Offset| Offsets], State0, Acc0, State) :-
+		state_lane(State0, Index, Lane),
+		rol64(Lane, Offset, Rotated),
+		X is Index mod 5,
+		Y is Index // 5,
+		NewX is Y,
+		NewY is (2 * X + 3 * Y) mod 5,
+		NewIndex is NewX + 5 * NewY,
+		set_lane(Acc0, NewIndex, Rotated, Acc1),
+		NextIndex is Index + 1,
+		rho_pi(NextIndex, Offsets, State0, Acc1, State).
+
+	chi(State0, State) :-
+		mask64(Mask),
+		chi_rows(0, State0, Mask, State).
+
+	chi_rows(5, _, _, []) :-
+		!.
+	chi_rows(Y, State0, Mask, [N0, N1, N2, N3, N4| Rest]) :-
+		Base is Y * 5,
+		I1 is Base + 1,
+		I2 is Base + 2,
+		I3 is Base + 3,
+		I4 is Base + 4,
+		state_lane(State0, Base, B0),
+		state_lane(State0, I1, B1),
+		state_lane(State0, I2, B2),
+		state_lane(State0, I3, B3),
+		state_lane(State0, I4, B4),
+		not64(B1, NB1),
+		not64(B2, NB2),
+		not64(B3, NB3),
+		not64(B4, NB4),
+		not64(B0, NB0),
+		and64(NB1, B2, T0),
+		and64(NB2, B3, T1),
+		and64(NB3, B4, T2),
+		and64(NB4, B0, T3),
+		and64(NB0, B1, T4),
+		xor64(B0, T0, N0_0),
+		xor64(B1, T1, N1_0),
+		xor64(B2, T2, N2_0),
+		xor64(B3, T3, N3_0),
+		xor64(B4, T4, N4_0),
+		N0 is N0_0 /\ Mask,
+		N1 is N1_0 /\ Mask,
+		N2 is N2_0 /\ Mask,
+		N3 is N3_0 /\ Mask,
+		N4 is N4_0 /\ Mask,
+		NextY is Y + 1,
+		chi_rows(NextY, State0, Mask, Rest).
+
+	iota([Lane| Lanes], RoundConstant, [UpdatedLane| Lanes]) :-
+		xor64(Lane, RoundConstant, UpdatedLane).
+
+	initial_state([
+		0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0
+	]).
+
+	round_constants([
+		0x0000000000000001, 0x0000000000008082,
+		0x800000000000808A, 0x8000000080008000,
+		0x000000000000808B, 0x0000000080000001,
+		0x8000000080008081, 0x8000000000008009,
+		0x000000000000008A, 0x0000000000000088,
+		0x0000000080008009, 0x000000008000000A,
+		0x000000008000808B, 0x800000000000008B,
+		0x8000000000008089, 0x8000000000008003,
+		0x8000000000008002, 0x8000000000000080,
+		0x000000000000800A, 0x800000008000000A,
+		0x8000000080008081, 0x8000000000008080,
+		0x0000000080000001, 0x8000000080008008
+	]).
+
+	rho_offsets([
+		0, 1, 62, 28, 27,
+		36, 44, 6, 55, 20,
+		3, 10, 43, 25, 39,
+		41, 45, 15, 21, 8,
+		18, 2, 61, 56, 14
+	]).
+
+	take_exact_prefix(0, Rest, [], Rest) :-
+		!.
+	take_exact_prefix(_, [], _, _) :-
+		!,
+		fail.
+	take_exact_prefix(Count, [Byte| Bytes], [Byte| Prefix], Rest) :-
+		NextCount is Count - 1,
+		take_exact_prefix(NextCount, Bytes, Prefix, Rest).
+
+	zero_bytes(0, []) :-
+		!.
+	zero_bytes(Count, [0| Bytes]) :-
+		NextCount is Count - 1,
+		zero_bytes(NextCount, Bytes).
+
+	xor_last_byte([Byte], Value, [UpdatedByte]) :-
+		!,
+		UpdatedByte is xor(Byte, Value).
+	xor_last_byte([Byte| Bytes], Value, [Byte| UpdatedBytes]) :-
+		xor_last_byte(Bytes, Value, UpdatedBytes).
+
+	state_lane([Lane| _], 0, Lane) :-
+		!.
+	state_lane([_| Lanes], Index, Lane) :-
+		NextIndex is Index - 1,
+		state_lane(Lanes, NextIndex, Lane).
+
+	set_lane([_| Lanes], 0, UpdatedLane, [UpdatedLane| Lanes]) :-
+		!.
+	set_lane([Lane| Lanes], Index, UpdatedLane, [Lane| UpdatedLanes]) :-
+		NextIndex is Index - 1,
+		set_lane(Lanes, NextIndex, UpdatedLane, UpdatedLanes).
+
+:- end_object.
+
+
+:- object(sha3_224,
+	extends(fips202_hash(144, 0x06, 28))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-04,
+		comment is 'FIPS 202 SHA3-224 hash function.',
+		see_also is [sha3_256, sha3_384, sha3_512, shake128(_), shake256(_)]
+	]).
+
+:- end_object.
+
+
+:- object(sha3_256,
+	extends(fips202_hash(136, 0x06, 32))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-04,
+		comment is 'FIPS 202 SHA3-256 hash function.',
+		see_also is [sha3_224, sha3_384, sha3_512, sha256, shake128(_), shake256(_)]
+	]).
+
+:- end_object.
+
+
+:- object(sha3_384,
+	extends(fips202_hash(104, 0x06, 48))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-04,
+		comment is 'FIPS 202 SHA3-384 hash function.',
+		see_also is [sha3_224, sha3_256, sha3_512, shake128(_), shake256(_)]
+	]).
+
+:- end_object.
+
+
+:- object(sha3_512,
+	extends(fips202_hash(72, 0x06, 64))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-04,
+		comment is 'FIPS 202 SHA3-512 hash function.',
+		see_also is [sha3_224, sha3_256, sha3_384, shake128(_), shake256(_)]
+	]).
+
+:- end_object.
+
+
+:- object(shake128(_OutputBytes_),
+	extends(fips202_hash(168, 0x1F, _OutputBytes_))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-04,
+		comment is 'FIPS 202 SHAKE128 extensible-output function.',
+		parameters is [
+			'OutputBytes' - 'Number of output bytes to generate.'
+		],
+		see_also is [shake256(_), sha3_224, sha3_256, sha3_384, sha3_512]
+	]).
+
+:- end_object.
+
+
+:- object(shake256(_OutputBytes_),
+	extends(fips202_hash(136, 0x1F, _OutputBytes_))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-04,
+		comment is 'FIPS 202 SHAKE256 extensible-output function.',
+		parameters is [
+			'OutputBytes' - 'Number of output bytes to generate.'
+		],
+		see_also is [shake128(_), sha3_224, sha3_256, sha3_384, sha3_512]
+	]).
 
 :- end_object.
 
@@ -450,12 +834,7 @@
 	implements(hash_protocol)).
 
 	:- uses(hash_common_32, [
-		pad_md/4,
-		integer_to_big_endian_bytes32/2,
-		bytes_hex/2,
-		add32/3,
-		rol32/3,
-		big_endian_word32/2
+		pad_md/4, integer_to_big_endian_bytes32/2, bytes_hex/2, add32/3, rol32/3, big_endian_word32/2
 	]).
 
 	:- info([
@@ -553,12 +932,7 @@
 	implements(hash_protocol)).
 
 	:- uses(hash_common_32, [
-		pad_md/4,
-		bytes_hex/2,
-		add32/3,
-		ror32/3,
-		integer_to_big_endian_bytes32/2,
-		big_endian_word32/2
+		pad_md/4, bytes_hex/2, add32/3, ror32/3, integer_to_big_endian_bytes32/2, big_endian_word32/2
 	]).
 
 	:- info([

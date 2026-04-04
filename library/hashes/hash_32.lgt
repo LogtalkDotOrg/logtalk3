@@ -22,7 +22,9 @@
 :- object(djb2_32,
 	implements(hash_protocol)).
 
-	:- uses(hash_common_32, [word32_hex/2]).
+	:- uses(hash_common_32, [
+		word32_hex/2
+	]).
 
 	:- info([
 		version is 1:0:0,
@@ -47,7 +49,9 @@
 :- object(sdbm_32,
 	implements(hash_protocol)).
 
-	:- uses(hash_common_32, [word32_hex/2]).
+	:- uses(hash_common_32, [
+		word32_hex/2
+	]).
 
 	:- info([
 		version is 1:0:0,
@@ -72,7 +76,9 @@
 :- object(fnv1a_32,
 	implements(hash_protocol)).
 
-	:- uses(hash_common_32, [word32_hex/2, mul32/3]).
+	:- uses(hash_common_32, [
+		word32_hex/2, mul32/3
+	]).
 
 	:- info([
 		version is 1:0:0,
@@ -98,7 +104,9 @@
 :- object(crc32,
 	implements(hash_protocol)).
 
-	:- uses(hash_common_32, [word32_hex/2]).
+	:- uses(hash_common_32, [
+		word32_hex/2
+	]).
 
 	:- info([
 		version is 1:0:0,
@@ -142,7 +150,9 @@
 :- object(murmurhash3_x86_32,
 	implements(hash_protocol)).
 
-	:- uses(hash_common_32, [word32_hex/2, little_endian_word32/2, mul32/3, rol32/3]).
+	:- uses(hash_common_32, [
+		word32_hex/2, little_endian_word32/2, mul32/3, rol32/3
+	]).
 
 	:- info([
 		version is 1:0:0,

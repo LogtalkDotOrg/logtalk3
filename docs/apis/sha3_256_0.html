@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>djb2_64 &mdash; Logtalk 3.99.0</title>
+  <title>sha3_256 &mdash; Logtalk 3.99.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="fips202_hash(A,B,C)" href="fips202_hash_3.html" />
-    <link rel="prev" title="djb2_32" href="djb2_32_0.html" />
+    <link rel="next" title="sha3_384" href="sha3_384_0.html" />
+    <link rel="prev" title="sha3_224" href="sha3_224_0.html" />
    
 </head>
 
@@ -113,7 +113,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#hashes"><span class="xref std std-ref">hashes</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="crc32_0.html">crc32</a></li>
 <li class="toctree-l3"><a class="reference internal" href="djb2_32_0.html">djb2_32</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">djb2_64</a></li>
+<li class="toctree-l3"><a class="reference internal" href="djb2_64_0.html">djb2_64</a></li>
 <li class="toctree-l3"><a class="reference internal" href="fips202_hash_3.html">fips202_hash(A,B,C)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="fnv1a_32_0.html">fnv1a_32</a></li>
 <li class="toctree-l3"><a class="reference internal" href="fnv1a_64_0.html">fnv1a_64</a></li>
@@ -129,7 +129,7 @@
 <li class="toctree-l3"><a class="reference internal" href="sha1_0.html">sha1</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sha256_0.html">sha256</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sha3_224_0.html">sha3_224</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sha3_256_0.html">sha3_256</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">sha3_256</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sha3_384_0.html">sha3_384</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sha3_512_0.html">sha3_512</a></li>
 <li class="toctree-l3"><a class="reference internal" href="shake128_1.html">shake128(OutputBytes)</a></li>
@@ -259,9 +259,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">djb2_64</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">sha3_256</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/djb2_64_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/sha3_256_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -269,10 +269,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="djb2-64-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="djb2-64">
-<h1><code class="docutils literal notranslate"><span class="pre">djb2_64</span></code><a class="headerlink" href="#djb2-64" title="Link to this heading"></a></h1>
-<p>DJB2 64-bit hash function.</p>
+  <p class="right" id="sha3-256-0"><span id="index-0"></span><strong>object</strong></p>
+<section id="sha3-256">
+<h1><code class="docutils literal notranslate"><span class="pre">sha3_256</span></code><a class="headerlink" href="#sha3-256" title="Link to this heading"></a></h1>
+<p>FIPS 202 SHA3-256 hash function.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -291,13 +291,9 @@
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Implements:</strong></div>
+<div class="line"><strong>Extends:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="hash_protocol_0.html#hash-protocol-0"><span class="std std-ref">hash_protocol</span></a></div>
-</div>
-<div class="line"><strong>Uses:</strong></div>
-<div class="line-block">
-<div class="line"><a class="reference internal" href="hash_common_64_0.html#hash-common-64-0"><span class="std std-ref">hash_common_64</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="fips202_hash_3.html#fips202-hash-3"><span class="std std-ref">fips202_hash(136,6,32)</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -337,7 +333,7 @@
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="djb2_32_0.html#djb2-32-0"><span class="std std-ref">djb2_32</span></a>, <a class="reference internal" href="sdbm_64_0.html#sdbm-64-0"><span class="std std-ref">sdbm_64</span></a>, <a class="reference internal" href="fnv1a_64_0.html#fnv1a-64-0"><span class="std std-ref">fnv1a_64</span></a></p>
+<p><a class="reference internal" href="sha3_224_0.html#sha3-224-0"><span class="std std-ref">sha3_224</span></a>, <a class="reference internal" href="sha3_384_0.html#sha3-384-0"><span class="std std-ref">sha3_384</span></a>, <a class="reference internal" href="sha3_512_0.html#sha3-512-0"><span class="std std-ref">sha3_512</span></a>, <a class="reference internal" href="sha256_0.html#sha256-0"><span class="std std-ref">sha256</span></a>, <a class="reference internal" href="shake128_1.html#shake128-1"><span class="std std-ref">shake128(OutputBytes)</span></a>, <a class="reference internal" href="shake256_1.html#shake256-1"><span class="std std-ref">shake256(OutputBytes)</span></a></p>
 </div>
 </section>
 </section>
@@ -346,8 +342,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="djb2_32_0.html" class="btn btn-neutral float-left" title="djb2_32" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="fips202_hash_3.html" class="btn btn-neutral float-right" title="fips202_hash(A,B,C)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="sha3_224_0.html" class="btn btn-neutral float-left" title="sha3_224" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sha3_384_0.html" class="btn btn-neutral float-right" title="sha3_384" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

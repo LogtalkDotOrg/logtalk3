@@ -1,0 +1,60 @@
+.. index:: single: sha3_512
+.. _sha3_512/0:
+
+.. rst-class:: right
+
+**object**
+
+``sha3_512``
+============
+
+FIPS 202 SHA3-512 hash function.
+
+| **Availability:** 
+|    ``logtalk_load(hashes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-04
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`fips202_hash(72,6,64) <fips202_hash/3>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`hash_protocol/0::hash/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`sha3_224 <sha3_224/0>`, :ref:`sha3_256 <sha3_256/0>`, :ref:`sha3_384 <sha3_384/0>`, :ref:`shake128(OutputBytes) <shake128/1>`, :ref:`shake256(OutputBytes) <shake256/1>`
+

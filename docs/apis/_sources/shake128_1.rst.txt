@@ -1,0 +1,63 @@
+.. index:: single: shake128(OutputBytes)
+.. _shake128/1:
+
+.. rst-class:: right
+
+**object**
+
+``shake128(OutputBytes)``
+=========================
+
+* ``OutputBytes`` - Number of output bytes to generate.
+
+
+FIPS 202 SHAKE128 extensible-output function.
+
+| **Availability:** 
+|    ``logtalk_load(hashes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-04
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`fips202_hash(168,31,OutputBytes) <fips202_hash/3>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`hash_protocol/0::hash/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`shake256(OutputBytes) <shake256/1>`, :ref:`sha3_224 <sha3_224/0>`, :ref:`sha3_256 <sha3_256/0>`, :ref:`sha3_384 <sha3_384/0>`, :ref:`sha3_512 <sha3_512/0>`
+

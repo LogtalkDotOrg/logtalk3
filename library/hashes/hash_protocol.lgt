@@ -25,7 +25,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-04,
-		comment is 'Hashing protocol. Hash values are returned as lowercase hexadecimal atoms with the natural width of each algorithm output.'
+		comment is 'Hashing protocol. Hash values are returned as lowercase hexadecimal atoms using the output width of each algorithm or extensible-output function instance.'
 	]).
 
 	:- public(hash/2).

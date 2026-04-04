@@ -133,6 +133,120 @@ Rotates a 64-bit word left by the given number of bits.
 
 ------------
 
+.. index:: xor64/3
+.. _hash_common_64/0::xor64/3:
+
+``xor64/3``
+^^^^^^^^^^^
+
+Computes the bitwise exclusive-or of two integers modulo 2^64.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``xor64(A,B,Xor)``
+| **Mode and number of proofs:**
+|    ``xor64(+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: or64/3
+.. _hash_common_64/0::or64/3:
+
+``or64/3``
+^^^^^^^^^^
+
+Computes the bitwise disjunction of two integers modulo 2^64.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``or64(A,B,Or)``
+| **Mode and number of proofs:**
+|    ``or64(+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: and64/3
+.. _hash_common_64/0::and64/3:
+
+``and64/3``
+^^^^^^^^^^^
+
+Computes the bitwise conjunction of two integers modulo 2^64.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``and64(A,B,And)``
+| **Mode and number of proofs:**
+|    ``and64(+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: not64/2
+.. _hash_common_64/0::not64/2:
+
+``not64/2``
+^^^^^^^^^^^
+
+Computes the bitwise complement of an integer modulo 2^64.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``not64(Value,Complement)``
+| **Mode and number of proofs:**
+|    ``not64(+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: shl64/3
+.. _hash_common_64/0::shl64/3:
+
+``shl64/3``
+^^^^^^^^^^^
+
+Shifts a 64-bit word left by the given number of bits and masks the result.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``shl64(Value,Shift,Shifted)``
+| **Mode and number of proofs:**
+|    ``shl64(+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: shr64/3
+.. _hash_common_64/0::shr64/3:
+
+``shr64/3``
+^^^^^^^^^^^
+
+Shifts a 64-bit word right by the given number of bits after masking the input.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``shr64(Value,Shift,Shifted)``
+| **Mode and number of proofs:**
+|    ``shr64(+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
 .. index:: integer_to_big_endian_bytes64/2
 .. _hash_common_64/0::integer_to_big_endian_bytes64/2:
 

@@ -186,6 +186,7 @@ Objects
    file_dependency_diagram(Format) <file_dependency_diagram_1>
    file_load_diagram <file_load_diagram_0>
    file_load_diagram(Format) <file_load_diagram_1>
+   fips202_hash(A,B,C) <fips202_hash_3>
    float <float_0>
    fnv1a_32 <fnv1a_32_0>
    fnv1a_64 <fnv1a_64_0>
@@ -338,6 +339,12 @@ Objects
    set(Type) <set_1>
    sha1 <sha1_0>
    sha256 <sha256_0>
+   sha3_224 <sha3_224_0>
+   sha3_256 <sha3_256_0>
+   sha3_384 <sha3_384_0>
+   sha3_512 <sha3_512_0>
+   shake128(OutputBytes) <shake128_1>
+   shake256(OutputBytes) <shake256_1>
    shell <shell_0>
    shell(Interpreters) <shell_1>
    shell_expansion(Mode) <shell_expansion_1>

@@ -22,14 +22,25 @@ The library implements the following hashing algorithms:
 - MurmurHash3 x86 32-bit (``murmurhash3_x86_32``)
 - MurmurHash3 x86 128-bit (``murmurhash3_x86_128``)
 - MurmurHash3 x64 128-bit (``murmurhash3_x64_128``)
+- SHA3-224 (``sha3_224``)
+- SHA3-256 (``sha3_256``)
+- SHA3-384 (``sha3_384``)
+- SHA3-512 (``sha3_512``)
+- SHAKE128 (``shake128(OutputBytes)``)
+- SHAKE256 (``shake256(OutputBytes)``)
 - MD5 (``md5``)
 - SHA1 (``sha1``)
 - SHA256 (``sha256``)
 
 The ``djb2_64``, ``sdbm_64``, ``fnv1a_64``, ``siphash_2_4``,
-``murmurhash3_x86_128``, ``murmurhash3_x64_128``, ``sha1``, and
-``sha256`` objects are only loaded on backend Prolog compilers
-supporting unbounded integer arithmetic.
+``murmurhash3_x86_128``, ``murmurhash3_x64_128``, ``sha3_224``,
+``sha3_256``, ``sha3_384``, ``sha3_512``, ``shake128(OutputBytes)``,
+``shake256(OutputBytes)``, ``sha1``, and ``sha256`` objects are only
+loaded on backend Prolog compilers supporting unbounded integer
+arithmetic.
+
+The SHAKE objects are parametric extensible-output functions. Pass the
+number of output bytes to generate when constructing the object.
 
 The ``siphash_2_4`` object uses the standard reference key
 ``00 01 02 ... 0f``. For custom keys, use the parametric object
@@ -76,6 +87,16 @@ Compute the SHA-256 hash of a text message:
         sha256::hash(Bytes, Hash).
    Bytes = [84,104,101,32,113,117,105,99,107,32,98,114,111,119,110,32,102,111,120,32,106,117,109,112,115,32,111,118,101,114,32,116,104,101,32,108,97,122,121,32,100,111,103],
    Hash = 'd7a8fbb307d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592'
+   yes
+
+Compute a 32-byte SHAKE128 digest:
+
+::
+
+   | ?- atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
+        shake128(32)::hash(Bytes, Hash).
+   Bytes = [84,104,101,32,113,117,105,99,107,32,98,114,111,119,110,32,102,111,120,32,106,117,109,112,115,32,111,118,101,114,32,116,104,101,32,108,97,122,121,32,100,111,103],
+   Hash = 'f4202e3c5852f9182a0430fd8144f0a74b95e7417ecae17db0f8cfeed0e3e66e'
    yes
 
 Compute the CRC32 checksum for the standard ``123456789`` test vector:
