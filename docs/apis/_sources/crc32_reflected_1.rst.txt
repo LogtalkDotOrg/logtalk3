@@ -1,21 +1,24 @@
-.. index:: single: crc32
-.. _crc32/0:
+.. index:: single: crc32_reflected(Polynomial)
+.. _crc32_reflected/1:
 
 .. rst-class:: right
 
 **object**
 
-``crc32``
-=========
+``crc32_reflected(Polynomial)``
+===============================
 
-CRC32 hash function using the standard polynomial 0xEDB88320.
+* ``Polynomial`` - Reflected CRC-32 polynomial.
+
+
+Parametric reflected CRC-32 hash function using initial value 0xFFFFFFFF and final xor 0xFFFFFFFF.
 
 | **Availability:** 
 |    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-04
+| **Date:** 2026-04-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -58,5 +61,5 @@ Operators
 
 .. seealso::
 
-   :ref:`murmurhash3_x86_32 <murmurhash3_x86_32/0>`, :ref:`fnv1a_32 <fnv1a_32/0>`
+   :ref:`crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength) <crc32_non_reflected/4>`, :ref:`crc32b <crc32b/0>`, :ref:`crc32c <crc32c/0>`, :ref:`crc32posix <crc32posix/0>`, :ref:`crc32mpeg2 <crc32mpeg2/0>`, :ref:`crc32bzip2 <crc32bzip2/0>`, :ref:`crc32q <crc32q/0>`, :ref:`murmurhash3_x86_32 <murmurhash3_x86_32/0>`, :ref:`fnv1a_32 <fnv1a_32/0>`
 

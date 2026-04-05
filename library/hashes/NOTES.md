@@ -35,7 +35,14 @@ The library implements the following hashing algorithms:
 - FNV-1a 32-bit (`fnv1a_32`)
 - FNV-1a 64-bit (`fnv1a_64`)
 - SipHash (`siphash_2_4`)
-- CRC32 (`crc32`)
+- CRC-32 parametric reflected implementation (`crc32_reflected(Polynomial)`)
+- CRC-32 parametric non-reflected implementation (`crc32_non_reflected(Polynomial, Initial, FinalXor, AppendLength)`)
+- CRC-32/ISO-HDLC (`crc32b`)
+- CRC-32C/Castagnoli (`crc32c`)
+- CRC-32/POSIX (`crc32posix`)
+- CRC-32/MPEG-2 (`crc32mpeg2`)
+- CRC-32/BZIP2 (`crc32bzip2`)
+- CRC-32Q (aka CRC-32/AIXM) (`crc32q`)
 - MurmurHash3 x86 32-bit (`murmurhash3_x86_32`)
 - MurmurHash3 x86 128-bit (`murmurhash3_x86_128`)
 - MurmurHash3 x64 128-bit (`murmurhash3_x64_128`)
@@ -57,6 +64,45 @@ integer arithmetic.
 
 The SHAKE objects are parametric extensible-output functions. Pass the number
 of output bytes to generate when constructing the object.
+
+The `crc32_reflected(Polynomial)` object implements a reflected CRC-32 family using
+initial value `0xFFFFFFFF` and final xor value `0xFFFFFFFF`, where
+`Polynomial` is the reflected CRC-32 polynomial.
+
+The `crc32_non_reflected(Polynomial, Initial, FinalXor, AppendLength)` object
+implements a non-reflected CRC-32 family using a canonical polynomial,
+ configurable initial and final xor values, and an `AppendLength` flag that
+ controls whether the message length is appended as little-endian bytes.
+
+The `crc32b` object implements the CRC-32/ISO-HDLC variant, also widely used
+by Ethernet, gzip, and PKZip. It uses reflected input/output processing, the
+reflected polynomial `0xEDB88320` (equivalent to the canonical polynomial
+`0x04C11DB7`), initial value `0xFFFFFFFF`, and final xor value `0xFFFFFFFF`.
+
+The `crc32c` object implements the CRC-32C/Castagnoli variant using reflected
+input/output processing, the reflected polynomial `0x82F63B78` (equivalent to
+the canonical polynomial `0x1EDC6F41`), initial value `0xFFFFFFFF`, and final
+xor value `0xFFFFFFFF`.
+
+The `crc32posix` object implements the CRC-32/POSIX variant used by the
+standard `cksum` utility. It is an instance of the non-reflected
+`crc32_non_reflected(Polynomial, Initial, FinalXor, AppendLength)` family:
+it uses the canonical polynomial `0x04C11DB7`,
+initial value `0x00000000`, processes bits most-significant first, appends the
+message length as little-endian bytes, and applies a final xor value of
+`0xFFFFFFFF`.
+
+The `crc32mpeg2` object implements the CRC-32/MPEG-2 variant using the
+canonical polynomial `0x04C11DB7`, initial value `0xFFFFFFFF`, no appended
+length bytes, and final xor value `0x00000000`.
+
+The `crc32bzip2` object implements the CRC-32/BZIP2 variant using the
+canonical polynomial `0x04C11DB7`, initial value `0xFFFFFFFF`, no appended
+length bytes, and final xor value `0xFFFFFFFF`.
+
+The `crc32q` object implements the CRC-32Q variant, also used by AIXM-style
+formats, using the canonical polynomial `0x814141AB`, initial value
+`0x00000000`, no appended length bytes, and final xor value `0x00000000`.
 
 The `siphash_2_4` object uses the standard reference key `00 01 02 ... 0f`.
 For custom keys, use the parametric object `siphash_2_4(Key)` where `Key`
@@ -109,11 +155,46 @@ Compute a 32-byte SHAKE128 digest:
 	Hash = 'f4202e3c5852f9182a0430fd8144f0a74b95e7417ecae17db0f8cfeed0e3e66e'
 	yes
 
-Compute the CRC32 checksum for the standard `123456789` test vector:
+Compute the CRC-32/ISO-HDLC checksum for the standard `123456789` test vector:
 
-	| ?- atom_codes('123456789', Bytes), crc32::hash(Bytes, Hash).
+	| ?- atom_codes('123456789', Bytes), crc32b::hash(Bytes, Hash).
 	Bytes = [49,50,51,52,53,54,55,56,57],
 	Hash = 'cbf43926'
+	yes
+
+Compute the CRC-32C/Castagnoli checksum for the standard `123456789` test vector:
+
+	| ?- atom_codes('123456789', Bytes), crc32c::hash(Bytes, Hash).
+	Bytes = [49,50,51,52,53,54,55,56,57],
+	Hash = 'e3069283'
+	yes
+
+Compute the CRC-32/POSIX checksum for the standard `123456789` test vector:
+
+	| ?- atom_codes('123456789', Bytes), crc32posix::hash(Bytes, Hash).
+	Bytes = [49,50,51,52,53,54,55,56,57],
+	Hash = '377a6011'
+	yes
+
+Compute the CRC-32/MPEG-2 checksum for the standard `123456789` test vector:
+
+	| ?- atom_codes('123456789', Bytes), crc32mpeg2::hash(Bytes, Hash).
+	Bytes = [49,50,51,52,53,54,55,56,57],
+	Hash = '0376e6e7'
+	yes
+
+Compute the CRC-32/BZIP2 checksum for the standard `123456789` test vector:
+
+	| ?- atom_codes('123456789', Bytes), crc32bzip2::hash(Bytes, Hash).
+	Bytes = [49,50,51,52,53,54,55,56,57],
+	Hash = 'fc891918'
+	yes
+
+Compute the CRC-32Q checksum for the standard `123456789` test vector:
+
+	| ?- atom_codes('123456789', Bytes), crc32q::hash(Bytes, Hash).
+	Bytes = [49,50,51,52,53,54,55,56,57],
+	Hash = '3010bf7f'
 	yes
 
 Use SipHash-2-4 with a custom key on a backend supporting unbounded integer

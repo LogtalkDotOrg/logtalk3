@@ -532,7 +532,14 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
 
-   crc32 <crc32_0>
+   crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength) <crc32_non_reflected_4>
+   crc32_reflected(Polynomial) <crc32_reflected_1>
+   crc32b <crc32b_0>
+   crc32bzip2 <crc32bzip2_0>
+   crc32c <crc32c_0>
+   crc32mpeg2 <crc32mpeg2_0>
+   crc32posix <crc32posix_0>
+   crc32q <crc32q_0>
    djb2_32 <djb2_32_0>
    djb2_64 <djb2_64_0>
    fips202_hash(A,B,C) <fips202_hash_3>

@@ -101,7 +101,7 @@
 :- end_object.
 
 
-:- object(crc32,
+:- object(crc32_reflected(_Polynomial_),
 	implements(hash_protocol)).
 
 	:- uses(hash_common_32, [
@@ -111,16 +111,19 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
-		comment is 'CRC32 hash function using the standard polynomial 0xEDB88320.',
-		see_also is [murmurhash3_x86_32, fnv1a_32]
+		date is 2026-04-05,
+		comment is 'Parametric reflected CRC-32 hash function using initial value 0xFFFFFFFF and final xor 0xFFFFFFFF.',
+		parameters is [
+			'Polynomial' - 'Reflected CRC-32 polynomial.'
+		],
+		see_also is [crc32_non_reflected(_,_,_,_), crc32b, crc32c, crc32posix, crc32mpeg2, crc32bzip2, crc32q, murmurhash3_x86_32, fnv1a_32]
 	]).
 
 	hash(Bytes, Hash) :-
-		crc32(Bytes, CRC32),
+		crc32_reflected(Bytes, CRC32),
 		word32_hex(CRC32, Hash).
 
-	crc32(Bytes, CRC32) :-
+	crc32_reflected(Bytes, CRC32) :-
 		crc32_acc(Bytes, 0xFFFFFFFF, Acc),
 		CRC32 is xor(Acc, 0xFFFFFFFF) /\ 0xFFFFFFFF.
 
@@ -138,11 +141,164 @@
 		!.
 	crc32_table_value(Count, Value0, Value) :-
 		(   Value0 /\ 1 =:= 1 ->
-			Value1 is xor((Value0 >> 1), 0xEDB88320)
+			Value1 is xor((Value0 >> 1), _Polynomial_)
 		;   Value1 is Value0 >> 1
 		),
 		NextCount is Count - 1,
 		crc32_table_value(NextCount, Value1, Value).
+
+:- end_object.
+
+
+:- object(crc32b,
+	extends(crc32_reflected(0xEDB88320))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-05,
+		comment is 'CRC-32/ISO-HDLC hash function using the reflected polynomial 0xEDB88320, initial value 0xFFFFFFFF, and final xor 0xFFFFFFFF.',
+		see_also is [crc32_reflected(_), crc32c, crc32posix, crc32mpeg2, crc32bzip2, crc32q, murmurhash3_x86_32, fnv1a_32]
+	]).
+
+:- end_object.
+
+
+:- object(crc32c,
+	extends(crc32_reflected(0x82F63B78))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-05,
+		comment is 'CRC-32C/Castagnoli hash function using the reflected polynomial 0x82F63B78, initial value 0xFFFFFFFF, and final xor 0xFFFFFFFF.',
+		see_also is [crc32_reflected(_), crc32b, crc32posix, crc32mpeg2, crc32bzip2, crc32q, murmurhash3_x86_32, fnv1a_32]
+	]).
+
+:- end_object.
+
+
+:- object(crc32_non_reflected(_Polynomial_, _Initial_, _FinalXor_, _AppendLength_),
+	implements(hash_protocol)).
+
+	:- uses(hash_common_32, [
+		word32_hex/2
+	]).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-05,
+		comment is 'Parametric non-reflected CRC-32 hash function using a canonical polynomial, configurable initial value and final xor value, and optional appended little-endian length bytes.',
+		parameters is [
+			'Polynomial' - 'Canonical non-reflected CRC-32 polynomial.',
+			'Initial' - 'Initial CRC accumulator value.',
+			'FinalXor' - 'Final xor value.',
+			'AppendLength' - 'Boolean flag controlling whether the message length is appended as little-endian bytes.'
+		],
+		see_also is [crc32_reflected(_), crc32b, crc32c, crc32posix, crc32mpeg2, crc32bzip2, crc32q, murmurhash3_x86_32, fnv1a_32]
+	]).
+
+	hash(Bytes, Hash) :-
+		crc32_non_reflected(Bytes, CRC32),
+		word32_hex(CRC32, Hash),
+		!.
+
+	crc32_non_reflected(Bytes, CRC32) :-
+		crc32_non_reflected_acc(Bytes, _Initial_, Acc0),
+		(   _AppendLength_ == true ->
+			length_bytes(Bytes, LengthBytes),
+			crc32_non_reflected_acc(LengthBytes, Acc0, Acc1)
+		;   Acc1 = Acc0
+		),
+		CRC32 is xor(Acc1, _FinalXor_) /\ 0xFFFFFFFF.
+
+	crc32_non_reflected_acc([], Acc, Acc).
+	crc32_non_reflected_acc([Byte| Bytes], Acc0, Acc) :-
+		step_byte(Acc0, Byte, Acc1),
+		crc32_non_reflected_acc(Bytes, Acc1, Acc).
+
+	step_byte(Acc0, Byte, Acc) :-
+		Acc1 is xor(Acc0, (Byte /\ 0xFF) << 24) /\ 0xFFFFFFFF,
+		step_bits(8, Acc1, Acc).
+
+	step_bits(0, Acc, Acc) :-
+		!.
+	step_bits(Count, Acc0, Acc) :-
+		(   Acc0 /\ 0x80000000 =:= 0x80000000 ->
+			Acc1 is xor((Acc0 << 1), _Polynomial_) /\ 0xFFFFFFFF
+		;   Acc1 is (Acc0 << 1) /\ 0xFFFFFFFF
+		),
+		NextCount is Count - 1,
+		step_bits(NextCount, Acc1, Acc).
+
+	length_bytes(Bytes, LengthBytes) :-
+		list::length(Bytes, Length),
+		length_bytes(Length, LengthBytes).
+
+	length_bytes(0, []) :-
+		!.
+	length_bytes(Length, [Byte| Bytes]) :-
+		Length > 0,
+		Byte is Length /\ 0xFF,
+		NextLength is Length >> 8,
+		length_bytes(NextLength, Bytes).
+
+:- end_object.
+
+
+:- object(crc32posix,
+	extends(crc32_non_reflected(0x04C11DB7, 0x00000000, 0xFFFFFFFF, true))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-05,
+		comment is 'CRC-32/POSIX (cksum) hash function using the canonical polynomial 0x04C11DB7, initial value 0x00000000, appended little-endian length bytes, and final xor 0xFFFFFFFF.',
+		see_also is [crc32_non_reflected(_,_,_,_), crc32_reflected(_), crc32b, crc32c, crc32mpeg2, crc32bzip2, crc32q, murmurhash3_x86_32, fnv1a_32]
+	]).
+
+:- end_object.
+
+
+:- object(crc32mpeg2,
+	extends(crc32_non_reflected(0x04C11DB7, 0xFFFFFFFF, 0x00000000, false))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-05,
+		comment is 'CRC-32/MPEG-2 hash function using the canonical polynomial 0x04C11DB7, initial value 0xFFFFFFFF, and final xor 0x00000000.',
+		see_also is [crc32_non_reflected(_,_,_,_), crc32posix, crc32bzip2, crc32q, crc32_reflected(_), crc32b, crc32c, murmurhash3_x86_32, fnv1a_32]
+	]).
+
+:- end_object.
+
+
+:- object(crc32bzip2,
+	extends(crc32_non_reflected(0x04C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, false))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-05,
+		comment is 'CRC-32/BZIP2 hash function using the canonical polynomial 0x04C11DB7, initial value 0xFFFFFFFF, and final xor 0xFFFFFFFF.',
+		see_also is [crc32_non_reflected(_,_,_,_), crc32mpeg2, crc32posix, crc32q, crc32_reflected(_), crc32b, crc32c, murmurhash3_x86_32, fnv1a_32]
+	]).
+
+:- end_object.
+
+
+:- object(crc32q,
+	extends(crc32_non_reflected(0x814141AB, 0x00000000, 0x00000000, false))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-05,
+		comment is 'CRC-32Q hash function, also used by AIXM-style formats, using the canonical polynomial 0x814141AB, initial value 0x00000000, and final xor 0x00000000.',
+		see_also is [crc32_non_reflected(_,_,_,_), crc32mpeg2, crc32bzip2, crc32posix, crc32_reflected(_), crc32b, crc32c, murmurhash3_x86_32, fnv1a_32]
+	]).
 
 :- end_object.
 

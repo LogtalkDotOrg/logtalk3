@@ -1,28 +1,28 @@
-.. index:: single: siphash_2_4
-.. _siphash_2_4/0:
+.. index:: single: crc32mpeg2
+.. _crc32mpeg2/0:
 
 .. rst-class:: right
 
 **object**
 
-``siphash_2_4``
-===============
+``crc32mpeg2``
+==============
 
-SipHash-2-4 hash function using the standard reference key 00 01 02 ... 0f.
+CRC-32/MPEG-2 hash function using the canonical polynomial 0x04C11DB7, initial value 0xFFFFFFFF, and final xor 0x00000000.
 
 | **Availability:** 
 |    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-04
+| **Date:** 2026-04-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Extends:**
-|    ``public`` :ref:`siphash_2_4([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]) <siphash_2_4/1>`
+|    ``public`` :ref:`crc32_non_reflected(79764919,4294967295,0,false) <crc32_non_reflected/4>`
 
 | **Remarks:**
 |    (none)
@@ -56,5 +56,5 @@ Operators
 
 .. seealso::
 
-   :ref:`siphash_2_4(Key) <siphash_2_4/1>`, :ref:`fnv1a_64 <fnv1a_64/0>`, :ref:`crc32b <crc32b/0>`, :ref:`crc32c <crc32c/0>`
+   :ref:`crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength) <crc32_non_reflected/4>`, :ref:`crc32posix <crc32posix/0>`, :ref:`crc32bzip2 <crc32bzip2/0>`, :ref:`crc32q <crc32q/0>`, :ref:`crc32_reflected(Polynomial) <crc32_reflected/1>`, :ref:`crc32b <crc32b/0>`, :ref:`crc32c <crc32c/0>`, :ref:`murmurhash3_x86_32 <murmurhash3_x86_32/0>`, :ref:`fnv1a_32 <fnv1a_32/0>`
 

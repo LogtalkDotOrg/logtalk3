@@ -237,7 +237,16 @@ hexadecimal atom.</p>
 <li><p>FNV-1a 32-bit (<code class="docutils literal notranslate"><span class="pre">fnv1a_32</span></code>)</p></li>
 <li><p>FNV-1a 64-bit (<code class="docutils literal notranslate"><span class="pre">fnv1a_64</span></code>)</p></li>
 <li><p>SipHash (<code class="docutils literal notranslate"><span class="pre">siphash_2_4</span></code>)</p></li>
-<li><p>CRC32 (<code class="docutils literal notranslate"><span class="pre">crc32</span></code>)</p></li>
+<li><p>CRC-32 parametric reflected implementation
+(<code class="docutils literal notranslate"><span class="pre">crc32_reflected(Polynomial)</span></code>)</p></li>
+<li><p>CRC-32 parametric non-reflected implementation
+(<code class="docutils literal notranslate"><span class="pre">crc32_non_reflected(Polynomial,</span> <span class="pre">Initial,</span> <span class="pre">FinalXor,</span> <span class="pre">AppendLength)</span></code>)</p></li>
+<li><p>CRC-32/ISO-HDLC (<code class="docutils literal notranslate"><span class="pre">crc32b</span></code>)</p></li>
+<li><p>CRC-32C/Castagnoli (<code class="docutils literal notranslate"><span class="pre">crc32c</span></code>)</p></li>
+<li><p>CRC-32/POSIX (<code class="docutils literal notranslate"><span class="pre">crc32posix</span></code>)</p></li>
+<li><p>CRC-32/MPEG-2 (<code class="docutils literal notranslate"><span class="pre">crc32mpeg2</span></code>)</p></li>
+<li><p>CRC-32/BZIP2 (<code class="docutils literal notranslate"><span class="pre">crc32bzip2</span></code>)</p></li>
+<li><p>CRC-32Q (aka CRC-32/AIXM) (<code class="docutils literal notranslate"><span class="pre">crc32q</span></code>)</p></li>
 <li><p>MurmurHash3 x86 32-bit (<code class="docutils literal notranslate"><span class="pre">murmurhash3_x86_32</span></code>)</p></li>
 <li><p>MurmurHash3 x86 128-bit (<code class="docutils literal notranslate"><span class="pre">murmurhash3_x86_128</span></code>)</p></li>
 <li><p>MurmurHash3 x64 128-bit (<code class="docutils literal notranslate"><span class="pre">murmurhash3_x64_128</span></code>)</p></li>
@@ -259,6 +268,40 @@ loaded on backend Prolog compilers supporting unbounded integer
 arithmetic.</p>
 <p>The SHAKE objects are parametric extensible-output functions. Pass the
 number of output bytes to generate when constructing the object.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">crc32_reflected(Polynomial)</span></code> object implements a reflected CRC-32
+family using initial value <code class="docutils literal notranslate"><span class="pre">0xFFFFFFFF</span></code> and final xor value
+<code class="docutils literal notranslate"><span class="pre">0xFFFFFFFF</span></code>, where <code class="docutils literal notranslate"><span class="pre">Polynomial</span></code> is the reflected CRC-32 polynomial.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">crc32_non_reflected(Polynomial,</span> <span class="pre">Initial,</span> <span class="pre">FinalXor,</span> <span class="pre">AppendLength)</span></code>
+object implements a non-reflected CRC-32 family using a canonical
+polynomial, configurable initial and final xor values, and an
+<code class="docutils literal notranslate"><span class="pre">AppendLength</span></code> flag that controls whether the message length is
+appended as little-endian bytes.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">crc32b</span></code> object implements the CRC-32/ISO-HDLC variant, also
+widely used by Ethernet, gzip, and PKZip. It uses reflected input/output
+processing, the reflected polynomial <code class="docutils literal notranslate"><span class="pre">0xEDB88320</span></code> (equivalent to the
+canonical polynomial <code class="docutils literal notranslate"><span class="pre">0x04C11DB7</span></code>), initial value <code class="docutils literal notranslate"><span class="pre">0xFFFFFFFF</span></code>, and
+final xor value <code class="docutils literal notranslate"><span class="pre">0xFFFFFFFF</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">crc32c</span></code> object implements the CRC-32C/Castagnoli variant using
+reflected input/output processing, the reflected polynomial
+<code class="docutils literal notranslate"><span class="pre">0x82F63B78</span></code> (equivalent to the canonical polynomial <code class="docutils literal notranslate"><span class="pre">0x1EDC6F41</span></code>),
+initial value <code class="docutils literal notranslate"><span class="pre">0xFFFFFFFF</span></code>, and final xor value <code class="docutils literal notranslate"><span class="pre">0xFFFFFFFF</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">crc32posix</span></code> object implements the CRC-32/POSIX variant used by
+the standard <code class="docutils literal notranslate"><span class="pre">cksum</span></code> utility. It is an instance of the non-reflected
+<code class="docutils literal notranslate"><span class="pre">crc32_non_reflected(Polynomial,</span> <span class="pre">Initial,</span> <span class="pre">FinalXor,</span> <span class="pre">AppendLength)</span></code>
+family: it uses the canonical polynomial <code class="docutils literal notranslate"><span class="pre">0x04C11DB7</span></code>, initial value
+<code class="docutils literal notranslate"><span class="pre">0x00000000</span></code>, processes bits most-significant first, appends the
+message length as little-endian bytes, and applies a final xor value of
+<code class="docutils literal notranslate"><span class="pre">0xFFFFFFFF</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">crc32mpeg2</span></code> object implements the CRC-32/MPEG-2 variant using the
+canonical polynomial <code class="docutils literal notranslate"><span class="pre">0x04C11DB7</span></code>, initial value <code class="docutils literal notranslate"><span class="pre">0xFFFFFFFF</span></code>, no
+appended length bytes, and final xor value <code class="docutils literal notranslate"><span class="pre">0x00000000</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">crc32bzip2</span></code> object implements the CRC-32/BZIP2 variant using the
+canonical polynomial <code class="docutils literal notranslate"><span class="pre">0x04C11DB7</span></code>, initial value <code class="docutils literal notranslate"><span class="pre">0xFFFFFFFF</span></code>, no
+appended length bytes, and final xor value <code class="docutils literal notranslate"><span class="pre">0xFFFFFFFF</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">crc32q</span></code> object implements the CRC-32Q variant, also used by
+AIXM-style formats, using the canonical polynomial <code class="docutils literal notranslate"><span class="pre">0x814141AB</span></code>,
+initial value <code class="docutils literal notranslate"><span class="pre">0x00000000</span></code>, no appended length bytes, and final xor
+value <code class="docutils literal notranslate"><span class="pre">0x00000000</span></code>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">siphash_2_4</span></code> object uses the standard reference key
 <code class="docutils literal notranslate"><span class="pre">00</span> <span class="pre">01</span> <span class="pre">02</span> <span class="pre">...</span> <span class="pre">0f</span></code>. For custom keys, use the parametric object
 <code class="docutils literal notranslate"><span class="pre">siphash_2_4(Key)</span></code> where <code class="docutils literal notranslate"><span class="pre">Key</span></code> is a list of 16 bytes.</p>
@@ -304,10 +347,50 @@ yes
 yes
 </pre></div>
 </div>
-<p>Compute the CRC32 checksum for the standard <code class="docutils literal notranslate"><span class="pre">123456789</span></code> test vector:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">atom_codes</span>(<span class="s">&#39;123456789&#39;</span>, <span class="nv">Bytes</span>), crc32<span class="o">::</span>hash(<span class="nv">Bytes</span>, <span class="nv">Hash</span>).
+<p>Compute the CRC-32/ISO-HDLC checksum for the standard <code class="docutils literal notranslate"><span class="pre">123456789</span></code> test
+vector:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">atom_codes</span>(<span class="s">&#39;123456789&#39;</span>, <span class="nv">Bytes</span>), crc32b<span class="o">::</span>hash(<span class="nv">Bytes</span>, <span class="nv">Hash</span>).
 <span class="nv">Bytes</span> <span class="o">=</span> [<span class="m">49</span>,<span class="m">50</span>,<span class="m">51</span>,<span class="m">52</span>,<span class="m">53</span>,<span class="m">54</span>,<span class="m">55</span>,<span class="m">56</span>,<span class="m">57</span>],
 <span class="nv">Hash</span> <span class="o">=</span> <span class="s">&#39;cbf43926&#39;</span>
+yes
+</pre></div>
+</div>
+<p>Compute the CRC-32C/Castagnoli checksum for the standard <code class="docutils literal notranslate"><span class="pre">123456789</span></code>
+test vector:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">atom_codes</span>(<span class="s">&#39;123456789&#39;</span>, <span class="nv">Bytes</span>), crc32c<span class="o">::</span>hash(<span class="nv">Bytes</span>, <span class="nv">Hash</span>).
+<span class="nv">Bytes</span> <span class="o">=</span> [<span class="m">49</span>,<span class="m">50</span>,<span class="m">51</span>,<span class="m">52</span>,<span class="m">53</span>,<span class="m">54</span>,<span class="m">55</span>,<span class="m">56</span>,<span class="m">57</span>],
+<span class="nv">Hash</span> <span class="o">=</span> <span class="s">&#39;e3069283&#39;</span>
+yes
+</pre></div>
+</div>
+<p>Compute the CRC-32/POSIX checksum for the standard <code class="docutils literal notranslate"><span class="pre">123456789</span></code> test
+vector:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">atom_codes</span>(<span class="s">&#39;123456789&#39;</span>, <span class="nv">Bytes</span>), crc32posix<span class="o">::</span>hash(<span class="nv">Bytes</span>, <span class="nv">Hash</span>).
+<span class="nv">Bytes</span> <span class="o">=</span> [<span class="m">49</span>,<span class="m">50</span>,<span class="m">51</span>,<span class="m">52</span>,<span class="m">53</span>,<span class="m">54</span>,<span class="m">55</span>,<span class="m">56</span>,<span class="m">57</span>],
+<span class="nv">Hash</span> <span class="o">=</span> <span class="s">&#39;377a6011&#39;</span>
+yes
+</pre></div>
+</div>
+<p>Compute the CRC-32/MPEG-2 checksum for the standard <code class="docutils literal notranslate"><span class="pre">123456789</span></code> test
+vector:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">atom_codes</span>(<span class="s">&#39;123456789&#39;</span>, <span class="nv">Bytes</span>), crc32mpeg2<span class="o">::</span>hash(<span class="nv">Bytes</span>, <span class="nv">Hash</span>).
+<span class="nv">Bytes</span> <span class="o">=</span> [<span class="m">49</span>,<span class="m">50</span>,<span class="m">51</span>,<span class="m">52</span>,<span class="m">53</span>,<span class="m">54</span>,<span class="m">55</span>,<span class="m">56</span>,<span class="m">57</span>],
+<span class="nv">Hash</span> <span class="o">=</span> <span class="s">&#39;0376e6e7&#39;</span>
+yes
+</pre></div>
+</div>
+<p>Compute the CRC-32/BZIP2 checksum for the standard <code class="docutils literal notranslate"><span class="pre">123456789</span></code> test
+vector:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">atom_codes</span>(<span class="s">&#39;123456789&#39;</span>, <span class="nv">Bytes</span>), crc32bzip2<span class="o">::</span>hash(<span class="nv">Bytes</span>, <span class="nv">Hash</span>).
+<span class="nv">Bytes</span> <span class="o">=</span> [<span class="m">49</span>,<span class="m">50</span>,<span class="m">51</span>,<span class="m">52</span>,<span class="m">53</span>,<span class="m">54</span>,<span class="m">55</span>,<span class="m">56</span>,<span class="m">57</span>],
+<span class="nv">Hash</span> <span class="o">=</span> <span class="s">&#39;fc891918&#39;</span>
+yes
+</pre></div>
+</div>
+<p>Compute the CRC-32Q checksum for the standard <code class="docutils literal notranslate"><span class="pre">123456789</span></code> test vector:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">atom_codes</span>(<span class="s">&#39;123456789&#39;</span>, <span class="nv">Bytes</span>), crc32q<span class="o">::</span>hash(<span class="nv">Bytes</span>, <span class="nv">Hash</span>).
+<span class="nv">Bytes</span> <span class="o">=</span> [<span class="m">49</span>,<span class="m">50</span>,<span class="m">51</span>,<span class="m">52</span>,<span class="m">53</span>,<span class="m">54</span>,<span class="m">55</span>,<span class="m">56</span>,<span class="m">57</span>],
+<span class="nv">Hash</span> <span class="o">=</span> <span class="s">&#39;3010bf7f&#39;</span>
 yes
 </pre></div>
 </div>

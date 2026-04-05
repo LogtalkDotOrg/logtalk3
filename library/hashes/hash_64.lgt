@@ -116,7 +116,7 @@
 		parameters is [
 			'Key' - 'A list of 16 bytes.'
 		],
-		see_also is [siphash_2_4, fnv1a_64, crc32]
+		see_also is [siphash_2_4, fnv1a_64, crc32b, crc32c]
 	]).
 
 		hash(Bytes, Hash) :-
@@ -206,7 +206,7 @@
 		author is 'Paulo Moura',
 		date is 2026-04-04,
 		comment is 'SipHash-2-4 hash function using the standard reference key 00 01 02 ... 0f.',
-		see_also is [siphash_2_4(_), fnv1a_64, crc32]
+		see_also is [siphash_2_4(_), fnv1a_64, crc32b, crc32c]
 	]).
 
 :- end_object.

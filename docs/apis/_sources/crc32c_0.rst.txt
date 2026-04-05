@@ -1,34 +1,28 @@
-.. index:: single: siphash_2_4(Key)
-.. _siphash_2_4/1:
+.. index:: single: crc32c
+.. _crc32c/0:
 
 .. rst-class:: right
 
 **object**
 
-``siphash_2_4(Key)``
-====================
+``crc32c``
+==========
 
-* ``Key`` - A list of 16 bytes.
-
-
-SipHash-2-4 keyed hash function.
+CRC-32C/Castagnoli hash function using the reflected polynomial 0x82F63B78, initial value 0xFFFFFFFF, and final xor 0xFFFFFFFF.
 
 | **Availability:** 
 |    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-04
+| **Date:** 2026-04-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
-| **Implements:**
-|    ``public`` :ref:`hash_protocol <hash_protocol/0>`
-| **Uses:**
-|    :ref:`hash_common_64 <hash_common_64/0>`
-|    :ref:`list <list/0>`
+| **Extends:**
+|    ``public`` :ref:`crc32_reflected(2197175160) <crc32_reflected/1>`
 
 | **Remarks:**
 |    (none)
@@ -62,5 +56,5 @@ Operators
 
 .. seealso::
 
-   :ref:`siphash_2_4 <siphash_2_4/0>`, :ref:`fnv1a_64 <fnv1a_64/0>`, :ref:`crc32b <crc32b/0>`, :ref:`crc32c <crc32c/0>`
+   :ref:`crc32_reflected(Polynomial) <crc32_reflected/1>`, :ref:`crc32b <crc32b/0>`, :ref:`crc32posix <crc32posix/0>`, :ref:`crc32mpeg2 <crc32mpeg2/0>`, :ref:`crc32bzip2 <crc32bzip2/0>`, :ref:`crc32q <crc32q/0>`, :ref:`murmurhash3_x86_32 <murmurhash3_x86_32/0>`, :ref:`fnv1a_32 <fnv1a_32/0>`
 

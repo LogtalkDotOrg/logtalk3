@@ -1,0 +1,60 @@
+.. index:: single: crc32bzip2
+.. _crc32bzip2/0:
+
+.. rst-class:: right
+
+**object**
+
+``crc32bzip2``
+==============
+
+CRC-32/BZIP2 hash function using the canonical polynomial 0x04C11DB7, initial value 0xFFFFFFFF, and final xor 0xFFFFFFFF.
+
+| **Availability:** 
+|    ``logtalk_load(hashes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`crc32_non_reflected(79764919,4294967295,4294967295,false) <crc32_non_reflected/4>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`hash_protocol/0::hash/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength) <crc32_non_reflected/4>`, :ref:`crc32mpeg2 <crc32mpeg2/0>`, :ref:`crc32posix <crc32posix/0>`, :ref:`crc32q <crc32q/0>`, :ref:`crc32_reflected(Polynomial) <crc32_reflected/1>`, :ref:`crc32b <crc32b/0>`, :ref:`crc32c <crc32c/0>`, :ref:`murmurhash3_x86_32 <murmurhash3_x86_32/0>`, :ref:`fnv1a_32 <fnv1a_32/0>`
+
