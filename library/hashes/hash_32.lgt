@@ -401,8 +401,8 @@
 		bytes_hex(DigestBytes, Hash).
 
 	md5_blocks([], A, B, C, D, A, B, C, D).
-	md5_blocks([Byte| BlockBytes], A0, B0, C0, D0, A, B, C, D) :-
-		take_block([Byte| BlockBytes], Block, Rest),
+	md5_blocks([Byte| Bytes], A0, B0, C0, D0, A, B, C, D) :-
+		list::take(64, [Byte| Bytes], Block, Rest),
 		block_words_le(Block, X),
 		md5_rounds(0, X, A0, B0, C0, D0, AA, BB, CC, DD),
 		add32(A0, AA, A1),
@@ -442,24 +442,139 @@
 		;   G is (7 * I) mod 16
 		).
 
-	md5_s(I, S) :-
-		list::nth0(I, [7,12,17,22,7,12,17,22,7,12,17,22,7,12,17,22,5,9,14,20,5,9,14,20,5,9,14,20,5,9,14,20,4,11,16,23,4,11,16,23,4,11,16,23,4,11,16,23,6,10,15,21,6,10,15,21,6,10,15,21,6,10,15,21], S).
+	md5_s( 0,  7).
+	md5_s( 1, 12).
+	md5_s( 2, 17).
+	md5_s( 3, 22).
+	md5_s( 4,  7).
+	md5_s( 5, 12).
+	md5_s( 6, 17).
+	md5_s( 7, 22).
+	md5_s( 8,  7).
+	md5_s( 9, 12).
+	md5_s(10, 17).
+	md5_s(11, 22).
+	md5_s(12,  7).
+	md5_s(13, 12).
+	md5_s(14, 17).
+	md5_s(15, 22).
+	md5_s(16,  5).
+	md5_s(17,  9).
+	md5_s(18, 14).
+	md5_s(19, 20).
+	md5_s(20,  5).
+	md5_s(21,  9).
+	md5_s(22, 14).
+	md5_s(23, 20).
+	md5_s(24,  5).
+	md5_s(25,  9).
+	md5_s(26, 14).
+	md5_s(27, 20).
+	md5_s(28,  5).
+	md5_s(29,  9).
+	md5_s(30, 14).
+	md5_s(31, 20).
+	md5_s(32,  4).
+	md5_s(33, 11).
+	md5_s(34, 16).
+	md5_s(35, 23).
+	md5_s(36,  4).
+	md5_s(37, 11).
+	md5_s(38, 16).
+	md5_s(39, 23).
+	md5_s(40,  4).
+	md5_s(41, 11).
+	md5_s(42, 16).
+	md5_s(43, 23).
+	md5_s(44,  4).
+	md5_s(45, 11).
+	md5_s(46, 16).
+	md5_s(47, 23).
+	md5_s(48,  6).
+	md5_s(49, 10).
+	md5_s(50, 15).
+	md5_s(51, 21).
+	md5_s(52,  6).
+	md5_s(53, 10).
+	md5_s(54, 15).
+	md5_s(55, 21).
+	md5_s(56,  6).
+	md5_s(57, 10).
+	md5_s(58, 15).
+	md5_s(59, 21).
+	md5_s(60,  6).
+	md5_s(61, 10).
+	md5_s(62, 15).
+	md5_s(63, 21).
 
-	md5_k(I, K) :-
-		list::nth0(I, [0xD76AA478,0xE8C7B756,0x242070DB,0xC1BDCEEE,0xF57C0FAF,0x4787C62A,0xA8304613,0xFD469501,0x698098D8,0x8B44F7AF,0xFFFF5BB1,0x895CD7BE,0x6B901122,0xFD987193,0xA679438E,0x49B40821,0xF61E2562,0xC040B340,0x265E5A51,0xE9B6C7AA,0xD62F105D,0x02441453,0xD8A1E681,0xE7D3FBC8,0x21E1CDE6,0xC33707D6,0xF4D50D87,0x455A14ED,0xA9E3E905,0xFCEFA3F8,0x676F02D9,0x8D2A4C8A,0xFFFA3942,0x8771F681,0x6D9D6122,0xFDE5380C,0xA4BEEA44,0x4BDECFA9,0xF6BB4B60,0xBEBFBC70,0x289B7EC6,0xEAA127FA,0xD4EF3085,0x04881D05,0xD9D4D039,0xE6DB99E5,0x1FA27CF8,0xC4AC5665,0xF4292244,0x432AFF97,0xAB9423A7,0xFC93A039,0x655B59C3,0x8F0CCC92,0xFFEFF47D,0x85845DD1,0x6FA87E4F,0xFE2CE6E0,0xA3014314,0x4E0811A1,0xF7537E82,0xBD3AF235,0x2AD7D2BB,0xEB86D391], K).
-
-	take_block(Bytes, Block, Rest) :-
-		prefix_length(64, Bytes, Block, Rest).
+	md5_k( 0, 0xD76AA478).
+	md5_k( 1, 0xE8C7B756).
+	md5_k( 2, 0x242070DB).
+	md5_k( 3, 0xC1BDCEEE).
+	md5_k( 4, 0xF57C0FAF).
+	md5_k( 5, 0x4787C62A).
+	md5_k( 6, 0xA8304613).
+	md5_k( 7, 0xFD469501).
+	md5_k( 8, 0x698098D8).
+	md5_k( 9, 0x8B44F7AF).
+	md5_k(10, 0xFFFF5BB1).
+	md5_k(11, 0x895CD7BE).
+	md5_k(12, 0x6B901122).
+	md5_k(13, 0xFD987193).
+	md5_k(14, 0xA679438E).
+	md5_k(15, 0x49B40821).
+	md5_k(16, 0xF61E2562).
+	md5_k(17, 0xC040B340).
+	md5_k(18, 0x265E5A51).
+	md5_k(19, 0xE9B6C7AA).
+	md5_k(20, 0xD62F105D).
+	md5_k(21, 0x02441453).
+	md5_k(22, 0xD8A1E681).
+	md5_k(23, 0xE7D3FBC8).
+	md5_k(24, 0x21E1CDE6).
+	md5_k(25, 0xC33707D6).
+	md5_k(26, 0xF4D50D87).
+	md5_k(27, 0x455A14ED).
+	md5_k(28, 0xA9E3E905).
+	md5_k(29, 0xFCEFA3F8).
+	md5_k(30, 0x676F02D9).
+	md5_k(31, 0x8D2A4C8A).
+	md5_k(32, 0xFFFA3942).
+	md5_k(33, 0x8771F681).
+	md5_k(34, 0x6D9D6122).
+	md5_k(35, 0xFDE5380C).
+	md5_k(36, 0xA4BEEA44).
+	md5_k(37, 0x4BDECFA9).
+	md5_k(38, 0xF6BB4B60).
+	md5_k(39, 0xBEBFBC70).
+	md5_k(40, 0x289B7EC6).
+	md5_k(41, 0xEAA127FA).
+	md5_k(42, 0xD4EF3085).
+	md5_k(43, 0x04881D05).
+	md5_k(44, 0xD9D4D039).
+	md5_k(45, 0xE6DB99E5).
+	md5_k(46, 0x1FA27CF8).
+	md5_k(47, 0xC4AC5665).
+	md5_k(48, 0xF4292244).
+	md5_k(49, 0x432AFF97).
+	md5_k(50, 0xAB9423A7).
+	md5_k(51, 0xFC93A039).
+	md5_k(52, 0x655B59C3).
+	md5_k(53, 0x8F0CCC92).
+	md5_k(54, 0xFFEFF47D).
+	md5_k(55, 0x85845DD1).
+	md5_k(56, 0x6FA87E4F).
+	md5_k(57, 0xFE2CE6E0).
+	md5_k(58, 0xA3014314).
+	md5_k(59, 0x4E0811A1).
+	md5_k(60, 0xF7537E82).
+	md5_k(61, 0xBD3AF235).
+	md5_k(62, 0x2AD7D2BB).
+	md5_k(63, 0xEB86D391).
 
 	block_words_le([], []).
 	block_words_le([B0, B1, B2, B3| Bytes], [Word| Words]) :-
 		little_endian_word32([B0, B1, B2, B3], Word),
 		block_words_le(Bytes, Words).
-
-	prefix_length(0, Rest, [], Rest) :-
-		!.
-	prefix_length(Count, [Byte| Bytes], [Byte| Prefix], Rest) :-
-		NextCount is Count - 1,
-		prefix_length(NextCount, Bytes, Prefix, Rest).
 
 :- end_object.

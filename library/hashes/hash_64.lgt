@@ -861,7 +861,7 @@
 
 	sha1_blocks([], H0, H1, H2, H3, H4, H0, H1, H2, H3, H4).
 	sha1_blocks([Byte| Bytes], H0_0, H1_0, H2_0, H3_0, H4_0, H0, H1, H2, H3, H4) :-
-		prefix_length(64, [Byte| Bytes], Block, Rest),
+		list::take(64, [Byte| Bytes], Block, Rest),
 		block_words_be(Block, W0),
 		extend_sha1_words(16, W0, W),
 		sha1_rounds(0, W, H0_0, H1_0, H2_0, H3_0, H4_0, A, B, C, D, E),
@@ -919,12 +919,6 @@
 		big_endian_word32([B0, B1, B2, B3], Word),
 		block_words_be(Bytes, Words).
 
-	prefix_length(0, Rest, [], Rest) :-
-		!.
-	prefix_length(Count, [Byte| Bytes], [Byte| Prefix], Rest) :-
-		NextCount is Count - 1,
-		prefix_length(NextCount, Bytes, Prefix, Rest).
-
 :- end_object.
 
 
@@ -951,7 +945,7 @@
 
 	sha256_blocks([], State, State).
 	sha256_blocks([Byte| Bytes], State0, State) :-
-		prefix_length(64, [Byte| Bytes], Block, Rest),
+		list::take(64, [Byte| Bytes], Block, Rest),
 		block_words_be(Block, W0),
 		extend_sha256_words(16, W0, W),
 		sha256_compress(W, State0, State1),
@@ -1032,18 +1026,74 @@
 		state_bytes(Words, RestBytes),
 		list::append(WordBytes, RestBytes, Bytes).
 
-	sha256_k(I, K) :-
-		list::nth0(I, [0x428A2F98,0x71374491,0xB5C0FBCF,0xE9B5DBA5,0x3956C25B,0x59F111F1,0x923F82A4,0xAB1C5ED5,0xD807AA98,0x12835B01,0x243185BE,0x550C7DC3,0x72BE5D74,0x80DEB1FE,0x9BDC06A7,0xC19BF174,0xE49B69C1,0xEFBE4786,0x0FC19DC6,0x240CA1CC,0x2DE92C6F,0x4A7484AA,0x5CB0A9DC,0x76F988DA,0x983E5152,0xA831C66D,0xB00327C8,0xBF597FC7,0xC6E00BF3,0xD5A79147,0x06CA6351,0x14292967,0x27B70A85,0x2E1B2138,0x4D2C6DFC,0x53380D13,0x650A7354,0x766A0ABB,0x81C2C92E,0x92722C85,0xA2BFE8A1,0xA81A664B,0xC24B8B70,0xC76C51A3,0xD192E819,0xD6990624,0xF40E3585,0x106AA070,0x19A4C116,0x1E376C08,0x2748774C,0x34B0BCB5,0x391C0CB3,0x4ED8AA4A,0x5B9CCA4F,0x682E6FF3,0x748F82EE,0x78A5636F,0x84C87814,0x8CC70208,0x90BEFFFA,0xA4506CEB,0xBEF9A3F7,0xC67178F2], K).
+	sha256_k( 0, 0x428A2F98).
+	sha256_k( 1, 0x71374491).
+	sha256_k( 2, 0xB5C0FBCF).
+	sha256_k( 3, 0xE9B5DBA5).
+	sha256_k( 4, 0x3956C25B).
+	sha256_k( 5, 0x59F111F1).
+	sha256_k( 6, 0x923F82A4).
+	sha256_k( 7, 0xAB1C5ED5).
+	sha256_k( 8, 0xD807AA98).
+	sha256_k( 9, 0x12835B01).
+	sha256_k(10, 0x243185BE).
+	sha256_k(11, 0x550C7DC3).
+	sha256_k(12, 0x72BE5D74).
+	sha256_k(13, 0x80DEB1FE).
+	sha256_k(14, 0x9BDC06A7).
+	sha256_k(15, 0xC19BF174).
+	sha256_k(16, 0xE49B69C1).
+	sha256_k(17, 0xEFBE4786).
+	sha256_k(18, 0x0FC19DC6).
+	sha256_k(19, 0x240CA1CC).
+	sha256_k(20, 0x2DE92C6F).
+	sha256_k(21, 0x4A7484AA).
+	sha256_k(22, 0x5CB0A9DC).
+	sha256_k(23, 0x76F988DA).
+	sha256_k(24, 0x983E5152).
+	sha256_k(25, 0xA831C66D).
+	sha256_k(26, 0xB00327C8).
+	sha256_k(27, 0xBF597FC7).
+	sha256_k(28, 0xC6E00BF3).
+	sha256_k(29, 0xD5A79147).
+	sha256_k(30, 0x06CA6351).
+	sha256_k(31, 0x14292967).
+	sha256_k(32, 0x27B70A85).
+	sha256_k(33, 0x2E1B2138).
+	sha256_k(34, 0x4D2C6DFC).
+	sha256_k(35, 0x53380D13).
+	sha256_k(36, 0x650A7354).
+	sha256_k(37, 0x766A0ABB).
+	sha256_k(38, 0x81C2C92E).
+	sha256_k(39, 0x92722C85).
+	sha256_k(40, 0xA2BFE8A1).
+	sha256_k(41, 0xA81A664B).
+	sha256_k(42, 0xC24B8B70).
+	sha256_k(43, 0xC76C51A3).
+	sha256_k(44, 0xD192E819).
+	sha256_k(45, 0xD6990624).
+	sha256_k(46, 0xF40E3585).
+	sha256_k(47, 0x106AA070).
+	sha256_k(48, 0x19A4C116).
+	sha256_k(49, 0x1E376C08).
+	sha256_k(50, 0x2748774C).
+	sha256_k(51, 0x34B0BCB5).
+	sha256_k(52, 0x391C0CB3).
+	sha256_k(53, 0x4ED8AA4A).
+	sha256_k(54, 0x5B9CCA4F).
+	sha256_k(55, 0x682E6FF3).
+	sha256_k(56, 0x748F82EE).
+	sha256_k(57, 0x78A5636F).
+	sha256_k(58, 0x84C87814).
+	sha256_k(59, 0x8CC70208).
+	sha256_k(60, 0x90BEFFFA).
+	sha256_k(61, 0xA4506CEB).
+	sha256_k(62, 0xBEF9A3F7).
+	sha256_k(63, 0xC67178F2).
 
 	block_words_be([], []).
 	block_words_be([B0, B1, B2, B3| Bytes], [Word| Words]) :-
 		big_endian_word32([B0, B1, B2, B3], Word),
 		block_words_be(Bytes, Words).
-
-	prefix_length(0, Rest, [], Rest) :-
-		!.
-	prefix_length(Count, [Byte| Bytes], [Byte| Prefix], Rest) :-
-		NextCount is Count - 1,
-		prefix_length(NextCount, Bytes, Prefix, Rest).
 
 :- end_object.
