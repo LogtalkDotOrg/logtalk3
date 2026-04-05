@@ -66,6 +66,9 @@ for backward compatibility.
 
 * ADDED: New `application` library for declaring application metadata.
 
+* ADDED: New `character_sets` library implementing conversion between character
+codes and bytes plus character set metadata.
+
 * ADDED: New `hashes` library implementing commonly used hashing algorithms.
 
 * ADDED: A 2-3 tree implementation to the `dictionaries` library. Contributed

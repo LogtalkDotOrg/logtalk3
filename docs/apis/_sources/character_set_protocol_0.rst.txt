@@ -1,0 +1,172 @@
+.. index:: single: character_set_protocol
+.. _character_set_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``character_set_protocol``
+==========================
+
+Character set protocol for converting between lists of character codes and lists of bytes.
+
+| **Availability:** 
+|    ``logtalk_load(character_sets(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-05
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Object names: Concrete object names are derived from the preferred IANA MIME names by lowercasing them and replacing hyphens with underscores.
+   - IANA registry metadata: The metadata predicates reflect the IANA character set registry. When the registry does not define a distinct preferred MIME alias, the ``preferred_mime_name/1`` and ``name/1`` predicates return the same atom.
+   - Unicode encodings: Unicode character sets use Unicode scalar values and do not emit or consume a byte order mark (BOM).
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: preferred_mime_name/1
+.. _character_set_protocol/0::preferred_mime_name/1:
+
+``preferred_mime_name/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Preferred MIME name for the character set according to the IANA registry.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``preferred_mime_name(Name)``
+| **Mode and number of proofs:**
+|    ``preferred_mime_name(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: name/1
+.. _character_set_protocol/0::name/1:
+
+``name/1``
+^^^^^^^^^^
+
+Registered character set name according to the IANA registry.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``name(Name)``
+| **Mode and number of proofs:**
+|    ``name(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: alias/1
+.. _character_set_protocol/0::alias/1:
+
+``alias/1``
+^^^^^^^^^^^
+
+Alias for the character set according to the IANA registry.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``alias(Alias)``
+| **Mode and number of proofs:**
+|    ``alias(?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: mibenum/1
+.. _character_set_protocol/0::mibenum/1:
+
+``mibenum/1``
+^^^^^^^^^^^^^
+
+MIBenum value for the character set according to the IANA registry.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mibenum(MIBenum)``
+| **Mode and number of proofs:**
+|    ``mibenum(?integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: codes_to_bytes/2
+.. _character_set_protocol/0::codes_to_bytes/2:
+
+``codes_to_bytes/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Converts a list of character codes to the corresponding list of bytes in the character set when all codes are representable.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``codes_to_bytes(Codes,Bytes)``
+| **Mode and number of proofs:**
+|    ``codes_to_bytes(+list(integer),--list(byte))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: bytes_to_codes/2
+.. _character_set_protocol/0::bytes_to_codes/2:
+
+``bytes_to_codes/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Converts a list of bytes in the character set to the corresponding list of character codes when the byte sequence is valid for that character set.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bytes_to_codes(Bytes,Codes)``
+| **Mode and number of proofs:**
+|    ``bytes_to_codes(+list(byte),--list(integer))`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

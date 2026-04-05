@@ -22,6 +22,7 @@ Categories
    assertions_messages <assertions_messages_0>
    best_first <best_first_0>
    ccsds_types <ccsds_types_0>
+   character_set <character_set_0>
    class_hierarchy <class_hierarchy_0>
    code_metric <code_metric_0>
    code_metrics_messages <code_metrics_messages_0>
@@ -50,6 +51,7 @@ Categories
    linda_server <linda_server_0>
    listing <listing_0>
    logging <logging_0>
+   mapped_single_byte_character_set <mapped_single_byte_character_set_0>
    monitor <monitor_0>
    mutation_testing_messages <mutation_testing_messages_0>
    mutations <mutations_0>
@@ -62,6 +64,7 @@ Categories
    proto_hierarchy <proto_hierarchy_0>
    read_file <read_file_0>
    recorded_database_core <recorded_database_core_0>
+   single_byte_character_set(MaxCode) <single_byte_character_set_1>
    statistics <statistics_0>
    subject <subject_0>
    tool_diagnostics_common <tool_diagnostics_common_0>
@@ -69,6 +72,8 @@ Categories
    ulid_types <ulid_types_0>
    undirected_graph_common <undirected_graph_common_0>
    unweighted_graph_common(Dictionary) <unweighted_graph_common_1>
+   utf_16_character_set(Endian) <utf_16_character_set_1>
+   utf_32_character_set(Endian) <utf_32_character_set_1>
    weighted_graph_common(Dictionary) <weighted_graph_common_1>
 
 Objects
@@ -226,6 +231,16 @@ Objects
    interval <interval_0>
    ip_grammars(Format) <ip_grammars_1>
    iso8601 <iso8601_0>
+   iso_8859_1 <iso_8859_1_0>
+   iso_8859_10 <iso_8859_10_0>
+   iso_8859_13 <iso_8859_13_0>
+   iso_8859_14 <iso_8859_14_0>
+   iso_8859_15 <iso_8859_15_0>
+   iso_8859_16 <iso_8859_16_0>
+   iso_8859_2 <iso_8859_2_0>
+   iso_8859_3 <iso_8859_3_0>
+   iso_8859_4 <iso_8859_4_0>
+   iso_8859_9 <iso_8859_9_0>
    isolation_forest <isolation_forest_0>
    issue_creator <issue_creator_0>
    java <java_0>
@@ -411,10 +426,17 @@ Objects
    unweighted_undirected_graph(Dictionary) <unweighted_undirected_graph_1>
    upn_metric <upn_metric_0>
    url(Representation) <url_1>
+   us_ascii <us_ascii_0>
    user <user_0>
    uses_diagram <uses_diagram_0>
    uses_diagram(Format) <uses_diagram_1>
    uses_directive_resource_deletion(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <uses_directive_resource_deletion_5>
+   utf_16be <utf_16be_0>
+   utf_16le <utf_16le_0>
+   utf_32be <utf_32be_0>
+   utf_32le <utf_32le_0>
+   utf_8 <utf_8_0>
+   utf_8_character_set <utf_8_character_set_0>
    uuid <uuid_0>
    uuid(Representation) <uuid_1>
    validated <validated_0>
@@ -425,6 +447,12 @@ Objects
    weighted_directed_graph(Dictionary) <weighted_directed_graph_1>
    weighted_undirected_graph <weighted_undirected_graph_0>
    weighted_undirected_graph(Dictionary) <weighted_undirected_graph_1>
+   windows_1250 <windows_1250_0>
+   windows_1251 <windows_1251_0>
+   windows_1252 <windows_1252_0>
+   windows_1253 <windows_1253_0>
+   windows_1254 <windows_1254_0>
+   windows_1257 <windows_1257_0>
    wmc_metric <wmc_metric_0>
    wrapper <wrapper_0>
    write_to_file_hook(File) <write_to_file_hook_1>
@@ -452,6 +480,7 @@ Protocols
 
    application_protocol <application_protocol_0>
    assignvarsp <assignvarsp_0>
+   character_set_protocol <character_set_protocol_0>
    characterp <characterp_0>
    class_hierarchyp <class_hierarchyp_0>
    classifier_protocol <classifier_protocol_0>

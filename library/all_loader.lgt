@@ -103,6 +103,7 @@
 		ccsds(loader),
 		avro(loader),
 		protobuf(loader),
+		character_sets(loader),
 		base32(loader),
 		base58(loader),
 		base64(loader),

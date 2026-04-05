@@ -1,0 +1,206 @@
+.. index:: single: character_set
+.. _character_set/0:
+
+.. rst-class:: right
+
+**category**
+
+``character_set``
+=================
+
+Shared implementation support category for character set objects.
+
+| **Availability:** 
+|    ``logtalk_load(character_sets(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-05
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`character_set_protocol <character_set_protocol/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`character_set_protocol/0::alias/1`  :ref:`character_set_protocol/0::bytes_to_codes/2`  :ref:`character_set_protocol/0::codes_to_bytes/2`  :ref:`character_set_protocol/0::mibenum/1`  :ref:`character_set_protocol/0::name/1`  :ref:`character_set_protocol/0::preferred_mime_name/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: valid_unicode_scalar/1
+.. _character_set/0::valid_unicode_scalar/1:
+
+``valid_unicode_scalar/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True if the argument is a valid Unicode scalar value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_unicode_scalar(Code)``
+| **Mode and number of proofs:**
+|    ``valid_unicode_scalar(+integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: continuation_byte/1
+.. _character_set/0::continuation_byte/1:
+
+``continuation_byte/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+True if the argument is a valid UTF continuation byte.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``continuation_byte(Byte)``
+| **Mode and number of proofs:**
+|    ``continuation_byte(+integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: high_surrogate/1
+.. _character_set/0::high_surrogate/1:
+
+``high_surrogate/1``
+^^^^^^^^^^^^^^^^^^^^
+
+True if the argument is a UTF-16 high surrogate code point.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``high_surrogate(Code)``
+| **Mode and number of proofs:**
+|    ``high_surrogate(+integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: low_surrogate/1
+.. _character_set/0::low_surrogate/1:
+
+``low_surrogate/1``
+^^^^^^^^^^^^^^^^^^^
+
+True if the argument is a UTF-16 low surrogate code point.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``low_surrogate(Code)``
+| **Mode and number of proofs:**
+|    ``low_surrogate(+integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: word_bytes/4
+.. _character_set/0::word_bytes/4:
+
+``word_bytes/4``
+^^^^^^^^^^^^^^^^
+
+Converts a 16-bit word into two bytes using the given byte order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``word_bytes(Endian,Word,Byte1,Byte2)``
+| **Mode and number of proofs:**
+|    ``word_bytes(+atom,+integer,-integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: dword_bytes/6
+.. _character_set/0::dword_bytes/6:
+
+``dword_bytes/6``
+^^^^^^^^^^^^^^^^^
+
+Converts a 32-bit word into four bytes using the given byte order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dword_bytes(Endian,Word,Byte1,Byte2,Byte3,Byte4)``
+| **Mode and number of proofs:**
+|    ``dword_bytes(+atom,+integer,-integer,-integer,-integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: bytes_word/4
+.. _character_set/0::bytes_word/4:
+
+``bytes_word/4``
+^^^^^^^^^^^^^^^^
+
+Converts two bytes into a 16-bit word using the given byte order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bytes_word(Endian,Byte1,Byte2,Word)``
+| **Mode and number of proofs:**
+|    ``bytes_word(+atom,+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: bytes_dword/6
+.. _character_set/0::bytes_dword/6:
+
+``bytes_dword/6``
+^^^^^^^^^^^^^^^^^
+
+Converts four bytes into a 32-bit word using the given byte order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bytes_dword(Endian,Byte1,Byte2,Byte3,Byte4,Word)``
+| **Mode and number of proofs:**
+|    ``bytes_dword(+atom,+integer,+integer,+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

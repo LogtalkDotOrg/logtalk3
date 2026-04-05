@@ -41,6 +41,7 @@ directory in the ``NOTES.md`` file.
    basic_types
    c45
    cbor
+   character_sets
    ccsds
    classifier_protocols
    combinations

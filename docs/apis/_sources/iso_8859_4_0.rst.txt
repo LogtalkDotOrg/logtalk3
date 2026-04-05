@@ -1,0 +1,56 @@
+.. index:: single: iso_8859_4
+.. _iso_8859_4/0:
+
+.. rst-class:: right
+
+**object**
+
+``iso_8859_4``
+==============
+
+ISO-8859-4 character set encoder and decoder.
+
+| **Availability:** 
+|    ``logtalk_load(character_sets(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`mapped_single_byte_character_set <mapped_single_byte_character_set/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`character_set_protocol/0::alias/1`  :ref:`character_set_protocol/0::bytes_to_codes/2`  :ref:`character_set_protocol/0::codes_to_bytes/2`  :ref:`character_set_protocol/0::mibenum/1`  :ref:`character_set_protocol/0::name/1`  :ref:`character_set_protocol/0::preferred_mime_name/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

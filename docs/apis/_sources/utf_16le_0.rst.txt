@@ -1,0 +1,56 @@
+.. index:: single: utf_16le
+.. _utf_16le/0:
+
+.. rst-class:: right
+
+**object**
+
+``utf_16le``
+============
+
+UTF-16 little-endian character set encoder and decoder.
+
+| **Availability:** 
+|    ``logtalk_load(character_sets(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`utf_16_character_set(little_endian) <utf_16_character_set/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`character_set_protocol/0::alias/1`  :ref:`character_set_protocol/0::bytes_to_codes/2`  :ref:`character_set_protocol/0::codes_to_bytes/2`  :ref:`character_set_protocol/0::mibenum/1`  :ref:`character_set_protocol/0::name/1`  :ref:`character_set_protocol/0::preferred_mime_name/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

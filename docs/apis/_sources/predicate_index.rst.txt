@@ -372,6 +372,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`monitoring <monitoring/0::after/3>`
 
+``alias/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`character_set_protocol <character_set_protocol/0::alias/1>`
+
 ``all/0``
 ---------
 
@@ -1415,6 +1425,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`hash_common_32 <hash_common_32/0::bytes_hex/2>`
 
+``bytes_to_codes/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`character_set_protocol <character_set_protocol/0::bytes_to_codes/2>`
+
 ``calendar_month/3``
 --------------------
 
@@ -2021,6 +2041,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`geospatial_protocol <geospatial_protocol/0::close_polygon/2>`
+
+``codes_to_bytes/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`character_set_protocol <character_set_protocol/0::codes_to_bytes/2>`
 
 ``coefficient_of_variation/2``
 ------------------------------
@@ -9810,6 +9840,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`memcached <memcached/0::mget/3>`
 * :ref:`redis <redis/0::mget/3>`
 
+``mibenum/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`character_set_protocol <character_set_protocol/0::mibenum/1>`
+
 ``midpoint/3``
 --------------
 
@@ -10104,6 +10144,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`application_protocol <application_protocol/0::name/1>`
+* :ref:`character_set_protocol <character_set_protocol/0::name/1>`
 * :ref:`command_line_option <command_line_option/0::name/1>`
 * :ref:`pack_protocol <pack_protocol/0::name/1>`
 * :ref:`registry_protocol <registry_protocol/0::name/1>`
@@ -12045,6 +12086,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`knn <knn/0::predict_probabilities/4>`
 * :ref:`nearest_centroid <nearest_centroid/0::predict_probabilities/4>`
+
+``preferred_mime_name/1``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`character_set_protocol <character_set_protocol/0::preferred_mime_name/1>`
 
 ``prefix/0``
 ------------

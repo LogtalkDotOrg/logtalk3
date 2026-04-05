@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 4, 2026
+##   Last updated on April 5, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -94,6 +94,7 @@ sed '1,19d' ../../../library/c45/NOTES.md | pandoc -f gfm -t rst -o libraries/c4
 sed '1,19d' ../../../library/coroutining/NOTES.md | pandoc -f gfm -t rst -o libraries/coroutining.rst
 sed '1,19d' ../../../library/cbor/NOTES.md | pandoc -f gfm -t rst -o libraries/cbor.rst
 sed '1,19d' ../../../library/ccsds/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds.rst
+sed '1,19d' ../../../library/character_sets/NOTES.md | pandoc -f gfm -t rst -o libraries/character_sets.rst
 sed '1,19d' ../../../library/classifier_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/classifier_protocols.rst
 sed '1,19d' ../../../library/combinations/NOTES.md | pandoc -f gfm -t rst -o libraries/combinations.rst
 sed '1,32d' ../../../library/command_line_options/NOTES.md | pandoc -f gfm -t rst -o libraries/command_line_options.rst

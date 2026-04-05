@@ -243,6 +243,44 @@ To load an entity, always load the library that includes it using the goal ``log
    ccsds(SecondaryHeaderLength) <ccsds_1>
    ccsds_types <ccsds_types_0>
 
+``library/character_sets/``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   character_set <character_set_0>
+   character_set_protocol <character_set_protocol_0>
+   iso_8859_1 <iso_8859_1_0>
+   iso_8859_10 <iso_8859_10_0>
+   iso_8859_13 <iso_8859_13_0>
+   iso_8859_14 <iso_8859_14_0>
+   iso_8859_15 <iso_8859_15_0>
+   iso_8859_16 <iso_8859_16_0>
+   iso_8859_2 <iso_8859_2_0>
+   iso_8859_3 <iso_8859_3_0>
+   iso_8859_4 <iso_8859_4_0>
+   iso_8859_9 <iso_8859_9_0>
+   mapped_single_byte_character_set <mapped_single_byte_character_set_0>
+   single_byte_character_set(MaxCode) <single_byte_character_set_1>
+   us_ascii <us_ascii_0>
+   utf_16_character_set(Endian) <utf_16_character_set_1>
+   utf_16be <utf_16be_0>
+   utf_16le <utf_16le_0>
+   utf_32_character_set(Endian) <utf_32_character_set_1>
+   utf_32be <utf_32be_0>
+   utf_32le <utf_32le_0>
+   utf_8 <utf_8_0>
+   utf_8_character_set <utf_8_character_set_0>
+   windows_1250 <windows_1250_0>
+   windows_1251 <windows_1251_0>
+   windows_1252 <windows_1252_0>
+   windows_1253 <windows_1253_0>
+   windows_1254 <windows_1254_0>
+   windows_1257 <windows_1257_0>
+
 ``library/classifier_protocols/``
 ---------------------------------
 
