@@ -48,6 +48,10 @@ in a source file.
    compilation directives (as those predicates only become available after
    the file is successfully compiled and loaded).
 
+   Conditional compilation directives are currently not supported in
+   included files when the conditional code includes ``op/3`` directives
+   or ``uses/2``/``use_module/2`` directives with ``op/3`` arguments.
+
 Template and modes
 ------------------
 

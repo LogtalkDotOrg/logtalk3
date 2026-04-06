@@ -51,6 +51,9 @@ backends such as ECLiPSe and Trealla Prolog.
 Documentation
 -------------
 
+* ADDED: Documentation on limitations when using conditional compilation
+directives in included files.
+
 * FIXED: The Handbook sections on entity properties were missing the `info/1`
 property.
 

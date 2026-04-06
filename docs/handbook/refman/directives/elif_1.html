@@ -150,6 +150,9 @@ in a source file.</p>
 contained in the same source file that contains the conditional
 compilation directives (as those predicates only become available after
 the file is successfully compiled and loaded).</p>
+<p>Conditional compilation directives are currently not supported in
+included files when the conditional code includes <code class="docutils literal notranslate"><span class="pre">op/3</span></code> directives
+or <code class="docutils literal notranslate"><span class="pre">uses/2</span></code>/<code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives with <code class="docutils literal notranslate"><span class="pre">op/3</span></code> arguments.</p>
 </div>
 </section>
 <section id="template-and-modes">
