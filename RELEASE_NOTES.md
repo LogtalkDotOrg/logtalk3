@@ -263,6 +263,8 @@ Ports
 * CHANGED: The `toychr` port by moving its operator directives to a file that
 is included in the `toychrdb` and in the example objects.
 
+* FIXED: Compatibility of the `toychr` port with the SICStus Prolog backend.
+
 Tests
 -----
 

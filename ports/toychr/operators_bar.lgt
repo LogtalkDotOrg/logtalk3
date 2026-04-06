@@ -28,5 +28,6 @@
 :- op(1150, fx, chr_constraint).
 :- op(1150, fx, handler).
 :- op(1150, fx, rules).
+:- op(1105, xfy, '|').
 :- op(1100, xfx, \).
 :- op(1200, xfx, @).
