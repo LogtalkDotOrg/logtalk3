@@ -9181,6 +9181,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_activate_entity_operator'(Priority, Specifier, Operator, Scope, File, Lines, _) :-
+	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope, File, Lines),
+	!.
+
+'$lgt_activate_entity_operator'(Priority, Specifier, Operator, Scope, File, Lines, _) :-
 	(	current_op(OriginalPriority, OriginalSpecifier, Operator),
 		'$lgt_same_operator_class'(Specifier, OriginalSpecifier) ->
 		assertz('$lgt_pp_file_operator_'(OriginalPriority, OriginalSpecifier, Operator))

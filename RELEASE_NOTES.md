@@ -42,6 +42,9 @@ a term position while verifying that the position is for the given term.
 dynamic binding cache update operations with mutexes when using multi-threaded
 backends. Thanks to Lindsey Spratt for help in debugging the race conditions.
 
+* FIXED: Bug when handling entity operators defined in an included file where
+they would be visible outside the entity.
+
 * FIXED: Workaround mishandling of multifile and dynamic predicates by some
 backends such as ECLiPSe and Trealla Prolog.
 
