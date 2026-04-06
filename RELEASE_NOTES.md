@@ -95,6 +95,9 @@ files.
 a file-system path into file URL components (handles Windows drive-letter and
 UNC paths).
 
+* IMPROVED: The implementation `os::shell/1-2` library predicates for SICStus
+Prolog to avoid quoting issues on POSIX systems.
+
 * FIXED: The implementation of the `os::absolute_file_name/2` predicate for
 the Ciao Prolog, CxProlog, ECLiPSe, GNU Prolog, JIProlog, SICStus Prolog,
 Tau Prolog, and Trealla Prolog backends to preserve a slash at the end of

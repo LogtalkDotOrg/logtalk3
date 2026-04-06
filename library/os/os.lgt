@@ -51,9 +51,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:103:0,
+		version is 1:103:1,
 		author is 'Paulo Moura',
-		date is 2026-04-03,
+		date is 2026-04-06,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -795,8 +795,7 @@
 					atom_concat('cmd.exe /Q /C ', Command, Command1),
 					{process_create(Command1, [], [commandline(true), cwd(Directory), wait(Exit)])}
 				;	% assume POSIX
-					{atomic_list_concat(['/bin/sh -c \'', Command, '\''], Command1)},
-					{process_create(Command1, [], [commandline(true), cwd(Directory), wait(Exit)])}
+					{process_create(Command, [], [commandline(true), cwd(Directory), wait(Exit)])}
 				),
 				Exit = exit(Status).
 
