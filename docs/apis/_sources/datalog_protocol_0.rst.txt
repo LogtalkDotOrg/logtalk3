@@ -297,11 +297,11 @@ Returns one explanation for a currently true fact.
 
 ------------
 
-.. index:: (rules)/1
-.. _datalog_protocol/0::(rules)/1:
+.. index:: rules/1
+.. _datalog_protocol/0::rules/1:
 
-``(rules)/1``
-^^^^^^^^^^^^^
+``rules/1``
+^^^^^^^^^^^
 
 Returns the loaded rules.
 
@@ -309,9 +309,9 @@ Returns the loaded rules.
 |    ``static``
 
 | **Template:**
-|    ``rules Rules``
+|    ``rules(Rules)``
 | **Mode and number of proofs:**
-|    ``rules-list`` - ``one``
+|    ``rules(-list)`` - ``one``
 
 
 ------------

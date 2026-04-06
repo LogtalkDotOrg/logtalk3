@@ -33,7 +33,7 @@ Portable Datalog engine with stratified negation and incremental updates.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`datalog_protocol/0::add_rule/3`  :ref:`datalog_protocol/0::assert_fact/1`  :ref:`datalog_protocol/0::begin/0`  :ref:`datalog_protocol/0::clear/0`  :ref:`datalog_protocol/0::commit/0`  :ref:`datalog_protocol/0::explain/2`  :ref:`datalog_protocol/0::facts/1`  :ref:`datalog_protocol/0::load_program/1`  :ref:`datalog_protocol/0::materialize/0`  :ref:`datalog_protocol/0::predicate_stratum/3`  :ref:`datalog_protocol/0::query/1`  :ref:`datalog_protocol/0::query/2`  :ref:`datalog_protocol/0::remove_rule/1`  :ref:`datalog_protocol/0::retract_fact/1`  :ref:`datalog_protocol/0::rollback/0`  :ref:`datalog_protocol/0::(rules)/1`  :ref:`datalog_protocol/0::strata/1`  :ref:`datalog_protocol/0::update/3`  
+|     :ref:`datalog_protocol/0::add_rule/3`  :ref:`datalog_protocol/0::assert_fact/1`  :ref:`datalog_protocol/0::begin/0`  :ref:`datalog_protocol/0::clear/0`  :ref:`datalog_protocol/0::commit/0`  :ref:`datalog_protocol/0::explain/2`  :ref:`datalog_protocol/0::facts/1`  :ref:`datalog_protocol/0::load_program/1`  :ref:`datalog_protocol/0::materialize/0`  :ref:`datalog_protocol/0::predicate_stratum/3`  :ref:`datalog_protocol/0::query/1`  :ref:`datalog_protocol/0::query/2`  :ref:`datalog_protocol/0::remove_rule/1`  :ref:`datalog_protocol/0::retract_fact/1`  :ref:`datalog_protocol/0::rollback/0`  :ref:`datalog_protocol/0::rules/1`  :ref:`datalog_protocol/0::strata/1`  :ref:`datalog_protocol/0::update/3`  
 
 .. contents::
    :local:
