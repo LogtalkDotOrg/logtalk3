@@ -9115,6 +9115,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_activate_file_operator'(Priority, Specifier, Operator, Mode).
 
 
+'$lgt_activate_file_operator'(Priority, Specifier, Operator, _) :-
+	'$lgt_pp_file_operator_'(Priority, Specifier, Operator),
+	% usually an operator declared in an included file, already activated to ensure that
+	% followup content in the file parses correctly; there may also be repeated operator
+	% declarations
+	!.
+
 '$lgt_activate_file_operator'(Priority, Specifier, Operator, compile(_,_,_)) :-
 	'$lgt_compiler_flag'(redefined_operators, warning),
 	(	'$lgt_iso_spec_operator'(Operator, OriginalSpecifier, OriginalPriority)
@@ -9135,9 +9142,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_activate_file_operator'(Priority, Specifier, Operator, _) :-
 	(	current_op(OriginalPriority, OriginalSpecifier, Operator),
-		'$lgt_same_operator_class'(Specifier, OriginalSpecifier) ->
+		'$lgt_same_operator_class'(Specifier, OriginalSpecifier),
+		\+ '$lgt_pp_file_operator_'(OriginalPriority, OriginalSpecifier, Operator) ->
+		% assume and save a global operator to be restored after compiling the current file
 		assertz('$lgt_pp_global_operator_'(OriginalPriority, OriginalSpecifier, Operator))
-	;	true
+	;	% no clash with an existing operator or the highly unlikely case of the same
+		% operator being redefined within the same file
+		true
 	),
 	op(Priority, Specifier, Operator),
 	assertz('$lgt_pp_file_operator_'(Priority, Specifier, Operator)).
@@ -9182,13 +9193,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_activate_entity_operator'(Priority, Specifier, Operator, Scope, File, Lines, _) :-
 	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope, File, Lines),
+	% usually an operator declared in an included file, already activated to ensure that
+	% followup content in the file parses correctly; there may also be repeated operator
+	% declarations
 	!.
 
 '$lgt_activate_entity_operator'(Priority, Specifier, Operator, Scope, File, Lines, _) :-
 	(	current_op(OriginalPriority, OriginalSpecifier, Operator),
-		'$lgt_same_operator_class'(Specifier, OriginalSpecifier) ->
+		'$lgt_same_operator_class'(Specifier, OriginalSpecifier),
+		\+ '$lgt_pp_entity_operator_'(OriginalPriority, OriginalSpecifier, Operator, _, _, _) ->
+		% assume and save a file scoped operator to be restored after compiling the current entity
 		assertz('$lgt_pp_file_operator_'(OriginalPriority, OriginalSpecifier, Operator))
-	;	true
+	;	% no clash with an existing operator or the highly unlikely case of the same
+		% operator being redefined within the same entity
+		true
 	),
 	op(Priority, Specifier, Operator),
 	assertz('$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope, File, Lines)),
@@ -29226,6 +29244,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_read_stream_to_terms'((:- op(Priority, Specifier, Operators)), VariableNames, Singletons, Lines, File, Stream, [(:- op(Priority, Specifier, Operators))-sd(VariableNames,Singletons,Lines)| Terms], Mode) :-
 	!,
 	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
+	% activate operators to ensure successful parsing of the rest of the file
 	(	'$lgt_pp_entity_'(_, _, _) ->
 		'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l, File, Lines, Mode)
 	;	'$lgt_activate_file_operators'(Priority, Specifier, Operators, Mode)
@@ -29234,6 +29253,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_read_stream_to_terms'(NextTerm, NextVariableNames, NextSingletons, NextLines, File, Stream, Terms, Mode).
 '$lgt_read_stream_to_terms'((:- uses(Object, Resources)), VariableNames, Singletons, Lines, File, Stream, [(:- uses(Object, Resources))-sd(VariableNames,Singletons,Lines)| Terms], Mode) :-
 	!,
+	% activate any listed operators to ensure successful parsing of the rest of the file
 	forall(
 		'$lgt_member'(op(Priority, Specifier, Operators), Resources),
 		(	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
@@ -29247,6 +29267,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_read_stream_to_terms'(NextTerm, NextVariableNames, NextSingletons, NextLines, File, Stream, Terms, Mode).
 '$lgt_read_stream_to_terms'((:- use_module(Module, Resources)), VariableNames, Singletons, Lines, File, Stream, [(:- use_module(Module, Resources))-sd(VariableNames,Singletons,Lines)| Terms], Mode) :-
 	!,
+	% activate any listed operators to ensure successful parsing of the rest of the file
 	forall(
 		'$lgt_member'(op(Priority, Specifier, Operators), Resources),
 		(	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
