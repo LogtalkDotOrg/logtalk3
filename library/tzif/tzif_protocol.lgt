@@ -31,14 +31,14 @@
 	:- public(load/1).
 	:- mode(load(+compound), zero_or_one).
 	:- info(load/1, [
-		comment is 'Loads a TZif source given as ``file(Path, ZoneId)``, ``files(Root, Paths)``, ``directory(Root)``, ``stream(Stream, ZoneId)``, ``bytes(Bytes, ZoneId)``, or ``snapshot(File)`` and caches the resulting per-zone ``tzif(...)`` terms, replacing cached entries with matching zone identifiers. Zone identifiers are validated against bundled IANA TZDB 2026a canonical names plus backward-compatible aliases.',
+		comment is 'Loads a TZif source given as ``file(Path, ZoneId)``, ``files(Root, Paths)``, ``directory(Root)``, ``stream(Stream, ZoneId)``, ``bytes(Bytes, ZoneId)``, or ``snapshot(File)`` and caches the resulting per-zone ``tzif(...)`` terms, replacing cached entries with matching zone identifiers. For ``directory(Root)`` sources, regular files whose relative paths are not recognized zone identifiers are ignored, allowing system zoneinfo trees that contain metadata files such as ``leapseconds``. Zone identifiers are validated against bundled IANA TZDB 2026a canonical names plus backward-compatible aliases.',
 		argnames is ['Source']
 	]).
 
 	:- public(load/2).
 	:- mode(load(+compound, -list(compound)), zero_or_one).
 	:- info(load/2, [
-		comment is 'Loads a TZif source given as ``file(Path, ZoneId)``, ``files(Root, Paths)``, ``directory(Root)``, ``stream(Stream, ZoneId)``, ``bytes(Bytes, ZoneId)``, or ``snapshot(File)`` into a list of per-zone ``tzif(...)`` compound terms without caching them. Zone identifiers are validated against bundled IANA TZDB 2026a canonical names plus backward-compatible aliases.',
+		comment is 'Loads a TZif source given as ``file(Path, ZoneId)``, ``files(Root, Paths)``, ``directory(Root)``, ``stream(Stream, ZoneId)``, ``bytes(Bytes, ZoneId)``, or ``snapshot(File)`` into a list of per-zone ``tzif(...)`` compound terms without caching them. For ``directory(Root)`` sources, regular files whose relative paths are not recognized zone identifiers are ignored, allowing system zoneinfo trees that contain metadata files such as ``leapseconds``. Zone identifiers are validated against bundled IANA TZDB 2026a canonical names plus backward-compatible aliases.',
 		argnames is ['Source', 'TZifs']
 	]).
 

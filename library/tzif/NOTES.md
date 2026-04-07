@@ -89,6 +89,10 @@ For directory and file-set loads, zone identifiers are the relative paths used
 to locate the TZif files inside the root directory, and each loaded term
 records its own `file(File, ZoneId)` source.
 
+When loading a `directory(Root)`, regular files whose relative paths are not
+recognized zone identifiers are ignored. This allows loading system zoneinfo
+trees that also contain metadata files such as `leapseconds`.
+
 For single-zone file, stream, and byte-list loads, the caller must provide the
 zone identifier explicitly using `file(Path, ZoneId)`, `stream(Stream, ZoneId)`,
 or `bytes(Bytes, ZoneId)`.

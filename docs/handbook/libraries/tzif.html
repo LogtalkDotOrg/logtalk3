@@ -290,6 +290,10 @@ leap-second records, and parsed footer for a single zone. These per-zone
 <p>For directory and file-set loads, zone identifiers are the relative
 paths used to locate the TZif files inside the root directory, and each
 loaded term records its own <code class="docutils literal notranslate"><span class="pre">file(File,</span> <span class="pre">ZoneId)</span></code> source.</p>
+<p>When loading a <code class="docutils literal notranslate"><span class="pre">directory(Root)</span></code>, regular files whose relative paths
+are not recognized zone identifiers are ignored. This allows loading
+system zoneinfo trees that also contain metadata files such as
+<code class="docutils literal notranslate"><span class="pre">leapseconds</span></code>.</p>
 <p>For single-zone file, stream, and byte-list loads, the caller must
 provide the zone identifier explicitly using <code class="docutils literal notranslate"><span class="pre">file(Path,</span> <span class="pre">ZoneId)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">stream(Stream,</span> <span class="pre">ZoneId)</span></code>, or <code class="docutils literal notranslate"><span class="pre">bytes(Bytes,</span> <span class="pre">ZoneId)</span></code>.</p>

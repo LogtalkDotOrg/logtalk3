@@ -209,7 +209,8 @@
 		load_zone_files(Root, Paths, TZifs).
 	load_source(directory(Root), TZifs) :-
 		!,
-		directory_zone_paths(Root, Paths),
+		directory_zone_paths(Root, Paths0),
+		filter_known_zone_paths(Paths0, Paths),
 		load_zone_files(Root, Paths, TZifs).
 	load_source(Source, _) :-
 		domain_error(tzif_source, Source).
@@ -321,6 +322,14 @@
 	check_known_zone_paths([Path| Paths]) :-
 		( known_zone_id(Path) -> true ; domain_error(time_zone, Path) ),
 		check_known_zone_paths(Paths).
+
+	filter_known_zone_paths([], []).
+	filter_known_zone_paths([Path| Paths], [Path| KnownPaths]) :-
+		known_zone_id(Path),
+		!,
+		filter_known_zone_paths(Paths, KnownPaths).
+	filter_known_zone_paths([_| Paths], KnownPaths) :-
+		filter_known_zone_paths(Paths, KnownPaths).
 
 	check_source_zone_id(ZoneId, _) :-
 		var(ZoneId),

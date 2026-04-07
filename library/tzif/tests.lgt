@@ -271,9 +271,10 @@
 		generated_database_fixture(Root),
 		tzif::load(files(Root, ['Invalid/Zone']), _).
 
-	test(tzif_invalid_directory_zone_id_2_01, error(domain_error(time_zone, 'Invalid/Zone'))) :-
-		generated_invalid_database_fixture(Root),
-		tzif::load(directory(Root), _).
+	test(tzif_directory_ignores_non_zone_files_2_01, deterministic(Zones == ['America/New_York'])) :-
+		generated_database_with_non_tzif_files_fixture(Root),
+		tzif::load(directory(Root), TZifs),
+		tzif::zones(TZifs, Zones).
 
 	test(tzif_clear_cache_2_01, error(existence_error(tzif_cache, tzif))) :-
 		tzif::clear_cache,
@@ -568,15 +569,17 @@
 		^^create_binary_file(LondonPath, LondonBytes),
 		^^create_binary_file(NewYorkPath, NewYorkBytes).
 
-	generated_invalid_database_fixture(Root) :-
+	generated_database_with_non_tzif_files_fixture(Root) :-
 		generated_directory(Root),
 		^^clean_directory(Root),
 		os::ensure_directory(Root),
-		os::path_concat(Root, 'Invalid', InvalidDirectory),
-		os::ensure_directory(InvalidDirectory),
-		v1_fixture_bytes(Bytes),
-		os::path_concat(InvalidDirectory, 'Zone', Path),
-		^^create_binary_file(Path, Bytes).
+		os::path_concat(Root, 'America', AmericaDirectory),
+		os::ensure_directory(AmericaDirectory),
+		v2_fixture_bytes(Bytes),
+		os::path_concat(AmericaDirectory, 'New_York', Path),
+		^^create_binary_file(Path, Bytes),
+		os::path_concat(Root, 'leapseconds', MetadataPath),
+		^^create_binary_file(MetadataPath, Bytes).
 
 	generated_directory(Root) :-
 		^^file_path('test_files/generated', Root).
