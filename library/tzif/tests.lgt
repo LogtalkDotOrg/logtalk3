@@ -256,6 +256,36 @@
 		tzif::daylight_saving_time(Zone, date_time(2024, 7, 1, 12, 0, 0), IsDST),
 		tzif::abbreviation(Zone, date_time(2024, 7, 1, 12, 0, 0), Abbreviation).
 
+	test(tzif_local_cached_zone_queries_2_01, deterministic(Offset-IsDST-Abbreviation == -14400-true-'EDT')) :-
+		real_tzif_file(new_york, Path),
+		tzif::clear_cache,
+		tzif::load(file(Path, 'America/New_York')),
+		tzif::local_offset('America/New_York', date_time(2024, 7, 1, 12, 0, 0), Offset),
+		tzif::local_daylight_saving_time('America/New_York', date_time(2024, 7, 1, 12, 0, 0), IsDST),
+		tzif::local_abbreviation('America/New_York', date_time(2024, 7, 1, 12, 0, 0), Abbreviation).
+
+	test(tzif_local_cached_single_zone_convenience_2_01, deterministic(Offset-IsDST-Abbreviation == 0-false-'UTC')) :-
+		real_tzif_file(utc, Path),
+		tzif::clear_cache,
+		tzif::load(file(Path, 'Etc/UTC')),
+		tzif::local_offset(date_time(2024, 1, 15, 12, 0, 0), Offset),
+		tzif::local_daylight_saving_time(date_time(2024, 1, 15, 12, 0, 0), IsDST),
+		tzif::local_abbreviation(date_time(2024, 1, 15, 12, 0, 0), Abbreviation).
+
+	test(tzif_local_time_type_reified_cached_zone_2_01, deterministic(Offset-IsDST-Abbreviation == -14400-true-'EDT')) :-
+		real_tzif_file(new_york, Path),
+		tzif::clear_cache,
+		tzif::load(file(Path, 'America/New_York')),
+		tzif::local_time_type_reified('America/New_York', date_time(2024, 7, 1, 12, 0, 0), unique(time_type(Offset, IsDST, Abbreviation, _))).
+
+	test(tzif_local_reified_cached_single_zone_convenience_2_01, deterministic(OffsetResult-DSTResult-AbbreviationResult == unique(0)-unique(false)-unique('UTC'))) :-
+		real_tzif_file(utc, Path),
+		tzif::clear_cache,
+		tzif::load(file(Path, 'Etc/UTC')),
+		tzif::local_offset_reified(date_time(2024, 1, 15, 12, 0, 0), OffsetResult),
+		tzif::local_daylight_saving_time_reified(date_time(2024, 1, 15, 12, 0, 0), DSTResult),
+		tzif::local_abbreviation_reified(date_time(2024, 1, 15, 12, 0, 0), AbbreviationResult).
+
 	test(tzif_load_2_without_cache_2_01, error(existence_error(tzif_cache, tzif))) :-
 		tzif::clear_cache,
 		v2_fixture_bytes(Bytes),
@@ -331,6 +361,83 @@
 		tzif::offset(TZif, 'America/New_York', date_time(2024, 7, 1, 12, 0, 0), Offset),
 		tzif::daylight_saving_time(TZif, 'America/New_York', date_time(2024, 7, 1, 12, 0, 0), IsDST),
 		tzif::abbreviation(TZif, 'America/New_York', date_time(2024, 7, 1, 12, 0, 0), Abbreviation).
+
+	test(tzif_local_real_america_new_york_gap_strict_2_01, fail) :-
+		real_tzif_file(new_york, Path),
+		tzif::load(file(Path, 'America/New_York'), [TZif]),
+		tzif::local_time_type(TZif, 'America/New_York', date_time(2024, 3, 10, 2, 30, 0), _).
+
+	test(tzif_local_real_america_new_york_gap_reified_2_01, deterministic(Result == nonexistent)) :-
+		real_tzif_file(new_york, Path),
+		tzif::load(file(Path, 'America/New_York'), [TZif]),
+		tzif::local_time_type_reified(TZif, 'America/New_York', date_time(2024, 3, 10, 2, 30, 0), Result).
+
+	test(tzif_local_real_america_new_york_fold_strict_2_01, fail) :-
+		real_tzif_file(new_york, Path),
+		tzif::load(file(Path, 'America/New_York'), [TZif]),
+		tzif::local_time_type(TZif, 'America/New_York', date_time(2024, 11, 3, 1, 30, 0), _).
+
+	test(tzif_local_real_america_new_york_fold_time_type_reified_2_01, deterministic(Results == [-14400-true-'EDT', -18000-false-'EST'])) :-
+		real_tzif_file(new_york, Path),
+		tzif::load(file(Path, 'America/New_York'), [TZif]),
+		tzif::local_time_type_reified(
+			TZif,
+			'America/New_York',
+			date_time(2024, 11, 3, 1, 30, 0),
+			ambiguous([
+				time_type(Offset1, IsDST1, Abbreviation1, _),
+				time_type(Offset2, IsDST2, Abbreviation2, _)
+			])
+		),
+		Results = [Offset1-IsDST1-Abbreviation1, Offset2-IsDST2-Abbreviation2].
+
+	test(tzif_local_real_america_new_york_fold_projected_reified_2_01, deterministic(OffsetResult-DSTResult-AbbreviationResult == ambiguous([-14400, -18000])-ambiguous([true, false])-ambiguous(['EDT', 'EST']))) :-
+		real_tzif_file(new_york, Path),
+		tzif::load(file(Path, 'America/New_York'), [TZif]),
+		tzif::local_offset_reified(TZif, 'America/New_York', date_time(2024, 11, 3, 1, 30, 0), OffsetResult),
+		tzif::local_daylight_saving_time_reified(TZif, 'America/New_York', date_time(2024, 11, 3, 1, 30, 0), DSTResult),
+		tzif::local_abbreviation_reified(TZif, 'America/New_York', date_time(2024, 11, 3, 1, 30, 0), AbbreviationResult).
+
+	test(tzif_local_real_america_new_york_fold_first_2_01, deterministic(Offset-IsDST-Abbreviation == -14400-true-'EDT')) :-
+		real_tzif_file(new_york, Path),
+		tzif::load(file(Path, 'America/New_York'), [TZif]),
+		tzif::local_offset_with_resolution(TZif, 'America/New_York', date_time(2024, 11, 3, 1, 30, 0), first, Offset),
+		tzif::local_daylight_saving_time_with_resolution(TZif, 'America/New_York', date_time(2024, 11, 3, 1, 30, 0), first, IsDST),
+		tzif::local_abbreviation_with_resolution(TZif, 'America/New_York', date_time(2024, 11, 3, 1, 30, 0), first, Abbreviation).
+
+	test(tzif_local_real_america_new_york_fold_second_2_01, deterministic(Offset-IsDST-Abbreviation == -18000-false-'EST')) :-
+		real_tzif_file(new_york, Path),
+		tzif::load(file(Path, 'America/New_York'), [TZif]),
+		tzif::local_offset_with_resolution(TZif, 'America/New_York', date_time(2024, 11, 3, 1, 30, 0), second, Offset),
+		tzif::local_daylight_saving_time_with_resolution(TZif, 'America/New_York', date_time(2024, 11, 3, 1, 30, 0), second, IsDST),
+		tzif::local_abbreviation_with_resolution(TZif, 'America/New_York', date_time(2024, 11, 3, 1, 30, 0), second, Abbreviation).
+
+	test(tzif_local_real_america_new_york_fold_all_2_01, deterministic(Results == [-14400-true-'EDT', -18000-false-'EST'])) :-
+		real_tzif_file(new_york, Path),
+		tzif::load(file(Path, 'America/New_York'), [TZif]),
+		findall(Offset-IsDST-Abbreviation,
+				(tzif::local_time_type_with_resolution(TZif, 'America/New_York', date_time(2024, 11, 3, 1, 30, 0), all, time_type(Offset, IsDST, Abbreviation, _))),
+				Results).
+
+	test(tzif_local_footer_gap_strict_2_01, fail) :-
+		v2_fixture_bytes(Bytes),
+		raw_bytes_zone(Zone),
+		tzif::load(bytes(Bytes, Zone), [TZif]),
+		tzif::local_time_type(TZif, Zone, date_time(2024, 3, 10, 2, 30, 0), _).
+
+	test(tzif_local_footer_gap_reified_2_01, deterministic(Result == nonexistent)) :-
+		v2_fixture_bytes(Bytes),
+		raw_bytes_zone(Zone),
+		tzif::load(bytes(Bytes, Zone), [TZif]),
+		tzif::local_time_type_reified(TZif, Zone, date_time(2024, 3, 10, 2, 30, 0), Result).
+
+	test(tzif_local_footer_fold_all_2_01, deterministic(Results == [-14400-true-'EDT', -18000-false-'EST'])) :-
+		v2_fixture_bytes(Bytes),
+		raw_bytes_zone(Zone),
+		tzif::load(bytes(Bytes, Zone), [TZif]),
+		findall(Offset-IsDST-Abbreviation,
+				(tzif::local_time_type_with_resolution(TZif, Zone, date_time(2024, 11, 3, 1, 30, 0), all, time_type(Offset, IsDST, Abbreviation, _))),
+				Results).
 
 	test(tzif_real_asia_kathmandu_2_01, deterministic(Offset-IsDST-Abbreviation == 20700-false-'+0545')) :-
 		real_tzif_file(kathmandu, Path),

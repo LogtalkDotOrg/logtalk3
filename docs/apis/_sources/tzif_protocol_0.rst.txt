@@ -473,6 +473,690 @@ Cached single-zone convenience variant of ``abbreviation/3`` using the cached TZ
 
 ------------
 
+.. index:: local_time_type/4
+.. _tzif_protocol/0::local_time_type/4:
+
+``local_time_type/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the applicable local time type for a loaded zone and a local civil time given as a ``date_time/6`` term. This strict variant fails unless the local civil time has a unique interpretation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_time_type(TZif,Zone,LocalDateTime,TimeType)``
+| **Mode and number of proofs:**
+|    ``local_time_type(+compound,+atom,+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: local_time_type/3
+.. _tzif_protocol/0::local_time_type/3:
+
+``local_time_type/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the applicable local time type for a zone in the cached TZif terms. This strict variant fails unless the local civil time has a unique interpretation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_time_type(Zone,LocalDateTime,TimeType)``
+| **Mode and number of proofs:**
+|    ``local_time_type(+atom,+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: local_time_type/2
+.. _tzif_protocol/0::local_time_type/2:
+
+``local_time_type/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Cached single-zone convenience variant of strict local civil-time lookup; requires exactly one cached zone and fails unless the local civil time has a unique interpretation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_time_type(LocalDateTime,TimeType)``
+| **Mode and number of proofs:**
+|    ``local_time_type(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: local_time_type_with_resolution/5
+.. _tzif_protocol/0::local_time_type_with_resolution/5:
+
+``local_time_type_with_resolution/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the applicable local time type for a loaded zone and a local civil time using the explicit resolution mode: ``strict`` (fail unless exactly one interpretation exists), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), and ``all`` (enumerate all valid interpretations in chronological order).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_time_type_with_resolution(TZif,Zone,LocalDateTime,ResolutionMode,TimeType)``
+| **Mode and number of proofs:**
+|    ``local_time_type_with_resolution(+compound,+atom,+compound,+atom,-compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: local_time_type_with_resolution/4
+.. _tzif_protocol/0::local_time_type_with_resolution/4:
+
+``local_time_type_with_resolution/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the applicable local time type for a zone in the cached TZif terms using the explicit resolution mode: ``strict`` (fail unless exactly one interpretation exists), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), and ``all`` (enumerate all valid interpretations in chronological order).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_time_type_with_resolution(Zone,LocalDateTime,ResolutionMode,TimeType)``
+| **Mode and number of proofs:**
+|    ``local_time_type_with_resolution(+atom,+compound,+atom,-compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: local_time_type_with_resolution/3
+.. _tzif_protocol/0::local_time_type_with_resolution/3:
+
+``local_time_type_with_resolution/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cached single-zone convenience variant of local civil-time lookup using the explicit resolution mode: ``strict`` (fail unless exactly one interpretation exists), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), and ``all`` (enumerate all valid interpretations in chronological order). Requires exactly one cached zone.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_time_type_with_resolution(LocalDateTime,ResolutionMode,TimeType)``
+| **Mode and number of proofs:**
+|    ``local_time_type_with_resolution(+compound,+atom,-compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: local_offset/4
+.. _tzif_protocol/0::local_offset/4:
+
+``local_offset/4``
+^^^^^^^^^^^^^^^^^^
+
+Returns the UTC offset in seconds for a loaded zone and a local civil time. This strict variant fails unless the local civil time has a unique interpretation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_offset(TZif,Zone,LocalDateTime,OffsetSeconds)``
+| **Mode and number of proofs:**
+|    ``local_offset(+compound,+atom,+compound,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: local_offset/3
+.. _tzif_protocol/0::local_offset/3:
+
+``local_offset/3``
+^^^^^^^^^^^^^^^^^^
+
+Returns the UTC offset in seconds for a zone in the cached TZif terms. This strict variant fails unless the local civil time has a unique interpretation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_offset(Zone,LocalDateTime,OffsetSeconds)``
+| **Mode and number of proofs:**
+|    ``local_offset(+atom,+compound,-integer)`` - ``one_or_error``
+
+
+------------
+
+.. index:: local_offset/2
+.. _tzif_protocol/0::local_offset/2:
+
+``local_offset/2``
+^^^^^^^^^^^^^^^^^^
+
+Cached single-zone convenience variant of strict local civil-time offset lookup.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_offset(LocalDateTime,OffsetSeconds)``
+| **Mode and number of proofs:**
+|    ``local_offset(+compound,-integer)`` - ``one_or_error``
+
+
+------------
+
+.. index:: local_offset_with_resolution/5
+.. _tzif_protocol/0::local_offset_with_resolution/5:
+
+``local_offset_with_resolution/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the UTC offset in seconds for a loaded zone and a local civil time using the explicit resolution mode: ``strict`` (fail unless exactly one interpretation exists), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), and ``all`` (enumerate all valid interpretations in chronological order).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_offset_with_resolution(TZif,Zone,LocalDateTime,ResolutionMode,OffsetSeconds)``
+| **Mode and number of proofs:**
+|    ``local_offset_with_resolution(+compound,+atom,+compound,+atom,-integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: local_offset_with_resolution/4
+.. _tzif_protocol/0::local_offset_with_resolution/4:
+
+``local_offset_with_resolution/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the UTC offset in seconds for a zone in the cached TZif terms using the explicit resolution mode: ``strict`` (fail unless exactly one interpretation exists), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), and ``all`` (enumerate all valid interpretations in chronological order).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_offset_with_resolution(Zone,LocalDateTime,ResolutionMode,OffsetSeconds)``
+| **Mode and number of proofs:**
+|    ``local_offset_with_resolution(+atom,+compound,+atom,-integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: local_offset_with_resolution/3
+.. _tzif_protocol/0::local_offset_with_resolution/3:
+
+``local_offset_with_resolution/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cached single-zone convenience variant of local civil-time offset lookup using the explicit resolution mode; requires exactly one cached zone.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_offset_with_resolution(LocalDateTime,ResolutionMode,OffsetSeconds)``
+| **Mode and number of proofs:**
+|    ``local_offset_with_resolution(+compound,+atom,-integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: local_daylight_saving_time/4
+.. _tzif_protocol/0::local_daylight_saving_time/4:
+
+``local_daylight_saving_time/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns daylight-saving information for a loaded zone and a local civil time. This strict variant fails unless the local civil time has a unique interpretation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_daylight_saving_time(TZif,Zone,LocalDateTime,IsDST)``
+| **Mode and number of proofs:**
+|    ``local_daylight_saving_time(+compound,+atom,+compound,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: local_daylight_saving_time/3
+.. _tzif_protocol/0::local_daylight_saving_time/3:
+
+``local_daylight_saving_time/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns daylight-saving information for a zone in the cached TZif terms. This strict variant fails unless the local civil time has a unique interpretation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_daylight_saving_time(Zone,LocalDateTime,IsDST)``
+| **Mode and number of proofs:**
+|    ``local_daylight_saving_time(+atom,+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: local_daylight_saving_time/2
+.. _tzif_protocol/0::local_daylight_saving_time/2:
+
+``local_daylight_saving_time/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cached single-zone convenience variant of strict local daylight-saving lookup.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_daylight_saving_time(LocalDateTime,IsDST)``
+| **Mode and number of proofs:**
+|    ``local_daylight_saving_time(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: local_daylight_saving_time_with_resolution/5
+.. _tzif_protocol/0::local_daylight_saving_time_with_resolution/5:
+
+``local_daylight_saving_time_with_resolution/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns daylight-saving information for a loaded zone and a local civil time using the explicit resolution mode: ``strict`` (fail unless exactly one interpretation exists), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), and ``all`` (enumerate all valid interpretations in chronological order).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_daylight_saving_time_with_resolution(TZif,Zone,LocalDateTime,ResolutionMode,IsDST)``
+| **Mode and number of proofs:**
+|    ``local_daylight_saving_time_with_resolution(+compound,+atom,+compound,+atom,-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: local_daylight_saving_time_with_resolution/4
+.. _tzif_protocol/0::local_daylight_saving_time_with_resolution/4:
+
+``local_daylight_saving_time_with_resolution/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns daylight-saving information for a zone in the cached TZif terms using the explicit resolution mode: ``strict`` (fail unless exactly one interpretation exists), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), and ``all`` (enumerate all valid interpretations in chronological order).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_daylight_saving_time_with_resolution(Zone,LocalDateTime,ResolutionMode,IsDST)``
+| **Mode and number of proofs:**
+|    ``local_daylight_saving_time_with_resolution(+atom,+compound,+atom,-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: local_daylight_saving_time_with_resolution/3
+.. _tzif_protocol/0::local_daylight_saving_time_with_resolution/3:
+
+``local_daylight_saving_time_with_resolution/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cached single-zone convenience variant of local civil-time daylight-saving lookup using the explicit resolution mode; requires exactly one cached zone.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_daylight_saving_time_with_resolution(LocalDateTime,ResolutionMode,IsDST)``
+| **Mode and number of proofs:**
+|    ``local_daylight_saving_time_with_resolution(+compound,+atom,-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: local_abbreviation/4
+.. _tzif_protocol/0::local_abbreviation/4:
+
+``local_abbreviation/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the time-zone abbreviation for a loaded zone and a local civil time. This strict variant fails unless the local civil time has a unique interpretation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_abbreviation(TZif,Zone,LocalDateTime,Abbreviation)``
+| **Mode and number of proofs:**
+|    ``local_abbreviation(+compound,+atom,+compound,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: local_abbreviation/3
+.. _tzif_protocol/0::local_abbreviation/3:
+
+``local_abbreviation/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the time-zone abbreviation for a zone in the cached TZif terms. This strict variant fails unless the local civil time has a unique interpretation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_abbreviation(Zone,LocalDateTime,Abbreviation)``
+| **Mode and number of proofs:**
+|    ``local_abbreviation(+atom,+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: local_abbreviation/2
+.. _tzif_protocol/0::local_abbreviation/2:
+
+``local_abbreviation/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cached single-zone convenience variant of strict local abbreviation lookup.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_abbreviation(LocalDateTime,Abbreviation)``
+| **Mode and number of proofs:**
+|    ``local_abbreviation(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: local_abbreviation_with_resolution/5
+.. _tzif_protocol/0::local_abbreviation_with_resolution/5:
+
+``local_abbreviation_with_resolution/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the time-zone abbreviation for a loaded zone and a local civil time using the explicit resolution mode: ``strict`` (fail unless exactly one interpretation exists), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), and ``all`` (enumerate all valid interpretations in chronological order).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_abbreviation_with_resolution(TZif,Zone,LocalDateTime,ResolutionMode,Abbreviation)``
+| **Mode and number of proofs:**
+|    ``local_abbreviation_with_resolution(+compound,+atom,+compound,+atom,-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: local_abbreviation_with_resolution/4
+.. _tzif_protocol/0::local_abbreviation_with_resolution/4:
+
+``local_abbreviation_with_resolution/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the time-zone abbreviation for a zone in the cached TZif terms using the explicit resolution mode: ``strict`` (fail unless exactly one interpretation exists), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), and ``all`` (enumerate all valid interpretations in chronological order).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_abbreviation_with_resolution(Zone,LocalDateTime,ResolutionMode,Abbreviation)``
+| **Mode and number of proofs:**
+|    ``local_abbreviation_with_resolution(+atom,+compound,+atom,-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: local_abbreviation_with_resolution/3
+.. _tzif_protocol/0::local_abbreviation_with_resolution/3:
+
+``local_abbreviation_with_resolution/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cached single-zone convenience variant of local civil-time abbreviation lookup using the explicit resolution mode; requires exactly one cached zone.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_abbreviation_with_resolution(LocalDateTime,ResolutionMode,Abbreviation)``
+| **Mode and number of proofs:**
+|    ``local_abbreviation_with_resolution(+compound,+atom,-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: local_time_type_reified/4
+.. _tzif_protocol/0::local_time_type_reified/4:
+
+``local_time_type_reified/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a reified local civil-time lookup result for a loaded zone as one of ``unique(TimeType)``, ``ambiguous(TimeTypes)``, or ``nonexistent``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_time_type_reified(TZif,Zone,LocalDateTime,Result)``
+| **Mode and number of proofs:**
+|    ``local_time_type_reified(+compound,+atom,+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: local_time_type_reified/3
+.. _tzif_protocol/0::local_time_type_reified/3:
+
+``local_time_type_reified/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a reified local civil-time lookup result for a zone in the cached TZif terms as one of ``unique(TimeType)``, ``ambiguous(TimeTypes)``, or ``nonexistent``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_time_type_reified(Zone,LocalDateTime,Result)``
+| **Mode and number of proofs:**
+|    ``local_time_type_reified(+atom,+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: local_time_type_reified/2
+.. _tzif_protocol/0::local_time_type_reified/2:
+
+``local_time_type_reified/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cached single-zone convenience variant of reified local civil-time lookup; returns ``unique(TimeType)``, ``ambiguous(TimeTypes)``, or ``nonexistent``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_time_type_reified(LocalDateTime,Result)``
+| **Mode and number of proofs:**
+|    ``local_time_type_reified(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: local_offset_reified/4
+.. _tzif_protocol/0::local_offset_reified/4:
+
+``local_offset_reified/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a reified local offset lookup result for a loaded zone as one of ``unique(OffsetSeconds)``, ``ambiguous(OffsetSecondsList)``, or ``nonexistent``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_offset_reified(TZif,Zone,LocalDateTime,Result)``
+| **Mode and number of proofs:**
+|    ``local_offset_reified(+compound,+atom,+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: local_offset_reified/3
+.. _tzif_protocol/0::local_offset_reified/3:
+
+``local_offset_reified/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a reified local offset lookup result for a zone in the cached TZif terms as one of ``unique(OffsetSeconds)``, ``ambiguous(OffsetSecondsList)``, or ``nonexistent``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_offset_reified(Zone,LocalDateTime,Result)``
+| **Mode and number of proofs:**
+|    ``local_offset_reified(+atom,+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: local_offset_reified/2
+.. _tzif_protocol/0::local_offset_reified/2:
+
+``local_offset_reified/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cached single-zone convenience variant of reified local offset lookup; returns ``unique(OffsetSeconds)``, ``ambiguous(OffsetSecondsList)``, or ``nonexistent``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_offset_reified(LocalDateTime,Result)``
+| **Mode and number of proofs:**
+|    ``local_offset_reified(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: local_daylight_saving_time_reified/4
+.. _tzif_protocol/0::local_daylight_saving_time_reified/4:
+
+``local_daylight_saving_time_reified/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a reified local daylight-saving lookup result for a loaded zone as one of ``unique(IsDST)``, ``ambiguous(IsDSTList)``, or ``nonexistent``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_daylight_saving_time_reified(TZif,Zone,LocalDateTime,Result)``
+| **Mode and number of proofs:**
+|    ``local_daylight_saving_time_reified(+compound,+atom,+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: local_daylight_saving_time_reified/3
+.. _tzif_protocol/0::local_daylight_saving_time_reified/3:
+
+``local_daylight_saving_time_reified/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a reified local daylight-saving lookup result for a zone in the cached TZif terms as one of ``unique(IsDST)``, ``ambiguous(IsDSTList)``, or ``nonexistent``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_daylight_saving_time_reified(Zone,LocalDateTime,Result)``
+| **Mode and number of proofs:**
+|    ``local_daylight_saving_time_reified(+atom,+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: local_daylight_saving_time_reified/2
+.. _tzif_protocol/0::local_daylight_saving_time_reified/2:
+
+``local_daylight_saving_time_reified/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cached single-zone convenience variant of reified local daylight-saving lookup; returns ``unique(IsDST)``, ``ambiguous(IsDSTList)``, or ``nonexistent``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_daylight_saving_time_reified(LocalDateTime,Result)``
+| **Mode and number of proofs:**
+|    ``local_daylight_saving_time_reified(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: local_abbreviation_reified/4
+.. _tzif_protocol/0::local_abbreviation_reified/4:
+
+``local_abbreviation_reified/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a reified local abbreviation lookup result for a loaded zone as one of ``unique(Abbreviation)``, ``ambiguous(Abbreviations)``, or ``nonexistent``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_abbreviation_reified(TZif,Zone,LocalDateTime,Result)``
+| **Mode and number of proofs:**
+|    ``local_abbreviation_reified(+compound,+atom,+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: local_abbreviation_reified/3
+.. _tzif_protocol/0::local_abbreviation_reified/3:
+
+``local_abbreviation_reified/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a reified local abbreviation lookup result for a zone in the cached TZif terms as one of ``unique(Abbreviation)``, ``ambiguous(Abbreviations)``, or ``nonexistent``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_abbreviation_reified(Zone,LocalDateTime,Result)``
+| **Mode and number of proofs:**
+|    ``local_abbreviation_reified(+atom,+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: local_abbreviation_reified/2
+.. _tzif_protocol/0::local_abbreviation_reified/2:
+
+``local_abbreviation_reified/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cached single-zone convenience variant of reified local abbreviation lookup; returns ``unique(Abbreviation)``, ``ambiguous(Abbreviations)``, or ``nonexistent``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_abbreviation_reified(LocalDateTime,Result)``
+| **Mode and number of proofs:**
+|    ``local_abbreviation_reified(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
 Protected predicates
 --------------------
 

@@ -21,6 +21,13 @@ Current feature set:
 - Parses POSIX footers, including signed-hour and signed-minute offsets.
 - Exposes zone-aware lookup predicates over loaded ``tzif(...)`` terms,
   plus cached convenience variants for zone and single-zone queries.
+- Exposes strict local civil-time lookup predicates that fail cleanly
+  for ambiguous or nonexistent times.
+- Exposes ``*_with_resolution`` local civil-time query predicates for
+  explicit resolution modes (``strict``, ``first``, ``second``, and
+  ``all``).
+- Exposes ``*_reified`` local civil-time query predicates that return
+  ``unique(...)``, ``ambiguous(...)``, or ``nonexistent`` results.
 - Caches successful ``load/1`` calls automatically, while ``load/2``
   returns a loaded term without changing the cache.
 - Provides ``cache/1`` for making an already loaded ``tzif(...)`` term
@@ -107,6 +114,53 @@ To refresh the bundled table for a newer IANA release, run:
 
    $ ./update_zone_ids.sh 2026a
 
+Local Queries
+-------------
+
+The library provides three sets of predicates for local civil-time
+queries.
+
+Strict predicates:
+
+- ``local_time_type/2-4``
+- ``local_offset/2-4``
+- ``local_daylight_saving_time/2-4``
+- ``local_abbreviation/2-4``
+
+These predicates are intended for local civil times with a unique
+interpretation. They fail for ambiguous fold times and nonexistent gap
+times.
+
+Explicit-resolution predicates:
+
+- ``local_time_type_with_resolution/3-5``
+- ``local_offset_with_resolution/3-5``
+- ``local_daylight_saving_time_with_resolution/3-5``
+- ``local_abbreviation_with_resolution/3-5``
+
+These predicates accept an explicit resolution mode argument. Supported
+modes are ``strict``, ``first``, ``second``, and ``all``.
+
+- ``strict``: succeed only when the local civil time has a unique
+  interpretation
+- ``first``: select the earliest valid interpretation
+- ``second``: select the latest valid interpretation
+- ``all``: enumerate all valid interpretations in chronological order
+
+Reified predicates:
+
+- ``local_time_type_reified/2-4``
+- ``local_offset_reified/2-4``
+- ``local_daylight_saving_time_reified/2-4``
+- ``local_abbreviation_reified/2-4``
+
+These predicates never use failure to distinguish ambiguity from
+absence. Instead, they return one of the following results:
+
+- ``unique(...)``
+- ``ambiguous(...)``
+- ``nonexistent``
+
 Examples
 --------
 
@@ -169,15 +223,21 @@ Use the automatic cache populated by ``load/1``:
    | ?- tzif::load(snapshot('snapshot.pl')).
    | ?- tzif::abbreviation(date_time(2024, 7, 1, 12, 0, 0), Abbreviation).
 
+Resolve an ambiguous local civil time explicitly:
+
+::
+
+   | ?- tzif::local_offset_with_resolution('America/New_York', date_time(2024, 11, 3, 1, 30, 0), first, Offset).
+
+Inspect whether a local civil time is unique, ambiguous, or nonexistent:
+
+::
+
+   | ?- tzif::local_time_type_reified('America/New_York', date_time(2024, 11, 3, 1, 30, 0), Result).
+
 List cached zones directly:
 
 ::
 
    | ?- tzif::load(directory('/usr/share/zoneinfo')).
    | ?- tzif::zones(Zones).
-
-Limitations
------------
-
-- Local civil-time queries and ambiguity resolution are not yet
-  implemented.

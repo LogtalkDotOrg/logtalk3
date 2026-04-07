@@ -173,8 +173,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#representation">Representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#zone-identifier-validation">Zone identifier validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#local-queries">Local Queries</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ulid.html"><code class="docutils literal notranslate"><span class="pre">ulid</span></code></a></li>
@@ -244,6 +244,13 @@ compatibility block in v2/v3 files.</p></li>
 <li><p>Parses POSIX footers, including signed-hour and signed-minute offsets.</p></li>
 <li><p>Exposes zone-aware lookup predicates over loaded <code class="docutils literal notranslate"><span class="pre">tzif(...)</span></code> terms,
 plus cached convenience variants for zone and single-zone queries.</p></li>
+<li><p>Exposes strict local civil-time lookup predicates that fail cleanly
+for ambiguous or nonexistent times.</p></li>
+<li><p>Exposes <code class="docutils literal notranslate"><span class="pre">*_with_resolution</span></code> local civil-time query predicates for
+explicit resolution modes (<code class="docutils literal notranslate"><span class="pre">strict</span></code>, <code class="docutils literal notranslate"><span class="pre">first</span></code>, <code class="docutils literal notranslate"><span class="pre">second</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">all</span></code>).</p></li>
+<li><p>Exposes <code class="docutils literal notranslate"><span class="pre">*_reified</span></code> local civil-time query predicates that return
+<code class="docutils literal notranslate"><span class="pre">unique(...)</span></code>, <code class="docutils literal notranslate"><span class="pre">ambiguous(...)</span></code>, or <code class="docutils literal notranslate"><span class="pre">nonexistent</span></code> results.</p></li>
 <li><p>Caches successful <code class="docutils literal notranslate"><span class="pre">load/1</span></code> calls automatically, while <code class="docutils literal notranslate"><span class="pre">load/2</span></code>
 returns a loaded term without changing the cache.</p></li>
 <li><p>Provides <code class="docutils literal notranslate"><span class="pre">cache/1</span></code> for making an already loaded <code class="docutils literal notranslate"><span class="pre">tzif(...)</span></code> term
@@ -315,6 +322,51 @@ installed zoneinfo tree.</p>
 </pre></div>
 </div>
 </section>
+<section id="local-queries">
+<h2>Local Queries<a class="headerlink" href="#local-queries" title="Link to this heading"></a></h2>
+<p>The library provides three sets of predicates for local civil-time
+queries.</p>
+<p>Strict predicates:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">local_time_type/2-4</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">local_offset/2-4</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">local_daylight_saving_time/2-4</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">local_abbreviation/2-4</span></code></p></li>
+</ul>
+<p>These predicates are intended for local civil times with a unique
+interpretation. They fail for ambiguous fold times and nonexistent gap
+times.</p>
+<p>Explicit-resolution predicates:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">local_time_type_with_resolution/3-5</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">local_offset_with_resolution/3-5</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">local_daylight_saving_time_with_resolution/3-5</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">local_abbreviation_with_resolution/3-5</span></code></p></li>
+</ul>
+<p>These predicates accept an explicit resolution mode argument. Supported
+modes are <code class="docutils literal notranslate"><span class="pre">strict</span></code>, <code class="docutils literal notranslate"><span class="pre">first</span></code>, <code class="docutils literal notranslate"><span class="pre">second</span></code>, and <code class="docutils literal notranslate"><span class="pre">all</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">strict</span></code>: succeed only when the local civil time has a unique
+interpretation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">first</span></code>: select the earliest valid interpretation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">second</span></code>: select the latest valid interpretation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">all</span></code>: enumerate all valid interpretations in chronological order</p></li>
+</ul>
+<p>Reified predicates:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">local_time_type_reified/2-4</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">local_offset_reified/2-4</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">local_daylight_saving_time_reified/2-4</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">local_abbreviation_reified/2-4</span></code></p></li>
+</ul>
+<p>These predicates never use failure to distinguish ambiguity from
+absence. Instead, they return one of the following results:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">unique(...)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ambiguous(...)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nonexistent</span></code></p></li>
+</ul>
+</section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <p>Load a single TZif payload without caching it:</p>
@@ -358,18 +410,19 @@ installed zoneinfo tree.</p>
 | <span class="o">?-</span> tzif<span class="o">::</span>abbreviation(date_time(<span class="m">2024</span>, <span class="m">7</span>, <span class="m">1</span>, <span class="m">12</span>, <span class="m">0</span>, <span class="m">0</span>), <span class="nv">Abbreviation</span>).
 </pre></div>
 </div>
+<p>Resolve an ambiguous local civil time explicitly:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> tzif<span class="o">::</span>local_offset_with_resolution(<span class="s">&#39;America/New_York&#39;</span>, date_time(<span class="m">2024</span>, <span class="m">11</span>, <span class="m">3</span>, <span class="m">1</span>, <span class="m">30</span>, <span class="m">0</span>), first, <span class="nv">Offset</span>).
+</pre></div>
+</div>
+<p>Inspect whether a local civil time is unique, ambiguous, or nonexistent:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> tzif<span class="o">::</span>local_time_type_reified(<span class="s">&#39;America/New_York&#39;</span>, date_time(<span class="m">2024</span>, <span class="m">11</span>, <span class="m">3</span>, <span class="m">1</span>, <span class="m">30</span>, <span class="m">0</span>), <span class="nv">Result</span>).
+</pre></div>
+</div>
 <p>List cached zones directly:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> tzif<span class="o">::</span>load(directory(<span class="s">&#39;/usr/share/zoneinfo&#39;</span>)).
 | <span class="o">?-</span> tzif<span class="o">::</span>zones(<span class="nv">Zones</span>).
 </pre></div>
 </div>
-</section>
-<section id="limitations">
-<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>Local civil-time queries and ambiguity resolution are not yet
-implemented.</p></li>
-</ul>
 </section>
 </section>
 

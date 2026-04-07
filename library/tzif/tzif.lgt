@@ -151,6 +151,125 @@
 	abbreviation(UTC, Abbreviation) :-
 		time_type(UTC, time_type(_, _, Abbreviation, _)).
 
+	local_time_type(TZif, Zone, LocalDateTime, TimeType) :-
+		normalize_local_query(LocalDateTime, LocalUnixSeconds),
+		require_tzif_zone(TZif, Zone, ZoneData),
+		lookup_local_time_type(ZoneData, LocalDateTime, LocalUnixSeconds, strict, TimeType).
+
+	local_time_type(Zone, LocalDateTime, TimeType) :-
+		normalize_local_query(LocalDateTime, LocalUnixSeconds),
+		require_cached_zone(Zone, ZoneData),
+		lookup_local_time_type(ZoneData, LocalDateTime, LocalUnixSeconds, strict, TimeType).
+	local_time_type(LocalDateTime, TimeType) :-
+		normalize_local_query(LocalDateTime, LocalUnixSeconds),
+		require_single_cached_tzif(tzif(_, _, ZoneData)),
+		lookup_local_time_type(ZoneData, LocalDateTime, LocalUnixSeconds, strict, TimeType).
+
+	local_time_type_with_resolution(TZif, Zone, LocalDateTime, Mode, TimeType) :-
+		normalize_local_query(LocalDateTime, LocalUnixSeconds),
+		check_local_resolution_mode(Mode),
+		require_tzif_zone(TZif, Zone, ZoneData),
+		lookup_local_time_type(ZoneData, LocalDateTime, LocalUnixSeconds, Mode, TimeType).
+	local_time_type_with_resolution(Zone, LocalDateTime, Mode, TimeType) :-
+		normalize_local_query(LocalDateTime, LocalUnixSeconds),
+		check_local_resolution_mode(Mode),
+		require_cached_zone(Zone, ZoneData),
+		lookup_local_time_type(ZoneData, LocalDateTime, LocalUnixSeconds, Mode, TimeType).
+	local_time_type_with_resolution(LocalDateTime, Mode, TimeType) :-
+		normalize_local_query(LocalDateTime, LocalUnixSeconds),
+		check_local_resolution_mode(Mode),
+		require_single_cached_tzif(tzif(_, _, ZoneData)),
+		lookup_local_time_type(ZoneData, LocalDateTime, LocalUnixSeconds, Mode, TimeType).
+
+	local_offset(TZif, Zone, LocalDateTime, OffsetSeconds) :-
+		local_time_type(TZif, Zone, LocalDateTime, time_type(OffsetSeconds, _, _, _)).
+	local_offset(Zone, LocalDateTime, OffsetSeconds) :-
+		local_time_type(Zone, LocalDateTime, time_type(OffsetSeconds, _, _, _)).
+	local_offset(LocalDateTime, OffsetSeconds) :-
+		local_time_type(LocalDateTime, time_type(OffsetSeconds, _, _, _)).
+
+	local_offset_with_resolution(TZif, Zone, LocalDateTime, Mode, OffsetSeconds) :-
+		local_time_type_with_resolution(TZif, Zone, LocalDateTime, Mode, time_type(OffsetSeconds, _, _, _)).
+	local_offset_with_resolution(Zone, LocalDateTime, Mode, OffsetSeconds) :-
+		local_time_type_with_resolution(Zone, LocalDateTime, Mode, time_type(OffsetSeconds, _, _, _)).
+	local_offset_with_resolution(LocalDateTime, Mode, OffsetSeconds) :-
+		local_time_type_with_resolution(LocalDateTime, Mode, time_type(OffsetSeconds, _, _, _)).
+
+	local_daylight_saving_time(TZif, Zone, LocalDateTime, IsDST) :-
+		local_time_type(TZif, Zone, LocalDateTime, time_type(_, IsDST, _, _)).
+	local_daylight_saving_time(Zone, LocalDateTime, IsDST) :-
+		local_time_type(Zone, LocalDateTime, time_type(_, IsDST, _, _)).
+	local_daylight_saving_time(LocalDateTime, IsDST) :-
+		local_time_type(LocalDateTime, time_type(_, IsDST, _, _)).
+
+	local_daylight_saving_time_with_resolution(TZif, Zone, LocalDateTime, Mode, IsDST) :-
+		local_time_type_with_resolution(TZif, Zone, LocalDateTime, Mode, time_type(_, IsDST, _, _)).
+	local_daylight_saving_time_with_resolution(Zone, LocalDateTime, Mode, IsDST) :-
+		local_time_type_with_resolution(Zone, LocalDateTime, Mode, time_type(_, IsDST, _, _)).
+	local_daylight_saving_time_with_resolution(LocalDateTime, Mode, IsDST) :-
+		local_time_type_with_resolution(LocalDateTime, Mode, time_type(_, IsDST, _, _)).
+
+	local_abbreviation(TZif, Zone, LocalDateTime, Abbreviation) :-
+		local_time_type(TZif, Zone, LocalDateTime, time_type(_, _, Abbreviation, _)).
+	local_abbreviation(Zone, LocalDateTime, Abbreviation) :-
+		local_time_type(Zone, LocalDateTime, time_type(_, _, Abbreviation, _)).
+	local_abbreviation(LocalDateTime, Abbreviation) :-
+		local_time_type(LocalDateTime, time_type(_, _, Abbreviation, _)).
+
+	local_abbreviation_with_resolution(TZif, Zone, LocalDateTime, Mode, Abbreviation) :-
+		local_time_type_with_resolution(TZif, Zone, LocalDateTime, Mode, time_type(_, _, Abbreviation, _)).
+	local_abbreviation_with_resolution(Zone, LocalDateTime, Mode, Abbreviation) :-
+		local_time_type_with_resolution(Zone, LocalDateTime, Mode, time_type(_, _, Abbreviation, _)).
+	local_abbreviation_with_resolution(LocalDateTime, Mode, Abbreviation) :-
+		local_time_type_with_resolution(LocalDateTime, Mode, time_type(_, _, Abbreviation, _)).
+
+	local_time_type_reified(TZif, Zone, LocalDateTime, Result) :-
+		normalize_local_query(LocalDateTime, LocalUnixSeconds),
+		require_tzif_zone(TZif, Zone, ZoneData),
+		lookup_local_time_type_result(ZoneData, LocalDateTime, LocalUnixSeconds, Result).
+
+	local_time_type_reified(Zone, LocalDateTime, Result) :-
+		normalize_local_query(LocalDateTime, LocalUnixSeconds),
+		require_cached_zone(Zone, ZoneData),
+		lookup_local_time_type_result(ZoneData, LocalDateTime, LocalUnixSeconds, Result).
+	local_time_type_reified(LocalDateTime, Result) :-
+		normalize_local_query(LocalDateTime, LocalUnixSeconds),
+		require_single_cached_tzif(tzif(_, _, ZoneData)),
+		lookup_local_time_type_result(ZoneData, LocalDateTime, LocalUnixSeconds, Result).
+
+	local_offset_reified(TZif, Zone, LocalDateTime, Result) :-
+		local_time_type_reified(TZif, Zone, LocalDateTime, TimeTypeResult),
+		local_offset_result_from_time_type_result(TimeTypeResult, Result).
+
+	local_offset_reified(Zone, LocalDateTime, Result) :-
+		local_time_type_reified(Zone, LocalDateTime, TimeTypeResult),
+		local_offset_result_from_time_type_result(TimeTypeResult, Result).
+	local_offset_reified(LocalDateTime, Result) :-
+		local_time_type_reified(LocalDateTime, TimeTypeResult),
+		local_offset_result_from_time_type_result(TimeTypeResult, Result).
+
+	local_daylight_saving_time_reified(TZif, Zone, LocalDateTime, Result) :-
+		local_time_type_reified(TZif, Zone, LocalDateTime, TimeTypeResult),
+		local_daylight_saving_time_result_from_time_type_result(TimeTypeResult, Result).
+
+	local_daylight_saving_time_reified(Zone, LocalDateTime, Result) :-
+		local_time_type_reified(Zone, LocalDateTime, TimeTypeResult),
+		local_daylight_saving_time_result_from_time_type_result(TimeTypeResult, Result).
+	local_daylight_saving_time_reified(LocalDateTime, Result) :-
+		local_time_type_reified(LocalDateTime, TimeTypeResult),
+		local_daylight_saving_time_result_from_time_type_result(TimeTypeResult, Result).
+
+	local_abbreviation_reified(TZif, Zone, LocalDateTime, Result) :-
+		local_time_type_reified(TZif, Zone, LocalDateTime, TimeTypeResult),
+		local_abbreviation_result_from_time_type_result(TimeTypeResult, Result).
+
+	local_abbreviation_reified(Zone, LocalDateTime, Result) :-
+		local_time_type_reified(Zone, LocalDateTime, TimeTypeResult),
+		local_abbreviation_result_from_time_type_result(TimeTypeResult, Result).
+	local_abbreviation_reified(LocalDateTime, Result) :-
+		local_time_type_reified(LocalDateTime, TimeTypeResult),
+		local_abbreviation_result_from_time_type_result(TimeTypeResult, Result).
+
 	cache_tzifs([]).
 	cache_tzifs([TZif| TZifs]) :-
 		cache_tzif(TZif),
@@ -328,6 +447,28 @@
 		!.
 	normalize_query_utc(date_time(Year, Month, Day, Hours, Minutes, Seconds), UnixSeconds) :-
 		date_time_to_unix(date_time(Year, Month, Day, Hours, Minutes, Seconds), UnixSeconds).
+
+	normalize_local_query(LocalDateTime, LocalUnixSeconds) :-
+		LocalDateTime = date_time(Year, Month, Day, Hours, Minutes, Seconds),
+		!,
+		date_time_to_unix(date_time(Year, Month, Day, Hours, Minutes, Seconds), LocalUnixSeconds).
+	normalize_local_query(LocalDateTime, _) :-
+		( var(LocalDateTime) -> instantiation_error ; type_error(date_time, LocalDateTime) ).
+
+	check_local_resolution_mode(Mode) :-
+		var(Mode),
+		!,
+		instantiation_error.
+	check_local_resolution_mode(strict) :-
+		!.
+	check_local_resolution_mode(first) :-
+		!.
+	check_local_resolution_mode(second) :-
+		!.
+	check_local_resolution_mode(all) :-
+		!.
+	check_local_resolution_mode(Mode) :-
+		domain_error(local_time_resolution_mode, Mode).
 
 	parse_source(file(File), ZoneData) :-
 		!,
@@ -685,10 +826,110 @@
 				Footer \== empty ->
 				footer_time_type(Footer, UnixSeconds, TimeType)
 			;	latest_transition(Transitions, ComparisonTime, transition(SourceTime, TypeIndex)),
-				local_time_type(TypeIndex, Types, Type),
+				indexed_local_time_type(TypeIndex, Types, Type),
 				type_term_to_time_type(transition(SourceTime), Type, TimeType)
 			)
 		).
+
+	lookup_local_time_type(ZoneData, LocalDateTime, LocalUnixSeconds, Mode, TimeType) :-
+		local_time_type_candidates(ZoneData, LocalDateTime, LocalUnixSeconds, Candidates),
+		resolve_local_time_type_candidates(Mode, Candidates, TimeType).
+
+	lookup_local_time_type_result(ZoneData, LocalDateTime, LocalUnixSeconds, Result) :-
+		local_time_type_candidates(ZoneData, LocalDateTime, LocalUnixSeconds, Candidates),
+		reify_local_time_type_candidates(Candidates, Result).
+
+	local_time_type_candidates(ZoneData, LocalDateTime, LocalUnixSeconds, Candidates) :-
+		setof(UTC-TimeType, local_time_type_candidate(ZoneData, LocalDateTime, LocalUnixSeconds, UTC, TimeType), Candidates),
+		!.
+	local_time_type_candidates(_, _, _, []).
+
+	local_time_type_candidate(ZoneData, LocalDateTime, LocalUnixSeconds, UTC, TimeType) :-
+		local_offset_candidate(ZoneData, OffsetSeconds),
+		UTC is LocalUnixSeconds - OffsetSeconds,
+		lookup_time_type(ZoneData, UTC, TimeType),
+		time_type_offset(TimeType, OffsetSeconds),
+		matching_local_date_time(UTC, OffsetSeconds, LocalDateTime).
+
+	resolve_local_time_type_candidates(strict, [_-TimeType], TimeType).
+	resolve_local_time_type_candidates(first, [_-TimeType| _], TimeType).
+	resolve_local_time_type_candidates(second, [_-TimeType], TimeType) :-
+		!.
+	resolve_local_time_type_candidates(second, [_-_, _-TimeType| _], TimeType).
+	resolve_local_time_type_candidates(all, Candidates, TimeType) :-
+		member(_-TimeType, Candidates).
+
+	reify_local_time_type_candidates([], nonexistent) :-
+		!.
+	reify_local_time_type_candidates([_-TimeType], unique(TimeType)) :-
+		!.
+	reify_local_time_type_candidates(Candidates, ambiguous(TimeTypes)) :-
+		Candidates = [_-_, _-_| _],
+		candidate_time_types(Candidates, TimeTypes).
+
+	candidate_time_types([], []).
+	candidate_time_types([_-TimeType| Candidates], [TimeType| TimeTypes]) :-
+		candidate_time_types(Candidates, TimeTypes).
+
+	local_offset_result_from_time_type_result(nonexistent, nonexistent).
+	local_offset_result_from_time_type_result(unique(TimeType), unique(OffsetSeconds)) :-
+		time_type_offset(TimeType, OffsetSeconds).
+	local_offset_result_from_time_type_result(ambiguous(TimeTypes), ambiguous(OffsetSecondsList)) :-
+		time_types_offsets(TimeTypes, OffsetSecondsList).
+
+	time_types_offsets([], []).
+	time_types_offsets([TimeType| TimeTypes], [OffsetSeconds| OffsetSecondsList]) :-
+		time_type_offset(TimeType, OffsetSeconds),
+		time_types_offsets(TimeTypes, OffsetSecondsList).
+
+	local_daylight_saving_time_result_from_time_type_result(nonexistent, nonexistent).
+	local_daylight_saving_time_result_from_time_type_result(unique(TimeType), unique(IsDST)) :-
+		time_type_daylight_saving_time(TimeType, IsDST).
+	local_daylight_saving_time_result_from_time_type_result(ambiguous(TimeTypes), ambiguous(IsDSTs)) :-
+		time_types_daylight_saving_time(TimeTypes, IsDSTs).
+
+	time_types_daylight_saving_time([], []).
+	time_types_daylight_saving_time([TimeType| TimeTypes], [IsDST| IsDSTs]) :-
+		time_type_daylight_saving_time(TimeType, IsDST),
+		time_types_daylight_saving_time(TimeTypes, IsDSTs).
+
+	time_type_daylight_saving_time(time_type(_, IsDST, _, _), IsDST).
+
+	local_abbreviation_result_from_time_type_result(nonexistent, nonexistent).
+	local_abbreviation_result_from_time_type_result(unique(TimeType), unique(Abbreviation)) :-
+		time_type_abbreviation(TimeType, Abbreviation).
+	local_abbreviation_result_from_time_type_result(ambiguous(TimeTypes), ambiguous(Abbreviations)) :-
+		time_types_abbreviations(TimeTypes, Abbreviations).
+
+	time_types_abbreviations([], []).
+	time_types_abbreviations([TimeType| TimeTypes], [Abbreviation| Abbreviations]) :-
+		time_type_abbreviation(TimeType, Abbreviation),
+		time_types_abbreviations(TimeTypes, Abbreviations).
+
+	time_type_abbreviation(time_type(_, _, Abbreviation, _), Abbreviation).
+
+	local_offset_candidate(zone_data(_, _, Types, _, _, _, _), OffsetSeconds) :-
+		indexed_local_time_type_offset(Types, OffsetSeconds).
+	local_offset_candidate(zone_data(_, _, _, _, _, _, footer(Footer)), OffsetSeconds) :-
+		footer_offset_candidate(Footer, OffsetSeconds).
+
+	indexed_local_time_type_offset([local_time_type(_, OffsetSeconds, _, _, _)| _], OffsetSeconds).
+	indexed_local_time_type_offset([_| Types], OffsetSeconds) :-
+		indexed_local_time_type_offset(Types, OffsetSeconds).
+
+	footer_offset_candidate(empty, _) :-
+		fail.
+	footer_offset_candidate(posix(_, StandardOffset, none, none, none, none), StandardOffset).
+	footer_offset_candidate(posix(_, StandardOffset, DSTAbbreviation, _DSTOffset, _, _), StandardOffset) :-
+		DSTAbbreviation \== none.
+	footer_offset_candidate(posix(_, _, DSTAbbreviation, DSTOffset, _, _), DSTOffset) :-
+		DSTAbbreviation \== none.
+
+	time_type_offset(time_type(OffsetSeconds, _, _, _), OffsetSeconds).
+
+	matching_local_date_time(UTC, OffsetSeconds, LocalDateTime) :-
+		LocalUnixSeconds is UTC + OffsetSeconds,
+		unix_to_date_time(LocalUnixSeconds, LocalDateTime).
 
 	latest_transition([Transition], ComparisonTime, Transition) :-
 		!,
@@ -701,10 +942,10 @@
 		;	Transition = transition(Time, TypeIndex)
 		).
 
-	local_time_type(Index, [local_time_type(Index, OffsetSeconds, IsDST, Abbreviation, DesignationIndex)| _], local_time_type(Index, OffsetSeconds, IsDST, Abbreviation, DesignationIndex)) :-
+	indexed_local_time_type(Index, [local_time_type(Index, OffsetSeconds, IsDST, Abbreviation, DesignationIndex)| _], local_time_type(Index, OffsetSeconds, IsDST, Abbreviation, DesignationIndex)) :-
 		!.
-	local_time_type(Index, [_| Types], Type) :-
-		local_time_type(Index, Types, Type).
+	indexed_local_time_type(Index, [_| Types], Type) :-
+		indexed_local_time_type(Index, Types, Type).
 
 	type_term_to_time_type(Source, local_time_type(_, OffsetSeconds, IsDST, Abbreviation, _), time_type(OffsetSeconds, IsDST, Abbreviation, Source)).
 
@@ -951,7 +1192,7 @@
 
 	save_snapshot_terms([], _).
 	save_snapshot_terms([TZif| TZifs], Stream) :-
-		write_term(Stream, TZif, [quoted(true)]),
+		write_canonical(Stream, TZif),
 		write(Stream, '.\n'),
 		save_snapshot_terms(TZifs, Stream).
 

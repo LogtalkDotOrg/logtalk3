@@ -188,4 +188,256 @@
 		argnames is ['UTC', 'Abbreviation']
 	]).
 
+	:- public(local_time_type/4).
+	:- mode(local_time_type(+compound, +atom, +compound, -compound), zero_or_one).
+	:- info(local_time_type/4, [
+		comment is 'Returns the applicable local time type for a loaded zone and a local civil time given as a ``date_time/6`` term. This strict variant fails unless the local civil time has a unique interpretation.',
+		argnames is ['TZif', 'Zone', 'LocalDateTime', 'TimeType']
+	]).
+
+	:- public(local_time_type/3).
+	:- mode(local_time_type(+atom, +compound, -compound), one_or_error).
+	:- info(local_time_type/3, [
+		comment is 'Returns the applicable local time type for a zone in the cached TZif terms. This strict variant fails unless the local civil time has a unique interpretation.',
+		argnames is ['Zone', 'LocalDateTime', 'TimeType']
+	]).
+
+	:- public(local_time_type/2).
+	:- mode(local_time_type(+compound, -compound), one_or_error).
+	:- info(local_time_type/2, [
+		comment is 'Cached single-zone convenience variant of strict local civil-time lookup; requires exactly one cached zone and fails unless the local civil time has a unique interpretation.',
+		argnames is ['LocalDateTime', 'TimeType']
+	]).
+
+	:- public(local_time_type_with_resolution/5).
+	:- mode(local_time_type_with_resolution(+compound, +atom, +compound, +atom, -compound), zero_or_more).
+	:- info(local_time_type_with_resolution/5, [
+		comment is 'Returns the applicable local time type for a loaded zone and a local civil time using the explicit resolution mode: ``strict`` (fail unless exactly one interpretation exists), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), and ``all`` (enumerate all valid interpretations in chronological order).',
+		argnames is ['TZif', 'Zone', 'LocalDateTime', 'ResolutionMode', 'TimeType']
+	]).
+
+	:- public(local_time_type_with_resolution/4).
+	:- mode(local_time_type_with_resolution(+atom, +compound, +atom, -compound), zero_or_more).
+	:- info(local_time_type_with_resolution/4, [
+		comment is 'Returns the applicable local time type for a zone in the cached TZif terms using the explicit resolution mode: ``strict`` (fail unless exactly one interpretation exists), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), and ``all`` (enumerate all valid interpretations in chronological order).',
+		argnames is ['Zone', 'LocalDateTime', 'ResolutionMode', 'TimeType']
+	]).
+
+	:- public(local_time_type_with_resolution/3).
+	:- mode(local_time_type_with_resolution(+compound, +atom, -compound), zero_or_more).
+	:- info(local_time_type_with_resolution/3, [
+		comment is 'Cached single-zone convenience variant of local civil-time lookup using the explicit resolution mode: ``strict`` (fail unless exactly one interpretation exists), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), and ``all`` (enumerate all valid interpretations in chronological order). Requires exactly one cached zone.',
+		argnames is ['LocalDateTime', 'ResolutionMode', 'TimeType']
+	]).
+
+	:- public(local_offset/4).
+	:- mode(local_offset(+compound, +atom, +compound, -integer), zero_or_one).
+	:- info(local_offset/4, [
+		comment is 'Returns the UTC offset in seconds for a loaded zone and a local civil time. This strict variant fails unless the local civil time has a unique interpretation.',
+		argnames is ['TZif', 'Zone', 'LocalDateTime', 'OffsetSeconds']
+	]).
+
+	:- public(local_offset/3).
+	:- mode(local_offset(+atom, +compound, -integer), one_or_error).
+	:- info(local_offset/3, [
+		comment is 'Returns the UTC offset in seconds for a zone in the cached TZif terms. This strict variant fails unless the local civil time has a unique interpretation.',
+		argnames is ['Zone', 'LocalDateTime', 'OffsetSeconds']
+	]).
+
+	:- public(local_offset/2).
+	:- mode(local_offset(+compound, -integer), one_or_error).
+	:- info(local_offset/2, [
+		comment is 'Cached single-zone convenience variant of strict local civil-time offset lookup.',
+		argnames is ['LocalDateTime', 'OffsetSeconds']
+	]).
+
+	:- public(local_offset_with_resolution/5).
+	:- mode(local_offset_with_resolution(+compound, +atom, +compound, +atom, -integer), zero_or_more).
+	:- info(local_offset_with_resolution/5, [
+		comment is 'Returns the UTC offset in seconds for a loaded zone and a local civil time using the explicit resolution mode: ``strict`` (fail unless exactly one interpretation exists), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), and ``all`` (enumerate all valid interpretations in chronological order).',
+		argnames is ['TZif', 'Zone', 'LocalDateTime', 'ResolutionMode', 'OffsetSeconds']
+	]).
+
+	:- public(local_offset_with_resolution/4).
+	:- mode(local_offset_with_resolution(+atom, +compound, +atom, -integer), zero_or_more).
+	:- info(local_offset_with_resolution/4, [
+		comment is 'Returns the UTC offset in seconds for a zone in the cached TZif terms using the explicit resolution mode: ``strict`` (fail unless exactly one interpretation exists), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), and ``all`` (enumerate all valid interpretations in chronological order).',
+		argnames is ['Zone', 'LocalDateTime', 'ResolutionMode', 'OffsetSeconds']
+	]).
+
+	:- public(local_offset_with_resolution/3).
+	:- mode(local_offset_with_resolution(+compound, +atom, -integer), zero_or_more).
+	:- info(local_offset_with_resolution/3, [
+		comment is 'Cached single-zone convenience variant of local civil-time offset lookup using the explicit resolution mode; requires exactly one cached zone.',
+		argnames is ['LocalDateTime', 'ResolutionMode', 'OffsetSeconds']
+	]).
+
+	:- public(local_daylight_saving_time/4).
+	:- mode(local_daylight_saving_time(+compound, +atom, +compound, -atom), zero_or_one).
+	:- info(local_daylight_saving_time/4, [
+		comment is 'Returns daylight-saving information for a loaded zone and a local civil time. This strict variant fails unless the local civil time has a unique interpretation.',
+		argnames is ['TZif', 'Zone', 'LocalDateTime', 'IsDST']
+	]).
+
+	:- public(local_daylight_saving_time/3).
+	:- mode(local_daylight_saving_time(+atom, +compound, -atom), one_or_error).
+	:- info(local_daylight_saving_time/3, [
+		comment is 'Returns daylight-saving information for a zone in the cached TZif terms. This strict variant fails unless the local civil time has a unique interpretation.',
+		argnames is ['Zone', 'LocalDateTime', 'IsDST']
+	]).
+
+	:- public(local_daylight_saving_time/2).
+	:- mode(local_daylight_saving_time(+compound, -atom), one_or_error).
+	:- info(local_daylight_saving_time/2, [
+		comment is 'Cached single-zone convenience variant of strict local daylight-saving lookup.',
+		argnames is ['LocalDateTime', 'IsDST']
+	]).
+
+	:- public(local_daylight_saving_time_with_resolution/5).
+	:- mode(local_daylight_saving_time_with_resolution(+compound, +atom, +compound, +atom, -atom), zero_or_more).
+	:- info(local_daylight_saving_time_with_resolution/5, [
+		comment is 'Returns daylight-saving information for a loaded zone and a local civil time using the explicit resolution mode: ``strict`` (fail unless exactly one interpretation exists), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), and ``all`` (enumerate all valid interpretations in chronological order).',
+		argnames is ['TZif', 'Zone', 'LocalDateTime', 'ResolutionMode', 'IsDST']
+	]).
+
+	:- public(local_daylight_saving_time_with_resolution/4).
+	:- mode(local_daylight_saving_time_with_resolution(+atom, +compound, +atom, -atom), zero_or_more).
+	:- info(local_daylight_saving_time_with_resolution/4, [
+		comment is 'Returns daylight-saving information for a zone in the cached TZif terms using the explicit resolution mode: ``strict`` (fail unless exactly one interpretation exists), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), and ``all`` (enumerate all valid interpretations in chronological order).',
+		argnames is ['Zone', 'LocalDateTime', 'ResolutionMode', 'IsDST']
+	]).
+
+	:- public(local_daylight_saving_time_with_resolution/3).
+	:- mode(local_daylight_saving_time_with_resolution(+compound, +atom, -atom), zero_or_more).
+	:- info(local_daylight_saving_time_with_resolution/3, [
+		comment is 'Cached single-zone convenience variant of local civil-time daylight-saving lookup using the explicit resolution mode; requires exactly one cached zone.',
+		argnames is ['LocalDateTime', 'ResolutionMode', 'IsDST']
+	]).
+
+	:- public(local_abbreviation/4).
+	:- mode(local_abbreviation(+compound, +atom, +compound, -atom), zero_or_one).
+	:- info(local_abbreviation/4, [
+		comment is 'Returns the time-zone abbreviation for a loaded zone and a local civil time. This strict variant fails unless the local civil time has a unique interpretation.',
+		argnames is ['TZif', 'Zone', 'LocalDateTime', 'Abbreviation']
+	]).
+
+	:- public(local_abbreviation/3).
+	:- mode(local_abbreviation(+atom, +compound, -atom), one_or_error).
+	:- info(local_abbreviation/3, [
+		comment is 'Returns the time-zone abbreviation for a zone in the cached TZif terms. This strict variant fails unless the local civil time has a unique interpretation.',
+		argnames is ['Zone', 'LocalDateTime', 'Abbreviation']
+	]).
+
+	:- public(local_abbreviation/2).
+	:- mode(local_abbreviation(+compound, -atom), one_or_error).
+	:- info(local_abbreviation/2, [
+		comment is 'Cached single-zone convenience variant of strict local abbreviation lookup.',
+		argnames is ['LocalDateTime', 'Abbreviation']
+	]).
+
+	:- public(local_abbreviation_with_resolution/5).
+	:- mode(local_abbreviation_with_resolution(+compound, +atom, +compound, +atom, -atom), zero_or_more).
+	:- info(local_abbreviation_with_resolution/5, [
+		comment is 'Returns the time-zone abbreviation for a loaded zone and a local civil time using the explicit resolution mode: ``strict`` (fail unless exactly one interpretation exists), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), and ``all`` (enumerate all valid interpretations in chronological order).',
+		argnames is ['TZif', 'Zone', 'LocalDateTime', 'ResolutionMode', 'Abbreviation']
+	]).
+
+	:- public(local_abbreviation_with_resolution/4).
+	:- mode(local_abbreviation_with_resolution(+atom, +compound, +atom, -atom), zero_or_more).
+	:- info(local_abbreviation_with_resolution/4, [
+		comment is 'Returns the time-zone abbreviation for a zone in the cached TZif terms using the explicit resolution mode: ``strict`` (fail unless exactly one interpretation exists), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), and ``all`` (enumerate all valid interpretations in chronological order).',
+		argnames is ['Zone', 'LocalDateTime', 'ResolutionMode', 'Abbreviation']
+	]).
+
+	:- public(local_abbreviation_with_resolution/3).
+	:- mode(local_abbreviation_with_resolution(+compound, +atom, -atom), zero_or_more).
+	:- info(local_abbreviation_with_resolution/3, [
+		comment is 'Cached single-zone convenience variant of local civil-time abbreviation lookup using the explicit resolution mode; requires exactly one cached zone.',
+		argnames is ['LocalDateTime', 'ResolutionMode', 'Abbreviation']
+	]).
+
+	:- public(local_time_type_reified/4).
+	:- mode(local_time_type_reified(+compound, +atom, +compound, -compound), one).
+	:- info(local_time_type_reified/4, [
+		comment is 'Returns a reified local civil-time lookup result for a loaded zone as one of ``unique(TimeType)``, ``ambiguous(TimeTypes)``, or ``nonexistent``.',
+		argnames is ['TZif', 'Zone', 'LocalDateTime', 'Result']
+	]).
+
+	:- public(local_time_type_reified/3).
+	:- mode(local_time_type_reified(+atom, +compound, -compound), one_or_error).
+	:- info(local_time_type_reified/3, [
+		comment is 'Returns a reified local civil-time lookup result for a zone in the cached TZif terms as one of ``unique(TimeType)``, ``ambiguous(TimeTypes)``, or ``nonexistent``.',
+		argnames is ['Zone', 'LocalDateTime', 'Result']
+	]).
+
+	:- public(local_time_type_reified/2).
+	:- mode(local_time_type_reified(+compound, -compound), one_or_error).
+	:- info(local_time_type_reified/2, [
+		comment is 'Cached single-zone convenience variant of reified local civil-time lookup; returns ``unique(TimeType)``, ``ambiguous(TimeTypes)``, or ``nonexistent``.',
+		argnames is ['LocalDateTime', 'Result']
+	]).
+
+	:- public(local_offset_reified/4).
+	:- mode(local_offset_reified(+compound, +atom, +compound, -compound), one).
+	:- info(local_offset_reified/4, [
+		comment is 'Returns a reified local offset lookup result for a loaded zone as one of ``unique(OffsetSeconds)``, ``ambiguous(OffsetSecondsList)``, or ``nonexistent``.',
+		argnames is ['TZif', 'Zone', 'LocalDateTime', 'Result']
+	]).
+
+	:- public(local_offset_reified/3).
+	:- mode(local_offset_reified(+atom, +compound, -compound), one_or_error).
+	:- info(local_offset_reified/3, [
+		comment is 'Returns a reified local offset lookup result for a zone in the cached TZif terms as one of ``unique(OffsetSeconds)``, ``ambiguous(OffsetSecondsList)``, or ``nonexistent``.',
+		argnames is ['Zone', 'LocalDateTime', 'Result']
+	]).
+
+	:- public(local_offset_reified/2).
+	:- mode(local_offset_reified(+compound, -compound), one_or_error).
+	:- info(local_offset_reified/2, [
+		comment is 'Cached single-zone convenience variant of reified local offset lookup; returns ``unique(OffsetSeconds)``, ``ambiguous(OffsetSecondsList)``, or ``nonexistent``.',
+		argnames is ['LocalDateTime', 'Result']
+	]).
+
+	:- public(local_daylight_saving_time_reified/4).
+	:- mode(local_daylight_saving_time_reified(+compound, +atom, +compound, -compound), one).
+	:- info(local_daylight_saving_time_reified/4, [
+		comment is 'Returns a reified local daylight-saving lookup result for a loaded zone as one of ``unique(IsDST)``, ``ambiguous(IsDSTList)``, or ``nonexistent``.',
+		argnames is ['TZif', 'Zone', 'LocalDateTime', 'Result']
+	]).
+
+	:- public(local_daylight_saving_time_reified/3).
+	:- mode(local_daylight_saving_time_reified(+atom, +compound, -compound), one_or_error).
+	:- info(local_daylight_saving_time_reified/3, [
+		comment is 'Returns a reified local daylight-saving lookup result for a zone in the cached TZif terms as one of ``unique(IsDST)``, ``ambiguous(IsDSTList)``, or ``nonexistent``.',
+		argnames is ['Zone', 'LocalDateTime', 'Result']
+	]).
+
+	:- public(local_daylight_saving_time_reified/2).
+	:- mode(local_daylight_saving_time_reified(+compound, -compound), one_or_error).
+	:- info(local_daylight_saving_time_reified/2, [
+		comment is 'Cached single-zone convenience variant of reified local daylight-saving lookup; returns ``unique(IsDST)``, ``ambiguous(IsDSTList)``, or ``nonexistent``.',
+		argnames is ['LocalDateTime', 'Result']
+	]).
+
+	:- public(local_abbreviation_reified/4).
+	:- mode(local_abbreviation_reified(+compound, +atom, +compound, -compound), one).
+	:- info(local_abbreviation_reified/4, [
+		comment is 'Returns a reified local abbreviation lookup result for a loaded zone as one of ``unique(Abbreviation)``, ``ambiguous(Abbreviations)``, or ``nonexistent``.',
+		argnames is ['TZif', 'Zone', 'LocalDateTime', 'Result']
+	]).
+
+	:- public(local_abbreviation_reified/3).
+	:- mode(local_abbreviation_reified(+atom, +compound, -compound), one_or_error).
+	:- info(local_abbreviation_reified/3, [
+		comment is 'Returns a reified local abbreviation lookup result for a zone in the cached TZif terms as one of ``unique(Abbreviation)``, ``ambiguous(Abbreviations)``, or ``nonexistent``.',
+		argnames is ['Zone', 'LocalDateTime', 'Result']
+	]).
+
+	:- public(local_abbreviation_reified/2).
+	:- mode(local_abbreviation_reified(+compound, -compound), one_or_error).
+	:- info(local_abbreviation_reified/2, [
+		comment is 'Cached single-zone convenience variant of reified local abbreviation lookup; returns ``unique(Abbreviation)``, ``ambiguous(Abbreviations)``, or ``nonexistent``.',
+		argnames is ['LocalDateTime', 'Result']
+	]).
+
 :- end_protocol.
