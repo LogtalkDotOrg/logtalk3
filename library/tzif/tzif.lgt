@@ -952,8 +952,7 @@
 	save_snapshot_terms([], _).
 	save_snapshot_terms([TZif| TZifs], Stream) :-
 		write_term(Stream, TZif, [quoted(true)]),
-		write(Stream, '.'),
-		nl(Stream),
+		write(Stream, '.\n'),
 		save_snapshot_terms(TZifs, Stream).
 
 	read_binary_source(File, Bytes) :-

@@ -417,8 +417,7 @@
 		list::append(Prefix2, ActiveBytes, Prefix3),
 		list::append(Prefix3, FooterBytes, Bytes).
 
-	version_byte(2, 0'2) :-
-		!.
+	version_byte(2, 0'2).
 	version_byte(3, 0'3).
 
 	block_bytes(TimeSize, block_spec(Transitions, Types, Designations, Leaps, StandardWalls, UTLocals), Bytes,
@@ -472,8 +471,6 @@
 		list::append(OccurrenceBytes, CorrectionBytes, Prefix),
 		list::append(Prefix, RestBytes, Bytes).
 
-	indicator_bytes(_, [], [], 0) :-
-		!.
 	indicator_bytes(standard, Indicators, Bytes, Count) :-
 		standard_indicator_bytes(Indicators, Bytes),
 		list::length(Indicators, Count).
