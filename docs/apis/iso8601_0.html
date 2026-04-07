@@ -250,7 +250,7 @@
   <p class="right" id="iso8601-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="iso8601">
 <h1><code class="docutils literal notranslate"><span class="pre">iso8601</span></code><a class="headerlink" href="#iso8601" title="Link to this heading"></a></h1>
-<p>ISO 8601 (and European civil calendar) compliant library of date predicates.</p>
+<p>ISO 8601 (and European civil calendar) compliant library of date and time predicates.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -259,8 +259,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Daniel L. Dudley and Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:1:0</div>
-<div class="line"><strong>Date:</strong> 2026-02-25</div>
+<div class="line"><strong>Version:</strong> 1:3:0</div>
+<div class="line"><strong>Date:</strong> 2026-04-07</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -271,6 +271,7 @@
 <div class="line-block">
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
+<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="os_0.html#os-0"><span class="std std-ref">os</span></a></div>
 </div>
 </div>
@@ -303,17 +304,19 @@
 <li><p><a class="reference internal" href="#date-6" id="id4"><code class="docutils literal notranslate"><span class="pre">date/6</span></code></a></p></li>
 <li><p><a class="reference internal" href="#date-7" id="id5"><code class="docutils literal notranslate"><span class="pre">date/7</span></code></a></p></li>
 <li><p><a class="reference internal" href="#date-string-3" id="id6"><code class="docutils literal notranslate"><span class="pre">date_string/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#duration-string-2" id="id7"><code class="docutils literal notranslate"><span class="pre">duration_string/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#interval-string-2" id="id8"><code class="docutils literal notranslate"><span class="pre">interval_string/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-date-3" id="id9"><code class="docutils literal notranslate"><span class="pre">valid_date/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#leap-year-1" id="id10"><code class="docutils literal notranslate"><span class="pre">leap_year/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#calendar-month-3" id="id11"><code class="docutils literal notranslate"><span class="pre">calendar_month/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#easter-day-3" id="id12"><code class="docutils literal notranslate"><span class="pre">easter_day/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#time-string-3" id="id7"><code class="docutils literal notranslate"><span class="pre">time_string/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#date-time-string-3" id="id8"><code class="docutils literal notranslate"><span class="pre">date_time_string/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#duration-string-2" id="id9"><code class="docutils literal notranslate"><span class="pre">duration_string/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#interval-string-2" id="id10"><code class="docutils literal notranslate"><span class="pre">interval_string/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-date-3" id="id11"><code class="docutils literal notranslate"><span class="pre">valid_date/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#leap-year-1" id="id12"><code class="docutils literal notranslate"><span class="pre">leap_year/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#calendar-month-3" id="id13"><code class="docutils literal notranslate"><span class="pre">calendar_month/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#easter-day-3" id="id14"><code class="docutils literal notranslate"><span class="pre">easter_day/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id13">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id14">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id15">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id15">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id16">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id17">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -774,8 +777,100 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="time-string-3">
+<span id="iso8601-0-time-string-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">time_string/3</span></code></a><a class="headerlink" href="#time-string-3" title="Link to this heading"></a></h3>
+<p>Conversion between an ISO 8601 compliant time-of-day string and a <code class="docutils literal notranslate"><span class="pre">time(Hours,Minutes,Seconds)</span></code> term. Supported forms include basic and extended notations, with optional fractional seconds.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">time_string(Format,Time,String)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">time_string(+atom,?compound,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Time, complete, extended</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">time_string('Thh:mm:ss',time(14,30,0),String)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">String='T14:30:00'</span></code></div>
+</div>
+<div class="line">Time, complete, basic</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">time_string('Thhmmss',Time,'T143000')</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Time=time(14,30,0)</span></code></div>
+</div>
+<div class="line">Time, complete, extended, fractional seconds</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">time_string('Thh:mm:ss.s',Time,'T14:30:00.125')</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Time=time(14,30,0.125)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="date-time-string-3">
+<span id="iso8601-0-date-time-string-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">date_time_string/3</span></code></a><a class="headerlink" href="#date-time-string-3" title="Link to this heading"></a></h3>
+<p>Conversion between an ISO 8601 compliant combined date-time string and a <code class="docutils literal notranslate"><span class="pre">date_time/6</span></code> or <code class="docutils literal notranslate"><span class="pre">date_time/7</span></code> term. Offset-aware terms use <code class="docutils literal notranslate"><span class="pre">date_time(Year,Month,Day,Hours,Minutes,Seconds,OffsetSeconds)</span></code> where <code class="docutils literal notranslate"><span class="pre">OffsetSeconds</span></code> is the UTC offset in seconds.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">date_time_string(Format,DateTime,String)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">date_time_string(+atom,?compound,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Examples:</strong></div>
+<div class="line-block">
+<div class="line">Date-time, complete, extended</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">date_time_string('YYYY-MM-DDThh:mm:ss',date_time(2026,4,7,14,30,0),String)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">String='2026-04-07T14:30:00'</span></code></div>
+</div>
+<div class="line">Date-time, ordinal, extended, UTC</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">date_time_string('YYYY-DDDThh:mm:ssZ',DateTime,'2026-097T14:30:00Z')</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DateTime=date_time(2026,4,7,14,30,0,0)</span></code></div>
+</div>
+<div class="line">Date-time, week, complete, extended</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">date_time_string('YYYY-Www-DThh:mm:ss',date_time(2026,4,7,14,30,0),String)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">String='2026-W15-2T14:30:00'</span></code></div>
+</div>
+<div class="line">Date-time, complete, basic, UTC</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">date_time_string('YYYYMMDDThhmmssZ',DateTime,'20260407T143000Z')</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DateTime=date_time(2026,4,7,14,30,0,0)</span></code></div>
+</div>
+<div class="line">Date-time, complete, extended, offset</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">date_time_string('YYYY-MM-DDThh:mm:ss+hh:mm',DateTime,'2026-04-07T14:30:00+05:45')</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DateTime=date_time(2026,4,7,14,30,0,20700)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="duration-string-2">
-<span id="iso8601-0-duration-string-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">duration_string/2</span></code></a><a class="headerlink" href="#duration-string-2" title="Link to this heading"></a></h3>
+<span id="iso8601-0-duration-string-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">duration_string/2</span></code></a><a class="headerlink" href="#duration-string-2" title="Link to this heading"></a></h3>
 <p>Conversion between an ISO 8601 duration string and a <code class="docutils literal notranslate"><span class="pre">duration(Years,Months,Days,Hours,Minutes,Seconds)</span></code> term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -820,8 +915,8 @@
 <hr class="docutils" />
 </section>
 <section id="interval-string-2">
-<span id="iso8601-0-interval-string-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">interval_string/2</span></code></a><a class="headerlink" href="#interval-string-2" title="Link to this heading"></a></h3>
-<p>Conversion between an ISO 8601 interval string and an <code class="docutils literal notranslate"><span class="pre">interval(Start,End)</span></code>, <code class="docutils literal notranslate"><span class="pre">interval(Start,Duration)</span></code>, or <code class="docutils literal notranslate"><span class="pre">interval(Duration,End)</span></code> term where date endpoints are <code class="docutils literal notranslate"><span class="pre">[Year,Month,Day]</span></code> terms.</p>
+<span id="iso8601-0-interval-string-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">interval_string/2</span></code></a><a class="headerlink" href="#interval-string-2" title="Link to this heading"></a></h3>
+<p>Conversion between an ISO 8601 interval string and an <code class="docutils literal notranslate"><span class="pre">interval(Start,End)</span></code>, <code class="docutils literal notranslate"><span class="pre">interval(Start,Duration)</span></code>, or <code class="docutils literal notranslate"><span class="pre">interval(Duration,End)</span></code> term where endpoint terms are dates (<code class="docutils literal notranslate"><span class="pre">[Year,Month,Day]</span></code>) or date-times (<code class="docutils literal notranslate"><span class="pre">date_time/6-7</span></code> terms).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -844,7 +939,7 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Interval string: An ISO 8601 interval string encodes a time interval using two parts separated by <code class="docutils literal notranslate"><span class="pre">/</span></code>; each part is a date or a duration, e.g. <code class="docutils literal notranslate"><span class="pre">2026-02-25/2026-03-01</span></code> or <code class="docutils literal notranslate"><span class="pre">2026-02-25/P3D</span></code>.</p></li>
+<li><p>Interval string: An ISO 8601 interval string encodes a time interval using two parts separated by <code class="docutils literal notranslate"><span class="pre">/</span></code>; each part is a date, a date-time, or a duration, e.g. <code class="docutils literal notranslate"><span class="pre">2026-02-25/2026-03-01</span></code>, <code class="docutils literal notranslate"><span class="pre">2026-04-07T14:30:00Z/2026-04-07T15:00:00Z</span></code>, or <code class="docutils literal notranslate"><span class="pre">2026-02-25/P3D</span></code>.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -860,12 +955,17 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">interval_string(interval([2026,2,25],[2026,3,1]),String)</span></code></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">String='2026-02-25/2026-03-01'</span></code></div>
 </div>
+<div class="line">Format a date-time/date-time interval</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interval_string(interval(date_time(2026,4,7,14,30,0,0),date_time(2026,4,7,15,0,0,0)),String)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">String='2026-04-07T14:30:00Z/2026-04-07T15:00:00Z'</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="valid-date-3">
-<span id="iso8601-0-valid-date-3"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_date/3</span></code></a><a class="headerlink" href="#valid-date-3" title="Link to this heading"></a></h3>
+<span id="iso8601-0-valid-date-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_date/3</span></code></a><a class="headerlink" href="#valid-date-3" title="Link to this heading"></a></h3>
 <p>Validate a given date in the Gregorian calendar.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -911,7 +1011,7 @@
 <hr class="docutils" />
 </section>
 <section id="leap-year-1">
-<span id="iso8601-0-leap-year-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">leap_year/1</span></code></a><a class="headerlink" href="#leap-year-1" title="Link to this heading"></a></h3>
+<span id="iso8601-0-leap-year-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">leap_year/1</span></code></a><a class="headerlink" href="#leap-year-1" title="Link to this heading"></a></h3>
 <p>Succeed if given year is a leap year in the Gregorian calendar.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -985,7 +1085,7 @@
 <hr class="docutils" />
 </section>
 <section id="calendar-month-3">
-<span id="iso8601-0-calendar-month-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">calendar_month/3</span></code></a><a class="headerlink" href="#calendar-month-3" title="Link to this heading"></a></h3>
+<span id="iso8601-0-calendar-month-3"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">calendar_month/3</span></code></a><a class="headerlink" href="#calendar-month-3" title="Link to this heading"></a></h3>
 <p>Compute a calendar month.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1021,7 +1121,7 @@
 <hr class="docutils" />
 </section>
 <section id="easter-day-3">
-<span id="iso8601-0-easter-day-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">easter_day/3</span></code></a><a class="headerlink" href="#easter-day-3" title="Link to this heading"></a></h3>
+<span id="iso8601-0-easter-day-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">easter_day/3</span></code></a><a class="headerlink" href="#easter-day-3" title="Link to this heading"></a></h3>
 <p>Compute a Gregorian Easter Sunday.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

@@ -124,20 +124,44 @@
 <span id="library-iso8601"></span><h1><code class="docutils literal notranslate"><span class="pre">iso8601</span></code><a class="headerlink" href="#iso8601" title="Link to this heading"></a></h1>
 <p>ISO 8601 (and European civil calendar) compliant library of date and
 time (clock) related predicates. That is, an ISO 8601 handler.</p>
-<p>The library supports date representations plus ISO 8601 duration and
-interval string conversions using <code class="docutils literal notranslate"><span class="pre">duration_string/2</span></code> and
+<p>The library supports date and time-of-day representations plus ISO 8601
+duration and interval string conversions using <code class="docutils literal notranslate"><span class="pre">time_string/3</span></code>,
+<code class="docutils literal notranslate"><span class="pre">date_time_string/3</span></code>, <code class="docutils literal notranslate"><span class="pre">duration_string/2</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">interval_string/2</span></code>.</p>
+<p>Supported <strong>time-of-day strings</strong> include basic and extended forms with
+the required <code class="docutils literal notranslate"><span class="pre">T</span></code> prefix, e.g. <code class="docutils literal notranslate"><span class="pre">T143000</span></code>, <code class="docutils literal notranslate"><span class="pre">T14:30:00</span></code>,
+<code class="docutils literal notranslate"><span class="pre">T143000.125</span></code>, and <code class="docutils literal notranslate"><span class="pre">T14:30:00.125</span></code>.</p>
+<p>Supported <strong>combined date-time strings</strong> include calendar-date,
+ordinal-date, and complete week-date basic and extended forms with
+optional UTC <code class="docutils literal notranslate"><span class="pre">Z</span></code> or numeric offsets, e.g. <code class="docutils literal notranslate"><span class="pre">20260407T143000</span></code>,
+<code class="docutils literal notranslate"><span class="pre">2026-04-07T14:30:00</span></code>, <code class="docutils literal notranslate"><span class="pre">2026097T143000Z</span></code>,
+<code class="docutils literal notranslate"><span class="pre">2026-097T14:30:00+05:45</span></code>, <code class="docutils literal notranslate"><span class="pre">2026W152T143000Z</span></code>,
+<code class="docutils literal notranslate"><span class="pre">2026-W15-2T14:30:00+05:45</span></code>, and <code class="docutils literal notranslate"><span class="pre">20260407T143000.125+0545</span></code>.</p>
+<p>Normalized term shapes are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">time(Hours,Minutes,Seconds)</span></code> for time-of-day strings</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">date_time(Year,Month,Day,Hours,Minutes,Seconds)</span></code> for local
+date-time strings</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">date_time(Year,Month,Day,Hours,Minutes,Seconds,OffsetSeconds)</span></code> for
+UTC or offset date-time strings, using an offset in seconds from UTC</p></li>
+</ul>
 <p>An <strong>ISO 8601 duration string</strong> represents a time amount (e.g. <code class="docutils literal notranslate"><span class="pre">P3D</span></code>
 for three days or <code class="docutils literal notranslate"><span class="pre">P1Y2M3DT4H5M6S</span></code> for a mixed date/time duration).</p>
 <p>An <strong>ISO 8601 interval string</strong> represents a time interval using two
-parts separated by <code class="docutils literal notranslate"><span class="pre">/</span></code>, where each part can be a date or a duration
-(e.g. <code class="docutils literal notranslate"><span class="pre">2026-02-25/2026-03-01</span></code> or <code class="docutils literal notranslate"><span class="pre">2026-02-25/P3D</span></code>).</p>
+parts separated by <code class="docutils literal notranslate"><span class="pre">/</span></code>, where each part can be a date, a date-time, or
+a duration (e.g. <code class="docutils literal notranslate"><span class="pre">2026-02-25/2026-03-01</span></code>,
+<code class="docutils literal notranslate"><span class="pre">2026-04-07T14:30:00Z/2026-04-07T15:00:00Z</span></code>,
+<code class="docutils literal notranslate"><span class="pre">2026-097T14:30:00Z/2026-097T15:00:00Z</span></code>,
+<code class="docutils literal notranslate"><span class="pre">2026-W15-2T14:30:00Z/PT30M</span></code>, or <code class="docutils literal notranslate"><span class="pre">2026-02-25/P3D</span></code>).</p>
 <p>Author: Daniel L. Dudley Created: 2004-02-18</p>
 <div class="line-block">
 <div class="line">Modified: 2014-09-26 (to use the <code class="docutils literal notranslate"><span class="pre">os</span></code> library object to get the
 current date)</div>
 <div class="line">Modified: 2026-02-25 (to add <code class="docutils literal notranslate"><span class="pre">duration_string/2</span></code> and
-<code class="docutils literal notranslate"><span class="pre">interval_string/2</span></code> predicates)</div>
+<code class="docutils literal notranslate"><span class="pre">interval_string/2</span></code> predicates) Modified: 2026-04-07 (to add
+<code class="docutils literal notranslate"><span class="pre">time_string/3</span></code> and <code class="docutils literal notranslate"><span class="pre">date_time_string/3</span></code> predicates and extend
+<code class="docutils literal notranslate"><span class="pre">interval_string/2</span></code>, including ordinal-date and week-date date-time
+forms)</div>
 </div>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>

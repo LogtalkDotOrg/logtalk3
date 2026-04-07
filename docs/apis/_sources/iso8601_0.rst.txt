@@ -8,20 +8,21 @@
 ``iso8601``
 ===========
 
-ISO 8601 (and European civil calendar) compliant library of date predicates.
+ISO 8601 (and European civil calendar) compliant library of date and time predicates.
 
 | **Availability:** 
 |    ``logtalk_load(iso8601(loader))``
 
 | **Author:** Daniel L. Dudley and Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2026-02-25
+| **Version:** 1:3:0
+| **Date:** 2026-04-07
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Uses:**
+|    :ref:`list <list/0>`
 |    :ref:`os <os/0>`
 
 | **Remarks:**
@@ -349,6 +350,72 @@ Conversion between an ISO 8601 compliant date string and its components (truncat
 
 ------------
 
+.. index:: time_string/3
+.. _iso8601/0::time_string/3:
+
+``time_string/3``
+^^^^^^^^^^^^^^^^^
+
+Conversion between an ISO 8601 compliant time-of-day string and a ``time(Hours,Minutes,Seconds)`` term. Supported forms include basic and extended notations, with optional fractional seconds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``time_string(Format,Time,String)``
+| **Mode and number of proofs:**
+|    ``time_string(+atom,?compound,?atom)`` - ``zero_or_one``
+
+| **Examples:**
+|    Time, complete, extended
+|      ``time_string('Thh:mm:ss',time(14,30,0),String)``
+|      ``String='T14:30:00'``
+|    Time, complete, basic
+|      ``time_string('Thhmmss',Time,'T143000')``
+|      ``Time=time(14,30,0)``
+|    Time, complete, extended, fractional seconds
+|      ``time_string('Thh:mm:ss.s',Time,'T14:30:00.125')``
+|      ``Time=time(14,30,0.125)``
+
+
+------------
+
+.. index:: date_time_string/3
+.. _iso8601/0::date_time_string/3:
+
+``date_time_string/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Conversion between an ISO 8601 compliant combined date-time string and a ``date_time/6`` or ``date_time/7`` term. Offset-aware terms use ``date_time(Year,Month,Day,Hours,Minutes,Seconds,OffsetSeconds)`` where ``OffsetSeconds`` is the UTC offset in seconds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``date_time_string(Format,DateTime,String)``
+| **Mode and number of proofs:**
+|    ``date_time_string(+atom,?compound,?atom)`` - ``zero_or_one``
+
+| **Examples:**
+|    Date-time, complete, extended
+|      ``date_time_string('YYYY-MM-DDThh:mm:ss',date_time(2026,4,7,14,30,0),String)``
+|      ``String='2026-04-07T14:30:00'``
+|    Date-time, ordinal, extended, UTC
+|      ``date_time_string('YYYY-DDDThh:mm:ssZ',DateTime,'2026-097T14:30:00Z')``
+|      ``DateTime=date_time(2026,4,7,14,30,0,0)``
+|    Date-time, week, complete, extended
+|      ``date_time_string('YYYY-Www-DThh:mm:ss',date_time(2026,4,7,14,30,0),String)``
+|      ``String='2026-W15-2T14:30:00'``
+|    Date-time, complete, basic, UTC
+|      ``date_time_string('YYYYMMDDThhmmssZ',DateTime,'20260407T143000Z')``
+|      ``DateTime=date_time(2026,4,7,14,30,0,0)``
+|    Date-time, complete, extended, offset
+|      ``date_time_string('YYYY-MM-DDThh:mm:ss+hh:mm',DateTime,'2026-04-07T14:30:00+05:45')``
+|      ``DateTime=date_time(2026,4,7,14,30,0,20700)``
+
+
+------------
+
 .. index:: duration_string/2
 .. _iso8601/0::duration_string/2:
 
@@ -387,7 +454,7 @@ Conversion between an ISO 8601 duration string and a ``duration(Years,Months,Day
 ``interval_string/2``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Conversion between an ISO 8601 interval string and an ``interval(Start,End)``, ``interval(Start,Duration)``, or ``interval(Duration,End)`` term where date endpoints are ``[Year,Month,Day]`` terms.
+Conversion between an ISO 8601 interval string and an ``interval(Start,End)``, ``interval(Start,Duration)``, or ``interval(Duration,End)`` term where endpoint terms are dates (``[Year,Month,Day]``) or date-times (``date_time/6-7`` terms).
 
 | **Compilation flags:**
 |    ``static``
@@ -400,7 +467,7 @@ Conversion between an ISO 8601 interval string and an ``interval(Start,End)``, `
 
 | **Remarks:**
 
-    - Interval string: An ISO 8601 interval string encodes a time interval using two parts separated by ``/``; each part is a date or a duration, e.g. ``2026-02-25/2026-03-01`` or ``2026-02-25/P3D``.
+    - Interval string: An ISO 8601 interval string encodes a time interval using two parts separated by ``/``; each part is a date, a date-time, or a duration, e.g. ``2026-02-25/2026-03-01``, ``2026-04-07T14:30:00Z/2026-04-07T15:00:00Z``, or ``2026-02-25/P3D``.
 
 | **Examples:**
 |    Parse a start/date + duration interval
@@ -409,6 +476,9 @@ Conversion between an ISO 8601 interval string and an ``interval(Start,End)``, `
 |    Format a date/date interval
 |      ``interval_string(interval([2026,2,25],[2026,3,1]),String)``
 |      ``String='2026-02-25/2026-03-01'``
+|    Format a date-time/date-time interval
+|      ``interval_string(interval(date_time(2026,4,7,14,30,0,0),date_time(2026,4,7,15,0,0,0)),String)``
+|      ``String='2026-04-07T14:30:00Z/2026-04-07T15:00:00Z'``
 
 
 ------------

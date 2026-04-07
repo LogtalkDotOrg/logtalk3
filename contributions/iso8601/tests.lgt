@@ -23,20 +23,24 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:3:0,
 		author is 'Paulo Moura and Daniel L. Dudley',
-		date is 2026-02-25,
+		date is 2026-04-07,
 		comment is 'Unit tests for the iso8601 library.'
 	]).
 
 	:- uses(iso8601, [
 		date/4, date/5, date/6, date/7,
 		date_string/3,
+		time_string/3,
+		date_time_string/3,
 		duration_string/2,
 		interval_string/2,
 		valid_date/3,
 		leap_year/1, calendar_month/3, easter_day/3
 	]).
+
+	cover(iso8601).
 
 	% date/4 tests
 
@@ -280,6 +284,70 @@
 		% Week, reduced, extended (section 5.2.3.2)
 		date_string('YYYY-Www', Day, '2004-W09').
 
+	% time_string/3 tests
+
+	test(iso8601_time_string_3_01, deterministic(String == 'T14:30:00')) :-
+		time_string('Thh:mm:ss', time(14,30,0), String).
+
+	test(iso8601_time_string_3_02, deterministic(Time == time(14,30,0))) :-
+		time_string('Thh:mm:ss', Time, 'T14:30:00').
+
+	test(iso8601_time_string_3_03, deterministic(String == 'T143000')) :-
+		time_string('Thhmmss', time(14,30,0), String).
+
+	test(iso8601_time_string_3_04, deterministic(Time == time(14,30,0.125))) :-
+		time_string('Thh:mm:ss.s', Time, 'T14:30:00.125').
+
+	test(iso8601_time_string_3_05, deterministic(String == 'T143000.125')) :-
+		time_string('Thhmmss.s', time(14,30,0.125), String).
+
+	% date_time_string/3 tests
+
+	test(iso8601_date_time_string_3_01, deterministic(String == '2026-04-07T14:30:00')) :-
+		date_time_string('YYYY-MM-DDThh:mm:ss', date_time(2026,4,7,14,30,0), String).
+
+	test(iso8601_date_time_string_3_02, deterministic(DateTime == date_time(2026,4,7,14,30,0))) :-
+		date_time_string('YYYY-MM-DDThh:mm:ss', DateTime, '2026-04-07T14:30:00').
+
+	test(iso8601_date_time_string_3_03, deterministic(String == '20260407T143000Z')) :-
+		date_time_string('YYYYMMDDThhmmssZ', date_time(2026,4,7,14,30,0,0), String).
+
+	test(iso8601_date_time_string_3_04, deterministic(DateTime == date_time(2026,4,7,14,30,0,0))) :-
+		date_time_string('YYYY-MM-DDThh:mm:ssZ', DateTime, '2026-04-07T14:30:00Z').
+
+	test(iso8601_date_time_string_3_05, deterministic(String == '2026-04-07T14:30:00+05:45')) :-
+		date_time_string('YYYY-MM-DDThh:mm:ss+hh:mm', date_time(2026,4,7,14,30,0,20700), String).
+
+	test(iso8601_date_time_string_3_06, deterministic(DateTime == date_time(2026,4,7,14,30,0,20700))) :-
+		date_time_string('YYYY-MM-DDThh:mm:ss+hh:mm', DateTime, '2026-04-07T14:30:00+05:45').
+
+	test(iso8601_date_time_string_3_07, deterministic(String == '20260407T143000+0545')) :-
+		date_time_string('YYYYMMDDThhmmss+hhmm', date_time(2026,4,7,14,30,0,20700), String).
+
+	test(iso8601_date_time_string_3_08, deterministic(DateTime == date_time(2026,4,7,14,30,0.125,0))) :-
+		date_time_string('YYYY-MM-DDThh:mm:ss.sZ', DateTime, '2026-04-07T14:30:00.125Z').
+
+	test(iso8601_date_time_string_3_09, deterministic(String == '20260407T143000.125+0545')) :-
+		date_time_string('YYYYMMDDThhmmss.s+hhmm', date_time(2026,4,7,14,30,0.125,20700), String).
+
+	test(iso8601_date_time_string_3_10, deterministic(String == '2026097T143000')) :-
+		date_time_string('YYYYDDDThhmmss', date_time(2026,4,7,14,30,0), String).
+
+	test(iso8601_date_time_string_3_11, deterministic(DateTime == date_time(2026,4,7,14,30,0,0))) :-
+		date_time_string('YYYY-DDDThh:mm:ssZ', DateTime, '2026-097T14:30:00Z').
+
+	test(iso8601_date_time_string_3_12, deterministic(String == '2026097T143000.125+0545')) :-
+		date_time_string('YYYYDDDThhmmss.s+hhmm', date_time(2026,4,7,14,30,0.125,20700), String).
+
+	test(iso8601_date_time_string_3_13, deterministic(String == '2026-W15-2T14:30:00')) :-
+		date_time_string('YYYY-Www-DThh:mm:ss', date_time(2026,4,7,14,30,0), String).
+
+	test(iso8601_date_time_string_3_14, deterministic(DateTime == date_time(2026,4,7,14,30,0,0))) :-
+		date_time_string('YYYYWwwDThhmmssZ', DateTime, '2026W152T143000Z').
+
+	test(iso8601_date_time_string_3_15, deterministic(String == '2026-W15-2T14:30:00.125+05:45')) :-
+		date_time_string('YYYY-Www-DThh:mm:ss.s+hh:mm', date_time(2026,4,7,14,30,0.125,20700), String).
+
 	% duration_string/2 tests
 
 	test(iso8601_duration_string_2_01, deterministic(String == 'P1Y2M3DT4H5M6S')) :-
@@ -304,6 +372,24 @@
 
 	test(iso8601_interval_string_2_04, deterministic(Interval == interval([2026,2,25], duration(0, 0, 3, 0, 0, 0)))) :-
 		interval_string(Interval, '2026-02-25/P3D').
+
+	test(iso8601_interval_string_2_05, deterministic(String == '2026-04-07T14:30:00Z/2026-04-07T15:00:00Z')) :-
+		interval_string(interval(date_time(2026,4,7,14,30,0,0), date_time(2026,4,7,15,0,0,0)), String).
+
+	test(iso8601_interval_string_2_06, deterministic(Interval == interval(date_time(2026,4,7,14,30,0,0), date_time(2026,4,7,15,0,0,0)))) :-
+		interval_string(Interval, '2026-04-07T14:30:00Z/2026-04-07T15:00:00Z').
+
+	test(iso8601_interval_string_2_07, deterministic(String == '2026-04-07T14:30:00Z/PT30M')) :-
+		interval_string(interval(date_time(2026,4,7,14,30,0,0), duration(0, 0, 0, 0, 30, 0)), String).
+
+	test(iso8601_interval_string_2_08, deterministic(Interval == interval(duration(0, 0, 0, 0, 30, 0), date_time(2026,4,7,15,0,0,0)))) :-
+		interval_string(Interval, 'PT30M/2026-04-07T15:00:00Z').
+
+	test(iso8601_interval_string_2_09, deterministic(Interval == interval(date_time(2026,4,7,14,30,0,0), date_time(2026,4,7,15,0,0,0)))) :-
+		interval_string(Interval, '2026-097T14:30:00Z/2026-097T15:00:00Z').
+
+	test(iso8601_interval_string_2_10, deterministic(Interval == interval(date_time(2026,4,7,14,30,0,0), duration(0, 0, 0, 0, 30, 0)))) :-
+		interval_string(Interval, '2026-W15-2T14:30:00Z/PT30M').
 
 	% valid_date/3 tests
 

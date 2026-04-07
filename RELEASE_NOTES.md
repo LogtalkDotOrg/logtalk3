@@ -274,6 +274,13 @@ alias clash with the new `permutations` library.
 
 * FIXED: Tests for the `hello_world` examples when run on Windows.
 
+Contributions
+-------------
+
+* ADDED: Predicates `time_string/3` and `date_time_string/3` to the `iso8601`
+contribution. Also extend the `interval_string/2` predicate to support
+additional interval endpoints.
+
 Ports
 -----
 
