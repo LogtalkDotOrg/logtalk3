@@ -24,9 +24,9 @@
 	implements(datep)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2026-02-25,
+		date is 2026-04-07,
 		comment is 'Date predicates.'
 	]).
 
@@ -188,6 +188,7 @@
 		valid_date_time(DateTime, strict).
 
 	valid_date_time(date_time(Year, Month, Day, Hours, Minutes, Seconds), strict) :-
+		!,
 		valid(Year, Month, Day),
 		valid_time(Hours, Minutes, Seconds).
 	valid_date_time(date_time(Year, Month, Day, Hours, Minutes, Seconds), relaxed) :-

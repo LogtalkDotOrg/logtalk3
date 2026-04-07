@@ -158,6 +158,9 @@ Windows.
 * FIXED: Bug in the `sockets` library with the SWI-Prolog backend where IPv4
 and IPv6 mismatches could happen between client and server.
 
+* FIXED: Spurious choice-point when calling the `date::valid_date_time/2`
+library predicate.
+
 Tools
 -----
 
