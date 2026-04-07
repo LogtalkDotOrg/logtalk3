@@ -281,6 +281,9 @@ Contributions
 contribution. Also extend the `interval_string/2` predicate to support
 additional interval endpoints.
 
+* ADDED: Support to the `iso8601` for comma as a fractional separator in time
+and date representations.
+
 Ports
 -----
 

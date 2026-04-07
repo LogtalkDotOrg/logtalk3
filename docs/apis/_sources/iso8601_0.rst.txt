@@ -15,7 +15,7 @@ ISO 8601 (and European civil calendar) compliant library of date and time predic
 
 | **Author:** Daniel L. Dudley and Paulo Moura
 | **Version:** 1:3:0
-| **Date:** 2026-04-07
+| **Date:** 2026-04-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -376,6 +376,9 @@ Conversion between an ISO 8601 compliant time-of-day string and a ``time(Hours,M
 |    Time, complete, extended, fractional seconds
 |      ``time_string('Thh:mm:ss.s',Time,'T14:30:00.125')``
 |      ``Time=time(14,30,0.125)``
+|    Time, complete, extended, comma fractional seconds
+|      ``time_string('Thh:mm:ss,s',Time,'T14:30:00,125')``
+|      ``Time=time(14,30,0.125)``
 
 
 ------------
@@ -412,6 +415,9 @@ Conversion between an ISO 8601 compliant combined date-time string and a ``date_
 |    Date-time, complete, extended, offset
 |      ``date_time_string('YYYY-MM-DDThh:mm:ss+hh:mm',DateTime,'2026-04-07T14:30:00+05:45')``
 |      ``DateTime=date_time(2026,4,7,14,30,0,20700)``
+|    Date-time, complete, extended, comma fractional seconds
+|      ``date_time_string('YYYY-MM-DDThh:mm:ss,sZ',DateTime,'2026-04-07T14:30:00,125Z')``
+|      ``DateTime=date_time(2026,4,7,14,30,0.125,0)``
 
 
 ------------

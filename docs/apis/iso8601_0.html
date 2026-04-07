@@ -260,7 +260,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Daniel L. Dudley and Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:3:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-07</div>
+<div class="line"><strong>Date:</strong> 2026-04-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -814,6 +814,11 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">time_string('Thh:mm:ss.s',Time,'T14:30:00.125')</span></code></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Time=time(14,30,0.125)</span></code></div>
 </div>
+<div class="line">Time, complete, extended, comma fractional seconds</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">time_string('Thh:mm:ss,s',Time,'T14:30:00,125')</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Time=time(14,30,0.125)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -864,6 +869,11 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">date_time_string('YYYY-MM-DDThh:mm:ss+hh:mm',DateTime,'2026-04-07T14:30:00+05:45')</span></code></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">DateTime=date_time(2026,4,7,14,30,0,20700)</span></code></div>
+</div>
+<div class="line">Date-time, complete, extended, comma fractional seconds</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">date_time_string('YYYY-MM-DDThh:mm:ss,sZ',DateTime,'2026-04-07T14:30:00,125Z')</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DateTime=date_time(2026,4,7,14,30,0.125,0)</span></code></div>
 </div>
 </div>
 </div>

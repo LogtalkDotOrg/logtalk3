@@ -130,13 +130,15 @@ duration and interval string conversions using <code class="docutils literal not
 <code class="docutils literal notranslate"><span class="pre">interval_string/2</span></code>.</p>
 <p>Supported <strong>time-of-day strings</strong> include basic and extended forms with
 the required <code class="docutils literal notranslate"><span class="pre">T</span></code> prefix, e.g. <code class="docutils literal notranslate"><span class="pre">T143000</span></code>, <code class="docutils literal notranslate"><span class="pre">T14:30:00</span></code>,
-<code class="docutils literal notranslate"><span class="pre">T143000.125</span></code>, and <code class="docutils literal notranslate"><span class="pre">T14:30:00.125</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">T143000.125</span></code>, <code class="docutils literal notranslate"><span class="pre">T14:30:00.125</span></code>, <code class="docutils literal notranslate"><span class="pre">T143000,125</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">T14:30:00,125</span></code>.</p>
 <p>Supported <strong>combined date-time strings</strong> include calendar-date,
 ordinal-date, and complete week-date basic and extended forms with
-optional UTC <code class="docutils literal notranslate"><span class="pre">Z</span></code> or numeric offsets, e.g. <code class="docutils literal notranslate"><span class="pre">20260407T143000</span></code>,
-<code class="docutils literal notranslate"><span class="pre">2026-04-07T14:30:00</span></code>, <code class="docutils literal notranslate"><span class="pre">2026097T143000Z</span></code>,
-<code class="docutils literal notranslate"><span class="pre">2026-097T14:30:00+05:45</span></code>, <code class="docutils literal notranslate"><span class="pre">2026W152T143000Z</span></code>,
-<code class="docutils literal notranslate"><span class="pre">2026-W15-2T14:30:00+05:45</span></code>, and <code class="docutils literal notranslate"><span class="pre">20260407T143000.125+0545</span></code>.</p>
+optional UTC <code class="docutils literal notranslate"><span class="pre">Z</span></code> or numeric offsets, using either <code class="docutils literal notranslate"><span class="pre">.</span></code> or <code class="docutils literal notranslate"><span class="pre">,</span></code> as
+fractional separator, e.g. <code class="docutils literal notranslate"><span class="pre">20260407T143000</span></code>, <code class="docutils literal notranslate"><span class="pre">2026-04-07T14:30:00</span></code>,
+<code class="docutils literal notranslate"><span class="pre">2026097T143000Z</span></code>, <code class="docutils literal notranslate"><span class="pre">2026-097T14:30:00+05:45</span></code>, <code class="docutils literal notranslate"><span class="pre">2026W152T143000Z</span></code>,
+<code class="docutils literal notranslate"><span class="pre">2026-W15-2T14:30:00+05:45</span></code>, <code class="docutils literal notranslate"><span class="pre">20260407T143000.125+0545</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">2026-04-07T14:30:00,125Z</span></code>.</p>
 <p>Normalized term shapes are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">time(Hours,Minutes,Seconds)</span></code> for time-of-day strings</p></li>
@@ -161,7 +163,9 @@ current date)</div>
 <code class="docutils literal notranslate"><span class="pre">interval_string/2</span></code> predicates) Modified: 2026-04-07 (to add
 <code class="docutils literal notranslate"><span class="pre">time_string/3</span></code> and <code class="docutils literal notranslate"><span class="pre">date_time_string/3</span></code> predicates and extend
 <code class="docutils literal notranslate"><span class="pre">interval_string/2</span></code>, including ordinal-date and week-date date-time
-forms)</div>
+forms) Modified: 2026-04-08 (to add support for comma as fractional
+separator in <code class="docutils literal notranslate"><span class="pre">time_string/3</span></code> and <code class="docutils literal notranslate"><span class="pre">date_time_string/3</span></code> and for
+corresponding interval parsing)</div>
 </div>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>

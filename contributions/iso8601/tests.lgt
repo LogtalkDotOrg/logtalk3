@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:3:0,
 		author is 'Paulo Moura and Daniel L. Dudley',
-		date is 2026-04-07,
+		date is 2026-04-08,
 		comment is 'Unit tests for the iso8601 library.'
 	]).
 
@@ -301,6 +301,12 @@
 	test(iso8601_time_string_3_05, deterministic(String == 'T143000.125')) :-
 		time_string('Thhmmss.s', time(14,30,0.125), String).
 
+	test(iso8601_time_string_3_06, deterministic(Time == time(14,30,0.125))) :-
+		time_string('Thh:mm:ss,s', Time, 'T14:30:00,125').
+
+	test(iso8601_time_string_3_07, deterministic(String == 'T143000,125')) :-
+		time_string('Thhmmss,s', time(14,30,0.125), String).
+
 	% date_time_string/3 tests
 
 	test(iso8601_date_time_string_3_01, deterministic(String == '2026-04-07T14:30:00')) :-
@@ -348,6 +354,15 @@
 	test(iso8601_date_time_string_3_15, deterministic(String == '2026-W15-2T14:30:00.125+05:45')) :-
 		date_time_string('YYYY-Www-DThh:mm:ss.s+hh:mm', date_time(2026,4,7,14,30,0.125,20700), String).
 
+	test(iso8601_date_time_string_3_16, deterministic(DateTime == date_time(2026,4,7,14,30,0.125,0))) :-
+		date_time_string('YYYY-MM-DDThh:mm:ss,sZ', DateTime, '2026-04-07T14:30:00,125Z').
+
+	test(iso8601_date_time_string_3_17, deterministic(String == '2026097T143000,125+0545')) :-
+		date_time_string('YYYYDDDThhmmss,s+hhmm', date_time(2026,4,7,14,30,0.125,20700), String).
+
+	test(iso8601_date_time_string_3_18, deterministic(DateTime == date_time(2026,4,7,14,30,0.125,20700))) :-
+		date_time_string('YYYY-Www-DThh:mm:ss,s+hh:mm', DateTime, '2026-W15-2T14:30:00,125+05:45').
+
 	% duration_string/2 tests
 
 	test(iso8601_duration_string_2_01, deterministic(String == 'P1Y2M3DT4H5M6S')) :-
@@ -390,6 +405,9 @@
 
 	test(iso8601_interval_string_2_10, deterministic(Interval == interval(date_time(2026,4,7,14,30,0,0), duration(0, 0, 0, 0, 30, 0)))) :-
 		interval_string(Interval, '2026-W15-2T14:30:00Z/PT30M').
+
+	test(iso8601_interval_string_2_11, deterministic(Interval == interval(date_time(2026,4,7,14,30,0.125,0), date_time(2026,4,7,15,0,0.25,0)))) :-
+		interval_string(Interval, '2026-04-07T14:30:00,125Z/2026-04-07T15:00:00,25Z').
 
 	% valid_date/3 tests
 

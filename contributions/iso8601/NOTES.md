@@ -30,14 +30,16 @@ duration and interval string conversions using `time_string/3`,
 `date_time_string/3`, `duration_string/2`, and `interval_string/2`.
 
 Supported **time-of-day strings** include basic and extended forms with the
-required `T` prefix, e.g. `T143000`, `T14:30:00`, `T143000.125`, and
-`T14:30:00.125`.
+required `T` prefix, e.g. `T143000`, `T14:30:00`, `T143000.125`,
+`T14:30:00.125`, `T143000,125`, and `T14:30:00,125`.
 
 Supported **combined date-time strings** include calendar-date, ordinal-date,
 and complete week-date basic and extended forms with optional UTC `Z` or
-numeric offsets, e.g. `20260407T143000`, `2026-04-07T14:30:00`,
-`2026097T143000Z`, `2026-097T14:30:00+05:45`, `2026W152T143000Z`,
-`2026-W15-2T14:30:00+05:45`, and `20260407T143000.125+0545`.
+numeric offsets, using either `.` or `,` as fractional separator, e.g.
+`20260407T143000`, `2026-04-07T14:30:00`, `2026097T143000Z`,
+`2026-097T14:30:00+05:45`, `2026W152T143000Z`,
+`2026-W15-2T14:30:00+05:45`, `20260407T143000.125+0545`, and
+`2026-04-07T14:30:00,125Z`.
 
 Normalized term shapes are:
 
@@ -61,6 +63,7 @@ Created: 2004-02-18
 Modified: 2014-09-26 (to use the `os` library object to get the current date)  
 Modified: 2026-02-25 (to add `duration_string/2` and `interval_string/2` predicates)
 Modified: 2026-04-07 (to add `time_string/3` and `date_time_string/3` predicates and extend `interval_string/2`, including ordinal-date and week-date date-time forms)
+Modified: 2026-04-08 (to add support for comma as fractional separator in `time_string/3` and `date_time_string/3` and for corresponding interval parsing)
 
 
 API documentation

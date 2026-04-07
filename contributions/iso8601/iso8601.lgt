@@ -43,7 +43,7 @@
 	:- info([
 		version is 1:3:0,
 		author is 'Daniel L. Dudley and Paulo Moura',
-		date is 2026-04-07,
+		date is 2026-04-08,
 		comment is 'ISO 8601 (and European civil calendar) compliant library of date and time predicates.',
 		remarks is [
 			'Scope' - 'This object currently provides a powerful, versatile and efficient set of date-handling predicates, which--thanks to Logtalk--may be used as is on a wide range of Prolog compilers. Besides taking time to familiarize oneself with each predicate, the user should take note of the following information.',
@@ -204,7 +204,8 @@
 		examples is [
 			'Time, complete, extended' - time_string('Thh:mm:ss', time(14,30,0), String) - {String = 'T14:30:00'},
 			'Time, complete, basic' - time_string('Thhmmss', Time, 'T143000') - {Time = time(14,30,0)},
-			'Time, complete, extended, fractional seconds' - time_string('Thh:mm:ss.s', Time, 'T14:30:00.125') - {Time = time(14,30,0.125)}
+			'Time, complete, extended, fractional seconds' - time_string('Thh:mm:ss.s', Time, 'T14:30:00.125') - {Time = time(14,30,0.125)},
+			'Time, complete, extended, comma fractional seconds' - time_string('Thh:mm:ss,s', Time, 'T14:30:00,125') - {Time = time(14,30,0.125)}
 		]
 	]).
 
@@ -218,7 +219,8 @@
 			'Date-time, ordinal, extended, UTC' - date_time_string('YYYY-DDDThh:mm:ssZ', DateTime, '2026-097T14:30:00Z') - {DateTime = date_time(2026,4,7,14,30,0,0)},
 			'Date-time, week, complete, extended' - date_time_string('YYYY-Www-DThh:mm:ss', date_time(2026,4,7,14,30,0), String) - {String = '2026-W15-2T14:30:00'},
 			'Date-time, complete, basic, UTC' - date_time_string('YYYYMMDDThhmmssZ', DateTime, '20260407T143000Z') - {DateTime = date_time(2026,4,7,14,30,0,0)},
-			'Date-time, complete, extended, offset' - date_time_string('YYYY-MM-DDThh:mm:ss+hh:mm', DateTime, '2026-04-07T14:30:00+05:45') - {DateTime = date_time(2026,4,7,14,30,0,20700)}
+			'Date-time, complete, extended, offset' - date_time_string('YYYY-MM-DDThh:mm:ss+hh:mm', DateTime, '2026-04-07T14:30:00+05:45') - {DateTime = date_time(2026,4,7,14,30,0,20700)},
+			'Date-time, complete, extended, comma fractional seconds' - date_time_string('YYYY-MM-DDThh:mm:ss,sZ', DateTime, '2026-04-07T14:30:00,125Z') - {DateTime = date_time(2026,4,7,14,30,0.125,0)}
 		]
 	]).
 
@@ -559,17 +561,17 @@
 	% time_string(+Format, ?Time, ?String)
 
 	time_string(Format, Time, String) :-
-		time_format(Format, Style, Fractional),
+		time_format(Format, Style, FractionalSeparator),
 		(	atom(String) ->
 			atom_codes(String, [0'T| Codes]),
-			parse_time_codes(Style, Fractional, Codes, Time)
+			parse_time_codes(Style, FractionalSeparator, Codes, Time)
 		;	(var(Time) ->
 				os::date_time(_, _, _, Hours, Minutes, Seconds, _),
 				Time = time(Hours, Minutes, Seconds)
 			;	true
 			),
 			nonvar(Time),
-			format_time_codes(Style, Fractional, Time, Codes),
+			format_time_codes(Style, FractionalSeparator, Time, Codes),
 			atom_codes(String, [0'T| Codes])
 		).
 
@@ -578,17 +580,17 @@
 	% date_time_string(+Format, ?DateTime, ?String)
 
 	date_time_string(Format, DateTime, String) :-
-		date_time_format(Format, DateFormat, TimeStyle, Fractional, ZoneStyle),
+		date_time_format(Format, DateFormat, TimeStyle, FractionalSeparator, ZoneStyle),
 		(	atom(String) ->
 			atom_codes(String, Codes),
-			parse_date_time_codes(DateFormat, TimeStyle, Fractional, ZoneStyle, Codes, DateTime)
+			parse_date_time_codes(DateFormat, TimeStyle, FractionalSeparator, ZoneStyle, Codes, DateTime)
 		;	(	var(DateTime), ZoneStyle == none ->
 				os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
 				DateTime = date_time(Year, Month, Day, Hours, Minutes, Seconds)
 			;	true
 			),
 			nonvar(DateTime),
-			format_date_time_codes(DateFormat, TimeStyle, Fractional, ZoneStyle, DateTime, Codes),
+			format_date_time_codes(DateFormat, TimeStyle, FractionalSeparator, ZoneStyle, DateTime, Codes),
 			atom_codes(String, Codes)
 		).
 
@@ -754,65 +756,85 @@
 	valid_interval_types(duration, date_time) :- !.
 	valid_interval_types(duration, date).
 
-	time_format('Thhmmss', basic, false).
-	time_format('Thh:mm:ss', extended, false).
-	time_format('Thhmmss.s', basic, true).
-	time_format('Thh:mm:ss.s', extended, true).
+	time_format('Thhmmss', basic, none).
+	time_format('Thh:mm:ss', extended, none).
+	time_format('Thhmmss.s', basic, dot).
+	time_format('Thh:mm:ss.s', extended, dot).
+	time_format('Thhmmss,s', basic, comma).
+	time_format('Thh:mm:ss,s', extended, comma).
 
-	date_time_format('YYYYMMDDThhmmss', 'YYYYMMDD', basic, false, none).
-	date_time_format('YYYY-MM-DDThh:mm:ss', 'YYYY-MM-DD', extended, false, none).
-	date_time_format('YYYYMMDDThhmmss.s', 'YYYYMMDD', basic, true, none).
-	date_time_format('YYYY-MM-DDThh:mm:ss.s', 'YYYY-MM-DD', extended, true, none).
-	date_time_format('YYYYMMDDThhmmssZ', 'YYYYMMDD', basic, false, z).
-	date_time_format('YYYY-MM-DDThh:mm:ssZ', 'YYYY-MM-DD', extended, false, z).
-	date_time_format('YYYYMMDDThhmmss.sZ', 'YYYYMMDD', basic, true, z).
-	date_time_format('YYYY-MM-DDThh:mm:ss.sZ', 'YYYY-MM-DD', extended, true, z).
-	date_time_format('YYYYMMDDThhmmss+hhmm', 'YYYYMMDD', basic, false, basic).
-	date_time_format('YYYY-MM-DDThh:mm:ss+hh:mm', 'YYYY-MM-DD', extended, false, extended).
-	date_time_format('YYYYMMDDThhmmss.s+hhmm', 'YYYYMMDD', basic, true, basic).
-	date_time_format('YYYY-MM-DDThh:mm:ss.s+hh:mm', 'YYYY-MM-DD', extended, true, extended).
-	date_time_format('YYYYDDDThhmmss', 'YYYYDDD', basic, false, none).
-	date_time_format('YYYY-DDDThh:mm:ss', 'YYYY-DDD', extended, false, none).
-	date_time_format('YYYYDDDThhmmss.s', 'YYYYDDD', basic, true, none).
-	date_time_format('YYYY-DDDThh:mm:ss.s', 'YYYY-DDD', extended, true, none).
-	date_time_format('YYYYDDDThhmmssZ', 'YYYYDDD', basic, false, z).
-	date_time_format('YYYY-DDDThh:mm:ssZ', 'YYYY-DDD', extended, false, z).
-	date_time_format('YYYYDDDThhmmss.sZ', 'YYYYDDD', basic, true, z).
-	date_time_format('YYYY-DDDThh:mm:ss.sZ', 'YYYY-DDD', extended, true, z).
-	date_time_format('YYYYDDDThhmmss+hhmm', 'YYYYDDD', basic, false, basic).
-	date_time_format('YYYY-DDDThh:mm:ss+hh:mm', 'YYYY-DDD', extended, false, extended).
-	date_time_format('YYYYDDDThhmmss.s+hhmm', 'YYYYDDD', basic, true, basic).
-	date_time_format('YYYY-DDDThh:mm:ss.s+hh:mm', 'YYYY-DDD', extended, true, extended).
-	date_time_format('YYYYWwwDThhmmss', 'YYYYWwwD', basic, false, none).
-	date_time_format('YYYY-Www-DThh:mm:ss', 'YYYY-Www-D', extended, false, none).
-	date_time_format('YYYYWwwDThhmmss.s', 'YYYYWwwD', basic, true, none).
-	date_time_format('YYYY-Www-DThh:mm:ss.s', 'YYYY-Www-D', extended, true, none).
-	date_time_format('YYYYWwwDThhmmssZ', 'YYYYWwwD', basic, false, z).
-	date_time_format('YYYY-Www-DThh:mm:ssZ', 'YYYY-Www-D', extended, false, z).
-	date_time_format('YYYYWwwDThhmmss.sZ', 'YYYYWwwD', basic, true, z).
-	date_time_format('YYYY-Www-DThh:mm:ss.sZ', 'YYYY-Www-D', extended, true, z).
-	date_time_format('YYYYWwwDThhmmss+hhmm', 'YYYYWwwD', basic, false, basic).
-	date_time_format('YYYY-Www-DThh:mm:ss+hh:mm', 'YYYY-Www-D', extended, false, extended).
-	date_time_format('YYYYWwwDThhmmss.s+hhmm', 'YYYYWwwD', basic, true, basic).
-	date_time_format('YYYY-Www-DThh:mm:ss.s+hh:mm', 'YYYY-Www-D', extended, true, extended).
+	date_time_format('YYYYMMDDThhmmss', 'YYYYMMDD', basic, none, none).
+	date_time_format('YYYY-MM-DDThh:mm:ss', 'YYYY-MM-DD', extended, none, none).
+	date_time_format('YYYYMMDDThhmmss.s', 'YYYYMMDD', basic, dot, none).
+	date_time_format('YYYY-MM-DDThh:mm:ss.s', 'YYYY-MM-DD', extended, dot, none).
+	date_time_format('YYYYMMDDThhmmss,s', 'YYYYMMDD', basic, comma, none).
+	date_time_format('YYYY-MM-DDThh:mm:ss,s', 'YYYY-MM-DD', extended, comma, none).
+	date_time_format('YYYYMMDDThhmmssZ', 'YYYYMMDD', basic, none, z).
+	date_time_format('YYYY-MM-DDThh:mm:ssZ', 'YYYY-MM-DD', extended, none, z).
+	date_time_format('YYYYMMDDThhmmss.sZ', 'YYYYMMDD', basic, dot, z).
+	date_time_format('YYYY-MM-DDThh:mm:ss.sZ', 'YYYY-MM-DD', extended, dot, z).
+	date_time_format('YYYYMMDDThhmmss,sZ', 'YYYYMMDD', basic, comma, z).
+	date_time_format('YYYY-MM-DDThh:mm:ss,sZ', 'YYYY-MM-DD', extended, comma, z).
+	date_time_format('YYYYMMDDThhmmss+hhmm', 'YYYYMMDD', basic, none, basic).
+	date_time_format('YYYY-MM-DDThh:mm:ss+hh:mm', 'YYYY-MM-DD', extended, none, extended).
+	date_time_format('YYYYMMDDThhmmss.s+hhmm', 'YYYYMMDD', basic, dot, basic).
+	date_time_format('YYYY-MM-DDThh:mm:ss.s+hh:mm', 'YYYY-MM-DD', extended, dot, extended).
+	date_time_format('YYYYMMDDThhmmss,s+hhmm', 'YYYYMMDD', basic, comma, basic).
+	date_time_format('YYYY-MM-DDThh:mm:ss,s+hh:mm', 'YYYY-MM-DD', extended, comma, extended).
+	date_time_format('YYYYDDDThhmmss', 'YYYYDDD', basic, none, none).
+	date_time_format('YYYY-DDDThh:mm:ss', 'YYYY-DDD', extended, none, none).
+	date_time_format('YYYYDDDThhmmss.s', 'YYYYDDD', basic, dot, none).
+	date_time_format('YYYY-DDDThh:mm:ss.s', 'YYYY-DDD', extended, dot, none).
+	date_time_format('YYYYDDDThhmmss,s', 'YYYYDDD', basic, comma, none).
+	date_time_format('YYYY-DDDThh:mm:ss,s', 'YYYY-DDD', extended, comma, none).
+	date_time_format('YYYYDDDThhmmssZ', 'YYYYDDD', basic, none, z).
+	date_time_format('YYYY-DDDThh:mm:ssZ', 'YYYY-DDD', extended, none, z).
+	date_time_format('YYYYDDDThhmmss.sZ', 'YYYYDDD', basic, dot, z).
+	date_time_format('YYYY-DDDThh:mm:ss.sZ', 'YYYY-DDD', extended, dot, z).
+	date_time_format('YYYYDDDThhmmss,sZ', 'YYYYDDD', basic, comma, z).
+	date_time_format('YYYY-DDDThh:mm:ss,sZ', 'YYYY-DDD', extended, comma, z).
+	date_time_format('YYYYDDDThhmmss+hhmm', 'YYYYDDD', basic, none, basic).
+	date_time_format('YYYY-DDDThh:mm:ss+hh:mm', 'YYYY-DDD', extended, none, extended).
+	date_time_format('YYYYDDDThhmmss.s+hhmm', 'YYYYDDD', basic, dot, basic).
+	date_time_format('YYYY-DDDThh:mm:ss.s+hh:mm', 'YYYY-DDD', extended, dot, extended).
+	date_time_format('YYYYDDDThhmmss,s+hhmm', 'YYYYDDD', basic, comma, basic).
+	date_time_format('YYYY-DDDThh:mm:ss,s+hh:mm', 'YYYY-DDD', extended, comma, extended).
+	date_time_format('YYYYWwwDThhmmss', 'YYYYWwwD', basic, none, none).
+	date_time_format('YYYY-Www-DThh:mm:ss', 'YYYY-Www-D', extended, none, none).
+	date_time_format('YYYYWwwDThhmmss.s', 'YYYYWwwD', basic, dot, none).
+	date_time_format('YYYY-Www-DThh:mm:ss.s', 'YYYY-Www-D', extended, dot, none).
+	date_time_format('YYYYWwwDThhmmss,s', 'YYYYWwwD', basic, comma, none).
+	date_time_format('YYYY-Www-DThh:mm:ss,s', 'YYYY-Www-D', extended, comma, none).
+	date_time_format('YYYYWwwDThhmmssZ', 'YYYYWwwD', basic, none, z).
+	date_time_format('YYYY-Www-DThh:mm:ssZ', 'YYYY-Www-D', extended, none, z).
+	date_time_format('YYYYWwwDThhmmss.sZ', 'YYYYWwwD', basic, dot, z).
+	date_time_format('YYYY-Www-DThh:mm:ss.sZ', 'YYYY-Www-D', extended, dot, z).
+	date_time_format('YYYYWwwDThhmmss,sZ', 'YYYYWwwD', basic, comma, z).
+	date_time_format('YYYY-Www-DThh:mm:ss,sZ', 'YYYY-Www-D', extended, comma, z).
+	date_time_format('YYYYWwwDThhmmss+hhmm', 'YYYYWwwD', basic, none, basic).
+	date_time_format('YYYY-Www-DThh:mm:ss+hh:mm', 'YYYY-Www-D', extended, none, extended).
+	date_time_format('YYYYWwwDThhmmss.s+hhmm', 'YYYYWwwD', basic, dot, basic).
+	date_time_format('YYYY-Www-DThh:mm:ss.s+hh:mm', 'YYYY-Www-D', extended, dot, extended).
+	date_time_format('YYYYWwwDThhmmss,s+hhmm', 'YYYYWwwD', basic, comma, basic).
+	date_time_format('YYYY-Www-DThh:mm:ss,s+hh:mm', 'YYYY-Www-D', extended, comma, extended).
 
 	parse_supported_date_time_atom(Atom, DateTime) :-
 		date_time_format(Format, _, _, _, _),
 		catch(date_time_string(Format, DateTime, Atom), _, fail),
 		!.
 
-	parse_date_time_codes(DateFormat, TimeStyle, Fractional, ZoneStyle, Codes, DateTime) :-
+	parse_date_time_codes(DateFormat, TimeStyle, FractionalSeparator, ZoneStyle, Codes, DateTime) :-
 		date_codes(DateFormat, DateCodesLength),
 		length(DateCodes, DateCodesLength),
 		append(DateCodes, [0'T| RestCodes], Codes),
 		parse_date_component_codes(DateFormat, DateCodes, [Year, Month, Day]),
-		parse_time_zone_codes(TimeStyle, Fractional, ZoneStyle, RestCodes, Hours, Minutes, Seconds, Offset),
+		parse_time_zone_codes(TimeStyle, FractionalSeparator, ZoneStyle, RestCodes, Hours, Minutes, Seconds, Offset),
 		date_time_term(ZoneStyle, Year, Month, Day, Hours, Minutes, Seconds, Offset, DateTime).
 
-	format_date_time_codes(DateFormat, TimeStyle, Fractional, ZoneStyle, DateTime, Codes) :-
+	format_date_time_codes(DateFormat, TimeStyle, FractionalSeparator, ZoneStyle, DateTime, Codes) :-
 		date_time_term(ZoneStyle, Year, Month, Day, Hours, Minutes, Seconds, Offset, DateTime),
 		format_date_component_codes(DateFormat, [Year, Month, Day], DateCodes),
-		format_time_codes(TimeStyle, Fractional, time(Hours, Minutes, Seconds), TimeCodes),
+		format_time_codes(TimeStyle, FractionalSeparator, time(Hours, Minutes, Seconds), TimeCodes),
 		format_zone_codes(ZoneStyle, Offset, ZoneCodes),
 		append(DateCodes, [0'T| TimeCodes], Codes0),
 		append(Codes0, ZoneCodes, Codes).
@@ -824,40 +846,42 @@
 		Style \== z,
 		valid_offset_seconds(Offset).
 
-	parse_time_zone_codes(Style, Fractional, none, Codes, Hours, Minutes, Seconds, _) :-
-		parse_time_codes(Style, Fractional, Codes, time(Hours, Minutes, Seconds)),
+	parse_time_zone_codes(Style, FractionalSeparator, none, Codes, Hours, Minutes, Seconds, _) :-
+		parse_time_codes(Style, FractionalSeparator, Codes, time(Hours, Minutes, Seconds)),
 		!.
-	parse_time_zone_codes(Style, Fractional, z, Codes, Hours, Minutes, Seconds, 0) :-
+	parse_time_zone_codes(Style, FractionalSeparator, z, Codes, Hours, Minutes, Seconds, 0) :-
 		append(TimeCodes, [0'Z], Codes),
-		parse_time_codes(Style, Fractional, TimeCodes, time(Hours, Minutes, Seconds)),
+		parse_time_codes(Style, FractionalSeparator, TimeCodes, time(Hours, Minutes, Seconds)),
 		!.
-	parse_time_zone_codes(Style, Fractional, basic, Codes, Hours, Minutes, Seconds, Offset) :-
+	parse_time_zone_codes(Style, FractionalSeparator, basic, Codes, Hours, Minutes, Seconds, Offset) :-
 		split_last_codes(5, Codes, TimeCodes, OffsetCodes),
-		parse_time_codes(Style, Fractional, TimeCodes, time(Hours, Minutes, Seconds)),
+		parse_time_codes(Style, FractionalSeparator, TimeCodes, time(Hours, Minutes, Seconds)),
 		parse_offset_codes(basic, OffsetCodes, Offset),
 		!.
-	parse_time_zone_codes(Style, Fractional, extended, Codes, Hours, Minutes, Seconds, Offset) :-
+	parse_time_zone_codes(Style, FractionalSeparator, extended, Codes, Hours, Minutes, Seconds, Offset) :-
 		split_last_codes(6, Codes, TimeCodes, OffsetCodes),
-		parse_time_codes(Style, Fractional, TimeCodes, time(Hours, Minutes, Seconds)),
+		parse_time_codes(Style, FractionalSeparator, TimeCodes, time(Hours, Minutes, Seconds)),
 		parse_offset_codes(extended, OffsetCodes, Offset),
 		!.
 
-	parse_time_codes(basic, Fractional, [H1,H2,M1,M2| SecondCodes], time(Hours, Minutes, Seconds)) :-
+	parse_time_codes(basic, FractionalSeparator, [H1,H2,M1,M2| SecondCodes], time(Hours, Minutes, Seconds)) :-
 		digits_value(H1, H2, Hours),
 		digits_value(M1, M2, Minutes),
-		parse_seconds_codes(Fractional, SecondCodes, Seconds),
-		valid_time(Hours, Minutes, Seconds).
-	parse_time_codes(extended, Fractional, [H1,H2,0':,M1,M2,0':| SecondCodes], time(Hours, Minutes, Seconds)) :-
+		parse_seconds_codes(FractionalSeparator, SecondCodes, Seconds),
+		valid_time(Hours, Minutes, Seconds),
+		!.
+	parse_time_codes(extended, FractionalSeparator, [H1,H2,0':,M1,M2,0':| SecondCodes], time(Hours, Minutes, Seconds)) :-
 		digits_value(H1, H2, Hours),
 		digits_value(M1, M2, Minutes),
-		parse_seconds_codes(Fractional, SecondCodes, Seconds),
-		valid_time(Hours, Minutes, Seconds).
+		parse_seconds_codes(FractionalSeparator, SecondCodes, Seconds),
+		valid_time(Hours, Minutes, Seconds),
+		!.
 
-	format_time_codes(Style, Fractional, time(Hours, Minutes, Seconds), Codes) :-
+	format_time_codes(Style, FractionalSeparator, time(Hours, Minutes, Seconds), Codes) :-
 		valid_time(Hours, Minutes, Seconds),
 		prepend_zeros(2, Hours, HoursCodes),
 		prepend_zeros(2, Minutes, MinutesCodes),
-		format_seconds_codes(Fractional, Seconds, SecondsCodes),
+		format_seconds_codes(FractionalSeparator, Seconds, SecondsCodes),
 		(	Style == basic ->
 			append(HoursCodes, MinutesCodes, Codes0),
 			append(Codes0, SecondsCodes, Codes)
@@ -865,17 +889,26 @@
 			append(Codes0, [0':| SecondsCodes], Codes)
 		).
 
-	parse_seconds_codes(false, [S1,S2], Seconds) :-
+	parse_seconds_codes(none, [S1,S2], Seconds) :-
 		digits_value(S1, S2, Seconds).
-	parse_seconds_codes(true, [S1,S2| Rest], Seconds) :-
+	parse_seconds_codes(dot, [S1,S2| Rest], Seconds) :-
 		digits_value(S1, S2, WholeSeconds),
-		parse_fraction_codes(Rest, Fraction),
+		parse_fraction_codes(0'., Rest, Fraction),
+		Seconds is WholeSeconds + Fraction.
+	parse_seconds_codes(comma, [S1,S2| Rest], Seconds) :-
+		digits_value(S1, S2, WholeSeconds),
+		parse_fraction_codes(0',, Rest, Fraction),
 		Seconds is WholeSeconds + Fraction.
 
-	format_seconds_codes(false, Seconds, Codes) :-
+	format_seconds_codes(none, Seconds, Codes) :-
 		whole_seconds_value(Seconds, WholeSeconds),
 		prepend_zeros(2, WholeSeconds, Codes).
-	format_seconds_codes(true, Seconds, Codes) :-
+	format_seconds_codes(dot, Seconds, Codes) :-
+		format_fractional_seconds_codes(0'., Seconds, Codes).
+	format_seconds_codes(comma, Seconds, Codes) :-
+		format_fractional_seconds_codes(0',, Seconds, Codes).
+
+	format_fractional_seconds_codes(Separator, Seconds, Codes) :-
 		number(Seconds),
 		Seconds >= 0,
 		Seconds < 60,
@@ -891,9 +924,9 @@
 		number_codes(WholeSeconds, WholeCodes0),
 		WholeSeconds < 60,
 		prepend_zeros(2, WholeSeconds, WholeCodes),
-		append(WholeCodes, [0'.| FractionCodes], Codes).
+		append(WholeCodes, [Separator| FractionCodes], Codes).
 
-	parse_fraction_codes([0'.| Digits], Fraction) :-
+	parse_fraction_codes(Separator, [Separator| Digits], Fraction) :-
 		Digits \== [],
 		digits_codes(Digits),
 		FractionCodes = [0'0,0'.| Digits],
