@@ -38,7 +38,7 @@
 	]).
 
 	:- uses(date, [
-		date_time_to_unix/2, days_in_month/3, leap_year/1, unix_to_date_time/2, weekday/2
+		date_time_to_unix/2, day_of_year_date/3, leap_year/1, month_weekday_date/5, unix_to_date_time/2
 	]).
 
 	:- uses(list, [
@@ -775,31 +775,12 @@
 		ActualDay is Day0 + 1,
 		day_of_year_date(Year, ActualDay, Date).
 	rule_date(month_weekday(Month, Week, WeekdayNumber), Year, Date) :-
-		month_weekday_date(Year, Month, Week, WeekdayNumber, Date).
+		posix_weekday_date_weekday(WeekdayNumber, DateWeekday),
+		month_weekday_date(Year, Month, Week, DateWeekday, Date).
 
-	day_of_year_date(Year, DayOfYear, date(Year, Month, Day)) :-
-		date_time_to_unix(date_time(Year, 1, 1, 0, 0, 0), StartUnixSeconds),
-		UnixSeconds is StartUnixSeconds + (DayOfYear - 1) * 86400,
-		unix_to_date_time(UnixSeconds, date_time(_, Month, Day, _, _, _)).
-
-	month_weekday_date(Year, Month, Week, POSIXWeekday, date(Year, Month, Day)) :-
-		weekday(date(Year, Month, 1), FirstWeekday),
-		FirstPOSIXWeekday is FirstWeekday mod 7,
-		Delta is (POSIXWeekday - FirstPOSIXWeekday + 7) mod 7,
-		FirstDay is 1 + Delta,
-		days_in_month(Month, Year, Length),
-		(	Week =:= 5 ->
-			last_month_weekday(FirstDay, Length, Day)
-		;	Day is FirstDay + (Week - 1) * 7,
-			Day =< Length
-		).
-
-	last_month_weekday(Day0, Length, Day) :-
-		NextDay is Day0 + 7,
-		(	NextDay =< Length ->
-			last_month_weekday(NextDay, Length, Day)
-		;	Day = Day0
-		).
+	posix_weekday_date_weekday(0, 7) :-
+		!.
+	posix_weekday_date_weekday(WeekdayNumber, WeekdayNumber).
 
 	check_tzif_term(TZif) :-
 		valid_tzif_term(TZif),

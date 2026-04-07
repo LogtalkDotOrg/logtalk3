@@ -262,8 +262,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:2:0</div>
-<div class="line"><strong>Date:</strong> 2026-02-25</div>
+<div class="line"><strong>Version:</strong> 2:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-04-07</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -307,16 +307,18 @@
 <li><p><a class="reference internal" href="#utc-to-local-3" id="id13"><code class="docutils literal notranslate"><span class="pre">utc_to_local/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#local-to-utc-3" id="id14"><code class="docutils literal notranslate"><span class="pre">local_to_utc/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#day-of-year-2" id="id15"><code class="docutils literal notranslate"><span class="pre">day_of_year/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#week-of-year-iso-2" id="id16"><code class="docutils literal notranslate"><span class="pre">week_of_year_iso/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#weekday-2" id="id17"><code class="docutils literal notranslate"><span class="pre">weekday/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#normalize-date-time-2" id="id18"><code class="docutils literal notranslate"><span class="pre">normalize_date_time/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-date-time-1" id="id19"><code class="docutils literal notranslate"><span class="pre">valid_date_time/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-date-time-2" id="id20"><code class="docutils literal notranslate"><span class="pre">valid_date_time/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#day-of-year-date-3" id="id16"><code class="docutils literal notranslate"><span class="pre">day_of_year_date/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#month-weekday-date-5" id="id17"><code class="docutils literal notranslate"><span class="pre">month_weekday_date/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#week-of-year-iso-2" id="id18"><code class="docutils literal notranslate"><span class="pre">week_of_year_iso/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#weekday-2" id="id19"><code class="docutils literal notranslate"><span class="pre">weekday/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#normalize-date-time-2" id="id20"><code class="docutils literal notranslate"><span class="pre">normalize_date_time/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-date-time-1" id="id21"><code class="docutils literal notranslate"><span class="pre">valid_date_time/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-date-time-2" id="id22"><code class="docutils literal notranslate"><span class="pre">valid_date_time/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id21">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id22">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id23">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id23">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id24">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id25">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -365,7 +367,7 @@
 </section>
 <section id="name-of-day-3">
 <span id="datep-0-name-of-day-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">name_of_day/3</span></code></a><a class="headerlink" href="#name-of-day-3" title="Link to this heading"></a></h3>
-<p>Name and short name of day.</p>
+<p>Name and short name of day using ISO weekday numbering (Monday=1, …, Sunday=7).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -615,8 +617,50 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="day-of-year-date-3">
+<span id="datep-0-day-of-year-date-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">day_of_year_date/3</span></code></a><a class="headerlink" href="#day-of-year-date-3" title="Link to this heading"></a></h3>
+<p>Computes the calendar date corresponding to a year and day of year (1-366) as <code class="docutils literal notranslate"><span class="pre">date(Year,Month,Day)</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">day_of_year_date(Year,DayOfYear,Date)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">day_of_year_date(+integer,+integer,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="month-weekday-date-5">
+<span id="datep-0-month-weekday-date-5"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">month_weekday_date/5</span></code></a><a class="headerlink" href="#month-weekday-date-5" title="Link to this heading"></a></h3>
+<p>Computes the calendar date for the nth or last weekday in a month as <code class="docutils literal notranslate"><span class="pre">date(Year,Month,Day)</span></code>. Week values 1-4 select the nth weekday and week value 5 selects the last one. Weekday uses ISO numbering (Monday=1, …, Sunday=7).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">month_weekday_date(Year,Month,Week,Weekday,Date)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">month_weekday_date(+integer,+integer,+integer,+integer,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="week-of-year-iso-2">
-<span id="datep-0-week-of-year-iso-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">week_of_year_iso/2</span></code></a><a class="headerlink" href="#week-of-year-iso-2" title="Link to this heading"></a></h3>
+<span id="datep-0-week-of-year-iso-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">week_of_year_iso/2</span></code></a><a class="headerlink" href="#week-of-year-iso-2" title="Link to this heading"></a></h3>
 <p>Computes ISO week for a <code class="docutils literal notranslate"><span class="pre">date(Year,Month,Day)</span></code> or <code class="docutils literal notranslate"><span class="pre">date_time(...)</span></code> term as <code class="docutils literal notranslate"><span class="pre">week(Week,Year)</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -637,7 +681,7 @@
 <hr class="docutils" />
 </section>
 <section id="weekday-2">
-<span id="datep-0-weekday-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">weekday/2</span></code></a><a class="headerlink" href="#weekday-2" title="Link to this heading"></a></h3>
+<span id="datep-0-weekday-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">weekday/2</span></code></a><a class="headerlink" href="#weekday-2" title="Link to this heading"></a></h3>
 <p>Computes ISO weekday number (Monday=1, …, Sunday=7) for a <code class="docutils literal notranslate"><span class="pre">date(Year,Month,Day)</span></code> or <code class="docutils literal notranslate"><span class="pre">date_time(...)</span></code> term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -658,7 +702,7 @@
 <hr class="docutils" />
 </section>
 <section id="normalize-date-time-2">
-<span id="datep-0-normalize-date-time-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">normalize_date_time/2</span></code></a><a class="headerlink" href="#normalize-date-time-2" title="Link to this heading"></a></h3>
+<span id="datep-0-normalize-date-time-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">normalize_date_time/2</span></code></a><a class="headerlink" href="#normalize-date-time-2" title="Link to this heading"></a></h3>
 <p>Normalizes a datetime term by carrying overflows/underflows in date and time fields.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -679,7 +723,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-date-time-1">
-<span id="datep-0-valid-date-time-1"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_date_time/1</span></code></a><a class="headerlink" href="#valid-date-time-1" title="Link to this heading"></a></h3>
+<span id="datep-0-valid-date-time-1"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_date_time/1</span></code></a><a class="headerlink" href="#valid-date-time-1" title="Link to this heading"></a></h3>
 <p>True iff a datetime term is valid in strict mode.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -700,7 +744,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-date-time-2">
-<span id="datep-0-valid-date-time-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_date_time/2</span></code></a><a class="headerlink" href="#valid-date-time-2" title="Link to this heading"></a></h3>
+<span id="datep-0-valid-date-time-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_date_time/2</span></code></a><a class="headerlink" href="#valid-date-time-2" title="Link to this heading"></a></h3>
 <p>Validates a datetime term in <code class="docutils literal notranslate"><span class="pre">strict</span></code> or <code class="docutils literal notranslate"><span class="pre">relaxed</span></code> mode.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

@@ -14,8 +14,8 @@ Date protocol.
 |    ``logtalk_load(dates(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:2:0
-| **Date:** 2026-02-25
+| **Version:** 2:0:0
+| **Date:** 2026-04-07
 
 | **Compilation flags:**
 |    ``static``
@@ -82,7 +82,7 @@ True if the argument is a leap year.
 ``name_of_day/3``
 ^^^^^^^^^^^^^^^^^
 
-Name and short name of day.
+Name and short name of day using ISO weekday numbering (Monday=1, ..., Sunday=7).
 
 | **Compilation flags:**
 |    ``static``
@@ -300,6 +300,44 @@ Computes the day of year (1-366) for a ``date(Year,Month,Day)`` or ``date_time(.
 |    ``day_of_year(DateLike,DayOfYear)``
 | **Mode and number of proofs:**
 |    ``day_of_year(+compound,?integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: day_of_year_date/3
+.. _datep/0::day_of_year_date/3:
+
+``day_of_year_date/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the calendar date corresponding to a year and day of year (1-366) as ``date(Year,Month,Day)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``day_of_year_date(Year,DayOfYear,Date)``
+| **Mode and number of proofs:**
+|    ``day_of_year_date(+integer,+integer,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: month_weekday_date/5
+.. _datep/0::month_weekday_date/5:
+
+``month_weekday_date/5``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the calendar date for the nth or last weekday in a month as ``date(Year,Month,Day)``. Week values 1-4 select the nth weekday and week value 5 selects the last one. Weekday uses ISO numbering (Monday=1, ..., Sunday=7).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``month_weekday_date(Year,Month,Week,Weekday,Date)``
+| **Mode and number of proofs:**
+|    ``month_weekday_date(+integer,+integer,+integer,+integer,-compound)`` - ``zero_or_one``
 
 
 ------------
