@@ -151,9 +151,6 @@
 	abbreviation(UTC, Abbreviation) :-
 		time_type(UTC, time_type(_, _, Abbreviation, _)).
 
-	looks_like_tzif_list([]).
-	looks_like_tzif_list([_| _]).
-
 	cache_tzifs([]).
 	cache_tzifs([TZif| TZifs]) :-
 		cache_tzif(TZif),
@@ -181,10 +178,6 @@
 	require_tzif_zone(TZif, Zone, ZoneData) :-
 		check_tzif_term(TZif),
 		( TZif = tzif(Zone, _, ZoneData) -> true ; existence_error(time_zone, Zone) ).
-
-	require_single_zone_tzif(TZifOrTZifs, Zone, ZoneData) :-
-		normalize_tzif_collection(TZifOrTZifs, TZifs),
-		( TZifs = [tzif(Zone, _, ZoneData)] -> true ; domain_error(single_zone_tzif, TZifs) ).
 
 	load_source(snapshot(File), TZifs) :-
 		!,
@@ -261,13 +254,6 @@
 	relative_path_concat(Prefix, Path, PrefixedPath) :-
 		path_concat(Prefix, Path, PrefixedPath).
 
-	normalize_tzif_collection(TZifs0, TZifs) :-
-		looks_like_tzif_list(TZifs0),
-		!,
-		normalize_tzif_list(TZifs0, TZifs).
-	normalize_tzif_collection(TZif, [TZif]) :-
-		check_tzif_term(TZif).
-
 	normalize_tzif_list(TZifs0, TZifs) :-
 		check_tzif_list(TZifs0),
 		normalize_tzif_terms(TZifs0, TZifs).
@@ -297,11 +283,6 @@
 	merge_tzif(TZif, TZifs, [TZif| TZifs]).
 
 	tzif_zone_id(tzif(Zone, _, _), Zone).
-
-	tzif_zone([tzif(Zone, _, ZoneData)| _], Zone, ZoneData) :-
-		!.
-	tzif_zone([_| TZifs], Zone, ZoneData) :-
-		tzif_zone(TZifs, Zone, ZoneData).
 
 	tzif_zones(TZifs, Zones) :-
 		tzif_terms_zones(TZifs, Zones).
@@ -819,12 +800,6 @@
 			last_month_weekday(NextDay, Length, Day)
 		;	Day = Day0
 		).
-
-	next_month(Year, 12, NextYear, 1) :-
-		!,
-		NextYear is Year + 1.
-	next_month(Year, Month, Year, NextMonth) :-
-		NextMonth is Month + 1.
 
 	check_tzif_term(TZif) :-
 		valid_tzif_term(TZif),
