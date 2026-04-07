@@ -1,0 +1,112 @@
+.. index:: single: tzif_zone_ids
+.. _tzif_zone_ids/0:
+
+.. rst-class:: right
+
+**object**
+
+``tzif_zone_ids``
+=================
+
+Bundled canonical TZDB zone ids and backward-compatible aliases derived from IANA TZDB 2026a.
+
+| **Availability:** 
+|    ``logtalk_load(tzif(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-07
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: tzdb_version/1
+.. _tzif_zone_ids/0::tzdb_version/1:
+
+``tzdb_version/1``
+^^^^^^^^^^^^^^^^^^
+
+Bundled IANA TZDB release used to derive the zone-id table.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tzdb_version(Version)``
+| **Mode and number of proofs:**
+|    ``tzdb_version(-atom)`` - ``one``
+
+
+------------
+
+.. index:: known_zone_id/1
+.. _tzif_zone_ids/0::known_zone_id/1:
+
+``known_zone_id/1``
+^^^^^^^^^^^^^^^^^^^
+
+True when the argument is a bundled canonical TZDB zone id or backward-compatible alias.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``known_zone_id(ZoneId)``
+| **Mode and number of proofs:**
+|    ``known_zone_id(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: zone_id_kind/2
+.. _tzif_zone_ids/0::zone_id_kind/2:
+
+``zone_id_kind/2``
+^^^^^^^^^^^^^^^^^^
+
+Classifies a bundled zone id as canonical or as a backward-compatible alias targeting another zone id.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zone_id_kind(ZoneId,Kind)``
+| **Mode and number of proofs:**
+|    ``zone_id_kind(+atom,-compound)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

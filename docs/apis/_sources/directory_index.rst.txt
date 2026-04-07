@@ -1309,6 +1309,18 @@ To load an entity, always load the library that includes it using the goal ``log
    varlist <varlist_0>
    varlistp <varlistp_0>
 
+``library/tzif/``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   tzif <tzif_0>
+   tzif_protocol <tzif_protocol_0>
+   tzif_zone_ids <tzif_zone_ids_0>
+
 ``library/ulid/``
 -----------------
 

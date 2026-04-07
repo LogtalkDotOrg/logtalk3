@@ -78,6 +78,7 @@
 		gensym(loader),
 		genint(loader),
 		time_scales(loader),
+		tzif(loader),
 		geospatial(loader),
 		git(loader),
 		grammars(loader),

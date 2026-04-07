@@ -77,6 +77,9 @@ codes and bytes plus character set metadata.
 
 * ADDED: New `hashes` library implementing commonly used hashing algorithms.
 
+* ADDED: New `tzif` library for parsing TZif v1/v2/v3 files, persisting parsed
+snapshots, and answering UTC-based offset, DST, and abbreviation queries.
+
 * ADDED: A 2-3 tree implementation to the `dictionaries` library. Contributed
 by Michael T. Richter.
 

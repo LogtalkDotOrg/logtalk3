@@ -1,0 +1,490 @@
+.. index:: single: tzif_protocol
+.. _tzif_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``tzif_protocol``
+=================
+
+Protocol for loading TZif data sets, persisting loaded terms, and answering zone-aware UTC-based offset, DST, and abbreviation queries.
+
+| **Availability:** 
+|    ``logtalk_load(tzif(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-07
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: load/1
+.. _tzif_protocol/0::load/1:
+
+``load/1``
+^^^^^^^^^^
+
+Loads a TZif source given as ``file(Path, ZoneId)``, ``files(Root, Paths)``, ``directory(Root)``, ``stream(Stream, ZoneId)``, ``bytes(Bytes, ZoneId)``, or ``snapshot(File)`` and caches the resulting per-zone ``tzif(...)`` terms, replacing cached entries with matching zone identifiers. Zone identifiers are validated against bundled IANA TZDB 2026a canonical names plus backward-compatible aliases.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``load(Source)``
+| **Mode and number of proofs:**
+|    ``load(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: load/2
+.. _tzif_protocol/0::load/2:
+
+``load/2``
+^^^^^^^^^^
+
+Loads a TZif source given as ``file(Path, ZoneId)``, ``files(Root, Paths)``, ``directory(Root)``, ``stream(Stream, ZoneId)``, ``bytes(Bytes, ZoneId)``, or ``snapshot(File)`` into a list of per-zone ``tzif(...)`` compound terms without caching them. Zone identifiers are validated against bundled IANA TZDB 2026a canonical names plus backward-compatible aliases.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``load(Source,TZifs)``
+| **Mode and number of proofs:**
+|    ``load(+compound,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: cache/1
+.. _tzif_protocol/0::cache/1:
+
+``cache/1``
+^^^^^^^^^^^
+
+Caches one or more loaded per-zone ``tzif(...)`` compound terms, replacing cached entries with matching zone identifiers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cache(TZifs)``
+| **Mode and number of proofs:**
+|    ``cache(+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: save/2
+.. _tzif_protocol/0::save/2:
+
+``save/2``
+^^^^^^^^^^
+
+Saves a list of per-zone ``tzif(...)`` terms to a plain Prolog snapshot file, writing one serialized term per line.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``save(TZifs,File)``
+| **Mode and number of proofs:**
+|    ``save(+list(compound),+atom)`` - ``one``
+
+
+------------
+
+.. index:: save/1
+.. _tzif_protocol/0::save/1:
+
+``save/1``
+^^^^^^^^^^
+
+Saves all cached ``tzif(...)`` terms to a plain Prolog snapshot file.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``save(File)``
+| **Mode and number of proofs:**
+|    ``save(+atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: clear_cache/0
+.. _tzif_protocol/0::clear_cache/0:
+
+``clear_cache/0``
+^^^^^^^^^^^^^^^^^
+
+Clears all cached TZif terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``clear_cache`` - ``one``
+
+
+------------
+
+.. index:: cache_source/1
+.. _tzif_protocol/0::cache_source/1:
+
+``cache_source/1``
+^^^^^^^^^^^^^^^^^^
+
+Enumerates the source terms recorded in the cached TZif terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cache_source(Source)``
+| **Mode and number of proofs:**
+|    ``cache_source(-compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: cached_tzif/1
+.. _tzif_protocol/0::cached_tzif/1:
+
+``cached_tzif/1``
+^^^^^^^^^^^^^^^^^
+
+Enumerates the cached per-zone ``tzif(...)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cached_tzif(TZif)``
+| **Mode and number of proofs:**
+|    ``cached_tzif(-compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: zone/3
+.. _tzif_protocol/0::zone/3:
+
+``zone/3``
+^^^^^^^^^^
+
+Returns the loaded zone identifier and its nested parsed zone-data term from a per-zone ``tzif(...)`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zone(TZif,Zone,ZoneData)``
+| **Mode and number of proofs:**
+|    ``zone(+compound,?atom,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: zones/2
+.. _tzif_protocol/0::zones/2:
+
+``zones/2``
+^^^^^^^^^^^
+
+Returns the list of zone identifiers loaded in a list of per-zone ``tzif(...)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zones(TZifs,Zones)``
+| **Mode and number of proofs:**
+|    ``zones(+list(compound),-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: zones/1
+.. _tzif_protocol/0::zones/1:
+
+``zones/1``
+^^^^^^^^^^^
+
+Returns the list of zone identifiers loaded in the cached ``tzif(...)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zones(Zones)``
+| **Mode and number of proofs:**
+|    ``zones(-list(atom))`` - ``one_or_error``
+
+
+------------
+
+.. index:: time_type/4
+.. _tzif_protocol/0::time_type/4:
+
+``time_type/4``
+^^^^^^^^^^^^^^^
+
+Returns the applicable local time type for a loaded zone and a UTC instant given either as Unix seconds or as a ``date_time/6`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``time_type(TZif,Zone,UTC,TimeType)``
+| **Mode and number of proofs:**
+|    ``time_type(+compound,+atom,+types([integer,compound]),-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: time_type/3
+.. _tzif_protocol/0::time_type/3:
+
+``time_type/3``
+^^^^^^^^^^^^^^^
+
+Returns the applicable local time type for a zone in the cached TZif terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``time_type(Zone,UTC,TimeType)``
+| **Mode and number of proofs:**
+|    ``time_type(+atom,+types([integer,compound]),-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: time_type/2
+.. _tzif_protocol/0::time_type/2:
+
+``time_type/2``
+^^^^^^^^^^^^^^^
+
+Cached single-zone convenience variant of ``time_type/3`` using the cached TZif terms; requires exactly one cached zone.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``time_type(UTC,TimeType)``
+| **Mode and number of proofs:**
+|    ``time_type(+types([integer,compound]),-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: offset/4
+.. _tzif_protocol/0::offset/4:
+
+``offset/4``
+^^^^^^^^^^^^
+
+Returns the UTC offset in seconds for a loaded zone and a UTC instant.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``offset(TZif,Zone,UTC,OffsetSeconds)``
+| **Mode and number of proofs:**
+|    ``offset(+compound,+atom,+types([integer,compound]),-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: offset/3
+.. _tzif_protocol/0::offset/3:
+
+``offset/3``
+^^^^^^^^^^^^
+
+Returns the UTC offset in seconds for a zone in the cached TZif terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``offset(Zone,UTC,OffsetSeconds)``
+| **Mode and number of proofs:**
+|    ``offset(+atom,+types([integer,compound]),-integer)`` - ``one_or_error``
+
+
+------------
+
+.. index:: offset/2
+.. _tzif_protocol/0::offset/2:
+
+``offset/2``
+^^^^^^^^^^^^
+
+Cached single-zone convenience variant of ``offset/3`` using the cached TZif terms; requires exactly one cached zone.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``offset(UTC,OffsetSeconds)``
+| **Mode and number of proofs:**
+|    ``offset(+types([integer,compound]),-integer)`` - ``one_or_error``
+
+
+------------
+
+.. index:: daylight_saving_time/4
+.. _tzif_protocol/0::daylight_saving_time/4:
+
+``daylight_saving_time/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns ``true`` or ``false`` according to whether daylight saving time is active for a loaded zone and a UTC instant.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``daylight_saving_time(TZif,Zone,UTC,IsDST)``
+| **Mode and number of proofs:**
+|    ``daylight_saving_time(+compound,+atom,+types([integer,compound]),-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: daylight_saving_time/3
+.. _tzif_protocol/0::daylight_saving_time/3:
+
+``daylight_saving_time/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns daylight-saving information for a zone in the cached TZif terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``daylight_saving_time(Zone,UTC,IsDST)``
+| **Mode and number of proofs:**
+|    ``daylight_saving_time(+atom,+types([integer,compound]),-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: daylight_saving_time/2
+.. _tzif_protocol/0::daylight_saving_time/2:
+
+``daylight_saving_time/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cached single-zone convenience variant of ``daylight_saving_time/3`` using the cached TZif terms; requires exactly one cached zone.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``daylight_saving_time(UTC,IsDST)``
+| **Mode and number of proofs:**
+|    ``daylight_saving_time(+types([integer,compound]),-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: abbreviation/4
+.. _tzif_protocol/0::abbreviation/4:
+
+``abbreviation/4``
+^^^^^^^^^^^^^^^^^^
+
+Returns the time-zone abbreviation for a loaded zone and a UTC instant.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``abbreviation(TZif,Zone,UTC,Abbreviation)``
+| **Mode and number of proofs:**
+|    ``abbreviation(+compound,+atom,+types([integer,compound]),-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: abbreviation/3
+.. _tzif_protocol/0::abbreviation/3:
+
+``abbreviation/3``
+^^^^^^^^^^^^^^^^^^
+
+Returns the time-zone abbreviation for a zone in the cached TZif terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``abbreviation(Zone,UTC,Abbreviation)``
+| **Mode and number of proofs:**
+|    ``abbreviation(+atom,+types([integer,compound]),-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: abbreviation/2
+.. _tzif_protocol/0::abbreviation/2:
+
+``abbreviation/2``
+^^^^^^^^^^^^^^^^^^
+
+Cached single-zone convenience variant of ``abbreviation/3`` using the cached TZif terms; requires exactly one cached zone.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``abbreviation(UTC,Abbreviation)``
+| **Mode and number of proofs:**
+|    ``abbreviation(+types([integer,compound]),-atom)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

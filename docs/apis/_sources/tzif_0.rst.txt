@@ -1,0 +1,80 @@
+.. index:: single: tzif
+.. _tzif/0:
+
+.. rst-class:: right
+
+**object**
+
+``tzif``
+========
+
+Loader, per-zone cache and snapshot persistence support, and zone-aware UTC lookup predicates for TZif v1/v2/v3 files.
+
+| **Availability:** 
+|    ``logtalk_load(tzif(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-07
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`tzif_protocol <tzif_protocol/0>`
+| **Uses:**
+|    :ref:`date <date/0>`
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`os <os/0>`
+|    :ref:`reader <reader/0>`
+|    :ref:`tzif_zone_ids <tzif_zone_ids/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`tzif_protocol/0::abbreviation/2`  :ref:`tzif_protocol/0::abbreviation/3`  :ref:`tzif_protocol/0::abbreviation/4`  :ref:`tzif_protocol/0::cache/1`  :ref:`tzif_protocol/0::cache_source/1`  :ref:`tzif_protocol/0::cached_tzif/1`  :ref:`tzif_protocol/0::clear_cache/0`  :ref:`tzif_protocol/0::daylight_saving_time/2`  :ref:`tzif_protocol/0::daylight_saving_time/3`  :ref:`tzif_protocol/0::daylight_saving_time/4`  :ref:`tzif_protocol/0::load/1`  :ref:`tzif_protocol/0::load/2`  :ref:`tzif_protocol/0::offset/2`  :ref:`tzif_protocol/0::offset/3`  :ref:`tzif_protocol/0::offset/4`  :ref:`tzif_protocol/0::save/1`  :ref:`tzif_protocol/0::save/2`  :ref:`tzif_protocol/0::time_type/2`  :ref:`tzif_protocol/0::time_type/3`  :ref:`tzif_protocol/0::time_type/4`  :ref:`tzif_protocol/0::zone/3`  :ref:`tzif_protocol/0::zones/1`  :ref:`tzif_protocol/0::zones/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: cached_tzif_/2
+.. _tzif/0::cached_tzif_/2:
+
+``cached_tzif_/2``
+^^^^^^^^^^^^^^^^^^
+
+Table holding the currently cached TZif terms keyed by zone identifier.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``cached_tzif_(Zone,TZif)``
+| **Mode and number of proofs:**
+|    ``cached_tzif_(?atom,?compound)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

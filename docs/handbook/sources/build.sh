@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 5, 2026
+##   Last updated on April 7, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -175,8 +175,9 @@ sed '1,19d' ../../../library/timeout/NOTES.md | pandoc -f gfm -t rst -o librarie
 sed '1,19d' ../../../library/toon/NOTES.md | pandoc -f gfm -t rst -o libraries/toon.rst
 sed '1,19d' ../../../library/tsv/NOTES.md | pandoc -f gfm -t rst -o libraries/tsv.rst
 sed '1,19d' ../../../library/types/NOTES.md | pandoc -f gfm -t rst -o libraries/types.rst
-cat ../../../library/unicode_data/README.md | pandoc -f gfm -t rst -o libraries/unicode_data.rst
+sed '1,19d' ../../../library/tzif/NOTES.md | pandoc -f gfm -t rst -o libraries/tzif.rst
 sed '1,19d' ../../../library/ulid/NOTES.md | pandoc -f gfm -t rst -o libraries/ulid.rst
+cat ../../../library/unicode_data/README.md | pandoc -f gfm -t rst -o libraries/unicode_data.rst
 sed '1,19d' ../../../library/union_find/NOTES.md | pandoc -f gfm -t rst -o libraries/union_find.rst
 sed '1,19d' ../../../library/url/NOTES.md | pandoc -f gfm -t rst -o libraries/url.rst
 sed '1,19d' ../../../library/uuid/NOTES.md | pandoc -f gfm -t rst -o libraries/uuid.rst

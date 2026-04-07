@@ -121,6 +121,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`comparingp <comparingp/0::(>=)/2>`
 
+``abbreviation/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::abbreviation/2>`
+
+``abbreviation/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::abbreviation/3>`
+
+``abbreviation/4``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::abbreviation/4>`
+
 ``abort_transaction/3``
 -----------------------
 
@@ -1435,6 +1465,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`character_set_protocol <character_set_protocol/0::bytes_to_codes/2>`
 
+``cache/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::cache/1>`
+
+``cache_source/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::cache_source/1>`
+
+``cached_tzif/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::cached_tzif/1>`
+
 ``calendar_month/3``
 --------------------
 
@@ -1908,6 +1968,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`datalog_protocol <datalog_protocol/0::clear/0>`
+
+``clear_cache/0``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::clear_cache/0>`
 
 ``clear_dut1_override/0``
 -------------------------
@@ -2828,6 +2898,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`datep <datep/0::day_of_year/2>`
+
+``daylight_saving_time/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::daylight_saving_time/2>`
+
+``daylight_saving_time/3``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::daylight_saving_time/3>`
+
+``daylight_saving_time/4``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::daylight_saving_time/4>`
 
 ``days_in_month/3``
 -------------------
@@ -8122,6 +8222,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`process <process/0::kill/2>`
 
+``known_zone_id/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_zone_ids <tzif_zone_ids/0::known_zone_id/1>`
+
 ``kurtosis/2``
 --------------
 
@@ -8711,6 +8821,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`redis <redis/0::llen/3>`
+
+``load/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::load/1>`
+
+``load/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::load/2>`
 
 ``load_config/1``
 -----------------
@@ -10882,6 +11012,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`validation <validation/0::of_valid/2>`
 
+``offset/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::offset/2>`
+
 ``offset/3``
 ------------
 
@@ -10891,6 +11031,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`time_scales_protocol <time_scales_protocol/0::offset/3>`
+* :ref:`tzif_protocol <tzif_protocol/0::offset/3>`
+
+``offset/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::offset/4>`
 
 ``one_or_more//0``
 ------------------
@@ -13969,6 +14120,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`packs <packs/0::save/1>`
+* :ref:`tzif_protocol <tzif_protocol/0::save/1>`
 * :ref:`wrapper <wrapper/0::save/1>`
 
 ``save/2``
@@ -13980,6 +14132,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`packs <packs/0::save/2>`
+* :ref:`tzif_protocol <tzif_protocol/0::save/2>`
 
 ``save_dut1_entries/1``
 -----------------------
@@ -15866,6 +16019,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::time_stamp/1>`
 
+``time_type/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::time_type/2>`
+
+``time_type/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::time_type/3>`
+
+``time_type/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::time_type/4>`
+
 ``timeout/1``
 -------------
 
@@ -16281,6 +16464,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`redis <redis/0::type/3>`
+
+``tzdb_version/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_zone_ids <tzif_zone_ids/0::tzdb_version/1>`
 
 ``unexpected/1``
 ----------------
@@ -17455,6 +17648,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`zlist <zlist/0::zip_at_index/4>`
+
+``zone/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::zone/3>`
+
+``zone_id_kind/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_zone_ids <tzif_zone_ids/0::zone_id_kind/2>`
+
+``zones/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::zones/1>`
+
+``zones/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tzif_protocol <tzif_protocol/0::zones/2>`
 
 ``zrange/5``
 ------------
