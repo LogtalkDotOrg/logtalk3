@@ -15,6 +15,8 @@ It also provides portable predicates for date-time handling, including:
   ``local_to_utc/3``)
 - calendar utilities (``day_of_year/2``, ``week_of_year_iso/2``,
   ``weekday/2``)
+- reverse and positional calendar utilities (``day_of_year_date/3``,
+  ``month_weekday_date/5``)
 - date-time normalization and validation (``normalize_data_time/2``,
   ``valid_data_time/1-2``)
 

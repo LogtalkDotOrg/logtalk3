@@ -104,6 +104,9 @@ files.
 a file-system path into file URL components (handles Windows drive-letter and
 UNC paths).
 
+* ADDED: Predicates `day_of_year_date/3` and `month_weekday_date` to the
+`dates` library.
+
 * IMPROVED: The implementation `os::shell/1-2` library predicates for SICStus
 Prolog to avoid quoting issues on POSIX systems.
 

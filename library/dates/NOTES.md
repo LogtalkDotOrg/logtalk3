@@ -29,6 +29,7 @@ It also provides portable predicates for date-time handling, including:
 - date-time arithmetic with durations (`add_duration/3`, `subtract_duration/3`, `duration_between/3`)
 - UTC/local conversion using explicit offsets (`utc_to_local/3`, `local_to_utc/3`)
 - calendar utilities (`day_of_year/2`, `week_of_year_iso/2`, `weekday/2`)
+- reverse and positional calendar utilities (`day_of_year_date/3`, `month_weekday_date/5`)
 - date-time normalization and validation (`normalize_data_time/2`, `valid_data_time/1-2`)
 
 Date-time values are represented using the `date_time/6` compound term:

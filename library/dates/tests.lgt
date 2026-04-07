@@ -62,6 +62,21 @@
 	test(date_day_of_year_2_01, true(DayOfYear == 60)) :-
 		date::day_of_year(date(2024, 2, 29), DayOfYear).
 
+	test(date_day_of_year_date_3_01, true(Date == date(2024, 2, 29))) :-
+		date::day_of_year_date(2024, 60, Date).
+
+	test(date_day_of_year_date_3_02, true(Date == date(2023, 12, 31))) :-
+		date::day_of_year_date(2023, 365, Date).
+
+	test(date_day_of_year_date_3_03, false) :-
+		date::day_of_year_date(2023, 366, _).
+
+	test(date_month_weekday_date_5_01, true(Date == date(2024, 3, 10))) :-
+		date::month_weekday_date(2024, 3, 2, 7, Date).
+
+	test(date_month_weekday_date_5_02, true(Date == date(2024, 10, 27))) :-
+		date::month_weekday_date(2024, 10, 5, 7, Date).
+
 	test(date_name_of_day_3_01, true(Name-Short == 'Monday'-'Mon')) :-
 		date::name_of_day(1, Name, Short).
 

@@ -145,6 +145,31 @@
 		date_julian_day(Year, 1, 1, FirstJulianDay),
 		DayOfYear is JulianDay - FirstJulianDay + 1.
 
+	day_of_year_date(Year, DayOfYear, date(Year, Month, Day)) :-
+		integer(Year),
+		integer(DayOfYear),
+		( leap_year(Year) -> MaxDay is 366 ; MaxDay is 365 ),
+		DayOfYear >= 1,
+		DayOfYear =< MaxDay,
+		date_julian_day(Year, 1, 1, FirstJulianDay),
+		JulianDay is FirstJulianDay + DayOfYear - 1,
+		julian_day_date(JulianDay, Year, Month, Day).
+
+	month_weekday_date(Year, Month, Week, Weekday, date(Year, Month, Day)) :-
+		integer(Year),
+		integer(Month), Month >= 1, Month =< 12,
+		integer(Week), Week >= 1, Week =< 5,
+		integer(Weekday), Weekday >= 1, Weekday =< 7,
+		weekday(date(Year, Month, 1), FirstWeekday),
+		Delta is (Weekday - FirstWeekday + 7) mod 7,
+		FirstDay is 1 + Delta,
+		days_in_month(Month, Year, Length),
+		( 	Week =:= 5 ->
+			last_month_weekday(FirstDay, Length, Day)
+		;	Day is FirstDay + (Week - 1) * 7,
+			Day =< Length
+		).
+
 	week_of_year_iso(DateLike, week(WeekNumber, WeekYear)) :-
 		date_like(DateLike, Year, Month, Day),
 		date_julian_day(Year, Month, Day, JulianDay),
@@ -166,6 +191,13 @@
 		date_like(DateLike, Year, Month, Day),
 		date_julian_day(Year, Month, Day, JulianDay),
 		Weekday is (JulianDay mod 7) + 1.
+
+	last_month_weekday(Day0, Length, Day) :-
+		NextDay is Day0 + 7,
+		( 	NextDay =< Length ->
+			last_month_weekday(NextDay, Length, Day)
+		;	Day = Day0
+		).
 
 	normalize_date_time(date_time(Year0, Month0, Day0, Hours0, Minutes0, Seconds0), date_time(Year, Month, Day, Hours, Minutes, Seconds)) :-
 		integer(Year0),

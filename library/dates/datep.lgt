@@ -127,6 +127,20 @@
 		argnames is ['DateLike', 'DayOfYear']
 	]).
 
+	:- public(day_of_year_date/3).
+	:- mode(day_of_year_date(+integer, +integer, -compound), zero_or_one).
+	:- info(day_of_year_date/3, [
+		comment is 'Computes the calendar date corresponding to a year and day of year (1-366) as ``date(Year,Month,Day)``.',
+		argnames is ['Year', 'DayOfYear', 'Date']
+	]).
+
+	:- public(month_weekday_date/5).
+	:- mode(month_weekday_date(+integer, +integer, +integer, +integer, -compound), zero_or_one).
+	:- info(month_weekday_date/5, [
+		comment is 'Computes the calendar date for the nth or last weekday in a month as ``date(Year,Month,Day)``. Week values 1-4 select the nth weekday and week value 5 selects the last one. Weekday uses ISO numbering (Monday=1, ..., Sunday=7).',
+		argnames is ['Year', 'Month', 'Week', 'Weekday', 'Date']
+	]).
+
 	:- public(week_of_year_iso/2).
 	:- mode(week_of_year_iso(+compound, ?compound), zero_or_one).
 	:- info(week_of_year_iso/2, [
