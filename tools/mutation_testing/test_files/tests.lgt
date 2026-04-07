@@ -13,12 +13,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-30,
+		date is 2026-04-07,
 		comment is 'Unit tests for the "mutation_testing" tool.'
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2
+		length/2, member/2, memberchk/2
 	]).
 
 	cover(mutation_testing).
