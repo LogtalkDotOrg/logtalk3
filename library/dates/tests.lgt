@@ -101,11 +101,4 @@
 
 	test(date_valid_date_time_1_02, false) :-
 		date::valid_date_time('date_time'(2024, 2, 30, 23, 59, 59)).
-
-	test(date_valid_date_time_2_01, true) :-
-		date::valid_date_time('date_time'(2024, 2, 29, 23, 60, 70), relaxed).
-
-	test(date_valid_date_time_2_02, false) :-
-		date::valid_date_time('date_time'(2024, 2, 29, 23, 60, 70), strict).
-
 :- end_object.

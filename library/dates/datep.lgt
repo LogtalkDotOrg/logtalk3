@@ -169,11 +169,4 @@
 		argnames is ['DateTime']
 	]).
 
-	:- public(valid_date_time/2).
-	:- mode(valid_date_time(@compound, +atom), zero_or_one).
-	:- info(valid_date_time/2, [
-		comment is 'Validates a datetime term in ``strict`` or ``relaxed`` mode.',
-		argnames is ['DateTime', 'Mode']
-	]).
-
 :- end_protocol.

@@ -23,9 +23,9 @@
 	implements(time_scales_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-04-07,
 		comment is 'Time scale conversions for UTC, TAI, TT, UT1, TDB, GPS, GST, TCG, and TCB using bundled and optional override data.',
 		remarks is [
 			'Supported UTC range' - 'From 1972-01-01T00:00:00Z onwards.',
@@ -80,7 +80,6 @@
 		time_scales_data::save_dut1_entries(File).
 
 	utc_date_time_to_instant(UTCDateTime, instant(utc, UnixSeconds, fraction(0, 1))) :-
-		date::valid_date_time(UTCDateTime, strict),
 		date::date_time_to_unix(UTCDateTime, UnixSeconds),
 		UnixSeconds >= 63072000.
 

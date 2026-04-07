@@ -60,6 +60,8 @@ property.
 Library
 -------
 
+* REMOVED: The `dates` library `valid_date_time/2` predicate.
+
 * REMOVED: The `linda` library `shutdown_server/0` and `close_client/0`
 predicates.
 

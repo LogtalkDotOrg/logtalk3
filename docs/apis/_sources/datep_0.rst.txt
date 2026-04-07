@@ -418,25 +418,6 @@ True iff a datetime term is valid in strict mode.
 
 ------------
 
-.. index:: valid_date_time/2
-.. _datep/0::valid_date_time/2:
-
-``valid_date_time/2``
-^^^^^^^^^^^^^^^^^^^^^
-
-Validates a datetime term in ``strict`` or ``relaxed`` mode.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``valid_date_time(DateTime,Mode)``
-| **Mode and number of proofs:**
-|    ``valid_date_time(@compound,+atom)`` - ``zero_or_one``
-
-
-------------
-
 Protected predicates
 --------------------
 

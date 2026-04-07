@@ -85,7 +85,7 @@
 		Day >= 1, Day =< Days.
 
 	date_time_to_unix(DateTime, UnixTime) :-
-		valid_date_time(DateTime, strict),
+		valid_date_time(DateTime),
 		date_time_julian_day(DateTime, JulianDay),
 		epoch_julian_day(EpochJulianDay),
 		extract_time(DateTime, Hours, Minutes, Seconds),
@@ -216,20 +216,9 @@
 		Minutes is (SecondsOfDay mod 3600) // 60,
 		Seconds is SecondsOfDay mod 60.
 
-	valid_date_time(DateTime) :-
-		valid_date_time(DateTime, strict).
-
-	valid_date_time(date_time(Year, Month, Day, Hours, Minutes, Seconds), strict) :-
-		!,
+	valid_date_time(date_time(Year, Month, Day, Hours, Minutes, Seconds)) :-
 		valid(Year, Month, Day),
 		valid_time(Hours, Minutes, Seconds).
-	valid_date_time(date_time(Year, Month, Day, Hours, Minutes, Seconds), relaxed) :-
-		integer(Year),
-		integer(Month),
-		integer(Day),
-		integer(Hours),
-		integer(Minutes),
-		integer(Seconds).
 
 	epoch_julian_day(2440588).
 
