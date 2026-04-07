@@ -24,7 +24,7 @@
 	implements(datep)).
 
 	:- info([
-		version is 1:3:1,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-07,
 		comment is 'Date predicates.'
@@ -39,13 +39,13 @@
 		;	0 =:= mod(Year, 400)
 		).
 
-	name_of_day(1, 'Sunday', 'Sun').
-	name_of_day(2, 'Monday', 'Mon').
-	name_of_day(3, 'Tuesday', 'Tue').
-	name_of_day(4, 'Wednesday', 'Wed').
-	name_of_day(5, 'Thursday', 'Thu').
-	name_of_day(6, 'Friday', 'Fri').
-	name_of_day(7, 'Saturday', 'Sat').
+	name_of_day(1, 'Monday', 'Mon').
+	name_of_day(2, 'Tuesday', 'Tue').
+	name_of_day(3, 'Wednesday', 'Wed').
+	name_of_day(4, 'Thursday', 'Thu').
+	name_of_day(5, 'Friday', 'Fri').
+	name_of_day(6, 'Saturday', 'Sat').
+	name_of_day(7, 'Sunday', 'Sun').
 
 	name_of_month( 1, 'January', 'Jan').
 	name_of_month( 2, 'February', 'Feb').

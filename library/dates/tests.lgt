@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-25,
+		date is 2026-04-07,
 		comment is 'Unit tests for the "dates" library.'
 	]).
 
@@ -62,8 +62,18 @@
 	test(date_day_of_year_2_01, true(DayOfYear == 60)) :-
 		date::day_of_year(date(2024, 2, 29), DayOfYear).
 
+	test(date_name_of_day_3_01, true(Name-Short == 'Monday'-'Mon')) :-
+		date::name_of_day(1, Name, Short).
+
+	test(date_name_of_day_3_02, true(Name-Short == 'Sunday'-'Sun')) :-
+		date::name_of_day(7, Name, Short).
+
 	test(date_weekday_2_01, true(Weekday == 1)) :-
 		date::weekday(date(2024, 10, 14), Weekday).
+
+	test(date_weekday_name_consistency_2_01, true(Name-Short == 'Monday'-'Mon')) :-
+		date::weekday(date(2024, 10, 14), Weekday),
+		date::name_of_day(Weekday, Name, Short).
 
 	test(date_week_of_year_iso_2_01, true(Week == week(53, 2004))) :-
 		date::week_of_year_iso(date(2005, 1, 1), Week).

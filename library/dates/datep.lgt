@@ -22,9 +22,9 @@
 :- protocol(datep).
 
 	:- info([
-		version is 1:2:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-25,
+		date is 2026-04-07,
 		comment is 'Date protocol.',
 		see_also is [date, timep]
 	]).
@@ -46,7 +46,7 @@
 	:- public(name_of_day/3).
 	:- mode(name_of_day(?integer, ?atom, ?atom), zero_or_more).
 	:- info(name_of_day/3, [
-		comment is 'Name and short name of day.',
+		comment is 'Name and short name of day using ISO weekday numbering (Monday=1, ..., Sunday=7).',
 		argnames is ['Index', 'Name', 'Short']
 	]).
 
