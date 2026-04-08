@@ -7,8 +7,8 @@ The ``date`` object implements some useful calendar date predicates.
 
 It also provides portable predicates for date-time handling, including:
 
-- Unix epoch conversions (``data_time_to_unix/2``,
-  ``unix_to_data_time/2``)
+- Unix epoch conversions (``date_time_to_unix/2``,
+  ``unix_to_date_time/2``)
 - date-time arithmetic with durations (``add_duration/3``,
   ``subtract_duration/3``, ``duration_between/3``)
 - UTC/local conversion using explicit offsets (``utc_to_local/3``,
@@ -17,8 +17,21 @@ It also provides portable predicates for date-time handling, including:
   ``weekday/2``)
 - reverse and positional calendar utilities (``day_of_year_date/3``,
   ``month_weekday_date/5``)
-- date-time normalization and validation (``normalize_data_time/2``,
-  ``valid_data_time/1-2``)
+- date-time normalization and validation (``normalize_date_time/2``,
+  ``valid_date_time/1-2``)
+
+The duration predicates accept two duration representations:
+
+- ``duration(Days, Hours, Minutes, Seconds)`` — a fixed-length duration
+  converted to seconds
+- ``duration(Years, Months, Days, Hours, Minutes, Seconds)`` — a
+  calendar-aware period where the year and month delta is applied first
+  using calendar arithmetic, clamping the day to the last valid day of
+  the resulting month when necessary (e.g. adding one month to January
+  31 gives February 28 or 29 depending on the year), with the remaining
+  day and time delta applied via fixed-length arithmetic. The
+  ``duration_between/3`` predicate returns this form when called with a
+  6-arity skeleton such as ``duration(Yr, Mo, Da, Hr, Mi, Se)``.
 
 Date-time values are represented using the ``date_time/6`` compound
 term:

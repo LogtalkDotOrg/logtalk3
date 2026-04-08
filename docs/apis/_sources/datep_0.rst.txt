@@ -14,8 +14,8 @@ Date protocol.
 |    ``logtalk_load(dates(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:0:0
-| **Date:** 2026-04-07
+| **Version:** 2:1:0
+| **Date:** 2026-04-08
 
 | **Compilation flags:**
 |    ``static``
@@ -196,7 +196,7 @@ Converts Unix epoch seconds to a UTC date-time term ``date_time(Year,Month,Day,H
 ``add_duration/3``
 ^^^^^^^^^^^^^^^^^^
 
-Adds a duration to a datetime. Duration can be integer seconds or ``duration(Days,Hours,Minutes,Seconds)``.
+Adds a duration to a datetime. Duration can be integer seconds, ``duration(Days,Hours,Minutes,Seconds)``, or a calendar-aware ``duration(Years,Months,Days,Hours,Minutes,Seconds)``. For the 6-arity form, the year and month delta is applied first using calendar arithmetic, clamping the day to the last valid day of the resulting month when necessary (e.g. January 31 plus one month gives February 28 or 29), and the remaining day and time delta is then applied via fixed-length arithmetic.
 
 | **Compilation flags:**
 |    ``static``
@@ -215,7 +215,7 @@ Adds a duration to a datetime. Duration can be integer seconds or ``duration(Day
 ``subtract_duration/3``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Subtracts a duration from a datetime. Duration can be integer seconds or ``duration(Days,Hours,Minutes,Seconds)``.
+Subtracts a duration from a datetime. Duration can be integer seconds, ``duration(Days,Hours,Minutes,Seconds)``, or a calendar-aware ``duration(Years,Months,Days,Hours,Minutes,Seconds)``. For the 6-arity form, the year and month delta is subtracted first using calendar arithmetic with end-of-month day clamping, and the remaining day and time delta is then subtracted via fixed-length arithmetic.
 
 | **Compilation flags:**
 |    ``static``
@@ -234,7 +234,7 @@ Subtracts a duration from a datetime. Duration can be integer seconds or ``durat
 ``duration_between/3``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Computes the difference between two datetimes as integer seconds or as ``duration(Days,Hours,Minutes,Seconds)``.
+Computes the difference between two datetimes as integer seconds, as ``duration(Days,Hours,Minutes,Seconds)``, or as a calendar-aware ``duration(Years,Months,Days,Hours,Minutes,Seconds)``. For the 6-arity form, the year and month components count the largest whole number of calendar months between the two datetimes (consistent with the day-clamping semantics of ``add_duration/3``), and the remaining days and time fields are the exact residual. For backward intervals all fields are negative.
 
 | **Compilation flags:**
 |    ``static``

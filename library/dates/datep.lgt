@@ -22,9 +22,9 @@
 :- protocol(datep).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-07,
+		date is 2026-04-08,
 		comment is 'Date protocol.',
 		see_also is [date, timep]
 	]).
@@ -88,21 +88,21 @@
 	:- public(add_duration/3).
 	:- mode(add_duration(+compound, +nonvar, -compound), zero_or_one).
 	:- info(add_duration/3, [
-		comment is 'Adds a duration to a datetime. Duration can be integer seconds or ``duration(Days,Hours,Minutes,Seconds)``.',
+		comment is 'Adds a duration to a datetime. Duration can be integer seconds, ``duration(Days,Hours,Minutes,Seconds)``, or a calendar-aware ``duration(Years,Months,Days,Hours,Minutes,Seconds)``. For the 6-arity form, the year and month delta is applied first using calendar arithmetic, clamping the day to the last valid day of the resulting month when necessary (e.g. January 31 plus one month gives February 28 or 29), and the remaining day and time delta is then applied via fixed-length arithmetic.',
 		argnames is ['DateTime', 'Duration', 'ResultDateTime']
 	]).
 
 	:- public(subtract_duration/3).
 	:- mode(subtract_duration(+compound, +nonvar, -compound), zero_or_one).
 	:- info(subtract_duration/3, [
-		comment is 'Subtracts a duration from a datetime. Duration can be integer seconds or ``duration(Days,Hours,Minutes,Seconds)``.',
+		comment is 'Subtracts a duration from a datetime. Duration can be integer seconds, ``duration(Days,Hours,Minutes,Seconds)``, or a calendar-aware ``duration(Years,Months,Days,Hours,Minutes,Seconds)``. For the 6-arity form, the year and month delta is subtracted first using calendar arithmetic with end-of-month day clamping, and the remaining day and time delta is then subtracted via fixed-length arithmetic.',
 		argnames is ['DateTime', 'Duration', 'ResultDateTime']
 	]).
 
 	:- public(duration_between/3).
 	:- mode(duration_between(+compound, +compound, ?term), zero_or_one).
 	:- info(duration_between/3, [
-		comment is 'Computes the difference between two datetimes as integer seconds or as ``duration(Days,Hours,Minutes,Seconds)``.',
+		comment is 'Computes the difference between two datetimes as integer seconds, as ``duration(Days,Hours,Minutes,Seconds)``, or as a calendar-aware ``duration(Years,Months,Days,Hours,Minutes,Seconds)``. For the 6-arity form, the year and month components count the largest whole number of calendar months between the two datetimes (consistent with the day-clamping semantics of ``add_duration/3``), and the remaining days and time fields are the exact residual. For backward intervals all fields are negative.',
 		argnames is ['StartDateTime', 'EndDateTime', 'Duration']
 	]).
 

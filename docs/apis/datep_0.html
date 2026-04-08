@@ -262,8 +262,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-07</div>
+<div class="line"><strong>Version:</strong> 2:1:0</div>
+<div class="line"><strong>Date:</strong> 2026-04-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -492,7 +492,7 @@
 </section>
 <section id="add-duration-3">
 <span id="datep-0-add-duration-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">add_duration/3</span></code></a><a class="headerlink" href="#add-duration-3" title="Link to this heading"></a></h3>
-<p>Adds a duration to a datetime. Duration can be integer seconds or <code class="docutils literal notranslate"><span class="pre">duration(Days,Hours,Minutes,Seconds)</span></code>.</p>
+<p>Adds a duration to a datetime. Duration can be integer seconds, <code class="docutils literal notranslate"><span class="pre">duration(Days,Hours,Minutes,Seconds)</span></code>, or a calendar-aware <code class="docutils literal notranslate"><span class="pre">duration(Years,Months,Days,Hours,Minutes,Seconds)</span></code>. For the 6-arity form, the year and month delta is applied first using calendar arithmetic, clamping the day to the last valid day of the resulting month when necessary (e.g. January 31 plus one month gives February 28 or 29), and the remaining day and time delta is then applied via fixed-length arithmetic.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -513,7 +513,7 @@
 </section>
 <section id="subtract-duration-3">
 <span id="datep-0-subtract-duration-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">subtract_duration/3</span></code></a><a class="headerlink" href="#subtract-duration-3" title="Link to this heading"></a></h3>
-<p>Subtracts a duration from a datetime. Duration can be integer seconds or <code class="docutils literal notranslate"><span class="pre">duration(Days,Hours,Minutes,Seconds)</span></code>.</p>
+<p>Subtracts a duration from a datetime. Duration can be integer seconds, <code class="docutils literal notranslate"><span class="pre">duration(Days,Hours,Minutes,Seconds)</span></code>, or a calendar-aware <code class="docutils literal notranslate"><span class="pre">duration(Years,Months,Days,Hours,Minutes,Seconds)</span></code>. For the 6-arity form, the year and month delta is subtracted first using calendar arithmetic with end-of-month day clamping, and the remaining day and time delta is then subtracted via fixed-length arithmetic.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -534,7 +534,7 @@
 </section>
 <section id="duration-between-3">
 <span id="datep-0-duration-between-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">duration_between/3</span></code></a><a class="headerlink" href="#duration-between-3" title="Link to this heading"></a></h3>
-<p>Computes the difference between two datetimes as integer seconds or as <code class="docutils literal notranslate"><span class="pre">duration(Days,Hours,Minutes,Seconds)</span></code>.</p>
+<p>Computes the difference between two datetimes as integer seconds, as <code class="docutils literal notranslate"><span class="pre">duration(Days,Hours,Minutes,Seconds)</span></code>, or as a calendar-aware <code class="docutils literal notranslate"><span class="pre">duration(Years,Months,Days,Hours,Minutes,Seconds)</span></code>. For the 6-arity form, the year and month components count the largest whole number of calendar months between the two datetimes (consistent with the day-clamping semantics of <code class="docutils literal notranslate"><span class="pre">add_duration/3</span></code>), and the remaining days and time fields are the exact residual. For backward intervals all fields are negative.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

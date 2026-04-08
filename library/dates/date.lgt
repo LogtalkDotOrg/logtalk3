@@ -24,9 +24,9 @@
 	implements(datep)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-07,
+		date is 2026-04-08,
 		comment is 'Date predicates.'
 	]).
 
@@ -102,11 +102,52 @@
 		Minutes is (SecondsOfDay mod 3600) // 60,
 		Seconds is SecondsOfDay mod 60.
 
+	add_duration(date_time(Year, Month, Day, Hours, Minutes, Seconds),
+			 duration(DeltaYears, DeltaMonths, DeltaDays, DeltaHours, DeltaMinutes, DeltaSeconds),
+			 ResultDateTime) :-
+		!,
+		integer(DeltaYears),
+		integer(DeltaMonths),
+		integer(DeltaDays),
+		integer(DeltaHours),
+		integer(DeltaMinutes),
+		integer(DeltaSeconds),
+		valid_date_time(date_time(Year, Month, Day, Hours, Minutes, Seconds)),
+		% Step 1: apply the year/month delta using calendar arithmetic with day clamping
+		year_month_shift(Year, Month, DeltaYears, DeltaMonths, NewYear, NewMonth),
+		days_in_month(NewMonth, NewYear, MaxDay),
+		ClampedDay is min(Day, MaxDay),
+		% Step 2: apply the fixed part (days + time) via Unix seconds arithmetic
+		date_time_to_unix(date_time(NewYear, NewMonth, ClampedDay, Hours, Minutes, Seconds), UnixTime0),
+		DeltaSec is DeltaDays * 86400 + DeltaHours * 3600 + DeltaMinutes * 60 + DeltaSeconds,
+		ResultUnixTime is UnixTime0 + DeltaSec,
+		unix_to_date_time(ResultUnixTime, ResultDateTime).
+
 	add_duration(DateTime, Duration, ResultDateTime) :-
 		date_time_to_unix(DateTime, UnixTime),
 		duration_seconds(Duration, DeltaSeconds),
 		ResultUnixTime is UnixTime + DeltaSeconds,
 		unix_to_date_time(ResultUnixTime, ResultDateTime).
+
+	subtract_duration(date_time(Year, Month, Day, Hours, Minutes, Seconds),
+				  duration(DeltaYears, DeltaMonths, DeltaDays, DeltaHours, DeltaMinutes, DeltaSeconds),
+				  ResultDateTime) :-
+		!,
+		integer(DeltaYears),
+		integer(DeltaMonths),
+		integer(DeltaDays),
+		integer(DeltaHours),
+		integer(DeltaMinutes),
+		integer(DeltaSeconds),
+		NegYears   is -DeltaYears,
+		NegMonths  is -DeltaMonths,
+		NegDays    is -DeltaDays,
+		NegHours   is -DeltaHours,
+		NegMinutes is -DeltaMinutes,
+		NegSeconds is -DeltaSeconds,
+		add_duration(date_time(Year, Month, Day, Hours, Minutes, Seconds),
+				 duration(NegYears, NegMonths, NegDays, NegHours, NegMinutes, NegSeconds),
+				 ResultDateTime).
 
 	subtract_duration(DateTime, Duration, ResultDateTime) :-
 		date_time_to_unix(DateTime, UnixTime),
@@ -124,6 +165,8 @@
 			Duration =:= DeltaSeconds
 		;   Duration = duration(_, _, _, _) ->
 			seconds_duration(DeltaSeconds, Duration)
+		;   Duration = duration(_, _, _, _, _, _) ->
+			calendar_duration_between(StartDateTime, EndDateTime, Duration)
 		;   fail
 		).
 
@@ -266,6 +309,7 @@
 		(Year < 1 -> Year0 is Year - 1; Year0 = Year).
 
 	duration_seconds(duration(Days, Hours, Minutes, Seconds), TotalSeconds) :-
+		!,
 		integer(Days),
 		integer(Hours),
 		integer(Minutes),
@@ -290,11 +334,12 @@
 		Minutes is Sign * Minutes0,
 		RemainingSeconds is Sign * RemainingSeconds0.
 
-	offset_seconds('Z', 0).
+	offset_seconds('Z', 0) :-
+		!.
 	offset_seconds(Offset, OffsetSeconds) :-
 		atom(Offset),
 		atom_chars(Offset, [Sign, H1, H2, ':', M1, M2]),
-		(Sign == ('+'); Sign == ('-')),
+		once((Sign == ('+'); Sign == ('-'))),
 		digits_value(H1, H2, Hours),
 		digits_value(M1, M2, Minutes),
 		Hours =< 23,
@@ -311,5 +356,53 @@
 		Code1 >= 0'0, Code1 =< 0'9,
 		Code2 >= 0'0, Code2 =< 0'9,
 		Value is (Code1 - 0'0) * 10 + (Code2 - 0'0).
+
+	% year_month_shift(+Year, +Month, +DeltaYears, +DeltaMonths, -NewYear, -NewMonth)
+	% Advances Year/Month by DeltaYears years and DeltaMonths months using floored
+	% integer division so that negative month indices map correctly to prior years.
+	year_month_shift(Year, Month, DeltaYears, DeltaMonths, NewYear, NewMonth) :-
+		MonthIndex is (Year - 1) * 12 + (Month - 1) + DeltaYears * 12 + DeltaMonths,
+		NewYear is MonthIndex div 12 + 1,
+		NewMonth is MonthIndex mod 12 + 1.
+
+	% apply_months_to_datetime(+DateTime, +DeltaMonths, -NewDateTime)
+	% Applies DeltaMonths calendar months to DateTime, clamping the day to the
+	% last valid day of the resulting month if necessary.
+	apply_months_to_datetime(date_time(Year, Month, Day, H, Mi, Se), DeltaMonths, date_time(NewYear, NewMonth, NewDay, H, Mi, Se)) :-
+		year_month_shift(Year, Month, 0, DeltaMonths, NewYear, NewMonth),
+		days_in_month(NewMonth, NewYear, MaxDay),
+		NewDay is min(Day, MaxDay).
+
+	% calendar_duration_between(+StartDateTime, +EndDateTime, -Duration)
+	% Decomposes the interval into whole calendar months plus an exact day/time residual.
+	% For backward intervals all fields are negated.
+	calendar_duration_between(StartDateTime, EndDateTime, duration(Years, Months, Days, Hours, Minutes, Seconds)) :-
+		date_time_to_unix(StartDateTime, StartUnix),
+		date_time_to_unix(EndDateTime, EndUnix),
+		(   StartUnix =< EndUnix ->
+			StartDateTime = date_time(SYear, SMonth, _, _, _, _),
+			EndDateTime   = date_time(EYear, EMonth, _, _, _, _),
+			RawDeltaMonths is (EYear - SYear) * 12 + (EMonth - SMonth),
+			apply_months_to_datetime(StartDateTime, RawDeltaMonths, Intermediate0),
+			date_time_to_unix(Intermediate0, T0),
+			(   T0 > EndUnix ->
+				DeltaMonths is RawDeltaMonths - 1
+			;   DeltaMonths = RawDeltaMonths
+			),
+			apply_months_to_datetime(StartDateTime, DeltaMonths, Intermediate),
+			Years  is DeltaMonths // 12,
+			Months is DeltaMonths mod 12,
+			date_time_to_unix(Intermediate, IntUnix),
+			RemainSecs is EndUnix - IntUnix,
+			seconds_duration(RemainSecs, duration(Days, Hours, Minutes, Seconds))
+		;   % Backward interval: compute as forward and negate all fields
+			calendar_duration_between(EndDateTime, StartDateTime, duration(Y0, Mo0, D0, H0, Mi0, Se0)),
+			Years   is -Y0,
+			Months  is -Mo0,
+			Days    is -D0,
+			Hours   is -H0,
+			Minutes is -Mi0,
+			Seconds is -Se0
+		).
 
 :- end_object.

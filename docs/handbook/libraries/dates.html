@@ -227,8 +227,8 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">date</span></code> object implements some useful calendar date predicates.</p>
 <p>It also provides portable predicates for date-time handling, including:</p>
 <ul class="simple">
-<li><p>Unix epoch conversions (<code class="docutils literal notranslate"><span class="pre">data_time_to_unix/2</span></code>,
-<code class="docutils literal notranslate"><span class="pre">unix_to_data_time/2</span></code>)</p></li>
+<li><p>Unix epoch conversions (<code class="docutils literal notranslate"><span class="pre">date_time_to_unix/2</span></code>,
+<code class="docutils literal notranslate"><span class="pre">unix_to_date_time/2</span></code>)</p></li>
 <li><p>date-time arithmetic with durations (<code class="docutils literal notranslate"><span class="pre">add_duration/3</span></code>,
 <code class="docutils literal notranslate"><span class="pre">subtract_duration/3</span></code>, <code class="docutils literal notranslate"><span class="pre">duration_between/3</span></code>)</p></li>
 <li><p>UTC/local conversion using explicit offsets (<code class="docutils literal notranslate"><span class="pre">utc_to_local/3</span></code>,
@@ -237,8 +237,21 @@
 <code class="docutils literal notranslate"><span class="pre">weekday/2</span></code>)</p></li>
 <li><p>reverse and positional calendar utilities (<code class="docutils literal notranslate"><span class="pre">day_of_year_date/3</span></code>,
 <code class="docutils literal notranslate"><span class="pre">month_weekday_date/5</span></code>)</p></li>
-<li><p>date-time normalization and validation (<code class="docutils literal notranslate"><span class="pre">normalize_data_time/2</span></code>,
-<code class="docutils literal notranslate"><span class="pre">valid_data_time/1-2</span></code>)</p></li>
+<li><p>date-time normalization and validation (<code class="docutils literal notranslate"><span class="pre">normalize_date_time/2</span></code>,
+<code class="docutils literal notranslate"><span class="pre">valid_date_time/1-2</span></code>)</p></li>
+</ul>
+<p>The duration predicates accept two duration representations:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">duration(Days,</span> <span class="pre">Hours,</span> <span class="pre">Minutes,</span> <span class="pre">Seconds)</span></code> — a fixed-length duration
+converted to seconds</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">duration(Years,</span> <span class="pre">Months,</span> <span class="pre">Days,</span> <span class="pre">Hours,</span> <span class="pre">Minutes,</span> <span class="pre">Seconds)</span></code> — a
+calendar-aware period where the year and month delta is applied first
+using calendar arithmetic, clamping the day to the last valid day of
+the resulting month when necessary (e.g. adding one month to January
+31 gives February 28 or 29 depending on the year), with the remaining
+day and time delta applied via fixed-length arithmetic. The
+<code class="docutils literal notranslate"><span class="pre">duration_between/3</span></code> predicate returns this form when called with a
+6-arity skeleton such as <code class="docutils literal notranslate"><span class="pre">duration(Yr,</span> <span class="pre">Mo,</span> <span class="pre">Da,</span> <span class="pre">Hr,</span> <span class="pre">Mi,</span> <span class="pre">Se)</span></code>.</p></li>
 </ul>
 <p>Date-time values are represented using the <code class="docutils literal notranslate"><span class="pre">date_time/6</span></code> compound
 term:</p>
