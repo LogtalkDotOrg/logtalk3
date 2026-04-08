@@ -123,6 +123,7 @@ directory in the ``NOTES.md`` file.
    term_io
    time_scales
    timeout
+   toml
    toon
    tsv
    types

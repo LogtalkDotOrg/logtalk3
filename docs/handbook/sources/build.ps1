@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 8, 2026
+##   Last updated on April 9, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -173,6 +173,7 @@ Foreach-Object {
 (Get-Content ../../../library/term_io/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/term_io.rst
 (Get-Content ../../../library/time_scales/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/time_scales.rst
 (Get-Content ../../../library/timeout/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/timeout.rst
+(Get-Content ../../../library/toml/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/toml.rst
 (Get-Content ../../../library/toon/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/toon.rst
 (Get-Content ../../../library/tsv/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/tsv.rst
 (Get-Content ../../../library/types/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/types.rst

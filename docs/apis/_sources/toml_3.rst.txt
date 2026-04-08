@@ -1,0 +1,64 @@
+.. index:: single: toml(ObjectRepresentation,PairRepresentation,StringRepresentation)
+.. _toml/3:
+
+.. rst-class:: right
+
+**object**
+
+``toml(ObjectRepresentation,PairRepresentation,StringRepresentation)``
+======================================================================
+
+* ``ObjectRepresentation`` - Object representation to be used when decoding TOML tables. Possible values are ``compound`` (default) and ``curly``.
+* ``PairRepresentation`` - Pair representation to be used when decoding TOML tables. Possible values are ``dash`` (default), ``equal``, and ``colon``.
+* ``StringRepresentation`` - Text representation to be used when decoding TOML basic and literal string values. Possible values are ``atom`` (default), ``chars``, and ``codes``.
+
+
+TOML parser and generator.
+
+| **Availability:** 
+|    ``logtalk_load(toml(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`toml_protocol <toml_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`reader <reader/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`toml_protocol/0::generate/2`  :ref:`toml_protocol/0::parse/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

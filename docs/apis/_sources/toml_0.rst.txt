@@ -1,0 +1,56 @@
+.. index:: single: toml
+.. _toml/0:
+
+.. rst-class:: right
+
+**object**
+
+``toml``
+========
+
+TOML parser and generator. Uses compound terms for parsed TOML tables, dashes for parsed TOML pairs, and atoms for parsed TOML string values.
+
+| **Availability:** 
+|    ``logtalk_load(toml(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`toml(compound,dash,atom) <toml/3>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`toml_protocol/0::generate/2`  :ref:`toml_protocol/0::parse/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

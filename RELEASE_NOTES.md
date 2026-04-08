@@ -82,6 +82,8 @@ codes and bytes plus character set metadata.
 
 * ADDED: New `hashes` library implementing commonly used hashing algorithms.
 
+* ADDED: New `toml` library for parsing and generating TOML v1.0.0 files.
+
 * ADDED: New `tzif` library for parsing TZif v1/v2/v3 files, persisting parsed
 snapshots, and answering UTC-based offset, DST, and abbreviation queries.
 

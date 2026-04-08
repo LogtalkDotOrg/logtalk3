@@ -1,0 +1,109 @@
+.. index:: single: toml_protocol
+.. _toml_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``toml_protocol``
+=================
+
+TOML parser and generator protocol.
+
+| **Availability:** 
+|    ``logtalk_load(toml(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-09
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/2
+.. _toml_protocol/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses TOML content read from the given source (``file(Path)``, ``stream(Stream)``, ``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) into a ground term representing the parsed TOML document.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,TOML)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,--ground)`` - ``zero_or_one``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source:
+|        ``domain_error(toml_source,Source)``
+
+
+------------
+
+.. index:: generate/2
+.. _toml_protocol/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates TOML output using the representation specified in the first argument (``file(Path)``, ``stream(Stream)``, ``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) from the ground TOML term in the second argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,TOML)``
+| **Mode and number of proofs:**
+|    ``generate(++compound,+ground)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``TOML`` is a variable:
+|        ``instantiation_error``
+|    ``TOML`` is not a valid TOML term:
+|        ``domain_error(toml_term,TOML)``
+|    ``Sink`` cannot be generated:
+|        ``domain_error(toml_sink,Sink)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

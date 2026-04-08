@@ -1,0 +1,9 @@
+title = "Roundtrip"
+meta = { version = 1, stable = true }
+
+[owner]
+name = "Logtalk"
+
+[database]
+server = "127.0.0.1"
+ports = [8000, 8001]

@@ -92,6 +92,7 @@
 		ksuid(loader),
 		json_ld(loader),
 		yaml(loader),
+		toml(loader),
 		toon(loader),
 		classifier_protocols(loader),
 		c45(loader),

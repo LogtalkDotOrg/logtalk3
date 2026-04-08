@@ -406,6 +406,9 @@ Objects
    time_scales <time_scales_0>
    time_scales_data <time_scales_data_0>
    timeout <timeout_0>
+   toml <toml_0>
+   toml(StringRepresentation) <toml_1>
+   toml(ObjectRepresentation,PairRepresentation,StringRepresentation) <toml_3>
    toon <toon_0>
    toon(StringRepresentation) <toon_1>
    toon(ObjectRepresentation,PairRepresentation,StringRepresentation) <toon_3>
@@ -559,6 +562,7 @@ Protocols
    termp <termp_0>
    time_scales_protocol <time_scales_protocol_0>
    timep <timep_0>
+   toml_protocol <toml_protocol_0>
    tool_diagnostics_protocol <tool_diagnostics_protocol_0>
    toon_protocol <toon_protocol_0>
    tsv_protocol <tsv_protocol_0>

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on April 8, 2026
+%  Last updated on April 9, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -202,6 +202,7 @@ logtalk_library_path(subsequences, library('subsequences/')).
 logtalk_library_path(term_io, library('term_io/')).
 logtalk_library_path(time_scales, library('time_scales/')).
 logtalk_library_path(timeout, library('timeout/')).
+logtalk_library_path(toml, library('toml/')).
 logtalk_library_path(toon, library('toon/')).
 logtalk_library_path(tsv, library('tsv/')).
 logtalk_library_path(types, library('types/')).

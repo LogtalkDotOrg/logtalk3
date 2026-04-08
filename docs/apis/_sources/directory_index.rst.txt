@@ -1262,6 +1262,19 @@ To load an entity, always load the library that includes it using the goal ``log
 
    timeout <timeout_0>
 
+``library/toml/``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   toml <toml_0>
+   toml(StringRepresentation) <toml_1>
+   toml(ObjectRepresentation,PairRepresentation,StringRepresentation) <toml_3>
+   toml_protocol <toml_protocol_0>
+
 ``library/toon/``
 -----------------
 
