@@ -23,9 +23,9 @@
 	implements(uuid_protocol)).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:9:0,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-04-08,
 		comment is 'Universally unique identifier (UUID) generator.',
 		parameters is [
 			'Representation' - 'Text representation for the UUID. Possible values are ``atom``, ``chars``, and ``codes``.'
@@ -70,6 +70,9 @@
 		random_bytes(2, [Byte1, Byte2]),
 		ClockSeq is (Byte1 << 8 + Byte2) /\ 0b0011111111111111.
 
+	uuid_v3(Namespace, Name, UUID) :-
+		hash_uuid(md5, Namespace, Name, 0x30, UUID).
+
 	uuid_v4(UUID) :-
 		random_bytes(16, [Byte1, Byte2, Byte3, Byte4, Byte5, Byte6, Byte7, Byte8, Byte9, Byte10, Byte11, Byte12, Byte13, Byte14, Byte15, Byte16]),
 		TimeHiAndVersion is (Byte7 \/ 0b01000000) /\ 0b01001111,
@@ -85,6 +88,13 @@
 			Codes
 		),
 		codes_to_uuid(_Representation_, Codes, UUID).
+
+	:- if(current_prolog_flag(bounded, false)).
+
+		uuid_v5(Namespace, Name, UUID) :-
+			hash_uuid(sha1, Namespace, Name, 0x50, UUID).
+
+	:- endif.
 
 	uuid_v7(UUID) :-
 		% get Unix timestamp in milliseconds
@@ -121,6 +131,36 @@
 			Codes
 		),
 		codes_to_uuid(_Representation_, Codes, UUID).
+
+		hash_uuid(Hash, Namespace, Name, Version, UUID) :-
+			namespace_uuid_bytes(Namespace, NamespaceBytes),
+			text_bytes(Name, NameBytes),
+			list::append(NamespaceBytes, NameBytes, Bytes),
+			Hash::hash(Bytes, Digest),
+			hash_uuid_bytes(Digest, Version, UUIDBytes),
+			UUIDBytes = [Byte1, Byte2, Byte3, Byte4, Byte5, Byte6, Byte7, Byte8, Byte9, Byte10, Byte11, Byte12, Byte13, Byte14, Byte15, Byte16],
+			phrase(
+				bytes_to_uuid(
+					[Byte1, Byte2, Byte3, Byte4],
+					[Byte5, Byte6],
+					[Byte7, Byte8],
+					[Byte9, Byte10],
+					[Byte11, Byte12, Byte13, Byte14, Byte15, Byte16]
+				),
+				Codes
+			),
+			codes_to_uuid(_Representation_, Codes, UUID).
+
+		namespace_uuid_bytes(Namespace, Bytes) :-
+			text_codes(Namespace, Codes),
+			phrase(uuid_bytes(Bytes), Codes).
+
+		hash_uuid_bytes(Digest, Version, Bytes) :-
+			atom_codes(Digest, Codes),
+			hexadecimal_bytes_prefix(16, Codes, [Byte1, Byte2, Byte3, Byte4, Byte5, Byte6, Byte7, Byte8, Byte9, Byte10, Byte11, Byte12, Byte13, Byte14, Byte15, Byte16]),
+			Byte7Version is (Byte7 /\ 0x0f) \/ Version,
+			Byte9Variant is (Byte9 /\ 0x3f) \/ 0x80,
+			Bytes = [Byte1, Byte2, Byte3, Byte4, Byte5, Byte6, Byte7Version, Byte8, Byte9Variant, Byte10, Byte11, Byte12, Byte13, Byte14, Byte15, Byte16].
 
 	bytes_to_uuid(Sequence1, Sequence2, Sequence3, Sequence4, Sequence5) -->
 		bytes_to_hexadecimal_codes(Sequence1),
@@ -189,6 +229,64 @@
 	decimal_hexadecimal_code(14) --> [0'e].
 	decimal_hexadecimal_code(15) --> [0'f].
 
+	uuid_bytes([Byte1, Byte2, Byte3, Byte4, Byte5, Byte6, Byte7, Byte8, Byte9, Byte10, Byte11, Byte12, Byte13, Byte14, Byte15, Byte16]) -->
+		hexadecimal_byte(Byte1),
+		hexadecimal_byte(Byte2),
+		hexadecimal_byte(Byte3),
+		hexadecimal_byte(Byte4),
+		[0'-],
+		hexadecimal_byte(Byte5),
+		hexadecimal_byte(Byte6),
+		[0'-],
+		hexadecimal_byte(Byte7),
+		hexadecimal_byte(Byte8),
+		[0'-],
+		hexadecimal_byte(Byte9),
+		hexadecimal_byte(Byte10),
+		[0'-],
+		hexadecimal_byte(Byte11),
+		hexadecimal_byte(Byte12),
+		hexadecimal_byte(Byte13),
+		hexadecimal_byte(Byte14),
+		hexadecimal_byte(Byte15),
+		hexadecimal_byte(Byte16).
+
+	hexadecimal_byte(Byte) -->
+		[Code1, Code2],
+		{hexadecimal_code_decimal(Code1, Decimal1), hexadecimal_code_decimal(Code2, Decimal2), Byte is Decimal1 * 16 + Decimal2}.
+
+	hexadecimal_bytes_prefix(0, _, []) :-
+		!.
+	hexadecimal_bytes_prefix(N, [Code1, Code2| Codes], [Byte| Bytes]) :-
+		hexadecimal_code_decimal(Code1, Decimal1),
+		hexadecimal_code_decimal(Code2, Decimal2),
+		Byte is Decimal1 * 16 + Decimal2,
+		NextN is N - 1,
+		hexadecimal_bytes_prefix(NextN, Codes, Bytes).
+
+	hexadecimal_code_decimal(0'0,  0).
+	hexadecimal_code_decimal(0'1,  1).
+	hexadecimal_code_decimal(0'2,  2).
+	hexadecimal_code_decimal(0'3,  3).
+	hexadecimal_code_decimal(0'4,  4).
+	hexadecimal_code_decimal(0'5,  5).
+	hexadecimal_code_decimal(0'6,  6).
+	hexadecimal_code_decimal(0'7,  7).
+	hexadecimal_code_decimal(0'8,  8).
+	hexadecimal_code_decimal(0'9,  9).
+	hexadecimal_code_decimal(0'a, 10).
+	hexadecimal_code_decimal(0'b, 11).
+	hexadecimal_code_decimal(0'c, 12).
+	hexadecimal_code_decimal(0'd, 13).
+	hexadecimal_code_decimal(0'e, 14).
+	hexadecimal_code_decimal(0'f, 15).
+	hexadecimal_code_decimal(0'A, 10).
+	hexadecimal_code_decimal(0'B, 11).
+	hexadecimal_code_decimal(0'C, 12).
+	hexadecimal_code_decimal(0'D, 13).
+	hexadecimal_code_decimal(0'E, 14).
+	hexadecimal_code_decimal(0'F, 15).
+
 	random_bytes(N, Bytes) :-
 		catch(open('/dev/urandom', read, Stream, [type(binary)]), _, fail),
 		list::length(Bytes, N),
@@ -205,6 +303,34 @@
 	read_random_bytes([Byte| Bytes], Stream) :-
 		get_byte(Stream, Byte),
 		read_random_bytes(Bytes, Stream).
+
+	text_codes(Text, Codes) :-
+		atom(Text),
+		!,
+		atom_codes(Text, Codes).
+	text_codes(Text, Codes) :-
+		text_list_codes(Text, Codes).
+
+	text_bytes(Text, Bytes) :-
+		text_codes(Text, Bytes),
+		bytes(Bytes).
+
+	text_list_codes([], []).
+	text_list_codes([Element| Elements], [Code| Codes]) :-
+		integer(Element),
+		!,
+		Code = Element,
+		text_list_codes(Elements, Codes).
+	text_list_codes([Element| Elements], [Code| Codes]) :-
+		char_code(Element, Code),
+		text_list_codes(Elements, Codes).
+
+	bytes([]).
+	bytes([Byte| Bytes]) :-
+		integer(Byte),
+		Byte >= 0,
+		Byte =< 255,
+		bytes(Bytes).
 
 	codes_to_chars([], []).
 	codes_to_chars([Code| Codes], [Char| Chars]) :-

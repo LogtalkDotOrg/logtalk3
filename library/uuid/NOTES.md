@@ -22,8 +22,9 @@ ________________________________________________________________________
 ======
 
 This library implements a Universally Unique Identifier (UUID) generator.
-Currently version 1, version 4, and version 7 UUIDs are supported. For
-reference material, see e.g.
+Currently version 1, version 3, version 4, version 5, and version 7 UUIDs
+are supported. Version 5 support requires a Prolog backend with support for
+unbounded integer arithmetic. For reference material, see e.g.
 
 https://en.wikipedia.org/wiki/Universally_unique_identifier
 
@@ -35,6 +36,9 @@ The generation of version 4 and version 7 UUIDs uses the `/dev/urandom` random
 number generator when available. This includes macOS, Linux, *BSD, and other
 POSIX operating-systems. On Windows, a pseudo-random generator is used, but
 randomized using the current wall time.
+
+Version 3 and version 5 UUIDs are namespace-name based UUIDs using the MD5 and
+SHA-1 hash functions, respectively.
 
 Version 7 UUIDs are time-ordered using a Unix Epoch timestamp in milliseconds,
 as specified in RFC 9562. They are recommended over version 1 UUIDs for new
@@ -116,6 +120,59 @@ Similar to get a UUID using a list of character codes representation:
 	| ?- uuid(codes)::uuid_v4(UUID).
 	UUID = [102,97,52,54,57,98,100,50,45,51,57,54,51,45,52,97,100,55,45,
 	        98,50,50,55,45,101,100,52,99,56,55,99,54,53,55,102,98]
+	yes
+
+
+Generating version 3 UUIDs
+--------------------------
+
+Version 3 UUIDs are namespace-name based UUIDs using the MD5 hash function.
+For example:
+
+	| ?- uuid::uuid_v3('6ba7b810-9dad-11d1-80b4-00c04fd430c8', 'www.widgets.com', UUID).
+	UUID = '3d813cbb-47fb-32ba-91df-831e1593ac29'
+	yes
+
+To generate a UUID using a list of characters representation, use instead the
+`uuid/1` parametric object:
+
+	| ?- uuid(chars)::uuid_v3('6ba7b810-9dad-11d1-80b4-00c04fd430c8', 'www.widgets.com', UUID).
+	UUID = ['3',d,'8','1','3',c,b,b,-,'4','7',f,b,-,'3','2',b,a,-,
+	        '9','1',d,f,-,'8','3','1',e,'1','5','9','3',a,c,'2','9']
+	yes
+
+Similarly, to get a UUID using a list of character codes representation:
+
+	| ?- uuid(codes)::uuid_v3('6ba7b810-9dad-11d1-80b4-00c04fd430c8', 'www.widgets.com', UUID).
+	UUID = [51,100,56,49,51,99,98,98,45,52,55,102,98,45,51,50,98,97,45,
+	        57,49,100,102,45,56,51,49,101,49,53,57,51,97,99,50,57]
+	yes
+
+
+Generating version 5 UUIDs
+--------------------------
+
+Version 5 UUIDs are namespace-name based UUIDs using the SHA-1 hash function.
+This predicate is only available on Prolog backends with support for unbounded
+integer arithmetic. For example:
+
+	| ?- uuid::uuid_v5('6ba7b810-9dad-11d1-80b4-00c04fd430c8', 'www.widgets.com', UUID).
+	UUID = '21f7f8de-8051-5b89-8680-0195ef798b6a'
+	yes
+
+To generate a UUID using a list of characters representation, use instead the
+`uuid/1` parametric object:
+
+	| ?- uuid(chars)::uuid_v5('6ba7b810-9dad-11d1-80b4-00c04fd430c8', 'www.widgets.com', UUID).
+	UUID = ['2','1',f,'7',f,'8',d,e,-,'8','0','5','1',-,'5',b,'8','9',-,
+	        '8','6','8','0',-,'0','1','9','5',e,f,'7','9','8',b,'6',a]
+	yes
+
+Similarly, to get a UUID using a list of character codes representation:
+
+	| ?- uuid(codes)::uuid_v5('6ba7b810-9dad-11d1-80b4-00c04fd430c8', 'www.widgets.com', UUID).
+	UUID = [50,49,102,55,102,56,100,101,45,56,48,53,49,45,53,98,56,57,45,
+	        56,54,56,48,45,48,49,57,53,101,102,55,57,56,98,54,97]
 	yes
 
 

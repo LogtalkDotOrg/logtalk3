@@ -116,6 +116,8 @@ to the `dates` library.
 * ADDED: Support for calendar-aware year/month period arithmetic to the `dates`
 library.
 
+* ADDED: Support for version 3 and 5 UUIDs to the `uuid` library.
+
 * IMPROVED: The implementation `os::shell/1-2` library predicates for SICStus
 Prolog to avoid quoting issues on POSIX systems.
 

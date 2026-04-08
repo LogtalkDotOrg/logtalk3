@@ -22,49 +22,67 @@
 :- protocol(uuid_protocol).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2026-02-04,
+		date is 2026-04-08,
 		comment is 'Universally unique identifier (UUID) generator protocol.'
 	]).
 
 	:- public(uuid_v1/2).
-	:- mode(uuid_v1(+list(byte), --ground), one).
+	:- mode(uuid_v1(+list(byte), --text), one).
 	:- info(uuid_v1/2, [
 		comment is 'Returns a version 1 UUID for the given MAC address (a list of six bytes). The MAC address can be replaced by a random 6 bytes node identifier as per RFC 4122 when the MAC address is not available or should not be disclosed.',
 		argnames is ['MAC', 'UUID']
 	]).
 
+	:- public(uuid_v3/3).
+	:- mode(uuid_v3(+text, +text, --text), one).
+	:- info(uuid_v3/3, [
+		comment is 'Returns a version 3 UUID for the given namespace UUID and name. Namespace UUIDs and names can be represented as atoms, lists of characters, or lists of character codes. Name character codes must be bytes.',
+		argnames is ['Namespace', 'Name', 'UUID']
+	]).
+
 	:- public(uuid_v4/1).
-	:- mode(uuid_v4(--ground), one).
+	:- mode(uuid_v4(--text), one).
 	:- info(uuid_v4/1, [
 		comment is 'Returns a version 4 UUID.',
 		argnames is ['UUID']
 	]).
 
+	:- if(current_prolog_flag(bounded, false)).
+
+		:- public(uuid_v5/3).
+		:- mode(uuid_v5(+text, +text, --text), one).
+		:- info(uuid_v5/3, [
+			comment is 'Returns a version 5 UUID for the given namespace UUID and name. Namespace UUIDs and names can be represented as atoms, lists of characters, or lists of character codes. Name character codes must be bytes.',
+			argnames is ['Namespace', 'Name', 'UUID']
+		]).
+
+	:- endif.
+
 	:- public(uuid_v7/1).
-	:- mode(uuid_v7(--ground), one).
+	:- mode(uuid_v7(--text), one).
 	:- info(uuid_v7/1, [
 		comment is 'Returns a version 7 UUID.',
 		argnames is ['UUID']
 	]).
 
 	:- public(uuid_null/1).
-	:- mode(uuid_null(--ground), one).
+	:- mode(uuid_null(--text), one).
 	:- info(uuid_null/1, [
 		comment is 'Returns the null UUID. Deprecated. Use ``uuid_nil/1`` instead.',
 		argnames is ['UUID']
 	]).
 
 	:- public(uuid_nil/1).
-	:- mode(uuid_nil(--ground), one).
+	:- mode(uuid_nil(--text), one).
 	:- info(uuid_nil/1, [
 		comment is 'Returns the Nil UUID.',
 		argnames is ['UUID']
 	]).
 
 	:- public(uuid_max/1).
-	:- mode(uuid_max(--ground), one).
+	:- mode(uuid_max(--text), one).
 	:- info(uuid_max/1, [
 		comment is 'Returns the Max UUID.',
 		argnames is ['UUID']

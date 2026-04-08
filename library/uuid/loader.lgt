@@ -20,7 +20,9 @@
 
 
 :- initialization((
+	logtalk_load(basic_types(loader)),
 	logtalk_load(iso8601(loader)),
+	logtalk_load(hashes(loader)),
 	logtalk_load(random(loader)),
 	logtalk_load([uuid_protocol, uuid], [optimize(on)])
 )).

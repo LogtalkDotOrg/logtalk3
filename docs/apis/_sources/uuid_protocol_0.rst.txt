@@ -14,8 +14,8 @@ Universally unique identifier (UUID) generator protocol.
 |    ``logtalk_load(uuid(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:5:0
-| **Date:** 2026-02-04
+| **Version:** 0:6:0
+| **Date:** 2026-04-08
 
 | **Compilation flags:**
 |    ``static``
@@ -52,7 +52,26 @@ Returns a version 1 UUID for the given MAC address (a list of six bytes). The MA
 | **Template:**
 |    ``uuid_v1(MAC,UUID)``
 | **Mode and number of proofs:**
-|    ``uuid_v1(+list(byte),--ground)`` - ``one``
+|    ``uuid_v1(+list(byte),--text)`` - ``one``
+
+
+------------
+
+.. index:: uuid_v3/3
+.. _uuid_protocol/0::uuid_v3/3:
+
+``uuid_v3/3``
+^^^^^^^^^^^^^
+
+Returns a version 3 UUID for the given namespace UUID and name. Namespace UUIDs and names can be represented as atoms, lists of characters, or lists of character codes. Name character codes must be bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``uuid_v3(Namespace,Name,UUID)``
+| **Mode and number of proofs:**
+|    ``uuid_v3(+text,+text,--text)`` - ``one``
 
 
 ------------
@@ -71,7 +90,26 @@ Returns a version 4 UUID.
 | **Template:**
 |    ``uuid_v4(UUID)``
 | **Mode and number of proofs:**
-|    ``uuid_v4(--ground)`` - ``one``
+|    ``uuid_v4(--text)`` - ``one``
+
+
+------------
+
+.. index:: uuid_v5/3
+.. _uuid_protocol/0::uuid_v5/3:
+
+``uuid_v5/3``
+^^^^^^^^^^^^^
+
+Returns a version 5 UUID for the given namespace UUID and name. Namespace UUIDs and names can be represented as atoms, lists of characters, or lists of character codes. Name character codes must be bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``uuid_v5(Namespace,Name,UUID)``
+| **Mode and number of proofs:**
+|    ``uuid_v5(+text,+text,--text)`` - ``one``
 
 
 ------------
@@ -90,7 +128,7 @@ Returns a version 7 UUID.
 | **Template:**
 |    ``uuid_v7(UUID)``
 | **Mode and number of proofs:**
-|    ``uuid_v7(--ground)`` - ``one``
+|    ``uuid_v7(--text)`` - ``one``
 
 
 ------------
@@ -109,7 +147,7 @@ Returns the null UUID. Deprecated. Use ``uuid_nil/1`` instead.
 | **Template:**
 |    ``uuid_null(UUID)``
 | **Mode and number of proofs:**
-|    ``uuid_null(--ground)`` - ``one``
+|    ``uuid_null(--text)`` - ``one``
 
 
 ------------
@@ -128,7 +166,7 @@ Returns the Nil UUID.
 | **Template:**
 |    ``uuid_nil(UUID)``
 | **Mode and number of proofs:**
-|    ``uuid_nil(--ground)`` - ``one``
+|    ``uuid_nil(--text)`` - ``one``
 
 
 ------------
@@ -147,7 +185,7 @@ Returns the Max UUID.
 | **Template:**
 |    ``uuid_max(UUID)``
 | **Mode and number of proofs:**
-|    ``uuid_max(--ground)`` - ``one``
+|    ``uuid_max(--text)`` - ``one``
 
 
 ------------
