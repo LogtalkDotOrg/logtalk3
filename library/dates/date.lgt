@@ -24,7 +24,7 @@
 	implements(datep)).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Paulo Moura',
 		date is 2026-04-08,
 		comment is 'Date predicates.'
@@ -262,6 +262,26 @@
 	valid_date_time(date_time(Year, Month, Day, Hours, Minutes, Seconds)) :-
 		valid(Year, Month, Day),
 		valid_time(Hours, Minutes, Seconds).
+
+	before(DateTime1, DateTime2) :-
+		date_time_to_unix(DateTime1, Unix1),
+		date_time_to_unix(DateTime2, Unix2),
+		Unix1 < Unix2.
+
+	after(DateTime1, DateTime2) :-
+		date_time_to_unix(DateTime1, Unix1),
+		date_time_to_unix(DateTime2, Unix2),
+		Unix1 > Unix2.
+
+	same_instant(DateTime1, DateTime2) :-
+		date_time_to_unix(DateTime1, Unix1),
+		date_time_to_unix(DateTime2, Unix2),
+		Unix1 =:= Unix2.
+
+	compare_date_time(Order, DateTime1, DateTime2) :-
+		date_time_to_unix(DateTime1, Unix1),
+		date_time_to_unix(DateTime2, Unix2),
+		compare(Order, Unix1, Unix2).
 
 	epoch_julian_day(2440588).
 

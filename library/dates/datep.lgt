@@ -22,7 +22,7 @@
 :- protocol(datep).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Paulo Moura',
 		date is 2026-04-08,
 		comment is 'Date protocol.',
@@ -167,6 +167,34 @@
 	:- info(valid_date_time/1, [
 		comment is 'True iff a datetime term is valid in strict mode.',
 		argnames is ['DateTime']
+	]).
+
+	:- public(before/2).
+	:- mode(before(+compound, +compound), zero_or_one).
+	:- info(before/2, [
+		comment is 'True iff ``DateTime1`` represents an instant strictly before ``DateTime2``.',
+		argnames is ['DateTime1', 'DateTime2']
+	]).
+
+	:- public(after/2).
+	:- mode(after(+compound, +compound), zero_or_one).
+	:- info(after/2, [
+		comment is 'True iff ``DateTime1`` represents an instant strictly after ``DateTime2``.',
+		argnames is ['DateTime1', 'DateTime2']
+	]).
+
+	:- public(same_instant/2).
+	:- mode(same_instant(+compound, +compound), zero_or_one).
+	:- info(same_instant/2, [
+		comment is 'True iff ``DateTime1`` and ``DateTime2`` represent the same instant (equal Unix epoch seconds).',
+		argnames is ['DateTime1', 'DateTime2']
+	]).
+
+	:- public(compare_date_time/3).
+	:- mode(compare_date_time(?atom, +compound, +compound), zero_or_one).
+	:- info(compare_date_time/3, [
+		comment is 'Three-way comparison of two datetime terms. ``Order`` is unified with ``<``, ``=``, or ``>``. Suitable for use with ``msort/2`` and ``predsort/3``.',
+		argnames is ['Order', 'DateTime1', 'DateTime2']
 	]).
 
 :- end_protocol.

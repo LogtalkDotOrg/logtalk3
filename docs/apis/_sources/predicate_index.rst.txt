@@ -390,6 +390,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`datep <datep/0::after/2>`
 * :ref:`intervalp <intervalp/0::after/2>`
 
 ``after/3``
@@ -1151,6 +1152,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`datep <datep/0::before/2>`
 * :ref:`intervalp <intervalp/0::before/2>`
 
 ``before/3``
@@ -2341,6 +2343,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`json_ld_protocol <json_ld_protocol/0::compact/3>`
+
+``compare_date_time/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::compare_date_time/3>`
 
 ``compile_aux_clauses/1``
 -------------------------
@@ -14469,6 +14481,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`redis <redis/0::sadd/4>`
+
+``same_instant/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`datep <datep/0::same_instant/2>`
 
 ``same_length/2``
 -----------------

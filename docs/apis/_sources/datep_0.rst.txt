@@ -14,7 +14,7 @@ Date protocol.
 |    ``logtalk_load(dates(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:1:0
+| **Version:** 2:2:0
 | **Date:** 2026-04-08
 
 | **Compilation flags:**
@@ -414,6 +414,82 @@ True iff a datetime term is valid in strict mode.
 |    ``valid_date_time(DateTime)``
 | **Mode and number of proofs:**
 |    ``valid_date_time(@compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: before/2
+.. _datep/0::before/2:
+
+``before/2``
+^^^^^^^^^^^^
+
+True iff ``DateTime1`` represents an instant strictly before ``DateTime2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``before(DateTime1,DateTime2)``
+| **Mode and number of proofs:**
+|    ``before(+compound,+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: after/2
+.. _datep/0::after/2:
+
+``after/2``
+^^^^^^^^^^^
+
+True iff ``DateTime1`` represents an instant strictly after ``DateTime2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``after(DateTime1,DateTime2)``
+| **Mode and number of proofs:**
+|    ``after(+compound,+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: same_instant/2
+.. _datep/0::same_instant/2:
+
+``same_instant/2``
+^^^^^^^^^^^^^^^^^^
+
+True iff ``DateTime1`` and ``DateTime2`` represent the same instant (equal Unix epoch seconds).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``same_instant(DateTime1,DateTime2)``
+| **Mode and number of proofs:**
+|    ``same_instant(+compound,+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: compare_date_time/3
+.. _datep/0::compare_date_time/3:
+
+``compare_date_time/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Three-way comparison of two datetime terms. ``Order`` is unified with ``<``, ``=``, or ``>``. Suitable for use with ``msort/2`` and ``predsort/3``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``compare_date_time(Order,DateTime1,DateTime2)``
+| **Mode and number of proofs:**
+|    ``compare_date_time(?atom,+compound,+compound)`` - ``zero_or_one``
 
 
 ------------

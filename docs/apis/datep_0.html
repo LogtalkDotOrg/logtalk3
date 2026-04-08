@@ -262,7 +262,7 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2:1:0</div>
+<div class="line"><strong>Version:</strong> 2:2:0</div>
 <div class="line"><strong>Date:</strong> 2026-04-08</div>
 </div>
 <div class="line-block">
@@ -313,11 +313,15 @@
 <li><p><a class="reference internal" href="#weekday-2" id="id19"><code class="docutils literal notranslate"><span class="pre">weekday/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#normalize-date-time-2" id="id20"><code class="docutils literal notranslate"><span class="pre">normalize_date_time/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#valid-date-time-1" id="id21"><code class="docutils literal notranslate"><span class="pre">valid_date_time/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#before-2" id="id22"><code class="docutils literal notranslate"><span class="pre">before/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#after-2" id="id23"><code class="docutils literal notranslate"><span class="pre">after/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#same-instant-2" id="id24"><code class="docutils literal notranslate"><span class="pre">same_instant/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#compare-date-time-3" id="id25"><code class="docutils literal notranslate"><span class="pre">compare_date_time/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id22">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id23">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id24">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id26">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id27">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id28">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -738,6 +742,90 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">valid_date_time(&#64;compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="before-2">
+<span id="datep-0-before-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">before/2</span></code></a><a class="headerlink" href="#before-2" title="Link to this heading"></a></h3>
+<p>True iff <code class="docutils literal notranslate"><span class="pre">DateTime1</span></code> represents an instant strictly before <code class="docutils literal notranslate"><span class="pre">DateTime2</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">before(DateTime1,DateTime2)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">before(+compound,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="after-2">
+<span id="datep-0-after-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">after/2</span></code></a><a class="headerlink" href="#after-2" title="Link to this heading"></a></h3>
+<p>True iff <code class="docutils literal notranslate"><span class="pre">DateTime1</span></code> represents an instant strictly after <code class="docutils literal notranslate"><span class="pre">DateTime2</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">after(DateTime1,DateTime2)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">after(+compound,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="same-instant-2">
+<span id="datep-0-same-instant-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">same_instant/2</span></code></a><a class="headerlink" href="#same-instant-2" title="Link to this heading"></a></h3>
+<p>True iff <code class="docutils literal notranslate"><span class="pre">DateTime1</span></code> and <code class="docutils literal notranslate"><span class="pre">DateTime2</span></code> represent the same instant (equal Unix epoch seconds).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">same_instant(DateTime1,DateTime2)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">same_instant(+compound,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="compare-date-time-3">
+<span id="datep-0-compare-date-time-3"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">compare_date_time/3</span></code></a><a class="headerlink" href="#compare-date-time-3" title="Link to this heading"></a></h3>
+<p>Three-way comparison of two datetime terms. <code class="docutils literal notranslate"><span class="pre">Order</span></code> is unified with <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">=</span></code>, or <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>. Suitable for use with <code class="docutils literal notranslate"><span class="pre">msort/2</span></code> and <code class="docutils literal notranslate"><span class="pre">predsort/3</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">compare_date_time(Order,DateTime1,DateTime2)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">compare_date_time(?atom,+compound,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </section>

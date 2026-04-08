@@ -31,6 +31,7 @@ It also provides portable predicates for date-time handling, including:
 - calendar utilities (`day_of_year/2`, `week_of_year_iso/2`, `weekday/2`)
 - reverse and positional calendar utilities (`day_of_year_date/3`, `month_weekday_date/5`)
 - date-time normalization and validation (`normalize_date_time/2`, `valid_date_time/1-2`)
+- date-time comparison (`before/2`, `after/2`, `same_instant/2`, `compare_date_time/3`)
 
 The duration predicates accept two duration representations:
 
