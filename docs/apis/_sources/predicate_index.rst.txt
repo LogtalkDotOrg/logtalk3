@@ -2558,6 +2558,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`time_scales_protocol <time_scales_protocol/0::convert/4>`
 
+``convert_zones/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dates_tz_protocol <dates_tz_protocol/0::convert_zones/4>`
+
+``convert_zones_with_resolution/5``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dates_tz_protocol <dates_tz_protocol/0::convert_zones_with_resolution/5>`
+
 ``cooling_schedule/3``
 ----------------------
 
@@ -9376,6 +9396,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`datep <datep/0::local_to_utc/3>`
+
+``local_to_utc_tz/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dates_tz_protocol <dates_tz_protocol/0::local_to_utc_tz/3>`
+
+``local_to_utc_tz_with_resolution/4``
+-------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dates_tz_protocol <dates_tz_protocol/0::local_to_utc_tz_with_resolution/4>`
 
 ``log/3``
 ---------
@@ -17166,6 +17206,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`datep <datep/0::utc_to_local/3>`
+
+``utc_to_local_tz/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dates_tz_protocol <dates_tz_protocol/0::utc_to_local_tz/3>`
 
 ``uuid_max/1``
 --------------

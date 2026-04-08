@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 7, 2026
+##   Last updated on April 8, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -102,6 +102,7 @@ Foreach-Object {
 (Get-Content ../../../library/cuid2/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/cuid2.rst
 (Get-Content ../../../library/datalog/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/datalog.rst
 (Get-Content ../../../library/dates/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dates.rst
+(Get-Content ../../../library/dates_tz/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dates_tz.rst
 (Get-Content ../../../library/dependents/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dependents.rst
 (Get-Content ../../../library/deques/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/deques.rst
 (Get-Content ../../../library/dictionaries/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dictionaries.rst

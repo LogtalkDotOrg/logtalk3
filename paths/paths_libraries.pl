@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on April 7, 2026
+%  Last updated on April 8, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -56,6 +56,7 @@ logtalk_library_path(csv, library('csv/')).
 logtalk_library_path(cuid2, library('cuid2/')).
 logtalk_library_path(datalog, library('datalog/')).
 logtalk_library_path(dates, library('dates/')).
+logtalk_library_path(dates_tz, library('dates_tz/')).
 logtalk_library_path(dependents, library('dependents/')).
 logtalk_library_path(deques, library('deques/')).
 logtalk_library_path(dictionaries, library('dictionaries/')).

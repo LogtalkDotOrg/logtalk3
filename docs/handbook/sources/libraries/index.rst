@@ -52,6 +52,7 @@ directory in the ``NOTES.md`` file.
    cuid2
    datalog
    dates
+   dates_tz
    dependents
    deques
    dictionaries

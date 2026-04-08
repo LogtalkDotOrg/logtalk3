@@ -374,6 +374,17 @@ To load an entity, always load the library that includes it using the goal ``log
    time <time_0>
    timep <timep_0>
 
+``library/dates_tz/``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   dates_tz <dates_tz_0>
+   dates_tz_protocol <dates_tz_protocol_0>
+
 ``library/dependents/``
 -----------------------
 

@@ -1,0 +1,154 @@
+.. index:: single: dates_tz_protocol
+.. _dates_tz_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``dates_tz_protocol``
+=====================
+
+Protocol for zone-aware date-time conversion using cached TZif data.
+
+| **Availability:** 
+|    ``logtalk_load(dates_tz(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-08
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: utc_to_local_tz/3
+.. _dates_tz_protocol/0::utc_to_local_tz/3:
+
+``utc_to_local_tz/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Converts a UTC date-time to the civil local date-time in the named zone. Requires the zone to be present in the cached TZif data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``utc_to_local_tz(UTCDateTime,Zone,LocalDateTime)``
+| **Mode and number of proofs:**
+|    ``utc_to_local_tz(+compound,+atom,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: local_to_utc_tz/3
+.. _dates_tz_protocol/0::local_to_utc_tz/3:
+
+``local_to_utc_tz/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Converts a civil local date-time in the named zone to UTC. This strict variant fails silently if the local time falls in a DST gap (non-existent time) or a DST fold (ambiguous time). Requires the zone to be present in the cached TZif data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_to_utc_tz(LocalDateTime,Zone,UTCDateTime)``
+| **Mode and number of proofs:**
+|    ``local_to_utc_tz(+compound,+atom,-compound)`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: local_to_utc_tz_with_resolution/4
+.. _dates_tz_protocol/0::local_to_utc_tz_with_resolution/4:
+
+``local_to_utc_tz_with_resolution/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a civil local date-time in the named zone to UTC using an explicit resolution mode for ambiguous or non-existent times. The resolution mode can be ``strict`` (fail unless exactly one interpretation), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), or ``all`` (enumerate all valid interpretations). Requires the zone to be present in the cached TZif data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_to_utc_tz_with_resolution(LocalDateTime,Zone,ResolutionMode,UTCDateTime)``
+| **Mode and number of proofs:**
+|    ``local_to_utc_tz_with_resolution(+compound,+atom,+atom,-compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: convert_zones/4
+.. _dates_tz_protocol/0::convert_zones/4:
+
+``convert_zones/4``
+^^^^^^^^^^^^^^^^^^^
+
+Converts a civil local date-time in one zone to the civil local date-time in another zone. Uses strict interpretation: fails if the source local time is in a DST gap or fold. Requires both zones to be present in the cached TZif data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``convert_zones(LocalDateTime,FromZone,ToZone,ResultDateTime)``
+| **Mode and number of proofs:**
+|    ``convert_zones(+compound,+atom,+atom,-compound)`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: convert_zones_with_resolution/5
+.. _dates_tz_protocol/0::convert_zones_with_resolution/5:
+
+``convert_zones_with_resolution/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a civil local date-time in one zone to the civil local date-time in another zone using an explicit resolution mode for the source zone. The resolution mode is applied when the source local time is ambiguous or non-existent. Requires both zones to be present in the cached TZif data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``convert_zones_with_resolution(LocalDateTime,FromZone,ResolutionMode,ToZone,ResultDateTime)``
+| **Mode and number of proofs:**
+|    ``convert_zones_with_resolution(+compound,+atom,+atom,+atom,-compound)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`dates_tz <dates_tz/0>`
+

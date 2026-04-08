@@ -1,0 +1,63 @@
+.. index:: single: dates_tz
+.. _dates_tz/0:
+
+.. rst-class:: right
+
+**object**
+
+``dates_tz``
+============
+
+Zone-aware date-time conversion bridging the ``dates`` and ``tzif`` libraries.
+
+| **Availability:** 
+|    ``logtalk_load(dates_tz(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-08
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`dates_tz_protocol <dates_tz_protocol/0>`
+| **Uses:**
+|    :ref:`date <date/0>`
+|    :ref:`tzif <tzif/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`dates_tz_protocol/0::convert_zones/4`  :ref:`dates_tz_protocol/0::convert_zones_with_resolution/5`  :ref:`dates_tz_protocol/0::local_to_utc_tz/3`  :ref:`dates_tz_protocol/0::local_to_utc_tz_with_resolution/4`  :ref:`dates_tz_protocol/0::utc_to_local_tz/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`dates_tz_protocol <dates_tz_protocol/0>`, :ref:`date <date/0>`, :ref:`tzif <tzif/0>`
+

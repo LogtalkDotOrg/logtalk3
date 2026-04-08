@@ -79,6 +79,7 @@
 		genint(loader),
 		time_scales(loader),
 		tzif(loader),
+		dates_tz(loader),
 		geospatial(loader),
 		git(loader),
 		grammars(loader),
