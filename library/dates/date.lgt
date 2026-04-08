@@ -19,15 +19,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(date,
 	implements(datep)).
 
 	:- info([
-		version is 2:2:0,
+		version is 2:3:0,
 		author is 'Paulo Moura',
 		date is 2026-04-08,
 		comment is 'Date predicates.'
+	]).
+
+	:- uses(list, [
+		append/2, append/3, length/2
 	]).
 
 	today(Year, Month, Day) :-
@@ -181,6 +184,11 @@
 		offset_seconds(Offset, OffsetSeconds),
 		UTCUnixTime is UnixTime - OffsetSeconds,
 		unix_to_date_time(UTCUnixTime, UTCDateTime).
+
+	format_date_time(DateTime, OffsetSeconds, Format, String) :-
+		valid_date_time(DateTime),
+		integer(OffsetSeconds),
+		format_date_time_(Format, DateTime, OffsetSeconds, String).
 
 	day_of_year(DateLike, DayOfYear) :-
 		date_like(DateLike, Year, Month, Day),
@@ -369,6 +377,324 @@
 			OffsetSeconds = Seconds
 		;	OffsetSeconds is -Seconds
 		).
+
+	format_date_time_(rfc3339, date_time(Year, Month, Day, Hours, Minutes, Seconds), OffsetSeconds, String) :-
+		fixed_width_non_negative_integer_codes(Year, 4, YearCodes),
+		two_digit_codes(Month, MonthCodes),
+		two_digit_codes(Day, DayCodes),
+		two_digit_codes(Hours, HoursCodes),
+		two_digit_codes(Minutes, MinutesCodes),
+		two_digit_codes(Seconds, SecondsCodes),
+		rfc3339_offset_codes(OffsetSeconds, OffsetCodes),
+		append([
+			YearCodes, [0'-], MonthCodes, [0'-], DayCodes,
+			[0'T],
+			HoursCodes, [0':], MinutesCodes, [0':], SecondsCodes,
+			OffsetCodes
+		], Codes),
+		atom_codes(String, Codes).
+	format_date_time_(iso8601, DateTime, OffsetSeconds, String) :-
+		format_date_time_(rfc3339, DateTime, OffsetSeconds, String).
+	format_date_time_(atom, DateTime, OffsetSeconds, String) :-
+		format_date_time_(rfc3339, DateTime, OffsetSeconds, String).
+	format_date_time_(rfc2822, DateTime, OffsetSeconds, String) :-
+		DateTime = date_time(Year, Month, Day, Hours, Minutes, Seconds),
+		weekday(DateTime, Weekday),
+		name_of_day(Weekday, _, DayShort),
+		name_of_month(Month, _, MonthShort),
+		atom_codes(DayShort, DayShortCodes),
+		atom_codes(MonthShort, MonthShortCodes),
+		two_digit_codes(Day, DayCodes),
+		minimum_width_non_negative_integer_codes(Year, 4, YearCodes),
+		two_digit_codes(Hours, HoursCodes),
+		two_digit_codes(Minutes, MinutesCodes),
+		two_digit_codes(Seconds, SecondsCodes),
+		rfc2822_offset_codes(OffsetSeconds, OffsetCodes),
+		append([
+			DayShortCodes, [0',, 32],
+			DayCodes, [32], MonthShortCodes, [32], YearCodes, [32],
+			HoursCodes, [0':], MinutesCodes, [0':], SecondsCodes, [32],
+			OffsetCodes
+		], Codes),
+		atom_codes(String, Codes).
+	format_date_time_(rfc5322, DateTime, OffsetSeconds, String) :-
+		format_date_time_(rfc2822, DateTime, OffsetSeconds, String).
+	format_date_time_(rss, DateTime, OffsetSeconds, String) :-
+		format_date_time_(rfc2822, DateTime, OffsetSeconds, String).
+	format_date_time_(http_date, DateTime, OffsetSeconds, String) :-
+		subtract_duration(DateTime, OffsetSeconds, GMTDateTime),
+		GMTDateTime = date_time(Year, Month, Day, Hours, Minutes, Seconds),
+		weekday(GMTDateTime, Weekday),
+		name_of_day(Weekday, _, DayShort),
+		name_of_month(Month, _, MonthShort),
+		atom_codes(DayShort, DayShortCodes),
+		atom_codes(MonthShort, MonthShortCodes),
+		two_digit_codes(Day, DayCodes),
+		minimum_width_non_negative_integer_codes(Year, 4, YearCodes),
+		two_digit_codes(Hours, HoursCodes),
+		two_digit_codes(Minutes, MinutesCodes),
+		two_digit_codes(Seconds, SecondsCodes),
+		append([
+			DayShortCodes, [0',, 32],
+			DayCodes, [32], MonthShortCodes, [32], YearCodes, [32],
+			HoursCodes, [0':], MinutesCodes, [0':], SecondsCodes, [32],
+			[0'G, 0'M, 0'T]
+		], Codes),
+		atom_codes(String, Codes).
+	format_date_time_(rfc1123, DateTime, OffsetSeconds, String) :-
+		format_date_time_(http_date, DateTime, OffsetSeconds, String).
+	format_date_time_(unix_date, DateTime, _, String) :-
+		DateTime = date_time(Year, Month, Day, Hours, Minutes, Seconds),
+		weekday(DateTime, Weekday),
+		name_of_day(Weekday, _, DayShort),
+		name_of_month(Month, _, MonthShort),
+		atom_codes(DayShort, DayShortCodes),
+		atom_codes(MonthShort, MonthShortCodes),
+		space_padded_day_codes(Day, DayCodes),
+		minimum_width_non_negative_integer_codes(Year, 4, YearCodes),
+		two_digit_codes(Hours, HoursCodes),
+		two_digit_codes(Minutes, MinutesCodes),
+		two_digit_codes(Seconds, SecondsCodes),
+		append([
+			DayShortCodes, [32], MonthShortCodes, [32], DayCodes, [32],
+			HoursCodes, [0':], MinutesCodes, [0':], SecondsCodes, [32],
+			YearCodes
+		], Codes),
+		atom_codes(String, Codes).
+	format_date_time_(common_log, date_time(Year, Month, Day, Hours, Minutes, Seconds), OffsetSeconds, String) :-
+		name_of_month(Month, _, MonthShort),
+		atom_codes(MonthShort, MonthShortCodes),
+		two_digit_codes(Day, DayCodes),
+		minimum_width_non_negative_integer_codes(Year, 4, YearCodes),
+		two_digit_codes(Hours, HoursCodes),
+		two_digit_codes(Minutes, MinutesCodes),
+		two_digit_codes(Seconds, SecondsCodes),
+		rfc2822_offset_codes(OffsetSeconds, OffsetCodes),
+		append([
+			DayCodes, [0'/], MonthShortCodes, [0'/], YearCodes, [0':],
+			HoursCodes, [0':], MinutesCodes, [0':], SecondsCodes, [32],
+			OffsetCodes
+		], Codes),
+		atom_codes(String, Codes).
+	format_date_time_(date_short, date_time(Year, Month, Day, _, _, _), _, String) :-
+		fixed_width_non_negative_integer_codes(Year, 4, YearCodes),
+		two_digit_codes(Month, MonthCodes),
+		two_digit_codes(Day, DayCodes),
+		append([
+			YearCodes, [0'-], MonthCodes, [0'-], DayCodes
+		], Codes),
+		atom_codes(String, Codes).
+	format_date_time_(date_medium, date_time(Year, Month, Day, _, _, _), _, String) :-
+		name_of_month(Month, _, MonthShort),
+		atom_codes(MonthShort, MonthShortCodes),
+		minimum_width_non_negative_integer_codes(Day, 1, DayCodes),
+		minimum_width_non_negative_integer_codes(Year, 4, YearCodes),
+		append([
+			DayCodes, [32], MonthShortCodes, [32], YearCodes
+		], Codes),
+		atom_codes(String, Codes).
+	format_date_time_(date_long, date_time(Year, Month, Day, _, _, _), _, String) :-
+		name_of_month(Month, MonthName, _),
+		atom_codes(MonthName, MonthNameCodes),
+		minimum_width_non_negative_integer_codes(Day, 1, DayCodes),
+		minimum_width_non_negative_integer_codes(Year, 4, YearCodes),
+		append([
+			MonthNameCodes, [32], DayCodes, [0',, 32], YearCodes
+		], Codes),
+		atom_codes(String, Codes).
+	format_date_time_(date_full, DateTime, _, String) :-
+		DateTime = date_time(Year, Month, Day, _, _, _),
+		weekday(DateTime, Weekday),
+		name_of_day(Weekday, DayName, _),
+		name_of_month(Month, MonthName, _),
+		atom_codes(DayName, DayNameCodes),
+		atom_codes(MonthName, MonthNameCodes),
+		minimum_width_non_negative_integer_codes(Day, 1, DayCodes),
+		minimum_width_non_negative_integer_codes(Year, 4, YearCodes),
+		append([
+			DayNameCodes, [0',, 32], MonthNameCodes, [32], DayCodes, [0',, 32], YearCodes
+		], Codes),
+		atom_codes(String, Codes).
+	format_date_time_(time_short, date_time(_, _, _, Hours, Minutes, _), _, String) :-
+		two_digit_codes(Hours, HoursCodes),
+		two_digit_codes(Minutes, MinutesCodes),
+		append([
+			HoursCodes, [0':], MinutesCodes
+		], Codes),
+		atom_codes(String, Codes).
+	format_date_time_(time_medium, date_time(_, _, _, Hours, Minutes, Seconds), _, String) :-
+		two_digit_codes(Hours, HoursCodes),
+		two_digit_codes(Minutes, MinutesCodes),
+		two_digit_codes(Seconds, SecondsCodes),
+		append([
+			HoursCodes, [0':], MinutesCodes, [0':], SecondsCodes
+		], Codes),
+		atom_codes(String, Codes).
+	format_date_time_(time_long, date_time(_, _, _, Hours, Minutes, Seconds), OffsetSeconds, String) :-
+		two_digit_codes(Hours, HoursCodes),
+		two_digit_codes(Minutes, MinutesCodes),
+		two_digit_codes(Seconds, SecondsCodes),
+		rfc3339_offset_codes(OffsetSeconds, OffsetCodes),
+		append([
+			HoursCodes, [0':], MinutesCodes, [0':], SecondsCodes, [32], OffsetCodes
+		], Codes),
+		atom_codes(String, Codes).
+	format_date_time_(time_full, date_time(_, _, _, Hours, Minutes, Seconds), OffsetSeconds, String) :-
+		twelve_hour_clock(Hours, TwelveHours, Meridiem),
+		minimum_width_non_negative_integer_codes(TwelveHours, 1, HourCodes),
+		two_digit_codes(Minutes, MinutesCodes),
+		two_digit_codes(Seconds, SecondsCodes),
+		atom_codes(Meridiem, MeridiemCodes),
+		rfc3339_offset_codes(OffsetSeconds, OffsetCodes),
+		append([
+			HourCodes, [0':], MinutesCodes, [0':], SecondsCodes, [32], MeridiemCodes, [32], OffsetCodes
+		], Codes),
+		atom_codes(String, Codes).
+	format_date_time_(date_time_short, date_time(Year, Month, Day, Hours, Minutes, _), _, String) :-
+		fixed_width_non_negative_integer_codes(Year, 4, YearCodes),
+		two_digit_codes(Month, MonthCodes),
+		two_digit_codes(Day, DayCodes),
+		two_digit_codes(Hours, HoursCodes),
+		two_digit_codes(Minutes, MinutesCodes),
+		append([
+			YearCodes, [0'-], MonthCodes, [0'-], DayCodes, [32],
+			HoursCodes, [0':], MinutesCodes
+		], Codes),
+		atom_codes(String, Codes).
+	format_date_time_(date_time_medium, date_time(Year, Month, Day, Hours, Minutes, Seconds), _, String) :-
+		name_of_month(Month, _, MonthShort),
+		atom_codes(MonthShort, MonthShortCodes),
+		minimum_width_non_negative_integer_codes(Day, 1, DayCodes),
+		minimum_width_non_negative_integer_codes(Year, 4, YearCodes),
+		two_digit_codes(Hours, HoursCodes),
+		two_digit_codes(Minutes, MinutesCodes),
+		two_digit_codes(Seconds, SecondsCodes),
+		append([
+			DayCodes, [32], MonthShortCodes, [32], YearCodes, [32],
+			HoursCodes, [0':], MinutesCodes, [0':], SecondsCodes
+		], Codes),
+		atom_codes(String, Codes).
+	format_date_time_(date_time_long, date_time(Year, Month, Day, Hours, Minutes, Seconds), OffsetSeconds, String) :-
+		name_of_month(Month, MonthName, _),
+		atom_codes(MonthName, MonthNameCodes),
+		minimum_width_non_negative_integer_codes(Day, 1, DayCodes),
+		minimum_width_non_negative_integer_codes(Year, 4, YearCodes),
+		twelve_hour_clock(Hours, TwelveHours, Meridiem),
+		minimum_width_non_negative_integer_codes(TwelveHours, 1, HourCodes),
+		two_digit_codes(Minutes, MinutesCodes),
+		two_digit_codes(Seconds, SecondsCodes),
+		atom_codes(Meridiem, MeridiemCodes),
+		rfc3339_offset_codes(OffsetSeconds, OffsetCodes),
+		append([
+			MonthNameCodes, [32], DayCodes, [0',, 32], YearCodes, [32],
+			HourCodes, [0':], MinutesCodes, [0':], SecondsCodes, [32], MeridiemCodes, [32], OffsetCodes
+		], Codes),
+		atom_codes(String, Codes).
+	format_date_time_(date_time_full, DateTime, OffsetSeconds, String) :-
+		DateTime = date_time(Year, Month, Day, Hours, Minutes, Seconds),
+		weekday(DateTime, Weekday),
+		name_of_day(Weekday, DayName, _),
+		name_of_month(Month, MonthName, _),
+		atom_codes(DayName, DayNameCodes),
+		atom_codes(MonthName, MonthNameCodes),
+		minimum_width_non_negative_integer_codes(Day, 1, DayCodes),
+		minimum_width_non_negative_integer_codes(Year, 4, YearCodes),
+		twelve_hour_clock(Hours, TwelveHours, Meridiem),
+		minimum_width_non_negative_integer_codes(TwelveHours, 1, HourCodes),
+		two_digit_codes(Minutes, MinutesCodes),
+		two_digit_codes(Seconds, SecondsCodes),
+		atom_codes(Meridiem, MeridiemCodes),
+		rfc3339_offset_codes(OffsetSeconds, OffsetCodes),
+		append([
+			DayNameCodes, [0',, 32], MonthNameCodes, [32], DayCodes, [0',, 32], YearCodes, [32],
+			HourCodes, [0':], MinutesCodes, [0':], SecondsCodes, [32], MeridiemCodes, [32], OffsetCodes
+		], Codes),
+		atom_codes(String, Codes).
+
+	rfc3339_offset_codes(0, [0'Z]) :-
+		!.
+	rfc3339_offset_codes(OffsetSeconds, [SignCode, HourTens, HourOnes, 0':, MinuteTens, MinuteOnes]) :-
+		offset_seconds_components(OffsetSeconds, SignCode, OffsetHours, OffsetMinutes),
+		two_digit_codes(OffsetHours, [HourTens, HourOnes]),
+		two_digit_codes(OffsetMinutes, [MinuteTens, MinuteOnes]).
+
+	rfc2822_offset_codes(OffsetSeconds, [SignCode, HourTens, HourOnes, MinuteTens, MinuteOnes]) :-
+		offset_seconds_components(OffsetSeconds, SignCode, OffsetHours, OffsetMinutes),
+		two_digit_codes(OffsetHours, [HourTens, HourOnes]),
+		two_digit_codes(OffsetMinutes, [MinuteTens, MinuteOnes]).
+
+	offset_seconds_components(OffsetSeconds, SignCode, OffsetHours, OffsetMinutes) :-
+		integer(OffsetSeconds),
+		AbsOffsetSeconds is abs(OffsetSeconds),
+		0 is AbsOffsetSeconds mod 60,
+		AbsOffsetSeconds =< 86340,
+		OffsetHours is AbsOffsetSeconds // 3600,
+		OffsetMinutes is (AbsOffsetSeconds mod 3600) // 60,
+		( 	OffsetSeconds < 0 ->
+			SignCode = 0'-
+		;	SignCode = 0'+
+		).
+
+	two_digit_codes(Integer, [TensCode, OnesCode]) :-
+		integer(Integer),
+		Integer >= 0,
+		Integer =< 99,
+		TensCode is Integer // 10 + 0'0,
+		OnesCode is Integer mod 10 + 0'0.
+
+	space_padded_day_codes(Integer, [32, DayCode]) :-
+		integer(Integer),
+		Integer >= 0,
+		Integer < 10,
+		DayCode is Integer + 0'0.
+	space_padded_day_codes(Integer, Codes) :-
+		two_digit_codes(Integer, Codes).
+
+	twelve_hour_clock(Hours, TwelveHours, 'AM') :-
+		integer(Hours),
+		Hours >= 0,
+		Hours < 12,
+		( 	Hours =:= 0 ->
+			TwelveHours = 12
+		;	TwelveHours = Hours
+		).
+	twelve_hour_clock(Hours, TwelveHours, 'PM') :-
+		integer(Hours),
+		Hours >= 12,
+		Hours =< 23,
+		( 	Hours =:= 12 ->
+			TwelveHours = 12
+		;	TwelveHours is Hours - 12
+		).
+
+	fixed_width_non_negative_integer_codes(Integer, Width, Codes) :-
+		integer(Integer),
+		Integer >= 0,
+		number_codes(Integer, RawCodes),
+		length(RawCodes, RawLength),
+		RawLength =< Width,
+		Padding is Width - RawLength,
+		zero_codes(Padding, ZeroCodes),
+		append(ZeroCodes, RawCodes, Codes).
+
+	minimum_width_non_negative_integer_codes(Integer, Width, Codes) :-
+		integer(Integer),
+		Integer >= 0,
+		number_codes(Integer, RawCodes),
+		length(RawCodes, RawLength),
+		( 	RawLength >= Width ->
+			Codes = RawCodes
+		;	Padding is Width - RawLength,
+			zero_codes(Padding, ZeroCodes),
+			append(ZeroCodes, RawCodes, Codes)
+		).
+
+	zero_codes(0, []) :-
+		!.
+	zero_codes(Count, [0'0| Codes]) :-
+		Count > 0,
+		NextCount is Count - 1,
+		zero_codes(NextCount, Codes).
 
 	digits_value(C1, C2, Value) :-
 		char_code(C1, Code1),

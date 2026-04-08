@@ -14,7 +14,7 @@ Date protocol.
 |    ``logtalk_load(dates(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:2:0
+| **Version:** 2:3:0
 | **Date:** 2026-04-08
 
 | **Compilation flags:**
@@ -285,6 +285,25 @@ Converts a local datetime to UTC using an explicit timezone offset atom (``Z`` o
 
 ------------
 
+.. index:: format_date_time/4
+.. _datep/0::format_date_time/4:
+
+``format_date_time/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Formats a date-time using an explicit UTC offset in seconds. Supported format identifiers are ``rfc3339``, ``iso8601``, ``atom``, ``rfc2822``, ``rfc5322``, ``rss``, ``http_date``, ``rfc1123``, ``unix_date``, ``common_log``, ``date_short``, ``date_medium``, ``date_long``, ``date_full``, ``time_short``, ``time_medium``, ``time_long``, ``time_full``, ``date_time_short``, ``date_time_medium``, ``date_time_long``, and ``date_time_full``. RFC 3339, ISO 8601, Atom, and the ``date_*`` and ``date_time_*`` styles require a four-digit non-negative year. Formats that include numeric offsets require an offset expressible in whole minutes. HTTP-date and RFC 1123 output are always normalized to GMT. The style presets are English-only presentation formats. Fails if the format or date-time are not valid.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``format_date_time(DateTime,OffsetSeconds,Format,String)``
+| **Mode and number of proofs:**
+|    ``format_date_time(+compound,+integer,+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
 .. index:: day_of_year/2
 .. _datep/0::day_of_year/2:
 
@@ -481,7 +500,7 @@ True iff ``DateTime1`` and ``DateTime2`` represent the same instant (equal Unix 
 ``compare_date_time/3``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Three-way comparison of two datetime terms. ``Order`` is unified with ``<``, ``=``, or ``>``. Suitable for use with ``msort/2`` and ``predsort/3``.
+Three-way comparison of two datetime terms. ``Order`` is unified with ``<``, ``=``, or ``>``. Suitable for use with ``sort/3``.
 
 | **Compilation flags:**
 |    ``static``

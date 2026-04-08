@@ -110,7 +110,8 @@ a file-system path into file URL components (handles Windows drive-letter and
 UNC paths).
 
 * ADDED: Predicates `day_of_year_date/3`, `month_weekday_date`, `before/2`,
-`after/2`, `same_instant/2`, and `compare_date_time/3` to the `dates` library.
+`after/2`, `same_instant/2`, `compare_date_time/3`, and `format_date_time/4`
+to the `dates` library.
 
 * ADDED: Support for calendar-aware year/month period arithmetic to the `dates`
 library.

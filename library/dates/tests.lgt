@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:2:0,
+		version is 2:3:0,
 		author is 'Paulo Moura',
 		date is 2026-04-08,
 		comment is 'Unit tests for the "dates" library.'
@@ -58,6 +58,81 @@
 
 	test(date_local_to_utc_3_01, deterministic(UTCDateTime == date_time(2026, 2, 25, 11, 45, 30))) :-
 		date::local_to_utc(date_time(2026, 2, 25, 13, 15, 30), '+01:30', UTCDateTime).
+
+	test(date_format_date_time_4_01, deterministic(String == '2024-02-29T12:34:56Z')) :-
+		date::format_date_time(date_time(2024, 2, 29, 12, 34, 56), 0, rfc3339, String).
+
+	test(date_format_date_time_4_02, deterministic(String == 'Mon, 15 Jan 2024 07:00:00 -0500')) :-
+		date::format_date_time(date_time(2024, 1, 15, 7, 0, 0), -18000, rfc2822, String).
+
+	test(date_format_date_time_4_03, deterministic(String == '2024-02-29T12:34:56+01:30')) :-
+		date::format_date_time(date_time(2024, 2, 29, 12, 34, 56), 5400, iso8601, String).
+
+	test(date_format_date_time_4_04, deterministic(String == '2024-02-29T12:34:56Z')) :-
+		date::format_date_time(date_time(2024, 2, 29, 12, 34, 56), 0, atom, String).
+
+	test(date_format_date_time_4_05, deterministic(String == 'Mon, 15 Jan 2024 07:00:00 -0500')) :-
+		date::format_date_time(date_time(2024, 1, 15, 7, 0, 0), -18000, rfc5322, String).
+
+	test(date_format_date_time_4_06, deterministic(String == 'Mon, 15 Jan 2024 07:00:00 -0500')) :-
+		date::format_date_time(date_time(2024, 1, 15, 7, 0, 0), -18000, rss, String).
+
+	test(date_format_date_time_4_07a, deterministic(String == 'Mon, 15 Jan 2024 12:00:00 GMT')) :-
+		date::format_date_time(date_time(2024, 1, 15, 7, 0, 0), -18000, http_date, String).
+
+	test(date_format_date_time_4_07b, deterministic(String == 'Mon, 15 Jan 2024 12:00:00 GMT')) :-
+		date::format_date_time(date_time(2024, 1, 15, 7, 0, 0), -18000, rfc1123, String).
+
+	test(date_format_date_time_4_08, deterministic(String == 'Thu Feb 29 12:34:56 2024')) :-
+		date::format_date_time(date_time(2024, 2, 29, 12, 34, 56), 5400, unix_date, String).
+
+	test(date_format_date_time_4_09, deterministic(String == '29/Feb/2024:12:34:56 +0130')) :-
+		date::format_date_time(date_time(2024, 2, 29, 12, 34, 56), 5400, common_log, String).
+
+	test(date_format_date_time_4_10, deterministic(String == '2024-02-29')) :-
+		date::format_date_time(date_time(2024, 2, 29, 13, 45, 30), 5400, date_short, String).
+
+	test(date_format_date_time_4_11, deterministic(String == '29 Feb 2024')) :-
+		date::format_date_time(date_time(2024, 2, 29, 13, 45, 30), 5400, date_medium, String).
+
+	test(date_format_date_time_4_12, deterministic(String == 'February 29, 2024')) :-
+		date::format_date_time(date_time(2024, 2, 29, 13, 45, 30), 5400, date_long, String).
+
+	test(date_format_date_time_4_13, deterministic(String == 'Thursday, February 29, 2024')) :-
+		date::format_date_time(date_time(2024, 2, 29, 13, 45, 30), 5400, date_full, String).
+
+	test(date_format_date_time_4_14, deterministic(String == '13:45')) :-
+		date::format_date_time(date_time(2024, 2, 29, 13, 45, 30), 5400, time_short, String).
+
+	test(date_format_date_time_4_15, deterministic(String == '13:45:30')) :-
+		date::format_date_time(date_time(2024, 2, 29, 13, 45, 30), 5400, time_medium, String).
+
+	test(date_format_date_time_4_16, deterministic(String == '13:45:30 +01:30')) :-
+		date::format_date_time(date_time(2024, 2, 29, 13, 45, 30), 5400, time_long, String).
+
+	test(date_format_date_time_4_17, deterministic(String == '1:45:30 PM +01:30')) :-
+		date::format_date_time(date_time(2024, 2, 29, 13, 45, 30), 5400, time_full, String).
+
+	test(date_format_date_time_4_18, deterministic(String == '2024-02-29 13:45')) :-
+		date::format_date_time(date_time(2024, 2, 29, 13, 45, 30), 5400, date_time_short, String).
+
+	test(date_format_date_time_4_19, deterministic(String == '29 Feb 2024 13:45:30')) :-
+		date::format_date_time(date_time(2024, 2, 29, 13, 45, 30), 5400, date_time_medium, String).
+
+	test(date_format_date_time_4_20, deterministic(String == 'February 29, 2024 1:45:30 PM +01:30')) :-
+		date::format_date_time(date_time(2024, 2, 29, 13, 45, 30), 5400, date_time_long, String).
+
+	test(date_format_date_time_4_21, deterministic(String == 'Thursday, February 29, 2024 1:45:30 PM +01:30')) :-
+		date::format_date_time(date_time(2024, 2, 29, 13, 45, 30), 5400, date_time_full, String).
+
+	test(date_format_date_time_4_22, false) :-
+		date::format_date_time(date_time(2024, 2, 29, 12, 34, 56), 1, rfc3339, _).
+
+	test(date_format_date_time_4_23, false) :-
+		date::format_date_time(date_time(2024, 2, 29, 12, 34, 56), 0, unknown, _).
+
+	test(date_format_date_time_4_24, false) :-
+		date::format_date_time(date_time(12345, 1, 1, 0, 0, 0), 0, rfc3339, _).
 
 	test(date_day_of_year_2_01, deterministic(DayOfYear == 60)) :-
 		date::day_of_year(date(2024, 2, 29), DayOfYear).

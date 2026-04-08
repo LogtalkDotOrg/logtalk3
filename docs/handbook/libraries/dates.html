@@ -234,12 +234,13 @@
 <code class="docutils literal notranslate"><span class="pre">subtract_duration/3</span></code>, <code class="docutils literal notranslate"><span class="pre">duration_between/3</span></code>)</p></li>
 <li><p>UTC/local conversion using explicit offsets (<code class="docutils literal notranslate"><span class="pre">utc_to_local/3</span></code>,
 <code class="docutils literal notranslate"><span class="pre">local_to_utc/3</span></code>)</p></li>
+<li><p>date-time formatting with explicit offsets (<code class="docutils literal notranslate"><span class="pre">format_date_time/4</span></code>)</p></li>
 <li><p>calendar utilities (<code class="docutils literal notranslate"><span class="pre">day_of_year/2</span></code>, <code class="docutils literal notranslate"><span class="pre">week_of_year_iso/2</span></code>,
 <code class="docutils literal notranslate"><span class="pre">weekday/2</span></code>)</p></li>
 <li><p>reverse and positional calendar utilities (<code class="docutils literal notranslate"><span class="pre">day_of_year_date/3</span></code>,
 <code class="docutils literal notranslate"><span class="pre">month_weekday_date/5</span></code>)</p></li>
 <li><p>date-time normalization and validation (<code class="docutils literal notranslate"><span class="pre">normalize_date_time/2</span></code>,
-<code class="docutils literal notranslate"><span class="pre">valid_date_time/1-2</span></code>)</p></li>
+<code class="docutils literal notranslate"><span class="pre">valid_date_time/1</span></code>)</p></li>
 <li><p>date-time comparison (<code class="docutils literal notranslate"><span class="pre">before/2</span></code>, <code class="docutils literal notranslate"><span class="pre">after/2</span></code>, <code class="docutils literal notranslate"><span class="pre">same_instant/2</span></code>,
 <code class="docutils literal notranslate"><span class="pre">compare_date_time/3</span></code>)</p></li>
 </ul>
@@ -260,6 +261,32 @@ day and time delta applied via fixed-length arithmetic. The
 term:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">date_time(Year,</span> <span class="pre">Month,</span> <span class="pre">Day,</span> <span class="pre">Hours,</span> <span class="pre">Minutes,</span> <span class="pre">Seconds)</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">format_date_time/4</span></code> predicate currently supports the named
+formats <code class="docutils literal notranslate"><span class="pre">rfc3339</span></code>, <code class="docutils literal notranslate"><span class="pre">iso8601</span></code>, <code class="docutils literal notranslate"><span class="pre">atom</span></code>, <code class="docutils literal notranslate"><span class="pre">rfc2822</span></code>, <code class="docutils literal notranslate"><span class="pre">rfc5322</span></code>,
+<code class="docutils literal notranslate"><span class="pre">rss</span></code>, <code class="docutils literal notranslate"><span class="pre">http_date</span></code>, <code class="docutils literal notranslate"><span class="pre">rfc1123</span></code>, <code class="docutils literal notranslate"><span class="pre">unix_date</span></code>, <code class="docutils literal notranslate"><span class="pre">common_log</span></code>,
+<code class="docutils literal notranslate"><span class="pre">date_short</span></code>, <code class="docutils literal notranslate"><span class="pre">date_medium</span></code>, <code class="docutils literal notranslate"><span class="pre">date_long</span></code>, <code class="docutils literal notranslate"><span class="pre">date_full</span></code>,
+<code class="docutils literal notranslate"><span class="pre">time_short</span></code>, <code class="docutils literal notranslate"><span class="pre">time_medium</span></code>, <code class="docutils literal notranslate"><span class="pre">time_long</span></code>, <code class="docutils literal notranslate"><span class="pre">time_full</span></code>,
+<code class="docutils literal notranslate"><span class="pre">date_time_short</span></code>, <code class="docutils literal notranslate"><span class="pre">date_time_medium</span></code>, <code class="docutils literal notranslate"><span class="pre">date_time_long</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">date_time_full</span></code>.</p>
+<p>The explicit offset argument is given in seconds. Formats that include
+numeric offsets require offsets representable in whole minutes. The
+<code class="docutils literal notranslate"><span class="pre">http_date</span></code> and <code class="docutils literal notranslate"><span class="pre">rfc1123</span></code> formats always normalize the output to
+<code class="docutils literal notranslate"><span class="pre">GMT</span></code>.</p>
+<p>The style presets are currently English-only presentation formats:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">date_short</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">2026-04-08</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">date_medium</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">8</span> <span class="pre">Apr</span> <span class="pre">2026</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">date_long</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">April</span> <span class="pre">8,</span> <span class="pre">2026</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">date_full</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Tuesday,</span> <span class="pre">April</span> <span class="pre">8,</span> <span class="pre">2026</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time_short</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">13:45</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time_medium</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">13:45:30</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time_long</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">13:45:30</span> <span class="pre">+01:00</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time_full</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">1:45:30</span> <span class="pre">PM</span> <span class="pre">+01:00</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">date_time_short</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">2026-04-08</span> <span class="pre">13:45</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">date_time_medium</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">8</span> <span class="pre">Apr</span> <span class="pre">2026</span> <span class="pre">13:45:30</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">date_time_long</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">April</span> <span class="pre">8,</span> <span class="pre">2026</span> <span class="pre">1:45:30</span> <span class="pre">PM</span> <span class="pre">+01:00</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">date_time_full</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Tuesday,</span> <span class="pre">April</span> <span class="pre">8,</span> <span class="pre">2026</span> <span class="pre">1:45:30</span> <span class="pre">PM</span> <span class="pre">+01:00</span></code></p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">time</span></code> object implements some useful time predicates.</p>
 <p>Please note that the functionality of these objects depends on the

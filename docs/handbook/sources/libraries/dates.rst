@@ -13,12 +13,13 @@ It also provides portable predicates for date-time handling, including:
   ``subtract_duration/3``, ``duration_between/3``)
 - UTC/local conversion using explicit offsets (``utc_to_local/3``,
   ``local_to_utc/3``)
+- date-time formatting with explicit offsets (``format_date_time/4``)
 - calendar utilities (``day_of_year/2``, ``week_of_year_iso/2``,
   ``weekday/2``)
 - reverse and positional calendar utilities (``day_of_year_date/3``,
   ``month_weekday_date/5``)
 - date-time normalization and validation (``normalize_date_time/2``,
-  ``valid_date_time/1-2``)
+  ``valid_date_time/1``)
 - date-time comparison (``before/2``, ``after/2``, ``same_instant/2``,
   ``compare_date_time/3``)
 
@@ -39,6 +40,34 @@ Date-time values are represented using the ``date_time/6`` compound
 term:
 
 - ``date_time(Year, Month, Day, Hours, Minutes, Seconds)``
+
+The ``format_date_time/4`` predicate currently supports the named
+formats ``rfc3339``, ``iso8601``, ``atom``, ``rfc2822``, ``rfc5322``,
+``rss``, ``http_date``, ``rfc1123``, ``unix_date``, ``common_log``,
+``date_short``, ``date_medium``, ``date_long``, ``date_full``,
+``time_short``, ``time_medium``, ``time_long``, ``time_full``,
+``date_time_short``, ``date_time_medium``, ``date_time_long``, and
+``date_time_full``.
+
+The explicit offset argument is given in seconds. Formats that include
+numeric offsets require offsets representable in whole minutes. The
+``http_date`` and ``rfc1123`` formats always normalize the output to
+``GMT``.
+
+The style presets are currently English-only presentation formats:
+
+- ``date_short`` -> ``2026-04-08``
+- ``date_medium`` -> ``8 Apr 2026``
+- ``date_long`` -> ``April 8, 2026``
+- ``date_full`` -> ``Tuesday, April 8, 2026``
+- ``time_short`` -> ``13:45``
+- ``time_medium`` -> ``13:45:30``
+- ``time_long`` -> ``13:45:30 +01:00``
+- ``time_full`` -> ``1:45:30 PM +01:00``
+- ``date_time_short`` -> ``2026-04-08 13:45``
+- ``date_time_medium`` -> ``8 Apr 2026 13:45:30``
+- ``date_time_long`` -> ``April 8, 2026 1:45:30 PM +01:00``
+- ``date_time_full`` -> ``Tuesday, April 8, 2026 1:45:30 PM +01:00``
 
 The ``time`` object implements some useful time predicates.
 
