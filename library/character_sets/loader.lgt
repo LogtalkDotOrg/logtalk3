@@ -21,5 +21,13 @@
 
 :- initialization((
 	logtalk_load(basic_types(loader)),
-	logtalk_load([character_set_protocol, character_sets], [optimize(on)])
+	logtalk_load([
+		character_set_protocol,
+		character_sets,
+		utf_character_sets,
+		iso_8859_character_sets,
+		windows_character_sets
+	], [
+		optimize(on)
+	])
 )).

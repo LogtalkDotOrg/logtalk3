@@ -87,6 +87,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ccsds.html"><code class="docutils literal notranslate"><span class="pre">ccsds</span></code></a></li>
@@ -289,6 +290,20 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(character_sets(tester)).
 </pre></div>
 </div>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>The UTF, ISO 8859, and Windows character set objects are grouped in
+three main files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">utf_character_sets.lgt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iso_8859_character_sets.lgt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">windows_character_sets.lgt</span></code></p></li>
+</ul>
+<p>This allows some customization of the character set objects loaded by
+your application. Note that the <code class="docutils literal notranslate"><span class="pre">character_set_protocol.lgt</span></code> and
+<code class="docutils literal notranslate"><span class="pre">character_sets.lgt</span></code> base files must always be loaded (they include
+the <code class="docutils literal notranslate"><span class="pre">us_ascii</span></code> character set, which is thus always loaded).</p>
 </section>
 </section>
 

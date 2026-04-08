@@ -1,0 +1,603 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- object(iso_8859_1,
+	imports(single_byte_character_set(0xFF))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-05,
+		comment is 'ISO-8859-1 character set encoder and decoder.'
+	]).
+
+	preferred_mime_name('ISO-8859-1').
+
+	name('ISO_8859-1:1987').
+
+	alias('iso-ir-100').
+	alias('ISO_8859-1').
+	alias(latin1).
+	alias(l1).
+	alias('IBM819').
+	alias('CP819').
+	alias('csISOLatin1').
+
+	mibenum(4).
+
+:- end_object.
+
+
+:- object(iso_8859_2,
+	imports(mapped_single_byte_character_set)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-05,
+		comment is 'ISO-8859-2 character set encoder and decoder.'
+	]).
+
+	mapping(0xA1, 0x0104).
+	mapping(0xA2, 0x02D8).
+	mapping(0xA3, 0x0141).
+	mapping(0xA5, 0x013D).
+	mapping(0xA6, 0x015A).
+	mapping(0xA9, 0x0160).
+	mapping(0xAA, 0x015E).
+	mapping(0xAB, 0x0164).
+	mapping(0xAC, 0x0179).
+	mapping(0xAE, 0x017D).
+	mapping(0xAF, 0x017B).
+	mapping(0xB1, 0x0105).
+	mapping(0xB2, 0x02DB).
+	mapping(0xB3, 0x0142).
+	mapping(0xB5, 0x013E).
+	mapping(0xB6, 0x015B).
+	mapping(0xB7, 0x02C7).
+	mapping(0xB9, 0x0161).
+	mapping(0xBA, 0x015F).
+	mapping(0xBB, 0x0165).
+	mapping(0xBC, 0x017A).
+	mapping(0xBD, 0x02DD).
+	mapping(0xBE, 0x017E).
+	mapping(0xBF, 0x017C).
+	mapping(0xC0, 0x0154).
+	mapping(0xC3, 0x0102).
+	mapping(0xC5, 0x0139).
+	mapping(0xC6, 0x0106).
+	mapping(0xC8, 0x010C).
+	mapping(0xCA, 0x0118).
+	mapping(0xCC, 0x011A).
+	mapping(0xCF, 0x010E).
+	mapping(0xD0, 0x0110).
+	mapping(0xD1, 0x0143).
+	mapping(0xD2, 0x0147).
+	mapping(0xD5, 0x0150).
+	mapping(0xD8, 0x0158).
+	mapping(0xD9, 0x016E).
+	mapping(0xDB, 0x0170).
+	mapping(0xDE, 0x0162).
+	mapping(0xE0, 0x0155).
+	mapping(0xE3, 0x0103).
+	mapping(0xE5, 0x013A).
+	mapping(0xE6, 0x0107).
+	mapping(0xE8, 0x010D).
+	mapping(0xEA, 0x0119).
+	mapping(0xEC, 0x011B).
+	mapping(0xEF, 0x010F).
+	mapping(0xF0, 0x0111).
+	mapping(0xF1, 0x0144).
+	mapping(0xF2, 0x0148).
+	mapping(0xF5, 0x0151).
+	mapping(0xF8, 0x0159).
+	mapping(0xF9, 0x016F).
+	mapping(0xFB, 0x0171).
+	mapping(0xFE, 0x0163).
+	mapping(0xFF, 0x02D9).
+
+	preferred_mime_name('ISO-8859-2').
+
+	name('ISO_8859-2:1987').
+
+	alias('iso-ir-101').
+	alias('ISO_8859-2').
+	alias('ISO-8859-2').
+	alias(latin2).
+	alias(l2).
+	alias('csISOLatin2').
+
+	mibenum(5).
+
+:- end_object.
+
+
+:- object(iso_8859_3,
+	imports(mapped_single_byte_character_set)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-05,
+		comment is 'ISO-8859-3 character set encoder and decoder.'
+	]).
+
+	mapping(0xA1, 0x0126).
+	mapping(0xA2, 0x02D8).
+	mapping(0xA6, 0x0124).
+	mapping(0xA9, 0x0130).
+	mapping(0xAA, 0x015E).
+	mapping(0xAB, 0x011E).
+	mapping(0xAC, 0x0134).
+	mapping(0xAF, 0x017B).
+	mapping(0xB1, 0x0127).
+	mapping(0xB6, 0x0125).
+	mapping(0xB9, 0x0131).
+	mapping(0xBA, 0x015F).
+	mapping(0xBB, 0x011F).
+	mapping(0xBC, 0x0135).
+	mapping(0xBF, 0x017C).
+	mapping(0xC5, 0x010A).
+	mapping(0xC6, 0x0108).
+	mapping(0xD5, 0x0120).
+	mapping(0xD8, 0x011C).
+	mapping(0xDD, 0x016C).
+	mapping(0xDE, 0x015C).
+	mapping(0xE5, 0x010B).
+	mapping(0xE6, 0x0109).
+	mapping(0xF5, 0x0121).
+	mapping(0xF8, 0x011D).
+	mapping(0xFD, 0x016D).
+	mapping(0xFE, 0x015D).
+	mapping(0xFF, 0x02D9).
+
+	preferred_mime_name('ISO-8859-3').
+
+	name('ISO_8859-3:1988').
+
+	alias('iso-ir-109').
+	alias('ISO_8859-3').
+	alias('ISO-8859-3').
+	alias(latin3).
+	alias(l3).
+	alias('csISOLatin3').
+
+	mibenum(6).
+
+:- end_object.
+
+
+:- object(iso_8859_4,
+	imports(mapped_single_byte_character_set)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-05,
+		comment is 'ISO-8859-4 character set encoder and decoder.'
+	]).
+
+	mapping(0xA1, 0x0104).
+	mapping(0xA2, 0x0138).
+	mapping(0xA3, 0x0156).
+	mapping(0xA5, 0x0128).
+	mapping(0xA6, 0x013B).
+	mapping(0xA9, 0x0160).
+	mapping(0xAA, 0x0112).
+	mapping(0xAB, 0x0122).
+	mapping(0xAC, 0x0166).
+	mapping(0xAE, 0x017D).
+	mapping(0xB1, 0x0105).
+	mapping(0xB2, 0x02DB).
+	mapping(0xB3, 0x0157).
+	mapping(0xB5, 0x0129).
+	mapping(0xB6, 0x013C).
+	mapping(0xB7, 0x02C7).
+	mapping(0xB9, 0x0161).
+	mapping(0xBA, 0x0113).
+	mapping(0xBB, 0x0123).
+	mapping(0xBC, 0x0167).
+	mapping(0xBD, 0x014A).
+	mapping(0xBE, 0x017E).
+	mapping(0xBF, 0x014B).
+	mapping(0xC0, 0x0100).
+	mapping(0xC7, 0x012E).
+	mapping(0xC8, 0x010C).
+	mapping(0xCA, 0x0118).
+	mapping(0xCC, 0x0116).
+	mapping(0xCF, 0x012A).
+	mapping(0xD0, 0x0110).
+	mapping(0xD1, 0x0145).
+	mapping(0xD2, 0x014C).
+	mapping(0xD3, 0x0136).
+	mapping(0xD9, 0x0172).
+	mapping(0xDD, 0x0168).
+	mapping(0xDE, 0x016A).
+	mapping(0xE0, 0x0101).
+	mapping(0xE7, 0x012F).
+	mapping(0xE8, 0x010D).
+	mapping(0xEA, 0x0119).
+	mapping(0xEC, 0x0117).
+	mapping(0xEF, 0x012B).
+	mapping(0xF0, 0x0111).
+	mapping(0xF1, 0x0146).
+	mapping(0xF2, 0x014D).
+	mapping(0xF3, 0x0137).
+	mapping(0xF9, 0x0173).
+	mapping(0xFD, 0x0169).
+	mapping(0xFE, 0x016B).
+	mapping(0xFF, 0x02D9).
+
+	preferred_mime_name('ISO-8859-4').
+
+	name('ISO_8859-4:1988').
+
+	alias('iso-ir-110').
+	alias('ISO_8859-4').
+	alias('ISO-8859-4').
+	alias(latin4).
+	alias(l4).
+	alias('csISOLatin4').
+
+	mibenum(7).
+
+:- end_object.
+
+
+:- object(iso_8859_9,
+	imports(mapped_single_byte_character_set)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-05,
+		comment is 'ISO-8859-9 character set encoder and decoder.'
+	]).
+
+	mapping(0xD0, 0x011E).
+	mapping(0xDD, 0x0130).
+	mapping(0xDE, 0x015E).
+	mapping(0xF0, 0x011F).
+	mapping(0xFD, 0x0131).
+	mapping(0xFE, 0x015F).
+
+	preferred_mime_name('ISO-8859-9').
+
+	name('ISO_8859-9:1989').
+
+	alias('iso-ir-148').
+	alias('ISO_8859-9').
+	alias('ISO-8859-9').
+	alias(latin5).
+	alias(l5).
+	alias('csISOLatin5').
+
+	mibenum(12).
+
+:- end_object.
+
+
+:- object(iso_8859_10,
+	imports(mapped_single_byte_character_set)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-05,
+		comment is 'ISO-8859-10 character set encoder and decoder.'
+	]).
+
+	mapping(0xA1, 0x0104).
+	mapping(0xA2, 0x0112).
+	mapping(0xA3, 0x0122).
+	mapping(0xA4, 0x012A).
+	mapping(0xA5, 0x0128).
+	mapping(0xA6, 0x0136).
+	mapping(0xA8, 0x013B).
+	mapping(0xA9, 0x0110).
+	mapping(0xAA, 0x0160).
+	mapping(0xAB, 0x0166).
+	mapping(0xAC, 0x017D).
+	mapping(0xAE, 0x016A).
+	mapping(0xAF, 0x014A).
+	mapping(0xB1, 0x0105).
+	mapping(0xB2, 0x0113).
+	mapping(0xB3, 0x0123).
+	mapping(0xB4, 0x012B).
+	mapping(0xB5, 0x0129).
+	mapping(0xB6, 0x0137).
+	mapping(0xB8, 0x013C).
+	mapping(0xB9, 0x0111).
+	mapping(0xBA, 0x0161).
+	mapping(0xBB, 0x0167).
+	mapping(0xBC, 0x017E).
+	mapping(0xBD, 0x2015).
+	mapping(0xBE, 0x016B).
+	mapping(0xBF, 0x014B).
+	mapping(0xC0, 0x0100).
+	mapping(0xC7, 0x012E).
+	mapping(0xC8, 0x010C).
+	mapping(0xCA, 0x0118).
+	mapping(0xCC, 0x0116).
+	mapping(0xD1, 0x0145).
+	mapping(0xD2, 0x014C).
+	mapping(0xD7, 0x0168).
+	mapping(0xD9, 0x0172).
+	mapping(0xE0, 0x0101).
+	mapping(0xE7, 0x012F).
+	mapping(0xE8, 0x010D).
+	mapping(0xEA, 0x0119).
+	mapping(0xEC, 0x0117).
+	mapping(0xF1, 0x0146).
+	mapping(0xF2, 0x014D).
+	mapping(0xF7, 0x0169).
+	mapping(0xF9, 0x0173).
+	mapping(0xFF, 0x0138).
+
+	preferred_mime_name('ISO-8859-10').
+
+	name('ISO-8859-10').
+
+	alias('iso-ir-157').
+	alias(l6).
+	alias('ISO_8859-10:1992').
+	alias('csISOLatin6').
+	alias(latin6).
+
+	mibenum(13).
+
+:- end_object.
+
+
+:- object(iso_8859_13,
+	imports(mapped_single_byte_character_set)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-05,
+		comment is 'ISO-8859-13 character set encoder and decoder.'
+	]).
+
+	mapping(0xA1, 0x201D).
+	mapping(0xA5, 0x201E).
+	mapping(0xA8, 0x00D8).
+	mapping(0xAA, 0x0156).
+	mapping(0xAF, 0x00C6).
+	mapping(0xB4, 0x201C).
+	mapping(0xB8, 0x00F8).
+	mapping(0xBA, 0x0157).
+	mapping(0xBF, 0x00E6).
+	mapping(0xC0, 0x0104).
+	mapping(0xC1, 0x012E).
+	mapping(0xC2, 0x0100).
+	mapping(0xC3, 0x0106).
+	mapping(0xC6, 0x0118).
+	mapping(0xC7, 0x0112).
+	mapping(0xC8, 0x010C).
+	mapping(0xCA, 0x0179).
+	mapping(0xCB, 0x0116).
+	mapping(0xCC, 0x0122).
+	mapping(0xCD, 0x0136).
+	mapping(0xCE, 0x012A).
+	mapping(0xCF, 0x013B).
+	mapping(0xD0, 0x0160).
+	mapping(0xD1, 0x0143).
+	mapping(0xD2, 0x0145).
+	mapping(0xD4, 0x014C).
+	mapping(0xD8, 0x0172).
+	mapping(0xD9, 0x0141).
+	mapping(0xDA, 0x015A).
+	mapping(0xDB, 0x016A).
+	mapping(0xDD, 0x017B).
+	mapping(0xDE, 0x017D).
+	mapping(0xE0, 0x0105).
+	mapping(0xE1, 0x012F).
+	mapping(0xE2, 0x0101).
+	mapping(0xE3, 0x0107).
+	mapping(0xE6, 0x0119).
+	mapping(0xE7, 0x0113).
+	mapping(0xE8, 0x010D).
+	mapping(0xEA, 0x017A).
+	mapping(0xEB, 0x0117).
+	mapping(0xEC, 0x0123).
+	mapping(0xED, 0x0137).
+	mapping(0xEE, 0x012B).
+	mapping(0xEF, 0x013C).
+	mapping(0xF0, 0x0161).
+	mapping(0xF1, 0x0144).
+	mapping(0xF2, 0x0146).
+	mapping(0xF4, 0x014D).
+	mapping(0xF8, 0x0173).
+	mapping(0xF9, 0x0142).
+	mapping(0xFA, 0x015B).
+	mapping(0xFB, 0x016B).
+	mapping(0xFD, 0x017C).
+	mapping(0xFE, 0x017E).
+	mapping(0xFF, 0x2019).
+
+	preferred_mime_name('ISO-8859-13').
+
+	name('ISO-8859-13').
+
+	alias('csISO885913').
+
+	mibenum(109).
+
+:- end_object.
+
+
+:- object(iso_8859_14,
+	imports(mapped_single_byte_character_set)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-05,
+		comment is 'ISO-8859-14 character set encoder and decoder.'
+	]).
+
+	mapping(0xA1, 0x1E02).
+	mapping(0xA2, 0x1E03).
+	mapping(0xA4, 0x010A).
+	mapping(0xA5, 0x010B).
+	mapping(0xA6, 0x1E0A).
+	mapping(0xA8, 0x1E80).
+	mapping(0xAA, 0x1E82).
+	mapping(0xAB, 0x1E0B).
+	mapping(0xAC, 0x1EF2).
+	mapping(0xAF, 0x0178).
+	mapping(0xB0, 0x1E1E).
+	mapping(0xB1, 0x1E1F).
+	mapping(0xB2, 0x0120).
+	mapping(0xB3, 0x0121).
+	mapping(0xB4, 0x1E40).
+	mapping(0xB5, 0x1E41).
+	mapping(0xB7, 0x1E56).
+	mapping(0xB8, 0x1E81).
+	mapping(0xB9, 0x1E57).
+	mapping(0xBA, 0x1E83).
+	mapping(0xBB, 0x1E60).
+	mapping(0xBC, 0x1EF3).
+	mapping(0xBD, 0x1E84).
+	mapping(0xBE, 0x1E85).
+	mapping(0xBF, 0x1E61).
+	mapping(0xD0, 0x0174).
+	mapping(0xD7, 0x1E6A).
+	mapping(0xDE, 0x0176).
+	mapping(0xF0, 0x0175).
+	mapping(0xF7, 0x1E6B).
+	mapping(0xFE, 0x0177).
+
+	preferred_mime_name('ISO-8859-14').
+
+	name('ISO-8859-14').
+
+	alias('iso-ir-199').
+	alias('ISO_8859-14:1998').
+	alias('ISO_8859-14').
+	alias(latin8).
+	alias('iso-celtic').
+	alias(l8).
+	alias('csISO885914').
+
+	mibenum(110).
+
+:- end_object.
+
+
+:- object(iso_8859_15,
+	imports(mapped_single_byte_character_set)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-05,
+		comment is 'ISO-8859-15 character set encoder and decoder.'
+	]).
+
+	mapping(0xA4, 0x20AC).
+	mapping(0xA6, 0x0160).
+	mapping(0xA8, 0x0161).
+	mapping(0xB4, 0x017D).
+	mapping(0xB8, 0x017E).
+	mapping(0xBC, 0x0152).
+	mapping(0xBD, 0x0153).
+	mapping(0xBE, 0x0178).
+
+	preferred_mime_name('ISO-8859-15').
+
+	name('ISO-8859-15').
+
+	alias('ISO_8859-15').
+	alias('Latin-9').
+	alias('csISO885915').
+
+	mibenum(111).
+
+:- end_object.
+
+
+:- object(iso_8859_16,
+	imports(mapped_single_byte_character_set)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-05,
+		comment is 'ISO-8859-16 character set encoder and decoder.'
+	]).
+
+	mapping(0xA1, 0x0104).
+	mapping(0xA2, 0x0105).
+	mapping(0xA3, 0x0141).
+	mapping(0xA4, 0x20AC).
+	mapping(0xA5, 0x201E).
+	mapping(0xA6, 0x0160).
+	mapping(0xA8, 0x0161).
+	mapping(0xAA, 0x0218).
+	mapping(0xAC, 0x0179).
+	mapping(0xAE, 0x017A).
+	mapping(0xAF, 0x017B).
+	mapping(0xB2, 0x010C).
+	mapping(0xB3, 0x0142).
+	mapping(0xB4, 0x017D).
+	mapping(0xB5, 0x201D).
+	mapping(0xB8, 0x017E).
+	mapping(0xB9, 0x010D).
+	mapping(0xBA, 0x0219).
+	mapping(0xBC, 0x0152).
+	mapping(0xBD, 0x0153).
+	mapping(0xBE, 0x0178).
+	mapping(0xBF, 0x017C).
+	mapping(0xC3, 0x0102).
+	mapping(0xC5, 0x0106).
+	mapping(0xD0, 0x0110).
+	mapping(0xD1, 0x0143).
+	mapping(0xD5, 0x0150).
+	mapping(0xD7, 0x015A).
+	mapping(0xD8, 0x0170).
+	mapping(0xDD, 0x0118).
+	mapping(0xDE, 0x021A).
+	mapping(0xE3, 0x0103).
+	mapping(0xE5, 0x0107).
+	mapping(0xF0, 0x0111).
+	mapping(0xF1, 0x0144).
+	mapping(0xF5, 0x0151).
+	mapping(0xF7, 0x015B).
+	mapping(0xF8, 0x0171).
+	mapping(0xFD, 0x0119).
+	mapping(0xFE, 0x021B).
+
+	preferred_mime_name('ISO-8859-16').
+
+	name('ISO-8859-16').
+
+	alias('iso-ir-226').
+	alias('ISO_8859-16:2001').
+	alias('ISO_8859-16').
+	alias(latin10).
+	alias(l10).
+	alias('csISO885916').
+
+	mibenum(112).
+
+:- end_object.

@@ -21,7 +21,16 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
-	logtalk_load([character_set_protocol, character_sets], [debug(on), source_data(on)]),
+		logtalk_load([
+		character_set_protocol,
+		character_sets,
+		utf_character_sets,
+		iso_8859_character_sets,
+		windows_character_sets
+	], [
+		debug(on),
+		source_data(on)
+	]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

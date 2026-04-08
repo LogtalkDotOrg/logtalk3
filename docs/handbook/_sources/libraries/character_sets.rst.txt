@@ -78,3 +78,18 @@ To test this library predicates, load the ``tester.lgt`` file:
 ::
 
    | ?- logtalk_load(character_sets(tester)).
+
+Usage
+-----
+
+The UTF, ISO 8859, and Windows character set objects are grouped in
+three main files:
+
+- ``utf_character_sets.lgt``
+- ``iso_8859_character_sets.lgt``
+- ``windows_character_sets.lgt``
+
+This allows some customization of the character set objects loaded by
+your application. Note that the ``character_set_protocol.lgt`` and
+``character_sets.lgt`` base files must always be loaded (they include
+the ``us_ascii`` character set, which is thus always loaded).
