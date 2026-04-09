@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:88:0,
+		version is 0:89:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2026-02-04,
+		date is 2026-04-09,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -80,6 +80,13 @@
 	:- mode(dead_code_recursive(+atom), one).
 	:- info(dead_code_recursive/1, [
 		comment is 'Recursively scans a directory for dead code.',
+		argnames is ['Directory']
+	]).
+
+	:- public(portability/1).
+	:- mode(portability(+atom), one).
+	:- info(portability/1, [
+		comment is 'Scans loaded code for portability issues.',
 		argnames is ['Directory']
 	]).
 
@@ -404,6 +411,17 @@
 			logtalk_load(dead_code_scanner(loader)),
 			dead_code_scanner::rdirectory(Directory)
 		}),
+		open(Marker, append, Stream),
+		close(Stream).
+
+	% portability
+
+	portability(Directory) :-
+		atom_concat(Directory, '/.vscode_portability_done', Marker),
+		current_logtalk_flag(portability, Current),
+		set_logtalk_flag(portability, warning),
+		logtalk_make(force),
+		set_logtalk_flag(portability, Current),
 		open(Marker, append, Stream),
 		close(Stream).
 

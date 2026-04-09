@@ -316,6 +316,8 @@ Windows with backends that use CRLF instead of LF.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* ADDED: VSCode support for checking the portability of loaded code.
+
 * UPDATED: The Context7 MCP server `context7.json` support file to the latest
 format.
 
