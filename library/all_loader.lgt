@@ -60,6 +60,7 @@
 		java(loader),
 		redis(loader),
 		memcached(loader),
+		mime_types(loader),
 		recorded_database(loader),
 		optionals(loader),
 		options(loader),

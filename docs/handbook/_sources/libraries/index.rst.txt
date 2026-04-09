@@ -93,6 +93,7 @@ directory in the ``NOTES.md`` file.
    memcached
    meta
    meta_compiler
+   mime_types
    mutations
    nanoid
    naive_bayes

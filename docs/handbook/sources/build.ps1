@@ -143,6 +143,7 @@ Foreach-Object {
 (Get-Content ../../../library/memcached/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/memcached.rst
 (Get-Content ../../../library/meta/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/meta.rst
 (Get-Content ../../../library/meta_compiler/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/meta_compiler.rst
+(Get-Content ../../../library/mime_types/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mime_types.rst
 (Get-Content ../../../library/mutations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mutations.rst
 (Get-Content ../../../library/nanoid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nanoid.rst
 (Get-Content ../../../library/naive_bayes/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/naive_bayes.rst

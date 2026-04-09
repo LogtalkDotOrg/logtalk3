@@ -362,6 +362,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`datalog_protocol <datalog_protocol/0::add_rule/3>`
 
+``add_type/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mime_types <mime_types/0::add_type/2>`
+
+``add_type/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mime_types <mime_types/0::add_type/3>`
+
 ``add_vertex/3``
 ----------------
 
@@ -4629,6 +4649,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`amqp <amqp/0::encode_frame/2>`
 
+``encoding_suffix/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mime_types <mime_types/0::encoding_suffix/2>`
+
 ``ensure_directory/1``
 ----------------------
 
@@ -5116,6 +5146,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`proto_hierarchyp <proto_hierarchyp/0::extension/1>`
+
+``extension_type/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mime_types <mime_types/0::extension_type/2>`
+
+``extension_type/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mime_types <mime_types/0::extension_type/3>`
 
 ``extensions/1``
 ----------------
@@ -6497,6 +6547,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`pairs <pairs/0::group_sorted_by_key/2>`
 
+``guess_all_extensions/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mime_types <mime_types/0::guess_all_extensions/2>`
+
+``guess_all_extensions/3``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mime_types <mime_types/0::guess_all_extensions/3>`
+
 ``guess_arity/2``
 -----------------
 
@@ -6507,6 +6577,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`csv_protocol <csv_protocol/0::guess_arity/2>`
 
+``guess_extension/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mime_types <mime_types/0::guess_extension/2>`
+
+``guess_extension/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mime_types <mime_types/0::guess_extension/3>`
+
+``guess_file_type/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mime_types <mime_types/0::guess_file_type/3>`
+
+``guess_file_type/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mime_types <mime_types/0::guess_file_type/4>`
+
 ``guess_separator/2``
 ---------------------
 
@@ -6516,6 +6626,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`csv_protocol <csv_protocol/0::guess_separator/2>`
+
+``guess_type/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mime_types <mime_types/0::guess_type/3>`
+
+``guess_type/4``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mime_types <mime_types/0::guess_type/4>`
 
 ``gumbel/3``
 ------------
@@ -8893,6 +9023,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`mime_types <mime_types/0::load/1>`
 * :ref:`tzif_protocol <tzif_protocol/0::load/1>`
 
 ``load/2``
@@ -8903,6 +9034,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`mime_types <mime_types/0::load/2>`
 * :ref:`tzif_protocol <tzif_protocol/0::load/2>`
 
 ``load_config/1``
@@ -13542,6 +13674,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`json_rpc <json_rpc/0::read_message/2>`
 
+``read_mime_types/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mime_types <mime_types/0::read_mime_types/2>`
+
 ``read_only_device_path/1``
 ---------------------------
 
@@ -13999,6 +14141,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`counter <counter/0::reset/0>`
 * :ref:`debuggerp <debuggerp/0::reset/0>`
 * :ref:`linter_reporter <linter_reporter/0::reset/0>`
+* :ref:`mime_types <mime_types/0::reset/0>`
 * :ref:`mutator_protocol <mutator_protocol/0::reset/0>`
 * :ref:`packs_common <packs_common/0::reset/0>`
 * :ref:`ports_profiler <ports_profiler/0::reset/0>`
@@ -16160,6 +16303,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`listp <listp/0::suffix/3>`
+
+``suffix_alias/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mime_types <mime_types/0::suffix_alias/2>`
 
 ``sum/2``
 ---------

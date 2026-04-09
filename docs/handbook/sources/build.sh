@@ -143,6 +143,7 @@ sed '1,19d' ../../../library/mcp_server/NOTES.md | pandoc -f gfm -t rst -o libra
 sed '1,19d' ../../../library/memcached/NOTES.md | pandoc -f gfm -t rst -o libraries/memcached.rst
 sed '1,19d' ../../../library/meta/NOTES.md | pandoc -f gfm -t rst -o libraries/meta.rst
 sed '1,19d' ../../../library/meta_compiler/NOTES.md | pandoc -f gfm -t rst -o libraries/meta_compiler.rst
+sed '1,19d' ../../../library/mime_types/NOTES.md | pandoc -f gfm -t rst -o libraries/mime_types.rst
 sed '1,19d' ../../../library/mutations/NOTES.md | pandoc -f gfm -t rst -o libraries/mutations.rst
 sed '1,19d' ../../../library/nanoid/NOTES.md | pandoc -f gfm -t rst -o libraries/nanoid.rst
 sed '1,19d' ../../../library/naive_bayes/NOTES.md | pandoc -f gfm -t rst -o libraries/naive_bayes.rst

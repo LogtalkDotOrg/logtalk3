@@ -171,6 +171,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#add-rule-3"><code class="docutils literal notranslate"><span class="pre">add_rule/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#add-type-2"><code class="docutils literal notranslate"><span class="pre">add_type/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#add-type-3"><code class="docutils literal notranslate"><span class="pre">add_type/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#add-vertex-3"><code class="docutils literal notranslate"><span class="pre">add_vertex/3</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -1425,6 +1431,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#encode-frame-2"><code class="docutils literal notranslate"><span class="pre">encode_frame/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#encoding-suffix-2"><code class="docutils literal notranslate"><span class="pre">encoding_suffix/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#ensure-directory-1"><code class="docutils literal notranslate"><span class="pre">ensure_directory/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -1567,6 +1576,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#extension-1"><code class="docutils literal notranslate"><span class="pre">extension/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#extension-type-2"><code class="docutils literal notranslate"><span class="pre">extension_type/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#extension-type-3"><code class="docutils literal notranslate"><span class="pre">extension_type/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#extensions-1"><code class="docutils literal notranslate"><span class="pre">extensions/1</span></code></a><ul class="simple">
@@ -1965,10 +1980,34 @@
 <li class="toctree-l2"><a class="reference internal" href="#group-sorted-by-key-2"><code class="docutils literal notranslate"><span class="pre">group_sorted_by_key/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#guess-all-extensions-2"><code class="docutils literal notranslate"><span class="pre">guess_all_extensions/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#guess-all-extensions-3"><code class="docutils literal notranslate"><span class="pre">guess_all_extensions/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#guess-arity-2"><code class="docutils literal notranslate"><span class="pre">guess_arity/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#guess-extension-2"><code class="docutils literal notranslate"><span class="pre">guess_extension/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#guess-extension-3"><code class="docutils literal notranslate"><span class="pre">guess_extension/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#guess-file-type-3"><code class="docutils literal notranslate"><span class="pre">guess_file_type/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#guess-file-type-4"><code class="docutils literal notranslate"><span class="pre">guess_file_type/4</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#guess-separator-2"><code class="docutils literal notranslate"><span class="pre">guess_separator/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#guess-type-3"><code class="docutils literal notranslate"><span class="pre">guess_type/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#guess-type-4"><code class="docutils literal notranslate"><span class="pre">guess_type/4</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#gumbel-3"><code class="docutils literal notranslate"><span class="pre">gumbel/3</span></code></a><ul class="simple">
@@ -4032,6 +4071,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#read-message-2"><code class="docutils literal notranslate"><span class="pre">read_message/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#read-mime-types-2"><code class="docutils literal notranslate"><span class="pre">read_mime_types/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#read-only-device-path-1"><code class="docutils literal notranslate"><span class="pre">read_only_device_path/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -4801,6 +4843,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#suffix-3"><code class="docutils literal notranslate"><span class="pre">suffix/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#suffix-alias-2"><code class="docutils literal notranslate"><span class="pre">suffix_alias/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#sum-2"><code class="docutils literal notranslate"><span class="pre">sum/2</span></code></a><ul class="simple">
@@ -5740,6 +5785,22 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="datalog_protocol_0.html#datalog-protocol-0-add-rule-3"><span class="std std-ref">datalog_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="add-type-2">
+<h2><code class="docutils literal notranslate"><span class="pre">add_type/2</span></code><a class="headerlink" href="#add-type-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="mime_types_0.html#mime-types-0-add-type-2"><span class="std std-ref">mime_types</span></a></p></li>
+</ul>
+</section>
+<section id="add-type-3">
+<h2><code class="docutils literal notranslate"><span class="pre">add_type/3</span></code><a class="headerlink" href="#add-type-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="mime_types_0.html#mime-types-0-add-type-3"><span class="std std-ref">mime_types</span></a></p></li>
 </ul>
 </section>
 <section id="add-vertex-3">
@@ -9173,6 +9234,14 @@
 <li><p><a class="reference internal" href="amqp_0.html#amqp-0-encode-frame-2"><span class="std std-ref">amqp</span></a></p></li>
 </ul>
 </section>
+<section id="encoding-suffix-2">
+<h2><code class="docutils literal notranslate"><span class="pre">encoding_suffix/2</span></code><a class="headerlink" href="#encoding-suffix-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="mime_types_0.html#mime-types-0-encoding-suffix-2"><span class="std std-ref">mime_types</span></a></p></li>
+</ul>
+</section>
 <section id="ensure-directory-1">
 <h2><code class="docutils literal notranslate"><span class="pre">ensure_directory/1</span></code><a class="headerlink" href="#ensure-directory-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -9563,6 +9632,22 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="proto_hierarchyp_0.html#proto-hierarchyp-0-extension-1"><span class="std std-ref">proto_hierarchyp</span></a></p></li>
+</ul>
+</section>
+<section id="extension-type-2">
+<h2><code class="docutils literal notranslate"><span class="pre">extension_type/2</span></code><a class="headerlink" href="#extension-type-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="mime_types_0.html#mime-types-0-extension-type-2"><span class="std std-ref">mime_types</span></a></p></li>
+</ul>
+</section>
+<section id="extension-type-3">
+<h2><code class="docutils literal notranslate"><span class="pre">extension_type/3</span></code><a class="headerlink" href="#extension-type-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="mime_types_0.html#mime-types-0-extension-type-3"><span class="std std-ref">mime_types</span></a></p></li>
 </ul>
 </section>
 <section id="extensions-1">
@@ -10681,6 +10766,22 @@
 <li><p><a class="reference internal" href="pairs_0.html#pairs-0-group-sorted-by-key-2"><span class="std std-ref">pairs</span></a></p></li>
 </ul>
 </section>
+<section id="guess-all-extensions-2">
+<h2><code class="docutils literal notranslate"><span class="pre">guess_all_extensions/2</span></code><a class="headerlink" href="#guess-all-extensions-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="mime_types_0.html#mime-types-0-guess-all-extensions-2"><span class="std std-ref">mime_types</span></a></p></li>
+</ul>
+</section>
+<section id="guess-all-extensions-3">
+<h2><code class="docutils literal notranslate"><span class="pre">guess_all_extensions/3</span></code><a class="headerlink" href="#guess-all-extensions-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="mime_types_0.html#mime-types-0-guess-all-extensions-3"><span class="std std-ref">mime_types</span></a></p></li>
+</ul>
+</section>
 <section id="guess-arity-2">
 <h2><code class="docutils literal notranslate"><span class="pre">guess_arity/2</span></code><a class="headerlink" href="#guess-arity-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -10689,12 +10790,60 @@
 <li><p><a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-guess-arity-2"><span class="std std-ref">csv_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="guess-extension-2">
+<h2><code class="docutils literal notranslate"><span class="pre">guess_extension/2</span></code><a class="headerlink" href="#guess-extension-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="mime_types_0.html#mime-types-0-guess-extension-2"><span class="std std-ref">mime_types</span></a></p></li>
+</ul>
+</section>
+<section id="guess-extension-3">
+<h2><code class="docutils literal notranslate"><span class="pre">guess_extension/3</span></code><a class="headerlink" href="#guess-extension-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="mime_types_0.html#mime-types-0-guess-extension-3"><span class="std std-ref">mime_types</span></a></p></li>
+</ul>
+</section>
+<section id="guess-file-type-3">
+<h2><code class="docutils literal notranslate"><span class="pre">guess_file_type/3</span></code><a class="headerlink" href="#guess-file-type-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="mime_types_0.html#mime-types-0-guess-file-type-3"><span class="std std-ref">mime_types</span></a></p></li>
+</ul>
+</section>
+<section id="guess-file-type-4">
+<h2><code class="docutils literal notranslate"><span class="pre">guess_file_type/4</span></code><a class="headerlink" href="#guess-file-type-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="mime_types_0.html#mime-types-0-guess-file-type-4"><span class="std std-ref">mime_types</span></a></p></li>
+</ul>
+</section>
 <section id="guess-separator-2">
 <h2><code class="docutils literal notranslate"><span class="pre">guess_separator/2</span></code><a class="headerlink" href="#guess-separator-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-guess-separator-2"><span class="std std-ref">csv_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="guess-type-3">
+<h2><code class="docutils literal notranslate"><span class="pre">guess_type/3</span></code><a class="headerlink" href="#guess-type-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="mime_types_0.html#mime-types-0-guess-type-3"><span class="std std-ref">mime_types</span></a></p></li>
+</ul>
+</section>
+<section id="guess-type-4">
+<h2><code class="docutils literal notranslate"><span class="pre">guess_type/4</span></code><a class="headerlink" href="#guess-type-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="mime_types_0.html#mime-types-0-guess-type-4"><span class="std std-ref">mime_types</span></a></p></li>
 </ul>
 </section>
 <section id="gumbel-3">
@@ -12604,6 +12753,7 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="mime_types_0.html#mime-types-0-load-1"><span class="std std-ref">mime_types</span></a></p></li>
 <li><p><a class="reference internal" href="tzif_protocol_0.html#tzif-protocol-0-load-1"><span class="std std-ref">tzif_protocol</span></a></p></li>
 </ul>
 </section>
@@ -12612,6 +12762,7 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="mime_types_0.html#mime-types-0-load-2"><span class="std std-ref">mime_types</span></a></p></li>
 <li><p><a class="reference internal" href="tzif_protocol_0.html#tzif-protocol-0-load-2"><span class="std std-ref">tzif_protocol</span></a></p></li>
 </ul>
 </section>
@@ -16348,6 +16499,14 @@
 <li><p><a class="reference internal" href="json_rpc_0.html#json-rpc-0-read-message-2"><span class="std std-ref">json_rpc</span></a></p></li>
 </ul>
 </section>
+<section id="read-mime-types-2">
+<h2><code class="docutils literal notranslate"><span class="pre">read_mime_types/2</span></code><a class="headerlink" href="#read-mime-types-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="mime_types_0.html#mime-types-0-read-mime-types-2"><span class="std std-ref">mime_types</span></a></p></li>
+</ul>
+</section>
 <section id="read-only-device-path-1">
 <h2><code class="docutils literal notranslate"><span class="pre">read_only_device_path/1</span></code><a class="headerlink" href="#read-only-device-path-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -16714,6 +16873,7 @@
 <li><p><a class="reference internal" href="counter_0.html#counter-0-reset-0"><span class="std std-ref">counter</span></a></p></li>
 <li><p><a class="reference internal" href="debuggerp_0.html#debuggerp-0-reset-0"><span class="std std-ref">debuggerp</span></a></p></li>
 <li><p><a class="reference internal" href="linter_reporter_0.html#linter-reporter-0-reset-0"><span class="std std-ref">linter_reporter</span></a></p></li>
+<li><p><a class="reference internal" href="mime_types_0.html#mime-types-0-reset-0"><span class="std std-ref">mime_types</span></a></p></li>
 <li><p><a class="reference internal" href="mutator_protocol_0.html#mutator-protocol-0-reset-0"><span class="std std-ref">mutator_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="packs_common_0.html#packs-common-0-reset-0"><span class="std std-ref">packs_common</span></a></p></li>
 <li><p><a class="reference internal" href="ports_profiler_0.html#ports-profiler-0-reset-0"><span class="std std-ref">ports_profiler</span></a></p></li>
@@ -18451,6 +18611,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="listp_0.html#listp-0-suffix-3"><span class="std std-ref">listp</span></a></p></li>
+</ul>
+</section>
+<section id="suffix-alias-2">
+<h2><code class="docutils literal notranslate"><span class="pre">suffix_alias/2</span></code><a class="headerlink" href="#suffix-alias-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="mime_types_0.html#mime-types-0-suffix-alias-2"><span class="std std-ref">mime_types</span></a></p></li>
 </ul>
 </section>
 <section id="sum-2">

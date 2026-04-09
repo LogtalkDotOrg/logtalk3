@@ -1,0 +1,415 @@
+.. index:: single: mime_types
+.. _mime_types/0:
+
+.. rst-class:: right
+
+**object**
+
+``mime_types``
+==============
+
+MIME type registry and convenience predicates for mapping file names and URLs to media types.
+
+| **Availability:** 
+|    ``logtalk_load(mime_types(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+|    :ref:`reader <reader/0>`
+|    :ref:`string(Representation) <string/1>`
+
+| **Remarks:**
+
+   - Default behavior: Convenience predicates default to lenient lookup by consulting both built-in standard mappings and built-in common mappings.
+   - Path decomposition: File path decomposition uses the ``os`` library ``decompose_file_name/4`` predicate.
+   - External overlays: Additional ``mime.types``-style files can be loaded into the in-memory registry using the ``load/1-2`` predicates.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: guess_type/3
+.. _mime_types/0::guess_type/3:
+
+``guess_type/3``
+^^^^^^^^^^^^^^^^
+
+Guesses the MIME type and content encoding for a URL or file name using lenient lookup. Unknown values are returned as the empty atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``guess_type(Resource,Type,Encoding)``
+| **Mode and number of proofs:**
+|    ``guess_type(+atom,-atom,-atom)`` - ``one``
+
+
+------------
+
+.. index:: guess_type/4
+.. _mime_types/0::guess_type/4:
+
+``guess_type/4``
+^^^^^^^^^^^^^^^^
+
+Guesses the MIME type and content encoding for a URL or file name. When ``Strict`` is ``true``, only built-in standard mappings and strict runtime overlays are consulted.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``guess_type(Resource,Type,Encoding,Strict)``
+| **Mode and number of proofs:**
+|    ``guess_type(+atom,-atom,-atom,+boolean)`` - ``one``
+
+
+------------
+
+.. index:: guess_file_type/3
+.. _mime_types/0::guess_file_type/3:
+
+``guess_file_type/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Guesses the MIME type and content encoding for a file path using lenient lookup. Unknown values are returned as the empty atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``guess_file_type(Path,Type,Encoding)``
+| **Mode and number of proofs:**
+|    ``guess_file_type(+atom,-atom,-atom)`` - ``one``
+
+
+------------
+
+.. index:: guess_file_type/4
+.. _mime_types/0::guess_file_type/4:
+
+``guess_file_type/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Guesses the MIME type and content encoding for a file path.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``guess_file_type(Path,Type,Encoding,Strict)``
+| **Mode and number of proofs:**
+|    ``guess_file_type(+atom,-atom,-atom,+boolean)`` - ``one``
+
+
+------------
+
+.. index:: extension_type/2
+.. _mime_types/0::extension_type/2:
+
+``extension_type/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the MIME type associated with a file extension using lenient lookup.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``extension_type(Extension,Type)``
+| **Mode and number of proofs:**
+|    ``extension_type(+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: extension_type/3
+.. _mime_types/0::extension_type/3:
+
+``extension_type/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the MIME type associated with a file extension.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``extension_type(Extension,Type,Strict)``
+| **Mode and number of proofs:**
+|    ``extension_type(+atom,-atom,+boolean)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: guess_extension/2
+.. _mime_types/0::guess_extension/2:
+
+``guess_extension/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the preferred file extension associated with a MIME type using lenient lookup.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``guess_extension(Type,Extension)``
+| **Mode and number of proofs:**
+|    ``guess_extension(+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: guess_extension/3
+.. _mime_types/0::guess_extension/3:
+
+``guess_extension/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the preferred file extension associated with a MIME type.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``guess_extension(Type,Extension,Strict)``
+| **Mode and number of proofs:**
+|    ``guess_extension(+atom,-atom,+boolean)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: guess_all_extensions/2
+.. _mime_types/0::guess_all_extensions/2:
+
+``guess_all_extensions/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns all known file extensions associated with a MIME type using lenient lookup.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``guess_all_extensions(Type,Extensions)``
+| **Mode and number of proofs:**
+|    ``guess_all_extensions(+atom,-list(atom))`` - ``one``
+|    ``guess_all_extensions(+atom,-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: guess_all_extensions/3
+.. _mime_types/0::guess_all_extensions/3:
+
+``guess_all_extensions/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns all known file extensions associated with a MIME type.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``guess_all_extensions(Type,Extensions,Strict)``
+
+------------
+
+.. index:: add_type/2
+.. _mime_types/0::add_type/2:
+
+``add_type/2``
+^^^^^^^^^^^^^^
+
+Adds a lenient runtime mapping from a MIME type to a file extension.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_type(Type,Extension)``
+| **Mode and number of proofs:**
+|    ``add_type(+atom,+atom)`` - ``one``
+
+
+------------
+
+.. index:: add_type/3
+.. _mime_types/0::add_type/3:
+
+``add_type/3``
+^^^^^^^^^^^^^^
+
+Adds a runtime mapping from a MIME type to a file extension.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_type(Type,Extension,Strict)``
+| **Mode and number of proofs:**
+|    ``add_type(+atom,+atom,+boolean)`` - ``one``
+
+
+------------
+
+.. index:: read_mime_types/2
+.. _mime_types/0::read_mime_types/2:
+
+``read_mime_types/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Reads a ``mime.types``-style file returning a list of ``Extension-Type`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``read_mime_types(File,Pairs)``
+| **Mode and number of proofs:**
+|    ``read_mime_types(+atom,-list(pair(atom,atom)))`` - ``one``
+
+
+------------
+
+.. index:: load/1
+.. _mime_types/0::load/1:
+
+``load/1``
+^^^^^^^^^^
+
+Loads a ``mime.types``-style file as a lenient runtime overlay.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``load(File)``
+| **Mode and number of proofs:**
+|    ``load(+atom)`` - ``one``
+
+
+------------
+
+.. index:: load/2
+.. _mime_types/0::load/2:
+
+``load/2``
+^^^^^^^^^^
+
+Loads a ``mime.types``-style file as a strict or lenient runtime overlay.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``load(File,Strict)``
+| **Mode and number of proofs:**
+|    ``load(+atom,+boolean)`` - ``one``
+
+
+------------
+
+.. index:: reset/0
+.. _mime_types/0::reset/0:
+
+``reset/0``
+^^^^^^^^^^^
+
+Clears all runtime MIME type overlays.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``reset`` - ``one``
+
+
+------------
+
+.. index:: suffix_alias/2
+.. _mime_types/0::suffix_alias/2:
+
+``suffix_alias/2``
+^^^^^^^^^^^^^^^^^^
+
+Returns suffix aliases used before splitting encoding and type suffixes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``suffix_alias(Alias,Expanded)``
+| **Mode and number of proofs:**
+|    ``suffix_alias(?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: encoding_suffix/2
+.. _mime_types/0::encoding_suffix/2:
+
+``encoding_suffix/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns content-encoding suffix mappings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encoding_suffix(Extension,Encoding)``
+| **Mode and number of proofs:**
+|    ``encoding_suffix(?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: runtime_type_/3
+.. _mime_types/0::runtime_type_/3:
+
+``runtime_type_/3``
+^^^^^^^^^^^^^^^^^^^
+
+Table of runtime MIME type overlays.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``runtime_type_(Strict,Extension,Type)``
+| **Mode and number of proofs:**
+|    ``runtime_type_(?boolean,?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

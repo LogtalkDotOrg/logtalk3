@@ -90,6 +90,10 @@ snapshots, and answering UTC-based offset, DST, and abbreviation queries.
 * ADDED: New `dates_tz` library linking the `dates` and `tzif` libraries for
 zone-aware date-time conversions.
 
+* ADDED: New `mime_types` library providing convenience predicates for mapping
+file extensions, file names, and URL-like resources to MIME media types and
+content encodings.
+
 * ADDED: A 2-3 tree implementation to the `dictionaries` library. Contributed
 by Michael T. Richter.
 
