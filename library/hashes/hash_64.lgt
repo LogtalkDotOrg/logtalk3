@@ -22,10 +22,6 @@
 :- object(djb2_64,
 	implements(hash_protocol)).
 
-	:- uses(hash_common_64, [
-		word64_hex/2
-	]).
-
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
@@ -34,24 +30,24 @@
 		see_also is [djb2_32, sdbm_64, fnv1a_64]
 	]).
 
-		hash(Bytes, Hash) :-
-			djb2_64(Bytes, 5381, Value),
-			word64_hex(Value, Hash).
+	:- uses(hash_common_64, [
+		word64_hex/2
+	]).
 
-		djb2_64([], Acc, Acc).
-		djb2_64([Byte| Bytes], Acc0, Acc) :-
-			Acc1 is ((Acc0 << 5) + Acc0 + Byte) /\ 0xFFFFFFFFFFFFFFFF,
-			djb2_64(Bytes, Acc1, Acc).
+	hash(Bytes, Hash) :-
+		djb2_64(Bytes, 5381, Value),
+		word64_hex(Value, Hash).
+
+	djb2_64([], Acc, Acc).
+	djb2_64([Byte| Bytes], Acc0, Acc) :-
+		Acc1 is ((Acc0 << 5) + Acc0 + Byte) /\ 0xFFFFFFFFFFFFFFFF,
+		djb2_64(Bytes, Acc1, Acc).
 
 :- end_object.
 
 
 :- object(sdbm_64,
 	implements(hash_protocol)).
-
-	:- uses(hash_common_64, [
-		word64_hex/2
-	]).
 
 	:- info([
 		version is 1:0:0,
@@ -61,24 +57,24 @@
 		see_also is [sdbm_32, djb2_64, fnv1a_64]
 	]).
 
-		hash(Bytes, Hash) :-
-			sdbm_64(Bytes, 0, Value),
-			word64_hex(Value, Hash).
+	:- uses(hash_common_64, [
+		word64_hex/2
+	]).
 
-		sdbm_64([], Acc, Acc).
-		sdbm_64([Byte| Bytes], Acc0, Acc) :-
-			Acc1 is (Byte + (Acc0 << 6) + (Acc0 << 16) - Acc0) /\ 0xFFFFFFFFFFFFFFFF,
-			sdbm_64(Bytes, Acc1, Acc).
+	hash(Bytes, Hash) :-
+		sdbm_64(Bytes, 0, Value),
+		word64_hex(Value, Hash).
+
+	sdbm_64([], Acc, Acc).
+	sdbm_64([Byte| Bytes], Acc0, Acc) :-
+		Acc1 is (Byte + (Acc0 << 6) + (Acc0 << 16) - Acc0) /\ 0xFFFFFFFFFFFFFFFF,
+		sdbm_64(Bytes, Acc1, Acc).
 
 :- end_object.
 
 
 :- object(fnv1a_64,
 	implements(hash_protocol)).
-
-	:- uses(hash_common_64, [
-		word64_hex/2, mul64/3
-	]).
 
 	:- info([
 		version is 1:0:0,
@@ -88,25 +84,25 @@
 		see_also is [fnv1a_32, djb2_64, sdbm_64]
 	]).
 
-		hash(Bytes, Hash) :-
-			fnv1a_64(Bytes, 0xCBF29CE484222325, Value),
-			word64_hex(Value, Hash).
+	:- uses(hash_common_64, [
+		word64_hex/2, mul64/3
+	]).
 
-		fnv1a_64([], Acc, Acc).
-		fnv1a_64([Byte| Bytes], Acc0, Acc) :-
-			Acc1 is xor(Acc0, Byte),
-			mul64(Acc1, 0x100000001B3, Acc2),
-			fnv1a_64(Bytes, Acc2, Acc).
+	hash(Bytes, Hash) :-
+		fnv1a_64(Bytes, 0xCBF29CE484222325, Value),
+		word64_hex(Value, Hash).
+
+	fnv1a_64([], Acc, Acc).
+	fnv1a_64([Byte| Bytes], Acc0, Acc) :-
+		Acc1 is xor(Acc0, Byte),
+		mul64(Acc1, 0x100000001B3, Acc2),
+		fnv1a_64(Bytes, Acc2, Acc).
 
 :- end_object.
 
 
 :- object(siphash_2_4(_Key_),
 	implements(hash_protocol)).
-
-	:- uses(hash_common_64, [
-		add64/3, or64/3, rol64/3, shl64/3, word64_hex/2, xor64/3
-	]).
 
 	:- info([
 		version is 1:0:0,
@@ -119,81 +115,85 @@
 		see_also is [siphash_2_4, fnv1a_64, crc32b, crc32c]
 	]).
 
-		hash(Bytes, Hash) :-
-			list::length(_Key_, 16),
-			siphash(Bytes, Value),
-			word64_hex(Value, Hash).
+	:- uses(hash_common_64, [
+		add64/3, or64/3, rol64/3, shl64/3, word64_hex/2, xor64/3
+	]).
 
-		siphash(Bytes, Hash) :-
-			key_words(_Key_, K0, K1),
-			xor64(0x736F6D6570736575, K0, V0_0),
-			xor64(0x646F72616E646F6D, K1, V1_0),
-			xor64(0x6C7967656E657261, K0, V2_0),
-			xor64(0x7465646279746573, K1, V3_0),
-			process_blocks(Bytes, V0_0, V1_0, V2_0, V3_0, V0_1, V1_1, V2_1, V3_1, Last),
-			last_word(Bytes, Last, FinalM),
-			xor64(V3_1, FinalM, V3_2),
-			sip_rounds(2, V0_1, V1_1, V2_1, V3_2, V0_3, V1_3, V2_3, V3_3),
-			xor64(V0_3, FinalM, V0_4),
-			xor64(V2_3, 0xFF, V2_4),
-			sip_rounds(4, V0_4, V1_3, V2_4, V3_3, V0_5, V1_5, V2_5, V3_5),
-			xor64(V0_5, V1_5, T01),
-			xor64(V2_5, V3_5, T23),
-			xor64(T01, T23, Hash).
+	hash(Bytes, Hash) :-
+		list::length(_Key_, 16),
+		siphash(Bytes, Value),
+		word64_hex(Value, Hash).
 
-		process_blocks(Bytes, V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last) :-
-			process_blocks(Bytes, [], V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last).
+	siphash(Bytes, Hash) :-
+		key_words(_Key_, K0, K1),
+		xor64(0x736F6D6570736575, K0, V0_0),
+		xor64(0x646F72616E646F6D, K1, V1_0),
+		xor64(0x6C7967656E657261, K0, V2_0),
+		xor64(0x7465646279746573, K1, V3_0),
+		process_blocks(Bytes, V0_0, V1_0, V2_0, V3_0, V0_1, V1_1, V2_1, V3_1, Last),
+		last_word(Bytes, Last, FinalM),
+		xor64(V3_1, FinalM, V3_2),
+		sip_rounds(2, V0_1, V1_1, V2_1, V3_2, V0_3, V1_3, V2_3, V3_3),
+		xor64(V0_3, FinalM, V0_4),
+		xor64(V2_3, 0xFF, V2_4),
+		sip_rounds(4, V0_4, V1_3, V2_4, V3_3, V0_5, V1_5, V2_5, V3_5),
+		xor64(V0_5, V1_5, T01),
+		xor64(V2_5, V3_5, T23),
+		xor64(T01, T23, Hash).
 
-		process_blocks([], Acc, V0, V1, V2, V3, V0, V1, V2, V3, Acc).
-		process_blocks([Byte| Bytes], Acc0, V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last) :-
-			list::append(Acc0, [Byte], Acc1),
-			(   Acc1 = [B0, B1, B2, B3, B4, B5, B6, B7] ->
-				little_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], M),
-				xor64(V3, M, V3_0),
-				sip_rounds(2, V0, V1, V2, V3_0, V0_1, V1_1, V2_1, V3_1),
-				xor64(V0_1, M, V0_2),
-				process_blocks(Bytes, [], V0_2, V1_1, V2_1, V3_1, FV0, FV1, FV2, FV3, Last)
-			;   process_blocks(Bytes, Acc1, V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last)
-			).
+	process_blocks(Bytes, V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last) :-
+		process_blocks(Bytes, [], V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last).
 
-		last_word(Bytes, Acc, Word) :-
-			list::length(Bytes, Length),
-			shl64(Length /\ 0xFF, 56, LastByte),
-			partial_word(Acc, 0, Partial),
-			or64(LastByte, Partial, Word).
+	process_blocks([], Acc, V0, V1, V2, V3, V0, V1, V2, V3, Acc).
+	process_blocks([Byte| Bytes], Acc0, V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last) :-
+		list::append(Acc0, [Byte], Acc1),
+		(   Acc1 = [B0, B1, B2, B3, B4, B5, B6, B7] ->
+			little_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], M),
+			xor64(V3, M, V3_0),
+			sip_rounds(2, V0, V1, V2, V3_0, V0_1, V1_1, V2_1, V3_1),
+			xor64(V0_1, M, V0_2),
+			process_blocks(Bytes, [], V0_2, V1_1, V2_1, V3_1, FV0, FV1, FV2, FV3, Last)
+		;   process_blocks(Bytes, Acc1, V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last)
+		).
 
-		little_endian_word64(Bytes, Word) :-
-			partial_word(Bytes, 0, Word).
+	last_word(Bytes, Acc, Word) :-
+		list::length(Bytes, Length),
+		shl64(Length /\ 0xFF, 56, LastByte),
+		partial_word(Acc, 0, Partial),
+		or64(LastByte, Partial, Word).
 
-		partial_word([], _, 0).
-		partial_word([Byte| Bytes], Shift, Word) :-
-			partial_word(Bytes, Shift + 8, Rest),
-			shl64(Byte, Shift, ShiftedByte),
-			or64(ShiftedByte, Rest, Word).
+	little_endian_word64(Bytes, Word) :-
+		partial_word(Bytes, 0, Word).
 
-		sip_rounds(0, V0, V1, V2, V3, V0, V1, V2, V3) :-
-			!.
-		sip_rounds(Count, V0_0, V1_0, V2_0, V3_0, V0, V1, V2, V3) :-
-			add64(V0_0, V1_0, A0),
-			rol64(V1_0, 13, A1),
-			xor64(A1, A0, B1),
-			rol64(A0, 32, B0),
-			add64(V2_0, V3_0, C0),
-			rol64(V3_0, 16, C1),
-			xor64(C1, C0, D1),
-			add64(B0, D1, E0),
-			rol64(D1, 21, E1),
-			xor64(E1, E0, F1),
-			add64(C0, B1, G0),
-			rol64(B1, 17, G1),
-			xor64(G1, G0, H1),
-			rol64(G0, 32, H0),
-			NextCount is Count - 1,
-			sip_rounds(NextCount, E0, H1, H0, F1, V0, V1, V2, V3).
+	partial_word([], _, 0).
+	partial_word([Byte| Bytes], Shift, Word) :-
+		partial_word(Bytes, Shift + 8, Rest),
+		shl64(Byte, Shift, ShiftedByte),
+		or64(ShiftedByte, Rest, Word).
 
-		key_words([K0, K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11, K12, K13, K14, K15], Word0, Word1) :-
-			little_endian_word64([K0, K1, K2, K3, K4, K5, K6, K7], Word0),
-			little_endian_word64([K8, K9, K10, K11, K12, K13, K14, K15], Word1).
+	sip_rounds(0, V0, V1, V2, V3, V0, V1, V2, V3) :-
+		!.
+	sip_rounds(Count, V0_0, V1_0, V2_0, V3_0, V0, V1, V2, V3) :-
+		add64(V0_0, V1_0, A0),
+		rol64(V1_0, 13, A1),
+		xor64(A1, A0, B1),
+		rol64(A0, 32, B0),
+		add64(V2_0, V3_0, C0),
+		rol64(V3_0, 16, C1),
+		xor64(C1, C0, D1),
+		add64(B0, D1, E0),
+		rol64(D1, 21, E1),
+		xor64(E1, E0, F1),
+		add64(C0, B1, G0),
+		rol64(B1, 17, G1),
+		xor64(G1, G0, H1),
+		rol64(G0, 32, H0),
+		NextCount is Count - 1,
+		sip_rounds(NextCount, E0, H1, H0, F1, V0, V1, V2, V3).
+
+	key_words([K0, K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11, K12, K13, K14, K15], Word0, Word1) :-
+		little_endian_word64([K0, K1, K2, K3, K4, K5, K6, K7], Word0),
+		little_endian_word64([K8, K9, K10, K11, K12, K13, K14, K15], Word1).
 
 :- end_object.
 
@@ -215,16 +215,16 @@
 :- object(murmurhash3_x86_128,
 	implements(hash_protocol)).
 
-	:- uses(hash_common_32, [
-		add32/3, add32/4, add32/5, little_endian_word32/2, mul32/3, rol32/3, word32_hex/2
-	]).
-
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-04,
 		comment is 'MurmurHash3 x86 128-bit hash function with seed 0.',
 		see_also is [murmurhash3_x86_32, murmurhash3_x64_128]
+	]).
+
+	:- uses(hash_common_32, [
+		add32/3, add32/5, little_endian_word32/2, mul32/3, rol32/3, word32_hex/2
 	]).
 
 	hash(Bytes, Hash) :-
@@ -366,16 +366,16 @@
 :- object(murmurhash3_x64_128,
 	implements(hash_protocol)).
 
-	:- uses(hash_common_64, [
-		add64/3, mul64/3, or64/3, rol64/3, shl64/3, shr64/3, word64_hex/2, xor64/3
-	]).
-
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-04,
 		comment is 'MurmurHash3 x64 128-bit hash function with seed 0.',
 		see_also is [murmurhash3_x86_32, murmurhash3_x86_128]
+	]).
+
+	:- uses(hash_common_64, [
+		add64/3, mul64/3, or64/3, rol64/3, shl64/3, shr64/3, word64_hex/2, xor64/3
 	]).
 
 	hash(Bytes, Hash) :-
@@ -471,18 +471,32 @@
 :- object(fips202_hash(_RateBytes_, _Suffix_, _OutputBytes_),
 	implements(hash_protocol)).
 
+	:- info([
+		version is 1:1:0,
+		author is 'Paulo Moura',
+		date is 2026-04-15,
+		comment is 'Common implementation of the standardized FIPS 202 SHA-3 and SHAKE variants using the Keccak-f[1600] permutation.'
+	]).
+
+	:- protected(absorb/2).
+	:- mode(absorb(+list(byte), --list(integer)), one).
+	:- info(absorb/2, [
+		comment is 'Absorbs the input bytes into the Keccak state and returns the resulting state after the final padded block permutation.',
+		argnames is ['Bytes', 'State']
+	]).
+	:- protected(squeeze/3).
+	:- mode(squeeze(+list(integer), +integer, --list(byte)), one).
+	:- info(squeeze/3, [
+		comment is 'Squeezes the requested number of output bytes from a Keccak state.',
+		argnames is ['State', 'OutputBytes', 'DigestBytes']
+	]).
+
 	:- uses(hash_common_32, [
 		bytes_hex/2
 	]).
+
 	:- uses(hash_common_64, [
 		and64/3, mask64/1, not64/2, rol64/3, shl64/3, shr64/3, xor64/3
-	]).
-
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2026-04-04,
-		comment is 'Common implementation of the standardized FIPS 202 SHA-3 and SHAKE variants using the Keccak-f[1600] permutation.'
 	]).
 
 	hash(Bytes, Hash) :-
@@ -740,13 +754,37 @@
 :- end_object.
 
 
-:- object(sha3_224,
-	extends(fips202_hash(144, 0x06, 28))).
+:- object(fips202_fixed_hash(_RateBytes_, _Suffix_, _OutputBytes_),
+	extends(fips202_hash(_RateBytes_, _Suffix_, _OutputBytes_)),
+	implements(hash_digest_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-04-15,
+		comment is 'Common implementation of the fixed-size FIPS 202 SHA-3 variants suitable for use with HMAC.'
+	]).
+
+	digest(Bytes, DigestBytes) :-
+		integer(_OutputBytes_),
+		_OutputBytes_ >= 0,
+		^^absorb(Bytes, State),
+		^^squeeze(State, _OutputBytes_, DigestBytes).
+
+	digest_size(_OutputBytes_).
+
+	block_size(_RateBytes_).
+
+:- end_object.
+
+
+:- object(sha3_224,
+	extends(fips202_fixed_hash(144, 0x06, 28))).
+
+	:- info([
+		version is 1:1:0,
+		author is 'Paulo Moura',
+		date is 2026-04-15,
 		comment is 'FIPS 202 SHA3-224 hash function.',
 		see_also is [sha3_256, sha3_384, sha3_512, shake128(_), shake256(_)]
 	]).
@@ -755,12 +793,12 @@
 
 
 :- object(sha3_256,
-	extends(fips202_hash(136, 0x06, 32))).
+	extends(fips202_fixed_hash(136, 0x06, 32))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-04-15,
 		comment is 'FIPS 202 SHA3-256 hash function.',
 		see_also is [sha3_224, sha3_384, sha3_512, sha256, shake128(_), shake256(_)]
 	]).
@@ -769,12 +807,12 @@
 
 
 :- object(sha3_384,
-	extends(fips202_hash(104, 0x06, 48))).
+	extends(fips202_fixed_hash(104, 0x06, 48))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-04-15,
 		comment is 'FIPS 202 SHA3-384 hash function.',
 		see_also is [sha3_224, sha3_256, sha3_512, shake128(_), shake256(_)]
 	]).
@@ -783,12 +821,12 @@
 
 
 :- object(sha3_512,
-	extends(fips202_hash(72, 0x06, 64))).
+	extends(fips202_fixed_hash(72, 0x06, 64))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-04-15,
 		comment is 'FIPS 202 SHA3-512 hash function.',
 		see_also is [sha3_224, sha3_256, sha3_384, shake128(_), shake256(_)]
 	]).
@@ -831,21 +869,21 @@
 
 
 :- object(sha1,
-	implements(hash_protocol)).
+	implements(hash_digest_protocol)).
+
+	:- info([
+		version is 1:1:0,
+		author is 'Paulo Moura',
+		date is 2026-04-15,
+		comment is 'SHA-1 hash function.',
+		see_also is [md5, sha256]
+	]).
 
 	:- uses(hash_common_32, [
 		pad_md/4, integer_to_big_endian_bytes32/2, bytes_hex/2, add32/3, rol32/3, big_endian_word32/2
 	]).
 
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2026-04-04,
-		comment is 'SHA-1 hash function.',
-		see_also is [md5, sha256]
-	]).
-
-	hash(Bytes, Hash) :-
+	digest(Bytes, DigestBytes) :-
 		pad_md(big, Bytes, 8, PaddedBytes),
 		sha1_blocks(PaddedBytes, 0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0, H0, H1, H2, H3, H4),
 		integer_to_big_endian_bytes32(H0, B0),
@@ -856,7 +894,14 @@
 		list::append(B0, B1, T01),
 		list::append(B2, B3, T23),
 		list::append(T01, T23, T0123),
-		list::append(T0123, B4, DigestBytes),
+		list::append(T0123, B4, DigestBytes).
+
+	digest_size(20).
+
+	block_size(64).
+
+	hash(Bytes, Hash) :-
+		digest(Bytes, DigestBytes),
 		bytes_hex(DigestBytes, Hash).
 
 	sha1_blocks([], H0, H1, H2, H3, H4, H0, H1, H2, H3, H4).
@@ -923,24 +968,31 @@
 
 
 :- object(sha256,
-	implements(hash_protocol)).
+	implements(hash_digest_protocol)).
+
+	:- info([
+		version is 1:1:0,
+		author is 'Paulo Moura',
+		date is 2026-04-15,
+		comment is 'SHA-256 hash function.',
+		see_also is [md5, sha1]
+	]).
 
 	:- uses(hash_common_32, [
 		pad_md/4, bytes_hex/2, add32/3, ror32/3, integer_to_big_endian_bytes32/2, big_endian_word32/2
 	]).
 
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2026-04-04,
-		comment is 'SHA-256 hash function.',
-		see_also is [md5, sha1]
-	]).
-
-	hash(Bytes, Hash) :-
+	digest(Bytes, DigestBytes) :-
 		pad_md(big, Bytes, 8, PaddedBytes),
 		sha256_blocks(PaddedBytes, [0x6A09E667,0xBB67AE85,0x3C6EF372,0xA54FF53A,0x510E527F,0x9B05688C,0x1F83D9AB,0x5BE0CD19], State),
-		state_bytes(State, DigestBytes),
+		state_bytes(State, DigestBytes).
+
+	digest_size(32).
+
+	block_size(64).
+
+	hash(Bytes, Hash) :-
+		digest(Bytes, DigestBytes),
 		bytes_hex(DigestBytes, Hash).
 
 	sha256_blocks([], State, State).

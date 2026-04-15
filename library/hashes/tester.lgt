@@ -26,6 +26,7 @@
 		logtalk_load(basic_types(loader)),
 		logtalk_load([
 			hash_protocol,
+			hash_digest_protocol,
 			hash_common_32,
 			hash_common_64,
 			hash_32,
@@ -49,6 +50,7 @@
 		logtalk_load(basic_types(loader)),
 		logtalk_load([
 			hash_protocol,
+			hash_digest_protocol,
 			hash_common_32,
 			hash_32
 		], [

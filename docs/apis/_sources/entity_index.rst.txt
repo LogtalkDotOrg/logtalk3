@@ -199,6 +199,7 @@ Objects
    file_dependency_diagram(Format) <file_dependency_diagram_1>
    file_load_diagram <file_load_diagram_0>
    file_load_diagram(Format) <file_load_diagram_1>
+   fips202_fixed_hash(A,B,C) <fips202_fixed_hash_3>
    fips202_hash(A,B,C) <fips202_hash_3>
    float <float_0>
    fnv1a_32 <fnv1a_32_0>
@@ -515,6 +516,7 @@ Protocols
    git_protocol <git_protocol_0>
    graph_language_protocol <graph_language_protocol_0>
    graph_protocol <graph_protocol_0>
+   hash_digest_protocol <hash_digest_protocol_0>
    hash_protocol <hash_protocol_0>
    heap_protocol <heap_protocol_0>
    heapp <heapp_0>

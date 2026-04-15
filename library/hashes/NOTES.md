@@ -26,6 +26,13 @@ used hashing algorithms. All hash objects implement the `hash_protocol`
 protocol by providing a `hash/2` predicate that takes a list of bytes and
 returns the computed hash as a lowercase hexadecimal atom.
 
+The fixed-size cryptographic hash objects that can be safely used with HMAC
+(`md5`, `sha1`, `sha256`, `sha3_224`, `sha3_256`, `sha3_384`, and
+`sha3_512`) also implement the `hash_digest_protocol` protocol. This protocol
+adds `digest/2`, `digest_size/1`, and `block_size/1` predicates so that
+libraries such as `hmac` can compute keyed digests without duplicating hash
+function internals.
+
 The library implements the following hashing algorithms:
 
 - DJB2 32-bit (`djb2_32`)

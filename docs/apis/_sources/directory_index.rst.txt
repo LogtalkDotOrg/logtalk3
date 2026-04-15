@@ -591,11 +591,13 @@ To load an entity, always load the library that includes it using the goal ``log
    crc32q <crc32q_0>
    djb2_32 <djb2_32_0>
    djb2_64 <djb2_64_0>
+   fips202_fixed_hash(A,B,C) <fips202_fixed_hash_3>
    fips202_hash(A,B,C) <fips202_hash_3>
    fnv1a_32 <fnv1a_32_0>
    fnv1a_64 <fnv1a_64_0>
    hash_common_32 <hash_common_32_0>
    hash_common_64 <hash_common_64_0>
+   hash_digest_protocol <hash_digest_protocol_0>
    hash_protocol <hash_protocol_0>
    md5 <md5_0>
    murmurhash3_x64_128 <murmurhash3_x64_128_0>

@@ -23,10 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-04-15,
 		comment is 'Unit tests for the "hashes" library 32-bit algorithms.'
+	]).
+
+	:- uses(hash_common_32, [
+		bytes_hex/2
 	]).
 
 	cover(djb2_32).
@@ -126,5 +130,12 @@
 	test(md5_quick_brown_fox, deterministic(Hash == '9e107d9d372bb6826bd81d3542a419d6')) :-
 		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
 		md5::hash(Bytes, Hash).
+
+	test(md5_hash_digest_protocol, deterministic(Info == info('d41d8cd98f00b204e9800998ecf8427e', 16, 64))) :-
+		md5::digest([], Digest),
+		bytes_hex(Digest, Hex),
+		md5::digest_size(DigestSize),
+		md5::block_size(BlockSize),
+		Info = info(Hex, DigestSize, BlockSize).
 
 :- end_object.

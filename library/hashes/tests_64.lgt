@@ -23,10 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-04-15,
 		comment is 'Unit tests for the "hashes" library 64-bit algorithms.'
+	]).
+
+	:- uses(hash_common_32, [
+		bytes_hex/2
 	]).
 
 	cover(djb2_64).
@@ -157,5 +161,47 @@
 	test(sha256_quick_brown_fox, deterministic(Hash == 'd7a8fbb307d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592')) :-
 		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
 		sha256::hash(Bytes, Hash).
+
+	test(sha3_224_hash_digest_protocol, deterministic(Info == info('6b4e03423667dbb73b6e15454f0eb1abd4597f9a1b078e3f5b5a6bc7', 28, 144))) :-
+		sha3_224::digest([], Digest),
+		bytes_hex(Digest, Hex),
+		sha3_224::digest_size(DigestSize),
+		sha3_224::block_size(BlockSize),
+		Info = info(Hex, DigestSize, BlockSize).
+
+	test(sha3_256_hash_digest_protocol, deterministic(Info == info('a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a', 32, 136))) :-
+		sha3_256::digest([], Digest),
+		bytes_hex(Digest, Hex),
+		sha3_256::digest_size(DigestSize),
+		sha3_256::block_size(BlockSize),
+		Info = info(Hex, DigestSize, BlockSize).
+
+	test(sha3_384_hash_digest_protocol, deterministic(Info == info('0c63a75b845e4f7d01107d852e4c2485c51a50aaaa94fc61995e71bbee983a2ac3713831264adb47fb6bd1e058d5f004', 48, 104))) :-
+		sha3_384::digest([], Digest),
+		bytes_hex(Digest, Hex),
+		sha3_384::digest_size(DigestSize),
+		sha3_384::block_size(BlockSize),
+		Info = info(Hex, DigestSize, BlockSize).
+
+	test(sha3_512_hash_digest_protocol, deterministic(Info == info('a69f73cca23a9ac5c8b567dc185a756e97c982164fe25859e0d1dcc1475c80a615b2123af1f5f94c11e3e9402c3ac558f500199d95b6d3e301758586281dcd26', 64, 72))) :-
+		sha3_512::digest([], Digest),
+		bytes_hex(Digest, Hex),
+		sha3_512::digest_size(DigestSize),
+		sha3_512::block_size(BlockSize),
+		Info = info(Hex, DigestSize, BlockSize).
+
+	test(sha1_hash_digest_protocol, deterministic(Info == info('da39a3ee5e6b4b0d3255bfef95601890afd80709', 20, 64))) :-
+		sha1::digest([], Digest),
+		bytes_hex(Digest, Hex),
+		sha1::digest_size(DigestSize),
+		sha1::block_size(BlockSize),
+		Info = info(Hex, DigestSize, BlockSize).
+
+	test(sha256_hash_digest_protocol, deterministic(Info == info('e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', 32, 64))) :-
+		sha256::digest([], Digest),
+		bytes_hex(Digest, Hex),
+		sha256::digest_size(DigestSize),
+		sha256::block_size(BlockSize),
+		Info = info(Hex, DigestSize, BlockSize).
 
 :- end_object.

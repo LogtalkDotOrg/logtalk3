@@ -19,34 +19,35 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_prolog_flag(bounded, false)).
+:- protocol(hash_digest_protocol,
+	extends(hash_protocol)).
 
-	:- initialization((
-		logtalk_load(basic_types(loader)),
-		logtalk_load([
-			hash_protocol,
-			hash_digest_protocol,
-			hash_common_32,
-			hash_common_64,
-			hash_32,
-			hash_64
-		], [
-			optimize(on)
-		])
-	)).
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-16,
+		comment is 'Protocol for fixed-size cryptographic hash functions exposing raw digests and digest metadata.'
+	]).
 
-:- else.
+	:- public(digest/2).
+	:- mode(digest(+list(byte), --list(byte)), one).
+	:- info(digest/2, [
+		comment is 'Computes the digest for a list of bytes and returns it as a list of bytes.',
+		argnames is ['Bytes', 'Digest']
+	]).
 
-	:- initialization((
-		logtalk_load(basic_types(loader)),
-		logtalk_load([
-			hash_protocol,
-			hash_digest_protocol,
-			hash_common_32,
-			hash_32
-		], [
-			optimize(on)
-		])
-	)).
+	:- public(digest_size/1).
+	:- mode(digest_size(--integer), one).
+	:- info(digest_size/1, [
+		comment is 'Returns the digest size in bytes.',
+		argnames is ['DigestSize']
+	]).
 
-:- endif.
+	:- public(block_size/1).
+	:- mode(block_size(--integer), one).
+	:- info(block_size/1, [
+		comment is 'Returns the hash block size in bytes.',
+		argnames is ['BlockSize']
+	]).
+
+:- end_protocol.

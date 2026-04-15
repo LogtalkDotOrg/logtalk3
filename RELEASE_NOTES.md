@@ -28,6 +28,10 @@ RELEASE NOTES
 Library
 -------
 
+* ADDED: Support to the `hashes` library for computing keyed digests and
+access metadata for fixed-size cryptographic hash objects that can be safely
+used with HMAC.
+
 * IMPROVED: The `numberlist::softmax/2-3` library predicates by making their
 implementation numerically stable.
 

@@ -373,12 +373,12 @@
 
 
 :- object(md5,
-	implements(hash_protocol)).
+	implements(hash_digest_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-04-15,
 		comment is 'MD5 hash function.',
 		see_also is [sha1, sha256]
 	]).
@@ -388,7 +388,7 @@
 		rol32/3
 	]).
 
-	hash(Bytes, Hash) :-
+	digest(Bytes, DigestBytes) :-
 		pad_md(little, Bytes, 8, PaddedBytes),
 		md5_blocks(PaddedBytes, 0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, A, B, C, D),
 		integer_to_little_endian_bytes32(A, BytesA),
@@ -397,7 +397,14 @@
 		integer_to_little_endian_bytes32(D, BytesD),
 		list::append(BytesA, BytesB, BytesAB),
 		list::append(BytesC, BytesD, BytesCD),
-		list::append(BytesAB, BytesCD, DigestBytes),
+		list::append(BytesAB, BytesCD, DigestBytes).
+
+	digest_size(16).
+
+	block_size(64).
+
+	hash(Bytes, Hash) :-
+		digest(Bytes, DigestBytes),
 		bytes_hex(DigestBytes, Hash).
 
 	md5_blocks([], A, B, C, D, A, B, C, D).

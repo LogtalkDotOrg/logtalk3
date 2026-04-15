@@ -14,8 +14,8 @@ Common implementation of the standardized FIPS 202 SHA-3 and SHAKE variants usin
 |    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-04-04
+| **Version:** 1:1:0
+| **Date:** 2026-04-15
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -46,7 +46,43 @@ Public predicates
 Protected predicates
 --------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: absorb/2
+.. _fips202_hash/3::absorb/2:
+
+``absorb/2``
+^^^^^^^^^^^^
+
+Absorbs the input bytes into the Keccak state and returns the resulting state after the final padded block permutation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``absorb(Bytes,State)``
+| **Mode and number of proofs:**
+|    ``absorb(+list(byte),--list(integer))`` - ``one``
+
+
+------------
+
+.. index:: squeeze/3
+.. _fips202_hash/3::squeeze/3:
+
+``squeeze/3``
+^^^^^^^^^^^^^
+
+Squeezes the requested number of output bytes from a Keccak state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``squeeze(State,OutputBytes,DigestBytes)``
+| **Mode and number of proofs:**
+|    ``squeeze(+list(integer),+integer,--list(byte))`` - ``one``
+
+
+------------
 
 Private predicates
 ------------------

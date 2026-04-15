@@ -1,14 +1,14 @@
-.. index:: single: sha256
-.. _sha256/0:
+.. index:: single: fips202_fixed_hash(A,B,C)
+.. _fips202_fixed_hash/3:
 
 .. rst-class:: right
 
 **object**
 
-``sha256``
-==========
+``fips202_fixed_hash(A,B,C)``
+=============================
 
-SHA-256 hash function.
+Common implementation of the fixed-size FIPS 202 SHA-3 variants suitable for use with HMAC.
 
 | **Availability:** 
 |    ``logtalk_load(hashes(loader))``
@@ -23,9 +23,8 @@ SHA-256 hash function.
 
 | **Implements:**
 |    ``public`` :ref:`hash_digest_protocol <hash_digest_protocol/0>`
-| **Uses:**
-|    :ref:`hash_common_32 <hash_common_32/0>`
-|    :ref:`list <list/0>`
+| **Extends:**
+|    ``public`` :ref:`fips202_hash(A,B,C) <fips202_hash/3>`
 
 | **Remarks:**
 |    (none)
@@ -56,8 +55,4 @@ Operators
 ---------
 
 (none)
-
-.. seealso::
-
-   :ref:`md5 <md5/0>`, :ref:`sha1 <sha1/0>`
 

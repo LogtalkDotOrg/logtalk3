@@ -14,21 +14,21 @@ FIPS 202 SHA3-224 hash function.
 |    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-04-04
+| **Version:** 1:1:0
+| **Date:** 2026-04-15
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Extends:**
-|    ``public`` :ref:`fips202_hash(144,6,28) <fips202_hash/3>`
+|    ``public`` :ref:`fips202_fixed_hash(144,6,28) <fips202_fixed_hash/3>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`hash_protocol/0::hash/2`  
+|     :ref:`hash_digest_protocol/0::block_size/1`  :ref:`hash_digest_protocol/0::digest/2`  :ref:`hash_digest_protocol/0::digest_size/1`  :ref:`hash_protocol/0::hash/2`  
 
 .. contents::
    :local:

@@ -1357,6 +1357,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`blank_grammars(Format) <blank_grammars/1::blanks//0>`
 
+``block_size/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_digest_protocol <hash_digest_protocol/0::block_size/1>`
+
 ``body_pred/1``
 ---------------
 
@@ -3943,6 +3953,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`coroutining <coroutining/0::dif/2>`
 * :ref:`dif <dif/0::dif/2>`
+
+``digest/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_digest_protocol <hash_digest_protocol/0::digest/2>`
+
+``digest_size/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_digest_protocol <hash_digest_protocol/0::digest_size/1>`
 
 ``digit//1``
 ------------

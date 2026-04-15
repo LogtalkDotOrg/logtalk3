@@ -14,15 +14,15 @@ SHA-1 hash function.
 |    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-04-04
+| **Version:** 1:1:0
+| **Date:** 2026-04-15
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Implements:**
-|    ``public`` :ref:`hash_protocol <hash_protocol/0>`
+|    ``public`` :ref:`hash_digest_protocol <hash_digest_protocol/0>`
 | **Uses:**
 |    :ref:`hash_common_32 <hash_common_32/0>`
 |    :ref:`list <list/0>`
@@ -31,7 +31,7 @@ SHA-1 hash function.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`hash_protocol/0::hash/2`  
+|     :ref:`hash_digest_protocol/0::block_size/1`  :ref:`hash_digest_protocol/0::digest/2`  :ref:`hash_digest_protocol/0::digest_size/1`  :ref:`hash_protocol/0::hash/2`  
 
 .. contents::
    :local:
