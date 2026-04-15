@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sinelaw/fresh/main/crates/fresh-editor/plugins/schemas/package.schema.json",
+  "name": "logtalk",
+  "version": "1.0.0",
+  "description": "Logtalk language pack",
+  "type": "language",
+  "author": "Paulo Moura",
+  "license": "MIT",
+  "fresh": {
+    "grammar": {
+      "file": "grammars/syntax.sublime-syntax",
+      "extensions": ["lgt", "logtalk"]
+    },
+    "language": {
+      "commentPrefix": "%",
+      "blockCommentStart": "/*",
+      "blockCommentEnd": "*/",
+      "tabSize": 4,
+      "useTabs": true,
+      "autoIndent": true
+    }
+  }
+}

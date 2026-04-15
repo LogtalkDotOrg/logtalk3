@@ -25,7 +25,10 @@ RELEASE NOTES
 3.100.0 - April ??, 2026
 ========================
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
 
+* ADDED: Syntax highlight support for the Fresh editor.
 
 
 3.99.0 - April 9, 2026
