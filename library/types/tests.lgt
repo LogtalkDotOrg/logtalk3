@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:21:0,
+		version is 0:22:0,
 		author is 'Paulo Moura',
-		date is 2026-02-23,
+		date is 2026-04-15,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
@@ -299,11 +299,25 @@
 		numberlist::softmax([1.0,2.0,3.0,4.0], Softmax),
 		numberlist::sum(Softmax, Sum).
 
+	test(numberlist_softmax_2_03, true(Softmax =~= [0.03205860328008499, 0.08714431874203257, 0.23688281808991013, 0.6439142598879722])) :-
+		numberlist::softmax([1001.0,1002.0,1003.0,1004.0], Softmax).
+
+	test(numberlist_softmax_2_04, true(Sum =~= 1.0)) :-
+		numberlist::softmax([1001.0,1002.0,1003.0,1004.0], Softmax),
+		numberlist::sum(Softmax, Sum).
+
 	test(numberlist_softmax_3_01, true(Softmax =~= [0.002144008783584634, 0.015842201178506925, 0.11705891323853292, 0.8649548767993755])) :-
 		numberlist::softmax([1.0,2.0,3.0,4.0], 0.5, Softmax).
 
 	test(numberlist_softmax_3_02, true(Sum =~= 1.0)) :-
 		numberlist::softmax([1.0,2.0,3.0,4.0], 0.5, Softmax),
+		numberlist::sum(Softmax, Sum).
+
+	test(numberlist_softmax_3_03, true(Softmax =~= [0.002144008783584634, 0.015842201178506925, 0.11705891323853292, 0.8649548767993755])) :-
+		numberlist::softmax([1001.0,1002.0,1003.0,1004.0], 0.5, Softmax).
+
+	test(numberlist_softmax_3_04, true(Sum =~= 1.0)) :-
+		numberlist::softmax([1001.0,1002.0,1003.0,1004.0], 0.5, Softmax),
 		numberlist::sum(Softmax, Sum).
 
 	test(numberlist_least_common_multiple_2_01, true(Multiple == 6)) :-

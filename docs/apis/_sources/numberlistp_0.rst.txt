@@ -14,8 +14,8 @@ List of numbers protocol.
 |    ``logtalk_load(types(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:11:0
-| **Date:** 2026-02-23
+| **Version:** 1:12:0
+| **Date:** 2026-04-15
 
 | **Compilation flags:**
 |    ``static``
@@ -449,7 +449,7 @@ Computes the least common multiple of a list of two or more positive integers. F
 ``softmax/2``
 ^^^^^^^^^^^^^
 
-Computes the softmax of a list of floats, returning a probability distribution.
+Computes the softmax of a list of floats, returning a probability distribution. The implementation is numerically stable.
 
 | **Compilation flags:**
 |    ``static``
@@ -468,7 +468,7 @@ Computes the softmax of a list of floats, returning a probability distribution.
 ``softmax/3``
 ^^^^^^^^^^^^^
 
-Computes the softmax of a list of floats with the given temperature, returning a probability distribution.
+Computes the softmax of a list of floats with the given temperature, returning a probability distribution. The implementation is numerically stable.
 
 | **Compilation flags:**
 |    ``static``

@@ -24,9 +24,9 @@
 	extends(list)).
 
 	:- info([
-		version is 1:18:0,
+		version is 1:19:0,
 		author is 'Paulo Moura',
-		date is 2026-02-23,
+		date is 2026-04-15,
 		comment is 'List of numbers predicates.',
 		see_also is [list, list(_), varlist, difflist]
 	]).
@@ -284,16 +284,19 @@
 	softmax(Xs, Ys) :-
 		softmax(Xs, 1.0, Ys).
 
+	softmax([], _, []) :-
+		!.
 	softmax(Xs, T, Ys) :-
 		T > 0.0,
-		softmax_exps_sum(Xs, T, Es, 0, Sum),
+		max(Xs, Max),
+		softmax_exps_sum(Xs, Max, T, Es, 0.0, Sum),
 		softmax_exps_softmax(Es, Sum, Ys).
 
-	softmax_exps_sum([], _, [], Sum, Sum).
-	softmax_exps_sum([X| Xs], T, [E| Es], Sum0, Sum) :-
-		E is exp(X / T),
+	softmax_exps_sum([], _, _, [], Sum, Sum).
+	softmax_exps_sum([X| Xs], Max, T, [E| Es], Sum0, Sum) :-
+		E is exp((X - Max) / T),
 		Sum1 is Sum0 + E,
-		softmax_exps_sum(Xs, T, Es, Sum1, Sum).
+		softmax_exps_sum(Xs, Max, T, Es, Sum1, Sum).
 
 	softmax_exps_softmax([], _, []).
 	softmax_exps_softmax([E| Es], Sum, [Y| Ys]) :-

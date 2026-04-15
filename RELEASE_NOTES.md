@@ -25,6 +25,12 @@ RELEASE NOTES
 3.100.0 - April ??, 2026
 ========================
 
+Library
+-------
+
+* IMPROVED: The `numberlist::softmax/2-3` library predicates by making their
+implementation numerically stable.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

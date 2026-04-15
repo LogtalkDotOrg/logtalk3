@@ -22,9 +22,9 @@
 :- protocol(numberlistp).
 
 	:- info([
-		version is 1:11:0,
+		version is 1:12:0,
 		author is 'Paulo Moura',
-		date is 2026-02-23,
+		date is 2026-04-15,
 		comment is 'List of numbers protocol.',
 		see_also is [numberlist, listp, varlistp]
 	]).
@@ -185,14 +185,14 @@
 	:- public(softmax/2).
 	:- mode(softmax(+list(float), -list(float)), one).
 	:- info(softmax/2, [
-		comment is 'Computes the softmax of a list of floats, returning a probability distribution.',
+		comment is 'Computes the softmax of a list of floats, returning a probability distribution. The implementation is numerically stable.',
 		argnames is ['Floats', 'Softmax']
 	]).
 
 	:- public(softmax/3).
 	:- mode(softmax(+list(float), +positive_float, -list(float)), one).
 	:- info(softmax/3, [
-		comment is 'Computes the softmax of a list of floats with the given temperature, returning a probability distribution.',
+		comment is 'Computes the softmax of a list of floats with the given temperature, returning a probability distribution. The implementation is numerically stable.',
 		argnames is ['Floats', 'Temperature', 'Softmax'],
 		remarks is [
 			'``Temperature > 1.0``' - 'Makes the distribution more uniform.',
