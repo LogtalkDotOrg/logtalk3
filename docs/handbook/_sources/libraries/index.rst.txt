@@ -71,6 +71,7 @@ directory in the ``NOTES.md`` file.
    hashes
    heaps
    hierarchies
+   hmac
    hook_flows
    hook_objects
    html

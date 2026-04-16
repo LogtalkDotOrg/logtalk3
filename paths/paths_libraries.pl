@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on April 9, 2026
+%  Last updated on April 16, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -75,6 +75,7 @@ logtalk_library_path(graphs, library('graphs/')).
 logtalk_library_path(hashes, library('hashes/')).
 logtalk_library_path(heaps, library('heaps/')).
 logtalk_library_path(hierarchies, library('hierarchies/')).
+logtalk_library_path(hmac, library('hmac/')).
 logtalk_library_path(hook_flows, library('hook_flows/')).
 logtalk_library_path(hook_objects, library('hook_objects/')).
 logtalk_library_path(html, library('html/')).

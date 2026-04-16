@@ -113,6 +113,7 @@
 		base64(loader),
 		base85(loader),
 		hashes(loader),
+		hmac(loader),
 		url(loader),
 		ulid(loader),
 		uuid(loader),

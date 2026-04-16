@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 9, 2026
+##   Last updated on April 16, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -121,6 +121,7 @@ sed '1,19d' ../../../library/graphs/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,19d' ../../../library/hashes/NOTES.md | pandoc -f gfm -t rst -o libraries/hashes.rst
 sed '1,19d' ../../../library/heaps/NOTES.md | pandoc -f gfm -t rst -o libraries/heaps.rst
 sed '1,19d' ../../../library/hierarchies/NOTES.md | pandoc -f gfm -t rst -o libraries/hierarchies.rst
+sed '1,19d' ../../../library/hmac/NOTES.md | pandoc -f gfm -t rst -o libraries/hmac.rst
 sed '1,19d' ../../../library/hook_flows/NOTES.md | pandoc -f gfm -t rst -o libraries/hook_flows.rst
 sed '1,19d' ../../../library/hook_objects/NOTES.md | pandoc -f gfm -t rst -o libraries/hook_objects.rst
 sed '1,19d' ../../../library/html/NOTES.md | pandoc -f gfm -t rst -o libraries/html.rst

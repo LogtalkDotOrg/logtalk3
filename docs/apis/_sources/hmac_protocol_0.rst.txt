@@ -1,0 +1,135 @@
+.. index:: single: hmac_protocol
+.. _hmac_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``hmac_protocol``
+=================
+
+Protocol for one-shot HMAC digest computation using hash objects implementing ``hash_digest_protocol``.
+
+| **Availability:** 
+|    ``logtalk_load(hmac(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-16
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: digest/4
+.. _hmac_protocol/0::digest/4:
+
+``digest/4``
+^^^^^^^^^^^^
+
+Computes the full HMAC digest for a hash object, key bytes, and message bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``digest(Hash,KeyBytes,MessageBytes,DigestBytes)``
+| **Mode and number of proofs:**
+|    ``digest(+object_identifier,+list(byte),+list(byte),--list(byte))`` - ``one``
+
+
+------------
+
+.. index:: hex_digest/4
+.. _hmac_protocol/0::hex_digest/4:
+
+``hex_digest/4``
+^^^^^^^^^^^^^^^^
+
+Computes the full HMAC digest for a hash object, key bytes, and message bytes, returning a lowercase hexadecimal atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hex_digest(Hash,KeyBytes,MessageBytes,HexDigest)``
+| **Mode and number of proofs:**
+|    ``hex_digest(+object_identifier,+list(byte),+list(byte),--atom)`` - ``one``
+
+
+------------
+
+.. index:: digest/5
+.. _hmac_protocol/0::digest/5:
+
+``digest/5``
+^^^^^^^^^^^^
+
+Computes a truncated HMAC digest containing the requested number of leftmost bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``digest(Hash,KeyBytes,MessageBytes,Length,DigestBytes)``
+| **Mode and number of proofs:**
+|    ``digest(+object_identifier,+list(byte),+list(byte),+integer,--list(byte))`` - ``one``
+
+
+------------
+
+.. index:: hex_digest/5
+.. _hmac_protocol/0::hex_digest/5:
+
+``hex_digest/5``
+^^^^^^^^^^^^^^^^
+
+Computes a truncated HMAC digest containing the requested number of leftmost bytes and returns it as a lowercase hexadecimal atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hex_digest(Hash,KeyBytes,MessageBytes,Length,HexDigest)``
+| **Mode and number of proofs:**
+|    ``hex_digest(+object_identifier,+list(byte),+list(byte),+integer,--atom)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`hash_digest_protocol <hash_digest_protocol/0>`
+

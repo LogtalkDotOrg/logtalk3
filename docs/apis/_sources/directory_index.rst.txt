@@ -650,6 +650,17 @@ To load an entity, always load the library that includes it using the goal ``log
    proto_hierarchy <proto_hierarchy_0>
    proto_hierarchyp <proto_hierarchyp_0>
 
+``library/hmac/``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   hmac <hmac_0>
+   hmac_protocol <hmac_protocol_0>
+
 ``library/hook_flows/``
 -----------------------
 
