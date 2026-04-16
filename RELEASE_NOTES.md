@@ -48,6 +48,9 @@ IDEs, text editors, and syntax highlighters support
 
 * ADDED: Syntax highlight support for the Fresh editor.
 
+* FIXED: The syntax highlight test files contained an incorrect example of the
+Logtalk `use_module/1` directive.
+
 
 3.99.0 - April 9, 2026
 ======================

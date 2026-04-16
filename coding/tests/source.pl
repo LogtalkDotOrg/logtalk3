@@ -1,4 +1,4 @@
-:- encoding(Encoding).	% this is a single-line comment
+:- encoding('UTF-8').	% this is a single-line comment
 
 /*
 this is
@@ -7,21 +7,21 @@ comment
 */
 
 
-:- if(Goal).
+:- if(some_goal).
 	% conditional
-:- elif(Goal).
+:- elif(another_goal).
 	% compilation
 :- else.
 	% directives
 :- endif.
 
 
-:- initialization(Goal).
-:- op(Precedence, Associativity, Operator).
-:- ensure_loaded(File).
-:- include(File).
-:- set_prolog_flag(Flag, Value).
-:- set_logtalk_flag(Flag, Value).
+:- initialization(init).
+:- op(600, xfx, foo).
+:- ensure_loaded(some_file).
+:- include(another_file).
+:- set_prolog_flag(flag, value).
+:- set_logtalk_flag(flag, value).
 
 
 :- module(module, [foo/1, bar/2]).

@@ -15,8 +15,7 @@
 // and the path to the language files
 //
 $source = " 
-
-% this is a single-line comment
+:- encoding('UTF-8').	% this is a single-line comment
 
 /*
 this is
@@ -25,22 +24,21 @@ comment
 */
 
 
-:- if(Goal).
+:- if(some_goal).
 	% conditional
-:- elif(Goal).
+:- elif(another_goal).
 	% compilation
 :- else.
 	% directives
 :- endif.
 
 
-:- initialization(Goal).
-:- encoding(Encoding).
-:- op(Precedence, Associativity, Operator).
-:- ensure_loaded(File).
-:- include(File).
-:- set_prolog_flag(Flag, Value).
-:- set_logtalk_flag(Flag, Value).
+:- initialization(init).
+:- op(600, xfx, foo).
+:- ensure_loaded(some_file).
+:- include(another_file).
+:- set_prolog_flag(flag, value).
+:- set_logtalk_flag(flag, value).
 
 
 :- object(prototype,
@@ -49,9 +47,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1:52:0,
+		version is 1:53:0,
 		author is 'Paulo Moura',
-		date is 2025-10-06,
+		date is 2026-04-16,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
@@ -71,7 +69,7 @@ comment
 	:- uses(list, [append/3, member/2]).
 	:- uses(queues, [new/1 as new_queue/1]).
 
-	:- use_module(module).
+	:- use_module([module as alias]).
 	:- use_module(module, [append/3, member/2]).
 
 	:- multifile(zzz/1).
