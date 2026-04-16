@@ -25,6 +25,11 @@ RELEASE NOTES
 3.100.0 - April ??, 2026
 ========================
 
+Documentation
+-------------
+
+* FIXED: Sequence non-terminals in the Handbook grammar section.
+
 Library
 -------
 

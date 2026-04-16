@@ -285,11 +285,10 @@ implemented_protocol <span class="o">::=</span>
    | scope &quot;::&quot; protocol_identifier
 
 implemented_protocol_sequence <span class="o">::=</span>
-   implemented_protocol
-   | implemented_protocol &quot;,&quot; implemented_protocol_sequence
+   &quot;(&quot; implemented_protocol (&quot;,&quot; implemented_protocol)* &quot;)&quot;
 
 implemented_protocol_list <span class="o">::=</span>
-   &quot;[&quot; implemented_protocol_sequence &quot;]&quot;
+   &quot;[&quot; implemented_protocol (&quot;,&quot; implemented_protocol)* &quot;]&quot;
 </pre></div>
 </div>
 </section>
@@ -305,11 +304,10 @@ extended_protocol <span class="o">::=</span>
    | scope &quot;::&quot; protocol_identifier
 
 extended_protocol_sequence <span class="o">::=</span>
-   extended_protocol
-   |extended_protocol &quot;,&quot; extended_protocol_sequence
+   &quot;(&quot; extended_protocol (&quot;,&quot; extended_protocol)* &quot;)&quot;
 
 extended_protocol_list <span class="o">::=</span>
-   &quot;[&quot; extended_protocol_sequence &quot;]&quot;
+   &quot;[&quot; extended_protocol (&quot;,&quot; extended_protocol)* &quot;]&quot;
 </pre></div>
 </div>
 </section>
@@ -325,11 +323,10 @@ imported_category <span class="o">::=</span>
    | scope &quot;::&quot; category_identifier
 
 imported_category_sequence <span class="o">::=</span>
-   imported_category
-   | imported_category &quot;,&quot; imported_category_sequence
+   &quot;(&quot; imported_category (&quot;,&quot; imported_category)* &quot;)&quot;
 
 imported_category_list <span class="o">::=</span>
-   &quot;[&quot; imported_category_sequence &quot;]&quot;
+   &quot;[&quot; imported_category (&quot;,&quot; imported_category)* &quot;]&quot;
 </pre></div>
 </div>
 </section>
@@ -345,11 +342,10 @@ extended_object <span class="o">::=</span>
    | scope &quot;::&quot; object_identifier
 
 extended_object_sequence <span class="o">::=</span>
-   extended_object
-   | extended_object &quot;,&quot; extended_object_sequence
+   &quot;(&quot; extended_object (&quot;,&quot; extended_object)* &quot;)&quot;
 
 extended_object_list <span class="o">::=</span>
-   &quot;[&quot; extended_object_sequence &quot;]&quot;
+   &quot;[&quot; extended_object (&quot;,&quot; extended_object)* &quot;]&quot;
 </pre></div>
 </div>
 </section>
@@ -365,11 +361,10 @@ extended_category <span class="o">::=</span>
    | scope &quot;::&quot; category_identifier
 
 extended_category_sequence <span class="o">::=</span>
-   extended_category
-   | extended_category &quot;,&quot; extended_category_sequence
+   &quot;(&quot; extended_category (&quot;,&quot; extended_category)* &quot;)&quot;
 
 extended_category_list <span class="o">::=</span>
-   &quot;[&quot; extended_category_sequence &quot;]&quot;
+   &quot;[&quot; extended_category (&quot;,&quot; extended_category)* &quot;]&quot;
 </pre></div>
 </div>
 </section>
@@ -385,11 +380,10 @@ instantiated_object <span class="o">::=</span>
    | scope &quot;::&quot; object_identifier
 
 instantiated_object_sequence <span class="o">::=</span>
-   instantiated_object
-   | instantiated_object &quot;,&quot; instantiated_object_sequence
+   &quot;(&quot; instantiated_object (&quot;,&quot; instantiated_object)* &quot;)&quot;
 
 instantiated_object_list <span class="o">::=</span>
-   &quot;[&quot; instantiated_object_sequence &quot;]&quot;
+   &quot;[&quot; instantiated_object (&quot;,&quot; instantiated_object)* &quot;]&quot;
 </pre></div>
 </div>
 </section>
@@ -405,11 +399,10 @@ specialized_object <span class="o">::=</span>
    | scope &quot;::&quot; object_identifier
 
 specialized_object_sequence <span class="o">::=</span>
-   specialized_object
-   | specialized_object &quot;,&quot; specialized_object_sequence
+   &quot;(&quot; specialized_object (&quot;,&quot; specialized_object)* &quot;)&quot;
 
 specialized_object_list <span class="o">::=</span>
-   &quot;[&quot; specialized_object_sequence &quot;]&quot;
+   &quot;[&quot; specialized_object (&quot;,&quot; specialized_object)* &quot;]&quot;
 </pre></div>
 </div>
 </section>
@@ -421,11 +414,10 @@ specialized_object_list <span class="o">::=</span>
    | complemented_object_list
 
 complemented_object_sequence <span class="o">::=</span>
-   object_identifier
-   | object_identifier &quot;,&quot; complemented_object_sequence
+   &quot;(&quot; object_identifier (&quot;,&quot; object_identifier)* &quot;)&quot;
 
 complemented_object_list <span class="o">::=</span>
-   &quot;[&quot; complemented_object_sequence &quot;]&quot;
+   &quot;[&quot; object_identifier (&quot;,&quot; object_identifier)* &quot;]&quot;
 </pre></div>
 </div>
 </section>
@@ -670,11 +662,10 @@ scope_directive_resource <span class="o">::=</span>
    | operator
 
 scope_directive_resource_sequence <span class="o">::=</span>
-   scope_directive_resource
-   | scope_directive_resource &quot;,&quot; scope_directive_resource_sequence
+   &quot;(&quot; scope_directive_resource (&quot;,&quot; scope_directive_resource)* &quot;)&quot;
 
 scope_directive_resource_list <span class="o">::=</span>
-   &quot;[&quot; scope_directive_resource_sequence &quot;]&quot;
+   &quot;[&quot; scope_directive_resource (&quot;,&quot; scope_directive_resource)* &quot;]&quot;
 
 entity_resources_list <span class="o">::=</span>
    predicate_indicator_list
@@ -686,22 +677,20 @@ predicate_indicator_term <span class="o">::=</span>
    | predicate_indicator_list
 
 predicate_indicator_sequence <span class="o">::=</span>
-   predicate_indicator
-   | predicate_indicator &quot;,&quot; predicate_indicator_sequence
+   &quot;(&quot; predicate_indicator (&quot;,&quot; predicate_indicator)* &quot;)&quot;
 
 predicate_indicator_list <span class="o">::=</span>
-   &quot;[&quot; predicate_indicator_sequence &quot;]&quot;
-
-alias_directive_resource_list <span class="o">::=</span>
-   &quot;[&quot; alias_directive_resource_sequence &quot;]&quot;
-
-alias_directive_resource_sequence <span class="o">::=</span>
-   alias_directive_resource
-   | alias_directive_resource &quot;,&quot; alias_directive_resource_sequence
+   &quot;[&quot; predicate_indicator (&quot;,&quot; predicate_indicator)* &quot;]&quot;
 
 alias_directive_resource <span class="o">::=</span>
    predicate_indicator_alias
    | non_terminal_indicator_alias
+
+alias_directive_resource_sequence <span class="o">::=</span>
+   &quot;(&quot; alias_directive_resource (&quot;,&quot; alias_directive_resource)* &quot;)&quot;
+
+alias_directive_resource_list <span class="o">::=</span>
+   &quot;[&quot; alias_directive_resource (&quot;,&quot; alias_directive_resource)* &quot;]&quot;
 
 synchronized_directive_resource_term <span class="o">::=</span>
    synchronized_directive_resource
@@ -713,37 +702,38 @@ synchronized_directive_resource <span class="o">::=</span>
    | non_terminal_indicator
 
 synchronized_directive_resource_sequence <span class="o">::=</span>
-   synchronized_directive_resource
-   | synchronized_directive_resource &quot;,&quot; synchronized_directive_resource_sequence
+   &quot;(&quot; synchronized_directive_resource (&quot;,&quot; synchronized_directive_resource)* &quot;)&quot;
 
 synchronized_directive_resource_list <span class="o">::=</span>
-   &quot;[&quot; synchronized_directive_resource_sequence &quot;]&quot;
-
-uses_directive_resource_list <span class="o">::=</span>
-   &quot;[&quot; uses_directive_resource_sequence &quot;]&quot;
-
-uses_directive_resource_sequence <span class="o">::=</span>
-   uses_directive_resource
-   | uses_directive_resource &quot;,&quot; uses_directive_resource_sequence
+   &quot;[&quot; synchronized_directive_resource (&quot;,&quot; synchronized_directive_resource)* &quot;]&quot;
 
 uses_directive_resource <span class="o">::=</span>
-   predicate_indicator
+   predicate_indicator_alias
+   | non_terminal_indicator_alias
+   | predicate_indicator
    | non_terminal_indicator
    | predicate_template_alias
    | operator
 
-use_module_directive_resource_list <span class="o">::=</span>
-   &quot;[&quot; use_module_directive_resource_sequence &quot;]&quot;
+uses_directive_resource_sequence <span class="o">::=</span>
+   &quot;(&quot; uses_directive_resource (&quot;,&quot; uses_directive_resource)* &quot;)&quot;
 
-use_module_directive_resource_sequence <span class="o">::=</span>
-   use_module_directive_resource
-   | use_module_directive_resource &quot;,&quot; use_module_directive_resource_sequence
+uses_directive_resource_list <span class="o">::=</span>
+   &quot;[&quot; uses_directive_resource (&quot;,&quot; uses_directive_resource)* &quot;]&quot;
 
 use_module_directive_resource <span class="o">::=</span>
-   predicate_indicator
+   predicate_indicator_alias
+   | non_terminal_indicator_alias
+   | predicate_indicator
    | non_terminal_indicator
    | predicate_template_alias
    | operator
+
+use_module_directive_resource_sequence <span class="o">::=</span>
+   &quot;(&quot; use_module_directive_resource (&quot;,&quot; use_module_directive_resource)* &quot;)&quot;
+
+use_module_directive_resource_list <span class="o">::=</span>
+   &quot;[&quot; use_module_directive_resource (&quot;,&quot; use_module_directive_resource)* &quot;]&quot;
 
 qualified_directive_resource_term <span class="o">::=</span>
    qualified_directive_resource
@@ -751,11 +741,10 @@ qualified_directive_resource_term <span class="o">::=</span>
    | qualified_directive_resource_list
 
 qualified_directive_resource_sequence <span class="o">::=</span>
-   qualified_directive_resource
-   | qualified_directive_resource &quot;,&quot; qualified_directive_resource_sequence
+   &quot;(&quot; qualified_directive_resource_term (&quot;,&quot; qualified_directive_resource_term)* &quot;)&quot;
 
 qualified_directive_resource_list <span class="o">::=</span>
-   &quot;[&quot; qualified_directive_resource_sequence &quot;]&quot;
+   &quot;[&quot; qualified_directive_resource_term (&quot;,&quot; qualified_directive_resource_term)* &quot;]&quot;
 
 qualified_directive_resource <span class="o">::=</span>
    predicate_indicator
@@ -789,11 +778,10 @@ coinductive_predicate_template_term <span class="o">::=</span>
    | coinductive_predicate_template_list
 
 coinductive_predicate_template_sequence <span class="o">::=</span>
-   coinductive_predicate_template
-   | coinductive_predicate_template &quot;,&quot; coinductive_predicate_template_sequence
+   &quot;(&quot; coinductive_predicate_template (&quot;,&quot; coinductive_predicate_template)* &quot;)&quot;
 
 coinductive_predicate_template_list <span class="o">::=</span>
-   &quot;[&quot; coinductive_predicate_template_sequence &quot;]&quot;
+   &quot;[&quot; coinductive_predicate_template (&quot;,&quot; coinductive_predicate_template)* &quot;]&quot;
 
 coinductive_predicate_template <span class="o">::=</span>
    atom &quot;(&quot; coinductive_mode_terms &quot;)&quot;
@@ -870,11 +858,10 @@ meta_predicate_template_term <span class="o">::=</span>
    | meta_predicate_template_list
 
 meta_predicate_template_sequence <span class="o">::=</span>
-   meta_predicate_template
-   | meta_predicate_template &quot;,&quot; meta_predicate_template_sequence
+   &quot;(&quot; meta_predicate_template (&quot;,&quot; meta_predicate_template)* &quot;)&quot;
 
 meta_predicate_template_list <span class="o">::=</span>
-   &quot;[&quot; meta_predicate_template_sequence &quot;]&quot;
+   &quot;[&quot; meta_predicate_template (&quot;,&quot; meta_predicate_template)* &quot;]&quot;
 
 meta_predicate_template <span class="o">::=</span>
    object_identifier &quot;::&quot; atom &quot;(&quot; meta_predicate_specifiers &quot;)&quot;
@@ -895,12 +882,11 @@ meta_predicate_specifier <span class="o">::=</span>
 meta_non_terminal_template_term <span class="o">::=</span>
    meta_predicate_template_term
 
-entity_info_list <span class="o">::=</span>
-   &quot;[&quot; entity_info_sequence? &quot;]&quot;
-
-entity_info_sequence <span class="o">::=</span>
+entity_info_pair <span class="o">::=</span>
    entity_info_item &quot;is&quot; nonvar
-   | entity_info_item &quot;is&quot; nonvar &quot;,&quot; entity_info_sequence
+
+entity_info_list <span class="o">::=</span>
+   &quot;[&quot; entity_info_pair (&quot;,&quot; entity_info_pair)* &quot;]&quot;
 
 entity_info_item <span class="o">::=</span>
    &quot;comment&quot;
@@ -915,12 +901,11 @@ entity_info_item <span class="o">::=</span>
    | &quot;see_also&quot;
    | atom
 
-predicate_info_list <span class="o">::=</span>
-   &quot;[&quot; predicate_info_sequence? &quot;]&quot;
-
-predicate_info_sequence <span class="o">::=</span>
+predicate_info_pair <span class="o">::=</span>
    predicate_info_item &quot;is&quot; nonvar
-   | predicate_info_item &quot;is&quot; nonvar &quot;,&quot; predicate_info_sequence
+
+predicate_info_list <span class="o">::=</span>
+   &quot;[&quot; predicate_info_pair (&quot;,&quot; predicate_info_pair)* &quot;]&quot;
 
 predicate_info_item <span class="o">::=</span>
    &quot;comment&quot;
@@ -934,25 +919,17 @@ predicate_info_item <span class="o">::=</span>
    | &quot;see_also&quot;
    | atom
 
-object_alias_list <span class="o">::=</span>
-   &quot;[&quot; object_alias_sequence &quot;]&quot;
-
-object_alias_sequence <span class="o">::=</span>
-   object_alias
-   | object_alias &quot;,&quot; object_alias_sequence
-
 object_alias <span class="o">::=</span>
    object_identifier &quot;as&quot; object_identifier
 
-module_alias_list <span class="o">::=</span>
-   &quot;[&quot; module_alias_sequence &quot;]&quot;
-
-module_alias_sequence <span class="o">::=</span>
-   module_alias
-   | module_alias &quot;,&quot; module_alias_sequence
+object_alias_list <span class="o">::=</span>
+   &quot;[&quot; object_alias (&quot;,&quot; object_alias)* &quot;]&quot;
 
 module_alias <span class="o">::=</span>
    module_identifier &quot;as&quot; module_identifier
+
+module_alias_list <span class="o">::=</span>
+   &quot;[&quot; module_alias (&quot;,&quot; module_alias)* &quot;]&quot;
 </pre></div>
 </div>
 </section>
@@ -1118,11 +1095,7 @@ protocol_property <span class="o">::=</span>
    | &quot;debugging&quot;
 
 predicate_declaration_property_list <span class="o">::=</span>
-   &quot;[&quot; predicate_declaration_property_sequence &quot;]&quot;
-
-predicate_declaration_property_sequence <span class="o">::=</span>
-   predicate_declaration_property
-   | predicate_declaration_property &quot;,&quot; predicate_declaration_property_sequence
+   &quot;[&quot; predicate_declaration_property (&quot;,&quot; predicate_declaration_property)* &quot;]&quot;
 
 predicate_declaration_property <span class="o">::=</span>
    &quot;static&quot;
@@ -1144,11 +1117,7 @@ predicate_declaration_property <span class="o">::=</span>
    | &quot;info(&quot; list &quot;)&quot;
 
 predicate_definition_property_list <span class="o">::=</span>
-   &quot;[&quot; predicate_definition_property_sequence &quot;]&quot;
-
-predicate_definition_property_sequence <span class="o">::=</span>
-   predicate_definition_property
-   | predicate_definition_property &quot;,&quot; predicate_definition_property_sequence
+   &quot;[&quot; predicate_definition_property (&quot;,&quot; predicate_definition_property)* &quot;]&quot;
 
 predicate_definition_property <span class="o">::=</span>
    &quot;inline&quot;
@@ -1161,11 +1130,7 @@ predicate_definition_property <span class="o">::=</span>
    | &quot;number_of_rules(&quot; integer &quot;)&quot;
 
 entity_alias_property_list <span class="o">::=</span>
-   &quot;[&quot; entity_alias_property_sequence &quot;]&quot;
-
-entity_alias_property_sequence <span class="o">::=</span>
-   entity_alias_property
-   | entity_alias_property &quot;,&quot; entity_alias_property_sequence
+   &quot;[&quot; entity_alias_property (&quot;,&quot; entity_alias_property)* &quot;]&quot;
 
 entity_alias_property <span class="o">::=</span>
    &quot;object&quot;
@@ -1176,11 +1141,7 @@ entity_alias_property <span class="o">::=</span>
    | &quot;line_count(&quot; integer &quot;)&quot;
 
 predicate_alias_property_list <span class="o">::=</span>
-   &quot;[&quot; predicate_alias_property_sequence &quot;]&quot;
-
-predicate_alias_property_sequence <span class="o">::=</span>
-   predicate_alias_property
-   | predicate_alias_property &quot;,&quot; predicate_alias_property_sequence
+   &quot;[&quot; predicate_alias_property (&quot;,&quot; predicate_alias_property)* &quot;]&quot;
 
 predicate_alias_property <span class="o">::=</span>
    &quot;predicate&quot;
@@ -1199,11 +1160,7 @@ predicate <span class="o">::=</span>
    | ( variable | module_identifier ) &quot;:&quot; predicate_indicator
 
 predicate_call_update_property_list <span class="o">::=</span>
-   &quot;[&quot; predicate_call_update_property_sequence &quot;]&quot;
-
-predicate_call_update_property_sequence <span class="o">::=</span>
-   predicate_call_update_property
-   | predicate_call_update_property &quot;,&quot; predicate_call_update_property_sequence
+   &quot;[&quot; predicate_call_update_property (&quot;,&quot; predicate_call_update_property)* &quot;]&quot;
 
 predicate_call_update_property <span class="o">::=</span>
    &quot;caller(&quot; predicate_indicator &quot;)&quot;
@@ -1217,12 +1174,15 @@ reference <span class="o">::=</span>
    object_identifier | category_identifier
    | ( object_identifier | category_identifier ) &quot;::&quot; predicate_indicator
 
-reference_property_list <span class="o">::=</span>
+reference_property <span class="o">::=</span>
    &quot;in(&quot; ( &quot;multifile&quot; | &quot;dynamic&quot; | &quot;discontiguous&quot; | &quot;meta_predicate&quot; | &quot;meta_non_terminal&quot; | &quot;clause&quot; ) &quot;)&quot;
    | &quot;include(&quot; atom &quot;)&quot;
    | &quot;lines(&quot; integer  &quot;,&quot; integer &quot;)&quot;
    | &quot;line_count(&quot; integer &quot;)&quot;
    | &quot;non_terminal(&quot; non_terminal_indicator &quot;)&quot;
+
+reference_property_list <span class="o">::=</span>
+   &quot;[&quot; reference_property (&quot;,&quot; reference_property)* &quot;]&quot;
 </pre></div>
 </div>
 </section>

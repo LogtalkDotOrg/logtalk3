@@ -165,11 +165,10 @@ Implemented protocols
       | scope "::" protocol_identifier
 
    implemented_protocol_sequence ::=
-      implemented_protocol
-      | implemented_protocol "," implemented_protocol_sequence
+      "(" implemented_protocol ("," implemented_protocol)* ")"
 
    implemented_protocol_list ::=
-      "[" implemented_protocol_sequence "]"
+      "[" implemented_protocol ("," implemented_protocol)* "]"
 
 .. _grammar_extended_protocols:
 
@@ -188,11 +187,10 @@ Extended protocols
       | scope "::" protocol_identifier
 
    extended_protocol_sequence ::=
-      extended_protocol
-      |extended_protocol "," extended_protocol_sequence
+      "(" extended_protocol ("," extended_protocol)* ")"
 
    extended_protocol_list ::=
-      "[" extended_protocol_sequence "]"
+      "[" extended_protocol ("," extended_protocol)* "]"
 
 .. _grammar_imported_categories:
 
@@ -211,11 +209,10 @@ Imported categories
       | scope "::" category_identifier
 
    imported_category_sequence ::=
-      imported_category
-      | imported_category "," imported_category_sequence
+      "(" imported_category ("," imported_category)* ")"
 
    imported_category_list ::=
-      "[" imported_category_sequence "]"
+      "[" imported_category ("," imported_category)* "]"
 
 .. _grammar_extended_objects:
 
@@ -234,11 +231,10 @@ Extended objects
       | scope "::" object_identifier
 
    extended_object_sequence ::=
-      extended_object
-      | extended_object "," extended_object_sequence
+      "(" extended_object ("," extended_object)* ")"
 
    extended_object_list ::=
-      "[" extended_object_sequence "]"
+      "[" extended_object ("," extended_object)* "]"
 
 .. _grammar_extended_categories:
 
@@ -257,11 +253,10 @@ Extended categories
       | scope "::" category_identifier
 
    extended_category_sequence ::=
-      extended_category
-      | extended_category "," extended_category_sequence
+      "(" extended_category ("," extended_category)* ")"
 
    extended_category_list ::=
-      "[" extended_category_sequence "]"
+      "[" extended_category ("," extended_category)* "]"
 
 .. _grammar_instantiated_objects:
 
@@ -280,11 +275,10 @@ Instantiated objects
       | scope "::" object_identifier
 
    instantiated_object_sequence ::=
-      instantiated_object
-      | instantiated_object "," instantiated_object_sequence
+      "(" instantiated_object ("," instantiated_object)* ")"
 
    instantiated_object_list ::=
-      "[" instantiated_object_sequence "]"
+      "[" instantiated_object ("," instantiated_object)* "]"
 
 .. _grammar_specialized_objects:
 
@@ -303,11 +297,10 @@ Specialized objects
       | scope "::" object_identifier
 
    specialized_object_sequence ::=
-      specialized_object
-      | specialized_object "," specialized_object_sequence
+      "(" specialized_object ("," specialized_object)* ")"
 
    specialized_object_list ::=
-      "[" specialized_object_sequence "]"
+      "[" specialized_object ("," specialized_object)* "]"
 
 .. _grammar_complemented_objects:
 
@@ -322,11 +315,10 @@ Complemented objects
       | complemented_object_list
 
    complemented_object_sequence ::=
-      object_identifier
-      | object_identifier "," complemented_object_sequence
+      "(" object_identifier ("," object_identifier)* ")"
 
    complemented_object_list ::=
-      "[" complemented_object_sequence "]"
+      "[" object_identifier ("," object_identifier)* "]"
 
 .. _grammar_scope:
 
@@ -623,11 +615,10 @@ Predicate directives
       | operator
 
    scope_directive_resource_sequence ::=
-      scope_directive_resource
-      | scope_directive_resource "," scope_directive_resource_sequence
+      "(" scope_directive_resource ("," scope_directive_resource)* ")"
 
    scope_directive_resource_list ::=
-      "[" scope_directive_resource_sequence "]"
+      "[" scope_directive_resource ("," scope_directive_resource)* "]"
 
    entity_resources_list ::=
       predicate_indicator_list
@@ -639,22 +630,20 @@ Predicate directives
       | predicate_indicator_list
 
    predicate_indicator_sequence ::=
-      predicate_indicator
-      | predicate_indicator "," predicate_indicator_sequence
+      "(" predicate_indicator ("," predicate_indicator)* ")"
 
    predicate_indicator_list ::=
-      "[" predicate_indicator_sequence "]"
-
-   alias_directive_resource_list ::=
-      "[" alias_directive_resource_sequence "]"
-
-   alias_directive_resource_sequence ::=
-      alias_directive_resource
-      | alias_directive_resource "," alias_directive_resource_sequence
+      "[" predicate_indicator ("," predicate_indicator)* "]"
 
    alias_directive_resource ::=
       predicate_indicator_alias
       | non_terminal_indicator_alias
+
+   alias_directive_resource_sequence ::=
+      "(" alias_directive_resource ("," alias_directive_resource)* ")"
+
+   alias_directive_resource_list ::=
+      "[" alias_directive_resource ("," alias_directive_resource)* "]"
 
    synchronized_directive_resource_term ::=
       synchronized_directive_resource
@@ -666,37 +655,38 @@ Predicate directives
       | non_terminal_indicator
 
    synchronized_directive_resource_sequence ::=
-      synchronized_directive_resource
-      | synchronized_directive_resource "," synchronized_directive_resource_sequence
+      "(" synchronized_directive_resource ("," synchronized_directive_resource)* ")"
 
    synchronized_directive_resource_list ::=
-      "[" synchronized_directive_resource_sequence "]"
-
-   uses_directive_resource_list ::=
-      "[" uses_directive_resource_sequence "]"
-
-   uses_directive_resource_sequence ::=
-      uses_directive_resource
-      | uses_directive_resource "," uses_directive_resource_sequence
+      "[" synchronized_directive_resource ("," synchronized_directive_resource)* "]"
 
    uses_directive_resource ::=
-      predicate_indicator
+      predicate_indicator_alias
+      | non_terminal_indicator_alias
+      | predicate_indicator
       | non_terminal_indicator
       | predicate_template_alias
       | operator
 
-   use_module_directive_resource_list ::=
-      "[" use_module_directive_resource_sequence "]"
+   uses_directive_resource_sequence ::=
+      "(" uses_directive_resource ("," uses_directive_resource)* ")"
 
-   use_module_directive_resource_sequence ::=
-      use_module_directive_resource
-      | use_module_directive_resource "," use_module_directive_resource_sequence
+   uses_directive_resource_list ::=
+      "[" uses_directive_resource ("," uses_directive_resource)* "]"
 
    use_module_directive_resource ::=
-      predicate_indicator
+      predicate_indicator_alias
+      | non_terminal_indicator_alias
+      | predicate_indicator
       | non_terminal_indicator
       | predicate_template_alias
       | operator
+
+   use_module_directive_resource_sequence ::=
+      "(" use_module_directive_resource ("," use_module_directive_resource)* ")"
+
+   use_module_directive_resource_list ::=
+      "[" use_module_directive_resource ("," use_module_directive_resource)* "]"
 
    qualified_directive_resource_term ::=
       qualified_directive_resource
@@ -704,11 +694,10 @@ Predicate directives
       | qualified_directive_resource_list
 
    qualified_directive_resource_sequence ::=
-      qualified_directive_resource
-      | qualified_directive_resource "," qualified_directive_resource_sequence
+      "(" qualified_directive_resource_term ("," qualified_directive_resource_term)* ")"
 
    qualified_directive_resource_list ::=
-      "[" qualified_directive_resource_sequence "]"
+      "[" qualified_directive_resource_term ("," qualified_directive_resource_term)* "]"
 
    qualified_directive_resource ::=
       predicate_indicator
@@ -742,11 +731,10 @@ Predicate directives
       | coinductive_predicate_template_list
 
    coinductive_predicate_template_sequence ::=
-      coinductive_predicate_template
-      | coinductive_predicate_template "," coinductive_predicate_template_sequence
+      "(" coinductive_predicate_template ("," coinductive_predicate_template)* ")"
 
    coinductive_predicate_template_list ::=
-      "[" coinductive_predicate_template_sequence "]"
+      "[" coinductive_predicate_template ("," coinductive_predicate_template)* "]"
 
    coinductive_predicate_template ::=
       atom "(" coinductive_mode_terms ")"
@@ -823,11 +811,10 @@ Predicate directives
       | meta_predicate_template_list
 
    meta_predicate_template_sequence ::=
-      meta_predicate_template
-      | meta_predicate_template "," meta_predicate_template_sequence
+      "(" meta_predicate_template ("," meta_predicate_template)* ")"
 
    meta_predicate_template_list ::=
-      "[" meta_predicate_template_sequence "]"
+      "[" meta_predicate_template ("," meta_predicate_template)* "]"
 
    meta_predicate_template ::=
       object_identifier "::" atom "(" meta_predicate_specifiers ")"
@@ -848,12 +835,11 @@ Predicate directives
    meta_non_terminal_template_term ::=
       meta_predicate_template_term
 
-   entity_info_list ::=
-      "[" entity_info_sequence? "]"
-
-   entity_info_sequence ::=
+   entity_info_pair ::=
       entity_info_item "is" nonvar
-      | entity_info_item "is" nonvar "," entity_info_sequence
+
+   entity_info_list ::=
+      "[" entity_info_pair ("," entity_info_pair)* "]"
 
    entity_info_item ::=
       "comment"
@@ -868,12 +854,11 @@ Predicate directives
       | "see_also"
       | atom
 
-   predicate_info_list ::=
-      "[" predicate_info_sequence? "]"
-
-   predicate_info_sequence ::=
+   predicate_info_pair ::=
       predicate_info_item "is" nonvar
-      | predicate_info_item "is" nonvar "," predicate_info_sequence
+
+   predicate_info_list ::=
+      "[" predicate_info_pair ("," predicate_info_pair)* "]"
 
    predicate_info_item ::=
       "comment"
@@ -887,25 +872,17 @@ Predicate directives
       | "see_also"
       | atom
 
-   object_alias_list ::=
-      "[" object_alias_sequence "]"
-
-   object_alias_sequence ::=
-      object_alias
-      | object_alias "," object_alias_sequence
-
    object_alias ::=
       object_identifier "as" object_identifier
 
-   module_alias_list ::=
-      "[" module_alias_sequence "]"
-
-   module_alias_sequence ::=
-      module_alias
-      | module_alias "," module_alias_sequence
+   object_alias_list ::=
+      "[" object_alias ("," object_alias)* "]"
 
    module_alias ::=
       module_identifier "as" module_identifier
+
+   module_alias_list ::=
+      "[" module_alias ("," module_alias)* "]"
 
 .. _grammar_clauses:
 
@@ -1079,11 +1056,7 @@ Entity properties
       | "debugging"
 
    predicate_declaration_property_list ::=
-      "[" predicate_declaration_property_sequence "]"
-
-   predicate_declaration_property_sequence ::=
-      predicate_declaration_property
-      | predicate_declaration_property "," predicate_declaration_property_sequence
+      "[" predicate_declaration_property ("," predicate_declaration_property)* "]"
 
    predicate_declaration_property ::=
       "static"
@@ -1105,11 +1078,7 @@ Entity properties
       | "info(" list ")"
 
    predicate_definition_property_list ::=
-      "[" predicate_definition_property_sequence "]"
-
-   predicate_definition_property_sequence ::=
-      predicate_definition_property
-      | predicate_definition_property "," predicate_definition_property_sequence
+      "[" predicate_definition_property ("," predicate_definition_property)* "]"
 
    predicate_definition_property ::=
       "inline"
@@ -1122,11 +1091,7 @@ Entity properties
       | "number_of_rules(" integer ")"
 
    entity_alias_property_list ::=
-      "[" entity_alias_property_sequence "]"
-
-   entity_alias_property_sequence ::=
-      entity_alias_property
-      | entity_alias_property "," entity_alias_property_sequence
+      "[" entity_alias_property ("," entity_alias_property)* "]"
 
    entity_alias_property ::=
       "object"
@@ -1137,11 +1102,7 @@ Entity properties
       | "line_count(" integer ")"
 
    predicate_alias_property_list ::=
-      "[" predicate_alias_property_sequence "]"
-
-   predicate_alias_property_sequence ::=
-      predicate_alias_property
-      | predicate_alias_property "," predicate_alias_property_sequence
+      "[" predicate_alias_property ("," predicate_alias_property)* "]"
 
    predicate_alias_property ::=
       "predicate"
@@ -1160,11 +1121,7 @@ Entity properties
       | ( variable | module_identifier ) ":" predicate_indicator
 
    predicate_call_update_property_list ::=
-      "[" predicate_call_update_property_sequence "]"
-
-   predicate_call_update_property_sequence ::=
-      predicate_call_update_property
-      | predicate_call_update_property "," predicate_call_update_property_sequence
+      "[" predicate_call_update_property ("," predicate_call_update_property)* "]"
 
    predicate_call_update_property ::=
       "caller(" predicate_indicator ")"
@@ -1178,12 +1135,15 @@ Entity properties
       object_identifier | category_identifier
       | ( object_identifier | category_identifier ) "::" predicate_indicator
 
-   reference_property_list ::=
+   reference_property ::=
       "in(" ( "multifile" | "dynamic" | "discontiguous" | "meta_predicate" | "meta_non_terminal" | "clause" ) ")"
       | "include(" atom ")"
       | "lines(" integer  "," integer ")"
       | "line_count(" integer ")"
       | "non_terminal(" non_terminal_indicator ")"
+
+   reference_property_list ::=
+      "[" reference_property ("," reference_property)* "]"
 
 .. _grammar_predicate_properties:
 
