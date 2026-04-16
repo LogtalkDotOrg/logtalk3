@@ -62,6 +62,10 @@ Categories
    packs_common <packs_common_0>
    packs_messages <packs_messages_0>
    proto_hierarchy <proto_hierarchy_0>
+   ranker_diagnostics <ranker_diagnostics_0>
+   ranker_export <ranker_export_0>
+   ranking_dataset_analysis <ranking_dataset_analysis_0>
+   ranking_dataset_validation <ranking_dataset_validation_0>
    read_file <read_file_0>
    recorded_database_core <recorded_database_core_0>
    single_byte_character_set(MaxCode) <single_byte_character_set_1>
@@ -113,6 +117,7 @@ Objects
    bintree <bintree_0>
    blank_grammars(Format) <blank_grammars_1>
    body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <body_goal_negation_5>
+   bradley_terry <bradley_terry_0>
    bup_interpreter <bup_interpreter_0>
    c45 <c45_0>
    callable <callable_0>
@@ -550,11 +555,14 @@ Protocols
    options_protocol <options_protocol_0>
    osp <osp_0>
    pack_protocol <pack_protocol_0>
+   pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol_0>
    permutations_protocol <permutations_protocol_0>
    proto_hierarchyp <proto_hierarchyp_0>
    pseudo_random_protocol <pseudo_random_protocol_0>
    queuep <queuep_0>
    random_protocol <random_protocol_0>
+   ranker_protocol <ranker_protocol_0>
+   ranking_dataset_protocol <ranking_dataset_protocol_0>
    registry_protocol <registry_protocol_0>
    sampling_protocol <sampling_protocol_0>
    setp <setp_0>

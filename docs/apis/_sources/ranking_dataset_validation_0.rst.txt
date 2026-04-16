@@ -1,0 +1,130 @@
+.. index:: single: ranking_dataset_validation
+.. _ranking_dataset_validation/0:
+
+.. rst-class:: right
+
+**category**
+
+``ranking_dataset_validation``
+==============================
+
+Shared predicates for validating ranking datasets.
+
+| **Availability:** 
+|    ``logtalk_load(ranking_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-16
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: validate_pairwise_dataset/1
+.. _ranking_dataset_validation/0::validate_pairwise_dataset/1:
+
+``validate_pairwise_dataset/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates a pairwise ranking dataset and throws an error if the dataset is malformed or disconnected.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_pairwise_dataset(Dataset)``
+| **Mode and number of proofs:**
+|    ``validate_pairwise_dataset(+object_identifier)`` - ``one``
+
+
+------------
+
+.. index:: validate_pairwise_dataset/2
+.. _ranking_dataset_validation/0::validate_pairwise_dataset/2:
+
+``validate_pairwise_dataset/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates a pairwise ranking dataset and returns its dataset summary when validation succeeds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_pairwise_dataset(Dataset,Summary)``
+| **Mode and number of proofs:**
+|    ``validate_pairwise_dataset(+object_identifier,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: validate_grouped_dataset/1
+.. _ranking_dataset_validation/0::validate_grouped_dataset/1:
+
+``validate_grouped_dataset/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates a grouped ranking dataset and throws an error if the dataset is malformed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_grouped_dataset(Dataset)``
+| **Mode and number of proofs:**
+|    ``validate_grouped_dataset(+object_identifier)`` - ``one``
+
+
+------------
+
+.. index:: validate_grouped_dataset/2
+.. _ranking_dataset_validation/0::validate_grouped_dataset/2:
+
+``validate_grouped_dataset/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates a grouped ranking dataset and returns its dataset summary when validation succeeds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_grouped_dataset(Dataset,Summary)``
+| **Mode and number of proofs:**
+|    ``validate_grouped_dataset(+object_identifier,-list(compound))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -1,0 +1,128 @@
+.. index:: single: ranker_diagnostics
+.. _ranker_diagnostics/0:
+
+.. rst-class:: right
+
+**category**
+
+``ranker_diagnostics``
+======================
+
+Shared predicates for accessing ranker diagnostics in a representation-independent way.
+
+| **Availability:** 
+|    ``logtalk_load(ranking_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-16
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: diagnostics/2
+.. _ranker_diagnostics/0::diagnostics/2:
+
+``diagnostics/2``
+^^^^^^^^^^^^^^^^^
+
+Returns the diagnostics metadata associated with a learned ranker.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics(Ranker,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``diagnostics(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: diagnostic/2
+.. _ranker_diagnostics/0::diagnostic/2:
+
+``diagnostic/2``
+^^^^^^^^^^^^^^^^
+
+Tests or enumerates individual diagnostics metadata terms for a learned ranker.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostic(Ranker,Diagnostic)``
+| **Mode and number of proofs:**
+|    ``diagnostic(+compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: ranker_options/2
+.. _ranker_diagnostics/0::ranker_options/2:
+
+``ranker_options/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the effective training options recorded in a learned ranker diagnostics list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ranker_options(Ranker,Options)``
+| **Mode and number of proofs:**
+|    ``ranker_options(+compound,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+.. index:: ranker_diagnostics_data/2
+.. _ranker_diagnostics/0::ranker_diagnostics_data/2:
+
+``ranker_diagnostics_data/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing ranker implementations must define in order to expose diagnostics metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ranker_diagnostics_data(Ranker,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``ranker_diagnostics_data(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

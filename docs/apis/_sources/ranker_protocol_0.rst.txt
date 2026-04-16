@@ -1,0 +1,173 @@
+.. index:: single: ranker_protocol
+.. _ranker_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``ranker_protocol``
+===================
+
+Protocol for machine learning rankers.
+
+| **Availability:** 
+|    ``logtalk_load(ranking_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-16
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/2
+.. _ranker_protocol/0::learn/2:
+
+``learn/2``
+^^^^^^^^^^^
+
+Learns a ranker from the given dataset object.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Ranker)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound)`` - ``one``
+
+
+------------
+
+.. index:: rank/3
+.. _ranker_protocol/0::rank/3:
+
+``rank/3``
+^^^^^^^^^^
+
+Ranks a list of candidate items using the learned ranker and returns the candidates ordered from most preferred to least preferred.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rank(Ranker,Candidates,Ranking)``
+| **Mode and number of proofs:**
+|    ``rank(+compound,+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: diagnostics/2
+.. _ranker_protocol/0::diagnostics/2:
+
+``diagnostics/2``
+^^^^^^^^^^^^^^^^^
+
+Returns diagnostics and metadata associated with a learned ranker in a representation-independent way.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics(Ranker,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``diagnostics(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: ranker_to_clauses/4
+.. _ranker_protocol/0::ranker_to_clauses/4:
+
+``ranker_to_clauses/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a ranker into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ranker_to_clauses(Dataset,Ranker,Functor,Clauses)``
+| **Mode and number of proofs:**
+|    ``ranker_to_clauses(+object_identifier,+compound,+callable,-list(clause))`` - ``one``
+
+
+------------
+
+.. index:: ranker_to_file/4
+.. _ranker_protocol/0::ranker_to_file/4:
+
+``ranker_to_file/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Exports a ranker to a file. ``Functor`` is the functor for the generated predicate clauses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ranker_to_file(Dataset,Ranker,Functor,File)``
+| **Mode and number of proofs:**
+|    ``ranker_to_file(+object_identifier,+compound,+callable,+atom)`` - ``one``
+
+
+------------
+
+.. index:: print_ranker/1
+.. _ranker_protocol/0::print_ranker/1:
+
+``print_ranker/1``
+^^^^^^^^^^^^^^^^^^
+
+Prints a ranker to the current output stream in a human-readable format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_ranker(Ranker)``
+| **Mode and number of proofs:**
+|    ``print_ranker(+compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`bradley_terry <bradley_terry/0>`, :ref:`ranking_dataset_protocol <ranking_dataset_protocol/0>`, :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0>`
+

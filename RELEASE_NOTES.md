@@ -33,6 +33,12 @@ Documentation
 Library
 -------
 
+* ADDED: New `ranking_protocols` library defining common protocols, shared
+test datasets, and smoke tests for machine learning ranking algorithms.
+
+* ADDED: New `bradley_terry` library implementing pairwise preference ranking
+using the Bradley-Terry model.
+
 * ADDED: New `hmac` library providing a portable implementation of HMAC
 (Keyed-Hashing for Message Authentication) as specified in RFC 2104.
 

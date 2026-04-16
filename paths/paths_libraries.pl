@@ -44,6 +44,7 @@ logtalk_library_path(base58, library('base58/')).
 logtalk_library_path(base64, library('base64/')).
 logtalk_library_path(base85, library('base85/')).
 logtalk_library_path(basic_types, library('basic_types/')).
+logtalk_library_path(bradley_terry, library('bradley_terry/')).
 logtalk_library_path(c45, library('c45/')).
 logtalk_library_path(cbor, library('cbor/')).
 logtalk_library_path(character_sets, library('character_sets/')).
@@ -113,6 +114,7 @@ logtalk_library_path(protobuf, library('protobuf/')).
 logtalk_library_path(queues, library('queues/')).
 logtalk_library_path(random, library('random/')).
 logtalk_library_path(random_forest, library('random_forest/')).
+logtalk_library_path(ranking_protocols, library('ranking_protocols/')).
 logtalk_library_path(reader, library('reader/')).
 logtalk_library_path(recorded_database, library('recorded_database/')).
 logtalk_library_path(redis, library('redis/')).

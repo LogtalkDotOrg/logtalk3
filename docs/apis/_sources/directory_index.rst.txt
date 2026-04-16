@@ -210,6 +210,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    base85 <base85_0>
 
+``library/bradley_terry/``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   bradley_terry <bradley_terry_0>
+
 ``library/c45/``
 ----------------
 
@@ -1101,6 +1111,22 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    random_forest <random_forest_0>
+
+``library/ranking_protocols/``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol_0>
+   ranker_diagnostics <ranker_diagnostics_0>
+   ranker_export <ranker_export_0>
+   ranker_protocol <ranker_protocol_0>
+   ranking_dataset_analysis <ranking_dataset_analysis_0>
+   ranking_dataset_protocol <ranking_dataset_protocol_0>
+   ranking_dataset_validation <ranking_dataset_validation_0>
 
 ``library/reader/``
 -------------------

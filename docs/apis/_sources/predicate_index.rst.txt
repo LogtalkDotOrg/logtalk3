@@ -3800,6 +3800,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`ranker_diagnostics <ranker_diagnostics/0::diagnostic/2>`
 * :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostic/2>`
 
 ``diagnostic/3``
@@ -3850,6 +3851,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`ranker_diagnostics <ranker_diagnostics/0::diagnostics/2>`
+* :ref:`ranker_protocol <ranker_protocol/0::diagnostics/2>`
 * :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostics/2>`
 
 ``diagnostics/3``
@@ -6567,6 +6570,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`termp <termp/0::ground/1>`
 
+``group/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_protocol <ranking_dataset_protocol/0::group/1>`
+
 ``group_by_key/2``
 ------------------
 
@@ -6596,6 +6609,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`pairs <pairs/0::group_sorted_by_key/2>`
+
+``grouped_dataset_groups/2``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_analysis <ranking_dataset_analysis/0::grouped_dataset_groups/2>`
+
+``grouped_dataset_items/3``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_analysis <ranking_dataset_analysis/0::grouped_dataset_items/3>`
+
+``grouped_dataset_summary/2``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_analysis <ranking_dataset_analysis/0::grouped_dataset_summary/2>`
 
 ``guess_all_extensions/2``
 --------------------------
@@ -8264,6 +8307,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`characterp <characterp/0::is_white_space/1>`
 
+``item/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0::item/1>`
+
+``item/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_protocol <ranking_dataset_protocol/0::item/2>`
+
 ``iterator_element/2``
 ----------------------
 
@@ -8669,6 +8732,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`classifier_protocol <classifier_protocol/0::learn/2>`
 * :ref:`metagol <metagol/0::learn/2>`
+* :ref:`ranker_protocol <ranker_protocol/0::learn/2>`
 
 ``learn/3``
 -----------
@@ -8679,6 +8743,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ada_boost <ada_boost/0::learn/3>`
+* :ref:`bradley_terry <bradley_terry/0::learn/3>`
 * :ref:`isolation_forest <isolation_forest/0::learn/3>`
 * :ref:`metagol <metagol/0::learn/3>`
 * :ref:`random_forest <random_forest/0::learn/3>`
@@ -12091,6 +12156,66 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`hash_common_32 <hash_common_32/0::pad_md/4>`
 
+``pairwise_dataset_connected_components/2``
+-------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_analysis <ranking_dataset_analysis/0::pairwise_dataset_connected_components/2>`
+
+``pairwise_dataset_declared_items/2``
+-------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_analysis <ranking_dataset_analysis/0::pairwise_dataset_declared_items/2>`
+
+``pairwise_dataset_items/2``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_analysis <ranking_dataset_analysis/0::pairwise_dataset_items/2>`
+
+``pairwise_dataset_preferences/2``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_analysis <ranking_dataset_analysis/0::pairwise_dataset_preferences/2>`
+
+``pairwise_dataset_summary/2``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_analysis <ranking_dataset_analysis/0::pairwise_dataset_summary/2>`
+
+``pairwise_dataset_win_totals/2``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_analysis <ranking_dataset_analysis/0::pairwise_dataset_win_totals/2>`
+
 ``params/2``
 ------------
 
@@ -12894,6 +13019,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`knn <knn/0::predict_probabilities/4>`
 * :ref:`nearest_centroid <nearest_centroid/0::predict_probabilities/4>`
 
+``preference/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0::preference/3>`
+
 ``preferred_mime_name/1``
 -------------------------
 
@@ -13065,6 +13200,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`logtalk <logtalk/0::print_message_tokens/3>`
+
+``print_ranker/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranker_protocol <ranker_protocol/0::print_ranker/1>`
 
 ``product/2``
 -------------
@@ -13498,6 +13643,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`statisticsp <statisticsp/0::range/2>`
 
+``rank/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranker_protocol <ranker_protocol/0::rank/3>`
+
 ``rank_correlation/3``
 ----------------------
 
@@ -13507,6 +13662,37 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`statisticsp <statisticsp/0::rank_correlation/3>`
+
+``ranker_options/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranker_diagnostics <ranker_diagnostics/0::ranker_options/2>`
+
+``ranker_to_clauses/4``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranker_protocol <ranker_protocol/0::ranker_to_clauses/4>`
+
+``ranker_to_file/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranker_export <ranker_export/0::ranker_to_file/4>`
+* :ref:`ranker_protocol <ranker_protocol/0::ranker_to_file/4>`
 
 ``rd/1``
 --------
@@ -13978,6 +14164,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`application_protocol <application_protocol/0::release_date/1>`
+
+``relevance/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_protocol <ranking_dataset_protocol/0::relevance/3>`
 
 ``removeDependent/1``
 ---------------------
@@ -16058,6 +16254,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`reader <reader/0::stream_to_terms/3>`
 
+``strengths/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`bradley_terry <bradley_terry/0::strengths/2>`
+
 ``string_chars/2``
 ------------------
 
@@ -17697,6 +17903,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`json_schema_protocol <json_schema_protocol/0::validate/3>`
+
+``validate_grouped_dataset/1``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_validation <ranking_dataset_validation/0::validate_grouped_dataset/1>`
+
+``validate_grouped_dataset/2``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_validation <ranking_dataset_validation/0::validate_grouped_dataset/2>`
+
+``validate_pairwise_dataset/1``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_validation <ranking_dataset_validation/0::validate_pairwise_dataset/1>`
+
+``validate_pairwise_dataset/2``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_validation <ranking_dataset_validation/0::validate_pairwise_dataset/2>`
 
 ``valids/2``
 ------------

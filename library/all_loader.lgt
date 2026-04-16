@@ -114,6 +114,8 @@
 		base85(loader),
 		hashes(loader),
 		hmac(loader),
+		ranking_protocols(loader),
+		bradley_terry(loader),
 		url(loader),
 		ulid(loader),
 		uuid(loader),

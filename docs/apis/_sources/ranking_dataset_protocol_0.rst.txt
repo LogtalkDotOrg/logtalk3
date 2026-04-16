@@ -1,0 +1,114 @@
+.. index:: single: ranking_dataset_protocol
+.. _ranking_dataset_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``ranking_dataset_protocol``
+============================
+
+Protocol for grouped ranking datasets.
+
+| **Availability:** 
+|    ``logtalk_load(ranking_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-16
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: group/1
+.. _ranking_dataset_protocol/0::group/1:
+
+``group/1``
+^^^^^^^^^^^
+
+Enumerates by backtracking the ranking groups or contexts in the dataset.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``group(Group)``
+| **Mode and number of proofs:**
+|    ``group(-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: item/2
+.. _ranking_dataset_protocol/0::item/2:
+
+``item/2``
+^^^^^^^^^^
+
+Enumerates by backtracking the items available inside each ranking group or context.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``item(Group,Item)``
+| **Mode and number of proofs:**
+|    ``item(+atom,-atom)`` - ``zero_or_more``
+|    ``item(-atom,-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: relevance/3
+.. _ranking_dataset_protocol/0::relevance/3:
+
+``relevance/3``
+^^^^^^^^^^^^^^^
+
+Enumerates by backtracking the non-negative integer relevance judgments associated with each group and item.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``relevance(Group,Item,Relevance)``
+| **Mode and number of proofs:**
+|    ``relevance(+atom,+atom,-integer)`` - ``zero_or_more``
+|    ``relevance(-atom,-atom,-integer)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

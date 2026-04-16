@@ -39,6 +39,7 @@ directory in the ``NOTES.md`` file.
    base64
    base85
    basic_types
+   bradley_terry
    c45
    cbor
    character_sets
@@ -109,6 +110,7 @@ directory in the ``NOTES.md`` file.
    queues
    random
    random_forest
+   ranking_protocols
    reader
    recorded_database
    redis

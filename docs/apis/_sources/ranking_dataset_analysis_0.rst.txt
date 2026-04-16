@@ -1,0 +1,226 @@
+.. index:: single: ranking_dataset_analysis
+.. _ranking_dataset_analysis/0:
+
+.. rst-class:: right
+
+**category**
+
+``ranking_dataset_analysis``
+============================
+
+Shared predicates for collecting and analyzing ranking datasets.
+
+| **Availability:** 
+|    ``logtalk_load(ranking_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-16
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: pairwise_dataset_declared_items/2
+.. _ranking_dataset_analysis/0::pairwise_dataset_declared_items/2:
+
+``pairwise_dataset_declared_items/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the pairwise dataset declared items preserving declaration order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pairwise_dataset_declared_items(Dataset,Items)``
+| **Mode and number of proofs:**
+|    ``pairwise_dataset_declared_items(+object_identifier,-list)`` - ``one``
+
+
+------------
+
+.. index:: pairwise_dataset_items/2
+.. _ranking_dataset_analysis/0::pairwise_dataset_items/2:
+
+``pairwise_dataset_items/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the unique pairwise dataset items preserving their first declaration order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pairwise_dataset_items(Dataset,Items)``
+| **Mode and number of proofs:**
+|    ``pairwise_dataset_items(+object_identifier,-list)`` - ``one``
+
+
+------------
+
+.. index:: pairwise_dataset_preferences/2
+.. _ranking_dataset_analysis/0::pairwise_dataset_preferences/2:
+
+``pairwise_dataset_preferences/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the pairwise dataset preferences as ``Winner-Loser-Weight`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pairwise_dataset_preferences(Dataset,Preferences)``
+| **Mode and number of proofs:**
+|    ``pairwise_dataset_preferences(+object_identifier,-list)`` - ``one``
+
+
+------------
+
+.. index:: pairwise_dataset_connected_components/2
+.. _ranking_dataset_analysis/0::pairwise_dataset_connected_components/2:
+
+``pairwise_dataset_connected_components/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the connected components induced by the pairwise preference graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pairwise_dataset_connected_components(Dataset,Components)``
+| **Mode and number of proofs:**
+|    ``pairwise_dataset_connected_components(+object_identifier,-list(list))`` - ``one``
+
+
+------------
+
+.. index:: pairwise_dataset_summary/2
+.. _ranking_dataset_analysis/0::pairwise_dataset_summary/2:
+
+``pairwise_dataset_summary/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a summary of a pairwise dataset, including item, preference, component, and isolated-item counts.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pairwise_dataset_summary(Dataset,Summary)``
+| **Mode and number of proofs:**
+|    ``pairwise_dataset_summary(+object_identifier,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: pairwise_dataset_win_totals/2
+.. _ranking_dataset_analysis/0::pairwise_dataset_win_totals/2:
+
+``pairwise_dataset_win_totals/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns per-item total win weights for a pairwise dataset.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pairwise_dataset_win_totals(Dataset,Totals)``
+| **Mode and number of proofs:**
+|    ``pairwise_dataset_win_totals(+object_identifier,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: grouped_dataset_groups/2
+.. _ranking_dataset_analysis/0::grouped_dataset_groups/2:
+
+``grouped_dataset_groups/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the unique grouped-dataset groups preserving their first declaration order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``grouped_dataset_groups(Dataset,Groups)``
+| **Mode and number of proofs:**
+|    ``grouped_dataset_groups(+object_identifier,-list)`` - ``one``
+
+
+------------
+
+.. index:: grouped_dataset_items/3
+.. _ranking_dataset_analysis/0::grouped_dataset_items/3:
+
+``grouped_dataset_items/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the unique items declared for a grouped-dataset group.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``grouped_dataset_items(Dataset,Group,Items)``
+| **Mode and number of proofs:**
+|    ``grouped_dataset_items(+object_identifier,+term,-list)`` - ``one``
+
+
+------------
+
+.. index:: grouped_dataset_summary/2
+.. _ranking_dataset_analysis/0::grouped_dataset_summary/2:
+
+``grouped_dataset_summary/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a summary of a grouped dataset, including group, item, and relevance-judgment counts.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``grouped_dataset_summary(Dataset,Summary)``
+| **Mode and number of proofs:**
+|    ``grouped_dataset_summary(+object_identifier,-list(compound))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

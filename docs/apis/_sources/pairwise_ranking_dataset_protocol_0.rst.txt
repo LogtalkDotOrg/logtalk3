@@ -1,0 +1,95 @@
+.. index:: single: pairwise_ranking_dataset_protocol
+.. _pairwise_ranking_dataset_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``pairwise_ranking_dataset_protocol``
+=====================================
+
+Protocol for pairwise ranking datasets.
+
+| **Availability:** 
+|    ``logtalk_load(ranking_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-16
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Validity requirements: Datasets are expected to declare each item once, use only declared items in preferences, and assign a positive weight to each preference between distinct items.
+   - Identifiability: Rankers such as Bradley-Terry may require the item comparison graph induced by the preferences to be connected in order to learn globally comparable scores.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: item/1
+.. _pairwise_ranking_dataset_protocol/0::item/1:
+
+``item/1``
+^^^^^^^^^^
+
+Enumerates by backtracking the items that can be ranked.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``item(Item)``
+| **Mode and number of proofs:**
+|    ``item(-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: preference/3
+.. _pairwise_ranking_dataset_protocol/0::preference/3:
+
+``preference/3``
+^^^^^^^^^^^^^^^^
+
+Enumerates by backtracking weighted pairwise preferences where ``Winner`` is preferred over ``Loser`` ``Weight`` times.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``preference(Winner,Loser,Weight)``
+| **Mode and number of proofs:**
+|    ``preference(-atom,-atom,-number)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
