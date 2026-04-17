@@ -23,9 +23,9 @@
 	implements(toon_protocol)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2025-12-07,
+		date is 2026-04-17,
 		comment is 'TOON (Token-Oriented Object Notation) parser and generator. TOON is a compact, human-readable, line-oriented format that encodes the JSON data model.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding TOON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -171,15 +171,15 @@
 
 	% Calculate indentation depth
 	get_depth(Codes, Depth) :-
-		count_leading_spaces(Codes, Spaces),
+		count_leading_spaces(Codes, 0, Spaces),
 		Depth is Spaces // 2.
 
-	count_leading_spaces([], 0).
-	count_leading_spaces([32| Codes], N) :-
+	count_leading_spaces([], N, N).
+	count_leading_spaces([32| Codes], N0, N) :-
 		!,
-		count_leading_spaces(Codes, N1),
-		N is N1 + 1.
-	count_leading_spaces([_| _], 0).
+		N1 is N0 + 1,
+		count_leading_spaces(Codes, N1, N).
+	count_leading_spaces([_| _], N, N).
 
 	% Parse root array (starts with [N]:)
 	parse_root_array([line(HeaderCodes)|RestLines], Result) :-

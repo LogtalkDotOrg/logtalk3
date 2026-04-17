@@ -63,6 +63,8 @@ tail-recursive auxiliary predicate.
 * IMPROVED: Rewritten two `c45` library auxiliary predicates to be
 tail-recursive.
 
+* IMPROVED: Rewritten `toon` library auxiliary predicate to be tail-recursive.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
