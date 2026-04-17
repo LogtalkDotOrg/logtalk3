@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-20,
+		date is 2026-04-17,
 		comment is 'Nearest Centroid classifier with multiple distance metrics. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Assign to an instance the the class of the training samples whose mean (centroid) is closest to the instance.',
@@ -250,7 +250,7 @@
         normalize_to_probabilities(WeightedDistances, Probabilities).
 
     compute_inverse_weights([], []).
-    compute_inverse_weights([Distance-Class|Rest], [Weight-Class|WeightedRest]) :-
+    compute_inverse_weights([Distance-Class| Rest], [Weight-Class| WeightedRest]) :-
         (   Distance =:= 0 ->
             Weight = 1.0e10  % Very large weight for exact match
         ;   Weight is 1.0 / Distance
@@ -258,16 +258,16 @@
         compute_inverse_weights(Rest, WeightedRest).
 
     normalize_to_probabilities(WeightedDistances, Probabilities) :-
-        sum_weights(WeightedDistances, TotalWeight),
+        sum_weights(WeightedDistances, 0, TotalWeight),
         normalize_weights(WeightedDistances, TotalWeight, Probabilities).
 
-    sum_weights([], 0).
-    sum_weights([Weight-_|Rest], Total) :-
-        sum_weights(Rest, RestTotal),
-        Total is Weight + RestTotal.
+    sum_weights([], Total, Total).
+    sum_weights([Weight-_| Rest], Total0, Total) :-
+        Total1 is Weight + Total0,
+        sum_weights(Rest, Total1, Total).
 
     normalize_weights([], _, []).
-    normalize_weights([Weight-Class|Rest], Total, [Class-Prob|NormRest]) :-
+    normalize_weights([Weight-Class| Rest], Total, [Class-Prob| NormRest]) :-
         Prob is Weight / Total,
         normalize_weights(Rest, Total, NormRest).
 

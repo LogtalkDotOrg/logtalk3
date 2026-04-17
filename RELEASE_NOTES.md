@@ -81,7 +81,10 @@ tail-recursive.
 * IMPROVED: Rewritten two `graphs` library auxiliary predicates to be
 tail-recursive.
 
-* IMPROVED: Rewritten `strings` library auxiliary predicate to be
+* IMPROVED: Rewritten `base58` library auxiliary predicate to be
+tail-recursive.
+
+* IMPROVED: Rewritten `nearest_centroid` library auxiliary predicate to be
 tail-recursive.
 
 * IMPROVED: Rewritten `toml` library auxiliary predicates to be tail-recursive.
