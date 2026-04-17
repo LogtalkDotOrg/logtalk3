@@ -57,6 +57,9 @@ used with HMAC.
 * IMPROVED: The `numberlist::softmax/2-3` library predicates by making their
 implementation numerically stable.
 
+* IMPROVED: The `pairing_heap(_Order_)::top_next/5` library predicate to use a
+tail-recursive auxiliary predicate.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

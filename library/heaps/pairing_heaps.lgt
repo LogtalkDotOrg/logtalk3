@@ -36,9 +36,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-01-28,
+		date is 2026-04-17,
 		comment is 'Pairing heap implementation, parameterized by the order to be used to compare keys (``<`` or ``>``).',
 		parameters is [
 			'Order' - 'Either ``<`` for a min heap or ``>`` for a max heap.'
@@ -134,18 +134,15 @@
 	top(p(Key, Value, _), Key, Value).
 
 	% Get the top and second element
-	top_next(p(Key1, Value1, [Child| Children]), Key1, Value1, Key2, Value2) :-
-		find_minimum_child(Children, Child, Key2, Value2).
+	top_next(p(Key1, Value1, [p(Key0, Value0, _)| Children]), Key1, Value1, Key2, Value2) :-
+		find_minimum_child(Children, Key0, Value0, Key2, Value2).
 
 	% Find the child with the minimum (or maximum) key
-	find_minimum_child([], p(Key, Value, _), Key, Value).
-	find_minimum_child([Child| Children], p(Key1, Value1, _), Key, Value) :-
-		find_minimum_child(Children, Child, Key2, Value2),
-		(	compare(_Order_, Key1, Key2) ->
-			Key = Key1,
-			Value = Value1
-		;	Key = Key2,
-			Value = Value2
+	find_minimum_child([], Key, Value, Key, Value).
+	find_minimum_child([p(Key0, Value0, _)| Children], Key1, Value1, Key, Value) :-
+		(	compare(_Order_, Key1, Key0) ->
+			find_minimum_child(Children, Key1, Value1, Key, Value)
+		;	find_minimum_child(Children, Key0, Value0, Key, Value)
 		).
 
 	% Validate heap structure and ordering
