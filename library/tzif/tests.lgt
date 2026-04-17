@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-07,
+		date is 2026-04-17,
 		comment is 'Unit tests for the tzif library.'
 	]).
 
@@ -530,8 +530,8 @@
 	block_bytes(TimeSize, block_spec(Transitions, Types, Designations, Leaps, StandardWalls, UTLocals), Bytes,
 			counts(UTLocalCount, StandardWallCount, LeapCount, TransitionCount, TypeCount, CharCount)) :-
 		transitions_bytes(TimeSize, Transitions, TransitionTimesBytes, TransitionIndexesBytes, TransitionCount),
-		type_specs_bytes(Types, TypeBytes, TypeCount),
-		leap_specs_bytes(Leaps, TimeSize, LeapBytes, LeapCount),
+		type_specs_bytes(Types, TypeBytes, 0, TypeCount),
+		leap_specs_bytes(Leaps, TimeSize, LeapBytes, 0, LeapCount),
 		indicator_bytes(standard, StandardWalls, StandardWallBytes, StandardWallCount),
 		indicator_bytes(ut_local, UTLocals, UTLocalBytes, UTLocalCount),
 		list::length(Designations, CharCount),
@@ -550,33 +550,33 @@
 	transition_times_bytes([], _, []).
 	transition_times_bytes([transition_spec(Time, _)| Transitions], TimeSize, Bytes) :-
 		signed_bytes(TimeSize, Time, TransitionBytes),
-		transition_times_bytes(Transitions, TimeSize, RestBytes),
-		list::append(TransitionBytes, RestBytes, Bytes).
+		list::append(TransitionBytes, RestBytes, Bytes),
+		transition_times_bytes(Transitions, TimeSize, RestBytes).
 
 	transition_indexes_bytes([], []).
 	transition_indexes_bytes([transition_spec(_, TypeIndex)| Transitions], [TypeIndex| Bytes]) :-
 		transition_indexes_bytes(Transitions, Bytes).
 
-	type_specs_bytes([], [], 0).
-	type_specs_bytes([type_spec(OffsetSeconds, IsDST, AbbreviationIndex)| Types], Bytes, Count) :-
+	type_specs_bytes([], [], Count, Count).
+	type_specs_bytes([type_spec(OffsetSeconds, IsDST, AbbreviationIndex)| Types], Bytes, Count0, Count) :-
 		signed_bytes(4, OffsetSeconds, OffsetBytes),
 		bool_byte(IsDST, IsDSTByte),
-		type_specs_bytes(Types, RestBytes, RestCount),
-		Count is RestCount + 1,
 		list::append(OffsetBytes, [IsDSTByte, AbbreviationIndex], Prefix),
-		list::append(Prefix, RestBytes, Bytes).
+		list::append(Prefix, RestBytes, Bytes),
+		Count1 is Count0 + 1,
+		type_specs_bytes(Types, RestBytes, Count1, Count).
 
 	bool_byte(true,  1).
 	bool_byte(false, 0).
 
-	leap_specs_bytes([], _, [], 0).
-	leap_specs_bytes([leap_spec(Occurrence, Correction)| Leaps], TimeSize, Bytes, Count) :-
+	leap_specs_bytes([], _, [], Count, Count).
+	leap_specs_bytes([leap_spec(Occurrence, Correction)| Leaps], TimeSize, Bytes, Count0, Count) :-
 		signed_bytes(TimeSize, Occurrence, OccurrenceBytes),
 		signed_bytes(4, Correction, CorrectionBytes),
-		leap_specs_bytes(Leaps, TimeSize, RestBytes, RestCount),
-		Count is RestCount + 1,
 		list::append(OccurrenceBytes, CorrectionBytes, Prefix),
-		list::append(Prefix, RestBytes, Bytes).
+		list::append(Prefix, RestBytes, Bytes),
+		Count1 is Count0 + 1,
+		leap_specs_bytes(Leaps, TimeSize, RestBytes, Count1, Count).
 
 	indicator_bytes(standard, Indicators, Bytes, Count) :-
 		standard_indicator_bytes(Indicators, Bytes),
