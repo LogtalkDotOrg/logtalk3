@@ -15,7 +15,7 @@ Shared predicates for collecting and analyzing ranking datasets.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-16
+| **Date:** 2026-04-17
 
 | **Compilation flags:**
 |    ``static``
@@ -82,7 +82,7 @@ Collects the unique pairwise dataset items preserving their first declaration or
 ``pairwise_dataset_preferences/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Collects the pairwise dataset preferences as ``Winner-Loser-Weight`` terms.
+Collects the pairwise dataset preferences as ``p(Winner,Loser,Weight)`` terms.
 
 | **Compilation flags:**
 |    ``static``

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-16,
+		date is 2026-04-17,
 		comment is 'Shared predicates for exporting learned rankers.'
 	]).
 
@@ -55,7 +55,7 @@
 
 	write_clauses([], _Stream).
 	write_clauses([Clause| Clauses], Stream) :-
-		writeq(Stream, Clause), write(Stream, '.'), nl(Stream),
+		format(Stream, '~q.~n', [Clause]),
 		write_clauses(Clauses, Stream).
 
 :- end_category.

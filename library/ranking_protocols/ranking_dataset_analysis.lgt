@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-16,
+		date is 2026-04-17,
 		comment is 'Shared predicates for collecting and analyzing ranking datasets.'
 	]).
 
@@ -53,7 +53,7 @@
 	:- public(pairwise_dataset_preferences/2).
 	:- mode(pairwise_dataset_preferences(+object_identifier, -list), one).
 	:- info(pairwise_dataset_preferences/2, [
-		comment is 'Collects the pairwise dataset preferences as ``Winner-Loser-Weight`` terms.',
+		comment is 'Collects the pairwise dataset preferences as ``p(Winner,Loser,Weight)`` terms.',
 		argnames is ['Dataset', 'Preferences']
 	]).
 
@@ -107,7 +107,7 @@
 		unique_list(RawItems, Items).
 
 	pairwise_dataset_preferences(Dataset, Preferences) :-
-		findall(Winner-Loser-Weight, Dataset::preference(Winner, Loser, Weight), Preferences).
+		findall(p(Winner, Loser, Weight), Dataset::preference(Winner, Loser, Weight), Preferences).
 
 	pairwise_dataset_connected_components(Dataset, Components) :-
 		pairwise_dataset_items(Dataset, Items),
@@ -171,7 +171,7 @@
 		reachable_items(NextQueue, Preferences, Reachable1, Reachable).
 
 	neighbors([], _Item, []).
-	neighbors([Winner-Loser-_| Preferences], Item, Neighbors) :-
+	neighbors([p(Winner, Loser, _)| Preferences], Item, Neighbors) :-
 		(   Item == Winner ->
 			Neighbors = [Loser| Rest]
 		;   Item == Loser ->
@@ -198,12 +198,12 @@
 
 	isolated_items([], _Preferences, []).
 	isolated_items([Component| Components], Preferences, IsolatedItems) :-
-		isolated_items(Components, Preferences, Rest),
 		(   Component = [Item],
 		    neighbors(Preferences, Item, []) ->
 			IsolatedItems = [Item| Rest]
 		;   IsolatedItems = Rest
-		).
+		),
+		isolated_items(Components, Preferences, Rest).
 
 	count_grouped_items([], _Dataset, Count, Count).
 	count_grouped_items([Group| Groups], Dataset, Count0, Count) :-
@@ -213,7 +213,7 @@
 		count_grouped_items(Groups, Dataset, Count1, Count).
 
 	item_wins(Item, Preferences, Wins) :-
-		findall(Weight, member(Item-_-Weight, Preferences), Weights),
+		findall(Weight, member(p(Item, _, Weight), Preferences), Weights),
 		sum(Weights, Wins).
 
 	unique_list([], []).

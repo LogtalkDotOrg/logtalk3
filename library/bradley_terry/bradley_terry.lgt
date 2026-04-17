@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-16,
+		date is 2026-04-17,
 		comment is 'Bradley-Terry pairwise preference ranker. Learns one positive strength parameter per item from a connected dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		remarks is [
 			'Algorithm' - 'Uses a deterministic minorization-maximization update to estimate one relative strength parameter per item from weighted pairwise wins and losses.',
@@ -150,10 +150,10 @@
 			RawStrengths
 		),
 		normalize_strengths(RawStrengths, Strengths),
-		max_difference(Strengths0, Strengths, MaximumDifference).
+		max_difference(Strengths0, Strengths, 0.0, MaximumDifference).
 
 	item_wins([], _Item, Wins, Wins).
-	item_wins([Winner-_-Weight| Preferences], Item, Wins0, Wins) :-
+	item_wins([p(Winner, _, Weight)| Preferences], Item, Wins0, Wins) :-
 		(   Item == Winner ->
 			Wins1 is Wins0 + Weight
 		;   Wins1 = Wins0
@@ -181,7 +181,7 @@
 
 	pairwise_weight(_Winner, _Loser, [], 0.0) :-
 		!.
-	pairwise_weight(Winner, Loser, [Winner-Loser-Weight| Preferences], TotalWeight) :-
+	pairwise_weight(Winner, Loser, [p(Winner, Loser, Weight)| Preferences], TotalWeight) :-
 		!,
 		pairwise_weight(Winner, Loser, Preferences, RestWeight),
 		TotalWeight is RestWeight + Weight.
@@ -194,7 +194,7 @@
 		lookup_strength(Item, Strengths, Strength).
 
 	normalize_strengths(Strengths0, Strengths) :-
-		sum_strengths(Strengths0, Total),
+		sum_strengths(Strengths0, 0, Total),
 		(   Total =< 1.0e-12 ->
 			Strengths = Strengths0
 		;   normalize_strengths(Strengths0, Total, Strengths)
@@ -205,19 +205,19 @@
 		Strength is Strength0 / Total,
 		normalize_strengths(Strengths0, Total, Strengths).
 
-	sum_strengths([], 0.0).
-	sum_strengths([_-Strength| Strengths], Total) :-
-		sum_strengths(Strengths, RestTotal),
-		Total is RestTotal + Strength.
+	sum_strengths([], Total, Total).
+	sum_strengths([_-Strength| Strengths], Total0, Total) :-
+		Total1 is Total0 + Strength,
+		sum_strengths(Strengths, Total1, Total).
 
-	max_difference([], [], 0.0).
-	max_difference([Item-Strength0| Strengths0], [Item-Strength1| Strengths1], MaximumDifference) :-
-		max_difference(Strengths0, Strengths1, RestDifference),
+	max_difference([], [], MaximumDifference, MaximumDifference).
+	max_difference([Item-Strength0| Strengths0], [Item-Strength1| Strengths1], MaximumDifference0, MaximumDifference) :-
 		Difference is abs(Strength0 - Strength1),
-		(   Difference > RestDifference ->
-			MaximumDifference = Difference
-		;   MaximumDifference = RestDifference
-		).
+		(   Difference > MaximumDifference0 ->
+			MaximumDifference1 = Difference
+		;   MaximumDifference1 = MaximumDifference0
+		),
+		max_difference(Strengths0, Strengths1, MaximumDifference1, MaximumDifference).
 
 	validate_candidates([], _Items).
 	validate_candidates([Candidate| Candidates], Items) :-

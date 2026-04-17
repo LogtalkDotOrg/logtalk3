@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-16,
+		date is 2026-04-17,
 		comment is 'Shared predicates for validating ranking datasets.'
 	]).
 
@@ -70,7 +70,7 @@
 		::pairwise_dataset_items(Dataset, Items),
 		::pairwise_dataset_preferences(Dataset, Preferences),
 		forall(
-			member(Winner-Loser-Weight, Preferences),
+			member(p(Winner, Loser, Weight), Preferences),
 			validate_preference(Items, Winner, Loser, Weight)
 		),
 		::pairwise_dataset_connected_components(Dataset, Components),
