@@ -537,8 +537,8 @@
 		;   state_prefix_bytes(State, _RateBytes_, BlockBytes),
 			Remaining is OutputBytes - _RateBytes_,
 			keccak_f1600(State, NextState),
-			squeeze(NextState, Remaining, RestBytes),
-			list::append(BlockBytes, RestBytes, DigestBytes)
+			list::append(BlockBytes, RestBytes, DigestBytes),
+			squeeze(NextState, Remaining, RestBytes)
 		).
 
 	xor_block(Bytes, State0, State) :-
@@ -1075,8 +1075,8 @@
 	state_bytes([], []).
 	state_bytes([Word| Words], Bytes) :-
 		integer_to_big_endian_bytes32(Word, WordBytes),
-		state_bytes(Words, RestBytes),
-		list::append(WordBytes, RestBytes, Bytes).
+		list::append(WordBytes, RestBytes, Bytes),
+		state_bytes(Words, RestBytes).
 
 	sha256_k( 0, 0x428A2F98).
 	sha256_k( 1, 0x71374491).
