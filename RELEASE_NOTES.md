@@ -60,6 +60,9 @@ implementation numerically stable.
 * IMPROVED: Rewritten two `amqp` library auxiliary predicate to be
 tail-recursive.
 
+* IMPROVED: Rewritten `avro` library auxiliary non-terminal to be
+tail-recursive.
+
 * IMPROVED: Rewritten `base58` library auxiliary predicate to be
 tail-recursive.
 

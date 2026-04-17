@@ -22,9 +22,9 @@
 :- object(avro).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-05,
+		date is 2026-04-17,
 		comment is 'Apache Avro binary format parser and generator.'
 	]).
 
@@ -139,8 +139,8 @@
 			take_bytes(BlockSize, BlockData),
 			% Skip sync marker (16 bytes)
 			skip_bytes(16),
-			parse_data_blocks(MoreData),
-			{ append(BlockData, MoreData, Data) }
+			{ append(BlockData, MoreData, Data) },
+			parse_data_blocks(MoreData)
 		).
 
 	% generate/3 - generate without schema in output
