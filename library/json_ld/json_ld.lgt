@@ -23,9 +23,9 @@
 	implements(json_ld_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-05,
+		date is 2026-04-17,
 		comment is 'JSON-LD 1.1 parser, generator, and processor. Builds on top of the ``json`` library for JSON parsing and generation.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -284,8 +284,8 @@
 		pair_key_value(Pair, PairKey, _),
 		(	PairKey == Key ->
 			Result = Pairs
-		;	remove_pair(Key, Pairs, RestResult),
-			Result = [Pair| RestResult]
+		;	Result = [Pair| RestResult],
+			remove_pair(Key, Pairs, RestResult)
 		).
 
 	% ==================== Expansion ====================
@@ -315,8 +315,8 @@
 	expand_array_elements([], _ActiveContext, []).
 	expand_array_elements([Element| Elements], ActiveContext, Expanded) :-
 		expand_document(Element, ActiveContext, ExpandedElement),
-		expand_array_elements(Elements, ActiveContext, ExpandedRest),
-		append(ExpandedElement, ExpandedRest, Expanded).
+		append(ExpandedElement, ExpandedRest, Expanded),
+		expand_array_elements(Elements, ActiveContext, ExpandedRest).
 
 	% Expand a node object (list of pairs)
 	expand_node_object([], _ActiveContext, []) :- !.
@@ -332,8 +332,8 @@
 	expand_pairs([Pair| Pairs], ActiveContext, ExpandedPairs) :-
 		pair_key_value(Pair, Key, Value),
 		expand_pair(Key, Value, ActiveContext, ExpandedPair),
-		expand_pairs(Pairs, ActiveContext, ExpandedRest),
-		append(ExpandedPair, ExpandedRest, ExpandedPairs).
+		append(ExpandedPair, ExpandedRest, ExpandedPairs),
+		expand_pairs(Pairs, ActiveContext, ExpandedRest).
 
 	% Skip @context during expansion (already processed)
 	expand_pair('@context', _Value, _ActiveContext, []) :- !.

@@ -66,6 +66,9 @@ tail-recursive.
 * IMPROVED: Rewritten two `hashes` library auxiliary predicates to be
 tail-recursive.
 
+* IMPROVED: Rewritten three `json_ld` library auxiliary predicates to be
+tail-recursive.
+
 * IMPROVED: Rewritten `json_schema` library auxiliary predicates to be
 tail-recursive.
 
