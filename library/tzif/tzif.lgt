@@ -23,9 +23,9 @@
 	implements(tzif_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-07,
+		date is 2026-04-17,
 		comment is 'Loader, per-zone cache and snapshot persistence support, and zone-aware UTC lookup predicates for TZif v1/v2/v3 files.'
 	]).
 
@@ -360,8 +360,8 @@
 		path_concat(Directory, Child, ChildDirectory),
 		relative_path_concat(Prefix, Child, ChildPrefix),
 		directory_zone_paths(ChildDirectory, ChildPrefix, ChildPaths),
-		directory_zone_paths_directories(Children, Directory, Prefix, RemainingPaths),
-		append(ChildPaths, RemainingPaths, Paths).
+		append(ChildPaths, RemainingPaths, Paths),
+		directory_zone_paths_directories(Children, Directory, Prefix, RemainingPaths).
 
 	prefix_relative_paths([], _, []).
 	prefix_relative_paths([Path| Paths], Prefix, [PrefixedPath| PrefixedPaths]) :-

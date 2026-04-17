@@ -71,6 +71,8 @@ tail-recursive.
 
 * IMPROVED: Rewritten `toon` library auxiliary predicate to be tail-recursive.
 
+* IMPROVED: Rewritten `tzif` library auxiliary predicate to be tail-recursive.
+
 * IMPROVED: Rewritten two `yaml` library auxiliary predicates to be
 tail-recursive.
 
