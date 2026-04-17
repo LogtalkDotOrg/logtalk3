@@ -23,9 +23,9 @@
 	implements(classifier_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-20,
+		date is 2026-04-17,
 		comment is 'C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes, handles missing values, and supports tree pruning.',
 		remarks is [
 			'Algorithm' - 'C4.5 is an extension of the ID3 algorithm that uses information gain ratio instead of information gain for attribute selection, which avoids bias towards attributes with many values.',
@@ -419,8 +419,8 @@
 	subtrees_to_clauses([], _, _, _, _, []).
 	subtrees_to_clauses([Value-Subtree| Subtrees], Attribute, Functor, AttributeNames, Bindings, Clauses) :-
 		tree_to_clauses_(Subtree, Functor, AttributeNames, [Attribute-Value| Bindings], Clauses1),
-		subtrees_to_clauses(Subtrees, Attribute, Functor, AttributeNames, Bindings, Clauses2),
-		append(Clauses1, Clauses2, Clauses).
+		append(Clauses1, Clauses2, Clauses),
+		subtrees_to_clauses(Subtrees, Attribute, Functor, AttributeNames, Bindings, Clauses2).
 
 	build_clause(Functor, AttributeNames, Bindings, Class, Clause) :-
 		build_args(AttributeNames, Bindings, Args, Goals),
@@ -626,7 +626,7 @@
 	leaf_error(Examples, ZScore, MinInstances, Error, MajorityClass) :-
 		majority_class(Examples, MajorityClass),
 		length(Examples, Total),
-		count_errors(Examples, MajorityClass, Errors),
+		count_errors(Examples, MajorityClass, 0, Errors),
 		% Apply minimum instances consideration
 		(	Total < MinInstances ->
 			% Small sample: use pessimistic estimate
@@ -635,13 +635,13 @@
 		).
 
 	% count_errors/3 - count examples not belonging to the given class
-	count_errors([], _, 0).
-	count_errors([_-Class-_| Examples], MajorityClass, Errors) :-
-		count_errors(Examples, MajorityClass, RestErrors),
+	count_errors([], _, Errors, Errors).
+	count_errors([_-Class-_| Examples], MajorityClass, Errors0, Errors) :-
 		(	Class == MajorityClass ->
-			Errors = RestErrors
-		;	Errors is RestErrors + 1
-		).
+			Errors1 is Errors0
+		;	Errors1 is Errors0 + 1
+		),
+		count_errors(Examples, MajorityClass, Errors1, Errors).
 
 	% upper_confidence_bound/4 - C4.5 upper confidence bound formula
 	% Computes the upper bound of the binomial distribution confidence interval
@@ -668,7 +668,7 @@
 		length(Examples, Total),
 		(	Total =:= 0 ->
 			Error is 1.0
-		;	count_errors(Examples, Class, Errors),
+		;	count_errors(Examples, Class, 0, Errors),
 			upper_confidence_bound(Errors, Total, ZScore, Error)
 		).
 	subtree_error(tree(Attr, threshold(Threshold), Left, Right), ZScore, Examples, Error) :-
