@@ -96,9 +96,13 @@ Protected predicates
 ``ranker_diagnostics_data/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Returns the ranker diagnostics data.
+
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``ranker_diagnostics_data(Ranker,Diagnostics)``
 | **Mode and number of proofs:**
 |    ``ranker_diagnostics_data(+compound,-list(compound))`` - ``one``
 

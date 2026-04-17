@@ -50,6 +50,13 @@
 		argnames is ['Ranker', 'Strengths']
 	]).
 
+	:- protected(ranker_diagnostics_data/2).
+	:- mode(ranker_diagnostics_data(+compound, -list(compound)), one).
+	:- info(ranker_diagnostics_data/2, [
+		comment is 'Returns the ranker diagnostics data.',
+		argnames is ['Ranker', 'Diagnostics']
+	]).
+
 	:- uses(format, [
 		format/2
 	]).
@@ -57,9 +64,6 @@
 	:- uses(list, [
 		length/2, member/2, memberchk/2, sort/4
 	]).
-
-	:- protected(ranker_diagnostics_data/2).
-	:- mode(ranker_diagnostics_data(+compound, -list(compound)), one).
 
 	learn(Dataset, Ranker) :-
 		learn(Dataset, Ranker, []).

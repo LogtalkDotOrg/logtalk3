@@ -475,7 +475,8 @@
 		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2026-04-15,
-		comment is 'Common implementation of the standardized FIPS 202 SHA-3 and SHAKE variants using the Keccak-f[1600] permutation.'
+		comment is 'Common implementation of the standardized FIPS 202 SHA-3 and SHAKE variants using the Keccak-f[1600] permutation.',
+		parnames is ['RateBytes', 'Suffix', 'OutputBytes']
 	]).
 
 	:- protected(absorb/2).
@@ -762,7 +763,8 @@
 		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2026-04-15,
-		comment is 'Common implementation of the fixed-size FIPS 202 SHA-3 variants suitable for use with HMAC.'
+		comment is 'Common implementation of the fixed-size FIPS 202 SHA-3 variants suitable for use with HMAC.',
+		parnames is ['RateBytes', 'Suffix', 'OutputBytes']
 	]).
 
 	digest(Bytes, DigestBytes) :-
