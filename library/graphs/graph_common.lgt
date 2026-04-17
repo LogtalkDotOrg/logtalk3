@@ -23,9 +23,9 @@
 	implements(graph_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-25,
+		date is 2026-04-17,
 		comment is 'Common graph predicates shared by all graph objects. Uses self-dispatch to call object-specific predicates such as ``neighbors/3``, ``vertices/2``, and ``edges/2``.'
 	]).
 
@@ -230,8 +230,8 @@
 	all_pairs_min_paths_sources([Source| Sources], Graph, Pairs) :-
 		::min_distances(Source, Graph, Distances),
 		tag_distances(Source, Distances, SourcePairs),
-		all_pairs_min_paths_sources(Sources, Graph, RestPairs),
-		append(SourcePairs, RestPairs, Pairs).
+		append(SourcePairs, RestPairs, Pairs),
+		all_pairs_min_paths_sources(Sources, Graph, RestPairs).
 
 	tag_distances(_, [], []).
 	tag_distances(Source, [Target-Cost| Distances], [((Source-Target)-Cost)| Pairs]) :-
@@ -241,8 +241,8 @@
 	all_pairs_min_predecessors_sources([Source| Sources], Graph, Pairs) :-
 		::min_predecessors(Source, Graph, Predecessors),
 		tag_predecessors(Source, Predecessors, SourcePairs),
-		all_pairs_min_predecessors_sources(Sources, Graph, RestPairs),
-		append(SourcePairs, RestPairs, Pairs).
+		append(SourcePairs, RestPairs, Pairs),
+		all_pairs_min_predecessors_sources(Sources, Graph, RestPairs).
 
 	tag_predecessors(_, [], []).
 	tag_predecessors(Source, [Target-Predecessor| Predecessors], [((Source-Target)-Predecessor)| Pairs]) :-

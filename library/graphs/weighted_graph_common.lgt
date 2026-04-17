@@ -333,7 +333,7 @@
 		!.
 	bellman_ford_relax(Iterations, Vertices, Graph, Dist0, Dist) :-
 		bellman_ford_relax_vertices(Vertices, Graph, Dist0, Dist1, Changed),
-		(Changed == true ->
+		(	Changed == true ->
 			NextIterations is Iterations - 1,
 			bellman_ford_relax(NextIterations, Vertices, Graph, Dist1, Dist)
 		;	Dist = Dist1
@@ -348,7 +348,7 @@
 			Changed0 = false
 		),
 		bellman_ford_relax_vertices(Vertices, Graph, Dist1, Dist2, Changed1),
-		(Changed0 == true ->
+		(	Changed0 == true ->
 			Changed = true
 		;	Changed = Changed1
 		),
