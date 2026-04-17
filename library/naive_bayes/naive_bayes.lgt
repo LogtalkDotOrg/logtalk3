@@ -23,9 +23,9 @@
 	implements(classifier_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-20,
+		date is 2026-04-17,
 		comment is 'Naive Bayes classifier with Laplace smoothing and Gaussian distribution support. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Naive Bayes is a probabilistic classifier based on Bayes theorem with strong (naive) independence assumptions between features.',
@@ -185,16 +185,16 @@
 		!.
 	compute_posteriors(Values, [Class| Classes], ClassPriors, FeatureTypes, FeatureParams, [Class-Posterior| Pairs]) :-
 		memberchk(Class-Prior, ClassPriors),
-		compute_likelihood(Values, Class, FeatureTypes, FeatureParams, 1, Likelihood),
+		compute_likelihood(Values, Class, FeatureTypes, FeatureParams, 1, 1, Likelihood),
 		Posterior is Prior * Likelihood,
 		compute_posteriors(Values, Classes, ClassPriors, FeatureTypes, FeatureParams, Pairs).
 
-	compute_likelihood([], _, _, _, _, 1).
-	compute_likelihood([Value| Values], Class, [Type| Types], [Param| Params], Index, Likelihood) :-
+	compute_likelihood([], _, _, _, _, Likelihood, Likelihood).
+	compute_likelihood([Value| Values], Class, [Type| Types], [Param| Params], Index, Likelihood0, Likelihood) :-
 		feature_likelihood(Type, Param, Value, Class, FeatureLikelihood),
 		NextIndex is Index + 1,
-		compute_likelihood(Values, Class, Types, Params, NextIndex, RestLikelihood),
-		Likelihood is FeatureLikelihood * RestLikelihood.
+		Likelihood1 is FeatureLikelihood * Likelihood0,
+		compute_likelihood(Values, Class, Types, Params, NextIndex, Likelihood1, Likelihood).
 
 	feature_likelihood(categorical, feature(_, categorical, Probs), Value, Class, Likelihood) :-
 		(	memberchk(Class-ValueProbs, Probs),

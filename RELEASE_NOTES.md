@@ -84,6 +84,9 @@ tail-recursive.
 * IMPROVED: Rewritten `base58` library auxiliary predicate to be
 tail-recursive.
 
+* IMPROVED: Rewritten `naive_bayes` library auxiliary predicate to be
+tail-recursive.
+
 * IMPROVED: Rewritten `nearest_centroid` library auxiliary predicate to be
 tail-recursive.
 
