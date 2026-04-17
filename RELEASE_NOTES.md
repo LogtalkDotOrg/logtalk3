@@ -39,6 +39,14 @@ test datasets, and smoke tests for machine learning ranking algorithms.
 * ADDED: New `bradley_terry` library implementing pairwise preference ranking
 using the Bradley-Terry model.
 
+* ADDED: New `logistic_regression` library implementing logistic regression
+for binary and multiclass classification on continuous and mixed-feature
+datasets using batch gradient descent.
+
+* ADDED: New `linear_svm` library implementing linear support vector machine
+classification for binary and multiclass continuous and mixed-feature datasets
+using one-vs-rest hinge-loss training.
+
 * ADDED: New `hmac` library providing a portable implementation of HMAC
 (Keyed-Hashing for Message Authentication) as specified in RFC 2104.
 

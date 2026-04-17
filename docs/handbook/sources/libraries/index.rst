@@ -88,8 +88,10 @@ directory in the ``NOTES.md`` file.
    knn
    ksuid
    linda
+   linear_svm
    listing
    logging
+   logistic_regression
    loops
    mcp_server
    memcached

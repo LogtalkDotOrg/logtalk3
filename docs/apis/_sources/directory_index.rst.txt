@@ -860,6 +860,16 @@ To load an entity, always load the library that includes it using the goal ``log
    linda_client <linda_client_0>
    linda_server <linda_server_0>
 
+``library/linear_svm/``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   linear_svm <linear_svm_0>
+
 ``library/listing/``
 --------------------
 
@@ -881,6 +891,16 @@ To load an entity, always load the library that includes it using the goal ``log
    logger <logger_0>
    logging <logging_0>
    loggingp <loggingp_0>
+
+``library/logistic_regression/``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   logistic_regression <logistic_regression_0>
 
 ``library/loops/``
 ------------------

@@ -102,6 +102,8 @@
 		knn(loader),
 		naive_bayes(loader),
 		nearest_centroid(loader),
+		linear_svm(loader),
+		logistic_regression(loader),
 		isolation_forest(loader),
 		cbor(loader),
 		ccsds(loader),

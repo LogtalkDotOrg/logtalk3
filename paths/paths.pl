@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on April 16, 2026
+%  Last updated on April 17, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -167,8 +167,10 @@ logtalk_library_path(json_ld, library('json_ld/')).
 logtalk_library_path(knn, library('knn/')).
 logtalk_library_path(ksuid, library('ksuid/')).
 logtalk_library_path(linda, library('linda/')).
+logtalk_library_path(linear_svm, library('linear_svm/')).
 logtalk_library_path(listing, library('listing/')).
 logtalk_library_path(logging, library('logging/')).
+logtalk_library_path(logistic_regression, library('logistic_regression/')).
 logtalk_library_path(loops, library('loops/')).
 logtalk_library_path(mcp_server, library('mcp_server/')).
 logtalk_library_path(memcached, library('memcached/')).

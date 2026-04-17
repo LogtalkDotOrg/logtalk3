@@ -30,7 +30,7 @@ as objects implementing the `classifier_protocol` protocol.
 This library also provides test datasets. See below for details.
 
 Logtalk currently provides several classifiers including `c45`, `knn`,
-`naive_bayes`, `nearest_centroid`, and `random_forest`. See these
+`linear_svm`, `logistic_regression`, `naive_bayes`, `nearest_centroid`, and `random_forest`. See these
 libraries documentation for details.
 
 

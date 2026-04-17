@@ -8745,6 +8745,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ada_boost <ada_boost/0::learn/3>`
 * :ref:`bradley_terry <bradley_terry/0::learn/3>`
 * :ref:`isolation_forest <isolation_forest/0::learn/3>`
+* :ref:`linear_svm <linear_svm/0::learn/3>`
+* :ref:`logistic_regression <logistic_regression/0::learn/3>`
 * :ref:`metagol <metagol/0::learn/3>`
 * :ref:`random_forest <random_forest/0::learn/3>`
 
@@ -13004,6 +13006,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ada_boost <ada_boost/0::predict_probabilities/3>`
 * :ref:`knn <knn/0::predict_probabilities/3>`
+* :ref:`logistic_regression <logistic_regression/0::predict_probabilities/3>`
 * :ref:`naive_bayes <naive_bayes/0::predict_probabilities/3>`
 * :ref:`nearest_centroid <nearest_centroid/0::predict_probabilities/3>`
 * :ref:`random_forest <random_forest/0::predict_probabilities/3>`

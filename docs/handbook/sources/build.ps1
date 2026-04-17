@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 16, 2026
+##   Last updated on April 17, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -138,8 +138,10 @@ Foreach-Object {
 (Get-Content ../../../library/knn/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/knn.rst
 (Get-Content ../../../library/ksuid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ksuid.rst
 (Get-Content ../../../library/linda/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linda.rst
+(Get-Content ../../../library/linear_svm/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linear_svm.rst
 (Get-Content ../../../library/listing/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/listing.rst
 (Get-Content ../../../library/logging/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/logging.rst
+(Get-Content ../../../library/logistic_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/logistic_regression.rst
 (Get-Content ../../../library/loops/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/loops.rst
 (Get-Content ../../../library/mcp_server/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mcp_server.rst
 (Get-Content ../../../library/memcached/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/memcached.rst
