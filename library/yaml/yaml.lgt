@@ -23,9 +23,9 @@
 	implements(yaml_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-03,
+		date is 2026-04-17,
 		comment is 'YAML parser and generator.'
 	]).
 
@@ -524,10 +524,10 @@
 		!,
 		anchor_name(AnchorName),
 		skip_spaces,
-		% Parse the value that this anchor refers to
-		inline_value(Indent, Value, S0, S1),
 		% Store the anchor in state
-		{ store_anchor(AnchorName, Value, S1, S) }.
+		{ store_anchor(AnchorName, Value, S1, S) },
+		% Parse the value that this anchor refers to
+		inline_value(Indent, Value, S0, S1).
 	inline_value(_Indent, Value, S0, S0) -->
 		% Alias reference (*name)
 		[0'*],
@@ -708,7 +708,7 @@
 	fold_lines([line(L)], L) :- !.
 	fold_lines([line(L), blank| Rest], Result) :-
 		!,
-		count_blanks([blank| Rest], BlankCount, AfterBlanks),
+		count_blanks([blank| Rest], 0, BlankCount, AfterBlanks),
 		fold_lines(AfterBlanks, RestResult),
 		% Blank lines become newlines
 		n_newlines(BlankCount, Newlines),
@@ -746,11 +746,11 @@
 		fold_lines([line(L)| Rest], RestResult),
 		Result = [10| RestResult].
 
-	count_blanks([blank| Rest], Count, After) :-
+	count_blanks([blank| Rest], Count0, Count, After) :-
 		!,
-		count_blanks(Rest, Count1, After),
-		Count is Count1 + 1.
-	count_blanks(List, 0, List).
+		Count1 is Count0 + 1,
+		count_blanks(Rest, Count1, Count, After).
+	count_blanks(List, Count, Count, List).
 
 	% Apply chomping to the result
 	apply_chomping(strip, Codes, Result) :-
