@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-04-17,
 		comment is 'Unit tests for the "knn" library.'
 	]).
 
@@ -124,10 +124,14 @@
 	test(knn_classifier_to_file_4_loaded, true(ground(Prediction))) :-
 		^^file_path('test_output.pl', File),
 		knn::learn(iris_small, Classifier),
-		knn::classifier_to_file(_Dataset, Classifier, classify, File),
+		knn::classifier_to_file(iris_small, Classifier, classify, File),
 		logtalk_load(File),
 		{classify(AttributeNames, FeatureTypes, Instances)},
 		knn::predict(classify(AttributeNames, FeatureTypes, Instances), [sepal_length-5.0, sepal_width-3.3, petal_length-1.4, petal_width-0.2], Prediction).
+
+	test(knn_diagnostics_2, deterministic((list::memberchk(model(knn), Diagnostics), list::memberchk(training_examples(_), Diagnostics)))) :-
+		knn::learn(iris_small, Classifier),
+		knn::diagnostics(Classifier, Diagnostics).
 
 	% Test print_classifier/1 (just ensure it doesn't fail)
 	test(knn_print_classifier_1, true) :-

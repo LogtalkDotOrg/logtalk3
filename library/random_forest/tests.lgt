@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-04-17,
 		comment is 'Unit tests for the "random_forest" library.'
 	]).
 
@@ -161,6 +161,11 @@
 		logtalk_load(File),
 		{classify(Trees, ClassValues, Options)},
 		random_forest::predict(classify(Trees, ClassValues, Options), [outlook-overcast, temperature-hot, humidity-high, wind-weak], Prediction).
+
+	test(random_forest_diagnostics_2, deterministic((list::memberchk(model(random_forest), Diagnostics), list::memberchk(options(Options), Diagnostics)))) :-
+		random_forest::learn(play_tennis, Classifier),
+		random_forest::diagnostics(Classifier, Diagnostics),
+		random_forest::classifier_options(Classifier, Options).
 
 	% print_classifier/1 tests
 

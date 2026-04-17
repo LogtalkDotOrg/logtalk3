@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-20,
+		date is 2026-04-17,
 		comment is 'Unit tests for the "ada_boost" library.'
 	]).
 
@@ -147,6 +147,11 @@
 		logtalk_load(File),
 		{classify(WeightedTrees, ClassValues, Options)},
 		ada_boost::predict(classify(WeightedTrees, ClassValues, Options), [outlook-overcast, temperature-hot, humidity-high, wind-weak], Prediction).
+
+	test(ada_boost_diagnostics_2, deterministic((list::memberchk(model(ada_boost), Diagnostics), list::memberchk(options(Options), Diagnostics)))) :-
+		ada_boost::learn(play_tennis, Classifier),
+		ada_boost::diagnostics(Classifier, Diagnostics),
+		ada_boost::classifier_options(Classifier, Options).
 
 	% print_classifier/1 tests
 

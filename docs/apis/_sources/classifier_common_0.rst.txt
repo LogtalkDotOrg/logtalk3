@@ -1,0 +1,76 @@
+.. index:: single: classifier_common
+.. _classifier_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``classifier_common``
+=====================
+
+Shared predicates for classifier diagnostics and export.
+
+| **Availability:** 
+|    ``logtalk_load(classifier_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-17
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`classifier_protocol <classifier_protocol/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`classifier_protocol/0::classifier_options/2`  :ref:`classifier_protocol/0::classifier_to_clauses/4`  :ref:`classifier_protocol/0::classifier_to_file/4`  :ref:`classifier_protocol/0::diagnostic/2`  :ref:`classifier_protocol/0::diagnostics/2`  :ref:`classifier_protocol/0::learn/2`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: classifier_diagnostics_data/2
+.. _classifier_common/0::classifier_diagnostics_data/2:
+
+``classifier_diagnostics_data/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing classifier implementations must define in order to expose diagnostics metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``classifier_diagnostics_data(Classifier,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``classifier_diagnostics_data(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

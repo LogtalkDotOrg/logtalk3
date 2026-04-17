@@ -20,13 +20,12 @@
 
 
 :- object(random_forest,
-	implements(classifier_protocol),
-	imports(options)).
+	imports([options, classifier_common])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-20,
+		date is 2026-04-17,
 		comment is 'Random Forest classifier using C4.5 decision trees as base learners. Builds an ensemble of decision trees trained on bootstrap samples with random feature subsets and combines their predictions through majority voting.',
 		remarks is [
 			'Algorithm' - 'Random Forest is an ensemble learning method that constructs multiple decision trees during training and outputs the class that is the mode of the classes predicted by individual trees.',
@@ -262,26 +261,19 @@
 		;	max_probability([Class2-Prob2| Rest], MaxClass, MaxProb)
 		).
 
+	classifier_diagnostics_data(rf_classifier(Trees, ClassValues, Options), Diagnostics) :-
+		length(Trees, TreeCount),
+		Diagnostics = [
+			model(random_forest),
+			classes(ClassValues),
+			trees(TreeCount),
+			options(Options)
+		].
+
 	% classifier_to_clauses/4 - exports classifier as a clause
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Classifier =.. [_, Trees, ClassValues, Options],
 		Clause =.. [Functor, Trees, ClassValues, Options].
-
-	% classifier_to_file/4 - exports classifier to a file
-	classifier_to_file(Dataset, Classifier, Functor, File) :-
-		classifier_to_clauses(Dataset, Classifier, Functor, Clauses),
-		open(File, write, Stream),
-		write_comment_header(Functor, Stream),
-		write_clauses(Clauses, Stream),
-		close(Stream).
-
-	write_comment_header(Functor, Stream) :-
-		format(Stream, '% ~q(Trees, ClassValues, Options)~n', [Functor]).
-
-	write_clauses([], _).
-	write_clauses([Clause| Clauses], Stream) :-
-		format(Stream, '~q.~n', [Clause]),
-		write_clauses(Clauses, Stream).
 
 	% print_classifier/1 - pretty prints the classifier
 	print_classifier(Classifier) :-

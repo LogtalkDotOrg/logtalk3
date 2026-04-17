@@ -27,11 +27,57 @@ learning classifier algorithms. Datasets are represented as objects
 implementing the `dataset_protocol` protocol. Classifiers are represented
 as objects implementing the `classifier_protocol` protocol.
 
-This library also provides test datasets. See below for details.
+This library also provides reusable shared categories, smoke tests, and
+test datasets. See below for details.
 
 Logtalk currently provides several classifiers including `c45`, `knn`,
-`linear_svm`, `logistic_regression`, `naive_bayes`, `nearest_centroid`, and `random_forest`. See these
-libraries documentation for details.
+`linear_svm`, `logistic_regression`, `naive_bayes`, `nearest_centroid`,
+and `random_forest`. See these libraries documentation for details.
+
+
+Shared category
+---------------
+
+The library includes one reusable category intended to be imported by
+classifier algorithm implementations:
+
+- `classifier_common` — shared diagnostics accessors and classifier export
+  helpers.
+
+This category keeps diagnostics access and file export behavior separate
+from the algorithm-specific learning, prediction, and pretty-printing code.
+
+
+Diagnostics
+-----------
+
+The `classifier_common` category provides shared accessor predicates
+such as `diagnostics/2`, `diagnostic/2`, and `classifier_options/2`. These
+predicates make it possible to inspect learned-classifier metadata without
+depending on the exact term representation used by a particular classifier
+implementation.
+
+The detailed contents of the diagnostics data are classifier-dependent.
+For example, some classifiers report effective training options, while
+others report structural metadata such as attribute names, feature types,
+or the number of training examples or models.
+
+
+Export header convention
+------------------------
+
+The shared classifier exporter in the `classifier_common` category writes a standard comment header before the
+exported clauses:
+
+- `% exported classifier predicate: Functor`
+- `% dataset prediction schema: Functor(TitleCaseAttribute1, ..., TitleCaseAttributeN, TitleCaseClass)`
+- `% diagnostics: Diagnostics`
+
+The `dataset prediction schema` line always uses the same ASCII-only
+TitleCase conversion already used by `c45` for header comments. This line
+documents the dataset-level prediction interface for readability, even when
+the exported clauses serialize a model term instead of an executable
+predictor relation.
 
 
 API documentation
@@ -49,10 +95,19 @@ To load all entities in this library, load the `loader.lgt` file:
 	| ?- logtalk_load(classifier_protocols(loader)).
 
 
+Testing
+-------
+
+To test this library predicates, shared categories, and datasets, load the
+`tester.lgt` file:
+
+  | ?- logtalk_load(classifier_protocols(tester)).
+
+
 Test datasets
 -------------
 
-Several sample datasets are included in the `test_files` directory:
+Several sample datasets are included in the `test_datasets` directory:
 
 - **Play Tennis** — The classic weather/tennis dataset with 14 examples
   and 4 discrete attributes (outlook, temperature, humidity, wind).

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-04-17,
 		comment is 'Unit tests for the "naive_bayes" library.'
 	]).
 
@@ -133,10 +133,14 @@
 	test(naive_bayes_classifier_to_file_3_loaded, true(Prediction == yes)) :-
 		^^file_path('test_output.pl', File),
 		naive_bayes::learn(weather, Classifier),
-		naive_bayes::classifier_to_file(_Dataset, Classifier, classify, File),
+		naive_bayes::classifier_to_file(weather, Classifier, classify, File),
 		logtalk_load(File),
 		{classify(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams)},
 		naive_bayes::predict(classify(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams), [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
+
+	test(naive_bayes_diagnostics_2, deterministic((list::memberchk(model(naive_bayes), Diagnostics), list::memberchk(classes(_), Diagnostics)))) :-
+		naive_bayes::learn(weather, Classifier),
+		naive_bayes::diagnostics(Classifier, Diagnostics).
 
 	% Test print_classifier/1 (just ensure it doesn't fail)
 	test(naive_bayes_print_classifier_1, true) :-

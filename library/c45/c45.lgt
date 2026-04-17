@@ -20,10 +20,10 @@
 
 
 :- object(c45,
-	implements(classifier_protocol)).
+	imports(classifier_common)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2026-04-17,
 		comment is 'C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes, handles missing values, and supports tree pruning.',
@@ -407,6 +407,8 @@
 		keys(Attributes, AttributeNames),
 		tree_to_clauses_(Tree, Functor, AttributeNames, [], Clauses).
 
+	classifier_diagnostics_data(_Tree, [model(c45)]).
+
 	tree_to_clauses_(leaf(Class), Functor, AttributeNames, Bindings, [Clause]) :-
 		build_clause(Functor, AttributeNames, Bindings, Class, Clause).
 	tree_to_clauses_(tree(Attribute, threshold(Threshold), LeftTree, RightTree), Functor, AttributeNames, Bindings, Clauses) :-
@@ -465,42 +467,6 @@
 		!.
 	list_to_conjunction([Goal| Goals], (Goal, Rest)) :-
 		list_to_conjunction(Goals, Rest).
-
-	% tree_to_file/4 - export tree as clauses to a file
-	classifier_to_file(Dataset, Tree, Functor, File) :-
-		classifier_to_clauses(Dataset, Tree, Functor, Clauses),
-		open(File, write, Stream),
-		write_comment_header(Dataset, Functor, Stream),
-		write_clauses(Clauses, Stream),
-		close(Stream).
-
-	write_comment_header(Dataset, Functor, Stream) :-
-		Dataset::class(Class),
-		findall(
-			Attribute,
-			Dataset::attribute_values(Attribute, _),
-			Arguments,
-			[Class]
-		),
-		title_case(Arguments, TitleCaseArguments),
-		Template =.. [Functor| TitleCaseArguments],
-		format(Stream, '% ~q~n', [Template]).
-
-	% assumes ASCII attribute names
-	title_case([], []).
-	title_case([Attribute| Attributes], [TitleCaseAttribute| TitleCaseAttributes]) :-
-		atom_codes(Attribute, [Letter| Letters]),
-		(	0'a @=< Letter, Letter @=< 0'z ->
-			UpperCaseLetter is Letter - 32,
-			atom_codes(TitleCaseAttribute, [UpperCaseLetter| Letters])
-		;	TitleCaseAttribute = Attribute
-		),
-		title_case(Attributes, TitleCaseAttributes).
-
-	write_clauses([], _).
-	write_clauses([Clause| Clauses], Stream) :-
-		format(Stream, '~q.~n', [Clause]),
-		write_clauses(Clauses, Stream).
 
 	% print_classifier/1 - pretty print the tree
 	print_classifier(Tree) :-

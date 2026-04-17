@@ -20,13 +20,12 @@
 
 
 :- object(knn,
-	implements(classifier_protocol),
-	imports(options)).
+	imports([options, classifier_common])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-20,
+		date is 2026-04-17,
 		comment is 'k-Nearest Neighbors classifier with multiple distance metrics and weighting options. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'k-NN is a lazy learning algorithm that classifies instances based on the majority class among the k nearest training instances.',
@@ -300,24 +299,18 @@
 		;	max_probability([Class2-Probability2| ClassProbabilities], MaxClass, MaxProbability)
 		).
 
+	classifier_diagnostics_data(knn_classifier(AttributeNames, FeatureTypes, Instances), Diagnostics) :-
+		length(Instances, TrainingExamples),
+		Diagnostics = [
+			model(knn),
+			attributes(AttributeNames),
+			feature_types(FeatureTypes),
+			training_examples(TrainingExamples)
+		].
+
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Classifier =.. [_, AttributeNames, FeatureTypes, Instances],
 		Clause =.. [Functor, AttributeNames, FeatureTypes, Instances].
-
-	classifier_to_file(Dataset, Classifier, Functor, File) :-
-		classifier_to_clauses(Dataset, Classifier, Functor, Clauses),
-		open(File, write, Stream),
-		write_comment_header(Functor, Stream),
-		write_clauses(Clauses, Stream),
-		close(Stream).
-
-	write_comment_header(Functor, Stream) :-
-		format(Stream, '% ~q(AttributeNames, FeatureTypes, Instances)~n', [Functor]).
-
-	write_clauses([], _).
-	write_clauses([Clause| Clauses], Stream) :-
-		format(Stream, '~q.~n', [Clause]),
-		write_clauses(Clauses, Stream).
 
 	print_classifier(Classifier) :-
 		Classifier =.. [_, AttributeNames, FeatureTypes, Instances],

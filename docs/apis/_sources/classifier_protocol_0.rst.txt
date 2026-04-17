@@ -14,8 +14,8 @@ Protocol for machine learning classifiers.
 |    ``logtalk_load(classifier_protocols(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-19
+| **Version:** 1:1:0
+| **Date:** 2026-04-17
 
 | **Compilation flags:**
 |    ``static``
@@ -72,6 +72,63 @@ Predicts the class label for a new instance using the learned classifier. The in
 |    ``predict(Classifier,Instance,Class)``
 | **Mode and number of proofs:**
 |    ``predict(+compound,+list,-atom)`` - ``one``
+
+
+------------
+
+.. index:: diagnostics/2
+.. _classifier_protocol/0::diagnostics/2:
+
+``diagnostics/2``
+^^^^^^^^^^^^^^^^^
+
+Returns diagnostics and metadata associated with a learned classifier in a representation-independent way.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics(Classifier,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``diagnostics(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: diagnostic/2
+.. _classifier_protocol/0::diagnostic/2:
+
+``diagnostic/2``
+^^^^^^^^^^^^^^^^
+
+Tests or enumerates individual diagnostics metadata terms for a learned classifier.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostic(Classifier,Diagnostic)``
+| **Mode and number of proofs:**
+|    ``diagnostic(+compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: classifier_options/2
+.. _classifier_protocol/0::classifier_options/2:
+
+``classifier_options/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the effective training options recorded in a learned classifier diagnostics list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``classifier_options(Classifier,Options)``
+| **Mode and number of proofs:**
+|    ``classifier_options(+compound,-list(compound))`` - ``zero_or_one``
 
 
 ------------

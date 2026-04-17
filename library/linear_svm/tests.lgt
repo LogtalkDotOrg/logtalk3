@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2026-04-17,
 		comment is 'Unit tests for the "linear_svm" library.'
@@ -106,10 +106,15 @@
 	test(linear_svm_classifier_to_file_4_loaded, deterministic(Prediction == yes)) :-
 		^^file_path('test_output.pl', File),
 		linear_svm::learn(weather, Classifier),
-		linear_svm::classifier_to_file(_Dataset, Classifier, classify, File),
+		linear_svm::classifier_to_file(weather, Classifier, classify, File),
 		logtalk_load(File),
 		{classify(Classes, Encoders, Models, Options)},
 		linear_svm::predict(classify(Classes, Encoders, Models, Options), [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
+
+	test(linear_svm_diagnostics_2, deterministic((list::memberchk(model(linear_svm), Diagnostics), list::memberchk(options(Options), Diagnostics)))) :-
+		linear_svm::learn(weather, Classifier),
+		linear_svm::diagnostics(Classifier, Diagnostics),
+		linear_svm::classifier_options(Classifier, Options).
 
 	test(linear_svm_print_classifier_1, deterministic) :-
 		^^suppress_text_output,

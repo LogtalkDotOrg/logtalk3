@@ -87,8 +87,12 @@
 <li class="toctree-l2"><a class="reference internal" href="character_sets.html"><code class="docutils literal notranslate"><span class="pre">character_sets</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ccsds.html"><code class="docutils literal notranslate"><span class="pre">ccsds</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#shared-category">Shared category</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diagnostics">Diagnostics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#export-header-convention">Export header convention</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#test-datasets">Test datasets</a></li>
 </ul>
 </li>
@@ -237,11 +241,51 @@ learning classifier algorithms. Datasets are represented as objects
 implementing the <code class="docutils literal notranslate"><span class="pre">dataset_protocol</span></code> protocol. Classifiers are
 represented as objects implementing the <code class="docutils literal notranslate"><span class="pre">classifier_protocol</span></code>
 protocol.</p>
-<p>This library also provides test datasets. See below for details.</p>
+<p>This library also provides reusable shared categories, smoke tests, and
+test datasets. See below for details.</p>
 <p>Logtalk currently provides several classifiers including <code class="docutils literal notranslate"><span class="pre">c45</span></code>,
 <code class="docutils literal notranslate"><span class="pre">knn</span></code>, <code class="docutils literal notranslate"><span class="pre">linear_svm</span></code>, <code class="docutils literal notranslate"><span class="pre">logistic_regression</span></code>, <code class="docutils literal notranslate"><span class="pre">naive_bayes</span></code>,
 <code class="docutils literal notranslate"><span class="pre">nearest_centroid</span></code>, and <code class="docutils literal notranslate"><span class="pre">random_forest</span></code>. See these libraries
 documentation for details.</p>
+<section id="shared-category">
+<h2>Shared category<a class="headerlink" href="#shared-category" title="Link to this heading"></a></h2>
+<p>The library includes one reusable category intended to be imported by
+classifier algorithm implementations:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">classifier_common</span></code> — shared diagnostics accessors and classifier
+export helpers.</p></li>
+</ul>
+<p>This category keeps diagnostics access and file export behavior separate
+from the algorithm-specific learning, prediction, and pretty-printing
+code.</p>
+</section>
+<section id="diagnostics">
+<h2>Diagnostics<a class="headerlink" href="#diagnostics" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">classifier_common</span></code> category provides shared accessor predicates
+such as <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">classifier_options/2</span></code>. These predicates make it possible to inspect
+learned-classifier metadata without depending on the exact term
+representation used by a particular classifier implementation.</p>
+<p>The detailed contents of the diagnostics data are classifier-dependent.
+For example, some classifiers report effective training options, while
+others report structural metadata such as attribute names, feature
+types, or the number of training examples or models.</p>
+</section>
+<section id="export-header-convention">
+<h2>Export header convention<a class="headerlink" href="#export-header-convention" title="Link to this heading"></a></h2>
+<p>The shared classifier exporter in the <code class="docutils literal notranslate"><span class="pre">classifier_common</span></code> category
+writes a standard comment header before the exported clauses:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">exported</span> <span class="pre">classifier</span> <span class="pre">predicate:</span> <span class="pre">Functor</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">dataset</span> <span class="pre">prediction</span> <span class="pre">schema:</span> <span class="pre">Functor(TitleCaseAttribute1,</span> <span class="pre">...,</span> <span class="pre">TitleCaseAttributeN,</span> <span class="pre">TitleCaseClass)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">diagnostics:</span> <span class="pre">Diagnostics</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">dataset</span> <span class="pre">prediction</span> <span class="pre">schema</span></code> line always uses the same ASCII-only
+TitleCase conversion already used by <code class="docutils literal notranslate"><span class="pre">c45</span></code> for header comments. This
+line documents the dataset-level prediction interface for readability,
+even when the exported clauses serialize a model term instead of an
+executable predictor relation.</p>
+</section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -255,9 +299,15 @@ link in a web browser.</p>
 </pre></div>
 </div>
 </section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, shared categories, and datasets, load
+the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<p>| ?- logtalk_load(classifier_protocols(tester)).</p>
+</section>
 <section id="test-datasets">
 <h2>Test datasets<a class="headerlink" href="#test-datasets" title="Link to this heading"></a></h2>
-<p>Several sample datasets are included in the <code class="docutils literal notranslate"><span class="pre">test_files</span></code> directory:</p>
+<p>Several sample datasets are included in the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory:</p>
 <ul class="simple">
 <li><p><strong>Play Tennis</strong> — The classic weather/tennis dataset with 14 examples
 and 4 discrete attributes (outlook, temperature, humidity, wind).

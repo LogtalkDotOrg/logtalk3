@@ -1919,6 +1919,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`class_hierarchyp <class_hierarchyp/0::classes/1>`
 
+``classifier_options/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`classifier_protocol <classifier_protocol/0::classifier_options/2>`
+
 ``classifier_to_clauses/4``
 ---------------------------
 
@@ -3800,6 +3810,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`classifier_protocol <classifier_protocol/0::diagnostic/2>`
 * :ref:`ranker_diagnostics <ranker_diagnostics/0::diagnostic/2>`
 * :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostic/2>`
 
@@ -3851,6 +3862,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`classifier_protocol <classifier_protocol/0::diagnostics/2>`
 * :ref:`ranker_diagnostics <ranker_diagnostics/0::diagnostics/2>`
 * :ref:`ranker_protocol <ranker_protocol/0::diagnostics/2>`
 * :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostics/2>`

@@ -54,6 +54,12 @@ using one-vs-rest hinge-loss training.
 access metadata for fixed-size cryptographic hash objects that can be safely
 used with HMAC.
 
+* ADDED: Support for diagnostics and classifier metadata to the classifier
+libraries.
+
+* IMPROVED: Code refactoring of the classifier libraries by introducing a new
+`classifier_common` category with shared code.
+
 * IMPROVED: The `numberlist::softmax/2-3` library predicates by making their
 implementation numerically stable.
 

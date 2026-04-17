@@ -20,11 +20,10 @@
 
 
 :- object(nearest_centroid,
-	implements(classifier_protocol),
-	imports(options)).
+	imports([options, classifier_common])).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2026-04-17,
 		comment is 'Nearest Centroid classifier with multiple distance metrics. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
@@ -344,24 +343,18 @@
 		!.
 	feature_distance_abs(categorical, _, _, 1).
 
+	classifier_diagnostics_data(nc_classifier(AttributeNames, FeatureTypes, Centroids), Diagnostics) :-
+		length(Centroids, CentroidCount),
+		Diagnostics = [
+			model(nearest_centroid),
+			attributes(AttributeNames),
+			feature_types(FeatureTypes),
+			centroids(CentroidCount)
+		].
+
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Classifier =.. [_, AttributeNames, FeatureTypes, Centroids],
 		Clause =.. [Functor, AttributeNames, FeatureTypes, Centroids].
-
-	classifier_to_file(Dataset, Classifier, Functor, File) :-
-		classifier_to_clauses(Dataset, Classifier, Functor, Clauses),
-		open(File, write, Stream),
-		write_comment_header(Functor, Stream),
-		write_clauses(Clauses, Stream),
-		close(Stream).
-
-	write_comment_header(Functor, Stream) :-
-		format(Stream, '% ~q(AttributeNames, FeatureTypes, Centroids)~n', [Functor]).
-
-	write_clauses([], _).
-	write_clauses([Clause| Clauses], Stream) :-
-		format(Stream, '~q.~n', [Clause]),
-		write_clauses(Clauses, Stream).
 
 	print_classifier(Classifier) :-
 		Classifier =.. [_, AttributeNames, FeatureTypes, Centroids],

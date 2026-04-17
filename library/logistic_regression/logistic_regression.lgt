@@ -20,11 +20,10 @@
 
 
 :- object(logistic_regression,
-	implements(classifier_protocol),
-	imports(options)).
+	imports([options, classifier_common])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2026-04-17,
 		comment is 'Logistic regression classifier supporting binary and multiclass classification using joint softmax training. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
@@ -360,24 +359,20 @@
 		;   max_probability([Class2-Probability2| Probabilities], Class, Probability)
 		).
 
+	classifier_diagnostics_data(lr_classifier(Classes, Encoders, Models, Options), Diagnostics) :-
+		encoders_feature_count(Encoders, 0, EncodedFeatures),
+		length(Models, ModelCount),
+		Diagnostics = [
+			model(logistic_regression),
+			classes(Classes),
+			encoded_features(EncodedFeatures),
+			models(ModelCount),
+			options(Options)
+		].
+
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Classifier = lr_classifier(Classes, Encoders, Models, Options),
 		Clause =.. [Functor, Classes, Encoders, Models, Options].
-
-	classifier_to_file(Dataset, Classifier, Functor, File) :-
-		classifier_to_clauses(Dataset, Classifier, Functor, Clauses),
-		open(File, write, Stream),
-		write_comment_header(Functor, Stream),
-		write_clauses(Clauses, Stream),
-		close(Stream).
-
-	write_comment_header(Functor, Stream) :-
-		format(Stream, '% ~q(Classes, Encoders, Models, Options)~n', [Functor]).
-
-	write_clauses([], _).
-	write_clauses([Clause| Clauses], Stream) :-
-		format(Stream, '~q.~n', [Clause]),
-		write_clauses(Clauses, Stream).
 
 	print_classifier(lr_classifier(Classes, Encoders, Models, Options)) :-
 		format('Logistic Regression Classifier~n', []),

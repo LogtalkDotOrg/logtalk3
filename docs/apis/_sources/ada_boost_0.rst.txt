@@ -14,17 +14,16 @@ AdaBoost (Adaptive Boosting) classifier using C4.5 decision trees as base learne
 |    ``logtalk_load(ada_boost(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-20
+| **Version:** 1:1:0
+| **Date:** 2026-04-17
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
-| **Implements:**
-|    ``public`` :ref:`classifier_protocol <classifier_protocol/0>`
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
+|    ``public`` :ref:`classifier_common <classifier_common/0>`
 | **Uses:**
 |    :ref:`c45 <c45/0>`
 |    :ref:`fast_random(Algorithm) <fast_random/1>`
@@ -42,7 +41,7 @@ AdaBoost (Adaptive Boosting) classifier using C4.5 decision trees as base learne
    - Early stopping: Training stops early if a perfect classifier is found (zero weighted error) or if a base learner performs worse than random guessing.
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`classifier_protocol/0::classifier_to_clauses/4`  :ref:`classifier_protocol/0::classifier_to_file/4`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`classifier_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`classifier_protocol/0::classifier_options/2`  :ref:`classifier_protocol/0::classifier_to_clauses/4`  :ref:`classifier_protocol/0::classifier_to_file/4`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`classifier_protocol/0::diagnostic/2`  :ref:`classifier_protocol/0::diagnostics/2`  :ref:`classifier_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:

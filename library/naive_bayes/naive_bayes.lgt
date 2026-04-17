@@ -20,10 +20,10 @@
 
 
 :- object(naive_bayes,
-	implements(classifier_protocol)).
+	imports(classifier_common)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2026-04-17,
 		comment is 'Naive Bayes classifier with Laplace smoothing and Gaussian distribution support. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
@@ -262,24 +262,16 @@
 			Attributes
 		).
 
+	classifier_diagnostics_data(nb_classifier(Classes, _ClassPriors, AttributeNames, FeatureTypes, _FeatureParams), [
+		model(naive_bayes),
+		classes(Classes),
+		attributes(AttributeNames),
+		feature_types(FeatureTypes)
+	]).
+
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Classifier =.. [_, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams],
 		Clause =.. [Functor, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams].
-
-	classifier_to_file(Dataset, Classifier, Functor, File) :-
-		classifier_to_clauses(Dataset, Classifier, Functor, Clauses),
-		open(File, write, Stream),
-		write_comment_header(Functor, Stream),
-		write_clauses(Clauses, Stream),
-		close(Stream).
-
-	write_comment_header(Functor, Stream) :-
-		format(Stream, '% ~q(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams)~n', [Functor]).
-
-	write_clauses([], _).
-	write_clauses([Clause| Clauses], Stream) :-
-		format(Stream, '~q.~n', [Clause]),
-		write_clauses(Clauses, Stream).
 
 	print_classifier(Classifier) :-
 		Classifier =.. [_, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams],

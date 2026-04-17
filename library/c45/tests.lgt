@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-04-17,
 		comment is 'Unit tests for the "c45" library.'
 	]).
 
@@ -84,6 +84,10 @@
 		^^file_path('test_output.pl', File),
 		c45::learn(play_tennis, Tree),
 		c45::classifier_to_file(play_tennis, Tree, classify, File).
+
+	test(c45_diagnostics_2, deterministic(Diagnostics == [model(c45)])) :-
+		c45::learn(play_tennis, Tree),
+		c45::diagnostics(Tree, Diagnostics).
 
 	% print_classifier/1 tests
 

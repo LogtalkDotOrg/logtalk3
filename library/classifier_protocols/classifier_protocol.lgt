@@ -22,9 +22,9 @@
 :- protocol(classifier_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-04-17,
 		comment is 'Protocol for machine learning classifiers.',
 		see_also is [c45, isolation_forest, knn, linear_svm, logistic_regression, naive_bayes, nearest_centroid, random_forest]
 	]).
@@ -41,6 +41,27 @@
 	:- info(predict/3, [
 		comment is 'Predicts the class label for a new instance using the learned classifier. The instance is a list of ``Attribute-Value`` pairs.',
 		argnames is ['Classifier', 'Instance', 'Class']
+	]).
+
+	:- public(diagnostics/2).
+	:- mode(diagnostics(+compound, -list(compound)), one).
+	:- info(diagnostics/2, [
+		comment is 'Returns diagnostics and metadata associated with a learned classifier in a representation-independent way.',
+		argnames is ['Classifier', 'Diagnostics']
+	]).
+
+	:- public(diagnostic/2).
+	:- mode(diagnostic(+compound, ?compound), zero_or_more).
+	:- info(diagnostic/2, [
+		comment is 'Tests or enumerates individual diagnostics metadata terms for a learned classifier.',
+		argnames is ['Classifier', 'Diagnostic']
+	]).
+
+	:- public(classifier_options/2).
+	:- mode(classifier_options(+compound, -list(compound)), zero_or_one).
+	:- info(classifier_options/2, [
+		comment is 'Returns the effective training options recorded in a learned classifier diagnostics list.',
+		argnames is ['Classifier', 'Options']
 	]).
 
 	:- public(classifier_to_clauses/4).

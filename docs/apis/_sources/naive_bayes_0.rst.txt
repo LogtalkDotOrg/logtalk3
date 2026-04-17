@@ -14,15 +14,15 @@ Naive Bayes classifier with Laplace smoothing and Gaussian distribution support.
 |    ``logtalk_load(naive_bayes(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
+| **Version:** 1:2:0
 | **Date:** 2026-04-17
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
-| **Implements:**
-|    ``public`` :ref:`classifier_protocol <classifier_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`classifier_common <classifier_common/0>`
 | **Uses:**
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
@@ -37,7 +37,7 @@ Naive Bayes classifier with Laplace smoothing and Gaussian distribution support.
    - Classifier representation: The learned classifier is represented by default as ``nb_classifier(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams)`` where ``FeatureParams`` contains the learned probabilities or statistics for each feature.
 
 | **Inherited public predicates:**
-|     :ref:`classifier_protocol/0::classifier_to_clauses/4`  :ref:`classifier_protocol/0::classifier_to_file/4`  :ref:`classifier_protocol/0::learn/2`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  
+|     :ref:`classifier_protocol/0::classifier_options/2`  :ref:`classifier_protocol/0::classifier_to_clauses/4`  :ref:`classifier_protocol/0::classifier_to_file/4`  :ref:`classifier_protocol/0::diagnostic/2`  :ref:`classifier_protocol/0::diagnostics/2`  :ref:`classifier_protocol/0::learn/2`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  
 
 .. contents::
    :local:

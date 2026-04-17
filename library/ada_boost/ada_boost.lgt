@@ -20,13 +20,12 @@
 
 
 :- object(ada_boost,
-	implements(classifier_protocol),
-	imports(options)).
+	imports([options, classifier_common])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-20,
+		date is 2026-04-17,
 		comment is 'AdaBoost (Adaptive Boosting) classifier using C4.5 decision trees as base learners. Implements the SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss function) variant, which supports multi-class classification. Builds an ensemble of weighted decision trees where each subsequent tree focuses on the examples misclassified by previous trees.',
 		remarks is [
 			'Algorithm' - 'AdaBoost iteratively trains weak learners (C4.5 decision trees) on weighted versions of the training data. After each iteration, the weights of misclassified examples are increased so that subsequent learners focus more on difficult cases.',
@@ -342,26 +341,19 @@
 		;	max_probability([Class2-Prob2| Rest], MaxClass, MaxProb)
 		).
 
+	classifier_diagnostics_data(ab_classifier(WeightedTrees, ClassValues, Options), Diagnostics) :-
+		length(WeightedTrees, EstimatorCount),
+		Diagnostics = [
+			model(ada_boost),
+			classes(ClassValues),
+			estimators(EstimatorCount),
+			options(Options)
+		].
+
 	% classifier_to_clauses/4 - exports classifier as a clause
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Classifier =.. [_, WeightedTrees, ClassValues, Options],
 		Clause =.. [Functor, WeightedTrees, ClassValues, Options].
-
-	% classifier_to_file/4 - exports classifier to a file
-	classifier_to_file(Dataset, Classifier, Functor, File) :-
-		classifier_to_clauses(Dataset, Classifier, Functor, Clauses),
-		open(File, write, Stream),
-		write_comment_header(Functor, Stream),
-		write_clauses(Clauses, Stream),
-		close(Stream).
-
-	write_comment_header(Functor, Stream) :-
-		format(Stream, '% ~q(WeightedTrees, ClassValues, Options)~n', [Functor]).
-
-	write_clauses([], _).
-	write_clauses([Clause| Clauses], Stream) :-
-		format(Stream, '~q.~n', [Clause]),
-		write_clauses(Clauses, Stream).
 
 	% print_classifier/1 - pretty prints the classifier
 	print_classifier(Classifier) :-

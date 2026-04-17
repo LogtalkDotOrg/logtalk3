@@ -20,13 +20,12 @@
 
 
 :- object(isolation_forest,
-	implements(classifier_protocol),
-	imports(options)).
+	imports([options, classifier_common])).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-03-11,
+		date is 2026-04-17,
 		comment is 'Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the improved version described by Hariri et al. (2019) that uses random hyperplane cuts instead of axis-aligned cuts, eliminating score bias artifacts. Builds an ensemble of isolation trees from a dataset object implementing the ``dataset_protocol`` protocol. Missing attribute values are represented using anonymous variables.',
 		remarks is [
 			'Algorithm' - 'The Extended Isolation Forest builds an ensemble of isolation trees (iTrees) by recursively partitioning the data using random hyperplanes. Anomalous points, being few and different, require fewer partitions (shorter path lengths) to be isolated.',
@@ -205,26 +204,20 @@
 	extract_scores([Score-Id-Class| Rest], [Id-Class-Score| Scores]) :-
 		extract_scores(Rest, Scores).
 
+	classifier_diagnostics_data(if_model(Trees, Psi, AttributeNames, _Attributes, _Ranges, Options), Diagnostics) :-
+		length(Trees, TreeCount),
+		Diagnostics = [
+			model(isolation_forest),
+			trees(TreeCount),
+			subsample_size(Psi),
+			attributes(AttributeNames),
+			options(Options)
+		].
+
 	% classifier_to_clauses/4 - exports classifier as a clause
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Classifier =.. [_, Trees, Psi, AttributeNames, Attributes, Ranges, Options],
 		Clause =.. [Functor, Trees, Psi, AttributeNames, Attributes, Ranges, Options].
-
-	% classifier_to_file/4 - exports classifier to a file
-	classifier_to_file(Dataset, Classifier, Functor, File) :-
-		classifier_to_clauses(Dataset, Classifier, Functor, Clauses),
-		open(File, write, Stream),
-		write_comment_header(Functor, Stream),
-		write_clauses(Clauses, Stream),
-		close(Stream).
-
-	write_comment_header(Functor, Stream) :-
-		format(Stream, '% ~q(Trees, Psi, AttributeNames, Attributes, Ranges, Options)~n', [Functor]).
-
-	write_clauses([], _).
-	write_clauses([Clause| Clauses], Stream) :-
-		format(Stream, '~q.~n', [Clause]),
-		write_clauses(Clauses, Stream).
 
 	print_classifier(Model) :-
 		Model =.. [_, Trees, Psi, AttributeNames, _Attributes, _Ranges, Options],

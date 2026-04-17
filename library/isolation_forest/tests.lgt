@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-04-17,
 		comment is 'Unit tests for the "isolation_forest" library.'
 	]).
 
@@ -249,6 +249,11 @@
 		^^file_path('test_output.pl', File),
 		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(10)]),
 		isolation_forest::classifier_to_file(gaussian_anomalies, Model, iforest, File).
+
+	test(isolation_forest_diagnostics_2, deterministic((list::memberchk(model(isolation_forest), Diagnostics), list::memberchk(options(Options), Diagnostics)))) :-
+		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(10)]),
+		isolation_forest::diagnostics(Model, Diagnostics),
+		isolation_forest::classifier_options(Model, Options).
 
 	% ===================================================================
 	% print_classifier/1 tests

@@ -14,17 +14,16 @@ Nearest Centroid classifier with multiple distance metrics. Learns from a datase
 |    ``logtalk_load(nearest_centroid(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
+| **Version:** 1:2:0
 | **Date:** 2026-04-17
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
-| **Implements:**
-|    ``public`` :ref:`classifier_protocol <classifier_protocol/0>`
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
+|    ``public`` :ref:`classifier_common <classifier_common/0>`
 | **Uses:**
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
@@ -40,7 +39,7 @@ Nearest Centroid classifier with multiple distance metrics. Learns from a datase
    - Classifier representation: The learned classifier is represented by default as a ``nc_classifier(AttributeNames, FeatureTypes, Centroids)`` term.
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`classifier_protocol/0::classifier_to_clauses/4`  :ref:`classifier_protocol/0::classifier_to_file/4`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`classifier_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`classifier_protocol/0::classifier_options/2`  :ref:`classifier_protocol/0::classifier_to_clauses/4`  :ref:`classifier_protocol/0::classifier_to_file/4`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`classifier_protocol/0::diagnostic/2`  :ref:`classifier_protocol/0::diagnostics/2`  :ref:`classifier_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
