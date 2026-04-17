@@ -22,9 +22,9 @@
 :- object(amqp).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-04-17,
 		comment is 'Portable AMQP 0-9-1 (Advanced Message Queuing Protocol) client. Uses the sockets library for TCP communication.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM (same as the sockets library).',
@@ -1424,8 +1424,9 @@
 	encode_table_pairs([Key-Value| Rest], Bytes) :-
 		encode_shortstr(Key, KeyBytes),
 		encode_field_value(Value, ValueBytes),
-		encode_table_pairs(Rest, RestBytes),
-		append([KeyBytes, ValueBytes, RestBytes], Bytes).
+		append(KeyBytes, ValueBytes, Bytes0),
+		append(Bytes0, RestBytes, Bytes),
+		encode_table_pairs(Rest, RestBytes).
 
 	% Encode field value with type tag
 	encode_field_value(bool(true), [116, 1]) :- !.    % 't' for boolean
@@ -1502,8 +1503,8 @@
 	encode_array_values([], []).
 	encode_array_values([Value| Values], Bytes) :-
 		encode_field_value(Value, ValueBytes),
-		encode_array_values(Values, RestBytes),
-		append(ValueBytes, RestBytes, Bytes).
+		append(ValueBytes, RestBytes, Bytes),
+		encode_array_values(Values, RestBytes).
 
 	% Decode array
 	decode_array(Bytes, Values, Rest) :-
