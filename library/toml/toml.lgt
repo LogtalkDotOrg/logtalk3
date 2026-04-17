@@ -23,9 +23,9 @@
 	implements(toml_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-09,
+		date is 2026-04-17,
 		comment is 'TOML parser and generator.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding TOML tables. Possible values are ``compound`` (default) and ``curly``.',
@@ -1093,8 +1093,8 @@
 		encode_key(Key, Codes).
 	encode_dotted_path([Key| Keys], Codes) :-
 		encode_key(Key, KeyCodes),
-		encode_dotted_path(Keys, RestCodes),
-		append(KeyCodes, [0'., 32| RestCodes], Codes).
+		append(KeyCodes, [0'., 32| RestCodes], Codes),
+		encode_dotted_path(Keys, RestCodes).
 
 	encode_scalar_value(Value, Codes) :-
 		Value = '@'(true),
@@ -1157,8 +1157,8 @@
 	encode_array_tail([], [0']]).
 	encode_array_tail([Value| Values], Codes) :-
 		encode_inline_value(Value, ValueCodes),
-		encode_array_tail(Values, TailCodes),
-		append([0',, 32| ValueCodes], TailCodes, Codes).
+		append([0',, 32| ValueCodes], TailCodes, Codes),
+		encode_array_tail(Values, TailCodes).
 
 	encode_inline_value(node(_, Pairs), Codes) :-
 		!,
@@ -1171,13 +1171,15 @@
 	encode_inline_table_pairs([Key-Value], Codes) :-
 		!,
 		encode_key(Key, KeyCodes),
-		encode_inline_value(Value, ValueCodes),
-		append([KeyCodes, [32, 0'=, 32], ValueCodes], Codes).
+		append([KeyCodes, [32, 0'=, 32], ValueCodes], Codes),
+		encode_inline_value(Value, ValueCodes).
 	encode_inline_table_pairs([Key-Value| Pairs], Codes) :-
 		encode_key(Key, KeyCodes),
 		encode_inline_value(Value, ValueCodes),
-		encode_inline_table_pairs(Pairs, RestCodes),
-		append([KeyCodes, [32, 0'=, 32], ValueCodes, [0',, 32], RestCodes], Codes).
+		append(KeyCodes, [32, 0'=, 32], Codes0),
+		append(Codes0, ValueCodes, Codes1),
+		append(Codes1, [0',, 32| RestCodes], Codes),
+		encode_inline_table_pairs(Pairs, RestCodes).
 
 	encode_key(Key, Codes) :-
 		atom(Key),
@@ -1343,8 +1345,8 @@
 
 	flatten_lines([], []).
 	flatten_lines([Line| Lines], Codes) :-
-		flatten_lines(Lines, Rest),
-		append(Line, [10| Rest], Codes).
+		append(Line, [10| Rest], Codes),
+		flatten_lines(Lines, Rest).
 
 :- end_object.
 

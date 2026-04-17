@@ -75,6 +75,8 @@ tail-recursive.
 * IMPROVED: Rewritten `strings` library auxiliary predicate to be
 tail-recursive.
 
+* IMPROVED: Rewritten `toml` library auxiliary predicates to be tail-recursive.
+
 * IMPROVED: Rewritten `toon` library auxiliary predicate to be tail-recursive.
 
 * IMPROVED: Rewritten `tzif` library auxiliary predicate to be tail-recursive.
