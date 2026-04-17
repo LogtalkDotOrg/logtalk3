@@ -22,9 +22,9 @@
 :- object(string(_Representation_)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-03-07,
+		date is 2026-04-17,
 		comment is 'String manipulation predicates supporting different string representations.',
 		parameters is [
 			'Representation' - 'String representation. Valid values are ``atom``, ``codes``, and ``chars``.'
@@ -398,8 +398,8 @@
 	atomics_to_codes([], []).
 	atomics_to_codes([Atomic| Atomics], Codes) :-
 		atomic_to_codes(Atomic, AtomicCodes),
-		atomics_to_codes(Atomics, RestCodes),
-		append(AtomicCodes, RestCodes, Codes).
+		append(AtomicCodes, RestCodes, Codes),
+		atomics_to_codes(Atomics, RestCodes).
 
 	% Convert a list of atomics to codes with glue between elements
 	atomics_to_codes_with_glue([], _, []).

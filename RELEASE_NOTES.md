@@ -72,6 +72,9 @@ tail-recursive auxiliary predicate.
 * IMPROVED: Rewritten two `c45` library auxiliary predicates to be
 tail-recursive.
 
+* IMPROVED: Rewritten `strings` library auxiliary predicate to be
+tail-recursive.
+
 * IMPROVED: Rewritten `toon` library auxiliary predicate to be tail-recursive.
 
 * IMPROVED: Rewritten `tzif` library auxiliary predicate to be tail-recursive.
