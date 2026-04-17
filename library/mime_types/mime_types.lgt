@@ -22,9 +22,9 @@
 :- object(mime_types).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-09,
+		date is 2026-04-17,
 		comment is 'MIME type registry and convenience predicates for mapping file names and URLs to media types.',
 		remarks is [
 			'Default behavior' - 'Convenience predicates default to lenient lookup by consulting both built-in standard mappings and built-in common mappings.',
@@ -292,8 +292,8 @@
 			Pairs = []
 		;   atom_codes(Line, Codes),
 			parse_mime_types_line(Line, LinePairs),
-			read_mime_types_stream(Stream, RestPairs),
-			append(LinePairs, RestPairs, Pairs)
+			append(LinePairs, RestPairs, Pairs),
+			read_mime_types_stream(Stream, RestPairs)
 		).
 
 	parse_mime_types_line(Line, Pairs) :-

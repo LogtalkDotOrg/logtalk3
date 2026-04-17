@@ -87,6 +87,9 @@ tail-recursive.
 * IMPROVED: Rewritten `base58` library auxiliary predicate to be
 tail-recursive.
 
+* IMPROVED: Rewritten `mime_types` library auxiliary predicate to be
+tail-recursive.
+
 * IMPROVED: Rewritten `naive_bayes` library auxiliary predicate to be
 tail-recursive.
 
