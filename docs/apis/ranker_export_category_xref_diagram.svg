@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-389.5 547,-389.5 547,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category ranker_export</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;04&#45;17, 15:34</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;04&#45;17, 22:54</text>
 <g id="clust1" class="cluster">
 <title>cluster_ranker_export_category</title>
 <g id="a_clust1"><a xlink:title="ranker_export">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 523,-54.25 523,-54.25 529,-54.25 535,-60.25 535,-66.25 535,-66.25 535,-365.5 535,-365.5 535,-371.5 529,-377.5 523,-377.5 523,-377.5 20,-377.5 20,-377.5 14,-377.5 8,-371.5 8,-365.5 8,-365.5 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-359.75" font-family="Monospace" font-size="10.00" fill="dimgray">ranker_export</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>ranker_to_file/4</title>
 <polygon fill="springgreen" stroke="black" points="342.25,-338.75 207.75,-338.75 207.75,-302.75 342.25,-302.75 342.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="215.75" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L35" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L35">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L35" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L35">
 <text xml:space="preserve" text-anchor="start" x="221" y="-322.62" font-family="Monospace" font-size="11.00">ranker_to_file/4</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>write_comment_header/3</title>
 <polygon fill="cornsilk" stroke="black" points="193.5,-219.5 18.5,-219.5 18.5,-183.5 193.5,-183.5 193.5,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="26.5" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L49">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="31.75" y="-203.38" font-family="Monospace" font-size="11.00">write_comment_header/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- ranker_to_file/4&#45;&gt;write_comment_header/3 -->
 <g id="edge1" class="edge">
 <title>ranker_to_file/4&#45;&gt;write_comment_header/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L42" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L42" xlink:title="calls">
 <path fill="none" stroke="black" d="M250.06,-302.45C220.98,-282.27 172.75,-248.81 140.19,-226.22"/>
 <polygon fill="black" stroke="black" points="142.49,-223.56 132.28,-220.73 138.5,-229.31 142.49,-223.56"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L42">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="195.57" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>write_clauses/2</title>
 <polygon fill="cornsilk" stroke="black" points="338.88,-219.5 211.12,-219.5 211.12,-183.5 338.88,-183.5 338.88,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="219.12" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L56">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="224.38" y="-203.38" font-family="Monospace" font-size="11.00">write_clauses/2</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- ranker_to_file/4&#45;&gt;write_clauses/2 -->
 <g id="edge2" class="edge">
 <title>ranker_to_file/4&#45;&gt;write_clauses/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L42" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L42" xlink:title="calls">
 <path fill="none" stroke="black" d="M275,-302.45C275,-283.75 275,-253.62 275,-231.33"/>
 <polygon fill="black" stroke="black" points="278.5,-231.39 275,-221.39 271.5,-231.39 278.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L42">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="275" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -106,12 +106,12 @@
 <!-- ranker_to_file/4&#45;&gt;::ranker_to_clauses/4 -->
 <g id="edge3" class="edge">
 <title>ranker_to_file/4&#45;&gt;::ranker_to_clauses/4</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L42" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L42" xlink:title="calls">
 <path fill="none" stroke="black" d="M299.49,-302.45C327.94,-282.36 375.03,-249.1 407,-226.51"/>
 <polygon fill="black" stroke="black" points="409.02,-229.37 415.17,-220.74 404.98,-223.66 409.02,-229.37"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L42">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="362.98" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -133,12 +133,12 @@
 <!-- write_comment_header/3&#45;&gt;format::format/3 -->
 <g id="edge5" class="edge">
 <title>write_comment_header/3&#45;&gt;format::format/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L49" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M129.46,-183.2C156.7,-163.11 201.81,-129.85 232.44,-107.26"/>
 <polygon fill="black" stroke="black" points="234.25,-110.27 240.22,-101.52 230.1,-104.64 234.25,-110.27"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L49">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="190.27" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -157,12 +157,12 @@
 <!-- write_comment_header/3&#45;&gt;::diagnostics/2 -->
 <g id="edge4" class="edge">
 <title>write_comment_header/3&#45;&gt;::diagnostics/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L49" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M106,-183.2C106,-164.5 106,-134.37 106,-112.08"/>
 <polygon fill="black" stroke="black" points="109.5,-112.14 106,-102.14 102.5,-112.14 109.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L49">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="106" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -170,12 +170,12 @@
 <!-- write_clauses/2&#45;&gt;format::format/3 -->
 <g id="edge6" class="edge">
 <title>write_clauses/2&#45;&gt;format::format/3</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L57" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M273.52,-183.2C271.93,-164.5 269.36,-134.37 267.46,-112.08"/>
 <polygon fill="black" stroke="black" points="270.95,-111.8 266.61,-102.13 263.97,-112.39 270.95,-111.8"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ccab53f59c2313efc82169ac0318e9be806838f9/library/ranking_protocols/ranker_export.lgt#L57">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/633f9ec2fd9766ca3325551fc504de2a7fefacc9/library/ranking_protocols/ranker_export.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="270.3" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
