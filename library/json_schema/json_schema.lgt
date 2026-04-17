@@ -23,9 +23,9 @@
 	implements(json_schema_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-03-23,
+		date is 2026-04-17,
 		comment is 'JSON Schema parser and validator supporting JSON Schema draft-07/draft-2019-09/draft-2020-12.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation used for JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -453,8 +453,8 @@
 		append(Path, [Index], ItemPath),
 		validate_value(Schema, Item, ItemPath, Defs, ItemErrors),
 		NextIndex is Index + 1,
-		validate_all_items(Schema, Items, Path, Defs, NextIndex, RestErrors),
-		append(ItemErrors, RestErrors, Errors).
+		append(ItemErrors, RestErrors, Errors),
+		validate_all_items(Schema, Items, Path, Defs, NextIndex, RestErrors).
 
 	validate_prefix_items(Schemas, JSON, Path, Defs, Errors) :-
 		(	\+ is_list(JSON) ->
@@ -468,8 +468,8 @@
 		append(Path, [Index], ItemPath),
 		validate_value(Schema, Item, ItemPath, Defs, ItemErrors),
 		NextIndex is Index + 1,
-		validate_prefix_items_list(Schemas, Items, Path, Defs, NextIndex, RestErrors),
-		append(ItemErrors, RestErrors, Errors).
+		append(ItemErrors, RestErrors, Errors),
+		validate_prefix_items_list(Schemas, Items, Path, Defs, NextIndex, RestErrors).
 
 	validate_min_items(Min, JSON, Path, Errors) :-
 		(	\+ is_list(JSON) ->
@@ -528,8 +528,8 @@
 			validate_value(PropSchema, Value, PropPath, Defs, PropErrors)
 		;	PropErrors = []
 		),
-		validate_defined_properties(RestDefs, Pairs, Path, Defs, RestErrors),
-		append(PropErrors, RestErrors, Errors).
+		append(PropErrors, RestErrors, Errors),
+		validate_defined_properties(RestDefs, Pairs, Path, Defs, RestErrors).
 
 	validate_required(ReqList, JSON, Path, Errors) :-
 		(	\+ is_json_object(JSON) ->
@@ -544,8 +544,8 @@
 			PropErrors = []
 		;	PropErrors = [error(Path, missing_required(Prop))]
 		),
-		validate_required_list(Props, Pairs, Path, RestErrors),
-		append(PropErrors, RestErrors, Errors).
+		append(PropErrors, RestErrors, Errors),
+		validate_required_list(Props, Pairs, Path, RestErrors).
 
 	validate_additional_properties(Schema, JSON, _Path, Errors) :-
 		(	\+ is_json_object(JSON) ->
@@ -586,8 +586,8 @@
 	validate_all_property_names(_, [], _, _, []) :- !.
 	validate_all_property_names(Schema, [Name-_| Rest], Path, Defs, Errors) :-
 		validate_value(Schema, Name, Path, Defs, NameErrors),
-		validate_all_property_names(Schema, Rest, Path, Defs, RestErrors),
-		append(NameErrors, RestErrors, Errors).
+		append(NameErrors, RestErrors, Errors),
+		validate_all_property_names(Schema, Rest, Path, Defs, RestErrors).
 
 	validate_pattern_properties(_, _, _, []).  % Requires regex support
 
@@ -617,8 +617,8 @@
 	validate_all_of_list([], _, _, _, []) :- !.
 	validate_all_of_list([Schema| Schemas], JSON, Path, Defs, Errors) :-
 		validate_value(Schema, JSON, Path, Defs, SchemaErrors),
-		validate_all_of_list(Schemas, JSON, Path, Defs, RestErrors),
-		append(SchemaErrors, RestErrors, Errors).
+		append(SchemaErrors, RestErrors, Errors),
+		validate_all_of_list(Schemas, JSON, Path, Defs, RestErrors).
 
 	validate_any_of(Schemas, JSON, Path, Defs, Errors) :-
 		(	member(Schema, Schemas),

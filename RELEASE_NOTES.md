@@ -63,6 +63,9 @@ tail-recursive.
 * IMPROVED: Rewritten `base58` library auxiliary predicate to be
 tail-recursive.
 
+* IMPROVED: Rewritten `json_schema` library auxiliary predicates to be
+tail-recursive.
+
 * IMPROVED: The `pairing_heap(_Order_)::top_next/5` library predicate to use a
 tail-recursive auxiliary predicate.
 
