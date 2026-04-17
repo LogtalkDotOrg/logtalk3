@@ -22,9 +22,9 @@
 :- object(url(_Representation_)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-04-01,
+		date is 2026-04-17,
 		comment is 'URL validating, parsing, and normalizing predicates following RFC3986 nomenclature.',
 		parameters is [
 			'Representation' - 'URL and is components representation. Valid values are ``atom``, ``codes``, and ``chars``.'
@@ -540,8 +540,7 @@
 		[].
 
 	dot_identifiers(Codes) -->
-		[0'.], identifier(Codes0), dot_identifiers(Codes1),
-		{append([0'.| Codes0], Codes1, Codes)}.
+		[0'.], identifier(Codes0), {append([0'.| Codes0], Codes1, Codes)}, dot_identifiers(Codes1).
 	dot_identifiers([]) -->
 		[].
 

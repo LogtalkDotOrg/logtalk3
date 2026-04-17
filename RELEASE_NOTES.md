@@ -99,6 +99,9 @@ tail-recursive.
 
 * IMPROVED: Rewritten `tzif` library auxiliary predicate to be tail-recursive.
 
+* IMPROVED: Rewritten `url` library auxiliary non-terminal to be
+tail-recursive.
+
 * IMPROVED: Rewritten two `yaml` library auxiliary predicates to be
 tail-recursive.
 
