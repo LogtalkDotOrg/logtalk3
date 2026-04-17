@@ -22,9 +22,9 @@
 :- object(base58).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2025-01-23,
+		date is 2026-04-17,
 		comment is 'Base58 encoder and decoder (Bitcoin alphabet variant).'
 	]).
 
@@ -82,16 +82,16 @@
 	% decoder - convert Base58 string to bytes
 
 	decode(Codes, Bytes) :-
-		count_leading(Codes, 0'1, LeadingZeros, RestCodes),
+		count_leading(Codes, 0'1, 0, LeadingZeros, RestCodes),
 		codes_to_number(RestCodes, 0, Number),
 		number_to_bytes(Number, [], RestBytes),
 		leading_zeros(LeadingZeros, RestBytes, Bytes).
 
-	count_leading([Code| Codes], Code, N, Rest) :-
+	count_leading([Code| Codes], Code, N0, N, Rest) :-
 		!,
-		count_leading(Codes, Code, N1, Rest),
-		N is N1 + 1.
-	count_leading(Codes, _, 0, Codes).
+		N1 is N0 + 1,
+		count_leading(Codes, Code, N1, N, Rest).
+	count_leading(Codes, _, N, N, Codes).
 
 	codes_to_number([], Number, Number).
 	codes_to_number([Code| Codes], Number0, Number) :-
@@ -115,7 +115,7 @@
 	% encoder - convert bytes to Base58 string
 
 	encode(Bytes, Codes) :-
-		count_leading(Bytes, 0, LeadingZeros, RestBytes),
+		count_leading(Bytes, 0, 0, LeadingZeros, RestBytes),
 		bytes_to_number(RestBytes, 0, Number),
 		number_to_codes(Number, [], RestCodes),
 		leading_ones(LeadingZeros, RestCodes, Codes).
