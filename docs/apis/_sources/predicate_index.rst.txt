@@ -3811,7 +3811,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`classifier_protocol <classifier_protocol/0::diagnostic/2>`
-* :ref:`ranker_diagnostics <ranker_diagnostics/0::diagnostic/2>`
+* :ref:`ranker_protocol <ranker_protocol/0::diagnostic/2>`
 * :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostic/2>`
 
 ``diagnostic/3``
@@ -3863,7 +3863,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`classifier_protocol <classifier_protocol/0::diagnostics/2>`
-* :ref:`ranker_diagnostics <ranker_diagnostics/0::diagnostics/2>`
 * :ref:`ranker_protocol <ranker_protocol/0::diagnostics/2>`
 * :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostics/2>`
 
@@ -6630,7 +6629,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ranking_dataset_analysis <ranking_dataset_analysis/0::grouped_dataset_groups/2>`
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::grouped_dataset_groups/2>`
 
 ``grouped_dataset_items/3``
 ---------------------------
@@ -6640,7 +6639,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ranking_dataset_analysis <ranking_dataset_analysis/0::grouped_dataset_items/3>`
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::grouped_dataset_items/3>`
 
 ``grouped_dataset_summary/2``
 -----------------------------
@@ -6650,7 +6649,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ranking_dataset_analysis <ranking_dataset_analysis/0::grouped_dataset_summary/2>`
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::grouped_dataset_summary/2>`
 
 ``guess_all_extensions/2``
 --------------------------
@@ -12178,7 +12177,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ranking_dataset_analysis <ranking_dataset_analysis/0::pairwise_dataset_connected_components/2>`
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::pairwise_dataset_connected_components/2>`
 
 ``pairwise_dataset_declared_items/2``
 -------------------------------------
@@ -12188,7 +12187,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ranking_dataset_analysis <ranking_dataset_analysis/0::pairwise_dataset_declared_items/2>`
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::pairwise_dataset_declared_items/2>`
 
 ``pairwise_dataset_items/2``
 ----------------------------
@@ -12198,7 +12197,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ranking_dataset_analysis <ranking_dataset_analysis/0::pairwise_dataset_items/2>`
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::pairwise_dataset_items/2>`
 
 ``pairwise_dataset_preferences/2``
 ----------------------------------
@@ -12208,7 +12207,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ranking_dataset_analysis <ranking_dataset_analysis/0::pairwise_dataset_preferences/2>`
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::pairwise_dataset_preferences/2>`
 
 ``pairwise_dataset_summary/2``
 ------------------------------
@@ -12218,7 +12217,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ranking_dataset_analysis <ranking_dataset_analysis/0::pairwise_dataset_summary/2>`
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::pairwise_dataset_summary/2>`
 
 ``pairwise_dataset_win_totals/2``
 ---------------------------------
@@ -12228,7 +12227,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ranking_dataset_analysis <ranking_dataset_analysis/0::pairwise_dataset_win_totals/2>`
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::pairwise_dataset_win_totals/2>`
 
 ``params/2``
 ------------
@@ -13686,7 +13685,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ranker_diagnostics <ranker_diagnostics/0::ranker_options/2>`
+* :ref:`ranker_protocol <ranker_protocol/0::ranker_options/2>`
 
 ``ranker_to_clauses/4``
 -----------------------
@@ -13706,7 +13705,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ranker_export <ranker_export/0::ranker_to_file/4>`
 * :ref:`ranker_protocol <ranker_protocol/0::ranker_to_file/4>`
 
 ``rd/1``
@@ -17927,7 +17925,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ranking_dataset_validation <ranking_dataset_validation/0::validate_grouped_dataset/1>`
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::validate_grouped_dataset/1>`
 
 ``validate_grouped_dataset/2``
 ------------------------------
@@ -17937,7 +17935,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ranking_dataset_validation <ranking_dataset_validation/0::validate_grouped_dataset/2>`
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::validate_grouped_dataset/2>`
 
 ``validate_pairwise_dataset/1``
 -------------------------------
@@ -17947,7 +17945,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ranking_dataset_validation <ranking_dataset_validation/0::validate_pairwise_dataset/1>`
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::validate_pairwise_dataset/1>`
 
 ``validate_pairwise_dataset/2``
 -------------------------------
@@ -17957,7 +17955,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ranking_dataset_validation <ranking_dataset_validation/0::validate_pairwise_dataset/2>`
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::validate_pairwise_dataset/2>`
 
 ``valids/2``
 ------------

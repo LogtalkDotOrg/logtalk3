@@ -247,22 +247,22 @@ the shared ranking-family contracts.</p>
 <p>The library includes a small family of reusable categories intended to
 be imported by ranking algorithm implementations:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ranking_dataset_analysis</span></code> — dataset collection, summaries, graph
-connectivity, and connected-component analysis.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ranking_dataset_validation</span></code> — pairwise and grouped dataset
-correctness checks.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ranker_diagnostics</span></code> — representation-independent access to
-learned-ranker diagnostics.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ranker_export</span></code> — reusable helpers for exporting learned rankers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ranking_dataset_common</span></code> — dataset collection, summaries, graph
+connectivity, connected-component analysis, and pairwise/grouped
+dataset correctness checks.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ranker_common</span></code> — representation-independent access to
+learned-ranker diagnostics plus reusable helpers for exporting learned
+rankers.</p></li>
 </ul>
-<p>These categories are designed to keep responsibilities separate so that
-a ranker can import only the shared behavior it needs.</p>
+<p>These categories are designed to keep ranking implementations compact
+while keeping the shared protocol-facing behavior reusable.</p>
 </section>
 <section id="diagnostics">
 <h2>Diagnostics<a class="headerlink" href="#diagnostics" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">ranker_diagnostics</span></code> category provides shared accessor predicates
-such as <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">ranker_options/2</span></code>.
-These predicates make it possible to inspect learned-ranker metadata
+<p>The <code class="docutils literal notranslate"><span class="pre">ranker_common</span></code> category provides shared accessor predicates such
+as <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">ranker_options/2</span></code>,
+together with the shared <code class="docutils literal notranslate"><span class="pre">ranker_to_file/4</span></code> export helper. These
+predicates make it possible to inspect and export learned rankers
 without depending on the exact term representation used by a particular
 ranking algorithm implementation.</p>
 <p>The detailed contents of the diagnostics data are ranking algorithm
@@ -298,29 +298,31 @@ file:</p>
 <h2>Test datasets<a class="headerlink" href="#test-datasets" title="Link to this heading"></a></h2>
 <p>Several sample datasets are included in the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory:</p>
 <ul class="simple">
-<li><p><strong>Head to Head</strong> — A compact pairwise-comparison dataset with four
+<li><p><code class="docutils literal notranslate"><span class="pre">head_to_head.lgt</span></code> — A compact pairwise-comparison dataset with four
 items and weighted preferences suitable for smoke testing
 deterministic ranking.</p></li>
-<li><p><strong>Search Results</strong> — A grouped ranking dataset with two query groups,
-three items per group, and non-negative integer relevance judgments.</p></li>
-<li><p><strong>Malformed Pairwise</strong> — A negative fixture where a preference
+<li><p><code class="docutils literal notranslate"><span class="pre">search_results.lgt</span></code> — A grouped ranking dataset with two query
+groups, three items per group, and non-negative integer relevance
+judgments.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_pairwise.lgt</span></code> — A negative fixture where a preference
 mentions an undeclared item.</p></li>
-<li><p><strong>Malformed Duplicate Items</strong> — A negative pairwise fixture where an
-item is declared more than once.</p></li>
-<li><p><strong>Malformed Self Preference</strong> — A negative pairwise fixture where an
-item is preferred over itself.</p></li>
-<li><p><strong>Malformed Non-Positive Weight</strong> — A negative pairwise fixture where
-a preference weight is not positive.</p></li>
-<li><p><strong>Disconnected Pairwise</strong> — A pairwise fixture with more than one
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_duplicate_items.lgt</span></code> — A negative pairwise fixture where
+an item is declared more than once.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_self_preference.lgt</span></code> — A negative pairwise fixture where
+an item is preferred over itself.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_non_positive_weight.lgt</span></code> — A negative pairwise fixture
+where a preference weight is not positive.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">disconnected_pairwise.lgt</span></code> — A pairwise fixture with more than one
 connected component, useful for testing algorithms that require
 identifiable global scores.</p></li>
-<li><p><strong>Cyclic Pairwise</strong> — A connected pairwise fixture with a preference
-cycle, useful for smoke testing algorithms on non-transitive data.</p></li>
-<li><p><strong>Malformed Grouped</strong> — A negative fixture where a grouped relevance
-value is not a non-negative integer.</p></li>
-<li><p><strong>Sparse Preferences</strong> — A sparse pairwise dataset with an isolated
-item, useful for testing dataset summaries and disconnected-graph
-detection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cyclic_pairwise.lgt</span></code> — A connected pairwise fixture with a
+preference cycle, useful for smoke testing algorithms on
+non-transitive data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_grouped.lgt</span></code> — A negative fixture where a grouped
+relevance value is not a non-negative integer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sparse_preferences.lgt</span></code> — A sparse pairwise dataset with an
+isolated item, useful for testing dataset summaries and
+disconnected-graph detection.</p></li>
 </ul>
 </section>
 </section>

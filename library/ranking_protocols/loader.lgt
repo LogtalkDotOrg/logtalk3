@@ -23,11 +23,9 @@
 	logtalk_load(types(loader)),
 	logtalk_load(format(loader)),
 	logtalk_load([
-		ranking_dataset_analysis,
-		ranking_dataset_validation,
-		ranker_diagnostics,
-		ranker_export,
 		ranker_protocol,
+		ranker_common,
+		ranking_dataset_common,
 		ranking_dataset_protocol,
 		pairwise_ranking_dataset_protocol
 	], [

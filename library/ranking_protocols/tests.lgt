@@ -20,7 +20,7 @@
 
 
 :- object(ranking_test_support,
-	imports([ranking_dataset_analysis, ranking_dataset_validation])).
+	imports([ranking_dataset_common])).
 
 	:- public(rank_candidates/3).
 	:- public(win_totals/2).
@@ -54,7 +54,7 @@
 
 :- object(sample_ranker,
 	implements(ranker_protocol),
-	imports([ranking_dataset_analysis, ranking_dataset_validation, ranker_diagnostics, ranker_export])).
+	imports([ranking_dataset_common, ranker_common])).
 
 	:- uses(list, [
 		member/2
@@ -74,9 +74,6 @@
 
 	rank(sample_ranker(Strengths, _Diagnostics), Candidates, Ranking) :-
 		ranking_test_support::rank_candidates(Strengths, Candidates, Ranking).
-
-	diagnostics(Ranker, Diagnostics) :-
-		ranker_diagnostics_data(Ranker, Diagnostics).
 
 	ranker_diagnostics_data(sample_ranker(_Strengths, Diagnostics), Diagnostics).
 

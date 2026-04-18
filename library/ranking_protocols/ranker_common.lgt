@@ -19,38 +19,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- category(ranker_diagnostics).
+:- category(ranker_common,
+	implements(ranker_protocol)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-16,
-		comment is 'Shared predicates for accessing ranker diagnostics in a representation-independent way.'
+		date is 2026-04-18,
+		comment is 'Shared predicates for ranker diagnostics and export.'
+	]).
+
+	:- uses(format, [
+		format/3
 	]).
 
 	:- uses(list, [
-		member/2
-	]).
-
-	:- public(diagnostics/2).
-	:- mode(diagnostics(+compound, -list(compound)), one).
-	:- info(diagnostics/2, [
-		comment is 'Returns the diagnostics metadata associated with a learned ranker.',
-		argnames is ['Ranker', 'Diagnostics']
-	]).
-
-	:- public(diagnostic/2).
-	:- mode(diagnostic(+compound, ?compound), zero_or_more).
-	:- info(diagnostic/2, [
-		comment is 'Tests or enumerates individual diagnostics metadata terms for a learned ranker.',
-		argnames is ['Ranker', 'Diagnostic']
-	]).
-
-	:- public(ranker_options/2).
-	:- mode(ranker_options(+compound, -list(compound)), zero_or_one).
-	:- info(ranker_options/2, [
-		comment is 'Returns the effective training options recorded in a learned ranker diagnostics list.',
-		argnames is ['Ranker', 'Options']
+		member/2,
+		memberchk/2
 	]).
 
 	:- protected(ranker_diagnostics_data/2).
@@ -68,6 +53,26 @@
 		member(Diagnostic, Diagnostics).
 
 	ranker_options(Ranker, Options) :-
-		diagnostic(Ranker, options(Options)).
+		diagnostics(Ranker, Diagnostics),
+		memberchk(options(Options), Diagnostics).
+
+	ranker_to_file(Dataset, Ranker, Functor, File) :-
+		::ranker_to_clauses(Dataset, Ranker, Functor, Clauses),
+		open(File, write, Stream),
+		write_comment_header(Functor, Ranker, Stream),
+		write_clauses(Clauses, Stream),
+		close(Stream).
+
+	write_comment_header(Functor, Ranker, Stream) :-
+		format(Stream, '% exported ranker predicate: ~q~n', [Functor]),
+		(	::diagnostics(Ranker, Diagnostics) ->
+			format(Stream, '% diagnostics: ~q~n', [Diagnostics])
+		;	true
+		).
+
+	write_clauses([], _Stream).
+	write_clauses([Clause| Clauses], Stream) :-
+		format(Stream, '~q.~n', [Clause]),
+		write_clauses(Clauses, Stream).
 
 :- end_category.

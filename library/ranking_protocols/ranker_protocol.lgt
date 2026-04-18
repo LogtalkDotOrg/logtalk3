@@ -22,9 +22,9 @@
 :- protocol(ranker_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-16,
+		date is 2026-04-18,
 		comment is 'Protocol for machine learning rankers.',
 		see_also is [bradley_terry, ranking_dataset_protocol, pairwise_ranking_dataset_protocol]
 	]).
@@ -48,6 +48,20 @@
 	:- info(diagnostics/2, [
 		comment is 'Returns diagnostics and metadata associated with a learned ranker in a representation-independent way.',
 		argnames is ['Ranker', 'Diagnostics']
+	]).
+
+	:- public(diagnostic/2).
+	:- mode(diagnostic(+compound, ?compound), zero_or_more).
+	:- info(diagnostic/2, [
+		comment is 'Tests or enumerates individual diagnostics metadata terms for a learned ranker.',
+		argnames is ['Ranker', 'Diagnostic']
+	]).
+
+	:- public(ranker_options/2).
+	:- mode(ranker_options(+compound, -list(compound)), zero_or_one).
+	:- info(ranker_options/2, [
+		comment is 'Returns the effective training options recorded in a learned ranker diagnostics list.',
+		argnames is ['Ranker', 'Options']
 	]).
 
 	:- public(ranker_to_clauses/4).

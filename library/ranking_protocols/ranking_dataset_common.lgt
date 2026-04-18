@@ -19,21 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- category(ranking_dataset_analysis).
+:- category(ranking_dataset_common).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
-		comment is 'Shared predicates for collecting and analyzing ranking datasets.'
-	]).
-
-	:- uses(list, [
-		append/3, length/2, member/2, reverse/2
-	]).
-
-	:- uses(numberlist, [
-		sum/2
+		date is 2026-04-18,
+		comment is 'Shared predicates for collecting, analyzing, and validating ranking datasets.'
 	]).
 
 	:- public(pairwise_dataset_declared_items/2).
@@ -99,6 +91,42 @@
 		argnames is ['Dataset', 'Summary']
 	]).
 
+	:- public(validate_pairwise_dataset/1).
+	:- mode(validate_pairwise_dataset(+object_identifier), one).
+	:- info(validate_pairwise_dataset/1, [
+		comment is 'Validates a pairwise ranking dataset and throws an error if the dataset is malformed or disconnected.',
+		argnames is ['Dataset']
+	]).
+
+	:- public(validate_pairwise_dataset/2).
+	:- mode(validate_pairwise_dataset(+object_identifier, -list(compound)), one).
+	:- info(validate_pairwise_dataset/2, [
+		comment is 'Validates a pairwise ranking dataset and returns its dataset summary when validation succeeds.',
+		argnames is ['Dataset', 'Summary']
+	]).
+
+	:- public(validate_grouped_dataset/1).
+	:- mode(validate_grouped_dataset(+object_identifier), one).
+	:- info(validate_grouped_dataset/1, [
+		comment is 'Validates a grouped ranking dataset and throws an error if the dataset is malformed.',
+		argnames is ['Dataset']
+	]).
+
+	:- public(validate_grouped_dataset/2).
+	:- mode(validate_grouped_dataset(+object_identifier, -list(compound)), one).
+	:- info(validate_grouped_dataset/2, [
+		comment is 'Validates a grouped ranking dataset and returns its dataset summary when validation succeeds.',
+		argnames is ['Dataset', 'Summary']
+	]).
+
+	:- uses(list, [
+		append/3, length/2, member/2, memberchk/2, reverse/2
+	]).
+
+	:- uses(numberlist, [
+		sum/2
+	]).
+
 	pairwise_dataset_declared_items(Dataset, Items) :-
 		findall(Item, Dataset::item(Item), Items).
 
@@ -153,6 +181,48 @@
 			items(NumberOfItems),
 			relevance_judgments(NumberOfJudgments)
 		].
+
+	validate_pairwise_dataset(Dataset) :-
+		validate_pairwise_dataset(Dataset, _Summary).
+
+	validate_pairwise_dataset(Dataset, Summary) :-
+		::pairwise_dataset_declared_items(Dataset, RawItems),
+		RawItems \== [],
+		check_unique_items(RawItems),
+		::pairwise_dataset_items(Dataset, Items),
+		::pairwise_dataset_preferences(Dataset, Preferences),
+		forall(
+			member(p(Winner, Loser, Weight), Preferences),
+			validate_preference(Items, Winner, Loser, Weight)
+		),
+		::pairwise_dataset_connected_components(Dataset, Components),
+		(   Components = [_] ->
+			true
+		;   domain_error(connected_pairwise_dataset, Components)
+		),
+		::pairwise_dataset_summary(Dataset, Summary).
+
+	validate_grouped_dataset(Dataset) :-
+		validate_grouped_dataset(Dataset, _Summary).
+
+	validate_grouped_dataset(Dataset, Summary) :-
+		findall(Group, Dataset::group(Group), RawGroups),
+		RawGroups \== [],
+		check_unique_groups(RawGroups),
+		::grouped_dataset_groups(Dataset, Groups),
+		forall(
+			Dataset::item(Group, _Item),
+			memberchk(Group, Groups)
+		),
+		forall(
+			member(Group, Groups),
+			validate_group_items(Dataset, Group)
+		),
+		forall(
+			Dataset::relevance(Group, Item, Relevance),
+			validate_relevance(Dataset, Groups, Group, Item, Relevance)
+		),
+		::grouped_dataset_summary(Dataset, Summary).
 
 	connected_components([], _Preferences, []).
 	connected_components([Item| Items], Preferences, [Component| Components]) :-
@@ -215,6 +285,56 @@
 	item_wins(Item, Preferences, Wins) :-
 		findall(Weight, member(p(Item, _, Weight), Preferences), Weights),
 		sum(Weights, Wins).
+
+	check_unique_items([]).
+	check_unique_items([Item| Items]) :-
+		(   member(Item, Items) ->
+			domain_error(unique_items, [Item| Items])
+		;   check_unique_items(Items)
+		).
+
+	check_unique_groups([]).
+	check_unique_groups([Group| Groups]) :-
+		(   member(Group, Groups) ->
+			domain_error(unique_groups, [Group| Groups])
+		;   check_unique_groups(Groups)
+		).
+
+	validate_group_items(Dataset, Group) :-
+		findall(Item, Dataset::item(Group, Item), RawItems),
+		check_unique_items(RawItems).
+
+	validate_preference(Items, Winner, Loser, Weight) :-
+		(   member(Winner, Items) ->
+			true
+		;   existence_error(item, Winner)
+		),
+		(   member(Loser, Items) ->
+			true
+		;   existence_error(item, Loser)
+		),
+		(   Winner == Loser ->
+			domain_error(distinct_items, Winner-Loser)
+		;   true
+		),
+		(   number(Weight), Weight > 0 ->
+			true
+		;   domain_error(positive_number, Weight)
+		).
+
+	validate_relevance(Dataset, Groups, Group, Item, Relevance) :-
+		(   member(Group, Groups) ->
+			true
+		;   existence_error(group, Group)
+		),
+		(   Dataset::item(Group, Item) ->
+			true
+		;   existence_error(item, Item)
+		),
+		(   integer(Relevance), Relevance >= 0 ->
+			true
+		;   domain_error(non_negative_integer, Relevance)
+		).
 
 	unique_list([], []).
 	unique_list([Item| Items], UniqueItems) :-

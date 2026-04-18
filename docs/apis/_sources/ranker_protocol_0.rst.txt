@@ -14,8 +14,8 @@ Protocol for machine learning rankers.
 |    ``logtalk_load(ranking_protocols(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-04-16
+| **Version:** 1:1:0
+| **Date:** 2026-04-18
 
 | **Compilation flags:**
 |    ``static``
@@ -91,6 +91,44 @@ Returns diagnostics and metadata associated with a learned ranker in a represent
 |    ``diagnostics(Ranker,Diagnostics)``
 | **Mode and number of proofs:**
 |    ``diagnostics(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: diagnostic/2
+.. _ranker_protocol/0::diagnostic/2:
+
+``diagnostic/2``
+^^^^^^^^^^^^^^^^
+
+Tests or enumerates individual diagnostics metadata terms for a learned ranker.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostic(Ranker,Diagnostic)``
+| **Mode and number of proofs:**
+|    ``diagnostic(+compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: ranker_options/2
+.. _ranker_protocol/0::ranker_options/2:
+
+``ranker_options/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the effective training options recorded in a learned ranker diagnostics list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ranker_options(Ranker,Options)``
+| **Mode and number of proofs:**
+|    ``ranker_options(+compound,-list(compound))`` - ``zero_or_one``
 
 
 ------------

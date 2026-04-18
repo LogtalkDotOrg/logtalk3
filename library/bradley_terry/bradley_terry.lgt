@@ -20,13 +20,12 @@
 
 
 :- object(bradley_terry,
-	implements(ranker_protocol),
-	imports([options, ranking_dataset_analysis, ranking_dataset_validation, ranker_diagnostics, ranker_export])).
+	imports([options, ranking_dataset_common, ranker_common])).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-04-18,
 		comment is 'Bradley-Terry pairwise preference ranker. Learns one positive strength parameter per item from a connected dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		remarks is [
 			'Algorithm' - 'Uses a deterministic minorization-maximization update to estimate one relative strength parameter per item from weighted pairwise wins and losses.',
@@ -48,13 +47,6 @@
 	:- info(strengths/2, [
 		comment is 'Returns the learned item-strength pairs.',
 		argnames is ['Ranker', 'Strengths']
-	]).
-
-	:- protected(ranker_diagnostics_data/2).
-	:- mode(ranker_diagnostics_data(+compound, -list(compound)), one).
-	:- info(ranker_diagnostics_data/2, [
-		comment is 'Returns the ranker diagnostics data.',
-		argnames is ['Ranker', 'Diagnostics']
 	]).
 
 	:- uses(format, [
@@ -92,9 +84,6 @@
 		rank_candidates(Strengths, Candidates, Ranking).
 
 	strengths(bt_ranker(_Items, Strengths, _Diagnostics), Strengths).
-
-	diagnostics(Ranker, Diagnostics) :-
-		ranker_diagnostics_data(Ranker, Diagnostics).
 
 	ranker_diagnostics_data(bt_ranker(_Items, _Strengths, Diagnostics), Diagnostics).
 

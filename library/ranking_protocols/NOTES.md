@@ -36,24 +36,23 @@ Shared categories
 The library includes a small family of reusable categories intended to be
 imported by ranking algorithm implementations:
 
-- `ranking_dataset_analysis` — dataset collection, summaries, graph
-  connectivity, and connected-component analysis.
-- `ranking_dataset_validation` — pairwise and grouped dataset correctness
-  checks.
-- `ranker_diagnostics` — representation-independent access to learned-ranker
-  diagnostics.
-- `ranker_export` — reusable helpers for exporting learned rankers.
+- `ranking_dataset_common` — dataset collection, summaries, graph
+  connectivity, connected-component analysis, and pairwise/grouped dataset
+  correctness checks.
+- `ranker_common` — representation-independent access to learned-ranker
+  diagnostics plus reusable helpers for exporting learned rankers.
 
-These categories are designed to keep responsibilities separate so that a
-ranker can import only the shared behavior it needs.
+These categories are designed to keep ranking implementations compact while
+keeping the shared protocol-facing behavior reusable.
 
 Diagnostics
 -----------
 
-The `ranker_diagnostics` category provides shared accessor predicates such as
-`diagnostics/2`, `diagnostic/2`, and `ranker_options/2`. These predicates make
-it possible to inspect learned-ranker metadata without depending on the exact
-term representation used by a particular ranking algorithm implementation.
+The `ranker_common` category provides shared accessor predicates such as
+`diagnostics/2`, `diagnostic/2`, and `ranker_options/2`, together with the
+shared `ranker_to_file/4` export helper. These predicates make it possible to
+inspect and export learned rankers without depending on the exact term
+representation used by a particular ranking algorithm implementation.
 
 The detailed contents of the diagnostics data are ranking algorithm
 implementation dependent. For example, one ranker may report convergence
@@ -89,33 +88,33 @@ Test datasets
 
 Several sample datasets are included in the `test_datasets` directory:
 
-- **Head to Head** — A compact pairwise-comparison dataset with four items
+- `head_to_head.lgt` — A compact pairwise-comparison dataset with four items
   and weighted preferences suitable for smoke testing deterministic ranking.
 
-- **Search Results** — A grouped ranking dataset with two query groups,
+- `search_results.lgt` — A grouped ranking dataset with two query groups,
   three items per group, and non-negative integer relevance judgments.
 
-- **Malformed Pairwise** — A negative fixture where a preference mentions an
+- `malformed_pairwise.lgt` — A negative fixture where a preference mentions an
   undeclared item.
 
-- **Malformed Duplicate Items** — A negative pairwise fixture where an item is
+- `malformed_duplicate_items.lgt` — A negative pairwise fixture where an item is
   declared more than once.
 
-- **Malformed Self Preference** — A negative pairwise fixture where an item is
+- `malformed_self_preference.lgt` — A negative pairwise fixture where an item is
   preferred over itself.
 
-- **Malformed Non-Positive Weight** — A negative pairwise fixture where a
+- `malformed_non_positive_weight.lgt` — A negative pairwise fixture where a
   preference weight is not positive.
 
-- **Disconnected Pairwise** — A pairwise fixture with more than one connected
+- `disconnected_pairwise.lgt` — A pairwise fixture with more than one connected
   component, useful for testing algorithms that require identifiable global
   scores.
 
-- **Cyclic Pairwise** — A connected pairwise fixture with a preference cycle,
+- `cyclic_pairwise.lgt` — A connected pairwise fixture with a preference cycle,
   useful for smoke testing algorithms on non-transitive data.
 
-- **Malformed Grouped** — A negative fixture where a grouped relevance value
+- `malformed_grouped.lgt` — A negative fixture where a grouped relevance value
   is not a non-negative integer.
 
-- **Sparse Preferences** — A sparse pairwise dataset with an isolated item,
+- `sparse_preferences.lgt` — A sparse pairwise dataset with an isolated item,
   useful for testing dataset summaries and disconnected-graph detection.
