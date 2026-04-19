@@ -109,14 +109,14 @@ Test datasets
 
 Several sample datasets are included in the `test_datasets` directory:
 
-- **Play Tennis** — The classic weather/tennis dataset with 14 examples
+- `play_tennis.lgt` — The classic weather/tennis dataset with 14 examples
   and 4 discrete attributes (outlook, temperature, humidity, wind).
   Originally from Quinlan (1986) and widely used in machine learning
   textbooks including Mitchell (1997). Also available from the UCI
   Machine Learning Repository:
   https://archive.ics.uci.edu/dataset/349/tennis+major+tournament+match+statistics
 
-- **Contact Lenses** — A dataset with 24 examples and 4 discrete
+- `contact_lenses.lgt` — A dataset with 24 examples and 4 discrete
   attributes (age, spectacle prescription, astigmatism, tear production
   rate) for deciding the type of contact lenses to prescribe. Originally
   from Cendrowska, J. (1987). PRISM: An algorithm for inducing modular
@@ -124,7 +124,7 @@ Several sample datasets are included in the `test_datasets` directory:
   Available from the UCI Machine Learning Repository:
   https://archive.ics.uci.edu/dataset/58/lenses
 
-- **Iris** — The classic Iris flower dataset with 150 examples and 4
+- `iris.lgt` — The classic Iris flower dataset with 150 examples and 4
   continuous attributes (sepal length, sepal width, petal length, petal
   width) for classifying iris species (setosa, versicolor, virginica).
   Originally from Fisher, R.A. (1936). The use of multiple measurements
@@ -132,7 +132,7 @@ Several sample datasets are included in the `test_datasets` directory:
   from the UCI Machine Learning Repository:
   https://archive.ics.uci.edu/dataset/53/iris
 
-- **Breast Cancer** — A dataset with 286 examples and 9 discrete
+- `breast_cancer.lgt` — A dataset with 286 examples and 9 discrete
   attributes (age, menopause, tumor size, inv-nodes, node-caps, degree
   of malignancy, breast, breast quadrant, irradiation) for predicting
   breast cancer recurrence events. Contains missing values (9 examples
@@ -143,14 +143,14 @@ Several sample datasets are included in the `test_datasets` directory:
   Repository:
   https://archive.ics.uci.edu/dataset/14/breast+cancer
 
-- **Gaussian Anomalies** — A synthetic 2D anomaly detection dataset with
+- `gaussian_anomalies.lgt` — A synthetic 2D anomaly detection dataset with
   50 examples and 2 continuous attributes (x, y). Normal points are sampled
   from a standard normal distribution centered at the origin. Anomalous
   points are placed far from the cluster center. Inspired by the canonical
   test case used in the Extended Isolation Forest paper by Hariri et al.
   (2019).
 
-- **Shuttle Anomalies** — A subset of the Statlog Shuttle dataset with 50
+- `shuttle_anomalies.lgt` — A subset of the Statlog Shuttle dataset with 50
   examples and 9 continuous attributes representing sensor readings from
   the NASA Space Shuttle. Class 1 (Rad Flow) is the majority class
   (normal), while all other classes are treated as anomalies. Originally
@@ -158,7 +158,7 @@ Several sample datasets are included in the `test_datasets` directory:
   Repository:
   https://archive.ics.uci.edu/dataset/148/statlog+shuttle
 
-- **Water Potability** — A water potability dataset with 50 examples and
+- `water_potability.lgt` — A water potability dataset with 50 examples and
   9 continuous attributes (pH, hardness, solids, chloramines, sulfate,
   conductivity, organic carbon, trihalomethanes, turbidity). Normal
   instances represent potable water samples within acceptable ranges.
@@ -166,7 +166,7 @@ Several sample datasets are included in the `test_datasets` directory:
   levels. Based on the publicly available Water Quality dataset (Kadiwal,
   A., 2020, Kaggle).
 
-- **Sensor Anomalies** — A synthetic industrial sensor anomaly dataset
+- `sensor_anomalies.lgt` — A synthetic industrial sensor anomaly dataset
   with 40 examples and 3 continuous attributes (temperature, pressure,
   vibration). Contains missing values (14 examples with missing values,
   represented using anonymous variables). Normal readings cluster around
