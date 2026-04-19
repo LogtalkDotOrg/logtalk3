@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-891.25 2670,-891.25 2670,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object linear_svm</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;04&#45;18, 09:20</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;04&#45;20, 00:16</text>
 <g id="clust1" class="cluster">
 <title>cluster_linear_svm_object</title>
 <g id="a_clust1"><a xlink:title="linear_svm">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 2646,-54.25 2646,-54.25 2652,-54.25 2658,-60.25 2658,-66.25 2658,-66.25 2658,-867.25 2658,-867.25 2658,-873.25 2652,-879.25 2646,-879.25 2646,-879.25 20,-879.25 20,-879.25 14,-879.25 8,-873.25 8,-867.25 8,-867.25 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-861.5" font-family="Monospace" font-size="10.00" fill="dimgray">linear_svm</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>learn/3</title>
 <polygon fill="springgreen" stroke="black" points="1014.88,-721.25 941.12,-721.25 941.12,-685.25 1014.88,-685.25 1014.88,-721.25"/>
 <text xml:space="preserve" text-anchor="start" x="949.12" y="-705.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L40">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="954.38" y="-705.12" font-family="Monospace" font-size="11.00">learn/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>dataset_attributes/2</title>
 <polygon fill="cornsilk" stroke="black" points="308.75,-602 147.25,-602 147.25,-566 308.75,-566 308.75,-602"/>
 <text xml:space="preserve" text-anchor="start" x="155.25" y="-586.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L97">
+<g id="a_node4_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L97">
 <text xml:space="preserve" text-anchor="start" x="160.5" y="-585.88" font-family="Monospace" font-size="11.00">dataset_attributes/2</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- learn/3&#45;&gt;dataset_attributes/2 -->
 <g id="edge2" class="edge">
 <title>learn/3&#45;&gt;dataset_attributes/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74" xlink:title="calls">
 <path fill="none" stroke="black" d="M940.71,-697.07C841.58,-683.18 563.1,-643.51 320.11,-602.33"/>
 <polygon fill="black" stroke="black" points="320.87,-598.91 310.42,-600.68 319.69,-605.81 320.87,-598.91"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="607.33" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>build_encoders/3</title>
 <polygon fill="cornsilk" stroke="black" points="986.25,-602 851.75,-602 851.75,-566 986.25,-566 986.25,-602"/>
 <text xml:space="preserve" text-anchor="start" x="859.75" y="-586.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L104">
+<g id="a_node5_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L104">
 <text xml:space="preserve" text-anchor="start" x="865" y="-585.88" font-family="Monospace" font-size="11.00">build_encoders/3</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- learn/3&#45;&gt;build_encoders/3 -->
 <g id="edge3" class="edge">
 <title>learn/3&#45;&gt;build_encoders/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74" xlink:title="calls">
 <path fill="none" stroke="black" d="M969.29,-684.95C959.71,-665.9 944.16,-635 932.89,-612.6"/>
 <polygon fill="black" stroke="black" points="936.04,-611.08 928.42,-603.72 929.79,-614.23 936.04,-611.08"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="950.27" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>examples_to_rows/3</title>
 <polygon fill="cornsilk" stroke="black" points="727,-602 579,-602 579,-566 727,-566 727,-602"/>
 <text xml:space="preserve" text-anchor="start" x="587" y="-586.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L139" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L139">
+<g id="a_node8_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L139" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L139">
 <text xml:space="preserve" text-anchor="start" x="592.25" y="-585.88" font-family="Monospace" font-size="11.00">examples_to_rows/3</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- learn/3&#45;&gt;examples_to_rows/3 -->
 <g id="edge4" class="edge">
 <title>learn/3&#45;&gt;examples_to_rows/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74" xlink:title="calls">
 <path fill="none" stroke="black" d="M940.72,-688.8C884.81,-668.63 778.72,-630.35 712.16,-606.34"/>
 <polygon fill="black" stroke="black" points="713.44,-603.09 702.85,-602.98 711.07,-609.67 713.44,-603.09"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="825.24" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,7 +124,7 @@
 <title>encoders_feature_count/2</title>
 <polygon fill="cornsilk" stroke="black" points="2231.25,-338.75 2042.75,-338.75 2042.75,-302.75 2231.25,-302.75 2231.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="2050.75" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L190">
+<g id="a_node14_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L190">
 <text xml:space="preserve" text-anchor="start" x="2056" y="-322.62" font-family="Monospace" font-size="11.00">encoders_feature_count/2</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- learn/3&#45;&gt;encoders_feature_count/2 -->
 <g id="edge5" class="edge">
 <title>learn/3&#45;&gt;encoders_feature_count/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74" xlink:title="calls">
 <path fill="none" stroke="black" d="M1015.2,-696.3C1095.06,-683.1 1288.48,-648.76 1446,-602 1587.91,-559.87 1619.72,-538.13 1757,-482.75 1875.9,-434.78 2014.25,-375.21 2086.76,-343.69"/>
 <polygon fill="black" stroke="black" points="2087.81,-347.05 2095.59,-339.85 2085.02,-340.63 2087.81,-347.05"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="1669.32" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -151,7 +151,7 @@
 <title>train_models/5</title>
 <polygon fill="cornsilk" stroke="black" points="447.5,-602 326.5,-602 326.5,-566 447.5,-566 447.5,-602"/>
 <text xml:space="preserve" text-anchor="start" x="334.5" y="-586.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L200">
+<g id="a_node15_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L200">
 <text xml:space="preserve" text-anchor="start" x="339.75" y="-585.88" font-family="Monospace" font-size="11.00">train_models/5</text>
 </a>
 </g>
@@ -163,12 +163,12 @@
 <!-- learn/3&#45;&gt;train_models/5 -->
 <g id="edge6" class="edge">
 <title>learn/3&#45;&gt;train_models/5</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74" xlink:title="calls">
 <path fill="none" stroke="black" d="M941.03,-694.92C844.87,-675.84 585.63,-624.41 458.82,-599.25"/>
 <polygon fill="black" stroke="black" points="459.69,-595.85 449.2,-597.34 458.32,-602.72 459.69,-595.85"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="700.22" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -190,12 +190,12 @@
 <!-- learn/3&#45;&gt;pairs::keys/2 -->
 <g id="edge33" class="edge">
 <title>learn/3&#45;&gt;pairs::keys/2</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74" xlink:title="calls">
 <path fill="none" stroke="black" d="M990.25,-684.95C1003.92,-665.64 1026.2,-634.16 1042.11,-611.69"/>
 <polygon fill="black" stroke="black" points="1044.91,-613.79 1047.83,-603.61 1039.19,-609.75 1044.91,-613.79"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="1021.99" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -214,12 +214,12 @@
 <!-- learn/3&#45;&gt;^^check_options/1 -->
 <g id="edge29" class="edge">
 <title>learn/3&#45;&gt;^^check_options/1</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74" xlink:title="calls">
 <path fill="none" stroke="black" d="M1011.79,-684.95C1051.87,-664.43 1118.8,-630.16 1162.93,-607.57"/>
 <polygon fill="black" stroke="black" points="1164.42,-610.73 1171.72,-603.06 1161.23,-604.5 1164.42,-610.73"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="1099.37" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -238,12 +238,12 @@
 <!-- learn/3&#45;&gt;^^merge_options/2 -->
 <g id="edge30" class="edge">
 <title>learn/3&#45;&gt;^^merge_options/2</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74" xlink:title="calls">
 <path fill="none" stroke="black" d="M1015.2,-691.01C1080.12,-671.39 1215.01,-630.63 1297.31,-605.76"/>
 <polygon fill="black" stroke="black" points="1298.3,-609.11 1306.86,-602.87 1296.28,-602.41 1298.3,-609.11"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L74">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="1183.63" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -253,7 +253,7 @@
 <title>learn/2</title>
 <polygon fill="cornsilk" stroke="black" points="1014.88,-840.5 941.12,-840.5 941.12,-804.5 1014.88,-804.5 1014.88,-840.5"/>
 <text xml:space="preserve" text-anchor="start" x="949.12" y="-824.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L71">
+<g id="a_node2_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L71">
 <text xml:space="preserve" text-anchor="start" x="954.38" y="-824.38" font-family="Monospace" font-size="11.00">learn/2</text>
 </a>
 </g>
@@ -265,12 +265,12 @@
 <!-- learn/2&#45;&gt;learn/3 -->
 <g id="edge1" class="edge">
 <title>learn/2&#45;&gt;learn/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L71" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M978,-804.2C978,-785.5 978,-755.37 978,-733.08"/>
 <polygon fill="black" stroke="black" points="981.5,-733.14 978,-723.14 974.5,-733.14 981.5,-733.14"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L71">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L71">
 <text xml:space="preserve" text-anchor="start" x="978" y="-759.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -280,7 +280,7 @@
 <title>predict/3</title>
 <polygon fill="cornsilk" stroke="black" points="833.62,-602 746.38,-602 746.38,-566 833.62,-566 833.62,-602"/>
 <text xml:space="preserve" text-anchor="start" x="754.38" y="-586.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L91">
+<g id="a_node3_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L91">
 <text xml:space="preserve" text-anchor="start" x="759.62" y="-585.88" font-family="Monospace" font-size="11.00">predict/3</text>
 </a>
 </g>
@@ -294,7 +294,7 @@
 <title>encode_instance/3</title>
 <polygon fill="cornsilk" stroke="black" points="862.62,-482.75 721.38,-482.75 721.38,-446.75 862.62,-446.75 862.62,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="729.38" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L144">
+<g id="a_node9_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L144">
 <text xml:space="preserve" text-anchor="start" x="734.62" y="-466.62" font-family="Monospace" font-size="11.00">encode_instance/3</text>
 </a>
 </g>
@@ -306,12 +306,12 @@
 <!-- predict/3&#45;&gt;encode_instance/3 -->
 <g id="edge7" class="edge">
 <title>predict/3&#45;&gt;encode_instance/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L91" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L91" xlink:title="calls">
 <path fill="none" stroke="black" d="M790.3,-565.7C790.61,-547 791.13,-516.87 791.51,-494.58"/>
 <polygon fill="black" stroke="black" points="795.01,-494.69 791.68,-484.63 788.01,-494.57 795.01,-494.69"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L91">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L91">
 <text xml:space="preserve" text-anchor="start" x="791.06" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -321,7 +321,7 @@
 <title>class_scores/3</title>
 <polygon fill="cornsilk" stroke="black" points="456.5,-410.75 335.5,-410.75 335.5,-374.75 456.5,-374.75 456.5,-410.75"/>
 <text xml:space="preserve" text-anchor="start" x="343.5" y="-395" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node25_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L279">
+<g id="a_node25_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L279">
 <text xml:space="preserve" text-anchor="start" x="348.75" y="-394.62" font-family="Monospace" font-size="11.00">class_scores/3</text>
 </a>
 </g>
@@ -333,12 +333,12 @@
 <!-- predict/3&#45;&gt;class_scores/3 -->
 <g id="edge8" class="edge">
 <title>predict/3&#45;&gt;class_scores/3</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L91" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L91" xlink:title="calls">
 <path fill="none" stroke="black" d="M762.46,-565.73C740.5,-552.26 708.76,-533.42 680,-518.75 601.62,-478.77 507.65,-438.92 449.88,-415.31"/>
 <polygon fill="black" stroke="black" points="451.52,-412.2 440.93,-411.67 448.88,-418.68 451.52,-412.2"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L91">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L91">
 <text xml:space="preserve" text-anchor="start" x="699.76" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -348,7 +348,7 @@
 <title>max_score/3</title>
 <polygon fill="cornsilk" stroke="black" points="981.38,-482.75 880.62,-482.75 880.62,-446.75 981.38,-446.75 981.38,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="888.62" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node26_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L285" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L285">
+<g id="a_node26_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L285" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L285">
 <text xml:space="preserve" text-anchor="start" x="893.88" y="-466.62" font-family="Monospace" font-size="11.00">max_score/3</text>
 </a>
 </g>
@@ -360,12 +360,12 @@
 <!-- predict/3&#45;&gt;max_score/3 -->
 <g id="edge9" class="edge">
 <title>predict/3&#45;&gt;max_score/3</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L91" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L91" xlink:title="calls">
 <path fill="none" stroke="black" d="M810.81,-565.7C834.76,-545.78 874.28,-512.92 901.42,-490.35"/>
 <polygon fill="black" stroke="black" points="903.49,-493.17 908.95,-484.09 899.02,-487.79 903.49,-493.17"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L91">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L91">
 <text xml:space="preserve" text-anchor="start" x="864.73" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -375,7 +375,7 @@
 <title>continuous_stats/4</title>
 <polygon fill="cornsilk" stroke="black" points="1748,-482.75 1600,-482.75 1600,-446.75 1748,-446.75 1748,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="1608" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L113">
+<g id="a_node6_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="1613.25" y="-466.62" font-family="Monospace" font-size="11.00">continuous_stats/4</text>
 </a>
 </g>
@@ -387,12 +387,12 @@
 <!-- build_encoders/3&#45;&gt;continuous_stats/4 -->
 <g id="edge10" class="edge">
 <title>build_encoders/3&#45;&gt;continuous_stats/4</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L105" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L105" xlink:title="calls">
 <path fill="none" stroke="black" d="M986.49,-567.63C989.36,-567.06 992.21,-566.52 995,-566 1207.25,-526.65 1459.12,-492.79 1588.25,-476.35"/>
 <polygon fill="black" stroke="black" points="1588.62,-479.84 1598.1,-475.11 1587.74,-472.89 1588.62,-479.84"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L105">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="1273.94" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -402,7 +402,7 @@
 <title>known_attribute_values/3</title>
 <polygon fill="cornsilk" stroke="black" points="1768.25,-338.75 1579.75,-338.75 1579.75,-302.75 1768.25,-302.75 1768.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1587.75" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L130">
+<g id="a_node7_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L130">
 <text xml:space="preserve" text-anchor="start" x="1593" y="-322.62" font-family="Monospace" font-size="11.00">known_attribute_values/3</text>
 </a>
 </g>
@@ -414,12 +414,12 @@
 <!-- continuous_stats/4&#45;&gt;known_attribute_values/3 -->
 <g id="edge11" class="edge">
 <title>continuous_stats/4&#45;&gt;known_attribute_values/3</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L113" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L113" xlink:title="calls">
 <path fill="none" stroke="black" d="M1674,-446.34C1674,-422.36 1674,-378.89 1674,-350.17"/>
 <polygon fill="black" stroke="black" points="1677.5,-350.37 1674,-340.37 1670.5,-350.37 1677.5,-350.37"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L113">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="1674" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -441,12 +441,12 @@
 <!-- continuous_stats/4&#45;&gt;population::arithmetic_mean/2 -->
 <g id="edge34" class="edge">
 <title>continuous_stats/4&#45;&gt;population::arithmetic_mean/2</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L113" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L113" xlink:title="calls">
 <path fill="none" stroke="black" d="M1646.66,-446.34C1606.76,-420.93 1532.49,-373.64 1487.82,-345.19"/>
 <polygon fill="black" stroke="black" points="1489.81,-342.31 1479.5,-339.9 1486.05,-348.22 1489.81,-342.31"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L113">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="1589.03" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -468,12 +468,12 @@
 <!-- continuous_stats/4&#45;&gt;list::length/2 -->
 <g id="edge35" class="edge">
 <title>continuous_stats/4&#45;&gt;list::length/2</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L113" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L113" xlink:title="calls">
 <path fill="none" stroke="black" d="M1730.65,-446.28C1760.05,-436.71 1796.34,-424.09 1828,-410.75 1893.57,-383.11 1913.12,-380.14 1971,-338.75 1989.6,-325.45 1990.52,-317.78 2007.75,-302.75 2039.2,-275.31 2077.13,-246.34 2103.74,-226.64"/>
 <polygon fill="black" stroke="black" points="2105.81,-229.47 2111.78,-220.72 2101.65,-223.83 2105.81,-229.47"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L113">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="2007.75" y="-317.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -495,12 +495,12 @@
 <!-- continuous_stats/4&#45;&gt;population::variance/2 -->
 <g id="edge36" class="edge">
 <title>continuous_stats/4&#45;&gt;population::variance/2</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L113" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L113" xlink:title="calls">
 <path fill="none" stroke="black" d="M1698.52,-446.34C1734.08,-421.09 1800.08,-374.23 1840.22,-345.73"/>
 <polygon fill="black" stroke="black" points="1842.23,-348.6 1848.35,-339.96 1838.17,-342.89 1842.23,-348.6"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L113">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="1797.8" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -522,12 +522,12 @@
 <!-- known_attribute_values/3&#45;&gt;list::memberchk/2 -->
 <g id="edge37" class="edge">
 <title>known_attribute_values/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L131" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L131" xlink:title="calls">
 <path fill="none" stroke="black" d="M1579.47,-302.51C1453.5,-279.54 1232.65,-239.27 1113.23,-217.5"/>
 <polygon fill="black" stroke="black" points="1113.96,-214.07 1103.49,-215.72 1112.7,-220.96 1113.96,-214.07"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L131">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L131">
 <text xml:space="preserve" text-anchor="start" x="1371.78" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -535,12 +535,12 @@
 <!-- examples_to_rows/3&#45;&gt;encode_instance/3 -->
 <g id="edge12" class="edge">
 <title>examples_to_rows/3&#45;&gt;encode_instance/3</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L140" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L140" xlink:title="calls">
 <path fill="none" stroke="black" d="M648.25,-565.58C645.54,-551.66 644.32,-532.3 653.75,-518.75 667.07,-499.62 688.29,-487.4 710.15,-479.58"/>
 <polygon fill="black" stroke="black" points="711.03,-482.98 719.46,-476.56 708.87,-476.32 711.03,-482.98"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L140">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="653.75" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -550,7 +550,7 @@
 <title>normalize_continuous/4</title>
 <polygon fill="cornsilk" stroke="black" points="1321.5,-338.75 1146.5,-338.75 1146.5,-302.75 1321.5,-302.75 1321.5,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1154.5" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L165">
+<g id="a_node10_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L165">
 <text xml:space="preserve" text-anchor="start" x="1159.75" y="-322.62" font-family="Monospace" font-size="11.00">normalize_continuous/4</text>
 </a>
 </g>
@@ -562,12 +562,12 @@
 <!-- encode_instance/3&#45;&gt;normalize_continuous/4 -->
 <g id="edge13" class="edge">
 <title>encode_instance/3&#45;&gt;normalize_continuous/4</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L145" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L145" xlink:title="calls">
 <path fill="none" stroke="black" d="M858.71,-446.32C895.29,-436.47 941.34,-423.58 982,-410.75 1049.6,-389.41 1126.28,-361.84 1177.11,-343.08"/>
 <polygon fill="black" stroke="black" points="1178.29,-346.38 1186.45,-339.62 1175.86,-339.81 1178.29,-346.38"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L145">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L145">
 <text xml:space="preserve" text-anchor="start" x="1086.38" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -577,7 +577,7 @@
 <title>one_hot_encode/3</title>
 <polygon fill="cornsilk" stroke="black" points="506.25,-338.75 371.75,-338.75 371.75,-302.75 506.25,-302.75 506.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="379.75" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L172">
+<g id="a_node11_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L172">
 <text xml:space="preserve" text-anchor="start" x="385" y="-322.62" font-family="Monospace" font-size="11.00">one_hot_encode/3</text>
 </a>
 </g>
@@ -589,12 +589,12 @@
 <!-- encode_instance/3&#45;&gt;one_hot_encode/3 -->
 <g id="edge15" class="edge">
 <title>encode_instance/3&#45;&gt;one_hot_encode/3</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L155" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M746.15,-446.34C719.43,-436.12 685.11,-422.87 654.75,-410.75 598.43,-388.26 534.23,-361.65 490.6,-343.42"/>
 <polygon fill="black" stroke="black" points="492.22,-340.31 481.64,-339.68 489.52,-346.76 492.22,-340.31"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L155">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="654.75" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -604,7 +604,7 @@
 <title>missing_one_hot_encode/2</title>
 <polygon fill="cornsilk" stroke="black" points="713.25,-338.75 524.75,-338.75 524.75,-302.75 713.25,-302.75 713.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="532.75" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L180">
+<g id="a_node12_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L180">
 <text xml:space="preserve" text-anchor="start" x="538" y="-322.62" font-family="Monospace" font-size="11.00">missing_one_hot_encode/2</text>
 </a>
 </g>
@@ -616,12 +616,12 @@
 <!-- encode_instance/3&#45;&gt;missing_one_hot_encode/2 -->
 <g id="edge16" class="edge">
 <title>encode_instance/3&#45;&gt;missing_one_hot_encode/2</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L155" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M770.79,-446.34C740.22,-421.25 683.67,-374.83 648.88,-346.28"/>
 <polygon fill="black" stroke="black" points="651.24,-343.68 641.29,-340.04 646.79,-349.09 651.24,-343.68"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L155">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="726.08" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -631,7 +631,7 @@
 <title>check_categorical_value/3</title>
 <polygon fill="cornsilk" stroke="black" points="1128.62,-338.75 933.38,-338.75 933.38,-302.75 1128.62,-302.75 1128.62,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="941.38" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L184">
+<g id="a_node13_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="946.62" y="-322.62" font-family="Monospace" font-size="11.00">check_categorical_value/3</text>
 </a>
 </g>
@@ -643,12 +643,12 @@
 <!-- encode_instance/3&#45;&gt;check_categorical_value/3 -->
 <g id="edge14" class="edge">
 <title>encode_instance/3&#45;&gt;check_categorical_value/3</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L155" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M827.39,-446.42C847.23,-436.45 872.28,-423.41 894,-410.75 929.57,-390.02 968.86,-364.18 996.2,-345.69"/>
 <polygon fill="black" stroke="black" points="998.15,-348.6 1004.46,-340.09 994.22,-342.81 998.15,-348.6"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L155">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="951.26" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -656,12 +656,12 @@
 <!-- encode_instance/3&#45;&gt;list::memberchk/2 -->
 <g id="edge38" class="edge">
 <title>encode_instance/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L145" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L145" xlink:title="calls">
 <path fill="none" stroke="black" d="M802.34,-446.42C824.23,-410 875.1,-326.9 897.75,-302.75 926.1,-272.53 964.4,-244.77 992.66,-226.16"/>
 <polygon fill="black" stroke="black" points="994.45,-229.17 1000.94,-220.79 990.64,-223.3 994.45,-229.17"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L145">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L145">
 <text xml:space="preserve" text-anchor="start" x="897.75" y="-317.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -683,12 +683,12 @@
 <!-- encode_instance/3&#45;&gt;list::append/3 -->
 <g id="edge39" class="edge">
 <title>encode_instance/3&#45;&gt;list::append/3</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L155" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M792,-446.34C792,-422.36 792,-378.89 792,-350.17"/>
 <polygon fill="black" stroke="black" points="795.5,-350.37 792,-340.37 788.5,-350.37 795.5,-350.37"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L155">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="792" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -696,12 +696,12 @@
 <!-- check_categorical_value/3&#45;&gt;list::memberchk/2 -->
 <g id="edge40" class="edge">
 <title>check_categorical_value/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L184" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L184" xlink:title="calls">
 <path fill="none" stroke="black" d="M1031,-302.45C1031,-283.75 1031,-253.62 1031,-231.33"/>
 <polygon fill="black" stroke="black" points="1034.5,-231.39 1031,-221.39 1027.5,-231.39 1034.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L184">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="1031" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -709,12 +709,12 @@
 <!-- encoders_feature_count/2&#45;&gt;list::length/2 -->
 <g id="edge41" class="edge">
 <title>encoders_feature_count/2&#45;&gt;list::length/2</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L195" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L195" xlink:title="calls">
 <path fill="none" stroke="black" d="M2137,-302.45C2137,-283.75 2137,-253.62 2137,-231.33"/>
 <polygon fill="black" stroke="black" points="2140.5,-231.39 2137,-221.39 2133.5,-231.39 2140.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L195">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L195">
 <text xml:space="preserve" text-anchor="start" x="2137" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -724,7 +724,7 @@
 <title>initialize_model/3</title>
 <polygon fill="cornsilk" stroke="black" points="177,-482.75 29,-482.75 29,-446.75 177,-446.75 177,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="37" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L206" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L206">
+<g id="a_node16_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L206" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L206">
 <text xml:space="preserve" text-anchor="start" x="42.25" y="-466.62" font-family="Monospace" font-size="11.00">initialize_model/3</text>
 </a>
 </g>
@@ -736,12 +736,12 @@
 <!-- train_models/5&#45;&gt;initialize_model/3 -->
 <g id="edge17" class="edge">
 <title>train_models/5&#45;&gt;initialize_model/3</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L201" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L201" xlink:title="calls">
 <path fill="none" stroke="black" d="M344.79,-565.57C294.38,-544.76 210.04,-509.94 155.48,-487.41"/>
 <polygon fill="black" stroke="black" points="156.96,-484.24 146.38,-483.66 154.29,-490.71 156.96,-484.24"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L201">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L201">
 <text xml:space="preserve" text-anchor="start" x="253.52" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -751,7 +751,7 @@
 <title>optimize_model/6</title>
 <polygon fill="cornsilk" stroke="black" points="340.25,-482.75 205.75,-482.75 205.75,-446.75 340.25,-446.75 340.25,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="213.75" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L209">
+<g id="a_node17_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L209">
 <text xml:space="preserve" text-anchor="start" x="219" y="-466.62" font-family="Monospace" font-size="11.00">optimize_model/6</text>
 </a>
 </g>
@@ -763,12 +763,12 @@
 <!-- train_models/5&#45;&gt;optimize_model/6 -->
 <g id="edge18" class="edge">
 <title>train_models/5&#45;&gt;optimize_model/6</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L201" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L201" xlink:title="calls">
 <path fill="none" stroke="black" d="M370.18,-565.7C351.07,-546.04 319.69,-513.77 297.78,-491.24"/>
 <polygon fill="black" stroke="black" points="300.43,-488.94 290.95,-484.21 295.41,-493.82 300.43,-488.94"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L201">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L201">
 <text xml:space="preserve" text-anchor="start" x="333.42" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -778,7 +778,7 @@
 <title>zero_vector/2</title>
 <polygon fill="cornsilk" stroke="black" points="132.12,-338.75 17.87,-338.75 17.87,-302.75 132.12,-302.75 132.12,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="25.88" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node23_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L268" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L268">
+<g id="a_node23_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L268" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L268">
 <text xml:space="preserve" text-anchor="start" x="31.12" y="-322.62" font-family="Monospace" font-size="11.00">zero_vector/2</text>
 </a>
 </g>
@@ -790,12 +790,12 @@
 <!-- initialize_model/3&#45;&gt;zero_vector/2 -->
 <g id="edge19" class="edge">
 <title>initialize_model/3&#45;&gt;zero_vector/2</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L206" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L206" xlink:title="calls">
 <path fill="none" stroke="black" d="M99.57,-446.34C94.82,-422.25 86.19,-378.5 80.53,-349.78"/>
 <polygon fill="black" stroke="black" points="84.04,-349.48 78.67,-340.35 77.17,-350.83 84.04,-349.48"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L206" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L206">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L206" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L206">
 <text xml:space="preserve" text-anchor="start" x="92.33" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -805,7 +805,7 @@
 <title>update_model/7</title>
 <polygon fill="cornsilk" stroke="black" points="333.5,-338.75 212.5,-338.75 212.5,-302.75 333.5,-302.75 333.5,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="220.5" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L224">
+<g id="a_node18_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="225.75" y="-322.62" font-family="Monospace" font-size="11.00">update_model/7</text>
 </a>
 </g>
@@ -817,12 +817,12 @@
 <!-- optimize_model/6&#45;&gt;update_model/7 -->
 <g id="edge20" class="edge">
 <title>optimize_model/6&#45;&gt;update_model/7</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L209" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L209" xlink:title="calls">
 <path fill="none" stroke="black" d="M273,-446.34C273,-422.36 273,-378.89 273,-350.17"/>
 <polygon fill="black" stroke="black" points="276.5,-350.37 273,-340.37 269.5,-350.37 276.5,-350.37"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L209">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L209">
 <text xml:space="preserve" text-anchor="start" x="273" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -841,12 +841,12 @@
 <!-- optimize_model/6&#45;&gt;^^option/2 -->
 <g id="edge31" class="edge">
 <title>optimize_model/6&#45;&gt;^^option/2</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L209" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L209" xlink:title="calls">
 <path fill="none" stroke="black" d="M259.35,-446.61C223.8,-401.95 128.15,-281.82 85.74,-228.55"/>
 <polygon fill="black" stroke="black" points="88.61,-226.53 79.64,-220.89 83.13,-230.89 88.61,-226.53"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L209">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L209">
 <text xml:space="preserve" text-anchor="start" x="172.47" y="-317.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -856,7 +856,7 @@
 <title>accumulate_binary_gradients/8</title>
 <polygon fill="cornsilk" stroke="black" points="670.12,-219.5 447.88,-219.5 447.88,-183.5 670.12,-183.5 670.12,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="455.88" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L236" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L236">
+<g id="a_node19_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L236" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L236">
 <text xml:space="preserve" text-anchor="start" x="461.12" y="-203.38" font-family="Monospace" font-size="11.00">accumulate_binary_gradients/8</text>
 </a>
 </g>
@@ -868,12 +868,12 @@
 <!-- update_model/7&#45;&gt;accumulate_binary_gradients/8 -->
 <g id="edge22" class="edge">
 <title>update_model/7&#45;&gt;accumulate_binary_gradients/8</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L224" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M315.51,-302.32C366.28,-281.51 451.21,-246.69 506.15,-224.16"/>
 <polygon fill="black" stroke="black" points="507.4,-227.44 515.32,-220.41 504.74,-220.96 507.4,-227.44"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L224">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="424.58" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -883,7 +883,7 @@
 <title>update_weights/8</title>
 <polygon fill="cornsilk" stroke="black" points="430.25,-219.5 295.75,-219.5 295.75,-183.5 430.25,-183.5 430.25,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="303.75" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node22_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L260" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L260">
+<g id="a_node22_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L260" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L260">
 <text xml:space="preserve" text-anchor="start" x="309" y="-203.38" font-family="Monospace" font-size="11.00">update_weights/8</text>
 </a>
 </g>
@@ -895,12 +895,12 @@
 <!-- update_model/7&#45;&gt;update_weights/8 -->
 <g id="edge23" class="edge">
 <title>update_model/7&#45;&gt;update_weights/8</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L224" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M286.28,-302.45C301.17,-283.05 325.48,-251.38 342.75,-228.89"/>
 <polygon fill="black" stroke="black" points="345.43,-231.14 348.74,-221.07 339.88,-226.87 345.43,-231.14"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L224">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="320.7" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -910,7 +910,7 @@
 <title>zero_vector_like/2</title>
 <polygon fill="cornsilk" stroke="black" points="278,-219.5 130,-219.5 130,-183.5 278,-183.5 278,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="138" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node24_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L275" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L275">
+<g id="a_node24_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L275" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L275">
 <text xml:space="preserve" text-anchor="start" x="143.25" y="-203.38" font-family="Monospace" font-size="11.00">zero_vector_like/2</text>
 </a>
 </g>
@@ -922,12 +922,12 @@
 <!-- update_model/7&#45;&gt;zero_vector_like/2 -->
 <g id="edge21" class="edge">
 <title>update_model/7&#45;&gt;zero_vector_like/2</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L224" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M263.97,-302.38C257.09,-289.35 247.25,-271.13 238,-255.5 232.93,-246.94 227.17,-237.77 221.85,-229.5"/>
 <polygon fill="black" stroke="black" points="224.86,-227.72 216.48,-221.24 218.99,-231.53 224.86,-227.72"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L224">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="244.01" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -935,12 +935,12 @@
 <!-- update_model/7&#45;&gt;list::length/2 -->
 <g id="edge42" class="edge">
 <title>update_model/7&#45;&gt;list::length/2</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L224" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M333.85,-307.29C343.57,-305.58 353.54,-303.99 363,-302.75 644.81,-265.81 717.04,-272.62 1000.75,-255.5 1402.68,-231.24 1885.16,-212 2064.91,-205.18"/>
 <polygon fill="black" stroke="black" points="2064.93,-208.68 2074.79,-204.8 2064.67,-201.68 2064.93,-208.68"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L224">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="1000.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -948,12 +948,12 @@
 <!-- update_model/7&#45;&gt;^^option/2 -->
 <g id="edge32" class="edge">
 <title>update_model/7&#45;&gt;^^option/2</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L224" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M247.6,-302.28C227.68,-288.86 199.06,-270.2 173,-255.5 153.89,-244.72 132.28,-233.86 113.44,-224.81"/>
 <polygon fill="black" stroke="black" points="115.19,-221.76 104.65,-220.62 112.18,-228.08 115.19,-221.76"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L224">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="189.8" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -963,7 +963,7 @@
 <title>target_sign/3</title>
 <polygon fill="cornsilk" stroke="black" points="402.12,-100.25 287.88,-100.25 287.88,-64.25 402.12,-64.25 402.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="295.88" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L250" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L250">
+<g id="a_node20_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L250" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L250">
 <text xml:space="preserve" text-anchor="start" x="301.12" y="-84.12" font-family="Monospace" font-size="11.00">target_sign/3</text>
 </a>
 </g>
@@ -975,12 +975,12 @@
 <!-- accumulate_binary_gradients/8&#45;&gt;target_sign/3 -->
 <g id="edge24" class="edge">
 <title>accumulate_binary_gradients/8&#45;&gt;target_sign/3</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L237" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L237" xlink:title="calls">
 <path fill="none" stroke="black" d="M527.42,-183.2C490.12,-162.76 427.95,-128.7 386.71,-106.1"/>
 <polygon fill="black" stroke="black" points="388.49,-103.08 378.03,-101.35 385.12,-109.22 388.49,-103.08"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L237">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L237">
 <text xml:space="preserve" text-anchor="start" x="458.42" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -990,7 +990,7 @@
 <title>add_scaled_vector/4</title>
 <polygon fill="cornsilk" stroke="black" points="575.38,-100.25 420.62,-100.25 420.62,-64.25 575.38,-64.25 575.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="428.62" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node21_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L255">
+<g id="a_node21_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L255">
 <text xml:space="preserve" text-anchor="start" x="433.88" y="-84.12" font-family="Monospace" font-size="11.00">add_scaled_vector/4</text>
 </a>
 </g>
@@ -1002,12 +1002,12 @@
 <!-- accumulate_binary_gradients/8&#45;&gt;add_scaled_vector/4 -->
 <g id="edge25" class="edge">
 <title>accumulate_binary_gradients/8&#45;&gt;add_scaled_vector/4</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L237" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L237" xlink:title="calls">
 <path fill="none" stroke="black" d="M550,-183.2C540.04,-164.06 523.87,-132.97 512.2,-110.54"/>
 <polygon fill="black" stroke="black" points="515.46,-109.22 507.74,-101.96 509.25,-112.45 515.46,-109.22"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L237">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L237">
 <text xml:space="preserve" text-anchor="start" x="530.33" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1029,12 +1029,12 @@
 <!-- accumulate_binary_gradients/8&#45;&gt;numberlist::scalar_product/3 -->
 <g id="edge43" class="edge">
 <title>accumulate_binary_gradients/8&#45;&gt;numberlist::scalar_product/3</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L237" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L237" xlink:title="calls">
 <path fill="none" stroke="black" d="M579.95,-183.2C604.07,-163.28 643.87,-130.42 671.21,-107.85"/>
 <polygon fill="black" stroke="black" points="673.31,-110.65 678.79,-101.59 668.85,-105.25 673.31,-110.65"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L237">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L237">
 <text xml:space="preserve" text-anchor="start" x="634.26" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1042,12 +1042,12 @@
 <!-- class_scores/3&#45;&gt;numberlist::scalar_product/3 -->
 <g id="edge44" class="edge">
 <title>class_scores/3&#45;&gt;numberlist::scalar_product/3</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L280" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L280" xlink:title="calls">
 <path fill="none" stroke="black" d="M380.44,-374.52C365.13,-355.41 346.3,-324.42 363,-302.75 407.33,-245.23 630.21,-273.29 679,-219.5 705.57,-190.2 707.02,-142.03 704.7,-111.51"/>
 <polygon fill="black" stroke="black" points="708.22,-111.5 703.77,-101.88 701.25,-112.17 708.22,-111.5"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L280" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L280">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L280" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L280">
 <text xml:space="preserve" text-anchor="start" x="555.86" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1057,7 +1057,7 @@
 <title>classifier_diagnostics_data/2</title>
 <polygon fill="cornsilk" stroke="black" points="2362.12,-482.75 2139.88,-482.75 2139.88,-446.75 2362.12,-446.75 2362.12,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="2147.88" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node27_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L293">
+<g id="a_node27_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L293">
 <text xml:space="preserve" text-anchor="start" x="2153.12" y="-466.62" font-family="Monospace" font-size="11.00">classifier_diagnostics_data/2</text>
 </a>
 </g>
@@ -1069,12 +1069,12 @@
 <!-- classifier_diagnostics_data/2&#45;&gt;encoders_feature_count/2 -->
 <g id="edge26" class="edge">
 <title>classifier_diagnostics_data/2&#45;&gt;encoders_feature_count/2</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L293" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L293" xlink:title="calls">
 <path fill="none" stroke="black" d="M2237.02,-446.34C2217.17,-421.61 2180.68,-376.16 2157.69,-347.52"/>
 <polygon fill="black" stroke="black" points="2160.67,-345.65 2151.68,-340.04 2155.22,-350.03 2160.67,-345.65"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L293">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L293">
 <text xml:space="preserve" text-anchor="start" x="2207.56" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1082,12 +1082,12 @@
 <!-- classifier_diagnostics_data/2&#45;&gt;list::length/2 -->
 <g id="edge45" class="edge">
 <title>classifier_diagnostics_data/2&#45;&gt;list::length/2</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L293" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L293" xlink:title="calls">
 <path fill="none" stroke="black" d="M2253.71,-446.31C2257.64,-415.66 2262.25,-350.8 2240,-302.75 2225.47,-271.36 2196.48,-244.58 2172.95,-226.61"/>
 <polygon fill="black" stroke="black" points="2175.25,-223.96 2165.13,-220.83 2171.09,-229.59 2175.25,-223.96"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L293">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L293">
 <text xml:space="preserve" text-anchor="start" x="2251.28" y="-317.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1097,7 +1097,7 @@
 <title>classifier_to_clauses/4</title>
 <polygon fill="cornsilk" stroke="black" points="1814.88,-840.5 1633.12,-840.5 1633.12,-804.5 1814.88,-804.5 1814.88,-840.5"/>
 <text xml:space="preserve" text-anchor="start" x="1641.12" y="-824.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node28_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L304">
+<g id="a_node28_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L304">
 <text xml:space="preserve" text-anchor="start" x="1646.38" y="-824.38" font-family="Monospace" font-size="11.00">classifier_to_clauses/4</text>
 </a>
 </g>
@@ -1111,7 +1111,7 @@
 <title>print_classifier/1</title>
 <polygon fill="cornsilk" stroke="black" points="2543,-482.75 2395,-482.75 2395,-446.75 2543,-446.75 2543,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="2403" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node29_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L308">
+<g id="a_node29_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L308">
 <text xml:space="preserve" text-anchor="start" x="2408.25" y="-466.62" font-family="Monospace" font-size="11.00">print_classifier/1</text>
 </a>
 </g>
@@ -1125,7 +1125,7 @@
 <title>print_encoders/1</title>
 <polygon fill="cornsilk" stroke="black" points="2648.25,-338.75 2513.75,-338.75 2513.75,-302.75 2648.25,-302.75 2648.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="2521.75" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node30_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L319" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L319">
+<g id="a_node30_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L319" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L319">
 <text xml:space="preserve" text-anchor="start" x="2527" y="-322.62" font-family="Monospace" font-size="11.00">print_encoders/1</text>
 </a>
 </g>
@@ -1137,12 +1137,12 @@
 <!-- print_classifier/1&#45;&gt;print_encoders/1 -->
 <g id="edge27" class="edge">
 <title>print_classifier/1&#45;&gt;print_encoders/1</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L308" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L308" xlink:title="calls">
 <path fill="none" stroke="black" d="M2482.73,-446.34C2502.15,-421.72 2537.78,-376.55 2560.38,-347.89"/>
 <polygon fill="black" stroke="black" points="2563.12,-350.07 2566.57,-340.05 2557.63,-345.73 2563.12,-350.07"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L308">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L308">
 <text xml:space="preserve" text-anchor="start" x="2538.33" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1152,7 +1152,7 @@
 <title>print_models/1</title>
 <polygon fill="cornsilk" stroke="black" points="2432.5,-338.75 2311.5,-338.75 2311.5,-302.75 2432.5,-302.75 2432.5,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="2319.5" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node31_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L328" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L328">
+<g id="a_node31_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L328" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L328">
 <text xml:space="preserve" text-anchor="start" x="2324.75" y="-322.62" font-family="Monospace" font-size="11.00">print_models/1</text>
 </a>
 </g>
@@ -1164,12 +1164,12 @@
 <!-- print_classifier/1&#45;&gt;print_models/1 -->
 <g id="edge28" class="edge">
 <title>print_classifier/1&#45;&gt;print_models/1</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L308" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L308" xlink:title="calls">
 <path fill="none" stroke="black" d="M2457.11,-446.34C2440.36,-421.83 2409.7,-376.94 2390.11,-348.27"/>
 <polygon fill="black" stroke="black" points="2393.07,-346.39 2384.54,-340.11 2387.29,-350.34 2393.07,-346.39"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L308">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L308">
 <text xml:space="preserve" text-anchor="start" x="2432.04" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1191,12 +1191,12 @@
 <!-- print_classifier/1&#45;&gt;format::format/2 -->
 <g id="edge46" class="edge">
 <title>print_classifier/1&#45;&gt;format::format/2</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L308" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L308" xlink:title="calls">
 <path fill="none" stroke="black" d="M2469,-446.61C2469,-402.6 2469,-285.28 2469,-230.9"/>
 <polygon fill="black" stroke="black" points="2472.5,-231.22 2469,-221.22 2465.5,-231.22 2472.5,-231.22"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L308">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L308">
 <text xml:space="preserve" text-anchor="start" x="2469" y="-317.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1204,12 +1204,12 @@
 <!-- print_encoders/1&#45;&gt;format::format/2 -->
 <g id="edge47" class="edge">
 <title>print_encoders/1&#45;&gt;format::format/2</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L320" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L320" xlink:title="calls">
 <path fill="none" stroke="black" d="M2564.47,-302.45C2545.7,-282.79 2514.87,-250.52 2493.35,-227.99"/>
 <polygon fill="black" stroke="black" points="2496.08,-225.78 2486.64,-220.97 2491.02,-230.61 2496.08,-225.78"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L320" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L320">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L320" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L320">
 <text xml:space="preserve" text-anchor="start" x="2528.36" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1217,12 +1217,12 @@
 <!-- print_models/1&#45;&gt;list::length/2 -->
 <g id="edge48" class="edge">
 <title>print_models/1&#45;&gt;list::length/2</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L329" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L329" xlink:title="calls">
 <path fill="none" stroke="black" d="M2348.14,-302.52C2328.37,-288.7 2299.19,-269.4 2272,-255.5 2248.77,-243.62 2222.22,-232.68 2198.85,-223.85"/>
 <polygon fill="black" stroke="black" points="2200.37,-220.69 2189.78,-220.48 2197.94,-227.25 2200.37,-220.69"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L329" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L329">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L329" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L329">
 <text xml:space="preserve" text-anchor="start" x="2291.94" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1230,12 +1230,12 @@
 <!-- print_models/1&#45;&gt;format::format/2 -->
 <g id="edge49" class="edge">
 <title>print_models/1&#45;&gt;format::format/2</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L329" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L329" xlink:title="calls">
 <path fill="none" stroke="black" d="M2386.31,-302.45C2402.43,-282.97 2428.8,-251.09 2447.42,-228.58"/>
 <polygon fill="black" stroke="black" points="2449.99,-230.97 2453.66,-221.04 2444.59,-226.51 2449.99,-230.97"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L329" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L329">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L329" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L329">
 <text xml:space="preserve" text-anchor="start" x="2423.41" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1245,7 +1245,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="2267.25,-840.5 2132.75,-840.5 2132.75,-804.5 2267.25,-804.5 2267.25,-840.5"/>
 <text xml:space="preserve" text-anchor="start" x="2140.75" y="-824.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node32_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L334" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L334">
+<g id="a_node32_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L334" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L334">
 <text xml:space="preserve" text-anchor="start" x="2146" y="-824.38" font-family="Monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -1259,7 +1259,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="2556.5,-840.5 2435.5,-840.5 2435.5,-804.5 2556.5,-804.5 2556.5,-840.5"/>
 <text xml:space="preserve" text-anchor="start" x="2443.5" y="-824.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node33_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L339" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L339">
+<g id="a_node33_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L339" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L339">
 <text xml:space="preserve" text-anchor="start" x="2448.75" y="-824.38" font-family="Monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -1285,12 +1285,12 @@
 <!-- valid_option/1&#45;&gt;type::valid/2 -->
 <g id="edge50" class="edge">
 <title>valid_option/1&#45;&gt;type::valid/2</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L342" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L342" xlink:title="calls">
 <path fill="none" stroke="black" d="M2496,-804.2C2496,-785.5 2496,-755.37 2496,-733.08"/>
 <polygon fill="black" stroke="black" points="2499.5,-733.14 2496,-723.14 2492.5,-733.14 2499.5,-733.14"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L342" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/linear_svm/linear_svm.lgt#L342">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L342" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/linear_svm/linear_svm.lgt#L342">
 <text xml:space="preserve" text-anchor="start" x="2496" y="-759.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>

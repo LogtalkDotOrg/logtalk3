@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-891.25 2743,-891.25 2743,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object ada_boost</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;04&#45;18, 09:19</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;04&#45;20, 00:16</text>
 <g id="clust1" class="cluster">
 <title>cluster_ada_boost_object</title>
 <g id="a_clust1"><a xlink:title="ada_boost">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 2719,-54.25 2719,-54.25 2725,-54.25 2731,-60.25 2731,-66.25 2731,-66.25 2731,-867.25 2731,-867.25 2731,-873.25 2725,-879.25 2719,-879.25 2719,-879.25 20,-879.25 20,-879.25 14,-879.25 8,-873.25 8,-867.25 8,-867.25 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-861.5" font-family="Monospace" font-size="10.00" fill="dimgray">ada_boost</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>learn/3</title>
 <polygon fill="springgreen" stroke="black" points="1663.88,-721.25 1590.12,-721.25 1590.12,-685.25 1663.88,-685.25 1663.88,-721.25"/>
 <text xml:space="preserve" text-anchor="start" x="1598.12" y="-705.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L40">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="1603.38" y="-705.12" font-family="Monospace" font-size="11.00">learn/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>dataset_attributes/2</title>
 <polygon fill="cornsilk" stroke="black" points="1018.75,-602 857.25,-602 857.25,-566 1018.75,-566 1018.75,-602"/>
 <text xml:space="preserve" text-anchor="start" x="865.25" y="-586.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L112">
+<g id="a_node7_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L112">
 <text xml:space="preserve" text-anchor="start" x="870.5" y="-585.88" font-family="Monospace" font-size="11.00">dataset_attributes/2</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- learn/3&#45;&gt;dataset_attributes/2 -->
 <g id="edge2" class="edge">
 <title>learn/3&#45;&gt;dataset_attributes/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84" xlink:title="calls">
 <path fill="none" stroke="black" d="M1589.8,-696.3C1497.21,-681.44 1248.72,-641.18 1029.99,-602.34"/>
 <polygon fill="black" stroke="black" points="1030.89,-598.94 1020.43,-600.64 1029.66,-605.83 1030.89,-598.94"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="1290.72" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>initialize_weights/3</title>
 <polygon fill="cornsilk" stroke="black" points="1198.75,-602 1037.25,-602 1037.25,-566 1198.75,-566 1198.75,-602"/>
 <text xml:space="preserve" text-anchor="start" x="1045.25" y="-586.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L120">
+<g id="a_node8_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="1050.5" y="-585.88" font-family="Monospace" font-size="11.00">initialize_weights/3</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- learn/3&#45;&gt;initialize_weights/3 -->
 <g id="edge3" class="edge">
 <title>learn/3&#45;&gt;initialize_weights/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84" xlink:title="calls">
 <path fill="none" stroke="black" d="M1589.98,-693.72C1509.62,-675.21 1317.33,-630.92 1204.55,-604.94"/>
 <polygon fill="black" stroke="black" points="1205.56,-601.58 1195.03,-602.74 1203.99,-608.4 1205.56,-601.58"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="1387.76" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>build_ensemble/10</title>
 <polygon fill="cornsilk" stroke="black" points="1357.62,-602 1216.38,-602 1216.38,-566 1357.62,-566 1357.62,-602"/>
 <text xml:space="preserve" text-anchor="start" x="1224.38" y="-586.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L125">
+<g id="a_node9_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L125">
 <text xml:space="preserve" text-anchor="start" x="1229.62" y="-585.88" font-family="Monospace" font-size="11.00">build_ensemble/10</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- learn/3&#45;&gt;build_ensemble/10 -->
 <g id="edge4" class="edge">
 <title>learn/3&#45;&gt;build_ensemble/10</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84" xlink:title="calls">
 <path fill="none" stroke="black" d="M1589.64,-689.37C1531.39,-669.28 1418.34,-630.29 1348.11,-606.07"/>
 <polygon fill="black" stroke="black" points="1349.67,-602.91 1339.07,-602.96 1347.39,-609.53 1349.67,-602.91"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="1467.19" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- learn/3&#45;&gt;pairs::keys/2 -->
 <g id="edge35" class="edge">
 <title>learn/3&#45;&gt;pairs::keys/2</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84" xlink:title="calls">
 <path fill="none" stroke="black" d="M1620.95,-684.95C1614.35,-666.07 1603.68,-635.56 1595.87,-613.21"/>
 <polygon fill="black" stroke="black" points="1599.18,-612.08 1592.57,-603.8 1592.57,-614.4 1599.18,-612.08"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="1607.73" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -163,12 +163,12 @@
 <!-- learn/3&#45;&gt;list::length/2 -->
 <g id="edge36" class="edge">
 <title>learn/3&#45;&gt;list::length/2</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84" xlink:title="calls">
 <path fill="none" stroke="black" d="M1634.38,-684.97C1651.7,-641.54 1690.2,-525.66 1645,-446.75 1624.33,-410.66 1584.76,-385.04 1551.45,-368.74"/>
 <polygon fill="black" stroke="black" points="1553.24,-365.72 1542.71,-364.62 1550.26,-372.05 1553.24,-365.72"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="1666.1" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -187,12 +187,12 @@
 <!-- learn/3&#45;&gt;^^check_options/1 -->
 <g id="edge32" class="edge">
 <title>learn/3&#45;&gt;^^check_options/1</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84" xlink:title="calls">
 <path fill="none" stroke="black" d="M1645.44,-684.95C1666.49,-665.21 1701.1,-632.74 1725.15,-610.19"/>
 <polygon fill="black" stroke="black" points="1727.48,-612.8 1732.38,-603.41 1722.69,-607.7 1727.48,-612.8"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="1693.25" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -211,12 +211,12 @@
 <!-- learn/3&#45;&gt;^^merge_options/2 -->
 <g id="edge33" class="edge">
 <title>learn/3&#45;&gt;^^merge_options/2</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84" xlink:title="calls">
 <path fill="none" stroke="black" d="M1664.13,-686.92C1713.71,-666.45 1801.82,-630.07 1858.27,-606.77"/>
 <polygon fill="black" stroke="black" points="1859.47,-610.06 1867.38,-603.01 1856.8,-603.59 1859.47,-610.06"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="1777.52" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -235,12 +235,12 @@
 <!-- learn/3&#45;&gt;^^option/2 -->
 <g id="edge34" class="edge">
 <title>learn/3&#45;&gt;^^option/2</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84" xlink:title="calls">
 <path fill="none" stroke="black" d="M1664.29,-692.32C1728.44,-675.17 1864.04,-638.59 1988.79,-602.61"/>
 <polygon fill="black" stroke="black" points="1989.58,-606.02 1998.22,-599.88 1987.64,-599.3 1989.58,-606.02"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L84">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="1861.13" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -250,7 +250,7 @@
 <title>predict_probabilities/3</title>
 <polygon fill="springgreen" stroke="black" points="2202.88,-482.75 2021.12,-482.75 2021.12,-446.75 2202.88,-446.75 2202.88,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="2029.12" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L47">
+<g id="a_node2_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L47">
 <text xml:space="preserve" text-anchor="start" x="2034.38" y="-466.62" font-family="Monospace" font-size="11.00">predict_probabilities/3</text>
 </a>
 </g>
@@ -264,7 +264,7 @@
 <title>accumulate_weighted_votes/3</title>
 <polygon fill="cornsilk" stroke="black" points="2341.38,-363.5 2132.62,-363.5 2132.62,-327.5 2341.38,-327.5 2341.38,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="2140.62" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L307" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L307">
+<g id="a_node3_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L307" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L307">
 <text xml:space="preserve" text-anchor="start" x="2145.88" y="-347.38" font-family="Monospace" font-size="11.00">accumulate_weighted_votes/3</text>
 </a>
 </g>
@@ -276,12 +276,12 @@
 <!-- predict_probabilities/3&#45;&gt;accumulate_weighted_votes/3 -->
 <g id="edge24" class="edge">
 <title>predict_probabilities/3&#45;&gt;accumulate_weighted_votes/3</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L291" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L291" xlink:title="calls">
 <path fill="none" stroke="black" d="M2130.44,-446.45C2151.49,-426.71 2186.1,-394.24 2210.15,-371.69"/>
 <polygon fill="black" stroke="black" points="2212.48,-374.3 2217.38,-364.91 2207.69,-369.2 2212.48,-374.3"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L291">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L291">
 <text xml:space="preserve" text-anchor="start" x="2178.25" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -291,7 +291,7 @@
 <title>collect_weighted_predictions/3</title>
 <polygon fill="cornsilk" stroke="black" points="1955.5,-363.5 1726.5,-363.5 1726.5,-327.5 1955.5,-327.5 1955.5,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="1734.5" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node24_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L301" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L301">
+<g id="a_node24_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L301" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L301">
 <text xml:space="preserve" text-anchor="start" x="1739.75" y="-347.38" font-family="Monospace" font-size="11.00">collect_weighted_predictions/3</text>
 </a>
 </g>
@@ -303,12 +303,12 @@
 <!-- predict_probabilities/3&#45;&gt;collect_weighted_predictions/3 -->
 <g id="edge23" class="edge">
 <title>predict_probabilities/3&#45;&gt;collect_weighted_predictions/3</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L291" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L291" xlink:title="calls">
 <path fill="none" stroke="black" d="M2071.72,-446.32C2023.72,-425.55 1943.47,-390.84 1891.4,-368.31"/>
 <polygon fill="black" stroke="black" points="1893.01,-365.19 1882.45,-364.43 1890.23,-371.62 1893.01,-365.19"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L291">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L291">
 <text xml:space="preserve" text-anchor="start" x="1984.63" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -318,7 +318,7 @@
 <title>sum_vote_weights/3</title>
 <polygon fill="cornsilk" stroke="black" points="2507,-363.5 2359,-363.5 2359,-327.5 2507,-327.5 2507,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="2367" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node27_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L323" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L323">
+<g id="a_node27_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L323" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L323">
 <text xml:space="preserve" text-anchor="start" x="2372.25" y="-347.38" font-family="Monospace" font-size="11.00">sum_vote_weights/3</text>
 </a>
 </g>
@@ -330,12 +330,12 @@
 <!-- predict_probabilities/3&#45;&gt;sum_vote_weights/3 -->
 <g id="edge25" class="edge">
 <title>predict_probabilities/3&#45;&gt;sum_vote_weights/3</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L291" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L291" xlink:title="calls">
 <path fill="none" stroke="black" d="M2159.71,-446.32C2216.96,-425.41 2312.94,-390.36 2374.57,-367.84"/>
 <polygon fill="black" stroke="black" points="2375.68,-371.16 2383.87,-364.45 2373.27,-364.59 2375.68,-371.16"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L291">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L291">
 <text xml:space="preserve" text-anchor="start" x="2282.12" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -345,7 +345,7 @@
 <title>normalize_votes/3</title>
 <polygon fill="cornsilk" stroke="black" points="2114.62,-363.5 1973.38,-363.5 1973.38,-327.5 2114.62,-327.5 2114.62,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="1981.38" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node28_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L328" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L328">
+<g id="a_node28_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L328" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L328">
 <text xml:space="preserve" text-anchor="start" x="1986.62" y="-347.38" font-family="Monospace" font-size="11.00">normalize_votes/3</text>
 </a>
 </g>
@@ -357,12 +357,12 @@
 <!-- predict_probabilities/3&#45;&gt;normalize_votes/3 -->
 <g id="edge26" class="edge">
 <title>predict_probabilities/3&#45;&gt;normalize_votes/3</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L291" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L291" xlink:title="calls">
 <path fill="none" stroke="black" d="M2101.97,-446.45C2090.87,-427.31 2072.84,-396.22 2059.83,-373.79"/>
 <polygon fill="black" stroke="black" points="2062.88,-372.08 2054.83,-365.18 2056.82,-375.59 2062.88,-372.08"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L291">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L291">
 <text xml:space="preserve" text-anchor="start" x="2080.04" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -372,7 +372,7 @@
 <title>accumulate_votes_for_classes/3</title>
 <polygon fill="cornsilk" stroke="black" points="2351.5,-219.5 2122.5,-219.5 2122.5,-183.5 2351.5,-183.5 2351.5,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="2130.5" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node25_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L310" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L310">
+<g id="a_node25_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L310" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L310">
 <text xml:space="preserve" text-anchor="start" x="2135.75" y="-203.38" font-family="Monospace" font-size="11.00">accumulate_votes_for_classes/3</text>
 </a>
 </g>
@@ -384,12 +384,12 @@
 <!-- accumulate_weighted_votes/3&#45;&gt;accumulate_votes_for_classes/3 -->
 <g id="edge28" class="edge">
 <title>accumulate_weighted_votes/3&#45;&gt;accumulate_votes_for_classes/3</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L307" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L307" xlink:title="calls">
 <path fill="none" stroke="black" d="M2237,-327.09C2237,-303.11 2237,-259.64 2237,-230.92"/>
 <polygon fill="black" stroke="black" points="2240.5,-231.12 2237,-221.12 2233.5,-231.12 2240.5,-231.12"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L307" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L307">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L307" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L307">
 <text xml:space="preserve" text-anchor="start" x="2237" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -399,7 +399,7 @@
 <title>compute_weighted_error/4</title>
 <polygon fill="cornsilk" stroke="black" points="977.25,-482.75 788.75,-482.75 788.75,-446.75 977.25,-446.75 977.25,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="796.75" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L229">
+<g id="a_node4_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="802" y="-466.62" font-family="Monospace" font-size="11.00">compute_weighted_error/4</text>
 </a>
 </g>
@@ -413,7 +413,7 @@
 <title>compute_error_acc/5</title>
 <polygon fill="cornsilk" stroke="black" points="945.38,-363.5 790.62,-363.5 790.62,-327.5 945.38,-327.5 945.38,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="798.62" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L232">
+<g id="a_node16_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L232">
 <text xml:space="preserve" text-anchor="start" x="803.88" y="-347.38" font-family="Monospace" font-size="11.00">compute_error_acc/5</text>
 </a>
 </g>
@@ -425,12 +425,12 @@
 <!-- compute_weighted_error/4&#45;&gt;compute_error_acc/5 -->
 <g id="edge15" class="edge">
 <title>compute_weighted_error/4&#45;&gt;compute_error_acc/5</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L229" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L229" xlink:title="calls">
 <path fill="none" stroke="black" d="M880.79,-446.45C878.38,-427.66 874.5,-397.34 871.65,-375.02"/>
 <polygon fill="black" stroke="black" points="875.16,-374.85 870.41,-365.37 868.21,-375.74 875.16,-374.85"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L229">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="875.95" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -440,7 +440,7 @@
 <title>build_cumulative_distribution/2</title>
 <polygon fill="cornsilk" stroke="black" points="253.88,-363.5 18.12,-363.5 18.12,-327.5 253.88,-327.5 253.88,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="26.12" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L189" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L189">
+<g id="a_node5_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L189" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L189">
 <text xml:space="preserve" text-anchor="start" x="31.38" y="-347.38" font-family="Monospace" font-size="11.00">build_cumulative_distribution/2</text>
 </a>
 </g>
@@ -454,7 +454,7 @@
 <title>build_cdf_acc/3</title>
 <polygon fill="cornsilk" stroke="black" points="199.88,-219.5 72.12,-219.5 72.12,-183.5 199.88,-183.5 199.88,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="80.12" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L192" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L192">
+<g id="a_node11_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L192" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L192">
 <text xml:space="preserve" text-anchor="start" x="85.38" y="-203.38" font-family="Monospace" font-size="11.00">build_cdf_acc/3</text>
 </a>
 </g>
@@ -466,12 +466,12 @@
 <!-- build_cumulative_distribution/2&#45;&gt;build_cdf_acc/3 -->
 <g id="edge13" class="edge">
 <title>build_cumulative_distribution/2&#45;&gt;build_cdf_acc/3</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L189" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L189" xlink:title="calls">
 <path fill="none" stroke="black" d="M136,-327.09C136,-303.11 136,-259.64 136,-230.92"/>
 <polygon fill="black" stroke="black" points="139.5,-231.12 136,-221.12 132.5,-231.12 139.5,-231.12"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L189" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L189">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L189" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L189">
 <text xml:space="preserve" text-anchor="start" x="136" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -481,7 +481,7 @@
 <title>learn/2</title>
 <polygon fill="cornsilk" stroke="black" points="1663.88,-840.5 1590.12,-840.5 1590.12,-804.5 1663.88,-804.5 1663.88,-840.5"/>
 <text xml:space="preserve" text-anchor="start" x="1598.12" y="-824.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L80">
+<g id="a_node6_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="1603.38" y="-824.38" font-family="Monospace" font-size="11.00">learn/2</text>
 </a>
 </g>
@@ -493,12 +493,12 @@
 <!-- learn/2&#45;&gt;learn/3 -->
 <g id="edge1" class="edge">
 <title>learn/2&#45;&gt;learn/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L80" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M1627,-804.2C1627,-785.5 1627,-755.37 1627,-733.08"/>
 <polygon fill="black" stroke="black" points="1630.5,-733.14 1627,-723.14 1623.5,-733.14 1630.5,-733.14"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L80">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="1627" y="-759.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -506,12 +506,12 @@
 <!-- build_ensemble/10&#45;&gt;compute_weighted_error/4 -->
 <g id="edge6" class="edge">
 <title>build_ensemble/10&#45;&gt;compute_weighted_error/4</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L129" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M1215.98,-567.53C1213.29,-567 1210.62,-566.49 1208,-566 1108.79,-547.38 1078.1,-565.88 983.75,-530 958.37,-520.35 932.61,-503.77 913.49,-489.87"/>
 <polygon fill="black" stroke="black" points="915.72,-487.17 905.61,-484.01 911.54,-492.79 915.72,-487.17"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L129">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="983.75" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -521,7 +521,7 @@
 <title>create_weighted_dataset/5</title>
 <polygon fill="cornsilk" stroke="black" points="640.62,-482.75 445.38,-482.75 445.38,-446.75 640.62,-446.75 640.62,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="453.38" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167">
+<g id="a_node10_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167">
 <text xml:space="preserve" text-anchor="start" x="458.62" y="-466.62" font-family="Monospace" font-size="11.00">create_weighted_dataset/5</text>
 </a>
 </g>
@@ -533,12 +533,12 @@
 <!-- build_ensemble/10&#45;&gt;create_weighted_dataset/5 -->
 <g id="edge5" class="edge">
 <title>build_ensemble/10&#45;&gt;create_weighted_dataset/5</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L129" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M1216,-567.43C1213.3,-566.93 1210.63,-566.45 1208,-566 1085.11,-544.87 1053.11,-548.22 929.75,-530 835.89,-516.14 729.58,-498.32 652.2,-484.97"/>
 <polygon fill="black" stroke="black" points="652.94,-481.54 642.49,-483.29 651.75,-488.44 652.94,-481.54"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L129">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="929.75" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -548,7 +548,7 @@
 <title>update_weights/5</title>
 <polygon fill="cornsilk" stroke="black" points="1708.25,-363.5 1573.75,-363.5 1573.75,-327.5 1708.25,-327.5 1708.25,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="1581.75" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L243" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L243">
+<g id="a_node17_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L243" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L243">
 <text xml:space="preserve" text-anchor="start" x="1587" y="-347.38" font-family="Monospace" font-size="11.00">update_weights/5</text>
 </a>
 </g>
@@ -560,12 +560,12 @@
 <!-- build_ensemble/10&#45;&gt;update_weights/5 -->
 <g id="edge7" class="edge">
 <title>build_ensemble/10&#45;&gt;update_weights/5</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L129" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M1357.83,-576.95C1425.64,-567.56 1526.71,-543.64 1590,-482.75 1620.05,-453.84 1632.55,-405.56 1637.64,-374.91"/>
 <polygon fill="black" stroke="black" points="1641.07,-375.62 1639.08,-365.22 1634.15,-374.6 1641.07,-375.62"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L129">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="1615.23" y="-461.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -575,7 +575,7 @@
 <title>normalize_weights/2</title>
 <polygon fill="cornsilk" stroke="black" points="1215.38,-482.75 1060.62,-482.75 1060.62,-446.75 1215.38,-446.75 1215.38,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="1068.62" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L254" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L254">
+<g id="a_node18_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L254" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L254">
 <text xml:space="preserve" text-anchor="start" x="1073.88" y="-466.62" font-family="Monospace" font-size="11.00">normalize_weights/2</text>
 </a>
 </g>
@@ -587,12 +587,12 @@
 <!-- build_ensemble/10&#45;&gt;normalize_weights/2 -->
 <g id="edge8" class="edge">
 <title>build_ensemble/10&#45;&gt;normalize_weights/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L129" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M1265.01,-565.7C1239.59,-545.7 1197.58,-512.63 1168.89,-490.05"/>
 <polygon fill="black" stroke="black" points="1171.29,-487.49 1161.27,-484.06 1166.96,-492.99 1171.29,-487.49"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L129">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="1216.97" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -614,12 +614,12 @@
 <!-- build_ensemble/10&#45;&gt;c45::learn/2 -->
 <g id="edge37" class="edge">
 <title>build_ensemble/10&#45;&gt;c45::learn/2</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L129" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M1287,-565.7C1287,-547 1287,-516.87 1287,-494.58"/>
 <polygon fill="black" stroke="black" points="1290.5,-494.64 1287,-484.64 1283.5,-494.64 1290.5,-494.64"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L129">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="1287" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -641,12 +641,12 @@
 <!-- build_ensemble/10&#45;&gt;list::append/3 -->
 <g id="edge38" class="edge">
 <title>build_ensemble/10&#45;&gt;list::append/3</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L129" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M1222.47,-565.55C1167.64,-549.05 1088.14,-521.1 1025.75,-482.75 1005.44,-470.27 1005.19,-460.88 986,-446.75 952.75,-422.26 944.03,-415.58 906,-399.5 883.87,-390.14 829.45,-375.52 783.86,-364.01"/>
 <polygon fill="black" stroke="black" points="784.81,-360.64 774.26,-361.6 783.1,-367.43 784.81,-360.64"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L129">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="1025.75" y="-461.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -654,12 +654,12 @@
 <!-- create_weighted_dataset/5&#45;&gt;build_cumulative_distribution/2 -->
 <g id="edge9" class="edge">
 <title>create_weighted_dataset/5&#45;&gt;build_cumulative_distribution/2</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167" xlink:title="calls">
 <path fill="none" stroke="black" d="M474.57,-446.27C436.04,-436.25 387.1,-423.21 343.75,-410.75 295.72,-396.94 241.82,-380.24 200.96,-367.32"/>
 <polygon fill="black" stroke="black" points="202.1,-364.01 191.51,-364.33 199.98,-370.68 202.1,-364.01"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167">
 <text xml:space="preserve" text-anchor="start" x="343.75" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -669,7 +669,7 @@
 <title>weighted_sample/5</title>
 <polygon fill="cornsilk" stroke="black" points="413.62,-363.5 272.38,-363.5 272.38,-327.5 413.62,-327.5 413.62,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="280.38" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L198">
+<g id="a_node12_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L198">
 <text xml:space="preserve" text-anchor="start" x="285.62" y="-347.38" font-family="Monospace" font-size="11.00">weighted_sample/5</text>
 </a>
 </g>
@@ -681,12 +681,12 @@
 <!-- create_weighted_dataset/5&#45;&gt;weighted_sample/5 -->
 <g id="edge10" class="edge">
 <title>create_weighted_dataset/5&#45;&gt;weighted_sample/5</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167" xlink:title="calls">
 <path fill="none" stroke="black" d="M456.91,-446.33C431.91,-438.38 405.71,-426.98 384.75,-410.75 372.34,-401.14 362.5,-386.75 355.5,-374.01"/>
 <polygon fill="black" stroke="black" points="358.66,-372.5 350.98,-365.2 352.43,-375.7 358.66,-372.5"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167">
 <text xml:space="preserve" text-anchor="start" x="384.75" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -696,7 +696,7 @@
 <title>build_attribute_clauses/3</title>
 <polygon fill="cornsilk" stroke="black" points="821.62,-291.5 626.38,-291.5 626.38,-255.5 821.62,-255.5 821.62,-291.5"/>
 <text xml:space="preserve" text-anchor="start" x="634.38" y="-275.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L218" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L218">
+<g id="a_node14_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L218" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L218">
 <text xml:space="preserve" text-anchor="start" x="639.62" y="-275.38" font-family="Monospace" font-size="11.00">build_attribute_clauses/3</text>
 </a>
 </g>
@@ -708,12 +708,12 @@
 <!-- create_weighted_dataset/5&#45;&gt;build_attribute_clauses/3 -->
 <g id="edge11" class="edge">
 <title>create_weighted_dataset/5&#45;&gt;build_attribute_clauses/3</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167" xlink:title="calls">
 <path fill="none" stroke="black" d="M513.89,-446.27C473.48,-419.85 409.01,-368.5 443,-327.5 464.95,-301.03 545.43,-287.68 614.67,-281.01"/>
 <polygon fill="black" stroke="black" points="614.98,-284.5 624.61,-280.1 614.33,-277.53 614.98,-284.5"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167">
 <text xml:space="preserve" text-anchor="start" x="467.21" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -723,7 +723,7 @@
 <title>build_example_clauses/2</title>
 <polygon fill="cornsilk" stroke="black" points="633.88,-363.5 452.12,-363.5 452.12,-327.5 633.88,-327.5 633.88,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="460.12" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L224">
+<g id="a_node15_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="465.38" y="-347.38" font-family="Monospace" font-size="11.00">build_example_clauses/2</text>
 </a>
 </g>
@@ -735,12 +735,12 @@
 <!-- create_weighted_dataset/5&#45;&gt;build_example_clauses/2 -->
 <g id="edge12" class="edge">
 <title>create_weighted_dataset/5&#45;&gt;build_example_clauses/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167" xlink:title="calls">
 <path fill="none" stroke="black" d="M543,-446.45C543,-427.75 543,-397.62 543,-375.33"/>
 <polygon fill="black" stroke="black" points="546.5,-375.39 543,-365.39 539.5,-375.39 546.5,-375.39"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167">
 <text xml:space="preserve" text-anchor="start" x="543" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -748,12 +748,12 @@
 <!-- create_weighted_dataset/5&#45;&gt;list::length/2 -->
 <g id="edge39" class="edge">
 <title>create_weighted_dataset/5&#45;&gt;list::length/2</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167" xlink:title="calls">
 <path fill="none" stroke="black" d="M640.95,-456.83C816.91,-444.26 1170.75,-418.27 1197,-410.75 1207.46,-407.75 1208.44,-402.98 1218.75,-399.5 1303.57,-370.91 1331.76,-381.58 1423.18,-363.74"/>
 <polygon fill="black" stroke="black" points="1423.76,-367.2 1432.87,-361.79 1422.37,-360.34 1423.76,-367.2"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167">
 <text xml:space="preserve" text-anchor="start" x="1218.75" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -761,12 +761,12 @@
 <!-- create_weighted_dataset/5&#45;&gt;list::append/3 -->
 <g id="edge40" class="edge">
 <title>create_weighted_dataset/5&#45;&gt;list::append/3</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167" xlink:title="calls">
 <path fill="none" stroke="black" d="M567.94,-446.45C597.02,-426.27 645.25,-392.81 677.81,-370.22"/>
 <polygon fill="black" stroke="black" points="679.5,-373.31 685.72,-364.73 675.51,-367.56 679.5,-373.31"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L167">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L167">
 <text xml:space="preserve" text-anchor="start" x="632.57" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -776,7 +776,7 @@
 <title>select_from_cdf/3</title>
 <polygon fill="cornsilk" stroke="black" points="386.62,-219.5 245.38,-219.5 245.38,-183.5 386.62,-183.5 386.62,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="253.38" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L208">
+<g id="a_node13_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L208">
 <text xml:space="preserve" text-anchor="start" x="258.62" y="-203.38" font-family="Monospace" font-size="11.00">select_from_cdf/3</text>
 </a>
 </g>
@@ -788,12 +788,12 @@
 <!-- weighted_sample/5&#45;&gt;select_from_cdf/3 -->
 <g id="edge14" class="edge">
 <title>weighted_sample/5&#45;&gt;select_from_cdf/3</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L200" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L200" xlink:title="calls">
 <path fill="none" stroke="black" d="M333.55,-327.4C328.47,-317.28 322.65,-304.03 319.75,-291.5 315.18,-271.77 314.3,-248.92 314.54,-231.32"/>
 <polygon fill="black" stroke="black" points="318.04,-231.42 314.82,-221.33 311.04,-231.23 318.04,-231.42"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L200">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L200">
 <text xml:space="preserve" text-anchor="start" x="319.75" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -815,12 +815,12 @@
 <!-- weighted_sample/5&#45;&gt;fast_random(Algorithm)::random/1 -->
 <g id="edge41" class="edge">
 <title>weighted_sample/5&#45;&gt;fast_random(Algorithm)::random/1</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L200" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L200" xlink:title="calls">
 <path fill="none" stroke="black" d="M366.3,-327.09C400.01,-301.9 462.51,-255.18 500.67,-226.67"/>
 <polygon fill="black" stroke="black" points="502.68,-229.53 508.6,-220.74 498.49,-223.92 502.68,-229.53"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L200">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L200">
 <text xml:space="preserve" text-anchor="start" x="460.61" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -842,12 +842,12 @@
 <!-- build_attribute_clauses/3&#45;&gt;list::memberchk/2 -->
 <g id="edge42" class="edge">
 <title>build_attribute_clauses/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L219" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L219" xlink:title="calls">
 <path fill="none" stroke="black" d="M745.96,-255.04C788.56,-221.17 882.48,-146.49 931.25,-107.7"/>
 <polygon fill="black" stroke="black" points="933.26,-110.58 938.9,-101.61 928.9,-105.1 933.26,-110.58"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L219">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L219">
 <text xml:space="preserve" text-anchor="start" x="832.81" y="-198.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -857,7 +857,7 @@
 <title>filter_instance_attrs/3</title>
 <polygon fill="cornsilk" stroke="black" points="1396.88,-219.5 1215.12,-219.5 1215.12,-183.5 1396.88,-183.5 1396.88,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1223.12" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node22_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L279">
+<g id="a_node22_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L279">
 <text xml:space="preserve" text-anchor="start" x="1228.38" y="-203.38" font-family="Monospace" font-size="11.00">filter_instance_attrs/3</text>
 </a>
 </g>
@@ -869,12 +869,12 @@
 <!-- compute_error_acc/5&#45;&gt;filter_instance_attrs/3 -->
 <g id="edge16" class="edge">
 <title>compute_error_acc/5&#45;&gt;filter_instance_attrs/3</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L233" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L233" xlink:title="calls">
 <path fill="none" stroke="black" d="M921.71,-327.09C1002.43,-300.92 1154.8,-251.52 1241.45,-223.43"/>
 <polygon fill="black" stroke="black" points="1242.32,-226.82 1250.76,-220.41 1240.16,-220.16 1242.32,-226.82"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L233">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L233">
 <text xml:space="preserve" text-anchor="start" x="1139.11" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -896,12 +896,12 @@
 <!-- compute_error_acc/5&#45;&gt;c45::predict/3 -->
 <g id="edge43" class="edge">
 <title>compute_error_acc/5&#45;&gt;c45::predict/3</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L233" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L233" xlink:title="calls">
 <path fill="none" stroke="black" d="M945.71,-328.82C948.84,-328.35 951.95,-327.9 955,-327.5 1182.03,-297.48 1248.52,-353.4 1469,-291.5 1519.67,-277.27 1572.69,-247.16 1606.24,-225.92"/>
 <polygon fill="black" stroke="black" points="1607.79,-229.08 1614.31,-220.73 1604,-223.19 1607.79,-229.08"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L233">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L233">
 <text xml:space="preserve" text-anchor="start" x="1551.95" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -909,12 +909,12 @@
 <!-- update_weights/5&#45;&gt;filter_instance_attrs/3 -->
 <g id="edge17" class="edge">
 <title>update_weights/5&#45;&gt;filter_instance_attrs/3</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L244" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L244" xlink:title="calls">
 <path fill="none" stroke="black" d="M1573.32,-328.82C1525.57,-317.3 1466.1,-301.9 1442.75,-291.5 1403.86,-274.18 1363.51,-246.52 1336.81,-226.64"/>
 <polygon fill="black" stroke="black" points="1339.26,-224.1 1329.17,-220.87 1335.04,-229.69 1339.26,-224.1"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L244">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L244">
 <text xml:space="preserve" text-anchor="start" x="1442.75" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -922,12 +922,12 @@
 <!-- update_weights/5&#45;&gt;c45::predict/3 -->
 <g id="edge44" class="edge">
 <title>update_weights/5&#45;&gt;c45::predict/3</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L244" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L244" xlink:title="calls">
 <path fill="none" stroke="black" d="M1641,-327.09C1641,-303.11 1641,-259.64 1641,-230.92"/>
 <polygon fill="black" stroke="black" points="1644.5,-231.12 1641,-221.12 1637.5,-231.12 1644.5,-231.12"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L244">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L244">
 <text xml:space="preserve" text-anchor="start" x="1641" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -937,7 +937,7 @@
 <title>sum_weights/3</title>
 <polygon fill="cornsilk" stroke="black" points="1416.12,-363.5 1301.88,-363.5 1301.88,-327.5 1416.12,-327.5 1416.12,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="1309.88" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L264" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L264">
+<g id="a_node19_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L264" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L264">
 <text xml:space="preserve" text-anchor="start" x="1315.12" y="-347.38" font-family="Monospace" font-size="11.00">sum_weights/3</text>
 </a>
 </g>
@@ -949,12 +949,12 @@
 <!-- normalize_weights/2&#45;&gt;sum_weights/3 -->
 <g id="edge18" class="edge">
 <title>normalize_weights/2&#45;&gt;sum_weights/3</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L254" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L254" xlink:title="calls">
 <path fill="none" stroke="black" d="M1176.66,-446.25C1198.18,-436.28 1225.32,-423.29 1249,-410.75 1273.35,-397.85 1300.06,-382.29 1321.06,-369.71"/>
 <polygon fill="black" stroke="black" points="1322.82,-372.74 1329.58,-364.58 1319.21,-366.74 1322.82,-372.74"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L254" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L254">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L254" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L254">
 <text xml:space="preserve" text-anchor="start" x="1267.32" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -964,7 +964,7 @@
 <title>divide_weights/3</title>
 <polygon fill="cornsilk" stroke="black" points="1098.25,-363.5 963.75,-363.5 963.75,-327.5 1098.25,-327.5 1098.25,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="971.75" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L269">
+<g id="a_node20_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L269">
 <text xml:space="preserve" text-anchor="start" x="977" y="-347.38" font-family="Monospace" font-size="11.00">divide_weights/3</text>
 </a>
 </g>
@@ -976,12 +976,12 @@
 <!-- normalize_weights/2&#45;&gt;divide_weights/3 -->
 <g id="edge19" class="edge">
 <title>normalize_weights/2&#45;&gt;divide_weights/3</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L254" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L254" xlink:title="calls">
 <path fill="none" stroke="black" d="M1122.21,-446.45C1104.35,-426.88 1075.09,-394.81 1054.53,-372.28"/>
 <polygon fill="black" stroke="black" points="1057.2,-370.02 1047.87,-364.99 1052.03,-374.74 1057.2,-370.02"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L254" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L254">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L254" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L254">
 <text xml:space="preserve" text-anchor="start" x="1087.71" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -991,7 +991,7 @@
 <title>set_uniform_weights/3</title>
 <polygon fill="cornsilk" stroke="black" points="1284.12,-363.5 1115.88,-363.5 1115.88,-327.5 1284.12,-327.5 1284.12,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="1123.88" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node21_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L274">
+<g id="a_node21_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L274">
 <text xml:space="preserve" text-anchor="start" x="1129.12" y="-347.38" font-family="Monospace" font-size="11.00">set_uniform_weights/3</text>
 </a>
 </g>
@@ -1003,12 +1003,12 @@
 <!-- normalize_weights/2&#45;&gt;set_uniform_weights/3 -->
 <g id="edge20" class="edge">
 <title>normalize_weights/2&#45;&gt;set_uniform_weights/3</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L254" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L254" xlink:title="calls">
 <path fill="none" stroke="black" d="M1146.6,-446.49C1153.12,-433.51 1162.36,-415.32 1170.75,-399.5 1175.25,-391.01 1180.27,-381.83 1184.86,-373.53"/>
 <polygon fill="black" stroke="black" points="1187.84,-375.37 1189.64,-364.93 1181.72,-371.97 1187.84,-375.37"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L254" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L254">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L254" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L254">
 <text xml:space="preserve" text-anchor="start" x="1170.75" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1016,12 +1016,12 @@
 <!-- normalize_weights/2&#45;&gt;list::length/2 -->
 <g id="edge45" class="edge">
 <title>normalize_weights/2&#45;&gt;list::length/2</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L254" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L254" xlink:title="calls">
 <path fill="none" stroke="black" d="M1191.06,-446.32C1255.13,-425.28 1362.8,-389.92 1431.29,-367.42"/>
 <polygon fill="black" stroke="black" points="1432.09,-370.84 1440.5,-364.4 1429.91,-364.19 1432.09,-370.84"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L254" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L254">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L254" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L254">
 <text xml:space="preserve" text-anchor="start" x="1327.2" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1029,12 +1029,12 @@
 <!-- filter_instance_attrs/3&#45;&gt;list::memberchk/2 -->
 <g id="edge46" class="edge">
 <title>filter_instance_attrs/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L281" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L281" xlink:title="calls">
 <path fill="none" stroke="black" d="M1254.87,-183.07C1193.26,-162.07 1089.82,-126.81 1023.79,-104.31"/>
 <polygon fill="black" stroke="black" points="1025.16,-101.08 1014.56,-101.17 1022.9,-107.7 1025.16,-101.08"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L281" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L281">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L281" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L281">
 <text xml:space="preserve" text-anchor="start" x="1144.31" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1044,7 +1044,7 @@
 <title>predict/3</title>
 <polygon fill="cornsilk" stroke="black" points="2242.62,-602 2155.38,-602 2155.38,-566 2242.62,-566 2242.62,-602"/>
 <text xml:space="preserve" text-anchor="start" x="2163.38" y="-586.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node23_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L286" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L286">
+<g id="a_node23_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L286" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L286">
 <text xml:space="preserve" text-anchor="start" x="2168.62" y="-585.88" font-family="Monospace" font-size="11.00">predict/3</text>
 </a>
 </g>
@@ -1056,12 +1056,12 @@
 <!-- predict/3&#45;&gt;predict_probabilities/3 -->
 <g id="edge21" class="edge">
 <title>predict/3&#45;&gt;predict_probabilities/3</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L286" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L286" xlink:title="calls">
 <path fill="none" stroke="black" d="M2186.16,-565.7C2171.77,-546.3 2148.27,-514.63 2131.58,-492.14"/>
 <polygon fill="black" stroke="black" points="2134.56,-490.28 2125.79,-484.34 2128.94,-494.45 2134.56,-490.28"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L286" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L286">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L286" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L286">
 <text xml:space="preserve" text-anchor="start" x="2158.11" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1071,7 +1071,7 @@
 <title>max_probability/3</title>
 <polygon fill="cornsilk" stroke="black" points="2362.62,-482.75 2221.38,-482.75 2221.38,-446.75 2362.62,-446.75 2362.62,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="2229.38" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node29_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L336" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L336">
+<g id="a_node29_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L336" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L336">
 <text xml:space="preserve" text-anchor="start" x="2234.62" y="-466.62" font-family="Monospace" font-size="11.00">max_probability/3</text>
 </a>
 </g>
@@ -1083,12 +1083,12 @@
 <!-- predict/3&#45;&gt;max_probability/3 -->
 <g id="edge22" class="edge">
 <title>predict/3&#45;&gt;max_probability/3</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L286" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L286" xlink:title="calls">
 <path fill="none" stroke="black" d="M2212.72,-565.7C2228.11,-546.3 2253.23,-514.63 2271.07,-492.14"/>
 <polygon fill="black" stroke="black" points="2273.81,-494.32 2277.28,-484.31 2268.32,-489.97 2273.81,-494.32"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L286" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L286">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L286" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L286">
 <text xml:space="preserve" text-anchor="start" x="2248.29" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1096,12 +1096,12 @@
 <!-- collect_weighted_predictions/3&#45;&gt;filter_instance_attrs/3 -->
 <g id="edge27" class="edge">
 <title>collect_weighted_predictions/3&#45;&gt;filter_instance_attrs/3</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L302" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L302" xlink:title="calls">
 <path fill="none" stroke="black" d="M1790.99,-327.01C1767.42,-317.86 1739.36,-305.62 1715.75,-291.5 1693.84,-278.4 1694.4,-265.69 1671,-255.5 1587.38,-219.07 1483.82,-206.78 1408.39,-203.03"/>
 <polygon fill="black" stroke="black" points="1408.66,-199.54 1398.51,-202.59 1408.35,-206.53 1408.66,-199.54"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L302" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L302">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L302" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L302">
 <text xml:space="preserve" text-anchor="start" x="1715.75" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1109,12 +1109,12 @@
 <!-- collect_weighted_predictions/3&#45;&gt;c45::predict/3 -->
 <g id="edge47" class="edge">
 <title>collect_weighted_predictions/3&#45;&gt;c45::predict/3</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L302" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L302" xlink:title="calls">
 <path fill="none" stroke="black" d="M1825.43,-327.2C1807.56,-308.04 1776.75,-277 1746,-255.5 1729.42,-243.91 1709.95,-233.35 1692.31,-224.77"/>
 <polygon fill="black" stroke="black" points="1694.07,-221.73 1683.54,-220.6 1691.07,-228.05 1694.07,-221.73"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L302" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L302">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L302" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L302">
 <text xml:space="preserve" text-anchor="start" x="1787.43" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1124,7 +1124,7 @@
 <title>sum_class_weight/4</title>
 <polygon fill="cornsilk" stroke="black" points="2311,-100.25 2163,-100.25 2163,-64.25 2311,-64.25 2311,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="2171" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node26_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L315">
+<g id="a_node26_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L315">
 <text xml:space="preserve" text-anchor="start" x="2176.25" y="-84.12" font-family="Monospace" font-size="11.00">sum_class_weight/4</text>
 </a>
 </g>
@@ -1136,12 +1136,12 @@
 <!-- accumulate_votes_for_classes/3&#45;&gt;sum_class_weight/4 -->
 <g id="edge29" class="edge">
 <title>accumulate_votes_for_classes/3&#45;&gt;sum_class_weight/4</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L311" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L311" xlink:title="calls">
 <path fill="none" stroke="black" d="M2237,-183.2C2237,-164.5 2237,-134.37 2237,-112.08"/>
 <polygon fill="black" stroke="black" points="2240.5,-112.14 2237,-102.14 2233.5,-112.14 2240.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L311">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L311">
 <text xml:space="preserve" text-anchor="start" x="2237" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1151,7 +1151,7 @@
 <title>classifier_diagnostics_data/2</title>
 <polygon fill="cornsilk" stroke="black" points="1581.12,-482.75 1358.88,-482.75 1358.88,-446.75 1581.12,-446.75 1581.12,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="1366.88" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node30_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L344">
+<g id="a_node30_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L344">
 <text xml:space="preserve" text-anchor="start" x="1372.12" y="-466.62" font-family="Monospace" font-size="11.00">classifier_diagnostics_data/2</text>
 </a>
 </g>
@@ -1163,12 +1163,12 @@
 <!-- classifier_diagnostics_data/2&#45;&gt;list::length/2 -->
 <g id="edge48" class="edge">
 <title>classifier_diagnostics_data/2&#45;&gt;list::length/2</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L344" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L344" xlink:title="calls">
 <path fill="none" stroke="black" d="M1473.69,-446.45C1477.7,-427.66 1484.16,-397.34 1488.92,-375.02"/>
 <polygon fill="black" stroke="black" points="1492.32,-375.86 1490.98,-365.35 1485.47,-374.4 1492.32,-375.86"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L344">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L344">
 <text xml:space="preserve" text-anchor="start" x="1483.25" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1178,7 +1178,7 @@
 <title>classifier_to_clauses/4</title>
 <polygon fill="cornsilk" stroke="black" points="2175.88,-840.5 1994.12,-840.5 1994.12,-804.5 2175.88,-804.5 2175.88,-840.5"/>
 <text xml:space="preserve" text-anchor="start" x="2002.12" y="-824.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node31_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L354">
+<g id="a_node31_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L354">
 <text xml:space="preserve" text-anchor="start" x="2007.38" y="-824.38" font-family="Monospace" font-size="11.00">classifier_to_clauses/4</text>
 </a>
 </g>
@@ -1192,7 +1192,7 @@
 <title>print_classifier/1</title>
 <polygon fill="cornsilk" stroke="black" points="2600,-482.75 2452,-482.75 2452,-446.75 2600,-446.75 2600,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="2460" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node32_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L359" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L359">
+<g id="a_node32_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L359" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L359">
 <text xml:space="preserve" text-anchor="start" x="2465.25" y="-466.62" font-family="Monospace" font-size="11.00">print_classifier/1</text>
 </a>
 </g>
@@ -1206,7 +1206,7 @@
 <title>print_weighted_trees/2</title>
 <polygon fill="cornsilk" stroke="black" points="2720.5,-363.5 2545.5,-363.5 2545.5,-327.5 2720.5,-327.5 2720.5,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="2553.5" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node33_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L370">
+<g id="a_node33_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L370">
 <text xml:space="preserve" text-anchor="start" x="2558.75" y="-347.38" font-family="Monospace" font-size="11.00">print_weighted_trees/2</text>
 </a>
 </g>
@@ -1218,12 +1218,12 @@
 <!-- print_classifier/1&#45;&gt;print_weighted_trees/2 -->
 <g id="edge30" class="edge">
 <title>print_classifier/1&#45;&gt;print_weighted_trees/2</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L359" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L359" xlink:title="calls">
 <path fill="none" stroke="black" d="M2541.79,-446.45C2559.65,-426.88 2588.91,-394.81 2609.47,-372.28"/>
 <polygon fill="black" stroke="black" points="2611.97,-374.74 2616.13,-364.99 2606.8,-370.02 2611.97,-374.74"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L359" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L359">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L359" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L359">
 <text xml:space="preserve" text-anchor="start" x="2582.71" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1231,12 +1231,12 @@
 <!-- print_classifier/1&#45;&gt;list::length/2 -->
 <g id="edge50" class="edge">
 <title>print_classifier/1&#45;&gt;list::length/2</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L359" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L359" xlink:title="calls">
 <path fill="none" stroke="black" d="M2480.03,-446.39C2437.21,-431.08 2371.26,-409.67 2312,-399.5 1988.08,-343.93 1896.04,-409.43 1567.25,-363.63"/>
 <polygon fill="black" stroke="black" points="1567.84,-360.18 1557.45,-362.24 1566.86,-367.11 1567.84,-360.18"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L359" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L359">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L359" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L359">
 <text xml:space="preserve" text-anchor="start" x="2359.83" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1258,12 +1258,12 @@
 <!-- print_classifier/1&#45;&gt;format::format/2 -->
 <g id="edge49" class="edge">
 <title>print_classifier/1&#45;&gt;format::format/2</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L359" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L359" xlink:title="calls">
 <path fill="none" stroke="black" d="M2525.73,-446.43C2525.09,-420.43 2522.99,-369.86 2516,-327.5 2505.39,-263.17 2464.68,-244.39 2488,-183.5 2499.64,-153.11 2525.21,-126.15 2546.13,-107.86"/>
 <polygon fill="black" stroke="black" points="2548.22,-110.67 2553.6,-101.54 2543.7,-105.32 2548.22,-110.67"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L359" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L359">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L359" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L359">
 <text xml:space="preserve" text-anchor="start" x="2505.9" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1273,7 +1273,7 @@
 <title>print_tree_summary/1</title>
 <polygon fill="cornsilk" stroke="black" points="2658.75,-219.5 2497.25,-219.5 2497.25,-183.5 2658.75,-183.5 2658.75,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="2505.25" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node34_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L377" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L377">
+<g id="a_node34_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L377" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L377">
 <text xml:space="preserve" text-anchor="start" x="2510.5" y="-203.38" font-family="Monospace" font-size="11.00">print_tree_summary/1</text>
 </a>
 </g>
@@ -1285,12 +1285,12 @@
 <!-- print_weighted_trees/2&#45;&gt;print_tree_summary/1 -->
 <g id="edge31" class="edge">
 <title>print_weighted_trees/2&#45;&gt;print_tree_summary/1</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L371" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L371" xlink:title="calls">
 <path fill="none" stroke="black" d="M2626.26,-327.09C2616.89,-302.9 2599.83,-258.86 2588.71,-230.15"/>
 <polygon fill="black" stroke="black" points="2592.05,-229.08 2585.17,-221.02 2585.52,-231.61 2592.05,-229.08"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L371" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L371">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L371" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L371">
 <text xml:space="preserve" text-anchor="start" x="2612.04" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1298,12 +1298,12 @@
 <!-- print_weighted_trees/2&#45;&gt;format::format/2 -->
 <g id="edge51" class="edge">
 <title>print_weighted_trees/2&#45;&gt;format::format/2</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L371" xlink:title="calls">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L371" xlink:title="calls">
 <path fill="none" stroke="black" d="M2643.17,-327.09C2659.34,-297.01 2687.23,-233.72 2668,-183.5 2656.36,-153.11 2630.79,-126.15 2609.87,-107.86"/>
 <polygon fill="black" stroke="black" points="2612.3,-105.32 2602.4,-101.54 2607.78,-110.67 2612.3,-105.32"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L371" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L371">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L371" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L371">
 <text xml:space="preserve" text-anchor="start" x="2674.5" y="-198.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1311,12 +1311,12 @@
 <!-- print_tree_summary/1&#45;&gt;format::format/2 -->
 <g id="edge52" class="edge">
 <title>print_tree_summary/1&#45;&gt;format::format/2</title>
-<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L377" xlink:title="calls">
+<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L377" xlink:title="calls">
 <path fill="none" stroke="black" d="M2578,-183.2C2578,-164.5 2578,-134.37 2578,-112.08"/>
 <polygon fill="black" stroke="black" points="2581.5,-112.14 2578,-102.14 2574.5,-112.14 2581.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L377" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L377">
+<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L377" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L377">
 <text xml:space="preserve" text-anchor="start" x="2578" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1326,7 +1326,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="2484.25,-840.5 2349.75,-840.5 2349.75,-804.5 2484.25,-804.5 2484.25,-840.5"/>
 <text xml:space="preserve" text-anchor="start" x="2357.75" y="-824.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node35_43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L385" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L385">
+<g id="a_node35_43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L385" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L385">
 <text xml:space="preserve" text-anchor="start" x="2363" y="-824.38" font-family="Monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -1340,7 +1340,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="2701.5,-840.5 2580.5,-840.5 2580.5,-804.5 2701.5,-804.5 2701.5,-840.5"/>
 <text xml:space="preserve" text-anchor="start" x="2588.5" y="-824.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node36_44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L388">
+<g id="a_node36_44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L388">
 <text xml:space="preserve" text-anchor="start" x="2593.75" y="-824.38" font-family="Monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -1366,12 +1366,12 @@
 <!-- valid_option/1&#45;&gt;type::valid/2 -->
 <g id="edge53" class="edge">
 <title>valid_option/1&#45;&gt;type::valid/2</title>
-<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L388" xlink:title="calls">
+<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L388" xlink:title="calls">
 <path fill="none" stroke="black" d="M2641,-804.2C2641,-785.5 2641,-755.37 2641,-733.08"/>
 <polygon fill="black" stroke="black" points="2644.5,-733.14 2641,-723.14 2637.5,-733.14 2644.5,-733.14"/>
 </a>
 </g>
-<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6a3af8775d56efdb5436966a05f0029d0578ed84/library/ada_boost/ada_boost.lgt#L388">
+<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b34fecc4f52ae260a1f16806be84bdc5fbe2a7ef/library/ada_boost/ada_boost.lgt#L388">
 <text xml:space="preserve" text-anchor="start" x="2641" y="-759.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
