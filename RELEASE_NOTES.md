@@ -63,7 +63,7 @@ libraries, allowing more detailed exports.
 * IMPROVED: The `numberlist::softmax/2-3` library predicates by making their
 implementation numerically stable.
 
-* IMPROVED: Rewritten two `amqp` library auxiliary predicate to be
+* IMPROVED: Rewritten two `amqp` library auxiliary predicates to be
 tail-recursive.
 
 * IMPROVED: Rewritten `avro` library auxiliary non-terminal to be
@@ -113,6 +113,11 @@ tail-recursive.
 
 * IMPROVED: Rewritten two `yaml` library auxiliary predicates to be
 tail-recursive.
+
+Tools
+-----
+
+* IMPROVED: Rewritten `sarif` tool auxiliary predicate to be tail-recursive.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

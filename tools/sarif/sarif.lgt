@@ -22,9 +22,9 @@
 :- object(sarif).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-01,
+		date is 2026-04-19,
 		comment is 'Shared SARIF report generator for tools implementing the diagnostics protocol.'
 	]).
 
@@ -361,7 +361,7 @@
 		sarif_results(Diagnostics, Rules, ToolInfo, NormalizationContext, Results).
 
 	sarif_result(diagnostic(RuleId, Severity, Confidence, Message, Context, File, Lines, Properties), Rules, ToolInfo, NormalizationContext, json(Pairs)) :-
-		rule_index(RuleId, Rules, RuleIndex),
+		rule_index(RuleId, Rules, 0, RuleIndex),
 		message_pairs(Message, MessagePairs),
 		location_pairs(File, Lines, NormalizationContext, LocationPairs),
 		fingerprint_pairs(RuleId, File, Lines, Context, Properties, ToolInfo, NormalizationContext, FingerprintPairs),
@@ -550,11 +550,11 @@
 		normalized_location_identity(File, NormalizationContext, FileIdentity),
 		to_atom(FileIdentity, FileAtom).
 
-	rule_index(RuleId, [diagnostic_rule(RuleId, _ShortDescription, _FullDescription, _DefaultSeverity, _Properties)| _], 0) :-
+	rule_index(RuleId, [diagnostic_rule(RuleId, _ShortDescription, _FullDescription, _DefaultSeverity, _Properties)| _], RuleIndex, RuleIndex) :-
 		!.
-	rule_index(RuleId, [_| Rules], RuleIndex) :-
-		rule_index(RuleId, Rules, RuleIndex0),
-		RuleIndex is RuleIndex0 + 1.
+	rule_index(RuleId, [_| Rules], RuleIndex0, RuleIndex) :-
+		RuleIndex1 is RuleIndex0 + 1,
+		rule_index(RuleId, Rules, RuleIndex1, RuleIndex).
 
 	sarif_version_control_provenance(Diagnostics, VersionControlProvenance) :-
 		(	setof(Directory, sarif_version_control_directory(Diagnostics, Directory), Directories) ->
