@@ -8,22 +8,21 @@
 ``isolation_forest``
 ====================
 
-Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the improved version described by Hariri et al. (2019) that uses random hyperplane cuts instead of axis-aligned cuts, eliminating score bias artifacts. Builds an ensemble of isolation trees from a dataset object implementing the ``dataset_protocol`` protocol. Missing attribute values are represented using anonymous variables.
+Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the improved version described by Hariri et al. (2019) that uses random hyperplane cuts instead of axis-aligned cuts, eliminating score bias artifacts. Builds an ensemble of isolation trees from a dataset object implementing the ``anomaly_dataset_protocol`` protocol. Missing attribute values are represented using anonymous variables.
 
 | **Availability:** 
 |    ``logtalk_load(isolation_forest(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2026-04-17
+| **Version:** 2:0:0
+| **Date:** 2026-04-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Imports:**
-|    ``public`` :ref:`options <options/0>`
-|    ``public`` :ref:`classifier_common <classifier_common/0>`
+|    ``public`` :ref:`anomaly_common <anomaly_common/0>`
 | **Uses:**
 |    :ref:`fast_random(Algorithm) <fast_random/1>`
 |    :ref:`format <format/0>`
@@ -42,10 +41,10 @@ Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the 
    - Anomaly score: The anomaly score ``s(x)`` is computed as ``s(x) = 2^(-E(h(x))/c(psi))`` where ``E(h(x))`` is the average path length across all trees, ``c(psi)`` is the average path length of unsuccessful searches in a BST, and ``psi`` is the subsample size. Scores close to 1 indicate anomalies; scores below 0.5 indicate normal points.
    - Discrete attributes: Discrete (categorical) attributes are mapped to numeric indices based on their position in the attribute value list declared by the dataset. This allows the algorithm to handle datasets with mixed attribute types.
    - Missing values: Missing attribute values are represented using anonymous variables. During tree construction, missing values are replaced with random values drawn from the observed range of the corresponding attribute. During scoring, instances with missing values are sent down both branches of the tree and the path length is computed as the weighted average of the two branches.
-   - Classifier representation: The learned model is represented as an ``if_model(Trees, SubsampleSize, AttributeNames, Attributes, Ranges, Options)`` compound term.
+   - Anomaly detector representation: The learned model is represented as an ``if_model(Trees, SubsampleSize, AttributeNames, Attributes, Ranges, Options)`` compound term.
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`classifier_protocol/0::classifier_options/2`  :ref:`classifier_protocol/0::classifier_to_clauses/4`  :ref:`classifier_protocol/0::classifier_to_file/4`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`classifier_protocol/0::diagnostic/2`  :ref:`classifier_protocol/0::diagnostics/2`  :ref:`classifier_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`anomaly_detector_protocol/0::anomaly_detector_to_clauses/4`  :ref:`anomaly_detector_protocol/0::anomaly_detector_to_file/4`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`anomaly_detector_protocol/0::learn/2`  :ref:`anomaly_detector_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`anomaly_detector_protocol/0::predict/3`  :ref:`anomaly_detector_protocol/0::predict/4`  :ref:`anomaly_detector_protocol/0::print_anomaly_detector/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -53,44 +52,6 @@ Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the 
 
 Public predicates
 -----------------
-
-.. index:: learn/3
-.. _isolation_forest/0::learn/3:
-
-``learn/3``
-^^^^^^^^^^^
-
-Learns an isolation forest model from the given dataset object using the specified options. Valid options are ``number_of_trees/1`` (default: ``100``), ``subsample_size/1`` (default: ``256`` or the number of instances if smaller), ``extension_level/1`` (default: ``d - 1`` where ``d`` is the number of dimensions), and ``anomaly_threshold/1`` (default: ``0.5``).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``learn(Dataset,Model,Options)``
-| **Mode and number of proofs:**
-|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
-
-
-------------
-
-.. index:: predict/4
-.. _isolation_forest/0::predict/4:
-
-``predict/4``
-^^^^^^^^^^^^^
-
-Predicts whether an instance is an anomaly or normal using the learned model and the anomaly threshold with the given options. The instance is a list of ``Attribute-Value`` pairs where missing values are represented using anonymous variables. Returns ``anomaly`` if the anomaly score is above the threshold, ``normal`` otherwise.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``predict(Model,Instance,Prediction,Options)``
-| **Mode and number of proofs:**
-|    ``predict(+compound,+list,-atom,+list(compound))`` - ``one``
-
-
-------------
 
 .. index:: score/3
 .. _isolation_forest/0::score/3:
@@ -147,5 +108,5 @@ Operators
 
 .. seealso::
 
-   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`c45 <c45/0>`, :ref:`random_forest <random_forest/0>`, :ref:`ada_boost <ada_boost/0>`
+   :ref:`anomaly_dataset_protocol <anomaly_dataset_protocol/0>`, :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0>`, :ref:`knn_distance <knn_distance/0>`, :ref:`lof <lof/0>`
 

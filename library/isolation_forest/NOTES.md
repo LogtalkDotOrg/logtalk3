@@ -33,9 +33,9 @@ and different from normal points, require fewer partitions (shorter path
 lengths) to be isolated. The anomaly score for an instance is computed
 based on the average path length across all trees in the forest.
 
-Datasets are represented as objects implementing the `dataset_protocol`
-protocol from the `classifier_protocols` library. See the `test_datasets`
-directory for examples.
+Datasets are represented as objects implementing the `anomaly_dataset_protocol`
+protocol from the `anomaly_protocols` library. See the
+`anomaly_protocols/test_datasets` directory for examples.
 
 
 API documentation
@@ -84,18 +84,29 @@ Implemented features
   attribute; during scoring, missing dimensions are excluded from the
   hyperplane dot product computation so that routing decisions at each
   tree node are based entirely on the known attribute values
-- Configurable parameters via options:
-  - `number_of_trees/1` (default: `100`): number of isolation trees
-  - `subsample_size/1` (default: `256` or number of instances if smaller):
-    subsample size for each tree
-  - `extension_level/1` (default: `d - 1`): controls the dimensionality
-    of the random hyperplane normal vectors
-  - `anomaly_threshold/1` (default: `0.5`): threshold for anomaly
-    prediction
 - Scoring all dataset instances with results sorted by descending anomaly
   score for easy identification of top anomalies
 - Pretty-printing of learned models with tree depth and node count
   summaries
+
+
+Options
+-------
+
+The following options can be passed to the `learn/3` and `predict/4`
+predicates:
+
+- `number_of_trees(N)`: number of isolation trees to build
+  (default: `100`)
+- `subsample_size(N)`: subsample size used to build each isolation tree.
+  When omitted, the implementation uses `256` or the number of training
+  instances if smaller
+- `extension_level(N)`: controls the dimensionality of the random
+  hyperplane cuts. `0` reproduces the original axis-aligned Isolation
+  Forest; when omitted, the implementation uses `d - 1`, where `d` is the
+  number of dimensions
+- `anomaly_threshold(T)`: threshold used by `predict/3-4`
+  (default: `0.5`)
 
 
 Limitations

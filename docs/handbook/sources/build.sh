@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 17, 2026
+##   Last updated on April 19, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -81,6 +81,7 @@ rm -f temp0
 sed '1,19d' ../../../library/NOTES.md | pandoc -f gfm -t rst -o libraries/overview.rst
 sed '1,19d' ../../../library/ada_boost/NOTES.md | pandoc -f gfm -t rst -o libraries/ada_boost.rst
 sed '1,19d' ../../../library/amqp/NOTES.md | pandoc -f gfm -t rst -o libraries/amqp.rst
+sed '1,19d' ../../../library/anomaly_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/anomaly_protocols.rst
 sed '1,19d' ../../../library/application/NOTES.md | pandoc -f gfm -t rst -o libraries/application.rst
 sed '1,19d' ../../../library/arbitrary/NOTES.md | pandoc -f gfm -t rst -o libraries/arbitrary.rst
 sed '1,19d' ../../../library/assignvars/NOTES.md | pandoc -f gfm -t rst -o libraries/assignvars.rst
@@ -138,8 +139,10 @@ sed '1,19d' ../../../library/json_schema/NOTES.md | pandoc -f gfm -t rst -o libr
 sed '1,19d' ../../../library/linda/NOTES.md | pandoc -f gfm -t rst -o libraries/linda.rst
 sed '1,19d' ../../../library/linear_svm/NOTES.md | pandoc -f gfm -t rst -o libraries/linear_svm.rst
 sed '1,19d' ../../../library/knn/NOTES.md | pandoc -f gfm -t rst -o libraries/knn.rst
+sed '1,19d' ../../../library/knn_distance/NOTES.md | pandoc -f gfm -t rst -o libraries/knn_distance.rst
 sed '1,19d' ../../../library/ksuid/NOTES.md | pandoc -f gfm -t rst -o libraries/ksuid.rst
 sed '1,19d' ../../../library/listing/NOTES.md | pandoc -f gfm -t rst -o libraries/listing.rst
+sed '1,19d' ../../../library/lof/NOTES.md | pandoc -f gfm -t rst -o libraries/lof.rst
 sed '1,19d' ../../../library/logging/NOTES.md | pandoc -f gfm -t rst -o libraries/logging.rst
 sed '1,19d' ../../../library/logistic_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/logistic_regression.rst
 sed '1,19d' ../../../library/loops/NOTES.md | pandoc -f gfm -t rst -o libraries/loops.rst

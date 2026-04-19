@@ -1,0 +1,230 @@
+.. index:: single: anomaly_detector_protocol
+.. _anomaly_detector_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``anomaly_detector_protocol``
+=============================
+
+Protocol for machine learning anomaly detectors.
+
+| **Availability:** 
+|    ``logtalk_load(anomaly_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-19
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/2
+.. _anomaly_detector_protocol/0::learn/2:
+
+``learn/2``
+^^^^^^^^^^^
+
+Learns an anomaly detector from the given dataset object.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,AnomalyDetector)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound)`` - ``one``
+
+
+------------
+
+.. index:: learn/3
+.. _anomaly_detector_protocol/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns an anomaly detector from the given dataset object using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,AnomalyDetector,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: predict/3
+.. _anomaly_detector_protocol/0::predict/3:
+
+``predict/3``
+^^^^^^^^^^^^^
+
+Predicts whether a new instance is ``normal`` or ``anomaly`` using the learned detector. The instance is a list of ``Attribute-Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predict(AnomalyDetector,Instance,Prediction)``
+| **Mode and number of proofs:**
+|    ``predict(+compound,+list,-atom)`` - ``one``
+
+
+------------
+
+.. index:: predict/4
+.. _anomaly_detector_protocol/0::predict/4:
+
+``predict/4``
+^^^^^^^^^^^^^
+
+Predicts whether a new instance is ``normal`` or ``anomaly`` using the learned detector and the specified options. The instance is a list of ``Attribute-Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predict(AnomalyDetector,Instance,Prediction,Options)``
+| **Mode and number of proofs:**
+|    ``predict(+compound,+list,-atom,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: score/3
+.. _anomaly_detector_protocol/0::score/3:
+
+``score/3``
+^^^^^^^^^^^
+
+Computes an anomaly score in the interval ``[0.0, 1.0]`` for a new instance. Larger scores indicate more anomalous instances.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score(AnomalyDetector,Instance,Score)``
+| **Mode and number of proofs:**
+|    ``score(+compound,+list,-float)`` - ``one``
+
+
+------------
+
+.. index:: score_all/3
+.. _anomaly_detector_protocol/0::score_all/3:
+
+``score_all/3``
+^^^^^^^^^^^^^^^
+
+Computes anomaly scores for all examples in a dataset and returns a list of ``Id-Class-Score`` triples sorted by descending score.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_all(Dataset,AnomalyDetector,Scores)``
+| **Mode and number of proofs:**
+|    ``score_all(+object_identifier,+compound,-list)`` - ``one``
+
+
+------------
+
+.. index:: anomaly_detector_to_clauses/4
+.. _anomaly_detector_protocol/0::anomaly_detector_to_clauses/4:
+
+``anomaly_detector_to_clauses/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts an anomaly detector into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``anomaly_detector_to_clauses(Dataset,AnomalyDetector,Functor,Clauses)``
+| **Mode and number of proofs:**
+|    ``anomaly_detector_to_clauses(+object_identifier,+compound,+callable,-list(clause))`` - ``one``
+
+
+------------
+
+.. index:: anomaly_detector_to_file/4
+.. _anomaly_detector_protocol/0::anomaly_detector_to_file/4:
+
+``anomaly_detector_to_file/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Exports an anomaly detector to a file. ``Functor`` is the functor for the generated predicate clauses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``anomaly_detector_to_file(Dataset,AnomalyDetector,Functor,File)``
+| **Mode and number of proofs:**
+|    ``anomaly_detector_to_file(+object_identifier,+compound,+callable,+atom)`` - ``one``
+
+
+------------
+
+.. index:: print_anomaly_detector/1
+.. _anomaly_detector_protocol/0::print_anomaly_detector/1:
+
+``print_anomaly_detector/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Prints an anomaly detector to the current output stream in a human-readable format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_anomaly_detector(AnomalyDetector)``
+| **Mode and number of proofs:**
+|    ``print_anomaly_detector(+compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`anomaly_dataset_protocol <anomaly_dataset_protocol/0>`, :ref:`anomaly_common <anomaly_common/0>`, :ref:`isolation_forest <isolation_forest/0>`, :ref:`knn_distance <knn_distance/0>`, :ref:`lof <lof/0>`
+

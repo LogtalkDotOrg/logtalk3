@@ -30,6 +30,7 @@ directory in the ``NOTES.md`` file.
    overview
    ada_boost
    amqp
+   anomaly_protocols
    application
    arbitrary
    assignvars
@@ -86,10 +87,12 @@ directory in the ``NOTES.md`` file.
    json_rpc
    json_schema
    knn
+   knn_distance
    ksuid
    linda
    linear_svm
    listing
+   lof
    logging
    logistic_regression
    loops

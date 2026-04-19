@@ -142,33 +142,3 @@ Several sample datasets are included in the `test_datasets` directory:
   Ming Tan and Jeff Schlimmer. Available from the UCI Machine Learning
   Repository:
   https://archive.ics.uci.edu/dataset/14/breast+cancer
-
-- `gaussian_anomalies.lgt` — A synthetic 2D anomaly detection dataset with
-  50 examples and 2 continuous attributes (x, y). Normal points are sampled
-  from a standard normal distribution centered at the origin. Anomalous
-  points are placed far from the cluster center. Inspired by the canonical
-  test case used in the Extended Isolation Forest paper by Hariri et al.
-  (2019).
-
-- `shuttle_anomalies.lgt` — A subset of the Statlog Shuttle dataset with 50
-  examples and 9 continuous attributes representing sensor readings from
-  the NASA Space Shuttle. Class 1 (Rad Flow) is the majority class
-  (normal), while all other classes are treated as anomalies. Originally
-  from Catlett, J. (1991). Available from the UCI Machine Learning
-  Repository:
-  https://archive.ics.uci.edu/dataset/148/statlog+shuttle
-
-- `water_potability.lgt` — A water potability dataset with 50 examples and
-  9 continuous attributes (pH, hardness, solids, chloramines, sulfate,
-  conductivity, organic carbon, trihalomethanes, turbidity). Normal
-  instances represent potable water samples within acceptable ranges.
-  Anomalous instances represent water samples with hazardous contamination
-  levels. Based on the publicly available Water Quality dataset (Kadiwal,
-  A., 2020, Kaggle).
-
-- `sensor_anomalies.lgt` — A synthetic industrial sensor anomaly dataset
-  with 40 examples and 3 continuous attributes (temperature, pressure,
-  vibration). Contains missing values (14 examples with missing values,
-  represented using anonymous variables). Normal readings cluster around
-  typical operating ranges. Anomalous readings show extreme values
-  indicating equipment malfunction.

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on April 17, 2026
+%  Last updated on April 19, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -110,6 +110,7 @@ logtalk_library_path(wrapper, tools('wrapper/')).
 % libraries
 logtalk_library_path(ada_boost, library('ada_boost/')).
 logtalk_library_path(amqp, library('amqp/')).
+logtalk_library_path(anomaly_protocols, library('anomaly_protocols/')).
 logtalk_library_path(application, library('application/')).
 logtalk_library_path(arbitrary, library('arbitrary/')).
 logtalk_library_path(assignvars, library('assignvars/')).
@@ -165,10 +166,12 @@ logtalk_library_path(json_lines, library('json_lines/')).
 logtalk_library_path(json_schema, library('json_schema/')).
 logtalk_library_path(json_ld, library('json_ld/')).
 logtalk_library_path(knn, library('knn/')).
+logtalk_library_path(knn_distance, library('knn_distance/')).
 logtalk_library_path(ksuid, library('ksuid/')).
 logtalk_library_path(linda, library('linda/')).
 logtalk_library_path(linear_svm, library('linear_svm/')).
 logtalk_library_path(listing, library('listing/')).
+logtalk_library_path(lof, library('lof/')).
 logtalk_library_path(logging, library('logging/')).
 logtalk_library_path(logistic_regression, library('logistic_regression/')).
 logtalk_library_path(loops, library('loops/')).

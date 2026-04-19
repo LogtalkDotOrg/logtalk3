@@ -1,0 +1,71 @@
+.. index:: single: lof
+.. _lof/0:
+
+.. rst-class:: right
+
+**object**
+
+``lof``
+=======
+
+Local Outlier Factor anomaly detector with multiple distance metrics, mixed-feature support, and missing-value handling. Learns from a dataset object implementing the ``anomaly_dataset_protocol`` protocol and returns a detector term that can be used for scoring, prediction, and export.
+
+| **Availability:** 
+|    ``logtalk_load(lof(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-19
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`anomaly_common <anomaly_common/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`pairs <pairs/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Algorithm: The detector memorizes the training instances and computes Local Outlier Factor values by comparing the local reachability density of a query to the densities of its neighbors.
+   - Feature types: Handles continuous and categorical attributes declared by the dataset object.
+   - Missing values: Missing values are ignored when computing distances. Distances are normalized by the number of comparable dimensions.
+   - Normalized scores: Raw LOF values are normalized to the interval ``[0.0, 1.0]`` by ranking them against the training raw scores.
+   - Anomaly detector representation: The learned detector is represented as a ``lof_detector(AttributeNames, FeatureTypes, AttributeScales, Instances, Options)`` term.
+
+| **Inherited public predicates:**
+|     :ref:`anomaly_detector_protocol/0::anomaly_detector_to_clauses/4`  :ref:`anomaly_detector_protocol/0::anomaly_detector_to_file/4`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`anomaly_detector_protocol/0::learn/2`  :ref:`anomaly_detector_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`anomaly_detector_protocol/0::predict/3`  :ref:`anomaly_detector_protocol/0::predict/4`  :ref:`anomaly_detector_protocol/0::print_anomaly_detector/1`  :ref:`anomaly_detector_protocol/0::score/3`  :ref:`anomaly_detector_protocol/0::score_all/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`anomaly_dataset_protocol <anomaly_dataset_protocol/0>`, :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0>`, :ref:`knn_distance <knn_distance/0>`, :ref:`isolation_forest <isolation_forest/0>`
+

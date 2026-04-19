@@ -33,6 +33,19 @@ Documentation
 Library
 -------
 
+* CHANGED: The `isolation_forest` library to depend on the new
+`anomaly_protocols` library instead of `classifier_protocols` (functionality
+preserved but four export and print predicates were renamed with this change).
+
+* ADDED: New `anomaly_protocols` library defining common protocols, benchmark
+datasets, and smoke tests for anomaly-detection algorithms.
+
+* ADDED: New `knn_distance` library implementing a portable k-nearest-neighbor
+distance anomaly detector with mixed-feature and missing-value support.
+
+* ADDED: New `lof` library implementing a portable Local Outlier Factor
+anomaly detector with mixed-feature and missing-value support.
+
 * ADDED: New `ranking_protocols` library defining common protocols, shared
 test datasets, and smoke tests for machine learning ranking algorithms.
 

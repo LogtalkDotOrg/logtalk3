@@ -591,6 +591,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`hash_common_64 <hash_common_64/0::and64/3>`
 
+``anomaly_detector_to_clauses/4``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::anomaly_detector_to_clauses/4>`
+
+``anomaly_detector_to_file/4``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::anomaly_detector_to_file/4>`
+
 ``apid/2``
 ----------
 
@@ -972,6 +992,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`anomaly_dataset_protocol <anomaly_dataset_protocol/0::attribute_values/2>`
 * :ref:`dataset_protocol <dataset_protocol/0::attribute_values/2>`
 
 ``available/0``
@@ -1896,6 +1917,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`anomaly_dataset_protocol <anomaly_dataset_protocol/0::class/1>`
 * :ref:`class_hierarchyp <class_hierarchyp/0::class/1>`
 * :ref:`dataset_protocol <dataset_protocol/0::class/1>`
 
@@ -1907,6 +1929,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`anomaly_dataset_protocol <anomaly_dataset_protocol/0::class_values/1>`
 * :ref:`dataset_protocol <dataset_protocol/0::class_values/1>`
 
 ``classes/1``
@@ -5029,6 +5052,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`anomaly_dataset_protocol <anomaly_dataset_protocol/0::example/3>`
 * :ref:`dataset_protocol <dataset_protocol/0::example/3>`
 
 ``exchange_bind/4``
@@ -8741,6 +8765,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::learn/2>`
 * :ref:`classifier_protocol <classifier_protocol/0::learn/2>`
 * :ref:`metagol <metagol/0::learn/2>`
 * :ref:`ranker_protocol <ranker_protocol/0::learn/2>`
@@ -8754,8 +8779,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ada_boost <ada_boost/0::learn/3>`
+* :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::learn/3>`
 * :ref:`bradley_terry <bradley_terry/0::learn/3>`
-* :ref:`isolation_forest <isolation_forest/0::learn/3>`
 * :ref:`linear_svm <linear_svm/0::learn/3>`
 * :ref:`logistic_regression <logistic_regression/0::learn/3>`
 * :ref:`metagol <metagol/0::learn/3>`
@@ -12993,6 +13018,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::predict/3>`
 * :ref:`classifier_protocol <classifier_protocol/0::predict/3>`
 
 ``predict/4``
@@ -13003,7 +13029,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`isolation_forest <isolation_forest/0::predict/4>`
+* :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::predict/4>`
 * :ref:`knn <knn/0::predict/4>`
 * :ref:`nearest_centroid <nearest_centroid/0::predict/4>`
 
@@ -13153,6 +13179,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`permutations_protocol <permutations_protocol/0::previous_permutation/2>`
+
+``print_anomaly_detector/1``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::print_anomaly_detector/1>`
 
 ``print_classifier/1``
 ----------------------
@@ -15110,6 +15146,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::score/3>`
 * :ref:`isolation_forest <isolation_forest/0::score/3>`
 
 ``score_all/3``
@@ -15120,6 +15157,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::score_all/3>`
 * :ref:`isolation_forest <isolation_forest/0::score_all/3>`
 
 ``search/1``

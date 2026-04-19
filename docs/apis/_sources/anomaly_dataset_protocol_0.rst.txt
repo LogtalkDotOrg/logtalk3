@@ -1,0 +1,132 @@
+.. index:: single: anomaly_dataset_protocol
+.. _anomaly_dataset_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``anomaly_dataset_protocol``
+============================
+
+Protocol for datasets used with anomaly-detection algorithms.
+
+| **Availability:** 
+|    ``logtalk_load(anomaly_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-19
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: attribute_values/2
+.. _anomaly_dataset_protocol/0::attribute_values/2:
+
+``attribute_values/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates by backtracking the attributes and their possible values. For discrete attributes, ``Values`` is a list of possible values. For continuous attributes, ``Values`` is the atom ``continuous``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``attribute_values(Attribute,Values)``
+| **Mode and number of proofs:**
+|    ``attribute_values(?atom,-list(atom))`` - ``zero_or_more``
+|    ``attribute_values(?atom,-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: class/1
+.. _anomaly_dataset_protocol/0::class/1:
+
+``class/1``
+^^^^^^^^^^^
+
+Returns the name of the target label attribute.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``class(Class)``
+| **Mode and number of proofs:**
+|    ``class(-atom)`` - ``one``
+
+
+------------
+
+.. index:: class_values/1
+.. _anomaly_dataset_protocol/0::class_values/1:
+
+``class_values/1``
+^^^^^^^^^^^^^^^^^^
+
+Returns the list of possible labels for the target attribute. Current anomaly benchmarks conventionally use ``[normal, anomaly]``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``class_values(Values)``
+| **Mode and number of proofs:**
+|    ``class_values(-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: example/3
+.. _anomaly_dataset_protocol/0::example/3:
+
+``example/3``
+^^^^^^^^^^^^^
+
+Enumerates by backtracking the examples in the dataset. Each example has an ``Id``, a ``Class`` label, and a list of ``Attribute-Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``example(Id,Class,AttributeValues)``
+| **Mode and number of proofs:**
+|    ``example(-integer,-atom,-list(pair))`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

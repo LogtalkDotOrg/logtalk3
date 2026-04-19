@@ -27,13 +27,13 @@
 	logtalk_load(os(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(random(loader)),
-	logtalk_load(classifier_protocols(loader)),
+	logtalk_load(anomaly_protocols(loader)),
 	logtalk_load(isolation_forest, [source_data(on), debug(on)]),
 	logtalk_load([
-		classifier_protocols('test_datasets/gaussian_anomalies'),
-		classifier_protocols('test_datasets/shuttle_anomalies'),
-		classifier_protocols('test_datasets/water_potability'),
-		classifier_protocols('test_datasets/sensor_anomalies')
+		anomaly_protocols('test_datasets/gaussian_anomalies'),
+		anomaly_protocols('test_datasets/shuttle_anomalies'),
+		anomaly_protocols('test_datasets/water_potability'),
+		anomaly_protocols('test_datasets/sensor_anomalies')
 	], [
 		source_data(on),
 		debug(on)

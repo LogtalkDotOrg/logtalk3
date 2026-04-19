@@ -72,6 +72,7 @@
 <li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ada_boost.html"><code class="docutils literal notranslate"><span class="pre">ada_boost</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="amqp.html"><code class="docutils literal notranslate"><span class="pre">amqp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="anomaly_protocols.html"><code class="docutils literal notranslate"><span class="pre">anomaly_protocols</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="application.html"><code class="docutils literal notranslate"><span class="pre">application</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="arbitrary.html"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="assignvars.html"><code class="docutils literal notranslate"><span class="pre">assignvars</span></code></a></li>
@@ -125,6 +126,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#implemented-features">Implemented features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
@@ -137,10 +139,12 @@
 <li class="toctree-l2"><a class="reference internal" href="json_rpc.html"><code class="docutils literal notranslate"><span class="pre">json_rpc</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="json_schema.html"><code class="docutils literal notranslate"><span class="pre">json_schema</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="knn.html"><code class="docutils literal notranslate"><span class="pre">knn</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="knn_distance.html"><code class="docutils literal notranslate"><span class="pre">knn_distance</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ksuid.html"><code class="docutils literal notranslate"><span class="pre">ksuid</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linda.html"><code class="docutils literal notranslate"><span class="pre">linda</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linear_svm.html"><code class="docutils literal notranslate"><span class="pre">linear_svm</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="listing.html"><code class="docutils literal notranslate"><span class="pre">listing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lof.html"><code class="docutils literal notranslate"><span class="pre">lof</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="logistic_regression.html"><code class="docutils literal notranslate"><span class="pre">logistic_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="loops.html"><code class="docutils literal notranslate"><span class="pre">loops</span></code></a></li>
@@ -249,8 +253,9 @@ partitions (shorter path lengths) to be isolated. The anomaly score for
 an instance is computed based on the average path length across all
 trees in the forest.</p>
 <p>Datasets are represented as objects implementing the
-<code class="docutils literal notranslate"><span class="pre">dataset_protocol</span></code> protocol from the <code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code> library.
-See the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory for examples.</p>
+<code class="docutils literal notranslate"><span class="pre">anomaly_dataset_protocol</span></code> protocol from the <code class="docutils literal notranslate"><span class="pre">anomaly_protocols</span></code>
+library. See the <code class="docutils literal notranslate"><span class="pre">anomaly_protocols/test_datasets</span></code> directory for
+examples.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -295,21 +300,28 @@ random values drawn from the observed range of the corresponding
 attribute; during scoring, missing dimensions are excluded from the
 hyperplane dot product computation so that routing decisions at each
 tree node are based entirely on the known attribute values</p></li>
-<li><p>Configurable parameters via options:</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">number_of_trees/1</span></code> (default: <code class="docutils literal notranslate"><span class="pre">100</span></code>): number of isolation trees</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">subsample_size/1</span></code> (default: <code class="docutils literal notranslate"><span class="pre">256</span></code> or number of instances if
-smaller): subsample size for each tree</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">extension_level/1</span></code> (default: <code class="docutils literal notranslate"><span class="pre">d</span> <span class="pre">-</span> <span class="pre">1</span></code>): controls the
-dimensionality of the random hyperplane normal vectors</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">anomaly_threshold/1</span></code> (default: <code class="docutils literal notranslate"><span class="pre">0.5</span></code>): threshold for anomaly
-prediction</p></li>
-</ul>
-</li>
 <li><p>Scoring all dataset instances with results sorted by descending
 anomaly score for easy identification of top anomalies</p></li>
 <li><p>Pretty-printing of learned models with tree depth and node count
 summaries</p></li>
+</ul>
+</section>
+<section id="options">
+<h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
+<p>The following options can be passed to the <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> and <code class="docutils literal notranslate"><span class="pre">predict/4</span></code>
+predicates:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">number_of_trees(N)</span></code>: number of isolation trees to build (default:
+<code class="docutils literal notranslate"><span class="pre">100</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">subsample_size(N)</span></code>: subsample size used to build each isolation
+tree. When omitted, the implementation uses <code class="docutils literal notranslate"><span class="pre">256</span></code> or the number of
+training instances if smaller</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">extension_level(N)</span></code>: controls the dimensionality of the random
+hyperplane cuts. <code class="docutils literal notranslate"><span class="pre">0</span></code> reproduces the original axis-aligned Isolation
+Forest; when omitted, the implementation uses <code class="docutils literal notranslate"><span class="pre">d</span> <span class="pre">-</span> <span class="pre">1</span></code>, where <code class="docutils literal notranslate"><span class="pre">d</span></code>
+is the number of dimensions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anomaly_threshold(T)</span></code>: threshold used by <code class="docutils literal notranslate"><span class="pre">predict/3-4</span></code> (default:
+<code class="docutils literal notranslate"><span class="pre">0.5</span></code>)</p></li>
 </ul>
 </section>
 <section id="limitations">

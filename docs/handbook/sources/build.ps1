@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 17, 2026
+##   Last updated on April 19, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -81,6 +81,7 @@ Foreach-Object {
 (Get-Content ../../../library/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/overview.rst
 (Get-Content ../../../library/ada_boost/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ada_boost.rst
 (Get-Content ../../../library/amqp/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/amqp.rst
+(Get-Content ../../../library/anomaly_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/anomaly_protocols.rst
 (Get-Content ../../../library/application/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/application.rst
 (Get-Content ../../../library/arbitrary/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/arbitrary.rst
 (Get-Content ../../../library/assignvars/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/assignvars.rst
@@ -136,10 +137,12 @@ Foreach-Object {
 (Get-Content ../../../library/json_rpc/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_rpc.rst
 (Get-Content ../../../library/json_schema/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_schema.rst
 (Get-Content ../../../library/knn/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/knn.rst
+(Get-Content ../../../library/knn_distance/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/knn_distance.rst
 (Get-Content ../../../library/ksuid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ksuid.rst
 (Get-Content ../../../library/linda/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linda.rst
 (Get-Content ../../../library/linear_svm/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linear_svm.rst
 (Get-Content ../../../library/listing/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/listing.rst
+(Get-Content ../../../library/lof/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lof.rst
 (Get-Content ../../../library/logging/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/logging.rst
 (Get-Content ../../../library/logistic_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/logistic_regression.rst
 (Get-Content ../../../library/loops/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/loops.rst

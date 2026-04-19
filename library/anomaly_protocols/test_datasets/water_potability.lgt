@@ -20,7 +20,7 @@
 
 
 :- object(water_potability,
-	implements(dataset_protocol)).
+	implements(anomaly_dataset_protocol)).
 
 	:- info([
 		version is 1:0:0,

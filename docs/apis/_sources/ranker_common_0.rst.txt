@@ -1,0 +1,76 @@
+.. index:: single: ranker_common
+.. _ranker_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``ranker_common``
+=================
+
+Shared predicates for ranker diagnostics and export.
+
+| **Availability:** 
+|    ``logtalk_load(ranking_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-18
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`ranker_protocol <ranker_protocol/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::learn/2`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  :ref:`ranker_protocol/0::ranker_to_clauses/4`  :ref:`ranker_protocol/0::ranker_to_file/4`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: ranker_diagnostics_data/2
+.. _ranker_common/0::ranker_diagnostics_data/2:
+
+``ranker_diagnostics_data/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing ranker implementations must define in order to expose diagnostics metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ranker_diagnostics_data(Ranker,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``ranker_diagnostics_data(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

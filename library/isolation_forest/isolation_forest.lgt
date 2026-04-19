@@ -20,13 +20,13 @@
 
 
 :- object(isolation_forest,
-	imports([options, classifier_common])).
+	imports(anomaly_common)).
 
 	:- info([
-		version is 1:1:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
-		comment is 'Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the improved version described by Hariri et al. (2019) that uses random hyperplane cuts instead of axis-aligned cuts, eliminating score bias artifacts. Builds an ensemble of isolation trees from a dataset object implementing the ``dataset_protocol`` protocol. Missing attribute values are represented using anonymous variables.',
+		date is 2026-04-19,
+		comment is 'Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the improved version described by Hariri et al. (2019) that uses random hyperplane cuts instead of axis-aligned cuts, eliminating score bias artifacts. Builds an ensemble of isolation trees from a dataset object implementing the ``anomaly_dataset_protocol`` protocol. Missing attribute values are represented using anonymous variables.',
 		remarks is [
 			'Algorithm' - 'The Extended Isolation Forest builds an ensemble of isolation trees (iTrees) by recursively partitioning the data using random hyperplanes. Anomalous points, being few and different, require fewer partitions (shorter path lengths) to be isolated.',
 			'Extended vs Original' - 'The original Isolation Forest uses axis-aligned splits (random attribute + random value), which introduces bias in anomaly scores along coordinate axes. The extended version uses random hyperplane cuts with arbitrary slopes, producing more consistent and reliable anomaly scores.',
@@ -35,23 +35,9 @@
 			'Anomaly score' - 'The anomaly score ``s(x)`` is computed as ``s(x) = 2^(-E(h(x))/c(psi))`` where ``E(h(x))`` is the average path length across all trees, ``c(psi)`` is the average path length of unsuccessful searches in a BST, and ``psi`` is the subsample size. Scores close to 1 indicate anomalies; scores below 0.5 indicate normal points.',
 			'Discrete attributes' - 'Discrete (categorical) attributes are mapped to numeric indices based on their position in the attribute value list declared by the dataset. This allows the algorithm to handle datasets with mixed attribute types.',
 			'Missing values' - 'Missing attribute values are represented using anonymous variables. During tree construction, missing values are replaced with random values drawn from the observed range of the corresponding attribute. During scoring, instances with missing values are sent down both branches of the tree and the path length is computed as the weighted average of the two branches.',
-			'Classifier representation' - 'The learned model is represented as an ``if_model(Trees, SubsampleSize, AttributeNames, Attributes, Ranges, Options)`` compound term.'
+			'Anomaly detector representation' - 'The learned model is represented as an ``if_model(Trees, SubsampleSize, AttributeNames, Attributes, Ranges, Options)`` compound term.'
 		],
-		see_also is [dataset_protocol, c45, random_forest, ada_boost]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
-	:- info(learn/3, [
-		comment is 'Learns an isolation forest model from the given dataset object using the specified options. Valid options are ``number_of_trees/1`` (default: ``100``), ``subsample_size/1`` (default: ``256`` or the number of instances if smaller), ``extension_level/1`` (default: ``d - 1`` where ``d`` is the number of dimensions), and ``anomaly_threshold/1`` (default: ``0.5``).',
-		argnames is ['Dataset', 'Model', 'Options']
-	]).
-
-	:- public(predict/4).
-	:- mode(predict(+compound, +list, -atom, +list(compound)), one).
-	:- info(predict/4, [
-		comment is 'Predicts whether an instance is an anomaly or normal using the learned model and the anomaly threshold with the given options. The instance is a list of ``Attribute-Value`` pairs where missing values are represented using anonymous variables. Returns ``anomaly`` if the anomaly score is above the threshold, ``normal`` otherwise.',
-		argnames is ['Model', 'Instance', 'Prediction', 'Options']
+		see_also is [anomaly_dataset_protocol, anomaly_detector_protocol, knn_distance, lof]
 	]).
 
 	:- public(score/3).
@@ -96,16 +82,12 @@
 		valid/2
 	]).
 
-	% learn/2 - learn with default options
-	learn(Dataset, Model) :-
-		learn(Dataset, Model, []).
-
 	% learn/3 - learn with specified options
 	learn(Dataset, Model, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		% Get attribute information
-		dataset_attributes(Dataset, Attributes),
+		^^dataset_attributes(Dataset, Attributes),
 		keys(Attributes, AttributeNames),
 		length(AttributeNames, NumDimensions),
 		% Get all examples as numeric vectors; missing values are replaced
@@ -155,28 +137,6 @@
 		;	Score = 0.5
 		).
 
-	% predict/3 - predict anomaly or normal using default options
-	predict(Model, Instance, Prediction) :-
-		Model =.. [_, _, _, _, _, _, Options],
-		predict(Model, Instance, Prediction, Options).
-
-	% predict/4 - predict anomaly or normal using specified options
-	predict(Model, Instance, Prediction, UserOptions) :-
-		^^check_options(UserOptions),
-		Model =.. [_, _, _, _, _, _, ModelOptions],
-		(	member(anomaly_threshold(_), UserOptions) ->
-			UpdateUserOptions = UserOptions
-		;	memberchk(anomaly_threshold(ModelThreshold), ModelOptions),
-			UpdateUserOptions = [anomaly_threshold(ModelThreshold)| UserOptions]
-		),
-		^^merge_options(UpdateUserOptions, Options),
-		^^option(anomaly_threshold(Threshold), Options),
-		score(Model, Instance, Score),
-		(	Score >= Threshold ->
-			Prediction = anomaly
-		;	Prediction = normal
-		).
-
 	% score_all/3 - compute scores for all instances
 	score_all(Dataset, Model, SortedScores) :-
 		Model =.. [_, _, _, AttributeNames, Attributes, Ranges, _],
@@ -190,7 +150,7 @@
 		),
 		msort(UnsortedPairs, SortedPairsAsc),
 		reverse(SortedPairsAsc, SortedPairsDesc),
-		extract_scores(SortedPairsDesc, SortedScores).
+		^^extract_scores(SortedPairsDesc, SortedScores).
 
 	score_vector(if_model(Trees, Psi, _, _, _, _), Vector, MissingMask, Ranges, Score) :-
 		compute_average_path_length(Trees, Vector, MissingMask, Ranges, AvgPathLength),
@@ -200,26 +160,12 @@
 		;	Score = 0.5
 		).
 
-	extract_scores([], []).
-	extract_scores([Score-Id-Class| Rest], [Id-Class-Score| Scores]) :-
-		extract_scores(Rest, Scores).
-
-	classifier_diagnostics_data(if_model(Trees, Psi, AttributeNames, _Attributes, _Ranges, Options), Diagnostics) :-
-		length(Trees, TreeCount),
-		Diagnostics = [
-			model(isolation_forest),
-			trees(TreeCount),
-			subsample_size(Psi),
-			attributes(AttributeNames),
-			options(Options)
-		].
-
-	% classifier_to_clauses/4 - exports classifier as a clause
-	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
-		Classifier =.. [_, Trees, Psi, AttributeNames, Attributes, Ranges, Options],
+	% anomaly_detector_to_clauses/4 - exports detector as a clause
+	anomaly_detector_to_clauses(_Dataset, Detector, Functor, [Clause]) :-
+		Detector =.. [_, Trees, Psi, AttributeNames, Attributes, Ranges, Options],
 		Clause =.. [Functor, Trees, Psi, AttributeNames, Attributes, Ranges, Options].
 
-	print_classifier(Model) :-
+	print_anomaly_detector(Model) :-
 		Model =.. [_, Trees, Psi, AttributeNames, _Attributes, _Ranges, Options],
 		length(Trees, NumTrees),
 		length(AttributeNames, NumDimensions),
@@ -229,9 +175,13 @@
 		format('Subsample size:     ~w~n', [Psi]),
 		format('Number of features: ~w~n', [NumDimensions]),
 		format('Features:           ~w~n', [AttributeNames]),
+		^^print_anomaly_detector_template(Model),
 		format('Options:            ~w~n~n', [Options]),
 		format('Trees:~n', []),
 		print_trees(Trees, 1).
+
+	anomaly_detector_template(Functor, Template) :-
+		Template =.. [Functor, 'Trees', 'Psi', 'AttributeNames', 'Attributes', 'Ranges', 'Options'].
 
 	print_trees([], _).
 	print_trees([Tree| Trees], N) :-
@@ -256,14 +206,6 @@
 	% ===================================================================
 	% Internal predicates
 	% ===================================================================
-
-	% dataset_attributes/2 - get attribute name-values pairs from dataset
-	dataset_attributes(Dataset, Attributes) :-
-		findall(
-			Attribute-Values,
-			Dataset::attribute_values(Attribute, Values),
-			Attributes
-		).
 
 	% to_numeric_vectors/5 - convert all attribute-value pair lists to numeric vectors
 	% with random imputation of missing values for training

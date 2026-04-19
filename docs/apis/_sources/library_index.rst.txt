@@ -29,6 +29,18 @@ To load any library (including developer tools, ports, and contributions), use t
    amqp <amqp_0>
    amqp_pool <amqp_pool_0>
 
+:ref:`anomaly_protocols <library_anomaly_protocols>`
+----------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   anomaly_common <anomaly_common_0>
+   anomaly_dataset_protocol <anomaly_dataset_protocol_0>
+   anomaly_detector_protocol <anomaly_detector_protocol_0>
+
 :ref:`application <library_application>`
 ----------------------------------------
 
@@ -936,6 +948,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
    knn <knn_0>
 
+:ref:`knn_distance <library_knn_distance>`
+------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   knn_distance <knn_distance_0>
+
 :ref:`ksuid <library_ksuid>`
 ----------------------------
 
@@ -1041,6 +1063,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    listing <listing_0>
+
+:ref:`lof <library_lof>`
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   lof <lof_0>
 
 :ref:`logging <library_logging>`
 --------------------------------

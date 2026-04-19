@@ -17,6 +17,7 @@ Categories
 
 
    amqp_pool <amqp_pool_0>
+   anomaly_common <anomaly_common_0>
    application_common <application_common_0>
    arbitrary <arbitrary_0>
    assertions_messages <assertions_messages_0>
@@ -268,6 +269,7 @@ Objects
    json_schema(StringRepresentation) <json_schema_1>
    json_schema(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_schema_3>
    knn <knn_0>
+   knn_distance <knn_distance_0>
    ksuid <ksuid_0>
    ksuid(Representation,Alphabet) <ksuid_2>
    lcom_metric <lcom_metric_0>
@@ -284,6 +286,7 @@ Objects
    linter_reporter <linter_reporter_0>
    list <list_0>
    list(Type) <list_1>
+   lof <lof_0>
    logger <logger_0>
    logistic_regression <logistic_regression_0>
    logtalk <logtalk_0>
@@ -493,6 +496,8 @@ Protocols
 
 
 
+   anomaly_dataset_protocol <anomaly_dataset_protocol_0>
+   anomaly_detector_protocol <anomaly_detector_protocol_0>
    application_protocol <application_protocol_0>
    assignvarsp <assignvarsp_0>
    character_set_protocol <character_set_protocol_0>

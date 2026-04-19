@@ -20,7 +20,7 @@
 
 
 :- object(sensor_anomalies,
-	implements(dataset_protocol)).
+	implements(anomaly_dataset_protocol)).
 
 	:- info([
 		version is 1:0:0,
@@ -29,7 +29,6 @@
 		comment is 'Synthetic industrial sensor anomaly dataset with missing values for testing anomaly detection with incomplete data. The dataset simulates readings from three sensors (temperature, pressure, vibration) where some readings are missing (represented using anonymous variables). Normal readings cluster around typical operating ranges. Anomalous readings show extreme values indicating equipment malfunction.'
 	]).
 
-	% Three continuous sensor attributes
 	attribute_values(temperature, continuous).
 	attribute_values(pressure, continuous).
 	attribute_values(vibration, continuous).
@@ -42,7 +41,6 @@
 		example_(Id, Class, [Temperature, Pressure, Vibration]).
 
 	% Normal sensor readings (typical operating range)
-	% temperature: 60-80, pressure: 28-35, vibration: 0.1-0.5
 	example_( 1, normal, [72.3,  31.2,  0.25]).
 	example_( 2, normal, [68.7,  30.5,  0.31]).
 	example_( 3, normal, [74.1,  32.8,  0.22]).
@@ -75,7 +73,6 @@
 	example_(29, normal, [71.7,  _,     0.28]).
 	example_(30, normal, [_,     31.3,  0.33]).
 	% Anomalous readings (equipment malfunction: extreme values)
-	% temperature > 95 or < 45, pressure > 42 or < 22, vibration > 1.5
 	example_(31, anomaly, [102.5, 44.8,  2.31]).
 	example_(32, anomaly, [41.2,  21.3,  1.85]).
 	example_(33, anomaly, [98.7,  43.1,  2.05]).

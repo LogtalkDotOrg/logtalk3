@@ -127,6 +127,18 @@ To load an entity, always load the library that includes it using the goal ``log
    amqp <amqp_0>
    amqp_pool <amqp_pool_0>
 
+``library/anomaly_protocols/``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   anomaly_common <anomaly_common_0>
+   anomaly_dataset_protocol <anomaly_dataset_protocol_0>
+   anomaly_detector_protocol <anomaly_detector_protocol_0>
+
 ``library/application/``
 ------------------------
 
@@ -837,6 +849,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    knn <knn_0>
 
+``library/knn_distance/``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   knn_distance <knn_distance_0>
+
 ``library/ksuid/``
 ------------------
 
@@ -880,6 +902,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    listing <listing_0>
+
+``library/lof/``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   lof <lof_0>
 
 ``library/logging/``
 --------------------
