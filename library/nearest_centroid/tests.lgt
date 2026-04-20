@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-04-20,
 		comment is 'Unit tests for the "nearest_centroid" library.'
 	]).
 
@@ -98,8 +98,7 @@
 	% Test classifier_to_clauses/4 - verify exported clause works with predict/3
 	test(nearest_centroid_classifier_to_clauses_4, true(ground(Prediction))) :-
 		nearest_centroid::learn(iris_small, Classifier),
-		nearest_centroid::classifier_to_clauses(_Dataset, Classifier, classify, [ExportedClassifier]),
-		% Extract classifier from the exported clause and use it
+		nearest_centroid::classifier_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
 		nearest_centroid::predict(ExportedClassifier, [sepal_length-5.0, sepal_width-3.3, petal_length-1.4, petal_width-0.2], Prediction).
 
 	% Test classifier_to_file/4 - verify file is written
@@ -112,10 +111,10 @@
 	test(nearest_centroid_classifier_to_file_4_loaded, true(ground(Prediction))) :-
 		^^file_path('test_output.pl', File),
 		nearest_centroid::learn(iris_small, Classifier),
-		nearest_centroid::classifier_to_file(iris_small, Classifier, classify, File),
+		nearest_centroid::classifier_to_file(iris_small, Classifier, classifier, File),
 		logtalk_load(File),
-		{classify(AttributeNames, FeatureTypes, Centroids)},
-		nearest_centroid::predict(classify(AttributeNames, FeatureTypes, Centroids), [sepal_length-5.0, sepal_width-3.3, petal_length-1.4, petal_width-0.2], Prediction).
+		{classifier(LoadedClassifier)},
+		nearest_centroid::predict(LoadedClassifier, [sepal_length-5.0, sepal_width-3.3, petal_length-1.4, petal_width-0.2], Prediction).
 
 	test(nearest_centroid_diagnostics_2, deterministic((list::memberchk(model(nearest_centroid), Diagnostics), list::memberchk(centroids(_), Diagnostics)))) :-
 		nearest_centroid::learn(iris_small, Classifier),

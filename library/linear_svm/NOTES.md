@@ -112,12 +112,9 @@ Usage
 Classifier representation
 -------------------------
 
-The learned classifier is represented internally as a compound term with
-the form:
+The learned classifier is represented as a compound term with the form:
 
 	linear_svm_classifier(Classes, Encoders, Models, Options)
-
-When exported, the functor is chosen by the caller.
 
 Where:
 
@@ -125,6 +122,11 @@ Where:
 - `Encoders`: list of continuous scaling descriptors and categorical value lists
 - `Models`: list of `class_model(Class, Bias, Weights)` terms
 - `Options`: merged training options used to learn the model
+
+When exported using `classifier_to_clauses/4` or `classifier_to_file/4`,
+this classifier term is serialized directly as the single argument of the
+generated predicate clause so that the exported model can be loaded and
+reused as-is.
 
 
 References

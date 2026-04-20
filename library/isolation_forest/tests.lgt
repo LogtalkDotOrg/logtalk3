@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-19,
+		date is 2026-04-20,
 		comment is 'Unit tests for the "isolation_forest" library.'
 	]).
 
@@ -231,10 +231,18 @@
 		isolation_forest::anomaly_detector_to_clauses(gaussian_anomalies, Model, iforest, [Clause]),
 		functor(Clause, Functor, _).
 
-	test(isolation_forest_anomaly_detector_to_clauses_4_clause_arity, true(Arity == 6)) :-
+	test(isolation_forest_anomaly_detector_to_clauses_4_clause_arity, true(Arity == 1)) :-
 		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(10)]),
 		isolation_forest::anomaly_detector_to_clauses(gaussian_anomalies, Model, iforest, [Clause]),
 		functor(Clause, _, Arity).
+
+	test(isolation_forest_anomaly_detector_to_file_4_loadable, deterministic(Prediction == anomaly)) :-
+		^^file_path('test_output.pl', File),
+		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(10)]),
+		isolation_forest::anomaly_detector_to_file(gaussian_anomalies, Model, iforest, File),
+		logtalk_load(File),
+		{iforest(LoadedModel)},
+		isolation_forest::predict(LoadedModel, [x-4.50, y-4.20], Prediction).
 
 	test(isolation_forest_anomaly_detector_to_clauses_4_sensor, true(N == 1)) :-
 		isolation_forest::learn(sensor_anomalies, Model, [number_of_trees(10)]),

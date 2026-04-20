@@ -94,6 +94,31 @@ predicates:
 - ``anomaly_threshold(T)``: threshold used by ``predict/3-4`` (default:
   ``0.5``)
 
+Detector Representation
+-----------------------
+
+The learned detector is represented by default as:
+
+::
+
+   if_model(Trees, Psi, AttributeNames, Attributes, Ranges, Options)
+
+Where:
+
+- ``Trees``: List of learned isolation trees
+- ``Psi``: Effective subsample size used to build each tree
+- ``AttributeNames``: List of attribute names in order
+- ``Attributes``: List of ``Attribute-Values`` declarations from the
+  training dataset
+- ``Ranges``: Observed numeric ranges used for imputing and scoring
+  missing values
+- ``Options``: Learned options
+
+When exported using ``anomaly_detector_to_clauses/4`` or
+``anomaly_detector_to_file/4``, this detector term is serialized
+directly as the single argument of the generated predicate clause so
+that the exported model can be loaded and reused as-is.
+
 Limitations
 -----------
 

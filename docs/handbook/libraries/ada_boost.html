@@ -312,9 +312,7 @@ predicate clauses</p></li>
 </section>
 <section id="classifier-representation">
 <h2>Classifier Representation<a class="headerlink" href="#classifier-representation" title="Link to this heading"></a></h2>
-<p>The learned classifier is represented as a compound term with the
-functor chosen by the user when exporting the classifier and arity 3.
-The default functor is <code class="docutils literal notranslate"><span class="pre">ab_classifier/3</span></code>:</p>
+<p>The learned classifier is represented as a compound term:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>ab_classifier(<span class="nv">WeightedTrees</span>, <span class="nv">ClassValues</span>, <span class="nv">Options</span>)
 </pre></div>
 </div>
@@ -325,6 +323,10 @@ The default functor is <code class="docutils literal notranslate"><span class="p
 <li><p><code class="docutils literal notranslate"><span class="pre">ClassValues</span></code>: List of possible class values</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Options</span></code>: List of options used during learning</p></li>
 </ul>
+<p>When exported using <code class="docutils literal notranslate"><span class="pre">classifier_to_clauses/4</span></code> or
+<code class="docutils literal notranslate"><span class="pre">classifier_to_file/4</span></code>, this classifier term is serialized directly as
+the single argument of the generated predicate clause so that the
+exported model can be loaded and reused as-is.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>

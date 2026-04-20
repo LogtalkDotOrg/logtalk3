@@ -15,7 +15,7 @@ Protocol for machine learning rankers.
 
 | **Author:** Paulo Moura
 | **Version:** 1:1:0
-| **Date:** 2026-04-18
+| **Date:** 2026-04-20
 
 | **Compilation flags:**
 |    ``static``
@@ -139,7 +139,7 @@ Returns the effective training options recorded in a learned ranker diagnostics 
 ``ranker_to_clauses/4``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Converts a ranker into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses.
+Converts a ranker into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized ranker term, a noun such as ``ranker`` or ``model`` is usually clearer than a verb or result label.
 
 | **Compilation flags:**
 |    ``static``
@@ -158,7 +158,7 @@ Converts a ranker into a list of predicate clauses. ``Functor`` is the functor f
 ``ranker_to_file/4``
 ^^^^^^^^^^^^^^^^^^^^
 
-Exports a ranker to a file. ``Functor`` is the functor for the generated predicate clauses.
+Exports a ranker to a file. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized ranker term, a noun such as ``ranker`` or ``model`` is usually clearer than a verb or result label.
 
 | **Compilation flags:**
 |    ``static``

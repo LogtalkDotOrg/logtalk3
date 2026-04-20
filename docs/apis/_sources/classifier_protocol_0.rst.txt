@@ -14,8 +14,8 @@ Protocol for machine learning classifiers.
 |    ``logtalk_load(classifier_protocols(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2026-04-17
+| **Version:** 1:2:0
+| **Date:** 2026-04-20
 
 | **Compilation flags:**
 |    ``static``
@@ -139,7 +139,7 @@ Returns the effective training options recorded in a learned classifier diagnost
 ``classifier_to_clauses/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Converts a classifier into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses.
+Converts a classifier into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized classifier term, a noun such as ``classifier`` or ``model`` is usually clearer than a verb such as ``classify``.
 
 | **Compilation flags:**
 |    ``static``
@@ -158,7 +158,7 @@ Converts a classifier into a list of predicate clauses. ``Functor`` is the funct
 ``classifier_to_file/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Exports a classifier to a file. ``Functor`` is the functor for the generated predicate clauses.
+Exports a classifier to a file. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized classifier term, a noun such as ``classifier`` or ``model`` is usually clearer than a verb such as ``classify``.
 
 | **Compilation flags:**
 |    ``static``

@@ -440,6 +440,10 @@ bound.</p></li>
 options, convergence status, iteration count, final update delta, and
 dataset summary.</p></li>
 </ul>
+<p>When exported using <code class="docutils literal notranslate"><span class="pre">ranker_to_clauses/4</span></code> or <code class="docutils literal notranslate"><span class="pre">ranker_to_file/4</span></code>,
+this ranker term is serialized directly as the single argument of the
+generated predicate clause so that the exported model can be loaded and
+reused as-is.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>

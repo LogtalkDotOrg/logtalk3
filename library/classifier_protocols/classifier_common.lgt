@@ -23,13 +23,14 @@
 	implements(classifier_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-04-20,
 		comment is 'Shared predicates for classifier diagnostics and export.'
 	]).
 
 	:- uses(format, [
+		format/2,
 		format/3
 	]).
 
@@ -45,6 +46,27 @@
 		argnames is ['Classifier', 'Diagnostics']
 	]).
 
+	:- protected(classifier_export_template/4).
+	:- mode(classifier_export_template(+object_identifier, +compound, +atom, -callable), one).
+	:- info(classifier_export_template/4, [
+		comment is 'Hook predicate that importing classifier implementations must define in order to expose the exported classifier template for a given functor.',
+		argnames is ['Dataset', 'Classifier', 'Functor', 'Template']
+	]).
+
+	:- protected(classifier_term_template/2).
+	:- mode(classifier_term_template(+compound, -callable), one).
+	:- info(classifier_term_template/2, [
+		comment is 'Hook predicate that importing classifier implementations must define in order to expose the learned classifier term template used by pretty-printing helpers.',
+		argnames is ['Classifier', 'Template']
+	]).
+
+	:- protected(print_classifier_template/1).
+	:- mode(print_classifier_template(+compound), one).
+	:- info(print_classifier_template/1, [
+		comment is 'Pretty-printing helper predicate used by importing classifier implementations to show the learned classifier term template.',
+		argnames is ['Classifier']
+	]).
+
 	diagnostics(Classifier, Diagnostics) :-
 		::classifier_diagnostics_data(Classifier, Diagnostics).
 
@@ -56,6 +78,10 @@
 		diagnostics(Classifier, Diagnostics),
 		memberchk(options(Options), Diagnostics).
 
+	print_classifier_template(Classifier) :-
+		::classifier_term_template(Classifier, Template),
+		format('Template: ~w~n', [Template]).
+
 	classifier_to_file(Dataset, Classifier, Functor, File) :-
 		::classifier_to_clauses(Dataset, Classifier, Functor, Clauses),
 		open(File, write, Stream),
@@ -64,13 +90,17 @@
 		close(Stream).
 
 	write_comment_header(Dataset, Functor, Classifier, Stream) :-
-		format(Stream, '% exported classifier predicate: ~q~n', [Functor]),
+		::classifier_export_template(Dataset, Classifier, Functor, Template),
+		functor(Template, _, Arity),
+		format(Stream, '% exported classifier predicate: ~q/~d~n', [Functor, Arity]),
+		format(Stream, '% training dataset: ~q~n', [Dataset]),
 		dataset_prediction_schema(Dataset, Functor, Schema),
-		format(Stream, '% dataset prediction schema: ~q~n', [Schema]),
+		format(Stream, '% dataset prediction schema: ~w~n', [Schema]),
 		(	::diagnostics(Classifier, Diagnostics) ->
 			format(Stream, '% diagnostics: ~q~n', [Diagnostics])
 		;	true
-		).
+		),
+		format(Stream, '% ~w~n', [Template]).
 
 	dataset_prediction_schema(Dataset, Functor, Schema) :-
 		Dataset::class(Class),

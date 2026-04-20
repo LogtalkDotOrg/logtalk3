@@ -23,9 +23,9 @@
 	imports([options, classifier_common])).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-04-20,
 		comment is 'k-Nearest Neighbors classifier with multiple distance metrics and weighting options. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'k-NN is a lazy learning algorithm that classifies instances based on the majority class among the k nearest training instances.',
@@ -299,7 +299,8 @@
 		;	max_probability([Class2-Probability2| ClassProbabilities], MaxClass, MaxProbability)
 		).
 
-	classifier_diagnostics_data(knn_classifier(AttributeNames, FeatureTypes, Instances), Diagnostics) :-
+	classifier_diagnostics_data(Classifier, Diagnostics) :-
+		classifier_data(Classifier, AttributeNames, FeatureTypes, Instances),
 		length(Instances, TrainingExamples),
 		Diagnostics = [
 			model(knn),
@@ -309,15 +310,23 @@
 		].
 
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
-		Classifier =.. [_, AttributeNames, FeatureTypes, Instances],
-		Clause =.. [Functor, AttributeNames, FeatureTypes, Instances].
+		Clause =.. [Functor, Classifier].
+
+	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
+		Template =.. [Functor, 'Classifier'].
+
+	classifier_term_template(knn_classifier(_AttributeNames, _FeatureTypes, _Instances), knn_classifier('AttributeNames', 'FeatureTypes', 'Instances')).
+
+	classifier_data(Classifier, AttributeNames, FeatureTypes, Instances) :-
+		Classifier =.. [_Functor, AttributeNames, FeatureTypes, Instances].
 
 	print_classifier(Classifier) :-
-		Classifier =.. [_, AttributeNames, FeatureTypes, Instances],
+		classifier_data(Classifier, AttributeNames, FeatureTypes, Instances),
 		format('k-Nearest Neighbors Classifier~n', []),
 		format('==============================~n~n', []),
 		length(Instances, NumInstances),
 		format('Training instances: ~w~n~n', [NumInstances]),
+		^^print_classifier_template(Classifier),
 		format('Features:~n', []),
 		print_features(AttributeNames, FeatureTypes).
 

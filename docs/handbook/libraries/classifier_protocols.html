@@ -279,15 +279,20 @@ types, or the number of training examples or models.</p>
 <p>The shared classifier exporter in the <code class="docutils literal notranslate"><span class="pre">classifier_common</span></code> category
 writes a standard comment header before the exported clauses:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">exported</span> <span class="pre">classifier</span> <span class="pre">predicate:</span> <span class="pre">Functor</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">exported</span> <span class="pre">classifier</span> <span class="pre">predicate:</span> <span class="pre">Functor/Arity</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">training</span> <span class="pre">dataset:</span> <span class="pre">Dataset</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">dataset</span> <span class="pre">prediction</span> <span class="pre">schema:</span> <span class="pre">Functor(TitleCaseAttribute1,</span> <span class="pre">...,</span> <span class="pre">TitleCaseAttributeN,</span> <span class="pre">TitleCaseClass)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">diagnostics:</span> <span class="pre">Diagnostics</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">Functor(Classifier)</span></code></p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">dataset</span> <span class="pre">prediction</span> <span class="pre">schema</span></code> line always uses the same ASCII-only
 TitleCase conversion already used by <code class="docutils literal notranslate"><span class="pre">c45</span></code> for header comments. This
 line documents the dataset-level prediction interface for readability,
 even when the exported clauses serialize a model term instead of an
 executable predictor relation.</p>
+<p>When exporting a serialized classifier term, using a noun such as
+<code class="docutils literal notranslate"><span class="pre">classifier/1</span></code> or <code class="docutils literal notranslate"><span class="pre">model/1</span></code> is usually clearer than using a verb
+such as <code class="docutils literal notranslate"><span class="pre">classify/1</span></code>.</p>
 </section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>

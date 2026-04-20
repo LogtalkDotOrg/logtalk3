@@ -15,7 +15,7 @@ Protocol for machine learning anomaly detectors.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-19
+| **Date:** 2026-04-20
 
 | **Compilation flags:**
 |    ``static``
@@ -158,7 +158,7 @@ Computes anomaly scores for all examples in a dataset and returns a list of ``Id
 ``anomaly_detector_to_clauses/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Converts an anomaly detector into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses.
+Converts an anomaly detector into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized detector term, a noun such as ``detector`` or ``model`` is usually clearer than a verb such as ``detect``.
 
 | **Compilation flags:**
 |    ``static``
@@ -177,7 +177,7 @@ Converts an anomaly detector into a list of predicate clauses. ``Functor`` is th
 ``anomaly_detector_to_file/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Exports an anomaly detector to a file. ``Functor`` is the functor for the generated predicate clauses.
+Exports an anomaly detector to a file. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized detector term, a noun such as ``detector`` or ``model`` is usually clearer than a verb such as ``detect``.
 
 | **Compilation flags:**
 |    ``static``

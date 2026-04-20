@@ -208,6 +208,10 @@ Where:
 - `Diagnostics`: List of metadata terms, including the effective options,
   convergence status, iteration count, final update delta, and dataset summary.
 
+When exported using `ranker_to_clauses/4` or `ranker_to_file/4`, this
+ranker term is serialized directly as the single argument of the generated
+predicate clause so that the exported model can be loaded and reused as-is.
+
 
 References
 ----------

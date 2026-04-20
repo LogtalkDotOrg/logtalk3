@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-19,
+		date is 2026-04-20,
 		comment is 'k-nearest-neighbor distance anomaly detector with multiple distance metrics, mixed-feature support, and missing-value handling. Learns from a dataset object implementing the ``anomaly_dataset_protocol`` protocol and returns a detector term that can be used for scoring, prediction, and export.',
 		remarks is [
 			'Algorithm' - 'The detector memorizes the training instances and computes an anomaly score from normalized distances to the nearest neighbors. Larger distances indicate more isolated and therefore more anomalous instances.',
@@ -76,7 +76,7 @@
 		Detector = knn_distance_detector(AttributeNames, FeatureTypes, AttributeScales, Instances, Options).
 
 	score(Detector, Instance, Score) :-
-		Detector = knn_distance_detector(AttributeNames, FeatureTypes, AttributeScales, Instances, Options),
+		detector_data(Detector, AttributeNames, FeatureTypes, AttributeScales, Instances, Options),
 		extract_values(AttributeNames, Instance, RawValues),
 		sanitize_input_values(RawValues, Values),
 		instance_raw_score(Values, FeatureTypes, AttributeScales, Instances, Options, RawScore),
@@ -84,7 +84,7 @@
 		normalize_against_reference(RawScore, ReferenceScores, Score).
 
 	score_all(Dataset, Detector, Scores) :-
-		Detector = knn_distance_detector(AttributeNames, FeatureTypes, AttributeScales, Instances, Options),
+		detector_data(Detector, AttributeNames, FeatureTypes, AttributeScales, Instances, Options),
 		raw_score_pairs(Dataset, AttributeNames, FeatureTypes, AttributeScales, Instances, Options, RawPairs),
 		reference_scores(RawPairs, ReferenceScores),
 		normalize_raw_pairs(RawPairs, ReferenceScores, ScoredPairs),
@@ -93,11 +93,10 @@
 		^^extract_scores(SortedDescending, Scores).
 
 	anomaly_detector_to_clauses(_Dataset, Detector, Functor, [Clause]) :-
-		Detector =.. [_, AttributeNames, FeatureTypes, AttributeScales, Instances, Options],
-		Clause =.. [Functor, AttributeNames, FeatureTypes, AttributeScales, Instances, Options].
+		Clause =.. [Functor, Detector].
 
 	print_anomaly_detector(Detector) :-
-		Detector = knn_distance_detector(AttributeNames, FeatureTypes, _AttributeScales, Instances, Options),
+		detector_data(Detector, AttributeNames, FeatureTypes, _AttributeScales, Instances, Options),
 		length(Instances, NumInstances),
 		format('k-Nearest-Neighbor Distance Anomaly Detector~n', []),
 		format('==========================================~n~n', []),
@@ -107,8 +106,13 @@
 		^^print_anomaly_detector_template(Detector),
 		format('Options:            ~w~n', [Options]).
 
-	anomaly_detector_template(Functor, Template) :-
-		Template =.. [Functor, 'AttributeNames', 'FeatureTypes', 'AttributeScales', 'Instances', 'Options'].
+	anomaly_detector_export_template(Functor, Template) :-
+		Template =.. [Functor, 'Detector'].
+
+	anomaly_detector_term_template(knn_distance_detector(_AttributeNames, _FeatureTypes, _AttributeScales, _Instances, _Options), knn_distance_detector('AttributeNames', 'FeatureTypes', 'AttributeScales', 'Instances', 'Options')).
+
+	detector_data(Detector, AttributeNames, FeatureTypes, AttributeScales, Instances, Options) :-
+		Detector =.. [_Functor, AttributeNames, FeatureTypes, AttributeScales, Instances, Options].
 
 	determine_feature_types([], []).
 	determine_feature_types([_-Values| Pairs], [Type| Types]) :-

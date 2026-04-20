@@ -23,9 +23,9 @@
 	imports([options, classifier_common])).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-04-20,
 		comment is 'Linear support vector machine classifier supporting binary and multiclass classification using one-vs-rest margin models. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses batch subgradient descent to train one linear hinge-loss model per class in a one-vs-rest configuration.',
@@ -290,7 +290,8 @@
 		;   max_score([Class2-Score2| Scores], Class, Score)
 		).
 
-	classifier_diagnostics_data(linear_svm_classifier(Classes, Encoders, Models, Options), Diagnostics) :-
+	classifier_diagnostics_data(Classifier, Diagnostics) :-
+		classifier_data(Classifier, Classes, Encoders, Models, Options),
 		encoders_feature_count(Encoders, EncodedFeatures),
 		length(Models, ModelCount),
 		Diagnostics = [
@@ -302,12 +303,21 @@
 		].
 
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
-		Classifier = linear_svm_classifier(Classes, Encoders, Models, Options),
-		Clause =.. [Functor, Classes, Encoders, Models, Options].
+		Clause =.. [Functor, Classifier].
 
-	print_classifier(linear_svm_classifier(Classes, Encoders, Models, Options)) :-
+	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
+		Template =.. [Functor, 'Classifier'].
+
+	classifier_term_template(linear_svm_classifier(_Classes, _Encoders, _Models, _Options), linear_svm_classifier('Classes', 'Encoders', 'Models', 'Options')).
+
+	classifier_data(Classifier, Classes, Encoders, Models, Options) :-
+		Classifier =.. [_Functor, Classes, Encoders, Models, Options].
+
+	print_classifier(Classifier) :-
+		classifier_data(Classifier, Classes, Encoders, Models, Options),
 		format('Linear SVM Classifier~n', []),
 		format('=====================~n~n', []),
+		^^print_classifier_template(Classifier),
 		format('Classes: ~w~n', [Classes]),
 		format('Options: ~w~n~n', [Options]),
 		format('Encoders:~n', []),

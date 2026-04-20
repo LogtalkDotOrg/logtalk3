@@ -51,9 +51,18 @@ Export header convention
 The shared exporter in the `anomaly_common` category writes a standard
 comment header before the exported clauses:
 
-- `% exported anomaly detector predicate: Functor`
-- `% detector template: Functor(Argument1, ..., ArgumentN)`
+- `% exported anomaly detector predicate: Functor/Arity`
+- `% training dataset: Dataset`
 - `% options: Options`
+- `% Functor(Detector)`
+
+The exported clauses serialize the learned detector term as a single
+predicate argument so that loading the file gives a detector value that
+can be passed directly to `predict/3-4` and `score_all/3`.
+
+When exporting a serialized detector term, using a noun such as
+`detector/1` or `model/1` is usually clearer than using a verb such as
+`detect/1`.
 
 
 API documentation

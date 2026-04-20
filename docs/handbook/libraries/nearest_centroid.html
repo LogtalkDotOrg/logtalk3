@@ -363,9 +363,7 @@ needing to access the original training dataset.</p>
 </section>
 <section id="classifier-representation">
 <h2>Classifier Representation<a class="headerlink" href="#classifier-representation" title="Link to this heading"></a></h2>
-<p>The learned classifier is represented as a compound term with the
-functor chosen by the user when exporting the classifier and arity 4.
-For example, assuming the <code class="docutils literal notranslate"><span class="pre">my_classifier/1</span></code> functor:</p>
+<p>The learned classifier is represented as a compound term:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>nc_classifier(<span class="nv">AttributeNames</span>, <span class="nv">FeatureTypes</span>, <span class="nv">Centroids</span>)
 </pre></div>
 </div>
@@ -375,6 +373,10 @@ For example, assuming the <code class="docutils literal notranslate"><span class
 <li><p><code class="docutils literal notranslate"><span class="pre">FeatureTypes</span></code>: List of types (<code class="docutils literal notranslate"><span class="pre">numeric</span></code> or <code class="docutils literal notranslate"><span class="pre">categorical</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Centroids</span></code>: List of computed <code class="docutils literal notranslate"><span class="pre">Class-Centroid</span></code> pairs</p></li>
 </ul>
+<p>When exported using <code class="docutils literal notranslate"><span class="pre">classifier_to_clauses/4</span></code> or
+<code class="docutils literal notranslate"><span class="pre">classifier_to_file/4</span></code>, this classifier term is serialized directly as
+the single argument of the generated predicate clause so that the
+exported model can be loaded and reused as-is.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>

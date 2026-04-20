@@ -23,9 +23,9 @@
 	imports(classifier_common)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-04-20,
 		comment is 'Naive Bayes classifier with Laplace smoothing and Gaussian distribution support. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Naive Bayes is a probabilistic classifier based on Bayes theorem with strong (naive) independence assumptions between features.',
@@ -262,21 +262,30 @@
 			Attributes
 		).
 
-	classifier_diagnostics_data(nb_classifier(Classes, _ClassPriors, AttributeNames, FeatureTypes, _FeatureParams), [
+	classifier_diagnostics_data(Classifier, [
 		model(naive_bayes),
 		classes(Classes),
 		attributes(AttributeNames),
 		feature_types(FeatureTypes)
-	]).
+	]) :-
+		classifier_data(Classifier, Classes, _ClassPriors, AttributeNames, FeatureTypes, _FeatureParams).
 
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
-		Classifier =.. [_, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams],
-		Clause =.. [Functor, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams].
+		Clause =.. [Functor, Classifier].
+
+	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
+		Template =.. [Functor, 'Classifier'].
+
+	classifier_term_template(nb_classifier(_Classes, _ClassPriors, _AttributeNames, _FeatureTypes, _FeatureParams), nb_classifier('Classes', 'ClassPriors', 'AttributeNames', 'FeatureTypes', 'FeatureParams')).
+
+	classifier_data(Classifier, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams) :-
+		Classifier =.. [_Functor, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams].
 
 	print_classifier(Classifier) :-
-		Classifier =.. [_, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams],
+		classifier_data(Classifier, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams),
 		format('Naive Bayes Classifier~n', []),
 		format('======================~n~n', []),
+		^^print_classifier_template(Classifier),
 		format('Classes: ~w~n~n', [Classes]),
 		format('Class Priors:~n', []),
 		print_priors(ClassPriors),

@@ -23,9 +23,9 @@
 	imports(classifier_common)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-04-20,
 		comment is 'C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes, handles missing values, and supports tree pruning.',
 		remarks is [
 			'Algorithm' - 'C4.5 is an extension of the ID3 algorithm that uses information gain ratio instead of information gain for attribute selection, which avoids bias towards attributes with many values.',
@@ -409,6 +409,21 @@
 
 	classifier_diagnostics_data(_Tree, [model(c45)]).
 
+	classifier_export_template(Dataset, _Tree, Functor, Template) :-
+		Dataset::class(Class),
+		findall(
+			Attribute,
+			Dataset::attribute_values(Attribute, _),
+			Arguments,
+			[Class]
+		),
+		title_case(Arguments, TitleCaseArguments),
+		Template =.. [Functor| TitleCaseArguments].
+
+	classifier_term_template(leaf(_Class), leaf('Class')).
+	classifier_term_template(tree(_Attribute, threshold(_Threshold), _LeftTree, _RightTree), tree('Attribute', threshold('Threshold'), 'LeftTree', 'RightTree')).
+	classifier_term_template(tree(_Attribute, _Subtrees), tree('Attribute', 'Subtrees')).
+
 	tree_to_clauses_(leaf(Class), Functor, AttributeNames, Bindings, [Clause]) :-
 		build_clause(Functor, AttributeNames, Bindings, Class, Clause).
 	tree_to_clauses_(tree(Attribute, threshold(Threshold), LeftTree, RightTree), Functor, AttributeNames, Bindings, Clauses) :-
@@ -470,6 +485,7 @@
 
 	% print_classifier/1 - pretty print the tree
 	print_classifier(Tree) :-
+		^^print_classifier_template(Tree),
 		print_classifier(Tree, 0).
 
 	print_classifier(leaf(Class), Indent) :-
@@ -492,6 +508,17 @@
 		Indent1 is Indent + 1,
 		print_classifier(Subtree, Indent1),
 		print_subtrees(Subtrees, Attribute, Indent).
+
+	% assumes ASCII attribute and class names
+	title_case([], []).
+	title_case([Name| Names], [TitleCaseName| TitleCaseNames]) :-
+		atom_codes(Name, [Letter| Letters]),
+		(	0'a @=< Letter, Letter @=< 0'z ->
+			UpperCaseLetter is Letter - 32,
+			atom_codes(TitleCaseName, [UpperCaseLetter| Letters])
+		;	TitleCaseName = Name
+		),
+		title_case(Names, TitleCaseNames).
 
 	dataset_attributes(Dataset, Attributes) :-
 		findall(

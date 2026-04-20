@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-18,
+		date is 2026-04-20,
 		comment is 'Bradley-Terry pairwise preference ranker. Learns one positive strength parameter per item from a connected dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		remarks is [
 			'Algorithm' - 'Uses a deterministic minorization-maximization update to estimate one relative strength parameter per item from weighted pairwise wins and losses.',
@@ -79,25 +79,38 @@
 			dataset_summary(DatasetSummary)
 		]).
 
-	rank(bt_ranker(Items, Strengths, _Diagnostics), Candidates, Ranking) :-
+	rank(Ranker, Candidates, Ranking) :-
+		ranker_data(Ranker, Items, Strengths, _Diagnostics),
 		validate_candidates(Candidates, Items),
 		rank_candidates(Strengths, Candidates, Ranking).
 
-	strengths(bt_ranker(_Items, Strengths, _Diagnostics), Strengths).
+	strengths(Ranker, Strengths) :-
+		ranker_data(Ranker, _Items, Strengths, _Diagnostics).
 
-	ranker_diagnostics_data(bt_ranker(_Items, _Strengths, Diagnostics), Diagnostics).
+	ranker_diagnostics_data(Ranker, Diagnostics) :-
+		ranker_data(Ranker, _Items, _Strengths, Diagnostics).
+
+	ranker_export_template(_Dataset, _Ranker, Functor, Template) :-
+		Template =.. [Functor, 'Ranker'].
+
+	ranker_term_template(bt_ranker(_Items, _Strengths, _Diagnostics), bt_ranker('Items', 'Strengths', 'Diagnostics')).
 
 	ranker_to_clauses(_Dataset, Ranker, Functor, [Clause]) :-
 		Clause =.. [Functor, Ranker].
 
-	print_ranker(bt_ranker(Items, Strengths, Diagnostics)) :-
+	print_ranker(Ranker) :-
+		ranker_data(Ranker, Items, Strengths, Diagnostics),
 		length(Items, Count),
 		format('Bradley-Terry ranker for ~d items~n', [Count]),
+		^^print_ranker_template(Ranker),
 		forall(
 			member(Item-Strength, Strengths),
 			format('  ~q: ~6f~n', [Item, Strength])
 		),
 		format('Diagnostics: ~q~n', [Diagnostics]).
+
+	ranker_data(Ranker, Items, Strengths, Diagnostics) :-
+		Ranker =.. [_Functor, Items, Strengths, Diagnostics].
 
 	initial_strengths(Items, Strengths) :-
 		length(Items, Count),

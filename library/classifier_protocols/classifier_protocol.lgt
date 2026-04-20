@@ -22,9 +22,9 @@
 :- protocol(classifier_protocol).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-04-20,
 		comment is 'Protocol for machine learning classifiers.',
 		see_also is [c45, isolation_forest, knn, linear_svm, logistic_regression, naive_bayes, nearest_centroid, random_forest]
 	]).
@@ -67,14 +67,14 @@
 	:- public(classifier_to_clauses/4).
 	:- mode(classifier_to_clauses(+object_identifier, +compound, +callable, -list(clause)), one).
 	:- info(classifier_to_clauses/4, [
-		comment is 'Converts a classifier into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses.',
+		comment is 'Converts a classifier into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized classifier term, a noun such as ``classifier`` or ``model`` is usually clearer than a verb such as ``classify``.',
 		argnames is ['Dataset', 'Classifier', 'Functor', 'Clauses']
 	]).
 
 	:- public(classifier_to_file/4).
 	:- mode(classifier_to_file(+object_identifier, +compound, +callable, +atom), one).
 	:- info(classifier_to_file/4, [
-		comment is 'Exports a classifier to a file. ``Functor`` is the functor for the generated predicate clauses.',
+		comment is 'Exports a classifier to a file. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized classifier term, a noun such as ``classifier`` or ``model`` is usually clearer than a verb such as ``classify``.',
 		argnames is ['Dataset', 'Classifier', 'Functor', 'File']
 	]).
 

@@ -127,6 +127,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#implemented-features">Implemented features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#detector-representation">Detector Representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
@@ -323,6 +324,28 @@ is the number of dimensions</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">anomaly_threshold(T)</span></code>: threshold used by <code class="docutils literal notranslate"><span class="pre">predict/3-4</span></code> (default:
 <code class="docutils literal notranslate"><span class="pre">0.5</span></code>)</p></li>
 </ul>
+</section>
+<section id="detector-representation">
+<h2>Detector Representation<a class="headerlink" href="#detector-representation" title="Link to this heading"></a></h2>
+<p>The learned detector is represented by default as:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>if_model(<span class="nv">Trees</span>, <span class="nv">Psi</span>, <span class="nv">AttributeNames</span>, <span class="nv">Attributes</span>, <span class="nv">Ranges</span>, <span class="nv">Options</span>)
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Trees</span></code>: List of learned isolation trees</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Psi</span></code>: Effective subsample size used to build each tree</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AttributeNames</span></code>: List of attribute names in order</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Attributes</span></code>: List of <code class="docutils literal notranslate"><span class="pre">Attribute-Values</span></code> declarations from the
+training dataset</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ranges</span></code>: Observed numeric ranges used for imputing and scoring
+missing values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Options</span></code>: Learned options</p></li>
+</ul>
+<p>When exported using <code class="docutils literal notranslate"><span class="pre">anomaly_detector_to_clauses/4</span></code> or
+<code class="docutils literal notranslate"><span class="pre">anomaly_detector_to_file/4</span></code>, this detector term is serialized
+directly as the single argument of the generated predicate clause so
+that the exported model can be loaded and reused as-is.</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>

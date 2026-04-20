@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-04-20,
 		comment is 'Unit tests for the "ada_boost" library.'
 	]).
 
@@ -124,14 +124,14 @@
 		ada_boost::learn(play_tennis, Classifier),
 		ada_boost::classifier_to_clauses(play_tennis, Classifier, classify, Clauses).
 
-	test(ada_boost_classifier_to_clauses_4_structure, true(functor(Clause, my_boost, 3))) :-
+	test(ada_boost_classifier_to_clauses_4_structure, true(functor(Clause, my_boost, 1))) :-
 		ada_boost::learn(play_tennis, Classifier),
 		ada_boost::classifier_to_clauses(play_tennis, Classifier, my_boost, [Clause]).
 
 	test(ada_boost_classifier_to_clauses_4_usable, true(ground(Prediction))) :-
 		ada_boost::learn(play_tennis, Classifier),
-		ada_boost::classifier_to_clauses(_Dataset, Classifier, classify, [Clause]),
-		ada_boost::predict(Clause, [outlook-overcast, temperature-hot, humidity-high, wind-weak], Prediction).
+		ada_boost::classifier_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
+		ada_boost::predict(ExportedClassifier, [outlook-overcast, temperature-hot, humidity-high, wind-weak], Prediction).
 
 	% classifier_to_file/4 tests
 
@@ -143,10 +143,10 @@
 	test(ada_boost_classifier_to_file_4_loadable, true(ground(Prediction))) :-
 		^^file_path('test_output.pl', File),
 		ada_boost::learn(play_tennis, Classifier),
-		ada_boost::classifier_to_file(play_tennis, Classifier, classify, File),
+		ada_boost::classifier_to_file(play_tennis, Classifier, classifier, File),
 		logtalk_load(File),
-		{classify(WeightedTrees, ClassValues, Options)},
-		ada_boost::predict(classify(WeightedTrees, ClassValues, Options), [outlook-overcast, temperature-hot, humidity-high, wind-weak], Prediction).
+		{classifier(LoadedClassifier)},
+		ada_boost::predict(LoadedClassifier, [outlook-overcast, temperature-hot, humidity-high, wind-weak], Prediction).
 
 	test(ada_boost_diagnostics_2, deterministic((list::memberchk(model(ada_boost), Diagnostics), list::memberchk(options(Options), Diagnostics)))) :-
 		ada_boost::learn(play_tennis, Classifier),

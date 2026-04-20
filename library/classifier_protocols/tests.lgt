@@ -34,10 +34,16 @@
 
 	classifier_diagnostics_data(sample_classifier(_DefaultClass, Diagnostics), Diagnostics).
 
+	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
+		Template =.. [Functor, 'Classifier'].
+
+	classifier_term_template(sample_classifier(_DefaultClass, _Diagnostics), sample_classifier('DefaultClass', 'Diagnostics')).
+
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Clause =.. [Functor, Classifier].
 
 	print_classifier(Classifier) :-
+		^^print_classifier_template(Classifier),
 		writeq(Classifier), nl.
 
 :- end_object.
@@ -47,9 +53,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-04-20,
 		comment is 'Smoke tests for the "classifier_protocols" library.'
 	]).
 
@@ -89,22 +95,23 @@
 		sample_classifier::learn(play_tennis, Classifier),
 		sample_classifier::classifier_options(Classifier, Options).
 
-	test(sample_classifier_classifier_to_clauses_4, deterministic(Clause == classify(sample_classifier(yes, [model(sample_classifier), options([]), training_dataset(play_tennis)])))) :-
+	test(sample_classifier_classifier_to_clauses_4, deterministic(Clause == classifier(sample_classifier(yes, [model(sample_classifier), options([]), training_dataset(play_tennis)])))) :-
 		sample_classifier::learn(play_tennis, Classifier),
-		sample_classifier::classifier_to_clauses(play_tennis, Classifier, classify, [Clause]).
+		sample_classifier::classifier_to_clauses(play_tennis, Classifier, classifier, [Clause]).
 
-	test(sample_classifier_classifier_to_file_4_header, deterministic(HeaderLines == ['% exported classifier predicate: classify', '% dataset prediction schema: classify(\'Outlook\',\'Temperature\',\'Humidity\',\'Wind\',\'Play_tennis\')', '% diagnostics: [model(sample_classifier),options([]),training_dataset(play_tennis)]'])) :-
+	test(sample_classifier_classifier_to_file_4_header, deterministic(HeaderLines == ['% exported classifier predicate: classifier/1', '% training dataset: play_tennis', '% dataset prediction schema: classifier(Outlook,Temperature,Humidity,Wind,Play_tennis)', '% diagnostics: [model(sample_classifier),options([]),training_dataset(play_tennis)]', '% classifier(Classifier)'])) :-
 		^^file_path('test_output.pl', File),
 		sample_classifier::learn(play_tennis, Classifier),
-		sample_classifier::classifier_to_file(play_tennis, Classifier, classify, File),
+		sample_classifier::classifier_to_file(play_tennis, Classifier, classifier, File),
 		header_lines(File, HeaderLines).
 
-	test(sample_classifier_classifier_to_file_4_loadable, deterministic(memberchk(model(sample_classifier), Diagnostics))) :-
+	test(sample_classifier_classifier_to_file_4_loadable, deterministic((DefaultClass == yes, memberchk(model(sample_classifier), Diagnostics)))) :-
 		^^file_path('test_output.pl', File),
 		sample_classifier::learn(play_tennis, Classifier),
-		sample_classifier::classifier_to_file(play_tennis, Classifier, classify, File),
+		sample_classifier::classifier_to_file(play_tennis, Classifier, classifier, File),
 		logtalk_load(File),
-		{classify(sample_classifier(_DefaultClass, Diagnostics))}.
+		{classifier(LoadedClassifier)},
+		LoadedClassifier = sample_classifier(DefaultClass, Diagnostics).
 
 	test(sample_classifier_print_classifier_1, deterministic) :-
 		^^suppress_text_output,
@@ -116,8 +123,10 @@
 		read_line_atom(Stream, Line1),
 		read_line_atom(Stream, Line2),
 		read_line_atom(Stream, Line3),
+		read_line_atom(Stream, Line4),
+		read_line_atom(Stream, Line5),
 		close(Stream),
-		Lines = [Line1, Line2, Line3].
+		Lines = [Line1, Line2, Line3, Line4, Line5].
 
 	read_line_atom(Stream, Line) :-
 		get_code(Stream, Code),

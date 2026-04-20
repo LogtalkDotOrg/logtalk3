@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-19,
+		date is 2026-04-20,
 		comment is 'Shared predicates for anomaly detector learning defaults, threshold-based prediction, dataset helpers, and export.'
 	]).
 
@@ -37,11 +37,18 @@
 		argnames is ['AnomalyDetector', 'Options']
 	]).
 
-	:- protected(anomaly_detector_template/2).
-	:- mode(anomaly_detector_template(+atom, -callable), one).
-	:- info(anomaly_detector_template/2, [
-		comment is 'Hook predicate that importing anomaly detector implementations must define in order to expose the exported detector template for a given functor.',
+	:- protected(anomaly_detector_export_template/2).
+	:- mode(anomaly_detector_export_template(+atom, -callable), one).
+	:- info(anomaly_detector_export_template/2, [
+		comment is 'Hook predicate that importing anomaly detector implementations must define in order to expose the exported detector predicate template for a given functor.',
 		argnames is ['Functor', 'Template']
+	]).
+
+	:- protected(anomaly_detector_term_template/2).
+	:- mode(anomaly_detector_term_template(+compound, -compound), one).
+	:- info(anomaly_detector_term_template/2, [
+		comment is 'Hook predicate that importing anomaly detector implementations must define in order to expose the learned detector term template used by pretty-printing helpers.',
+		argnames is ['AnomalyDetector', 'Template']
 	]).
 
 	:- protected(dataset_attributes/2).
@@ -100,7 +107,7 @@
 	anomaly_detector_to_file(Dataset, Detector, Functor, File) :-
 		::anomaly_detector_to_clauses(Dataset, Detector, Functor, Clauses),
 		open(File, write, Stream),
-		write_comment_header(Functor, Detector, Stream),
+		write_comment_header(Dataset, Functor, Detector, Stream),
 		write_clauses(Clauses, Stream),
 		close(Stream).
 
@@ -120,16 +127,17 @@
 		extract_scores(Pairs, Scores).
 
 	print_anomaly_detector_template(Detector) :-
-		functor(Detector, Functor, _),
-		::anomaly_detector_template(Functor, Template),
-		format('Template:           ~q~n', [Template]).
+		::anomaly_detector_term_template(Detector, Template),
+		format('Template:           ~w~n', [Template]).
 
-	write_comment_header(Functor, Detector, Stream) :-
-		format(Stream, '% exported anomaly detector predicate: ~q~n', [Functor]),
-		::anomaly_detector_template(Functor, Template),
-		format(Stream, '% detector template: ~q~n', [Template]),
+	write_comment_header(Dataset, Functor, Detector, Stream) :-
+		::anomaly_detector_export_template(Functor, Template),
+		functor(Template, _, Arity),
+		format(Stream, '% exported anomaly detector predicate: ~q/~d~n', [Functor, Arity]),
+		format(Stream, '% training dataset: ~q~n', [Dataset]),
 		::anomaly_detector_options(Detector, Options),
-		format(Stream, '% options: ~q~n', [Options]).
+		format(Stream, '% options: ~q~n', [Options]),
+		format(Stream, '% ~w~n', [Template]).
 
 	write_clauses([], _Stream).
 	write_clauses([Clause| Clauses], Stream) :-

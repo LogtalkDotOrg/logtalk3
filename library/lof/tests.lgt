@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-19,
+		date is 2026-04-20,
 		comment is 'Unit tests for the "lof" library.'
 	]).
 
@@ -120,6 +120,14 @@
 		^^file_path('test_output.pl', File),
 		learn(gaussian_anomalies, Detector, [k(5)]),
 		anomaly_detector_to_file(gaussian_anomalies, Detector, detect, File).
+
+	test(lof_anomaly_detector_to_file_4_loadable, deterministic(Prediction == anomaly)) :-
+		^^file_path('test_output.pl', File),
+		learn(gaussian_anomalies, Detector, [k(5)]),
+		anomaly_detector_to_file(gaussian_anomalies, Detector, detector, File),
+		logtalk_load(File),
+		{detector(LoadedDetector)},
+		predict(LoadedDetector, [x-4.50, y-4.20], Prediction).
 
 	test(lof_print_anomaly_detector_1, deterministic) :-
 		^^suppress_text_output,

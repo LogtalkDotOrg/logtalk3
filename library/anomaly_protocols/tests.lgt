@@ -22,8 +22,11 @@
 :- object(anomaly_test_support).
 
 	:- public(validate_anomaly_dataset/1).
+	:- public(training_model/3).
 	:- public(instance_score/2).
+	:- public(instance_score/4).
 	:- public(sorted_scores/2).
+	:- public(sorted_scores/4).
 
 	:- uses(list, [
 		length/2, member/2, memberchk/2, reverse/2
@@ -61,6 +64,22 @@
 		;   memberchk(Value, Values)
 		).
 
+	training_model(Dataset, AttributeNames, Scale) :-
+		findall(Attribute, Dataset::attribute_values(Attribute, _), AttributeNames),
+		findall(
+			Absolute,
+			(
+				Dataset::example(_Id, _Class, AttributeValues),
+				member(Attribute, AttributeNames),
+				memberchk(Attribute-Value, AttributeValues),
+				nonvar(Value),
+				number(Value),
+				Absolute is abs(Value)
+			),
+			AbsoluteValues
+		),
+		max_or_one(AbsoluteValues, Scale).
+
 	instance_score(Instance, Score) :-
 		findall(
 			Absolute,
@@ -79,8 +98,34 @@
 		;   Score = Score0
 		).
 
+	instance_score(AttributeNames, Scale, Instance, Score) :-
+		findall(
+			Absolute,
+			(
+				member(Attribute, AttributeNames),
+				memberchk(Attribute-Value, Instance),
+				nonvar(Value),
+				number(Value),
+				Absolute is abs(Value)
+			),
+			AbsoluteValues
+		),
+		max_or_zero(AbsoluteValues, Maximum),
+		(   Scale > 0.0 ->
+			Score0 is Maximum / Scale
+		;   Score0 = 0.0
+		),
+		(   Score0 > 1.0 ->
+			Score = 1.0
+		;   Score = Score0
+		).
+
 	max_or_zero([], 0.0).
 	max_or_zero([Value| Values], Maximum) :-
+		max_or_zero(Values, Value, Maximum).
+
+	max_or_one([], 1.0).
+	max_or_one([Value| Values], Maximum) :-
 		max_or_zero(Values, Value, Maximum).
 
 	max_or_zero([], Maximum, Maximum).
@@ -104,6 +149,19 @@
 		reverse(Ascending, Descending),
 		extract_scores(Descending, Scores).
 
+	sorted_scores(Dataset, AttributeNames, Scale, Scores) :-
+		findall(
+			Score-Id-Class,
+			(
+				Dataset::example(Id, Class, AttributeValues),
+				instance_score(AttributeNames, Scale, AttributeValues, Score)
+			),
+			Pairs
+		),
+		msort(Pairs, Ascending),
+		reverse(Ascending, Descending),
+		extract_scores(Descending, Scores).
+
 	extract_scores([], []).
 	extract_scores([Score-Id-Class| Pairs], [Id-Class-Score| Scores]) :-
 		extract_scores(Pairs, Scores).
@@ -118,24 +176,27 @@
 		valid/2
 	]).
 
-	learn(Dataset, sample_anomaly_detector(Dataset, Options), UserOptions) :-
+	learn(Dataset, sample_anomaly_detector(Dataset, AttributeNames, Scale, Options), UserOptions) :-
 		^^check_options(UserOptions),
-		^^merge_options(UserOptions, Options).
+		^^merge_options(UserOptions, Options),
+		anomaly_test_support::training_model(Dataset, AttributeNames, Scale).
 
-	score(_Detector, Instance, Score) :-
-		anomaly_test_support::instance_score(Instance, Score).
+	score(sample_anomaly_detector(_Dataset, AttributeNames, Scale, _Options), Instance, Score) :-
+		anomaly_test_support::instance_score(AttributeNames, Scale, Instance, Score).
 
-	score_all(Dataset, _Detector, Scores) :-
-		anomaly_test_support::sorted_scores(Dataset, Scores).
+	score_all(Dataset, sample_anomaly_detector(_TrainingDataset, AttributeNames, Scale, _Options), Scores) :-
+		anomaly_test_support::sorted_scores(Dataset, AttributeNames, Scale, Scores).
 
-	anomaly_detector_to_clauses(_Dataset, sample_anomaly_detector(Dataset, Options), Functor, [Clause]) :-
-		Clause =.. [Functor, Dataset, Options].
+	anomaly_detector_to_clauses(_Dataset, Detector, Functor, [Clause]) :-
+		Clause =.. [Functor, Detector].
 
 	print_anomaly_detector(Detector) :-
 		writeq(Detector), nl.
 
-	anomaly_detector_template(Functor, Template) :-
-		Template =.. [Functor, 'Dataset', 'Options'].
+	anomaly_detector_export_template(Functor, Template) :-
+		Template =.. [Functor, 'Detector'].
+
+	anomaly_detector_term_template(sample_anomaly_detector(_Dataset, _AttributeNames, _Scale, _Options), sample_anomaly_detector('Dataset', 'AttributeNames', 'Scale', 'Options')).
 
 	default_option(anomaly_threshold(0.5)).
 
@@ -151,7 +212,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-19,
+		date is 2026-04-20,
 		comment is 'Smoke tests for the "anomaly_protocols" library.'
 	]).
 
@@ -219,22 +280,23 @@
 		sample_anomaly_detector::score_all(gaussian_anomalies, Detector, AllScores),
 		AllScores = [_-_-FirstScore, _-_-SecondScore| _].
 
-	test(sample_anomaly_detector_to_clauses_4, deterministic(Clause == detect(gaussian_anomalies, [anomaly_threshold(0.5)]))) :-
+	test(sample_anomaly_detector_to_clauses_4, deterministic(Clause == detector(sample_anomaly_detector(gaussian_anomalies, [x, y], 5.3, [anomaly_threshold(0.5)])))) :-
 		sample_anomaly_detector::learn(gaussian_anomalies, Detector),
-		sample_anomaly_detector::anomaly_detector_to_clauses(gaussian_anomalies, Detector, detect, [Clause]).
+		sample_anomaly_detector::anomaly_detector_to_clauses(gaussian_anomalies, Detector, detector, [Clause]).
 
-	test(sample_anomaly_detector_to_file_4_header, deterministic(HeaderLines == ['% exported anomaly detector predicate: detect', '% detector template: detect(''Dataset'',''Options'')', '% options: [anomaly_threshold(0.5)]'])) :-
+	test(sample_anomaly_detector_to_file_4_header, deterministic(HeaderLines == ['% exported anomaly detector predicate: detector/1', '% training dataset: gaussian_anomalies', '% options: [anomaly_threshold(0.5)]', '% detector(Detector)'])) :-
 		^^file_path('test_output.pl', File),
 		sample_anomaly_detector::learn(gaussian_anomalies, Detector),
-		sample_anomaly_detector::anomaly_detector_to_file(gaussian_anomalies, Detector, detect, File),
+		sample_anomaly_detector::anomaly_detector_to_file(gaussian_anomalies, Detector, detector, File),
 		header_lines(File, HeaderLines).
 
-	test(sample_anomaly_detector_to_file_4_loadable, deterministic((Dataset == gaussian_anomalies, Options == [anomaly_threshold(0.5)]))) :-
+	test(sample_anomaly_detector_to_file_4_loadable, deterministic((LoadedDetector == sample_anomaly_detector(gaussian_anomalies, [x, y], 5.3, [anomaly_threshold(0.5)]), Prediction == anomaly))) :-
 		^^file_path('test_output.pl', File),
 		sample_anomaly_detector::learn(gaussian_anomalies, Detector),
-		sample_anomaly_detector::anomaly_detector_to_file(gaussian_anomalies, Detector, detect, File),
+		sample_anomaly_detector::anomaly_detector_to_file(gaussian_anomalies, Detector, detector, File),
 		logtalk_load(File),
-		{detect(Dataset, Options)}.
+		{detector(LoadedDetector)},
+		sample_anomaly_detector::predict(LoadedDetector, [x-4.50, y-4.20], Prediction).
 
 	test(sample_anomaly_detector_print_1, deterministic) :-
 		^^suppress_text_output,
@@ -246,8 +308,9 @@
 		read_line_atom(Stream, Line1),
 		read_line_atom(Stream, Line2),
 		read_line_atom(Stream, Line3),
+		read_line_atom(Stream, Line4),
 		close(Stream),
-		Lines = [Line1, Line2, Line3].
+		Lines = [Line1, Line2, Line3, Line4].
 
 	read_line_atom(Stream, Line) :-
 		get_code(Stream, Code),

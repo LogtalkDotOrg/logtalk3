@@ -15,7 +15,7 @@ Shared predicates for anomaly detector learning defaults, threshold-based predic
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-19
+| **Date:** 2026-04-20
 
 | **Compilation flags:**
 |    ``static``
@@ -66,21 +66,40 @@ Hook predicate that importing anomaly detector implementations may override in o
 
 ------------
 
-.. index:: anomaly_detector_template/2
-.. _anomaly_common/0::anomaly_detector_template/2:
+.. index:: anomaly_detector_export_template/2
+.. _anomaly_common/0::anomaly_detector_export_template/2:
 
-``anomaly_detector_template/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``anomaly_detector_export_template/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Hook predicate that importing anomaly detector implementations must define in order to expose the exported detector template for a given functor.
+Hook predicate that importing anomaly detector implementations must define in order to expose the exported detector predicate template for a given functor.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``anomaly_detector_template(Functor,Template)``
+|    ``anomaly_detector_export_template(Functor,Template)``
 | **Mode and number of proofs:**
-|    ``anomaly_detector_template(+atom,-callable)`` - ``one``
+|    ``anomaly_detector_export_template(+atom,-callable)`` - ``one``
+
+
+------------
+
+.. index:: anomaly_detector_term_template/2
+.. _anomaly_common/0::anomaly_detector_term_template/2:
+
+``anomaly_detector_term_template/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing anomaly detector implementations must define in order to expose the learned detector term template used by pretty-printing helpers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``anomaly_detector_term_template(AnomalyDetector,Template)``
+| **Mode and number of proofs:**
+|    ``anomaly_detector_term_template(+compound,-compound)`` - ``one``
 
 
 ------------

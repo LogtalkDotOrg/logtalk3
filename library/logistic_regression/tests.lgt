@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-04-20,
 		comment is 'Unit tests for the "logistic_regression" library.'
 	]).
 
@@ -111,8 +111,8 @@
 
 	test(logistic_regression_classifier_to_clauses_4, deterministic(Prediction == yes)) :-
 		logistic_regression::learn(weather, Classifier),
-		logistic_regression::classifier_to_clauses(_Dataset, Classifier, classify, [Clause]),
-		logistic_regression::predict(Clause, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
+		logistic_regression::classifier_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
+		logistic_regression::predict(ExportedClassifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
 
 	test(logistic_regression_classifier_to_file_4_written, deterministic(os::file_exists(File))) :-
 		^^file_path('test_output.pl', File),
@@ -122,10 +122,10 @@
 	test(logistic_regression_classifier_to_file_4_loaded, deterministic(Prediction == yes)) :-
 		^^file_path('test_output.pl', File),
 		logistic_regression::learn(weather, Classifier),
-		logistic_regression::classifier_to_file(weather, Classifier, classify, File),
+		logistic_regression::classifier_to_file(weather, Classifier, classifier, File),
 		logtalk_load(File),
-		{classify(Classes, Encoders, Models, Options)},
-		logistic_regression::predict(classify(Classes, Encoders, Models, Options), [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
+		{classifier(LoadedClassifier)},
+		logistic_regression::predict(LoadedClassifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
 
 	test(logistic_regression_diagnostics_2, deterministic((list::memberchk(model(logistic_regression), Diagnostics), list::memberchk(options(Options), Diagnostics)))) :-
 		logistic_regression::learn(weather, Classifier),

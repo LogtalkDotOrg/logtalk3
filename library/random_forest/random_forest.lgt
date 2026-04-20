@@ -23,9 +23,9 @@
 	imports([options, classifier_common])).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-04-20,
 		comment is 'Random Forest classifier using C4.5 decision trees as base learners. Builds an ensemble of decision trees trained on bootstrap samples with random feature subsets and combines their predictions through majority voting.',
 		remarks is [
 			'Algorithm' - 'Random Forest is an ensemble learning method that constructs multiple decision trees during training and outputs the class that is the mode of the classes predicted by individual trees.',
@@ -261,7 +261,8 @@
 		;	max_probability([Class2-Prob2| Rest], MaxClass, MaxProb)
 		).
 
-	classifier_diagnostics_data(rf_classifier(Trees, ClassValues, Options), Diagnostics) :-
+	classifier_diagnostics_data(Classifier, Diagnostics) :-
+		classifier_data(Classifier, Trees, ClassValues, Options),
 		length(Trees, TreeCount),
 		Diagnostics = [
 			model(random_forest),
@@ -272,14 +273,22 @@
 
 	% classifier_to_clauses/4 - exports classifier as a clause
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
-		Classifier =.. [_, Trees, ClassValues, Options],
-		Clause =.. [Functor, Trees, ClassValues, Options].
+		Clause =.. [Functor, Classifier].
+
+	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
+		Template =.. [Functor, 'Classifier'].
+
+	classifier_term_template(rf_classifier(_Trees, _ClassValues, _Options), rf_classifier('Trees', 'ClassValues', 'Options')).
+
+	classifier_data(Classifier, Trees, ClassValues, Options) :-
+		Classifier =.. [_Functor, Trees, ClassValues, Options].
 
 	% print_classifier/1 - pretty prints the classifier
 	print_classifier(Classifier) :-
-		Classifier =.. [_, Trees, ClassValues, Options],
+		classifier_data(Classifier, Trees, ClassValues, Options),
 		format('Random Forest Classifier~n', []),
 		format('========================~n~n', []),
+		^^print_classifier_template(Classifier),
 		format('Learning options: ~w~n~n', [Options]),
 		format('Class values: ~w~n', [ClassValues]),
 		format('Trees:~n', []),

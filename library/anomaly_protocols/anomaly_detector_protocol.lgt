@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-19,
+		date is 2026-04-20,
 		comment is 'Protocol for machine learning anomaly detectors.',
 		see_also is [anomaly_dataset_protocol, anomaly_common, isolation_forest, knn_distance, lof]
 	]).
@@ -74,14 +74,14 @@
 	:- public(anomaly_detector_to_clauses/4).
 	:- mode(anomaly_detector_to_clauses(+object_identifier, +compound, +callable, -list(clause)), one).
 	:- info(anomaly_detector_to_clauses/4, [
-		comment is 'Converts an anomaly detector into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses.',
+		comment is 'Converts an anomaly detector into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized detector term, a noun such as ``detector`` or ``model`` is usually clearer than a verb such as ``detect``.',
 		argnames is ['Dataset', 'AnomalyDetector', 'Functor', 'Clauses']
 	]).
 
 	:- public(anomaly_detector_to_file/4).
 	:- mode(anomaly_detector_to_file(+object_identifier, +compound, +callable, +atom), one).
 	:- info(anomaly_detector_to_file/4, [
-		comment is 'Exports an anomaly detector to a file. ``Functor`` is the functor for the generated predicate clauses.',
+		comment is 'Exports an anomaly detector to a file. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized detector term, a noun such as ``detector`` or ``model`` is usually clearer than a verb such as ``detect``.',
 		argnames is ['Dataset', 'AnomalyDetector', 'Functor', 'File']
 	]).
 

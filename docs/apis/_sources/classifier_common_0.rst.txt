@@ -14,8 +14,8 @@ Shared predicates for classifier diagnostics and export.
 |    ``logtalk_load(classifier_protocols(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-04-17
+| **Version:** 1:1:0
+| **Date:** 2026-04-20
 
 | **Compilation flags:**
 |    ``static``
@@ -60,6 +60,63 @@ Hook predicate that importing classifier implementations must define in order to
 |    ``classifier_diagnostics_data(Classifier,Diagnostics)``
 | **Mode and number of proofs:**
 |    ``classifier_diagnostics_data(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: classifier_export_template/4
+.. _classifier_common/0::classifier_export_template/4:
+
+``classifier_export_template/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing classifier implementations must define in order to expose the exported classifier template for a given functor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``classifier_export_template(Dataset,Classifier,Functor,Template)``
+| **Mode and number of proofs:**
+|    ``classifier_export_template(+object_identifier,+compound,+atom,-callable)`` - ``one``
+
+
+------------
+
+.. index:: classifier_term_template/2
+.. _classifier_common/0::classifier_term_template/2:
+
+``classifier_term_template/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing classifier implementations must define in order to expose the learned classifier term template used by pretty-printing helpers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``classifier_term_template(Classifier,Template)``
+| **Mode and number of proofs:**
+|    ``classifier_term_template(+compound,-callable)`` - ``one``
+
+
+------------
+
+.. index:: print_classifier_template/1
+.. _classifier_common/0::print_classifier_template/1:
+
+``print_classifier_template/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Pretty-printing helper predicate used by importing classifier implementations to show the learned classifier term template.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_classifier_template(Classifier)``
+| **Mode and number of proofs:**
+|    ``print_classifier_template(+compound)`` - ``one``
 
 
 ------------

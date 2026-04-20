@@ -23,9 +23,9 @@
 	imports([options, classifier_common])).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-04-20,
 		comment is 'Logistic regression classifier supporting binary and multiclass classification using joint softmax training. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses batch gradient descent to train a single multiclass softmax model. Binary classification is treated as a two-class special case of the same objective.',
@@ -359,7 +359,8 @@
 		;   max_probability([Class2-Probability2| Probabilities], Class, Probability)
 		).
 
-	classifier_diagnostics_data(lr_classifier(Classes, Encoders, Models, Options), Diagnostics) :-
+	classifier_diagnostics_data(Classifier, Diagnostics) :-
+		classifier_data(Classifier, Classes, Encoders, Models, Options),
 		encoders_feature_count(Encoders, 0, EncodedFeatures),
 		length(Models, ModelCount),
 		Diagnostics = [
@@ -371,12 +372,21 @@
 		].
 
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
-		Classifier = lr_classifier(Classes, Encoders, Models, Options),
-		Clause =.. [Functor, Classes, Encoders, Models, Options].
+		Clause =.. [Functor, Classifier].
 
-	print_classifier(lr_classifier(Classes, Encoders, Models, Options)) :-
+	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
+		Template =.. [Functor, 'Classifier'].
+
+	classifier_term_template(lr_classifier(_Classes, _Encoders, _Models, _Options), lr_classifier('Classes', 'Encoders', 'Models', 'Options')).
+
+	classifier_data(Classifier, Classes, Encoders, Models, Options) :-
+		Classifier =.. [_Functor, Classes, Encoders, Models, Options].
+
+	print_classifier(Classifier) :-
+		classifier_data(Classifier, Classes, Encoders, Models, Options),
 		format('Logistic Regression Classifier~n', []),
 		format('==============================~n~n', []),
+		^^print_classifier_template(Classifier),
 		format('Classes: ~w~n', [Classes]),
 		print_options(Options),
 		nl,

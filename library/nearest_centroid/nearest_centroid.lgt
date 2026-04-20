@@ -23,9 +23,9 @@
 	imports([options, classifier_common])).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-04-20,
 		comment is 'Nearest Centroid classifier with multiple distance metrics. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Assign to an instance the the class of the training samples whose mean (centroid) is closest to the instance.',
@@ -343,7 +343,8 @@
 		!.
 	feature_distance_abs(categorical, _, _, 1).
 
-	classifier_diagnostics_data(nc_classifier(AttributeNames, FeatureTypes, Centroids), Diagnostics) :-
+	classifier_diagnostics_data(Classifier, Diagnostics) :-
+		classifier_data(Classifier, AttributeNames, FeatureTypes, Centroids),
 		length(Centroids, CentroidCount),
 		Diagnostics = [
 			model(nearest_centroid),
@@ -353,15 +354,23 @@
 		].
 
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
-		Classifier =.. [_, AttributeNames, FeatureTypes, Centroids],
-		Clause =.. [Functor, AttributeNames, FeatureTypes, Centroids].
+		Clause =.. [Functor, Classifier].
+
+	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
+		Template =.. [Functor, 'Classifier'].
+
+	classifier_term_template(nc_classifier(_AttributeNames, _FeatureTypes, _Centroids), nc_classifier('AttributeNames', 'FeatureTypes', 'Centroids')).
+
+	classifier_data(Classifier, AttributeNames, FeatureTypes, Centroids) :-
+		Classifier =.. [_Functor, AttributeNames, FeatureTypes, Centroids].
 
 	print_classifier(Classifier) :-
-		Classifier =.. [_, AttributeNames, FeatureTypes, Centroids],
+		classifier_data(Classifier, AttributeNames, FeatureTypes, Centroids),
 		format('Nearest Centroid Classifier~n', []),
 		format('==============================~n~n', []),
 		length(Centroids, NumCentroids),
 		format('Number of centroids: ~w~n~n', [NumCentroids]),
+		^^print_classifier_template(Classifier),
 		nl,
 		format('Attributes:~n', []),
 		print_features(AttributeNames, FeatureTypes).

@@ -262,10 +262,17 @@ and pretty-printing code.</p>
 <p>The shared exporter in the <code class="docutils literal notranslate"><span class="pre">anomaly_common</span></code> category writes a standard
 comment header before the exported clauses:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">exported</span> <span class="pre">anomaly</span> <span class="pre">detector</span> <span class="pre">predicate:</span> <span class="pre">Functor</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">detector</span> <span class="pre">template:</span> <span class="pre">Functor(Argument1,</span> <span class="pre">...,</span> <span class="pre">ArgumentN)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">exported</span> <span class="pre">anomaly</span> <span class="pre">detector</span> <span class="pre">predicate:</span> <span class="pre">Functor/Arity</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">training</span> <span class="pre">dataset:</span> <span class="pre">Dataset</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">options:</span> <span class="pre">Options</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">Functor(Detector)</span></code></p></li>
 </ul>
+<p>The exported clauses serialize the learned detector term as a single
+predicate argument so that loading the file gives a detector value that
+can be passed directly to <code class="docutils literal notranslate"><span class="pre">predict/3-4</span></code> and <code class="docutils literal notranslate"><span class="pre">score_all/3</span></code>.</p>
+<p>When exporting a serialized detector term, using a noun such as
+<code class="docutils literal notranslate"><span class="pre">detector/1</span></code> or <code class="docutils literal notranslate"><span class="pre">model/1</span></code> is usually clearer than using a verb such
+as <code class="docutils literal notranslate"><span class="pre">detect/1</span></code>.</p>
 </section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>

@@ -15,7 +15,7 @@ Shared predicates for ranker diagnostics and export.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-18
+| **Date:** 2026-04-20
 
 | **Compilation flags:**
 |    ``static``
@@ -60,6 +60,63 @@ Hook predicate that importing ranker implementations must define in order to exp
 |    ``ranker_diagnostics_data(Ranker,Diagnostics)``
 | **Mode and number of proofs:**
 |    ``ranker_diagnostics_data(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: ranker_export_template/4
+.. _ranker_common/0::ranker_export_template/4:
+
+``ranker_export_template/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing ranker implementations must define in order to expose the exported ranker template for a given functor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ranker_export_template(Dataset,Ranker,Functor,Template)``
+| **Mode and number of proofs:**
+|    ``ranker_export_template(+object_identifier,+compound,+atom,-callable)`` - ``one``
+
+
+------------
+
+.. index:: ranker_term_template/2
+.. _ranker_common/0::ranker_term_template/2:
+
+``ranker_term_template/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing ranker implementations must define in order to expose the learned ranker term template used by pretty-printing helpers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ranker_term_template(Ranker,Template)``
+| **Mode and number of proofs:**
+|    ``ranker_term_template(+compound,-callable)`` - ``one``
+
+
+------------
+
+.. index:: print_ranker_template/1
+.. _ranker_common/0::print_ranker_template/1:
+
+``print_ranker_template/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Pretty-printing helper predicate used by importing ranker implementations to show the learned ranker term template.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_ranker_template(Ranker)``
+| **Mode and number of proofs:**
+|    ``print_ranker_template(+compound)`` - ``one``
 
 
 ------------

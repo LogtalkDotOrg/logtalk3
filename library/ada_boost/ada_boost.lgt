@@ -23,9 +23,9 @@
 	imports([options, classifier_common])).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-04-20,
 		comment is 'AdaBoost (Adaptive Boosting) classifier using C4.5 decision trees as base learners. Implements the SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss function) variant, which supports multi-class classification. Builds an ensemble of weighted decision trees where each subsequent tree focuses on the examples misclassified by previous trees.',
 		remarks is [
 			'Algorithm' - 'AdaBoost iteratively trains weak learners (C4.5 decision trees) on weighted versions of the training data. After each iteration, the weights of misclassified examples are increased so that subsequent learners focus more on difficult cases.',
@@ -341,7 +341,8 @@
 		;	max_probability([Class2-Prob2| Rest], MaxClass, MaxProb)
 		).
 
-	classifier_diagnostics_data(ab_classifier(WeightedTrees, ClassValues, Options), Diagnostics) :-
+	classifier_diagnostics_data(Classifier, Diagnostics) :-
+		classifier_data(Classifier, WeightedTrees, ClassValues, Options),
 		length(WeightedTrees, EstimatorCount),
 		Diagnostics = [
 			model(ada_boost),
@@ -352,14 +353,22 @@
 
 	% classifier_to_clauses/4 - exports classifier as a clause
 	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
-		Classifier =.. [_, WeightedTrees, ClassValues, Options],
-		Clause =.. [Functor, WeightedTrees, ClassValues, Options].
+		Clause =.. [Functor, Classifier].
+
+	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
+		Template =.. [Functor, 'Classifier'].
+
+	classifier_term_template(ab_classifier(_WeightedTrees, _ClassValues, _Options), ab_classifier('WeightedTrees', 'ClassValues', 'Options')).
+
+	classifier_data(Classifier, WeightedTrees, ClassValues, Options) :-
+		Classifier =.. [_Functor, WeightedTrees, ClassValues, Options].
 
 	% print_classifier/1 - pretty prints the classifier
 	print_classifier(Classifier) :-
-		Classifier =.. [_, WeightedTrees, ClassValues, Options],
+		classifier_data(Classifier, WeightedTrees, ClassValues, Options),
 		format('AdaBoost Classifier~n', []),
 		format('===================~n~n', []),
+		^^print_classifier_template(Classifier),
 		format('Learning options: ~w~n~n', [Options]),
 		format('Class values: ~w~n', [ClassValues]),
 		length(WeightedTrees, NumTrees),

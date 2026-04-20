@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-19,
+		date is 2026-04-20,
 		comment is 'Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the improved version described by Hariri et al. (2019) that uses random hyperplane cuts instead of axis-aligned cuts, eliminating score bias artifacts. Builds an ensemble of isolation trees from a dataset object implementing the ``anomaly_dataset_protocol`` protocol. Missing attribute values are represented using anonymous variables.',
 		remarks is [
 			'Algorithm' - 'The Extended Isolation Forest builds an ensemble of isolation trees (iTrees) by recursively partitioning the data using random hyperplanes. Anomalous points, being few and different, require fewer partitions (shorter path lengths) to be isolated.',
@@ -126,7 +126,7 @@
 	% Missing values are handled by sending the instance down both
 	% branches and computing a weighted average path length
 	score(Model, Instance, Score) :-
-		Model =.. [_, Trees, Psi, AttributeNames, Attributes, Ranges, _Options],
+		detector_data(Model, Trees, Psi, AttributeNames, Attributes, Ranges, _Options),
 		to_numeric_vector_with_missing(AttributeNames, Instance, Attributes, Vector, MissingMask),
 		% Compute average path length across all trees
 		compute_average_path_length(Trees, Vector, MissingMask, Ranges, AvgPathLength),
@@ -139,7 +139,7 @@
 
 	% score_all/3 - compute scores for all instances
 	score_all(Dataset, Model, SortedScores) :-
-		Model =.. [_, _, _, AttributeNames, Attributes, Ranges, _],
+		detector_data(Model, _Trees, _Psi, AttributeNames, Attributes, Ranges, _Options),
 		findall(
 			Score-Id-Class,
 			(	Dataset::example(Id, Class, AVs),
@@ -162,11 +162,10 @@
 
 	% anomaly_detector_to_clauses/4 - exports detector as a clause
 	anomaly_detector_to_clauses(_Dataset, Detector, Functor, [Clause]) :-
-		Detector =.. [_, Trees, Psi, AttributeNames, Attributes, Ranges, Options],
-		Clause =.. [Functor, Trees, Psi, AttributeNames, Attributes, Ranges, Options].
+		Clause =.. [Functor, Detector].
 
 	print_anomaly_detector(Model) :-
-		Model =.. [_, Trees, Psi, AttributeNames, _Attributes, _Ranges, Options],
+		detector_data(Model, Trees, Psi, AttributeNames, _Attributes, _Ranges, Options),
 		length(Trees, NumTrees),
 		length(AttributeNames, NumDimensions),
 		format('Extended Isolation Forest Model~n', []),
@@ -180,8 +179,13 @@
 		format('Trees:~n', []),
 		print_trees(Trees, 1).
 
-	anomaly_detector_template(Functor, Template) :-
-		Template =.. [Functor, 'Trees', 'Psi', 'AttributeNames', 'Attributes', 'Ranges', 'Options'].
+	anomaly_detector_export_template(Functor, Template) :-
+		Template =.. [Functor, 'Detector'].
+
+	anomaly_detector_term_template(if_model(_Trees, _Psi, _AttributeNames, _Attributes, _Ranges, _Options), if_model('Trees', 'Psi', 'AttributeNames', 'Attributes', 'Ranges', 'Options')).
+
+	detector_data(Detector, Trees, Psi, AttributeNames, Attributes, Ranges, Options) :-
+		Detector =.. [_Functor, Trees, Psi, AttributeNames, Attributes, Ranges, Options].
 
 	print_trees([], _).
 	print_trees([Tree| Trees], N) :-

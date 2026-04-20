@@ -344,9 +344,7 @@ needing to access the original training dataset.</p>
 </section>
 <section id="classifier-representation">
 <h2>Classifier Representation<a class="headerlink" href="#classifier-representation" title="Link to this heading"></a></h2>
-<p>The learned classifier is represented as a compound term with the
-functor chosen by the user when exporting the classifier and arity 5.
-The default functor is <code class="docutils literal notranslate"><span class="pre">nb_classifier</span></code>:</p>
+<p>The learned classifier is represented as a compound term:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>nb_classifier(<span class="nv">Classes</span>, <span class="nv">ClassPriors</span>, <span class="nv">AttributeNames</span>, <span class="nv">FeatureTypes</span>, <span class="nv">FeatureParams</span>)
 </pre></div>
 </div>
@@ -358,6 +356,10 @@ The default functor is <code class="docutils literal notranslate"><span class="p
 <li><p><code class="docutils literal notranslate"><span class="pre">FeatureTypes</span></code>: List of types (<code class="docutils literal notranslate"><span class="pre">categorical</span></code> or <code class="docutils literal notranslate"><span class="pre">continuous</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">FeatureParams</span></code>: List of learned parameters for each feature</p></li>
 </ul>
+<p>When exported using <code class="docutils literal notranslate"><span class="pre">classifier_to_clauses/4</span></code> or
+<code class="docutils literal notranslate"><span class="pre">classifier_to_file/4</span></code>, this classifier term is serialized directly as
+the single argument of the generated predicate clause so that the
+exported model can be loaded and reused as-is.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>

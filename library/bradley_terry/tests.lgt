@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-16,
+		date is 2026-04-20,
 		comment is 'Unit tests for the "bradley_terry" library.'
 	]).
 
@@ -85,14 +85,14 @@
 
 	test(bradley_terry_ranker_to_clauses_4, deterministic(ground(Clause))) :-
 		bradley_terry::learn(head_to_head, Ranker),
-		bradley_terry::ranker_to_clauses(head_to_head, Ranker, rank_model, [Clause]).
+		bradley_terry::ranker_to_clauses(head_to_head, Ranker, ranker, [Clause]).
 
 	test(bradley_terry_ranker_to_file_4_loaded, deterministic(Ranking == [alpha, beta, gamma, delta])) :-
 		^^file_path('test_output.pl', File),
 		bradley_terry::learn(head_to_head, Ranker),
-		bradley_terry::ranker_to_file(head_to_head, Ranker, rank_model, File),
+		bradley_terry::ranker_to_file(head_to_head, Ranker, ranker, File),
 		logtalk_load(File),
-		{rank_model(LoadedRanker)},
+		{ranker(LoadedRanker)},
 		bradley_terry::rank(LoadedRanker, [alpha, beta, gamma, delta], Ranking).
 
 	test(bradley_terry_print_ranker_1, deterministic) :-

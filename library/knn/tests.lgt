@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-04-20,
 		comment is 'Unit tests for the "knn" library.'
 	]).
 
@@ -111,7 +111,7 @@
 	% Test classifier_to_clauses/4 - verify exported clause works with predict/3
 	test(knn_classifier_to_clauses_4, true(ground(Prediction))) :-
 		knn::learn(iris_small, Classifier),
-		knn::classifier_to_clauses(_Dataset, Classifier, classify, [ExportedClassifier]),
+		knn::classifier_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
 		knn::predict(ExportedClassifier, [sepal_length-5.0, sepal_width-3.3, petal_length-1.4, petal_width-0.2], Prediction).
 
 	% Test classifier_to_file/4 - verify file is written
@@ -124,10 +124,10 @@
 	test(knn_classifier_to_file_4_loaded, true(ground(Prediction))) :-
 		^^file_path('test_output.pl', File),
 		knn::learn(iris_small, Classifier),
-		knn::classifier_to_file(iris_small, Classifier, classify, File),
+		knn::classifier_to_file(iris_small, Classifier, classifier, File),
 		logtalk_load(File),
-		{classify(AttributeNames, FeatureTypes, Instances)},
-		knn::predict(classify(AttributeNames, FeatureTypes, Instances), [sepal_length-5.0, sepal_width-3.3, petal_length-1.4, petal_width-0.2], Prediction).
+		{classifier(LoadedClassifier)},
+		knn::predict(LoadedClassifier, [sepal_length-5.0, sepal_width-3.3, petal_length-1.4, petal_width-0.2], Prediction).
 
 	test(knn_diagnostics_2, deterministic((list::memberchk(model(knn), Diagnostics), list::memberchk(training_examples(_), Diagnostics)))) :-
 		knn::learn(iris_small, Classifier),

@@ -77,10 +77,16 @@
 
 	ranker_diagnostics_data(sample_ranker(_Strengths, Diagnostics), Diagnostics).
 
+	ranker_export_template(_Dataset, _Ranker, Functor, Template) :-
+		Template =.. [Functor, 'Ranker'].
+
+	ranker_term_template(sample_ranker(_Strengths, _Diagnostics), sample_ranker('Strengths', 'Diagnostics')).
+
 	ranker_to_clauses(_Dataset, Ranker, Functor, [Clause]) :-
 		Clause =.. [Functor, Ranker].
 
 	print_ranker(Ranker) :-
+		^^print_ranker_template(Ranker),
 		writeq(Ranker), nl.
 
 :- end_object.
@@ -92,7 +98,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-16,
+		date is 2026-04-20,
 		comment is 'Smoke tests for the "ranking_protocols" library.'
 	]).
 
@@ -172,20 +178,59 @@
 		sample_ranker::diagnostics(Ranker, Diagnostics),
 		findall(Diagnostic, sample_ranker::diagnostic(Ranker, Diagnostic), Enumerated).
 
-	test(sample_ranker_ranker_to_clauses_4, deterministic(Clause == ranked(sample_ranker([alpha-10, beta-5, gamma-4, delta-0], [model(sample_ranker), options([]), convergence(not_applicable), iterations(0), final_delta(0.0), dataset_summary([items(4), preferences(6), connected_components(1), isolated_items([])])])))) :-
+	test(sample_ranker_ranker_to_clauses_4, deterministic(Clause == ranker(sample_ranker([alpha-10, beta-5, gamma-4, delta-0], [model(sample_ranker), options([]), convergence(not_applicable), iterations(0), final_delta(0.0), dataset_summary([items(4), preferences(6), connected_components(1), isolated_items([])])])))) :-
 		sample_ranker::learn(head_to_head, Ranker),
-		sample_ranker::ranker_to_clauses(head_to_head, Ranker, ranked, [Clause]).
+		sample_ranker::ranker_to_clauses(head_to_head, Ranker, ranker, [Clause]).
+
+	test(sample_ranker_ranker_to_file_4_header, deterministic(HeaderLines == ['% exported ranker predicate: ranker/1', '% training dataset: head_to_head', '% diagnostics: [model(sample_ranker),options([]),convergence(not_applicable),iterations(0),final_delta(0.0),dataset_summary([items(4),preferences(6),connected_components(1),isolated_items([])])]', '% ranker(Ranker)'])) :-
+		^^file_path('test_output.pl', File),
+		sample_ranker::learn(head_to_head, Ranker),
+		sample_ranker::ranker_to_file(head_to_head, Ranker, ranker, File),
+		header_lines(File, HeaderLines).
 
 	test(sample_ranker_ranker_to_file_4, deterministic(memberchk(model(sample_ranker), Diagnostics))) :-
 		^^file_path('test_output.pl', File),
 		sample_ranker::learn(head_to_head, Ranker),
-		sample_ranker::ranker_to_file(head_to_head, Ranker, ranked, File),
+		sample_ranker::ranker_to_file(head_to_head, Ranker, ranker, File),
 		logtalk_load(File),
-		{ranked(sample_ranker(_Strengths, Diagnostics))}.
+		{ranker(LoadedRanker)},
+		LoadedRanker = sample_ranker(_Strengths, Diagnostics).
 
 	test(sample_ranker_print_ranker_1, deterministic) :-
 		^^suppress_text_output,
 		sample_ranker::learn(head_to_head, Ranker),
 		sample_ranker::print_ranker(Ranker).
+
+	header_lines(File, Lines) :-
+		open(File, read, Stream),
+		read_line_atom(Stream, Line1),
+		read_line_atom(Stream, Line2),
+		read_line_atom(Stream, Line3),
+		read_line_atom(Stream, Line4),
+		close(Stream),
+		Lines = [Line1, Line2, Line3, Line4].
+
+	read_line_atom(Stream, Line) :-
+		get_code(Stream, Code),
+		(	Code == -1 ->
+			Line = end_of_file
+		;	read_line_codes(Code, Stream, Codes),
+			atom_codes(Line, Codes)
+		).
+
+	read_line_codes(-1, _Stream, []) :-
+		!.
+	read_line_codes(10, _Stream, []) :-
+		!.
+	read_line_codes(13, Stream, Codes) :-
+		!,
+		get_code(Stream, NextCode),
+		(	NextCode == 10 ->
+			Codes = []
+		;	read_line_codes(NextCode, Stream, Codes)
+		).
+	read_line_codes(Code, Stream, [Code| Codes]) :-
+		get_code(Stream, NextCode),
+		read_line_codes(NextCode, Stream, Codes).
 
 :- end_object.

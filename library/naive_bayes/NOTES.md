@@ -119,9 +119,7 @@ to access the original training dataset.
 Classifier Representation
 -------------------------
 
-The learned classifier is represented as a compound term with the functor chosen
-by the user when exporting the classifier and arity 5. The default functor is
-`nb_classifier`:
+The learned classifier is represented as a compound term:
 
     nb_classifier(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams)
 
@@ -132,6 +130,11 @@ Where:
 - `AttributeNames`: List of attribute names in order
 - `FeatureTypes`: List of types (`categorical` or `continuous`)
 - `FeatureParams`: List of learned parameters for each feature
+
+When exported using `classifier_to_clauses/4` or `classifier_to_file/4`,
+this classifier term is serialized directly as the single argument of the
+generated predicate clause so that the exported model can be loaded and
+reused as-is.
 
 
 References

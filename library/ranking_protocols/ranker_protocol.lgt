@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-18,
+		date is 2026-04-20,
 		comment is 'Protocol for machine learning rankers.',
 		see_also is [bradley_terry, ranking_dataset_protocol, pairwise_ranking_dataset_protocol]
 	]).
@@ -67,14 +67,14 @@
 	:- public(ranker_to_clauses/4).
 	:- mode(ranker_to_clauses(+object_identifier, +compound, +callable, -list(clause)), one).
 	:- info(ranker_to_clauses/4, [
-		comment is 'Converts a ranker into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses.',
+		comment is 'Converts a ranker into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized ranker term, a noun such as ``ranker`` or ``model`` is usually clearer than a verb or result label.',
 		argnames is ['Dataset', 'Ranker', 'Functor', 'Clauses']
 	]).
 
 	:- public(ranker_to_file/4).
 	:- mode(ranker_to_file(+object_identifier, +compound, +callable, +atom), one).
 	:- info(ranker_to_file/4, [
-		comment is 'Exports a ranker to a file. ``Functor`` is the functor for the generated predicate clauses.',
+		comment is 'Exports a ranker to a file. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized ranker term, a noun such as ``ranker`` or ``model`` is usually clearer than a verb or result label.',
 		argnames is ['Dataset', 'Ranker', 'Functor', 'File']
 	]).
 
