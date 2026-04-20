@@ -47,7 +47,7 @@ recycle, whenever possible, the identifiers.
 When creating a new dynamic parametric object, access to the object parameters
 must use the :ref:`methods_parameter_2` built-in execution context method.
 
-Declared predicates (using scope clauses in the ``Directives`` argument)
+Declared predicates (using scope directives in the ``Directives`` argument)
 are implicitly declared also as dynamic.
 
 When using Logtalk multi-threading features, predicates calling this
