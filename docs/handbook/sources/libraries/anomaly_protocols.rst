@@ -25,24 +25,27 @@ This category keeps threshold-based prediction and export behavior
 separate from the algorithm-specific learning, scoring, clause export,
 and pretty-printing code.
 
-Export header convention
-------------------------
+Export header format
+--------------------
 
-The shared exporter in the ``anomaly_common`` category writes a standard
-comment header before the exported clauses:
+The shared exporter in the ``anomaly_common`` category writes a header
+before the exported clauses in the following format:
 
-- ``% exported anomaly detector predicate: Functor/Arity``
-- ``% training dataset: Dataset``
-- ``% options: Options``
-- ``% Functor(Detector)``
+::
+
+   % exported anomaly detector predicate: Functor/Arity
+   % training dataset: Dataset
+   % options: Options
+   % Functor(Detector)
+   Functor(Detector)
 
 The exported clauses serialize the learned detector term as a single
-predicate argument so that loading the file gives a detector value that
-can be passed directly to ``predict/3-4`` and ``score_all/3``.
+predicate argument so that loading the file gives a detector term that
+can be passed directly to the ``predict/3-4`` and ``score_all/3``
+predicates.
 
 When exporting a serialized detector term, using a noun such as
-``detector/1`` or ``model/1`` is usually clearer than using a verb such
-as ``detect/1``.
+``detector/1`` or ``model/1`` is recommended.
 
 API documentation
 -----------------

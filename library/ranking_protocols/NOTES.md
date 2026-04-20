@@ -61,19 +61,21 @@ different set of metadata terms or only a subset of those details. When using
 diagnostics in application code, rely on the shared access predicates and the
 documentation of the specific ranking algorithm you are using.
 
-Export header convention
-------------------------
+Export header format
+--------------------
 
-The shared ranker exporter in the `ranker_common` category writes a standard
-comment header before the exported clauses:
+The shared ranker exporter in the `ranker_common` category writes a header
+before the exported clauses in the following format:
 
-- `% exported ranker predicate: Functor/Arity`
-- `% training dataset: Dataset`
-- `% diagnostics: Diagnostics`
-- `% Functor(Ranker)`
+    % exported ranker predicate: Functor/Arity
+    % training dataset: Dataset
+    % diagnostics: Diagnostics
+    % Functor(Ranker)
+    Functor(Ranker)
 
 When exporting a serialized ranker term, using a noun such as `ranker/1`
-or `model/1` is usually clearer than using a verb or result label.
+or `model/1` is recommended. The `Ranker` argument can then be passed to
+the rank predicates.
 
 API documentation
 -----------------

@@ -44,27 +44,29 @@ For example, some classifiers report effective training options, while
 others report structural metadata such as attribute names, feature
 types, or the number of training examples or models.
 
-Export header convention
-------------------------
+Export header format
+--------------------
 
 The shared classifier exporter in the ``classifier_common`` category
-writes a standard comment header before the exported clauses:
+writes a header before the exported clauses in the following format:
 
-- ``% exported classifier predicate: Functor/Arity``
-- ``% training dataset: Dataset``
-- ``% dataset prediction schema: Functor(TitleCaseAttribute1, ..., TitleCaseAttributeN, TitleCaseClass)``
-- ``% diagnostics: Diagnostics``
-- ``% Functor(Classifier)``
+::
 
-The ``dataset prediction schema`` line always uses the same ASCII-only
-TitleCase conversion already used by ``c45`` for header comments. This
-line documents the dataset-level prediction interface for readability,
-even when the exported clauses serialize a model term instead of an
-executable predictor relation.
+   % exported classifier predicate: Functor/Arity
+   % training dataset: Dataset
+   % dataset prediction schema: Functor(Attribute1, ..., AttributeN, Class)
+   % diagnostics: Diagnostics
+   % Functor(Classifier)
+   Functor(Classifier)
+
+The ``dataset prediction schema`` line always uses an ASCII-only title
+case conversion for the attribute names and class. This line documents
+the dataset-level prediction interface for readability, even when the
+exported clauses serialize a model term instead of an executable
+predictor relation.
 
 When exporting a serialized classifier term, using a noun such as
-``classifier/1`` or ``model/1`` is usually clearer than using a verb
-such as ``classify/1``.
+``classifier/1`` or ``model/1`` is recommended.
 
 API documentation
 -----------------

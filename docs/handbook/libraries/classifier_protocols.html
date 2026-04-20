@@ -90,7 +90,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#shared-category">Shared category</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#diagnostics">Diagnostics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#export-header-convention">Export header convention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#export-header-format">Export header format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
@@ -274,25 +274,25 @@ For example, some classifiers report effective training options, while
 others report structural metadata such as attribute names, feature
 types, or the number of training examples or models.</p>
 </section>
-<section id="export-header-convention">
-<h2>Export header convention<a class="headerlink" href="#export-header-convention" title="Link to this heading"></a></h2>
+<section id="export-header-format">
+<h2>Export header format<a class="headerlink" href="#export-header-format" title="Link to this heading"></a></h2>
 <p>The shared classifier exporter in the <code class="docutils literal notranslate"><span class="pre">classifier_common</span></code> category
-writes a standard comment header before the exported clauses:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">exported</span> <span class="pre">classifier</span> <span class="pre">predicate:</span> <span class="pre">Functor/Arity</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">training</span> <span class="pre">dataset:</span> <span class="pre">Dataset</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">dataset</span> <span class="pre">prediction</span> <span class="pre">schema:</span> <span class="pre">Functor(TitleCaseAttribute1,</span> <span class="pre">...,</span> <span class="pre">TitleCaseAttributeN,</span> <span class="pre">TitleCaseClass)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">diagnostics:</span> <span class="pre">Diagnostics</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">Functor(Classifier)</span></code></p></li>
-</ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">dataset</span> <span class="pre">prediction</span> <span class="pre">schema</span></code> line always uses the same ASCII-only
-TitleCase conversion already used by <code class="docutils literal notranslate"><span class="pre">c45</span></code> for header comments. This
-line documents the dataset-level prediction interface for readability,
-even when the exported clauses serialize a model term instead of an
-executable predictor relation.</p>
+writes a header before the exported clauses in the following format:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% exported classifier predicate: Functor/Arity</span>
+<span class="c">% training dataset: Dataset</span>
+<span class="c">% dataset prediction schema: Functor(Attribute1, ..., AttributeN, Class)</span>
+<span class="c">% diagnostics: Diagnostics</span>
+<span class="c">% Functor(Classifier)</span>
+<span class="nv">Functor</span>(<span class="nv">Classifier</span>)
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">dataset</span> <span class="pre">prediction</span> <span class="pre">schema</span></code> line always uses an ASCII-only title
+case conversion for the attribute names and class. This line documents
+the dataset-level prediction interface for readability, even when the
+exported clauses serialize a model term instead of an executable
+predictor relation.</p>
 <p>When exporting a serialized classifier term, using a noun such as
-<code class="docutils literal notranslate"><span class="pre">classifier/1</span></code> or <code class="docutils literal notranslate"><span class="pre">model/1</span></code> is usually clearer than using a verb
-such as <code class="docutils literal notranslate"><span class="pre">classify/1</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">classifier/1</span></code> or <code class="docutils literal notranslate"><span class="pre">model/1</span></code> is recommended.</p>
 </section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>

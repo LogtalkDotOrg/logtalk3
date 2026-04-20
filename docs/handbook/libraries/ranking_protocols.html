@@ -160,7 +160,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#shared-categories">Shared categories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#diagnostics">Diagnostics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#export-header-convention">Export header convention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#export-header-format">Export header format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
@@ -277,19 +277,20 @@ When using diagnostics in application code, rely on the shared access
 predicates and the documentation of the specific ranking algorithm you
 are using.</p>
 </section>
-<section id="export-header-convention">
-<h2>Export header convention<a class="headerlink" href="#export-header-convention" title="Link to this heading"></a></h2>
+<section id="export-header-format">
+<h2>Export header format<a class="headerlink" href="#export-header-format" title="Link to this heading"></a></h2>
 <p>The shared ranker exporter in the <code class="docutils literal notranslate"><span class="pre">ranker_common</span></code> category writes a
-standard comment header before the exported clauses:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">exported</span> <span class="pre">ranker</span> <span class="pre">predicate:</span> <span class="pre">Functor/Arity</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">training</span> <span class="pre">dataset:</span> <span class="pre">Dataset</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">diagnostics:</span> <span class="pre">Diagnostics</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">Functor(Ranker)</span></code></p></li>
-</ul>
+header before the exported clauses in the following format:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% exported ranker predicate: Functor/Arity</span>
+<span class="c">% training dataset: Dataset</span>
+<span class="c">% diagnostics: Diagnostics</span>
+<span class="c">% Functor(Ranker)</span>
+<span class="nv">Functor</span>(<span class="nv">Ranker</span>)
+</pre></div>
+</div>
 <p>When exporting a serialized ranker term, using a noun such as
-<code class="docutils literal notranslate"><span class="pre">ranker/1</span></code> or <code class="docutils literal notranslate"><span class="pre">model/1</span></code> is usually clearer than using a verb or
-result label.</p>
+<code class="docutils literal notranslate"><span class="pre">ranker/1</span></code> or <code class="docutils literal notranslate"><span class="pre">model/1</span></code> is recommended. The <code class="docutils literal notranslate"><span class="pre">Ranker</span></code> argument can
+then be passed to the rank predicates.</p>
 </section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
