@@ -14,7 +14,7 @@ Local Outlier Factor anomaly detector with multiple distance metrics, mixed-feat
 |    ``logtalk_load(lof(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
+| **Version:** 1:0:0
 | **Date:** 2026-04-20
 
 | **Compilation flags:**
@@ -39,7 +39,7 @@ Local Outlier Factor anomaly detector with multiple distance metrics, mixed-feat
    - Anomaly detector representation: The learned detector is represented as a ``lof_detector(AttributeNames, FeatureTypes, AttributeScales, Instances, Options)`` term.
 
 | **Inherited public predicates:**
-|     :ref:`anomaly_detector_protocol/0::anomaly_detector_to_clauses/4`  :ref:`anomaly_detector_protocol/0::anomaly_detector_to_file/4`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`anomaly_detector_protocol/0::learn/2`  :ref:`anomaly_detector_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`anomaly_detector_protocol/0::predict/3`  :ref:`anomaly_detector_protocol/0::predict/4`  :ref:`anomaly_detector_protocol/0::print_anomaly_detector/1`  :ref:`anomaly_detector_protocol/0::score/3`  :ref:`anomaly_detector_protocol/0::score_all/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`anomaly_detector_protocol/0::export_to_clauses/4`  :ref:`anomaly_detector_protocol/0::export_to_file/4`  :ref:`anomaly_detector_protocol/0::learn/2`  :ref:`anomaly_detector_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`anomaly_detector_protocol/0::predict/3`  :ref:`anomaly_detector_protocol/0::predict/4`  :ref:`anomaly_detector_protocol/0::print_anomaly_detector/1`  :ref:`anomaly_detector_protocol/0::score/3`  :ref:`anomaly_detector_protocol/0::score_all/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:

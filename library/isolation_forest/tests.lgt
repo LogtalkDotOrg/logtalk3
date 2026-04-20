@@ -214,49 +214,49 @@
 		isolation_forest::predict(Model, [temperature-102.0, pressure-45.0, vibration- _], Prediction, [anomaly_threshold(0.5)]).
 
 	% ===================================================================
-	% anomaly_detector_to_clauses/4 tests
+	% export_to_clauses/4 tests
 	% ===================================================================
 
-	test(isolation_forest_anomaly_detector_to_clauses_4_gaussian, true(N == 1)) :-
+	test(isolation_forest_export_to_clauses_4_gaussian, true(N == 1)) :-
 		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(10)]),
-		isolation_forest::anomaly_detector_to_clauses(gaussian_anomalies, Model, iforest, Clauses),
+		isolation_forest::export_to_clauses(gaussian_anomalies, Model, iforest, Clauses),
 		length(Clauses, N).
 
-	test(isolation_forest_anomaly_detector_to_clauses_4_clause_is_ground, true(ground(Clauses))) :-
+	test(isolation_forest_export_to_clauses_4_clause_is_ground, true(ground(Clauses))) :-
 		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(10)]),
-		isolation_forest::anomaly_detector_to_clauses(gaussian_anomalies, Model, iforest, Clauses).
+		isolation_forest::export_to_clauses(gaussian_anomalies, Model, iforest, Clauses).
 
-	test(isolation_forest_anomaly_detector_to_clauses_4_clause_functor, true(Functor == iforest)) :-
+	test(isolation_forest_export_to_clauses_4_clause_functor, true(Functor == iforest)) :-
 		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(10)]),
-		isolation_forest::anomaly_detector_to_clauses(gaussian_anomalies, Model, iforest, [Clause]),
+		isolation_forest::export_to_clauses(gaussian_anomalies, Model, iforest, [Clause]),
 		functor(Clause, Functor, _).
 
-	test(isolation_forest_anomaly_detector_to_clauses_4_clause_arity, true(Arity == 1)) :-
+	test(isolation_forest_export_to_clauses_4_clause_arity, true(Arity == 1)) :-
 		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(10)]),
-		isolation_forest::anomaly_detector_to_clauses(gaussian_anomalies, Model, iforest, [Clause]),
+		isolation_forest::export_to_clauses(gaussian_anomalies, Model, iforest, [Clause]),
 		functor(Clause, _, Arity).
 
-	test(isolation_forest_anomaly_detector_to_file_4_loadable, deterministic(Prediction == anomaly)) :-
+	test(isolation_forest_export_to_file_4_loadable, deterministic(Prediction == anomaly)) :-
 		^^file_path('test_output.pl', File),
 		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(10)]),
-		isolation_forest::anomaly_detector_to_file(gaussian_anomalies, Model, iforest, File),
+		isolation_forest::export_to_file(gaussian_anomalies, Model, iforest, File),
 		logtalk_load(File),
 		{iforest(LoadedModel)},
 		isolation_forest::predict(LoadedModel, [x-4.50, y-4.20], Prediction).
 
-	test(isolation_forest_anomaly_detector_to_clauses_4_sensor, true(N == 1)) :-
+	test(isolation_forest_export_to_clauses_4_sensor, true(N == 1)) :-
 		isolation_forest::learn(sensor_anomalies, Model, [number_of_trees(10)]),
-		isolation_forest::anomaly_detector_to_clauses(sensor_anomalies, Model, detect, Clauses),
+		isolation_forest::export_to_clauses(sensor_anomalies, Model, detect, Clauses),
 		length(Clauses, N).
 
 	% ===================================================================
-	% anomaly_detector_to_file/4 tests
+	% export_to_file/4 tests
 	% ===================================================================
 
-	test(isolation_forest_anomaly_detector_to_file_4_gaussian, deterministic(os::file_exists(File))) :-
+	test(isolation_forest_export_to_file_4_gaussian, deterministic(os::file_exists(File))) :-
 		^^file_path('test_output.pl', File),
 		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(10)]),
-		isolation_forest::anomaly_detector_to_file(gaussian_anomalies, Model, iforest, File).
+		isolation_forest::export_to_file(gaussian_anomalies, Model, iforest, File).
 
 	% ===================================================================
 	% print_anomaly_detector/1 tests

@@ -23,7 +23,7 @@
 	imports([options, ranking_dataset_common, ranker_common])).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-20,
 		comment is 'Bradley-Terry pairwise preference ranker. Learns one positive strength parameter per item from a connected dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
@@ -95,7 +95,7 @@
 
 	ranker_term_template(bt_ranker(_Items, _Strengths, _Diagnostics), bt_ranker('Items', 'Strengths', 'Diagnostics')).
 
-	ranker_to_clauses(_Dataset, Ranker, Functor, [Clause]) :-
+	export_to_clauses(_Dataset, Ranker, Functor, [Clause]) :-
 		Clause =.. [Functor, Ranker].
 
 	print_ranker(Ranker) :-

@@ -187,7 +187,7 @@
 	score_all(Dataset, sample_anomaly_detector(_TrainingDataset, AttributeNames, Scale, _Options), Scores) :-
 		anomaly_test_support::sorted_scores(Dataset, AttributeNames, Scale, Scores).
 
-	anomaly_detector_to_clauses(_Dataset, Detector, Functor, [Clause]) :-
+	export_to_clauses(_Dataset, Detector, Functor, [Clause]) :-
 		Clause =.. [Functor, Detector].
 
 	print_anomaly_detector(Detector) :-
@@ -280,20 +280,20 @@
 		sample_anomaly_detector::score_all(gaussian_anomalies, Detector, AllScores),
 		AllScores = [_-_-FirstScore, _-_-SecondScore| _].
 
-	test(sample_anomaly_detector_to_clauses_4, deterministic(Clause == detector(sample_anomaly_detector(gaussian_anomalies, [x, y], 5.3, [anomaly_threshold(0.5)])))) :-
+	test(sample_export_to_clauses_4, deterministic(Clause == detector(sample_anomaly_detector(gaussian_anomalies, [x, y], 5.3, [anomaly_threshold(0.5)])))) :-
 		sample_anomaly_detector::learn(gaussian_anomalies, Detector),
-		sample_anomaly_detector::anomaly_detector_to_clauses(gaussian_anomalies, Detector, detector, [Clause]).
+		sample_anomaly_detector::export_to_clauses(gaussian_anomalies, Detector, detector, [Clause]).
 
-	test(sample_anomaly_detector_to_file_4_header, deterministic(HeaderLines == ['% exported anomaly detector predicate: detector/1', '% training dataset: gaussian_anomalies', '% options: [anomaly_threshold(0.5)]', '% detector(Detector)'])) :-
+	test(sample_export_to_file_4_header, deterministic(HeaderLines == ['% exported anomaly detector predicate: detector/1', '% training dataset: gaussian_anomalies', '% options: [anomaly_threshold(0.5)]', '% detector(Detector)'])) :-
 		^^file_path('test_output.pl', File),
 		sample_anomaly_detector::learn(gaussian_anomalies, Detector),
-		sample_anomaly_detector::anomaly_detector_to_file(gaussian_anomalies, Detector, detector, File),
+		sample_anomaly_detector::export_to_file(gaussian_anomalies, Detector, detector, File),
 		header_lines(File, HeaderLines).
 
-	test(sample_anomaly_detector_to_file_4_loadable, deterministic((LoadedDetector == sample_anomaly_detector(gaussian_anomalies, [x, y], 5.3, [anomaly_threshold(0.5)]), Prediction == anomaly))) :-
+	test(sample_export_to_file_4_loadable, deterministic((LoadedDetector == sample_anomaly_detector(gaussian_anomalies, [x, y], 5.3, [anomaly_threshold(0.5)]), Prediction == anomaly))) :-
 		^^file_path('test_output.pl', File),
 		sample_anomaly_detector::learn(gaussian_anomalies, Detector),
-		sample_anomaly_detector::anomaly_detector_to_file(gaussian_anomalies, Detector, detector, File),
+		sample_anomaly_detector::export_to_file(gaussian_anomalies, Detector, detector, File),
 		logtalk_load(File),
 		{detector(LoadedDetector)},
 		sample_anomaly_detector::predict(LoadedDetector, [x-4.50, y-4.20], Prediction).

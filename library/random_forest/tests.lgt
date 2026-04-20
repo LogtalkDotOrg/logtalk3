@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-20,
 		comment is 'Unit tests for the "random_forest" library.'
@@ -132,32 +132,32 @@
 		random_forest::learn(iris, Classifier),
 		random_forest::predict_probabilities(Classifier, [sepal_length-5.0, sepal_width-3.5, petal_length-1.4, petal_width-0.2], Probabilities).
 
-	% classifier_to_clauses/4 tests
+	% export_to_clauses/4 tests
 
-	test(rf_classifier_to_clauses_4, true(length(Clauses, 1))) :-
+	test(rf_export_to_clauses_4, true(length(Clauses, 1))) :-
 		random_forest::learn(play_tennis, Classifier),
-		random_forest::classifier_to_clauses(play_tennis, Classifier, classify, Clauses).
+		random_forest::export_to_clauses(play_tennis, Classifier, classify, Clauses).
 
-	test(rf_classifier_to_clauses_4_structure, true(functor(Clause, my_forest, 1))) :-
+	test(rf_export_to_clauses_4_structure, true(functor(Clause, my_forest, 1))) :-
 		random_forest::learn(play_tennis, Classifier),
-		random_forest::classifier_to_clauses(play_tennis, Classifier, my_forest, [Clause]).
+		random_forest::export_to_clauses(play_tennis, Classifier, my_forest, [Clause]).
 
-	test(rf_classifier_to_clauses_4_usable, true(ground(Prediction))) :-
+	test(rf_export_to_clauses_4_usable, true(ground(Prediction))) :-
 		random_forest::learn(play_tennis, Classifier),
-		random_forest::classifier_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
+		random_forest::export_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
 		random_forest::predict(ExportedClassifier, [outlook-overcast, temperature-hot, humidity-high, wind-weak], Prediction).
 
-	% classifier_to_file/4 tests
+	% export_to_file/4 tests
 
-	test(rf_classifier_to_file_4_written, deterministic(os::file_exists(File))) :-
+	test(rf_export_to_file_4_written, deterministic(os::file_exists(File))) :-
 		^^file_path('test_output.pl', File),
 		random_forest::learn(play_tennis, Classifier),
-		random_forest::classifier_to_file(play_tennis, Classifier, classify, File).
+		random_forest::export_to_file(play_tennis, Classifier, classify, File).
 
-	test(rf_classifier_to_file_4_loadable, true(ground(Prediction))) :-
+	test(rf_export_to_file_4_loadable, true(ground(Prediction))) :-
 		^^file_path('test_output.pl', File),
 		random_forest::learn(play_tennis, Classifier),
-		random_forest::classifier_to_file(play_tennis, Classifier, classifier, File),
+		random_forest::export_to_file(play_tennis, Classifier, classifier, File),
 		logtalk_load(File),
 		{classifier(LoadedClassifier)},
 		random_forest::predict(LoadedClassifier, [outlook-overcast, temperature-hot, humidity-high, wind-weak], Prediction).

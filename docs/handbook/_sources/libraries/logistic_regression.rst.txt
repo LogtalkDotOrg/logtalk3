@@ -115,10 +115,10 @@ Exporting the classifier
 ::
 
    | ?- logistic_regression::learn(weather, Classifier),
-        logistic_regression::classifier_to_clauses(weather, Classifier, classify, Clauses).
+        logistic_regression::export_to_clauses(weather, Classifier, classify, Clauses).
 
    | ?- logistic_regression::learn(weather, Classifier),
-        logistic_regression::classifier_to_file(weather, Classifier, classify, 'classifier.pl').
+        logistic_regression::export_to_file(weather, Classifier, classify, 'classifier.pl').
 
 Classifier representation
 -------------------------
@@ -137,10 +137,10 @@ Where:
 - ``Models``: list of ``class_model(Class, Bias, Weights)`` terms
 - ``Options``: merged training options used to learn the model
 
-When exported using ``classifier_to_clauses/4`` or
-``classifier_to_file/4``, this classifier term is serialized directly as
-the single argument of the generated predicate clause so that the
-exported model can be loaded and reused as-is.
+When exported using ``export_to_clauses/4`` or ``export_to_file/4``,
+this classifier term is serialized directly as the single argument of
+the generated predicate clause so that the exported model can be loaded
+and reused as-is.
 
 References
 ----------

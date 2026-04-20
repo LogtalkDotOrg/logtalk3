@@ -90,10 +90,10 @@ Where:
 - ``Instances``: List of training ``Id-Class-Values`` triples
 - ``Options``: Learned options
 
-When exported using ``anomaly_detector_to_clauses/4`` or
-``anomaly_detector_to_file/4``, this detector term is serialized
-directly as the single argument of the generated predicate clause so
-that the exported model can be loaded and reused as-is.
+When exported using ``export_to_clauses/4`` or ``export_to_file/4``,
+this detector term is serialized directly as the single argument of the
+generated predicate clause so that the exported model can be loaded and
+reused as-is.
 
 References
 ----------

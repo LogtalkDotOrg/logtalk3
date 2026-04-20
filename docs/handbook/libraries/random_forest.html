@@ -323,10 +323,10 @@ consider per tree (default: sqrt(total_features))</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ClassValues</span></code>: List of possible class values</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Options</span></code>: List of options used during learning</p></li>
 </ul>
-<p>When exported using <code class="docutils literal notranslate"><span class="pre">classifier_to_clauses/4</span></code> or
-<code class="docutils literal notranslate"><span class="pre">classifier_to_file/4</span></code>, this classifier term is serialized directly as
-the single argument of the generated predicate clause so that the
-exported model can be loaded and reused as-is.</p>
+<p>When exported using <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> or <code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code>,
+this classifier term is serialized directly as the single argument of
+the generated predicate clause so that the exported model can be loaded
+and reused as-is.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
@@ -372,13 +372,13 @@ Kaufmann.</p></li>
 <h3>Exporting the Classifier<a class="headerlink" href="#exporting-the-classifier" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Export as predicate clauses</span>
 | <span class="o">?-</span> random_forest<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>),
-     random_forest<span class="o">::</span>classifier_to_clauses(play_tennis, <span class="nv">Classifier</span>, my_forest, <span class="nv">Clauses</span>).
+     random_forest<span class="o">::</span>export_to_clauses(play_tennis, <span class="nv">Classifier</span>, my_forest, <span class="nv">Clauses</span>).
 <span class="nv">Clauses</span> <span class="o">=</span> [my_forest(random_forest_classifier(...))]
 ...
 
 <span class="c">% Export to a file</span>
 | <span class="o">?-</span> random_forest<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>),
-     random_forest<span class="o">::</span>classifier_to_file(play_tennis, <span class="nv">Classifier</span>, my_forest, <span class="s">&#39;forest.pl&#39;</span>).
+     random_forest<span class="o">::</span>export_to_file(play_tennis, <span class="nv">Classifier</span>, my_forest, <span class="s">&#39;forest.pl&#39;</span>).
 ...
 </pre></div>
 </div>

@@ -152,11 +152,11 @@ Computes anomaly scores for all examples in a dataset and returns a list of ``Id
 
 ------------
 
-.. index:: anomaly_detector_to_clauses/4
-.. _anomaly_detector_protocol/0::anomaly_detector_to_clauses/4:
+.. index:: export_to_clauses/4
+.. _anomaly_detector_protocol/0::export_to_clauses/4:
 
-``anomaly_detector_to_clauses/4``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``export_to_clauses/4``
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Converts an anomaly detector into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized detector term, a noun such as ``detector`` or ``model`` is usually clearer than a verb such as ``detect``.
 
@@ -164,18 +164,18 @@ Converts an anomaly detector into a list of predicate clauses. ``Functor`` is th
 |    ``static``
 
 | **Template:**
-|    ``anomaly_detector_to_clauses(Dataset,AnomalyDetector,Functor,Clauses)``
+|    ``export_to_clauses(Dataset,AnomalyDetector,Functor,Clauses)``
 | **Mode and number of proofs:**
-|    ``anomaly_detector_to_clauses(+object_identifier,+compound,+callable,-list(clause))`` - ``one``
+|    ``export_to_clauses(+object_identifier,+compound,+callable,-list(clause))`` - ``one``
 
 
 ------------
 
-.. index:: anomaly_detector_to_file/4
-.. _anomaly_detector_protocol/0::anomaly_detector_to_file/4:
+.. index:: export_to_file/4
+.. _anomaly_detector_protocol/0::export_to_file/4:
 
-``anomaly_detector_to_file/4``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``export_to_file/4``
+^^^^^^^^^^^^^^^^^^^^
 
 Exports an anomaly detector to a file. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized detector term, a noun such as ``detector`` or ``model`` is usually clearer than a verb such as ``detect``.
 
@@ -183,9 +183,9 @@ Exports an anomaly detector to a file. ``Functor`` is the functor for the genera
 |    ``static``
 
 | **Template:**
-|    ``anomaly_detector_to_file(Dataset,AnomalyDetector,Functor,File)``
+|    ``export_to_file(Dataset,AnomalyDetector,Functor,File)``
 | **Mode and number of proofs:**
-|    ``anomaly_detector_to_file(+object_identifier,+compound,+callable,+atom)`` - ``one``
+|    ``export_to_file(+object_identifier,+compound,+callable,+atom)`` - ``one``
 
 
 ------------

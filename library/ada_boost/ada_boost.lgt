@@ -23,7 +23,7 @@
 	imports([options, classifier_common])).
 
 	:- info([
-		version is 1:2:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-20,
 		comment is 'AdaBoost (Adaptive Boosting) classifier using C4.5 decision trees as base learners. Implements the SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss function) variant, which supports multi-class classification. Builds an ensemble of weighted decision trees where each subsequent tree focuses on the examples misclassified by previous trees.',
@@ -351,8 +351,8 @@
 			options(Options)
 		].
 
-	% classifier_to_clauses/4 - exports classifier as a clause
-	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
+	% export_to_clauses/4 - exports classifier as a clause
+	export_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Clause =.. [Functor, Classifier].
 
 	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-

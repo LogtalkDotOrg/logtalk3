@@ -93,13 +93,13 @@ Learned classifiers can be exported as a list of clauses or to a file for later 
 
     % Export as predicate clauses
     | ?- naive_bayes::learn(my_dataset, Classifier),
-         naive_bayes::classifier_to_clauses(Classifier, my_classifier, Clauses).
+         naive_bayes::export_to_clauses(Classifier, my_classifier, Clauses).
     Clauses = [my_classifier(...)]
     ...
 
     % Export to a file
     | ?- naive_bayes::learn(my_dataset, Classifier),
-         naive_bayes::classifier_to_file(Classifier, my_classifier, 'classifier.pl').
+         naive_bayes::export_to_file(Classifier, my_classifier, 'classifier.pl').
     ...
 
 ### Using a learned classifier
@@ -131,7 +131,7 @@ Where:
 - `FeatureTypes`: List of types (`categorical` or `continuous`)
 - `FeatureParams`: List of learned parameters for each feature
 
-When exported using `classifier_to_clauses/4` or `classifier_to_file/4`,
+When exported using `export_to_clauses/4` or `export_to_file/4`,
 this classifier term is serialized directly as the single argument of the
 generated predicate clause so that the exported model can be loaded and
 reused as-is.

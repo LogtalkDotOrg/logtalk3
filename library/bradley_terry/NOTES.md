@@ -175,13 +175,13 @@ Learned rankers can be exported as a list of clauses or to a file for later use.
 
     % Export as predicate clauses
     | ?- bradley_terry::learn(my_dataset, Ranker),
-         bradley_terry::ranker_to_clauses(my_dataset, Ranker, my_ranker, Clauses).
+         bradley_terry::export_to_clauses(my_dataset, Ranker, my_ranker, Clauses).
     Clauses = [my_ranker(bt_ranker(...))]
     ...
 
     % Export to a file
     | ?- bradley_terry::learn(my_dataset, Ranker),
-         bradley_terry::ranker_to_file(my_dataset, Ranker, my_ranker, 'ranker.pl').
+         bradley_terry::export_to_file(my_dataset, Ranker, my_ranker, 'ranker.pl').
     ...
 
 
@@ -208,7 +208,7 @@ Where:
 - `Diagnostics`: List of metadata terms, including the effective options,
   convergence status, iteration count, final update delta, and dataset summary.
 
-When exported using `ranker_to_clauses/4` or `ranker_to_file/4`, this
+When exported using `export_to_clauses/4` or `export_to_file/4`, this
 ranker term is serialized directly as the single argument of the generated
 predicate clause so that the exported model can be loaded and reused as-is.
 

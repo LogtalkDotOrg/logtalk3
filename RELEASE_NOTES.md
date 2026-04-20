@@ -33,6 +33,10 @@ Documentation
 Library
 -------
 
+* RENAMED: The export predicates for all classifier libraries to
+`export_to_clauses/4` and `export_to_file/4` for uniform naming
+across all machine learning libraries.
+
 * CHANGED: The `isolation_forest` library to depend on the new
 `anomaly_protocols` library instead of `classifier_protocols` (functionality
 preserved but four export and print predicates were renamed with this change).

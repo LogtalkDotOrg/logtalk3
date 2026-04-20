@@ -160,8 +160,8 @@
 		;	Score = 0.5
 		).
 
-	% anomaly_detector_to_clauses/4 - exports detector as a clause
-	anomaly_detector_to_clauses(_Dataset, Detector, Functor, [Clause]) :-
+	% export_to_clauses/4 - exports detector as a clause
+	export_to_clauses(_Dataset, Detector, Functor, [Clause]) :-
 		Clause =.. [Functor, Detector].
 
 	print_anomaly_detector(Model) :-

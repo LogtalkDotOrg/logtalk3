@@ -23,7 +23,7 @@
 	imports([options, classifier_common])).
 
 	:- info([
-		version is 1:2:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-20,
 		comment is 'Logistic regression classifier supporting binary and multiclass classification using joint softmax training. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
@@ -371,7 +371,7 @@
 			options(Options)
 		].
 
-	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
+	export_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Clause =.. [Functor, Classifier].
 
 	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-

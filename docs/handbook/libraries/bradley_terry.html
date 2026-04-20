@@ -409,13 +409,13 @@ effective options.</p>
 later use.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Export as predicate clauses</span>
 | <span class="o">?-</span> bradley_terry<span class="o">::</span>learn(my_dataset, <span class="nv">Ranker</span>),
-     bradley_terry<span class="o">::</span>ranker_to_clauses(my_dataset, <span class="nv">Ranker</span>, my_ranker, <span class="nv">Clauses</span>).
+     bradley_terry<span class="o">::</span>export_to_clauses(my_dataset, <span class="nv">Ranker</span>, my_ranker, <span class="nv">Clauses</span>).
 <span class="nv">Clauses</span> <span class="o">=</span> [my_ranker(bt_ranker(...))]
 ...
 
 <span class="c">% Export to a file</span>
 | <span class="o">?-</span> bradley_terry<span class="o">::</span>learn(my_dataset, <span class="nv">Ranker</span>),
-     bradley_terry<span class="o">::</span>ranker_to_file(my_dataset, <span class="nv">Ranker</span>, my_ranker, <span class="s">&#39;ranker.pl&#39;</span>).
+     bradley_terry<span class="o">::</span>export_to_file(my_dataset, <span class="nv">Ranker</span>, my_ranker, <span class="s">&#39;ranker.pl&#39;</span>).
 ...
 </pre></div>
 </div>
@@ -444,7 +444,7 @@ bound.</p></li>
 options, convergence status, iteration count, final update delta, and
 dataset summary.</p></li>
 </ul>
-<p>When exported using <code class="docutils literal notranslate"><span class="pre">ranker_to_clauses/4</span></code> or <code class="docutils literal notranslate"><span class="pre">ranker_to_file/4</span></code>,
+<p>When exported using <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> or <code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code>,
 this ranker term is serialized directly as the single argument of the
 generated predicate clause so that the exported model can be loaded and
 reused as-is.</p>

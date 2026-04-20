@@ -103,13 +103,13 @@ Learned classifiers can be exported as a list of clauses or to a file for later 
 
     % Export as predicate clauses
     | ?- nearest_centroid::learn(my_dataset, Classifier),
-         nearest_centroid::classifier_to_clauses(my_dataset, Classifier, my_classifier, Clauses).
+         nearest_centroid::export_to_clauses(my_dataset, Classifier, my_classifier, Clauses).
     Clauses = [my_classifier(...)]
     ...
 
     % Export to a file
     | ?- nearest_centroid::learn(my_dataset, Classifier),
-         nearest_centroid::classifier_to_file(my_dataset, Classifier, my_classifier, 'classifier.pl').
+         nearest_centroid::export_to_file(my_dataset, Classifier, my_classifier, 'classifier.pl').
     ...
 
 ### Using a learned classifier
@@ -148,7 +148,7 @@ Where:
 - `FeatureTypes`: List of types (`numeric` or `categorical`)
 - `Centroids`: List of computed `Class-Centroid` pairs
 
-When exported using `classifier_to_clauses/4` or `classifier_to_file/4`,
+When exported using `export_to_clauses/4` or `export_to_file/4`,
 this classifier term is serialized directly as the single argument of the
 generated predicate clause so that the exported model can be loaded and
 reused as-is.

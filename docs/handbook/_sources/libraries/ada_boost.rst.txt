@@ -89,10 +89,10 @@ Where:
 - ``ClassValues``: List of possible class values
 - ``Options``: List of options used during learning
 
-When exported using ``classifier_to_clauses/4`` or
-``classifier_to_file/4``, this classifier term is serialized directly as
-the single argument of the generated predicate clause so that the
-exported model can be loaded and reused as-is.
+When exported using ``export_to_clauses/4`` or ``export_to_file/4``,
+this classifier term is serialized directly as the single argument of
+the generated predicate clause so that the exported model can be loaded
+and reused as-is.
 
 References
 ----------
@@ -145,12 +145,12 @@ Exporting the Classifier
 
    % Export as predicate clauses
    | ?- ada_boost::learn(play_tennis, Classifier),
-        ada_boost::classifier_to_clauses(play_tennis, Classifier, my_boost, Clauses).
+        ada_boost::export_to_clauses(play_tennis, Classifier, my_boost, Clauses).
    ...
 
    % Export to a file
    | ?- ada_boost::learn(play_tennis, Classifier),
-        ada_boost::classifier_to_file(play_tennis, Classifier, my_boost, 'boost.pl').
+        ada_boost::export_to_file(play_tennis, Classifier, my_boost, 'boost.pl').
    ...
 
 Using a Saved Classifier

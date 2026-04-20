@@ -335,13 +335,13 @@ predicate clauses</p></li>
 for later use.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Export as predicate clauses</span>
 | <span class="o">?-</span> knn<span class="o">::</span>learn(my_dataset, <span class="nv">Classifier</span>),
-     knn<span class="o">::</span>classifier_to_clauses(my_dataset, <span class="nv">Classifier</span>, my_classifier, <span class="nv">Clauses</span>).
+     knn<span class="o">::</span>export_to_clauses(my_dataset, <span class="nv">Classifier</span>, my_classifier, <span class="nv">Clauses</span>).
 <span class="nv">Clauses</span> <span class="o">=</span> [my_classifier(...)]
 ...
 
 <span class="c">% Export to a file</span>
 | <span class="o">?-</span> knn<span class="o">::</span>learn(my_dataset, <span class="nv">Classifier</span>),
-     knn<span class="o">::</span>classifier_to_file(my_dataset, <span class="nv">Classifier</span>, my_classifier, <span class="s">&#39;classifier.pl&#39;</span>).
+     knn<span class="o">::</span>export_to_file(my_dataset, <span class="nv">Classifier</span>, my_classifier, <span class="s">&#39;classifier.pl&#39;</span>).
 ...
 </pre></div>
 </div>
@@ -386,10 +386,10 @@ Options: <code class="docutils literal notranslate"><span class="pre">uniform</s
 <li><p><code class="docutils literal notranslate"><span class="pre">Instances</span></code>: List of <code class="docutils literal notranslate"><span class="pre">Values-Class</span></code> pairs (the training data in
 compact form)</p></li>
 </ul>
-<p>When exported using <code class="docutils literal notranslate"><span class="pre">classifier_to_clauses/4</span></code> or
-<code class="docutils literal notranslate"><span class="pre">classifier_to_file/4</span></code>, this classifier term is serialized directly as
-the single argument of the generated predicate clause so that the
-exported model can be loaded and reused as-is.</p>
+<p>When exported using <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> or <code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code>,
+this classifier term is serialized directly as the single argument of
+the generated predicate clause so that the exported model can be loaded
+and reused as-is.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>

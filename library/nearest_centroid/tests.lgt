@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-20,
 		comment is 'Unit tests for the "nearest_centroid" library.'
@@ -95,23 +95,23 @@
 		nearest_centroid::learn(mixed, Classifier),
 		nearest_centroid::predict(Classifier, [age-26, income-36000, student-yes, credit_rating-fair], Prediction).
 
-	% Test classifier_to_clauses/4 - verify exported clause works with predict/3
-	test(nearest_centroid_classifier_to_clauses_4, true(ground(Prediction))) :-
+	% Test export_to_clauses/4 - verify exported clause works with predict/3
+	test(nearest_centroid_export_to_clauses_4, true(ground(Prediction))) :-
 		nearest_centroid::learn(iris_small, Classifier),
-		nearest_centroid::classifier_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
+		nearest_centroid::export_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
 		nearest_centroid::predict(ExportedClassifier, [sepal_length-5.0, sepal_width-3.3, petal_length-1.4, petal_width-0.2], Prediction).
 
-	% Test classifier_to_file/4 - verify file is written
-	test(nearest_centroid_classifier_to_file_4_written, deterministic(os::file_exists(File))) :-
+	% Test export_to_file/4 - verify file is written
+	test(nearest_centroid_export_to_file_4_written, deterministic(os::file_exists(File))) :-
 		^^file_path('test_output.pl', File),
 		nearest_centroid::learn(iris_small, Classifier),
-		nearest_centroid::classifier_to_file(iris_small, Classifier, classify, File).
+		nearest_centroid::export_to_file(iris_small, Classifier, classify, File).
 
-	% Test classifier_to_file/4 - verify exported classifier works with predict/3
-	test(nearest_centroid_classifier_to_file_4_loaded, true(ground(Prediction))) :-
+	% Test export_to_file/4 - verify exported classifier works with predict/3
+	test(nearest_centroid_export_to_file_4_loaded, true(ground(Prediction))) :-
 		^^file_path('test_output.pl', File),
 		nearest_centroid::learn(iris_small, Classifier),
-		nearest_centroid::classifier_to_file(iris_small, Classifier, classifier, File),
+		nearest_centroid::export_to_file(iris_small, Classifier, classifier, File),
 		logtalk_load(File),
 		{classifier(LoadedClassifier)},
 		nearest_centroid::predict(LoadedClassifier, [sepal_length-5.0, sepal_width-3.3, petal_length-1.4, petal_width-0.2], Prediction).

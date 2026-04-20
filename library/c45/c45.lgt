@@ -23,7 +23,7 @@
 	imports(classifier_common)).
 
 	:- info([
-		version is 1:3:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-20,
 		comment is 'C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes, handles missing values, and supports tree pruning.',
@@ -401,8 +401,8 @@
 	select_best([_| Rest], CurrentBest, CurrentGR, Best) :-
 		select_best(Rest, CurrentBest, CurrentGR, Best).
 
-	% classifier_to_clauses/4 - convert tree to list of clauses
-	classifier_to_clauses(Dataset, Tree, Functor, Clauses) :-
+	% export_to_clauses/4 - convert tree to list of clauses
+	export_to_clauses(Dataset, Tree, Functor, Clauses) :-
 		dataset_attributes(Dataset, Attributes),
 		keys(Attributes, AttributeNames),
 		tree_to_clauses_(Tree, Functor, AttributeNames, [], Clauses).

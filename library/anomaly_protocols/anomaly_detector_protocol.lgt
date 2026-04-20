@@ -71,16 +71,16 @@
 		argnames is ['Dataset', 'AnomalyDetector', 'Scores']
 	]).
 
-	:- public(anomaly_detector_to_clauses/4).
-	:- mode(anomaly_detector_to_clauses(+object_identifier, +compound, +callable, -list(clause)), one).
-	:- info(anomaly_detector_to_clauses/4, [
+	:- public(export_to_clauses/4).
+	:- mode(export_to_clauses(+object_identifier, +compound, +callable, -list(clause)), one).
+	:- info(export_to_clauses/4, [
 		comment is 'Converts an anomaly detector into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized detector term, a noun such as ``detector`` or ``model`` is usually clearer than a verb such as ``detect``.',
 		argnames is ['Dataset', 'AnomalyDetector', 'Functor', 'Clauses']
 	]).
 
-	:- public(anomaly_detector_to_file/4).
-	:- mode(anomaly_detector_to_file(+object_identifier, +compound, +callable, +atom), one).
-	:- info(anomaly_detector_to_file/4, [
+	:- public(export_to_file/4).
+	:- mode(export_to_file(+object_identifier, +compound, +callable, +atom), one).
+	:- info(export_to_file/4, [
 		comment is 'Exports an anomaly detector to a file. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized detector term, a noun such as ``detector`` or ``model`` is usually clearer than a verb such as ``detect``.',
 		argnames is ['Dataset', 'AnomalyDetector', 'Functor', 'File']
 	]).

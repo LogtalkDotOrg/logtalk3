@@ -82,7 +82,7 @@
 
 	ranker_term_template(sample_ranker(_Strengths, _Diagnostics), sample_ranker('Strengths', 'Diagnostics')).
 
-	ranker_to_clauses(_Dataset, Ranker, Functor, [Clause]) :-
+	export_to_clauses(_Dataset, Ranker, Functor, [Clause]) :-
 		Clause =.. [Functor, Ranker].
 
 	print_ranker(Ranker) :-
@@ -178,20 +178,20 @@
 		sample_ranker::diagnostics(Ranker, Diagnostics),
 		findall(Diagnostic, sample_ranker::diagnostic(Ranker, Diagnostic), Enumerated).
 
-	test(sample_ranker_ranker_to_clauses_4, deterministic(Clause == ranker(sample_ranker([alpha-10, beta-5, gamma-4, delta-0], [model(sample_ranker), options([]), convergence(not_applicable), iterations(0), final_delta(0.0), dataset_summary([items(4), preferences(6), connected_components(1), isolated_items([])])])))) :-
+	test(sample_ranker_export_to_clauses_4, deterministic(Clause == ranker(sample_ranker([alpha-10, beta-5, gamma-4, delta-0], [model(sample_ranker), options([]), convergence(not_applicable), iterations(0), final_delta(0.0), dataset_summary([items(4), preferences(6), connected_components(1), isolated_items([])])])))) :-
 		sample_ranker::learn(head_to_head, Ranker),
-		sample_ranker::ranker_to_clauses(head_to_head, Ranker, ranker, [Clause]).
+		sample_ranker::export_to_clauses(head_to_head, Ranker, ranker, [Clause]).
 
-	test(sample_ranker_ranker_to_file_4_header, deterministic(HeaderLines == ['% exported ranker predicate: ranker/1', '% training dataset: head_to_head', '% diagnostics: [model(sample_ranker),options([]),convergence(not_applicable),iterations(0),final_delta(0.0),dataset_summary([items(4),preferences(6),connected_components(1),isolated_items([])])]', '% ranker(Ranker)'])) :-
+	test(sample_ranker_export_to_file_4_header, deterministic(HeaderLines == ['% exported ranker predicate: ranker/1', '% training dataset: head_to_head', '% diagnostics: [model(sample_ranker),options([]),convergence(not_applicable),iterations(0),final_delta(0.0),dataset_summary([items(4),preferences(6),connected_components(1),isolated_items([])])]', '% ranker(Ranker)'])) :-
 		^^file_path('test_output.pl', File),
 		sample_ranker::learn(head_to_head, Ranker),
-		sample_ranker::ranker_to_file(head_to_head, Ranker, ranker, File),
+		sample_ranker::export_to_file(head_to_head, Ranker, ranker, File),
 		header_lines(File, HeaderLines).
 
-	test(sample_ranker_ranker_to_file_4, deterministic(memberchk(model(sample_ranker), Diagnostics))) :-
+	test(sample_ranker_export_to_file_4, deterministic(memberchk(model(sample_ranker), Diagnostics))) :-
 		^^file_path('test_output.pl', File),
 		sample_ranker::learn(head_to_head, Ranker),
-		sample_ranker::ranker_to_file(head_to_head, Ranker, ranker, File),
+		sample_ranker::export_to_file(head_to_head, Ranker, ranker, File),
 		logtalk_load(File),
 		{ranker(LoadedRanker)},
 		LoadedRanker = sample_ranker(_Strengths, Diagnostics).

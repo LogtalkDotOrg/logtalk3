@@ -14,7 +14,7 @@ Protocol for machine learning classifiers.
 |    ``logtalk_load(classifier_protocols(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:2:0
+| **Version:** 2:0:0
 | **Date:** 2026-04-20
 
 | **Compilation flags:**
@@ -133,11 +133,11 @@ Returns the effective training options recorded in a learned classifier diagnost
 
 ------------
 
-.. index:: classifier_to_clauses/4
-.. _classifier_protocol/0::classifier_to_clauses/4:
+.. index:: export_to_clauses/4
+.. _classifier_protocol/0::export_to_clauses/4:
 
-``classifier_to_clauses/4``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``export_to_clauses/4``
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Converts a classifier into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized classifier term, a noun such as ``classifier`` or ``model`` is usually clearer than a verb such as ``classify``.
 
@@ -145,18 +145,18 @@ Converts a classifier into a list of predicate clauses. ``Functor`` is the funct
 |    ``static``
 
 | **Template:**
-|    ``classifier_to_clauses(Dataset,Classifier,Functor,Clauses)``
+|    ``export_to_clauses(Dataset,Classifier,Functor,Clauses)``
 | **Mode and number of proofs:**
-|    ``classifier_to_clauses(+object_identifier,+compound,+callable,-list(clause))`` - ``one``
+|    ``export_to_clauses(+object_identifier,+compound,+callable,-list(clause))`` - ``one``
 
 
 ------------
 
-.. index:: classifier_to_file/4
-.. _classifier_protocol/0::classifier_to_file/4:
+.. index:: export_to_file/4
+.. _classifier_protocol/0::export_to_file/4:
 
-``classifier_to_file/4``
-^^^^^^^^^^^^^^^^^^^^^^^^
+``export_to_file/4``
+^^^^^^^^^^^^^^^^^^^^
 
 Exports a classifier to a file. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized classifier term, a noun such as ``classifier`` or ``model`` is usually clearer than a verb such as ``classify``.
 
@@ -164,9 +164,9 @@ Exports a classifier to a file. ``Functor`` is the functor for the generated pre
 |    ``static``
 
 | **Template:**
-|    ``classifier_to_file(Dataset,Classifier,Functor,File)``
+|    ``export_to_file(Dataset,Classifier,Functor,File)``
 | **Mode and number of proofs:**
-|    ``classifier_to_file(+object_identifier,+compound,+callable,+atom)`` - ``one``
+|    ``export_to_file(+object_identifier,+compound,+callable,+atom)`` - ``one``
 
 
 ------------

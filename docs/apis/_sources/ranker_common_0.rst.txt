@@ -31,7 +31,7 @@ Shared predicates for ranker diagnostics and export.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::learn/2`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  :ref:`ranker_protocol/0::ranker_to_clauses/4`  :ref:`ranker_protocol/0::ranker_to_file/4`  
+|     :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::export_to_clauses/4`  :ref:`ranker_protocol/0::export_to_file/4`  :ref:`ranker_protocol/0::learn/2`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  
 
 .. contents::
    :local:

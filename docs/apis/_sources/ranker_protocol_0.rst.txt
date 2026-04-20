@@ -14,7 +14,7 @@ Protocol for machine learning rankers.
 |    ``logtalk_load(ranking_protocols(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
+| **Version:** 1:0:0
 | **Date:** 2026-04-20
 
 | **Compilation flags:**
@@ -133,10 +133,10 @@ Returns the effective training options recorded in a learned ranker diagnostics 
 
 ------------
 
-.. index:: ranker_to_clauses/4
-.. _ranker_protocol/0::ranker_to_clauses/4:
+.. index:: export_to_clauses/4
+.. _ranker_protocol/0::export_to_clauses/4:
 
-``ranker_to_clauses/4``
+``export_to_clauses/4``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 Converts a ranker into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized ranker term, a noun such as ``ranker`` or ``model`` is usually clearer than a verb or result label.
@@ -145,17 +145,17 @@ Converts a ranker into a list of predicate clauses. ``Functor`` is the functor f
 |    ``static``
 
 | **Template:**
-|    ``ranker_to_clauses(Dataset,Ranker,Functor,Clauses)``
+|    ``export_to_clauses(Dataset,Ranker,Functor,Clauses)``
 | **Mode and number of proofs:**
-|    ``ranker_to_clauses(+object_identifier,+compound,+callable,-list(clause))`` - ``one``
+|    ``export_to_clauses(+object_identifier,+compound,+callable,-list(clause))`` - ``one``
 
 
 ------------
 
-.. index:: ranker_to_file/4
-.. _ranker_protocol/0::ranker_to_file/4:
+.. index:: export_to_file/4
+.. _ranker_protocol/0::export_to_file/4:
 
-``ranker_to_file/4``
+``export_to_file/4``
 ^^^^^^^^^^^^^^^^^^^^
 
 Exports a ranker to a file. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized ranker term, a noun such as ``ranker`` or ``model`` is usually clearer than a verb or result label.
@@ -164,9 +164,9 @@ Exports a ranker to a file. ``Functor`` is the functor for the generated predica
 |    ``static``
 
 | **Template:**
-|    ``ranker_to_file(Dataset,Ranker,Functor,File)``
+|    ``export_to_file(Dataset,Ranker,Functor,File)``
 | **Mode and number of proofs:**
-|    ``ranker_to_file(+object_identifier,+compound,+callable,+atom)`` - ``one``
+|    ``export_to_file(+object_identifier,+compound,+callable,+atom)`` - ``one``
 
 
 ------------

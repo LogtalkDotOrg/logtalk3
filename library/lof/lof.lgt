@@ -23,7 +23,7 @@
 	imports(anomaly_common)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-20,
 		comment is 'Local Outlier Factor anomaly detector with multiple distance metrics, mixed-feature support, and missing-value handling. Learns from a dataset object implementing the ``anomaly_dataset_protocol`` protocol and returns a detector term that can be used for scoring, prediction, and export.',
@@ -92,7 +92,7 @@
 		reverse(SortedAscending, SortedDescending),
 		^^extract_scores(SortedDescending, Scores).
 
-	anomaly_detector_to_clauses(_Dataset, Detector, Functor, [Clause]) :-
+	export_to_clauses(_Dataset, Detector, Functor, [Clause]) :-
 		Clause =.. [Functor, Detector].
 
 	print_anomaly_detector(Detector) :-

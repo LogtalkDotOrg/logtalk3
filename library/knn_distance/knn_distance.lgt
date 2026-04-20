@@ -92,7 +92,7 @@
 		reverse(SortedAscending, SortedDescending),
 		^^extract_scores(SortedDescending, Scores).
 
-	anomaly_detector_to_clauses(_Dataset, Detector, Functor, [Clause]) :-
+	export_to_clauses(_Dataset, Detector, Functor, [Clause]) :-
 		Clause =.. [Functor, Detector].
 
 	print_anomaly_detector(Detector) :-

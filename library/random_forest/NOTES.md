@@ -93,7 +93,7 @@ Where:
 - `ClassValues`: List of possible class values
 - `Options`: List of options used during learning
 
-When exported using `classifier_to_clauses/4` or `classifier_to_file/4`,
+When exported using `export_to_clauses/4` or `export_to_file/4`,
 this classifier term is serialized directly as the single argument of the
 generated predicate clause so that the exported model can be loaded and
 reused as-is.
@@ -138,13 +138,13 @@ Usage
 
 	% Export as predicate clauses
 	| ?- random_forest::learn(play_tennis, Classifier),
-	     random_forest::classifier_to_clauses(play_tennis, Classifier, my_forest, Clauses).
+	     random_forest::export_to_clauses(play_tennis, Classifier, my_forest, Clauses).
 	Clauses = [my_forest(random_forest_classifier(...))]
 	...
 
 	% Export to a file
 	| ?- random_forest::learn(play_tennis, Classifier),
-	     random_forest::classifier_to_file(play_tennis, Classifier, my_forest, 'forest.pl').
+	     random_forest::export_to_file(play_tennis, Classifier, my_forest, 'forest.pl').
 	...
 
 ### Using a Saved Classifier

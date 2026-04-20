@@ -104,8 +104,8 @@
 		;	Prediction = normal
 		).
 
-	anomaly_detector_to_file(Dataset, Detector, Functor, File) :-
-		::anomaly_detector_to_clauses(Dataset, Detector, Functor, Clauses),
+	export_to_file(Dataset, Detector, Functor, File) :-
+		::export_to_clauses(Dataset, Detector, Functor, Clauses),
 		open(File, write, Stream),
 		write_comment_header(Dataset, Functor, Detector, Stream),
 		write_clauses(Clauses, Stream),

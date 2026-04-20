@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-20,
 		comment is 'Unit tests for the "ada_boost" library.'
@@ -118,32 +118,32 @@
 		ada_boost::learn(iris, Classifier),
 		ada_boost::predict_probabilities(Classifier, [sepal_length-5.0, sepal_width-3.5, petal_length-1.4, petal_width-0.2], Probabilities).
 
-	% classifier_to_clauses/4 tests
+	% export_to_clauses/4 tests
 
-	test(ada_boost_classifier_to_clauses_4, true(length(Clauses, 1))) :-
+	test(ada_boost_export_to_clauses_4, true(length(Clauses, 1))) :-
 		ada_boost::learn(play_tennis, Classifier),
-		ada_boost::classifier_to_clauses(play_tennis, Classifier, classify, Clauses).
+		ada_boost::export_to_clauses(play_tennis, Classifier, classify, Clauses).
 
-	test(ada_boost_classifier_to_clauses_4_structure, true(functor(Clause, my_boost, 1))) :-
+	test(ada_boost_export_to_clauses_4_structure, true(functor(Clause, my_boost, 1))) :-
 		ada_boost::learn(play_tennis, Classifier),
-		ada_boost::classifier_to_clauses(play_tennis, Classifier, my_boost, [Clause]).
+		ada_boost::export_to_clauses(play_tennis, Classifier, my_boost, [Clause]).
 
-	test(ada_boost_classifier_to_clauses_4_usable, true(ground(Prediction))) :-
+	test(ada_boost_export_to_clauses_4_usable, true(ground(Prediction))) :-
 		ada_boost::learn(play_tennis, Classifier),
-		ada_boost::classifier_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
+		ada_boost::export_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
 		ada_boost::predict(ExportedClassifier, [outlook-overcast, temperature-hot, humidity-high, wind-weak], Prediction).
 
-	% classifier_to_file/4 tests
+	% export_to_file/4 tests
 
-	test(ada_boost_classifier_to_file_4_written, deterministic(os::file_exists(File))) :-
+	test(ada_boost_export_to_file_4_written, deterministic(os::file_exists(File))) :-
 		^^file_path('test_output.pl', File),
 		ada_boost::learn(play_tennis, Classifier),
-		ada_boost::classifier_to_file(play_tennis, Classifier, classify, File).
+		ada_boost::export_to_file(play_tennis, Classifier, classify, File).
 
-	test(ada_boost_classifier_to_file_4_loadable, true(ground(Prediction))) :-
+	test(ada_boost_export_to_file_4_loadable, true(ground(Prediction))) :-
 		^^file_path('test_output.pl', File),
 		ada_boost::learn(play_tennis, Classifier),
-		ada_boost::classifier_to_file(play_tennis, Classifier, classifier, File),
+		ada_boost::export_to_file(play_tennis, Classifier, classifier, File),
 		logtalk_load(File),
 		{classifier(LoadedClassifier)},
 		ada_boost::predict(LoadedClassifier, [outlook-overcast, temperature-hot, humidity-high, wind-weak], Prediction).

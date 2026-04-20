@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-20,
 		comment is 'Unit tests for the "linear_svm" library.'
@@ -93,20 +93,20 @@
 		linear_svm::learn(iris_small, Classifier),
 		linear_svm::predict(Classifier, [sepal_length-6.4, sepal_width-3.0, petal_length-5.8, petal_width-2.2], Prediction).
 
-	test(linear_svm_classifier_to_clauses_4, deterministic(Prediction == yes)) :-
+	test(linear_svm_export_to_clauses_4, deterministic(Prediction == yes)) :-
 		linear_svm::learn(weather, Classifier),
-		linear_svm::classifier_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
+		linear_svm::export_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
 		linear_svm::predict(ExportedClassifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
 
-	test(linear_svm_classifier_to_file_4_written, deterministic(os::file_exists(File))) :-
+	test(linear_svm_export_to_file_4_written, deterministic(os::file_exists(File))) :-
 		^^file_path('test_output.pl', File),
 		linear_svm::learn(weather, Classifier),
-		linear_svm::classifier_to_file(weather, Classifier, classify, File).
+		linear_svm::export_to_file(weather, Classifier, classify, File).
 
-	test(linear_svm_classifier_to_file_4_loaded, deterministic(Prediction == yes)) :-
+	test(linear_svm_export_to_file_4_loaded, deterministic(Prediction == yes)) :-
 		^^file_path('test_output.pl', File),
 		linear_svm::learn(weather, Classifier),
-		linear_svm::classifier_to_file(weather, Classifier, classifier, File),
+		linear_svm::export_to_file(weather, Classifier, classifier, File),
 		logtalk_load(File),
 		{classifier(LoadedClassifier)},
 		linear_svm::predict(LoadedClassifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).

@@ -23,7 +23,7 @@
 	imports([options, classifier_common])).
 
 	:- info([
-		version is 1:2:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-20,
 		comment is 'k-Nearest Neighbors classifier with multiple distance metrics and weighting options. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
@@ -309,7 +309,7 @@
 			training_examples(TrainingExamples)
 		].
 
-	classifier_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
+	export_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Clause =.. [Functor, Classifier].
 
 	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-

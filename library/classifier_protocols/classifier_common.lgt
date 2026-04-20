@@ -23,7 +23,7 @@
 	implements(classifier_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-20,
 		comment is 'Shared predicates for classifier diagnostics and export.'
@@ -82,8 +82,8 @@
 		::classifier_term_template(Classifier, Template),
 		format('Template: ~w~n', [Template]).
 
-	classifier_to_file(Dataset, Classifier, Functor, File) :-
-		::classifier_to_clauses(Dataset, Classifier, Functor, Clauses),
+	export_to_file(Dataset, Classifier, Functor, File) :-
+		::export_to_clauses(Dataset, Classifier, Functor, Clauses),
 		open(File, write, Stream),
 		write_comment_header(Dataset, Functor, Classifier, Stream),
 		write_clauses(Clauses, Stream),

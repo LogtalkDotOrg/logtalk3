@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-20,
 		comment is 'Unit tests for the "naive_bayes" library.'
@@ -117,23 +117,23 @@
 		naive_bayes::predict_probabilities(Classifier, [age-48, income-80000, student-no, credit_rating-excellent], Probabilities),
 		memberchk(yes-ProbabilityYes, Probabilities).
 
-	% Test classifier_to_clauses/4 - verify exported clause works with predict/3
-	test(naive_bayes_classifier_to_clauses_3, true(Prediction == yes)) :-
+	% Test export_to_clauses/4 - verify exported clause works with predict/3
+	test(naive_bayes_export_to_clauses_3, true(Prediction == yes)) :-
 		naive_bayes::learn(weather, Classifier),
-		naive_bayes::classifier_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
+		naive_bayes::export_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
 		naive_bayes::predict(ExportedClassifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
 
-	% Test classifier_to_file/4 - verify file is written
-	test(naive_bayes_classifier_to_file_4_written, deterministic(os::file_exists(File))) :-
+	% Test export_to_file/4 - verify file is written
+	test(naive_bayes_export_to_file_4_written, deterministic(os::file_exists(File))) :-
 		^^file_path('test_output.pl', File),
 		naive_bayes::learn(weather, Classifier),
-		naive_bayes::classifier_to_file(weather, Classifier, classify, File).
+		naive_bayes::export_to_file(weather, Classifier, classify, File).
 
-	% Test classifier_to_file/4 - verify exported clause works with predict/3
-	test(naive_bayes_classifier_to_file_3_loaded, true(Prediction == yes)) :-
+	% Test export_to_file/4 - verify exported clause works with predict/3
+	test(naive_bayes_export_to_file_3_loaded, true(Prediction == yes)) :-
 		^^file_path('test_output.pl', File),
 		naive_bayes::learn(weather, Classifier),
-		naive_bayes::classifier_to_file(weather, Classifier, classifier, File),
+		naive_bayes::export_to_file(weather, Classifier, classifier, File),
 		logtalk_load(File),
 		{classifier(LoadedClassifier)},
 		naive_bayes::predict(LoadedClassifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).

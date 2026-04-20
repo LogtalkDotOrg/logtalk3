@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-20,
 		comment is 'Unit tests for the "logistic_regression" library.'
@@ -109,20 +109,20 @@
 		logistic_regression::predict_probabilities(Classifier, [sepal_length-6.4, sepal_width-3.0, petal_length-5.8, petal_width-2.2], Probabilities),
 		sum_probabilities(Probabilities, 0.0, Total).
 
-	test(logistic_regression_classifier_to_clauses_4, deterministic(Prediction == yes)) :-
+	test(logistic_regression_export_to_clauses_4, deterministic(Prediction == yes)) :-
 		logistic_regression::learn(weather, Classifier),
-		logistic_regression::classifier_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
+		logistic_regression::export_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
 		logistic_regression::predict(ExportedClassifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
 
-	test(logistic_regression_classifier_to_file_4_written, deterministic(os::file_exists(File))) :-
+	test(logistic_regression_export_to_file_4_written, deterministic(os::file_exists(File))) :-
 		^^file_path('test_output.pl', File),
 		logistic_regression::learn(weather, Classifier),
-		logistic_regression::classifier_to_file(weather, Classifier, classify, File).
+		logistic_regression::export_to_file(weather, Classifier, classify, File).
 
-	test(logistic_regression_classifier_to_file_4_loaded, deterministic(Prediction == yes)) :-
+	test(logistic_regression_export_to_file_4_loaded, deterministic(Prediction == yes)) :-
 		^^file_path('test_output.pl', File),
 		logistic_regression::learn(weather, Classifier),
-		logistic_regression::classifier_to_file(weather, Classifier, classifier, File),
+		logistic_regression::export_to_file(weather, Classifier, classifier, File),
 		logtalk_load(File),
 		{classifier(LoadedClassifier)},
 		logistic_regression::predict(LoadedClassifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).

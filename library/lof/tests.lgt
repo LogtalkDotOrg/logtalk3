@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(lof, [
-		anomaly_detector_to_clauses/4, anomaly_detector_to_file/4,
+		export_to_clauses/4, export_to_file/4,
 		learn/2, learn/3, predict/3, predict/4,
 		print_anomaly_detector/1, score/3, score_all/3
 	]).
@@ -112,19 +112,19 @@
 		take(2, Scores, TopScores),
 		count_class(TopScores, anomaly, AnomalyCount).
 
-	test(lof_anomaly_detector_to_clauses_4, true(ground(Clauses))) :-
+	test(lof_export_to_clauses_4, true(ground(Clauses))) :-
 		learn(gaussian_anomalies, Detector, [k(5)]),
-		anomaly_detector_to_clauses(gaussian_anomalies, Detector, detect, Clauses).
+		export_to_clauses(gaussian_anomalies, Detector, detect, Clauses).
 
-	test(lof_anomaly_detector_to_file_4, deterministic(os::file_exists(File))) :-
+	test(lof_export_to_file_4, deterministic(os::file_exists(File))) :-
 		^^file_path('test_output.pl', File),
 		learn(gaussian_anomalies, Detector, [k(5)]),
-		anomaly_detector_to_file(gaussian_anomalies, Detector, detect, File).
+		export_to_file(gaussian_anomalies, Detector, detect, File).
 
-	test(lof_anomaly_detector_to_file_4_loadable, deterministic(Prediction == anomaly)) :-
+	test(lof_export_to_file_4_loadable, deterministic(Prediction == anomaly)) :-
 		^^file_path('test_output.pl', File),
 		learn(gaussian_anomalies, Detector, [k(5)]),
-		anomaly_detector_to_file(gaussian_anomalies, Detector, detector, File),
+		export_to_file(gaussian_anomalies, Detector, detector, File),
 		logtalk_load(File),
 		{detector(LoadedDetector)},
 		predict(LoadedDetector, [x-4.50, y-4.20], Prediction).

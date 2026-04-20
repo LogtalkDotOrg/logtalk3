@@ -591,26 +591,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`hash_common_64 <hash_common_64/0::and64/3>`
 
-``anomaly_detector_to_clauses/4``
----------------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::anomaly_detector_to_clauses/4>`
-
-``anomaly_detector_to_file/4``
-------------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::anomaly_detector_to_file/4>`
-
 ``apid/2``
 ----------
 
@@ -1954,26 +1934,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`classifier_protocol <classifier_protocol/0::classifier_options/2>`
-
-``classifier_to_clauses/4``
----------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`classifier_protocol <classifier_protocol/0::classifier_to_clauses/4>`
-
-``classifier_to_file/4``
-------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`classifier_protocol <classifier_protocol/0::classifier_to_file/4>`
 
 ``clause/5``
 ------------
@@ -5247,7 +5207,10 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::export_to_clauses/4>`
+* :ref:`classifier_protocol <classifier_protocol/0::export_to_clauses/4>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::export_to_clauses/4>`
+* :ref:`ranker_protocol <ranker_protocol/0::export_to_clauses/4>`
 
 ``export_to_file/4``
 --------------------
@@ -5257,7 +5220,10 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::export_to_file/4>`
+* :ref:`classifier_protocol <classifier_protocol/0::export_to_file/4>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::export_to_file/4>`
+* :ref:`ranker_protocol <ranker_protocol/0::export_to_file/4>`
 
 ``extension/1``
 ---------------
@@ -13771,26 +13737,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ranker_protocol <ranker_protocol/0::ranker_options/2>`
-
-``ranker_to_clauses/4``
------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`ranker_protocol <ranker_protocol/0::ranker_to_clauses/4>`
-
-``ranker_to_file/4``
---------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`ranker_protocol <ranker_protocol/0::ranker_to_file/4>`
 
 ``rd/1``
 --------

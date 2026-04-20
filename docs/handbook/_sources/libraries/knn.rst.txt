@@ -102,13 +102,13 @@ for later use.
 
    % Export as predicate clauses
    | ?- knn::learn(my_dataset, Classifier),
-        knn::classifier_to_clauses(my_dataset, Classifier, my_classifier, Clauses).
+        knn::export_to_clauses(my_dataset, Classifier, my_classifier, Clauses).
    Clauses = [my_classifier(...)]
    ...
 
    % Export to a file
    | ?- knn::learn(my_dataset, Classifier),
-        knn::classifier_to_file(my_dataset, Classifier, my_classifier, 'classifier.pl').
+        knn::export_to_file(my_dataset, Classifier, my_classifier, 'classifier.pl').
    ...
 
 Using a learned classifier
@@ -155,10 +155,10 @@ Where:
 - ``Instances``: List of ``Values-Class`` pairs (the training data in
   compact form)
 
-When exported using ``classifier_to_clauses/4`` or
-``classifier_to_file/4``, this classifier term is serialized directly as
-the single argument of the generated predicate clause so that the
-exported model can be loaded and reused as-is.
+When exported using ``export_to_clauses/4`` or ``export_to_file/4``,
+this classifier term is serialized directly as the single argument of
+the generated predicate clause so that the exported model can be loaded
+and reused as-is.
 
 References
 ----------

@@ -346,10 +346,10 @@ update (default: <code class="docutils literal notranslate"><span class="pre">1.
 <section id="exporting-the-classifier">
 <h3>Exporting the classifier<a class="headerlink" href="#exporting-the-classifier" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> logistic_regression<span class="o">::</span>learn(weather, <span class="nv">Classifier</span>),
-     logistic_regression<span class="o">::</span>classifier_to_clauses(weather, <span class="nv">Classifier</span>, classify, <span class="nv">Clauses</span>).
+     logistic_regression<span class="o">::</span>export_to_clauses(weather, <span class="nv">Classifier</span>, classify, <span class="nv">Clauses</span>).
 
 | <span class="o">?-</span> logistic_regression<span class="o">::</span>learn(weather, <span class="nv">Classifier</span>),
-     logistic_regression<span class="o">::</span>classifier_to_file(weather, <span class="nv">Classifier</span>, classify, <span class="s">&#39;classifier.pl&#39;</span>).
+     logistic_regression<span class="o">::</span>export_to_file(weather, <span class="nv">Classifier</span>, classify, <span class="s">&#39;classifier.pl&#39;</span>).
 </pre></div>
 </div>
 </section>
@@ -368,10 +368,10 @@ value lists</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Models</span></code>: list of <code class="docutils literal notranslate"><span class="pre">class_model(Class,</span> <span class="pre">Bias,</span> <span class="pre">Weights)</span></code> terms</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Options</span></code>: merged training options used to learn the model</p></li>
 </ul>
-<p>When exported using <code class="docutils literal notranslate"><span class="pre">classifier_to_clauses/4</span></code> or
-<code class="docutils literal notranslate"><span class="pre">classifier_to_file/4</span></code>, this classifier term is serialized directly as
-the single argument of the generated predicate clause so that the
-exported model can be loaded and reused as-is.</p>
+<p>When exported using <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> or <code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code>,
+this classifier term is serialized directly as the single argument of
+the generated predicate clause so that the exported model can be loaded
+and reused as-is.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>

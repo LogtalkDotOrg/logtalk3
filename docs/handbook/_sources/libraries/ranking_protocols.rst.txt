@@ -33,7 +33,7 @@ Diagnostics
 
 The ``ranker_common`` category provides shared accessor predicates such
 as ``diagnostics/2``, ``diagnostic/2``, and ``ranker_options/2``,
-together with the shared ``ranker_to_file/4`` export helper. These
+together with the shared ``export_to_file/4`` export helper. These
 predicates make it possible to inspect and export learned rankers
 without depending on the exact term representation used by a particular
 ranking algorithm implementation.

@@ -82,8 +82,8 @@
 		::ranker_term_template(Ranker, Template),
 		format('Template: ~w~n', [Template]).
 
-	ranker_to_file(Dataset, Ranker, Functor, File) :-
-		::ranker_to_clauses(Dataset, Ranker, Functor, Clauses),
+	export_to_file(Dataset, Ranker, Functor, File) :-
+		::export_to_clauses(Dataset, Ranker, Functor, Clauses),
 		open(File, write, Stream),
 		write_comment_header(Dataset, Functor, Ranker, Stream),
 		write_clauses(Clauses, Stream),
