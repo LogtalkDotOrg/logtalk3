@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on April 19, 2026
+%  Last updated on April 20, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -63,6 +63,7 @@ logtalk_library_path(dependents, library('dependents/')).
 logtalk_library_path(deques, library('deques/')).
 logtalk_library_path(dictionaries, library('dictionaries/')).
 logtalk_library_path(dif, library('dif/')).
+logtalk_library_path(dimension_reduction_protocols, library('dimension_reduction_protocols/')).
 logtalk_library_path(edcg, library('edcg/')).
 logtalk_library_path(events, library('events/')).
 logtalk_library_path(expand_library_alias_paths, library('expand_library_alias_paths/')).
@@ -93,6 +94,7 @@ logtalk_library_path(json_ld, library('json_ld/')).
 logtalk_library_path(knn, library('knn/')).
 logtalk_library_path(knn_distance, library('knn_distance/')).
 logtalk_library_path(ksuid, library('ksuid/')).
+logtalk_library_path(lda_projection, library('lda_projection/')).
 logtalk_library_path(linda, library('linda/')).
 logtalk_library_path(linear_svm, library('linear_svm/')).
 logtalk_library_path(listing, library('listing/')).
@@ -113,12 +115,14 @@ logtalk_library_path(nested_dictionaries, library('nested_dictionaries/')).
 logtalk_library_path(optionals, library('optionals/')).
 logtalk_library_path(options, library('options/')).
 logtalk_library_path(os, library('os/')).
+logtalk_library_path(pca, library('pca/')).
 logtalk_library_path(permutations, library('permutations/')).
 logtalk_library_path(process, library('process/')).
 logtalk_library_path(protobuf, library('protobuf/')).
 logtalk_library_path(queues, library('queues/')).
 logtalk_library_path(random, library('random/')).
 logtalk_library_path(random_forest, library('random_forest/')).
+logtalk_library_path(random_projection, library('random_projection/')).
 logtalk_library_path(ranking_protocols, library('ranking_protocols/')).
 logtalk_library_path(reader, library('reader/')).
 logtalk_library_path(recorded_database, library('recorded_database/')).

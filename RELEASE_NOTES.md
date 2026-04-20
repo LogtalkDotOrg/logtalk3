@@ -37,6 +37,19 @@ Library
 `anomaly_protocols` library instead of `classifier_protocols` (functionality
 preserved but four export and print predicates were renamed with this change).
 
+* ADDED: New `dimension_reduction_protocols` library with protocols and
+datasets for use in the implementation of machine learning dimension
+reduction algorithms.
+
+* ADDED: New `lda_projection` library implementing Linear Discriminant
+Analysis projection for labeled continuous datasets.
+
+* ADDED: New `pca` library implementing Principal Component Analysis
+dimension reduction for continuous datasets.
+
+* ADDED: New `random_projection` library implementing seeded random
+projection for continuous datasets.
+
 * ADDED: New `anomaly_protocols` library defining common protocols, benchmark
 datasets, and smoke tests for anomaly-detection algorithms.
 

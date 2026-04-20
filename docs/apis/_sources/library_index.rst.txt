@@ -493,6 +493,19 @@ To load any library (including developer tools, ports, and contributions), use t
 
    dif <dif_0>
 
+:ref:`dimension_reduction_protocols <library_dimension_reduction_protocols>`
+----------------------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   dimension_reducer_common <dimension_reducer_common_0>
+   dimension_reducer_protocol <dimension_reducer_protocol_0>
+   dimension_reduction_dataset_protocol <dimension_reduction_dataset_protocol_0>
+   supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol_0>
+
 :ref:`doclet <library_doclet>`
 ------------------------------
 
@@ -970,6 +983,16 @@ To load any library (including developer tools, ports, and contributions), use t
    ksuid(Representation,Alphabet) <ksuid_2>
    ksuid_protocol <ksuid_protocol_0>
 
+:ref:`lda_projection <library_lda_projection>`
+----------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   lda_projection <lda_projection_0>
+
 :ref:`lgtdoc <library_lgtdoc>`
 ------------------------------
 
@@ -1313,6 +1336,16 @@ To load any library (including developer tools, ports, and contributions), use t
    registry_loader_hook <registry_loader_hook_0>
    registry_protocol <registry_protocol_0>
 
+:ref:`pca <library_pca>`
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   pca <pca_0>
+
 :ref:`pddl_parser <library_pddl_parser>`
 ----------------------------------------
 
@@ -1402,6 +1435,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    random_forest <random_forest_0>
+
+:ref:`random_projection <library_random_projection>`
+----------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   random_projection <random_projection_0>
 
 :ref:`ranking_protocols <library_ranking_protocols>`
 ----------------------------------------------------

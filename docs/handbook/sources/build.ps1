@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 19, 2026
+##   Last updated on April 20, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -109,6 +109,7 @@ Foreach-Object {
 (Get-Content ../../../library/deques/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/deques.rst
 (Get-Content ../../../library/dictionaries/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dictionaries.rst
 (Get-Content ../../../library/dif/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dif.rst
+(Get-Content ../../../library/dimension_reduction_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dimension_reduction_protocols.rst
 (Get-Content ../../../library/edcg/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/edcg.rst
 (Get-Content ../../../library/events/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/events.rst
 (Get-Content ../../../library/expand_library_alias_paths/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/expand_library_alias_paths.rst
@@ -139,6 +140,7 @@ Foreach-Object {
 (Get-Content ../../../library/knn/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/knn.rst
 (Get-Content ../../../library/knn_distance/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/knn_distance.rst
 (Get-Content ../../../library/ksuid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ksuid.rst
+(Get-Content ../../../library/lda_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lda_projection.rst
 (Get-Content ../../../library/linda/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linda.rst
 (Get-Content ../../../library/linear_svm/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linear_svm.rst
 (Get-Content ../../../library/listing/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/listing.rst
@@ -159,12 +161,14 @@ Foreach-Object {
 (Get-Content ../../../library/optionals/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/optionals.rst
 (Get-Content ../../../library/options/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/options.rst
 (Get-Content ../../../library/os/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/os.rst
+(Get-Content ../../../library/pca/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/pca.rst
 (Get-Content ../../../library/permutations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/permutations.rst
 (Get-Content ../../../library/process/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/process.rst
 (Get-Content ../../../library/protobuf/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/protobuf.rst
 (Get-Content ../../../library/queues/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/queues.rst
 (Get-Content ../../../library/random/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/random.rst
 (Get-Content ../../../library/random_forest/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/random_forest.rst
+(Get-Content ../../../library/random_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/random_projection.rst
 (Get-Content ../../../library/ranking_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ranking_protocols.rst
 (Get-Content ../../../library/reader/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/reader.rst
 (Get-Content ../../../library/recorded_database/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/recorded_database.rst

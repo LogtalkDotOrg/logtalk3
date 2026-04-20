@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-22,
+		date is 2026-04-20,
 		comment is 'Unit tests for the "simulated_annealing" library.'
 	]).
 
@@ -33,6 +33,7 @@
 		msort/2, length/2, member/2
 	]).
 
+	cover(simulated_annealing(_, _)).
 	cover(simulated_annealing(_)).
 
 	% quadratic problem with default options

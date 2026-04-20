@@ -455,6 +455,19 @@ To load an entity, always load the library that includes it using the goal ``log
 
    dif <dif_0>
 
+``library/dimension_reduction_protocols/``
+------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   dimension_reducer_common <dimension_reducer_common_0>
+   dimension_reducer_protocol <dimension_reducer_protocol_0>
+   dimension_reduction_dataset_protocol <dimension_reduction_dataset_protocol_0>
+   supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol_0>
+
 ``library/edcg/``
 -----------------
 
@@ -871,6 +884,16 @@ To load an entity, always load the library that includes it using the goal ``log
    ksuid(Representation,Alphabet) <ksuid_2>
    ksuid_protocol <ksuid_protocol_0>
 
+``library/lda_projection/``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   lda_projection <lda_projection_0>
+
 ``library/linda/``
 ------------------
 
@@ -1096,6 +1119,16 @@ To load an entity, always load the library that includes it using the goal ``log
    os_types <os_types_0>
    osp <osp_0>
 
+``library/pca/``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   pca <pca_0>
+
 ``library/permutations/``
 -------------------------
 
@@ -1164,6 +1197,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    random_forest <random_forest_0>
+
+``library/random_projection/``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   random_projection <random_projection_0>
 
 ``library/ranking_protocols/``
 ------------------------------

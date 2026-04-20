@@ -59,6 +59,7 @@ directory in the ``NOTES.md`` file.
    deques
    dictionaries
    dif
+   dimension_reduction_protocols
    edcg
    events
    expand_library_alias_paths
@@ -89,6 +90,7 @@ directory in the ``NOTES.md`` file.
    knn
    knn_distance
    ksuid
+   lda_projection
    linda
    linear_svm
    listing
@@ -109,12 +111,14 @@ directory in the ``NOTES.md`` file.
    optionals
    options
    os
+   pca
    permutations
    process
    protobuf
    queues
    random
    random_forest
+   random_projection
    ranking_protocols
    reader
    recorded_database

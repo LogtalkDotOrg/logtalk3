@@ -23,9 +23,9 @@
 	implements(geospatial_protocol)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
-		date is 2026-02-25,
+		date is 2026-04-20,
 		comment is 'Geospatial predicates over geographic coordinates represented as ``(Latitude,Longitude)``.',
 		remarks is [
 			'Distance unit' - 'Kilometers.',
@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2
+		append/3, length/2, reverse/2
 	]).
 
 	:- public(distance/4).
@@ -438,7 +438,7 @@
 		polygon_orientation(NormalizedPolygon, CurrentOrientation),
 		(	CurrentOrientation == clockwise ->
 			OrientedPolygon = NormalizedPolygon
-		;	reverse_list(NormalizedPolygon, OrientedPolygon)
+		;	reverse(NormalizedPolygon, OrientedPolygon)
 		).
 	normalize_polygon_orientation(Polygon, counterclockwise, OrientedPolygon) :-
 		!,
@@ -446,7 +446,7 @@
 		polygon_orientation(NormalizedPolygon, CurrentOrientation),
 		(	CurrentOrientation == counterclockwise ->
 			OrientedPolygon = NormalizedPolygon
-		;	reverse_list(NormalizedPolygon, OrientedPolygon)
+		;	reverse(NormalizedPolygon, OrientedPolygon)
 		).
 
 	clockwise_polygon(Polygon, ClockwisePolygon) :-
@@ -826,13 +826,6 @@
 	append_without_duplicate_last(Left, Right, Combined) :-
 		remove_last_polygon_coordinate(Left, LeftWithoutLast),
 		append(LeftWithoutLast, Right, Combined).
-
-	reverse_list(List, Reversed) :-
-		reverse_list(List, [], Reversed).
-
-	reverse_list([], Reversed, Reversed).
-	reverse_list([Item| Items], Accumulator, Reversed) :-
-		reverse_list(Items, [Item| Accumulator], Reversed).
 
 	point_segment_distance(Point, SegmentStart, SegmentEnd, Distance) :-
 		point_segment_projection(Point, SegmentStart, SegmentEnd, _, Distance).

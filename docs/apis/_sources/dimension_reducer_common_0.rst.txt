@@ -1,0 +1,309 @@
+.. index:: single: dimension_reducer_common
+.. _dimension_reducer_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``dimension_reducer_common``
+============================
+
+Shared predicates for dimension reducer learning defaults, dataset helpers, transformation, export, and printing.
+
+| **Availability:** 
+|    ``logtalk_load(dimension_reduction_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-20
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`population <population/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`dimension_reducer_protocol/0::export_to_clauses/4`  :ref:`dimension_reducer_protocol/0::export_to_file/4`  :ref:`dimension_reducer_protocol/0::learn/2`  :ref:`dimension_reducer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`dimension_reducer_protocol/0::print_dimension_reducer/1`  :ref:`dimension_reducer_protocol/0::transform/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: dimension_reducer_data/3
+.. _dimension_reducer_common/0::dimension_reducer_data/3:
+
+``dimension_reducer_data/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing dimension reducer implementations must define in order to expose the learned encoders and projection components.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dimension_reducer_data(DimensionReducer,Encoders,Components)``
+| **Mode and number of proofs:**
+|    ``dimension_reducer_data(+compound,-list,-list)`` - ``one``
+
+
+------------
+
+.. index:: print_dimension_reducer_properties/1
+.. _dimension_reducer_common/0::print_dimension_reducer_properties/1:
+
+``print_dimension_reducer_properties/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing dimension reducer implementations must define in order to print the learned reducer in a human-readable form.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_dimension_reducer_properties(DimensionReducer)``
+| **Mode and number of proofs:**
+|    ``print_dimension_reducer_properties(+compound)`` - ``one``
+
+
+------------
+
+.. index:: example_attribute_values/2
+.. _dimension_reducer_common/0::example_attribute_values/2:
+
+``example_attribute_values/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing dimension reducer implementations must define in order to extract example attribute values from their local training example representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``example_attribute_values(Example,AttributeValues)``
+| **Mode and number of proofs:**
+|    ``example_attribute_values(+compound,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: dataset_attributes/2
+.. _dimension_reducer_common/0::dataset_attributes/2:
+
+``dataset_attributes/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the dataset attribute declarations as `Attribute-Values` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dataset_attributes(Dataset,Attributes)``
+| **Mode and number of proofs:**
+|    ``dataset_attributes(+object_identifier,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: check_continuous_attributes/1
+.. _dimension_reducer_common/0::check_continuous_attributes/1:
+
+``check_continuous_attributes/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that all declared dataset attributes are continuous.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_continuous_attributes(Attributes)``
+| **Mode and number of proofs:**
+|    ``check_continuous_attributes(+list(pair))`` - ``one``
+
+
+------------
+
+.. index:: check_examples_non_empty/2
+.. _dimension_reducer_common/0::check_examples_non_empty/2:
+
+``check_examples_non_empty/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a training example collection is not empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_examples_non_empty(Dataset,Examples)``
+| **Mode and number of proofs:**
+|    ``check_examples_non_empty(+object_identifier,+list)`` - ``one``
+
+
+------------
+
+.. index:: check_example_values/2
+.. _dimension_reducer_common/0::check_example_values/2:
+
+``check_example_values/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that all example attribute values are present and numeric for the declared attributes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_example_values(Examples,AttributeNames)``
+| **Mode and number of proofs:**
+|    ``check_example_values(+list,+list(atom))`` - ``one``
+
+
+------------
+
+.. index:: check_example_attributes/2
+.. _dimension_reducer_common/0::check_example_attributes/2:
+
+``check_example_attributes/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a single example contains numeric values for all declared attributes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_example_attributes(AttributeNames,AttributeValues)``
+| **Mode and number of proofs:**
+|    ``check_example_attributes(+list(atom),+list(pair))`` - ``one``
+
+
+------------
+
+.. index:: attribute_value/3
+.. _dimension_reducer_common/0::attribute_value/3:
+
+``attribute_value/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Looks up an attribute value in a list of `Attribute-Value` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``attribute_value(Attribute,AttributeValues,Value)``
+| **Mode and number of proofs:**
+|    ``attribute_value(+atom,+list(pair),-term)`` - ``one``
+
+
+------------
+
+.. index:: build_encoders/4
+.. _dimension_reducer_common/0::build_encoders/4:
+
+``build_encoders/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Builds continuous feature encoders by computing per-attribute centering and optional scaling statistics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``build_encoders(AttributeNames,Examples,Options,Encoders)``
+| **Mode and number of proofs:**
+|    ``build_encoders(+list(atom),+list,+list(compound),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: known_attribute_values/3
+.. _dimension_reducer_common/0::known_attribute_values/3:
+
+``known_attribute_values/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the known numeric values for a given attribute across the training examples.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``known_attribute_values(Attribute,Examples,Values)``
+| **Mode and number of proofs:**
+|    ``known_attribute_values(+atom,+list,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: encode_instance/3
+.. _dimension_reducer_common/0::encode_instance/3:
+
+``encode_instance/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Encodes an instance using the learned continuous attribute encoders.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_instance(Encoders,AttributeValues,Features)``
+| **Mode and number of proofs:**
+|    ``encode_instance(+list(compound),+list(pair),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: project_components/4
+.. _dimension_reducer_common/0::project_components/4:
+
+``project_components/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Projects encoded features onto the learned components and returns `component_N-Score` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``project_components(Components,Features,Index,ReducedInstance)``
+| **Mode and number of proofs:**
+|    ``project_components(+list(list(number)),+list(number),+integer,-list(pair))`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

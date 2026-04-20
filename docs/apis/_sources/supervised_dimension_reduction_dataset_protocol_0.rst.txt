@@ -1,0 +1,111 @@
+.. index:: single: supervised_dimension_reduction_dataset_protocol
+.. _supervised_dimension_reduction_dataset_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``supervised_dimension_reduction_dataset_protocol``
+===================================================
+
+Protocol for labeled datasets used with supervised dimension reduction algorithms such as LDA.
+
+| **Availability:** 
+|    ``logtalk_load(dimension_reduction_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-18
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`dimension_reduction_dataset_protocol <dimension_reduction_dataset_protocol/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`dimension_reduction_dataset_protocol/0::attribute_values/2`  :ref:`dimension_reduction_dataset_protocol/0::example/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: class/1
+.. _supervised_dimension_reduction_dataset_protocol/0::class/1:
+
+``class/1``
+^^^^^^^^^^^
+
+Returns the name of the target class attribute.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``class(Class)``
+| **Mode and number of proofs:**
+|    ``class(-atom)`` - ``one``
+
+
+------------
+
+.. index:: class_values/1
+.. _supervised_dimension_reduction_dataset_protocol/0::class_values/1:
+
+``class_values/1``
+^^^^^^^^^^^^^^^^^^
+
+Returns the list of possible values for the target class attribute.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``class_values(Values)``
+| **Mode and number of proofs:**
+|    ``class_values(-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: example/3
+.. _supervised_dimension_reduction_dataset_protocol/0::example/3:
+
+``example/3``
+^^^^^^^^^^^^^
+
+Enumerates by backtracking the labeled examples in the dataset. Each example has an ``Id``, a ``Class`` value, and a list of ``Attribute-Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``example(Id,Class,AttributeValues)``
+| **Mode and number of proofs:**
+|    ``example(-integer,-atom,-list(pair))`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

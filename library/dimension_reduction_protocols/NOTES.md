@@ -1,0 +1,105 @@
+________________________________________________________________________
+
+This file is part of Logtalk <https://logtalk.org/>
+SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+SPDX-License-Identifier: Apache-2.0
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+________________________________________________________________________
+
+
+`dimension_reduction_protocols`
+===============================
+
+This library provides protocols and a reusable category used in the
+implementation of machine learning dimension reduction algorithms.
+Unsupervised datasets are represented as objects implementing the
+`dimension_reduction_dataset_protocol` protocol. Labeled datasets for
+supervised reducers such as Linear Discriminant Analysis are represented
+as objects implementing the
+`supervised_dimension_reduction_dataset_protocol` protocol. Dimension
+reducers are represented as objects importing the `dimension_reducer_common`
+category.
+
+This library also provides reusable test datasets and a small smoke-test
+suite.
+
+Concrete dimension reduction algorithms are intentionally out of scope
+for this package. The goal is to provide a portable foundation for
+libraries such as `pca`, `random_projection`, and `lda_projection`,
+including shared reducer helpers for common tasks such as feature
+encoding, projection, export, and pretty-printing.
+
+Exported reducers are serialized protocol-wide as single-argument
+predicates such as `reducer(Reducer)`, allowing the saved reducer term to
+be loaded and passed directly to `transform/3`.
+
+
+API documentation
+-----------------
+
+Open the [../../apis/library_index.html#dimension_reduction_protocols](../../apis/library_index.html#dimension_reduction_protocols)
+link in a web browser.
+
+
+Loading
+-------
+
+To load all entities in this library, load the `loader.lgt` file:
+
+	| ?- logtalk_load(dimension_reduction_protocols(loader)).
+
+
+Common options
+--------------
+
+The `dimension_reducer_common` category supports the `feature_scaling/1`
+option used by importing reducers to control continuous feature
+normalization before projection:
+
+- `feature_scaling(on)` standardizes each continuous attribute using its
+  training-set mean and standard deviation.
+
+- `feature_scaling(off)` only centers each continuous attribute using its
+  training-set mean.
+
+The current `pca`, `random_projection`, and `lda_projection` libraries
+all define `feature_scaling(on)` as their default.
+
+
+Testing
+-------
+
+To run the library smoke tests, load the `tester.lgt` file:
+
+	| ?- logtalk_load(dimension_reduction_protocols(tester)).
+
+
+Test datasets
+-------------
+
+Several sample datasets are included in the `test_datasets` directory:
+
+- `correlated_plane.lgt` — A compact continuous dataset with 8 examples
+  and 3 continuous attributes (`x`, `y`, `z`) where the features are
+  strongly correlated. It is intended for PCA and projection smoke
+  tests.
+
+- `high_dimensional_measurements.lgt` — A small continuous dataset with 10
+  examples and 6 continuous attributes (`f1` through `f6`). It is
+  intended for testing projected dimensionality and reducer output shape.
+
+- `labeled_measurements.lgt` — A compact labeled continuous dataset with 9
+  examples, 4 continuous attributes (`length`, `width`, `height`,
+  `weight`), and 3 class labels (`alpha`, `beta`, `gamma`). It is
+  intended for testing supervised reducers such as `lda_projection`.

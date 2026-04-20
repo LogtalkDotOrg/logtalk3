@@ -29,7 +29,7 @@
 	:- public(sorted_scores/4).
 
 	:- uses(list, [
-		length/2, member/2, memberchk/2, reverse/2
+		length/2, member/2, memberchk/2, msort/2, reverse/2
 	]).
 
 	validate_anomaly_dataset(Dataset) :-

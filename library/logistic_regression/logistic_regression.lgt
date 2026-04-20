@@ -209,8 +209,8 @@
 		encoders_feature_count(Encoders, Count1, Count).
 
 	train_models([], _, _, _, []).
-	train_models(Classes, Rows, NumFeatures, Options, Models) :-
-		initialize_models(Classes, NumFeatures, InitialModels),
+	train_models([Class| Classes], Rows, NumFeatures, Options, Models) :-
+		initialize_models([Class| Classes], NumFeatures, InitialModels),
 		optimize_models(Rows, Options, 0, InitialModels, Models).
 
 	initialize_models([], _, []).

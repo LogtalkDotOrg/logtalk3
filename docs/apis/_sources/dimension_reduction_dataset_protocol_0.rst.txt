@@ -1,0 +1,94 @@
+.. index:: single: dimension_reduction_dataset_protocol
+.. _dimension_reduction_dataset_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``dimension_reduction_dataset_protocol``
+========================================
+
+Protocol for datasets used with unsupervised dimension reduction algorithms.
+
+| **Availability:** 
+|    ``logtalk_load(dimension_reduction_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-20
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: attribute_values/2
+.. _dimension_reduction_dataset_protocol/0::attribute_values/2:
+
+``attribute_values/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates by backtracking the attributes and their possible values. For discrete attributes, ``Values`` is a list of possible values. For continuous (numeric) attributes, ``Values`` is the atom ``continuous``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``attribute_values(Attribute,Values)``
+| **Mode and number of proofs:**
+|    ``attribute_values(?atom,-list(atom))`` - ``zero_or_more``
+|    ``attribute_values(?atom,-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: example/2
+.. _dimension_reduction_dataset_protocol/0::example/2:
+
+``example/2``
+^^^^^^^^^^^^^
+
+Enumerates by backtracking the examples in the dataset. Each example has an ``Id`` and a list of ``Attribute-Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``example(Id,AttributeValues)``
+| **Mode and number of proofs:**
+|    ``example(-integer,-list(pair))`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

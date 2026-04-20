@@ -36,6 +36,7 @@ Categories
    dead_code_scanner_messages <dead_code_scanner_messages_0>
    debugger_messages <debugger_messages_0>
    diagram(Format) <diagram_1>
+   dimension_reducer_common <dimension_reducer_common_0>
    directed_graph_common <directed_graph_common_0>
    directory_diagram(Format) <directory_diagram_1>
    file_diagram(Format) <file_diagram_1>
@@ -274,6 +275,7 @@ Objects
    ksuid(Representation,Alphabet) <ksuid_2>
    lcom_metric <lcom_metric_0>
    lcov_report <lcov_report_0>
+   lda_projection <lda_projection_0>
    lgtdoc <lgtdoc_0>
    lgtunit <lgtunit_0>
    library_dependency_diagram <library_dependency_diagram_0>
@@ -339,6 +341,7 @@ Objects
    pairing_heap_max <pairing_heap_max_0>
    pairing_heap_min <pairing_heap_min_0>
    pairs <pairs_0>
+   pca <pca_0>
    pddl <pddl_0>
    permutations <permutations_0>
    plantuml_graph_language <plantuml_graph_language_0>
@@ -354,6 +357,7 @@ Objects
    random <random_0>
    random(Algorithm) <random_1>
    random_forest <random_forest_0>
+   random_projection <random_projection_0>
    rbtree <rbtree_0>
    reader <reader_0>
    recorded_database <recorded_database_0>
@@ -518,6 +522,8 @@ Protocols
    debuggerp <debuggerp_0>
    deque_protocol <deque_protocol_0>
    dictionaryp <dictionaryp_0>
+   dimension_reducer_protocol <dimension_reducer_protocol_0>
+   dimension_reduction_dataset_protocol <dimension_reduction_dataset_protocol_0>
    directed_graph_protocol <directed_graph_protocol_0>
    directive_mutator_protocol <directive_mutator_protocol_0>
    event_registryp <event_registryp_0>
@@ -577,6 +583,7 @@ Protocols
    statisticsp <statisticsp_0>
    stemmer_protocol <stemmer_protocol_0>
    subsequences_protocol <subsequences_protocol_0>
+   supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol_0>
    term_io_protocol <term_io_protocol_0>
    termp <termp_0>
    time_scales_protocol <time_scales_protocol_0>

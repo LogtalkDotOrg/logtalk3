@@ -1,0 +1,87 @@
+.. index:: single: lda_projection
+.. _lda_projection/0:
+
+.. rst-class:: right
+
+**object**
+
+``lda_projection``
+==================
+
+Linear Discriminant Analysis projection for labeled continuous datasets using a portable regularized Fisher eigensolver.
+
+| **Availability:** 
+|    ``logtalk_load(lda_projection(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-20
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`dimension_reducer_common <dimension_reducer_common/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`pairs <pairs/0>`
+|    :ref:`population <population/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Algorithm: Centers the training data, optionally standardizes continuous attributes, builds regularized within-class and between-class scatter matrices, whitens the Fisher criterion using a Cholesky factorization, and extracts discriminant directions using deterministic power iteration with deflation.
+   - Feature handling: Supports continuous attributes only. Missing or nonnumeric values are rejected.
+   - Supervision: Requires a dataset implementing ``supervised_dimension_reduction_dataset_protocol`` and therefore uses class labels during training.
+   - Dimension reducer representation: The learned reducer is represented by default as ``lda_projection_reducer(Encoders, Components, ClassValues, Options)`` where ``Encoders`` stores attribute centering/scaling metadata and ``Components`` stores the learned discriminant vectors.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`dimension_reducer_protocol/0::export_to_clauses/4`  :ref:`dimension_reducer_protocol/0::export_to_file/4`  :ref:`dimension_reducer_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`dimension_reducer_protocol/0::print_dimension_reducer/1`  :ref:`dimension_reducer_protocol/0::transform/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/3
+.. _lda_projection/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns an LDA projection from the given labeled dataset object using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,DimensionReducer,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0>`, :ref:`dimension_reduction_dataset_protocol <dimension_reduction_dataset_protocol/0>`, :ref:`supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol/0>`, :ref:`pca <pca/0>`, :ref:`random_projection <random_projection/0>`
+
