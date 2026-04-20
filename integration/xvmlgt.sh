@@ -28,7 +28,7 @@ source "$(dirname "$0")/logtalk_setup_env.sh"
 setup_logtalk_env || exit 1
 
 if [ -e "$(command -v rlwrap)" ] ; then
-	exec rlwrap -a -n xvmpl -f "$LOGTALKHOME/integration/logtalk_xvm.pl" "$@"
+	exec rlwrap -n xvmpl -f "$LOGTALKHOME/integration/logtalk_xvm.pl" "$@"
 else
 	exec xvmpl -f "$LOGTALKHOME/integration/logtalk_xvm.pl" "$@"
 fi
