@@ -1,0 +1,100 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- object(tests,
+	extends(lgtunit)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-21,
+		comment is 'Unit tests for the "gradient_boosting_regression" library.'
+	]).
+
+	:- uses(lgtunit, [
+		op(700, xfx, =~=), (=~=)/2
+	]).
+
+	:- uses(list, [
+		length/2, memberchk/2
+	]).
+
+	cover(gradient_boosting_regression).
+
+	cleanup :-
+		^^clean_file('test_output.pl').
+
+	test(gradient_boosting_regression_learn_2_step_signal, deterministic(ground(Regressor))) :-
+		gradient_boosting_regression::learn(step_signal, Regressor).
+
+	test(gradient_boosting_regression_learn_2_structure, deterministic(functor(Regressor, gradient_boosting_regressor, 3))) :-
+		gradient_boosting_regression::learn(step_signal, Regressor).
+
+	test(gradient_boosting_regression_learn_3_custom_options, deterministic((length(WeightedTrees, StageCount), StageCount >= 1, StageCount =< 5, memberchk(number_of_estimators(5), Options), memberchk(learning_rate(1.0), Options), memberchk(maximum_depth(3), Options), memberchk(minimum_samples_leaf(2), Options), memberchk(feature_scaling(off), Options)))) :-
+		gradient_boosting_regression::learn(step_signal, gradient_boosting_regressor(_InitialPrediction, WeightedTrees, Options), [number_of_estimators(5), learning_rate(1.0), maximum_depth(3), minimum_samples_leaf(2), feature_scaling(off)]).
+
+	test(gradient_boosting_regression_predict_3_step_signal_left_band, deterministic(Prediction =~= 10.0)) :-
+		gradient_boosting_regression::learn(step_signal, Regressor, [number_of_estimators(5), learning_rate(1.0), maximum_depth(2)]),
+		gradient_boosting_regression::predict(Regressor, [x-1.5], Prediction).
+
+	test(gradient_boosting_regression_predict_3_step_signal_right_band, deterministic(Prediction =~= 20.0)) :-
+		gradient_boosting_regression::learn(step_signal, Regressor, [number_of_estimators(5), learning_rate(1.0), maximum_depth(2)]),
+		gradient_boosting_regression::predict(Regressor, [x-8.5], Prediction).
+
+	test(gradient_boosting_regression_predict_3_intercept_only, deterministic(Prediction =~= 7.0)) :-
+		gradient_boosting_regression::learn(intercept_only, Regressor),
+		gradient_boosting_regression::predict(Regressor, [dummy-0], Prediction).
+
+	test(gradient_boosting_regression_predict_3_mixed_signal, deterministic(Prediction =~= 175.0)) :-
+		gradient_boosting_regression::learn(mixed_signal, Regressor, [number_of_estimators(3), learning_rate(1.0), maximum_depth(4), feature_scaling(off)]),
+		gradient_boosting_regression::predict(Regressor, [age-20, student-yes, plan-premium], Prediction).
+
+	test(gradient_boosting_regression_export_to_clauses_4, deterministic(Prediction =~= 20.0)) :-
+		gradient_boosting_regression::learn(step_signal, Regressor, [number_of_estimators(5), learning_rate(1.0), maximum_depth(2)]),
+		gradient_boosting_regression::export_to_clauses(step_signal, Regressor, regress, [Clause]),
+		gradient_boosting_regression::predict(Clause, [x-9], Prediction).
+
+	test(gradient_boosting_regression_export_to_file_4_written, deterministic(os::file_exists(File))) :-
+		^^file_path('test_output.pl', File),
+		gradient_boosting_regression::learn(step_signal, Regressor),
+		gradient_boosting_regression::export_to_file(step_signal, Regressor, regress, File).
+
+	test(gradient_boosting_regression_export_to_file_4_loaded, deterministic(Prediction =~= 10.0)) :-
+		^^file_path('test_output.pl', File),
+		gradient_boosting_regression::learn(step_signal, Regressor, [number_of_estimators(5), learning_rate(1.0), maximum_depth(2)]),
+		gradient_boosting_regression::export_to_file(step_signal, Regressor, regress, File),
+		logtalk_load(File),
+		{regress(InitialPrediction, WeightedTrees, Options)},
+		gradient_boosting_regression::predict(regress(InitialPrediction, WeightedTrees, Options), [x-2], Prediction).
+
+	test(gradient_boosting_regression_print_regressor_1, deterministic) :-
+		^^suppress_text_output,
+		gradient_boosting_regression::learn(step_signal, Regressor),
+		gradient_boosting_regression::print_regressor(Regressor).
+
+	test(gradient_boosting_regression_learn_2_invalid_target, error(type_error(number, bad))) :-
+		gradient_boosting_regression::learn(invalid_target, _Regressor).
+
+	test(gradient_boosting_regression_predict_3_unknown_category, error(domain_error(attribute_value(plan, [basic, premium]), deluxe))) :-
+		gradient_boosting_regression::learn(mixed_signal, Regressor, [number_of_estimators(3), learning_rate(1.0), maximum_depth(4)]),
+		gradient_boosting_regression::predict(Regressor, [age-20, student-yes, plan-deluxe], _Prediction).
+
+:- end_object.

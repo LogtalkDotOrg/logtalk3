@@ -1,0 +1,173 @@
+.. index:: single: regressor_protocol
+.. _regressor_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``regressor_protocol``
+======================
+
+Protocol for machine learning regressors.
+
+| **Availability:** 
+|    ``logtalk_load(regression_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-21
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/3
+.. _regressor_protocol/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns a regressor from the given dataset object using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Regressor,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: learn/2
+.. _regressor_protocol/0::learn/2:
+
+``learn/2``
+^^^^^^^^^^^
+
+Learns a regressor from the given dataset object using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Regressor)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound)`` - ``one``
+
+
+------------
+
+.. index:: predict/3
+.. _regressor_protocol/0::predict/3:
+
+``predict/3``
+^^^^^^^^^^^^^
+
+Predicts the numeric target value for a new instance using the learned regressor. The instance is a list of ``Attribute-Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predict(Regressor,Instance,Target)``
+| **Mode and number of proofs:**
+|    ``predict(+compound,+list,-number)`` - ``one``
+
+
+------------
+
+.. index:: export_to_clauses/4
+.. _regressor_protocol/0::export_to_clauses/4:
+
+``export_to_clauses/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a regressor into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized regressor term, a noun such as ``regressor`` or ``model`` is usually clearer than a verb such as ``predict``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_clauses(Dataset,Regressor,Functor,Clauses)``
+| **Mode and number of proofs:**
+|    ``export_to_clauses(+object_identifier,+compound,+callable,-list(clause))`` - ``one``
+
+
+------------
+
+.. index:: export_to_file/4
+.. _regressor_protocol/0::export_to_file/4:
+
+``export_to_file/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Exports a regressor to a file. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized regressor term, a noun such as ``regressor`` or ``model`` is usually clearer than a verb such as ``predict``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_file(Dataset,Regressor,Functor,File)``
+| **Mode and number of proofs:**
+|    ``export_to_file(+object_identifier,+compound,+callable,+atom)`` - ``one``
+
+
+------------
+
+.. index:: print_regressor/1
+.. _regressor_protocol/0::print_regressor/1:
+
+``print_regressor/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Prints a regressor to the current output stream in a human-readable format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_regressor(Regressor)``
+| **Mode and number of proofs:**
+|    ``print_regressor(+compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`linear_regression <linear_regression/0>`, :ref:`regression_dataset_protocol <regression_dataset_protocol/0>`
+

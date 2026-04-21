@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on April 20, 2026
+%  Last updated on April 21, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -73,6 +73,7 @@ logtalk_library_path(gensym, library('gensym/')).
 logtalk_library_path(genint, library('genint/')).
 logtalk_library_path(geospatial, library('geospatial/')).
 logtalk_library_path(git, library('git/')).
+logtalk_library_path(gradient_boosting_regression, library('gradient_boosting_regression/')).
 logtalk_library_path(grammars, library('grammars/')).
 logtalk_library_path(graphs, library('graphs/')).
 logtalk_library_path(hashes, library('hashes/')).
@@ -93,9 +94,11 @@ logtalk_library_path(json_schema, library('json_schema/')).
 logtalk_library_path(json_ld, library('json_ld/')).
 logtalk_library_path(knn, library('knn/')).
 logtalk_library_path(knn_distance, library('knn_distance/')).
+logtalk_library_path(knn_regression, library('knn_regression/')).
 logtalk_library_path(ksuid, library('ksuid/')).
 logtalk_library_path(lda_projection, library('lda_projection/')).
 logtalk_library_path(linda, library('linda/')).
+logtalk_library_path(linear_regression, library('linear_regression/')).
 logtalk_library_path(linear_svm, library('linear_svm/')).
 logtalk_library_path(listing, library('listing/')).
 logtalk_library_path(lof, library('lof/')).
@@ -122,11 +125,14 @@ logtalk_library_path(protobuf, library('protobuf/')).
 logtalk_library_path(queues, library('queues/')).
 logtalk_library_path(random, library('random/')).
 logtalk_library_path(random_forest, library('random_forest/')).
+logtalk_library_path(random_forest_regression, library('random_forest_regression/')).
 logtalk_library_path(random_projection, library('random_projection/')).
 logtalk_library_path(ranking_protocols, library('ranking_protocols/')).
 logtalk_library_path(reader, library('reader/')).
 logtalk_library_path(recorded_database, library('recorded_database/')).
 logtalk_library_path(redis, library('redis/')).
+logtalk_library_path(regression_protocols, library('regression_protocols/')).
+logtalk_library_path(regression_tree, library('regression_tree/')).
 logtalk_library_path(sets, library('sets/')).
 logtalk_library_path(simulated_annealing, library('simulated_annealing/')).
 logtalk_library_path(snowflakeid, library('snowflakeid/')).

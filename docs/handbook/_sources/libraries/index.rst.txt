@@ -69,6 +69,7 @@ directory in the ``NOTES.md`` file.
    gensym
    geospatial
    git
+   gradient_boosting_regression
    grammars
    graphs
    hashes
@@ -89,9 +90,11 @@ directory in the ``NOTES.md`` file.
    json_schema
    knn
    knn_distance
+   knn_regression
    ksuid
    lda_projection
    linda
+   linear_regression
    linear_svm
    listing
    lof
@@ -118,11 +121,14 @@ directory in the ``NOTES.md`` file.
    queues
    random
    random_forest
+   random_forest_regression
    random_projection
    ranking_protocols
    reader
    recorded_database
    redis
+   regression_protocols
+   regression_tree
    sets
    snowflakeid
    sockets

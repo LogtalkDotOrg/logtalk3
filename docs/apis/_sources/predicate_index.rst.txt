@@ -975,6 +975,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`anomaly_dataset_protocol <anomaly_dataset_protocol/0::attribute_values/2>`
 * :ref:`dataset_protocol <dataset_protocol/0::attribute_values/2>`
 * :ref:`dimension_reduction_dataset_protocol <dimension_reduction_dataset_protocol/0::attribute_values/2>`
+* :ref:`regression_dataset_protocol <regression_dataset_protocol/0::attribute_values/2>`
 
 ``available/0``
 ---------------
@@ -5027,6 +5028,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`anomaly_dataset_protocol <anomaly_dataset_protocol/0::example/3>`
 * :ref:`dataset_protocol <dataset_protocol/0::example/3>`
+* :ref:`regression_dataset_protocol <regression_dataset_protocol/0::example/3>`
 * :ref:`supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol/0::example/3>`
 
 ``exchange_bind/4``
@@ -5211,6 +5213,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`classifier_protocol <classifier_protocol/0::export_to_clauses/4>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::export_to_clauses/4>`
 * :ref:`ranker_protocol <ranker_protocol/0::export_to_clauses/4>`
+* :ref:`regressor_protocol <regressor_protocol/0::export_to_clauses/4>`
 
 ``export_to_file/4``
 --------------------
@@ -5224,6 +5227,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`classifier_protocol <classifier_protocol/0::export_to_file/4>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::export_to_file/4>`
 * :ref:`ranker_protocol <ranker_protocol/0::export_to_file/4>`
+* :ref:`regressor_protocol <regressor_protocol/0::export_to_file/4>`
 
 ``extension/1``
 ---------------
@@ -8770,6 +8774,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::learn/2>`
 * :ref:`metagol <metagol/0::learn/2>`
 * :ref:`ranker_protocol <ranker_protocol/0::learn/2>`
+* :ref:`regressor_protocol <regressor_protocol/0::learn/2>`
 
 ``learn/3``
 -----------
@@ -8783,13 +8788,19 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::learn/3>`
 * :ref:`bradley_terry <bradley_terry/0::learn/3>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::learn/3>`
+* :ref:`gradient_boosting_regression <gradient_boosting_regression/0::learn/3>`
+* :ref:`knn_regression <knn_regression/0::learn/3>`
 * :ref:`lda_projection <lda_projection/0::learn/3>`
+* :ref:`linear_regression <linear_regression/0::learn/3>`
 * :ref:`linear_svm <linear_svm/0::learn/3>`
 * :ref:`logistic_regression <logistic_regression/0::learn/3>`
 * :ref:`metagol <metagol/0::learn/3>`
 * :ref:`pca <pca/0::learn/3>`
 * :ref:`random_forest <random_forest/0::learn/3>`
+* :ref:`random_forest_regression <random_forest_regression/0::learn/3>`
 * :ref:`random_projection <random_projection/0::learn/3>`
+* :ref:`regression_tree <regression_tree/0::learn/3>`
+* :ref:`regressor_protocol <regressor_protocol/0::learn/3>`
 
 ``learn_seq/2``
 ---------------
@@ -13025,6 +13036,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::predict/3>`
 * :ref:`classifier_protocol <classifier_protocol/0::predict/3>`
+* :ref:`regressor_protocol <regressor_protocol/0::predict/3>`
 
 ``predict/4``
 -------------
@@ -13275,6 +13287,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ranker_protocol <ranker_protocol/0::print_ranker/1>`
+
+``print_regressor/1``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`regressor_protocol <regressor_protocol/0::print_regressor/1>`
 
 ``product/2``
 -------------
@@ -16857,6 +16879,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`listp <listp/0::take/4>`
+
+``target/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`regression_dataset_protocol <regression_dataset_protocol/0::target/1>`
 
 ``tcb_minus_tdb_approx/3``
 --------------------------

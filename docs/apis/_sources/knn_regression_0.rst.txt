@@ -1,0 +1,90 @@
+.. index:: single: knn_regression
+.. _knn_regression/0:
+
+.. rst-class:: right
+
+**object**
+
+``knn_regression``
+==================
+
+k-Nearest Neighbors regressor with multiple distance metrics, weighting schemes, optional feature scaling, and mixed-feature support.
+
+| **Availability:** 
+|    ``logtalk_load(knn_regression(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-21
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+|    ``public`` :ref:`regressor_common <regressor_common/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`population <population/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Algorithm: Learns lazily by storing encoded training rows and predicts targets as the weighted average of the k nearest neighbors.
+   - Distance metrics: Supports Euclidean, Manhattan, Chebyshev, and Minkowski distance metrics over encoded numeric feature vectors.
+   - Weighting schemes: Supports uniform, distance-based, and Gaussian weighting of neighbors.
+   - Feature handling: Continuous features may be standardized using z-score scaling. Categorical features are one-hot encoded from the declared dataset attribute values.
+   - Missing values: Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.
+   - Regressor representation: The learned regressor is represented by default as ``knn_regressor(Encoders, Rows, Options)`` where ``Rows`` stores encoded feature vectors paired with numeric targets.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`regressor_protocol/0::export_to_clauses/4`  :ref:`regressor_protocol/0::export_to_file/4`  :ref:`regressor_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`regressor_protocol/0::predict/3`  :ref:`regressor_protocol/0::print_regressor/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/3
+.. _knn_regression/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns a regressor from the given dataset object using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Regressor,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`linear_regression <linear_regression/0>`, :ref:`regression_tree <regression_tree/0>`, :ref:`random_forest_regression <random_forest_regression/0>`, :ref:`gradient_boosting_regression <gradient_boosting_regression/0>`
+

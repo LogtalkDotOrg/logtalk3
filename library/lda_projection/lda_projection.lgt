@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-21,
 		comment is 'Linear Discriminant Analysis projection for labeled continuous datasets using a portable regularized Fisher eigensolver.',
 		remarks is [
 			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, builds regularized within-class and between-class scatter matrices, whitens the Fisher criterion using a Cholesky factorization, and extracts discriminant directions using deterministic power iteration with deflation.',
@@ -502,14 +502,12 @@
 	valid_option(n_components(Components)) :-
 		valid(positive_integer, Components).
 	valid_option(feature_scaling(FeatureScaling)) :-
-		memberchk(FeatureScaling, [on, off]).
+		once((FeatureScaling == on; FeatureScaling == off)).
 	valid_option(maximum_iterations(MaximumIterations)) :-
 		valid(positive_integer, MaximumIterations).
 	valid_option(tolerance(Tolerance)) :-
-		number(Tolerance),
-		Tolerance > 0.0.
+		valid(positive_float, Tolerance).
 	valid_option(regularization(Regularization)) :-
-		number(Regularization),
-		Regularization > 0.0.
+		valid(positive_float, Regularization).
 
 :- end_object.

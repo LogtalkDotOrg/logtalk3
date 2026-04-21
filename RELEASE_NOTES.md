@@ -41,6 +41,28 @@ across all machine learning libraries.
 `anomaly_protocols` library instead of `classifier_protocols` (functionality
 preserved but four export and print predicates were renamed with this change).
 
+* ADDED: New `regression_protocols`  library with protocols and datasets
+for use in the implementation of machine learning regression algorithms.
+
+* ADDED: New `gradient_boosting_regression` library implementing
+gradient boosting regression using regression trees as additive base
+learners fitted to successive residuals.
+
+* ADDED: New `knn_regression` library implementing k-nearest neighbors
+regression with multiple distance metrics, weighting schemes, optional
+feature scaling, and mixed-feature support.
+
+* ADDED: New `linear_regression` library implementing linear regression
+for continuous and mixed-feature datasets using batch gradient descent.
+
+* ADDED: New `regression_tree` library implementing regression trees for
+continuous and mixed-feature datasets using recursive variance-reduction
+splits.
+
+* ADDED: New `random_forest_regression` library implementing random
+forest regression using regression trees trained on bootstrap samples
+and random feature subsets.
+
 * ADDED: New `dimension_reduction_protocols` library with protocols and
 datasets for use in the implementation of machine learning dimension
 reduction algorithms.

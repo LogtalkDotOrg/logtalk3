@@ -1,0 +1,90 @@
+.. index:: single: random_forest_regression
+.. _random_forest_regression/0:
+
+.. rst-class:: right
+
+**object**
+
+``random_forest_regression``
+============================
+
+Random Forest regression using regression trees as base learners trained on bootstrap samples and random feature subsets.
+
+| **Availability:** 
+|    ``logtalk_load(random_forest_regression(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-21
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+|    ``public`` :ref:`regressor_common <regressor_common/0>`
+| **Uses:**
+|    :ref:`fast_random <fast_random/0>`
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`pairs <pairs/0>`
+|    :ref:`population <population/0>`
+|    :ref:`regression_tree <regression_tree/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Algorithm: Builds an ensemble of regression trees trained on bootstrap samples and random feature subsets and predicts using the arithmetic mean of the individual tree predictions.
+   - Bootstrap sampling: Each tree is trained on a bootstrap sample drawn with replacement from the original training examples.
+   - Feature randomization: Each tree uses a random subset of the available dataset attributes. The default number of features is the square root of the total number of features.
+   - Regressor representation: The learned regressor is represented by default as ``rf_regressor(Trees, Options)`` where ``Trees`` contains ``tree(TreeRegressor, AttributeNames)`` terms.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`regressor_protocol/0::export_to_clauses/4`  :ref:`regressor_protocol/0::export_to_file/4`  :ref:`regressor_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`regressor_protocol/0::predict/3`  :ref:`regressor_protocol/0::print_regressor/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/3
+.. _random_forest_regression/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns a regressor from the given dataset object using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Regressor,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`linear_regression <linear_regression/0>`, :ref:`knn_regression <knn_regression/0>`, :ref:`regression_tree <regression_tree/0>`, :ref:`gradient_boosting_regression <gradient_boosting_regression/0>`
+

@@ -1,0 +1,171 @@
+.. index:: single: regressor_common
+.. _regressor_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``regressor_common``
+====================
+
+Shared predicates for regressor learning defaults, dataset validation, export, and pretty-print helpers.
+
+| **Availability:** 
+|    ``logtalk_load(regression_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-21
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`regressor_protocol <regressor_protocol/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`regressor_protocol/0::export_to_clauses/4`  :ref:`regressor_protocol/0::export_to_file/4`  :ref:`regressor_protocol/0::learn/2`  :ref:`regressor_protocol/0::learn/3`  :ref:`regressor_protocol/0::predict/3`  :ref:`regressor_protocol/0::print_regressor/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: regressor_options/2
+.. _regressor_common/0::regressor_options/2:
+
+``regressor_options/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing regressor implementations may override in order to expose the effective regressor options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``regressor_options(Regressor,Options)``
+| **Mode and number of proofs:**
+|    ``regressor_options(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: regressor_export_template/4
+.. _regressor_common/0::regressor_export_template/4:
+
+``regressor_export_template/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing regressor implementations must define in order to expose the exported regressor template for a given functor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``regressor_export_template(Dataset,Regressor,Functor,Template)``
+| **Mode and number of proofs:**
+|    ``regressor_export_template(+object_identifier,+compound,+atom,-callable)`` - ``one``
+
+
+------------
+
+.. index:: regressor_term_template/2
+.. _regressor_common/0::regressor_term_template/2:
+
+``regressor_term_template/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing regressor implementations must define in order to expose the learned regressor term template used by pretty-printing helpers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``regressor_term_template(Regressor,Template)``
+| **Mode and number of proofs:**
+|    ``regressor_term_template(+compound,-callable)`` - ``one``
+
+
+------------
+
+.. index:: dataset_attributes/2
+.. _regressor_common/0::dataset_attributes/2:
+
+``dataset_attributes/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the dataset attribute declarations as `Attribute-Values` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dataset_attributes(Dataset,Attributes)``
+| **Mode and number of proofs:**
+|    ``dataset_attributes(+object_identifier,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: check_examples/2
+.. _regressor_common/0::check_examples/2:
+
+``check_examples/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Validates that the collected examples list is non-empty and only contains numeric targets.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_examples(Dataset,Examples)``
+| **Mode and number of proofs:**
+|    ``check_examples(+object_identifier,+list)`` - ``one``
+
+
+------------
+
+.. index:: print_regressor_template/1
+.. _regressor_common/0::print_regressor_template/1:
+
+``print_regressor_template/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Pretty-printing helper predicate used by importing regressor implementations to show the learned regressor term template.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_regressor_template(Regressor)``
+| **Mode and number of proofs:**
+|    ``print_regressor_template(+compound)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

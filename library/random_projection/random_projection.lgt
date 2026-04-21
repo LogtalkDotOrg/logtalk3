@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-21,
 		comment is 'Random projection reducer for continuous datasets using a portable seeded Rademacher projection matrix.',
 		remarks is [
 			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, and samples a dense Rademacher projection matrix with entries in {-$1/sqrt(k)$, +$1/sqrt(k)$} where $k$ is the requested reduced dimensionality.',
@@ -135,7 +135,7 @@
 	valid_option(n_components(Components)) :-
 		valid(positive_integer, Components).
 	valid_option(feature_scaling(FeatureScaling)) :-
-		memberchk(FeatureScaling, [on, off]).
+		once((FeatureScaling == on; FeatureScaling == off)).
 	valid_option(random_seed(RandomSeed)) :-
 		valid(positive_integer, RandomSeed).
 

@@ -69,6 +69,7 @@ Categories
    ranking_dataset_common <ranking_dataset_common_0>
    read_file <read_file_0>
    recorded_database_core <recorded_database_core_0>
+   regressor_common <regressor_common_0>
    single_byte_character_set(MaxCode) <single_byte_character_set_1>
    statistics <statistics_0>
    subject <subject_0>
@@ -215,6 +216,7 @@ Objects
    gensym <gensym_0>
    geospatial <geospatial_0>
    git <git_0>
+   gradient_boosting_regression <gradient_boosting_regression_0>
    grammar_rules_hook <grammar_rules_hook_0>
    graph_language_registry <graph_language_registry_0>
    halstead_metric <halstead_metric_0>
@@ -271,6 +273,7 @@ Objects
    json_schema(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_schema_3>
    knn <knn_0>
    knn_distance <knn_distance_0>
+   knn_regression <knn_regression_0>
    ksuid <ksuid_0>
    ksuid(Representation,Alphabet) <ksuid_2>
    lcom_metric <lcom_metric_0>
@@ -283,6 +286,7 @@ Objects
    library_load_diagram <library_load_diagram_0>
    library_load_diagram(Format) <library_load_diagram_1>
    linda <linda_0>
+   linear_regression <linear_regression_0>
    linear_svm <linear_svm_0>
    lines_metric <lines_metric_0>
    linter_reporter <linter_reporter_0>
@@ -357,6 +361,7 @@ Objects
    random <random_0>
    random(Algorithm) <random_1>
    random_forest <random_forest_0>
+   random_forest_regression <random_forest_regression_0>
    random_projection <random_projection_0>
    rbtree <rbtree_0>
    reader <reader_0>
@@ -364,6 +369,7 @@ Objects
    redis <redis_0>
    registries <registries_0>
    registry_loader_hook <registry_loader_hook_0>
+   regression_tree <regression_tree_0>
    relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <relational_operator_replacement_5>
    rfc_metric <rfc_metric_0>
    rule_expansion(Mode) <rule_expansion_1>
@@ -576,6 +582,8 @@ Protocols
    ranker_protocol <ranker_protocol_0>
    ranking_dataset_protocol <ranking_dataset_protocol_0>
    registry_protocol <registry_protocol_0>
+   regression_dataset_protocol <regression_dataset_protocol_0>
+   regressor_protocol <regressor_protocol_0>
    sampling_protocol <sampling_protocol_0>
    setp <setp_0>
    simulated_annealing_protocol <simulated_annealing_protocol_0>

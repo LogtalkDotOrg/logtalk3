@@ -569,6 +569,16 @@ To load an entity, always load the library that includes it using the goal ``log
    git <git_0>
    git_protocol <git_protocol_0>
 
+``library/gradient_boosting_regression/``
+-----------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   gradient_boosting_regression <gradient_boosting_regression_0>
+
 ``library/grammars/``
 ---------------------
 
@@ -872,6 +882,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    knn_distance <knn_distance_0>
 
+``library/knn_regression/``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   knn_regression <knn_regression_0>
+
 ``library/ksuid/``
 ------------------
 
@@ -905,6 +925,16 @@ To load an entity, always load the library that includes it using the goal ``log
    linda <linda_0>
    linda_client <linda_client_0>
    linda_server <linda_server_0>
+
+``library/linear_regression/``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   linear_regression <linear_regression_0>
 
 ``library/linear_svm/``
 -----------------------
@@ -1198,6 +1228,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    random_forest <random_forest_0>
 
+``library/random_forest_regression/``
+-------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   random_forest_regression <random_forest_regression_0>
+
 ``library/random_projection/``
 ------------------------------
 
@@ -1252,6 +1292,28 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    redis <redis_0>
+
+``library/regression_protocols/``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   regression_dataset_protocol <regression_dataset_protocol_0>
+   regressor_common <regressor_common_0>
+   regressor_protocol <regressor_protocol_0>
+
+``library/regression_tree/``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   regression_tree <regression_tree_0>
 
 ``library/sets/``
 -----------------

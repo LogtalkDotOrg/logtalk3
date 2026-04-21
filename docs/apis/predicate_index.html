@@ -3948,6 +3948,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#print-ranker-1"><code class="docutils literal notranslate"><span class="pre">print_ranker/1</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#print-regressor-1"><code class="docutils literal notranslate"><span class="pre">print_regressor/1</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#product-2"><code class="docutils literal notranslate"><span class="pre">product/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -4999,6 +5002,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#take-4"><code class="docutils literal notranslate"><span class="pre">take/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#target-1"><code class="docutils literal notranslate"><span class="pre">target/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#tcb-minus-tdb-approx-3"><code class="docutils literal notranslate"><span class="pre">tcb_minus_tdb_approx/3</span></code></a><ul class="simple">
@@ -6383,6 +6389,7 @@
 <li><p><a class="reference internal" href="anomaly_dataset_protocol_0.html#anomaly-dataset-protocol-0-attribute-values-2"><span class="std std-ref">anomaly_dataset_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="dataset_protocol_0.html#dataset-protocol-0-attribute-values-2"><span class="std std-ref">dataset_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="dimension_reduction_dataset_protocol_0.html#dimension-reduction-dataset-protocol-0-attribute-values-2"><span class="std std-ref">dimension_reduction_dataset_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="regression_dataset_protocol_0.html#regression-dataset-protocol-0-attribute-values-2"><span class="std std-ref">regression_dataset_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="available-0">
@@ -9641,6 +9648,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="anomaly_dataset_protocol_0.html#anomaly-dataset-protocol-0-example-3"><span class="std std-ref">anomaly_dataset_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="dataset_protocol_0.html#dataset-protocol-0-example-3"><span class="std std-ref">dataset_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="regression_dataset_protocol_0.html#regression-dataset-protocol-0-example-3"><span class="std std-ref">regression_dataset_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="supervised_dimension_reduction_dataset_protocol_0.html#supervised-dimension-reduction-dataset-protocol-0-example-3"><span class="std std-ref">supervised_dimension_reduction_dataset_protocol</span></a></p></li>
 </ul>
 </section>
@@ -9789,6 +9797,7 @@
 <li><p><a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-export-to-clauses-4"><span class="std std-ref">classifier_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="dimension_reducer_protocol_0.html#dimension-reducer-protocol-0-export-to-clauses-4"><span class="std std-ref">dimension_reducer_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="ranker_protocol_0.html#ranker-protocol-0-export-to-clauses-4"><span class="std std-ref">ranker_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="regressor_protocol_0.html#regressor-protocol-0-export-to-clauses-4"><span class="std std-ref">regressor_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="export-to-file-4">
@@ -9800,6 +9809,7 @@
 <li><p><a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-export-to-file-4"><span class="std std-ref">classifier_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="dimension_reducer_protocol_0.html#dimension-reducer-protocol-0-export-to-file-4"><span class="std std-ref">dimension_reducer_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="ranker_protocol_0.html#ranker-protocol-0-export-to-file-4"><span class="std std-ref">ranker_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="regressor_protocol_0.html#regressor-protocol-0-export-to-file-4"><span class="std std-ref">regressor_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="extension-1">
@@ -12652,6 +12662,7 @@
 <li><p><a class="reference internal" href="dimension_reducer_protocol_0.html#dimension-reducer-protocol-0-learn-2"><span class="std std-ref">dimension_reducer_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="metagol_0.html#metagol-0-learn-2"><span class="std std-ref">metagol</span></a></p></li>
 <li><p><a class="reference internal" href="ranker_protocol_0.html#ranker-protocol-0-learn-2"><span class="std std-ref">ranker_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="regressor_protocol_0.html#regressor-protocol-0-learn-2"><span class="std std-ref">regressor_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="learn-3">
@@ -12663,13 +12674,19 @@
 <li><p><a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0-learn-3"><span class="std std-ref">anomaly_detector_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="bradley_terry_0.html#bradley-terry-0-learn-3"><span class="std std-ref">bradley_terry</span></a></p></li>
 <li><p><a class="reference internal" href="dimension_reducer_protocol_0.html#dimension-reducer-protocol-0-learn-3"><span class="std std-ref">dimension_reducer_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="gradient_boosting_regression_0.html#gradient-boosting-regression-0-learn-3"><span class="std std-ref">gradient_boosting_regression</span></a></p></li>
+<li><p><a class="reference internal" href="knn_regression_0.html#knn-regression-0-learn-3"><span class="std std-ref">knn_regression</span></a></p></li>
 <li><p><a class="reference internal" href="lda_projection_0.html#lda-projection-0-learn-3"><span class="std std-ref">lda_projection</span></a></p></li>
+<li><p><a class="reference internal" href="linear_regression_0.html#linear-regression-0-learn-3"><span class="std std-ref">linear_regression</span></a></p></li>
 <li><p><a class="reference internal" href="linear_svm_0.html#linear-svm-0-learn-3"><span class="std std-ref">linear_svm</span></a></p></li>
 <li><p><a class="reference internal" href="logistic_regression_0.html#logistic-regression-0-learn-3"><span class="std std-ref">logistic_regression</span></a></p></li>
 <li><p><a class="reference internal" href="metagol_0.html#metagol-0-learn-3"><span class="std std-ref">metagol</span></a></p></li>
 <li><p><a class="reference internal" href="pca_0.html#pca-0-learn-3"><span class="std std-ref">pca</span></a></p></li>
 <li><p><a class="reference internal" href="random_forest_0.html#random-forest-0-learn-3"><span class="std std-ref">random_forest</span></a></p></li>
+<li><p><a class="reference internal" href="random_forest_regression_0.html#random-forest-regression-0-learn-3"><span class="std std-ref">random_forest_regression</span></a></p></li>
 <li><p><a class="reference internal" href="random_projection_0.html#random-projection-0-learn-3"><span class="std std-ref">random_projection</span></a></p></li>
+<li><p><a class="reference internal" href="regression_tree_0.html#regression-tree-0-learn-3"><span class="std std-ref">regression_tree</span></a></p></li>
+<li><p><a class="reference internal" href="regressor_protocol_0.html#regressor-protocol-0-learn-3"><span class="std std-ref">regressor_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="learn-seq-2">
@@ -16081,6 +16098,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0-predict-3"><span class="std std-ref">anomaly_detector_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-predict-3"><span class="std std-ref">classifier_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="regressor_protocol_0.html#regressor-protocol-0-predict-3"><span class="std std-ref">regressor_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="predict-4">
@@ -16283,6 +16301,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="ranker_protocol_0.html#ranker-protocol-0-print-ranker-1"><span class="std std-ref">ranker_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="print-regressor-1">
+<h2><code class="docutils literal notranslate"><span class="pre">print_regressor/1</span></code><a class="headerlink" href="#print-regressor-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="regressor_protocol_0.html#regressor-protocol-0-print-regressor-1"><span class="std std-ref">regressor_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="product-2">
@@ -19163,6 +19189,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="listp_0.html#listp-0-take-4"><span class="std std-ref">listp</span></a></p></li>
+</ul>
+</section>
+<section id="target-1">
+<h2><code class="docutils literal notranslate"><span class="pre">target/1</span></code><a class="headerlink" href="#target-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="regression_dataset_protocol_0.html#regression-dataset-protocol-0-target-1"><span class="std std-ref">regression_dataset_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="tcb-minus-tdb-approx-3">

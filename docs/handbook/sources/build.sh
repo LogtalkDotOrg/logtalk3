@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 20, 2026
+##   Last updated on April 21, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -119,6 +119,7 @@ sed '1,19d' ../../../library/gensym/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,19d' ../../../library/genint/NOTES.md | pandoc -f gfm -t rst -o libraries/genint.rst
 sed '1,19d' ../../../library/geospatial/NOTES.md | pandoc -f gfm -t rst -o libraries/geospatial.rst
 sed '1,19d' ../../../library/git/NOTES.md | pandoc -f gfm -t rst -o libraries/git.rst
+sed '1,19d' ../../../library/gradient_boosting_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/gradient_boosting_regression.rst
 sed '1,19d' ../../../library/grammars/NOTES.md | pandoc -f gfm -t rst -o libraries/grammars.rst
 sed '1,19d' ../../../library/graphs/NOTES.md | pandoc -f gfm -t rst -o libraries/graphs.rst
 sed '1,19d' ../../../library/hashes/NOTES.md | pandoc -f gfm -t rst -o libraries/hashes.rst
@@ -139,9 +140,11 @@ sed '1,19d' ../../../library/json_rpc/NOTES.md | pandoc -f gfm -t rst -o librari
 sed '1,19d' ../../../library/json_schema/NOTES.md | pandoc -f gfm -t rst -o libraries/json_schema.rst
 sed '1,19d' ../../../library/lda_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/lda_projection.rst
 sed '1,19d' ../../../library/linda/NOTES.md | pandoc -f gfm -t rst -o libraries/linda.rst
+sed '1,19d' ../../../library/linear_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/linear_regression.rst
 sed '1,19d' ../../../library/linear_svm/NOTES.md | pandoc -f gfm -t rst -o libraries/linear_svm.rst
 sed '1,19d' ../../../library/knn/NOTES.md | pandoc -f gfm -t rst -o libraries/knn.rst
 sed '1,19d' ../../../library/knn_distance/NOTES.md | pandoc -f gfm -t rst -o libraries/knn_distance.rst
+sed '1,19d' ../../../library/knn_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/knn_regression.rst
 sed '1,19d' ../../../library/ksuid/NOTES.md | pandoc -f gfm -t rst -o libraries/ksuid.rst
 sed '1,19d' ../../../library/listing/NOTES.md | pandoc -f gfm -t rst -o libraries/listing.rst
 sed '1,19d' ../../../library/lof/NOTES.md | pandoc -f gfm -t rst -o libraries/lof.rst
@@ -168,11 +171,14 @@ sed '1,19d' ../../../library/protobuf/NOTES.md | pandoc -f gfm -t rst -o librari
 sed '1,19d' ../../../library/queues/NOTES.md | pandoc -f gfm -t rst -o libraries/queues.rst
 sed '1,19d' ../../../library/random/NOTES.md | pandoc -f gfm -t rst -o libraries/random.rst
 sed '1,19d' ../../../library/random_forest/NOTES.md | pandoc -f gfm -t rst -o libraries/random_forest.rst
+sed '1,19d' ../../../library/random_forest_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/random_forest_regression.rst
 sed '1,19d' ../../../library/random_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/random_projection.rst
 sed '1,19d' ../../../library/ranking_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/ranking_protocols.rst
 sed '1,19d' ../../../library/reader/NOTES.md | pandoc -f gfm -t rst -o libraries/reader.rst
 sed '1,19d' ../../../library/recorded_database/NOTES.md | pandoc -f gfm -t rst -o libraries/recorded_database.rst
 sed '1,19d' ../../../library/redis/NOTES.md | pandoc -f gfm -t rst -o libraries/redis.rst
+sed '1,19d' ../../../library/regression_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/regression_protocols.rst
+sed '1,19d' ../../../library/regression_tree/NOTES.md | pandoc -f gfm -t rst -o libraries/regression_tree.rst
 sed '1,19d' ../../../library/sets/NOTES.md | pandoc -f gfm -t rst -o libraries/sets.rst
 sed '1,19d' ../../../library/simulated_annealing/NOTES.md | pandoc -f gfm -t rst -o libraries/simulated_annealing.rst
 sed '1,19d' ../../../library/snowflakeid/NOTES.md | pandoc -f gfm -t rst -o libraries/snowflakeid.rst

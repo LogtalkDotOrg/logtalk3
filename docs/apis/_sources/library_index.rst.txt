@@ -638,6 +638,16 @@ To load any library (including developer tools, ports, and contributions), use t
    git <git_0>
    git_protocol <git_protocol_0>
 
+:ref:`gradient_boosting_regression <library_gradient_boosting_regression>`
+--------------------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   gradient_boosting_regression <gradient_boosting_regression_0>
+
 :ref:`grammars <library_grammars>`
 ----------------------------------
 
@@ -971,6 +981,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
    knn_distance <knn_distance_0>
 
+:ref:`knn_regression <library_knn_regression>`
+----------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   knn_regression <knn_regression_0>
+
 :ref:`ksuid <library_ksuid>`
 ----------------------------
 
@@ -1056,6 +1076,16 @@ To load any library (including developer tools, ports, and contributions), use t
    linda <linda_0>
    linda_client <linda_client_0>
    linda_server <linda_server_0>
+
+:ref:`linear_regression <library_linear_regression>`
+----------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   linear_regression <linear_regression_0>
 
 :ref:`linear_svm <library_linear_svm>`
 --------------------------------------
@@ -1436,6 +1466,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
    random_forest <random_forest_0>
 
+:ref:`random_forest_regression <library_random_forest_regression>`
+------------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   random_forest_regression <random_forest_regression_0>
+
 :ref:`random_projection <library_random_projection>`
 ----------------------------------------------------
 
@@ -1490,6 +1530,28 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    redis <redis_0>
+
+:ref:`regression_protocols <library_regression_protocols>`
+----------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   regression_dataset_protocol <regression_dataset_protocol_0>
+   regressor_common <regressor_common_0>
+   regressor_protocol <regressor_protocol_0>
+
+:ref:`regression_tree <library_regression_tree>`
+------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   regression_tree <regression_tree_0>
 
 :ref:`sarif <library_sarif>`
 ----------------------------
