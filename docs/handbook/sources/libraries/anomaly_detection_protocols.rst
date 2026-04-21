@@ -1,7 +1,7 @@
-.. _library_anomaly_protocols:
+.. _library_anomaly_detection_protocols:
 
-``anomaly_protocols``
-=====================
+``anomaly_detection_protocols``
+===============================
 
 This library provides protocols used in the implementation of machine
 learning anomaly-detection algorithms. Datasets are represented as
@@ -18,8 +18,8 @@ Shared category
 The library includes one reusable category intended to be imported by
 anomaly detector algorithm implementations:
 
-- ``anomaly_common`` — shared ``learn/2``, ``predict/3-4``, file export,
-  and dataset helper predicates.
+- ``anomaly_detector_common`` — shared ``learn/2``, ``predict/3-4``,
+  file export, and dataset helper predicates.
 
 This category keeps threshold-based prediction and export behavior
 separate from the algorithm-specific learning, scoring, clause export,
@@ -28,8 +28,8 @@ and pretty-printing code.
 Export header format
 --------------------
 
-The shared exporter in the ``anomaly_common`` category writes a header
-before the exported clauses in the following format:
+The shared exporter in the ``anomaly_detector_common`` category writes a
+header before the exported clauses in the following format:
 
 ::
 
@@ -51,7 +51,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#anomaly_protocols <../../apis/library_index.html#anomaly_protocols>`__
+`../../apis/library_index.html#anomaly-detection-protocols <../../apis/library_index.html#anomaly-detection-protocols>`__
 link in a web browser.
 
 Loading
@@ -59,9 +59,7 @@ Loading
 
 To load all entities in this library, load the ``loader.lgt`` file:
 
-::
-
-   | ?- logtalk_load(anomaly_protocols(loader)).
+\| ?- logtalk_load(anomaly_detection_protocols(loader)).
 
 Testing
 -------
@@ -69,9 +67,7 @@ Testing
 To run the library smoke tests, shared category tests, and dataset
 checks, load the ``tester.lgt`` file:
 
-::
-
-   | ?- logtalk_load(anomaly_protocols(tester)).
+\| ?- logtalk_load(anomaly_detection_protocols(tester)).
 
 Test datasets
 -------------

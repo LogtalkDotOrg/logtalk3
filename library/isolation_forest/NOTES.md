@@ -34,8 +34,8 @@ lengths) to be isolated. The anomaly score for an instance is computed
 based on the average path length across all trees in the forest.
 
 Datasets are represented as objects implementing the `anomaly_dataset_protocol`
-protocol from the `anomaly_protocols` library. See the
-`anomaly_protocols/test_datasets` directory for examples.
+protocol from the `anomaly_detection_protocols` library. See the
+`anomaly_detection_protocols/test_datasets` directory for examples.
 
 
 API documentation

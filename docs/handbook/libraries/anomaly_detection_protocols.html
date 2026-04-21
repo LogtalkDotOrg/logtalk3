@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>anomaly_protocols &mdash; Logtalk 3.100.0</title>
+  <title>anomaly_detection_protocols &mdash; Logtalk 3.100.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
@@ -72,7 +72,7 @@
 <li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ada_boost.html"><code class="docutils literal notranslate"><span class="pre">ada_boost</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="amqp.html"><code class="docutils literal notranslate"><span class="pre">amqp</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">anomaly_protocols</span></code></a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">anomaly_detection_protocols</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#shared-category">Shared category</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#export-header-format">Export header format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
@@ -236,9 +236,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">anomaly_protocols</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">anomaly_detection_protocols</span></code></li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/anomaly_protocols.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/anomaly_detection_protocols.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -246,8 +246,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="anomaly-protocols">
-<span id="library-anomaly-protocols"></span><h1><code class="docutils literal notranslate"><span class="pre">anomaly_protocols</span></code><a class="headerlink" href="#anomaly-protocols" title="Link to this heading"></a></h1>
+  <section id="anomaly-detection-protocols">
+<span id="library-anomaly-detection-protocols"></span><h1><code class="docutils literal notranslate"><span class="pre">anomaly_detection_protocols</span></code><a class="headerlink" href="#anomaly-detection-protocols" title="Link to this heading"></a></h1>
 <p>This library provides protocols used in the implementation of machine
 learning anomaly-detection algorithms. Datasets are represented as
 objects implementing the <code class="docutils literal notranslate"><span class="pre">anomaly_dataset_protocol</span></code> protocol. Anomaly
@@ -260,8 +260,8 @@ datasets, and a small family smoke-test suite.</p>
 <p>The library includes one reusable category intended to be imported by
 anomaly detector algorithm implementations:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">anomaly_common</span></code> — shared <code class="docutils literal notranslate"><span class="pre">learn/2</span></code>, <code class="docutils literal notranslate"><span class="pre">predict/3-4</span></code>, file export,
-and dataset helper predicates.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anomaly_detector_common</span></code> — shared <code class="docutils literal notranslate"><span class="pre">learn/2</span></code>, <code class="docutils literal notranslate"><span class="pre">predict/3-4</span></code>,
+file export, and dataset helper predicates.</p></li>
 </ul>
 <p>This category keeps threshold-based prediction and export behavior
 separate from the algorithm-specific learning, scoring, clause export,
@@ -269,8 +269,8 @@ and pretty-printing code.</p>
 </section>
 <section id="export-header-format">
 <h2>Export header format<a class="headerlink" href="#export-header-format" title="Link to this heading"></a></h2>
-<p>The shared exporter in the <code class="docutils literal notranslate"><span class="pre">anomaly_common</span></code> category writes a header
-before the exported clauses in the following format:</p>
+<p>The shared exporter in the <code class="docutils literal notranslate"><span class="pre">anomaly_detector_common</span></code> category writes a
+header before the exported clauses in the following format:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% exported anomaly detector predicate: Functor/Arity</span>
 <span class="c">% training dataset: Dataset</span>
 <span class="c">% options: Options</span>
@@ -288,23 +288,19 @@ predicates.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
-<a class="reference external" href="../../apis/library_index.html#anomaly_protocols">../../apis/library_index.html#anomaly_protocols</a>
+<a class="reference external" href="../../apis/library_index.html#anomaly-detection-protocols">../../apis/library_index.html#anomaly-detection-protocols</a>
 link in a web browser.</p>
 </section>
 <section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(anomaly_protocols(loader)).
-</pre></div>
-</div>
+<p>| ?- logtalk_load(anomaly_detection_protocols(loader)).</p>
 </section>
 <section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>To run the library smoke tests, shared category tests, and dataset
 checks, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(anomaly_protocols(tester)).
-</pre></div>
-</div>
+<p>| ?- logtalk_load(anomaly_detection_protocols(tester)).</p>
 </section>
 <section id="test-datasets">
 <h2>Test datasets<a class="headerlink" href="#test-datasets" title="Link to this heading"></a></h2>

@@ -38,8 +38,9 @@ Library
 across all machine learning libraries.
 
 * CHANGED: The `isolation_forest` library to depend on the new
-`anomaly_protocols` library instead of `classifier_protocols` (functionality
-preserved but four export and print predicates were renamed with this change).
+`anomaly_detection_protocols` library instead of `classifier_protocols`
+(functionality preserved but four export and print predicates were renamed
+with this change).
 
 * ADDED: New `regression_protocols`  library with protocols and datasets
 for use in the implementation of machine learning regression algorithms.
@@ -76,8 +77,8 @@ dimension reduction for continuous datasets.
 * ADDED: New `random_projection` library implementing seeded random
 projection for continuous datasets.
 
-* ADDED: New `anomaly_protocols` library defining common protocols, benchmark
-datasets, and smoke tests for anomaly-detection algorithms.
+* ADDED: New `anomaly_detection_protocols` library defining common protocols,
+benchmark datasets, and smoke tests for anomaly-detection algorithms.
 
 * ADDED: New `knn_distance` library implementing a portable k-nearest-neighbor
 distance anomaly detector with mixed-feature and missing-value support.

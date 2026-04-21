@@ -25,13 +25,14 @@ Local Outlier Factor anomaly detector supporting multiple distance metrics,
 mixed continuous and categorical features, and missing values.
 
 The library implements the `anomaly_detector_protocol` defined in the
-`anomaly_protocols` library. It learns a compact detector from a dataset,
-computes normalized anomaly scores for new instances, predicts `normal` or
-`anomaly`, and exports learned detectors as clauses or files.
+`anomaly_detection_protocols` library. It learns a compact detector from a
+dataset, computes normalized anomaly scores for new instances, predicts
+`normal` or `anomaly`, and exports learned detectors as clauses or files.
 
 Datasets are represented as objects implementing the
-`anomaly_dataset_protocol` protocol from the `anomaly_protocols` library.
-See the `anomaly_protocols/test_datasets` directory for examples.
+`anomaly_dataset_protocol` protocol from the `anomaly_detection_protocols`
+library. See the `anomaly_detection_protocols/test_datasets` directory
+for examples.
 
 
 API documentation

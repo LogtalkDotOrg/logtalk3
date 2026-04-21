@@ -104,7 +104,7 @@
 		nearest_centroid(loader),
 		linear_svm(loader),
 		logistic_regression(loader),
-		anomaly_protocols(loader),
+		anomaly_detection_protocols(loader),
 		isolation_forest(loader),
 		knn_distance(loader),
 		lof(loader),

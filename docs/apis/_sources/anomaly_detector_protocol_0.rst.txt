@@ -11,7 +11,7 @@
 Protocol for machine learning anomaly detectors.
 
 | **Availability:** 
-|    ``logtalk_load(anomaly_protocols(loader))``
+|    ``logtalk_load(anomaly_detection_protocols(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
@@ -226,5 +226,5 @@ Operators
 
 .. seealso::
 
-   :ref:`anomaly_dataset_protocol <anomaly_dataset_protocol/0>`, :ref:`anomaly_common <anomaly_common/0>`, :ref:`isolation_forest <isolation_forest/0>`, :ref:`knn_distance <knn_distance/0>`, :ref:`lof <lof/0>`
+   :ref:`anomaly_dataset_protocol <anomaly_dataset_protocol/0>`, :ref:`anomaly_detector_common <anomaly_detector_common/0>`, :ref:`isolation_forest <isolation_forest/0>`, :ref:`knn_distance <knn_distance/0>`, :ref:`lof <lof/0>`
 

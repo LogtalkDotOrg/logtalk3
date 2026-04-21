@@ -170,7 +170,7 @@
 
 
 :- object(sample_anomaly_detector,
-	imports(anomaly_common)).
+	imports(anomaly_detector_common)).
 
 	:- uses(type, [
 		valid/2
@@ -213,7 +213,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-20,
-		comment is 'Smoke tests for the "anomaly_protocols" library.'
+		comment is 'Smoke tests for the "anomaly_detection_protocols" library.'
 	]).
 
 	:- uses(list, [

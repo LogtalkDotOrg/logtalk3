@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- category(anomaly_common,
+:- category(anomaly_detector_common,
 	implements(anomaly_detector_protocol),
 	extends(options)).
 

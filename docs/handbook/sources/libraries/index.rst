@@ -30,7 +30,7 @@ directory in the ``NOTES.md`` file.
    overview
    ada_boost
    amqp
-   anomaly_protocols
+   anomaly_detection_protocols
    application
    arbitrary
    assignvars

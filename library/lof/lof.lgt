@@ -20,7 +20,7 @@
 
 
 :- object(lof,
-	imports(anomaly_common)).
+	imports(anomaly_detector_common)).
 
 	:- info([
 		version is 1:0:0,

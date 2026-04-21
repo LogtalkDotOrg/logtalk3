@@ -121,6 +121,25 @@ Collects the dataset attribute declarations as `Attribute-Values` pairs.
 
 ------------
 
+.. index:: dataset_examples/2
+.. _regressor_common/0::dataset_examples/2:
+
+``dataset_examples/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the dataset examples as `example(Id, TargetValue, AttributeValues)` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dataset_examples(Dataset,Examples)``
+| **Mode and number of proofs:**
+|    ``dataset_examples(+object_identifier,-list(compound))`` - ``one``
+
+
+------------
+
 .. index:: check_examples/2
 .. _regressor_common/0::check_examples/2:
 

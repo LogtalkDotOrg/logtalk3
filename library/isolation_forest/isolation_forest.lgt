@@ -20,7 +20,7 @@
 
 
 :- object(isolation_forest,
-	imports(anomaly_common)).
+	imports(anomaly_detector_common)).
 
 	:- info([
 		version is 2:0:0,

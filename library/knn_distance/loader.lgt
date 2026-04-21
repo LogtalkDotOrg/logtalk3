@@ -23,6 +23,6 @@
 	logtalk_load(types(loader)),
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
-	logtalk_load(anomaly_protocols(loader)),
+	logtalk_load(anomaly_detection_protocols(loader)),
 	logtalk_load(knn_distance, [optimize(on)])
 )).

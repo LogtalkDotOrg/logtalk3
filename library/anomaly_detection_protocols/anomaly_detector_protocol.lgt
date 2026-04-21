@@ -26,7 +26,7 @@
 		author is 'Paulo Moura',
 		date is 2026-04-20,
 		comment is 'Protocol for machine learning anomaly detectors.',
-		see_also is [anomaly_dataset_protocol, anomaly_common, isolation_forest, knn_distance, lof]
+		see_also is [anomaly_dataset_protocol, anomaly_detector_common, isolation_forest, knn_distance, lof]
 	]).
 
 	:- public(learn/2).

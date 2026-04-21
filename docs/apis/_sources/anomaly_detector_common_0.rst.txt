@@ -1,17 +1,17 @@
-.. index:: single: anomaly_common
-.. _anomaly_common/0:
+.. index:: single: anomaly_detector_common
+.. _anomaly_detector_common/0:
 
 .. rst-class:: right
 
 **category**
 
-``anomaly_common``
-==================
+``anomaly_detector_common``
+===========================
 
 Shared predicates for anomaly detector learning defaults, threshold-based prediction, dataset helpers, and export.
 
 | **Availability:** 
-|    ``logtalk_load(anomaly_protocols(loader))``
+|    ``logtalk_load(anomaly_detection_protocols(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
@@ -48,7 +48,7 @@ Protected predicates
 --------------------
 
 .. index:: anomaly_detector_options/2
-.. _anomaly_common/0::anomaly_detector_options/2:
+.. _anomaly_detector_common/0::anomaly_detector_options/2:
 
 ``anomaly_detector_options/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -67,7 +67,7 @@ Hook predicate that importing anomaly detector implementations may override in o
 ------------
 
 .. index:: anomaly_detector_export_template/2
-.. _anomaly_common/0::anomaly_detector_export_template/2:
+.. _anomaly_detector_common/0::anomaly_detector_export_template/2:
 
 ``anomaly_detector_export_template/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -86,7 +86,7 @@ Hook predicate that importing anomaly detector implementations must define in or
 ------------
 
 .. index:: anomaly_detector_term_template/2
-.. _anomaly_common/0::anomaly_detector_term_template/2:
+.. _anomaly_detector_common/0::anomaly_detector_term_template/2:
 
 ``anomaly_detector_term_template/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -105,7 +105,7 @@ Hook predicate that importing anomaly detector implementations must define in or
 ------------
 
 .. index:: dataset_attributes/2
-.. _anomaly_common/0::dataset_attributes/2:
+.. _anomaly_detector_common/0::dataset_attributes/2:
 
 ``dataset_attributes/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -124,7 +124,7 @@ Collects the dataset attribute declarations as `Attribute-Values` pairs.
 ------------
 
 .. index:: extract_scores/2
-.. _anomaly_common/0::extract_scores/2:
+.. _anomaly_detector_common/0::extract_scores/2:
 
 ``extract_scores/2``
 ^^^^^^^^^^^^^^^^^^^^
@@ -143,7 +143,7 @@ Transforms `Score-Id-Class` tuples into the public `Id-Class-Score` representati
 ------------
 
 .. index:: print_anomaly_detector_template/1
-.. _anomaly_common/0::print_anomaly_detector_template/1:
+.. _anomaly_detector_common/0::print_anomaly_detector_template/1:
 
 ``print_anomaly_detector_template/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
