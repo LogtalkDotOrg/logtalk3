@@ -28,6 +28,8 @@ RELEASE NOTES
 Documentation
 -------------
 
+* ADDED: Handbook libraries overview grouped by scope.
+
 * FIXED: Sequence non-terminals in the Handbook grammar section.
 
 Library

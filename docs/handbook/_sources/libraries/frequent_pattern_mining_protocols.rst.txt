@@ -10,6 +10,10 @@ implementing the ``transaction_dataset_protocol`` protocol. The generic
 category used by concrete miners are loaded from the
 ``pattern_mining_protocols`` core library.
 
+The ``frequent_pattern_mining_common`` category builds on that generic
+core with frequent-itemset-specific helpers for dataset validation,
+support accumulation, and itemset ordering/filtering.
+
 This library also provides reusable transaction smoke-test datasets and
 a small smoke-test suite.
 
@@ -54,3 +58,21 @@ Several sample transaction datasets are included in the
 - ``deep_intersection_baskets.lgt``: A compact transaction dataset with
   one frequent length-4 itemset and multiple overlapping length-3
   itemsets intended to stress deeper vertical tidset intersections.
+
+The directory also includes invalid fixtures useful for validation and
+error-handling tests:
+
+- ``invalid_undeclared_item_baskets.lgt``: Uses an item not listed in
+  the declared item domain.
+
+- ``invalid_unsorted_transaction_baskets.lgt``: Uses a transaction whose
+  items are not in canonical sorted order.
+
+- ``invalid_duplicate_item_baskets.lgt``: Uses a transaction with a
+  duplicate item.
+
+- ``invalid_empty_baskets.lgt``: Declares an item domain but no
+  transactions.
+
+- ``invalid_item_domain_baskets.lgt``: Declares a non-canonical item
+  domain with duplicate items.

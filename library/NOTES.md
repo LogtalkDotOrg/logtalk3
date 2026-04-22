@@ -22,6 +22,76 @@ Overview
 ========
 
 This folder contains libraries of useful objects, categories, and protocols.
+The currently available libraries can be grouped by scope as follows (the
+grouping is thematic only, as some libraries naturally span multiple areas):
+
+- Application metadata, configuration., and logging:
+	`application`, `expand_library_alias_paths`, `command_line_options`, `logging`, and `options`.
+- Types, collections, combinatorics, and generic data processing:
+	`basic_types`, `types`, `assignvars`, `combinations`, `deques`, `dictionaries`,
+	`nested_dictionaries`, `graphs`, `heaps`, `hierarchies`, `intervals`,
+	`permutations`, `queues`, `sets`, `subsequences`, `union_find`, and `zippers`.
+- Meta-programming:
+    `meta` and `meta_compiler`
+- Monoid implementations:
+	`expecteds`, `optionals`, and `validations`.
+- Control, state, and developer support:
+	`dependents`, `edcg`, `events`,	`listing`, `reader`, and `term_io`.
+- Term- and goal-expansion:
+	`hook_flows` and `hook_objects`.
+- Portability:
+	`coroutining`, `dif`, `format`, `process`, `recorded_database`, and `timeout`.
+- Dates, time, and geospatial data:
+	`ccsds`, `dates`, `dates_tz`, `geospatial`, `time_scales`, and `tzif`.
+- Text and NLP:
+	`character_sets`, `grammars`, `stemming`, `string_distance`, and `strings`.
+- Web:
+	`html`, `mime_types`, and `url`.
+- Identifiers:
+	`cuid2`, `genint`, `gensym`, `ids`, `ksuid`, `nanoid`, `snowflakeid`,
+	`ulid`, and `uuid`.
+- Interchange formats and wire protocols:
+	`amqp`, `avro`, `base32`, `base58`, `base64`, `base85`, `cbor`,
+	`csv`, `json`, `json_ld`, `json_lines`, `json_rpc`, `json_schema`,
+	`mcp_server`, `protobuf`, `stomp`, `toml`, `toon`, `tsv`, and `yaml`.
+- Coordination and data stores:
+	`linda`, `memcached`, and `redis`.
+- System and external integration:
+	`git`, `java`, `os`, and `sockets`.
+- Logic and symbolic computing:
+	`datalog`.
+- Security and integrity:
+	`hashes` and `hmac`.
+- Randomness:
+	`arbitrary`, `mutations`, and `random`.
+- Mathematics, statistics, and optimization:
+	`simulated_annealing` and `statistics`.
+- Machine learning:
+	- Classification:
+		`classification_protocols`, `ada_boost`, `c45`, `knn`, `linear_svm`,
+		`logistic_regression`, `naive_bayes`, `nearest_centroid`, and
+		`random_forest`.
+	- Anomaly detection:
+		`anomaly_detection_protocols`, `isolation_forest`, `knn_distance`, and
+		`lof`.
+	- Regression:
+		`regression_protocols`, `gradient_boosting_regression`,
+		`knn_regression`, `linear_regression`,
+		`random_forest_regression`, and `regression_tree`.
+	- Ranking:
+		`ranking_protocols` and `bradley_terry`.
+	- Dimension reduction:
+		`dimension_reduction_protocols`, `lda_projection`, `pca`, and
+		`random_projection`.
+	- Pattern mining:
+		`pattern_mining_protocols`, `frequent_pattern_mining_protocols`,
+		`sequential_pattern_mining_protocols`, `apriori`, `clo_span`,
+		`eclat`, `fp_growth`, `gsp`, `prefix_span`, and `spade`.
+
+In addition to the loader-based libraries, this directory also contains a
+small number of standalone reusable entities, namely `attributes`, `cloning`,
+`counters`, and `streamvars`.
+
 Specific notes about individual libraries can be found in the corresponding
 library directory `NOTES.md` files.
 
