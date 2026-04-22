@@ -21,5 +21,5 @@
 
 :- initialization((
     logtalk_load(basic_types(loader)),
-    logtalk_load(url, [debug(on)])
+    logtalk_load(url, [optimize(on)])
 )).

@@ -22,5 +22,5 @@
 :- initialization((
 	logtalk_load(basic_types(loader)),
 	logtalk_load(reader(loader)),
-	logtalk_load([yaml_protocol, yaml], [debug(on)])
+	logtalk_load([yaml_protocol, yaml], [optimize(on)])
 )).

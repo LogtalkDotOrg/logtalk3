@@ -195,6 +195,9 @@ tail-recursive.
 * IMPROVED: Rewritten two `yaml` library auxiliary predicates to be
 tail-recursive.
 
+* FIXED: The `linda`, `tzif`, `ulid`, `url`, and `yaml` libraries to compile
+all their entities in optimal mode.
+
 Tools
 -----
 

@@ -28,9 +28,11 @@
 			os(loader),
 			reader(loader)
 		]),
-		logtalk_load(tzif_zone_ids, [reload(skip)]),
-		logtalk_load(tzif_protocol),
-		logtalk_load(tzif, [
+		logtalk_load([
+			tzif_protocol,
+			tzif_zone_ids,
+			tzif
+		], [
 			optimize(on)
 		])
 	)).

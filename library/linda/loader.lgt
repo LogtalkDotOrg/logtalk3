@@ -26,7 +26,7 @@
 		logtalk_load(options(loader)),
 		logtalk_load(os(loader)),
 		logtalk_load(sockets(loader)),
-		logtalk_load([linda_server, linda_client, linda], [optimize(off), suspicious_calls(silent)]),
+		logtalk_load([linda_server, linda_client, linda], [optimize(on), suspicious_calls(silent)]),
 		% enable debugging messages
 		set_logtalk_flag(debug, on)
 	)).
