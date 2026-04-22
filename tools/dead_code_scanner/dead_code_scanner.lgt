@@ -24,9 +24,9 @@
 	imports((tool_diagnostics_common, options))).
 
 	:- info([
-		version is 0:18:0,
+		version is 0:18:1,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2026-04-05,
+		date is 2026-04-22,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
@@ -257,12 +257,6 @@
 	target_diagnostic(Target, Diagnostic, Options) :-
 		target_finding(Target, Finding, Options),
 		finding_diagnostic(Finding, Diagnostic).
-
-	target_findings(Target, Findings, Options) :-
-		(	setof(Finding, target_finding(Target, Finding, Options), Findings) ->
-			true
-		;	Findings = []
-		).
 
 	predicates(Entity, Predicates, UserOptions) :-
 		^^check_options(UserOptions),

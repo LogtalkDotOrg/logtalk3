@@ -206,6 +206,8 @@ Tools
 
 * IMPROVED: Rewritten `sarif` tool auxiliary predicate to be tail-recursive.
 
+* FIXED: Deleted dead code in the `dead_code_scanner` tool.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
