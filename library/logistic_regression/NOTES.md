@@ -26,14 +26,14 @@ classification. Multiclass classification is implemented using a joint
 softmax model trained across all classes.
 
 The library implements the `classifier_protocol` defined in the
-`classifier_protocols` library. It provides predicates for learning a
+`classification_protocols` library. It provides predicates for learning a
 classifier from a dataset object, using it to make predictions,
 returning class probabilities, and exporting the learned model as a list
 of predicate clauses or to a file.
 
 Datasets are represented as objects implementing the `dataset_protocol`
-protocol from the `classifier_protocols` library. Existing datasets in
-`classifier_protocols/test_datasets` can be used for binary, multiclass,
+protocol from the `classification_protocols` library. Existing datasets in
+`classification_protocols/test_datasets` can be used for binary, multiclass,
 continuous, categorical, and mixed-feature testing.
 
 

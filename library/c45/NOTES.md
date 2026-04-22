@@ -28,12 +28,12 @@ instead of information gain for attribute selection, which avoids bias
 towards attributes with many values (see below for implementation details).
 
 The library implements the `classifier_protocol` defined in the
-`classifier_protocols` library. It provides predicates for learning a 
+`classification_protocols` library. It provides predicates for learning a 
 decision tree from a dataset, optionally prune it, using it to make
 predictions, and exporting it as a list of predicate clauses or to a file.
 
 Datasets are represented as objects implementing the `dataset_protocol`
-protocol from the `classifier_protocols` library. See `test_files` directory
+protocol from the `classification_protocols` library. See `test_files` directory
 for examples.
 
 

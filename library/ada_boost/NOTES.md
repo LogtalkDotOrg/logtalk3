@@ -28,13 +28,13 @@ classification. Builds an ensemble of weighted decision trees where each
 subsequent tree focuses on the examples misclassified by previous trees.
 
 The library implements the `classifier_protocol` defined in the
-`classifier_protocols` library. It provides predicates for learning an
+`classification_protocols` library. It provides predicates for learning an
 ensemble classifier from a dataset, using it to make predictions (with
 class probabilities), and exporting it as a list of predicate clauses or
 to a file.
 
 Datasets are represented as objects implementing the `dataset_protocol`
-protocol from the `classifier_protocols` library. See `test_files` directory
+protocol from the `classification_protocols` library. See `test_files` directory
 for examples.
 
 

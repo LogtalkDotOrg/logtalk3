@@ -56,7 +56,7 @@
 		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-20,
-		comment is 'Smoke tests for the "classifier_protocols" library.'
+		comment is 'Smoke tests for the "classification_protocols" library.'
 	]).
 
 	:- uses(list, [

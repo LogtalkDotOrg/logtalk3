@@ -95,7 +95,7 @@
 		yaml(loader),
 		toml(loader),
 		toon(loader),
-		classifier_protocols(loader),
+		classification_protocols(loader),
 		c45(loader),
 		random_forest(loader),
 		ada_boost(loader),

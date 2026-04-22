@@ -23,11 +23,11 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(loader),
 	logtalk_load([
-		classifier_protocols('test_datasets/weather'),
-		classifier_protocols('test_datasets/iris_small'),
-		classifier_protocols('test_datasets/mixed'),
-		classifier_protocols('test_datasets/breast_cancer'),
-		classifier_protocols('test_datasets/missing_mixed')
+		classification_protocols('test_datasets/weather'),
+		classification_protocols('test_datasets/iris_small'),
+		classification_protocols('test_datasets/mixed'),
+		classification_protocols('test_datasets/breast_cancer'),
+		classification_protocols('test_datasets/missing_mixed')
 	], [
 		optimize(on)
 	]),

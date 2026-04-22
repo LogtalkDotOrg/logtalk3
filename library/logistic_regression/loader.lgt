@@ -24,6 +24,6 @@
 	logtalk_load(statistics(loader)),
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
-	logtalk_load(classifier_protocols(loader)),
+	logtalk_load(classification_protocols(loader)),
 	logtalk_load(logistic_regression, [optimize(on)])
 )).

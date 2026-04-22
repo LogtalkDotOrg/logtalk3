@@ -45,7 +45,7 @@ directory in the ``NOTES.md`` file.
    cbor
    character_sets
    ccsds
-   classifier_protocols
+   classification_protocols
    combinations
    command_line_options
    core

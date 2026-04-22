@@ -24,7 +24,7 @@
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(random(loader)),
-	logtalk_load(classifier_protocols(loader)),
+	logtalk_load(classification_protocols(loader)),
 	logtalk_load(c45(loader)),
 	logtalk_load(random_forest, [optimize(on)])
 )).

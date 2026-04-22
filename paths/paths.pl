@@ -124,7 +124,7 @@ logtalk_library_path(bradley_terry, library('bradley_terry/')).
 logtalk_library_path(c45, library('c45/')).
 logtalk_library_path(cbor, library('cbor/')).
 logtalk_library_path(character_sets, library('character_sets/')).
-logtalk_library_path(classifier_protocols, library('classifier_protocols/')).
+logtalk_library_path(classification_protocols, library('classification_protocols/')).
 logtalk_library_path(combinations, library('combinations/')).
 logtalk_library_path(command_line_options, library('command_line_options/')).
 logtalk_library_path(coroutining, library('coroutining/')).

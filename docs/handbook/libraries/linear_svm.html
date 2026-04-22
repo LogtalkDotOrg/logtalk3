@@ -87,7 +87,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="character_sets.html"><code class="docutils literal notranslate"><span class="pre">character_sets</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ccsds.html"><code class="docutils literal notranslate"><span class="pre">ccsds</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="classifier_protocols.html"><code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="classification_protocols.html"><code class="docutils literal notranslate"><span class="pre">classification_protocols</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="combinations.html"><code class="docutils literal notranslate"><span class="pre">combinations</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="command_line_options.html"><code class="docutils literal notranslate"><span class="pre">command_line_options</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="core.html"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
@@ -259,14 +259,15 @@
 multiclass classification. Multiclass classification is implemented
 using a one-vs-rest scheme with one linear margin model per class.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">classifier_protocol</span></code> defined in the
-<code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code> library. It provides predicates for learning a
-classifier from a dataset object, using it to make predictions, and
-exporting the learned model as a list of predicate clauses or to a file.</p>
+<code class="docutils literal notranslate"><span class="pre">classification_protocols</span></code> library. It provides predicates for
+learning a classifier from a dataset object, using it to make
+predictions, and exporting the learned model as a list of predicate
+clauses or to a file.</p>
 <p>Datasets are represented as objects implementing the
-<code class="docutils literal notranslate"><span class="pre">dataset_protocol</span></code> protocol from the <code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code> library.
-Existing datasets in <code class="docutils literal notranslate"><span class="pre">classifier_protocols/test_datasets</span></code> can be used
-for binary, multiclass, continuous, categorical, and mixed-feature
-testing.</p>
+<code class="docutils literal notranslate"><span class="pre">dataset_protocol</span></code> protocol from the <code class="docutils literal notranslate"><span class="pre">classification_protocols</span></code>
+library. Existing datasets in <code class="docutils literal notranslate"><span class="pre">classification_protocols/test_datasets</span></code>
+can be used for binary, multiclass, continuous, categorical, and
+mixed-feature testing.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

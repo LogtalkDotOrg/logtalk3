@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>classifier_protocols &mdash; Logtalk 3.100.0</title>
+  <title>classification_protocols &mdash; Logtalk 3.100.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
@@ -87,7 +87,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="character_sets.html"><code class="docutils literal notranslate"><span class="pre">character_sets</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ccsds.html"><code class="docutils literal notranslate"><span class="pre">ccsds</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code></a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">classification_protocols</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#shared-category">Shared category</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#diagnostics">Diagnostics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#export-header-format">Export header format</a></li>
@@ -237,9 +237,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">classification_protocols</span></code></li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/classifier_protocols.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/classification_protocols.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -247,8 +247,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="classifier-protocols">
-<span id="library-classifier-protocols"></span><h1><code class="docutils literal notranslate"><span class="pre">classifier_protocols</span></code><a class="headerlink" href="#classifier-protocols" title="Link to this heading"></a></h1>
+  <section id="classification-protocols">
+<span id="library-classification-protocols"></span><h1><code class="docutils literal notranslate"><span class="pre">classification_protocols</span></code><a class="headerlink" href="#classification-protocols" title="Link to this heading"></a></h1>
 <p>This library provides protocols used in the implementation of machine
 learning classifier algorithms. Datasets are represented as objects
 implementing the <code class="docutils literal notranslate"><span class="pre">dataset_protocol</span></code> protocol. Classifiers are
@@ -307,21 +307,19 @@ predictor relation.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
-<a class="reference external" href="../../apis/library_index.html#classifier_protocols">../../apis/library_index.html#classifier_protocols</a>
+<a class="reference external" href="../../apis/library_index.html#classification_protocols">../../apis/library_index.html#classification_protocols</a>
 link in a web browser.</p>
 </section>
 <section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(classifier_protocols(loader)).
-</pre></div>
-</div>
+<p>| ?- logtalk_load(classification_protocols(loader)).</p>
 </section>
 <section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>To test this library predicates, shared categories, and datasets, load
 the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
-<p>| ?- logtalk_load(classifier_protocols(tester)).</p>
+<p>| ?- logtalk_load(classification_protocols(tester)).</p>
 </section>
 <section id="test-datasets">
 <h2>Test datasets<a class="headerlink" href="#test-datasets" title="Link to this heading"></a></h2>

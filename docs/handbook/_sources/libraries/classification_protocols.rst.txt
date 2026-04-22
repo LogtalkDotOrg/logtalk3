@@ -1,7 +1,7 @@
-.. _library_classifier_protocols:
+.. _library_classification_protocols:
 
-``classifier_protocols``
-========================
+``classification_protocols``
+============================
 
 This library provides protocols used in the implementation of machine
 learning classifier algorithms. Datasets are represented as objects
@@ -72,7 +72,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#classifier_protocols <../../apis/library_index.html#classifier_protocols>`__
+`../../apis/library_index.html#classification_protocols <../../apis/library_index.html#classification_protocols>`__
 link in a web browser.
 
 Loading
@@ -80,9 +80,7 @@ Loading
 
 To load all entities in this library, load the ``loader.lgt`` file:
 
-::
-
-   | ?- logtalk_load(classifier_protocols(loader)).
+\| ?- logtalk_load(classification_protocols(loader)).
 
 Testing
 -------
@@ -90,7 +88,7 @@ Testing
 To test this library predicates, shared categories, and datasets, load
 the ``tester.lgt`` file:
 
-\| ?- logtalk_load(classifier_protocols(tester)).
+\| ?- logtalk_load(classification_protocols(tester)).
 
 Test datasets
 -------------

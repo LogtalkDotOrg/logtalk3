@@ -26,12 +26,12 @@
 	logtalk_load(format(loader)),
 	logtalk_load(os(loader)),
 	logtalk_load(options(loader)),
-	logtalk_load(classifier_protocols(loader)),
+	logtalk_load(classification_protocols(loader)),
 	logtalk_load([
-		classifier_protocols('test_datasets/weather'),
-		classifier_protocols('test_datasets/iris_small'),
-		classifier_protocols('test_datasets/mixed'),
-		classifier_protocols('test_datasets/missing_mixed')
+		classification_protocols('test_datasets/weather'),
+		classification_protocols('test_datasets/iris_small'),
+		classification_protocols('test_datasets/mixed'),
+		classification_protocols('test_datasets/missing_mixed')
 	], [
 		source_data(on),
 		debug(on)

@@ -8,15 +8,16 @@ multiclass classification. Multiclass classification is implemented
 using a one-vs-rest scheme with one linear margin model per class.
 
 The library implements the ``classifier_protocol`` defined in the
-``classifier_protocols`` library. It provides predicates for learning a
-classifier from a dataset object, using it to make predictions, and
-exporting the learned model as a list of predicate clauses or to a file.
+``classification_protocols`` library. It provides predicates for
+learning a classifier from a dataset object, using it to make
+predictions, and exporting the learned model as a list of predicate
+clauses or to a file.
 
 Datasets are represented as objects implementing the
-``dataset_protocol`` protocol from the ``classifier_protocols`` library.
-Existing datasets in ``classifier_protocols/test_datasets`` can be used
-for binary, multiclass, continuous, categorical, and mixed-feature
-testing.
+``dataset_protocol`` protocol from the ``classification_protocols``
+library. Existing datasets in ``classification_protocols/test_datasets``
+can be used for binary, multiclass, continuous, categorical, and
+mixed-feature testing.
 
 API documentation
 -----------------
