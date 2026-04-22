@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-21,
+		date is 2026-04-22,
 		comment is 'Unit tests for the "regression_tree" library.'
 	]).
 
@@ -58,11 +58,11 @@
 		regression_tree::predict(Regressor, [dummy-0], Prediction).
 
 	test(regression_tree_predict_3_mixed_signal, deterministic(Prediction =~= 175.0)) :-
-		regression_tree::learn(mixed_signal, Regressor, [feature_scaling(off)]),
+		regression_tree::learn(mixed_signal, Regressor, [feature_scaling(false)]),
 		regression_tree::predict(Regressor, [age-20, student-yes, plan-premium], Prediction).
 
-	test(regression_tree_learn_3_custom_options, deterministic((memberchk(maximum_depth(4), Options), memberchk(minimum_samples_leaf(2), Options), memberchk(minimum_variance_reduction(0.1), Options), memberchk(feature_scaling(on), Options)))) :-
-		regression_tree::learn(step_signal, regression_tree_regressor(_Encoders, _FeatureLabels, _Tree, Options), [maximum_depth(4), minimum_samples_leaf(2), minimum_variance_reduction(0.1), feature_scaling(on)]).
+	test(regression_tree_learn_3_custom_options, deterministic((memberchk(maximum_depth(4), Options), memberchk(minimum_samples_leaf(2), Options), memberchk(minimum_variance_reduction(0.1), Options), memberchk(feature_scaling(true), Options)))) :-
+		regression_tree::learn(step_signal, regression_tree_regressor(_Encoders, _FeatureLabels, _Tree, Options), [maximum_depth(4), minimum_samples_leaf(2), minimum_variance_reduction(0.1), feature_scaling(true)]).
 
 	test(regression_tree_export_to_clauses_4, deterministic(Prediction =~= 20.0)) :-
 		regression_tree::learn(step_signal, Regressor),

@@ -65,9 +65,10 @@ Features
 - **Ensemble Learning**: Combines multiple C4.5 decision trees for robust predictions
 - **Bootstrap Sampling**: Each tree is trained on a random sample with replacement
 - **Feature Randomization**: Random subset of features selected for each tree (default: sqrt(total_features))
+- **Portable Seeded Sampling**: Uses `fast_random(xoshiro128pp)` so bootstrap sampling and feature subset selection are portable and reproducible
 - **Majority Voting**: Final predictions determined by voting across all trees
 - **Probability Estimation**: Provides confidence scores based on vote proportions
-- **Configurable Options**: Number of trees and max features per tree via predicate options
+- **Configurable Options**: Number of trees, maximum features per tree, and random seed via predicate options
 - **Classifier Export**: Learned classifiers can be exported as predicate clauses
 
 
@@ -76,8 +77,9 @@ Options
 
 The following options can be passed to the `learn/3` predicate:
 
-- `number_of_trees(N)`: Number of trees in the forest (default: 10)
-- `maximum_features_per_tree(N)`: Maximum number of features to consider per tree (default: sqrt(total_features))
+- `number_of_trees(N)`: Number of trees in the forest (default: `10`).
+- `maximum_features_per_tree(N)`: Maximum number of features to consider per tree (default: sqrt(total_features)).
+- `random_seed(N)`: Positive integer seed used by the portable `fast_random(xoshiro128pp)` pseudo-random generator when drawing bootstrap samples and random feature subsets. Using the same seed with the same dataset and options reproduces the same learned classifier (default: `1357911`).
 
 
 Classifier Representation
@@ -117,7 +119,7 @@ Usage
 	...
 
 	% Learn with custom options
-	| ?- random_forest::learn(play_tennis, Classifier, [number_of_trees(20), maximum_features_per_tree(2)]).
+	| ?- random_forest::learn(play_tennis, Classifier, [number_of_trees(20), maximum_features_per_tree(2), random_seed(17)]).
 	...
 
 ### Making Predictions

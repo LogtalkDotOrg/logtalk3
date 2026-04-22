@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-21,
+		date is 2026-04-22,
 		comment is 'Gradient boosting regression using regression trees as additive base learners fitted to successive residuals.',
 		remarks is [
 			'Algorithm' - 'Builds an additive ensemble of regression trees by repeatedly fitting the current residuals under squared-error loss.',
@@ -101,7 +101,7 @@
 		Round > NumberOfEstimators,
 		!.
 	build_ensemble(Attributes, Examples, Predictions, NumberOfEstimators, LearningRate, TreeOptions, Round, WeightedTrees0, WeightedTrees) :-
-		create_residual_examples(Examples, Predictions, ResidualExamples, ResidualSSE),
+		create_residual_examples(Examples, Predictions, ResidualExamples, 0.0, ResidualSSE),
 		(   ResidualSSE =< 1.0e-12 ->
 			WeightedTrees = WeightedTrees0
 		;   create_residual_dataset(Attributes, ResidualExamples, ResidualDataset),
@@ -113,11 +113,11 @@
 			build_ensemble(Attributes, Examples, UpdatedPredictions, NumberOfEstimators, LearningRate, TreeOptions, NextRound, WeightedTrees1, WeightedTrees)
 		).
 
-	create_residual_examples([], [], [], 0.0).
-	create_residual_examples([example(Id, Target, AttributeValues)| Examples], [Prediction| Predictions], [example(Id, Residual, AttributeValues)| ResidualExamples], ResidualSSE) :-
+	create_residual_examples([], [], [], ResidualSSE, ResidualSSE).
+	create_residual_examples([example(Id, Target, AttributeValues)| Examples], [Prediction| Predictions], [example(Id, Residual, AttributeValues)| ResidualExamples], ResidualSSE0, ResidualSSE) :-
 		Residual is Target - Prediction,
-		create_residual_examples(Examples, Predictions, ResidualExamples, ResidualSSE0),
-		ResidualSSE is ResidualSSE0 + Residual * Residual.
+		ResidualSSE1 is ResidualSSE0 + Residual * Residual,
+		create_residual_examples(Examples, Predictions, ResidualExamples, ResidualSSE1, ResidualSSE).
 
 	create_residual_dataset(Attributes, ResidualExamples, ResidualDataset) :-
 		build_attribute_clauses(Attributes, AttributeClauses),
@@ -177,7 +177,7 @@
 	default_option(maximum_depth(3)).
 	default_option(minimum_samples_leaf(1)).
 	default_option(minimum_variance_reduction(0.0)).
-	default_option(feature_scaling(off)).
+	default_option(feature_scaling(false)).
 
 	valid_option(number_of_estimators(NumberOfEstimators)) :-
 		valid(positive_integer, NumberOfEstimators).
@@ -190,6 +190,6 @@
 	valid_option(minimum_variance_reduction(MinimumVarianceReduction)) :-
 		valid(non_negative_float, MinimumVarianceReduction).
 	valid_option(feature_scaling(FeatureScaling)) :-
-		once((FeatureScaling == on; FeatureScaling == off)).
+		valid(boolean, FeatureScaling).
 
 :- end_object.

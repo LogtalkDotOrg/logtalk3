@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-22,
 		comment is 'Shared predicates for dimension reducer learning defaults, dataset helpers, transformation, export, and printing.'
 	]).
 
@@ -122,7 +122,7 @@
 	]).
 
 	:- uses(format, [
-		format/2, format/3
+		format/3
 	]).
 
 	:- uses(list, [
@@ -217,7 +217,7 @@
 		known_attribute_values(Attribute, Examples, Values),
 		arithmetic_mean(Values, Mean),
 		^^option(feature_scaling(FeatureScaling), Options),
-		(   FeatureScaling == on ->
+		(   FeatureScaling == true ->
 			length(Values, Count),
 			(   Count > 1 ->
 				variance(Values, Variance)

@@ -1,0 +1,84 @@
+.. index:: single: gsp
+.. _gsp/0:
+
+.. rst-class:: right
+
+**object**
+
+``gsp``
+=======
+
+GSP sequential pattern miner for sequence datasets using level-wise candidate generation and pruning.
+
+| **Availability:** 
+|    ``logtalk_load(gsp(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-22
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`sequential_pattern_mining_common <sequential_pattern_mining_common/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+
+   - Algorithm: Builds frequent sequential patterns level by level by extending frequent patterns, pruning candidates whose immediate subpatterns are not all frequent, and rescanning the dataset for support.
+   - Dataset handling: Requires a dataset implementing ``sequence_dataset_protocol`` with sequences represented as ordered lists of canonical sorted itemsets over a declared item domain.
+   - Support thresholds: Supports minimum support specified either as a relative proportion or as an absolute count. When both are given, the absolute-count threshold takes precedence.
+   - Pattern miner representation: The mined result is represented by default as ``gsp_pattern_miner(ItemDomain, Patterns, Options)`` where ``Patterns`` stores ``sequence_pattern(Pattern, SupportCount)`` terms ordered first by total item count and then lexicographically.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`pattern_miner_protocol/0::export_to_clauses/4`  :ref:`pattern_miner_protocol/0::export_to_file/4`  :ref:`pattern_miner_protocol/0::mine/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`pattern_miner_protocol/0::print_pattern_miner/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: mine/3
+.. _gsp/0::mine/3:
+
+``mine/3``
+^^^^^^^^^^
+
+Mines frequent sequential patterns from the given sequence dataset using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mine(Dataset,PatternMiner,Options)``
+| **Mode and number of proofs:**
+|    ``mine(+object_identifier,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`pattern_miner_protocol <pattern_miner_protocol/0>`, :ref:`sequence_dataset_protocol <sequence_dataset_protocol/0>`, :ref:`prefix_span <prefix_span/0>`, :ref:`spade <spade/0>`, :ref:`clo_span <clo_span/0>`
+

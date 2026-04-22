@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-21,
+		date is 2026-04-22,
 		comment is 'k-Nearest Neighbors regressor with multiple distance metrics, weighting schemes, optional feature scaling, and mixed-feature support.',
 		remarks is [
 			'Algorithm' - 'Learns lazily by storing encoded training rows and predicts targets as the weighted average of the k nearest neighbors.',
@@ -94,7 +94,7 @@
 
 	continuous_stats(Attribute, Examples, Options, Mean, Scale) :-
 		^^option(feature_scaling(FeatureScaling), Options),
-		(   FeatureScaling == on ->
+		(   FeatureScaling == true ->
 			known_attribute_values(Examples, Attribute, Values),
 			(   Values == [] ->
 				Mean = 0.0,
@@ -280,7 +280,7 @@
 	default_option(distance_metric(euclidean)).
 	default_option(weight_scheme(uniform)).
 	default_option(minkowski_power(3.0)).
-	default_option(feature_scaling(on)).
+	default_option(feature_scaling(true)).
 
 	valid_option(k(K)) :-
 		valid(positive_integer, K).
@@ -292,6 +292,6 @@
 		number(Power),
 		Power >= 1.0.
 	valid_option(feature_scaling(FeatureScaling)) :-
-		once((FeatureScaling == on; FeatureScaling == off)).
+		valid(boolean, FeatureScaling).
 
 :- end_object.

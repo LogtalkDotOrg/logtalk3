@@ -66,6 +66,13 @@
 		Classifier = rf_classifier(Trees, _, _),
 		length(Trees, NumTrees).
 
+	test(random_forest_learn_3_random_seed_option, deterministic(list::memberchk(random_seed(17), Options))) :-
+		random_forest::learn(play_tennis, rf_classifier(_Trees, _ClassValues, Options), [number_of_trees(5), random_seed(17)]).
+
+	test(random_forest_learn_3_same_seed_same_classifier, deterministic(Classifier1 == Classifier2)) :-
+		random_forest::learn(play_tennis, Classifier1, [number_of_trees(5), random_seed(19)]),
+		random_forest::learn(play_tennis, Classifier2, [number_of_trees(5), random_seed(19)]).
+
 	test(random_forest_learn_3_custom_max_features, true(ground(Classifier))) :-
 		random_forest::learn(play_tennis, Classifier, [number_of_trees(3), maximum_features_per_tree(2)]).
 
@@ -95,7 +102,7 @@
 
 	test(random_forest_predict_3_play_tennis_overcast_yes, true(Class == yes)) :-
 		% Overcast should strongly predict "yes" even with ensemble
-		random_forest::learn(play_tennis, Classifier, [number_of_trees(5)]),
+		random_forest::learn(play_tennis, Classifier, [number_of_trees(5), random_seed(17)]),
 		random_forest::predict(Classifier, [outlook-overcast, temperature-hot, humidity-high, wind-weak], Class).
 
 	test(random_forest_predict_3_contact_lenses, true(ground(Class))) :-
@@ -104,11 +111,11 @@
 
 	test(random_forest_predict_3_iris_setosa, true(Class == setosa)) :-
 		% Setosa is well-separated, ensemble should agree
-		random_forest::learn(iris, Classifier, [number_of_trees(5)]),
+		random_forest::learn(iris, Classifier, [number_of_trees(5), random_seed(17)]),
 		random_forest::predict(Classifier, [sepal_length-5.0, sepal_width-3.5, petal_length-1.4, petal_width-0.2], Class).
 
 	test(random_forest_predict_3_iris_virginica, true(Class == virginica)) :-
-		random_forest::learn(iris, Classifier, [number_of_trees(5)]),
+		random_forest::learn(iris, Classifier, [number_of_trees(5), random_seed(17)]),
 		random_forest::predict(Classifier, [sepal_length-6.5, sepal_width-3.0, petal_length-5.5, petal_width-2.0], Class).
 
 	% predict_probabilities/3 tests - verify voting behavior

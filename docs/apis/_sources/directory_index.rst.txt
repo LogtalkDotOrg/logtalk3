@@ -150,6 +150,16 @@ To load an entity, always load the library that includes it using the goal ``log
    application_common <application_common_0>
    application_protocol <application_protocol_0>
 
+``library/apriori/``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   apriori <apriori_0>
+
 ``library/arbitrary/``
 ----------------------
 
@@ -315,6 +325,16 @@ To load an entity, always load the library that includes it using the goal ``log
    classifier_protocol <classifier_protocol_0>
    dataset_protocol <dataset_protocol_0>
 
+``library/clo_span/``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   clo_span <clo_span_0>
+
 ``library/combinations/``
 -------------------------
 
@@ -468,6 +488,16 @@ To load an entity, always load the library that includes it using the goal ``log
    dimension_reduction_dataset_protocol <dimension_reduction_dataset_protocol_0>
    supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol_0>
 
+``library/eclat/``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   eclat <eclat_0>
+
 ``library/edcg/``
 -----------------
 
@@ -524,6 +554,27 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    format <format_0>
+
+``library/fp_growth/``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   fp_growth <fp_growth_0>
+
+``library/frequent_pattern_mining_protocols/``
+----------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   frequent_pattern_mining_common <frequent_pattern_mining_common_0>
+   transaction_dataset_protocol <transaction_dataset_protocol_0>
 
 ``library/genint/``
 -------------------
@@ -618,6 +669,16 @@ To load an entity, always load the library that includes it using the goal ``log
    weighted_graph_protocol <weighted_graph_protocol_0>
    weighted_undirected_graph <weighted_undirected_graph_0>
    weighted_undirected_graph(Dictionary) <weighted_undirected_graph_1>
+
+``library/gsp/``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   gsp <gsp_0>
 
 ``library/hashes/``
 -------------------
@@ -1149,6 +1210,17 @@ To load an entity, always load the library that includes it using the goal ``log
    os_types <os_types_0>
    osp <osp_0>
 
+``library/pattern_mining_protocols/``
+-------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   pattern_miner_common <pattern_miner_common_0>
+   pattern_miner_protocol <pattern_miner_protocol_0>
+
 ``library/pca/``
 ----------------
 
@@ -1169,6 +1241,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    permutations <permutations_0>
    permutations_protocol <permutations_protocol_0>
+
+``library/prefix_span/``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   prefix_span <prefix_span_0>
 
 ``library/process/``
 --------------------
@@ -1315,6 +1397,17 @@ To load an entity, always load the library that includes it using the goal ``log
 
    regression_tree <regression_tree_0>
 
+``library/sequential_pattern_mining_protocols/``
+------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   sequence_dataset_protocol <sequence_dataset_protocol_0>
+   sequential_pattern_mining_common <sequential_pattern_mining_common_0>
+
 ``library/sets/``
 -----------------
 
@@ -1367,6 +1460,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    socket <socket_0>
+
+``library/spade/``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   spade <spade_0>
 
 ``library/statistics/``
 -----------------------

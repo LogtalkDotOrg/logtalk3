@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-21,
+		date is 2026-04-22,
 		comment is 'Regression tree regressor supporting continuous and mixed-feature datasets using recursive variance-reduction splits.',
 		remarks is [
 			'Algorithm' - 'Builds a binary regression tree by recursively selecting the encoded feature threshold that maximizes variance reduction.',
@@ -90,7 +90,7 @@
 
 	continuous_stats(Attribute, Examples, Options, Mean, Scale) :-
 		^^option(feature_scaling(FeatureScaling), Options),
-		(   FeatureScaling == on ->
+		(   FeatureScaling == true ->
 			known_attribute_values(Examples, Attribute, Values),
 			(   Values == [] ->
 				Mean = 0.0,
@@ -375,7 +375,7 @@
 	default_option(maximum_depth(10)).
 	default_option(minimum_samples_leaf(1)).
 	default_option(minimum_variance_reduction(0.0)).
-	default_option(feature_scaling(off)).
+	default_option(feature_scaling(false)).
 
 	valid_option(maximum_depth(MaximumDepth)) :-
 		valid(positive_integer, MaximumDepth).
@@ -384,6 +384,6 @@
 	valid_option(minimum_variance_reduction(MinimumVarianceReduction)) :-
 		valid(non_negative_float, MinimumVarianceReduction).
 	valid_option(feature_scaling(FeatureScaling)) :-
-		once((FeatureScaling == on; FeatureScaling == off)).
+		valid(boolean, FeatureScaling).
 
 :- end_object.

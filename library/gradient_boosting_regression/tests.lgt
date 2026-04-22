@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-21,
+		date is 2026-04-22,
 		comment is 'Unit tests for the "gradient_boosting_regression" library.'
 	]).
 
@@ -48,8 +48,8 @@
 	test(gradient_boosting_regression_learn_2_structure, deterministic(functor(Regressor, gradient_boosting_regressor, 3))) :-
 		gradient_boosting_regression::learn(step_signal, Regressor).
 
-	test(gradient_boosting_regression_learn_3_custom_options, deterministic((length(WeightedTrees, StageCount), StageCount >= 1, StageCount =< 5, memberchk(number_of_estimators(5), Options), memberchk(learning_rate(1.0), Options), memberchk(maximum_depth(3), Options), memberchk(minimum_samples_leaf(2), Options), memberchk(feature_scaling(off), Options)))) :-
-		gradient_boosting_regression::learn(step_signal, gradient_boosting_regressor(_InitialPrediction, WeightedTrees, Options), [number_of_estimators(5), learning_rate(1.0), maximum_depth(3), minimum_samples_leaf(2), feature_scaling(off)]).
+	test(gradient_boosting_regression_learn_3_custom_options, deterministic((length(WeightedTrees, StageCount), StageCount >= 1, StageCount =< 5, memberchk(number_of_estimators(5), Options), memberchk(learning_rate(1.0), Options), memberchk(maximum_depth(3), Options), memberchk(minimum_samples_leaf(2), Options), memberchk(feature_scaling(false), Options)))) :-
+		gradient_boosting_regression::learn(step_signal, gradient_boosting_regressor(_InitialPrediction, WeightedTrees, Options), [number_of_estimators(5), learning_rate(1.0), maximum_depth(3), minimum_samples_leaf(2), feature_scaling(false)]).
 
 	test(gradient_boosting_regression_predict_3_step_signal_left_band, deterministic(Prediction =~= 10.0)) :-
 		gradient_boosting_regression::learn(step_signal, Regressor, [number_of_estimators(5), learning_rate(1.0), maximum_depth(2)]),
@@ -64,7 +64,7 @@
 		gradient_boosting_regression::predict(Regressor, [dummy-0], Prediction).
 
 	test(gradient_boosting_regression_predict_3_mixed_signal, deterministic(Prediction =~= 175.0)) :-
-		gradient_boosting_regression::learn(mixed_signal, Regressor, [number_of_estimators(3), learning_rate(1.0), maximum_depth(4), feature_scaling(off)]),
+		gradient_boosting_regression::learn(mixed_signal, Regressor, [number_of_estimators(3), learning_rate(1.0), maximum_depth(4), feature_scaling(false)]),
 		gradient_boosting_regression::predict(Regressor, [age-20, student-yes, plan-premium], Prediction).
 
 	test(gradient_boosting_regression_export_to_clauses_4, deterministic(Prediction =~= 20.0)) :-

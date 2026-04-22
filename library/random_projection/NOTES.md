@@ -67,7 +67,7 @@ Options
 The `learn/3` predicate accepts the following options:
 
 - `n_components/1`: Number of random projection components to sample. The default is `2`.
-- `feature_scaling/1`: Whether to standardize continuous attributes before projection. Options: `on` (default) or `off`.
+- `feature_scaling/1`: Whether to standardize continuous attributes before projection. Options: `true` (default) or `false`.
 - `random_seed/1`: Positive integer used to seed the portable pseudo-random generator before sampling the projection matrix. The default is `1357911`.
 
 
@@ -84,7 +84,7 @@ The following examples use the sample datasets shipped with the
 
 	| ?- random_projection::learn(correlated_plane, DimensionReducer).
 
-	| ?- random_projection::learn(correlated_plane, DimensionReducer, [n_components(1), feature_scaling(off), random_seed(17)]).
+	| ?- random_projection::learn(correlated_plane, DimensionReducer, [n_components(1), feature_scaling(false), random_seed(17)]).
 
 ### Transforming new instances
 

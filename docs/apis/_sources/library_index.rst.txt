@@ -52,6 +52,16 @@ To load any library (including developer tools, ports, and contributions), use t
    application_common <application_common_0>
    application_protocol <application_protocol_0>
 
+:ref:`apriori <library_apriori>`
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   apriori <apriori_0>
+
 :ref:`arbitrary <library_arbitrary>`
 ------------------------------------
 
@@ -228,6 +238,16 @@ To load any library (including developer tools, ports, and contributions), use t
    classifier_common <classifier_common_0>
    classifier_protocol <classifier_protocol_0>
    dataset_protocol <dataset_protocol_0>
+
+:ref:`clo_span <library_clo_span>`
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   clo_span <clo_span_0>
 
 :ref:`code_metrics <library_code_metrics>`
 ------------------------------------------
@@ -516,6 +536,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
    doclet <doclet_0>
 
+:ref:`eclat <library_eclat>`
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   eclat <eclat_0>
+
 :ref:`edcg <library_edcg>`
 --------------------------
 
@@ -593,6 +623,27 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    format <format_0>
+
+:ref:`fp_growth <library_fp_growth>`
+------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   fp_growth <fp_growth_0>
+
+:ref:`frequent_pattern_mining_protocols <library_frequent_pattern_mining_protocols>`
+------------------------------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   frequent_pattern_mining_common <frequent_pattern_mining_common_0>
+   transaction_dataset_protocol <transaction_dataset_protocol_0>
 
 :ref:`genint <library_genint>`
 ------------------------------
@@ -687,6 +738,16 @@ To load any library (including developer tools, ports, and contributions), use t
    weighted_graph_protocol <weighted_graph_protocol_0>
    weighted_undirected_graph <weighted_undirected_graph_0>
    weighted_undirected_graph(Dictionary) <weighted_undirected_graph_1>
+
+:ref:`gsp <library_gsp>`
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   gsp <gsp_0>
 
 :ref:`hashes <library_hashes>`
 ------------------------------
@@ -1366,6 +1427,17 @@ To load any library (including developer tools, ports, and contributions), use t
    registry_loader_hook <registry_loader_hook_0>
    registry_protocol <registry_protocol_0>
 
+:ref:`pattern_mining_protocols <library_pattern_mining_protocols>`
+------------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   pattern_miner_common <pattern_miner_common_0>
+   pattern_miner_protocol <pattern_miner_protocol_0>
+
 :ref:`pca <library_pca>`
 ------------------------
 
@@ -1407,6 +1479,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    ports_profiler <ports_profiler_0>
+
+:ref:`prefix_span <library_prefix_span>`
+----------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   prefix_span <prefix_span_0>
 
 :ref:`process <library_process>`
 --------------------------------
@@ -1573,6 +1655,17 @@ To load any library (including developer tools, ports, and contributions), use t
 
    sbom <sbom_0>
 
+:ref:`sequential_pattern_mining_protocols <library_sequential_pattern_mining_protocols>`
+----------------------------------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   sequence_dataset_protocol <sequence_dataset_protocol_0>
+   sequential_pattern_mining_common <sequential_pattern_mining_common_0>
+
 :ref:`sets <library_sets>`
 --------------------------
 
@@ -1625,6 +1718,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    socket <socket_0>
+
+:ref:`spade <library_spade>`
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   spade <spade_0>
 
 :ref:`statistics <library_statistics>`
 --------------------------------------

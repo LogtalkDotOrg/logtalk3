@@ -42,6 +42,7 @@ Categories
    file_diagram(Format) <file_diagram_1>
    flags <flags_0>
    flatting <flatting_0>
+   frequent_pattern_mining_common <frequent_pattern_mining_common_0>
    genint_core <genint_core_0>
    gensym_core <gensym_core_0>
    graph_common <graph_common_0>
@@ -64,12 +65,14 @@ Categories
    os_types <os_types_0>
    packs_common <packs_common_0>
    packs_messages <packs_messages_0>
+   pattern_miner_common <pattern_miner_common_0>
    proto_hierarchy <proto_hierarchy_0>
    ranker_common <ranker_common_0>
    ranking_dataset_common <ranking_dataset_common_0>
    read_file <read_file_0>
    recorded_database_core <recorded_database_core_0>
    regressor_common <regressor_common_0>
+   sequential_pattern_mining_common <sequential_pattern_mining_common_0>
    single_byte_character_set(MaxCode) <single_byte_character_set_1>
    statistics <statistics_0>
    subject <subject_0>
@@ -94,6 +97,7 @@ Objects
    ada_boost <ada_boost_0>
    after_event_registry <after_event_registry_0>
    amqp <amqp_0>
+   apriori <apriori_0>
    arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <arithmetic_operator_replacement_5>
    assertions <assertions_0>
    assertions(Mode) <assertions_1>
@@ -132,6 +136,7 @@ Objects
    ccsds(SecondaryHeaderLength) <ccsds_1>
    character <character_0>
    clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <clauses_reordering_5>
+   clo_span <clo_span_0>
    cobertura_report <cobertura_report_0>
    code_metrics <code_metrics_0>
    cogc_metric <cogc_metric_0>
@@ -190,6 +195,7 @@ Objects
    doclet <doclet_0>
    dot_graph_language <dot_graph_language_0>
    dump_trace <dump_trace_0>
+   eclat <eclat_0>
    edcg <edcg_0>
    either <either_0>
    entity_diagram <entity_diagram_0>
@@ -212,6 +218,7 @@ Objects
    fnv1a_32 <fnv1a_32_0>
    fnv1a_64 <fnv1a_64_0>
    format <format_0>
+   fp_growth <fp_growth_0>
    genint <genint_0>
    gensym <gensym_0>
    geospatial <geospatial_0>
@@ -219,6 +226,7 @@ Objects
    gradient_boosting_regression <gradient_boosting_regression_0>
    grammar_rules_hook <grammar_rules_hook_0>
    graph_language_registry <graph_language_registry_0>
+   gsp <gsp_0>
    halstead_metric <halstead_metric_0>
    halstead_metric(Stroud) <halstead_metric_1>
    hash_common_32 <hash_common_32_0>
@@ -353,6 +361,7 @@ Objects
    porter_stemmer(Representation) <porter_stemmer_1>
    ports_profiler <ports_profiler_0>
    predicate_directive_suppression(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <predicate_directive_suppression_5>
+   prefix_span <prefix_span_0>
    print_goal_hook <print_goal_hook_0>
    process <process_0>
    prolog_module_hook(Module) <prolog_module_hook_1>
@@ -407,6 +416,7 @@ Objects
    snowflakeid_twitter <snowflakeid_twitter_0>
    snowflakeid_twitter(Representation) <snowflakeid_twitter_1>
    socket <socket_0>
+   spade <spade_0>
    splaytree <splaytree_0>
    stomp <stomp_0>
    streamvars <streamvars_0>
@@ -574,6 +584,7 @@ Protocols
    osp <osp_0>
    pack_protocol <pack_protocol_0>
    pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol_0>
+   pattern_miner_protocol <pattern_miner_protocol_0>
    permutations_protocol <permutations_protocol_0>
    proto_hierarchyp <proto_hierarchyp_0>
    pseudo_random_protocol <pseudo_random_protocol_0>
@@ -585,6 +596,7 @@ Protocols
    regression_dataset_protocol <regression_dataset_protocol_0>
    regressor_protocol <regressor_protocol_0>
    sampling_protocol <sampling_protocol_0>
+   sequence_dataset_protocol <sequence_dataset_protocol_0>
    setp <setp_0>
    simulated_annealing_protocol <simulated_annealing_protocol_0>
    snowflakeid_protocol <snowflakeid_protocol_0>
@@ -599,6 +611,7 @@ Protocols
    toml_protocol <toml_protocol_0>
    tool_diagnostics_protocol <tool_diagnostics_protocol_0>
    toon_protocol <toon_protocol_0>
+   transaction_dataset_protocol <transaction_dataset_protocol_0>
    tsv_protocol <tsv_protocol_0>
    tzif_protocol <tzif_protocol_0>
    ulid_protocol <ulid_protocol_0>

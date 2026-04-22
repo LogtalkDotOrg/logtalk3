@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-22,
 		comment is 'Naive Bayes classifier with Laplace smoothing and Gaussian distribution support. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Naive Bayes is a probabilistic classifier based on Bayes theorem with strong (naive) independence assumptions between features.',
@@ -56,7 +56,7 @@
 	]).
 
 	:- uses(format, [
-		format/2, format/3
+		format/2
 	]).
 
 	learn(Dataset, Classifier) :-
@@ -289,8 +289,7 @@
 		format('Classes: ~w~n~n', [Classes]),
 		format('Class Priors:~n', []),
 		print_priors(ClassPriors),
-		nl,
-		format('Features:~n', []),
+		format('~nFeatures:~n', []),
 		print_features(AttributeNames, FeatureTypes, FeatureParams).
 
 	print_priors([]).

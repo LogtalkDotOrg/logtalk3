@@ -1,0 +1,93 @@
+.. index:: single: sequence_dataset_protocol
+.. _sequence_dataset_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``sequence_dataset_protocol``
+=============================
+
+Protocol for ordered sequence datasets used with sequential pattern mining algorithms.
+
+| **Availability:** 
+|    ``logtalk_load(sequential_pattern_mining_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-22
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: items/1
+.. _sequence_dataset_protocol/0::items/1:
+
+``items/1``
+^^^^^^^^^^^
+
+Returns the declared sequence item domain as a canonical sorted list of unique items.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``items(Items)``
+| **Mode and number of proofs:**
+|    ``items(-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: sequence/2
+.. _sequence_dataset_protocol/0::sequence/2:
+
+``sequence/2``
+^^^^^^^^^^^^^^
+
+Enumerates by backtracking the sequences in the dataset. Each sequence is represented as an ordered list of canonical sorted itemsets with unique declared items.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sequence(Id,Sequence)``
+| **Mode and number of proofs:**
+|    ``sequence(-integer,-list(list(atom)))`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

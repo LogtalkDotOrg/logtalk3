@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-21,
+		date is 2026-04-22,
 		comment is 'Linear regression regressor supporting continuous and mixed-feature datasets using batch gradient descent. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses batch gradient descent to minimize mean squared error. Supports optional L2 regularization and optional feature scaling for continuous attributes.',
@@ -50,6 +50,10 @@
 
 	:- uses(list, [
 		append/3, length/2, memberchk/2
+	]).
+
+	:- uses(numberlist, [
+		scalar_product/3 as dot_product/3
 	]).
 
 	:- uses(population, [
@@ -90,7 +94,7 @@
 
 	continuous_stats(Attribute, Examples, Options, Mean, Scale) :-
 		^^option(feature_scaling(FeatureScaling), Options),
-		(   FeatureScaling == on ->
+		(   FeatureScaling == true ->
 			known_attribute_values(Attribute, Examples, Values),
 			(   Values == [] ->
 				Mean = 0.0,
@@ -218,7 +222,7 @@
 		MeanBiasGradient is GradientBias * Scale,
 		Bias1 is Bias0 - LearningRate * MeanBiasGradient,
 		BiasDelta is abs(Bias1 - Bias0),
-		update_weights(Weights0, GradientWeights, Scale, Regularization, LearningRate, Weights1, MaxWeightDelta),
+		update_weights(Weights0, GradientWeights, Scale, Regularization, LearningRate, Weights1, 0.0, MaxWeightDelta),
 		MaxDelta is max(BiasDelta, MaxWeightDelta).
 
 	accumulate_gradients([], _, _, GradientBias, GradientWeights, GradientBias, GradientWeights).
@@ -230,23 +234,18 @@
 		add_scaled_vector(Features, Error, GradientWeights0, GradientWeights1),
 		accumulate_gradients(Rows, Bias, Weights, GradientBias1, GradientWeights1, GradientBias, GradientWeights).
 
-	dot_product([], [], 0.0).
-	dot_product([Weight| Weights], [Feature| Features], Value) :-
-		dot_product(Weights, Features, RestValue),
-		Value is RestValue + Weight * Feature.
-
 	add_scaled_vector([], _, [], []).
 	add_scaled_vector([Feature| Features], Scale, [Gradient| Gradients], [Updated| UpdatedGradients]) :-
 		Updated is Gradient + Feature * Scale,
 		add_scaled_vector(Features, Scale, Gradients, UpdatedGradients).
 
-	update_weights([], [], _, _, _, [], 0.0).
-	update_weights([Weight0| Weights0], [Gradient| Gradients], Scale, Regularization, LearningRate, [Weight1| Weights1], MaxDelta) :-
+	update_weights([], [], _, _, _, [], MaxDelta, MaxDelta).
+	update_weights([Weight0| Weights0], [Gradient| Gradients], Scale, Regularization, LearningRate, [Weight1| Weights1], MaxDelta0, MaxDelta) :-
 		MeanGradient is Gradient * Scale + Regularization * Weight0,
 		Weight1 is Weight0 - LearningRate * MeanGradient,
 		Delta is abs(Weight1 - Weight0),
-		update_weights(Weights0, Gradients, Scale, Regularization, LearningRate, Weights1, RestMaxDelta),
-		MaxDelta is max(Delta, RestMaxDelta).
+		MaxDelta1 is max(Delta, MaxDelta0),
+		update_weights(Weights0, Gradients, Scale, Regularization, LearningRate, Weights1, MaxDelta1, MaxDelta).
 
 	zero_vector(0, []) :-
 		!.
@@ -295,7 +294,7 @@
 	default_option(maximum_iterations(2000)).
 	default_option(tolerance(1.0e-7)).
 	default_option(l2_regularization(0.0)).
-	default_option(feature_scaling(on)).
+	default_option(feature_scaling(true)).
 
 	valid_option(learning_rate(Rate)) :-
 		valid(positive_float, Rate).
@@ -306,6 +305,6 @@
 	valid_option(l2_regularization(Regularization)) :-
 		valid(non_negative_float, Regularization).
 	valid_option(feature_scaling(FeatureScaling)) :-
-		once((FeatureScaling == on; FeatureScaling == off)).
+		valid(boolean, FeatureScaling).
 
 :- end_object.

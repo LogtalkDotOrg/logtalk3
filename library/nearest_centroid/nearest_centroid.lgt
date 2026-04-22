@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-22,
 		comment is 'Nearest Centroid classifier with multiple distance metrics. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Assign to an instance the the class of the training samples whose mean (centroid) is closest to the instance.',
@@ -58,11 +58,11 @@
 	]).
 
 	:- uses(format, [
-		format/2, format/3
+		format/2
 	]).
 
 	:- uses(list, [
-		length/2, member/2, memberchk/2, nth1/3, sort/4, take/3
+		length/2, member/2, memberchk/2, sort/4
 	]).
 
 	:- uses(numberlist, [
@@ -70,7 +70,7 @@
 	]).
 
 	:- uses(pairs, [
-		keys/2, values/2
+		keys/2
 	]).
 
 	:- uses(type, [
@@ -371,8 +371,7 @@
 		length(Centroids, NumCentroids),
 		format('Number of centroids: ~w~n~n', [NumCentroids]),
 		^^print_classifier_template(Classifier),
-		nl,
-		format('Attributes:~n', []),
+		format('~nAttributes:~n', []),
 		print_features(AttributeNames, FeatureTypes).
 
 	print_features([], []).

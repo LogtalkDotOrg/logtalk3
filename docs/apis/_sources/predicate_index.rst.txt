@@ -5212,6 +5212,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::export_to_clauses/4>`
 * :ref:`classifier_protocol <classifier_protocol/0::export_to_clauses/4>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::export_to_clauses/4>`
+* :ref:`pattern_miner_protocol <pattern_miner_protocol/0::export_to_clauses/4>`
 * :ref:`ranker_protocol <ranker_protocol/0::export_to_clauses/4>`
 * :ref:`regressor_protocol <regressor_protocol/0::export_to_clauses/4>`
 
@@ -5226,6 +5227,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::export_to_file/4>`
 * :ref:`classifier_protocol <classifier_protocol/0::export_to_file/4>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::export_to_file/4>`
+* :ref:`pattern_miner_protocol <pattern_miner_protocol/0::export_to_file/4>`
 * :ref:`ranker_protocol <ranker_protocol/0::export_to_file/4>`
 * :ref:`regressor_protocol <regressor_protocol/0::export_to_file/4>`
 
@@ -8366,6 +8368,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ranking_dataset_protocol <ranking_dataset_protocol/0::item/2>`
 
+``items/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`sequence_dataset_protocol <sequence_dataset_protocol/0::items/1>`
+* :ref:`transaction_dataset_protocol <transaction_dataset_protocol/0::items/1>`
+
 ``iterator_element/2``
 ----------------------
 
@@ -10867,6 +10880,32 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`weighted_undirected_graph(Dictionary) <weighted_undirected_graph/1::min_tree/3>`
 
+``mine/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`pattern_miner_protocol <pattern_miner_protocol/0::mine/2>`
+
+``mine/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`apriori <apriori/0::mine/3>`
+* :ref:`clo_span <clo_span/0::mine/3>`
+* :ref:`eclat <eclat/0::mine/3>`
+* :ref:`fp_growth <fp_growth/0::mine/3>`
+* :ref:`gsp <gsp/0::mine/3>`
+* :ref:`prefix_span <prefix_span/0::mine/3>`
+* :ref:`spade <spade/0::mine/3>`
+
 ``minimum_enclosing_circle/3``
 ------------------------------
 
@@ -13278,6 +13317,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`logtalk <logtalk/0::print_message_tokens/3>`
 
+``print_pattern_miner/1``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`pattern_miner_protocol <pattern_miner_protocol/0::print_pattern_miner/1>`
+
 ``print_ranker/1``
 ------------------
 
@@ -15303,6 +15352,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`either <either/0::sequence/2>`
 * :ref:`maybe <maybe/0::sequence/2>`
+* :ref:`sequence_dataset_protocol <sequence_dataset_protocol/0::sequence/2>`
 * :ref:`validated <validated/0::sequence/2>`
 
 ``sequence/3``
@@ -17231,6 +17281,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`logtalk <logtalk/0::trace_event/2>`
+
+``transaction/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`transaction_dataset_protocol <transaction_dataset_protocol/0::transaction/2>`
 
 ``transform/3``
 ---------------

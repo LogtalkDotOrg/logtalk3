@@ -1,0 +1,93 @@
+.. index:: single: transaction_dataset_protocol
+.. _transaction_dataset_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``transaction_dataset_protocol``
+================================
+
+Protocol for transaction datasets used with frequent itemset mining algorithms.
+
+| **Availability:** 
+|    ``logtalk_load(frequent_pattern_mining_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-22
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: items/1
+.. _transaction_dataset_protocol/0::items/1:
+
+``items/1``
+^^^^^^^^^^^
+
+Returns the declared transaction item domain as a canonical sorted list of unique items.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``items(Items)``
+| **Mode and number of proofs:**
+|    ``items(-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: transaction/2
+.. _transaction_dataset_protocol/0::transaction/2:
+
+``transaction/2``
+^^^^^^^^^^^^^^^^^
+
+Enumerates by backtracking the transactions in the dataset. Each transaction is represented as a canonical sorted list of unique declared items.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``transaction(Id,Transaction)``
+| **Mode and number of proofs:**
+|    ``transaction(-integer,-list(atom))`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

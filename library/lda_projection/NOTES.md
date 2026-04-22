@@ -67,7 +67,7 @@ Options
 The `learn/3` predicate accepts the following options:
 
 - `n_components/1`: Maximum number of discriminant components to extract. The effective number of components is capped by the number of features and by `number_of_classes - 1`. The default is `2`.
-- `feature_scaling/1`: Whether to standardize continuous attributes before estimating scatter matrices. Options: `on` (default) or `off`.
+- `feature_scaling/1`: Whether to standardize continuous attributes before estimating scatter matrices. Options: `true` (default) or `false`.
 - `maximum_iterations/1`: Maximum number of power-iteration steps used when estimating each discriminant direction. The default is `1000`.
 - `tolerance/1`: Positive convergence tolerance used both for power-iteration stopping and for deciding when additional discriminant directions are numerically negligible. The default is `1.0e-8`.
 - `regularization/1`: Positive diagonal regularization added to the within-class scatter matrix before whitening. The default is `1.0e-6`.
@@ -85,7 +85,7 @@ The following examples use the sample labeled dataset shipped with the
 
 	| ?- lda_projection::learn(labeled_measurements, DimensionReducer).
 
-	| ?- lda_projection::learn(labeled_measurements, DimensionReducer, [n_components(1), feature_scaling(off), maximum_iterations(250), tolerance(1.0e-7), regularization(1.0e-5)]).
+	| ?- lda_projection::learn(labeled_measurements, DimensionReducer, [n_components(1), feature_scaling(false), maximum_iterations(250), tolerance(1.0e-7), regularization(1.0e-5)]).
 
 ### Transforming new instances
 

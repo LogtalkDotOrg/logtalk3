@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-21,
+		date is 2026-04-22,
 		comment is 'Performance and reference-fit benchmarks for the "regression_tree" library.'
 	]).
 
@@ -36,7 +36,7 @@
 		reference_fit(step_signal, [], 0.01, 0.01, TrainTime, RMSE, MAE).
 
 	test(mixed_signal_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
-		reference_fit(mixed_signal, [feature_scaling(off)], 0.01, 0.01, TrainTime, RMSE, MAE).
+		reference_fit(mixed_signal, [feature_scaling(false)], 0.01, 0.01, TrainTime, RMSE, MAE).
 
 	test(intercept_only_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
 		reference_fit(intercept_only, [], 0.01, 0.01, TrainTime, RMSE, MAE).

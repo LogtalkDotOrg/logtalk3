@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-22,
 		comment is 'Linear support vector machine classifier supporting binary and multiclass classification using one-vs-rest margin models. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses batch subgradient descent to train one linear hinge-loss model per class in a one-vs-rest configuration.',
@@ -45,7 +45,7 @@
 	]).
 
 	:- uses(format, [
-		format/2, format/3
+		format/2
 	]).
 
 	:- uses(list, [
@@ -322,8 +322,7 @@
 		format('Options: ~w~n~n', [Options]),
 		format('Encoders:~n', []),
 		print_encoders(Encoders),
-		nl,
-		format('Models:~n', []),
+		format('~nModels:~n', []),
 		print_models(Models).
 
 	print_encoders([]).

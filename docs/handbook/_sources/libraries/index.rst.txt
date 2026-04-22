@@ -32,6 +32,7 @@ directory in the ``NOTES.md`` file.
    amqp
    anomaly_detection_protocols
    application
+   apriori
    arbitrary
    assignvars
    avro
@@ -46,6 +47,7 @@ directory in the ``NOTES.md`` file.
    character_sets
    ccsds
    classification_protocols
+   clo_span
    combinations
    command_line_options
    core
@@ -60,11 +62,14 @@ directory in the ``NOTES.md`` file.
    dictionaries
    dif
    dimension_reduction_protocols
+   eclat
    edcg
    events
    expand_library_alias_paths
    expecteds
    format
+   fp_growth
+   frequent_pattern_mining_protocols
    genint
    gensym
    geospatial
@@ -72,6 +77,7 @@ directory in the ``NOTES.md`` file.
    gradient_boosting_regression
    grammars
    graphs
+   gsp
    hashes
    heaps
    hierarchies
@@ -114,8 +120,10 @@ directory in the ``NOTES.md`` file.
    optionals
    options
    os
+   pattern_mining_protocols
    pca
    permutations
+   prefix_span
    process
    protobuf
    queues
@@ -129,9 +137,11 @@ directory in the ``NOTES.md`` file.
    redis
    regression_protocols
    regression_tree
+   sequential_pattern_mining_protocols
    sets
    snowflakeid
    sockets
+   spade
    simulated_annealing
    statistics
    stemming

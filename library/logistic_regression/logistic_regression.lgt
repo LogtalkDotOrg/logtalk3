@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-22,
 		comment is 'Logistic regression classifier supporting binary and multiclass classification using joint softmax training. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses batch gradient descent to train a single multiclass softmax model. Binary classification is treated as a two-class special case of the same objective.',
@@ -52,7 +52,7 @@
 	]).
 
 	:- uses(format, [
-		format/2, format/3
+		format/2
 	]).
 
 	:- uses(list, [
@@ -291,14 +291,6 @@
 		!.
 	target_value(_, _, 0.0).
 
-	sigmoid(Score, Probability) :-
-		(   Score >= 0.0 ->
-			Exp is exp(-Score),
-			Probability is 1.0 / (1.0 + Exp)
-		;   Exp is exp(Score),
-			Probability is Exp / (1.0 + Exp)
-		).
-
 	add_scaled_vector([], _, [], []).
 	add_scaled_vector([Feature| Features], Scale, [Gradient| Gradients], [Updated| UpdatedGradients]) :-
 		Updated is Gradient + Feature * Scale,
@@ -389,11 +381,9 @@
 		^^print_classifier_template(Classifier),
 		format('Classes: ~w~n', [Classes]),
 		print_options(Options),
-		nl,
-		format('Encoders:~n', []),
+		format('~nEncoders:~n', []),
 		print_encoders(Encoders),
-		nl,
-		format('Models:~n', []),
+		format('~nModels:~n', []),
 		print_models(Models).
 
 	print_options(Options) :-

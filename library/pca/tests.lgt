@@ -37,7 +37,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-22,
 		comment is 'Unit tests for the "pca" library.'
 	]).
 
@@ -56,8 +56,8 @@
 	test(pca_learn_2_structure, deterministic(functor(DimensionReducer, pca_reducer, 4))) :-
 		pca::learn(correlated_plane, DimensionReducer).
 
-	test(pca_learn_3_custom_options, deterministic((length(Components, 1), ExplainedVariances = [Variance], Variance > 0.0, memberchk(n_components(1), Options), memberchk(feature_scaling(off), Options)))) :-
-		pca::learn(correlated_plane, pca_reducer(_Encoders, Components, ExplainedVariances, Options), [n_components(1), feature_scaling(off), maximum_iterations(200), tolerance(1.0e-7)]).
+	test(pca_learn_3_custom_options, deterministic((length(Components, 1), ExplainedVariances = [Variance], Variance > 0.0, memberchk(n_components(1), Options), memberchk(feature_scaling(false), Options)))) :-
+		pca::learn(correlated_plane, pca_reducer(_Encoders, Components, ExplainedVariances, Options), [n_components(1), feature_scaling(false), maximum_iterations(200), tolerance(1.0e-7)]).
 
 	test(pca_transform_3_component_names, deterministic((length(ReducedInstance, 2), memberchk(component_1-_, ReducedInstance), memberchk(component_2-_, ReducedInstance)))) :-
 		pca::learn(high_dimensional_measurements, DimensionReducer),

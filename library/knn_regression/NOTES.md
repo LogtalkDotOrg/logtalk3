@@ -72,8 +72,8 @@ Options
 
 The `learn/3` predicate accepts the following options:
 
-- **`k/1`**: Number of nearest neighbors considered for each prediction. Smaller values make predictions more local; larger values smooth them by averaging over more training rows. The default is `3`.
-- **`distance_metric/1`**: Distance function used to compare encoded feature vectors. Accepted values are `euclidean`, `manhattan`, `chebyshev`, and `minkowski`. The default is `euclidean`.
-- **`weight_scheme/1`**: Neighbor weighting policy used when averaging targets. Accepted values are `uniform`, `distance`, and `gaussian`. The default is `uniform`.
-- **`minkowski_power/1`**: Exponent used when `distance_metric(minkowski)` is selected. Larger values increase the influence of larger coordinate differences. The default is `3.0`.
-- **`feature_scaling/1`**: Controls z-score standardization of continuous attributes before storing rows and encoding prediction requests. Accepted values are `on` and `off`. The default is `on`.
+- `k/1`: Number of nearest neighbors considered for each prediction. Smaller values make predictions more local; larger values smooth them by averaging over more training rows. The default is `3`.
+- `distance_metric/1`: Distance function used to compare encoded feature vectors. Accepted values are `euclidean`, `manhattan`, `chebyshev`, and `minkowski`. The default is `euclidean`.
+- `weight_scheme/1`: Neighbor weighting policy used when averaging targets. Accepted values are `uniform`, `distance`, and `gaussian`. The default is `uniform`.
+- `minkowski_power/1`: Exponent used when `distance_metric(minkowski)` is selected. Larger values increase the influence of larger coordinate differences. The default is `3.0`.
+- `feature_scaling/1`: Controls z-score standardization of continuous attributes before storing rows and encoding prediction requests. Accepted values are `true` and `false`. The default is `true`.

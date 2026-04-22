@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-22,
 		comment is 'Local Outlier Factor anomaly detector with multiple distance metrics, mixed-feature support, and missing-value handling. Learns from a dataset object implementing the ``anomaly_dataset_protocol`` protocol and returns a detector term that can be used for scoring, prediction, and export.',
 		remarks is [
 			'Algorithm' - 'The detector memorizes the training instances and computes Local Outlier Factor values by comparing the local reachability density of a query to the densities of its neighbors.',
@@ -38,7 +38,7 @@
 	]).
 
 	:- uses(format, [
-		format/2, format/3
+		format/2
 	]).
 
 	:- uses(list, [
@@ -46,7 +46,7 @@
 	]).
 
 	:- uses(numberlist, [
-		max/2, min/2, sum/2
+		max/2, min/2
 	]).
 
 	:- uses(pairs, [

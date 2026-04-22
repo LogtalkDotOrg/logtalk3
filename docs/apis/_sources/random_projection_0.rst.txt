@@ -15,7 +15,7 @@ Random projection reducer for continuous datasets using a portable seeded Radema
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-21
+| **Date:** 2026-04-22
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,8 +25,8 @@ Random projection reducer for continuous datasets using a portable seeded Radema
 |    ``public`` :ref:`dimension_reducer_common <dimension_reducer_common/0>`
 | **Uses:**
 |    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
-|    :ref:`numberlist <numberlist/0>`
 |    :ref:`pairs <pairs/0>`
 |    :ref:`type <type/0>`
 

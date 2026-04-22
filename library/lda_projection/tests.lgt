@@ -41,7 +41,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-22,
 		comment is 'Unit tests for the "lda_projection" library.'
 	]).
 
@@ -60,8 +60,8 @@
 	test(lda_projection_learn_2_structure, deterministic(functor(DimensionReducer, lda_projection_reducer, 4))) :-
 		lda_projection::learn(labeled_measurements, DimensionReducer).
 
-	test(lda_projection_learn_3_custom_options, deterministic((length(Components, 2), ClassValues == [alpha, beta, gamma], memberchk(n_components(4), Options), memberchk(feature_scaling(off), Options), memberchk(regularization(1.0e-5), Options)))) :-
-		lda_projection::learn(labeled_measurements, lda_projection_reducer(_Encoders, Components, ClassValues, Options), [n_components(4), feature_scaling(off), maximum_iterations(250), tolerance(1.0e-7), regularization(1.0e-5)]).
+	test(lda_projection_learn_3_custom_options, deterministic((length(Components, 2), ClassValues == [alpha, beta, gamma], memberchk(n_components(4), Options), memberchk(feature_scaling(false), Options), memberchk(regularization(1.0e-5), Options)))) :-
+		lda_projection::learn(labeled_measurements, lda_projection_reducer(_Encoders, Components, ClassValues, Options), [n_components(4), feature_scaling(false), maximum_iterations(250), tolerance(1.0e-7), regularization(1.0e-5)]).
 
 	test(lda_projection_transform_3_component_names, deterministic((length(ReducedInstance, 2), memberchk(component_1-_, ReducedInstance), memberchk(component_2-_, ReducedInstance)))) :-
 		lda_projection::learn(labeled_measurements, DimensionReducer),

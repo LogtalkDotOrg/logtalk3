@@ -70,8 +70,8 @@ Options
 
 The `learn/3` predicate accepts the following options:
 
-- **`learning_rate/1`**: Step size used by batch gradient descent when updating the bias and weights. Larger values speed up training but can overshoot; smaller values are more conservative. The default is `0.05`.
-- **`maximum_iterations/1`**: Maximum number of gradient-descent iterations to run before stopping even if the tolerance criterion has not been met. The default is `2000`.
-- **`tolerance/1`**: Convergence threshold for the maximum parameter update. Training stops early when the largest absolute change in the bias or any weight is at or below this value. The default is `1.0e-7`.
-- **`l2_regularization/1`**: L2 penalty coefficient applied to the weight vector during optimization. Higher values increase shrinkage and can reduce overfitting. The default is `0.0`.
-- **`feature_scaling/1`**: Controls z-score standardization of continuous attributes before training and prediction. Accepted values are `on` and `off`. The default is `on`.
+- `learning_rate/1`: Step size used by batch gradient descent when updating the bias and weights. Larger values speed up training but can overshoot; smaller values are more conservative. The default is `0.05`.
+- `maximum_iterations/1`: Maximum number of gradient-descent iterations to run before stopping even if the tolerance criterion has not been met. The default is `2000`.
+- `tolerance/1`: Convergence threshold for the maximum parameter update. Training stops early when the largest absolute change in the bias or any weight is at or below this value. The default is `1.0e-7`.
+- `l2_regularization/1`: L2 penalty coefficient applied to the weight vector during optimization. Higher values increase shrinkage and can reduce overfitting. The default is `0.0`.
+- `feature_scaling/1`: Controls z-score standardization of continuous attributes before training and prediction. Accepted values are `true` and `false`. The default is `true`.

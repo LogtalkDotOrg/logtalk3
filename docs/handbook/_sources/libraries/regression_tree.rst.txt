@@ -87,18 +87,17 @@ Options
 
 The ``learn/3`` predicate accepts the following options:
 
-- **``maximum_depth/1``**: Maximum depth allowed for the induced
-  regression tree. Lower values yield smaller trees; higher values allow
-  more detailed partitioning of the training data. The default is
-  ``10``.
-- **``minimum_samples_leaf/1``**: Minimum number of training examples
+- ``maximum_depth/1``: Maximum depth allowed for the induced regression
+  tree. Lower values yield smaller trees; higher values allow more
+  detailed partitioning of the training data. The default is ``10``.
+- ``minimum_samples_leaf/1``: Minimum number of training examples
   required in a leaf. This option also prevents candidate splits that
   would create child nodes smaller than the requested size. The default
   is ``1``.
-- **``minimum_variance_reduction/1``**: Minimum variance-reduction gain
+- ``minimum_variance_reduction/1``: Minimum variance-reduction gain
   required for accepting a split. Higher values make the learner more
   conservative by pruning weak splits during induction. The default is
   ``0.0``.
-- **``feature_scaling/1``**: Controls z-score standardization of
-  continuous attributes before tree induction. Accepted values are
-  ``on`` and ``off``. The default is ``off``.
+- ``feature_scaling/1``: Controls z-score standardization of continuous
+  attributes before tree induction. Accepted values are ``true`` and
+  ``false``. The default is ``false``.

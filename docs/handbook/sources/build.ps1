@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 21, 2026
+##   Last updated on April 22, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -83,6 +83,7 @@ Foreach-Object {
 (Get-Content ../../../library/amqp/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/amqp.rst
 (Get-Content ../../../library/anomaly_detection_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/anomaly_detection_protocols.rst
 (Get-Content ../../../library/application/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/application.rst
+(Get-Content ../../../library/apriori/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/apriori.rst
 (Get-Content ../../../library/arbitrary/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/arbitrary.rst
 (Get-Content ../../../library/assignvars/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/assignvars.rst
 (Get-Content ../../../library/avro/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/avro.rst
@@ -97,6 +98,7 @@ Foreach-Object {
 (Get-Content ../../../library/ccsds/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ccsds.rst
 (Get-Content ../../../library/character_sets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/character_sets.rst
 (Get-Content ../../../library/classification_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/classification_protocols.rst
+(Get-Content ../../../library/clo_span/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/clo_span.rst
 (Get-Content ../../../library/combinations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/combinations.rst
 (Get-Content ../../../library/command_line_options/NOTES.md | Select-Object -Skip 32) | pandoc -f gfm -t rst -o libraries/command_line_options.rst
 (Get-Content ../../../library/coroutining/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/coroutining.rst
@@ -110,11 +112,14 @@ Foreach-Object {
 (Get-Content ../../../library/dictionaries/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dictionaries.rst
 (Get-Content ../../../library/dif/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dif.rst
 (Get-Content ../../../library/dimension_reduction_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dimension_reduction_protocols.rst
+(Get-Content ../../../library/eclat/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/eclat.rst
 (Get-Content ../../../library/edcg/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/edcg.rst
 (Get-Content ../../../library/events/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/events.rst
 (Get-Content ../../../library/expand_library_alias_paths/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/expand_library_alias_paths.rst
 (Get-Content ../../../library/expecteds/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/expecteds.rst
 (Get-Content ../../../library/format/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/format.rst
+(Get-Content ../../../library/fp_growth/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/fp_growth.rst
+(Get-Content ../../../library/frequent_pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/frequent_pattern_mining_protocols.rst
 (Get-Content ../../../library/genint/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/genint.rst
 (Get-Content ../../../library/gensym/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/gensym.rst
 (Get-Content ../../../library/geospatial/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/geospatial.rst
@@ -122,6 +127,7 @@ Foreach-Object {
 (Get-Content ../../../library/gradient_boosting_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/gradient_boosting_regression.rst
 (Get-Content ../../../library/grammars/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/grammars.rst
 (Get-Content ../../../library/graphs/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/graphs.rst
+(Get-Content ../../../library/gsp/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/gsp.rst
 (Get-Content ../../../library/hashes/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/hashes.rst
 (Get-Content ../../../library/heaps/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/heaps.rst
 (Get-Content ../../../library/hierarchies/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/hierarchies.rst
@@ -164,8 +170,10 @@ Foreach-Object {
 (Get-Content ../../../library/optionals/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/optionals.rst
 (Get-Content ../../../library/options/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/options.rst
 (Get-Content ../../../library/os/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/os.rst
+(Get-Content ../../../library/pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/pattern_mining_protocols.rst
 (Get-Content ../../../library/pca/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/pca.rst
 (Get-Content ../../../library/permutations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/permutations.rst
+(Get-Content ../../../library/prefix_span/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/prefix_span.rst
 (Get-Content ../../../library/process/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/process.rst
 (Get-Content ../../../library/protobuf/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/protobuf.rst
 (Get-Content ../../../library/queues/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/queues.rst
@@ -179,10 +187,12 @@ Foreach-Object {
 (Get-Content ../../../library/redis/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/redis.rst
 (Get-Content ../../../library/regression_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/regression_protocols.rst
 (Get-Content ../../../library/regression_tree/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/regression_tree.rst
+(Get-Content ../../../library/sequential_pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sequential_pattern_mining_protocols.rst
 (Get-Content ../../../library/sets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sets.rst
 (Get-Content ../../../library/simulated_annealing/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/simulated_annealing.rst
 (Get-Content ../../../library/snowflakeid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/snowflakeid.rst
 (Get-Content ../../../library/sockets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sockets.rst
+(Get-Content ../../../library/spade/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/spade.rst
 (Get-Content ../../../library/statistics/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/statistics.rst
 (Get-Content ../../../library/stemming/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/stemming.rst
 (Get-Content ../../../library/stomp/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/stomp.rst

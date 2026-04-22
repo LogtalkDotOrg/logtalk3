@@ -6,24 +6,16 @@
 This library provides protocols used in the implementation of machine
 learning anomaly-detection algorithms. Datasets are represented as
 objects implementing the ``anomaly_dataset_protocol`` protocol. Anomaly
-detectors are represented as objects implementing the
-``anomaly_detector_protocol`` protocol.
+detectors are represented as objects importing the
+``anomaly_detector_common`` category which imports the
+``anomaly_detector_protocol`` protocol. The category provides shared
+``learn/2``, ``predict/3-4``, file export, and dataset helper
+predicates. It keeps threshold-based prediction and export behavior
+separate from the algorithm-specific learning, scoring, clause export,
+and pretty-printing code.
 
 This library also provides a reusable shared category, anomaly benchmark
 datasets, and a small family smoke-test suite.
-
-Shared category
----------------
-
-The library includes one reusable category intended to be imported by
-anomaly detector algorithm implementations:
-
-- ``anomaly_detector_common`` — shared ``learn/2``, ``predict/3-4``,
-  file export, and dataset helper predicates.
-
-This category keeps threshold-based prediction and export behavior
-separate from the algorithm-specific learning, scoring, clause export,
-and pretty-printing code.
 
 Export header format
 --------------------

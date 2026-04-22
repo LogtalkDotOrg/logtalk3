@@ -55,7 +55,8 @@ The ``learn/3`` predicate accepts the following options:
 - ``n_components/1``: Number of principal components to extract. The
   default is ``2``.
 - ``feature_scaling/1``: Whether to standardize continuous attributes
-  before extracting components. Options: ``on`` (default) or ``off``.
+  before extracting components. Options: ``true`` (default) or
+  ``false``.
 - ``maximum_iterations/1``: Maximum number of power-iteration steps used
   when estimating each principal direction. The default is ``1000``.
 - ``tolerance/1``: Positive convergence tolerance used both for
@@ -80,7 +81,7 @@ Learning a reducer
 
    | ?- pca::learn(correlated_plane, DimensionReducer).
 
-   | ?- pca::learn(correlated_plane, DimensionReducer, [n_components(1), feature_scaling(off), maximum_iterations(200), tolerance(1.0e-7)]).
+   | ?- pca::learn(correlated_plane, DimensionReducer, [n_components(1), feature_scaling(false), maximum_iterations(200), tolerance(1.0e-7)]).
 
 Transforming new instances
 ~~~~~~~~~~~~~~~~~~~~~~~~~~

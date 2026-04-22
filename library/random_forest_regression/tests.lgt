@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-21,
+		date is 2026-04-22,
 		comment is 'Unit tests for the "random_forest_regression" library.'
 	]).
 
@@ -43,8 +43,12 @@
 	test(random_forest_regression_learn_2_structure, deterministic(functor(Regressor, rf_regressor, 2))) :-
 		random_forest_regression::learn(step_signal, Regressor).
 
-	test(random_forest_regression_learn_3_custom_num_trees, deterministic((length(Trees, 5), memberchk(number_of_trees(5), Options), memberchk(maximum_depth(4), Options), memberchk(minimum_samples_leaf(2), Options), memberchk(feature_scaling(on), Options)))) :-
-		random_forest_regression::learn(step_signal, rf_regressor(Trees, Options), [number_of_trees(5), maximum_depth(4), minimum_samples_leaf(2), feature_scaling(on)]).
+	test(random_forest_regression_learn_3_custom_num_trees, deterministic((length(Trees, 5), memberchk(number_of_trees(5), Options), memberchk(maximum_depth(4), Options), memberchk(minimum_samples_leaf(2), Options), memberchk(feature_scaling(true), Options), memberchk(random_seed(17), Options)))) :-
+		random_forest_regression::learn(step_signal, rf_regressor(Trees, Options), [number_of_trees(5), maximum_depth(4), minimum_samples_leaf(2), feature_scaling(true), random_seed(17)]).
+
+	test(random_forest_regression_learn_3_same_seed_same_regressor, deterministic(Regressor1 == Regressor2)) :-
+		random_forest_regression::learn(step_signal, Regressor1, [number_of_trees(5), random_seed(19)]),
+		random_forest_regression::learn(step_signal, Regressor2, [number_of_trees(5), random_seed(19)]).
 
 	test(random_forest_regression_trees_respect_max_features, deterministic(FeatureCount =< 2)) :-
 		random_forest_regression::learn(mixed_signal, rf_regressor(Trees, _Options), [number_of_trees(4), maximum_features_per_tree(2)]),

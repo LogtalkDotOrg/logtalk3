@@ -1,0 +1,151 @@
+.. index:: single: frequent_pattern_mining_common
+.. _frequent_pattern_mining_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``frequent_pattern_mining_common``
+==================================
+
+Shared predicates for frequent itemset miner dataset validation, support accumulation, and itemset ordering/filtering helpers.
+
+| **Availability:** 
+|    ``logtalk_load(frequent_pattern_mining_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-22
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`pattern_miner_common <pattern_miner_common/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`pattern_miner_protocol/0::export_to_clauses/4`  :ref:`pattern_miner_protocol/0::export_to_file/4`  :ref:`pattern_miner_protocol/0::mine/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`pattern_miner_protocol/0::print_pattern_miner/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: check_transactions/4
+.. _frequent_pattern_mining_common/0::check_transactions/4:
+
+``check_transactions/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates the collected dataset transactions and returns the maximum transaction length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_transactions(Dataset,ItemDomain,Transactions,MaxTransactionLength)``
+| **Mode and number of proofs:**
+|    ``check_transactions(+object_identifier,+list(atom),+list(pair(integer,list(atom))),-integer)`` - ``one``
+
+
+------------
+
+.. index:: sort_patterns/2
+.. _frequent_pattern_mining_common/0::sort_patterns/2:
+
+``sort_patterns/2``
+^^^^^^^^^^^^^^^^^^^
+
+Sorts itemset patterns first by pattern length and then lexicographically.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sort_patterns(Patterns0,Patterns)``
+| **Mode and number of proofs:**
+|    ``sort_patterns(+list(compound),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: filter_patterns/3
+.. _frequent_pattern_mining_common/0::filter_patterns/3:
+
+``filter_patterns/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Filters itemset patterns by minimum pattern length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``filter_patterns(Patterns0,MinimumPatternLength,Patterns)``
+| **Mode and number of proofs:**
+|    ``filter_patterns(+list(compound),+integer,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: count_items/4
+.. _frequent_pattern_mining_common/0::count_items/4:
+
+``count_items/4``
+^^^^^^^^^^^^^^^^^
+
+Accumulates support counts for a list of items.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``count_items(Items,Count,ItemCounts0,ItemCounts)``
+| **Mode and number of proofs:**
+|    ``count_items(+list(atom),+integer,+list(pair(atom,integer)),-list(pair(atom,integer)))`` - ``one``
+
+
+------------
+
+.. index:: select_frequent_item_supports/3
+.. _frequent_pattern_mining_common/0::select_frequent_item_supports/3:
+
+``select_frequent_item_supports/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Selects the item supports that satisfy the minimum support count.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``select_frequent_item_supports(ItemCounts,SupportCount,FrequentItemSupports)``
+| **Mode and number of proofs:**
+|    ``select_frequent_item_supports(+list(pair(atom,integer)),+integer,-list(compound))`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

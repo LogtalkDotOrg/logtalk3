@@ -49,14 +49,14 @@ The ``dimension_reducer_common`` category supports the
 ``feature_scaling/1`` option used by importing reducers to control
 continuous feature normalization before projection:
 
-- ``feature_scaling(on)`` standardizes each continuous attribute using
+- ``feature_scaling(true)`` standardizes each continuous attribute using
   its training-set mean and standard deviation.
 
-- ``feature_scaling(off)`` only centers each continuous attribute using
-  its training-set mean.
+- ``feature_scaling(false)`` only centers each continuous attribute
+  using its training-set mean.
 
 The current ``pca``, ``random_projection``, and ``lda_projection``
-libraries all define ``feature_scaling(on)`` as their default.
+libraries all define ``feature_scaling(true)`` as their default.
 
 Testing
 -------

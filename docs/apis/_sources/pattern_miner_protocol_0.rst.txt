@@ -1,0 +1,135 @@
+.. index:: single: pattern_miner_protocol
+.. _pattern_miner_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``pattern_miner_protocol``
+==========================
+
+Protocol for machine learning pattern-mining algorithms.
+
+| **Availability:** 
+|    ``logtalk_load(pattern_mining_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-22
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: mine/2
+.. _pattern_miner_protocol/0::mine/2:
+
+``mine/2``
+^^^^^^^^^^
+
+Mines a pattern miner result from the given dataset object.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mine(Dataset,PatternMiner)``
+| **Mode and number of proofs:**
+|    ``mine(+object_identifier,-compound)`` - ``one``
+
+
+------------
+
+.. index:: export_to_clauses/4
+.. _pattern_miner_protocol/0::export_to_clauses/4:
+
+``export_to_clauses/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a pattern miner result into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_clauses(Dataset,PatternMiner,Functor,Clauses)``
+| **Mode and number of proofs:**
+|    ``export_to_clauses(+object_identifier,+compound,+callable,-list(clause))`` - ``one``
+
+
+------------
+
+.. index:: export_to_file/4
+.. _pattern_miner_protocol/0::export_to_file/4:
+
+``export_to_file/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Exports a pattern miner result to a file. ``Functor`` is the functor for the generated predicate clauses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_file(Dataset,PatternMiner,Functor,File)``
+| **Mode and number of proofs:**
+|    ``export_to_file(+object_identifier,+compound,+callable,+atom)`` - ``one``
+
+
+------------
+
+.. index:: print_pattern_miner/1
+.. _pattern_miner_protocol/0::print_pattern_miner/1:
+
+``print_pattern_miner/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Prints a pattern miner result to the current output stream in a human-readable format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_pattern_miner(PatternMiner)``
+| **Mode and number of proofs:**
+|    ``print_pattern_miner(+compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`transaction_dataset_protocol <transaction_dataset_protocol/0>`, :ref:`sequence_dataset_protocol <sequence_dataset_protocol/0>`
+

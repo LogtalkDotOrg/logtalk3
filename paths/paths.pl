@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on April 21, 2026
+%  Last updated on April 22, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -112,6 +112,7 @@ logtalk_library_path(ada_boost, library('ada_boost/')).
 logtalk_library_path(amqp, library('amqp/')).
 logtalk_library_path(anomaly_detection_protocols, library('anomaly_detection_protocols/')).
 logtalk_library_path(application, library('application/')).
+logtalk_library_path(apriori, library('apriori/')).
 logtalk_library_path(arbitrary, library('arbitrary/')).
 logtalk_library_path(assignvars, library('assignvars/')).
 logtalk_library_path(avro, library('avro/')).
@@ -125,6 +126,7 @@ logtalk_library_path(c45, library('c45/')).
 logtalk_library_path(cbor, library('cbor/')).
 logtalk_library_path(character_sets, library('character_sets/')).
 logtalk_library_path(classification_protocols, library('classification_protocols/')).
+logtalk_library_path(clo_span, library('clo_span')).
 logtalk_library_path(combinations, library('combinations/')).
 logtalk_library_path(command_line_options, library('command_line_options/')).
 logtalk_library_path(coroutining, library('coroutining/')).
@@ -139,11 +141,14 @@ logtalk_library_path(deques, library('deques/')).
 logtalk_library_path(dictionaries, library('dictionaries/')).
 logtalk_library_path(dif, library('dif/')).
 logtalk_library_path(dimension_reduction_protocols, library('dimension_reduction_protocols/')).
+logtalk_library_path(eclat, library('eclat/')).
 logtalk_library_path(edcg, library('edcg/')).
 logtalk_library_path(events, library('events/')).
 logtalk_library_path(expand_library_alias_paths, library('expand_library_alias_paths/')).
 logtalk_library_path(expecteds, library('expecteds/')).
 logtalk_library_path(format, library('format/')).
+logtalk_library_path(fp_growth, library('fp_growth/')).
+logtalk_library_path(frequent_pattern_mining_protocols, library('frequent_pattern_mining_protocols/')).
 logtalk_library_path(gensym, library('gensym/')).
 logtalk_library_path(genint, library('genint/')).
 logtalk_library_path(geospatial, library('geospatial/')).
@@ -151,6 +156,7 @@ logtalk_library_path(git, library('git/')).
 logtalk_library_path(gradient_boosting_regression, library('gradient_boosting_regression/')).
 logtalk_library_path(grammars, library('grammars/')).
 logtalk_library_path(graphs, library('graphs/')).
+logtalk_library_path(gsp, library('gsp/')).
 logtalk_library_path(hashes, library('hashes/')).
 logtalk_library_path(heaps, library('heaps/')).
 logtalk_library_path(hierarchies, library('hierarchies/')).
@@ -193,8 +199,10 @@ logtalk_library_path(nested_dictionaries, library('nested_dictionaries/')).
 logtalk_library_path(optionals, library('optionals/')).
 logtalk_library_path(options, library('options/')).
 logtalk_library_path(os, library('os/')).
+logtalk_library_path(pattern_mining_protocols, library('pattern_mining_protocols/')).
 logtalk_library_path(pca, library('pca/')).
 logtalk_library_path(permutations, library('permutations/')).
+logtalk_library_path(prefix_span, library('prefix_span/')).
 logtalk_library_path(process, library('process/')).
 logtalk_library_path(protobuf, library('protobuf/')).
 logtalk_library_path(queues, library('queues/')).
@@ -208,10 +216,12 @@ logtalk_library_path(recorded_database, library('recorded_database/')).
 logtalk_library_path(redis, library('redis/')).
 logtalk_library_path(regression_protocols, library('regression_protocols/')).
 logtalk_library_path(regression_tree, library('regression_tree/')).
+logtalk_library_path(sequential_pattern_mining_protocols, library('sequential_pattern_mining_protocols/')).
 logtalk_library_path(sets, library('sets/')).
 logtalk_library_path(simulated_annealing, library('simulated_annealing/')).
 logtalk_library_path(snowflakeid, library('snowflakeid/')).
 logtalk_library_path(sockets, library('sockets/')).
+logtalk_library_path(spade, library('spade/')).
 logtalk_library_path(statistics, library('statistics/')).
 logtalk_library_path(stemming, library('stemming/')).
 logtalk_library_path(stomp, library('stomp/')).

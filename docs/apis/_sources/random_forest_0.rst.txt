@@ -15,7 +15,7 @@ Random Forest classifier using C4.5 decision trees as base learners. Builds an e
 
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
-| **Date:** 2026-04-20
+| **Date:** 2026-04-22
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -26,7 +26,7 @@ Random Forest classifier using C4.5 decision trees as base learners. Builds an e
 |    ``public`` :ref:`classifier_common <classifier_common/0>`
 | **Uses:**
 |    :ref:`c45 <c45/0>`
-|    :ref:`fast_random <fast_random/0>`
+|    :ref:`fast_random(Algorithm) <fast_random/1>`
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
 |    :ref:`pairs <pairs/0>`
@@ -37,6 +37,7 @@ Random Forest classifier using C4.5 decision trees as base learners. Builds an e
    - Algorithm: Random Forest is an ensemble learning method that constructs multiple decision trees during training and outputs the class that is the mode of the classes predicted by individual trees.
    - Bootstrap sampling: Each tree is trained on a bootstrap sample (random sample with replacement) of the training data.
    - Feature randomization: At each tree, a random subset of features is selected. The default number of features is sqrt(total_features).
+   - Reproducibility: Random subsets are generated using the portable ``fast_random(xoshiro128pp)`` pseudo-random generator and can be reproduced by setting the ``random_seed/1`` option.
    - Classifier representation: The learned classifier is represented by default as a ``rf_classifier(Trees, ClassValues, Options)`` term.
 
 | **Inherited public predicates:**

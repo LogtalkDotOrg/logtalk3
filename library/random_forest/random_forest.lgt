@@ -25,12 +25,13 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-22,
 		comment is 'Random Forest classifier using C4.5 decision trees as base learners. Builds an ensemble of decision trees trained on bootstrap samples with random feature subsets and combines their predictions through majority voting.',
 		remarks is [
 			'Algorithm' - 'Random Forest is an ensemble learning method that constructs multiple decision trees during training and outputs the class that is the mode of the classes predicted by individual trees.',
 			'Bootstrap sampling' - 'Each tree is trained on a bootstrap sample (random sample with replacement) of the training data.',
 			'Feature randomization' - 'At each tree, a random subset of features is selected. The default number of features is sqrt(total_features).',
+			'Reproducibility' - 'Random subsets are generated using the portable ``fast_random(xoshiro128pp)`` pseudo-random generator and can be reproduced by setting the ``random_seed/1`` option.',
 			'Classifier representation' - 'The learned classifier is represented by default as a ``rf_classifier(Trees, ClassValues, Options)`` term.'
 		],
 		see_also is [dataset_protocol, c45, isolation_forest, knn, naive_bayes, nearest_centroid, ada_boost]
@@ -51,17 +52,16 @@
 	]).
 
 	:- uses(c45, [
-		learn/2 as c45_learn/2,
-		predict/3 as c45_predict/3
+		learn/2 as c45_learn/2, predict/3 as c45_predict/3
 	]).
 
-	:- uses(fast_random, [
-		between/3 as random_between/3,
-		permutation/2 as random_permutation/2
+	:- uses(fast_random(xoshiro128pp), [
+		between/3 as random_between/3, get_seed/1 as get_random_seed/1, permutation/2 as random_permutation/2,
+		randomize/1 as randomize_seed/1, set_seed/1 as set_random_seed/1
 	]).
 
 	:- uses(format, [
-		format/2, format/3
+		format/2
 	]).
 
 	:- uses(list, [
@@ -97,8 +97,12 @@
 		;	% Default: sqrt(num_features)
 			MaxFeatures is max(1, floor(sqrt(NumFeatures)))
 		),
+		get_random_seed(OriginalSeed),
+		^^option(random_seed(RandomSeed), Options),
+		randomize_seed(RandomSeed),
 		% Build the forest
 		build_forest(Dataset, NumTrees, Attributes, AttributeNames, MaxFeatures, Trees),
+		set_random_seed(OriginalSeed),
 		% Create classifier term
 		Classifier = rf_classifier(Trees, ClassValues, Options).
 
@@ -310,11 +314,14 @@
 
 	% Default options
 	default_option(number_of_trees(10)).
+	default_option(random_seed(1357911)).
 
 	% Option validation
 	valid_option(number_of_trees(N)) :-
 		valid(positive_integer, N).
 	valid_option(maximum_features_per_tree(N)) :-
 		valid(positive_integer, N).
+	valid_option(random_seed(RandomSeed)) :-
+		valid(positive_integer, RandomSeed).
 
 :- end_object.

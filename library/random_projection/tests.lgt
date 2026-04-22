@@ -37,7 +37,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-22,
 		comment is 'Unit tests for the "random_projection" library.'
 	]).
 
@@ -56,8 +56,8 @@
 	test(random_projection_learn_2_structure, deterministic(functor(DimensionReducer, random_projection_reducer, 3))) :-
 		random_projection::learn(correlated_plane, DimensionReducer).
 
-	test(random_projection_learn_3_custom_options, deterministic((length(Components, 1), memberchk(n_components(1), Options), memberchk(feature_scaling(off), Options), memberchk(random_seed(17), Options)))) :-
-		random_projection::learn(correlated_plane, random_projection_reducer(_Encoders, Components, Options), [n_components(1), feature_scaling(off), random_seed(17)]).
+	test(random_projection_learn_3_custom_options, deterministic((length(Components, 1), memberchk(n_components(1), Options), memberchk(feature_scaling(false), Options), memberchk(random_seed(17), Options)))) :-
+		random_projection::learn(correlated_plane, random_projection_reducer(_Encoders, Components, Options), [n_components(1), feature_scaling(false), random_seed(17)]).
 
 	test(random_projection_transform_3_component_names, deterministic((length(ReducedInstance, 2), memberchk(component_1-_, ReducedInstance), memberchk(component_2-_, ReducedInstance)))) :-
 		random_projection::learn(high_dimensional_measurements, DimensionReducer, [random_seed(11)]),

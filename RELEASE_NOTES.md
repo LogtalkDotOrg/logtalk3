@@ -45,6 +45,31 @@ across all machine learning libraries.
 (functionality preserved but four export and print predicates were renamed
 with this change).
 
+* ADDED: New `pattern_mining_protocols`, `frequent_pattern_mining_protocols`,
+and `sequential_pattern_mining_protocols` libraries with protocols and datasets
+for use in the implementation of machine learning pattern-finding algorithms.
+
+* ADDED: New `apriori` library implementing Apriori frequent itemset
+mining for transaction datasets.
+
+* ADDED: New `eclat` library implementing Eclat frequent itemset
+mining for transaction datasets.
+
+* ADDED: New `fp_growth` library implementing FP-growth frequent
+itemset mining for transaction datasets.
+
+* ADDED: New `prefix_span` library implementing PrefixSpan sequential
+pattern mining for sequence datasets.
+
+* ADDED: New `clo_span` library implementing CloSpan sequential
+pattern mining for sequence datasets.
+
+* ADDED: New `gsp` library implementing GSP sequential pattern
+mining for sequence datasets.
+
+* ADDED: New `spade` library implementing SPADE sequential pattern
+mining for sequence datasets.
+
 * ADDED: New `regression_protocols`  library with protocols and datasets
 for use in the implementation of machine learning regression algorithms.
 

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-21,
+		date is 2026-04-22,
 		comment is 'Principal Component Analysis reducer for continuous datasets using a portable power-iteration eigensolver.',
 		remarks is [
 			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, computes the covariance matrix, and extracts principal components using deterministic power iteration with deflation.',
@@ -42,8 +42,12 @@
 		argnames is ['Dataset', 'DimensionReducer', 'Options']
 	]).
 
+	:- uses(format, [
+		format/2
+	]).
+
 	:- uses(list, [
-		length/2, memberchk/2, reverse/2
+		length/2, reverse/2
 	]).
 
 	:- uses(numberlist, [
@@ -266,14 +270,14 @@
 		format('Explained variances: ~w~n', [ExplainedVariances]).
 
 	default_option(n_components(2)).
-	default_option(feature_scaling(on)).
+	default_option(feature_scaling(true)).
 	default_option(maximum_iterations(1000)).
 	default_option(tolerance(1.0e-8)).
 
 	valid_option(n_components(Components)) :-
 		valid(positive_integer, Components).
 	valid_option(feature_scaling(FeatureScaling)) :-
-		once((FeatureScaling == on; FeatureScaling == off)).
+		valid(boolean, FeatureScaling).
 	valid_option(maximum_iterations(MaximumIterations)) :-
 		valid(positive_integer, MaximumIterations).
 	valid_option(tolerance(Tolerance)) :-

@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 21, 2026
+##   Last updated on April 22, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -83,6 +83,7 @@ sed '1,19d' ../../../library/ada_boost/NOTES.md | pandoc -f gfm -t rst -o librar
 sed '1,19d' ../../../library/amqp/NOTES.md | pandoc -f gfm -t rst -o libraries/amqp.rst
 sed '1,19d' ../../../library/anomaly_detection_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/anomaly_detection_protocols.rst
 sed '1,19d' ../../../library/application/NOTES.md | pandoc -f gfm -t rst -o libraries/application.rst
+sed '1,19d' ../../../library/apriori/NOTES.md | pandoc -f gfm -t rst -o libraries/apriori.rst
 sed '1,19d' ../../../library/arbitrary/NOTES.md | pandoc -f gfm -t rst -o libraries/arbitrary.rst
 sed '1,19d' ../../../library/assignvars/NOTES.md | pandoc -f gfm -t rst -o libraries/assignvars.rst
 sed '1,19d' ../../../library/avro/NOTES.md | pandoc -f gfm -t rst -o libraries/avro.rst
@@ -98,6 +99,7 @@ sed '1,19d' ../../../library/cbor/NOTES.md | pandoc -f gfm -t rst -o libraries/c
 sed '1,19d' ../../../library/ccsds/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds.rst
 sed '1,19d' ../../../library/character_sets/NOTES.md | pandoc -f gfm -t rst -o libraries/character_sets.rst
 sed '1,19d' ../../../library/classification_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/classification_protocols.rst
+sed '1,19d' ../../../library/clo_span/NOTES.md | pandoc -f gfm -t rst -o libraries/clo_span.rst
 sed '1,19d' ../../../library/combinations/NOTES.md | pandoc -f gfm -t rst -o libraries/combinations.rst
 sed '1,32d' ../../../library/command_line_options/NOTES.md | pandoc -f gfm -t rst -o libraries/command_line_options.rst
 sed '1,19d' ../../../library/csv/NOTES.md | pandoc -f gfm -t rst -o libraries/csv.rst
@@ -110,11 +112,14 @@ sed '1,19d' ../../../library/deques/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,19d' ../../../library/dictionaries/NOTES.md | pandoc -f gfm -t rst -o libraries/dictionaries.rst
 sed '1,19d' ../../../library/dif/NOTES.md | pandoc -f gfm -t rst -o libraries/dif.rst
 sed '1,19d' ../../../library/dimension_reduction_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/dimension_reduction_protocols.rst
+sed '1,19d' ../../../library/eclat/NOTES.md | pandoc -f gfm -t rst -o libraries/eclat.rst
 sed '1,19d' ../../../library/edcg/NOTES.md | pandoc -f gfm -t rst -o libraries/edcg.rst
 sed '1,19d' ../../../library/events/NOTES.md | pandoc -f gfm -t rst -o libraries/events.rst
 sed '1,19d' ../../../library/expand_library_alias_paths/NOTES.md | pandoc -f gfm -t rst -o libraries/expand_library_alias_paths.rst
 sed '1,19d' ../../../library/expecteds/NOTES.md | pandoc -f gfm -t rst -o libraries/expecteds.rst
 sed '1,19d' ../../../library/format/NOTES.md | pandoc -f gfm -t rst -o libraries/format.rst
+sed '1,19d' ../../../library/fp_growth/NOTES.md | pandoc -f gfm -t rst -o libraries/fp_growth.rst
+sed '1,19d' ../../../library/frequent_pattern_mining_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/frequent_pattern_mining_protocols.rst
 sed '1,19d' ../../../library/gensym/NOTES.md | pandoc -f gfm -t rst -o libraries/gensym.rst
 sed '1,19d' ../../../library/genint/NOTES.md | pandoc -f gfm -t rst -o libraries/genint.rst
 sed '1,19d' ../../../library/geospatial/NOTES.md | pandoc -f gfm -t rst -o libraries/geospatial.rst
@@ -122,6 +127,7 @@ sed '1,19d' ../../../library/git/NOTES.md | pandoc -f gfm -t rst -o libraries/gi
 sed '1,19d' ../../../library/gradient_boosting_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/gradient_boosting_regression.rst
 sed '1,19d' ../../../library/grammars/NOTES.md | pandoc -f gfm -t rst -o libraries/grammars.rst
 sed '1,19d' ../../../library/graphs/NOTES.md | pandoc -f gfm -t rst -o libraries/graphs.rst
+sed '1,19d' ../../../library/gsp/NOTES.md | pandoc -f gfm -t rst -o libraries/gsp.rst
 sed '1,19d' ../../../library/hashes/NOTES.md | pandoc -f gfm -t rst -o libraries/hashes.rst
 sed '1,19d' ../../../library/heaps/NOTES.md | pandoc -f gfm -t rst -o libraries/heaps.rst
 sed '1,19d' ../../../library/hierarchies/NOTES.md | pandoc -f gfm -t rst -o libraries/hierarchies.rst
@@ -164,8 +170,10 @@ sed '1,19d' ../../../library/nested_dictionaries/NOTES.md | pandoc -f gfm -t rst
 sed '1,19d' ../../../library/optionals/NOTES.md | pandoc -f gfm -t rst -o libraries/optionals.rst
 sed '1,19d' ../../../library/options/NOTES.md | pandoc -f gfm -t rst -o libraries/options.rst
 sed '1,19d' ../../../library/os/NOTES.md | pandoc -f gfm -t rst -o libraries/os.rst
+sed '1,19d' ../../../library/pattern_mining_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/pattern_mining_protocols.rst
 sed '1,19d' ../../../library/pca/NOTES.md | pandoc -f gfm -t rst -o libraries/pca.rst
 sed '1,19d' ../../../library/permutations/NOTES.md | pandoc -f gfm -t rst -o libraries/permutations.rst
+sed '1,19d' ../../../library/prefix_span/NOTES.md | pandoc -f gfm -t rst -o libraries/prefix_span.rst
 sed '1,19d' ../../../library/process/NOTES.md | pandoc -f gfm -t rst -o libraries/process.rst
 sed '1,19d' ../../../library/protobuf/NOTES.md | pandoc -f gfm -t rst -o libraries/protobuf.rst
 sed '1,19d' ../../../library/queues/NOTES.md | pandoc -f gfm -t rst -o libraries/queues.rst
@@ -179,10 +187,12 @@ sed '1,19d' ../../../library/recorded_database/NOTES.md | pandoc -f gfm -t rst -
 sed '1,19d' ../../../library/redis/NOTES.md | pandoc -f gfm -t rst -o libraries/redis.rst
 sed '1,19d' ../../../library/regression_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/regression_protocols.rst
 sed '1,19d' ../../../library/regression_tree/NOTES.md | pandoc -f gfm -t rst -o libraries/regression_tree.rst
+sed '1,19d' ../../../library/sequential_pattern_mining_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/sequential_pattern_mining_protocols.rst
 sed '1,19d' ../../../library/sets/NOTES.md | pandoc -f gfm -t rst -o libraries/sets.rst
 sed '1,19d' ../../../library/simulated_annealing/NOTES.md | pandoc -f gfm -t rst -o libraries/simulated_annealing.rst
 sed '1,19d' ../../../library/snowflakeid/NOTES.md | pandoc -f gfm -t rst -o libraries/snowflakeid.rst
 sed '1,19d' ../../../library/sockets/NOTES.md | pandoc -f gfm -t rst -o libraries/sockets.rst
+sed '1,19d' ../../../library/spade/NOTES.md | pandoc -f gfm -t rst -o libraries/spade.rst
 sed '1,19d' ../../../library/statistics/NOTES.md | pandoc -f gfm -t rst -o libraries/statistics.rst
 sed '1,19d' ../../../library/stemming/NOTES.md | pandoc -f gfm -t rst -o libraries/stemming.rst
 sed '1,19d' ../../../library/stomp/NOTES.md | pandoc -f gfm -t rst -o libraries/stomp.rst

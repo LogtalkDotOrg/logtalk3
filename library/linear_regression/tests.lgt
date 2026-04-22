@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-21,
+		date is 2026-04-22,
 		comment is 'Unit tests for the "linear_regression" library.'
 	]).
 
@@ -51,7 +51,7 @@
 
 	test(linear_regression_simple_line_matches_numberlist, deterministic(([Weight, Bias] =~= [Slope, Intercept]))) :-
 		numberlist::linear_regression([1,2,3,4,5], [3,5,7,9,11], Slope, Intercept),
-		linear_regression::learn(simple_line, linear_regressor([continuous(x, 0.0, 1.0)], Bias, [Weight, _MissingWeight], _Options), [feature_scaling(off), learning_rate(0.01), maximum_iterations(8000), tolerance(1.0e-10)]).
+		linear_regression::learn(simple_line, linear_regressor([continuous(x, 0.0, 1.0)], Bias, [Weight, _MissingWeight], _Options), [feature_scaling(false), learning_rate(0.01), maximum_iterations(8000), tolerance(1.0e-10)]).
 
 	test(linear_regression_predict_3_plane, deterministic(Prediction =~= 3.0)) :-
 		linear_regression::learn(plane, Regressor, [learning_rate(0.05), maximum_iterations(8000), tolerance(1.0e-9)]),
@@ -65,8 +65,8 @@
 		linear_regression::learn(intercept_only, Regressor, [learning_rate(0.05), maximum_iterations(5000), tolerance(1.0e-9)]),
 		linear_regression::predict(Regressor, [dummy-0], Prediction).
 
-	test(linear_regression_learn_3_custom_options, deterministic((memberchk(learning_rate(0.1), Options), memberchk(maximum_iterations(1500), Options), memberchk(tolerance(1.0e-6), Options), memberchk(l2_regularization(0.02), Options), memberchk(feature_scaling(off), Options)))) :-
-		linear_regression::learn(simple_line, linear_regressor(_Encoders, _Bias, _Weights, Options), [learning_rate(0.1), maximum_iterations(1500), tolerance(1.0e-6), l2_regularization(0.02), feature_scaling(off)]).
+	test(linear_regression_learn_3_custom_options, deterministic((memberchk(learning_rate(0.1), Options), memberchk(maximum_iterations(1500), Options), memberchk(tolerance(1.0e-6), Options), memberchk(l2_regularization(0.02), Options), memberchk(feature_scaling(false), Options)))) :-
+		linear_regression::learn(simple_line, linear_regressor(_Encoders, _Bias, _Weights, Options), [learning_rate(0.1), maximum_iterations(1500), tolerance(1.0e-6), l2_regularization(0.02), feature_scaling(false)]).
 
 	test(linear_regression_export_to_clauses_4, deterministic(Prediction =~= 13.0)) :-
 		linear_regression::learn(simple_line, Regressor, [learning_rate(0.05), maximum_iterations(5000), tolerance(1.0e-9)]),

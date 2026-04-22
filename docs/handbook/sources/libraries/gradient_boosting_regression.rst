@@ -63,26 +63,26 @@ Options
 
 The ``learn/3`` predicate accepts the following options:
 
-- **``number_of_estimators/1``**: Maximum number of boosting stages to
-  fit. Each stage adds one regression tree to the ensemble. The default
-  is ``50``. Training can stop before reaching this limit when the
-  residual sum of squares becomes negligible.
-- **``learning_rate/1``**: Shrinkage factor applied to each stage
-  prediction before it is added to the current model. Smaller values
-  usually require more stages but can improve generalization. The
-  default is ``0.1``.
-- **``maximum_depth/1``**: Maximum depth allowed for each regression
-  tree used as a base learner. Lower values produce weaker, simpler
-  trees; higher values allow each stage to model more complex residual
+- ``number_of_estimators/1``: Maximum number of boosting stages to fit.
+  Each stage adds one regression tree to the ensemble. The default is
+  ``50``. Training can stop before reaching this limit when the residual
+  sum of squares becomes negligible.
+- ``learning_rate/1``: Shrinkage factor applied to each stage prediction
+  before it is added to the current model. Smaller values usually
+  require more stages but can improve generalization. The default is
+  ``0.1``.
+- ``maximum_depth/1``: Maximum depth allowed for each regression tree
+  used as a base learner. Lower values produce weaker, simpler trees;
+  higher values allow each stage to model more complex residual
   structure. The default is ``3``.
-- **``minimum_samples_leaf/1``**: Minimum number of training examples
+- ``minimum_samples_leaf/1``: Minimum number of training examples
   required in each leaf of a base learner tree. Increasing this value
   makes the fitted trees more conservative and can reduce overfitting.
   The default is ``1``.
-- **``minimum_variance_reduction/1``**: Minimum reduction in target
-  variance required to accept a split when fitting a base learner tree.
-  Larger values make tree growth stricter by rejecting weak splits. The
-  default is ``0.0``.
-- **``feature_scaling/1``**: Controls continuous-feature scaling in the
-  underlying regression-tree learner. The accepted values are ``on`` and
-  ``off``. The default is ``off``.
+- ``minimum_variance_reduction/1``: Minimum reduction in target variance
+  required to accept a split when fitting a base learner tree. Larger
+  values make tree growth stricter by rejecting weak splits. The default
+  is ``0.0``.
+- ``feature_scaling/1``: Controls continuous-feature scaling in the
+  underlying regression-tree learner. The accepted values are ``true``
+  and ``false``. The default is ``false``.

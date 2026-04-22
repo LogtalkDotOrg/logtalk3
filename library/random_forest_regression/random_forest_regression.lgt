@@ -25,12 +25,13 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-21,
+		date is 2026-04-22,
 		comment is 'Random Forest regression using regression trees as base learners trained on bootstrap samples and random feature subsets.',
 		remarks is [
 			'Algorithm' - 'Builds an ensemble of regression trees trained on bootstrap samples and random feature subsets and predicts using the arithmetic mean of the individual tree predictions.',
 			'Bootstrap sampling' - 'Each tree is trained on a bootstrap sample drawn with replacement from the original training examples.',
 			'Feature randomization' - 'Each tree uses a random subset of the available dataset attributes. The default number of features is the square root of the total number of features.',
+			'Reproducibility' - 'Random subsets are generated using the portable ``fast_random(xoshiro128pp)`` pseudo-random generator and can be reproduced by setting the ``random_seed/1`` option.',
 			'Regressor representation' - 'The learned regressor is represented by default as ``rf_regressor(Trees, Options)`` where ``Trees`` contains ``tree(TreeRegressor, AttributeNames)`` terms.'
 		],
 		see_also is [linear_regression, knn_regression, regression_tree, gradient_boosting_regression]
@@ -47,8 +48,9 @@
 		learn/3 as tree_learn/3, predict/3 as tree_predict/3
 	]).
 
-	:- uses(fast_random, [
-		between/3 as random_between/3, permutation/2 as random_permutation/2
+	:- uses(fast_random(xoshiro128pp), [
+		between/3 as random_between/3, get_seed/1 as get_random_seed/1, permutation/2 as random_permutation/2,
+		randomize/1 as randomize_seed/1, set_seed/1 as set_random_seed/1
 	]).
 
 	:- uses(format, [
@@ -86,7 +88,11 @@
 		;   MaxFeatures is max(1, floor(sqrt(NumFeatures)))
 		),
 		build_tree_options(Options, TreeOptions),
+		get_random_seed(OriginalSeed),
+		^^option(random_seed(RandomSeed), Options),
+		randomize_seed(RandomSeed),
 		build_forest(Dataset, NumTrees, Attributes, AttributeNames, MaxFeatures, TreeOptions, Trees),
+		set_random_seed(OriginalSeed),
 		Regressor = rf_regressor(Trees, Options).
 
 	predict(Regressor, Instance, Target) :-
@@ -210,7 +216,8 @@
 	default_option(maximum_depth(10)).
 	default_option(minimum_samples_leaf(1)).
 	default_option(minimum_variance_reduction(0.0)).
-	default_option(feature_scaling(off)).
+	default_option(feature_scaling(false)).
+	default_option(random_seed(1357911)).
 
 	valid_option(number_of_trees(NumberOfTrees)) :-
 		valid(positive_integer, NumberOfTrees).
@@ -223,6 +230,8 @@
 	valid_option(minimum_variance_reduction(MinimumVarianceReduction)) :-
 		valid(non_negative_float, MinimumVarianceReduction).
 	valid_option(feature_scaling(FeatureScaling)) :-
-		once((FeatureScaling == on; FeatureScaling == off)).
+		valid(boolean, FeatureScaling).
+	valid_option(random_seed(RandomSeed)) :-
+		valid(positive_integer, RandomSeed).
 
 :- end_object.

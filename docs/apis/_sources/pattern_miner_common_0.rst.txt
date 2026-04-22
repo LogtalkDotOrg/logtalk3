@@ -1,0 +1,135 @@
+.. index:: single: pattern_miner_common
+.. _pattern_miner_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``pattern_miner_common``
+========================
+
+Shared predicates for pattern miner defaults, option handling, and export helpers.
+
+| **Availability:** 
+|    ``logtalk_load(pattern_mining_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-22
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`pattern_miner_protocol <pattern_miner_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`pattern_miner_protocol/0::export_to_clauses/4`  :ref:`pattern_miner_protocol/0::export_to_file/4`  :ref:`pattern_miner_protocol/0::mine/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`pattern_miner_protocol/0::print_pattern_miner/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: pattern_miner_export_template/4
+.. _pattern_miner_common/0::pattern_miner_export_template/4:
+
+``pattern_miner_export_template/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing pattern miner implementations must define in order to expose the exported pattern miner template for a given functor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pattern_miner_export_template(Dataset,PatternMiner,Functor,Template)``
+| **Mode and number of proofs:**
+|    ``pattern_miner_export_template(+object_identifier,+compound,+atom,-callable)`` - ``one``
+
+
+------------
+
+.. index:: check_item_domain/1
+.. _pattern_miner_common/0::check_item_domain/1:
+
+``check_item_domain/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates that the declared item domain is canonical and contains only atoms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_item_domain(ItemDomain)``
+| **Mode and number of proofs:**
+|    ``check_item_domain(+list(atom))`` - ``one``
+
+
+------------
+
+.. index:: effective_support_count/3
+.. _pattern_miner_common/0::effective_support_count/3:
+
+``effective_support_count/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the effective minimum support count from the effective options and the dataset size.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``effective_support_count(DatasetSize,Options,SupportCount)``
+| **Mode and number of proofs:**
+|    ``effective_support_count(+integer,+list(compound),-integer)`` - ``one``
+
+
+------------
+
+.. index:: effective_maximum_pattern_length/3
+.. _pattern_miner_common/0::effective_maximum_pattern_length/3:
+
+``effective_maximum_pattern_length/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the effective maximum pattern length from the effective options and the dataset maximum pattern length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``effective_maximum_pattern_length(DatasetMaximumPatternLength,Options,MaximumPatternLength)``
+| **Mode and number of proofs:**
+|    ``effective_maximum_pattern_length(+integer,+list(compound),-integer)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

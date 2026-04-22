@@ -73,7 +73,7 @@
 	]).
 
 	:- uses(format, [
-		format/3
+		format/2, format/3
 	]).
 
 	:- uses(list, [
