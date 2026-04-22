@@ -23,9 +23,9 @@
 	implements(toml_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-04-22,
 		comment is 'TOML parser and generator.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding TOML tables. Possible values are ``compound`` (default) and ``curly``.',
@@ -1261,11 +1261,6 @@
 			trim_trailing_zero_codes(FractionCodes0, FractionCodes),
 			append(WholeCodes, [0'.| FractionCodes], Codes)
 		).
-
-	whole_seconds_codes([Digit], [0'0, Digit]) :-
-		digit_code(Digit),
-		!.
-	whole_seconds_codes(Digits, Digits).
 
 	fixed_width_codes(Number, Width, Codes) :-
 		integer(Number),

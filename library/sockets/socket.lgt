@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:13:0,
 		author is 'Paulo Moura',
-		date is 2026-04-01,
+		date is 2026-04-22,
 		comment is 'Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.',
@@ -140,10 +140,6 @@
 		argnames is ['Host']
 	]).
 
-	:- uses(list, [
-		member/2, memberchk/2
-	]).
-
 	client_open(Host, Port, InputStream, OutputStream, UserOptions) :-
 		context(Context),
 		^^check_options(UserOptions),
@@ -238,6 +234,10 @@
 
 	% ECLiPSe: socket/2 for creation, then bind, listen, etc.
 
+	:- uses(list, [
+		member/2
+	]).
+
 	client_open_(Host, Port, Socket, Socket, Options) :-
 		{socket(internet, stream, Socket)},
 		{connect(Socket, Host/Port)},
@@ -273,6 +273,10 @@
 
 	% GNU Prolog: socket/2, socket_connect/4, socket_bind/2, socket_listen/2, socket_accept/4
 
+	:- uses(list, [
+		memberchk/2
+	]).
+
 	client_open_(Host, Port, Input, Output, Options) :-
 		socket('AF_INET', Socket),
 		socket_connect(Socket, 'AF_INET'(Host, Port), Input, Output),
@@ -304,6 +308,10 @@
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
 	% SICStus Prolog: higher-level API with socket_client_open/3 and socket_server_open/[2,3]
+
+	:- uses(list, [
+		memberchk/2
+	]).
 
 	client_open_(Host, Port, Stream, Stream, Options) :-
 		memberchk(type(Type), Options),
@@ -363,6 +371,10 @@
 
 	% SWI-Prolog: tcp_connect/3, tcp_bind/2, tcp_listen/2, tcp_accept/3
 
+	:- uses(list, [
+		memberchk/2
+	]).
+
 	client_open_(Host, Port, StreamPair, StreamPair, Options) :-
 		socket:tcp_connect(Host:Port, StreamPair, [domain(inet), nodelay(true)]),
 		stream_pair(StreamPair, Input, Output),
@@ -410,6 +422,10 @@
 	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
 
 	% Trealla Prolog: higher-level API with socket_client_open/3 and socket_server_open/[2,3]
+
+	:- uses(list, [
+		memberchk/2
+	]).
 
 	client_open_(Host, Port, Stream, Stream, Options) :-
 		memberchk(type(Type), Options),
@@ -468,6 +484,10 @@
 	:- elif(current_logtalk_flag(prolog_dialect, xvm)).
 
 	% XVM: socket/2, socket_connect/4, socket_bind/2, socket_listen/2, socket_accept/4
+
+	:- uses(list, [
+		memberchk/2
+	]).
 
 	client_open_(Host, Port, Input, Output, Options) :-
 		socket('AF_INET', Socket),

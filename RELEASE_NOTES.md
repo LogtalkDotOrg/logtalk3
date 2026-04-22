@@ -198,6 +198,9 @@ tail-recursive.
 * FIXED: The `linda`, `tzif`, `ulid`, `url`, and `yaml` libraries to compile
 all their entities in optimal mode.
 
+* FIXED: Deleted dead code in the `linda`, `meta_compiler`, `sockets`, `toml`,
+and `validations` libraries.
+
 Tools
 -----
 

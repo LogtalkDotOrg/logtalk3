@@ -22,9 +22,9 @@
 :- object(validation).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-22,
+		date is 2026-04-22,
 		comment is 'Constructors for validation terms. A validation term is either ``valid(Value)`` or ``invalid(Errors)`` where ``Errors`` is a list of errors. Validation terms allow applicative-style error accumulation.',
 		remarks is [
 			'Type-checking support' - 'Defines a ``validation`` type for use with the ``type`` library object.'
@@ -113,10 +113,6 @@
 	:- info(from_expected/2, [
 		comment is 'Converts an expected term to a validation term. Returns a valid term holding the value if the expected term holds a value. Returns an invalid term with the expected term error otherwise.',
 		argnames is ['Expected', 'Validation']
-	]).
-
-	:- uses(list, [
-		append/3, reverse/2
 	]).
 
 	of_valid(Value, valid(Value)).

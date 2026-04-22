@@ -23,9 +23,9 @@
 	implements(json_ld_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-04-22,
 		comment is 'JSON-LD 1.1 parser, generator, and processor. Builds on top of the ``json`` library for JSON parsing and generation.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -40,7 +40,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, member/2, msort/2, valid/1 as is_list/1
+		append/3, member/2, valid/1 as is_list/1
 	]).
 
 	% ==================== parse/2 ====================

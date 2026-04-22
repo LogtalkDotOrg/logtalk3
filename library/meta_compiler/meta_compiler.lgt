@@ -23,8 +23,8 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:16:0,
-		date is 2024-10-24,
+		version is 0:16:1,
+		date is 2026-04-22,
 		author is 'Paulo Moura',
 		comment is 'Compiler for the ``meta`` object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.',
 		remarks is [
@@ -33,7 +33,7 @@
 		see_also is [meta]
 	]).
 
-	:- uses(list, [append/3, length/2, member/2]).
+	:- uses(list, [append/3, length/2]).
 	:- uses(gensym, [gensym/2]).
 	:- uses(user, [atomic_list_concat/2]).
 

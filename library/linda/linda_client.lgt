@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Paulo Moura',
-		date is 2026-03-27,
+		date is 2026-04-22,
 		comment is 'Linda client predicates and client-side connection state. Import into a threaded object together with the linda_server category.'
 	]).
 
@@ -525,17 +525,15 @@
 		% streams are thread-owned in XVM
 
 		write_out(Output, Term) :-
-			adopt_stream(Output),
+			{adopt_stream(Output)},
 			write_canonical(Output, Term),
 			write(Output, '.\n'),
 			flush_output(Output).
 
 		read_in(Input, Term) :-
-			adopt_stream(Input),
+			{adopt_stream(Input)},
 			read_term(Input, Term, []).
 
-		adopt_stream(Stream) :-
-			{adopt_stream(Stream)}.
 	:- else.
 
 		write_out(Output, Term) :-
@@ -545,8 +543,6 @@
 
 		read_in(Input, Term) :-
 			read_term(Input, Term, []).
-
-		adopt_stream(_).
 
 	:- endif.
 
