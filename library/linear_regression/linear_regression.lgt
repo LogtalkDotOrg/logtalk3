@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-23,
 		comment is 'Linear regression regressor supporting continuous and mixed-feature datasets using batch gradient descent. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses batch gradient descent to minimize mean squared error. Supports optional L2 regularization and optional feature scaling for continuous attributes.',
@@ -95,7 +95,7 @@
 	continuous_stats(Attribute, Examples, Options, Mean, Scale) :-
 		^^option(feature_scaling(FeatureScaling), Options),
 		(   FeatureScaling == true ->
-			known_attribute_values(Attribute, Examples, Values),
+			known_attribute_values(Examples, Attribute, Values),
 			(   Values == [] ->
 				Mean = 0.0,
 				Scale = 1.0
@@ -114,15 +114,14 @@
 			Scale = 1.0
 		).
 
-	known_attribute_values(_, [], []) :-
-		!.
-	known_attribute_values(Attribute, [example(_Id, _Target, AttributeValues)| Examples], Values) :-
+	known_attribute_values([], _, []).
+	known_attribute_values([example(_Id, _Target, AttributeValues)| Examples], Attribute, Values) :-
 		(   memberchk(Attribute-Value, AttributeValues),
 			nonvar(Value) ->
 			Values = [Value| Rest]
 		;   Values = Rest
 		),
-		known_attribute_values(Attribute, Examples, Rest).
+		known_attribute_values(Examples, Attribute, Rest).
 
 	examples_to_rows([], _, []).
 	examples_to_rows([example(_Id, Target, AttributeValues)| Examples], Encoders, [Features-Target| Rows]) :-

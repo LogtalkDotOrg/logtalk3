@@ -26,6 +26,7 @@ Categories
    character_set <character_set_0>
    class_hierarchy <class_hierarchy_0>
    classifier_common <classifier_common_0>
+   clusterer_common <clusterer_common_0>
    code_metric <code_metric_0>
    code_metrics_messages <code_metrics_messages_0>
    code_metrics_utilities <code_metrics_utilities_0>
@@ -72,6 +73,7 @@ Categories
    read_file <read_file_0>
    recorded_database_core <recorded_database_core_0>
    regressor_common <regressor_common_0>
+   search_indexing <search_indexing_0>
    sequential_pattern_mining_common <sequential_pattern_mining_common_0>
    single_byte_character_set(MaxCode) <single_byte_character_set_1>
    statistics <statistics_0>
@@ -96,6 +98,7 @@ Objects
    a_star_interpreter(W) <a_star_interpreter_1>
    ada_boost <ada_boost_0>
    after_event_registry <after_event_registry_0>
+   agglomerative <agglomerative_0>
    amqp <amqp_0>
    apriori <apriori_0>
    arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <arithmetic_operator_replacement_5>
@@ -167,6 +170,7 @@ Objects
    datalog <datalog_0>
    date <date_0>
    dates_tz <dates_tz_0>
+   dbscan <dbscan_0>
    dead_code_scanner <dead_code_scanner_0>
    debug_expansion(Mode) <debug_expansion_1>
    debug_messages <debug_messages_0>
@@ -219,6 +223,7 @@ Objects
    fnv1a_64 <fnv1a_64_0>
    format <format_0>
    fp_growth <fp_growth_0>
+   gaussian_mixture <gaussian_mixture_0>
    genint <genint_0>
    gensym <gensym_0>
    geospatial <geospatial_0>
@@ -231,11 +236,13 @@ Objects
    halstead_metric(Stroud) <halstead_metric_1>
    hash_common_32 <hash_common_32_0>
    hash_common_64 <hash_common_64_0>
+   hdbscan <hdbscan_0>
    head_arguments_mutation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_mutation_5>
    head_arguments_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_reordering_5>
    heap(Order) <heap_1>
    help <help_0>
    heuristic_expansion(Mode) <heuristic_expansion_1>
+   hierarchical_clustering <hierarchical_clustering_0>
    hmac <hmac_0>
    hook_pipeline(Pipeline) <hook_pipeline_1>
    hook_set(Set) <hook_set_1>
@@ -279,9 +286,15 @@ Objects
    json_schema <json_schema_0>
    json_schema(StringRepresentation) <json_schema_1>
    json_schema(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_schema_3>
+   kcenters <kcenters_0>
+   kmeans <kmeans_0>
+   kmedians <kmedians_0>
+   kmedoids <kmedoids_0>
+   kmodes <kmodes_0>
    knn <knn_0>
    knn_distance <knn_distance_0>
    knn_regression <knn_regression_0>
+   kprototypes <kprototypes_0>
    ksuid <ksuid_0>
    ksuid(Representation,Alphabet) <ksuid_2>
    lcom_metric <lcom_metric_0>
@@ -344,6 +357,7 @@ Objects
    object_wrapper_hook <object_wrapper_hook_0>
    object_wrapper_hook(Protocol) <object_wrapper_hook_1>
    object_wrapper_hook(Name,Relations) <object_wrapper_hook_2>
+   optics <optics_0>
    optional <optional_0>
    optional(Optional) <optional_1>
    os <os_0>
@@ -526,6 +540,8 @@ Protocols
    classifier_protocol <classifier_protocol_0>
    clause_mutator_protocol <clause_mutator_protocol_0>
    cloning <cloning_0>
+   clusterer_protocol <clusterer_protocol_0>
+   clustering_dataset_protocol <clustering_dataset_protocol_0>
    combinations_protocol <combinations_protocol_0>
    comparingp <comparingp_0>
    csv_protocol <csv_protocol_0>

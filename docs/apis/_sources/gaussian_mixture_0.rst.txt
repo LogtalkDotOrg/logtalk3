@@ -1,0 +1,89 @@
+.. index:: single: gaussian_mixture
+.. _gaussian_mixture/0:
+
+.. rst-class:: right
+
+**object**
+
+``gaussian_mixture``
+====================
+
+Gaussian mixture model clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.
+
+| **Availability:** 
+|    ``logtalk_load(gaussian_mixture(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`clusterer_common <clusterer_common/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`pairs <pairs/0>`
+|    :ref:`population <population/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Algorithm: Uses deterministic expectation-maximization with diagonal covariance matrices.
+   - Dead components: Supports explicit dead-component handling policies: ``zero_weight`` preserves the previous component with zero weight, while ``reseed`` relocates the component to the least-confident training row.
+   - Feature handling: Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.
+   - Initialization: Supports ``first_k`` initialization and deterministic ``spread`` initialization for component means.
+   - Prediction: Assigns new instances to the component with the largest posterior score and can also return per-component posterior probabilities.
+   - Clusterer representation: The learned clusterer is represented by default as ``gaussian_mixture_clusterer(Encoders, Components, Weights, Options, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Components`` stores the learned means and diagonal variances, ``Weights`` stores the mixture weights, ``Options`` stores the effective training options, and ``Diagnostics`` stores convergence metadata.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`clusterer_protocol/0::cluster/3`  :ref:`clusterer_protocol/0::clusterer_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`clusterer_protocol/0::diagnostic/2`  :ref:`clusterer_protocol/0::diagnostics/2`  :ref:`clusterer_protocol/0::export_to_clauses/4`  :ref:`clusterer_protocol/0::export_to_file/4`  :ref:`clusterer_protocol/0::learn/2`  :ref:`clusterer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`clusterer_protocol/0::print_clusterer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: cluster_probabilities/3
+.. _gaussian_mixture/0::cluster_probabilities/3:
+
+``cluster_probabilities/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns posterior component probabilities for a new instance as ``Cluster-Probability`` pairs in component-id order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cluster_probabilities(Clusterer,Instance,Probabilities)``
+| **Mode and number of proofs:**
+|    ``cluster_probabilities(+compound,+list,-list(pair))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`clusterer_protocol <clusterer_protocol/0>`, :ref:`clustering_dataset_protocol <clustering_dataset_protocol/0>`, :ref:`kmeans <kmeans/0>`
+

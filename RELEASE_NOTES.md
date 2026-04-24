@@ -47,6 +47,51 @@ across all machine learning libraries.
 (functionality preserved but four export and print predicates were renamed
 with this change).
 
+* ADDED: New `clustering_protocols` library providing protocols and datasets
+to support the implementation of clustering libraries.
+
+* ADDED: New `agglomerative` library implementing bottom-up
+agglomerative clustering for continuous datasets.
+
+* ADDED: New `dbscan` library implementing deterministic density-based
+clustering for continuous datasets using epsilon neighborhoods and
+minimum point counts.
+
+* ADDED: New `gaussian_mixture` library implementing Gaussian mixture
+model clustering for continuous datasets using deterministic
+expectation-maximization with diagonal covariance matrices.
+
+* ADDED: New `hdbscan` library implementing a simplified deterministic
+HDBSCAN-style clusterer for continuous datasets.
+
+* ADDED: New `hierarchical_clustering` library implementing full
+hierarchical clustering for continuous datasets with deterministic
+dendrogram cutting.
+
+* ADDED: New `kcenters` library implementing k-centers clustering for
+continuous datasets using a deterministic farthest-first center
+selection heuristic.
+
+* ADDED: New `kmeans` library implementing k-means clustering for
+continuous datasets using Lloyd's algorithm with deterministic
+initialization.
+
+* ADDED: New `kmedians` library implementing k-medians clustering for
+continuous datasets using iterative median updates.
+
+* ADDED: New `kmedoids` library implementing k-medoids clustering for
+continuous datasets using iterative medoid updates.
+
+* ADDED: New `kmodes` library implementing k-modes clustering for
+discrete datasets using iterative mode updates.
+
+* ADDED: New `kprototypes` library implementing k-prototypes clustering
+for mixed datasets with continuous and discrete attributes.
+
+* ADDED: New `optics` library implementing deterministic OPTICS
+clustering for continuous datasets with epsilon-based cluster
+extraction.
+
 * ADDED: New `pattern_mining_protocols`, `frequent_pattern_mining_protocols`,
 and `sequential_pattern_mining_protocols` libraries with protocols and datasets
 for use in the implementation of machine learning pattern-finding algorithms.

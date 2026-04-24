@@ -1,0 +1,364 @@
+.. index:: single: clusterer_common
+.. _clusterer_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``clusterer_common``
+====================
+
+Shared predicates for clusterer learning defaults, export, and common dataset and encoding helpers.
+
+| **Availability:** 
+|    ``logtalk_load(clustering_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-23
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`clusterer_protocol <clusterer_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`population <population/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`clusterer_protocol/0::cluster/3`  :ref:`clusterer_protocol/0::clusterer_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`clusterer_protocol/0::diagnostic/2`  :ref:`clusterer_protocol/0::diagnostics/2`  :ref:`clusterer_protocol/0::export_to_clauses/4`  :ref:`clusterer_protocol/0::export_to_file/4`  :ref:`clusterer_protocol/0::learn/2`  :ref:`clusterer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`clusterer_protocol/0::print_clusterer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: dataset_attributes/2
+.. _clusterer_common/0::dataset_attributes/2:
+
+``dataset_attributes/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the dataset attribute declarations as `Attribute-Values` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dataset_attributes(Dataset,Attributes)``
+| **Mode and number of proofs:**
+|    ``dataset_attributes(+object_identifier,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: check_continuous_attributes/1
+.. _clusterer_common/0::check_continuous_attributes/1:
+
+``check_continuous_attributes/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that all declared dataset attributes are continuous.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_continuous_attributes(Attributes)``
+| **Mode and number of proofs:**
+|    ``check_continuous_attributes(+list(pair))`` - ``one``
+
+
+------------
+
+.. index:: check_examples_non_empty/2
+.. _clusterer_common/0::check_examples_non_empty/2:
+
+``check_examples_non_empty/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a training example collection is not empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_examples_non_empty(Dataset,Examples)``
+| **Mode and number of proofs:**
+|    ``check_examples_non_empty(+object_identifier,+list)`` - ``one``
+
+
+------------
+
+.. index:: check_examples/3
+.. _clusterer_common/0::check_examples/3:
+
+``check_examples/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Checks that a continuous training dataset is non-empty and that all example values are numeric.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_examples(Dataset,AttributeNames,Examples)``
+| **Mode and number of proofs:**
+|    ``check_examples(+object_identifier,+list(atom),+list)`` - ``one``
+
+
+------------
+
+.. index:: check_example_values/2
+.. _clusterer_common/0::check_example_values/2:
+
+``check_example_values/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that all example attribute values are present and numeric for the declared attributes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_example_values(Examples,AttributeNames)``
+| **Mode and number of proofs:**
+|    ``check_example_values(+list,+list(atom))`` - ``one``
+
+
+------------
+
+.. index:: check_example_attributes/2
+.. _clusterer_common/0::check_example_attributes/2:
+
+``check_example_attributes/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a single example contains numeric values for all declared attributes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_example_attributes(AttributeNames,AttributeValues)``
+| **Mode and number of proofs:**
+|    ``check_example_attributes(+list(atom),+list(pair))`` - ``one``
+
+
+------------
+
+.. index:: attribute_value/3
+.. _clusterer_common/0::attribute_value/3:
+
+``attribute_value/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Looks up an attribute value in a list of `Attribute-Value` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``attribute_value(Attribute,AttributeValues,Value)``
+| **Mode and number of proofs:**
+|    ``attribute_value(+atom,+list(pair),-term)`` - ``one``
+
+
+------------
+
+.. index:: build_encoders/4
+.. _clusterer_common/0::build_encoders/4:
+
+``build_encoders/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Builds continuous feature encoders by computing per-attribute centering and optional scaling statistics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``build_encoders(AttributeNames,Examples,Options,Encoders)``
+| **Mode and number of proofs:**
+|    ``build_encoders(+list(atom),+list,+list(compound),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: known_attribute_values/3
+.. _clusterer_common/0::known_attribute_values/3:
+
+``known_attribute_values/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the known numeric values for a given attribute across the training examples.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``known_attribute_values(Examples,Attribute,Values)``
+| **Mode and number of proofs:**
+|    ``known_attribute_values(+list,+atom,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: examples_to_rows/3
+.. _clusterer_common/0::examples_to_rows/3:
+
+``examples_to_rows/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Encodes training examples into `Id-Features` rows using the object-local or imported encoder implementation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``examples_to_rows(Examples,Encoders,Rows)``
+| **Mode and number of proofs:**
+|    ``examples_to_rows(+list,+list(compound),-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: encode_instance/3
+.. _clusterer_common/0::encode_instance/3:
+
+``encode_instance/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Encodes an instance using the learned continuous attribute encoders.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_instance(Encoders,AttributeValues,Features)``
+| **Mode and number of proofs:**
+|    ``encode_instance(+list(compound),+list(pair),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: normalize_continuous/4
+.. _clusterer_common/0::normalize_continuous/4:
+
+``normalize_continuous/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes a continuous value using the learned centering and scaling parameters.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_continuous(Value,Mean,Scale,Feature)``
+| **Mode and number of proofs:**
+|    ``normalize_continuous(+number,+number,+number,-number)`` - ``one``
+
+
+------------
+
+.. index:: check_cluster_count/2
+.. _clusterer_common/0::check_cluster_count/2:
+
+``check_cluster_count/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that the requested cluster count does not exceed the number of examples.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_cluster_count(K,Count)``
+| **Mode and number of proofs:**
+|    ``check_cluster_count(+integer,+integer)`` - ``one``
+
+
+------------
+
+.. index:: take_first_k/3
+.. _clusterer_common/0::take_first_k/3:
+
+``take_first_k/3``
+^^^^^^^^^^^^^^^^^^
+
+Collects the first `K` vectors from `Id-Vector` rows.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``take_first_k(K,Rows,Vectors)``
+| **Mode and number of proofs:**
+|    ``take_first_k(+integer,+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: remove_candidate/3
+.. _clusterer_common/0::remove_candidate/3:
+
+``remove_candidate/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Removes the first matching `Id-Vector` candidate from a candidate list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``remove_candidate(Candidate,Candidates,RemainingCandidates)``
+| **Mode and number of proofs:**
+|    ``remove_candidate(+pair,+list(pair),-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: clusterer_diagnostics_data/2
+.. _clusterer_common/0::clusterer_diagnostics_data/2:
+
+``clusterer_diagnostics_data/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing clusterer implementations must define in order to expose diagnostics metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``clusterer_diagnostics_data(Clusterer,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``clusterer_diagnostics_data(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

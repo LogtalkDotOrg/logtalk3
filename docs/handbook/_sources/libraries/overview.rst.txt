@@ -55,6 +55,10 @@ multiple areas):
     ``linear_regression``, ``random_forest_regression``, and
     ``regression_tree``.
   - Ranking: ``ranking_protocols`` and ``bradley_terry``.
+  - Clustering: ``clustering_protocols``, ``agglomerative``, ``dbscan``,
+    ``gaussian_mixture``, ``hdbscan``, ``hierarchical_clustering``,
+    ``kcenters``, ``kmeans``, ``kmedians``, ``kmedoids``, ``kmodes``,
+    ``kprototypes``, and ``optics``.
   - Dimension reduction: ``dimension_reduction_protocols``,
     ``lda_projection``, ``pca``, and ``random_projection``.
   - Pattern mining: ``pattern_mining_protocols``,

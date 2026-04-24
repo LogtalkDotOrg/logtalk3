@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on April 22, 2026
+%  Last updated on April 23, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -34,6 +34,7 @@
 logtalk_library_path(library, logtalk_user('library/')).
 
 logtalk_library_path(ada_boost, library('ada_boost/')).
+logtalk_library_path(agglomerative, library('agglomerative/')).
 logtalk_library_path(amqp, library('amqp/')).
 logtalk_library_path(anomaly_detection_protocols, library('anomaly_detection_protocols/')).
 logtalk_library_path(application, library('application/')).
@@ -52,6 +53,7 @@ logtalk_library_path(cbor, library('cbor/')).
 logtalk_library_path(character_sets, library('character_sets/')).
 logtalk_library_path(classification_protocols, library('classification_protocols/')).
 logtalk_library_path(clo_span, library('clo_span')).
+logtalk_library_path(clustering_protocols, library('clustering_protocols/')).
 logtalk_library_path(combinations, library('combinations/')).
 logtalk_library_path(command_line_options, library('command_line_options/')).
 logtalk_library_path(coroutining, library('coroutining/')).
@@ -61,6 +63,7 @@ logtalk_library_path(cuid2, library('cuid2/')).
 logtalk_library_path(datalog, library('datalog/')).
 logtalk_library_path(dates, library('dates/')).
 logtalk_library_path(dates_tz, library('dates_tz/')).
+logtalk_library_path(dbscan, library('dbscan/')).
 logtalk_library_path(dependents, library('dependents/')).
 logtalk_library_path(deques, library('deques/')).
 logtalk_library_path(dictionaries, library('dictionaries/')).
@@ -74,8 +77,9 @@ logtalk_library_path(expecteds, library('expecteds/')).
 logtalk_library_path(format, library('format/')).
 logtalk_library_path(fp_growth, library('fp_growth/')).
 logtalk_library_path(frequent_pattern_mining_protocols, library('frequent_pattern_mining_protocols/')).
-logtalk_library_path(gensym, library('gensym/')).
+logtalk_library_path(gaussian_mixture, library('gaussian_mixture/')).
 logtalk_library_path(genint, library('genint/')).
+logtalk_library_path(gensym, library('gensym/')).
 logtalk_library_path(geospatial, library('geospatial/')).
 logtalk_library_path(git, library('git/')).
 logtalk_library_path(gradient_boosting_regression, library('gradient_boosting_regression/')).
@@ -83,7 +87,9 @@ logtalk_library_path(grammars, library('grammars/')).
 logtalk_library_path(graphs, library('graphs/')).
 logtalk_library_path(gsp, library('gsp/')).
 logtalk_library_path(hashes, library('hashes/')).
+logtalk_library_path(hdbscan, library('hdbscan/')).
 logtalk_library_path(heaps, library('heaps/')).
+logtalk_library_path(hierarchical_clustering, library('hierarchical_clustering/')).
 logtalk_library_path(hierarchies, library('hierarchies/')).
 logtalk_library_path(hmac, library('hmac/')).
 logtalk_library_path(hook_flows, library('hook_flows/')).
@@ -94,13 +100,19 @@ logtalk_library_path(intervals, library('intervals/')).
 logtalk_library_path(isolation_forest, library('isolation_forest/')).
 logtalk_library_path(java, library('java/')).
 logtalk_library_path(json, library('json/')).
-logtalk_library_path(json_rpc, library('json_rpc/')).
-logtalk_library_path(json_lines, library('json_lines/')).
-logtalk_library_path(json_schema, library('json_schema/')).
 logtalk_library_path(json_ld, library('json_ld/')).
+logtalk_library_path(json_lines, library('json_lines/')).
+logtalk_library_path(json_rpc, library('json_rpc/')).
+logtalk_library_path(json_schema, library('json_schema/')).
+logtalk_library_path(kcenters, library('kcenters/')).
+logtalk_library_path(kmeans, library('kmeans/')).
+logtalk_library_path(kmedians, library('kmedians/')).
+logtalk_library_path(kmedoids, library('kmedoids/')).
+logtalk_library_path(kmodes, library('kmodes/')).
 logtalk_library_path(knn, library('knn/')).
 logtalk_library_path(knn_distance, library('knn_distance/')).
 logtalk_library_path(knn_regression, library('knn_regression/')).
+logtalk_library_path(kprototypes, library('kprototypes/')).
 logtalk_library_path(ksuid, library('ksuid/')).
 logtalk_library_path(lda_projection, library('lda_projection/')).
 logtalk_library_path(linda, library('linda/')).
@@ -121,6 +133,7 @@ logtalk_library_path(naive_bayes, library('naive_bayes/')).
 logtalk_library_path(nanoid, library('nanoid/')).
 logtalk_library_path(nearest_centroid, library('nearest_centroid/')).
 logtalk_library_path(nested_dictionaries, library('nested_dictionaries/')).
+logtalk_library_path(optics, library('optics/')).
 logtalk_library_path(optionals, library('optionals/')).
 logtalk_library_path(options, library('options/')).
 logtalk_library_path(os, library('os/')).

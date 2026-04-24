@@ -18,6 +18,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
    ada_boost <ada_boost_0>
 
+:ref:`agglomerative <library_agglomerative>`
+--------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   agglomerative <agglomerative_0>
+
 :ref:`amqp <library_amqp>`
 --------------------------
 
@@ -249,6 +259,19 @@ To load any library (including developer tools, ports, and contributions), use t
 
    clo_span <clo_span_0>
 
+:ref:`clustering_protocols <library_clustering_protocols>`
+----------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   clusterer_common <clusterer_common_0>
+   clusterer_protocol <clusterer_protocol_0>
+   clustering_dataset_protocol <clustering_dataset_protocol_0>
+   search_indexing <search_indexing_0>
+
 :ref:`code_metrics <library_code_metrics>`
 ------------------------------------------
 
@@ -386,6 +409,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
    dates_tz <dates_tz_0>
    dates_tz_protocol <dates_tz_protocol_0>
+
+:ref:`dbscan <library_dbscan>`
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   dbscan <dbscan_0>
 
 :ref:`dead_code_scanner <library_dead_code_scanner>`
 ----------------------------------------------------
@@ -645,6 +678,16 @@ To load any library (including developer tools, ports, and contributions), use t
    frequent_pattern_mining_common <frequent_pattern_mining_common_0>
    transaction_dataset_protocol <transaction_dataset_protocol_0>
 
+:ref:`gaussian_mixture <library_gaussian_mixture>`
+--------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   gaussian_mixture <gaussian_mixture_0>
+
 :ref:`genint <library_genint>`
 ------------------------------
 
@@ -792,6 +835,16 @@ To load any library (including developer tools, ports, and contributions), use t
    siphash_2_4 <siphash_2_4_0>
    siphash_2_4(Key) <siphash_2_4_1>
 
+:ref:`hdbscan <library_hdbscan>`
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   hdbscan <hdbscan_0>
+
 :ref:`heaps <library_heaps>`
 ----------------------------
 
@@ -821,6 +874,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    help <help_0>
+
+:ref:`hierarchical_clustering <library_hierarchical_clustering>`
+----------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   hierarchical_clustering <hierarchical_clustering_0>
 
 :ref:`hierarchies <library_hierarchies>`
 ----------------------------------------
@@ -1022,6 +1085,56 @@ To load any library (including developer tools, ports, and contributions), use t
    json_schema(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_schema_3>
    json_schema_protocol <json_schema_protocol_0>
 
+:ref:`kcenters <library_kcenters>`
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   kcenters <kcenters_0>
+
+:ref:`kmeans <library_kmeans>`
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   kmeans <kmeans_0>
+
+:ref:`kmedians <library_kmedians>`
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   kmedians <kmedians_0>
+
+:ref:`kmedoids <library_kmedoids>`
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   kmedoids <kmedoids_0>
+
+:ref:`kmodes <library_kmodes>`
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   kmodes <kmodes_0>
+
 :ref:`knn <library_knn>`
 ------------------------
 
@@ -1051,6 +1164,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    knn_regression <knn_regression_0>
+
+:ref:`kprototypes <library_kprototypes>`
+----------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   kprototypes <kprototypes_0>
 
 :ref:`ksuid <library_ksuid>`
 ----------------------------
@@ -1374,6 +1497,16 @@ To load any library (including developer tools, ports, and contributions), use t
    nbintree <nbintree_0>
    nested_dictionary_protocol <nested_dictionary_protocol_0>
    nrbtree <nrbtree_0>
+
+:ref:`optics <library_optics>`
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   optics <optics_0>
 
 :ref:`optionals <library_optionals>`
 ------------------------------------

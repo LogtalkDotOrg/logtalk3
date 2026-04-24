@@ -1,0 +1,93 @@
+.. index:: single: hierarchical_clustering
+.. _hierarchical_clustering/0:
+
+.. rst-class:: right
+
+**object**
+
+``hierarchical_clustering``
+===========================
+
+Hierarchical clusterer for continuous datasets. Learns a full agglomerative merge tree from a dataset object implementing the ``clustering_dataset_protocol`` protocol and then cuts the hierarchy to the requested number of clusters for prediction and export.
+
+| **Availability:** 
+|    ``logtalk_load(hierarchical_clustering(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-24
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`clusterer_common <clusterer_common/0>`
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`binary_heap_min <binary_heap_min/0>`
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`pairs <pairs/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Algorithm: Builds the full bottom-up agglomerative hierarchy and derives the requested partition by cutting the learned dendrogram at the largest remaining merge distances.
+   - Feature handling: Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.
+   - Linkage strategies: Supports ``single``, ``complete``, and ``average`` linkage.
+   - Distance metrics: Supports Euclidean and Manhattan distances.
+   - Re-cutting: Supports re-cutting a learned hierarchy to a different number of clusters using ``cut/3`` without retraining.
+   - Tie-breaking: When merge distances or cut heights are equal, the implementation deterministically prefers the smallest node-id pair.
+   - Prediction: New instances are assigned to the nearest learned cluster using the selected linkage strategy and distance metric.
+   - Clusterer representation: The learned clusterer is represented by default as ``hierarchical_clustering_clusterer(Encoders, hierarchy(RootState, MergeRecords, Dendrogram), Clusters, Prototypes, Diagnostics)`` where ``hierarchy(...)`` stores the reusable merge state for re-cutting, ``Clusters`` stores the partition obtained by cutting the hierarchy to ``k`` clusters, ``Prototypes`` stores average vectors for display and export metadata, and ``Diagnostics`` stores the effective options and training metadata.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`clusterer_protocol/0::cluster/3`  :ref:`clusterer_protocol/0::clusterer_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`clusterer_protocol/0::diagnostic/2`  :ref:`clusterer_protocol/0::diagnostics/2`  :ref:`clusterer_protocol/0::export_to_clauses/4`  :ref:`clusterer_protocol/0::export_to_file/4`  :ref:`clusterer_protocol/0::learn/2`  :ref:`clusterer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`clusterer_protocol/0::print_clusterer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: cut/3
+.. _hierarchical_clustering/0::cut/3:
+
+``cut/3``
+^^^^^^^^^
+
+Re-cuts a learned hierarchy to a new number of clusters without retraining.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cut(Clusterer,K,RecutClusterer)``
+| **Mode and number of proofs:**
+|    ``cut(+compound,+integer,-compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`clusterer_protocol <clusterer_protocol/0>`, :ref:`clustering_dataset_protocol <clustering_dataset_protocol/0>`, :ref:`agglomerative <agglomerative/0>`
+

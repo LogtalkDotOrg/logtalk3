@@ -1,0 +1,313 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- category(clusterer_common,
+	implements(clusterer_protocol),
+	extends(options)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-23,
+		comment is 'Shared predicates for clusterer learning defaults, export, and common dataset and encoding helpers.'
+	]).
+
+	:- protected(dataset_attributes/2).
+	:- mode(dataset_attributes(+object_identifier, -list(pair)), one).
+	:- info(dataset_attributes/2, [
+		comment is 'Collects the dataset attribute declarations as `Attribute-Values` pairs.',
+		argnames is ['Dataset', 'Attributes']
+	]).
+
+	:- protected(check_continuous_attributes/1).
+	:- mode(check_continuous_attributes(+list(pair)), one).
+	:- info(check_continuous_attributes/1, [
+		comment is 'Checks that all declared dataset attributes are continuous.',
+		argnames is ['Attributes']
+	]).
+
+	:- protected(check_examples_non_empty/2).
+	:- mode(check_examples_non_empty(+object_identifier, +list), one).
+	:- info(check_examples_non_empty/2, [
+		comment is 'Checks that a training example collection is not empty.',
+		argnames is ['Dataset', 'Examples']
+	]).
+
+	:- protected(check_examples/3).
+	:- mode(check_examples(+object_identifier, +list(atom), +list), one).
+	:- info(check_examples/3, [
+		comment is 'Checks that a continuous training dataset is non-empty and that all example values are numeric.',
+		argnames is ['Dataset', 'AttributeNames', 'Examples']
+	]).
+
+	:- protected(check_example_values/2).
+	:- mode(check_example_values(+list, +list(atom)), one).
+	:- info(check_example_values/2, [
+		comment is 'Checks that all example attribute values are present and numeric for the declared attributes.',
+		argnames is ['Examples', 'AttributeNames']
+	]).
+
+	:- protected(check_example_attributes/2).
+	:- mode(check_example_attributes(+list(atom), +list(pair)), one).
+	:- info(check_example_attributes/2, [
+		comment is 'Checks that a single example contains numeric values for all declared attributes.',
+		argnames is ['AttributeNames', 'AttributeValues']
+	]).
+
+	:- protected(attribute_value/3).
+	:- mode(attribute_value(+atom, +list(pair), -term), one).
+	:- info(attribute_value/3, [
+		comment is 'Looks up an attribute value in a list of `Attribute-Value` pairs.',
+		argnames is ['Attribute', 'AttributeValues', 'Value']
+	]).
+
+	:- protected(build_encoders/4).
+	:- mode(build_encoders(+list(atom), +list, +list(compound), -list(compound)), one).
+	:- info(build_encoders/4, [
+		comment is 'Builds continuous feature encoders by computing per-attribute centering and optional scaling statistics.',
+		argnames is ['AttributeNames', 'Examples', 'Options', 'Encoders']
+	]).
+
+	:- protected(known_attribute_values/3).
+	:- mode(known_attribute_values(+list, +atom, -list(number)), one).
+	:- info(known_attribute_values/3, [
+		comment is 'Collects the known numeric values for a given attribute across the training examples.',
+		argnames is ['Examples', 'Attribute', 'Values']
+	]).
+
+	:- protected(examples_to_rows/3).
+	:- mode(examples_to_rows(+list, +list(compound), -list(pair)), one).
+	:- info(examples_to_rows/3, [
+		comment is 'Encodes training examples into `Id-Features` rows using the object-local or imported encoder implementation.',
+		argnames is ['Examples', 'Encoders', 'Rows']
+	]).
+
+	:- protected(encode_instance/3).
+	:- mode(encode_instance(+list(compound), +list(pair), -list(number)), one).
+	:- info(encode_instance/3, [
+		comment is 'Encodes an instance using the learned continuous attribute encoders.',
+		argnames is ['Encoders', 'AttributeValues', 'Features']
+	]).
+
+	:- protected(normalize_continuous/4).
+	:- mode(normalize_continuous(+number, +number, +number, -number), one).
+	:- info(normalize_continuous/4, [
+		comment is 'Normalizes a continuous value using the learned centering and scaling parameters.',
+		argnames is ['Value', 'Mean', 'Scale', 'Feature']
+	]).
+
+	:- protected(check_cluster_count/2).
+	:- mode(check_cluster_count(+integer, +integer), one).
+	:- info(check_cluster_count/2, [
+		comment is 'Checks that the requested cluster count does not exceed the number of examples.',
+		argnames is ['K', 'Count']
+	]).
+
+	:- protected(take_first_k/3).
+	:- mode(take_first_k(+integer, +list, -list), one).
+	:- info(take_first_k/3, [
+		comment is 'Collects the first `K` vectors from `Id-Vector` rows.',
+		argnames is ['K', 'Rows', 'Vectors']
+	]).
+
+	:- protected(remove_candidate/3).
+	:- mode(remove_candidate(+pair, +list(pair), -list(pair)), one).
+	:- info(remove_candidate/3, [
+		comment is 'Removes the first matching `Id-Vector` candidate from a candidate list.',
+		argnames is ['Candidate', 'Candidates', 'RemainingCandidates']
+	]).
+
+	:- uses(format, [
+		format/3
+	]).
+
+	:- uses(list, [
+		length/2, member/2, memberchk/2
+	]).
+
+	:- protected(clusterer_diagnostics_data/2).
+	:- mode(clusterer_diagnostics_data(+compound, -list(compound)), one).
+	:- info(clusterer_diagnostics_data/2, [
+		comment is 'Hook predicate that importing clusterer implementations must define in order to expose diagnostics metadata.',
+		argnames is ['Clusterer', 'Diagnostics']
+	]).
+
+	:- uses(population, [
+		arithmetic_mean/2, variance/2
+	]).
+
+	learn(Dataset, Clusterer) :-
+		::learn(Dataset, Clusterer, []).
+
+	diagnostics(Clusterer, Diagnostics) :-
+		::clusterer_diagnostics_data(Clusterer, Diagnostics).
+
+	diagnostic(Clusterer, Diagnostic) :-
+		diagnostics(Clusterer, Diagnostics),
+		member(Diagnostic, Diagnostics).
+
+	clusterer_options(Clusterer, Options) :-
+		diagnostics(Clusterer, Diagnostics),
+		memberchk(options(Options), Diagnostics).
+
+	export_to_clauses(_Dataset, Clusterer, Functor, [Clause]) :-
+		Clusterer =.. [_| Arguments],
+		Clause =.. [Functor| Arguments].
+
+	export_to_file(Dataset, Clusterer, Functor, File) :-
+		Clause =.. [Functor, Clusterer],
+		open(File, write, Stream),
+		write_comment_header(Dataset, Clusterer, Functor, Stream),
+		write_clauses([Clause], Stream),
+		close(Stream).
+
+	dataset_attributes(Dataset, Attributes) :-
+		findall(
+			Attribute-Values,
+			Dataset::attribute_values(Attribute, Values),
+			Attributes
+		).
+
+	check_continuous_attributes([]).
+	check_continuous_attributes([Attribute-Values| Attributes]) :-
+		(   Values == continuous ->
+			true
+		;   domain_error(continuous_attribute(Attribute), Values)
+		),
+		check_continuous_attributes(Attributes).
+
+	check_examples_non_empty(Dataset, Examples) :-
+		(   Examples == [] ->
+			domain_error(non_empty_dataset, Dataset)
+		;   true
+		).
+
+	check_examples(Dataset, AttributeNames, Examples) :-
+		::check_examples_non_empty(Dataset, Examples),
+		::check_example_values(Examples, AttributeNames).
+
+	check_example_values([], _AttributeNames).
+	check_example_values([_-AttributeValues| Examples], AttributeNames) :-
+		::check_example_attributes(AttributeNames, AttributeValues),
+		check_example_values(Examples, AttributeNames).
+
+	check_example_attributes([], _AttributeValues).
+	check_example_attributes([Attribute| Attributes], AttributeValues) :-
+		::attribute_value(Attribute, AttributeValues, Value),
+		(   nonvar(Value) ->
+			true
+		;   instantiation_error
+		),
+		(   number(Value) ->
+			true
+		;   type_error(number, Value)
+		),
+		check_example_attributes(Attributes, AttributeValues).
+
+	attribute_value(Attribute, AttributeValues, Value) :-
+		(   member(Attribute-Value, AttributeValues) ->
+			true
+		;   existence_error(attribute, Attribute)
+		).
+
+	build_encoders([], _Examples, _Options, []).
+	build_encoders([Attribute| Attributes], Examples, Options, [continuous(Attribute, Mean, Scale)| Encoders]) :-
+		continuous_stats(Attribute, Examples, Options, Mean, Scale),
+		build_encoders(Attributes, Examples, Options, Encoders).
+
+	continuous_stats(Attribute, Examples, Options, Mean, Scale) :-
+		^^option(feature_scaling(FeatureScaling), Options),
+		(   FeatureScaling == on ->
+			::known_attribute_values(Examples, Attribute, Values),
+			arithmetic_mean(Values, Mean),
+			length(Values, Count),
+			(   Count > 1 ->
+				variance(Values, Variance)
+			;   Variance = 0.0
+			),
+			(   Variance > 0.0 ->
+				Scale is sqrt(Variance)
+			;   Scale = 1.0
+			)
+		;   Mean = 0.0,
+			Scale = 1.0
+		).
+
+	known_attribute_values([], _Attribute, []).
+	known_attribute_values([_-AttributeValues| Examples], Attribute, [Value| Values]) :-
+		::attribute_value(Attribute, AttributeValues, Value),
+		known_attribute_values(Examples, Attribute, Values).
+
+	examples_to_rows([], _Encoders, []).
+	examples_to_rows([Id-AttributeValues| Examples], Encoders, [Id-Features| Rows]) :-
+		::encode_instance(Encoders, AttributeValues, Features),
+		examples_to_rows(Examples, Encoders, Rows).
+
+	encode_instance([], _AttributeValues, []).
+	encode_instance([continuous(Attribute, Mean, Scale)| Encoders], AttributeValues, [Feature| Features]) :-
+		::attribute_value(Attribute, AttributeValues, Value),
+		::normalize_continuous(Value, Mean, Scale, Feature),
+		encode_instance(Encoders, AttributeValues, Features).
+
+	normalize_continuous(Value, Mean, Scale, Feature) :-
+		(   nonvar(Value) ->
+			true
+		;   instantiation_error
+		),
+		(   number(Value) ->
+			true
+		;   type_error(number, Value)
+		),
+		Feature is (Value - Mean) / Scale.
+
+	check_cluster_count(K, Count) :-
+		(   K =< Count ->
+			true
+		;   domain_error(cluster_count(1, Count), K)
+		).
+
+	take_first_k(0, _Rows, []) :-
+		!.
+	take_first_k(K, [_-Vector| Rows], [Vector| Vectors]) :-
+		K > 0,
+		NextK is K - 1,
+		take_first_k(NextK, Rows, Vectors).
+
+	remove_candidate(Id-Vector, [Id-Vector| Candidates], Candidates) :-
+		!.
+	remove_candidate(Candidate, [Head| Candidates], [Head| RemainingCandidates]) :-
+		remove_candidate(Candidate, Candidates, RemainingCandidates).
+
+	write_comment_header(Dataset, Clusterer, Functor, Stream) :-
+		format(Stream, '% exported clusterer predicate: ~q/~d~n', [Functor, 1]),
+		format(Stream, '% training dataset: ~q~n', [Dataset]),
+		(   ::diagnostics(Clusterer, Diagnostics) ->
+			format(Stream, '% diagnostics: ~q~n', [Diagnostics])
+		;   true
+		),
+		format(Stream, '% ~q(Clusterer)~n', [Functor]).
+
+	write_clauses([], _Stream).
+	write_clauses([Clause| Clauses], Stream) :-
+		format(Stream, '~q.~n', [Clause]),
+		write_clauses(Clauses, Stream).
+
+:- end_category.

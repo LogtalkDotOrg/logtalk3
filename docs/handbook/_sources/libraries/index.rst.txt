@@ -29,6 +29,7 @@ directory in the ``NOTES.md`` file.
 
    overview
    ada_boost
+   agglomerative
    amqp
    anomaly_detection_protocols
    application
@@ -48,6 +49,7 @@ directory in the ``NOTES.md`` file.
    ccsds
    classification_protocols
    clo_span
+   clustering_protocols
    combinations
    command_line_options
    core
@@ -57,6 +59,7 @@ directory in the ``NOTES.md`` file.
    datalog
    dates
    dates_tz
+   dbscan
    dependents
    deques
    dictionaries
@@ -70,6 +73,7 @@ directory in the ``NOTES.md`` file.
    format
    fp_growth
    frequent_pattern_mining_protocols
+   gaussian_mixture
    genint
    gensym
    geospatial
@@ -79,7 +83,9 @@ directory in the ``NOTES.md`` file.
    graphs
    gsp
    hashes
+   hdbscan
    heaps
+   hierarchical_clustering
    hierarchies
    hmac
    hook_flows
@@ -94,9 +100,15 @@ directory in the ``NOTES.md`` file.
    json_lines
    json_rpc
    json_schema
+   kcenters
+   kmeans
+   kmedians
+   kmedoids
+   kmodes
    knn
    knn_distance
    knn_regression
+   kprototypes
    ksuid
    lda_projection
    linda
@@ -117,6 +129,7 @@ directory in the ``NOTES.md`` file.
    naive_bayes
    nearest_centroid
    nested_dictionaries
+   optics
    optionals
    options
    os

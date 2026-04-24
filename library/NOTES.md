@@ -80,6 +80,11 @@ grouping is thematic only, as some libraries naturally span multiple areas):
 		`random_forest_regression`, and `regression_tree`.
 	- Ranking:
 		`ranking_protocols` and `bradley_terry`.
+	- Clustering:
+		`clustering_protocols`, `agglomerative`, `dbscan`,
+		`gaussian_mixture`, `hdbscan`, `hierarchical_clustering`,
+		`kcenters`, `kmeans`, `kmedians`, `kmedoids`, `kmodes`,
+		`kprototypes`, and `optics`.
 	- Dimension reduction:
 		`dimension_reduction_protocols`, `lda_projection`, `pca`, and
 		`random_projection`.

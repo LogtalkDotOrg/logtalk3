@@ -1,0 +1,72 @@
+.. index:: single: kprototypes
+.. _kprototypes/0:
+
+.. rst-class:: right
+
+**object**
+
+``kprototypes``
+===============
+
+k-Prototypes clusterer for mixed datasets with continuous and discrete attributes. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.
+
+| **Availability:** 
+|    ``logtalk_load(kprototypes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`clusterer_common <clusterer_common/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`pairs <pairs/0>`
+|    :ref:`population <population/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Algorithm: Uses an iterative prototype-update algorithm with deterministic initialization and deterministic cluster assignments.
+   - Feature handling: Supports continuous and discrete attributes in the same dataset. Continuous attributes can be standardized using z-score scaling before clustering.
+   - Categorical weighting: Uses the ``gamma`` option to weight discrete mismatches in the mixed distance function.
+   - Initialization: Supports ``first_k`` initialization and a deterministic ``spread`` initialization that repeatedly chooses the farthest example from the prototypes selected so far.
+   - Empty clusters: If an iteration leaves a cluster empty, its prototype is kept unchanged from the previous iteration.
+   - Clusterer representation: The learned clusterer is represented by default as ``kprototypes_clusterer(Encoders, Prototypes, Options)`` where ``Encoders`` stores the feature encoding metadata, ``Prototypes`` stores the learned mixed prototypes in cluster-id order, and ``Options`` stores the effective training options.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`clusterer_protocol/0::cluster/3`  :ref:`clusterer_protocol/0::clusterer_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`clusterer_protocol/0::diagnostic/2`  :ref:`clusterer_protocol/0::diagnostics/2`  :ref:`clusterer_protocol/0::export_to_clauses/4`  :ref:`clusterer_protocol/0::export_to_file/4`  :ref:`clusterer_protocol/0::learn/2`  :ref:`clusterer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`clusterer_protocol/0::print_clusterer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`clusterer_protocol <clusterer_protocol/0>`, :ref:`clustering_dataset_protocol <clustering_dataset_protocol/0>`, :ref:`kmeans <kmeans/0>`, :ref:`kmedoids <kmedoids/0>`
+

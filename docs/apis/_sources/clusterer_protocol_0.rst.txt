@@ -1,0 +1,230 @@
+.. index:: single: clusterer_protocol
+.. _clusterer_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``clusterer_protocol``
+======================
+
+Protocol for machine learning clusterers.
+
+| **Availability:** 
+|    ``logtalk_load(clustering_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-23
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/3
+.. _clusterer_protocol/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns a clusterer from the given dataset object using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Clusterer,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: learn/2
+.. _clusterer_protocol/0::learn/2:
+
+``learn/2``
+^^^^^^^^^^^
+
+Learns a clusterer from the given dataset object using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Clusterer)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound)`` - ``one``
+
+
+------------
+
+.. index:: cluster/3
+.. _clusterer_protocol/0::cluster/3:
+
+``cluster/3``
+^^^^^^^^^^^^^
+
+Assigns a new instance to a cluster using the learned clusterer. The instance is a list of ``Attribute-Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cluster(Clusterer,Instance,Cluster)``
+| **Mode and number of proofs:**
+|    ``cluster(+compound,+list,-ground)`` - ``one``
+
+
+------------
+
+.. index:: diagnostics/2
+.. _clusterer_protocol/0::diagnostics/2:
+
+``diagnostics/2``
+^^^^^^^^^^^^^^^^^
+
+Returns diagnostics and metadata associated with a learned clusterer in a representation-independent way.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics(Clusterer,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``diagnostics(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: diagnostic/2
+.. _clusterer_protocol/0::diagnostic/2:
+
+``diagnostic/2``
+^^^^^^^^^^^^^^^^
+
+Tests or enumerates individual diagnostics metadata terms for a learned clusterer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostic(Clusterer,Diagnostic)``
+| **Mode and number of proofs:**
+|    ``diagnostic(+compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: clusterer_options/2
+.. _clusterer_protocol/0::clusterer_options/2:
+
+``clusterer_options/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the effective training options recorded in a learned clusterer diagnostics list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``clusterer_options(Clusterer,Options)``
+| **Mode and number of proofs:**
+|    ``clusterer_options(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: export_to_clauses/4
+.. _clusterer_protocol/0::export_to_clauses/4:
+
+``export_to_clauses/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a clusterer into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_clauses(Dataset,Clusterer,Functor,Clauses)``
+| **Mode and number of proofs:**
+|    ``export_to_clauses(+object_identifier,+compound,+callable,-list(clause))`` - ``one``
+
+
+------------
+
+.. index:: export_to_file/4
+.. _clusterer_protocol/0::export_to_file/4:
+
+``export_to_file/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Exports a clusterer to a file. ``Functor`` is the functor for the generated ``Functor(Clusterer)`` predicate clause.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_file(Dataset,Clusterer,Functor,File)``
+| **Mode and number of proofs:**
+|    ``export_to_file(+object_identifier,+compound,+callable,+atom)`` - ``one``
+
+
+------------
+
+.. index:: print_clusterer/1
+.. _clusterer_protocol/0::print_clusterer/1:
+
+``print_clusterer/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Prints a clusterer to the current output stream in a human-readable format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_clusterer(Clusterer)``
+| **Mode and number of proofs:**
+|    ``print_clusterer(+compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`clustering_dataset_protocol <clustering_dataset_protocol/0>`
+

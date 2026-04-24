@@ -116,6 +116,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    ada_boost <ada_boost_0>
 
+``library/agglomerative/``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   agglomerative <agglomerative_0>
+
 ``library/amqp/``
 -----------------
 
@@ -335,6 +345,19 @@ To load an entity, always load the library that includes it using the goal ``log
 
    clo_span <clo_span_0>
 
+``library/clustering_protocols/``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   clusterer_common <clusterer_common_0>
+   clusterer_protocol <clusterer_protocol_0>
+   clustering_dataset_protocol <clustering_dataset_protocol_0>
+   search_indexing <search_indexing_0>
+
 ``library/combinations/``
 -------------------------
 
@@ -427,6 +450,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    dates_tz <dates_tz_0>
    dates_tz_protocol <dates_tz_protocol_0>
+
+``library/dbscan/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   dbscan <dbscan_0>
 
 ``library/dependents/``
 -----------------------
@@ -576,6 +609,16 @@ To load an entity, always load the library that includes it using the goal ``log
    frequent_pattern_mining_common <frequent_pattern_mining_common_0>
    transaction_dataset_protocol <transaction_dataset_protocol_0>
 
+``library/gaussian_mixture/``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   gaussian_mixture <gaussian_mixture_0>
+
 ``library/genint/``
 -------------------
 
@@ -723,6 +766,16 @@ To load an entity, always load the library that includes it using the goal ``log
    siphash_2_4 <siphash_2_4_0>
    siphash_2_4(Key) <siphash_2_4_1>
 
+``library/hdbscan/``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   hdbscan <hdbscan_0>
+
 ``library/heaps/``
 ------------------
 
@@ -742,6 +795,16 @@ To load an entity, always load the library that includes it using the goal ``log
    pairing_heap(Order) <pairing_heap_1>
    pairing_heap_max <pairing_heap_max_0>
    pairing_heap_min <pairing_heap_min_0>
+
+``library/hierarchical_clustering/``
+------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   hierarchical_clustering <hierarchical_clustering_0>
 
 ``library/hierarchies/``
 ------------------------
@@ -923,6 +986,56 @@ To load an entity, always load the library that includes it using the goal ``log
    json_schema(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_schema_3>
    json_schema_protocol <json_schema_protocol_0>
 
+``library/kcenters/``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   kcenters <kcenters_0>
+
+``library/kmeans/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   kmeans <kmeans_0>
+
+``library/kmedians/``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   kmedians <kmedians_0>
+
+``library/kmedoids/``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   kmedoids <kmedoids_0>
+
+``library/kmodes/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   kmodes <kmodes_0>
+
 ``library/knn/``
 ----------------
 
@@ -952,6 +1065,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    knn_regression <knn_regression_0>
+
+``library/kprototypes/``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   kprototypes <kprototypes_0>
 
 ``library/ksuid/``
 ------------------
@@ -1174,6 +1297,16 @@ To load an entity, always load the library that includes it using the goal ``log
    nbintree <nbintree_0>
    nested_dictionary_protocol <nested_dictionary_protocol_0>
    nrbtree <nrbtree_0>
+
+``library/optics/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   optics <optics_0>
 
 ``library/optionals/``
 ----------------------
