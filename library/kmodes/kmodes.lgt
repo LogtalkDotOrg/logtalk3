@@ -25,14 +25,15 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-24,
 		comment is 'k-Modes clusterer for discrete datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses an iterative mode-update algorithm with deterministic initialization and deterministic cluster assignments.',
 			'Feature handling' - 'Supports discrete attributes only.',
 			'Initialization' - 'Supports ``first_k`` initialization and a deterministic ``spread`` initialization that repeatedly chooses the farthest example from the modes selected so far.',
 			'Empty clusters' - 'If an iteration leaves a cluster empty, its mode is kept unchanged from the previous iteration.',
-			'Clusterer representation' - 'The learned clusterer is represented by default as ``kmodes_clusterer(Encoders, Modes, Options)`` where ``Encoders`` stores the feature encoding metadata, ``Modes`` stores the learned categorical modes in cluster-id order, and ``Options`` stores the effective training options.'
+			'Training diagnostics' - 'Exposes training metadata including example count, convergence status, performed iterations, and final mode shift.',
+			'Clusterer representation' - 'The learned clusterer is represented by default as ``kmodes_clusterer(Encoders, Modes, Options, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Modes`` stores the learned categorical modes in cluster-id order, ``Options`` stores the effective training options, and ``Diagnostics`` stores training metadata.'
 		],
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kprototypes]
 	]).
@@ -72,22 +73,33 @@
 		^^check_cluster_count(K, Count),
 		^^option(initialization(Initialization), Options),
 		initialize_modes(Initialization, K, Rows, Encoders, InitialModes),
-		optimize_modes(Rows, Encoders, Options, 0, InitialModes, Modes),
-		Clusterer = kmodes_clusterer(Encoders, Modes, Options),
+		optimize_modes(Rows, Encoders, Options, 0, 0.0, InitialModes, Modes, Convergence, Iterations, FinalShift),
+		build_diagnostics(Count, Modes, Options, Convergence, Iterations, FinalShift, Diagnostics),
+		Clusterer = kmodes_clusterer(Encoders, Modes, Options, Diagnostics),
 		!.
 
 	cluster(Clusterer, Instance, Cluster) :-
-		Clusterer =.. [_, Encoders, Modes, Options],
+		clusterer_data(Clusterer, Encoders, Modes, Options, _Diagnostics),
 		encode_instance(Encoders, Instance, Features),
 		nearest_mode(Modes, Encoders, Features, Options, Cluster, _Distance).
 
-	clusterer_diagnostics_data(kmodes_clusterer(_Encoders, Modes, Options), Diagnostics) :-
+	build_diagnostics(TrainingExampleCount, Modes, Options, Convergence, Iterations, FinalShift, Diagnostics) :-
 		length(Modes, ModeCount),
 		Diagnostics = [
 			model(kmodes),
 			mode_count(ModeCount),
+			training_example_count(TrainingExampleCount),
+			convergence(Convergence),
+			iterations(Iterations),
+			final_shift(FinalShift),
 			options(Options)
 		].
+
+	clusterer_diagnostics_data(Clusterer, Diagnostics) :-
+		clusterer_data(Clusterer, _Encoders, _Modes, _Options, Diagnostics).
+
+	clusterer_data(Clusterer, Encoders, Modes, Options, Diagnostics) :-
+		Clusterer =.. [_Functor, Encoders, Modes, Options, Diagnostics].
 
 	check_discrete_attributes([]).
 	check_discrete_attributes([Attribute-Values| Attributes]) :-
@@ -106,12 +118,16 @@
 		check_example_attributes(AttributeNames, Attributes, AttributeValues),
 		check_example_values(Examples, Attributes, AttributeNames).
 
-	check_example_attributes([], _, _).
-	check_example_attributes([Attribute| AttributeNames], Attributes, AttributeValues) :-
+	check_example_attributes(AttributeNames, Attributes, AttributeValues) :-
+		^^check_attribute_bindings(AttributeNames, AttributeValues),
+		check_example_attributes_checked(AttributeNames, Attributes, AttributeValues).
+
+	check_example_attributes_checked([], _, _).
+	check_example_attributes_checked([Attribute| AttributeNames], Attributes, AttributeValues) :-
 		attribute_spec(Attribute, Attributes, AllowedValues),
 		^^attribute_value(Attribute, AttributeValues, Value),
 		check_attribute_value(Attribute, AllowedValues, Value),
-		check_example_attributes(AttributeNames, Attributes, AttributeValues).
+		check_example_attributes_checked(AttributeNames, Attributes, AttributeValues).
 
 	attribute_spec(Attribute, Attributes, Spec) :-
 		(   member(Attribute-Spec, Attributes) ->
@@ -133,11 +149,15 @@
 	build_encoders([Attribute-Values| Attributes], [discrete(Attribute, Values)| Encoders]) :-
 		build_encoders(Attributes, Encoders).
 
-	encode_instance([], _, []).
-	encode_instance([discrete(Attribute, AllowedValues)| Encoders], AttributeValues, [Value| Features]) :-
+	encode_instance(Encoders, AttributeValues, Features) :-
+		^^check_encoded_attribute_bindings(Encoders, AttributeValues),
+		encode_instance_checked(Encoders, AttributeValues, Features).
+
+	encode_instance_checked([], _, []).
+	encode_instance_checked([discrete(Attribute, AllowedValues)| Encoders], AttributeValues, [Value| Features]) :-
 		^^attribute_value(Attribute, AttributeValues, Value),
 		check_attribute_value(Attribute, AllowedValues, Value),
-		encode_instance(Encoders, AttributeValues, Features).
+		encode_instance_checked(Encoders, AttributeValues, Features).
 
 	initialize_modes(first_k, K, Rows, _Encoders, Modes) :-
 		^^take_first_k(K, Rows, Modes).
@@ -172,18 +192,24 @@
 		),
 		farthest_candidate(Candidates, Selected, Encoders, BestCandidate1, BestDistance1, BestCandidate).
 
-	optimize_modes(Rows, Encoders, Options, Iteration, Modes0, Modes) :-
+	optimize_modes(Rows, Encoders, Options, Iteration, PreviousShift, Modes0, Modes, Convergence, Iterations, FinalShift) :-
 		^^option(maximum_iterations(MaximumIterations), Options),
 		(   Iteration >= MaximumIterations ->
-			Modes = Modes0
+			Modes = Modes0,
+			Convergence = maximum_iterations,
+			Iterations = Iteration,
+			FinalShift = PreviousShift
 		;   assign_rows(Rows, Modes0, Encoders, Options, Assignments),
 			recompute_modes(Modes0, Assignments, Encoders, 1, Modes1),
-			max_mode_shift(Modes0, Modes1, Encoders, Shift),
+			max_mode_shift(Modes0, Modes1, Encoders, 0.0, Shift),
 			^^option(tolerance(Tolerance), Options),
+			NextIteration is Iteration + 1,
 			(   Shift =< Tolerance ->
-				Modes = Modes1
-			;   NextIteration is Iteration + 1,
-				optimize_modes(Rows, Encoders, Options, NextIteration, Modes1, Modes)
+				Modes = Modes1,
+				Convergence = tolerance,
+				Iterations = NextIteration,
+				FinalShift = Shift
+			;   optimize_modes(Rows, Encoders, Options, NextIteration, Shift, Modes1, Modes, Convergence, Iterations, FinalShift)
 			)
 		).
 
@@ -193,12 +219,12 @@
 		assign_rows(Rows, Modes, Encoders, Options, Assignments).
 
 	nearest_mode([Mode| Modes], Encoders, Vector, _Options, Cluster, Distance) :-
-		mismatch_distance(Encoders, Vector, Mode, InitialDistance),
+		mismatch_distance(Encoders, Vector, Mode, 0.0, InitialDistance),
 		nearest_mode(Modes, Encoders, Vector, 2, 1, InitialDistance, Cluster, Distance).
 
 	nearest_mode([], _Encoders, _Vector, _Index, BestCluster, BestDistance, BestCluster, BestDistance).
 	nearest_mode([Mode| Modes], Encoders, Vector, Index, BestCluster0, BestDistance0, BestCluster, BestDistance) :-
-		mismatch_distance(Encoders, Vector, Mode, Distance0),
+		mismatch_distance(Encoders, Vector, Mode, 0.0, Distance0),
 		(   Distance0 < BestDistance0 ->
 			BestCluster1 = Index,
 			BestDistance1 = Distance0
@@ -209,25 +235,25 @@
 		nearest_mode(Modes, Encoders, Vector, NextIndex, BestCluster1, BestDistance1, BestCluster, BestDistance).
 
 	closest_mode_distance(Vector, [Mode| Modes], Encoders, Distance) :-
-		mismatch_distance(Encoders, Vector, Mode, InitialDistance),
+		mismatch_distance(Encoders, Vector, Mode, 0.0, InitialDistance),
 		closest_mode_distance(Modes, Encoders, Vector, InitialDistance, Distance).
 
 	closest_mode_distance([], _Encoders, _Vector, BestDistance, BestDistance).
 	closest_mode_distance([Mode| Modes], Encoders, Vector, BestDistance0, BestDistance) :-
-		mismatch_distance(Encoders, Vector, Mode, Distance0),
+		mismatch_distance(Encoders, Vector, Mode, 0.0, Distance0),
 		(   Distance0 < BestDistance0 ->
 			BestDistance1 = Distance0
 		;   BestDistance1 = BestDistance0
 		),
 		closest_mode_distance(Modes, Encoders, Vector, BestDistance1, BestDistance).
 
-	mismatch_distance([], [], [], 0.0).
-	mismatch_distance([discrete(_, _)| Encoders], [Feature| Features], [ModeFeature| ModeFeatures], Distance) :-
-		mismatch_distance(Encoders, Features, ModeFeatures, RestDistance),
+	mismatch_distance([], [], [], Distance, Distance).
+	mismatch_distance([discrete(_, _)| Encoders], [Feature| Features], [ModeFeature| ModeFeatures], Distance0, Distance) :-
 		(   Feature == ModeFeature ->
-			Distance = RestDistance
-		;   Distance is RestDistance + 1.0
-		).
+			Distance1 is Distance0
+		;   Distance1 is Distance0 + 1.0
+		),
+		mismatch_distance(Encoders, Features, ModeFeatures, Distance1, Distance).
 
 	recompute_modes([], _, _, _, []).
 	recompute_modes([Mode0| Modes0], Assignments, Encoders, Cluster, [Mode| Modes]) :-
@@ -290,16 +316,18 @@
 	count_occurrences(Value, [_Other| Values], Count) :-
 		count_occurrences(Value, Values, Count).
 
-	max_mode_shift([], [], _Encoders, 0.0).
-	max_mode_shift([Mode0| Modes0], [Mode1| Modes1], Encoders, MaxShift) :-
-		mismatch_distance(Encoders, Mode0, Mode1, Shift),
-		max_mode_shift(Modes0, Modes1, Encoders, RestMaxShift),
-		MaxShift is max(Shift, RestMaxShift).
+	max_mode_shift([], [], _Encoders, MaxShift, MaxShift).
+	max_mode_shift([Mode0| Modes0], [Mode1| Modes1], Encoders, MaxShift0, MaxShift) :-
+		mismatch_distance(Encoders, Mode0, Mode1, 0.0, Shift),
+		MaxShift1 is max(MaxShift0, Shift),
+		max_mode_shift(Modes0, Modes1, Encoders, MaxShift1, MaxShift).
 
-	print_clusterer(kmodes_clusterer(Encoders, Modes, Options)) :-
+	print_clusterer(Clusterer) :-
+		clusterer_data(Clusterer, Encoders, Modes, Options, Diagnostics),
 		format('k-Modes Clusterer~n', []),
 		format('=================~n~n', []),
 		format('Options: ~w~n~n', [Options]),
+		format('Diagnostics: ~w~n~n', [Diagnostics]),
 		format('Encoders:~n', []),
 		print_encoders(Encoders),
 		format('~nModes:~n', []),

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-24,
 		comment is 'k-Medoids clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses an iterative medoid-update algorithm with deterministic initialization and deterministic cluster assignments.',
@@ -33,7 +33,8 @@
 			'Distance metrics' - 'Supports Euclidean and Manhattan distances.',
 			'Initialization' - 'Supports ``first_k`` initialization and a deterministic ``spread`` initialization that repeatedly chooses the farthest example from the medoids selected so far.',
 			'Empty clusters' - 'If an iteration leaves a cluster empty, its medoid is kept unchanged from the previous iteration.',
-			'Clusterer representation' - 'The learned clusterer is represented by default as ``kmedoids_clusterer(Encoders, Medoids, Options)`` where ``Encoders`` stores the feature encoding metadata, ``Medoids`` stores the learned medoid vectors in cluster-id order, and ``Options`` stores the effective training options.'
+			'Training diagnostics' - 'Exposes training metadata including example count, convergence status, performed iterations, and final medoid shift.',
+			'Clusterer representation' - 'The learned clusterer is represented by default as ``kmedoids_clusterer(Encoders, Medoids, Options, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Medoids`` stores the learned medoid vectors in cluster-id order, ``Options`` stores the effective training options, and ``Diagnostics`` stores training metadata.'
 		],
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kmeans]
 	]).
@@ -77,21 +78,32 @@
 		^^check_cluster_count(K, Count),
 		^^option(initialization(Initialization), Options),
 		initialize_medoids(Initialization, K, Rows, Options, InitialMedoids),
-		optimize_medoids(Rows, Options, 0, InitialMedoids, Medoids),
-		Clusterer = kmedoids_clusterer(Encoders, Medoids, Options).
+		optimize_medoids(Rows, Options, 0, 0.0, InitialMedoids, Medoids, Convergence, Iterations, FinalShift),
+		build_diagnostics(Count, Medoids, Options, Convergence, Iterations, FinalShift, Diagnostics),
+		Clusterer = kmedoids_clusterer(Encoders, Medoids, Options, Diagnostics).
 
 	cluster(Clusterer, Instance, Cluster) :-
-		Clusterer =.. [_, Encoders, Medoids, Options],
+		clusterer_data(Clusterer, Encoders, Medoids, Options, _Diagnostics),
 		^^encode_instance(Encoders, Instance, Features),
 		nearest_medoid(Medoids, Features, Options, Cluster, _Distance).
 
-	clusterer_diagnostics_data(kmedoids_clusterer(_Encoders, Medoids, Options), Diagnostics) :-
+	build_diagnostics(TrainingExampleCount, Medoids, Options, Convergence, Iterations, FinalShift, Diagnostics) :-
 		length(Medoids, MedoidCount),
 		Diagnostics = [
 			model(kmedoids),
 			medoid_count(MedoidCount),
+			training_example_count(TrainingExampleCount),
+			convergence(Convergence),
+			iterations(Iterations),
+			final_shift(FinalShift),
 			options(Options)
 		].
+
+	clusterer_diagnostics_data(Clusterer, Diagnostics) :-
+		clusterer_data(Clusterer, _Encoders, _Medoids, _Options, Diagnostics).
+
+	clusterer_data(Clusterer, Encoders, Medoids, Options, Diagnostics) :-
+		Clusterer =.. [_Functor, Encoders, Medoids, Options, Diagnostics].
 
 	initialize_medoids(first_k, K, Rows, _Options, Medoids) :-
 		^^take_first_k(K, Rows, Medoids).
@@ -126,18 +138,24 @@
 		),
 		farthest_candidate(Candidates, Selected, Options, BestCandidate1, BestDistance1, BestCandidate).
 
-	optimize_medoids(Rows, Options, Iteration, Medoids0, Medoids) :-
+	optimize_medoids(Rows, Options, Iteration, PreviousShift, Medoids0, Medoids, Convergence, Iterations, FinalShift) :-
 		^^option(maximum_iterations(MaximumIterations), Options),
 		(   Iteration >= MaximumIterations ->
-			Medoids = Medoids0
+			Medoids = Medoids0,
+			Convergence = maximum_iterations,
+			Iterations = Iteration,
+			FinalShift = PreviousShift
 		;   assign_rows(Rows, Medoids0, Options, Assignments),
 			recompute_medoids(Medoids0, Assignments, Options, 1, Medoids1),
-			max_medoid_shift(Medoids0, Medoids1, Options, Shift),
+			max_medoid_shift(Medoids0, Medoids1, Options, 0.0, Shift),
 			^^option(tolerance(Tolerance), Options),
+			NextIteration is Iteration + 1,
 			(   Shift =< Tolerance ->
-				Medoids = Medoids1
-			;   NextIteration is Iteration + 1,
-				optimize_medoids(Rows, Options, NextIteration, Medoids1, Medoids)
+				Medoids = Medoids1,
+				Convergence = tolerance,
+				Iterations = NextIteration,
+				FinalShift = Shift
+			;   optimize_medoids(Rows, Options, NextIteration, Shift, Medoids1, Medoids, Convergence, Iterations, FinalShift)
 			)
 		).
 
@@ -194,12 +212,12 @@
 		assigned_vectors(Cluster, Assignments, Vectors).
 
 	best_medoid([Vector| Vectors], Options, Medoid) :-
-		total_distance(Vector, [Vector| Vectors], Options, InitialCost),
+		total_distance([Vector| Vectors], Vector, Options, 0.0, InitialCost),
 		best_medoid(Vectors, [Vector| Vectors], Options, Vector, InitialCost, Medoid).
 
 	best_medoid([], _Candidates, _Options, BestMedoid, _BestCost, BestMedoid).
 	best_medoid([Candidate| Candidates], AllVectors, Options, BestMedoid0, BestCost0, BestMedoid) :-
-		total_distance(Candidate, AllVectors, Options, Cost),
+		total_distance(AllVectors, Candidate, Options, 0.0, Cost),
 		(   Cost < BestCost0 ->
 			BestMedoid1 = Candidate,
 			BestCost1 = Cost
@@ -208,18 +226,17 @@
 		),
 		best_medoid(Candidates, AllVectors, Options, BestMedoid1, BestCost1, BestMedoid).
 
-	total_distance(_Candidate, [], _Options, 0.0) :-
-		!.
-	total_distance(Candidate, [Vector| Vectors], Options, Cost) :-
+	total_distance([], _Candidate, _Options, Cost, Cost).
+	total_distance([Vector| Vectors], Candidate, Options, Cost0, Cost) :-
 		distance(Options, Candidate, Vector, Distance0),
-		total_distance(Candidate, Vectors, Options, RestCost),
-		Cost is Distance0 + RestCost.
+		Cost1 is Cost0 + Distance0,
+		total_distance(Vectors, Candidate, Options, Cost1, Cost).
 
-	max_medoid_shift([], [], _Options, 0.0).
-	max_medoid_shift([Medoid0| Medoids0], [Medoid1| Medoids1], Options, MaxShift) :-
+	max_medoid_shift([], [], _Options, MaxShift, MaxShift).
+	max_medoid_shift([Medoid0| Medoids0], [Medoid1| Medoids1], Options, MaxShift0, MaxShift) :-
 		distance(Options, Medoid0, Medoid1, Shift),
-		max_medoid_shift(Medoids0, Medoids1, Options, RestMaxShift),
-		MaxShift is max(Shift, RestMaxShift).
+		MaxShift1 is max(MaxShift0, Shift),
+		max_medoid_shift(Medoids0, Medoids1, Options, MaxShift1, MaxShift).
 
 	distance(Options, Vector1, Vector2, Distance) :-
 		^^option(distance_metric(Metric), Options),
@@ -230,10 +247,12 @@
 	distance_metric(manhattan, Vector1, Vector2, Distance) :-
 		manhattan_distance(Vector1, Vector2, Distance).
 
-	print_clusterer(kmedoids_clusterer(Encoders, Medoids, Options)) :-
+	print_clusterer(Clusterer) :-
+		clusterer_data(Clusterer, Encoders, Medoids, Options, Diagnostics),
 		format('k-Medoids Clusterer~n', []),
 		format('===================~n~n', []),
 		format('Options: ~w~n~n', [Options]),
+		format('Diagnostics: ~w~n~n', [Diagnostics]),
 		format('Encoders:~n', []),
 		print_encoders(Encoders),
 		format('~nMedoids:~n', []),

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-24,
 		comment is 'Performance and reference-fit benchmarks for the "kmodes" library.'
 	]).
 
@@ -54,18 +54,18 @@
 		Inertia =< MaximumInertia,
 		MinModeDistance >= MinimumModeDistance.
 
-	clusterer_metrics(Dataset, kmodes_clusterer(Encoders, Modes, Options), Inertia, MinModeDistance) :-
+	clusterer_metrics(Dataset, kmodes_clusterer(Encoders, Modes, Options, _Diagnostics), Inertia, MinModeDistance) :-
 		findall(
 			AttributeValues,
 			Dataset::example(_, AttributeValues),
 			Examples
 		),
-		training_inertia(Examples, kmodes_clusterer(Encoders, Modes, Options), Inertia),
+		training_inertia(Examples, kmodes_clusterer(Encoders, Modes, Options, _Diagnostics), Inertia),
 		minimum_mode_distance(Encoders, Modes, MinModeDistance).
 
 	training_inertia([], _, 0.0).
 	training_inertia([AttributeValues| Examples], Clusterer, Inertia) :-
-		Clusterer = kmodes_clusterer(Encoders, Modes, _Options),
+		Clusterer = kmodes_clusterer(Encoders, Modes, _Options, _Diagnostics),
 		kmodes::cluster(Clusterer, AttributeValues, Cluster),
 		encode_instance(Encoders, AttributeValues, Features),
 		nth1(Cluster, Modes, Mode),

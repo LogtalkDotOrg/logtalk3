@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-24,
 		comment is 'Performance and reference-fit benchmarks for the "kcenters" library.'
 	]).
 
@@ -54,18 +54,18 @@
 		CoveringRadius =< MaximumCoveringRadius,
 		MinCenterDistance >= MinimumCenterDistance.
 
-	clusterer_metrics(Dataset, kcenters_clusterer(Encoders, Centers, Options), CoveringRadius, MinCenterDistance) :-
+	clusterer_metrics(Dataset, kcenters_clusterer(Encoders, Centers, Options, _Diagnostics), CoveringRadius, MinCenterDistance) :-
 		findall(
 			AttributeValues,
 			Dataset::example(_, AttributeValues),
 			Examples
 		),
-		covering_radius(Examples, kcenters_clusterer(Encoders, Centers, Options), CoveringRadius),
+		covering_radius(Examples, kcenters_clusterer(Encoders, Centers, Options, _Diagnostics), CoveringRadius),
 		minimum_center_distance(Centers, MinCenterDistance).
 
 	covering_radius([], _, 0.0).
 	covering_radius([AttributeValues| Examples], Clusterer, CoveringRadius) :-
-		Clusterer = kcenters_clusterer(Encoders, Centers, Options),
+		Clusterer = kcenters_clusterer(Encoders, Centers, Options, _Diagnostics),
 		kcenters::cluster(Clusterer, AttributeValues, Cluster),
 		encode_instance(Encoders, AttributeValues, Features),
 		nth1(Cluster, Centers, Center),

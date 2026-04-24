@@ -304,7 +304,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-23</div>
+<div class="line"><strong>Date:</strong> 2026-04-24</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -335,7 +335,8 @@
 <li><p>Feature handling: Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.</p></li>
 <li><p>Distance metrics: Supports Euclidean and Manhattan distances.</p></li>
 <li><p>Initialization: Supports <code class="docutils literal notranslate"><span class="pre">first_k</span></code> initialization and a deterministic <code class="docutils literal notranslate"><span class="pre">spread</span></code> initialization that repeatedly chooses the farthest example from the centers selected so far.</p></li>
-<li><p>Clusterer representation: The learned clusterer is represented by default as <code class="docutils literal notranslate"><span class="pre">kcenters_clusterer(Encoders,</span> <span class="pre">Centers,</span> <span class="pre">Options)</span></code> where <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores the feature encoding metadata, <code class="docutils literal notranslate"><span class="pre">Centers</span></code> stores the learned center vectors in cluster-id order, and <code class="docutils literal notranslate"><span class="pre">Options</span></code> stores the effective training options.</p></li>
+<li><p>Training diagnostics: Exposes training metadata including example count, selected center count, and the center-selection strategy used during learning.</p></li>
+<li><p>Clusterer representation: The learned clusterer is represented by default as <code class="docutils literal notranslate"><span class="pre">kcenters_clusterer(Encoders,</span> <span class="pre">Centers,</span> <span class="pre">Options,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores the feature encoding metadata, <code class="docutils literal notranslate"><span class="pre">Centers</span></code> stores the learned center vectors in cluster-id order, <code class="docutils literal notranslate"><span class="pre">Options</span></code> stores the effective training options, and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores training metadata.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">

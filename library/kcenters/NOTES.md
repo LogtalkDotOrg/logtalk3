@@ -68,6 +68,7 @@ Features
 - **Deterministic Initialization**: Supports `first_k` and deterministic `spread` initialization.
 - **Distance Metrics**: Supports `euclidean` and `manhattan` distances.
 - **Optional Feature Scaling**: Continuous attributes can be standardized using z-score scaling.
+- **Rich Training Diagnostics**: Learned clusterers report training example count, selected center count, and the center-selection strategy used during learning.
 - **Portable Export**: Learned clusterers can be exported as clauses or files and reused later.
 
 
@@ -82,20 +83,33 @@ The following options can be passed to the `learn/3` predicate:
 - `feature_scaling(FeatureScaling)`: Whether to standardize continuous attributes before clustering. Options: `on` (default) or `off`.
 
 
+Diagnostics
+-----------
+
+The `diagnostics/2` predicate returns a list containing:
+
+- `model(kcenters)`
+- `center_count(Count)`
+- `training_example_count(Count)`
+- `selection_strategy(Strategy)`
+- `options(Options)`
+
+
 Clusterer Representation
 ------------------------
 
 The learned clusterer is represented as a compound term with the
-functor chosen by the user when exporting the clusterer and arity 3.
+functor chosen by the user when exporting the clusterer and arity 4.
 For example:
 
-	kcenters_clusterer(Encoders, Centers, Options)
+	kcenters_clusterer(Encoders, Centers, Options, Diagnostics)
 
 Where:
 
 - `Encoders`: List of continuous attribute encoders storing attribute name, mean, and scale.
 - `Centers`: List of center vectors in cluster-id order.
 - `Options`: Effective training options used to learn the clusterer.
+- `Diagnostics`: Training diagnostics metadata returned by the `diagnostics/2` predicate.
 
 
 References

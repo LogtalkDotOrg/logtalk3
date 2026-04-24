@@ -52,6 +52,9 @@ Features
 
 - **Mixed Datasets**: Accepts datasets with continuous, discrete, or
   mixed attributes.
+- **Strict Attribute Validation**: Training examples and prediction
+  instances must contain each declared attribute exactly once and no
+  undeclared attributes.
 - **Deterministic Initialization**: Supports ``first_k`` and
   deterministic ``spread`` initialization.
 - **Optional Feature Scaling**: Continuous attributes can be
@@ -62,6 +65,8 @@ Features
   files and reused later.
 - **Stable Empty-Cluster Handling**: Empty clusters keep their previous
   prototypes instead of failing.
+- **Training Diagnostics**: Exposes convergence metadata including
+  training example count, iteration count, and final prototype shift.
 
 Options
 -------
@@ -80,22 +85,43 @@ The following options can be passed to the ``learn/3`` predicate:
 - ``feature_scaling(FeatureScaling)``: Whether to standardize continuous
   attributes before clustering. Options: ``on`` (default) or ``off``.
 
+Distance Function
+-----------------
+
+The mixed k-prototypes distance used for both assignment and prototype
+spread initialization is:
+
+::
+
+   D(X, P) = Sum((x_i - p_i)^2) + gamma * M
+
+where the sum is taken over all continuous attributes and ``M`` is the
+number of discrete-attribute mismatches between the instance ``X`` and
+the prototype ``P``.
+
+For discrete prototype updates, the selected value for each categorical
+attribute is the most frequent value among the cluster members. When two
+or more values are tied, the implementation deterministically keeps the
+first value in the declared attribute-values list.
+
 Clusterer Representation
 ------------------------
 
 The learned clusterer is represented as a compound term with the functor
-chosen by the user when exporting the clusterer and arity 3. For
+chosen by the user when exporting the clusterer and arity 4. For
 example:
 
 ::
 
-   kprototypes_clusterer(Encoders, Prototypes, Options)
+   kprototypes_clusterer(Encoders, Prototypes, Options, Diagnostics)
 
 Where:
 
 - ``Encoders``: List of continuous and discrete attribute encoders.
 - ``Prototypes``: List of learned mixed prototypes in cluster-id order.
 - ``Options``: Effective training options used to learn the clusterer.
+- ``Diagnostics``: Training metadata including convergence reason,
+  iteration count, and final prototype shift.
 
 References
 ----------

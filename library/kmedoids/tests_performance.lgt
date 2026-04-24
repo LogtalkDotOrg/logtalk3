@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-24,
 		comment is 'Performance and reference-fit benchmarks for the "kmedoids" library.'
 	]).
 
@@ -50,18 +50,18 @@
 		Inertia =< MaximumInertia,
 		MinMedoidDistance >= MinimumMedoidDistance.
 
-	clusterer_metrics(Dataset, kmedoids_clusterer(Encoders, Medoids, Options), Inertia, MinMedoidDistance) :-
+	clusterer_metrics(Dataset, kmedoids_clusterer(Encoders, Medoids, Options, _Diagnostics), Inertia, MinMedoidDistance) :-
 		findall(
 			AttributeValues,
 			Dataset::example(_, AttributeValues),
 			Examples
 		),
-		training_inertia(Examples, kmedoids_clusterer(Encoders, Medoids, Options), Inertia),
+		training_inertia(Examples, kmedoids_clusterer(Encoders, Medoids, Options, _Diagnostics), Inertia),
 		minimum_medoid_distance(Medoids, MinMedoidDistance).
 
 	training_inertia([], _, 0.0).
 	training_inertia([AttributeValues| Examples], Clusterer, Inertia) :-
-		Clusterer = kmedoids_clusterer(Encoders, Medoids, _Options),
+		Clusterer = kmedoids_clusterer(Encoders, Medoids, _Options, _Diagnostics),
 		kmedoids::cluster(Clusterer, AttributeValues, Cluster),
 		encode_instance(Encoders, AttributeValues, Features),
 		nth1(Cluster, Medoids, Medoid),

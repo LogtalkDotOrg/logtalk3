@@ -156,6 +156,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#distance-function">Distance Function</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#clusterer-representation">Clusterer Representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
@@ -311,6 +312,9 @@ link in a web browser.</p>
 <ul class="simple">
 <li><p><strong>Mixed Datasets</strong>: Accepts datasets with continuous, discrete, or
 mixed attributes.</p></li>
+<li><p><strong>Strict Attribute Validation</strong>: Training examples and prediction
+instances must contain each declared attribute exactly once and no
+undeclared attributes.</p></li>
 <li><p><strong>Deterministic Initialization</strong>: Supports <code class="docutils literal notranslate"><span class="pre">first_k</span></code> and
 deterministic <code class="docutils literal notranslate"><span class="pre">spread</span></code> initialization.</p></li>
 <li><p><strong>Optional Feature Scaling</strong>: Continuous attributes can be
@@ -321,6 +325,8 @@ discrete attributes.</p></li>
 files and reused later.</p></li>
 <li><p><strong>Stable Empty-Cluster Handling</strong>: Empty clusters keep their previous
 prototypes instead of failing.</p></li>
+<li><p><strong>Training Diagnostics</strong>: Exposes convergence metadata including
+training example count, iteration count, and final prototype shift.</p></li>
 </ul>
 </section>
 <section id="options">
@@ -340,12 +346,27 @@ Default is <code class="docutils literal notranslate"><span class="pre">1.0</spa
 attributes before clustering. Options: <code class="docutils literal notranslate"><span class="pre">on</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">off</span></code>.</p></li>
 </ul>
 </section>
+<section id="distance-function">
+<h2>Distance Function<a class="headerlink" href="#distance-function" title="Link to this heading"></a></h2>
+<p>The mixed k-prototypes distance used for both assignment and prototype
+spread initialization is:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">D</span>(<span class="nv">X</span>, <span class="nv">P</span>) <span class="o">=</span> <span class="nv">Sum</span>((x_i <span class="o">-</span> p_i)<span class="o">^</span><span class="m">2</span>) <span class="o">+</span> gamma <span class="o">*</span> <span class="nv">M</span>
+</pre></div>
+</div>
+<p>where the sum is taken over all continuous attributes and <code class="docutils literal notranslate"><span class="pre">M</span></code> is the
+number of discrete-attribute mismatches between the instance <code class="docutils literal notranslate"><span class="pre">X</span></code> and
+the prototype <code class="docutils literal notranslate"><span class="pre">P</span></code>.</p>
+<p>For discrete prototype updates, the selected value for each categorical
+attribute is the most frequent value among the cluster members. When two
+or more values are tied, the implementation deterministically keeps the
+first value in the declared attribute-values list.</p>
+</section>
 <section id="clusterer-representation">
 <h2>Clusterer Representation<a class="headerlink" href="#clusterer-representation" title="Link to this heading"></a></h2>
 <p>The learned clusterer is represented as a compound term with the functor
-chosen by the user when exporting the clusterer and arity 3. For
+chosen by the user when exporting the clusterer and arity 4. For
 example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>kprototypes_clusterer(<span class="nv">Encoders</span>, <span class="nv">Prototypes</span>, <span class="nv">Options</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>kprototypes_clusterer(<span class="nv">Encoders</span>, <span class="nv">Prototypes</span>, <span class="nv">Options</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
 <p>Where:</p>
@@ -353,6 +374,8 @@ example:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">Encoders</span></code>: List of continuous and discrete attribute encoders.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Prototypes</span></code>: List of learned mixed prototypes in cluster-id order.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Options</span></code>: Effective training options used to learn the clusterer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>: Training metadata including convergence reason,
+iteration count, and final prototype shift.</p></li>
 </ul>
 </section>
 <section id="references">

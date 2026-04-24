@@ -1,0 +1,207 @@
+.. index:: single: search_indexing
+.. _search_indexing/0:
+
+.. rst-class:: right
+
+**category**
+
+``search_indexing``
+===================
+
+Shared helpers for adaptive search-index construction and range queries used by clustering libraries.
+
+| **Availability:** 
+|    ``logtalk_load(clustering_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-23
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: build_auto_search_index/3
+.. _search_indexing/0::build_auto_search_index/3:
+
+``build_auto_search_index/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds an adaptive search index by selecting either a grid index or a metric tree based on dataset shape.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``build_auto_search_index(Rows,Options,SearchIndex)``
+| **Mode and number of proofs:**
+|    ``build_auto_search_index(+list(pair),+list(compound),-compound)`` - ``one``
+
+
+------------
+
+.. index:: build_metric_tree/3
+.. _search_indexing/0::build_metric_tree/3:
+
+``build_metric_tree/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds a metric tree search index for encoded dataset rows.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``build_metric_tree(Rows,Options,MetricTree)``
+| **Mode and number of proofs:**
+|    ``build_metric_tree(+list(pair),+list(compound),-compound)`` - ``one``
+
+
+------------
+
+.. index:: build_grid_index/3
+.. _search_indexing/0::build_grid_index/3:
+
+``build_grid_index/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Builds a grid-based search index for encoded dataset rows using the object-defined cell size.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``build_grid_index(Rows,Options,GridIndex)``
+| **Mode and number of proofs:**
+|    ``build_grid_index(+list(pair),+list(compound),-compound)`` - ``one``
+
+
+------------
+
+.. index:: range_query/5
+.. _search_indexing/0::range_query/5:
+
+``range_query/5``
+^^^^^^^^^^^^^^^^^
+
+Queries a search index for rows within the given epsilon distance of an encoded feature vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``range_query(SearchIndex,Vector,Options,Epsilon,Neighbors)``
+| **Mode and number of proofs:**
+|    ``range_query(+compound,+list(number),+list(compound),+number,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: search_index_cell_size/2
+.. _search_indexing/0::search_index_cell_size/2:
+
+``search_index_cell_size/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the grid cell size to use when constructing a grid-based search index.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``search_index_cell_size(Options,CellSize)``
+| **Mode and number of proofs:**
+|    ``search_index_cell_size(+list(compound),-number)`` - ``one``
+
+
+------------
+
+.. index:: select_metric_pivot/4
+.. _search_indexing/0::select_metric_pivot/4:
+
+``select_metric_pivot/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Selects a pivot row and returns the remaining rows decorated and sorted by distance to that pivot.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``select_metric_pivot(Rows,Options,Pivot,SortedRows)``
+| **Mode and number of proofs:**
+|    ``select_metric_pivot(+list(pair),+list(compound),-pair,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: distance/4
+.. _search_indexing/0::distance/4:
+
+``distance/4``
+^^^^^^^^^^^^^^
+
+Computes the distance between two encoded feature vectors using the effective object options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distance(Options,Vector1,Vector2,Distance)``
+| **Mode and number of proofs:**
+|    ``distance(+list(compound),+list(number),+list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: split_sorted_rows/5
+.. _search_indexing/0::split_sorted_rows/5:
+
+``split_sorted_rows/5``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Splits rows decorated with distances into inner and outer partitions and returns their boundary distances.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``split_sorted_rows(SortedRows,InnerUpperBound,OuterLowerBound,InnerRows,OuterRows)``
+| **Mode and number of proofs:**
+|    ``split_sorted_rows(+list(pair),-number,-number,-list(pair),-list(pair))`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

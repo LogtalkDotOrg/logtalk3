@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-24,
 		comment is 'Performance and reference-fit benchmarks for the "kmeans" library.'
 	]).
 
@@ -50,18 +50,18 @@
 		Inertia =< MaximumInertia,
 		MinCentroidDistance >= MinimumCentroidDistance.
 
-	clusterer_metrics(Dataset, kmeans_clusterer(Encoders, Centroids, Options), Inertia, MinCentroidDistance) :-
+	clusterer_metrics(Dataset, kmeans_clusterer(Encoders, Centroids, Options, _Diagnostics), Inertia, MinCentroidDistance) :-
 		findall(
 			AttributeValues,
 			Dataset::example(_, AttributeValues),
 			Examples
 		),
-		training_inertia(Examples, kmeans_clusterer(Encoders, Centroids, Options), Inertia),
+		training_inertia(Examples, kmeans_clusterer(Encoders, Centroids, Options, _Diagnostics), Inertia),
 		minimum_centroid_distance(Centroids, MinCentroidDistance).
 
 	training_inertia([], _, 0.0).
 	training_inertia([AttributeValues| Examples], Clusterer, Inertia) :-
-		Clusterer = kmeans_clusterer(Encoders, Centroids, _Options),
+		Clusterer = kmeans_clusterer(Encoders, Centroids, _Options, _Diagnostics),
 		kmeans::cluster(Clusterer, AttributeValues, Cluster),
 		encode_instance(Encoders, AttributeValues, Features),
 		nth1(Cluster, Centroids, Centroid),

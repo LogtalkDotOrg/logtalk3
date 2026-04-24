@@ -15,7 +15,7 @@ Shared predicates for clusterer learning defaults, export, and common dataset an
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-23
+| **Date:** 2026-04-24
 
 | **Compilation flags:**
 |    ``static``
@@ -149,7 +149,7 @@ Checks that all example attribute values are present and numeric for the declare
 ``check_example_attributes/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Checks that a single example contains numeric values for all declared attributes.
+Checks that a single example contains exactly the declared attributes and that all values are numeric.
 
 | **Compilation flags:**
 |    ``static``
@@ -158,6 +158,25 @@ Checks that a single example contains numeric values for all declared attributes
 |    ``check_example_attributes(AttributeNames,AttributeValues)``
 | **Mode and number of proofs:**
 |    ``check_example_attributes(+list(atom),+list(pair))`` - ``one``
+
+
+------------
+
+.. index:: check_attribute_bindings/2
+.. _clusterer_common/0::check_attribute_bindings/2:
+
+``check_attribute_bindings/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that an attribute-value list contains each declared attribute exactly once and no undeclared attributes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_attribute_bindings(AttributeNames,AttributeValues)``
+| **Mode and number of proofs:**
+|    ``check_attribute_bindings(+list(atom),+list(pair))`` - ``one``
 
 
 ------------
@@ -244,7 +263,7 @@ Encodes training examples into `Id-Features` rows using the object-local or impo
 ``encode_instance/3``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Encodes an instance using the learned continuous attribute encoders.
+Encodes an instance using the learned continuous attribute encoders after checking that it contains exactly the declared attributes.
 
 | **Compilation flags:**
 |    ``static``
@@ -253,6 +272,25 @@ Encodes an instance using the learned continuous attribute encoders.
 |    ``encode_instance(Encoders,AttributeValues,Features)``
 | **Mode and number of proofs:**
 |    ``encode_instance(+list(compound),+list(pair),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: check_encoded_attribute_bindings/2
+.. _clusterer_common/0::check_encoded_attribute_bindings/2:
+
+``check_encoded_attribute_bindings/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that an attribute-value list contains each attribute described by the encoders exactly once and no undeclared attributes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_encoded_attribute_bindings(Encoders,AttributeValues)``
+| **Mode and number of proofs:**
+|    ``check_encoded_attribute_bindings(+list(compound),+list(pair))`` - ``one``
 
 
 ------------

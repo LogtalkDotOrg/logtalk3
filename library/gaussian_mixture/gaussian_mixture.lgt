@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-24,
 		comment is 'Gaussian mixture model clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses deterministic expectation-maximization with diagonal covariance matrices.',
@@ -171,12 +171,12 @@
 		).
 
 	closest_mean_distance_squared(Vector, [Mean| Means], DistanceSquared) :-
-		squared_distance(Vector, Mean, InitialDistance),
+		squared_distance(Vector, Mean, 0.0, InitialDistance),
 		closest_mean_distance_squared(Means, Vector, InitialDistance, DistanceSquared).
 
 	closest_mean_distance_squared([], _Vector, BestDistance, BestDistance).
 	closest_mean_distance_squared([Mean| Means], Vector, BestDistance0, BestDistance) :-
-		squared_distance(Vector, Mean, Distance),
+		squared_distance(Vector, Mean, 0.0, Distance),
 		(   Distance < BestDistance0 ->
 			BestDistance1 = Distance
 		;   BestDistance1 = BestDistance0
@@ -235,7 +235,7 @@
 		initialize_weights(NextK, Weight, Weights).
 
 	optimize_em(Rows, Count, Options, Iteration, PreviousAverageLogLikelihood, Components0, Weights0, Components, Weights, Convergence, Iterations, AverageLogLikelihood, FinalDelta) :-
-		expectation(Rows, Components0, Weights0, Responsibilities, TotalLogLikelihood),
+		expectation(Rows, Components0, Weights0, Responsibilities, 0.0, TotalLogLikelihood),
 		CurrentAverageLogLikelihood is TotalLogLikelihood / Count,
 		average_log_likelihood_delta(PreviousAverageLogLikelihood, CurrentAverageLogLikelihood, CurrentDelta),
 		(   PreviousAverageLogLikelihood \== none,
@@ -265,11 +265,11 @@
 	average_log_likelihood_delta(PreviousAverageLogLikelihood, AverageLogLikelihood, Delta) :-
 		Delta is abs(AverageLogLikelihood - PreviousAverageLogLikelihood).
 
-	expectation([], _Components, _Weights, [], 0.0).
-	expectation([_-Features| Rows], Components, Weights, [Responsibilities| ResponsibilitiesRows], LogLikelihood) :-
+	expectation([], _Components, _Weights, [], LogLikelihood, LogLikelihood).
+	expectation([_-Features| Rows], Components, Weights, [Responsibilities| ResponsibilitiesRows], LogLikelihood0, LogLikelihood) :-
 		row_responsibilities(Features, Components, Weights, Responsibilities, RowLogLikelihood),
-		expectation(Rows, Components, Weights, ResponsibilitiesRows, RestLogLikelihood),
-		LogLikelihood is RowLogLikelihood + RestLogLikelihood.
+		LogLikelihood1 is LogLikelihood0 + RowLogLikelihood,
+		expectation(Rows, Components, Weights, ResponsibilitiesRows, LogLikelihood1, LogLikelihood).
 
 	row_responsibilities(Features, Components, Weights, Responsibilities, LogLikelihood) :-
 		row_log_scores_summary(Features, Components, Weights, LogScores, LogLikelihood, _BestCluster),
@@ -327,14 +327,14 @@
 		!,
 		LogScore = -1.0e300.
 	component_log_score(Features, component(Mean, Variances), Weight, LogScore) :-
-		gaussian_log_density(Features, Mean, Variances, LogDensity),
+		gaussian_log_density(Features, Mean, Variances, 0.0, LogDensity),
 		LogScore is log(Weight) + LogDensity.
 
-	gaussian_log_density([], [], [], 0.0).
-	gaussian_log_density([Value| Values], [Mean| Means], [Variance| Variances], LogDensity) :-
-		gaussian_log_density(Values, Means, Variances, RestLogDensity),
+	gaussian_log_density([], [], [], LogDensity, LogDensity).
+	gaussian_log_density([Value| Values], [Mean| Means], [Variance| Variances], LogDensity0, LogDensity) :-
 		Delta is Value - Mean,
-		LogDensity is RestLogDensity - 0.5 * log(6.283185307179586 * Variance) - (Delta * Delta) / (2.0 * Variance).
+		LogDensity1 is LogDensity0 - 0.5 * log(6.283185307179586 * Variance) - (Delta * Delta) / (2.0 * Variance),
+		gaussian_log_density(Values, Means, Variances, LogDensity1, LogDensity).
 
 	maximization(Rows, ResponsibilitiesRows, Components0, Options, Components, Weights) :-
 		length(Components0, K),
@@ -351,7 +351,7 @@
 		update_components(NextIndex, K, Rows, ResponsibilitiesRows, Components0, Options, Components, Weights).
 
 	update_component(Index, Rows, ResponsibilitiesRows, Component0, Options, Component, Weight) :-
-		component_statistics(Index, Rows, ResponsibilitiesRows, ResponsibilitySum, WeightedSum, WeightedSquares),
+		component_statistics(Rows, Index, ResponsibilitiesRows, ResponsibilitySum, WeightedSum, WeightedSquares),
 		(   ResponsibilitySum =< 1.0e-9 ->
 			dead_component_update(Rows, ResponsibilitiesRows, Component0, Options, Component, Weight)
 		;   divide_vector(WeightedSum, ResponsibilitySum, Mean),
@@ -401,13 +401,12 @@
 		),
 		maximum_responsibility(Responsibilities, NextMaximum, Maximum).
 
-	component_statistics(_Index, [], [], 0.0, [], []) :-
-		!.
-	component_statistics(Index, [_-Features| Rows], [Responsibilities| ResponsibilitiesRows], ResponsibilitySum, WeightedSum, WeightedSquares) :-
+	component_statistics([], _Index, [], 0.0, [], []).
+	component_statistics([_-Features| Rows], Index, [Responsibilities| ResponsibilitiesRows], ResponsibilitySum, WeightedSum, WeightedSquares) :-
 		nth1(Index, Responsibilities, Responsibility),
 		scale_vector(Features, Responsibility, RowWeightedFeatures),
 		scale_squares(Features, Responsibility, RowWeightedSquares),
-		component_statistics(Index, Rows, ResponsibilitiesRows, RestResponsibilitySum, RestWeightedSum, RestWeightedSquares),
+		component_statistics(Rows, Index, ResponsibilitiesRows, RestResponsibilitySum, RestWeightedSum, RestWeightedSquares),
 		ResponsibilitySum is Responsibility + RestResponsibilitySum,
 		add_optional_vectors(RowWeightedFeatures, RestWeightedSum, WeightedSum),
 		add_optional_vectors(RowWeightedSquares, RestWeightedSquares, WeightedSquares).
@@ -473,11 +472,11 @@
 	best_component(Features, Components, Weights, Cluster) :-
 		row_log_score_summary(Features, Components, Weights, _LogLikelihood, Cluster).
 
-	squared_distance([], [], 0.0).
-	squared_distance([Value1| Values1], [Value2| Values2], DistanceSquared) :-
-		squared_distance(Values1, Values2, RestDistanceSquared),
+	squared_distance([], [], DistanceSquared, DistanceSquared).
+	squared_distance([Value1| Values1], [Value2| Values2], DistanceSquared0, DistanceSquared) :-
 		Delta is Value1 - Value2,
-		DistanceSquared is RestDistanceSquared + Delta * Delta.
+		DistanceSquared01 is DistanceSquared0 + Delta * Delta,
+		squared_distance(Values1, Values2, DistanceSquared01, DistanceSquared).
 
 	print_clusterer(Clusterer) :-
 		clusterer_data(Clusterer, Encoders, Components, Weights, Options, Diagnostics),

@@ -19,13 +19,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- object(invalid_two_blobs_declarations,
+	implements(clustering_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	attribute_values(x, continuous).
+	attribute_values(y, continuous).
+
+	example(1, [x-1.0, y-1.0]).
+	example(2, [x-5.0, y-5.0]).
+
+:- end_object.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-24,
 		comment is 'Unit tests for the "kmedoids" library.'
 	]).
 
@@ -34,7 +47,7 @@
 	]).
 
 	:- uses(kmedoids, [
-		cluster/3, export_to_clauses/4, export_to_file/4, learn/2, learn/3, print_clusterer/1
+		cluster/3, diagnostics/2, export_to_clauses/4, export_to_file/4, learn/2, learn/3, print_clusterer/1
 	]).
 
 	cover(kmedoids).
@@ -54,7 +67,19 @@
 		cluster(Clusterer, [x-5.1, y-5.0], Cluster).
 
 	test(kmedoids_learn_3_custom_options, deterministic((memberchk(k(3), Options), memberchk(maximum_iterations(40), Options), memberchk(tolerance(1.0e-5), Options), memberchk(initialization(first_k), Options), memberchk(distance_metric(manhattan), Options), memberchk(feature_scaling(off), Options)))) :-
-		learn(iris_unlabeled, kmedoids_clusterer(_Encoders, _Medoids, Options), [k(3), maximum_iterations(40), tolerance(1.0e-5), initialization(first_k), distance_metric(manhattan), feature_scaling(off)]).
+		learn(iris_unlabeled, kmedoids_clusterer(_Encoders, _Medoids, Options, _Diagnostics), [k(3), maximum_iterations(40), tolerance(1.0e-5), initialization(first_k), distance_metric(manhattan), feature_scaling(off)]).
+
+	test(kmedoids_diagnostics_2_rich_metadata, deterministic((memberchk(model(kmedoids), Diagnostics), memberchk(medoid_count(2), Diagnostics), memberchk(training_example_count(8), Diagnostics), memberchk(convergence(_), Diagnostics), memberchk(iterations(Iterations), Diagnostics), Iterations >= 1, memberchk(final_shift(FinalShift), Diagnostics), FinalShift >= 0.0, memberchk(options(Options), Diagnostics), memberchk(distance_metric(manhattan), Options), memberchk(feature_scaling(off), Options)))) :-
+		learn(two_blobs, Clusterer, [k(2), initialization(spread), distance_metric(manhattan), feature_scaling(off)]),
+		diagnostics(Clusterer, Diagnostics).
+
+	test(kmedoids_learn_3_maximum_iterations_termination, deterministic((memberchk(convergence(maximum_iterations), Diagnostics), memberchk(iterations(1), Diagnostics), memberchk(final_shift(FinalShift), Diagnostics), FinalShift > 0.0))) :-
+		learn(two_blobs, Clusterer, [k(2), maximum_iterations(1), tolerance(0.0), initialization(first_k), distance_metric(euclidean), feature_scaling(off)]),
+		diagnostics(Clusterer, Diagnostics).
+
+	test(kmedoids_learn_3_tolerance_termination, deterministic((memberchk(convergence(tolerance), Diagnostics), memberchk(iterations(1), Diagnostics), memberchk(final_shift(FinalShift), Diagnostics), FinalShift >= 0.0))) :-
+		learn(two_blobs, Clusterer, [k(2), maximum_iterations(40), tolerance(1000.0), initialization(first_k), distance_metric(euclidean), feature_scaling(off)]),
+		diagnostics(Clusterer, Diagnostics).
 
 	test(kmedoids_cluster_3_iris_extremes, deterministic(Cluster1 \== Cluster2)) :-
 		learn(iris_unlabeled, Clusterer, [k(3)]),
@@ -86,6 +111,9 @@
 
 	test(kmedoids_learn_3_mixed_profiles, error(domain_error(continuous_attribute(channel), [online, retail]))) :-
 		learn(mixed_profiles, _Clusterer).
+
+	test(kmedoids_learn_3_duplicate_attribute_declaration, error(permission_error(repeat, attribute_declaration, x))) :-
+		learn(invalid_two_blobs_declarations, _Clusterer, [feature_scaling(off)]).
 
 	test(kmedoids_learn_3_invalid_cluster_count, error(domain_error(cluster_count(1, 8), 9))) :-
 		learn(two_blobs, _Clusterer, [k(9)]).

@@ -25,14 +25,15 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-24,
 		comment is 'k-Means clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses Lloyd''s algorithm with deterministic initialization.',
 			'Feature handling' - 'Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.',
 			'Initialization' - 'Supports ``first_k`` initialization and a deterministic ``spread`` initialization that repeatedly chooses the farthest example from the centroids selected so far.',
 			'Empty clusters' - 'If an iteration leaves a cluster empty, its centroid is kept unchanged from the previous iteration.',
-			'Clusterer representation' - 'The learned clusterer is represented by default as ``kmeans_clusterer(Encoders, Centroids, Options)`` where ``Encoders`` stores the feature encoding metadata, ``Centroids`` stores the learned centroid vectors in cluster-id order, and ``Options`` stores the effective training options.'
+			'Training diagnostics' - 'Exposes training metadata including example count, convergence status, performed iterations, and final centroid shift.',
+			'Clusterer representation' - 'The learned clusterer is represented by default as ``kmeans_clusterer(Encoders, Centroids, Options, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Centroids`` stores the learned centroid vectors in cluster-id order, ``Options`` stores the effective training options, and ``Diagnostics`` stores training metadata.'
 		],
 		see_also is [clusterer_protocol, clustering_dataset_protocol, nearest_centroid]
 	]).
@@ -72,21 +73,32 @@
 		^^check_cluster_count(K, Count),
 		^^option(initialization(Initialization), Options),
 		initialize_centroids(Initialization, K, Rows, InitialCentroids),
-		optimize_centroids(Rows, Options, 0, InitialCentroids, Centroids),
-		Clusterer = kmeans_clusterer(Encoders, Centroids, Options).
+		optimize_centroids(Rows, Options, 0, 0.0, InitialCentroids, Centroids, Convergence, Iterations, FinalShift),
+		build_diagnostics(Count, Centroids, Options, Convergence, Iterations, FinalShift, Diagnostics),
+		Clusterer = kmeans_clusterer(Encoders, Centroids, Options, Diagnostics).
 
 	cluster(Clusterer, Instance, Cluster) :-
-		Clusterer =.. [_, Encoders, Centroids, _Options],
+		clusterer_data(Clusterer, Encoders, Centroids, _Options, _Diagnostics),
 		^^encode_instance(Encoders, Instance, Features),
 		nearest_centroid(Centroids, Features, Cluster, _DistanceSquared).
 
-	clusterer_diagnostics_data(kmeans_clusterer(_Encoders, Centroids, Options), Diagnostics) :-
+	build_diagnostics(TrainingExampleCount, Centroids, Options, Convergence, Iterations, FinalShift, Diagnostics) :-
 		length(Centroids, CentroidCount),
 		Diagnostics = [
 			model(kmeans),
 			centroid_count(CentroidCount),
+			training_example_count(TrainingExampleCount),
+			convergence(Convergence),
+			iterations(Iterations),
+			final_shift(FinalShift),
 			options(Options)
 		].
+
+	clusterer_diagnostics_data(Clusterer, Diagnostics) :-
+		clusterer_data(Clusterer, _Encoders, _Centroids, _Options, Diagnostics).
+
+	clusterer_data(Clusterer, Encoders, Centroids, Options, Diagnostics) :-
+		Clusterer =.. [_Functor, Encoders, Centroids, Options, Diagnostics].
 
 	initialize_centroids(first_k, K, Rows, Centroids) :-
 		^^take_first_k(K, Rows, Centroids).
@@ -121,18 +133,24 @@
 		),
 		farthest_candidate(Candidates, Selected, BestCandidate1, BestDistance1, BestCandidate).
 
-	optimize_centroids(Rows, Options, Iteration, Centroids0, Centroids) :-
+	optimize_centroids(Rows, Options, Iteration, PreviousShift, Centroids0, Centroids, Convergence, Iterations, FinalShift) :-
 		^^option(maximum_iterations(MaximumIterations), Options),
 		(   Iteration >= MaximumIterations ->
-			Centroids = Centroids0
+			Centroids = Centroids0,
+			Convergence = maximum_iterations,
+			Iterations = Iteration,
+			FinalShift = PreviousShift
 		;   assign_rows(Rows, Centroids0, Assignments),
 			recompute_centroids(Centroids0, Assignments, 1, Centroids1),
-			max_centroid_shift(Centroids0, Centroids1, Shift),
+			max_centroid_shift(Centroids0, Centroids1, 0.0, Shift),
 			^^option(tolerance(Tolerance), Options),
+			NextIteration is Iteration + 1,
 			(   Shift =< Tolerance ->
-				Centroids = Centroids1
-			;   NextIteration is Iteration + 1,
-				optimize_centroids(Rows, Options, NextIteration, Centroids1, Centroids)
+				Centroids = Centroids1,
+				Convergence = tolerance,
+				Iterations = NextIteration,
+				FinalShift = Shift
+			;   optimize_centroids(Rows, Options, NextIteration, Shift, Centroids1, Centroids, Convergence, Iterations, FinalShift)
 			)
 		).
 
@@ -142,13 +160,13 @@
 		assign_rows(Rows, Centroids, Assignments).
 
 	nearest_centroid([Centroid| Centroids], Vector, Cluster, DistanceSquared) :-
-		squared_euclidean_distance(Vector, Centroid, InitialDistance),
+		squared_euclidean_distance(Vector, Centroid, 0.0, InitialDistance),
 		nearest_centroid(Centroids, Vector, 2, 1, InitialDistance, Cluster, DistanceSquared).
 
 	nearest_centroid([], _Vector, _Index, BestCluster, BestDistance, BestCluster, BestDistance) :-
 		!.
 	nearest_centroid([Centroid| Centroids], Vector, Index, BestCluster0, BestDistance0, BestCluster, BestDistance) :-
-		squared_euclidean_distance(Vector, Centroid, Distance),
+		squared_euclidean_distance(Vector, Centroid, 0.0, Distance),
 		(   Distance < BestDistance0 ->
 			BestCluster1 = Index,
 			BestDistance1 = Distance
@@ -159,23 +177,23 @@
 		nearest_centroid(Centroids, Vector, NextIndex, BestCluster1, BestDistance1, BestCluster, BestDistance).
 
 	closest_centroid_distance_squared(Vector, [Centroid| Centroids], DistanceSquared) :-
-		squared_euclidean_distance(Vector, Centroid, InitialDistance),
+		squared_euclidean_distance(Vector, Centroid, 0.0, InitialDistance),
 		closest_centroid_distance_squared(Centroids, Vector, InitialDistance, DistanceSquared).
 
 	closest_centroid_distance_squared([], _Vector, BestDistance, BestDistance).
 	closest_centroid_distance_squared([Centroid| Centroids], Vector, BestDistance0, BestDistance) :-
-		squared_euclidean_distance(Vector, Centroid, Distance),
+		squared_euclidean_distance(Vector, Centroid, 0.0, Distance),
 		(   Distance < BestDistance0 ->
 			BestDistance1 = Distance
 		;   BestDistance1 = BestDistance0
 		),
 		closest_centroid_distance_squared(Centroids, Vector, BestDistance1, BestDistance).
 
-	squared_euclidean_distance([], [], 0.0).
-	squared_euclidean_distance([Value| Values], [Centroid| Centroids], DistanceSquared) :-
-		squared_euclidean_distance(Values, Centroids, RestDistanceSquared),
+	squared_euclidean_distance([], [], DistanceSquared, DistanceSquared).
+	squared_euclidean_distance([Value| Values], [Centroid| Centroids], DistanceSquared0, DistanceSquared) :-
 		Delta is Value - Centroid,
-		DistanceSquared is RestDistanceSquared + Delta * Delta.
+		DistanceSquared1 is DistanceSquared0 + Delta * Delta,
+		squared_euclidean_distance(Values, Centroids, DistanceSquared1, DistanceSquared).
 
 	recompute_centroids([], _, _, []).
 	recompute_centroids([Centroid0| Centroids0], Assignments, Cluster, [Centroid| Centroids]) :-
@@ -217,17 +235,19 @@
 		Scaled is Value * Factor,
 		scale_vector(Values, Factor, ScaledValues).
 
-	max_centroid_shift([], [], 0.0).
-	max_centroid_shift([Centroid0| Centroids0], [Centroid1| Centroids1], MaxShift) :-
-		squared_euclidean_distance(Centroid0, Centroid1, DistanceSquared),
+	max_centroid_shift([], [], MaxShift, MaxShift).
+	max_centroid_shift([Centroid0| Centroids0], [Centroid1| Centroids1], MaxShift0, MaxShift) :-
+		squared_euclidean_distance(Centroid0, Centroid1, 0.0, DistanceSquared),
 		Shift is sqrt(DistanceSquared),
-		max_centroid_shift(Centroids0, Centroids1, RestMaxShift),
-		MaxShift is max(Shift, RestMaxShift).
+		MaxShift1 is max(MaxShift0, Shift),
+		max_centroid_shift(Centroids0, Centroids1, MaxShift1, MaxShift).
 
-	print_clusterer(kmeans_clusterer(Encoders, Centroids, Options)) :-
+	print_clusterer(Clusterer) :-
+		clusterer_data(Clusterer, Encoders, Centroids, Options, Diagnostics),
 		format('k-Means Clusterer~n', []),
 		format('=================~n~n', []),
 		format('Options: ~w~n~n', [Options]),
+		format('Diagnostics: ~w~n~n', [Diagnostics]),
 		format('Encoders:~n', []),
 		print_encoders(Encoders),
 		format('~nCentroids:~n', []),

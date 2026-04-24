@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-24,
 		comment is 'Performance and reference-fit benchmarks for the "kprototypes" library.'
 	]).
 
@@ -50,18 +50,18 @@
 		Inertia =< MaximumInertia,
 		MinPrototypeDistance >= MinimumPrototypeDistance.
 
-	clusterer_metrics(Dataset, kprototypes_clusterer(Encoders, Prototypes, Options), Inertia, MinPrototypeDistance) :-
+	clusterer_metrics(Dataset, kprototypes_clusterer(Encoders, Prototypes, Options, _Diagnostics), Inertia, MinPrototypeDistance) :-
 		findall(
 			AttributeValues,
 			Dataset::example(_, AttributeValues),
 			Examples
 		),
-		training_inertia(Examples, kprototypes_clusterer(Encoders, Prototypes, Options), Inertia),
+		training_inertia(Examples, kprototypes_clusterer(Encoders, Prototypes, Options, _Diagnostics), Inertia),
 		minimum_prototype_distance(Encoders, Prototypes, Options, MinPrototypeDistance).
 
 	training_inertia([], _, 0.0).
 	training_inertia([AttributeValues| Examples], Clusterer, Inertia) :-
-		Clusterer = kprototypes_clusterer(Encoders, Prototypes, Options),
+		Clusterer = kprototypes_clusterer(Encoders, Prototypes, Options, _Diagnostics),
 		kprototypes::cluster(Clusterer, AttributeValues, Cluster),
 		encode_instance(Encoders, AttributeValues, Features),
 		nth1(Cluster, Prototypes, Prototype),

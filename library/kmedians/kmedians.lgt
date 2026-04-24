@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-24,
 		comment is 'k-Medians clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses an iterative median-update algorithm with deterministic initialization.',
@@ -33,7 +33,8 @@
 			'Distance metric' - 'Uses Manhattan distance for assignment and convergence checks.',
 			'Initialization' - 'Supports ``first_k`` initialization and a deterministic ``spread`` initialization that repeatedly chooses the farthest example from the medians selected so far.',
 			'Empty clusters' - 'If an iteration leaves a cluster empty, its median is kept unchanged from the previous iteration.',
-			'Clusterer representation' - 'The learned clusterer is represented by default as ``kmedians_clusterer(Encoders, Medians, Options)`` where ``Encoders`` stores the feature encoding metadata, ``Medians`` stores the learned median vectors in cluster-id order, and ``Options`` stores the effective training options.'
+			'Training diagnostics' - 'Exposes training metadata including example count, convergence status, performed iterations, and final median shift.',
+			'Clusterer representation' - 'The learned clusterer is represented by default as ``kmedians_clusterer(Encoders, Medians, Options, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Medians`` stores the learned median vectors in cluster-id order, ``Options`` stores the effective training options, and ``Diagnostics`` stores training metadata.'
 		],
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kmeans, kmedoids]
 	]).
@@ -77,22 +78,33 @@
 		^^check_cluster_count(K, Count),
 		^^option(initialization(Initialization), Options),
 		initialize_medians(Initialization, K, Rows, InitialMedians),
-		optimize_medians(Rows, Options, 0, InitialMedians, Medians),
-		Clusterer = kmedians_clusterer(Encoders, Medians, Options),
+		optimize_medians(Rows, Options, 0, 0.0, InitialMedians, Medians, Convergence, Iterations, FinalShift),
+		build_diagnostics(Count, Medians, Options, Convergence, Iterations, FinalShift, Diagnostics),
+		Clusterer = kmedians_clusterer(Encoders, Medians, Options, Diagnostics),
 		!.
 
 	cluster(Clusterer, Instance, Cluster) :-
-		Clusterer =.. [_, Encoders, Medians, _Options],
+		clusterer_data(Clusterer, Encoders, Medians, _Options, _Diagnostics),
 		^^encode_instance(Encoders, Instance, Features),
 		nearest_median(Medians, Features, Cluster, _Distance).
 
-	clusterer_diagnostics_data(kmedians_clusterer(_Encoders, Medians, Options), Diagnostics) :-
+	build_diagnostics(TrainingExampleCount, Medians, Options, Convergence, Iterations, FinalShift, Diagnostics) :-
 		length(Medians, MedianCount),
 		Diagnostics = [
 			model(kmedians),
 			median_count(MedianCount),
+			training_example_count(TrainingExampleCount),
+			convergence(Convergence),
+			iterations(Iterations),
+			final_shift(FinalShift),
 			options(Options)
 		].
+
+	clusterer_diagnostics_data(Clusterer, Diagnostics) :-
+		clusterer_data(Clusterer, _Encoders, _Medians, _Options, Diagnostics).
+
+	clusterer_data(Clusterer, Encoders, Medians, Options, Diagnostics) :-
+		Clusterer =.. [_Functor, Encoders, Medians, Options, Diagnostics].
 
 	initialize_medians(first_k, K, Rows, Medians) :-
 		^^take_first_k(K, Rows, Medians).
@@ -127,18 +139,24 @@
 		),
 		farthest_candidate(Candidates, Selected, BestCandidate1, BestDistance1, BestCandidate).
 
-	optimize_medians(Rows, Options, Iteration, Medians0, Medians) :-
+	optimize_medians(Rows, Options, Iteration, PreviousShift, Medians0, Medians, Convergence, Iterations, FinalShift) :-
 		^^option(maximum_iterations(MaximumIterations), Options),
 		(   Iteration >= MaximumIterations ->
-			Medians = Medians0
+			Medians = Medians0,
+			Convergence = maximum_iterations,
+			Iterations = Iteration,
+			FinalShift = PreviousShift
 		;   assign_rows(Rows, Medians0, Assignments),
 			recompute_medians(Medians0, Assignments, 1, Medians1),
-			max_median_shift(Medians0, Medians1, Shift),
+			max_median_shift(Medians0, Medians1, 0.0, Shift),
 			^^option(tolerance(Tolerance), Options),
+			NextIteration is Iteration + 1,
 			(   Shift =< Tolerance ->
-				Medians = Medians1
-			;   NextIteration is Iteration + 1,
-				optimize_medians(Rows, Options, NextIteration, Medians1, Medians)
+				Medians = Medians1,
+				Convergence = tolerance,
+				Iterations = NextIteration,
+				FinalShift = Shift
+			;   optimize_medians(Rows, Options, NextIteration, Shift, Medians1, Medians, Convergence, Iterations, FinalShift)
 			)
 		).
 
@@ -240,16 +258,18 @@
 			Median is (LeftValue + RightValue) / 2.0
 		).
 
-	max_median_shift([], [], 0.0).
-	max_median_shift([Median0| Medians0], [Median1| Medians1], MaxShift) :-
+	max_median_shift([], [], MaxShift, MaxShift).
+	max_median_shift([Median0| Medians0], [Median1| Medians1], MaxShift0, MaxShift) :-
 		manhattan_distance(Median0, Median1, Shift),
-		max_median_shift(Medians0, Medians1, RestMaxShift),
-		MaxShift is max(Shift, RestMaxShift).
+		MaxShift1 is max(MaxShift0, Shift),
+		max_median_shift(Medians0, Medians1, MaxShift1, MaxShift).
 
-	print_clusterer(kmedians_clusterer(Encoders, Medians, Options)) :-
+	print_clusterer(Clusterer) :-
+		clusterer_data(Clusterer, Encoders, Medians, Options, Diagnostics),
 		format('k-Medians Clusterer~n', []),
 		format('===================~n~n', []),
 		format('Options: ~w~n~n', [Options]),
+		format('Diagnostics: ~w~n~n', [Diagnostics]),
 		format('Encoders:~n', []),
 		print_encoders(Encoders),
 		format('~nMedians:~n', []),

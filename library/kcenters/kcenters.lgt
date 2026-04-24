@@ -25,14 +25,15 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-24,
 		comment is 'k-Centers clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses a deterministic farthest-first center selection heuristic.',
 			'Feature handling' - 'Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.',
 			'Distance metrics' - 'Supports Euclidean and Manhattan distances.',
 			'Initialization' - 'Supports ``first_k`` initialization and a deterministic ``spread`` initialization that repeatedly chooses the farthest example from the centers selected so far.',
-			'Clusterer representation' - 'The learned clusterer is represented by default as ``kcenters_clusterer(Encoders, Centers, Options)`` where ``Encoders`` stores the feature encoding metadata, ``Centers`` stores the learned center vectors in cluster-id order, and ``Options`` stores the effective training options.'
+			'Training diagnostics' - 'Exposes training metadata including example count, selected center count, and the center-selection strategy used during learning.',
+			'Clusterer representation' - 'The learned clusterer is represented by default as ``kcenters_clusterer(Encoders, Centers, Options, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Centers`` stores the learned center vectors in cluster-id order, ``Options`` stores the effective training options, and ``Diagnostics`` stores training metadata.'
 		],
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kmeans, kmedoids, kmedians]
 	]).
@@ -76,21 +77,38 @@
 		^^check_cluster_count(K, Count),
 		^^option(initialization(Initialization), Options),
 		initialize_centers(Initialization, K, Rows, Options, Centers),
-		Clusterer = kcenters_clusterer(Encoders, Centers, Options),
+		build_diagnostics(Count, Centers, Options, Diagnostics),
+		Clusterer = kcenters_clusterer(Encoders, Centers, Options, Diagnostics),
 		!.
 
 	cluster(Clusterer, Instance, Cluster) :-
-		Clusterer =.. [_, Encoders, Centers, Options],
+		clusterer_data(Clusterer, Encoders, Centers, Options, _Diagnostics),
 		^^encode_instance(Encoders, Instance, Features),
 		nearest_center(Centers, Features, Options, Cluster, _Distance).
 
-	clusterer_diagnostics_data(kcenters_clusterer(_Encoders, Centers, Options), Diagnostics) :-
+	build_diagnostics(TrainingExampleCount, Centers, Options, Diagnostics) :-
 		length(Centers, CenterCount),
+		selection_strategy(Options, SelectionStrategy),
 		Diagnostics = [
 			model(kcenters),
 			center_count(CenterCount),
+			training_example_count(TrainingExampleCount),
+			selection_strategy(SelectionStrategy),
 			options(Options)
 		].
+
+	selection_strategy(Options, SelectionStrategy) :-
+		^^option(initialization(Initialization), Options),
+		(   Initialization == spread ->
+			SelectionStrategy = deterministic_farthest_first
+		;   SelectionStrategy = first_k
+		).
+
+	clusterer_diagnostics_data(Clusterer, Diagnostics) :-
+		clusterer_data(Clusterer, _Encoders, _Centers, _Options, Diagnostics).
+
+	clusterer_data(Clusterer, Encoders, Centers, Options, Diagnostics) :-
+		Clusterer =.. [_Functor, Encoders, Centers, Options, Diagnostics].
 
 	initialize_centers(first_k, K, Rows, _Options, Centers) :-
 		^^take_first_k(K, Rows, Centers).
@@ -163,10 +181,12 @@
 	distance_metric(manhattan, Vector1, Vector2, Distance) :-
 		manhattan_distance(Vector1, Vector2, Distance).
 
-	print_clusterer(kcenters_clusterer(Encoders, Centers, Options)) :-
+	print_clusterer(Clusterer) :-
+		clusterer_data(Clusterer, Encoders, Centers, Options, Diagnostics),
 		format('k-Centers Clusterer~n', []),
 		format('===================~n~n', []),
 		format('Options: ~w~n~n', [Options]),
+		format('Diagnostics: ~w~n~n', [Diagnostics]),
 		format('Encoders:~n', []),
 		print_encoders(Encoders),
 		format('~nCenters:~n', []),

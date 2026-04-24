@@ -21,6 +21,8 @@
 
 :- initialization((
 	logtalk_load(types(loader)),
+	logtalk_load(dictionaries(loader)),
+	logtalk_load(heaps(loader)),
 	logtalk_load(statistics(loader)),
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),

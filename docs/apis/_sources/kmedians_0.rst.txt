@@ -15,7 +15,7 @@ k-Medians clusterer for continuous datasets. Learns from a dataset object implem
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-23
+| **Date:** 2026-04-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -37,7 +37,8 @@ k-Medians clusterer for continuous datasets. Learns from a dataset object implem
    - Distance metric: Uses Manhattan distance for assignment and convergence checks.
    - Initialization: Supports ``first_k`` initialization and a deterministic ``spread`` initialization that repeatedly chooses the farthest example from the medians selected so far.
    - Empty clusters: If an iteration leaves a cluster empty, its median is kept unchanged from the previous iteration.
-   - Clusterer representation: The learned clusterer is represented by default as ``kmedians_clusterer(Encoders, Medians, Options)`` where ``Encoders`` stores the feature encoding metadata, ``Medians`` stores the learned median vectors in cluster-id order, and ``Options`` stores the effective training options.
+   - Training diagnostics: Exposes training metadata including example count, convergence status, performed iterations, and final median shift.
+   - Clusterer representation: The learned clusterer is represented by default as ``kmedians_clusterer(Encoders, Medians, Options, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Medians`` stores the learned median vectors in cluster-id order, ``Options`` stores the effective training options, and ``Diagnostics`` stores training metadata.
 
 | **Inherited public predicates:**
 |     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`clusterer_protocol/0::cluster/3`  :ref:`clusterer_protocol/0::clusterer_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`clusterer_protocol/0::diagnostic/2`  :ref:`clusterer_protocol/0::diagnostics/2`  :ref:`clusterer_protocol/0::export_to_clauses/4`  :ref:`clusterer_protocol/0::export_to_file/4`  :ref:`clusterer_protocol/0::learn/2`  :ref:`clusterer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`clusterer_protocol/0::print_clusterer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  

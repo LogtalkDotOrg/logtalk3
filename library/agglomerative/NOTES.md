@@ -65,6 +65,12 @@ Features
 - **Linkage Strategies**: Supports `single`, `complete`, and `average` linkage.
 - **Distance Metrics**: Supports `euclidean` and `manhattan` distances.
 - **Optional Feature Scaling**: Continuous attributes can be standardized using z-score scaling.
+- **Linkage-Aware Prediction**: New instances are assigned using the configured linkage strategy against the learned cluster members instead of only against cluster prototypes.
+- **Deterministic Ordering**: Equal-distance merges are broken using node-id order and final clusters are ordered by minimum training example id so equivalent dataset permutations keep the same cluster ids.
+- **Cached Distances**: Inter-cluster distances are cached and incrementally updated after each merge instead of being fully recomputed from cluster members at every iteration.
+- **Priority-Queue Merge Selection**: Candidate merges are tracked in a min-heap keyed by distance and node-id order, allowing stale entries to be discarded lazily while keeping merge selection deterministic.
+- **Rich Diagnostics**: Diagnostics report the training example count, performed merge count, initial pair count, maximum heap size, stale-pair discard count, deterministic pair-selection strategy, and linkage-aware prediction strategy.
+- **Fail-Fast Consistency Checks**: Internal heap, active-node, and cached-distance inconsistencies raise explicit `agglomerative_error/2` exceptions instead of failing silently.
 - **Portable Export**: Learned clusterers can be exported as clauses or files and reused later.
 
 
@@ -86,11 +92,28 @@ The learned clusterer is represented as a compound term with the
 functor chosen by the user when exporting the clusterer and arity 4.
 For example:
 
-	agglomerative_clusterer(Encoders, Clusters, Prototypes, Options)
+	agglomerative_clusterer(Encoders, Clusters, Prototypes, Options, Diagnostics)
 
 Where:
 
 - `Encoders`: List of continuous attribute encoders storing attribute name, mean, and scale.
 - `Clusters`: List of `cluster(Id, Points)` terms in cluster-id order.
-- `Prototypes`: List of average vectors used for assigning new instances.
+- `Prototypes`: List of average vectors used for display, diagnostics, and export metadata.
 - `Options`: Effective training options used to learn the clusterer.
+- `Diagnostics`: Training metadata including heap and prediction details.
+
+
+Diagnostics
+-----------
+
+The `diagnostics/2` predicate returns metadata including:
+
+- `training_example_count/1`
+- `merge_count/1`
+- `initial_pair_count/1`
+- `maximum_heap_size/1`
+- `stale_pair_discard_count/1`
+- `pair_selection(priority_queue)`
+- `prediction_strategy(cluster_member_linkage_distance)`
+- `tie_breaking(node_id_order)`
+- `options/1`

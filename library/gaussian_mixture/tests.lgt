@@ -19,13 +19,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- object(invalid_gaussian_mixture_two_blobs,
+	implements(clustering_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	attribute_values(y, continuous).
+
+	example(1, [x-1.0, x-1.1, y-1.0]).
+	example(2, [x-5.0, y-5.0]).
+
+:- end_object.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-24,
 		comment is 'Unit tests for the "gaussian_mixture" library.'
 	]).
 
@@ -73,6 +85,14 @@
 	test(gaussian_mixture_cluster_3_missing_attribute, error(existence_error(attribute, y))) :-
 		learn(two_blobs, Clusterer, [feature_scaling(off)]),
 		cluster(Clusterer, [x-1.0], _Cluster).
+
+	test(gaussian_mixture_cluster_3_duplicate_attribute, error(domain_error(attribute_occurrences(x, 1), 2))) :-
+		learn(two_blobs, Clusterer, [feature_scaling(off)]),
+		cluster(Clusterer, [x-1.0, x-1.1, y-1.0], _Cluster).
+
+	test(gaussian_mixture_cluster_3_undeclared_attribute, error(domain_error(declared_attribute(_), z))) :-
+		learn(two_blobs, Clusterer, [feature_scaling(off)]),
+		cluster(Clusterer, [x-1.0, y-1.0, z-2.0], _Cluster).
 
 	test(gaussian_mixture_cluster_3_non_numeric_attribute, error(type_error(number, foo))) :-
 		learn(two_blobs, Clusterer, [feature_scaling(off)]),
@@ -175,6 +195,9 @@
 
 	test(gaussian_mixture_learn_3_invalid_cluster_count, error(domain_error(cluster_count(1, 8), 9))) :-
 		learn(two_blobs, _Clusterer, [k(9)]).
+
+	test(gaussian_mixture_learn_3_duplicate_training_attribute, error(domain_error(attribute_occurrences(x, 1), 2))) :-
+		learn(invalid_gaussian_mixture_two_blobs, _Clusterer, [feature_scaling(off)]).
 
 	training_assignments(Dataset, Clusterer, Assignments) :-
 		findall(

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kmodes &mdash; Logtalk 3.100.0</title>
+  <title>search_indexing &mdash; Logtalk 3.100.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="knn" href="knn_0.html" />
-    <link rel="prev" title="kmedoids" href="kmedoids_0.html" />
+    <link rel="next" title="cc_metric" href="cc_metric_0.html" />
+    <link rel="prev" title="clustering_dataset_protocol" href="clustering_dataset_protocol_0.html" />
    
 </head>
 
@@ -85,7 +85,13 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#character-sets"><span class="xref std std-ref">character_sets</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#classification-protocols"><span class="xref std std-ref">classification_protocols</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#clo-span"><span class="xref std std-ref">clo_span</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#clustering-protocols"><span class="xref std std-ref">clustering_protocols</span></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#clustering-protocols"><span class="xref std std-ref">clustering_protocols</span></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="clusterer_common_0.html">clusterer_common</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clusterer_protocol_0.html">clusterer_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clustering_dataset_protocol_0.html">clustering_dataset_protocol</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">search_indexing</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><span class="xref std std-ref">code_metrics</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#combinations"><span class="xref std std-ref">combinations</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#command-line-options"><span class="xref std std-ref">command_line_options</span></a></li>
@@ -151,10 +157,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#kmeans"><span class="xref std std-ref">kmeans</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#kmedians"><span class="xref std std-ref">kmedians</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#kmedoids"><span class="xref std std-ref">kmedoids</span></a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#kmodes"><span class="xref std std-ref">kmodes</span></a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">kmodes</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#kmodes"><span class="xref std std-ref">kmodes</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#knn"><span class="xref std std-ref">knn</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#knn-distance"><span class="xref std std-ref">knn_distance</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#knn-regression"><span class="xref std std-ref">knn_regression</span></a></li>
@@ -281,9 +284,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">kmodes</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">search_indexing</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/kmodes_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/search_indexing_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -291,65 +294,63 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="kmodes-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="kmodes">
-<h1><code class="docutils literal notranslate"><span class="pre">kmodes</span></code><a class="headerlink" href="#kmodes" title="Link to this heading"></a></h1>
-<p>k-Modes clusterer for discrete datasets. Learns from a dataset object implementing the <code class="docutils literal notranslate"><span class="pre">clustering_dataset_protocol</span></code> protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.</p>
+  <p class="right" id="search-indexing-0"><span id="index-0"></span><strong>category</strong></p>
+<section id="search-indexing">
+<h1><code class="docutils literal notranslate"><span class="pre">search_indexing</span></code><a class="headerlink" href="#search-indexing" title="Link to this heading"></a></h1>
+<p>Shared helpers for adaptive search-index construction and range queries used by clustering libraries.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(kmodes(loader))</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(clustering_protocols(loader))</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-24</div>
+<div class="line"><strong>Date:</strong> 2026-04-23</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Imports:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="clusterer_common_0.html#clusterer-common-0"><span class="std std-ref">clusterer_common</span></a></div>
-</div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
-<div class="line"><a class="reference internal" href="format_0.html#format-0"><span class="std std-ref">format</span></a></div>
+<div class="line"><a class="reference internal" href="avltree_0.html#avltree-0"><span class="std std-ref">avltree</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
-<div class="line"><a class="reference internal" href="pairs_0.html#pairs-0"><span class="std std-ref">pairs</span></a></div>
-<div class="line"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Uses an iterative mode-update algorithm with deterministic initialization and deterministic cluster assignments.</p></li>
-<li><p>Feature handling: Supports discrete attributes only.</p></li>
-<li><p>Initialization: Supports <code class="docutils literal notranslate"><span class="pre">first_k</span></code> initialization and a deterministic <code class="docutils literal notranslate"><span class="pre">spread</span></code> initialization that repeatedly chooses the farthest example from the modes selected so far.</p></li>
-<li><p>Empty clusters: If an iteration leaves a cluster empty, its mode is kept unchanged from the previous iteration.</p></li>
-<li><p>Training diagnostics: Exposes training metadata including example count, convergence status, performed iterations, and final mode shift.</p></li>
-<li><p>Clusterer representation: The learned clusterer is represented by default as <code class="docutils literal notranslate"><span class="pre">kmodes_clusterer(Encoders,</span> <span class="pre">Modes,</span> <span class="pre">Options,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores the feature encoding metadata, <code class="docutils literal notranslate"><span class="pre">Modes</span></code> stores the learned categorical modes in cluster-id order, <code class="docutils literal notranslate"><span class="pre">Options</span></code> stores the effective training options, and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores training metadata.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="clusterer_protocol_0.html#clusterer-protocol-0-cluster-3"><span class="std std-ref">cluster/3</span></a>  <a class="reference internal" href="clusterer_protocol_0.html#clusterer-protocol-0-clusterer-options-2"><span class="std std-ref">clusterer_options/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="clusterer_protocol_0.html#clusterer-protocol-0-diagnostic-2"><span class="std std-ref">diagnostic/2</span></a>  <a class="reference internal" href="clusterer_protocol_0.html#clusterer-protocol-0-diagnostics-2"><span class="std std-ref">diagnostics/2</span></a>  <a class="reference internal" href="clusterer_protocol_0.html#clusterer-protocol-0-export-to-clauses-4"><span class="std std-ref">export_to_clauses/4</span></a>  <a class="reference internal" href="clusterer_protocol_0.html#clusterer-protocol-0-export-to-file-4"><span class="std std-ref">export_to_file/4</span></a>  <a class="reference internal" href="clusterer_protocol_0.html#clusterer-protocol-0-learn-2"><span class="std std-ref">learn/2</span></a>  <a class="reference internal" href="clusterer_protocol_0.html#clusterer-protocol-0-learn-3"><span class="std std-ref">learn/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="clusterer_protocol_0.html#clusterer-protocol-0-print-clusterer-1"><span class="std std-ref">print_clusterer/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
+<div class="line">(none)</div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id4">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#build-auto-search-index-3" id="id3"><code class="docutils literal notranslate"><span class="pre">build_auto_search_index/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#build-metric-tree-3" id="id4"><code class="docutils literal notranslate"><span class="pre">build_metric_tree/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#build-grid-index-3" id="id5"><code class="docutils literal notranslate"><span class="pre">build_grid_index/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#range-query-5" id="id6"><code class="docutils literal notranslate"><span class="pre">range_query/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#search-index-cell-size-2" id="id7"><code class="docutils literal notranslate"><span class="pre">search_index_cell_size/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#select-metric-pivot-4" id="id8"><code class="docutils literal notranslate"><span class="pre">select_metric_pivot/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#distance-4" id="id9"><code class="docutils literal notranslate"><span class="pre">distance/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#split-sorted-rows-5" id="id10"><code class="docutils literal notranslate"><span class="pre">split_sorted_rows/5</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#private-predicates" id="id11">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id12">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -358,8 +359,175 @@
 </section>
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<section id="build-auto-search-index-3">
+<span id="search-indexing-0-build-auto-search-index-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">build_auto_search_index/3</span></code></a><a class="headerlink" href="#build-auto-search-index-3" title="Link to this heading"></a></h3>
+<p>Builds an adaptive search index by selecting either a grid index or a metric tree based on dataset shape.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">build_auto_search_index(Rows,Options,SearchIndex)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">build_auto_search_index(+list(pair),+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
 </section>
+<section id="build-metric-tree-3">
+<span id="search-indexing-0-build-metric-tree-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">build_metric_tree/3</span></code></a><a class="headerlink" href="#build-metric-tree-3" title="Link to this heading"></a></h3>
+<p>Builds a metric tree search index for encoded dataset rows.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">build_metric_tree(Rows,Options,MetricTree)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">build_metric_tree(+list(pair),+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="build-grid-index-3">
+<span id="search-indexing-0-build-grid-index-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">build_grid_index/3</span></code></a><a class="headerlink" href="#build-grid-index-3" title="Link to this heading"></a></h3>
+<p>Builds a grid-based search index for encoded dataset rows using the object-defined cell size.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">build_grid_index(Rows,Options,GridIndex)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">build_grid_index(+list(pair),+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="range-query-5">
+<span id="search-indexing-0-range-query-5"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">range_query/5</span></code></a><a class="headerlink" href="#range-query-5" title="Link to this heading"></a></h3>
+<p>Queries a search index for rows within the given epsilon distance of an encoded feature vector.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">range_query(SearchIndex,Vector,Options,Epsilon,Neighbors)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">range_query(+compound,+list(number),+list(compound),+number,-list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="search-index-cell-size-2">
+<span id="search-indexing-0-search-index-cell-size-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">search_index_cell_size/2</span></code></a><a class="headerlink" href="#search-index-cell-size-2" title="Link to this heading"></a></h3>
+<p>Returns the grid cell size to use when constructing a grid-based search index.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">search_index_cell_size(Options,CellSize)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">search_index_cell_size(+list(compound),-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="select-metric-pivot-4">
+<span id="search-indexing-0-select-metric-pivot-4"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">select_metric_pivot/4</span></code></a><a class="headerlink" href="#select-metric-pivot-4" title="Link to this heading"></a></h3>
+<p>Selects a pivot row and returns the remaining rows decorated and sorted by distance to that pivot.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">select_metric_pivot(Rows,Options,Pivot,SortedRows)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">select_metric_pivot(+list(pair),+list(compound),-pair,-list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="distance-4">
+<span id="search-indexing-0-distance-4"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">distance/4</span></code></a><a class="headerlink" href="#distance-4" title="Link to this heading"></a></h3>
+<p>Computes the distance between two encoded feature vectors using the effective object options.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">distance(Options,Vector1,Vector2,Distance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">distance(+list(compound),+list(number),+list(number),-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="split-sorted-rows-5">
+<span id="search-indexing-0-split-sorted-rows-5"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">split_sorted_rows/5</span></code></a><a class="headerlink" href="#split-sorted-rows-5" title="Link to this heading"></a></h3>
+<p>Splits rows decorated with distances into inner and outer partitions and returns their boundary distances.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">split_sorted_rows(SortedRows,InnerUpperBound,OuterLowerBound,InnerRows,OuterRows)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">split_sorted_rows(+list(pair),-number,-number,-list(pair),-list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
@@ -367,10 +535,6 @@
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="clusterer_protocol_0.html#clusterer-protocol-0"><span class="std std-ref">clusterer_protocol</span></a>, <a class="reference internal" href="clustering_dataset_protocol_0.html#clustering-dataset-protocol-0"><span class="std std-ref">clustering_dataset_protocol</span></a>, <a class="reference internal" href="kprototypes_0.html#kprototypes-0"><span class="std std-ref">kprototypes</span></a></p>
-</div>
 </section>
 </section>
 
@@ -378,8 +542,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="kmedoids_0.html" class="btn btn-neutral float-left" title="kmedoids" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="knn_0.html" class="btn btn-neutral float-right" title="knn" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="clustering_dataset_protocol_0.html" class="btn btn-neutral float-left" title="clustering_dataset_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cc_metric_0.html" class="btn btn-neutral float-right" title="cc_metric" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

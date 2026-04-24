@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-24,
 		comment is 'Performance and reference-fit benchmarks for the "kmedians" library.'
 	]).
 
@@ -54,18 +54,18 @@
 		Inertia =< MaximumInertia,
 		MinMedianDistance >= MinimumMedianDistance.
 
-	clusterer_metrics(Dataset, kmedians_clusterer(Encoders, Medians, Options), Inertia, MinMedianDistance) :-
+	clusterer_metrics(Dataset, kmedians_clusterer(Encoders, Medians, Options, _Diagnostics), Inertia, MinMedianDistance) :-
 		findall(
 			AttributeValues,
 			Dataset::example(_, AttributeValues),
 			Examples
 		),
-		training_inertia(Examples, kmedians_clusterer(Encoders, Medians, Options), Inertia),
+		training_inertia(Examples, kmedians_clusterer(Encoders, Medians, Options, _Diagnostics), Inertia),
 		minimum_median_distance(Medians, MinMedianDistance).
 
 	training_inertia([], _, 0.0).
 	training_inertia([AttributeValues| Examples], Clusterer, Inertia) :-
-		Clusterer = kmedians_clusterer(Encoders, Medians, _Options),
+		Clusterer = kmedians_clusterer(Encoders, Medians, _Options, _Diagnostics),
 		kmedians::cluster(Clusterer, AttributeValues, Cluster),
 		encode_instance(Encoders, AttributeValues, Features),
 		nth1(Cluster, Medians, Median),

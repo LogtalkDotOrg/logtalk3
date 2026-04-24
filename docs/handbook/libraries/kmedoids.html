@@ -151,6 +151,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diagnostics">Diagnostics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#clusterer-representation">Clusterer Representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
@@ -317,6 +318,9 @@ distances.</p></li>
 deterministic <code class="docutils literal notranslate"><span class="pre">spread</span></code> initialization.</p></li>
 <li><p><strong>Optional Feature Scaling</strong>: Continuous attributes can be
 standardized using z-score scaling.</p></li>
+<li><p><strong>Rich Training Diagnostics</strong>: Learned clusterers report training
+example count, convergence status, iteration count, and final medoid
+shift.</p></li>
 <li><p><strong>Portable Export</strong>: Learned clusterers can be exported as clauses or
 files and reused later.</p></li>
 <li><p><strong>Stable Empty-Cluster Handling</strong>: Empty clusters keep their previous
@@ -340,12 +344,25 @@ Options: <code class="docutils literal notranslate"><span class="pre">spread</sp
 attributes before clustering. Options: <code class="docutils literal notranslate"><span class="pre">on</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">off</span></code>.</p></li>
 </ul>
 </section>
+<section id="diagnostics">
+<h2>Diagnostics<a class="headerlink" href="#diagnostics" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code> predicate returns a list containing:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">model(kmedoids)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">medoid_count(Count)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">training_example_count(Count)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">convergence(Reason)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iterations(Count)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">final_shift(Shift)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">options(Options)</span></code></p></li>
+</ul>
+</section>
 <section id="clusterer-representation">
 <h2>Clusterer Representation<a class="headerlink" href="#clusterer-representation" title="Link to this heading"></a></h2>
 <p>The learned clusterer is represented as a compound term with the functor
-chosen by the user when exporting the clusterer and arity 3. For
+chosen by the user when exporting the clusterer and arity 4. For
 example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>kmedoids_clusterer(<span class="nv">Encoders</span>, <span class="nv">Medoids</span>, <span class="nv">Options</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>kmedoids_clusterer(<span class="nv">Encoders</span>, <span class="nv">Medoids</span>, <span class="nv">Options</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
 <p>Where:</p>
@@ -354,6 +371,8 @@ example:</p>
 name, mean, and scale.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Medoids</span></code>: List of medoid vectors in cluster-id order.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Options</span></code>: Effective training options used to learn the clusterer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>: Training diagnostics metadata returned by the
+<code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code> predicate.</p></li>
 </ul>
 </section>
 <section id="references">

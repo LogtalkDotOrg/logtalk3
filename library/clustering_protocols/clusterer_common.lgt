@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-24,
 		comment is 'Shared predicates for clusterer learning defaults, export, and common dataset and encoding helpers.'
 	]).
 
@@ -68,7 +68,14 @@
 	:- protected(check_example_attributes/2).
 	:- mode(check_example_attributes(+list(atom), +list(pair)), one).
 	:- info(check_example_attributes/2, [
-		comment is 'Checks that a single example contains numeric values for all declared attributes.',
+		comment is 'Checks that a single example contains exactly the declared attributes and that all values are numeric.',
+		argnames is ['AttributeNames', 'AttributeValues']
+	]).
+
+	:- protected(check_attribute_bindings/2).
+	:- mode(check_attribute_bindings(+list(atom), +list(pair)), one).
+	:- info(check_attribute_bindings/2, [
+		comment is 'Checks that an attribute-value list contains each declared attribute exactly once and no undeclared attributes.',
 		argnames is ['AttributeNames', 'AttributeValues']
 	]).
 
@@ -103,8 +110,15 @@
 	:- protected(encode_instance/3).
 	:- mode(encode_instance(+list(compound), +list(pair), -list(number)), one).
 	:- info(encode_instance/3, [
-		comment is 'Encodes an instance using the learned continuous attribute encoders.',
+		comment is 'Encodes an instance using the learned continuous attribute encoders after checking that it contains exactly the declared attributes.',
 		argnames is ['Encoders', 'AttributeValues', 'Features']
+	]).
+
+	:- protected(check_encoded_attribute_bindings/2).
+	:- mode(check_encoded_attribute_bindings(+list(compound), +list(pair)), one).
+	:- info(check_encoded_attribute_bindings/2, [
+		comment is 'Checks that an attribute-value list contains each attribute described by the encoders exactly once and no undeclared attributes.',
+		argnames is ['Encoders', 'AttributeValues']
 	]).
 
 	:- protected(normalize_continuous/4).
@@ -184,7 +198,33 @@
 			Attribute-Values,
 			Dataset::attribute_values(Attribute, Values),
 			Attributes
-		).
+		),
+		check_attribute_declarations(Attributes).
+
+	check_attribute_declarations([]).
+	check_attribute_declarations([Attribute-_| Attributes]) :-
+		attribute_declaration_occurrences(Attributes, Attribute, 1, Count),
+		(   Count == 1 ->
+			true
+		;   permission_error(repeat, attribute_declaration, Attribute)
+		),
+		remove_attribute_declarations(Attribute, Attributes, RemainingAttributes),
+		check_attribute_declarations(RemainingAttributes).
+
+	attribute_declaration_occurrences([], _Attribute, Count, Count).
+	attribute_declaration_occurrences([Attribute-_Values| Attributes], Attribute, Count0, Count) :-
+		!,
+		Count1 is Count0 + 1,
+		attribute_declaration_occurrences(Attributes, Attribute, Count1, Count).
+	attribute_declaration_occurrences([_OtherAttribute-_Values| Attributes], Attribute, Count0, Count) :-
+		attribute_declaration_occurrences(Attributes, Attribute, Count0, Count).
+
+	remove_attribute_declarations(_Attribute, [], []).
+	remove_attribute_declarations(Attribute, [Attribute-_Values| Attributes], RemainingAttributes) :-
+		!,
+		remove_attribute_declarations(Attribute, Attributes, RemainingAttributes).
+	remove_attribute_declarations(Attribute, [Declaration| Attributes], [Declaration| RemainingAttributes]) :-
+		remove_attribute_declarations(Attribute, Attributes, RemainingAttributes).
 
 	check_continuous_attributes([]).
 	check_continuous_attributes([Attribute-Values| Attributes]) :-
@@ -209,8 +249,12 @@
 		::check_example_attributes(AttributeNames, AttributeValues),
 		check_example_values(Examples, AttributeNames).
 
-	check_example_attributes([], _AttributeValues).
-	check_example_attributes([Attribute| Attributes], AttributeValues) :-
+	check_example_attributes(AttributeNames, AttributeValues) :-
+		::check_attribute_bindings(AttributeNames, AttributeValues),
+		check_example_attributes_checked(AttributeNames, AttributeValues).
+
+	check_example_attributes_checked([], _AttributeValues).
+	check_example_attributes_checked([Attribute| Attributes], AttributeValues) :-
 		::attribute_value(Attribute, AttributeValues, Value),
 		(   nonvar(Value) ->
 			true
@@ -220,7 +264,38 @@
 			true
 		;   type_error(number, Value)
 		),
-		check_example_attributes(Attributes, AttributeValues).
+		check_example_attributes_checked(Attributes, AttributeValues).
+
+	check_attribute_bindings(AttributeNames, AttributeValues) :-
+		check_declared_attribute_bindings(AttributeNames, AttributeValues),
+		check_undeclared_attribute_bindings(AttributeValues, AttributeNames).
+
+	check_declared_attribute_bindings([], _AttributeValues).
+	check_declared_attribute_bindings([Attribute| Attributes], AttributeValues) :-
+		attribute_occurrences(AttributeValues, Attribute, 0, Count),
+		(   Count == 1 ->
+			true
+		;   Count == 0 ->
+			existence_error(attribute, Attribute)
+		;   domain_error(attribute_occurrences(Attribute, 1), Count)
+		),
+		check_declared_attribute_bindings(Attributes, AttributeValues).
+
+	check_undeclared_attribute_bindings([], _AttributeNames).
+	check_undeclared_attribute_bindings([Attribute-_Value| AttributeValues], AttributeNames) :-
+		(   memberchk(Attribute, AttributeNames) ->
+			true
+		;   domain_error(declared_attribute(AttributeNames), Attribute)
+		),
+		check_undeclared_attribute_bindings(AttributeValues, AttributeNames).
+
+	attribute_occurrences([], _Attribute, Count, Count).
+	attribute_occurrences([Attribute-_Value| AttributeValues], Attribute, Count0, Count) :-
+		!,
+		Count1 is Count0 + 1,
+		attribute_occurrences(AttributeValues, Attribute, Count1, Count).
+	attribute_occurrences([_OtherAttribute-_Value| AttributeValues], Attribute, Count0, Count) :-
+		attribute_occurrences(AttributeValues, Attribute, Count0, Count).
 
 	attribute_value(Attribute, AttributeValues, Value) :-
 		(   member(Attribute-Value, AttributeValues) ->
@@ -261,11 +336,26 @@
 		::encode_instance(Encoders, AttributeValues, Features),
 		examples_to_rows(Examples, Encoders, Rows).
 
-	encode_instance([], _AttributeValues, []).
-	encode_instance([continuous(Attribute, Mean, Scale)| Encoders], AttributeValues, [Feature| Features]) :-
+	encode_instance(Encoders, AttributeValues, Features) :-
+		::check_encoded_attribute_bindings(Encoders, AttributeValues),
+		encode_instance_checked(Encoders, AttributeValues, Features).
+
+	check_encoded_attribute_bindings(Encoders, AttributeValues) :-
+		encoder_attribute_names(Encoders, AttributeNames),
+		check_attribute_bindings(AttributeNames, AttributeValues).
+
+	encoder_attribute_names([], []).
+	encoder_attribute_names([continuous(Attribute, _Mean, _Scale)| Encoders], [Attribute| AttributeNames]) :-
+		!,
+		encoder_attribute_names(Encoders, AttributeNames).
+	encoder_attribute_names([discrete(Attribute, _AllowedValues)| Encoders], [Attribute| AttributeNames]) :-
+		encoder_attribute_names(Encoders, AttributeNames).
+
+	encode_instance_checked([], _AttributeValues, []).
+	encode_instance_checked([continuous(Attribute, Mean, Scale)| Encoders], AttributeValues, [Feature| Features]) :-
 		::attribute_value(Attribute, AttributeValues, Value),
 		::normalize_continuous(Value, Mean, Scale, Feature),
-		encode_instance(Encoders, AttributeValues, Features).
+		encode_instance_checked(Encoders, AttributeValues, Features).
 
 	normalize_continuous(Value, Mean, Scale, Feature) :-
 		(   nonvar(Value) ->

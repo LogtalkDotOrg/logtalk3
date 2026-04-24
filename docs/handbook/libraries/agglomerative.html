@@ -78,6 +78,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#clusterer-representation">Clusterer Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diagnostics">Diagnostics</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="amqp.html"><code class="docutils literal notranslate"><span class="pre">amqp</span></code></a></li>
@@ -313,6 +314,26 @@ attributes.</p></li>
 distances.</p></li>
 <li><p><strong>Optional Feature Scaling</strong>: Continuous attributes can be
 standardized using z-score scaling.</p></li>
+<li><p><strong>Linkage-Aware Prediction</strong>: New instances are assigned using the
+configured linkage strategy against the learned cluster members
+instead of only against cluster prototypes.</p></li>
+<li><p><strong>Deterministic Ordering</strong>: Equal-distance merges are broken using
+node-id order and final clusters are ordered by minimum training
+example id so equivalent dataset permutations keep the same cluster
+ids.</p></li>
+<li><p><strong>Cached Distances</strong>: Inter-cluster distances are cached and
+incrementally updated after each merge instead of being fully
+recomputed from cluster members at every iteration.</p></li>
+<li><p><strong>Priority-Queue Merge Selection</strong>: Candidate merges are tracked in a
+min-heap keyed by distance and node-id order, allowing stale entries
+to be discarded lazily while keeping merge selection deterministic.</p></li>
+<li><p><strong>Rich Diagnostics</strong>: Diagnostics report the training example count,
+performed merge count, initial pair count, maximum heap size,
+stale-pair discard count, deterministic pair-selection strategy, and
+linkage-aware prediction strategy.</p></li>
+<li><p><strong>Fail-Fast Consistency Checks</strong>: Internal heap, active-node, and
+cached-distance inconsistencies raise explicit
+<code class="docutils literal notranslate"><span class="pre">agglomerative_error/2</span></code> exceptions instead of failing silently.</p></li>
 <li><p><strong>Portable Export</strong>: Learned clusterers can be exported as clauses or
 files and reused later.</p></li>
 </ul>
@@ -336,7 +357,7 @@ attributes before clustering. Options: <code class="docutils literal notranslate
 <p>The learned clusterer is represented as a compound term with the functor
 chosen by the user when exporting the clusterer and arity 4. For
 example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>agglomerative_clusterer(<span class="nv">Encoders</span>, <span class="nv">Clusters</span>, <span class="nv">Prototypes</span>, <span class="nv">Options</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>agglomerative_clusterer(<span class="nv">Encoders</span>, <span class="nv">Clusters</span>, <span class="nv">Prototypes</span>, <span class="nv">Options</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
 <p>Where:</p>
@@ -345,9 +366,26 @@ example:</p>
 name, mean, and scale.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Clusters</span></code>: List of <code class="docutils literal notranslate"><span class="pre">cluster(Id,</span> <span class="pre">Points)</span></code> terms in cluster-id
 order.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Prototypes</span></code>: List of average vectors used for assigning new
-instances.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Prototypes</span></code>: List of average vectors used for display, diagnostics,
+and export metadata.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Options</span></code>: Effective training options used to learn the clusterer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>: Training metadata including heap and prediction
+details.</p></li>
+</ul>
+</section>
+<section id="diagnostics">
+<h2>Diagnostics<a class="headerlink" href="#diagnostics" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code> predicate returns metadata including:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">training_example_count/1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">merge_count/1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_pair_count/1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maximum_heap_size/1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stale_pair_discard_count/1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pair_selection(priority_queue)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prediction_strategy(cluster_member_linkage_distance)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tie_breaking(node_id_order)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">options/1</span></code></p></li>
 </ul>
 </section>
 </section>

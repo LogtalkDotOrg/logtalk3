@@ -54,6 +54,9 @@ Features
   attributes.
 - **Deterministic Initialization**: Supports ``first_k`` and
   deterministic ``spread`` initialization.
+- **Rich Training Diagnostics**: Learned clusterers report training
+  example count, convergence status, iteration count, and final mode
+  shift.
 - **Portable Export**: Learned clusterers can be exported as clauses or
   files and reused later.
 - **Stable Empty-Cluster Handling**: Empty clusters keep their previous
@@ -72,22 +75,37 @@ The following options can be passed to the ``learn/3`` predicate:
 - ``initialization(Initialization)``: Mode initialization strategy.
   Options: ``spread`` (default) or ``first_k``.
 
+Diagnostics
+-----------
+
+The ``diagnostics/2`` predicate returns a list containing:
+
+- ``model(kmodes)``
+- ``mode_count(Count)``
+- ``training_example_count(Count)``
+- ``convergence(Reason)``
+- ``iterations(Count)``
+- ``final_shift(Shift)``
+- ``options(Options)``
+
 Clusterer Representation
 ------------------------
 
 The learned clusterer is represented as a compound term with the functor
-chosen by the user when exporting the clusterer and arity 3. For
+chosen by the user when exporting the clusterer and arity 4. For
 example:
 
 ::
 
-   kmodes_clusterer(Encoders, Modes, Options)
+   kmodes_clusterer(Encoders, Modes, Options, Diagnostics)
 
 Where:
 
 - ``Encoders``: List of discrete attribute encoders.
 - ``Modes``: List of learned categorical modes in cluster-id order.
 - ``Options``: Effective training options used to learn the clusterer.
+- ``Diagnostics``: Training diagnostics metadata returned by the
+  ``diagnostics/2`` predicate.
 
 References
 ----------

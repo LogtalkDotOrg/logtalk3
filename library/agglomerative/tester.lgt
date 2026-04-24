@@ -22,12 +22,16 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(types(loader)),
+	logtalk_load(dictionaries(loader)),
+	logtalk_load(heaps(loader)),
 	logtalk_load(statistics(loader)),
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(clustering_protocols(loader)),
 	logtalk_load([
 		clustering_protocols('test_datasets/two_blobs'),
+		clustering_protocols('test_datasets/two_blobs_permuted'),
+		clustering_protocols('test_datasets/duplicate_points'),
 		clustering_protocols('test_datasets/iris_unlabeled'),
 		clustering_protocols('test_datasets/mixed_profiles')
 	], [

@@ -19,13 +19,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- object(invalid_two_blobs_declarations,
+	implements(clustering_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	attribute_values(x, continuous).
+	attribute_values(y, continuous).
+
+	example(1, [x-1.0, y-1.0]).
+	example(2, [x-5.0, y-5.0]).
+
+:- end_object.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-24,
 		comment is 'Unit tests for the "kcenters" library.'
 	]).
 
@@ -34,7 +47,7 @@
 	]).
 
 	:- uses(kcenters, [
-		cluster/3, export_to_clauses/4, export_to_file/4, learn/2, learn/3, print_clusterer/1
+		cluster/3, diagnostics/2, export_to_clauses/4, export_to_file/4, learn/2, learn/3, print_clusterer/1
 	]).
 
 	cover(kcenters).
@@ -54,7 +67,11 @@
 		cluster(Clusterer, [x-5.1, y-5.0], Cluster).
 
 	test(kcenters_learn_3_custom_options, deterministic((memberchk(k(3), Options), memberchk(initialization(first_k), Options), memberchk(distance_metric(manhattan), Options), memberchk(feature_scaling(off), Options)))) :-
-		learn(iris_unlabeled, kcenters_clusterer(_Encoders, _Centers, Options), [k(3), initialization(first_k), distance_metric(manhattan), feature_scaling(off)]).
+		learn(iris_unlabeled, kcenters_clusterer(_Encoders, _Centers, Options, _Diagnostics), [k(3), initialization(first_k), distance_metric(manhattan), feature_scaling(off)]).
+
+	test(kcenters_diagnostics_2_rich_metadata, deterministic((memberchk(model(kcenters), Diagnostics), memberchk(center_count(2), Diagnostics), memberchk(training_example_count(8), Diagnostics), memberchk(selection_strategy(deterministic_farthest_first), Diagnostics), memberchk(options(Options), Diagnostics), memberchk(distance_metric(manhattan), Options), memberchk(feature_scaling(off), Options)))) :-
+		learn(two_blobs, Clusterer, [k(2), initialization(spread), distance_metric(manhattan), feature_scaling(off)]),
+		diagnostics(Clusterer, Diagnostics).
 
 	test(kcenters_cluster_3_iris_extremes, deterministic(Cluster1 \== Cluster2)) :-
 		learn(iris_unlabeled, Clusterer, [k(3)]),
@@ -86,6 +103,9 @@
 
 	test(kcenters_learn_3_mixed_profiles, error(domain_error(continuous_attribute(channel), [online, retail]))) :-
 		learn(mixed_profiles, _Clusterer).
+
+	test(kcenters_learn_3_duplicate_attribute_declaration, error(permission_error(repeat, attribute_declaration, x))) :-
+		learn(invalid_two_blobs_declarations, _Clusterer, [feature_scaling(off)]).
 
 	test(kcenters_learn_3_invalid_cluster_count, error(domain_error(cluster_count(1, 8), 9))) :-
 		learn(two_blobs, _Clusterer, [k(9)]).

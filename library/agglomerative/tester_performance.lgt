@@ -24,6 +24,7 @@
 	logtalk_load(loader),
 	logtalk_load([
 		clustering_protocols('test_datasets/two_blobs'),
+		clustering_protocols('test_datasets/large_two_blobs'),
 		clustering_protocols('test_datasets/iris_unlabeled')
 	], [
 		optimize(on)

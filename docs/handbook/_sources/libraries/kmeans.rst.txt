@@ -56,6 +56,9 @@ Features
   deterministic ``spread`` initialization.
 - **Optional Feature Scaling**: Continuous attributes can be
   standardized using z-score scaling.
+- **Rich Training Diagnostics**: Learned clusterers report training
+  example count, convergence status, iteration count, and final centroid
+  shift.
 - **Portable Export**: Learned clusterers can be exported as clauses or
   files and reused later.
 - **Stable Empty-Cluster Handling**: Empty clusters keep their previous
@@ -76,16 +79,29 @@ The following options can be passed to the ``learn/3`` predicate:
 - ``feature_scaling(FeatureScaling)``: Whether to standardize continuous
   attributes before clustering. Options: ``on`` (default) or ``off``.
 
+Diagnostics
+-----------
+
+The ``diagnostics/2`` predicate returns a list containing:
+
+- ``model(kmeans)``
+- ``centroid_count(Count)``
+- ``training_example_count(Count)``
+- ``convergence(Reason)``
+- ``iterations(Count)``
+- ``final_shift(Shift)``
+- ``options(Options)``
+
 Clusterer Representation
 ------------------------
 
 The learned clusterer is represented as a compound term with the functor
-chosen by the user when exporting the clusterer and arity 3. For
+chosen by the user when exporting the clusterer and arity 4. For
 example:
 
 ::
 
-   kmeans_clusterer(Encoders, Centroids, Options)
+   kmeans_clusterer(Encoders, Centroids, Options, Diagnostics)
 
 Where:
 
@@ -93,6 +109,8 @@ Where:
   name, mean, and scale.
 - ``Centroids``: List of centroid vectors in cluster-id order.
 - ``Options``: Effective training options used to learn the clusterer.
+- ``Diagnostics``: Training diagnostics metadata returned by the
+  ``diagnostics/2`` predicate.
 
 References
 ----------
