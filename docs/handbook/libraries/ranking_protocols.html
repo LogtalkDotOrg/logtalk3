@@ -33,7 +33,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="reader" href="reader.html" />
-    <link rel="prev" title="random_projection" href="random_projection.html" />
+    <link rel="prev" title="rank_centrality" href="rank_centrality.html" />
    
 </head>
 
@@ -180,6 +180,7 @@
 <li class="toctree-l2"><a class="reference internal" href="pattern_mining_protocols.html"><code class="docutils literal notranslate"><span class="pre">pattern_mining_protocols</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="pca.html"><code class="docutils literal notranslate"><span class="pre">pca</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="permutations.html"><code class="docutils literal notranslate"><span class="pre">permutations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="plackett_luce_last.html"><code class="docutils literal notranslate"><span class="pre">plackett_luce_last</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="prefix_span.html"><code class="docutils literal notranslate"><span class="pre">prefix_span</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="process.html"><code class="docutils literal notranslate"><span class="pre">process</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="protobuf.html"><code class="docutils literal notranslate"><span class="pre">protobuf</span></code></a></li>
@@ -188,6 +189,7 @@
 <li class="toctree-l2"><a class="reference internal" href="random_forest.html"><code class="docutils literal notranslate"><span class="pre">random_forest</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="random_forest_regression.html"><code class="docutils literal notranslate"><span class="pre">random_forest_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="random_projection.html"><code class="docutils literal notranslate"><span class="pre">random_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rank_centrality.html"><code class="docutils literal notranslate"><span class="pre">rank_centrality</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#shared-categories">Shared categories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#diagnostics">Diagnostics</a></li>
@@ -203,6 +205,7 @@
 <li class="toctree-l2"><a class="reference internal" href="redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="regression_protocols.html"><code class="docutils literal notranslate"><span class="pre">regression_protocols</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="regression_tree.html"><code class="docutils literal notranslate"><span class="pre">regression_tree</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="regularized_bradley_terry.html"><code class="docutils literal notranslate"><span class="pre">regularized_bradley_terry</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="sequential_pattern_mining_protocols.html"><code class="docutils literal notranslate"><span class="pre">sequential_pattern_mining_protocols</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="snowflakeid.html"><code class="docutils literal notranslate"><span class="pre">snowflakeid</span></code></a></li>
@@ -288,10 +291,14 @@ be imported by ranking algorithm implementations:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ranking_dataset_common</span></code> — dataset collection, summaries, graph
 connectivity, connected-component analysis, and pairwise/grouped
-dataset correctness checks.</p></li>
+dataset correctness checks, including grouped tie-block extraction
+helpers for algorithms that consume tied rankings directly.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ranker_common</span></code> — representation-independent access to
 learned-ranker diagnostics plus reusable helpers for exporting learned
 rankers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">grouped_strength_ranker_common</span></code> — reusable positive-strength,
+strong-connectivity, and iterative-update helpers for grouped ranking
+models that estimate one latent strength parameter per item.</p></li>
 </ul>
 <p>These categories are designed to keep ranking implementations compact
 while keeping the shared protocol-facing behavior reusable.</p>
@@ -385,7 +392,7 @@ disconnected-graph detection.</p></li>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="random_projection.html" class="btn btn-neutral float-left" title="random_projection" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rank_centrality.html" class="btn btn-neutral float-left" title="rank_centrality" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="reader.html" class="btn btn-neutral float-right" title="reader" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

@@ -384,6 +384,25 @@ Maps grouped item relevances to per-item score deltas using a relevance-points d
 
 ------------
 
+.. index:: grouped_dataset_tie_blocks/4
+.. _ranking_dataset_common/0::grouped_dataset_tie_blocks/4:
+
+``grouped_dataset_tie_blocks/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects grouped-dataset item relevances into descending relevance tie blocks represented as ``tie_block(Relevance, Items)`` terms, preserving the declaration order of items inside each block.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``grouped_dataset_tie_blocks(Dataset,Group,MissingRelevance,TieBlocks)``
+| **Mode and number of proofs:**
+|    ``grouped_dataset_tie_blocks(+object_identifier,+term,+atom,-list(compound))`` - ``one``
+
+
+------------
+
 Private predicates
 ------------------
 

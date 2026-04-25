@@ -75,6 +75,11 @@ undirected comparison graph into multiple components, or create
 dominance partitions with no directed path back to stronger items are
 rejected instead of producing degenerate strengths.
 
+For a related MAP formulation that keeps the same pairwise-preference
+setting but uses an explicit Gamma prior to admit connected datasets
+whose directed win graph is not strongly connected, see the
+``regularized_bradley_terry`` library.
+
 Usage
 -----
 

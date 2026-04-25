@@ -20,9 +20,10 @@
 
 
 :- object(ranking_test_support,
-	imports([ranking_dataset_common])).
+	imports(ranking_dataset_common)).
 
 	:- public(rank_candidates/3).
+	:- public(group_tie_blocks/4).
 	:- public(win_totals/2).
 
 	:- uses(list, [
@@ -35,6 +36,9 @@
 
 	win_totals(Dataset, Totals) :-
 		::pairwise_dataset_win_totals(Dataset, Totals).
+
+	group_tie_blocks(Dataset, Group, MissingRelevance, TieBlocks) :-
+		::grouped_dataset_tie_blocks(Dataset, Group, MissingRelevance, TieBlocks).
 
 	rank_candidates(Strengths, Candidates, Ranking) :-
 		findall(
@@ -88,6 +92,14 @@
 	print_ranker(Ranker) :-
 		^^print_ranker_template(Ranker),
 		writeq(Ranker), nl.
+
+:- end_object.
+
+
+:- object(ranking_empty_grouped,
+	implements(ranking_dataset_protocol)).
+
+	group(ballot_one).
 
 :- end_object.
 
@@ -157,8 +169,17 @@
 	test(search_results_validation, deterministic) :-
 		ranking_test_support::validate_grouped_dataset(search_results).
 
+	test(tied_grouped_tie_blocks, deterministic(TieBlocks == [tie_block(1, [alpha, beta]), tie_block(0, [gamma])])) :-
+		ranking_test_support::group_tie_blocks(tied_grouped, ballot_one, zero, TieBlocks).
+
+	test(sparse_grouped_tie_blocks_default_zero, deterministic(TieBlocks == [tie_block(2, [alpha]), tie_block(1, [beta]), tie_block(0, [gamma])])) :-
+		ranking_test_support::group_tie_blocks(sparse_grouped_relevance, ballot_one, zero, TieBlocks).
+
 	test(malformed_grouped_validation, error(domain_error(non_negative_integer, high))) :-
 		ranking_test_support::validate_grouped_dataset(malformed_grouped).
+
+	test(empty_grouped_validation, error(domain_error(non_empty_group, ballot_one))) :-
+		ranking_test_support::validate_grouped_dataset(ranking_empty_grouped).
 
 	% Sample ranker protocol smoke tests.
 

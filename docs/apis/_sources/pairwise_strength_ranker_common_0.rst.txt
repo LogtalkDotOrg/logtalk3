@@ -1,0 +1,283 @@
+.. index:: single: pairwise_strength_ranker_common
+.. _pairwise_strength_ranker_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``pairwise_strength_ranker_common``
+===================================
+
+Shared preprocessing, connectivity, and MM-iteration helpers for pairwise strength rankers.
+
+| **Availability:** 
+|    ``logtalk_load(ranking_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-25
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: update_strengths/4
+.. _pairwise_strength_ranker_common/0::update_strengths/4:
+
+``update_strengths/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing rankers must define to perform one synchronous strength-update iteration.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update_strengths(Context,Strengths0,Strengths,MaximumDifference)``
+| **Mode and number of proofs:**
+|    ``update_strengths(+nonvar,+list(number),-list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: initial_strengths/2
+.. _pairwise_strength_ranker_common/0::initial_strengths/2:
+
+``initial_strengths/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Initializes a positive strength vector with a uniform value for each ordered item.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initial_strengths(Items,Strengths)``
+| **Mode and number of proofs:**
+|    ``initial_strengths(+list,-list(float))`` - ``one``
+
+
+------------
+
+.. index:: strength_pairs/3
+.. _pairwise_strength_ranker_common/0::strength_pairs/3:
+
+``strength_pairs/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Pairs ordered items with their learned strength values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``strength_pairs(Items,StrengthValues,Strengths)``
+| **Mode and number of proofs:**
+|    ``strength_pairs(+list,+list(number),-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: index_items/3
+.. _pairwise_strength_ranker_common/0::index_items/3:
+
+``index_items/3``
+^^^^^^^^^^^^^^^^^
+
+Builds ``Item-Index`` pairs for the ordered training items.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``index_items(Items,Index,Indices)``
+| **Mode and number of proofs:**
+|    ``index_items(+list,+integer,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: preprocess_matchups/6
+.. _pairwise_strength_ranker_common/0::preprocess_matchups/6:
+
+``preprocess_matchups/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds directed adjacency, reverse adjacency, per-item win totals, and undirected pair-adjacency structures from aggregated pairwise matchups.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``preprocess_matchups(Matchups,IndexDictionary,DirectedAdjacency,ReverseAdjacency,WinWeights,PairAdjacency)``
+| **Mode and number of proofs:**
+|    ``preprocess_matchups(+list,+compound,-compound,-compound,-compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: build_dataset_model/5
+.. _pairwise_strength_ranker_common/0::build_dataset_model/5:
+
+``build_dataset_model/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Materializes dense per-item win totals and weighted undirected adjacency lists from the sparse preprocessing dictionaries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``build_dataset_model(Count,WinWeights,PairAdjacency,PairWeights,Wins)``
+| **Mode and number of proofs:**
+|    ``build_dataset_model(+integer,+compound,+compound,-list,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: require_strong_connectivity/4
+.. _pairwise_strength_ranker_common/0::require_strong_connectivity/4:
+
+``require_strong_connectivity/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that the directed graph is strongly connected and throws a domain error with the strongly connected components otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``require_strong_connectivity(Count,DirectedAdjacency,ReverseAdjacency,ErrorDomain)``
+| **Mode and number of proofs:**
+|    ``require_strong_connectivity(+integer,+compound,+compound,+atom)`` - ``one``
+
+
+------------
+
+.. index:: strongly_connected/3
+.. _pairwise_strength_ranker_common/0::strongly_connected/3:
+
+``strongly_connected/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when all indexed items are mutually reachable in both the forward and reverse adjacency graphs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``strongly_connected(Count,DirectedAdjacency,ReverseAdjacency)``
+| **Mode and number of proofs:**
+|    ``strongly_connected(+integer,+compound,+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: strongly_connected_components/4
+.. _pairwise_strength_ranker_common/0::strongly_connected_components/4:
+
+``strongly_connected_components/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the strongly connected components of the directed graph induced by the forward and reverse adjacency dictionaries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``strongly_connected_components(Count,DirectedAdjacency,ReverseAdjacency,Components)``
+| **Mode and number of proofs:**
+|    ``strongly_connected_components(+integer,+compound,+compound,-list)`` - ``one``
+
+
+------------
+
+.. index:: optimize_strengths/8
+.. _pairwise_strength_ranker_common/0::optimize_strengths/8:
+
+``optimize_strengths/8``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Runs the iterative strength-update loop until convergence or the maximum iteration bound is reached.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``optimize_strengths(MaximumIterations,Tolerance,UpdateContext,Strengths0,Strengths,Status,Iterations,FinalDifference)``
+| **Mode and number of proofs:**
+|    ``optimize_strengths(+integer,+number,+nonvar,+list(number),-list(number),-atom,-integer,-number)`` - ``one``
+
+
+------------
+
+.. index:: strength_dictionary/2
+.. _pairwise_strength_ranker_common/0::strength_dictionary/2:
+
+``strength_dictionary/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds an index-addressable dictionary from an ordered list of strength values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``strength_dictionary(Strengths,Dictionary)``
+| **Mode and number of proofs:**
+|    ``strength_dictionary(+list(number),-compound)`` - ``one``
+
+
+------------
+
+.. index:: item_denominator/5
+.. _pairwise_strength_ranker_common/0::item_denominator/5:
+
+``item_denominator/5``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Accumulates the pairwise MM denominator for one item using the current strength dictionary and weighted neighbors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``item_denominator(Neighbors,StrengthDictionary,CurrentStrength,Denominator0,Denominator)``
+| **Mode and number of proofs:**
+|    ``item_denominator(+list(pair),+compound,+number,+number,-number)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

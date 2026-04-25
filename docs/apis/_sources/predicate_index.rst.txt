@@ -8869,11 +8869,14 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`logistic_regression <logistic_regression/0::learn/3>`
 * :ref:`metagol <metagol/0::learn/3>`
 * :ref:`pca <pca/0::learn/3>`
+* :ref:`plackett_luce_last <plackett_luce_last/0::learn/3>`
 * :ref:`random_forest <random_forest/0::learn/3>`
 * :ref:`random_forest_regression <random_forest_regression/0::learn/3>`
 * :ref:`random_projection <random_projection/0::learn/3>`
+* :ref:`rank_centrality <rank_centrality/0::learn/3>`
 * :ref:`regression_tree <regression_tree/0::learn/3>`
 * :ref:`regressor_protocol <regressor_protocol/0::learn/3>`
+* :ref:`regularized_bradley_terry <regularized_bradley_terry/0::learn/3>`
 
 ``learn_seq/2``
 ---------------
@@ -15316,6 +15319,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`borda <borda/0::scores/2>`
 * :ref:`copeland <copeland/0::scores/2>`
+* :ref:`rank_centrality <rank_centrality/0::scores/2>`
 
 ``search/1``
 ------------
@@ -16472,6 +16476,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`bradley_terry <bradley_terry/0::strengths/2>`
+* :ref:`plackett_luce_last <plackett_luce_last/0::strengths/2>`
+* :ref:`regularized_bradley_terry <regularized_bradley_terry/0::strengths/2>`
 
 ``string_chars/2``
 ------------------

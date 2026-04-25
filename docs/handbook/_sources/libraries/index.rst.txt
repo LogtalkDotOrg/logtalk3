@@ -138,6 +138,7 @@ directory in the ``NOTES.md`` file.
    pattern_mining_protocols
    pca
    permutations
+   plackett_luce_last
    prefix_span
    process
    protobuf
@@ -146,12 +147,14 @@ directory in the ``NOTES.md`` file.
    random_forest
    random_forest_regression
    random_projection
+   rank_centrality
    ranking_protocols
    reader
    recorded_database
    redis
    regression_protocols
    regression_tree
+   regularized_bradley_terry
    sequential_pattern_mining_protocols
    sets
    snowflakeid

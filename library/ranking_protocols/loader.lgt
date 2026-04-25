@@ -29,6 +29,8 @@
 		ranker_common,
 		score_ranker_common,
 		score_ranker_model_common,
+		grouped_strength_ranker_common,
+		pairwise_strength_ranker_common,
 		ranking_dataset_common,
 		ranking_dataset_protocol,
 		pairwise_ranking_dataset_protocol

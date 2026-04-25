@@ -188,6 +188,7 @@ sed '1,19d' ../../../library/os/NOTES.md | pandoc -f gfm -t rst -o libraries/os.
 sed '1,19d' ../../../library/pattern_mining_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/pattern_mining_protocols.rst
 sed '1,19d' ../../../library/pca/NOTES.md | pandoc -f gfm -t rst -o libraries/pca.rst
 sed '1,19d' ../../../library/permutations/NOTES.md | pandoc -f gfm -t rst -o libraries/permutations.rst
+sed '1,19d' ../../../library/plackett_luce_last/NOTES.md | pandoc -f gfm -t rst -o libraries/plackett_luce_last.rst
 sed '1,19d' ../../../library/prefix_span/NOTES.md | pandoc -f gfm -t rst -o libraries/prefix_span.rst
 sed '1,19d' ../../../library/process/NOTES.md | pandoc -f gfm -t rst -o libraries/process.rst
 sed '1,19d' ../../../library/protobuf/NOTES.md | pandoc -f gfm -t rst -o libraries/protobuf.rst
@@ -196,12 +197,14 @@ sed '1,19d' ../../../library/random/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,19d' ../../../library/random_forest/NOTES.md | pandoc -f gfm -t rst -o libraries/random_forest.rst
 sed '1,19d' ../../../library/random_forest_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/random_forest_regression.rst
 sed '1,19d' ../../../library/random_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/random_projection.rst
+sed '1,19d' ../../../library/rank_centrality/NOTES.md | pandoc -f gfm -t rst -o libraries/rank_centrality.rst
 sed '1,19d' ../../../library/ranking_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/ranking_protocols.rst
 sed '1,19d' ../../../library/reader/NOTES.md | pandoc -f gfm -t rst -o libraries/reader.rst
 sed '1,19d' ../../../library/recorded_database/NOTES.md | pandoc -f gfm -t rst -o libraries/recorded_database.rst
 sed '1,19d' ../../../library/redis/NOTES.md | pandoc -f gfm -t rst -o libraries/redis.rst
 sed '1,19d' ../../../library/regression_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/regression_protocols.rst
 sed '1,19d' ../../../library/regression_tree/NOTES.md | pandoc -f gfm -t rst -o libraries/regression_tree.rst
+sed '1,19d' ../../../library/regularized_bradley_terry/NOTES.md | pandoc -f gfm -t rst -o libraries/regularized_bradley_terry.rst
 sed '1,19d' ../../../library/sequential_pattern_mining_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/sequential_pattern_mining_protocols.rst
 sed '1,19d' ../../../library/sets/NOTES.md | pandoc -f gfm -t rst -o libraries/sets.rst
 sed '1,19d' ../../../library/simulated_annealing/NOTES.md | pandoc -f gfm -t rst -o libraries/simulated_annealing.rst

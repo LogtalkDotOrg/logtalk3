@@ -193,6 +193,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#pca"><span class="xref std std-ref">pca</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><span class="xref std std-ref">pddl_parser</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#permutations"><span class="xref std std-ref">permutations</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#plackett-luce-last"><span class="xref std std-ref">plackett_luce_last</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ports-profiler"><span class="xref std std-ref">ports_profiler</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#prefix-span"><span class="xref std std-ref">prefix_span</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#process"><span class="xref std std-ref">process</span></a></li>
@@ -202,8 +203,11 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#random-forest"><span class="xref std std-ref">random_forest</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#random-forest-regression"><span class="xref std std-ref">random_forest_regression</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#random-projection"><span class="xref std std-ref">random_projection</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#rank-centrality"><span class="xref std std-ref">rank_centrality</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#ranking-protocols"><span class="xref std std-ref">ranking_protocols</span></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="grouped_strength_ranker_common_0.html">grouped_strength_ranker_common</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pairwise_ranking_dataset_protocol_0.html">pairwise_ranking_dataset_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pairwise_strength_ranker_common_0.html">pairwise_strength_ranker_common</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ranker_common_0.html">ranker_common</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ranker_protocol_0.html">ranker_protocol</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">ranking_dataset_common</a></li>
@@ -217,6 +221,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#redis"><span class="xref std std-ref">redis</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#regression-protocols"><span class="xref std std-ref">regression_protocols</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#regression-tree"><span class="xref std std-ref">regression_tree</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#regularized-bradley-terry"><span class="xref std std-ref">regularized_bradley_terry</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#sarif"><span class="xref std std-ref">sarif</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#sbom"><span class="xref std std-ref">sbom</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#sequential-pattern-mining-protocols"><span class="xref std std-ref">sequential_pattern_mining_protocols</span></a></li>
@@ -366,10 +371,11 @@
 <li><p><a class="reference internal" href="#grouped-dataset-item-relevances-4" id="id18"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_item_relevances/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#grouped-dataset-relevance-frequencies-2" id="id19"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_relevance_frequencies/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#grouped-dataset-item-relevance-scores-3" id="id20"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_item_relevance_scores/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#grouped-dataset-tie-blocks-4" id="id21"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_tie_blocks/4</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id21">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id22">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id22">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id23">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -751,6 +757,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_item_relevance_scores(+list(pair),+compound,-list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="grouped-dataset-tie-blocks-4">
+<span id="ranking-dataset-common-0-grouped-dataset-tie-blocks-4"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_tie_blocks/4</span></code></a><a class="headerlink" href="#grouped-dataset-tie-blocks-4" title="Link to this heading"></a></h3>
+<p>Collects grouped-dataset item relevances into descending relevance tie blocks represented as <code class="docutils literal notranslate"><span class="pre">tie_block(Relevance,</span> <span class="pre">Items)</span></code> terms, preserving the declaration order of items inside each block.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_tie_blocks(Dataset,Group,MissingRelevance,TieBlocks)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_tie_blocks(+object_identifier,+term,+atom,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </section>

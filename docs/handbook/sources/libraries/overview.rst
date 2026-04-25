@@ -54,8 +54,8 @@ multiple areas):
     ``gradient_boosting_regression``, ``knn_regression``,
     ``linear_regression``, ``random_forest_regression``, and
     ``regression_tree``.
-  - Ranking: ``ranking_protocols``, ``borda``, ``bradley_terry``, and
-    ``copeland``.
+  - Ranking: ``ranking_protocols``, ``borda``, ``bradley_terry``,
+    ``copeland``, and ``rank_centrality``.
   - Clustering: ``clustering_protocols``, ``agglomerative``, ``dbscan``,
     ``gaussian_mixture``, ``hdbscan``, ``hierarchical_clustering``,
     ``kcenters``, ``kmeans``, ``kmedians``, ``kmedoids``, ``kmodes``,

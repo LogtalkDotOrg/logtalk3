@@ -1395,6 +1395,16 @@ To load an entity, always load the library that includes it using the goal ``log
    permutations <permutations_0>
    permutations_protocol <permutations_protocol_0>
 
+``library/plackett_luce_last/``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   plackett_luce_last <plackett_luce_last_0>
+
 ``library/prefix_span/``
 ------------------------
 
@@ -1483,6 +1493,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    random_projection <random_projection_0>
 
+``library/rank_centrality/``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   rank_centrality <rank_centrality_0>
+
 ``library/ranking_protocols/``
 ------------------------------
 
@@ -1491,7 +1511,9 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
 
+   grouped_strength_ranker_common <grouped_strength_ranker_common_0>
    pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol_0>
+   pairwise_strength_ranker_common <pairwise_strength_ranker_common_0>
    ranker_common <ranker_common_0>
    ranker_protocol <ranker_protocol_0>
    ranking_dataset_common <ranking_dataset_common_0>
@@ -1551,6 +1573,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    regression_tree <regression_tree_0>
+
+``library/regularized_bradley_terry/``
+--------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   regularized_bradley_terry <regularized_bradley_terry_0>
 
 ``library/sequential_pattern_mining_protocols/``
 ------------------------------------------------

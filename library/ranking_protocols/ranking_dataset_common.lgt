@@ -126,6 +126,13 @@
 		argnames is ['ItemRelevances', 'PointsDictionary', 'ItemScores']
 	]).
 
+	:- protected(grouped_dataset_tie_blocks/4).
+	:- mode(grouped_dataset_tie_blocks(+object_identifier, +term, +atom, -list(compound)), one).
+	:- info(grouped_dataset_tie_blocks/4, [
+		comment is 'Collects grouped-dataset item relevances into descending relevance tie blocks represented as ``tie_block(Relevance, Items)`` terms, preserving the declaration order of items inside each block.',
+		argnames is ['Dataset', 'Group', 'MissingRelevance', 'TieBlocks']
+	]).
+
 	:- public(validate_pairwise_dataset/1).
 	:- mode(validate_pairwise_dataset(+object_identifier), one).
 	:- info(validate_pairwise_dataset/1, [
@@ -247,6 +254,14 @@
 	grouped_dataset_relevance_frequencies(ItemRelevances, FrequencyDictionary) :-
 		dictionary_new(FrequencyDictionary0),
 		grouped_dataset_relevance_frequencies(ItemRelevances, FrequencyDictionary0, FrequencyDictionary).
+
+	grouped_dataset_tie_blocks(Dataset, Group, MissingRelevance, TieBlocks) :-
+		::grouped_dataset_item_relevances(Dataset, Group, MissingRelevance, ItemRelevances),
+		dictionary_new(TieBlocks0),
+		grouped_dataset_tie_blocks(ItemRelevances, TieBlocks0, TieBlocks1),
+		dictionary_as_list(TieBlocks1, TieBlockEntries0),
+		reverse(TieBlockEntries0, TieBlockEntries),
+		tie_block_entries(TieBlockEntries, TieBlocks).
 
 	grouped_dataset_item_relevance_scores([], _PointsDictionary, []).
 	grouped_dataset_item_relevance_scores([Item-Relevance| ItemRelevances], PointsDictionary, [Item-Points| ItemScores]) :-
@@ -371,12 +386,28 @@
 		update_frequency_dictionary(FrequencyDictionary0, Relevance, FrequencyDictionary1),
 		grouped_dataset_relevance_frequencies(ItemRelevances, FrequencyDictionary1, FrequencyDictionary).
 
+	grouped_dataset_tie_blocks([], TieBlocks, TieBlocks).
+	grouped_dataset_tie_blocks([Item-Relevance| ItemRelevances], TieBlocks0, TieBlocks) :-
+		update_tie_block_dictionary(TieBlocks0, Relevance, Item, TieBlocks1),
+		grouped_dataset_tie_blocks(ItemRelevances, TieBlocks1, TieBlocks).
+
 	update_frequency_dictionary(FrequencyDictionary0, Relevance, FrequencyDictionary) :-
 		(   dictionary_lookup(Relevance, Count0, FrequencyDictionary0) ->
 			Count is Count0 + 1
 		;   Count = 1
 		),
 		dictionary_insert(FrequencyDictionary0, Relevance, Count, FrequencyDictionary).
+
+	update_tie_block_dictionary(TieBlocks0, Relevance, Item, TieBlocks) :-
+		(   dictionary_lookup(Relevance, Items0, TieBlocks0) ->
+			append(Items0, [Item], Items)
+		;   Items = [Item]
+		),
+		dictionary_insert(TieBlocks0, Relevance, Items, TieBlocks).
+
+	tie_block_entries([], []).
+	tie_block_entries([Relevance-Items| TieBlockEntries], [tie_block(Relevance, Items)| TieBlocks]) :-
+		tie_block_entries(TieBlockEntries, TieBlocks).
 
 	item_wins(Item, Preferences, Wins) :-
 		findall(Weight, member(p(Item, _, Weight), Preferences), Weights),
@@ -436,7 +467,10 @@
 
 	validate_group_items(Dataset, Group) :-
 		findall(Item, Dataset::item(Group, Item), RawItems),
-		check_unique_items(RawItems).
+		(   RawItems == [] ->
+			domain_error(non_empty_group, Group)
+		;   check_unique_items(RawItems)
+		).
 
 	validate_preference(Items, Winner, Loser, Weight) :-
 		(   member(Winner, Items) ->

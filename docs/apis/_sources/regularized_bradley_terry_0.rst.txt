@@ -1,0 +1,106 @@
+.. index:: single: regularized_bradley_terry
+.. _regularized_bradley_terry/0:
+
+.. rst-class:: right
+
+**object**
+
+``regularized_bradley_terry``
+=============================
+
+Regularized Bradley-Terry MAP ranker. Learns one positive strength parameter per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol using a Bradley-Terry likelihood with an explicit independent Gamma prior, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.
+
+| **Availability:** 
+|    ``logtalk_load(regularized_bradley_terry(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-25
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`ranking_dataset_common <ranking_dataset_common/0>`
+|    ``public`` :ref:`pairwise_strength_ranker_common <pairwise_strength_ranker_common/0>`
+|    ``public`` :ref:`score_ranker_common <score_ranker_common/0>`
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+
+   - Algorithm: Uses a deterministic MM-style posterior-mode update for a Bradley-Terry likelihood regularized by an explicit independent Gamma prior over item strengths.
+   - Dataset requirements: The training dataset must declare each ranked item once, enumerate positive-weight pairwise preferences between distinct declared items, and induce a connected undirected comparison graph. Unlike the unregularized Bradley-Terry model, the directed win graph is not required to be strongly connected.
+   - Prior semantics: The ``gamma_prior(gamma(Shape, Rate))`` option specifies the Gamma prior hyperparameters. The implementation requires ``Shape > 1`` and ``Rate > 0`` so the posterior mode remains strictly positive for all items.
+   - Ranker representation: The learned ranker is represented by default as ``regularized_bt_ranker(Items, Strengths, Diagnostics)`` where ``Strengths`` stores ``Item-Strength`` pairs and ``Diagnostics`` stores metadata such as the effective Gamma prior, convergence status, iteration count, and dataset summary.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::export_to_clauses/4`  :ref:`ranker_protocol/0::export_to_file/4`  :ref:`ranking_dataset_common/0::grouped_dataset_groups/2`  :ref:`ranking_dataset_common/0::grouped_dataset_items/2`  :ref:`ranking_dataset_common/0::grouped_dataset_items/3`  :ref:`ranking_dataset_common/0::grouped_dataset_summary/2`  :ref:`ranker_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ranking_dataset_common/0::pairwise_dataset_connected_components/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_declared_items/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_items/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_matchups/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_preferences/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_summary/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_win_totals/2`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`ranking_dataset_common/0::validate_grouped_dataset/1`  :ref:`ranking_dataset_common/0::validate_grouped_dataset/2`  :ref:`ranking_dataset_common/0::validate_pairwise_dataset/1`  :ref:`ranking_dataset_common/0::validate_pairwise_dataset/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/3
+.. _regularized_bradley_terry/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns a regularized Bradley-Terry ranker from the given dataset object using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Ranker,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: strengths/2
+.. _regularized_bradley_terry/0::strengths/2:
+
+``strengths/2``
+^^^^^^^^^^^^^^^
+
+Returns the learned item-strength pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``strengths(Ranker,Strengths)``
+| **Mode and number of proofs:**
+|    ``strengths(+compound,-list(pair))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0>`, :ref:`ranker_protocol <ranker_protocol/0>`, :ref:`bradley_terry <bradley_terry/0>`
+

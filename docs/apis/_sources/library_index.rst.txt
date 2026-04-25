@@ -1623,6 +1623,16 @@ To load any library (including developer tools, ports, and contributions), use t
    permutations <permutations_0>
    permutations_protocol <permutations_protocol_0>
 
+:ref:`plackett_luce_last <library_plackett_luce_last>`
+------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   plackett_luce_last <plackett_luce_last_0>
+
 :ref:`ports_profiler <library_ports_profiler>`
 ----------------------------------------------
 
@@ -1721,6 +1731,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
    random_projection <random_projection_0>
 
+:ref:`rank_centrality <library_rank_centrality>`
+------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   rank_centrality <rank_centrality_0>
+
 :ref:`ranking_protocols <library_ranking_protocols>`
 ----------------------------------------------------
 
@@ -1729,7 +1749,9 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
 
+   grouped_strength_ranker_common <grouped_strength_ranker_common_0>
    pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol_0>
+   pairwise_strength_ranker_common <pairwise_strength_ranker_common_0>
    ranker_common <ranker_common_0>
    ranker_protocol <ranker_protocol_0>
    ranking_dataset_common <ranking_dataset_common_0>
@@ -1789,6 +1811,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    regression_tree <regression_tree_0>
+
+:ref:`regularized_bradley_terry <library_regularized_bradley_terry>`
+--------------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   regularized_bradley_terry <regularized_bradley_terry_0>
 
 :ref:`sarif <library_sarif>`
 ----------------------------

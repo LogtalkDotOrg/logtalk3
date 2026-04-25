@@ -42,6 +42,8 @@
 		'test_datasets/disconnected_pairwise',
 		'test_datasets/cyclic_pairwise',
 		'test_datasets/search_results',
+		'test_datasets/tied_grouped',
+		'test_datasets/sparse_grouped_relevance',
 		'test_datasets/malformed_pairwise',
 		'test_datasets/malformed_grouped',
 		'test_datasets/malformed_duplicate_items',

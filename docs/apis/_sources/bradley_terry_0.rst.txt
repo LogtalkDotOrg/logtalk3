@@ -23,6 +23,7 @@ Bradley-Terry pairwise preference ranker. Learns one positive strength parameter
 
 | **Imports:**
 |    ``public`` :ref:`ranking_dataset_common <ranking_dataset_common/0>`
+|    ``public`` :ref:`pairwise_strength_ranker_common <pairwise_strength_ranker_common/0>`
 |    ``public`` :ref:`score_ranker_common <score_ranker_common/0>`
 | **Uses:**
 |    :ref:`avltree <avltree/0>`
@@ -101,5 +102,5 @@ Operators
 
 .. seealso::
 
-   :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0>`, :ref:`ranking_dataset_protocol <ranking_dataset_protocol/0>`, :ref:`ranker_protocol <ranker_protocol/0>`
+   :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0>`, :ref:`ranking_dataset_protocol <ranking_dataset_protocol/0>`, :ref:`ranker_protocol <ranker_protocol/0>`, :ref:`regularized_bradley_terry <regularized_bradley_terry/0>`
 

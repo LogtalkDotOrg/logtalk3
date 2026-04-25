@@ -188,6 +188,7 @@ Foreach-Object {
 (Get-Content ../../../library/pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/pattern_mining_protocols.rst
 (Get-Content ../../../library/pca/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/pca.rst
 (Get-Content ../../../library/permutations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/permutations.rst
+(Get-Content ../../../library/plackett_luce_last/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/plackett_luce_last.rst
 (Get-Content ../../../library/prefix_span/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/prefix_span.rst
 (Get-Content ../../../library/process/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/process.rst
 (Get-Content ../../../library/protobuf/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/protobuf.rst
@@ -196,12 +197,14 @@ Foreach-Object {
 (Get-Content ../../../library/random_forest/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/random_forest.rst
 (Get-Content ../../../library/random_forest_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/random_forest_regression.rst
 (Get-Content ../../../library/random_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/random_projection.rst
+(Get-Content ../../../library/rank_centrality/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/rank_centrality.rst
 (Get-Content ../../../library/ranking_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ranking_protocols.rst
 (Get-Content ../../../library/reader/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/reader.rst
 (Get-Content ../../../library/recorded_database/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/recorded_database.rst
 (Get-Content ../../../library/redis/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/redis.rst
 (Get-Content ../../../library/regression_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/regression_protocols.rst
 (Get-Content ../../../library/regression_tree/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/regression_tree.rst
+(Get-Content ../../../library/regularized_bradley_terry/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/regularized_bradley_terry.rst
 (Get-Content ../../../library/sequential_pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sequential_pattern_mining_protocols.rst
 (Get-Content ../../../library/sets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sets.rst
 (Get-Content ../../../library/simulated_annealing/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/simulated_annealing.rst

@@ -1,0 +1,105 @@
+.. index:: single: rank_centrality
+.. _rank_centrality/0:
+
+.. rst-class:: right
+
+**object**
+
+``rank_centrality``
+===================
+
+Rank Centrality pairwise preference ranker. Learns one stationary probability score per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by applying power iteration to the Rank Centrality Markov chain built from aggregated head-to-head outcomes, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.
+
+| **Availability:** 
+|    ``logtalk_load(rank_centrality(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-25
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`ranking_dataset_common <ranking_dataset_common/0>`
+|    ``public`` :ref:`score_ranker_common <score_ranker_common/0>`
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+
+| **Remarks:**
+
+   - Algorithm: Uses the Rank Centrality transition rule where each observed opponent contributes an outgoing transition proportional to the empirical probability of beating the current item, scaled by the maximum comparison degree, and estimates the stationary distribution using deterministic power iteration.
+   - Dataset requirements: The training dataset must declare each ranked item once, enumerate positive-weight pairwise preferences between distinct declared items, induce a connected undirected comparison graph, and induce a strongly connected directed transition graph so that the learned stationary distribution is unique.
+   - Ranker representation: The learned ranker is represented by default as ``rank_centrality_ranker(Items, Scores, Diagnostics)`` where ``Scores`` stores ``Item-Score`` pairs summing to ``1.0`` and ``Diagnostics`` stores metadata such as convergence status, iteration count, maximum comparison degree, and dataset summary.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::export_to_clauses/4`  :ref:`ranker_protocol/0::export_to_file/4`  :ref:`ranking_dataset_common/0::grouped_dataset_groups/2`  :ref:`ranking_dataset_common/0::grouped_dataset_items/2`  :ref:`ranking_dataset_common/0::grouped_dataset_items/3`  :ref:`ranking_dataset_common/0::grouped_dataset_summary/2`  :ref:`ranker_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ranking_dataset_common/0::pairwise_dataset_connected_components/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_declared_items/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_items/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_matchups/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_preferences/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_summary/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_win_totals/2`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`ranking_dataset_common/0::validate_grouped_dataset/1`  :ref:`ranking_dataset_common/0::validate_grouped_dataset/2`  :ref:`ranking_dataset_common/0::validate_pairwise_dataset/1`  :ref:`ranking_dataset_common/0::validate_pairwise_dataset/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/3
+.. _rank_centrality/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns a Rank Centrality ranker from the given dataset object using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Ranker,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: scores/2
+.. _rank_centrality/0::scores/2:
+
+``scores/2``
+^^^^^^^^^^^^
+
+Returns the learned item-score pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``scores(Ranker,Scores)``
+| **Mode and number of proofs:**
+|    ``scores(+compound,-list(pair))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0>`, :ref:`ranker_protocol <ranker_protocol/0>`, :ref:`bradley_terry <bradley_terry/0>`, :ref:`copeland <copeland/0>`
+

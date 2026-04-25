@@ -20,10 +20,14 @@ be imported by ranking algorithm implementations:
 
 - ``ranking_dataset_common`` — dataset collection, summaries, graph
   connectivity, connected-component analysis, and pairwise/grouped
-  dataset correctness checks.
+  dataset correctness checks, including grouped tie-block extraction
+  helpers for algorithms that consume tied rankings directly.
 - ``ranker_common`` — representation-independent access to
   learned-ranker diagnostics plus reusable helpers for exporting learned
   rankers.
+- ``grouped_strength_ranker_common`` — reusable positive-strength,
+  strong-connectivity, and iterative-update helpers for grouped ranking
+  models that estimate one latent strength parameter per item.
 
 These categories are designed to keep ranking implementations compact
 while keeping the shared protocol-facing behavior reusable.

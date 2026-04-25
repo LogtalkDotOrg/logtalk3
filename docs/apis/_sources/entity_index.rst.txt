@@ -48,6 +48,7 @@ Categories
    gensym_core <gensym_core_0>
    graph_common <graph_common_0>
    graph_types <graph_types_0>
+   grouped_strength_ranker_common <grouped_strength_ranker_common_0>
    html <html_0>
    lgtdoc_messages <lgtdoc_messages_0>
    lgtunit_messages <lgtunit_messages_0>
@@ -66,6 +67,7 @@ Categories
    os_types <os_types_0>
    packs_common <packs_common_0>
    packs_messages <packs_messages_0>
+   pairwise_strength_ranker_common <pairwise_strength_ranker_common_0>
    pattern_miner_common <pattern_miner_common_0>
    proto_hierarchy <proto_hierarchy_0>
    ranker_common <ranker_common_0>
@@ -374,6 +376,7 @@ Objects
    pca <pca_0>
    pddl <pddl_0>
    permutations <permutations_0>
+   plackett_luce_last <plackett_luce_last_0>
    plantuml_graph_language <plantuml_graph_language_0>
    population <population_0>
    porter_stemmer(Representation) <porter_stemmer_1>
@@ -390,6 +393,7 @@ Objects
    random_forest <random_forest_0>
    random_forest_regression <random_forest_regression_0>
    random_projection <random_projection_0>
+   rank_centrality <rank_centrality_0>
    rbtree <rbtree_0>
    reader <reader_0>
    recorded_database <recorded_database_0>
@@ -397,6 +401,7 @@ Objects
    registries <registries_0>
    registry_loader_hook <registry_loader_hook_0>
    regression_tree <regression_tree_0>
+   regularized_bradley_terry <regularized_bradley_terry_0>
    relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <relational_operator_replacement_5>
    rfc_metric <rfc_metric_0>
    rule_expansion(Mode) <rule_expansion_1>
