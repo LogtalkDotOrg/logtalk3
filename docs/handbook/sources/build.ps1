@@ -102,6 +102,7 @@ Foreach-Object {
 (Get-Content ../../../library/classification_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/classification_protocols.rst
 (Get-Content ../../../library/clo_span/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/clo_span.rst
 (Get-Content ../../../library/clustering_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/clustering_protocols.rst
+(Get-Content ../../../library/colley/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/colley.rst
 (Get-Content ../../../library/combinations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/combinations.rst
 (Get-Content ../../../library/command_line_options/NOTES.md | Select-Object -Skip 32) | pandoc -f gfm -t rst -o libraries/command_line_options.rst
 (Get-Content ../../../library/copeland/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/copeland.rst
@@ -119,6 +120,7 @@ Foreach-Object {
 (Get-Content ../../../library/dimension_reduction_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dimension_reduction_protocols.rst
 (Get-Content ../../../library/eclat/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/eclat.rst
 (Get-Content ../../../library/edcg/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/edcg.rst
+(Get-Content ../../../library/elo/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/elo.rst
 (Get-Content ../../../library/events/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/events.rst
 (Get-Content ../../../library/expand_library_alias_paths/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/expand_library_alias_paths.rst
 (Get-Content ../../../library/expecteds/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/expecteds.rst

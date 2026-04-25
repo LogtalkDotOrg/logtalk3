@@ -8859,8 +8859,10 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`borda <borda/0::learn/3>`
 * :ref:`bradley_terry <bradley_terry/0::learn/3>`
 * :ref:`clusterer_protocol <clusterer_protocol/0::learn/3>`
+* :ref:`colley <colley/0::learn/3>`
 * :ref:`copeland <copeland/0::learn/3>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::learn/3>`
+* :ref:`elo <elo/0::learn/3>`
 * :ref:`gradient_boosting_regression <gradient_boosting_regression/0::learn/3>`
 * :ref:`knn_regression <knn_regression/0::learn/3>`
 * :ref:`lda_projection <lda_projection/0::learn/3>`
@@ -13891,6 +13893,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ranker_protocol <ranker_protocol/0::ranker_options/2>`
+
+``ratings/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`colley <colley/0::ratings/2>`
+* :ref:`elo <elo/0::ratings/2>`
 
 ``rd/1``
 --------

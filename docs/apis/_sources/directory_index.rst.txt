@@ -368,6 +368,16 @@ To load an entity, always load the library that includes it using the goal ``log
    clustering_dataset_protocol <clustering_dataset_protocol_0>
    search_indexing <search_indexing_0>
 
+``library/colley/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   colley <colley_0>
+
 ``library/combinations/``
 -------------------------
 
@@ -560,6 +570,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    edcg <edcg_0>
+
+``library/elo/``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   elo <elo_0>
 
 ``library/events/``
 -------------------

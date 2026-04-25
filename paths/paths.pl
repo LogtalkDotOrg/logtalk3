@@ -132,6 +132,7 @@ logtalk_library_path(clo_span, library('clo_span')).
 logtalk_library_path(clustering_protocols, library('clustering_protocols/')).
 logtalk_library_path(combinations, library('combinations/')).
 logtalk_library_path(command_line_options, library('command_line_options/')).
+logtalk_library_path(colley, library('colley/')).
 logtalk_library_path(copeland, library('copeland/')).
 logtalk_library_path(coroutining, library('coroutining/')).
 logtalk_library_path(ccsds, library('ccsds/')).
@@ -148,6 +149,7 @@ logtalk_library_path(dif, library('dif/')).
 logtalk_library_path(dimension_reduction_protocols, library('dimension_reduction_protocols/')).
 logtalk_library_path(eclat, library('eclat/')).
 logtalk_library_path(edcg, library('edcg/')).
+logtalk_library_path(elo, library('elo/')).
 logtalk_library_path(events, library('events/')).
 logtalk_library_path(expand_library_alias_paths, library('expand_library_alias_paths/')).
 logtalk_library_path(expecteds, library('expecteds/')).

@@ -1,0 +1,104 @@
+.. index:: single: elo
+.. _elo/0:
+
+.. rst-class:: right
+
+**object**
+
+``elo``
+=======
+
+Elo pairwise preference ranker. Learns one deterministic rating per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by replaying the observed preference stream using a deterministic batch Elo update rule, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.
+
+| **Availability:** 
+|    ``logtalk_load(elo(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-25
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`ranking_dataset_common <ranking_dataset_common/0>`
+|    ``public`` :ref:`score_ranker_model_common <score_ranker_model_common/0>`
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+
+| **Remarks:**
+
+   - Algorithm: Processes the pairwise preference stream in dataset enumeration order using the standard Elo expected-score formula and symmetric rating updates after each observed result.
+   - Weight semantics: Preference weights must be positive integers and are replayed as repeated unit outcomes in dataset enumeration order.
+   - Batch semantics: Because the current pairwise dataset protocol does not encode historical timestamps, the implementation is a deterministic batch Elo variant over the dataset enumeration order rather than a literal chronological competition log.
+   - Dataset requirements: The current implementation requires a well-formed connected pairwise dataset so that learned ratings remain globally comparable across all ranked items.
+   - Ranker representation: The learned ranker is represented by default as ``elo_ranker(Items, Ratings, Diagnostics)`` where ``Ratings`` stores ``Item-Rating`` pairs and ``Diagnostics`` stores metadata such as the effective options and training dataset summary.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::export_to_clauses/4`  :ref:`ranker_protocol/0::export_to_file/4`  :ref:`ranking_dataset_common/0::grouped_dataset_groups/2`  :ref:`ranking_dataset_common/0::grouped_dataset_items/2`  :ref:`ranking_dataset_common/0::grouped_dataset_items/3`  :ref:`ranking_dataset_common/0::grouped_dataset_summary/2`  :ref:`ranker_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ranking_dataset_common/0::pairwise_dataset_connected_components/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_declared_items/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_items/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_matchups/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_preferences/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_summary/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_win_totals/2`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`ranking_dataset_common/0::validate_grouped_dataset/1`  :ref:`ranking_dataset_common/0::validate_grouped_dataset/2`  :ref:`ranking_dataset_common/0::validate_pairwise_dataset/1`  :ref:`ranking_dataset_common/0::validate_pairwise_dataset/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/3
+.. _elo/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns an Elo ranker from the given dataset object using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Ranker,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: ratings/2
+.. _elo/0::ratings/2:
+
+``ratings/2``
+^^^^^^^^^^^^^
+
+Returns the learned item-rating pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ratings(Ranker,Ratings)``
+| **Mode and number of proofs:**
+|    ``ratings(+compound,-list(pair))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0>`, :ref:`ranker_protocol <ranker_protocol/0>`, :ref:`colley <colley/0>`, :ref:`rank_centrality <rank_centrality/0>`
+

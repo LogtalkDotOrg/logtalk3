@@ -51,6 +51,7 @@ directory in the ``NOTES.md`` file.
    classification_protocols
    clo_span
    clustering_protocols
+   colley
    combinations
    command_line_options
    core
@@ -69,6 +70,7 @@ directory in the ``NOTES.md`` file.
    dimension_reduction_protocols
    eclat
    edcg
+   elo
    events
    expand_library_alias_paths
    expecteds

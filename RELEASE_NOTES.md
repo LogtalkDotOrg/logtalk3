@@ -164,8 +164,29 @@ anomaly detector with mixed-feature and missing-value support.
 * ADDED: New `ranking_protocols` library defining common protocols, shared
 test datasets, and smoke tests for machine learning ranking algorithms.
 
+* ADDED: New `borda` library implementing grouped relevance ranking
+using the Borda count method.
+
 * ADDED: New `bradley_terry` library implementing pairwise preference ranking
 using the Bradley-Terry model.
+
+* ADDED: New `colley` library implementing pairwise preference ranking
+using the Colley matrix method.
+
+* ADDED: New `copeland` library implementing pairwise preference ranking
+using Copeland scores.
+
+* ADDED: New `elo` library implementing pairwise preference ranking
+using deterministic batch Elo rating updates.
+
+* ADDED: New `plackett_luce_last` library implementing grouped ranking
+using a tie-aware Plackett-Luce-last model.
+
+* ADDED: New `rank_centrality` library implementing pairwise preference
+ranking using the Rank Centrality method.
+
+* ADDED: New `regularized_bradley_terry` library implementing pairwise
+preference ranking using a regularized Bradley-Terry model.
 
 * ADDED: New `logistic_regression` library implementing logistic regression
 for binary and multiclass classification on continuous and mixed-feature

@@ -104,6 +104,7 @@ sed '1,19d' ../../../library/character_sets/NOTES.md | pandoc -f gfm -t rst -o l
 sed '1,19d' ../../../library/classification_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/classification_protocols.rst
 sed '1,19d' ../../../library/clo_span/NOTES.md | pandoc -f gfm -t rst -o libraries/clo_span.rst
 sed '1,19d' ../../../library/clustering_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/clustering_protocols.rst
+sed '1,19d' ../../../library/colley/NOTES.md | pandoc -f gfm -t rst -o libraries/colley.rst
 sed '1,19d' ../../../library/combinations/NOTES.md | pandoc -f gfm -t rst -o libraries/combinations.rst
 sed '1,32d' ../../../library/command_line_options/NOTES.md | pandoc -f gfm -t rst -o libraries/command_line_options.rst
 sed '1,19d' ../../../library/csv/NOTES.md | pandoc -f gfm -t rst -o libraries/csv.rst
@@ -119,6 +120,7 @@ sed '1,19d' ../../../library/dif/NOTES.md | pandoc -f gfm -t rst -o libraries/di
 sed '1,19d' ../../../library/dimension_reduction_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/dimension_reduction_protocols.rst
 sed '1,19d' ../../../library/eclat/NOTES.md | pandoc -f gfm -t rst -o libraries/eclat.rst
 sed '1,19d' ../../../library/edcg/NOTES.md | pandoc -f gfm -t rst -o libraries/edcg.rst
+sed '1,19d' ../../../library/elo/NOTES.md | pandoc -f gfm -t rst -o libraries/elo.rst
 sed '1,19d' ../../../library/events/NOTES.md | pandoc -f gfm -t rst -o libraries/events.rst
 sed '1,19d' ../../../library/expand_library_alias_paths/NOTES.md | pandoc -f gfm -t rst -o libraries/expand_library_alias_paths.rst
 sed '1,19d' ../../../library/expecteds/NOTES.md | pandoc -f gfm -t rst -o libraries/expecteds.rst

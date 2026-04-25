@@ -427,7 +427,7 @@
 
 	update_scores(IncomingAdjacency, OutgoingMasses, MaximumDegree, Scores0, Scores, MaximumDifference) :-
 		score_dictionary(Scores0, ScoreDictionary),
-		update_score_values(IncomingAdjacency, OutgoingMasses, MaximumDegree, ScoreDictionary, Scores0, RawScores, TotalRawScore),
+		update_score_values(IncomingAdjacency, OutgoingMasses, MaximumDegree, ScoreDictionary, Scores0, RawScores, 0.0, TotalRawScore),
 		normalize_scores(RawScores, TotalRawScore, Scores0, Scores, MaximumDifference).
 
 	score_dictionary(Scores, Dictionary) :-
@@ -440,13 +440,13 @@
 		NextIndex is Index + 1,
 		score_dictionary(Scores, NextIndex, Dictionary1, Dictionary).
 
-	update_score_values([], [], _MaximumDegree, _ScoreDictionary, [], [], 0.0).
-	update_score_values([IncomingNeighbors| IncomingAdjacency], [OutgoingMass| OutgoingMasses], MaximumDegree, ScoreDictionary, [CurrentScore| CurrentScores], [RawScore| RawScores], TotalRawScore) :-
+	update_score_values([], [], _MaximumDegree, _ScoreDictionary, [], [], TotalRawScore, TotalRawScore).
+	update_score_values([IncomingNeighbors| IncomingAdjacency], [OutgoingMass| OutgoingMasses], MaximumDegree, ScoreDictionary, [CurrentScore| CurrentScores], [RawScore| RawScores], TotalRawScore0, TotalRawScore) :-
 		incoming_mass(IncomingNeighbors, ScoreDictionary, 0.0, IncomingMass0),
 		StayWeight is 1.0 - OutgoingMass / MaximumDegree,
 		RawScore is CurrentScore * StayWeight + IncomingMass0 / MaximumDegree,
-		update_score_values(IncomingAdjacency, OutgoingMasses, MaximumDegree, ScoreDictionary, CurrentScores, RawScores, RemainingRawScore),
-		TotalRawScore is RawScore + RemainingRawScore.
+		TotalRawScore1 is TotalRawScore0 + RawScore,
+		update_score_values(IncomingAdjacency, OutgoingMasses, MaximumDegree, ScoreDictionary, CurrentScores, RawScores, TotalRawScore1, TotalRawScore).
 
 	incoming_mass([], _ScoreDictionary, IncomingMass, IncomingMass).
 	incoming_mass([SourceIndex-Weight| IncomingNeighbors], ScoreDictionary, IncomingMass0, IncomingMass) :-
