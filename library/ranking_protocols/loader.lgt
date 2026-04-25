@@ -22,9 +22,13 @@
 :- initialization((
 	logtalk_load(types(loader)),
 	logtalk_load(format(loader)),
+	logtalk_load(dictionaries(loader)),
+	logtalk_load(options(loader)),
 	logtalk_load([
 		ranker_protocol,
 		ranker_common,
+		score_ranker_common,
+		score_ranker_model_common,
 		ranking_dataset_common,
 		ranking_dataset_protocol,
 		pairwise_ranking_dataset_protocol

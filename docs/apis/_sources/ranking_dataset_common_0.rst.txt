@@ -22,6 +22,7 @@ Shared predicates for collecting, analyzing, and validating ranking datasets.
 
 
 | **Uses:**
+|    :ref:`avltree <avltree/0>`
 |    :ref:`list <list/0>`
 |    :ref:`numberlist <numberlist/0>`
 
@@ -152,6 +153,25 @@ Returns per-item total win weights for a pairwise dataset.
 
 ------------
 
+.. index:: pairwise_dataset_matchups/2
+.. _ranking_dataset_common/0::pairwise_dataset_matchups/2:
+
+``pairwise_dataset_matchups/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns aggregated pairwise matchups as ``matchup(Item1,Item2,Item1Wins,Item2Wins)`` terms preserving item declaration order inside each pair.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pairwise_dataset_matchups(Dataset,Matchups)``
+| **Mode and number of proofs:**
+|    ``pairwise_dataset_matchups(+object_identifier,-list(compound))`` - ``one``
+
+
+------------
+
 .. index:: grouped_dataset_groups/2
 .. _ranking_dataset_common/0::grouped_dataset_groups/2:
 
@@ -167,6 +187,25 @@ Collects the unique grouped-dataset groups preserving their first declaration or
 |    ``grouped_dataset_groups(Dataset,Groups)``
 | **Mode and number of proofs:**
 |    ``grouped_dataset_groups(+object_identifier,-list)`` - ``one``
+
+
+------------
+
+.. index:: grouped_dataset_items/2
+.. _ranking_dataset_common/0::grouped_dataset_items/2:
+
+``grouped_dataset_items/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the unique items declared across all groups in a grouped dataset preserving their first declaration order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``grouped_dataset_items(Dataset,Items)``
+| **Mode and number of proofs:**
+|    ``grouped_dataset_items(+object_identifier,-list)`` - ``one``
 
 
 ------------
@@ -288,7 +327,62 @@ Validates a grouped ranking dataset and returns its dataset summary when validat
 Protected predicates
 --------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: grouped_dataset_item_relevances/4
+.. _ranking_dataset_common/0::grouped_dataset_item_relevances/4:
+
+``grouped_dataset_item_relevances/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the declared items for a grouped-dataset group paired with their relevance values under the given missing-relevance policy.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``grouped_dataset_item_relevances(Dataset,Group,MissingRelevance,ItemRelevances)``
+| **Mode and number of proofs:**
+|    ``grouped_dataset_item_relevances(+object_identifier,+term,+atom,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: grouped_dataset_relevance_frequencies/2
+.. _ranking_dataset_common/0::grouped_dataset_relevance_frequencies/2:
+
+``grouped_dataset_relevance_frequencies/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Aggregates grouped item relevances into a relevance-frequency dictionary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``grouped_dataset_relevance_frequencies(ItemRelevances,FrequencyDictionary)``
+| **Mode and number of proofs:**
+|    ``grouped_dataset_relevance_frequencies(+list(pair),-compound)`` - ``one``
+
+
+------------
+
+.. index:: grouped_dataset_item_relevance_scores/3
+.. _ranking_dataset_common/0::grouped_dataset_item_relevance_scores/3:
+
+``grouped_dataset_item_relevance_scores/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Maps grouped item relevances to per-item score deltas using a relevance-points dictionary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``grouped_dataset_item_relevance_scores(ItemRelevances,PointsDictionary,ItemScores)``
+| **Mode and number of proofs:**
+|    ``grouped_dataset_item_relevance_scores(+list(pair),+compound,-list(pair))`` - ``one``
+
+
+------------
 
 Private predicates
 ------------------

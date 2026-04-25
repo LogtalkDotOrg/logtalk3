@@ -70,11 +70,25 @@
 		argnames is ['Dataset', 'Totals']
 	]).
 
+	:- public(pairwise_dataset_matchups/2).
+	:- mode(pairwise_dataset_matchups(+object_identifier, -list(compound)), one).
+	:- info(pairwise_dataset_matchups/2, [
+		comment is 'Returns aggregated pairwise matchups as ``matchup(Item1,Item2,Item1Wins,Item2Wins)`` terms preserving item declaration order inside each pair.',
+		argnames is ['Dataset', 'Matchups']
+	]).
+
 	:- public(grouped_dataset_groups/2).
 	:- mode(grouped_dataset_groups(+object_identifier, -list), one).
 	:- info(grouped_dataset_groups/2, [
 		comment is 'Collects the unique grouped-dataset groups preserving their first declaration order.',
 		argnames is ['Dataset', 'Groups']
+	]).
+
+	:- public(grouped_dataset_items/2).
+	:- mode(grouped_dataset_items(+object_identifier, -list), one).
+	:- info(grouped_dataset_items/2, [
+		comment is 'Collects the unique items declared across all groups in a grouped dataset preserving their first declaration order.',
+		argnames is ['Dataset', 'Items']
 	]).
 
 	:- public(grouped_dataset_items/3).
@@ -89,6 +103,27 @@
 	:- info(grouped_dataset_summary/2, [
 		comment is 'Returns a summary of a grouped dataset, including group, item, and relevance-judgment counts.',
 		argnames is ['Dataset', 'Summary']
+	]).
+
+	:- protected(grouped_dataset_item_relevances/4).
+	:- mode(grouped_dataset_item_relevances(+object_identifier, +term, +atom, -list(pair)), one).
+	:- info(grouped_dataset_item_relevances/4, [
+		comment is 'Collects the declared items for a grouped-dataset group paired with their relevance values under the given missing-relevance policy.',
+		argnames is ['Dataset', 'Group', 'MissingRelevance', 'ItemRelevances']
+	]).
+
+	:- protected(grouped_dataset_relevance_frequencies/2).
+	:- mode(grouped_dataset_relevance_frequencies(+list(pair), -compound), one).
+	:- info(grouped_dataset_relevance_frequencies/2, [
+		comment is 'Aggregates grouped item relevances into a relevance-frequency dictionary.',
+		argnames is ['ItemRelevances', 'FrequencyDictionary']
+	]).
+
+	:- protected(grouped_dataset_item_relevance_scores/3).
+	:- mode(grouped_dataset_item_relevance_scores(+list(pair), +compound, -list(pair)), one).
+	:- info(grouped_dataset_item_relevance_scores/3, [
+		comment is 'Maps grouped item relevances to per-item score deltas using a relevance-points dictionary.',
+		argnames is ['ItemRelevances', 'PointsDictionary', 'ItemScores']
 	]).
 
 	:- public(validate_pairwise_dataset/1).
@@ -121,6 +156,14 @@
 
 	:- uses(list, [
 		append/3, length/2, member/2, memberchk/2, reverse/2
+	]).
+
+	:- uses(avltree, [
+		as_dictionary/2,
+		as_list/2 as dictionary_as_list/2,
+		insert/4 as dictionary_insert/4,
+		lookup/3 as dictionary_lookup/3,
+		new/1 as dictionary_new/1
 	]).
 
 	:- uses(numberlist, [
@@ -162,9 +205,24 @@
 		pairwise_dataset_preferences(Dataset, Preferences),
 		findall(Item-Wins, (member(Item, Items), item_wins(Item, Preferences, Wins)), Totals).
 
+	pairwise_dataset_matchups(Dataset, Matchups) :-
+		pairwise_dataset_items(Dataset, Items),
+		pairwise_dataset_preferences(Dataset, Preferences),
+		index_pairs(Items, 1, ItemIndexPairs, IndexItemPairs),
+		as_dictionary(ItemIndexPairs, ItemIndices),
+		as_dictionary(IndexItemPairs, IndexedItems),
+		dictionary_new(Matchups0),
+		aggregate_matchups(Preferences, ItemIndices, Matchups0, Matchups1),
+		dictionary_as_list(Matchups1, MatchupEntries),
+		matchup_entries(MatchupEntries, IndexedItems, Matchups).
+
 	grouped_dataset_groups(Dataset, Groups) :-
 		findall(Group, Dataset::group(Group), RawGroups),
 		unique_list(RawGroups, Groups).
+
+	grouped_dataset_items(Dataset, Items) :-
+		findall(Item, Dataset::item(_Group, Item), RawItems),
+		unique_list(RawItems, Items).
 
 	grouped_dataset_items(Dataset, Group, Items) :-
 		findall(Item, Dataset::item(Group, Item), RawItems),
@@ -181,6 +239,19 @@
 			items(NumberOfItems),
 			relevance_judgments(NumberOfJudgments)
 		].
+
+	grouped_dataset_item_relevances(Dataset, Group, MissingRelevance, ItemRelevances) :-
+		::grouped_dataset_items(Dataset, Group, Items),
+		grouped_dataset_item_relevances(Items, Dataset, Group, MissingRelevance, ItemRelevances).
+
+	grouped_dataset_relevance_frequencies(ItemRelevances, FrequencyDictionary) :-
+		dictionary_new(FrequencyDictionary0),
+		grouped_dataset_relevance_frequencies(ItemRelevances, FrequencyDictionary0, FrequencyDictionary).
+
+	grouped_dataset_item_relevance_scores([], _PointsDictionary, []).
+	grouped_dataset_item_relevance_scores([Item-Relevance| ItemRelevances], PointsDictionary, [Item-Points| ItemScores]) :-
+		dictionary_lookup(Relevance, Points, PointsDictionary),
+		grouped_dataset_item_relevance_scores(ItemRelevances, PointsDictionary, ItemScores).
 
 	validate_pairwise_dataset(Dataset) :-
 		validate_pairwise_dataset(Dataset, _Summary).
@@ -282,9 +353,72 @@
 		Count1 is Count0 + GroupCount,
 		count_grouped_items(Groups, Dataset, Count1, Count).
 
+	grouped_dataset_item_relevances([], _Dataset, _Group, _MissingRelevance, []).
+	grouped_dataset_item_relevances([Item| Items], Dataset, Group, MissingRelevance, [Item-Relevance| ItemRelevances]) :-
+		grouped_dataset_item_relevance(Dataset, Group, Item, MissingRelevance, Relevance),
+		grouped_dataset_item_relevances(Items, Dataset, Group, MissingRelevance, ItemRelevances).
+
+	grouped_dataset_item_relevance(Dataset, Group, Item, MissingRelevance, Relevance) :-
+		(   Dataset::relevance(Group, Item, Relevance0) ->
+			Relevance = Relevance0
+		;   MissingRelevance == zero ->
+			Relevance = 0
+		;   existence_error(relevance, Group-Item)
+		).
+
+	grouped_dataset_relevance_frequencies([], FrequencyDictionary, FrequencyDictionary).
+	grouped_dataset_relevance_frequencies([_Item-Relevance| ItemRelevances], FrequencyDictionary0, FrequencyDictionary) :-
+		update_frequency_dictionary(FrequencyDictionary0, Relevance, FrequencyDictionary1),
+		grouped_dataset_relevance_frequencies(ItemRelevances, FrequencyDictionary1, FrequencyDictionary).
+
+	update_frequency_dictionary(FrequencyDictionary0, Relevance, FrequencyDictionary) :-
+		(   dictionary_lookup(Relevance, Count0, FrequencyDictionary0) ->
+			Count is Count0 + 1
+		;   Count = 1
+		),
+		dictionary_insert(FrequencyDictionary0, Relevance, Count, FrequencyDictionary).
+
 	item_wins(Item, Preferences, Wins) :-
 		findall(Weight, member(p(Item, _, Weight), Preferences), Weights),
 		sum(Weights, Wins).
+
+	index_pairs([], _Index, [], []).
+	index_pairs([Item| Items], Index, [Item-Index| ItemIndexPairs], [Index-Item| IndexItemPairs]) :-
+		NextIndex is Index + 1,
+		index_pairs(Items, NextIndex, ItemIndexPairs, IndexItemPairs).
+
+	aggregate_matchups([], _ItemIndices, Matchups, Matchups).
+	aggregate_matchups([p(Winner, Loser, Weight)| Preferences], ItemIndices, Matchups0, Matchups) :-
+		dictionary_lookup(Winner, WinnerIndex, ItemIndices),
+		dictionary_lookup(Loser, LoserIndex, ItemIndices),
+		(   WinnerIndex < LoserIndex ->
+			LeftIndex = WinnerIndex,
+			RightIndex = LoserIndex,
+			LeftDelta = Weight,
+			RightDelta = 0
+		;   LeftIndex = LoserIndex,
+			RightIndex = WinnerIndex,
+			LeftDelta = 0,
+			RightDelta = Weight
+		),
+		update_matchup_dictionary(Matchups0, LeftIndex, RightIndex, LeftDelta, RightDelta, Matchups1),
+		aggregate_matchups(Preferences, ItemIndices, Matchups1, Matchups).
+
+	update_matchup_dictionary(Matchups0, LeftIndex, RightIndex, LeftDelta, RightDelta, Matchups) :-
+		Key = pair(LeftIndex, RightIndex),
+		(   dictionary_lookup(Key, totals(Left0, Right0), Matchups0) ->
+			Left is Left0 + LeftDelta,
+			Right is Right0 + RightDelta
+		;   Left = LeftDelta,
+			Right = RightDelta
+		),
+		dictionary_insert(Matchups0, Key, totals(Left, Right), Matchups).
+
+	matchup_entries([], _IndexedItems, []).
+	matchup_entries([pair(LeftIndex, RightIndex)-totals(LeftWins, RightWins)| MatchupEntries], IndexedItems, [matchup(LeftItem, RightItem, LeftWins, RightWins)| Matchups]) :-
+		dictionary_lookup(LeftIndex, LeftItem, IndexedItems),
+		dictionary_lookup(RightIndex, RightItem, IndexedItems),
+		matchup_entries(MatchupEntries, IndexedItems, Matchups).
 
 	check_unique_items([]).
 	check_unique_items([Item| Items]) :-
@@ -336,12 +470,17 @@
 		;   domain_error(non_negative_integer, Relevance)
 		).
 
-	unique_list([], []).
-	unique_list([Item| Items], UniqueItems) :-
-		(   member(Item, Items) ->
-			unique_list(Items, UniqueItems)
-		;   UniqueItems = [Item| Rest],
-			unique_list(Items, Rest)
+	unique_list(Items, UniqueItems) :-
+		dictionary_new(Seen0),
+		unique_list(Items, Seen0, UniqueItems).
+
+	unique_list([], _Seen, []).
+	unique_list([Item| Items], Seen0, UniqueItems) :-
+		(   dictionary_lookup(Item, _Seen, Seen0) ->
+			unique_list(Items, Seen0, UniqueItems)
+		;   dictionary_insert(Seen0, Item, true, Seen),
+			UniqueItems = [Item| Rest],
+			unique_list(Items, Seen, Rest)
 		).
 
 :- end_category.

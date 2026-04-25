@@ -23,7 +23,19 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(types(loader)),
 	logtalk_load(format(loader)),
-	logtalk_load(loader),
+	logtalk_load(dictionaries(loader)),
+	logtalk_load(options(loader)),
+	logtalk_load([
+		ranker_protocol,
+		ranker_common,
+		score_ranker_common,
+		ranking_dataset_common,
+		ranking_dataset_protocol,
+		pairwise_ranking_dataset_protocol
+	], [
+		source_data(on),
+		debug(on)
+	]),
 	logtalk_load([
 		'test_datasets/head_to_head',
 		'test_datasets/sparse_preferences',

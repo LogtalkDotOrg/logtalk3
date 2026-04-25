@@ -1,0 +1,248 @@
+.. index:: single: score_ranker_model_common
+.. _score_ranker_model_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``score_ranker_model_common``
+=============================
+
+Shared predicates for score-ranker term construction, validation, ranking, export, and pretty-printing.
+
+| **Availability:** 
+|    ``logtalk_load(ranking_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-25
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`score_ranker_common <score_ranker_common/0>`
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::export_to_clauses/4`  :ref:`ranker_protocol/0::export_to_file/4`  :ref:`ranker_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: score_ranker_model/1
+.. _score_ranker_model_common/0::score_ranker_model/1:
+
+``score_ranker_model/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing rankers must define to identify the learned score-ranker model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_ranker_model(Model)``
+| **Mode and number of proofs:**
+|    ``score_ranker_model(-atom)`` - ``one``
+
+
+------------
+
+.. index:: score_ranker_label/1
+.. _score_ranker_model_common/0::score_ranker_label/1:
+
+``score_ranker_label/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing rankers must define to provide a human-readable label used by pretty-printing helpers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_ranker_label(Label)``
+| **Mode and number of proofs:**
+|    ``score_ranker_label(-atom)`` - ``one``
+
+
+------------
+
+.. index:: score_ranker_term/4
+.. _score_ranker_model_common/0::score_ranker_term/4:
+
+``score_ranker_term/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing rankers must define to map between the ranker term representation and its items, scores, and diagnostics payloads.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_ranker_term(Items,Scores,Diagnostics,Ranker)``
+| **Mode and number of proofs:**
+|    ``score_ranker_term(?list,?list,?list(compound),?compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_score/1
+.. _score_ranker_model_common/0::valid_score/1:
+
+``valid_score/1``
+^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing rankers must define to validate individual learned score values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_score(Score)``
+| **Mode and number of proofs:**
+|    ``valid_score(+number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: build_score_ranker/5
+.. _score_ranker_model_common/0::build_score_ranker/5:
+
+``build_score_ranker/5``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds a self-describing score-ranker term from ordered items, score pairs, effective options, and dataset summary metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``build_score_ranker(Items,Scores,Options,DatasetSummary,Ranker)``
+| **Mode and number of proofs:**
+|    ``build_score_ranker(+list,+list(pair),+list(compound),+list(compound),-compound)`` - ``one``
+
+
+------------
+
+.. index:: score_ranker_data/4
+.. _score_ranker_model_common/0::score_ranker_data/4:
+
+``score_ranker_data/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates and destructures a score-ranker term into its items, score pairs, and diagnostics payloads.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_ranker_data(Ranker,Items,Scores,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``score_ranker_data(+compound,-list,-list(pair),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: initialize_scores/2
+.. _score_ranker_model_common/0::initialize_scores/2:
+
+``initialize_scores/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Initializes a score dictionary with zero scores for the given ordered items.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initialize_scores(Items,Scores)``
+| **Mode and number of proofs:**
+|    ``initialize_scores(+list,-compound)`` - ``one``
+
+
+------------
+
+.. index:: accumulate_item_scores/3
+.. _score_ranker_model_common/0::accumulate_item_scores/3:
+
+``accumulate_item_scores/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Accumulates item score deltas into a score dictionary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``accumulate_item_scores(ItemDeltas,Scores,UpdatedScores)``
+| **Mode and number of proofs:**
+|    ``accumulate_item_scores(+list(pair),+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: update_score/4
+.. _score_ranker_model_common/0::update_score/4:
+
+``update_score/4``
+^^^^^^^^^^^^^^^^^^
+
+Updates the score of a single item in a score dictionary by adding the given delta.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update_score(Scores,Item,Delta,UpdatedScores)``
+| **Mode and number of proofs:**
+|    ``update_score(+compound,+term,+number,-compound)`` - ``one``
+
+
+------------
+
+.. index:: ordered_scores/3
+.. _score_ranker_model_common/0::ordered_scores/3:
+
+``ordered_scores/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Materializes ordered ``Item-Score`` pairs from a score dictionary using the given item order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ordered_scores(Items,ScoresDictionary,Scores)``
+| **Mode and number of proofs:**
+|    ``ordered_scores(+list,+compound,-list(pair))`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

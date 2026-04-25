@@ -23,7 +23,6 @@
 	logtalk_load(types(loader)),
 	logtalk_load(format(loader)),
 	logtalk_load(dictionaries(loader)),
-	logtalk_load(options(loader)),
 	logtalk_load(ranking_protocols(loader)),
 	logtalk_load(bradley_terry, [optimize(on)])
 )).

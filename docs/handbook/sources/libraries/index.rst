@@ -42,6 +42,7 @@ directory in the ``NOTES.md`` file.
    base64
    base85
    basic_types
+   borda
    bradley_terry
    c45
    cbor
@@ -53,6 +54,7 @@ directory in the ``NOTES.md`` file.
    combinations
    command_line_options
    core
+   copeland
    coroutining
    csv
    cuid2

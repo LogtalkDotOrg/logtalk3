@@ -6707,6 +6707,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ranking_dataset_common <ranking_dataset_common/0::grouped_dataset_groups/2>`
 
+``grouped_dataset_items/2``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::grouped_dataset_items/2>`
+
 ``grouped_dataset_items/3``
 ---------------------------
 
@@ -8846,8 +8856,10 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ada_boost <ada_boost/0::learn/3>`
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::learn/3>`
+* :ref:`borda <borda/0::learn/3>`
 * :ref:`bradley_terry <bradley_terry/0::learn/3>`
 * :ref:`clusterer_protocol <clusterer_protocol/0::learn/3>`
+* :ref:`copeland <copeland/0::learn/3>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::learn/3>`
 * :ref:`gradient_boosting_regression <gradient_boosting_regression/0::learn/3>`
 * :ref:`knn_regression <knn_regression/0::learn/3>`
@@ -12327,6 +12339,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ranking_dataset_common <ranking_dataset_common/0::pairwise_dataset_items/2>`
 
+``pairwise_dataset_matchups/2``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::pairwise_dataset_matchups/2>`
+
 ``pairwise_dataset_preferences/2``
 ----------------------------------
 
@@ -15283,6 +15305,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::score_all/3>`
 * :ref:`isolation_forest <isolation_forest/0::score_all/3>`
+
+``scores/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`borda <borda/0::scores/2>`
+* :ref:`copeland <copeland/0::scores/2>`
 
 ``search/1``
 ------------

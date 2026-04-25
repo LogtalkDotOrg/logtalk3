@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 23, 2026
+##   Last updated on April 25, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -93,8 +93,10 @@ sed '1,19d' ../../../library/base58/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,19d' ../../../library/base64/NOTES.md | pandoc -f gfm -t rst -o libraries/base64.rst
 sed '1,19d' ../../../library/base85/NOTES.md | pandoc -f gfm -t rst -o libraries/base85.rst
 sed '1,19d' ../../../library/basic_types/NOTES.md | pandoc -f gfm -t rst -o libraries/basic_types.rst
+sed '1,19d' ../../../library/borda/NOTES.md | pandoc -f gfm -t rst -o libraries/borda.rst
 sed '1,19d' ../../../library/bradley_terry/NOTES.md | pandoc -f gfm -t rst -o libraries/bradley_terry.rst
 sed '1,19d' ../../../library/c45/NOTES.md | pandoc -f gfm -t rst -o libraries/c45.rst
+sed '1,19d' ../../../library/copeland/NOTES.md | pandoc -f gfm -t rst -o libraries/copeland.rst
 sed '1,19d' ../../../library/coroutining/NOTES.md | pandoc -f gfm -t rst -o libraries/coroutining.rst
 sed '1,19d' ../../../library/cbor/NOTES.md | pandoc -f gfm -t rst -o libraries/cbor.rst
 sed '1,19d' ../../../library/ccsds/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds.rst

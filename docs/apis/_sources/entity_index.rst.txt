@@ -73,6 +73,8 @@ Categories
    read_file <read_file_0>
    recorded_database_core <recorded_database_core_0>
    regressor_common <regressor_common_0>
+   score_ranker_common <score_ranker_common_0>
+   score_ranker_model_common <score_ranker_model_common_0>
    search_indexing <search_indexing_0>
    sequential_pattern_mining_common <sequential_pattern_mining_common_0>
    single_byte_character_set(MaxCode) <single_byte_character_set_1>
@@ -126,6 +128,7 @@ Objects
    bintree <bintree_0>
    blank_grammars(Format) <blank_grammars_1>
    body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <body_goal_negation_5>
+   borda <borda_0>
    bradley_terry <bradley_terry_0>
    bup_interpreter <bup_interpreter_0>
    c45 <c45_0>
@@ -146,6 +149,7 @@ Objects
    combinations <combinations_0>
    command_line_options <command_line_options_0>
    compound <compound_0>
+   copeland <copeland_0>
    coroutining <coroutining_0>
    counter <counter_0>
    coupling_metric <coupling_metric_0>

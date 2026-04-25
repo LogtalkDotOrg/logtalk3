@@ -79,7 +79,7 @@ grouping is thematic only, as some libraries naturally span multiple areas):
 		`knn_regression`, `linear_regression`,
 		`random_forest_regression`, and `regression_tree`.
 	- Ranking:
-		`ranking_protocols` and `bradley_terry`.
+		`ranking_protocols`, `borda`, `bradley_terry`, and `copeland`.
 	- Clustering:
 		`clustering_protocols`, `agglomerative`, `dbscan`,
 		`gaussian_mixture`, `hdbscan`, `hierarchical_clustering`,

@@ -156,6 +156,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
    base85 <base85_0>
 
+:ref:`borda <library_borda>`
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   borda <borda_0>
+
 :ref:`bradley_terry <library_bradley_terry>`
 --------------------------------------------
 
@@ -323,6 +333,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
    command_line_option <command_line_option_0>
    command_line_options <command_line_options_0>
+
+:ref:`copeland <library_copeland>`
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   copeland <copeland_0>
 
 :ref:`core <library_core>`
 --------------------------
@@ -1714,6 +1734,8 @@ To load any library (including developer tools, ports, and contributions), use t
    ranker_protocol <ranker_protocol_0>
    ranking_dataset_common <ranking_dataset_common_0>
    ranking_dataset_protocol <ranking_dataset_protocol_0>
+   score_ranker_common <score_ranker_common_0>
+   score_ranker_model_common <score_ranker_model_common_0>
 
 :ref:`reader <library_reader>`
 ------------------------------

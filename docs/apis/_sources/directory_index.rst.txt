@@ -242,6 +242,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    base85 <base85_0>
 
+``library/borda/``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   borda <borda_0>
+
 ``library/bradley_terry/``
 --------------------------
 
@@ -379,6 +389,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    command_line_option <command_line_option_0>
    command_line_options <command_line_options_0>
+
+``library/copeland/``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   copeland <copeland_0>
 
 ``library/coroutining/``
 ------------------------
@@ -1476,6 +1496,8 @@ To load an entity, always load the library that includes it using the goal ``log
    ranker_protocol <ranker_protocol_0>
    ranking_dataset_common <ranking_dataset_common_0>
    ranking_dataset_protocol <ranking_dataset_protocol_0>
+   score_ranker_common <score_ranker_common_0>
+   score_ranker_model_common <score_ranker_model_common_0>
 
 ``library/reader/``
 -------------------

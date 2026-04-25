@@ -20,7 +20,8 @@
 
 
 :- category(ranker_common,
-	implements(ranker_protocol)).
+	implements(ranker_protocol),
+	extends(options)).
 
 	:- info([
 		version is 1:0:0,
