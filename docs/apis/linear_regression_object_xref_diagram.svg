@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-772 2337,-772 2337,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object linear_regression</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;04&#45;25, 18:19</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;04&#45;25, 21:52</text>
 <g id="clust1" class="cluster">
 <title>cluster_linear_regression_object</title>
 <g id="a_clust1"><a xlink:title="linear_regression">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 2313,-54.25 2313,-54.25 2319,-54.25 2325,-60.25 2325,-66.25 2325,-66.25 2325,-748 2325,-748 2325,-754 2319,-760 2313,-760 2313,-760 20,-760 20,-760 14,-760 8,-754 8,-748 8,-748 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-742.25" font-family="Monospace" font-size="10.00" fill="dimgray">linear_regression</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>learn/3</title>
 <polygon fill="springgreen" stroke="black" points="1103.88,-721.25 1030.12,-721.25 1030.12,-685.25 1103.88,-685.25 1103.88,-721.25"/>
 <text xml:space="preserve" text-anchor="start" x="1038.12" y="-705.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L40">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="1043.38" y="-705.12" font-family="Monospace" font-size="11.00">learn/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>build_encoders/4</title>
 <polygon fill="cornsilk" stroke="black" points="1514.25,-530 1379.75,-530 1379.75,-494 1514.25,-494 1514.25,-530"/>
 <text xml:space="preserve" text-anchor="start" x="1387.75" y="-514.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L86">
+<g id="a_node5_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L86">
 <text xml:space="preserve" text-anchor="start" x="1393" y="-513.88" font-family="Monospace" font-size="11.00">build_encoders/4</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- learn/3&#45;&gt;build_encoders/4 -->
 <g id="edge1" class="edge">
 <title>learn/3&#45;&gt;build_encoders/4</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67" xlink:title="calls">
 <path fill="none" stroke="black" d="M1099.79,-684.85C1130.82,-667.16 1177.25,-637.37 1209,-602 1221.23,-588.38 1214.44,-577.09 1229,-566 1268.76,-535.71 1323.44,-522.47 1368.09,-516.79"/>
 <polygon fill="black" stroke="black" points="1368.46,-520.27 1378,-515.65 1367.66,-513.32 1368.46,-520.27"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="1169.07" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>examples_to_rows/3</title>
 <polygon fill="cornsilk" stroke="black" points="830,-530 682,-530 682,-494 830,-494 830,-530"/>
 <text xml:space="preserve" text-anchor="start" x="690" y="-514.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L126">
+<g id="a_node8_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="695.25" y="-513.88" font-family="Monospace" font-size="11.00">examples_to_rows/3</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- learn/3&#45;&gt;examples_to_rows/3 -->
 <g id="edge2" class="edge">
 <title>learn/3&#45;&gt;examples_to_rows/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67" xlink:title="calls">
 <path fill="none" stroke="black" d="M1064.95,-685.21C1060.43,-655.73 1046.73,-595.55 1008,-566 982.1,-546.24 904.01,-531.8 841.55,-523.03"/>
 <polygon fill="black" stroke="black" points="842.36,-519.61 831.98,-521.72 841.41,-526.54 842.36,-519.61"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="1057.17" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>encoders_feature_count/2</title>
 <polygon fill="cornsilk" stroke="black" points="1108.25,-530 919.75,-530 919.75,-494 1108.25,-494 1108.25,-530"/>
 <text xml:space="preserve" text-anchor="start" x="927.75" y="-514.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L185">
+<g id="a_node16_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L185">
 <text xml:space="preserve" text-anchor="start" x="933" y="-513.88" font-family="Monospace" font-size="11.00">encoders_feature_count/2</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- learn/3&#45;&gt;encoders_feature_count/2 -->
 <g id="edge3" class="edge">
 <title>learn/3&#45;&gt;encoders_feature_count/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67" xlink:title="calls">
 <path fill="none" stroke="black" d="M1045.38,-684.98C1035.33,-675.59 1024.38,-663.08 1018.75,-649.25 1011.08,-630.43 1011.57,-575.53 1012.71,-541.44"/>
 <polygon fill="black" stroke="black" points="1016.2,-541.98 1013.08,-531.86 1009.2,-541.72 1016.2,-541.98"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="1018.75" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,7 +124,7 @@
 <title>train_model/5</title>
 <polygon fill="cornsilk" stroke="black" points="1200.12,-602 1085.88,-602 1085.88,-566 1200.12,-566 1200.12,-602"/>
 <text xml:space="preserve" text-anchor="start" x="1093.88" y="-586.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L195">
+<g id="a_node17_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L195">
 <text xml:space="preserve" text-anchor="start" x="1099.12" y="-585.88" font-family="Monospace" font-size="11.00">train_model/5</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- learn/3&#45;&gt;train_model/5 -->
 <g id="edge4" class="edge">
 <title>learn/3&#45;&gt;train_model/5</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67" xlink:title="calls">
 <path fill="none" stroke="black" d="M1078.21,-684.95C1090.67,-665.73 1110.95,-634.44 1125.51,-611.99"/>
 <polygon fill="black" stroke="black" points="1128.41,-613.94 1130.92,-603.64 1122.54,-610.13 1128.41,-613.94"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="1107.28" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -160,12 +160,12 @@
 <!-- learn/3&#45;&gt;^^check_options/1 -->
 <g id="edge24" class="edge">
 <title>learn/3&#45;&gt;^^check_options/1</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67" xlink:title="calls">
 <path fill="none" stroke="black" d="M1104.34,-693.85C1150.16,-683.13 1224.75,-664.17 1249,-649.25 1264.8,-639.53 1279.11,-624.57 1289.8,-611.52"/>
 <polygon fill="black" stroke="black" points="1292.55,-613.68 1295.97,-603.66 1287.04,-609.36 1292.55,-613.68"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="1262.54" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -184,12 +184,12 @@
 <!-- learn/3&#45;&gt;^^merge_options/2 -->
 <g id="edge25" class="edge">
 <title>learn/3&#45;&gt;^^merge_options/2</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67" xlink:title="calls">
 <path fill="none" stroke="black" d="M1104.16,-694.98C1149.24,-685.83 1227.37,-668.91 1293,-649.25 1334.44,-636.83 1380.32,-619.87 1414.7,-606.49"/>
 <polygon fill="black" stroke="black" points="1415.54,-609.92 1423.57,-603.01 1412.99,-603.4 1415.54,-609.92"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="1326.98" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -208,12 +208,12 @@
 <!-- learn/3&#45;&gt;^^dataset_attributes/2 -->
 <g id="edge26" class="edge">
 <title>learn/3&#45;&gt;^^dataset_attributes/2</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67" xlink:title="calls">
 <path fill="none" stroke="black" d="M1029.75,-693.53C950.28,-674.93 762.32,-630.94 651.62,-605.04"/>
 <polygon fill="black" stroke="black" points="652.51,-601.65 641.97,-602.78 650.91,-608.47 652.51,-601.65"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="831.52" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -232,12 +232,12 @@
 <!-- learn/3&#45;&gt;^^dataset_examples/2 -->
 <g id="edge27" class="edge">
 <title>learn/3&#45;&gt;^^dataset_examples/2</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67" xlink:title="calls">
 <path fill="none" stroke="black" d="M1029.63,-688.34C975.17,-668.07 873.53,-630.24 809.5,-606.4"/>
 <polygon fill="black" stroke="black" points="810.79,-603.15 800.2,-602.94 808.35,-609.71 810.79,-603.15"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="918.94" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -256,12 +256,12 @@
 <!-- learn/3&#45;&gt;^^check_examples/2 -->
 <g id="edge28" class="edge">
 <title>learn/3&#45;&gt;^^check_examples/2</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67" xlink:title="calls">
 <path fill="none" stroke="black" d="M1029.79,-686.98C1010.5,-677.89 987.36,-665.03 969.75,-649.25 958.05,-638.76 947.78,-624.64 940.05,-612.31"/>
 <polygon fill="black" stroke="black" points="943.09,-610.57 934.95,-603.79 937.08,-614.16 943.09,-610.57"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L67">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="969.75" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -271,7 +271,7 @@
 <title>print_options/1</title>
 <polygon fill="cornsilk" stroke="black" points="2017.88,-602 1890.12,-602 1890.12,-566 2017.88,-566 2017.88,-602"/>
 <text xml:space="preserve" text-anchor="start" x="1898.12" y="-586.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L280" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L280">
+<g id="a_node2_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L280" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L280">
 <text xml:space="preserve" text-anchor="start" x="1903.38" y="-585.88" font-family="Monospace" font-size="11.00">print_options/1</text>
 </a>
 </g>
@@ -297,12 +297,12 @@
 <!-- print_options/1&#45;&gt;format::format/2 -->
 <g id="edge47" class="edge">
 <title>print_options/1&#45;&gt;format::format/2</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L280" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L280" xlink:title="calls">
 <path fill="none" stroke="black" d="M1954,-565.59C1954,-541.61 1954,-498.14 1954,-469.42"/>
 <polygon fill="black" stroke="black" points="1957.5,-469.62 1954,-459.62 1950.5,-469.62 1957.5,-469.62"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L280" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L280">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L280" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L280">
 <text xml:space="preserve" text-anchor="start" x="1954" y="-508.62" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -312,7 +312,7 @@
 <title>regressor_export_template/4</title>
 <polygon fill="cornsilk" stroke="black" points="1376.38,-721.25 1167.62,-721.25 1167.62,-685.25 1376.38,-685.25 1376.38,-721.25"/>
 <text xml:space="preserve" text-anchor="start" x="1175.62" y="-705.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L260" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L260">
+<g id="a_node3_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L260" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L260">
 <text xml:space="preserve" text-anchor="start" x="1180.88" y="-705.12" font-family="Monospace" font-size="11.00">regressor_export_template/4</text>
 </a>
 </g>
@@ -326,7 +326,7 @@
 <title>predict/3</title>
 <polygon fill="cornsilk" stroke="black" points="878.62,-458 791.38,-458 791.38,-422 878.62,-422 878.62,-458"/>
 <text xml:space="preserve" text-anchor="start" x="799.38" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L80">
+<g id="a_node4_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="804.62" y="-441.88" font-family="Monospace" font-size="11.00">predict/3</text>
 </a>
 </g>
@@ -340,7 +340,7 @@
 <title>encode_instance/3</title>
 <polygon fill="cornsilk" stroke="black" points="705.62,-338.75 564.38,-338.75 564.38,-302.75 705.62,-302.75 705.62,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="572.38" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L131">
+<g id="a_node9_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L131">
 <text xml:space="preserve" text-anchor="start" x="577.62" y="-322.62" font-family="Monospace" font-size="11.00">encode_instance/3</text>
 </a>
 </g>
@@ -352,12 +352,12 @@
 <!-- predict/3&#45;&gt;encode_instance/3 -->
 <g id="edge5" class="edge">
 <title>predict/3&#45;&gt;encode_instance/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L80" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M805.49,-421.7C770.78,-401.35 713.01,-367.48 674.47,-344.89"/>
 <polygon fill="black" stroke="black" points="676.33,-341.93 665.94,-339.89 672.79,-347.96 676.33,-341.93"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L80">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="741" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -379,12 +379,12 @@
 <!-- predict/3&#45;&gt;numberlist::scalar_product/3 -->
 <g id="edge33" class="edge">
 <title>predict/3&#45;&gt;numberlist::scalar_product/3</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L80" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M839,-421.52C851.06,-370.06 888.25,-220.46 921,-183.5 955.4,-144.67 1008.13,-119.57 1052.14,-104.2"/>
 <polygon fill="black" stroke="black" points="1053.05,-107.59 1061.4,-101.08 1050.81,-100.95 1053.05,-107.59"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L80">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="885.8" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -394,7 +394,7 @@
 <title>continuous_stats/5</title>
 <polygon fill="cornsilk" stroke="black" points="1775,-338.75 1627,-338.75 1627,-302.75 1775,-302.75 1775,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1635" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L95">
+<g id="a_node6_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1640.25" y="-322.62" font-family="Monospace" font-size="11.00">continuous_stats/5</text>
 </a>
 </g>
@@ -406,12 +406,12 @@
 <!-- build_encoders/4&#45;&gt;continuous_stats/5 -->
 <g id="edge6" class="edge">
 <title>build_encoders/4&#45;&gt;continuous_stats/5</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L87" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L87" xlink:title="calls">
 <path fill="none" stroke="black" d="M1470.44,-493.54C1515.99,-459.59 1616.55,-384.67 1668.5,-345.96"/>
 <polygon fill="black" stroke="black" points="1670.47,-348.86 1676.4,-340.08 1666.29,-343.25 1670.47,-348.86"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L87">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L87">
 <text xml:space="preserve" text-anchor="start" x="1563.13" y="-436.62" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -421,7 +421,7 @@
 <title>known_attribute_values/3</title>
 <polygon fill="cornsilk" stroke="black" points="1881.25,-219.5 1692.75,-219.5 1692.75,-183.5 1881.25,-183.5 1881.25,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1700.75" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L117">
+<g id="a_node7_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="1706" y="-203.38" font-family="Monospace" font-size="11.00">known_attribute_values/3</text>
 </a>
 </g>
@@ -433,12 +433,12 @@
 <!-- continuous_stats/5&#45;&gt;known_attribute_values/3 -->
 <g id="edge7" class="edge">
 <title>continuous_stats/5&#45;&gt;known_attribute_values/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L95" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L95" xlink:title="calls">
 <path fill="none" stroke="black" d="M1713.69,-302.45C1727.92,-283.05 1751.15,-251.38 1767.65,-228.89"/>
 <polygon fill="black" stroke="black" points="1770.27,-231.23 1773.36,-221.09 1764.63,-227.09 1770.27,-231.23"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L95">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1746.58" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -460,12 +460,12 @@
 <!-- continuous_stats/5&#45;&gt;population::arithmetic_mean/2 -->
 <g id="edge34" class="edge">
 <title>continuous_stats/5&#45;&gt;population::arithmetic_mean/2</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L95" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L95" xlink:title="calls">
 <path fill="none" stroke="black" d="M1775.49,-302.39C1866.9,-281.08 2021.6,-245.02 2117.99,-222.55"/>
 <polygon fill="black" stroke="black" points="2118.73,-225.97 2127.68,-220.29 2117.14,-219.15 2118.73,-225.97"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L95">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1967.58" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -487,12 +487,12 @@
 <!-- continuous_stats/5&#45;&gt;list::length/2 -->
 <g id="edge35" class="edge">
 <title>continuous_stats/5&#45;&gt;list::length/2</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L95" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L95" xlink:title="calls">
 <path fill="none" stroke="black" d="M1626.81,-309.55C1608.58,-307.18 1589.1,-304.77 1571,-302.75 1397.89,-283.45 1351.16,-302.79 1180.75,-266.75 1132.94,-256.64 1080.44,-238.4 1042.64,-223.93"/>
 <polygon fill="black" stroke="black" points="1044.39,-220.85 1033.8,-220.51 1041.86,-227.38 1044.39,-220.85"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L95">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1180.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -514,12 +514,12 @@
 <!-- continuous_stats/5&#45;&gt;population::variance/2 -->
 <g id="edge36" class="edge">
 <title>continuous_stats/5&#45;&gt;population::variance/2</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L95" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L95" xlink:title="calls">
 <path fill="none" stroke="black" d="M1743.51,-302.32C1794.28,-281.51 1879.21,-246.69 1934.15,-224.16"/>
 <polygon fill="black" stroke="black" points="1935.4,-227.44 1943.32,-220.41 1932.74,-220.96 1935.4,-227.44"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L95">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1852.58" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -538,12 +538,12 @@
 <!-- continuous_stats/5&#45;&gt;^^option/2 -->
 <g id="edge29" class="edge">
 <title>continuous_stats/5&#45;&gt;^^option/2</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L95" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L95" xlink:title="calls">
 <path fill="none" stroke="black" d="M1690.23,-302.45C1678.26,-283.23 1658.78,-251.94 1644.8,-229.49"/>
 <polygon fill="black" stroke="black" points="1647.87,-227.8 1639.62,-221.16 1641.93,-231.5 1647.87,-227.8"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L95">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1666.69" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -565,12 +565,12 @@
 <!-- known_attribute_values/3&#45;&gt;list::memberchk/2 -->
 <g id="edge37" class="edge">
 <title>known_attribute_values/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L118" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L118" xlink:title="calls">
 <path fill="none" stroke="black" d="M1692.44,-184.8C1689.6,-184.36 1686.78,-183.92 1684,-183.5 1533.17,-160.58 1495.52,-154.06 1344,-136.25 1178.01,-116.74 983.26,-99.28 875.43,-90.09"/>
 <polygon fill="black" stroke="black" points="875.76,-86.6 865.5,-89.24 875.17,-93.58 875.76,-86.6"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L118">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L118">
 <text xml:space="preserve" text-anchor="start" x="1429.89" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -578,12 +578,12 @@
 <!-- examples_to_rows/3&#45;&gt;encode_instance/3 -->
 <g id="edge8" class="edge">
 <title>examples_to_rows/3&#45;&gt;encode_instance/3</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L127" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L127" xlink:title="calls">
 <path fill="none" stroke="black" d="M744.83,-493.54C723.63,-460.37 677.4,-388.07 652.21,-348.67"/>
 <polygon fill="black" stroke="black" points="655.29,-346.99 646.95,-340.45 649.39,-350.76 655.29,-346.99"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L127">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L127">
 <text xml:space="preserve" text-anchor="start" x="720.72" y="-436.62" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -593,7 +593,7 @@
 <title>normalize_continuous/4</title>
 <polygon fill="cornsilk" stroke="black" points="399.5,-219.5 224.5,-219.5 224.5,-183.5 399.5,-183.5 399.5,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="232.5" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L152">
+<g id="a_node10_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L152">
 <text xml:space="preserve" text-anchor="start" x="237.75" y="-203.38" font-family="Monospace" font-size="11.00">normalize_continuous/4</text>
 </a>
 </g>
@@ -605,12 +605,12 @@
 <!-- encode_instance/3&#45;&gt;normalize_continuous/4 -->
 <g id="edge9" class="edge">
 <title>encode_instance/3&#45;&gt;normalize_continuous/4</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L132" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L132" xlink:title="calls">
 <path fill="none" stroke="black" d="M564.03,-310.55C517.34,-302.79 455.68,-289.25 404.75,-266.75 381.56,-256.5 358.11,-240.19 340.59,-226.57"/>
 <polygon fill="black" stroke="black" points="343.19,-224.17 333.18,-220.68 338.83,-229.65 343.19,-224.17"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L132">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="404.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -620,7 +620,7 @@
 <title>one_hot_encode/3</title>
 <polygon fill="cornsilk" stroke="black" points="615.25,-219.5 480.75,-219.5 480.75,-183.5 615.25,-183.5 615.25,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="488.75" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L159">
+<g id="a_node11_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L159">
 <text xml:space="preserve" text-anchor="start" x="494" y="-203.38" font-family="Monospace" font-size="11.00">one_hot_encode/3</text>
 </a>
 </g>
@@ -632,12 +632,12 @@
 <!-- encode_instance/3&#45;&gt;one_hot_encode/3 -->
 <g id="edge11" class="edge">
 <title>encode_instance/3&#45;&gt;one_hot_encode/3</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L142" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L142" xlink:title="calls">
 <path fill="none" stroke="black" d="M622.16,-302.45C607.77,-283.05 584.27,-251.38 567.58,-228.89"/>
 <polygon fill="black" stroke="black" points="570.56,-227.03 561.79,-221.09 564.94,-231.2 570.56,-227.03"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L142">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="594.11" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -647,7 +647,7 @@
 <title>missing_one_hot_encode/2</title>
 <polygon fill="cornsilk" stroke="black" points="206.25,-219.5 17.75,-219.5 17.75,-183.5 206.25,-183.5 206.25,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="25.75" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L171">
+<g id="a_node13_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="31" y="-203.38" font-family="Monospace" font-size="11.00">missing_one_hot_encode/2</text>
 </a>
 </g>
@@ -659,12 +659,12 @@
 <!-- encode_instance/3&#45;&gt;missing_one_hot_encode/2 -->
 <g id="edge12" class="edge">
 <title>encode_instance/3&#45;&gt;missing_one_hot_encode/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L142" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L142" xlink:title="calls">
 <path fill="none" stroke="black" d="M564.13,-307.72C507.52,-297.76 426.26,-282.71 355.75,-266.75 297.74,-253.62 232.62,-236.32 184.29,-222.98"/>
 <polygon fill="black" stroke="black" points="185.35,-219.64 174.77,-220.34 183.48,-226.39 185.35,-219.64"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L142">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="355.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -674,7 +674,7 @@
 <title>check_categorical_value/3</title>
 <polygon fill="cornsilk" stroke="black" points="890.62,-219.5 695.38,-219.5 695.38,-183.5 890.62,-183.5 890.62,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="703.38" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L175">
+<g id="a_node14_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="708.62" y="-203.38" font-family="Monospace" font-size="11.00">check_categorical_value/3</text>
 </a>
 </g>
@@ -686,12 +686,12 @@
 <!-- encode_instance/3&#45;&gt;check_categorical_value/3 -->
 <g id="edge10" class="edge">
 <title>encode_instance/3&#45;&gt;check_categorical_value/3</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L142" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L142" xlink:title="calls">
 <path fill="none" stroke="black" d="M658.31,-302.45C685.39,-282.36 730.21,-249.1 760.64,-226.51"/>
 <polygon fill="black" stroke="black" points="762.43,-229.54 768.38,-220.77 758.26,-223.92 762.43,-229.54"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L142">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="718.74" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -699,12 +699,12 @@
 <!-- encode_instance/3&#45;&gt;list::memberchk/2 -->
 <g id="edge38" class="edge">
 <title>encode_instance/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L132" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L132" xlink:title="calls">
 <path fill="none" stroke="black" d="M634.26,-302.41C633.9,-275.06 636.52,-221.15 659.75,-183.5 680.57,-149.74 717.28,-123.4 746.9,-106.21"/>
 <polygon fill="black" stroke="black" points="748.32,-109.43 755.32,-101.48 744.89,-103.33 748.32,-109.43"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L132">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="659.75" y="-198.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -726,12 +726,12 @@
 <!-- encode_instance/3&#45;&gt;list::append/3 -->
 <g id="edge39" class="edge">
 <title>encode_instance/3&#45;&gt;list::append/3</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L142" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L142" xlink:title="calls">
 <path fill="none" stroke="black" d="M572.85,-302.33C530.61,-287.26 476.93,-261.18 445.75,-219.5 422.24,-188.07 417.4,-141.6 417,-111.88"/>
 <polygon fill="black" stroke="black" points="420.5,-112.15 417.04,-102.14 413.5,-112.12 420.5,-112.15"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L142">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="445.75" y="-198.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -741,7 +741,7 @@
 <title>one_hot_encode_/3</title>
 <polygon fill="cornsilk" stroke="black" points="637.62,-100.25 496.38,-100.25 496.38,-64.25 637.62,-64.25 637.62,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="504.38" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L163">
+<g id="a_node12_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L163">
 <text xml:space="preserve" text-anchor="start" x="509.62" y="-84.12" font-family="Monospace" font-size="11.00">one_hot_encode_/3</text>
 </a>
 </g>
@@ -753,12 +753,12 @@
 <!-- one_hot_encode/3&#45;&gt;one_hot_encode_/3 -->
 <g id="edge13" class="edge">
 <title>one_hot_encode/3&#45;&gt;one_hot_encode_/3</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L159" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L159" xlink:title="calls">
 <path fill="none" stroke="black" d="M550.8,-183.2C553.85,-164.41 558.76,-134.09 562.38,-111.77"/>
 <polygon fill="black" stroke="black" points="565.8,-112.55 563.94,-102.12 558.89,-111.43 565.8,-112.55"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L159">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L159">
 <text xml:space="preserve" text-anchor="start" x="558.07" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -766,12 +766,12 @@
 <!-- one_hot_encode/3&#45;&gt;list::append/3 -->
 <g id="edge40" class="edge">
 <title>one_hot_encode/3&#45;&gt;list::append/3</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L159" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L159" xlink:title="calls">
 <path fill="none" stroke="black" d="M528.82,-183.2C506.83,-163.37 470.62,-130.7 445.6,-108.14"/>
 <polygon fill="black" stroke="black" points="448.15,-105.73 438.38,-101.64 443.47,-110.93 448.15,-105.73"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L159">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L159">
 <text xml:space="preserve" text-anchor="start" x="486.9" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -781,7 +781,7 @@
 <title>zero_vector_from_values/2</title>
 <polygon fill="cornsilk" stroke="black" points="213.62,-100.25 18.38,-100.25 18.38,-64.25 213.62,-64.25 213.62,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="26.38" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L181">
+<g id="a_node15_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L181">
 <text xml:space="preserve" text-anchor="start" x="31.62" y="-84.12" font-family="Monospace" font-size="11.00">zero_vector_from_values/2</text>
 </a>
 </g>
@@ -793,12 +793,12 @@
 <!-- missing_one_hot_encode/2&#45;&gt;zero_vector_from_values/2 -->
 <g id="edge14" class="edge">
 <title>missing_one_hot_encode/2&#45;&gt;zero_vector_from_values/2</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L171" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L171" xlink:title="calls">
 <path fill="none" stroke="black" d="M112.59,-183.2C113.23,-164.5 114.26,-134.37 115.02,-112.08"/>
 <polygon fill="black" stroke="black" points="118.51,-112.25 115.36,-102.13 111.52,-112.01 118.51,-112.25"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L171">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="114.12" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -806,12 +806,12 @@
 <!-- missing_one_hot_encode/2&#45;&gt;list::append/3 -->
 <g id="edge41" class="edge">
 <title>missing_one_hot_encode/2&#45;&gt;list::append/3</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L171" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L171" xlink:title="calls">
 <path fill="none" stroke="black" d="M157.48,-183.07C211.95,-162.2 303.17,-127.25 361.94,-104.73"/>
 <polygon fill="black" stroke="black" points="363.02,-108.06 371.11,-101.22 360.52,-101.53 363.02,-108.06"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L171">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="274.18" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -819,12 +819,12 @@
 <!-- check_categorical_value/3&#45;&gt;list::memberchk/2 -->
 <g id="edge42" class="edge">
 <title>check_categorical_value/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L175" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L175" xlink:title="calls">
 <path fill="none" stroke="black" d="M793,-183.2C793,-164.5 793,-134.37 793,-112.08"/>
 <polygon fill="black" stroke="black" points="796.5,-112.14 793,-102.14 789.5,-112.14 796.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L175">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="793" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -832,12 +832,12 @@
 <!-- encoders_feature_count/2&#45;&gt;list::length/2 -->
 <g id="edge43" class="edge">
 <title>encoders_feature_count/2&#45;&gt;list::length/2</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L190" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L190" xlink:title="calls">
 <path fill="none" stroke="black" d="M1012.64,-493.53C1008.68,-442.62 997.12,-294.06 992.23,-231.16"/>
 <polygon fill="black" stroke="black" points="995.73,-230.99 991.46,-221.29 988.75,-231.53 995.73,-230.99"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L190">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L190">
 <text xml:space="preserve" text-anchor="start" x="1003.96" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -847,7 +847,7 @@
 <title>optimize_model/7</title>
 <polygon fill="cornsilk" stroke="black" points="1362.25,-458 1227.75,-458 1227.75,-422 1362.25,-422 1362.25,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1235.75" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L199">
+<g id="a_node18_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L199">
 <text xml:space="preserve" text-anchor="start" x="1241" y="-441.88" font-family="Monospace" font-size="11.00">optimize_model/7</text>
 </a>
 </g>
@@ -859,12 +859,12 @@
 <!-- train_model/5&#45;&gt;optimize_model/7 -->
 <g id="edge16" class="edge">
 <title>train_model/5&#45;&gt;optimize_model/7</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L195" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L195" xlink:title="calls">
 <path fill="none" stroke="black" d="M1161.64,-565.59C1188.45,-540.54 1238.03,-494.22 1268.6,-465.66"/>
 <polygon fill="black" stroke="black" points="1270.66,-468.53 1275.58,-459.14 1265.88,-463.41 1270.66,-468.53"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L195">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L195">
 <text xml:space="preserve" text-anchor="start" x="1237.08" y="-508.62" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -874,7 +874,7 @@
 <title>zero_vector/2</title>
 <polygon fill="cornsilk" stroke="black" points="1200.12,-458 1085.88,-458 1085.88,-422 1200.12,-422 1200.12,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1093.88" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node23_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L249">
+<g id="a_node23_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L249">
 <text xml:space="preserve" text-anchor="start" x="1099.12" y="-441.88" font-family="Monospace" font-size="11.00">zero_vector/2</text>
 </a>
 </g>
@@ -886,12 +886,12 @@
 <!-- train_model/5&#45;&gt;zero_vector/2 -->
 <g id="edge15" class="edge">
 <title>train_model/5&#45;&gt;zero_vector/2</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L195" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L195" xlink:title="calls">
 <path fill="none" stroke="black" d="M1143,-565.59C1143,-541.61 1143,-498.14 1143,-469.42"/>
 <polygon fill="black" stroke="black" points="1146.5,-469.62 1143,-459.62 1139.5,-469.62 1146.5,-469.62"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L195">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L195">
 <text xml:space="preserve" text-anchor="start" x="1143" y="-508.62" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -901,7 +901,7 @@
 <title>update_parameters/7</title>
 <polygon fill="cornsilk" stroke="black" points="1372.38,-338.75 1217.62,-338.75 1217.62,-302.75 1372.38,-302.75 1372.38,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1225.62" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L214">
+<g id="a_node19_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L214">
 <text xml:space="preserve" text-anchor="start" x="1230.88" y="-322.62" font-family="Monospace" font-size="11.00">update_parameters/7</text>
 </a>
 </g>
@@ -913,12 +913,12 @@
 <!-- optimize_model/7&#45;&gt;update_parameters/7 -->
 <g id="edge17" class="edge">
 <title>optimize_model/7&#45;&gt;update_parameters/7</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L199" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L199" xlink:title="calls">
 <path fill="none" stroke="black" d="M1295,-421.7C1295,-403 1295,-372.87 1295,-350.58"/>
 <polygon fill="black" stroke="black" points="1298.5,-350.64 1295,-340.64 1291.5,-350.64 1298.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L199">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L199">
 <text xml:space="preserve" text-anchor="start" x="1295" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -926,12 +926,12 @@
 <!-- optimize_model/7&#45;&gt;^^option/2 -->
 <g id="edge30" class="edge">
 <title>optimize_model/7&#45;&gt;^^option/2</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L199" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L199" xlink:title="calls">
 <path fill="none" stroke="black" d="M1319.49,-421.61C1378.18,-379.92 1527,-274.23 1594.18,-226.52"/>
 <polygon fill="black" stroke="black" points="1596.12,-229.44 1602.24,-220.79 1592.06,-223.73 1596.12,-229.44"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L199">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L199">
 <text xml:space="preserve" text-anchor="start" x="1483.64" y="-317.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -941,7 +941,7 @@
 <title>accumulate_gradients/7</title>
 <polygon fill="cornsilk" stroke="black" points="1562.5,-219.5 1387.5,-219.5 1387.5,-183.5 1562.5,-183.5 1562.5,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1395.5" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L227">
+<g id="a_node20_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L227">
 <text xml:space="preserve" text-anchor="start" x="1400.75" y="-203.38" font-family="Monospace" font-size="11.00">accumulate_gradients/7</text>
 </a>
 </g>
@@ -953,12 +953,12 @@
 <!-- update_parameters/7&#45;&gt;accumulate_gradients/7 -->
 <g id="edge19" class="edge">
 <title>update_parameters/7&#45;&gt;accumulate_gradients/7</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L214" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L214" xlink:title="calls">
 <path fill="none" stroke="black" d="M1321.56,-302.45C1352.67,-282.19 1404.35,-248.52 1439.03,-225.93"/>
 <polygon fill="black" stroke="black" points="1440.59,-229.09 1447.06,-220.7 1436.77,-223.22 1440.59,-229.09"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L214">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L214">
 <text xml:space="preserve" text-anchor="start" x="1390.4" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -968,7 +968,7 @@
 <title>update_weights/8</title>
 <polygon fill="cornsilk" stroke="black" points="1203.25,-219.5 1068.75,-219.5 1068.75,-183.5 1203.25,-183.5 1203.25,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1076.75" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node22_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L241">
+<g id="a_node22_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L241">
 <text xml:space="preserve" text-anchor="start" x="1082" y="-203.38" font-family="Monospace" font-size="11.00">update_weights/8</text>
 </a>
 </g>
@@ -980,12 +980,12 @@
 <!-- update_parameters/7&#45;&gt;update_weights/8 -->
 <g id="edge20" class="edge">
 <title>update_parameters/7&#45;&gt;update_weights/8</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L214" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L214" xlink:title="calls">
 <path fill="none" stroke="black" d="M1271.54,-302.45C1244.3,-282.36 1199.19,-249.1 1168.56,-226.51"/>
 <polygon fill="black" stroke="black" points="1170.9,-223.89 1160.78,-220.77 1166.75,-229.52 1170.9,-223.89"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L214">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L214">
 <text xml:space="preserve" text-anchor="start" x="1220.27" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -995,7 +995,7 @@
 <title>zero_vector_like/2</title>
 <polygon fill="cornsilk" stroke="black" points="1369,-219.5 1221,-219.5 1221,-183.5 1369,-183.5 1369,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1229" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node24_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L256" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L256">
+<g id="a_node24_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L256" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L256">
 <text xml:space="preserve" text-anchor="start" x="1234.25" y="-203.38" font-family="Monospace" font-size="11.00">zero_vector_like/2</text>
 </a>
 </g>
@@ -1007,12 +1007,12 @@
 <!-- update_parameters/7&#45;&gt;zero_vector_like/2 -->
 <g id="edge18" class="edge">
 <title>update_parameters/7&#45;&gt;zero_vector_like/2</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L214" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L214" xlink:title="calls">
 <path fill="none" stroke="black" d="M1295,-302.45C1295,-283.75 1295,-253.62 1295,-231.33"/>
 <polygon fill="black" stroke="black" points="1298.5,-231.39 1295,-221.39 1291.5,-231.39 1298.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L214">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L214">
 <text xml:space="preserve" text-anchor="start" x="1295" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1020,12 +1020,12 @@
 <!-- update_parameters/7&#45;&gt;list::length/2 -->
 <g id="edge44" class="edge">
 <title>update_parameters/7&#45;&gt;list::length/2</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L214" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L214" xlink:title="calls">
 <path fill="none" stroke="black" d="M1217.21,-307.54C1175.77,-299.29 1124.63,-286.27 1081.75,-266.75 1059.2,-256.48 1036.37,-240.52 1019.13,-227.08"/>
 <polygon fill="black" stroke="black" points="1021.34,-224.37 1011.34,-220.86 1016.97,-229.84 1021.34,-224.37"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L214">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L214">
 <text xml:space="preserve" text-anchor="start" x="1081.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1033,12 +1033,12 @@
 <!-- update_parameters/7&#45;&gt;^^option/2 -->
 <g id="edge31" class="edge">
 <title>update_parameters/7&#45;&gt;^^option/2</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L214" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L214" xlink:title="calls">
 <path fill="none" stroke="black" d="M1344.49,-302.32C1404.7,-281.13 1506.16,-245.4 1569.98,-222.93"/>
 <polygon fill="black" stroke="black" points="1570.96,-226.29 1579.23,-219.67 1568.64,-219.69 1570.96,-226.29"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L214">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L214">
 <text xml:space="preserve" text-anchor="start" x="1471.48" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1048,7 +1048,7 @@
 <title>add_scaled_vector/4</title>
 <polygon fill="cornsilk" stroke="black" points="1552.38,-100.25 1397.62,-100.25 1397.62,-64.25 1552.38,-64.25 1552.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1405.62" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node21_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L236" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L236">
+<g id="a_node21_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L236" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L236">
 <text xml:space="preserve" text-anchor="start" x="1410.88" y="-84.12" font-family="Monospace" font-size="11.00">add_scaled_vector/4</text>
 </a>
 </g>
@@ -1060,12 +1060,12 @@
 <!-- accumulate_gradients/7&#45;&gt;add_scaled_vector/4 -->
 <g id="edge21" class="edge">
 <title>accumulate_gradients/7&#45;&gt;add_scaled_vector/4</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L228" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L228" xlink:title="calls">
 <path fill="none" stroke="black" d="M1475,-183.2C1475,-164.5 1475,-134.37 1475,-112.08"/>
 <polygon fill="black" stroke="black" points="1478.5,-112.14 1475,-102.14 1471.5,-112.14 1478.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L228">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L228">
 <text xml:space="preserve" text-anchor="start" x="1475" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1073,12 +1073,12 @@
 <!-- accumulate_gradients/7&#45;&gt;numberlist::scalar_product/3 -->
 <g id="edge45" class="edge">
 <title>accumulate_gradients/7&#45;&gt;numberlist::scalar_product/3</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L228" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L228" xlink:title="calls">
 <path fill="none" stroke="black" d="M1423.87,-183.07C1362.26,-162.07 1258.82,-126.81 1192.79,-104.31"/>
 <polygon fill="black" stroke="black" points="1194.16,-101.08 1183.56,-101.17 1191.9,-107.7 1194.16,-101.08"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L228">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L228">
 <text xml:space="preserve" text-anchor="start" x="1313.31" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1088,7 +1088,7 @@
 <title>regressor_term_template/2</title>
 <polygon fill="cornsilk" stroke="black" points="1639.62,-721.25 1444.38,-721.25 1444.38,-685.25 1639.62,-685.25 1639.62,-721.25"/>
 <text xml:space="preserve" text-anchor="start" x="1452.38" y="-705.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node25_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L263" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L263">
+<g id="a_node25_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L263" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L263">
 <text xml:space="preserve" text-anchor="start" x="1457.62" y="-705.12" font-family="Monospace" font-size="11.00">regressor_term_template/2</text>
 </a>
 </g>
@@ -1102,7 +1102,7 @@
 <title>export_to_clauses/4</title>
 <polygon fill="cornsilk" stroke="black" points="1837.38,-721.25 1682.62,-721.25 1682.62,-685.25 1837.38,-685.25 1837.38,-721.25"/>
 <text xml:space="preserve" text-anchor="start" x="1690.62" y="-705.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node26_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L265">
+<g id="a_node26_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L265">
 <text xml:space="preserve" text-anchor="start" x="1695.88" y="-705.12" font-family="Monospace" font-size="11.00">export_to_clauses/4</text>
 </a>
 </g>
@@ -1116,7 +1116,7 @@
 <title>print_regressor/1</title>
 <polygon fill="cornsilk" stroke="black" points="2009.62,-721.25 1868.38,-721.25 1868.38,-685.25 2009.62,-685.25 2009.62,-721.25"/>
 <text xml:space="preserve" text-anchor="start" x="1876.38" y="-705.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node27_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L269">
+<g id="a_node27_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L269">
 <text xml:space="preserve" text-anchor="start" x="1881.62" y="-705.12" font-family="Monospace" font-size="11.00">print_regressor/1</text>
 </a>
 </g>
@@ -1128,12 +1128,12 @@
 <!-- print_regressor/1&#45;&gt;print_options/1 -->
 <g id="edge22" class="edge">
 <title>print_regressor/1&#45;&gt;print_options/1</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L269" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L269" xlink:title="calls">
 <path fill="none" stroke="black" d="M1941.21,-684.95C1943.62,-666.16 1947.5,-635.84 1950.35,-613.52"/>
 <polygon fill="black" stroke="black" points="1953.79,-614.24 1951.59,-603.87 1946.84,-613.35 1953.79,-614.24"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L269">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L269">
 <text xml:space="preserve" text-anchor="start" x="1946.95" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1143,7 +1143,7 @@
 <title>print_encoders/1</title>
 <polygon fill="cornsilk" stroke="black" points="2170.25,-602 2035.75,-602 2035.75,-566 2170.25,-566 2170.25,-602"/>
 <text xml:space="preserve" text-anchor="start" x="2043.75" y="-586.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node28_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L283">
+<g id="a_node28_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L283">
 <text xml:space="preserve" text-anchor="start" x="2049" y="-585.88" font-family="Monospace" font-size="11.00">print_encoders/1</text>
 </a>
 </g>
@@ -1155,12 +1155,12 @@
 <!-- print_regressor/1&#45;&gt;print_encoders/1 -->
 <g id="edge23" class="edge">
 <title>print_regressor/1&#45;&gt;print_encoders/1</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L269" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L269" xlink:title="calls">
 <path fill="none" stroke="black" d="M1963.2,-684.95C1991.3,-664.86 2037.82,-631.6 2069.41,-609.01"/>
 <polygon fill="black" stroke="black" points="2071.37,-611.92 2077.47,-603.25 2067.3,-606.22 2071.37,-611.92"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L269">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L269">
 <text xml:space="preserve" text-anchor="start" x="2025.92" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1168,12 +1168,12 @@
 <!-- print_regressor/1&#45;&gt;format::format/2 -->
 <g id="edge46" class="edge">
 <title>print_regressor/1&#45;&gt;format::format/2</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L269" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L269" xlink:title="calls">
 <path fill="none" stroke="black" d="M1868.84,-684.83C1779.77,-662 1635.78,-622.49 1620.75,-602 1611.29,-589.1 1611.64,-579.15 1620.75,-566 1677.69,-483.83 1795.77,-455.59 1874.96,-445.94"/>
 <polygon fill="black" stroke="black" points="1875.31,-449.42 1884.85,-444.82 1874.52,-442.47 1875.31,-449.42"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L269">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L269">
 <text xml:space="preserve" text-anchor="start" x="1620.75" y="-580.62" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1192,12 +1192,12 @@
 <!-- print_regressor/1&#45;&gt;^^print_regressor_template/1 -->
 <g id="edge32" class="edge">
 <title>print_regressor/1&#45;&gt;^^print_regressor_template/1</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L269" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L269" xlink:title="calls">
 <path fill="none" stroke="black" d="M1913.18,-684.95C1883.06,-664.77 1833.12,-631.31 1799.4,-608.72"/>
 <polygon fill="black" stroke="black" points="1801.44,-605.87 1791.19,-603.21 1797.54,-611.69 1801.44,-605.87"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L269">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L269">
 <text xml:space="preserve" text-anchor="start" x="1856.75" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1205,12 +1205,12 @@
 <!-- print_encoders/1&#45;&gt;format::format/2 -->
 <g id="edge48" class="edge">
 <title>print_encoders/1&#45;&gt;format::format/2</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L284" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L284" xlink:title="calls">
 <path fill="none" stroke="black" d="M2084.73,-565.59C2058.56,-540.65 2010.26,-494.62 1980.26,-466.03"/>
 <polygon fill="black" stroke="black" points="1982.7,-463.52 1973.05,-459.16 1977.87,-468.59 1982.7,-463.52"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L284" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L284">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L284" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L284">
 <text xml:space="preserve" text-anchor="start" x="2046.23" y="-508.62" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1220,7 +1220,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="2168.25,-721.25 2033.75,-721.25 2033.75,-685.25 2168.25,-685.25 2168.25,-721.25"/>
 <text xml:space="preserve" text-anchor="start" x="2041.75" y="-705.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node29_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L292" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L292">
+<g id="a_node29_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L292" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L292">
 <text xml:space="preserve" text-anchor="start" x="2047" y="-705.12" font-family="Monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -1234,7 +1234,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="2310.5,-721.25 2189.5,-721.25 2189.5,-685.25 2310.5,-685.25 2310.5,-721.25"/>
 <text xml:space="preserve" text-anchor="start" x="2197.5" y="-705.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node30_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L298" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L298">
+<g id="a_node30_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L298" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L298">
 <text xml:space="preserve" text-anchor="start" x="2202.75" y="-705.12" font-family="Monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -1260,12 +1260,12 @@
 <!-- valid_option/1&#45;&gt;type::valid/2 -->
 <g id="edge49" class="edge">
 <title>valid_option/1&#45;&gt;type::valid/2</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L298" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L298" xlink:title="calls">
 <path fill="none" stroke="black" d="M2250,-684.95C2250,-666.25 2250,-636.12 2250,-613.83"/>
 <polygon fill="black" stroke="black" points="2253.5,-613.89 2250,-603.89 2246.5,-613.89 2253.5,-613.89"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L298" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5cb0d9ac97a8ca187e20a3cdc67655ec603cbce9/library/linear_regression/linear_regression.lgt#L298">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L298" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b48b062f38b015cfe09a2494c628d2f392d4373/library/linear_regression/linear_regression.lgt#L298">
 <text xml:space="preserve" text-anchor="start" x="2250" y="-640.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
