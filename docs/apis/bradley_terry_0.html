@@ -294,7 +294,7 @@
   <p class="right" id="bradley-terry-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="bradley-terry">
 <h1><code class="docutils literal notranslate"><span class="pre">bradley_terry</span></code><a class="headerlink" href="#bradley-terry" title="Link to this heading"></a></h1>
-<p>Bradley-Terry pairwise preference ranker. Learns one positive strength parameter per item from a connected dataset object implementing the <code class="docutils literal notranslate"><span class="pre">pairwise_ranking_dataset_protocol</span></code> protocol and returns a self-describing ranker term with diagnostics that can be used for ranking and export.</p>
+<p>Bradley-Terry pairwise preference ranker. Learns one positive strength parameter per item from a dataset object implementing the <code class="docutils literal notranslate"><span class="pre">pairwise_ranking_dataset_protocol</span></code> protocol when the directed win graph admits a finite Bradley-Terry maximum-likelihood estimate, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -304,7 +304,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 2:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-20</div>
+<div class="line"><strong>Date:</strong> 2026-04-24</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -321,8 +321,11 @@
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
+<div class="line"><a class="reference internal" href="avltree_0.html#avltree-0"><span class="std std-ref">avltree</span></a></div>
 <div class="line"><a class="reference internal" href="format_0.html#format-0"><span class="std std-ref">format</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="numberlist_0.html#numberlist-0"><span class="std std-ref">numberlist</span></a></div>
+<div class="line"><a class="reference internal" href="pairs_0.html#pairs-0"><span class="std std-ref">pairs</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -331,7 +334,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Algorithm: Uses a deterministic minorization-maximization update to estimate one relative strength parameter per item from weighted pairwise wins and losses.</p></li>
-<li><p>Dataset requirements: The training dataset must declare each ranked item once, enumerate positive-weight pairwise preferences between distinct declared items, and induce a connected comparison graph.</p></li>
+<li><p>Dataset requirements: The training dataset must declare each ranked item once, enumerate positive-weight pairwise preferences between distinct declared items, induce a connected undirected comparison graph, and induce a strongly connected directed win graph so that a finite Bradley-Terry maximum-likelihood estimate exists.</p></li>
 <li><p>Ranker representation: The learned ranker is represented by default as <code class="docutils literal notranslate"><span class="pre">bt_ranker(Items,</span> <span class="pre">Strengths,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Strengths</span></code> stores <code class="docutils literal notranslate"><span class="pre">Item-Strength</span></code> pairs and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores metadata such as convergence status, iteration count, and dataset summary.</p></li>
 </ul>
 </div></blockquote>

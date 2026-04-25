@@ -8,14 +8,14 @@
 ``bradley_terry``
 =================
 
-Bradley-Terry pairwise preference ranker. Learns one positive strength parameter per item from a connected dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol and returns a self-describing ranker term with diagnostics that can be used for ranking and export.
+Bradley-Terry pairwise preference ranker. Learns one positive strength parameter per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol when the directed win graph admits a finite Bradley-Terry maximum-likelihood estimate, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.
 
 | **Availability:** 
 |    ``logtalk_load(bradley_terry(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
-| **Date:** 2026-04-20
+| **Date:** 2026-04-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -26,13 +26,16 @@ Bradley-Terry pairwise preference ranker. Learns one positive strength parameter
 |    ``public`` :ref:`ranking_dataset_common <ranking_dataset_common/0>`
 |    ``public`` :ref:`ranker_common <ranker_common/0>`
 | **Uses:**
+|    :ref:`avltree <avltree/0>`
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`pairs <pairs/0>`
 
 | **Remarks:**
 
    - Algorithm: Uses a deterministic minorization-maximization update to estimate one relative strength parameter per item from weighted pairwise wins and losses.
-   - Dataset requirements: The training dataset must declare each ranked item once, enumerate positive-weight pairwise preferences between distinct declared items, and induce a connected comparison graph.
+   - Dataset requirements: The training dataset must declare each ranked item once, enumerate positive-weight pairwise preferences between distinct declared items, induce a connected undirected comparison graph, and induce a strongly connected directed win graph so that a finite Bradley-Terry maximum-likelihood estimate exists.
    - Ranker representation: The learned ranker is represented by default as ``bt_ranker(Items, Strengths, Diagnostics)`` where ``Strengths`` stores ``Item-Strength`` pairs and ``Diagnostics`` stores metadata such as convergence status, iteration count, and dataset summary.
 
 | **Inherited public predicates:**

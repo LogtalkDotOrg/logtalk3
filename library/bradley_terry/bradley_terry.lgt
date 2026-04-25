@@ -25,11 +25,11 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
-		comment is 'Bradley-Terry pairwise preference ranker. Learns one positive strength parameter per item from a connected dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
+		date is 2026-04-24,
+		comment is 'Bradley-Terry pairwise preference ranker. Learns one positive strength parameter per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol when the directed win graph admits a finite Bradley-Terry maximum-likelihood estimate, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		remarks is [
 			'Algorithm' - 'Uses a deterministic minorization-maximization update to estimate one relative strength parameter per item from weighted pairwise wins and losses.',
-			'Dataset requirements' - 'The training dataset must declare each ranked item once, enumerate positive-weight pairwise preferences between distinct declared items, and induce a connected comparison graph.',
+			'Dataset requirements' - 'The training dataset must declare each ranked item once, enumerate positive-weight pairwise preferences between distinct declared items, induce a connected undirected comparison graph, and induce a strongly connected directed win graph so that a finite Bradley-Terry maximum-likelihood estimate exists.',
 			'Ranker representation' - 'The learned ranker is represented by default as ``bt_ranker(Items, Strengths, Diagnostics)`` where ``Strengths`` stores ``Item-Strength`` pairs and ``Diagnostics`` stores metadata such as convergence status, iteration count, and dataset summary.'
 		],
 		see_also is [pairwise_ranking_dataset_protocol, ranking_dataset_protocol, ranker_protocol]
@@ -53,8 +53,24 @@
 		format/2
 	]).
 
+	:- uses(avltree, [
+		as_dictionary/2,
+		as_list/2 as dictionary_as_list/2,
+		insert/4 as dictionary_insert/4,
+		lookup/3 as dictionary_lookup/3,
+		new/1 as dictionary_new/1
+	]).
+
 	:- uses(list, [
-		length/2, member/2, memberchk/2, sort/4
+		keysort/2, length/2, member/2, reverse/2, sort/4
+	]).
+
+	:- uses(numberlist, [
+		sum/2
+	]).
+
+	:- uses(pairs, [
+		values/2 as pairs_values/2
 	]).
 
 	learn(Dataset, Ranker) :-
@@ -66,10 +82,17 @@
 		^^validate_pairwise_dataset(Dataset, DatasetSummary),
 		^^pairwise_dataset_items(Dataset, Items),
 		^^pairwise_dataset_preferences(Dataset, Preferences),
-		initial_strengths(Items, Strengths0),
+		length(Items, Count),
+		index_items(Items, 1, IndexPairs),
+		as_dictionary(IndexPairs, IndexDictionary),
+		preprocess_preferences(Preferences, IndexDictionary, DirectedAdjacency0, ReverseAdjacency0, WinWeights0, PairAdjacency0),
+		validate_bradley_terry_dataset(Count, DirectedAdjacency0, ReverseAdjacency0),
+		build_dataset_model(Count, WinWeights0, PairAdjacency0, PairWeights, Wins),
+		initial_strengths(Items, StrengthValues0),
 		^^option(maximum_iterations(MaximumIterations), Options),
 		^^option(tolerance(Tolerance), Options),
-		optimize_strengths(MaximumIterations, Tolerance, Items, Preferences, Strengths0, Strengths, Status, Iterations, FinalDifference),
+		optimize_strengths(MaximumIterations, Tolerance, PairWeights, Wins, StrengthValues0, StrengthValues, Status, Iterations, FinalDifference),
+		strength_pairs(Items, StrengthValues, Strengths),
 		Ranker = bt_ranker(Items, Strengths, [
 			model(bradley_terry),
 			options(Options),
@@ -80,9 +103,12 @@
 		]).
 
 	rank(Ranker, Candidates, Ranking) :-
-		ranker_data(Ranker, Items, Strengths, _Diagnostics),
-		validate_candidates(Candidates, Items),
-		rank_candidates(Strengths, Candidates, Ranking).
+		ranker_data(Ranker, _Items, Strengths, _Diagnostics),
+		as_dictionary(Strengths, StrengthDictionary),
+		dictionary_new(SeenCandidates),
+		rank_candidate_pairs(Candidates, StrengthDictionary, SeenCandidates, Candidates, Pairs),
+		sort(1, @=<, Pairs, SortedPairs),
+		pairs_values(SortedPairs, Ranking).
 
 	strengths(Ranker, Strengths) :-
 		ranker_data(Ranker, _Items, Strengths, _Diagnostics).
@@ -110,18 +136,242 @@
 		format('Diagnostics: ~q~n', [Diagnostics]).
 
 	ranker_data(Ranker, Items, Strengths, Diagnostics) :-
-		Ranker =.. [_Functor, Items, Strengths, Diagnostics].
+		(   var(Ranker) ->
+			instantiation_error
+		;   Ranker = bt_ranker(Items, Strengths, Diagnostics),
+			valid_ranker_data(Items, Strengths) ->
+			true
+		;   domain_error(bradley_terry_ranker, Ranker)
+		).
+
+	valid_ranker_data(Items, Strengths) :-
+		proper_item_list(Items),
+		strength_pairs_values(Items, Strengths, _Values).
+
+	proper_item_list(Items) :-
+		proper_item_list(Items, []).
+
+	proper_item_list(Items, _Seen) :-
+		var(Items),
+		!,
+		fail.
+	proper_item_list([], _Seen).
+	proper_item_list([Item| Items], Seen) :-
+		nonvar(Item),
+		\+ member(Item, Seen),
+		proper_item_list(Items, [Item| Seen]).
+
+	strength_pairs_values([], [], []).
+	strength_pairs_values([Item| Items], [StrengthItem-Strength| Strengths], [Strength| Values]) :-
+		Item == StrengthItem,
+		number(Strength),
+		Strength > 0.0,
+		strength_pairs_values(Items, Strengths, Values).
 
 	initial_strengths(Items, Strengths) :-
 		length(Items, Count),
 		Strength is 1.0 / Count,
-		findall(Item-Strength, member(Item, Items), Strengths).
+		fill_strengths(Count, Strength, Strengths).
 
-	optimize_strengths(MaximumIterations, Tolerance, Items, Preferences, Strengths0, Strengths, Status, Iterations, FinalDifference) :-
-		optimize_strengths(0, MaximumIterations, Tolerance, Items, Preferences, Strengths0, Strengths, Status, Iterations, FinalDifference).
+	fill_strengths(0, _Strength, []) :-
+		!.
+	fill_strengths(Count, Strength, [Strength| Strengths]) :-
+		Count > 0,
+		NextCount is Count - 1,
+		fill_strengths(NextCount, Strength, Strengths).
 
-	optimize_strengths(Iteration0, MaximumIterations, Tolerance, Items, Preferences, Strengths0, Strengths, Status, Iterations, FinalDifference) :-
-		update_strengths(Items, Preferences, Strengths0, Strengths1, MaximumDifference),
+	strength_pairs([], [], []).
+	strength_pairs([Item| Items], [Strength| Values], [Item-Strength| Strengths]) :-
+		strength_pairs(Items, Values, Strengths).
+
+	build_dataset_model(Count, WinWeights0, PairAdjacency0, PairWeights, Wins) :-
+		dictionary_as_list(WinWeights0, WinEntries),
+		fill_weight_vector(1, Count, WinEntries, Wins),
+		dictionary_as_list(PairAdjacency0, PairAdjacencyEntries),
+		fill_weighted_adjacency(1, Count, PairAdjacencyEntries, PairWeights).
+
+	index_items([], _Index, []).
+	index_items([Item| Items], Index, [Item-Index| Indices]) :-
+		NextIndex is Index + 1,
+		index_items(Items, NextIndex, Indices).
+
+	preprocess_preferences(Preferences, IndexDictionary, DirectedAdjacency, ReverseAdjacency, WinWeights, PairAdjacency) :-
+		dictionary_new(DirectedAdjacency0),
+		dictionary_new(ReverseAdjacency0),
+		dictionary_new(WinWeights0),
+		dictionary_new(PairAdjacency0),
+		preprocess_preferences(Preferences, IndexDictionary, DirectedAdjacency0, DirectedAdjacency, ReverseAdjacency0, ReverseAdjacency, WinWeights0, WinWeights, PairAdjacency0, PairAdjacency).
+
+	preprocess_preferences([], _IndexDictionary, DirectedAdjacency, DirectedAdjacency, ReverseAdjacency, ReverseAdjacency, WinWeights, WinWeights, PairAdjacency, PairAdjacency).
+	preprocess_preferences([p(Winner, Loser, Weight)| Preferences], IndexDictionary, DirectedAdjacency0, DirectedAdjacency, ReverseAdjacency0, ReverseAdjacency, WinWeights0, WinWeights, PairAdjacency0, PairAdjacency) :-
+		dictionary_lookup(Winner, WinnerIndex, IndexDictionary),
+		dictionary_lookup(Loser, LoserIndex, IndexDictionary),
+		ordered_pair(WinnerIndex, LoserIndex, LeftIndex, RightIndex),
+		update_neighbor_dictionary(DirectedAdjacency0, WinnerIndex, LoserIndex, DirectedAdjacency1),
+		update_neighbor_dictionary(ReverseAdjacency0, LoserIndex, WinnerIndex, ReverseAdjacency1),
+		update_weight_dictionary(WinWeights0, WinnerIndex, Weight, WinWeights1),
+		update_pair_adjacency_dictionary(PairAdjacency0, LeftIndex, RightIndex, Weight, PairAdjacency1),
+		preprocess_preferences(Preferences, IndexDictionary, DirectedAdjacency1, DirectedAdjacency, ReverseAdjacency1, ReverseAdjacency, WinWeights1, WinWeights, PairAdjacency1, PairAdjacency).
+
+	update_neighbor_dictionary(Dictionary0, Key, Neighbor, Dictionary) :-
+		(   dictionary_lookup(Key, Neighbors0, Dictionary0) ->
+			Neighbors = [Neighbor| Neighbors0]
+		;   Neighbors = [Neighbor]
+		),
+		dictionary_insert(Dictionary0, Key, Neighbors, Dictionary).
+
+	update_weight_dictionary(Dictionary0, Key, Delta, Dictionary) :-
+		(   dictionary_lookup(Key, Weight0, Dictionary0) ->
+			Weight is Weight0 + Delta
+		;   Weight = Delta
+		),
+		dictionary_insert(Dictionary0, Key, Weight, Dictionary).
+
+	update_pair_adjacency_dictionary(Dictionary0, Left, Right, Delta, Dictionary) :-
+		update_neighbor_weight_dictionary(Dictionary0, Left, Right, Delta, Dictionary1),
+		update_neighbor_weight_dictionary(Dictionary1, Right, Left, Delta, Dictionary).
+
+	update_neighbor_weight_dictionary(Dictionary0, Key, Neighbor, Delta, Dictionary) :-
+		(   dictionary_lookup(Key, NeighborWeights0, Dictionary0) ->
+			true
+		;   dictionary_new(NeighborWeights0)
+		),
+		update_weight_dictionary(NeighborWeights0, Neighbor, Delta, NeighborWeights),
+		dictionary_insert(Dictionary0, Key, NeighborWeights, Dictionary).
+
+	ordered_pair(Left, Right, Left, Right) :-
+		Left < Right,
+		!.
+	ordered_pair(Left, Right, Right, Left).
+
+	fill_weight_vector(Index, Count, _Entries, []) :-
+		Index > Count,
+		!.
+	fill_weight_vector(Index, Count, [Index-Weight| Entries], [Weight| Weights]) :-
+		!,
+		NextIndex is Index + 1,
+		fill_weight_vector(NextIndex, Count, Entries, Weights).
+	fill_weight_vector(Index, Count, Entries, [0.0| Weights]) :-
+		NextIndex is Index + 1,
+		fill_weight_vector(NextIndex, Count, Entries, Weights).
+
+	fill_weighted_adjacency(Index, Count, _Entries, []) :-
+		Index > Count,
+		!.
+	fill_weighted_adjacency(Index, Count, [Index-NeighborWeights| Entries], [Neighbors| PairWeights]) :-
+		!,
+		dictionary_as_list(NeighborWeights, Neighbors),
+		NextIndex is Index + 1,
+		fill_weighted_adjacency(NextIndex, Count, Entries, PairWeights).
+	fill_weighted_adjacency(Index, Count, Entries, [[]| PairWeights]) :-
+		NextIndex is Index + 1,
+		fill_weighted_adjacency(NextIndex, Count, Entries, PairWeights).
+
+	validate_bradley_terry_dataset(Count, DirectedAdjacency0, ReverseAdjacency0) :-
+		(   strongly_connected(Count, DirectedAdjacency0, ReverseAdjacency0) ->
+			true
+		;   strongly_connected_components(Count, DirectedAdjacency0, ReverseAdjacency0, Components),
+			domain_error(bradley_terry_regular_dataset, Components)
+		).
+
+	strongly_connected(Count, DirectedAdjacency, ReverseAdjacency) :-
+		reachable_all(Count, DirectedAdjacency),
+		reachable_all(Count, ReverseAdjacency).
+
+	reachable_all(Count, Adjacency) :-
+		dictionary_new(Visited0),
+		dfs_reach(1, Adjacency, Visited0, Visited),
+		all_visited(1, Count, Visited).
+
+	dfs_reach(Index, Adjacency, Visited0, Visited) :-
+		(   dictionary_lookup(Index, _Seen, Visited0) ->
+			Visited = Visited0
+		;   dictionary_insert(Visited0, Index, true, Visited1),
+			adjacency_neighbors(Index, Adjacency, Neighbors),
+			dfs_reach_neighbors(Neighbors, Adjacency, Visited1, Visited)
+		).
+
+	dfs_reach_neighbors([], _Adjacency, Visited, Visited).
+	dfs_reach_neighbors([Neighbor| Neighbors], Adjacency, Visited0, Visited) :-
+		dfs_reach(Neighbor, Adjacency, Visited0, Visited1),
+		dfs_reach_neighbors(Neighbors, Adjacency, Visited1, Visited).
+
+	all_visited(Index, Count, _Visited) :-
+		Index > Count,
+		!.
+	all_visited(Index, Count, Visited) :-
+		dictionary_lookup(Index, _Seen, Visited),
+		NextIndex is Index + 1,
+		all_visited(NextIndex, Count, Visited).
+
+	strongly_connected_components(Count, DirectedAdjacency, ReverseAdjacency, Components) :-
+		dictionary_new(ForwardVisited0),
+		finish_order(1, Count, DirectedAdjacency, ForwardVisited0, [], _ForwardVisited, Order),
+		dictionary_new(ReverseVisited0),
+		collect_components(Order, ReverseAdjacency, ReverseVisited0, [], _ReverseVisited, Components0),
+		reverse(Components0, Components).
+
+	finish_order(Index, Count, _DirectedAdjacency, Visited, Order, Visited, Order) :-
+		Index > Count,
+		!.
+	finish_order(Index, Count, DirectedAdjacency, Visited0, Order0, Visited, Order) :-
+		(   dictionary_lookup(Index, _Seen, Visited0) ->
+			Visited1 = Visited0,
+			Order1 = Order0
+		;   dfs_finish(Index, DirectedAdjacency, Visited0, Order0, Visited1, Order1)
+		),
+		NextIndex is Index + 1,
+		finish_order(NextIndex, Count, DirectedAdjacency, Visited1, Order1, Visited, Order).
+
+	dfs_finish(Index, DirectedAdjacency, Visited0, Order0, Visited, [Index| Order]) :-
+		dictionary_insert(Visited0, Index, true, Visited1),
+		adjacency_neighbors(Index, DirectedAdjacency, Neighbors),
+		dfs_finish_neighbors(Neighbors, DirectedAdjacency, Visited1, Order0, Visited, Order).
+
+	dfs_finish_neighbors([], _DirectedAdjacency, Visited, Order, Visited, Order).
+	dfs_finish_neighbors([Neighbor| Neighbors], DirectedAdjacency, Visited0, Order0, Visited, Order) :-
+		(   dictionary_lookup(Neighbor, _Seen, Visited0) ->
+			Visited1 = Visited0,
+			Order1 = Order0
+		;   dfs_finish(Neighbor, DirectedAdjacency, Visited0, Order0, Visited1, Order1)
+		),
+		dfs_finish_neighbors(Neighbors, DirectedAdjacency, Visited1, Order1, Visited, Order).
+
+	collect_components([], _ReverseAdjacency, Visited, Components, Visited, Components).
+	collect_components([Index| Indices], ReverseAdjacency, Visited0, Components0, Visited, Components) :-
+		(   dictionary_lookup(Index, _Seen, Visited0) ->
+			Visited1 = Visited0,
+			Components1 = Components0
+		;   dfs_collect(Index, ReverseAdjacency, Visited0, [], Visited1, Component),
+			Components1 = [Component| Components0]
+		),
+		collect_components(Indices, ReverseAdjacency, Visited1, Components1, Visited, Components).
+
+	dfs_collect(Index, ReverseAdjacency, Visited0, Component0, Visited, Component) :-
+		dictionary_insert(Visited0, Index, true, Visited1),
+		adjacency_neighbors(Index, ReverseAdjacency, Neighbors),
+		dfs_collect_neighbors(Neighbors, ReverseAdjacency, Visited1, [Index| Component0], Visited, Component).
+
+	dfs_collect_neighbors([], _ReverseAdjacency, Visited, Component, Visited, Component).
+	dfs_collect_neighbors([Neighbor| Neighbors], ReverseAdjacency, Visited0, Component0, Visited, Component) :-
+		(   dictionary_lookup(Neighbor, _Seen, Visited0) ->
+			Visited1 = Visited0,
+			Component1 = Component0
+		;   dfs_collect(Neighbor, ReverseAdjacency, Visited0, Component0, Visited1, Component1)
+		),
+		dfs_collect_neighbors(Neighbors, ReverseAdjacency, Visited1, Component1, Visited, Component).
+
+	adjacency_neighbors(Index, Adjacency, Neighbors) :-
+		(   dictionary_lookup(Index, Neighbors, Adjacency) ->
+			true
+		;   Neighbors = []
+		).
+
+	optimize_strengths(MaximumIterations, Tolerance, PairWeights, Wins, Strengths0, Strengths, Status, Iterations, FinalDifference) :-
+		optimize_strengths(0, MaximumIterations, Tolerance, PairWeights, Wins, Strengths0, Strengths, Status, Iterations, FinalDifference).
+
+	optimize_strengths(Iteration0, MaximumIterations, Tolerance, PairWeights, Wins, Strengths0, Strengths, Status, Iterations, FinalDifference) :-
+		update_strengths(PairWeights, Wins, Strengths0, Strengths1, MaximumDifference),
 		Iteration is Iteration0 + 1,
 		(   MaximumDifference =< Tolerance ->
 			Strengths = Strengths1,
@@ -133,122 +383,82 @@
 			Status = maximum_iterations_exhausted,
 			Iterations = Iteration,
 			FinalDifference = MaximumDifference
-		;   optimize_strengths(Iteration, MaximumIterations, Tolerance, Items, Preferences, Strengths1, Strengths, Status, Iterations, FinalDifference)
+		;   optimize_strengths(Iteration, MaximumIterations, Tolerance, PairWeights, Wins, Strengths1, Strengths, Status, Iterations, FinalDifference)
 		).
 
-	update_strengths(Items, Preferences, Strengths0, Strengths, MaximumDifference) :-
-		findall(
-			Item-RawStrength,
-			(
-				member(Item, Items),
-				lookup_strength(Item, Strengths0, CurrentStrength),
-				item_wins(Preferences, Item, 0.0, Wins),
-				item_denominator(Items, Item, Preferences, Strengths0, 0.0, Denominator),
-				(   Denominator =< 1.0e-12 ->
-					RawStrength = CurrentStrength
-				;   CandidateStrength is Wins / Denominator,
-					(   CandidateStrength > 1.0e-12 ->
-						RawStrength = CandidateStrength
-					;   RawStrength = 1.0e-12
-					)
-				)
-			),
-			RawStrengths
-		),
-		normalize_strengths(RawStrengths, Strengths),
-		max_difference(Strengths0, Strengths, 0.0, MaximumDifference).
+	update_strengths(PairWeights, Wins, Strengths0, Strengths, MaximumDifference) :-
+		strength_dictionary(Strengths0, StrengthDictionary),
+		update_strength_values(PairWeights, Wins, StrengthDictionary, Strengths0, RawStrengths, TotalRawStrength),
+		normalize_strengths(RawStrengths, TotalRawStrength, Strengths0, Strengths, MaximumDifference).
 
-	item_wins([], _Item, Wins, Wins).
-	item_wins([p(Winner, _, Weight)| Preferences], Item, Wins0, Wins) :-
-		(   Item == Winner ->
-			Wins1 is Wins0 + Weight
-		;   Wins1 = Wins0
-		),
-		item_wins(Preferences, Item, Wins1, Wins).
+	strength_dictionary(Strengths, Dictionary) :-
+		dictionary_new(Dictionary0),
+		strength_dictionary(Strengths, 1, Dictionary0, Dictionary).
 
-	item_denominator([], _Item, _Preferences, _Strengths, Denominator, Denominator).
-	item_denominator([Other| Others], Item, Preferences, Strengths, Denominator0, Denominator) :-
-		(   Item == Other ->
-			Denominator1 = Denominator0
-		;   comparison_weight(Item, Other, Preferences, TotalWeight),
-			(   TotalWeight =< 1.0e-12 ->
-				Denominator1 = Denominator0
-			;   lookup_strength(Item, Strengths, ItemStrength),
-				lookup_strength(Other, Strengths, OtherStrength),
-				Denominator1 is Denominator0 + TotalWeight / (ItemStrength + OtherStrength)
-			)
-		),
-		item_denominator(Others, Item, Preferences, Strengths, Denominator1, Denominator).
+	strength_dictionary([], _Index, Dictionary, Dictionary).
+	strength_dictionary([Strength| Strengths], Index, Dictionary0, Dictionary) :-
+		dictionary_insert(Dictionary0, Index, Strength, Dictionary1),
+		NextIndex is Index + 1,
+		strength_dictionary(Strengths, NextIndex, Dictionary1, Dictionary).
 
-	comparison_weight(Item, Other, Preferences, TotalWeight) :-
-		pairwise_weight(Item, Other, Preferences, ForwardWeight),
-		pairwise_weight(Other, Item, Preferences, BackwardWeight),
-		TotalWeight is ForwardWeight + BackwardWeight.
+	update_strength_values([], [], _StrengthDictionary, [], [], 0.0).
+	update_strength_values([Neighbors| PairWeights], [Wins| WinTotals], StrengthDictionary, [CurrentStrength| CurrentStrengths], [RawStrength| RawStrengths], TotalRawStrength) :-
+		item_denominator(Neighbors, StrengthDictionary, CurrentStrength, 0.0, Denominator),
+		RawStrength is Wins / Denominator,
+		update_strength_values(PairWeights, WinTotals, StrengthDictionary, CurrentStrengths, RawStrengths, RemainingRawStrength),
+		TotalRawStrength is RawStrength + RemainingRawStrength.
 
-	pairwise_weight(_Winner, _Loser, [], 0.0) :-
-		!.
-	pairwise_weight(Winner, Loser, [p(Winner, Loser, Weight)| Preferences], TotalWeight) :-
-		!,
-		pairwise_weight(Winner, Loser, Preferences, RestWeight),
-		TotalWeight is RestWeight + Weight.
-	pairwise_weight(Winner, Loser, [_| Preferences], TotalWeight) :-
-		pairwise_weight(Winner, Loser, Preferences, TotalWeight).
+	item_denominator([], _StrengthDictionary, _CurrentStrength, Denominator, Denominator).
+	item_denominator([NeighborIndex-PairWeight| Neighbors], StrengthDictionary, CurrentStrength, Denominator0, Denominator) :-
+		dictionary_lookup(NeighborIndex, OtherStrength, StrengthDictionary),
+		Denominator1 is Denominator0 + PairWeight / (CurrentStrength + OtherStrength),
+		item_denominator(Neighbors, StrengthDictionary, CurrentStrength, Denominator1, Denominator).
 
-	lookup_strength(Item, [Item-Strength| _], Strength) :-
-		!.
-	lookup_strength(Item, [_| Strengths], Strength) :-
-		lookup_strength(Item, Strengths, Strength).
-
-	normalize_strengths(Strengths0, Strengths) :-
-		sum_strengths(Strengths0, 0, Total),
-		(   Total =< 1.0e-12 ->
-			Strengths = Strengths0
-		;   normalize_strengths(Strengths0, Total, Strengths)
+	normalize_strengths(RawStrengths, TotalRawStrength, Strengths0, Strengths, MaximumDifference) :-
+		(   TotalRawStrength =< 1.0e-12 ->
+			normalize_strengths_identity(RawStrengths, Strengths0, Strengths, 0.0, MaximumDifference)
+		;   normalize_strengths_scaled(RawStrengths, TotalRawStrength, Strengths0, Strengths, 0.0, MaximumDifference)
 		).
 
-	normalize_strengths([], _Total, []).
-	normalize_strengths([Item-Strength0| Strengths0], Total, [Item-Strength| Strengths]) :-
-		Strength is Strength0 / Total,
-		normalize_strengths(Strengths0, Total, Strengths).
-
-	sum_strengths([], Total, Total).
-	sum_strengths([_-Strength| Strengths], Total0, Total) :-
-		Total1 is Total0 + Strength,
-		sum_strengths(Strengths, Total1, Total).
-
-	max_difference([], [], MaximumDifference, MaximumDifference).
-	max_difference([Item-Strength0| Strengths0], [Item-Strength1| Strengths1], MaximumDifference0, MaximumDifference) :-
-		Difference is abs(Strength0 - Strength1),
+	normalize_strengths_identity([], [], [], MaximumDifference, MaximumDifference).
+	normalize_strengths_identity([RawStrength| RawStrengths], [Strength0| Strengths0], [RawStrength| Strengths], MaximumDifference0, MaximumDifference) :-
+		Difference is abs(Strength0 - RawStrength),
 		(   Difference > MaximumDifference0 ->
 			MaximumDifference1 = Difference
 		;   MaximumDifference1 = MaximumDifference0
 		),
-		max_difference(Strengths0, Strengths1, MaximumDifference1, MaximumDifference).
+		normalize_strengths_identity(RawStrengths, Strengths0, Strengths, MaximumDifference1, MaximumDifference).
 
-	validate_candidates([], _Items).
-	validate_candidates([Candidate| Candidates], Items) :-
-		(   memberchk(Candidate, Items) ->
-			true
+	normalize_strengths_scaled([], _TotalRawStrength, [], [], MaximumDifference, MaximumDifference).
+	normalize_strengths_scaled([RawStrength| RawStrengths], TotalRawStrength, [Strength0| Strengths0], [Strength| Strengths], MaximumDifference0, MaximumDifference) :-
+		Strength is RawStrength / TotalRawStrength,
+		Difference is abs(Strength0 - Strength),
+		(   Difference > MaximumDifference0 ->
+			MaximumDifference1 = Difference
+		;   MaximumDifference1 = MaximumDifference0
+		),
+		normalize_strengths_scaled(RawStrengths, TotalRawStrength, Strengths0, Strengths, MaximumDifference1, MaximumDifference).
+
+	rank_candidate_pairs(Candidates, _StrengthDictionary, _SeenCandidates, _Original, _Pairs) :-
+		var(Candidates),
+		!,
+		instantiation_error.
+	rank_candidate_pairs([], _StrengthDictionary, _SeenCandidates, _Original, []) :-
+		!.
+	rank_candidate_pairs([Candidate| Candidates], StrengthDictionary, SeenCandidates0, Original, [pair(NegStrength, Candidate)-Candidate| Pairs]) :-
+		!,
+		(   var(Candidate) ->
+			instantiation_error
+		;   dictionary_lookup(Candidate, _Seen, SeenCandidates0) ->
+			domain_error(unique_candidates, Original)
+		;   dictionary_lookup(Candidate, Strength, StrengthDictionary) ->
+			dictionary_insert(SeenCandidates0, Candidate, true, SeenCandidates),
+			NegStrength is -Strength,
+			rank_candidate_pairs(Candidates, StrengthDictionary, SeenCandidates, Original, Pairs)
 		;   existence_error(item, Candidate)
-		),
-		validate_candidates(Candidates, Items).
-
-	rank_candidates(Strengths, Candidates, Ranking) :-
-		findall(
-			pair(NegStrength, Item)-Item,
-			(
-				member(Item, Candidates),
-				lookup_strength(Item, Strengths, Strength),
-				NegStrength is -Strength
-			),
-			Pairs
-		),
-		sort(1, @=<, Pairs, SortedPairs),
-		pairs_values(SortedPairs, Ranking).
-
-	pairs_values([], []).
-	pairs_values([_-Value| Pairs], [Value| Values]) :-
-		pairs_values(Pairs, Values).
+		).
+	rank_candidate_pairs(Candidates, _StrengthDictionary, _SeenCandidates, _Original, _Pairs) :-
+		type_error(list, Candidates).
 
 	valid_option(maximum_iterations(Value)) :-
 		integer(Value),

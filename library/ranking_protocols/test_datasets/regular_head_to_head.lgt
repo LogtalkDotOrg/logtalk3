@@ -19,11 +19,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(types(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(dictionaries(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(ranking_protocols(loader)),
-	logtalk_load(bradley_terry, [optimize(on)])
-)).
+:- object(regular_head_to_head,
+	implements(pairwise_ranking_dataset_protocol)).
+
+	item(alpha).
+	item(beta).
+	item(gamma).
+	item(delta).
+
+	preference(alpha, beta, 6).
+	preference(beta, alpha, 1).
+	preference(alpha, gamma, 6).
+	preference(gamma, alpha, 2).
+	preference(alpha, delta, 7).
+	preference(delta, alpha, 2).
+	preference(beta, gamma, 5).
+	preference(gamma, beta, 2).
+	preference(beta, delta, 6).
+	preference(delta, beta, 2).
+	preference(gamma, delta, 5).
+	preference(delta, gamma, 2).
+
+:- end_object.

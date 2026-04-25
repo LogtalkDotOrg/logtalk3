@@ -45,24 +45,35 @@ Features
 
 - **Pairwise Preference Learning**: Learns relative item strengths from
   weighted head-to-head outcomes.
+- **Original MM Fidelity**: Rejects datasets without a finite
+  Bradley-Terry maximum-likelihood estimate instead of masking them with
+  implicit strength flooring or other hidden regularization.
 - **Deterministic Ranking**: Orders candidate items by learned strength
   with deterministic tie-breaking.
 - **Strict Dataset Validation**: Rejects duplicate items, undeclared
-  items, self-preferences, non-positive weights, and disconnected
-  comparison graphs.
+  items, self-preferences, non-positive weights, disconnected comparison
+  graphs, and pairwise datasets that do not admit a finite Bradley-Terry
+  maximum- likelihood estimate.
 - **Training Diagnostics**: Learned rankers include convergence and
   dataset summary metadata that can be accessed using the
   ``diagnostics/2`` predicate.
 - **Ranker Export**: Learned rankers can be exported as self-contained
   terms.
+- **Sparse Comparison Processing**: Training aggregates weighted
+  comparisons into sparse adjacency lists so iteration cost scales with
+  observed pairwise comparisons instead of the full dense item
+  cross-product.
 
 Dataset requirements
 --------------------
 
-This implementation assumes that the pairwise preference graph is
-connected. Datasets that leave one or more items isolated or split the
-items into multiple disconnected components are rejected instead of
-producing globally incomparable strengths.
+This implementation requires more than undirected connectedness. In
+order to admit a finite Bradley-Terry maximum-likelihood estimate, the
+directed win graph induced by the preferences must be strongly
+connected. Datasets that leave one or more items isolated, split the
+undirected comparison graph into multiple components, or create
+dominance partitions with no directed path back to stronger items are
+rejected instead of producing degenerate strengths.
 
 Usage
 -----
@@ -171,6 +182,11 @@ Ranking candidate items
         bradley_terry::rank(Ranker, [item_a, item_b, item_c], Ranking).
    Ranking = [...]
    ...
+
+Candidate lists must be proper lists of unique, ground items declared by
+the training dataset. Invalid ranker terms, duplicate candidates, and
+candidates containing variables are rejected with errors instead of
+being silently accepted.
 
 Exporting the ranker
 ~~~~~~~~~~~~~~~~~~~~

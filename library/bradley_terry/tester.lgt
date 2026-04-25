@@ -22,11 +22,15 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(types(loader)),
+	logtalk_load(dictionaries(loader)),
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(ranking_protocols(loader)),
 	logtalk_load([
+		ranking_protocols('test_datasets/two_item_head_to_head'),
+		ranking_protocols('test_datasets/regular_head_to_head'),
 		ranking_protocols('test_datasets/head_to_head'),
+		ranking_protocols('test_datasets/cyclic_pairwise'),
 		ranking_protocols('test_datasets/malformed_pairwise'),
 		ranking_protocols('test_datasets/sparse_preferences'),
 		ranking_protocols('test_datasets/disconnected_pairwise'),

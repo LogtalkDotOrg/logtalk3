@@ -317,24 +317,35 @@ link in a web browser.</p>
 <ul class="simple">
 <li><p><strong>Pairwise Preference Learning</strong>: Learns relative item strengths from
 weighted head-to-head outcomes.</p></li>
+<li><p><strong>Original MM Fidelity</strong>: Rejects datasets without a finite
+Bradley-Terry maximum-likelihood estimate instead of masking them with
+implicit strength flooring or other hidden regularization.</p></li>
 <li><p><strong>Deterministic Ranking</strong>: Orders candidate items by learned strength
 with deterministic tie-breaking.</p></li>
 <li><p><strong>Strict Dataset Validation</strong>: Rejects duplicate items, undeclared
-items, self-preferences, non-positive weights, and disconnected
-comparison graphs.</p></li>
+items, self-preferences, non-positive weights, disconnected comparison
+graphs, and pairwise datasets that do not admit a finite Bradley-Terry
+maximum- likelihood estimate.</p></li>
 <li><p><strong>Training Diagnostics</strong>: Learned rankers include convergence and
 dataset summary metadata that can be accessed using the
 <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code> predicate.</p></li>
 <li><p><strong>Ranker Export</strong>: Learned rankers can be exported as self-contained
 terms.</p></li>
+<li><p><strong>Sparse Comparison Processing</strong>: Training aggregates weighted
+comparisons into sparse adjacency lists so iteration cost scales with
+observed pairwise comparisons instead of the full dense item
+cross-product.</p></li>
 </ul>
 </section>
 <section id="dataset-requirements">
 <h2>Dataset requirements<a class="headerlink" href="#dataset-requirements" title="Link to this heading"></a></h2>
-<p>This implementation assumes that the pairwise preference graph is
-connected. Datasets that leave one or more items isolated or split the
-items into multiple disconnected components are rejected instead of
-producing globally incomparable strengths.</p>
+<p>This implementation requires more than undirected connectedness. In
+order to admit a finite Bradley-Terry maximum-likelihood estimate, the
+directed win graph induced by the preferences must be strongly
+connected. Datasets that leave one or more items isolated, split the
+undirected comparison graph into multiple components, or create
+dominance partitions with no directed path back to stronger items are
+rejected instead of producing degenerate strengths.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
@@ -431,6 +442,10 @@ effective options.</p>
 ...
 </pre></div>
 </div>
+<p>Candidate lists must be proper lists of unique, ground items declared by
+the training dataset. Invalid ranker terms, duplicate candidates, and
+candidates containing variables are rejected with errors instead of
+being silently accepted.</p>
 </section>
 <section id="exporting-the-ranker">
 <h3>Exporting the ranker<a class="headerlink" href="#exporting-the-ranker" title="Link to this heading"></a></h3>
