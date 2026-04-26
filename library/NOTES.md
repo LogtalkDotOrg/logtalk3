@@ -80,7 +80,8 @@ grouping is thematic only, as some libraries naturally span multiple areas):
 		`random_forest_regression`, and `regression_tree`.
 	- Ranking:
 		`ranking_protocols`, `borda`, `bradley_terry`, `colley`, `copeland`, `elo`,
-        `plackett_luce_last`, `rank_centrality`, and `regularized_bradley_terry`.
+        `plackett_luce_last`, `rank_centrality`, `regularized_bradley_terry`,
+        `schulze`, and `thurstone_mosteller`.
 	- Clustering:
 		`clustering_protocols`, `agglomerative`, `dbscan`,
 		`gaussian_mixture`, `hdbscan`, `hierarchical_clustering`,

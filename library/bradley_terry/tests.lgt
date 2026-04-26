@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-24,
+		date is 2026-04-26,
 		comment is 'Unit tests for the "bradley_terry" library.'
 	]).
 
@@ -52,9 +52,9 @@
 		bradley_terry::learn(regular_head_to_head, Ranker),
 		bradley_terry::rank(Ranker, [gamma, delta, alpha], Ranking).
 
-	test(bradley_terry_strengths_2, deterministic((memberchk(alpha-Alpha, Strengths), memberchk(beta-Beta, Strengths), memberchk(gamma-Gamma, Strengths), memberchk(delta-Delta, Strengths), Alpha > Beta, Beta > Gamma, Gamma > Delta))) :-
+	test(bradley_terry_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), memberchk(gamma-Gamma, Scores), memberchk(delta-Delta, Scores), Alpha > Beta, Beta > Gamma, Gamma > Delta))) :-
 		bradley_terry::learn(regular_head_to_head, Ranker),
-		bradley_terry::strengths(Ranker, Strengths).
+		bradley_terry::scores(Ranker, Scores).
 
 	test(bradley_terry_diagnostics_2, deterministic((memberchk(model(bradley_terry), Diagnostics), memberchk(convergence(converged), Diagnostics)))) :-
 		bradley_terry::learn(regular_head_to_head, Ranker),
@@ -65,13 +65,13 @@
 		bradley_terry::diagnostics(Ranker, Diagnostics),
 		findall(Diagnostic, bradley_terry::diagnostic(Ranker, Diagnostic), Enumerated).
 
-	test(bradley_terry_two_item_closed_form_strengths_2, deterministic((memberchk(alpha-Alpha, Strengths), memberchk(beta-Beta, Strengths), abs(Alpha - 0.75) =< 1.0e-6, abs(Beta - 0.25) =< 1.0e-6))) :-
+	test(bradley_terry_two_item_closed_form_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), abs(Alpha - 0.75) =< 1.0e-6, abs(Beta - 0.25) =< 1.0e-6))) :-
 		bradley_terry::learn(two_item_head_to_head, Ranker),
-		bradley_terry::strengths(Ranker, Strengths).
+		bradley_terry::scores(Ranker, Scores).
 
-	test(bradley_terry_cyclic_pairwise_strengths_2, deterministic((memberchk(alpha-Alpha, Strengths), memberchk(beta-Beta, Strengths), memberchk(gamma-Gamma, Strengths), abs(Alpha - Beta) =< 1.0e-6, abs(Beta - Gamma) =< 1.0e-6))) :-
+	test(bradley_terry_cyclic_pairwise_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), memberchk(gamma-Gamma, Scores), abs(Alpha - Beta) =< 1.0e-6, abs(Beta - Gamma) =< 1.0e-6))) :-
 		bradley_terry::learn(cyclic_pairwise, Ranker),
-		bradley_terry::strengths(Ranker, Strengths).
+		bradley_terry::scores(Ranker, Scores).
 
 	test(bradley_terry_non_regular_pairwise_error, error(domain_error(bradley_terry_regular_dataset, _))) :-
 		bradley_terry::learn(head_to_head, _Ranker).

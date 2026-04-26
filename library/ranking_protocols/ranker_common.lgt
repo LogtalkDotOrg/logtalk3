@@ -26,8 +26,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
-		comment is 'Shared predicates for ranker diagnostics and export.'
+		date is 2026-04-26,
+		comment is 'Shared predicates for ranker score access, diagnostics, and export.'
 	]).
 
 	:- uses(format, [
@@ -38,6 +38,13 @@
 	:- uses(list, [
 		member/2,
 		memberchk/2
+	]).
+
+	:- protected(ranker_scores_data/2).
+	:- mode(ranker_scores_data(+compound, -list(pair)), one).
+	:- info(ranker_scores_data/2, [
+		comment is 'Hook predicate that importing ranker implementations must define in order to expose the learned item-score pairs on the ranker native numeric scale.',
+		argnames is ['Ranker', 'Scores']
 	]).
 
 	:- protected(ranker_diagnostics_data/2).
@@ -67,6 +74,9 @@
 		comment is 'Pretty-printing helper predicate used by importing ranker implementations to show the learned ranker term template.',
 		argnames is ['Ranker']
 	]).
+
+	scores(Ranker, Scores) :-
+		::ranker_scores_data(Ranker, Scores).
 
 	diagnostics(Ranker, Diagnostics) :-
 		::ranker_diagnostics_data(Ranker, Diagnostics).

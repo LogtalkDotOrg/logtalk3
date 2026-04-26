@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-25,
+		date is 2026-04-26,
 		comment is 'Tie-aware Plackett-Luce-last grouped-ranking ranker. Learns one positive preference strength parameter per item from a dataset object implementing the ``ranking_dataset_protocol`` protocol by fitting a last-choice Plackett-Luce model to grouped tie blocks, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		remarks is [
 			'Algorithm' - 'Processes each group as a sequence of last-choice eliminations from lowest relevance to highest relevance, using grouped tie blocks and a deterministic fixed-point update on positive item strengths.',
@@ -35,20 +35,6 @@
 			'Ranker representation' - 'The learned ranker is represented by default as ``plackett_luce_last_ranker(Items, Strengths, Diagnostics)`` where ``Strengths`` stores normalized ``Item-Strength`` pairs and ``Diagnostics`` stores metadata such as convergence status, iteration count, and dataset summary.'
 		],
 		see_also is [ranking_dataset_protocol, ranker_protocol, borda]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
-	:- info(learn/3, [
-		comment is 'Learns a Plackett-Luce-last ranker from the given grouped ranking dataset using the specified options.',
-		argnames is ['Dataset', 'Ranker', 'Options']
-	]).
-
-	:- public(strengths/2).
-	:- mode(strengths(+compound, -list(pair)), one).
-	:- info(strengths/2, [
-		comment is 'Returns the learned item-strength pairs.',
-		argnames is ['Ranker', 'Strengths']
 	]).
 
 	:- uses(format, [
@@ -62,10 +48,6 @@
 
 	:- uses(list, [
 		append/3, drop/3, length/2, member/2, nth0/3, reverse/2
-	]).
-
-	:- uses(numberlist, [
-		sum/2
 	]).
 
 	learn(Dataset, Ranker) :-
@@ -106,8 +88,8 @@
 		ranker_data(Ranker, _Items, Strengths, _Diagnostics),
 		^^rank_by_scores(Strengths, Candidates, Ranking).
 
-	strengths(Ranker, Strengths) :-
-		ranker_data(Ranker, _Items, Strengths, _Diagnostics).
+	ranker_scores_data(Ranker, Scores) :-
+		ranker_data(Ranker, _Items, Scores, _Diagnostics).
 
 	ranker_diagnostics_data(Ranker, Diagnostics) :-
 		ranker_data(Ranker, _Items, _Strengths, Diagnostics).
@@ -134,37 +116,10 @@
 	ranker_data(Ranker, Items, Strengths, Diagnostics) :-
 		(	var(Ranker) ->
 			instantiation_error
-		;	Ranker = plackett_luce_last_ranker(Items, Strengths, Diagnostics),
-			valid_ranker_data(Items, Strengths) ->
+		;	Ranker = plackett_luce_last_ranker(Items, Strengths, Diagnostics) ->
 			true
 		;	domain_error(plackett_luce_last_ranker, Ranker)
 		).
-
-	valid_ranker_data(Items, Strengths) :-
-		proper_item_list(Items),
-		strength_pairs_values(Items, Strengths, Values),
-		sum(Values, Total),
-		abs(Total - 1.0) =< 1.0e-6.
-
-	proper_item_list(Items) :-
-		proper_item_list(Items, []).
-
-	proper_item_list(Items, _Seen) :-
-		var(Items),
-		!,
-		fail.
-	proper_item_list([], _Seen).
-	proper_item_list([Item| Items], Seen) :-
-		nonvar(Item),
-		\+ member(Item, Seen),
-		proper_item_list(Items, [Item| Seen]).
-
-	strength_pairs_values([], [], []).
-	strength_pairs_values([Item| Items], [StrengthItem-Strength| Strengths], [Strength| Values]) :-
-		Item == StrengthItem,
-		number(Strength),
-		Strength > 0.0,
-		strength_pairs_values(Items, Strengths, Values).
 
 	singleton_ranker(Item, Options, DatasetSummary, plackett_luce_last_ranker([Item], [Item-1.0], [
 		model(plackett_luce_last),

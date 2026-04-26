@@ -184,7 +184,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-25,
+		date is 2026-04-26,
 		comment is 'Unit tests for the "plackett_luce_last" library.'
 	]).
 
@@ -200,9 +200,9 @@
 	test(plackett_luce_last_learn_2, deterministic(ground(Ranker))) :-
 		plackett_luce_last::learn(ranked_ballots, Ranker).
 
-	test(plackett_luce_last_singleton_strengths_2, deterministic(Strengths == [alpha-1.0])) :-
+	test(plackett_luce_last_singleton_scores_2, deterministic(Scores == [alpha-1.0])) :-
 		plackett_luce_last::learn(singleton_grouped, Ranker),
-		plackett_luce_last::strengths(Ranker, Strengths).
+		plackett_luce_last::scores(Ranker, Scores).
 
 	test(plackett_luce_last_singleton_diagnostics_2, deterministic((memberchk(convergence(converged), Diagnostics), memberchk(iterations(0), Diagnostics), memberchk(final_delta(0.0), Diagnostics)))) :-
 		plackett_luce_last::learn(singleton_grouped, Ranker),
@@ -222,25 +222,25 @@
 		plackett_luce_last::learn(ranked_ballots, Ranker),
 		plackett_luce_last::rank(Ranker, [gamma, beta], [beta, gamma]).
 
-	test(plackett_luce_last_strengths_2, deterministic((memberchk(alpha-Alpha, Strengths), memberchk(beta-Beta, Strengths), memberchk(gamma-Gamma, Strengths), Beta > Alpha, Alpha > Gamma, Sum is Alpha + Beta + Gamma, abs(Sum - 1.0) =< 1.0e-6))) :-
+	test(plackett_luce_last_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), memberchk(gamma-Gamma, Scores), Beta > Alpha, Alpha > Gamma, Sum is Alpha + Beta + Gamma, abs(Sum - 1.0) =< 1.0e-6))) :-
 		plackett_luce_last::learn(ranked_ballots, Ranker),
-		plackett_luce_last::strengths(Ranker, Strengths).
+		plackett_luce_last::scores(Ranker, Scores).
 
-	test(plackett_luce_last_regular_tied_grouped_strengths_2, deterministic((memberchk(alpha-Alpha, Strengths), memberchk(beta-Beta, Strengths), memberchk(gamma-Gamma, Strengths), abs(Alpha - Beta) =< 1.0e-6, abs(Beta - Gamma) =< 1.0e-6, abs(Gamma - (1.0/3.0)) =< 1.0e-6))) :-
+	test(plackett_luce_last_regular_tied_grouped_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), memberchk(gamma-Gamma, Scores), abs(Alpha - Beta) =< 1.0e-6, abs(Beta - Gamma) =< 1.0e-6, abs(Gamma - (1.0/3.0)) =< 1.0e-6))) :-
 		plackett_luce_last::learn(regular_tied_grouped, Ranker),
-		plackett_luce_last::strengths(Ranker, Strengths).
+		plackett_luce_last::scores(Ranker, Scores).
 
 	test(plackett_luce_last_regular_tied_grouped_rank_3, deterministic(Ranking == [alpha, beta, gamma])) :-
 		plackett_luce_last::learn(regular_tied_grouped, Ranker),
 		plackett_luce_last::rank(Ranker, [gamma, beta, alpha], Ranking).
 
-	test(plackett_luce_last_asymmetric_tied_grouped_strengths_2, deterministic((memberchk(alpha-Alpha, Strengths), memberchk(beta-Beta, Strengths), memberchk(gamma-Gamma, Strengths), Alpha > Beta, abs(Alpha - 0.5351837211255078) =< 1.0e-6, abs(Beta - 0.23240813943724614) =< 1.0e-6, abs(Gamma - 0.23240813943724614) =< 1.0e-6))) :-
+	test(plackett_luce_last_asymmetric_tied_grouped_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), memberchk(gamma-Gamma, Scores), Alpha > Beta, abs(Alpha - 0.5351837211255078) =< 1.0e-6, abs(Beta - 0.23240813943724614) =< 1.0e-6, abs(Gamma - 0.23240813943724614) =< 1.0e-6))) :-
 		plackett_luce_last::learn(asymmetric_tied_grouped, Ranker),
-		plackett_luce_last::strengths(Ranker, Strengths).
+		plackett_luce_last::scores(Ranker, Scores).
 
-	test(plackett_luce_last_asymmetric_tied_grouped_three_strengths_2, deterministic((memberchk(alpha-Alpha, Strengths), memberchk(beta-Beta, Strengths), memberchk(gamma-Gamma, Strengths), Alpha > Beta, Beta > Gamma, abs(Alpha - 0.5792050820671106) =< 1.0e-6, abs(Beta - 0.2651655355571285) =< 1.0e-6, abs(Gamma - 0.1556293823757608) =< 1.0e-6))) :-
+	test(plackett_luce_last_asymmetric_tied_grouped_three_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), memberchk(gamma-Gamma, Scores), Alpha > Beta, Beta > Gamma, abs(Alpha - 0.5792050820671106) =< 1.0e-6, abs(Beta - 0.2651655355571285) =< 1.0e-6, abs(Gamma - 0.1556293823757608) =< 1.0e-6))) :-
 		plackett_luce_last::learn(asymmetric_tied_grouped_three, Ranker),
-		plackett_luce_last::strengths(Ranker, Strengths).
+		plackett_luce_last::scores(Ranker, Scores).
 
 	test(plackett_luce_last_diagnostics_2, deterministic((memberchk(model(plackett_luce_last), Diagnostics), memberchk(convergence(converged), Diagnostics), memberchk(dataset_summary(Summary), Diagnostics), memberchk(groups(2), Summary)))) :-
 		plackett_luce_last::learn(ranked_ballots, Ranker),

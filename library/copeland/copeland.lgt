@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-25,
+		date is 2026-04-26,
 		comment is 'Copeland pairwise preference ranker. Learns one deterministic score per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by comparing aggregated head-to-head outcomes for each observed matchup and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		remarks is [
 			'Algorithm' - 'Copeland ranks each item by its number of matchup wins minus losses after aggregating weighted pairwise preferences per observed opponent pair.',
@@ -35,25 +35,6 @@
 			'Ranker representation' - 'The learned ranker is represented by default as ``copeland_ranker(Items, Scores, Diagnostics)`` where ``Scores`` stores ``Item-Score`` pairs and ``Diagnostics`` stores metadata such as the training dataset summary.'
 		],
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, bradley_terry]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
-	:- info(learn/3, [
-		comment is 'Learns a Copeland ranker from the given dataset object using the specified options.',
-		argnames is ['Dataset', 'Ranker', 'Options']
-	]).
-
-	:- public(scores/2).
-	:- mode(scores(+compound, -list(pair)), one).
-	:- info(scores/2, [
-		comment is 'Returns the learned item-score pairs.',
-		argnames is ['Ranker', 'Scores']
-	]).
-
-	:- uses(avltree, [
-		lookup/3 as dictionary_lookup/3,
-		new/1 as dictionary_new/1
 	]).
 
 	learn(Dataset, Ranker) :-
@@ -73,9 +54,6 @@
 	rank(Ranker, Candidates, Ranking) :-
 		^^score_ranker_data(Ranker, _Items, Scores, _Diagnostics),
 		^^rank_by_scores(Scores, Candidates, Ranking).
-
-	scores(Ranker, Scores) :-
-		^^score_ranker_data(Ranker, _Items, Scores, _Diagnostics).
 
 	copeland_scores([], Scores, Scores).
 	copeland_scores([matchup(Item1, Item2, Item1Wins, Item2Wins)| Matchups], Scores0, Scores) :-

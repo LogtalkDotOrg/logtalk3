@@ -33,7 +33,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-25,
+		date is 2026-04-26,
 		comment is 'Unit tests for the "colley" library.'
 	]).
 
@@ -55,13 +55,13 @@
 	test(colley_learn_3_non_empty_options_error, error(domain_error(option, prior(flat)))) :-
 		colley::learn(regular_head_to_head, _Ranker, [prior(flat)]).
 
-	test(colley_singleton_rating_2, deterministic(Ratings == [alpha-0.5])) :-
+	test(colley_singleton_scores_2, deterministic(Scores == [alpha-0.5])) :-
 		colley::learn(singleton_pairwise, Ranker),
-		colley::ratings(Ranker, Ratings).
+		colley::scores(Ranker, Scores).
 
-	test(colley_two_item_ratings_2, deterministic((memberchk(alpha-Alpha, Ratings), memberchk(beta-Beta, Ratings), abs(Alpha - 0.6) =< 1.0e-6, abs(Beta - 0.4) =< 1.0e-6))) :-
+	test(colley_two_item_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), abs(Alpha - 0.6) =< 1.0e-6, abs(Beta - 0.4) =< 1.0e-6))) :-
 		colley::learn(two_item_head_to_head, Ranker),
-		colley::ratings(Ranker, Ratings).
+		colley::scores(Ranker, Scores).
 
 	test(colley_rank_3, deterministic(Ranking == [alpha, beta, gamma, delta])) :-
 		colley::learn(regular_head_to_head, Ranker),
@@ -71,9 +71,9 @@
 		colley::learn(head_to_head, Ranker),
 		colley::rank(Ranker, [alpha, beta, gamma, delta], Ranking).
 
-	test(colley_cyclic_pairwise_ratings_2, deterministic((memberchk(alpha-Alpha, Ratings), memberchk(beta-Beta, Ratings), memberchk(gamma-Gamma, Ratings), abs(Alpha - 0.5) =< 1.0e-6, abs(Beta - 0.5) =< 1.0e-6, abs(Gamma - 0.5) =< 1.0e-6))) :-
+	test(colley_cyclic_pairwise_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), memberchk(gamma-Gamma, Scores), abs(Alpha - 0.5) =< 1.0e-6, abs(Beta - 0.5) =< 1.0e-6, abs(Gamma - 0.5) =< 1.0e-6))) :-
 		colley::learn(cyclic_pairwise, Ranker),
-		colley::ratings(Ranker, Ratings).
+		colley::scores(Ranker, Scores).
 
 	test(colley_diagnostics_2, deterministic((memberchk(model(colley), Diagnostics), memberchk(options([]), Diagnostics)))) :-
 		colley::learn(regular_head_to_head, Ranker),
@@ -133,8 +133,8 @@
 	test(colley_rank_invalid_ranker_error, error(domain_error(colley_ranker, fake_ranker([alpha], [alpha-0.5], [model(fake)])))) :-
 		colley::rank(fake_ranker([alpha], [alpha-0.5], [model(fake)]), [alpha], _Ranking).
 
-	test(colley_ratings_invalid_ranker_error, error(domain_error(colley_ranker, colley_ranker([alpha, beta], [alpha-1.1, beta- -0.1], [model(colley), options([]), dataset_summary([items(2), preferences(1), connected_components(1), isolated_items([])])])))) :-
-		colley::ratings(colley_ranker([alpha, beta], [alpha-1.1, beta- -0.1], [model(colley), options([]), dataset_summary([items(2), preferences(1), connected_components(1), isolated_items([])])]), _Ratings).
+	test(colley_scores_invalid_ranker_error, error(domain_error(colley_ranker, colley_ranker([alpha, beta], [alpha-1.1, beta- -0.1], [model(colley), options([]), dataset_summary([items(2), preferences(1), connected_components(1), isolated_items([])])])))) :-
+		colley::scores(colley_ranker([alpha, beta], [alpha-1.1, beta- -0.1], [model(colley), options([]), dataset_summary([items(2), preferences(1), connected_components(1), isolated_items([])])]), _Scores).
 
 	test(colley_print_ranker_1, deterministic) :-
 		colley::learn(regular_head_to_head, Ranker),

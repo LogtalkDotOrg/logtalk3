@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 25, 2026
+##   Last updated on April 26, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -207,6 +207,7 @@ Foreach-Object {
 (Get-Content ../../../library/regression_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/regression_protocols.rst
 (Get-Content ../../../library/regression_tree/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/regression_tree.rst
 (Get-Content ../../../library/regularized_bradley_terry/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/regularized_bradley_terry.rst
+(Get-Content ../../../library/schulze/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/schulze.rst
 (Get-Content ../../../library/sequential_pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sequential_pattern_mining_protocols.rst
 (Get-Content ../../../library/sets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sets.rst
 (Get-Content ../../../library/simulated_annealing/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/simulated_annealing.rst
@@ -220,6 +221,7 @@ Foreach-Object {
 (Get-Content ../../../library/strings/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/strings.rst
 (Get-Content ../../../library/subsequences/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/subsequences.rst
 (Get-Content ../../../library/term_io/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/term_io.rst
+(Get-Content ../../../library/thurstone_mosteller/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/thurstone_mosteller.rst
 (Get-Content ../../../library/time_scales/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/time_scales.rst
 (Get-Content ../../../library/timeout/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/timeout.rst
 (Get-Content ../../../library/toml/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/toml.rst

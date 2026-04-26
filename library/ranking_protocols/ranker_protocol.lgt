@@ -24,15 +24,22 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-26,
 		comment is 'Protocol for machine learning rankers.',
 		see_also is [bradley_terry, ranking_dataset_protocol, pairwise_ranking_dataset_protocol]
+	]).
+
+	:- public(learn/3).
+	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
+	:- info(learn/3, [
+		comment is 'Learns a ranker from the given dataset object using the specified options.',
+		argnames is ['Dataset', 'Ranker', 'Options']
 	]).
 
 	:- public(learn/2).
 	:- mode(learn(+object_identifier, -compound), one).
 	:- info(learn/2, [
-		comment is 'Learns a ranker from the given dataset object.',
+		comment is 'Learns a ranker from the given dataset object using default options.',
 		argnames is ['Dataset', 'Ranker']
 	]).
 
@@ -41,6 +48,13 @@
 	:- info(rank/3, [
 		comment is 'Ranks a list of candidate items using the learned ranker and returns the candidates ordered from most preferred to least preferred.',
 		argnames is ['Ranker', 'Candidates', 'Ranking']
+	]).
+
+	:- public(scores/2).
+	:- mode(scores(+compound, -list(pair)), one).
+	:- info(scores/2, [
+		comment is 'Returns the learned item-score pairs on the ranker native numeric scale. Depending on the ranker, these values may also be interpreted more specifically as strengths or ratings.',
+		argnames is ['Ranker', 'Scores']
 	]).
 
 	:- public(diagnostics/2).

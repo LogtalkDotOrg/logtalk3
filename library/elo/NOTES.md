@@ -177,7 +177,7 @@ The learned ranker is represented by a compound term of the form:
 Where:
 
 - `Items`: List of ranked items.
-- `Ratings`: List of `Item-Rating` pairs.
+- `Scores`: List of `Item-Rating` pairs.
 - `Diagnostics`: List of metadata terms, including the effective options and
   dataset summary.
 

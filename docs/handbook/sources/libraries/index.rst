@@ -157,6 +157,7 @@ directory in the ``NOTES.md`` file.
    regression_protocols
    regression_tree
    regularized_bradley_terry
+   schulze
    sequential_pattern_mining_protocols
    sets
    snowflakeid
@@ -170,6 +171,7 @@ directory in the ``NOTES.md`` file.
    strings
    subsequences
    term_io
+   thurstone_mosteller
    time_scales
    timeout
    toml

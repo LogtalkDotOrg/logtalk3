@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-25,
+		date is 2026-04-26,
 		comment is 'Rank Centrality pairwise preference ranker. Learns one stationary probability score per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by applying power iteration to the Rank Centrality Markov chain built from aggregated head-to-head outcomes, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		remarks is [
 			'Algorithm' - 'Uses the Rank Centrality transition rule where each observed opponent contributes an outgoing transition proportional to the empirical probability of beating the current item, scaled by the maximum comparison degree, and estimates the stationary distribution using deterministic power iteration.',
@@ -33,20 +33,6 @@
 			'Ranker representation' - 'The learned ranker is represented by default as ``rank_centrality_ranker(Items, Scores, Diagnostics)`` where ``Scores`` stores ``Item-Score`` pairs summing to ``1.0`` and ``Diagnostics`` stores metadata such as convergence status, iteration count, maximum comparison degree, and dataset summary.'
 		],
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, bradley_terry, copeland]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
-	:- info(learn/3, [
-		comment is 'Learns a Rank Centrality ranker from the given dataset object using the specified options.',
-		argnames is ['Dataset', 'Ranker', 'Options']
-	]).
-
-	:- public(scores/2).
-	:- mode(scores(+compound, -list(pair)), one).
-	:- info(scores/2, [
-		comment is 'Returns the learned item-score pairs.',
-		argnames is ['Ranker', 'Scores']
 	]).
 
 	:- uses(format, [
@@ -60,10 +46,6 @@
 
 	:- uses(list, [
 		length/2, member/2, nth1/3, reverse/2
-	]).
-
-	:- uses(numberlist, [
-		sum/2
 	]).
 
 	learn(Dataset, Ranker) :-
@@ -103,7 +85,7 @@
 		ranker_data(Ranker, _Items, Scores, _Diagnostics),
 		^^rank_by_scores(Scores, Candidates, Ranking).
 
-	scores(Ranker, Scores) :-
+	ranker_scores_data(Ranker, Scores) :-
 		ranker_data(Ranker, _Items, Scores, _Diagnostics).
 
 	ranker_diagnostics_data(Ranker, Diagnostics) :-
@@ -131,37 +113,10 @@
 	ranker_data(Ranker, Items, Scores, Diagnostics) :-
 		(	var(Ranker) ->
 			instantiation_error
-		;	Ranker = rank_centrality_ranker(Items, Scores, Diagnostics),
-			valid_ranker_data(Items, Scores) ->
+		;	Ranker = rank_centrality_ranker(Items, Scores, Diagnostics) ->
 			true
 		;	domain_error(rank_centrality_ranker, Ranker)
 		).
-
-	valid_ranker_data(Items, Scores) :-
-		proper_item_list(Items),
-		score_pairs_values(Items, Scores, Values),
-		sum(Values, Total),
-		abs(Total - 1.0) =< 1.0e-6.
-
-	proper_item_list(Items) :-
-		proper_item_list(Items, []).
-
-	proper_item_list(Items, _Seen) :-
-		var(Items),
-		!,
-		fail.
-	proper_item_list([], _Seen).
-	proper_item_list([Item| Items], Seen) :-
-		nonvar(Item),
-		\+ member(Item, Seen),
-		proper_item_list(Items, [Item| Seen]).
-
-	score_pairs_values([], [], []).
-	score_pairs_values([Item| Items], [ScoreItem-Score| Scores], [Score| Values]) :-
-		Item == ScoreItem,
-		number(Score),
-		Score > 0.0,
-		score_pairs_values(Items, Scores, Values).
 
 	singleton_ranker(Item, Options, DatasetSummary, rank_centrality_ranker([Item], [Item-1.0], [
 		model(rank_centrality),

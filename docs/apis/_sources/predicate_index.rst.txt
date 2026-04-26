@@ -8856,13 +8856,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ada_boost <ada_boost/0::learn/3>`
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::learn/3>`
-* :ref:`borda <borda/0::learn/3>`
-* :ref:`bradley_terry <bradley_terry/0::learn/3>`
 * :ref:`clusterer_protocol <clusterer_protocol/0::learn/3>`
-* :ref:`colley <colley/0::learn/3>`
-* :ref:`copeland <copeland/0::learn/3>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::learn/3>`
-* :ref:`elo <elo/0::learn/3>`
 * :ref:`gradient_boosting_regression <gradient_boosting_regression/0::learn/3>`
 * :ref:`knn_regression <knn_regression/0::learn/3>`
 * :ref:`lda_projection <lda_projection/0::learn/3>`
@@ -8871,14 +8866,12 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`logistic_regression <logistic_regression/0::learn/3>`
 * :ref:`metagol <metagol/0::learn/3>`
 * :ref:`pca <pca/0::learn/3>`
-* :ref:`plackett_luce_last <plackett_luce_last/0::learn/3>`
 * :ref:`random_forest <random_forest/0::learn/3>`
 * :ref:`random_forest_regression <random_forest_regression/0::learn/3>`
 * :ref:`random_projection <random_projection/0::learn/3>`
-* :ref:`rank_centrality <rank_centrality/0::learn/3>`
+* :ref:`ranker_protocol <ranker_protocol/0::learn/3>`
 * :ref:`regression_tree <regression_tree/0::learn/3>`
 * :ref:`regressor_protocol <regressor_protocol/0::learn/3>`
-* :ref:`regularized_bradley_terry <regularized_bradley_terry/0::learn/3>`
 
 ``learn_seq/2``
 ---------------
@@ -13894,17 +13887,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ranker_protocol <ranker_protocol/0::ranker_options/2>`
 
-``ratings/2``
--------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`colley <colley/0::ratings/2>`
-* :ref:`elo <elo/0::ratings/2>`
-
 ``rd/1``
 --------
 
@@ -15330,9 +15312,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`borda <borda/0::scores/2>`
-* :ref:`copeland <copeland/0::scores/2>`
-* :ref:`rank_centrality <rank_centrality/0::scores/2>`
+* :ref:`ranker_protocol <ranker_protocol/0::scores/2>`
 
 ``search/1``
 ------------
@@ -16480,18 +16460,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`reader <reader/0::stream_to_terms/3>`
 
-``strengths/2``
----------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`bradley_terry <bradley_terry/0::strengths/2>`
-* :ref:`plackett_luce_last <plackett_luce_last/0::strengths/2>`
-* :ref:`regularized_bradley_terry <regularized_bradley_terry/0::strengths/2>`
-
 ``string_chars/2``
 ------------------
 
@@ -16561,6 +16529,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`redis <redis/0::strlen/3>`
+
+``strongest_paths/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`schulze <schulze/0::strongest_paths/2>`
 
 ``strongly_connected_components/2``
 -----------------------------------

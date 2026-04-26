@@ -44,7 +44,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-25,
+		date is 2026-04-26,
 		comment is 'Unit tests for the "elo" library.'
 	]).
 
@@ -63,9 +63,9 @@
 	test(elo_learn_3_custom_options, deterministic((memberchk(options(Options), Diagnostics), memberchk(initial_rating(1400.0), Options), memberchk(k_factor(24.0), Options), memberchk(rating_scale(200.0), Options)))) :-
 		elo::learn(regular_head_to_head, elo_ranker(_Items, _Ratings, Diagnostics), [initial_rating(1400.0), k_factor(24.0), rating_scale(200.0)]).
 
-	test(elo_singleton_rating_2, deterministic(Ratings == [alpha-1500.0])) :-
+	test(elo_singleton_scores_2, deterministic(Scores == [alpha-1500.0])) :-
 		elo::learn(singleton_pairwise, Ranker),
-		elo::ratings(Ranker, Ratings).
+		elo::scores(Ranker, Scores).
 
 	test(elo_rank_3, deterministic(Ranking == [alpha, beta, gamma, delta])) :-
 		elo::learn(regular_head_to_head, Ranker),
@@ -75,9 +75,9 @@
 		elo::learn(head_to_head, Ranker),
 		elo::rank(Ranker, [alpha, beta, gamma, delta], Ranking).
 
-	test(elo_two_item_ratings_2, deterministic((memberchk(alpha-Alpha, Ratings), memberchk(beta-Beta, Ratings), abs(Alpha - 1523.8009426289977) =< 1.0e-6, abs(Beta - 1476.1990573710023) =< 1.0e-6))) :-
+	test(elo_two_item_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), abs(Alpha - 1523.8009426289977) =< 1.0e-6, abs(Beta - 1476.1990573710023) =< 1.0e-6))) :-
 		elo::learn(two_item_head_to_head, Ranker),
-		elo::ratings(Ranker, Ratings).
+		elo::scores(Ranker, Scores).
 
 	test(elo_diagnostics_2, deterministic((memberchk(model(elo), Diagnostics), memberchk(options(Options), Diagnostics), memberchk(initial_rating(1500.0), Options), memberchk(k_factor(32.0), Options), memberchk(rating_scale(400.0), Options)))) :-
 		elo::learn(regular_head_to_head, Ranker),
@@ -146,8 +146,8 @@
 	test(elo_rank_invalid_ranker_error, error(domain_error(elo_ranker, fake_ranker([alpha], [alpha-1500.0], [model(fake)])))) :-
 		elo::rank(fake_ranker([alpha], [alpha-1500.0], [model(fake)]), [alpha], _Ranking).
 
-	test(elo_ratings_invalid_ranker_error, error(domain_error(elo_ranker, elo_ranker([alpha, beta], [alpha-high, beta-1400.0], [model(elo), options([initial_rating(1500.0), k_factor(32.0), rating_scale(400.0)]), dataset_summary([items(2), preferences(1), connected_components(1), isolated_items([])])])))) :-
-		elo::ratings(elo_ranker([alpha, beta], [alpha-high, beta-1400.0], [model(elo), options([initial_rating(1500.0), k_factor(32.0), rating_scale(400.0)]), dataset_summary([items(2), preferences(1), connected_components(1), isolated_items([])])]), _Ratings).
+	test(elo_scores_invalid_ranker_error, error(domain_error(elo_ranker, elo_ranker([alpha, beta], [alpha-high, beta-1400.0], [model(elo), options([initial_rating(1500.0), k_factor(32.0), rating_scale(400.0)]), dataset_summary([items(2), preferences(1), connected_components(1), isolated_items([])])])))) :-
+		elo::scores(elo_ranker([alpha, beta], [alpha-high, beta-1400.0], [model(elo), options([initial_rating(1500.0), k_factor(32.0), rating_scale(400.0)]), dataset_summary([items(2), preferences(1), connected_components(1), isolated_items([])])]), _Scores).
 
 	test(elo_print_ranker_1, deterministic) :-
 		elo::learn(regular_head_to_head, Ranker),

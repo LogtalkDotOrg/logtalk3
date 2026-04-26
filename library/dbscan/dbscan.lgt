@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-26,
 		comment is 'DBSCAN clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses deterministic density-based clustering based on epsilon neighborhoods and minimum point counts.',
@@ -42,7 +42,7 @@
 	]).
 
 	:- uses(list, [
-		last/2, length/2, member/2, memberchk/2, nth1/3
+		last/2, length/2, member/2, nth1/3
 	]).
 
 	:- uses(numberlist, [

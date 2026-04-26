@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-25,
+		date is 2026-04-26,
 		comment is 'Elo pairwise preference ranker. Learns one deterministic rating per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by replaying the observed preference stream using a deterministic batch Elo update rule, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		remarks is [
 			'Algorithm' - 'Processes the pairwise preference stream in dataset enumeration order using the standard Elo expected-score formula and symmetric rating updates after each observed result.',
@@ -35,20 +35,6 @@
 			'Ranker representation' - 'The learned ranker is represented by default as ``elo_ranker(Items, Ratings, Diagnostics)`` where ``Ratings`` stores ``Item-Rating`` pairs and ``Diagnostics`` stores metadata such as the effective options and training dataset summary.'
 		],
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, colley, rank_centrality]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
-	:- info(learn/3, [
-		comment is 'Learns an Elo ranker from the given dataset object using the specified options.',
-		argnames is ['Dataset', 'Ranker', 'Options']
-	]).
-
-	:- public(ratings/2).
-	:- mode(ratings(+compound, -list(pair)), one).
-	:- info(ratings/2, [
-		comment is 'Returns the learned item-rating pairs.',
-		argnames is ['Ranker', 'Ratings']
 	]).
 
 	:- uses(avltree, [
@@ -79,9 +65,6 @@
 	rank(Ranker, Candidates, Ranking) :-
 		^^score_ranker_data(Ranker, _Items, Ratings, _Diagnostics),
 		^^rank_by_scores(Ratings, Candidates, Ranking).
-
-	ratings(Ranker, Ratings) :-
-		^^score_ranker_data(Ranker, _Items, Ratings, _Diagnostics).
 
 	singleton_ranker(Item, InitialRating, Options, DatasetSummary, elo_ranker([Item], [Item-InitialRating], [
 		model(elo),

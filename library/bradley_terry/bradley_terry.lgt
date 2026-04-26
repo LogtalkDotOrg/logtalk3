@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-24,
+		date is 2026-04-26,
 		comment is 'Bradley-Terry pairwise preference ranker. Learns one positive strength parameter per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol when the directed win graph admits a finite Bradley-Terry maximum-likelihood estimate, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		remarks is [
 			'Algorithm' - 'Uses a deterministic minorization-maximization update to estimate one relative strength parameter per item from weighted pairwise wins and losses.',
@@ -33,20 +33,6 @@
 			'Ranker representation' - 'The learned ranker is represented by default as ``bt_ranker(Items, Strengths, Diagnostics)`` where ``Strengths`` stores ``Item-Strength`` pairs and ``Diagnostics`` stores metadata such as convergence status, iteration count, and dataset summary.'
 		],
 		see_also is [pairwise_ranking_dataset_protocol, ranking_dataset_protocol, ranker_protocol, regularized_bradley_terry]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
-	:- info(learn/3, [
-		comment is 'Learns a Bradley-Terry ranker from the given dataset object using the specified options.',
-		argnames is ['Dataset', 'Ranker', 'Options']
-	]).
-
-	:- public(strengths/2).
-	:- mode(strengths(+compound, -list(pair)), one).
-	:- info(strengths/2, [
-		comment is 'Returns the learned item-strength pairs.',
-		argnames is ['Ranker', 'Strengths']
 	]).
 
 	:- uses(format, [
@@ -58,11 +44,7 @@
 	]).
 
 	:- uses(list, [
-		keysort/2, length/2, member/2
-	]).
-
-	:- uses(numberlist, [
-		sum/2
+		length/2, member/2
 	]).
 
 	learn(Dataset, Ranker) :-
@@ -98,8 +80,8 @@
 		ranker_data(Ranker, _Items, Strengths, _Diagnostics),
 		^^rank_by_scores(Strengths, Candidates, Ranking).
 
-	strengths(Ranker, Strengths) :-
-		ranker_data(Ranker, _Items, Strengths, _Diagnostics).
+	ranker_scores_data(Ranker, Scores) :-
+		ranker_data(Ranker, _Items, Scores, _Diagnostics).
 
 	ranker_diagnostics_data(Ranker, Diagnostics) :-
 		ranker_data(Ranker, _Items, _Strengths, Diagnostics).
@@ -126,35 +108,10 @@
 	ranker_data(Ranker, Items, Strengths, Diagnostics) :-
 		(   var(Ranker) ->
 			instantiation_error
-		;   Ranker = bt_ranker(Items, Strengths, Diagnostics),
-			valid_ranker_data(Items, Strengths) ->
+		;   Ranker = bt_ranker(Items, Strengths, Diagnostics) ->
 			true
 		;   domain_error(bradley_terry_ranker, Ranker)
 		).
-
-	valid_ranker_data(Items, Strengths) :-
-		proper_item_list(Items),
-		strength_pairs_values(Items, Strengths, _Values).
-
-	proper_item_list(Items) :-
-		proper_item_list(Items, []).
-
-	proper_item_list(Items, _Seen) :-
-		var(Items),
-		!,
-		fail.
-	proper_item_list([], _Seen).
-	proper_item_list([Item| Items], Seen) :-
-		nonvar(Item),
-		\+ member(Item, Seen),
-		proper_item_list(Items, [Item| Seen]).
-
-	strength_pairs_values([], [], []).
-	strength_pairs_values([Item| Items], [StrengthItem-Strength| Strengths], [Strength| Values]) :-
-		Item == StrengthItem,
-		number(Strength),
-		Strength > 0.0,
-		strength_pairs_values(Items, Strengths, Values).
 
 	update_strengths(bradley_terry_context(PairWeights, Wins), Strengths0, Strengths, MaximumDifference) :-
 		^^strength_dictionary(Strengths0, StrengthDictionary),

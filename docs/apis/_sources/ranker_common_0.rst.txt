@@ -8,14 +8,14 @@
 ``ranker_common``
 =================
 
-Shared predicates for ranker diagnostics and export.
+Shared predicates for ranker score access, diagnostics, and export.
 
 | **Availability:** 
 |    ``logtalk_load(ranking_protocols(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-20
+| **Date:** 2026-04-26
 
 | **Compilation flags:**
 |    ``static``
@@ -33,7 +33,7 @@ Shared predicates for ranker diagnostics and export.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::export_to_clauses/4`  :ref:`ranker_protocol/0::export_to_file/4`  :ref:`ranker_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::export_to_clauses/4`  :ref:`ranker_protocol/0::export_to_file/4`  :ref:`ranker_protocol/0::learn/2`  :ref:`ranker_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  :ref:`ranker_protocol/0::scores/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -46,6 +46,25 @@ Public predicates
 
 Protected predicates
 --------------------
+
+.. index:: ranker_scores_data/2
+.. _ranker_common/0::ranker_scores_data/2:
+
+``ranker_scores_data/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing ranker implementations must define in order to expose the learned item-score pairs on the ranker native numeric scale.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ranker_scores_data(Ranker,Scores)``
+| **Mode and number of proofs:**
+|    ``ranker_scores_data(+compound,-list(pair))`` - ``one``
+
+
+------------
 
 .. index:: ranker_diagnostics_data/2
 .. _ranker_common/0::ranker_diagnostics_data/2:

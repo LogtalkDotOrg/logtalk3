@@ -15,7 +15,7 @@ Copeland pairwise preference ranker. Learns one deterministic score per item fro
 
 | **Author:** Paulo Moura
 | **Version:** 1:1:0
-| **Date:** 2026-04-25
+| **Date:** 2026-04-26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,8 +24,6 @@ Copeland pairwise preference ranker. Learns one deterministic score per item fro
 | **Imports:**
 |    ``public`` :ref:`ranking_dataset_common <ranking_dataset_common/0>`
 |    ``public`` :ref:`score_ranker_model_common <score_ranker_model_common/0>`
-| **Uses:**
-|    :ref:`avltree <avltree/0>`
 
 | **Remarks:**
 
@@ -36,7 +34,7 @@ Copeland pairwise preference ranker. Learns one deterministic score per item fro
    - Ranker representation: The learned ranker is represented by default as ``copeland_ranker(Items, Scores, Diagnostics)`` where ``Scores`` stores ``Item-Score`` pairs and ``Diagnostics`` stores metadata such as the training dataset summary.
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::export_to_clauses/4`  :ref:`ranker_protocol/0::export_to_file/4`  :ref:`ranking_dataset_common/0::grouped_dataset_groups/2`  :ref:`ranking_dataset_common/0::grouped_dataset_items/2`  :ref:`ranking_dataset_common/0::grouped_dataset_items/3`  :ref:`ranking_dataset_common/0::grouped_dataset_summary/2`  :ref:`ranker_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ranking_dataset_common/0::pairwise_dataset_connected_components/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_declared_items/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_items/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_matchups/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_preferences/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_summary/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_win_totals/2`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`ranking_dataset_common/0::validate_grouped_dataset/1`  :ref:`ranking_dataset_common/0::validate_grouped_dataset/2`  :ref:`ranking_dataset_common/0::validate_pairwise_dataset/1`  :ref:`ranking_dataset_common/0::validate_pairwise_dataset/2`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::export_to_clauses/4`  :ref:`ranker_protocol/0::export_to_file/4`  :ref:`ranking_dataset_common/0::grouped_dataset_groups/2`  :ref:`ranking_dataset_common/0::grouped_dataset_items/2`  :ref:`ranking_dataset_common/0::grouped_dataset_items/3`  :ref:`ranking_dataset_common/0::grouped_dataset_summary/2`  :ref:`ranker_protocol/0::learn/2`  :ref:`ranker_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ranking_dataset_common/0::pairwise_dataset_connected_components/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_declared_items/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_items/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_matchups/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_preferences/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_summary/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_win_totals/2`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  :ref:`ranker_protocol/0::scores/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`ranking_dataset_common/0::validate_grouped_dataset/1`  :ref:`ranking_dataset_common/0::validate_grouped_dataset/2`  :ref:`ranking_dataset_common/0::validate_pairwise_dataset/1`  :ref:`ranking_dataset_common/0::validate_pairwise_dataset/2`  
 
 .. contents::
    :local:
@@ -45,43 +43,7 @@ Copeland pairwise preference ranker. Learns one deterministic score per item fro
 Public predicates
 -----------------
 
-.. index:: learn/3
-.. _copeland/0::learn/3:
-
-``learn/3``
-^^^^^^^^^^^
-
-Learns a Copeland ranker from the given dataset object using the specified options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``learn(Dataset,Ranker,Options)``
-| **Mode and number of proofs:**
-|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
-
-
-------------
-
-.. index:: scores/2
-.. _copeland/0::scores/2:
-
-``scores/2``
-^^^^^^^^^^^^
-
-Returns the learned item-score pairs.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``scores(Ranker,Scores)``
-| **Mode and number of proofs:**
-|    ``scores(+compound,-list(pair))`` - ``one``
-
-
-------------
+(no local declarations; see entity ancestors if any)
 
 Protected predicates
 --------------------

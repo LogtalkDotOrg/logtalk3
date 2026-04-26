@@ -188,6 +188,12 @@ ranking using the Rank Centrality method.
 * ADDED: New `regularized_bradley_terry` library implementing pairwise
 preference ranking using a regularized Bradley-Terry model.
 
+* ADDED: New `schulze` library implementing pairwise preference ranking
+using the Schulze strongest-path method.
+
+* ADDED: New `thurstone_mosteller` library implementing pairwise
+preference ranking using a deterministic Thurstone-Mosteller Case V fit.
+
 * ADDED: New `logistic_regression` library implementing logistic regression
 for binary and multiclass classification on continuous and mixed-feature
 datasets using batch gradient descent.

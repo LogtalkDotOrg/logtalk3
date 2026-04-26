@@ -201,7 +201,7 @@ The learned ranker is represented by a compound term of the form:
 Where:
 
 - `Items`: List of ranked items.
-- `Strengths`: List of normalized `Item-Strength` pairs.
+- `Scores`: List of normalized `Item-Strength` pairs.
 - `Diagnostics`: List of metadata terms, including the effective options,
   convergence status, iteration count, final update delta, and dataset summary.
 

@@ -188,11 +188,11 @@
 	test(rank_centrality_rank_invalid_ranker_error, error(domain_error(rank_centrality_ranker, fake_ranker([alpha], [alpha-1.0], [model(fake)])))) :-
 		rank_centrality::rank(fake_ranker([alpha], [alpha-1.0], [model(fake)]), [alpha], _Ranking).
 
-	test(rank_centrality_rank_non_normalized_ranker_error, error(domain_error(rank_centrality_ranker, rank_centrality_ranker([alpha, beta], [alpha-0.8, beta-0.3], [model(rank_centrality), options([maximum_iterations(5000), tolerance(1.0e-8)]), convergence(converged), iterations(3), final_delta(0.0), maximum_degree(1), dataset_summary([items(2), preferences(4), connected_components(1), isolated_items([])])])))) :-
-		rank_centrality::rank(rank_centrality_ranker([alpha, beta], [alpha-0.8, beta-0.3], [model(rank_centrality), options([maximum_iterations(5000), tolerance(1.0e-8)]), convergence(converged), iterations(3), final_delta(0.0), maximum_degree(1), dataset_summary([items(2), preferences(4), connected_components(1), isolated_items([])])]), [alpha, beta], _Ranking).
+	test(rank_centrality_rank_non_normalized_ranker_accepted, deterministic(Ranking == [alpha, beta])) :-
+		rank_centrality::rank(rank_centrality_ranker([alpha, beta], [alpha-0.8, beta-0.3], [model(rank_centrality), options([maximum_iterations(5000), tolerance(1.0e-8)]), convergence(converged), iterations(3), final_delta(0.0), maximum_degree(1), dataset_summary([items(2), preferences(4), connected_components(1), isolated_items([])])]), [alpha, beta], Ranking).
 
-	test(rank_centrality_scores_non_normalized_ranker_error, error(domain_error(rank_centrality_ranker, rank_centrality_ranker([alpha, beta], [alpha-0.8, beta-0.3], [model(rank_centrality), options([maximum_iterations(5000), tolerance(1.0e-8)]), convergence(converged), iterations(3), final_delta(0.0), maximum_degree(1), dataset_summary([items(2), preferences(4), connected_components(1), isolated_items([])])])))) :-
-		rank_centrality::scores(rank_centrality_ranker([alpha, beta], [alpha-0.8, beta-0.3], [model(rank_centrality), options([maximum_iterations(5000), tolerance(1.0e-8)]), convergence(converged), iterations(3), final_delta(0.0), maximum_degree(1), dataset_summary([items(2), preferences(4), connected_components(1), isolated_items([])])]), _Scores).
+	test(rank_centrality_scores_non_normalized_ranker_accepted, deterministic(Scores == [alpha-0.8, beta-0.3])) :-
+		rank_centrality::scores(rank_centrality_ranker([alpha, beta], [alpha-0.8, beta-0.3], [model(rank_centrality), options([maximum_iterations(5000), tolerance(1.0e-8)]), convergence(converged), iterations(3), final_delta(0.0), maximum_degree(1), dataset_summary([items(2), preferences(4), connected_components(1), isolated_items([])])]), Scores).
 
 	test(rank_centrality_print_ranker_1, deterministic) :-
 		^^suppress_text_output,

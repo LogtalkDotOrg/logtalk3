@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 25, 2026
+##   Last updated on April 26, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -207,6 +207,7 @@ sed '1,19d' ../../../library/redis/NOTES.md | pandoc -f gfm -t rst -o libraries/
 sed '1,19d' ../../../library/regression_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/regression_protocols.rst
 sed '1,19d' ../../../library/regression_tree/NOTES.md | pandoc -f gfm -t rst -o libraries/regression_tree.rst
 sed '1,19d' ../../../library/regularized_bradley_terry/NOTES.md | pandoc -f gfm -t rst -o libraries/regularized_bradley_terry.rst
+sed '1,19d' ../../../library/schulze/NOTES.md | pandoc -f gfm -t rst -o libraries/schulze.rst
 sed '1,19d' ../../../library/sequential_pattern_mining_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/sequential_pattern_mining_protocols.rst
 sed '1,19d' ../../../library/sets/NOTES.md | pandoc -f gfm -t rst -o libraries/sets.rst
 sed '1,19d' ../../../library/simulated_annealing/NOTES.md | pandoc -f gfm -t rst -o libraries/simulated_annealing.rst
@@ -220,6 +221,7 @@ sed '1,19d' ../../../library/string_distance/NOTES.md | pandoc -f gfm -t rst -o 
 sed '1,19d' ../../../library/strings/NOTES.md | pandoc -f gfm -t rst -o libraries/strings.rst
 sed '1,19d' ../../../library/subsequences/NOTES.md | pandoc -f gfm -t rst -o libraries/subsequences.rst
 sed '1,19d' ../../../library/term_io/NOTES.md | pandoc -f gfm -t rst -o libraries/term_io.rst
+sed '1,19d' ../../../library/thurstone_mosteller/NOTES.md | pandoc -f gfm -t rst -o libraries/thurstone_mosteller.rst
 sed '1,19d' ../../../library/time_scales/NOTES.md | pandoc -f gfm -t rst -o libraries/time_scales.rst
 sed '1,19d' ../../../library/timeout/NOTES.md | pandoc -f gfm -t rst -o libraries/timeout.rst
 sed '1,19d' ../../../library/toml/NOTES.md | pandoc -f gfm -t rst -o libraries/toml.rst

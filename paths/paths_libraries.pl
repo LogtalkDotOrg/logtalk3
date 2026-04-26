@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on April 25, 2026
+%  Last updated on April 26, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -161,6 +161,7 @@ logtalk_library_path(redis, library('redis/')).
 logtalk_library_path(regression_protocols, library('regression_protocols/')).
 logtalk_library_path(regression_tree, library('regression_tree/')).
 logtalk_library_path(regularized_bradley_terry, library('regularized_bradley_terry/')).
+logtalk_library_path(schulze, library('schulze/')).
 logtalk_library_path(sequential_pattern_mining_protocols, library('sequential_pattern_mining_protocols/')).
 logtalk_library_path(sets, library('sets/')).
 logtalk_library_path(simulated_annealing, library('simulated_annealing/')).
@@ -174,6 +175,7 @@ logtalk_library_path(string_distance, library('string_distance/')).
 logtalk_library_path(strings, library('strings/')).
 logtalk_library_path(subsequences, library('subsequences/')).
 logtalk_library_path(term_io, library('term_io/')).
+logtalk_library_path(thurstone_mosteller, library('thurstone_mosteller/')).
 logtalk_library_path(time_scales, library('time_scales/')).
 logtalk_library_path(timeout, library('timeout/')).
 logtalk_library_path(toml, library('toml/')).

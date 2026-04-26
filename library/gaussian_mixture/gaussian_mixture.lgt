@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-24,
+		date is 2026-04-26,
 		comment is 'Gaussian mixture model clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses deterministic expectation-maximization with diagonal covariance matrices.',
@@ -401,15 +401,18 @@
 		),
 		maximum_responsibility(Responsibilities, NextMaximum, Maximum).
 
-	component_statistics([], _Index, [], 0.0, [], []).
-	component_statistics([_-Features| Rows], Index, [Responsibilities| ResponsibilitiesRows], ResponsibilitySum, WeightedSum, WeightedSquares) :-
+	component_statistics(Rows, Index, ResponsibilitiesRows, ResponsibilitySum, WeightedSum, WeightedSquares) :-
+		component_statistics(Rows, Index, ResponsibilitiesRows, 0.0, ResponsibilitySum, [], WeightedSum, [], WeightedSquares).
+
+	component_statistics([], _Index, [], ResponsibilitySum, ResponsibilitySum, WeightedSum, WeightedSum, WeightedSquares, WeightedSquares).
+	component_statistics([_-Features| Rows], Index, [Responsibilities| ResponsibilitiesRows], ResponsibilitySum0, ResponsibilitySum, WeightedSum0, WeightedSum, WeightedSquares0, WeightedSquares) :-
 		nth1(Index, Responsibilities, Responsibility),
 		scale_vector(Features, Responsibility, RowWeightedFeatures),
 		scale_squares(Features, Responsibility, RowWeightedSquares),
-		component_statistics(Rows, Index, ResponsibilitiesRows, RestResponsibilitySum, RestWeightedSum, RestWeightedSquares),
-		ResponsibilitySum is Responsibility + RestResponsibilitySum,
-		add_optional_vectors(RowWeightedFeatures, RestWeightedSum, WeightedSum),
-		add_optional_vectors(RowWeightedSquares, RestWeightedSquares, WeightedSquares).
+		ResponsibilitySum1 is ResponsibilitySum0 + Responsibility,
+		add_optional_vectors(RowWeightedFeatures, WeightedSum0, WeightedSum1),
+		add_optional_vectors(RowWeightedSquares, WeightedSquares0, WeightedSquares1),
+		component_statistics(Rows, Index, ResponsibilitiesRows, ResponsibilitySum1, ResponsibilitySum, WeightedSum1, WeightedSum, WeightedSquares1, WeightedSquares).
 
 	scale_squares([], _Responsibility, []).
 	scale_squares([Value| Values], Responsibility, [WeightedSquare| WeightedSquares]) :-

@@ -15,7 +15,7 @@ Protocol for machine learning rankers.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-20
+| **Date:** 2026-04-26
 
 | **Compilation flags:**
 |    ``static``
@@ -38,13 +38,32 @@ Protocol for machine learning rankers.
 Public predicates
 -----------------
 
+.. index:: learn/3
+.. _ranker_protocol/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns a ranker from the given dataset object using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Ranker,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
+
+
+------------
+
 .. index:: learn/2
 .. _ranker_protocol/0::learn/2:
 
 ``learn/2``
 ^^^^^^^^^^^
 
-Learns a ranker from the given dataset object.
+Learns a ranker from the given dataset object using default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -72,6 +91,25 @@ Ranks a list of candidate items using the learned ranker and returns the candida
 |    ``rank(Ranker,Candidates,Ranking)``
 | **Mode and number of proofs:**
 |    ``rank(+compound,+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: scores/2
+.. _ranker_protocol/0::scores/2:
+
+``scores/2``
+^^^^^^^^^^^^
+
+Returns the learned item-score pairs on the ranker native numeric scale. Depending on the ranker, these values may also be interpreted more specifically as strengths or ratings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``scores(Ranker,Scores)``
+| **Mode and number of proofs:**
+|    ``scores(+compound,-list(pair))`` - ``one``
 
 
 ------------

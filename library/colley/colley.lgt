@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-25,
+		date is 2026-04-26,
 		comment is 'Colley pairwise preference ranker. Learns one deterministic rating per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by solving the Colley linear system built from aggregated pairwise outcomes and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		remarks is [
 			'Algorithm' - 'Builds the Colley coefficient matrix with diagonal entries ``2 + games_i`` and off-diagonal entries ``-games_ij``, then solves the linear system ``C r = b`` using deterministic Gaussian elimination with partial pivoting and residual validation.',
@@ -34,20 +34,6 @@
 			'Ranker representation' - 'The learned ranker is represented by default as ``colley_ranker(Items, Ratings, Diagnostics)`` where ``Ratings`` stores ``Item-Rating`` pairs and ``Diagnostics`` stores metadata such as the training dataset summary.'
 		],
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, copeland, rank_centrality]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
-	:- info(learn/3, [
-		comment is 'Learns a Colley ranker from the given dataset object using the specified options.',
-		argnames is ['Dataset', 'Ranker', 'Options']
-	]).
-
-	:- public(ratings/2).
-	:- mode(ratings(+compound, -list(pair)), one).
-	:- info(ratings/2, [
-		comment is 'Returns the learned item-rating pairs.',
-		argnames is ['Ranker', 'Ratings']
 	]).
 
 	:- uses(avltree, [
@@ -88,9 +74,6 @@
 	rank(Ranker, Candidates, Ranking) :-
 		^^score_ranker_data(Ranker, _Items, Ratings, _Diagnostics),
 		^^rank_by_scores(Ratings, Candidates, Ranking).
-
-	ratings(Ranker, Ratings) :-
-		^^score_ranker_data(Ranker, _Items, Ratings, _Diagnostics).
 
 	singleton_ranker(Item, Options, DatasetSummary, colley_ranker([Item], [Item-0.5], [
 		model(colley),

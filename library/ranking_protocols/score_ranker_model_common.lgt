@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-25,
+		date is 2026-04-26,
 		comment is 'Shared predicates for score-ranker term construction, validation, ranking, export, and pretty-printing.'
 	]).
 
@@ -110,6 +110,9 @@
 	:- uses(avltree, [
 		insert/4 as dictionary_insert/4, lookup/3 as dictionary_lookup/3, new/1 as dictionary_new/1
 	]).
+
+	ranker_scores_data(Ranker, Scores) :-
+		::score_ranker_data(Ranker, _Items, Scores, _Diagnostics).
 
 	ranker_diagnostics_data(Ranker, Diagnostics) :-
 		::score_ranker_data(Ranker, _Items, _Scores, Diagnostics).

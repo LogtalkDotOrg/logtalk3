@@ -79,6 +79,8 @@
 	rank(sample_ranker(Strengths, _Diagnostics), Candidates, Ranking) :-
 		ranking_test_support::rank_candidates(Strengths, Candidates, Ranking).
 
+	ranker_scores_data(sample_ranker(Strengths, _Diagnostics), Strengths).
+
 	ranker_diagnostics_data(sample_ranker(_Strengths, Diagnostics), Diagnostics).
 
 	ranker_export_template(_Dataset, _Ranker, Functor, Template) :-
@@ -110,7 +112,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-26,
 		comment is 'Smoke tests for the "ranking_protocols" library.'
 	]).
 
@@ -189,6 +191,10 @@
 	test(sample_ranker_rank_3, deterministic(Ranking == [alpha, beta, gamma, delta])) :-
 		sample_ranker::learn(head_to_head, Ranker),
 		sample_ranker::rank(Ranker, [alpha, beta, gamma, delta], Ranking).
+
+	test(sample_ranker_scores_2, deterministic(Scores == [alpha-10, beta-5, gamma-4, delta-0])) :-
+		sample_ranker::learn(head_to_head, Ranker),
+		sample_ranker::scores(Ranker, Scores).
 
 	test(sample_ranker_diagnostics_2, deterministic(memberchk(model(sample_ranker), Diagnostics))) :-
 		sample_ranker::learn(head_to_head, Ranker),

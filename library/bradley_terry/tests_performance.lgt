@@ -61,7 +61,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-24,
+		date is 2026-04-26,
 		comment is 'Performance and sparse-graph regression benchmarks for the "bradley_terry" library.'
 	]).
 
@@ -77,7 +77,7 @@
 	test(sparse_cycle_256_reference_fit, true, [note(metrics(train_seconds-TrainTime, items-Count, iterations-Iterations, strength_sum-TotalStrength))]) :-
 		benchmark(bradley_terry::learn(sparse_cycle_256, _), TrainTime),
 		bradley_terry::learn(sparse_cycle_256, Ranker),
-		bradley_terry::strengths(Ranker, Strengths),
+		bradley_terry::scores(Ranker, Strengths),
 		length(Strengths, Count),
 		Count == 256,
 		sum_strengths(Strengths, 0.0, TotalStrength),
