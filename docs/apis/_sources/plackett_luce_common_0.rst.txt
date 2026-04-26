@@ -1,0 +1,115 @@
+.. index:: single: plackett_luce_common
+.. _plackett_luce_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``plackett_luce_common``
+========================
+
+Shared helpers for grouped Plackett-Luce rankers.
+
+| **Availability:** 
+|    ``logtalk_load(ranking_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-26
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: index_items/3
+.. _plackett_luce_common/0::index_items/3:
+
+``index_items/3``
+^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``index_items(+list,+integer,-list)`` - ``one``
+
+
+------------
+
+.. index:: preprocess_groups/10
+.. _plackett_luce_common/0::preprocess_groups/10:
+
+``preprocess_groups/10``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``preprocess_groups(+atom,+list,+object_identifier,+atom,+compound,+integer,-list,-list,-compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: selection_exposures/4
+.. _plackett_luce_common/0::selection_exposures/4:
+
+``selection_exposures/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``selection_exposures(+list,+list,+compound,-list)`` - ``one``
+
+
+------------
+
+.. index:: normalize_strengths/6
+.. _plackett_luce_common/0::normalize_strengths/6:
+
+``normalize_strengths/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``normalize_strengths(+list(number),+number,+list(number),-list(number),+number,-number)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

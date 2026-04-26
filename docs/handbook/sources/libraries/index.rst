@@ -140,6 +140,7 @@ directory in the ``NOTES.md`` file.
    pattern_mining_protocols
    pca
    permutations
+   plackett_luce
    plackett_luce_last
    prefix_span
    process

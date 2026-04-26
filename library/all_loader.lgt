@@ -141,6 +141,7 @@
 		bradley_terry(loader),
 		colley(loader),
 		schulze(loader),
+		plackett_luce(loader),
 		plackett_luce_last(loader),
 		regularized_bradley_terry(loader),
 		copeland(loader),

@@ -1643,6 +1643,16 @@ To load any library (including developer tools, ports, and contributions), use t
    permutations <permutations_0>
    permutations_protocol <permutations_protocol_0>
 
+:ref:`plackett_luce <library_plackett_luce>`
+--------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   plackett_luce <plackett_luce_0>
+
 :ref:`plackett_luce_last <library_plackett_luce_last>`
 ------------------------------------------------------
 
@@ -1772,6 +1782,7 @@ To load any library (including developer tools, ports, and contributions), use t
    grouped_strength_ranker_common <grouped_strength_ranker_common_0>
    pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol_0>
    pairwise_strength_ranker_common <pairwise_strength_ranker_common_0>
+   plackett_luce_common <plackett_luce_common_0>
    ranker_common <ranker_common_0>
    ranker_protocol <ranker_protocol_0>
    ranking_dataset_common <ranking_dataset_common_0>

@@ -190,6 +190,7 @@ Foreach-Object {
 (Get-Content ../../../library/pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/pattern_mining_protocols.rst
 (Get-Content ../../../library/pca/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/pca.rst
 (Get-Content ../../../library/permutations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/permutations.rst
+(Get-Content ../../../library/plackett_luce/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/plackett_luce.rst
 (Get-Content ../../../library/plackett_luce_last/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/plackett_luce_last.rst
 (Get-Content ../../../library/prefix_span/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/prefix_span.rst
 (Get-Content ../../../library/process/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/process.rst

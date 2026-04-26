@@ -219,6 +219,7 @@ logtalk_library_path(os, library('os/')).
 logtalk_library_path(pattern_mining_protocols, library('pattern_mining_protocols/')).
 logtalk_library_path(pca, library('pca/')).
 logtalk_library_path(permutations, library('permutations/')).
+logtalk_library_path(plackett_luce, library('plackett_luce/')).
 logtalk_library_path(plackett_luce_last, library('plackett_luce_last/')).
 logtalk_library_path(prefix_span, library('prefix_span/')).
 logtalk_library_path(process, library('process/')).

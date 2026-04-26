@@ -190,6 +190,7 @@ sed '1,19d' ../../../library/os/NOTES.md | pandoc -f gfm -t rst -o libraries/os.
 sed '1,19d' ../../../library/pattern_mining_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/pattern_mining_protocols.rst
 sed '1,19d' ../../../library/pca/NOTES.md | pandoc -f gfm -t rst -o libraries/pca.rst
 sed '1,19d' ../../../library/permutations/NOTES.md | pandoc -f gfm -t rst -o libraries/permutations.rst
+sed '1,19d' ../../../library/plackett_luce/NOTES.md | pandoc -f gfm -t rst -o libraries/plackett_luce.rst
 sed '1,19d' ../../../library/plackett_luce_last/NOTES.md | pandoc -f gfm -t rst -o libraries/plackett_luce_last.rst
 sed '1,19d' ../../../library/prefix_span/NOTES.md | pandoc -f gfm -t rst -o libraries/prefix_span.rst
 sed '1,19d' ../../../library/process/NOTES.md | pandoc -f gfm -t rst -o libraries/process.rst

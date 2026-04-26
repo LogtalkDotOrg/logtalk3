@@ -179,6 +179,9 @@ using Copeland scores.
 * ADDED: New `elo` library implementing pairwise preference ranking
 using deterministic batch Elo rating updates.
 
+* ADDED: New `plackett_luce` library implementing grouped ranking
+using a tie-aware top-choice Plackett-Luce model.
+
 * ADDED: New `plackett_luce_last` library implementing grouped ranking
 using a tie-aware Plackett-Luce-last model.
 

@@ -213,8 +213,10 @@ predicate clause so that the exported model can be loaded and reused as-is.
 See also
 --------
 
-For a deterministic non-probabilistic grouped-ranking baseline over the same
-dataset protocol, see the `borda` library.
+For the complementary grouped top-choice variant over the same dataset
+protocol, see the `plackett_luce` library. For a deterministic
+non-probabilistic grouped-ranking baseline over the same dataset protocol,
+see the `borda` library.
 
 
 References
