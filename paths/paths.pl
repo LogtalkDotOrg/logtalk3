@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on April 26, 2026
+%  Last updated on April 27, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -202,6 +202,7 @@ logtalk_library_path(lof, library('lof/')).
 logtalk_library_path(logging, library('logging/')).
 logtalk_library_path(logistic_regression, library('logistic_regression/')).
 logtalk_library_path(loops, library('loops/')).
+logtalk_library_path(massey, library('massey/')).
 logtalk_library_path(mcp_server, library('mcp_server/')).
 logtalk_library_path(memcached, library('memcached/')).
 logtalk_library_path(meta, library('meta/')).

@@ -123,6 +123,7 @@ directory in the ``NOTES.md`` file.
    logging
    logistic_regression
    loops
+   massey
    mcp_server
    memcached
    meta

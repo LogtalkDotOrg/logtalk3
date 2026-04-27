@@ -143,6 +143,7 @@
 		schulze(loader),
 		plackett_luce(loader),
 		plackett_luce_last(loader),
+		massey(loader),
 		regularized_bradley_terry(loader),
 		copeland(loader),
 		elo(loader),
