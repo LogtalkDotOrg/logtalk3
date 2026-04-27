@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'GSP sequential pattern miner for sequence datasets using level-wise candidate generation and pruning.',
 		remarks is [
 			'Algorithm' - 'Builds frequent sequential patterns level by level by extending frequent patterns, pruning candidates whose immediate subpatterns are not all frequent, and rescanning the dataset for support.',
@@ -114,7 +114,7 @@
 	i_extension_candidate(Pattern, Item, Candidate) :-
 		Pattern \== [],
 		append(LeadingItemsets, [LastItemset], Pattern),
-		\+ memberchk(Item, LastItemset),
+		\+ member(Item, LastItemset),
 		append(LastItemset, [Item], ExtendedLastItemset0),
 		sort(ExtendedLastItemset0, ExtendedLastItemset),
 		append(LeadingItemsets, [ExtendedLastItemset], Candidate).

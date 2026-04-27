@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "c45" library.'
 	]).
 
@@ -38,6 +38,12 @@
 
 	test(c45_learn_2_play_tennis, deterministic(ground(Tree))) :-
 		c45::learn(play_tennis, Tree).
+
+	test(c45_valid_classifier_1, deterministic(c45::valid_classifier(Tree))) :-
+		c45::learn(play_tennis, Tree).
+
+	test(c45_invalid_classifier_1, fail) :-
+		c45::valid_classifier(tree(outlook, [sunny-leaf(no), sunny-leaf(yes)])).
 
 	test(c45_learn_2_play_tennis_root_is_tree, true(Attribute == outlook)) :-
 		c45::learn(play_tennis, tree(Attribute, _)).

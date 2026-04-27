@@ -15,7 +15,7 @@ Shared predicates for classifier diagnostics and export.
 
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
-| **Date:** 2026-04-20
+| **Date:** 2026-04-27
 
 | **Compilation flags:**
 |    ``static``
@@ -23,15 +23,18 @@ Shared predicates for classifier diagnostics and export.
 
 | **Implements:**
 |    ``public`` :ref:`classifier_protocol <classifier_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`classifier_protocol/0::classifier_options/2`  :ref:`classifier_protocol/0::diagnostic/2`  :ref:`classifier_protocol/0::diagnostics/2`  :ref:`classifier_protocol/0::export_to_clauses/4`  :ref:`classifier_protocol/0::export_to_file/4`  :ref:`classifier_protocol/0::learn/2`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  
+|     :ref:`classifier_protocol/0::check_classifier/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`classifier_protocol/0::classifier_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`classifier_protocol/0::diagnostic/2`  :ref:`classifier_protocol/0::diagnostics/2`  :ref:`classifier_protocol/0::export_to_clauses/4`  :ref:`classifier_protocol/0::export_to_file/4`  :ref:`classifier_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  :ref:`classifier_protocol/0::valid_classifier/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -117,6 +120,139 @@ Pretty-printing helper predicate used by importing classifier implementations to
 |    ``print_classifier_template(Classifier)``
 | **Mode and number of proofs:**
 |    ``print_classifier_template(+compound)`` - ``one``
+
+
+------------
+
+.. index:: valid_attribute_names/1
+.. _classifier_common/0::valid_attribute_names/1:
+
+``valid_attribute_names/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a list of attribute names is a proper list of distinct atoms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_attribute_names(AttributeNames)``
+| **Mode and number of proofs:**
+|    ``valid_attribute_names(+list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_class_values/1
+.. _classifier_common/0::valid_class_values/1:
+
+``valid_class_values/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a list of class values is a non-empty proper list of distinct atoms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_class_values(ClassValues)``
+| **Mode and number of proofs:**
+|    ``valid_class_values(+list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_feature_types/2
+.. _classifier_common/0::valid_feature_types/2:
+
+``valid_feature_types/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a list of feature type tags is non-empty and each tag belongs to the given allowed set.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_feature_types(FeatureTypes,AllowedTypes)``
+| **Mode and number of proofs:**
+|    ``valid_feature_types(+list,+list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_discrete_values/1
+.. _classifier_common/0::valid_discrete_values/1:
+
+``valid_discrete_values/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a list of categorical values is non-empty, contains only nonvar terms, and has no duplicates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_discrete_values(Values)``
+| **Mode and number of proofs:**
+|    ``valid_discrete_values(+list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_linear_encoders/1
+.. _classifier_common/0::valid_linear_encoders/1:
+
+``valid_linear_encoders/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a list of encoders only contains valid ``continuous/3`` or ``categorical/2`` encoder terms with distinct attributes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_linear_encoders(Encoders)``
+| **Mode and number of proofs:**
+|    ``valid_linear_encoders(+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_classifier_metadata/2
+.. _classifier_common/0::valid_classifier_metadata/2:
+
+``valid_classifier_metadata/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when diagnostics metadata contains the expected model term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_classifier_metadata(Model,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``valid_classifier_metadata(+atom,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_classifier_metadata/3
+.. _classifier_common/0::valid_classifier_metadata/3:
+
+``valid_classifier_metadata/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when diagnostics metadata contains the expected model term and records the given effective options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_classifier_metadata(Model,Options,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``valid_classifier_metadata(+atom,+list(compound),+list(compound))`` - ``zero_or_one``
 
 
 ------------

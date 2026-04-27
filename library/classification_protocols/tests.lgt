@@ -32,6 +32,16 @@
 
 	predict(sample_classifier(DefaultClass, _Diagnostics), _Instance, DefaultClass).
 
+	check_classifier(Classifier) :-
+		(   Classifier = sample_classifier(DefaultClass, Diagnostics),
+			atom(DefaultClass),
+			^^valid_classifier_metadata(sample_classifier, Diagnostics),
+			memberchk(training_dataset(_Dataset), Diagnostics),
+			memberchk(options([]), Diagnostics) ->
+			true
+		;   domain_error(valid_classifier, Classifier)
+		).
+
 	classifier_diagnostics_data(sample_classifier(_DefaultClass, Diagnostics), Diagnostics).
 
 	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
@@ -55,7 +65,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-27,
 		comment is 'Smoke tests for the "classification_protocols" library.'
 	]).
 
@@ -85,6 +95,12 @@
 	test(sample_classifier_diagnostics_2, deterministic(memberchk(model(sample_classifier), Diagnostics))) :-
 		sample_classifier::learn(play_tennis, Classifier),
 		sample_classifier::diagnostics(Classifier, Diagnostics).
+
+	test(sample_classifier_valid_classifier_1, deterministic(sample_classifier::valid_classifier(Classifier))) :-
+		sample_classifier::learn(play_tennis, Classifier).
+
+	test(sample_classifier_invalid_classifier_1, fail) :-
+		sample_classifier::valid_classifier(sample_classifier(1, [model(sample_classifier), options([]), training_dataset(play_tennis)])).
 
 	test(sample_classifier_diagnostic_2_enumerates, deterministic(Enumerated == Diagnostics)) :-
 		sample_classifier::learn(play_tennis, Classifier),

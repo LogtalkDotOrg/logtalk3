@@ -20,12 +20,12 @@
 
 
 :- object(knn,
-	imports([options, classifier_common])).
+	imports(classifier_common)).
 
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'k-Nearest Neighbors classifier with multiple distance metrics and weighting options. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'k-NN is a lazy learning algorithm that classifies instances based on the majority class among the k nearest training instances.',
@@ -309,6 +309,17 @@
 			training_examples(TrainingExamples)
 		].
 
+	check_classifier(Classifier) :-
+		(   classifier_data(Classifier, AttributeNames, FeatureTypes, Instances),
+			^^valid_attribute_names(AttributeNames),
+			^^valid_feature_types(FeatureTypes, [numeric, categorical]),
+			length(AttributeNames, FeatureCount),
+			length(FeatureTypes, FeatureCount),
+			valid_instances(Instances, FeatureTypes) ->
+			true
+		;   domain_error(valid_classifier, Classifier)
+		).
+
 	export_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Clause =.. [Functor, Classifier].
 
@@ -316,6 +327,27 @@
 		Template =.. [Functor, 'Classifier'].
 
 	classifier_term_template(knn_classifier(_AttributeNames, _FeatureTypes, _Instances), knn_classifier('AttributeNames', 'FeatureTypes', 'Instances')).
+
+	valid_instances(Instances, FeatureTypes) :-
+		valid(list(compound), Instances),
+		Instances \== [],
+		valid_instances_(Instances, FeatureTypes).
+
+	valid_instances_([], _FeatureTypes).
+	valid_instances_([Instance-Class| Instances], FeatureTypes) :-
+		atom(Class),
+		length(Instance, FeatureCount),
+		length(FeatureTypes, FeatureCount),
+		valid_instance_values(Instance, FeatureTypes),
+		valid_instances_(Instances, FeatureTypes).
+
+	valid_instance_values([], []).
+	valid_instance_values([Value| Values], [numeric| FeatureTypes]) :-
+		number(Value),
+		valid_instance_values(Values, FeatureTypes).
+	valid_instance_values([Value| Values], [categorical| FeatureTypes]) :-
+		nonvar(Value),
+		valid_instance_values(Values, FeatureTypes).
 
 	classifier_data(Classifier, AttributeNames, FeatureTypes, Instances) :-
 		Classifier =.. [_Functor, AttributeNames, FeatureTypes, Instances].

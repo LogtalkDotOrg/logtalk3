@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "ada_boost" library.'
 	]).
 
@@ -42,6 +42,12 @@
 
 	test(ada_boost_learn_2_play_tennis, true(ground(Classifier))) :-
 		ada_boost::learn(play_tennis, Classifier).
+
+	test(ada_boost_valid_classifier_1, deterministic(ada_boost::valid_classifier(Classifier))) :-
+		ada_boost::learn(play_tennis, Classifier).
+
+	test(ada_boost_invalid_classifier_1, fail) :-
+		ada_boost::valid_classifier(ab_classifier([weighted_tree(0.5, leaf(yes), [outlook, outlook])], [yes, no], [number_of_estimators(1)])).
 
 	test(ada_boost_learn_2_classifier_structure, true(functor(Classifier, ab_classifier, 3))) :-
 		ada_boost::learn(play_tennis, Classifier).

@@ -20,12 +20,12 @@
 
 
 :- object(linear_svm,
-	imports([options, classifier_common])).
+	imports(classifier_common)).
 
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'Linear support vector machine classifier supporting binary and multiclass classification using one-vs-rest margin models. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses batch subgradient descent to train one linear hinge-loss model per class in a one-vs-rest configuration.',
@@ -49,7 +49,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, memberchk/2
+		append/3, length/2, member/2, memberchk/2
 	]).
 
 	:- uses(numberlist, [
@@ -182,7 +182,7 @@
 		missing_one_hot_encode(Values, Zeroes).
 
 	check_categorical_value(Attribute, Values, Value) :-
-		(   memberchk(Value, Values) ->
+		(   member(Value, Values) ->
 			true
 		;   domain_error(attribute_value(Attribute, Values), Value)
 		).
@@ -302,6 +302,19 @@
 			options(Options)
 		].
 
+	check_classifier(Classifier) :-
+		(   classifier_data(Classifier, Classes, Encoders, Models, Options),
+			^^valid_class_values(Classes),
+			^^valid_linear_encoders(Encoders),
+			catch(::check_options(Options), _Error, fail),
+			encoders_feature_count(Encoders, EncodedFeatures),
+			length(Classes, ModelCount),
+			length(Models, ModelCount),
+			valid_models(Models, Classes, EncodedFeatures, []) ->
+			true
+		;   domain_error(valid_classifier, Classifier)
+		).
+
 	export_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Clause =.. [Functor, Classifier].
 
@@ -309,6 +322,14 @@
 		Template =.. [Functor, 'Classifier'].
 
 	classifier_term_template(linear_svm_classifier(_Classes, _Encoders, _Models, _Options), linear_svm_classifier('Classes', 'Encoders', 'Models', 'Options')).
+
+	valid_models([], _Classes, _EncodedFeatures, _SeenClasses).
+	valid_models([class_model(Class, Bias, Weights)| Models], Classes, EncodedFeatures, SeenClasses) :-
+		memberchk(Class, Classes),
+		\+ member(Class, SeenClasses),
+		valid(float, Bias),
+		valid(list(float, EncodedFeatures), Weights),
+		valid_models(Models, Classes, EncodedFeatures, [Class| SeenClasses]).
 
 	classifier_data(Classifier, Classes, Encoders, Models, Options) :-
 		Classifier =.. [_Functor, Classes, Encoders, Models, Options].

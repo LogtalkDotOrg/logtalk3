@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'Naive Bayes classifier with Laplace smoothing and Gaussian distribution support. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Naive Bayes is a probabilistic classifier based on Bayes theorem with strong (naive) independence assumptions between features.',
@@ -44,7 +44,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, memberchk/2, msort/2, nth1/3
+		length/2, member/2, memberchk/2, msort/2, nth1/3
 	]).
 
 	:- uses(pairs, [
@@ -57,6 +57,10 @@
 
 	:- uses(format, [
 		format/2
+	]).
+
+	:- uses(type, [
+		valid/2
 	]).
 
 	learn(Dataset, Classifier) :-
@@ -270,6 +274,20 @@
 	]) :-
 		classifier_data(Classifier, Classes, _ClassPriors, AttributeNames, FeatureTypes, _FeatureParams).
 
+	check_classifier(Classifier) :-
+		(   classifier_data(Classifier, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams),
+			^^valid_class_values(Classes),
+			valid_class_priors(ClassPriors, Classes),
+			^^valid_attribute_names(AttributeNames),
+			^^valid_feature_types(FeatureTypes, [continuous, categorical]),
+			length(AttributeNames, FeatureCount),
+			length(FeatureTypes, FeatureCount),
+			length(FeatureParams, FeatureCount),
+			valid_feature_params(FeatureParams, AttributeNames, FeatureTypes, Classes) ->
+			true
+		;   domain_error(valid_classifier, Classifier)
+		).
+
 	export_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Clause =.. [Functor, Classifier].
 
@@ -277,6 +295,63 @@
 		Template =.. [Functor, 'Classifier'].
 
 	classifier_term_template(nb_classifier(_Classes, _ClassPriors, _AttributeNames, _FeatureTypes, _FeatureParams), nb_classifier('Classes', 'ClassPriors', 'AttributeNames', 'FeatureTypes', 'FeatureParams')).
+
+	valid_class_priors(ClassPriors, Classes) :-
+		length(ClassPriors, Count),
+		length(Classes, Count),
+		valid_class_priors(ClassPriors, Classes, [], 0.0, Sum),
+		Delta is abs(Sum - 1.0),
+		Delta =< 1.0e-6.
+
+	valid_class_priors([], _Classes, _SeenClasses, Sum, Sum).
+	valid_class_priors([Class-Prior| ClassPriors], Classes, SeenClasses, Sum0, Sum) :-
+		memberchk(Class, Classes),
+		\+ member(Class, SeenClasses),
+		valid(positive_float, Prior),
+		Sum1 is Sum0 + Prior,
+		valid_class_priors(ClassPriors, Classes, [Class| SeenClasses], Sum1, Sum).
+
+	valid_feature_params([], [], [], _Classes).
+	valid_feature_params([feature(Attribute, categorical, Probs)| FeatureParams], [Attribute| AttributeNames], [categorical| FeatureTypes], Classes) :-
+		valid_categorical_probs(Probs, Classes),
+		valid_feature_params(FeatureParams, AttributeNames, FeatureTypes, Classes).
+	valid_feature_params([feature(Attribute, continuous, Stats)| FeatureParams], [Attribute| AttributeNames], [continuous| FeatureTypes], Classes) :-
+		valid_continuous_stats(Stats, Classes),
+		valid_feature_params(FeatureParams, AttributeNames, FeatureTypes, Classes).
+
+	valid_categorical_probs(Probs, Classes) :-
+		length(Probs, Count),
+		length(Classes, Count),
+		valid_categorical_probs(Probs, Classes, []).
+
+	valid_categorical_probs([], _Classes, _SeenClasses).
+	valid_categorical_probs([Class-ValueProbs| Probs], Classes, SeenClasses) :-
+		memberchk(Class, Classes),
+		\+ member(Class, SeenClasses),
+		valid_value_probabilities(ValueProbs, 0.0, Sum),
+		Delta is abs(Sum - 1.0),
+		Delta =< 1.0e-6,
+		valid_categorical_probs(Probs, Classes, [Class| SeenClasses]).
+
+	valid_value_probabilities([], Sum, Sum).
+	valid_value_probabilities([Value-Probability| ValueProbabilities], Sum0, Sum) :-
+		nonvar(Value),
+		valid(positive_float, Probability),
+		Sum1 is Sum0 + Probability,
+		valid_value_probabilities(ValueProbabilities, Sum1, Sum).
+
+	valid_continuous_stats(Stats, Classes) :-
+		length(Stats, Count),
+		length(Classes, Count),
+		valid_continuous_stats(Stats, Classes, []).
+
+	valid_continuous_stats([], _Classes, _SeenClasses).
+	valid_continuous_stats([Class-stats(Mean, Variance)| Stats], Classes, SeenClasses) :-
+		memberchk(Class, Classes),
+		\+ member(Class, SeenClasses),
+		valid(float, Mean),
+		valid(non_negative_float, Variance),
+		valid_continuous_stats(Stats, Classes, [Class| SeenClasses]).
 
 	classifier_data(Classifier, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams) :-
 		Classifier =.. [_Functor, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams].

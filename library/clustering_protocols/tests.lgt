@@ -41,7 +41,7 @@
 	]).
 
 	cluster(sample_clusterer(_Attributes), Instance, Cluster) :-
-		(\+ memberchk(x-_, Instance) ->
+		(\+ member(x-_, Instance) ->
 			Cluster = categorical
 		; memberchk(x-X, Instance),
 		  (X < 3 -> Cluster = left ; Cluster = right)

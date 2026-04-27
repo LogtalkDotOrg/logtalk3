@@ -20,12 +20,12 @@
 
 
 :- object(ada_boost,
-	imports([options, classifier_common])).
+	imports(classifier_common)).
 
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'AdaBoost (Adaptive Boosting) classifier using C4.5 decision trees as base learners. Implements the SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss function) variant, which supports multi-class classification. Builds an ensemble of weighted decision trees where each subsequent tree focuses on the examples misclassified by previous trees.',
 		remarks is [
 			'Algorithm' - 'AdaBoost iteratively trains weak learners (C4.5 decision trees) on weighted versions of the training data. After each iteration, the weights of misclassified examples are increased so that subsequent learners focus more on difficult cases.',
@@ -351,6 +351,19 @@
 			options(Options)
 		].
 
+	check_classifier(Classifier) :-
+		(   classifier_data(Classifier, WeightedTrees, ClassValues, Options),
+			WeightedTrees \== [],
+			^^valid_class_values(ClassValues),
+			catch(::check_options(Options), _Error, fail),
+			memberchk(number_of_estimators(ExpectedEstimators), Options),
+			length(WeightedTrees, EstimatorCount),
+			EstimatorCount =< ExpectedEstimators,
+			valid_weighted_trees(WeightedTrees) ->
+			true
+		;   domain_error(valid_classifier, Classifier)
+		).
+
 	% export_to_clauses/4 - exports classifier as a clause
 	export_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Clause =.. [Functor, Classifier].
@@ -359,6 +372,14 @@
 		Template =.. [Functor, 'Classifier'].
 
 	classifier_term_template(ab_classifier(_WeightedTrees, _ClassValues, _Options), ab_classifier('WeightedTrees', 'ClassValues', 'Options')).
+
+	valid_weighted_trees([]).
+	valid_weighted_trees([weighted_tree(Alpha, Tree, AttributeNames)| WeightedTrees]) :-
+		valid(positive_float, Alpha),
+		^^valid_attribute_names(AttributeNames),
+		AttributeNames \== [],
+		c45::valid_classifier(Tree),
+		valid_weighted_trees(WeightedTrees).
 
 	classifier_data(Classifier, WeightedTrees, ClassValues, Options) :-
 		Classifier =.. [_Functor, WeightedTrees, ClassValues, Options].

@@ -116,7 +116,7 @@
 	valid_clusters([], _FeatureCount, _SeenIds).
 	valid_clusters([cluster(ClusterId, Points, MaxCoreDistance, Stability)| Clusters], FeatureCount, SeenIds) :-
 		valid(positive_integer, ClusterId),
-		\+ memberchk(ClusterId, SeenIds),
+		\+ member(ClusterId, SeenIds),
 		Points \== [],
 		valid(list(list(number, FeatureCount)), Points),
 		valid(non_negative_float, MaxCoreDistance),

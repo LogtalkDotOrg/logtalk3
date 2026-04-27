@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "random_forest" library.'
 	]).
 
@@ -46,6 +46,12 @@
 
 	test(random_forest_learn_2_play_tennis, true(ground(Classifier))) :-
 		random_forest::learn(play_tennis, Classifier).
+
+	test(random_forest_valid_classifier_1, deterministic(random_forest::valid_classifier(Classifier))) :-
+		random_forest::learn(play_tennis, Classifier).
+
+	test(random_forest_invalid_classifier_1, fail) :-
+		random_forest::valid_classifier(rf_classifier([tree(leaf(yes), [outlook, outlook])], [yes, no], [number_of_trees(1), random_seed(1357911)])).
 
 	test(random_forest_learn_2_classifier_structure, true(functor(Classifier, rf_classifier, 3))) :-
 		random_forest::learn(play_tennis, Classifier).

@@ -126,7 +126,7 @@
 		learn(imbalanced_three_modes, Clusterer, [k(4), initialization(first_k), feature_scaling(off), dead_component_policy(reseed)]),
 		clusterer_options(Clusterer, Options).
 
-	test(gaussian_mixture_learn_3_dead_component_policy_runtime_difference, deterministic((memberchk(0.0, ZeroWeights), \+ memberchk(0.0, ReseedWeights), ZeroWeights \== ReseedWeights, ZeroAssignments == ReseedAssignments, memberchk(dead_component_policy(zero_weight), ZeroOptions), memberchk(dead_component_policy(reseed), ReseedOptions)))) :-
+	test(gaussian_mixture_learn_3_dead_component_policy_runtime_difference, deterministic((memberchk(0.0, ZeroWeights), \+ member(0.0, ReseedWeights), ZeroWeights \== ReseedWeights, ZeroAssignments == ReseedAssignments, memberchk(dead_component_policy(zero_weight), ZeroOptions), memberchk(dead_component_policy(reseed), ReseedOptions)))) :-
 		Options = [k(3), initialization(first_k), feature_scaling(off), maximum_iterations(50), covariance_regularization(1.0e-12)],
 		learn(dead_component_blobs, ZeroClusterer, [dead_component_policy(zero_weight)| Options]),
 		learn(dead_component_blobs, ReseedClusterer, [dead_component_policy(reseed)| Options]),

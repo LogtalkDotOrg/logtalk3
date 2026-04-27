@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "linear_svm" library.'
 	]).
 
@@ -40,6 +40,13 @@
 
 	test(linear_svm_learn_2_weather, deterministic(ground(Classifier))) :-
 		linear_svm::learn(weather, Classifier).
+
+	test(linear_svm_valid_classifier_1, deterministic(linear_svm::valid_classifier(Classifier))) :-
+		linear_svm::learn(weather, Classifier).
+
+	test(linear_svm_invalid_classifier_1, fail) :-
+		linear_svm::learn(weather, linear_svm_classifier(Classes, Encoders, _Models, Options)),
+		linear_svm::valid_classifier(linear_svm_classifier(Classes, Encoders, [class_model(yes, 0.0, [0.0]), class_model(no, 0.0, [0.0])], Options)).
 
 	test(linear_svm_predict_3_weather_yes, deterministic(Prediction == yes)) :-
 		linear_svm::learn(weather, Classifier),

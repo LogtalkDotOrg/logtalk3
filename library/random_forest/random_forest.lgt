@@ -20,12 +20,12 @@
 
 
 :- object(random_forest,
-	imports([options, classifier_common])).
+	imports(classifier_common)).
 
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'Random Forest classifier using C4.5 decision trees as base learners. Builds an ensemble of decision trees trained on bootstrap samples with random feature subsets and combines their predictions through majority voting.',
 		remarks is [
 			'Algorithm' - 'Random Forest is an ensemble learning method that constructs multiple decision trees during training and outputs the class that is the mode of the classes predicted by individual trees.',
@@ -275,6 +275,18 @@
 			options(Options)
 		].
 
+	check_classifier(Classifier) :-
+		(   classifier_data(Classifier, Trees, ClassValues, Options),
+			Trees \== [],
+			^^valid_class_values(ClassValues),
+			catch(::check_options(Options), _Error, fail),
+			memberchk(number_of_trees(ExpectedTreeCount), Options),
+			length(Trees, ExpectedTreeCount),
+			valid_trees(Trees) ->
+			true
+		;   domain_error(valid_classifier, Classifier)
+		).
+
 	% export_to_clauses/4 - exports classifier as a clause
 	export_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Clause =.. [Functor, Classifier].
@@ -283,6 +295,13 @@
 		Template =.. [Functor, 'Classifier'].
 
 	classifier_term_template(rf_classifier(_Trees, _ClassValues, _Options), rf_classifier('Trees', 'ClassValues', 'Options')).
+
+	valid_trees([]).
+	valid_trees([tree(Tree, AttributeNames)| Trees]) :-
+		^^valid_attribute_names(AttributeNames),
+		AttributeNames \== [],
+		c45::valid_classifier(Tree),
+		valid_trees(Trees).
 
 	classifier_data(Classifier, Trees, ClassValues, Options) :-
 		Classifier =.. [_Functor, Trees, ClassValues, Options].

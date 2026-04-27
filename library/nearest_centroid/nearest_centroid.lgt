@@ -20,12 +20,12 @@
 
 
 :- object(nearest_centroid,
-	imports([options, classifier_common])).
+	imports(classifier_common)).
 
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'Nearest Centroid classifier with multiple distance metrics. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Assign to an instance the the class of the training samples whose mean (centroid) is closest to the instance.',
@@ -353,6 +353,17 @@
 			centroids(CentroidCount)
 		].
 
+	check_classifier(Classifier) :-
+		(   classifier_data(Classifier, AttributeNames, FeatureTypes, Centroids),
+			^^valid_attribute_names(AttributeNames),
+			^^valid_feature_types(FeatureTypes, [numeric, categorical]),
+			length(AttributeNames, FeatureCount),
+			length(FeatureTypes, FeatureCount),
+			valid_centroids(Centroids, FeatureTypes) ->
+			true
+		;   domain_error(valid_classifier, Classifier)
+		).
+
 	export_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Clause =.. [Functor, Classifier].
 
@@ -360,6 +371,28 @@
 		Template =.. [Functor, 'Classifier'].
 
 	classifier_term_template(nc_classifier(_AttributeNames, _FeatureTypes, _Centroids), nc_classifier('AttributeNames', 'FeatureTypes', 'Centroids')).
+
+	valid_centroids(Centroids, FeatureTypes) :-
+		valid(list(compound), Centroids),
+		Centroids \== [],
+		valid_centroids_(Centroids, FeatureTypes, []).
+
+	valid_centroids_([], _FeatureTypes, _SeenClasses).
+	valid_centroids_([Class-Centroid| Centroids], FeatureTypes, SeenClasses) :-
+		atom(Class),
+		\+ member(Class, SeenClasses),
+		length(Centroid, FeatureCount),
+		length(FeatureTypes, FeatureCount),
+		valid_centroid_values(Centroid, FeatureTypes),
+		valid_centroids_(Centroids, FeatureTypes, [Class| SeenClasses]).
+
+	valid_centroid_values([], []).
+	valid_centroid_values([Value| Values], [numeric| FeatureTypes]) :-
+		valid(float, Value),
+		valid_centroid_values(Values, FeatureTypes).
+	valid_centroid_values([Value| Values], [categorical| FeatureTypes]) :-
+		nonvar(Value),
+		valid_centroid_values(Values, FeatureTypes).
 
 	classifier_data(Classifier, AttributeNames, FeatureTypes, Centroids) :-
 		Classifier =.. [_Functor, AttributeNames, FeatureTypes, Centroids].

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'SPADE sequential pattern miner for sequence datasets using vertical occurrence lists.',
 		remarks is [
 			'Algorithm' - 'Builds frequent sequential patterns by extending vertical occurrence lists keyed by sequence and event position.',
@@ -129,7 +129,7 @@
 		append(_LeadingItemsets, [LastItemset], Pattern),
 		append(_, [LastItem], LastItemset),
 		Item @> LastItem,
-		\+ memberchk(Item, LastItemset),
+		\+ member(Item, LastItemset),
 		append(LeadingItemsets, [LastItemset], Pattern),
 		append(LastItemset, [Item], ExtendedLastItemset0),
 		sort(ExtendedLastItemset0, ExtendedLastItemset),

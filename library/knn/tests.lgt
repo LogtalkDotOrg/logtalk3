@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "knn" library.'
 	]).
 
@@ -45,6 +45,12 @@
 	% Test learn/2 with continuous iris dataset
 	test(knn_learn_2_iris, true(ground(Classifier))) :-
 		knn::learn(iris_small, Classifier).
+
+	test(knn_valid_classifier_1, deterministic(knn::valid_classifier(Classifier))) :-
+		knn::learn(iris_small, Classifier).
+
+	test(knn_invalid_classifier_1, fail) :-
+		knn::valid_classifier(knn_classifier([sepal_length], [numeric], [[wide]-setosa])).
 
 	% Test predict/3 with iris dataset (continuous features)
 	test(knn_predict_3_iris_setosa, true(Prediction == setosa)) :-

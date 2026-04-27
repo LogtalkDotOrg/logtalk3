@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "logistic_regression" library.'
 	]).
 
@@ -44,6 +44,13 @@
 
 	test(logistic_regression_learn_2_weather, deterministic(ground(Classifier))) :-
 		logistic_regression::learn(weather, Classifier).
+
+	test(logistic_regression_valid_classifier_1, deterministic(logistic_regression::valid_classifier(Classifier))) :-
+		logistic_regression::learn(weather, Classifier).
+
+	test(logistic_regression_invalid_classifier_1, fail) :-
+		logistic_regression::learn(weather, lr_classifier(Classes, Encoders, _Models, Options)),
+		logistic_regression::valid_classifier(lr_classifier(Classes, Encoders, [class_model(yes, 0.0, [0.0]), class_model(no, 0.0, [0.0])], Options)).
 
 	test(logistic_regression_predict_3_weather_yes, deterministic(Prediction == yes)) :-
 		logistic_regression::learn(weather, Classifier),

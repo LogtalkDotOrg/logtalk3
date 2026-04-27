@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes, handles missing values, and supports tree pruning.',
 		remarks is [
 			'Algorithm' - 'C4.5 is an extension of the ID3 algorithm that uses information gain ratio instead of information gain for attribute selection, which avoids bias towards attributes with many values.',
@@ -73,6 +73,10 @@
 
 	:- uses(pairs, [
 		keys/2
+	]).
+
+	:- uses(type, [
+		valid/2
 	]).
 
 	learn(Dataset, Tree) :-
@@ -407,6 +411,12 @@
 		keys(Attributes, AttributeNames),
 		tree_to_clauses_(Tree, Functor, AttributeNames, [], Clauses).
 
+	check_classifier(Classifier) :-
+		(   valid_tree(Classifier) ->
+			true
+		;   domain_error(valid_classifier, Classifier)
+		).
+
 	classifier_diagnostics_data(_Tree, [model(c45)]).
 
 	classifier_export_template(Dataset, _Tree, Functor, Template) :-
@@ -423,6 +433,26 @@
 	classifier_term_template(leaf(_Class), leaf('Class')).
 	classifier_term_template(tree(_Attribute, threshold(_Threshold), _LeftTree, _RightTree), tree('Attribute', threshold('Threshold'), 'LeftTree', 'RightTree')).
 	classifier_term_template(tree(_Attribute, _Subtrees), tree('Attribute', 'Subtrees')).
+
+	valid_tree(leaf(Class)) :-
+		atom(Class).
+	valid_tree(tree(Attribute, threshold(Threshold), LeftTree, RightTree)) :-
+		atom(Attribute),
+		valid(float, Threshold),
+		valid_tree(LeftTree),
+		valid_tree(RightTree).
+	valid_tree(tree(Attribute, Subtrees)) :-
+		atom(Attribute),
+		valid(list(compound), Subtrees),
+		Subtrees \== [],
+		valid_subtrees(Subtrees, []).
+
+	valid_subtrees([], _SeenValues).
+	valid_subtrees([Value-Subtree| Subtrees], SeenValues) :-
+		nonvar(Value),
+		\+ member(Value, SeenValues),
+		valid_tree(Subtree),
+		valid_subtrees(Subtrees, [Value| SeenValues]).
 
 	tree_to_clauses_(leaf(Class), Functor, AttributeNames, Bindings, [Clause]) :-
 		build_clause(Functor, AttributeNames, Bindings, Class, Clause).
@@ -456,7 +486,7 @@
 		(	(LEThresholds \== [] ; GTThresholds \== []) ->
 			make_simplified_goals(LEThresholds, GTThresholds, Arg, AttrGoals),
 			append(AttrGoals, RestGoals, Goals)
-		;	memberchk(Attr-Arg, Bindings) ->
+		;	member(Attr-Arg, Bindings) ->
 			Goals = RestGoals
 		;	Goals = RestGoals
 		),

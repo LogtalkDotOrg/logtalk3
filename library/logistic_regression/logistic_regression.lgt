@@ -20,12 +20,12 @@
 
 
 :- object(logistic_regression,
-	imports([options, classifier_common])).
+	imports(classifier_common)).
 
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'Logistic regression classifier supporting binary and multiclass classification using joint softmax training. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses batch gradient descent to train a single multiclass softmax model. Binary classification is treated as a two-class special case of the same objective.',
@@ -363,6 +363,19 @@
 			options(Options)
 		].
 
+	check_classifier(Classifier) :-
+		(   classifier_data(Classifier, Classes, Encoders, Models, Options),
+			^^valid_class_values(Classes),
+			^^valid_linear_encoders(Encoders),
+			catch(::check_options(Options), _Error, fail),
+			encoders_feature_count(Encoders, 0, EncodedFeatures),
+			length(Classes, ModelCount),
+			length(Models, ModelCount),
+			valid_models(Models, Classes, EncodedFeatures, []) ->
+			true
+		;   domain_error(valid_classifier, Classifier)
+		).
+
 	export_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Clause =.. [Functor, Classifier].
 
@@ -370,6 +383,14 @@
 		Template =.. [Functor, 'Classifier'].
 
 	classifier_term_template(lr_classifier(_Classes, _Encoders, _Models, _Options), lr_classifier('Classes', 'Encoders', 'Models', 'Options')).
+
+	valid_models([], _Classes, _EncodedFeatures, _SeenClasses).
+	valid_models([class_model(Class, Bias, Weights)| Models], Classes, EncodedFeatures, SeenClasses) :-
+		memberchk(Class, Classes),
+		\+ member(Class, SeenClasses),
+		valid(float, Bias),
+		valid(list(float, EncodedFeatures), Weights),
+		valid_models(Models, Classes, EncodedFeatures, [Class| SeenClasses]).
 
 	classifier_data(Classifier, Classes, Encoders, Models, Options) :-
 		Classifier =.. [_Functor, Classes, Encoders, Models, Options].

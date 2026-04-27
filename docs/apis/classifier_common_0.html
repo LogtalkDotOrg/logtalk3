@@ -322,7 +322,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 2:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-20</div>
+<div class="line"><strong>Date:</strong> 2026-04-27</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -335,10 +335,15 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0"><span class="std std-ref">classifier_protocol</span></a></div>
 </div>
+<div class="line"><strong>Extends:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="options_0.html#options-0"><span class="std std-ref">options</span></a></div>
+</div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
 <div class="line"><a class="reference internal" href="format_0.html#format-0"><span class="std std-ref">format</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -350,7 +355,7 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-classifier-options-2"><span class="std std-ref">classifier_options/2</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-diagnostic-2"><span class="std std-ref">diagnostic/2</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-diagnostics-2"><span class="std std-ref">diagnostics/2</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-export-to-clauses-4"><span class="std std-ref">export_to_clauses/4</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-export-to-file-4"><span class="std std-ref">export_to_file/4</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-learn-2"><span class="std std-ref">learn/2</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-predict-3"><span class="std std-ref">predict/3</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-print-classifier-1"><span class="std std-ref">print_classifier/1</span></a></div>
+<div class="line"> <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-check-classifier-1"><span class="std std-ref">check_classifier/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-classifier-options-2"><span class="std std-ref">classifier_options/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-diagnostic-2"><span class="std std-ref">diagnostic/2</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-diagnostics-2"><span class="std std-ref">diagnostics/2</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-export-to-clauses-4"><span class="std std-ref">export_to_clauses/4</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-export-to-file-4"><span class="std std-ref">export_to_file/4</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-learn-2"><span class="std std-ref">learn/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-predict-3"><span class="std std-ref">predict/3</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-print-classifier-1"><span class="std std-ref">print_classifier/1</span></a>  <a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-valid-classifier-1"><span class="std std-ref">valid_classifier/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
@@ -362,10 +367,17 @@
 <li><p><a class="reference internal" href="#classifier-export-template-4" id="id4"><code class="docutils literal notranslate"><span class="pre">classifier_export_template/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#classifier-term-template-2" id="id5"><code class="docutils literal notranslate"><span class="pre">classifier_term_template/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#print-classifier-template-1" id="id6"><code class="docutils literal notranslate"><span class="pre">print_classifier_template/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-attribute-names-1" id="id7"><code class="docutils literal notranslate"><span class="pre">valid_attribute_names/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-class-values-1" id="id8"><code class="docutils literal notranslate"><span class="pre">valid_class_values/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-feature-types-2" id="id9"><code class="docutils literal notranslate"><span class="pre">valid_feature_types/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-discrete-values-1" id="id10"><code class="docutils literal notranslate"><span class="pre">valid_discrete_values/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-linear-encoders-1" id="id11"><code class="docutils literal notranslate"><span class="pre">valid_linear_encoders/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-classifier-metadata-2" id="id12"><code class="docutils literal notranslate"><span class="pre">valid_classifier_metadata/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-classifier-metadata-3" id="id13"><code class="docutils literal notranslate"><span class="pre">valid_classifier_metadata/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id7">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id8">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id14">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id15">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -454,6 +466,153 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">print_classifier_template(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="valid-attribute-names-1">
+<span id="classifier-common-0-valid-attribute-names-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_attribute_names/1</span></code></a><a class="headerlink" href="#valid-attribute-names-1" title="Link to this heading"></a></h3>
+<p>True when a list of attribute names is a proper list of distinct atoms.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_attribute_names(AttributeNames)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_attribute_names(+list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="valid-class-values-1">
+<span id="classifier-common-0-valid-class-values-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_class_values/1</span></code></a><a class="headerlink" href="#valid-class-values-1" title="Link to this heading"></a></h3>
+<p>True when a list of class values is a non-empty proper list of distinct atoms.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_class_values(ClassValues)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_class_values(+list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="valid-feature-types-2">
+<span id="classifier-common-0-valid-feature-types-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_feature_types/2</span></code></a><a class="headerlink" href="#valid-feature-types-2" title="Link to this heading"></a></h3>
+<p>True when a list of feature type tags is non-empty and each tag belongs to the given allowed set.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_feature_types(FeatureTypes,AllowedTypes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_feature_types(+list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="valid-discrete-values-1">
+<span id="classifier-common-0-valid-discrete-values-1"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_discrete_values/1</span></code></a><a class="headerlink" href="#valid-discrete-values-1" title="Link to this heading"></a></h3>
+<p>True when a list of categorical values is non-empty, contains only nonvar terms, and has no duplicates.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_discrete_values(Values)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_discrete_values(+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="valid-linear-encoders-1">
+<span id="classifier-common-0-valid-linear-encoders-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_linear_encoders/1</span></code></a><a class="headerlink" href="#valid-linear-encoders-1" title="Link to this heading"></a></h3>
+<p>True when a list of encoders only contains valid <code class="docutils literal notranslate"><span class="pre">continuous/3</span></code> or <code class="docutils literal notranslate"><span class="pre">categorical/2</span></code> encoder terms with distinct attributes.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_linear_encoders(Encoders)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_linear_encoders(+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="valid-classifier-metadata-2">
+<span id="classifier-common-0-valid-classifier-metadata-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_classifier_metadata/2</span></code></a><a class="headerlink" href="#valid-classifier-metadata-2" title="Link to this heading"></a></h3>
+<p>True when diagnostics metadata contains the expected model term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_classifier_metadata(Model,Diagnostics)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_classifier_metadata(+atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="valid-classifier-metadata-3">
+<span id="classifier-common-0-valid-classifier-metadata-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_classifier_metadata/3</span></code></a><a class="headerlink" href="#valid-classifier-metadata-3" title="Link to this heading"></a></h3>
+<p>True when diagnostics metadata contains the expected model term and records the given effective options.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_classifier_metadata(Model,Options,Diagnostics)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_classifier_metadata(+atom,+list(compound),+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </section>

@@ -53,7 +53,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, memberchk/2
+		append/3, length/2, member/2, memberchk/2
 	]).
 
 	:- uses(numberlist, [
@@ -147,7 +147,7 @@
 	valid_clusters([], _FeatureCount, _SeenIds).
 	valid_clusters([cluster(ClusterId, Points)| Clusters], FeatureCount, SeenIds) :-
 		valid(positive_integer, ClusterId),
-		\+ memberchk(ClusterId, SeenIds),
+		\+ member(ClusterId, SeenIds),
 		Points \== [],
 		valid(list(list(number, FeatureCount)), Points),
 		valid_clusters(Clusters, FeatureCount, [ClusterId| SeenIds]).

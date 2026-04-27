@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "nearest_centroid" library.'
 	]).
 
@@ -45,6 +45,12 @@
 	% Test learn/2 with continuous iris dataset
 	test(nearest_centroid_learn_2_iris, true(ground(Classifier))) :-
 		nearest_centroid::learn(iris_small, Classifier).
+
+	test(nearest_centroid_valid_classifier_1, deterministic(nearest_centroid::valid_classifier(Classifier))) :-
+		nearest_centroid::learn(iris_small, Classifier).
+
+	test(nearest_centroid_invalid_classifier_1, fail) :-
+		nearest_centroid::valid_classifier(nc_classifier([sepal_length], [numeric], [setosa-[wide]])).
 
 	% Test predict/3 with iris dataset (continuous features)
 	test(nearest_centroid_predict_3_iris_setosa, true(Prediction == setosa)) :-

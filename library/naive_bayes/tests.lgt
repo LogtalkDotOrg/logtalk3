@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "naive_bayes" library.'
 	]).
 
@@ -45,6 +45,18 @@
 	% Test learn/2 with categorical weather dataset
 	test(naive_bayes_learn_2_weather, true(ground(Classifier))) :-
 		naive_bayes::learn(weather, Classifier).
+
+	test(naive_bayes_valid_classifier_1, deterministic(naive_bayes::valid_classifier(Classifier))) :-
+		naive_bayes::learn(weather, Classifier).
+
+	test(naive_bayes_invalid_classifier_1, fail) :-
+		naive_bayes::valid_classifier(nb_classifier(
+			[yes, no],
+			[yes-0.6, no-0.6],
+			[outlook],
+			[categorical],
+			[feature(outlook, categorical, [yes-[sunny-0.5, rainy-0.5], no-[sunny-0.4, rainy-0.6]])]
+		)).
 
 	% Test predict/3 with weather dataset
 	test(naive_bayes_predict_3_weather_01, true(Prediction == yes)) :-
